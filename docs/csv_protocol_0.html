@@ -194,8 +194,8 @@
 <p>CSV file and stream reading and writing protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Jacinto Dávila and Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2021-09-24</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2023-03-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -211,10 +211,12 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Type-checking: Some of the predicate file and stream argument type-checking exceptions depend on the Prolgo backend compliance with standards.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
@@ -265,6 +267,51 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_file(+atom,+object_identifier,+predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but not an existing file:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an existing file but cannot be opened for reading:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is neither a variable nor an object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a valid object identifier but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is neither a variable nor a predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,Predicate)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a valid predicate indicator but not an existing public predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate,Predicate)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="read-stream-3">
@@ -284,6 +331,55 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_stream(+stream_or_alias,+object_identifier,+predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is neither a variable nor a stream-term or alias:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(stream_or_alias,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is not an open stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is an output stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(input,stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a binary stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(input,binary_stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is neither a variable nor an object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a valid object identifier but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is neither a variable nor a predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,Predicate)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a valid predicate indicator but not an existing public predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate,Predicate)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -307,6 +403,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_file(+atom,-list(list))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but not an existing file:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an existing file but cannot be opened for reading:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="read-stream-2">
@@ -326,6 +443,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_stream(+stream_or_alias,-list(list))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is neither a variable nor a stream-term or alias:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(stream_or_alias,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is not an open stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is an output stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(input,stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a binary stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(input,binary_stream,Stream)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -349,6 +491,51 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_file_by_line(+atom,+object_identifier,+predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but not an existing file:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an existing file but cannot be opened for reading:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is neither a variable nor an object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a valid object identifier but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is neither a variable nor a predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,Predicate)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a valid predicate indicator but not an existing public predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate,Predicate)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="read-stream-by-line-3">
@@ -368,6 +555,55 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_stream_by_line(+stream_or_alias,+object_identifier,+predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is neither a variable nor a stream-term or alias:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(stream_or_alias,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is not an open stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is an output stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(input,stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a binary stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(input,binary_stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is neither a variable nor an object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a valid object identifier but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is neither a variable nor a predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,Predicate)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a valid predicate indicator but not an existing public predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate,Predicate)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -391,6 +627,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_file_by_line(+atom,-list(list))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but not an existing file:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an existing file but cannot be opened for reading:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="read-stream-by-line-2">
@@ -410,6 +667,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_stream_by_line(+stream_or_alias,-list(list))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is neither a variable nor a stream-term or alias:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(stream_or_alias,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is not an open stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is an output stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(input,stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a binary stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(input,binary_stream,Stream)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -433,6 +715,47 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">write_file(+atom,+object_identifier,+predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but cannot be opened for writing:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is neither a variable nor an object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a valid object identifier but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is neither a variable nor a predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,Predicate)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a valid predicate indicator but not an existing public predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate,Predicate)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="write-stream-3">
@@ -452,6 +775,55 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">write_stream(+stream_or_alias,+object_identifier,+predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is neither a variable nor a stream-term or alias:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(stream_or_alias,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is not an open stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is an input stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(output,stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a binary stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(output,binary_stream,Stream)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is neither a variable nor an object identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(object_identifier,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Object</span></code> is a valid object identifier but not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Object)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is neither a variable nor a predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,Predicate)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code> is a valid predicate indicator but not an existing public predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate,Predicate)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -475,6 +847,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">guess_separator(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but not an existing file:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but cannot be opened for writing:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="guess-arity-2">
@@ -494,6 +887,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">guess_arity(+atom,-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but not an existing file:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(file,File)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is an atom but cannot be opened for writing:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,source_sink,File)</span></code></div>
+</div>
 </div>
 </div>
 </section>

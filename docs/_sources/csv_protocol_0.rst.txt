@@ -11,8 +11,8 @@
 CSV file and stream reading and writing protocol.
 
 | **Author:** Jacinto Dávila and Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2021-09-24
+| **Version:** 2:0:0
+| **Date:** 2023-03-13
 
 | **Compilation flags:**
 |    ``static``
@@ -23,7 +23,8 @@ CSV file and stream reading and writing protocol.
 
 
 | **Remarks:**
-|    (none)
+
+   - Type-checking: Some of the predicate file and stream argument type-checking exceptions depend on the Prolgo backend compliance with standards.
 
 | **Inherited public predicates:**
 |    (none)
@@ -51,6 +52,28 @@ Reads a CSV file saving the data as clauses for the specified object predicate. 
 | **Mode and number of proofs:**
 |    ``read_file(+atom,+object_identifier,+predicate_indicator)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but not an existing file:
+|        ``existence_error(file,File)``
+|    ``File`` is an existing file but cannot be opened for reading:
+|        ``permission_error(open,source_sink,File)``
+|    ``Object`` is a variable:
+|        ``instantiation_error``
+|    ``Object`` is neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Object)``
+|    ``Object`` is a valid object identifier but not an existing object:
+|        ``existence_error(object,Object)``
+|    ``Predicate`` is a variable:
+|        ``instantiation_error``
+|    ``Predicate`` is neither a variable nor a predicate indicator:
+|        ``type_error(predicate_indicator,Predicate)``
+|    ``Predicate`` is a valid predicate indicator but not an existing public predicate:
+|        ``existence_error(predicate,Predicate)``
+
 
 ------------
 
@@ -69,6 +92,30 @@ Reads a CSV stream saving the data as clauses for the specified object predicate
 |    ``read_stream(Stream,Object,Predicate)``
 | **Mode and number of proofs:**
 |    ``read_stream(+stream_or_alias,+object_identifier,+predicate_indicator)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    ``Stream`` is neither a variable nor a stream-term or alias:
+|        ``domain_error(stream_or_alias,Stream)``
+|    ``Stream`` is not an open stream:
+|        ``existence_error(stream,Stream)``
+|    ``Stream`` is an output stream:
+|        ``permission_error(input,stream,Stream)``
+|    ``Stream`` is a binary stream:
+|        ``permission_error(input,binary_stream,Stream)``
+|    ``Object`` is a variable:
+|        ``instantiation_error``
+|    ``Object`` is neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Object)``
+|    ``Object`` is a valid object identifier but not an existing object:
+|        ``existence_error(object,Object)``
+|    ``Predicate`` is a variable:
+|        ``instantiation_error``
+|    ``Predicate`` is neither a variable nor a predicate indicator:
+|        ``type_error(predicate_indicator,Predicate)``
+|    ``Predicate`` is a valid predicate indicator but not an existing public predicate:
+|        ``existence_error(predicate,Predicate)``
 
 
 ------------
@@ -89,6 +136,16 @@ Reads a CSV file returning the data as a list of rows, each row a list of fields
 | **Mode and number of proofs:**
 |    ``read_file(+atom,-list(list))`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but not an existing file:
+|        ``existence_error(file,File)``
+|    ``File`` is an existing file but cannot be opened for reading:
+|        ``permission_error(open,source_sink,File)``
+
 
 ------------
 
@@ -107,6 +164,18 @@ Reads a CSV stream returning the data as a list of rows, each row a list of fiel
 |    ``read_stream(Stream,Rows)``
 | **Mode and number of proofs:**
 |    ``read_stream(+stream_or_alias,-list(list))`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    ``Stream`` is neither a variable nor a stream-term or alias:
+|        ``domain_error(stream_or_alias,Stream)``
+|    ``Stream`` is not an open stream:
+|        ``existence_error(stream,Stream)``
+|    ``Stream`` is an output stream:
+|        ``permission_error(input,stream,Stream)``
+|    ``Stream`` is a binary stream:
+|        ``permission_error(input,binary_stream,Stream)``
 
 
 ------------
@@ -127,6 +196,28 @@ Reads a CSV file saving the data as clauses for the specified object predicate. 
 | **Mode and number of proofs:**
 |    ``read_file_by_line(+atom,+object_identifier,+predicate_indicator)`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but not an existing file:
+|        ``existence_error(file,File)``
+|    ``File`` is an existing file but cannot be opened for reading:
+|        ``permission_error(open,source_sink,File)``
+|    ``Object`` is a variable:
+|        ``instantiation_error``
+|    ``Object`` is neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Object)``
+|    ``Object`` is a valid object identifier but not an existing object:
+|        ``existence_error(object,Object)``
+|    ``Predicate`` is a variable:
+|        ``instantiation_error``
+|    ``Predicate`` is neither a variable nor a predicate indicator:
+|        ``type_error(predicate_indicator,Predicate)``
+|    ``Predicate`` is a valid predicate indicator but not an existing public predicate:
+|        ``existence_error(predicate,Predicate)``
+
 
 ------------
 
@@ -145,6 +236,30 @@ Reads a CSV stream saving the data as clauses for the specified object predicate
 |    ``read_stream_by_line(Stream,Object,Predicate)``
 | **Mode and number of proofs:**
 |    ``read_stream_by_line(+stream_or_alias,+object_identifier,+predicate_indicator)`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    ``Stream`` is neither a variable nor a stream-term or alias:
+|        ``domain_error(stream_or_alias,Stream)``
+|    ``Stream`` is not an open stream:
+|        ``existence_error(stream,Stream)``
+|    ``Stream`` is an output stream:
+|        ``permission_error(input,stream,Stream)``
+|    ``Stream`` is a binary stream:
+|        ``permission_error(input,binary_stream,Stream)``
+|    ``Object`` is a variable:
+|        ``instantiation_error``
+|    ``Object`` is neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Object)``
+|    ``Object`` is a valid object identifier but not an existing object:
+|        ``existence_error(object,Object)``
+|    ``Predicate`` is a variable:
+|        ``instantiation_error``
+|    ``Predicate`` is neither a variable nor a predicate indicator:
+|        ``type_error(predicate_indicator,Predicate)``
+|    ``Predicate`` is a valid predicate indicator but not an existing public predicate:
+|        ``existence_error(predicate,Predicate)``
 
 
 ------------
@@ -165,6 +280,16 @@ Reads a CSV file returning the data as a list of rows, each row a list of fields
 | **Mode and number of proofs:**
 |    ``read_file_by_line(+atom,-list(list))`` - ``zero_or_one``
 
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but not an existing file:
+|        ``existence_error(file,File)``
+|    ``File`` is an existing file but cannot be opened for reading:
+|        ``permission_error(open,source_sink,File)``
+
 
 ------------
 
@@ -183,6 +308,18 @@ Reads a CSV stream returning the data as a list of rows, each row a list of fiel
 |    ``read_stream_by_line(Stream,Rows)``
 | **Mode and number of proofs:**
 |    ``read_stream_by_line(+stream_or_alias,-list(list))`` - ``zero_or_one``
+
+| **Exceptions:**
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    ``Stream`` is neither a variable nor a stream-term or alias:
+|        ``domain_error(stream_or_alias,Stream)``
+|    ``Stream`` is not an open stream:
+|        ``existence_error(stream,Stream)``
+|    ``Stream`` is an output stream:
+|        ``permission_error(input,stream,Stream)``
+|    ``Stream`` is a binary stream:
+|        ``permission_error(input,binary_stream,Stream)``
 
 
 ------------
@@ -203,6 +340,26 @@ Writes a CSV file with the data represented by the clauses of the specified obje
 | **Mode and number of proofs:**
 |    ``write_file(+atom,+object_identifier,+predicate_indicator)`` - ``one``
 
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but cannot be opened for writing:
+|        ``permission_error(open,source_sink,File)``
+|    ``Object`` is a variable:
+|        ``instantiation_error``
+|    ``Object`` is neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Object)``
+|    ``Object`` is a valid object identifier but not an existing object:
+|        ``existence_error(object,Object)``
+|    ``Predicate`` is a variable:
+|        ``instantiation_error``
+|    ``Predicate`` is neither a variable nor a predicate indicator:
+|        ``type_error(predicate_indicator,Predicate)``
+|    ``Predicate`` is a valid predicate indicator but not an existing public predicate:
+|        ``existence_error(predicate,Predicate)``
+
 
 ------------
 
@@ -221,6 +378,30 @@ Writes a CSV stream with the data represented by the clauses of the specified ob
 |    ``write_stream(Stream,Object,Predicate)``
 | **Mode and number of proofs:**
 |    ``write_stream(+stream_or_alias,+object_identifier,+predicate_indicator)`` - ``one``
+
+| **Exceptions:**
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    ``Stream`` is neither a variable nor a stream-term or alias:
+|        ``domain_error(stream_or_alias,Stream)``
+|    ``Stream`` is not an open stream:
+|        ``existence_error(stream,Stream)``
+|    ``Stream`` is an input stream:
+|        ``permission_error(output,stream,Stream)``
+|    ``Stream`` is a binary stream:
+|        ``permission_error(output,binary_stream,Stream)``
+|    ``Object`` is a variable:
+|        ``instantiation_error``
+|    ``Object`` is neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Object)``
+|    ``Object`` is a valid object identifier but not an existing object:
+|        ``existence_error(object,Object)``
+|    ``Predicate`` is a variable:
+|        ``instantiation_error``
+|    ``Predicate`` is neither a variable nor a predicate indicator:
+|        ``type_error(predicate_indicator,Predicate)``
+|    ``Predicate`` is a valid predicate indicator but not an existing public predicate:
+|        ``existence_error(predicate,Predicate)``
 
 
 ------------
@@ -241,6 +422,16 @@ Guesses the separator used in a given file, asking the user to confirm.
 | **Mode and number of proofs:**
 |    ``guess_separator(+atom,-atom)`` - ``one``
 
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but not an existing file:
+|        ``existence_error(file,File)``
+|    ``File`` is an atom but cannot be opened for writing:
+|        ``permission_error(open,source_sink,File)``
+
 
 ------------
 
@@ -259,6 +450,16 @@ Guesses the arity of records in a given file, asking the user to confirm.
 |    ``guess_arity(File,Arity)``
 | **Mode and number of proofs:**
 |    ``guess_arity(+atom,-number)`` - ``one``
+
+| **Exceptions:**
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` is an atom but not an existing file:
+|        ``existence_error(file,File)``
+|    ``File`` is an atom but cannot be opened for writing:
+|        ``permission_error(open,source_sink,File)``
 
 
 ------------

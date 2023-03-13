@@ -35,6 +35,9 @@ predicates are visible.
 Library
 -------
 
+* CHANGED: The `csv` library to throw `error/2` exception terms and type-check
+the `write_file/3` and `write_stream/3` predicates.
+
 * UPDATED: The `java` library to also abstract JPL `jpl_map_element/2` and
 `jpl_set_element/2` predicates for the SWI-Prolog and YAP backends.
 

@@ -24,9 +24,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 1:3:1,
+		version is 2:0:0,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2022-07-22,
+		date is 2023-03-13,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).',
@@ -44,8 +44,9 @@
 	]).
 
 	read_file(File, Object, Predicate) :-
-		type::check(predicate, Object::Predicate),
-		type::check(file, File),
+		context(Context),
+		type::check(file, File, Context),
+		type::check(predicate, Object::Predicate, Context),
 		ensure_bound_options(File),
 		reader::file_to_codes(File, Codes),
 		dbg('File codes'-Codes),
@@ -53,7 +54,8 @@
 		assert_rows(Rows, Object, Predicate, 1).
 
 	read_stream(Stream, Object, Predicate) :-
-		type::check(predicate, Object::Predicate),
+		context(Context),
+		type::check(predicate, Object::Predicate, Context),
 		ensure_bound_options,
 		reader::stream_to_codes(Stream, Codes),
 		dbg('File codes'-Codes),
@@ -61,7 +63,8 @@
 		assert_rows(Rows, Object, Predicate, 1).
 
 	read_file(File, Rows) :-
-		type::check(file, File),
+		context(Context),
+		type::check(file, File, Context),
 		reader::file_to_codes(File, Codes),
 		ensure_bound_options(File),
 		dbg('File codes'-Codes),
@@ -74,8 +77,9 @@
 		phrase(csv(Rows), Codes).
 
 	read_file_by_line(File, Object, Predicate) :-
-		type::check(predicate, Object::Predicate),
-		type::check(file, File),
+		context(Context),
+		type::check(predicate, Object::Predicate, Context),
+		type::check(file, File, Context),
 		ensure_bound_options(File),
 		open(File, read, Stream),
 		(	_Header_ == skip ->
@@ -96,7 +100,8 @@
 		dbg('All the file has been read into memory'-File).
 
 	read_stream_by_line(Stream, Object, Predicate) :-
-		type::check(predicate, Object::Predicate),
+		context(Context),
+		type::check(predicate, Object::Predicate, Context),
 		ensure_bound_options,
 		(	_Header_ == skip ->
 			N = 2,
@@ -107,7 +112,8 @@
 		dbg('All the stream has been read into memory'-Stream).
 
 	read_file_by_line(File, Rows) :-
-		type::check(file, File),
+		context(Context),
+		type::check(file, File, Context),
 		ensure_bound_options(File),
 		open(File, read, Stream),
 		(	_Header_ == skip ->
@@ -137,8 +143,12 @@
 		read_line_by_line(Stream, Rows, N),
 		dbg('All the stream has been read'-[Stream,Rows]).
 
-	write_file(File, Object, Name/Arity) :-
+	write_file(File, Object, Predicate) :-
+		context(Context),
+		type::check(atom, File, Context),
+		type::check(predicate, Object::Predicate, Context),
 		ensure_bound_options(File),
+		Predicate = Name/Arity,
 		functor(Message, Name, Arity),
 		dbg('Goal to be called'-Object::Message),
 		csv_file_write_options(Options),
@@ -150,8 +160,11 @@
 		),
 		close(Stream).
 
-	write_stream(Stream, Object, Name/Arity) :-
+	write_stream(Stream, Object, Predicate) :-
+		context(Context),
+		type::check(predicate, Object::Predicate, Context),
 		ensure_bound_options,
+		Predicate = Name/Arity,
 		functor(Message, Name, Arity),
 		dbg('Goal to be called'-Object::Message),
 		write_one_by_one(Stream, Object, Message).

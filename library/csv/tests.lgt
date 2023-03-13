@@ -27,22 +27,23 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 2:0:0,
 		author is 'Jacinto Dávila',
-		date is 2022-10-28,
+		date is 2023-03-13,
 		comment is 'Tests for the CSV library.'
 	]).
 
 	cover(csv(_, _, _)).
 	cover(csv).
+	cover(tsv).
 
 	setup :-
-		^^file_path('test_files/output00.csv', Path1),
-		(os::file_exists(Path1) -> os::delete_file(Path1); true),
-		^^file_path('test_files/output01.csv', Path2),
-		(os::file_exists(Path2) -> os::delete_file(Path2); true),
-		^^file_path('test_files/output02.csv', Path3),
-		(os::file_exists(Path3) -> os::delete_file(Path3); true).
+		^^file_path('test_files/output00.csv', Path00),
+		^^clean_file(Path00),
+		^^file_path('test_files/output01.csv', Path01),
+		^^clean_file(Path01),
+		^^file_path('test_files/output02.csv', Path02),
+		^^clean_file(Path02).
 
 	cleanup :-
 		setup.
