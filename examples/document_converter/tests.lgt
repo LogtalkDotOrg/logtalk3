@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2023-03-09,
+		date is 2023-03-13,
 		comment is 'Tests for the "document_converter" example.'
 	]).
 
@@ -34,8 +34,7 @@
 		sub_atom(CLASSPATH, _, _, _, 'tika-app-').
 
 	cleanup :-
-		^^file_path('sample.txt', Target),
-		^^clean_file(Target).
+		^^clean_file('sample.txt').
 
 	test(document_converter_convert_to_text, true(os::file_exists(Target))) :-
 		^^file_path('sample.pdf', Source),

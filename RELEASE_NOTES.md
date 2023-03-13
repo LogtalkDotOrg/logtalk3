@@ -44,6 +44,10 @@ the `write_file/3` and `write_stream/3` predicates.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool `clean_file/1` predicate to always interpret
+relative paths as relative to the tests object path. This simplifies usage
+and improves reliability by not depending on the current working directory.
+
 * ADDED: New `packs::installed/1` predicate to list all packs installed from
 a given registry.
 

@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 13:2:0
-| **Date:** 2022-10-28
+| **Version:** 14:0:0
+| **Date:** 2023-03-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -734,6 +734,9 @@ Returns the absolute path for a file path that is relative to the tests object p
 |    ``file_path(File,Path)``
 | **Mode and number of proofs:**
 |    ``file_path(+atom,-atom)`` - ``one``
+
+| **See also:**
+|    :ref:`lgtunit/0::clean_file/1`
 
 
 ------------
@@ -1690,7 +1693,7 @@ Returns an assertion for checking that the given file have the expected binary c
 ``clean_file/1``
 ^^^^^^^^^^^^^^^^
 
-Closes any existing stream associated with the file and deletes the file if it exists.
+Closes any existing stream associated with the file and deletes the file if it exists. Relative file paths are interpreted as relative to the tests object path.
 
 | **Compilation flags:**
 |    ``static``
@@ -1699,6 +1702,9 @@ Closes any existing stream associated with the file and deletes the file if it e
 |    ``clean_file(File)``
 | **Mode and number of proofs:**
 |    ``clean_file(+atom)`` - ``one``
+
+| **See also:**
+|    :ref:`lgtunit/0::file_path/2`
 
 
 ------------

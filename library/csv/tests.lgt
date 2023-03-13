@@ -27,7 +27,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Jacinto Dávila',
 		date is 2023-03-13,
 		comment is 'Tests for the CSV library.'
@@ -38,12 +38,9 @@
 	cover(tsv).
 
 	setup :-
-		^^file_path('test_files/output00.csv', Path00),
-		^^clean_file(Path00),
-		^^file_path('test_files/output01.csv', Path01),
-		^^clean_file(Path01),
-		^^file_path('test_files/output02.csv', Path02),
-		^^clean_file(Path02).
+		^^clean_file('test_files/output00.csv'),
+		^^clean_file('test_files/output01.csv'),
+		^^clean_file('test_files/output02.csv').
 
 	cleanup :-
 		setup.

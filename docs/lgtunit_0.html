@@ -200,8 +200,8 @@
 <p>A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 13:2:0</div>
-<div class="line"><strong>Date:</strong> 2022-10-28</div>
+<div class="line"><strong>Version:</strong> 14:0:0</div>
+<div class="line"><strong>Date:</strong> 2023-03-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1154,6 +1154,12 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">file_path(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-file-1"><span class="std std-ref">clean_file/1</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -2194,7 +2200,7 @@
 </section>
 <section id="clean-file-1">
 <span id="lgtunit-0-clean-file-1"></span><span id="index-85"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code></a><a class="headerlink" href="#clean-file-1" title="Permalink to this heading"></a></h3>
-<p>Closes any existing stream associated with the file and deletes the file if it exists.</p>
+<p>Closes any existing stream associated with the file and deletes the file if it exists. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2209,6 +2215,12 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clean_file(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-file-path-2"><span class="std std-ref">file_path/2</span></a></div>
 </div>
 </div>
 <hr class="docutils" />

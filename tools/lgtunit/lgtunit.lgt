@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 13:2:0,
+		version is 14:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-28,
+		date is 2023-03-13,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -305,7 +305,8 @@
 	:- mode(file_path(+atom, -atom), one).
 	:- info(file_path/2, [
 		comment is 'Returns the absolute path for a file path that is relative to the tests object path.',
-		argnames is ['File', 'Path']
+		argnames is ['File', 'Path'],
+		see_also is [clean_file/1]
 	]).
 
 	:- protected(suppress_text_output/0).
@@ -663,8 +664,9 @@
 	:- protected(clean_file/1).
 	:- mode(clean_file(+atom), one).
 	:- info(clean_file/1, [
-		comment is 'Closes any existing stream associated with the file and deletes the file if it exists.',
-		argnames is ['File']
+		comment is 'Closes any existing stream associated with the file and deletes the file if it exists. Relative file paths are interpreted as relative to the tests object path.',
+		argnames is ['File'],
+		see_also is [file_path/2]
 	]).
 
 	:- protected(closed_input_stream/2).
@@ -2923,7 +2925,13 @@
 		clean_file(File, _).
 
 	clean_file(File, Path) :-
-		os::absolute_file_name(File, Path),
+		(	is_absolute_file_name(File) ->
+			% the file may still require expanding
+			os::absolute_file_name(File, Path)
+		;	self(Self),
+			object_property(Self, file(_, Directory)),
+			atom_concat(Directory, File, Path)
+		),
 		% the file can be associated with more than one stream
 		forall(
 			stream_property(Stream, file_name(Path)),
