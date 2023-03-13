@@ -27,9 +27,9 @@
 :- object(benchmarks).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2018-05-23,
+		date is 2023-03-20,
 		comment is 'Some benchmarks for the "jpl" example.'
 	]).
 
@@ -37,13 +37,29 @@
 		:- use_module(prolog_statistics, [time/1]).
 	:- endif.
 
+	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+
+		:- uses(user, [
+			jpl_new/3,
+			jpl_call/4
+		]).
+
+	:- else.
+
+		:- use_module(jpl, [
+			jpl_new/3,
+			jpl_call/4
+		]).
+
+	:- endif.
+
 	:- public(run/0).
 	run :-
 		% trigger class loading so that it doesn't interfere with the benchmarks
-		jpl:jpl_new('java.util.Date', [], _),
+		jpl_new('java.util.Date', [], _),
 		% now we can run the benchmarks
-		writeq(((jpl:jpl_new('java.util.Date', [], I1), jpl:jpl_call(I1, getYear, [], _)))), nl,
-		time((jpl:jpl_new('java.util.Date', [], I1), jpl:jpl_call(I1, getYear, [], _))),
+		writeq(((jpl_new('java.util.Date', [], I1), jpl_call(I1, getYear, [], _)))), nl,
+		time((jpl_new('java.util.Date', [], I1), jpl_call(I1, getYear, [], _))),
 		writeq((java('java.util.Date')::new(I4), java(I4, Year3)::getYear)), nl,
 		time((java('java.util.Date')::new(I4), java(I4, Year3)::getYear)),
 		writeq((java('java.util.Date')::new(I5), java(I5)::getYear)), nl,

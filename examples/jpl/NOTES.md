@@ -19,10 +19,11 @@ ________________________________________________________________________
 
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
-file. Running all the examples and the benchmarks requires SWI-Prolog with
-the JPL library installed. YAP most likely would be usable when the old JPL
-library bundled with it is updated. Some examples (but not the benchmarks)
-can also be used with JIProlog.
+file. Running all the examples and the benchmarks requires LVM (with its
+`jni` plug-in installed) or SWI-Prolog (with the JPL library installed).
+YAP most likely would be usable when the old JPL library bundled with it
+is updated. Some examples (but not the benchmarks) can also be used with
+JIProlog.
 
 This folder contains GUI examples, most of them adapted from the JPL library
 distributed with SWI-Prolog and YAP, of calling Java from Logtalk. It uses

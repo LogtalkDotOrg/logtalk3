@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2023-03-09,
+		date is 2023-03-20,
 		comment is 'Tests for the "clustering" example.'
 	]).
 
@@ -37,7 +37,7 @@
 		os::environment_variable('CLASSPATH', CLASSPATH),
 		sub_atom(CLASSPATH, _, _, _, 'commons-math3-').
 
-	test(clustering_01) :-
+	test(clustering_01, true, [condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
 		clustering::clusters([1.0,1.5,1.8,3.5,3.6,4.0,4.2], 4, 10000, Clusters),
 		list::length(Clusters, Length),
 		^^assertion(Length == 4),

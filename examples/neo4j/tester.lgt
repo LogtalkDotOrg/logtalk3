@@ -41,6 +41,17 @@
 		tests::run
 	)).
 
+:- elif((current_logtalk_flag(prolog_dialect, lvm), logtalk_library_path(jni, _))).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(java(loader)),
+		logtalk_load([hello_world, matrix], [source_data(on), debug(on)]),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
 :- else.
 
 	:- initialization((write('(not applicable)'), nl)).

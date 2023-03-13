@@ -42,6 +42,9 @@ elif [ "$backend" == "swipack" ] ; then
 elif [ "$backend" == "yap" ] ; then
 	source set_classpath_yap.sh
 	export CLASSPATH
+elif [ "$backend" == "lvm" ] ; then
+	source set_classpath_lvm.sh
+	export CLASSPATH
 fi
 
 return 0

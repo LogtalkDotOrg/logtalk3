@@ -19,8 +19,8 @@ ________________________________________________________________________
 
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
-file. This example is only supported when using SWI-Prolog or YAP as the
-backend compiler.
+file. This example is only supported when using LVM (with its `jni` plug-in
+installed), SWI-Prolog, or YAP as the backend compiler.
 
 This is a simple example of using a Java library for converting documents
 to text using the Apache Tika Java library, which you **must** download
@@ -28,6 +28,6 @@ from:
 
 https://tika.apache.org
 
-After downloading the Tika JAR file (for version 1.19.1, this would be
-the `tika-app-1.19.1.jar` file), copy it to the example `jars` folder
-before running the example.
+After downloading the Tika JAR file (for version 2.7.0, this would be the
+`tika-app-2.7.0.jar` file), copy it to the example `jars` folder before
+running the example.

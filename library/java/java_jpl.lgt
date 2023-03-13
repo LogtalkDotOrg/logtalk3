@@ -23,9 +23,9 @@
 	implements((forwarding, java_access_protocol))).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2019-06-13,
+		date is 2023-03-13,
 		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object.',
@@ -39,11 +39,23 @@
 		]
 	]).
 
-	:- use_module(jpl, [
-		jpl_get/3, jpl_set/3,
-		jpl_new/3,
-		jpl_call/4
-	]).
+	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+
+		:- uses(user, [
+			jpl_get/3, jpl_set/3,
+			jpl_new/3,
+			jpl_call/4
+		]).
+
+	:- else.
+
+		:- use_module(jpl, [
+			jpl_get/3, jpl_set/3,
+			jpl_new/3,
+			jpl_call/4
+		]).
+
+	:- endif.
 
 	get_field(Field, Value) :-
 		jpl_get(_Reference_, Field, Value).
@@ -106,14 +118,29 @@
 		]
 	]).
 
-	:- use_module(jpl, [
-		jpl_true/1, jpl_false/1, jpl_void/1, jpl_null/1,
-		jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1, jpl_is_object/1,
-		jpl_is_ref/1,
-		jpl_terms_to_array/2, jpl_list_to_array/2, jpl_array_to_list/2,
-		jpl_iterator_element/2, jpl_map_element/2, jpl_set_element/2,
-		jpl_call/4
-	]).
+	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+
+		:- uses(user, [
+			jpl_true/1, jpl_false/1, jpl_void/1, jpl_null/1,
+			jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1, jpl_is_object/1,
+			jpl_is_ref/1,
+			jpl_terms_to_array/2, jpl_list_to_array/2, jpl_array_to_list/2,
+			jpl_iterator_element/2, jpl_map_element/2, jpl_set_element/2,
+			jpl_call/4
+		]).
+
+	:- else.
+
+		:- use_module(jpl, [
+			jpl_true/1, jpl_false/1, jpl_void/1, jpl_null/1,
+			jpl_is_true/1, jpl_is_false/1, jpl_is_void/1, jpl_is_null/1, jpl_is_object/1,
+			jpl_is_ref/1,
+			jpl_terms_to_array/2, jpl_list_to_array/2, jpl_array_to_list/2,
+			jpl_iterator_element/2, jpl_map_element/2, jpl_set_element/2,
+			jpl_call/4
+		]).
+
+	:- endif.
 
 	:- uses(user, [
 		length/2

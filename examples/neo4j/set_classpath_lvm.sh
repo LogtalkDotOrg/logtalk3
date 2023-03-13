@@ -2,8 +2,8 @@
 
 #############################################################################
 ## 
-##   Bash script to be sourced by the logtalk_tester script
-##   Last updated on March 13, 2023
+##   Set CLASSPATH environment variable for LVM
+##   Last updated on March 14, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -23,28 +23,11 @@
 #############################################################################
 
 
-local OPTIND=1
-local OPTERR=0
-while getopts "p:" option
-do
-	case $option in
-		p) backend=$OPTARG;;
-		?) shift;;
-	esac
+CLASSPATH="$(lvmpl --src-root)/../library/jni/dependencies/jpl.jar"
+NEO4J="$(neo4j --verbose status | grep 'app.home' | sed 's/.*-Dapp.home=\(.*\),.*/\1/')"
+
+for jar in "$NEO4J"/lib/*.jar; do
+	CLASSPATH="$jar":$CLASSPATH
 done
 
-if [ "$backend" == "swi" ] ; then
-	source set_classpath_swi.sh
-	export CLASSPATH
-elif [ "$backend" == "swipack" ] ; then
-	source set_classpath_swi.sh
-	export CLASSPATH
-elif [ "$backend" == "yap" ] ; then
-	source set_classpath_yap.sh
-	export CLASSPATH
-elif [ "$backend" == "lvm" ] ; then
-	source set_classpath_lvm.sh
-	export CLASSPATH
-fi
-
-return 0
+export CLASSPATH

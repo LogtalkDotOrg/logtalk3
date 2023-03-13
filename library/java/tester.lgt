@@ -46,6 +46,17 @@
 
 	:- endif.
 
+:- elif((current_logtalk_flag(prolog_dialect, lvm), logtalk_library_path(jni, _))).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(jni(loader)),
+		logtalk_load([java_protocols,java_jpl], [optimize(on)]),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
 :- elif(current_logtalk_flag(prolog_dialect, ji)).
 
 	:- initialization((

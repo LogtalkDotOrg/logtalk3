@@ -46,6 +46,8 @@ Library
 * CHANGED: The `csv` library to throw `error/2` exception terms and type-check
 the `write_file/3` and `write_stream/3` predicates.
 
+* ADDED: Experimental support for LVM to the `java` library.
+
 * ADDED: New `java` library `array_to_list/2` and `list_to_array/2` predicates.
 Unlike the now deprecated `array_list/2` predicate, calls to these predicates
 can be inlined.
@@ -86,6 +88,8 @@ Examples
 Neo4j.
 
 * ADDED: Tests for the `document_converter` example.
+
+* ADDED: Experimental support for LVM to the Java examples.
 
 * IMPROVED: Test set condition for the `clustering` example.
 

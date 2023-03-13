@@ -27,9 +27,9 @@
 :- object(flags_table).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paul Singleton; adapted to Logtalk by Paulo Moura.',
-		date is 2016-09-19,
+		date is 2023-03-20,
 		comment is 'JTable example from the JPL distribution.'
 	]).
 
@@ -43,7 +43,7 @@
 		findall(
 			Array,
 			(	current_logtalk_flag(Flag, Value),
-				term_to_atom(Value, ValueAtom),
+				term_io::write_to_atom(Value, ValueAtom),
 				java('[Ljava.lang.String;')::new([Flag,ValueAtom], Array)
 			),
 			Arrays

@@ -36,6 +36,7 @@
 
 		:- initialization((
 			logtalk_load(java(loader)),
+			logtalk_load(term_io(loader)),
 			logtalk_load([color_chooser, flags_table, jlist, text_entry], [optimize(on), hook(java_hook)]),
 			logtalk_load(benchmarks, [optimize(on), hook(java_hook)])
 		)).
@@ -45,6 +46,15 @@
 		:- initialization((write('(JPL library not available)'), nl)).
 
 	:- endif.
+
+:- elif((current_logtalk_flag(prolog_dialect, lvm), logtalk_library_path(jni, _))).
+
+	:- initialization((
+		logtalk_load(java(loader)),
+		logtalk_load(term_io(loader)),
+		logtalk_load([color_chooser, flags_table, jlist, text_entry], [optimize(on), hook(java_hook)]),
+		logtalk_load(benchmarks, [optimize(on), hook(java_hook)])
+	)).
 
 :- elif(current_logtalk_flag(prolog_dialect, ji)).
 
