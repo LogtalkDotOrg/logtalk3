@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Set CLASSPATH environment variable for SWI-Prolog
-##   Last updated on October 29, 2018
+##   Last updated on March 14, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -25,8 +25,9 @@
 
 eval $(swipl --dump-runtime-variables)
 CLASSPATH="$PLBASE/lib/jpl.jar"
+NEO4J="$(neo4j --verbose status | grep 'app.home' | sed 's/.*-Dapp.home=\(.*\),.*/\1/')"
 
-for jar in /usr/local/Cellar/neo4j/5.5.0/libexec/lib/*.jar; do
+for jar in "$NEO4J"/lib/*.jar; do
 	CLASSPATH="$jar":$CLASSPATH
 done
 
