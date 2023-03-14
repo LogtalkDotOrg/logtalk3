@@ -75,6 +75,8 @@ Neo4j.
 
 * IMPROVED: Test set condition for the `clustering` example.
 
+* IMPROVED: The documentation of the `bench` example.
+
 * FIXED: The `clustering` and `document_converter` examples `tester.sh`
 scripts.
 

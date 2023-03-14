@@ -18,27 +18,38 @@ limitations under the License.
 ________________________________________________________________________
 
 
-% start by loading the example by choosing one of the plain Prolog files
-% (you must quit and restart Logtalk for each testing scenario):
+% start by loading the example:
 
 | ?- logtalk_load(bench(loader)).
 ...
+
+
+% run all tests, repeating each one 1000 times:
+
+| ?- run.
+...
+
+% run all tests, repeating each one N times, e.g. 2000 times:
+
+| ?- run(2000).
+...
+
+% run a specific benchmark, e.g. "nreverse", 10000 times:
+
+| ?- run(nreverse, 10000).
+...
+
+
+% if you want to compare Logtalk and plain Prolog versions of an individual
+% benchmark, load also its Prolog file (in this case, you must quit and
+% restart Logtalk for each testing scenario); for example:
 
 | ?- ['$LOGTALKUSER/examples/bench/boyer.pl'].
 yes
 
 
-% load the "lgtunit" tool so that we can use its benchmark predicates:
-
-| ?- logtalk_load(lgtunit(loader)).
-...
-
-
-% benchmark both the plain Prolog and the Logtalk versions:
-
-| ?- lgtunit::benchmark(top,1000,Time).
-Time = ...
-yes
+% you can also use the "lgtunit" tool benchmark predicates directly; for
+% example:
 
 | ?- lgtunit::benchmark(boyer::top,1000,Time).
 Time = ...
@@ -57,7 +68,7 @@ yes
 % predicate that may also be used in alternative to the `lgtunit` benchmark
 % predicates (the adapter files for these two systems ensure that ::/2 goals
 % in the argument of the time/1 are fully compiled prior to calling them so
-% that we benchmark the code instead of the compiler):
+% that we benchmark the code instead of the Logtalk compiler):
 
 | ?- time(true).  % autoload if necessary
 ...
