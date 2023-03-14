@@ -19601,17 +19601,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_,_,_), user),
 	% source file user-defined predicate
 	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
-	THead =.. [_| THeadArguments],
-	term_variables(THeadArguments, THeadVariables),
-	THeadArguments == THeadVariables,
+	Head =.. [_| HeadArguments],
+	term_variables(HeadArguments, HeadVariables),
+	HeadArguments == HeadVariables,
 	% all head arguments are variables
-	\+ '$lgt_variable_aliasing'(THead),
+	\+ '$lgt_variable_aliasing'(Head),
 	% don't inline predicate definitions with variable aliasing in the clause
 	% head as this can result in optimization bugs when compiling predicate
 	% calls due to compile time variable bindings propagating to previous goals
 	% in the same clause body
 	'$lgt_inlining_candidate'(TBody, Functor/Arity),
 	% valid candidate for inlining
+	term_variables(THead, THeadVariables),
 	term_variables(TBody, TBodyVariables),
 	forall(
 		'$lgt_member'(TBodyVariable, TBodyVariables),

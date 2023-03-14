@@ -25,6 +25,12 @@ RELEASE NOTES
 3.64.0 - March ??, 2023
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Performance issue where the compiler would not inline predicate
+definitions when the clause body goal uses parameter variables.
+
 Prolog adapter and integration files
 ------------------------------------
 
