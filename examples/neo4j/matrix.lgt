@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-03-09,
+		date is 2023-03-14,
 		comment is 'Simple example of using Neo4j adapted from <https://console.neo4j.org>.',
 		argnames is ['URI', 'User', 'Password']
 	]).
@@ -36,20 +36,12 @@
 		argnames is ['Who']
 	]).
 
-	:- uses(list, [
-		member/2
-	]).
-
-	:- uses(type, [
-		check/3
-	]).
-
 	neo_knows(Who) :-
 		% type check all arguments to minimize the possible exceptions in the Java side
 		context(Context),
-		check(atom, _URI_, Context),
-		check(atom, _User_, Context),
-		check(atom, _Password_, Context),
+		type::check(atom, _URI_, Context),
+		type::check(atom, _User_, Context),
+		type::check(atom, _Password_, Context),
 		java('org.neo4j.driver.AuthTokens', AuthTokens)::basic(_User_, _Password_),
 		java('org.neo4j.driver.GraphDatabase', Driver)::driver(_URI_, AuthTokens),
 		java(Driver, Session)::session,
