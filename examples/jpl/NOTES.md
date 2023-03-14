@@ -24,7 +24,7 @@ the JPL library installed. YAP most likely would be usable when the old JPL
 library bundled with it is updated. Some examples (but not the benchmarks)
 can also be used with JIProlog.
 
-This folder contains examples, most of them adapted from the JPL library
+This folder contains GUI examples, most of them adapted from the JPL library
 distributed with SWI-Prolog and YAP, of calling Java from Logtalk. It uses
 a lightweight abstraction included in the Logtalk library for calling Java.
 

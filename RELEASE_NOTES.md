@@ -66,6 +66,8 @@ registry is defined.
 Examples
 --------
 
+* MOVED: Tests from the `jpl` example to the `java` library.
+
 * ADDED: New `neo4j` example of using the `java` library to interface with
 Neo4j.
 

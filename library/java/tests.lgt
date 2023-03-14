@@ -23,24 +23,33 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2023-03-13,
+		date is 2023-03-14,
 		comment is 'Unit tests for the "java" library.'
 	]).
 
-	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
+	:- uses(lgtunit, [
+		op(700, xfx, '=~='), '=~='/2
+	]).
 
 	cover(java(_, _)).
+	cover(java(_)).
 	cover(java).
 
-	% "java(_, _)" object tests
+	% new/1-2 tests
 
 	test(java_2_new_1_01, true) :-
 		java('java.lang.Object')::new(_).
 
-	test(java_2_new_2_01, true) :-
+	test(java_2_new_1_02, true(number(Time))) :-
+		java('java.util.Date')::new(Date),
+		java(Date, Time)::getTime.
+
+	test(java_2_new_2_02, true) :-
 		java('java.lang.String')::new([abc], _).
+
+	% invoke/1-2 tests
 
 	test(java_2_invoke_1_01, true(integer(HashCode))) :-
 		java('java.lang.Object')::new(Reference),
@@ -58,18 +67,47 @@
 		java('java.lang.Object')::new(Reference),
 		java('java.lang.System', HashCode)::invoke(identityHashCode, [Reference]).
 
-	test(java_2_forward_1_01, true(integer(HashCode))) :-
+	test(java_03, true(atom(Version))) :-
+		java('java.lang.System', Version)::invoke(getProperty('java.version')).
+
+	% forwarding tests
+
+	test(java_2_forward_1_01, true) :-
+		java('java.lang.System')::getProperty('java.version').
+
+	test(java_2_forward_1_02, true(atom(Version))) :-
+		java('java.lang.System', Version)::getProperty('java.version').
+
+	test(java_2_forward_1_03, true(Integer == 123)) :-
+		java('java.lang.Integer', Integer)::parseInt('123').
+
+	test(java_2_forward_1_04, true(integer(HashCode))) :-
 		java('java.lang.Object')::new(Reference),
 		java(Reference, HashCode)::hashCode.
 
-	test(java_2_forward_1_02, true(integer(HashCode))) :-
+	test(java_2_forward_1_05, true(integer(HashCode))) :-
 		java('java.lang.Object')::new(Reference),
 		java('java.lang.System', HashCode)::identityHashCode(Reference).
+
+	test(java_2_forward_1_06, true(float(Float))) :-
+		java('java.util.Random')::new(Random),
+		java(Random)::setSeed(12345),
+		java(Random, Float)::nextFloat.
+
+	test(java_2_forward_1_07, true(integer(Int))) :-
+		java('java.util.Random')::new([12345], Random),
+		java(Random, Int)::nextInt.
+
+	% get_field/2 tests
 
 	test(java_2_get_field_2_01, true(Pi =~= 3.141592653589793)) :-
 		java('java.lang.Math')::get_field('PI', Pi).
 
-	% "java" object tests
+	test(java_2_get_field_2_02, true(integer(Year))) :-
+		java('java.util.Calendar', Calendar)::getInstance,
+		java(Calendar)::get_field('YEAR', Year).
+
+	% "java" object utility predicate tests
 
 	test(java_true_1_01, true(ground(Reference))) :-
 		java::true(Reference).
@@ -119,6 +157,8 @@
 		java::value_reference(null, Reference),
 		java::is_null(Reference).
 
+	% terms_to_array/2 and array_to_terms/2 tests
+
 	test(java_arrays_01, true(Terms == [a,42,foo])) :-
 		java::terms_to_array([a,42,foo], Array),
 		java::array_to_terms(Array, Terms).
@@ -127,17 +167,29 @@
 		java::terms_to_array([2.72,3.14,9.8], Array),
 		java::array_to_terms(Array, Terms).
 
-	test(java_arrays_03, true) :-
+	test(java_arrays_03, true(List == [0.0, 0])) :-
+		java::terms_to_array([0.0, 0], Array),
+		java::array_to_terms(Array, List).
+
+	test(java_arrays_04, true) :-
 		java::terms_to_array([a,42,foo], Array),
 		java::array_to_terms(Array, Terms, Length),
 		^^assertion(terms, Terms == [a,42,foo]),
 		^^assertion(length, Length == 3).
+
+	test(java_arrays_05, true(List == [x, [1, a, 7, [y, z]], k, [], foo(bar)])) :-
+		java::terms_to_array([x, [1, a, 7, [y,z]], k, [], foo(bar)], Array),
+		java::array_to_terms(Array, List).
+
+	% iterator_element/2 tests
 
 	test(java_iterator_element_2_01, true(Elements == [a,b,c])) :-
 		java('java.util.ArrayList')::new(ArrayList),
 		java(ArrayList)::(add(a), add(b), add(c)),
 		java(ArrayList, Iterator)::iterator,
 		findall(Element, java::iterator_element(Iterator,Element), Elements).
+
+	% map_element/2 tests
 
 	test(java_map_element_2_01, true(Elements == [a-1,b-2,c-3])) :-
 		java('java.util.TreeMap')::new(Map),
@@ -155,9 +207,30 @@
 			Elements
 		).
 
+	% set_element/2 tests
+
 	test(java_set_element_2_01, true(Elements == [a,b,c])) :-
 		java('java.util.TreeSet')::new(Set),
 		java(Set)::(add(a), add(b), add(c)),
 		findall(Element, java::set_element(Set,Element), Elements).
+
+	% test using Java iterators
+
+	test(java_iterator, true(Names == ['Paulo', 'Carlos', 'Helena'])) :-
+		java('java.util.ArrayList')::new(ArrayList),
+		java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')),
+		java(ArrayList, Iterator)::iterator,
+		findall(
+			Name,
+			(	repeat,
+				java(Iterator, HasNext)::hasNext,
+				(	java::is_true(HasNext) ->
+					java(Iterator, Name)::next
+				;	!,
+					fail
+				)
+			),
+			Names
+		).
 
 :- end_object.

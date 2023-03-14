@@ -23,71 +23,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 0:0:0,
 		author is 'Paulo Moura and Sergio Castro',
-		date is 2022-10-22,
+		date is 2023-03-14,
 		comment is 'Unit tests for the "jpl" example.'
 	]).
-
-	:- uses(lgtunit, [
-		op(700, xfx, '=~='), '=~='/2
-	]).
-
-	test(java_01, true) :-
-		java('java.lang.System')::getProperty('java.version').
-
-	test(java_02, true(atom(Version))) :-
-		java('java.lang.System', Version)::getProperty('java.version').
-
-	test(java_03, true(atom(Version))) :-
-		java('java.lang.System', Version)::invoke(getProperty('java.version')).
-
-	test(java_04, true(Integer == 123)) :-
-		java('java.lang.Integer', Integer)::parseInt('123').
-
-	test(java_05, true(float(Pi))) :-
-		java('java.lang.Math')::get_field('PI', Pi).
-
-	test(java_06, true(integer(Year))) :-
-		java('java.util.Calendar', Calendar)::getInstance,
-		java(Calendar)::get_field('YEAR', Year).
-
-	test(java_07, true(number(Time))) :-
-		java('java.util.Date')::new(Date),
-		java(Date, Time)::getTime.
-
-	test(java_08, true(float(Float))) :-
-		java('java.util.Random')::new(Random),
-		java(Random)::setSeed(12345),
-		java(Random, Float)::nextFloat.
-
-	test(java_09, true(integer(Int))) :-
-		java('java.util.Random')::new([12345], Random),
-		java(Random, Int)::nextInt.
-
-	test(java_10, true(Names == ['Paulo', 'Carlos', 'Helena'])) :-
-		java('java.util.ArrayList')::new(ArrayList),
-		java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')),
-		java(ArrayList, Iterator)::iterator,
-		findall(
-			Name,
-			(	repeat,
-				java(Iterator, HasNext)::hasNext,
-				(	java::is_true(HasNext) ->
-					java(Iterator, Name)::next
-				;	!,
-					fail
-				)
-			),
-			Names
-		).
-
-	test(java_11, true(List == [x, [1, a, 7, [y, z]], k, [], foo(bar)])) :-
-		java::terms_to_array([x, [1, a, 7, [y,z]], k, [], foo(bar)], Array),
-		java::array_to_terms(Array, List).
-
-	test(java_12, true(List =~= [1.73, 3.14, 8.91])) :-
-		java::terms_to_array([1.73, 3.14, 8.91], Array),
-		java::array_to_terms(Array, List).
 
 :- end_object.
