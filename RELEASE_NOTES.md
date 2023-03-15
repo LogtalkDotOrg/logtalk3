@@ -77,6 +77,9 @@ Neo4j.
 
 * IMPROVED: The documentation of the `bench` example.
 
+* UPDATED: The `coinduction` example for upcoming changes in LVM 6.x version
+handling of the unification occurs check.
+
 * FIXED: The `clustering` and `document_converter` examples `tester.sh`
 scripts.
 
