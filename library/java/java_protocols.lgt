@@ -22,7 +22,7 @@
 :- protocol(java_access_protocol).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2023-03-15,
 		comment is 'Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.'
@@ -173,11 +173,25 @@
 		argnames is ['Array', 'Terms']
 	]).
 
+	:- public(array_to_list/2).
+	:- mode(array_to_list(+array, -list), one).
+	:- info(array_to_list/2, [
+		comment is 'Converts an array (a Java reference) to a list of Java references.',
+		argnames is ['Array', 'List']
+	]).
+
+	:- public(list_to_array/2).
+	:- mode(list_to_array(+list, -array), one).
+	:- info(list_to_array/2, [
+		comment is 'Converts a list of Java references to an array (a Java reference).',
+		argnames is ['List', 'Array']
+	]).
+
 	:- public(array_list/2).
 	:- mode(array_list(+array, -list), one).
 	:- mode(array_list(-array, +list), one).
 	:- info(array_list/2, [
-		comment is 'Converts between an array (a Java reference) and a list (of Java references).',
+		comment is 'Converts between an array (a Java reference) and a list of Java references. Deprecated. Use array_to_list/2 or list_to_array/2 instead.',
 		argnames is ['Array', 'List']
 	]).
 

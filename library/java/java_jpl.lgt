@@ -97,9 +97,9 @@
 	implements(java_utils_protocol)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2023-03-13,
+		date is 2023-03-15,
 		comment is 'Abstract interface to JPL API utility predicates.',
 		see_also is [
 			java(_,_), java(_), java_hook
@@ -164,6 +164,12 @@
 
 	array_to_terms(Array, Terms) :-
 		jpl_call('org.jpl7.Util', termArrayToList, [Array], {Terms}).
+
+	array_to_list(Array, List) :-
+		jpl_array_to_list(Array, List).
+
+	list_to_array(List, Array) :-
+		jpl_list_to_array(List, Array).
 
 	array_list(Array, List) :-
 		(	var(Array) ->
