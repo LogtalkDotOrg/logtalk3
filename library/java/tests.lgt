@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2023-03-14,
+		date is 2023-03-15,
 		comment is 'Unit tests for the "java" library.'
 	]).
 
@@ -180,6 +180,15 @@
 	test(java_arrays_05, true(List == [x, [1, a, 7, [y, z]], k, [], foo(bar)])) :-
 		java::terms_to_array([x, [1, a, 7, [y,z]], k, [], foo(bar)], Array),
 		java::array_to_terms(Array, List).
+
+	% array_list/2 tests
+
+	test(java_array_list_2_01, true(List == [A,B,C])) :-
+		java('java.lang.String')::new([a], A),
+		java('java.lang.String')::new([b], B),
+		java('java.lang.String')::new([c], C),
+		java::array_list(Array, [A, B, C]),
+		java::array_list(Array, List).
 
 	% iterator_element/2 tests
 
