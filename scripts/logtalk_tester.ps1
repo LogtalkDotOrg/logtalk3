@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.8")
+	Write-Output ($myName + " 10.9")
 }
 
 Function Run-TestSet() {
@@ -205,17 +205,17 @@ param(
 	[Parameter(Position = 1)]
 	[String]$name,
 	[Parameter(Position = 2)]
-	[String]$error
+	[String]$exception
 )
 	$short = $directory -replace $prefix, ""
 	if ($format -eq "xunit") {
-		$timestamp=$(date +"%Y-%m-%dT%H:%M:%S")
+		$timestamp=$(Get-Date +"%Y-%m-%dT%H:%M:%S")
 		New-Item -Path . -Name $directory/xunit_report.xml -ItemType "file" -Force > $null
 		Add-Content -Path $directory/xunit_report.xml -Value "<?xml version=`"1.0`" encoding=`"UTF-8`"?>"
 		Add-Content -Path $directory/xunit_report.xml -Value "<testsuites>"
 		Add-Content -Path $directory/xunit_report.xml -Value "<testsuite package=`"$short/`" name=`"$short/tests.lgt`" tests=`"0`" errors=`"1`" failures=`"0`" skipped=`"0`" time=`"0`" timestamp=`"$timestamp`" id=`"0`">"
 		Add-Content -Path $directory/xunit_report.xml -Value "<testcase classname=`"tests`" name=`"$name`" time=`"0`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<failure message=`"$error`" type=`"$error`">$error</failure>"
+		Add-Content -Path $directory/xunit_report.xml -Value "<failure message=`"$exception`" type=`"$exception`">$exception</failure>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</testcase>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</testsuite>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</testsuites>"
@@ -227,17 +227,17 @@ param(
 		Add-Content -Path $directory/xunit_report.xml -Value "<assemblies>"
 		Add-Content -Path $directory/xunit_report.xml -Value "<assembly name=`"$short/tests.lgt::tests`" con}g-file=`"$short/tests.lgt`" test-framework=`"lgtunit`" run-date=`"$run_date`" run-time=`"$run_time`" time=`"0`" total=`"0`" errors=`"1`" failures=`"1`" skipped=`"0`">"
 		Add-Content -Path $directory/xunit_report.xml -Value "<errors>"
-		Add-Content -Path $directory/xunit_report.xml -Value "<error type=`"$error`" name=`"$error`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<failure exception-type=`"$error`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<message><![CDATA[$error]]></message>"
+		Add-Content -Path $directory/xunit_report.xml -Value "<error type=`"$exception`" name=`"$exception`">"
+		Add-Content -Path $directory/xunit_report.xml -Value "<failure exception-type=`"$exception`">"
+		Add-Content -Path $directory/xunit_report.xml -Value "<message><![CDATA[$exception]]></message>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</failure>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</error>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</errors>"
 		# hack for Allure ignoring the "errors" tag
 		Add-Content -Path $directory/xunit_report.xml -Value "<collection name=`"$short/tests.lgt::tests`" time=`"0`" total=`"1`" passed=`"0`" failed=`"1`" skipped=`"0`">"
 		Add-Content -Path $directory/xunit_report.xml -Value "<test name=`"$name::tests`" type=`"$short/tests.lgt::tests`" method=`"$name`" time=`"0`" result=`"Fail`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<failure exception-type=`"$error`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<message><![CDATA[$error]]></message>"
+		Add-Content -Path $directory/xunit_report.xml -Value "<failure exception-type=`"$exception`">"
+		Add-Content -Path $directory/xunit_report.xml -Value "<message><![CDATA[$exception]]></message>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</failure>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</test>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</collection>"
@@ -246,7 +246,7 @@ param(
 	} elseif ($format -eq "tap") {
 		New-Item -Path . -Name $directory/tap_report.xml -ItemType "file" -Force > $null
 		Add-Content -Path $directory/tap_report.xml -Value "TAP version 13"
-		Add-Content -Path $directory/tap_report.xml -Value "Bail out! $unit $error"
+		Add-Content -Path $directory/tap_report.xml -Value "Bail out! $unit $exception"
 	}
 }
 
@@ -574,40 +574,79 @@ if ($o -eq "verbose") {
 	(Select-String -Path $results/tester_versions.txt -Pattern "Prolog version:" -Raw -SimpleMatch) -replace "Prolog", $prolog
 }
 
-$testsets = (Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} | Measure-Object).count
+if ($exclude -eq "") {
+	$testsets = (Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | Measure-Object).count
+} else {
+	$testsets = (Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} | Measure-Object).count
+}
 
 if ($l -eq "") {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} |
-		Foreach-Object {
-			Run-TestSet $_.FullName
+		if ($exclude -eq "") {
+			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
+			Foreach-Object {
+				Run-TestSet $_.FullName
+			}
+		} else {
+			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} |
+			Foreach-Object {
+				Run-TestSet $_.FullName
+			}
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} |
-		Foreach-Object {
-			Write-Host -NoNewline "% running $testsets test sets: "
-			Write-Host -NoNewline "$counter`r"
-			Run-TestSet $_.FullName
-			$counter++
+		if ($exclude -eq "") {
+			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
+			Foreach-Object {
+				Write-Host -NoNewline "% running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
+				Run-TestSet $_.FullName
+				$counter++
+			}
+		} else {
+			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} |
+			Foreach-Object {
+				Write-Host -NoNewline "% running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
+				Run-TestSet $_.FullName
+				$counter++
+			}
 		}
 		Write-Output "%"
 	}
 } else {
 	if ($o -eq "verbose") {
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level | where-object{$_.fullname -notmatch $exclude} |
-		Foreach-Object {
-			Run-TestSet $_.FullName
+		if ($exclude -eq "") {
+			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
+			Foreach-Object {
+				Run-TestSet $_.FullName
+			}
+		} else {
+			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level | where-object{$_.fullname -notmatch $exclude} |
+			Foreach-Object {
+				Run-TestSet $_.FullName
+			}
 		}
 	} else {
 		$counter = 1
-		Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level | where-object{$_.fullname -notmatch $exclude} |
-		Foreach-Object {
-			Write-Host -NoNewline "% running $testsets test sets: "
-			Write-Host -NoNewline "$counter`r"
-			Run-TestSet $_.FullName
-			$counter++
-			Write-Output "%"
+		if ($exclude -eq "") {
+			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
+			Foreach-Object {
+				Write-Host -NoNewline "% running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
+				Run-TestSet $_.FullName
+				$counter++
+				Write-Output "%"
+			}
+		} else {
+			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level | where-object{$_.fullname -notmatch $exclude} |
+			Foreach-Object {
+				Write-Host -NoNewline "% running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
+				Run-TestSet $_.FullName
+				$counter++
+				Write-Output "%"
+			}
 		}
 	}
 }

@@ -249,6 +249,8 @@ predicates.
 answers a question at a leashed port to avoid an automatic creep when
 returning to the port after calling the goal.
 
+* FIXED: The `logtalk_tester.ps1` script when the `-e` option is not used.
+
 Examples
 --------
 
