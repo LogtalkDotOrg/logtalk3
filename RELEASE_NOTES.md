@@ -38,6 +38,8 @@ Prolog adapter and integration files
 predicate from within objects and categories to ensure that all database
 predicates are visible.
 
+* UPDATED: All integration PowerShell scripts to require version 7.3 or later.
+
 Library
 -------
 
@@ -59,6 +61,8 @@ a given registry.
 
 * IMPROVED: The `registries::update/0` predicate to inform the user when no
 registry is defined.
+
+* UPDATED: All tool PowerShell scripts to require version 7.3 or later.
 
 * FIXED: The `logtalk_tester.sh` script passing calling options to a sourced
 `tester.sh` script in the test set directories.

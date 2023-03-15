@@ -25,11 +25,8 @@ and installation.
 Scripts with a `.sh` extension are Bash shells scripts for macOS, Linux,
 and similar systems.
 
-Scripts with a `.ps1` extension are PowerShell 7.2.x scripts for Windows
-systems. The `logtalk_tester.ps1` script requires enabling an experimental
-feature:
-
-	Enable-ExperimentalFeature PSNativeCommandArgumentPassing
+Scripts with a `.ps1` extension are PowerShell 7.3.x scripts for Windows
+systems.
 
 Scripts with extension `.js` are JScript command-line scripts for Windows.
 These are deprecated. They require WSH 5.6 or later version to be installed

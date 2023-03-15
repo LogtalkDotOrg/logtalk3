@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Packs virtual environment script
-##   Last updated on January 10, 2023
+##   Last updated on March 15, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -22,7 +22,7 @@
 #############################################################################
 
 
-#Requires -Version 7.2
+#Requires -Version 7.3
 
 [CmdletBinding()]
 param(

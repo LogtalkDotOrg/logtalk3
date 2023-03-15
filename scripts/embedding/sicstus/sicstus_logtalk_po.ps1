@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on October 10, 2022
+##   Last updated on March 15, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 #############################################################################
 
 
-#Requires -Version 7.2
+#Requires -Version 7.3
 
 [CmdletBinding()]
 param(
