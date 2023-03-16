@@ -326,7 +326,7 @@ Converts a list of Java references to an array (a Java reference).
 ``array_list/2``
 ^^^^^^^^^^^^^^^^
 
-Converts between an array (a Java reference) and a list of Java references. Deprecated. Use array_to_list/2 or list_to_array/2 instead.
+Converts between an array (a Java reference) and a list of Java references. Deprecated. Use the ``array_to_list/2`` and ``list_to_array/2`` predicates instead.
 
 | **Compilation flags:**
 |    ``static``

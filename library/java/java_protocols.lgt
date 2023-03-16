@@ -191,7 +191,7 @@
 	:- mode(array_list(+array, -list), one).
 	:- mode(array_list(-array, +list), one).
 	:- info(array_list/2, [
-		comment is 'Converts between an array (a Java reference) and a list of Java references. Deprecated. Use array_to_list/2 or list_to_array/2 instead.',
+		comment is 'Converts between an array (a Java reference) and a list of Java references. Deprecated. Use the ``array_to_list/2`` and ``list_to_array/2`` predicates instead.',
 		argnames is ['Array', 'List']
 	]).
 
