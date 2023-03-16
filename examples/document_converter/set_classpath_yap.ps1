@@ -23,8 +23,8 @@
 
 #Requires -Version 7.3
 
-& yap -dump-runtime-variables > (Join-Path $pwd "swipl_runtime_variables.txt")
-$line = (Get-Content (Join-Path $pwd "swipl_runtime_variables.txt") | Select-String -Pattern 'PLBASE' -CaseSensitive -SimpleMatch -Raw).split("=")
+& yap -dump-runtime-variables > (Join-Path $pwd "yap_runtime_variables.txt")
+$line = (Get-Content (Join-Path $pwd "yap_runtime_variables.txt") | Select-String -Pattern 'PLBASE' -CaseSensitive -SimpleMatch -Raw).split("=")
 
 $classpath = ((($line[1] -replace ";", "") -replace "/", "\") -replace "`"", "") + "\lib\jpl.jar"
 
