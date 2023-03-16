@@ -497,7 +497,7 @@ $PSNativeCommandArgumentPassing = 'Standard'
 
 Push-Location
 
-$allargs = $args
+$allargs = $PSBoundParameters
 
 # default argument values
 

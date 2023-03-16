@@ -26,9 +26,9 @@
 & yap -dump-runtime-variables > (Join-Path $pwd "swipl_runtime_variables.txt")
 $line = (Get-Content (Join-Path $pwd "swipl_runtime_variables.txt") | Select-String -Pattern 'PLBASE' -CaseSensitive -SimpleMatch -Raw).split("=")
 
-$classpath = ($line[1] -replace ";", "") + "/lib/jpl.jar"
+$classpath = ((($line[1] -replace ";", "") -replace "/", "\") -replace "`"", "") + "\lib\jpl.jar"
 
-Get-ChildItem -Path jars/* -Filter *.jar |
+Get-ChildItem -Path jars\* -Filter *.jar |
 Foreach-Object {
 	$classpath += ";" + $_.FullName
 }
