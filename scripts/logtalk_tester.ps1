@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.10")
+	Write-Output ($myName + " 10.11")
 }
 
 Function Run-TestSet() {
@@ -66,8 +66,12 @@ param(
 	$unit_short = $unit -replace $prefix, ""
 	Push-Location "$unit"
 	if ($w -eq $true) {
-		Remove-Item -Path .\.lgt_tmp -Recurse -Force
-		Remove-Item -Path .\lgt_tmp  -Recurse -Force
+		if (Test-Path .\.lgt_tmp) {
+			Remove-Item -Path .\.lgt_tmp -Recurse -Force
+		}
+		if (Test-Path .\lgt_tmp) {
+			Remove-Item -Path .\lgt_tmp  -Recurse -Force
+		}
 	}
 	if ($o -eq "verbose") {
 		Write-Output "%"

@@ -74,6 +74,9 @@ registry is defined.
 calling options to a sourced `tester.sh` and `tester.ps1` scripts in the
 test set directories.
 
+* FIXED: The `logtalk_tester.ps1` script handling of the `-w` option to avoid
+warnings when the scratch directories don't exist.
+
 Examples
 --------
 
