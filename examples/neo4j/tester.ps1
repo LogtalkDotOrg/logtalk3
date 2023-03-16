@@ -1,6 +1,6 @@
 #############################################################################
 ## 
-##   Set CLASSPATH environment variable for YAP
+##   PowerShell script to be sourced by the logtalk_tester script
 ##   Last updated on March 16, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
@@ -23,14 +23,18 @@
 
 #Requires -Version 7.3
 
-& yap -dump-runtime-variables > (Join-Path $pwd "yap_runtime_variables.txt")
-$line = (Get-Content (Join-Path $pwd "yap_runtime_variables.txt") | Select-String -Pattern 'PLBASE' -CaseSensitive -SimpleMatch -Raw).split("=")
+[CmdletBinding()]
+param(
+	[Parameter()]
+	[String]$p
+)
 
-$classpath = ((($line[1] -replace ";", "") -replace "/", "\") -replace "`"", "") + "\lib\jpl.jar"
-
-Get-ChildItem -Path C:\neo4j-community-5.5.0\lib\* -Filter *.jar |
-Foreach-Object {
-	$classpath += ";" + $_.FullName
+if ($p -eq "swi") {
+	& .\set_classpath_swi.ps1
+} elseif ($p -eq "yap") {
+	& .\set_classpath_yap.ps1
+} else {
+	Exit 1
 }
 
-[System.Environment]::setEnvironmentVariable("CLASSPATH", $classpath, "Process")
+Exit 0

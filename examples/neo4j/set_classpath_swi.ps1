@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Set CLASSPATH environment variable for SWI-Prolog
-##   Last updated on April 25, 2022
+##   Last updated on March 16, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -21,11 +21,16 @@
 #############################################################################
 
 
+#Requires -Version 7.3
+
 & swipl --dump-runtime-variables > (Join-Path $pwd "swipl_runtime_variables.txt")
 $line = (Get-Content (Join-Path $pwd "swipl_runtime_variables.txt") | Select-String -Pattern 'PLBASE' -CaseSensitive -SimpleMatch -Raw).split("=")
-$env:CLASSPATH = ($line[1] -replace ";", "") + "/lib/jpl.jar"
 
-Get-ChildItem -Path /usr/local/Cellar/neo4j/5.5.0/libexec/lib/* -Filter *.jar |
+$classpath = ((($line[1] -replace ";", "") -replace "/", "\") -replace "`"", "") + "\lib\jpl.jar"
+
+Get-ChildItem -Path C:\neo4j-community-5.5.0\lib\* -Filter *.jar |
 Foreach-Object {
-	$env:CLASSPATH += ";" + $_.FullName
+	$classpath += ";" + $_.FullName
 }
+
+[System.Environment]::setEnvironmentVariable("CLASSPATH", $classpath, "Process")
