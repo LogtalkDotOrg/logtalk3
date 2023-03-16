@@ -75,7 +75,7 @@ param(
 	}
 	$source = ".\\" + $n + ".ps1"
 	if (Test-Path $source) {
-		& $source $script:@args
+		& $source $allargs
 		if ($LASTEXITCODE -gt 0) {
 			Write-Output ("%         source " + $n + ".ps1 returned code " + $LASTEXITCODE)
 			Exit 9
@@ -496,6 +496,8 @@ Function Check-Parameters() {
 $PSNativeCommandArgumentPassing = 'Standard'
 
 Push-Location
+
+$allargs = @args
 
 # default argument values
 
