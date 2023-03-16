@@ -33,4 +33,4 @@ Foreach-Object {
 	$classpath += ";" + $_.FullName
 }
 
-[System.Environment]::setEnvironmentVariable("CLASSPATH", $classpath)
+[System.Environment]::setEnvironmentVariable("CLASSPATH", $classpath, "Process")
