@@ -53,3 +53,7 @@ example:
 Save the edit file and start Neo4j:
 
 	$ neo4j start
+
+When running this example on Windows, check first the Neo4j installation
+directory path used in the `set_classpath_*.ps1` scripts and adjust it if
+required.
