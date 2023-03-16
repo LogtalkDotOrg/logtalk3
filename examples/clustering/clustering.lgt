@@ -22,9 +22,9 @@
 :- object(clustering).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2018-09-04,
+		date is 2023-03-16,
 		comment is 'Clustering example using the Apache commons math Java library.'
 	]).
 
@@ -89,12 +89,12 @@
 				java(Results, Result)::get(N),
 				java(Result, Points)::getPoints,
 				java(Points, Array)::toArray,
-				java::array_list(Array, DoublePoints),
+				java::array_to_list(Array, DoublePoints),
 				findall(
 					ClusterValue,
 					(	member(DoublePoint, DoublePoints),
 						java(DoublePoint, ArrayDouble)::getPoint,
-						java::array_list(ArrayDouble, [ClusterValue])
+						java::array_to_list(ArrayDouble, [ClusterValue])
 					),
 					Cluster
 				)
