@@ -288,7 +288,7 @@ Converts an array (a Java reference) to a list of ground Prolog terms. The array
 ``array_to_list/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Converts an array (a Java reference) to a list of Java references.
+Converts an array (a Java reference) to a list of Java references or their values.
 
 | **Compilation flags:**
 |    ``static``
@@ -307,7 +307,7 @@ Converts an array (a Java reference) to a list of Java references.
 ``list_to_array/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Converts a list of Java references to an array (a Java reference).
+Converts a list of Java references or values to an array (a Java reference).
 
 | **Compilation flags:**
 |    ``static``
@@ -326,7 +326,7 @@ Converts a list of Java references to an array (a Java reference).
 ``array_list/2``
 ^^^^^^^^^^^^^^^^
 
-Converts between an array (a Java reference) and a list of Java references. Deprecated. Use the ``array_to_list/2`` and ``list_to_array/2`` predicates instead.
+Converts between an array (a Java reference) and a list of Java references or their values. Deprecated. Use the ``array_to_list/2`` and ``list_to_array/2`` predicates instead.
 
 | **Compilation flags:**
 |    ``static``
