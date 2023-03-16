@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.9")
+	Write-Output ($myName + " 10.10")
 }
 
 Function Run-TestSet() {
@@ -75,7 +75,7 @@ param(
 	}
 	$source = ".\\" + $n + ".ps1"
 	if (Test-Path $source) {
-		& $source @args
+		& $source $script:@args
 		if ($LASTEXITCODE -gt 0) {
 			Write-Output ("%         source " + $n + ".ps1 returned code " + $LASTEXITCODE)
 			Exit 9
