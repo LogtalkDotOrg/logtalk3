@@ -70,8 +70,9 @@ registry is defined.
 
 * UPDATED: All tool PowerShell scripts to require version 7.3 or later.
 
-* FIXED: The `logtalk_tester.sh` script passing calling options to a sourced
-`tester.sh` script in the test set directories.
+* FIXED: The `logtalk_tester.sh` and `logtalk_tester.ps1` scripts passing
+calling options to a sourced `tester.sh` and `tester.ps1` scripts in the
+test set directories.
 
 Examples
 --------
