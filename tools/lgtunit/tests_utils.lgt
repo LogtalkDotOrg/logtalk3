@@ -570,7 +570,7 @@ a(1).
 
 	:- multifile(arbitrary::arbitrary/2).
 	arbitrary::arbitrary(broken_type, _) :-
-	    char_code(1, _).
+		char_code(1, _).
 
 	% suppress quick_check/1-3 messages and save option values for tests
 

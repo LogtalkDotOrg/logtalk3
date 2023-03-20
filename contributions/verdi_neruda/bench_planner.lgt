@@ -51,31 +51,31 @@
 
 	transform(State,State,_,[]) if true.
 	transform(State1,State2,Visited,[Action|Actions]) if
-	   legal_action(Action,State1) and
-	   update(Action,State1,State) and
-	   not(member(State,Visited)) and
-	   transform(State,State2,[State|Visited],Actions).
+		legal_action(Action,State1) and
+		update(Action,State1,State) and
+		not(member(State,Visited)) and
+		transform(State,State2,[State|Visited],Actions).
 
 	legal_action(to_place(Block,Y,Place),State) if
-	   on(Block,Y,State) and
-	   clear(Block,State) and
-	   place(Place) and
-	   clear(Place,State).
+		on(Block,Y,State) and
+		clear(Block,State) and
+		place(Place) and
+		clear(Place,State).
 	legal_action(to_block(Block1,Y,Block2),State) if
-	   on(Block1,Y,State) and
-	   clear(Block1,State) and
-	   block(Block2) and
-	   {Block1 \== Block2} and
-	   clear(Block2,State).
+		on(Block1,Y,State) and
+		clear(Block1,State) and
+		block(Block2) and
+		{Block1 \== Block2} and
+		clear(Block2,State).
 
 	clear(X,State) if not(above(X, State)).
 	above(X, State) if member(on(_, X), State).
 	on(X,Y,State) if member(on(X,Y),State).
 
 	update(to_block(X,Y,Z),State,State1) if
-	   substitute(on(X,Y), on(X,Z),State,State1).
+		substitute(on(X,Y), on(X,Z),State,State1).
 	update(to_place(X,Y,Z),State,State1) if
-	   substitute(on(X,Y),on(X,Z),State,State1).
+		substitute(on(X,Y),on(X,Z),State,State1).
 
 	substitute(X,Y,[X|Xs],[Y|Xs]) if true.
 	substitute(X,Y,[X1|Xs],[X1|Ys]) if

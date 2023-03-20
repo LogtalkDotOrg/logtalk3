@@ -44,7 +44,7 @@
 
 	% the book/0 and travel/0 predicates don't have default definitions and
 	% thus must be defined in the descendant objects; if no definitions are
-	% found the ::book and ::travel will fail and thus the call to the 
+	% found the ::book and ::travel will fail and thus the call to the
 	% journey/0 predicate will also fail; an alternative is to add default
 	% definitions that throw an error if they are not overridden in the
 	% descendant objects; for example:

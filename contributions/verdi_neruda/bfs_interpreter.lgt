@@ -80,12 +80,13 @@
 		%%new body with Goals. Goal in the template is a placeholder,
 		%%and is later used in add_bindings/5 to create a unifier
 		%%between the old goal and the resolvent.
-		bagof(state(Body, Depth, Goal),
-			  (
-			   rule(Goal, Body, Goals, DB),
-			   counter::increment %Inference counting.
-			  ),
-			NewGoals0),
+		bagof(
+			state(Body, Depth, Goal),
+			(	rule(Goal, Body, Goals, DB),
+				counter::increment %Inference counting.
+			),
+			NewGoals0
+		),
 		!,
 		add_bindings(NewGoals0, Goal, Bindings, NewGoals, []).
 	expand_state(_, [], _).

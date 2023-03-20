@@ -49,13 +49,15 @@
 		{threaded_peek(true, _)}.
 
 	succeeds(threaded_peek_2_04) :-
-		{threaded_call(true, Tag),
-		 thread_sleep(1),
-		 threaded_peek(true, Tag)}.
+		{	threaded_call(true, Tag),
+			thread_sleep(1),
+			threaded_peek(true, Tag)
+		}.
 
 	succeeds(threaded_peek_2_05) :-
-		{threaded_once(true, Tag),
-		 thread_sleep(1),
-		 threaded_peek(true, Tag)}.
+		{	threaded_once(true, Tag),
+			thread_sleep(1),
+			threaded_peek(true, Tag)
+		}.
 
 :- end_object.

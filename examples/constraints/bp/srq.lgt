@@ -43,7 +43,7 @@
 	:- public(q_all/0).
 	q_all :-
 		statistics(runtime,_),
-		(	srq(L), 
+		(	srq(L),
 			write(L), nl,
 			fail
 		;	nl
@@ -125,7 +125,7 @@
 	/*Question 5 */
 		A5=C1,  B5=C3,  C5=C5,  D5=C7,  E5=C9,
 	/*Question 6  */
-		Aft in 0..1, Aftn in 0..1, Bef in 0..1, Befn in 0..1,  
+		Aft in 0..1, Aftn in 0..1, Bef in 0..1, Befn in 0..1,
 		SmD in 0..10, DD12 in 0..1,
 		DD34 in 0..1,DD1234 in 0..1, DD78 in 0..1, DD910 in 0..1,
 
@@ -145,7 +145,7 @@
 		SmD #= D1 + D2 + D3 + D4 + D5 + D6 + D7 + D8 + D9 + D10,
 
 		iff(SmD,0,D6),
-		E6=D6, 
+		E6=D6,
 	/*Question 7  */
 		E678910n in 0..1,
 		E78910n in 0..1,
@@ -177,7 +177,7 @@
 		SmA in 0..10, SmE in 0..10, SmAE in 0..10,
 		SmA #= A1 + A2 + A3 + A4 + A5 + A6 + A7 + A8 + A9 + A10,
 		SmE #= E1 + E2 + E3 + E4 + E5 + E6 + E7 + E8 + E9 + E10,
-		SmAE #= SmA + SmE,  
+		SmAE #= SmA + SmE,
 		iff(SmAE,0,A9),
 		iff(SmAE,1,B9),
 		iff(SmAE,2,C9),

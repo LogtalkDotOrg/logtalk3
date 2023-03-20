@@ -59,9 +59,13 @@
 		retractall(told_by_user_(_, _)),
 		write('Please answer all questions with yes or no.'), nl, nl,
 		forall(
-			(::descendant(Where), Where::find(Description)),
-			(nl, write('Location      : '), write(Where), nl,
-			 write('Possible Fault: '), write(Description), nl)),
+			(	::descendant(Where),
+				Where::find(Description)
+			),
+			(	nl, write('Location      : '), write(Where), nl,
+				write('Possible Fault: '), write(Description), nl
+			)
+		),
 		nl, write('No (more) explanations found.').
 
 	find(Description) :-
@@ -69,17 +73,18 @@
 		forall(::effect(Fault, Symptom), exhibited(Symptom)).
 
 	exhibited(Symptom) :-
-		told_by_user_(Symptom, Reply) ->
+		(	told_by_user_(Symptom, Reply) ->
 			Reply = yes
-			;
-			::symptom(Symptom, Description),
+		;	::symptom(Symptom, Description),
 			write(Description), write('? '),
 			read(Reply),
 			asserta(told_by_user_(Symptom, Reply)),
 			Reply = yes,
 			forall(
 				(::contrary(Symptom, Contrary); ::contrary(Contrary, Symptom)),
-				asserta(told_by_user_(Contrary, no))).
+				asserta(told_by_user_(Contrary, no))
+			)
+		).
 
 :- end_object.
 

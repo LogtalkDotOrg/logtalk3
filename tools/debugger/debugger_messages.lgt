@@ -337,7 +337,7 @@
 		[nl].
 
 	leashed_ports([Port| Ports]) -->
-		 [' ~w'-[Port]],
+		[' ~w'-[Port]],
 		leashed_ports(Ports).
 	leashed_ports([]) --> [].
 

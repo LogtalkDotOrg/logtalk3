@@ -217,7 +217,7 @@
 	]).
 
 	route(Towns, Route) :-
-		presort::route(Towns, Presort), 
+		presort::route(Towns, Presort),
 		drive_around(Presort, Route).
 
 	drive_around(Route-Town1-Town2, Route1-Route2) :-

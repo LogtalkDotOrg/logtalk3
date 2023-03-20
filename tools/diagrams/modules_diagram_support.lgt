@@ -63,62 +63,62 @@
 		property_module(exports(Exports), Module) :-
 			{module_property(Module, exports(Exports))}.
 		property_module(declares(Functor/Arity, Properties), Module) :-
-			{module_property(Module, exports(Exports)),
-			 member(Functor/Arity, Exports)
+			{	module_property(Module, exports(Exports)),
+				member(Functor/Arity, Exports)
 			},
 			module_predicate_properties(Module, Functor/Arity, Properties).
 		property_module(defines(Functor/Arity, []), Module) :-
-			{module_property(Module, file(File)),
-			 xref_source(File),
-			 setof(How, xref_defined(File, Predicate, How), _),
-			 Predicate \= ':'(_,_),
-			 \+ xref_defined(File, Predicate, imported(_)),
-			 functor(Predicate, Functor, Arity)
+			{	module_property(Module, file(File)),
+				xref_source(File),
+				setof(How, xref_defined(File, Predicate, How), _),
+				Predicate \= ':'(_,_),
+				\+ xref_defined(File, Predicate, imported(_)),
+				functor(Predicate, Functor, Arity)
 			}.
 		property_module(provides(Functor/Arity, To, []), Module) :-
-			{module_property(Module, file(File)),
-			 xref_source(File),
-			 setof(Location, xref_defined(File, To:Predicate, local(Location)), _),
-			 To \== Module,
-			 functor(Predicate, Functor, Arity)
+			{	module_property(Module, file(File)),
+				xref_source(File),
+				setof(Location, xref_defined(File, To:Predicate, local(Location)), _),
+				To \== Module,
+				functor(Predicate, Functor, Arity)
 			}.
 		property_module(file(File), Module) :-
 			{module_property(Module, file(File))}.
 		property_module(file(Basename, Directory), Module) :-
-			{module_property(Module, file(File)),
-			 file_directory_name(File, Directory0),
-			 atom_concat(Directory0, '/', Directory),
-			 file_base_name(File, Basename)
+			{	module_property(Module, file(File)),
+				file_directory_name(File, Directory0),
+				atom_concat(Directory0, '/', Directory),
+				file_base_name(File, Basename)
 			}.
 		property_module(calls(Callee, [caller(Caller)| OtherProperties]), Module) :-
-			{module_property(Module, file(File)),
-			 xref_source(File),
-			 xref_called(File, Callee0, Caller0),
-			 (	Caller0 = ':'(ForModule,Caller1) ->
-			 	functor(Caller1, CallerFunctor, CallerArity),
-				Caller = ':'(ForModule,CallerFunctor/CallerArity)
-			 ;	functor(Caller0, CallerFunctor, CallerArity),
-			 	Caller = CallerFunctor/CallerArity
-			 ),
-			 (	xref_defined(File, Caller0, local(Line)) ->
-			 	OtherProperties = [line_count(Line)]
-			 ;	OtherProperties = []
-			 ),
-			 functor(Caller, CallerFunctor, CallerArity),
-			 (	Callee0 = (Object::Callee1) ->
-			 	functor(Callee1, CalleeFunctor, CalleeArity),
-				Callee = (Object::CalleeFunctor/CalleeArity)
-			 ;	Callee0 = ':'(OtherModule,Callee1) ->
-			 	functor(Callee1, CalleeFunctor, CalleeArity),
-				Callee = ':'(OtherModule,CalleeFunctor/CalleeArity)
-			 ;	xref_defined(File, Callee0, imported(FromFile)) ->
-			 	once(module_property(FromModule, file(FromFile))),
-			 	functor(Callee0, CalleeFunctor, CalleeArity),
-			 	Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
-			 ;	% assume local predicate
-			 	functor(Callee0, CalleeFunctor, CalleeArity),
-			 	Callee = CalleeFunctor/CalleeArity
-			 )
+			{	module_property(Module, file(File)),
+				xref_source(File),
+				xref_called(File, Callee0, Caller0),
+				(	Caller0 = ':'(ForModule,Caller1) ->
+					functor(Caller1, CallerFunctor, CallerArity),
+					Caller = ':'(ForModule,CallerFunctor/CallerArity)
+				;	functor(Caller0, CallerFunctor, CallerArity),
+					Caller = CallerFunctor/CallerArity
+				),
+				(	xref_defined(File, Caller0, local(Line)) ->
+					OtherProperties = [line_count(Line)]
+				;	OtherProperties = []
+				),
+				functor(Caller, CallerFunctor, CallerArity),
+				(	Callee0 = (Object::Callee1) ->
+					functor(Callee1, CalleeFunctor, CalleeArity),
+					Callee = (Object::CalleeFunctor/CalleeArity)
+				;	Callee0 = ':'(OtherModule,Callee1) ->
+					functor(Callee1, CalleeFunctor, CalleeArity),
+					Callee = ':'(OtherModule,CalleeFunctor/CalleeArity)
+				;	xref_defined(File, Callee0, imported(FromFile)) ->
+					once(module_property(FromModule, file(FromFile))),
+					functor(Callee0, CalleeFunctor, CalleeArity),
+					Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
+				;	% assume local predicate
+					functor(Callee0, CalleeFunctor, CalleeArity),
+					Callee = CalleeFunctor/CalleeArity
+				)
 			}.
 
 		module_predicate_properties(Module, Functor/Arity, Properties) :-
@@ -144,12 +144,14 @@
 			;	Parent = Parent0
 			).
 		property_source_file(directory(Directory), File) :-
-			{source_file(File),
-			 file_directory_name(File, Directory0),
-			 atom_concat(Directory0, '/', Directory)}.
+			{	source_file(File),
+				file_directory_name(File, Directory0),
+				atom_concat(Directory0, '/', Directory)
+			}.
 		property_source_file(basename(Basename), File) :-
-			{source_file(File),
-			 file_base_name(File, Basename)}.
+			{	source_file(File),
+				file_base_name(File, Basename)
+			}.
 
 		source_file_extension('.pl').
 		source_file_extension('.prolog').
@@ -164,80 +166,80 @@
 			property_module(Property, Module).
 
 		property_module(exports(Exports), Module) :-
-			{module_property(Module, exports(Predicates)),
-			 (	module_property(Module, exported_operators(Operators)) ->
-			 	% this property fails instead of returning the empty list!
-			 	append(Predicates, Operators, Exports)
-			 ;	Exports = Predicates
-			 )
+			{	module_property(Module, exports(Predicates)),
+				(	module_property(Module, exported_operators(Operators)) ->
+					% this property fails instead of returning the empty list!
+					append(Predicates, Operators, Exports)
+				;	Exports = Predicates
+				)
 			}.
 		property_module(declares(Functor/Arity, Properties), Module) :-
-			{module_property(Module, file(File)),
-			 xref_source(File),
-			 module_property(Module, exports(Exports)),
-			 member(Functor/Arity, Exports),
-			 functor(Predicate, Functor, Arity),
-			 xref_defined(File, Predicate, local(_)),
-			 findall(Property, predicate_property(':'(Module,Predicate), Property), Properties)
+			{	module_property(Module, file(File)),
+				xref_source(File),
+				module_property(Module, exports(Exports)),
+				member(Functor/Arity, Exports),
+				functor(Predicate, Functor, Arity),
+				xref_defined(File, Predicate, local(_)),
+				findall(Property, predicate_property(':'(Module,Predicate), Property), Properties)
 			}.
 		property_module(defines(Functor/Arity, Properties), Module) :-
-			{module_property(Module, file(File)),
-			 xref_source(File),
-			 xref_defined(File, Predicate, local(_)),
-			 Predicate \= ':'(_,_),
-			 functor(Predicate, Functor, Arity),
-			 findall(Property, predicate_property(':'(Module,Predicate), Property), Properties)
+			{	module_property(Module, file(File)),
+				xref_source(File),
+				xref_defined(File, Predicate, local(_)),
+				Predicate \= ':'(_,_),
+				functor(Predicate, Functor, Arity),
+				findall(Property, predicate_property(':'(Module,Predicate), Property), Properties)
 			}.
 		property_module(provides(Functor/Arity, To, [line_count(Line)| Properties]), Module) :-
-			{module_property(Module, file(File)),
-			 xref_source(File),
-			 xref_defined(File, To:Predicate, local(Line)),
-			 To \== Module,
-			 functor(Predicate, Functor, Arity),
-			 findall(Property, predicate_property(':'(To,Predicate), Property), Properties)
+			{	module_property(Module, file(File)),
+				xref_source(File),
+				xref_defined(File, To:Predicate, local(Line)),
+				To \== Module,
+				functor(Predicate, Functor, Arity),
+				findall(Property, predicate_property(':'(To,Predicate), Property), Properties)
 			}.
 		property_module(file(File), Module) :-
 			{module_property(Module, file(File))}.
 		property_module(file(Basename, Directory), Module) :-
-			{module_property(Module, file(File)),
-			 file_directory_name(File, Directory0),
-			 atom_concat(Directory0, '/', Directory),
-			 file_base_name(File, Basename)
+			{	module_property(Module, file(File)),
+				file_directory_name(File, Directory0),
+				atom_concat(Directory0, '/', Directory),
+				file_base_name(File, Basename)
 			}.
 		property_module(calls(Callee, [caller(Caller)| OtherProperties]), Module) :-
-			{module_property(Module, file(File)),
-			 xref_source(File),
-			 xref_called(File, Callee0, Caller0),
-			 (	Caller0 = ':'(ForModule,Caller1) ->
-			 	functor(Caller1, CallerFunctor, CallerArity),
-				Caller = ':'(ForModule,CallerFunctor/CallerArity)
-			 ;	Caller0 = '<directive>'(_) ->
-			 	Caller = (:-)/1
-			 ;	functor(Caller0, CallerFunctor, CallerArity),
-			 	Caller = CallerFunctor/CallerArity
-			 ),
-			 (	xref_defined(File, Caller0, local(Line)) ->
-			 	OtherProperties = [line_count(Line)]
-			 ;	OtherProperties = []
-			 ),
-			 (	Callee0 = (Object::Callee1) ->
-			 	functor(Callee1, CalleeFunctor, CalleeArity),
-				Callee = (Object::CalleeFunctor/CalleeArity)
-			 ;	Callee0 = ':'(OtherModule,Callee1) ->
-			 	functor(Callee1, CalleeFunctor, CalleeArity),
-				Callee = ':'(OtherModule,CalleeFunctor/CalleeArity)
-			 ;	xref_defined(File, Callee0, imported(FromFile)) ->
-			 	once(module_property(FromModule, file(FromFile))),
-			 	functor(Callee0, CalleeFunctor, CalleeArity),
-			 	Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
-			 ;	predicate_property(Callee0, autoload(FromFile)),
-			 	xref_public_list(FromFile, File, [module(FromModule)]) ->
-			 	functor(Callee0, CalleeFunctor, CalleeArity),
-			 	Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
-			 ;	% assume local predicate
-			 	functor(Callee0, CalleeFunctor, CalleeArity),
-			 	Callee = CalleeFunctor/CalleeArity
-			 )
+			{	module_property(Module, file(File)),
+				xref_source(File),
+				xref_called(File, Callee0, Caller0),
+				(	Caller0 = ':'(ForModule,Caller1) ->
+					functor(Caller1, CallerFunctor, CallerArity),
+					Caller = ':'(ForModule,CallerFunctor/CallerArity)
+				;	Caller0 = '<directive>'(_) ->
+					Caller = (:-)/1
+				;	functor(Caller0, CallerFunctor, CallerArity),
+					Caller = CallerFunctor/CallerArity
+				),
+				(	xref_defined(File, Caller0, local(Line)) ->
+					OtherProperties = [line_count(Line)]
+				;	OtherProperties = []
+				),
+				(	Callee0 = (Object::Callee1) ->
+					functor(Callee1, CalleeFunctor, CalleeArity),
+					Callee = (Object::CalleeFunctor/CalleeArity)
+				;	Callee0 = ':'(OtherModule,Callee1) ->
+					functor(Callee1, CalleeFunctor, CalleeArity),
+					Callee = ':'(OtherModule,CalleeFunctor/CalleeArity)
+				;	xref_defined(File, Callee0, imported(FromFile)) ->
+					once(module_property(FromModule, file(FromFile))),
+					functor(Callee0, CalleeFunctor, CalleeArity),
+					Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
+				;	predicate_property(Callee0, autoload(FromFile)),
+					xref_public_list(FromFile, File, [module(FromModule)]) ->
+					functor(Callee0, CalleeFunctor, CalleeArity),
+					Callee = ':'(FromModule,CalleeFunctor/CalleeArity)
+				;	% assume local predicate
+					functor(Callee0, CalleeFunctor, CalleeArity),
+					Callee = CalleeFunctor/CalleeArity
+				)
 			}.
 
 		loaded_file_property(File, Property) :-
@@ -250,20 +252,23 @@
 			;	File = File0
 			).
 		property_source_file(parent(Parent), File) :-
-			{source_file_property(File, load_context(Module, _, _)),
-			 module_property(Module, file(Parent)),
-			 % verify explicit dependency instead of auto-loading
-			 xref_source(Parent),
-			 xref_uses_file(Parent, _, File)}.
+			{	source_file_property(File, load_context(Module, _, _)),
+				module_property(Module, file(Parent)),
+				% verify explicit dependency instead of auto-loading
+				xref_source(Parent),
+				xref_uses_file(Parent, _, File)
+			}.
 		property_source_file(parent(Parent), File) :-
 			{source_file_property(File, derived_from(Parent, _))}.
 		property_source_file(directory(Directory), File) :-
-			{source_file(File),
-			 file_directory_name(File, Directory0),
-			 atom_concat(Directory0, '/', Directory)}.
+			{	source_file(File),
+				file_directory_name(File, Directory0),
+				atom_concat(Directory0, '/', Directory)
+			}.
 		property_source_file(basename(Basename), File) :-
-			{source_file(File),
-			 file_base_name(File, Basename)}.
+			{	source_file(File),
+				file_base_name(File, Basename)
+			}.
 
 		source_file_extension('.pl').
 		source_file_extension('.prolog').
@@ -285,11 +290,11 @@
 		property_module(file(File), Module) :-
 			{current_compiled_file(File, _, Module)}.
 		property_module(file(Basename, Directory), Module) :-
-			{current_compiled_file(File, _, Module),
-			 pathname(File, DirectoryString, NameString, ExtensionString),
-			 atom_string(Directory, DirectoryString),
-			 concat_strings(NameString, ExtensionString, BasenameString),
-			 atom_string(Basename, BasenameString)
+			{	current_compiled_file(File, _, Module),
+				pathname(File, DirectoryString, NameString, ExtensionString),
+				atom_string(Directory, DirectoryString),
+				concat_strings(NameString, ExtensionString, BasenameString),
+				atom_string(Basename, BasenameString)
 			}.
 
 		filter_interface([], []).
@@ -323,14 +328,16 @@
 		property_source_file(parent(_Parent), _File) :-
 			fail.
 		property_source_file(directory(Directory), File) :-
-			{current_compiled_file(File, _, _),
-			 pathname(File, DirectoryString, _, _),
-			 atom_string(Directory, DirectoryString)}.
+			{	current_compiled_file(File, _, _),
+				pathname(File, DirectoryString, _, _),
+				atom_string(Directory, DirectoryString)
+			}.
 		property_source_file(basename(Basename), File) :-
-			{current_compiled_file(File, _, _),
-			 pathname(File, _, NameString, ExtensionString),
-			 concat_strings(NameString, ExtensionString, BasenameString),
-			 atom_string(Basename, BasenameString)}.
+			{	current_compiled_file(File, _, _),
+				pathname(File, _, NameString, ExtensionString),
+				concat_strings(NameString, ExtensionString, BasenameString),
+				atom_string(Basename, BasenameString)
+			}.
 
 		source_file_extension('.pl').
 		source_file_extension('.prolog').

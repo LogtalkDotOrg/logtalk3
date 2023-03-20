@@ -92,7 +92,7 @@
 		!,
 		write(Self), write(': teach '),
 		write(Subject), write(' to '),
-		write(Form), nl. 
+		write(Form), nl.
 
 	print_teacher(_) :-
 		self(Self),
@@ -105,7 +105,7 @@
 		!,
 		write(Self), write(': '),
 		write(Teacher), write(' teaches '),
-		write(Subject), nl. 
+		write(Subject), nl.
 
 	print_form(_) :-
 		self(Self),
@@ -118,7 +118,7 @@
 		write(Self), write(': '),
 		write(Form), write(' taught by '),
 		write(Teacher), nl,
-		fail. 
+		fail.
 
 	print_subject(_).
 

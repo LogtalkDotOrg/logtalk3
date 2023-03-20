@@ -71,7 +71,7 @@
 	instantiates(meta_driver)).
 
 	:- public(new/3).
-	
+
 	new(Driver, Name, Age) :-
 		self(Self),
 		create_object(Driver, [instantiates(Self)], [], [name(Name), age(Age)]).

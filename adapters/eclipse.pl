@@ -219,8 +219,8 @@ forall(Generate, Test) :-
 % setup_call_cleanup(+callable, +callable, +callable)
 
 :- if((get_flag(version_as_list, Version), Version @> [7,0,24])).
-    :- ensure_loaded(library(prolog_extras)).
-    :- import setup_call_cleanup/3 from prolog_extras.
+	:- ensure_loaded(library(prolog_extras)).
+	:- import setup_call_cleanup/3 from prolog_extras.
 :- endif.
 
 
@@ -623,10 +623,10 @@ forall(Generate, Test) :-
 % returns a list of files in the given directory
 
 '$lgt_directory_files'(Directory, Files) :-
-   	read_directory(Directory, '*', Directories0, Files0),
-   	findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
-   	findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
-   	append(['.', '..'| Directories1], Files1, Files).
+	read_directory(Directory, '*', Directories0, Files0),
+	findall(File1, (member(File0, Files0), atom_string(File1, File0)), Files1),
+	findall(Directory1, (member(Directory0, Directories0), atom_string(Directory1, Directory0)), Directories1),
+	append(['.', '..'| Directories1], Files1, Files).
 
 
 

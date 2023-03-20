@@ -1296,9 +1296,10 @@
 		message_tokens(Message).
 
 	message_tokens(generating_diagram(Self, Kind, For)) -->
-		{copy_term(For, ForCopy),
-		 numbervars(ForCopy, 0, _),
-		 Self::message_diagram_description(Description)},
+		{	copy_term(For, ForCopy),
+			numbervars(ForCopy, 0, _),
+			Self::message_diagram_description(Description)
+		},
 		['Generating ~w diagram for ~w ~q ... '-[Description, Kind, ForCopy]].
 	message_tokens(generated_diagram(_Self, _Kind, _For)) -->
 		[at_same_line, 'done'-[], nl].

@@ -26,7 +26,7 @@
 
 
 % our flyweight object stores cheese brands and their corresponding unit
-% cost, which we assume are the same for all shops selling cheese 
+% cost, which we assume are the same for all shops selling cheese
 
 :- object(cheese_brands).
 
@@ -65,7 +65,7 @@
 	sell_cheese(Brand, Units) :-
 		(	::retract(order_(Brand, UnitsSofar)) ->
 			true
-		;	UnitsSofar is 0	
+		;	UnitsSofar is 0
 		),
 		UpdatedUnits is UnitsSofar + Units,
 		::assertz(order_(Brand, UpdatedUnits)).

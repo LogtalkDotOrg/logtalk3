@@ -139,7 +139,7 @@
 		% Ditto for Tuesday in following week
 		date(_, Y, M, D, 9, week(1,2005)),
 		Y == 2005, M == 1, D == 11.
-		
+
 	test(iso8601_date_6_09) :-
 		% Ditto for Thursday in the prior week
 		date(_, Y, M, D, 4, week(0,2005)),
@@ -154,7 +154,7 @@
 		% Ditto for Saturday
 		date(_, Y, M, D, 6, week(53,2004)),
 		Y == 2005, M == 1, D == 1.
-		
+
 	test(iso8601_date_6_12) :-
 		% Ditto for Monday (note automatic compensation of nonexistent week number)
 		date(_, Y, M, D, 1, week(60,2004)),
@@ -166,7 +166,7 @@
 		% Get the date and day-of-year of a Julian number
 		date(2451649, Year, Month, Day, _, _, DoY),
 		Year == 2000, Month == 4, Day == 14, DoY == 105.
-		
+
 	test(iso8601_date_7_02) :-
 		% Get the Julian number, week number and day-of-year of a date, confirming that it is a Sunday
 		date(JD, 2004, 2, 29, 7, Wk, DoY),
@@ -195,7 +195,7 @@
 		% Match given date data and, if true, return the missing data (excl. Julian number)
 		date(_, 2004, 3, Day, DoW, Week, 61),
 		Day == 1, DoW == 1, Week == week(10,2004).
-		
+
 	test(iso8601_date_7_08) :-
 		% Ditto (the 61st day-of-year cannot be both day 1 and 2 of the month)
 		\+ date(_, 2004, _Month, 2, _DoW, _Week, 61).

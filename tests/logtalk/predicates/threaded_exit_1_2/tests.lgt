@@ -46,11 +46,13 @@
 		{threaded_exit(1, _)}.
 
 	succeeds(threaded_exit_2_03) :-
-		{threaded_call(true, Tag),
-		 threaded_exit(true, Tag)}.
+		{	threaded_call(true, Tag),
+			threaded_exit(true, Tag)
+		}.
 
 	succeeds(threaded_exit_2_04) :-
-		{threaded_once(true, Tag),
-		 threaded_exit(true, Tag)}.
+		{	threaded_once(true, Tag),
+			threaded_exit(true, Tag)
+		}.
 
 :- end_object.

@@ -46,8 +46,9 @@
 		{current_input(S)}.
 
 	test(sics_current_input_1_05, true) :-
-		{current_input(S),
-		 current_input(S)}.
+		{	current_input(S),
+			current_input(S)
+		}.
 
 	% tests from the Logtalk portability work
 

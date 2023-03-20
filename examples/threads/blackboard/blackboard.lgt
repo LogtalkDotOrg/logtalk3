@@ -22,7 +22,7 @@
 
 :- category(using).
 
-	% we can call the threaded_wait/1 and threaded_notify/1 predicates from category 
+	% we can call the threaded_wait/1 and threaded_notify/1 predicates from category
 	% predicates; the importing object message queues are used for exchanging notifications
 
 	:- public([pick_up/0, release/0]).

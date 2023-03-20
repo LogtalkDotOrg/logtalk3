@@ -3,16 +3,16 @@
 %  Sample settings file
 %  Last updated on November 28, 2017
 %
-%  This file is part of Logtalk <https://logtalk.org/>  
+%  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
 %  You may obtain a copy of the License at
-%  
+%
 %      http://www.apache.org/licenses/LICENSE-2.0
-%  
+%
 %  Unless required by applicable law or agreed to in writing, software
 %  distributed under the License is distributed on an "AS IS" BASIS,
 %  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -81,7 +81,7 @@
 %
 %  Limitations of the backend Prolog compilers may prevent settings files
 %  to work from directories other than the Logtalk user directory, specially
-%  when running on non-POSIX operating systems such as Windows. Check the 
+%  when running on non-POSIX operating systems such as Windows. Check the
 %  `adapters/NOTES.md` file for compatibility details.
 
 
@@ -141,8 +141,8 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 /*
 :- initialization((
-    logtalk_load_context(directory, Directory),
-    assertz(logtalk_library_path(my_project, Directory))
+	logtalk_load_context(directory, Directory),
+	assertz(logtalk_library_path(my_project, Directory))
 )).
 */
 

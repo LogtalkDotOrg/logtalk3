@@ -49,6 +49,6 @@
 	length([], 0) if true.
 	length([_|Xs], N) if
 		length(Xs, N0) and
-		 {N is N0 + 1}.
+		{N is N0 + 1}.
 
 :- end_object.

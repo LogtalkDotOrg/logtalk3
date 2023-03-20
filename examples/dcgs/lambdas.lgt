@@ -102,7 +102,7 @@
 		!,
 		repeat(NonTerminal, Min, NextCount, Max, Digits).
 	repeat(_, Min, Count, _, []) -->
-		 {Min =< Count}.
+		{Min =< Count}.
 
 :- end_object.
 

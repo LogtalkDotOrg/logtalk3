@@ -33,11 +33,13 @@
 		{threaded_cancel(_)}.
 
 	succeeds(threaded_cancel_1_02) :-
-		{threaded_call(true, Tag),
-		 threaded_cancel(Tag)}.
+		{	threaded_call(true, Tag),
+			threaded_cancel(Tag)
+		}.
 
 	succeeds(threaded_cancel_1_03) :-
-		{threaded_once(true, Tag),
-		 threaded_cancel(Tag)}.
+		{	threaded_once(true, Tag),
+			threaded_cancel(Tag)
+		}.
 
 :- end_object.

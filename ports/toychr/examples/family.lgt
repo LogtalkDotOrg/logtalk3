@@ -37,15 +37,15 @@ parent(P,C) <=> (true | (father(P,C) ; mother(P,C))).
 
 sibling_def @
 sibling(C1,C2) <=>
-         diff(C1,C2),
-         parent(P,C1), parent(P,C2).
+	diff(C1,C2),
+	parent(P,C1), parent(P,C2).
 
 ext_intro @
 start <=> father(john,mary),   father(john,peter),
-          mother(jane,mary),
-          person(john,male),   person(peter,male),
-          person(jane,female), person(mary,female),
-          person(paul,male).
+	mother(jane,mary),
+	person(john,male),   person(peter,male),
+	person(jane,female), person(mary,female),
+	person(paul,male).
 
 
 

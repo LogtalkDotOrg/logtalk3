@@ -63,8 +63,8 @@
 		minheap::delete(Heap, Cost, State, Heap1),
 		State = state(Goals, Length, Depth, Bindings),
 		0 =\= Depth - Limit,
-		(   Goals = [not(G)|Gs] ->
-			(   prove(G, DB) ->
+		(	Goals = [not(G)|Gs] ->
+			(	prove(G, DB) ->
 				prove_branch(Heap1, Limit, DB)
 			;	Length1 is Length - 1,
 				Depth1 is Depth + 1,
@@ -81,14 +81,16 @@
 	expand_state(_, state([], 0, _, _), [], _) :- !.
 	expand_state(_Cost0, state([Goal|Goals], Length1, Depth0, Bindings), Pairs, DB) :-
 		Depth is Depth0 + 1,
-		bagof(Cost - state(Body, Length, Depth, Goal),
-			  Length1^Length2^(
+		bagof(
+			Cost - state(Body, Length, Depth, Goal),
+			Length1^Length2^(
 				rule(Goal, Body, Length2, Goals, DB),
 				Length is Length1 + Length2 - 1,
 				counter::increment, %Inference counting.
 				::f(Length1, Length2, Depth, Cost)
-			  ),
-			NewPairs0),
+			),
+			NewPairs0
+		),
 		!,
 		add_bindings(NewPairs0, Goal, Bindings, Pairs).
 	expand_state(_, _, [], _).

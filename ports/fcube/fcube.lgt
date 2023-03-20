@@ -101,9 +101,9 @@
 		writeln('This is free software, and you are welcome to redistribute it'),
 		writeln('under  conditions  GNU  Public License, see <http://www.gnu.org/licenses/> for details.').
 
-	fcube:-
-		 read(X),
-		 decide(X).
+	fcube :-
+		read(X),
+		decide(X).
 
 	decide(X):-
 		intDecide(X, _, 1).

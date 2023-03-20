@@ -863,8 +863,9 @@
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 
 		module_exported_predicate(Module, Predicate) :-
-			{current_module(Module),
-			 module_property(Module, exports(Exports))},
+			{	current_module(Module),
+				module_property(Module, exports(Exports))
+			},
 			member(Predicate, Exports).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).

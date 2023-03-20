@@ -39,19 +39,22 @@ load_interpreters([I|Is]) :-
 	load_interpreters(Is).
 
 :- initialization((
-	Interpreters = [dfs_interpreter - rule_expansion(debug),
-					bfs_interpreter - rule_expansion(debug),
-					iddfs_interpreter(_Inc) - rule_expansion(debug),
-					bup_interpreter - magic_expansion(debug),
-					a_star_interpreter(_W) - heuristic_expansion(debug)],
-	logtalk_load(
-		[types(loader),
-		 meta(loader),
-		 heaps(loader),
-		 queues(loader),
-		 random(loader)],
-		[report(off)]
-	),
+	Interpreters = [
+		dfs_interpreter - rule_expansion(debug),
+		bfs_interpreter - rule_expansion(debug),
+		iddfs_interpreter(_Inc) - rule_expansion(debug),
+		bup_interpreter - magic_expansion(debug),
+		a_star_interpreter(_W) - heuristic_expansion(debug)
+	],
+	logtalk_load([
+		types(loader),
+		meta(loader),
+		heaps(loader),
+		queues(loader),
+		random(loader)
+	], [
+		report(off)
+	]),
 	logtalk_load(counter, [report(warnings), portability(warning)]),
 	logtalk_load(magic, [report(warnings), portability(warning)]),
 	logtalk_load(flatting, [report(warnings), portability(warning)]),

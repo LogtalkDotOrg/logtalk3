@@ -30,7 +30,7 @@
 
 	:- threaded.
 
-	% interactors initialization 
+	% interactors initialization
 	:- initialization((
 		% the engine names are object-scoped
 		threaded_engine_create(_, natural_loop(1), naturals),

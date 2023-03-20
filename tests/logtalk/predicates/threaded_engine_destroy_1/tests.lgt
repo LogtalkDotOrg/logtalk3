@@ -40,7 +40,7 @@
 		threaded_engine_destroy(foo).
 
 	% engine destroy should always be successful independent
-	% of engine thread state and engine goal results 
+	% of engine thread state and engine goal results
 
 	succeeds(threaded_engine_destroy_1_03) :-
 		threaded_engine_create(none, repeat, test_engine_1),

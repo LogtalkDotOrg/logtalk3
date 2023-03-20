@@ -56,17 +56,17 @@
 	:- multifile(arbitrary::shrinker/1).
 	arbitrary::shrinker(odd).
 
-    :- multifile(arbitrary::shrink/3).
-    arbitrary::shrink(odd, Large, Small) :-
+	:- multifile(arbitrary::shrink/3).
+	arbitrary::shrink(odd, Large, Small) :-
 		integer(Large),
-        (	Large < -1 ->
+		(	Large < -1 ->
 			Small is Large + 2
 		;	Large > 1,
 			Small is Large - 2
 		).
 
 	:- multifile(arbitrary::edge_case/2).
-    arbitrary::edge_case(odd,  1).
-    arbitrary::edge_case(odd, -1).
+	arbitrary::edge_case(odd,  1).
+	arbitrary::edge_case(odd, -1).
 
 :- end_object.

@@ -37,12 +37,12 @@
 :- category(purchase_power).
 
 	% allowable amount that can be approved
-	% by a given person role 
+	% by a given person role
 	:- public(allowable/1).
 
 	% main client predicate handling purchase requests
 	:- public(process_request/1).
-	
+
 	process_request(Amount) :-
 		::allowable(Allowable),
 		(	Amount < Allowable ->

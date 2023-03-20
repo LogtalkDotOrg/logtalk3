@@ -25,7 +25,7 @@
 	:- multifile(primary::expand/2).
 	primary::expand(Term, Expanded) :-
 		% the next call must use the "secondary" object
-		% database, not the "primary" object database 
+		% database, not the "primary" object database
 		expand_term(Term, Expanded).
 
 	term_expansion(term, secondary).

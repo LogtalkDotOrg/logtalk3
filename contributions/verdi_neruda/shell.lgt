@@ -101,18 +101,20 @@
 	dispatch(load(Database), _) :-
 		load_database(Database, rule_expansion(production)).
 	dispatch(listing(Database), _) :-
-		findall(rule(Head, Body),
-			    (
-				 Database::rule(Head, Body),
-				 numbervars(rule(Head, Body), 0, _)
-				),
-			   Rules),
+		findall(
+			rule(Head, Body),
+			(	Database::rule(Head, Body),
+				numbervars(rule(Head, Body), 0, _)
+			),
+			Rules
+		),
 		meta::map(write_rule, Rules).
 	dispatch(programs(Database), _) :-
 		findall(
 			Functor/Arity,
 			(Database::rule(Head, _), functor(Head, Functor, Arity)),
-			Functors),
+			Functors
+		),
 		list::sort(Functors, SortedFunctors),
 		meta::map(writeln, SortedFunctors).
 	dispatch(databases, _) :-

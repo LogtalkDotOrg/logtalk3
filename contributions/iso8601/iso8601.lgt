@@ -343,73 +343,73 @@
 	% date_string(+Format, ?Day, ?String)
 
 	date_string('YYYYMMDD',Day,String) :-	% DATE
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,M0,M1,D0,D1]),
-			  number_chars(Y,[Y0,Y1,Y2,Y3]),
-			  number_chars(M,[M0,M1]),
-			  number_chars(D,[D0,D1]),
-			  Day = [Y,M,D]
-		  ;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
-			  (Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; date(Day,Y,M,D)),
-			  prepend_zeros(2,D,D1),
-			  prepend_zeros(2,M,M1),
-			  number_codes(Y,Y1),
-			  list_of_lists_to_atom([Y1,M1,D1],String)
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,M0,M1,D0,D1]),
+			number_chars(Y,[Y0,Y1,Y2,Y3]),
+			number_chars(M,[M0,M1]),
+			number_chars(D,[D0,D1]),
+			Day = [Y,M,D]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
+			(Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; date(Day,Y,M,D)),
+			prepend_zeros(2,D,D1),
+			prepend_zeros(2,M,M1),
+			number_codes(Y,Y1),
+			list_of_lists_to_atom([Y1,M1,D1],String)
 		).
 	date_string('YYYY-MM-DD',Day,String) :-  % DATE
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,_,M0,M1,_,D0,D1]),
-			  number_chars(Y,[Y0,Y1,Y2,Y3]),
-			  number_chars(M,[M0,M1]),
-			  number_chars(D,[D0,D1]),
-			  Day = [Y,M,D]
-		  ;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
-			  (Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; date(Day,Y,M,D)),
-			  prepend_zeros(2,D,D1),
-			  prepend_zeros(2,M,M1),
-			  number_codes(Y,Y1),
-			  list_of_lists_to_atom([Y1,[45],M1,[45],D1],String)
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,_,M0,M1,_,D0,D1]),
+			number_chars(Y,[Y0,Y1,Y2,Y3]),
+			number_chars(M,[M0,M1]),
+			number_chars(D,[D0,D1]),
+			Day = [Y,M,D]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
+			(Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; date(Day,Y,M,D)),
+			prepend_zeros(2,D,D1),
+			prepend_zeros(2,M,M1),
+			number_codes(Y,Y1),
+			list_of_lists_to_atom([Y1,[45],M1,[45],D1],String)
 		).
 	date_string('YYYY-MM',Day,String) :-	  % YEAR & MONTH
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,_,M0,M1]),
-			  number_chars(Year,[Y0,Y1,Y2,Y3]),
-			  number_chars(Month,[M0,M1]),
-			  Day = [Year,Month]
-		  ;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,_) ; true),
-			  (Day = [Y,M,_] -> nonvar(Y), nonvar(M) ; date(Day,Y,M,_)),
-			  prepend_zeros(2,M,M1),
-			  number_codes(Y,Y1),
-			  list_of_lists_to_atom([Y1,[45],M1],String)
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,_,M0,M1]),
+			number_chars(Year,[Y0,Y1,Y2,Y3]),
+			number_chars(Month,[M0,M1]),
+			Day = [Year,Month]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,_) ; true),
+			(Day = [Y,M,_] -> nonvar(Y), nonvar(M) ; date(Day,Y,M,_)),
+			prepend_zeros(2,M,M1),
+			number_codes(Y,Y1),
+			list_of_lists_to_atom([Y1,[45],M1],String)
 		).
 	date_string('YYYY',Day,String) :-		  % YEAR
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3]),
-			  number_chars(Year,[Y0,Y1,Y2,Y3]),
-			  Day = [Year]
-		;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,_,_) ; true),
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3]),
+			number_chars(Year,[Y0,Y1,Y2,Y3]),
+			Day = [Year]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,_,_) ; true),
 			(Day = [Y|_] -> nonvar(Y) ; date(Day,Y,_,_)),
 			number_codes(Y,Codes),
 			atom_codes(String,Codes)
 		).
 	date_string('YY',Day,String) :-			% CENTURY
-		( nonvar(String)
-		  -> atom_chars(String,[C0,C1]),
-			  number_chars(Century,[C0,C1]),
-			  Day = [Century]
-		;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,_,_) ; true),
+		(	nonvar(String)
+		->	atom_chars(String,[C0,C1]),
+			number_chars(Century,[C0,C1]),
+			Day = [Century]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,_,_) ; true),
 			(Day = [Y|_] -> nonvar(Y) ; date(Day,Y,_,_)),
 			Y1 is Y // 100,
 			number_codes(Y1,Codes),
 			atom_codes(String,Codes)
 		).
 	date_string('YYYYDDD',Day,String) :-	  % YEAR & DAY-OF-YEAR
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,D0,D1,D2]),
-			  number_chars(Year,[Y0,Y1,Y2,Y3]),
-			  number_chars(DoY,[D0,D1,D2]),
-			  Day = [Year,DoY]
-		;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,D0,D1,D2]),
+			number_chars(Year,[Y0,Y1,Y2,Y3]),
+			number_chars(DoY,[D0,D1,D2]),
+			Day = [Year,DoY]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
 			(Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
 			date(JD,Y,M,D,_,_,DoY),
 			prepend_zeros(3,DoY,DoY1),
@@ -417,12 +417,12 @@
 			list_of_lists_to_atom([Y1,DoY1],String)
 		).
 	date_string('YYYY-DDD',Day,String) :-	% YEAR & DAY-OF-YEAR
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,_,D0,D1,D2]),
-			  number_chars(Year,[Y0,Y1,Y2,Y3]),
-			  number_chars(DoY,[D0,D1,D2]),
-			  Day = [Year,DoY]
-		;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,_,D0,D1,D2]),
+			number_chars(Year,[Y0,Y1,Y2,Y3]),
+			number_chars(DoY,[D0,D1,D2]),
+			Day = [Year,DoY]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
 			(Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
 			date(JD,Y,M,D,_,_,DoY),
 			prepend_zeros(3,DoY,DoY1),
@@ -430,64 +430,64 @@
 			list_of_lists_to_atom([Y1,[45],DoY1],String)
 		).
 	date_string('YYYYWwwD',Day,String) :-	% YEAR, WEEK & DAY-OF-WEEK
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,_,W0,W1,DoW0]),
-			  number_chars(Year,[Y0,Y1,Y2,Y3]),
-			  number_chars(Week,[W0,W1]),
-			  number_chars(DoW,[DoW0]),
-			  Day = [Year,Week,DoW]
-		  ;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
-			  (Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
-			  date(JD,Y,M,D,DoW,week(Wk,Yr)),
-			  number_codes(Yr,Y1),
-			  prepend_zeros(2,Wk,Wk1),
-			  number_codes(DoW,DoW1),
-			  List = [Y1,[87],Wk1,DoW1],
-			  list_of_lists_to_atom(List,String)
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,_,W0,W1,DoW0]),
+			number_chars(Year,[Y0,Y1,Y2,Y3]),
+			number_chars(Week,[W0,W1]),
+			number_chars(DoW,[DoW0]),
+			Day = [Year,Week,DoW]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
+			(Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
+			date(JD,Y,M,D,DoW,week(Wk,Yr)),
+			number_codes(Yr,Y1),
+			prepend_zeros(2,Wk,Wk1),
+			number_codes(DoW,DoW1),
+			List = [Y1,[87],Wk1,DoW1],
+			list_of_lists_to_atom(List,String)
 		).
 	date_string('YYYY-Www-D',Day,String) :-  % YEAR, WEEK & DAY-OF-WEEK
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,_,_,W0,W1,_,DoW0]),
-			  number_chars(Year,[Y0,Y1,Y2,Y3]),
-			  number_chars(Week,[W0,W1]),
-			  number_chars(DoW,[DoW0]),
-			  Day = [Year,Week,DoW]
-		  ;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
-			  (Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
-			  date(JD,Y,M,D,DoW,week(Wk,Yr)),
-			  number_codes(Yr,Y1),
-			  prepend_zeros(2,Wk,Wk1),
-			  number_codes(DoW,DoW1),
-			  List = [Y1,[45,87],Wk1,[45],DoW1],
-			  list_of_lists_to_atom(List,String)
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,_,_,W0,W1,_,DoW0]),
+			number_chars(Year,[Y0,Y1,Y2,Y3]),
+			number_chars(Week,[W0,W1]),
+			number_chars(DoW,[DoW0]),
+			Day = [Year,Week,DoW]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
+			(Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
+			date(JD,Y,M,D,DoW,week(Wk,Yr)),
+			number_codes(Yr,Y1),
+			prepend_zeros(2,Wk,Wk1),
+			number_codes(DoW,DoW1),
+			List = [Y1,[45,87],Wk1,[45],DoW1],
+			list_of_lists_to_atom(List,String)
 		).
 	date_string('YYYYWww',Day,String) :-	  % YEAR & WEEK
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,_,W0,W1]),
-			  number_chars(Year,[Y0,Y1,Y2,Y3]),
-			  number_chars(Week,[W0,W1]),
-			  Day = [Year,Week]
-		  ;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
-			  (Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
-			  date(JD,Y,M,D,_,week(Wk,Yr)),
-			  number_codes(Yr,Y1),
-			  prepend_zeros(2,Wk,Wk1),
-			  List = [Y1,[87],Wk1],
-			  list_of_lists_to_atom(List,String)
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,_,W0,W1]),
+			number_chars(Year,[Y0,Y1,Y2,Y3]),
+			number_chars(Week,[W0,W1]),
+			Day = [Year,Week]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
+			(Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
+			date(JD,Y,M,D,_,week(Wk,Yr)),
+			number_codes(Yr,Y1),
+			prepend_zeros(2,Wk,Wk1),
+			List = [Y1,[87],Wk1],
+			list_of_lists_to_atom(List,String)
 		).
 	date_string('YYYY-Www',Day,String) :-	% YEAR & WEEK
-		( nonvar(String)
-		  -> atom_chars(String,[Y0,Y1,Y2,Y3,_,_,W0,W1]),
-			  number_chars(Year,[Y0,Y1,Y2,Y3]),
-			  number_chars(Week,[W0,W1]),
-			  Day = [Year,Week]
-		  ;  ((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
-			  (Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
-			  date(JD,Y,M,D,_,week(Wk,Yr)),
-			  number_codes(Yr,Y1),
-			  prepend_zeros(2,Wk,Wk1),
-			  List = [Y1,[45,87],Wk1],
-			  list_of_lists_to_atom(List,String)
+		(	nonvar(String)
+		->	atom_chars(String,[Y0,Y1,Y2,Y3,_,_,W0,W1]),
+			number_chars(Year,[Y0,Y1,Y2,Y3]),
+			number_chars(Week,[W0,W1]),
+			Day = [Year,Week]
+		;	((var(Day) ; Day = [Y|_], var(Y)) -> date(_,Y,M,D) ; true),
+			(Day = [Y,M,D] -> nonvar(Y), nonvar(M), nonvar(D) ; JD = Day),
+			date(JD,Y,M,D,_,week(Wk,Yr)),
+			number_codes(Yr,Y1),
+			prepend_zeros(2,Wk,Wk1),
+			List = [Y1,[45,87],Wk1],
+			list_of_lists_to_atom(List,String)
 		).
 
 
@@ -553,9 +553,9 @@
 	valid_date(Year,Month,Day) :-
 		Month > 0,  Month < 13,
 		Day > 0,
-		(  Month =:= 2
-			-> (leap_year(Year) -> Days = 29 ;  Days = 28)
-		;  days_in_month(Month,Days)
+		(	Month =:= 2
+		->	(leap_year(Year) -> Days = 29 ;  Days = 28)
+		;	days_in_month(Month,Days)
 		),
 		Day =< Days.
 
@@ -578,9 +578,9 @@
 		% COMPUTE THE BODY (A 6 ROW BY 8 COLUMN TABLE OF WEEK AND DAY NUMBERS):
 		date(JD,Year,Month,1,DoW,week(Week,_)),
 		Lead0s is DoW - 1,  % number of leading zeros required
-		( Month =:= 2
-		  -> (leap_year(Year) -> Days = 29 ;  Days = 28)
-		  ;  days_in_month(Month,Days)
+		(	Month =:= 2
+		->	(leap_year(Year) -> Days = 29 ;  Days = 28)
+		;	days_in_month(Month,Days)
 		),
 		Delta is 42 - (Lead0s + Days),	% number of trailing zeros required
 		zeros(Delta,[],Append),		 % zeros to be appended to day list

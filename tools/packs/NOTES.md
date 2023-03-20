@@ -781,8 +781,8 @@ For example:
 
 	| ?- {lflat(loader)},
 	     {lgtdoc(loader)},
-		 logtalk::expand_library_path(lflat, Path),
-		 lgtdoc::rdirectory(Path).
+	     logtalk::expand_library_path(lflat, Path),
+	     lgtdoc::rdirectory(Path).
 	...
 
 This query creates a `xml_docs` directory in the current directory. The XML

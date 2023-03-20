@@ -108,8 +108,9 @@ bar(_X) :- true.
 
 	test(lgt_abolish_1_16, errors([existence_error(procedure,baz/2), existence_error(procedure,':'(user,baz/2))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
-		{assertz(baz(1, 2)),
-		 abolish(baz/2),
-	     baz(_, _)}.
+		{	assertz(baz(1, 2)),
+			abolish(baz/2),
+			baz(_, _)
+		}.
 
 :- end_object.

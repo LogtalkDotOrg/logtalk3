@@ -49,7 +49,8 @@
 		{set_input(S)}.
 
 	throws(sics_set_input_1_5, error(permission_error(input,stream,S),_)) :-
-		{current_output(S),
-		 set_input(S)}.		
+		{	current_output(S),
+			set_input(S)
+		}.
 
 :- end_object.

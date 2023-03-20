@@ -323,10 +323,12 @@
 	optional_buzz_off.
 
 
-	/* Under UNIX, the "halt." command quits Prolog but does not
-	   remove the output window. On a PC, however, the window
-	   disappears before the final output can be seen. Hence this
-	   routine requests the user to perform the final "halt." */
+	/*
+		Under UNIX, the "halt." command quits Prolog but does not
+		remove the output window. On a PC, however, the window
+		disappears before the final output can be seen. Hence this
+		routine requests the user to perform the final "halt."
+	*/
 
 	finish :-
 		write('The game is over. Please enter the "halt." command.'), nl,
@@ -366,8 +368,10 @@
 		halt.
 
 
-	/* These rules describe the various rooms.  Depending on
-	   circumstances, a room may have more than one description. */
+	/*
+		These rules describe the various rooms.  Depending on
+		circumstances, a room may have more than one description.
+	*/
 
 	describe(bedroom) :-
 		(	lit(bedroom) ->

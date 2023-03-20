@@ -55,7 +55,7 @@
 		::retractall(strategy_(_)),
 		::assertz(strategy_(Strategy)).
 
-	% customer state 
+	% customer state
 
 	:- private(drinks_/1).
 	:- dynamic(drinks_/1).

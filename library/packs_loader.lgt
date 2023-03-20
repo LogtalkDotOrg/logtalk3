@@ -46,7 +46,7 @@ pack_loader_file(PackLoader) :-
 	'$lgt_member'(Pack, Files),
 	\+ sub_atom(Pack, 0, _, _, '.'),
 	(	atomic_list_concat([ExpandedPath, '/', Pack, '/loader.lgt'], PackLoader),
-		'$lgt_file_exists'(PackLoader) ->	
+		'$lgt_file_exists'(PackLoader) ->
 		true
 	;	atomic_list_concat([ExpandedPath, '/', Pack, '/loader.logtalk'], PackLoader),
 		'$lgt_file_exists'(PackLoader)

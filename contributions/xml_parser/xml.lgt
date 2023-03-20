@@ -516,10 +516,10 @@
 		entity_value( Quote, Namespaces0, String ),
 		spaces,
 		">",
-		{\+ character_entity( Name, _StandardCode ),
-		 % Don't allow &lt; &quote; etc. to be updated
-		 context_update( entity(Name), Namespaces0, String, Namespaces2 )
-		 },
+		{	\+ character_entity( Name, _StandardCode ),
+			% Don't allow &lt; &quote; etc. to be updated
+			context_update( entity(Name), Namespaces0, String, Namespaces2 )
+		},
 		dtd( Namespaces2, Literals, Namespaces1 ).
 	dtd( Namespaces0, Literals, Namespaces1 ) -->
 		spaces,
@@ -1763,8 +1763,8 @@
 		{(	Name == 'xml:space',
 			Value="preserve" ->
 			Format1 = false
-		  ;	Format1 = Format0
-		  )},
+		;	Format1 = Format0
+		)},
 		" ",
 		generated_name( Name ),
 		"=""",

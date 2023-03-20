@@ -174,9 +174,9 @@ prolog_edit:locate(Entity::Predicate, EntityPredicateSpec, [file(Source), line(L
 user:prolog_exception_hook(Error, Error, Frame, _CatchFrame) :-
 	Error \= error(_, context(_,_)),
 	% SWI-Prolog default hook handles errors with a context/2 context argument
-    get_prolog_backtrace(Frame, 20, Trace),
+	get_prolog_backtrace(Frame, 20, Trace),
 	'$lgt_swi_filter_trace'(Trace, TraceFiltered),
-    '$swi_print_backtrace'(TraceFiltered, Error),
+	'$swi_print_backtrace'(TraceFiltered, Error),
 	fail.
 
 '$lgt_swi_filter_trace'([], []).
@@ -195,12 +195,12 @@ user:prolog_exception_hook(Error, Error, Frame, _CatchFrame) :-
 	'$lgt_swi_filter_trace'(Trace, TraceFiltered).
 
 '$swi_print_backtrace'(TraceFiltered, Error) :-
-    format(user_error, 'Error: ~p~n~n', [Error]),
+	format(user_error, 'Error: ~p~n~n', [Error]),
 	'$swi_print_backtrace'(TraceFiltered).
 
 '$swi_print_backtrace'([]).
 '$swi_print_backtrace'([frame(_,_,Goal)| Frames]) :-
-    format(user_error, '~q~n', [Goal]),
+	format(user_error, '~q~n', [Goal]),
 	'$swi_print_backtrace'(Frames).
 */
 

@@ -170,8 +170,8 @@
 
 	group_consecutive_by_key([], []).
 	group_consecutive_by_key([Key-Value| KeyValues0], [Key-[Value| Values]| KeyValues]) :-
-        equal_key(Key, KeyValues0, Values, KeyValues1),
-        group_consecutive_by_key(KeyValues1, KeyValues).
+		equal_key(Key, KeyValues0, Values, KeyValues1),
+		group_consecutive_by_key(KeyValues1, KeyValues).
 
 	equal_key(Key, [Key0-Value| KeyValues0], [Value| Values], KeyValues) :-
 		Key == Key0,

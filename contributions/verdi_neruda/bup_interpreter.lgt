@@ -95,20 +95,24 @@
 	collect(I, Di, Heads, Pendings, DB) :-
 		findall(
 			Head,
-			(DB::rule(Head, Body, PosOrNeg),
-			 debug((write('Trying rule: '), write(rule(Head, Body, PosOrNeg)), nl)),
-			 satisfy_one(Body, Di, NewBody, DB),
-			 debug((write(rule(Head, Body, PosOrNeg)),nl)),
-			 satisfy_all(NewBody, I, [], DB),
-			 debug((write('Rule satisfied: '), write(rule(Head, Body, PosOrNeg)), nl)),
-			 \+ subsumption_member(Head, I)),
-			Heads),
+			(	DB::rule(Head, Body, PosOrNeg),
+				debug((write('Trying rule: '), write(rule(Head, Body, PosOrNeg)), nl)),
+				satisfy_one(Body, Di, NewBody, DB),
+				debug((write(rule(Head, Body, PosOrNeg)),nl)),
+				satisfy_all(NewBody, I, [], DB),
+				debug((write('Rule satisfied: '), write(rule(Head, Body, PosOrNeg)), nl)),
+				\+ subsumption_member(Head, I)
+			),
+			Heads
+		),
 		findall(
 			Pending,
-			(DB::rule(Head, Body, negative),
-			 satisfy_one(Body, Di, NewBody, DB),
-			 satisfy_all(NewBody, I, [Pending], DB)),
-			Pendings).
+			(	DB::rule(Head, Body, negative),
+				satisfy_one(Body, Di, NewBody, DB),
+				satisfy_all(NewBody, I, [Pending], DB)
+			),
+			Pendings
+		).
 
 	subsumption_member(X, [Y|Ys]) :-
 		(	subsumed(X, Y) ->
@@ -178,8 +182,7 @@
 
 	%%The double negation is a dirty hack to avoid binding any variables.
 	subsumed(X, Y) :-
-		%counter::increment, %Uncomment this if the subsumed operation should be counted
-							 %as 1 inference.
+		%counter::increment, %Uncomment this if the subsumed operation should be counted as 1 inference.
 		\+ \+ term::subsumes(Y, X).
 
 :- end_object.

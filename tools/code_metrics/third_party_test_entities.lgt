@@ -20,7 +20,7 @@
 
 % The following example is adapted from the following paper where it is used
 % to illustrate the Cyclomatic Complexity and Unique Predicate Nodes metrics:
-% 
+%
 % @article{MOORES199845,
 %	title = "Applying Complexity Measures to Rule-Based Prolog Programs",
 %	journal = "Journal of Systems and Software",
