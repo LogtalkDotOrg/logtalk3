@@ -21,7 +21,7 @@ ________________________________________________________________________
 PDT is a free Prolog IDE provided as a plug-in for the Eclipse IDE
 that's available at:
 
-    https://sewiki.iai.uni-bonn.de/research/pdt/start
+	https://sewiki.iai.uni-bonn.de/research/pdt/start
 
 PDT is being extended with Logtalk support. The default settings file
 contains some example settings for Logtalk development using PDT.

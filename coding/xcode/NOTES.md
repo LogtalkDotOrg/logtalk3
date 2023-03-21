@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains some files that provide basic syntax highlighting 
-and project and template files for editing Logtalk source files with macOS 
+This directory contains some files that provide basic syntax highlighting
+and project and template files for editing Logtalk source files with macOS
 Xcode 1.1 or later version.
 
 
@@ -31,7 +31,7 @@ directory:
 	~/Library/Application Support/Apple/Developer Tools/Specifications 
 
 2. Copy the directory "Logtalk" to the directory:
- 
+
 	~/Library/Application Support/Apple/Developer Tools/File Templates 
 
 3. Create (if it does not exist) the directory:
@@ -41,9 +41,9 @@ directory:
 and copy to it the directory Logtalk Application
 
 
-Although the file logtalk.pblangspec provides basic syntax coloring for the 
-Logtalk language, it is recommended that you configure Xcode to use an 
-external text editor such as SubEthaEdit or TextMate for editing Logtalk 
+Although the file logtalk.pblangspec provides basic syntax coloring for the
+Logtalk language, it is recommended that you configure Xcode to use an
+external text editor such as SubEthaEdit or TextMate for editing Logtalk
 source files.
 
 

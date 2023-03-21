@@ -356,11 +356,11 @@ macOS GUI applications *don't* inherit shell environment variable values):
 		current_prolog_flag(home,HOME),
 		sub_atom(HOME,_,_,0,'SWI-Prolog.app/Contents/swipl')
 	)).
-	
+
 		:- setenv('LOGTALKHOME', '/opt/local/share/logtalk').
 		:- setenv('LOGTALKUSER', '/Users/pmoura/logtalk').
 		:- ['$LOGTALKHOME/integration/logtalk_swi.pl'].
-	
+
 	:- endif.
 
 The conditional compilation block allows automatically loading Logtalk at

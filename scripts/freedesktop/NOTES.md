@@ -21,4 +21,4 @@ ________________________________________________________________________
 This directory contains a XML file, `logtalk.xml`, defining the Logtalk
 mime-type for the freedesktop.org shared mime-info database:
 
-    http://standards.freedesktop.org/shared-mime-info-spec/shared-mime-info-spec-latest.html
+	http://standards.freedesktop.org/shared-mime-info-spec/shared-mime-info-spec-latest.html
