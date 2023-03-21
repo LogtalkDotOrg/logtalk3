@@ -67,7 +67,7 @@ Encoding a list of bytes in Base64 format is accomplished by the
 	Base64 = [83,71,86,115,98,71,56,103,100,50,57,121,98,71,81,104]
 	Bytes = [72,101,108,108,111,32,119,111,114,108,100,33]
 	yes
-	
+
 The Base64 result can also be represented using a list of chars, written to
 a file or to a stream. See the API documentation for details.
 

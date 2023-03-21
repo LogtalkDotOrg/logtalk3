@@ -26,7 +26,7 @@
 #
 #    Indic_Syllabic_Category     enumerated property
 #
-# NB: Provisional properties and data files have no associated stability 
+# NB: Provisional properties and data files have no associated stability
 # guarantees. They are provided in part to determine the possible usefulness
 # of a property or other data and to encourage analysis and further investigation
 # which may result in their improvement. Provisional properties and
@@ -43,7 +43,7 @@
 # of Indic script characters which are relevant to how Indic
 # syllables (or aksaras) are constructed. Note that rules for
 # syllabic structure in Indic scripts may differ significantly
-# from how phonological syllables are defined. 
+# from how phonological syllables are defined.
 #
 # Format:
 #    Field 0  Code Point or Code Point Range
@@ -132,7 +132,7 @@ unicode_indic_syllabic_category(0xA880, 0xA880, 'Bindu'). % Mc       SAURASHTRA 
 unicode_indic_syllabic_category(0x10A0E, 0x10A0E, 'Bindu'). % Mn       KHAROSHTHI SIGN ANUSVARA
 unicode_indic_syllabic_category(0x11000, 0x11000, 'Bindu'). % Mc       BRAHMI SIGN CANDRABINDU
 unicode_indic_syllabic_category(0x11001, 0x11001, 'Bindu'). % Mn       BRAHMI SIGN ANUSVARA
-unicode_indic_syllabic_category(0x11080, 0x11081, 'Bindu'). % Mn   [2] KAITHI SIGN CANDRABINDU..KAITHI SIGN ANUSVARA      
+unicode_indic_syllabic_category(0x11080, 0x11081, 'Bindu'). % Mn   [2] KAITHI SIGN CANDRABINDU..KAITHI SIGN ANUSVARA
 unicode_indic_syllabic_category(0x11100, 0x11101, 'Bindu'). % Mn       CHAKMA SIGN CANDRABINDU..CHAKMA SIGN ANUSVARA
 unicode_indic_syllabic_category(0x11180, 0x11181, 'Bindu'). % Mn       SHARADA SIGN CANDRABINDU..SHARADA SIGN ANUSVARA
 unicode_indic_syllabic_category(0x116AB, 0x116AB, 'Bindu'). % Mn       TAKRI SIGN ANUSVARA
@@ -144,7 +144,7 @@ unicode_indic_syllabic_category(0x116AB, 0x116AB, 'Bindu'). % Mn       TAKRI SIG
 % Visarga (-h)
 % Includes specialized case for Sanskrit: ardhavisarga
 % Excludes letters for jihvamuliya and upadhmaniya, which are
-%   related, but structured somewhat differently. 
+%   related, but structured somewhat differently.
 
 % [Not derivable]
 

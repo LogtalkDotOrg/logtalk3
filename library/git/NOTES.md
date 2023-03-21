@@ -82,13 +82,13 @@ commit author and the commit hash. For example:
 	yes
 
 	| ?- git::commit_hash('/Users/pmoura/Documents/Logtalk/logtalk3', Hash).
-	
+
 	Hash = eccaa1a2a9495fef441915bbace84e0a4b0394a2
 	yes
 
 It's also possible to get the name of the current local branch. For example:
 
 	| ?- git::branch('/Users/pmoura/Documents/Logtalk/logtalk3', Branch).
-	
+
 	Branch = master
 	yes

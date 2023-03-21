@@ -28,7 +28,7 @@
 # Notes:
 #
 # - The term 'assigned' means that a previously reserved code point was assigned
-#   to be a character (graphic, format, control, or private-use); 
+#   to be a character (graphic, format, control, or private-use);
 #   a noncharacter code point; or a surrogate code point.
 #   For more information, see The Unicode Standard Section 2.4
 #

@@ -29,13 +29,13 @@ unicode_alphabetic(CodePoint) :-
 		true
 	).
 
-unicode_range_alphabetic(0x0041, 0x005A). 
-unicode_range_alphabetic(0x0061, 0x007A). 
-unicode_range_alphabetic(0x00AA, 0x00AA). 
-unicode_range_alphabetic(0x00B5, 0x00B5). 
+unicode_range_alphabetic(0x0041, 0x005A).
+unicode_range_alphabetic(0x0061, 0x007A).
+unicode_range_alphabetic(0x00AA, 0x00AA).
+unicode_range_alphabetic(0x00B5, 0x00B5).
 unicode_range_alphabetic(0x00BA, 0x00BA).
 unicode_range_alphabetic(0x00C0, 0x00D6).
-unicode_range_alphabetic(0x00D8, 0x00F6). 
+unicode_range_alphabetic(0x00D8, 0x00F6).
 unicode_range_alphabetic(0x00F8, 0x02C1).
 unicode_range_alphabetic(0x02C6, 0x02D1).
 unicode_range_alphabetic(0x02E0, 0x02E4).

@@ -9,11 +9,11 @@ and allows creating Java object, accessing Java class fields, and
 calling Java class and object methods using syntax closer to Logtalk. It
 also gives access to some Java utility predicates.
 
-This abstraction was developed primarily to work with the JPL library
-bundled with SWI-Prolog and YAP. However, it's expected to be
-implementable with alternative Java interfaces found in other backend
-Prolog compilers. Currently, a preliminary implementation is also
-available for JIProlog.
+This abstraction was developed primarily to work with LVM (with its
+``jni`` plug-in installed) or the JPL library bundled with SWI-Prolog
+and YAP. However, it's expected to be implementable with alternative
+Java interfaces found in other backend Prolog compilers. Currently, a
+preliminary implementation is also available for JIProlog.
 
 The main idea in this abstraction layer is to use parametric objects
 where the first parameter holds the Java reference (usually to a class
@@ -69,5 +69,5 @@ When running Java GUI examples on the macOS Terminal application, you
 may get a Java error saying that the AWT cannot be started. In
 alternative, try to run the example from within the SWI-Prolog macOS
 application instead of using the shell integration script. This issue is
-due to a macOS Java issue that's orthogonal to both SWI-Prolog/YAP and
-Logtalk.
+due to a macOS Java issue that's orthogonal to both LVM/SWI-Prolog/YAP
+and Logtalk.

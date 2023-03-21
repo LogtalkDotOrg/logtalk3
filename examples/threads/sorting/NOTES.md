@@ -32,15 +32,16 @@ intended only to illustrate Logtalk multi-threading features. For any
 other purpose, you may find the following paper a worthwhile reading:
 
 @incollection{ apt93modular,
-    author = "Krzysztof R. Apt and Dino Pedreschi",
-    title = "Modular Termination Proofs for Logic and Pure Prolog Programs.",
-    booktitle = "116",
-    month = "31",
-    publisher = "Centrum voor Wiskunde en Informatica (CWI)",
-    address = "ISSN 0169-118X",
-    pages = "35",
-    year = "1993",
-    url = "citeseer.ist.psu.edu/apt93modular.html" }
+	author = "Krzysztof R. Apt and Dino Pedreschi",
+	title = "Modular Termination Proofs for Logic and Pure Prolog Programs.",
+	booktitle = "116",
+	month = "31",
+	publisher = "Centrum voor Wiskunde en Informatica (CWI)",
+	address = "ISSN 0169-118X",
+	pages = "35",
+	year = "1993",
+	url = "citeseer.ist.psu.edu/apt93modular.html"
+}
 
 You probably want to play with the list sizes in order to find out when the 
 lists to be sorted are big enough to make the use of multi-threading worth

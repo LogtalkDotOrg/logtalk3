@@ -65,7 +65,7 @@ queue using, respectively, the `join/3` and `join_all/3` predicates or the
 	Queue0 = ...,
 	Queue1 = ...
 	yes
-	
+
 We can query the head of the queue or remove the head of the queue using,
 respectively, the `head/2` and `serve/3` predicates. For example:
 

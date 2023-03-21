@@ -57,7 +57,7 @@ objects. For example:
 
 	:- object(my_random_generator_1,
 		extends(random)).
-	
+
 		:- initialization(::reset_seed).
 
 	:- end_object.

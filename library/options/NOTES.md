@@ -67,34 +67,34 @@ fails, the option is used as-is.
 A simple example:
 
 	:- object(foo,
-	    imports(options)).
-	
-	    :- uses(type, [
-	        valid/2
-	    ]).
+		imports(options)).
 
-	    :- public(p/0).
+		:- uses(type, [
+			valid/2
+		]).
+
+		:- public(p/0).
 		p :-
 			% use default options
 			p([]).
-	
-	    :- public(p/1).
-	    p(UserOptions) :-
+
+		:- public(p/1).
+		p(UserOptions) :-
 			^^check_options(UserOptions),
 			% construct the full set of options from
 			% the user options and the default options
-	        ^^merge_options(UserOptions, Options),
-	        ...
+			^^merge_options(UserOptions, Options),
+			...
 			% query an option
-	        ^^option(baz(Boolean), Options),
-	        q(Boolean),
-	        ...
-	
-	    default_option(baz(true)).
+			^^option(baz(Boolean), Options),
+			q(Boolean),
+			...
+
+		default_option(baz(true)).
 		...
 
-	    valid_option(baz(Boolean)) :-
-	        valid(boolean, Boolean).
+		valid_option(baz(Boolean)) :-
+			valid(boolean, Boolean).
 		...
 
 	:- end_object.

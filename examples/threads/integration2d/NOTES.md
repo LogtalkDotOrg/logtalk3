@@ -48,7 +48,7 @@ The split/span/collect of thread goals uses the Logtalk built-in predicates
 
 Both objects implement the same protocol:
 
-    integrate(Function, A, B, C, D, NP, Error, Integral)
+	integrate(Function, A, B, C, D, NP, Error, Integral)
 
 This predicate allows us to find the integral of a function of two variables 
 on the rectangular domain `[A,B][C,D]` given a maximum approximation error.
@@ -68,6 +68,6 @@ The example functions bailey1, bailey2, bailey3, bailey4, and bailey5 are from
 the following article:
 
 David H. Bailey and Jonathan M. Borwein, 
-"Highly Parallel, High-Precision Numerical Integration" (April 22, 2005). 
-Lawrence Berkeley National Laboratory. Paper LBNL-57491. 
+"Highly Parallel, High-Precision Numerical Integration" (April 22, 2005).
+Lawrence Berkeley National Laboratory. Paper LBNL-57491.
 http://repositories.cdlib.org/lbnl/LBNL-57491

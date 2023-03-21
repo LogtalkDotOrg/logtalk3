@@ -25,9 +25,9 @@ This folder contains a Logtalk version of a GNU Prolog/CX unit example, a
 simple dictionary implementation using a list of key-value pairs:
 
 	:- unit(dict(ST)).
-	
-    dict(ST).
-	
+
+	dict(ST).
+
 	lookup(KEY, VALUE) :- ST=[KEY=VALUE|_].
 	lookup(KEY, VALUE) :- ST=[_|STx], dict(STx) :> lookup(KEY, VALUE).
 

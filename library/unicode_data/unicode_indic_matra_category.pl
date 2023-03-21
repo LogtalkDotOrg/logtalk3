@@ -26,7 +26,7 @@
 #
 #    Indic_Matra_Category     enumerated property
 #
-# NB: Provisional properties and data files have no associated stability 
+# NB: Provisional properties and data files have no associated stability
 # guarantees. They are provided in part to determine the possible usefulness
 # of a property or other data and to encourage analysis and further investigation
 # which may result in their improvement. Provisional properties and
@@ -63,7 +63,7 @@
 #   4. Matra display may be contextually determined. This is
 #      notable, for example, in the Tamil script, where the shape
 #      and placement of -u and -uu vowels depends strongly on
-#      which consonant they adjoin. 
+#      which consonant they adjoin.
 #
 # Format:
 #    Field 0  Code Point or Code Point Range

@@ -87,8 +87,8 @@ Predicates are provided for the most common set operations. For example:
 When working with a custom type of set elements, the corresponding object
 must implement the `comparingp` protocol. For example:
 
-	 :- object(rainbow_colors,
-	 	implements(comparingp)).
+	:- object(rainbow_colors,
+		implements(comparingp)).
 
 		order(red,    1).
 		order(orange, 2).
@@ -98,15 +98,15 @@ must implement the `comparingp` protocol. For example:
 		order(indigo, 6).
 		order(violet, 7).
 
-	    Color1 < Color2 :-
+		Color1 < Color2 :-
 			order(Color1, N1),
 			order(Color2, N2),
-	        {N1 < N2}.
+			{N1 < N2}.
 
-	    Color1 =< Color2 :-
+		Color1 =< Color2 :-
 			order(Color1, N1),
 			order(Color2, N2),
-	        {N1 =< N2}.
+			{N1 =< N2}.
 
 		...
 

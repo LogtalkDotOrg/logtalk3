@@ -20,7 +20,7 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
- 
+
 This example illustrates how to define object constructors for a simple 
 hierarchy of objects representing persons, students, and teachers. For
 simplicity, prototypes are used instead of classes. Logtalk provides a 

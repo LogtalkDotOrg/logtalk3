@@ -11,7 +11,7 @@
 
 %  Last modified: April 27, 2013
 
-% from the Unicode 6.2 "UnicodeData.txt" official file: 
+% from the Unicode 6.2 "UnicodeData.txt" official file:
 
 % E000;<Private Use, First>;Co;0;L;;;;;N;;;;;
 % F8FF;<Private Use, Last>;Co;0;L;;;;;N;;;;;

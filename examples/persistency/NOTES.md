@@ -20,7 +20,7 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
- 
+
 This example illustrates a very simple solution for persisting an object
 dynamic state across sessions. It uses a plain Prolog file for saving the
 state and an include/1 directive to automatically restore the saved state

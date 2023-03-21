@@ -79,7 +79,7 @@ object must implement the ``comparingp`` protocol. For example:
 
 ::
 
-    :- object(rainbow_colors,
+   :- object(rainbow_colors,
        implements(comparingp)).
 
        order(red,    1).

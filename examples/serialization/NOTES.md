@@ -20,7 +20,7 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
- 
+
 This example illustrates a simple solution for serializing dynamic objects
 that conform to a given protocol. The serialization data is saved to a file.
 Restoring this file recreates the serialized objects. Object identities are

@@ -48,7 +48,7 @@
 :- include('unicode_categories/unicode_category_cs_other_surrogate').
 
 
-% from the Unicode 6.2 "UnicodeData.txt" official file: 
+% from the Unicode 6.2 "UnicodeData.txt" official file:
 
 % 3400;<CJK Ideograph Extension A, First>;Lo;0;L;;;;;N;;;;;
 % 4DB5;<CJK Ideograph Extension A, Last>;Lo;0;L;;;;;N;;;;;
@@ -130,7 +130,7 @@ unicode_category_convert_('Nl', 'Nl').
 unicode_category_convert_('Nl', 'N').
 unicode_category_convert_('No', 'No').
 unicode_category_convert_('No', 'N').
-                                
+
 unicode_category_convert_('Pc', 'Pc').
 unicode_category_convert_('Pc', 'P').
 unicode_category_convert_('Pd', 'Pd').
@@ -154,7 +154,7 @@ unicode_category_convert_('Sm', 'Sm').
 unicode_category_convert_('Sm', 'S').
 unicode_category_convert_('So', 'So').
 unicode_category_convert_('So', 'S').
-                                
+
 unicode_category_convert_('Zs', 'Zs').
 unicode_category_convert_('Zs', 'Z').
 unicode_category_convert_('Zp', 'Zp').

@@ -40,7 +40,7 @@
 # <code>; <lower> ; <title> ; <upper> ; (<condition_list> ;)? # <comment>
 #
 # <code>, <lower>, <title>, and <upper> provide character values in hex. If there is more
-# than one character, they are separated by spaces. Other than as used to separate 
+# than one character, they are separated by spaces. Other than as used to separate
 # elements, spaces are to be ignored.
 #
 # The <condition_list> is optional. Where present, it consists of one or more language IDs
@@ -54,7 +54,7 @@
 #
 # A language ID is defined by BCP 47, with '-' and '_' treated equivalently.
 #
-# A context for a character C is defined by Section 3.13 Default Case 
+# A context for a character C is defined by Section 3.13 Default Case
 # Operations, of The Unicode Standard, Version 5.0.
 # (This is identical to the context defined by Unicode 4.1.0,
 #  as specified in http://www.unicode.org/versions/Unicode4.1.0/)
@@ -209,7 +209,7 @@ unicode_special_casing(0x1FF7, [0x1FF7], [0x03A9, 0x0342, 0x0345], [0x03A9, 0x03
 
 % ================================================================================
 % Conditional Mappings
-% The remainder of this file provides conditional casing data used to produce 
+% The remainder of this file provides conditional casing data used to produce
 % full case mappings.
 % ================================================================================
 % Language-Insensitive Mappings

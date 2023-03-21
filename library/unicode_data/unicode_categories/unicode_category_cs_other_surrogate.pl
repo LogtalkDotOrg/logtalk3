@@ -11,7 +11,7 @@
 
 %  Last modified: April 27, 2013
 
-% from the Unicode 6.2 "UnicodeData.txt" official file: 
+% from the Unicode 6.2 "UnicodeData.txt" official file:
 
 % D800;<Non Private Use High Surrogate, First>;Cs;0;L;;;;;N;;;;;
 % DB7F;<Non Private Use High Surrogate, Last>;Cs;0;L;;;;;N;;;;;

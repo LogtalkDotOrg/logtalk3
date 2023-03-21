@@ -96,7 +96,7 @@ Load the `grammar_rules_hook.lgt` and use the term-expansion rules in the
 `grammar_rules_hook` object. For example:
 
 	| ?- grammar_rules_hook::term_expansion((a --> [b],c), Clause).
-	
+
 	Clause = (a([b|T], C) :- c(T, C))
 	yes
 

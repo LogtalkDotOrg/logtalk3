@@ -346,7 +346,7 @@ unicode_numerical_value(0x10107, 1.0, 1).	% No       AEGEAN NUMBER ONE
 unicode_numerical_value(0x10142, 1.0, 1).	% Nl       GREEK ACROPHONIC ATTIC ONE DRACHMA
 %10158..1015A  ; 1.0, 1).	% Nl   [3] GREEK ACROPHONIC HERAEUM ONE PLETHRON..GREEK ACROPHONIC HERMIONIAN ONE
 unicode_numerical_value(0x10158, 1.0, 1).	% Nl       GREEK ACROPHONIC HERAEUM ONE PLETHRON
-unicode_numerical_value(0x10159, 1.0, 1).	% Nl       GREEK ACROPHONIC THESPIAN ONE 
+unicode_numerical_value(0x10159, 1.0, 1).	% Nl       GREEK ACROPHONIC THESPIAN ONE
 unicode_numerical_value(0x1015A, 1.0, 1).	% Nl       GREEK ACROPHONIC HERMIONIAN ONE
 unicode_numerical_value(0x10320, 1.0, 1).	% No       OLD ITALIC NUMERAL ONE
 unicode_numerical_value(0x103D1, 1.0, 1).	% Nl       OLD PERSIAN NUMBER ONE

@@ -16,7 +16,9 @@ License
 
 Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication:
 
-https://creativecommons.org/publicdomain/zero/1.0/
+::
+
+   https://creativecommons.org/publicdomain/zero/1.0/
 
 We do appreciate acknowledgement if you use these resources, however,
 and we also welcome contributions to improve them.
@@ -27,7 +29,9 @@ Website
 The latest release of the VivoMind Prolog Unicode Resources is available
 at the URL:
 
-https://github.com/VivoMind
+::
+
+   https://github.com/VivoMind
 
 At this address you can also find additional information about the
 VivoMind Prolog Unicode Resources and submit your bug reports and
@@ -41,7 +45,9 @@ the conversion of most (but not all) official UCD 6.1 files and updated
 for the few changes in the 6.2 standard. The original files can be
 downloaded from:
 
-http://www.unicode.org
+::
+
+   http://www.unicode.org
 
 The conversion of the UCD files resulted in a large number of Prolog
 tables and also a set of auxiliary predicates (described below) for
@@ -112,8 +118,11 @@ workaround Prolog systems with buggy or missing implementations of the
 An overview of the original file names and the code point properties can
 be found at:
 
-| http://www.unicode.org/reports/tr44/#Directory_Structure
-| http://www.unicode.org/reports/tr44/#Property_Definitions
+::
+
+   http://www.unicode.org/reports/tr44/#Directory_Structure
+
+   http://www.unicode.org/reports/tr44/#Property_Definitions
 
 .. _unicode_arabic_shapingpl:
 

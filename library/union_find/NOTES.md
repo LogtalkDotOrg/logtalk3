@@ -74,18 +74,18 @@ spanning tree for a connected weighted graph adding increasing cost arcs at
 each step.
 
 	:- object(kruskal).
-	
+
 		:- public(kruskal/2).
-	
+
 		:- uses(union_find, [
 			new/2, find/4, union/4
 		]).
-	
+
 		kruskal(g(Vertices-Edges), g(Vertices-Tree)) :-
 			new(Vertices, UnionFind),
 			keysort(Edges, Sorted),
 			kruskal(UnionFind, Sorted, Tree).
-	
+
 		kruskal(_, [], []).
 		kruskal(UnionFind0, [Edge| Edges], [Edge| Tree]) :-
 			Edge = _-(Vertex1, Vertex2),
@@ -97,7 +97,7 @@ each step.
 			kruskal(UnionFind3, Edges, Tree).
 		kruskal(UnionFind, [_| Edges], Tree) :-
 			kruskal(UnionFind, Edges, Tree).
-	
+
 	:- end_object.
 
 Sample query:

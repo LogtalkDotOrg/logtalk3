@@ -73,7 +73,7 @@ By default, version 1 UUIDs are generated as atoms. For example:
 	| ?- uuid::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], UUID).
 	UUID = '00a66fc0-82cf-11eb-bc83-f2d19094dc4b'
 	yes
-	
+
 To generate a UUID using a list of characters representation, use instead the
 `uuid/1` parametric object:
 

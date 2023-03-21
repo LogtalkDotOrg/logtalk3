@@ -38,7 +38,7 @@ The two exceptions are the `pre` or `code` elements whose content is never
 interpreted as an element or a list of elements. For example, the fragment:
 
 	pre([foo,bar,baz])
-	
+
 is translated to:
 
 	<pre>
@@ -160,10 +160,10 @@ object that extends one of the library objects. For example:
 
 	:- object(html5custom,
 		extends(html5)).
-	
+
 		normal_element(foo, inline).
 		normal_element(bar, block).
 		normal_element(Name, Display) :-
 			^^normal_element(Name, Display).
-	
+
 	:- end_object.

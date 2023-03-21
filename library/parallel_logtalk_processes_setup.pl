@@ -39,8 +39,8 @@
 
 	logtalk_library_path(scratch_directory, Directory) :-
 		current_prolog_flag(tmp_dir, Prefix),
-    	uuid:uuid(UUID),
-    	atomic_list_concat([Prefix, '/', UUID], Directory).
+		uuid:uuid(UUID),
+		atomic_list_concat([Prefix, '/', UUID], Directory).
 
 :- elif(current_prolog_flag(dialect, gprolog)).
 

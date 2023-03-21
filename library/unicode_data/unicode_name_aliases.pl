@@ -42,7 +42,7 @@
 # includes the character names and the names of named character sequences.
 # The inclusion of ISO 6429 names and other commonly occurring names and
 # abbreviations for control codes and format characters as formal name aliases
-# is to help avoid name collisions between Unicode character names and the 
+# is to help avoid name collisions between Unicode character names and the
 # labels which commonly appear in text and/or in implementations such as regex, for
 # control codes (which have no Unicode character name) or for format characters.
 #
