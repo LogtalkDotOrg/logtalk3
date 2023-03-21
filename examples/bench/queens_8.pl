@@ -1,5 +1,5 @@
 % generated: 10 November 1989
-% option(s): 
+% option(s):
 %
 %   (queens) queens_8
 %
@@ -22,7 +22,7 @@
 %   the observation that any solution of the problem has exactly one queen
 %   in each column.
 %
-%   The program distinguishes symmetric solutions.  For example, 
+%   The program distinguishes symmetric solutions.  For example,
 %
 %   ?- queens(4, Qs).
 %
@@ -32,7 +32,9 @@
 %
 %   Qs = [2,4,1,3]
 
-top:-queens(8,Qs),fail.
+top :-
+	queens(8,Qs),
+	fail.
 top.
 
 queens(N,Qs) :-

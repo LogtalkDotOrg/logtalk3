@@ -95,10 +95,10 @@ documentation by typing:
 
 	| ?- {my_app(loader)}.
 	...
-	
+
 	| ?- {lgtdoc(loader)}.
 	...
-	
+
 	| ?- lgtdoc::library(my_app).
 	...
 

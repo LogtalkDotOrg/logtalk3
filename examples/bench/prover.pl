@@ -1,5 +1,5 @@
 % generated: 30 October 1989
-% option(s): 
+% option(s):
 %
 %   prover
 %
@@ -11,7 +11,8 @@
 
 % op/3 directives
 
-top:-prover.
+top :-
+	prover.
 
 
 :- op(950, xfy, or).	% disjunction
@@ -22,9 +23,10 @@ top:-prover.
 %:- op(500, fx, +).	% assertion
 %:- op(500, fx, -).	% denial
 
-prover :- problem(_, P, C),
-	  implies(P, C),
-	  fail.
+prover :-
+	problem(_, P, C),
+	implies(P, C),
+	fail.
 prover.
 
 % problem set

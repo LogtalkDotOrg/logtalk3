@@ -89,7 +89,7 @@ any debug messages:
 	| ?- {debug_messages(loader), foo}.
 	...
 	yes
-	
+
 	| ?- foo::(bar, baz).
 	yes
 

@@ -30,11 +30,12 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-top:-main(0).
+top :-
+	main(0).
 
 main(N) :-
 	init_state(N, NumVars, NumGs, Gs),
-        add_necessary_functions(NumVars, NumGs, Gs, NumGs2, Gs2),
+	add_necessary_functions(NumVars, NumGs, Gs, NumGs2, Gs2),
 	test_bounds(NumVars, NumGs2, Gs2),
 	search(NumVars, NumGs2, Gs2).
 main(_).
@@ -154,7 +155,7 @@ select_vector([Gk|Gks], NumVars, NumGs, Gs,
 		GjIn, Vin, TypeIn, Nin, Gj, V, Type, N),
 	select_vector(Gks, NumVars, NumGs, Gs,
 		Gj, V, Type, N, GjOut, Vout, TypeOut, Nout).
-	
+
 % loop over vectors
 select_vector([], _, _, _, _, Gj, V, Type, N, Gj, V, Type, N).
 select_vector([V|Vs], Gk, NumVars, NumGs, Gs,
@@ -293,7 +294,7 @@ cover_vector(NumVars, NumGsIn, GsIn, Gj, Vector, NumGsOut, GsOut) :-
 	vector_types(Type),
 	cover_vector(Type, IPs, CIs, Gj, Vector, NumVars, NumGsIn, GsIn,
 		NumGsOut, GsOut).
-	
+
 vector_types(var).
 vector_types(exp).
 vector_types(fcn).
@@ -457,7 +458,7 @@ new_function_CIs(GsIn, function(L,Tl,Fl,_,IPl,ISl,Pl,Sl), NumVars,
 		[GlOut|GsOut], GlOut) :-
 	new_function_CIs(GsIn, L, Fl, NumVars, GsOut, [], CIlo),
 	GlOut = function(L,Tl,Fl,CIlo,IPl,ISl,Pl,Sl).
-	
+
 new_function_CIs([], _, _, _, [], CIl, CIl).
 new_function_CIs([function(K,Tk,Fk,CIk,IPk,ISk,Pk,Sk)|GsIn], L, Fl, NumVars,
 		[function(K,Tk,Fk,CIko,IPk,ISk,Pk,Sk)|GsOut], CIlIn, CIlOut) :-

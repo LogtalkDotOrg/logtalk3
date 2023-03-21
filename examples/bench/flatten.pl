@@ -7,7 +7,7 @@
 
 top:-
 	eliminate_disjunctions([(a(A,_B,C):-(b(A);c(C)))],X,Y,[]),
-    inst_vars((X,Y)).
+	inst_vars((X,Y)).
 %	write((X,Y)), nl,
 	% (X,Y) == ([(a:-'_dummy_0')],[('_dummy_0':-b),('_dummy_0':-c)]),
 %	write(ok), nl.
@@ -16,7 +16,7 @@ top :- true.
 
 eliminate_disjunctions(OneProc,NewProc,NewClauses,Link) :-
 	gather_disj(OneProc,NewProc,Disj,[]),
-    treat_disj(Disj,NewClauses,Link).
+	treat_disj(Disj,NewClauses,Link).
 
 gather_disj([],[],Link,Link).
 gather_disj([C|Cs],NewProc,Disj,Link) :-
@@ -104,22 +104,22 @@ my_append([H|L1], L2, [H|Res]) :- my_append(L1, L2, Res).
 
 % copy_term using a symbol table.
 copy(Term1, Term2) :-
-        varset(Term1, Set), make_sym(Set, Sym),
-        copy2(Term1, Term2, Sym), !.
+	varset(Term1, Set), make_sym(Set, Sym),
+	copy2(Term1, Term2, Sym), !.
 
 copy2(V1, V2, Sym) :- var(V1), !, retrieve_sym(V1, Sym, V2).
 copy2(X1, X2, Sym) :- nonvar(X1), !,
-        functor(X1,Name,Arity),
-        functor(X2,Name,Arity),
-        copy2(X1, X2, Sym, 1, Arity).
+	functor(X1,Name,Arity),
+	functor(X2,Name,Arity),
+	copy2(X1, X2, Sym, 1, Arity).
 
 copy2(_X1,_X2,_Sym, N, Arity) :- N>Arity, !.
 copy2(X1, X2, Sym, N, Arity) :- N=<Arity, !,
-        arg(N, X1, Arg1),
-        arg(N, X2, Arg2),
-        copy2(Arg1, Arg2, Sym),
-        N1 is N+1,
-        copy2(X1, X2, Sym, N1, Arity).
+	arg(N, X1, Arg1),
+	arg(N, X2, Arg2),
+	copy2(Arg1, Arg2, Sym),
+	N1 is N+1,
+	copy2(X1, X2, Sym, N1, Arity).
 
 retrieve_sym(V, [p(W,X)|_Sym], X) :- V==W, !.
 retrieve_sym(V, [_|Sym], X) :- retrieve_sym(V, Sym, X).
@@ -129,7 +129,7 @@ make_sym([V|L], [p(V,_)|S]) :- make_sym(L, S).
 
 % *** Gather all variables used in a term: (in a set or a bag)
 varset(Term, VarSet) :- varbag(Term, VB),
-    sort(VB, VarSet).
+	sort(VB, VarSet).
 varbag(Term, VarBag) :- phrase(varbag(Term), VarBag).
 
 varbag(Var) --> {var(Var)}, !, [Var].
@@ -137,15 +137,15 @@ varbag(Str) --> {nonvar(Str), !, functor(Str,_,Arity)}, varbag(Str, 1, Arity).
 
 varbag(_Str, N, Arity) --> {N>Arity}, !.
 varbag(Str, N, Arity) --> {N=<Arity}, !,
-        {arg(N, Str, Arg)}, varbag(Arg),
-        {N1 is N+1},
-        varbag(Str, N1, Arity).
+	{arg(N, Str, Arg)}, varbag(Arg),
+	{N1 is N+1},
+	varbag(Str, N1, Arity).
 
 inst_vars(Term) :-
 	varset(Term, Vars),
 	% original code was:
 	% [A]=`A`,
-    char_code('A', A),
+	char_code('A', A),
 	inst_vars_list(Vars, A).
 
 inst_vars_list([], _).

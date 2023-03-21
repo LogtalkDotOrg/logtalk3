@@ -23,8 +23,8 @@
 
 call_n_maplist(_Cont, []).
 call_n_maplist(Cont, [E|Es]) :-
-    call(Cont, E),
-    call_n_maplist(Cont, Es).
+	call(Cont, E),
+	call_n_maplist(Cont, Es).
 
 
 :- object(tests,

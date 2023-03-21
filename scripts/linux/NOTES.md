@@ -23,7 +23,7 @@ This directory contains files used when building Linux RPM packages.
 The `build_rpm.sh` shell script makes the following assumptions:
 
 (1) The `~/.rpmmacros` configuration file contains the definition:
- 
+
 	%packager      Paulo Moura <pmoura@logtalk.org>
 	%distribution  Logtalk.org
 	%vendor        Logtalk.org

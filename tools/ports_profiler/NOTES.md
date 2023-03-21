@@ -122,14 +122,14 @@ distribution:
 	| ?- {ports_profiler(loader)}.
 	...
 	yes
-	
+
 	| ?- set_logtalk_flag(debug, on).
 	yes
-	
+
 	| ?- logtalk_load(family(loader)).
 	...
 	yes
-	
+
 	| ?- addams::sister(Sister, Sibling).
 	Sister = wednesday,
 	Sibling = pubert ;
@@ -140,7 +140,7 @@ distribution:
 	Sister = wednesday,
 	Sibling = pugsley ;
 	no
-	
+
 	| ?- ports_profiler::data.
 	----------------------------------------------------------------------
 	Entity     Predicate    Fact  Rule  Call  Exit *Exit  Fail  Redo Error

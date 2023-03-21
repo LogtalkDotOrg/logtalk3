@@ -74,134 +74,134 @@ analyze_closure(Strees, InTable, OutTable, N) :- N>0, !,
 % Initialize the table of call lattice values:
 
 init_strees([],_4,_4) :-
-   true.
+	true.
 init_strees([_12|_13],_4,_5) :-
-   _12=stree(_14,(_15:-_16),_17,_18,_19),
-   bottom_call(_14,_20),
-   table_command(get(_14,_20),_4,_23),
-   init_disj(_16,_23,_24),
-   init_strees(_18,_24,_25),
-   init_strees(_13,_25,_5),
-   true.
+	_12=stree(_14,(_15:-_16),_17,_18,_19),
+	bottom_call(_14,_20),
+	table_command(get(_14,_20),_4,_23),
+	init_disj(_16,_23,_24),
+	init_strees(_18,_24,_25),
+	init_strees(_13,_25,_5),
+	true.
 
 init_conj(true,_4,_4) :-
-   true.
+	true.
 init_conj((_12,_13),_4,_5) :-
-   init_goal(_12,_4,_16),
-   init_conj(_13,_16,_5),
-   true.
+	init_goal(_12,_4,_16),
+	init_conj(_13,_16,_5),
+	true.
 
 init_disj(fail,_4,_4) :-
-   true.
+	true.
 init_disj((_12;_13),_4,_5) :-
-   init_conj(_12,_4,_16),
-   init_disj(_13,_16,_5),
-   true.
+	init_conj(_12,_4,_16),
+	init_disj(_13,_16,_5),
+	true.
 
 init_goal(_3,_4,_5) :-
-   call_p(_3),
-   !,
-   functor(_3,_12,_13),
-   bottom_call(_12/_13,_14),
-   table_command(get(_12/_13,_14),_4,_5),
-   true.
+	call_p(_3),
+	!,
+	functor(_3,_12,_13),
+	bottom_call(_12/_13,_14),
+	table_command(get(_12/_13,_14),_4,_5),
+	true.
 init_goal(_3,_4,_4) :-
-   unify_p(_3),
-   !,
-   true.
+	unify_p(_3),
+	!,
+	true.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 traverse_strees([],_4,_4,_6,_6) :-
-   true.
+	true.
 traverse_strees([_14|_15],_4,_5,_6,_7) :-
-   _14=stree(_16,(_17:-_18),_19,_20,_21),
-   traverse_disj(_17,_18,_4,_26,_6,_27),
-   traverse_strees(_20,_26,_28,_27,_29),
-   traverse_strees(_15,_28,_5,_29,_7),
-   true.
+	_14=stree(_16,(_17:-_18),_19,_20,_21),
+	traverse_disj(_17,_18,_4,_26,_6,_27),
+	traverse_strees(_20,_26,_28,_27,_29),
+	traverse_strees(_15,_28,_5,_29,_7),
+	true.
 
 traverse_disj(_3,fail,_5,_5,_7,_7) :-
-   true.
+	true.
 traverse_disj(_3,(_15;_16),_5,_6,_7,_8) :-
-   traverse_conj(_3,_15,_5,_22,_7,_23),
-   traverse_disj(_3,_16,_22,_6,_23,_8),
-   true.
+	traverse_conj(_3,_15,_5,_22,_7,_23),
+	traverse_disj(_3,_16,_22,_6,_23,_8),
+	true.
 
 traverse_conj(_3,_4,_5,_6,_7,_8) :-
-   varset(_3,_24),
-   functor(_3,_15,_16),
-   table_command(get(_15/_16,_17),_5,_25),
-   get_entry_modes(uninit,_3,_17,_26),
-   get_entry_modes(ground,_3,_17,_27),
-   traverse_conj(_4,_25,_6,_7,_8,_27,_28,_26,_29,_24,_30),
-   true.
+	varset(_3,_24),
+	functor(_3,_15,_16),
+	table_command(get(_15/_16,_17),_5,_25),
+	get_entry_modes(uninit,_3,_17,_26),
+	get_entry_modes(ground,_3,_17,_27),
+	traverse_conj(_4,_25,_6,_7,_8,_27,_28,_26,_29,_24,_30),
+	true.
 
 traverse_conj(true,_4,_4,_6,_6,_8,_8,_10,_10,_12,_12) :-
-   true.
+	true.
 traverse_conj((_20,_21),_4,_5,_6,_7,_8,_9,_10,_11,_12,_13) :-
-   varset(_20,_32),
-   update_goal(_20,_32,_4,_33,_6,_34,_8,_35,_10,_36,_12,_37),
-   unionv(_32,_37,_38),
-   traverse_conj(_21,_33,_5,_34,_7,_35,_9,_36,_11,_38,_13),
-   true.
+	varset(_20,_32),
+	update_goal(_20,_32,_4,_33,_6,_34,_8,_35,_10,_36,_12,_37),
+	unionv(_32,_37,_38),
+	traverse_conj(_21,_33,_5,_34,_7,_35,_9,_36,_11,_38,_13),
+	true.
 
 update_goal(_3,_4,_5,_5,_7,_7,_9,_10,_11,_12,_13,_13) :-
-   split_unify(_3,_21,_27),
-   var(_21),
-   nonvar(_27),
-   varset(_27,_28),
-   subsetv(_28,_9),
-   !,
-   set_command(add(_21),_9,_10),
-   set_command(sub(_21),_11,_12),
-   true.
+	split_unify(_3,_21,_27),
+	var(_21),
+	nonvar(_27),
+	varset(_27,_28),
+	subsetv(_28,_9),
+	!,
+	set_command(add(_21),_9,_10),
+	set_command(sub(_21),_11,_12),
+	true.
 update_goal(_3,_4,_5,_5,_7,_7,_9,_9,_11,_12,_13,_13) :-
-   split_unify(_3,_21,_30),
-   var(_21),
-   nonvar(_30),
-   inv(_21,_11),
-   !,
-   diffv(_4,_13,_31),
-   diffv(_31,_9,_22),
-   set_command(add_set(_22),_11,_32),
-   set_command(sub(_21),_32,_33),
-   intersectv(_4,_13,_23),
-   set_command(sub_set(_23),_33,_12),
-   true.
+	split_unify(_3,_21,_30),
+	var(_21),
+	nonvar(_30),
+	inv(_21,_11),
+	!,
+	diffv(_4,_13,_31),
+	diffv(_31,_9,_22),
+	set_command(add_set(_22),_11,_32),
+	set_command(sub(_21),_32,_33),
+	intersectv(_4,_13,_23),
+	set_command(sub_set(_23),_33,_12),
+	true.
 update_goal(_3,_4,_5,_5,_7,_7,_9,_10,_11,_12,_13,_13) :-
-   split_unify(_3,_27,_28),
-   var(_27),
-   inv(_27,_9),
-   !,
-   set_command(add_set(_4),_9,_10),
-   set_command(sub_set(_4),_11,_12),
-   true.
+	split_unify(_3,_27,_28),
+	var(_27),
+	inv(_27,_9),
+	!,
+	set_command(add_set(_4),_9,_10),
+	set_command(sub_set(_4),_11,_12),
+	true.
 update_goal(_3,_4,_5,_5,_7,_7,_9,_9,_11,_12,_13,_13) :-
-   unify_p(_3),
-   !,
-   set_command(sub_set(_4),_11,_12),
-   true.
+	unify_p(_3),
+	!,
+	set_command(sub_set(_4),_11,_12),
+	true.
 update_goal(_3,_4,_5,_6,_7,_8,_9,_9,_11,_12,_13,_13) :-
-   call_p(_3),
-   !,
-   goal_dupset(_3,_33),
-   var_args(_3,_34),
-   functor(_3,_22,_23),
-   functor(_35,_22,_23),
-   create_new_call(1,_23,_9,_34,_33,_11,_13,_3,_35),
-   update_table(_22/_23,_35,_5,_6,_7,_8),
-   set_command(sub_set(_4),_11,_12),
-   true.
+	call_p(_3),
+	!,
+	goal_dupset(_3,_33),
+	var_args(_3,_34),
+	functor(_3,_22,_23),
+	functor(_35,_22,_23),
+	create_new_call(1,_23,_9,_34,_33,_11,_13,_3,_35),
+	update_table(_22/_23,_35,_5,_6,_7,_8),
+	set_command(sub_set(_4),_11,_12),
+	true.
 
 update_table(_15/_16,_4,_5,_6,_7,_8) :-
-   table_command(get(_15/_16,_18),_5,_24),
-   lub_call(_18,_4,_19),
-   _18\==_19,
-   !,
-   table_command(set(_15/_16,_19),_24,_6),
-   _8 is _7+1,
-   true.
+	table_command(get(_15/_16,_18),_5,_24),
+	lub_call(_18,_4,_19),
+	_18\==_19,
+	!,
+	table_command(set(_15/_16,_19),_24,_6),
+	_8 is _7+1,
+	true.
 update_table(_15/_16,_4,_5,_5,_7,_7).
 
 create_new_call(I, Ar, _, _, _, _, _, _, _) :- I>Ar, !.
@@ -467,9 +467,9 @@ varbag(Str) --> {nonvar(Str), !, functor(Str,_,Arity)}, varbag(Str, 1, Arity).
 
 varbag(_Str, N, Arity) --> {N>Arity}, !.
 varbag(Str, N, Arity) --> {N=<Arity}, !,
-        {arg(N, Str, Arg)}, varbag(Arg),
-        {N1 is N+1},
-        varbag(Str, N1, Arity).
+	{arg(N, Str, Arg)}, varbag(Arg),
+	{N1 is N+1},
+	varbag(Str, N1, Arity).
 
 unify_p(_=_).
 

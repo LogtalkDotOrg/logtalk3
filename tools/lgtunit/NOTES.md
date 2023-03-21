@@ -214,7 +214,7 @@ same set of tests for the library `random_protocol` protocol. We can write:
 
 	:- object(tests(_RandomObject_),
 		extends(lgtunit)).
-	
+
 		:- uses(_RandomObject_, [
 			random/1, between/3, member/2,
 			...
@@ -225,7 +225,7 @@ same set of tests for the library `random_protocol` protocol. We can write:
 			1 =< Random, Random =< 10.
 
 		...
-	
+
 	:- end_object.
 
 We can then test a specific implementation by instantiating the parameter.
@@ -391,11 +391,11 @@ First, we define an expansion for this file into a test object:
 
 	:- object(simple_dialect,
 		implements(expanding)).
-	
+
 		term_expansion(begin_of_file, [(:- object(tests,extends(lgtunit)))]).
 		term_expansion((Head :- Body), [test(Head) :- Body]).
 		term_expansion(end_of_file, [(:- end_object)]).
-	
+
 	:- end_object.
 
 Then we can use this hook object to expand and run tests written in this
@@ -1132,7 +1132,7 @@ one). For example, using the `points` example in the Logtalk distribution:
 	% point: process_init_option/1 - 1/2 - [1]
 	% point: position_/2 - 0/0 - (all)
 	% point: 7 out of 8 clauses covered, 87.500000% coverage
-	
+
 The numbers after the predicate indicators represents the clauses covered
 and the total number of clauses. E.g. for the `process_init_option/1`
 predicate, the tests cover 1 out of 2 clauses. After these numbers, we either
@@ -1173,7 +1173,7 @@ Prolog file, say `plain.pl`, we can define a Logtalk object that wraps the
 code using an `include/1` directive:
 
 	:- object(plain).
-	
+
 		:- include('plain.pl').
 
 	:- end_object.
@@ -1368,10 +1368,8 @@ files on the test set directories.
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
 
-- https://docs.qameta.io/allure-report/
-  (supports multiple reports)
-- https://github.com/Zir0-93/xunit-to-html
-  (supports multiple test sets in a single report)
+- https://docs.qameta.io/allure-report/ (supports multiple reports)
+- https://github.com/Zir0-93/xunit-to-html (supports multiple test sets in a single report)
 - https://www.npmjs.com/package/xunit-viewer
 - https://github.com/JatechUK/NUnit-HTML-Report-Generator
 - https://plugins.jenkins.io/xunit

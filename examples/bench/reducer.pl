@@ -316,8 +316,8 @@ intersectv([A|S1], S2, S) :- intersectv_2(S2, A, S1, S).
 
 intersectv_2([], _, _, []).
 intersectv_2([B|S2], A, S1, S) :-
-        compare(Order, A, B),
-        intersectv_3(Order, A, S1, B, S2, S).
+	compare(Order, A, B),
+	intersectv_3(Order, A, S1, B, S2, S).
 
 intersectv_3(<, _, S1, B, S2,     S) :- intersectv_2(S1, B, S2, S).
 intersectv_3(=, A, S1, _, S2, [A|S]) :- intersectv(S1, S2, S).
@@ -335,8 +335,8 @@ diffv([A|S1], S2, S) :- diffv_2(S2, A, S1, S).
 
 diffv_2([], A, S1, [A|S1]).
 diffv_2([B|S2], A, S1, S) :-
-        compare(Order, A, B),
-        diffv_3(Order, A, S1, B, S2, S).
+	compare(Order, A, B),
+	diffv_3(Order, A, S1, B, S2, S).
 
 diffv_3(<,  A, S1, B, S2, [A|S]) :- diffv(S1, [B|S2], S).
 diffv_3(=, _A, S1, _, S2,     S) :- diffv(S1, S2, S).
@@ -348,8 +348,8 @@ unionv([A|S1], S2, S) :- unionv_2(S2, A, S1, S).
 
 unionv_2([], A, S1, [A|S1]).
 unionv_2([B|S2], A, S1, S) :-
-        compare(Order, A, B),
-        unionv_3(Order, A, S1, B, S2, S).
+	compare(Order, A, B),
+	unionv_3(Order, A, S1, B, S2, S).
 
 unionv_3(<, A, S1, B, S2, [A|S]) :- unionv_2(S1, B, S2, S).
 unionv_3(=, A, S1, _, S2, [A|S]) :- unionv(S1, S2, S).
@@ -358,8 +358,8 @@ unionv_3(>, A, S1, B, S2, [B|S]) :- unionv_2(S2, A, S1, S).
 % *** Subset
 subsetv([], _).
 subsetv([A|S1], [B|S2]) :-
-        compare(Order, A, B),
-        subsetv_2(Order, A, S1, S2).
+	compare(Order, A, B),
+	subsetv_2(Order, A, S1, S2).
 
 subsetv_2(=, _, S1, S2) :- subsetv(S1, S2).
 subsetv_2(>, A, S1, S2) :- subsetv([A|S1], S2).
@@ -370,8 +370,8 @@ small_subsetv([A|S1], S2) :- inv(A, S2), small_subsetv(S1, S2).
 
 % *** Membership
 inv(A, [B|S]) :-
-        compare(Order, A, B),
-        inv_2(Order, A, S).
+	compare(Order, A, B),
+	inv_2(Order, A, S).
 
 inv_2(=, _, _).
 inv_2(>, A, S) :- inv(A, S).
@@ -381,8 +381,8 @@ notinv(A, S) :- notinv_2(S, A).
 
 notinv_2([], _).
 notinv_2([B|S], A) :-
-        compare(Order, A, B),
-        notinv_3(Order, A, S).
+	compare(Order, A, B),
+	notinv_3(Order, A, S).
 
 notinv_3(<, _, _).
 notinv_3(>, A, S) :- notinv_2(S, A).

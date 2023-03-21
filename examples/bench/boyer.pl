@@ -1,5 +1,5 @@
 % generated: 20 November 1989
-% option(s): 
+% option(s):
 %
 %   boyer
 %
@@ -9,7 +9,7 @@
 %
 %   prove arithmetic theorem
 
-go:-
+go :-
     statistics(runtime,[_,_]),
     wff(Wff),
     rewrite(Wff,NewWff),
@@ -65,7 +65,7 @@ rewrite(Old,New) :-
         ),!.
 
 rewrite_args(0,_,_) :- !.
-rewrite_args(N,Old,Mid) :- 
+rewrite_args(N,Old,Mid) :-
         arg(N,Old,OldArg),
         arg(N,Mid,MidArg),
         rewrite(OldArg,MidArg),
@@ -215,7 +215,7 @@ equal(  nth(A,B),
         ) :- nth(A,B,C).
 equal(  numberp(greatest_factor(X,Y)),
         not(and(or(zerop(Y),equal(Y,1)),
-                not(numberp(X))))            
+                not(numberp(X))))
         ).
 equal(  or(P,Q),
         if(P,t,if(Q,t,f),f)

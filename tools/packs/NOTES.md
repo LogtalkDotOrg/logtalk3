@@ -271,24 +271,24 @@ An example of a registry specification object would be:
 
 	:- object(jdoe_awesome_packs_registry,
 		implements(registry_protocol)).
-	
+
 		:- info([
 			version is 1:0:0,
 			author is 'John Doe',
 			date is 2021-10-18,
 			comment is 'John Doe awesome packs registry spec.'
 		]).
-	
+
 		name(jdoe_awesome_packs).
-	
+
 		description('John Doe awesome packs').
-	
+
 		home('https://example.com/jdoe_awesome_packs').
-	
+
 		clone('https://github.com/jdoe/jdoe_awesome_packs.git').
-	
+
 		archive('https://github.com/jdoe/jdoe_awesome_packs/archive/main.zip').
-	
+
 	:- end_object.
 
 Optionally, the registry object can also define a ``note(Action, Note)``
@@ -428,22 +428,22 @@ atom. An example of a registry specification object would be:
 
 	:- object(lflat_pack,
 		implements(pack_protocol)).
-	
+
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
 			date is 2021-10-18,
 			comment is 'L-FLAT - Logtalk Formal Language and Automata Toolkit pack spec.'
 		]).
-	
+
 		name(lflat).
-	
+
 		description('L-FLAT - Logtalk Formal Language and Automata Toolkit').
-	
+
 		license('MIT').
-	
+
 		home('https://github.com/l-flat/lflat').
-	
+
 		version(
 			2:1:0,
 			stable,
@@ -452,7 +452,7 @@ atom. An example of a registry specification object would be:
 			[logtalk @>= 3:36:0],
 			all
 		).
-	
+
 		version(
 			2:0:2,
 			stable,
@@ -461,7 +461,7 @@ atom. An example of a registry specification object would be:
 			[logtalk @>= 3:36:0],
 			all
 		).
-	
+
 	:- end_object.
 
 Optionally, the pack object can also define a ``note(Action, Version, Note)``
@@ -766,7 +766,7 @@ Additional documentation may also be available from the pack home page, which
 can be printed by using the `describe/1-2` predicates. For example:
 
 	| ?- packs::describe(lflat).
-	
+
 	% Registry:    ...
 	% Pack:        lflat
 	% Description: L-FLAT - Logtalk Formal Language and Automata Toolkit
@@ -926,7 +926,7 @@ example, assuming a `pl_pack` Prolog pack:
 
 	:- multifile(file_search_path/2).
 	:- dynamic(file_search_path/2).
-	
+
 	file_search_path(library, '$LOGTALKPACKS/packs/pl_pack').
 
 If the Prolog system also supports reading an initialization file at
