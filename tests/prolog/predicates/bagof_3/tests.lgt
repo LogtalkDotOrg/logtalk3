@@ -49,9 +49,9 @@ f(_, 2, b).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:8:1,
 		author is 'Paulo Moura',
-		date is 2023-03-07,
+		date is 2023-03-22,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -93,8 +93,9 @@ f(_, 2, b).
 	:- else.
 
 		test(iso_bagof_3_09, true(S == [3])) :-
-			{set_prolog_flag(unknown, fail),
-			 bagof(X,(Y^(X=1;Y=1);X=3),S)}.
+			{	set_prolog_flag(unknown, fail),
+				bagof(X,(Y^(X=1;Y=1);X=3),S)
+			}.
 
 	:- endif.
 
@@ -167,7 +168,9 @@ f(_, 2, b).
 	:- endif.
 
 	test(lgt_bagof_3_23, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
-		{bagof(X, foobar(X), _)}.
+		{	set_prolog_flag(unknown, error),
+			bagof(X, foobar(X), _)
+		}.
 
 	% auxiliary predicates
 

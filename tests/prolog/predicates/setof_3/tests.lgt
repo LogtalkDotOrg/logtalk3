@@ -85,9 +85,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:8:1,
 		author is 'Paulo Moura',
-		date is 2023-03-07,
+		date is 2023-03-22,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -134,8 +134,9 @@ setof_3_member(X, [_| L]) :-
 	:- else.
 
 		test(iso_setof_3_11, true(S == [3])) :-
-			{set_prolog_flag(unknown, fail),
-			 setof(X, (Y^(X=1;Y=2);X=3), S)}.
+			{	set_prolog_flag(unknown, fail),
+				setof(X, (Y^(X=1;Y=2);X=3), S)
+			}.
 
 	:- endif.
 
@@ -293,7 +294,9 @@ setof_3_member(X, [_| L]) :-
 	:- endif.
 
 	test(lgt_setof_3_37, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
-		{setof(X, foobar(X), _)}.
+		{	set_prolog_flag(unknown, error),
+			setof(X, foobar(X), _)
+		}.
 
 	% tests from the WG17 standardization work
 
