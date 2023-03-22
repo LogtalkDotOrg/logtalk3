@@ -1,0 +1,2 @@
+
+:- dynamic(bar/1).

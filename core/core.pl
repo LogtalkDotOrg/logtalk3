@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 64, 0, b01)).
+'$lgt_version_data'(logtalk(3, 64, 0, b02)).
 
 
 
@@ -20527,6 +20527,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_dynamic_entity_dynamic_predicate_directives' :-
 	'$lgt_pp_def_'(Clause),
+		% only local table; reject linking clauses
+		Clause \= (_ :- _),
+		arg(3, Clause, Call),
+		'$lgt_unwrap_compiled_head'(Call, Pred),
+		functor(Pred, Functor, Arity),
+		assertz('$lgt_pp_directive_'(dynamic(Functor/Arity))),
+	fail.
+
+'$lgt_generate_dynamic_entity_dynamic_predicate_directives' :-
+	'$lgt_pp_ddef_'(Clause),
 		% only local table; reject linking clauses
 		Clause \= (_ :- _),
 		arg(3, Clause, Call),

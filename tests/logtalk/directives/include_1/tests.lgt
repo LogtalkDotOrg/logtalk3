@@ -26,9 +26,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-11-15,
+		date is 2023-03-22,
 		comment is 'Unit tests for the include/1 built-in directive.'
 	]).
 
@@ -155,5 +155,14 @@
 
 	test(include_1_27, true(X == 1)) :-
 		{sub::plain_2(X)}.
+
+	% handling of dynamic/1 directives in included files
+
+	test(include_1_28, false) :-
+		dyn << bar(_).
+
+	test(include_1_29, false) :-
+		create_object(Object, [], [set_logtalk_flag(context_switching_calls,allow), include('include_3.pl')], []),
+		Object << bar(_).
 
 :- end_object.

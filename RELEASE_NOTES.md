@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Handling of `dynamic/1` directives for predicates with no clauses
+in included files when using an `include/1` argument in `create_object/4`
+goals.
+
 * FIXED: Performance issue where the compiler would not inline predicate
 definitions when the clause body goal uses parameter variables.
 
