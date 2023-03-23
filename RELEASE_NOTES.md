@@ -32,6 +32,9 @@ Logtalk compiler and runtime
 in included files when using an `include/1` argument in `create_object/4`
 goals.
 
+* FIXED: Do not print a linter warning for a missing `dynamic/1` directive
+when compiling a category if there isn't a scope directive for the predicate.
+
 * FIXED: Performance issue where the compiler would not inline predicate
 definitions when the clause body goal uses parameter variables.
 

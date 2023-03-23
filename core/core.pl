@@ -3492,7 +3492,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 64, 0, b02)).
+'$lgt_version_data'(logtalk(3, 64, 0, b03)).
 
 
 
@@ -17289,6 +17289,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_pp_missing_dynamic_directive_'(Head, _, _) ->
 		% missing dynamic/1 directive already recorded
+		true
+	;	'$lgt_pp_entity_'(category, _, _),
+		% database predicates act only on objects
+		functor(Head, Functor, Arity),
+		\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_private_'(Functor, Arity, _, _) ->
+		% no scope directive
 		true
 	;	'$lgt_term_template'(Head, Template),
 		'$lgt_source_file_context'(File, Lines),
