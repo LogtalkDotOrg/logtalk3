@@ -29,9 +29,9 @@ f(_, 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:7:1,
 		author is 'Paulo Moura',
-		date is 2023-03-07,
+		date is 2023-03-23,
 		comment is 'Unit tests for the ISO Prolog standard findall/3 built-in predicate.'
 	]).
 
@@ -99,7 +99,9 @@ f(_, 2).
 		{findall(g(_, X), f(_, X), [g(V1, _), g(V2, _)])}.
 
 	test(lgt_findall_3_13, errors([existence_error(procedure,foo/1), existence_error(procedure,':'(user,foo/1))])) :-
-		{findall(1, foo(_), _)}.
+		{	set_prolog_flag(unknown, error),
+			findall(1, foo(_), _)
+		}.
 
 	% auxiliary predicates
 

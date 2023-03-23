@@ -44,9 +44,9 @@ test_error_choice :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Jan Wielemaker and Paulo Moura and WG17.',
-		date is 2023-03-08,
+		date is 2023-03-23,
 		comment is 'Unit tests for the setup_call_cleanup/3 built-in predicate that is becoming a de facto standard.',
 		source is 'Several tests adapted with permission from the SWI-Prolog distribution. Some tests adapted from the WG17 standardization proposal.'
 	]).
@@ -140,13 +140,19 @@ test_error_choice :-
 		^^text_output_assertion(innerouter, Assertion).
 
 	test(lgt_setup_call_cleanup_3_22, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
-		{setup_call_cleanup(foobar(_), true, true)}.
+		{	set_prolog_flag(unknown, error),
+			setup_call_cleanup(foobar(_), true, true)
+		}.
 
 	test(lgt_setup_call_cleanup_3_23, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
-		{setup_call_cleanup(true, foobar(_), true)}.
+		{	set_prolog_flag(unknown, error),
+			setup_call_cleanup(true, foobar(_), true)
+		}.
 
 	test(lgt_setup_call_cleanup_3_24, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
-		{setup_call_cleanup(true, true, foobar(_))}.
+		{	set_prolog_flag(unknown, error),
+			setup_call_cleanup(true, true, foobar(_))
+		}.
 
 	% tests from WG17 standardization proposal
 	% https://www.complang.tuwien.ac.at/ulrich/iso-prolog/N215

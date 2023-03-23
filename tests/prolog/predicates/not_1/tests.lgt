@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2023-03-08,
+		date is 2023-03-23,
 		comment is 'Unit tests for the ISO Prolog standard (\\+)/1 built-in predicate.'
 	]).
 
@@ -74,6 +74,8 @@
 		{'\\+'('\\+'(X=1))}.
 
 	test(lgt_not_1_10, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
-		{'\\+'(foobar(_))}.
+		{	set_prolog_flag(unknown, error),
+			'\\+'(foobar(_))
+		}.
 
 :- end_object.

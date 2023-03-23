@@ -31,9 +31,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:7:1,
 		author is 'Paulo Moura',
-		date is 2023-03-08,
+		date is 2023-03-23,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -136,7 +136,9 @@ call_n_maplist(Cont, [E|Es]) :-
 		{call(Three, _, _, _, _, _, _, _)}.
 
 	test(lgt_call_N_23, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
-		{call(foobar, _)}.
+		{	set_prolog_flag(unknown, error),
+			call(foobar, _)
+		}.
 
 	% tests from the ECLiPSe test suite
 
