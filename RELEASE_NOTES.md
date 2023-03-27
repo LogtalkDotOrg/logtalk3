@@ -70,6 +70,9 @@ can be inlined.
 Tools
 -----
 
+* CHANGED: The `logtalk_tester.sh` script to only accept LVM long options for
+choosing between the standard and custom top-levels.
+
 * CHANGED: The `lgtunit` tool `clean_file/1` predicate to always interpret
 relative paths as relative to the tests object path. This simplifies usage
 and improves reliability by not depending on the current working directory.

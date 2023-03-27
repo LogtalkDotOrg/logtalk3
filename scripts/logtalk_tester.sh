@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 9, 2023
+##   Last updated on March 27, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 set -o pipefail
 
 print_version() {
-	echo "$(basename "$0") 13.0"
+	echo "$(basename "$0") 14.0"
 	exit 0
 }
 
@@ -394,9 +394,7 @@ elif [ "$p_arg" == "lvm" ] ; then
 	logtalk_call="$logtalk $i_arg -g"
 	case "$i_arg" in 
 		*"--standard-top-level"*) dot=".";;
-		*"-s"*) dot=".";;
 		*"--custom-top-level"*) dot="?";;
-		*"-c"*) dot="?";;
 		*) dot=".";;
 	esac
 elif [ "$p_arg" == "scryer" ] ; then
