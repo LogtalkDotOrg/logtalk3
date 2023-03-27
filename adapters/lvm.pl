@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 4.1.0 and later versions
-%  Last updated on March 6, 2023
+%  Last updated on March 27, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -241,7 +241,11 @@
 '$lgt_prolog_feature'(engines, unsupported).
 '$lgt_prolog_feature'(threads, unsupported).
 '$lgt_prolog_feature'(modules, unsupported).
-'$lgt_prolog_feature'(coinduction, supported).
+'$lgt_prolog_feature'(coinduction, Coinduction) :-
+	(	catch(current_prolog_flag(unify_applies_occurs_check, true), _, fail) ->
+		Coinduction = supported
+	;	Coinduction = unsupported
+	).
 '$lgt_prolog_feature'(unicode, full).
 
 

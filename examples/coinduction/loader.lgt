@@ -25,10 +25,6 @@
 		:- write_depth(10, 10).
 	:- endif.
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
-		:- initialization(catch(set_prolog_flag(unify_applies_occurs_check, true), _, true)).
-	:- endif.
-
 	:- if(current_logtalk_flag(prolog_dialect, yap)).
 		:- initialization((
 			current_prolog_flag(toplevel_print_options, Options),

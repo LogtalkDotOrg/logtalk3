@@ -41,6 +41,9 @@ definitions when the clause body goal uses parameter variables.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: The LVM adapter file to set the `coinduction` flag from the value
+of the `unify_applies_occurs_check` flag.
+
 * UPDATED: The LVM adapter file to expand calls to the `open_db/2` built-in
 predicate from within objects and categories to ensure that all database
 predicates are visible.
@@ -101,9 +104,6 @@ Neo4j.
 * IMPROVED: Test set condition for the `clustering` example.
 
 * IMPROVED: The documentation of the `bench` example.
-
-* UPDATED: The `coinduction` example for upcoming changes in LVM 6.x version
-handling of the unification occurs check.
 
 * FIXED: The `clustering` and `document_converter` examples `tester.sh`
 scripts.
