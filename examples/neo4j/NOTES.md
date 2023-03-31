@@ -57,3 +57,7 @@ Save the edit file and start Neo4j:
 When running this example on Windows, check first the Neo4j installation
 directory path used in the `set_classpath_*.ps1` scripts and adjust it if
 required.
+
+For the default location of the `neo4j.conf` file, see:
+
+https://neo4j.com/docs/operations-manual/current/configuration/file-locations/

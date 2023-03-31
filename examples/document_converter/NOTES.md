@@ -29,5 +29,5 @@ from:
 https://tika.apache.org
 
 After downloading the Tika JAR file (for version 2.7.0, this would be the
-`tika-app-2.7.0.jar` file), copy it to the example `jars` folder before
+`tika-app-2.7.0.jar` file), copy it to this example `jars` folder before
 running the example.

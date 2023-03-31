@@ -26,8 +26,8 @@ This is a simple example of using a Java library for performing clustering
 of a set of numbers. It uses the Apache Commons Math Java library, which
 you **must** download from:
 
-http://commons.apache.org/proper/commons-math/download_math.cgi
+https://commons.apache.org/proper/commons-math/
 
 After downloading the library archive, decompress it, and copy the main
 JAR (for version 3.6.1, this would be the `commons-math3-3.6.1.jar` file)
-to the example `jars` folder before running the example.
+to this example `jars` folder before running the example.
