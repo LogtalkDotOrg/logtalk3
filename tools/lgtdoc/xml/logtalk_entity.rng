@@ -434,6 +434,9 @@
 				<ref name="remarks"/>
 			</optional>
 			<optional>
+				<ref name="since"/>
+			</optional>
+			<optional>
 				<ref name="see_also"/>
 			</optional>
 			<zeroOrMore>
@@ -530,6 +533,12 @@
 
 	<define name="term">
 		<element name="term">
+			<text/>
+		</element>
+	</define>
+
+	<define name="since">
+		<element name="since">
 			<text/>
 		</element>
 	</define>

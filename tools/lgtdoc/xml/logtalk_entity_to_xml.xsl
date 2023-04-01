@@ -89,35 +89,35 @@
 <xsl:template match="logtalk_entity/entity">
 	<dl class="properties">
 	<xsl:if test="author">
-		<dt class ="key">author:</dt>
+		<dt class="key">author:</dt>
 			<dd class="value"><code><xsl:value-of select="author" /></code></dd>
 	</xsl:if>
 	<xsl:if test="version">
-		<dt class ="key">version:</dt>
+		<dt class="key">version:</dt>
 			<dd class="value"><code><xsl:value-of select="version" /></code></dd>
 	</xsl:if>
 	<xsl:if test="date">
-		<dt class ="key">date:</dt>
+		<dt class="key">date:</dt>
 			<dd class="value"><code><xsl:value-of select="date" /></code></dd>
 	</xsl:if>
 	<xsl:if test="copyright">
-		<dt class ="key">copyright:</dt>
+		<dt class="key">copyright:</dt>
 			<dd class="value"><code><xsl:value-of select="copyright" /></code></dd>
 	</xsl:if>
 	<xsl:if test="license">
-		<dt class ="key">license:</dt>
+		<dt class="key">license:</dt>
 			<dd class="value"><code><xsl:value-of select="license" /></code></dd>
 	</xsl:if>
 	</dl>
 	<dl class="properties">
-		<dt class ="key">compilation flags:</dt>
-			<dd class ="value"><code><xsl:value-of select="compilation" /></code></dd>
+		<dt class="key">compilation flags:</dt>
+			<dd class="value"><code><xsl:value-of select="compilation" /></code></dd>
 	</dl>
 	<xsl:if test="info">
 		<dl class="properties">
 		<xsl:for-each select="info">
-			<dt class ="key"><xsl:value-of select="key" />:</dt>
-				<dd class ="value"><code><xsl:value-of select="value" /></code></dd>
+			<dt class="key"><xsl:value-of select="key" />:</dt>
+				<dd class="value"><code><xsl:value-of select="value" /></code></dd>
 		</xsl:for-each>
 		</dl>
 	</xsl:if>
@@ -129,45 +129,45 @@
 		<xsl:when test="*">
 		<dl class="relations">
 			<xsl:if test="implements">
-			<dt class ="key">implements:</dt>
+			<dt class="key">implements:</dt>
 				<xsl:apply-templates select="implements" />
 			</xsl:if>
 			<xsl:if test="imports">
-			<dt class ="key">imports:</dt>
+			<dt class="key">imports:</dt>
 				<xsl:apply-templates select="imports" />
 			</xsl:if>
 			<xsl:if test="extends">
-			<dt class ="key">extends:</dt>
+			<dt class="key">extends:</dt>
 				<xsl:apply-templates select="extends" />
 			</xsl:if>
 			<xsl:if test="instantiates">
-			<dt class ="key">instantiates:</dt>
+			<dt class="key">instantiates:</dt>
 				<xsl:apply-templates select="instantiates" />
 			</xsl:if>
 			<xsl:if test="specializes">
-			<dt class ="key">specializes:</dt>
+			<dt class="key">specializes:</dt>
 				<xsl:apply-templates select="specializes" />
 			</xsl:if>
 			<xsl:if test="complements">
-			<dt class ="key">complements:</dt>
+			<dt class="key">complements:</dt>
 				<xsl:apply-templates select="complements" />
 			</xsl:if>
 			<xsl:if test="provides">
-			<dt class ="key">provides:</dt>
+			<dt class="key">provides:</dt>
 				<xsl:apply-templates select="provides" />
 			</xsl:if>
 			<xsl:if test="uses">
-			<dt class ="key">uses:</dt>
+			<dt class="key">uses:</dt>
 				<xsl:apply-templates select="uses" />
 			</xsl:if>
 			<xsl:if test="alias">
-			<dt class ="key">aliases:</dt>
+			<dt class="key">aliases:</dt>
 				<xsl:apply-templates select="alias" />
 			</xsl:if>
 		</dl>
 		</xsl:when>
 		<xsl:otherwise>
-			<dt class ="key">dependencies:</dt>
+			<dt class="key">dependencies:</dt>
 				<dd class="comment">(none)</dd>
 		</xsl:otherwise>
 	</xsl:choose>
@@ -175,27 +175,27 @@
 
 
 <xsl:template match="logtalk_entity/relations/provides" priority="1">
-	<dd class ="value"><code><a href="{file}.xml"><xsl:value-of select="to" />::<xsl:value-of select="resource" /></a></code></dd>
+	<dd class="value"><code><a href="{file}.xml"><xsl:value-of select="to" />::<xsl:value-of select="resource" /></a></code></dd>
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/uses" priority="1">
-	<dd class ="value"><code><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
+	<dd class="value"><code><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/alias" priority="1">
-	<dd class ="value"><code><xsl:value-of select="name" /><xsl:text> </xsl:text><xsl:value-of select="original" /></code><em> as </em><code><xsl:value-of select="alternative" /></code></dd>
+	<dd class="value"><code><xsl:value-of select="name" /><xsl:text> </xsl:text><xsl:value-of select="original" /></code><em> as </em><code><xsl:value-of select="alternative" /></code></dd>
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/complements" priority="1">
-	<dd class ="value"><code><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
+	<dd class="value"><code><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
 <xsl:template match="logtalk_entity/relations/*" priority="0">
-	<dd class ="value"><code><xsl:value-of select="scope" /><xsl:text> </xsl:text><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
+	<dd class="value"><code><xsl:value-of select="scope" /><xsl:text> </xsl:text><a href="{file}.xml"><xsl:value-of select="name" /></a></code></dd>
 </xsl:template>
 
 
@@ -285,54 +285,58 @@
 	</xsl:if>
 	</blockquote>
 	<dl class="properties">
-		<dt class ="key">compilation flags:</dt>
-			<dd class ="value"><code><xsl:value-of select="compilation" /></code></dd>
+		<dt class="key">compilation flags:</dt>
+			<dd class="value"><code><xsl:value-of select="compilation" /></code></dd>
 		<xsl:if test="template">
-		<dt class ="key">template:</dt>
-			<dd class ="value"><code><xsl:value-of select="template" /></code></dd>
+		<dt class="key">template:</dt>
+			<dd class="value"><code><xsl:value-of select="template" /></code></dd>
 		</xsl:if>
 		<xsl:if test="arguments">
-			<dd class ="value"><ul class="arguments">
+			<dd class="value"><ul class="arguments">
 			<xsl:for-each select="arguments/argument">
 				<li><code><xsl:value-of select="name" /></code><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><span class="comment"><xsl:value-of select="description" /></span></li>
 			</xsl:for-each></ul></dd>
 		</xsl:if>
 		<xsl:if test="meta">
-		<dt class ="key">meta-predicate template:</dt>
-			<dd class ="value"><code><xsl:value-of select="meta" /></code></dd>
+		<dt class="key">meta-predicate template:</dt>
+			<dd class="value"><code><xsl:value-of select="meta" /></code></dd>
 		</xsl:if>
 		<xsl:if test="coinductive">
-		<dt class ="key">coinductive predicate template:</dt>
-			<dd class ="value"><code><xsl:value-of select="coinductive" /></code></dd>
+		<dt class="key">coinductive predicate template:</dt>
+			<dd class="value"><code><xsl:value-of select="coinductive" /></code></dd>
 		</xsl:if>
 		<xsl:if test="mode">
-		<dt class ="key">mode<xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text>number of proofs:</dt>
+		<dt class="key">mode<xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text>number of proofs:</dt>
 		<xsl:for-each select="mode">
-			<dd class ="value"><code><xsl:value-of select="template" /><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><xsl:value-of select="proofs" /></code></dd>
+			<dd class="value"><code><xsl:value-of select="template" /><xsl:text disable-output-escaping="yes"> &amp;ndash; </xsl:text><xsl:value-of select="proofs" /></code></dd>
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="exceptions">
-		<dt class ="key">exceptions:</dt>
+		<dt class="key">exceptions:</dt>
 		<xsl:for-each select="exceptions/exception">
-			<dd class ="value"><xsl:value-of select="condition" />: <code><xsl:value-of select="term" /></code></dd>
+			<dd class="value"><xsl:value-of select="condition" />: <code><xsl:value-of select="term" /></code></dd>
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="remarks">
-		<dt class ="key">remarks:</dt>
+		<dt class="key">remarks:</dt>
 		<xsl:for-each select="remarks/remark">
-			<dd class ="value"><xsl:value-of select="topic" />: <xsl:value-of select="text" /></dd>
+			<dd class="value"><xsl:value-of select="topic" />: <xsl:value-of select="text" /></dd>
 		</xsl:for-each>
 		</xsl:if>
+		<xsl:if test="since">
+		<dt class="key">since:</dt>
+			<dd class="value"><code><xsl:value-of select="since" /></code></dd>
+		</xsl:if>
 		<xsl:if test="see_also">
-		<dt class ="key">see also:</dt>
+		<dt class="key">see also:</dt>
 		<xsl:for-each select="see_also/reference">
-			<dd class ="code"><a href="#{name}"><xsl:value-of select="name" /></a></dd>
+			<dd class="code"><a href="#{name}"><xsl:value-of select="name" /></a></dd>
 		</xsl:for-each>
 		</xsl:if>
 		<xsl:if test="examples">
-		<dt class ="key">examples:</dt>
+		<dt class="key">examples:</dt>
 			<xsl:for-each select="examples/example">
-			<dd class ="value"><dl class="examples">
+			<dd class="value"><dl class="examples">
 				<dt class="comment"><xsl:value-of select="description" /></dt>
 					<dd class="code"><xsl:value-of select="call" /></dd>
 					<dd class="code"><xsl:value-of select="bindings" /></dd>
@@ -343,8 +347,8 @@
 	<xsl:if test="info">
 		<dl class="properties">
 			<xsl:for-each select="info">
-			<dt class ="key"><xsl:value-of select="key" />:</dt>
-				<dd class ="value"><code><xsl:value-of select="value" /></code></dd>
+			<dt class="key"><xsl:value-of select="key" />:</dt>
+				<dd class="value"><code><xsl:value-of select="value" /></code></dd>
 			</xsl:for-each>
 		</dl>
 	</xsl:if>

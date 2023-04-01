@@ -12165,6 +12165,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(list(predicate_or_non_terminal_indicator), References).
 
+'$lgt_compile_predicate_info_directive_pair'(since, Version, _, _, since(Version)) :-
+	!,
+	(	Version = ':'(Major, ':'(Minor, Patch)) ->
+		'$lgt_check'(non_negative_integer, Major),
+		'$lgt_check'(non_negative_integer, Minor),
+		'$lgt_check'(non_negative_integer, Patch)
+	;	throw(domain_error(since, Version))
+	).
+
 % user-defined predicate info pair; no checking
 '$lgt_compile_predicate_info_directive_pair'(Key, Value, _, _, TPair) :-
 	TPair =.. [Key, Value].

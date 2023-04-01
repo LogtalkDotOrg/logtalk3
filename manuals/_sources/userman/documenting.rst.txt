@@ -181,6 +181,8 @@ Logtalk tools:
    List of general remarks about the predicate using ``Topic-Text``
    pairs where both the topic and the text must be atoms. End the
    ``Text`` with a period (full stop).
+``since``
+   Version that added the predicate (``Major:Minor:Patch``).
 ``see_also``
    List of related predicates and non-terminals (using the predicate
    and non-terminal indicators).

@@ -25,7 +25,17 @@ RELEASE NOTES
 3.65.0 - April ??, 2023
 =======================
 
+Logtalk compiler and runtime
+----------------------------
 
+* ADDED: Support for a `info/2` directive `since` key to document the version
+that added a predicate.
+
+Tools
+-----
+
+* ADDED: Support to the `lgtdoc` tool to output `info/2` directive `since`
+keys.
 
 
 3.64.0 - March 28, 2023

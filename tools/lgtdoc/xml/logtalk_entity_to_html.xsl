@@ -321,6 +321,10 @@
 			<dd class ="value"><xsl:value-of select="topic" />: <xsl:value-of select="text" /></dd>
 		</xsl:for-each>
 		</xsl:if>
+		<xsl:if test="since">
+		<dt class ="key">since:</dt>
+			<dd class ="value"><code><xsl:value-of select="since" /></code></dd>
+		</xsl:if>
 		<xsl:if test="see_also">
 		<dt class ="key">see also:</dt>
 		<xsl:for-each select="see_also/reference">

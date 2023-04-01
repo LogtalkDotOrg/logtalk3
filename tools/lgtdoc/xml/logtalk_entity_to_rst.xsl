@@ -410,6 +410,12 @@
 		</xsl:for-each>
 		<xsl:value-of select="$nl" />
 	</xsl:if>
+	<xsl:if test="since">
+		<xsl:text>| **Since:**</xsl:text>
+		<xsl:value-of select="$nl" />
+		<xsl:text>|    ``</xsl:text><xsl:value-of select="since" /><xsl:text>``</xsl:text>
+		<xsl:value-of select="$nl" />
+	</xsl:if>
 	<xsl:if test="see_also">
 		<xsl:text>| **See also:**</xsl:text>
 		<xsl:value-of select="$nl" />

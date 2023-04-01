@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:0:0,
+		version is 9:1:0,
 		author is 'Paulo Moura',
-		date is 2022-10-25,
+		date is 2023-04-01,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1017,6 +1017,10 @@
 			write_xml_close_tag(Stream, remarks)
 		;	true
 		),
+		(	member(since(Version), Info) ->
+			write_xml_element(Stream, since, [], Version)
+		;	true
+		),
 		(	member(see_also(SeeAlso), Info) ->
 			write_xml_open_tag(Stream, see_also, []),
 			relation_to_xml_filename(Entity, File),
@@ -1035,7 +1039,7 @@
 		forall(
 			(	member(KeyValue, Info),
 				KeyValue =.. [Key, Value],
-				\+ member(Key, [comment, arguments, argnames, exceptions, examples, remarks, see_also])
+				\+ member(Key, [comment, arguments, argnames, exceptions, examples, remarks, since, see_also])
 			),
 			(	write_xml_open_tag(Stream, info, []),
 				write_xml_element(Stream, key, [], Key),
