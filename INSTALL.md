@@ -35,7 +35,7 @@ operating-systems and for easy Logtalk integration with popular Prolog
 compilers.
 
 The POSIX shell scripts assume that `bash` is available. The PowerShell
-scripts require version 7.2 or later.
+scripts require version 7.3 or later.
 
 
 Logtalk basic installation
@@ -56,10 +56,10 @@ one of the provided scripts.
 In this case, there is no installation procedure other than decompressing the
 sources (or cloning the git repository) into a convenient directory. Simply
 skip to the section below on setting the Logtalk environment variables and
-use the directory full path as the value for both the `LOGTALKHOME` and
+use the clone directory full path as the value for both the `LOGTALKHOME` and
 `LOGTALKUSER` variables. Note that in this case, on POSIX systems, you will
 need to call the provided scripts without omitting the `.sh` extension (e.g.
-`swilgt.sh` instead of `swilgt`).
+use `swilgt.sh` instead of `swilgt`).
 
 **Installing for a single user with no administrative rights**
 

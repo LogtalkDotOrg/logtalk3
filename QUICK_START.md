@@ -48,11 +48,12 @@ by default for running Logtalk with the supported backend Prolog compilers
 * XSB:            `xsblgt`     (first run may require `sudo`)
 * YAP:            `yaplgt`
 
-On macOS systems, `/opt/local/bin` must be in your `PATH` to run the scripts.
-Terminal command files for running Logtalk with selected backend Prolog
-compilers are also available on the Logtalk installation folder (by default,
-`/opt/local/share/logtalk/scripts/macos/command_files`). For easy access, the
-installer creates an alias to the Logtalk folder in the Applications folder.
+On macOS systems, `/opt/local/bin` must be in your `PATH` to run the scripts
+when using the provided installer. Terminal command files for running Logtalk
+with selected backend Prolog compilers are also available on the Logtalk
+installation folder (by default, `/opt/local/share/logtalk/scripts/macos/command_files`).
+For easy access, the installer creates an alias to the Logtalk folder in
+the Applications folder.
 
 On Windows systems, shortcuts for running Logtalk with selected backend
 Prolog compilers are created on the `Start Menu/Programs/Logtalk` menu.
@@ -60,7 +61,8 @@ The first run of the JIProlog and XSB integration shortcuts may require
 administrator privileges depending on the JIProlog and XSB installation
 (right-click on the shortcut and select the "Run as administrator" option).
 PowerShell versions of the scripts listed above are also available (e.g.
-`gplgt.ps1`).
+`gplgt.ps1`). PowerShell 7.3 or later version is required for running
+these scripts.
 
 If you get an unexpected failure when using one of the Prolog integration
 scripts or shortcuts, consult the [`adapters/NOTES.md`](adapters/NOTES.md)
