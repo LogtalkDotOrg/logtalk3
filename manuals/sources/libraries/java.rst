@@ -56,11 +56,12 @@ if you want to ignore the return value or when calling a void Java
 method.
 
 The ``java`` object implements utility predicates. For some backend Java
-interfaces such as JPL (available in SWI-Prolog and YAP) there is also a
-``java_hook`` hook object for removing any overhead when using this
-library abstraction.
+interfaces such as JPL (available in LVM, SWI-Prolog, and YAP) there is
+also a ``java_hook`` hook object for removing any overhead when using
+this library abstraction.
 
-For usage examples and unit tests, see the ``jpl`` example.
+For usage examples and additional tests, see the ``clustering``,
+``document_converter``, ``jpl``, and ``neo4j`` examples.
 
 Known issues
 ------------
@@ -69,5 +70,5 @@ When running Java GUI examples on the macOS Terminal application, you
 may get a Java error saying that the AWT cannot be started. In
 alternative, try to run the example from within the SWI-Prolog macOS
 application instead of using the shell integration script. This issue is
-due to a macOS Java issue that's orthogonal to both LVM/SWI-Prolog/YAP
-and Logtalk.
+due to a macOS Java issue that's orthogonal to both Prolog backends and
+Logtalk.
