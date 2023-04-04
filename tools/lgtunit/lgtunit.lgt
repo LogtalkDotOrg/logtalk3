@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 14:0:1,
+		version is 14:1:0,
 		author is 'Paulo Moura',
-		date is 2023-03-15,
+		date is 2023-04-04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -2633,7 +2633,8 @@
 	file_path(File, Path) :-
 		self(Self),
 		object_property(Self, file(_, Directory)),
-		atom_concat(Directory, File, Path).
+		atom_concat(Directory, File, Path0),
+		os::absolute_file_name(Path0, Path).
 
 	% support for suppressing output
 
@@ -2930,7 +2931,8 @@
 			os::absolute_file_name(File, Path)
 		;	self(Self),
 			object_property(Self, file(_, Directory)),
-			atom_concat(Directory, File, Path)
+			atom_concat(Directory, File, Path0),
+			os::absolute_file_name(Path0, Path)
 		),
 		% the file can be associated with more than one stream
 		forall(

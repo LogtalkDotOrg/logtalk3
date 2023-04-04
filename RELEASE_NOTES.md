@@ -37,6 +37,10 @@ Tools
 * ADDED: Support to the `lgtdoc` tool to output `info/2` directive `since`
 keys.
 
+* IMPROVED: The `lgtunit` tool `file_path/2` and `clean_file/1` utility
+predicates to expand the constructed absolute file path to resolve any
+remaining relative file path parts.
+
 
 3.64.0 - March 28, 2023
 =======================
