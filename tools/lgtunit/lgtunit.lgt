@@ -27,7 +27,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 14:1:0,
+		version is 15:0:0,
 		author is 'Paulo Moura',
 		date is 2023-04-04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -304,7 +304,7 @@
 	:- protected(file_path/2).
 	:- mode(file_path(+atom, -atom), one).
 	:- info(file_path/2, [
-		comment is 'Returns the absolute path for a file path that is relative to the tests object path.',
+		comment is 'Returns the absolute path for a file path that is relative to the tests object path. When the file path is already an absolute path, it is expanded to resolve any remaining relative file path parts.',
 		argnames is ['File', 'Path'],
 		see_also is [clean_file/1]
 	]).
@@ -325,255 +325,288 @@
 	:- mode(set_text_input(+atom, +atom, +list(stream_option)), one).
 	:- mode(set_text_input(+atom, +list(atom), +list(stream_option)), one).
 	:- info(set_text_input/3, [
-		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.',
-		argnames is ['Alias', 'Contents', 'Options']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given text contents, and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.',
+		argnames is ['Alias', 'Contents', 'Options'],
+		see_also is [text_input_assertion/3, check_text_input/2, clean_text_input/0]
 	]).
 
 	:- protected(set_text_input/2).
 	:- mode(set_text_input(+atom, +atom), one).
 	:- mode(set_text_input(+atom, +list(atom)), one).
 	:- info(set_text_input/2, [
-		comment is 'Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.',
-		argnames is ['Alias', 'Contents']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given text contents, and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.',
+		argnames is ['Alias', 'Contents'],
+		see_also is [text_input_assertion/3, check_text_input/2, clean_text_input/0]
 	]).
 
 	:- protected(set_text_input/1).
 	:- mode(set_text_input(+atom), one).
 	:- mode(set_text_input(+list(atom)), one).
 	:- info(set_text_input/1, [
-		comment is 'Creates a temporary file with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.',
-		argnames is ['Contents']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.',
+		argnames is ['Contents'],
+		see_also is [text_input_assertion/2, check_text_input/1, clean_text_input/0]
 	]).
 
 	:- protected(check_text_input/2).
 	:- mode(check_text_input(+atom, +atom), zero_or_one).
 	:- info(check_text_input/2, [
 		comment is 'Checks that the temporary file (referenced by the given alias) being read have the expected text contents.',
-		argnames is ['Alias', 'Contents']
+		argnames is ['Alias', 'Contents'],
+		see_also is [set_text_input/2, set_text_input/2, text_input_assertion/3, clean_text_input/0]
 	]).
 
 	:- protected(check_text_input/1).
 	:- mode(check_text_input(+atom), zero_or_one).
 	:- info(check_text_input/1, [
 		comment is 'Checks that the temporary file being read have the expected text contents.',
-		argnames is ['Contents']
+		argnames is ['Contents'],
+		see_also is [set_text_input/1, text_input_assertion/2, clean_text_input/0]
 	]).
 
 	:- protected(text_input_assertion/3).
 	:- mode(text_input_assertion(+atom, +atom, --callable), one).
 	:- info(text_input_assertion/3, [
 		comment is 'Returns an assertion for checking that the temporary file (referenced by the given alias) being read have the expected text contents.',
-		argnames is ['Alias', 'Contents', 'Assertion']
+		argnames is ['Alias', 'Contents', 'Assertion'],
+		see_also is [set_text_input/3, check_text_input/2, clean_text_input/0]
 	]).
 
 	:- protected(text_input_assertion/2).
 	:- mode(text_input_assertion(+atom, --callable), one).
 	:- info(text_input_assertion/2, [
 		comment is 'Returns an assertion for checking that the temporary file being read have the expected text contents.',
-		argnames is ['Contents', 'Assertion']
+		argnames is ['Contents', 'Assertion'],
+		see_also is [set_text_input/1, check_text_input/1, clean_text_input/0]
 	]).
 
 	:- protected(clean_text_input/0).
 	:- mode(clean_text_input, one).
 	:- info(clean_text_input/0, [
-		comment is 'Cleans the temporary file used when testing text input.'
+		comment is 'Cleans the temporary file used when testing text input.',
+		see_also is [set_text_input/3, set_text_input/2, set_text_input/1]
 	]).
 
 	:- protected(set_binary_input/3).
 	:- mode(set_binary_input(+atom, +list(byte), +list(stream_option)), one).
 	:- info(set_binary_input/3, [
-		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.',
-		argnames is ['Alias', 'Bytes', 'Options']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for reading referenced by the given alias and using the additional options. If no ``eof_action/1`` option is specified, its value will be the default used by the backend compiler.',
+		argnames is ['Alias', 'Bytes', 'Options'],
+		see_also is [binary_input_assertion/3, check_binary_input/2, clean_binary_input/0]
 	]).
 
 	:- protected(set_binary_input/2).
 	:- mode(set_binary_input(+atom, +list(byte)), one).
 	:- info(set_binary_input/2, [
-		comment is 'Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.',
-		argnames is ['Alias', 'Bytes']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.',
+		argnames is ['Alias', 'Bytes'],
+		see_also is [binary_input_assertion/3, check_binary_input/2, clean_binary_input/0]
 	]).
 
 	:- protected(set_binary_input/1).
 	:- mode(set_binary_input(+list(byte)), one).
 	:- info(set_binary_input/1, [
-		comment is 'Creates a temporary file with the given binary contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.',
-		argnames is ['Bytes']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.',
+		argnames is ['Bytes'],
+		see_also is [binary_input_assertion/2, check_binary_input/1, clean_binary_input/0]
 	]).
 
 	:- protected(check_binary_input/2).
 	:- mode(check_binary_input(+atom, +list(byte)), zero_or_one).
 	:- info(check_binary_input/2, [
 		comment is 'Checks that the temporary file (referenced by the given alias) being read have the expected binary contents.',
-		argnames is ['Alias', 'Bytes']
+		argnames is ['Alias', 'Bytes'],
+		see_also is [set_binary_input/3, set_binary_input/2, binary_input_assertion/3, clean_binary_input/0]
 	]).
 
 	:- protected(check_binary_input/1).
 	:- mode(check_binary_input(+list(byte)), zero_or_one).
 	:- info(check_binary_input/1, [
 		comment is 'Checks that the temporary file being read have the expected binary contents.',
-		argnames is ['Bytes']
+		argnames is ['Bytes'],
+		see_also is [binary_input_assertion/2, set_binary_input/1, clean_binary_input/0]
 	]).
 
 	:- protected(binary_input_assertion/3).
 	:- mode(binary_input_assertion(+atom, +list(byte), --callable), one).
 	:- info(binary_input_assertion/3, [
 		comment is 'Returns an assertion for checking that the temporary file (referenced by the given alias) being read have the expected binary contents.',
-		argnames is ['Alias', 'Bytes', 'Assertion']
+		argnames is ['Alias', 'Bytes', 'Assertion'],
+		see_also is [check_binary_input/2, set_binary_input/3, set_binary_input/2, clean_binary_input/0]
 	]).
 
 	:- protected(binary_input_assertion/2).
 	:- mode(binary_input_assertion(+list(byte), --callable), one).
 	:- info(binary_input_assertion/2, [
 		comment is 'Returns an assertion for checking that the temporary file being read have the expected binary contents.',
-		argnames is ['Bytes', 'Assertion']
+		argnames is ['Bytes', 'Assertion'],
+		see_also is [check_binary_input/1, set_binary_input/1, clean_binary_input/0]
 	]).
 
 	:- protected(clean_binary_input/0).
 	:- mode(clean_binary_input, one).
 	:- info(clean_binary_input/0, [
-		comment is 'Cleans the temporary file used when testing binary input.'
+		comment is 'Cleans the temporary file used when testing binary input.',
+		see_also is [set_binary_input/3, set_binary_input/2, set_binary_input/1]
 	]).
 
 	:- protected(set_text_output/3).
 	:- mode(set_text_output(+atom, +atom, +list(stream_option)), one).
 	:- mode(set_text_output(+atom, +list(atom), +list(stream_option)), one).
 	:- info(set_text_output/3, [
-		comment is 'Creates a temporary file with the given text contents and opens it for writing referenced by the given alias and using the additional options.',
-		argnames is ['Alias', 'Contents', 'Options']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given text contents, and opens it for writing referenced by the given alias and using the additional options.',
+		argnames is ['Alias', 'Contents', 'Options'],
+		see_also is [text_output_assertion/4, check_text_output/3, clean_text_output/0]
 	]).
 
 	:- protected(set_text_output/2).
 	:- mode(set_text_output(+atom, +atom), one).
 	:- mode(set_text_output(+atom, +list(atom)), one).
 	:- info(set_text_output/2, [
-		comment is 'Creates a temporary file with the given text contents and referenced by the given alias.',
-		argnames is ['Alias', 'Contents']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given text contents, and referenced by the given alias.',
+		argnames is ['Alias', 'Contents'],
+		see_also is [text_output_assertion/3, check_text_output/2, clean_text_output/0]
 	]).
 
 	:- protected(set_text_output/1).
 	:- mode(set_text_output(+atom), one).
 	:- mode(set_text_output(+list(atom)), one).
 	:- info(set_text_output/1, [
-		comment is 'Creates a temporary file with the given text contents and sets the current output stream to the file.',
-		argnames is ['Contents']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given text contents, and sets the current output stream to the file.',
+		argnames is ['Contents'],
+		see_also is [text_output_assertion/2, check_text_output/1, clean_text_output/0]
 	]).
 
 	:- protected(check_text_output/3).
 	:- mode(check_text_output(+atom, +atom, +list(stream_option)), zero_or_one).
 	:- info(check_text_output/3, [
-		comment is 'Checks that the temporary file (open with the given options and alias) being written have the expected text contents.',
-		argnames is ['Alias', 'Contents', 'Options']
+		comment is 'Checks that the temporary file (open with the given options and alias in the same directory as the tests object) being written have the expected text contents.',
+		argnames is ['Alias', 'Contents', 'Options'],
+		see_also is [set_text_output/3, text_output_assertion/4, clean_text_output/0]
 	]).
 
 	:- protected(check_text_output/2).
 	:- mode(check_text_output(+atom, +atom), zero_or_one).
 	:- info(check_text_output/2, [
-		comment is 'Checks that the temporary file (open with default options and alias) being written have the expected text contents.',
-		argnames is ['Alias', 'Contents']
+		comment is 'Checks that the temporary file (open with default options and alias in the same directory as the tests object) being written have the expected text contents.',
+		argnames is ['Alias', 'Contents'],
+		see_also is [set_text_output/2, text_output_assertion/3, clean_text_output/0]
 	]).
 
 	:- protected(check_text_output/1).
 	:- mode(check_text_output(+atom), zero_or_one).
 	:- info(check_text_output/1, [
 		comment is 'Checks that the temporary file being written have the expected text contents.',
-		argnames is ['Contents']
+		argnames is ['Contents'],
+		see_also is [set_text_output/1, text_output_assertion/2, clean_text_output/0]
 	]).
 
 	:- protected(text_output_assertion/4).
 	:- mode(text_output_assertion(+atom, +atom, +list(stream_option), --callable), one).
 	:- info(text_output_assertion/4, [
-		comment is 'Returns an assertion for checking that the temporary file (open with the given options and alias) being written have the expected text contents.',
-		argnames is ['Alias', 'Contents', 'Options', 'Assertion']
+		comment is 'Returns an assertion for checking that the temporary file (open with the given options and alias in the same directory as the tests object) being written have the expected text contents.',
+		argnames is ['Alias', 'Contents', 'Options', 'Assertion'],
+		see_also is [set_text_output/3, check_text_output/3, clean_text_output/0]
 	]).
 
 	:- protected(text_output_assertion/3).
 	:- mode(text_output_assertion(+atom, +atom, --callable), one).
 	:- info(text_output_assertion/3, [
-		comment is 'Returns an assertion for checking that the temporary file (open with default options and alias) being written have the expected text contents.',
-		argnames is ['Alias', 'Contents', 'Assertion']
+		comment is 'Returns an assertion for checking that the temporary file (open with default options and alias in the same directory as the tests object) being written have the expected text contents.',
+		argnames is ['Alias', 'Contents', 'Assertion'],
+		see_also is [set_text_output/2, check_text_output/2, clean_text_output/0]
 	]).
 
 	:- protected(text_output_assertion/2).
 	:- mode(text_output_assertion(+atom, --callable), one).
 	:- info(text_output_assertion/2, [
-		comment is 'Returns an assertion for checking that the temporary file being written have the expected text contents.',
-		argnames is ['Contents', 'Assertion']
+		comment is 'Returns an assertion for checking that the temporary file (open with default options in the same directory as the tests object) being written have the expected text contents.',
+		argnames is ['Contents', 'Assertion'],
+		see_also is [set_text_output/1, check_text_output/1, clean_text_output/0]
 	]).
 
 	:- protected(text_output_contents/3).
 	:- mode(text_output_contents(+atom, -list(character), +list(stream_option)), one).
 	:- info(text_output_contents/3, [
-		comment is 'Returns the contents of the temporary file (open with the given options and alias) being written.',
+		comment is 'Returns the contents of the temporary file (open with the given options and alias in the same directory as the tests object) being written.',
 		argnames is ['Alias', 'Contents', 'Options']
 	]).
 
 	:- protected(text_output_contents/2).
 	:- mode(text_output_contents(+atom, -list(character)), one).
 	:- info(text_output_contents/2, [
-		comment is 'Returns the contents of the temporary file (open with default options and alias) being written.',
+		comment is 'Returns the contents of the temporary file (open with default options and alias in the same directory as the tests object) being written.',
 		argnames is ['Alias', 'Contents']
 	]).
 
 	:- protected(text_output_contents/1).
 	:- mode(text_output_contents(-list(character)), one).
 	:- info(text_output_contents/1, [
-		comment is 'Returns the contents of the temporary file being written.',
+		comment is 'Returns the contents of the temporary file (open with default options in the same directory as the tests object) being written.',
 		argnames is ['Contents']
 	]).
 
 	:- protected(clean_text_output/0).
 	:- mode(clean_text_output, one).
 	:- info(clean_text_output/0, [
-		comment is 'Cleans the temporary file used when testing text output.'
+		comment is 'Cleans the temporary file used when testing text output.',
+		see_also is [set_text_output/3, set_text_output/2, set_text_output/1]
 	]).
 
 	:- protected(set_binary_output/3).
 	:- mode(set_binary_output(+atom, +list(byte), +list(stream_option)), one).
 	:- info(set_binary_output/3, [
-		comment is 'Creates a temporary file with the given binary contents and opens it for writing referenced by the given alias and using the additional options.',
-		argnames is ['Alias', 'Contents', 'Options']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for writing referenced by the given alias and using the additional options.',
+		argnames is ['Alias', 'Contents', 'Options'],
+		see_also is [binary_output_assertion/3, check_binary_output/2, clean_binary_output/0]
 	]).
 
 	:- protected(set_binary_output/2).
 	:- mode(set_binary_output(+atom, +list(byte)), one).
 	:- info(set_binary_output/2, [
-		comment is 'Creates a temporary file with the given binary contents and opens it for writing referenced with the given alias.',
-		argnames is ['Alias', 'Bytes']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for writing referenced with the given alias.',
+		argnames is ['Alias', 'Bytes'],
+		see_also is [binary_output_assertion/3, check_binary_output/2, clean_binary_output/0]
 	]).
 
 	:- protected(set_binary_output/1).
 	:- mode(set_binary_output(+list(byte)), one).
 	:- info(set_binary_output/1, [
-		comment is 'Creates a temporary file with the given binary contents and sets the current output stream to the file.',
-		argnames is ['Bytes']
+		comment is 'Creates a temporary file, in the same directory as the tests object, with the given binary contents, and sets the current output stream to the file.',
+		argnames is ['Bytes'],
+		see_also is [binary_output_assertion/2, check_binary_output/1, clean_binary_output/0]
 	]).
 
 	:- protected(check_binary_output/2).
 	:- mode(check_binary_output(+atom, +list(byte)), zero_or_one).
 	:- info(check_binary_output/2, [
 		comment is 'Checks that the temporary file (referenced by the given alias) have the expected binary contents.',
-		argnames is ['Alias', 'Bytes']
+		argnames is ['Alias', 'Bytes'],
+		see_also is [set_binary_output/3, set_binary_output/2, binary_output_assertion/3, clean_binary_output/0]
 	]).
 
 	:- protected(check_binary_output/1).
 	:- mode(check_binary_output(+list(byte)), zero_or_one).
 	:- info(check_binary_output/1, [
-		comment is 'Checks that the temporary file have the expected binary contents.',
-		argnames is ['Bytes']
+		comment is 'Checks that the temporary file (open in the same directory as the tests object) have the expected binary contents.',
+		argnames is ['Bytes'],
+		see_also is [set_binary_output/1, binary_output_assertion/2, clean_binary_output/0]
 	]).
 
 	:- protected(binary_output_assertion/3).
 	:- mode(binary_output_assertion(+atom, +list(byte), --callable), one).
 	:- info(binary_output_assertion/3, [
 		comment is 'Returns an assertion for checking that the temporary file (referenced by the given alias) have the expected binary contents.',
-		argnames is ['Alias', 'Bytes', 'Assertion']
+		argnames is ['Alias', 'Bytes', 'Assertion'],
+		see_also is [set_binary_output/2, check_binary_output/2, clean_binary_output/0]
 	]).
 
 	:- protected(binary_output_assertion/2).
 	:- mode(binary_output_assertion(+list(byte), --callable), one).
 	:- info(binary_output_assertion/2, [
-		comment is 'Returns an assertion for checking that the temporary file have the expected binary contents.',
-		argnames is ['Bytes', 'Assertion']
+		comment is 'Returns an assertion for checking that the temporary file (open in the same directory as the tests object) have the expected binary contents.',
+		argnames is ['Bytes', 'Assertion'],
+		see_also is [set_binary_output/1, check_binary_output/1, clean_binary_output/0]
 	]).
 
 	:- protected(binary_output_contents/2).
@@ -593,14 +626,15 @@
 	:- protected(clean_binary_output/0).
 	:- mode(clean_binary_output, one).
 	:- info(clean_binary_output/0, [
-		comment is 'Cleans the temporary file used when testing binary output.'
+		comment is 'Cleans the temporary file used when testing binary output.',
+		see_also is [set_binary_output/3, set_binary_output/2, set_binary_output/1]
 	]).
 
 	:- protected(create_text_file/3).
 	:- mode(create_text_file(+atom, +atom, +list(stream_option)), one).
 	:- mode(create_text_file(+atom, +list(atom), +list(stream_option)), one).
 	:- info(create_text_file/3, [
-		comment is 'Creates a text file with the given contents. The file is open for writing using the given options.',
+		comment is 'Creates a text file with the given contents. The file is open for writing using the given options. Relative file paths are interpreted as relative to the tests object path.',
 		argnames is ['File', 'Contents', 'Options']
 	]).
 
@@ -608,57 +642,63 @@
 	:- mode(create_text_file(+atom, +atom), one).
 	:- mode(create_text_file(+atom, +list(atom)), one).
 	:- info(create_text_file/2, [
-		comment is 'Creates a text file with the given contents. The file is open for writing using default options.',
+		comment is 'Creates a text file with the given contents. The file is open for writing using default options. Relative file paths are interpreted as relative to the tests object path.',
 		argnames is ['File', 'Contents']
 	]).
 
 	:- protected(create_binary_file/2).
 	:- mode(create_binary_file(+atom, +list(byte)), one).
 	:- info(create_binary_file/2, [
-		comment is 'Creates a binary file with the given contents.',
+		comment is 'Creates a binary file with the given contents. Relative file paths are interpreted as relative to the tests object path.',
 		argnames is ['File', 'Bytes']
 	]).
 
 	:- protected(check_text_file/3).
 	:- mode(check_text_file(+atom, +atom, +list(stream_option)), zero_or_one).
 	:- info(check_text_file/3, [
-		comment is 'Checks that the contents of a text file match the expected contents. The file is open for reading using the given options.',
-		argnames is ['File', 'Contents', 'Options']
+		comment is 'Checks that the contents of a text file match the expected contents. The file is open for reading using the given options. Relative file paths are interpreted as relative to the tests object path.',
+		argnames is ['File', 'Contents', 'Options'],
+		see_also is [text_file_assertion/4]
 	]).
 
 	:- protected(check_text_file/2).
 	:- mode(check_text_file(+atom, +atom), zero_or_one).
 	:- info(check_text_file/2, [
-		comment is 'Checks that the contents of a text file (open for reading using default options) match the expected contents.',
-		argnames is ['File', 'Contents']
+		comment is 'Checks that the contents of a text file (open for reading using default options) match the expected contents. Relative file paths are interpreted as relative to the tests object path.',
+		argnames is ['File', 'Contents'],
+		see_also is [text_file_assertion/3]
 	]).
 
 	:- protected(text_file_assertion/4).
 	:- mode(text_file_assertion(+atom, +atom, +list(stream_option), --callable), one).
 	:- info(text_file_assertion/4, [
-		comment is 'Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using the given options.',
-		argnames is ['File', 'Contents', 'Options', 'Assertion']
+		comment is 'Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using the given options. Relative file paths are interpreted as relative to the tests object path.',
+		argnames is ['File', 'Contents', 'Options', 'Assertion'],
+		see_also is [check_text_file/3]
 	]).
 
 	:- protected(text_file_assertion/3).
 	:- mode(text_file_assertion(+atom, +atom, --callable), one).
 	:- info(text_file_assertion/3, [
-		comment is 'Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using default options.',
-		argnames is ['File', 'Contents', 'Assertion']
+		comment is 'Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using default options. Relative file paths are interpreted as relative to the tests object path.',
+		argnames is ['File', 'Contents', 'Assertion'],
+		see_also is [check_text_file/2]
 	]).
 
 	:- protected(check_binary_file/2).
 	:- mode(check_binary_file(+atom, +list(byte)), zero_or_one).
 	:- info(check_binary_file/2, [
-		comment is 'Checks the contents of a binary file match the expected contents.',
-		argnames is ['File', 'Bytes']
+		comment is 'Checks the contents of a binary file match the expected contents. Relative file paths are interpreted as relative to the tests object path.',
+		argnames is ['File', 'Bytes'],
+		see_also is [binary_file_assertion/3]
 	]).
 
 	:- protected(binary_file_assertion/3).
 	:- mode(binary_file_assertion(+atom, +list(byte), --callable), one).
 	:- info(binary_file_assertion/3, [
-		comment is 'Returns an assertion for checking that the given file have the expected binary contents.',
-		argnames is ['Path', 'Bytes', 'Assertion']
+		comment is 'Returns an assertion for checking that the given file have the expected binary contents. Relative file paths are interpreted as relative to the tests object path.',
+		argnames is ['File', 'Bytes', 'Assertion'],
+		see_also is [check_binary_file/2]
 	]).
 
 	:- protected(clean_file/1).
@@ -672,21 +712,21 @@
 	:- protected(closed_input_stream/2).
 	:- mode(closed_input_stream(-stream, +list(stream_option)), one).
 	:- info(closed_input_stream/2, [
-		comment is 'Opens a temporary file with the given options for reading, closes it, and returns its stream handle.',
+		comment is 'Opens a temporary file in the same directory as the tests object with the given options for reading, closes it, and returns its stream handle.',
 		argnames is ['Stream', 'Options']
 	]).
 
 	:- protected(closed_output_stream/2).
 	:- mode(closed_output_stream(-stream, +list(stream_option)), zero_or_one).
 	:- info(closed_output_stream/2, [
-		comment is 'Opens a temporary file with the given options for writing, closes it, and returns its stream handle.',
+		comment is 'Opens a temporary file in the same directory as the tests object with the given options for writing, closes it, and returns its stream handle.',
 		argnames is ['Stream', 'Options']
 	]).
 
 	:- protected(stream_position/1).
 	:- mode(stream_position(-stream_position), one).
 	:- info(stream_position/1, [
-		comment is 'Returns a syntactically valid stream position.',
+		comment is 'Returns a syntactically valid stream position by opening a temporary file in the same directory as the tests object.',
 		argnames is ['Position']
 	]).
 
@@ -2631,10 +2671,14 @@
 	% support for computing full paths for test data files
 
 	file_path(File, Path) :-
-		self(Self),
-		object_property(Self, file(_, Directory)),
-		atom_concat(Directory, File, Path0),
-		os::absolute_file_name(Path0, Path).
+		(	os::is_absolute_file_name(File) ->
+			% the file may still require expanding
+			os::absolute_file_name(File, Path)
+		;	self(Self),
+			object_property(Self, file(_, Directory)),
+			atom_concat(Directory, File, Path0),
+			os::absolute_file_name(Path0, Path)
+		).
 
 	% support for suppressing output
 
@@ -2750,7 +2794,7 @@
 
 	check_text_output(Alias, Expected, Options) :-
 		close(Alias),
-		os::absolute_file_name('test_output.text', Path),
+		file_path('test_output.text', Path),
 		open(Path, read, InputStream, Options),
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output,
@@ -2762,7 +2806,7 @@
 	check_text_output(Expected) :-
 		current_output(OutputStream),
 		close(OutputStream),
-		os::absolute_file_name('test_output.text', Path),
+		file_path('test_output.text', Path),
 		open(Path, read, InputStream),
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output,
@@ -2770,7 +2814,7 @@
 
 	text_output_assertion(Alias, Expected, Options, Expected == Contents) :-
 		close(Alias),
-		os::absolute_file_name('test_output.text', Path),
+		file_path('test_output.text', Path),
 		open(Path, read, InputStream, Options),
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output.
@@ -2781,21 +2825,21 @@
 	text_output_assertion(Expected, Expected == Contents) :-
 		current_output(OutputStream),
 		close(OutputStream),
-		os::absolute_file_name('test_output.text', Path),
+		file_path('test_output.text', Path),
 		open(Path, read, InputStream),
 		get_text_contents(InputStream, Expected, Contents),
 		clean_text_output.
 
 	text_output_contents(Alias, Contents, Options) :-
 		close(Alias),
-		os::absolute_file_name('test_output.text', Path),
+		file_path('test_output.text', Path),
 		open(Path, read, InputStream, Options),
 		get_text_contents(InputStream, Contents),
 		clean_text_output.
 
 	text_output_contents(Alias, Contents) :-
 		close(Alias),
-		os::absolute_file_name('test_output.text', Path),
+		file_path('test_output.text', Path),
 		open(Path, read, InputStream),
 		get_text_contents(InputStream, Contents),
 		clean_text_output.
@@ -2803,7 +2847,7 @@
 	text_output_contents(Contents) :-
 		current_output(OutputStream),
 		close(OutputStream),
-		os::absolute_file_name('test_output.text', Path),
+		file_path('test_output.text', Path),
 		open(Path, read, InputStream),
 		get_text_contents(InputStream, Contents),
 		clean_text_output.
@@ -2827,7 +2871,7 @@
 
 	check_binary_output(Alias, Expected) :-
 		close(Alias),
-		os::absolute_file_name('test_output.binary', Path),
+		file_path('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output,
@@ -2836,7 +2880,7 @@
 	check_binary_output(Expected) :-
 		current_output(OutputStream),
 		close(OutputStream),
-		os::absolute_file_name('test_output.binary', Path),
+		file_path('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output,
@@ -2844,7 +2888,7 @@
 
 	binary_output_assertion(Alias, Expected, Expected == Contents) :-
 		close(Alias),
-		os::absolute_file_name('test_output.binary', Path),
+		file_path('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output.
@@ -2852,14 +2896,14 @@
 	binary_output_assertion(Expected, Expected == Contents) :-
 		current_output(OutputStream),
 		close(OutputStream),
-		os::absolute_file_name('test_output.binary', Path),
+		file_path('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Expected, Contents),
 		clean_binary_output.
 
 	binary_output_contents(Alias, Contents) :-
 		close(Alias),
-		os::absolute_file_name('test_output.binary', Path),
+		file_path('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Contents),
 		clean_binary_output.
@@ -2867,7 +2911,7 @@
 	binary_output_contents(Contents) :-
 		current_output(OutputStream),
 		close(OutputStream),
-		os::absolute_file_name('test_output.binary', Path),
+		file_path('test_output.binary', Path),
 		open(Path, read, InputStream, [type(binary)]),
 		get_binary_contents(InputStream, Contents),
 		clean_binary_output.
@@ -2878,7 +2922,7 @@
 	% other predicates for testing input/output predicates
 
 	create_text_file(File, Contents, Options) :-
-		os::absolute_file_name(File, Path),
+		file_path(File, Path),
 		open(Path, write, Stream, Options),
 		write_text_contents(Stream, Contents),
 		close(Stream).
@@ -2887,13 +2931,13 @@
 		create_text_file(File, Contents, []).
 
 	create_binary_file(File, Bytes) :-
-		os::absolute_file_name(File, Path),
+		file_path(File, Path),
 		open(Path, write, Stream, [type(binary)]),
 		write_binary_contents(Bytes, Stream),
 		close(Stream).
 
 	check_text_file(File, Expected, Options) :-
-		os::absolute_file_name(File, Path),
+		file_path(File, Path),
 		open(Path, read, Stream, Options),
 		get_text_contents(Stream, Expected, Contents),
 		Expected == Contents.
@@ -2902,7 +2946,7 @@
 		check_text_file(File, Expected, []).
 
 	text_file_assertion(File, Expected, Options, Expected == Contents) :-
-		os::absolute_file_name(File, Path),
+		file_path(File, Path),
 		open(Path, read, Stream, Options),
 		get_text_contents(Stream, Expected, Contents).
 
@@ -2910,13 +2954,13 @@
 		text_file_assertion(File, Expected, [], Assertion).
 
 	check_binary_file(File, Expected) :-
-		os::absolute_file_name(File, Path),
+		file_path(File, Path),
 		open(Path, read, Stream, [type(binary)]),
 		get_binary_contents(Stream, Expected, Contents),
 		Expected == Contents.
 
 	binary_file_assertion(File, Expected, Expected == Contents) :-
-		os::absolute_file_name(File, Path),
+		file_path(File, Path),
 		open(Path, read, Stream, [type(binary)]),
 		get_binary_contents(Stream, Expected, Contents).
 
@@ -3023,7 +3067,7 @@
 		).
 
 	closed_input_stream(ReadStream, Options) :-
-		os::absolute_file_name(temporary_file, Path),
+		file_path(temporary_file, Path),
 		open(Path, write, WriteStream),
 		close(WriteStream),
 		open(Path, read, ReadStream, Options),
@@ -3031,7 +3075,7 @@
 		os::delete_file(Path).
 
 	closed_output_stream(WriteStream, Options) :-
-		os::absolute_file_name(temporary_file, Path),
+		file_path(temporary_file, Path),
 		open(Path, write, WriteStream, Options),
 		close(WriteStream),
 		os::delete_file(Path).
@@ -3039,7 +3083,7 @@
 	:- if(current_logtalk_flag(prolog_dialect, sicstus)).
 
 		stream_position(Position) :-
-			os::absolute_file_name(temporary_file, Path),
+			file_path(temporary_file, Path),
 			open(Path, write, Stream),
 			stream_position(Stream, Position),
 			close(Stream),
@@ -3048,7 +3092,7 @@
 	:- else.
 
 		stream_position(Position) :-
-			os::absolute_file_name(temporary_file, Path),
+			file_path(temporary_file, Path),
 			open(Path, write, Stream),
 			stream_property(Stream, position(Position)),
 			close(Stream),

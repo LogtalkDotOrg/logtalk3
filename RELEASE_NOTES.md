@@ -34,12 +34,24 @@ that added a predicate.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool input/output testing predicates to always
+interpret relative paths as relative to the tests object path and to always
+open temporary files in the same directory as the tests object. This
+simplifies usage and improves reliability by not depending on the current
+working directory.
+
+* CHANGED: The `lgtunit` tool `file_path/2` to also accept absolute file paths
+(further expanding them to resolve any remaining relative file path parts).
+
 * ADDED: Support to the `lgtdoc` tool to output `info/2` directive `since`
 keys.
 
 * IMPROVED: The `lgtunit` tool `file_path/2` and `clean_file/1` utility
 predicates to expand the constructed absolute file path to resolve any
 remaining relative file path parts.
+
+* IMPROVED: The `lgtunit` tool documentation of the input/output testing
+predicates.
 
 
 3.64.0 - March 28, 2023

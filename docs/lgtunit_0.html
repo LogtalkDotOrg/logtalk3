@@ -200,7 +200,7 @@
 <p>A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 14:1:0</div>
+<div class="line"><strong>Version:</strong> 15:0:0</div>
 <div class="line"><strong>Date:</strong> 2023-04-04</div>
 </div>
 <div class="line-block">
@@ -1139,7 +1139,7 @@
 </section>
 <section id="file-path-2">
 <span id="lgtunit-0-file-path-2"></span><span id="index-34"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_path/2</span></code></a><a class="headerlink" href="#file-path-2" title="Permalink to this heading"></a></h3>
-<p>Returns the absolute path for a file path that is relative to the tests object path.</p>
+<p>Returns the absolute path for a file path that is relative to the tests object path. When the file path is already an absolute path, it is expanded to resolve any remaining relative file path parts.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1200,7 +1200,7 @@
 </section>
 <section id="set-text-input-3">
 <span id="lgtunit-0-set-text-input-3"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_text_input/3</span></code></a><a class="headerlink" href="#set-text-input-3" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the additional options. If no <code class="docutils literal notranslate"><span class="pre">eof_action/1</span></code> option is specified, its value will be the default used by the backend compiler.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given text contents, and opens it for reading referenced by the given alias and using the additional options. If no <code class="docutils literal notranslate"><span class="pre">eof_action/1</span></code> option is specified, its value will be the default used by the backend compiler.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1218,11 +1218,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom,+list(atom),+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-input-assertion-3"><span class="std std-ref">text_input_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-input-2"><span class="std std-ref">check_text_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-input-0"><span class="std std-ref">clean_text_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-text-input-2">
 <span id="lgtunit-0-set-text-input-2"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_text_input/2</span></code></a><a class="headerlink" href="#set-text-input-2" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given text contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given text contents, and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1240,11 +1248,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom,+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-input-assertion-3"><span class="std std-ref">text_input_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-input-2"><span class="std std-ref">check_text_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-input-0"><span class="std std-ref">clean_text_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-text-input-1">
 <span id="lgtunit-0-set-text-input-1"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_text_input/1</span></code></a><a class="headerlink" href="#set-text-input-1" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given text contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1260,6 +1276,14 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_input(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-input-assertion-2"><span class="std std-ref">text_input_assertion/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-input-1"><span class="std std-ref">check_text_input/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-input-0"><span class="std std-ref">clean_text_input/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1283,6 +1307,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_input(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-input-2"><span class="std std-ref">set_text_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-input-2"><span class="std std-ref">set_text_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-input-assertion-3"><span class="std std-ref">text_input_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-input-0"><span class="std std-ref">clean_text_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-text-input-1">
@@ -1302,6 +1335,14 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_input(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-input-1"><span class="std std-ref">set_text_input/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-input-assertion-2"><span class="std std-ref">text_input_assertion/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-input-0"><span class="std std-ref">clean_text_input/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1325,6 +1366,14 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">text_input_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-input-3"><span class="std std-ref">set_text_input/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-input-2"><span class="std std-ref">check_text_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-input-0"><span class="std std-ref">clean_text_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="text-input-assertion-2">
@@ -1346,6 +1395,14 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">text_input_assertion(+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-input-1"><span class="std std-ref">set_text_input/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-input-1"><span class="std std-ref">check_text_input/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-input-0"><span class="std std-ref">clean_text_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="clean-text-input-0">
@@ -1363,11 +1420,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clean_text_input</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-input-3"><span class="std std-ref">set_text_input/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-input-2"><span class="std std-ref">set_text_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-input-1"><span class="std std-ref">set_text_input/1</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-binary-input-3">
 <span id="lgtunit-0-set-binary-input-3"></span><span id="index-45"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_binary_input/3</span></code></a><a class="headerlink" href="#set-binary-input-3" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the additional options. If no <code class="docutils literal notranslate"><span class="pre">eof_action/1</span></code> option is specified, its value will be the default used by the backend compiler.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for reading referenced by the given alias and using the additional options. If no <code class="docutils literal notranslate"><span class="pre">eof_action/1</span></code> option is specified, its value will be the default used by the backend compiler.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1384,11 +1449,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(+atom,+list(byte),+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-input-assertion-3"><span class="std std-ref">binary_input_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-input-2"><span class="std std-ref">check_binary_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-input-0"><span class="std std-ref">clean_binary_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-binary-input-2">
 <span id="lgtunit-0-set-binary-input-2"></span><span id="index-46"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_binary_input/2</span></code></a><a class="headerlink" href="#set-binary-input-2" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given binary contents and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for reading referenced by the given alias and using the default end-of-file action for the used backend compiler.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1405,11 +1478,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-input-assertion-3"><span class="std std-ref">binary_input_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-input-2"><span class="std std-ref">check_binary_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-input-0"><span class="std std-ref">clean_binary_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-binary-input-1">
 <span id="lgtunit-0-set-binary-input-1"></span><span id="index-47"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_binary_input/1</span></code></a><a class="headerlink" href="#set-binary-input-1" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given binary contents, opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for reading using the default end-of-file action for the used backend compiler, and sets the current input stream to the file.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1424,6 +1505,14 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_input(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-input-assertion-2"><span class="std std-ref">binary_input_assertion/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-input-1"><span class="std std-ref">check_binary_input/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-input-0"><span class="std std-ref">clean_binary_input/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1447,6 +1536,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_input(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-3"><span class="std std-ref">set_binary_input/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-2"><span class="std std-ref">set_binary_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-input-assertion-3"><span class="std std-ref">binary_input_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-input-0"><span class="std std-ref">clean_binary_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-binary-input-1">
@@ -1466,6 +1564,14 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_input(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-input-assertion-2"><span class="std std-ref">binary_input_assertion/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-1"><span class="std std-ref">set_binary_input/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-input-0"><span class="std std-ref">clean_binary_input/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1489,6 +1595,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">binary_input_assertion(+atom,+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-input-2"><span class="std std-ref">check_binary_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-3"><span class="std std-ref">set_binary_input/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-2"><span class="std std-ref">set_binary_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-input-0"><span class="std std-ref">clean_binary_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="binary-input-assertion-2">
@@ -1510,6 +1625,14 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">binary_input_assertion(+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-input-1"><span class="std std-ref">check_binary_input/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-1"><span class="std std-ref">set_binary_input/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-input-0"><span class="std std-ref">clean_binary_input/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="clean-binary-input-0">
@@ -1527,11 +1650,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clean_binary_input</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-3"><span class="std std-ref">set_binary_input/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-2"><span class="std std-ref">set_binary_input/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-input-1"><span class="std std-ref">set_binary_input/1</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-text-output-3">
 <span id="lgtunit-0-set-text-output-3"></span><span id="index-53"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_text_output/3</span></code></a><a class="headerlink" href="#set-text-output-3" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given text contents and opens it for writing referenced by the given alias and using the additional options.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given text contents, and opens it for writing referenced by the given alias and using the additional options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1549,11 +1680,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_output(+atom,+list(atom),+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-output-assertion-4"><span class="std std-ref">text_output_assertion/4</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-output-3"><span class="std std-ref">check_text_output/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-text-output-2">
 <span id="lgtunit-0-set-text-output-2"></span><span id="index-54"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_text_output/2</span></code></a><a class="headerlink" href="#set-text-output-2" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given text contents and referenced by the given alias.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given text contents, and referenced by the given alias.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1571,11 +1710,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_output(+atom,+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-output-assertion-3"><span class="std std-ref">text_output_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-output-2"><span class="std std-ref">check_text_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-text-output-1">
 <span id="lgtunit-0-set-text-output-1"></span><span id="index-55"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_text_output/1</span></code></a><a class="headerlink" href="#set-text-output-1" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given text contents and sets the current output stream to the file.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given text contents, and sets the current output stream to the file.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1593,11 +1740,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_text_output(+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-output-assertion-2"><span class="std std-ref">text_output_assertion/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-output-1"><span class="std std-ref">check_text_output/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-text-output-3">
 <span id="lgtunit-0-check-text-output-3"></span><span id="index-56"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_text_output/3</span></code></a><a class="headerlink" href="#check-text-output-3" title="Permalink to this heading"></a></h3>
-<p>Checks that the temporary file (open with the given options and alias) being written have the expected text contents.</p>
+<p>Checks that the temporary file (open with the given options and alias in the same directory as the tests object) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1614,11 +1769,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_output(+atom,+atom,+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-3"><span class="std std-ref">set_text_output/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-output-assertion-4"><span class="std std-ref">text_output_assertion/4</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-text-output-2">
 <span id="lgtunit-0-check-text-output-2"></span><span id="index-57"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_text_output/2</span></code></a><a class="headerlink" href="#check-text-output-2" title="Permalink to this heading"></a></h3>
-<p>Checks that the temporary file (open with default options and alias) being written have the expected text contents.</p>
+<p>Checks that the temporary file (open with default options and alias in the same directory as the tests object) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1633,6 +1796,14 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_output(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-2"><span class="std std-ref">set_text_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-output-assertion-3"><span class="std std-ref">text_output_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1656,11 +1827,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_output(+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-1"><span class="std std-ref">set_text_output/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-output-assertion-2"><span class="std std-ref">text_output_assertion/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="text-output-assertion-4">
 <span id="lgtunit-0-text-output-assertion-4"></span><span id="index-59"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">text_output_assertion/4</span></code></a><a class="headerlink" href="#text-output-assertion-4" title="Permalink to this heading"></a></h3>
-<p>Returns an assertion for checking that the temporary file (open with the given options and alias) being written have the expected text contents.</p>
+<p>Returns an assertion for checking that the temporary file (open with the given options and alias in the same directory as the tests object) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1677,11 +1856,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,+atom,+list(stream_option),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-3"><span class="std std-ref">set_text_output/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-output-3"><span class="std std-ref">check_text_output/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="text-output-assertion-3">
 <span id="lgtunit-0-text-output-assertion-3"></span><span id="index-60"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">text_output_assertion/3</span></code></a><a class="headerlink" href="#text-output-assertion-3" title="Permalink to this heading"></a></h3>
-<p>Returns an assertion for checking that the temporary file (open with default options and alias) being written have the expected text contents.</p>
+<p>Returns an assertion for checking that the temporary file (open with default options and alias in the same directory as the tests object) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1698,11 +1885,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-2"><span class="std std-ref">set_text_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-output-2"><span class="std std-ref">check_text_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="text-output-assertion-2">
 <span id="lgtunit-0-text-output-assertion-2"></span><span id="index-61"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">text_output_assertion/2</span></code></a><a class="headerlink" href="#text-output-assertion-2" title="Permalink to this heading"></a></h3>
-<p>Returns an assertion for checking that the temporary file being written have the expected text contents.</p>
+<p>Returns an assertion for checking that the temporary file (open with default options in the same directory as the tests object) being written have the expected text contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1719,11 +1914,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">text_output_assertion(+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-1"><span class="std std-ref">set_text_output/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-output-1"><span class="std std-ref">check_text_output/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-text-output-0"><span class="std std-ref">clean_text_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="text-output-contents-3">
 <span id="lgtunit-0-text-output-contents-3"></span><span id="index-62"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">text_output_contents/3</span></code></a><a class="headerlink" href="#text-output-contents-3" title="Permalink to this heading"></a></h3>
-<p>Returns the contents of the temporary file (open with the given options and alias) being written.</p>
+<p>Returns the contents of the temporary file (open with the given options and alias in the same directory as the tests object) being written.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1744,7 +1947,7 @@
 </section>
 <section id="text-output-contents-2">
 <span id="lgtunit-0-text-output-contents-2"></span><span id="index-63"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">text_output_contents/2</span></code></a><a class="headerlink" href="#text-output-contents-2" title="Permalink to this heading"></a></h3>
-<p>Returns the contents of the temporary file (open with default options and alias) being written.</p>
+<p>Returns the contents of the temporary file (open with default options and alias in the same directory as the tests object) being written.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1765,7 +1968,7 @@
 </section>
 <section id="text-output-contents-1">
 <span id="lgtunit-0-text-output-contents-1"></span><span id="index-64"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">text_output_contents/1</span></code></a><a class="headerlink" href="#text-output-contents-1" title="Permalink to this heading"></a></h3>
-<p>Returns the contents of the temporary file being written.</p>
+<p>Returns the contents of the temporary file (open with default options in the same directory as the tests object) being written.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1799,11 +2002,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clean_text_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-3"><span class="std std-ref">set_text_output/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-2"><span class="std std-ref">set_text_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-text-output-1"><span class="std std-ref">set_text_output/1</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-binary-output-3">
 <span id="lgtunit-0-set-binary-output-3"></span><span id="index-66"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_binary_output/3</span></code></a><a class="headerlink" href="#set-binary-output-3" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given binary contents and opens it for writing referenced by the given alias and using the additional options.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for writing referenced by the given alias and using the additional options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1820,11 +2031,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_output(+atom,+list(byte),+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-output-assertion-3"><span class="std std-ref">binary_output_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-output-2"><span class="std std-ref">check_binary_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-output-0"><span class="std std-ref">clean_binary_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-binary-output-2">
 <span id="lgtunit-0-set-binary-output-2"></span><span id="index-67"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_binary_output/2</span></code></a><a class="headerlink" href="#set-binary-output-2" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given binary contents and opens it for writing referenced with the given alias.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given binary contents, and opens it for writing referenced with the given alias.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1841,11 +2060,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_output(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-output-assertion-3"><span class="std std-ref">binary_output_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-output-2"><span class="std std-ref">check_binary_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-output-0"><span class="std std-ref">clean_binary_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="set-binary-output-1">
 <span id="lgtunit-0-set-binary-output-1"></span><span id="index-68"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">set_binary_output/1</span></code></a><a class="headerlink" href="#set-binary-output-1" title="Permalink to this heading"></a></h3>
-<p>Creates a temporary file with the given binary contents and sets the current output stream to the file.</p>
+<p>Creates a temporary file, in the same directory as the tests object, with the given binary contents, and sets the current output stream to the file.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1860,6 +2087,14 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_binary_output(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-output-assertion-2"><span class="std std-ref">binary_output_assertion/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-output-1"><span class="std std-ref">check_binary_output/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-output-0"><span class="std std-ref">clean_binary_output/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1883,11 +2118,20 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_output(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-output-3"><span class="std std-ref">set_binary_output/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-output-2"><span class="std std-ref">set_binary_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-output-assertion-3"><span class="std std-ref">binary_output_assertion/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-output-0"><span class="std std-ref">clean_binary_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-binary-output-1">
 <span id="lgtunit-0-check-binary-output-1"></span><span id="index-70"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_binary_output/1</span></code></a><a class="headerlink" href="#check-binary-output-1" title="Permalink to this heading"></a></h3>
-<p>Checks that the temporary file have the expected binary contents.</p>
+<p>Checks that the temporary file (open in the same directory as the tests object) have the expected binary contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1902,6 +2146,14 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_output(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-output-1"><span class="std std-ref">set_binary_output/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-output-assertion-2"><span class="std std-ref">binary_output_assertion/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-output-0"><span class="std std-ref">clean_binary_output/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1925,11 +2177,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">binary_output_assertion(+atom,+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-output-2"><span class="std std-ref">set_binary_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-output-2"><span class="std std-ref">check_binary_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-output-0"><span class="std std-ref">clean_binary_output/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="binary-output-assertion-2">
 <span id="lgtunit-0-binary-output-assertion-2"></span><span id="index-72"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">binary_output_assertion/2</span></code></a><a class="headerlink" href="#binary-output-assertion-2" title="Permalink to this heading"></a></h3>
-<p>Returns an assertion for checking that the temporary file have the expected binary contents.</p>
+<p>Returns an assertion for checking that the temporary file (open in the same directory as the tests object) have the expected binary contents.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1944,6 +2204,14 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">binary_output_assertion(+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-output-1"><span class="std std-ref">set_binary_output/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-output-1"><span class="std std-ref">check_binary_output/1</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-clean-binary-output-0"><span class="std std-ref">clean_binary_output/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -2005,11 +2273,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">clean_binary_output</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-output-3"><span class="std std-ref">set_binary_output/3</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-output-2"><span class="std std-ref">set_binary_output/2</span></a></div>
+<div class="line"><a class="reference internal" href="#lgtunit-0-set-binary-output-1"><span class="std std-ref">set_binary_output/1</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="create-text-file-3">
 <span id="lgtunit-0-create-text-file-3"></span><span id="index-76"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">create_text_file/3</span></code></a><a class="headerlink" href="#create-text-file-3" title="Permalink to this heading"></a></h3>
-<p>Creates a text file with the given contents. The file is open for writing using the given options.</p>
+<p>Creates a text file with the given contents. The file is open for writing using the given options. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2031,7 +2307,7 @@
 </section>
 <section id="create-text-file-2">
 <span id="lgtunit-0-create-text-file-2"></span><span id="index-77"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">create_text_file/2</span></code></a><a class="headerlink" href="#create-text-file-2" title="Permalink to this heading"></a></h3>
-<p>Creates a text file with the given contents. The file is open for writing using default options.</p>
+<p>Creates a text file with the given contents. The file is open for writing using default options. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2053,7 +2329,7 @@
 </section>
 <section id="create-binary-file-2">
 <span id="lgtunit-0-create-binary-file-2"></span><span id="index-78"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">create_binary_file/2</span></code></a><a class="headerlink" href="#create-binary-file-2" title="Permalink to this heading"></a></h3>
-<p>Creates a binary file with the given contents.</p>
+<p>Creates a binary file with the given contents. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2074,7 +2350,7 @@
 </section>
 <section id="check-text-file-3">
 <span id="lgtunit-0-check-text-file-3"></span><span id="index-79"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_text_file/3</span></code></a><a class="headerlink" href="#check-text-file-3" title="Permalink to this heading"></a></h3>
-<p>Checks that the contents of a text file match the expected contents. The file is open for reading using the given options.</p>
+<p>Checks that the contents of a text file match the expected contents. The file is open for reading using the given options. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2091,11 +2367,17 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_file(+atom,+atom,+list(stream_option))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-file-assertion-4"><span class="std std-ref">text_file_assertion/4</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-text-file-2">
 <span id="lgtunit-0-check-text-file-2"></span><span id="index-80"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_text_file/2</span></code></a><a class="headerlink" href="#check-text-file-2" title="Permalink to this heading"></a></h3>
-<p>Checks that the contents of a text file (open for reading using default options) match the expected contents.</p>
+<p>Checks that the contents of a text file (open for reading using default options) match the expected contents. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2112,11 +2394,17 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_text_file(+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-text-file-assertion-3"><span class="std std-ref">text_file_assertion/3</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="text-file-assertion-4">
 <span id="lgtunit-0-text-file-assertion-4"></span><span id="index-81"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">text_file_assertion/4</span></code></a><a class="headerlink" href="#text-file-assertion-4" title="Permalink to this heading"></a></h3>
-<p>Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using the given options.</p>
+<p>Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using the given options. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2133,11 +2421,17 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">text_file_assertion(+atom,+atom,+list(stream_option),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-file-3"><span class="std std-ref">check_text_file/3</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="text-file-assertion-3">
 <span id="lgtunit-0-text-file-assertion-3"></span><span id="index-82"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">text_file_assertion/3</span></code></a><a class="headerlink" href="#text-file-assertion-3" title="Permalink to this heading"></a></h3>
-<p>Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using default options.</p>
+<p>Returns an assertion for checking that the given file have the expected text contents. The file is open for reading using default options. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2154,11 +2448,17 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">text_file_assertion(+atom,+atom,--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-text-file-2"><span class="std std-ref">check_text_file/2</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-binary-file-2">
 <span id="lgtunit-0-check-binary-file-2"></span><span id="index-83"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">check_binary_file/2</span></code></a><a class="headerlink" href="#check-binary-file-2" title="Permalink to this heading"></a></h3>
-<p>Checks the contents of a binary file match the expected contents.</p>
+<p>Checks the contents of a binary file match the expected contents. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2175,11 +2475,17 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_binary_file(+atom,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-binary-file-assertion-3"><span class="std std-ref">binary_file_assertion/3</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="binary-file-assertion-3">
 <span id="lgtunit-0-binary-file-assertion-3"></span><span id="index-84"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">binary_file_assertion/3</span></code></a><a class="headerlink" href="#binary-file-assertion-3" title="Permalink to this heading"></a></h3>
-<p>Returns an assertion for checking that the given file have the expected binary contents.</p>
+<p>Returns an assertion for checking that the given file have the expected binary contents. Relative file paths are interpreted as relative to the tests object path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2189,11 +2495,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_file_assertion(Path,Bytes,Assertion)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">binary_file_assertion(File,Bytes,Assertion)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">binary_file_assertion(+atom,+list(byte),--callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#lgtunit-0-check-binary-file-2"><span class="std std-ref">check_binary_file/2</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -2227,7 +2539,7 @@
 </section>
 <section id="closed-input-stream-2">
 <span id="lgtunit-0-closed-input-stream-2"></span><span id="index-86"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">closed_input_stream/2</span></code></a><a class="headerlink" href="#closed-input-stream-2" title="Permalink to this heading"></a></h3>
-<p>Opens a temporary file with the given options for reading, closes it, and returns its stream handle.</p>
+<p>Opens a temporary file in the same directory as the tests object with the given options for reading, closes it, and returns its stream handle.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2248,7 +2560,7 @@
 </section>
 <section id="closed-output-stream-2">
 <span id="lgtunit-0-closed-output-stream-2"></span><span id="index-87"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">closed_output_stream/2</span></code></a><a class="headerlink" href="#closed-output-stream-2" title="Permalink to this heading"></a></h3>
-<p>Opens a temporary file with the given options for writing, closes it, and returns its stream handle.</p>
+<p>Opens a temporary file in the same directory as the tests object with the given options for writing, closes it, and returns its stream handle.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2269,7 +2581,7 @@
 </section>
 <section id="stream-position-1">
 <span id="lgtunit-0-stream-position-1"></span><span id="index-88"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">stream_position/1</span></code></a><a class="headerlink" href="#stream-position-1" title="Permalink to this heading"></a></h3>
-<p>Returns a syntactically valid stream position.</p>
+<p>Returns a syntactically valid stream position by opening a temporary file in the same directory as the tests object.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:2,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2023-04-04,
 		comment is 'Unit tests for the "lgtunit" tool input/output testing predicates.'
 	]).
 
@@ -182,9 +182,7 @@
 	% create_text_file/2 tests
 
 	test(create_text_file_2_01, deterministic(Term == foo42)) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_text_file(File, 'foo42.'),
 		open(File, read, Stream, [type(text)]),
 		read_term(Stream, Term, []),
@@ -193,9 +191,7 @@
 	% create_binary_file/2 tests
 
 	test(create_binary_file_2_01, deterministic([Byte1,Byte2,Byte3] == [65,66,67])) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_binary_file(File, [65,66,67]),
 		open(File, read, Stream, [type(binary)]),
 		get_byte(Stream, Byte1),
@@ -206,34 +202,26 @@
 	% check_text_file/2 tests
 
 	test(check_text_file_2_01, deterministic) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_text_file(File, 'foo42.'),
 		^^check_text_file(File, 'foo42.'),
 		^^clean_file(File).
 
 	test(check_text_file_2_02, false) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_text_file(File, 'foo42.'),
 		^^check_text_file(File, 'foo24.').
 
 	% text_file_assertion/3
 
 	test(text_file_assertion_3_01, deterministic(Assertion)) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_text_file(File, 'foo42.'),
 		^^text_file_assertion(File, 'foo42.', Assertion),
 		^^clean_file(File).
 
 	test(text_file_assertion_3_02, true(\+ Assertion)) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_text_file(File, 'foo42.'),
 		^^text_file_assertion(File, 'foo24.', Assertion),
 		^^clean_file(File).
@@ -241,34 +229,26 @@
 	% check_binary_file/2 tests
 
 	test(check_binary_file_2_01, deterministic) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_binary_file(File, [65,66,67]),
 		^^check_binary_file(File, [65,66,67]),
 		^^clean_file(File).
 
 	test(check_binary_file_2_02, false) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_binary_file(File, [65,66,67]),
 		^^check_binary_file(File, [68,69,70]).
 
 	% binary_file_assertion/3
 
 	test(binary_file_assertion_3_01, deterministic(Assertion)) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_binary_file(File, [65,66,67]),
 		^^binary_file_assertion(File, [65,66,67], Assertion),
 		^^clean_file(File).
 
 	test(binary_file_assertion_3_02, true(\+ Assertion)) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		^^create_binary_file(File, [65,66,67]),
 		^^binary_file_assertion(File, [68,69,70], Assertion),
 		^^clean_file(File).
@@ -276,9 +256,7 @@
 	% clean_file/1 tests
 
 	test(clean_file_1_01, deterministic(\+ os::file_exists(File))) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, foo42, File),
+		^^file_path(foo42, File),
 		open(File, write, _),
 		^^clean_file(File).
 
