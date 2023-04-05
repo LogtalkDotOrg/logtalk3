@@ -863,7 +863,8 @@ Péter Szabó and Péter Szeredi.
 Two sets of predicates are provided, one for testing text input/output and
 one for testing binary input/output. In both cases, temporary files (possibly
 referenced by a user-defined alias) are used. The predicates allow setting,
-checking, and cleaning text/binary input/output.
+checking, and cleaning text/binary input/output. These predicate are declared
+as protected and thus called using the `(^^/1)` control construct.
 
 As an example of testing an input predicate, consider the standard `get_char/1`
 predicate. This predicate reads a single character (atom) from the current
@@ -886,25 +887,32 @@ stream alias as argument. For example, when testing the standard `get_char/2`
 predicate, we could write:
 
 	test(get_char_2_01, true(Char == 'q')) :-
-		^^set_text_input(my_alias, 'qwerty'),
-		get_char(my_alias, Char).
+		^^set_text_input(in, 'qwerty'),
+		get_char(in, Char).
 
 	test(get_char_2_02, true(Assertion)) :-
-		^^set_text_input(my_alias, 'qwerty'),
-		get_char(my_alias, _Char),
-		^^text_input_assertion(my_alias, 'werty', Assertion).
+		^^set_text_input(in, 'qwerty'),
+		get_char(in, _Char),
+		^^text_input_assertion(in, 'werty', Assertion).
 
-Testing output predicates follows the same pattern by using instead the
+Testing output predicates follows a similar pattern by using instead the
 `set_text_output/1-2` and `text_output_assertion/2-3` predicates. For
-testing binary input/output predicates, equivalent testing predicates
+example:
+
+	test(put_char_2_02, true(Assertion)) :-
+		^^set_text_output(out, 'qwert'),
+		put_char(out, y),
+		^^text_output_assertion(out, 'qwerty', Assertion).
+
+For testing binary input/output predicates, equivalent testing predicates
 are provided. There is also a small set of helper predicates for dealing
 with stream handles and stream positions. For testing with files instead
 of streams, testing predicates are provided that allow creating text and
 binary files with given contents and check text and binary files for
 expected contents.
 
-For more practical examples, check the included tests for Prolog conformance
-of standard input/output predicates.
+For more practical examples, check the included tests for Prolog standard
+conformance of built-in input/output predicates.
 
 
 Suppressing tested predicates output
