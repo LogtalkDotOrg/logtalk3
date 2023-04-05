@@ -1062,8 +1062,8 @@ test(get_char_1_02, <span class="k">true</span>(<span class="nv">Assertion</span
 setting the input for the predicate being tested, calling it, and then
 checking the results. It is also possible to work with streams other
 than the current input/output streams by using the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> predicate
-variants that take a stream as argument. For example, when testing the
-standard <code class="docutils literal notranslate"><span class="pre">get_char/2</span></code> predicate, we could write:</p>
+variants that take a stream alias as argument. For example, when testing
+the standard <code class="docutils literal notranslate"><span class="pre">get_char/2</span></code> predicate, we could write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(get_char_2_01, <span class="k">true</span>(<span class="nv">Char</span> <span class="o">==</span> <span class="s">&#39;q&#39;</span>)) <span class="o">:-</span>
     <span class="o">^^</span>set_text_input(my_alias, <span class="s">&#39;qwerty&#39;</span>),
     <span class="k">get_char</span>(my_alias, <span class="nv">Char</span>).

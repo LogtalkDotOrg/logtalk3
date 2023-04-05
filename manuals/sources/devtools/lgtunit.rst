@@ -1007,8 +1007,8 @@ As you can see in the above example, the testing pattern consist on
 setting the input for the predicate being tested, calling it, and then
 checking the results. It is also possible to work with streams other
 than the current input/output streams by using the ``lgtunit`` predicate
-variants that take a stream as argument. For example, when testing the
-standard ``get_char/2`` predicate, we could write:
+variants that take a stream alias as argument. For example, when testing
+the standard ``get_char/2`` predicate, we could write:
 
 ::
 
