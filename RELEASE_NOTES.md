@@ -28,8 +28,17 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for `mode/2` directive `zero_or_more_or_error` and
+`one_or_more_or_error` number of proofs.
+
 * ADDED: Support for a `info/2` directive `since` key to document the version
 that added a predicate.
+
+Documentation
+-------------
+
+* IMPROVED: Handbook documentation on documenting predicates using the `mode/2`
+directive.
 
 Tools
 -----

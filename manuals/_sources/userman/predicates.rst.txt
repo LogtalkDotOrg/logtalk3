@@ -203,40 +203,47 @@ often have different determinism. The possible values are:
 ``one_or_more``
    Predicate has one or more proofs.
 ``zero_or_error``
-   Predicate either fails or throws an error (see below).
+   Predicate either fails or throws an error.
 ``one_or_error``
-   Predicate either succeeds once or throws an error (see below).
+   Predicate either succeeds once or throws an error.
 ``zero_or_one_or_error``
-   Predicate either succeeds once or fails or throws an error (see below).
+   Predicate succeeds once or fails or throws an error.
+``zero_or_more_or_error``
+   Predicate may fail or succeed multiple times or throw an error.
+``one_or_more_or_error``
+   Predicate may succeed one or more times or throw an error.
 ``error``
    Predicate will throw an error.
 
-Mode declarations can also be used to document that some call modes will
-throw an error. For instance, regarding the ``arg/3`` and ``open/3`` ISO
-Prolog built-in predicates, we may write:
+The last six values support documenting that some call modes may throw an
+error or will throw an error despite the calls complying with the argument
+types and instantiation modes. As an example, consider the ``open/3`` ISO
+Prolog built-in predicate. We may write:
 
 ::
 
-   :- mode(arg(-, -, +), error).
-   :- mode(open(@, @, --), one_or_error).
+   :- mode(open(@source_sink, @io_mode, --stream), one_or_error).
 
-Note that most predicates have more than one valid mode implying several
+In this case, the mode directive tells the user that a valid call can still
+throw an error (there may be e.g. a permission error opening the specified
+source or sink).
+
+Note that some predicates have more than one valid mode implying several
 mode directives. For example, to document the possible use modes of the
-``atom_concat/3`` ISO built-in predicate we would write:
+ISO Prolog ``atom_concat/3`` built-in predicate we would write:
 
 ::
 
    :- mode(atom_concat(?atom, ?atom, +atom), one_or_more).
    :- mode(atom_concat(+atom, +atom, -atom), zero_or_one).
 
-Some old Prolog compilers supported some sort of mode directives to
-improve performance. To the best of my knowledge, there is no modern
-Prolog compiler supporting this kind of directive for that purpose.
-The current Logtalk version simply parses this directive for collecting
-its information for use in the :ref:`reflection API <reflection_reflection>`
-(assuming the :ref:`source_data <flag_source_data>` flag is turned on).
-In any case, the use of mode directives is a good starting point for
-documenting your predicates.
+Some old Prolog compilers supported some sort of mode directives to improve
+performance. To the best of my knowledge, there is no modern Prolog compiler
+supporting this kind of directive for that purpose. The current Logtalk version
+simply parses this directive for collecting its information for use in the
+:ref:`reflection API <reflection_reflection>` (assuming the
+:ref:`source_data <flag_source_data>` flag is turned on). In any case, the use
+of mode directives is a good starting point for documenting your predicates.
 
 .. _predicates_meta:
 

@@ -331,37 +331,43 @@ often have different determinism. The possible values are:</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></dt><dd><p>Predicate has one or more proofs.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_error</span></code></dt><dd><p>Predicate either fails or throws an error (see below).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_error</span></code></dt><dd><p>Predicate either fails or throws an error.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></dt><dd><p>Predicate either succeeds once or throws an error (see below).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></dt><dd><p>Predicate either succeeds once or throws an error.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></dt><dd><p>Predicate either succeeds once or fails or throws an error (see below).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></dt><dd><p>Predicate succeeds once or fails or throws an error.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more_or_error</span></code></dt><dd><p>Predicate may fail or succeed multiple times or throw an error.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">one_or_more_or_error</span></code></dt><dd><p>Predicate may succeed one or more times or throw an error.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">error</span></code></dt><dd><p>Predicate will throw an error.</p>
 </dd>
 </dl>
-<p>Mode declarations can also be used to document that some call modes will
-throw an error. For instance, regarding the <code class="docutils literal notranslate"><span class="pre">arg/3</span></code> and <code class="docutils literal notranslate"><span class="pre">open/3</span></code> ISO
-Prolog built-in predicates, we may write:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(<span class="k">arg</span>(<span class="o">-</span>, <span class="o">-</span>, <span class="o">+</span>), error).
-<span class="p">:- </span><span class="k">mode</span>(<span class="k">open</span>(<span class="o">@</span>, <span class="o">@</span>, <span class="o">--</span>), one_or_error).
+<p>The last six values support documenting that some call modes may throw an
+error or will throw an error despite the calls complying with the argument
+types and instantiation modes. As an example, consider the <code class="docutils literal notranslate"><span class="pre">open/3</span></code> ISO
+Prolog built-in predicate. We may write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(<span class="k">open</span>(<span class="o">@</span>source_sink, <span class="o">@</span>io_mode, <span class="o">--</span>stream), one_or_error).
 </pre></div>
 </div>
-<p>Note that most predicates have more than one valid mode implying several
+<p>In this case, the mode directive tells the user that a valid call can still
+throw an error (there may be e.g. a permission error opening the specified
+source or sink).</p>
+<p>Note that some predicates have more than one valid mode implying several
 mode directives. For example, to document the possible use modes of the
-<code class="docutils literal notranslate"><span class="pre">atom_concat/3</span></code> ISO built-in predicate we would write:</p>
+ISO Prolog <code class="docutils literal notranslate"><span class="pre">atom_concat/3</span></code> built-in predicate we would write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(<span class="k">atom_concat</span>(<span class="o">?</span>atom, <span class="o">?</span>atom, <span class="o">+</span>atom), one_or_more).
 <span class="p">:- </span><span class="k">mode</span>(<span class="k">atom_concat</span>(<span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">-</span>atom), zero_or_one).
 </pre></div>
 </div>
-<p>Some old Prolog compilers supported some sort of mode directives to
-improve performance. To the best of my knowledge, there is no modern
-Prolog compiler supporting this kind of directive for that purpose.
-The current Logtalk version simply parses this directive for collecting
-its information for use in the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a>
-(assuming the <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag is turned on).
-In any case, the use of mode directives is a good starting point for
-documenting your predicates.</p>
+<p>Some old Prolog compilers supported some sort of mode directives to improve
+performance. To the best of my knowledge, there is no modern Prolog compiler
+supporting this kind of directive for that purpose. The current Logtalk version
+simply parses this directive for collecting its information for use in the
+<a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> (assuming the
+<a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag is turned on). In any case, the use
+of mode directives is a good starting point for documenting your predicates.</p>
 </section>
 <section id="meta-predicate-directive">
 <span id="predicates-meta"></span><h3>Meta-predicate directive<a class="headerlink" href="#meta-predicate-directive" title="Permalink to this heading"></a></h3>
