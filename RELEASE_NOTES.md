@@ -62,6 +62,11 @@ remaining relative file path parts.
 * IMPROVED: The `lgtunit` tool documentation of the input/output testing
 predicates.
 
+Tests
+-----
+
+* ADDED: Tests for the ISO Prolog standard line and block comment syntax.
+
 
 3.64.0 - March 28, 2023
 =======================
