@@ -36,9 +36,9 @@
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 4:2:0,
+		version is 4:3:0,
 		author is 'Paulo Moura',
-		date is 2021-08-17,
+		date is 2023-04-08,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_report))``.'
@@ -192,50 +192,23 @@
 	write_test_element_tags(passed_test(File, Position, Note, Time), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object), type-(Short::Object), method-Name, time-Time, result-'Pass']),
-		write_xml_open_tag(traits, []),
-		write_xml_empty_tag(trait, [name-file, value-Short]),
-		write_xml_empty_tag(trait, [name-position, value-Position]),
-		(	tests_url(Short, Position, URL) ->
-			write_xml_empty_tag(trait, [name-url, value-URL])
-		;	true
-		),
-		(	Note == '' ->
-			true
-		;	write_xml_empty_tag(trait, [name-note, value-Note])
-		),
-		write_xml_close_tag(traits),
+		write_test_element_traits(Short, Position, Note),
 		write_xml_close_tag(test).
 	write_test_element_tags(non_deterministic_success(File, Position, Note, Time), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object), type-(Short::Object), method-Name, time-Time, result-'Fail']),
-		write_xml_open_tag(traits, []),
-		write_xml_empty_tag(trait, [name-file, value-Short]),
-		write_xml_empty_tag(trait, [name-position, value-Position]),
-		(	tests_url(Short, Position, URL) ->
-			write_xml_empty_tag(trait, [name-url, value-URL])
-		;	true
-		),
-		write_xml_close_tag(traits),
+		write_test_element_traits(Short, Position, Note),
 		write_xml_open_tag(failure, []),
-		test_message(Note, 'Non-deterministic success', Message),
-		write_xml_cdata_element(message, [], Message),
+		write_xml_cdata_element(message, [], 'Non-deterministic success'),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
 	write_test_element_tags(failed_test(File, Position, Reason, Note, Time), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object), type-(Short::Object), method-Name, time-Time, result-'Fail']),
-		write_xml_open_tag(traits, []),
-		write_xml_empty_tag(trait, [name-file, value-Short]),
-		write_xml_empty_tag(trait, [name-position, value-Position]),
-		(	tests_url(Short, Position, URL) ->
-			write_xml_empty_tag(trait, [name-url, value-URL])
-		;	true
-		),
-		write_xml_close_tag(traits),
+		write_test_element_traits(Short, Position, Note),
 		write_xml_open_tag(failure, []),
 		failed_test(Reason, Description, _, Error),
-		test_message(Note, Description, Message),
-		write_xml_cdata_element(message, [], Message),
+		write_xml_cdata_element(message, [], Description),
 		(	Error == '' ->
 			true
 		;	write_xml_cdata_element('stack-trace', [], Error)
@@ -245,16 +218,8 @@
 	write_test_element_tags(skipped_test(File, Position, Note), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object), type-(Short::Object), method-Name, time-0.0, result-'Skip']),
-		write_xml_open_tag(traits, []),
-		write_xml_empty_tag(trait, [name-file, value-Short]),
-		write_xml_empty_tag(trait, [name-position, value-Position]),
-		(	tests_url(Short, Position, URL) ->
-			write_xml_empty_tag(trait, [name-url, value-URL])
-		;	true
-		),
-		write_xml_close_tag(traits),
-		test_message(Note, 'Skipped test', Reason),
-		write_xml_cdata_element(reason, [], Reason),
+		write_test_element_traits(Short, Position, Note),
+		write_xml_cdata_element(reason, [], 'Skipped test'),
 		write_xml_close_tag(test).
 
 	% failed_test(Reason, Description, Type, Error)
@@ -270,13 +235,6 @@
 	failed_test(quick_check_error(Error, _, _), 'QuickCheck test error', quick_check_error, Error).
 	failed_test(step_error(_, Error), 'Test step error', step_error, Error).
 	failed_test(step_failure(Step), 'Test step failure', step_failure, Step).
-
-	test_message(Note, Description, Message) :-
-		(	Note == '' ->
-			Message = Description
-		;	atom_concat(Description, ': ', Message0),
-			atom_concat(Message0, Note, Message)
-		).
 
 	% "assembly" tag attributes
 
@@ -371,6 +329,22 @@
 			true
 		;	ShortPath = Path
 		).
+
+	% write test element auxiliary predicates
+
+	write_test_element_traits(Short, Position, Note) :-
+		write_xml_open_tag(traits, []),
+		write_xml_empty_tag(trait, [name-file, value-Short]),
+		write_xml_empty_tag(trait, [name-position, value-Position]),
+		(	tests_url(Short, Position, URL) ->
+			write_xml_empty_tag(trait, [name-url, value-URL])
+		;	true
+		),
+		(	Note \== '' ->
+			write_xml_empty_tag(property, [name-note, value-Note])
+		;	true
+		),
+		write_xml_close_tag(traits).
 
 	tests_url(Short, Position, URL) :-
 		% bypass the compiler as the flag is only created after loading this file

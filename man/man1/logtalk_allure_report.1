@@ -1,4 +1,4 @@
-.TH logtalk_allure_report 1 "September 17, 2021" "Logtalk 3.51.0" "Logtalk Documentation"
+.TH logtalk_allure_report 1 "April 8, 2023" "Logtalk 3.65.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_allure_report \- Logtalk script for generating Allure reports
@@ -17,7 +17,7 @@ logtalk_allure_report \- Logtalk script for generating Allure reports
 .B logtalk_allure_report -h
 
 .SH DESCRIPTION
-\fBlogtalk_allure_report\fR is a script for generating Allure reports. Requires running first the \fIlogtalk_tester\fR script using the \fI-f xunit\fR (or \fI-f xunit_net_v2\fR) command-line option.
+\fBlogtalk_allure_report\fR is a script for generating Allure reports (version 2.21.0 or later). Requires running first the \fIlogtalk_tester\fR script using the \fI-f xunit\fR (or \fI-f xunit_net_v2\fR) command-line option.
 
 .SH OPTIONS
 .TP
@@ -75,7 +75,7 @@ Save the processed test results and the report data to permanent directories so 
 \fBallure open "$HOME/my_project/allure_report"\fR
 
 .SH IMPLEMENTATION NOTES
-Tested using Allure 2.13.8.
+Tested using Allure 2.21.0.
 
 .SH "SEE ALSO"
 The Allure website at https://docs.qameta.io/allure-report/

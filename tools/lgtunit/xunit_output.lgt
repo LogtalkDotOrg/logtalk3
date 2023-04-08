@@ -29,9 +29,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2021-05-31,
+		date is 2023-04-08,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -126,23 +126,28 @@
 		fail.
 	write_test_elements(_).
 
-	write_testcase_element_tags(passed_test(_File, _Position, _Note, Time), ClassName, Name) :-
-		write_xml_empty_tag(testcase, [classname-ClassName, name-Name, time-Time]).
+	write_testcase_element_tags(passed_test(File, Position, Note, Time), ClassName, Name) :-
+		suppress_path_prefix(File, Short),
+		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-Time]),
+		write_testcase_properties(Short, Position, Note),
+		write_xml_close_tag(testcase).
 	write_testcase_element_tags(non_deterministic_success(File, Position, Note, Time), ClassName, Name) :-
 		write_testcase_element_tags(failed_test(File, Position, non_deterministic_success, Note, Time), ClassName, Name).
-	write_testcase_element_tags(failed_test(_File, _Position, Reason, Note, Time), ClassName, Name) :-
+	write_testcase_element_tags(failed_test(File, Position, Reason, Note, Time), ClassName, Name) :-
+		suppress_path_prefix(File, Short),
 		failed_test(Reason, Description, Type, Error),
-		test_message(Note, Description, Message),
 		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-Time]),
+		write_testcase_properties(Short, Position, Note),
 		(	Error == '' ->
-			write_xml_empty_tag(failure, [message-Message, type-Type])
-		;	writeq_xml_cdata_element(failure, [message-Message, type-Type], Error)
+			write_xml_empty_tag(failure, [message-Description, type-Type])
+		;	writeq_xml_cdata_element(failure, [message-Description, type-Type], Error)
 		),
 		write_xml_close_tag(testcase).
-	write_testcase_element_tags(skipped_test(_File, _Position, Note), ClassName, Name) :-
+	write_testcase_element_tags(skipped_test(File, Position, Note), ClassName, Name) :-
+		suppress_path_prefix(File, Short),
 		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-0.0]),
-		test_message(Note, 'Skipped test', Message),
-		write_xml_empty_tag(skipped, [message-Message]),
+		write_testcase_properties(Short, Position, Note),
+		write_xml_empty_tag(skipped, [message-'Skipped test']),
 		write_xml_close_tag(testcase).
 
 	% failed_test(Reason, Description, Type, Error)
@@ -158,13 +163,6 @@
 	failed_test(quick_check_error(Error, _, _), 'QuickCheck test error', quick_check_error, Error).
 	failed_test(step_error(_, Error), 'Test step error', step_error, Error).
 	failed_test(step_failure(Step), 'Test step failure', step_failure, Step).
-
-	test_message(Note, Description, Message) :-
-		(	Note == '' ->
-			Message = Description
-		;	atom_concat(Description, ': ', Message0),
-			atom_concat(Message0, Note, Message)
-		).
 
 	% "testsuites" tag attributes
 
@@ -227,6 +225,45 @@
 	testsuite_timestamp(TimeStamp) :-
 		message_cache_(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp).
+
+	% "testcase" tag properties
+
+	suppress_path_prefix(Path, ShortPath) :-
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(suppress_path_prefix, Prefix)},
+		(	atom_concat(Prefix, ShortPath, Path) ->
+			true
+		;	ShortPath = Path
+		).
+
+	write_testcase_properties(Short, Position, Note) :-
+		write_xml_open_tag(properties, []),
+		write_xml_empty_tag(property, [name-file, value-Short]),
+		write_xml_empty_tag(property, [name-position, value-Position]),
+		(	tests_url(Short, Position, URL) ->
+			write_xml_empty_tag(property, [name-url, value-URL])
+		;	true
+		),
+		(	Note \== '' ->
+			write_xml_empty_tag(property, [name-note, value-Note])
+		;	true
+		),
+		write_xml_close_tag(properties).
+
+	tests_url(Short, Position, URL) :-
+		% bypass the compiler as the flag is only created after loading this file
+		{current_logtalk_flag(tests_base_url, BaseURL)},
+		BaseURL \== '',
+		Position = Line-_,
+		atom_concat(BaseURL, Short, URL0),
+		(	sub_atom(BaseURL, _, _, _, bitbucket) ->
+			atom_concat(URL0, '#', URL1)
+		;	% assume GitHub or GitLab host
+			atom_concat(URL0, '#L', URL1)
+		),
+		number_chars(Line, LineChars),
+		atom_chars(LineAtom, LineChars),
+		atom_concat(URL1, LineAtom, URL).
 
 	% date and time auxiliary predicates
 

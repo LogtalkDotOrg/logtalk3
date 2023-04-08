@@ -52,6 +52,16 @@ working directory.
 * CHANGED: The `lgtunit` tool `file_path/2` to also accept absolute file paths
 (further expanding them to resolve any remaining relative file path parts).
 
+* CHANGED: The `lgtunit` tool support for generating Allure reports now
+requires version 2.21.0 or later.
+
+* CHANGED: The `lgtunit` tool `xunit_output` and `xunit_report` formats to
+include as test case properties the test file, test lines, test URL, and
+test note (if any).
+
+* CHANGED: The `lgtunit` tool `xunit_net_v2_output` and `xunit_net_v2_report`
+formats now include the test note (if any) as a test trait for all outcomes.
+
 * ADDED: Support to the `lgtdoc` tool to output `info/2` directive `since`
 keys.
 
