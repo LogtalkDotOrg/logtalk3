@@ -31,9 +31,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2022-02-28,
+		date is 2023-04-09,
 		comment is 'Unit tests for the de facto Prolog standard length/2 built-in predicate.'
 	]).
 
@@ -131,12 +131,12 @@
 
 	:- else.
 
-		- test(commons_length_2_26, error(_)) :-
+		- test(commons_length_2_26, error(_), [note('STO')]) :-
 			% STO; Undefined.
 			L = [_| L],
 			{length(L, _)}.
 
-		- test(commons_length_2_27, error(_)) :-
+		- test(commons_length_2_27, error(_), [note('STO')]) :-
 			% STO; Undefined.
 			L = [_| L],
 			{length(L, 3)}.

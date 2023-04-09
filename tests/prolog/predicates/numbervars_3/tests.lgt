@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-12-09,
+		date is 2023-04-09,
 		comment is 'Unit tests for the de facto Prolog standard numbervars/3 built-in predicate.'
 	]).
 
@@ -97,12 +97,12 @@
 
 	:- else.
 
-		- test(lgt_numbervars_3_11, true(N == 0)) :-
+		- test(lgt_numbervars_3_11, true(N == 0), [note('STO')]) :-
 			% STO; Undefined.
 			X = f(X),
 			{numbervars(X, 0, N)}.
 
-		- test(lgt_numbervars_3_12, true((N == 3, A == '$VAR'(0), B == '$VAR'(1), C == '$VAR'(2)))) :-
+		- test(lgt_numbervars_3_12, true((N == 3, A == '$VAR'(0), B == '$VAR'(1), C == '$VAR'(2))), [note('STO')]) :-
 			% STO; Undefined.
 			L = [A,B,C| L],
 			{numbervars(L, 0, N)}.

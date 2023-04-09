@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-12-15,
+		date is 2023-04-09,
 		comment is 'Unit tests for the de facto Prolog standard msort/2 built-in predicate.'
 	]).
 
@@ -45,12 +45,16 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
+
 		test(lgt_msort_2_04, true) :-
 			{msort([V], V)}.
+
 	:- else.
-		- test(lgt_msort_2_04, true) :-
+
+		- test(lgt_msort_2_04, true, [note('STO')]) :-
 			% STO; Undefined.
 			{msort([V], V)}.
+
 	:- endif.
 
 	test(lgt_msort_2_05, true) :-

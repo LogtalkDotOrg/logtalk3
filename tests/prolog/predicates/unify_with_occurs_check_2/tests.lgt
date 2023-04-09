@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2022-12-31,
+		date is 2023-04-09,
 		comment is 'Unit tests for the ISO Prolog standard unify_with_occurs_check/2 built-in predicate.'
 	]).
 
@@ -95,7 +95,7 @@
 
 	:- else.
 
-		- test(lgt_unify_with_occurs_check_2_18, true(v(A,B,C) == v(1,2,3))) :-
+		- test(lgt_unify_with_occurs_check_2_18, true(v(A,B,C) == v(1,2,3)), [note('STO')]) :-
 			% STO; Undefined.
 			{L1 = [1,2,3| L1], L2 = [A,B,C| L2], unify_with_occurs_check(L1, L2)}.
 

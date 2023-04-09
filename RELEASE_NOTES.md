@@ -77,6 +77,8 @@ Tests
 
 * ADDED: Tests for the ISO Prolog standard line and block comment syntax.
 
+* IMPROVED: Add `note/1` option to tests that are skipped due to being STO.
+
 
 3.64.0 - March 28, 2023
 =======================

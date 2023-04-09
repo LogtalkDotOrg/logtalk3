@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-03-13,
+		date is 2023-04-09,
 		comment is 'Unit tests for the ISO Prolog standard sort/2 built-in predicate.'
 	]).
 
@@ -51,7 +51,7 @@
 
 	:- else.
 
-		- test(iso_sort_2_04, true) :-
+		- test(iso_sort_2_04, true, [note('STO')]) :-
 			% STO; Undefined.
 			{sort([V], V)}.
 
@@ -111,7 +111,7 @@
 
 	:- else.
 
-		- test(lgt_sort_2_18, error(type_error(list,L))) :-
+		- test(lgt_sort_2_18, error(type_error(list,L)), [note('STO')]) :-
 			% STO; Undefined.
 			{L = [3,1,2| L], sort(L, _)}.
 

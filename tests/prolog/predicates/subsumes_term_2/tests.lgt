@@ -23,60 +23,56 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2022-04-06,
+		date is 2023-04-09,
 		comment is 'Unit tests for the ISO Prolog standard subsumes_term/2 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.2.4.4
 
-	succeeds(iso_subsumes_term_2_01) :-
+	test(iso_subsumes_term_2_01, true) :-
 		{subsumes_term(a, a)}.
 
-	succeeds(iso_subsumes_term_2_02) :-
+	test(iso_subsumes_term_2_02, true) :-
 		{subsumes_term(f(_X,_Y), f(Z,Z))}.
 
-	fails(iso_subsumes_term_2_03) :-
+	test(iso_subsumes_term_2_03, false) :-
 		{subsumes_term(f(Z,Z), f(_X,_Y))}.
 
-	fails(iso_subsumes_term_2_04) :-
+	test(iso_subsumes_term_2_04, false) :-
 		{subsumes_term(g(X), g(f(X)))}.
 
-	fails(iso_subsumes_term_2_05) :-
+	test(iso_subsumes_term_2_05, false) :-
 		{subsumes_term(X, f(X))}.
 
-	succeeds(iso_subsumes_term_2_06) :-
+	test(iso_subsumes_term_2_06, true) :-
 		{subsumes_term(X, Y), subsumes_term(Y, f(X))}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_subsumes_term_2_07) :-
+	test(lgt_subsumes_term_2_07, true) :-
 		{subsumes_term(A, A)}.
 
-	succeeds(lgt_subsumes_term_2_08) :-
+	test(lgt_subsumes_term_2_08, true) :-
 		{subsumes_term(t(A,B), t(A,B))}.
 
-	succeeds(lgt_subsumes_term_2_09) :-
+	test(lgt_subsumes_term_2_09, true) :-
 		{subsumes_term(A-B, A-B)}.
 
-	succeeds(lgt_subsumes_term_2_10) :-
+	test(lgt_subsumes_term_2_10, true) :-
 		{subsumes_term(c(A, [e(B)]), c(A, [e(B)]))}.
 
-	succeeds(lgt_subsumes_term_2_11) :-
+	test(lgt_subsumes_term_2_11, true) :-
 		{subsumes_term(_A, _B)}.
 
-	succeeds(lgt_subsumes_term_2_12) :-
+	test(lgt_subsumes_term_2_12, true) :-
 		{subsumes_term(t(_A,_B), t(_C,_D))}.
 
-	succeeds(lgt_subsumes_term_2_13) :-
+	test(lgt_subsumes_term_2_13, true) :-
 		{subsumes_term(_A-_B, _C-_D)}.
 
-	succeeds(lgt_subsumes_term_2_14) :-
+	test(lgt_subsumes_term_2_14, true) :-
 		{subsumes_term(c(_A, [e(_B)]), c(_C, [e(_D)]))}.
 
 	:- if((
@@ -85,31 +81,31 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		succeeds(lgt_subsumes_term_2_15) :-
+		test(lgt_subsumes_term_2_15, true) :-
 			X = f(X),
 			{subsumes_term(f(_), f(X))}.
 
-		fails(lgt_subsumes_term_2_16) :-
+		test(lgt_subsumes_term_2_16, false) :-
 			X = f(X),
 			{subsumes_term(f(X), f(_))}.
 
-		succeeds(lgt_subsumes_term_2_17) :-
+		test(lgt_subsumes_term_2_17, true) :-
 			X = f(X),
 			{subsumes_term(X, X)}.
 
 	:- else.
 
-		- succeeds(lgt_subsumes_term_2_15) :-
+		- test(lgt_subsumes_term_2_15, true, [note('STO')]) :-
 			% STO; Undefined.
 			X = f(X),
 			{subsumes_term(f(_), f(X))}.
 
-		- fails(lgt_subsumes_term_2_16) :-
+		- test(lgt_subsumes_term_2_16, false, [note('STO')]) :-
 			% STO; Undefined.
 			X = f(X),
 			{subsumes_term(f(X), f(_))}.
 
-		- succeeds(lgt_subsumes_term_2_17) :-
+		- test(lgt_subsumes_term_2_17, true, [note('STO')]) :-
 			% STO; Undefined.
 			X = f(X),
 			{subsumes_term(X, X)}.

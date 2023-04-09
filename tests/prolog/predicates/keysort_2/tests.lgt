@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2022-03-13,
+		date is 2023-04-09,
 		comment is 'Unit tests for the ISO Prolog standard keysort/2 built-in predicate.'
 	]).
 
@@ -40,7 +40,7 @@
 	test(iso_keysort_2_03, true(X == 2)) :-
 		{keysort([X-1,1-1],[2-1,1-1])}.
 
-	- test(iso_keysort_2_04, true) :-
+	- test(iso_keysort_2_04, true, [note('STO')]) :-
 		% STO; Undefined.
 		{Pairs = [1-2|Pairs], keysort(Pairs, _Sorted)}.
 
@@ -52,7 +52,7 @@
 		test(iso_keysort_2_05, true) :-
 			{keysort([V-V], V)}.
 	:- else.
-		- test(iso_keysort_2_05, true) :-
+		- test(iso_keysort_2_05, true, [note('STO')]) :-
 			% STO; Undefined.
 			{keysort([V-V], V)}.
 	:- endif.
@@ -117,7 +117,7 @@
 
 	:- else.
 
-		- test(lgt_keysort_2_21, error(type_error(list,L))) :-
+		- test(lgt_keysort_2_21, error(type_error(list,L)), [note('STO')]) :-
 			% STO; Undefined.
 			{L = [c-3,a-1,b-2| L], keysort(L, _)}.
 

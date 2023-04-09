@@ -23,82 +23,78 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-12-09,
+		date is 2023-04-09,
 		comment is 'Unit tests for the ISO Prolog standard term comparison built-in predicates.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.4.1.4
 
-	succeeds(iso_term_comparison_01) :-
+	test(iso_term_comparison_01, true) :-
 		{'@=<'(1.0, 1)}.
 
-	succeeds(iso_term_comparison_02) :-
+	test(iso_term_comparison_02, true) :-
 		{'@<'(1.0, 1)}.
 
-	fails(iso_term_comparison_03) :-
+	test(iso_term_comparison_03, false) :-
 		{'\\=='(1, 1)}.
 
-	succeeds(iso_term_comparison_04) :-
+	test(iso_term_comparison_04, true) :-
 		{'@=<'(aardvark, zebra)}.
 
-	succeeds(iso_term_comparison_05) :-
+	test(iso_term_comparison_05, true) :-
 		{'@=<'(short, short)}.
 
-	succeeds(iso_term_comparison_06) :-
+	test(iso_term_comparison_06, true) :-
 		{'@=<'(short, shorter)}.
 
-	fails(iso_term_comparison_07) :-
+	test(iso_term_comparison_07, false) :-
 		{'@>='(short, shorter)}.
 
-	fails(iso_term_comparison_08) :-
+	test(iso_term_comparison_08, false) :-
 		{'@<'(foo(a,b), north(a))}.
 
-	succeeds(iso_term_comparison_09) :-
+	test(iso_term_comparison_09, true) :-
 		{'@>'(foo(b), foo(a))}.
 
-	succeeds(iso_term_comparison_10) :-
+	test(iso_term_comparison_10, true) :-
 		{'@<'(foo(a, _X), foo(b, _Y))}.
 
-	succeeds(iso_term_comparison_11) :-
+	test(iso_term_comparison_11, true) :-
 		(	{'@<'(foo(_X, a), foo(_Y, b))} ->
 			true
 		;	true
 		).
 
-	succeeds(iso_term_comparison_12) :-
+	test(iso_term_comparison_12, true) :-
 		{'@=<'(X, X)}.
 
-	succeeds(iso_term_comparison_13) :-
+	test(iso_term_comparison_13, true) :-
 		{'=='(X, X)}.
 
-	succeeds(iso_term_comparison_14) :-
+	test(iso_term_comparison_14, true) :-
 		(	{'@=<'(_X, _Y)} ->
 			true
 		;	true
 		).
 
-	fails(iso_term_comparison_15) :-
+	test(iso_term_comparison_15, false) :-
 		{'=='(_X, _Y)}.
 
-	succeeds(iso_term_comparison_16) :-
+	test(iso_term_comparison_16, true) :-
 		{\==(_, _)}.
 
-	fails(iso_term_comparison_17) :-
+	test(iso_term_comparison_17, false) :-
 		{'=='(_, _)}.
 
-	succeeds(iso_term_comparison_18) :-
+	test(iso_term_comparison_18, true) :-
 		(	{'@=<'(_, _)} ->
 			true
 		;	true
 		).
 
-	succeeds(iso_term_comparison_19) :-
+	test(iso_term_comparison_19, true) :-
 		(	{'@=<'(foo(_X, a), foo(_Y, b))} ->
 			true
 		;	true
@@ -106,60 +102,60 @@
 
 	% standard order tests from the Logtalk portability work
 
-	succeeds(lgt_term_comparison_20) :-
+	test(lgt_term_comparison_20, true) :-
 		{'@<'(_X, 1.1)}.
 
-	succeeds(lgt_term_comparison_21) :-
+	test(lgt_term_comparison_21, true) :-
 		{'@<'(1.1, 1)}.
 
-	succeeds(lgt_term_comparison_22) :-
+	test(lgt_term_comparison_22, true) :-
 		{'@<'(1, a)}.
 
-	succeeds(lgt_term_comparison_23) :-
+	test(lgt_term_comparison_23, true) :-
 		{'@<'(a, a(_))}.
 
-	succeeds(lgt_term_comparison_24) :-
+	test(lgt_term_comparison_24, true) :-
 		{'@<'(a(_), a(_,_))}.
 
-	succeeds(lgt_term_comparison_25) :-
+	test(lgt_term_comparison_25, true) :-
 		{'@<'(b(_), a(_,_))}.
 
-	succeeds(lgt_term_comparison_26) :-
+	test(lgt_term_comparison_26, true) :-
 		{'@<'(a(1,2), a(1,3))}.
 
-	succeeds(lgt_term_comparison_27) :-
+	test(lgt_term_comparison_27, true) :-
 		{'@<'(a(1,2), b(1,2))}.
 
 	% other tests
 
-	succeeds(lgt_term_comparison_28) :-
+	test(lgt_term_comparison_28, true) :-
 		{'@>='((4,1,0), (4,0,1))}.
 
-	fails(lgt_term_comparison_29) :-
+	test(lgt_term_comparison_29, false) :-
 		{'@>='((4,0,1), (4,1,0))}.
 
-	fails(lgt_term_comparison_30) :-
+	test(lgt_term_comparison_30, false) :-
 		{'@=<'((4,1,0), (4,0,1))}.
 
-	succeeds(lgt_term_comparison_31) :-
+	test(lgt_term_comparison_31, true) :-
 		{'@=<'((4,0,1), (4,1,0))}.
 
-	succeeds(lgt_term_comparison_32) :-
+	test(lgt_term_comparison_32, true) :-
 		{'@>'((4,1,0), (4,0,1))}.
 
-	fails(lgt_term_comparison_33) :-
+	test(lgt_term_comparison_33, false) :-
 		{'@>'((4,0,1), (4,1,0))}.
 
-	fails(lgt_term_comparison_34) :-
+	test(lgt_term_comparison_34, false) :-
 		{'@<'((4,1,0), (4,0,1))}.
 
-	succeeds(lgt_term_comparison_35) :-
+	test(lgt_term_comparison_35, true) :-
 		{'@<'((4,0,1), (4,1,0))}.
 
-	succeeds(lgt_term_comparison_36) :-
+	test(lgt_term_comparison_36, true) :-
 		{'@<'(b/0, a//0)}.
 
-	fails(lgt_term_comparison_37) :-
+	test(lgt_term_comparison_37, false) :-
 		{'@<'(a//0, a/0)}.
 
 	:- if((
@@ -168,26 +164,26 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		succeeds(lgt_term_comparison_38) :-
+		test(lgt_term_comparison_38, true) :-
 			{X = f(X), Y = f(Y), X @>= Y}.
 
-		fails(lgt_term_comparison_39) :-
+		test(lgt_term_comparison_39, false) :-
 			{X = f(X), Y = f(Y), X @< Y}.
 
-		succeeds(lgt_term_comparison_40) :-
+		test(lgt_term_comparison_40, true) :-
 			{X = f(X), Y = f(Y), X == Y}.
 
 	:- else.
 
-		- succeeds(lgt_term_comparison_38) :-
+		- test(lgt_term_comparison_38, true, [note('STO')]) :-
 			% STO; Undefined.
 			{X = f(X), Y = f(Y), X @>= Y}.
 
-		- fails(lgt_term_comparison_39) :-
+		- test(lgt_term_comparison_39, false, [note('STO')]) :-
 			% STO; Undefined.
 			{X = f(X), Y = f(Y), X @< Y}.
 
-		- succeeds(lgt_term_comparison_40) :-
+		- test(lgt_term_comparison_40, true, [note('STO')]) :-
 			% STO; Undefined.
 			{X = f(X), Y = f(Y), X == Y}.
 
