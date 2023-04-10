@@ -38,9 +38,9 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2022-10-28,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -338,10 +338,8 @@ goal_expansion(X = 1, X = 2).
 	% test set actions
 
 	cleanup :-
-		^^file_path('test_files/target1.pl', Path1),
-		(os::file_exists(Path1) -> os::delete_file(Path1); true),
-		^^file_path('test_files/target2.pl', Path2),
-		(os::file_exists(Path2) -> os::delete_file(Path2); true),
+		^^clean_file('test_files/target1.pl'),
+		^^clean_file('test_files/target2.pl'),
 		^^clean_text_output.
 
 :- end_object.

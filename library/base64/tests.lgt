@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "base64" library.'
 	]).
 
@@ -33,13 +33,7 @@
 	cover(base64url).
 
 	cleanup :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		os::path_concat(Directory, 'test_files/dump_base64.txt', Path),
-		(	os::file_exists(Path) ->
-			os::delete_file(Path)
-		;	true
-		).
+		^^clean_file('test_files/dump_base64.txt').
 
 	test(base64_parse_2_atom, true) :-
 		base64::parse(atom('VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIHRoZSBsYXp5IGRvZy4='), Bytes),
@@ -69,18 +63,14 @@
 		^^assertion(Base64 == [86,71,104,108,73,72,70,49,97,87,78,114,73,71,74,121,98,51,100,117,73,71,90,118,101,67,66,113,100,87,49,119,99,121,66,118,100,109,86,121,73,72,82,111,90,83,66,115,89,88,112,53,73,71,82,118,90,121,52,61]).
 
 	test(base64_roundtrip_01, true) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		os::path_concat(Directory, 'test_files/logtalk.png', Path),
+		^^file_path('test_files/logtalk.png', Path),
 		reader::file_to_bytes(Path, Bytes0),
 		base64::generate(codes(Codes), Bytes0),
 		base64::parse(codes(Codes), Bytes),
 		^^assertion(Bytes == Bytes0).
 
 	test(base64_roundtrip_02, true) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		os::path_concat(Directory, 'test_files/dump_base64.txt', Path),
+		^^file_path('test_files/dump_base64.txt', Path),
 		atom_codes('The quick brown fox jumps over the lazy dog.', Bytes0),
 		base64::generate(file(Path), Bytes0),
 		base64::parse(file(Path), Bytes),

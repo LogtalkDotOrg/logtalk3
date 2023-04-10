@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "serialization" example.'
 	]).
 
@@ -55,12 +55,6 @@
 		Object3::c(C3), C3 == 3.
 
 	cleanup :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, abc_objects, File),
-		(	os::file_exists(File) ->
-			os::delete_file(File)
-		;	true
-		).
+		^^clean_file(abc_objects).
 
 :- end_object.

@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2022-10-28,
+		date is 2023-04-10,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -627,12 +627,9 @@
 	cleanup :-
 		^^clean_text_input,
 		^^clean_text_output,
-		^^file_path(sample_utf_8, Path1),
-		(os::file_exists(Path1) -> os::delete_file(Path1); true),
-		^^file_path(sample_utf_8_bom, Path2),
-		(os::file_exists(Path2) -> os::delete_file(Path2); true),
-		^^file_path(sample_utf_8_no_bom, Path3),
-		(os::file_exists(Path3) -> os::delete_file(Path3); true).
+		^^clean_file(sample_utf_8),
+		^^clean_file(sample_utf_8_bom),
+		^^clean_file(sample_utf_8_no_bom).
 
 	% partial list of valid encodings (from http://www.iana.org/assignments/character-sets)
 

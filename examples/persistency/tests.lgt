@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "persistency" example.'
 	]).
 
@@ -49,12 +49,6 @@
 		reset.
 
 	cleanup :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, 'state.pl', File),
-		(	os::file_exists(File) ->
-			os::delete_file(File)
-		;	true
-		).
+		^^clean_file('state.pl').
 
 :- end_object.

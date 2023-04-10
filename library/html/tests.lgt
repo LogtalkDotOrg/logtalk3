@@ -28,9 +28,9 @@ content(strong('Hello world!')).
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:2,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2022-02-13,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "html" library.'
 	]).
 
@@ -103,12 +103,6 @@ content(strong('Hello world!')).
 		^^text_output_assertion('<span><strong>Hello world!</strong></span>', Assertion).
 
 	cleanup :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'foo.html', File),
-		(	os::file_exists(File) ->
-			os::delete_file(File)
-		;	true
-		).
+		^^clean_file('foo.html').
 
 :- end_object.
