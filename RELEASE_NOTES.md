@@ -85,6 +85,8 @@ Tests
 
 * IMPROVED: Add `note/1` option to tests that are skipped due to being STO.
 
+* UPDATED: The tests for the `uses/2` directive for Scryer Prolog.
+
 
 3.64.0 - March 28, 2023
 =======================

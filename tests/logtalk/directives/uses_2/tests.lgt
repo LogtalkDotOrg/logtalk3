@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-05-16,
+		date is 2023-04-10,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
@@ -50,8 +50,9 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(	Dialect == eclipse; Dialect == lvm; Dialect == sicstus;
-			Dialect = swi; Dialect = trealla; Dialect = yap
+		(	Dialect == eclipse; Dialect == lvm; Dialect == scryer;
+			Dialect == sicstus; Dialect = swi; Dialect = trealla;
+			Dialect = yap
 		)
 	)).
 
@@ -60,7 +61,7 @@
 
 	:- else.
 
-		- test(uses_2_06, true).
+		- test(uses_2_06, true, [note('Requires a backend supporting the definition of meta-predicates in plain Prolog')]).
 
 	:- endif.
 
