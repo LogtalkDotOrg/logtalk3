@@ -23,42 +23,42 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-11-21,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard (\\=)/2 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.2.3.4
 
-	fails(iso_not_unifiable_2_01) :-
+	test(iso_not_unifiable_2_01, false) :-
 		{'\\='(1, 1)}.
 
-	fails(iso_not_unifiable_2_02) :-
+	test(iso_not_unifiable_2_02, false) :-
 		{\=(_X, 1)}.
 
-	fails(iso_not_unifiable_2_03) :-
+	test(iso_not_unifiable_2_03, false) :-
 		{'\\='(_X, _Y)}.
 
-	fails(iso_not_unifiable_2_04) :-
+	test(iso_not_unifiable_2_04, false) :-
 		{\=(_, _)}.
 
-	fails(iso_not_unifiable_2_05) :-
+	test(iso_not_unifiable_2_05, false) :-
 		{\=(f(_X,def), f(def,_Y))}.
 
-	succeeds(iso_not_unifiable_2_06) :-
+	test(iso_not_unifiable_2_06, true) :-
 		{'\\='(1, 2)}.
 
-	succeeds(iso_not_unifiable_2_07) :-
+	test(iso_not_unifiable_2_07, true) :-
 		{\=(1, 1.0)}.
 
-	succeeds(iso_not_unifiable_2_08) :-
+	test(iso_not_unifiable_2_08, true) :-
 		{'\\='(g(X), f(f(X)))}.
 
-	succeeds(iso_not_unifiable_2_09) :-
+	test(iso_not_unifiable_2_09, true) :-
 		{\=(f(X,1), f(a(X)))}.
 
-	succeeds(iso_not_unifiable_2_10) :-
+	test(iso_not_unifiable_2_10, true) :-
 		{'\\='(f(X,Y,X), f(a(X),a(Y),Y,2))}.
 
 	:- if((
@@ -66,40 +66,44 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		fails(iso_not_unifiable_2_11) :-
+
+		test(iso_not_unifiable_2_11, false) :-
 			{\=(X, a(X))}.
 
-		succeeds(iso_not_unifiable_2_12) :-
+		test(iso_not_unifiable_2_12, true) :-
 			{'\\='(f(X,1), f(a(X),2))}.
 
-		succeeds(iso_not_unifiable_2_13) :-
+		test(iso_not_unifiable_2_13, true) :-
 			{'\\='(f(1,X,1), f(2,a(X),2))}.
 
-		succeeds(iso_not_unifiable_2_14) :-
+		test(iso_not_unifiable_2_14, true) :-
 			{\=(f(1,X), f(2,a(X)))}.
 
-		succeeds(iso_not_unifiable_2_15) :-
+		test(iso_not_unifiable_2_15, true) :-
 			{'\\='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+
 	:- else.
-		- fails(iso_not_unifiable_2_11) :-
+
+		- test(iso_not_unifiable_2_11, false, [note('STO')]) :-
 			% STO; Undefined
 			{\=(X, a(X))}.
 
-		- succeeds(iso_not_unifiable_2_12) :-
+		- test(iso_not_unifiable_2_12, true, [note('STO')]) :-
 			% STO; Undefined
 			{'\\='(f(X,1), f(a(X),2))}.
 
-		- succeeds(iso_not_unifiable_2_13) :-
+		- test(iso_not_unifiable_2_13, true, [note('STO')]) :-
 			% STO; Undefined
 			{'\\='(f(1,X,1), f(2,a(X),2))}.
 
-		- succeeds(iso_not_unifiable_2_14) :-
+		- test(iso_not_unifiable_2_14, true, [note('STO')]) :-
 			% STO; Undefined
 			{\=(f(1,X), f(2,a(X)))}.
 
-		- succeeds(iso_not_unifiable_2_15) :-
+		- test(iso_not_unifiable_2_15, true, [note('STO')]) :-
 			% STO; Undefined
 			{'\\='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+
 	:- endif.
 
 :- end_object.

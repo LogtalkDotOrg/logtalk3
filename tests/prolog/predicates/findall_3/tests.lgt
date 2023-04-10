@@ -29,9 +29,9 @@ f(_, 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:1,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2023-03-23,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard findall/3 built-in predicate.'
 	]).
 
@@ -88,7 +88,7 @@ f(_, 2).
 
 	:- else.
 
-		- test(lgt_findall_3_11, true(L == [1,2])) :-
+		- test(lgt_findall_3_11, true(L == [1,2]), [note('STO')]) :-
 			% STO; Undefined
 			X = f(X,Y),
 			{findall(Y, X, L)}.

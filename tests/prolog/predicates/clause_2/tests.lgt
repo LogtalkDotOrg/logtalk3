@@ -42,42 +42,40 @@ insect(bee).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2015-06-02,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard clause/2 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.8.1.4
 
-	succeeds(iso_clause_2_01) :-
+	test(iso_clause_2_01, true) :-
 		{clause(cat,true)}.
 
-	succeeds(iso_clause_2_02) :-
+	test(iso_clause_2_02, true) :-
 		{clause(dog,true)}.
 
-	succeeds(iso_clause_2_03) :-
-		{clause(legs(I,6), Body)},
-		Body == insect(I).
+	test(iso_clause_2_03, true(Body == insect(I))) :-
+		{clause(legs(I,6), Body)}.
 
-	succeeds(iso_clause_2_04) :-
-		{clause(legs(C,7), Body)},
-		Body == (call(C),call(C)).
+	test(iso_clause_2_04, true(Body == (call(C),call(C)))) :-
+		{clause(legs(C,7), Body)}.
 
-	succeeds(iso_clause_2_05) :-
-		findall(I-T, {clause(insect(I),T)}, L),
-		L == [ant-true, bee-true].
+	test(iso_clause_2_05, true(L == [ant-true, bee-true])) :-
+		findall(I-T, {clause(insect(I),T)}, L).
 
-	fails(iso_clause_2_06) :-
+	test(iso_clause_2_06, false) :-
 		{clause(x, _Body)}.
 
-	throws(iso_clause_2_07, error(instantiation_error,_)) :-
+	test(iso_clause_2_07, error(instantiation_error)) :-
 		{clause(_, _B)}.
 
-	throws(iso_clause_2_08, error(type_error(callable,4),_)) :-
+	test(iso_clause_2_08, error(type_error(callable,4))) :-
 		{clause(4, _B)}.
 
-	succeeds(iso_clause_2_09) :-
+	test(iso_clause_2_09, true) :-
+		% some Prolog systems allows applying clauses/2 to static predicates
 		catch(
 			{clause(elk(_N), _Body)},
 			Error,
@@ -87,7 +85,7 @@ insect(bee).
 			)
 		).
 
-	throws(iso_clause_2_10, [error(permission_error(access,private_procedure,atom/1),_), error(permission_error(access,private_procedure,':'(user,atom/1)),_)]) :-
+	test(iso_clause_2_10, errors([permission_error(access,private_procedure,atom/1), permission_error(access,private_procedure,':'(user,atom/1))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{clause(atom(_), _Body)}.
 
@@ -96,17 +94,21 @@ insect(bee).
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		succeeds(iso_clause_2_11) :-
+
+		test(iso_clause_2_11, true) :-
 			{clause(legs(A,6), insect(f(A)))}.
+
 	:- else.
-		- succeeds(iso_clause_2_11) :-
+
+		- test(iso_clause_2_11, true, [note('STO')]) :-
 			% STO; Undefined
 			{clause(legs(A,6), insect(f(A)))}.
+
 	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	throws(eddbali_clause_2_12, error(type_error(callable,5),_)) :-
+	test(eddbali_clause_2_12, error(type_error(callable,5))) :-
 		{clause(f(_), 5)}.
 
 :- end_object.

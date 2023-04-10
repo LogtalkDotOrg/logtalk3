@@ -23,18 +23,18 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2021-12-09,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard throw/1 control construct.'
 	]).
 
 	% tests from the Logtalk portability work
 
-	throws(lgt_throw_1_01, error(instantiation_error,_)) :-
+	test(lgt_throw_1_01, error(instantiation_error)) :-
 		{throw(_)}.
 
-	throws(lgt_throw_1_02, my_error) :-
+	test(lgt_throw_1_02, ball(my_error)) :-
 		{throw(my_error)}.
 
 	:- if((
@@ -43,13 +43,13 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		throws(lgt_throw_1_03, f(_)) :-
+		test(lgt_throw_1_03, ball(f(_))) :-
 			X = f(X),
 			{throw(X)}.
 
 	:- else.
 
-		- throws(lgt_throw_1_03, f(_)) :-
+		- test(lgt_throw_1_03, ball(f(_)), [note('STO')]) :-
 			% STO; Undefined.
 			X = f(X),
 			{throw(X)}.
@@ -58,20 +58,19 @@
 
 	% tests from the ECLiPSe test suite
 
-	throws(eclipse_throw_1_04, a) :-
+	test(eclipse_throw_1_04, ball(a)) :-
 		{throw(a)}.
 
-	throws(eclipse_throw_1_05, 1) :-
+	test(eclipse_throw_1_05, ball(1)) :-
 		{throw(1)}.
 
-	throws(eclipse_throw_1_06, 1.0) :-
+	test(eclipse_throw_1_06, ball(1.0)) :-
 		{throw(1.0)}.
 
-	throws(eclipse_throw_1_07, f(a)) :-
+	test(eclipse_throw_1_07, ball(f(a))) :-
 		{throw(f(a))}.
 
-	succeeds(eclipse_throw_1_08) :-
-		{catch(throw(f(_)), T, true)},
-		^^variant(T, f(_)).
+	test(eclipse_throw_1_08, variant(T, f(_))) :-
+		{catch(throw(f(_)), T, true)}.
 
 :- end_object.

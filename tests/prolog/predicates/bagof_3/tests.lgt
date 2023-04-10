@@ -49,9 +49,9 @@ f(_, 2, b).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:1,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2023-03-22,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -160,7 +160,7 @@ f(_, 2, b).
 
 	:- else.
 
-		- test(lgt_bagof_3_22, true(LL == [a-[1], b-[2]])) :-
+		- test(lgt_bagof_3_22, true(LL == [a-[1], b-[2]]), [note('STO')]) :-
 			% STO; Undefined
 			X = f(X,Y,Z),
 			findall(Z-L, {bagof(Y, X, L)}, LL).

@@ -85,9 +85,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:1,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2023-03-22,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -216,7 +216,7 @@ setof_3_member(X, [_| L]) :-
 
 	:- else.
 
-		- test(eddbali_setof_3_25, true) :-
+		- test(eddbali_setof_3_25, true, [note('STO')]) :-
 			% STO; Undefined
 			{setof(f(X,Y),X=Y,[f(g(Z),Z)])}.
 
@@ -286,7 +286,7 @@ setof_3_member(X, [_| L]) :-
 
 	:- else.
 
-		- test(lgt_setof_3_36, true(LL == [a-[1], b-[2]])) :-
+		- test(lgt_setof_3_36, true(LL == [a-[1], b-[2]]), [note('STO')]) :-
 			% STO; Undefined
 			X = f(X,Y,Z),
 			findall(Z-L, {setof(Y, X, L)}, LL).

@@ -23,49 +23,45 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-11-21,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard (=)/2 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.2.1.4
 
-	succeeds(iso_unify_2_01) :-
+	test(iso_unify_2_01, true) :-
 		{'='(1, 1)}.
 
-	succeeds(iso_unify_2_02) :-
-		{'='(X, 1)},
-		X == 1.
+	test(iso_unify_2_02, true(X == 1)) :-
+		{'='(X, 1)}.
 
-	succeeds(iso_unify_2_03) :-
-		{'='(X, Y)},
-		X == Y.
+	test(iso_unify_2_03, true(X == Y)) :-
+		{'='(X, Y)}.
 
-	succeeds(iso_unify_2_04) :-
+	test(iso_unify_2_04, true) :-
 		{'='(_, _)}.
 
-	succeeds(iso_unify_2_05) :-
-		{('='(X,Y), '='(X,abc))},
-		X == abc, Y == abc.
+	test(iso_unify_2_05, true((X == abc, Y == abc))) :-
+		{('='(X,Y), '='(X,abc))}.
 
-	succeeds(iso_unify_2_06) :-
-		{'='(f(X,def), f(def,Y))},
-		X == def, Y == def.
+	test(iso_unify_2_06, true((X == def, Y == def))) :-
+		{'='(f(X,def), f(def,Y))}.
 
-	fails(iso_unify_2_07) :-
+	test(iso_unify_2_07, false) :-
 		{'='(1, 2)}.
 
-	fails(iso_unify_2_08) :-
+	test(iso_unify_2_08, false) :-
 		{'='(1, 1.0)}.
 
-	fails(iso_unify_2_09) :-
+	test(iso_unify_2_09, false) :-
 		{'='(g(X), f(f(X)))}.
 
-	fails(iso_unify_2_10) :-
+	test(iso_unify_2_10, false) :-
 		{'='(f(X,1), f(a(X)))}.
 
-	fails(iso_unify_2_11) :-
+	test(iso_unify_2_11, false) :-
 		{'='(f(X,Y,X), f(a(X),a(Y),Y,2))}.
 
 	:- if((
@@ -73,40 +69,44 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
-		succeeds(iso_unify_2_12) :-
+
+		test(iso_unify_2_12, true) :-
 			{'='(X,a(X))}.
 
-		fails(iso_unify_2_13) :-
+		test(iso_unify_2_13, false) :-
 			{'='(f(X,1), f(a(X),2))}.
 
-		fails(iso_unify_2_14) :-
+		test(iso_unify_2_14, false) :-
 			{'='(f(1,X,1), f(2,a(X),2))}.
 
-		fails(iso_unify_2_15) :-
+		test(iso_unify_2_15, false) :-
 			{'='(f(1,X), f(2,a(X)))}.
 
-		fails(iso_unify_2_16) :-
+		test(iso_unify_2_16, false) :-
 			{'='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+
 	:- else.
-		- succeeds(iso_unify_2_12) :-
+
+		- test(iso_unify_2_12, true, [note('STO')]) :-
 			% STO; Undefined
 			{'='(X,a(X))}.
 
-		- fails(iso_unify_2_13) :-
+		- test(iso_unify_2_13, false, [note('STO')]) :-
 			% STO; Undefined
 			{'='(f(X,1), f(a(X),2))}.
 
-		- fails(iso_unify_2_14) :-
+		- test(iso_unify_2_14, false, [note('STO')]) :-
 			% STO; Undefined
 			{'='(f(1,X,1), f(2,a(X),2))}.
 
-		- fails(iso_unify_2_15) :-
+		- test(iso_unify_2_15, false, [note('STO')]) :-
 			% STO; Undefined
 			{'='(f(1,X), f(2,a(X)))}.
 
-		- fails(iso_unify_2_16) :-
+		- test(iso_unify_2_16, false, [note('STO')]) :-
 			% STO; Undefined
 			{'='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+
 	:- endif.
 
 :- end_object.

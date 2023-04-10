@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:1,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2023-03-23,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard once/1 built-in predicate.'
 	]).
 
@@ -48,12 +48,16 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
+
 		test(iso_once_1_05, true) :-
 			{once((X = f(X)))}.
+
 	:- else.
-		- test(iso_once_1_05, true) :-
+
+		- test(iso_once_1_05, true, [note('STO')]) :-
 			% STO; Undefined
 			{once((X = f(X)))}.
+
 	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi

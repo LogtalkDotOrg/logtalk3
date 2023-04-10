@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-12-13,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard compare/3 built-in predicate.'
 	]).
 
@@ -135,7 +135,7 @@
 
 	:- else.
 
-		- test(lgt_compare_3_30, true(Order == (<))) :-
+		- test(lgt_compare_3_30, true(Order == (<)), [note('STO')]) :-
 			% STO; Undefined
 			X = [0,1| X],
 			Y = [0,2| Y],

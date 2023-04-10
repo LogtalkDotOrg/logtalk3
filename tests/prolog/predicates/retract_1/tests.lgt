@@ -43,9 +43,9 @@ foo(X) :- call(X), call(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2022-04-06,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard retract/1 built-in predicate.'
 	]).
 
@@ -82,7 +82,7 @@ foo(X) :- call(X), call(X).
 
 	:- else.
 
-		- test(iso_retract_1_07, true) :-
+		- test(iso_retract_1_07, true, [note('STO')]) :-
 			% STO; Undefined
 			{retract((foo(A) :- A,call(A)))}.
 

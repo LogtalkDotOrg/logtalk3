@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2022-03-14,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard copy_term/2 built-in predicate.'
 	]).
 
@@ -66,7 +66,7 @@
 
 	:- else.
 
-		- test(iso_copy_term_2_09, true) :-
+		- test(iso_copy_term_2_09, true, [note('STO')]) :-
 			% STO; Undefined
 			{copy_term(demoen(X,X), demoen(Y,f(Y)))}.
 
@@ -102,12 +102,12 @@
 
 	:- else.
 
-		- test(lgt_copy_term_2_12, true(Z == X)) :-
+		- test(lgt_copy_term_2_12, true(Z == X), [note('STO')]) :-
 			% STO; Undefined
 			X = f(X),
 			{copy_term(foo(X,Y), foo(Z,Y))}.
 
-		- test(lgt_copy_term_2_13, true((V = [_, _, _| T], V == T))) :-
+		- test(lgt_copy_term_2_13, true((V = [_, _, _| T], V == T)), [note('STO')]) :-
 			% STO; Undefined
 			{L = [_, _, _| L], copy_term(L, V)}.
 

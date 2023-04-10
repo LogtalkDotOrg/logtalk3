@@ -23,41 +23,37 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-12-09,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard ground/1 built-in predicate.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, fails/1
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.3.10.4
 
-	succeeds(iso_ground_1_01) :-
+	test(iso_ground_1_01, true) :-
 		{ground(3)}.
 
-	fails(iso_ground_1_02) :-
+	test(iso_ground_1_02, false) :-
 		{ground(a(1, _))}.
 
 	% tests from the ECLiPSe test suite
 
-	succeeds(eclipse_ground_1_03) :-
+	test(eclipse_ground_1_03, true) :-
 		{ground(a)}.
 
-	succeeds(eclipse_ground_1_04) :-
+	test(eclipse_ground_1_04, true) :-
 		{ground(f(3))}.
 
-	fails(eclipse_ground_1_05) :-
+	test(eclipse_ground_1_05, false) :-
 		{ground(_)}.
 
-	fails(eclipse_ground_1_06) :-
+	test(eclipse_ground_1_06, false) :-
 		{ground(f(_))}.
 
 	% tests from the Logtalk portability work
 
-	succeeds(lgt_ground_1_07) :-
+	test(lgt_ground_1_07, true) :-
 		{ground('$VAR'(0))}.
 
 	:- if((
@@ -66,13 +62,13 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		succeeds(lgt_ground_1_08) :-
+		test(lgt_ground_1_08, true) :-
 			X = f(X),
 			{ground(X)}.
 
 	:- else.
 
-		- succeeds(lgt_ground_1_08) :-
+		- test(lgt_ground_1_08, true, [note('STO')]) :-
 			% STO; Undefined.
 			X = f(X),
 			{ground(X)}.

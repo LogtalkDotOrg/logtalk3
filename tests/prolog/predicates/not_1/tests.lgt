@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2023-03-23,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard (\\+)/1 built-in predicate.'
 	]).
 
@@ -60,12 +60,16 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
+
 		test(iso_not_1_08, false) :-
 			{'\\+'(X=f(X))}.
+
 	:- else.
-		- test(iso_not_1_08, false) :-
+
+		- test(iso_not_1_08, false, [note('STO')]) :-
 			% STO; Undefined
 			{'\\+'(X=f(X))}.
+
 	:- endif.
 
 	% tests from the Logtalk portability work

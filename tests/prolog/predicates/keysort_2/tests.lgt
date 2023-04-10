@@ -49,12 +49,16 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
+
 		test(iso_keysort_2_05, true) :-
 			{keysort([V-V], V)}.
+
 	:- else.
+
 		- test(iso_keysort_2_05, true, [note('STO')]) :-
 			% STO; Undefined.
 			{keysort([V-V], V)}.
+
 	:- endif.
 
 	% tests from the ECLiPSe test suite

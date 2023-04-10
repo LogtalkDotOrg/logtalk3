@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-01-26,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -73,11 +73,16 @@
 		\+ current_logtalk_flag(prolog_dialect, cx),
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
+
 		test(iso_arg_3_12, true) :-
 			{arg(1, foo(X), u(X))}.
+
 	:- else.
-		- test(iso_arg_3_12, true) :-
+
+		- test(iso_arg_3_12, true, [note('STO')]) :-
+			% STO; Undefined.
 			{arg(1, foo(X), u(X))}.
+
 	:- endif.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
