@@ -11,8 +11,8 @@
 Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.
 
 | **Author:** Paulo Moura
-| **Version:** 3:0:0
-| **Date:** 2021-05-31
+| **Version:** 3:2:0
+| **Date:** 2023-04-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -22,6 +22,7 @@ Intercepts unit test execution messages and outputs a report using the xUnit XML
 |    :ref:`logtalk::message_hook/4 <logtalk/0::message_hook/4>`
 | **Uses:**
 |    :ref:`logtalk <logtalk/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 

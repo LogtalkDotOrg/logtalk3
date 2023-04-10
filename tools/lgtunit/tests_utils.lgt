@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2023-04-04,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -546,8 +546,19 @@ a(1).
 		^^clean_file(Path).
 
 	test(clean_file_1_02, true(\+ os::file_exists(Path))) :-
-		^^file_path(non_existent, Path),
+		^^file_path(non_existent_file, Path),
 		^^clean_file(Path).
+
+	% clean_directory/1 tests
+
+	test(clean_directory_1_01, true(\+ os::directory_exists(Path))) :-
+		^^file_path(foo42, Path),
+		os::ensure_directory(Path),
+		^^clean_directory(Path).
+
+	test(clean_directory_1_02, true(\+ os::directory_exists(Path))) :-
+		^^file_path(non_existent_directory, Path),
+		^^clean_directory(Path).
 
 	% auxiliary predicates
 

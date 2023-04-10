@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 15:0:0,
+		version is 15:1:0,
 		author is 'Paulo Moura',
-		date is 2023-04-04,
+		date is 2023-04-10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -707,6 +707,14 @@
 		comment is 'Closes any existing stream associated with the file and deletes the file if it exists. Relative file paths are interpreted as relative to the tests object path.',
 		argnames is ['File'],
 		see_also is [file_path/2]
+	]).
+
+	:- protected(clean_directory/1).
+	:- mode(clean_directory(+atom), one).
+	:- info(clean_directory/1, [
+		comment is 'Deletes an empty directory if it exists. Relative file paths are interpreted as relative to the tests object path.',
+		argnames is ['Directory'],
+		see_also is [clean_file/1]
 	]).
 
 	:- protected(closed_input_stream/2).
@@ -2996,6 +3004,21 @@
 		;	true
 		),
 		clean_file(File, Path).
+
+	clean_directory(Directory) :-
+		(	os::is_absolute_file_name(Directory) ->
+			% the directory may still require expanding
+			os::absolute_file_name(Directory, Path)
+		;	self(Self),
+			object_property(Self, file(_, SelfDirectory)),
+			atom_concat(SelfDirectory, Directory, Path0),
+			os::absolute_file_name(Path0, Path)
+		),
+		% the directory may exist only if some unit test failed
+		(	os::directory_exists(Path) ->
+			os::delete_directory(Path)
+		;	true
+		).
 
 	write_text_contents(Stream, Contents) :-
 		(	atom(Contents) ->

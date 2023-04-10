@@ -65,6 +65,9 @@ formats now include the test note (if any) as a test trait for all outcomes.
 * ADDED: Support to the `lgtdoc` tool to output `info/2` directive `since`
 keys.
 
+* ADDED: New `lgtunit` tool `clean_directory/1` protected predicate to delete
+an empty directory if it exists.
+
 * IMPROVED: The `lgtunit` tool `file_path/2` and `clean_file/1` utility
 predicates to expand the constructed absolute file path to resolve any
 remaining relative file path parts.
