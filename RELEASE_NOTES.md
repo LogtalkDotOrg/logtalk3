@@ -72,6 +72,9 @@ remaining relative file path parts.
 * IMPROVED: The `lgtunit` tool documentation of the input/output testing
 predicates.
 
+* UPDATED: The `logtalk_allure_report` scripts to add a `categories.json` file
+to classify failed tests.
+
 * FIXED: The `lgtunit` tool xUnit format support to ensure that test URLs
 are correct when the suppressed path prefix ends with a slash.
 

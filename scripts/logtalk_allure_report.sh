@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on September 17, 2021
+##   Last updated on April 10, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -24,7 +24,7 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 0.10"
 	exit 0
 }
 
@@ -172,6 +172,18 @@ executor=$(cat <<EOF
 EOF
 )
 echo "$executor" > "$results"/executor.json
+
+# add minimal categories.json to classify failed tests
+categories=$(cat <<EOF
+[
+	{
+		"name": "Failed tests",
+		"matchedStatuses": ["failed"]
+	}
+]
+EOF
+)
+echo "$categories" > "$results"/categories.json
 
 cd "$results/.." || exit 1
 allure generate --clean --report-dir "$report" "$results"

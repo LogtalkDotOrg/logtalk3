@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on March 15, 2023
+##   Last updated on April 10, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.9")
+	Write-Output ($myName + " 0.10")
 }
 
 Function Write-Usage-Help() {
@@ -145,13 +145,21 @@ if (Test-Path $o\history) {
 	$next_build = $current_build
 }
 
-# add a minimal executor.json so that trend graphs
-# show build labels
+# add a minimal executor.json so that trend graphs show build labels
 New-Item -Path $o -Name executor.json -ItemType "file" -Force > $null
 Add-Content -Path $o\executor.json -Value ('"buildOrder": "' + $next_build + '"')
 Add-Content -Path $o\executor.json -Value ('"buildName": "logtalk_allure_report#' + $next_build + '"')
 Add-Content -Path $o\executor.json -Value '"name": "logtalk_tester"'
 Add-Content -Path $o\executor.json -Value '"type": "logtalk_tester"'
+
+# add minimal categories.json to classify failed tests
+New-Item -Path $o -Name categories.json -ItemType "file" -Force > $null
+Add-Content -Path $o\categories.json -Value '['
+Add-Content -Path $o\categories.json -Value '	{'
+Add-Content -Path $o\categories.json -Value '		"name": "Failed tests",'
+Add-Content -Path $o\categories.json -Value '		"matchedStatuses": ["failed"]'
+Add-Content -Path $o\categories.json -Value '	}'
+Add-Content -Path $o\categories.json -Value ']'
 
 Push-Location (Join-Path $i ..)
 
