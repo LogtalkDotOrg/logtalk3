@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2022-10-25,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard atom_chars/2 built-in predicate.'
 	]).
 
@@ -76,10 +76,10 @@
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
 
-	- test(sics_atom_chars_2_14, true(L == ['P','é','c','s'])) :-
+	- test(sics_atom_chars_2_14, true(L == ['P','é','c','s']), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{atom_chars('Pécs', L)}.
 
-	- test(sics_atom_chars_2_15, true(A == 'Pécs')) :-
+	- test(sics_atom_chars_2_15, true(A == 'Pécs'), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{atom_chars(A, ['P','é','c','s'])}.
 
 	% tests from the Logtalk portability work

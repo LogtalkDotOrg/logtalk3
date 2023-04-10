@@ -85,6 +85,9 @@ Tests
 
 * IMPROVED: Add `note/1` option to tests that are skipped due to being STO.
 
+* IMPROVED: Add `note/1` option to tests that are skipped due the lack of a
+Prolog portable solution to specify text encoding.
+
 * UPDATED: The tests for the `uses/2` directive for Scryer Prolog.
 
 

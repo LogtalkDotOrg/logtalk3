@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-11-16,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard atom_length/2 built-in predicate.'
 	]).
 
@@ -66,7 +66,7 @@
 	% way to specify a supporting text encoding such as UTF-8
 	% for all Logtalk supported backend Prolog compilers
 
-	- test(sics_atom_length_2_09, true(N == 11)) :-
+	- test(sics_atom_length_2_09, true(N == 11), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{atom_length('Bartók Béla', N)}.
 
 :- end_object.

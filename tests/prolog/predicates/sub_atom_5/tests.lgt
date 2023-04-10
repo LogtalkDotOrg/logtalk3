@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2023-01-09,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard sub_atom/5 built-in predicate.'
 	]).
 
@@ -121,16 +121,16 @@
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
 
-	- test(sics_sub_atom_5_29, true(A-S == 5-'ók')) :-
+	- test(sics_sub_atom_5_29, true(A-S == 5-'ók'), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{sub_atom('Bartók Béla', 4, 2, A, S)}.
 
-	- test(sics_sub_atom_5_30, true(L-S == 2-'ók')) :-
+	- test(sics_sub_atom_5_30, true(L-S == 2-'ók'), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{sub_atom('Bartók Béla', 4, L, 5, S)}.
 
-	- test(sics_sub_atom_5_31, true(B-S == 4-'ók')) :-
+	- test(sics_sub_atom_5_31, true(B-S == 4-'ók'), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{sub_atom('Bartók Béla', B, 2, 5, S)}.
 
-	- test(sics_sub_atom_5_32, true(L == [0-2-'Pé', 1-1-'éc', 2-0-'cs'])) :-
+	- test(sics_sub_atom_5_32, true(L == [0-2-'Pé', 1-1-'éc', 2-0-'cs']), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		findall(B-A-S, {sub_atom('Pécs',B,2,A,S)}, L).
 
 	test(sics_sub_atom_5_33, true(L == [0-4-7, 7-4-0])) :-

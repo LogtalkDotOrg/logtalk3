@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2022-08-23,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard atom_concat/3 built-in predicate.'
 	]).
 
@@ -67,16 +67,16 @@
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
 
-	- test(sics_atom_concat_3_11, true(N == 'Bartók Béla')) :-
+	- test(sics_atom_concat_3_11, true(N == 'Bartók Béla'), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{atom_concat('Bartók ', 'Béla', N)}.
 
-	- test(sics_atom_concat_3_12, true(N == 'Bartók ')) :-
+	- test(sics_atom_concat_3_12, true(N == 'Bartók '), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{atom_concat(N, 'Béla', 'Bartók Béla')}.
 
-	- test(sics_atom_concat_3_13, true(N == 'Béla')) :-
+	- test(sics_atom_concat_3_13, true(N == 'Béla'), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{atom_concat('Bartók ', N, 'Bartók Béla')}.
 
-	- test(sics_atom_concat_3_14, true(L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-''])) :-
+	- test(sics_atom_concat_3_14, true(L == [''-'Pécs', 'P'-'écs', 'Pé'-'cs', 'Péc'-'s', 'Pécs'-'']), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		findall(T1-T2, {atom_concat(T1, T2, 'Pécs')}, L).
 
 	% tests from the Logtalk portability work

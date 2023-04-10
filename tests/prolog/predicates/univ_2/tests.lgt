@@ -151,7 +151,7 @@
 
 	:- else.
 
-		- test(lgt_univ_2_28, true(L == [f,f(X)])) :-
+		- test(lgt_univ_2_28, true(L == [f,f(X)]), [note('STO')]) :-
 			% STO; Undefined
 			{X = f(X), X =.. L}.
 
