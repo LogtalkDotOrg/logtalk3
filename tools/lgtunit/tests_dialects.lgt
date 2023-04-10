@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2023-01-13,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -208,11 +208,11 @@
 
 	% test identifiers
 
-	- test(a(1)).
+	- test(a(1), true, [note('Checks parsing of test identifiers')]).
 
-	- test(a(2)).
+	- test(a(2), true, [note('Checks parsing of test identifiers')]).
 
-	- test(a(3)).
+	- test(a(3), true, [note('Checks parsing of test identifiers')]).
 
 	% auxiliary predicates for checking that condition/1, setup/1, cleanup/1,
 	% and note/1 options in the test/3 dialect are processed

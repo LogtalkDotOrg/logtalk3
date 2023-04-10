@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-10-26,
+		date is 2023-04-10,
 		comment is 'Unit tests for the ISO Prolog standard number_chars/2 built-in predicate.'
 	]).
 
@@ -119,7 +119,7 @@
 	% way to specify a supporting text encoding such as UTF-8
 	% for all Logtalk supported backend Prolog compilers
 
-	- test(sics_number_chars_2_28, error(syntax_error(_))) :-
+	- test(sics_number_chars_2_28, error(syntax_error(_)), [note('Requires Prolog portable solution to specify text encoding')]) :-
 		{number_chars(_X, ['á'])}.
 
 	test(sics_number_chars_2_29, error(syntax_error(_))) :-

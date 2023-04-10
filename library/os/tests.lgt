@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:31:0,
+		version is 0:32:0,
 		author is 'Paulo Moura',
-		date is 2023-01-06,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -143,7 +143,7 @@
 
 	% skip the following test as it requires passing
 	% extra arguments when executing this test set
-	- test(os_command_line_arguments_1_01, true(Arguments == [foo, bar, baz])) :-
+	- test(os_command_line_arguments_1_01, true(Arguments == [foo, bar, baz]), [note('Requires passing extra arguments when executing this test set')]) :-
 		os::command_line_arguments(Arguments).
 
 	test(os_pid_1_01, true(integer(PID))) :-
