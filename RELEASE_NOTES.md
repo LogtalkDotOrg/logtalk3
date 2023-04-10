@@ -72,6 +72,9 @@ remaining relative file path parts.
 * IMPROVED: The `lgtunit` tool documentation of the input/output testing
 predicates.
 
+* FIXED: The `lgtunit` tool xUnit format support to ensure that test URLs
+are correct when the suppressed path prefix ends with a slash.
+
 Tests
 -----
 

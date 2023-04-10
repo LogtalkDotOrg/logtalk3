@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
-		date is 2023-04-08,
+		date is 2023-04-10,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -44,6 +44,10 @@
 	:- info(message_cache_/1, [
 		comment is 'Table of messages emitted by the lgtunit tool when running tests.',
 		argnames is ['Message']
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	% intercept all messages from the "lgtunit" object while running tests
@@ -329,15 +333,22 @@
 		{current_logtalk_flag(tests_base_url, BaseURL)},
 		BaseURL \== '',
 		Position = Line-_,
-		atom_concat(BaseURL, Short, URL0),
 		(	sub_atom(BaseURL, _, _, _, bitbucket) ->
-			atom_concat(URL0, '#', URL1)
+			LineSeparator = '#'
 		;	% assume GitHub or GitLab host
-			atom_concat(URL0, '#L', URL1)
+			LineSeparator = '#L'
 		),
-		number_chars(Line, LineChars),
-		atom_chars(LineAtom, LineChars),
-		atom_concat(URL1, LineAtom, URL).
+		(	sub_atom(BaseURL, _, 1, 0, '/') ->
+			(	sub_atom(Short, 0, 1, _, '/') ->
+				sub_atom(Short, 1, _, 0, ShortSuffix),
+				atomic_list_concat([BaseURL, ShortSuffix, LineSeparator, Line], URL)
+			;	atomic_list_concat([BaseURL, Short, LineSeparator, Line], URL)
+			)
+		;	(	sub_atom(Short, 0, 1, _, '/') ->
+				atomic_list_concat([BaseURL, Short, LineSeparator, Line], URL)
+			;	atomic_list_concat([BaseURL, '/', Short, LineSeparator, Line], URL)
+			)
+		).
 
 	% XML auxiliary predicates
 
