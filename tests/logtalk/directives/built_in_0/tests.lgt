@@ -23,23 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-02-05,
+		date is 2023-04-10,
 		comment is 'Unit tests for the built_in/0 built-in directive.'
 	]).
 
 	fails(built_in_0_01) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, 'source1.lgt', File),
-		logtalk_compile(File).
+		^^file_path('source1.lgt', Path),
+		logtalk_compile(Path).
 
 	fails(built_in_0_02) :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		atom_concat(Directory, 'source2.lgt', File),
-		logtalk_compile(File).
+		^^file_path('source2.lgt', Path),
+		logtalk_compile(Path).
 
 	throws(built_in_0_03, error(permission_error(declare,built_in,_),logtalk(create_object(_,[],[built_in],[]),_))) :-
 		create_object(_, [], [built_in], []).

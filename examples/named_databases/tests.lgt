@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2016-10-10,
+		date is 2023-04-10,
 		comment is 'Unit tests for the "named_databases" example.'
 	]).
 
@@ -37,19 +37,15 @@
 	]).
 
 	test(named_databases_1) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'data_in.pl', In),
-		atom_concat(Directory, 'data_out.pl', Out),
+		^^file_path('data_in.pl', In),
+		^^file_path('data_out.pl', Out),
 		db_create(named_database),
 		db_load(named_database, In),
 		db_save(named_database, Out),
 		db_clear(named_database).
 
 	test(named_databases_2) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'data_in.pl', In),
+		^^file_path('data_in.pl', In),
 		db_create(named_database),
 		db_load(named_database, In),
 		setof(X, db_call(named_database, s(X)), Xs),

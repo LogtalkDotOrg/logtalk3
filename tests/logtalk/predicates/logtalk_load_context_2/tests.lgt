@@ -111,9 +111,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-08-26,
+		date is 2023-04-10,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -124,9 +124,7 @@
 	:- set_logtalk_flag(singleton_variables, silent).
 
 	setup :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'sample.lgt', Source),
+		^^file_path('sample.lgt', Source),
 		logtalk_load(Source, [hook(hook)]).
 
 	% only true during source file compilation when called from a clause
@@ -136,15 +134,11 @@
 	% source file related keys
 
 	test(logtalk_load_context_2_02, true(Source0 == Source)) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'sample.lgt', Source),
+		^^file_path('sample.lgt', Source),
 		result(source, Source0).
 
 	test(logtalk_load_context_2_03, true(File0 == File)) :-
-		this(This),
-		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'sample.lgt', File),
+		^^file_path('sample.lgt', File),
 		result(file, File0).
 
 	test(logtalk_load_context_2_04, true(Basename == 'sample.lgt')) :-
