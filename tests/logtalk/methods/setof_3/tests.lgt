@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2022-03-12,
+		date is 2023-04-10,
 		comment is 'Unit tests for the setof/3 built-in method.'
 	]).
 
@@ -99,7 +99,7 @@
 
 	% Logtalk doesn't support setting the `unknown` standard Prolog
 	% flag *locally* to an entity to `warning` for the folowing test
-	- test(setof_3_16, variant(LL, [_-[3]])) :-
+	- test(setof_3_16, variant(LL, [_-[3]]), [note('Requires Logtalk support for an object local "unknown" flag')]) :-
 		findall(Y-L, setof(X, ((Y^(X=1; Y=2)); X=3), L), LL).
 
 	test(setof_3_17, true) :-

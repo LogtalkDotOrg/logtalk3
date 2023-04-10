@@ -31,9 +31,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2023-04-09,
+		date is 2023-04-10,
 		comment is 'Unit tests for the de facto Prolog standard length/2 built-in predicate.'
 	]).
 
@@ -110,7 +110,7 @@
 	test(commons_length_2_24, false) :-
 		{length([1, 2, 3, 4, 5| _], 2)}.
 
-	- test(commons_length_2_25, error(resource_error(finite_memory))) :-
+	- test(commons_length_2_25, error(resource_error(finite_memory)), [note('Requires Prolog portable solution for calls with timeouts')]) :-
 		{length(L, L)}.
 
 	% tests from the Logtalk portability work

@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-03-12,
+		date is 2023-04-10,
 		comment is 'Unit tests for the bagof/3 built-in method.'
 	]).
 
@@ -76,7 +76,7 @@
 
 	% Logtalk doesn't support setting the `unknown` standard Prolog
 	% flag *locally* to an entity to `warning` for the folowing test
-	- test(bagof_3_12, variant(LL, [_-[3]])) :-
+	- test(bagof_3_12, variant(LL, [_-[3]]), [note('Requires Logtalk support for an object local "unknown" flag')]) :-
 		findall(Y-L, bagof(X, ((Y^(X=1; Y=2)); X=3), L), LL).
 
 	test(bagof_3_13, true) :-
