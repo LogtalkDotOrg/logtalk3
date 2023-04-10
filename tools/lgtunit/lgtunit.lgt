@@ -306,7 +306,7 @@
 	:- info(file_path/2, [
 		comment is 'Returns the absolute path for a file path that is relative to the tests object path. When the file path is already an absolute path, it is expanded to resolve any remaining relative file path parts.',
 		argnames is ['File', 'Path'],
-		see_also is [clean_file/1]
+		see_also is [clean_file/1, clean_directory/1]
 	]).
 
 	:- protected(suppress_text_output/0).
@@ -706,15 +706,15 @@
 	:- info(clean_file/1, [
 		comment is 'Closes any existing stream associated with the file and deletes the file if it exists. Relative file paths are interpreted as relative to the tests object path.',
 		argnames is ['File'],
-		see_also is [file_path/2]
+		see_also is [clean_directory/1, file_path/2]
 	]).
 
 	:- protected(clean_directory/1).
 	:- mode(clean_directory(+atom), one).
 	:- info(clean_directory/1, [
-		comment is 'Deletes an empty directory if it exists. Relative file paths are interpreted as relative to the tests object path.',
+		comment is 'Deletes an empty directory if it exists. Relative directory paths are interpreted as relative to the tests object path.',
 		argnames is ['Directory'],
-		see_also is [clean_file/1]
+		see_also is [clean_file/1, file_path/2]
 	]).
 
 	:- protected(closed_input_stream/2).

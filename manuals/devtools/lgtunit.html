@@ -1213,14 +1213,14 @@ test(lgt_unicode_open_4_01, <span class="k">true</span>) <span class="o">:-</spa
 <p>The absolute path is computed relative to the path of <em>self</em>, i.e.
 relative to the path of the test object that received the message that
 runs the tests.</p>
-<p>It’s also common for tests to create temporary files that should be
-deleted after the tests completion. The <code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code> protected
-predicate can be used for this purpose. For example, assuming that the
-tests create two text files, <code class="docutils literal notranslate"><span class="pre">foo.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">bar.txt</span></code>, in the same
-directory of the tests object:</p>
+<p>It’s also common for tests to create temporary files and directories
+that should be deleted after the tests completion. The <code class="docutils literal notranslate"><span class="pre">clean_file/1</span></code>
+and <code class="docutils literal notranslate"><span class="pre">clean_directory/1</span></code> protected predicates can be used for this
+purpose. For example, assuming that the tests create a <code class="docutils literal notranslate"><span class="pre">foo.txt</span></code> text
+file and a <code class="docutils literal notranslate"><span class="pre">tmp</span></code> directory in the same directory of the tests object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>cleanup <span class="o">:-</span>
     <span class="o">^^</span>clean_file(<span class="s">&#39;foo.txt&#39;</span>),
-    <span class="o">^^</span>clean_file(<span class="s">&#39;bar.txt&#39;</span>).
+    <span class="o">^^</span>clean_directory(<span class="s">&#39;tmp&#39;</span>).
 </pre></div>
 </div>
 <p>Similar to the <code class="docutils literal notranslate"><span class="pre">file_path/2</span></code> predicate, relative paths are interpreted

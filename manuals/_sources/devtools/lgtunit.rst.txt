@@ -1183,17 +1183,17 @@ The absolute path is computed relative to the path of *self*, i.e.
 relative to the path of the test object that received the message that
 runs the tests.
 
-It's also common for tests to create temporary files that should be
-deleted after the tests completion. The ``clean_file/1`` protected
-predicate can be used for this purpose. For example, assuming that the
-tests create two text files, ``foo.txt`` and ``bar.txt``, in the same
-directory of the tests object:
+It's also common for tests to create temporary files and directories
+that should be deleted after the tests completion. The ``clean_file/1``
+and ``clean_directory/1`` protected predicates can be used for this
+purpose. For example, assuming that the tests create a ``foo.txt`` text
+file and a ``tmp`` directory in the same directory of the tests object:
 
 ::
 
    cleanup :-
        ^^clean_file('foo.txt'),
-       ^^clean_file('bar.txt').
+       ^^clean_directory('tmp').
 
 Similar to the ``file_path/2`` predicate, relative paths are interpreted
 as relative to the path of the test object. This predicate also closes
