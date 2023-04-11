@@ -23,9 +23,9 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 2:0:2,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2022-01-25,
+		date is 2023-04-11,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -34,14 +34,16 @@
 		pid/1, temporary_directory/1, shell/1
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	:- if(os::operating_system_type(windows)).
 
 		branch(Directory, Branch) :-
 			temporary_file(Temporary),
 			internal_os_path(Temporary, NativeTemporary),
-			atom_concat('git -C ', Directory, Command0),
-			atom_concat(Command0, ' rev-parse --abbrev-ref HEAD 2>nul > ', Command1),
-			atom_concat(Command1, NativeTemporary, Command),
+			atomic_list_concat(['git -C ', Directory, ' rev-parse --abbrev-ref HEAD 2>nul > ', NativeTemporary], Command),
 			(	shell(Command) ->
 				data_clean(Temporary, Branch),
 				Branch \== ''
@@ -52,11 +54,7 @@
 		commit_log(Directory, Format, Output) :-
 			temporary_file(Temporary),
 			internal_os_path(Temporary, NativeTemporary),
-			atom_concat('git -C ', Directory, Command0),
-			atom_concat(Command0, ' log --oneline -n 1 --pretty=format:', Command1),
-			atom_concat(Command1, Format, Command2),
-			atom_concat(Command2, ' 2>nul > ', Command3),
-			atom_concat(Command3, NativeTemporary, Command),
+			atomic_list_concat(['git -C ', Directory, ' log --oneline -n 1 --pretty=format:', Format, ' 2>nul > ', NativeTemporary], Command),
 			(	shell(Command) ->
 				data_raw(Temporary, Output)
 			;	delete_file(Temporary),
@@ -67,9 +65,7 @@
 
 		branch(Directory, Branch) :-
 			temporary_file(Temporary),
-			atom_concat('git -C ', Directory, Command0),
-			atom_concat(Command0, ' rev-parse --abbrev-ref HEAD 2>/dev/null > ', Command1),
-			atom_concat(Command1, Temporary, Command),
+			atomic_list_concat(['git -C ', Directory, ' rev-parse --abbrev-ref HEAD 2>/dev/null > ', Temporary], Command),
 			(	shell(Command) ->
 				data_clean(Temporary, Branch),
 				Branch \== ''
@@ -79,11 +75,7 @@
 
 		commit_log(Directory, Format, Output) :-
 			temporary_file(Temporary),
-			atom_concat('git -C ', Directory, Command0),
-			atom_concat(Command0, ' log --oneline -n 1 --pretty=format:"', Command1),
-			atom_concat(Command1, Format, Command2),
-			atom_concat(Command2, '" 2>/dev/null > ', Command3),
-			atom_concat(Command3, Temporary, Command),
+			atomic_list_concat(['git -C ', Directory, ' log --oneline -n 1 --pretty=format:"', Format, '" 2>/dev/null > ', Temporary], Command),
 			(	shell(Command) ->
 				data_raw(Temporary, Output)
 			;	delete_file(Temporary),
@@ -111,9 +103,7 @@
 
 	temporary_file(Temporary) :-
 		pid(PID),
-		number_codes(PID, Codes),
-		atom_codes(PIDAtom, Codes),
-		atom_concat(logtalk_git_data_access_, PIDAtom, Basename),
+		atomic_list_concat([logtalk_git_data_access_, PID], Basename),
 		temporary_directory(Directory),
 		path_concat(Directory, Basename, Temporary).
 
