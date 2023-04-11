@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-04-11,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -251,13 +251,13 @@
 		message_cache_(tests_start_date_time(Year, Month, Day, _, _, _)),
 		integers_to_atoms([Year,Month,Day], [AYear,AMonth0,ADay0]),
 		pad_single_char_atoms([AMonth0,ADay0], [AMonth,ADay]),
-		concatenate_atoms([AYear,'-',AMonth,'-',ADay], '', RunDate).
+		atomic_list_concat([AYear,'-',AMonth,'-',ADay], '', RunDate).
 
 	assembly_run_time(RunTime) :-
 		message_cache_(tests_start_date_time(_, _, _, Hours, Minutes, Seconds)),
 		integers_to_atoms([Hours,Minutes,Seconds], [AHours0,AMinutes0,ASeconds0]),
 		pad_single_char_atoms([AHours0,AMinutes0,ASeconds0], [AHours,AMinutes,ASeconds]),
-		concatenate_atoms([AHours,':',AMinutes,':',ASeconds], '', RunTime).
+		atomic_list_concat([AHours,':',AMinutes,':',ASeconds], '', RunTime).
 
 	% "collection" tag attributes
 
@@ -283,7 +283,7 @@
 	date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp) :-
 		integers_to_atoms([Year,Month,Day,Hours,Minutes,Seconds], [AYear,AMonth0,ADay0,AHours0,AMinutes0,ASeconds0]),
 		pad_single_char_atoms([AMonth0,ADay0,AHours0,AMinutes0,ASeconds0], [AMonth,ADay,AHours,AMinutes,ASeconds]),
-		concatenate_atoms([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], '', TimeStamp).
+		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], '', TimeStamp).
 
 	integers_to_atoms([], []).
 	integers_to_atoms([Integer| Integers], [Atom| Atoms]) :-
@@ -298,11 +298,6 @@
 		;	PaddedAtom = Atom
 		),
 		pad_single_char_atoms(Atoms, PaddedAtoms).
-
-	concatenate_atoms([], Concat, Concat).
-	concatenate_atoms([Atom| Atoms], Concat0, Concat) :-
-		atom_concat(Concat0, Atom, Concat1),
-		concatenate_atoms(Atoms, Concat1, Concat).
 
 	suppress_path_prefix(Path, ShortPath) :-
 		% bypass the compiler as the flag is only created after loading this file

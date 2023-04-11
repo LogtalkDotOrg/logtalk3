@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 15:1:0,
+		version is 15:2:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-04-11,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -835,6 +835,8 @@
 	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
 	% for QuickCheck support
 	:- uses(fast_random, [maybe/0]).
+	% for converting test identifiers into auxiliary predicate names
+	:- uses(user, [atomic_list_concat/2]).
 
 	:- if(current_logtalk_flag(prolog_dialect, gnu)).
 		% workaround gplc limitation when dealing with multifile predicates
@@ -1657,32 +1659,23 @@
 		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note, NoteFlag).
 
 	compile_test_step_aux_predicate(Test, Step, Goal, Head) :-
-		test_name_to_atom_prefix(Test, Prefix),
-		atom_concat(Prefix, Step, Functor),
+		test_name_to_aux_predicate_name(Test, Step, Name),
 		term_variables(Goal, Variables),
-		Head =.. [Functor| Variables],
+		Head =.. [Name| Variables],
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
 	compile_deterministic_test_aux_predicate(Test, Goal, Head) :-
-		test_name_to_atom_prefix(Test, Prefix),
-		atom_concat(Prefix, '_deterministic', Functor),
+		test_name_to_aux_predicate_name(Test, '_deterministic', Name),
 		term_variables(Goal, Variables),
-		Head =.. [Functor| Variables],
+		Head =.. [Name| Variables],
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
 
-	test_name_to_atom_prefix(Test, Prefix) :-
-		functor(Test, Name, Arity),
-		atom_concat(Name, '_', Prefix0),
-		number_codes(Arity, ArityCodes),
-		atom_codes(ArityAtom, ArityCodes),
-		atom_concat(Prefix0, ArityAtom, Prefix1),
-		atom_concat(Prefix1, '_', Prefix2),
+	test_name_to_aux_predicate_name(Test, Step, AuxName) :-
+		functor(Test, TestName, TestArity),
 		retract(auxiliary_predicate_counter_(OldCounter)), !,
 		NewCounter is OldCounter + 1,
 		assertz(auxiliary_predicate_counter_(NewCounter)),
-		number_codes(NewCounter, CounterCodes),
-		atom_codes(CounterAtom, CounterCodes),
-		atom_concat(Prefix2, CounterAtom, Prefix).
+		atomic_list_concat([TestName, '_', TestArity, '_', NewCounter, Step], AuxName).
 
 	parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions) :-
 		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),

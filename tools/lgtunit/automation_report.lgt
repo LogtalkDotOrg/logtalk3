@@ -34,13 +34,17 @@
 :- object(automation_report).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:1:0,
 		author is 'Paulo Moura',
-		date is 2021-05-31,
+		date is 2023-04-11,
 		comment is 'Intercepts unit test execution messages and generates a ``*.totals`` files for parsing by the ``logtalk_tester.sh`` automation shell script.',
 		remarks is [
 			'Usage' - 'Automatically loaded by the ``logtalk_tester.sh`` shell script.'
 		]
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	% intercept all messages from the "lgtunit" object while running tests
@@ -58,9 +62,7 @@
 		% bypass the compiler as the flags are only created after loading this file
 		{current_logtalk_flag(test_results_directory, Directory)},
 		{current_logtalk_flag(test_unit_name, Name)},
-		atom_concat('/', Name, ResultsFile0),
-		atom_concat(ResultsFile0, '.totals', ResultsFile1),
-		atom_concat(Directory, ResultsFile1, ResultsFile),
+		atomic_list_concat([Directory, '/', Name, '.totals'], ResultsFile),
 		open(ResultsFile, write, _, [alias(results_file)]).
 	message_hook(running_tests_from_object_file(_, File)) :-
 		write(results_file, 'file\t'), write(results_file, File), nl(results_file).
