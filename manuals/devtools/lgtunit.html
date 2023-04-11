@@ -1692,9 +1692,10 @@ But note that not all supported backends provide accurate line numbers.</p>
 aware. First, Allure expects test names to be unique across different
 tests sets. If there are two test with the same name in two different
 test sets, only one of them will be reported. Second, skipped test sets
-are not reported. Finally, when using the xUnit.net v2 XML format, tests
-are reported in a random order instead of their run order and dates are
-displayed as “unknown” in the overview page.</p>
+are not reported. Third, when using the <code class="docutils literal notranslate"><span class="pre">xunit</span></code> format, dates are
+reported as MM/DD/YYYY. Finally, when using the <code class="docutils literal notranslate"><span class="pre">xunit_net_v2</span></code> format,
+tests are reported in a random order instead of their run order and
+dates are displayed as “unknown” in the overview page.</p>
 </section>
 <section id="exporting-code-coverage-results-in-xml-format">
 <h2>Exporting code coverage results in XML format<a class="headerlink" href="#exporting-code-coverage-results-in-xml-format" title="Permalink to this heading"></a></h2>

@@ -1709,9 +1709,10 @@ There are some caveats when generating Allure reports that users must be
 aware. First, Allure expects test names to be unique across different
 tests sets. If there are two test with the same name in two different
 test sets, only one of them will be reported. Second, skipped test sets
-are not reported. Finally, when using the xUnit.net v2 XML format, tests
-are reported in a random order instead of their run order and dates are
-displayed as "unknown" in the overview page.
+are not reported. Third, when using the ``xunit`` format, dates are
+reported as MM/DD/YYYY. Finally, when using the ``xunit_net_v2`` format,
+tests are reported in a random order instead of their run order and
+dates are displayed as "unknown" in the overview page.
 
 Exporting code coverage results in XML format
 ---------------------------------------------
