@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:1:0,
+		version is 9:2:0,
 		author is 'Paulo Moura',
-		date is 2023-04-01,
+		date is 2023-04-12,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -84,6 +84,10 @@
 
 	:- uses(type, [
 		valid/2
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	:- uses(varlist, [
@@ -320,11 +324,7 @@
 
 	entity_doc_file_name(Entity, File) :-
 		functor(Entity, Functor, Arity),
-		number_codes(Arity, Codes),
-		atom_codes(Atom, Codes),
-		atom_concat(Functor, '_', Aux),
-		atom_concat(Aux, Atom, Name),
-		atom_concat(Name, '.xml', File).
+		atomic_list_concat([Functor, '_', Arity, '.xml'], File).
 
 	convert_stream_options([], []).
 	convert_stream_options([StreamOption| StreamOptions], [ConvertedStreamOption| ConvertedStreamOptions]) :-
@@ -413,12 +413,7 @@
 		).
 
 	xml_header_text(Version, Encoding, Standalone, Text) :-
-		atom_concat('?xml version="', Version, Aux1),
-		atom_concat(Aux1, '" encoding="', Aux2),
-		atom_concat(Aux2, Encoding, Aux3),
-		atom_concat(Aux3, '" standalone="', Aux4),
-		atom_concat(Aux4, Standalone, Aux5),
-		atom_concat(Aux5, '"?', Text).
+		atomic_list_concat(['?xml version="', Version, '" encoding="', Encoding, '" standalone="', Standalone, '"?'], Text).
 
 	write_entity_xml_footer(Stream) :-
 		write_xml_close_tag(Stream, logtalk_entity).
@@ -583,8 +578,7 @@
 	% representing the corresponding XML entity
 
 	entity_name_to_xml_entity({EntityName}, XMLEntity) :-
-		atom_concat('&', EntityName, Aux),
-		atom_concat(Aux, ';', XMLEntity).
+		atomic_list_concat(['&', EntityName, ';'], XMLEntity).
 
 	% entity_to_xml_term(+entity)
 	%
@@ -679,8 +673,7 @@
 		atom(Atom),
 		!,
 		(	atom_requires_quotes(Atom) ->
-			atom_concat('''', Atom, Aux),
-			atom_concat(Aux, '''', QAtom)
+			atomic_list_concat(['''', Atom, ''''], QAtom)
 		;	Atom = QAtom
 		).
 
@@ -762,10 +755,7 @@
 
 	relation_to_xml_filename(Relation, File) :-
 		functor(Relation, Functor, Arity),
-		number_codes(Arity, Codes),
-		atom_codes(Atom, Codes),
-		atom_concat(Functor, '_', Aux),
-		atom_concat(Aux, Atom, File).
+		atomic_list_concat([Functor, '_', Arity], File).
 
 	% write_entity_xml_predicates(@stream, @entity_identifier, +atom, @list)
 	%
@@ -1605,12 +1595,7 @@
 	date_to_padded_atom(Year-Month-Day, DateAtom) :-
 		integer_to_padded_atom(Month, MonthAtom),
 		integer_to_padded_atom(Day, DayAtom),
-		number_codes(Year, YearCodes),
-		atom_codes(YearAtom, YearCodes),
-		atom_concat(YearAtom, '-', DateAtom0),
-		atom_concat(DateAtom0, MonthAtom, DateAtom1),
-		atom_concat(DateAtom1, '-', DateAtom2),
-		atom_concat(DateAtom2, DayAtom, DateAtom).
+		atomic_list_concat([Year, '-', MonthAtom, '-', DayAtom], DateAtom).
 	date_to_padded_atom(Year/Month/Day, DateAtom) :-
 		% old, deprecated date format
 		date_to_padded_atom(Year-Month-Day, DateAtom).

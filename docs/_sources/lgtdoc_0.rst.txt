@@ -11,8 +11,8 @@
 Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.
 
 | **Author:** Paulo Moura
-| **Version:** 9:1:0
-| **Date:** 2023-04-01
+| **Version:** 9:2:0
+| **Date:** 2023-04-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,6 +28,7 @@ Documenting tool. Generates XML documenting files for loaded entities and for li
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
 |    :ref:`type <type/0>`
+|    :ref:`user <user/0>`
 |    :ref:`varlist <varlist/0>`
 
 | **Remarks:**
