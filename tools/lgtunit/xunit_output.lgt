@@ -29,9 +29,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:3:1,
 		author is 'Paulo Moura',
-		date is 2023-04-11,
+		date is 2023-04-12,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -289,7 +289,7 @@
 	date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp) :-
 		integers_to_atoms([Year,Month,Day,Hours,Minutes,Seconds], [AYear,AMonth0,ADay0,AHours0,AMinutes0,ASeconds0]),
 		pad_single_char_atoms([AMonth0,ADay0,AHours0,AMinutes0,ASeconds0], [AMonth,ADay,AHours,AMinutes,ASeconds]),
-		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], '', TimeStamp).
+		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], TimeStamp).
 
 	integers_to_atoms([], []).
 	integers_to_atoms([Integer| Integers], [Atom| Atoms]) :-
