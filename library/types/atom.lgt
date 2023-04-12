@@ -43,6 +43,10 @@
 		argnames is ['Atom', 'Delimiter', 'SubAtoms']
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	replace_sub_atom(Old, New, Input, Output) :-
 		atom_length(Old, Length),
 		(	Length =:= 0 ->
