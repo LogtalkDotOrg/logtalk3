@@ -23,9 +23,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2019-11-28,
+		date is 2023-04-12,
 		comment is 'Atom data type predicates.'
 	]).
 
@@ -47,8 +47,8 @@
 		atom_length(Old, Length),
 		(	Length =:= 0 ->
 			Output = Input
-		;	replace_sub_atom(Old, Length, New, Input, [Fragment| Fragments]),
-			append_fragments(Fragments, Fragment, Output)
+		;	replace_sub_atom(Old, Length, New, Input, Fragments),
+			atomic_list_concat(Fragments, Output)
 		).
 
 	replace_sub_atom(Old, Length, New, Input, Fragments) :-
@@ -61,11 +61,6 @@
 			replace_sub_atom(Old, Length, New, Suffix, TailFragments)
 		;	Fragments = [Input]
 		).
-
-	append_fragments([], Output, Output).
-	append_fragments([Fragment| Fragments], Previous, Output) :-
-		atom_concat(Previous, Fragment, Output0),
-		append_fragments(Fragments, Output0, Output).
 
 	split(Atom, Delimiter, SubAtoms) :-
 		(	Delimiter == '' ->

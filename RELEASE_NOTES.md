@@ -40,6 +40,12 @@ Documentation
 * IMPROVED: Handbook documentation on documenting predicates using the `mode/2`
 directive.
 
+Library
+-------
+
+* IMPROVED: Reduced the number of atoms created when calling the
+`atom::replace_sub_atom/4` library predicate.
+
 Tools
 -----
 
