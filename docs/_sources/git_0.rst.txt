@@ -11,8 +11,8 @@
 Predicates for accessing a git project current branch and latest commit data.
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:2
-| **Date:** 2022-01-25
+| **Version:** 2:1:0
+| **Date:** 2023-04-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -22,6 +22,7 @@ Predicates for accessing a git project current branch and latest commit data.
 |    ``public`` :ref:`git_protocol <git_protocol/0>`
 | **Uses:**
 |    :ref:`os <os/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)

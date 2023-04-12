@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:66:3,
+		version is 2:67:0,
 		author is 'Paulo Moura',
-		date is 2022-10-06,
+		date is 2023-04-12,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -86,8 +86,7 @@
 		self(Self),
 		entity_kind(Entity, Kind, GroundEntity, Name),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, Kind, Entity)),
-		atom_concat(Name, '_', Identifier0),
-		atom_concat(Identifier0, Kind, Identifier),
+		atomic_list_concat([Name, '_', Kind], Identifier),
 		^^format_object(Format),
 		^^merge_options(UserOptions, Options),
 		::reset,
@@ -132,9 +131,7 @@
 			Name = Entity
 		;	^^ground_entity_identifier(Kind, Entity, GroundEntity),
 			functor(GroundEntity, Functor, Arity),
-			number_chars(Arity, Chars),
-			atom_chars(ArityAtom, ['_'| Chars]),
-			atom_concat(Functor, ArityAtom, Name)
+			atomic_list_concat([Functor, '_', Arity], Name)
 		).
 
 	process_entity(Kind, Entity, Options) :-
@@ -333,23 +330,17 @@
 			% third, find the documentation URL prefix, looking for a
 			% path specific prefix before considering the generic prefix
 			(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
-				atom_concat(Prefix, _, Path) ->
+				sub_atom(Path, 0, _, _, Prefix) ->
 				true
 			;	member(url_prefixes(_, DocPrefix), Options)
 			),
 			DocPrefix \== '' ->
 			functor(Entity, EntityFunctor, EntityArity),
-			atom_concat(DocPrefix, EntityFunctor, DocURL0),
-			number_codes(EntityArity, EntityArityCodes),
-			atom_codes(EntityArityAtom, [0'_| EntityArityCodes]),
-			atom_concat(DocURL0, EntityArityAtom, DocURL1),
 			^^option(entity_url_suffix_target(Suffix, Target), Options),
-			atom_concat(DocURL1, Suffix, DocURL2),
 			(	Target == '' ->
-				DocURL = DocURL2
-			;	atom_concat(DocURL2, Target, DocURL3),
-				predicate_target_value(Predicate, TargetValue),
-				atom_concat(DocURL3, TargetValue, DocURL)
+				atomic_list_concat([DocPrefix, EntityFunctor, '_', EntityArity, Suffix], DocURL)
+			;	predicate_target_value(Predicate, TargetValue),
+				atomic_list_concat([DocPrefix, EntityFunctor, '_', EntityArity, Suffix, Target, TargetValue], DocURL)
 			),
 			XRefOptions = [url(DocURL)| Options]
 		;	% could not find entity file or URL prefixes not defined
@@ -386,7 +377,7 @@
 			% second, find the code URL prefix, looking for a path
 			% specific prefix before considering the generic prefix
 			(	member(path_url_prefixes(Prefix, CodePrefix, _), Options),
-				atom_concat(Prefix, _, Path) ->
+				sub_atom(Path, 0, _, _, Prefix) ->
 				true
 			;	^^option(url_prefixes(CodePrefix, _), Options)
 			),
@@ -414,17 +405,9 @@
 				% style URL line reference
 				member(url_line_references(bitbucket), Options) ->
 				decompose_file_name(RelativePath, _, File),
-				atom_concat(CodeURL0, '?fileviewer=file-view-default#', CodeURL1),
-				atom_concat(CodeURL1, File, CodeURL2),
-				atom_concat(CodeURL2, '-', CodeURL3),
-				number_codes(Line, LineCodes),
-				atom_codes(LineAtom, LineCodes),
-				atom_concat(CodeURL3, LineAtom, CodeURL)
+				atomic_list_concat([CodeURL0, '?fileviewer=file-view-default#', File, '-', Line], CodeURL)
 			;	% assume github or gitlab line reference syntax
-				atom_concat(CodeURL0, '#L', CodeURL1),
-				number_codes(Line, LineCodes),
-				atom_codes(LineAtom, LineCodes),
-				atom_concat(CodeURL1, LineAtom, CodeURL)
+				atomic_list_concat([CodeURL0, '#L', Line], CodeURL)
 			) ->
 			XRefOptions = [url(CodeURL)| Options]
 		;	% could not find entity file or URL prefixes not defined

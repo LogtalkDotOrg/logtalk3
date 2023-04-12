@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:53:1,
+		version is 2:54:0,
 		author is 'Paulo Moura',
-		date is 2022-10-06,
+		date is 2023-04-12,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -33,6 +33,10 @@
 
 	:- uses(list, [
 		append/3, member/2, memberchk/2
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	:- public(file/2).
@@ -240,9 +244,8 @@
 		^^option(urls(_, DocPrefix), Options),
 		(	DocPrefix \== '' ->
 			entity_to_html_name(Kind, Entity, Name),
-			atom_concat(DocPrefix, Name, DocURL0),
 			^^option(entity_url_suffix_target(Suffix, _), Options),
-			atom_concat(DocURL0, Suffix, DocURL),
+			atomic_list_concat([DocPrefix, Name, Suffix], DocURL),
 			EntityOptions = [url(DocURL)| Options]
 		;	EntityOptions = [url('')| Options]
 		).
@@ -251,11 +254,10 @@
 		modules_diagram_support::module_property(Entity, file(Path)),
 		(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
 			DocPrefix \== '',
-			atom_concat(Prefix, _, Path) ->
+			sub_atom(Path, 0, _, _, Prefix) ->
 			entity_to_html_name(module, Entity, Name),
-			atom_concat(DocPrefix, Name, DocURL0),
 			^^option(entity_url_suffix_target(Suffix, _), Options),
-			atom_concat(DocURL0, Suffix, DocURL),
+			atomic_list_concat([DocPrefix, Name, Suffix], DocURL),
 			EntityOptions = [url(DocURL)| Options]
 		;	EntityOptions = [url('')| Options]
 		).
@@ -272,13 +274,12 @@
 		),
 		(	(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
 				DocPrefix \== '',
-				atom_concat(Prefix, _, Path)
+				sub_atom(Path, 0, _, _, Prefix)
 			;	member(url_prefixes(_, DocPrefix), Options)
 			) ->
 			entity_to_html_name(logtalk, Entity, Name),
-			atom_concat(DocPrefix, Name, DocURL0),
 			^^option(entity_url_suffix_target(Suffix, _), Options),
-			atom_concat(DocURL0, Suffix, DocURL),
+			atomic_list_concat([DocPrefix, Name, Suffix], DocURL),
 			EntityOptions = [url(DocURL)| Options]
 		;	EntityOptions = [url('')| Options]
 		).
@@ -286,9 +287,7 @@
 	entity_to_html_name(module, Entity, Entity).
 	entity_to_html_name(logtalk, Entity, Name) :-
 		functor(Entity, Functor, Arity),
-		number_codes(Arity, ArityCodes),
-		atom_codes(ArityAtom, [0'_| ArityCodes]),
-		atom_concat(Functor, ArityAtom, Name).
+		atomic_list_concat([Functor, '_', Arity], Name).
 
 	add_external_entity_code_url(Kind, Entity, Options, EntityOptions) :-
 		(	% first, find the file defining the entity
@@ -306,7 +305,7 @@
 			% second, find the code URL prefix, looking for a path
 			% specific prefix before considering the generic prefix
 			(	member(path_url_prefixes(Prefix, CodePrefix, _), Options),
-				atom_concat(Prefix, _, Path) ->
+				sub_atom(Path, 0, _, _, Prefix) ->
 				true
 			;	member(url_prefixes(CodePrefix, _), Options)
 			) ->

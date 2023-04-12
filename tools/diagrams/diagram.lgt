@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:51:1,
+		version is 2:52:0,
 		author is 'Paulo Moura',
-		date is 2022-07-11,
+		date is 2023-04-12,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -1195,7 +1195,7 @@
 
 	add_link_options(Path, Options, LinkingOptions) :-
 		(	member(path_url_prefixes(PathPrefix, CodePrefix, DocPrefix), Options),
-			atom_concat(PathPrefix, _, Path) ->
+			sub_atom(Path, 0, _, _, PathPrefix) ->
 			true
 		;	^^option(url_prefixes(CodePrefix, DocPrefix), Options)
 		),

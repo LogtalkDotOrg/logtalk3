@@ -14,8 +14,8 @@
 Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.
 
 | **Author:** Paulo Moura
-| **Version:** 2:53:1
-| **Date:** 2022-10-06
+| **Version:** 2:54:0
+| **Date:** 2023-04-12
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -27,6 +27,7 @@ Predicates for generating entity diagrams in the specified format with both inhe
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`modules_diagram_support <modules_diagram_support/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
