@@ -90,9 +90,9 @@ also available in the Logtalk website.
 
 - `logtalk_allure_report.sh` and `logtalk_allure_report.ps1`  
 	Bash shell and PowerShell scripts for creating Allure test reports
-	(https://docs.qameta.io/allure-report/); tested with Allure 2.13.8; these scripts
-	should be called after running the `logtalk_tester.*` scripts using
-	the `-f xunit` or `-f xunit_net_v2` command-line options
+	(https://docs.qameta.io/allure-report/); requires Allure 2.21.0 or a later
+	version; these scripts should be called after running the `logtalk_tester.*`
+	scripts using the `-f xunit` or `-f xunit_net_v2` command-line options
 
 - `logtalk_doclet.sh` and `logtalk_doclet.ps1`  
 	Bash shell script and PowerShell script for automating running doclets in
