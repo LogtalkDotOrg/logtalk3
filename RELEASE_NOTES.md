@@ -52,6 +52,8 @@ Library
 * IMPROVED: Reduced the number of atoms created when calling the
 `atom::replace_sub_atom/4` library predicate.
 
+* FIXED: The `git` library when working with paths containing spaces.
+
 Tools
 -----
 

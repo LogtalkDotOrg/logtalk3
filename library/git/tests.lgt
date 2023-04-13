@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2023-04-11,
+		date is 2023-04-13,
 		comment is 'Unit tests for the "git" library.'
 	]).
 
@@ -49,7 +49,7 @@
 
 		setup :-
 			test_repo(Repo, Directory),
-			atomic_list_concat(['tar -xf ', Repo, '.zip', ' -C ', Directory], Command),
+			atomic_list_concat(['tar -xf "', Repo, '.zip"', ' -C "', Directory, '"'], Command),
 			os::shell(Command).
 
 		cleanup :-
@@ -65,12 +65,12 @@
 
 		setup :-
 			test_repo(Repo, Directory),
-			atomic_list_concat(['unzip ', Repo, '.zip', ' -d ', Directory], Command),
+			atomic_list_concat(['unzip "', Repo, '.zip"', ' -d "', Directory, '"'], Command),
 			os::shell(Command).
 
 		cleanup :-
 			test_repo(Repo, _),
-			atom_concat('rm -rf ', Repo, Command),
+			atomic_list_concat(['rm -rf "', Repo, '"'], Command),
 			os::shell(Command).
 
 	:- endif.

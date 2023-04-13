@@ -23,9 +23,9 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:1:1,
 		author is 'Paulo Moura',
-		date is 2023-04-11,
+		date is 2023-04-13,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
@@ -43,7 +43,7 @@
 		branch(Directory, Branch) :-
 			temporary_file(Temporary),
 			internal_os_path(Temporary, NativeTemporary),
-			atomic_list_concat(['git -C ', Directory, ' rev-parse --abbrev-ref HEAD 2>nul > ', NativeTemporary], Command),
+			atomic_list_concat(['git -C "', Directory, '" rev-parse --abbrev-ref HEAD 2>nul > "', NativeTemporary, '"'], Command),
 			(	shell(Command) ->
 				data_clean(Temporary, Branch),
 				Branch \== ''
@@ -54,7 +54,7 @@
 		commit_log(Directory, Format, Output) :-
 			temporary_file(Temporary),
 			internal_os_path(Temporary, NativeTemporary),
-			atomic_list_concat(['git -C ', Directory, ' log --oneline -n 1 --pretty=format:', Format, ' 2>nul > ', NativeTemporary], Command),
+			atomic_list_concat(['git -C "', Directory, '" log --oneline -n 1 --pretty=format:', Format, ' 2>nul > "', NativeTemporary, '"'], Command),
 			(	shell(Command) ->
 				data_raw(Temporary, Output)
 			;	delete_file(Temporary),
@@ -65,7 +65,7 @@
 
 		branch(Directory, Branch) :-
 			temporary_file(Temporary),
-			atomic_list_concat(['git -C ', Directory, ' rev-parse --abbrev-ref HEAD 2>/dev/null > ', Temporary], Command),
+			atomic_list_concat(['git -C "', Directory, '" rev-parse --abbrev-ref HEAD 2>/dev/null > "', Temporary, '"'], Command),
 			(	shell(Command) ->
 				data_clean(Temporary, Branch),
 				Branch \== ''
@@ -75,7 +75,7 @@
 
 		commit_log(Directory, Format, Output) :-
 			temporary_file(Temporary),
-			atomic_list_concat(['git -C ', Directory, ' log --oneline -n 1 --pretty=format:"', Format, '" 2>/dev/null > ', Temporary], Command),
+			atomic_list_concat(['git -C "', Directory, '" log --oneline -n 1 --pretty=format:"', Format, '" 2>/dev/null > "', Temporary, '"'], Command),
 			(	shell(Command) ->
 				data_raw(Temporary, Output)
 			;	delete_file(Temporary),
