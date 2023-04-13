@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog 0.9.1 and later versions
-%  Last updated on November 11, 2022
+%  Last updated on April 13, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -457,8 +457,9 @@
 :- use_module(library(os), [getenv/2]).
 
 '$lgt_environment_variable'(Variable, Value) :-
-	atom_chars(Variable, Chars),
-	getenv(Chars, Value).
+	atom_chars(Variable, VariableChars),
+	getenv(VariableChars, ValueChars),
+	atom_chars(Value, ValueChars).
 
 
 % '$lgt_decompose_file_name'(+atom, ?atom, ?atom, ?atom)

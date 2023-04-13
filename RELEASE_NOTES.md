@@ -34,6 +34,12 @@ Logtalk compiler and runtime
 * ADDED: Support for a `info/2` directive `since` key to document the version
 that added a predicate.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The Scryer Prolog adapter file internal predicate for retrieving
+environment variable values. Thanks to Joe Taber for the bug report.
+
 Documentation
 -------------
 
