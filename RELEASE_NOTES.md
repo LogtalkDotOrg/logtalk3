@@ -98,6 +98,13 @@ to classify failed tests.
 * FIXED: The `lgtunit` tool xUnit format support to ensure that test URLs
 are correct when the suppressed path prefix ends with a slash.
 
+Examples
+--------
+
+* FIXED: The `tester.ps1` files for the `clustering`, `document_converter`,
+and `neo4j` Java examples to avoid PowerShell errors when running the
+`logtalk_tester.ps1` automation script with options other than `-p`.
+
 Tests
 -----
 

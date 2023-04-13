@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   PowerShell script to be sourced by the logtalk_tester script
-##   Last updated on March 16, 2023
+##   Last updated on April 13, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,24 @@
 [CmdletBinding()]
 param(
 	[Parameter()]
-	[String]$p
+	[String]$p,
+	[String]$o,
+	[String]$m,
+	[String]$f,
+	[String]$d,
+	[String]$t,
+	[String]$n,
+	[String]$s,
+	[String]$b,
+	[String]$u,
+	[String]$c,
+	[String]$l,
+	[String]$e,
+	[String]$i,
+	[String]$g,
+	[String]$r,
+	[Switch]$w,
+	[String[]]$a
 )
 
 if ($p -eq "swi") {
