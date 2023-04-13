@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:6:1,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-04-13,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -100,7 +100,7 @@
 
 	:- if(current_prolog_flag(max_arity, unbounded)).
 
-		test(sics_univ_2_18, true).
+		- test(sics_univ_2_18, true, [note('The max_arity flag is unbounded')]).
 
 	:- else.
 
