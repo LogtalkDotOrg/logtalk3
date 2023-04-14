@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 15, 2023
+##   Last updated on April 14, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -119,26 +119,29 @@ param(
 	} elseif ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet)) {
 		Write-Output "%         not applicable"
 	} elseif ($tests_exit -eq 0 -and (Test-Path $results/$name.totals) -and $o -eq "verbose") {
-		$line = (Get-Content -Path $results/$name.totals | Select-String -Pattern '^object' -CaseSensitive -Raw).split("`t")
-		Write-Host -NoNewline $mode_prefix
-		Write-Host -NoNewline $line[2]
-		Write-Host -NoNewline ' tests: '
-		Write-Host -NoNewline $line[3]
-		Write-Host -NoNewline ' skipped, '
-		Write-Host -NoNewline $line[4]
-		Write-Host -NoNewline ' passed, '
-		Write-Host -NoNewline $line[5]
-		Write-Host -NoNewline ' failed ('		
-		Write-Host -NoNewline $line[6]
-		Write-Output ' flaky)'
-		$end_time = Get-Date -UFormat %s
-		$duration = $end_time - $start_time
-		Write-Host -NoNewline '%         completed tests from object '
-		Write-Host -NoNewline $line[1]
-		if ($duration -eq 1) {
-			Write-Output (" in " + $duration + " second")
-		} else {
-			Write-Output (" in " + $duration + " seconds")
+		Get-Content -Path $results/$name.totals | Select-String -AllMatches -Pattern '^object' -CaseSensitive -Raw |
+		ForEach-Object {$_.Matches} {
+			$line = $_.split("`t")
+			Write-Host -NoNewline $mode_prefix
+			Write-Host -NoNewline $line[2]
+			Write-Host -NoNewline ' tests: '
+			Write-Host -NoNewline $line[3]
+			Write-Host -NoNewline ' skipped, '
+			Write-Host -NoNewline $line[4]
+			Write-Host -NoNewline ' passed, '
+			Write-Host -NoNewline $line[5]
+			Write-Host -NoNewline ' failed ('		
+			Write-Host -NoNewline $line[6]
+			Write-Output ' flaky)'
+			$end_time = Get-Date -UFormat %s
+			$duration = $end_time - $start_time
+			Write-Host -NoNewline '%         completed tests from object '
+			Write-Host -NoNewline $line[1]
+			if ($duration -eq 1) {
+				Write-Output (" in " + $duration + " second")
+			} else {
+				Write-Output (" in " + $duration + " seconds")
+			}
 		}
 		Write-Host -NoNewline '%         clause coverage '
 		(Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("`t")[1]

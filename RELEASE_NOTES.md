@@ -98,6 +98,9 @@ to classify failed tests.
 * FIXED: The `lgtunit` tool xUnit format support to ensure that test URLs
 are correct when the suppressed path prefix ends with a slash.
 
+* FIXED: The `logtalk_tester.ps1` script reporting of test sets with multiple
+or parametric test objects.
+
 Examples
 --------
 
