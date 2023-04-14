@@ -120,6 +120,12 @@ Prolog portable solution to specify text encoding.
 
 * UPDATED: The tests for the `uses/2` directive for Scryer Prolog.
 
+Installers and installation scripts
+-----------------------------------
+
+* ADDED: Preliminary support for Scryer Prolog to the Windows installer.
+Assumes a `C:\scryer-prolog\scryer-prolog.exe` executable.
+
 
 3.64.0 - March 28, 2023
 =======================
