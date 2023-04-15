@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:94:1,
+		version is 1:94:2,
 		author is 'Paulo Moura',
-		date is 2022-09-30,
+		date is 2023-04-15,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2218,26 +2218,33 @@
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
 			{
 				current_time(Time),
-				memberchk('Y'=YearChars,    Time),
-				memberchk('m'=MonthChars,   Time),
-				memberchk('d'=DayChars,     Time),
-				memberchk('H'=HoursChars,   Time),
-				memberchk('M'=MinutesChars, Time),
-				memberchk('S'=SecondsChars, Time),
+				memberchk('Y'=Year0,    Time),
+				memberchk('m'=Month0,   Time),
+				memberchk('d'=Day0,     Time),
+				memberchk('H'=Hours0,   Time),
+				memberchk('M'=Minutes0, Time),
+				memberchk('S'=Seconds0, Time),
 				(	current_prolog_flag(double_quotes, chars) ->
-					number_chars(Year, YearChars),
-					number_chars(Month, MonthChars),
-					number_chars(Day, DayChars),
-					number_chars(Hours, HoursChars),
-					number_chars(Minutes, MinutesChars),
-					number_chars(Seconds, SecondsChars)
-				;	% assume codes
-					number_codes(Year, YearChars),
-					number_codes(Month, MonthChars),
-					number_codes(Day, DayChars),
-					number_codes(Hours, HoursChars),
-					number_codes(Minutes, MinutesChars),
-					number_codes(Seconds, SecondsChars)
+					number_chars(Year, Year0),
+					number_chars(Month, Month0),
+					number_chars(Day, Day0),
+					number_chars(Hours, Hours0),
+					number_chars(Minutes, Minutes0),
+					number_chars(Seconds, Seconds0)
+				;	current_prolog_flag(double_quotes, codes) ->
+					number_codes(Year, Year0),
+					number_codes(Month, Month0),
+					number_codes(Day, Day0),
+					number_codes(Hours, Hours0),
+					number_codes(Minutes, Minutes0),
+					number_codes(Seconds, Seconds0)
+				;	% current_prolog_flag(double_quotes, atom),
+					atom_codes(Year0, YearCodes), number_codes(Year, YearCodes),
+					atom_codes(Month0, MonthCodes), number_codes(Month, MonthCodes),
+					atom_codes(Day0, DayCodes), number_codes(Day, DayCodes),
+					atom_codes(Hours0, HoursCodes), number_codes(Hours, HoursCodes),
+					atom_codes(Minutes0, MinutesCodes), number_codes(Minutes, MinutesCodes),
+					atom_codes(Seconds0, SecondsCodes), number_codes(Seconds, SecondsCodes)
 				)
 			}.
 

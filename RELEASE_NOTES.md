@@ -54,6 +54,9 @@ Library
 
 * FIXED: The `git` library when working with paths containing spaces.
 
+* FIXED: The `os::date_time/7` library predicate for Scryer Prolog when the
+`double_quotes` flag is set to `atom`.
+
 Tools
 -----
 
