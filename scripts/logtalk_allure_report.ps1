@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on April 10, 2023
+##   Last updated on April 17, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.10")
+	Write-Output ($myName + " 0.11")
 }
 
 Function Write-Usage-Help() {
@@ -79,6 +79,17 @@ Function Check-Parameters() {
 }
 
 ###################### here it starts ############################ 
+
+$minimal_version="2.21.0" 
+
+if ((Get-Command "allure" -ErrorAction SilentlyContinue) -eq $null)  { 
+	Write-Host "Error: allure is not installed!"
+	Exit 1
+} else {
+	if ((allure --version) -lt $minimal_version) {
+		Write-Host "Warning: allure " + $minimal_version + " or later version is recommended!"
+	}
+}
 
 Check-Parameters
 

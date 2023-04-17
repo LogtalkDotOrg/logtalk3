@@ -95,6 +95,9 @@ remaining relative file path parts.
 * IMPROVED: The `lgtunit` tool documentation of the input/output testing
 predicates.
 
+* IMPROVED: The `logtalk_allure_report` scripts to check if Allure is
+installed and the required minimal version.
+
 * UPDATED: The `logtalk_allure_report` scripts to add a `categories.json` file
 to classify failed tests.
 

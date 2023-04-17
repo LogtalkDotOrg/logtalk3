@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on April 10, 2023
+##   Last updated on April 17, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -24,17 +24,25 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.10"
+	echo "$(basename "$0") 0.11"
 	exit 0
 }
 
 # default argument values
+minimal_version="2.21.0"
 tests=$(pwd)
 results="./allure-results"
 report="./allure-report"
 title=""
 preprocess_only="false"
 environment_pairs=""
+
+if ! [ -x "$(command -v allure)" ] ; then
+	echo "Error: allure is not installed!" >&2
+	exit 1
+elif ! [ "$(printf '%s\n' "$minimal_version" "$(allure --version)" | sort -V | head -n1)" = "$minimal_version" ] ; then
+	echo "Warning: allure $minimal_version or later version is recommended!"
+fi
 
 # use GNU sed if available instead of BSD sed
 if gsed --version >/dev/null 2>&1 ; then
