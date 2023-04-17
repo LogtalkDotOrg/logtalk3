@@ -132,6 +132,9 @@ Installers and installation scripts
 * ADDED: Preliminary support for Scryer Prolog to the Windows installer.
 Assumes a `C:\scryer-prolog\scryer-prolog.exe` executable.
 
+* ADDED: Preliminary support for Trealla Prolog to the Windows installer.
+Assumes a `C:\tpl-windows-x64\tpl.exe` executable.
+
 
 3.64.0 - March 28, 2023
 =======================

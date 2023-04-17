@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on April 14, 2023
+; Last updated on April 17, 2023
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -79,6 +79,7 @@ Name: "prolog\sicstus"; Description: "SICStus Prolog integration (4.1.0 or later
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\tau"; Description: "Tau Prolog integration (0.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\trealla"; Description: "Trealla Prolog integration (2.6.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsb"; Description: "XSB integration (3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (console) integration (6.3.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (window) integration (6.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -176,6 +177,8 @@ Name: "{group}\Logtalk - SWI-Prolog (console)"; Filename: "{code:GetSWIConExePat
 Name: "{group}\Logtalk - SWI-Prolog (window)"; Filename: "{code:GetSWIWinExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_swi.pl"""; Comment: "Runs Logtalk with SWI-Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\swiwin; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - Tau Prolog"; Filename: "{code:GetNodeExePath}"; Parameters: "--stack_size=10000 ""%LOGTALKHOME%\integration\logtalk_tau.js"""; Comment: "Runs Logtalk with Tau Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\tau; Flags: createonlyiffileexists
+
+Name: "{group}\Logtalk -Trealla Prolog (window)"; Filename: "{code:GetTreallaExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_tp.pl"""; Comment: "Runs Logtalk with Trealla Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\trealla; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - XSB"; Filename: "{code:GetXSBExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsb.pl']."""; Comment: "Runs Logtalk with XSB (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsb; Flags: createonlyiffileexists
 
@@ -500,7 +503,7 @@ begin
   begin
     Warning := 'Failed to detect Scryer Prolog installation.' + Chr(13) +
                'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
-               'You can manually create the shortcut by finding the full path to the SICStus Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the Scryer Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
                'executable full path -l "%LOGTALKHOME%\integration\logtalk_scryer.pl"';
     MsgBox(Warning, mbError, MB_OK);
   end
@@ -692,6 +695,32 @@ begin
   end
 end;
 
+function TreallaExePath: String;
+var
+  Path: String;
+begin
+  Path := FileSearch('tpl.exe', ExpandConstant('{sd}\tpl-windows-x64'));
+  if Path = '' then
+    Result := 'prolog_compiler_not_installed'
+  else
+    Result := Path
+end;
+
+function GetTreallaExePath(Param: String): String;
+var
+  Warning: String;
+begin
+  Result := TreallaExePath;
+  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
+  begin
+    Warning := 'Failed to detect Trealla Prolog installation.' + Chr(13) +
+               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
+               'You can manually create the shortcut by finding the full path to the Trealla Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
+               'executable full path -l "%LOGTALKHOME%\integration\logtalk_tp.pl"';
+    MsgBox(Warning, mbError, MB_OK);
+  end
+end;
+
 function XSBExePath: String;
 var
   XSB_DIR: String;
@@ -820,6 +849,7 @@ begin
       (SWIConExePath = 'prolog_compiler_not_installed') and
       (SWIWinExePath = 'prolog_compiler_not_installed') and
       (NodeExePath = 'prolog_compiler_not_installed') and
+      (TreallaExePath = 'prolog_compiler_not_installed') and
       (XSBExePath = 'prolog_compiler_not_installed') and
       (YAPConExePath = 'prolog_compiler_not_installed') and
       (YAPWinExePath = 'prolog_compiler_not_installed')
