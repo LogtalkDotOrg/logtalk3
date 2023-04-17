@@ -87,7 +87,7 @@ if ((Get-Command "allure" -ErrorAction SilentlyContinue) -eq $null)  {
 	Exit 1
 } else {
 	if ((allure --version) -lt $minimal_version) {
-		Write-Output "Warning: allure " + $minimal_version + " or later version is recommended!"
+		Write-Output ("Warning: allure " + $minimal_version + " or later version is recommended!")
 	}
 }
 
