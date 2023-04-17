@@ -83,11 +83,11 @@ Function Check-Parameters() {
 $minimal_version="2.21.0" 
 
 if ((Get-Command "allure" -ErrorAction SilentlyContinue) -eq $null)  { 
-	Write-Host "Error: allure is not installed!"
+	Write-Output "Error: allure is not installed!"
 	Exit 1
 } else {
 	if ((allure --version) -lt $minimal_version) {
-		Write-Host "Warning: allure " + $minimal_version + " or later version is recommended!"
+		Write-Output "Warning: allure " + $minimal_version + " or later version is recommended!"
 	}
 }
 
