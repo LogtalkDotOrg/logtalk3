@@ -178,7 +178,7 @@ Name: "{group}\Logtalk - SWI-Prolog (window)"; Filename: "{code:GetSWIWinExePath
 
 Name: "{group}\Logtalk - Tau Prolog"; Filename: "{code:GetNodeExePath}"; Parameters: "--stack_size=10000 ""%LOGTALKHOME%\integration\logtalk_tau.js"""; Comment: "Runs Logtalk with Tau Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\tau; Flags: createonlyiffileexists
 
-Name: "{group}\Logtalk -Trealla Prolog (window)"; Filename: "{code:GetTreallaExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_tp.pl"""; Comment: "Runs Logtalk with Trealla Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\trealla; Flags: createonlyiffileexists
+Name: "{group}\Logtalk - Trealla Prolog"; Filename: "{code:GetTreallaExePath}"; Parameters: "-s ""%LOGTALKHOME%\integration\logtalk_tp.pl"""; Comment: "Runs Logtalk with Trealla Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\trealla; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - XSB"; Filename: "{code:GetXSBExePath}"; Parameters: "-l -e ""['%LOGTALKHOME%\\integration\\logtalk_xsb.pl']."""; Comment: "Runs Logtalk with XSB (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\xsb; Flags: createonlyiffileexists
 
