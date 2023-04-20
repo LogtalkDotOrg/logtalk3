@@ -198,7 +198,17 @@ category is imported by the default <code class="docutils literal notranslate"><
 application global generators. To make the generators local and thus
 minimize the potential for generator name clashes, the category can be
 imported by one of more application objects. Use protected or private
-import to restrict the scope of the library predicates.</p>
+import to restrict the scope of the library predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo,
+    <span class="k">imports</span>(private<span class="o">::</span>gensym_core)).
+
+    bar <span class="o">:-</span>
+        <span class="o">^^</span>gensym(p, <span class="nv">S</span>),
+        ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
 </section>
 </section>
 

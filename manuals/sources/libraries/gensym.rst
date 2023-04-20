@@ -41,4 +41,15 @@ category is imported by the default ``gensym`` object to provide
 application global generators. To make the generators local and thus
 minimize the potential for generator name clashes, the category can be
 imported by one of more application objects. Use protected or private
-import to restrict the scope of the library predicates.
+import to restrict the scope of the library predicates. For example:
+
+::
+
+   :- object(foo,
+       imports(private::gensym_core)).
+
+       bar :-
+           ^^gensym(p, S),
+           ...
+
+   :- end_object.
