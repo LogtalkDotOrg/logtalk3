@@ -107,6 +107,9 @@ are correct when the suppressed path prefix ends with a slash.
 * FIXED: The `logtalk_tester.ps1` script reporting of test sets with multiple
 or parametric test objects.
 
+* FIXED: The `debugger` tool to reset skipping and zapping state when tracing
+a new top-level query. Thanks to Lindsey Spratt for the bug report.
+
 Examples
 --------
 

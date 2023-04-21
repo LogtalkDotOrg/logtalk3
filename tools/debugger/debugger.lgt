@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:14:0,
+		version is 4:14:1,
 		author is 'Paulo Moura',
-		date is 2023-01-25,
+		date is 2023-04-21,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -507,6 +507,10 @@
 			assertz(debugging_)
 		;	true
 		),
+		retractall(skipping_),
+		retractall(quasi_skipping_),
+		retractall(skipping_unleashed_(_)),
+		retractall(zap_to_port_(_)),
 		debug_handler(goal(Goal, TGoal), ExCtx).
 	debug_handler(goal(Goal, TGoal), ExCtx) :-
 		inc_invocation_number(N),
