@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 4.1.0 and later versions
-%  Last updated on March 27, 2023
+%  Last updated on April 22, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -544,6 +544,16 @@
 
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
+
+'$lgt_prolog_goal_expansion'(add_csv(Predicate,File,Options), {add_csv(CPredicate,File,Options)}) :-
+	logtalk_load_context(entity_type, object),
+	!,
+	'$lgt_compile_predicate_indicators'(Predicate, _, CPredicate).
+'$lgt_prolog_goal_expansion'(
+		add_csv(Predicate,File,Options),
+		(this(This), {'$lgt_compile_predicate_indicators'(Predicate, This, CPredicate), add_csv(CPredicate,File,Options)})
+	) :-
+	logtalk_load_context(entity_type, category).
 
 '$lgt_prolog_goal_expansion'(define_disk_predicate(Template,Mode,Database), {define_disk_predicate(CTemplate,Mode,Database)}) :-
 	logtalk_load_context(entity_type, object),

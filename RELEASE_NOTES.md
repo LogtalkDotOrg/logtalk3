@@ -37,6 +37,9 @@ that added a predicate.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: LVM adapter file support for the new `add_csv/3` built-in predicate
+introduced in version 6.0.0.
+
 * FIXED: The Scryer Prolog adapter file internal predicate for retrieving
 environment variable values. Thanks to Joe Taber for the bug report.
 
