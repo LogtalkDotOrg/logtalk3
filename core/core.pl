@@ -14481,16 +14481,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_context_switch_call'(Obj, Pred, TPred, ExCtx).
 
-% access to predicate definitions in "this" from complementing categories;
-% usually used to call a predicate definition that is being overriden by
-% the category
+% access to predicate definitions in "this" from categories; in the case of
+% complementing categories, it's usually used to call a predicate definition
+% that is being overriden by the category; when used within an object, it's
+% the same as calling its argument
 
 '$lgt_compile_body'(@Pred, _, TPred, '$lgt_debug'(goal(@Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_complemented_object_'(_, _, _, _, _),
-	'$lgt_check'(callable, Pred),
 	!,
+	'$lgt_check'(callable, Pred),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_call_in_this'(Pred, ExCtx).
+
+'$lgt_compile_body'(@Pred, _, TPred, '$lgt_debug'(goal(@Pred, TPred), ExCtx), Ctx) :-
+	'$lgt_pp_entity_'(category, _, _),
+	!,
+	'$lgt_check'(callable, Pred),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	(	functor(Pred, Functor, Arity),
+		\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_private_'(Functor, Arity, _, _) ->
+		% no scope directive
+		TPred = '$lgt_call_in_this'(Pred, ExCtx)
+	;	TPred = '$lgt_call_in_this_checked'(Pred, ExCtx)
+	).
+
+'$lgt_compile_body'(@Pred, Caller, TPred, DPred, Ctx) :-
+	!,
+	'$lgt_check'(callable, Pred),
+	'$lgt_compile_body'(Pred, Caller, TPred, DPred, Ctx).
 
 % calling explicitly qualified module predicates
 

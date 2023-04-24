@@ -28,8 +28,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: Calls to unknown dynamic predicates in "this" from a category to
+* CHANGED: Calls to unknown dynamic predicates in *this* from a category to
 throw an existence error instead of failing.
+
+* ADDED: Support for using the `(@)/1` goal annotation for calling a predicate
+in *this* from any category and from objects.
 
 * ADDED: Support for `mode/2` directive `zero_or_more_or_error` and
 `one_or_more_or_error` number of proofs.
