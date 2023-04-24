@@ -14462,7 +14462,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % usually used to call a predicate definition that is being overriden by
 % the category
 
-'$lgt_compile_body'(@Pred, _, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
+'$lgt_compile_body'(@Pred, _, TPred, '$lgt_debug'(goal(@Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_complemented_object_'(_, _, _, _, _),
 	'$lgt_check'(callable, Pred),
 	!,
