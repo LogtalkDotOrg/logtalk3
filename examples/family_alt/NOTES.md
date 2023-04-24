@@ -30,7 +30,7 @@ parametric object allows concrete families to be plugged-in by defining the
 basic female, male, and parent relations as multifile predicates parameterized
 by the family database object. Several family objects can be loaded at the
 same time. Using a parametric object to query a family extended relations is
-convenient as the object parameter allows us to make name of the concrete
+convenient as the object parameter allows us to make the name of the concrete
 family easily available to any predicate.
 
 The main advantage of this solution is that it avoids dynamic binding as
