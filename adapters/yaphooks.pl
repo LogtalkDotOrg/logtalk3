@@ -3,7 +3,7 @@
 %  Integration code for YAP 6.3.4 and later versions to improve
 %  usability when using the YAP profilers.
 %
-%  Last updated on January 28, 2020
+%  Last updated on April 24, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -32,6 +32,7 @@ user:prolog_predicate_name(user:'$lgt_send_to_self_'(_, _, _), '::/1') :- !.
 user:prolog_predicate_name(user:'$lgt_obj_super_call_'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_ctg_super_call_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 user:prolog_predicate_name(user:'$lgt_call_in_this'(_, _), 'call/1') :- !.
+user:prolog_predicate_name(user:'$lgt_call_in_this_checked'(_, _), 'call/1') :- !.
 
 user:prolog_predicate_name(user:'$lgt_send_to_obj_rt'(_, _, _, _), '::/2 (runtime)') :- !.
 user:prolog_predicate_name(user:'$lgt_send_to_obj'(_, _, _), '::/2 (event-aware)') :- !.

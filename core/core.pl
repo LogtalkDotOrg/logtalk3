@@ -6571,16 +6571,39 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_call_in_this'(+callable, +execution_context)
+% '$lgt_call_in_this_checked'(+callable, +execution_context)
 %
-% calls a dynamic predicate in "this" from within a category at runtime;
-% also used to call overriden predicate definitions from complementing
-% cateogries
+% calls a dynamic and declared predicate in "this" from within a category at runtime;
+% also used to call overriden predicate definitions from complementing categories
 
-'$lgt_call_in_this'(Pred, ExCtx) :-
+'$lgt_call_in_this_checked'(Pred, ExCtx) :-
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
 	'$lgt_current_object_'(This, _, _, Def, _, _, _, _, DDef, _, _),
 	(	% the object definition may include some initial clauses for the predicate
+		call(Def, Pred, ExCtx, TPred) ->
+		call(TPred)
+	;	% or the clauses for the predicate may be defined only at runtime
+		call(DDef, Pred, ExCtx, TPred) ->
+		call(TPred)
+	;	% no definition found; fail as per closed-world assumption
+		fail
+	).
+
+
+
+% '$lgt_call_in_this'(+callable, +execution_context)
+%
+% calls a dynamic predicate in "this" from within a category at runtime;
+% also used to call overriden predicate definitions from complementing categories
+
+'$lgt_call_in_this'(Pred, ExCtx) :-
+	'$lgt_execution_context_this_entity'(ExCtx, This, _),
+	'$lgt_current_object_'(This, _, Dcl, Def, _, _, _, _, DDef, _, _),
+	(	\+ call(Dcl, Pred, _, _, _, _, _) ->
+		% unknown predicate
+		functor(Pred, Functor, Arity),
+		throw(error(existence_error(predicate_declaration, Functor/Arity), logtalk(Pred, ExCtx)))
+	;	% the object definition may include some initial clauses for the predicate
 		call(Def, Pred, ExCtx, TPred) ->
 		call(TPred)
 	;	% or the clauses for the predicate may be defined only at runtime
@@ -16015,7 +16038,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_dynamic_'(Pred, _, _),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	TPred = '$lgt_call_in_this'(Pred, ExCtx).
+	(	functor(Pred, Functor, Arity),
+		\+ '$lgt_pp_public_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
+		\+ '$lgt_pp_private_'(Functor, Arity, _, _) ->
+		% no scope directive
+		TPred = '$lgt_call_in_this'(Pred, ExCtx)
+	;	TPred = '$lgt_call_in_this_checked'(Pred, ExCtx)
+	).
 
 % non-callable terms
 

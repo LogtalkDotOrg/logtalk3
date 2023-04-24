@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on March 22, 2020
+%  Last updated on April 24, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -246,6 +246,7 @@ user:prolog_predicate_name(Goal, Label) :-
 '$lgt_swi_prolog_predicate_name'('$lgt_obj_super_call_'(_, _, _), '^^/2 (from obj; same pred)') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_ctg_super_call_'(_, _, _), '^^/2 (from ctg; same pred)') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_call_in_this'(_, _), 'call/1') :- !.
+'$lgt_swi_prolog_predicate_name'('$lgt_call_in_this_checked'(_, _), 'call/1') :- !.
 
 '$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj_rt'(_, _, _, _), '::/2 (runtime)') :- !.
 '$lgt_swi_prolog_predicate_name'('$lgt_send_to_obj'(_, _, _), '::/2 (event transparent)') :- !.
@@ -492,6 +493,7 @@ prolog_clause:make_varnames_hook(_, (THead :- _), Offsets, Names, Bindings) :-
 '$lgt_swi_unify_clause_body'(^^Msg, _, '$lgt_ctg_super_call_'(_, Msg, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(Goal, _, '$lgt_call_in_this'(Goal, _), TermPos, TermPos) :- !.
+'$lgt_swi_unify_clause_body'(Goal, _, '$lgt_call_in_this_checked'(Goal, _), TermPos, TermPos) :- !.
 
 '$lgt_swi_unify_clause_body'(Obj<<Goal, _, '$lgt_call_within_context'(Obj, Goal, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Obj<<Goal, _, '$lgt_call_within_context_nv'(Obj, Goal, _), TermPos, TermPos) :- !.
