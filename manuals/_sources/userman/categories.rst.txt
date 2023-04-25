@@ -211,11 +211,11 @@ allowing patching a previous patch if necessary.
 
 When replacing a predicate definition, it is possible to call the overriden
 definition in the object from the new definition in the category by using the
-**experimental** :ref:`call_in_this_1` goal annotation (defined as a prefix
-operator). This goal annotation is only meaningful when used within categories
-and requires a compile time bound goal argument, which is called in
-:term:`this` (i.e. in the context of the complemented object or the object
-importing a category). As an example, consider the following object:
+:ref:`call_in_this_1` control construct. This construct is only meaningful
+when used within categories and requires a compile time bound goal argument,
+which is called in :term:`this` (i.e. in the context of the complemented
+object or the object importing a category). As an example, consider the
+following object:
 
 ::
 
@@ -229,7 +229,7 @@ importing a category). As an example, consider the following object:
 
    :- end_object.
    
-We can use the ``@`` goal annotation to e.g. wrap the original ``make_sound/0``
+We can use the ``(@)/1`` control construct e.g. wrap the original ``make_sound/0``
 predicate definition by writing:
 
 ::

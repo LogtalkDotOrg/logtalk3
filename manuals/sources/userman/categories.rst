@@ -229,7 +229,7 @@ following object:
 
    :- end_object.
    
-We can use the ``@`` goal annotation to e.g. wrap the original ``make_sound/0``
+We can use the ``(@)/1`` control construct e.g. wrap the original ``make_sound/0``
 predicate definition by writing:
 
 ::
