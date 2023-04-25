@@ -318,10 +318,12 @@ only adding new functionality). A complementing category takes preference
 over a previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.</p>
 <p>When replacing a predicate definition, it is possible to call the overriden
-definition in the object from the new definition in the category by annoting
-the goal with the <strong>experimental</strong> <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> prefix operator. This goal annotation
-is only valid in the context of a complementing category and for compile time
-bound goals. As an example, consider the following object:</p>
+definition in the object from the new definition in the category by using the
+<strong>experimental</strong> <a class="reference internal" href="../refman/control/call_in_this_1.html#call-in-this-1"><span class="std std-ref">(&#64;)/1</span></a> goal annotation (defined as a prefix
+operator). This goal annotation is only meaningful when used within categories
+and requires a compile time bound goal argument, which is called in
+<a class="reference internal" href="../glossary.html#term-this"><span class="xref std std-term">this</span></a> (i.e. in the context of the complemented object or the object
+importing a category). As an example, consider the following object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bird).
 
 <span class="p">    :- </span><span class="k">set_logtalk_flag</span>(complements, allow).

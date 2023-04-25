@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calling external predicates &mdash; The Logtalk Handbook v3.65.0-b01 documentation</title>
+  <title>(@)/1 &mdash; The Logtalk Handbook v3.65.0-b01 documentation</title>
       <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
@@ -29,8 +29,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="{}/1" href="external_call_1.html" />
-    <link rel="prev" title="(@)/1" href="call_in_this_1.html" />
+    <link rel="next" title="Calling external predicates" href="external_calls.html" />
+    <link rel="prev" title="Calling predicates in this" href="call_in_this.html" />
    
 </head>
 
@@ -67,11 +67,11 @@
 <li class="toctree-l3"><a class="reference internal" href="message_sending.html">Message sending</a></li>
 <li class="toctree-l3"><a class="reference internal" href="message_delegation.html">Message delegation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="super_calls.html">Calling imported and inherited predicates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="call_in_this.html">Calling predicates in <em>this</em></a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Calling external predicates</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="external_call_1.html"><code class="docutils literal notranslate"><span class="pre">{}/1</span></code></a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="call_in_this.html">Calling predicates in <em>this</em></a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">(&#64;)/1</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="external_calls.html">Calling external predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="context_switching_calls.html">Context switching calls</a></li>
 </ul>
 </li>
@@ -114,9 +114,10 @@
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Reference Manual</a></li>
           <li class="breadcrumb-item"><a href="index.html">Control constructs</a></li>
-      <li class="breadcrumb-item active">Calling external predicates</li>
+          <li class="breadcrumb-item"><a href="call_in_this.html">Calling predicates in <em>this</em></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">(&#64;)/1</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/control/external_calls.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/control/call_in_this_1.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -124,21 +125,63 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="calling-external-predicates">
-<span id="external-calls"></span><h1>Calling external predicates<a class="headerlink" href="#calling-external-predicates" title="Permalink to this heading"></a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="external_call_1.html"><code class="docutils literal notranslate"><span class="pre">{}/1</span></code></a></li>
-</ul>
+  <p class="align-right"><strong>control construct</strong></p>
+<section id="call-in-this-1">
+<span id="index-0"></span><span id="id1"></span><h1><code class="docutils literal notranslate"><span class="pre">(&#64;)/1</span></code><a class="headerlink" href="#call-in-this-1" title="Permalink to this heading"></a></h1>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span><span class="nv">Predicate</span>
+</pre></div>
 </div>
+<p>Calls a predicate definition in <a class="reference internal" href="../../glossary.html#term-this"><span class="xref std std-term">this</span></a>. The argument must be a callable
+term at compile time. The predicate must be declared (by a scope directive).
+This control construct provides access to predicate definitions in <em>this</em> from
+categories. For example, it allows overriding a predicate definition from a
+complementing category with a new definition that calls goals before and
+after calling the overriden definition (the overriding definition is sometimes
+described in other programming languages as an <em>around method</em>). When used
+within an object, it’s the same as calling its argument.</p>
+</section>
+<section id="modes-and-number-of-proofs">
+<h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Permalink to this heading"></a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span> <span class="o">+</span>callable <span class="o">-</span> zero_or_more
+</pre></div>
+</div>
+</section>
+<section id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading"></a></h2>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Predicate</span></code>, with predicate indicator <code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>, is not declared:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate_declaration,</span> <span class="pre">Name/Arity)</span></code></div>
+</div>
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>Assuming an object declaring a <code class="docutils literal notranslate"><span class="pre">make_sound/0</span></code> predicate, define an
+<em>around method</em> in a complementing category:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>make_sound <span class="o">:-</span>
+    <span class="k">write</span>(<span class="s">&#39;Started making sound...&#39;</span>), <span class="k">nl</span>,
+    <span class="o">@</span>make_sound,
+    <span class="k">write</span>(<span class="s">&#39;... finished making sound.&#39;</span>), <span class="k">nl</span>.
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a>,
+<a class="reference internal" href="send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>,
+<a class="reference internal" href="delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a></p>
+</div>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="call_in_this_1.html" class="btn btn-neutral float-left" title="(@)/1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="external_call_1.html" class="btn btn-neutral float-right" title="{}/1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="call_in_this.html" class="btn btn-neutral float-left" title="Calling predicates in this" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="external_calls.html" class="btn btn-neutral float-right" title="Calling external predicates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -210,10 +210,12 @@ over a previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.
 
 When replacing a predicate definition, it is possible to call the overriden
-definition in the object from the new definition in the category by annoting
-the goal with the **experimental** ``@`` prefix operator. This goal annotation
-is only valid in the context of a complementing category and for compile time
-bound goals. As an example, consider the following object:
+definition in the object from the new definition in the category by using the
+**experimental** :ref:`call_in_this_1` goal annotation (defined as a prefix
+operator). This goal annotation is only meaningful when used within categories
+and requires a compile time bound goal argument, which is called in
+:term:`this` (i.e. in the context of the complemented object or the object
+importing a category). As an example, consider the following object:
 
 ::
 

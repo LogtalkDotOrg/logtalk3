@@ -26,5 +26,6 @@ Control constructs
    message_sending
    message_delegation
    super_calls
+   call_in_this
    external_calls
    context_switching_calls

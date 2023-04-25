@@ -31,7 +31,7 @@ Logtalk compiler and runtime
 * CHANGED: Calls to unknown dynamic predicates in *this* from a category to
 throw an existence error instead of failing.
 
-* ADDED: Support for using the `(@)/1` goal annotation for calling a predicate
+* ADDED: Support to the `(@)/1` control construct for calling a predicate
 in *this* from any category and from objects.
 
 * ADDED: Support for `mode/2` directive `zero_or_more_or_error` and
@@ -51,6 +51,9 @@ environment variable values. Thanks to Joe Taber for the bug report.
 
 Documentation
 -------------
+
+* ADDED: Documentation for the `(@)/1` control construct, which allows calling
+predicates in *this* from within categories.
 
 * IMPROVED: Handbook documentation on documenting predicates using the `mode/2`
 directive.
@@ -128,6 +131,8 @@ and `neo4j` Java examples to avoid PowerShell errors when running the
 
 Tests
 -----
+
+* ADDED: Tests for the `(@)/1` control construct.
 
 * ADDED: Tests for the ISO Prolog standard line and block comment syntax.
 
