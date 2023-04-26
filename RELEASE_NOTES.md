@@ -91,6 +91,9 @@ test note (if any).
 * CHANGED: The `lgtunit` tool `xunit_net_v2_output` and `xunit_net_v2_report`
 formats now include the test note (if any) as a test trait for all outcomes.
 
+* CHANGED: The `lgtunit` tool `run/1` predicate to also save and restore the
+current output stream and working directory when running tests.
+
 * ADDED: Support to the `lgtdoc` tool to output `info/2` directive `since`
 keys.
 

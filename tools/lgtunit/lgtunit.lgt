@@ -27,7 +27,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 15:3:0,
+		version is 15:4:0,
 		author is 'Paulo Moura',
 		date is 2023-04-26,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -933,6 +933,9 @@
 		!,
 		run([Test]).
 	run(Tests) :-
+		% save the current output stream and working directory
+		current_output(Output),
+		working_directory(Directory),
 		reset_test_counters,
 		reset_coverage_results,
 		run_setup,
@@ -944,7 +947,10 @@
 		),
 		run_cleanup,
 		write_tests_results,
-		write_coverage_results.
+		write_coverage_results,
+		% restore the current output stream and working directory
+		change_directory(Directory),
+		set_output(Output).
 
 	run_test_from_file(Test, File) :-
 		(	::test(Test, Spec) ->
