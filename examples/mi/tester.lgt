@@ -19,10 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, sicstus)).
-	:- set_prolog_flag(redefine_warnings, off).
-:- endif.
-
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
