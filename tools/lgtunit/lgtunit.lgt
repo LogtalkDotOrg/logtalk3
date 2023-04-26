@@ -27,7 +27,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 15:4:0,
+		version is 16:0:0,
 		author is 'Paulo Moura',
 		date is 2023-04-26,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -55,7 +55,7 @@
 	:- mode(run(++callable), zero_or_one).
 	:- mode(run(++list(callable)), zero_or_one).
 	:- info(run/1, [
-		comment is 'Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined, failing if either step fails. Also fails if the test does not exist.',
+		comment is 'Runs a unit test or a list of unit tests, writing the results to the current output stream. Runs the global setup and cleanup steps when defined. Fails when given a partial list of tests or when one of the test identifiers is not valid.',
 		argnames is ['Tests']
 	]).
 
@@ -929,34 +929,55 @@
 		set_output(Output).
 
 	run(Test) :-
-		atom(Test),
+		Test \= [_| _],
 		!,
 		run([Test]).
 	run(Tests) :-
+		\+ valid(list, Tests),
+		print_message(error, lgtunit, partial_list_of_tests(Tests)),
+		!,
+		fail.
+	run(Tests) :-
+		% fail if any test identifier is not valid
+		forall(
+			member(Test, Tests),
+			valid_test_identifier(Test)
+		),
 		% save the current output stream and working directory
 		current_output(Output),
 		working_directory(Directory),
 		reset_test_counters,
 		reset_coverage_results,
-		run_setup,
-		self(Object),
-		object_property(Object, file(File)),
-		forall(
-			member(Test, Tests),
-			run_test_from_file(Test, File)
+		(	run_setup ->
+			self(Object),
+			object_property(Object, file(File)),
+			forall(
+				member(Test, Tests),
+				(::test(Test, Spec), run_test(Spec, File))
+			),
+			run_cleanup,
+			write_tests_results,
+			write_coverage_results
+		;	tests_skipped
 		),
-		run_cleanup,
-		write_tests_results,
-		write_coverage_results,
 		% restore the current output stream and working directory
 		change_directory(Directory),
 		set_output(Output).
 
-	run_test_from_file(Test, File) :-
-		(	::test(Test, Spec) ->
-			run_test(Spec, File)
-		;	print_message(warning, lgtunit, 'Unknown test: ~q'+[Test]),
+	valid_test_identifier(Test) :-
+		(	var(Test) ->
+			print_message(error, lgtunit, non_instantiated_test_identifier),
 			fail
+		;	\+ callable(Test) ->
+			print_message(error, lgtunit, non_callable_test_identifier(Test)),
+			fail
+		;	\+ ground(Test) ->
+			print_message(error, lgtunit, non_ground_test_identifier(Test)),
+			fail
+		;	\+ ::test(Test, _) ->
+			print_message(error, lgtunit, unknown_test(Test)),
+			fail
+		;	true
 		).
 
 	run_test(Spec, File) :-
@@ -1615,7 +1636,7 @@
 	check_for_valid_test_identifier(Test) :-
 		self(Object),
 		(	var(Test) ->
-			print_message(error, lgtunit, non_instantiated_test_identifier)
+			print_message(error, lgtunit, non_instantiated_test_identifier(Object))
 		;	\+ callable(Test) ->
 			print_message(error, lgtunit, non_callable_test_identifier(Object, Test))
 		;	\+ ground(Test) ->

@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 7:1:0,
+		version is 8:0:0,
 		author is 'Paulo Moura',
-		date is 2022-10-06,
+		date is 2023-04-26,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -255,9 +255,9 @@
 	message_tokens(unknown_entity_declared_covered(Entity)) -->
 		['unknown entity declared covered: ~q'-[Entity], nl].
 
-	% messages for test identifier errors
+	% messages for test identifier errors (compile time)
 
-	message_tokens(non_instantiated_test_identifier) -->
+	message_tokens(non_instantiated_test_identifier(_Object)) -->
 		['non-instantiated test identifier found'-[], nl].
 
 	message_tokens(non_callable_test_identifier(_Object, Test)) -->
@@ -268,6 +268,23 @@
 
 	message_tokens(repeated_test_identifier(_Object, Test)) -->
 		['repeated test identifier found: ~q'-[Test], nl].
+
+	% messages for test identifier errors (runtime)
+
+	message_tokens(non_instantiated_test_identifier) -->
+		['non-instantiated test identifier'-[], nl].
+
+	message_tokens(non_callable_test_identifier(Test)) -->
+		['non-callable test identifier: ~q'-[Test], nl].
+
+	message_tokens(non_ground_test_identifier(Test)) -->
+		['non-ground test identifier: ~q'-[Test], nl].
+
+	message_tokens(unknown_test(Test)) -->
+		['unknown test: ~q'-[Test], nl].
+
+	message_tokens(partial_list_of_tests(Tests)) -->
+		['partial list of tests: ~q'-[Tests], nl].
 
 	% messages for test outcome errors
 

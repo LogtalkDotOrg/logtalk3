@@ -92,7 +92,9 @@ test note (if any).
 formats now include the test note (if any) as a test trait for all outcomes.
 
 * CHANGED: The `lgtunit` tool `run/1` predicate to also save and restore the
-current output stream and working directory when running tests.
+current output stream and working directory when running tests. Moreover, the
+predicate now only fails when given a partial list of tests or when one of the
+test identifiers is not valid.
 
 * ADDED: Support to the `lgtdoc` tool to output `info/2` directive `since`
 keys.
