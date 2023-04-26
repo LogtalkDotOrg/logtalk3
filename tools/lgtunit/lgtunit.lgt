@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 15:2:0,
+		version is 15:3:0,
 		author is 'Paulo Moura',
-		date is 2023-04-11,
+		date is 2023-04-26,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -830,7 +830,7 @@
 	% library support for quick check
 	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1]).
 	% library support for suppressin test output
-	:- uses(os, [cpu_time/1, null_device_path/1]).
+	:- uses(os, [change_directory/1, working_directory/1, cpu_time/1, null_device_path/1]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
 	% for QuickCheck support
@@ -869,8 +869,9 @@
 		close(Stream).
 
 	run :-
-		% save the current output stream
+		% save the current output stream and working directory
 		current_output(Output),
+		working_directory(Directory),
 		retractall(running_test_sets_),
 		reset_test_counters,
 		reset_coverage_results,
@@ -887,7 +888,8 @@
 		;	tests_skipped
 		),
 		write_tests_footer,
-		% restore the current output stream
+		% restore the current output stream and working directory
+		change_directory(Directory),
 		set_output(Output).
 
 	run_test_sets([First, Next| Others]) :-
@@ -908,8 +910,9 @@
 		run_test_sets_(TestSets).
 
 	run_test_set :-
-		% save the current output stream
+		% save the current output stream and working directory
 		current_output(Output),
+		working_directory(Directory),
 		reset_test_counters,
 		write_tests_object,
 		(	run_condition ->
@@ -921,7 +924,8 @@
 			)
 		;	tests_skipped
 		),
-		% restore the current output stream
+		% restore the current output stream and working directory
+		change_directory(Directory),
 		set_output(Output).
 
 	run(Test) :-

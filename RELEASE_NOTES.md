@@ -100,6 +100,9 @@ an empty directory if it exists.
 * IMPROVED: Reduced the number of atoms created when using the `diagrams`,
 `lgtdoc`, and `lgtunit` tools.
 
+* IMPROVED: The `lgtunit` tool now saves and restores the current working
+directory when running tests.
+
 * IMPROVED: The `lgtunit` tool `file_path/2` and `clean_file/1` utility
 predicates to expand the constructed absolute file path to resolve any
 remaining relative file path parts.
