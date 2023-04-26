@@ -143,6 +143,9 @@ Prolog portable solution to specify text encoding.
 
 * UPDATED: The tests for the `uses/2` directive for Scryer Prolog.
 
+* FIXED: The tests for the `diagrams` tool to use the Logtalk default scratch
+directory as the temporary directory for generated diagram files.
+
 Installers and installation scripts
 -----------------------------------
 

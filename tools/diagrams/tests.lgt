@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-08-03,
+		date is 2023-04-26,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -60,6 +60,18 @@
 	:- uses(list, [
 		member/2
 	]).
+
+	setup :-
+		logtalk::expand_library_path(logtalk_user(scratch), Directory),
+		os::change_directory(Directory).
+
+	cleanup :-
+		logtalk::expand_library_path(logtalk_user(scratch), Directory),
+		os::directory_files(Directory, Files, [paths(absolute), extensions(['.dot'])]),
+		forall(
+			list::member(File, Files),
+			os::delete_file(File)
+		).
 
 	% the following tests ony check (for now) that the called
 	% predicates succeed as expected and are deterministic
@@ -815,15 +827,6 @@
 	test(xref_diagram_file_1_01, deterministic) :-
 		object_property(xref_diagram, file(File)),
 		xref_diagram::file(File).
-
-	cleanup :-
-		this(This),
-		object_property(This, file(_,Directory)),
-		os::directory_files(Directory, Files, [paths(absolute), extensions(['.dot'])]),
-		forall(
-			list::member(File, Files),
-			os::delete_file(File)
-		).
 
 	% suppress all messages from the "diagrams" tool
 	% component to not pollute the unit tests output
