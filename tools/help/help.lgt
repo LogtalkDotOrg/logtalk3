@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:31:0,
+		version is 0:32:0,
 		author is 'Paulo Moura',
-		date is 2022-09-22,
+		date is 2023-04-27,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -407,6 +407,7 @@
 	control_construct('[]', 1, '/manuals/refman/control/', 'delegate_message_1.html').
 	control_construct((::), 1, '/manuals/refman/control/', 'send_to_self_1.html').
 	control_construct((^^), 1, '/manuals/refman/control/', 'call_super_1.html').
+	control_construct((@),  1, '/manuals/refman/control/', 'call_in_this_1.html').
 	control_construct(({}), 1, '/manuals/refman/control/', 'external_call_1.html').
 	control_construct((<<), 2, '/manuals/refman/control/', 'context_switch_2.html').
 
