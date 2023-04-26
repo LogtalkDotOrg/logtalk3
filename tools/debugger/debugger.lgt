@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:14:1,
+		version is 4:14:2,
 		author is 'Paulo Moura',
-		date is 2023-04-21,
+		date is 2023-04-26,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -167,7 +167,7 @@
 		).
 
 	nodebug :-
-		(	debugging_ ->
+		(	(debugging_; leaping_(debugging)) ->
 			retractall(debugging_),
 			retractall(tracing_),
 			retractall(leaping_(_)),
@@ -187,7 +187,7 @@
 		).
 
 	notrace :-
-		(	tracing_ ->
+		(	(tracing_; leaping_(tracing)) ->
 			retractall(tracing_),
 			retractall(debugging_),
 			retractall(leaping_(_)),
@@ -495,18 +495,7 @@
 		).
 	debug_handler(top_goal(Goal, TGoal), ExCtx) :-
 		reset_invocation_number(_),
-		(	leaping_(tracing) ->
-			retractall(leaping_(_)),
-			retractall(tracing_),
-			assertz(tracing_),
-			retractall(debugging_),
-			assertz(debugging_)
-		;	leaping_(debugging) ->
-			retractall(leaping_(_)),
-			retractall(debugging_),
-			assertz(debugging_)
-		;	true
-		),
+		retractall(leaping_(_)),
 		retractall(skipping_),
 		retractall(quasi_skipping_),
 		retractall(skipping_unleashed_(_)),

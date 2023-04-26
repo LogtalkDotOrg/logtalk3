@@ -130,6 +130,10 @@ or parametric test objects.
 * FIXED: The `debugger` tool to reset skipping and zapping state when tracing
 a new top-level query. Thanks to Lindsey Spratt for the bug report.
 
+* FIXED: The `debugger` tool `notrace/0` and `nodebug/0` predicates when the
+*leap* command as used before calling the predicates. Thanks to Lindsey Spratt
+for the bug report.
+
 Examples
 --------
 
