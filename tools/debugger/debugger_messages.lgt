@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 2:5:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2023-01-25,
+		date is 2023-04-26,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -89,16 +89,16 @@
 
 	% debugger status and switching
 
-	message_tokens(debugger_on_spying) -->
+	message_tokens(debugger_spying_on) -->
 		['   Debugger is on: showing spy points for all objects compiled in debug mode.'-[], nl].
 
-	message_tokens(debugger_switched_on_spying) -->
+	message_tokens(debugger_spying_switched_on) -->
 		['   Debugger switched on: showing spy points for all objects compiled in debug mode.'-[], nl].
 
-	message_tokens(debugger_on_tracing) -->
+	message_tokens(debugger_tracing_on) -->
 		['   Debugger is on: tracing everything for all objects compiled in debug mode.'-[], nl].
 
-	message_tokens(debugger_switched_on_tracing) -->
+	message_tokens(debugger_tracing_switched_on) -->
 		['   Debugger switched on: tracing everything for all objects compiled in debug mode.'-[], nl].
 
 	message_tokens(debugger_off) -->
@@ -106,6 +106,15 @@
 
 	message_tokens(debugger_switched_off) -->
 		['   Debugger switched off.'-[], nl].
+
+	message_tokens(debugger_tracing_off) -->
+		['   Debugger tracing is off.'-[], nl].
+
+	message_tokens(debugger_tracing_switched_off) -->
+		['   Debugger tracing switched off.'-[], nl].
+
+	message_tokens(max_depth(MaxDepth)) -->
+		['     Maximum write depth for terms: ~w'-[MaxDepth], nl].
 
 	% at port
 

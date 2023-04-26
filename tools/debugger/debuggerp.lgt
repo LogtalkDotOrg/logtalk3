@@ -22,9 +22,9 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 2:3:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2021-01-30,
+		date is 2023-04-26,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
@@ -42,7 +42,8 @@
 	:- public(reset/0).
 	:- mode(reset, one).
 	:- info(reset/0, [
-		comment is 'Resets all debugging settings, including spy points and leashed ports, and turns off debugging.'
+		comment is 'Resets all debugging settings, including spy points and leashed ports, and turns off debugging.',
+		see_also is [nospyall/0]
 	]).
 
 	:- public(debug/0).
@@ -54,7 +55,8 @@
 	:- public(nodebug/0).
 	:- mode(nodebug, one).
 	:- info(nodebug/0, [
-		comment is 'Stops debugging for all defined spy points.'
+		comment is 'Stops debugging for all defined spy points. Also turns off tracing. Does not remove defined spy points.',
+		see_also is [reset/0]
 	]).
 
 	:- public(debugging/0).
@@ -79,7 +81,7 @@
 	:- public(notrace/0).
 	:- mode(notrace, one).
 	:- info(notrace/0, [
-		comment is 'Stops tracing of calls compiled in debug mode.'
+		comment is 'Stops tracing of calls compiled in debug mode. Debugger will still stop at defined spy points.'
 	]).
 
 	:- public((spy)/1).
@@ -130,7 +132,8 @@
 	:- public(nospyall/0).
 	:- mode(nospyall, one).
 	:- info(nospyall/0, [
-		comment is 'Removes all line number, predicate, non-terminal, and context spy points.'
+		comment is 'Removes all line number, predicate, non-terminal, and context spy points.',
+		see_also is [reset/0]
 	]).
 
 	:- public(leash/1).

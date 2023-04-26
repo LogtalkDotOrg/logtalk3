@@ -11,8 +11,8 @@
 Debugger protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 2:3:0
-| **Date:** 2021-01-30
+| **Version:** 3:0:0
+| **Date:** 2023-04-26
 
 | **Compilation flags:**
 |    ``static``
@@ -54,6 +54,9 @@ Resets all debugging settings, including spy points and leashed ports, and turns
 | **Mode and number of proofs:**
 |    ``reset`` - ``one``
 
+| **See also:**
+|    :ref:`debuggerp/0::nospyall/0`
+
 
 ------------
 
@@ -80,13 +83,16 @@ Starts debugging for all defined spy points.
 ``nodebug/0``
 ^^^^^^^^^^^^^
 
-Stops debugging for all defined spy points.
+Stops debugging for all defined spy points. Also turns off tracing. Does not remove defined spy points.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
 |    ``nodebug`` - ``one``
+
+| **See also:**
+|    :ref:`debuggerp/0::reset/0`
 
 
 ------------
@@ -150,7 +156,7 @@ Starts tracing all calls compiled in debug mode.
 ``notrace/0``
 ^^^^^^^^^^^^^
 
-Stops tracing of calls compiled in debug mode.
+Stops tracing of calls compiled in debug mode. Debugger will still stop at defined spy points.
 
 | **Compilation flags:**
 |    ``static``
@@ -291,6 +297,9 @@ Removes all line number, predicate, non-terminal, and context spy points.
 
 | **Mode and number of proofs:**
 |    ``nospyall`` - ``one``
+
+| **See also:**
+|    :ref:`debuggerp/0::reset/0`
 
 
 ------------

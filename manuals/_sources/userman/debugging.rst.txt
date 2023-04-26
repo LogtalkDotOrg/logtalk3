@@ -278,6 +278,9 @@ using the debugger ``nospyall/0`` predicate:
    All context spy points removed.
    yes
 
+There's also a ``reset/0`` predicate that can be used to reset the debugger
+to its default settings.
+
 .. _programming_trace:
 
 Tracing program execution
@@ -335,7 +338,8 @@ context spy points. For example:
         Call: (2) ::female(_1078) ? 
      +  Call: (3) female(_1078) ? 
 
-To stop tracing and turning off the debugger, write:
+To stop tracing (but still allowing the debugger to stop at defined spy points),
+write:
 
 .. code-block:: text
 

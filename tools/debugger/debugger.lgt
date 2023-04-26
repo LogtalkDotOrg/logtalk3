@@ -23,7 +23,7 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 4:14:2,
+		version is 5:0:0,
 		author is 'Paulo Moura',
 		date is 2023-04-26,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
@@ -159,11 +159,11 @@
 
 	debug :-
 		(	debugging_ ->
-			print_message(comment, debugger, debugger_on_spying)
+			print_message(comment, debugger, debugger_spying_on)
 		;	assertz(debugging_),
 			retractall(tracing_),
 			reset_invocation_number(_),
-			print_message(comment, debugger, debugger_switched_on_spying)
+			print_message(comment, debugger, debugger_spying_switched_on)
 		).
 
 	nodebug :-
@@ -177,29 +177,28 @@
 
 	trace :-
 		(	tracing_ ->
-			print_message(comment, debugger, debugger_on_tracing)
+			print_message(comment, debugger, debugger_tracing_on)
 		;	assertz(tracing_),
 			retractall(debugging_),
 			assertz(debugging_),
 			retractall(leaping_(_)),
 			reset_invocation_number(_),
-			print_message(comment, debugger, debugger_switched_on_tracing)
+			print_message(comment, debugger, debugger_tracing_switched_on)
 		).
 
 	notrace :-
 		(	(tracing_; leaping_(tracing)) ->
 			retractall(tracing_),
-			retractall(debugging_),
 			retractall(leaping_(_)),
-			print_message(comment, debugger, debugger_switched_off)
-		;	print_message(comment, debugger, debugger_off)
+			print_message(comment, debugger, debugger_tracing_switched_off)
+		;	print_message(comment, debugger, debugger_tracing_off)
 		).
 
 	debugging :-
 		(	debugging_ ->
 			(	tracing_ ->
-				print_message(information, debugger, debugger_on_tracing)
-			;	print_message(information, debugger, debugger_on_spying)
+				print_message(information, debugger, debugger_tracing_on)
+			;	print_message(information, debugger, debugger_spying_on)
 			)
 		;	print_message(information, debugger, debugger_off)
 		),
@@ -222,7 +221,11 @@
 		;	print_message(information, debugger, no_context_spy_points_defined)
 		),
 		findall(Port, leashing_(Port), Ports),
-		print_message(information, debugger, leashed_ports(Ports)).
+		print_message(information, debugger, leashed_ports(Ports)),
+		(	write_max_depth_(MaxDepth) ->
+			print_message(information, debugger, max_depth(MaxDepth))
+		;	print_message(information, debugger, max_depth(unset))
+		).
 
 	debugging(Entity) :-
 		nonvar(Entity),

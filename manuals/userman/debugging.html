@@ -396,6 +396,8 @@ All context spy points removed.
 yes
 </pre></div>
 </div>
+<p>There’s also a <code class="docutils literal notranslate"><span class="pre">reset/0</span></code> predicate that can be used to reset the debugger
+to its default settings.</p>
 </section>
 </section>
 <section id="tracing-program-execution">
@@ -445,7 +447,8 @@ yes
   +  Call: (3) female(_1078) ?
 </pre></div>
 </div>
-<p>To stop tracing and turning off the debugger, write:</p>
+<p>To stop tracing (but still allowing the debugger to stop at defined spy points),
+write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::notrace.
 
 yes

@@ -193,8 +193,8 @@
 <p>Debugger protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:3:0</div>
-<div class="line"><strong>Date:</strong> 2021-01-30</div>
+<div class="line"><strong>Version:</strong> 3:0:0</div>
+<div class="line"><strong>Date:</strong> 2023-04-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -270,6 +270,12 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">reset</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#debuggerp-0-nospyall-0"><span class="std std-ref">nospyall/0</span></a></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="debug-0">
@@ -291,7 +297,7 @@
 </section>
 <section id="nodebug-0">
 <span id="debuggerp-0-nodebug-0"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nodebug/0</span></code></a><a class="headerlink" href="#nodebug-0" title="Permalink to this heading"></a></h3>
-<p>Stops debugging for all defined spy points.</p>
+<p>Stops debugging for all defined spy points. Also turns off tracing. Does not remove defined spy points.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -302,6 +308,12 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">nodebug</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#debuggerp-0-reset-0"><span class="std std-ref">reset/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -363,7 +375,7 @@
 </section>
 <section id="notrace-0">
 <span id="debuggerp-0-notrace-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">notrace/0</span></code></a><a class="headerlink" href="#notrace-0" title="Permalink to this heading"></a></h3>
-<p>Stops tracing of calls compiled in debug mode.</p>
+<p>Stops tracing of calls compiled in debug mode. Debugger will still stop at defined spy points.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -520,6 +532,12 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">nospyall</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>See also:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="#debuggerp-0-reset-0"><span class="std std-ref">reset/0</span></a></div>
 </div>
 </div>
 <hr class="docutils" />

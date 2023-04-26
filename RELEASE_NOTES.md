@@ -72,6 +72,9 @@ Library
 Tools
 -----
 
+* CHANGED: The `debugger` tool `notrace/0` predicate to only turn off tracing,
+thus allowing the debugger to continue to stop at defined spy points.
+
 * CHANGED: The `lgtunit` tool input/output testing predicates to always
 interpret relative paths as relative to the tests object path and to always
 open temporary files in the same directory as the tests object. This
@@ -117,6 +120,9 @@ predicates.
 
 * IMPROVED: The `logtalk_allure_report` scripts to check if Allure is
 installed and the required minimal version.
+
+* IMPROVED: The `debugger` tool `debugging/0` predicate now also prints the
+maximum write depth for terms.
 
 * UPDATED: The `logtalk_allure_report` scripts to add a `categories.json` file
 to classify failed tests.
