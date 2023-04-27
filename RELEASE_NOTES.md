@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.65.0 - April ??, 2023
+3.65.0 - April 27, 2023
 =======================
 
 Logtalk compiler and runtime
