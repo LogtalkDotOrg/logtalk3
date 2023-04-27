@@ -24,7 +24,7 @@
 	:- info([
 		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2023-04-26,
+		date is 2023-04-27,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -289,6 +289,7 @@
 			'       f - fail (forces backtracking; may also be used to convert an exception into a failure)'-[], nl,
 			'       u - unify (reads and unifies a term with the current goal; valid at the call port)'-[], nl,
 			'       n - nodebug (turns off debugging)'-[], nl,
+			'       N - notrace (turns off tracing)'-[], nl,
 			'       ! - command (reads and executes a query)'-[], nl,
 			'       @ - command (reads and executes a query)'-[], nl,
 			'       b - break (suspends execution and starts new interpreter; type end_of_file to terminate)'-[], nl,
@@ -321,12 +322,12 @@
 			'       l - leap             f - fail       / - remove context spy point'-[], nl,
 			'       s - skip             u - unify      + - add predicate spy point'-[], nl,
 			'       S - Skip             n - nodebug    - - remove predicate spy point'-[], nl,
-			'       q - quasi-skip       ! - command    # - add line number spy point'-[], nl,
-			'       r - retry            @ - command    | - remove line number spy point'-[], nl,
-			'       j - jump             b - break'-[], nl,
-			'       z - zap              a - abort'-[], nl,
-			'       p - print            Q - quit Logtalk'-[], nl,
-			'       d - display'-[], nl,
+			'       q - quasi-skip       N - notrace    # - add line number spy point'-[], nl,
+			'       r - retry            ! - command    | - remove line number spy point'-[], nl,
+			'       j - jump             @ - command'-[], nl,
+			'       z - zap              b - break'-[], nl,
+			'       p - print            a - abort'-[], nl,
+			'       d - display          Q - quit Logtalk'-[], nl,
 			'       w - write            x - execution context'-[], nl,
 			'       < - write depth      = - debugging information'-[], nl,
 			'       $ - compiled goal    . - file information'-[], nl,

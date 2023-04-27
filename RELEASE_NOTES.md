@@ -99,6 +99,8 @@ current output stream and working directory when running tests. Moreover, the
 predicate now only fails when given a partial list of tests or when one of the
 test identifiers is not valid.
 
+* ADDED: New `debugger` tool port command `N` to turn off tracing.
+
 * ADDED: Support to the `lgtdoc` tool to output `info/2` directive `since`
 keys.
 

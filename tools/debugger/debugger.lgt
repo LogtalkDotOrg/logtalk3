@@ -645,6 +645,7 @@
 	valid_port_option(r, fail, _) :- !.
 	valid_port_option(u, call, _) :- !.
 	valid_port_option(n, _, _) :- !.
+	valid_port_option('N', _, _) :- !.
 	valid_port_option(!, _, _) :- !.
 	valid_port_option((@), _, _) :- !.
 	valid_port_option(b, _, _) :- !.
@@ -765,6 +766,9 @@
 
 	do_port_option(n, _, _, _, _, _, _, true) :-
 		nodebug.
+
+	do_port_option('N', _, _, _, _, _, _, true) :-
+		notrace.
 
 	do_port_option((=), _, _, _, _, _, _, _) :-
 		debugging_details,

@@ -53,14 +53,15 @@ Compiling source files in debug mode
 Compilation of source files in debug mode is controlled by the
 :ref:`debug <flag_debug>` compiler flag. The default value for this flag,
 usually ``off``, is defined in the adapter files. Its default value may
-be changed at runtime by calling:
+be changed globally at runtime by calling:
 
 .. code-block:: text
 
    | ?- set_logtalk_flag(debug, on).
 
-In alternative, if we want to compile only some source files in debug
-mode, we may instead write:
+Implicitly, this goal also turns off the ``optimize`` flag. In alternative,
+if we want to compile only some source files in debug mode, we may instead
+write:
 
 .. code-block:: text
 
@@ -81,10 +82,12 @@ With most :term:`backend Prolog compilers <backend Prolog compiler>`, the
 be recompiled in normal or optimized mode using, respectively, the ``{+n}``
 or ``{+o}`` top-level shortcuts.
 
-The :ref:`clean <flag_clean>` compiler flag should be turned on whenever
-the :ref:`debug <flag_debug>` flag is turned on at runtime. This is necessary
-because debug code would not be generated for files previously compiled in
-normal mode if there are no changes to the source files.
+.. warning::
+
+   The :ref:`clean <flag_clean>` compiler flag should be turned on whenever
+   the :ref:`debug <flag_debug>` flag is turned on at runtime. This is necessary
+   because debug code would not be generated for files previously compiled in
+   normal or optimized mode if there are no changes to the source files.
 
 After loading the debugger, we may check (or enumerate by backtracking),
 all loaded entities compiled in debug mode as follows:
@@ -95,6 +98,9 @@ all loaded entities compiled in debug mode as follows:
 
 To compile only a specific entity in debug mode, use the
 :ref:`directives_set_logtalk_flag_2` directive inside the entity.
+To compile all entities in a source file in debug mode, use the
+:ref:`directives_set_logtalk_flag_2` directive at the beginning
+of the file.
 
 .. _debugging_box_model:
 
@@ -164,15 +170,15 @@ By default, the debugger pauses at every port for user interaction.
 Defining spy points
 -------------------
 
-Logtalk spy points can be defined by simply stating which predicates
-should be spied, as in most Prolog debuggers, by stating which predicate
-clauses to spy given their source file line numbers, or by
-specifying the context for activating a spy point. In the case
-of line number spy points (also known as breakpoints), the line number
-must correspond to the first line of an entity clause. To simplify the
-definition of line number spy points, these are specified using the
-entity identifier instead of the file name (as all entities share a
-single namespace, an entity can only be defined in a single file).
+Logtalk spy points can be defined by simply stating which predicates should
+be spied (as in most Prolog debuggers), by stating which predicate clauses
+to spy given their source file line numbers, or by specifying the execution
+context for activating a spy point. In the case of line number spy points
+(also known as breakpoints), the line number must correspond to the first
+line of an entity clause. To simplify the definition of line number spy
+points, these are specified using the entity identifier instead of the
+file name (as all entities share a single namespace, an entity can only
+be defined in a single file).
 
 Defining line number and predicate spy points
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -418,6 +424,8 @@ point for user interaction. The commands available are as follows:
    failure
 ``n`` — nodebug
    turns off debugging
+``N`` — notrace
+   turns off tracing
 ``@`` — command; ``!`` can be used in alternative
    reads and executes a query
 ``b`` — break
