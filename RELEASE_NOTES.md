@@ -22,6 +22,16 @@ RELEASE NOTES
 =============
 
 
+3.66.0 - May ??, 2023
+=====================
+
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `packs` tool on requirements plus saving and
+restoring (virtual) environments.
+
+
 3.65.0 - April 27, 2023
 =======================
 

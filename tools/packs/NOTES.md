@@ -53,6 +53,7 @@ required:
 - `bsdtar` (provided by `libarchive` or `libarchive-tools`)
 - `gpg` (provided by `gnupg2`)
 - `git`
+- `direnv` (when using virtual environments)
 
 The tool uses `bsdtar` instead of GNU `tar` so that it can uncompress
 `.zip` archives (`unzip` doesn't provide the desired options that allows
@@ -66,9 +67,10 @@ On Windows systems, the following shell commands are required:
 - `tar.exe`
 - `gpg.exe`
 - `git.exe`
+- `Set-PsEnv` (when using virtual environments)
 
-In recent Windows 10 builds, only `gpg` and `git` should require installation.
-You can download the GnuPG software from:
+In recent Windows 10 builds, only `gpg`, `git`, and `Set-PsEnv` should require
+installation. You can download the GnuPG software from:
 
 https://www.gnupg.org/
 
@@ -76,21 +78,26 @@ You can download Git from:
 
 https://gitforwindows.org
 
+To install [Set-PsEnv](https://github.com/rajivharris/Set-PsEnv) from
+the PowerShell Gallery:
+
+	PS> Install-Module -Name Set-PsEnv
+
 On macOS systems, Apple bundles both `curl` and BSD `tar` (under the name
 `tar`; you can simply create a `bsdtar` alias or install a more recent
 version). The required commands can be easily installed using MacPorts:
 
-	$ sudo port install coreutils libarchive gnupg2 git
+	$ sudo port install coreutils libarchive gnupg2 git direnv
 
 Or using Homebrew:
 
-	$ brew install coretutils libarchive gnupg2 git
+	$ brew install coretutils libarchive gnupg2 git direnv
 
 On Linux systems, use the distribution own package manager to install any
 missing command. For example, in recent Ubuntu versions:
 
 	$ sudo apt update
-	$ sudo apt install coreutils curl libarchive-tools gnupg2 git
+	$ sudo apt install coreutils curl libarchive-tools gnupg2 git direnv
 
 
 API documentation
@@ -226,8 +233,8 @@ the `packs::save/1` predicate:
 This query saves a listing of all the installed packs and their registries.
 Using the saved file, the virtual environment setup can then be restored
 using the `packs::restore/1-2` predicates. The file uses a simple format with
-`registry/2` and `pack/3` facts (in this order) and can be manually created
-or edited if necessary. For example:
+`registry/2`, `pack/3`, `pinned_registry/1`, and `pinned_pack/1` facts (in
+this order) and can be manually created or edited if necessary. For example:
 
 	registry(talkshow, 'https://github.com/LogtalkDotOrg/talkshow.git').
 	pack(talkshow, logtalk, 3:45:0).

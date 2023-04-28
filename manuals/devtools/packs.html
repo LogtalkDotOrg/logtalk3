@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>packs &mdash; The Logtalk Handbook v3.65.0 documentation</title>
+  <title>packs &mdash; The Logtalk Handbook v3.66.0-b01 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
@@ -47,7 +47,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.65.0
+                3.66.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -182,6 +182,7 @@ required:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">libarchive</span></code> or <code class="docutils literal notranslate"><span class="pre">libarchive-tools</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">gnupg2</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">direnv</span></code> (when using virtual environments)</p></li>
 </ul>
 <p>The tool uses <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> instead of GNU <code class="docutils literal notranslate"><span class="pre">tar</span></code> so that it can
 uncompress <code class="docutils literal notranslate"><span class="pre">.zip</span></code> archives (<code class="docutils literal notranslate"><span class="pre">unzip</span></code> doesn’t provide the desired
@@ -194,27 +195,33 @@ non-predictable name of the wrapper directory).</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git.exe</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Set-PsEnv</span></code> (when using virtual environments)</p></li>
 </ul>
-<p>In recent Windows 10 builds, only <code class="docutils literal notranslate"><span class="pre">gpg</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span></code> should require
-installation. You can download the GnuPG software from:</p>
+<p>In recent Windows 10 builds, only <code class="docutils literal notranslate"><span class="pre">gpg</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code>, and <code class="docutils literal notranslate"><span class="pre">Set-PsEnv</span></code>
+should require installation. You can download the GnuPG software from:</p>
 <p><a class="reference external" href="https://www.gnupg.org/">https://www.gnupg.org/</a></p>
 <p>You can download Git from:</p>
 <p><a class="reference external" href="https://gitforwindows.org">https://gitforwindows.org</a></p>
+<p>To install <a class="reference external" href="https://github.com/rajivharris/Set-PsEnv">Set-PsEnv</a> from
+the PowerShell Gallery:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PS</span><span class="o">&gt;</span> <span class="nv">Install</span><span class="o">-</span><span class="nv">Module</span> <span class="o">-</span><span class="nv">Name</span> <span class="nv">Set</span><span class="o">-</span><span class="nv">PsEnv</span>
+</pre></div>
+</div>
 <p>On macOS systems, Apple bundles both <code class="docutils literal notranslate"><span class="pre">curl</span></code> and BSD <code class="docutils literal notranslate"><span class="pre">tar</span></code> (under the
 name <code class="docutils literal notranslate"><span class="pre">tar</span></code>; you can simply create a <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> alias or install a more
 recent version). The required commands can be easily installed using
 MacPorts:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo port install coreutils libarchive gnupg2 git
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo port install coreutils libarchive gnupg2 git direnv
 </pre></div>
 </div>
 <p>Or using Homebrew:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ brew install coretutils libarchive gnupg2 git
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ brew install coretutils libarchive gnupg2 git direnv
 </pre></div>
 </div>
 <p>On Linux systems, use the distribution own package manager to install
 any missing command. For example, in recent Ubuntu versions:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
-$ sudo apt install coreutils curl libarchive-tools gnupg2 git
+$ sudo apt install coreutils curl libarchive-tools gnupg2 git direnv
 </pre></div>
 </div>
 </section>
@@ -342,8 +349,9 @@ using the <code class="docutils literal notranslate"><span class="pre">packs::sa
 <p>This query saves a listing of all the installed packs and their
 registries. Using the saved file, the virtual environment setup can then
 be restored using the <code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code> predicates. The file uses a
-simple format with <code class="docutils literal notranslate"><span class="pre">registry/2</span></code> and <code class="docutils literal notranslate"><span class="pre">pack/3</span></code> facts (in this order)
-and can be manually created or edited if necessary. For example:</p>
+simple format with <code class="docutils literal notranslate"><span class="pre">registry/2</span></code>, <code class="docutils literal notranslate"><span class="pre">pack/3</span></code>, <code class="docutils literal notranslate"><span class="pre">pinned_registry/1</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">pinned_pack/1</span></code> facts (in this order) and can be manually created
+or edited if necessary. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>registry(talkshow, <span class="s">&#39;https://github.com/LogtalkDotOrg/talkshow.git&#39;</span>).
 pack(talkshow, logtalk, <span class="m">3</span><span class="o">:</span><span class="m">45</span><span class="o">:</span><span class="m">0</span>).
 pack(talkshow, lflat, <span class="m">2</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">0</span>).
