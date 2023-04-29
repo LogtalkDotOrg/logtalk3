@@ -31,6 +31,12 @@ Documentation
 * IMPROVED: Documentation of the `packs` tool on requirements plus saving and
 restoring (virtual) environments.
 
+Tests
+-----
+
+* ADDED: Additional tests for the Prolog standard `number_chars/2` and
+`number_codes/2` predicates.
+
 
 3.65.0 - April 27, 2023
 =======================

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-04-29,
 		comment is 'Unit tests for the ISO Prolog standard number_chars/2 built-in predicate.'
 	]).
 
@@ -169,6 +169,12 @@
 
 	test(lgt_number_chars_2_42, error(type_error(list,['2'| '3']))) :-
 		{number_chars(123, ['2'| '3'])}.
+
+	test(lgt_number_chars_2_43, error(syntax_error(_))) :-
+		{number_chars(_, ['3','%'])}.
+
+	test(lgt_number_chars_2_44, error(syntax_error(_))) :-
+		{number_chars(_, ['3','/','*',' ','*','/'])}.
 
 	% auxiliary predicates
 

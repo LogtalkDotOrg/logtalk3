@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2022-10-26,
+		date is 2023-04-29,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
 	]).
 
@@ -128,30 +128,36 @@
 	test(lgt_number_codes_2_29, error(type_error(list,[0'2| 0'3]))) :-
 		{number_codes(123, [0'2| 0'3])}.
 
+	test(lgt_number_codes_2_30, error(syntax_error(_))) :-
+		{number_codes(_, [0'3,0'%])}.
+
+	test(lgt_number_codes_2_31, error(syntax_error(_))) :-
+		{number_codes(_, [0'3,0'/,0'*,0'-,0'*,0'/])}.
+
 	% tests from (or derived from) the WG17 test suite
 
-	test(wg17_number_codes_2_30, true) :-
+	test(wg17_number_codes_2_32, true) :-
 		{number_codes(1.0e9, [0'1,0'.,0'0,0'E,0'9])}.
 
-	test(wg17_number_codes_2_31, true) :-
+	test(wg17_number_codes_2_33, true) :-
 		{number_codes(1.0e9, [0'1,0'.,0'0,0'E,0'+,0'9])}.
 
-	test(wg17_number_codes_2_32, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_34, error(syntax_error(_))) :-
 		{number_codes(1, [])}.
 
-	test(wg17_number_codes_2_33, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_35, error(syntax_error(_))) :-
 		{number_codes(_, [0'3,0'.])}.
 
-	test(wg17_number_codes_2_34, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_36, error(syntax_error(_))) :-
 		{number_codes(_, [0'0,0'B,0'1])}.
 
-	test(wg17_number_codes_2_35, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_37, error(syntax_error(_))) :-
 		{number_codes(_, [0'0,0'O,0'7])}.
 
-	test(wg17_number_codes_2_36, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_38, error(syntax_error(_))) :-
 		{number_codes(_, [0'0,0'X,0'f])}.
 
-	test(wg17_number_codes_2_37, true(X == 32)) :-
+	test(wg17_number_codes_2_39, true(X == 32)) :-
 		{number_codes(X, [48,39,32])}.
 
 	% auxiliary predicates
