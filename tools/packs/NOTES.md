@@ -185,6 +185,10 @@ can define the `logtalk_packs` library alias using code such as:
 		assertz(logtalk_library_path(logtalk_packs, Directory))
 	)).
 
+The definition of the `logtalk_packs` library alias **must** always be an
+atom and thus never use library notation (i.e. it must never depend on other
+library aliases).
+
 When a virtual environment also requires a specific Logtalk version (e.g. the
 version used to test and certify it), this can be installed as a pack from
 the official [talkshow](https://github.com/LogtalkDotOrg/talkshow) registry

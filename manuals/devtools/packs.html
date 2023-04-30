@@ -301,6 +301,9 @@ virtual environment. The <code class="docutils literal notranslate"><span class=
 )).
 </pre></div>
 </div>
+<p>The definition of the <code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> library alias <strong>must</strong> always be
+an atom and thus never use library notation (i.e. it must never depend
+on other library aliases).</p>
 <p>When a virtual environment also requires a specific Logtalk version
 (e.g. the version used to test and certify it), this can be installed as
 a pack from the official
