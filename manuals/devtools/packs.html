@@ -274,19 +274,11 @@ the contents of these directories. Multiple and independent
 registry/pack setups are possible using <em>virtual environments</em> as
 explained next.</p>
 <p>Your registries and packs setup can be saved and restored (e.g. in a
-different system) by using the <code class="docutils literal notranslate"><span class="pre">packs::save/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code> predicates. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>save(my_setup, [save(all)]).
-...
-</pre></div>
-</div>
-<p>Then, in the destination system:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>restore(my_setup).
-...
-</pre></div>
-</div>
-<p>If necessary, before restoring, the <code class="docutils literal notranslate"><span class="pre">packs::reset/0</span></code> predicate can be
-called to delete any defined registries and installed packs.</p>
+different system) by using the <code class="docutils literal notranslate"><span class="pre">packs::save/1-2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code> predicates, as explained in the next section
+about virtual environments. If necessary, before restoring, the
+<code class="docutils literal notranslate"><span class="pre">packs::reset/0</span></code> predicate can be called to delete any defined
+registries and installed packs.</p>
 </section>
 <section id="virtual-environments">
 <h2>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this heading"></a></h2>

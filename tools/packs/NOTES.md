@@ -158,19 +158,10 @@ of these directories. Multiple and independent registry/pack setups are
 possible using _virtual environments_ as explained next.
 
 Your registries and packs setup can be saved and restored (e.g. in a different
-system) by using the `packs::save/2` and `packs::restore/1-2` predicates. For
-example:
-
-	| ?- packs::save(my_setup, [save(all)]).
-	...
-
-Then, in the destination system:
-
-	| ?- packs::restore(my_setup).
-	...
-
-If necessary, before restoring, the `packs::reset/0` predicate can be called
-to delete any defined registries and installed packs.
+system) by using the `packs::save/1-2` and `packs::restore/1-2` predicates, as
+explained in the next section about virtual environments. If necessary, before
+restoring, the `packs::reset/0` predicate can be called to delete any defined
+registries and installed packs.
 
 
 Virtual environments
