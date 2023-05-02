@@ -645,6 +645,14 @@ tokenization for five *meta-messages* that cover the most common cases:
    By default, the title is printed followed by a newline and the
    indented list items, one per line. The items are printed as in
    the ``List`` meta message.
+``[Stream,Prefix]>>Goal``
+   By default, call user-defined printing ``Goal`` in the context of
+   ``user``. The use of a lambda expression allows passing the message
+   stream and prefix. Printing the prefix is delegated to the goal.
+``[Stream]>>Goal``
+   By default, call user-defined printing ``Goal`` in the context of
+   ``user``. The use of a lambda expression allows passing the message
+   stream.
 
 Some simple examples of using these meta-messages:
 
@@ -653,7 +661,14 @@ Some simple examples of using these meta-messages:
    | ?- logtalk::print_message(debug, core, @'Phase 1 completed').
    yes
 
+   | ?- logtalk::print_message(debug, core, [Stream]>>write(Stream,foo)).
+   yes
+
    | ?- set_logtalk_flag(debug, on).
+   yes
+
+   | ?- logtalk::print_message(debug, core, [Stream]>>write(Stream,foo)).
+   foo
    yes
 
    | ?- logtalk::print_message(debug, core, @'Phase 1 completed').

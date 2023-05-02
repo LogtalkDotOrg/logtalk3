@@ -25,8 +25,18 @@ RELEASE NOTES
 3.66.0 - May ??, 2023
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Two new meta-messages, `[Stream,Prefix]>>Goal` and `[Stream]>>Goal`,
+to the message printing mechanism. These new meta-messages allow calling a
+user-defined printing goal. The use of lambda expressions allow passing the
+message stream and prefix.
+
 Documentation
 -------------
+
+* ADDED: Handbook description and examples of the new meta-messages.
 
 * IMPROVED: Documentation of the `packs` tool on requirements plus saving and
 restoring (virtual) environments.

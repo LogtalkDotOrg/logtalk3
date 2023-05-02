@@ -711,12 +711,27 @@ is printed as passed to the <code class="docutils literal notranslate"><span cla
 indented list items, one per line. The items are printed as in
 the <code class="docutils literal notranslate"><span class="pre">List</span></code> meta message.</p>
 </dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[Stream,Prefix]&gt;&gt;Goal</span></code></dt><dd><p>By default, call user-defined printing <code class="docutils literal notranslate"><span class="pre">Goal</span></code> in the context of
+<code class="docutils literal notranslate"><span class="pre">user</span></code>. The use of a lambda expression allows passing the message
+stream and prefix. Printing the prefix is delegated to the goal.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">[Stream]&gt;&gt;Goal</span></code></dt><dd><p>By default, call user-defined printing <code class="docutils literal notranslate"><span class="pre">Goal</span></code> in the context of
+<code class="docutils literal notranslate"><span class="pre">user</span></code>. The use of a lambda expression allows passing the message
+stream.</p>
+</dd>
 </dl>
 <p>Some simple examples of using these meta-messages:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk::print_message(debug, core, @&#39;Phase 1 completed&#39;).
 yes
 
+| ?- logtalk::print_message(debug, core, [Stream]&gt;&gt;write(Stream,foo)).
+yes
+
 | ?- set_logtalk_flag(debug, on).
+yes
+
+| ?- logtalk::print_message(debug, core, [Stream]&gt;&gt;write(Stream,foo)).
+foo
 yes
 
 | ?- logtalk::print_message(debug, core, @&#39;Phase 1 completed&#39;).

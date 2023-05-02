@@ -11,8 +11,8 @@
 Built-in object providing message printing, debugging, library, source file, and hacking methods.
 
 | **Author:** Paulo Moura
-| **Version:** 1:21:0
-| **Date:** 2023-01-03
+| **Version:** 1:22:0
+| **Date:** 2023-05-02
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -37,6 +37,8 @@ Built-in object providing message printing, debugging, library, source file, and
    - Meta message ``Format+Arguments``: By default, the message is printed as passed to the ``format/2`` predicate.
    - Meta message ``List``: By default, the list items are printed indented one per line. The items are preceded by a dash and can be ``@Message``, ``Key-Value``, or ``Format+Arguments`` messages. If that is not the case, the item is printed as passed to the ``writeq/1`` predicate.
    - Meta message ``Title::List``: By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.
+   - Meta message ``[Stream,Prefix]>>Goal``: By default, call user-defined ``Goal`` in the context of ``user``. The use of a lambda expression allows passing the message stream and prefix. Printing the prefix is delegated to the goal.
+   - Meta message ``[Stream]>>Goal``: By default, call user-defined ``Goal`` in the context of ``user``. The use of a lambda expression allows passing the message stream.
    - Message tokens: ``at_same_line``, ``tab(Expression)``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``.
 
 | **Inherited public predicates:**

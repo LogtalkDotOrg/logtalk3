@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:21:0,
+		version is 1:22:0,
 		author is 'Paulo Moura',
-		date is 2023-01-03,
+		date is 2023-05-02,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -46,6 +46,8 @@
 			'Meta message ``Format+Arguments``' - 'By default, the message is printed as passed to the ``format/2`` predicate.',
 			'Meta message ``List``' - 'By default, the list items are printed indented one per line. The items are preceded by a dash and can be ``@Message``, ``Key-Value``, or ``Format+Arguments`` messages. If that is not the case, the item is printed as passed to the ``writeq/1`` predicate.',
 			'Meta message ``Title::List``' - 'By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the ``List`` meta message.',
+			'Meta message ``[Stream,Prefix]>>Goal``' - 'By default, call user-defined ``Goal`` in the context of ``user``. The use of a lambda expression allows passing the message stream and prefix. Printing the prefix is delegated to the goal.',
+			'Meta message ``[Stream]>>Goal``' - 'By default, call user-defined ``Goal`` in the context of ``user``. The use of a lambda expression allows passing the message stream.',
 			'Message tokens' - '``at_same_line``, ``tab(Expression)``, ``nl``, ``flush``, ``Format-Arguments``, ``term(Term,Options)``, ``ansi(Attributes,Format,Arguments)``, ``begin(Kind,Variable)``, and ``end(Variable)``.'
 		]
 	]).
@@ -346,6 +348,9 @@
 		(	Tokens = [at_same_line| _] ->
 			% continuation message; do not print the prefix
 			print_message_tokens_([begin(Kind,Ctx)| Tokens], Stream, Prefix)
+		;	Tokens = [[_, _]>>_| _] ->
+			% user-defined print goal; printing the prefix is delegated to the goal
+			print_message_tokens_([begin(Kind,Ctx)| Tokens], Stream, Prefix)
 		;	print_message_tokens_([begin(Kind,Ctx), Prefix-[]| Tokens], Stream, Prefix)
 		),
 		print_message_tokens_([end(Ctx)], Stream, Prefix).
@@ -373,6 +378,12 @@
 	print_message_tokens(Stream, Prefix, Tokens) :-
 		(	Tokens = [at_same_line| _] ->
 			% continuation message
+			print_message_tokens_(Tokens, Stream, Prefix)
+		;	Tokens = [[_, _]>>_| _] ->
+			% user-defined print goal; printing the prefix is delegated to the goal
+			print_message_tokens_(Tokens, Stream, Prefix)
+		;	Tokens = [begin(Kind, Context), [_, _]>>_| _] ->
+			% user-defined print goal; printing the prefix is delegated to the goal
 			print_message_tokens_(Tokens, Stream, Prefix)
 		;	Tokens = [begin(Kind, Context)| Rest] ->
 			% write the prefix after the begin/2 token
@@ -417,6 +428,10 @@
 		{'$lgt_format'(Stream, Format, Arguments)}.
 	default_print_message_token(term(Term, Options), _, Stream, _) :-
 		write_term(Stream, Term, Options).
+	default_print_message_token([Stream, Prefix]>>Goal, _, Stream, Prefix) :-
+		{once(Goal)}.
+	default_print_message_token([Stream]>>Goal, _, Stream, _) :-
+		{once(Goal)}.
 	% the following tokens were first introduced by SWI-Prolog; we use default definitions
 	% for compatibility when running Logtalk with other backend Prolog compilers
 	default_print_message_token(ansi(_, Format, Arguments), _, Stream, _) :-
@@ -448,6 +463,10 @@
 		{copy_term(List, Copy), numbervars(Copy, 0, _)},
 		['~w:'-[Title], nl],
 		default_message_tokens_list(Copy).
+	default_message_tokens([Stream, Prefix]>>Goal) -->
+		[[Stream, Prefix]>>Goal, nl].
+	default_message_tokens([Stream]>>Goal) -->
+		[[Stream]>>Goal, nl].
 
 	default_message_tokens_list([]) -->
 		[].

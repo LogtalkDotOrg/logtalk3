@@ -195,8 +195,8 @@
 <p>Built-in object providing message printing, debugging, library, source file, and hacking methods.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:21:0</div>
-<div class="line"><strong>Date:</strong> 2023-01-03</div>
+<div class="line"><strong>Version:</strong> 1:22:0</div>
+<div class="line"><strong>Date:</strong> 2023-05-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -228,6 +228,8 @@
 <li><p>Meta message <code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code>: By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">format/2</span></code> predicate.</p></li>
 <li><p>Meta message <code class="docutils literal notranslate"><span class="pre">List</span></code>: By default, the list items are printed indented one per line. The items are preceded by a dash and can be <code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code>, <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>, or <code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code> messages. If that is not the case, the item is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p></li>
 <li><p>Meta message <code class="docutils literal notranslate"><span class="pre">Title::List</span></code>: By default, the title is printed followed by a newline and the indented list items, one per line. The items are printed as in the <code class="docutils literal notranslate"><span class="pre">List</span></code> meta message.</p></li>
+<li><p>Meta message <code class="docutils literal notranslate"><span class="pre">[Stream,Prefix]&gt;&gt;Goal</span></code>: By default, call user-defined <code class="docutils literal notranslate"><span class="pre">Goal</span></code> in the context of <code class="docutils literal notranslate"><span class="pre">user</span></code>. The use of a lambda expression allows passing the message stream and prefix. Printing the prefix is delegated to the goal.</p></li>
+<li><p>Meta message <code class="docutils literal notranslate"><span class="pre">[Stream]&gt;&gt;Goal</span></code>: By default, call user-defined <code class="docutils literal notranslate"><span class="pre">Goal</span></code> in the context of <code class="docutils literal notranslate"><span class="pre">user</span></code>. The use of a lambda expression allows passing the message stream.</p></li>
 <li><p>Message tokens: <code class="docutils literal notranslate"><span class="pre">at_same_line</span></code>, <code class="docutils literal notranslate"><span class="pre">tab(Expression)</span></code>, <code class="docutils literal notranslate"><span class="pre">nl</span></code>, <code class="docutils literal notranslate"><span class="pre">flush</span></code>, <code class="docutils literal notranslate"><span class="pre">Format-Arguments</span></code>, <code class="docutils literal notranslate"><span class="pre">term(Term,Options)</span></code>, <code class="docutils literal notranslate"><span class="pre">ansi(Attributes,Format,Arguments)</span></code>, <code class="docutils literal notranslate"><span class="pre">begin(Kind,Variable)</span></code>, and <code class="docutils literal notranslate"><span class="pre">end(Variable)</span></code>.</p></li>
 </ul>
 </div></blockquote>
