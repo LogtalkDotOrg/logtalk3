@@ -624,7 +624,7 @@ Meta-messages
 
 To avoid having to define :ref:`methods_message_tokens_2` grammar rules
 for translating each and every debug message, Logtalk provides default
-tokenization for five *meta-messages* that cover the most common cases:
+tokenization for seven *meta-messages* that cover the most common cases:
 
 ``@Message``
    By default, the message is printed as passed to the ``write/1``
