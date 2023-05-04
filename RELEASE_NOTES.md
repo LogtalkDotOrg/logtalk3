@@ -36,6 +36,9 @@ message stream and prefix.
 * ADDED: Linter warning for unclassified (but non-singleton and non-anonymous)
 variables in `Free/Goal` lambda expressions.
 
+* IMPROVED: Reporting of calls to unknown predicates from auxiliary clauses
+(e.g. generated from the compilation of lambda expressions).
+
 Documentation
 -------------
 

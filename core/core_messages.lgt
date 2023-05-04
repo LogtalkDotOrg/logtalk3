@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:118:0,
+		version is 1:119:0,
 		author is 'Paulo Moura',
-		date is 2022-11-02,
+		date is 2023-05-04,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -880,7 +880,9 @@
 
 	message_context(File, Lines, Type, Entity) -->
 		['  while compiling ~w ~q'-[Type, Entity], nl],
-		(	{Lines == 1-1} ->
+		(	{Lines == 0-0} ->
+			['  in auxiliary clause generated for file ~w'-[File], nl, nl]
+		;	{Lines == 1-1} ->
 			['  in file ~w at line 1'-[File], nl, nl]
 		;	{Lines = Line-Line} ->
 			['  in file ~w at or above line ~d'-[File, Line], nl, nl]
