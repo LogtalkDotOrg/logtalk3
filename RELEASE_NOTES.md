@@ -33,6 +33,9 @@ to the message printing mechanism. These new meta-messages allow calling a
 user-defined printing goal. The use of lambda expressions allow passing the
 message stream and prefix.
 
+* ADDED: Linter warning for unclassified (but non-singleton and non-anonymous)
+variables in `Free/Goal` lambda expressions.
+
 Documentation
 -------------
 

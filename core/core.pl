@@ -23769,9 +23769,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_check_lambda_expression'(Free/Goal, _) :-
+'$lgt_check_lambda_expression'(Free/Goal, Ctx) :-
 	'$lgt_check'(var_or_curly_bracketed_term, Free),
-	'$lgt_check'(var_or_callable, Goal).
+	'$lgt_check'(var_or_callable, Goal),
+	% second, check for likely errors if compiling a source file
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		nonvar(Free),
+		nonvar(Goal) ->
+		'$lgt_check_lambda_expression_unclassified_variables'(Free/Goal, Ctx)
+	;	true
+	).
 
 '$lgt_check_lambda_expression'(Parameters>>Goal, Ctx) :-
 	% first, check for errors
@@ -23835,21 +23842,61 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % each lambda goal variable should be either a lambda free variable or a lambda parameter
 
+'$lgt_check_lambda_expression_unclassified_variables'(Free/Goal, Ctx) :-
+	% take into account currying to avoid false positives
+	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars, Ctx),
+	term_variables(Free, FreeVars),
+	'$lgt_var_subtract'(GoalVars, FreeVars, UnclassifiedVars0),
+	(	UnclassifiedVars0 \== [],
+		'$lgt_compiler_flag'(lambda_variables, warning),
+		% reinstate relation between term variables and their names
+		'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
+		'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, Singletons, _, _),
+		% ignore singleton (and anonymous) variables
+		'$lgt_filter_singleton_variables'(UnclassifiedVars0, VariableNames, Singletons, UnclassifiedVars),
+		UnclassifiedVars \== [] ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_print_message'(
+			warning(lambda_variables),
+			unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnclassifiedVars, Free/Goal)
+		)
+	;	true
+	).
+
 '$lgt_check_lambda_expression_unclassified_variables'(Parameters>>Goal, Ctx) :-
 	% take into account currying to avoid false positives
 	'$lgt_check_lambda_expression_goal_variables'(Goal, GoalVars, Ctx),
 	term_variables(Parameters, ParameterVars),
-	'$lgt_var_subtract'(GoalVars, ParameterVars, UnqualifiedVars),
-	(	UnqualifiedVars \== [],
+	'$lgt_var_subtract'(GoalVars, ParameterVars, UnclassifiedVars),
+	(	UnclassifiedVars \== [],
 		'$lgt_compiler_flag'(lambda_variables, warning) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_print_message'(
 			warning(lambda_variables),
-			unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnqualifiedVars, Parameters>>Goal)
+			unclassified_variables_in_lambda_expression(File, Lines, Type, Entity, UnclassifiedVars, Parameters>>Goal)
 		)
 	;	true
 	).
+
+
+'$lgt_filter_singleton_variables'([], _, _, []).
+
+'$lgt_filter_singleton_variables'([UnclassifiedVar0| UnclassifiedVars0], VariableNames, Singletons, [UnclassifiedVar0| UnclassifiedVars]) :-
+	'$lgt_member'(_Name0=Variable0, VariableNames),
+	Variable0 == UnclassifiedVar0,
+	\+ (
+		'$lgt_member'(Name1=Variable1, Singletons),
+		Variable1 == UnclassifiedVar0,
+		% parameter variables may be singletons in the clause but still need to be classified
+		\+ '$lgt_parameter_variable_name'(Name1)
+	),
+	!,
+	'$lgt_filter_singleton_variables'(UnclassifiedVars0, VariableNames, Singletons, UnclassifiedVars).
+
+'$lgt_filter_singleton_variables'([_| UnclassifiedVars0], VariableNames, Singletons, UnclassifiedVars) :-
+	'$lgt_filter_singleton_variables'(UnclassifiedVars0, VariableNames, Singletons, UnclassifiedVars).
 
 
 '$lgt_check_lambda_expression_goal_variables'(Parameters>>Goal, UnqualifiedVars, Ctx) :-
