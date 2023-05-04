@@ -16124,7 +16124,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, _, TPred, '$lgt_debug'(goal(DPred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_coinductive_'(Pred, _, ExCtx, TCPred, _, _, DCPred, _, _),
 	!,
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines, _),
 	(	'$lgt_pp_defines_predicate_'(Pred, Functor/Arity, _, TPred0, _, _) ->
 		'$lgt_check_for_trivial_fails'(Mode, Pred, TPred0, Head),
 		% convert the call to the original coinductive predicate into a call to the auxiliary
@@ -16139,14 +16139,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head),
 		% closed-world assumption: calls to static, declared but undefined
 		% predicates must fail instead of throwing an exception,
-		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity),
+		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
 		TPred = fail,
 		DPred = Pred
 	).
 
 '$lgt_compile_body'(Pred, _, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_synchronized_'(Pred, Mutex, _, _),
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines, _),
 	functor(Pred, Functor, Arity),
 	\+ (nonvar(Head), functor(Head, Functor, Arity)),
 	% not a recursive call
@@ -16163,7 +16163,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		% closed-world assumption: calls to static, declared but undefined
 		% predicates must fail instead of throwing an exception,
-		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity),
+		'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines),
 		TPred = fail
 	),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head).
@@ -16244,10 +16244,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	% closed-world assumption: calls to static, non-multifile, declared
 	% but undefined predicates must fail instead of throwing an exception
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, Lines, _),
 	'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head),
-	'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity).
+	'$lgt_report_undefined_predicate_call'(Mode, Functor/Arity, Lines).
 
 % call to a deprecated Prolog built-in predicate
 
@@ -22197,7 +22197,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_report_unknown_predicate_call'(@compilation_mode, @callable)
+% '$lgt_report_unknown_predicate_call'(@compilation_mode, @callable, @lines)
 %
 % reports unknown predicates and non-terminals
 
@@ -22235,27 +22235,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_report_undefined_predicate_call'(@compilation_mode, @callable)
+% '$lgt_report_undefined_predicate_call'(@compilation_mode, @callable, @lines)
 %
 % reports calls to declared, static, but undefined predicates and non-terminals
 
-'$lgt_report_undefined_predicate_call'(runtime, _).
+'$lgt_report_undefined_predicate_call'(runtime, _, _).
 
-'$lgt_report_undefined_predicate_call'(compile(_,_,_), Pred) :-
+'$lgt_report_undefined_predicate_call'(compile(_,_,_), Pred, Lines) :-
 	'$lgt_compiler_flag'(undefined_predicates, Value),
-	'$lgt_report_undefined_predicate_call_aux'(Value, Pred).
+	'$lgt_report_undefined_predicate_call_aux'(Value, Pred, Lines).
 
 
-'$lgt_report_undefined_predicate_call_aux'(silent, _).
+'$lgt_report_undefined_predicate_call_aux'(silent, _, _).
 
-'$lgt_report_undefined_predicate_call_aux'(error, Functor/Arity) :-
+'$lgt_report_undefined_predicate_call_aux'(error, Functor/Arity, _) :-
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
 		throw(existence_error(procedure, Functor//Arity2))
 	;	throw(existence_error(procedure, Functor/Arity))
 	).
 
-'$lgt_report_undefined_predicate_call_aux'(warning, Functor/Arity) :-
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
+'$lgt_report_undefined_predicate_call_aux'(warning, Functor/Arity, Lines) :-
+	% we may be compiling an auxiliary clause and thus unable
+	% to use the '$lgt_source_file_context'/4 predicate
+	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
+	'$lgt_pp_entity_'(Type, Entity, _),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
 		'$lgt_print_message'(
