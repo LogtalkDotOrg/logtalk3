@@ -53,6 +53,12 @@ Tools
 * FIXED: The `packs` tool `describe/1-2` and `directory/2` predicates when
 listing orphaned packs.
 
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate lambda expression linter
+warnings.
+
 Tests
 -----
 

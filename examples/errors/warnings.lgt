@@ -754,3 +754,21 @@
 		).
 
 :- end_object.
+
+
+
+:- object(lambdas(_A_)).
+
+	foo(Y, L) :-
+		bagof(X, {X}/qux(X,Y,_A_), L).
+
+	bar :-
+		call({X}/[X]>>qux(X), _, _).
+
+	baz :-
+		call([X]>>qux(X), _, _),
+		X = 1.
+
+	qux(_, _, _).
+
+:- end_object.
