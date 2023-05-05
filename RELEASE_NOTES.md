@@ -50,6 +50,9 @@ restoring (virtual) environments.
 Tools
 -----
 
+* UPDATED: The `tutor` tool to also explain the linter warning in missing else
+part in if-then-else and soft-cut control constructs.
+
 * FIXED: The `packs` tool `describe/1-2` and `directory/2` predicates when
 listing orphaned packs.
 

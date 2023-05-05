@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:50:0,
+		version is 0:51:0,
 		author is 'Paulo Moura',
-		date is 2022-10-03,
+		date is 2023-05-05,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -762,6 +762,14 @@
 			'term is a potential bug: if the variable is unbound at runtime, the test'-[], nl,
 			'will always succeed, committing to the then part. Consider using instead'-[], nl,
 			'the (==)/2 or (=:=)/2 built-in predicates.'-[], nl, nl
+		].
+
+	% other conditional warnings
+
+	explain(missing_else_part(_, _, _, _, _)) -->
+		[	'If-then-else (and soft-cut) control constructs without the else part are'-[], nl,
+			'false when the condition is false; adding the missing else part makes this'-[], nl,
+			'semantics clear.'-[], nl, nl
 		].
 
 	% catch/3 goals that catch all exceptions
