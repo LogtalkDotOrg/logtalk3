@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:28:0,
+		version is 0:29:0,
 		author is 'Paulo Moura',
-		date is 2022-11-20,
+		date is 2023-05-05,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -245,9 +245,9 @@
 	message_tokens(outdated_pack(Registry, Pack, Version, LatestVersion)) -->
 		['  ~q::~q@~q - ~q available'-[Registry, Pack, Version, LatestVersion], nl].
 
-	% pack orphaned messages
+	% pack listing messages
 
-	message_tokens(orphaned_pack(Registry, Pack)) -->
+	message_tokens(pack(Registry, Pack)) -->
 		['  ~q::~q'-[Registry, Pack], nl].
 
 	% pack clean messages
@@ -279,11 +279,14 @@
 	message_tokens(cannot_update_pinned_pack(Pack)) -->
 		['Cannot update pinned pack: ~q'-[Pack], nl].
 
-	message_tokens(unknown_pack(Pack)) -->
-		['Unknown pack: ~q'-[Pack], nl].
+	message_tokens(orphaned_pack(Registry, Pack)) -->
+		['Orphaned pack: ~q::~q'-[Registry, Pack], nl].
 
 	message_tokens(unknown_pack(Registry, Pack)) -->
 		['Unknown pack: ~q::~q'-[Registry, Pack], nl].
+
+	message_tokens(unknown_pack(Pack)) -->
+		['Unknown pack: ~q'-[Pack], nl].
 
 	message_tokens(pack_not_installed(Pack)) -->
 		['Pack is not installed: ~q'-[Pack], nl].

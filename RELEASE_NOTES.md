@@ -47,6 +47,12 @@ Documentation
 * IMPROVED: Documentation of the `packs` tool on requirements plus saving and
 restoring (virtual) environments.
 
+Tools
+-----
+
+* FIXED: The `packs` tool `describe/1-2` and `directory/2` predicates when
+listing orphaned packs.
+
 Tests
 -----
 

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:61:0,
+		version is 0:61:1,
 		author is 'Paulo Moura',
-		date is 2023-03-01,
+		date is 2023-05-05,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -625,18 +625,19 @@
 	directory(Pack, Directory) :-
 		check(var_or(atom), Pack),
 		check(var_or(atom), Directory),
-		(	var(Pack) ->
-			implements_protocol(PackObject, pack_protocol),
-			PackObject::name(Pack)
-		;	check(atom, Pack),
-			implements_protocol(PackObject, pack_protocol),
-			PackObject::name(Pack),
-			!
-		),
 		^^logtalk_packs(LogtalkPacks),
-		path_concat(LogtalkPacks, packs, Packs),
-		path_concat(Packs, Pack, Directory),
-		directory_exists(Directory).
+		path_concat(LogtalkPacks, packs, LogtalkPacksDirectory),
+		directory_files(LogtalkPacksDirectory, Packs, [type(directory), dot_files(false), paths(relative)]),
+		(	var(Pack), var(Directory) ->
+			member(Pack, Packs),
+			path_concat(LogtalkPacksDirectory, Pack, Directory)
+		;	var(Directory) ->
+			memberchk(Pack, Packs),
+			path_concat(LogtalkPacksDirectory, Pack, Directory)
+		;	member(Pack, Packs),
+			path_concat(LogtalkPacksDirectory, Pack, Directory),
+			!
+		).
 
 	directory(Pack) :-
 		check(atom, Pack),
@@ -956,6 +957,10 @@
 		check(atom, Pack),
 		(	registry_pack(Registry, Pack, PackObject) ->
 			describe_pack(Registry, Pack, PackObject)
+		;	directory(Pack, Directory),
+			read_registry(Directory, Registry) ->
+			print_message(error, packs, orphaned_pack(Registry, Pack)),
+			fail
 		;	print_message(error, packs, unknown_pack(Registry, Pack)),
 			fail
 		).
@@ -963,7 +968,11 @@
 	describe(Pack) :-
 		check(atom, Pack),
 		(	\+ registry_pack(_, Pack, _) ->
-			print_message(error, packs, unknown_pack(Pack)),
+			(	directory(Pack, Directory),
+				read_registry(Directory, Registry) ->
+				print_message(error, packs, orphaned_pack(Registry, Pack))
+			;	print_message(error, packs, unknown_pack(Pack))
+			),
 			fail
 		;	forall(
 				registry_pack(Registry, Pack, PackObject),
@@ -1305,7 +1314,7 @@
 	orphaned :-
 		print_message(information, packs, @'Orphaned packs:'),
 		orphaned_pack(Registry, Pack),
-		print_message(information, packs, orphaned_pack(Registry, Pack)),
+		print_message(information, packs, pack(Registry, Pack)),
 		fail.
 	orphaned :-
 		\+ orphaned_pack(_, _),
