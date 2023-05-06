@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:51:0,
+		version is 0:52:0,
 		author is 'Paulo Moura',
-		date is 2023-05-05,
+		date is 2023-05-06,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -198,19 +198,23 @@
 
 	error(permission_error(modify, uses_object_predicate, _)) -->
 		[	'This predicate is already listed in a uses/2 directive.'-[], nl,
-			'Typo in the predicate indicator or a duplicate?'-[], nl, nl
+			'Typo in the predicate indicator or a duplicated predicate reference?'-[], nl,
+			'Trying to define a local clause for the same predicate?'-[], nl, nl
 		].
 	error(permission_error(modify, uses_module_predicate, _)) -->
 		[	'This predicate is already listed in a use_module/2 directive.'-[], nl,
-			'Typo in the predicate indicator or a duplicate?'-[], nl, nl
+			'Typo in the predicate indicator or a duplicated predicate reference?'-[], nl,
+			'Trying to define a local clause for the same predicate?'-[], nl, nl
 		].
 	error(permission_error(modify, uses_object_non_terminal, _)) -->
 		[	'This non-terminal is already listed in a uses/2 directive.'-[], nl,
-			'Typo in the non-terminal indicator or a duplicate?'-[], nl, nl
+			'Typo in the predicate indicator or a duplicated predicate reference?'-[], nl,
+			'Trying to define a local clause for the same predicate?'-[], nl, nl
 		].
 	error(permission_error(modify, uses_module_non_terminal, _)) -->
 		[	'This non-terminal is already listed in a use_module/2 directive.'-[], nl,
-			'Typo in the non-terminal indicator or a duplicate?'-[], nl, nl
+			'Typo in the predicate indicator or a duplicated predicate reference?'-[], nl,
+			'Trying to define a local clause for the same predicate?'-[], nl, nl
 		].
 
 	error(permission_error(modify, predicate_scope, _)) -->

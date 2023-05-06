@@ -50,7 +50,11 @@ restoring (virtual) environments.
 Tools
 -----
 
-* UPDATED: The `tutor` tool to also explain the linter warning in missing else
+* IMPROVED: The `tutor` tool explanation for compiler errors when trying
+to redefine the meaning of predicates listed in `uses/2` or `use_module/2`
+directives.
+
+* UPDATED: The `tutor` tool to also explain the linter warning on missing else
 part in if-then-else and soft-cut control constructs.
 
 * FIXED: The `packs` tool `describe/1-2` and `directory/2` predicates when
