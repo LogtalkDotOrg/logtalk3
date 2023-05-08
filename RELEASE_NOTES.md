@@ -47,6 +47,8 @@ Documentation
 
 * ADDED: Handbook description and examples of the new meta-messages.
 
+* IMPROVED: Handbook documentation of the `logtalk_library_path/2` predicate.
+
 * IMPROVED: Documentation of the `packs` tool on requirements plus saving and
 restoring (virtual) environments.
 

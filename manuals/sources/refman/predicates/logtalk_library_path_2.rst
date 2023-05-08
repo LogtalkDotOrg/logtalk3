@@ -44,6 +44,13 @@ end with the path directory separator character (``'/'``).
    built-in predicate can be used to detect and report duplicated library 
    aliases using the ``check`` target.
 
+Clauses for this predicate should preferably be facts. Defining rules to
+dynamically compute at runtime both library alias names and their paths,
+although sometimes handy, can inadvertently result in endless loops when
+those rules also attempt to expand library paths. When asserting facts
+for this predicate, use preferably ``asserta/1`` instead of ``assertz/1``
+to help ensure the facts will be used before any rules.
+
 Relative paths (e.g. ``'../'`` or ``'./'``) should only be used within
 the *alias(path)*) notation so that library paths can always be expanded
 to absolute paths independently of the (usually unpredictable) current
@@ -98,7 +105,7 @@ Examples
 
    :- initialization((
       logtalk_load_context(directory, Directory),
-      assertz(logtalk_library_path(my_application_root, Directory))
+      asserta(logtalk_library_path(my_application_root, Directory))
    )).
 
 ::

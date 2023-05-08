@@ -156,6 +156,12 @@ end with the path directory separator character (<code class="docutils literal n
 built-in predicate can be used to detect and report duplicated library
 aliases using the <code class="docutils literal notranslate"><span class="pre">check</span></code> target.</p>
 </div>
+<p>Clauses for this predicate should preferably be facts. Defining rules to
+dynamically compute at runtime both library alias names and their paths,
+although sometimes handy, can inadvertently result in endless loops when
+those rules also attempt to expand library paths. When asserting facts
+for this predicate, use preferably <code class="docutils literal notranslate"><span class="pre">asserta/1</span></code> instead of <code class="docutils literal notranslate"><span class="pre">assertz/1</span></code>
+to help ensure the facts will be used before any rules.</p>
 <p>Relative paths (e.g. <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) should only be used within
 the <em>alias(path)</em>) notation so that library paths can always be expanded
 to absolute paths independently of the (usually unpredictable) current
@@ -201,7 +207,7 @@ using library notation.</p>
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
    <span class="k">logtalk_load_context</span>(directory, <span class="nv">Directory</span>),
-   <span class="k">assertz</span>(<span class="k">logtalk_library_path</span>(my_application_root, <span class="nv">Directory</span>))
+   <span class="k">asserta</span>(<span class="k">logtalk_library_path</span>(my_application_root, <span class="nv">Directory</span>))
 )).
 </pre></div>
 </div>

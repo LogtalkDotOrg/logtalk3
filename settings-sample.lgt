@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on October 28, 2022
+%  Last updated on April 8, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -215,6 +215,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 logtalk_library_path(my_logtalk_projects, home('my_logtalk_projects/')).
 logtalk_library_path(Project, my_logtalk_projects(ProjectPath)) :-
+	Library \== logtalk_packs,
 	logtalk::expand_library_path(my_logtalk_projects, MyProjectsPath),
 	os::directory_files(MyProjectsPath, Projects, [type(directory), dot_files(false)]),
 	list::member(Project, Projects),
