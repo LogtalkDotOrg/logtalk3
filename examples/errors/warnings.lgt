@@ -166,6 +166,16 @@
 
 
 
+:- object(predicate_called_as_a_non_terminal).
+
+	q(_) --> p(_).
+
+	p(_, _, _).
+
+:- end_object.
+
+
+
 :- object(missing_protocol_reference).
 
 	before(_, _, _).
