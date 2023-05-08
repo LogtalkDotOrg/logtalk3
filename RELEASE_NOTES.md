@@ -79,6 +79,12 @@ Tests
 * ADDED: Additional tests for the Prolog standard `number_chars/2` and
 `number_codes/2` predicates.
 
+Contributions
+-------------
+
+* FIXED: Cases in the `xml_parser` contribution where predicates were called
+as non-terminals.
+
 
 3.65.0 - April 27, 2023
 =======================

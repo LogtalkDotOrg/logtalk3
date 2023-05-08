@@ -17,9 +17,9 @@
 :- object(xml).
 
 	:- info([
-		version is 3:8:2,
+		version is 3:8:3,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
-		date is 2022-09-06,
+		date is 2023-05-08,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
 		license is 'This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
@@ -201,11 +201,11 @@
 	unparsed( Unparsed, _Context, [unparsed(Unparsed)], [], false ).
 
 	xml_declaration( Attributes ) -->
-		spaces,
+		call(spaces),
 		"<?",
 		nmtoken( xml ),
 		xml_declaration_attributes( Attributes ),
-		spaces,
+		call(spaces),
 		"?>".
 
 	xml_to_document0( [], Context, Terms, [], WF ) :-
@@ -323,7 +323,7 @@
 	open_tag( Tag, Namespaces, Attributes, Termination ) -->
 		nmtoken_codes( Tag ),
 		attributes( Attributes, [], Namespaces ),
-		spaces,
+		call(spaces),
 		open_tag_terminator( Tag, Termination ).
 
 	open_tag_terminator( Tag, push(Tag) ) -->
@@ -332,12 +332,12 @@
 		"/>".
 
 	declaration_parse( comment, Namespaces, comment(Comment), Namespaces ) -->
-		comment(Comment).
+		call(comment(Comment)).
 	declaration_parse( cdata, Namespaces, cdata(CData), Namespaces ) -->
-		cdata( CData ).
+		call(cdata( CData )).
 	declaration_parse( doctype, Namespaces0, doctype(Name, Names), Namespaces ) -->
 		doctype( Name, Names, Namespaces0, Namespaces ),
-		spaces,
+		call(spaces),
 		">".
 
 	inline_instruction( Target, Processing, Plus, Minus  ) :-
@@ -376,7 +376,7 @@
 
 	closing_tag_name( Tag ) -->
 		nmtoken_codes( Tag ),
-		spaces,
+		call(spaces),
 		">".
 
 	entity_reference( Codes, Context, Terms, Residue, WF ) :-
@@ -447,34 +447,34 @@
 		input_attributes( Attributes0, Context, Attributes ).
 
 	attributes( [Name=Value|Attributes], Seen, Namespaces ) -->
-		spaces,
+		call(spaces),
 		nmtoken_codes( Name ),
 		{\+ member(Name, Seen)},
-		spaces,
+		call(spaces),
 		"=",
-		spaces,
+		call(spaces),
 		attribute_value( Value, Namespaces ),
 		attributes( Attributes, [Name|Seen], Namespaces ).
 	attributes( [], _Seen, _Namespaces ) --> "".
 
 	xml_declaration_attributes( [] ) --> "".
 	xml_declaration_attributes( [Name=Value|Attributes] ) -->
-		spaces,
+		call(spaces),
 		nmtoken( Name ),
-		spaces,
+		call(spaces),
 		"=",
-		spaces,
+		call(spaces),
 		xml_string( Value ),
 		{xml_declaration_attribute_valid(Name, Value)},
 		xml_declaration_attributes( Attributes ),
-		spaces.
+		call(spaces).
 
 	doctype( Name, External, Namespaces0, Namespaces1 ) -->
-		spaces,
+		call(spaces),
 		nmtoken( Name ),
-		spaces,
+		call(spaces),
 		doctype_id( External0 ),
-		spaces,
+		call(spaces),
 		doctype1( Namespaces0, Literals, Namespaces1 ),
 		{doctype_extension(Literals, External0, External)}.
 
@@ -495,26 +495,26 @@
 
 	doctype_id( system(URL) ) -->
 		"SYSTEM",
-		spaces,
+		call(spaces),
 		uri( URL ).
 	doctype_id( public(URN,URL) ) -->
 		"PUBLIC",
-		spaces,
+		call(spaces),
 		uri( URN ),
-		spaces,
+		call(spaces),
 		uri( URL ).
 	doctype_id( local ) --> "".
 
 	dtd( Namespaces0, Literals, Namespaces1 ) -->
-		spaces,
+		call(spaces),
 		"<!ENTITY",
 		!,
-		spaces,
+		call(spaces),
 		nmtoken_codes( Name ),
-		spaces,
+		call(spaces),
 		quote( Quote ),
-		entity_value( Quote, Namespaces0, String ),
-		spaces,
+		call(entity_value( Quote, Namespaces0, String )),
+		call(spaces),
 		">",
 		{	\+ character_entity( Name, _StandardCode ),
 			% Don't allow &lt; &quote; etc. to be updated
@@ -522,25 +522,25 @@
 		},
 		dtd( Namespaces2, Literals, Namespaces1 ).
 	dtd( Namespaces0, Literals, Namespaces1 ) -->
-		spaces,
+		call(spaces),
 		"<!--",
 		!,
-		dtd_comment,
+		call(dtd_comment),
 		">",
 		dtd( Namespaces0, Literals, Namespaces1 ).
 	dtd( Namespaces0, [dtd_literal(Literal)|Literals], Namespaces1 ) -->
-		spaces,
+		call(spaces),
 		"<!",
 		!,
 		dtd_literal( Literal ),
 		dtd( Namespaces0, Literals, Namespaces1 ).
-	dtd( Namespaces, [], Namespaces ) --> spaces.
+	dtd( Namespaces, [], Namespaces ) --> call(spaces).
 
 	dtd_literal( [] ) --> ">", !.
 	dtd_literal( Codes ) -->
 		"--",
 		!,
-		dtd_comment,
+		call(dtd_comment),
 		dtd_literal( Codes ).
 	dtd_literal( [Code|Codes] ) -->
 		[Code],
@@ -551,7 +551,7 @@
 		!.
 
 	nmtokens( [Name|Names] ) -->
-		spaces,
+		call(spaces),
 		nmtoken( Name ),
 		nmtokens( Names ).
 	nmtokens( [] ) --> [].
@@ -568,7 +568,7 @@
 
 	attribute_value( String, Namespaces ) -->
 		quote( Quote ),
-		attribute_leading_layouts( Quote, Namespaces, String ).
+		call(attribute_leading_layouts( Quote, Namespaces, String )).
 
 	attribute_leading_layouts( _Quote, _Namespace, [], [], [] ).
 	attribute_leading_layouts( Quote, Namespaces, String, [Code|Plus], Minus ) :-
@@ -652,7 +652,7 @@
 		"#", digit( Digit ), digits( Digits ), ";",
 		{catch(number_codes( Code, [Digit|Digits]), _, fail)}.
 	standard_character_entity( C ) -->
-		codes( String ),
+		call(codes( String )),
 		";",
 		!,
 		{character_entity(String, C)}.
@@ -1661,14 +1661,14 @@
 
 	fault_path( Tag, Attributes ) -->
 		{atom_codes( Tag, Codes )},
-		codes( Codes ),
+		call(codes( Codes )),
 		fault_id( Attributes ),
 		" ".
 
 	fault_id( Attributes ) -->
 		{member( id=Codes, Attributes ), is_codes( Codes )},
 		!,
-		"(", codes(Codes), ")".
+		"(", call(codes(Codes)), ")".
 	fault_id( _Attributes ) --> "".
 
 
@@ -1731,18 +1731,18 @@
 		generation( Terms, Prefix, Format1, Indent, Format ).
 	generation( doctype(Name, External), _Prefix, Format, [], Format ) -->
 		"<!DOCTYPE ",
-		generated_name( Name ),
+		call(generated_name( Name )),
 		generated_external_id( External ),
 		">".
 	generation( instructions(Target,Process), _Prefix, Format, Indent, Format ) -->
 		indent( Format, Indent ),
-		"<?", generated_name(Target), " ", codes( Process ) ,"?>".
+		"<?", call(generated_name(Target)), " ", call(codes( Process )) ,"?>".
 	generation( pcdata(Codes), _Prefix, Format0, _Indent, Format1 ) -->
-		pcdata_generation( Codes ),
+		call(pcdata_generation( Codes )),
 		{character_data_format( Codes, Format0, Format1 )}.
 	generation( comment( Comment ), _Prefix, Format, Indent, Format ) -->
 		indent( Format, Indent ),
-		"<!--", codes( Comment ), "-->".
+		"<!--", call(codes( Comment )), "-->".
 	generation( namespace(URI, Prefix, element(Name, Atts, Content)),
 			_Prefix0, Format, Indent, Format ) -->
 		indent( Format, Indent ),
@@ -1766,18 +1766,18 @@
 		;	Format1 = Format0
 		)},
 		" ",
-		generated_name( Name ),
+		call(generated_name( Name )),
 		"=""",
-		quoted_string( Value ),
+		call(quoted_string( Value )),
 		"""",
 		generated_attributes( Attributes, Format1, Format  ).
 
 	generated_prefixed_name( [], Name ) -->
-		generated_name( Name ).
+		call(generated_name( Name )).
 	generated_prefixed_name( Prefix, Name ) -->
 		{Prefix = [_|_]},
-		codes( Prefix ), ":",
-		generated_name( Name ).
+		call(codes( Prefix )), ":",
+		call(generated_name( Name )).
 
 	generated_content( [], _Format, _Indent, _Prefix, _Namespace ) -->
 		" />". % Leave an extra space for XHTML output.
@@ -1805,24 +1805,24 @@
 		generated_doctype_literals( Literals ), "\n\t]".
 	generated_external_id( system(URL) ) -->
 		" SYSTEM """,
-		codes( URL ),
+		call(codes( URL )),
 		"""".
 	generated_external_id( system(URL,Literals) ) -->
 		" SYSTEM """,
-		codes( URL ),
+		call(codes( URL )),
 		""" [",
 		generated_doctype_literals( Literals ), "\n\t]".
 	generated_external_id( public(URN,URL) ) -->
 		" PUBLIC """,
-		codes( URN ),
+		call(codes( URN )),
 		""" """,
-		codes( URL ),
+		call(codes( URL )),
 		"""".
 	generated_external_id( public(URN,URL,Literals) ) -->
 		" PUBLIC """,
-		codes( URN ),
+		call(codes( URN )),
 		""" """,
-		codes( URL ),
+		call(codes( URL )),
 		""" [",
 		generated_doctype_literals( Literals ), "\n\t]".
 
@@ -1879,7 +1879,7 @@
 
 	indent( false, _Indent ) --> [].
 	indent( true, Indent ) -->
-		"\n",	codes( Indent ).
+		"\n", call(codes( Indent )).
 
 	apos --> "&apos;".
 
@@ -2045,7 +2045,7 @@
 	pcdata_7bit( 127 ) --> "&#127;".
 
 	pcdata_8bits_plus( Codes ) -->
-		"&#", codes( Codes ), ";".
+		"&#", call(codes( Codes )), ";".
 
 	/* character_data_format( +Codes, +Format0, ?Format1 ) holds when Format0 and
 	 * Format1 are the statuses of XML formatting before and after Codes -
