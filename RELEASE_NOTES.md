@@ -39,6 +39,9 @@ variables in `Free/Goal` lambda expressions.
 * IMPROVED: Reporting of calls to undefined predicates and unknown predicates
 from auxiliary clauses (e.g. generated while compiling lambda expressions).
 
+* FIXED: Ensure that the `startup` library alias is found before the runtime
+constructed pack library aliases.
+
 Documentation
 -------------
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on Match 9, 2023
+%  Last updated on April 8, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -39,7 +39,7 @@
 		;	atom_concat(LOGTALK_STARTUP_DIRECTORY0, '/', LOGTALK_STARTUP_DIRECTORY)
 		)
 	),
-	assertz(logtalk_library_path(startup, LOGTALK_STARTUP_DIRECTORY))
+	asserta(logtalk_library_path(startup, LOGTALK_STARTUP_DIRECTORY))
 )).
 
 % Logtalk installation directory
