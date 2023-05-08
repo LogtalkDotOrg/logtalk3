@@ -71,6 +71,8 @@ Examples
 * UPDATED: The `errors` example to illustrate lambda expression linter
 warnings.
 
+* FIXED: Example `bench` cases where predicates were called as non-terminals.
+
 Tests
 -----
 

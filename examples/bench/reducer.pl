@@ -327,7 +327,7 @@ intersectv_list([], []).
 intersectv_list([InS|Sets], OutS) :- phrase(intersectv_list(Sets), InS, OutS).
 
 intersectv_list([]) --> [].
-intersectv_list([S|Sets]) --> intersectv(S), intersectv_list(Sets).
+intersectv_list([S|Sets]) --> call(intersectv(S)), intersectv_list(Sets).
 
 % *** Difference
 diffv([], _, []).

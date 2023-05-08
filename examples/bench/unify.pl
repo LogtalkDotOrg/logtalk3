@@ -114,8 +114,8 @@ make_word(V,   _, V)           :- var(V), !.
 make_word(A,   _, tatm^A)      :- atomic(A), !.
 
 % Calculate the size of T on the heap:
-size(T) --> {structure(T)}, !, {functor(T, _, N)}, add(1), add(N), size_args(1, N, T).
-size(T) --> {cons(T)}, !, add(2), size_args(1, 2, T).
+size(T) --> {structure(T)}, !, {functor(T, _, N)}, call(add(1)), call(add(N)), size_args(1, N, T).
+size(T) --> {cons(T)}, !, call(add(2)), size_args(1, 2, T).
 size(T) --> {atomic(T)}, !.
 size(T) --> {var(T)}, !.
 
