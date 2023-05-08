@@ -33,6 +33,9 @@ to the message printing mechanism. These new meta-messages allow calling a
 user-defined printing goal. The use of lambda expressions allow passing the
 message stream and prefix.
 
+* ADDED: Linter warning for predicates called as non-terminals from grammar
+rules.
+
 * ADDED: Linter warning for unclassified (but non-singleton and non-anonymous)
 variables in `Free/Goal` lambda expressions.
 
@@ -48,6 +51,8 @@ Documentation
 * ADDED: Handbook description and examples of the new meta-messages.
 
 * IMPROVED: Handbook documentation of the `logtalk_library_path/2` predicate.
+
+* IMPROVED: Handbook documentation on definite clause grammars.
 
 * IMPROVED: Documentation of the `packs` tool on requirements plus saving and
 restoring (virtual) environments.

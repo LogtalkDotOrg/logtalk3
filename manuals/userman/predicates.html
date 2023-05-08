@@ -1136,11 +1136,11 @@ the code without changes.</p>
 <section id="definite-clause-grammar-rules">
 <span id="predicates-dcgs"></span><h2>Definite clause grammar rules<a class="headerlink" href="#definite-clause-grammar-rules" title="Permalink to this heading"></a></h2>
 <p>Definite clause grammar rules (DCGs) provide a convenient notation to
-represent the rewrite rules common of most grammars in Prolog. In Logtalk,
-definite clause grammar rules can be encapsulated in objects and
-categories. Currently, the ISO/IEC WG17 group is working on a draft
-specification for a definite clause grammars Prolog standard. Therefore,
-in the mean time, Logtalk follows the common practice of Prolog
+represent the parsing and rewrite rules common of most grammars in
+Prolog. In Logtalk, definite clause grammar rules can be encapsulated
+in objects and categories. Currently, the ISO/IEC WG17 group is working
+on a draft specification for a definite clause grammars Prolog standard.
+Therefore, in the mean time, Logtalk follows the common practice of Prolog
 compilers supporting definite clause grammars, extending it to support
 calling grammar rules contained in categories and objects. A common
 example of a definite clause grammar is the definition of a set of rules
@@ -1289,6 +1289,16 @@ directive, as in the following example:</p>
 <span class="p">:- </span><span class="k">info</span>(sentence<span class="o">//</span><span class="m">0</span>, [
     comment <span class="k">is</span> <span class="s">&#39;Rewrites sentence into noun and verb phrases.&#39;</span>]).
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Future Logtalk versions may compile grammar rules differently from Prolog
+traditional compilation to prevent name clases between non-terminals and
+predicates. Therefore, you should always call non-terminals from predicates
+using the <code class="docutils literal notranslate"><span class="pre">phrase/2-3</span></code> built-in methods and always call predicates from
+grammar rules using the <code class="docutils literal notranslate"><span class="pre">call//1</span></code> built-in method. This recommended
+practice, besides making your code forward compatible with future Logtalk
+versions, also make the code more clear.</p>
 </div>
 </section>
 <section id="built-in-methods">

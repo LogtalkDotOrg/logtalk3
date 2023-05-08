@@ -1164,11 +1164,11 @@ Definite clause grammar rules
 -----------------------------
 
 Definite clause grammar rules (DCGs) provide a convenient notation to
-represent the rewrite rules common of most grammars in Prolog. In Logtalk,
-definite clause grammar rules can be encapsulated in objects and
-categories. Currently, the ISO/IEC WG17 group is working on a draft
-specification for a definite clause grammars Prolog standard. Therefore,
-in the mean time, Logtalk follows the common practice of Prolog
+represent the parsing and rewrite rules common of most grammars in
+Prolog. In Logtalk, definite clause grammar rules can be encapsulated
+in objects and categories. Currently, the ISO/IEC WG17 group is working
+on a draft specification for a definite clause grammars Prolog standard.
+Therefore, in the mean time, Logtalk follows the common practice of Prolog
 compilers supporting definite clause grammars, extending it to support
 calling grammar rules contained in categories and objects. A common
 example of a definite clause grammar is the definition of a set of rules
@@ -1336,6 +1336,16 @@ directive, as in the following example:
 
    :- info(sentence//0, [
        comment is 'Rewrites sentence into noun and verb phrases.']).
+
+.. note::
+
+   Future Logtalk versions may compile grammar rules differently from Prolog
+   traditional compilation to prevent name clases between non-terminals and
+   predicates. Therefore, you should always call non-terminals from predicates
+   using the ``phrase/2-3`` built-in methods and always call predicates from
+   grammar rules using the ``call//1`` built-in method. This recommended
+   practice, besides making your code forward compatible with future Logtalk
+   versions, also make the code more clear.
 
 .. _predicates_methods:
 

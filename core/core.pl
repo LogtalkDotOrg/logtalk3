@@ -19809,6 +19809,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_lint_issues'(Type, Entity) :-
 	'$lgt_report_missing_directives'(Type, Entity),
 	'$lgt_report_non_portable_calls'(Type, Entity),
+	'$lgt_report_predicates_called_as_non_terminals'(Type, Entity),
 	'$lgt_report_non_tail_recursive_predicates'(Type, Entity),
 	'$lgt_report_unknown_entities'(Type, Entity),
 	'$lgt_report_unknown_messages'(Type, Entity),
@@ -22305,6 +22306,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_non_portable_calls'(_, _).
+
+
+
+% '$lgt_report_predicates_called_as_non_terminals'(@entity_type, @entity_identifier)
+%
+% reports calls to predicates as non-terminals from grammar rules
+
+'$lgt_report_predicates_called_as_non_terminals'(protocol, _) :-
+	!.
+
+'$lgt_report_predicates_called_as_non_terminals'(Type, Entity) :-
+	'$lgt_pp_calls_non_terminal_'(Functor, Arity, ExtArity, Lines),
+	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity),
+	'$lgt_pp_defines_predicate_'(_, Functor/ExtArity, _, _, _, _),
+	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(
+		warning(general),
+		calls_predicate_as_non_terminal(File, Lines, Type, Entity, Functor/ExtArity)
+	),
+	fail.
+
+'$lgt_report_predicates_called_as_non_terminals'(_, _).
 
 
 

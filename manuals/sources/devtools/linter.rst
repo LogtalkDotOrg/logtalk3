@@ -36,6 +36,8 @@ Lint checks include:
 -  Calls to declared but not defined static predicates
 -  Non-terminals called as predicates (instead of via the ``phrase/2-3``
    built-in methods)
+-  Predicates called as non-terminals (instead of via the ``call//1``
+   built-in method)
 -  Non-portable predicate calls, predicate options, arithmetic function
    calls, directives, flags, and flag values
 -  Suspicious calls (syntactically valid calls that are likely semantic
