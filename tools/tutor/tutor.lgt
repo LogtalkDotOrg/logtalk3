@@ -59,7 +59,9 @@
 	error(type_error(callable, _)) -->
 		['Callable terms are either atoms or compound terms.'-[], nl, nl].
 	error(type_error(predicate_alias_specification, _)) -->
-		['Aliases are specified using the as/2 infix operator: Original as Alias.'-[], nl, nl].
+		[	'Aliases are specified using the (as)/2 infix operator: Original as Alias.'-[], nl,
+			'In alternative, the (::)/2 infix operator can also be used: Original::Alias.'-[], nl, nl
+		].
 
 	error(type_error(source_file_name, _)) -->
 		[	'Source file names are specified using either an atom (representing a relative or'-[], nl,
@@ -138,7 +140,7 @@
 
 	error(domain_error(message_sending_goal, _)) -->
 		[	'The argument of the message delegation control construct must be'-[], nl,
-			'a ::/2 message sending goal.'-[], nl, nl
+			'a (::)/2 message sending goal.'-[], nl, nl
 		].
 
 	error(domain_error(meta_directive_template, _)) -->
@@ -368,7 +370,7 @@
 			'Wrong scope for calling the predicate?'-[], nl, nl
 		].
 	error(existence_error(predicate_declaration, _)) -->
-		[	'There is not declared predicate with that functor.'-[], nl,
+		[	'There is no declared predicate with that functor.'-[], nl,
 			'Typo in the predicate name or number of arguments?'-[], nl, nl
 		].
 
@@ -568,7 +570,7 @@
 
 	explain(non_standard_predicate_option(_, _, _, _, _, _)) -->
 		[	'Use of non-standard predicate options can make the code non-portable'-[], nl,
-			' when using other backend compilers. Are there portable alternatives'-[], nl,
+			'when using other backend compilers. Are there portable alternatives'-[], nl,
 			'that can be used?'-[], nl, nl
 		].
 
