@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2023-04-09,
+		date is 2023-05-09,
 		comment is 'Unit tests for the de facto Prolog standard numbervars/3 built-in predicate.'
 	]).
 
@@ -108,5 +108,23 @@
 			{numbervars(L, 0, N)}.
 
 	:- endif.
+
+	test(lgt_numbervars_3_13, true(N == 0)) :-
+		{numbervars(t, 0, N)}.
+
+	test(lgt_numbervars_3_14, false) :-
+		{numbervars(t, 0, 1)}.
+
+	test(lgt_numbervars_3_15, true(N == 0)) :-
+		{numbervars(1, 0, N)}.
+
+	test(lgt_numbervars_3_16, false) :-
+		{numbervars(1, 0, 1)}.
+
+	test(lgt_numbervars_3_17, true(N == 0)) :-
+		{numbervars(3.14, 0, N)}.
+
+	test(lgt_numbervars_3_18, false) :-
+		{numbervars(3.14, 0, 1)}.
 
 :- end_object.
