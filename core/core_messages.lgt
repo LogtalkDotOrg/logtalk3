@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:120:0,
+		version is 1:121:0,
 		author is 'Paulo Moura',
-		date is 2023-05-08,
+		date is 2023-05-09,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -588,6 +588,10 @@
 	message_tokens(invalid_logtalk_load_context_key(File, Lines, Key)) -->
 		['Invalid logtalk_load_context/2 predicate key: ~q'-[Key], nl],
 		message_context(File, Lines).
+
+	message_tokens(alias_same_as_original(File, Lines, Type, Entity, Original)) -->
+		['Original and alias are not distinct: ~q'-[Original], nl],
+		message_context(File, Lines, Type, Entity).
 
 	% singleton variable messages
 

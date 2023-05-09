@@ -39,6 +39,9 @@ rules.
 * ADDED: Linter warning for unclassified (but non-singleton and non-anonymous)
 variables in `Free/Goal` lambda expressions.
 
+* ADDED: Linter warning for object, predicate, and non-terminal aliases that
+are not distinct from the originals.
+
 * IMPROVED: Reporting of calls to undefined predicates and unknown predicates
 from auxiliary clauses (e.g. generated while compiling lambda expressions).
 
@@ -64,8 +67,8 @@ Tools
 to redefine the meaning of predicates listed in `uses/2` or `use_module/2`
 directives.
 
-* UPDATED: The `tutor` tool to explain the new linter warning on predicates
-called as non-terminals from grammar rules.
+* UPDATED: The `tutor` tool to explain the new linter warnings on predicates
+called as non-terminals from grammar rules and aliases same as originals.
 
 * UPDATED: The `tutor` tool to also explain the linter warning on missing else
 part in if-then-else and soft-cut control constructs.
@@ -77,7 +80,7 @@ Examples
 --------
 
 * UPDATED: The `errors` example to illustrate lambda expression linter
-warnings and the new linter warning for predicates called as non-terminals.
+warnings and the new linter warnings.
 
 * FIXED: Example `bench` cases where predicates were called as non-terminals.
 

@@ -22,7 +22,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:53:0,
+		version is 0:54:0,
 		author is 'Paulo Moura',
 		date is 2023-05-09,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
@@ -535,6 +535,11 @@
 			'rule body. This warning can be fixed by redefining the non-terminal,'-[], nl,
 			'often by using an accumulator. This warning should be fixed when the'-[], nl,
 			'non-terminal is deterministic.'-[], nl, nl
+		].
+
+	explain(alias_same_as_original(_, _, _, _, _)) -->
+		[	'There is not point in declaring an alias that is the same as the original.'-[], nl,
+			'Typo in either alias or original?'
 		].
 
 	% lambda expression messages
