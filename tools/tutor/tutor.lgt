@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:52:0,
+		version is 0:53:0,
 		author is 'Paulo Moura',
-		date is 2023-05-06,
+		date is 2023-05-09,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -229,7 +229,7 @@
 	error(permission_error(modify, meta_non_terminal_template, _)) -->
 		[	'A meta-non-terminal template is already declared in a previous directive.'-[], nl,
 			'There can be only one meta-non-terminal directive per non-terminal within'-[], nl,
-			'entity.'-[], nl, nl
+			'an entity.'-[], nl, nl
 		].
 
 	error(permission_error(access, private_predicate, _)) -->
@@ -455,6 +455,12 @@
 	explain(calls_non_terminal_as_predicate(_, _, _, _, _)) -->
 		[	'Calls to non-terminals from predicates should always be made using the'-[], nl,
 			'phrase/2-3 built-in methods instead of assuming how grammar rules are'-[], nl,
+			'compiled into predicate clauses.'-[], nl, nl
+		].
+
+	explain(calls_predicate_as_non_terminal(_, _, _, _, _)) -->
+		[	'Calls to predicates from non-terminals should always be made using the'-[], nl,
+			'call//1 built-in method instead of assuming how grammar rules are'-[], nl,
 			'compiled into predicate clauses.'-[], nl, nl
 		].
 
