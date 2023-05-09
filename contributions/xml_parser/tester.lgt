@@ -19,10 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- if(current_logtalk_flag(prolog_dialect, gnu)).
+	:- set_prolog_flag(strict_iso, off).
+:- endif.
+
+:- set_prolog_flag(double_quotes, codes).
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(loader),
+	logtalk_load(reader(loader)),
+	logtalk_load(types(loader)),
+	logtalk_load(xml, [debug(on), source_data(on)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

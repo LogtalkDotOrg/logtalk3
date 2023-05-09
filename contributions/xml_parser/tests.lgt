@@ -23,10 +23,29 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2019-10-09,
-		comment is 'Unit tests for the xml_parser library.'
+		date is 2023-05-09,
+		comment is 'Unit tests for the "xml_parser" library.'
 	]).
+
+	cover(xml).
+
+	test(xml_parser_access_attribute, true(Year == "1994")) :-
+		^^file_path('bib.xml', Path),
+		reader::file_to_codes(Path, Codes),
+		xml::parse(Codes, Bibliography),
+		xml::subterm(Bibliography, element(book, Attributes, _)),
+		list::member(year=Year, Attributes),
+		Year @> "1993".
+
+	test(xml_parser_access_element, true(Title == "TCP/IP Illustrated")) :-
+		^^file_path('bib.xml', Path),
+		reader::file_to_codes(Path, Codes),
+		xml::parse(Codes, Bibliography),
+		xml::subterm(Bibliography, element(book, Attributes, Content)),
+		list::member(year=Year, Attributes),
+		Year @> "1993",
+		xml::subterm(Content, element(title, _, [pcdata(Title)])).
 
 :- end_object.

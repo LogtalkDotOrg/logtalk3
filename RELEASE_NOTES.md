@@ -90,6 +90,8 @@ Tests
 Contributions
 -------------
 
+* UPDATED: Automate some of the `xml_parser` contribution original tests.
+
 * FIXED: Cases in the `xml_parser` contribution where predicates were called
 as non-terminals.
 
