@@ -270,7 +270,7 @@ copy the operator definitions to a <code class="docutils literal notranslate"><s
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool makes available a <code class="docutils literal notranslate"><span class="pre">'=~='/2</span></code> predicate (for approximate
 float equality) that is intended to be used as an infix operator:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [
-     <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="s">&#39;=~=&#39;</span>), <span class="s">&#39;=~=&#39;</span><span class="o">/</span><span class="m">2</span>
+    <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="s">&#39;=~=&#39;</span>), <span class="s">&#39;=~=&#39;</span><span class="o">/</span><span class="m">2</span>
 ]).
 </pre></div>
 </div>
@@ -1287,7 +1287,8 @@ directive, as in the following example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(sentence<span class="o">//</span><span class="m">0</span>).
 
 <span class="p">:- </span><span class="k">info</span>(sentence<span class="o">//</span><span class="m">0</span>, [
-    comment <span class="k">is</span> <span class="s">&#39;Rewrites sentence into noun and verb phrases.&#39;</span>]).
+    comment <span class="k">is</span> <span class="s">&#39;Rewrites sentence into noun and verb phrases.&#39;</span>
+]).
 </pre></div>
 </div>
 <div class="admonition note">
@@ -1298,7 +1299,8 @@ predicates. Therefore, you should always call non-terminals from predicates
 using the <code class="docutils literal notranslate"><span class="pre">phrase/2-3</span></code> built-in methods and always call predicates from
 grammar rules using the <code class="docutils literal notranslate"><span class="pre">call//1</span></code> built-in method. This recommended
 practice, besides making your code forward compatible with future Logtalk
-versions, also make the code more clear.</p>
+versions, also make the code more clear. The linter prints warnings when
+these guidelines are not followed.</p>
 </div>
 </section>
 <section id="built-in-methods">

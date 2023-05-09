@@ -132,7 +132,7 @@ float equality) that is intended to be used as an infix operator:
 ::
 
    :- uses(lgtunit, [
-   	op(700, xfx, '=~='), '=~='/2
+       op(700, xfx, '=~='), '=~='/2
    ]).
 
 Thus, in practice, the solution to use library entity operators in client
@@ -1335,7 +1335,8 @@ directive, as in the following example:
    :- public(sentence//0).
 
    :- info(sentence//0, [
-       comment is 'Rewrites sentence into noun and verb phrases.']).
+       comment is 'Rewrites sentence into noun and verb phrases.'
+   ]).
 
 .. note::
 
@@ -1345,7 +1346,8 @@ directive, as in the following example:
    using the ``phrase/2-3`` built-in methods and always call predicates from
    grammar rules using the ``call//1`` built-in method. This recommended
    practice, besides making your code forward compatible with future Logtalk
-   versions, also make the code more clear.
+   versions, also make the code more clear. The linter prints warnings when
+   these guidelines are not followed.
 
 .. _predicates_methods:
 
