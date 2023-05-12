@@ -32,6 +32,7 @@
 
 [Setup]
 AppName={#MyAppName}
+AppVersion={#MyAppVer}
 AppVerName={#MyAppName} {#MyAppVer}
 AppCopyright={#MyAppCopyright}
 AppPublisher={#MyAppPublisher}
