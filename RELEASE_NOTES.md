@@ -57,6 +57,9 @@ Documentation
 
 * IMPROVED: Handbook documentation on definite clause grammars.
 
+* IMPROVED: Handbook documentation on `disjunctions` and `conditionals` linter
+flags.
+
 * IMPROVED: Documentation of the `packs` tool on requirements plus saving and
 restoring (virtual) environments.
 

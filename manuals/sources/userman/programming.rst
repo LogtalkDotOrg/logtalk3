@@ -943,14 +943,18 @@ Lint flags
 
 ``disjunctions(Option)``
    Controls warnings on clauses where the body is a disjunction. Possible
-   option values are ``warning`` (the usual default) and ``silent``.
+   option values are ``warning`` (the usual default) and ``silent``. As
+   per coding guidelines, in most cases, these clauses can be rewritten
+   using a clause per disjunction branch for improved code readability.
 
 .. _flag_conditionals:
 .. index:: pair: conditionals; Flag
 
 ``conditionals(Option)``
    Controls warnings on if-then-else and soft-cut control constructs. Possible
-   option values are ``warning`` (the usual default) and ``silent``.
+   option values are ``warning`` (the usual default) and ``silent``. Warnings
+   include misuse of cuts, potential bugs in the test part, and missing else
+   part (lack of compliance with coding guidelines).
 
 .. _flag_catchall_catch:
 .. index:: pair: catchall_catch; Flag

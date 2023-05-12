@@ -920,12 +920,16 @@ were expanded.</p>
 </dl>
 <span class="target" id="flag-disjunctions"></span><dl class="simple" id="index-30">
 <dt><code class="docutils literal notranslate"><span class="pre">disjunctions(Option)</span></code></dt><dd><p>Controls warnings on clauses where the body is a disjunction. Possible
-option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code>.</p>
+option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code>. As
+per coding guidelines, in most cases, these clauses can be rewritten
+using a clause per disjunction branch for improved code readability.</p>
 </dd>
 </dl>
 <span class="target" id="flag-conditionals"></span><dl class="simple" id="index-31">
 <dt><code class="docutils literal notranslate"><span class="pre">conditionals(Option)</span></code></dt><dd><p>Controls warnings on if-then-else and soft-cut control constructs. Possible
-option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code>.</p>
+option values are <code class="docutils literal notranslate"><span class="pre">warning</span></code> (the usual default) and <code class="docutils literal notranslate"><span class="pre">silent</span></code>. Warnings
+include misuse of cuts, potential bugs in the test part, and missing else
+part (lack of compliance with coding guidelines).</p>
 </dd>
 </dl>
 <span class="target" id="flag-catchall-catch"></span><dl class="simple" id="index-32">
