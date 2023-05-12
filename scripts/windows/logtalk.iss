@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on April 17, 2023
+; Last updated on May 12, 2023
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -32,6 +32,7 @@
 
 [Setup]
 AppName={#MyAppName}
+AppVersion={#MyAppVer}
 AppVerName={#MyAppName} {#MyAppVer}
 AppCopyright={#MyAppCopyright}
 AppPublisher={#MyAppPublisher}

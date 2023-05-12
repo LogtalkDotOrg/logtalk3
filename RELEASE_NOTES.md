@@ -101,6 +101,12 @@ Contributions
 * FIXED: Cases in the `xml_parser` contribution where predicates were called
 as non-terminals.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The Windows installer to write the Logtalk version to the registry
+`DisplayVersion` property. Fix contributed by the GitHub user SpecterShell.
+
 
 3.65.0 - April 27, 2023
 =======================
