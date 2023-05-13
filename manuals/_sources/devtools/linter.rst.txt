@@ -14,8 +14,11 @@ using the
 built-in predicate. For (source file or entity) local scope, use instead
 the
 `set_logtalk_flag/2 <../refman/directives/set_logtalk_flag_2.html>`__
-directive. Some lint checks are turned off by default, specially when
-computationally expensive.
+directive.
+
+Some lint checks are turned off by default, specially when
+computationally expensive. Still, it's a good idea to turn them on to
+check your code on a regular basis (e.g. in CI/CD pipelines).
 
 Note that, in some cases, the linter may generate false warnings due to
 source code analysis limitations or special cases that, while valid when
@@ -79,7 +82,8 @@ Lint checks include:
 -  File, entity, predicate, and variable names not following official
    coding guidelines
 -  Variable names that differ only on case
--  Clauses whose body is a disjunction
+-  Clauses whose body is a disjunction (and that can be rewritten as
+   multiple clauses per coding guidelines)
 -  Naked meta-variables in cut-transparent control constructs
 
 Additional lint checks are provided by the ``lgtunit``, ``lgtdoc``,
@@ -91,7 +95,10 @@ Help on linter warnings
 -----------------------
 
 By loading the ``tutor`` tool, most lint warnings are expanded with
-explanations and suggestions on how to fix the reported issues.
+explanations and suggestions on how to fix the reported issues. See also
+the `coding
+guidelines <https://logtalk.org/coding_style_guidelines.html>`__ for
+additional explanations.
 
 Extending the linter
 --------------------

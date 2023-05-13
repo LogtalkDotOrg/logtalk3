@@ -147,8 +147,10 @@ using the
 built-in predicate. For (source file or entity) local scope, use instead
 the
 <a class="reference external" href="../refman/directives/set_logtalk_flag_2.html">set_logtalk_flag/2</a>
-directive. Some lint checks are turned off by default, specially when
-computationally expensive.</p>
+directive.</p>
+<p>Some lint checks are turned off by default, specially when
+computationally expensive. Still, it’s a good idea to turn them on to
+check your code on a regular basis (e.g. in CI/CD pipelines).</p>
 <p>Note that, in some cases, the linter may generate false warnings due to
 source code analysis limitations or special cases that, while valid when
 intended, usually result from programming issues. When a code rewrite is
@@ -209,7 +211,8 @@ without collecting them</p></li>
 <li><p>File, entity, predicate, and variable names not following official
 coding guidelines</p></li>
 <li><p>Variable names that differ only on case</p></li>
-<li><p>Clauses whose body is a disjunction</p></li>
+<li><p>Clauses whose body is a disjunction (and that can be rewritten as
+multiple clauses per coding guidelines)</p></li>
 <li><p>Naked meta-variables in cut-transparent control constructs</p></li>
 </ul>
 <p>Additional lint checks are provided by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>, <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>,
@@ -220,7 +223,10 @@ code quality.</p>
 <section id="help-on-linter-warnings">
 <h2>Help on linter warnings<a class="headerlink" href="#help-on-linter-warnings" title="Permalink to this heading"></a></h2>
 <p>By loading the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool, most lint warnings are expanded with
-explanations and suggestions on how to fix the reported issues.</p>
+explanations and suggestions on how to fix the reported issues. See also
+the <a class="reference external" href="https://logtalk.org/coding_style_guidelines.html">coding
+guidelines</a> for
+additional explanations.</p>
 </section>
 <section id="extending-the-linter">
 <h2>Extending the linter<a class="headerlink" href="#extending-the-linter" title="Permalink to this heading"></a></h2>
