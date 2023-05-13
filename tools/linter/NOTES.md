@@ -107,7 +107,8 @@ Extending the linter
 
 Experimental support for extending the linter with user-defined warnings is
 available using the [logtalk_linter_hook/7](../refman/predicates/logtalk_linter_hook_7.html)
-multifile hook predicate.
+multifile hook predicate. For example, the `list` library object defines this
+hook predicate to lint calls to the `append/3` predicate for common misuses.
 
 
 Linting Prolog modules

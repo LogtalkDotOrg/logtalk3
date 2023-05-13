@@ -63,6 +63,8 @@ flags.
 * IMPROVED: Documentation of the `packs` tool on requirements plus saving and
 restoring (virtual) environments.
 
+* IMPROVED: Documentation of the `linter` tool.
+
 Tools
 -----
 
