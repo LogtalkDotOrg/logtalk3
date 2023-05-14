@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on November 1, 2022
+%  Last updated on May 13, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,6 @@
 :- [library(directory)].
 :- [library(strings)].
 :- [library(environ)].
-:- [library(subsumes)].
 :- [library(unify)].
 :- [library(math)].
 
@@ -254,7 +253,7 @@ sub_atom(Atom, Before, Length, After, SubAtom) :-
 
 
 subsumes_term(General, Specific) :-
-	subsumes(General, Specific).
+	subsumes_chk(General, Specific).
 
 
 term_variables(Term, Variables) :-

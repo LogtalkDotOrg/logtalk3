@@ -48,6 +48,12 @@ from auxiliary clauses (e.g. generated while compiling lambda expressions).
 * FIXED: Ensure that the `startup` library alias is found before the runtime
 constructed pack library aliases.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The Quintus Prolog adapter file definition for the `subsumes_term/2`
+standard predicate.
+
 Documentation
 -------------
 
