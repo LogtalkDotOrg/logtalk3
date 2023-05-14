@@ -11,8 +11,8 @@
 Term utility predicates protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:34:0
-| **Date:** 2022-02-03
+| **Version:** 1:35:0
+| **Date:** 2022-05-13
 
 | **Compilation flags:**
 |    ``static``
@@ -124,7 +124,7 @@ The first term subsumes the second term. Deprecated. Use the ``subsumes_term/2``
 | **Template:**
 |    ``subsumes(General,Specific)``
 | **Mode and number of proofs:**
-|    ``subsumes(?term,@term)`` - ``zero_or_one``
+|    ``subsumes(@term,@term)`` - ``zero_or_one``
 
 
 ------------
@@ -211,7 +211,7 @@ Each term is a variant of the other (i.e. they are structurally equivalent).
 ``variables/2``
 ^^^^^^^^^^^^^^^
 
-Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).
+Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``). Deprecated. Use the standard ``term_variables/2`` predicate instead.
 
 | **Compilation flags:**
 |    ``static``

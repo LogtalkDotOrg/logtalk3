@@ -23,9 +23,9 @@
 	extends(comparingp)).
 
 	:- info([
-		version is 1:34:0,
+		version is 1:35:0,
 		author is 'Paulo Moura',
-		date is 2022-02-03,
+		date is 2022-05-13,
 		comment is 'Term utility predicates protocol.',
 		see_also is [term]
 	]).
@@ -59,7 +59,7 @@
 	]).
 
 	:- public(subsumes/2).
-	:- mode(subsumes(?term, @term), zero_or_one).
+	:- mode(subsumes(@term, @term), zero_or_one).
 	:- info(subsumes/2, [
 		comment is 'The first term subsumes the second term. Deprecated. Use the ``subsumes_term/2`` standard predicate instead.',
 		argnames is ['General', 'Specific']
@@ -96,7 +96,7 @@
 	:- public(variables/2).
 	:- mode(variables(@term, -list), one).
 	:- info(variables/2, [
-		comment is 'Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``).',
+		comment is 'Returns a list of all term variables (ordered as found when doing a depth-first, left-to-right traversal of ``Term``). Deprecated. Use the standard ``term_variables/2`` predicate instead.',
 		argnames is ['Term', 'List']
 	]).
 

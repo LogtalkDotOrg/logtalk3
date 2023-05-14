@@ -65,6 +65,17 @@ restoring (virtual) environments.
 
 * IMPROVED: Documentation of the `linter` tool.
 
+Library
+-------
+
+* REMOVED: The `term` library object definition for the deprecated and no
+longer declared `vars/2` predicate.
+
+* CHANGED: Declare the `termp` library protocol `variables/2` predicate
+deprecated.
+
+* IMPROVED: Simplify the `term` library object `variant/2` predicate.
+
 Tools
 -----
 

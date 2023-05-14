@@ -23,9 +23,9 @@
 	implements(termp)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2022-02-03,
+		date is 2022-05-13,
 		comment is 'Term utility predicates.'
 	]).
 
@@ -77,6 +77,7 @@
 		N2 is N - 1,
 		occurs(N2, Var, Term).
 
+	% deprecated
 	subsumes(General, Specific) :-
 		subsumes_term(General, Specific).
 
@@ -100,11 +101,8 @@
 	check(_).
 
 	variant(Term1, Term2) :-
-		\+ \+ subsumes_term(Term1, Term2),
-		\+ \+ subsumes_term(Term2, Term1).
-
-	vars(Term, Vars) :-			% deprecated
-		term_variables(Term, Vars).
+		subsumes_term(Term1, Term2),
+		subsumes_term(Term2, Term1).
 
 	variables(Term, Vars) :-
 		term_variables(Term, Vars).
