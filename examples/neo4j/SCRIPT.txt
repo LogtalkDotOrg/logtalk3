@@ -20,10 +20,12 @@ ________________________________________________________________________
 
 % be sure to have installed Neo4j; see the `NOTES.txt` file for details
 
-% start by setting the Java CLASSPATH environment variable (to use YAP
-% instead of SWI-Prolog, source the `set_classpath_yap.sh` file instead)
-% by first editing the `set_classpath_swi.sh` for the location of the
-% Neo4j JAR files:
+
+% start by setting the Java CLASSPATH environment variable; three backend
+% Prolog systems are supported (LVM, SWI-Prolog, and YAP) and for each one
+% there's a Bash script file that sets the CLASSPATH environment variable
+% when sourced; for example, when using SWI-Prolog (if necessary, edit the
+% scripts for the location of the Neo4j JAR files):
 
 $ cd "$LOGTALKUSER/examples/neo4j"
 $ . set_classpath_swi.sh

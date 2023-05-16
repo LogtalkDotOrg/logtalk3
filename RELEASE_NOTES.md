@@ -104,6 +104,9 @@ listing orphaned packs.
 Examples
 --------
 
+* IMPROVED: Documentation of the `clustering`, `document_converter`, and
+`neo4j` examples.
+
 * UPDATED: The `errors` example to illustrate lambda expression linter
 warnings and the new linter warnings.
 
