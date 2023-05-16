@@ -54,6 +54,25 @@ Generates a new ULID.
 
 ------------
 
+.. index:: generate/2
+.. _ulid_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates a new ULID from a timestamp (number of seconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Timestamp,ULID)``
+| **Mode and number of proofs:**
+|    ``generate(+number,--ground)`` - ``one``
+
+
+------------
+
 Protected predicates
 --------------------
 

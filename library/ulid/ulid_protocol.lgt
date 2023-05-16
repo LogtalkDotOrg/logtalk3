@@ -35,4 +35,11 @@
 		argnames is ['ULID']
 	]).
 
+	:- public(generate/2).
+	:- mode(generate(+number, --ground), one).
+	:- info(generate/2, [
+		comment is 'Generates a new ULID from a timestamp (number of seconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
+		argnames is ['Timestamp', 'ULID']
+	]).
+
 :- end_protocol.

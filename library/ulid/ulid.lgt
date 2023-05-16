@@ -39,6 +39,10 @@
 		SecondsBetweenEpocs is (Current - Start) * 86400,
 		os::date_time(_, _, _, Hours, Minutes, Seconds, Milliseconds),
 		TimeMilliseconds is (SecondsBetweenEpocs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
+		generate(TimeMilliseconds, ULID).
+
+	generate(Timestamp, ULID) :-
+		TimeMilliseconds is floor(Timestamp * 1000.0),
 		random_bytes(16, Bytes),
 		encode_time(10, TimeMilliseconds, Tail, Codes),
 		encode_random(Bytes, Tail),
