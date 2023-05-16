@@ -65,6 +65,7 @@
 		json(loader),
 		cbor(loader),
 		base64(loader),
+		ulid(loader),
 		uuid(loader),
 		html(loader),
 		format(loader),

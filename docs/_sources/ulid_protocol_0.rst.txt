@@ -1,0 +1,71 @@
+.. index:: ulid_protocol
+.. _ulid_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ulid_protocol``
+=================
+
+Universally Unique Lexicographically Sortable Identifier (ULID) generator protocol.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2023-05-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: generate/1
+.. _ulid_protocol/0::generate/1:
+
+``generate/1``
+^^^^^^^^^^^^^^
+
+Generates a new ULID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(ULID)``
+| **Mode and number of proofs:**
+|    ``generate(--ground)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

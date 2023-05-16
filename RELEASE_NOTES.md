@@ -74,6 +74,9 @@ restoring (virtual) environments.
 Library
 -------
 
+* ADDED: New `ulid` library for generating Universally Unique Lexicographically
+Sortable Identifiers.
+
 * REMOVED: The `term` library object definition for the deprecated and no
 longer declared `vars/2` predicate.
 

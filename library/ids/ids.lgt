@@ -30,7 +30,7 @@
 			'Representation' - 'Text representation for the identifier. Possible values are ``atom``, ``chars``, and ``codes``.',
 			'Bytes' - 'Number of bytes of randomness.'
 		],
-		see_also is [ids, uuid]
+		see_also is [ids, uuid, ulid]
 	]).
 
 	:- public(generate/1).
@@ -81,7 +81,7 @@
 		author is 'Paulo Moura',
 		date is 2022-11-23,
 		comment is 'Generator of random identifiers with 160 bits (20 bytes) of randomness.',
-		see_also is [ids(_, _), uuid]
+		see_also is [ids(_, _), uuid, ulid]
 	]).
 
 :- end_object.

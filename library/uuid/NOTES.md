@@ -39,7 +39,7 @@ randomized using the current wall time.
 UUIDs can be generated as atoms, lists of characters, or lists of character
 codes.
 
-See also the `ids` library.
+See also the `ids` and `ulid` libraries.
 
 
 API documentation

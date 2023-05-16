@@ -1,0 +1,65 @@
+.. index:: ulid(Representation)
+.. _ulid/1:
+
+.. rst-class:: right
+
+**object**
+
+``ulid(Representation)``
+========================
+
+* ``Representation`` - Text representation for the ULID. Possible values are ``atom``, ``chars``, and ``codes``.
+
+
+Universally Unique Lexicographically Sortable Identifier (ULID) generator.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2023-05-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`ulid_protocol <ulid_protocol/0>`
+| **Uses:**
+|    :ref:`fast_random <fast_random/0>`
+|    :ref:`iso8601 <iso8601/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ulid_protocol/0::generate/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`ulid <ulid/0>`, :ref:`uuid(Representation) <uuid/1>`, :ref:`uuid <uuid/0>`, :ref:`ids <ids/0>`, :ref:`ids(Representation,Bytes) <ids/2>`
+

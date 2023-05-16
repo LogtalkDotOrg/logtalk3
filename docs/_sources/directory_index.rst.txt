@@ -661,6 +661,18 @@ To load an entity, always load the library that includes it using the goal ``log
    varlist <varlist_0>
    varlistp <varlistp_0>
 
+``library/ulid/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ulid <ulid_0>
+   ulid(Representation) <ulid_1>
+   ulid_protocol <ulid_protocol_0>
+
 ``library/union_find/``
 -----------------------
 
