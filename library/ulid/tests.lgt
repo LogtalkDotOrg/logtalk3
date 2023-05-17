@@ -59,13 +59,17 @@
 		ulid(codes)::generate(ULID),
 		list::length(ULID, Length).
 
-	test(ulid_timestamp_2_integer, all(Timestamp == 1684316883000)) :-
+	test(ulid_timestamp_2_integer, true(Timestamp == 1684316883000)) :-
 		ulid::generate(1684316883000, ULID),
 		ulid::timestamp(ULID, Timestamp).
 
-	test(ulid_timestamp_2_float, all(Timestamp == 1684316883417)) :-
+	test(ulid_timestamp_2_float, true(Timestamp == 1684316883417)) :-
 		ulid::generate(1684316883417, ULID),
 		ulid::timestamp(ULID, Timestamp).
+
+	test(ulid_generate_8_roundtrip, true(dt(Year,Month,Day,Hours,Minutes,Seconds,Milliseconds) == dt(2023,5,17,16,23,38,591))) :-
+		ulid::generate(2023, 5, 17, 16, 23, 38, 591, ULID),
+		ulid::timestamp(ULID, Year, Month, Day, Hours, Minutes, Seconds, Milliseconds).
 
 	% auxiliary predicates
 

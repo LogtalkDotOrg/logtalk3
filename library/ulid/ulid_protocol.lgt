@@ -42,11 +42,25 @@
 		argnames is ['Milliseconds', 'ULID']
 	]).
 
+	:- public(generate/8).
+	:- mode(generate(+integer, +integer, +integer, +integer, +integer, +integer, +integer, --ulid), one).
+	:- info(generate/8, [
+		comment is 'Generates a new ULID from a timestamp discrete components.',
+		argnames is ['Year', 'Month', 'Day',  'Hours', 'Minutes', 'Seconds', 'Milliseconds', 'ULID']
+	]).
+
 	:- public(timestamp/2).
 	:- mode(timestamp(++ulid, -integer), one).
 	:- info(timestamp/2, [
 		comment is 'Returns the given ULID timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
 		argnames is ['ULID', 'Milliseconds']
+	]).
+
+	:- public(timestamp/8).
+	:- mode(timestamp(++ulid, -integer, -integer, -integer, -integer, -integer, -integer, -integer), one).
+	:- info(timestamp/8, [
+		comment is 'Decodes a ULID into its timestamp discrete components.',
+		argnames is ['ULID', 'Year', 'Month', 'Day',  'Hours', 'Minutes', 'Seconds', 'Milliseconds']
 	]).
 
 :- end_protocol.

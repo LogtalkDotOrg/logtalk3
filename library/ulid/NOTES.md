@@ -87,30 +87,28 @@ Similar to get a ULID using a list of character codes representation:
 
 It's also possible to generate ULIDs from a given timestamp, i.e. the
 number of milliseconds since the Unix epoch (00:00:00 UTC on January 1,
-1970). The timestamp must be an integer. For example, assuming a backend
-Prolog system providing a `time_stamp/1` predicate returning the Unix
-epoch in milliseconds:
+1970), using the `generate/2` predicate. The timestamp must be an integer.
+For example, assuming a backend Prolog system providing a `time_stamp/1`
+predicate returning the Unix epoch in milliseconds:
 
 	| ?- time_stamp(Milliseconds), ulid(atom)::generate(Seconds, ULID).
 	Seconds = 1684245175344, ULID = '01H0JDBQ1GAWJF35C44Y5S97DX'
 	yes
 
-You can also use the `iso8601` library to compute a ULID for a specific
-date. For example:
+You can also use timestamp discrete components using the `generate/8`
+predicate. For example:
 
-	| ?- iso8601::(date(Start, 1970, 1, 1), date(End, 1999, 9, 13)),
-	     Milliseconds is (End - Start) * 86400 * 1000,
-	     ulid(atom)::generate(Milliseconds, ULID).
-	Start = 2440588, End = 2451435, Milliseconds = 937180800000, ULID = '00V8T58900C2946QER73XXYW8Q'
+	| ?- ulid(atom)::generate(2023, 5, 17, 16, 23, 38, 591, ULID).
+	ULID = '01H0N8CDAZK75C5H3BJSGS4VCQ'
 	yes
 
-To extract the timestamp from a given ULID, use the `timestamp/2`
-predicate. For example:
+To extract the timestamp from a given ULID, use the `timestamp/2` and
+`timestamp/8` predicates. For example:
 
 	| ?- ulid(atom)::timestamp('01H0JDBQ1GAWJF35C44Y5S97DX', Milliseconds).
 	Milliseconds = 1684245175344
 	yes
 
-	| ?- ulid(atom)::timestamp('00V8T58900C2946QER73XXYW8Q', Milliseconds).
-	Milliseconds = 937180800000
+	| ?- ulid(atom)::timestamp('01H0N8CDAZK75C5H3BJSGS4VCQ', Year, Month, Day, Hours, Minutes, Seconds, Milliseconds).
+	Year = 2023, Month = 5, Day = 17, Hours = 16, Minutes = 23, Seconds = 38, Milliseconds = 591
 	yes

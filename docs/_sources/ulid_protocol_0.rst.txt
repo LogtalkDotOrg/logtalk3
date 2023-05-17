@@ -73,6 +73,25 @@ Generates a new ULID from a timestamp (number of miliseconds since the Unix epoc
 
 ------------
 
+.. index:: generate/8
+.. _ulid_protocol/0::generate/8:
+
+``generate/8``
+^^^^^^^^^^^^^^
+
+Generates a new ULID from a timestamp discrete components.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Year,Month,Day,Hours,Minutes,Seconds,Milliseconds,ULID)``
+| **Mode and number of proofs:**
+|    ``generate(+integer,+integer,+integer,+integer,+integer,+integer,+integer,--ulid)`` - ``one``
+
+
+------------
+
 .. index:: timestamp/2
 .. _ulid_protocol/0::timestamp/2:
 
@@ -88,6 +107,25 @@ Returns the given ULID timestamp (number of miliseconds since the Unix epoch: 00
 |    ``timestamp(ULID,Milliseconds)``
 | **Mode and number of proofs:**
 |    ``timestamp(++ulid,-integer)`` - ``one``
+
+
+------------
+
+.. index:: timestamp/8
+.. _ulid_protocol/0::timestamp/8:
+
+``timestamp/8``
+^^^^^^^^^^^^^^^
+
+Decodes a ULID into its timestamp discrete components.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``timestamp(ULID,Year,Month,Day,Hours,Minutes,Seconds,Milliseconds)``
+| **Mode and number of proofs:**
+|    ``timestamp(++ulid,-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
 
 
 ------------

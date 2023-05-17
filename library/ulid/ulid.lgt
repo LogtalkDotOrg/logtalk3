@@ -47,9 +47,28 @@
 		encode_random(Bytes, Tail),
 		codes_to_ulid(_Representation_, Codes, ULID).
 
+	generate(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds, ULID) :-
+		iso8601::date(Start, 1970, 1, 1),
+		iso8601::date(Current, Year, Month, Day),
+		SecondsBetweenEpocs is (Current - Start) * 86400,
+		TotalMilliseconds is (SecondsBetweenEpocs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
+		generate(TotalMilliseconds, ULID).
+
 	timestamp(ULID, Milliseconds) :-
 		ulid_to_codes(_Representation_, ULID, Codes),
 		decode_time(Codes, Milliseconds).
+
+	timestamp(ULID, Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
+		timestamp(ULID, TotalMilliseconds),
+		TotalSeconds is TotalMilliseconds // 1000,
+		iso8601::date(Start, 1970, 1, 1),
+		Current is Start + TotalSeconds // 86400,
+		iso8601::date(Current, Year, Month, Day),
+		RemainingSeconds is TotalSeconds - (Current - Start) * 86400,
+		Hours is RemainingSeconds // 3600,
+		Minutes is (RemainingSeconds - Hours * 3600) // 60,
+		Seconds is RemainingSeconds - Hours * 3600 - Minutes * 60,
+		Milliseconds is TotalMilliseconds rem 1000.
 
 	encode_time(0, _, Tail, Tail) :-
 		!.
