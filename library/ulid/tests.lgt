@@ -25,39 +25,47 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-05-16,
+		date is 2023-05-17,
 		comment is 'Unit tests for the "ulid" library.'
 	]).
 
 	cover(ulid).
 	cover(ulid(_)).
 
-	test(ulid_atom, all(atom(ULID))) :-
+	test(ulid_generate_1_atom, all(atom(ULID))) :-
 		integer::between(1, 100, _),
 		ulid(atom)::generate(ULID).
 
-	test(ulid_atom_length, all(Length == 26)) :-
+	test(ulid_generate_1_atom_length, all(Length == 26)) :-
 		integer::between(1, 100, _),
 		ulid(atom)::generate(ULID),
 		atom_length(ULID, Length).
 
-	test(ulid_chars, all(valid_base_32_chars(ULID))) :-
+	test(ulid_generate_1_chars, all(valid_base_32_chars(ULID))) :-
 		integer::between(1, 100, _),
 		ulid(chars)::generate(ULID).
 
-	test(ulid_chars_length, all(Length == 26)) :-
+	test(ulid_generate_1_chars_length, all(Length == 26)) :-
 		integer::between(1, 100, _),
 		ulid(chars)::generate(ULID),
 		list::length(ULID, Length).
 
-	test(ulid_codes, all(valid_base_32_codes(ULID))) :-
+	test(ulid_generate_1_codes, all(valid_base_32_codes(ULID))) :-
 		integer::between(1, 100, _),
 		ulid(codes)::generate(ULID).
 
-	test(ulid_codes_length, all(Length == 26)) :-
+	test(ulid_generate_1_codes_length, all(Length == 26)) :-
 		integer::between(1, 100, _),
 		ulid(codes)::generate(ULID),
 		list::length(ULID, Length).
+
+	test(ulid_timestamp_2_integer, all(Timestamp == 1684316883000)) :-
+		ulid::generate(1684316883000, ULID),
+		ulid::timestamp(ULID, Timestamp).
+
+	test(ulid_timestamp_2_float, all(Timestamp == 1684316883417)) :-
+		ulid::generate(1684316883417, ULID),
+		ulid::timestamp(ULID, Timestamp).
 
 	% auxiliary predicates
 

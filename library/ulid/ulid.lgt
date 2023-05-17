@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-05-16,
+		date is 2023-05-17,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the ULID. Possible values are ``atom``, ``chars``, and ``codes``.'
@@ -38,15 +38,18 @@
 		iso8601::date(Current, _, _, _),
 		SecondsBetweenEpocs is (Current - Start) * 86400,
 		os::date_time(_, _, _, Hours, Minutes, Seconds, Milliseconds),
-		TimeMilliseconds is (SecondsBetweenEpocs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
-		generate(TimeMilliseconds, ULID).
+		TotalMilliseconds is (SecondsBetweenEpocs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
+		generate(TotalMilliseconds, ULID).
 
-	generate(Timestamp, ULID) :-
-		TimeMilliseconds is floor(Timestamp * 1000.0),
+	generate(Milliseconds, ULID) :-
 		random_bytes(16, Bytes),
-		encode_time(10, TimeMilliseconds, Tail, Codes),
+		encode_time(10, Milliseconds, Tail, Codes),
 		encode_random(Bytes, Tail),
-		codes_to_uuid(_Representation_, Codes, ULID).
+		codes_to_ulid(_Representation_, Codes, ULID).
+
+	timestamp(ULID, Milliseconds) :-
+		ulid_to_codes(_Representation_, ULID, Codes),
+		decode_time(Codes, Milliseconds).
 
 	encode_time(0, _, Tail, Tail) :-
 		!.
@@ -63,16 +66,40 @@
 		code(Index, Code),
 		encode_random(Bytes, Codes).
 
-	codes_to_uuid(atom, Codes, ULID) :-
+	decode_time([Code1, Code2, Code3, Code4, Code5, Code6, Code7, Code8, Code9, Code10| _], Milliseconds) :-
+		code(Index1, Code1),
+		code(Index2, Code2),
+		code(Index3, Code3),
+		code(Index4, Code4),
+		code(Index5, Code5),
+		code(Index6, Code6),
+		code(Index7, Code7),
+		code(Index8, Code8),
+		code(Index9, Code9),
+		code(Index10, Code10), !,
+		Milliseconds is Index1*32^9 + Index2*32^8 + Index3*32^7 + Index4*32^6 + Index5*32^5 + Index6*32^4 + Index7*32^3 + Index8*32^2 + Index9*32 + Index10.
+
+	codes_to_ulid(atom, Codes, ULID) :-
 		atom_codes(ULID, Codes).
-	codes_to_uuid(chars, Codes, ULID) :-
+	codes_to_ulid(chars, Codes, ULID) :-
 		codes_to_chars(Codes, ULID).
-	codes_to_uuid(codes, ULID, ULID).
+	codes_to_ulid(codes, ULID, ULID).
+
+	ulid_to_codes(atom, ULID, Codes) :-
+		atom_codes(ULID, Codes).
+	ulid_to_codes(chars, ULID, Codes) :-
+		chars_to_codes(ULID, Codes).
+	ulid_to_codes(codes, Codes, Codes).
 
 	codes_to_chars([], []).
 	codes_to_chars([Code| Codes], [Char| Chars]) :-
 		char_code(Char, Code),
 		codes_to_chars(Codes, Chars).
+
+	chars_to_codes([], []).
+	chars_to_codes([Char| Chars], [Code| Codes]) :-
+		char_code(Char, Code),
+		chars_to_codes(Chars, Codes).
 
 	random_bytes(N, Bytes) :-
 		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),

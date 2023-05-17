@@ -24,22 +24,29 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-05-16,
+		date is 2023-05-17,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator protocol.'
 	]).
 
 	:- public(generate/1).
-	:- mode(generate(--ground), one).
+	:- mode(generate(--ulid), one).
 	:- info(generate/1, [
 		comment is 'Generates a new ULID.',
 		argnames is ['ULID']
 	]).
 
 	:- public(generate/2).
-	:- mode(generate(+number, --ground), one).
+	:- mode(generate(+integer, --ulid), one).
 	:- info(generate/2, [
-		comment is 'Generates a new ULID from a timestamp (number of seconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
-		argnames is ['Timestamp', 'ULID']
+		comment is 'Generates a new ULID from a timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
+		argnames is ['Milliseconds', 'ULID']
+	]).
+
+	:- public(timestamp/2).
+	:- mode(timestamp(++ulid, -integer), one).
+	:- info(timestamp/2, [
+		comment is 'Returns the given ULID timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
+		argnames is ['ULID', 'Milliseconds']
 	]).
 
 :- end_protocol.

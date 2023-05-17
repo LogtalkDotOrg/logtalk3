@@ -222,22 +222,32 @@ yes
 </pre></div>
 </div>
 <p>It’s also possible to generate ULIDs from a given timestamp, i.e. the
-number of seconds since the Unix epoch (00:00:00 UTC on January 1,
-1970). The timestamp can be either an integer or a float value. In the
-later case, the fractional part allow representing milliseconds. For
-example, assuming a backend Prolog system providing a <code class="docutils literal notranslate"><span class="pre">time_stamp/1</span></code>
-predicate returning the Unix epoch:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> time_stamp(<span class="nv">Seconds</span>), ulid(atom)<span class="o">::</span>generate(<span class="nv">Seconds</span>, <span class="nv">ULID</span>).
-<span class="nv">Seconds</span> <span class="o">=</span> <span class="m">1684245175.344532</span>, <span class="nv">ULID</span> <span class="o">=</span> <span class="s">&#39;01H0JDBQ1GAWJF35C44Y5S97DX&#39;</span>
+number of milliseconds since the Unix epoch (00:00:00 UTC on January 1,
+1970). The timestamp must be an integer. For example, assuming a backend
+Prolog system providing a <code class="docutils literal notranslate"><span class="pre">time_stamp/1</span></code> predicate returning the Unix
+epoch in milliseconds:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> time_stamp(<span class="nv">Milliseconds</span>), ulid(atom)<span class="o">::</span>generate(<span class="nv">Seconds</span>, <span class="nv">ULID</span>).
+<span class="nv">Seconds</span> <span class="o">=</span> <span class="m">1684245175344</span>, <span class="nv">ULID</span> <span class="o">=</span> <span class="s">&#39;01H0JDBQ1GAWJF35C44Y5S97DX&#39;</span>
 yes
 </pre></div>
 </div>
 <p>You can also use the <code class="docutils literal notranslate"><span class="pre">iso8601</span></code> library to compute a ULID for a
 specific date. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> iso8601<span class="o">::</span>(date(<span class="nv">Start</span>, <span class="m">1970</span>, <span class="m">1</span>, <span class="m">1</span>), date(<span class="nv">End</span>, <span class="m">1999</span>, <span class="m">9</span>, <span class="m">13</span>)),
-     <span class="nv">Seconds</span> <span class="k">is</span> (<span class="nv">End</span> <span class="o">-</span> <span class="nv">Start</span>) <span class="o">*</span> <span class="m">86400</span>,
-     ulid(atom)<span class="o">::</span>generate(<span class="nv">Seconds</span>, <span class="nv">ULID</span>).
-<span class="nv">Start</span> <span class="o">=</span> <span class="m">2440588</span>, <span class="nv">End</span> <span class="o">=</span> <span class="m">2451435</span>, <span class="nv">Seconds</span> <span class="o">=</span> <span class="m">937180800</span>, <span class="nv">ULID</span> <span class="o">=</span> <span class="s">&#39;00V8T58900C2946QER73XXYW8Q&#39;</span>
+     <span class="nv">Milliseconds</span> <span class="k">is</span> (<span class="nv">End</span> <span class="o">-</span> <span class="nv">Start</span>) <span class="o">*</span> <span class="m">86400</span> <span class="o">*</span> <span class="m">1000</span>,
+     ulid(atom)<span class="o">::</span>generate(<span class="nv">Milliseconds</span>, <span class="nv">ULID</span>).
+<span class="nv">Start</span> <span class="o">=</span> <span class="m">2440588</span>, <span class="nv">End</span> <span class="o">=</span> <span class="m">2451435</span>, <span class="nv">Milliseconds</span> <span class="o">=</span> <span class="m">937180800000</span>, <span class="nv">ULID</span> <span class="o">=</span> <span class="s">&#39;00V8T58900C2946QER73XXYW8Q&#39;</span>
+yes
+</pre></div>
+</div>
+<p>To extract the timestamp from a given ULID, use the <code class="docutils literal notranslate"><span class="pre">timestamp/2</span></code>
+predicate. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ulid(atom)<span class="o">::</span>timestamp(<span class="s">&#39;01H0JDBQ1GAWJF35C44Y5S97DX&#39;</span>, <span class="nv">Milliseconds</span>).
+<span class="nv">Milliseconds</span> <span class="o">=</span> <span class="m">1684245175344</span>
+yes
+
+| <span class="o">?-</span> ulid(atom)<span class="o">::</span>timestamp(<span class="s">&#39;00V8T58900C2946QER73XXYW8Q&#39;</span>, <span class="nv">Milliseconds</span>).
+<span class="nv">Milliseconds</span> <span class="o">=</span> <span class="m">937180800000</span>
 yes
 </pre></div>
 </div>

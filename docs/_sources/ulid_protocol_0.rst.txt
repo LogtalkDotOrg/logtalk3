@@ -12,7 +12,7 @@ Universally Unique Lexicographically Sortable Identifier (ULID) generator protoc
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2023-05-16
+| **Date:** 2023-05-17
 
 | **Compilation flags:**
 |    ``static``
@@ -49,7 +49,7 @@ Generates a new ULID.
 | **Template:**
 |    ``generate(ULID)``
 | **Mode and number of proofs:**
-|    ``generate(--ground)`` - ``one``
+|    ``generate(--ulid)`` - ``one``
 
 
 ------------
@@ -60,15 +60,34 @@ Generates a new ULID.
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates a new ULID from a timestamp (number of seconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).
+Generates a new ULID from a timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``generate(Timestamp,ULID)``
+|    ``generate(Milliseconds,ULID)``
 | **Mode and number of proofs:**
-|    ``generate(+number,--ground)`` - ``one``
+|    ``generate(+integer,--ulid)`` - ``one``
+
+
+------------
+
+.. index:: timestamp/2
+.. _ulid_protocol/0::timestamp/2:
+
+``timestamp/2``
+^^^^^^^^^^^^^^^
+
+Returns the given ULID timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``timestamp(ULID,Milliseconds)``
+| **Mode and number of proofs:**
+|    ``timestamp(++ulid,-integer)`` - ``one``
 
 
 ------------
