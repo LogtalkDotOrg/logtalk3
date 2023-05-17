@@ -42,6 +42,10 @@ variables in `Free/Goal` lambda expressions.
 * ADDED: Linter warning for object, predicate, and non-terminal aliases that
 are not distinct from the originals.
 
+* ADDED: Linter warning for `(:)/2` goals when using a backend Prolog system
+that doesn't support modules and when not compiling a module as an object.
+Thanks to Lindsey Spratt for the suggestion.
+
 * IMPROVED: Reporting of calls to undefined predicates and unknown predicates
 from auxiliary clauses (e.g. generated while compiling lambda expressions).
 
