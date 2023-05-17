@@ -78,6 +78,10 @@ restoring (virtual) environments.
 Library
 -------
 
+* CHANGED: The `hook_objects` library loader file to only load the
+`prolog_module_hook/1` object when running on a backend Prolog system
+supporting modules.
+
 * ADDED: New `ulid` library for generating Universally Unique Lexicographically
 Sortable Identifiers.
 

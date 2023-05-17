@@ -26,7 +26,6 @@
 		default_workflow_hook,
 		identity_hook,
 		grammar_rules_hook,
-		prolog_module_hook,
 		object_wrapper_hook,
 		write_to_stream_hook,
 		write_to_file_hook,
@@ -36,3 +35,15 @@
 		optimize(on)
 	])
 )).
+
+:- if(current_logtalk_flag(modules, supported)).
+
+	:- initialization((
+		logtalk_load([
+			prolog_module_hook
+		], [
+			optimize(on)
+		])
+	)).
+
+:- endif.
