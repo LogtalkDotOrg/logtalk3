@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2021-11-18,
+		date is 2023-05-18,
 		comment is 'Unit tests for the ISO Prolog standard op/3 directive.'
 	]).
 
 	test(op_3_01, true(L == [1-a,2-b,3-c])) :-
 		findall(X-Y, {foo(X, Y)}, L).
 
-	test(discontiguous_1_02, false) :-
+	test(op_3_02, false) :-
 		{current_op(_, xfx, foo)}.
 
 :- end_object.
