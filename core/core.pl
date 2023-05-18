@@ -9382,6 +9382,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(ExpandedFile)), sd(Term,VariableNames,Singletons,File,Lines), Lines)).
 
+'$lgt_compile_file_directive'(use_module(FileSpec), Ctx) :-
+	'$lgt_prolog_feature'(modules, unsupported),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_pp_term_source_data_'(_, _, _, File, Lines),
+	'$lgt_print_message'(
+		warning(general),
+		unsupported_directive(File, Lines, use_module(FileSpec))
+	),
+	fail.
+
 '$lgt_compile_file_directive'(use_module(FileSpec), _) :-
 	!,
 	% perform basic error checking
@@ -9392,6 +9403,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(use_module(ExpandedFile), _, true),
 	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile)), sd(Term,VariableNames,Singletons,File,Lines), Lines)).
+
+'$lgt_compile_file_directive'(use_module(FileSpec, Imports), Ctx) :-
+	'$lgt_prolog_feature'(modules, unsupported),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_pp_term_source_data_'(_, _, _, File, Lines),
+	'$lgt_print_message'(
+		warning(general),
+		unsupported_directive(File, Lines, use_module(FileSpec, Imports))
+	),
+	fail.
 
 '$lgt_compile_file_directive'(use_module(FileSpec, Imports), _) :-
 	!,
@@ -9934,6 +9956,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 % use_module/1 entity directive
 
 '$lgt_compile_logtalk_directive'(use_module(Aliases), Ctx) :-
+	'$lgt_prolog_feature'(modules, unsupported),
+	\+ '$lgt_pp_module_'(_),
+	% not compiling a module as an object
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(general),
+		unsupported_directive(File, Lines, Type, Entity, use_module(Aliases))
+	),
+	fail.
+
+'$lgt_compile_logtalk_directive'(use_module(Aliases), Ctx) :-
 	'$lgt_compile_use_module_directive'(Aliases, Aliases, Ctx).
 
 % use_module/2 predicate directive
@@ -9941,6 +9976,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the first argument must be a module identifier; when a file specification
 % is used, as it's usual in Prolog, it must be expanded at the adapter file
 % level into a module identifier
+
+'$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
+	'$lgt_prolog_feature'(modules, unsupported),
+	\+ '$lgt_pp_module_'(_),
+	% not compiling a module as an object
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(general),
+		unsupported_directive(File, Lines, Type, Entity, use_module(Module, Imports))
+	),
+	fail.
 
 '$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
 	var(Module),
@@ -14553,6 +14601,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(':'(Module, Pred), _, _, _, Ctx) :-
 	'$lgt_prolog_feature'(modules, unsupported),
 	\+ '$lgt_pp_module_'(_),
+	% not compiling a module as an object
 	% likely typo where a message sending goal is intended
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),

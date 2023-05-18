@@ -46,6 +46,13 @@ are not distinct from the originals.
 that doesn't support modules and when not compiling a module as an object.
 Thanks to Lindsey Spratt for the suggestion.
 
+* ADDED: Linter warning for `use_module/1-2` file directives when using a
+backend Prolog system that doesn't support modules.
+
+* ADDED: Linter warning for `use_module/1-2` entity directives when using a
+backend Prolog system that doesn't support modules and not compiling a module
+as an object.
+
 * IMPROVED: Reporting of calls to undefined predicates and unknown predicates
 from auxiliary clauses (e.g. generated while compiling lambda expressions).
 

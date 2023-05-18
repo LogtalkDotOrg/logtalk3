@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:121:0,
+		version is 1:122:0,
 		author is 'Paulo Moura',
-		date is 2023-05-09,
+		date is 2023-05-17,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -592,6 +592,14 @@
 	message_tokens(alias_same_as_original(File, Lines, Type, Entity, Original)) -->
 		['Original and alias are not distinct: ~q'-[Original], nl],
 		message_context(File, Lines, Type, Entity).
+
+	message_tokens(unsupported_directive(File, Lines, Type, Entity, Directive)) -->
+		['Unsupported directive (with current backend): ~q'-[Directive], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(unsupported_directive(File, Lines, Directive)) -->
+		['Unsupported directive (with current backend): ~q'-[Directive], nl],
+		message_context(File, Lines).
 
 	% singleton variable messages
 
