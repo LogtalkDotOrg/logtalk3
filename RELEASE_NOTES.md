@@ -52,6 +52,9 @@ from auxiliary clauses (e.g. generated while compiling lambda expressions).
 * FIXED: Ensure that the `startup` library alias is found before the runtime
 constructed pack library aliases.
 
+* FIXED: Linter warning for unknown entities to only report unknown Prolog
+modules when the backend system actually support modules.
+
 Prolog adapter and integration files
 ------------------------------------
 
