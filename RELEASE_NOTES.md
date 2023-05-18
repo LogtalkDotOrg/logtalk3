@@ -55,6 +55,9 @@ constructed pack library aliases.
 * FIXED: Linter warning for unknown entities to only report unknown Prolog
 modules when the backend system actually support modules.
 
+* FIXED: Linter warning for unknown messages to only report calls to unknown
+Prolog module predicates when the backend system actually support modules.
+
 Prolog adapter and integration files
 ------------------------------------
 

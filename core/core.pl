@@ -20040,6 +20040,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_unknown_messages'(Type, Entity) :-
+	'$lgt_prolog_feature'(modules, supported),
 	'$lgt_pp_use_module_predicate_'(Module, Original, _, _, File, Lines),
 	nonvar(Module),
 	functor(Original, Functor, Arity),
@@ -20047,6 +20048,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_unknown_messages'(Type, Entity) :-
+	'$lgt_prolog_feature'(modules, supported),
 	'$lgt_pp_use_module_non_terminal_'(Module, Original, _, Pred, _, _, File, Lines),
 	nonvar(Module),
 	functor(Pred, Functor, Arity),
