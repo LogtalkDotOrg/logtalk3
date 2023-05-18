@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:54:0,
+		version is 0:55:0,
 		author is 'Paulo Moura',
-		date is 2023-05-09,
+		date is 2023-05-18,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -877,6 +877,8 @@
 			'In the later case, use instead anonymous variables.'-[], nl, nl
 		].
 
+	% suspicious call messages
+
 	explain(suspicious_call(_, _, _, _, (_ -> _), reason(missing_else_part))) -->
 		[	'Using the ->/2 if-then control construct without an else part is'-[], nl,
 			'a common source of errors. Check if the else part is missing due'-[], nl,
@@ -1003,6 +1005,20 @@
 
 	explain(misplaced_encoding_directive(_, _)) -->
 		['The encoding/1 directive must be the first term, in the first line, in a file.'-[], nl, nl].
+
+	% unsupported directive messages
+
+	explain(unsupported_directive(_, _, _, _, _)) -->
+		[	'This directive requires features not provided by the current backend.'-[], nl,
+			'Trying to compile code requiring a different backend? Trying to port'-[], nl,
+			'Prolog code? If the latter, consult the Handbook for porting advice.'-[], nl, nl
+		].
+
+	explain(unsupported_directive(_, _, _)) -->
+		[	'This directive requires features not provided by the current backend.'-[], nl,
+			'Trying to compile code requiring a different backend? Trying to port'-[], nl,
+			'Prolog code? If the latter, consult the Handbook for porting advice.'-[], nl, nl
+		].
 
 	% steadfastness messages
 

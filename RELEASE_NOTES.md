@@ -113,8 +113,7 @@ Tools
 to redefine the meaning of predicates listed in `uses/2` or `use_module/2`
 directives.
 
-* UPDATED: The `tutor` tool to explain the new linter warnings on predicates
-called as non-terminals from grammar rules and aliases same as originals.
+* UPDATED: The `tutor` tool to explain the new linter warnings.
 
 * UPDATED: The `tutor` tool to also explain the linter warning on missing else
 part in if-then-else and soft-cut control constructs.

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:122:0,
 		author is 'Paulo Moura',
-		date is 2023-05-17,
+		date is 2023-05-18,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
