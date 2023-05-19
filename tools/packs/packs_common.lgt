@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:30:0,
+		version is 0:30:1,
 		author is 'Paulo Moura',
-		date is 2023-01-25,
+		date is 2023-05-20,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -233,6 +233,22 @@
 		argnames is ['URL', 'Decoded']
 	]).
 
+	:- multifile(type::type/1).
+	type::type(pack_version).
+
+	% add the actual checking code for the new type
+	:- multifile(type::check/2).
+	type::check(pack_version, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	Term = Major:Minor:Patch,
+			integer(Major), Major >= 0,
+			integer(Minor), Minor >= 0,
+			integer(Patch), Patch >= 0
+		->	true
+		;	throw(type_error(pack_version, Term))
+		).
+
 	:- uses(list, [
 		member/2
 	]).
@@ -246,10 +262,6 @@
 		file_exists/1, internal_os_path/2, make_directory_path/1,
 		path_concat/3, directory_files/3
 	]).
-
-	:- if(current_logtalk_flag(prolog_dialect, ciao)).
-		:- multifile(type::check/2).
-	:- endif.
 
 	:- uses(type, [
 		check/2
@@ -409,21 +421,5 @@
 		decode_url_spaces_in_list(Chars0, Chars).
 	decode_url_spaces_in_list([Char| Chars0], [Char| Chars]) :-
 		decode_url_spaces_in_list(Chars0, Chars).
-
-	:- multifile(type::type/1).
-	type::type(pack_version).
-
-	% add the actual checking code for the new type
-	:- multifile(type::check/2).
-	type::check(pack_version, Term) :-
-		(	var(Term) ->
-			throw(instantiation_error)
-		;	Term = Major:Minor:Patch,
-			integer(Major), Major >= 0,
-			integer(Minor), Minor >= 0,
-			integer(Patch), Patch >= 0
-		->	true
-		;	throw(type_error(pack_version, Term))
-		).
 
 :- end_category.
