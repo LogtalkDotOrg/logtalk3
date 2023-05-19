@@ -22,5 +22,5 @@
 :- initialization((
 	logtalk_load(iso8601(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load([ulid_protocol, ulid], [debug(on)])
+	logtalk_load([ulid_protocol, ulid, ulid_types], [debug(on)])
 )).

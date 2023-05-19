@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ulid &mdash; Logtalk APIs v3.66.0-b01 documentation</title>
+  <title>ulid_types &mdash; Logtalk APIs v3.66.0-b01 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
@@ -29,8 +29,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ulid(Representation)" href="ulid_1.html" />
-    <link rel="prev" title="varlistp" href="varlistp_0.html" />
+    <link rel="next" title="union_find" href="union_find_0.html" />
+    <link rel="prev" title="ulid_protocol" href="ulid_protocol_0.html" />
    
 </head>
 
@@ -129,10 +129,10 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">ulid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulid_0.html">ulid</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ulid_1.html">ulid(Representation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ulid_protocol_0.html">ulid_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ulid_types_0.html">ulid_types</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ulid_types</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#union-find"><span class="xref std std-ref">union_find</span></a></li>
@@ -178,9 +178,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">ulid_types</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/ulid_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/ulid_types_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -188,10 +188,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="ulid-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="ulid">
-<h1><code class="docutils literal notranslate"><span class="pre">ulid</span></code><a class="headerlink" href="#ulid" title="Permalink to this heading"></a></h1>
-<p>Universally Unique Lexicographically Sortable Identifier (ULID) generator using an atom representation.</p>
+  <p class="right" id="ulid-types-0"><span id="index-0"></span><strong>category</strong></p>
+<section id="ulid-types">
+<h1><code class="docutils literal notranslate"><span class="pre">ulid_types</span></code><a class="headerlink" href="#ulid-types" title="Permalink to this heading"></a></h1>
+<p>ULID type definition.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
@@ -200,25 +200,33 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Extends:</strong></div>
+<div class="line"><strong>Provides:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="ulid_1.html#ulid-1"><span class="std std-ref">ulid(atom)</span></a></div>
+<div class="line"><a class="reference internal" href="type_0.html#type-0-type-1"><span class="std std-ref">type::type/1</span></a></div>
+<div class="line"><a class="reference internal" href="type_0.html#type-0-check-2"><span class="std std-ref">type::check/2</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Provided types: This category adds a <code class="docutils literal notranslate"><span class="pre">ulid(Representation)</span></code> type for type-checking when using the <code class="docutils literal notranslate"><span class="pre">ulid</span></code> library object. Valid representation values are <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and <code class="docutils literal notranslate"><span class="pre">codes</span></code>.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="ulid_protocol_0.html#ulid-protocol-0-generate-1"><span class="std std-ref">generate/1</span></a>  <a class="reference internal" href="ulid_protocol_0.html#ulid-protocol-0-generate-2"><span class="std std-ref">generate/2</span></a>  <a class="reference internal" href="ulid_protocol_0.html#ulid-protocol-0-generate-8"><span class="std std-ref">generate/8</span></a>  <a class="reference internal" href="ulid_protocol_0.html#ulid-protocol-0-timestamp-2"><span class="std std-ref">timestamp/2</span></a>  <a class="reference internal" href="ulid_protocol_0.html#ulid-protocol-0-timestamp-8"><span class="std std-ref">timestamp/8</span></a></div>
+<div class="line">(none)</div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -246,7 +254,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="ulid_1.html#ulid-1"><span class="std std-ref">ulid(Representation)</span></a>, <a class="reference internal" href="ulid_types_0.html#ulid-types-0"><span class="std std-ref">ulid_types</span></a>, <a class="reference internal" href="uuid_0.html#uuid-0"><span class="std std-ref">uuid</span></a>, <a class="reference internal" href="uuid_1.html#uuid-1"><span class="std std-ref">uuid(Representation)</span></a>, <a class="reference internal" href="ids_0.html#ids-0"><span class="std std-ref">ids</span></a>, <a class="reference internal" href="ids_2.html#ids-2"><span class="std std-ref">ids(Representation,Bytes)</span></a></p>
+<p><a class="reference internal" href="ulid_1.html#ulid-1"><span class="std std-ref">ulid(Representation)</span></a>, <a class="reference internal" href="ulid_0.html#ulid-0"><span class="std std-ref">ulid</span></a></p>
 </div>
 </section>
 </section>
@@ -255,8 +263,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="varlistp_0.html" class="btn btn-neutral float-left" title="varlistp" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="ulid_1.html" class="btn btn-neutral float-right" title="ulid(Representation)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ulid_protocol_0.html" class="btn btn-neutral float-left" title="ulid_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="union_find_0.html" class="btn btn-neutral float-right" title="union_find" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

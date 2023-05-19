@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-05-17,
+		date is 2023-05-19,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the ULID. Possible values are ``atom``, ``chars``, and ``codes``.'
 		],
-		see_also is [ulid, uuid(_), uuid, ids, ids(_, _)]
+		see_also is [ulid, ulid_types, uuid(_), uuid, ids, ids(_, _)]
 	]).
 
 	generate(ULID) :-
@@ -180,9 +180,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-05-16,
+		date is 2023-05-19,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator using an atom representation.',
-		see_also is [ulid(_), uuid, uuid(_), ids, ids(_, _)]
+		see_also is [ulid(_), ulid_types, uuid, uuid(_), ids, ids(_, _)]
 	]).
 
 :- end_object.

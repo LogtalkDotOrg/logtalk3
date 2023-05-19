@@ -1,0 +1,62 @@
+.. index:: ulid_types
+.. _ulid_types/0:
+
+.. rst-class:: right
+
+**category**
+
+``ulid_types``
+==============
+
+ULID type definition.
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2023-05-19
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Provides:**
+|    :ref:`type::type/1 <type/0::type/1>`
+|    :ref:`type::check/2 <type/0::check/2>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Provided types: This category adds a ``ulid(Representation)`` type for type-checking when using the ``ulid`` library object. Valid representation values are ``atom``, ``chars``, and ``codes``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`ulid(Representation) <ulid/1>`, :ref:`ulid <ulid/0>`
+

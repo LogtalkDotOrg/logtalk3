@@ -107,3 +107,15 @@ To extract the timestamp from a given ULID, use the ``timestamp/2`` and
    | ?- ulid(atom)::timestamp('01H0N8CDAZK75C5H3BJSGS4VCQ', Year, Month, Day, Hours, Minutes, Seconds, Milliseconds).
    Year = 2023, Month = 5, Day = 17, Hours = 16, Minutes = 23, Seconds = 38, Milliseconds = 591
    yes
+
+Type-checking ULIDs
+-------------------
+
+This library also defines a ``ulid(Representation)`` type for
+type-checking ULIDs. For example, with an atom containing invalid
+characters:
+
+::
+
+   | ?- type::check(ulid(atom), '01BX5ZIKBKALTAV9OEVGEMMVRY').
+   uncaught exception: domain_error(ulid,'01BX5ZIKBKALTAV9OEVGEMMVRY')

@@ -12,7 +12,7 @@ Universally Unique Lexicographically Sortable Identifier (ULID) generator using 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2023-05-16
+| **Date:** 2023-05-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -53,5 +53,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid <uuid/0>`, :ref:`uuid(Representation) <uuid/1>`, :ref:`ids <ids/0>`, :ref:`ids(Representation,Bytes) <ids/2>`
+   :ref:`ulid(Representation) <ulid/1>`, :ref:`ulid_types <ulid_types/0>`, :ref:`uuid <uuid/0>`, :ref:`uuid(Representation) <uuid/1>`, :ref:`ids <ids/0>`, :ref:`ids(Representation,Bytes) <ids/2>`
 

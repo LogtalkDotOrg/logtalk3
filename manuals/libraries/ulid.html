@@ -120,6 +120,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating-ulids">Generating ULIDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#type-checking-ulids">Type-checking ULIDs</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
@@ -247,6 +248,16 @@ yes
 | <span class="o">?-</span> ulid(atom)<span class="o">::</span>timestamp(<span class="s">&#39;01H0N8CDAZK75C5H3BJSGS4VCQ&#39;</span>, <span class="nv">Year</span>, <span class="nv">Month</span>, <span class="nv">Day</span>, <span class="nv">Hours</span>, <span class="nv">Minutes</span>, <span class="nv">Seconds</span>, <span class="nv">Milliseconds</span>).
 <span class="nv">Year</span> <span class="o">=</span> <span class="m">2023</span>, <span class="nv">Month</span> <span class="o">=</span> <span class="m">5</span>, <span class="nv">Day</span> <span class="o">=</span> <span class="m">17</span>, <span class="nv">Hours</span> <span class="o">=</span> <span class="m">16</span>, <span class="nv">Minutes</span> <span class="o">=</span> <span class="m">23</span>, <span class="nv">Seconds</span> <span class="o">=</span> <span class="m">38</span>, <span class="nv">Milliseconds</span> <span class="o">=</span> <span class="m">591</span>
 yes
+</pre></div>
+</div>
+</section>
+<section id="type-checking-ulids">
+<h2>Type-checking ULIDs<a class="headerlink" href="#type-checking-ulids" title="Permalink to this heading"></a></h2>
+<p>This library also defines a <code class="docutils literal notranslate"><span class="pre">ulid(Representation)</span></code> type for
+type-checking ULIDs. For example, with an atom containing invalid
+characters:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>check(ulid(atom), <span class="s">&#39;01BX5ZIKBKALTAV9OEVGEMMVRY&#39;</span>).
+uncaught exception<span class="o">:</span> <span class="k">domain_error</span>(ulid,<span class="s">&#39;01BX5ZIKBKALTAV9OEVGEMMVRY&#39;</span>)
 </pre></div>
 </div>
 </section>
