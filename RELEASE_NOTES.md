@@ -141,6 +141,9 @@ Tests
 * ADDED: Additional tests for the de facto Prolog standard `numbervars/3`
 predicate.
 
+* FIXED: Test for the `current_op/3` predicate (compliance with the ISO/IEC
+13211-1:1995(E) standard, section 8.14.4.1 NOTES).
+
 Contributions
 -------------
 

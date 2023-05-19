@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2022-06-05,
+		date is 2023-05-19,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
+	]).
+
+	:- uses(list, [
+		msort/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.4.4
@@ -150,41 +154,17 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.4.1 NOTES
 
-	:- if((
-		os::operating_system_type(windows),
-		\+ current_logtalk_flag(prolog_dialect, b),
-		\+ current_logtalk_flag(prolog_dialect, gnu),
-		\+ current_logtalk_flag(prolog_dialect, ji),
-		\+ current_logtalk_flag(prolog_dialect, sicstus),
-		\+ current_logtalk_flag(prolog_dialect, swi),
-		\+ current_logtalk_flag(prolog_dialect, xsb)
-	)).
-
-		test(iso_current_op_3_40, true(Assertion)) :-
-			^^set_text_output(''),
-			{	op(333, fx, foo),
-				(T = 1; T = 2; T = 3),
-				write(foo(T)), nl,
-				op(0, fx, foo),
-				fail
-			;	true
+	test(iso_current_op_3_40, true(Ops == [baz,quux]), [note('All tested systems fail this test!')]) :-
+		findall(
+			Op,
+			{	op(444, fy, baz),
+				op(444, fy, quux),
+				current_op(444, fy, Op),
+				op(0, fy, quux)
 			},
-			^^text_output_assertion('foo 1\r\nfoo 2\r\nfoo 3\r\n', Assertion).
-
-	:- else.
-
-		test(iso_current_op_3_40, true(Assertion)) :-
-			^^set_text_output(''),
-			{	op(333, fx, foo),
-				(T = 1; T = 2; T = 3),
-				write(foo(T)), nl,
-				op(0, fx, foo),
-				fail
-			;	true
-			},
-			^^text_output_assertion('foo 1\nfoo 2\nfoo 3\n', Assertion).
-
-	:- endif.
+			Ops0
+		),
+		msort(Ops0, Ops).
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
