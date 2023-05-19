@@ -135,8 +135,8 @@ warnings and the new linter warnings.
 Tests
 -----
 
-* ADDED: Additional tests for the Prolog standard `number_chars/2` and
-`number_codes/2` predicates.
+* ADDED: Additional tests for the Prolog standard `op/3`, `number_chars/2`
+and `number_codes/2` predicates.
 
 * ADDED: Additional tests for the de facto Prolog standard `numbervars/3`
 predicate.

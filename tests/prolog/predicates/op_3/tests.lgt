@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2022-06-05,
+		date is 2023-05-18,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -164,5 +164,18 @@
 	test(lgt_op_3_32, true) :-
 		{op(0, fx, bar)},
 		{\+ current_op(_, _, bar)}.
+
+	test(lgt_op_3_33, true) :-
+		{op(700, xfx, xyz)},
+		^^set_text_input('1 xyz 2. '),
+		read(T),
+		^^assertion(T == xyz(1,2)),
+		{op(0, xfx, xyz)},
+		^^set_text_input('3 xyz 4. '),
+		catch(read(T), Error, true),
+		^^assertion(subsumes_term(error(syntax_error(_),_), Error)).
+
+	cleanup :-
+		^^clean_text_input.
 
 :- end_object.
