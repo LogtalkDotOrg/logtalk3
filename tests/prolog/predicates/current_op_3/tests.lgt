@@ -154,7 +154,7 @@
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.4.1 NOTES
 
-	test(iso_current_op_3_40, true(Ops == [baz,quux]), [note('All tested systems fail this test!')]) :-
+	test(iso_current_op_3_40, true(Ops == [baz,quux])) :-
 		findall(
 			Op,
 			{	op(444, fy, baz),
