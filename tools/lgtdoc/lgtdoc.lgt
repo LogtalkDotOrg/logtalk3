@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:2:0,
+		version is 9:2:1,
 		author is 'Paulo Moura',
-		date is 2023-04-12,
+		date is 2023-05-23,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -918,7 +918,7 @@
 		),
 		(	member(mode(_, _), Properties) ->
 			true
-		;	warn_on_missing_predicate_directive(mode/2, Entity, Name)
+		;	warn_on_missing_predicate_directive((mode)/2, Entity, Name)
 		),
 		(	member(info(Info), Properties) ->
 			write_xml_predicate_info(Stream, Entity, Name, Functor, Arity, Info)

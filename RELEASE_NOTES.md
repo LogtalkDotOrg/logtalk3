@@ -121,6 +121,8 @@ part in if-then-else and soft-cut control constructs.
 * FIXED: The `packs` tool `describe/1-2` and `directory/2` predicates when
 listing orphaned packs.
 
+* FIXED: Syntax error when loading the `lgtdoc` tool using the XSB backend.
+
 Examples
 --------
 
