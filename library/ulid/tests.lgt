@@ -44,7 +44,7 @@
 		ulid(codes)::generate(ULID).
 
 	test(ulid_generate_1_monotonic_sort_order, true(ULIDs == SortedULIDs)) :-
-		% per spec, within the same millisecond, sort order is not guaranteed
+		% per spec, within the same millisecond, monotonic sort order is not guaranteed
 		findall(
 			ULID,
 			(integer::between(1, 10, _), ulid(atom)::generate(ULID), os::sleep(1)),
