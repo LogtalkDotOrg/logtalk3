@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-05-19,
+		date is 2023-05-24,
 		comment is 'Unit tests for the "ulid" library.'
 	]).
 
@@ -42,6 +42,15 @@
 
 	test(ulid_generate_1_codes, true(type::check(ulid(codes), ULID))) :-
 		ulid(codes)::generate(ULID).
+
+	test(ulid_generate_1_monotonic_sort_order, true(ULIDs == SortedULIDs)) :-
+		% per spec, within the same millisecond, sort order is not guaranteed
+		findall(
+			ULID,
+			(integer::between(1, 10, _), ulid(atom)::generate(ULID), os::sleep(1)),
+			ULIDs
+		),
+		sort(ULIDs, SortedULIDs).
 
 	% timestamp/2 type tests
 

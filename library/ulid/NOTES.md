@@ -26,7 +26,7 @@ Identifier (ULID) generator.
 
 https://github.com/ulid/spec
 
-Note that some backends provide time stamps with lower granularity than
+Note that most backends provide time stamps with lower granularity than
 required (i.e. seconds but not milliseconds).
 
 The generation of ULIDs uses the `/dev/urandom` random number generator
