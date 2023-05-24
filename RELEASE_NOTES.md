@@ -106,6 +106,9 @@ deprecated.
 
 * IMPROVED: Simplify the `term` library object `variant/2` predicate.
 
+* UPDATED: The `os` library for LVM to use the new `date_time/7` built-in
+predicate when available.
+
 Tools
 -----
 

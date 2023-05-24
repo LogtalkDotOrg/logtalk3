@@ -55,7 +55,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:94:3,
+		version is 1:95:0,
 		author is 'Paulo Moura',
 		date is 2023-05-24,
 		comment is 'Portable operating-system access predicates.',
@@ -2083,8 +2083,17 @@
 		time_stamp(Time) :-
 			{time_stamp(Time)}.
 
-		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
-			{date_time(Year, Month, Day, Hours, Minutes, Seconds)}.
+		:- if({predicate_property(date_time(_, _, _, _, _, _, _), built_in)}).
+
+			date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
+				{date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds)}.
+
+		:- else.
+
+			date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+				{date_time(Year, Month, Day, Hours, Minutes, Seconds)}.
+
+		:- endif.
 
 		cpu_time(Seconds) :-
 			{cpu_time(Seconds)}.
