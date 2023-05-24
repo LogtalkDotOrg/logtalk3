@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:33:0,
+		version is 1:34:0,
 		author is 'Paulo Moura',
-		date is 2022-09-12,
+		date is 2023-05-24,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -254,7 +254,7 @@
 	:- public(date_time/7).
 	:- mode(date_time(-integer, -integer, -integer, -integer, -integer, -integer, -integer), one).
 	:- info(date_time/7, [
-		comment is 'Returns the current date and time.',
+		comment is 'Returns the current date and time. Note that most backends do not provide sub-second accuracy and in those cases the value of the ``Milliseconds`` argument is always zero.',
 		argnames is ['Year', 'Month', 'Day', 'Hours', 'Minutes', 'Seconds', 'Milliseconds']
 	]).
 

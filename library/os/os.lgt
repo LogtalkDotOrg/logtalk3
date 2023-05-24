@@ -55,14 +55,15 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:94:2,
+		version is 1:94:3,
 		author is 'Paulo Moura',
-		date is 2023-04-15,
+		date is 2023-05-24,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
 			'Exception terms' - 'Currently, there is no standardization of the exception terms thrown by the different backend Prolog systems.',
 			'B-Prolog portability' - 'The ``wall_time/1`` predicate is not supported.',
+			'CxProlog portability' - 'The ``date_time/7`` predicate returns zeros for all arguments.',
 			'JIProlog portability' - 'The ``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
 			'Qu-Prolog portability' - 'The ``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - 'The ``pid/1`` and ``shell/2`` predicates are not supported.',

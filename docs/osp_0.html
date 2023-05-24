@@ -193,8 +193,8 @@
 <p>Portable operating-system access protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:33:0</div>
-<div class="line"><strong>Date:</strong> 2022-09-12</div>
+<div class="line"><strong>Version:</strong> 1:34:0</div>
+<div class="line"><strong>Date:</strong> 2023-05-24</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -917,7 +917,7 @@
 </section>
 <section id="date-time-7">
 <span id="osp-0-date-time-7"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">date_time/7</span></code></a><a class="headerlink" href="#date-time-7" title="Permalink to this heading"></a></h3>
-<p>Returns the current date and time.</p>
+<p>Returns the current date and time. Note that most backends do not provide sub-second accuracy and in those cases the value of the <code class="docutils literal notranslate"><span class="pre">Milliseconds</span></code> argument is always zero.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
