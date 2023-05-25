@@ -75,6 +75,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
@@ -176,6 +177,7 @@ fail).</p>
 <p>Calls to the library predicates are inlined when compiled with the
 <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on. In this case, there is no overhead compared
 with calling the abstracted predicates directly.</p>
+<p>See also the <code class="docutils literal notranslate"><span class="pre">dif</span></code> library.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
@@ -193,6 +195,18 @@ link in a web browser.</p>
 <h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(coroutining(tester)).
+</pre></div>
+</div>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>Load this library from your application loader file. To call the
+coroutining predicates using implicit message sending, add the following
+directive to any object or category calling the predicates (adjust the
+list to the predicates actually called):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(coroutining, [
+    dif<span class="o">/</span><span class="m">2</span>, dif<span class="o">/</span><span class="m">1</span>, freeze<span class="o">/</span><span class="m">2</span>, frozen<span class="o">/</span><span class="m">2</span>, when<span class="o">/</span><span class="m">2</span>
+]).
 </pre></div>
 </div>
 </section>

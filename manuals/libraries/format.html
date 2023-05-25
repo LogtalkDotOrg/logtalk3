@@ -84,10 +84,11 @@
 <li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">format</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#portability">Portability</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#portability">Portability</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
@@ -183,22 +184,6 @@ predicates among Prolog systems, the linter checks focus on detecting
 common errors such as missing arguments and too many arguments. The
 linter warnings are printed when the <code class="docutils literal notranslate"><span class="pre">suspicious_calls</span></code> flag is set to
 <code class="docutils literal notranslate"><span class="pre">warning</span></code> (its usual default).</p>
-<section id="portability">
-<h2>Portability<a class="headerlink" href="#portability" title="Permalink to this heading"></a></h2>
-<p>Some Prolog systems provide only a subset of the expected format
-specifiers. Notably, table related format specifiers are only fully
-supported by a few systems. See the section below on testing.</p>
-<p>Only some of the supported Prolog backends provide implementations of
-the <code class="docutils literal notranslate"><span class="pre">format/2-3</span></code> predicates that allow using not only an atom or a
-list of character codes for the format string (as de facto standard) but
-also using a list of characters. These currently include ECLiPSe, LVM,
-SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP. Therefore, when
-wide portability is sought, atoms must be used for the format specifier
-argument. Some systems, like Scryer Prolog and Tau Prolog, only accept a
-list of characters for the format string. In this case, this library
-will convert the atom format string before calling these systems native
-implementations.</p>
-</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>Open the
@@ -223,6 +208,34 @@ link in a web browser.</p>
 <code class="docutils literal notranslate"><span class="pre">tests/prolog/predicates</span></code> directory as part of the Prolog standards
 conformance test suite. Use those tests to confirm the portability of
 the format specifiers that you want to use.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>Load this library from your application loader file. To call the
+<code class="docutils literal notranslate"><span class="pre">format/2-3</span></code> predicates using implicit message sending, add the
+following directive to any object or category calling the predicates:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(format, [
+    format<span class="o">/</span><span class="m">2</span>, format<span class="o">/</span><span class="m">3</span>
+]).
+</pre></div>
+</div>
+</section>
+<section id="portability">
+<h2>Portability<a class="headerlink" href="#portability" title="Permalink to this heading"></a></h2>
+<p>Some Prolog systems provide only a subset of the expected format
+specifiers. Notably, table related format specifiers are only fully
+supported by a few systems. See the section below on testing.</p>
+<p>Only some of the supported Prolog backends provide implementations of
+the <code class="docutils literal notranslate"><span class="pre">format/2-3</span></code> predicates that allow using not only an atom or a
+list of character codes for the format string (as de facto standard) but
+also using a list of characters. These currently include ECLiPSe, GNU
+Prolog, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.
+Therefore, when wide portability is sought, atoms must be used for the
+format specifier argument as they bypass any dependency on the
+<code class="docutils literal notranslate"><span class="pre">double_quotes</span></code> standard Prolog flag. Some systems, like Scryer Prolog
+and Tau Prolog, only accept a list of characters for the format string.
+In this case, this library will convert the atom format string before
+calling these systems native implementations.</p>
 </section>
 </section>
 

@@ -23,12 +23,14 @@ ________________________________________________________________________
 
 The `dif` object provides a portable abstraction over how the `dif/2`
 predicate is made available by the supported backend Prolog systems
-that implement it (B-Prolog, ECLiPSe, Scryer Prolog, SICStus Prolog,
+that implement it (B-Prolog, ECLiPSe, LVM, Scryer Prolog, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, XSB, and YAP).
 
 Calls to the library predicates are inlined when compiled with the
 `optimize` flag turned on. In this case, there is no overhead compared
-with calling the abstracted predicates directly.
+with calling the abstracted predicate directly.
+
+See also the `coroutining` library.
 
 
 API documentation
@@ -52,3 +54,15 @@ Testing
 To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(dif(tester)).
+
+
+Usage
+-----
+
+Load this library from your application loader file. To call the `dif/1-2`
+predicates using implicit message sending, add the following directive to
+any object or category calling the predicates:
+
+	:- uses(dif, [
+		dif/2, dif/1
+	]).

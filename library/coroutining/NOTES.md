@@ -31,6 +31,8 @@ Calls to the library predicates are inlined when compiled with the `optimize`
 flag turned on. In this case, there is no overhead compared with calling the
 abstracted predicates directly.
 
+See also the `dif` library.
+
 
 API documentation
 -----------------
@@ -53,3 +55,16 @@ Testing
 To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(coroutining(tester)).
+
+
+Usage
+-----
+
+Load this library from your application loader file. To call the coroutining
+predicates using implicit message sending, add the following directive to any
+object or category calling the predicates (adjust the list to the predicates
+actually called):
+
+	:- uses(coroutining, [
+		dif/2, dif/1, freeze/2, frozen/2, when/2
+	]).
