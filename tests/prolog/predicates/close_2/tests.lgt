@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:7:1,
 		author is 'Paulo Moura',
-		date is 2022-10-30,
+		date is 2023-05-27,
 		comment is 'Unit tests for the ISO Prolog standard close/1-2 built-in predicates.'
 	]).
 
@@ -51,9 +51,9 @@
 		% both exception terms seem to be acceptable in the ISO spec
 		{close(foo)}.
 
-	throws(lgt_close_1_04, [error(domain_error(stream_or_alias,1),_), error(existence_error(stream,1),_)]) :-
+	throws(lgt_close_1_04, [error(domain_error(stream_or_alias,42),_), error(existence_error(stream,42),_)]) :-
 		% both exception terms seem to be acceptable in the ISO spec
-		{close(1)}.
+		{close(42)}.
 
 	throws(sics_close_1_05, error(existence_error(stream,S),_)) :-
 		^^closed_input_stream(S, []),
