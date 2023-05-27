@@ -135,6 +135,8 @@ Examples
 * UPDATED: The `errors` example to illustrate lambda expression linter
 warnings and the new linter warnings.
 
+* UPDATED: The `symbiosis` example for Scryer Prolog.
+
 * FIXED: Example `bench` cases where predicates were called as non-terminals.
 
 Tests
