@@ -148,6 +148,10 @@
 </div>
 <p>Declares an entity and its contents as dynamic. Dynamic entities can be
 abolished at runtime.</p>
+<p>As entities created at runtime (using the <a class="reference internal" href="../predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a>,
+<a class="reference internal" href="../predicates/create_protocol_3.html#predicates-create-protocol-3"><span class="std std-ref">create_protocol/3</span></a>, and <a class="reference internal" href="../predicates/create_category_4.html#predicates-create-category-4"><span class="std std-ref">create_category/4</span></a>
+built-in predicates) are always dynamic, this directive is only necessary in
+the rare cases where we want to define dynamic entities in source files.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Some backend Prolog compilers declare the atom <code class="docutils literal notranslate"><span class="pre">dynamic</span></code> as an operator

@@ -36,6 +36,11 @@ Description
 Declares an entity and its contents as dynamic. Dynamic entities can be
 abolished at runtime.
 
+As entities created at runtime (using the :ref:`predicates_create_object_4`,
+:ref:`predicates_create_protocol_3`, and :ref:`predicates_create_category_4`
+built-in predicates) are always dynamic, this directive is only necessary in
+the rare cases where we want to define dynamic entities in source files.
+
 .. warning::
 
    Some backend Prolog compilers declare the atom ``dynamic`` as an operator

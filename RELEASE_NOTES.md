@@ -79,6 +79,8 @@ Documentation
 
 * ADDED: Handbook description and examples of the new meta-messages.
 
+* IMPROVED: Handbook documentation of the `dynamic/0` entity directive.
+
 * IMPROVED: Handbook documentation of the `logtalk_library_path/2` predicate.
 
 * IMPROVED: Handbook documentation on definite clause grammars.
