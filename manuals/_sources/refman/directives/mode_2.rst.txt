@@ -37,8 +37,9 @@ Most predicates can be used with several instantiations modes. This
 directive enables the specification of each
 :ref:`instantiation mode <predicates_mode_instantiation>` and the
 corresponding :ref:`number of proofs <predicates_mode_number_of_proofs>`
-(not necessarily distinct solutions). You may also use this directive
-for documenting grammar rule non-terminals.
+(but not necessarily distinct solutions). The instantiation mode of
+each argument can include type information. You may also use this
+directive for documenting grammar rule non-terminals.
 
 Template and modes
 ------------------
