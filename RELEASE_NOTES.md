@@ -71,6 +71,9 @@ Prolog adapter and integration files
 * FIXED: The Quintus Prolog adapter file definition for the `subsumes_term/2`
 standard predicate.
 
+* FIXED: The Scryer Prolog adapter filer to not declare module meta-predicates
+as built-in meta-predicates.
+
 Documentation
 -------------
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Scryer Prolog 0.9.1 and later versions
-%  Last updated on April 13, 2023
+%  Last updated on May 27, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -140,10 +140,8 @@
 % the third argument, which must be either "predicate" or "control_construct",
 % is used to guide the compilation of these meta-predicates in debug mode
 
-'$lgt_prolog_meta_predicate'(setup_call_cleanup(_, _, _), setup_call_cleanup(0, 0, 0), predicate).
-'$lgt_prolog_meta_predicate'(call_cleanup(_, _), call_cleanup(0, 0), predicate).
-'$lgt_prolog_meta_predicate'(freeze(_, _), freeze(*, 0), predicate).
-'$lgt_prolog_meta_predicate'(call_with_inference_limit(_, _, _), call_with_inference_limit(0, *, *), predicate).
+'$lgt_prolog_meta_predicate'(_, _, _) :-
+	fail.
 
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
