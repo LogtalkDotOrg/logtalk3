@@ -1793,11 +1793,27 @@ test execution messages.
 Known issues
 ------------
 
-Parameter variables (``_VariableName_``) cannot currently be used in the
-definition of the ``condition/1``, ``setup/1``, and ``cleanup/1`` test
-options when using the ``test/3`` dialect. Use in alternative the
-``parameter/2`` built-in execution context predicate.
-
 Deterministic unit tests are currently not available when using Quintus
 Prolog as it lacks built-in support that cannot be sensibly defined in
 Prolog.
+
+Parameter variables (``_VariableName_``) cannot currently be used in the
+definition of the ``condition/1``, ``setup/1``, and ``cleanup/1`` test
+options when using the ``test/3`` dialect. For example, the following
+condition will not work:
+
+::
+
+   test(some_id, true, [condition(_ParVar_ == 42)]) :-
+       ...
+
+The workaround is to define an auxiliary predicate called from those
+options. For example:
+
+::
+
+   test(check_xyz, true, [condition(xyz_condition)]) :-
+       ...
+
+   xyz_condition :-
+       _ParVar_ == 42.

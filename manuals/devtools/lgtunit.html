@@ -1762,13 +1762,26 @@ test execution messages.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
-<p>Parameter variables (<code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>) cannot currently be used in the
-definition of the <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>, <code class="docutils literal notranslate"><span class="pre">setup/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code> test
-options when using the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. Use in alternative the
-<code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> built-in execution context predicate.</p>
 <p>Deterministic unit tests are currently not available when using Quintus
 Prolog as it lacks built-in support that cannot be sensibly defined in
 Prolog.</p>
+<p>Parameter variables (<code class="docutils literal notranslate"><span class="pre">_VariableName_</span></code>) cannot currently be used in the
+definition of the <code class="docutils literal notranslate"><span class="pre">condition/1</span></code>, <code class="docutils literal notranslate"><span class="pre">setup/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">cleanup/1</span></code> test
+options when using the <code class="docutils literal notranslate"><span class="pre">test/3</span></code> dialect. For example, the following
+condition will not work:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(some_id, <span class="k">true</span>, [condition(<span class="nv">_ParVar_</span> <span class="o">==</span> <span class="m">42</span>)]) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>The workaround is to define an auxiliary predicate called from those
+options. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(check_xyz, <span class="k">true</span>, [condition(xyz_condition)]) <span class="o">:-</span>
+    ...
+
+xyz_condition <span class="o">:-</span>
+    <span class="nv">_ParVar_</span> <span class="o">==</span> <span class="m">42.</span>
+</pre></div>
+</div>
 </section>
 </section>
 
