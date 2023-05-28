@@ -8096,7 +8096,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% this will allow us to use the stream position if necessary to find
 	% the approximated position of the error
 	retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)),
-	% the actual read term predicate is defined in the adapter files
+	% the actual read term predicate is defined in the adapter files as
+	% there's no standard option for returning the read term position
 	'$lgt_read_term'(Stream, Term, [variable_names(VariableNames), singletons(Singletons)], Lines),
 	'$lgt_report_variable_naming_issues'(VariableNames, File, Lines),
 	assertz('$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines)).

@@ -467,8 +467,8 @@ numbervars(Term, From, Next) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  customized version of the read_term/3 predicate for returning the term
-%  position (start and end lines; needed for improved error messages) and
-%  the variable names (ideally using the standard variable_names/1 option)
+%  position (start and end lines; needed for improved error messages) due
+%  to the lack of a standard option for this purpose
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
