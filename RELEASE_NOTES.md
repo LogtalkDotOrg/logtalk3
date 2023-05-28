@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: New `parameter_variables`, `variable_names(Term)`, and
+`singletons(Term)` keys to the `logtalk_load_context/2` built-in predicate.
+
 * ADDED: Two new meta-messages, `[Stream,Prefix]>>Goal` and `[Stream]>>Goal`,
 to the message printing mechanism. These new meta-messages allow calling a
 user-defined printing goal. The use of lambda expressions allow passing the

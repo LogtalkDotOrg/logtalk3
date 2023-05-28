@@ -49,8 +49,20 @@
 		assertz(result(variable_names, VariableNames)),
 		fail.
 	term_expansion(a(_,_,_,_,_), _) :-
+		logtalk_load_context(variable_names(Term), VariableNames),
+		assertz(result(variable_names(Term), VariableNames)),
+		fail.
+	term_expansion(a(_,_,_,_,_), _) :-
 		logtalk_load_context(singletons, Singletons),
 		assertz(result(singletons, Singletons)),
+		fail.
+	term_expansion(a(_,_,_,_,_), _) :-
+		logtalk_load_context(singletons(Term), Singletons),
+		assertz(result(singletons(Term), Singletons)),
+		fail.
+	term_expansion(a(_,_,_,_,_), _) :-
+		logtalk_load_context(parameter_variables, ParameterVariables),
+		assertz(result(parameter_variables, ParameterVariables)),
 		fail.
 	term_expansion(a(_,_,_,_,_), _) :-
 		logtalk_load_context(term_position, Position),
@@ -111,9 +123,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-05-28,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -157,12 +169,12 @@
 
 	% source file entity related keys
 
-	test(logtalk_load_context_2_08, true(EntityIdentifier == sample)) :-
+	test(logtalk_load_context_2_08, subsumes(sample(_,_), EntityIdentifier)) :-
 		result(entity_identifier, EntityIdentifier).
 
 	test(logtalk_load_context_2_09, true(EntityPrefix0 == EntityPrefix)) :-
 		result(entity_prefix, EntityPrefix0),
-		logtalk::entity_prefix(sample, EntityPrefix).
+		logtalk::entity_prefix(sample(_, _), EntityPrefix).
 
 	test(logtalk_load_context_2_10, true(EntityType == object)) :-
 		result(entity_type, EntityType).
@@ -178,27 +190,38 @@
 	test(logtalk_load_context_2_13, variant(VariableNames, ['A'=_, 'B'=_, 'C'=_])) :-
 		result(variable_names, VariableNames).
 
-	test(logtalk_load_context_2_14, variant(Singletons, ['C'=_])) :-
+	test(logtalk_load_context_2_14, true(VariableNames == ['A'=A, 'B'=B, 'C'=C])) :-
+		result(variable_names(Term), VariableNames),
+		term_variables(Term, [A, B, C]).
+
+	test(logtalk_load_context_2_15, variant(Singletons, ['C'=_])) :-
 		result(singletons, Singletons).
 
-	test(logtalk_load_context_2_15, true(ground(TermPosition))) :-
+	test(logtalk_load_context_2_16, true(Singletons == ['C'=C])) :-
+		result(singletons(Term), Singletons),
+		term_variables(Term, [_, _, C]).
+
+	test(logtalk_load_context_2_17, true(ParameterVariables == ['_PV1_'-1, '_PV2_'-2])) :-
+		result(parameter_variables, ParameterVariables).
+
+	test(logtalk_load_context_2_18, true(ground(TermPosition))) :-
 		result(term_position, TermPosition).
 
 	% calls from initialization/1 directives
 
-	test(logtalk_load_context_2_16, true(Source0 == Source)) :-
+	test(logtalk_load_context_2_19, true(Source0 == Source)) :-
 		object_property(hook, file(Source0)),
 		logtalk_library_path(hook_source, Source).
 
-	test(logtalk_load_context_2_17, true(Directory0 == Directory)) :-
+	test(logtalk_load_context_2_20, true(Directory0 == Directory)) :-
 		object_property(hook, file(_, Directory0)),
 		logtalk_library_path(hook_directory, Directory).
 
-	test(logtalk_load_context_2_18, true(Basename0 == Basename)) :-
+	test(logtalk_load_context_2_21, true(Basename0 == Basename)) :-
 		object_property(hook, file(Basename0,_)),
 		logtalk_library_path(hook_basename, Basename).
 
-	test(logtalk_load_context_2_19, true(File0 == File)) :-
+	test(logtalk_load_context_2_22, true(File0 == File)) :-
 		object_property(hook, file(File0)),
 		logtalk_library_path(hook_file, File).
 

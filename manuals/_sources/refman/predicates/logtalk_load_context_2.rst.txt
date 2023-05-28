@@ -33,8 +33,8 @@ Description
 
    logtalk_load_context(Key, Value)
 
-Provides access to the Logtalk compilation/loading context. The
-following keys are currently supported:
+Provides access to the Logtalk compilation/loading context. The following keys
+are currently supported:
 
 * ``entity_identifier`` - identifier of the entity being compiled if any
 * ``entity_prefix`` - internal prefix for the entity compiled code
@@ -50,7 +50,13 @@ following keys are currently supported:
 * ``term_position`` - the position of the term being compiled (``StartLine-EndLine``)
 * ``variables`` - the variables of the term being compiled (``[Variable1, ...]``)
 * ``variable_names`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
+* ``variable_names(Term)`` - the variable names of the term being compiled (``[Name1=Variable1, ...]``)
 * ``singletons`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
+* ``singletons(Term)`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
+* ``parameter_variables`` - list of parameter variable names and positions (``[Name1-Position1, ...]``)
+
+Calling this predicate with the ``parameter_variables`` key only succeeds
+when compiling a parametric entity containing parameter variables.
 
 This predicate is usually called by the :ref:`methods_term_expansion_2`
 and :ref:`methods_goal_expansion_2` methods. It can also be called directly
@@ -66,19 +72,10 @@ from an object ``initialization/1`` directive.
    such support is not available, the value ``-1`` is returned for both
    the start and the end lines.
 
-   Currently, any variables in the values of the ``term``, ``variables``,
-   ``variable_names``, and ``singletons`` keys are not shared with,
-   respectively, the term and goal arguments of the ``term_expansion/2``
-   and ``goal_expansion/2`` methods.
-
-   Using the ``variables``, ``variable_names``, and ``singletons`` keys
-   may require calling the standard built-in predicate ``term_variables/2``
-   on the term read and unifying the term variables with the variables
-   in the names list. This, however, may rise portability issues with
-   Prolog compilers that don't return the variables in the same order for
-   the ``term_variables/2`` predicate and the option ``variable_names/1``
-   of the ``read_term/3`` built-in predicate, which is used by the Logtalk
-   compiler to read source files.
+   Variables in the values of the ``term``, ``variables``, ``variable_names``,
+   and ``singletons`` keys are not shared with, respectively, the term and
+   goal arguments of the ``term_expansion/2`` and ``goal_expansion/2`` methods.
+   Use instead the ``variable_names(Term)`` and ``singletons(Term)`` keys.
 
 Modes and number of proofs
 --------------------------
@@ -100,6 +97,11 @@ Examples
    % expand source file terms only if they are entity terms
    term_expansion(Term, ExpandedTerms) :-
        logtalk_load_context(entity_identifier, _),
+       ....
+
+   % expand source file term while accessing its variable names
+   term_expansion(Term, ExpandedTerms) :-
+       logtalk_load_context(variable_names(Term), VariableNames),
        ....
 
    % define a library alias based on the source directory

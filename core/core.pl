@@ -3304,9 +3304,21 @@ logtalk_load_context(variable_names, VariableNames) :-
 	% variable names for the full file term being compiled
 	'$lgt_pp_term_source_data_'(_, VariableNames, _, _, _).
 
+logtalk_load_context(variable_names(Term), VariableNames) :-
+	% variable names for the full file term being compiled
+	'$lgt_pp_term_source_data_'(Term, VariableNames, _, _, _).
+
 logtalk_load_context(singletons, Singletons) :-
 	% singleton variables in the full file term being compiled
 	'$lgt_pp_term_source_data_'(_, _, Singletons, _, _).
+
+logtalk_load_context(singletons(Term), Singletons) :-
+	% singleton variables in the full file term being compiled
+	'$lgt_pp_term_source_data_'(Term, _, Singletons, _, _).
+
+logtalk_load_context(parameter_variables, ParameterVariablePairs) :-
+	% only succeeds when compiling a parametric entity containing parameter variables
+	'$lgt_pp_parameter_variables_'(ParameterVariablePairs).
 
 logtalk_load_context(file, File) :-
 	% when compiling terms from an included file, this key returns the full
@@ -8861,6 +8873,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % we throw an error
 
 '$lgt_compile_file_term'(Term, Ctx) :-
+	% we must unify any parameter variables used in the term with
+	% the corresponding entity parameters before any expansion
 	'$lgt_unify_parameter_variables'(Term, Ctx),
 	(	Term = {_} ->
 		% bypass control construct; skip term-expansion
@@ -13884,7 +13898,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		entity_identifier, entity_prefix, entity_type,
 		source, file, basename, directory,
 		stream, target, flags,
-		term, term_position, variables, variable_names, singletons
+		term, term_position, variables, parameter_variables,
+		variable_names, variable_names(_), singletons, singletons(_)
 	]),
 	'$lgt_source_file_context'(File, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->

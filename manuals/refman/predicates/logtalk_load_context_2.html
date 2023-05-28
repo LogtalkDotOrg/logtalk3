@@ -146,8 +146,8 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_load_context</span>(<span class="nv">Key</span>, <span class="nv">Value</span>)
 </pre></div>
 </div>
-<p>Provides access to the Logtalk compilation/loading context. The
-following keys are currently supported:</p>
+<p>Provides access to the Logtalk compilation/loading context. The following keys
+are currently supported:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">entity_identifier</span></code> - identifier of the entity being compiled if any</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">entity_prefix</span></code> - internal prefix for the entity compiled code</p></li>
@@ -163,8 +163,13 @@ following keys are currently supported:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">term_position</span></code> - the position of the term being compiled (<code class="docutils literal notranslate"><span class="pre">StartLine-EndLine</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">variables</span></code> - the variables of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Variable1,</span> <span class="pre">...]</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">variable_names</span></code> - the variable names of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variable_names(Term)</span></code> - the variable names of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">singletons</span></code> - the singleton variables of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">singletons(Term)</span></code> - the singleton variables of the term being compiled (<code class="docutils literal notranslate"><span class="pre">[Name1=Variable1,</span> <span class="pre">...]</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">parameter_variables</span></code> - list of parameter variable names and positions (<code class="docutils literal notranslate"><span class="pre">[Name1-Position1,</span> <span class="pre">...]</span></code>)</p></li>
 </ul>
+<p>Calling this predicate with the <code class="docutils literal notranslate"><span class="pre">parameter_variables</span></code> key only succeeds
+when compiling a parametric entity containing parameter variables.</p>
 <p>This predicate is usually called by the <a class="reference internal" href="../methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a>
 and <a class="reference internal" href="../methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> methods. It can also be called directly
 from <a class="reference internal" href="../directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a> directives in a source file. Note
@@ -177,18 +182,10 @@ from an object <code class="docutils literal notranslate"><span class="pre">init
 that provide access to the start and end lines of a read term. When
 such support is not available, the value <code class="docutils literal notranslate"><span class="pre">-1</span></code> is returned for both
 the start and the end lines.</p>
-<p>Currently, any variables in the values of the <code class="docutils literal notranslate"><span class="pre">term</span></code>, <code class="docutils literal notranslate"><span class="pre">variables</span></code>,
-<code class="docutils literal notranslate"><span class="pre">variable_names</span></code>, and <code class="docutils literal notranslate"><span class="pre">singletons</span></code> keys are not shared with,
-respectively, the term and goal arguments of the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code>
-and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> methods.</p>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">variables</span></code>, <code class="docutils literal notranslate"><span class="pre">variable_names</span></code>, and <code class="docutils literal notranslate"><span class="pre">singletons</span></code> keys
-may require calling the standard built-in predicate <code class="docutils literal notranslate"><span class="pre">term_variables/2</span></code>
-on the term read and unifying the term variables with the variables
-in the names list. This, however, may rise portability issues with
-Prolog compilers that don’t return the variables in the same order for
-the <code class="docutils literal notranslate"><span class="pre">term_variables/2</span></code> predicate and the option <code class="docutils literal notranslate"><span class="pre">variable_names/1</span></code>
-of the <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> built-in predicate, which is used by the Logtalk
-compiler to read source files.</p>
+<p>Variables in the values of the <code class="docutils literal notranslate"><span class="pre">term</span></code>, <code class="docutils literal notranslate"><span class="pre">variables</span></code>, <code class="docutils literal notranslate"><span class="pre">variable_names</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">singletons</span></code> keys are not shared with, respectively, the term and
+goal arguments of the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> methods.
+Use instead the <code class="docutils literal notranslate"><span class="pre">variable_names(Term)</span></code> and <code class="docutils literal notranslate"><span class="pre">singletons(Term)</span></code> keys.</p>
 </div>
 </section>
 <section id="modes-and-number-of-proofs">
@@ -206,6 +203,11 @@ compiler to read source files.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% expand source file terms only if they are entity terms</span>
 <span class="k">term_expansion</span>(<span class="nv">Term</span>, <span class="nv">ExpandedTerms</span>) <span class="o">:-</span>
     <span class="k">logtalk_load_context</span>(entity_identifier, <span class="nv">_</span>),
+    ....
+
+<span class="c">% expand source file term while accessing its variable names</span>
+<span class="k">term_expansion</span>(<span class="nv">Term</span>, <span class="nv">ExpandedTerms</span>) <span class="o">:-</span>
+    <span class="k">logtalk_load_context</span>(variable_names(<span class="nv">Term</span>), <span class="nv">VariableNames</span>),
     ....
 
 <span class="c">% define a library alias based on the source directory</span>

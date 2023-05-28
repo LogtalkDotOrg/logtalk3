@@ -22,7 +22,7 @@
 :- set_logtalk_flag(singleton_variables, silent).
 
 
-:- object(sample).
+:- object(sample(_PV1_, _PV2_)).
 
 	a(A,B,C,B,A).
 
