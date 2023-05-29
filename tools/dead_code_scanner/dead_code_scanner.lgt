@@ -23,9 +23,9 @@
 :- object(dead_code_scanner).
 
 	:- info([
-		version is 0:11:2,
+		version is 0:12:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2022-07-08,
+		date is 2023-05-29,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -142,6 +142,9 @@
 			Caller \== Predicate
 		),
 		% no other callers for Object::Predicate
+		\+ inherited_scope_directive(Entity, Predicate),
+		% not a predicate (or non-terminal) made available (via a scope
+		% directive) by the object containing the uses/2 directive
 		(	memberchk(non_terminal(NonTerminal), CallsProperties),
 			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
 			Resource = NonTerminal
@@ -167,6 +170,9 @@
 			Caller \== Predicate
 		),
 		% no other callers for Module:Predicate
+		\+ inherited_scope_directive(Entity, Predicate),
+		% not a predicate (or non-terminal) made available (via a scope
+		% directive) by the object containing the use_module/2 directive
 		(	memberchk(non_terminal(NonTerminal), CallsProperties),
 			memberchk(non_terminal(NonTerminal), DefinesProperties) ->
 			Resource = NonTerminal
@@ -194,6 +200,12 @@
 		% no local scope directive
 		\+ inherited_scope_directive(Entity, Predicate),
 		% no inherited scope directive
+		(	current_category(Entity),
+			complements_object(Entity, Object) ->
+			non_scoped_predicate(Object, Predicate, _, _)
+		;	true
+		),
+		% no scoped predicate in category complemented object
 		(	member(include(File), Properties) ->
 			true
 		;	entity_property(Entity, file(File))

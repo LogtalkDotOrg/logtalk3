@@ -123,6 +123,14 @@ predicate when available.
 Tools
 -----
 
+* IMPROVED: The `dead_code_scanner` tool no longer reports predicates listed
+in `uses/2` or `use_module/2` directives that are made available as scoped
+predicates by the object (or category) containing the directives.
+
+* IMPROVED: The `dead_code_scanner` tool no longer reports predicates defined
+in a complementing category when the complemented object contains or inherits
+a scope directive for the predicate.
+
 * IMPROVED: The `tutor` tool explanation for compiler errors when trying
 to redefine the meaning of predicates listed in `uses/2` or `use_module/2`
 directives.
