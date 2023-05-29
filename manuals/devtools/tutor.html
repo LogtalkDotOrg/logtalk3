@@ -151,7 +151,35 @@ the compiler and runtime warning and error messages.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
-<p>Simply load the tool at startup (e.g. from a settings file).</p>
+<p>Simply load the tool at startup (e.g. from a settings file). As an
+example, with this tool loaded, instead of terse compiler warnings such
+as:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>     <span class="nv">No</span> matching clause for goal<span class="o">:</span> baz(a)
+<span class="o">*</span>       while compiling object main_include_compiler_warning
+<span class="o">*</span>       in file logtalk<span class="o">/</span>examples<span class="o">/</span>errors<span class="o">/</span>include_compiler_warning.lgt between lines <span class="m">37</span><span class="o">-</span><span class="m">38</span>
+<span class="o">*</span>
+<span class="o">*</span>     <span class="nv">Duplicated</span> clause<span class="o">:</span> b(one)
+<span class="o">*</span>       first found at or above line <span class="m">45</span>
+<span class="o">*</span>       while compiling object main_include_compiler_warning
+<span class="o">*</span>       in file logtalk<span class="o">/</span>examples<span class="o">/</span>errors<span class="o">/</span>include_compiler_warning.lgt at or above line <span class="m">48</span>
+</pre></div>
+</div>
+<p>the user will get:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>     <span class="nv">No</span> matching clause for goal<span class="o">:</span> baz(a)
+<span class="o">*</span>       while compiling object main_include_compiler_warning
+<span class="o">*</span>       in file logtalk<span class="o">/</span>examples<span class="o">/</span>errors<span class="o">/</span>include_compiler_warning.lgt between lines <span class="m">37</span><span class="o">-</span><span class="m">38</span>
+<span class="o">*</span>     <span class="nv">Calls</span> to locally defined predicates without a clause with a matching head
+<span class="o">*</span>     <span class="k">fail</span>. <span class="nv">Typo</span> in a predicate argument<span class="o">?</span> <span class="nv">Predicate</span> definition incomplete<span class="o">?</span>
+<span class="o">*</span>
+<span class="o">*</span>     <span class="nv">Duplicated</span> clause<span class="o">:</span> b(one)
+<span class="o">*</span>       first found at or above line <span class="m">45</span>
+<span class="o">*</span>       while compiling object main_include_compiler_warning
+<span class="o">*</span>       in file logtalk<span class="o">/</span>examples<span class="o">/</span>errors<span class="o">/</span>include_compiler_warning.lgt at or above line <span class="m">48</span>
+<span class="o">*</span>     <span class="nv">Duplicated</span> clauses are usually a source code editing error and can
+<span class="o">*</span>     result in spurious choice<span class="o">-</span>points, degrading performance. <span class="nv">Delete</span> or
+<span class="o">*</span>     correct the duplicated clause to fix this warning.
+</pre></div>
+</div>
 </section>
 </section>
 
