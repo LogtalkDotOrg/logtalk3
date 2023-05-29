@@ -135,6 +135,9 @@ listing orphaned packs.
 
 * FIXED: Syntax error when loading the `lgtdoc` tool using the XSB backend.
 
+* FIXED: Bug in the validation code for the `lgtdoc` tool predicate
+`entity_xsl_file` and `index_xsl_file` options.
+
 Examples
 --------
 

@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:2:1,
+		version is 9:2:2,
 		author is 'Paulo Moura',
-		date is 2023-05-23,
+		date is 2023-05-29,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1535,9 +1535,9 @@
 	default_option(exclude_entities([])).
 	default_option(sort_predicates(false)).
 
-	valid_option(entity_xsl_file, File) :-
+	valid_option(entity_xsl_file(File)) :-
 		atom(File).
-	valid_option(index_xsl_file, File) :-
+	valid_option(index_xsl_file(File)) :-
 		atom(File).
 	valid_option(xml_spec_reference(Reference)) :-
 		(Reference == standalone -> true; Reference == (local) -> true; Reference == web).
