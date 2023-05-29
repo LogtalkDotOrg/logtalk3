@@ -118,6 +118,8 @@ deprecated.
 * UPDATED: The `os` library for LVM to use the new `date_time/7` built-in
 predicate when available.
 
+* FIXED: Delete dead code in the the `csv` library.
+
 Tools
 -----
 

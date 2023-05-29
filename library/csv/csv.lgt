@@ -249,9 +249,6 @@
 	separator(semicolon) --> [0';], spaces.
 	separator(colon) --> [0':], spaces.
 
-	tabs --> [0'\t], !, tabs.
-	tabs --> [].
-
 	spaces --> [32], !, spaces.
 	spaces --> [].
 
