@@ -570,7 +570,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == qp; Dialect == scryer; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
+		(Dialect == b; Dialect == scryer; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
 	)).
 
 		call_goal(TGoal, Deterministic) :-

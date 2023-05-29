@@ -260,5 +260,5 @@ module library predicates).
 Known issues
 ------------
 
-Determinism information is currently not available when using Lean
-Prolog or Quintus Prolog as backend compilers.
+Determinism information is currently not available when using Quintus
+Prolog as the backend compiler.

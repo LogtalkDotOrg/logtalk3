@@ -22986,7 +22986,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_aux_clauses'(@list(clause))
 %
 % compiles a list of auxiliary predicate clauses;
-% used mainly in conjunction with goal_expansion/2 hooks
+% used mainly in conjunction with term_expansion/2 and goal_expansion/2 hook predicates
 
 '$lgt_compile_aux_clauses'([Clause| Clauses]) :-
 	% avoid making a predicate discontiguous by accident by using a

@@ -3,8 +3,8 @@
 ``redis``
 =========
 
-Redis client library. Supports GNU Prolog, LVM, Qu-Prolog, SICStus
-Prolog, SWI-Prolog, and XSB. Support for Ciao Prolog and ECLiPSe is also
+Redis client library. Supports GNU Prolog, LVM, SICStus Prolog,
+SWI-Prolog, and XSB. Support for Ciao Prolog and ECLiPSe is also
 included but requires fixes for issues in these systems.
 
 For general information on Redis, including a list of the available
