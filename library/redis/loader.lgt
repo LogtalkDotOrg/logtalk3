@@ -48,13 +48,6 @@
 		logtalk_load(redis, [optimize(on)])
 	)).
 
-:- elif(current_logtalk_flag(prolog_dialect, qp)).
-
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(redis, [optimize(on)])
-	)).
-
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 
 	:- use_module(library(sockets), []).

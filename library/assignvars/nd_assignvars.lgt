@@ -92,7 +92,7 @@ please consult the URL http://www.kprolog.com/en/logical_assignment/
 
 	:- elif((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == eclipse; Dialect == gnu; Dialect == qp; Dialect == swi; Dialect == yap)
+		(Dialect == b; Dialect == eclipse; Dialect == gnu; Dialect == swi; Dialect == yap)
 	)).
 
 		assignable(Assignable) :-

@@ -29,8 +29,8 @@ protocol. It can be used with any backend Prolog compiler.
 
 The `nd_assignvars` object provides a non-declarative but faster implementation
 of the `assignvarsp` protocol. It can be used with the following backend Prolog
-compilers: B-Prolog, CxProlog, ECLiPSe, GNU Prolog, Qu-Prolog, SICStus Prolog,
-SWI-Prolog, and YAP.
+compilers: B-Prolog, CxProlog, ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
+and YAP.
 
 For more information on assignvars, please consult the URL:
 
