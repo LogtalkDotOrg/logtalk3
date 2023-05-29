@@ -23,15 +23,15 @@
 	extends(options)).
 
 	:- info([
-		version is 2:52:0,
+		version is 2:52:1,
 		author is 'Paulo Moura',
-		date is 2023-04-12,
+		date is 2023-05-29,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
 
 	:- uses(list, [
-		append/3, member/2
+		member/2
 	]).
 	:- uses(pairs, [
 		keys/2
