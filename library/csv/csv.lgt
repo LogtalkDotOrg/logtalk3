@@ -24,9 +24,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2023-03-13,
+		date is 2023-05-29,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).',
@@ -425,11 +425,8 @@
 	non_separator_code(_, Separator) :-
 		var(Separator).
 
-	separator_code(Code) :-
-		separator_code(_, Code).
-
-	% the order of this predicate facts define the
-	% priorities of the separators at guessing
+	% the order of these predicate facts defines
+	% the priority of the separators at guessing
 	separator_code(tab, 0'\t).
 	separator_code(comma, 0',).
 	separator_code(semicolon, 0';).
