@@ -23,9 +23,9 @@
 	implements(statisticsp)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:7:1,
 		author is 'Paulo Moura',
-		date is 2022-06-20,
+		date is 2023-05-29,
 		comment is 'Statistical calculations over a list of numbers.'
 	]).
 
@@ -58,7 +58,7 @@
 	]).
 
 	:- uses(list, [
-		msort/2, sort/4, nth1/3
+		nth1/3
 	]).
 
 	:- uses(numberlist, [

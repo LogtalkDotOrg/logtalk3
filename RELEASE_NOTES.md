@@ -118,7 +118,7 @@ deprecated.
 * UPDATED: The `os` library for LVM to use the new `date_time/7` built-in
 predicate when available.
 
-* FIXED: Delete dead code in the the `csv` library.
+* FIXED: Delete dead code in the the `csv` and `statistics` libraries.
 
 Tools
 -----
@@ -139,6 +139,8 @@ listing orphaned packs.
 
 * FIXED: Bug in the validation code for the `lgtdoc` tool predicate
 `entity_xsl_file` and `index_xsl_file` options.
+
+* FIXED: Delete dead code in the the `diagrams` tool.
 
 Examples
 --------
