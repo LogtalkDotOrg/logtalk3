@@ -22,7 +22,8 @@ Given the possibility of false positives, care must be taken before
 deleting reported dead code to ensure that it's, in fact, code that is
 not used. A common cause of false positives is the use of conditional
 compilation directives to provide implementations for predicates missing
-in some systems.
+in some systems or different predicate implementations per
+operating-system.
 
 The ``dead_code_scanner.lgt`` source file implements the scanning
 predicates for finding dead code in entities, libraries, and

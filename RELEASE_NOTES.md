@@ -71,6 +71,8 @@ Prolog module predicates when the backend system actually support modules.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The Trealla Prolog adapter file to require version 2.17.10 or later.
+
 * FIXED: The Quintus Prolog adapter file definition for the `subsumes_term/2`
 standard predicate.
 

@@ -157,7 +157,8 @@ in <code class="docutils literal notranslate"><span class="pre">alias/2</span></
 deleting reported dead code to ensure that it’s, in fact, code that is
 not used. A common cause of false positives is the use of conditional
 compilation directives to provide implementations for predicates missing
-in some systems.</p>
+in some systems or different predicate implementations per
+operating-system.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">dead_code_scanner.lgt</span></code> source file implements the scanning
 predicates for finding dead code in entities, libraries, and
 directories. The source file <code class="docutils literal notranslate"><span class="pre">dead_code_scanner_messages.lgt</span></code> defines
