@@ -1066,6 +1066,32 @@ the text `[flaky]` when reporting failed tests. Moreover, the `logtalk_tester`
 automation script will ignore failed flaky tests when setting its exit status.
 
 
+Debugging messages in tests
+---------------------------
+
+Sometimes is useful to write debugging or logging messages from tests when
+running them manually. But those messages are better suppressed when running
+the tests automated. A common solution is to use _meta-messages_ (see the
+corresponding section in the Handbook). For example:
+
+	:- uses(logtalk, [
+		print_message(debug, my_app, Message) as dbg(Message)
+	]).
+
+	test(some_test_id, ...) :-
+		...,
+		dbg('Some intermediate value'-Value),
+		...,
+		dbg([Stream]>>custom_print_goal(Stream, ...)),
+		...
+
+The messages are only printed (and the user-defined printing goals are only
+called) when the `debug` flag is turned on. Note that this doesn't require
+compiling the tests in debug mode: you simply toggle the flag to toggle the
+debug messages. Also note that the `print_message/3` goals are suppressed
+by compiler when compiling with the `optimize` flag turned on.
+
+
 Debugging failed tests
 ----------------------
 

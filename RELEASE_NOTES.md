@@ -25,7 +25,11 @@ RELEASE NOTES
 3.67.0 - June ??, 2023
 =====================
 
+Documentation
+-------------
 
+* ADDED: Section on writing debugging/logging messages from tests to the
+`lgtunit` tool documentation.
 
 
 3.66.0 - May 30, 2023

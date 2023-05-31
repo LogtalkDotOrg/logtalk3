@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#test-annotations">Test annotations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#working-with-test-data-files">Working with test data files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#flaky-tests">Flaky tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-messages-in-tests">Debugging messages in tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#automating-running-tests">Automating running tests</a></li>
@@ -1238,6 +1239,32 @@ If the <code class="docutils literal notranslate"><span class="pre">note/1</span
 the testing automation support outputs the text <code class="docutils literal notranslate"><span class="pre">[flaky]</span></code> when
 reporting failed tests. Moreover, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation
 script will ignore failed flaky tests when setting its exit status.</p>
+</section>
+<section id="debugging-messages-in-tests">
+<h2>Debugging messages in tests<a class="headerlink" href="#debugging-messages-in-tests" title="Permalink to this heading"></a></h2>
+<p>Sometimes is useful to write debugging or logging messages from tests
+when running them manually. But those messages are better suppressed
+when running the tests automated. A common solution is to use
+<em>meta-messages</em> (see the corresponding section in the Handbook). For
+example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(logtalk, [
+    print_message(debug, my_app, <span class="nv">Message</span>) <span class="o">as</span> dbg(<span class="nv">Message</span>)
+]).
+
+test(some_test_id, ...) <span class="o">:-</span>
+    ...,
+    dbg(<span class="s">&#39;Some intermediate value&#39;</span><span class="o">-</span><span class="nv">Value</span>),
+    ...,
+    dbg([<span class="nv">Stream</span>]<span class="o">&gt;&gt;</span>custom_print_goal(<span class="nv">Stream</span>, ...)),
+    ...
+</pre></div>
+</div>
+<p>The messages are only printed (and the user-defined printing goals are
+only called) when the <code class="docutils literal notranslate"><span class="pre">debug</span></code> flag is turned on. Note that this
+doesn’t require compiling the tests in debug mode: you simply toggle the
+flag to toggle the debug messages. Also note that the
+<code class="docutils literal notranslate"><span class="pre">print_message/3</span></code> goals are suppressed by compiler when compiling with
+the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag turned on.</p>
 </section>
 <section id="debugging-failed-tests">
 <h2>Debugging failed tests<a class="headerlink" href="#debugging-failed-tests" title="Permalink to this heading"></a></h2>
