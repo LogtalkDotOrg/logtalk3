@@ -31,6 +31,12 @@ Documentation
 * ADDED: Section on writing debugging/logging messages from tests to the
 `lgtunit` tool documentation.
 
+Tools
+-----
+
+* UPDATED: The `help` tool to support other operating-systems, notably BSD,
+that also provide the `xdg-open` command.
+
 
 3.66.0 - May 30, 2023
 =====================

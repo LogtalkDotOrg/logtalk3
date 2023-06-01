@@ -139,8 +139,8 @@
   <section id="help">
 <span id="library-help"></span><h1><code class="docutils literal notranslate"><span class="pre">help</span></code><a class="headerlink" href="#help" title="Permalink to this heading"></a></h1>
 <p>This tool provides basic on-line help for Logtalk features and libraries
-when running in a limited set of operating-systems. For help on the
-Logtalk compiler error and warning messages, see the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool.</p>
+when running in most operating-systems. For help on the Logtalk compiler
+error and warning messages, see the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
@@ -179,10 +179,10 @@ abstraction.</p>
 <p>On POSIX systems, when using Ciao Prolog, ECLiPSe, GNU Prolog (1.5.1 or
 later version), LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB
 as the backend, <code class="docutils literal notranslate"><span class="pre">apis/1</span></code> and <code class="docutils literal notranslate"><span class="pre">handbook/0-1</span></code> predicates are made
-available. These predicates open inline, respectively, the Texinfo
-versions of the Handbook and the APIs documentation. The optional
-argument is a topic to search, which can be an atom, a predicate
-indicator, or a non-terminal indicator. Some examples:</p>
+available. These predicates open inline at the top-level interpreter the
+Texinfo versions of the Handbook and the APIs documentation. The
+optional argument is a topic to search, which can be an atom, a
+predicate indicator, or a non-terminal indicator. Some examples:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> help<span class="o">::</span>handbook.
 
 | <span class="o">?-</span> help<span class="o">::</span>handbook(base64).

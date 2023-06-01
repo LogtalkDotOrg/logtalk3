@@ -22,8 +22,8 @@ ________________________________________________________________________
 ======
 
 This tool provides basic on-line help for Logtalk features and libraries
-when running in a limited set of operating-systems. For help on the
-Logtalk compiler error and warning messages, see the `tutor` tool.
+when running in most operating-systems. For help on the Logtalk compiler
+error and warning messages, see the `tutor` tool.
 
 
 API documentation
@@ -71,10 +71,10 @@ Experimental features
 On POSIX systems, when using Ciao Prolog, ECLiPSe, GNU Prolog (1.5.1 or later
 version), LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the
 backend, `apis/1` and `handbook/0-1` predicates are made available. These
-predicates open inline, respectively, the Texinfo versions of the Handbook
-and the APIs documentation. The optional argument is a topic to search, which
-can be an atom, a predicate indicator, or a non-terminal indicator. Some
-examples:
+predicates open inline at the top-level interpreter the Texinfo versions of
+the Handbook and the APIs documentation. The optional argument is a topic
+to search, which can be an atom, a predicate indicator, or a non-terminal
+indicator. Some examples:
 
 	| ?- help::handbook.
 

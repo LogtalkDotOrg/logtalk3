@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:33:0,
 		author is 'Paulo Moura',
-		date is 2023-04-27,
+		date is 2023-06-01,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -525,8 +525,8 @@
 			% assume we're running on macOS
 			atomic_list_concat(['open "file://$LOGTALKHOME', Path, File, '" > /dev/null 2>&1'], Command),
 			os::shell(Command)
-		;	os::shell('uname -s | grep Linux 1> /dev/null') ->
-			% assume we're running on Linux
+		;	os::shell('command -v xdg-open > /dev/null 2>&1') ->
+			% assume we're running on Linux or BSD
 			atomic_list_concat(['xdg-open "file://$LOGTALKHOME', Path, File, '" > /dev/null 2>&1'], Command),
 			os::shell(Command)
 		;	% we couldn't find which operating-system are we running on
