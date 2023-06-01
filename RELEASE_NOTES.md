@@ -25,6 +25,11 @@ RELEASE NOTES
 3.67.0 - June ??, 2023
 =====================
 
+Prolog adapter and integration files
+------------------------------------
+
+* ADDED: macOS `.command` files for JIProlog and Scryer Prolog.
+
 Documentation
 -------------
 
