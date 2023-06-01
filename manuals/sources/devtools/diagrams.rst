@@ -629,7 +629,7 @@ be generated using the goal:
 
 ::
 
-   | ?- GitHub  = 'https://github.com/LogtalkDotOrg/logtalk3/commit/...',
+   | ?- GitHub  = 'https://github.com/LogtalkDotOrg/logtalk3/commit/eb156d46e135ac47ef23adcc5d20d49dd8b66abb',
         APIDocs = 'https://logtalk.org/library/',
         logtalk_load(diagrams(loader)),
         set_logtalk_flag(source_data, on),
@@ -651,9 +651,13 @@ the ``LOGTALKUSER`` environment variable). As we also don't want any
 local operating-system paths to be exposed in the diagram, we use the
 ``omit_path_prefixes/1`` option to suppress those path prefixes, Note
 that all the paths and URLs must end with a slash for proper handling.
+The ``git`` library may be useful to retrieve the commit SHA1 from a
+local repo directory.
 
 See the ``SCRIPT.txt`` file in the tool directory for additional
-examples.
+examples. To avoid retyping such complex goals when updating diagrams,
+use the ``doclet`` tool to save and reapply them easily (e.g. by using
+the ``make`` tool with the ``documentation`` target).
 
 Creating diagrams for Prolog module applications
 ------------------------------------------------

@@ -1244,9 +1244,8 @@ script will ignore failed flaky tests when setting its exit status.</p>
 <h2>Debugging messages in tests<a class="headerlink" href="#debugging-messages-in-tests" title="Permalink to this heading"></a></h2>
 <p>Sometimes is useful to write debugging or logging messages from tests
 when running them manually. But those messages are better suppressed
-when running the tests automated. A common solution is to use
-<em>meta-messages</em> (see the corresponding section in the Handbook). For
-example:</p>
+when running the tests automated. A common solution is to use debug
+<em>meta-messages</em>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(logtalk, [
     print_message(debug, my_app, <span class="nv">Message</span>) <span class="o">as</span> dbg(<span class="nv">Message</span>)
 ]).

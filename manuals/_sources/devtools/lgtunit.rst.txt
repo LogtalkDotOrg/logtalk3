@@ -1217,9 +1217,8 @@ Debugging messages in tests
 
 Sometimes is useful to write debugging or logging messages from tests
 when running them manually. But those messages are better suppressed
-when running the tests automated. A common solution is to use
-*meta-messages* (see the corresponding section in the Handbook). For
-example:
+when running the tests automated. A common solution is to use debug
+*meta-messages*. For example:
 
 ::
 

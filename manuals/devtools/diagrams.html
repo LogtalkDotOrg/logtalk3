@@ -904,7 +904,7 @@ entity and predicate file line information in the URLs remain valid if
 the code changes in later commits. Assuming a <code class="docutils literal notranslate"><span class="pre">GitHub</span></code> variable bound
 to the SHA1 commit URL we want to reference, an inheritance diagram can
 be generated using the goal:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">GitHub</span>  <span class="o">=</span> <span class="s">&#39;https://github.com/LogtalkDotOrg/logtalk3/commit/...&#39;</span>,
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">GitHub</span>  <span class="o">=</span> <span class="s">&#39;https://github.com/LogtalkDotOrg/logtalk3/commit/eb156d46e135ac47ef23adcc5d20d49dd8b66abb&#39;</span>,
      <span class="nv">APIDocs</span> <span class="o">=</span> <span class="s">&#39;https://logtalk.org/library/&#39;</span>,
      <span class="k">logtalk_load</span>(diagrams(loader)),
      <span class="k">set_logtalk_flag</span>(source_data, on),
@@ -926,9 +926,13 @@ variable) or from the Logtalk user directory (whose location is given by
 the <code class="docutils literal notranslate"><span class="pre">LOGTALKUSER</span></code> environment variable). As we also don’t want any
 local operating-system paths to be exposed in the diagram, we use the
 <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code> option to suppress those path prefixes, Note
-that all the paths and URLs must end with a slash for proper handling.</p>
+that all the paths and URLs must end with a slash for proper handling.
+The <code class="docutils literal notranslate"><span class="pre">git</span></code> library may be useful to retrieve the commit SHA1 from a
+local repo directory.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory for additional
-examples.</p>
+examples. To avoid retyping such complex goals when updating diagrams,
+use the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> tool to save and reapply them easily (e.g. by using
+the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool with the <code class="docutils literal notranslate"><span class="pre">documentation</span></code> target).</p>
 </section>
 <section id="creating-diagrams-for-prolog-module-applications">
 <h2>Creating diagrams for Prolog module applications<a class="headerlink" href="#creating-diagrams-for-prolog-module-applications" title="Permalink to this heading"></a></h2>

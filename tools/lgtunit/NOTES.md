@@ -1071,8 +1071,8 @@ Debugging messages in tests
 
 Sometimes is useful to write debugging or logging messages from tests when
 running them manually. But those messages are better suppressed when running
-the tests automated. A common solution is to use _meta-messages_ (see the
-corresponding section in the Handbook). For example:
+the tests automated. A common solution is to use debug _meta-messages_. For
+example:
 
 	:- uses(logtalk, [
 		print_message(debug, my_app, Message) as dbg(Message)
