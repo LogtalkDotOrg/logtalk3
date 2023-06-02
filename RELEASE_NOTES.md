@@ -45,7 +45,8 @@ that also provide the `xdg-open` command.
 Tests
 -----
 
-* ADDED: Additional test for the Prolog standard `catch/3` control construct.
+* ADDED: Additional tests for the Prolog standard `call/1` and `catch/3`
+control constructs.
 
 * ADDED: Additional tests for the Prolog `setup_call_cleanup/3` predicate.
 

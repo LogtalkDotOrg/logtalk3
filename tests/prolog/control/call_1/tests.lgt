@@ -28,6 +28,8 @@ b(X) :-
 a(1).
 a(2).
 
+one(1).
+
 
 % calls to declared predicates with no clauses must fail
 
@@ -42,9 +44,9 @@ a(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2023-03-08,
+		date is 2023-05-02,
 		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
 	]).
 
@@ -123,5 +125,13 @@ a(2).
 
 	test(lgt_call_1_19, errors([existence_error(procedure,foobar/1), existence_error(procedure,':'(user,foobar/1))])) :-
 		{call(foobar(_))}.
+
+	test(lgt_call_1_20, deterministic) :-
+		goal(Goal),
+		{call(Goal)}.
+
+	% auxiliary predicates
+
+	goal(one(_)).
 
 :- end_object.
