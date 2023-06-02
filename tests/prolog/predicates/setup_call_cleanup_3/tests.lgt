@@ -23,6 +23,8 @@
 
 :- dynamic(v/1).
 
+det(1).
+
 ndet(a).
 ndet(b).
 ndet(_) :- 1 =:= 0.
@@ -44,9 +46,9 @@ test_error_choice :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:1,
+		version is 1:6:0,
 		author is 'Jan Wielemaker and Paulo Moura and WG17.',
-		date is 2023-03-23,
+		date is 2023-06-02,
 		comment is 'Unit tests for the setup_call_cleanup/3 built-in predicate that is becoming a de facto standard.',
 		source is 'Several tests adapted with permission from the SWI-Prolog distribution. Some tests adapted from the WG17 standardization proposal.'
 	]).
@@ -154,22 +156,28 @@ test_error_choice :-
 			setup_call_cleanup(true, true, foobar(_))
 		}.
 
+	test(lgt_setup_call_cleanup_3_25, true(Deterministic == true)) :-
+		{setup_call_cleanup(true, det(_), Deterministic = true)}.
+
+	test(lgt_setup_call_cleanup_3_26, true(var(Deterministic))) :-
+		{setup_call_cleanup(true, ndet(_), Deterministic = true)}.
+
 	% tests from WG17 standardization proposal
 	% https://www.complang.tuwien.ac.at/ulrich/iso-prolog/N215
 
-	test(wg17_setup_call_cleanup_3_25, error(instantiation_error)) :-
+	test(wg17_setup_call_cleanup_3_27, error(instantiation_error)) :-
 		{setup_call_cleanup(true, throw(unthrown), _)}.
 
-	test(wg17_setup_call_cleanup_3_26, true) :-
+	test(wg17_setup_call_cleanup_3_28, true) :-
 		{setup_call_cleanup(true, true, (true; throw(x)))}.
 
-	test(wg17_setup_call_cleanup_3_27, true(X == 1)) :-
+	test(wg17_setup_call_cleanup_3_29, true(X == 1)) :-
 		{setup_call_cleanup(true, X = 1, X = 2)}.
 
-	test(wg17_setup_call_cleanup_3_28, error(instantiation_error)) :-
+	test(wg17_setup_call_cleanup_3_30, error(instantiation_error)) :-
 		{setup_call_cleanup(true, X = true, X)}.
 
-	test(wg17_setup_call_cleanup_3_29, true(L == [1-3])) :-
+	test(wg17_setup_call_cleanup_3_31, true(L == [1-3])) :-
 		findall(S-G, {setup_call_cleanup((S = 1; S = 2), G = 3, _C = 4)}, L).
 
 	cleanup :-
