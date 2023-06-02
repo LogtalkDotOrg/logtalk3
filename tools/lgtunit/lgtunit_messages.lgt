@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 8:0:0,
+		version is 8:1:0,
 		author is 'Paulo Moura',
-		date is 2023-04-26,
+		date is 2023-06-02,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -101,6 +101,9 @@
 			['tests skipped @ ~q'-[Object], nl]
 		;	['tests skipped @ ~q (~w)'-[Object, Note], nl]
 		).
+
+	message_tokens(tests_run_differ_from_tests_total(Run, Total)) -->
+		['Number ot tests run is ~d but the total number of tests is ~d!'-[Run, Total], nl].
 
 	% messages for test results
 

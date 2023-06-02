@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:0:0,
+		version is 16:1:0,
 		author is 'Paulo Moura',
-		date is 2023-04-26,
+		date is 2023-06-02,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1011,7 +1011,19 @@
 		).
 
 	run_tests(File) :-
-		forall(::test(_, Spec), run_test(Spec, File)).
+		forall(::test(_, Spec), run_test(Spec, File)),
+		% sanity check: a number of tests run different from the total number
+		% of defined tests usually implies bugs in the implementation of basic
+		% Prolog control constructs by the used backend system
+		::number_of_tests(Total),
+		::passed_(Passed),
+		::failed_(Failed),
+		::skipped_(Skipped),
+		Run is Passed + Failed + Skipped,
+		(	Run =\= Total ->
+			print_message(warning, lgtunit, tests_run_differ_from_tests_total(Run, Total))
+		;	true
+		).
 
 	:- meta_predicate(run_test((::), (*), (*))).
 

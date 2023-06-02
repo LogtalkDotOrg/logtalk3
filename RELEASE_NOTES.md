@@ -39,6 +39,11 @@ Documentation
 Tools
 -----
 
+* ADDED: The `lgtunit` tool now detects and reports discrepancies between the
+number of tests run and the total number of tests defined in a test set. This
+usually implies bugs in the implementation of basic Prolog control constructs
+by the used backend system.
+
 * UPDATED: The `help` tool to support other operating-systems, notably BSD,
 that also provide the `xdg-open` command.
 
