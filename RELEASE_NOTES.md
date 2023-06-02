@@ -42,6 +42,11 @@ Tools
 * UPDATED: The `help` tool to support other operating-systems, notably BSD,
 that also provide the `xdg-open` command.
 
+Tests
+-----
+
+* ADDED: Additional test for the Prolog standard `catch/3` control construct.
+
 
 3.66.0 - May 30, 2023
 =====================

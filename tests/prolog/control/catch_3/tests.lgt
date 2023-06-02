@@ -45,14 +45,16 @@ q :-
 	catch((true; throw(err)), E, write(E)),
 	fail.
 
+r(1).
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2023-01-15,
+		date is 2023-06-02,
 		comment is 'Unit tests for the ISO Prolog standard catch/3 control construct.'
 	]).
 
@@ -111,6 +113,9 @@ q :-
 		^^set_text_output(''),
 		ignore({q}),
 		^^text_output_assertion('err', Assertion).
+
+	test(lgt_catch_3_14, deterministic) :-
+		{catch(r(_), _, fail)}.
 
 	cleanup :-
 		^^clean_text_output.
