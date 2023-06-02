@@ -19,6 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+one(1).
+
 % database for tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.15.4.4
 
 call_n_maplist(_Cont, []).
@@ -31,9 +33,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:1,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2023-03-23,
+		date is 2023-06-02,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -140,9 +142,13 @@ call_n_maplist(Cont, [E|Es]) :-
 			call(foobar, _)
 		}.
 
+	test(lgt_call_N_24, deterministic) :-
+		goal(Closure, Argument),
+		{call(Closure, Argument)}.
+
 	% tests from the ECLiPSe test suite
 
-	test(eclipse_call_N_24, errors([
+	test(eclipse_call_N_25, errors([
 			type_error(callable,(fail,3)), type_error(callable,3),
 			type_error(callable,(':'(user,fail),':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
@@ -151,7 +157,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		three(Three),
 		{call(',', fail, Three)}.
 
-	test(eclipse_call_N_25, errors([
+	test(eclipse_call_N_26, errors([
 			type_error(callable,(!;3)), type_error(callable,3),
 			type_error(callable,(':'(user,!);':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
@@ -160,7 +166,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		three(Three),
 		{call(';', !, Three)}.
 
-	test(eclipse_call_N_26, errors([
+	test(eclipse_call_N_27, errors([
 			type_error(callable,(fail->3)), type_error(callable,3),
 			type_error(callable,(':'(user,fail)->':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
@@ -169,10 +175,10 @@ call_n_maplist(Cont, [E|Es]) :-
 		three(Three),
 		{call('->', fail, Three)}.
 
-	test(eclipse_call_N_27, true(L == [1, 2])) :-
+	test(eclipse_call_N_28, true(L == [1, 2])) :-
 		findall(X, {call(',', C=!, (X=1,C;X=2))}, L).
 
-	test(eclipse_call_N_28, errors([
+	test(eclipse_call_N_29, errors([
 			type_error(callable,(fail,3)), type_error(callable,3),
 			type_error(callable,(':'(user,fail),':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
@@ -181,7 +187,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		three(Three),
 		{call(','(fail), Three)}.
 
-	test(eclipse_call_N_29, errors([
+	test(eclipse_call_N_30, errors([
 			type_error(callable,(!;3)), type_error(callable,3),
 			type_error(callable,(':'(user,!);':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
@@ -190,7 +196,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		three(Three),
 		{call(';'(!), Three)}.
 
-	test(eclipse_call_N_30, errors([
+	test(eclipse_call_N_31, errors([
 			type_error(callable,(fail->3)), type_error(callable,3),
 			type_error(callable,(':'(user,fail)->':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
@@ -199,7 +205,7 @@ call_n_maplist(Cont, [E|Es]) :-
 		three(Three),
 		{call('->'(fail), Three)}.
 
-	test(eclipse_call_N_31, true(L == [1, 2])) :-
+	test(eclipse_call_N_32, true(L == [1, 2])) :-
 		findall(X, {call(','(C=!), (X=1,C;X=2))}, L).
 
 	% auxiliary predicates used to delay errors to runtime
@@ -207,5 +213,7 @@ call_n_maplist(Cont, [E|Es]) :-
 	three(3).
 
 	variable(_).
+
+	goal(one, _).
 
 :- end_object.

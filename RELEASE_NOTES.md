@@ -48,7 +48,8 @@ Tests
 * ADDED: Additional tests for the Prolog standard `call/1` and `catch/3`
 control constructs.
 
-* ADDED: Additional tests for the Prolog `setup_call_cleanup/3` predicate.
+* ADDED: Additional tests for the Prolog `call/2-N` and `setup_call_cleanup/3`
+predicates.
 
 
 3.66.0 - May 30, 2023

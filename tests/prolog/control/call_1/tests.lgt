@@ -46,7 +46,7 @@ one(1).
 	:- info([
 		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2023-05-02,
+		date is 2023-06-02,
 		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
 	]).
 
