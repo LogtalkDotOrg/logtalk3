@@ -25,6 +25,13 @@ RELEASE NOTES
 3.67.0 - June ??, 2023
 =====================
 
+
+Logtalk compiler and runtime
+----------------------------
+
+* UPDATED: The compiler to also handle the `lsb/1` and `msb/1` integer
+functions when lint checking `(is)/2` goals.
+
 Prolog adapter and integration files
 ------------------------------------
 

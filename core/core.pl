@@ -15840,28 +15840,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Term is Exp, _, _, _, _) :-
 	nonvar(Term),
-	\+ number(Term),
-	% the standard allows any term in the left side
-	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(always_true_or_false_goals), goal_is_always_false(File, Lines, Type, Entity, Term is Exp)),
-	fail.
-
-'$lgt_compile_body'(Term is Exp, _, _, _, _) :-
-	integer(Term),
-	'$lgt_float_expression'(Exp),
-	% integers and floats do not unify (per standard)
-	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(warning(always_true_or_false_goals), goal_is_always_false(File, Lines, Type, Entity, Term is Exp)),
-	fail.
-
-'$lgt_compile_body'(Term is Exp, _, _, _, _) :-
-	float(Term),
-	'$lgt_integer_expression'(Exp),
-	% integers and floats do not unify (per standard)
+	once((
+		integer(Term),
+		'$lgt_float_expression'(Exp)
+		% integers and floats do not unify (per standard)
+	;	float(Term),
+		'$lgt_integer_expression'(Exp)
+		% integers and floats do not unify (per standard)
+	;	\+ number(Term)
+		% the standard allows any term in the left side
+	)),
 	'$lgt_compiler_flag'(always_true_or_false_goals, warning),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -25536,6 +25524,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_integer_expression'(_ \/ _).
 '$lgt_integer_expression'(xor(_, _)).
 '$lgt_integer_expression'(\ _).
+'$lgt_integer_expression'(lsb(_)).
+'$lgt_integer_expression'(msb(_)).
 '$lgt_integer_expression'(popcount(_)).
 
 
