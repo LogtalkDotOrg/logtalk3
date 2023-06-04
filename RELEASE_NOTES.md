@@ -57,7 +57,8 @@ that also provide the `xdg-open` command.
 Examples
 --------
 
-* UPDATED: The `metainterpreters` example tests to use explicit assertions.
+* UPDATED: The `inlining` and `metainterpreters` example tests to use explicit
+assertions.
 
 Tests
 -----

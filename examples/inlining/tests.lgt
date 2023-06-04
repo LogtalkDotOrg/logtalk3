@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2019-01-05,
+		date is 2023-04-04,
 		comment is 'Unit tests for the "inlining" example.'
 	]).
 
@@ -35,88 +35,87 @@
 
 	% test "inline" predicate property
 
-	test(inlining_01) :-
+	test(inlining_01, true) :-
 		inlining::predicate_property(integer(_), inline).
 
-	test(inlining_02) :-
+	test(inlining_02, true) :-
 		findall(
 			Property,
 			inlining::predicate_property(integer(_), Property),
 			Properties
 		),
-		ground(Properties),
-		memberchk(inline, Properties).
+		^^assertion(ground(Properties)),
+		^^assertion(memberchk(inline, Properties)).
 
-	test(inlining_03) :-
+	test(inlining_03, true) :-
 		inlining::predicate_property(map(_,_), inline).
 
-	test(inlining_04) :-
+	test(inlining_04, true) :-
 		findall(
 			Property,
 			inlining::predicate_property(map(_,_), Property),
 			Properties
 		),
-		ground(Properties),
-		memberchk(inline, Properties).
+		^^assertion(ground(Properties)),
+		^^assertion(memberchk(inline, Properties)).
 
-	test(inlining_05) :-
+	test(inlining_05, true) :-
 		inlining::predicate_property(a(_,_), inline).
 
-	test(inlining_06) :-
+	test(inlining_06, true) :-
 		findall(
 			Property,
 			inlining::predicate_property(a(_,_), Property),
 			Properties
 		),
-		ground(Properties),
-		memberchk(inline, Properties).
+		^^assertion(ground(Properties)),
+		^^assertion(memberchk(inline, Properties)).
 
-	test(inlining_07) :-
-		\+ inlining::predicate_property(any(_,_), inline).
+	test(inlining_07, false) :-
+		inlining::predicate_property(any(_,_), inline).
 
-	test(inlining_08) :-
+	test(inlining_08, true) :-
 		findall(
 			Property,
 			inlining::predicate_property(any(_,_), Property),
 			Properties
 		),
-		ground(Properties),
-		\+ member(inline, Properties).
+		^^assertion(ground(Properties)),
+		^^assertion(\+ member(inline, Properties)).
 
 	% test "inline" predicate definition property
 
-	test(inlining_09) :-
+	test(inlining_09, true) :-
 		object_property(inlining, defines(integer/1, Properties)),
-		ground(Properties),
-		memberchk(inline, Properties).
+		^^assertion(ground(Properties)),
+		^^assertion(memberchk(inline, Properties)).
 
-	test(inlining_10) :-
+	test(inlining_10, true) :-
 		object_property(inlining, defines(map/2, Properties)),
-		ground(Properties),
-		memberchk(inline, Properties).
+		^^assertion(ground(Properties)),
+		^^assertion(memberchk(inline, Properties)).
 
-	test(inlining_11) :-
+	test(inlining_11, true) :-
 		object_property(inlining, defines(a/2, Properties)),
-		ground(Properties),
-		memberchk(inline, Properties).
+		^^assertion(ground(Properties)),
+		^^assertion(memberchk(inline, Properties)).
 
-	test(inlining_12) :-
+	test(inlining_12, true) :-
 		object_property(inlining, defines(any/2, Properties)),
-		ground(Properties),
-		\+ member(inline, Properties).
+		^^assertion(ground(Properties)),
+		^^assertion(\+ member(inline, Properties)).
 
 	:- if(current_logtalk_flag(modules, supported)).
 
 		:- if(current_module(lists)).
 
-			test(inlining_13) :-
-				findall(X, inlining::member(X, [1,2,3]), L),
-				L == [1,2,3].
+			test(inlining_13, true(L == [1,2,3])) :-
+				findall(X, inlining::member(X, [1,2,3]), L).
 
-			test(inlining_14) :-
+			test(inlining_14, true) :-
 				object_property(inlining, defines(member/2, Properties)),
-				ground(Properties),
-				memberchk(inline, Properties).
+				^^assertion(ground(Properties)),
+				^^assertion(memberchk(inline, Properties)).
 
 		:- endif.
 
