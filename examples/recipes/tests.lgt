@@ -23,42 +23,35 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2019-12-04,
+		date is 2023-06-04,
 		comment is 'Unit tests for the "recipes" example.'
 	]).
 
-	test(recipes_01) :-
-		green_soup::ingredients(Ingredients),
-		Ingredients == [peas,cream,water,oil].
+	test(recipes_01, true(Ingredients == [peas,cream,water,oil])) :-
+		green_soup::ingredients(Ingredients).
 
-	test(recipes_02) :-
-		mashed_peas::steps(Steps),
-		Steps == [1-'Boil the peas.',2-'Mash the peas',3-'Add salt and mix.'].
+	test(recipes_02, true(Steps == [1-'Boil the peas.',2-'Mash the peas',3-'Add salt and mix.'])) :-
+		mashed_peas::steps(Steps).
 
-	test(recipes_03) :-
-		setof(Recipe, ({recipe(Recipe)}, Recipe::ingredient(peas)), Recipes),
-		Recipes == [green_soup,mashed_peas].
+	test(recipes_03, true(Recipes == [green_soup,mashed_peas])) :-
+		setof(Recipe, ({recipe(Recipe)}, Recipe::ingredient(peas)), Recipes).
 
-	test(recipes_04) :-
-		green_soup::level(Level),
-		Level == hard.
+	test(recipes_04, true(Level == hard)) :-
+		green_soup::level(Level).
 
-	test(recipes_05) :-
-		mashed_peas::level(Level),
-		Level == easy.
+	test(recipes_05, true(Level == easy)) :-
+		mashed_peas::level(Level).
 
-	test(recipes_06) :-
-		{recipe(_,_,_)}::level(Level),
-		Level == easy.
+	test(recipes_06, true(Level == easy)) :-
+		{recipe(_,_,_)}::level(Level).
 
-	test(recipes_07) :-
+	test(recipes_07, true(Name == 'Berries and cream')) :-
 		{recipe(Recipe)},
 		Recipe::ingredient(chocolate),
 		Recipe::cooking_time(CookingTime),
 		Recipe::name(Name),
-		CookingTime < 35,
-		Name == 'Berries and cream'.
+		CookingTime < 35.
 
 :- end_object.

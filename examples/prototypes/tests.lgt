@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-03,
+		date is 2023-06-04,
 		comment is 'Unit tests for the "prototypes" example.'
 	]).
 
@@ -35,16 +35,17 @@
 
 	test(prototypes_1) :-
 		findall(P, (alf::current_predicate(F/A), functor(P,F,A), alf::P), Solutions),
-		Solutions == [
+		^^assertion(Solutions == [
 			chases('Lucky'),
 			favorite_food(cats),
 			motto('Are you going to finish that sandwich?'),
 			name('Gordon Shumway'),
 			planet('Melmac'),
-			stomachs(8)].
+			stomachs(8)
+		]).
 
 	test(prototypes_2) :-
 		findall(Melmacian, rhonda::boyfriend(Melmacian), Solutions),
-		Solutions == [alf].
+		^^assertion(Solutions == [alf]).
 
 :- end_object.

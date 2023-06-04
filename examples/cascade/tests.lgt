@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2019-12-30,
+		date is 2023-06-04,
 		comment is 'Unit tests for the "cascade" example.'
 	]).
 
@@ -35,17 +35,17 @@
 	test(cascade_01) :-
 		catch(cascade::process_image(image, Final), Error, true),
 		(	var(Error) ->
-			Final == with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image)))))
+			^^assertion(Final == with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))))
 		;	ground(Error),
-			list::memberchk(Error, [missing_cat,bow_tie_failure,eyes_closed,wants_to_grow,sunny_day])
+			^^assertion(list::memberchk(Error, [missing_cat,bow_tie_failure,eyes_closed,wants_to_grow,sunny_day]))
 		).
 
 	test(cascade_dcgs_01) :-
 		catch(cascade_dcgs::process_image(image, Final), Error, true),
 		(	var(Error) ->
-			Final == with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image)))))
+			^^assertion(Final == with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))))
 		;	ground(Error),
-			list::memberchk(Error, [missing_cat,bow_tie_failure,eyes_closed,wants_to_grow,sunny_day])
+			^^assertion(list::memberchk(Error, [missing_cat,bow_tie_failure,eyes_closed,wants_to_grow,sunny_day]))
 		).
 
 :- end_object.

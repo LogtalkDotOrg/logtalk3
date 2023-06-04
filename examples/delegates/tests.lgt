@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2020-01-06,
+		date is 2023-06-04,
 		comment is 'Unit tests for the "delegates" example.'
 	]).
 
@@ -36,29 +36,24 @@
 	cover(an_object).
 
 	% without a delegate:
-	test(delegates_1) :-
-		a_delegator::operation(String),
-		String == 'default implementation'.
+	test(delegates_1, true(String == 'default implementation')) :-
+		a_delegator::operation(String).
 
 	% with a delegate that does not implement thing/1:
-	test(delegates_2) :-
+	test(delegates_2, true(String == 'default implementation')) :-
 		a_delegator::set_delegate(an_object),
-		a_delegator::operation(String),
-		String == 'default implementation'.
+		a_delegator::operation(String).
 
 	% with a delegate that implements thing/1:
-	test(delegates_3) :-
+	test(delegates_3, true(String == 'delegate implementation')) :-
 		a_delegator::set_delegate(a_delegate),
-		a_delegator::operation(String),
-		String == 'delegate implementation'.
+		a_delegator::operation(String).
 
 	% same tests but using the parametric object implementation:
-	test(delegates_4) :-
-		a_delegator(an_object)::operation(String),
-		String == 'default implementation'.
+	test(delegates_4, true(String == 'default implementation')) :-
+		a_delegator(an_object)::operation(String).
 
-	test(delegates_5) :-
-		a_delegator(a_delegate)::operation(String),
-		String == 'delegate implementation'.
+	test(delegates_5, true(String == 'delegate implementation')) :-
+		a_delegator(a_delegate)::operation(String).
 
 :- end_object.

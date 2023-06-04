@@ -23,35 +23,34 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020-12-12,
+		date is 2023-06-04,
 		comment is 'Unit tests for the "assign_parameters" example.'
 	]).
 
 	cover(rectangle(_, _, _)).
 	cover(fsm(_, _, _)).
 
-	test(assignvars_1) :-
+	test(assignvars_1, true) :-
 		rectangle(2, 3, S)::init,
 		rectangle(2, 3, S)::position(X0, Y0),
-		X0 == 0, Y0 == 0,
+		^^assertion(X0-Y0 == 0-0),
 		rectangle(2, 3, S)::move(3, 7),
 		rectangle(2, 3, S)::position(X1, Y1),
-		X1 == 3, Y1 == 7,
+		^^assertion(X1-Y1 == 3-7),
 		rectangle(2, 3, S)::move(2, 5),
 		rectangle(2, 3, S)::position(X2, Y2),
-		X2 == 2, Y2 == 5,
+		^^assertion(X2-Y2 == 2-5),
 		rectangle(2, 3, S)::area(Area),
-		Area == 6.
+		^^assertion(Area == 6).
 
-	test(assignvars_2) :-
+	test(assignvars_2, true(Solutions == [[red-0-red, red-1-green, red-2-red, yellow-0-red, yellow-1-green, yellow-2-red, green-0-yellow, green-1-yellow, green-2-red]-red-[red]])) :-
 		^^suppress_text_output,
-		findall(T-I-F, {fsm(T, I, F)}::recognise([0,1,1,2,1,2,0]), Solutions),
-		Solutions == [[red-0-red, red-1-green, red-2-red, yellow-0-red, yellow-1-green, yellow-2-red, green-0-yellow, green-1-yellow, green-2-red]-red-[red]].
+		findall(T-I-F, {fsm(T, I, F)}::recognise([0,1,1,2,1,2,0]), Solutions).
 
-	test(assignvars_3) :-
+	test(assignvars_3, false) :-
 		^^suppress_text_output,
-		\+ {fsm(_T, _I, _F)}::recognise([0,1,1,2,1,2,1,0]).
+		{fsm(_T, _I, _F)}::recognise([0,1,1,2,1,2,1,0]).
 
 :- end_object.
