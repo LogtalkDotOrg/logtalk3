@@ -54,6 +54,11 @@ by the used backend system.
 * UPDATED: The `help` tool to support other operating-systems, notably BSD,
 that also provide the `xdg-open` command.
 
+Examples
+--------
+
+* UPDATED: The `metainterpreters` example tests to use explicit assertions.
+
 Tests
 -----
 

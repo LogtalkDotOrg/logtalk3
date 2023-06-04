@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2012-07-03,
+		date is 2023-06-04,
 		comment is 'Unit tests for the "metainterpreters" example.'
 	]).
 
@@ -38,28 +38,22 @@
 	cover(engine).
 	cover(rules).
 
-	test(metainterpreters_1) :-
-		findall(X,database::p(X),Solutions),
-		Solutions == [1, 2].
+	test(metainterpreters_1, true(Solutions == [1, 2])) :-
+		findall(X,database::p(X),Solutions).
 
-	test(metainterpreters_2) :-
-		findall(X,database::solve(p(X)),Solutions),
-		Solutions == [1, 2].
+	test(metainterpreters_2, true(Solutions == [1, 2])) :-
+		findall(X,database::solve(p(X)),Solutions).
 
-	test(metainterpreters_3) :-
-		findall(X-Tree,database::proof_tree(p(X), Tree),Solutions),
-		Solutions == [1-(p(1) :- (q(1, a) :- (s(1) :-true), (t(1, a) :-true)), (r(a) :-true)),2-(p(2) :- (q(2, b) :- (s(2) :-true), (t(2, b) :-true)), (r(b) :-true))].
+	test(metainterpreters_3, true(Solutions == [1-(p(1) :- (q(1, a) :- (s(1) :-true), (t(1, a) :-true)), (r(a) :-true)),2-(p(2) :- (q(2, b) :- (s(2) :-true), (t(2, b) :-true)), (r(b) :-true))])) :-
+		findall(X-Tree,database::proof_tree(p(X), Tree),Solutions).
 
-	test(metainterpreters_4) :-
-		findall(Weather, rules::prove(weather(Weather)),Solutions),
-		Solutions == [raining].
+	test(metainterpreters_4, true(Solutions == [raining])) :-
+		findall(Weather, rules::prove(weather(Weather)),Solutions).
 
-	test(metainterpreters_5) :-
-		findall(Where,rules::prove(goto(Where)),Solutions),
-		Solutions == [cinema].
+	test(metainterpreters_5, true(Solutions == [cinema])) :-
+		findall(Where,rules::prove(goto(Where)),Solutions).
 
-	test(metainterpreters_6) :-
-		lists::steps(reverse([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],_), Steps),
-		Steps == 496.
+	test(metainterpreters_6, true(Steps == 496)) :-
+		lists::steps(reverse([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],_), Steps).
 
 :- end_object.
