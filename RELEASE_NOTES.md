@@ -67,6 +67,9 @@ to use explicit assertions.
 Tests
 -----
 
+* ADDED: Tests for the de facto Prolog standard conditional compilation
+directives.
+
 * ADDED: Additional tests for the Prolog standard `call/1` and `catch/3`
 control constructs.
 
