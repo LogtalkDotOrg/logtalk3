@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:6:1,
 		author is 'Paulo Moura',
-		date is 2023-04-26,
+		date is 2023-06-05,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -250,7 +250,7 @@
 
 	test(directory_dependency_diagram_rdirectory_2_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		directory_dependency_diagram::rdirectory(test, LgtunitDirectory, []).
+		directory_dependency_diagram::rdirectory(test, LgtunitDirectory).
 
 	test(directory_dependency_diagram_rdirectory_1_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
@@ -310,7 +310,7 @@
 
 	test(directory_load_diagram_rdirectory_2_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),
-		directory_load_diagram::rdirectory(test, LgtunitDirectory, []).
+		directory_load_diagram::rdirectory(test, LgtunitDirectory).
 
 	test(directory_load_diagram_rdirectory_1_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, LgtunitDirectory),

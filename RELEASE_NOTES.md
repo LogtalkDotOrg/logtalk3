@@ -54,6 +54,9 @@ by the used backend system.
 * UPDATED: The `help` tool to support other operating-systems, notably BSD,
 that also provide the `xdg-open` command.
 
+* FIXED: Tests for the `directory_dependency_diagram::rdirectory/2` and
+`directory_load_diagram::rdirectory/2` library predicates.
+
 Examples
 --------
 
