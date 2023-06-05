@@ -43,6 +43,12 @@ Documentation
 * ADDED: Section on writing debugging/logging messages from tests to the
 `lgtunit` tool documentation.
 
+Library
+-------
+
+* FIXED: The `type` object library type-checking of Unicode character codes to
+exclude non-character code points (i.e. reserved, surrogate, or non-assigned).
+
 Tools
 -----
 

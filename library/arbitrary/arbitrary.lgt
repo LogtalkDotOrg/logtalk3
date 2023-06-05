@@ -1268,6 +1268,7 @@
 
 	arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
 		repeat,
+			% 65534 and 65535 are Cn, Unassigned
 			between(First, 65533, Arbitrary),
 			% not a high or low surrogate code point
 			\+ integer::between(55296, 57343, Arbitrary),
@@ -1284,6 +1285,7 @@
 			\+ integer::between(55296, 57343, Arbitrary),
 			% not a non-character code point
 			\+ integer::between(64976, 65007, Arbitrary),
+			% not Cn, Unassigned
 			Code is Arbitrary /\ 65535,
 			Code =\= 65534,
 			Code =\= 65535,

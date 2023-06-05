@@ -22,9 +22,9 @@
 :- object(type).
 
 	:- info([
-		version is 1:34:0,
+		version is 1:35:0,
 		author is 'Paulo Moura',
-		date is 2022-09-14,
+		date is 2023-06-05,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -1260,9 +1260,22 @@
 	valid_character_code(byte, Code) :-
 		0 =< Code, Code =< 255.
 	valid_character_code(unicode_bmp, Code) :-
-		0 =< Code, Code =< 65535.
+		% 65534 and 65535 are Cn, Unassigned
+		0 =< Code, Code =< 65533,
+		% not a high or low surrogate code point
+		\+ (55296 =< Code, Code =< 57343),
+		% not a non-character code point
+		\+ (64976 =< Code, Code =< 65007).
 	valid_character_code(unicode_full, Code) :-
-		0 =< Code, Code =< 1114111.
+		0 =< Code, Code =< 1114111,
+		% not a high or low surrogate code point
+		\+ (55296 =< Code, Code =< 57343),
+		% not a non-character code point
+		\+ (64976 =< Code, Code =< 65007),
+		% not Cn, Unassigned
+		Value is Code /\ 65535,
+		Value =\= 65534,
+		Value =\= 65535.
 
 	is_partial_list(Var) :-
 		var(Var),
