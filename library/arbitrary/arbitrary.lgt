@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:25:0,
+		version is 2:26:0,
 		author is 'Paulo Moura',
-		date is 2022-09-14,
+		date is 2023-06-05,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -46,7 +46,8 @@
 			'Character sets' - '``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``.',
 			'Default character sets' - 'The default character set when using a parameterizable type that takes a character set parameter depends on the type.',
 			'Default character sets' - 'Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ``ascii_identifier`` functor. Character and character code types default to ``ascii_full``. Other types default to ``ascii_printable``.',
-			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.'
+			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.',
+			'Unicode limitations' - 'Currently, correct character/code generation is only ensured for LVM and SWI-Prolog as other backends do not provide support for querying a Unicode code point category.'
 		],
 		see_also is [type]
 	]).
@@ -1266,34 +1267,55 @@
 		'_'
 	]).
 
-	arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
-		repeat,
-			% 65534 and 65535 are Cn, Unassigned
-			between(First, 65533, Arbitrary),
-			% not a high or low surrogate code point
-			\+ integer::between(55296, 57343, Arbitrary),
-			% not a non-character code point
-			\+ integer::between(64976, 65007, Arbitrary),
-			% not a private use code point
-			\+ integer::between(57344, 63743, Arbitrary),
-		!.
-
-	arbitrary_unicode_full_code_point(First, Arbitrary) :-
-		repeat,
-			between(First, 1048575, Arbitrary),
-			% not a high or low surrogate code point
-			\+ integer::between(55296, 57343, Arbitrary),
-			% not a non-character code point
-			\+ integer::between(64976, 65007, Arbitrary),
-			% not Cn, Unassigned
-			Code is Arbitrary /\ 65535,
-			Code =\= 65534,
-			Code =\= 65535,
-			% not a private use code point
-			\+ integer::between(57344, 63743, Arbitrary),
-			\+ integer::between(983040, 1048573, Arbitrary),
-			% \+ integer::between(Arbitrary, 1048576, 1114109),
-		!.
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == lvm; Dialect == swi))).
+		:- if(current_logtalk_flag(prolog_dialect, swi)).
+			:- use_module(library(unicode), [unicode_property/2]).
+		:- endif.
+		arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
+			repeat,
+				between(First, 65535, Arbitrary),
+				unicode_property(Arbitrary, category(Category)),
+				Category \== 'Cn',
+				Category \== 'Cs',
+				Category \== 'Co',
+			!.
+		arbitrary_unicode_full_code_point(First, Arbitrary) :-
+			repeat,
+				between(First, 1114111, Arbitrary),
+				unicode_property(Arbitrary, category(Category)),
+				Category \== 'Cn',
+				Category \== 'Cs',
+				Category \== 'Co',
+			!.
+	:- else.
+		arbitrary_unicode_bmp_code_point(First, Arbitrary) :-
+			repeat,
+				% 65534 and 65535 are Cn, Unassigned
+				between(First, 65533, Arbitrary),
+				% not a high or low surrogate code point
+				\+ integer::between(55296, 57343, Arbitrary),
+				% not a non-character code point
+				\+ integer::between(64976, 65007, Arbitrary),
+				% not a private use code point
+				\+ integer::between(57344, 63743, Arbitrary),
+			!.
+		arbitrary_unicode_full_code_point(First, Arbitrary) :-
+			repeat,
+				between(First, 1048575, Arbitrary),
+				% not a high or low surrogate code point
+				\+ integer::between(55296, 57343, Arbitrary),
+				% not a non-character code point
+				\+ integer::between(64976, 65007, Arbitrary),
+				% not Cn, Unassigned
+				Code is Arbitrary /\ 65535,
+				Code =\= 65534,
+				Code =\= 65535,
+				% not a private use code point
+				\+ integer::between(57344, 63743, Arbitrary),
+				\+ integer::between(983040, 1048573, Arbitrary),
+				% \+ integer::between(Arbitrary, 1048576, 1114109),
+			!.
+	:- endif.
 
 	map_arbitrary([], _).
 	map_arbitrary([Head| Tail], Type) :-

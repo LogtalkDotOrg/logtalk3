@@ -103,7 +103,7 @@
 		).
 
 	message_tokens(tests_run_differ_from_tests_total(Run, Total)) -->
-		['Number ot tests run is ~d but the total number of tests is ~d!'-[Run, Total], nl].
+		['number of tests run is ~d but the number of defined tests is ~d'-[Run, Total], nl, nl].
 
 	% messages for test results
 

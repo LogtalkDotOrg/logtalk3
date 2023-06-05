@@ -59,7 +59,8 @@
 			'Registering new types' - 'New types can be registered by defining clauses for the ``type/1`` and ``check/2`` multifile predicates. Clauses for both predicates must have a bound first argument to avoid introducing spurious choice-points when type-checking terms.',
 			'Meta-types' - 'Meta-types are types that have one or more sub-type arguments. E.g. ``var_or(Type)``. The sub-types of a meta-type can be enumerated by defining a clause for the ``meta_type/3`` multifile predicate.',
 			'Character sets' - 'When testing character or character code based terms (e.g. atom), it is possible to choose a character set (``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, or ``unicode_full``) using the parameterizable types.',
-			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.'
+			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.',
+			'Unicode limitations' - 'Currently, correct character/code type-checking is only ensured for LVM and SWI-Prolog as other backends do not provide support for querying a Unicode code point category.'
 		],
 		see_also is [arbitrary, os_types, either, maybe]
 	]).
@@ -1259,23 +1260,40 @@
 		)).
 	valid_character_code(byte, Code) :-
 		0 =< Code, Code =< 255.
-	valid_character_code(unicode_bmp, Code) :-
-		% 65534 and 65535 are Cn, Unassigned
-		0 =< Code, Code =< 65533,
-		% not a high or low surrogate code point
-		\+ (55296 =< Code, Code =< 57343),
-		% not a non-character code point
-		\+ (64976 =< Code, Code =< 65007).
-	valid_character_code(unicode_full, Code) :-
-		0 =< Code, Code =< 1114111,
-		% not a high or low surrogate code point
-		\+ (55296 =< Code, Code =< 57343),
-		% not a non-character code point
-		\+ (64976 =< Code, Code =< 65007),
-		% not Cn, Unassigned
-		Value is Code /\ 65535,
-		Value =\= 65534,
-		Value =\= 65535.
+
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == lvm; Dialect == swi))).
+		:- if(current_logtalk_flag(prolog_dialect, swi)).
+			:- use_module(library(unicode), [unicode_property/2]).
+		:- endif.
+		valid_character_code(unicode_bmp, Code) :-
+			0 =< Code, Code =< 65535,
+			unicode_property(Code, category(Category)),
+			Category \== 'Cn',
+			Category \== 'Cs'.
+		valid_character_code(unicode_full, Code) :-
+			0 =< Code, Code =< 1114111,
+			unicode_property(Code, category(Category)),
+			Category \== 'Cn',
+			Category \== 'Cs'.
+	:- else.
+		valid_character_code(unicode_bmp, Code) :-
+			% 65534 and 65535 are Cn, Unassigned
+			0 =< Code, Code =< 65533,
+			% not a high or low surrogate code point
+			\+ (55296 =< Code, Code =< 57343),
+			% not a non-character code point
+			\+ (64976 =< Code, Code =< 65007).
+		valid_character_code(unicode_full, Code) :-
+			0 =< Code, Code =< 1114111,
+			% not a high or low surrogate code point
+			\+ (55296 =< Code, Code =< 57343),
+			% not a non-character code point
+			\+ (64976 =< Code, Code =< 65007),
+			% not Cn, Unassigned
+			Value is Code /\ 65535,
+			Value =\= 65534,
+			Value =\= 65535.
+	:- endif.
 
 	is_partial_list(Var) :-
 		var(Var),

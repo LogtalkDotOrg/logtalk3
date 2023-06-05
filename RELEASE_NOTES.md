@@ -46,8 +46,15 @@ Documentation
 Library
 -------
 
-* FIXED: The `type` object library type-checking of Unicode character codes to
+* FIXED: The `type` library object type-checking of Unicode character codes to
 exclude non-character code points (i.e. reserved, surrogate, or non-assigned).
+Currently, this check is only accurate for LVM and SWI-Prolog as other backends
+don't provide support for querying a Unicode code point category. 
+
+* FIXED: The `arbitrary` library category generation of Unicode character codes
+to exclude non-character code points (i.e. reserved, surrogate, or non-assigned).
+Currently, this is only accurate for LVM and SWI-Prolog as other backends
+don't provide support for querying a Unicode code point category. 
 
 Tools
 -----
