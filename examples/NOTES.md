@@ -128,10 +128,6 @@ Follows a short description of each included example (in alphabetical order):
 	where any of them may cause an error condition without using the
 	traditional catch/throw mechanism
 
-- `cc`  
-	example of using conditional compilation directives to write code
-	portable across several backend Prolog compilers
-
 - `classmethods`  
 	example of defining "class methods" as found on some class-based
 	object-oriented programming languages

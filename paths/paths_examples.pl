@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on March 9, 2023
+%  Last updated on June 5, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -57,7 +57,6 @@ logtalk_library_path(buckets, threads('buckets/')).
 logtalk_library_path(buffer, threads('buffer/')).
 logtalk_library_path(carengines, examples('carengines/')).
 logtalk_library_path(cascade, examples('cascade/')).
-logtalk_library_path(cc, examples('cc/')).
 logtalk_library_path(checkpoint, threads('checkpoint/')).
 logtalk_library_path(classmethods, examples('classmethods/')).
 logtalk_library_path(classvars, examples('classvars/')).
