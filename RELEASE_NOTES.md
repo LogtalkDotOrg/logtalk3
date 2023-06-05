@@ -67,6 +67,10 @@ to use explicit assertions.
 Tests
 -----
 
+* MOVED: Tests for the Logtalk implementation of the de facto Prolog
+standard conditional compilation directives from the `cc` example to
+the `tests/logtalk/directives/conditional_compilation` directory.
+
 * ADDED: Tests for the de facto Prolog standard conditional compilation
 directives.
 
