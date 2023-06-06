@@ -56,6 +56,14 @@ to exclude non-character code points (i.e. reserved, surrogate, or non-assigned)
 Currently, this is only accurate for LVM and SWI-Prolog as other backends
 don't provide support for querying a Unicode code point category. 
 
+* FIXED: The `arbitrary` library category generation of Unicode atoms in the
+BMP to avoid atom normalization (as performed by some backends such as LVM)
+resulting in atoms with characters outside the BMP.
+
+* FIXED: The `arbitrary` library category generation of Unicode atoms of a
+given length to avoid atom normalization (as performed by some backends such
+as LVM) resulting in atoms with a different length.
+
 Tools
 -----
 

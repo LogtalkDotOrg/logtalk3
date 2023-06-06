@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:26:0,
+		version is 2:26:1,
 		author is 'Paulo Moura',
-		date is 2023-06-05,
+		date is 2023-06-06,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -399,17 +399,13 @@
 		atom_codes(Arbitrary, [Code| Codes]).
 
 	arbitrary(atom(CharSet), Arbitrary) :-
-		arbitrary(list(character_code(CharSet)), Codes),
-		atom_codes(Arbitrary, Codes).
+		arbitrary_atom_charset(CharSet, Arbitrary).
 
 	arbitrary(atom(CharSet,Length), Arbitrary) :-
-		arbitrary(list(character_code(CharSet),Length), Codes),
-		atom_codes(Arbitrary, Codes).
+		arbitrary_atom_charset_length(CharSet, Length, Arbitrary).
 
 	arbitrary(non_empty_atom(CharSet), Arbitrary) :-
-		arbitrary(character_code(CharSet), Code),
-		arbitrary(list(character_code(CharSet)), Codes),
-		atom_codes(Arbitrary, [Code| Codes]).
+		arbitrary_non_empty_atom_charset(CharSet, Arbitrary).
 
 	arbitrary(operator_specifier, Arbitrary) :-
 		member(Arbitrary, [fx, fy, xfx, xfy, yfx, xf, yf]).
@@ -1252,6 +1248,59 @@
 			ground(Arbitrary),
 		!.
 
+	arbitrary_atom_charset(unicode_bmp, Arbitrary) :-
+		!,
+		repeat,
+			arbitrary(list(character_code(unicode_bmp)), Codes),
+			atom_codes(Arbitrary, Codes),
+		% Unicode atom normalization may also result in characters no longer in the BMP
+		atom_codes(Arbitrary, ArbitraryCodes),
+		\+ (list::member(ArbitraryCode, ArbitraryCodes), ArbitraryCode > 65535),
+		!.
+	arbitrary_atom_charset(CharSet, Arbitrary) :-
+		arbitrary(list(character_code(CharSet)), Codes),
+		atom_codes(Arbitrary, Codes).
+
+	arbitrary_non_empty_atom_charset(unicode_bmp, Arbitrary) :-
+		!,
+		repeat,
+			arbitrary(character_code(unicode_bmp), Code),
+			arbitrary(list(character_code(unicode_bmp)), Codes),
+			atom_codes(Arbitrary, [Code| Codes]),
+		% Unicode atom normalization may also result in characters no longer in the BMP
+		atom_codes(Arbitrary, ArbitraryCodes),
+		\+ (list::member(ArbitraryCode, ArbitraryCodes), ArbitraryCode > 65535),
+		!.
+	arbitrary_non_empty_atom_charset(CharSet, Arbitrary) :-
+		arbitrary(character_code(CharSet), Code),
+		arbitrary(list(character_code(CharSet)), Codes),
+		atom_codes(Arbitrary, [Code| Codes]).
+
+	arbitrary_atom_charset_length(unicode_bmp, Length, Arbitrary) :-
+		!,
+		repeat,
+			arbitrary(list(character_code(unicode_bmp),Length), Codes),
+			atom_codes(Arbitrary, Codes),
+		% Unicode atom normalization may result in an atom with
+		% length different from the length of the list of codes
+		atom_length(Arbitrary, Length),
+		% Unicode atom normalization may also result in characters no longer in the BMP
+		atom_codes(Arbitrary, ArbitraryCodes),
+		\+ (list::member(ArbitraryCode, ArbitraryCodes), ArbitraryCode > 65535),
+		!.
+	arbitrary_atom_charset_length(unicode_full, Length, Arbitrary) :-
+		!,
+		repeat,
+			arbitrary(list(character_code(unicode_full),Length), Codes),
+			atom_codes(Arbitrary, Codes),
+		% Unicode atom normalization may result in an atom with
+		% length different from the length of the list of codes
+		atom_length(Arbitrary, Length),
+		!.
+	arbitrary_atom_charset_length(CharSet, Length, Arbitrary) :-
+		arbitrary(list(character_code(CharSet),Length), Codes),
+		atom_codes(Arbitrary, Codes).
+
 	% some Prolog systems either don't support the null character or
 	% provide buggy results when calling char_code/2 with a code of zero
 	:- if((catch(char_code(Char,0), _, fail), atom_length(Char,1))).
@@ -1275,17 +1324,17 @@
 			repeat,
 				between(First, 65535, Arbitrary),
 				unicode_property(Arbitrary, category(Category)),
-				Category \== 'Cn',
-				Category \== 'Cs',
-				Category \== 'Co',
+			Category \== 'Cn',
+			Category \== 'Cs',
+			Category \== 'Co',
 			!.
 		arbitrary_unicode_full_code_point(First, Arbitrary) :-
 			repeat,
 				between(First, 1114111, Arbitrary),
 				unicode_property(Arbitrary, category(Category)),
-				Category \== 'Cn',
-				Category \== 'Cs',
-				Category \== 'Co',
+			Category \== 'Cn',
+			Category \== 'Cs',
+			Category \== 'Co',
 			!.
 	:- else.
 		arbitrary_unicode_bmp_code_point(First, Arbitrary) :-

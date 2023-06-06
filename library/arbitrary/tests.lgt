@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2022-07-17,
+		date is 2024-06-06,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -120,7 +120,7 @@
 	test(arbitrary_arbitrary_2_10) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte]),
-			(	lgtunit::quick_check(type::arbitrary({character(CharSet)}, -character(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({code(CharSet)}, -code(CharSet)), Result, [n(25)]),
 				^^assertion(type(character(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
@@ -154,7 +154,7 @@
 	test(arbitrary_arbitrary_2_10) :-
 		forall(
 			list::member(CharSet, [ascii_full, ascii_printable, ascii_identifier, byte, unicode_bmp, unicode_full]),
-			(	lgtunit::quick_check(type::arbitrary({character(CharSet)}, -character(CharSet)), Result, [n(25)]),
+			(	lgtunit::quick_check(type::arbitrary({code(CharSet)}, -code(CharSet)), Result, [n(25)]),
 				^^assertion(type(character(CharSet),Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
