@@ -25,7 +25,6 @@ RELEASE NOTES
 3.67.0 - June ??, 2023
 =====================
 
-
 Logtalk compiler and runtime
 ----------------------------
 
@@ -104,6 +103,9 @@ control constructs.
 
 * ADDED: Additional tests for the Prolog `call/2-N` and `setup_call_cleanup/3`
 predicates.
+
+* FIXED: Test condition for Unicode support by the `format/2` de-facto Prolog
+standard predicate.
 
 
 3.66.0 - May 30, 2023
