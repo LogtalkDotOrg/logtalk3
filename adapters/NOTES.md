@@ -427,12 +427,12 @@ and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla Prolog 2.17.10 and later versions
+Trealla Prolog 2.18.7 and later versions
 ---------------------------------------
 
 	trealla.pl
 
-Experimental. Joint work with the Trealla Prolog developer, Andrew Davison.
+Joint work with the Trealla Prolog developer, Andrew Davison.
 
 
 XSB 3.8.0 and later versions

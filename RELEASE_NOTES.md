@@ -35,6 +35,8 @@ functions when lint checking `(is)/2` goals.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The Trealla Prolog adapter file to require version 2.18.7 or later.
+
 * ADDED: macOS `.command` files for JIProlog and Scryer Prolog.
 
 Documentation

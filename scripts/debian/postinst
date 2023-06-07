@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk Debian package auxiliary script
-##   Last updated on May 30, 2023
+##   Last updated on June 7, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -68,7 +68,7 @@ echo "* Scryer Prolog (0.9.1 or later):    scryerlgt   (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.2 or later):       taulgt"
-echo "* Trealla Prolog (2.17.10 or later): tplgt       (experimental)"
+echo "* Trealla Prolog (2.18.7 or later):  tplgt"
 echo "* XSB (3.8.0 or later):              xsblgt      (first run may require sudo)"
 echo "* YAP (6.3.4 or later):              yaplgt"
 echo
