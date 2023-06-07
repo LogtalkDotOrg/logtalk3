@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:1:0,
+		version is 16:1:1,
 		author is 'Paulo Moura',
-		date is 2023-06-02,
+		date is 2023-06-08,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1029,7 +1029,7 @@
 
 	% test/3 dialect
 	run_test(succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
-		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
+		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
 				cpu_time(Start),
 				(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Start, Output)) ->
@@ -1045,7 +1045,7 @@
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
 	run_test(deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
-		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
+		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
 				cpu_time(Start),
 				(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Start, Output)) ->
@@ -1064,7 +1064,7 @@
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
 	run_test(fails(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
-		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
+		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
 				cpu_time(Start),
 				(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Note, Start, Output)) ->
@@ -1080,7 +1080,7 @@
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
 	run_test(throws(Test, Variables, PossibleErrors, Position, Condition, Setup, Cleanup, Note), File, Output) :-
-		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
+		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
 				cpu_time(Start),
 				(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Note, Start, Output)) ->
@@ -1099,7 +1099,7 @@
 		).
 	% quick_check/3 dialect
 	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
-		(	run_test_condition(Test, Condition, File, Position, Note, Output) ->
+		(	run_test_condition(Condition) ->
 			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
 				cpu_time(Start),
 				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Start, Output)) ->
@@ -1278,12 +1278,12 @@
 
 	:- meta_predicate(run_test_condition(*, *, *, *, *, *)).
 
-	run_test_condition(Test, Condition, File, Position, Note, Output) :-
+	run_test_condition(Condition) :-
 		option_goal(Condition, Goal),
 		% expected either success or failure; error means user error
 		(	Goal == true ->
 			true
-		;	catch(Goal, Error, (failed_test(Test,File,Position,step_error(condition,Error),Note,0.0,Output), fail))
+		;	catch(Goal, _, fail)
 		).
 
 	:- meta_predicate(run_test_setup(*, *, *, *, *, *)).

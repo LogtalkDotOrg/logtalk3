@@ -76,6 +76,9 @@ by the used backend system.
 * UPDATED: The `help` tool to support other operating-systems, notably BSD,
 that also provide the `xdg-open` command.
 
+* FIXED: A `lgtunit` tool bug when a test condition goal throws an error that
+would result in the test being reported twice (both as skipped and failed).
+
 * FIXED: Tests for the `directory_dependency_diagram::rdirectory/2` and
 `directory_load_diagram::rdirectory/2` library predicates.
 
@@ -103,9 +106,6 @@ control constructs.
 
 * ADDED: Additional tests for the Prolog `call/2-N` and `setup_call_cleanup/3`
 predicates.
-
-* FIXED: Test condition for Unicode support by the `format/2` de-facto Prolog
-standard predicate.
 
 
 3.66.0 - May 30, 2023

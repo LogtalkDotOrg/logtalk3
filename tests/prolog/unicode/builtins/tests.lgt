@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:13:1,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2023-06-07,
+		date is 2023-04-10,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -608,7 +608,7 @@
 
 	% format/2 tests
 
-	test(lgt_unicode_format_2_01, true(Assertion), [condition(catch(current_prolog_flag(encoding,'UTF-8'),_,fail))]) :-
+	test(lgt_unicode_format_2_01, true(Assertion), [condition(current_prolog_flag(encoding,'UTF-8'))]) :-
 		^^set_text_output(''),
 		% bypass the compiler as the predicate may come from
 		% a library instead of being a built-in predicate
