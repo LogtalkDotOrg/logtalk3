@@ -94,6 +94,9 @@ to use explicit assertions.
 Tests
 -----
 
+* CHANGED: Splited the Unicode syntax tests in two sets, one for letter case
+and variables and one for escape sequences.
+
 * MOVED: Tests for the Logtalk implementation of the de facto Prolog
 standard conditional compilation directives from the `cc` example to
 the `tests/logtalk/directives/conditional_compilation` directory.
