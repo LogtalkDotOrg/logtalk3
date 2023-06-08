@@ -731,7 +731,8 @@ dialect and the `condition/1` option. For example:
 	test(test_id, true, [condition(current_prolog_flag(bounded,true))) :-
 		...
 
-The conditional compilation directives can also be used in alternative but note
+The test is skipped if the condition goal fails or generates an error. The
+conditional compilation directives can also be used in alternative but note
 that in this case there will be no report on the number of skipped tests.
 
 
