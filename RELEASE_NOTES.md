@@ -44,6 +44,8 @@ Documentation
 * ADDED: Section on writing debugging/logging messages from tests to the
 `lgtunit` tool documentation.
 
+* UPDATED: Documentation of the `dictionaries` library.
+
 Library
 -------
 

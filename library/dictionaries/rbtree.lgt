@@ -34,7 +34,7 @@
 		version is 1:9:0,
 		author is 'Vitor Santos Costa; Logtalk port and additional predicates by Paulo Moura.',
 		date is 2021-04-12,
-		comment is 'Red-Black trees. Uses standard order to compare keys.',
+		comment is 'Red-Black tree implementation of the dictionary protocol. Uses standard order to compare keys.',
 		see_also is [avltree, bintree]
 	]).
 
