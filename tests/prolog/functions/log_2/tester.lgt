@@ -19,10 +19,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	set_logtalk_flag(suspicious_calls, silent),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
-	tests::run
-)).
+:- if(catch(_ is log(2,3), _, fail)).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		set_logtalk_flag(suspicious_calls, silent),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit), optimize(on)]),
+		tests::run
+	)).
+
+:- else.
+
+	:- initialization((
+		write('(not applicable)'), nl
+	)).
+
+:- endif.

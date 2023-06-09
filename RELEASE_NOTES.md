@@ -96,6 +96,9 @@ to use explicit assertions.
 Tests
 -----
 
+* CHANGED: Only run the `log/2` arithmetic function tests when the function
+is implemented by the backend.
+
 * CHANGED: Splited the Unicode syntax tests in two sets, one for letter case
 and variables and one for escape sequences.
 
