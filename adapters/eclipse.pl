@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on May 28, 2023
+%  Last updated on June 12, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -1065,6 +1065,15 @@ forall(Generate, Test) :-
 
 '$lgt_find_visible_module_predicate'(_Current, _Module, _Predicate) :-
 	fail.
+
+
+% '$lgt_current_module_predicate'(+atom, +predicate_indicator)
+%
+% succeeds when Module defines Predicate
+
+'$lgt_current_module_predicate'(Module, Predicate) :-
+	% avoid errors on locked modules
+	catch(current_predicate(Predicate)@Module, _, fail).
 
 
 

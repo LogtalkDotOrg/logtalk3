@@ -3152,7 +3152,7 @@ logtalk_make(Target) :-
 	nonvar(Module),
 	% require loaded modules as the missing modules are already listed
 	current_module(Module),
-	\+ current_predicate(':'(Module,Predicate)),
+	\+ '$lgt_current_module_predicate'(Module, Predicate),
 	'$lgt_missing_reference'(Entity, Location, Reference).
 
 
@@ -20138,7 +20138,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_predicate_availability'(use_module, Module, Original, Pred, Functor, Arity, Type, Entity, File, Lines) :-
 	(	\+ current_module(Module) ->
 		true
-	;	current_predicate(':'(Module, Functor/Arity)) ->
+	;	'$lgt_current_module_predicate'(Module, Functor/Arity) ->
 		true
 	;	Module == user,
 		(	'$lgt_predicate_property'(Pred, built_in)

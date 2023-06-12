@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on May 28, 2023
+%  Last updated on June 12, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -1470,6 +1470,14 @@ term_expansion(
 	import_module(Current, Module),
 	predicate_property(Predicate, defined),
 	!.
+
+
+% '$lgt_current_module_predicate'(+atom, +predicate_indicator)
+%
+% succeeds when Module defines Predicate
+
+'$lgt_current_module_predicate'(Module, Predicate) :-
+	current_predicate(Module:Predicate).
 
 
 

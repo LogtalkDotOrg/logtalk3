@@ -28,6 +28,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Abstract how the linter and make tools check if a module defines
+a predicate. While this fixes some issues with some backends (e.g. ECLiPSe),
+most systems don't provide a reliable and clean solution for performing these
+checks.
+
 * UPDATED: The compiler to also handle the `lsb/1` and `msb/1` integer
 functions when lint checking `(is)/2` goals.
 

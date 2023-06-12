@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 4.1.0 and later versions
-%  Last updated on May 28, 2023
+%  Last updated on June 12, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -797,6 +797,14 @@ term_hash(_, _, _, _) :-
 % succeeds when Module:Predicate is visible in module Current
 
 '$lgt_find_visible_module_predicate'(_Current, _Module, _Predicate) :-
+	fail.
+
+
+% '$lgt_current_module_predicate'(+atom, +predicate_indicator)
+%
+% succeeds when Module defines Predicate
+
+'$lgt_current_module_predicate'(_Module, _Predicate) :-
 	fail.
 
 
