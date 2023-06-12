@@ -20,7 +20,10 @@
 
 
 :- initialization((
+	% the constraint solver libraries must always be loaded prior
+	% to compilation of the individual example files
 	lib(ic),
 	lib(ic_sets),
+	lib(lists),
 	logtalk_load([puzzle, steiner, tomography, zebra])
 )).

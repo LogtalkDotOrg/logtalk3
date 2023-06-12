@@ -33,26 +33,21 @@
 %
 %	?- go.
 %	    0 0 7 1 6 3 4 5 2 7 0 0
-%	 0                         
-%	 0                         
-%	 8      * * * * * * * *    
-%	 2      *             *    
-%	 6      *   * * * *   *    
-%	 4      *   *     *   *    
-%	 5      *   *   * *   *    
-%	 3      *   *         *    
-%	 7      *   * * * * * *    
-%	 0                         
-%	 0                         
+%	 0
+%	 0
+%	 8      * * * * * * * *
+%	 2      *             *
+%	 6      *   * * * *   *
+%	 4      *   *     *   *
+%	 5      *   *   * *   *
+%	 3      *   *         *
+%	 7      *   * * * * * *
+%	 0
+%	 0
 %
 %
 % Eclipse solution by Joachim Schimpf, IC-Parc
 %
-
-
-% the constraint solver libraries must always be loaded prior to compilation of 
-% the individual example files:
-:- lib(ic).
 
 
 :- object(tomography).
@@ -62,7 +57,7 @@
 	% we must define an alias (ins/2) for the ECLiPSe "ic" library operator ::/2
 	% in order to avoid conflicts with the ::/2 Logtalk message sending operator
 	% ECLiPSE 6.0#78 adds an alias in_set_range/2 for ::/2 that could also be used
-	:- use_module(ic, [alldifferent/1, (::)/2:ins/2, labeling/1, (#=)/2]).
+	:- use_module(ic, [alldifferent/1, (::)/2 as ins/2, labeling/1, (#=)/2]).
 	:- op(700, xfx, ins).
 
 	% ECLiPSe "do" operator is not available when the library(iso) is used

@@ -24,12 +24,12 @@
 
 %
 % Lewis Carrol's classical puzzle with five houses and a zebra:
-% 
+%
 % Five men with different nationalities live in the first five houses
 % of a street.  They practise five distinct professions, and each of
 % them has a favourite animal and a favourite drink, all of them
 % different.  The five houses are painted in different colours.
-% 
+%
 % The Englishman lives in a red house.
 % The Spaniard owns a dog.
 % The Japanese is a painter.
@@ -44,14 +44,9 @@
 % The violinist drinks fruit juice.
 % The fox is in a house next to that of the doctor.
 % The horse is in a house next to that of the diplomat.
-% 
+%
 % Who owns a Zebra, and who drinks water?
-% 
-
-
-% the constraint solver libraries must always be loaded prior to compilation of 
-% the individual example files:
-:- lib(ic).
+%
 
 
 :- object(zebra).

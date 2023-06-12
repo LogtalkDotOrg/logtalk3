@@ -22,7 +22,7 @@
 % code adapted to Logtalk by Paulo Moura from one of the examples
 % found on the ECLiPSe 5.10#141 documentation (August 2008)
 
-% 
+%
 % ECLiPSe sample code - Steiner triplets
 %
 % The following program computes so-called Steiner triplets.
@@ -30,20 +30,14 @@
 % two triplets have at most one element in common.
 %
 % Here is an example of running this program:
-% 
+%
 % ?- steiner(9,X).
-% 
+%
 % X = [[1, 2, 3], [1, 4, 5], [1, 6, 7], [1, 8, 9],
 %      [2, 4, 6], [2, 5, 8], [2, 7, 9], [3, 4, 9],
 %      [3, 5, 7], [3, 6, 8], [4, 7, 8], [5, 6, 9]]
 % Yes (2.89s cpu, solution 1, maybe more) ? ;
-% 
-
-
-% the constraint solver libraries must always be loaded prior to
-% compilation of the individual example files:
-:- lib(ic).
-:- lib(ic_sets).
+%
 
 
 :- object(steiner).

@@ -23,11 +23,6 @@
 % found on the ECLiPSe 5.10#141 documentation (August 2008)
 
 
-% the constraint solver libraries must always be loaded prior to compilation of 
-% the individual example files:
-:- lib(ic).
-
-
 :- object(puzzle).
 
 	:- public([sendmore1/1, sendmore2/1]).
