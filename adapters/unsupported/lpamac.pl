@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA MacProlog32 1.25
-%  Last updated on June 12, 2023
+%  Last updated on June 13, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -354,6 +354,8 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 '$lgt_default_flag'(trivial_goal_fails, warning).
 '$lgt_default_flag'(always_true_or_false_goals, warning).
 '$lgt_default_flag'(lambda_variables, warning).
+'$lgt_default_flag'(grammar_rules, warning).
+'$lgt_default_flag'(arithmetic_expressions, warning).
 '$lgt_default_flag'(suspicious_calls, warning).
 '$lgt_default_flag'(underscore_variables, singletons).
 % optional features compilation flags:

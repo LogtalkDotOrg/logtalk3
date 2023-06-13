@@ -3504,7 +3504,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 67, 0, b01)).
+'$lgt_version_data'(logtalk(3, 67, 0, b02)).
 
 
 
@@ -13357,7 +13357,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(arithmetic_expressions),
 		suspicious_call(File, Lines, Type, Entity, Exp1 == Exp2, reason(float_comparison))
 	),
 	fail.
@@ -13369,7 +13369,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(arithmetic_expressions),
 		suspicious_call(File, Lines, Type, Entity, Exp1 \== Exp2, reason(float_comparison))
 	),
 	fail.
@@ -15887,7 +15887,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(arithmetic_expressions),
 		suspicious_call(File, Lines, Type, Entity, Exp1 =:= Exp2, reason(float_comparison))
 	),
 	fail.
@@ -15906,7 +15906,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(arithmetic_expressions),
 		suspicious_call(File, Lines, Type, Entity, Exp1 =\= Exp2, reason(float_comparison))
 	),
 	fail.
@@ -16195,7 +16195,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
-		warning(general),
+		warning(grammar_rules),
 		calls_non_terminal_as_predicate(File, Lines, Type, Entity, Functor//Arity)
 	),
 	fail.
@@ -22414,7 +22414,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
-		warning(general),
+		warning(grammar_rules),
 		calls_predicate_as_non_terminal(File, Lines, Type, Entity, Functor/ExtArity)
 	),
 	fail.
@@ -24359,6 +24359,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(disjunctions).
 '$lgt_valid_flag'(conditionals).
 '$lgt_valid_flag'(catchall_catch).
+'$lgt_valid_flag'(grammar_rules).
+'$lgt_valid_flag'(arithmetic_expressions).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -24486,6 +24488,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(catchall_catch, silent) :- !.
 '$lgt_valid_flag_value'(catchall_catch, warning) :- !.
+
+'$lgt_valid_flag_value'(grammar_rules, silent) :- !.
+'$lgt_valid_flag_value'(grammar_rules, warning) :- !.
+
+'$lgt_valid_flag_value'(arithmetic_expressions, silent) :- !.
+'$lgt_valid_flag_value'(arithmetic_expressions, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.

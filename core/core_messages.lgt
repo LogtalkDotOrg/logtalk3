@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:122:0,
+		version is 1:123:0,
 		author is 'Paulo Moura',
-		date is 2023-05-18,
+		date is 2023-06-13,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -1033,6 +1033,9 @@
 			current_logtalk_flag(missing_directives, Missing0), align(Missing0, Missing),
 			current_logtalk_flag(duplicated_directives, Duplicated0), align(Duplicated0, Duplicated),
 			current_logtalk_flag(trivial_goal_fails, Trivial0), align(Trivial0, Trivial),
+			current_logtalk_flag(grammar_rules, GrammarRules0), align(GrammarRules0, GrammarRules),
+			current_logtalk_flag(arithmetic_expressions, ArithmeticExpressions0), align(ArithmeticExpressions0, ArithmeticExpressions),
+			current_logtalk_flag(trivial_goal_fails, Trivial0), align(Trivial0, Trivial),
 			current_logtalk_flag(always_true_or_false_goals, Always0), align(Always0, Always),
 			current_logtalk_flag(lambda_variables, Lambda0), align(Lambda0, Lambda),
 			current_logtalk_flag(suspicious_calls, SuspiciousCalls0), align(SuspiciousCalls0, SuspiciousCalls),
@@ -1047,6 +1050,7 @@
 			'  duplicated_clauses:   ~w    portability:                ~w'-[DuplicatedClauses, Portability], nl,
 			'  redefined_built_ins:  ~w    redefined_operators:        ~w'-[RedefinedBuiltIns, RedefinedOperators], nl,
 			'  trivial_goal_fails:   ~w    always_true_or_false_goals: ~w'-[Trivial, Always], nl,
+			'  grammar_rules:        ~w    arithmetic_expressions:     ~w'-[GrammarRules, ArithmeticExpressions], nl,
 			'  lambda_variables:     ~w    suspicious_calls:           ~w'-[Lambda, SuspiciousCalls], nl,
 			'  disjunctions:         ~w    conditionals:               ~w'-[Disjunctions, Conditionals], nl,
 			'  catchall_catch:       ~w    tail_recursive:             ~w'-[CatchallCatch, TailRecursive], nl,

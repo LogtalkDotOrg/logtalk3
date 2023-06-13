@@ -38,6 +38,8 @@
 			trivial_goal_fails(warning),
 			always_true_or_false_goals(warning),
 			lambda_variables(warning),
+			grammar_rules(warning),
+			arithmetic_expressions(warning),
 			suspicious_calls(warning),
 			singleton_variables(warning),
 			portability(warning),

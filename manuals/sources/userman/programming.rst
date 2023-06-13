@@ -860,6 +860,22 @@ Lint flags
    false. Possible option values are ``warning`` (the usual default) and
    ``silent`` (not recommended).
 
+.. _flag_grammar_rules:
+.. index:: pair: grammar_rules; Flag
+
+``grammar_rules(Option)``
+   Controls the printing of grammar rules related warnings. Possible
+   option values are ``warning`` (the usual default) and ``silent`` (not
+   recommended).
+
+.. _flag_arithmetic_expressions:
+.. index:: pair: arithmetic_expressions; Flag
+
+``arithmetic_expressions(Option)``
+   Controls the printing of arithmetic expressions related warnings. Possible
+   option values are ``warning`` (the usual default) and ``silent`` (not
+   recommended).
+
 .. _flag_lambda_variables:
 .. index:: pair: lambda_variables; Flag
 

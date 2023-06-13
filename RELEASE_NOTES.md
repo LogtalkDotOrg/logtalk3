@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Two new linter flags, `grammar_rules` and `arithmetic_expressions`,
+to enable/disable the corresponding warnings.
+
 * IMPROVED: Abstract how the linter and make tools check if a module defines
 a predicate. While this fixes some issues with some backends (e.g. ECLiPSe),
 most systems don't provide a reliable and clean solution for performing these
