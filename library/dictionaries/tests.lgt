@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2021-04-12,
+		date is 2023-06-14,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -49,12 +49,12 @@
 	test(dictionary_as_dictionary_2_01) :-
 		as_dictionary([], Dictionary),
 		as_list(Dictionary, Pairs),
-		^^assertion(pairs, Pairs == []).
+		^^assertion(Pairs == []).
 
 	test(dictionary_as_dictionary_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		as_list(Dictionary, Pairs),
-		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+		^^assertion(Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% as_curly_bracketed/2 tests
 
@@ -74,7 +74,7 @@
 		as_dictionary([], Dictionary),
 		clone(Dictionary, Clone, ClonePairs),
 		empty(Clone),
-		^^assertion(pairs, ClonePairs == []).
+		^^assertion(ClonePairs == []).
 
 	test(dictionary_clone_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
@@ -152,7 +152,7 @@
 		as_dictionary([e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		insert(Dictionary, j, 0, NewDictionary),
 		lookup(j, Value, NewDictionary),
-		^^assertion(new, Value == 0).
+		^^assertion(Value == 0).
 
 	% delete/4 tests
 
@@ -211,7 +211,7 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		update(Dictionary, b, 22, NewDictionary),
 		lookup(b, Value, NewDictionary),
-		^^assertion(new, Value == 22).
+		^^assertion(Value == 22).
 
 	% update/5 tests
 
@@ -259,13 +259,13 @@
 	deterministic(dictionary_lookup_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		lookup(b, Value, Dictionary),
-		^^assertion(value, Value == 2).
+		^^assertion(Value == 2).
 
 	deterministic(dictionary_lookup_3_03) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		findall(Key-Value, lookup(Key, Value, Dictionary), Pairs0),
 		msort(Pairs0, Pairs),
-		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
+		^^assertion(Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% lookup/2 tests
 
@@ -276,8 +276,7 @@
 	deterministic(dictionary_lookup_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		lookup([b-B, f-F], Dictionary),
-		^^assertion(b, B == 2),
-		^^assertion(f, F == 6).
+		^^assertion(B-F == 2-6).
 
 	% previous/4 tests
 
@@ -288,7 +287,7 @@
 	test(dictionary_previous_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		previous(Dictionary, b, Key, Value),
-		^^assertion(pair, Key-Value == a-1).
+		^^assertion(Key-Value == a-1).
 
 	% next/4 tests
 
@@ -299,7 +298,7 @@
 	test(dictionary_next_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		next(Dictionary, b, Key, Value),
-		^^assertion(pair, Key-Value == c-3).
+		^^assertion(Key-Value == c-3).
 
 	% min/3 tests
 
@@ -310,7 +309,7 @@
 	test(dictionary_min_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		min(Dictionary, Key, Value),
-		^^assertion(pair, Key-Value == a-1).
+		^^assertion(Key-Value == a-1).
 
 	% max/3 tests
 
@@ -321,7 +320,7 @@
 	test(dictionary_max_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		max(Dictionary, Key, Value),
-		^^assertion(pair, Key-Value == j-0).
+		^^assertion(Key-Value == j-0).
 
 	% delete_min/4 tests
 
@@ -356,24 +355,24 @@
 	test(dictionary_keys_2_01) :-
 		as_dictionary([], Dictionary),
 		keys(Dictionary, Keys),
-		^^assertion(keys, Keys == []).
+		^^assertion(Keys == []).
 
 	test(dictionary_keys_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		keys(Dictionary, Keys),
-		^^assertion(keys, Keys == [a,b,c,d,e,f,g,h,i,j]).
+		^^assertion(Keys == [a,b,c,d,e,f,g,h,i,j]).
 
 	% values/2 tests
 
 	test(dictionary_values_2_01) :-
 		as_dictionary([], Dictionary),
 		values(Dictionary, Values),
-		^^assertion(keys, Values == []).
+		^^assertion(Values == []).
 
 	test(dictionary_values_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		values(Dictionary, Values),
-		^^assertion(keys, Values == [1,2,3,4,5,6,7,8,9,0]).
+		^^assertion(Values == [1,2,3,4,5,6,7,8,9,0]).
 
 	% map/2 tests
 
@@ -392,7 +391,7 @@
 		map([Key-Value, Key-NewValue]>>(integer::succ(Value,NewValue)), Dictionary, NewDictionary),
 		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs0),
 		msort(OtherPairs0, OtherPairs),
-		^^assertion(pairs, OtherPairs == [a-2,b-3,c-4,d-5,e-6,f-7,g-8,h-9,i-10,j-1]).
+		^^assertion(OtherPairs == [a-2,b-3,c-4,d-5,e-6,f-7,g-8,h-9,i-10,j-1]).
 
 	% apply/4 tests
 
@@ -400,19 +399,19 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		apply([Key-Value, Key-NewValue]>>(integer::succ(Value,NewValue)), Dictionary, b, NewDictionary),
 		lookup(b, CurrentValue, NewDictionary),
-		^^assertion(value, CurrentValue == 3).
+		^^assertion(CurrentValue == 3).
 
 	% size/2 tests
 
 	test(dictionary_size_2_01) :-
 		as_dictionary([], Dictionary),
 		size(Dictionary, Size),
-		^^assertion(size, Size == 0).
+		^^assertion(Size == 0).
 
 	test(dictionary_size_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		size(Dictionary, Size),
-		^^assertion(size, Size == 10).
+		^^assertion(Size == 10).
 
 	% intersection/2 tests
 
