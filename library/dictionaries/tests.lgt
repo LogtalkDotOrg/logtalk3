@@ -46,37 +46,37 @@
 
 	% as_dictionary/2 and as_list/2 tests
 
-	test(dictionary_as_dictionary_2_01) :-
+	deterministic(dictionary_as_dictionary_2_01) :-
 		as_dictionary([], Dictionary),
 		as_list(Dictionary, Pairs),
 		^^assertion(Pairs == []).
 
-	test(dictionary_as_dictionary_2_02) :-
+	deterministic(dictionary_as_dictionary_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		as_list(Dictionary, Pairs),
 		^^assertion(Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% as_curly_bracketed/2 tests
 
-	test(dictionary_as_curly_bracketed_2_01) :-
+	deterministic(dictionary_as_curly_bracketed_2_01) :-
 		as_dictionary([], Dictionary),
 		as_curly_bracketed(Dictionary, Curly),
 		^^assertion(Curly == {}).
 
-	test(dictionary_as_curly_bracketed_2_02) :-
+	deterministic(dictionary_as_curly_bracketed_2_02) :-
 		as_dictionary([a-1,b-2], Dictionary),
 		as_curly_bracketed(Dictionary, Curly),
 		^^assertion((Curly == {a-1,b-2}; Curly == {b-2,a-1})).
 
 	% clone/3 tests
 
-	test(dictionary_clone_3_01) :-
+	deterministic(dictionary_clone_3_01) :-
 		as_dictionary([], Dictionary),
 		clone(Dictionary, Clone, ClonePairs),
 		empty(Clone),
 		^^assertion(ClonePairs == []).
 
-	test(dictionary_clone_3_02) :-
+	deterministic(dictionary_clone_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		clone(Dictionary, Clone, ClonePairs),
 		keys(Clone, Keys),
@@ -85,14 +85,14 @@
 
 	% clone/4 tests
 
-	test(dictionary_clone_4_01) :-
+	deterministic(dictionary_clone_4_01) :-
 		as_dictionary([], Dictionary),
 		clone(Dictionary, DictionaryPairs, Clone, ClonePairs),
 		empty(Clone),
 		^^assertion(original_pairs, DictionaryPairs == []),
 		^^assertion(clone_pairs, ClonePairs == []).
 
-	test(dictionary_clone_4_02) :-
+	deterministic(dictionary_clone_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		clone(Dictionary, DictionaryPairs, Clone, ClonePairs),
 		keys(Clone, Keys),
@@ -103,7 +103,7 @@
 	% insert/4 tests
 
 	% insert in empty dictionary
-	test(dictionary_insert_4_01) :-
+	deterministic(dictionary_insert_4_01) :-
 		as_dictionary([], Dictionary),
 		insert(Dictionary, b, 2, NewDictionary),
 		lookup(b, Value, NewDictionary),
@@ -112,7 +112,7 @@
 		^^assertion(pairs, Pairs == [b-2]).
 
 	% insert smallest key
-	test(dictionary_insert_4_02) :-
+	deterministic(dictionary_insert_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,d-4], Dictionary),
 		insert(Dictionary, a, 1, NewDictionary),
 		lookup(a, Value, NewDictionary),
@@ -121,7 +121,7 @@
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% insert second smallest key
-	test(dictionary_insert_4_03) :-
+	deterministic(dictionary_insert_4_03) :-
 		as_dictionary([j-0,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		insert(Dictionary, b, 2, NewDictionary),
 		lookup(b, Value, NewDictionary),
@@ -130,7 +130,7 @@
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% insert middle key
-	test(dictionary_insert_4_04) :-
+	deterministic(dictionary_insert_4_04) :-
 		as_dictionary([j-0,b-2,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		insert(Dictionary, e, 5, NewDictionary),
 		lookup(e, Value, NewDictionary),
@@ -139,7 +139,7 @@
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% insert key before largest key
-	test(dictionary_insert_4_05) :-
+	deterministic(dictionary_insert_4_05) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,h-8,f-6,a-1,d-4], Dictionary),
 		insert(Dictionary, i, 9, NewDictionary),
 		lookup(i, Value, NewDictionary),
@@ -148,7 +148,7 @@
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% insert largest key
-	test(dictionary_insert_4_06) :-
+	deterministic(dictionary_insert_4_06) :-
 		as_dictionary([e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		insert(Dictionary, j, 0, NewDictionary),
 		lookup(j, Value, NewDictionary),
@@ -162,7 +162,7 @@
 		\+ delete(Dictionary, b, _, _).
 
 	% delete smallest key
-	test(dictionary_delete_4_02) :-
+	deterministic(dictionary_delete_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, a, Value, NewDictionary),
 		^^assertion(value, Value == 1),
@@ -170,7 +170,7 @@
 		^^assertion(pairs, Pairs == [b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% delete second smallest key
-	test(dictionary_delete_4_03) :-
+	deterministic(dictionary_delete_4_03) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, b, Value, NewDictionary),
 		^^assertion(value, Value == 2),
@@ -178,7 +178,7 @@
 		^^assertion(pairs, Pairs == [a-1,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% delete middle key
-	test(dictionary_delete_4_04) :-
+	deterministic(dictionary_delete_4_04) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, e, Value, NewDictionary),
 		^^assertion(value, Value == 5),
@@ -186,7 +186,7 @@
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,f-6,g-7,h-8,i-9,j-0]).
 
 	% delete key before largest key
-	test(dictionary_delete_4_05) :-
+	deterministic(dictionary_delete_4_05) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, i, Value, NewDictionary),
 		^^assertion(value, Value == 9),
@@ -194,7 +194,7 @@
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,j-0]).
 
 	% delete largest key
-	test(dictionary_delete_4_06) :-
+	deterministic(dictionary_delete_4_06) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, j, Value, NewDictionary),
 		^^assertion(value, Value == 0),
@@ -207,7 +207,7 @@
 		as_dictionary([], Dictionary),
 		\+ update(Dictionary, b, _, _).
 
-	test(dictionary_update_4_02) :-
+	deterministic(dictionary_update_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		update(Dictionary, b, 22, NewDictionary),
 		lookup(b, Value, NewDictionary),
@@ -219,7 +219,7 @@
 		as_dictionary([], Dictionary),
 		\+ update(Dictionary, b, _, _, _).
 
-	test(dictionary_update_5_02) :-
+	deterministic(dictionary_update_5_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		update(Dictionary, b, OldValue, 22, NewDictionary),
 		^^assertion(old, OldValue == 2),
@@ -232,7 +232,7 @@
 		as_dictionary([], Dictionary),
 		\+ update(Dictionary, [b-42], _).
 
-	test(dictionary_update_3_02) :-
+	deterministic(dictionary_update_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		update(Dictionary, [b-22, f-7], NewDictionary),
 		lookup(b, B, NewDictionary),
@@ -242,7 +242,7 @@
 
 	% empty/1 tests
 
-	test(dictionary_empty_1_01) :-
+	deterministic(dictionary_empty_1_01) :-
 		as_dictionary([], Dictionary),
 		empty(Dictionary).
 
@@ -284,7 +284,7 @@
 		as_dictionary([], Dictionary),
 		\+ previous(Dictionary, _, _, _).
 
-	test(dictionary_previous_4_02) :-
+	deterministic(dictionary_previous_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		previous(Dictionary, b, Key, Value),
 		^^assertion(Key-Value == a-1).
@@ -295,7 +295,7 @@
 		as_dictionary([], Dictionary),
 		\+ next(Dictionary, _, _, _).
 
-	test(dictionary_next_4_02) :-
+	deterministic(dictionary_next_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		next(Dictionary, b, Key, Value),
 		^^assertion(Key-Value == c-3).
@@ -306,7 +306,7 @@
 		as_dictionary([], Dictionary),
 		\+ min(Dictionary, _, _).
 
-	test(dictionary_min_3_02) :-
+	deterministic(dictionary_min_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		min(Dictionary, Key, Value),
 		^^assertion(Key-Value == a-1).
@@ -317,7 +317,7 @@
 		as_dictionary([], Dictionary),
 		\+ max(Dictionary, _, _).
 
-	test(dictionary_max_3_02) :-
+	deterministic(dictionary_max_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		max(Dictionary, Key, Value),
 		^^assertion(Key-Value == j-0).
@@ -328,7 +328,7 @@
 		as_dictionary([], Dictionary),
 		\+ delete_min(Dictionary, _, _, _).
 
-	test(dictionary_delete_min_4_02) :-
+	deterministic(dictionary_delete_min_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete_min(Dictionary, Key, Value, NewDictionary),
 		^^assertion(pair, Key-Value == a-1),
@@ -342,7 +342,7 @@
 		as_dictionary([], Dictionary),
 		\+ delete_max(Dictionary, _, _, _).
 
-	test(dictionary_delete_max_4_02) :-
+	deterministic(dictionary_delete_max_4_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete_max(Dictionary, Key, Value, NewDictionary),
 		^^assertion(pair, Key-Value == j-0),
@@ -352,24 +352,24 @@
 
 	% keys/2 tests
 
-	test(dictionary_keys_2_01) :-
+	deterministic(dictionary_keys_2_01) :-
 		as_dictionary([], Dictionary),
 		keys(Dictionary, Keys),
 		^^assertion(Keys == []).
 
-	test(dictionary_keys_2_02) :-
+	deterministic(dictionary_keys_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		keys(Dictionary, Keys),
 		^^assertion(Keys == [a,b,c,d,e,f,g,h,i,j]).
 
 	% values/2 tests
 
-	test(dictionary_values_2_01) :-
+	deterministic(dictionary_values_2_01) :-
 		as_dictionary([], Dictionary),
 		values(Dictionary, Values),
 		^^assertion(Values == []).
 
-	test(dictionary_values_2_02) :-
+	deterministic(dictionary_values_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		values(Dictionary, Values),
 		^^assertion(Values == [1,2,3,4,5,6,7,8,9,0]).
@@ -403,40 +403,40 @@
 
 	% size/2 tests
 
-	test(dictionary_size_2_01) :-
+	deterministic(dictionary_size_2_01) :-
 		as_dictionary([], Dictionary),
 		size(Dictionary, Size),
 		^^assertion(Size == 0).
 
-	test(dictionary_size_2_02) :-
+	deterministic(dictionary_size_2_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		size(Dictionary, Size),
 		^^assertion(Size == 10).
 
 	% intersection/2 tests
 
-	test(dictionary_intersection_2_01) :-
+	deterministic(dictionary_intersection_2_01) :-
 		as_dictionary([], Dictionary1),
 		as_dictionary([], Dictionary2),
 		intersection(Dictionary1, Dictionary2).
 
-	test(dictionary_intersection_2_02) :-
+	deterministic(dictionary_intersection_2_02) :-
 		as_dictionary([], Dictionary1),
 		as_dictionary([x-1], Dictionary2),
 		intersection(Dictionary1, Dictionary2).
 
-	test(dictionary_intersection_2_03) :-
+	deterministic(dictionary_intersection_2_03) :-
 		as_dictionary([x-1], Dictionary1),
 		as_dictionary([], Dictionary2),
 		intersection(Dictionary1, Dictionary2).
 
-	test(dictionary_intersection_2_04) :-
+	deterministic(dictionary_intersection_2_04) :-
 		as_dictionary([x-1, y-Y], Dictionary1),
 		as_dictionary([x-X, y-2], Dictionary2),
 		intersection(Dictionary1, Dictionary2),
 		^^assertion(X-Y == 1-2).
 
-	test(dictionary_intersection_2_05) :-
+	deterministic(dictionary_intersection_2_05) :-
 		as_dictionary([x-1, y-Y, z-3], Dictionary1),
 		as_dictionary([x-X, y-2, t-4], Dictionary2),
 		intersection(Dictionary1, Dictionary2),
@@ -444,25 +444,25 @@
 
 	% intersection/3 tests
 
-	test(dictionary_intersection_3_01) :-
+	deterministic(dictionary_intersection_3_01) :-
 		as_dictionary([], Dictionary1),
 		as_dictionary([], Dictionary2),
 		intersection(Dictionary1, Dictionary2, Intersection),
 		empty(Intersection).
 
-	test(dictionary_intersection_3_02) :-
+	deterministic(dictionary_intersection_3_02) :-
 		as_dictionary([], Dictionary1),
 		as_dictionary([x-1], Dictionary2),
 		intersection(Dictionary1, Dictionary2, Intersection),
 		empty(Intersection).
 
-	test(dictionary_intersection_3_03) :-
+	deterministic(dictionary_intersection_3_03) :-
 		as_dictionary([x-1], Dictionary1),
 		as_dictionary([], Dictionary2),
 		intersection(Dictionary1, Dictionary2, Intersection),
 		empty(Intersection).
 
-	test(dictionary_intersection_3_04) :-
+	deterministic(dictionary_intersection_3_04) :-
 		as_dictionary([x-1, y-Y], Dictionary1),
 		as_dictionary([x-X, y-2], Dictionary2),
 		intersection(Dictionary1, Dictionary2, Intersection),
@@ -471,7 +471,7 @@
 		^^assertion(xy, X-Y == 1-2),
 		^^assertion(pairs, SortedPairs == [x-1, y-2]).
 
-	test(dictionary_intersection_3_05) :-
+	deterministic(dictionary_intersection_3_05) :-
 		as_dictionary([x-1, y-Y, z-3], Dictionary1),
 		as_dictionary([x-X, y-2, t-4], Dictionary2),
 		intersection(Dictionary1, Dictionary2, Intersection),
@@ -482,17 +482,17 @@
 
 	% valid/1 tests
 
-	test(dictionary_valid_1_01) :-
+	deterministic(dictionary_valid_1_01) :-
 		as_dictionary([], Dictionary),
 		valid(Dictionary).
 
-	test(dictionary_valid_1_02) :-
+	deterministic(dictionary_valid_1_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		valid(Dictionary).
 
 	% new/1 tests
 
-	test(dictionary_new_1_01) :-
+	deterministic(dictionary_new_1_01) :-
 		new(Dictionary),
 		valid(Dictionary).
 

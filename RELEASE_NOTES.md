@@ -57,7 +57,8 @@ Documentation
 Library
 -------
 
-* IMPROVED: Simplified some of the `dictionaries` library test assertions.
+* IMPROVED: Simplified some of the `dictionaries` library test assertions and
+changed most tests to check for expected determinism.
 
 * FIXED: The `type` library object type-checking of Unicode character codes to
 exclude non-character code points (i.e. reserved, surrogate, or non-assigned).
