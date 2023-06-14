@@ -712,12 +712,6 @@ To list all installed packs, call the ``packs::installed/0`` predicate:
 
    | ?- packs::installed.
 
-To list all installed packs, call the ``packs::installed/0`` predicate:
-
-::
-
-   | ?- packs::installed.
-
 To list only the installed packs from a specific registry, call instead
 the ``packs::installed/1`` predicate. For example:
 
@@ -793,7 +787,7 @@ version:
 
 ::
 
-   | ?- packs::install(foo, bar, 1:1:2, [update(true)]).
+   | ?- packs::install(reg, bar, 1:1:2, [update(true)]).
 
 When using a ``checksig(true)`` option to check a pack signature, is
 strongly advised that you also use the ``verbose(true)`` option. For
@@ -801,7 +795,7 @@ example:
 
 ::
 
-   | ?- packs::install(foo, bar, 1:1:2, [verbose(true), checksig(true)]).
+   | ?- packs::install(reg, bar, 1:1:2, [verbose(true), checksig(true)]).
 
 Note that the public key used to sign the pack archive must be already
 present in your local system.
@@ -813,20 +807,20 @@ using GitHub:
 
 ::
 
-   | ?- packs::install(foo, bar, 1:1:2, [curl('--header "Authorization: token foo42"')]).
+   | ?- packs::install(reg, bar, 1:1:2, [curl('--header "Authorization: token foo42"')]).
 
 Another example when using GitLab:
 
 ::
 
-   | ?- packs::install(foo, bar, 1:1:2, [curl('--header "PRIVATE-TOKEN: foo42"')]).
+   | ?- packs::install(reg, bar, 1:1:2, [curl('--header "PRIVATE-TOKEN: foo42"')]).
 
 Pack archives may be encrypted, requiring passing the decryption
 passphrase when installing or updating a pack. For example:
 
 ::
 
-   | ?- packs::install(foo, bar, 1:1:2, [tar('--passphrase test123')]).
+   | ?- packs::install(reg, bar, 1:1:2, [tar('--passphrase test123')]).
 
 In this case, you should be careful to not leak your passphrase in e.g.
 the query history.
