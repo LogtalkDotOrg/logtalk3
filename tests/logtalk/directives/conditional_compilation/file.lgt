@@ -36,6 +36,7 @@
 
 
 :- if(fail).
+	:- foo.
 	f1.
 :- endif.
 
@@ -43,10 +44,13 @@
 :- if(true).
 	s2.
 :- elif(fail).
+	:- foo.
 	f2.
 :- elif(fail).
+	:- bar.
 	f3.
 :- else.
+	:- baz.
 	f4.
 :- endif.
 
