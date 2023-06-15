@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  Copyright 1992, 1998 Thom Fruehwirth
-%  Copyright 1998 Christian Jolzbaur
-%  Copyright 2004 Tom Schrijvers
-%  Copyright 2021 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2021 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2004 Tom Schrijvers
+%  SPDX-FileCopyrightText: 1998 Christian Jolzbaur
+%  SPDX-FileCopyrightText: 1992, 1998 Thom Fruehwirth
 %  SPDX-License-Identifier: BSD-2-Clause
 %
 %  Redistribution and use in source and binary forms, with or without

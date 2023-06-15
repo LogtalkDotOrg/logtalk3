@@ -1,8 +1,8 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-Copyright 2016 Barry Evans <barryevans@kyndi.com> and  
-Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 2016 Barry Evans <barryevans@kyndi.com>  
+SPDX-FileCopyrightText: 2016 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");

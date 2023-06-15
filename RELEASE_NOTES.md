@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ RELEASE NOTES
 
 
 3.67.0 - June ??, 2023
-=====================
+======================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -48,6 +48,8 @@ Prolog adapter and integration files
 
 Documentation
 -------------
+
+* CHANGED: Use `SPDX-FileCopyrightText` for most files copyright information.
 
 * ADDED: Section on writing debugging/logging messages from tests to the
 `lgtunit` tool documentation.

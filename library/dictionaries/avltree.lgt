@@ -6,8 +6,8 @@
 %           Jiri Spitz, and Jan Wielemaker
 %  Logtalk port and additional predicates: Paulo Moura
 %
-%  Copyright 2004-2018 various people and institutions
-%  Copyright 2019 Paulo Moura
+%  SPDX-FileCopyrightText: 2019 Paulo Moura
+%  SPDX-FileCopyrightText: 2004-2018 various people and institutions
 %  SPDX-License-Identifier: BSD-2-Clause
 %
 %  Redistribution and use in source and binary forms, with or without

@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  Copyright 2012 Mauro Ferrari      <mauro.ferrari@uninsubria.it>
-%  Copyright 2012 Camillo Fiorentini <fiorenti@dsi.unimi.it>
-%  Copyright 2012 Guido Fiorino      <guido.fiorino@unimib.it>
-%  Copyright 2020-2021 Paulo Moura   <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2020-2021 Paulo Moura   <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2012 Mauro Ferrari      <mauro.ferrari@uninsubria.it>
+%  SPDX-FileCopyrightText: 2012 Camillo Fiorentini <fiorenti@dsi.unimi.it>
+%  SPDX-FileCopyrightText: 2012 Guido Fiorino      <guido.fiorino@unimib.it>
 %  SPDX-License-Identifier: GPL-2.0-or-later
 %
 %  This program is free software; you can redistribute it and/or modify

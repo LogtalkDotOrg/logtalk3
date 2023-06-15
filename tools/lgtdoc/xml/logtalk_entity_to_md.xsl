@@ -11,7 +11,7 @@
 %  Last updated on July 29, 2021
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
-%  Copyright 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");

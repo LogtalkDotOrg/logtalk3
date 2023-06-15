@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  Copyright 2020-2021 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2020-2021 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: GPL-2.0-or-later
 %
 %  This program is free software; you can redistribute it and/or modify

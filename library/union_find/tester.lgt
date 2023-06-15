@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  Copyright 2022 José Antonio Riaza Valverde <riazavalverde@gmail.com>
-%  Copyright 2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2022 José Antonio Riaza Valverde <riazavalverde@gmail.com>
+%  SPDX-FileCopyrightText: 2022 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");

@@ -1,8 +1,8 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-Copyright 2003 Gregory J. Duck
-Copyright 2019 Paulo Moura <pmoura@logtalk.org>
+SPDX-FileCopyrightText: 2003 Gregory J. Duck
+SPDX-FileCopyrightText: 2019 Paulo Moura <pmoura@logtalk.org>
 SPDX-License-Identifier: GPL-2.0-or-later
 
 This program is free software; you can redistribute it and/or modify

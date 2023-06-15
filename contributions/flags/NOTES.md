@@ -3,10 +3,8 @@
 
 Flags was developed at Katholieke Universiteit Leuven
 
-Copyright 2010  
-Katholieke Universiteit Leuven
-
-License: The Artistic License 2.0
+SPDX-FileCopyrightText: 2010 Katholieke Universiteit Leuven
+SPDX-License-Identifier: Artistic-2.0
 
 Contributions to this file:  
 Author: Theofrastos Mantadelis  

@@ -2,9 +2,8 @@ ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
 
-Copyright 2016 Metagol authors  
-Copyright 2018-2019 Paulo Moura  
-All rights reserved.  
+SPDX-FileCopyrightText: 2018-2019 Paulo Moura  
+SPDX-FileCopyrightText: 2016 Metagol authors  
 SPDX-License-Identifier: BSD-3-Clause
 
 Redistribution and use in source and binary forms, with or without

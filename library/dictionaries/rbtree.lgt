@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  Copyright 2010 Vitor Santos Costa
-%  Copyright 2010-2020 Paulo Moura
+%  SPDX-FileCopyrightText: 2010-2020 Paulo Moura
+%  SPDX-FileCopyrightText: 2010 Vitor Santos Costa
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
