@@ -128,6 +128,9 @@ control constructs.
 * ADDED: Additional tests for the Prolog `call/2-N` and `setup_call_cleanup/3`
 predicates.
 
+* ADDED: Tests for the `function_property/2` built-in predicate under
+discussion with Prolog system implementers.
+
 
 3.66.0 - May 30, 2023
 =====================
