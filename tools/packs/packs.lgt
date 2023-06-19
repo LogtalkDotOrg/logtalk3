@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:61:1,
+		version is 0:62:0,
 		author is 'Paulo Moura',
-		date is 2023-05-05,
+		date is 2023-06-19,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -269,6 +269,7 @@
 		comment is 'Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Version', 'Options'],
 		remarks is [
+			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
 			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
@@ -297,6 +298,7 @@
 		comment is 'Updates an outdated pack to its latest version using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Options'],
 		remarks is [
+			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
 			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
@@ -1074,9 +1076,13 @@
 				fail
 			;	update_pack(Registry, Pack, OldVersion, Version, Options)
 			)
-		;	registry_pack(_, Pack, _) ->
-			print_message(error, packs, pack_not_installed(Pack)),
-			fail
+		;	registry_pack(Registry, Pack, _) ->
+			(	member(install(true), Options) ->
+				latest_version(Registry, Pack, Version),
+				install(Registry, Pack, Version, Options)
+			;	print_message(error, packs, pack_not_installed(Pack)),
+				fail
+			)
 		;	print_message(error, packs, unknown_pack(Pack)),
 			fail
 		).
@@ -1091,9 +1097,13 @@
 				fail
 			;	update_pack(Registry, Pack, Version, Options)
 			)
-		;	registry_pack(_, Pack, _) ->
-			print_message(error, packs, pack_not_installed(Pack)),
-			fail
+		;	registry_pack(Registry, Pack, _) ->
+			(	member(install(true), Options) ->
+				latest_version(Registry, Pack, Version),
+				install(Registry, Pack, Version, Options)
+			;	print_message(error, packs, pack_not_installed(Pack)),
+				fail
+			)
 		;	print_message(error, packs, unknown_pack(Pack)),
 			fail
 		).
@@ -1262,7 +1272,8 @@
 		^^check_options(UserOptions),
 		(	member(force(_), UserOptions) ->
 			UpdatedOptions = UserOptions
-		;	UpdatedOptions = [force(true)| UserOptions]
+		;	% the restore/1-2 predicates use a different default for this option
+			UpdatedOptions = [force(true)| UserOptions]
 		),
 		^^merge_options(UpdatedOptions, Options),
 		open(File, read, Stream),
@@ -1830,8 +1841,17 @@
 
 	outdated_pack(Registry, Pack, Version, LatestVersion) :-
 		installed_pack(Registry, Pack, Version, _),
-		latest_version(Registry, Pack, LatestVersion, _, _, _, _),
+		latest_version(Registry, Pack, LatestVersion),
 		Version @< LatestVersion.
+
+	latest_version(Registry, Pack, LatestVersion) :-
+		registry_pack(Registry, Pack, PackObject),
+		findall(
+			Version,
+			PackObject::version(Version, _, _, _, _, _),
+			Versions
+		),
+		sort(0, (@>), Versions, [LatestVersion| _]).
 
 	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability) :-
 		registry_pack(Registry, Pack, PackObject),
@@ -2003,6 +2023,7 @@
 
 	default_option(verbose(false)).
 	default_option(clean(false)).
+	default_option(install(false)).
 	default_option(update(false)).
 	% the restore/1-2 predicates use force(true) instead
 	default_option(force(false)).
@@ -2017,6 +2038,8 @@
 	valid_option(verbose(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(clean(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(install(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(update(Boolean)) :-
 		valid(boolean, Boolean).

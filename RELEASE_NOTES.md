@@ -83,6 +83,10 @@ as LVM) resulting in atoms with a different length.
 Tools
 -----
 
+* ADDED: The `packs::update/2-3` predicates now accept an `install/1` boolean
+option to install a pack latest version when trying to update a pack that's
+not installed.
+
 * ADDED: The `lgtunit` tool now detects and reports discrepancies between the
 number of tests run and the total number of tests defined in a test set. This
 usually implies bugs in the implementation of basic Prolog control constructs
