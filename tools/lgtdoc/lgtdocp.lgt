@@ -33,9 +33,9 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 5:0:0,
+		version is 5:0:1,
 		author is 'Paulo Moura',
-		date is 2021-10-25,
+		date is 2023-06-20,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the ``source_data`` flag turned on.',
@@ -149,7 +149,7 @@
 	:- mode(all(+list), one).
 	:- info(all/1, [
 		comment is 'Creates XML documenting files for all loaded entities using the specified options.',
-		argnames is ['File']
+		argnames is ['Options']
 	]).
 
 	:- public(all/0).

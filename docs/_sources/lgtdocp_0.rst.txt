@@ -11,8 +11,8 @@
 Documenting tool protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 5:0:0
-| **Date:** 2021-10-25
+| **Version:** 5:0:1
+| **Date:** 2023-06-20
 
 | **Compilation flags:**
 |    ``static``
@@ -282,7 +282,7 @@ Creates XML documenting files for all loaded entities using the specified option
 |    ``static``
 
 | **Template:**
-|    ``all(File)``
+|    ``all(Options)``
 | **Mode and number of proofs:**
 |    ``all(+list)`` - ``one``
 
