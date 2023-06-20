@@ -2112,6 +2112,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`lgtdocp <lgtdocp/0::directories/1>`
 * :ref:`wrapper <wrapper/0::directories/1>`
 
 ``directories/2``
@@ -2124,6 +2125,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`diagram(Format) <diagram/1::directories/2>`
 * :ref:`diagrams(Format) <diagrams/1::directories/2>`
+* :ref:`lgtdocp <lgtdocp/0::directories/2>`
 * :ref:`wrapper <wrapper/0::directories/2>`
 
 ``directories/3``
@@ -2886,6 +2888,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`diagram(Format) <diagram/1::files/1>`
 * :ref:`diagrams(Format) <diagrams/1::files/1>`
+* :ref:`lgtdocp <lgtdocp/0::files/1>`
 * :ref:`wrapper <wrapper/0::files/1>`
 
 ``files/2``
@@ -2898,6 +2901,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`diagram(Format) <diagram/1::files/2>`
 * :ref:`diagrams(Format) <diagrams/1::files/2>`
+* :ref:`lgtdocp <lgtdocp/0::files/2>`
 * :ref:`wrapper <wrapper/0::files/2>`
 
 ``files/3``
@@ -4684,6 +4688,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`diagram(Format) <diagram/1::libraries/1>`
 * :ref:`diagrams(Format) <diagrams/1::libraries/1>`
+* :ref:`lgtdocp <lgtdocp/0::libraries/1>`
 
 ``libraries/2``
 ---------------
@@ -4695,6 +4700,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`diagram(Format) <diagram/1::libraries/2>`
 * :ref:`diagrams(Format) <diagrams/1::libraries/2>`
+* :ref:`lgtdocp <lgtdocp/0::libraries/2>`
 
 ``libraries/3``
 ---------------
@@ -6850,6 +6856,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::range/2>`
 
+``rdirectories/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtdocp <lgtdocp/0::rdirectories/1>`
+
+``rdirectories/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtdocp <lgtdocp/0::rdirectories/2>`
+
 ``rdirectory/1``
 ----------------
 
@@ -7325,6 +7351,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`zipperp <zipperp/0::rewind/3>`
+
+``rlibraries/1``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtdocp <lgtdocp/0::rlibraries/1>`
+
+``rlibraries/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lgtdocp <lgtdocp/0::rlibraries/2>`
 
 ``rlibrary/1``
 --------------

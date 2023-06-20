@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:2:2,
+		version is 9:3:0,
 		author is 'Paulo Moura',
-		date is 2023-05-29,
+		date is 2023-06-20,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -94,6 +94,22 @@
 		memberchk/2 as member_var/2
 	]).
 
+	rlibraries(Libraries, UserOptions) :-
+		^^check_options(UserOptions),
+		reset,
+		^^merge_options(UserOptions, Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
+		make_directory(XMLDirectory),
+		forall(
+			member(Library, Libraries),
+			(	expand_library_path(Library, TopPath),
+				output_rlibrary(TopPath, Options)
+			)
+		).
+
+	rlibraries(Libraries) :-
+		rlibraries(Libraries, []).
+
 	rlibrary(Library, UserOptions) :-
 		^^check_options(UserOptions),
 		reset,
@@ -125,6 +141,23 @@
 		atom_concat(TopPath, RelativePath, LibraryPath),
 		\+ member(RelativePath, ExcludedPaths).
 
+	libraries(Libraries, UserOptions) :-
+		^^check_options(UserOptions),
+		reset,
+		^^merge_options(UserOptions, Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
+		make_directory(XMLDirectory),
+		forall(
+			member(Library, Libraries),
+			(	expand_library_path(Library, Path),
+				output_directory_files(Path, Options),
+				write_indexes(Options)
+			)
+		).
+
+	libraries(Libraries) :-
+		libraries(Libraries, []).
+
 	library(Library, UserOptions) :-
 		^^check_options(UserOptions),
 		reset,
@@ -137,6 +170,22 @@
 
 	library(Library) :-
 		library(Library, []).
+
+	rdirectories(Directories, UserOptions) :-
+		^^check_options(UserOptions),
+		reset,
+		^^merge_options(UserOptions, Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
+		make_directory(XMLDirectory),
+		forall(
+			member(Directory, Directories),
+			(	absolute_file_name(Directory, Path),
+				output_rdirectory(Path, Options)
+			)
+		).
+
+	rdirectories(Directories) :-
+		rdirectories(Directories, []).
 
 	rdirectory(Directory, UserOptions) :-
 		^^check_options(UserOptions),
@@ -174,6 +223,23 @@
 		atom_concat(Directory, RelativePath, SubDirectory),
 		\+ member(RelativePath, ExcludedPaths).
 
+	directories(Directories, UserOptions) :-
+		^^check_options(UserOptions),
+		reset,
+		^^merge_options(UserOptions, Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
+		make_directory(XMLDirectory),
+		forall(
+			member(Directory, Directories),
+			(	absolute_file_name(Directory, Path),
+				output_directory_files(Path, Options),
+				write_indexes(Options)
+			)
+		).
+
+	directories(Directories) :-
+		directories(Directories, []).
+
 	directory(Directory, UserOptions) :-
 		^^check_options(UserOptions),
 		reset,
@@ -203,6 +269,22 @@
 		process(Basename, DirectorySlash, Options, StreamOptions),
 		fail.
 	output_directory_files(_, _).
+
+	files(Sources, UserOptions) :-
+		^^check_options(UserOptions),
+		reset,
+		^^merge_options(UserOptions, Options),
+		^^option(xml_docs_directory(XMLDirectory), Options),
+		make_directory(XMLDirectory),
+		forall(
+			member(Source, Sources),
+			(	locate_file(Source, Basename, Directory, StreamOptions),
+				process(Basename, Directory, Options, StreamOptions)
+			)
+		).
+
+	files(Sources) :-
+		files(Sources, []).
 
 	file(Source, UserOptions) :-
 		^^check_options(UserOptions),

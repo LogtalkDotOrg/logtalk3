@@ -83,6 +83,9 @@ as LVM) resulting in atoms with a different length.
 Tools
 -----
 
+* ADDED: Predicates `rlibraries/1-2`, `libraries/1-2`, `rdirectories/1-2`,
+`directories/1-2`, and `files/1-2` to the `lgtdoc` tool.
+
 * ADDED: The `packs::update/2-3` predicates now accept an `install/1` boolean
 option to install a pack latest version when trying to update a pack that's
 not installed.

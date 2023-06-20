@@ -33,7 +33,7 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 5:0:1,
+		version is 5:1:0,
 		author is 'Paulo Moura',
 		date is 2023-06-20,
 		comment is 'Documenting tool protocol.',
@@ -57,6 +57,20 @@
 		see_also is [lgtdoc]
 	]).
 
+	:- public(rlibraries/2).
+	:- mode(rlibraries(+list(atom), +list), one).
+	:- info(rlibraries/2, [
+		comment is 'Creates XML documenting files for all entities in all given libraries and their sub-libraries using the specified options.',
+		argnames is ['Libraries', 'Options']
+	]).
+
+	:- public(rlibraries/1).
+	:- mode(rlibraries(+list(atom)), one).
+	:- info(rlibraries/1, [
+		comment is 'Creates XML documenting files for all entities in all given libraries and their sub-libraries using default options.',
+		argnames is ['Libraries']
+	]).
+
 	:- public(rlibrary/2).
 	:- mode(rlibrary(+atom, +list), one).
 	:- info(rlibrary/2, [
@@ -77,6 +91,20 @@
 		]
 	]).
 
+	:- public(libraries/2).
+	:- mode(libraries(+list(atom), +list), one).
+	:- info(libraries/2, [
+		comment is 'Creates XML documenting files for all entities in all given libraries using the specified options.',
+		argnames is ['Libraries', 'Options']
+	]).
+
+	:- public(libraries/1).
+	:- mode(libraries(+list(atom)), one).
+	:- info(libraries/1, [
+		comment is 'Creates XML documenting files for all entities in all given libraries using default options.',
+		argnames is ['Libraries']
+	]).
+
 	:- public(library/2).
 	:- mode(library(+atom, +list), one).
 	:- info(library/2, [
@@ -92,6 +120,20 @@
 	:- info(library/1, [
 		comment is 'Creates XML documenting files for all entities in a library using default options.',
 		argnames is ['Library']
+	]).
+
+	:- public(rdirectories/2).
+	:- mode(rdirectories(+list(atom), +list), one).
+	:- info(rdirectories/2, [
+		comment is 'Creates XML documenting files for all entities in all given directories and their sub-directories using the specified options.',
+		argnames is ['Directories', 'Options']
+	]).
+
+	:- public(rdirectories/1).
+	:- mode(rdirectories(+list(atom)), one).
+	:- info(rdirectories/1, [
+		comment is 'Creates XML documenting files for all entities in all given directories and their sub-directories using default options.',
+		argnames is ['Directories']
 	]).
 
 	:- public(rdirectory/2).
@@ -114,6 +156,20 @@
 		]
 	]).
 
+	:- public(directories/2).
+	:- mode(directories(+list(atom), +list), one).
+	:- info(directories/2, [
+		comment is 'Creates XML documenting files for all entities in all given directories using the specified options.',
+		argnames is ['Directories', 'Options']
+	]).
+
+	:- public(directories/1).
+	:- mode(directories(+list(atom)), one).
+	:- info(directories/1, [
+		comment is 'Creates XML documenting files for all entities in all given directories using default options.',
+		argnames is ['Directories']
+	]).
+
 	:- public(directory/2).
 	:- mode(directory(+atom, +list), one).
 	:- info(directory/2, [
@@ -129,6 +185,20 @@
 	:- info(directory/1, [
 		comment is 'Creates XML documenting files for all entities in a directory using default options.',
 		argnames is ['Directory']
+	]).
+
+	:- public(files/2).
+	:- mode(files(+list(atom), +list), one).
+	:- info(files/2, [
+		comment is 'Creates XML documenting files for all entities in loaded source files using the specified options. The files can be given by name, basename, full path, or using library notation.',
+		argnames is ['Files', 'Options']
+	]).
+
+	:- public(files/1).
+	:- mode(files(+list(atom)), one).
+	:- info(files/1, [
+		comment is 'Creates XML documenting files for all entities in loaded source files using default options. The files can be given by name, basename, full path, or using library notation.',
+		argnames is ['Files']
 	]).
 
 	:- public(file/2).

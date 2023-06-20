@@ -11,7 +11,7 @@
 Documenting tool protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 5:0:1
+| **Version:** 5:1:0
 | **Date:** 2023-06-20
 
 | **Compilation flags:**
@@ -49,6 +49,44 @@ Documenting tool protocol.
 
 Public predicates
 -----------------
+
+.. index:: rlibraries/2
+.. _lgtdocp/0::rlibraries/2:
+
+``rlibraries/2``
+^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in all given libraries and their sub-libraries using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rlibraries(Libraries,Options)``
+| **Mode and number of proofs:**
+|    ``rlibraries(+list(atom),+list)`` - ``one``
+
+
+------------
+
+.. index:: rlibraries/1
+.. _lgtdocp/0::rlibraries/1:
+
+``rlibraries/1``
+^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in all given libraries and their sub-libraries using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rlibraries(Libraries)``
+| **Mode and number of proofs:**
+|    ``rlibraries(+list(atom))`` - ``one``
+
+
+------------
 
 .. index:: rlibrary/2
 .. _lgtdocp/0::rlibrary/2:
@@ -98,6 +136,44 @@ Creates XML documenting files for all entities in a library and its sub-librarie
 
 ------------
 
+.. index:: libraries/2
+.. _lgtdocp/0::libraries/2:
+
+``libraries/2``
+^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in all given libraries using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``libraries(Libraries,Options)``
+| **Mode and number of proofs:**
+|    ``libraries(+list(atom),+list)`` - ``one``
+
+
+------------
+
+.. index:: libraries/1
+.. _lgtdocp/0::libraries/1:
+
+``libraries/1``
+^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in all given libraries using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``libraries(Libraries)``
+| **Mode and number of proofs:**
+|    ``libraries(+list(atom))`` - ``one``
+
+
+------------
+
 .. index:: library/2
 .. _lgtdocp/0::library/2:
 
@@ -137,6 +213,44 @@ Creates XML documenting files for all entities in a library using default option
 |    ``library(Library)``
 | **Mode and number of proofs:**
 |    ``library(+atom)`` - ``one``
+
+
+------------
+
+.. index:: rdirectories/2
+.. _lgtdocp/0::rdirectories/2:
+
+``rdirectories/2``
+^^^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in all given directories and their sub-directories using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectories(Directories,Options)``
+| **Mode and number of proofs:**
+|    ``rdirectories(+list(atom),+list)`` - ``one``
+
+
+------------
+
+.. index:: rdirectories/1
+.. _lgtdocp/0::rdirectories/1:
+
+``rdirectories/1``
+^^^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in all given directories and their sub-directories using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectories(Directories)``
+| **Mode and number of proofs:**
+|    ``rdirectories(+list(atom))`` - ``one``
 
 
 ------------
@@ -189,6 +303,44 @@ Creates XML documenting files for all entities in a directory and its sub-direct
 
 ------------
 
+.. index:: directories/2
+.. _lgtdocp/0::directories/2:
+
+``directories/2``
+^^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in all given directories using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directories(Directories,Options)``
+| **Mode and number of proofs:**
+|    ``directories(+list(atom),+list)`` - ``one``
+
+
+------------
+
+.. index:: directories/1
+.. _lgtdocp/0::directories/1:
+
+``directories/1``
+^^^^^^^^^^^^^^^^^
+
+Creates XML documenting files for all entities in all given directories using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directories(Directories)``
+| **Mode and number of proofs:**
+|    ``directories(+list(atom))`` - ``one``
+
+
+------------
+
 .. index:: directory/2
 .. _lgtdocp/0::directory/2:
 
@@ -228,6 +380,44 @@ Creates XML documenting files for all entities in a directory using default opti
 |    ``directory(Directory)``
 | **Mode and number of proofs:**
 |    ``directory(+atom)`` - ``one``
+
+
+------------
+
+.. index:: files/2
+.. _lgtdocp/0::files/2:
+
+``files/2``
+^^^^^^^^^^^
+
+Creates XML documenting files for all entities in loaded source files using the specified options. The files can be given by name, basename, full path, or using library notation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``files(Files,Options)``
+| **Mode and number of proofs:**
+|    ``files(+list(atom),+list)`` - ``one``
+
+
+------------
+
+.. index:: files/1
+.. _lgtdocp/0::files/1:
+
+``files/1``
+^^^^^^^^^^^
+
+Creates XML documenting files for all entities in loaded source files using default options. The files can be given by name, basename, full path, or using library notation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``files(Files)``
+| **Mode and number of proofs:**
+|    ``files(+list(atom))`` - ``one``
 
 
 ------------
