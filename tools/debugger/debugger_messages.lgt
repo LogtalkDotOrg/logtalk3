@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2023-04-27,
+		date is 2023-06-21,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -359,8 +359,8 @@
 		['  Call: '-[]].
 	port_name(exit) -->
 		['  Exit: '-[]].
-	% LVM and Quintus Prolog don't provide a way to find if a call is deterministic
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == quintus; Dialect == lvm))).
+	% Quintus Prolog doesn't provide a way to find if a call is deterministic
+	:- if(current_logtalk_flag(prolog_dialect, quintus)).
 		port_name(nd_exit) -->
 			['  Exit: '-[]].
 	:- else.

@@ -104,6 +104,9 @@ would result in the test being reported twice (both as skipped and failed).
 * FIXED: Tests for the `directory_dependency_diagram::rdirectory/2` and
 `directory_load_diagram::rdirectory/2` library predicates.
 
+* FIXED: The `debugger` tool messages was still wrongly assuming that LVM
+didn't provide a way to check if a call is deterministic.
+
 Examples
 --------
 
