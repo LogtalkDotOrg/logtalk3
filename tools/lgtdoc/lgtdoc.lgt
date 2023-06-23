@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:3:0,
+		version is 9:3:1,
 		author is 'Paulo Moura',
-		date is 2023-06-20,
+		date is 2023-06-23,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -202,10 +202,13 @@
 	output_rdirectory(Directory, Options) :-
 		^^option(exclude_paths(ExcludedPaths), Options),
 		^^option(exclude_prefixes(ExcludedPrefixes), Options),
-		setof(
-			SubDirectory,
-			sub_directory(Directory, ExcludedPaths, ExcludedPrefixes, SubDirectory),
-			SubDirectories
+		(	setof(
+				SubDirectory,
+				sub_directory(Directory, ExcludedPaths, ExcludedPrefixes, SubDirectory),
+				SubDirectories
+			) ->
+			true
+		;	SubDirectories = []
 		),
 		forall(
 			member(SubDirectory, SubDirectories),

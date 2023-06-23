@@ -107,6 +107,9 @@ would result in the test being reported twice (both as skipped and failed).
 * FIXED: The `debugger` tool messages was still wrongly assuming that LVM
 didn't provide a way to check if a call is deterministic.
 
+* FIXED: Prevent the `lgtdoc` tool `rdirectory/1-2` predicates from failing
+when there are no sub-directories with loaded files.
+
 Examples
 --------
 
