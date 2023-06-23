@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(predicate_property(function_property(_,_), _)).
+:- if(predicate_property(evaluable_property(_,_), _)).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),

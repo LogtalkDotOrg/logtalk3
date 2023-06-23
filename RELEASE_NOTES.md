@@ -141,7 +141,7 @@ control constructs.
 * ADDED: Additional tests for the Prolog `call/2-N` and `setup_call_cleanup/3`
 predicates.
 
-* ADDED: Tests for the `function_property/2` built-in predicate under
+* ADDED: Tests for the `evaluable_property/2` built-in predicate under
 discussion with Prolog system implementers.
 
 
