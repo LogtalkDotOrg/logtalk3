@@ -56,6 +56,9 @@ Documentation
 
 * UPDATED: Documentation of the `dictionaries` library.
 
+* FIXED: Several typos in the Handbook section on Prolog integration and
+migration.
+
 Library
 -------
 

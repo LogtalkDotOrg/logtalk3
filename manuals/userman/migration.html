@@ -148,15 +148,8 @@
              
   <section id="prolog-integration-and-migration">
 <span id="migration-migration"></span><h1>Prolog integration and migration<a class="headerlink" href="#prolog-integration-and-migration" title="Permalink to this heading"></a></h1>
-<p>An application may include plain Prolog files, Prolog modules, and
-Logtalk objects. This is a perfectly valid way of developing a complex
-application and, in some cases, it might be the most appropriated
-solution. Modules may be used for legacy code or when a simple
-encapsulation mechanism is adequate. Logtalk objects may be used when
-more powerful encapsulation, abstraction, and reuse features are
-required.</p>
-<p>This section provides tips for integrating and migrating plain Prolog code
-and Prolog module code to Logtalk. Step-by-step instructions are provided
+<p>This section provides suggestions for integrating and migrating plain Prolog
+code and Prolog module code to Logtalk. Detailed instructions are provided
 for encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
 inside Logtalk. An interesting application of the techniques described
@@ -185,12 +178,12 @@ not meant to be directly called by the user. Encapsulating plain Prolog
 code in objects allows us to make clear the different roles of each
 predicate, to hide implementation details, to prevent auxiliary
 predicates from being called outside the object, and to take advantage
-of Logtalk advanced code encapsulating and reusing features.</p>
-<p>Encapsulating Prolog code using Logtalk objects is simple. First, for
-each source file, add an opening object directive,
-<a class="reference internal" href="../refman/directives/object_1_5.html#directives-object-1-5"><span class="std std-ref">object/1-5</span></a>, to the
-beginning of the file and an ending object directive,
-<a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>, to end of
+of Logtalk advanced code encapsulating and reusing features. It also
+simplifies using its developer tools.</p>
+<p>Encapsulating Prolog code using Logtalk objects is simple. First, for each
+source file, add an opening object directive, <a class="reference internal" href="../refman/directives/object_1_5.html#directives-object-1-5"><span class="std std-ref">object/1-5</span></a>,
+to the beginning of the file and an ending object directive,
+<a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>, to the end of
 the file. Choose an object name that reflects the purpose of source file
 code (this is a good opportunity for code refactoring if necessary).
 Second, add <a class="reference internal" href="../refman/directives/public_1.html#directives-public-1"><span class="std std-ref">public/1</span></a> predicate directives for the
@@ -228,12 +221,12 @@ the format:</p>
     ...
 </pre></div>
 </div>
-<p>See the User Manual section on the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> predicate directive
-for more information. An alternative solution is to simply keep the
-clauses for the multifile predicates as plain Prolog code and define, if
-necessary, a parametric object to encapsulate all predicates working
-with the multifile predicate clauses. For example, assume the following
-<code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive:</p>
+<p>See the <a class="reference internal" href="predicates.html#predicates-multifile"><span class="std std-ref">section</span></a> on the <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code>
+predicate directive for more information. An alternative solution is to
+simply keep the clauses for the multifile predicates as plain Prolog code
+and define, if necessary, a parametric object to encapsulate all predicates
+working with the multifile predicate clauses. For example, assume the
+following <code class="docutils literal notranslate"><span class="pre">multifile/1</span></code> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% city(Name, District, Population, Neighbors)</span>
 <span class="p">:- </span><span class="k">multifile</span>(city<span class="o">/</span><span class="m">4</span>).
 </pre></div>
@@ -254,7 +247,7 @@ for more details.</p>
 <section id="converting-prolog-modules-into-objects">
 <span id="migration-converting"></span><h2>Converting Prolog modules into objects<a class="headerlink" href="#converting-prolog-modules-into-objects" title="Permalink to this heading"></a></h2>
 <p>Converting Prolog modules into objects may allow an application to run
-on a wider range of Prolog compilers, overcoming compatibility problems.
+on a wider range of Prolog compilers, overcoming portability problems.
 Some Prolog compilers don’t support a module system. Among those Prolog
 compilers which support a module system, the lack of standardization
 leads to several issues, specially with semantics, operators, and
@@ -285,23 +278,23 @@ directives.</p></li>
 <li><p>Convert each <code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> directive into a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
 directive and <code class="docutils literal notranslate"><span class="pre">public/1</span></code> predicate directives (see next section).</p></li>
 <li><p>Convert any <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives into Logtalk
-<a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a>
-directives by replacing the module meta-argument indicator, <code class="docutils literal notranslate"><span class="pre">:</span></code>,
-with the Logtalk meta-argument indicator, <code class="docutils literal notranslate"><span class="pre">0</span></code>. Closures must be
-represented using an integer denoting the number of additional
-arguments that will be appended to construct a goal. Arguments which
-are not meta-arguments are represented by the <code class="docutils literal notranslate"><span class="pre">*</span></code> character.</p></li>
+<a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directives by replacing the module
+meta-argument indicator, <code class="docutils literal notranslate"><span class="pre">:</span></code>, with the Logtalk meta-argument indicator
+<code class="docutils literal notranslate"><span class="pre">0</span></code> for goal meta-arguments. For closure meta-arguments, use an integer
+denoting the number of additional arguments that will be appended to
+construct a goal. Arguments which are not meta-arguments are represented by
+the <code class="docutils literal notranslate"><span class="pre">*</span></code> character. Do not use argument mode indicators such as <code class="docutils literal notranslate"><span class="pre">?</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">+</span></code>, or <code class="docutils literal notranslate"><span class="pre">-</span></code> as Logtalk supports <a class="reference internal" href="predicates.html#predicates-mode"><span class="std std-ref">mode directives</span></a>.</p></li>
 <li><p>Convert any explicit qualified calls to module predicates to messages
-by replacing the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> operator with the
-<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a> message
-sending operator when the referenced modules are also being
-converted into objects. Calls in the pseudo-module <code class="docutils literal notranslate"><span class="pre">user</span></code> can
-be encapsulated using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> Logtalk
-external call control construct. You can also use instead a
-<a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directive where the
-first argument would be the atom <code class="docutils literal notranslate"><span class="pre">user</span></code> and the second argument a
-list of all external predicates. This alternative has the advantage
-of not requiring changes to the code making the predicate calls.</p></li>
+by replacing the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> operator with the <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a>
+message sending operator when the referenced modules are also being
+converted into objects. Calls in the pseudo-module <code class="docutils literal notranslate"><span class="pre">user</span></code> can be
+encapsulated using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> Logtalk external
+call control construct. You can also use instead a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
+directive where the first argument would be the atom <code class="docutils literal notranslate"><span class="pre">user</span></code> and the
+second argument a list of all external predicates. This alternative has
+the advantages of not requiring changes to the code making the predicate
+calls and of better visibility for the documenting and diagramming tools.</p></li>
 <li><p>If your module uses the database built-in predicates to implement
 module local mutable state using dynamic predicates, add both
 <a class="reference internal" href="../refman/directives/private_1.html#directives-private-1"><span class="std std-ref">private/1</span></a> and
@@ -440,10 +433,10 @@ directives by finding which predicates exported by the
 specified modules are reexported or imported into the module containing
 the directive. For <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives, finding the names of the
 imported predicates that are actually used is easy. First, comment out the
-and compile the file (making sure that the
+directive and compile the file (making sure that the
 <a class="reference internal" href="programming.html#flag-unknown-predicates"><span class="std std-ref">unknown_predicates</span></a> compiler flag is set
 to <code class="docutils literal notranslate"><span class="pre">warning</span></code>). Logtalk will print a warning with a list of predicates
-that are called but never defined. Second, use these list to replace the
+that are called but never defined. Second, use this list to replace the
 <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives by <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives. You should
 then be able to compile the modified Prolog module as an object.</p>
 </section>
@@ -462,18 +455,18 @@ code to be expanded. Logtalk supports using a module as a hook object
 as long as its name doesn’t coincide with the name of an object and
 that the module uses <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
 predicates. Assuming that’s the case, before attempting to compile
-the modules as objects, the default hook object is set to the module
+the modules as objects, set the default hook object is to the module
 containing the expansion code. For example, if the expansions stored
 in a <code class="docutils literal notranslate"><span class="pre">system</span></code> module:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- set_logtalk_flag(hook, system).
 ...
 </pre></div>
 </div>
-<p>This, however, may not be enough as some expansions may stored in more
-than one module. A common example is to use a module named <code class="docutils literal notranslate"><span class="pre">prolog</span></code>.
-It is also common to store the expansions in <code class="docutils literal notranslate"><span class="pre">user</span></code>. The Logtalk library
-provides a solution for these scenarios. Using the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library
-we can select multiple hook objects or hook modules. For example,
+<p>This, however, may not be enough as expansions may be stored in multiple
+modules. A common example is to use a module named <code class="docutils literal notranslate"><span class="pre">prolog</span></code> for system
+expansions and to store the user-defined expansions in <code class="docutils literal notranslate"><span class="pre">user</span></code>. The Logtalk
+library provides a solution for these scenarios. Using the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code>
+library we can select multiple hook objects or hook modules. For example,
 assuming expansions stored on both <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">system</span></code> modules:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(hook_flows(loader)).
 ...
@@ -493,11 +486,11 @@ be possible to rewrite the expansion rules to use the
 <section id="file-search-paths">
 <span id="migration-file-search-paths"></span><h3>File search paths<a class="headerlink" href="#file-search-paths" title="Permalink to this heading"></a></h3>
 <p>Some Prolog systems provide a mechanism for defining file search paths
-(this mechanism works differently from Logtalk own suporty for defining
-library paths). When porting Prolog code that defines file search paths,
-e.g. for finding module libraries, it often helps to load the pristine
-Prolog application before attempting to compile its source files as
-Logtalk source files. Depending on the Prolog backend, this may allow
+(this mechanism works differently from Logtalk own suport for defining
+library path aliases). When porting Prolog code that defines file search
+paths, e.g. for finding module libraries, it often helps to load the
+pristine Prolog application before attempting to compile its source files
+as Logtalk source files. Depending on the Prolog backend, this may allow
 the file search paths to be used when compiling modules as objects that
 use file directives such as <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>.</p>
 </section>
@@ -516,8 +509,8 @@ basis: ignoring the directive (i.e. do not copy the directive, although
 a goal can be proved as a consequence), rewriting and copy the directive
 to the generated Prolog files, or rewriting and recompiling the
 resulting directive. To specify these actions, the adapter files contain
-clauses for the <code class="docutils literal notranslate"><span class="pre">'$lgt_prolog_term_expansion'/2</span></code> predicate. For
-example, assume that a given Prolog compiler defines a <code class="docutils literal notranslate"><span class="pre">comment/2</span></code>
+clauses for the internal <code class="docutils literal notranslate"><span class="pre">'$lgt_prolog_term_expansion'/2</span></code> predicate.
+For example, assume that a given Prolog compiler defines a <code class="docutils literal notranslate"><span class="pre">comment/2</span></code>
 directive for predicates using the format:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span>comment(foo<span class="o">/</span><span class="m">2</span>, <span class="s">&quot;Brief description of the predicate&quot;</span>).
 </pre></div>
@@ -526,8 +519,8 @@ directive for predicates using the format:</p>
 defining a suitable clause for the <code class="docutils literal notranslate"><span class="pre">'$lgt_prolog_term_expansion'/2</span></code>
 predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_term_expansion&#39;</span>(
-        comment(<span class="nv">F</span><span class="o">/</span><span class="nv">A</span>, <span class="nv">String</span>),
-        info(<span class="nv">F</span><span class="o">/</span><span class="nv">A</span>, [comment <span class="k">is</span> <span class="nv">Atom</span>])
+        (<span class="o">:-</span> comment(<span class="nv">F</span><span class="o">/</span><span class="nv">A</span>, <span class="nv">String</span>)),
+        (<span class="o">:-</span> info(<span class="nv">F</span><span class="o">/</span><span class="nv">A</span>, [comment <span class="k">is</span> <span class="nv">Atom</span>]))
 ) <span class="o">:-</span>
     <span class="k">atom_codes</span>(<span class="nv">Atom</span>, <span class="nv">String</span>).
 </pre></div>
@@ -540,7 +533,7 @@ likely non-portable across Prolog compilers.</p>
 <p>A second example, where a proprietary Prolog directive is discarded
 after triggering a side effect:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_term_expansion&#39;</span>(
-        load_foreign_files(<span class="nv">Files</span>,<span class="nv">Libs</span>,<span class="nv">InitRoutine</span>),
+        (<span class="o">:-</span> load_foreign_files(<span class="nv">Files</span>,<span class="nv">Libs</span>,<span class="nv">InitRoutine</span>)),
         []
 ) <span class="o">:-</span>
     load_foreign_files(<span class="nv">Files</span>,<span class="nv">Libs</span>,<span class="nv">InitRoutine</span>).

@@ -21,16 +21,8 @@
 Prolog integration and migration
 ================================
 
-An application may include plain Prolog files, Prolog modules, and
-Logtalk objects. This is a perfectly valid way of developing a complex
-application and, in some cases, it might be the most appropriated
-solution. Modules may be used for legacy code or when a simple
-encapsulation mechanism is adequate. Logtalk objects may be used when
-more powerful encapsulation, abstraction, and reuse features are
-required.
-
-This section provides tips for integrating and migrating plain Prolog code
-and Prolog module code to Logtalk. Step-by-step instructions are provided
+This section provides suggestions for integrating and migrating plain Prolog
+code and Prolog module code to Logtalk. Detailed instructions are provided
 for encapsulating plain Prolog code in objects, converting Prolog modules
 into objects, and compiling and reusing Prolog modules as objects from
 inside Logtalk. An interesting application of the techniques described
@@ -66,13 +58,13 @@ not meant to be directly called by the user. Encapsulating plain Prolog
 code in objects allows us to make clear the different roles of each
 predicate, to hide implementation details, to prevent auxiliary
 predicates from being called outside the object, and to take advantage
-of Logtalk advanced code encapsulating and reusing features.
+of Logtalk advanced code encapsulating and reusing features. It also
+simplifies using its developer tools.
 
-Encapsulating Prolog code using Logtalk objects is simple. First, for
-each source file, add an opening object directive,
-:ref:`directives_object_1_5`, to the
-beginning of the file and an ending object directive,
-:ref:`directives_end_object_0`, to end of
+Encapsulating Prolog code using Logtalk objects is simple. First, for each
+source file, add an opening object directive, :ref:`directives_object_1_5`,
+to the beginning of the file and an ending object directive,
+:ref:`directives_end_object_0`, to the end of
 the file. Choose an object name that reflects the purpose of source file
 code (this is a good opportunity for code refactoring if necessary).
 Second, add :ref:`directives_public_1` predicate directives for the
@@ -116,12 +108,12 @@ the format:
    Entity::Functor(...) :-
        ...
 
-See the User Manual section on the ``multifile/1`` predicate directive
-for more information. An alternative solution is to simply keep the
-clauses for the multifile predicates as plain Prolog code and define, if
-necessary, a parametric object to encapsulate all predicates working
-with the multifile predicate clauses. For example, assume the following
-``multifile/1`` directive:
+See the :ref:`section <predicates_multifile>` on the ``multifile/1``
+predicate directive for more information. An alternative solution is to
+simply keep the clauses for the multifile predicates as plain Prolog code
+and define, if necessary, a parametric object to encapsulate all predicates
+working with the multifile predicate clauses. For example, assume the
+following ``multifile/1`` directive:
 
 ::
 
@@ -148,7 +140,7 @@ Converting Prolog modules into objects
 --------------------------------------
 
 Converting Prolog modules into objects may allow an application to run
-on a wider range of Prolog compilers, overcoming compatibility problems.
+on a wider range of Prolog compilers, overcoming portability problems.
 Some Prolog compilers don't support a module system. Among those Prolog
 compilers which support a module system, the lack of standardization
 leads to several issues, specially with semantics, operators, and
@@ -180,23 +172,23 @@ section). Assuming that this is the case, apply the following steps:
 #. Convert each ``reexport/1`` directive into a :ref:`directives_uses_2`
    directive and ``public/1`` predicate directives (see next section).
 #. Convert any ``meta_predicate/1`` directives into Logtalk
-   :ref:`directives_meta_predicate_1`
-   directives by replacing the module meta-argument indicator, ``:``,
-   with the Logtalk meta-argument indicator, ``0``. Closures must be
-   represented using an integer denoting the number of additional
-   arguments that will be appended to construct a goal. Arguments which
-   are not meta-arguments are represented by the ``*`` character.
+   :ref:`directives_meta_predicate_1` directives by replacing the module
+   meta-argument indicator, ``:``, with the Logtalk meta-argument indicator
+   ``0`` for goal meta-arguments. For closure meta-arguments, use an integer
+   denoting the number of additional arguments that will be appended to
+   construct a goal. Arguments which are not meta-arguments are represented by
+   the ``*`` character. Do not use argument mode indicators such as ``?``, or
+   ``+``, or ``-`` as Logtalk supports :ref:`mode directives <predicates_mode>`.
 #. Convert any explicit qualified calls to module predicates to messages
-   by replacing the ``(:)/2`` operator with the
-   :ref:`control_send_to_object_2` message
-   sending operator when the referenced modules are also being
-   converted into objects. Calls in the pseudo-module ``user`` can
-   be encapsulated using the :ref:`control_external_call_1` Logtalk
-   external call control construct. You can also use instead a
-   :ref:`directives_uses_2` directive where the
-   first argument would be the atom ``user`` and the second argument a
-   list of all external predicates. This alternative has the advantage
-   of not requiring changes to the code making the predicate calls.
+   by replacing the ``(:)/2`` operator with the :ref:`control_send_to_object_2`
+   message sending operator when the referenced modules are also being
+   converted into objects. Calls in the pseudo-module ``user`` can be
+   encapsulated using the :ref:`control_external_call_1` Logtalk external
+   call control construct. You can also use instead a :ref:`directives_uses_2`
+   directive where the first argument would be the atom ``user`` and the
+   second argument a list of all external predicates. This alternative has
+   the advantages of not requiring changes to the code making the predicate
+   calls and of better visibility for the documenting and diagramming tools.
 #. If your module uses the database built-in predicates to implement
    module local mutable state using dynamic predicates, add both
    :ref:`directives_private_1` and
@@ -350,10 +342,10 @@ directives by finding which predicates exported by the
 specified modules are reexported or imported into the module containing
 the directive. For ``use_module/1`` directives, finding the names of the
 imported predicates that are actually used is easy. First, comment out the 
-and compile the file (making sure that the
+directive and compile the file (making sure that the
 :ref:`unknown_predicates <flag_unknown_predicates>` compiler flag is set
 to ``warning``). Logtalk will print a warning with a list of predicates
-that are called but never defined. Second, use these list to replace the
+that are called but never defined. Second, use this list to replace the
 ``use_module/1`` directives by ``use_module/2`` directives. You should
 then be able to compile the modified Prolog module as an object.
 
@@ -375,7 +367,7 @@ code to be expanded. Logtalk supports using a module as a hook object
 as long as its name doesn't coincide with the name of an object and
 that the module uses ``term_expansion/2`` and ``goal_expansion/2``
 predicates. Assuming that's the case, before attempting to compile
-the modules as objects, the default hook object is set to the module
+the modules as objects, set the default hook object is to the module
 containing the expansion code. For example, if the expansions stored
 in a ``system`` module:
 
@@ -384,11 +376,11 @@ in a ``system`` module:
    | ?- set_logtalk_flag(hook, system).
    ...
 
-This, however, may not be enough as some expansions may stored in more
-than one module. A common example is to use a module named ``prolog``.
-It is also common to store the expansions in ``user``. The Logtalk library
-provides a solution for these scenarios. Using the ``hook_flows`` library
-we can select multiple hook objects or hook modules. For example,
+This, however, may not be enough as expansions may be stored in multiple
+modules. A common example is to use a module named ``prolog`` for system
+expansions and to store the user-defined expansions in ``user``. The Logtalk
+library provides a solution for these scenarios. Using the ``hook_flows``
+library we can select multiple hook objects or hook modules. For example,
 assuming expansions stored on both ``user`` and ``system`` modules:
 
 .. code-block:: text
@@ -413,11 +405,11 @@ File search paths
 ~~~~~~~~~~~~~~~~~
 
 Some Prolog systems provide a mechanism for defining file search paths
-(this mechanism works differently from Logtalk own suporty for defining
-library paths). When porting Prolog code that defines file search paths,
-e.g. for finding module libraries, it often helps to load the pristine
-Prolog application before attempting to compile its source files as
-Logtalk source files. Depending on the Prolog backend, this may allow
+(this mechanism works differently from Logtalk own suport for defining
+library path aliases). When porting Prolog code that defines file search
+paths, e.g. for finding module libraries, it often helps to load the
+pristine Prolog application before attempting to compile its source files
+as Logtalk source files. Depending on the Prolog backend, this may allow
 the file search paths to be used when compiling modules as objects that
 use file directives such as ``use_module/2``.
 
@@ -439,8 +431,8 @@ basis: ignoring the directive (i.e. do not copy the directive, although
 a goal can be proved as a consequence), rewriting and copy the directive
 to the generated Prolog files, or rewriting and recompiling the
 resulting directive. To specify these actions, the adapter files contain
-clauses for the ``'$lgt_prolog_term_expansion'/2`` predicate. For
-example, assume that a given Prolog compiler defines a ``comment/2``
+clauses for the internal ``'$lgt_prolog_term_expansion'/2`` predicate.
+For example, assume that a given Prolog compiler defines a ``comment/2``
 directive for predicates using the format:
 
 ::
@@ -454,8 +446,8 @@ predicate:
 ::
 
    '$lgt_prolog_term_expansion'(
-           comment(F/A, String),
-           info(F/A, [comment is Atom])
+           (:- comment(F/A, String)),
+           (:- info(F/A, [comment is Atom]))
    ) :-
        atom_codes(Atom, String).
 
@@ -471,7 +463,7 @@ after triggering a side effect:
 ::
 
    '$lgt_prolog_term_expansion'(
-           load_foreign_files(Files,Libs,InitRoutine),
+           (:- load_foreign_files(Files,Libs,InitRoutine)),
            []
    ) :-
        load_foreign_files(Files,Libs,InitRoutine).
