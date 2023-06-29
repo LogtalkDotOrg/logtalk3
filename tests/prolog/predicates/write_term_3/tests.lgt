@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:29:0,
+		version is 1:30:0,
 		author is 'Paulo Moura',
-		date is 2022-04-03,
+		date is 2023-06-29,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -633,6 +633,33 @@
 		^^set_text_output(''),
 		{writeq(1.0e+64)},
 		^^text_output_contents(Contents).
+
+	% check behavior on repeated options
+
+	test(lgt_write_term_3_118, true(Assertion)) :-
+		^^set_text_output(''),
+		{write_term('A', [quoted(true), quoted(false)])},
+		^^text_output_assertion('A', Assertion).
+
+	test(lgt_write_term_3_119, true(Assertion)) :-
+		^^set_text_output(''),
+		{write_term('A', [quoted(false), quoted(true)])},
+		^^text_output_assertion('\'A\'', Assertion).
+
+	test(lgt_write_term_3_120, true(Assertion)) :-
+		^^set_text_output(''),
+		{write_term('$VAR'(0), [numbervars(true), numbervars(false)])},
+		^^text_output_assertion('$VAR(0)', Assertion).
+
+	test(lgt_write_term_3_121, true(Assertion)) :-
+		^^set_text_output(''),
+		{write_term('$VAR'(0), [numbervars(false), numbervars(true)])},
+		^^text_output_assertion('A', Assertion).
+
+	test(lgt_write_term_3_122, true(Assertion)) :-
+		^^set_text_output(''),
+		{write_term(Var, [variable_names(['Ignored'=Var]), variable_names(['Used'=Var])])},
+		^^text_output_assertion('Used', Assertion).
 
 	cleanup :-
 		^^clean_binary_output,

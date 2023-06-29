@@ -141,8 +141,8 @@ directives.
 * ADDED: Additional tests for the Prolog standard `call/1` and `catch/3`
 control constructs.
 
-* ADDED: Additional tests for the Prolog `call/2-N` and `setup_call_cleanup/3`
-predicates.
+* ADDED: Additional tests for the Prolog `call/2-N`, `setup_call_cleanup/3`,
+and `write_term/2` predicates.
 
 * ADDED: Tests for the `evaluable_property/2` built-in predicate under
 discussion with Prolog system implementers.
