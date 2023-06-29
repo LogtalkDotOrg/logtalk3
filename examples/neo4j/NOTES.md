@@ -50,6 +50,10 @@ example:
 	#wrapper.java.additional=-Djava.awt.headless=true
 	#wrapper.java.additional.4=-Dneo4j.ext.udc.source=homebrew
 
+or (depending on the Neo4j version):
+
+	#server.jvm.additional=-Djava.awt.headless=true-Dunsupported.dbms.udc.source=homebrew
+
 Save the edit file and start Neo4j:
 
 	$ neo4j start
