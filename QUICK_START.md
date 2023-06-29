@@ -32,6 +32,7 @@ On POSIX operating-systems, the following shell scripts are installed
 by default for running Logtalk with the supported backend Prolog compilers
 (which must be installed and up-to-date before running these scripts):
 
+* Arriba:         `arribalgt`
 * B-Prolog:       `bplgt`
 * Ciao Prolog:    `ciaolgt`    (experimental; first run may require `sudo`)
 * CxProlog:       `cxlgt`

@@ -22,9 +22,9 @@
 :- object(coroutining).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2021-12-17,
+		date is 2023-06-21,
 		comment is 'Coroutining predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.'
@@ -84,6 +84,20 @@
 
 		when(Condition, Goal) :-
 			sicstus:when(Condition, Goal).
+
+	:- elif(current_logtalk_flag(prolog_dialect, arriba)).
+
+		dif(Term1, Term2) :-
+			user::dif(Term1, Term2).
+
+		freeze(Variable, Goal) :-
+			user::freeze(Variable, Goal).
+
+		frozen(Variable, Goal) :-
+			user::frozen(Variable, Goal).
+
+		when(Condition, Goal) :-
+			user::when(Condition, Goal).
 
 	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
 

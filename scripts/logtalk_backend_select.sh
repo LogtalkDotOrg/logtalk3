@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk backend Prolog compiler select script
-##   Last updated on June 28, 2021
+##   Last updated on June 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -26,13 +26,16 @@
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.13"
+	echo "  0.14"
 	exit 0
 }
 
 
 list_backends() {
 	echo "Available backend Prolog compilers:"
+	if [ -e "$(command -v arribalgt)" ] && [ "$(command -v arriba)" != "" ] ; then
+		echo -n "  arribalgt"
+	fi
 	if [ -e "$(command -v bplgt)" ] && [ "$(command -v bp)" != "" ] ; then
 		echo -n "  bplgt"
 	fi
@@ -132,7 +135,9 @@ usage_help() {
 
 
 valid_backend() {
-	if [ "$1" == "bplgt" ] && [ -e "$(command -v bplgt)" ]  && [ "$(command -v bp)" != "" ] ; then
+	if [ "$1" == "arribalgt" ] && [ -e "$(command -v arribalgt)" ]  && [ "$(command -v arriba)" != "" ] ; then
+		return 0
+	elif [ "$1" == "bplgt" ] && [ -e "$(command -v bplgt)" ]  && [ "$(command -v bp)" != "" ] ; then
 		return 0
 	elif [ "$1" == "ciaolgt" ] && [ -e "$(command -v ciaolgt)" ]  && [ "$(command -v ciaosh)" != "" ] ; then
 		return 0

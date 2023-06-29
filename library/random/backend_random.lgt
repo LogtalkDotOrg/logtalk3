@@ -23,9 +23,9 @@
 	implements(pseudo_random_protocol)).
 
 	:- info([
-		version is 1:15:0,
+		version is 1:16:0,
 		author is 'Paulo Moura',
-		date is 2021-05-04,
+		date is 2023-06-21,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',
@@ -225,6 +225,10 @@
 		get_seed(_).
 		set_seed(_).
 		random(Random) :- Random is rand.
+	:- elif(current_logtalk_flag(prolog_dialect, arriba)).
+		get_seed(Seed) :- {get_seed(Seed)}.
+		set_seed(Seed) :- {set_seed(Seed)}.
+		random(Random) :- {random(Random)}.
 	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
 		get_seed(Seed) :- {get_seed(Seed)}.
 		set_seed(Seed) :- {set_seed(Seed)}.

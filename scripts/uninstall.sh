@@ -63,6 +63,7 @@ cd "$LOGTALKHOME"/.. || exit 1
 rm -rf "$directory"
 rm -f logtalk
 cd ../bin || exit 1
+rm -f arribalgt
 rm -f bplgt
 rm -f ciaolgt
 rm -f cxlgt
@@ -93,6 +94,7 @@ rm -f tplgt
 rm -f xsblgt
 rm -f yaplgt
 cd ../share/man/man1 || exit 1
+rm -f arribalgt.1.gz
 rm -f bplgt.1.gz
 rm -f cxlgt.1.gz
 rm -f eclipselgt.1.gz

@@ -24,9 +24,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, lvm)).
+:- if((current_logtalk_flag(prolog_dialect, arriba); current_logtalk_flag(prolog_dialect, lvm))).
 
-	:- initialization((write('(currently not compatible with LVM due to a conflict with a built-in operator)'), nl)).
+	:- initialization((write('(currently not compatible with Arriba/LVM due to a conflict with a built-in operator)'), nl)).
 
 :- else.
 

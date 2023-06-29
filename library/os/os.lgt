@@ -1860,6 +1860,119 @@
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
 
+	:- elif(current_logtalk_flag(prolog_dialect, arriba)).
+
+		pid(PID) :-
+			{pid(PID)}.
+
+		shell(Command, Status) :-
+			{shell(Command, Status)}.
+
+		shell(Command) :-
+			{shell(Command)}.
+
+		absolute_file_name(Path, ExpandedPath) :-
+			{absolute_file_name(Path, ExpandedPath)}.
+
+		internal_os_path(Path, OSPath) :-
+			internal_os_path_portable(Path, OSPath).
+
+		make_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			(	{directory_exists(ExpandedPath)} ->
+				true
+			;	{make_directory(ExpandedPath)}
+			).
+
+		make_directory_path(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{make_directory_path(ExpandedPath)}.
+
+		delete_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{delete_directory(ExpandedPath)}.
+
+		change_directory(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{change_directory(ExpandedPath)}.
+
+		working_directory(Directory) :-
+			{current_directory(Directory)}.
+
+		directory_files(Directory, ['.', '..'| Files]) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{directory_files(ExpandedPath, Files)}.
+
+		directory_exists(Directory) :-
+			absolute_file_name(Directory, ExpandedPath),
+			{directory_exists(ExpandedPath)}.
+
+		file_exists(File) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_exists(ExpandedPath)}.
+
+		file_modification_time(File, Time) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_modification_time(ExpandedPath, Time)}.
+
+		file_size(File, Size) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_size(ExpandedPath, Size)}.
+
+		file_permission(File, Permission) :-
+			absolute_file_name(File, ExpandedPath),
+			{file_permission(ExpandedPath, Permission)}.
+
+		copy_file(File, Copy) :-
+			absolute_file_name(File, FilePath),
+			absolute_file_name(Copy, CopyPath),
+			{copy_file(FilePath, CopyPath)}.
+
+		rename_file(Old, New) :-
+			absolute_file_name(Old, OldExpandedPath),
+			absolute_file_name(New, NewExpandedPath),
+			{rename_file(OldExpandedPath, NewExpandedPath)}.
+
+		delete_file(File) :-
+			absolute_file_name(File, ExpandedPath),
+			{delete_file(ExpandedPath)}.
+
+		environment_variable(Variable, Value) :-
+			{getenv(Variable, Value)}.
+
+		time_stamp(Time) :-
+			{time_stamp(Time)}.
+
+		:- if({predicate_property(date_time(_, _, _, _, _, _, _), built_in)}).
+
+			date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
+				{date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds)}.
+
+		:- else.
+
+			date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
+				{date_time(Year, Month, Day, Hours, Minutes, Seconds)}.
+
+		:- endif.
+
+		cpu_time(Seconds) :-
+			{cpu_time(Seconds)}.
+
+		wall_time(Seconds) :-
+			{wall_time(Seconds)}.
+
+		operating_system_type(Type) :-
+			(	{getenv('COMSPEC', _)} ->
+				Type = windows
+			;	Type = unix
+			).
+
+		command_line_arguments(Arguments) :-
+			current_prolog_flag(argv, Arguments).
+
+		sleep(Seconds) :-
+			{sleep(Seconds)}.
+
 	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
 
 		pid(PID) :-
@@ -2364,7 +2477,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		Dialect \== swi, Dialect \== quintus, Dialect \== trealla, Dialect \== lvm
+		Dialect \== swi, Dialect \== quintus, Dialect \== trealla, Dialect \== arriba, Dialect \== lvm
 	)).
 
 		make_directory_path_portable(Path) :-

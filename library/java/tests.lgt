@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2023-03-20,
+		date is 2023-06-21,
 		comment is 'Unit tests for the "java" library.'
 	]).
 
@@ -159,25 +159,25 @@
 
 	% terms_to_array/2 and array_to_terms/2 tests
 
-	test(java_arrays_01, true(Terms == [a,42,foo]), [condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
+	test(java_arrays_01, true(Terms == [a,42,foo]), [condition((\+ current_logtalk_flag(prolog_dialect, arriba), \+ current_logtalk_flag(prolog_dialect, lvm)))]) :-
 		java::terms_to_array([a,42,foo], Array),
 		java::array_to_terms(Array, Terms).
 
-	test(java_arrays_02, true(Terms =~= [2.72,3.14,9.8]), [condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
+	test(java_arrays_02, true(Terms =~= [2.72,3.14,9.8]), [condition((\+ current_logtalk_flag(prolog_dialect, arriba), \+ current_logtalk_flag(prolog_dialect, lvm)))]) :-
 		java::terms_to_array([2.72,3.14,9.8], Array),
 		java::array_to_terms(Array, Terms).
 
-	test(java_arrays_03, true(List == [0.0, 0]), [condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
+	test(java_arrays_03, true(List == [0.0, 0]), [condition((\+ current_logtalk_flag(prolog_dialect, arriba), \+ current_logtalk_flag(prolog_dialect, lvm)))]) :-
 		java::terms_to_array([0.0, 0], Array),
 		java::array_to_terms(Array, List).
 
-	test(java_arrays_04, true, [condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
+	test(java_arrays_04, true, [condition((\+ current_logtalk_flag(prolog_dialect, arriba), \+ current_logtalk_flag(prolog_dialect, lvm)))]) :-
 		java::terms_to_array([a,42,foo], Array),
 		java::array_to_terms(Array, Terms, Length),
 		^^assertion(terms, Terms == [a,42,foo]),
 		^^assertion(length, Length == 3).
 
-	test(java_arrays_05, true(List == [x, [1, a, 7, [y, z]], k, [], foo(bar)]), [condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
+	test(java_arrays_05, true(List == [x, [1, a, 7, [y, z]], k, [], foo(bar)]), [condition((\+ current_logtalk_flag(prolog_dialect, arriba), \+ current_logtalk_flag(prolog_dialect, lvm)))]) :-
 		java::terms_to_array([x, [1, a, 7, [y,z]], k, [], foo(bar)], Array),
 		java::array_to_terms(Array, List).
 

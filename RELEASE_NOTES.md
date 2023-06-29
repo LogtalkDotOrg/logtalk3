@@ -45,6 +45,8 @@ when the non-terminal is declared as dynamic.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Preliminary support for the upcoming renaming of LVM to Arriba.
+
 * UPDATED: The Trealla Prolog adapter file to require version 2.18.7 or later.
 
 * ADDED: macOS `.command` files for JIProlog and Scryer Prolog.
@@ -70,21 +72,21 @@ changed most tests to check for expected determinism.
 
 * FIXED: The `type` library object type-checking of Unicode character codes to
 exclude non-character code points (i.e. reserved, surrogate, or non-assigned).
-Currently, this check is only accurate for LVM and SWI-Prolog as other backends
-don't provide support for querying a Unicode code point category. 
+Currently, this check is only accurate for Arriba/LVM and SWI-Prolog as other
+backends don't provide support for querying a Unicode code point category. 
 
 * FIXED: The `arbitrary` library category generation of Unicode character codes
 to exclude non-character code points (i.e. reserved, surrogate, or non-assigned).
-Currently, this is only accurate for LVM and SWI-Prolog as other backends
+Currently, this is only accurate for Arriba/LVM and SWI-Prolog as other backends
 don't provide support for querying a Unicode code point category. 
 
-* FIXED: The `arbitrary` library category generation of Unicode atoms in the
-BMP to avoid atom normalization (as performed by some backends such as LVM)
-resulting in atoms with characters outside the BMP.
+* FIXED: The `arbitrary` library category generation of Unicode atoms in
+the BMP to avoid atom normalization (as performed by some backends such as
+Arriba/LVM) resulting in atoms with characters outside the BMP.
 
 * FIXED: The `arbitrary` library category generation of Unicode atoms of a
 given length to avoid atom normalization (as performed by some backends such
-as LVM) resulting in atoms with a different length.
+as Arriba/LVM) resulting in atoms with a different length.
 
 Tools
 -----

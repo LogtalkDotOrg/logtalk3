@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:62:0,
+		version is 0:63:0,
 		author is 'Paulo Moura',
-		date is 2023-06-19,
+		date is 2023-06-21,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1598,6 +1598,7 @@
 		arg(2, Dependency, Version),
 		valid_version(Version).
 
+	valid_backend(arriba).
 	valid_backend(b).
 	valid_backend(ciao).
 	valid_backend(cx).
@@ -2002,6 +2003,7 @@
 
 	% Logtalk + Prolog backend identifier table
 
+	backend(arriba,  'Arriba').
 	backend(logtalk, 'Logtalk').
 	backend(b,       'B-Prolog').
 	backend(ciao,    'Ciao Prolog').

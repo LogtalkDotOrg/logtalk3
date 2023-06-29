@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Bash script to be sourced by the logtalk_tester script
-##   Last updated on March 13, 2023
+##   Last updated on June 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -41,6 +41,9 @@ elif [ "$backend" == "swipack" ] ; then
 	export CLASSPATH
 elif [ "$backend" == "yap" ] ; then
 	source set_classpath_yap.sh
+	export CLASSPATH
+elif [ "$backend" == "arriba" ] ; then
+	source set_classpath_arriba.sh
 	export CLASSPATH
 elif [ "$backend" == "lvm" ] ; then
 	source set_classpath_lvm.sh

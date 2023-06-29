@@ -301,7 +301,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are arriba, b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
@@ -364,6 +364,15 @@ if [ "$p_arg" == "" ] ; then
 	echo "Error! Backend Prolog compiler not specified!" >&2
 	usage_help
 	exit 1
+elif [ "$p_arg" == "arriba" ] ; then
+	prolog='Arriba'
+	logtalk=arribalgt$extension
+	logtalk_call="$logtalk $i_arg -g"
+	case "$i_arg" in 
+		*"--standard-top-level"*) dot=".";;
+		*"--custom-top-level"*) dot="?";;
+		*) dot=".";;
+	esac
 elif [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
 	logtalk=bplgt$extension

@@ -26,6 +26,7 @@ On POSIX systems, the Logtalk installers make the following integration
 scripts available from the command-line (you may need to adjust your
 system path):
 
+* Arriba (7.0.0 or later):           `arribalgt`
 * B-Prolog (8.1 or later):           `bplgt`
 * Ciao Prolog (1.22.0 or later):     `ciaolgt`    (experimental; first run may require `sudo`)
 * CxProlog (0.98.1 or later):        `cxlgt`

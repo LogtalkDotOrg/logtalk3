@@ -24,7 +24,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, lvm)).
+:- if((current_logtalk_flag(prolog_dialect, arriba); current_logtalk_flag(prolog_dialect, lvm))).
 
 	:- initialization((write('(not applicable)'), nl)).
 

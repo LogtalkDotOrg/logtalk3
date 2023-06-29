@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on March 15, 2023
+##   Last updated on June 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.3")
+	Write-Output ($myName + " 2.4")
 }
 
 Function Run-Doclets() {
@@ -100,7 +100,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (possible values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -128,6 +128,11 @@ Function Check-Parameters() {
 		Write-Output ("Error! Backend Prolog compiler not specified!")
 		Write-Usage-Help
 		Exit 1
+	} elseif ($p -eq "arriba") {
+		$script:prolog='Arriba'
+		$script:logtalk="arribalgt"
+		$script:logtalk_option="-g"
+		$script:dot="."
 	} elseif ($p -eq "b") {
 		$script:prolog='B-Prolog'
 		$script:logtalk="bplgt"

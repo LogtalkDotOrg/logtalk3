@@ -598,6 +598,7 @@ When a pack can only be used with a subset of the Prolog backends, the last
 argument of the `version/6` predicate is a list of backend identifiers
 (atoms):
 
+- Arriba: `arriba`
 - B-Prolog: `b`
 - Ciao Prolog: `ciao`
 - CxProlog: `cx`

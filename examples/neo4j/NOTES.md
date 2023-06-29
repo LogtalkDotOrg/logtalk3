@@ -19,8 +19,8 @@ ________________________________________________________________________
 
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
-file. This example is only supported when using LVM (with its `jni` plug-in
-installed), SWI-Prolog, or YAP as the backend compiler.
+file. This example is only supported when using Arriba/LVM (with its `jni`
+plug-in installed), SWI-Prolog, or YAP as the backend compiler.
 
 There are two individual examples. The first is a simple example of using
 Neo4j based on the `HelloWorldExample` found at:

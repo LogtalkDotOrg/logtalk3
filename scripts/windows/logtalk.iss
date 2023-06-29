@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on June 7, 2023
+; Last updated on June 21, 2023
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -118,6 +118,7 @@ Source: "{#MyBaseDir}\tests-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestNa
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 
 Source: "{#MyBaseDir}\scripts\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
+Source: "{#MyBaseDir}\scripts\embedding\arriba\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\cxprolog\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\eclipse\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\gprolog\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode

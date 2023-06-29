@@ -146,6 +146,7 @@ echo
 echo "Ensure that the \"$prefix/bin\" directory is in your execution path."
 echo
 
+ln -sf ../share/logtalk/integration/arribalgt.sh arribalgt
 ln -sf ../share/logtalk/integration/bplgt.sh bplgt
 ln -sf ../share/logtalk/integration/ciaolgt.sh ciaolgt
 ln -sf ../share/logtalk/integration/cxlgt.sh cxlgt
@@ -187,6 +188,7 @@ fi
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo
+echo "* Arriba (7.0.0 or later):           arribalgt"
 echo "* B-Prolog (8.1 or later):           bplgt"
 echo "* Ciao Prolog (1.22.0 or later):     ciaolgt     (experimental; first run may require sudo)"
 echo "* CxProlog (0.98.1 or later):        cxlgt"

@@ -19,8 +19,8 @@ ________________________________________________________________________
 
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
-file. This example is only supported when using LVM (with its `jni` plug-in
-installed), SWI-Prolog, or YAP as the backend compiler.
+file. This example is only supported when using Arriba/LVM (with its `jni`
+plug-in installed), SWI-Prolog, or YAP as the backend compiler.
 
 This is a simple example of using a Java library for converting documents
 to text using the Apache Tika Java library, which you **must** download

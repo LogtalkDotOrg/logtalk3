@@ -52,7 +52,7 @@
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(	Dialect == eclipse; Dialect == lvm; Dialect == scryer;
 			Dialect == sicstus; Dialect == swi; Dialect == trealla;
-			Dialect == yap
+			Dialect == yap; Dialect == arriba
 		)
 	)).
 

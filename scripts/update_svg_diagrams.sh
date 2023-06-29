@@ -4,7 +4,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on January 12, 2023
+##   Last updated on June 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -75,7 +75,7 @@ set_goals() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.23"
+	echo "$(basename "$0") 0.24"
 	exit 0
 }
 
@@ -93,7 +93,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo "  -i include all installed packs"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
@@ -113,7 +113,10 @@ do
 done
 
 
-if [ "$p_arg" == "b" ] ; then
+if [ "$p_arg" == "arriba" ] ; then
+	prolog='Arriba'
+	logtalk="arribalgt$extension -g"
+elif [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
 	logtalk="bplgt$extension -g"
 elif [ "$p_arg" == "ciao" ] ; then

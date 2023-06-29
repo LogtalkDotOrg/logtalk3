@@ -959,6 +959,7 @@ Tests with timeout limits
 There's no portable way to call a goal with a timeout limit. However, some
 backend Prolog compilers provide this functionality:
 
+- Arriba: `call_with_timeout/2-3` library predicates
 - B-Prolog: `time_out/3` predicate
 - ECLiPSe: `timeout/3` and `timeout/7` library predicates
 - LVM: `call_with_timeout/2-3` library predicates
@@ -1187,6 +1188,7 @@ The list of indexes of the covered predicate clauses can be quite long.
 Some backend Prolog compilers provide a flag or a predicate to control
 the depth of printed terms that can be useful:
 
+- Arriba 7.0.0 or later: `answer_write_options` flag
 - CxProlog: `write_depth/2` predicate
 - ECLiPSe: `print_depth` flag
 - LVM 3.2.0 or later: `answer_write_options` flag

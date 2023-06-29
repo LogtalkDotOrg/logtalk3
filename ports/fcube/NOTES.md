@@ -84,6 +84,6 @@ To test this port predicates, load the `tester.lgt` file:
 Known issues
 ------------
 
-This port cannot currently be loaded using LVM due to a clash with a
-built-in operator. Also, several tests fail when running on Tau Prolog,
+This port cannot currently be loaded using Arriba/LVM due to a clash with
+a built-in operator. Also, several tests fail when running on Tau Prolog,
 likely due to a bug in this system.

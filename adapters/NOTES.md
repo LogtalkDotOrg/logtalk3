@@ -83,6 +83,7 @@ following table summarizes the availability of these features:
 
 |  Compiler        |    Tabling    |  Coinduction  |    Unicode    |    Engines    |    Threads    |  Unbound Ints |  
 | :--------------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: | :-----------: |  
+|  Arriba          |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  B-Prolog        |      yes      |       no      |       no      |       no      |       no      |       no      |  
 |  Ciao Prolog     |      yes      |       no      |       no      |       no      |       no      |       no      |  
 |  CxProlog        |       no      |     partial   |      yes      |       no      |       no      |       no      |  
@@ -128,6 +129,12 @@ If an adapter file for your favorite Prolog is not available, use this
 file as a template for writing one. For each predicate in the file, 
 check if it is built-in in your Prolog, available in a library, or if 
 you can write a better definition.
+
+
+Arriba 7.0.0 and later versions
+-------------------------------
+
+	arriba.pl
 
 
 B-Prolog 8.1 and later versions

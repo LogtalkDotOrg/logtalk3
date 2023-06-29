@@ -77,6 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/logtalk_doclet
 /usr/local/bin/logtalk_version_select
 /usr/local/bin/logtalk_backend_select
+/usr/local/bin/arribalgt
 /usr/local/bin/bplgt
 /usr/local/bin/ciaolgt
 /usr/local/bin/cxlgt
@@ -95,6 +96,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/info/dir
 /usr/local/share/info/LogtalkAPIs.info
 /usr/local/share/info/TheLogtalkHandbook.info
+/usr/local/share/man/man1/arribalgt.1.gz
 /usr/local/share/man/man1/bplgt.1.gz
 /usr/local/share/man/man1/ciaolgt.1.gz
 /usr/local/share/man/man1/cxlgt.1.gz
@@ -141,6 +143,7 @@ echo
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo
+echo "* Arriba (7.0.0 or later):           arribalgt"
 echo "* B-Prolog (8.1 or later):           bplgt"
 echo "* Ciao Prolog (1.22.0 or later):     ciaolgt     (experimental; first run may require sudo)"
 echo "* CxProlog (0.98.1 or later):        cxlgt"

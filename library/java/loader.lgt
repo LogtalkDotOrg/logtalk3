@@ -40,6 +40,13 @@
 
 	:- endif.
 
+:- elif((current_logtalk_flag(prolog_dialect, arriba), logtalk_library_path(jni, _))).
+
+	:- initialization((
+		logtalk_load(jni(loader)),
+		logtalk_load([java_protocols,java_jpl], [optimize(on)])
+	)).
+
 :- elif((current_logtalk_flag(prolog_dialect, lvm), logtalk_library_path(jni, _))).
 
 	:- initialization((

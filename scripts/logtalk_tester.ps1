@@ -276,7 +276,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are arriba, b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -o output (valid values are verbose and minimal; default is " + $o + ")")
@@ -322,6 +322,12 @@ Function Check-Parameters() {
 		Write-Output ("Error! Backend Prolog compiler not specified!")
 		Write-Usage-Help
 		Exit 1
+	} elseif ($p -eq "arriba") {
+		$script:backend = 'arriba'
+		$script:prolog = 'Arriba'
+		$script:logtalk = "arribalgt"
+		$script:logtalk_option = "-g"
+		$script:dot = "."
 	} elseif ($p -eq "b") {
 		$script:backend = 'b'
 		$script:prolog = 'B-Prolog'

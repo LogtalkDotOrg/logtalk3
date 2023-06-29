@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on October 19, 2022
+##   Last updated on June 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 2.4"
+	echo "$(basename "$0") 2.5"
 	exit 0
 }
 
@@ -113,7 +113,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (possible values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -144,6 +144,11 @@ if [ "$p_arg" == "" ] ; then
 	echo "Error! Backend Prolog compiler not specified!" >&2
 	usage_help
 	exit 1
+elif [ "$p_arg" == "arriba" ] ; then
+	prolog='Arriba'
+	logtalk=arribalgt$extension
+	logtalk_call="$logtalk -g"
+	dot="."
 elif [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
 	logtalk=bplgt$extension

@@ -41,6 +41,13 @@
 		logtalk_load(redis, [optimize(on)])
 	)).
 
+:- elif(current_logtalk_flag(prolog_dialect, arriba)).
+
+	:- initialization((
+		logtalk_load(basic_types(loader)),
+		logtalk_load(redis, [optimize(on)])
+	)).
+
 :- elif(current_logtalk_flag(prolog_dialect, lvm)).
 
 	:- initialization((
