@@ -176,7 +176,7 @@
 		{open(rt, write, Stream, [reposition(false), reposition(true)]),
 		 stream_property(Stream, reposition(Reposition))}.
 
-	test(lgt_open_4_40, true(Reposition == false)) :-
+	test(lgt_open_4_40, true(Reposition == false), [note('flaky; implementation defined per ISO standard')]) :-
 		{open(rf, write, Stream, [reposition(true), reposition(false)]),
 		 stream_property(Stream, reposition(Reposition))}.
 
