@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2022-10-30,
+		date is 2023-06-30,
 		comment is 'Unit tests for the ISO Prolog standard open/3-4 built-in predicates.'
 	]).
 
@@ -152,6 +152,52 @@
 	test(lgt_open_4_34, error(domain_error(stream_option,foobar(a,1)))) :-
 		{open(foo, write, _, [foobar(a,1)])}.
 
+	% default type
+
+	test(lgt_open_4_35, true(Type == text)) :-
+		{open(d1, write, Stream),
+		 stream_property(Stream, type(Type))}.
+
+	test(lgt_open_4_36, true(Type == text)) :-
+		{open(d2, write, Stream, []),
+		 stream_property(Stream, type(Type))}.
+
+	% check behavior on repeated options
+
+	test(lgt_open_4_37, true(Type == text)) :-
+		{open(tt, write, Stream, [type(binary), type(text)]),
+		 stream_property(Stream, type(Type))}.
+
+	test(lgt_open_4_38, true(Type == binary)) :-
+		{open(tb, write, Stream, [type(text), type(binary)]),
+		 stream_property(Stream, type(Type))}.
+
+	test(lgt_open_4_39, true(Reposition == true)) :-
+		{open(rt, write, Stream, [reposition(false), reposition(true)]),
+		 stream_property(Stream, reposition(Reposition))}.
+
+	test(lgt_open_4_40, true(Reposition == false)) :-
+		{open(rf, write, Stream, [reposition(true), reposition(false)]),
+		 stream_property(Stream, reposition(Reposition))}.
+
+	test(lgt_open_4_41, true(Action == eof_code)) :-
+		^^file_path('dave', Path),
+		os::ensure_file(Path),
+		{open(Path, read, Stream, [eof_action(error), eof_action(eof_code)]),
+		 stream_property(Stream, eof_action(Action))}.
+
+	test(lgt_open_4_42, true(Action == reset)) :-
+		^^file_path('dave', Path),
+		os::ensure_file(Path),
+		{open(Path, read, Stream, [eof_action(eof_code), eof_action(reset)]),
+		 stream_property(Stream, eof_action(Action))}.
+
+	test(lgt_open_4_43, true(Action == error)) :-
+		^^file_path('dave', Path),
+		os::ensure_file(Path),
+		{open(Path, read, Stream, [eof_action(reset), eof_action(error)]),
+		 stream_property(Stream, eof_action(Action))}.
+
 	cleanup :-
 		^^clean_file(roger_data),
 		^^clean_file(scowen),
@@ -161,7 +207,13 @@
 		^^clean_file(f),
 		^^clean_file(no_read_permission),
 		^^clean_file(no_write_permission),
-		^^clean_file(no_append_permission).
+		^^clean_file(no_append_permission),
+		^^clean_file(d1),
+		^^clean_file(d2),
+		^^clean_file(tt),
+		^^clean_file(tb),
+		^^clean_file(rt),
+		^^clean_file(rf).
 
 	% auxiliary predicates
 
