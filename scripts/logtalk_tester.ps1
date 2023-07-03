@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on April 14, 2023
+##   Last updated on July 3, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 10.11")
+	Write-Output ($myName + " 11.0")
 }
 
 Function Run-TestSet() {
@@ -276,7 +276,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -o output (valid values are verbose and minimal; default is " + $o + ")")
@@ -346,6 +346,11 @@ Function Check-Parameters() {
 		$script:backend = 'gnu'
 		$script:prolog = 'GNU Prolog'
 		$script:logtalk = "gplgt"
+		$script:logtalk_option = "--query-goal"
+	} elseif ($p -eq "gnunc") {
+		$script:backend = 'gnu'
+		$script:prolog = 'GNU Prolog (native code)'
+		$script:logtalk = "gplgtnc"
 		$script:logtalk_option = "--query-goal"
 	} elseif ($p -eq "ji") {
 		$script:backend = 'ji'

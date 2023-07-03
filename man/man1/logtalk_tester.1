@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "February 21, 2023" "Logtalk 3.63.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "July 3, 2023" "Logtalk 3.67.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -36,7 +36,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 Print script version.
 .TP
 .BI \-p
-Backend Prolog compiler. Required. The following identifiers are used: B-Prolog - \fIb\fR, Ciao Prolog - \fIciao\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, JIProlog - \fIji\fR, LVM - \fIlvm\fR, Scryer Prolog - \fIscryer\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, Tau Prolog - \fItau\fR, Trealla Prolog - \fItrealla\fR, XSB - \fIxsb\fR, YAP - \fIyap\fR.
+Backend Prolog compiler. Required. The following identifiers are used: B-Prolog - \fIb\fR, Ciao Prolog - \fIciao\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, GNU Prolog (native code) - \fIgnunc\fR, JIProlog - \fIji\fR, LVM - \fIlvm\fR, Scryer Prolog - \fIscryer\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, Tau Prolog - \fItau\fR, Trealla Prolog - \fItrealla\fR, XSB - \fIxsb\fR, YAP - \fIyap\fR.
 .TP
 .BI \-o
 Output verbosity. Default is \fIverbose\fR. Valid values are \fIverbose\fR and \fIminimal\fR.
@@ -158,6 +158,9 @@ When the script detects either a \fItimeout\fR or a \fIgtimeout\fR command (prov
 Installation of the GNU \fIsed\fR command, when not available by default, is strongly recommended. The Git for Windows installer includes this command, which can be used from the bundled Bash shell.
 .TP
 The version of the \fIfind\fR command provided by some operating-systems doesn't support (extended) regular-expressions, thus preventing using the \fI-e\fR option.
+.TP
+The \fIgnunc\fR backend requires creating a GNU Prolog executable that includes Logtalk named \fIgplgtnc\fR and making it available in the system \fIPATH\fR. This executable can be created using the embedding script provided in the Logtalk distribution. For example:
+\fBgprolog_embed_logtalk.sh -c -d ~/collect -- --new-top-level && mv ~/collect/logtalk ~/collect/gplgtnc\fR
 
 .SH ENVIRONMENT
 .TP

@@ -98,6 +98,10 @@ number of tests run and the total number of tests defined in a test set. This
 usually implies bugs in the implementation of basic Prolog control constructs
 by the used backend system.
 
+* ADDED: Support to the `logtalk_tester.*` scripts for using a GNU Prolog
+executable that includes Logtalk for better performance. With the help of
+Daniel Diaz.
+
 * UPDATED: The `help` tool to support other operating-systems, notably BSD,
 that also provide the `xdg-open` command.
 

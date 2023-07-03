@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 27, 2023
+##   Last updated on July 3, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 set -o pipefail
 
 print_version() {
-	echo "$(basename "$0") 14.0"
+	echo "$(basename "$0") 15.0"
 	exit 0
 }
 
@@ -301,7 +301,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
@@ -384,6 +384,10 @@ elif [ "$p_arg" == "gnu" ] ; then
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
 	logtalk_call="$logtalk $i_arg --query-goal"
+elif [ "$p_arg" == "gnunc" ] ; then
+	prolog='GNU Prolog (native code)'
+	logtalk=gplgtnc
+	logtalk_call="$logtalk $i_arg --query-goal"
 elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
@@ -411,7 +415,7 @@ elif [ "$p_arg" == "swi" ] ; then
 	logtalk=swilgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "swipack" ] ; then
-	prolog='SWI-Prolog'
+	prolog='SWI-Prolog (pack)'
 	logtalk=swipl
 	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "tau" ] ; then

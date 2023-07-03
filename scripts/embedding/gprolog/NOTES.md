@@ -51,7 +51,12 @@ directive calling the startup goal. For example:
 To avoid syntax errors, you may need to use canonical notation in the argument
 of the directive as exemplified.
 
-See the script usage examples in the `../SCRIPT.txt` file.
+Another example is generating a new top-level that includes Logtalk and accepts
+the same command-line options as `gprolog`:
+
+	$ ./gprolog_embed_logtalk.sh -c -d ~/collect -- --new-top-level
+
+See other script usage examples in the `../SCRIPT.txt` file.
 
 Known issues
 ------------
