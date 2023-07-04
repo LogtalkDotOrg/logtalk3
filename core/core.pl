@@ -22411,6 +22411,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_calls_non_terminal_'(Functor, Arity, ExtArity, Lines),
 	\+ '$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity),
 	'$lgt_pp_defines_predicate_'(_, Functor/ExtArity, _, _, _, _),
+	% actually require at least one clause to be defined as the predicate may be dynamic
+	'$lgt_pp_number_of_clauses_rules_'(Functor, ExtArity, _, _),
 	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(

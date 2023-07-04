@@ -39,6 +39,9 @@ checks.
 * UPDATED: The compiler to also handle the `lsb/1` and `msb/1` integer
 functions when lint checking `(is)/2` goals.
 
+* FIXED: Linter check false positives for predicates called as non-terminals
+when the non-terminal is declared as dynamic.
+
 Prolog adapter and integration files
 ------------------------------------
 
