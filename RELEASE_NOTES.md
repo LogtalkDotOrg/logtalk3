@@ -28,7 +28,8 @@ RELEASE NOTES
 Tests
 -----
 
-* ADDED: Additional test for the Prolog standard `term_variables/2` predicate.
+* ADDED: Additional tests for the Prolog standard `term_variables/2` and
+`setof/3` predicates adapted from WG17 work.
 
 Installers and installation scripts
 -----------------------------------

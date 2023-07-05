@@ -85,9 +85,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-07-05,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -302,5 +302,11 @@ setof_3_member(X, [_| L]) :-
 
 	test(wg17_setof_3_38, false) :-
 		{setof(t, (L=2; L=1), L)}.
+
+	test(wg17_setof_3_39, true((variant(Ls, [[E,_,_],[_,E,_],[_,_,E]]); variant(Ls, [[_,_,E],[_,E,_],[E,_,_]])))) :-
+		bagof(L, A^B^C^{L = [A,B,C], setof(t, setof_3_member(E,L), _)}, Ls).
+
+	test(wg17_setof_3_40, true((L == [A,B,C]; L == [C,B,A]))) :-
+		bagof(E, {setof(t, (A=E;B=E;C=E), _)}, L).
 
 :- end_object.
