@@ -44,19 +44,24 @@ c(3, c, 'C').
 f(_, 1, a).
 f(_, 2, b).
 
+% avoid conflicts with a possible member/2 built-in predicate
+bagof_3_member(X, [X| _]).
+bagof_3_member(X, [_| L]) :-
+	bagof_3_member(X, L).
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-07-05,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
 	:- uses(lgtunit, [
-		assertion/1
+		assertion/1, variant/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.10.2.4
@@ -171,6 +176,17 @@ f(_, 2, b).
 		{	set_prolog_flag(unknown, error),
 			bagof(X, foobar(X), _)
 		}.
+
+	% tests from the WG17 standardization work
+
+	test(wg17_bagof_3_24, false) :-
+		{bagof(t, (L=2; L=1), L)}.
+
+	test(wg17_bagof_3_25, true((variant(Ls, [[E,_,_],[_,E,_],[_,_,E]]); variant(Ls, [[_,_,E],[_,E,_],[E,_,_]])))) :-
+		bagof(L, A^B^C^{L = [A,B,C], bagof(t, bagof_3_member(E,L), _)}, Ls).
+
+	test(wg17_bagof_3_26, true((L == [A,B,C]; L == [C,B,A]))) :-
+		bagof(E, {bagof(t, (A=E;B=E;C=E), _)}, L).
 
 	% auxiliary predicates
 

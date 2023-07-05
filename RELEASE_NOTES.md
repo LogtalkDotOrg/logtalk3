@@ -31,8 +31,9 @@ Tests
 * ADDED: Tests for the `call_nth/2` predicate found on increasing number of
 Prolog systems.
 
-* ADDED: Additional tests for the Prolog standard `copy_term/2`, `msort/2`,
-`setof/3`, `sort/2`, and `term_variables/2` predicates adapted from WG17 work.
+* ADDED: Additional tests for the Prolog standard `bagof/3`, `copy_term/2`,
+`msort/2`, `setof/3`, `sort/2`, and `term_variables/2` predicates adapted
+from WG17 work.
 
 Installers and installation scripts
 -----------------------------------
