@@ -28,8 +28,8 @@ RELEASE NOTES
 Tests
 -----
 
-* ADDED: Additional tests for the Prolog standard `msort/2`, `setof/3`,
-`sort/2`, and `term_variables/2` predicates adapted from WG17 work.
+* ADDED: Additional tests for the Prolog standard `copy_term/2`, `msort/2`,
+`setof/3`, `sort/2`, and `term_variables/2` predicates adapted from WG17 work.
 
 Installers and installation scripts
 -----------------------------------

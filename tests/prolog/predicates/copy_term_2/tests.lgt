@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-07-05,
 		comment is 'Unit tests for the ISO Prolog standard copy_term/2 built-in predicate.'
 	]).
 
@@ -112,5 +112,19 @@
 			{L = [_, _, _| L], copy_term(L, V)}.
 
 	:- endif.
+
+	test(lgt_copy_term_2_14, true(X \== Y)) :-
+		{copy_term(X, Y)}.
+
+	test(lgt_copy_term_2_15, true((A \== D, B \== E, C \== F))) :-
+		{copy_term([A,B|C], [D,E|F])}.
+
+	test(wg17_copy_term_2_16, true((A \== C, B \== D))) :-
+		{copy_term(A + B, C + D)}.
+
+	% tests from the WG17 standardization work
+
+	test(wg17_copy_term_2_17, variant(T, _ + _)) :-
+		{copy_term(_ + _, T)}.
 
 :- end_object.
