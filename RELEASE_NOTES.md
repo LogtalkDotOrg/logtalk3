@@ -25,6 +25,11 @@ RELEASE NOTES
 3.68.0 - August ??, 2023
 ========================
 
+Tests
+-----
+
+* ADDED: Additional test for the Prolog standard `term_variables/2` predicate.
+
 Installers and installation scripts
 -----------------------------------
 
