@@ -25,6 +25,11 @@ RELEASE NOTES
 3.68.0 - August ??, 2023
 ========================
 
+Installers and installation scripts
+-----------------------------------
+
+* CHANGED: The SWI-Prolog based Docker image to use `swipl:stable` instead
+of `swipl:latest`.
 
 
 3.67.0 - July 4, 2023
