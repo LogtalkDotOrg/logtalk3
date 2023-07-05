@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2023-04-09,
+		date is 2023-07-05,
 		comment is 'Unit tests for the de facto Prolog standard msort/2 built-in predicate.'
 	]).
 
@@ -90,5 +90,8 @@
 
 	test(lgt_msort_2_14, false) :-
 		{msort([2], [3])}.
+
+	test(lgt_msort_2_15, variant(L, [_,_])) :-
+		{msort([_,_], L)}.
 
 :- end_object.

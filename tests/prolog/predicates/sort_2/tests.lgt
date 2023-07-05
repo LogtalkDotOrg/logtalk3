@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2023-04-09,
+		date is 2023-07-05,
 		comment is 'Unit tests for the ISO Prolog standard sort/2 built-in predicate.'
 	]).
 
@@ -116,5 +116,10 @@
 			{L = [3,1,2| L], sort(L, _)}.
 
 	:- endif.
+
+	% tests from the WG17 standardization work
+
+	test(wg17_sort_2_19, variant(L, [_,_])) :-
+		{sort([_,_], L)}.
 
 :- end_object.
