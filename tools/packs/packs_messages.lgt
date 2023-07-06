@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:30:0,
 		author is 'Paulo Moura',
-		date is 2023-05-05,
+		date is 2023-07-06,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -231,7 +231,10 @@
 		['Pack is up-to-date: ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	message_tokens(pinned_pack(Registry, Pack, Version)) -->
-		['Pack is pinned: ~q::~q@~q'-[Registry, Pack, Version], nl].
+		['Pack is pinned:     ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(orphaned_pack(Registry, Pack, Version)) -->
+		['Pack is orphaned:   ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	% pack installed messages
 

@@ -1175,7 +1175,9 @@
 		).
 
 	update_pack(Registry, Pack, Version, Options) :-
-		(	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability),
+		(	orphaned(Registry, Pack) ->
+			print_message(comment, packs, orphaned_pack(Registry, Pack, Version))
+		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability),
 			Version @< LatestVersion ->
 			print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
 			check_dependencies(Dependencies, Installs),

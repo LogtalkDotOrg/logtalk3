@@ -31,6 +31,9 @@ Tools
 * IMPROVED: The `packs` tool `installed/0-1` and `outdated/0-1` predicates
 to list packs in alphabetical order.
 
+* IMPROVED: The `packs` tool `update/0` predicate to inform when a pack is
+orphaned.
+
 Tests
 -----
 
