@@ -34,6 +34,9 @@ to list packs in alphabetical order.
 * IMPROVED: The `packs` tool `update/0` predicate to inform when a pack is
 orphaned.
 
+* IMPROVED: The `packs` tool `update/1-3` predicates to print an error message
+when a pack is orphaned.
+
 Tests
 -----
 

@@ -266,7 +266,7 @@
 	:- public(update/3).
 	:- mode(update(+atom, ++callable, ++list(callable)), zero_or_one).
 	:- info(update/3, [
-		comment is 'Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
+		comment is 'Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is orphaned or pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Version', 'Options'],
 		remarks is [
 			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
@@ -295,7 +295,7 @@
 	:- public(update/2).
 	:- mode(update(+atom, ++list(callable)), zero_or_one).
 	:- info(update/2, [
-		comment is 'Updates an outdated pack to its latest version using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
+		comment is 'Updates an outdated pack to its latest version using the specified options. Fails if the pack is orphaned, unknown, or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Options'],
 		remarks is [
 			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
@@ -322,7 +322,7 @@
 	:- public(update/1).
 	:- mode(update(+atom), zero_or_one).
 	:- info(update/1, [
-		comment is 'Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, not installed, or unknown.',
+		comment is 'Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, orphaned, not installed, or unknown.',
 		argnames is ['Pack'],
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,
@@ -1119,7 +1119,10 @@
 		check(atom, Pack),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	installed_pack(Registry, Pack, Version, Pinned) ->
+		(	orphaned(Registry, Pack) ->
+			print_message(error, packs, orphaned_pack(Registry, Pack)),
+			fail
+		;	installed_pack(Registry, Pack, Version, Pinned) ->
 			(	Pinned == true ->
 				print_message(error, packs, cannot_update_pinned_pack(Pack)),
 				fail
@@ -1155,6 +1158,9 @@
 	update_pack(Registry, Pack, Version, NewVersion, Options) :-
 		(	Version == NewVersion ->
 			print_message(comment, packs, up_to_date_pack(Registry, Pack, NewVersion))
+		;	orphaned(Registry, Pack) ->
+			print_message(error, packs, orphaned_pack(Registry, Pack)),
+			fail
 		;	pack_object(Pack, PackObject),
 			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
 			print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
