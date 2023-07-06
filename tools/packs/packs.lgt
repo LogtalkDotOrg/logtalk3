@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:62:0,
+		version is 0:63:0,
 		author is 'Paulo Moura',
-		date is 2023-06-19,
+		date is 2023-07-06,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -682,8 +682,15 @@
 		).
 	installed(Registry) :-
 		print_message(information, packs, 'Installed packs from the ~q registry:'+[Registry]),
-		installed_pack(Registry, Pack, Version, Pinned),
-		print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned)),
+		setof(
+			p(Registry, Pack, Version, Pinned),
+			installed_pack(Registry, Pack, Version, Pinned),
+			Packs
+		),
+		forall(
+			member(p(Registry, Pack, Version, Pinned), Packs),
+			print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned))
+		),
 		fail.
 	installed(Registry) :-
 		\+ installed_pack(Registry, _, _, _),
@@ -693,8 +700,15 @@
 
 	installed :-
 		print_message(information, packs, @'Installed packs:'),
-		installed_pack(Registry, Pack, Version, Pinned),
-		print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned)),
+		setof(
+			p(Registry, Pack, Version, Pinned),
+			installed_pack(Registry, Pack, Version, Pinned),
+			Packs
+		),
+		forall(
+			member(p(Registry, Pack, Version, Pinned), Packs),
+			print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned))
+		),
 		fail.
 	installed :-
 		\+ installed_pack(_, _, _, _),
@@ -714,8 +728,15 @@
 	outdated(Registry) :-
 		check(atom, Registry),
 		print_message(information, packs, 'Outdated packs from the ~q registry:'+[Registry]),
-		outdated(Registry, Pack, Version, LatestVersion),
-		print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion)),
+		setof(
+			p(Registry, Pack, Version, LatestVersion),
+			outdated(Registry, Pack, Version, LatestVersion),
+			Packs
+		),
+		forall(
+			member(p(Registry, Pack, Version, LatestVersion), Packs),
+			print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion))
+		),
 		fail.
 	outdated(Registry) :-
 		\+ outdated_pack(Registry, _, _, _),
@@ -725,8 +746,15 @@
 
 	outdated :-
 		print_message(information, packs, @'Outdated packs:'),
-		outdated(Registry, Pack, Version, LatestVersion),
-		print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion)),
+		setof(
+			p(Registry, Pack, Version, LatestVersion),
+			outdated(Registry, Pack, Version, LatestVersion),
+			Packs
+		),
+		forall(
+			member(p(Registry, Pack, Version, LatestVersion), Packs),
+			print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion))
+		),
 		fail.
 	outdated :-
 		\+ outdated_pack(_, _, _, _),

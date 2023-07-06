@@ -25,6 +25,12 @@ RELEASE NOTES
 3.68.0 - August ??, 2023
 ========================
 
+Tools
+-----
+
+* IMPROVED: The `packs` tool `installed/0-1` and `outdated/0-1` predicates
+to list packs in alphabetical order.
+
 Tests
 -----
 
