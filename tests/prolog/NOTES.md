@@ -91,8 +91,8 @@ specifying a source file text encoding plus a common extended text encoding
 Tests that are specified as undefined in the standards due to the potential
 of creating cyclic terms are skipped when using a backend Prolog compiler
 that either doesn't support cyclic terms or whose support for cyclic terms
-is limited. Currently, these tests are only run when using SICStus Prolog,
-SWI-Prolog, or YAP as the backend Prolog compiler.
+is limited (see the table column for coinduction in the `adapters/NOTES.md`
+file).
 
 There is some overlap between a few test sets. Notably, between tests sets
 for arithmetic functions and the tests for the `is/2` built-in predicate.
