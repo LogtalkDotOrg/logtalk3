@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:63:0,
+		version is 0:64:0,
 		author is 'Paulo Moura',
-		date is 2023-07-06,
+		date is 2023-07-07,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -551,7 +551,8 @@
 
 	:- uses(os, [
 		delete_file/1, delete_directory/1, directory_exists/1, directory_files/3,
-		decompose_file_name/3, decompose_file_name/4, ensure_file/1, file_exists/1,
+		decompose_file_name/3, decompose_file_name/4,
+		ensure_file/1, file_exists/1, file_size/2,
 		internal_os_path/2, make_directory_path/1, operating_system_type/1,
 		path_concat/3
 	]).
@@ -1943,14 +1944,21 @@
 				atomic_list_concat(['git archive ', GitExtraOptions, ' -v -o "', Archive, '" --remote="', Remote, '" ', Tag], Command)
 			;	atomic_list_concat(['git archive ', GitExtraOptions, ' -o "',    Archive, '" --remote="', Remote, '" ', Tag], Command)
 			),
-			^^command(Command, pack_archive_download_failed(Pack, Archive)),
+			(	^^command(Command, pack_archive_download_failed(Pack, Command)) ->
+				true
+			;	% when the remote connection fails, git archive still creates an empty file
+				file_exists(Archive),
+				file_size(Archive, 0),
+				delete_file(Archive),
+				fail
+			),
 			Downloader = git
 		;	^^option(curl(CurlExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
-				atomic_list_concat(['curl ', CurlExtraOptions, ' -v -L -o "',    Archive, '" "', URL, '"'], Command)
-			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -s -S -L -o "', Archive, '" "', URL, '"'], Command)
+				atomic_list_concat(['curl ', CurlExtraOptions, ' -f -v -L -o "',    Archive, '" "', URL, '"'], Command)
+			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
-			^^command(Command, pack_archive_download_failed(Pack, Archive)),
+			^^command(Command, pack_archive_download_failed(Pack, Command)),
 			Downloader = curl
 		).
 

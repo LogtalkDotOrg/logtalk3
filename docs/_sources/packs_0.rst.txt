@@ -11,8 +11,8 @@
 Pack handling predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 0:63:0
-| **Date:** 2023-07-06
+| **Version:** 0:64:0
+| **Date:** 2023-07-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -574,7 +574,7 @@ Installs a pack (if its name is unique among all registries) using default optio
 ``update/3``
 ^^^^^^^^^^^^
 
-Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is orphaned or pinned and not using a ``force(true)`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -625,7 +625,7 @@ Updates an outdated pack to the specified version using the specified options. F
 ``update/2``
 ^^^^^^^^^^^^
 
-Updates an outdated pack to its latest version using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+Updates an outdated pack to its latest version using the specified options. Fails if the pack is orphaned, unknown, or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -672,7 +672,7 @@ Updates an outdated pack to its latest version using the specified options. Fail
 ``update/1``
 ^^^^^^^^^^^^
 
-Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, not installed, or unknown.
+Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, orphaned, not installed, or unknown.
 
 | **Compilation flags:**
 |    ``static``

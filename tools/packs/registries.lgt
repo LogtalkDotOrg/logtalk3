@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:55:0,
+		version is 0:56:0,
 		author is 'Paulo Moura',
-		date is 2023-06-19,
+		date is 2023-07-07,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -923,10 +923,10 @@
 		make_directory_path(ArchivesRegistriesRegistry),
 		^^option(curl(CurlExtraOptions), Options),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat(['curl ', CurlExtraOptions, ' -v -L -o "',    Archive, '" "', URL, '"'], Command)
-		;	atomic_list_concat(['curl ', CurlExtraOptions, ' -s -S -L -o "', Archive, '" "', URL, '"'], Command)
+			atomic_list_concat(['curl ', CurlExtraOptions, ' -f -v -L -o "',    Archive, '" "', URL, '"'], Command)
+		;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 		),
-		^^command(Command, registry_download_failed(Registry, URL)).
+		^^command(Command, registry_download_failed(Registry, Command)).
 
 	uncompress(Registry, Archive, Path, Options) :-
 		make_registry_installation_directory(Registry, Path, OSPath),

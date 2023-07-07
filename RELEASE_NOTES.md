@@ -37,6 +37,15 @@ orphaned.
 * IMPROVED: The `packs` tool `update/1-3` predicates to print an error message
 when a pack is orphaned.
 
+* IMPROVED: When using the `packs` tool to install a pack using `git archive`,
+delete any empty archive file created when the remote connection fails.
+
+* IMPROVED: When using the `packs` tool to install a pack using `curl`, fail
+on HTTP server errors instead of creating an archive file with the HTTP error.
+
+* IMPROVED: The `packs` tool now reports the pack or registry download full
+command in case of failure instead of the URL or the asset path.
+
 Tests
 -----
 

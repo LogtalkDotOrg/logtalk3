@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:30:0,
+		version is 0:31:0,
 		author is 'Paulo Moura',
-		date is 2023-07-06,
+		date is 2023-07-07,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -148,8 +148,8 @@
 	message_tokens(registry_directory_copy_failed(Registry, URL)) -->
 		['Registry directory copy failed: ~q (~q)'-[Registry, URL], nl].
 
-	message_tokens(registry_download_failed(Registry, URL)) -->
-		['Registry archive download failed: ~q (~q)'-[Registry, URL], nl].
+	message_tokens(registry_download_failed(Registry, Command)) -->
+		['Registry archive download failed: ~q (~q)'-[Registry, Command], nl].
 
 	message_tokens(registry_archive_uncompress_failed(Registry, Path)) -->
 		['Registry archive uncompress failed: ~q (~q)'-[Registry, Path], nl].
@@ -297,8 +297,8 @@
 	message_tokens(pack_directory_not_found(Pack, Directory)) -->
 		['Pack directory not found: ~q (~q)'-[Pack, Directory], nl].
 
-	message_tokens(pack_archive_download_failed(Pack, Archive)) -->
-		['Pack archive download failed: ~q (~q)'-[Pack, Archive], nl].
+	message_tokens(pack_archive_download_failed(Pack, Command)) -->
+		['Pack archive download failed: ~q (~q)'-[Pack, Command], nl].
 
 	message_tokens(pack_archive_checksum_failed(Pack, Archive)) -->
 		['Pack archive checksum check failed: ~q (~q)'-[Pack, Archive], nl].
