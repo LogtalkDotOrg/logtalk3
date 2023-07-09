@@ -25,6 +25,12 @@ RELEASE NOTES
 3.68.0 - August ??, 2023
 ========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: GNU Prolog adapter file for the `format/2-3` predicate changes in
+version 1.6.0.
+
 Tools
 -----
 
