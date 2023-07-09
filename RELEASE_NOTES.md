@@ -46,6 +46,11 @@ on HTTP server errors instead of creating an archive file with the HTTP error.
 * IMPROVED: The `packs` tool now reports the pack or registry download full
 command in case of failure instead of the URL or the asset path.
 
+Examples
+--------
+
+* UPDATED: Notes of the `tabling` object on current limitations.
+
 Tests
 -----
 
