@@ -700,6 +700,16 @@
 		catch({write_term([1,2,3,4,5], [max_depth(6)])}, _, true),
 		^^text_output_assertion('[1,2,3,4,5]', Assertion).
 
+	test(lgt_write_term_3_131, true(Assertion), [condition(max_depth_option_supported)]) :-
+		^^set_text_output(''),
+		catch({write_term(a(b(c(d(e)))), [max_depth(3)])}, _, true),
+		^^text_output_assertion('a(b(c(...)))', Assertion).
+
+	test(lgt_write_term_3_132, true(Assertion), [condition(max_depth_option_supported)]) :-
+		^^set_text_output(''),
+		catch({write_term([1,2,3,4,5], [max_depth(3)])}, _, true),
+		^^text_output_assertion('[1,2,3|...]', Assertion).
+
 	cleanup :-
 		^^clean_binary_output,
 		^^clean_text_input.
