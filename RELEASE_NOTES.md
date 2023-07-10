@@ -34,6 +34,10 @@ version 1.6.0.
 Tools
 -----
 
+* IMPROVED: The `lgtunit` tool now prints all test execution times with nine
+decimal digits to simplify comparing test runs. Thanks to Daniel Diaz for the
+suggestion.
+
 * IMPROVED: The `packs` tool `installed/0-1` and `outdated/0-1` predicates
 to list packs in alphabetical order.
 
