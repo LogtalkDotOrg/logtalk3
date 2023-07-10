@@ -710,6 +710,16 @@
 		catch({write_term([1,2,3,4,5], [max_depth(3)])}, _, true),
 		^^text_output_assertion('[1,2,3|...]', Assertion).
 
+	test(lgt_write_term_3_133, true(Assertion), [condition(max_depth_option_supported)]) :-
+		^^set_text_output(''),
+		catch({write_term(a(b(c(d(e(f(g(h(i(j(k(l(m)))))))))))), [max_depth(0)])}, _, true),
+		^^text_output_assertion('a(b(c(d(e(f(g(h(i(j(k(l(m))))))))))))', Assertion).
+
+	test(lgt_write_term_3_134, true(Assertion), [condition(max_depth_option_supported)]) :-
+		^^set_text_output(''),
+		catch({write_term([1,2,3,4,5,6,7,8,9,10,11,12,13], [max_depth(0)])}, _, true),
+		^^text_output_assertion('[1,2,3,4,5,6,7,8,9,10,11,12,13]', Assertion).
+
 	cleanup :-
 		^^clean_binary_output,
 		^^clean_text_input.
