@@ -71,6 +71,8 @@ Prolog systems.
 `bagof/3`, `copy_term/2`, `msort/2`, `setof/3`, `sort/2`, and
 `term_variables/2` predicates adapted from WG17 work.
 
+* ADDED: Additional tests for the Prolog standard `write_term/2` predicate.
+
 Installers and installation scripts
 -----------------------------------
 
