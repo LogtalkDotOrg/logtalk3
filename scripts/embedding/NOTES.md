@@ -63,10 +63,11 @@ In both solutions, the `reload` flag should usually be set to `skip`
 code when running the embedded application or saved state. You may
 also want to turn off the `source_data` flag to reduce the size of
 your application. The required flag values can be set on a dedicated
-settings file or, preferably, in a modified adapter file (where you
-can also set the `settings_file` flag to `deny` to prevent using any
-settings file accessible on a computer where the embedded application
-is run to disturb it). 
+settings file. When one is passed as argument to the embedding scripts,
+the backend adapter file ia automatically patched, changing the value
+of the `settings_file` flag to `deny`, to prevent using any settings
+file accessible on a computer where the embedded application is run
+to disturb it. 
 
 To avoid dependencies on the Logtalk `LOGTALKHOME` and `LOGTALKUSER`
 environment variables, the sample scripts support an option for
