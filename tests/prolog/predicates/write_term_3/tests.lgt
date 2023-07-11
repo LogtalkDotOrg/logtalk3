@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:31:0,
+		version is 1:32:0,
 		author is 'Paulo Moura',
-		date is 2023-07-10,
+		date is 2023-07-11,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -682,42 +682,42 @@
 
 	test(lgt_write_term_3_127, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
-		catch({write_term(1, [max_depth(0)])}, _, true),
+		{write_term(1, [max_depth(0)])},
 		^^text_output_assertion('1', Assertion).
 
 	test(lgt_write_term_3_128, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
-		catch({write_term(1, [max_depth(10)])}, _, true),
+		{write_term(1, [max_depth(10)])},
 		^^text_output_assertion('1', Assertion).
 
 	test(lgt_write_term_3_129, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
-		catch({write_term(a(b(c(d(e)))), [max_depth(6)])}, _, true),
+		{write_term(a(b(c(d(e)))), [max_depth(6)])},
 		^^text_output_assertion('a(b(c(d(e))))', Assertion).
 
 	test(lgt_write_term_3_130, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
-		catch({write_term([1,2,3,4,5], [max_depth(6)])}, _, true),
+		{write_term([1,2,3,4,5], [max_depth(6)])},
 		^^text_output_assertion('[1,2,3,4,5]', Assertion).
 
 	test(lgt_write_term_3_131, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
-		catch({write_term(a(b(c(d(e)))), [max_depth(3)])}, _, true),
+		{write_term(a(b(c(d(e)))), [max_depth(3)])},
 		^^text_output_assertion('a(b(c(...)))', Assertion).
 
 	test(lgt_write_term_3_132, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
-		catch({write_term([1,2,3,4,5], [max_depth(3)])}, _, true),
+		{write_term([1,2,3,4,5], [max_depth(3)])},
 		^^text_output_assertion('[1,2,3|...]', Assertion).
 
 	test(lgt_write_term_3_133, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
-		catch({write_term(a(b(c(d(e(f(g(h(i(j(k(l(m)))))))))))), [max_depth(0)])}, _, true),
+		{write_term(a(b(c(d(e(f(g(h(i(j(k(l(m)))))))))))), [max_depth(0)])},
 		^^text_output_assertion('a(b(c(d(e(f(g(h(i(j(k(l(m))))))))))))', Assertion).
 
 	test(lgt_write_term_3_134, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
-		catch({write_term([1,2,3,4,5,6,7,8,9,10,11,12,13], [max_depth(0)])}, _, true),
+		{write_term([1,2,3,4,5,6,7,8,9,10,11,12,13], [max_depth(0)])},
 		^^text_output_assertion('[1,2,3,4,5,6,7,8,9,10,11,12,13]', Assertion).
 
 	cleanup :-
