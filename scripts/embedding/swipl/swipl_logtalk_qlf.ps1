@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.qlf file with a
 ##   Logtalk application
 ## 
-##   Last updated on March 15, 2023
+##   Last updated on July 11, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -33,6 +33,7 @@ param(
 	[Parameter()]
 	[Switch]$c, 
 	[Switch]$x, 
+	[String]$f,
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "application",
@@ -49,7 +50,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.15")
+	Write-Output ($myName + " 0.16")
 }
 
 function Get-Logtalkhome {
@@ -103,6 +104,7 @@ function Write-Usage-Help() {
 	Write-Output "Optional arguments:"
 	Write-Output "  -c compile library alias paths in paths and settings files"
 	Write-Output "  -x also generate a standalone saved state"
+	Write-Output "  -f foreign object action for standalone saved state (requires -x option; no default)"
 	Write-Output "  -d directory for generated QLF files (absolute path; default is current directory)"
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
@@ -126,6 +128,12 @@ function Check-Parameters() {
 	if ($v -eq $true) {
 		Write-Script-Version
 		Exit
+	}
+
+	if ($f -ne "") {
+		$foreign = ",foreign($f)"
+	} else {
+		$foreign = ""
 	}
 
 	if (-not(Test-Path $p)) { # cannot be ""
@@ -298,10 +306,10 @@ if ($l -ne "") {
 if ($x -eq $true) {
 	Set-Location $d
 	if ($l -ne "") {
-		$GoalParam = "[logtalk, application], qsave_program('" + $n + "', [goal($g), stand_alone(true)])"
+		$GoalParam = "[logtalk, application], qsave_program('" + $n + "', [goal($g),stand_alone(true)$foreign])"
 		swipl -g $GoalParam -t "halt"
 	} else {
-		$GoalParam = "[logtalk], qsave_program('" + $n + "', [goal($g), stand_alone(true)])"
+		$GoalParam = "[logtalk], qsave_program('" + $n + "', [goal($g),stand_alone(true)$foreign])"
 		swipl -g $GoalParam -t "halt"
 	}
 }

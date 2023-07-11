@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.qlf file with a
 ##   Logtalk application
 ## 
-##   Last updated on April 9, 2022
+##   Last updated on July 11, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.15"
+	echo "$(basename "$0") 0.16"
 	exit 0
 }
 
@@ -108,6 +108,7 @@ paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 hooks="$LOGTALKHOME/adapters/swihooks.pl"
 compile="false"
+foreign=""
 
 usage_help()
 {
@@ -117,13 +118,14 @@ usage_help()
 	echo "code given its loader file. It can also generate a standalone saved state."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-x] [-d directory] [-t tmpdir] [-n name] [-p paths] [-k hooks] [-s settings] [-l loader] [-g goal]"
+	echo "  $(basename "$0") [-c] [-x] [-f foreign] [-d directory] [-t tmpdir] [-n name] [-p paths] [-k hooks] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -x also generate a standalone saved state"
+	echo "  -f foreign object action for standalone saved state (requires -x option; no default)"
 	echo "  -d directory for generated QLF files (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -n name of the generated saved state (default is application)"
@@ -137,11 +139,12 @@ usage_help()
 	echo
 }
 
-while getopts "cxd:t:n:p:k:s:l:g:vh" option
+while getopts "cxf:d:t:n:p:k:s:l:g:vh" option
 do
 	case $option in
 		c) compile="true";;
 		x) saved_state="true";;
+		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		n) n_arg="$OPTARG";;
@@ -155,6 +158,10 @@ do
 		*) usage_help; exit;;
 	esac
 done
+
+if [ "$f_arg" != "" ] ; then
+	foreign=",foreign($f_arg)"
+fi
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
@@ -299,9 +306,9 @@ fi
 if [ "$saved_state" == "true" ] ; then
 	cd "$directory" || exit 1
 	if [ "$loader" != "" ] ; then
-		swipl -g "[logtalk, application], qsave_program('$name', [goal($goal), stand_alone(true)])" -t "halt"
+		swipl -g "[logtalk, application], qsave_program('$name', [goal($goal),stand_alone(true)$foreign])" -t "halt"
 	else
-		swipl -g "[logtalk], qsave_program('$name', [goal($goal), stand_alone(true)])" -t "halt"
+		swipl -g "[logtalk], qsave_program('$name', [goal($goal),stand_alone(true)$foreign])" -t "halt"
 	fi
 fi
 
