@@ -25,6 +25,12 @@ RELEASE NOTES
 3.68.0 - August ??, 2023
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Harmless singleton variable warnings in the `logtalk` built-in object
+when using some embedding scripts.
+
 Prolog adapter and integration files
 ------------------------------------
 

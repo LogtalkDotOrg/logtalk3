@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:22:0,
+		version is 1:22:1,
 		author is 'Paulo Moura',
-		date is 2023-05-02,
+		date is 2023-07-11,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -382,7 +382,7 @@
 		;	Tokens = [[_, _]>>_| _] ->
 			% user-defined print goal; printing the prefix is delegated to the goal
 			print_message_tokens_(Tokens, Stream, Prefix)
-		;	Tokens = [begin(Kind, Context), [_, _]>>_| _] ->
+		;	Tokens = [begin(_, _), [_, _]>>_| _] ->
 			% user-defined print goal; printing the prefix is delegated to the goal
 			print_message_tokens_(Tokens, Stream, Prefix)
 		;	Tokens = [begin(Kind, Context)| Rest] ->
