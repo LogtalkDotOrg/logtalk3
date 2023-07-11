@@ -49,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.16")
+	Write-Output ($myName + " 0.17")
 }
 
 function Get-Logtalkhome {
@@ -243,6 +243,7 @@ if ($s -eq "") {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
 	}
 	xsblgt -e $GoalParam
+	xsb.pl -replace 'settings_file, allow' 'settings_file, deny'
 	Get-Content -Path xsb.pl,
 		paths_*.P,
 		expanding*_lgt.P,

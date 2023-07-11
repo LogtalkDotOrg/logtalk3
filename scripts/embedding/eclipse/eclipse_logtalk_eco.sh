@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.18"
+	echo "$(basename "$0") 0.19"
 	exit 0
 }
 
@@ -210,6 +210,13 @@ else
 	extension=''
 fi
 
+# use GNU sed if available instead of BSD sed
+if gsed --version >/dev/null 2>&1 ; then
+	sed="gsed"
+else
+	sed="sed"
+fi
+
 cp "$LOGTALKHOME/adapters/eclipse.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
@@ -227,6 +234,7 @@ if [ "$settings" != "" ] ; then
 	else
 		eclipselgt$extension -e "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt"
 	fi
+	$sed -i "s/settings_file, allow/settings_file, deny/" eclipse.pl
 	cat \
 		eclipse.pl \
 		paths_*.pl \

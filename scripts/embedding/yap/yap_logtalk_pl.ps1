@@ -49,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.16")
+	Write-Output ($myName + " 0.17")
 }
 
 function Get-Logtalkhome {
@@ -253,6 +253,7 @@ if ($s -eq "") {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
 	}
 	yaplgt -g $GoalParam
+	yap.pl -replace 'settings_file, allow' 'settings_file, deny'
 	Get-Content -Path yap.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,

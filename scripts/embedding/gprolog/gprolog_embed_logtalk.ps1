@@ -48,7 +48,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.15")
+	Write-Output ($myName + " 0.16")
 }
 
 function Get-Logtalkhome {
@@ -255,6 +255,10 @@ if ($l -ne "") {
 	gplgt --query-goal $GoalParam
 
 	Pop-Location
+}
+
+if ($s -ne "") {
+	gnu.pl -replace 'settings_file, allow' 'settings_file, deny'
 }
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {

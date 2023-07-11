@@ -85,6 +85,11 @@ Installers and installation scripts
 * CHANGED: The SWI-Prolog based Docker image to use `swipl:stable` instead
 of `swipl:latest`.
 
+* CHANGED: All embedding scripts to patch the backend adapter files to change
+the `settings_file` flag value from `allow` to `deny` when also embedding a
+setting file. This prevents the generated files to to try to load (another)
+setting file when loaded.
+
 * ADDED: SWI-Prolog embedding scripts support for specifying the foreign
 object action when building standalone saved states. Contributed by Yurii
 Rashkovskii.

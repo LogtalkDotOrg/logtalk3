@@ -51,7 +51,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.17")
+	Write-Output ($myName + " 0.18")
 }
 
 function Get-Logtalkhome {
@@ -262,6 +262,7 @@ if ($s -eq "") {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "])" 
 	}
 	swilgt -g $GoalParam -t "halt"
+	swi.pl -replace 'settings_file, allow' 'settings_file, deny'
 	Get-Content -Path swi.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,

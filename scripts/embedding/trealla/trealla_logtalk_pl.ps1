@@ -49,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.5")
+	Write-Output ($myName + " 0.6")
 }
 
 function Get-Logtalkhome {
@@ -243,6 +243,7 @@ if ($s -eq "") {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
 	}
 	tplgt -g $GoalParam
+	trealla.pl -replace 'settings_file, allow' 'settings_file, deny'
 	Get-Content -Path trealla.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,

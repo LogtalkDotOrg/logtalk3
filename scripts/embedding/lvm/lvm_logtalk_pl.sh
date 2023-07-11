@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.5"
+	echo "$(basename "$0") 0.6"
 	exit 0
 }
 
@@ -209,6 +209,13 @@ else
 	extension=''
 fi
 
+# use GNU sed if available instead of BSD sed
+if gsed --version >/dev/null 2>&1 ; then
+	sed="gsed"
+else
+	sed="sed"
+fi
+
 cp "$LOGTALKHOME/adapters/lvm.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
@@ -226,6 +233,7 @@ if [ "$settings" != "" ] ; then
 	else
 		lvmlgt$extension --goal "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt."
 	fi
+	$sed -i "s/settings_file, allow/settings_file, deny/" lvm.pl
 	cat \
 		lvm.pl \
 		paths*.pl \

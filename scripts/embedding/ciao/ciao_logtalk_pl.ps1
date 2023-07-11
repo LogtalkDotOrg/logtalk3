@@ -48,7 +48,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.2")
+	Write-Output ($myName + " 0.3")
 }
 
 function Get-Logtalkhome {
@@ -258,6 +258,7 @@ if ($s -eq "") {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
 	}
 	ciaolgt -e $GoalParam
+	ciao.pl -replace 'settings_file, allow' 'settings_file, deny'
 	Get-Content -Path header.pl,
 		ciao.pl,
 		paths_*.pl,
