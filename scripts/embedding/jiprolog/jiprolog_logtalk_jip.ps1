@@ -5,10 +5,11 @@
 ##   compiler and runtime and optionally an application.jip file with
 ##   a Logtalk application
 ## 
-##   Last updated on March 15, 2023
+##   Last updated on July 11, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2022 Hans N. Beck
+##   SPDX-FileCopyrightText: 2022 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.15")
+	Write-Output ($myName + " 0.16")
 }
 
 function Get-Logtalkhome {
@@ -219,7 +220,7 @@ $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwardin
 jiplgt -g $GoalParam 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
 	jiplgt -g $GoalParam
 } else {
 	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
@@ -237,7 +238,7 @@ if ($s -eq "") {
 		core.pl | Set-Content logtalk.pl
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
+		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
 	}

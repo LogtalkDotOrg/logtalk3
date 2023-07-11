@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on April 9, 2022
+##   Last updated on July 11, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.16"
+	echo "$(basename "$0") 0.17"
 	exit 0
 }
 
@@ -233,14 +233,14 @@ cp "$LOGTALKHOME/core/core.pl" .
 sicstuslgt$extension --goal "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')]),halt."
 
 if [ "$compile" != "false" ] ; then
-	sicstuslgt$extension --goal "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt."
+	sicstuslgt$extension --goal "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt."
 else
 	cp "$paths" "$temporary/paths_lgt.pl"
 fi
 
 if [ "$settings" != "" ] ; then
 	if [ "$compile" != "false" ] ; then
-		sicstuslgt$extension --goal "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt."
+		sicstuslgt$extension --goal "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt."
 	else
 		sicstuslgt$extension --goal "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt."
 	fi

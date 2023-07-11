@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.16"
+	echo "$(basename "$0") 0.17"
 	exit 0
 }
 
@@ -252,14 +252,14 @@ cp "$LOGTALKHOME/core/core.pl" .
 swilgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')])" -t "halt"
 
 if [ "$compile" != "false" ] ; then
-	swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')])" -t "halt"
+	swilgt$extension -g "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')])" -t "halt"
 else
 	cp "$paths" "$temporary/paths_lgt.pl"
 fi
 
 if [ "$settings" != "" ] ; then
 	if [ "$compile" != "false" ] ; then
-		swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')])" -t "halt"
+		swilgt$extension -g "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')])" -t "halt"
 	else
 		swilgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')])" -t "halt"
 	fi

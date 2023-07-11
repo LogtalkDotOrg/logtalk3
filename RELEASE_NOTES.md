@@ -89,6 +89,9 @@ of `swipl:latest`.
 object action when building standalone saved states. Contributed by Yurii
 Rashkovskii.
 
+* UPDATED: All embedding scripts to use `expand_library_alias_paths(loader)`
+instead of the deprecated loader file.
+
 
 3.67.0 - July 4, 2023
 =====================
