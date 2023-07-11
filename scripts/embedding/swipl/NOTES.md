@@ -38,5 +38,9 @@ Usage
 Use `swipl_logtalk_qlf.sh -h` or `swipl_logtalk_qlf.ps1 -h` for a list
 and description of the script options.
 
+The `-f Action` option allows passing the foreign object action when
+creating a standalone saved state. See the SWI-Prolog `qsave_program/2`
+predicate documentation on the `foreign(Action)` option for details.
+
 See the script usage examples in the `../SCRIPT.txt` file on how to
 create a SWI-Prolog saved state that includes a Logtalk application.

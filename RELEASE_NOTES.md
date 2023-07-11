@@ -79,6 +79,10 @@ Installers and installation scripts
 * CHANGED: The SWI-Prolog based Docker image to use `swipl:stable` instead
 of `swipl:latest`.
 
+* ADDED: SWI-Prolog embedding scripts support for specifying the foreign
+object action when building standalone saved states. Contributed by Yurii
+Rashkovskii.
+
 
 3.67.0 - July 4, 2023
 =====================
