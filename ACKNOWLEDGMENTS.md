@@ -39,6 +39,7 @@ CONTRIBUTORS
 * Camilo Correa Restrepo (bug reports)
 * Clara Dimene (GeSHi syntax highlighter)
 * Damien Roch (Docker support)
+* Daniel Diaz (testing and tools feedback and suggestions)
 * Daniel Gross (bug reports, documentation feedback and suggestions)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
@@ -101,6 +102,7 @@ CONTRIBUTORS
 * Victor Noel (bug reports)
 * Vítor Santos Costa (red-black tree library)
 * Xin Wang (bug reports)
+* Yurii Rashkovskii (SWI-Prolog embedding scripts improvements)
 
 A special thanks to all the Prolog implementers who fixed bugs and
 implemented enhancements that greatly helped in improving Logtalk
