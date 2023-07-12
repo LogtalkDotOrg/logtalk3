@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:32:0,
+		version is 1:33:0,
 		author is 'Paulo Moura',
-		date is 2023-07-11,
+		date is 2023-07-12,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -712,10 +712,20 @@
 
 	test(lgt_write_term_3_133, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
+		{write_term(a(b(c(d(e)))), [max_depth(1)])},
+		^^text_output_assertion('a(...)', Assertion).
+
+	test(lgt_write_term_3_134, true(Assertion), [condition(max_depth_option_supported)]) :-
+		^^set_text_output(''),
+		{write_term([1,2,3,4,5], [max_depth(1)])},
+		^^text_output_assertion('[1|...]', Assertion).
+
+	test(lgt_write_term_3_135, true(Assertion), [condition(max_depth_option_supported)]) :-
+		^^set_text_output(''),
 		{write_term(a(b(c(d(e(f(g(h(i(j(k(l(m)))))))))))), [max_depth(0)])},
 		^^text_output_assertion('a(b(c(d(e(f(g(h(i(j(k(l(m))))))))))))', Assertion).
 
-	test(lgt_write_term_3_134, true(Assertion), [condition(max_depth_option_supported)]) :-
+	test(lgt_write_term_3_136, true(Assertion), [condition(max_depth_option_supported)]) :-
 		^^set_text_output(''),
 		{write_term([1,2,3,4,5,6,7,8,9,10,11,12,13], [max_depth(0)])},
 		^^text_output_assertion('[1,2,3,4,5,6,7,8,9,10,11,12,13]', Assertion).
