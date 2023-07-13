@@ -23,48 +23,54 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2014-11-07,
+		date is 2023-07-13,
 		comment is 'Unit tests for the ISO Prolog term syntax.'
-	]).
-
-	:- discontiguous([
-		succeeds/1, throws/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.3.1
 
-	succeeds(iso_term_01) :-
+	test(iso_term_01, true) :-
 		^^set_text_input('f(x,y). '),
 		{read(_)}.
 
-	succeeds(iso_term_02) :-
+	test(iso_term_02, true) :-
 		^^set_text_input('f(:-, ;, [:-, :-|:-]). '),
 		{read(_)}.
 
-	throws(iso_term_03, error(syntax_error(_),_)) :-
+	test(iso_term_03, error(syntax_error(_))) :-
 		^^set_text_input('f(,,a). '),
 		{read(_)}.
 
-	throws(iso_term_04, error(syntax_error(_),_)) :-
+	test(iso_term_04, error(syntax_error(_))) :-
 		^^set_text_input('[a,,|v]. '),
 		{read(_)}.
 
-	throws(iso_term_05, error(syntax_error(_),_)) :-
+	test(iso_term_05, error(syntax_error(_))) :-
 		^^set_text_input('[a,b|,]. '),
 		{read(_)}.
 
-	succeeds(iso_term_06) :-
+	test(iso_term_06, true) :-
 		^^set_text_input('f(\',\',a). '),
 		{read(_)}.
 
-	succeeds(iso_term_07) :-
+	test(iso_term_07, true) :-
 		^^set_text_input('[a,\',\'|v]. '),
 		{read(_)}.
 
-	succeeds(iso_term_08) :-
+	test(iso_term_08, true) :-
 		^^set_text_input('[a,b|\',\']. '),
+		{read(_)}.
+
+	% tests from the WG17 standardization work
+
+	test(wg17_term_09, error(syntax_error(_))) :-
+		^^set_text_input('f(a:-b). '),
+		{read(_)}.
+
+	test(wg17_term_10, error(syntax_error(_))) :-
+		^^set_text_input('f(:-b). '),
 		{read(_)}.
 
 	cleanup :-
