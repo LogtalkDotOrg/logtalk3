@@ -3285,6 +3285,30 @@ logtalk_load_context(entity_identifier, Entity) :-
 logtalk_load_context(entity_prefix, Prefix) :-
 	'$lgt_pp_entity_'(_, _, Prefix).
 
+logtalk_load_context(extends_protocol, Protocol) :-
+   '$lgt_pp_extended_protocol_'(Protocol, _, _, _, _).
+
+logtalk_load_context(implements_protocol, Protocol) :-
+   '$lgt_pp_implemented_protocol_'(Protocol, _, _, _, _).
+
+logtalk_load_context(extends_category, Category) :-
+   '$lgt_pp_extended_category_'(Category, _, _, _, _, _).
+
+logtalk_load_context(imports_category, Category) :-
+   '$lgt_pp_imported_category_'(Category, _, _, _, _, _).
+
+logtalk_load_context(extends_object, Object) :-
+   '$lgt_pp_extended_object_'(Object, _, _, _, _, _, _, _, _, _, _).
+
+logtalk_load_context(instantiates_class, Class) :-
+   '$lgt_pp_instantiated_class_'(Class, _, _, _, _, _, _, _, _, _, _).
+
+logtalk_load_context(specializes_class, Class) :-
+   '$lgt_pp_specialized_class_'(Class, _, _, _, _, _, _, _, _, _, _).
+
+logtalk_load_context(complements_object, Object) :-
+   '$lgt_pp_complemented_object_'(Object, _, _, _, _).
+
 logtalk_load_context(entity_type, Type) :-
 	(	'$lgt_pp_module_'(_) ->
 		Type = module
@@ -13899,7 +13923,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		source, file, basename, directory,
 		stream, target, flags,
 		term, term_position, variables, parameter_variables,
-		variable_names, variable_names(_), singletons, singletons(_)
+		variable_names, variable_names(_), singletons, singletons(_),
+		extends_protocol, implements_protocol, extends_category,
+		imports_category, imports_category, extends_object,
+		instantiates_class, specializes_class, complements_object
 	]),
 	'$lgt_source_file_context'(File, Lines),
 	(	'$lgt_pp_entity_'(Type, Entity, _) ->

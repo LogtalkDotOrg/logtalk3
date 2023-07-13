@@ -27,3 +27,9 @@
 	a(A,B,C,B,A).
 
 :- end_object.
+
+:- protocol(sample_protocol).
+:- end_protocol.
+
+:- protocol(sample_protocol_ext, extends(sample_protocol)).
+:- end_protocol.

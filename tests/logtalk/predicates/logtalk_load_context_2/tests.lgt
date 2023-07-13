@@ -104,6 +104,38 @@
 		logtalk_load_context(stream, Stream),
 		assertz(result(stream, Stream)),
 		fail.
+    term_expansion((:- end_protocol), _) :-
+		logtalk_load_context(extends_protocol, V),
+		assertz(result(extends_protocol, V)),
+		fail.
+	term_expansion((:- end_object), _) :-
+		logtalk_load_context(implements_protocol, V),
+		assertz(result(implements_protocol, V)),
+		fail.
+	term_expansion((:- end_object), _) :-
+		logtalk_load_context(extends_category, V),
+		assertz(result(extends_object, V)),
+		fail.
+	term_expansion((:- end_object), _) :-
+		logtalk_load_context(imports_category, V),
+		assertz(result(imports_category, V)),
+		fail.
+	term_expansion((:- end_object), _) :-
+		logtalk_load_context(extends_object, V),
+		assertz(result(extends_object, V)),
+		fail.
+	term_expansion((:- end_object), _) :-
+		logtalk_load_context(instantiates_class, V),
+		assertz(result(instantiates_class, V)),
+		fail.
+	term_expansion((:- end_object), _) :-
+		logtalk_load_context(specializes_class, V),
+		assertz(result(specializes_class, V)),
+		fail.
+	term_expansion((:- end_object), _) :-
+		logtalk_load_context(complements_object, V),
+		assertz(result(complements_object, V)),
+		fail.
 
 	:- initialization((
 		logtalk_load_context(basename, Basename),
@@ -224,5 +256,11 @@
 	test(logtalk_load_context_2_22, true(File0 == File)) :-
 		object_property(hook, file(File0)),
 		logtalk_library_path(hook_file, File).
+
+    % test relations
+
+	test(logtalk_load_context_relations_extends_protocol) :-
+		result(extends_protocol, sample_protocol).
+	% TODO: finish relations coverage
 
 :- end_object.
