@@ -39,6 +39,7 @@ are currently supported:
 * ``entity_identifier`` - identifier of the entity being compiled if any
 * ``entity_prefix`` - internal prefix for the entity compiled code
 * ``entity_type`` - returns the value ``module`` when compiling a module as an object
+* ``entity_relation`` - returns the entity relations as declared in the entity opening directive
 * ``source`` - full path of the source file being compiled
 * ``file`` - the actual file being compiled, different from ``source`` only when processing an ``include/1`` directive
 * ``basename`` - source file basename
@@ -54,6 +55,17 @@ are currently supported:
 * ``singletons`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
 * ``singletons(Term)`` - the singleton variables of the term being compiled (``[Name1=Variable1, ...]``)
 * ``parameter_variables`` - list of parameter variable names and positions (``[Name1-Position1, ...]``)
+
+For the ``entity_relation`` key, the possible values are:
+
+* ``extends_protocol(Protocol, ParentProtocol, Scope)``
+* ``implements_protocol(ObjectOrCategory, Protocol, Scope)``
+* ``extends_category(Category, ParentCategory, Scope)``
+* ``imports_category(Object, Category, Scope)``
+* ``extends_object(Prototype, Parent, Scope)``
+* ``instantiates_class(Instance, Class, Scope)``
+* ``specializes_class(Class, Superclass, Scope)``
+* ``complements_object(Category, Object)``
 
 Calling this predicate with the ``parameter_variables`` key only succeeds
 when compiling a parametric entity containing parameter variables.

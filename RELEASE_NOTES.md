@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: New `logtalk_load_context/2` predicate `entity_relation` key to
+access the entity (being compiled) relations from its opening directive.
+After a suggestion and prototype code from Yurii Rashkovskii.
+
 * FIXED: Harmless singleton variable warnings in the `logtalk` built-in object
 when using some embedding scripts.
 

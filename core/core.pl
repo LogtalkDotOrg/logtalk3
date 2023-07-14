@@ -3291,6 +3291,9 @@ logtalk_load_context(entity_type, Type) :-
 	;	'$lgt_pp_entity_'(Type, _, _)
 	).
 
+logtalk_load_context(entity_relation, Relation) :-
+	'$lgt_logtalk_load_context_entity_relation'(Relation).
+
 logtalk_load_context(term, Term) :-
 	% full file term being compiled
 	'$lgt_pp_term_source_data_'(Term, _, _, _, _).
@@ -3333,6 +3336,31 @@ logtalk_load_context(term_position, Lines) :-
 logtalk_load_context(stream, Stream) :-
 	% avoid a spurious choice-point with some backend Prolog compilers
 	stream_property(Stream, alias(logtalk_compiler_input)), !.
+
+
+'$lgt_logtalk_load_context_entity_relation'(extends_protocol(Ptc, ExtPtc, Scope)) :-
+   '$lgt_pp_extended_protocol_'(ExtPtc, Ptc, _, _, Scope).
+
+'$lgt_logtalk_load_context_entity_relation'(implements_protocol(ObjOrCtg, Ptc, Scope)) :-
+   '$lgt_pp_implemented_protocol_'(Ptc, ObjOrCtg, _, _, Scope).
+
+'$lgt_logtalk_load_context_entity_relation'(extends_category(Ctg, ExtCtg, Scope)) :-
+   '$lgt_pp_extended_category_'(ExtCtg, Ctg, _, _, _, Scope).
+
+'$lgt_logtalk_load_context_entity_relation'(imports_category(Obj, Ctg, Scope)) :-
+   '$lgt_pp_imported_category_'(Ctg, Obj, _, _, _, Scope).
+
+'$lgt_logtalk_load_context_entity_relation'(extends_object(Prototype, Parent, Scope)) :-
+   '$lgt_pp_extended_object_'(Parent, Prototype, _, _, _, _, _, _, _, _, Scope).
+
+'$lgt_logtalk_load_context_entity_relation'(instantiates_class(Obj, Class, Scope)) :-
+   '$lgt_pp_instantiated_class_'(Class, Obj, _, _, _, _, _, _, _, _, Scope).
+
+'$lgt_logtalk_load_context_entity_relation'(specializes_class(Class, Superclass, Scope)) :-
+   '$lgt_pp_specialized_class_'(Superclass, Class, _, _, _, _, _, _, _, _, Scope).
+
+'$lgt_logtalk_load_context_entity_relation'(complements_object(Ctg, Obj)) :-
+   '$lgt_pp_complemented_object_'(Obj, Ctg, _, _, _).
 
 
 
@@ -3504,7 +3532,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 68, 0, b01)).
+'$lgt_version_data'(logtalk(3, 68, 0, b02)).
 
 
 
@@ -13895,7 +13923,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Key),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	\+ '$lgt_member'(Key, [
-		entity_identifier, entity_prefix, entity_type,
+		entity_identifier, entity_prefix, entity_type, entity_relation,
 		source, file, basename, directory,
 		stream, target, flags,
 		term, term_position, variables, parameter_variables,
