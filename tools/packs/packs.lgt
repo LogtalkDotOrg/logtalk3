@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:64:0,
+		version is 0:64:1,
 		author is 'Paulo Moura',
-		date is 2023-07-07,
+		date is 2023-07-12,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -2009,8 +2009,8 @@
 		;	Strip = 1
 		),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip ', Strip, ' --directory "', OSPath, '"'], Command)
-		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip ', Strip, ' --directory "', OSPath, '"'], Command)
+			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
+		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
 		),
 		^^command(Command, pack_archive_uncompress_failed(Pack, Archive)).
 
