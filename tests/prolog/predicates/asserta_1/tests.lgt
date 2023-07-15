@@ -29,9 +29,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2021-07-09,
+		date is 2021-07-15,
 		comment is 'Unit tests for the ISO Prolog standard asserta/1 built-in predicate.'
 	]).
 
@@ -132,6 +132,14 @@
 	test(wg17_asserta_1_22, errors([permission_error(modify,static_procedure,throw/1), permission_error(modify,static_procedure,':'(user,throw/1))])) :-
 		% the second exception term is used in some of the Prolog compilers supporting modules
 		{asserta((throw(_) :- true))}.
+
+	test(wg17_asserta_1_23, errors([permission_error(modify,static_procedure,(:-)/2), permission_error(modify,static_procedure,':'(user,(:-)/2))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{asserta(((a :- b) :- true))}.
+
+	test(wg17_asserta_1_24, errors([permission_error(modify,static_procedure,(:-)/1), permission_error(modify,static_procedure,':'(user,(:-)/1))])) :-
+		% the second exception term is used in some of the Prolog compilers supporting modules
+		{asserta(((:- b) :- true))}.
 
 	% auxiliary predicates
 
