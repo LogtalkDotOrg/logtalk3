@@ -19,6 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- if(current_logtalk_flag(prolog_dialect, swi)).
+
+	:- use_module(library(prolog_evaluable)).
+
+:- endif.
+
+
 :- if(predicate_property(evaluable_property(_,_), _)).
 
 	:- initialization((

@@ -86,6 +86,9 @@ WG17 work.
 
 * ADDED: Additional tests for the Prolog standard `write_term/2` predicate.
 
+* FIXED: Enable running the `evaluable_property/2` predicate tests when using
+SWI-Prolog as the backend.
+
 Installers and installation scripts
 -----------------------------------
 
