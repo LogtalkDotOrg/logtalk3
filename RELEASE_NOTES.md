@@ -43,6 +43,11 @@ version 1.6.0.
 
 * UPDATED: The LVM adapter file to require version 6.3.0 or later.
 
+Library
+-------
+
+* ADDED: LVM support to the library `parallel_logtalk_processes_setup.pl` file.
+
 Tools
 -----
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Parallel Logtalk processes setup for selected backend Prolog compilers
-%  Last updated on April 18, 2020
+%  Last updated on July 15, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -86,6 +86,16 @@
 			true
 		;	mkdir(Directory)
 		).
+
+:- elif(current_prolog_flag(dialect, lvm)).
+
+	% usage: lvmlgt -i parallel_logtalk_processes_setup.pl
+
+	logtalk_library_path(scratch_directory, Directory) :-
+		config_property(system/tempDir, TMP_DIR),
+		pid(PID),
+		atomic_list_concat([TMP_DIR, logtalk, PID], Directory),
+		make_directory_path(Directory).
 
 :- elif(current_prolog_flag(dialect, sicstus)).
 
