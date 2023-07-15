@@ -41,6 +41,8 @@ Prolog adapter and integration files
 * UPDATED: GNU Prolog adapter file for the `format/2-3` predicate changes in
 version 1.6.0.
 
+* UPDATED: The LVM adapter file to require version 6.3.0 or later.
+
 Tools
 -----
 

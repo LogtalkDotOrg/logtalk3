@@ -249,7 +249,7 @@ documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
 
 
-LVM 4.1.0 and later versions
+LVM 6.3.0 and later versions
 ----------------------------
 
 	lvm.pl
