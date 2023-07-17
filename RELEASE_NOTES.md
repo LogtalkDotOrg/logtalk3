@@ -107,6 +107,9 @@ the `settings_file` flag value from `allow` to `deny` when also embedding a
 setting file. This prevents the generated files to to try to load (another)
 setting file when loaded.
 
+* ADDED: LVM embedding scripts support for copying all plug-in foreign library
+files used by an application.
+
 * ADDED: SWI-Prolog embedding scripts support for specifying the foreign
 object action when building standalone saved states. Contributed by Yurii
 Rashkovskii.

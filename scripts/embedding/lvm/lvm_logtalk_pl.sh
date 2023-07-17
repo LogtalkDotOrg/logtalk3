@@ -5,7 +5,7 @@
 ##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on July 11, 2023
+##   Last updated on July 17, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.6"
+	echo "$(basename "$0") 0.7"
 	exit 0
 }
 
@@ -103,6 +103,7 @@ temporary=""
 paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 compile="false"
+foreign="false"
 
 usage_help()
 {
@@ -112,7 +113,7 @@ usage_help()
 	echo "code given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-f]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -123,12 +124,13 @@ usage_help()
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -s settings file (absolute path; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
+	echo "  -f copy foreign library files loaded by the application"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }
 
-while getopts "cd:t:p:l:s:vh" option
+while getopts "cd:t:p:l:s:fvh" option
 do
 	case $option in
 		c) compile="true";;
@@ -137,6 +139,7 @@ do
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		f) foreign="true";;
 		v) print_version;;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
@@ -263,7 +266,11 @@ fi
 if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
-	lvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
+	if [ "$foreign" != "false" ] ; then
+		lvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),forall((current_plugin(PlugIn),plugin_property(PlugIn,file(File))),(decompose_file_name(File,_,Basename),atom_concat('$directory/',Basename,Copy),copy_file(File,Copy))),halt."
+	else
+		lvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
+	fi
 	cat $(ls -rt *.pl) > "$directory"/application.pl
 fi
 

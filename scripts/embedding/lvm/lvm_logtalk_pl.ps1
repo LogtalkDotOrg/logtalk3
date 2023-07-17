@@ -4,7 +4,7 @@
 ##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on July 11, 2023
+##   Last updated on July 17, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2022 Hans N. Beck
@@ -40,6 +40,7 @@ param(
 	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
 	[String]$s, 
 	[String]$l,
+	[Switch]$f, 
 	[String]$g = "true",
 	[Switch]$v,
 	[Switch]$h
@@ -48,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.6")
+	Write-Output ($myName + " 0.7")
 }
 
 function Get-Logtalkhome {
@@ -95,7 +96,7 @@ function Write-Usage-Help() {
 	Write-Output "code given its loader file."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader]")
+	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-f]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
@@ -107,6 +108,7 @@ function Write-Usage-Help() {
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
 	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
+	Write-Output "  -f copy foreign library files loaded by the application"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
 	Write-Output ""
@@ -265,7 +267,11 @@ if ($l -ne "") {
 		Exit 
 	}
 
-	$GoalParam = "consult('" + $d.Replace('\', '/') +  "/logtalk.pl'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt." 
+	if ($f -eq $true) {
+		$GoalParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/') + "'), forall((current_plugin(PlugIn), plugin_property(PlugIn,file(File))), (decompose_file_name(File,_,Basename), atom_concat('" + $d.Replace('\', '/') + "',Basename,Copy), copy_file(File,Copy))), halt." 
+	} else {
+		$GoalParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/') + "'), halt." 
+	}
 
 	lvmpl --goal $GoalParam
 	Get-Item *.pl | 
