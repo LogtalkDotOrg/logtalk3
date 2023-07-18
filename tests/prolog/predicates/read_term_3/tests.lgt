@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:13:0,
 		author is 'Paulo Moura',
-		date is 2022-03-22,
+		date is 2023-07-18,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
 	]).
 
@@ -38,14 +38,14 @@
 		^^text_input_assertion(' term2. ...', Assertion).
 
 	test(iso_read_term_3_02, true(Assertion)) :-
-		^^set_text_input(st_o, 'term1. term2. ...'),
-		{read(st_o, term1)},
-		^^text_input_assertion(st_o, ' term2. ...', Assertion).
+		^^set_text_input(in, 'term1. term2. ...'),
+		{read(in, term1)},
+		^^text_input_assertion(in, ' term2. ...', Assertion).
 
 	test(iso_read_term_3_03, true) :-
-		^^set_text_input(st_o, ['foo(A+Roger,A+_). ','term2. ...']),
-		{read_term(st_o, T, [variables(VL),variable_names(VN),singletons(VS)])},
-		^^text_input_assertion(st_o, ' term2. ...', Assertion),
+		^^set_text_input(in, ['foo(A+Roger,A+_). ','term2. ...']),
+		{read_term(in, T, [variables(VL),variable_names(VN),singletons(VS)])},
+		^^text_input_assertion(in, ' term2. ...', Assertion),
 		^^assertion(variant(T, foo(X1+X2,X1+X3))),
 		T = foo(X1+X2,X1+X3),
 		^^assertion(VL == [X1,X2,X3]),
@@ -134,10 +134,10 @@
 		{read(_)}.
 
 	test(sics_read_term_3_21, true(Value == past)) :-
-		^^set_text_input(st_o, '', [eof_action(error)]),
-		get_code(st_o, _),
-		catch({read_term(st_o, _, [])}, error(permission_error(input,past_end_of_stream,_),_), true),
-		stream_property(Stream, alias(st_o)),
+		^^set_text_input(in, '', [eof_action(error)]),
+		get_code(in, _),
+		catch({read_term(in, _, [])}, error(permission_error(input,past_end_of_stream,_),_), true),
+		stream_property(Stream, alias(in)),
 		stream_property(Stream, end_of_stream(Value)).
 
 	test(sics_read_term_3_22, true(Assertion)) :-
@@ -158,9 +158,9 @@
 	% tests from the Logtalk portability work
 
 	test(lgt_read_term_3_25, true(Term == end_of_file)) :-
-		^^set_text_input(st_o, '', [eof_action(eof_code)]),
-		get_code(st_o, _),
-		{read_term(st_o, Term, [])}.
+		^^set_text_input(in, '', [eof_action(eof_code)]),
+		get_code(in, _),
+		{read_term(in, Term, [])}.
 
 	test(lgt_read_term_3_26, error(permission_error(input,stream,s))) :-
 		^^set_text_output(s, ''),
@@ -173,8 +173,8 @@
 	test(lgt_read_term_3_28, true) :-
 		^^set_text_input('foo(_X,_Y,_x,_y). '),
 		{read_term(T, [singletons(S)])},
-		compound(T),
-		T = foo(A, B, C, D),
+		^^assertion(variant(T, foo(A,B,C,D))),
+		T = foo(A,B,C,D),
 		^^assertion(S == ['_X'=A,'_Y'=B,'_x'=C,'_y'=D]).
 
 	test(lgt_read_term_3_29, true) :-
@@ -186,15 +186,21 @@
 		^^assertion(VS == []).
 
 	test(lgt_read_term_3_30, true) :-
-		^^set_text_input(foo, 'foo(A,B,A). '),
-		{read_term(foo, T, [variables(VL),variable_names(VN),singletons(VS)])},
+		^^set_text_input(in, 'foo(A,B,A). '),
+		{read_term(in, T, [variables(VL),variable_names(VN),singletons(VS)])},
 		^^assertion(variant(T, foo(A,B,A))),
 		T = foo(A,B,A),
-		^^assertion(var(A)),
-		^^assertion(var(B)),
 		^^assertion(VL == [A,B]),
 		^^assertion(VN == ['A'=A,'B'=B]),
 		^^assertion(VS == ['B'=B]).
+
+	test(lgt_read_term_3_31, true) :-
+		^^set_text_input(in, 'A. '),
+		{read_term(in, T, [variables(VL),variable_names(VN),singletons(VS)])},
+		^^assertion(var(T)),
+		^^assertion(VL == [T]),
+		^^assertion(VN == ['A'=T]),
+		^^assertion(VS == ['A'=T]).
 
 	% check detection of invalid options; the ISO Prolog standard only
 	% specifies a domain_error/2 but a uninstantiation_error/1 would be
@@ -204,37 +210,37 @@
 	% on Prolog backends that don't check options validity before
 	% attempting to read a term
 
-	test(lgt_read_term_3_31, error(domain_error(read_option,variables(a)))) :-
+	test(lgt_read_term_3_32, error(domain_error(read_option,variables(a)))) :-
 		^^set_text_input('a. '),
 		{read_term(_, [variables(a)])}.
 
-	test(lgt_read_term_3_32, error(domain_error(read_option,variables([_|a])))) :-
+	test(lgt_read_term_3_33, error(domain_error(read_option,variables([_|a])))) :-
 		^^set_text_input('a. '),
 		{read_term(_, [variables([_|a])])}.
 
-	test(lgt_read_term_3_33, error(domain_error(read_option,variable_names(a)))) :-
+	test(lgt_read_term_3_34, error(domain_error(read_option,variable_names(a)))) :-
 		^^set_text_input('a. '),
 		{read_term(_, [variable_names(a)])}.
 
-	test(lgt_read_term_3_34, error(domain_error(read_option,variable_names([_|a])))) :-
+	test(lgt_read_term_3_35, error(domain_error(read_option,variable_names([_|a])))) :-
 		^^set_text_input('a. '),
 		{read_term(_, [variable_names([_|a])])}.
 
-	test(lgt_read_term_3_35, error(domain_error(read_option,singletons(a)))) :-
+	test(lgt_read_term_3_36, error(domain_error(read_option,singletons(a)))) :-
 		^^set_text_input('a. '),
 		{read_term(_, [singletons(a)])}.
 
-	test(lgt_read_term_3_36, error(domain_error(read_option,singletons([_|a])))) :-
+	test(lgt_read_term_3_37, error(domain_error(read_option,singletons([_|a])))) :-
 		^^set_text_input('a. '),
 		{read_term(_, [singletons([_|a])])}.
 
 	% check detection of incomplete hexadecimal character escapes
 
-	test(lgt_read_term_3_37, error(syntax_error(_))) :-
+	test(lgt_read_term_3_38, error(syntax_error(_))) :-
 		^^set_text_input('\\x'),
 		{read(_)}.
 
-	test(lgt_read_term_3_38, error(syntax_error(_))) :-
+	test(lgt_read_term_3_39, error(syntax_error(_))) :-
 		^^set_text_input('\\x11'),
 		{read(_)}.
 
