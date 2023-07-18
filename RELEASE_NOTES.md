@@ -112,7 +112,7 @@ setting file. This prevents the generated files to to try to load (another)
 setting file when loaded.
 
 * ADDED: LVM embedding scripts support for copying all plug-in foreign library
-files used by an application.
+files used by an application and generate an auxiliary `loader.pl` file.
 
 * ADDED: SWI-Prolog embedding scripts support for specifying the foreign
 object action when building standalone saved states. Contributed by Yurii

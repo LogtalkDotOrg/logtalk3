@@ -4,7 +4,7 @@
 ##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on July 17, 2023
+##   Last updated on July 18, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2022 Hans N. Beck
@@ -49,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.7")
+	Write-Output ($myName + " 0.8")
 }
 
 function Get-Logtalkhome {
@@ -278,6 +278,16 @@ if ($l -ne "") {
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
 		Set-Content $d/application.pl
+
+	Set-Content -Path $d/loader.pl -Value ":- initialization(("
+	if ($f -eq $true) {
+		$LoaderParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(report,off), logtalk_load('$loader'), open('" + $d.Replace('\', '/') + "/loader.pl',append,Stream), forall((current_plugin(PlugIn), plugin_property(PlugIn,file(File))), (decompose_file_name(File,_,Basename,_), format(Stream,'\tload_foreign_library(~q),~n',[Basename]))), close(Stream), halt."
+
+		lvmpl --goal $LoaderParam
+	}
+	Add-Content -Path $d/loader.pl -Value  "	consult(logtalk),"
+	Add-Content -Path $d/loader.pl -Value  "	consult(application)"
+	Add-Content -Path $d/loader.pl -Value  "))."
 
 	Pop-Location
 }

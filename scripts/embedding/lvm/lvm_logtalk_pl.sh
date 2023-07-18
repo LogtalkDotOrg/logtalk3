@@ -5,7 +5,7 @@
 ##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on July 17, 2023
+##   Last updated on July 18, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.7"
+	echo "$(basename "$0") 0.8"
 	exit 0
 }
 
@@ -273,6 +273,14 @@ if [ "$loader" != "" ] ; then
 	fi
 	cat $(ls -rt *.pl) > "$directory"/application.pl
 fi
+
+echo ":- initialization((" > "$directory"/loader.pl
+if [ "$foreign" != "false" ] ; then
+	lvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(report,off),logtalk_load('$loader'),open('$directory/loader.pl',append,Stream),forall((current_plugin(PlugIn),plugin_property(PlugIn,file(File))),(decompose_file_name(File,_,Basename,_),format(Stream,'\tload_foreign_library(~q),~n',[Basename]))),close(Stream),halt."
+fi
+echo "	consult(logtalk)," >> "$directory"/loader.pl
+echo "	consult(application)" >> "$directory"/loader.pl
+echo "))." >> "$directory"/loader.pl
 
 function cleanup {
 	rm -rf "$temporary"
