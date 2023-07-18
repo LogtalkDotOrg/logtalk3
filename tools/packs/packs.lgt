@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:64:1,
+		version is 0:64:2,
 		author is 'Paulo Moura',
-		date is 2023-07-12,
+		date is 2023-07-18,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1937,7 +1937,11 @@
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesPacksRegistryPack),
 		(	file_exists(Archive) ->
-			true
+			(	atom_concat(Archive0, '.GIT.packs', DownloaderFile),
+				file_exists(DownloaderFile) ->
+				Downloader = git
+			;	Downloader = curl
+			)
 		;	git_archive_url(URL, Remote, Tag) ->
 			^^option(git(GitExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
@@ -1945,21 +1949,24 @@
 			;	atomic_list_concat(['git archive ', GitExtraOptions, ' -o "',    Archive, '" --remote="', Remote, '" ', Tag], Command)
 			),
 			(	^^command(Command, pack_archive_download_failed(Pack, Command)) ->
-				true
+				atom_concat(Archive0, '.GIT.packs', DownloaderFile),
+				ensure_file(DownloaderFile),
+				Downloader = git
 			;	% when the remote connection fails, git archive still creates an empty file
 				file_exists(Archive),
 				file_size(Archive, 0),
 				delete_file(Archive),
 				fail
-			),
-			Downloader = git
+			)
 		;	^^option(curl(CurlExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['curl ', CurlExtraOptions, ' -f -v -L -o "',    Archive, '" "', URL, '"'], Command)
 			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
 			^^command(Command, pack_archive_download_failed(Pack, Command)),
-			Downloader = curl
+			Downloader = curl,
+			atom_concat(Archive0, '.CURL.packs', DownloaderFile),
+			ensure_file(DownloaderFile)
 		).
 
 	git_archive_url(URL, Remote, Tag) :-

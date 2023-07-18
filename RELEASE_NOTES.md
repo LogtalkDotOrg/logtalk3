@@ -73,6 +73,10 @@ on HTTP server errors instead of creating an archive file with the HTTP error.
 * IMPROVED: The `packs` tool now reports the pack or registry download full
 command in case of failure instead of the URL or the asset path.
 
+* FIXED: Bug in the `packs` tool where installing a pack when its archive was
+previously downloaded using `git archive` would result in a mangled directory
+structure.
+
 Examples
 --------
 
