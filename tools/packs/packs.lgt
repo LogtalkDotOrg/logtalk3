@@ -1937,8 +1937,7 @@
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesPacksRegistryPack),
 		(	file_exists(Archive) ->
-			(	atom_concat(Archive0, '.GIT.packs', DownloaderFile),
-				file_exists(DownloaderFile) ->
+			(	git_archive_url(URL, _, _) ->
 				Downloader = git
 			;	Downloader = curl
 			)
@@ -1949,8 +1948,6 @@
 			;	atomic_list_concat(['git archive ', GitExtraOptions, ' -o "',    Archive, '" --remote="', Remote, '" ', Tag], Command)
 			),
 			(	^^command(Command, pack_archive_download_failed(Pack, Command)) ->
-				atom_concat(Archive0, '.GIT.packs', DownloaderFile),
-				ensure_file(DownloaderFile),
 				Downloader = git
 			;	% when the remote connection fails, git archive still creates an empty file
 				file_exists(Archive),
@@ -1964,9 +1961,7 @@
 			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
 			^^command(Command, pack_archive_download_failed(Pack, Command)),
-			Downloader = curl,
-			atom_concat(Archive0, '.CURL.packs', DownloaderFile),
-			ensure_file(DownloaderFile)
+			Downloader = curl
 		).
 
 	git_archive_url(URL, Remote, Tag) :-
