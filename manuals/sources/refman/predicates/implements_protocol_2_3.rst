@@ -40,8 +40,8 @@ Description
 Enumerates, by backtracking, all pairs of entities such that an object
 or a category implements a protocol. The relation scope is represented
 by the atoms ``public``, ``protected``, and ``private``. This predicate
-only returns direct implementation relations; it does not implement a
-transitive closure.
+only returns direct implementation relations. For a transitive closure,
+see the :ref:`predicates_conforms_to_protocol_2_3` predicate.
 
 Modes and number of proofs
 --------------------------
