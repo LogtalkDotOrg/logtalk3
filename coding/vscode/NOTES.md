@@ -21,7 +21,7 @@ ________________________________________________________________________
 DEPRECATED: For a more featured Logtalk extension for the Visual Studio
 Code text editor use instead:
 
-https://github.com/jacobfriedman/vsc-logtalk
+https://github.com/LogtalkDotOrg/logtalk-for-vscode
 
 Notes for the contents of this directory follows.
 
