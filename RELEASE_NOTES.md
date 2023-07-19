@@ -43,6 +43,9 @@ version 1.6.0.
 
 * UPDATED: The LVM adapter file to require version 6.3.0 or later.
 
+* FIXED: Workaround a LVM embedding application issue with loading of plug-in
+shared libraries.
+
 Library
 -------
 

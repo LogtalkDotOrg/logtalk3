@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 6.3.0 and later versions
-%  Last updated on July 15, 2023
+%  Last updated on July 19, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -547,6 +547,8 @@
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
+'$lgt_prolog_goal_expansion'(load_foreign_library(Path), '$lgt_lvm_load_foreign_library'(Path)).
+
 '$lgt_prolog_goal_expansion'(add_csv(Predicate,File,Options), {add_csv(CPredicate,File,Options)}) :-
 	logtalk_load_context(entity_type, object),
 	!,
@@ -588,6 +590,16 @@
 		(this(This), {open_db(DB, DBFile), '$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _), '$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix)})
 	) :-
 	logtalk_load_context(entity_type, category).
+
+
+'$lgt_lvm_load_foreign_library'(Path) :-
+	% workaround embedding issue where a plug-in shared library may be already
+	% pre-loaded from a directory different from the original plug-in directory
+	(	decompose_file_name(Path, _, Basename, _),
+		current_plugin(Basename) ->
+		true
+	;	load_foreign_library(Path)
+	).
 
 
 '$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix) :-
