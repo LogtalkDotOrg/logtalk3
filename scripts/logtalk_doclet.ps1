@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on March 15, 2023
+##   Last updated on July 20, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.3")
+	Write-Output ($myName + " 2.4")
 }
 
 Function Run-Doclets() {
@@ -100,7 +100,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -147,6 +147,10 @@ Function Check-Parameters() {
 	} elseif ($p -eq "gnu") {
 		$script:prolog='GNU Prolog'
 		$script:logtalk="gplgt"
+		$script:logtalk_option="--query-goal"
+	} elseif ($p -eq "gnunc") {
+		$script:prolog = 'GNU Prolog (native code)'
+		$script:logtalk = "gplgtnc"
 		$script:logtalk_option="--query-goal"
 	} elseif ($p -eq "ji") {
 		$script:prolog='JIProlog'

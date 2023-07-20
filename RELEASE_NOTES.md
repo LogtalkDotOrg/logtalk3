@@ -54,6 +54,10 @@ Library
 Tools
 -----
 
+* ADDED: Support to the `logtalk_doclet.*` scripts for using a GNU Prolog
+executable that includes Logtalk for better performance. With the help of
+Daniel Diaz.
+
 * IMPROVED: The `lgtunit` tool now prints all test execution times with nine
 decimal digits to simplify comparing test runs. Thanks to Daniel Diaz for the
 suggestion.

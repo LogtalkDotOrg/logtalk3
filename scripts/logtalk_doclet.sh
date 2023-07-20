@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on October 19, 2022
+##   Last updated on July 20, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 2.4"
+	echo "$(basename "$0") 2.5"
 	exit 0
 }
 
@@ -113,7 +113,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -163,6 +163,10 @@ elif [ "$p_arg" == "eclipse" ] ; then
 elif [ "$p_arg" == "gnu" ] ; then
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
+	logtalk_call="$logtalk --query-goal"
+elif [ "$p_arg" == "gnunc" ] ; then
+	prolog='GNU Prolog (native code)'
+	logtalk=gplgtnc
 	logtalk_call="$logtalk --query-goal"
 elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
