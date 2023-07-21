@@ -467,6 +467,13 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 /*
 :- category(my_terse_logtalk_startup_settings).
 
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2023-07-21,
+		comment is 'Terse Logtalk startup settings.'
+	]).
+
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
