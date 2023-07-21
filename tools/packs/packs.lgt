@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:64:2,
+		version is 0:64:3,
 		author is 'Paulo Moura',
-		date is 2023-07-18,
+		date is 2023-07-21,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1829,6 +1829,8 @@
 	install_dependency(none).
 	install_dependency(install(Registry, Pack, Version)) :-
 		install(Registry, Pack, Version).
+	install_dependency(update(_Registry, Pack, Version)) :-
+		update(Pack, Version, []).
 
 	check_portability(all).
 	check_portability([Backend| Backends]) :-

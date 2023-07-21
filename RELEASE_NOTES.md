@@ -84,6 +84,9 @@ command in case of failure instead of the URL or the asset path.
 previously downloaded using `git archive` would result in a mangled directory
 structure.
 
+* FIXED: Bug in the `packs` tool where installing a pack would fail when
+updating installed dependencies was required.
+
 Examples
 --------
 
