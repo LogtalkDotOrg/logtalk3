@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   PowerShell script to be sourced by the logtalk_tester script
-##   Last updated on April 13, 2023
+##   Last updated on July 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -46,12 +46,6 @@ param(
 	[String[]]$a
 )
 
-if ($p -eq "swi") {
-	& .\set_classpath_swi.ps1
-} elseif ($p -eq "yap") {
-	& .\set_classpath_yap.ps1
-} else {
-	Exit 1
-}
+& .\set_classpath.ps1
 
 Exit 0

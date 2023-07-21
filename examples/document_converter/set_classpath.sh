@@ -1,7 +1,9 @@
+#!/usr/bin/env bash
+
 #############################################################################
 ## 
-##   Set CLASSPATH environment variable for YAP
-##   Last updated on March 16, 2023
+##   Set CLASSPATH environment variable for LVM
+##   Last updated on July 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -21,16 +23,10 @@
 #############################################################################
 
 
-#Requires -Version 7.3
+cwd="$(dirname "${BASH_SOURCE[0]}")"
 
-& yap -dump-runtime-variables > (Join-Path $pwd "yap_runtime_variables.txt")
-$line = (Get-Content (Join-Path $pwd "yap_runtime_variables.txt") | Select-String -Pattern 'PLBASE' -CaseSensitive -SimpleMatch -Raw).split("=")
+for jar in "$cwd"/jars/*.jar; do
+	CLASSPATH="$jar"
+done
 
-$classpath = ((($line[1] -replace ";", "") -replace "/", "\") -replace "`"", "") + "\lib\jpl.jar"
-
-Get-ChildItem -Path C:\neo4j-community-5.5.0\lib\* -Filter *.jar |
-Foreach-Object {
-	$classpath += ";" + $_.FullName
-}
-
-[System.Environment]::setEnvironmentVariable("CLASSPATH", $classpath, "Process")
+export CLASSPATH

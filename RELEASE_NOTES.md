@@ -90,6 +90,9 @@ updating installed dependencies was required.
 Examples
 --------
 
+* IMPROVED: Simplify the Java example scripts that set the required
+`CLASSPATH` environment variable.
+
 * UPDATED: Notes of the `tabling` object on current limitations.
 
 Tests

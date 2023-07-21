@@ -2,8 +2,8 @@
 
 #############################################################################
 ## 
-##   Set CLASSPATH environment variable for YAP
-##   Last updated on September 21, 2019
+##   Set CLASSPATH environment variable for LVM
+##   Last updated on July 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -23,11 +23,10 @@
 #############################################################################
 
 
-eval $(yap -dump-runtime-variables)
-CLASSPATH="$YAP_ROOTDIR/share/Yap/jpl.jar"
+cwd="$(dirname "${BASH_SOURCE[0]}")"
 
-for jar in jars/*.jar; do
-	CLASSPATH="$PWD/$jar":$CLASSPATH
+for jar in "$cwd"/jars/*.jar; do
+	CLASSPATH="$jar"
 done
 
 export CLASSPATH

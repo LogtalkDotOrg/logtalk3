@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Bash script to be sourced by the logtalk_tester script
-##   Last updated on March 9, 2023
+##   Last updated on July 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -23,28 +23,7 @@
 #############################################################################
 
 
-local OPTIND=1
-local OPTERR=0
-while getopts "p:" option
-do
-	case $option in
-		p) backend=$OPTARG;;
-		?) shift;;
-	esac
-done
-
-if [ "$backend" == "swi" ] ; then
-	source set_classpath_swi.sh
-	export CLASSPATH
-elif [ "$backend" == "swipack" ] ; then
-	source set_classpath_swi.sh
-	export CLASSPATH
-elif [ "$backend" == "yap" ] ; then
-	source set_classpath_yap.sh
-	export CLASSPATH
-elif [ "$backend" == "lvm" ] ; then
-	source set_classpath_lvm.sh
-	export CLASSPATH
-fi
+source set_classpath.sh
+export CLASSPATH
 
 return 0
