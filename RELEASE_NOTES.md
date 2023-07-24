@@ -95,6 +95,9 @@ Examples
 
 * UPDATED: Notes of the `tabling` object on current limitations.
 
+* UPDATED: The `errors` example to illustrate errors occurring in the first
+source file line (mainly to test IDEs and text editors support).
+
 Tests
 -----
 
