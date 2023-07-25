@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on June 7, 2023
+##   Last updated on July 25, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -193,7 +193,7 @@ echo "* CxProlog (0.98.1 or later):        cxlgt"
 echo "* ECLiPSe (6.1#143 or later):        eclipselgt"
 echo "* GNU Prolog (1.4.5 or later):       gplgt"
 echo "* JIProlog (4.1.7.1 or later):       jiplgt      (first run may require sudo)"
-echo "* LVM (4.1.0 or later):              lvmlgt"
+echo "* LVM (6.3.0 or later):              lvmlgt"
 echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
 echo "* Scryer Prolog (0.9.1 or later):    scryerlgt   (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
