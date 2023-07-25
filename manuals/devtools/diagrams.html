@@ -929,6 +929,9 @@ local operating-system paths to be exposed in the diagram, we use the
 that all the paths and URLs must end with a slash for proper handling.
 The <code class="docutils literal notranslate"><span class="pre">git</span></code> library may be useful to retrieve the commit SHA1 from a
 local repo directory.</p>
+<p>For both <code class="docutils literal notranslate"><span class="pre">path_url_prefixes/3</span></code> and <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code> options,
+when a path prefix is itself a prefix of another path, the shorter path
+must come last to ensure correct links.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory for additional
 examples. To avoid retyping such complex goals when updating diagrams,
 use the <code class="docutils literal notranslate"><span class="pre">doclet</span></code> tool to save and reapply them easily (e.g. by using

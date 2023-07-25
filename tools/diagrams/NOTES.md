@@ -568,6 +568,10 @@ that all the paths and URLs must end with a slash for proper handling.
 The `git` library may be useful to retrieve the commit SHA1 from a
 local repo directory.
 
+For both `path_url_prefixes/3` and `omit_path_prefixes/1` options, when
+a path prefix is itself a prefix of another path, the shorter path must
+come last to ensure correct links.
+
 See the `SCRIPT.txt` file in the tool directory for additional examples.
 To avoid retyping such complex goals when updating diagrams, use the
 `doclet` tool to save and reapply them easily (e.g. by using the `make`

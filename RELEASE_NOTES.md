@@ -25,6 +25,12 @@ RELEASE NOTES
 3.69.0 - August ??, 2023
 ========================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `diagrams` tool `path_url_prefixes/3` and
+`omit_path_prefixes/1` options.
+
 
 3.68.0 - July 25, 2023
 ======================
