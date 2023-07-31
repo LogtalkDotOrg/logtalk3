@@ -2202,9 +2202,9 @@
 		).
 
 	full_device_path(Path) :-
-		(	shell('uname | grep Linux') ->
+		(	shell('uname | grep -q Linux') ->
 			Path = '/dev/null'
-		;	shell('uname | grep BSD') ->
+		;	shell('uname | grep -q BSD') ->
 			Path = '/dev/null'
 		;	fail
 		).
