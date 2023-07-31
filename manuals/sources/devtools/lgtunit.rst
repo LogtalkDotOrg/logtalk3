@@ -824,7 +824,7 @@ For example:
 
 ::
 
-   - test(xyz_reset, true, ['Feature xyz reset not yet implemented']) :-
+   - test(xyz_reset, true, [note('Feature xyz reset not yet implemented')]) :-
        ...
 
 The number of skipped tests is reported together with the numbers of
@@ -1156,6 +1156,15 @@ skipped by writing:
 
    - test(foo_1, true, [note('Waiting for Deep Thought answer')]) :-
        ...
+
+Another common use is to return the execution time of one of the test
+sub-goals. For example:
+
+::
+
+   test(foobar, true, [note(bar(seconds-Time))]) :-
+       foo(...),
+       benchmark(bar(...), Time).
 
 Annotations are written, by default, between parenthesis after and in
 the same line as the test results.
