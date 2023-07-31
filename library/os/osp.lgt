@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:34:0,
+		version is 1:35:0,
 		author is 'Paulo Moura',
-		date is 2023-05-24,
+		date is 2023-07-31,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -142,6 +142,13 @@
 	:- mode(null_device_path(?atom), one).
 	:- info(null_device_path/1, [
 		comment is 'Null device path: ``nul`` on Windows systems and ``/dev/null`` on POSIX systems.',
+		argnames is ['Path']
+	]).
+
+	:- public(full_device_path/1).
+	:- mode(full_device_path(?atom), zero_or_one).
+	:- info(full_device_path/1, [
+		comment is 'Full device path: ``/dev/full`` on Linux and BSD systems. Fails on other systems. Experimental.',
 		argnames is ['Path']
 	]).
 

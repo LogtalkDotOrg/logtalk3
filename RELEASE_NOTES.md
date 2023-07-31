@@ -31,6 +31,12 @@ Documentation
 * IMPROVED: Documentation of the `diagrams` tool `path_url_prefixes/3` and
 `omit_path_prefixes/1` options.
 
+Library
+-------
+
+* ADDED: Experimental `os::full_device_path/1` library predicate. Currently
+limited to Linux and BSD systems.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

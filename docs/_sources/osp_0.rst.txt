@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:34:0
-| **Date:** 2023-05-24
+| **Version:** 1:35:0
+| **Date:** 2023-07-31
 
 | **Compilation flags:**
 |    ``static``
@@ -337,6 +337,25 @@ Null device path: ``nul`` on Windows systems and ``/dev/null`` on POSIX systems.
 |    ``null_device_path(Path)``
 | **Mode and number of proofs:**
 |    ``null_device_path(?atom)`` - ``one``
+
+
+------------
+
+.. index:: full_device_path/1
+.. _osp/0::full_device_path/1:
+
+``full_device_path/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Full device path: ``/dev/full`` on Linux and BSD systems. Fails on other systems. Experimental.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``full_device_path(Path)``
+| **Mode and number of proofs:**
+|    ``full_device_path(?atom)`` - ``zero_or_one``
 
 
 ------------

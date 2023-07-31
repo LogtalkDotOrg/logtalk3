@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:33:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-07-31,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -405,6 +405,15 @@
 		write(Stream, abc),
 		close(Stream),
 		os::file_size(Path, Size).
+
+	test(os_full_device_path_1_01, true(atom(Path)), [note(flaky)]) :-
+		os::full_device_path(Path).
+
+	test(os_full_device_path_1_02, error(_), [note(flaky)]) :-
+		os::full_device_path(Path),
+		open(Path, write, Stream),
+		write(Stream, abc),
+		close(Stream).
 
 	test(os_directory_files_2_01, true) :-
 		this(This),
