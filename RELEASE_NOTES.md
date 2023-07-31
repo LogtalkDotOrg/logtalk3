@@ -31,6 +31,11 @@ Documentation
 * IMPROVED: Documentation of the `diagrams` tool `path_url_prefixes/3` and
 `omit_path_prefixes/1` options.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: Link to the new home for the VSCode Logtalk plug-in.
+
 
 3.68.0 - July 25, 2023
 ======================
