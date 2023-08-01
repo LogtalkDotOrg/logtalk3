@@ -412,7 +412,7 @@
 	test(os_full_device_path_1_02, error(_), [note(flaky)]) :-
 		os::full_device_path(Path),
 		open(Path, write, Stream),
-		write(Stream, abc),
+		write(Stream, abc), nl(Stream),
 		close(Stream).
 
 	test(os_directory_files_2_01, true) :-
