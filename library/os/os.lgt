@@ -57,7 +57,7 @@
 	:- info([
 		version is 1:96:0,
 		author is 'Paulo Moura',
-		date is 2023-07-31,
+		date is 2023-08-01,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2203,9 +2203,9 @@
 
 	full_device_path(Path) :-
 		(	shell('uname | grep -q Linux') ->
-			Path = '/dev/null'
+			Path = '/dev/full'
 		;	shell('uname | grep -q BSD') ->
-			Path = '/dev/null'
+			Path = '/dev/full'
 		;	fail
 		).
 

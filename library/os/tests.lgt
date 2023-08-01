@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:33:0,
 		author is 'Paulo Moura',
-		date is 2023-07-31,
+		date is 2023-08-01,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -519,13 +519,13 @@
 		os::shell(cd).
 
 	test(os_shell_1_02, false) :-
-		os::shell('cd non_existing_directory').
+		os::shell('cd non_existing_directory > /dev/null 2>&1').
 
 	test(os_shell_2_01, true(Exit == 0)) :-
 		os::shell(cd, Exit).
 
 	test(os_shell_2_02, true(Exit \== 0)) :-
-		os::shell('cd non_existing_directory', Exit).
+		os::shell('cd non_existing_directory > /dev/null 2>&1', Exit).
 
 	% os_types category tests
 
