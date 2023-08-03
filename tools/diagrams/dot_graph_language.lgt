@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:8:0,
+		version is 3:8:1,
 		author is 'Paulo Moura',
-		date is 2022-05-03,
+		date is 2023-08-03,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -61,7 +61,6 @@
 		write_key_value_nl(Stream, ranksep, '1.0'),
 		write_key_value_nl(Stream, compound, true),
 		write_key_value_nl(Stream, splines, true),
-		write_key_value_nl(Stream, pack, true),
 		write_key_value_nl(Stream, clusterrank, local),
 		write_key_value_nl(Stream, labeljust, l),
 		write_key_value_nl(Stream, margin, '1.0'),

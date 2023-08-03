@@ -40,6 +40,10 @@ limited to Linux and BSD systems.
 Tools
 -----
 
+* IMPROVED: The `diagrams` tool DOT language support no longer sets the graph
+`pack` attribute to `true` to avoid frequent Graphviz `dot` command crashes
+when converting graphs to SVG format.
+
 * IMPROVED: The `lgtdoc` tool support for documenting libraries where source
 files are organized in multiple sub-directories.
 
