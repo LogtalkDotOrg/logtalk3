@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:3:1,
+		version is 9:4:0,
 		author is 'Paulo Moura',
-		date is 2023-06-23,
+		date is 2023-08-03,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -371,11 +371,18 @@
 		entity_property(Entity, file(File, Path)),
 		\+ member(Entity, ExcludedEntities),
 		functor(Entity, Functor, _),
-		(	(	logtalk_library_path(Library, _),
-				Library \== startup
-			;	logtalk_library_path(Library, _)
+		% find the library name, if any; support documenting libraries
+		% where source files are organized in multiple sub-directories
+		(	findall(
+				Length-Library,
+				(	logtalk_library_path(Library, _),
+					expand_library_path(Library, LibraryPath),
+					sub_atom(Path, 0, _, _, LibraryPath),
+					atom_length(LibraryPath, Length)
+				),
+				LengthsLibraries
 			),
-			expand_library_path(Library, Path) ->
+			sort(1, @>, LengthsLibraries, [_-Library| _]) ->
 			assertz(library_entity_(Library, Library, Functor, Entity))
 		;	true
 		),

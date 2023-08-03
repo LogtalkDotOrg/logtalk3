@@ -37,6 +37,12 @@ Library
 * ADDED: Experimental `os::full_device_path/1` library predicate. Currently
 limited to Linux and BSD systems.
 
+Tools
+-----
+
+* IMPROVED: The `lgtdoc` tool support for documenting libraries where source
+files are organized in multiple sub-directories.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
