@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:33:0,
+		version is 0:34:0,
 		author is 'Paulo Moura',
-		date is 2023-08-01,
+		date is 2023-08-04,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -411,6 +411,15 @@
 
 	test(os_full_device_path_1_02, error(_), [note(flaky)]) :-
 		os::full_device_path(Path),
+		open(Path, write, Stream),
+		write(Stream, abc), nl(Stream),
+		close(Stream).
+
+	test(os_read_only_device_path_1_01, true(atom(Path)), [condition(\+ os::operating_system_type(windows))]) :-
+		os::read_only_device_path(Path).
+
+	test(os_read_only_device_path_1_02, error(_), [condition(\+ os::operating_system_type(windows))]) :-
+		os::read_only_device_path(Path),
 		open(Path, write, Stream),
 		write(Stream, abc), nl(Stream),
 		close(Stream).

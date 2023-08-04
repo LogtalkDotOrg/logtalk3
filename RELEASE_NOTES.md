@@ -37,6 +37,9 @@ Library
 * ADDED: Experimental `os::full_device_path/1` library predicate. Currently
 limited to Linux and BSD systems.
 
+* ADDED: Experimental `os::read_only_device_path/1` library predicate.
+Currently limited to POSIX systems.
+
 * ADDED: Predicate `approximately_equal/2` to the `number` library object.
 
 * IMPROVED: The `number` object documentation of the `approximately_equal/3`

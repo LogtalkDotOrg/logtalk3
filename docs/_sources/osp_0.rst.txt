@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:35:0
-| **Date:** 2023-07-31
+| **Version:** 1:36:0
+| **Date:** 2023-08-04
 
 | **Compilation flags:**
 |    ``static``
@@ -356,6 +356,25 @@ Full device path: ``/dev/full`` on Linux and BSD systems. Fails on other systems
 |    ``full_device_path(Path)``
 | **Mode and number of proofs:**
 |    ``full_device_path(?atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: read_only_device_path/1
+.. _osp/0::read_only_device_path/1:
+
+``read_only_device_path/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Read-only device path: ``/dev/urandom`` on macOS, Linux, BSD, and other POSIX systems. Fails on Windows. Experimental.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_only_device_path(Path)``
+| **Mode and number of proofs:**
+|    ``read_only_device_path(?atom)`` - ``zero_or_one``
 
 
 ------------
