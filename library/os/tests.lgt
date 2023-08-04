@@ -112,7 +112,7 @@
 	test(os_path_concat_3_05, true(Path == 'foo/bar')) :-
 		os::path_concat('foo', 'bar', Path).
 
-	test(os_internal_os_path_2_01, true(OSPath == '/foo/bar/baz'), [condition(os::operating_system_type(unix))]) :-
+	test(os_internal_os_path_2_01, true(OSPath == '/foo/bar/baz'), [condition(only_posix_systems)]) :-
 		os::internal_os_path(InternalPath, '/foo/bar/baz'),
 		os::internal_os_path(InternalPath, OSPath).
 
@@ -366,16 +366,16 @@
 		os::absolute_file_name(Path, ExpandedPath),
 		\+ sub_atom(ExpandedPath, _, _, 0, '.').
 
-	test(os_absolute_file_name_2_04, true(\+ sub_atom(ExpandedPath, _, 2, _, '..')), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_04, true(\+ sub_atom(ExpandedPath, _, 2, _, '..')), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('../d', ExpandedPath).
 
-	test(os_absolute_file_name_2_05, true(ExpandedPath == '/a/d'), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_05, true(ExpandedPath == '/a/d'), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('/a/b/c/../../d', ExpandedPath).
 
-	test(os_absolute_file_name_2_06, true(\+ sub_atom(ExpandedPath, _, 2, _, '.')), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_06, true(\+ sub_atom(ExpandedPath, _, 2, _, '.')), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('./d', ExpandedPath).
 
-	test(os_absolute_file_name_2_07, true(ExpandedPath == '/a/b/c/d'), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_07, true(ExpandedPath == '/a/b/c/d'), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('/a/b/c/././d', ExpandedPath).
 
 	test(os_temporary_directory_1_01, true) :-
@@ -406,23 +406,23 @@
 		close(Stream),
 		os::file_size(Path, Size).
 
-	test(os_full_device_path_1_01, true(atom(Path)), [note(flaky)]) :-
+	test(os_full_device_path_1_01, true(atom(Path)), [condition(only_linux_and_bsd_systems)]) :-
 		os::full_device_path(Path).
 
-	test(os_full_device_path_1_02, error(_), [note(flaky)]) :-
+	test(os_full_device_path_1_02, error(_), [condition(only_linux_and_bsd_systems)]) :-
 		os::full_device_path(Path),
 		open(Path, write, Stream),
-		write(Stream, abc), nl(Stream),
-		close(Stream).
+		write(Stream, abc),
+		flush_output(Stream).
 
-	test(os_read_only_device_path_1_01, true(atom(Path)), [condition(\+ os::operating_system_type(windows))]) :-
+	test(os_read_only_device_path_1_01, true(atom(Path)), [condition(only_posix_systems)]) :-
 		os::read_only_device_path(Path).
 
-	test(os_read_only_device_path_1_02, error(_), [condition(\+ os::operating_system_type(windows))]) :-
+	test(os_read_only_device_path_1_02, error(_), [condition(only_posix_systems)]) :-
 		os::read_only_device_path(Path),
 		open(Path, write, Stream),
-		write(Stream, abc), nl(Stream),
-		close(Stream).
+		write(Stream, abc),
+		flush_output(Stream).
 
 	test(os_directory_files_2_01, true) :-
 		this(This),
@@ -621,5 +621,14 @@
 		^^clean_directory('a'),
 		^^clean_directory('1/2'),
 		^^clean_directory('1').
+
+	% auxiliary predicates
+
+	only_linux_and_bsd_systems :-
+		\+ os::operating_system_type(windows),
+		\+ shell('uname -s | grep -q Darwin').
+
+	only_posix_systems :-
+		os::operating_system_type(unix).
 
 :- end_object.
