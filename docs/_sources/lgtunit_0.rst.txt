@@ -11,8 +11,8 @@
 A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.
 
 | **Author:** Paulo Moura
-| **Version:** 16:1:1
-| **Date:** 2023-06-08
+| **Version:** 16:2:0
+| **Date:** 2023-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -457,13 +457,32 @@ True when the two arguments are a variant of each other. I.e. if is possible to 
 
 ------------
 
+.. index:: approximately_equal/2
+.. _lgtunit/0::approximately_equal/2:
+
+``approximately_equal/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares two numbers for approximate equality given the ``epsilon`` arithmetic constant value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * epsilon``. Type-checked.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``approximately_equal(Number1,Number2)``
+| **Mode and number of proofs:**
+|    ``approximately_equal(+number,+number)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: approximately_equal/3
 .. _lgtunit/0::approximately_equal/3:
 
 ``approximately_equal/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Compares two numbers for approximate equality given an epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.
+Compares two numbers for approximate equality given a user-defined epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.
 
 | **Compilation flags:**
 |    ``static``
@@ -472,6 +491,11 @@ Compares two numbers for approximate equality given an epsilon value using the d
 |    ``approximately_equal(Number1,Number2,Epsilon)``
 | **Mode and number of proofs:**
 |    ``approximately_equal(+number,+number,+number)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Epsilon range: Epsilon should be the ``epsilon`` arithmetic constant value or a small multiple of it. Only use a larger value if a greater error is expected.
+    - Comparison with essential equality: For the same epsilon value, approximate equality is weaker requirement than essential equality.
 
 
 ------------
@@ -491,6 +515,10 @@ Compares two numbers for essential equality given an epsilon value using the de 
 |    ``essentially_equal(Number1,Number2,Epsilon)``
 | **Mode and number of proofs:**
 |    ``essentially_equal(+number,+number,+number)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Comparison with approximate equality: For the same epsilon value, essential equality is a stronger requirement than approximate equality.
 
 
 ------------

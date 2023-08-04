@@ -11,8 +11,8 @@
 Number data type predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:11:0
-| **Date:** 2022-02-03
+| **Version:** 1:12:0
+| **Date:** 2023-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -34,13 +34,32 @@ Number data type predicates.
 Public predicates
 -----------------
 
+.. index:: approximately_equal/2
+.. _number/0::approximately_equal/2:
+
+``approximately_equal/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares two numbers for approximate equality given the ``epsilon`` arithmetic constant value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * epsilon``. No type-checking.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``approximately_equal(Number1,Number2)``
+| **Mode and number of proofs:**
+|    ``approximately_equal(+number,+number)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: approximately_equal/3
 .. _number/0::approximately_equal/3:
 
 ``approximately_equal/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. No type-checking.
+Compares two numbers for approximate equality given a user-defined epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon``. No type-checking.
 
 | **Compilation flags:**
 |    ``static``
@@ -49,6 +68,11 @@ Compares two numbers for approximate equality given an epsilon value using the d
 |    ``approximately_equal(Number1,Number2,Epsilon)``
 | **Mode and number of proofs:**
 |    ``approximately_equal(+number,+number,+number)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Epsilon range: Epsilon should be the ``epsilon`` arithmetic constant value or a small multiple of it. Only use a larger value if a greater error is expected.
+    - Comparison with essential equality: For the same epsilon value, approximate equality is weaker requirement than essential equality.
 
 
 ------------
@@ -68,6 +92,10 @@ Compares two numbers for essential equality given an epsilon value using the de 
 |    ``essentially_equal(Number1,Number2,Epsilon)``
 | **Mode and number of proofs:**
 |    ``essentially_equal(+number,+number,+number)`` - ``zero_or_one``
+
+| **Remarks:**
+
+    - Comparison with approximate equality: For the same epsilon value, essential equality is a stronger requirement than approximate equality.
 
 
 ------------

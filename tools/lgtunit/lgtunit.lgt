@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:1:1,
+		version is 16:2:0,
 		author is 'Paulo Moura',
-		date is 2023-06-08,
+		date is 2023-08-04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -206,18 +206,32 @@
 		argnames is ['Term1', 'Term2']
 	]).
 
+	:- public(approximately_equal/2).
+	:- mode(approximately_equal(+number, +number), zero_or_one).
+	:- info(approximately_equal/2, [
+		comment is 'Compares two numbers for approximate equality given the ``epsilon`` arithmetic constant value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * epsilon``. Type-checked.',
+		argnames is ['Number1', 'Number2']
+	]).
+
 	:- public(approximately_equal/3).
 	:- mode(approximately_equal(+number, +number, +number), zero_or_one).
 	:- info(approximately_equal/3, [
-		comment is 'Compares two numbers for approximate equality given an epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.',
-		argnames is ['Number1', 'Number2', 'Epsilon']
+		comment is 'Compares two numbers for approximate equality given a user-defined epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.',
+		argnames is ['Number1', 'Number2', 'Epsilon'],
+		remarks is [
+			'Epsilon range' - 'Epsilon should be the ``epsilon`` arithmetic constant value or a small multiple of it. Only use a larger value if a greater error is expected.',
+			'Comparison with essential equality' - 'For the same epsilon value, approximate equality is weaker requirement than essential equality.'
+		]
 	]).
 
 	:- public(essentially_equal/3).
 	:- mode(essentially_equal(+number, +number, +number), zero_or_one).
 	:- info(essentially_equal/3, [
 		comment is 'Compares two numbers for essential equality given an epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon``. Type-checked.',
-		argnames is ['Number1', 'Number2', 'Epsilon']
+		argnames is ['Number1', 'Number2', 'Epsilon'],
+		remarks is [
+			'Comparison with approximate equality' - 'For the same epsilon value, essential equality is a stronger requirement than approximate equality.'
+		]
 	]).
 
 	:- public(tolerance_equal/4).
@@ -1920,6 +1934,13 @@
 			true
 		;	throw(assertion_failure(Assertion))
 		).
+
+	approximately_equal(Number1, Number2) :-
+		context(Context),
+		check(number, Number1, Context),
+		check(number, Number2, Context),
+		epsilon(Epsilon),
+		abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon.
 
 	approximately_equal(Number1, Number2, Epsilon) :-
 		context(Context),

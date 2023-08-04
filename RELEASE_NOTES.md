@@ -37,8 +37,18 @@ Library
 * ADDED: Experimental `os::full_device_path/1` library predicate. Currently
 limited to Linux and BSD systems.
 
+* ADDED: Predicate `approximately_equal/2` to the `number` library object.
+
+* IMPROVED: The `number` object documentation of the `approximately_equal/3`
+and `essentially_equal/3` predicates.
+
 Tools
 -----
+
+* ADDED: Predicate `approximately_equal/2` to the `lgtunit` tool.
+
+* IMPROVED: The `lgtunit` tool documentation of the `approximately_equal/3`
+and `essentially_equal/3` predicates.
 
 * IMPROVED: The `diagrams` tool DOT language support no longer sets the graph
 `pack` attribute to `true` to avoid frequent Graphviz `dot` command crashes

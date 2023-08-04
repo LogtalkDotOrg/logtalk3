@@ -23,24 +23,38 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2022-02-03,
+		date is 2023-08-04,
 		comment is 'Number data type predicates.'
+	]).
+
+	:- public(approximately_equal/2).
+	:- mode(approximately_equal(+number, +number), zero_or_one).
+	:- info(approximately_equal/2, [
+		comment is 'Compares two numbers for approximate equality given the ``epsilon`` arithmetic constant value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * epsilon``. No type-checking.',
+		argnames is ['Number1', 'Number2']
 	]).
 
 	:- public(approximately_equal/3).
 	:- mode(approximately_equal(+number, +number, +number), zero_or_one).
 	:- info(approximately_equal/3, [
-		comment is 'Compares two numbers for approximate equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon. No type-checking.',
-		argnames is ['Number1', 'Number2', 'Epsilon']
+		comment is 'Compares two numbers for approximate equality given a user-defined epsilon value using the de facto standard formula ``abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon``. No type-checking.',
+		argnames is ['Number1', 'Number2', 'Epsilon'],
+		remarks is [
+			'Epsilon range' - 'Epsilon should be the ``epsilon`` arithmetic constant value or a small multiple of it. Only use a larger value if a greater error is expected.',
+			'Comparison with essential equality' - 'For the same epsilon value, approximate equality is weaker requirement than essential equality.'
+		]
 	]).
 
 	:- public(essentially_equal/3).
 	:- mode(essentially_equal(+number, +number, +number), zero_or_one).
 	:- info(essentially_equal/3, [
 		comment is 'Compares two numbers for essential equality given an epsilon value using the de facto standard formula abs(Number1 - Number2) =< min(abs(Number1), abs(Number2)) * Epsilon. No type-checking.',
-		argnames is ['Number1', 'Number2', 'Epsilon']
+		argnames is ['Number1', 'Number2', 'Epsilon'],
+		remarks is [
+			'Comparison with approximate equality' - 'For the same epsilon value, essential equality is a stronger requirement than approximate equality.'
+		]
 	]).
 
 	:- public(tolerance_equal/4).
@@ -58,6 +72,10 @@
 		comment is 'Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.',
 		argnames is ['Float1', 'Float2']
 	]).
+
+	approximately_equal(Number1, Number2) :-
+		epsilon(Epsilon),
+		abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon.
 
 	approximately_equal(Number1, Number2, Epsilon) :-
 		{abs(Number1 - Number2) =< max(abs(Number1), abs(Number2)) * Epsilon}.

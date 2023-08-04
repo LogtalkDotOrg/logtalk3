@@ -1501,11 +1501,17 @@ simplify writing unit tests and for general use:
      an error (the first argument allows assertion failures to be
      distinguished when using multiple assertions).
 
+-  | ``approximately_equal(Number1, Number2)``
+   | For number approximate equality using the ``epsilon`` arithmetic
+     constant value.
+
 -  | ``approximately_equal(Number1, Number2, Epsilon)``
-   | For number approximate equality.
+   | For number approximate equality. Weaker equality than essential
+     equality.
 
 -  | ``essentially_equal(Number1, Number2, Epsilon)``
-   | For number essential equality.
+   | For number essential equality. Stronger equality than approximate
+     equality.
 
 -  | ``tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)``
    | For number equality within tolerances.

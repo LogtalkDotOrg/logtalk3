@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-08-04,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
@@ -37,7 +37,8 @@ a(1).
 		benchmark/2, benchmark_reified/3,
 		benchmark/3,
 		epsilon/1, ('=~=')/2,
-		approximately_equal/3, essentially_equal/3, tolerance_equal/4,
+		approximately_equal/2, approximately_equal/3,
+		essentially_equal/3, tolerance_equal/4,
 		deterministic/1, deterministic/2,
 		variant/2,
 		assertion/1, assertion/2,
@@ -91,6 +92,26 @@ a(1).
 		epsilon(Epsilon),
 		assertion(type, float(Epsilon)),
 		assertion(value, Epsilon > 0).
+
+	% approximately_equal/2 tests
+
+	test(approximately_equal_2_01, true) :-
+		approximately_equal(99.999999999999999, 100.0).
+
+	test(approximately_equal_2_02, false) :-
+		approximately_equal(99.9999, 100.0).
+
+	test(approximately_equal_2_03, error(instantiation_error)) :-
+		approximately_equal(_, 100.0).
+
+	test(approximately_equal_2_04, error(instantiation_error)) :-
+		approximately_equal(95.1, _).
+
+	test(approximately_equal_2_06, error(type_error(number,a))) :-
+		approximately_equal(a, 100.0).
+
+	test(approximately_equal_2_07, error(type_error(number,a))) :-
+		approximately_equal(95.1, a).
 
 	% approximately_equal/3 tests
 
