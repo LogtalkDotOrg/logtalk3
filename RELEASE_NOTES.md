@@ -60,6 +60,8 @@ when converting graphs to SVG format.
 * IMPROVED: The `lgtdoc` tool support for documenting libraries where source
 files are organized in multiple sub-directories.
 
+* FIXED: The `lgtunit` tool xUnit reports escaping of XML special characters.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

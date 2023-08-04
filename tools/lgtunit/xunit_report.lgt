@@ -36,9 +36,9 @@
 :- object(xunit_report).
 
 	:- info([
-		version is 4:3:1,
+		version is 4:3:2,
 		author is 'Paulo Moura',
-		date is 2023-04-12,
+		date is 2023-08-04,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'
@@ -395,8 +395,10 @@
 	escape_special_characters(Term, Escaped) :-
 		(	var(Term) ->
 			Escaped = Term
-		;	escape_special_character(Term, Escaped) ->
-			true
+		;	atom(Term) ->
+			atom_chars(Term, List),
+			phrase(escape_special_characters(List), EscapedList),
+			atom_chars(Escaped, EscapedList)
 		;	compound(Term) ->
 			Term =.. List,
 			escape_special_characters_list(List, EscapedList),
@@ -404,11 +406,21 @@
 		;	Escaped = Term
 		).
 
-	escape_special_character((<),  '&lt;').
-	escape_special_character((>),  '&gt;').
-	escape_special_character('"',  '&quot;').
-	escape_special_character('\'', '&apos;').
-	escape_special_character((&),  '&amp;').
+	escape_special_character((<))  --> [(&),l,t,';'].
+	escape_special_character((>))  --> [(&),g,t,';'].
+	escape_special_character('"')  --> [(&),q,u,o,t,';'].
+	escape_special_character('\'') --> [(&),a,p,o,s,';'].
+	escape_special_character((&))  --> [(&),a,m,p,';'].
+
+	escape_special_characters([]) -->
+		[].
+	escape_special_characters([Char| Chars]) -->
+		escape_special_character(Char),
+		!,
+		escape_special_characters(Chars).
+	escape_special_characters([Char| Chars]) -->
+		[Char],
+		escape_special_characters(Chars).
 
 	escape_special_characters_list([], []).
 	escape_special_characters_list([Argument| Arguments], [EscapedArgument| EscapedArguments]) :-
