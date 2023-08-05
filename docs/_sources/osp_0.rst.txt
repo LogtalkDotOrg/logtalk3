@@ -11,8 +11,8 @@
 Portable operating-system access protocol.
 
 | **Author:** Paulo Moura
-| **Version:** 1:36:0
-| **Date:** 2023-08-04
+| **Version:** 1:37:0
+| **Date:** 2023-08-05
 
 | **Compilation flags:**
 |    ``static``
@@ -366,7 +366,7 @@ Full device path: ``/dev/full`` on Linux and BSD systems. Fails on other systems
 ``read_only_device_path/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Read-only device path: ``/dev/urandom`` on macOS, Linux, BSD, and other POSIX systems. Fails on Windows. Experimental.
+Read-only device path: ``/dev/urandom`` on macOS. Fails on other systems. Experimental.
 
 | **Compilation flags:**
 |    ``static``

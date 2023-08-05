@@ -55,9 +55,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:97:0,
+		version is 1:98:0,
 		author is 'Paulo Moura',
-		date is 2023-08-04,
+		date is 2023-08-05,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2210,7 +2210,7 @@
 		).
 
 	read_only_device_path('/dev/urandom') :-
-		\+ operating_system_type(windows).
+		shell('uname -s | grep -q Darwin').
 
 	ensure_directory(Directory) :-
 		(	directory_exists(Directory) ->

@@ -38,7 +38,7 @@ Library
 limited to Linux and BSD systems.
 
 * ADDED: Experimental `os::read_only_device_path/1` library predicate.
-Currently limited to POSIX systems.
+Currently limited to macOS systems.
 
 * ADDED: Predicate `approximately_equal/2` to the `number` library object.
 

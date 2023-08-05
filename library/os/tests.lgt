@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:34:0,
+		version is 0:35:0,
 		author is 'Paulo Moura',
-		date is 2023-08-04,
+		date is 2023-08-05,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -415,10 +415,10 @@
 		write(Stream, abc),
 		flush_output(Stream).
 
-	test(os_read_only_device_path_1_01, true(atom(Path)), [condition(only_posix_systems)]) :-
+	test(os_read_only_device_path_1_01, true(atom(Path)), [condition(only_mac_systems)]) :-
 		os::read_only_device_path(Path).
 
-	test(os_read_only_device_path_1_02, error(_), [condition(only_posix_systems)]) :-
+	test(os_read_only_device_path_1_02, error(_), [condition(only_mac_systems)]) :-
 		os::read_only_device_path(Path),
 		open(Path, write, Stream),
 		write(Stream, abc),
@@ -630,5 +630,8 @@
 
 	only_posix_systems :-
 		os::operating_system_type(unix).
+
+	only_mac_systems :-
+		shell('uname -s | grep -q Darwin').
 
 :- end_object.
