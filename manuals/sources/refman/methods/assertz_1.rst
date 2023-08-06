@@ -41,11 +41,11 @@ a dynamic predicate declaration is added to the object. In this case, the
 predicate scope depends on how this method is called:
 
 ``assertz(Clause)``
-   The predicate is dynamically declared as private.
+   The predicate is dynamically declared as :term:`private <private predicate>`.
 ``::assertz(Clause)``
-   The predicate is dynamically declared as protected.
+   The predicate is dynamically declared as :term:`protected <protected predicate>`.
 ``Object::assertz(Clause)``
-   The predicate is dynamically declared as public.
+   The predicate is dynamically declared as :term:`public <public predicate>`.
 
 Note, however, that dynamically declaring a new predicate requires either a
 local assert or the :ref:`dynamic_declarations <flag_dynamic_declarations>`
