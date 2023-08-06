@@ -40,11 +40,11 @@ When the predicate was not previously declared (using a scope directive),
 a dynamic predicate declaration is added to the object. In this case, the
 predicate scope depends on how this method is called:
 
-``asserta(Clause)``
+``assertz(Clause)``
    The predicate is dynamically declared as private.
-``::asserta(Clause)``
+``::assertz(Clause)``
    The predicate is dynamically declared as protected.
-``Object::asserta(Clause)``
+``Object::assertz(Clause)``
    The predicate is dynamically declared as public.
 
 Note, however, that dynamically declaring a new predicate requires either a
