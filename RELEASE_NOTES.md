@@ -28,6 +28,8 @@ RELEASE NOTES
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `asserta/1` and `assertz/1` built-in methods.
+
 * IMPROVED: Documentation of the `diagrams` tool `path_url_prefixes/3` and
 `omit_path_prefixes/1` options.
 

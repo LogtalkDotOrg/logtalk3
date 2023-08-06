@@ -147,12 +147,21 @@
 <span class="k">asserta</span>((<span class="nv">Head</span><span class="o">:-</span><span class="nv">Body</span>))
 </pre></div>
 </div>
-<p>Asserts a clause as the first one for an object dynamic predicate. If the
-predicate is not previously declared (using a scope directive), then a
-dynamic predicate declaration is added to the object (assuming that we are
-asserting locally or that the
-<a class="reference internal" href="../../userman/programming.html#flag-dynamic-declarations"><span class="std std-ref">dynamic_declarations</span></a> compiler flag was
-set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> when the object was created or compiled).</p>
+<p>Asserts a clause as the first one for an object dynamic predicate.</p>
+<p>When the predicate was not previously declared (using a scope directive),
+a dynamic predicate declaration is added to the object. In this case, the
+predicate scope depends on how this method is called:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">asserta(Clause)</span></code></dt><dd><p>The predicate is dynamically declared as private.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">::asserta(Clause)</span></code></dt><dd><p>The predicate is dynamically declared as protected.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">Object::asserta(Clause)</span></code></dt><dd><p>The predicate is dynamically declared as public.</p>
+</dd>
+</dl>
+<p>Note, however, that dynamically declaring a new predicate requires either a
+local assert or the <a class="reference internal" href="../../userman/programming.html#flag-dynamic-declarations"><span class="std std-ref">dynamic_declarations</span></a>
+compiler flag set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> when the object was created or compiled.</p>
 <p>When the predicate indicator for <code class="docutils literal notranslate"><span class="pre">Head</span></code> is declared in a
 <a class="reference internal" href="../directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> or <a class="reference internal" href="../directives/use_module_2.html#directives-use-module-2"><span class="std std-ref">use_module/2</span></a> directive, the
 clause is asserted in the referenced object or module. When the backend
