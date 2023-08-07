@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:55:0,
+		version is 0:56:0,
 		author is 'Paulo Moura',
-		date is 2023-05-18,
+		date is 2023-08-07,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -913,14 +913,14 @@
 			'requiring sending a message to the "user" pseudo-object.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _::Pred, [Pred])) -->
-		[	'Only use message sending to call a local predicate when is necessary to'-[], nl,
-			'generate an event for the message. Otherwise, simply call the predicate'-[], nl,
-			'directly.'-[], nl, nl
+		[	'Using message sending to call a local predicate is usually only required'-[], nl,
+			'when we want to generate an event for the message. Otherwise, simply call'-[], nl,
+			'the predicate directly.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _::Pred, [::Pred])) -->
-		[	'Only use an explicit message sending instead of a message to "self" when'-[], nl,
-			'you need to generate an event for the message. Otherwise, simply send'-[], nl,
-			'a message to "self".'-[], nl, nl
+		[	'Using an object explicit message sending instead of a message to'-[], nl,
+			'"self" is usually only required when we want to generate an event'-[], nl,
+			'for the message. Otherwise, simply send a message to "self".'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, ::Pred, [Pred, ^^Pred])) -->
 		[	'Sending a message to self to call the same predicate being defined is'-[], nl,
