@@ -57,7 +57,7 @@ To test this tool, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(lgtunit(tester)).
 
-Writing and loading tests
+Writing and running tests
 -------------------------
 
 In order to write your own unit tests, define objects extending the
@@ -86,7 +86,8 @@ the source files defining the test objects using the option
 
 ::
 
-   | ?- logtalk_load(tests, [hook(lgtunit)]).
+   | ?- logtalk_load(lgtunit(loader)),
+        logtalk_load(tests, [hook(lgtunit)]).
 
 As the term-expansion mechanism applies to all the contents of a source
 file, the source files defining the test objects should preferably not
@@ -123,34 +124,42 @@ after loading:
        logtalk_load(source, [source_data(on), debug(on)]),
        % compile the unit tests file expanding it using "lgtunit" as the hook
        % object to preprocess the tests; if you have failing tests, add the
-       % option debug(on) to debug them
+       % option debug(on) to debug them (see "tools/lgtunit/NOTES.md" for
+       % debugging advice); tests should be loaded after the code being tested
+       % is loaded to avoid warnings such as references to unknown entities
        logtalk_load(tests, [hook(lgtunit)]),
        % run all the unit tests; assuming your tests object is named "tests"
        tests::run
    )).
 
 You may copy this sample file to a ``tester.lgt`` file in your project
-directory and edit it to load your project and tests files (the
+directory and edit it to load your project and tests files. The
 ``logtalk_tester`` testing automation script defaults to look for test
-driver files named ``tester.lgt`` or ``tester.logtalk``).
+driver files named ``tester.lgt`` or ``tester.logtalk`` (if you have
+work-in-progress test sets that you don't want to run by default, simply
+use a different file name such as ``tester_wip.lgt``; you can still run
+them automated by using ``logtalk_tester -n tester_wip``).
 
 Debugged test sets should preferably be compiled in optimal mode,
 specially when containing deterministic tests and when using the utility
 benchmarking predicates.
 
-Running unit tests
-------------------
+Assuming a ``tester.lgt`` driver file as exemplified above, the tests
+can be run by simply loading this file:
 
-Assuming that your test object is named ``tests``, after compiling and
-loading its source file, you can run the tests by typing:
+::
+
+   | ?- logtalk_load(tester).
+
+Assuming your test object is named ``tests``, you can re-run the tests
+by typing:
 
 ::
 
    | ?- tests::run.
 
-Usually, this goal is called automatically from an ``initialization/1``
-directive in a ``tester.lgt`` loader file. You can also run a single
-test (or a list of tests) using the ``run/1`` predicate:
+You can also re-run a single test (or a list of tests) using the
+``run/1`` predicate:
 
 ::
 
@@ -205,6 +214,96 @@ Note that you can have multiple test driver files. For example, one
 driver file that runs the tests collecting code coverage data and a
 quicker driver file that skips code coverage and compiles the code to be
 tested in optimized mode.
+
+Automating running tests
+------------------------
+
+You can use the ``scripts/logtalk_tester.sh`` Bash shell script or the
+``scripts/logtalk_tester.ps1`` PowerShell script for automating running
+unit tests (e.g. from a CI/CD pipeline). For example, assuming your
+current directory (or sub-directories) contain one or more
+``tester.lgt`` files:
+
+::
+
+   $ logtalk_tester -p gnu
+
+The only required argument is the identifier of the backend Prolog
+system. For other options, see the ``scripts/NOTES.md`` file or type:
+
+::
+
+   $ logtalk_tester -h
+
+On POSIX systems, you can also access extended documentation by
+consulting the script man page:
+
+::
+
+   $ man logtalk_tester
+
+The scripts support the same set of options but the option for passing
+additional arguments to the tests use different syntax. For example:
+
+::
+
+   $ logtalk_tester -p gnu -- foo bar baz
+
+   PS> logtalk_tester -p gnu -a foo,bar,baz
+
+On POSIX systems, assuming Logtalk was installed using one of the
+provided installers or installation scripts, there is also a ``man``
+page for the script:
+
+::
+
+   $ man logtalk_tester
+
+Alternatively, an HTML version of this man page can be found at:
+
+https://logtalk.org/man/logtalk_tester.html
+
+The ``logtalk_tester.ps1`` PowerShell script timeout option requires
+that Git for Windows is also installed as it requires the GNU timeout
+command bundled with it.
+
+In alternative to using the ``logtalk_tester.ps1`` PowerShell script,
+the Bash shell version of the automation script can also be used in
+Windows operating-systems with selected backends by using the Bash shell
+included in the Git for Windows installer. That requires defining a
+``.profile`` file setting the paths to the Logtalk scripts and the
+Prolog backend executables. For example:
+
+::
+
+   $ cat ~/.profile
+   # YAP
+   export PATH="/C/Program Files/Yap64/bin":$PATH
+   # GNU Prolog
+   export PATH="/C/GNU-Prolog/bin":$PATH
+   # SWI/Prolog
+   export PATH="/C/Program Files/swipl/bin":$PATH
+   # ECLiPSe
+   export PATH="/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt":$PATH
+   # SICStus Prolog
+   export PATH="/C/Program Files/SICStus Prolog VC16 4.6.0/bin":$PATH
+   # Logtalk
+   export PATH="$LOGTALKHOME/scripts":"$LOGTALKHOME/integration":$PATH
+
+The Git for Windows installer also includes GNU ``coreutils`` and its
+``timeout`` command, which is used by the ``logtalk_tester`` script
+``-t`` option.
+
+Note that some tests may give different results when run from within the
+Bash shell compared with running the tests manually using a Windows GUI
+version of the Prolog backend. Some backends may also not be usable for
+automated testing due to the way their are made available as Windows
+applications.
+
+Additional advice on testing and on automating testing using continuous
+integration servers can be found at:
+
+https://logtalk.org/testing.html
 
 Parametric test objects
 -----------------------
@@ -1406,80 +1505,6 @@ construct to call the Prolog predicates.
 
 See also the section below on exporting code coverage results to XML
 files, which can be easily converted and published as e.g. HTML reports.
-
-Automating running tests
-------------------------
-
-You can use the ``scripts/logtalk_tester.sh`` Bash shell script or the
-``scripts/logtalk_tester.ps1`` PowerShell script for automating running
-unit tests. See the ``scripts/NOTES.md`` file for details or type:
-
-::
-
-   $ logtalk_tester -h
-
-The scripts support the same set of options but the option for passing
-additional arguments to the tests use different syntax. For example:
-
-::
-
-   $ logtalk_tester -p gnu -- foo bar baz
-
-   PS> logtalk_tester -p gnu -a foo,bar,baz
-
-On POSIX systems, assuming Logtalk was installed using one of the
-provided installers or installation scripts, there is also a ``man``
-page for the script:
-
-::
-
-   $ man logtalk_tester
-
-Alternatively, an HTML version of this man page can be found at:
-
-https://logtalk.org/man/logtalk_tester.html
-
-The ``logtalk_tester.ps1`` PowerShell script timeout option requires
-that Git for Windows is also installed as it requires the GNU timeout
-command bundled with it.
-
-In alternative to using the ``logtalk_tester.ps1`` PowerShell script,
-the Bash shell version of the automation script can also be used in
-Windows operating-systems with selected backends by using the Bash shell
-included in the Git for Windows installer. That requires defining a
-``.profile`` file setting the paths to the Logtalk scripts and the
-Prolog backend executables. For example:
-
-::
-
-   $ cat ~/.profile
-   # YAP
-   export PATH="/C/Program Files/Yap64/bin":$PATH
-   # GNU Prolog
-   export PATH="/C/GNU-Prolog/bin":$PATH
-   # SWI/Prolog
-   export PATH="/C/Program Files/swipl/bin":$PATH
-   # ECLiPSe
-   export PATH="/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt":$PATH
-   # SICStus Prolog
-   export PATH="/C/Program Files/SICStus Prolog VC16 4.6.0/bin":$PATH
-   # Logtalk
-   export PATH="$LOGTALKHOME/scripts":"$LOGTALKHOME/integration":$PATH
-
-The Git for Windows installer also includes GNU ``coreutils`` and its
-``timeout`` command, which is used by the ``logtalk_tester`` script
-``-t`` option.
-
-Note that some tests may give different results when run from within the
-Bash shell compared with running the tests manually using a Windows GUI
-version of the Prolog backend. Some backends may also not be usable for
-automated testing due to the way their are made available as Windows
-applications.
-
-Additional advice on testing and on automating testing using continuous
-integration servers can be found at:
-
-https://logtalk.org/testing.html
 
 Utility predicates
 ------------------

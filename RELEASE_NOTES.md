@@ -33,6 +33,8 @@ Documentation
 * IMPROVED: Documentation of the `diagrams` tool `path_url_prefixes/3` and
 `omit_path_prefixes/1` options.
 
+* IMPROVED: Documentation of the `lgtunit` tool on writing and running tests.
+
 Library
 -------
 

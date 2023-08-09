@@ -48,7 +48,7 @@
 	% object to preprocess the tests; if you have failing tests, add the
 	% option debug(on) to debug them (see "tools/lgtunit/NOTES.md" for
 	% debugging advice); tests should be loaded after the code being tested
-	% is loaded to avoid warnings such as references to unknonw entities
+	% is loaded to avoid warnings such as references to unknown entities
 	logtalk_load(tests, [hook(lgtunit)]),
 	% run all the unit tests; assuming your tests object is named "tests"
 	tests::run

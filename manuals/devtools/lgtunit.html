@@ -82,8 +82,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#writing-and-loading-tests">Writing and loading tests</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#running-unit-tests">Running unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-and-running-tests">Writing and running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automating-running-tests">Automating running tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parametric-test-objects">Parametric test objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-dialects">Test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#user-defined-test-dialects">User-defined test dialects</a></li>
@@ -103,7 +103,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#debugging-messages-in-tests">Debugging messages in tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#automating-running-tests">Automating running tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#utility-predicates">Utility predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
@@ -208,8 +207,8 @@ formats of test results and are discussed below.</p>
 </pre></div>
 </div>
 </section>
-<section id="writing-and-loading-tests">
-<h2>Writing and loading tests<a class="headerlink" href="#writing-and-loading-tests" title="Permalink to this heading"></a></h2>
+<section id="writing-and-running-tests">
+<h2>Writing and running tests<a class="headerlink" href="#writing-and-running-tests" title="Permalink to this heading"></a></h2>
 <p>In order to write your own unit tests, define objects extending the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object. You may start by copying the <code class="docutils literal notranslate"><span class="pre">tests-sample.lgt</span></code>
 file (at the root of the Logtalk distribution) to a <code class="docutils literal notranslate"><span class="pre">tests.lgt</span></code> file
@@ -230,7 +229,8 @@ of actual unit tests. Other sources of examples are the <code class="docutils li
 <p>The tests must be term-expanded by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object by compiling
 the source files defining the test objects using the option
 <code class="docutils literal notranslate"><span class="pre">hook(lgtunit)</span></code>. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(tests, [hook(lgtunit)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtunit(loader)),
+     <span class="k">logtalk_load</span>(tests, [hook(lgtunit)]).
 </pre></div>
 </div>
 <p>As the term-expansion mechanism applies to all the contents of a source
@@ -263,7 +263,9 @@ after loading:</p>
     <span class="k">logtalk_load</span>(source, [source_data(on), debug(on)]),
     <span class="c">% compile the unit tests file expanding it using &quot;lgtunit&quot; as the hook</span>
     <span class="c">% object to preprocess the tests; if you have failing tests, add the</span>
-    <span class="c">% option debug(on) to debug them</span>
+    <span class="c">% option debug(on) to debug them (see &quot;tools/lgtunit/NOTES.md&quot; for</span>
+    <span class="c">% debugging advice); tests should be loaded after the code being tested</span>
+    <span class="c">% is loaded to avoid warnings such as references to unknown entities</span>
     <span class="k">logtalk_load</span>(tests, [hook(lgtunit)]),
     <span class="c">% run all the unit tests; assuming your tests object is named &quot;tests&quot;</span>
     tests<span class="o">::</span>run
@@ -271,23 +273,27 @@ after loading:</p>
 </pre></div>
 </div>
 <p>You may copy this sample file to a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file in your project
-directory and edit it to load your project and tests files (the
+directory and edit it to load your project and tests files. The
 <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> testing automation script defaults to look for test
-driver files named <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> or <code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code>).</p>
+driver files named <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> or <code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code> (if you have
+work-in-progress test sets that you don’t want to run by default, simply
+use a different file name such as <code class="docutils literal notranslate"><span class="pre">tester_wip.lgt</span></code>; you can still run
+them automated by using <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span> <span class="pre">-n</span> <span class="pre">tester_wip</span></code>).</p>
 <p>Debugged test sets should preferably be compiled in optimal mode,
 specially when containing deterministic tests and when using the utility
 benchmarking predicates.</p>
-</section>
-<section id="running-unit-tests">
-<h2>Running unit tests<a class="headerlink" href="#running-unit-tests" title="Permalink to this heading"></a></h2>
-<p>Assuming that your test object is named <code class="docutils literal notranslate"><span class="pre">tests</span></code>, after compiling and
-loading its source file, you can run the tests by typing:</p>
+<p>Assuming a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> driver file as exemplified above, the tests
+can be run by simply loading this file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(tester).
+</pre></div>
+</div>
+<p>Assuming your test object is named <code class="docutils literal notranslate"><span class="pre">tests</span></code>, you can re-run the tests
+by typing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tests<span class="o">::</span>run.
 </pre></div>
 </div>
-<p>Usually, this goal is called automatically from an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code>
-directive in a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> loader file. You can also run a single
-test (or a list of tests) using the <code class="docutils literal notranslate"><span class="pre">run/1</span></code> predicate:</p>
+<p>You can also re-run a single test (or a list of tests) using the
+<code class="docutils literal notranslate"><span class="pre">run/1</span></code> predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tests<span class="o">::</span>run(test_identifier).
 </pre></div>
 </div>
@@ -332,6 +338,77 @@ shortcut <code class="docutils literal notranslate"><span class="pre">{*}</span>
 driver file that runs the tests collecting code coverage data and a
 quicker driver file that skips code coverage and compiles the code to be
 tested in optimized mode.</p>
+</section>
+<section id="automating-running-tests">
+<h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Permalink to this heading"></a></h2>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script or the
+<code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.ps1</span></code> PowerShell script for automating running
+unit tests (e.g. from a CI/CD pipeline). For example, assuming your
+current directory (or sub-directories) contain one or more
+<code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> files:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -p gnu
+</pre></div>
+</div>
+<p>The only required argument is the identifier of the backend Prolog
+system. For other options, see the <code class="docutils literal notranslate"><span class="pre">scripts/NOTES.md</span></code> file or type:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -h
+</pre></div>
+</div>
+<p>On POSIX systems, you can also access extended documentation by
+consulting the script man page:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ man logtalk_tester
+</pre></div>
+</div>
+<p>The scripts support the same set of options but the option for passing
+additional arguments to the tests use different syntax. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -p gnu -- foo bar baz
+
+PS&gt; logtalk_tester -p gnu -a foo,bar,baz
+</pre></div>
+</div>
+<p>On POSIX systems, assuming Logtalk was installed using one of the
+provided installers or installation scripts, there is also a <code class="docutils literal notranslate"><span class="pre">man</span></code>
+page for the script:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ man logtalk_tester
+</pre></div>
+</div>
+<p>Alternatively, an HTML version of this man page can be found at:</p>
+<p><a class="reference external" href="https://logtalk.org/man/logtalk_tester.html">https://logtalk.org/man/logtalk_tester.html</a></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script timeout option requires
+that Git for Windows is also installed as it requires the GNU timeout
+command bundled with it.</p>
+<p>In alternative to using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script,
+the Bash shell version of the automation script can also be used in
+Windows operating-systems with selected backends by using the Bash shell
+included in the Git for Windows installer. That requires defining a
+<code class="docutils literal notranslate"><span class="pre">.profile</span></code> file setting the paths to the Logtalk scripts and the
+Prolog backend executables. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cat ~/.profile
+# YAP
+export PATH=&quot;/C/Program Files/Yap64/bin&quot;:$PATH
+# GNU Prolog
+export PATH=&quot;/C/GNU-Prolog/bin&quot;:$PATH
+# SWI/Prolog
+export PATH=&quot;/C/Program Files/swipl/bin&quot;:$PATH
+# ECLiPSe
+export PATH=&quot;/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt&quot;:$PATH
+# SICStus Prolog
+export PATH=&quot;/C/Program Files/SICStus Prolog VC16 4.6.0/bin&quot;:$PATH
+# Logtalk
+export PATH=&quot;$LOGTALKHOME/scripts&quot;:&quot;$LOGTALKHOME/integration&quot;:$PATH
+</pre></div>
+</div>
+<p>The Git for Windows installer also includes GNU <code class="docutils literal notranslate"><span class="pre">coreutils</span></code> and its
+<code class="docutils literal notranslate"><span class="pre">timeout</span></code> command, which is used by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script
+<code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
+<p>Note that some tests may give different results when run from within the
+Bash shell compared with running the tests manually using a Windows GUI
+version of the Prolog backend. Some backends may also not be usable for
+automated testing due to the way their are made available as Windows
+applications.</p>
+<p>Additional advice on testing and on automating testing using continuous
+integration servers can be found at:</p>
+<p><a class="reference external" href="https://logtalk.org/testing.html">https://logtalk.org/testing.html</a></p>
 </section>
 <section id="parametric-test-objects">
 <h2>Parametric test objects<a class="headerlink" href="#parametric-test-objects" title="Permalink to this heading"></a></h2>
@@ -1408,65 +1485,6 @@ Prolog code by defining tests that use the <code class="docutils literal notrans
 construct to call the Prolog predicates.</p>
 <p>See also the section below on exporting code coverage results to XML
 files, which can be easily converted and published as e.g. HTML reports.</p>
-</section>
-<section id="automating-running-tests">
-<h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Permalink to this heading"></a></h2>
-<p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script or the
-<code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.ps1</span></code> PowerShell script for automating running
-unit tests. See the <code class="docutils literal notranslate"><span class="pre">scripts/NOTES.md</span></code> file for details or type:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -h
-</pre></div>
-</div>
-<p>The scripts support the same set of options but the option for passing
-additional arguments to the tests use different syntax. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ logtalk_tester -p gnu -- foo bar baz
-
-PS&gt; logtalk_tester -p gnu -a foo,bar,baz
-</pre></div>
-</div>
-<p>On POSIX systems, assuming Logtalk was installed using one of the
-provided installers or installation scripts, there is also a <code class="docutils literal notranslate"><span class="pre">man</span></code>
-page for the script:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ man logtalk_tester
-</pre></div>
-</div>
-<p>Alternatively, an HTML version of this man page can be found at:</p>
-<p><a class="reference external" href="https://logtalk.org/man/logtalk_tester.html">https://logtalk.org/man/logtalk_tester.html</a></p>
-<p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script timeout option requires
-that Git for Windows is also installed as it requires the GNU timeout
-command bundled with it.</p>
-<p>In alternative to using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script,
-the Bash shell version of the automation script can also be used in
-Windows operating-systems with selected backends by using the Bash shell
-included in the Git for Windows installer. That requires defining a
-<code class="docutils literal notranslate"><span class="pre">.profile</span></code> file setting the paths to the Logtalk scripts and the
-Prolog backend executables. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cat ~/.profile
-# YAP
-export PATH=&quot;/C/Program Files/Yap64/bin&quot;:$PATH
-# GNU Prolog
-export PATH=&quot;/C/GNU-Prolog/bin&quot;:$PATH
-# SWI/Prolog
-export PATH=&quot;/C/Program Files/swipl/bin&quot;:$PATH
-# ECLiPSe
-export PATH=&quot;/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt&quot;:$PATH
-# SICStus Prolog
-export PATH=&quot;/C/Program Files/SICStus Prolog VC16 4.6.0/bin&quot;:$PATH
-# Logtalk
-export PATH=&quot;$LOGTALKHOME/scripts&quot;:&quot;$LOGTALKHOME/integration&quot;:$PATH
-</pre></div>
-</div>
-<p>The Git for Windows installer also includes GNU <code class="docutils literal notranslate"><span class="pre">coreutils</span></code> and its
-<code class="docutils literal notranslate"><span class="pre">timeout</span></code> command, which is used by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script
-<code class="docutils literal notranslate"><span class="pre">-t</span></code> option.</p>
-<p>Note that some tests may give different results when run from within the
-Bash shell compared with running the tests manually using a Windows GUI
-version of the Prolog backend. Some backends may also not be usable for
-automated testing due to the way their are made available as Windows
-applications.</p>
-<p>Additional advice on testing and on automating testing using continuous
-integration servers can be found at:</p>
-<p><a class="reference external" href="https://logtalk.org/testing.html">https://logtalk.org/testing.html</a></p>
 </section>
 <section id="utility-predicates">
 <h2>Utility predicates<a class="headerlink" href="#utility-predicates" title="Permalink to this heading"></a></h2>
