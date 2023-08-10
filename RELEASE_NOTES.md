@@ -54,6 +54,9 @@ Tools
 
 * ADDED: Predicate `approximately_equal/2` to the `lgtunit` tool.
 
+* ADDED: The `lgtunit` tool now supports a `flaky/0` test option as the
+preferred solution for declaring flaky tests.
+
 * IMPROVED: The `lgtunit` tool documentation of the `approximately_equal/3`
 and `essentially_equal/3` predicates.
 

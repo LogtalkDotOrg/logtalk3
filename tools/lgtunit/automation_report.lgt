@@ -75,10 +75,12 @@
 		write(results_file, '\t'), write(results_file, Failed),
 		write(results_file, '\t'), write(results_file, Flaky), nl(results_file).
 	% failed tests
-	message_hook(failed_test(Object, Test, File, _, _, Note, _)) :-
+	message_hook(failed_test(Object, Test, File, _, _, Flaky, Note, _)) :-
 		write(results_file, 'failed\t'), write(results_file, File), write(results_file, '\t'),
 		writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
-		(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
+		(	Flaky == true ->
+			write(results_file, ' [flaky]')
+		;	atom(Note), sub_atom(Note, _, _, _, flaky) ->
 			write(results_file, ' [flaky]')
 		;	true
 		),

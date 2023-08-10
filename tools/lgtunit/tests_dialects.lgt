@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-08-10,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -164,10 +164,16 @@
 
 	% flaky tests
 
-	test(test_flaky_01, true, [note('flaky; test expected to fail')]) :-
+	test(test_flaky_01, true, [flaky, note('test expected to fail')]) :-
 		Goal = (1 == 2), call(Goal).
 
-	test(test_flaky_02, false, [note('flaky; test expected to fail')]) :-
+	test(test_flaky_02, false, [flaky, note('test expected to fail')]) :-
+		Goal = (1 == 1), call(Goal).
+
+	test(test_flaky_03, true, [note('flaky; test expected to fail')]) :-
+		Goal = (1 == 2), call(Goal).
+
+	test(test_flaky_04, false, [note('flaky; test expected to fail')]) :-
 		Goal = (1 == 1), call(Goal).
 
 	% "explicit" dialects

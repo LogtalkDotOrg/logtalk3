@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 8:2:0,
+		version is 8:3:0,
 		author is 'Paulo Moura',
-		date is 2023-07-10,
+		date is 2023-08-10,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -121,20 +121,20 @@
 			;	['~q: success (~w) (in ~9f seconds)'-[Test, Note, Time], nl]
 			).
 
-		message_tokens(non_deterministic_success(_Object, Test, File, Position, Note, Time)) -->
+		message_tokens(non_deterministic_success(_Object, Test, File, Position, Flaky, Note, Time)) -->
 			(	{Note == ''} ->
 				['~q: failure (in ~9f seconds)'-[Test, Time], nl]
 			;	['~q: failure (~w) (in ~9f seconds)'-[Test, Note, Time], nl]
 			),
-			failed_test_reason(non_deterministic_success),
+			flaky(Flaky), failed_test_reason(non_deterministic_success),
 			file_position(File, Position).
 
-		message_tokens(failed_test(_Object, Test, File, Position, Reason, Note, Time)) -->
+		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, Time)) -->
 			(	{Note == ''} ->
 				['~q: failure (in ~9f seconds)'-[Test, Time], nl]
 			;	['~q: failure (~w) (in ~9f seconds)'-[Test, Note, Time], nl]
 			),
-			failed_test_reason(Reason),
+			flaky(Flaky), failed_test_reason(Reason),
 			file_position(File, Position).
 
 	:- else.
@@ -145,20 +145,20 @@
 			;	['~q: success (~w) (in ~w seconds)'-[Test, Note, Time], nl]
 			).
 
-		message_tokens(non_deterministic_success(_Object, Test, File, Position, Note, Time)) -->
+		message_tokens(non_deterministic_success(_Object, Test, File, Position, Flaky, Note, Time)) -->
 			(	{Note == ''} ->
 				['~q: failure (in ~w seconds)'-[Test, Time], nl]
 			;	['~q: failure (~w) (in ~w seconds)'-[Test, Note, Time], nl]
 			),
-			failed_test_reason(non_deterministic_success),
+			flaky(Flaky), failed_test_reason(non_deterministic_success),
 			file_position(File, Position).
 
-		message_tokens(failed_test(_Object, Test, File, Position, Reason, Note, Time)) -->
+		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, Time)) -->
 			(	{Note == ''} ->
 				['~q: failure (in ~w seconds)'-[Test, Time], nl]
 			;	['~q: failure (~w) (in ~w seconds)'-[Test, Note, Time], nl]
 			),
-			failed_test_reason(Reason),
+			flaky(Flaky), failed_test_reason(Reason),
 			file_position(File, Position).
 
 	:- endif.
@@ -338,57 +338,62 @@
 	% auxiliary grammar rules
 
 	failed_test_reason(success_instead_of_failure) -->
-		['  test goal succeeded but should have failed'-[], nl].
+		['test goal succeeded but should have failed'-[], nl].
 	failed_test_reason(success_instead_of_error(ExpectedError)) -->
-		['  test goal succeeded but should have thrown an error:'-[], nl],
-		['    expected ~q'-[ExpectedError], nl].
+		['test goal succeeded but should have thrown an error:'-[], nl],
+		['  expected ~q'-[ExpectedError], nl].
 	failed_test_reason(failure_instead_of_success) -->
-		['  test goal failed but should have succeeded'-[], nl].
+		['test goal failed but should have succeeded'-[], nl].
 	failed_test_reason(failure_instead_of_error(ExpectedError)) -->
-		['  test goal failed but should have thrown an error:'-[], nl],
-		['    expected ~q'-[ExpectedError], nl].
+		['test goal failed but should have thrown an error:'-[], nl],
+		['  expected ~q'-[ExpectedError], nl].
 	failed_test_reason(non_deterministic_success) -->
-		['  test goal succeeded non-deterministically'-[], nl].
+		['test goal succeeded non-deterministically'-[], nl].
 	failed_test_reason(error_instead_of_failure(Error)) -->
-		['  test goal throws an error but should have failed: ~q'-[Error], nl].
+		['test goal throws an error but should have failed: ~q'-[Error], nl].
 	failed_test_reason(error_instead_of_success(assertion_error(Assertion, error(Error,_)))) -->
-		['  test assertion throws an error: ~q - ~q'-[Assertion, Error], nl].
+		['test assertion throws an error: ~q - ~q'-[Assertion, Error], nl].
 	failed_test_reason(error_instead_of_success(assertion_error(Assertion, Error))) -->
-		['  test assertion throws an error: ~q - ~q'-[Assertion, Error], nl].
+		['test assertion throws an error: ~q - ~q'-[Assertion, Error], nl].
 	failed_test_reason(error_instead_of_success(assertion_failure(Assertion))) -->
-		['  test assertion failed: ~q'-[Assertion], nl].
+		['test assertion failed: ~q'-[Assertion], nl].
 	failed_test_reason(error_instead_of_success(Error)) -->
-		['  test goal throws an error but should have succeeded: ~q'-[Error], nl].
+		['test goal throws an error but should have succeeded: ~q'-[Error], nl].
 	failed_test_reason(wrong_error(ExpectedError, Error)) -->
-		['  test goal throws the wrong error:'-[], nl],
-		['    expected ~q'-[ExpectedError], nl],
-		['    but got  ~q'-[Error], nl].
+		['test goal throws the wrong error:'-[], nl],
+		['  expected ~q'-[ExpectedError], nl],
+		['  but got  ~q'-[Error], nl].
 
 	failed_test_reason(quick_check_failed(Goal, Test, Shrinks, Seed, TestSeed)) -->
 		(	{Shrinks == 1} ->
-			['  quick check test failure (at test ~w after ~w shrink with starting seed ~q and test seed ~q): ~q'-[Test, Shrinks, Seed, TestSeed, Goal], nl]
-		;	['  quick check test failure (at test ~w after ~w shrinks with starting seed ~q and test seed ~q): ~q'-[Test, Shrinks, Seed, TestSeed, Goal], nl]
+			['quick check test failure (at test ~w after ~w shrink with starting seed ~q and test seed ~q): ~q'-[Test, Shrinks, Seed, TestSeed, Goal], nl]
+		;	['quick check test failure (at test ~w after ~w shrinks with starting seed ~q and test seed ~q): ~q'-[Test, Shrinks, Seed, TestSeed, Goal], nl]
 		).
 
 	failed_test_reason(quick_check_error(error(Error,_), Goal, Test, Seed, TestSeed)) -->
 		failed_test_reason(quick_check_error(Error, Goal, Test, Seed, TestSeed)).
 	failed_test_reason(quick_check_error(Error, _Goal, Test, Seed, TestSeed)) -->
-		['  quick check test error (at test ~w with starting seed ~q and test seed ~q): ~q'-[Test, Seed, TestSeed, Error], nl].
+		['quick check test error (at test ~w with starting seed ~q and test seed ~q): ~q'-[Test, Seed, TestSeed, Error], nl].
 	failed_test_reason(quick_check_error(Error, Culprit)) -->
-		['  quick check test error (caused by ~q): ~q'-[Error, Culprit], nl].
+		['quick check test error (caused by ~q): ~q'-[Error, Culprit], nl].
 
 	failed_test_reason(step_error(Step, Error)) -->
-		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].
+		['~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].
 	failed_test_reason(step_failure(Step)) -->
-		['  ~w goal failed but should have succeeded'-[Step], nl].
+		['~w goal failed but should have succeeded'-[Step], nl].
 
 	failed_test_reason(Unexpected) -->
-		['  Unexpected failure (likely backend bug): ~q'-[Unexpected], nl].
+		['Unexpected failure (likely backend bug): ~q'-[Unexpected], nl].
 
 	failed_cleanup_reason(error(Error), _Object, Test) -->
 		['  test ~q cleanup goal throws an error but should have succeeded: ~q'-[Test, Error], nl].
 	failed_cleanup_reason(failure, _Object, Test) -->
 		['  test ~q cleanup goal failed but should have succeeded'-[Test], nl].
+
+	flaky(true) -->
+		['  [flaky] '-[]].
+	flaky(false) -->
+		['  '-[]].
 
 	file_position(Path, Position) -->
 		{suppress_path_prefix(Path, ShortPath)},

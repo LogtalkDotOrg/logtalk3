@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:2:0,
+		version is 16:3:0,
 		author is 'Paulo Moura',
-		date is 2023-08-04,
+		date is 2023-08-10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1042,48 +1042,48 @@
 	:- meta_predicate(run_test((::), (*), (*))).
 
 	% test/3 dialect
-	run_test(succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
+	run_test(succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
 		(	run_test_condition(Condition) ->
-			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
+			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				cpu_time(Start),
-				(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Start, Output)) ->
+				(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Flaky, Note, Start, Output)) ->
 					(	var(Error) ->
 						passed_test(Test, File, Position, Note, Start, Output)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Start, Output)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Flaky, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
 			)
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
-	run_test(deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
+	run_test(deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
 		(	run_test_condition(Condition) ->
-			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
+			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				cpu_time(Start),
-				(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Note, Start, Output)) ->
+				(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Flaky, Note, Start, Output)) ->
 					(	var(Error) ->
 						(	Deterministic == true ->
 							passed_test(Test, File, Position, Note, Start, Output)
-						;	non_deterministic_success(Test, File, Position, Note, Start, Output)
+						;	non_deterministic_success(Test, File, Position, Flaky, Note, Start, Output)
 						)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Start, Output)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Flaky, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
 			)
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
-	run_test(fails(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
+	run_test(fails(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
 		(	run_test_condition(Condition) ->
-			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
+			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				cpu_time(Start),
-				(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Note, Start, Output)) ->
+				(	catch(::test(Test, Variables, fail), Error, failed_test(Test, File, Position, error_instead_of_failure(Error), Flaky, Note, Start, Output)) ->
 					(	var(Error) ->
-						failed_test(Test, File, Position, success_instead_of_failure, Note, Start, Output)
+						failed_test(Test, File, Position, success_instead_of_failure, Flaky, Note, Start, Output)
 					;	true
 					)
 				;	passed_test(Test, File, Position, Note, Start, Output)
@@ -1093,18 +1093,18 @@
 			)
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
-	run_test(throws(Test, Variables, PossibleErrors, Position, Condition, Setup, Cleanup, Note), File, Output) :-
+	run_test(throws(Test, Variables, PossibleErrors, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
 		(	run_test_condition(Condition) ->
-			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
+			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				cpu_time(Start),
-				(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Note, Start, Output)) ->
+				(	catch(::test(Test, Variables, PossibleErrors), Error, check_error(Test, PossibleErrors, Error, File, Position, Flaky, Note, Start, Output)) ->
 					(	var(Error) ->
 						PossibleErrors = [PossibleError| _],
-						failed_test(Test, File, Position, success_instead_of_error(PossibleError), Note, Start, Output)
+						failed_test(Test, File, Position, success_instead_of_error(PossibleError), Flaky, Note, Start, Output)
 					;	true
 					)
 				;	PossibleErrors = [PossibleError| _],
-					failed_test(Test, File, Position, failure_instead_of_error(PossibleError), Note, Start, Output)
+					failed_test(Test, File, Position, failure_instead_of_error(PossibleError), Flaky, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
@@ -1112,16 +1112,16 @@
 		;	skipped_test(Test, File, Position, Note, Output)
 		).
 	% quick_check/3 dialect
-	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note), File, Output) :-
+	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
 		(	run_test_condition(Condition) ->
-			(	run_test_setup(Test, Setup, File, Position, Note, Output) ->
+			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				cpu_time(Start),
-				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Start, Output)) ->
+				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Flaky, Note, Start, Output)) ->
 					(	var(Error) ->
 						passed_test(Test, File, Position, Note, Start, Output)
 					;	true
 					)
-				;	failed_test(Test, File, Position, failure_instead_of_success, Note, Start, Output)
+				;	failed_test(Test, File, Position, failure_instead_of_success, Flaky, Note, Start, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
@@ -1188,13 +1188,13 @@
 		skipped_test(Test, File, Position, Output).
 
 	check_error(Test, PossibleErrors, Error, File, Position, Start, Output) :-
-		check_error(Test, PossibleErrors, Error, File, Position, '', Start, Output).
+		check_error(Test, PossibleErrors, Error, File, Position, false, '', Start, Output).
 
-	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position, Note, Start, Output) :-
+	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position, Flaky, Note, Start, Output) :-
 		(	member(ExpectedError, [PossibleError| PossibleErrors]),
 			subsumes_term(ExpectedError, Error) ->
 			passed_test(Test, File, Position, Note, Start, Output)
-		;	failed_test(Test, File, Position, wrong_error(PossibleError, Error), Note, Start, Output)
+		;	failed_test(Test, File, Position, wrong_error(PossibleError, Error), Flaky, Note, Start, Output)
 		).
 
 	write_tests_header :-
@@ -1240,7 +1240,7 @@
 	passed_test(Test, File, Position, Start, Output) :-
 		passed_test(Test, File, Position, '', Start, Output).
 
-	non_deterministic_success(Test, File, Position, Note, Start, Output) :-
+	non_deterministic_success(Test, File, Position, Flaky, Note, Start, Output) :-
 		self(Object),
 		cpu_time(End),
 		Time is End - Start,
@@ -1248,29 +1248,31 @@
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(error, lgtunit, non_deterministic_success(Object, Test, File, Position, Note, Time)),
+		print_message(error, lgtunit, non_deterministic_success(Object, Test, File, Position, Flaky, Note, Time)),
 		set_output(Current).
 
 	non_deterministic_success(Test, File, Position, Start, Output) :-
-		non_deterministic_success(Test, File, Position, '', Start, Output).
+		non_deterministic_success(Test, File, Position, false, '', Start, Output).
 
-	failed_test(Test, File, Position, Reason, Note, Start, Output) :-
+	failed_test(Test, File, Position, Reason, Flaky, Note, Start, Output) :-
 		self(Object),
 		cpu_time(End),
 		Time is End - Start,
 		increment_failed_tests_counter,
-		(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
+		(	Flaky == true ->
+			increment_flaky_tests_counter
+		;	atom(Note), sub_atom(Note, _, _, _, flaky) ->
 			increment_flaky_tests_counter
 		;	true
 		),
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(error, lgtunit, failed_test(Object, Test, File, Position, Reason, Note, Time)),
+		print_message(error, lgtunit, failed_test(Object, Test, File, Position, Reason, Flaky, Note, Time)),
 		set_output(Current).
 
 	failed_test(Test, File, Position, Reason, Start, Output) :-
-		failed_test(Test, File, Position, Reason, '', Start, Output).
+		failed_test(Test, File, Position, Reason, false, '', Start, Output).
 
 	skipped_test(Test, File, Position, Note, Output) :-
 		self(Object),
@@ -1302,17 +1304,17 @@
 
 	:- meta_predicate(run_test_setup(*, *, *, *, *, *)).
 
-	run_test_setup(Test, Setup, File, Position, Note, Output) :-
+	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) :-
 		option_goal(Setup, Goal),
 		% expected success; failure or error means user error
 		(	Goal == true ->
 			true
-		;	catch(Goal, Error, failed_test(Test,File,Position,step_error(setup,Error),Note,0.0,Output)) ->
+		;	catch(Goal, Error, failed_test(Test,File,Position,step_error(setup,Error),Flaky,Note,0.0,Output)) ->
 			(	var(Error) ->
 				true
 			;	fail
 			)
-		;	failed_test(Test, File, Position, step_failure(setup), Note, 0.0, Output),
+		;	failed_test(Test, File, Position, step_failure(setup), Flaky, Note, 0.0, Output),
 			fail
 		).
 
@@ -1409,7 +1411,7 @@
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		(	Head = test(Test, _, Options) ->
-			parse_test_options(Options, Test, _, _, _, Note),
+			parse_test_options(Options, Test, _, _, _, _, Note),
 			assertz(test_(Test, skipped(Test, Position, Note)))
 		;	assertz(test_(Test, skipped(Test, Position)))
 		).
@@ -1421,15 +1423,15 @@
 		convert_test_outcome(Outcome0, Test, Goal0, Outcome, Goal),
 		logtalk_load_context(term_position, Position),
 		term_variables(Outcome0+Options, Variables),
-		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note),
 		(	Outcome == true ->
-			assertz(test_(Test, succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Note)))
+			assertz(test_(Test, succeeds(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		;	Outcome = deterministic(_) ->
-			assertz(test_(Test, deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Note)))
+			assertz(test_(Test, deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		;	Outcome == fail ->
-			assertz(test_(Test, fails(Test, Variables, Position, Condition, Setup, Cleanup, Note)))
+			assertz(test_(Test, fails(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		;	% errors
-			assertz(test_(Test, throws(Test, Variables, Outcome, Position, Condition, Setup, Cleanup, Note)))
+			assertz(test_(Test, throws(Test, Variables, Outcome, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		).
 
 	% unit test idiom test/2
@@ -1492,8 +1494,8 @@
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		term_variables(Options, Variables),
-		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions),
-		assertz(test_(Test, quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Note))).
+		parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, QuickCheckOptions),
+		assertz(test_(Test, quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note))).
 
 	% unit test idiom quick_check/2
 	term_expansion(quick_check(Test, Template),  [(test(Test, [], quick_check) :- ::run_quick_check_tests(Template, QuickCheckOptions, _, _, _))]) :-
@@ -1672,12 +1674,12 @@
 		;	true
 		).
 
-	parse_test_options(Options, Test, Condition, Setup, Cleanup, Note) :-
+	parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note) :-
 		% notes can be variables (e.g. a parameter variable or a variable shared with the
 		% test clause body);  use a boolean flag to track the presence of a note/1 option
-		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note, _NoteFlag).
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, _NoteFlag).
 
-	parse_test_options([], _, Condition, Setup, Cleanup, Note, NoteFlag) :-
+	parse_test_options([], _, Condition, Setup, Cleanup, Flaky, Note, NoteFlag) :-
 		(	var(Condition) ->
 			% no condition/1 option found
 			Condition = true
@@ -1693,27 +1695,38 @@
 			Cleanup = true
 		;	true
 		),
+		(	var(Flaky) ->
+			% no flaky/0 option found
+			Flaky = false
+		;	true
+		),
 		(	NoteFlag == true ->
 			true
 		;	% no note/1 option found
 			Note = ''
 		).
-	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup, Note, NoteFlag) :-
+	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup, Flaky, Note, NoteFlag) :-
 		(	Option = condition(Goal) ->
 			compile_test_step_aux_predicate(Test, '__condition', Goal, Condition)
 		;	Option = setup(Goal) ->
 			compile_test_step_aux_predicate(Test, '__setup', Goal, Setup)
 		;	Option = cleanup(Goal) ->
 			compile_test_step_aux_predicate(Test, '__cleanup', Goal, Cleanup)
+		;	Option = flaky ->
+			Flaky = true
 		;	Option = note(Note) ->
-			NoteFlag = true
+			NoteFlag = true,
+			(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
+				Flaky = true
+			;	true
+			)
 		;	quick_check_option(Option) ->
 			% handled separately
 			true
 		;	% ignore but warn non-recognized options
 			print_message(warning, lgtunit, invalid_test_option(Test, Option))
 		),
-		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note, NoteFlag).
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, NoteFlag).
 
 	compile_test_step_aux_predicate(Test, Step, Goal, Head) :-
 		test_name_to_aux_predicate_name(Test, Step, Name),
@@ -1734,8 +1747,8 @@
 		assertz(auxiliary_predicate_counter_(NewCounter)),
 		atomic_list_concat([TestName, '_', TestArity, '_', NewCounter, Step], AuxName).
 
-	parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Note, QuickCheckOptions) :-
-		parse_test_options(Options, Test, Condition, Setup, Cleanup, Note),
+	parse_quick_check_idiom_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, QuickCheckOptions) :-
+		parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note),
 		parse_quick_check_options(Options, QuickCheckOptions).
 
 	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label), v(Verbose), pb(ProgressBar, Tick)| Other]) :-

@@ -438,6 +438,9 @@ The currently supported options are (non-recognized options are ignored):
 - `cleanup(Goal)`  
 	Cleanup goal for the test (default goal is `true`).
 
+- `flaky`  
+	Declare the test as a flaky test.
+
 - `note(Term)`  
 	Annotation to print (between parenthesis by default) after the test result (default is `''`); the annotation term can share variables with the test goal, which can be used to pass additional information about the test result.
 
@@ -1149,11 +1152,19 @@ Flaky tests
 Flaky tests are tests that pass or fail non-deterministically, usually due to
 external conditions (e.g. computer or network load). Thus, flaky tests often
 don't result from bugs in the code being tested itself but from test execution
-conditions that are not predictable. The `note/1` annotation can be used to
-alert that a test failure is for a flaky test. If the `note/1` argument is an
-atom containing the sub-atom `flaky`, the testing automation support outputs
-the text `[flaky]` when reporting failed tests. Moreover, the `logtalk_tester`
-automation script will ignore failed flaky tests when setting its exit status.
+conditions that are not predictable. The `flaky/0` test option declares a test
+to be flaky. For example:
+
+	test(foo, true, [flaky]) :-
+		...
+
+For backawards compatibility, the `note/1` annotation can also be used to
+alert that a test failure is for a flaky test when its argument is an atom
+containing the sub-atom `flaky`.
+
+The testing automation support outputs the text `[flaky]` when reporting
+failed flaky tests. Moreover, the `logtalk_tester` automation script will
+ignore failed flaky tests when setting its exit status.
 
 
 Debugging messages in tests

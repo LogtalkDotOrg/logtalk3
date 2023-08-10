@@ -612,6 +612,11 @@ ignored):</p>
 </div>
 </li>
 <li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">flaky</span></code></div>
+<div class="line">Declare the test as a flaky test.</div>
+</div>
+</li>
+<li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">note(Term)</span></code></div>
 <div class="line">Annotation to print (between parenthesis by default) after the test
 result (default is <code class="docutils literal notranslate"><span class="pre">''</span></code>); the annotation term can share variables
@@ -1318,12 +1323,19 @@ any open stream connected to the file before deleting it.</p>
 <p>Flaky tests are tests that pass or fail non-deterministically, usually
 due to external conditions (e.g. computer or network load). Thus, flaky
 tests often don’t result from bugs in the code being tested itself but
-from test execution conditions that are not predictable. The <code class="docutils literal notranslate"><span class="pre">note/1</span></code>
-annotation can be used to alert that a test failure is for a flaky test.
-If the <code class="docutils literal notranslate"><span class="pre">note/1</span></code> argument is an atom containing the sub-atom <code class="docutils literal notranslate"><span class="pre">flaky</span></code>,
-the testing automation support outputs the text <code class="docutils literal notranslate"><span class="pre">[flaky]</span></code> when
-reporting failed tests. Moreover, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation
-script will ignore failed flaky tests when setting its exit status.</p>
+from test execution conditions that are not predictable. The <code class="docutils literal notranslate"><span class="pre">flaky/0</span></code>
+test option declares a test to be flaky. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(foo, <span class="k">true</span>, [flaky]) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>For backawards compatibility, the <code class="docutils literal notranslate"><span class="pre">note/1</span></code> annotation can also be used
+to alert that a test failure is for a flaky test when its argument is an
+atom containing the sub-atom <code class="docutils literal notranslate"><span class="pre">flaky</span></code>.</p>
+<p>The testing automation support outputs the text <code class="docutils literal notranslate"><span class="pre">[flaky]</span></code> when
+reporting failed flaky tests. Moreover, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code>
+automation script will ignore failed flaky tests when setting its exit
+status.</p>
 </section>
 <section id="debugging-messages-in-tests">
 <h2>Debugging messages in tests<a class="headerlink" href="#debugging-messages-in-tests" title="Permalink to this heading"></a></h2>
