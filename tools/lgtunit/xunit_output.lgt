@@ -29,9 +29,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 3:3:2,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2023-08-04,
+		date is 2023-08-11,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -70,9 +70,6 @@
 	message_hook(passed_test(Object, Test, File, Position, Note, Time)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, Time)))).
-	message_hook(non_deterministic_success(Object, Test, File, Position, Note, Time)) :-
-		!,
-		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note, Time)))).
 	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, Time)))).
@@ -135,8 +132,6 @@
 		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-Time]),
 		write_testcase_properties(Short, Position, Note),
 		write_xml_close_tag(testcase).
-	write_testcase_element_tags(non_deterministic_success(File, Position, Note, Time), ClassName, Name) :-
-		write_testcase_element_tags(failed_test(File, Position, non_deterministic_success, Note, Time), ClassName, Name).
 	write_testcase_element_tags(failed_test(File, Position, Reason, Note, Time), ClassName, Name) :-
 		suppress_path_prefix(File, Short),
 		failed_test(Reason, Description, Type, Error),
@@ -219,7 +214,6 @@
 		findall(
 			TestTime,
 			(	message_cache_(test(Object, _, passed_test(_, _, _, TestTime)))
-			;	message_cache_(test(Object, _, non_deterministic_success(_, _, _, TestTime)))
 			;	message_cache_(test(Object, _, failed_test(_, _, _, _, TestTime)))
 			),
 			TestTimes

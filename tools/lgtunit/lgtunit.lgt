@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:3:0,
+		version is 16:4:0,
 		author is 'Paulo Moura',
-		date is 2023-08-10,
+		date is 2023-08-11,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1066,7 +1066,7 @@
 					(	var(Error) ->
 						(	Deterministic == true ->
 							passed_test(Test, File, Position, Note, Start, Output)
-						;	non_deterministic_success(Test, File, Position, Flaky, Note, Start, Output)
+						;	failed_test(Test, File, Position, non_deterministic_success, Flaky, Note, Start, Output)
 						)
 					;	true
 					)
@@ -1154,7 +1154,7 @@
 			(	var(Error) ->
 				(	Deterministic == true ->
 					passed_test(Test, File, Position, Start, Output)
-				;	non_deterministic_success(Test, File, Position, Start, Output)
+				;	failed_test(Test, File, Position, non_deterministic_success, Start, Output)
 				)
 			;	true
 			)
@@ -1239,20 +1239,6 @@
 
 	passed_test(Test, File, Position, Start, Output) :-
 		passed_test(Test, File, Position, '', Start, Output).
-
-	non_deterministic_success(Test, File, Position, Flaky, Note, Start, Output) :-
-		self(Object),
-		cpu_time(End),
-		Time is End - Start,
-		increment_failed_tests_counter,
-		% ensure that any redirection of the current output stream by
-		% the test itself doesn't affect printing the test results
-		current_output(Current), set_output(Output),
-		print_message(error, lgtunit, non_deterministic_success(Object, Test, File, Position, Flaky, Note, Time)),
-		set_output(Current).
-
-	non_deterministic_success(Test, File, Position, Start, Output) :-
-		non_deterministic_success(Test, File, Position, false, '', Start, Output).
 
 	failed_test(Test, File, Position, Reason, Flaky, Note, Start, Output) :-
 		self(Object),

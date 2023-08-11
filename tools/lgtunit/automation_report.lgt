@@ -85,14 +85,6 @@
 		;	true
 		),
 		nl(results_file).
-	message_hook(non_deterministic_success(Object, Test, File, _, Note, _)) :-
-		write(results_file, 'failed\t'), write(results_file, File), write(results_file, '\t'),
-		writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
-		(	atom(Note), sub_atom(Note, _, _, _, flaky) ->
-			write(results_file, ' [flaky]')
-		;	true
-		),
-		nl(results_file).
 	% skipped test
 	message_hook(skipped_test(Object, Test, File, _, _)) :-
 		write(results_file, 'skipped\t'), write(results_file, File), write(results_file, '\t'),

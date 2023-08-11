@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 3:4:2,
+		version is 3:5:0,
 		author is 'Paulo Moura',
-		date is 2023-08-04,
+		date is 2023-08-11,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -70,9 +70,6 @@
 	message_hook(passed_test(Object, Test, File, Position, Note, Time)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, Time)))).
-	message_hook(non_deterministic_success(Object, Test, File, Position, Note, Time)) :-
-		!,
-		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note, Time)))).
 	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, Time)))).
@@ -171,14 +168,6 @@
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-Time, result-'Pass']),
 		write_test_element_traits(Short, Position, Note),
 		write_xml_close_tag(test).
-	write_test_element_tags(non_deterministic_success(File, Position, Note, Time), Name, Object) :-
-		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-Time, result-'Fail']),
-		write_test_element_traits(Short, Position, Note),
-		write_xml_open_tag(failure, []),
-		write_xml_cdata_element(message, [], 'Non-deterministic success'),
-		write_xml_close_tag(failure),
-		write_xml_close_tag(test).
 	write_test_element_tags(failed_test(File, Position, Reason, Note, Time), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-Time, result-'Fail']),
@@ -219,7 +208,6 @@
 		findall(
 			TestTime,
 			(	message_cache_(test(Object, _, passed_test(_, _, _, TestTime)))
-			;	message_cache_(test(Object, _, non_deterministic_success(_, _, _, TestTime)))
 			;	message_cache_(test(Object, _, failed_test(_, _, _, _, TestTime)))
 			),
 			TestTimes

@@ -52,6 +52,10 @@ and `essentially_equal/3` predicates.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool to handle a non-deterministic success test result
+as any other test failure (thus suppressing `non_deterministic_success/6` print
+messages).
+
 * ADDED: Predicate `approximately_equal/2` to the `lgtunit` tool.
 
 * ADDED: The `lgtunit` tool now supports a `flaky/0` test option as the
