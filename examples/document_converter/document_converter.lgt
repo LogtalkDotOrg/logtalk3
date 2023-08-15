@@ -22,9 +22,9 @@
 :- object(document).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2018-12-10,
+		date is 2023-08-15,
 		comment is 'Document to text conversion example using the Apache Tika Java library.'
 	]).
 
@@ -73,7 +73,7 @@
 	convert_file_java(Document, Contents) :-
 		% parse method arguments
 		java('org.apache.tika.parser.AutoDetectParser')::new(AutoDetectParser),
-		java('org.apache.tika.sax.BodyContentHandler')::new(BodyContentHandler),
+		java('org.apache.tika.sax.BodyContentHandler')::new([-1], BodyContentHandler),
 		java('org.apache.tika.metadata.Metadata')::new(Metadata),
 		java('java.io.FileInputStream')::new([Document], FileInputStream),
 		java('org.apache.tika.parser.ParseContext')::new(ParseContext),

@@ -78,7 +78,10 @@ files are organized in multiple sub-directories.
 Examples
 --------
 
-IMPROVED: The `metapredicates` example.
+* IMPROVED: The `metapredicates` example.
+
+* UPDATED: The `document_converter` example to allow converting large PDF
+files. Tested with Apache Tika 2.8.0.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
