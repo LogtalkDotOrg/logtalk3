@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:64:3,
+		version is 0:64:4,
 		author is 'Paulo Moura',
-		date is 2023-07-21,
+		date is 2023-08-15,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1753,7 +1753,7 @@
 			{call(Operator2, UpperFixedVersion, Upper)} ->
 			true
 		;	backend(Backend, Name),
-			print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator1, Lower, Operator2, Upper])
+			print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q and ~w ~q'+[Name, Operator1, Lower, Operator2, Upper])
 		).
 	check_range_dependency(_, _, _, _, _, none).
 

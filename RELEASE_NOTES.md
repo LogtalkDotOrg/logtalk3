@@ -75,6 +75,10 @@ files are organized in multiple sub-directories.
 
 * FIXED: The `lgtunit` tool xUnit reports escaping of XML special characters.
 
+* FIXED: Bug in the `packs` tool warning message when installing a pack
+requires updating the backend Prolog system. Thanks to Jacob Friedman for
+the bug report.
+
 Examples
 --------
 
