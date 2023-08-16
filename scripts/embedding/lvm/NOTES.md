@@ -29,7 +29,11 @@ The following scripts are provided:
 	PowerShell script for Windows systems
 
 Both scripts create a `logtalk.pl` file with the Logtalk compiler and
-runtime and an optional `application.pl` file for an application.
+runtime and an optional `application.pl` file for an application. When
+a loader option is used, a `loader.pl` file is also created.
+
+When the encrypt option is used, `*.plx` files are generated instead
+of `*.pl` files.
 
 Usage
 -----

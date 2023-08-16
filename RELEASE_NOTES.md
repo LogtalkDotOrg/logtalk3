@@ -87,6 +87,12 @@ Examples
 * UPDATED: The `document_converter` example to allow converting large PDF
 files. Tested with Apache Tika 2.8.0.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The LVM embedding scripts to support encryption of the generated
+Prolog files. Requires LVM 6.4.0 or later version.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

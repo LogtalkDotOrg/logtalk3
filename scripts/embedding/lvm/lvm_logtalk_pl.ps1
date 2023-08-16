@@ -4,7 +4,7 @@
 ##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on July 18, 2023
+##   Last updated on August 16, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2022 Hans N. Beck
@@ -31,16 +31,17 @@
 [CmdletBinding()]
 param(
 	[Parameter()]
-	[Switch]$c, 
-	[Switch]$x, 
+	[Switch]$c,
+	[Switch]$x,
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "application",
 	[String]$p = ($env:LOGTALKHOME + '\paths\paths.pl'),
-	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
-	[String]$s, 
+	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'),
+	[String]$s,
 	[String]$l,
-	[Switch]$f, 
+	[Switch]$f,
+	[Switch]$x,
 	[String]$g = "true",
 	[Switch]$v,
 	[Switch]$h
@@ -49,7 +50,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.8")
+	Write-Output ($myName + " 0.9")
 }
 
 function Get-Logtalkhome {
@@ -96,7 +97,7 @@ function Write-Usage-Help() {
 	Write-Output "code given its loader file."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-f]")
+	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-f] [-x]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
@@ -109,6 +110,7 @@ function Write-Usage-Help() {
 	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output "  -f copy foreign library files loaded by the application"
+	Write-Output "  -x encrypt the generated logtalk.pl and application.pl files"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
 	Write-Output ""
@@ -280,11 +282,22 @@ if ($l -ne "") {
 		Set-Content $d/application.pl
 
 	Set-Content -Path $d/loader.pl -Value ":- initialization(("
+
+	if ($x -eq $true) {
+		$GoalEncryptLogtalk = "encrypt_program('" + $d.Replace('\', '/') + "/logtalk.pl'),halt."
+		$GoalEncryptApplication = "encrypt_program('" + $d.Replace('\', '/') + "/application.pl'),halt."
+		lvmpl --goal $GoalEncryptLogtalk
+		lvmpl --goal $GoalEncryptApplication
+		Remove-Item $d/logtalk.pl -Confirm
+		Remove-Item $d/application.pl -Confirm
+	}
+
 	if ($f -eq $true) {
 		$LoaderParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(report,off), logtalk_load('$loader'), open('" + $d.Replace('\', '/') + "/loader.pl',append,Stream), forall((current_plugin(PlugIn), plugin_property(PlugIn,file(File))), (decompose_file_name(File,_,Basename,_), format(Stream,'\tload_foreign_library(~q),~n',[Basename]))), close(Stream), halt."
 
 		lvmpl --goal $LoaderParam
 	}
+
 	Add-Content -Path $d/loader.pl -Value  "	consult(logtalk),"
 	Add-Content -Path $d/loader.pl -Value  "	consult(application)"
 	Add-Content -Path $d/loader.pl -Value  "))."
