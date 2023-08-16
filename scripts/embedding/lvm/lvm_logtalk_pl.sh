@@ -109,9 +109,10 @@ encrypt="false"
 usage_help()
 {
 	echo 
-	echo "This script creates a LVM logtalk.pl file with the Logtalk compiler and"
-	echo "runtime and an optional application.pl file from an application source"
-	echo "code given its loader file."
+	echo "This script creates a LVM logtalk.pl file with the Logtalk compiler/runtime"
+	echo "and an optional application.pl file from an application source code given"
+	echo "its loader file. When embedding an application, this script also creates a"
+	echo "loader.pl file for loading all generated Prolog and foreign library files."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-f] [-x]"

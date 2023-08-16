@@ -92,9 +92,10 @@ function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
-	Write-Output "This script creates a LVM logtalk.pl file with the Logtalk compiler and"
-	Write-Output "runtime and an optional application.pl file from an application source"
-	Write-Output "code given its loader file."
+	Write-Output "This script creates a LVM logtalk.pl file with the Logtalk compiler/runtime"
+	Write-Output "and an optional application.pl file from an application source code given"
+	Write-Output "its loader file. When embedding an application, this script also creates a"
+	Write-Output "loader.pl file for loading all generated Prolog and foreign library files."
 	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-f] [-x]")
