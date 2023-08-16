@@ -84,8 +84,9 @@ Examples
 
 * IMPROVED: The `metapredicates` example.
 
-* UPDATED: The `document_converter` example to allow converting large PDF
-files. Tested with Apache Tika 2.8.0.
+* UPDATED: The `document_converter` example to allow converting large files
+and to turn off OCR for faster testing. Also added samples in formats other
+than PDF. Tested with Apache Tika 2.8.0.
 
 Installers and installation scripts
 -----------------------------------

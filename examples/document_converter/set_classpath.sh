@@ -30,3 +30,5 @@ for jar in "$cwd"/jars/*.jar; do
 done
 
 export CLASSPATH
+
+export TIKA_CONFIG="$cwd"/jars/tika-config.xml 

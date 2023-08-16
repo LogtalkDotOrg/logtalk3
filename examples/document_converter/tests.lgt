@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2023-03-13,
+		date is 2023-08-16,
 		comment is 'Tests for the "document_converter" example.'
 	]).
 
@@ -34,15 +34,45 @@
 		sub_atom(CLASSPATH, _, _, _, 'tika-app-').
 
 	cleanup :-
-		^^clean_file('sample.txt').
+		^^clean_file('test_files/sample.pdf.txt'),
+		^^clean_file('test_files/sample.doc.txt'),
+		^^clean_file('test_files/sample.docx.txt'),
+		^^clean_file('test_files/sample.odt.txt').
 
-	test(document_converter_convert_to_text, true(os::file_exists(Target))) :-
-		^^file_path('sample.pdf', Source),
-		^^file_path('sample.txt', Target),
+	test(document_converter_convert_pdf_to_text, true(os::file_exists(Target))) :-
+		^^file_path('test_files/sample.pdf', Source),
+		^^file_path('test_files/sample.pdf.txt', Target),
 		document::convert(Source, Target).
 
-	test(document_converter_get_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
-		^^file_path('sample.pdf', Source),
+	test(document_converter_convert_doc_to_text, true(os::file_exists(Target))) :-
+		^^file_path('test_files/sample.doc', Source),
+		^^file_path('test_files/sample.doc.txt', Target),
+		document::convert(Source, Target).
+
+	test(document_converter_convert_docx_to_text, true(os::file_exists(Target))) :-
+		^^file_path('test_files/sample.docx', Source),
+		^^file_path('test_files/sample.docx.txt', Target),
+		document::convert(Source, Target).
+
+	test(document_converter_convert_odt_to_text, true(os::file_exists(Target))) :-
+		^^file_path('test_files/sample.odt', Source),
+		^^file_path('test_files/sample.odt.txt', Target),
+		document::convert(Source, Target).
+
+	test(document_converter_get_pdf_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.pdf', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_doc_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.doc', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_docx_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.docx', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_odt_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.odt', Source),
 		document::contents(Source, Contents).
 
 :- end_object.

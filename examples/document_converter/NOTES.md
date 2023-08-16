@@ -28,6 +28,6 @@ from:
 
 https://tika.apache.org
 
-After downloading the Tika JAR file (for version 2.7.0, this would be the
-`tika-app-2.7.0.jar` file), copy it to this example `jars` folder before
+After downloading the Tika JAR file (for version 2.8.0, this would be the
+`tika-app-2.8.0.jar` file), copy it to this example `jars` folder before
 running the example.
