@@ -56,4 +56,12 @@
 		obj::w(<=>(1,2)),
 		^^text_output_assertion('1<=>2', Assertion).
 
+	test(op_3_07, true(Term == <=>(1,2))) :-
+		^^set_text_input('1<=>2. '),
+		obj::rt(Term).
+
+	test(op_3_08, true(Term == <=>(1,2))) :-
+		^^set_text_input('1<=>2. '),
+		obj::r(Term).
+
 :- end_object.

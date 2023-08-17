@@ -105,8 +105,8 @@ Tests
 -----
 
 * ADDED: Additional tests for the Logtalk `op/3` directive for checking the
-semantics of the `write_term/2-3`, `writeq/1-2`, and `write/1-2` predicates
-in the presence of local operator definitions.
+semantics of the `read_term/2-3`, `read/1-2`, `write_term/2-3`, `writeq/1-2`,
+and `write/1-2` predicates in the presence of local operator definitions.
 
 Installers and installation scripts
 -----------------------------------
