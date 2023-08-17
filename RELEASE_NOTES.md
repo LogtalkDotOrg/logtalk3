@@ -100,6 +100,13 @@ Examples
 and to turn off OCR for faster testing. Also added samples in formats other
 than PDF. Tested with Apache Tika 2.8.0.
 
+Tests
+-----
+
+* ADDED: Additional tests for the Logtalk `op/3` directive for checking the
+semantics of the `write_term/2-3`, `writeq/1-2`, and `write/1-2` predicates
+in the presence of local operator definitions.
+
 Installers and installation scripts
 -----------------------------------
 

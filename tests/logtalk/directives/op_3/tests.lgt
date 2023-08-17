@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2021-08-18,
+		date is 2023-08-17,
 		comment is 'Unit tests for the op/3 built-in directive.'
 	]).
 
@@ -40,5 +40,20 @@
 
 	test(op_3_03, true(Priority-Specifier == 601-xfy)) :-
 		current_op(Priority, Specifier, baz).
+
+	test(op_3_04, true(Assertion)) :-
+		^^set_text_output(''),
+		obj::wt(<=>(1,2)),
+		^^text_output_assertion('1<=>2', Assertion).
+
+	test(op_3_05, true(Assertion)) :-
+		^^set_text_output(''),
+		obj::wq(<=>(1,2)),
+		^^text_output_assertion('1<=>2', Assertion).
+
+	test(op_3_06, true(Assertion)) :-
+		^^set_text_output(''),
+		obj::w(<=>(1,2)),
+		^^text_output_assertion('1<=>2', Assertion).
 
 :- end_object.
