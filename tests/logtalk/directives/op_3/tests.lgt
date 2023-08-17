@@ -64,4 +64,8 @@
 		^^set_text_input('1<=>2. '),
 		obj::r(Term).
 
+	cleanup :-
+		^^clean_text_input,
+		^^clean_text_output.
+
 :- end_object.
