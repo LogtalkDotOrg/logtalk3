@@ -3532,7 +3532,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal degit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 69, 0, b01)).
+'$lgt_version_data'(logtalk(3, 69, 0, b02)).
 
 
 
@@ -16648,10 +16648,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_write_term_options'(runtime, _, _).
 
 '$lgt_check_write_term_options'(compile(_,_,_), Predicate, Options) :-
-	'$lgt_is_list'(Options),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	(	'$lgt_member'(Option, Options),
+	(	'$lgt_is_list'(Options),
+		'$lgt_compiler_flag'(portability, warning),
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_member'(Option, Options),
 		nonvar(Option),
 		\+ '$lgt_iso_spec_write_term_option'(Option) ->
 		'$lgt_increment_compiling_warnings_counter',

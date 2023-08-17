@@ -25,6 +25,12 @@ RELEASE NOTES
 3.69.0 - August ??, 2023
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Compilation of `write_term/2-3` goals with an empty list of options
+would fail to take into account local operator definitions.
+
 Prolog adapter and integration files
 ------------------------------------
 
