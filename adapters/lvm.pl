@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 6.3.0 and later versions
-%  Last updated on July 19, 2023
+%  Last updated on August 17, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -596,7 +596,9 @@
 	% workaround embedding issue where a plug-in shared library may be already
 	% pre-loaded from a directory different from the original plug-in directory
 	(	decompose_file_name(Path, _, Basename, _),
-		current_plugin(Basename) ->
+		current_plugin(PlugIn),
+		plugin_property(PlugIn, file(File)),
+		decompose_file_name(File, _, Basename, _) ->
 		true
 	;	load_foreign_library(Path)
 	).

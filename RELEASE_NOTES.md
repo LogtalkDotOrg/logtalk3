@@ -25,6 +25,12 @@ RELEASE NOTES
 3.69.0 - August ??, 2023
 ========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: Workaround a LVM embedding application issue with plug-ins where the
+registry name differs from the shared library basename.
+
 Documentation
 -------------
 
