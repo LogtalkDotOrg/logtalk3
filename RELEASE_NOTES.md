@@ -28,9 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Compilation of `read_term/2-3` and `write_term/2-3` goals with
-an empty list of options would fail to take into account local operator
-definitions.
+* FIXED: Compilation of `read_term/2-3` and `write_term/2-3` goals would fail
+to take into account local operator definitions when the `portability` flag
+was set to `silent` (its default value).
 
 Prolog adapter and integration files
 ------------------------------------
