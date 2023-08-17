@@ -16625,10 +16625,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_read_term_options'(runtime, _, _).
 
 '$lgt_check_read_term_options'(compile(_,_,_), Predicate, Options) :-
-	'$lgt_is_list'(Options),
-	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	(	'$lgt_member'(Option, Options),
+	(	'$lgt_is_list'(Options),
+		'$lgt_compiler_flag'(portability, warning),
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_member'(Option, Options),
 		nonvar(Option),
 		\+ '$lgt_iso_spec_read_term_option'(Option) ->
 		'$lgt_increment_compiling_warnings_counter',
