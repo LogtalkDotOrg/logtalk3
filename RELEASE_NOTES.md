@@ -35,6 +35,9 @@ was set to `silent` (its default value).
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The LVM adapter file list of proprietary predicate properties for
+version 6.4.0.
+
 * FIXED: Workaround a LVM embedding application issue with plug-ins where the
 registry name differs from the shared library basename.
 

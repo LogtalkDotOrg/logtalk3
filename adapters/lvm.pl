@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 6.3.0 and later versions
-%  Last updated on August 17, 2023
+%  Last updated on August 18, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -180,15 +180,16 @@
 % compiler when checking if a predicate property is valid
 
 '$lgt_prolog_predicate_property'(control_construct).
-'$lgt_prolog_predicate_property'(file(_)).
-'$lgt_prolog_predicate_property'(line_).
 '$lgt_prolog_predicate_property'(discontiguous).
+'$lgt_prolog_predicate_property'(disk_predicate(_)).
+'$lgt_prolog_predicate_property'(file(_)).
+'$lgt_prolog_predicate_property'(foreign).
+'$lgt_prolog_predicate_property'(hidden_clauses).
 '$lgt_prolog_predicate_property'(indexed).
 '$lgt_prolog_predicate_property'(last_modified_generation(_)).
-'$lgt_prolog_predicate_property'(foreign).
+'$lgt_prolog_predicate_property'(line_).
 '$lgt_prolog_predicate_property'(number_of_clauses(_)).
 '$lgt_prolog_predicate_property'(spy).
-'$lgt_prolog_predicate_property'(disk_predicate(_)).
 
 
 
