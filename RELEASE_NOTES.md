@@ -44,6 +44,8 @@ registry name differs from the shared library basename.
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `op/3` directive.
+
 * IMPROVED: Documentation of the `asserta/1` and `assertz/1` built-in methods.
 
 * IMPROVED: Documentation of the `diagrams` tool `path_url_prefixes/3` and

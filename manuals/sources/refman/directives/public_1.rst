@@ -53,7 +53,7 @@ from any object. A public non-terminal can be used as an argument in
    Declaring a public operator does not make it global when the entity
    holding the scope directive is compiled and loaded. But declaring
    public operators provides a reusable specification for using them
-   in the entity clients.
+   in the entity clients (e.g. in :ref:`directives_uses_2` directives).
 
 Template and modes
 ------------------
