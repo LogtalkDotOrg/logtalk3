@@ -13,9 +13,9 @@
   <![endif]-->
   
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4dd76a21"></script>
+        <script src="../_static/documentation_options.js?v=9722baaf"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -140,7 +140,7 @@
            <div itemprop="articleBody">
              
   <section id="ports-profiler">
-<span id="library-ports-profiler"></span><h1><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code><a class="headerlink" href="#ports-profiler" title="Permalink to this heading"></a></h1>
+<span id="library-ports-profiler"></span><h1><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code><a class="headerlink" href="#ports-profiler" title="Link to this heading"></a></h1>
 <p>This tool counts and reports the number of times each port in the
 <em>procedure box model</em> is traversed during the execution of queries. It
 can also report the number of times each clause (or grammar rule) is
@@ -154,14 +154,14 @@ deterministic exits (reported in the <code class="docutils literal notranslate">
 result tables) and exits that leave choice-points (reported in the
 <code class="docutils literal notranslate"><span class="pre">*exit</span></code> column).</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#ports-profiler">../../docs/library_index.html#ports-profiler</a></p>
 <p>For sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ports_profiler(loader)).
 </pre></div>
 </div>
@@ -170,14 +170,14 @@ directory.</p>
 unique in a running session.</p>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ports_profiler(tester)).
 </pre></div>
 </div>
 </section>
 <section id="compiling-source-files-for-port-profiling">
-<h2>Compiling source files for port profiling<a class="headerlink" href="#compiling-source-files-for-port-profiling" title="Permalink to this heading"></a></h2>
+<h2>Compiling source files for port profiling<a class="headerlink" href="#compiling-source-files-for-port-profiling" title="Link to this heading"></a></h2>
 <p>To compile source files for port profiling, simply compile them in debug
 mode and with the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_source_file, [debug(on), source_data(on)]).
@@ -194,12 +194,12 @@ in debug mode. In this case, you will need to modify the loader files
 themselves.</p>
 </section>
 <section id="generating-profiling-data">
-<h2>Generating profiling data<a class="headerlink" href="#generating-profiling-data" title="Permalink to this heading"></a></h2>
+<h2>Generating profiling data<a class="headerlink" href="#generating-profiling-data" title="Link to this heading"></a></h2>
 <p>After loading this tool and compiling the source files that you want to
 profile in debug mode, simply call the goals to be profiled.</p>
 </section>
 <section id="printing-profiling-data-reports">
-<h2>Printing profiling data reports<a class="headerlink" href="#printing-profiling-data-reports" title="Permalink to this heading"></a></h2>
+<h2>Printing profiling data reports<a class="headerlink" href="#printing-profiling-data-reports" title="Link to this heading"></a></h2>
 <p>After calling the goals that you want to profile, you can print a table
 with all profile data by typing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ports_profiler<span class="o">::</span>data.
@@ -282,7 +282,7 @@ yes
 </div>
 </section>
 <section id="interpreting-profiling-data">
-<h2>Interpreting profiling data<a class="headerlink" href="#interpreting-profiling-data" title="Permalink to this heading"></a></h2>
+<h2>Interpreting profiling data<a class="headerlink" href="#interpreting-profiling-data" title="Link to this heading"></a></h2>
 <p>Some useful information that can be inferred from the profiling data
 include:</p>
 <ul class="simple">
@@ -301,7 +301,7 @@ include:</p>
 behavior for the profiled predicates.</p>
 </section>
 <section id="profiling-prolog-modules">
-<h2>Profiling Prolog modules<a class="headerlink" href="#profiling-prolog-modules" title="Permalink to this heading"></a></h2>
+<h2>Profiling Prolog modules<a class="headerlink" href="#profiling-prolog-modules" title="Link to this heading"></a></h2>
 <p>This tool can also be applied to Prolog modules that Logtalk is able to
 compile as objects. For example, if the Prolog module file is named
 <code class="docutils literal notranslate"><span class="pre">module.pl</span></code>, try:</p>
@@ -313,7 +313,7 @@ of proprietary extensions, this solution is not expected to work for all
 cases.</p>
 </section>
 <section id="profiling-plain-prolog-code">
-<h2>Profiling plain Prolog code<a class="headerlink" href="#profiling-plain-prolog-code" title="Permalink to this heading"></a></h2>
+<h2>Profiling plain Prolog code<a class="headerlink" href="#profiling-plain-prolog-code" title="Link to this heading"></a></h2>
 <p>This tool can also be applied to plain Prolog code. For example, if the
 Prolog file is named <code class="docutils literal notranslate"><span class="pre">code.pl</span></code>, simply define an object including its
 code and declaring as public any predicates that you want to use as
@@ -355,7 +355,7 @@ are straight-forward (e.g. adding <code class="docutils literal notranslate"><sp
 module library predicates).</p>
 </section>
 <section id="known-issues">
-<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
 <p>Determinism information is currently not available when using Quintus
 Prolog as the backend compiler.</p>
 </section>

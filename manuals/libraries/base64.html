@@ -13,9 +13,9 @@
   <![endif]-->
   
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4dd76a21"></script>
+        <script src="../_static/documentation_options.js?v=9722baaf"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -168,19 +168,19 @@
            <div itemprop="articleBody">
              
   <section id="base64">
-<span id="library-base64"></span><h1><code class="docutils literal notranslate"><span class="pre">base64</span></code><a class="headerlink" href="#base64" title="Permalink to this heading"></a></h1>
+<span id="library-base64"></span><h1><code class="docutils literal notranslate"><span class="pre">base64</span></code><a class="headerlink" href="#base64" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">base64</span></code> library provides predicates for parsing and generating
 data in the Base64 and Base64URL formats as per the specification found
 at:</p>
 <p><a class="reference external" href="https://www.rfc-editor.org/rfc/rfc4648">https://www.rfc-editor.org/rfc/rfc4648</a></p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#base64">../../docs/library_index.html#base64</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> utility
 file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(base64(loader)).
@@ -188,14 +188,14 @@ file:</p>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(base64(tester)).
 </pre></div>
 </div>
 </section>
 <section id="encoding">
-<h2>Encoding<a class="headerlink" href="#encoding" title="Permalink to this heading"></a></h2>
+<h2>Encoding<a class="headerlink" href="#encoding" title="Link to this heading"></a></h2>
 <p>Encoding a list of bytes in Base64 format is accomplished by the
 <code class="docutils literal notranslate"><span class="pre">base64::generate/2</span></code> predicate. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;Hello world!&#39;</span>, <span class="nv">Bytes</span>),
@@ -224,7 +224,7 @@ yes
 codes. The input URL should be in the same format.</p>
 </section>
 <section id="decoding">
-<h2>Decoding<a class="headerlink" href="#decoding" title="Permalink to this heading"></a></h2>
+<h2>Decoding<a class="headerlink" href="#decoding" title="Link to this heading"></a></h2>
 <p>Decoding of Base64 data is accomplished using the <code class="docutils literal notranslate"><span class="pre">base64::parse/2</span></code>
 predicate. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> base64<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;SGVsbG8gd29ybGQh&#39;</span>), <span class="nv">Bytes</span>),

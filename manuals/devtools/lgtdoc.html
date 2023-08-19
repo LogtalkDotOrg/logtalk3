@@ -13,9 +13,9 @@
   <![endif]-->
   
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4dd76a21"></script>
+        <script src="../_static/documentation_options.js?v=9722baaf"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -136,7 +136,7 @@
            <div itemprop="articleBody">
              
   <section id="lgtdoc">
-<span id="library-lgtdoc"></span><h1><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code><a class="headerlink" href="#lgtdoc" title="Permalink to this heading"></a></h1>
+<span id="library-lgtdoc"></span><h1><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code><a class="headerlink" href="#lgtdoc" title="Link to this heading"></a></h1>
 <p>This is the default Logtalk documenting tool for generating API
 documentation for libraries and applications. It uses the structural
 reflection API to extract and output in XML format relevant
@@ -151,26 +151,26 @@ with Sphinx), or plain text files. The scripts are described in their
 the <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml/NOTES.md</span></code> for details, including the <strong>required
 third-party software</strong>.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#lgtdoc">../../docs/library_index.html#lgtdoc</a></p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtdoc(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(lgtdoc(tester)).
 </pre></div>
 </div>
 </section>
 <section id="documenting-source-code">
-<h2>Documenting source code<a class="headerlink" href="#documenting-source-code" title="Permalink to this heading"></a></h2>
+<h2>Documenting source code<a class="headerlink" href="#documenting-source-code" title="Link to this heading"></a></h2>
 <p>For information on documenting your source code, notably on documenting
 directives, consult the documenting section of the User Manual:</p>
 <p><a class="reference external" href="../../manuals/userman/documenting.html">../../manuals/userman/documenting.html</a></p>
@@ -192,7 +192,7 @@ indexes. Note that the source files to be documented <strong>must</strong> be lo
 prior to using this tool predicates to generate the documentation.</p>
 </section>
 <section id="generating-documentation">
-<h2>Generating documentation<a class="headerlink" href="#generating-documentation" title="Permalink to this heading"></a></h2>
+<h2>Generating documentation<a class="headerlink" href="#generating-documentation" title="Link to this heading"></a></h2>
 <p>For a simple application, assuming a library alias is defined for it
 (e.g. <code class="docutils literal notranslate"><span class="pre">my_app</span></code>), and at the top-level interpreter, we can generate the
 application documentation by typing:</p>
@@ -217,15 +217,15 @@ protocol documentation for details on the available options.</p>
 <p>After generating the XML documenting files, these can be easily
 converted into final formats using the provided scripts. For example,
 assuming that we want to generate HTML documentation:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd xml_docs
-$ lgt2html -t &quot;My app&quot;
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cd xml_docs
+<span class="err">$</span> lgt2html <span class="o">-</span>t <span class="s">&quot;My app&quot;</span>
 </pre></div>
 </div>
 <p>To generate the documentation in Sphinx format instead (as used by
 Logtalk itself for its APIs):</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd xml_docs
-$ lgt2rst -s -- -q -p &quot;Application name&quot; -a &quot;Author name&quot; -v &quot;Version X.YZ.P&quot;
-$ make html
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cd xml_docs
+<span class="err">$</span> lgt2rst <span class="o">-</span>s <span class="o">--</span> <span class="o">-</span>q <span class="o">-</span>p <span class="s">&quot;Application name&quot;</span> <span class="o">-</span>a <span class="s">&quot;Author name&quot;</span> <span class="o">-</span>v <span class="s">&quot;Version X.YZ.P&quot;</span>
+<span class="err">$</span> make html
 </pre></div>
 </div>
 <p>In this case, the generated documentation will be in the
@@ -239,7 +239,7 @@ automatically when the <code class="docutils literal notranslate"><span class="p
 target.</p>
 </section>
 <section id="documentation-linter-checks">
-<h2>Documentation linter checks<a class="headerlink" href="#documentation-linter-checks" title="Permalink to this heading"></a></h2>
+<h2>Documentation linter checks<a class="headerlink" href="#documentation-linter-checks" title="Link to this heading"></a></h2>
 <p>When the <code class="docutils literal notranslate"><span class="pre">lgtdoc_missing_directives</span></code> flag is set to <code class="docutils literal notranslate"><span class="pre">warning</span></code> (its
 usual default value), the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool prints warnings on missing
 entity <code class="docutils literal notranslate"><span class="pre">info/1</span></code> directives and missing predicate <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and

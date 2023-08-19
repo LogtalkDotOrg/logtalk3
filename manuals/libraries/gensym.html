@@ -13,9 +13,9 @@
   <![endif]-->
   
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=4dd76a21"></script>
+        <script src="../_static/documentation_options.js?v=9722baaf"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -167,33 +167,33 @@
            <div itemprop="articleBody">
              
   <section id="gensym">
-<span id="library-gensym"></span><h1><code class="docutils literal notranslate"><span class="pre">gensym</span></code><a class="headerlink" href="#gensym" title="Permalink to this heading"></a></h1>
+<span id="library-gensym"></span><h1><code class="docutils literal notranslate"><span class="pre">gensym</span></code><a class="headerlink" href="#gensym" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">gensym</span></code> library implements predicates for generating unique
 atoms. The public predicates are declared synchronized to prevent race
 conditions when using a backend Prolog compiler with multi-threading
 support.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#gensym">../../docs/library_index.html#gensym</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(gensym(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(gensym(tester)).
 </pre></div>
 </div>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">gensym_core</span></code> category implements the library predicates. This
 category is imported by the default <code class="docutils literal notranslate"><span class="pre">gensym</span></code> object to provide
 application global generators. To make the generators local and thus
