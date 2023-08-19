@@ -81,7 +81,8 @@ file:
    :- end_object.
 
 Loading the file automatically calls the initialization goal. Compare its
-output with the output of the ``ops::w/1`` predicate:
+output with the output of the ``ops::w/1`` predicate. Compare also reading
+a term from within the ``ops`` object versus reading from ``user``.
 
 .. code-block:: text
 
