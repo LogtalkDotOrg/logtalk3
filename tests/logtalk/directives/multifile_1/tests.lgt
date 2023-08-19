@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2021-05-09,
+		date is 2023-08-19,
 		comment is 'Unit tests for the multifile/1 built-in directive.'
 	]).
 
@@ -33,6 +33,7 @@
 	multifile_primary_object::m1(3).
 
 	:- multifile(multifile_primary_object::m2/1).
+	:- dynamic(multifile_primary_object::m2/1).
 	multifile_primary_object::m2(3).
 
 	:- multifile(multifile_primary_category::n1/1).
