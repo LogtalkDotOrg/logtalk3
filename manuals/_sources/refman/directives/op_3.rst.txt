@@ -94,12 +94,12 @@ a term from within the ``ops`` object versus reading from ``user``.
    1<=>2
    true.
 
-   ?- ops::r(T).
+   | ?- ops::r(T).
    |: 3<=>4.
    
    T = <=>(3, 4).
 
-   ?- read(T).
+   | ?- read(T).
    |: 5<=>6.
    
    SYNTAX ERROR: operator expected
