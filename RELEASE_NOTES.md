@@ -25,7 +25,10 @@ RELEASE NOTES
 3.70.0 - September ??, 2023
 ===========================
 
+Tests
+-----
 
+* ADDED: Additional Unicode tests for the standard `sub_atom/5` predicate.
 
 
 3.69.0 - August 21, 2023
