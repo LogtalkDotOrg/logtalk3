@@ -25,6 +25,12 @@ RELEASE NOTES
 3.70.0 - September ??, 2023
 ===========================
 
+Libraries
+---------
+
+* ADDED: Additional tests for the `java` library conversion between non-ASCII
+Java strings and Prolog atoms.
+
 Tests
 -----
 
