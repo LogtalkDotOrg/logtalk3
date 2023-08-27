@@ -25,6 +25,12 @@ RELEASE NOTES
 3.70.0 - September ??, 2023
 ===========================
 
+Documentation
+-------------
+
+* FIXED: Override default Pygments CSS style for syntax highlighting errors
+in the Handbook to avoid displaying red boxes in non-Logtalk code blocks.
+
 Libraries
 ---------
 
