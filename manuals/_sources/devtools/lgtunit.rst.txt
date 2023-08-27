@@ -1787,14 +1787,21 @@ links include the line number for the tests in the tests files (assuming
 that the git repo is stored in a BitBucket, GitHub, or GitLab server).
 But note that not all supported backends provide accurate line numbers.
 
+When using the Allure 2.24.0 or a later version, it's possible to
+generate single file reports. For example:
+
+::
+
+   $ logtalk_allure_report -s  
+
 There are some caveats when generating Allure reports that users must be
 aware. First, Allure expects test names to be unique across different
 tests sets. If there are two test with the same name in two different
-test sets, only one of them will be reported. Second, skipped test sets
-are not reported. Third, when using the ``xunit`` format, dates are
-reported as MM/DD/YYYY. Finally, when using the ``xunit_net_v2`` format,
-tests are reported in a random order instead of their run order and
-dates are displayed as "unknown" in the overview page.
+test sets, only one of them will be reported. Second, when using the
+``xunit`` format, dates are reported as MM/DD/YYYY. Finally, when using
+the ``xunit_net_v2`` format, tests are reported in a random order
+instead of their run order and dates are displayed as "unknown" in the
+overview page.
 
 Exporting code coverage results in XML format
 ---------------------------------------------

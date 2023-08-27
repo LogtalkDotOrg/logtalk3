@@ -31,6 +31,12 @@ Libraries
 * ADDED: Additional tests for the `java` library conversion between non-ASCII
 Java strings and Prolog atoms.
 
+Tools
+-----
+
+* UPDATED: The `logtalk_allure_report` scripts to support generating single
+file reports when running Allure 2.24.0 or a later version.
+
 Tests
 -----
 

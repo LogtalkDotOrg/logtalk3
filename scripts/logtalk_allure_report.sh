@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on April 17, 2023
+##   Last updated on August 27, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -24,17 +24,18 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.11"
+	echo "$(basename "$0") 0.12"
 	exit 0
 }
 
 # default argument values
-minimal_version="2.21.0"
+minimal_version="2.24.0"
 tests=$(pwd)
 results="./allure-results"
 report="./allure-report"
 title=""
 preprocess_only="false"
+single_file="false"
 environment_pairs=""
 
 if ! [ -x "$(command -v allure)" ] ; then
@@ -54,10 +55,10 @@ fi
 usage_help()
 {
 	echo 
-	echo "This script generates Allure reports."
+	echo "This script generates Allure reports from test results."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d tests] [-i results] [-o report] [-t title] [-p]"
+	echo "  $(basename "$0") [-d tests] [-i results] [-o report] [-t title] [-p] [-s]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -68,12 +69,13 @@ usage_help()
 	echo "  -o report directory (default is $report)"
 	echo "  -t report title (default is \"Allure Report\")"
 	echo "  -p preprocess results but do not generate report"
+	echo "  -s single file report"
 	echo "  -- environment pairs (key1=value1 key2=value2 ...)"
 	echo "  -h help"
 	echo
 }
 
-while getopts "vd:i:o:t:ph" option
+while getopts "vd:i:o:t:psh" option
 do
 	case $option in
 		v) print_version;;
@@ -82,6 +84,7 @@ do
 		o) o_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		p) p_arg="true";;
+		s) s_arg="true";;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
 	esac
@@ -110,6 +113,10 @@ fi
 
 if [ "$p_arg" != "" ] ; then
 	preprocess_only="true"
+fi
+
+if [ "$s_arg" != "" ] ; then
+	single_file="true"
 fi
 
 if [ -d "$report" ] && [ -n "$(ls -A "$report")" ] ; then
@@ -194,7 +201,11 @@ EOF
 echo "$categories" > "$results"/categories.json
 
 cd "$results/.." || exit 1
-allure generate --clean --report-dir "$report" "$results"
+if [ "$single_file" == "true" ] ; then
+	allure generate --single-file --clean --report-dir "$report" "$results"
+else
+	allure generate --clean --report-dir "$report" "$results"
+fi
 if [ "$title" != "" ] ; then
 	$sed -i "s/Allure Report/$title/" "$report"/widgets/summary.json
 fi

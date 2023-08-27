@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on April 17, 2023
+##   Last updated on August 27, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -32,6 +32,7 @@ param(
 	[String]$o = "allure-report",
 	[String]$t,
 	[Switch]$p,
+	[Switch]$s,
 	[String]$e = "",
 	[Switch]$v,
 	[Switch]$h
@@ -40,7 +41,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.11")
+	Write-Output ($myName + " 0.12")
 }
 
 Function Write-Usage-Help() {
@@ -48,7 +49,7 @@ Function Write-Usage-Help() {
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
 	Write-Output ""
-	Write-Output "This script generates Allure reports."
+	Write-Output "This script generates Allure reports from test results."
 	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output ("  " + $myName + " [-d tests] [-i results] [-o report] [-t title] [-p] [-e pairs]")
@@ -61,6 +62,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -o report directory (default is .\allure-report)"
 	Write-Output "  -t report title (default is `"Allure Report`")"
 	Write-Output "  -p preprocess results but do not generate report"
+	Write-Output "  -s single file report"
 	Write-Output "  -e environment pairs as a string ('key1=value1,key2=value2,...')"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
@@ -80,7 +82,7 @@ Function Check-Parameters() {
 
 ###################### here it starts ############################ 
 
-$minimal_version="2.21.0" 
+$minimal_version="2.24.0" 
 
 if ((Get-Command "allure" -ErrorAction SilentlyContinue) -eq $null)  { 
 	Write-Output "Error: allure is not installed!"
@@ -174,7 +176,11 @@ Add-Content -Path $o\categories.json -Value ']'
 
 Push-Location (Join-Path $i ..)
 
-allure generate --clean --report-dir $o $i
+if ($s -eq $true) {
+	allure generate --single-file --clean --report-dir $o $i
+} else {
+	allure generate --clean --report-dir $o $i
+}
 if ($t -ne "") {
 	(Get-Content ($o + "\widgets\summary.json")) -Replace 'Allure Report', $t | Set-content ($o + "\widgets\summary.json")
 }
