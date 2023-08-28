@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:31:0,
+		version is 0:32:0,
 		author is 'Paulo Moura',
-		date is 2023-07-07,
+		date is 2023-08-28,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -235,6 +235,9 @@
 
 	message_tokens(orphaned_pack(Registry, Pack, Version)) -->
 		['Pack is orphaned:   ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(pack_update_failed(Registry, Pack, Version)) -->
+		['Pack update failed: ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	% pack installed messages
 

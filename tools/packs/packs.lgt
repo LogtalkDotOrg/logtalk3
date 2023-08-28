@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:64:5,
+		version is 0:65:0,
 		author is 'Paulo Moura',
 		date is 2023-08-28,
 		comment is 'Pack handling predicates.'
@@ -1165,15 +1165,18 @@
 			fail
 		;	pack_object(Pack, PackObject),
 			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
-			print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
-			check_availability(Registry, Pack, URL, CheckSum, Options),
-			check_dependencies(Dependencies, Installs),
-			check_portability(Portability),
-			uninstall_pack(Registry, Pack, Options),
-			install_dependencies(Installs),
-			install_pack(Registry, Pack, NewVersion, URL, CheckSum, Options),
-			print_message(comment, packs, pack_updated(Registry, Pack, NewVersion)),
-			print_note(update, NewVersion, Pack)
+			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
+				check_availability(Registry, Pack, URL, CheckSum, Options),
+				check_dependencies(Dependencies, Installs),
+				check_portability(Portability),
+				uninstall_pack(Registry, Pack, Options),
+				install_dependencies(Installs),
+				install_pack(Registry, Pack, NewVersion, URL, CheckSum, Options) ->
+				print_message(comment, packs, pack_updated(Registry, Pack, NewVersion)),
+				print_note(update, NewVersion, Pack)
+			;	print_message(error, packs, pack_update_failed(Registry, Pack, NewVersion)),
+				fail
+			)
 		;	print_message(error, packs, unknown_pack_version(Registry, Pack, NewVersion)),
 			fail
 		),
@@ -1187,14 +1190,17 @@
 			print_message(comment, packs, orphaned_pack(Registry, Pack, Version))
 		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability),
 			Version @< LatestVersion ->
-			print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
-			check_dependencies(Dependencies, Installs),
-			check_portability(Portability),
-			uninstall_pack(Registry, Pack, Options),
-			install_dependencies(Installs),
-			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
-			print_message(comment, packs, pack_updated(Registry, Pack, LatestVersion)),
-			print_note(update, LatestVersion, Pack)
+			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
+				check_dependencies(Dependencies, Installs),
+				check_portability(Portability),
+				uninstall_pack(Registry, Pack, Options),
+				install_dependencies(Installs),
+				install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options) ->
+				print_message(comment, packs, pack_updated(Registry, Pack, LatestVersion)),
+				print_note(update, LatestVersion, Pack)
+			;	print_message(error, packs, pack_update_failed(Registry, Pack, LatestVersion)),
+				fail
+			)
 		;	print_message(comment, packs, up_to_date_pack(Registry, Pack, Version))
 		),
 		(	^^option(clean(true), Options) ->

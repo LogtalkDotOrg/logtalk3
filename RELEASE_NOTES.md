@@ -43,6 +43,9 @@ Tools
 * UPDATED: The `logtalk_allure_report` scripts to support generating single
 file reports when running Allure 2.24.0 or a later version.
 
+* UPDATED: The `packs` tool to print an error message when updating a pack
+fails unexpectedly.
+
 * FIXED: The `packs::update/0` predicate to use default options for updating
 the outdated packs.
 
