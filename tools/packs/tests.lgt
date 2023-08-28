@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:25:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-08-28,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -286,13 +286,25 @@
 		packs::install(local_1_d, foo, 1:0:0).
 
 	test(packs_packs_install_3_02, true(Version-Pinned == (1:0:0)-false)) :-
+		packs::installed(local_1_d, foo, Version, Pinned).
+
+	test(packs_packs_install_3_03, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
-	test(packs_packs_install_3_03, true) :-
-		packs::install(local_1_d, foo, 2:0:0, [update(true)]).
+	test(packs_packs_install_3_04, true(Version-Pinned == (2:0:0)-false)) :-
+		packs::install(local_1_d, foo, 2:0:0, [update(true)]),
+		packs::installed(local_1_d, foo, Version, Pinned).
 
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
 		packs::dependents(local_2_d, baz, Dependents).
+
+	% update all installed packs
+
+	test(packs_packs_update_1_02, true(Version-Pinned == (2:0:0)-false)) :-
+		packs::uninstall(foo),
+		packs::install(local_1_d, foo, 1:0:0),
+		packs::update,
+		packs::installed(local_1_d, foo, Version, Pinned).
 
 	% update packs
 
