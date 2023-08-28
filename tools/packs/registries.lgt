@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:56:0,
+		version is 0:57:0,
 		author is 'Paulo Moura',
-		date is 2023-07-07,
+		date is 2023-08-28,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -534,7 +534,8 @@
 		defined(Registry, URL, _, Pinned),
 		(	Pinned == true ->
 			print_message(comment, packs, pinned_registry(Registry, URL))
-		;	update(Registry, [])
+		;	^^default_options(Options),
+			update_registry(Registry, Options)
 		),
 		fail.
 	update :-
