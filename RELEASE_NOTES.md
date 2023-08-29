@@ -40,6 +40,11 @@ Java strings and Prolog atoms.
 Tools
 -----
 
+* IMPROVED: The `packs` tool handling of pack dependencies to try first
+to select dependency versions that verify any Logtalk and Prolog backend
+requirements before resorting to versions that just comply with the parent
+pack requirements.
+
 * UPDATED: The `logtalk_allure_report` scripts to support generating single
 file reports when running Allure 2.24.0 or a later version.
 

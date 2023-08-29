@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:65:0,
+		version is 0:66:0,
 		author is 'Paulo Moura',
-		date is 2023-08-28,
+		date is 2023-08-29,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1740,17 +1740,17 @@
 		;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
 			fail
 		).
-	check_range_dependency(logtalk, Lower, Operator1, Upper, Operator2, none) :-
+	check_range_dependency(logtalk, Lower, Operator1, Upper, Operator2, Action) :-
 		!,
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
 		fix_version_for_comparison(Lower, Major:Minor:Patch, LowerFixedVersion),
 		fix_version_for_comparison(Upper, Major:Minor:Patch, UpperFixedVersion),
 		(	{call(Operator1, LowerFixedVersion, Lower)},
 			{call(Operator2, UpperFixedVersion, Upper)} ->
-			true
-		;	print_message(warning, packs, 'Pack requires updating Logtalk to a version ~w ~q and ~w ~q'+[Operator1, Lower, Operator2, Upper])
+			Action = none
+		;	Action = logtalk(Operator1, Lower, Operator2, Upper)
 		).
-	check_range_dependency(Backend, Lower, Operator1, Upper, Operator2, none) :-
+	check_range_dependency(Backend, Lower, Operator1, Upper, Operator2, Action) :-
 		current_logtalk_flag(prolog_dialect, Backend),
 		!,
 		current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
@@ -1758,9 +1758,9 @@
 		fix_version_for_comparison(Upper, Major:Minor:Patch, UpperFixedVersion),
 		(	{call(Operator1, LowerFixedVersion, Lower)},
 			{call(Operator2, UpperFixedVersion, Upper)} ->
-			true
+			Action = none
 		;	backend(Backend, Name),
-			print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q and ~w ~q'+[Name, Operator1, Lower, Operator2, Upper])
+			Action = backend(Name, Operator1, Lower, Operator2, Upper)
 		).
 	check_range_dependency(_, _, _, _, _, none).
 
@@ -1794,24 +1794,24 @@
 		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 			fail
 		).
-	check_version(Operator, logtalk, Version, _, none) :-
+	check_version(Operator, logtalk, Version, _, Action) :-
 		!,
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
 		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
 		(	{call(Operator, FixedVersion, Version)} ->
-			true
-		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
+			Action = none
+		;	Action = logtalk(Operator, Version)
 		).
-	check_version(Operator, Backend, Version, _, none) :-
+	check_version(Operator, Backend, Version, _, Action) :-
 		(	current_logtalk_flag(prolog_dialect, Backend) ->
 			current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
 			fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
 			(	{call(Operator, FixedVersion, Version)} ->
-				true
+				Action = none
 			;	backend(Backend, Name),
-				print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator, Version])
+				Action = backend(Name, Operator, Version)
 			)
-		;	true
+		;	Action = none
 		).
 
 	fix_version_for_comparison(_:_:_, Major:Minor:Patch, Major:Minor:Patch) :- !.
@@ -1824,9 +1824,17 @@
 
 	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) :-
 		registry_pack(Registry, Pack, PackObject),
-		fix_version_for_availability(RequiredVersion, Version),
-		PackObject::version(Version, _, _, _, _, _),
-		{call(Operator, Version, RequiredVersion)}.
+		fix_version_for_availability(RequiredVersion, RequiredVersionFixed),
+		(	% first try to find a version that verifies both Logtalk and Prolog backend dependencies
+			PackObject::version(Version, _, _, _, Dependencies, _),
+			{call(Operator, Version, RequiredVersionFixed)},
+			check_dependencies(Dependencies, Actions),
+			\+ member(logtalk(_, _, _, _), Actions),
+			\+ member(backend(_, _, _, _, _), Actions)
+		;	% if none found, use the first version required by the parent pack
+			PackObject::version(Version, _, _, _, _, _),
+			{call(Operator, Version, RequiredVersionFixed)}
+		).
 
 	install_dependencies([]).
 	install_dependencies([Dependency| Dependencies]) :-
@@ -1834,6 +1842,14 @@
 		install_dependencies(Dependencies).
 
 	install_dependency(none).
+	install_dependency(logtalk(Operator1, Lower, Operator2, Upper)) :-
+		print_message(warning, packs, 'Pack requires updating Logtalk to a version ~w ~q and ~w ~q'+[Operator1, Lower, Operator2, Upper]).
+	install_dependency(logtalk(Operator, Version)) :-
+		print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version]).
+	install_dependency(backend(Name, Operator1, Lower, Operator2, Upper)) :-
+		print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q and ~w ~q'+[Name, Operator1, Lower, Operator2, Upper]).
+	install_dependency(backend(Name, Operator, Version)) :-
+		print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator, Version]).
 	install_dependency(install(Registry, Pack, Version)) :-
 		install(Registry, Pack, Version).
 	install_dependency(update(_Registry, Pack, Version)) :-
