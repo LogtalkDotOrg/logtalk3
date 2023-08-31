@@ -88,7 +88,7 @@ verify that the following query fails:
 
 	| ?- setof(Library, File^(logtalk::loaded_file_property(File, library(Library))), Libraries),
 	     member(Missing, Libraries),
-		 \+ logtalk_library_path(Missing, _).
+	     \+ logtalk_library_path(Missing, _).
 
 Avoiding dependencies on the Logtalk environment variables
 ----------------------------------------------------------
