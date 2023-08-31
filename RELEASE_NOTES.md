@@ -28,6 +28,9 @@ RELEASE NOTES
 Documentation
 -------------
 
+* IMPROVED: Documentation of the embedding scripts, notably on how to ensure
+relocatable applications.
+
 * FIXED: Override default Pygments CSS style for syntax highlighting errors
 in the Handbook to avoid displaying red boxes in non-Logtalk code blocks.
 

@@ -22,9 +22,30 @@ This directory contains sample scripts for selected backend Prolog
 compilers for embedding Logtalk and Logtalk applications. See the
 `SCRIPT.txt` file for usage examples.
 
-If you're using Windows, experimental PowerShell scripts are available
-for selected backends. Using the PowerShell scripts may require first
-changing the execution policy:
+These scripts allow pre-compilation of the Logtalk compiler/runtime
+and optionally of a Logtalk application. This is a common requirement
+for embedding, specially when deploying applications in read-only file
+systems. These sample scripts should be regarded as starting points as
+actual use requires customization (e.g. the starting goal, inclusion of
+a top-level interpreter, etc).
+
+An alternative, available in some backend Prolog compilers such as
+SICStus Prolog, SWI-Prolog, and YAP, is to create a *saved state*
+after loading Logtalk and a Logtalk application (or the generated
+Prolog code for Logtalk and a Logtalk application). Saved states
+are usually executable files that embed both a Prolog runtime and
+application code. See the `SCRIPT.txt` file for some examples.
+For details on creating and using saved states, see your backend
+Prolog compiler documentation.
+
+Running the embedding scripts
+-----------------------------
+
+On POSIX systems, the scripts require the Bash shell.
+
+On Windows, experimental PowerShell scripts are available for selected
+backends. Using the PowerShell scripts may require first changing the
+execution policy:
 
 	PowerShell.exe -ExecutionPolicy Unrestricted
 
@@ -37,37 +58,40 @@ must also specify the temporary directory for intermediate files using
 the scripts `-t` option. Also, symbolic links may not work and use of
 actual paths to files may be required.
 
-These scripts allow pre-compilation of the Logtalk compiler/runtime
-and optionally of a Logtalk application. This is a common requirement
-for embedding, specially when deploying applications in read-only file
-systems. These sample scripts should be regarded as starting points as
-actual use requires customization (e.g. the starting goal, inclusion of
-a top-level interpreter, etc). The scripts also accept command-lines
-options for specifying a paths files and a settings file to be used to
-compile any application files. The paths file must provide definitions
-for the `logtalk_library_path/2` predicate for all libraries loaded by
-the application being embedded. See the `settings-embedding-sample.lgt`
-file for settings suggestions for embedding applications.
+Settings for embedded applications
+----------------------------------
 
-An alternative, available in some backend Prolog compilers such as
-SICStus Prolog, SWI-Prolog, and YAP, is to create a *saved state*
-after loading Logtalk and a Logtalk application (or the generated
-Prolog code for Logtalk and a Logtalk application). Saved states
-are usually executable files that embed both a Prolog runtime and
-application code. See the `SCRIPT.txt` file for some examples.
-For details on creating and using saved states, see your backend
-Prolog compiler documentation.
+The scripts accept a command-line option for specifying a settings file.
+See the `settings-embedding-sample.lgt` file for settings suggestions for
+embedding applications. Notably, the `reload` flag should usually be set
+to `skip` to prevent reloading of already loaded code when running the
+embedded application or saved state. You may also want to turn off the
+`source_data` flag to reduce the size of your application. When a settings
+file is passed as argument to the embedding scripts, the backend adapter
+file ia automatically patched, changing the value of the `settings_file`
+flag to `deny`, to prevent using any settings file accessible on a computer
+where the embedded application is run to disturb it. 
 
-In both solutions, the `reload` flag should usually be set to `skip`
-(in the used settings file) to prevent reloading of already loaded
-code when running the embedded application or saved state. You may
-also want to turn off the `source_data` flag to reduce the size of
-your application. The required flag values can be set on a dedicated
-settings file. When one is passed as argument to the embedding scripts,
-the backend adapter file ia automatically patched, changing the value
-of the `settings_file` flag to `deny`, to prevent using any settings
-file accessible on a computer where the embedded application is run
-to disturb it. 
+Library paths for embedded applications
+---------------------------------------
+
+The scripts also accept a command-line option for specifying a paths file.
+This paths file must provide definitions for the `logtalk_library_path/2`
+predicate for all libraries loaded by the application being embedded. The
+following query can be used to find the names of all the libraries used
+by a loaded application:
+
+	| ?- setof(Library, File^(logtalk::loaded_file_property(File, library(Library))), Libraries).
+
+To help ensure that the embedded application is relocatable, load it and
+verify that the following query fails:
+
+	| ?- setof(Library, File^(logtalk::loaded_file_property(File, library(Library))), Libraries),
+	     member(Missing, Libraries),
+		 \+ logtalk_library_path(Missing, _).
+
+Avoiding dependencies on the Logtalk environment variables
+----------------------------------------------------------
 
 To avoid dependencies on the Logtalk `LOGTALKHOME` and `LOGTALKUSER`
 environment variables, the sample scripts support an option for
