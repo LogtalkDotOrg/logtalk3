@@ -25,6 +25,12 @@ RELEASE NOTES
 3.70.0 - September ??, 2023
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Linter check for missing arithmetic functions when using a backend
+implementing the `evaluable_property/2` predicate.
+
 Documentation
 -------------
 

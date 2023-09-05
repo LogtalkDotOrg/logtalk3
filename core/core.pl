@@ -418,6 +418,8 @@
 :- dynamic('$lgt_pp_non_portable_predicate_'/3).
 % '$lgt_pp_non_portable_function_'(Function, File, Lines)
 :- dynamic('$lgt_pp_non_portable_function_'/3).
+% '$lgt_pp_missing_function_'(Function, File, Lines)
+:- dynamic('$lgt_pp_missing_function_'/3).
 
 % '$lgt_pp_missing_meta_predicate_directive_'(Head, File, Lines)
 :- dynamic('$lgt_pp_missing_meta_predicate_directive_'/3).
@@ -8406,6 +8408,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_updates_predicate_'(_, _, _, _)),
 	retractall('$lgt_pp_non_portable_predicate_'(_, _, _)),
 	retractall('$lgt_pp_non_portable_function_'(_, _, _)),
+	retractall('$lgt_pp_missing_function_'(_, _, _)),
 	retractall('$lgt_pp_missing_meta_predicate_directive_'(_, _, _)),
 	retractall('$lgt_pp_missing_dynamic_directive_'(_, _, _)),
 	retractall('$lgt_pp_missing_discontiguous_directive_'(_, _, _)),
@@ -17588,6 +17591,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Expression),
 	% assume function
 	!,
+	(	'$lgt_pp_missing_function_'(Expression, _, _) ->
+		% missing function already recorded
+		true
+	;	'$lgt_predicate_property'(evaluable_property(_, _), _),
+		\+ evaluable_property(Expression, _) ->
+		% first occurrence of this missing function; record it
+		'$lgt_term_template'(Expression, Template),
+		'$lgt_source_file_context'(File, Lines),
+		assertz('$lgt_pp_missing_function_'(Template, File, Lines))
+	;	% no reliable way of checking if the function is missing
+		true
+	),
 	(	'$lgt_iso_spec_function'(Expression) ->
 		% portable call (we assume...!)
 		true
@@ -19925,6 +19940,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_lint_issues'(Type, Entity) :-
 	'$lgt_report_missing_directives'(Type, Entity),
 	'$lgt_report_non_portable_calls'(Type, Entity),
+	'$lgt_report_missing_functions'(Type, Entity),
 	'$lgt_report_predicates_called_as_non_terminals'(Type, Entity),
 	'$lgt_report_non_tail_recursive_predicates'(Type, Entity),
 	'$lgt_report_unknown_entities'(Type, Entity),
@@ -22425,6 +22441,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_non_portable_calls'(_, _).
+
+
+
+% '$lgt_report_missing_functions'(@entity_type, @entity_identifier)
+%
+% reports non-portable predicate and function calls in the body of object and category predicates
+
+'$lgt_report_missing_functions'(protocol, _) :-
+	!.
+
+'$lgt_report_missing_functions'(_, _) :-
+	'$lgt_compiler_flag'(portability, silent),
+	!.
+
+'$lgt_report_missing_functions'(Type, Entity) :-
+	'$lgt_pp_missing_function_'(Function, File, Lines),
+		functor(Function, Functor, Arity),
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(portability),
+			missing_function(File, Lines, Type, Entity, Functor/Arity)
+		),
+	fail.
+
+'$lgt_report_missing_functions'(_, _).
 
 
 

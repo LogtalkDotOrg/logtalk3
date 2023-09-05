@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:123:0,
+		version is 1:124:0,
 		author is 'Paulo Moura',
-		date is 2023-06-13,
+		date is 2023-09-05,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -479,6 +479,10 @@
 	message_tokens(top_level_shortcut_as_directive(File, Lines, Directive)) -->
 		['Use of Logtalk or Prolog top-level shortcut as a directive: ~q'-[Directive], nl],
 		message_context(File, Lines).
+
+	message_tokens(missing_function(File, Lines, Type, Entity, Function)) -->
+		['Missing arithmetic function: ~q'-[Function], nl],
+		message_context(File, Lines, Type, Entity).
 
 	% lambda expression messages
 

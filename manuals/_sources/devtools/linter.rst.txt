@@ -43,6 +43,7 @@ Lint checks include:
    built-in method)
 -  Non-portable predicate calls, predicate options, arithmetic function
    calls, directives, flags, and flag values
+-  Missing arithmetic functions (with selected backends)
 -  Suspicious calls (syntactically valid calls that are likely semantic
    errors; e.g. float comparisons using the standard arithmetic
    comparison operators)
