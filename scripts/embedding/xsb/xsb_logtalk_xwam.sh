@@ -151,7 +151,7 @@ usage_help()
 	echo "  -d directory for generated .xwam files (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -p library paths file (absolute path; default is $paths)"
-	echo "  -s settings file (absolute path; default is $settings)"
+	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
@@ -190,7 +190,7 @@ if [ "$p_arg" != "" ] ; then
 	fi
 fi
 
-if [ "$s_arg" != "" ] ; then
+if [ "$s_arg" != "" ] && [ "$s_arg" != "none" ] ; then
 	if [ -f "$s_arg" ] ; then
 		settings="$s_arg"
 	else
@@ -255,7 +255,7 @@ else
 	cp "$paths" "$temporary/paths_lgt.P"
 fi
 
-if [ "$settings" != "" ] ; then
+if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 	if [ "$compile" != "false" ] ; then
 		xsblgt$extension -e "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt."
 	else

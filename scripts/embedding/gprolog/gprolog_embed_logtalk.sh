@@ -123,7 +123,7 @@ usage_help()
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -n name of the generated top-level (default is logtalk)"
 	echo "  -p library paths file (absolute path; default is $paths)"
-	echo "  -s settings file (absolute path; default is $settings)"
+	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -- arguments to be passed to gplc (no default)"
 	echo "  -v print version of $(basename "$0")"
@@ -171,7 +171,7 @@ if [ "$p_arg" != "" ] ; then
 	fi
 fi
 
-if [ "$s_arg" != "" ] ; then
+if [ "$s_arg" != "" ] && [ "$s_arg" != "none" ] ; then
 	if [ -f "$s_arg" ] ; then
 		settings="$s_arg"
 	else
@@ -236,7 +236,7 @@ else
 	cp "$paths" "$temporary/paths_lgt.pl"
 fi
 
-if [ "$settings" != "" ] ; then
+if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 	if [ "$compile" != "false" ] ; then
 		gplgt$extension --query-goal "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
 	else
@@ -250,7 +250,7 @@ fi
 if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
-	if [ "$settings" != "" ] ; then
+	if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 		cp "$settings" ./settings.lgt
 	fi
 	gplgt$extension --query-goal "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"

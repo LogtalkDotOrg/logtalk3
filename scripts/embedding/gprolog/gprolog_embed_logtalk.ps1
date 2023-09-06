@@ -104,7 +104,7 @@ function Write-Usage-Help() {
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
-	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
+	Write-Output ("  -s settings file (absolute path or 'none'; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
@@ -129,7 +129,7 @@ function Check-Parameters() {
 		Exit
 	}
 
-	if (($s -ne "") -and (-not(Test-Path $s))) {
+	if (($s -ne "") -and ($s -ne "none") -and (-not(Test-Path $s))) {
 		Write-Output ("The " + $s + " settings file does not exist!")
 		Start-Sleep -Seconds 2
 		Exit
@@ -226,7 +226,7 @@ if ($c -eq $true) {
 	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
 }
 
-if ($s -eq "") {
+if (($s -eq "") -or ($s -eq "none")) {
 	Set-Content -Path settings_lgt.pl -Value ""
 } elseif ($c -eq $true) {
 	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"

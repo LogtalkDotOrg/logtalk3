@@ -71,6 +71,9 @@ Tests
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: All the embedding scripts now support omitting a settings file by
+using the `-s none` option.
+
 * FIXED: All the embedding scripts to use the default value for the settings
 file if none is specified (using the `-s` option) as per documentation.
 

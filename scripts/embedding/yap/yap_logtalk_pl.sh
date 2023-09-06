@@ -129,7 +129,7 @@ usage_help()
 	echo "  -n name of the generated saved state (default is application)"
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -k hooks file (absolute path; default is $hooks)"
-	echo "  -s settings file (absolute path; default is $settings)"
+	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -g startup goal for the saved state in canonical syntax (default is true)"
 	echo "  -v print version of $(basename "$0")"
@@ -186,7 +186,7 @@ if [ "$k_arg" != "" ] ; then
 	fi
 fi
 
-if [ "$s_arg" != "" ] ; then
+if [ "$s_arg" != "" ] && [ "$s_arg" != "none" ] ; then
 	if [ -f "$s_arg" ] ; then
 		settings="$s_arg"
 	else
@@ -255,7 +255,7 @@ else
 	cp "$paths" "$temporary/paths_lgt.yap"
 fi
 
-if [ "$settings" != "" ] ; then
+if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 	if [ "$compile" != "false" ] ; then
 		yaplgt$extension -g "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
 	else

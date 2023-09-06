@@ -110,7 +110,7 @@ function Write-Usage-Help() {
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
 	Write-Output ("  -k hooks file (absolute path; default is " + $k + ")")
-	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
+	Write-Output ("  -s settings file (absolute path or 'none'; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output "  -g startup goal for the saved state in canonical syntax (default is true)"
 	Write-Output ("  -v print version of " +  $myName)
@@ -148,7 +148,7 @@ function Check-Parameters() {
 		Exit
 	}
 
-	if (($s -ne "") -and (-not(Test-Path $s))) {
+	if (($s -ne "") -and ($s -ne "none") -and (-not(Test-Path $s))) {
 		Write-Output ("The " + $s + " settings file does not exist!")
 		Start-Sleep -Seconds 2
 		Exit
@@ -243,7 +243,7 @@ if ($c -eq $true) {
 	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
 }
 
-if ($s -eq "") {
+if (($s -eq "") -or ($s -eq "none")) {
 	Get-Content -Path swi.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
