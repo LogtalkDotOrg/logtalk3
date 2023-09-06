@@ -168,6 +168,8 @@ if [ "$s_arg" != "" ] && [ "$s_arg" != "none" ] ; then
 		echo "The $s_arg settings file does not exist!" >&2
 		exit 1
 	fi
+else
+	settings="none"
 fi
 
 if [ "$l_arg" != "" ] ; then
