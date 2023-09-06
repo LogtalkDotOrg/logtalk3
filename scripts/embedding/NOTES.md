@@ -25,9 +25,9 @@ compilers for embedding Logtalk and Logtalk applications. See the
 These scripts allow pre-compilation of the Logtalk compiler/runtime
 and optionally of a Logtalk application. This is a common requirement
 for embedding, specially when deploying applications in read-only file
-systems. These sample scripts should be regarded as starting points as
-actual use requires customization (e.g. the starting goal, inclusion of
-a top-level interpreter, etc).
+systems. These sample scripts should be regarded as starting points
+as actual use often requires customization (e.g. the starting goal,
+inclusion of a top-level interpreter, etc).
 
 An alternative, available in some backend Prolog compilers such as
 SICStus Prolog, SWI-Prolog, and YAP, is to create a *saved state*
@@ -70,7 +70,11 @@ embedded application or saved state. You may also want to turn off the
 file is passed as argument to the embedding scripts, the backend adapter
 file ia automatically patched, changing the value of the `settings_file`
 flag to `deny`, to prevent using any settings file accessible on a computer
-where the embedded application is run to disturb it. 
+where the embedded application is run to disturb it.
+
+It's also possible to not include any settings file by using the `-s none`
+option. This is mostly useful when generating a new top-level executable
+that only includes the Logtalk compiler/runtime.
 
 Library paths for embedded applications
 ---------------------------------------
