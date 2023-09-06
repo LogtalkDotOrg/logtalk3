@@ -1,4 +1,4 @@
-.TH logtalk_doclet 1 "July 20, 2023" "Logtalk 3.68.0" "Logtalk Documentation"
+.TH logtalk_doclet 1 "September 6, 2023" "Logtalk 3.70.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_doclet \- Logtalk script for automating running doclets
@@ -56,7 +56,7 @@ One or more doclets crashed the process running them.
 
 .SH IMPLEMENTATION NOTES
 The \fIgnunc\fR backend requires creating a GNU Prolog executable that includes Logtalk named \fIgplgtnc\fR and making it available in the system \fIPATH\fR. This executable can be created using the embedding script provided in the Logtalk distribution. For example:
-\fBgprolog_embed_logtalk.sh -c -d ~/collect -- --new-top-level && mv ~/collect/logtalk ~/collect/gplgtnc\fR
+\fBgprolog_embed_logtalk.sh -c -d ~/collect -s none -- --new-top-level && mv ~/collect/logtalk ~/collect/gplgtnc\fR
 
 .SH ENVIRONMENT
 .TP

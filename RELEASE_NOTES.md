@@ -37,6 +37,9 @@ Documentation
 * IMPROVED: Documentation of the embedding scripts, notably on how to ensure
 relocatable applications.
 
+* UPDATED: The man pages of the `logtalk_doclet` and `logtalk_tester` scripts
+on generating a GNU Prolog executable that includes Logtalk.
+
 * FIXED: Override default Pygments CSS style for syntax highlighting errors
 in the Handbook to avoid displaying red boxes in non-Logtalk code blocks.
 

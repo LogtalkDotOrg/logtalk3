@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "July 3, 2023" "Logtalk 3.67.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "September 6, 2023" "Logtalk 3.70.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -160,7 +160,7 @@ Installation of the GNU \fIsed\fR command, when not available by default, is str
 The version of the \fIfind\fR command provided by some operating-systems doesn't support (extended) regular-expressions, thus preventing using the \fI-e\fR option.
 .TP
 The \fIgnunc\fR backend requires creating a GNU Prolog executable that includes Logtalk named \fIgplgtnc\fR and making it available in the system \fIPATH\fR. This executable can be created using the embedding script provided in the Logtalk distribution. For example:
-\fBgprolog_embed_logtalk.sh -c -d ~/collect -- --new-top-level && mv ~/collect/logtalk ~/collect/gplgtnc\fR
+\fBgprolog_embed_logtalk.sh -c -d ~/collect -s none -- --new-top-level && mv ~/collect/logtalk ~/collect/gplgtnc\fR
 
 .SH ENVIRONMENT
 .TP
