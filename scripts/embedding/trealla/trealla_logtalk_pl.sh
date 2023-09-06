@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on July 11, 2023
+##   Last updated on September 6, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.6"
+	echo "$(basename "$0") 0.7"
 	exit 0
 }
 
@@ -168,8 +168,6 @@ if [ "$s_arg" != "" ] ; then
 		echo "The $s_arg settings file does not exist!" >&2
 		exit 1
 	fi
-else
-	settings=""
 fi
 
 if [ "$l_arg" != "" ] ; then

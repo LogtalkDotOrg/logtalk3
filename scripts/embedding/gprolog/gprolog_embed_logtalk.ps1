@@ -4,7 +4,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on July 11, 2023
+##   Last updated on September 6, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2022 Hans N. Beck
@@ -38,7 +38,6 @@ param(
 	[String]$n = "application",
 	[String]$p = ($env:LOGTALKHOME + '\paths\paths.pl'),
 	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
-	[String]$s, 
 	[String]$l,
 	[String]$g = "true",
 	[Switch]$v,
@@ -48,7 +47,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.16")
+	Write-Output ($myName + " 0.17")
 }
 
 function Get-Logtalkhome {
@@ -131,7 +130,7 @@ function Check-Parameters() {
 	}
 
 	if (($s -ne "") -and (-not(Test-Path $s))) {
-	Write-Output ("The " + $s + " settings file does not exist!")
+		Write-Output ("The " + $s + " settings file does not exist!")
 		Start-Sleep -Seconds 2
 		Exit
 	}

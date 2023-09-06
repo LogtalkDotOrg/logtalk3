@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on July 11, 2023
+##   Last updated on September 6, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.19"
+	echo "$(basename "$0") 0.20"
 	exit 0
 }
 
@@ -161,6 +161,15 @@ if [ "$p_arg" != "" ] ; then
 	fi
 fi
 
+if [ "$s_arg" != "" ] ; then
+	if [ -f "$s_arg" ] ; then
+		settings="$s_arg"
+	else
+		echo "The $s_arg settings file does not exist!" >&2
+		exit 1
+	fi
+fi
+
 if [ "$l_arg" != "" ] ; then
 	if [ -f "$l_arg" ] ; then
 		loader="$l_arg"
@@ -170,17 +179,6 @@ if [ "$l_arg" != "" ] ; then
 	fi
 else
 	loader=""
-fi
-
-if [ "$s_arg" != "" ] ; then
-	if [ -f "$s_arg" ] ; then
-		settings="$s_arg"
-	else
-		echo "The $s_arg settings file does not exist!" >&2
-		exit 1
-	fi
-else
-	settings=""
 fi
 
 mkdir -p "$directory"

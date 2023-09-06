@@ -68,6 +68,12 @@ Tests
 
 * ADDED: Additional Unicode tests for the standard `sub_atom/5` predicate.
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: All the embedding scripts to use the default value for the settings
+file if none is specified (using the `-s` option) as per documentation.
+
 
 3.69.0 - August 21, 2023
 ========================

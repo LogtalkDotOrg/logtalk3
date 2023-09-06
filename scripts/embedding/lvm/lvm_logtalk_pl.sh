@@ -5,7 +5,7 @@
 ##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on August 16, 2023
+##   Last updated on September 6, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.9"
+	echo "$(basename "$0") 0.10"
 	exit 0
 }
 
@@ -174,8 +174,6 @@ if [ "$s_arg" != "" ] ; then
 		echo "The $s_arg settings file does not exist!" >&2
 		exit 1
 	fi
-else
-	settings=""
 fi
 
 if [ "$l_arg" != "" ] ; then

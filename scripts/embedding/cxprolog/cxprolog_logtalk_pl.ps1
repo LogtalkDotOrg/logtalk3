@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on July 11, 2023
+##   Last updated on September 6, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2022 Hans N. Beck
@@ -48,7 +48,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.18")
+	Write-Output ($myName + " 0.19")
 }
 
 function Get-Logtalkhome {
@@ -131,7 +131,7 @@ function Check-Parameters() {
 	}
 
 	if (($s -ne "") -and (-not(Test-Path $s))) {
-	Write-Output ("The " + $s + " settings file does not exist!")
+		Write-Output ("The " + $s + " settings file does not exist!")
 		Start-Sleep -Seconds 2
 		Exit
 	}
