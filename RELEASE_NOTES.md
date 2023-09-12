@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * ADDED: Linter check for missing arithmetic functions when using a backend
 implementing the `evaluable_property/2` predicate.
 
+* IMPROVED: The compiler to optimize the compilation of `catch/3` goals where
+the first argument is a `call/1` goal.
+
 Prolog adapter and integration files
 ------------------------------------
 

@@ -19104,6 +19104,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	var(Goal),
 	!.
 
+'$lgt_remove_redundant_calls'(catch(Goal0, Error, Goal2), SGoal) :-
+	nonvar(Goal0),
+	Goal0 = call(Goal1),
+	!,
+	'$lgt_remove_redundant_calls'(catch(Goal1, Error, Goal2), SGoal).
+
 '$lgt_remove_redundant_calls'(catch(Goal1, Error, Goal2), catch(SGoal1, Error, SGoal2)) :-
 	!,
 	'$lgt_remove_redundant_calls'(Goal1, SGoal1),
