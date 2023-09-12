@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on July 13, 2023
+%  Last updated on September 12, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -296,7 +296,7 @@ setup_call_cleanup(_, _, _) :-
 	;	ScratchDirectory = './.lgt_tmp/'
 	).
 '$lgt_default_flag'(report, Report) :-
-	(	catch(current_prolog_flag(show_information, off), _, fail) ->
+	(	catch(current_prolog_flag(show_banner, off), _, fail) ->
 		Report = warnings
 	;	Report = on
 	).
