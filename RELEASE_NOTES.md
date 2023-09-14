@@ -76,6 +76,12 @@ fails unexpectedly.
 * FIXED: The `packs::update/0` predicate to use default options for updating
 the outdated packs.
 
+Examples
+--------
+
+* IMPROVED: The `document_converter` example for faster conversion of large
+PDF files.
+
 Tests
 -----
 

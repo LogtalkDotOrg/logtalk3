@@ -22,9 +22,9 @@
 :- object(document).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2023-08-15,
+		date is 2023-09-14,
 		comment is 'Document to text conversion example using the Apache Tika Java library.'
 	]).
 
@@ -49,28 +49,44 @@
 		context(Context),
 		check(file, Document, Context),
 		check(atom, Text, Context),
-		convert_file(Document, Contents),
-		setup_call_cleanup(
-			open(Text, write, Stream),
-			write(Stream, Contents),
-			close(Stream)
+		convert_file(Document, Text).
+
+	convert_file(Document, Text) :-
+		catch(
+			convert_file_java(Document, Text),
+			error(_, JavaException),
+			resource_error(JavaException)
 		).
+
+	convert_file_java(Document, Text) :-
+		% parse method arguments
+		java('org.apache.tika.parser.AutoDetectParser')::new(AutoDetectParser),
+		java('java.io.FileOutputStream')::new([Text], FileOutputStream),
+		java('java.io.PrintWriter')::new([FileOutputStream], PrintWriter),
+		java('org.apache.tika.sax.BodyContentHandler')::new([PrintWriter], BodyContentHandler),
+		java('org.apache.tika.metadata.Metadata')::new(Metadata),
+		java('java.io.FileInputStream')::new([Document], FileInputStream),
+		java('org.apache.tika.parser.ParseContext')::new(ParseContext),
+		% file parsing
+		java(AutoDetectParser)::parse(FileInputStream, BodyContentHandler, Metadata, ParseContext),
+		java(FileInputStream)::close,
+		java(FileOutputStream)::close.
 
 	contents(Document, Contents) :-
 		% type check argument to minimize the possible exceptions in the Java side
 		context(Context),
 		check(file, Document, Context),
 		check(var, Contents, Context),
-		convert_file(Document, Contents).
+		contents_file(Document, Contents).
 
-	convert_file(Document, Contents) :-
+	contents_file(Document, Text) :-
 		catch(
-			convert_file_java(Document, Contents),
+			contents_file_java(Document, Text),
 			error(_, JavaException),
 			resource_error(JavaException)
 		).
 
-	convert_file_java(Document, Contents) :-
+	contents_file_java(Document, Contents) :-
 		% parse method arguments
 		java('org.apache.tika.parser.AutoDetectParser')::new(AutoDetectParser),
 		java('org.apache.tika.sax.BodyContentHandler')::new([-1], BodyContentHandler),
