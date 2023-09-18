@@ -22,16 +22,16 @@
 :- object(document).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2023-09-14,
+		date is 2023-09-18,
 		comment is 'Document to text conversion example using the Apache Tika Java library.'
 	]).
 
 	:- public(convert/2).
 	:- mode(convert(+atom, +atom), one).
 	:- info(convert/2, [
-		comment is 'Converts a document given its path to a text file.',
+		comment is 'Converts a document given its path to a text file using UTF-8 encoding.',
 		argnames is ['Document', 'Text']
 	]).
 
@@ -62,8 +62,9 @@
 		% parse method arguments
 		java('org.apache.tika.parser.AutoDetectParser')::new(AutoDetectParser),
 		java('java.io.FileOutputStream')::new([Text], FileOutputStream),
-		java('java.io.PrintWriter')::new([FileOutputStream], PrintWriter),
-		java('org.apache.tika.sax.BodyContentHandler')::new([PrintWriter], BodyContentHandler),
+		java('java.nio.charset.Charset', Charset)::forName('UTF8'),
+		java('java.io.OutputStreamWriter')::new([FileOutputStream, Charset], OutputStreamWriter),
+		java('org.apache.tika.sax.BodyContentHandler')::new([OutputStreamWriter], BodyContentHandler),
 		java('org.apache.tika.metadata.Metadata')::new(Metadata),
 		java('java.io.FileInputStream')::new([Document], FileInputStream),
 		java('org.apache.tika.parser.ParseContext')::new(ParseContext),

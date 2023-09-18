@@ -25,6 +25,12 @@ RELEASE NOTES
 3.71.0 - October ??, 2023
 =========================
 
+Examples
+--------
+
+* CHANGED: The `document_converter` example to ensure UTF-8 encoding of the
+text files resulting from PDF files conversion.
+
 
 3.70.0 - September 18, 2023
 ===========================
