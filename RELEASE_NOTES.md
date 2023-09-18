@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.70.0 - September ??, 2023
+3.70.0 - September 18, 2023
 ===========================
 
 Logtalk compiler and runtime
@@ -38,8 +38,8 @@ Prolog adapter and integration files
 ------------------------------------
 
 * FIXED: The GNU Prolog adapter file to rely on the new `show_banner` flag
-instead of the new `show_information` flag (in the upcoming 1.6.0 release)
-to set the Logtalk `report` flag.
+(when available) instead of the new `show_information` flag (in the upcoming
+1.6.0 release) to set the Logtalk `report` flag.
 
 Documentation
 -------------
