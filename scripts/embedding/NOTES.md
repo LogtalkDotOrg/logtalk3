@@ -38,6 +38,12 @@ application code. See the `SCRIPT.txt` file for some examples.
 For details on creating and using saved states, see your backend
 Prolog compiler documentation.
 
+Note that the provided scripts don't handle applications composed of
+both Logtalk and Prolog source files. In these cases, either move
+(if possible) the Prolog code into Logtalk source files or customize
+the embedding scripts to include the contents of the Prolog files
+into the generated embedding files.
+
 Running the embedding scripts
 -----------------------------
 

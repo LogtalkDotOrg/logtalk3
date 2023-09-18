@@ -25,6 +25,12 @@ RELEASE NOTES
 3.71.0 - October ??, 2023
 =========================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the embedding scripts on how to handle an
+application using a mix of Logtalk and Prolog source files.
+
 Examples
 --------
 
