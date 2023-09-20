@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 5:0:0,
+		version is 6:0:0,
 		author is 'Paulo Moura',
-		date is 2023-04-26,
+		date is 2023-09-20,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -614,14 +614,16 @@
 			do_port_option(Option, Port, N, Goal, TGoal, Error, ExCtx, Action),
 			!
 		;	(	tracing_ ->
-				(	write_max_depth_(MaxDepth),
-					MaxDepth > 0 ->
-					print_message(information, debugger, tracing_port(' ', Port, N, Goal, MaxDepth))
-				;	print_message(information, debugger, tracing_port(' ', Port, N, Goal))
-				)
-			;	true
+				Code = ' '
+			;	spying_port_code(Port, Goal, ExCtx, Code)
+			) ->
+			(	write_max_depth_(MaxDepth),
+				MaxDepth > 0 ->
+				print_message(information, debugger, tracing_port(Code, Port, N, Goal, MaxDepth))
+			;	print_message(information, debugger, tracing_port(Code, Port, N, Goal))
 			),
 			Action = true
+		;	Action = true
 		).
 
 	port(_, _, _, _, _, _, true).

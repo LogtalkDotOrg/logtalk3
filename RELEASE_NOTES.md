@@ -31,6 +31,12 @@ Documentation
 * IMPROVED: Documentation of the embedding scripts on how to handle an
 application using a mix of Logtalk and Prolog source files.
 
+Tools
+-----
+
+* CHANGED: The `debugger` tool to print a procedure box port for spy points
+when the port is unleashed.
+
 Examples
 --------
 
