@@ -138,7 +138,8 @@ goal with, respectively, a fact and a rule head:
 
 Following Prolog tradition, the user may define for which ports the
 debugger should pause for user interaction by specifying a list of
-*leashed* ports. For example:
+*leashed* ports. Unleashed ports are just printed with no pause for
+user interaction. For example:
 
 .. code-block:: text
 

@@ -270,7 +270,8 @@ goal with, respectively, a fact and a rule head:</p>
 </div>
 <p>Following Prolog tradition, the user may define for which ports the
 debugger should pause for user interaction by specifying a list of
-<em>leashed</em> ports. For example:</p>
+<em>leashed</em> ports. Unleashed ports are just printed with no pause for
+user interaction. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::leash([call, exit, fail]).
 </pre></div>
 </div>
