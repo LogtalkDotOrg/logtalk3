@@ -37,11 +37,17 @@ Tools
 * CHANGED: The `debugger` tool to print a procedure box port for spy points
 when the port is unleashed.
 
+* UPDATED: The `tutor` tool for the new linter warning on missing arithmetic
+functions.
+
 Examples
 --------
 
 * CHANGED: The `document_converter` example to ensure UTF-8 encoding of the
 text files resulting from PDF files conversion.
+
+* UPDATED: The `errors` example to illustrate linter arithmetic function
+warnings.
 
 
 3.70.0 - September 18, 2023

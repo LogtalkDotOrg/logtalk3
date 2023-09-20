@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:56:0,
+		version is 0:57:0,
 		author is 'Paulo Moura',
-		date is 2023-08-07,
+		date is 2023-09-20,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -736,6 +736,9 @@
 		[	'But there is a ~w directive for the predicate. If there is a scope'-[Directive], nl,
 			'directive, check for a typo in the predicate name or number of arguments.'-[], nl, nl
 		].
+
+	explain(missing_function(_, _, _, _, _)) -->
+		['Check for a typo in the function name or number of arguments.'-[], nl, nl].
 
 	% disjunction guidelines messages
 

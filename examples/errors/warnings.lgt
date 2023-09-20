@@ -97,6 +97,12 @@
 		retractall(result(Result, _)),
 		sort([], []),
 		tell(file).
+	% clause with calls to non-ISO Prolog standard arithmetic functions
+	predicate :-
+		_ is popcount(42).
+	% clause with calls to missing arithmetic functions
+	predicate :-
+		_ is fun(42).
 
 :- end_object.
 
