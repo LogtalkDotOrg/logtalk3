@@ -29,8 +29,9 @@ the JSON format based on the specification and standard found at:
 - https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
 
 It includes parametric objects whose parameters allow selecting the
-representation for parsed JSON text strings (`atom`, `chars`, or `codes`)
-and JSON pairs (`dash`, `equal`, or `colon`).
+representation for parsed JSON objects (`curly` or `list`), JSON text
+strings (`atom`, `chars`, or `codes`) and JSON pairs (`dash`, `equal`,
+or `colon`).
 
 
 API documentation
