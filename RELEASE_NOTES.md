@@ -31,6 +31,13 @@ Documentation
 * IMPROVED: Documentation of the embedding scripts on how to handle an
 application using a mix of Logtalk and Prolog source files.
 
+Library
+-------
+
+* UPDATED: The `tester_versions.lgt` library file to use the de facto Prolog
+standard `version_data` flag to print any additional backend Prolog version
+data.
+
 Tools
 -----
 
