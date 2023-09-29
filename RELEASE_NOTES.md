@@ -25,6 +25,12 @@ RELEASE NOTES
 3.71.0 - October ??, 2023
 =========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The GNU Prolog adapter file for compatibility with versions older
+than 1.6.0.
+
 Documentation
 -------------
 

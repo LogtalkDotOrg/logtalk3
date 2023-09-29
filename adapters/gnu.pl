@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on September 12, 2023
+%  Last updated on September 29, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -703,7 +703,7 @@ message_queue_destroy(_) :- fail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((current_prolog_flag(version_data, gprolog(Major,Minor,Patch)), Major:Minor:Patch @< 1:6:0)).
+:- if((current_prolog_flag(version_data, gprolog(Major,Minor,Patch,_)), Major:Minor:Patch @< 1:6:0)).
 
 	:- multifile('$logtalk#0.print_message_token#4'/5).
 	:- dynamic('$logtalk#0.print_message_token#4'/5).
