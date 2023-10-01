@@ -461,9 +461,9 @@ A pack is specified using a Logtalk source file defining an object that
 implements the ``pack_protocol``. The source file should be named after
 the pack with a ``_pack`` suffix. This naming convention helps
 preventing name conflicts, notably with the pack own objects. The file
-must be available from a declared pack registry. The pack name is
-ideally a valid unquoted atom. An example of a registry specification
-object would be:
+must be available from a declared pack registry (by having the registry
+loader file loading it). The pack name is ideally a valid unquoted atom.
+An example of a registry specification object would be:
 
 ::
 
@@ -522,10 +522,11 @@ formats and extensions are:
 -  ``.tgz``, ``.tar.gz``
 -  ``.tbz2``, ``.tar.bz2``
 
-The pack sources should contain ``LICENSE``, ``README.md``, and
-``loader.lgt`` (or ``loader.logtalk``) files. The path to the
-``README.md`` file is printed when the pack is installed or updated. It
-can also be queried using the ``packs::directory/2`` predicate.
+The pack sources should contain ``LICENSE``, ``README.md`` (or
+``NOTES.md``), and ``loader.lgt`` (or ``loader.logtalk``) files. The
+path to the ``README.md`` file is printed when the pack is installed or
+updated. It can also be queried using the ``packs::directory/2``
+predicate.
 
 Pack URLs and Single Sign-On
 ----------------------------
