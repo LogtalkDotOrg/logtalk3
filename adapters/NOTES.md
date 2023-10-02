@@ -91,7 +91,6 @@ following table summarizes the availability of these features:
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |       no      |  
 |  LVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |       no      |  
-|  Scryer Prolog   |       no      |       no      |       no      |       no      |       no      |      yes      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |      yes      |  
 |  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |       no      |  
@@ -270,14 +269,6 @@ some of these issues using the dialect-level goal-expansion mechanism.
 The original version of this adapter file was written and tested with help
 of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
 current release using version 3.5 for Windows for testing.
-
-
-Scryer Prolog 0.9.1 and later versions
-----------------------------------------
-
-	scryer.pl
-
-Experimental.
 
 
 SICStus Prolog 4.1.0 and later versions

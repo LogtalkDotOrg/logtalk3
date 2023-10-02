@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on June 7, 2023
+; Last updated on October 2, 2023
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -75,7 +75,6 @@ Name: "prolog\eclipse"; Description: "ECLiPSe integration (6.1#143 or later)"; T
 Name: "prolog\gprolog"; Description: "GNU Prolog integration (1.4.5 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\ji"; Description: "JIProlog integration (4.1.7.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\quintus"; Description: "Quintus Prolog (experimental) integration (3.3 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\scryer"; Description: "Scryer Prolog integration (0.9.1 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\sicstus"; Description: "SICStus Prolog integration (4.1.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
@@ -168,8 +167,6 @@ Name: "{group}\Logtalk - GNU Prolog"; Filename: "{code:GetGPExePath}"; Parameter
 Name: "{group}\Logtalk - JIProlog"; Filename: "{code:GetJIPExePath}"; Parameters: "-c ""{code:GetJIPIntegrationFilePath}"""; Comment: "Runs Logtalk with JIProlog (first time may require running as administrator)"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\ji; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - Quintus Prolog"; Filename: "{code:GetQuintusExePath}"; Parameters: "+l ""{code:GetQuintusIntegrationFilePath}"" +z ""%LOGTALKHOME%"""; Comment: "Runs Logtalk with Quintus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\quintus; Flags: createonlyiffileexists
-
-Name: "{group}\Logtalk - Scryer Prolog"; Filename: "{code:GetScryerExePath}"; Parameters: "-l ""%LOGTALKHOME%\integration\logtalk_scryer.pl"""; Comment: "Runs Logtalk with Scryer Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\scryer; Flags: createonlyiffileexists
 
 Name: "{group}\Logtalk - SICStus Prolog"; Filename: "{code:GetSICStusExePath}"; Parameters: "-l ""%LOGTALKHOME%\integration\logtalk_sicstus.pl"""; Comment: "Runs Logtalk with SICStus Prolog"; WorkingDir: "%LOGTALKUSER%"; Components: prolog\sicstus; Flags: createonlyiffileexists
 
@@ -482,32 +479,6 @@ end;
 function GetQuintusIntegrationFilePath(Param: String): String;
 begin
   Result := GetShortName(ExpandConstant('{app}') + '\integration\logtalk_quintus.pl')
-end;
-
-function ScryerExePath: String;
-var
-  Path: String;
-begin
-  Path := FileSearch('scryer-prolog.exe', ExpandConstant('{sd}\scryer-prolog'));
-  if Path = '' then
-    Result := 'prolog_compiler_not_installed'
-  else
-    Result := Path
-end;
-
-function GetScryerExePath(Param: String): String;
-var
-  Warning: String;
-begin
-  Result := ScryerExePath;
-  if (Result = 'prolog_compiler_not_installed') and not WizardSilent then
-  begin
-    Warning := 'Failed to detect Scryer Prolog installation.' + Chr(13) +
-               'Logtalk integration shortcut not created.' + Chr(13) + Chr(13) +
-               'You can manually create the shortcut by finding the full path to the Scryer Prolog executable and defining the shortcut target as:' + Chr(13) + Chr(13) +
-               'executable full path -l "%LOGTALKHOME%\integration\logtalk_scryer.pl"';
-    MsgBox(Warning, mbError, MB_OK);
-  end
 end;
 
 function SICStusExePath: String;
@@ -845,7 +816,6 @@ begin
       (GPExePath = 'prolog_compiler_not_installed') and
       (JIPExePath = 'prolog_compiler_not_installed') and
       (QuintusExePath = 'prolog_compiler_not_installed') and
-      (ScryerExePath = 'prolog_compiler_not_installed') and
       (SICStusExePath = 'prolog_compiler_not_installed') and
       (SWIConExePath = 'prolog_compiler_not_installed') and
       (SWIWinExePath = 'prolog_compiler_not_installed') and

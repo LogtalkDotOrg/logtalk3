@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 6:0:0,
+		version is 6:1:0,
 		author is 'Paulo Moura',
-		date is 2023-09-20,
+		date is 2023-10-02,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -549,7 +549,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == scryer; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
+		(Dialect == b; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
 	)).
 
 		call_goal(TGoal, Deterministic) :-
@@ -1055,11 +1055,6 @@
 				true
 			;	skip(10)
 			).
-
-	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
-
-		read_single_char(Char) :-
-			{':'(charsio,get_single_char(Char))}, put_char(Char), nl.
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 

@@ -19,10 +19,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(prolog_dialect, scryer)).
-	:- use_module(library(charsio), []).
-:- endif.
-
 :- initialization(
 	logtalk_load([
 		debuggerp,

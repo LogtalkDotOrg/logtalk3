@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on March 15, 2023
+##   Last updated on October 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.24")
+	Write-Output ($myName + " 0.25")
 }
 
 function Write-Usage-Help() {
@@ -58,7 +58,7 @@ function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -p backend Prolog compiler (default is " + $p + ")")
-	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output "  -i include all installed packs"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
@@ -102,9 +102,6 @@ if ("$p" -eq "b") {
 } elseif ("$p" -eq "lvm") {
 	$prolog='LVM'
 	$logtalk="lvmlgt -g"
-} elseif ("$p" -eq "scryer") {
-	$prolog='Scryer Prolog'
-	$logtalk="scryerlgt -g"
 } elseif ("$p" -eq "sicstus") {
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt --goal"

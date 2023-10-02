@@ -11,8 +11,8 @@
 Portable operating-system access predicates.
 
 | **Author:** Paulo Moura
-| **Version:** 1:98:0
-| **Date:** 2023-08-05
+| **Version:** 1:99:0
+| **Date:** 2023-10-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -32,9 +32,7 @@ Portable operating-system access predicates.
    - B-Prolog portability: The ``wall_time/1`` predicate is not supported.
    - CxProlog portability: The ``date_time/7`` predicate returns zeros for all arguments.
    - JIProlog portability: The ``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.
-   - Qu-Prolog portability: The ``directory_files/2`` predicate is not supported.
    - Quintus Prolog: The ``pid/1`` and ``shell/2`` predicates are not supported.
-   - Scryer Prolog: The ``file_permission/2``, ``cpu_time/1``, and ``wall_time/1`` predicates are not supported.
    - XSB portability: The ``command_line_arguments/1`` predicate is not supported.
 
 | **Inherited public predicates:**

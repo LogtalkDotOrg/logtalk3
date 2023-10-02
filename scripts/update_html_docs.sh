@@ -69,7 +69,7 @@ set_goal() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.24"
+	echo "$(basename "$0") 0.25"
 	exit 0
 }
 
@@ -87,7 +87,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo "  -i include all installed packs"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
@@ -128,9 +128,6 @@ elif [ "$p_arg" == "ji" ] ; then
 elif [ "$p_arg" == "lvm" ] ; then
 	prolog='LVM'
 	logtalk="lvmlgt$extension -g"
-elif [ "$p_arg" == "scryer" ] ; then
-	prolog='Scryer Prolog'
-	logtalk="scryerlgt$extension -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"

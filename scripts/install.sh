@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on July 25, 2023
+##   Last updated on October 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -154,7 +154,6 @@ ln -sf ../share/logtalk/integration/gplgt.sh gplgt
 ln -sf ../share/logtalk/integration/jiplgt.sh jiplgt
 ln -sf ../share/logtalk/integration/lvmlgt.sh lvmlgt
 ln -sf ../share/logtalk/integration/quintuslgt.sh quintuslgt
-ln -sf ../share/logtalk/integration/scryerlgt.sh scryerlgt
 ln -sf ../share/logtalk/integration/sicstuslgt.sh sicstuslgt
 ln -sf ../share/logtalk/integration/swilgt.sh swilgt
 ln -sf ../share/logtalk/integration/taulgt.sh taulgt
@@ -195,7 +194,6 @@ echo "* GNU Prolog (1.4.5 or later):       gplgt"
 echo "* JIProlog (4.1.7.1 or later):       jiplgt      (first run may require sudo)"
 echo "* LVM (6.3.0 or later):              lvmlgt"
 echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
-echo "* Scryer Prolog (0.9.1 or later):    scryerlgt   (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.2 or later):       taulgt"

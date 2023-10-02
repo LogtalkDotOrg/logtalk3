@@ -22,9 +22,9 @@
 :- object(format).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2022-03-02,
+		date is 2023-10-02,
 		comment is 'Formatted output predicates.'
 	]).
 
@@ -61,22 +61,6 @@
 
 		format(Format, Arguments) :-
 			{format:format(Format, Arguments)}.
-
-	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
-
-		format(Stream, Format, Arguments) :-
-			(	atom(Format) ->
-				atom_chars(Format, Chars),
-				{format:format(Stream,  Chars, Arguments)}
-			;	{format:format(Stream, Format, Arguments)}
-			).
-
-		format(Format, Arguments) :-
-			(	atom(Format) ->
-				atom_chars(Format, Chars),
-				{format:format(Chars,  Arguments)}
-			;	{format:format(Format, Arguments)}
-			).
 
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 

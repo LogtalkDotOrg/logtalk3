@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on January 10, 2023
+##   Last updated on October 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -85,7 +85,6 @@ rm -f logtalk_user_setup
 rm -f logtalk_version_select
 rm -f lvmlgt
 rm -f quintuslgt
-rm -f scryerlgt
 rm -f sicstuslgt
 rm -f swilgt
 rm -f taulgt
@@ -114,7 +113,6 @@ rm -f logtalk_user_setup.1.gz
 rm -f logtalk_version_select.1.gz
 rm -f lvmlgt.1.gz
 rm -f quintuslgt.1.gz
-rm -f scryerlgt.1.gz
 rm -f sicstuslgt.1.gz
 rm -f swilgt.1.gz
 rm -f taulgt.1.gz

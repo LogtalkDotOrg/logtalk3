@@ -26,7 +26,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == tau; Dialect == trealla; Dialect == scryer)
+		(Dialect == tau; Dialect == trealla)
 	)).
 		:- use_module(data1).
 		:- use_module(data2).

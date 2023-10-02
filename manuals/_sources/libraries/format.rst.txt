@@ -79,7 +79,7 @@ also using a list of characters. These currently include ECLiPSe, GNU
 Prolog, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.
 Therefore, when wide portability is sought, atoms must be used for the
 format specifier argument as they bypass any dependency on the
-``double_quotes`` standard Prolog flag. Some systems, like Scryer Prolog
-and Tau Prolog, only accept a list of characters for the format string.
-In this case, this library will convert the atom format string before
-calling these systems native implementations.
+``double_quotes`` standard Prolog flag. Some systems, like Tau Prolog,
+only accept a list of characters for the format string. In this case,
+this library will convert the atom format string before calling these
+systems native implementations.

@@ -28,8 +28,8 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: The Scryer Prolog adapter file to use the de facto Prolog standard
-`version_data` flag to define the Logtalk `prolog_version` flag.
+* CHANGED: Scryer Prolog is no longer supported due to the system refusal
+to support the de facto standard `version_data` flag.
 
 * FIXED: The GNU Prolog adapter file for compatibility with versions older
 than 1.6.0.

@@ -607,7 +607,6 @@ argument of the `version/6` predicate is a list of backend identifiers
 - JIProlog: `ji`
 - LVM: `lvm`
 - Quintus Prolog: `quintus`
-- Scryer Prolog: `scryer`
 - SICStus Prolog: `sicstus`
 - SWI-Prolog: `swi`
 - Tau Prolog: `tau`

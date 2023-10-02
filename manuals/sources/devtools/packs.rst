@@ -659,7 +659,6 @@ identifiers (atoms):
 -  JIProlog: ``ji``
 -  LVM: ``lvm``
 -  Quintus Prolog: ``quintus``
--  Scryer Prolog: ``scryer``
 -  SICStus Prolog: ``sicstus``
 -  SWI-Prolog: ``swi``
 -  Tau Prolog: ``tau``

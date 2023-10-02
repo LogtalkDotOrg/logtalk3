@@ -32,11 +32,6 @@
 	:- else.
 		:- use_module(library(process), [process_create/3]).
 	:- endif.
-:- elif(current_logtalk_flag(prolog_dialect, scryer)).
-	:- use_module(library(lists)).
-	:- use_module(library(files)).
-	:- use_module(library(os)).
-	:- use_module(library(time)).
 :- elif(current_logtalk_flag(prolog_dialect, swi)).
 	:- use_module(library(filesex)).
 :- elif(current_logtalk_flag(prolog_dialect, tau)).
@@ -55,9 +50,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:98:0,
+		version is 1:99:0,
 		author is 'Paulo Moura',
-		date is 2023-08-05,
+		date is 2023-10-02,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -65,9 +60,7 @@
 			'B-Prolog portability' - 'The ``wall_time/1`` predicate is not supported.',
 			'CxProlog portability' - 'The ``date_time/7`` predicate returns zeros for all arguments.',
 			'JIProlog portability' - 'The ``file_permission/2`` and ``command_line_arguments/1`` predicates are not supported.',
-			'Qu-Prolog portability' - 'The ``directory_files/2`` predicate is not supported.',
 			'Quintus Prolog' - 'The ``pid/1`` and ``shell/2`` predicates are not supported.',
-			'Scryer Prolog' - 'The ``file_permission/2``, ``cpu_time/1``, and ``wall_time/1`` predicates are not supported.',
 			'XSB portability' - 'The ``command_line_arguments/1`` predicate is not supported.'
 		],
 		see_also is [os_types]
@@ -1973,168 +1966,6 @@
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
 
-	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
-
-		expand_path_chars(Path, ExpandedPathChars) :-
-			atom_chars(Path, PathChars),
-			{path_segments(PathChars, [Segment| Segments])},
-			(	['$'| EnvVar] = Segment ->
-				{getenv(EnvVar, Value)},
-				{path_segments(PathCharsExpanded, [Value| Segments])}
-			;	PathCharsExpanded = PathChars
-			),
-			(	{path_canonical(PathCharsExpanded, ExpandedPathChars)} ->
-				true
-			;	PathCharsExpanded = ['/'| _] ->
-				ExpandedPathChars = PathCharsExpanded
-			;	{working_directory(Current, Current)},
-				{append(Current, ['/'| PathCharsExpanded], ExpandedPathChars)}
-			).
-
-		pid(PID) :-
-			{pid(PID)}.
-
-		shell(Command, Status) :-
-			atom_chars(Command, Chars),
-			{shell(Chars, Status)}.
-
-		shell(Command) :-
-			atom_chars(Command, Chars),
-			{shell(Chars)}.
-
-		absolute_file_name(Path, ExpandedPath) :-
-			expand_path_chars(Path, ExpandedPathChars),
-			atom_chars(ExpandedPath, ExpandedPathChars).
-
-		internal_os_path(Path, OSPath) :-
-			internal_os_path_portable(Path, OSPath).
-
-		make_directory(Directory) :-
-			expand_path_chars(Directory, ExpandedPathChars),
-			(	{directory_exists(ExpandedPathChars)} ->
-				true
-			;	{make_directory(ExpandedPathChars)}
-			).
-
-		make_directory_path(Directory) :-
-			expand_path_chars(Directory, ExpandedPathChars),
-			{make_directory_path(ExpandedPathChars)}.
-
-		delete_directory(Directory) :-
-			expand_path_chars(Directory, ExpandedPathChars),
-			{delete_directory(ExpandedPathChars)}.
-
-		change_directory(Directory) :-
-			expand_path_chars(Directory, ExpandedPathChars),
-			(	{directory_exists(ExpandedPathChars)} ->
-				{working_directory(_, ExpandedPathChars)}
-			;	existence_error(directory, Directory)
-			).
-
-		working_directory(Directory) :-
-			{working_directory(DirectoryChars, DirectoryChars)},
-			atom_chars(Directory, DirectoryChars).
-
-		directory_files(Directory, Files) :-
-			expand_path_chars(Directory, ExpandedPathChars),
-			(	{directory_exists(ExpandedPathChars)} ->
-				{directory_files(ExpandedPathChars, FilesChars)},
-				chars_to_atom(FilesChars, Files0),
-				Files = ['.', '..'| Files0]
-			;	existence_error(directory, Directory)
-			).
-
-		chars_to_atom([], []).
-		chars_to_atom([FileChars| FilesChars], [File| Files]) :-
-			atom_chars(File, FileChars),
-			chars_to_atom(FilesChars, Files).
-
-		directory_exists(Directory) :-
-			expand_path_chars(Directory, ExpandedPathChars),
-			{directory_exists(ExpandedPathChars)}.
-
-		file_exists(File) :-
-			expand_path_chars(File, ExpandedPathChars),
-			{file_exists(ExpandedPathChars)}.
-
-		file_modification_time(File, Time) :-
-			expand_path_chars(File, ExpandedPathChars),
-			{file_modification_time(ExpandedPathChars, Time)}.
-
-		file_size(File, Size) :-
-			expand_path_chars(File, ExpandedPathChars),
-			{file_size(ExpandedPathChars, Size)}.
-
-		file_permission(_, _) :-
-			throw(not_available(file_permission/2)).
-
-		rename_file(Old, New) :-
-			expand_path_chars(Old, OldExpandedPathChars),
-			expand_path_chars(New, NewExpandedPathChars),
-			{rename_file(OldExpandedPathChars, NewExpandedPathChars)}.
-
-		delete_file(File) :-
-			expand_path_chars(File, ExpandedPathChars),
-			{delete_file(ExpandedPathChars)}.
-
-		environment_variable(Variable, Value) :-
-			atom_chars(Variable, VariableChars),
-			{getenv(VariableChars, ValueChars)},
-			atom_chars(Value, ValueChars).
-
-		time_stamp(Time) :-
-			{current_time(Time)}.
-
-		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
-			{
-				current_time(Time),
-				memberchk('Y'=Year0,    Time),
-				memberchk('m'=Month0,   Time),
-				memberchk('d'=Day0,     Time),
-				memberchk('H'=Hours0,   Time),
-				memberchk('M'=Minutes0, Time),
-				memberchk('S'=Seconds0, Time),
-				(	current_prolog_flag(double_quotes, chars) ->
-					number_chars(Year, Year0),
-					number_chars(Month, Month0),
-					number_chars(Day, Day0),
-					number_chars(Hours, Hours0),
-					number_chars(Minutes, Minutes0),
-					number_chars(Seconds, Seconds0)
-				;	current_prolog_flag(double_quotes, codes) ->
-					number_codes(Year, Year0),
-					number_codes(Month, Month0),
-					number_codes(Day, Day0),
-					number_codes(Hours, Hours0),
-					number_codes(Minutes, Minutes0),
-					number_codes(Seconds, Seconds0)
-				;	% current_prolog_flag(double_quotes, atom),
-					atom_codes(Year0, YearCodes), number_codes(Year, YearCodes),
-					atom_codes(Month0, MonthCodes), number_codes(Month, MonthCodes),
-					atom_codes(Day0, DayCodes), number_codes(Day, DayCodes),
-					atom_codes(Hours0, HoursCodes), number_codes(Hours, HoursCodes),
-					atom_codes(Minutes0, MinutesCodes), number_codes(Minutes, MinutesCodes),
-					atom_codes(Seconds0, SecondsCodes), number_codes(Seconds, SecondsCodes)
-				)
-			}.
-
-		cpu_time(0.0).
-
-		wall_time(0.0).
-
-		operating_system_type(Type) :-
-			atom_chars('COMSPEC', Chars),
-			(	{getenv(Chars, _)} ->
-				Type = windows
-			;	Type = unix
-			).
-
-		command_line_arguments(Arguments) :-
-			{argv(Arguments)}.
-
-		sleep(Seconds) :-
-			{sleep(Seconds)}.
-
 	:- else.
 
 		:- initialization((write('WARNING: backend Prolog compiler not supported!'), nl)).
@@ -2463,7 +2294,7 @@
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(	Dialect == gnu, \+ predicate_property(copy_file(_,_), built_in);
-			Dialect == ji; Dialect == quintus; Dialect == scryer; Dialect == sicstus;
+			Dialect == ji; Dialect == quintus; Dialect == sicstus;
 			Dialect == tau, \+ {predicate_property(':'(os, copy_file(_,_)), static)}
 		)
 	)).

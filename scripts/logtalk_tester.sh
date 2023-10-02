@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on July 3, 2023
+##   Last updated on October 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 set -o pipefail
 
 print_version() {
-	echo "$(basename "$0") 15.0"
+	echo "$(basename "$0") 16.0"
 	exit 0
 }
 
@@ -301,7 +301,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
@@ -401,10 +401,6 @@ elif [ "$p_arg" == "lvm" ] ; then
 		*"--custom-top-level"*) dot="?";;
 		*) dot=".";;
 	esac
-elif [ "$p_arg" == "scryer" ] ; then
-	prolog='Scryer Prolog'
-	logtalk=scryerlgt$extension
-	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension

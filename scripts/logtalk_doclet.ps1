@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on July 20, 2023
+##   Last updated on October 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.4")
+	Write-Output ($myName + " 2.5")
 }
 
 Function Run-Doclets() {
@@ -100,7 +100,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -161,10 +161,6 @@ Function Check-Parameters() {
 		$script:logtalk="lvmlgt"
 		$script:logtalk_option="-g"
 		$script:dot="."
-	} elseif ($p -eq "scryer") {
-		$script:prolog='Scryer Prolog'
-		$script:logtalk="scryerlgt"
-		$script:logtalk_option="-g"
 	} elseif ($p -eq "sicstus") {
 		$script:prolog='SICStus Prolog'
 		$script:logtalk="sicstuslgt"

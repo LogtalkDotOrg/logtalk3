@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:66:0,
+		version is 0:67:0,
 		author is 'Paulo Moura',
-		date is 2023-08-29,
+		date is 2023-10-02,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1650,7 +1650,6 @@
 	valid_backend(ji).
 	valid_backend(lvm).
 	valid_backend(quintus).
-	valid_backend(scryer).
 	valid_backend(sicstus).
 	valid_backend(swi).
 	valid_backend(tau).
@@ -2082,7 +2081,6 @@
 	backend(ji,      'JIProlog').
 	backend(lvm,     'LVM').
 	backend(quintus, 'Quintus Prolog').
-	backend(scryer,  'Scryer Prolog').
 	backend(sicstus, 'SICStus Prolog').
 	backend(swi,     'SWI-Prolog').
 	backend(tau,     'Tau Prolog').
