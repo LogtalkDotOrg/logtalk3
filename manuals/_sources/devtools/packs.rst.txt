@@ -523,10 +523,11 @@ formats and extensions are:
 -  ``.tbz2``, ``.tar.bz2``
 
 The pack sources should contain ``LICENSE``, ``README.md`` (or
-``NOTES.md``), and ``loader.lgt`` (or ``loader.logtalk``) files. The
-path to the ``README.md`` file is printed when the pack is installed or
-updated. It can also be queried using the ``packs::directory/2``
-predicate.
+``NOTES.md``), and ``loader.lgt`` (or ``loader.logtalk``) files.
+Ideally, it should also contain a ``tester.lgt`` (``tester.logtalk``)
+file. The path to the ``README.md`` file is printed when the pack is
+installed or updated. It can also be queried using the
+``packs::directory/2`` predicate.
 
 Pack URLs and Single Sign-On
 ----------------------------
