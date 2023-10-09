@@ -7,5 +7,9 @@ build:
     python: "3.11"
 
 formats:
-    - epub
-    - pdf
+  - epub
+  - pdf
+
+python:
+  install:
+    - requirements: manuals/sources/requirements.txt
