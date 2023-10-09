@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:67:0,
+		version is 0:68:0,
 		author is 'Paulo Moura',
-		date is 2023-10-02,
+		date is 2023-10-09,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1592,6 +1592,13 @@
 		;	true
 		),
 		fail.
+	lint_check_versions(_, PackObject) :-
+		findall(Version, PackObject::version(Version, _, _, _, _, _), Versions),
+		(	sort(0, (@>), Versions, Versions) ->
+			true
+		;	print_message(warning, packs, 'Pack versions are not listed from newest to oldest: ~q'+[Versions])
+		),
+		fail.
 	lint_check_versions(_, _).
 
 	lint_check_note(Action, Version, Note) :-
@@ -1640,7 +1647,7 @@
 		),
 		memberchk(Operator, [(@>=), (@>), (==), (@=<), (@<)]),
 		arg(2, Dependency, Version),
-		valid_version(Version).
+		valid_dependency_version(Version).
 
 	valid_backend(b).
 	valid_backend(ciao).
@@ -1656,6 +1663,18 @@
 	valid_backend(trealla).
 	valid_backend(xsb).
 	valid_backend(yap).
+
+	valid_dependency_version(Major:Minor:Patch) :-
+		integer(Major),
+		integer(Minor),
+		integer(Patch),
+		!.
+	valid_dependency_version(Major:Minor) :-
+		integer(Major),
+		integer(Minor),
+		!.
+	valid_dependency_version(Major) :-
+		integer(Major).
 
 	% check availability of a pack update
 
