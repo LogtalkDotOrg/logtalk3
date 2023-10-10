@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into Markdown files
-%  Last updated on July 29, 2021
+%  Last updated on October 10, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -63,6 +63,7 @@
 		</xsl:for-each>
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
+	<xsl:apply-templates select="logtalk_entity/availability" />
 	<xsl:apply-templates select="logtalk_entity/entity" />
 	<xsl:apply-templates select="logtalk_entity/relations" />
 	<xsl:apply-templates select="logtalk_entity/predicates" />
@@ -70,6 +71,12 @@
 	<xsl:apply-templates select="logtalk_entity/remarks" />
 	<xsl:apply-templates select="logtalk_entity/see_also" />
 	<xsl:value-of select="$hr" />
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/availability">
+	<xsl:text>* availability: `</xsl:text><xsl:value-of select="current()" /><xsl:text>`</xsl:text>
+	<xsl:value-of select="$nl2" />
 </xsl:template>
 
 

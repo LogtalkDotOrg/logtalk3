@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:4:0,
+		version is 9:5:0,
 		author is 'Paulo Moura',
-		date is 2023-08-03,
+		date is 2023-10-10,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -463,6 +463,7 @@
 		write_entity_xml_operators(Stream, Entity),
 		write_entity_xml_remarks(Stream, Entity),
 		write_entity_xml_see_also(Stream, Entity),
+		write_entity_xml_availability(Stream, Entity),
 		write_entity_xml_footer(Stream).
 
 	write_entity_xml_header(Stream, Options, StreamOptions) :-
@@ -1365,6 +1366,14 @@
 		),
 		write_xml_close_tag(Stream, see_also).
 
+	write_entity_xml_availability(Stream, Entity) :-
+		(	library_entity_(Library, _, _, Entity),
+			Library \== core ->
+			atomic_list_concat(['logtalk_load(', Library, '(loader))'], Availability)
+		;	Availability = 'built_in'
+		),
+		write_xml_element(Stream, availability, [], Availability).
+
 	% write_xml_open_tag(@stream, @atom, @list)
 	%
 	% writes <Tag Att1="V1" Att2="V2" ...>
@@ -1562,11 +1571,11 @@
 		close(Stream).
 
 	kind_ref_doctype_xsd(entity, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/5.0/logtalk_entity.dtd', 'https://logtalk.org/xml/5.0/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/6.0/logtalk_entity.dtd', 'https://logtalk.org/xml/6.0/logtalk_entity.xsd').
 	kind_ref_doctype_xsd(entity, standalone, logtalk_entity-none, none).
 
 	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/5.0/logtalk_index.dtd', 'https://logtalk.org/xml/5.0/logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/6.0/logtalk_index.dtd', 'https://logtalk.org/xml/6.0/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
 	sorted_keys_to_keys([], []).

@@ -10,6 +10,9 @@
 
 Options processing predicates. Options are represented by compound terms where the functor is the option name.
 
+| **Availability:** 
+|    ``logtalk_load(options(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:2:0
 | **Date:** 2022-01-03

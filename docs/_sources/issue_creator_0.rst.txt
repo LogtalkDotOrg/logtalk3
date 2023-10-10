@@ -10,6 +10,9 @@
 
 Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.
 
+| **Availability:** 
+|    ``logtalk_load(issue_creator(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 0:12:0
 | **Date:** 2022-01-20

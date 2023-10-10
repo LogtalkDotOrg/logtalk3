@@ -10,6 +10,9 @@
 
 This hook object applies the expansion rules defined in the Prolog backend adapter file.
 
+| **Availability:** 
+|    ``logtalk_load(hook_objects(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2020-02-17

@@ -13,6 +13,9 @@
 
 Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.
 
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:22:0
 | **Date:** 2022-05-23

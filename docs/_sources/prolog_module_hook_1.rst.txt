@@ -10,6 +10,9 @@
 
 This hook object applies the expansion rules defined in a Prolog module (e.g. ``user``).
 
+| **Availability:** 
+|    ``logtalk_load(hook_objects(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2020-02-17

@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
-%  Last updated on July 29, 2021
+%  Last updated on October 10, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -153,6 +153,20 @@
 			</fo:block>
 		</xsl:for-each>
 	</xsl:if>
+
+	<fo:block
+			font-size="10pt"
+			font-family="serif" 
+			keep-with-next="always"
+			space-before="8pt">
+		availability:
+	</fo:block>
+	<fo:block
+			font-size="9pt"
+			font-family="monospace"
+			margin-left="10mm">
+		<xsl:value-of select="../availability"/>
+	</fo:block>
 
 	<xsl:if test="author">
 		<fo:block

@@ -10,6 +10,9 @@
 
 Optional term handling predicates. Requires passing an optional term (constructed using the ``optional`` object predicates) as a parameter.
 
+| **Availability:** 
+|    ``logtalk_load(optionals(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:7:0
 | **Date:** 2019-11-26

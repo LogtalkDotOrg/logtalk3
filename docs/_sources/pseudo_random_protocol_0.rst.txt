@@ -10,6 +10,9 @@
 
 Pseudo-random number generator protocol for seed handling predicates. These predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
+| **Availability:** 
+|    ``logtalk_load(random(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2021-02-21

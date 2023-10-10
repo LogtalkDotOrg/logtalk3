@@ -10,6 +10,9 @@
 
 Intercepts unit test execution messages and generates a ``coverage_report.xml`` file with a test suite code coverage results.
 
+| **Availability:** 
+|    ``logtalk_load(lgtunit(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 3:2:0
 | **Date:** 2023-04-11

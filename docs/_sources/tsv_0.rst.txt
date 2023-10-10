@@ -10,6 +10,9 @@
 
 TSV files reading and writing predicates using the options Header - ``keep``, Separator - ``tab``, and IgnoreQuotes - ``false``.
 
+| **Availability:** 
+|    ``logtalk_load(csv(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2022-07-22

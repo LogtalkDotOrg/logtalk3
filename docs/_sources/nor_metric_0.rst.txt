@@ -10,6 +10,9 @@
 
 Number of entity rules metric. The score is represented using the compound term ``number_of_rules(Total, User)``.
 
+| **Availability:** 
+|    ``logtalk_load(code_metrics(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 0:3:0
 | **Date:** 2022-05-05

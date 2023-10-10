@@ -10,6 +10,9 @@
 
 Hook object to optimize messages to the ``java/1-2`` objects that otherwise would trigger the ``forward/1`` handler.
 
+| **Availability:** 
+|    ``logtalk_load(java(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:1
 | **Date:** 2019-06-13

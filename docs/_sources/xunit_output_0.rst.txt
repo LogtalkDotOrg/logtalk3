@@ -10,6 +10,9 @@
 
 Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.
 
+| **Availability:** 
+|    ``logtalk_load(lgtunit(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 3:4:0
 | **Date:** 2023-08-11

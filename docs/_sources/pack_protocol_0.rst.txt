@@ -10,6 +10,9 @@
 
 Pack specification protocol. Objects implementing this protocol should be named after the pack with a ``_pack`` suffix and saved in a file with the same name as the object.
 
+| **Availability:** 
+|    ``logtalk_load(packs(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 0:16:0
 | **Date:** 2022-11-20

@@ -10,6 +10,9 @@
 
 Named integer counters. Counter names can be any nonvar term.
 
+| **Availability:** 
+|    ``logtalk_load(library(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:1
 | **Date:** 2022-02-11

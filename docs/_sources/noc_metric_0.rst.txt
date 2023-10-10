@@ -10,6 +10,9 @@
 
 Number of entity clauses metric. The score is represented using the compound term ``number_of_clauses(Total, User)``.
 
+| **Availability:** 
+|    ``logtalk_load(code_metrics(loader))``
+
 | **Author:** Ebrahim Azarisooreh and Paulo Moura
 | **Version:** 0:12:0
 | **Date:** 2022-05-05

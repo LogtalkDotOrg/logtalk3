@@ -10,6 +10,9 @@
 
 Use this object as a file specific hook object to prevent any (other) user-defined expansion rules to be applied when compiling the file.
 
+| **Availability:** 
+|    ``logtalk_load(hook_objects(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2020-02-15

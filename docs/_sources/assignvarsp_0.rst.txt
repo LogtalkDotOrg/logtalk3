@@ -10,6 +10,9 @@
 
 Assignable variables (supporting backtracable assignment of non-variable terms) protocol.
 
+| **Availability:** 
+|    ``logtalk_load(assignvars(loader))``
+
 | **Author:** Nobukuni Kino and Paulo Moura
 | **Version:** 1:0:1
 | **Date:** 2019-06-10

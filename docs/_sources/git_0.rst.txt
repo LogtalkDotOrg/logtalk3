@@ -10,6 +10,9 @@
 
 Predicates for accessing a git project current branch and latest commit data.
 
+| **Availability:** 
+|    ``logtalk_load(git(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 2:1:1
 | **Date:** 2023-04-13

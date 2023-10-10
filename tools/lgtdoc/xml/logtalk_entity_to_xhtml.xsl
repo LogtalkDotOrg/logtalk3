@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into XHTML files
-%  Last updated on July 29, 2021
+%  Last updated on October 10, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -69,6 +69,7 @@
 		</div>
 		<div class="entity">
 			<div class="section">
+				<xsl:apply-templates select="logtalk_entity/availability" />
 				<xsl:apply-templates select="logtalk_entity/entity" />
 				<xsl:apply-templates select="logtalk_entity/relations" />
 			</div>
@@ -87,6 +88,14 @@
 		</div>
 	</body>
 	</html>
+</xsl:template>
+
+
+<xsl:template match="logtalk_entity/availability">
+	<dl class="properties">
+		<dt class ="key">availability:</dt>
+			<dd class ="value"><code><xsl:value-of select="current()" /></code></dd>
+	</dl>
 </xsl:template>
 
 

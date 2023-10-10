@@ -10,6 +10,9 @@
 
 Global object for generating unique atoms. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
+| **Availability:** 
+|    ``logtalk_load(gensym(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
 | **Date:** 2022-07-21

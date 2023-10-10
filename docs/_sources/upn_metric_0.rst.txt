@@ -10,6 +10,9 @@
 
 Number of unique predicates nodes metric. The nodes include called and updated predicates independently of where they are defined. The score is represented by a non-negative integer.
 
+| **Availability:** 
+|    ``logtalk_load(code_metrics(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 0:4:0
 | **Date:** 2022-05-05

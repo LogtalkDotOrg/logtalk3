@@ -10,6 +10,9 @@
 
 Concise Binary Object Representation (CBOR) format exporter and importer. Uses atoms to represent decoded CBOR strings.
 
+| **Availability:** 
+|    ``logtalk_load(cbor(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2021-03-04

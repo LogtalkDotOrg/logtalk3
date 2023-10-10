@@ -10,6 +10,9 @@
 
 Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).
 
+| **Availability:** 
+|    ``logtalk_load(code_metrics(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 0:5:0
 | **Date:** 2022-05-05

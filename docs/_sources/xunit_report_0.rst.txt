@@ -10,6 +10,9 @@
 
 Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.
 
+| **Availability:** 
+|    ``logtalk_load(lgtunit(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 4:4:0
 | **Date:** 2023-08-11

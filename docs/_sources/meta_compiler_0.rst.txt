@@ -10,6 +10,9 @@
 
 Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.
 
+| **Availability:** 
+|    ``logtalk_load(meta_compiler(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 0:13:1
 | **Date:** 2022-05-06

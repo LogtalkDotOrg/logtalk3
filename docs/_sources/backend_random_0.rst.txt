@@ -10,6 +10,9 @@
 
 Random number generator predicates using the backend Prolog compiler built-in random generator.
 
+| **Availability:** 
+|    ``logtalk_load(random(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:17:0
 | **Date:** 2023-10-02
