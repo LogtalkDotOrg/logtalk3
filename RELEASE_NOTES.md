@@ -41,6 +41,8 @@ Documentation
 * IMPROVED: Documentation of the embedding scripts on how to handle an
 application using a mix of Logtalk and Prolog source files.
 
+* FIXED: Texinfo navigation between Handbook and APIs documentation.
+
 Library
 -------
 
