@@ -22,21 +22,24 @@ RELEASE NOTES
 =============
 
 
-3.71.0 - October ??, 2023
+3.71.0 - October 12, 2023
 =========================
 
 Prolog adapter and integration files
 ------------------------------------
 
-* CHANGED: Scryer Prolog is no longer supported due to the system refusal
-to implement (or accept contributions implementing) the de facto standard
-`version_data` flag.
+* REMOVED: Scryer Prolog is no longer supported due to the system refusal
+to implement (or accept contributions implementing) the required de facto
+standard `version_data` flag.
 
 * FIXED: The GNU Prolog adapter file for compatibility with versions older
 than 1.6.0.
 
 Documentation
 -------------
+
+* IMPROVED: Simplified finding the goal to use to load an entity when
+browsing the APIs documentation.
 
 * IMPROVED: Documentation of the embedding scripts on how to handle an
 application using a mix of Logtalk and Prolog source files.
