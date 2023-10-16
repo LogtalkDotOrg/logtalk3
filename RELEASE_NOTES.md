@@ -25,7 +25,10 @@ RELEASE NOTES
 3.72.0 - November ??, 2023
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
 
+* UPDATED: Notes on the LVM adapter file for enabling coinduction support.
 
 
 3.71.0 - October 12, 2023
@@ -37,8 +40,6 @@ Prolog adapter and integration files
 * REMOVED: Scryer Prolog is no longer supported due to the system refusal
 to implement (or accept contributions implementing) the required de facto
 standard `version_data` flag.
-
-* UPDATED: Notes on the LVM adapter file for enabling coinduction support.
 
 * FIXED: The GNU Prolog adapter file for compatibility with versions older
 than 1.6.0.
