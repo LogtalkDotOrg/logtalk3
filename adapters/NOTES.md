@@ -253,6 +253,12 @@ LVM 6.3.0 and later versions
 
 	lvm.pl
 
+Coinduction support requires setting the `unify_applies_occurs_check` to
+`true`. This can be accomplished e.g. by using the `--enable-occurs-check`
+command-line option:
+
+	$ lvmlgt --enable-occurs-check
+
 
 Quintus Prolog 3.3~3.5
 ----------------------

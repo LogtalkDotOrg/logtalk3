@@ -38,6 +38,8 @@ Prolog adapter and integration files
 to implement (or accept contributions implementing) the required de facto
 standard `version_data` flag.
 
+* UPDATED: Notes on the LVM adapter file for enabling coinduction support.
+
 * FIXED: The GNU Prolog adapter file for compatibility with versions older
 than 1.6.0.
 
