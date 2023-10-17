@@ -75,6 +75,13 @@ predicate indicator, or a non-terminal indicator. Some examples:
 
    | ?- help::apis(message_tokens//2).
 
+Although less useful, you can also browse the ``man`` pages of Logtalk
+scripts. For example:
+
+::
+
+   | ?- help::man(logtalk_tester).
+
 When you finish consult the documentation and quit the ``info`` process,
 you will be back to the top-level prompt (if you find that the top-level
 have scrolled from its last position, try to set your terminal terminfo

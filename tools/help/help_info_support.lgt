@@ -23,16 +23,16 @@
 	complements(help)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:7:1,
 		author is 'Paulo Moura',
-		date is 2023-02-06,
+		date is 2023-10-17,
 		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.'
 	]).
 
 	:- public(handbook/0).
 	:- mode(handbook, one).
 	:- info(handbook/0, [
-		comment is 'Opens inline the Texinfo verison of the Handbook.'
+		comment is 'Opens inline the Texinfo version of the Handbook.'
 	]).
 
 	:- public(handbook/1).
@@ -40,14 +40,14 @@
 	:- mode(handbook(+predicate_indicator), one).
 	:- mode(handbook(+non_terminal_indicator), one).
 	:- info(handbook/1, [
-		comment is 'Opens inline the Texinfo verison of the Handbook and searches for the given topic.',
+		comment is 'Opens inline the Texinfo version of the Handbook and searches for the given topic.',
 		argnames is ['Topic']
 	]).
 
 	:- public(apis/0).
 	:- mode(apis, one).
 	:- info(apis/0, [
-		comment is 'Opens inline the Texinfo verison of the APIs documentation.'
+		comment is 'Opens inline the Texinfo version of the APIs documentation.'
 	]).
 
 	:- public(apis/1).
@@ -55,8 +55,15 @@
 	:- mode(apis(+predicate_indicator), one).
 	:- mode(apis(+non_terminal_indicator), one).
 	:- info(apis/1, [
-		comment is 'Opens inline the Texinfo verison of the APIs documentation and searches for the given topic.',
+		comment is 'Opens inline the Texinfo version of the APIs documentation and searches for the given topic.',
 		argnames is ['Topic']
+	]).
+
+	:- public(man/1).
+	:- mode(man(+atom), one).
+	:- info(man/1, [
+		comment is 'Opens inline the man page of the given script.',
+		argnames is ['Script']
 	]).
 
 	:- uses(user, [
@@ -65,13 +72,13 @@
 
 	help :-
 		@help,
-		write('Experimental features: assuming the Handbook and APIs documentation'), nl,
-		write('info files and the info command-line executable are available, the'), nl,
-		write('following predicates can be used for inline browsing of the info files:'), nl, nl,
-		write('    help::handbook.                 help::apis.'), nl,
-		write('    help::handbook(Topic).          help::apis(Topic).'), nl,
-		write('    help::handbook(Name/Arity).     help::apis(Name/Arity).'), nl,
-		write('    help::handbook(Name//Arity).    help::apis(Name//Arity).'), nl, nl.
+		write('Experimental features: assuming the Handbook and APIs documentation Texinfo'), nl,
+		write('files, the man files, and the info command are available, the following goals'), nl,
+		write('can be used for inline browsing of the Texinfo and man files:'), nl, nl,
+		write('    help::handbook.               help::apis.               help::man(Script).'), nl,
+		write('    help::handbook(Topic).        help::apis(Topic).'), nl,
+		write('    help::handbook(Name/Arity).   help::apis(Name/Arity).'), nl,
+		write('    help::handbook(Name//Arity).  help::apis(Name//Arity).'), nl, nl.
 
 	handbook :-
 		info_executable(Info),
@@ -94,6 +101,10 @@
 		info_executable(Info),
 		apis_file(File),
 		process_create(Info, ['-f', File, '--index-search', TopicAtom]).
+
+	man(Script) :-
+		info_executable(Info),
+		process_create(Info, [Script]).
 
 	topic_to_atom(Topic, TopicAtom) :-
 		(	atom(Topic) ->

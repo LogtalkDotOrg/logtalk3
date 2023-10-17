@@ -30,6 +30,11 @@ Prolog adapter and integration files
 
 * UPDATED: Notes on the LVM adapter file for enabling coinduction support.
 
+Tools
+-----
+
+* ADDED: Predicate `help::man/1` for inline browsing of man files.
+
 
 3.71.0 - October 12, 2023
 =========================
