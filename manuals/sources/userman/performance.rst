@@ -83,10 +83,10 @@ Messages
 Logtalk implements :term:`static binding` and :term:`dynamic binding`
 for message sending calls. For dynamic binding, a caching mechanism is
 used by the runtime. It's useful to measure the performance overhead in
-*number of inferences* compared with plain Prolog and Prolog modules.
-Note that the number of inferences is a metric independent of the chosen
-backend Prolog compiler. The results for Logtalk 3.17.0 and later versions
-are:
+*number of logic inferences* compared with plain Prolog and Prolog modules.
+Note that the number of logic inferences is a metric independent of the
+chosen backend Prolog compiler. The results for Logtalk 3.17.0 and later
+versions are:
 
 -  Static binding: 0
 -  Dynamic binding (object bound at compile time): 1
@@ -111,8 +111,21 @@ use dynamic binding as the object that receives the message is only know
 at runtime.
 
 Messages sent from Prolog modules may use static binding depending on the
-used backend Prolog compiler when the ``optimize`` flag is turned on.
-Consult the Prolog compiler adapter file notes for details.
+used backend Prolog compiler native support for goal-expansion. Consult
+the Prolog compiler documentation and adapter file notes for details.
+
+.. warning::
+
+   Some Prolog systems provide a ``time/1`` predicate that reports (also)
+   the number of inferences. But the reported numbers are misleading when
+   the predicate is called from the top-level. Besides common top-level
+   bookkeeping operations (e.g. keeping track of goal history or applying
+   goal-expansion) that may influence the inference counting, the Logtalk
+   runtime code for a ``::/2`` top-level goal is necessarily different
+   from the code generated for a ``::/2`` goal from a compiled object as
+   it requires *runtime* compilation of the goal into the same low-level
+   message-sending primitive (assuming dynamic-binding is also required
+   for the compiled object goal).
 
 Automatic expansion of built-in meta-predicates
 -----------------------------------------------

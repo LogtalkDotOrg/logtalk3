@@ -30,6 +30,11 @@ Prolog adapter and integration files
 
 * UPDATED: Notes on the LVM adapter file for enabling coinduction support.
 
+Documentation
+-------------
+
+* IMPROVED: Handbook section on performance.
+
 Tools
 -----
 
