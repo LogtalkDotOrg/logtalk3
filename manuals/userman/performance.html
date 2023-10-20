@@ -219,17 +219,18 @@ of globally and thus minimizing the performance impact).</p>
 does indexing of dynamic predicates. This is a common feature of modern
 Prolog systems but the actual details vary from system to system and may
 have an impact on dynamic binding performance.</p>
-<p>Note that messages to <em>self</em> (<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> calls) always
-use dynamic binding as the object that receives the message is only know
-at runtime.</p>
+<p>Note that messages to <em>self</em> (<a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> calls) and
+messages to an object (<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a> calls) from the
+top-level interpreter always use dynamic binding as the object that
+receives the message is only know at runtime.</p>
 <p>Messages sent from Prolog modules may use static binding depending on the
 used backend Prolog compiler native support for goal-expansion. Consult
 the Prolog compiler documentation and adapter file notes for details.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Some Prolog systems provide a <code class="docutils literal notranslate"><span class="pre">time/1</span></code> predicate that reports (also)
-the number of inferences. But the reported numbers are misleading when
-the predicate is called from the top-level. Besides common top-level
+<p>Some Prolog systems provide a <code class="docutils literal notranslate"><span class="pre">time/1</span></code> predicate that also reports
+the number of inferences. But the reported numbers are often misleading
+when the predicate is called from the top-level. Besides common top-level
 bookkeeping operations (e.g. keeping track of goal history or applying
 goal-expansion) that may influence the inference counting, the Logtalk
 runtime code for a <code class="docutils literal notranslate"><span class="pre">::/2</span></code> top-level goal is necessarily different
