@@ -89,15 +89,15 @@ chosen backend Prolog compiler. The results for Logtalk 3.17.0 and later
 versions are:
 
 -  Static binding: 0
--  Dynamic binding (object bound at compile time): 1
--  Dynamic binding (object bound at runtime time): 2
+-  Dynamic binding (object bound at compile time): +1
+-  Dynamic binding (object bound at runtime): +2
 
 Static binding is the common case with libraries and most application
 code; it requires compiling code with the :ref:`optimize <flag_optimize>`
 flag turned on. Dynamic binding numbers are after the first call (i.e.
 after the generalization of the query is cached). All numbers with the
 :ref:`events <flag_events>` flag set to ``deny`` (setting this flag to
-``allow`` adds an overhead of 5 inferences to the results above; note
+``allow`` adds an overhead of +5 inferences to the results above; note
 that this flag can be defined in a per-object basis as needed instead
 of globally and thus minimizing the performance impact).
 
@@ -136,6 +136,7 @@ The compiler always expands calls to the :ref:`methods_forall_2`,
 equivalent definitions using the negation and conditional control constructs.
 It also expands calls to the :ref:`methods_call_N`, :ref:`methods_phrase_2`,
 and :ref:`methods_phrase_3` meta-predicates when the first argument is bound.
+These expansions are performed independently of the ``optimize`` flag value.
 
 Inlining
 --------

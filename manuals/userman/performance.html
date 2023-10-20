@@ -204,15 +204,15 @@ chosen backend Prolog compiler. The results for Logtalk 3.17.0 and later
 versions are:</p>
 <ul class="simple">
 <li><p>Static binding: 0</p></li>
-<li><p>Dynamic binding (object bound at compile time): 1</p></li>
-<li><p>Dynamic binding (object bound at runtime time): 2</p></li>
+<li><p>Dynamic binding (object bound at compile time): +1</p></li>
+<li><p>Dynamic binding (object bound at runtime): +2</p></li>
 </ul>
 <p>Static binding is the common case with libraries and most application
 code; it requires compiling code with the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a>
 flag turned on. Dynamic binding numbers are after the first call (i.e.
 after the generalization of the query is cached). All numbers with the
 <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> flag set to <code class="docutils literal notranslate"><span class="pre">deny</span></code> (setting this flag to
-<code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of 5 inferences to the results above; note
+<code class="docutils literal notranslate"><span class="pre">allow</span></code> adds an overhead of +5 inferences to the results above; note
 that this flag can be defined in a per-object basis as needed instead
 of globally and thus minimizing the performance impact).</p>
 <p>The dynamic binding caches assume the used <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>
@@ -246,7 +246,8 @@ for the compiled object goal).</p>
 <a class="reference internal" href="../refman/methods/once_1.html#methods-once-1"><span class="std std-ref">once/1</span></a>, and <a class="reference internal" href="../refman/methods/ignore_1.html#methods-ignore-1"><span class="std std-ref">ignore/1</span></a> meta-predicates into
 equivalent definitions using the negation and conditional control constructs.
 It also expands calls to the <a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a>, <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a>,
-and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> meta-predicates when the first argument is bound.</p>
+and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> meta-predicates when the first argument is bound.
+These expansions are performed independently of the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag value.</p>
 </section>
 <section id="inlining">
 <h2>Inlining<a class="headerlink" href="#inlining" title="Link to this heading"></a></h2>
