@@ -57,6 +57,13 @@
 :- object(lists,
 	imports(counter)).
 
+	:- info([
+		version is 1:0:0,
+		date is 2010-02-23,
+		author is 'Paulo Moura',
+		comment is 'Simple object providing a naive implementation of list reversing for computing LIPS (logical inferences per second).'
+	]).
+
 	:- public(append/3).
 	:- dynamic(append/3).
 

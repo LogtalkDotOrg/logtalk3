@@ -44,5 +44,18 @@ category.
 Defining meta-interpreters as categories allows the use of the built-in 
 predicate `clause/2` to access the clauses of object predicates without 
 forcing these predicates to be declared public or protected. Within a 
-category, calls to the built-in predicate `clause/2` retrieve clauses in 
-"this", i.e. in the database of the object importing the category. 
+category, calls to the built-in predicate `clause/2` retrieve clauses
+in "this", i.e. in the database of the object importing the category. 
+
+Counting the number of resolution steps can be applied to a naive
+implementation of list reversing for computing LIPS (logical inferences
+per second). Reversing a list of 30 elements is know to take 496
+resolution steps. Therefore, if `T` is the time in seconds that a
+system takes to repeat `N` times this list reversal operation, then:
+
+	LIPS = (496 * N) / T
+
+The value of `N` should be large enough to smooth out any timing
+fluctuations. Note that this benchmark is mainly of historical
+significance. It can be traced to a David Warren's paper about
+the Edinburgh Prolog compiler.

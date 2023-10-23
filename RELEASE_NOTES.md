@@ -40,6 +40,11 @@ Tools
 
 * ADDED: Predicate `help::man/1` for inline browsing of man files.
 
+Examples
+--------
+
+* UPDATED: The documentation of the `metainterpreters` example.
+
 
 3.71.0 - October 12, 2023
 =========================
