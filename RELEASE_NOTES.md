@@ -25,6 +25,12 @@ RELEASE NOTES
 3.72.0 - November ??, 2023
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Simplified handling of plain Prolog terms when compiling source
+files.
+
 Prolog adapter and integration files
 ------------------------------------
 

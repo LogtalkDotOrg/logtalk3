@@ -372,8 +372,8 @@
 
 % '$lgt_pp_directive_'(Directive)
 :- dynamic('$lgt_pp_directive_'/1).
-% '$lgt_pp_prolog_term_'(Term, SourceData, Lines)
-:- dynamic('$lgt_pp_prolog_term_'/3).
+% '$lgt_pp_prolog_term_'(Term, Lines)
+:- dynamic('$lgt_pp_prolog_term_'/2).
 % '$lgt_pp_entity_term_'(Term, SourceData, Lines)
 :- dynamic('$lgt_pp_entity_term_'/3).
 % '$lgt_pp_final_entity_term_'(Term, Lines)
@@ -8313,7 +8313,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% instead of plain Prolog terms intermixed between entities
 	% definitions; there might also be plain Prolog terms after
 	% the last entity definition
-	retractall('$lgt_pp_prolog_term_'(_, _, _)),
+	retractall('$lgt_pp_prolog_term_'(_, _)),
 	% retract all file-specific flag values
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
 	% retract all file-specific term and goal expansion hooks
@@ -8446,7 +8446,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_entity_meta_directive_'(_, _, _)),
 	retractall('$lgt_pp_dcl_'(_)),
 	% clean any plain Prolog terms appearing before an entity definition
-	retractall('$lgt_pp_prolog_term_'(_, _, _)),
+	retractall('$lgt_pp_prolog_term_'(_, _)),
 	retractall('$lgt_pp_entity_term_'(_, _, _)),
 	retractall('$lgt_pp_final_entity_term_'(_, _)),
 	retractall('$lgt_pp_entity_aux_clause_'(_)),
@@ -9030,7 +9030,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			% ensure that the relative order of the entity terms is kept
 			assertz('$lgt_pp_entity_term_'({ExpandedTerm}, SourceData, Lines))
 		;	% non-entity terms
-			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, SourceData, Lines))
+			assertz('$lgt_pp_prolog_term_'(ExpandedTerm, Lines))
 		)
 	;	var(ExpandedTerm) ->
 		throw(error(instantiation_error, term_expansion(Term, {ExpandedTerm})))
@@ -9425,8 +9425,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
 	% try to call ensure_loaded/1 as a built-in predicate but ignore any errors
 	catch(ensure_loaded(ExpandedFile), _, true),
-	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(ExpandedFile)), sd(Term,VariableNames,Singletons,File,Lines), Lines)).
+	'$lgt_pp_term_source_data_'(_, _, _, _, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(ExpandedFile)), Lines)).
 
 '$lgt_compile_file_directive'(use_module(FileSpec), Ctx) :-
 	'$lgt_prolog_feature'(modules, unsupported),
@@ -9447,8 +9447,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
 	% try to call use_module/1 as a built-in predicate but ignore any errors
 	catch(use_module(ExpandedFile), _, true),
-	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile)), sd(Term,VariableNames,Singletons,File,Lines), Lines)).
+	'$lgt_pp_term_source_data_'(_, _, _, _, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile)), Lines)).
 
 '$lgt_compile_file_directive'(use_module(FileSpec, Imports), Ctx) :-
 	'$lgt_prolog_feature'(modules, unsupported),
@@ -9470,8 +9470,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_expand_module_file_specification'(FileSpec, ExpandedFile),
 	% try to call use_module/2 as a built-in predicate but ignore any errors
 	catch(use_module(ExpandedFile, Imports), _, true),
-	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile, Imports)), sd(Term,VariableNames,Singletons,File,Lines), Lines)).
+	'$lgt_pp_term_source_data_'(_, _, _, _, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile, Imports)), Lines)).
 
 % handling of this Prolog directive is necessary to
 % support the Logtalk term-expansion mechanism
@@ -9519,8 +9519,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(operator_specification, op(Priority, Specifier, Operators)),
 	'$lgt_comp_ctx_mode'(Ctx, Mode),
 	'$lgt_activate_file_operators'(Priority, Specifier, Operators, Mode),
-	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), sd(Term,VariableNames,Singletons,File,Lines), Lines)).
+	'$lgt_pp_term_source_data_'(_, _, _, _, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- op(Priority, Specifier, Operators)), Lines)).
 
 '$lgt_compile_file_directive'(set_logtalk_flag(Name, Value), _) :-
 	!,
@@ -9540,8 +9540,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% depending on the flag and on the backend Prolog compiler
 	set_prolog_flag(Flag, Value),
 	% we also copy the directive to the generated intermediate Prolog file
-	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), sd(Term,VariableNames,Singletons,File,Lines), Lines)).
+	'$lgt_pp_term_source_data_'(_, _, _, _, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- set_prolog_flag(Flag, Value)), Lines)).
 
 '$lgt_compile_file_directive'(multifile(Preds), _) :-
 	% perform basic error checking
@@ -9566,8 +9566,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% Logtalk built-in predicate being used as a directive
 	!,
 	% directive will be copied to the generated Prolog file
-	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- Directive), sd(Term,VariableNames,Singletons,File,Lines), Lines)),
+	'$lgt_pp_term_source_data_'(_, _, _, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- Directive), Lines)),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(general), logtalk_built_in_predicate_as_directive(File, Lines, Directive))
@@ -9581,8 +9581,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% assume Logtalk or Prolog top-level shortcut being used as a directive
 	!,
 	% directive will be copied to the generated Prolog file
-	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- Directive), sd(Term,VariableNames,Singletons,File,Lines), Lines)),
+	'$lgt_pp_term_source_data_'(_, _, _, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- Directive), Lines)),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)) ->
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(general), top_level_shortcut_as_directive(File, Lines, Directive))
@@ -9591,8 +9591,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_file_directive'(Directive, Ctx) :-
 	% directive will be copied to the generated Prolog file
-	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines),
-	assertz('$lgt_pp_prolog_term_'((:- Directive), sd(Term,VariableNames,Singletons,File,Lines), Lines)),
+	'$lgt_pp_term_source_data_'(_, _, _, File, Lines),
+	assertz('$lgt_pp_prolog_term_'((:- Directive), Lines)),
 	% report a possible portability issue if warranted
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		'$lgt_compiler_flag'(portability, warning),
@@ -12412,15 +12412,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_entity_'(_, _, _),
 	% clause occurs before an opening entity directive
 	!,
-	% save the source data information for use in the second compiler stage
-	% (where it might be required by calls to the logtalk_load_context/2
-	% predicate during goal expansion)
-	(	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines) ->
-		SourceData = sd(Term, VariableNames, Singletons, File, Lines)
-	;	SourceData = nil, Lines = '-'(-1, -1)
+	(	'$lgt_pp_term_source_data_'(_, _, _, _, Lines) ->
+		true
+	;	Lines = '-'(-1, -1)
 	),
 	% copy the clause unchanged to the generated Prolog file
-	assertz('$lgt_pp_prolog_term_'(Clause, SourceData, Lines)).
+	assertz('$lgt_pp_prolog_term_'(Clause, Lines)).
 
 '$lgt_compile_clause'(Clause, _) :-
 	% deal with unexpected clause translation failures
@@ -22561,7 +22558,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % writes any Prolog clauses that appear before an entity opening directive
 
 '$lgt_write_prolog_terms'(Stream, Path) :-
-	'$lgt_pp_prolog_term_'(Term, _, Line-_),
+	'$lgt_pp_prolog_term_'(Term, Line-_),
 		'$lgt_write_compiled_term'(Stream, Term, user, Path, Line),
 	fail.
 
