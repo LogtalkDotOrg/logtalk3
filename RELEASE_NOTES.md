@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Linter warning for calls to the deprecated predicates `not/1` and
+`fail_if/1`.
+
 * IMPROVED: Simplified handling of plain Prolog terms when compiling source
 files.
 

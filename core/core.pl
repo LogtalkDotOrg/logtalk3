@@ -13119,6 +13119,40 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_body'(Pred1, meta, TPred1, DPred1, Ctx),
 	'$lgt_compile_body'(Pred2, Caller, TPred2, DPred2, Ctx).
 
+'$lgt_compile_body'(not(Pred), Caller, TPred, DPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(not(_)),
+	\+ '$lgt_pp_defines_predicate_'(not(_), _, _, _, _, _),
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, not/1, (\+)/1)
+		)
+	;	true
+	),
+	'$lgt_compile_body'(\+ Pred, Caller, TPred, DPred, Ctx).
+
+'$lgt_compile_body'(fail_if(Pred), Caller, TPred, DPred, Ctx) :-
+	'$lgt_prolog_built_in_predicate'(fail_if(_)),
+	\+ '$lgt_pp_defines_predicate_'(fail_if(_), _, _, _, _, _),
+	!,
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+		'$lgt_compiler_flag'(deprecated, warning),
+		'$lgt_source_file_context'(File, Lines),
+		'$lgt_pp_entity_'(Type, Entity, _) ->
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(deprecated),
+			deprecated_predicate(File, Lines, Type, Entity, fail_if/1, (\+)/1)
+		)
+	;	true
+	),
+	'$lgt_compile_body'(\+ Pred, Caller, TPred, DPred, Ctx).
+
 '$lgt_compile_body'(\+ Pred, _, _, _, Ctx) :-
 	callable(Pred),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
@@ -16569,7 +16603,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_negated_goal_alternative'(Pred, Alt)
 %
-% auxiliary table to simplify calls to \+ Goal goals
+% auxiliary table for \+ Goal linter warnings
 
 '$lgt_negated_goal_alternative'(call(Goal), \+ Goal).
 '$lgt_negated_goal_alternative'(once(Goal), \+ Goal).
