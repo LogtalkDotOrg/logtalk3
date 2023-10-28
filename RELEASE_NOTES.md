@@ -42,6 +42,9 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* ADDED: Documentation to the `lgtunit` tool on testing for expected output
+written to `user_error`.
+
 * IMPROVED: Handbook section on performance.
 
 Tools

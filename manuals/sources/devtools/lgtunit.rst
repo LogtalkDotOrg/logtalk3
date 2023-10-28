@@ -1137,6 +1137,25 @@ For example:
        put_char(out, y),
        ^^text_output_assertion(out, 'qwerty', Assertion).
 
+The ``set_text_output/1`` predicate diverts only the standard output
+stream (to a temporary file) using the standard ``set_output/1``
+predicate. Most backend Prolog systems also support writing to the de
+facto standard error stream. But there's no standard solution to divert
+this stream. However, several systems provide a ``set_stream/2`` or
+similar predicate that can be used for stream redirection. For example,
+assume that you wanted to test a backend Prolog system warning when an
+``initialization/1`` directive fails that is written to ``user_error``.
+An hypothetical test could be:
+
+::
+
+   test(singletons_warning, true(Assertion)) :-
+       ^^set_text_output(''),
+       current_output(Stream),
+       set_stream(Stream, alias(user_error)),
+       consult(broken_file),
+       ^^text_output_assertion('WARNING: initialization/1 directive failed', Assertion).
+
 For testing binary input/output predicates, equivalent testing
 predicates are provided. There is also a small set of helper predicates
 for dealing with stream handles and stream positions. For testing with
