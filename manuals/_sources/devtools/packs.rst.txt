@@ -80,7 +80,7 @@ Or using Homebrew:
 
 ::
 
-   $ brew install coretutils libarchive gnupg2 git direnv
+   $ brew install coreutils libarchive gnupg2 git direnv
 
 On Linux systems, use the distribution own package manager to install
 any missing command. For example, in recent Ubuntu versions:
