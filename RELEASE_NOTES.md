@@ -47,6 +47,8 @@ written to `user_error`.
 
 * IMPROVED: Handbook section on performance.
 
+* FIXED: Allow Handbook and APIs documentation search support to work offline.
+
 Tools
 -----
 
