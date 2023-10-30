@@ -1183,6 +1183,74 @@ failed flaky tests. Moreover, the `logtalk_tester` automation script will
 ignore failed flaky tests when setting its exit status.
 
 
+Mocking
+-------
+
+Sometimes the code being tested performs complex tasks that are not feasible
+or desirable when running tests. For example, the code may perform a login
+operation requiring the user to provide a username and a password using some
+GUI widget. In this case, the tests may required the login operation to still
+be performed but using canned data (also simplifying testing automation). I.e.
+we want to _mock_ (as in _imitate_) the login procedure. Ideally, this should
+be accomplished without requiring any changes to the code being tested. Logtalk
+provides two solutions that can be used for mocking: _term-expansion_ and _hot
+patching_.
+
+Using the term-expansion mechanism, we would define a _hook object_ that expands
+the login predicate into a fact:
+
+	:- object(mock_login,
+		implements(expanding)).
+
+		term_expansion((login(_, _) :- _), login(jdoe, test123)).
+
+	:- end_object.
+	
+The tests driver file would then load the application object responsible for
+user management using this hook object:
+
+	:- initialization((
+		...,
+		logtalk_load(mock_login),
+		logtalk_load(user_management, [hook(mock_login)]),
+		...
+	)).
+
+Using hot patching, we would define a _complementing category_ patching the
+object that defines the login predicate:
+
+	:- category(mock_login,
+		complements(user_management)).
+
+		login(jdoe, test123).
+
+	:- end_category.
+
+The tests driver file would then set the `complements` flag to `allow` and
+load the patch after loading application code:
+
+	:- initialization((
+		...,
+		set_logtalk_flag(complements, allow),
+		logtalk_load(application),
+		logtalk_load(mock_login),
+		...
+	)).
+	
+There are pros and cons for each solution. Term-expansion works by defining
+hook objects that are used at compile time while hot patching happens at
+runtime. Complementing categories can also be dynamically created, stacked,
+and abolished. Hot patching disables static binding optimizations but that's
+usually not a problem as the code being tested if often compiled in debug
+mode to collect code coverage data. Two advantages of the term-expansion
+solution is that it allows defining conditions for expanding terms and goals
+and can replace both predicate definitions and predicate calls. Limitations
+in the current Prolog standards prevent patching callers to local predicates
+being patched. But often both solutions can be used with the choice depending
+on code clarity and user preference. See the Handbook sections on
+term-expansion and hot patching for more details on these mechanisms.
+
+
 Debugging messages in tests
 ---------------------------
 

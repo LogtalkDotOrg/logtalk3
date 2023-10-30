@@ -103,6 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#test-annotations">Test annotations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#working-with-test-data-files">Working with test data files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#flaky-tests">Flaky tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mocking">Mocking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-messages-in-tests">Debugging messages in tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#code-coverage">Code coverage</a></li>
@@ -1356,6 +1357,73 @@ atom containing the sub-atom <code class="docutils literal notranslate"><span cl
 reporting failed flaky tests. Moreover, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code>
 automation script will ignore failed flaky tests when setting its exit
 status.</p>
+</section>
+<section id="mocking">
+<h2>Mocking<a class="headerlink" href="#mocking" title="Link to this heading"></a></h2>
+<p>Sometimes the code being tested performs complex tasks that are not
+feasible or desirable when running tests. For example, the code may
+perform a login operation requiring the user to provide a username and a
+password using some GUI widget. In this case, the tests may required the
+login operation to still be performed but using canned data (also
+simplifying testing automation). I.e. we want to <em>mock</em> (as in
+<em>imitate</em>) the login procedure. Ideally, this should be accomplished
+without requiring any changes to the code being tested. Logtalk provides
+two solutions that can be used for mocking: <em>term-expansion</em> and <em>hot
+patching</em>.</p>
+<p>Using the term-expansion mechanism, we would define a <em>hook object</em> that
+expands the login predicate into a fact:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(mock_login,
+    <span class="k">implements</span>(expanding)).
+
+    <span class="k">term_expansion</span>((login(<span class="nv">_</span>, <span class="nv">_</span>) <span class="o">:-</span> <span class="nv">_</span>), login(jdoe, test123)).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The tests driver file would then load the application object responsible
+for user management using this hook object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    ...,
+    <span class="k">logtalk_load</span>(mock_login),
+    <span class="k">logtalk_load</span>(user_management, [hook(mock_login)]),
+    ...
+)).
+</pre></div>
+</div>
+<p>Using hot patching, we would define a <em>complementing category</em> patching
+the object that defines the login predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(mock_login,
+    <span class="k">complements</span>(user_management)).
+
+    login(jdoe, test123).
+
+<span class="p">:- </span><span class="k">end_category</span>.
+</pre></div>
+</div>
+<p>The tests driver file would then set the <code class="docutils literal notranslate"><span class="pre">complements</span></code> flag to
+<code class="docutils literal notranslate"><span class="pre">allow</span></code> and load the patch after loading application code:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
+    ...,
+    <span class="k">set_logtalk_flag</span>(complements, allow),
+    <span class="k">logtalk_load</span>(application),
+    <span class="k">logtalk_load</span>(mock_login),
+    ...
+)).
+</pre></div>
+</div>
+<p>There are pros and cons for each solution. Term-expansion works by
+defining hook objects that are used at compile time while hot patching
+happens at runtime. Complementing categories can also be dynamically
+created, stacked, and abolished. Hot patching disables static binding
+optimizations but that’s usually not a problem as the code being tested
+if often compiled in debug mode to collect code coverage data. Two
+advantages of the term-expansion solution is that it allows defining
+conditions for expanding terms and goals and can replace both predicate
+definitions and predicate calls. Limitations in the current Prolog
+standards prevent patching callers to local predicates being patched.
+But often both solutions can be used with the choice depending on code
+clarity and user preference. See the Handbook sections on term-expansion
+and hot patching for more details on these mechanisms.</p>
 </section>
 <section id="debugging-messages-in-tests">
 <h2>Debugging messages in tests<a class="headerlink" href="#debugging-messages-in-tests" title="Link to this heading"></a></h2>
