@@ -1211,6 +1211,11 @@ it by using the goals <code class="docutils literal notranslate"><span class="pr
     <span class="k">{</span>circle(<span class="s">&#39;#2&#39;</span>, <span class="nv">Color</span>)<span class="k">}</span><span class="o">::</span>print.
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">suppress_text_output/0</span></code> and <code class="docutils literal notranslate"><span class="pre">suppress_binary_output/0</span></code>
+predicates work by redirecting standard output to the operating-system
+null device. But the application may also output to e.g. <code class="docutils literal notranslate"><span class="pre">user_error</span></code>
+and other streams. If this output must also be suppressed, several
+alternatives are described next.</p>
 <p>Output of expected warnings can be suppressed by turning off the
 corresponding linter flags. In this case, it is advisable to restrict
 the scope of the flag value changes as much as possible.</p>
@@ -1235,6 +1240,10 @@ component. For example:</p>
 logtalk<span class="o">::</span>message_hook(<span class="nv">_Message</span>, <span class="nv">_Kind</span>, code_metrics, <span class="nv">_Tokens</span>).
 </pre></div>
 </div>
+<p>Note that there’s no portable solution to suppress <em>all</em> output.
+However, several systems provide a <code class="docutils literal notranslate"><span class="pre">set_stream/2</span></code> or similar predicate
+that can be used for stream redirection. Check the documentation of the
+backend Prolog systems you’re using for details.</p>
 </section>
 <section id="tests-with-timeout-limits">
 <h2>Tests with timeout limits<a class="headerlink" href="#tests-with-timeout-limits" title="Link to this heading"></a></h2>

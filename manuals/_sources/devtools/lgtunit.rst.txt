@@ -1181,6 +1181,12 @@ it by using the goals ``^^suppress_text_output`` or
        ^^suppress_text_output,
        {circle('#2', Color)}::print.
 
+The ``suppress_text_output/0`` and ``suppress_binary_output/0``
+predicates work by redirecting standard output to the operating-system
+null device. But the application may also output to e.g. ``user_error``
+and other streams. If this output must also be suppressed, several
+alternatives are described next.
+
 Output of expected warnings can be suppressed by turning off the
 corresponding linter flags. In this case, it is advisable to restrict
 the scope of the flag value changes as much as possible.
@@ -1209,6 +1215,11 @@ component. For example:
    :- dynamic(logtalk::message_hook/4).
 
    logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
+
+Note that there's no portable solution to suppress *all* output.
+However, several systems provide a ``set_stream/2`` or similar predicate
+that can be used for stream redirection. Check the documentation of the
+backend Prolog systems you're using for details.
 
 Tests with timeout limits
 -------------------------

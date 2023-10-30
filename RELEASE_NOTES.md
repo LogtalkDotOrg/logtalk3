@@ -44,8 +44,8 @@ Documentation
 
 * ADDED: Documentation to the `lgtunit` tool on mocking solutions.
 
-* ADDED: Documentation to the `lgtunit` tool on testing for expected output
-written to `user_error`.
+* ADDED: Documentation to the `lgtunit` tool on testing or suppressing
+expected output written to `user_error` and other streams.
 
 * IMPROVED: Handbook section on performance.
 
