@@ -59,6 +59,12 @@ Examples
 
 * UPDATED: The documentation of the `metainterpreters` example.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installation script to also detect upcoming SICStus
+Prolog 4.9.x versions.
+
 
 3.71.0 - October 12, 2023
 =========================
