@@ -7293,10 +7293,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% embedding); when compiling with the "clean" flag turned on (its default
 	% value), also include in the file name the process identifier to avoid file
 	% name clashes when running parallel Logtalk processes
-	'$lgt_directory_hash_pid_as_atom'(SourceDirectory, HashPid),
-	'$lgt_object_file_name'(ObjectDirectory, SourceName, HashPid, Suffix, ObjectFilePid),
-	'$lgt_directory_hash_dialect_as_atom'(SourceDirectory, HashDialect),
-	'$lgt_object_file_name'(ObjectDirectory, SourceName, HashDialect, Suffix, ObjectFileDialect).
+	'$lgt_directory_hashes'(SourceDirectory, HashDialect, HashPid),
+	'$lgt_object_file_name'(ObjectDirectory, SourceName, HashDialect, Suffix, ObjectFileDialect),
+	'$lgt_object_file_name'(ObjectDirectory, SourceName, HashPid, Suffix, ObjectFilePid).
 
 
 '$lgt_object_file_name'(ObjectDirectory, SourceName, Hash, Suffix, ObjectFile) :-
@@ -13130,7 +13129,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(
 			warning(deprecated),
-			deprecated_predicate(File, Lines, Type, Entity, not/1, (\+)/1)
+			deprecated_predicate(File, Lines, Type, Entity, (not)/1, (\+)/1)
 		)
 	;	true
 	),
