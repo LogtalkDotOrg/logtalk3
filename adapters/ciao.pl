@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.22.0
-%  Last updated on June 13, 2023
+%  Last updated on October 30, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -391,34 +391,25 @@
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
 :- use_module(library(indexer/hash), [hash_term/2]).
-
-'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
-	hash_term(Directory, Hash0),
-	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	number_codes(Hash0, Hash0Codes),
-	atom_codes(Dialect, DialectCodes),
-	append([0'_| Hash0Codes], [0'_| DialectCodes], HashCodes),
-	atom_codes(Hash, HashCodes).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
 :- use_module(library(lists), [append/3]).
 
-'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
-	hash_term(Directory, Hash0),
+'$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
+	hash_term(Directory, Hash),
+	'$lgt_prolog_feature'(prolog_dialect, Dialect),
 	get_pid(PID),
-	number_codes(Hash0, Hash0Codes),
+	number_codes(Hash, HashCodes),
+	atom_codes(Dialect, DialectCodes),
+	append([0'_| HashCodes], [0'_| DialectCodes], HashDialectCodes),
+	atom_codes(HashDialect, HashDialectCodes),
 	number_codes(PID, PIDCodes),
-	append([0'_| Hash0Codes], [0'_| PIDCodes], HashCodes),
-	atom_codes(Hash, HashCodes).
+	append([0'_| HashCodes], [0'_| PIDCodes], HashPidCodes),
+	atom_codes(HashPid, HashPidCodes).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Qu-Prolog 9.7 and later versions
-%  Last updated on June 13, 2023
+%  Last updated on October 30, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -438,23 +438,18 @@ format_spec_('~', Stream, Arguments, Arguments) :-
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(_, Hash) :-
+'$lgt_directory_hashes'(_, HashDialect, HashPid) :-
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atom_concat('_', Dialect, Hash).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(_, Hash) :-
 	process_pid(PID),
-	number_codes(PID, Codes),
-	atom_codes(Hash, Codes).
+	atom_concat('_', Dialect, HashDialect),
+	number_codes(PID, PIDCodes),
+	atom_codes(PIDAtom, PIDCodes),
+	atom_concat('_', PIDAtom, HashPid).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

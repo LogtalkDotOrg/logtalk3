@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on June 13, 2023
+%  Last updated on October 30, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -529,26 +529,19 @@ forall(Generate, Test) :-
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
-	term_hash(Directory, 1, 2147483647, Hash0),
+'$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
+	term_hash(Directory, 1, 2147483647, Hash),
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atomics_to_string(['_', Hash0, '_', Dialect], HashString),
-	atom_string(Hash, HashString).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
-	term_hash(Directory, 1, 2147483647, Hash0),
 	get_flag(pid, PID),
-	atomics_to_string(['_', Hash0, '_', PID], HashString),
-	atom_string(Hash, HashString).
+	atomics_to_string(['_', Hash, '_', Dialect], HashDialectString),
+	atom_string(HashDialect, HashDialectString),
+	atomics_to_string(['_', Hash, '_', PID], HashPidString),
+	atom_string(HashPid, HashPidString).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

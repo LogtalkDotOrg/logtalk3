@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on June 13, 2023
+%  Last updated on October 30, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -384,22 +384,17 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(_, Hash) :-
+'$lgt_directory_hashes'(_, HashDialect, HashPid) :-
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atom_concat('_', Dialect, Hash).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(_, Hash) :-
 	os_pid(PID),
-	atom_term(Hash, PID).
+	atom_concat('_', Dialect, HashDialect),
+	atom_term(PIDAtom, PID),
+	atom_concat('_', PIDAtom, HashPid).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

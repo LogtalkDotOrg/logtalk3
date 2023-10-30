@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Amzi! Prolog 7.6.1 and later versions
-%  Last updated on June 13, 2023
+%  Last updated on October 30, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -371,20 +371,15 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(_, Hash) :-
+'$lgt_directory_hashes'(_, HashDialect, HashPid) :-
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atom_concat('_', Dialect, Hash).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(_, '_').
+	atom_concat('_', Dialect, HashDialect).
+	HashPid = '_'.
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

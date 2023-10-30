@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Quintus Prolog 3.3~3.5
-%  Last updated on June 13, 2023
+%  Last updated on October 30, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -659,27 +659,19 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
-	hash_term(Directory, Hash0),
+'$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
+	hash_term(Directory, Hash),
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	number_chars(Hash0, Hash0Codes),
+	number_chars(Hash, HashCodes),
 	atom_chars(Dialect, DialectCodes),
-	append([0'_| Hash0Codes], [0'_| DialectCodes], HashCodes),
-	atom_chars(Hash, HashCodes).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
-	hash_term(Directory, Hash0),
-	number_chars(Hash0, Codes),
-	atom_chars(Hash, [0'_| Codes]).
+	append([0'_| HashCodes], [0'_| DialectCodes], HashDialectCodes),
+	atom_chars(HashDialect, HashDialectCodes),
+	atom_chars(HashPid, [0'_| HashCodes]).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

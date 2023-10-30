@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 6.3.0 and later versions
-%  Last updated on August 18, 2023
+%  Last updated on October 30, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -393,24 +393,17 @@
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
-	atom_hash(Directory, Hash0),
+'$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
+	atom_hash(Directory, Hash),
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atomic_list_concat(['_', Hash0, '_', Dialect], Hash).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
-	atom_hash(Directory, Hash0),
 	pid(PID),
-	atomic_list_concat(['_', Hash0, '_', PID], Hash).
+	atomic_list_concat(['_', Hash, '_', Dialect], HashDialect),
+	atomic_list_concat(['_', Hash, '_', PID], HashPid).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

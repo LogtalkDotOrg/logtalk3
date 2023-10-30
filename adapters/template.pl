@@ -353,20 +353,14 @@ numbervars(Term, From, Next) :-
 	?????
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(_, Hash) :-
+'$lgt_directory_hashes'(_, HashDialect, HashPid) :-
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atom_concat('_', Dialect, Hash).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(_, '_').
+	?????
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

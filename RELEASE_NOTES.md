@@ -34,6 +34,8 @@ Logtalk compiler and runtime
 * IMPROVED: Simplified handling of plain Prolog terms when compiling source
 files.
 
+* IMPROVED: Avoid computing directory hash twice when compiling a source file.
+
 Prolog adapter and integration files
 ------------------------------------
 
