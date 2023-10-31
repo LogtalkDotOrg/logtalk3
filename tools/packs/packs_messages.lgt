@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:32:1,
 		author is 'Paulo Moura',
-		date is 2023-08-28,
+		date is 2023-10-31,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -310,7 +310,7 @@
 		['Pack archive signature check failed: ~q (~q)'-[Pack, Archive], nl].
 
 	message_tokens(pack_archive_uncompress_failed(Pack, Archive)) -->
-		['Registry archive uncompress failed: ~q (~q)'-[Pack, Archive], nl].
+		['Pack archive uncompress failed: ~q (~q)'-[Pack, Archive], nl].
 
 	% pack describe messages
 

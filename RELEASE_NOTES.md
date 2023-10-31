@@ -58,6 +58,9 @@ Tools
 
 * ADDED: Predicate `help::man/1` for inline browsing of man files.
 
+* FIXED: Typo in the `packs` tool error message when uncompressing a pack
+archive fails.
+
 Examples
 --------
 
