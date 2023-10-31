@@ -7106,8 +7106,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% existing intermediate Prolog files should be disregarded
 		'$lgt_compiler_flag'(clean, off),
 		'$lgt_file_exists'(ObjectFile),
-		'$lgt_compare_file_modification_times'(Result, SourceFile, ObjectFile),
-		Result \== (>) ->
+		'$lgt_up_to_date_object_file'(SourceFile, ObjectFile) ->
 		'$lgt_print_message'(silent(compiling), up_to_date_file(SourceFile, Flags))
 	;	% the intermediate Prolog file doesn't exist or it's outdated
 		'$lgt_print_message'(silent(compiling), compiling_file(SourceFile, Flags)),
@@ -7137,16 +7136,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compare_file_modification_times'(?atom, +atom, +atom)
+% '$lgt_up_to_date_object_file'(+atom, +atom)
 %
-% compare file modification times; same argument order as the
-% standard compare/3 predicate and same possible values for the
-% first argument (<, >, or =)
+% Check that the object file is up-to-date
 
-'$lgt_compare_file_modification_times'(Result, File1, File2) :-
-	'$lgt_file_modification_time'(File1, Time1),
-	'$lgt_file_modification_time'(File2, Time2),
-	compare(Result, Time1, Time2).
+'$lgt_up_to_date_object_file'(SourceFile, ObjectFile) :-
+	'$lgt_file_modification_time'(SourceFile, SourceFileTime),
+	'$lgt_file_modification_time'(ObjectFile, ObjectFileTime),
+	SourceFileTime @=< ObjectFileTime.
 
 
 
