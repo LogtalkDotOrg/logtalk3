@@ -65,7 +65,6 @@ program(zebra).
 :- endif.
 :- if(predicate_property(recorda(_,_,_), built_in)).
 	program(nand).
-
 :- endif.
 :- if(current_prolog_flag(bounded, false)).
 	program(perfect).
