@@ -71,6 +71,9 @@ Examples
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The macOS installer to also add the Logtalk default paths to the
+`PATH`, `MANPATH`, and `INFOPATH` environment variables.
+
 * UPDATED: The Windows installation script to also detect upcoming SICStus
 Prolog 4.9.x versions.
 
