@@ -36,6 +36,8 @@ files.
 
 * IMPROVED: Avoid computing directory hash twice when compiling a source file.
 
+* IMPROVED: Performance when compiling object and category facts.
+
 Prolog adapter and integration files
 ------------------------------------
 

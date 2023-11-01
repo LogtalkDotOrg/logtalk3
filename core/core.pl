@@ -22034,30 +22034,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(_, _).
 
 
-
-% '$lgt_compile_predicate_calls'(+callable, +compound, +atom, -callable)
-
-'$lgt_compile_predicate_calls'(Term, SourceData, Optimize, TTerm) :-
-	(	catch(
-			'$lgt_compile_predicate_calls_inner'(Term, SourceData, Optimize, TTerm),
-			Error,
-			'$lgt_compile_predicate_calls_error_handler'(Term, Error)
-		) ->
-		true
-	;	% unexpected compilation failure
-		'$lgt_compile_predicate_calls_error_handler'(Term, system_error)
-	).
-
-
-'$lgt_compile_predicate_calls_inner'(Body, SourceData, Optimize, TRule) :-
-	(	SourceData = sd(Term, VariableNames, Singletons, File, Lines) ->
-		assertz('$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines))
-	;	true
-	),
-	'$lgt_compile_predicate_calls'(Body, Optimize, TRule),
-	retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)).
-
-
+% auxiliary predicate used when checking for duplicated clauses
 '$lgt_clause_from_term'(srule(_,Body,Ctx), (Head:-Body), srule(_,_,_), Term) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
@@ -22077,12 +22054,40 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Fact, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
 
+% '$lgt_compile_predicate_calls'(+callable, +compound, +atom, -callable)
+
+% entity term is final
+'$lgt_compile_predicate_calls'({Term}, _, _, Term) :-
+	!.
+
+'$lgt_compile_predicate_calls'(fact(TFact,_), _, _, TFact) :-
+	!.
+
+% debug version of a predicate fact
+'$lgt_compile_predicate_calls'(dfact(TFact,DHead,_), _, _, (TFact:-DHead)) :-
+	!.
+
+'$lgt_compile_predicate_calls'(Body, SourceData, Optimize, TRule) :-
+	(	SourceData = sd(Term, VariableNames, Singletons, File, Lines) ->
+		assertz('$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines))
+	;	true
+	),
+	(	catch(
+			'$lgt_compile_predicate_calls'(Body, Optimize, TRule),
+			Error,
+			'$lgt_compile_predicate_calls_error_handler'(Body, Error)
+		) ->
+		retractall('$lgt_pp_term_source_data_'(_, _, _, _, _))
+	;	% unexpected compilation failure
+		retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)),
+		'$lgt_compile_predicate_calls_error_handler'(Body, system_error)
+	).
+
+
 '$lgt_compile_predicate_calls_error_handler'(Term, Error) :-
 	'$lgt_internal_term_to_user_term'(Term, UserTerm),
 	throw(error(Error,UserTerm)).
 
-
-'$lgt_internal_term_to_user_term'({Term}, term(Term)).
 
 '$lgt_internal_term_to_user_term'(srule(_,Body,Ctx), clause((Head:-Body))) :-
 	'$lgt_comp_ctx_head'(Ctx, Head).
@@ -22102,9 +22107,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_internal_term_to_user_term'(directive(Directive,_), directive(Directive)).
 
-
-% entity term is final
-'$lgt_compile_predicate_calls'({Term}, _, Term).
 
 % static predicate rule
 '$lgt_compile_predicate_calls'(srule(THead,Body,Ctx), Optimize, TClause) :-
@@ -22150,12 +22152,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_predicate_calls'(dgoal(Body,Ctx), _, DBody) :-
 	'$lgt_compile_body'(Body, directive, _, DBody, Ctx).
 
-% predicate fact
-'$lgt_compile_predicate_calls'(fact(TFact,_), _, TFact).
-
-% debug version of a predicate fact
-'$lgt_compile_predicate_calls'(dfact(TFact,DHead,_), _, (TFact:-DHead)).
-
 % supported Prolog meta-directives (specified in the adapter files)
 '$lgt_compile_predicate_calls'(directive(Directive,Meta), _, TDirective) :-
 	Directive =.. [Functor| Args],
@@ -22171,7 +22167,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% the meta-directive template is not usable, report it as an error
 		throw(domain_error(meta_directive_template, Meta))
 	).
-
 
 
 '$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead) :-
