@@ -12384,8 +12384,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(error(Error, clause(Clause)))
 	),
 	% sucessful first stage compilation; save the source data information for
-	% use in the second compiler stage (where it might be required by calls to
-	% the logtalk_load_context/2 predicate during goal expansion)
+	% use in the second compiler stage (where it might be required by calls
+	% to the logtalk_load_context/2 predicate during goal expansion or when
+	% checking for duplicated clauses)
 	(	'$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines) ->
 		SourceData = sd(Term, VariableNames, Singletons, File, Lines)
 	;	SourceData = nil
@@ -12517,7 +12518,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% other facts
 		(	var(ExCtx) ->
 			true
-		;	'$lgt_unify_head_thead_arguments'(Fact, TFact, ExCtx)
+		;	% parameter variables shared via the execution context
+			'$lgt_unify_head_thead_arguments'(Fact, TFact, ExCtx)
 		),
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
 	),
@@ -22035,6 +22037,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % auxiliary predicate used when checking for duplicated clauses
+
 '$lgt_clause_from_term'(srule(_,Body,Ctx), (Head:-Body), srule(_,_,_), Term) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
 
