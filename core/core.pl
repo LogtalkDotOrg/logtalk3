@@ -20567,6 +20567,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % reports variable naming issues as per official coding guidelines
 
+'$lgt_report_variable_naming_issues'([], _, _) :-
+	!.
+
 '$lgt_report_variable_naming_issues'(_, _, _) :-
 	'$lgt_compiler_flag'(naming, silent),
 	!.
