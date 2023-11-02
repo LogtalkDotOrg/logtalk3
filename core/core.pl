@@ -16507,7 +16507,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(TPred, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Pred, TPred, ExCtx),
 	'$lgt_remember_called_predicate'(Mode, Functor/Arity, TFunctor/TArity, Head),
-	'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity, Lines).
+	'$lgt_report_unknown_predicate_call'(Mode, Functor/Arity, Lines),
+	!.
+
+% unexpected compilation failure
+
+'$lgt_compile_body'(Pred, _, _, _, Ctx) :-
+	throw(domain_error(goal, Pred)).
 
 
 
@@ -22060,60 +22066,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_predicate_calls'(+callable, +compound, +atom, -callable)
 
 % entity term is final
-'$lgt_compile_predicate_calls'({Term}, _, _, Term) :-
-	!.
+'$lgt_compile_predicate_calls'({Term}, _, _, Term).
 
-'$lgt_compile_predicate_calls'(fact(TFact,_), _, _, TFact) :-
-	!.
+'$lgt_compile_predicate_calls'(fact(TFact,_), _, _, TFact).
 
 % debug version of a predicate fact
-'$lgt_compile_predicate_calls'(dfact(TFact,DHead,_), _, _, (TFact:-DHead)) :-
-	!.
-
-'$lgt_compile_predicate_calls'(Body, SourceData, Optimize, TRule) :-
-	(	SourceData = sd(Term, VariableNames, Singletons, File, Lines) ->
-		assertz('$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines))
-	;	true
-	),
-	(	catch(
-			'$lgt_compile_predicate_calls'(Body, Optimize, TRule),
-			Error,
-			'$lgt_compile_predicate_calls_error_handler'(Body, Error)
-		) ->
-		retractall('$lgt_pp_term_source_data_'(_, _, _, _, _))
-	;	% unexpected compilation failure
-		retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)),
-		'$lgt_compile_predicate_calls_error_handler'(Body, system_error)
-	).
-
-
-'$lgt_compile_predicate_calls_error_handler'(Term, Error) :-
-	'$lgt_internal_term_to_user_term'(Term, UserTerm),
-	throw(error(Error,UserTerm)).
-
-
-'$lgt_internal_term_to_user_term'(srule(_,Body,Ctx), clause((Head:-Body))) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
-
-'$lgt_internal_term_to_user_term'(dsrule(_,_,Body,Ctx), clause((Head:-Body))) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
-
-'$lgt_internal_term_to_user_term'(drule(_,_,Body,Ctx), clause((Head:-Body))) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
-
-'$lgt_internal_term_to_user_term'(ddrule(_,_,_,Body,Ctx), clause((Head:-Body))) :-
-	'$lgt_comp_ctx_head'(Ctx, Head).
-
-'$lgt_internal_term_to_user_term'(goal(Body,_), directive(initialization(Body))).
-
-'$lgt_internal_term_to_user_term'(dgoal(Body,_), directive(initialization(Body))).
-
-'$lgt_internal_term_to_user_term'(directive(Directive,_), directive(Directive)).
-
+'$lgt_compile_predicate_calls'(dfact(TFact,DHead,_), _, _, (TFact:-DHead)).
 
 % static predicate rule
-'$lgt_compile_predicate_calls'(srule(THead,Body,Ctx), Optimize, TClause) :-
-	'$lgt_compile_body'(Body, rule, FBody, _, Ctx),
+'$lgt_compile_predicate_calls'(srule(THead,Body,Ctx), SourceData, Optimize, TClause) :-
+	'$lgt_add_source_data'(SourceData),
+	catch(
+		'$lgt_compile_body'(Body, rule, FBody, _, Ctx),
+		Error,
+		('$lgt_comp_ctx_head'(Ctx,Head), throw(error(Error,clause((Head:-Body)))))
+	),
 	(	Optimize == on ->
 		'$lgt_simplify_goal'(FBody, SBody)
 	;	SBody = FBody
@@ -22124,12 +22091,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 % debug version of static predicate rule
-'$lgt_compile_predicate_calls'(dsrule(THead,DHead,Body,Ctx), _, (THead:-DHead,DBody)) :-
-	'$lgt_compile_body'(Body, rule, _, DBody, Ctx).
+'$lgt_compile_predicate_calls'(dsrule(THead,DHead,Body,Ctx), SourceData, _, (THead:-DHead,DBody)) :-
+	'$lgt_add_source_data'(SourceData),
+	catch(
+		'$lgt_compile_body'(Body, rule, _, DBody, Ctx),
+		Error,
+		('$lgt_comp_ctx_head'(Ctx,Head), throw(error(Error,clause((Head:-Body)))))
+	).
 
 % dynamic predicate rule
-'$lgt_compile_predicate_calls'(drule(THead,Nop,Body,Ctx), Optimize, TClause) :-
-	'$lgt_compile_body'(Body, rule, TBody0, _, Ctx),
+'$lgt_compile_predicate_calls'(drule(THead,Nop,Body,Ctx), SourceData, Optimize, TClause) :-
+	'$lgt_add_source_data'(SourceData),
+	catch(
+		'$lgt_compile_body'(Body, rule, TBody0, _, Ctx),
+		Error,
+		('$lgt_comp_ctx_head'(Ctx,Head), throw(error(Error,clause((Head:-Body)))))
+	),
 	(	Optimize == on ->
 		'$lgt_simplify_goal'(TBody0, TBody)
 	;	TBody = TBody0
@@ -22140,36 +22117,64 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 % debug version of dynamic predicate rule
-'$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), _, (THead:-Nop,DHead,DBody)) :-
-	'$lgt_compile_body'(Body, rule, _, DBody, Ctx).
+'$lgt_compile_predicate_calls'(ddrule(THead,Nop,DHead,Body,Ctx), SourceData, _, (THead:-Nop,DHead,DBody)) :-
+	'$lgt_add_source_data'(SourceData),
+	catch(
+		'$lgt_compile_body'(Body, rule, _, DBody, Ctx),
+		Error,
+		('$lgt_comp_ctx_head'(Ctx,Head), throw(error(Error,clause((Head:-Body)))))
+	).
 
 % initialization goal
-'$lgt_compile_predicate_calls'(goal(Body,Ctx), Optimize, TBody) :-
-	'$lgt_compile_body'(Body, directive, TBody0, _, Ctx),
+'$lgt_compile_predicate_calls'(goal(Body,Ctx), SourceData, Optimize, TBody) :-
+	'$lgt_add_source_data'(SourceData),
+	catch(
+		'$lgt_compile_body'(Body, directive, TBody0, _, Ctx),
+		Error,
+		throw(error(Error, directive(initialization(Body))))
+	),
 	(	Optimize == on ->
 		'$lgt_simplify_goal'(TBody0, TBody)
 	;	TBody = TBody0
 	).
 
 % debug version of initialization goal
-'$lgt_compile_predicate_calls'(dgoal(Body,Ctx), _, DBody) :-
-	'$lgt_compile_body'(Body, directive, _, DBody, Ctx).
+'$lgt_compile_predicate_calls'(dgoal(Body,Ctx), SourceData, _, DBody) :-
+	'$lgt_add_source_data'(SourceData),
+	catch(
+		'$lgt_compile_body'(Body, directive, _, DBody, Ctx),
+		Error,
+		throw(error(Error, directive(initialization(Body))))
+	).
 
 % supported Prolog meta-directives (specified in the adapter files)
-'$lgt_compile_predicate_calls'(directive(Directive,Meta), _, TDirective) :-
+'$lgt_compile_predicate_calls'(directive(Directive,Meta), SourceData, _, TDirective) :-
+	'$lgt_add_source_data'(SourceData),
 	Directive =.. [Functor| Args],
 	Meta =.. [Functor| MArgs],
 	'$lgt_pp_entity_'(_, Entity, Prefix),
 	% MetaVars = [] as we're compiling a local call
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, Entity, Entity, Entity, Prefix, [], _, _, _, [], _, _),
-	(	'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs) ->
+	(	catch(
+			'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs),
+			Error,
+			throw(error(Error, directive(Directive)))
+		) ->
 		(	'$lgt_compiler_flag'(debug, on) ->
 			TDirective =.. [Functor| DArgs]
 		;	TDirective =.. [Functor| TArgs]
 		)
 	;	% the meta-directive template is not usable, report it as an error
-		throw(domain_error(meta_directive_template, Meta))
+		throw(error(domain_error(meta_directive_template, Meta), directive(Directive)))
 	).
+
+
+'$lgt_add_source_data'(nil) :-
+	retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)).
+
+'$lgt_add_source_data'(sd(Term, VariableNames, Singletons, File, Lines)) :-
+	retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)),
+	assertz('$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines)).
 
 
 '$lgt_add_coinductive_predicate_aux_clause'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead) :-
