@@ -12605,6 +12605,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity).
 
 % not the first clause for this predicate; reuse the compiled head template
+%
+% we must ensure that Mode is the same to prevent that the auxiliary clauses
+% created for uses/2 and use_module/2 directives would result in a cached
+% template being reused for a conflicting user-defined predicate
 
 '$lgt_compile_head'(Head, Functor/Arity, THead, Ctx) :-
 	'$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, Mode, Origin),
