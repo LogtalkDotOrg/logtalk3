@@ -16512,7 +16512,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % unexpected compilation failure
 
-'$lgt_compile_body'(Pred, _, _, _, Ctx) :-
+'$lgt_compile_body'(Pred, _, _, _, _) :-
 	throw(domain_error(goal, Pred)).
 
 

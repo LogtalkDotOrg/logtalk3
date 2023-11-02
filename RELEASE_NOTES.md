@@ -38,6 +38,8 @@ files.
 
 * IMPROVED: Performance when compiling object and category facts.
 
+* IMPROVED: Performance when compiling entity ground terms.
+
 Prolog adapter and integration files
 ------------------------------------
 
