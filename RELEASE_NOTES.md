@@ -50,6 +50,9 @@ Documentation
 
 * ADDED: Documentation to the `lgtunit` tool on mocking solutions.
 
+* ADDED: Documentation to the `lgtunit` tool on test execution times and
+memory usage.
+
 * ADDED: Documentation to the `lgtunit` tool on testing or suppressing
 expected output written to `user_error` and other streams.
 

@@ -101,6 +101,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#tests-with-timeout-limits">Tests with timeout limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setup-and-cleanup-goals">Setup and cleanup goals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#test-annotations">Test annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-execution-times-and-memory-usage">Test execution times and memory usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#working-with-test-data-files">Working with test data files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#flaky-tests">Flaky tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mocking">Mocking</a></li>
@@ -1314,6 +1315,32 @@ sub-goals. For example:</p>
 <p>Annotations are written, by default, between parenthesis after and in
 the same line as the test results.</p>
 </section>
+<section id="test-execution-times-and-memory-usage">
+<h2>Test execution times and memory usage<a class="headerlink" href="#test-execution-times-and-memory-usage" title="Link to this heading"></a></h2>
+<p>Individual test CPU execution time (in seconds) is reported by default
+when running the tests. Starting and ending times when running a set of
+tests is also reported by default. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object also provides
+several public benchmarking predicates that can be useful for e.g.
+reporting test sub-goals execution times using either cpu or wall
+clocks.</p>
+<p>Test memory usage is not reported y default due to the lack of a
+portable solution to access memory data. However, several backend Prolog
+systems provide a <code class="docutils literal notranslate"><span class="pre">statistics/2</span></code> or similar predicate that can be used
+for a custom solution. Depending on the system, individual keys may be
+provided for each memory area (heap, trail, atom table, …).
+Aggregating keys may also be provided. As an hypothetical example,
+assume you’re running Logtalk with a backend providing a
+<code class="docutils literal notranslate"><span class="pre">statistics/2</span></code> predicate with a <code class="docutils literal notranslate"><span class="pre">memory_used</span></code> key:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>test(ack_3, <span class="k">true</span>(<span class="nv">Result</span> <span class="o">==</span> <span class="m">125</span>), [note(memory<span class="o">-</span><span class="nv">Memory</span>)]) <span class="o">:-</span>
+    statistics(memory_used, <span class="nv">Memory0</span>),
+    ack<span class="o">::</span>ack(<span class="m">3</span>, <span class="m">4</span>, <span class="nv">Result</span>),
+    statistics(memory_used, <span class="nv">Memory1</span>),
+    <span class="nv">Memory</span> <span class="k">is</span> <span class="nv">Memory1</span> <span class="o">-</span> <span class="nv">Memory0</span>.
+</pre></div>
+</div>
+<p>Consult the documentation of the backend Prolog systems for actual
+details.</p>
+</section>
 <section id="working-with-test-data-files">
 <h2>Working with test data files<a class="headerlink" href="#working-with-test-data-files" title="Link to this heading"></a></h2>
 <p>Frequently tests make use of test data files that are usually stored in
@@ -1705,11 +1732,11 @@ sent from the <code class="docutils literal notranslate"><span class="pre">lgtun
 the meta-argument, which would add an overhead to the timing results.
 But this advice conflicts with collecting code coverage data, which
 requires compilation in debug mode. The solution is to use separate test
-objects for benchmarking and for code coverage. But note that the CPU
+objects for benchmarking and for code coverage. Note that the CPU
 execution time (in seconds) for each individual test is reported by
 default when running the tests.</p>
-<p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object documentation for more details on these
-predicates.</p>
+<p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object API documentation for more details on
+these predicates.</p>
 </section>
 <section id="exporting-test-results-in-xunit-xml-format">
 <h2>Exporting test results in xUnit XML format<a class="headerlink" href="#exporting-test-results-in-xunit-xml-format" title="Link to this heading"></a></h2>
