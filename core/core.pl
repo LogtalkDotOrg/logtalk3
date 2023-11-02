@@ -20708,16 +20708,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_generate_entity_code'(object, Ctx) :-
 	'$lgt_generate_def_table_clauses'(Ctx),
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_compile_predicate_calls'(Mode),
+	'$lgt_compile_predicate_calls'(compile_time),
 	'$lgt_generate_object_clauses',
 	'$lgt_generate_object_directives',
 	'$lgt_generate_file_object_initialization_goal'.
 
 '$lgt_generate_entity_code'(category, Ctx) :-
 	'$lgt_generate_def_table_clauses'(Ctx),
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
-	'$lgt_compile_predicate_calls'(Mode),
+	'$lgt_compile_predicate_calls'(compile_time),
 	'$lgt_generate_category_clauses',
 	'$lgt_generate_category_directives'.
 
@@ -21953,13 +21951,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % predicates which may be textually defined in an entity after their calls
 
 '$lgt_compile_predicate_calls'(runtime) :-
-	retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)),
 	% avoid querying the optimize flag for each compiled term
 	'$lgt_compiler_flag'(optimize, Optimize),
 	'$lgt_compile_predicate_calls_loop'(silent, Optimize).
 
-'$lgt_compile_predicate_calls'(compile(_, _, _)) :-
-	retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)),
+'$lgt_compile_predicate_calls'(compile_time) :-
 	% avoid querying the duplicated_clauses and optimize flags for each compiled term
 	'$lgt_compiler_flag'(duplicated_clauses, DuplicatedClauses),
 	'$lgt_compiler_flag'(optimize, Optimize),
