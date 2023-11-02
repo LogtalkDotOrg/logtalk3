@@ -7790,7 +7790,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_sum_list'(Defines, TotalDefines),
 	findall(
 		AuxDefine,
-		(	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux,_,_), _),
+		(	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, aux),
 			'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, AuxDefine, _)
 		),
 		AuxDefines
@@ -7808,7 +7808,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_sum_list'(Defines, TotalDefines),
 	findall(
 		AuxDefine,
-		(	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, compile(aux,_,_), _),
+		(	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, aux),
 			'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, _, AuxDefine)
 		),
 		AuxDefines
@@ -7856,7 +7856,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity, MainFile) :-
-	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, Mode, _),
+	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, Origin),
 	(	'$lgt_pp_inline_predicate_'(Functor/Arity) ->
 		Flags0 is 4
 	;	Flags0 is 0
@@ -7865,7 +7865,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Flags1 is Flags0 + 2
 	;	Flags1 is Flags0
 	),
-	(	Mode = compile(aux,_,_) ->
+	(	Origin == aux ->
 		Flags is Flags1 + 1,
 		File = MainFile,
 		Line is 0
@@ -19837,7 +19837,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_multifile_'(Head, _, _),
 	\+ '$lgt_pp_synchronized_'(Head, _, _, _),
 	% static, non-multifile, and no synchronization wrapper
-	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, compile(_,_,_), user),
+	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, _, user),
 	% source file user-defined predicate
 	'$lgt_pp_final_entity_term_'((THead :- TBody), _),
 	Head =.. [_| HeadArguments],
@@ -19907,7 +19907,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 '$lgt_inlining_candidate'(TBody, _) :-
-	'$lgt_pp_defines_predicate_'(_, _, _, TBody, compile(_,_,_), user),
+	'$lgt_pp_defines_predicate_'(_, _, _, TBody, _, user),
 	% call to a local user-defined predicate
 	!.
 
@@ -20325,8 +20325,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
-	'$lgt_pp_defines_predicate_'(_, Name/Arity, _, _, Mode, _),
-	Mode \= compile(aux, _, _),
+	'$lgt_pp_defines_predicate_'(_, Name/Arity, _, _, _, user),
 	\+ '$lgt_pp_defines_non_terminal_'(Name, _, Arity),
 	\+ '$lgt_pp_public_'(Name, Arity, _, _),
 	\+ '$lgt_pp_protected_'(Name, Arity, _, _),
@@ -20350,8 +20349,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_report_predicate_naming_issues'(Type, Entity) :-
 	'$lgt_pp_defines_non_terminal_'(Name, Arity, ExtArity),
-	'$lgt_pp_defines_predicate_'(_, Name/ExtArity, _, _, Mode, _),
-	Mode \= compile(aux, _, _),
+	'$lgt_pp_defines_predicate_'(_, Name/ExtArity, _, _, _, user),
 	\+ '$lgt_pp_public_'(Name, ExtArity, _, _),
 	\+ '$lgt_pp_protected_'(Name, ExtArity, _, _),
 	\+ '$lgt_pp_private_'(Name, ExtArity, _, _),
