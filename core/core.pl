@@ -7256,7 +7256,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % converts a source file full path into two object file full paths: one that
 % includes the process identifier for use when the clean flag is turned on
 % (to allow parallel Logtalk processes) and one that includes the backend
-% indentifier for use when the clean flag is turned off (to avoid file name
+% identifier for use when the clean flag is turned off (to avoid file name
 % conflicts when running with backends generate the same directory hashes)
 
 '$lgt_object_file_names'(SourceDirectory, SourceName, SourceExtension, ObjectFilePid, ObjectFileDialect) :-
@@ -12387,7 +12387,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Error,
 		throw(error(Error, clause(Clause)))
 	),
-	% sucessful first stage compilation; save the source data information for
+	% successful first stage compilation; save the source data information for
 	% use in the second compiler stage (where it might be required by calls
 	% to the logtalk_load_context/2 predicate during goal expansion or when
 	% checking for duplicated clauses)
@@ -17593,7 +17593,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % this auxiliary predicate ensures that, when calling database methods in the body
 % of a multifile predicate clause defined in an object, the object database will be
-% used instead of the database of the entity hoding the multifile predicate primary
+% used instead of the database of the entity holding the multifile predicate primary
 % declaration (which could be a category, making the calls invalid)
 
 '$lgt_db_call_database_execution_context'(Entity, This, Database, ExCtx) :-
@@ -18799,7 +18799,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_goal_meta_call_context'(+callable, @term, @term, -callable)
 %
 % returns the meta-call execution context: an empty list for local
-% meta-calls or the sender execution context when the messge is for
+% meta-calls or the sender execution context when the message is for
 % a meta-predicate
 
 '$lgt_goal_meta_call_context'(no, ExCtx, This, []) :-
@@ -19314,7 +19314,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	ParameterVariablePairs \== [],
 	!,
 	% only save a non-empty list of parameter
-	% variables to improve compiler peformance
+	% variables to improve compiler performance
 	assertz('$lgt_pp_parameter_variables_'(ParameterVariablePairs)).
 
 '$lgt_save_parameter_variables'(_).
@@ -19358,7 +19358,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_entity_'(_, Entity, _) ->
 		% compile time; instantiate the Entity argument in the compilation context
 		true
-	;	% runtime <</2 call; Entity alreay instantiated in the compilation context
+	;	% runtime <</2 call; Entity already instantiated in the compilation context
 		true
 	),
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, _, _, _, _, _, _, ExCtx, _, _, _, _),
@@ -20863,7 +20863,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% object plays the role of a class
 		'$lgt_generate_ic_clauses'
 	;	% objects without an instantiation or specialization relation
-		%play the role of prototypes
+		% play the role of prototypes
 		'$lgt_generate_prototype_clauses'
 	).
 
@@ -20876,7 +20876,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % atom "true" if there are local clauses and the atom "false" otherwise
 %
 % the table clauses use a bit pattern representation for the predicate
-% properties for compacteness and access performance
+% properties for compactness and access performance
 
 '$lgt_generate_dcl_table_clauses'(Dcl, _) :-
 	(	'$lgt_pp_public_'(Functor, Arity, _, _), Scope = p(p(p))
@@ -28419,7 +28419,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % need to be checked for finding the value of a flag in a given context
 %
 % although there should be no clauses for the '$lgt_current_flag_'/2
-% predicate when this predicte is called at runtime initialization, a
+% predicate when this predicate is called at runtime initialization, a
 % wrong file order when embedding Logtalk or a Logtalk application can
 % falsify this assumption; therefore, we test for a flag definition
 % before caching its default value
@@ -28457,7 +28457,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_start_runtime_threading'
 %
-% initializes the engines mutext plus the asynchronous threaded calls mutex
+% initializes the engines mutex plus the asynchronous threaded calls mutex
 % and tag counter support for compilers supporting multi-threading programming
 % (currently we use integers for the tag counter, which impose a limitation on
 % the maximum number of tags on backend Prolog compilers with bounded integers)
