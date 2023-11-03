@@ -40,6 +40,9 @@ files.
 
 * IMPROVED: Performance when compiling entity ground terms.
 
+* FIXED: Catch any errors during the compilation of the `begin_of_file`
+virtual term.
+
 Prolog adapter and integration files
 ------------------------------------
 

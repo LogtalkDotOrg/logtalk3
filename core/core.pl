@@ -6811,7 +6811,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		atom_concat(Name, Extension, Basename),
 		(	'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)
 			% file already loaded; possibly an embedded application in which case we
-			% don't want to throw a file existence error as the original source files
+			% don't want to throw a file existence error as the original source file
 			% may not exist, or no longer exist, on the system where we are running
 		;	'$lgt_file_exists'(SourceFile)
 		) ->
@@ -7351,7 +7351,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	% generate a begin_of_file term for use by the term-expansion mechanism
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, compile(user,_,_), _, 0-0, _),
-	'$lgt_compile_file_term'(begin_of_file, Ctx),
+	catch(
+		'$lgt_compile_file_term'(begin_of_file, Ctx),
+		Error,
+		'$lgt_compiler_error_handler'(Error)
+	),
 	% read and compile the remaining terms in the Logtalk source file
 	catch(
 		'$lgt_compile_file_term'(Term, Singletons, Lines, SourceFile, NewInput),
