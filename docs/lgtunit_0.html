@@ -713,13 +713,13 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Number of tests: Use the <code class="docutils literal notranslate"><span class="pre">n(NumberOfTests)</span></code> option to specifiy the number of random tests. Default is 100.</p></li>
-<li><p>Maximum number of shrink operations: Use the <code class="docutils literal notranslate"><span class="pre">s(MaxShrinks)</span></code> option to specifiy the number of shrink operations when a counter example is found. Default is 64.</p></li>
-<li><p>Type edge cases: Use the <code class="docutils literal notranslate"><span class="pre">ec(Boolean)</span></code> option to specifiy if type edge cases are tested (before generating random tests). Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
-<li><p>Starting seed: Use the <code class="docutils literal notranslate"><span class="pre">rs(Seed)</span></code> option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.</p></li>
-<li><p>Test generation filtering: Use the <code class="docutils literal notranslate"><span class="pre">pc/1</span></code> option to specifiy a pre-condition closure for filtering generated tests (extended with the test arguments; no default).</p></li>
-<li><p>Generated tests classification: Use the <code class="docutils literal notranslate"><span class="pre">l/1</span></code> option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.</p></li>
-<li><p>Verbose test generation: Use the <code class="docutils literal notranslate"><span class="pre">v(Boolean)</span></code> option to specifiy verbose reporting of generated random tests. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p>Number of tests: Use the <code class="docutils literal notranslate"><span class="pre">n(NumberOfTests)</span></code> option to specify the number of random tests. Default is 100.</p></li>
+<li><p>Maximum number of shrink operations: Use the <code class="docutils literal notranslate"><span class="pre">s(MaxShrinks)</span></code> option to specify the number of shrink operations when a counter example is found. Default is 64.</p></li>
+<li><p>Type edge cases: Use the <code class="docutils literal notranslate"><span class="pre">ec(Boolean)</span></code> option to specify if type edge cases are tested (before generating random tests). Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p>Starting seed: Use the <code class="docutils literal notranslate"><span class="pre">rs(Seed)</span></code> option to specify the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.</p></li>
+<li><p>Test generation filtering: Use the <code class="docutils literal notranslate"><span class="pre">pc/1</span></code> option to specify a pre-condition closure for filtering generated tests (extended with the test arguments; no default).</p></li>
+<li><p>Generated tests classification: Use the <code class="docutils literal notranslate"><span class="pre">l/1</span></code> option to specify a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.</p></li>
+<li><p>Verbose test generation: Use the <code class="docutils literal notranslate"><span class="pre">v(Boolean)</span></code> option to specify verbose reporting of generated random tests. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p>Progress bar: Use the <code class="docutils literal notranslate"><span class="pre">pb(Boolean,Tick)</span></code> option to print a progress bar for the executed tests, advancing at every <code class="docutils literal notranslate"><span class="pre">Tick</span></code> tests. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>. Only applies when the verbose option is false.</p></li>
 </ul>
 </div></blockquote>
@@ -2723,7 +2723,7 @@
 </section>
 <section id="test-3">
 <span id="lgtunit-0-test-3"></span><span id="index-93"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">test/3</span></code></a><a class="headerlink" href="#test-3" title="Link to this heading"></a></h3>
-<p>Compiled unit tests. The list of variables is used to ensure variable sharing betwen a test with its test options.</p>
+<p>Compiled unit tests. The list of variables is used to ensure variable sharing between a test with its test options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

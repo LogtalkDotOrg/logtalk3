@@ -1495,7 +1495,7 @@ writing unit tests and for general use:
 	For finding the average time to prove a goal.
 
 - `benchmark(Goal, Repetitions, Clock, Time)`  
-	For finding the average time to prove a goal using a cpu or a wall clock.
+	For finding the average time to prove a goal using a `cpu` or a `wall` clock.
 
 - `deterministic(Goal)`  
 	For checking that a predicate succeeds without	leaving a choice-point.

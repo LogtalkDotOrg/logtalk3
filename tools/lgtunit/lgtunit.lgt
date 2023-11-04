@@ -149,13 +149,13 @@
 		comment is 'Generates and runs random tests for a predicate given its mode template and a set of options. Fails when a generated test fails printing the test. Also fails on an invalid option, printing the option.',
 		argnames is ['Template', 'Options'],
 		remarks is [
-			'Number of tests' - 'Use the ``n(NumberOfTests)`` option to specifiy the number of random tests. Default is 100.',
-			'Maximum number of shrink operations' - 'Use the ``s(MaxShrinks)`` option to specifiy the number of shrink operations when a counter example is found. Default is 64.',
-			'Type edge cases' - 'Use the ``ec(Boolean)`` option to specifiy if type edge cases are tested (before generating random tests). Default is ``true``.',
-			'Starting seed' - 'Use the ``rs(Seed)`` option to specifiy the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.',
-			'Test generation filtering' - 'Use the ``pc/1`` option to specifiy a pre-condition closure for filtering generated tests (extended with the test arguments; no default).',
-			'Generated tests classification' - 'Use the ``l/1`` option to specifiy a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.',
-			'Verbose test generation' - 'Use the ``v(Boolean)`` option to specifiy verbose reporting of generated random tests. Default is ``false``.',
+			'Number of tests' - 'Use the ``n(NumberOfTests)`` option to specify the number of random tests. Default is 100.',
+			'Maximum number of shrink operations' - 'Use the ``s(MaxShrinks)`` option to specify the number of shrink operations when a counter example is found. Default is 64.',
+			'Type edge cases' - 'Use the ``ec(Boolean)`` option to specify if type edge cases are tested (before generating random tests). Default is ``true``.',
+			'Starting seed' - 'Use the ``rs(Seed)`` option to specify the random generator starting seed to be used when generating tests. No default. Seeds should be regarded as opaque terms.',
+			'Test generation filtering' - 'Use the ``pc/1`` option to specify a pre-condition closure for filtering generated tests (extended with the test arguments; no default).',
+			'Generated tests classification' - 'Use the ``l/1`` option to specify a label closure for classifying the generated tests (extended with the test arguments plus the labels argument; no default). The labelling predicate can return a single test label or a list of test labels.',
+			'Verbose test generation' - 'Use the ``v(Boolean)`` option to specify verbose reporting of generated random tests. Default is ``false``.',
 			'Progress bar' - 'Use the ``pb(Boolean,Tick)`` option to print a progress bar for the executed tests, advancing at every ``Tick`` tests. Default is ``false``. Only applies when the verbose option is false.'
 		]
 	]).
@@ -767,10 +767,10 @@
 	]).
 
 	:- private(test/3).
-	:- meta_predicate(test(*, *, *)).  % just to slience warnings
+	:- meta_predicate(test(*, *, *)).  % just to silence warnings
 	:- mode(test(?callable, ?list(variable), ?nonvar), zero_or_more).
 	:- info(test/3, [
-		comment is 'Compiled unit tests. The list of variables is used to ensure variable sharing betwen a test with its test options.',
+		comment is 'Compiled unit tests. The list of variables is used to ensure variable sharing between a test with its test options.',
 		argnames is ['Identifier', 'Variables', 'Outcome']
 	]).
 
@@ -843,7 +843,7 @@
 	:- uses(logtalk, [print_message/3]).
 	% library support for quick check
 	:- uses(type, [check/2, check/3, valid/2, arbitrary/2, shrink/3, edge_case/2, get_seed/1, set_seed/1]).
-	% library support for suppressin test output
+	% library support for reporting test execution time and suppressing test output
 	:- uses(os, [change_directory/1, working_directory/1, cpu_time/1, null_device_path/1]).
 	% library list predicates
 	:- uses(list, [append/3, length/2, member/2, memberchk/2, nth1/3, select/3]).
@@ -1629,7 +1629,7 @@
 	lint_check_assertion(Test, Term1 = Term2) :-
 		once((var(Term1); var(Term2))),
 		!,
-		% undo numbervars of variables in the message term when priting by using double negation
+		% undo numbervars of variables in the message term when printing by using double negation
 		\+ \+ print_message(warning, lgtunit, assertion_uses_unification(Test, Term1 = Term2)).
 	lint_check_assertion(_, _).
 
