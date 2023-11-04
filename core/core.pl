@@ -12619,9 +12619,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	!,
 	% only check for a discontiguous predicate for user-defined predicates
-	(	Origin == aux ->
+	(	'$lgt_pp_previous_predicate_'(Head, Origin) ->
 		true
-	;	'$lgt_pp_previous_predicate_'(Head, Origin) ->
+	;	Origin == aux ->
 		true
 	;	% clauses for the predicate are discontiguous
 		'$lgt_check_discontiguous_directive'(Head, Ctx)
