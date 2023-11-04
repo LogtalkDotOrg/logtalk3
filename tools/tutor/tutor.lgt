@@ -893,7 +893,7 @@
 			'to a coding error or use the (If *-> Then; fail) pattern instead.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, Var, [call(Var)])) -->
-		[	'Naked mata-variables in control constructs that are cut-transparent'-[], nl,
+		[	'Naked meta-variables in control constructs that are cut-transparent'-[], nl,
 			'may have different semantics across Prolog systems. Use instead the '-[], nl,
 			'suggested alternative to avoid portability issues.'-[], nl, nl
 		].

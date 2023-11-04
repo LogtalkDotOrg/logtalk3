@@ -798,7 +798,7 @@
 	message_prefix_stream(raw,               '',       Stream) :-
 		current_output(Stream).
 
-	% wraper messages
+	% wrapper messages
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).

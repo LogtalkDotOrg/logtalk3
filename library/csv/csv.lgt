@@ -409,7 +409,7 @@
 
 	guess_textdata(Code, Separator) -->
 		[Code],
-		% anything alfanumeric except \r, \n, dquotes and the separator suggested
+		% anything alphanumeric except \r, \n, double-quotes and the separator suggested
 		{ \+ forbidden(Code), non_separator_code(Code, Separator) }.
 
 	propose_separator(C, Sep) :- var(Sep), separator_code(Sep, C),

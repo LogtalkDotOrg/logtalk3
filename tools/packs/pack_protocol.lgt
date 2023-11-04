@@ -63,7 +63,7 @@
 		comment is 'Table of available versions.',
 		argnames is ['Version', 'Status', 'URL', 'Checksum', 'Dependencies', 'Portability'],
 		remarks is [
-			'Version' - 'This argument uses the same format as entity versions: ``Major:Minor:Pathch``. Semantic versioning should be used.',
+			'Version' - 'This argument uses the same format as entity versions: ``Major:Minor:Patch``. Semantic versioning should be used.',
 			'Status' - 'Version development status. E.g ``stable``, ``rc``, ``beta``, ``alpha``, or ``deprecated``.',
 			'URL' - 'File URL for a local directory, file URL for a local archive, download HTTPS URL for the pack archive, or download git archive URL for the pack archive.',
 			'Checksum' - 'A pair where the key is the hash algorithm and the value is the checksum. Currently, the hash algorithm must be ``sha256``. For ``file://`` URLs of local directories, use ``none`` instead of a pair.',

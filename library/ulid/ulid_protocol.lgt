@@ -38,7 +38,7 @@
 	:- public(generate/2).
 	:- mode(generate(+integer, --ulid), one).
 	:- info(generate/2, [
-		comment is 'Generates a new ULID from a timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
+		comment is 'Generates a new ULID from a timestamp (number of milliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
 		argnames is ['Milliseconds', 'ULID']
 	]).
 
@@ -52,7 +52,7 @@
 	:- public(timestamp/2).
 	:- mode(timestamp(++ulid, -integer), one).
 	:- info(timestamp/2, [
-		comment is 'Returns the given ULID timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
+		comment is 'Returns the given ULID timestamp (number of milliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).',
 		argnames is ['ULID', 'Milliseconds']
 	]).
 

@@ -333,7 +333,7 @@
 	:- public(update/0).
 	:- mode(update, zero_or_one).
 	:- info(update/0, [
-		comment is 'Updades all outdated packs (that are not pinned) using default options.'
+		comment is 'Updates all outdated packs (that are not pinned) using default options.'
 	]).
 
 	:- public(uninstall/2).
@@ -690,7 +690,7 @@
 		),
 		forall(
 			member(p(Registry, Pack, Version, Pinned), Packs),
-			print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned))
+			print_message(information, packs, installed_pack(Registry, Pack, Version, Pinned))
 		),
 		fail.
 	installed(Registry) :-
@@ -708,7 +708,7 @@
 		),
 		forall(
 			member(p(Registry, Pack, Version, Pinned), Packs),
-			print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned))
+			print_message(information, packs, installed_pack(Registry, Pack, Version, Pinned))
 		),
 		fail.
 	installed :-

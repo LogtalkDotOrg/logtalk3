@@ -241,9 +241,9 @@
 
 	% pack installed messages
 
-	message_tokens(instaled_pack(Registry, Pack, Version, true)) -->
+	message_tokens(installed_pack(Registry, Pack, Version, true)) -->
 		['  ~q::~q@~q (pinned)'-[Registry, Pack, Version], nl].
-	message_tokens(instaled_pack(Registry, Pack, Version, false)) -->
+	message_tokens(installed_pack(Registry, Pack, Version, false)) -->
 		['  ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	% pack outdated messages

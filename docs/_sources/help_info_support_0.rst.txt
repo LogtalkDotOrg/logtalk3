@@ -8,7 +8,7 @@
 ``help_info_support``
 =====================
 
-Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.
+Experimental help predicates for inline browsing and searching of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.
 
 | **Availability:** 
 |    ``logtalk_load(help(loader))``

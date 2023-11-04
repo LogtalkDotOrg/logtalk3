@@ -309,7 +309,7 @@
 	message_tokens(invalid_test_outcome(Test, Outcome)) -->
 		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl].
 
-	% messages for invald test specifications
+	% messages for invalid test specifications
 
 	message_tokens(invalid_test_option(Test, Option)) -->
 		['test ~q option is invalid: ~q'-[Test, Option], nl].

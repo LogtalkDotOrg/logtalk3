@@ -188,7 +188,7 @@
 	:- mode(fractile(+float, +list(integer), -integer), zero_or_one).
 	:- mode(fractile(+float, +list(float), -float), zero_or_one).
 	:- info(fractile/3, [
-		comment is 'Calculates the smalest value in a list of numbers such that the list elements in its fraction ``P`` are less or equal to that value (with ``P`` in the open interval ``(0.0, 1.0)``). Fails if the list is empty.',
+		comment is 'Calculates the smallest value in a list of numbers such that the list elements in its fraction ``P`` are less or equal to that value (with ``P`` in the open interval ``(0.0, 1.0)``). Fails if the list is empty.',
 		argnames is ['P', 'List', 'Fractile']
 	]).
 
