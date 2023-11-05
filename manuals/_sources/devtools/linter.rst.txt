@@ -80,6 +80,7 @@ Lint checks include:
    without collecting them
 -  Calls to ``catch/3`` that catch all exceptions
 -  Calls to standard predicates that have more efficient alternatives
+-  Unsound calls in grammar rules
 -  File, entity, predicate, and variable names not following official
    coding guidelines
 -  Variable names that differ only on case

@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:57:0,
+		version is 0:58:0,
 		author is 'Paulo Moura',
-		date is 2023-09-20,
+		date is 2023-11-05,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -997,6 +997,24 @@
 			'loss of precision when converting from decimal to binary representation.'-[], nl,
 			'Check instead if the float values are within a given epsilon. The "float"'-[], nl,
 			'library object provides several predicates for comparing floats. '-[], nl, nl
+		].
+
+	explain(suspicious_call(_, _, _, _, \+ _, reason(unsound_construct_in_grammar_rule))) -->
+		[	'The use of this construct may result in unrestricted look ahead that may'-[], nl,
+			'or may not be valid considering the grammar rule implicit arguments. It'-[], nl,
+			'is advisable to only use this construct with a {}/1 argument.'-[], nl, nl
+		].
+
+	explain(suspicious_call(_, _, _, _, (_ -> _), reason(unsound_construct_in_grammar_rule))) -->
+		[	'The use of this construct may result in an early commit that may or may not'-[], nl,
+			'be valid considering the grammar rule implicit arguments. It is advisable'-[], nl,
+			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
+		].
+
+	explain(suspicious_call(_, _, _, _, '*->'(_, _), reason(unsound_construct_in_grammar_rule))) -->
+		[	'The use of this construct may result in an early commit that may or may not'-[], nl,
+			'be valid considering the grammar rule implicit arguments. It is advisable'-[], nl,
+			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
 		].
 
 	% encoding/1 directive messages

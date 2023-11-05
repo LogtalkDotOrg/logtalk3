@@ -72,6 +72,9 @@ Tools
 
 * ADDED: Predicate `help::man/1` for inline browsing of man files.
 
+* UPDATED: The `tutor` tool for the new linter warnings on unsound calls in
+grammar rules.
+
 * FIXED: Typo in the `packs` tool error message when uncompressing a pack
 archive fails.
 
