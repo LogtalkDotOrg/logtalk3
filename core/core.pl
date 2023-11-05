@@ -25181,11 +25181,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_fix_disjunction_left_side'(Either0, Either),
 	'$lgt_dcg_body'(GROr, S0, S, Or, Ctx).
 
+'$lgt_dcg_body'('*->'(GRIf, GRThen), _, _, _, Ctx) :-
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	nonvar(GRIf),
+	\+ functor(GRIf, {}, 1),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, '*->'(GRIf, GRThen), reason(unsound_construct_in_grammar_rule))
+	),
+	fail.
+
 '$lgt_dcg_body'('*->'(GRIf, GRThen), S0, S, '*->'(If, Then), Ctx) :-
 	'$lgt_predicate_property'('*->'(_, _), built_in),
 	!,
 	'$lgt_dcg_body'(GRIf, S0, S1, If, Ctx),
 	'$lgt_dcg_body'(GRThen, S1, S, Then, Ctx).
+
+'$lgt_dcg_body'((GRIf -> GRThen), _, _, _, Ctx) :-
+	nonvar(GRIf),
+	\+ functor(GRIf, {}, 1),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, (GRIf -> GRThen), reason(unsound_construct_in_grammar_rule))
+	),
+	fail.
 
 '$lgt_dcg_body'((GRIf -> GRThen), S0, S, (If -> Then), Ctx) :-
 	!,
@@ -25210,6 +25235,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_dcg_body'({Goal}, S0, S, (Goal, (S0 = S)), _) :-
 	!,
 	'$lgt_check'(callable, Goal).
+
+'$lgt_dcg_body'(\+ GRBody, _, _, _, Ctx) :-
+	nonvar(GRBody),
+	\+ functor(GRBody, {}, 1),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(suspicious_calls),
+		suspicious_call(File, Lines, Type, Entity, \+ GRBody, reason(unsound_construct_in_grammar_rule))
+	),
+	fail.
 
 '$lgt_dcg_body'(\+ GRBody, S0, S, (\+ Goal, (S0 = S)), Ctx) :-
 	!,

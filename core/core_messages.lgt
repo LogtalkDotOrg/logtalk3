@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:124:0,
+		version is 1:125:0,
 		author is 'Paulo Moura',
-		date is 2023-09-05,
+		date is 2023-11-05,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -983,6 +983,8 @@
 		['as ~w'-[Text], nl].
 	suspicious_call_reason(due_to(Text)) -->
 		['due to ~w'-[Text], nl].
+	suspicious_call_reason(unsound_construct_in_grammar_rule) -->
+		['is not a sound construct in a grammar rule'-[], nl].
 
 	missing_entities([]) -->
 		[].

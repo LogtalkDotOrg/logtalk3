@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Linter warnings for use of unsound calls in grammar rules (when the
+argument of a `(\+)/1` call or the condition in `(->)/2` or `(*->)/2` calls
+is not `{}/1`).
+
 * ADDED: Linter warning for calls to the deprecated predicates `not/1` and
 `fail_if/1`.
 
