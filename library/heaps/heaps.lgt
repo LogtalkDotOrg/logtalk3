@@ -49,7 +49,7 @@
       ..  ..  ..  ..  ..  ..  ..  ..  ..  ..  ..  ..  ..  ..  ..  ..
     The idea is that if the maximum number of elements that have been in
     the heap so far is M, and the tree currently has K elements, the tree
-    is some subtreee of the tree of this form having exactly M elements,
+    is some subtree of the tree of this form having exactly M elements,
     and the Free list is a list of K-M integers saying which of the
     positions in the M-element tree are currently unoccupied.  This free
     list is needed to ensure that the cost of passing N elements through

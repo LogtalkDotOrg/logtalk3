@@ -153,7 +153,6 @@ HOSTING AND TESTING SERVICES USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
 =========================================================================
 
 * GitHub
-* Travis CI
 * AppVeyor
 * Docker
 * Read the Docs
