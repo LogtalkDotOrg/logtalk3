@@ -17,7 +17,7 @@ FCube: An Efficient Prover for Intuitionistic Propositional Logic.
 | **Version:** 4:2:0
 | **Date:** 2022-10-08
 
-| **Copyright:** Copright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura
+| **Copyright:** Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura
 | **License:** GNU GPL 2.0 or later version
 
 | **Compilation flags:**
@@ -50,7 +50,7 @@ Public predicates
 ``fcube/0``
 ^^^^^^^^^^^
 
-Reads a formula and aplies the prover to it, priting its counter-model.
+Reads a formula and applies the prover to it, printing its counter-model.
 
 | **Compilation flags:**
 |    ``static``

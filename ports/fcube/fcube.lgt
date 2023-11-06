@@ -30,7 +30,7 @@
 		version is 4:2:0,
 		author is 'Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.',
 		date is 2022-10-08,
-		copyright is 'Copright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura',
+		copyright is 'Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'FCube: An Efficient Prover for Intuitionistic Propositional Logic.'
 	]).
@@ -38,7 +38,7 @@
 	:- public(fcube/0).
 	:- mode(fcube, one).
 	:- info(fcube/0, [
-		comment is 'Reads a formula and aplies the prover to it, priting its counter-model.'
+		comment is 'Reads a formula and applies the prover to it, printing its counter-model.'
 	]).
 
 	:- public(decide/1).
@@ -112,7 +112,7 @@
 	decide(X, COUNTERMODEL):-
 		intDecide(X, COUNTERMODEL, 1).
 
-	intDecide(X, COUNTERMODEL, NUMERO):-
+	intDecide(X, COUNTERMODEL, NUMERO) :-
 		writeln('Input Formula:'),
 		printSWFF(swff(f, X)),
 		writeln('\n'),
@@ -132,7 +132,7 @@
 		writeln('*** Prolog term of the countermodel ***'),
 		writeln(COUNTERMODEL).
 
-	intDecide(_, [valida], NUMERO):-
+	intDecide(_, [valida], NUMERO) :-
 		writeln(' '),
 		write(NUMERO),
 		writeln(' search result = provable (fCube-4.1)').
