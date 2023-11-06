@@ -29,7 +29,7 @@ ________________________________________________________________________
 % for these two systems ensure that a ::/2 goal in the argument of the
 % time/1 predicate is compiled prior to calling it):
 
-?- time(true).  % autoload the predicate in the case of SWI-Prolog
+?- time(true).  % auto-load the predicate in the case of SWI-Prolog
 true.
 
 ?- time(ack::ack(2, 4, V)).

@@ -215,7 +215,7 @@
 
 
 % some object proxies, which are simply Prolog predicate facts that are
-% interpreted as "instnaitations" of the parametric object identifiers;
+% interpreted as "instantiations" of the parametric object identifiers;
 % this representation os more compact but also much more rigid as the
 % number of arguments (which is also the number of person attributes)
 % is fixed:

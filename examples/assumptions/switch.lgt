@@ -24,7 +24,7 @@
 
 	:- info([
 		version is 1:1:1,
-		author is 'Orginal example by Paul Tarau et al. Adapted to Logtalk by Paulo Moura.',
+		author is 'Original example by Paul Tarau et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2023-01-13,
 		comment is 'Example of defining a switch...case control construct using linear assumptions.'
 	]).

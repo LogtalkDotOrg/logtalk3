@@ -149,7 +149,7 @@
 		version is 1:2:0,
 		date is 2010-03-28,
 		author is 'Paulo Moura',
-		comment is 'Monitor for brick movements printing an ascii representation of each brick position.'
+		comment is 'Monitor for brick movements printing an ASCII representation of each brick position.'
 	]).
 
 	:- set_logtalk_flag(events, deny).
