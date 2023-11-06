@@ -37,6 +37,14 @@ Not-provable meta-predicate. True iff ``call(Goal)`` is false. This
 built-in meta-predicate is declared as a private method and thus cannot
 be used as a message to an object.
 
+.. warning::
+
+   The argument is always compiled. As a consequence, when the argument
+   is a control construct (e.g. a conjunction), any meta-variables will
+   be wrapped with the equivalent to the ``call/1`` control construct.
+   Note that these semantics differ from the ISO Prolog Core standard
+   specification for the ``(\+)/1`` built-in predicate.
+
 Modes and number of proofs
 --------------------------
 

@@ -43,7 +43,7 @@ To load all entities in this library, load the ``loader.lgt`` file:
 Testing
 -------
 
-The provided unit tests are based on a collection of problemset files
+The provided unit tests are based on a collection of problem set files
 from International Planning Competition 2008. In order to run all unit
 tests from the parser's directory type:
 
