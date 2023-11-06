@@ -103,9 +103,9 @@ installation script accepts an installation prefix as argument. For example:
 If no prefix is given, the default installation prefix depends on the
 operating-system:
 
-* macOS:				`/opt/local`
-* Debian distributions:	`/usr`
-* Other POSIX systems:	`/usr/local`
+* macOS: `/opt/local`
+* Debian distributions: `/usr`
+* Other POSIX systems: `/usr/local`
 
 The script installs Logtalk in the `$prefix/share` directory with Prolog
 integration and other useful shell scripts written to the `$prefix/bin`

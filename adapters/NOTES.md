@@ -26,13 +26,13 @@ This file contains some notes about the adapter files provided. The folder
 or no longer officially supported.
 
 If you improve or correct some of these files, or write new ones for other
-Prolog compilers, please send me a copy. It is simply not feasible to 
+Prolog compilers, please send me a copy. It is simply not feasible to
 individually test Logtalk under all possible combinations of compatible
 Prolog versions and operating-system versions.
 
-As a general rule, always try to use the latest version of your Prolog 
-compiler of choice. For Prolog compilers with long release cycles, this 
-may require use of development versions. Most Prolog compilers are moving 
+As a general rule, always try to use the latest version of your Prolog
+compiler of choice. For Prolog compilers with long release cycles, this
+may require use of development versions. Most Prolog compilers are moving
 towards better compatibility with de facto and official standards and thus
 improved Logtalk compatibility. Also, visit the issue tracker on the Logtalk
 development website and check for any known Prolog compiler bugs that break
@@ -123,9 +123,9 @@ template adapter file
 
 	template.pl
 
-If an adapter file for your favorite Prolog is not available, use this 
-file as a template for writing one. For each predicate in the file, 
-check if it is built-in in your Prolog, available in a library, or if 
+If an adapter file for your favorite Prolog is not available, use this
+file as a template for writing one. For each predicate in the file,
+check if it is built-in in your Prolog, available in a library, or if
 you can write a better definition.
 
 
@@ -138,10 +138,10 @@ Note that this adapter file redefines the B-Prolog `(::)/2` finite-domain
 built-in predicate (you may use the alternative `in/2` built-in predicate
 instead).
 
-Some B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`) 
-are not core predicates and can be redefined by the user. The predicate 
-`predicate_property/2` does not return the property `built_in` for these 
-predicates. The solution is to encapsulate calls to these predicates 
+Some B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`)
+are not core predicates and can be redefined by the user. The predicate
+`predicate_property/2` does not return the property `built_in` for these
+predicates. The solution is to encapsulate calls to these predicates
 within objects and categories using the Logtalk `{}/1` control construct.
 
 You may need to increase the sizes of the code areas on the integration
@@ -189,15 +189,15 @@ ECLiPSe 6.1#143 or later versions
 	eclipse.pl
 
 There is a clash between Logtalk and ECLiPSe regarding the `(::)/2` operator.
-You may still use the `(::)/2` operator defined on the ECLiPSe constraint 
-solver libraries by using explicit module qualification by writing 
-`{library:(Var::Domain)}` (replace `library` by the actual library name; 
+You may still use the `(::)/2` operator defined on the ECLiPSe constraint
+solver libraries by using explicit module qualification by writing
+`{library:(Var::Domain)}` (replace `library` by the actual library name;
 the `{}/1` control construct allows you to bypass the Logtalk compiler).
 
 ECLiPSe defines an alias `in_set_range/2` for `(::)/2` that can be used to
 avoid conflicts with Logtalk `(::)/2` message sending operator.
 
-Adopted from an adapter file written and tested with help of Taner Bilgic 
+Adopted from an adapter file written and tested with help of Taner Bilgic
 for Logtalk 1.x.
 
 With this Prolog compiler, avoid reloading Logtalk source files defining
@@ -211,7 +211,7 @@ built-in predicates for separate compilation and loading. To generate
 flag to `off` and add the option `output:eco` to the Logtalk `prolog_loader`
 flag.
 
-ECLiPSe 7.0.25 and later versions multi-threading and engines support 
+ECLiPSe 7.0.25 and later versions multi-threading and engines support
 provide enough support for Logtalk threaded engines. But other Logtalk
 multi-threading features cannot currently be supported due to missing
 mutex predicates and missing thread creation options.
@@ -316,16 +316,16 @@ calls. To try it, copy the code to your Logtalk settings file that is
 loaded at startup.
 
 The adapter file may set the `iso` SWI-Prolog flag to `true`. This setting
-may improve compatibility of Logtalk code across different backend 
-Prolog compilers buy may also cause compatibility problems with some 
-SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2` 
+may improve compatibility of Logtalk code across different backend
+Prolog compilers buy may also cause compatibility problems with some
+SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2`
 directive if necessary.
 
 For using XPCE from Logtalk, see the `xpce` example in the Logtalk
 distribution.
 
 With multi-threading support turned on, you may get a harmless message
-when halting the system regarding threads that wouldn't die: you can 
+when halting the system regarding threads that wouldn't die: you can
 suppress the message on POSIX systems by using `% swilgt 2> /dev/null`.
 
 The definition of the predicate `{}/1` at the end of the adapter files
@@ -338,7 +338,7 @@ construct but this is only used within objects and categories.
 Logtalk doesn't rely on the SWI-Prolog auto-loading mechanism for library
 predicates. Calls of these predicates within objects and categories must
 be explicitly qualified or implicit qualified by listing the predicates
-in `use_module/2` directives). You may also set the Logtalk `portability`,
+in `use_module/2` directives. You may also set the Logtalk `portability`,
 and `unknown_predicates` compiler flags to `warning` in order to detect
 unqualified calls to library predicates. All the module libraries must
 be loaded prior to compilation of object and categories containing calls

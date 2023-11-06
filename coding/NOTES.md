@@ -43,18 +43,18 @@ of your favorite editor, you may want to check if the supporting files
 provided in this directory are newer than the editor ones.
 
 Logtalk source files (including the library entities and the programming
-examples) are indented using tabs and are expected to remain perfectly 
+examples) are indented using tabs and are expected to remain perfectly
 indented no matter your tab width preference (a common setting is a tab
 width equivalent to 4 spaces).
 
-You may notice that support for some text editors, notably for Windows-only 
+You may notice that support for some text editors, notably for Windows-only
 editors, is relatively poor. Depending on the text editor, proper syntax
 highlighting support for Prolog and Logtalk may require support for
 regular expressions with zero-width look-ahead and look-behind assertions,
 which some editors lack.
 
-Some text editors supporting regular expressions contain bugs and/or 
-hard-coded limitations that prevent full optimization of the syntax 
+Some text editors supporting regular expressions contain bugs and/or
+hard-coded limitations that prevent full optimization of the syntax
 coloring patterns.
 
 
