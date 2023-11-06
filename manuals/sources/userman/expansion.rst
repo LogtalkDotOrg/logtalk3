@@ -76,8 +76,8 @@ by the compiler when compiling a source file (see the section below on *hook
 objects*).
 
 Clauses for the ``term_expansion/2`` predicate are called until of them
-succeeds. The returned expansion can be a single term or a list of terms. 
-For example:
+succeeds. The returned expansion can be a single term or a list of terms
+(including the empty list). For example:
 
 .. code-block:: text
 
@@ -149,7 +149,8 @@ already been expanded.
 Goal-expansion applies to goal arguments of control constructs, meta-arguments
 in built-in or ``user`` defined meta-predicates, meta-arguments in local
 user-defined meta-predicates, meta-arguments in meta-predicate messages when
-static binding is possible, and ``initialization/1`` directives.
+static binding is possible, and ``initialization/1``, ``if/1``, and ``elif/1``
+directives.
 
 
 Expanding grammar rules
@@ -349,7 +350,7 @@ Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
 
    When a source file also contains plain Prolog directives and predicates,
    these are term-expanded but not goal-expanded (with the exception of the
-   ``initialization/1``, ``if/``, and ``elif/1`` directives, where the goal
+   ``initialization/1``, ``if/1``, and ``elif/1`` directives, where the goal
    argument is expanded to improve code portability across backends).
 
 
