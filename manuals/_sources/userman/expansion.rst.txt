@@ -146,6 +146,11 @@ The expansion of the goal ``a`` results in the goal ``(a -> b; c)`` with no
 attempt to further expand the ``a``, ``b``, and ``c`` goals as they have
 already been expanded.
 
+Goal-expansion applies to goal arguments of control constructs, meta-arguments
+in built-in or ``user`` defined meta-predicates, meta-arguments in local
+user-defined meta-predicates, meta-arguments in meta-predicate messages when
+static binding is possible, and ``initialization/1`` directives.
+
 
 Expanding grammar rules
 -----------------------

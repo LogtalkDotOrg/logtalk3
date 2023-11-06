@@ -250,6 +250,10 @@ expansion of the same goal. For example, consider the following object:</p>
 <p>The expansion of the goal <code class="docutils literal notranslate"><span class="pre">a</span></code> results in the goal <code class="docutils literal notranslate"><span class="pre">(a</span> <span class="pre">-&gt;</span> <span class="pre">b;</span> <span class="pre">c)</span></code> with no
 attempt to further expand the <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, and <code class="docutils literal notranslate"><span class="pre">c</span></code> goals as they have
 already been expanded.</p>
+<p>Goal-expansion applies to goal arguments of control constructs, meta-arguments
+in built-in or <code class="docutils literal notranslate"><span class="pre">user</span></code> defined meta-predicates, meta-arguments in local
+user-defined meta-predicates, meta-arguments in meta-predicate messages when
+static binding is possible, and <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives.</p>
 </section>
 <section id="expanding-grammar-rules">
 <h2>Expanding grammar rules<a class="headerlink" href="#expanding-grammar-rules" title="Link to this heading"></a></h2>
