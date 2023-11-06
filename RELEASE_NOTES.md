@@ -65,6 +65,9 @@ expected output written to `user_error` and other streams.
 
 * IMPROVED: Handbook section on performance.
 
+* IMPROVED: Handbook documentation of the `(\+)/1` and `forall/2` built-in
+methods.
+
 * FIXED: Allow Handbook and APIs documentation search support to work offline.
 
 Tools

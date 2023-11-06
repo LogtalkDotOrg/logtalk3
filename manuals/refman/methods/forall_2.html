@@ -150,7 +150,10 @@
 </div>
 <p>For all solutions of <code class="docutils literal notranslate"><span class="pre">Generator</span></code>, <code class="docutils literal notranslate"><span class="pre">Test</span></code> is true. This meta-predicate
 implements a <em>generate-and-test</em> loop using a definition equivalent to
-<code class="docutils literal notranslate"><span class="pre">\+</span> <span class="pre">(Generator,</span> <span class="pre">\+</span> <span class="pre">Test)</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">\+</span> <span class="pre">(Generator,</span> <span class="pre">\+</span> <span class="pre">Test)</span></code>. As a consequence, no variables in the arguments
+are bound by a call to this predicate. This predicate often provides a better
+alternative to a <em>failure-driven loop</em> as an unexpected <code class="docutils literal notranslate"><span class="pre">Test</span></code> failure will
+not be ignored as it will make the <code class="docutils literal notranslate"><span class="pre">forall/2</span></code> call fail.</p>
 <p>This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.</p>
 </section>

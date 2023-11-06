@@ -35,7 +35,10 @@ Description
 
 For all solutions of ``Generator``, ``Test`` is true. This meta-predicate
 implements a *generate-and-test* loop using a definition equivalent to
-``\+ (Generator, \+ Test)``.
+``\+ (Generator, \+ Test)``. As a consequence, no variables in the arguments
+are bound by a call to this predicate. This predicate often provides a better
+alternative to a *failure-driven loop* as an unexpected ``Test`` failure will
+not be ignored as it will make the ``forall/2`` call fail.
 
 This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.
