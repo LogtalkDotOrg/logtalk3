@@ -12525,7 +12525,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, ExCtx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, _, Term),
 	'$lgt_source_file_context'(Ctx, File, BeginLine-EndLine),
 	'$lgt_compile_head'(Head, PI, THead, Ctx),
-	'$lgt_comp_ctx_head'(Ctx, Head),
 	(	Head = {UserHead} ->
 		% clause for a multifile predicate in "user"
 		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, File, BeginLine), ExCtx),
