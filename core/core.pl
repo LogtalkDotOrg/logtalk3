@@ -6616,7 +6616,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_call_in_this_checked'(+callable, +execution_context)
 %
 % calls a dynamic and declared predicate in "this" from within a category at runtime;
-% also used to call overriden predicate definitions from complementing categories
+% also used to call overridden predicate definitions from complementing categories
 
 '$lgt_call_in_this_checked'(Pred, ExCtx) :-
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),
@@ -6636,7 +6636,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_call_in_this'(+callable, +execution_context)
 %
 % calls a dynamic predicate in "this" from within a category at runtime;
-% also used to call overriden predicate definitions from complementing categories
+% also used to call overridden predicate definitions from complementing categories
 
 '$lgt_call_in_this'(Pred, ExCtx) :-
 	'$lgt_execution_context_this_entity'(ExCtx, This, _),

@@ -545,8 +545,8 @@
 	% lambda expression messages
 
 	explain(parameter_variable_used_elsewhere(_, _, _, _, _, _)) -->
-		[	'An occurence of a lambda parameter variable before the lambda expression'-[], nl,
-			'is a common source of errors. An occurence of a lambda parameter variable'-[], nl,
+		[	'An occurrence of a lambda parameter variable before the lambda expression'-[], nl,
+			'is a common source of errors. An occurrence of a lambda parameter variable'-[], nl,
 			'after the lambda expression is bad programming style.'-[], nl, nl
 		].
 
