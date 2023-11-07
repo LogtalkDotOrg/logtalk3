@@ -13452,6 +13452,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
 	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, Singletons, _, _),
 	'$lgt_anonymous_or_singleton_variable'(Var, VariableNames, Singletons),
+	% var/1 predicate argument is either an anonymous or a
+	% singleton variable and thus can never be bound
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
@@ -13468,6 +13470,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
 	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, Singletons, _, _),
 	'$lgt_anonymous_or_singleton_variable'(Var, VariableNames, Singletons),
+	% nonvar/1 predicate argument is either an anonymous or a
+	% singleton variable and thus can never be bound
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
@@ -13485,6 +13489,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_term'(Ctx, OriginalTerm),
 	'$lgt_pp_term_source_data_'(OriginalTerm, VariableNames, Singletons, _, _),
 	'$lgt_anonymous_or_singleton_variables'(Variables, VariableNames, Singletons),
+	% all variables in the ground/1 predicate argument are either
+	% anonymous or singleton variables and thus can never be bound
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(

@@ -44,8 +44,7 @@ files.
 
 * IMPROVED: Performance when compiling entity ground terms.
 
-* IMPROVED: Performance when compiling entities terms that are not
-term-expanded.
+* IMPROVED: Performance when compiling entity terms that are not expanded.
 
 * FIXED: Catch any errors during the compilation of the `begin_of_file`
 virtual term.
