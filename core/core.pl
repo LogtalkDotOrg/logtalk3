@@ -8921,9 +8921,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_prolog_term_expansion_portability_warnings'(Term, ExpandedTerms),
 		'$lgt_compile_expanded_terms'(ExpandedTerms, Term, Ctx)
 	;	% no compiler hook defined
-		callable(Term) ->
-		'$lgt_compile_expanded_term'(Term, Term, Ctx)
-	;	throw(error(type_error(callable, Term), term(Term)))
+		'$lgt_compile_non_expanded_term'(Term, Ctx)
 	).
 
 
@@ -8999,21 +8997,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_second_stage'(object, Module, Ctx),
 	'$lgt_print_message'(silent(compiling), compiled_entity(module, Module)).
 
-'$lgt_compile_expanded_term'(end_of_file, _, _) :-
+'$lgt_compile_expanded_term'(end_of_file, Term, _) :-
 	'$lgt_pp_entity_'(Type, _, _),
 	% unexpected end-of-file while compiling an entity
 	(	Type == object ->
-		throw(error(existence_error(directive, end_object/0), term(end_of_file)))
+		throw(error(existence_error(directive, end_object/0), term_expansion(Term, end_of_file)))
 	;	Type == protocol ->
-		throw(error(existence_error(directive, end_protocol/0), term(end_of_file)))
+		throw(error(existence_error(directive, end_protocol/0), term_expansion(Term, end_of_file)))
 	;	% Type == category,
-		throw(error(existence_error(directive, end_category/0), term(end_of_file)))
+		throw(error(existence_error(directive, end_category/0), term_expansion(Term, end_of_file)))
 	).
 
-'$lgt_compile_expanded_term'(end_of_file, _, _) :-
+'$lgt_compile_expanded_term'(end_of_file, Term, _) :-
 	'$lgt_pp_cc_if_found_'(_),
 	% unexpected end-of-file while compiling a conditional compilation block
-	throw(error(existence_error(directive, endif/0), term(end_of_file))).
+	throw(error(existence_error(directive, endif/0), term_expansion(Term, end_of_file))).
 
 '$lgt_compile_expanded_term'(end_of_file, _, _) :-
 	!.
@@ -9059,6 +9057,85 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_compile_clause'(ExpandedTerm, Ctx)
 	;	throw(error(type_error(callable, ExpandedTerm), term_expansion(Term, ExpandedTerm)))
 	).
+
+
+
+% '$lgt_compile_non_expanded_term'(@term, +compilation_context)
+%
+% compiles a source file term (a clause, directive, or grammar rule);
+% the second argument is the original term and is used for more
+% informative exception terms in case of error
+
+'$lgt_compile_non_expanded_term'(begin_of_file, _) :-
+	!.
+
+'$lgt_compile_non_expanded_term'(end_of_file, Ctx) :-
+	'$lgt_pp_module_'(Module),
+	!,
+	% module definitions start with an opening module/1-2 directive and are assumed
+	% to end at the end of a source file; there is no module closing directive; set
+	% the initial compilation context and the position for compiling the end_of_file term
+	once(retract('$lgt_pp_referenced_object_'(Module, File, Start-_))),
+	'$lgt_comp_ctx_lines'(Ctx, _-End),
+	assertz('$lgt_pp_referenced_object_'(Module, File, Start-End)),
+	'$lgt_second_stage'(object, Module, Ctx),
+	'$lgt_print_message'(silent(compiling), compiled_entity(module, Module)).
+
+'$lgt_compile_non_expanded_term'(end_of_file, _) :-
+	'$lgt_pp_entity_'(Type, _, _),
+	% unexpected end-of-file while compiling an entity
+	(	Type == object ->
+		throw(error(existence_error(directive, end_object/0), term(end_of_file)))
+	;	Type == protocol ->
+		throw(error(existence_error(directive, end_protocol/0), term(end_of_file)))
+	;	% Type == category,
+		throw(error(existence_error(directive, end_category/0), term(end_of_file)))
+	).
+
+'$lgt_compile_non_expanded_term'(end_of_file, _) :-
+	'$lgt_pp_cc_if_found_'(_),
+	% unexpected end-of-file while compiling a conditional compilation block
+	throw(error(existence_error(directive, endif/0), term(end_of_file))).
+
+'$lgt_compile_non_expanded_term'(end_of_file, _) :-
+	!.
+
+'$lgt_compile_non_expanded_term'({Term}, _) :-
+	% bypass control construct; term is final
+	!,
+	(	callable(Term) ->
+		(	'$lgt_pp_term_source_data_'({Term}, VariableNames, Singletons, File, Lines) ->
+			SourceData = sd(Term, VariableNames, Singletons, File, Lines)
+		;	SourceData = nil, Lines = '-'(-1, -1)
+		),
+		(	'$lgt_pp_entity_'(_, _, _) ->
+			% ensure that the relative order of the entity terms is kept
+			assertz('$lgt_pp_entity_term_'({Term}, SourceData, Lines))
+		;	% non-entity terms
+			assertz('$lgt_pp_prolog_term_'(Term, Lines))
+		)
+	;	var(Term) ->
+		throw(error(instantiation_error, term({Term})))
+	;	throw(error(type_error(callable, Term), term({Term})))
+	).
+
+'$lgt_compile_non_expanded_term'((Head :- Body), Ctx) :-
+	!,
+	'$lgt_comp_ctx_term'(Ctx, (Head :- Body)),
+	'$lgt_compile_clause'((Head :- Body), Ctx).
+
+'$lgt_compile_non_expanded_term'((:- Directive), Ctx) :-
+	!,
+	'$lgt_comp_ctx_term'(Ctx, (:- Directive)),
+	'$lgt_compile_directive'(Directive, Ctx).
+
+'$lgt_compile_non_expanded_term'((Head --> Body), Ctx) :-
+	!,
+	'$lgt_comp_ctx_term'(Ctx, (Head --> Body)),
+	'$lgt_compile_grammar_rule'((Head --> Body), Ctx).
+
+'$lgt_compile_non_expanded_term'(Term, Ctx) :-
+	'$lgt_compile_clause'(Term, Ctx).
 
 
 
