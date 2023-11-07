@@ -12759,7 +12759,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(callable, Head),
 	fail.
 
-'$lgt_compile_head'(user::Head, user::Functor/Arity, Head, Ctx) :-
+'$lgt_compile_head'(user::Head, user::Functor/Arity, Head, _) :-
 	!,
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_directive_'(multifile(Functor/Arity)) ->
@@ -12799,7 +12799,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % compile the head of a clause of a module predicate (which we check if declared multifile)
 
-'$lgt_compile_head'(':'(Module, Head), ':'(Module, Functor/Arity), THead, Ctx) :-
+'$lgt_compile_head'(':'(Module, Head), ':'(Module, Functor/Arity), THead, _) :-
 	!,
 	'$lgt_check'(callable, Head),
 	functor(Head, Functor, Arity),
