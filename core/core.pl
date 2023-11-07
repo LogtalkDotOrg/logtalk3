@@ -12525,6 +12525,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, ExCtx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, _, Term),
 	'$lgt_source_file_context'(Ctx, File, BeginLine-EndLine),
 	'$lgt_compile_head'(Head, PI, THead, Ctx),
+	'$lgt_comp_ctx_head'(Ctx, Head),
 	(	Head = {UserHead} ->
 		% clause for a multifile predicate in "user"
 		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, File, BeginLine), ExCtx),
@@ -12575,7 +12576,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_clause'(Fact, Entity, fact(TFact,Ctx), dfact(TFact,DHead,Ctx), Ctx) :-
 	'$lgt_compile_head'(Fact, PI, TFact, Ctx),
-	'$lgt_comp_ctx_head'(Ctx, Fact),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_source_file_context'(Ctx, File, BeginLine-_),
 	(	Fact = {UserFact} ->
@@ -12596,12 +12596,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Fact = ':'(_, _) ->
 		% fact for a module multifile predicate
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
-	;	% other facts
-		(	var(ExCtx) ->
-			true
-		;	% parameter variables shared via the execution context
-			'$lgt_unify_head_thead_arguments'(Fact, TFact, ExCtx)
-		),
+	;	var(ExCtx) ->
+		% local fact
+		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
+	;	% parameter variables shared via the execution context
+		'$lgt_unify_head_thead_arguments'(Fact, TFact, ExCtx),
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
 	),
 	'$lgt_clause_number'(PI, fact, File, BeginLine, N).
@@ -12769,8 +12768,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_source_file_context'(File, Lines),
 		assertz('$lgt_pp_missing_multifile_directive_'(user::Functor/Arity, File, Lines))
-	),
-	'$lgt_comp_ctx_head'(Ctx, user::Head).
+	).
 
 '$lgt_compile_head'(logtalk::debug_handler_provider(NewProvider), _, _, Ctx) :-
 	'$lgt_check'(object_identifier, NewProvider),
@@ -12797,8 +12795,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	functor(THead, TFunctor, TArity),
 	'$lgt_unify_head_thead_arguments'(Head, THead, ExCtx),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_comp_ctx_head'(Ctx, Other::Head).
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
 
 % compile the head of a clause of a module predicate (which we check if declared multifile)
 
@@ -12819,8 +12816,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_source_file_context'(File, Lines),
 		assertz('$lgt_pp_missing_multifile_directive_'(':'(Module,Functor/Arity), File, Lines))
-	),
-	'$lgt_comp_ctx_head'(Ctx, ':'(Module, Head)).
+	).
 
 % compile the head of a clause of a user defined predicate
 
