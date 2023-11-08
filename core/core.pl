@@ -12530,36 +12530,39 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DHead = '$lgt_debug'(rule(Entity, user::UserHead, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, MetaVars, _, BodyExCtx, Mode, _, BeginLine-EndLine, Term),
 		'$lgt_execution_context_this_entity'(ExCtx, _, user),
+		% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
-		;	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
+		;	% category
+			'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 		)
-	;	Head = Other::_ ->
+	;	Head = Other::OtherHead ->
 		% clause for an object or category multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, MetaVars, _, BodyExCtx, Mode, _, BeginLine-EndLine, Term),
 		term_variables(Other, OtherVars),
-		term_variables(Head, HeadVars),
-		'$lgt_intersection'(OtherVars, HeadVars, CommonVars),
+		term_variables((OtherHead:-Body), ClauseVars),
+		'$lgt_intersection'(OtherVars, ClauseVars, CommonVars),
 		(	CommonVars == [] ->
 			true
-		;	% parametric entity sharing variables with the clause head
+		;	% parametric entity sharing variables with the clause
 			'$lgt_execution_context_this_entity'(ExCtx, _, Other)
 		),
+		% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
-		;	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
+		;	% category
+			'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 		)
 	;	Head = ':'(_, _) ->
 		% clause for a module multifile predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		'$lgt_comp_ctx'(BodyCtx, Head, ExCtx, _, _, _, _, Prefix, MetaVars, _, BodyExCtx, Mode, _, BeginLine-EndLine, Term),
+		% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 		(	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _) ->
-			% ensure that ::/1-2 and ^^/2 calls are compiled in the correct context
 			'$lgt_execution_context'(BodyExCtx, Entity, Entity, Entity, Entity, [], [])
-		;	'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
+		;	% category
+			'$lgt_execution_context'(BodyExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack)
 		)
 	;	% clause for a local predicate
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
@@ -12580,12 +12583,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Fact = {UserFact} ->
 		% fact for a multifile predicate in "user"
 		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N, File, BeginLine), ExCtx)
-	;	Fact = Other::_ ->
+	;	Fact = Other::OtherFact ->
 		% fact for an entity multifile predicate
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx),
 		term_variables(Other, OtherVars),
-		term_variables(Fact, FactVars),
-		'$lgt_intersection'(OtherVars, FactVars, CommonVars),
+		term_variables(OtherFact, OtherFactVars),
+		'$lgt_intersection'(OtherVars, OtherFactVars, CommonVars),
 		(	CommonVars == [] ->
 			true
 		;	% parametric entity sharing variables with the fact

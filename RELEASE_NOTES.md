@@ -49,6 +49,9 @@ files.
 * FIXED: Catch any errors during the compilation of the `begin_of_file`
 virtual term.
 
+* FIXED: Minor performance bug when compiling clauses for multifile predicates
+of parametric entities.
+
 Prolog adapter and integration files
 ------------------------------------
 
