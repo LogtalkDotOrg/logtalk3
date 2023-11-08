@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:125:0,
+		version is 1:125:1,
 		author is 'Paulo Moura',
-		date is 2023-11-05,
+		date is 2023-11-08,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -857,23 +857,27 @@
 		;	['  in directive'-[], nl]
 		).
 	term_tokens(clause(Clause)) -->
-		(	{\+ callable(Clause)} ->
+		(	{Clause = '$VAR'(_)} ->
 			['  in clause'-[], nl]
-		;	{Clause = (Head :- _), callable(Head)} ->
+		;	{\+ callable(Clause)} ->
+			['  in clause'-[], nl]
+		;	{Clause = (Head :- _), callable(Head), Head \= '$VAR'(_)} ->
 			{functor(Head, Name, Arity)},
 			['  in clause for predicate ~q/~w'-[Name, Arity], nl]
-		;	{Clause \= (_ :- _)} ->
+		;	{Clause \= (_ :- _), Clause \= '$VAR'(_)} ->
 			{functor(Clause, Name, Arity)},
 			['  in clause for predicate ~q/~w'-[Name, Arity], nl]
 		;	['  in clause'-[], nl]
 		).
 	term_tokens(grammar_rule('-->'(Left, _))) -->
-		(	{\+ callable(Left)} ->
+		(	{Left = '$VAR'(_)} ->
 			['  in grammar rule'-[], nl]
-		;	{Left = ','(Head, _), callable(Head)} ->
+		;	{\+ callable(Left)} ->
+			['  in grammar rule'-[], nl]
+		;	{Left = ','(Head, _), callable(Head), Head \= '$VAR'(_)} ->
 			{functor(Head, Name, Arity)},
 			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
-		;	{Left \= ','(_, _)} ->
+		;	{Left \= ','(_, _), Left \= '$VAR'(_)} ->
 			{functor(Left, Name, Arity)},
 			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
 		;	['  in grammar rule'-[], nl]

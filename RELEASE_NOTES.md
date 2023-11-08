@@ -52,6 +52,9 @@ virtual term.
 * FIXED: Minor performance bug when compiling clauses for multifile predicates
 of parametric entities.
 
+* FIXED: Reporting of compiler instantiation errors in clause and grammar rule
+heads where a `'$VAR'/1` or `'$VAR'//1` term would be displayed.
+
 Prolog adapter and integration files
 ------------------------------------
 
