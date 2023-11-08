@@ -12450,7 +12450,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles a source file clause
 
 '$lgt_compile_clause'(Clause, Ctx) :-
-	'$lgt_check'(clause, Clause, clause(Clause)),
 	'$lgt_pp_entity_'(Type, Entity, Prefix),
 	% compiling an entity clause
 	(	Type == protocol ->
@@ -12521,6 +12520,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_clause'((Head:-Body), Entity, TClause, DClause, Ctx) :-
 	!,
+	'$lgt_check'(callable, Head, clause((Head:-Body))),
 	'$lgt_head_meta_variables'(Head, MetaVars),
 	'$lgt_comp_ctx'(Ctx, Head, ExCtx, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, _, Term),
 	'$lgt_source_file_context'(Ctx, File, BeginLine-EndLine),
@@ -12577,6 +12577,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_clause_number'(PI, rule, File, BeginLine, N).
 
 '$lgt_compile_clause'(Fact, Entity, fact(TFact,Ctx), dfact(TFact,DHead,Ctx), Ctx) :-
+	'$lgt_check'(callable, Fact, clause(Fact)),
 	'$lgt_compile_head'(Fact, PI, TFact, Ctx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_source_file_context'(Ctx, File, BeginLine-_),
