@@ -22,6 +22,16 @@ RELEASE NOTES
 =============
 
 
+3.73.0 - December ??, 2023
+==========================
+
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The LVM adapter file to prevent a clash with the `term_hash/4`
+built-in predicate introduced in an upcoming version.
+
+
 3.72.0 - November 9, 2023
 =========================
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 6.3.0 and later versions
-%  Last updated on October 31, 2023
+%  Last updated on November 9, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -737,8 +737,12 @@
 
 % term_hash(@callable, +integer, +integer, -integer)
 
-term_hash(_, _, _, _) :-
-	fail.
+:- if(\+ predicate_property(term_hash(_,_,_,_), built_in)).
+
+	term_hash(_, _, _, _) :-
+		fail.
+
+:- endif.
 
 
 
