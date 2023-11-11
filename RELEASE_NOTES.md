@@ -31,6 +31,12 @@ Prolog adapter and integration files
 * UPDATED: The LVM adapter file to prevent a clash with the `term_hash/4`
 built-in predicate introduced in an upcoming version.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The macOS installer to also inform the user about the installation
+directories for the `man` pages and the Texinfo versions of the documentation.
+
 
 3.72.0 - November 9, 2023
 =========================

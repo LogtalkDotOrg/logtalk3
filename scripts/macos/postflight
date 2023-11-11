@@ -36,13 +36,6 @@ else
 	echo 'LOGTALKHOME=/opt/local/share/logtalk' >> /etc/zprofile
 	echo 'LOGTALKUSER=$HOME/logtalk' >> /etc/zprofile
 	echo 'export LOGTALKHOME LOGTALKUSER' >> /etc/zprofile
-	echo 'PATH=$PATH:$LOGTALKHOME/tools/diagrams' >> /etc/zprofile
-	echo 'PATH=$PATH:$LOGTALKHOME/tools/lgtdoc/xml' >> /etc/zprofile
-	echo 'PATH=$PATH:$LOGTALKHOME/scripts' >> /etc/zprofile
-	echo 'PATH=$PATH:$LOGTALKHOME/integration' >> /etc/zprofile
-	echo 'MANPATH=$MANPATH:$LOGTALKHOME/man' >> /etc/zprofile
-	echo 'INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals' >> /etc/zprofile
-	echo 'export PATH MANPATH INFOPATH' >> /etc/zprofile
 	
 fi
 
@@ -55,13 +48,6 @@ else
 	echo 'LOGTALKHOME=/opt/local/share/logtalk' >> /etc/profile
 	echo 'LOGTALKUSER=$HOME/logtalk' >> /etc/profile
 	echo 'export LOGTALKHOME LOGTALKUSER' >> /etc/profile
-	echo 'PATH=$PATH:$LOGTALKHOME/tools/diagrams' >> /etc/profile
-	echo 'PATH=$PATH:$LOGTALKHOME/tools/lgtdoc/xml' >> /etc/profile
-	echo 'PATH=$PATH:$LOGTALKHOME/scripts' >> /etc/profile
-	echo 'PATH=$PATH:$LOGTALKHOME/integration' >> /etc/profile
-	echo 'MANPATH=$MANPATH:$LOGTALKHOME/man' >> /etc/profile
-	echo 'INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals' >> /etc/profile
-	echo 'export PATH MANPATH INFOPATH' >> /etc/profile
 fi
 
 if grep "setenv LOGTALKHOME /opt/local/share/logtalk" /etc/csh.cshrc >/dev/null 2>&1; then
@@ -72,12 +58,6 @@ else
 	echo '# Logtalk environment variables default values' >> /etc/csh.cshrc
 	echo "setenv LOGTALKHOME /opt/local/share/logtalk" >> /etc/csh.cshrc
 	echo 'setenv LOGTALKUSER $HOME/logtalk' >> /etc/csh.cshrc
-	echo 'setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/diagrams' >> /etc/csh.cshrc
-	echo 'setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/lgtdoc/xml' >> /etc/csh.cshrc
-	echo 'setenv PATH "${PATH}":"${LOGTALKHOME}"/scripts' >> /etc/csh.cshrc
-	echo 'setenv PATH "${PATH}":"${LOGTALKHOME}"/integration' >> /etc/csh.cshrc
-	echo 'setenv MANPATH "${MANPATH}":"${LOGTALKHOME}"/man' >> /etc/csh.cshrc
-	echo 'setenv INFOPATH ${INFOPATH}:"${LOGTALKHOME}"/docs:"${LOGTALKHOME}"/manuals' >> /etc/csh.cshrc
 fi
 
 echo ""
