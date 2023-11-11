@@ -39,8 +39,8 @@ Installers and installation scripts
 environment variable, and `/opt/local/share/info` to the default system
 `INFOPATH` environment variable.
 
-* UPDATED: The macOS installer to also inform the user about the installation
-directories for the `man` pages and the Texinfo versions of the documentation.
+* UPDATED: The macOS installer to inform the user about the additions to the
+`PATH`, `MANPATH`, and `INFOPATH` environment variables.
 
 
 3.72.0 - November 9, 2023
