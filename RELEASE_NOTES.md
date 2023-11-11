@@ -35,7 +35,9 @@ Installers and installation scripts
 -----------------------------------
 
 * UPDATED: The macOS installer to add `/opt/local/bin` to the default system
-`PATH` environment variable.
+`PATH` environment variable, `/opt/local/man` to the default system `MANPATH`
+environment variable, and `/opt/local/share/info` to the default system
+`INFOPATH` environment variable.
 
 * UPDATED: The macOS installer to also inform the user about the installation
 directories for the `man` pages and the Texinfo versions of the documentation.

@@ -52,6 +52,62 @@ else
 fi
 
 echo ""
+echo "Checking for /opt/local/man in the system MANPATH..."
+echo ""
+
+if grep "/opt/local/man" /etc/zprofile >/dev/null 2>&1; then
+	echo "System MANPATH already includes /opt/local/man"
+else
+	echo '' >> /etc/zprofile
+	echo '# Links to the Logtalk man pages are created in /opt/local/man' >> /etc/zprofile
+	echo 'export MANPATH=$MANPATH:/opt/local/man' >> /etc/zprofile
+fi
+
+if grep "/opt/local/man" /etc/profile >/dev/null 2>&1; then
+	echo "System MANPATH already includes /opt/local/man"
+else
+	echo '' >> /etc/profile
+	echo '# Links to the Logtalk man pages are created in /opt/local/man' >> /etc/profile
+	echo 'export MANPATH=$MANPATH:/opt/local/man' >> /etc/profile
+fi
+
+if grep "/opt/local/man" /etc/csh.cshrc >/dev/null 2>&1; then
+	echo "System MANPATH already includes /opt/local/man"
+else
+	echo '' >> /etc/csh.cshrc
+	echo '# Links to the Logtalk man pages are created in /opt/local/man' >> /etc/csh.cshrc
+	echo 'setenv MANPATH "${MANPATH}":/opt/local/man' >> /etc/csh.cshrc
+fi
+
+echo ""
+echo "Checking for /opt/local/share/info in the system INFOPATH..."
+echo ""
+
+if grep "/opt/local/share/info" /etc/zprofile >/dev/null 2>&1; then
+	echo "System INFOPATH already includes /opt/local/share/info"
+else
+	echo '' >> /etc/zprofile
+	echo '# Links to the Logtalk Texinfo files are created in /opt/local/share/info' >> /etc/zprofile
+	echo 'export INFOPATH=$INFOPATH:/opt/local/share/info' >> /etc/zprofile
+fi
+
+if grep "/opt/local/share/info" /etc/profile >/dev/null 2>&1; then
+	echo "System INFOPATH already includes /opt/local/share/info"
+else
+	echo '' >> /etc/profile
+	echo '# Links to the Logtalk Texinfo files are created in /opt/local/share/info' >> /etc/profile
+	echo 'export INFOPATH=$INFOPATH:/opt/local/share/info' >> /etc/profile
+fi
+
+if grep "/opt/local/share/info" /etc/csh.cshrc >/dev/null 2>&1; then
+	echo "System INFOPATH already includes /opt/local/share/info"
+else
+	echo '' >> /etc/csh.cshrc
+	echo '# Links to the Logtalk Texinfo files are created in /opt/local/share/info' >> /etc/csh.cshrc
+	echo 'setenv INFOPATH "${INFOPATH}":/opt/local/share/info' >> /etc/csh.cshrc
+fi
+
+echo ""
 echo "Checking for the Logtalk environment variable definitions..."
 echo ""
 
