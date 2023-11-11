@@ -47,6 +47,9 @@ by default for running Logtalk with the supported backend Prolog compilers
 * XSB:            `xsblgt`     (first run may require `sudo`)
 * YAP:            `yaplgt`
 
+Man pages for all scripts are also provided on POSIX systems. HTML versions
+of the man pages are available in the Logtalk website.
+
 On macOS systems, `/opt/local/bin` must be in your `PATH` to run the scripts
 when using the provided installer. Terminal command files for running Logtalk
 with selected backend Prolog compilers are also available on the Logtalk

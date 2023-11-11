@@ -24,6 +24,34 @@
 #############################################################################
 
 echo ""
+echo "Checking for /opt/local/bin in the system PATH..."
+echo ""
+
+if grep "/opt/local/bin" /etc/zprofile >/dev/null 2>&1; then
+	echo "System PATH already includes /opt/local/bin"
+else
+	echo '' >> /etc/zprofile
+	echo '# Links to the Logtalk scripts are created in /opt/local/bin' >> /etc/zprofile
+	echo 'export PATH=$PATH:/opt/local/bin' >> /etc/zprofile
+fi
+
+if grep "/opt/local/bin" /etc/profile >/dev/null 2>&1; then
+	echo "System PATH already includes /opt/local/bin"
+else
+	echo '' >> /etc/profile
+	echo '# Links to the Logtalk scripts are created in /opt/local/bin' >> /etc/profile
+	echo 'export PATH=$PATH:/opt/local/bin' >> /etc/profile
+fi
+
+if grep "/opt/local/bin" /etc/csh.cshrc >/dev/null 2>&1; then
+	echo "System PATH already includes /opt/local/bin"
+else
+	echo '' >> /etc/csh.cshrc
+	echo '# Links to the Logtalk scripts are created in /opt/local/bin' >> /etc/csh.cshrc
+	echo 'setenv PATH "${PATH}":/opt/local/bin' >> /etc/csh.cshrc
+fi
+
+echo ""
 echo "Checking for the Logtalk environment variable definitions..."
 echo ""
 
@@ -36,7 +64,6 @@ else
 	echo 'LOGTALKHOME=/opt/local/share/logtalk' >> /etc/zprofile
 	echo 'LOGTALKUSER=$HOME/logtalk' >> /etc/zprofile
 	echo 'export LOGTALKHOME LOGTALKUSER' >> /etc/zprofile
-	
 fi
 
 if grep "LOGTALKHOME=/opt/local/share/logtalk" /etc/profile >/dev/null 2>&1; then

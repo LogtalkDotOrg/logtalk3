@@ -34,6 +34,9 @@ built-in predicate introduced in an upcoming version.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The macOS installer to add `/opt/local/bin` to the default system
+`PATH` environment variable.
+
 * UPDATED: The macOS installer to also inform the user about the installation
 directories for the `man` pages and the Texinfo versions of the documentation.
 
