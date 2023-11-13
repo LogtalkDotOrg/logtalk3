@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:58:0,
+		version is 0:59:0,
 		author is 'Paulo Moura',
-		date is 2023-11-05,
+		date is 2023-11-13,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -409,12 +409,20 @@
 			'directives are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
 	explain(deprecated_predicate(_, _, _, _, _)) -->
-		[	'Code that uses deprecated predicates will likely break when those'-[], nl,
+		[	'Code that calls deprecated predicates will likely break when those'-[], nl,
 			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
 	explain(deprecated_predicate(_, _, _, _, _, _)) -->
-		[	'Code that uses deprecated predicates will likely break when those'-[], nl,
+		[	'Code that calls deprecated predicates will likely break when those'-[], nl,
 			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
+	explain(deprecated_function(_, _, _, _, _)) -->
+		[	'Code that calls deprecated arithmetic functions will likely break when'-[], nl,
+			'those functions are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
+	explain(deprecated_function(_, _, _, _, _, _)) -->
+		[	'Code that calls deprecated arithmetic functions will likely break when'-[], nl,
+			'those functions are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
 
 	explain(deprecated_date_format(_, _, _, _, _, _)) -->

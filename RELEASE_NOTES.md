@@ -39,6 +39,11 @@ Prolog adapter and integration files
 * UPDATED: The LVM adapter file to prevent a clash with the `term_hash/4`
 built-in predicate introduced in an upcoming version.
 
+Tools
+--------
+
+* UPDATED: The `tutor` tool for the new arithmetic function linter warnings.
+
 Examples
 --------
 
