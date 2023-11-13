@@ -47,7 +47,8 @@ Lint checks include:
 -  Suspicious calls (syntactically valid calls that are likely semantic
    errors; e.g. float comparisons using the standard arithmetic
    comparison operators)
--  Deprecated directives, predicates, control constructs, and flags
+-  Deprecated directives, predicates, arithmetic functions, control
+   constructs, and flags
 -  References to unknown entities (objects, protocols, categories, or
    modules)
 -  Top-level shortcuts used as directives

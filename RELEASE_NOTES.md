@@ -25,6 +25,11 @@ RELEASE NOTES
 3.73.0 - December ??, 2023
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Linter warnings for deprecated arithmetic functions.
+
 Prolog adapter and integration files
 ------------------------------------
 

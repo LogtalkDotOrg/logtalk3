@@ -101,8 +101,8 @@
 	predicate :-
 		_ is popcount(42).
 	% clause with calls to missing arithmetic functions
-	predicate :-
-		_ is fun(42).
+%	predicate :-
+%		_ is fun(42).
 
 :- end_object.
 
@@ -699,6 +699,9 @@
 
 	baz(X) :-
 		get(X).
+
+	qux(X, Y) :-
+		X is integer(Y).
 
 :- end_object.
 

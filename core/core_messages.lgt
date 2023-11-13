@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:125:1,
+		version is 1:126:0,
 		author is 'Paulo Moura',
-		date is 2023-11-08,
+		date is 2023-11-13,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -657,6 +657,14 @@
 
 	message_tokens(deprecated_predicate(File, Lines, Type, Entity, Predicate, Replacement)) -->
 		['Deprecated predicate: ~q (compiled as a call to ~q)'-[Predicate, Replacement], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(deprecated_function(File, Lines, Type, Entity, Function)) -->
+		['Deprecated function: ~q'-[Function], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(deprecated_function(File, Lines, Type, Entity, Function, Replacement)) -->
+		['Deprecated function: ~q (replaceable by the standard ~q function)'-[Function, Replacement], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% encoding/1 directive messages

@@ -16024,7 +16024,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(_ is Exp, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp),
+	'$lgt_check_non_portable_functions'(Exp, Ctx),
 	fail.
 
 '$lgt_compile_body'(Exp1 =:= Exp2, _, _, _, Ctx) :-
@@ -16045,8 +16045,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Exp1 =:= Exp2, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Ctx),
+	'$lgt_check_non_portable_functions'(Exp2, Ctx),
 	fail.
 
 '$lgt_compile_body'(Exp1 =\= Exp2, _, _, _, Ctx) :-
@@ -16064,36 +16064,36 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Exp1 =\= Exp2, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Ctx),
+	'$lgt_check_non_portable_functions'(Exp2, Ctx),
 	fail.
 
 '$lgt_compile_body'(Exp1 < Exp2, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Ctx),
+	'$lgt_check_non_portable_functions'(Exp2, Ctx),
 	fail.
 
 '$lgt_compile_body'(Exp1 =< Exp2, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Ctx),
+	'$lgt_check_non_portable_functions'(Exp2, Ctx),
 	fail.
 
 '$lgt_compile_body'(Exp1 > Exp2, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Ctx),
+	'$lgt_check_non_portable_functions'(Exp2, Ctx),
 	fail.
 
 '$lgt_compile_body'(Exp1 >= Exp2, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
 	'$lgt_compiler_flag'(portability, warning),
-	'$lgt_check_non_portable_functions'(Exp1),
-	'$lgt_check_non_portable_functions'(Exp2),
+	'$lgt_check_non_portable_functions'(Exp1, Ctx),
+	'$lgt_check_non_portable_functions'(Exp2, Ctx),
 	fail.
 
 % blackboard predicates (requires a backend Prolog compiler natively supporting these built-in predicates)
@@ -17708,53 +17708,91 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_check_non_portable_functions'(@term)
+% '$lgt_check_non_portable_functions'(@term, @compilation_context)
 %
 % checks an arithmetic expression for calls to non-standard Prolog functions
 
-'$lgt_check_non_portable_functions'(Expression) :-
-	callable(Expression),
-	% assume function
-	!,
-	(	'$lgt_pp_missing_function_'(Expression, _, _) ->
+'$lgt_check_non_portable_functions'(Exp, _) :-
+	number(Exp),
+	!.
+
+'$lgt_check_non_portable_functions'(Exp, _) :-
+	var(Exp),
+	!.
+
+'$lgt_check_non_portable_functions'(Exp, Ctx) :-
+	'$lgt_prolog_deprecated_built_in_function'(Exp, Alt),
+	% standard alternative
+	once('$lgt_predicate_property'(evaluable_property(_, _), _)),
+	evaluable_property(Exp, built_in),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(deprecated, warning),
+	'$lgt_source_file_context'(File, Lines),
+	'$lgt_pp_entity_'(Type, Entity, _),
+	functor(Exp, Functor, Arity),
+	functor(Alt, AltFunctor, AltArity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(
+		warning(deprecated),
+		deprecated_function(File, Lines, Type, Entity, Functor/Arity, AltFunctor/AltArity)
+	),
+	fail.
+
+'$lgt_check_non_portable_functions'(Exp, Ctx) :-
+	'$lgt_prolog_deprecated_built_in_function'(Exp),
+	% no standard alternative
+	once('$lgt_predicate_property'(evaluable_property(_, _), _)),
+	evaluable_property(Exp, built_in),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(deprecated, warning),
+	'$lgt_source_file_context'(File, Lines),
+	'$lgt_pp_entity_'(Type, Entity, _),
+	functor(Exp, Functor, Arity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(
+		warning(deprecated),
+		deprecated_function(File, Lines, Type, Entity, Functor/Arity)
+	),
+	fail.
+
+'$lgt_check_non_portable_functions'(Exp, Ctx) :-
+	(	'$lgt_pp_missing_function_'(Exp, _, _) ->
 		% missing function already recorded
 		true
 	;	'$lgt_predicate_property'(evaluable_property(_, _), _),
-		\+ evaluable_property(Expression, _) ->
+		\+ evaluable_property(Exp, _) ->
 		% first occurrence of this missing function; record it
-		'$lgt_term_template'(Expression, Template),
+		'$lgt_term_template'(Exp, Template),
 		'$lgt_source_file_context'(File, Lines),
 		assertz('$lgt_pp_missing_function_'(Template, File, Lines))
 	;	% no reliable way of checking if the function is missing
 		true
 	),
-	(	'$lgt_iso_spec_function'(Expression) ->
+	(	'$lgt_iso_spec_function'(Exp) ->
 		% portable call (we assume...!)
 		true
-	;	'$lgt_pp_non_portable_function_'(Expression, _, _) ->
+	;	'$lgt_pp_non_portable_function_'(Exp, _, _) ->
 		% non-portable function already recorded
 		true
 	;	% first occurrence of this non-portable function; record it
-		'$lgt_term_template'(Expression, Template),
+		'$lgt_term_template'(Exp, Template),
 		'$lgt_source_file_context'(File, Lines),
 		assertz('$lgt_pp_non_portable_function_'(Template, File, Lines))
 	),
-	(	Expression = [_|_] ->
+	(	Exp = [_|_] ->
 		% avoid duplicated warnings with the Prolog legacy use of a list
 		% with a single character to represent the code of the character
 		true
-	;	Expression =.. [_| Expressions],
-		'$lgt_check_non_portable_function_args'(Expressions)
+	;	Exp =.. [_| Exps],
+		'$lgt_check_non_portable_function_args'(Exps, Ctx)
 	).
 
-'$lgt_check_non_portable_functions'(_).	% variables and numbers
 
+'$lgt_check_non_portable_function_args'([], _).
 
-'$lgt_check_non_portable_function_args'([]).
-
-'$lgt_check_non_portable_function_args'([Expression| Expressions]) :-
-	'$lgt_check_non_portable_functions'(Expression),
-	'$lgt_check_non_portable_function_args'(Expressions).
+'$lgt_check_non_portable_function_args'([Exp| Exps], Ctx) :-
+	'$lgt_check_non_portable_functions'(Exp, Ctx),
+	'$lgt_check_non_portable_function_args'(Exps, Ctx).
 
 
 
@@ -23576,6 +23614,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(telling(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(seen).
 '$lgt_prolog_deprecated_built_in_predicate'(told).
+
+
+
+% '$lgt_prolog_deprecated_built_in_function'(@callable, -callable)
+%
+% Prolog deprecated function that can be replaced by a call to a
+% standard function; callers must check that the function is a
+% built-in function
+
+'$lgt_prolog_deprecated_built_in_function'(ceil(Float), ceiling(Float)).
+'$lgt_prolog_deprecated_built_in_function'(integer(Float), round(Float)).
+
+
+
+% '$lgt_prolog_deprecated_built_in_function'(@callable)
+%
+% Prolog deprecated built-in function; callers must check that the
+% function is a built-in function
+
+'$lgt_prolog_deprecated_built_in_function'(_) :-
+	fail.
 
 
 
