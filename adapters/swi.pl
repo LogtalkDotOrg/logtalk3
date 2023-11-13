@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on October 31, 2023
+%  Last updated on November 13, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -54,6 +54,11 @@
 :- endif.
 
 :- license(asl2, 'Logtalk').
+
+
+:- if(exists_source(library(prolog_evaluable))).
+	:- use_module(library(prolog_evaluable), [evaluable_property/2]).
+:- endif.
 
 
 
