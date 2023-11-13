@@ -23581,6 +23581,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_iso_spec_flag'(Flag).
 '$lgt_prolog_deprecated_built_in_predicate'(on_exception(Error, Goal, Handler), catch(Goal, Error, Handler)).
 '$lgt_prolog_deprecated_built_in_predicate'(raise_exception(Error), throw(Error)).
+% Quintus Prolog predicates for arithmetic functions
+'$lgt_prolog_deprecated_built_in_predicate'(sin(X, Y), Y is sin(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(cos(X, Y), Y is cos(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(tan(X, Y), Y is tan(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(log(X, Y), Y is log(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(pow(X, Y, Z), Z is X**Y).
+'$lgt_prolog_deprecated_built_in_predicate'(ceiling(X, Y), Y is ceiling(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(floor(X, Y), Y is floor(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(round(X, Y), Y is round(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(sqrt(X, Y), Y is sqrt(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(acos(X, Y), Y is acos(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(asin(X, Y), Y is asin(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(atan(X, Y), Y is atan(X)).
+'$lgt_prolog_deprecated_built_in_predicate'(atan2(X, Y, Z), Z is atan2(X, Y)).
+'$lgt_prolog_deprecated_built_in_predicate'(sign(X, Y), Y is sign(X)).
 
 
 
@@ -23614,7 +23629,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(telling(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(seen).
 '$lgt_prolog_deprecated_built_in_predicate'(told).
-
+% Quintus Prolog predicates for arithmetic functions
+'$lgt_prolog_deprecated_built_in_predicate'(log10(_, _)).
 
 
 % '$lgt_prolog_deprecated_built_in_function'(@callable, -callable)

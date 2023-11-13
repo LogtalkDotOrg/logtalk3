@@ -30,11 +30,20 @@ Logtalk compiler and runtime
 
 * ADDED: Linter warnings for deprecated arithmetic functions.
 
+* ADDED: Linter warnings for Quintus Prolog predicate versions of arithmetic
+functions.
+
 Prolog adapter and integration files
 ------------------------------------
 
 * UPDATED: The LVM adapter file to prevent a clash with the `term_hash/4`
 built-in predicate introduced in an upcoming version.
+
+Examples
+--------
+
+* UPDATED: The `errors` example for the new arithmetic function linter
+warnings.
 
 Installers and installation scripts
 -----------------------------------
