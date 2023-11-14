@@ -1318,11 +1318,12 @@ the same line as the test results.</p>
 <section id="test-execution-times-and-memory-usage">
 <h2>Test execution times and memory usage<a class="headerlink" href="#test-execution-times-and-memory-usage" title="Link to this heading"></a></h2>
 <p>Individual test CPU execution time (in seconds) is reported by default
-when running the tests. Starting and ending times when running a set of
-tests is also reported by default. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object also provides
-several public benchmarking predicates that can be useful for e.g.
-reporting test sub-goals execution times using either cpu or wall
-clocks.</p>
+when running the tests. Total runtime for passed and failed tests is
+reported after the tests complete. Starting and ending date and time
+when running a set of tests is also reported by default. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>
+object also provides several public benchmarking predicates that can be
+useful for e.g. reporting test sub-goals execution times using either
+cpu or wall clocks.</p>
 <p>Test memory usage is not reported y default due to the lack of a
 portable solution to access memory data. However, several backend Prolog
 systems provide a <code class="docutils literal notranslate"><span class="pre">statistics/2</span></code> or similar predicate that can be used

@@ -1141,10 +1141,11 @@ Test execution times and memory usage
 -------------------------------------
 
 Individual test CPU execution time (in seconds) is reported by default when
-running the tests. Starting and ending times when running a set of tests is
-also reported by default. The `lgtunit` object also provides several public
-benchmarking predicates that can be useful for e.g. reporting test sub-goals
-execution times using either cpu or wall clocks.
+running the tests. Total runtime for passed and failed tests is reported after
+the tests complete. Starting and ending date and time when running a set of
+tests is also reported by default. The `lgtunit` object also provides several
+public benchmarking predicates that can be useful for e.g. reporting test
+sub-goals execution times using either cpu or wall clocks.
 
 Test memory usage is not reported y default due to the lack of a portable
 solution to access memory data. However, several backend Prolog systems
