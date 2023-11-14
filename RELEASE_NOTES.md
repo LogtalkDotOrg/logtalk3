@@ -43,6 +43,12 @@ built-in predicate introduced in an upcoming version.
 when available (provides the evaluable_property/2 predicate used by the
 linter).
 
+Library
+-------
+
+* IMPROVED: Performance of the `reader` library predicates that read a file
+or a stream to a list of chars, codes, or bytes.
+
 Tools
 --------
 

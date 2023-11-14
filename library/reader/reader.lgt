@@ -22,9 +22,9 @@
 :- object(reader).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
-		date is 2022-10-31,
+		date is 2023-11-14,
 		comment is 'Predicates for reading text file and text stream contents to lists of terms, characters, or character codes and for reading binary file and binary stream contents to lists of bytes.'
 	]).
 
@@ -223,37 +223,46 @@
 		close(Stream).
 
 	stream_to_codes(Stream, Codes) :-
-		stream_to_codes(Stream, Codes, []).
+		get_code(Stream, Code),
+		stream_to_codes(Code, Stream, Codes, []).
 
 	stream_to_codes(Stream, Codes, Tail) :-
 		get_code(Stream, Code),
-		(	Code == -1 ->
-			Codes = Tail
-		;	Codes = [Code| Rest],
-			stream_to_codes(Stream, Rest, Tail)
-		).
+		stream_to_codes(Code, Stream, Codes, Tail).
+
+	stream_to_codes(-1, _, Tail, Tail) :-
+		!.
+	stream_to_codes(Code, Stream, [Code| Rest], Tail) :-
+		get_code(Stream, NextCode),
+		stream_to_codes(NextCode, Stream, Rest, Tail).
 
 	stream_to_chars(Stream, Codes) :-
-		stream_to_chars(Stream, Codes, []).
+		get_char(Stream, Char),
+		stream_to_chars(Char, Stream, Codes, []).
 
 	stream_to_chars(Stream, Chars, Tail) :-
 		get_char(Stream, Char),
-		(	Char == end_of_file ->
-			Chars = Tail
-		;	Chars = [Char| Rest],
-			stream_to_chars(Stream, Rest, Tail)
-		).
+		stream_to_chars(Char, Stream, Chars, Tail).
+
+	stream_to_chars(end_of_file, _, Tail, Tail) :-
+		!.
+	stream_to_chars(Char, Stream, [Char| Rest], Tail) :-
+		get_char(Stream, NextChar),
+		stream_to_chars(NextChar, Stream, Rest, Tail).
 
 	stream_to_bytes(Stream, Bytes) :-
-		stream_to_bytes(Stream, Bytes, []).
+		get_byte(Stream, Byte),
+		stream_to_bytes(Byte, Stream, Bytes, []).
 
 	stream_to_bytes(Stream, Bytes, Tail) :-
 		get_byte(Stream, Byte),
-		(	Byte == -1 ->
-			Bytes = Tail
-		;	Bytes = [Byte| Rest],
-			stream_to_bytes(Stream, Rest, Tail)
-		).
+		stream_to_bytes(Byte, Stream, Bytes, Tail).
+
+	stream_to_bytes(-1, _, Tail, Tail) :-
+		!.
+	stream_to_bytes(Byte, Stream, [Byte| Rest], Tail) :-
+		get_byte(Stream, NextByte),
+		stream_to_bytes(NextByte, Stream, Rest, Tail).
 
 	line_to_chars(Stream, Chars) :-
 		(	at_end_of_stream(Stream) ->
