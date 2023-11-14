@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:5:0,
+		version is 16:6:0,
 		author is 'Paulo Moura',
-		date is 2023-10-02,
+		date is 2023-11-14,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -798,25 +798,25 @@
 		argnames is ['Counter']
 	]).
 
-	:- private(passed_/1).
-	:- dynamic(passed_/1).
-	:- mode(passed_(?integer), zero_or_one).
-	:- info(passed_/1, [
-		comment is 'Counter for passed tests.',
-		argnames is ['Counter']
+	:- private(passed_/2).
+	:- dynamic(passed_/2).
+	:- mode(passed_(?integer, -float), zero_or_one).
+	:- info(passed_/2, [
+		comment is 'Counter and total time for passed tests.',
+		argnames is ['Counter', 'Time']
 	]).
 
-	:- private(failed_/1).
-	:- dynamic(failed_/1).
-	:- mode(failed_(?callable), zero_or_one).
-	:- info(failed_/1, [
-		comment is 'Counter for failed tests.',
-		argnames is ['Counter']
+	:- private(failed_/2).
+	:- dynamic(failed_/2).
+	:- mode(failed_(?integer, -float), zero_or_one).
+	:- info(failed_/2, [
+		comment is 'Counter and total time for failed tests.',
+		argnames is ['Counter', 'Time']
 	]).
 
 	:- private(flaky_/1).
 	:- dynamic(flaky_/1).
-	:- mode(flaky_(?callable), zero_or_one).
+	:- mode(flaky_(?integer), zero_or_one).
 	:- info(flaky_/1, [
 		comment is 'Counter for failed tests that are marked as flaky.',
 		argnames is ['Counter']
@@ -1030,8 +1030,8 @@
 		% of defined tests usually implies bugs in the implementation of basic
 		% Prolog control constructs by the used backend system
 		::number_of_tests(Total),
-		::passed_(Passed),
-		::failed_(Failed),
+		::passed_(Passed, _),
+		::failed_(Failed, _),
 		::skipped_(Skipped),
 		Run is Passed + Failed + Skipped,
 		(	Run =\= Total ->
@@ -1213,12 +1213,14 @@
 	write_tests_results :-
 		self(Object),
 		::skipped_(Skipped),
-		::passed_(Passed),
-		::failed_(Failed),
+		::passed_(Passed, PassedTime),
+		::failed_(Failed, FailedTime),
 		::flaky_(Flaky),
 		Total is Skipped + Passed + Failed,
+		Time is PassedTime + FailedTime,
 		::note(Note),
 		print_message(information, lgtunit, tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note)),
+		print_message(information, lgtunit, tests_runtime(Object, Time)),
 		print_message(information, lgtunit, completed_tests_from_object(Object)).
 
 	write_tests_footer :-
@@ -1230,7 +1232,7 @@
 		self(Object),
 		cpu_time(End),
 		Time is End - Start,
-		increment_passed_tests_counter,
+		increment_passed_tests_counter(Time),
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
@@ -1244,7 +1246,7 @@
 		self(Object),
 		cpu_time(End),
 		Time is End - Start,
-		increment_failed_tests_counter,
+		increment_failed_tests_counter(Time),
 		(	Flaky == true ->
 			increment_flaky_tests_counter
 		;	atom(Note), sub_atom(Note, _, _, _, flaky) ->
@@ -1356,24 +1358,26 @@
 		::asserta(skipped_(New)).
 
 	reset_test_counters :-
-		::retractall(passed_(_)),
-		::asserta(passed_(0)),
-		::retractall(failed_(_)),
-		::asserta(failed_(0)),
+		::retractall(passed_(_, _)),
+		::asserta(passed_(0, 0)),
+		::retractall(failed_(_, _)),
+		::asserta(failed_(0, 0)),
 		::retractall(flaky_(_)),
 		::asserta(flaky_(0)),
 		::retractall(skipped_(_)),
 		::asserta(skipped_(0)).
 
-	increment_passed_tests_counter :-
-		::retract(passed_(Old)),
-		New is Old + 1,
-		::asserta(passed_(New)).
+	increment_passed_tests_counter(Time) :-
+		::retract(passed_(OldCount, OldTime)),
+		NewCount is OldCount + 1,
+		NewTime is OldTime + Time,
+		::asserta(passed_(NewCount, NewTime)).
 
-	increment_failed_tests_counter :-
-		::retract(failed_(Old)),
-		New is Old + 1,
-		::asserta(failed_(New)).
+	increment_failed_tests_counter(Time) :-
+		::retract(failed_(OldCount, OldTime)),
+		NewCount is OldCount + 1,
+		NewTime is OldTime + Time,
+		::asserta(failed_(NewCount, NewTime)).
 
 	increment_flaky_tests_counter :-
 		::retract(flaky_(Old)),

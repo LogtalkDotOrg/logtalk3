@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 16:5:0
-| **Date:** 2023-10-02
+| **Version:** 16:6:0
+| **Date:** 2023-11-14
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -2131,40 +2131,40 @@ Counter for skipped tests.
 
 ------------
 
-.. index:: passed_/1
-.. _lgtunit/0::passed_/1:
+.. index:: passed_/2
+.. _lgtunit/0::passed_/2:
 
-``passed_/1``
+``passed_/2``
 ^^^^^^^^^^^^^
 
-Counter for passed tests.
+Counter and total time for passed tests.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``passed_(Counter)``
+|    ``passed_(Counter,Time)``
 | **Mode and number of proofs:**
-|    ``passed_(?integer)`` - ``zero_or_one``
+|    ``passed_(?integer,-float)`` - ``zero_or_one``
 
 
 ------------
 
-.. index:: failed_/1
-.. _lgtunit/0::failed_/1:
+.. index:: failed_/2
+.. _lgtunit/0::failed_/2:
 
-``failed_/1``
+``failed_/2``
 ^^^^^^^^^^^^^
 
-Counter for failed tests.
+Counter and total time for failed tests.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``failed_(Counter)``
+|    ``failed_(Counter,Time)``
 | **Mode and number of proofs:**
-|    ``failed_(?callable)`` - ``zero_or_one``
+|    ``failed_(?integer,-float)`` - ``zero_or_one``
 
 
 ------------
@@ -2183,7 +2183,7 @@ Counter for failed tests that are marked as flaky.
 | **Template:**
 |    ``flaky_(Counter)``
 | **Mode and number of proofs:**
-|    ``flaky_(?callable)`` - ``zero_or_one``
+|    ``flaky_(?integer)`` - ``zero_or_one``
 
 
 ------------

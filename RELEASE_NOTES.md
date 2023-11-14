@@ -46,6 +46,8 @@ linter).
 Tools
 --------
 
+* UPDATED: The `lgtunit` tool to also print the tests runtime in seconds.
+
 * UPDATED: The `tutor` tool for the new arithmetic function linter warnings.
 
 Examples

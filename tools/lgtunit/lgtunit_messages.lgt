@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 8:4:0,
+		version is 8:5:0,
 		author is 'Paulo Moura',
-		date is 2023-08-11,
+		date is 2023-11-14,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -115,6 +115,9 @@
 
 	:- if(\+ current_logtalk_flag(prolog_dialect, ji)).
 
+		message_tokens(tests_runtime(_Object, Time)) -->
+			['runtime: ~9f seconds'-[Time], nl].
+
 		message_tokens(passed_test(_Object, Test, _File, _Position, Note, Time)) -->
 			(	{Note == ''} ->
 				['~q: success (in ~9f seconds)'-[Test, Time], nl]
@@ -130,6 +133,9 @@
 			file_position(File, Position).
 
 	:- else.
+
+		message_tokens(tests_runtime(_Object, Time)) -->
+			['runtime: ~w seconds'-[Time], nl].
 
 		message_tokens(passed_test(_Object, Test, _File, _Position, Note, Time)) -->
 			(	{Note == ''} ->
