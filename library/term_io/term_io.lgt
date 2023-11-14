@@ -23,9 +23,9 @@
 	implements(term_io_protocol)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-11-08,
+		date is 2023-11-14,
 		comment is 'Term input/output from/to atom, chars, and codes.'
 	]).
 
@@ -289,19 +289,23 @@
 
 	get_chars(Stream, Chars, Tail) :-
 		get_char(Stream, Char),
-		(	Char == end_of_file ->
-			Chars = Tail
-		;	Chars = [Char| Rest],
-			get_chars(Stream, Rest, Tail)
-		).
+		get_chars(Char, Stream, Chars, Tail).
+
+	get_chars(end_of_file, _, Tail, Tail) :-
+		!.
+	get_chars(Char, Stream, [Char| Rest], Tail) :-
+		get_char(Stream, NextChar),
+		get_chars(NextChar, Stream, Rest, Tail).
 
 	get_codes(Stream, Codes, Tail) :-
 		get_code(Stream, Code),
-		(	Code == -1 ->
-			Codes = Tail
-		;	Codes = [Code| Rest],
-			get_codes(Stream, Rest, Tail)
-		).
+		get_codes(Code, Stream, Codes, Tail).
+
+	get_codes(-1, _, Tail, Tail) :-
+		!.
+	get_codes(Code, Stream, [Code| Rest], Tail) :-
+		get_code(Stream, NextCode),
+		get_codes(NextCode, Stream, Rest, Tail).
 
 	temporary_file(Path) :-
 		os::temporary_directory(TemporaryDirectory),

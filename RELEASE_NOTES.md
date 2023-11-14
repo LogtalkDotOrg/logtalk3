@@ -49,6 +49,8 @@ Library
 * IMPROVED: Performance of the `reader` library predicates that read a file
 or a stream to a list of chars, codes, or bytes.
 
+* IMPROVED: Performance of the `term_io` library predicates.
+
 Tools
 --------
 
