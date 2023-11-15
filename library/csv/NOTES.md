@@ -103,7 +103,10 @@ of rows:
 	Rows = [[aaa,bbb,ccc],[zzz,yyy,xxx]] ?
 
 Alternatively, The CSV data can be saved using a public and dynamic object
-predicate. For example:
+predicate (that must be previously declared). For example:
+
+	| ?- assertz(p(_,_,_)), retractall(p(_,_,_)).
+	yes
 
 	| ?- csv(keep, comma, true)::read_file('test_files/crlf_ending.csv', user, p/3).
 	yes

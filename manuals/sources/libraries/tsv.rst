@@ -62,9 +62,12 @@ A TSV file can be read as a list of rows:
    yes
 
 Alternatively, The TSV data can be saved using a public and dynamic
-object predicate. For example:
+object predicate (that must be previously declared). For example:
 
 ::
+
+   | ?- assertz(p(_,_,_)), retractall(p(_,_,_)).
+   yes
 
    | ?- tsv(skip)::read_file('test_files/data.tsv', user, p/3).
    yes
