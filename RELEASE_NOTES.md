@@ -46,6 +46,10 @@ linter).
 Library
 -------
 
+* REMOVED: The `tsv` object from the `csv` library.
+
+* ADDED: New `tsv` library for reading and writing TSV files.
+
 * IMPROVED: Performance of the `reader` library predicates that read a file
 or a stream to a list of chars, codes, or bytes.
 

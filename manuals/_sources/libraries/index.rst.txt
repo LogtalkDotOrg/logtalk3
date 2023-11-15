@@ -74,6 +74,7 @@ directory in the ``NOTES.md`` file.
    statistics
    term_io
    timeout
+   tsv
    types
    unicode_data
    ulid

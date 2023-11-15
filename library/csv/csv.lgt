@@ -30,7 +30,7 @@
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).',
-			'Separator' - 'Separator handling option with possible values ``comma`` (default for non ``.tsv`` files or when no file name is available), ``tab`` (default for ``.tsv`` files), ``semicolon``, and ``colon``.',
+			'Separator' - 'Separator handling option with possible values ``comma`` (default for non ``.tsv`` and non ``.tab`` files or when no file name extension is available), ``tab`` (default for ``.tsv`` and ``.tab`` files), ``semicolon``, and ``colon``.',
 			'IgnoreQuotes' - 'Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.'
 		]
 	]).
@@ -534,19 +534,6 @@
 		author is 'Jacinto Dávila',
 		date is 2021-02-02,
 		comment is 'CSV files reading and writing predicates using the options Header - ``keep``, Separator - ``comma``, and IgnoreQuotes - ``false``.'
-	]).
-
-:- end_object.
-
-
-:- object(tsv,
-	extends(csv(keep, tab, false))).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2022-07-22,
-		comment is 'TSV files reading and writing predicates using the options Header - ``keep``, Separator - ``tab``, and IgnoreQuotes - ``false``.'
 	]).
 
 :- end_object.

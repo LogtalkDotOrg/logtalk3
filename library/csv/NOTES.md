@@ -22,11 +22,10 @@ ________________________________________________________________________
 `csv`
 =====
 
-The `csv` library provides predicates for reading and writing CSV/TSV files
+The `csv` library provides predicates for reading and writing CSV files
 and streams:
 
 https://www.rfc-editor.org/rfc/rfc4180.txt
-https://www.iana.org/assignments/media-types/text/tab-separated-values
 
 The main object, `csv/3`, is a parametric object allowing passing options
 for the handling of the header of the file, the fields separator, and the

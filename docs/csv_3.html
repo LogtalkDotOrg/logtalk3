@@ -77,7 +77,6 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">csv(Header,Separator,IgnoreQuotes)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_guess_questions_0.html">csv_guess_questions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_protocol_0.html">csv_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a></li>
@@ -136,6 +135,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -197,7 +197,7 @@
 <h1><code class="docutils literal notranslate"><span class="pre">csv(Header,Separator,IgnoreQuotes)</span></code><a class="headerlink" href="#csv-header-separator-ignorequotes" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Header</span></code> - Header handling option with possible values <code class="docutils literal notranslate"><span class="pre">missing</span></code>, <code class="docutils literal notranslate"><span class="pre">skip</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep</span></code> (default).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Separator</span></code> - Separator handling option with possible values <code class="docutils literal notranslate"><span class="pre">comma</span></code> (default for non <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> files or when no file name is available), <code class="docutils literal notranslate"><span class="pre">tab</span></code> (default for <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> files), <code class="docutils literal notranslate"><span class="pre">semicolon</span></code>, and <code class="docutils literal notranslate"><span class="pre">colon</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Separator</span></code> - Separator handling option with possible values <code class="docutils literal notranslate"><span class="pre">comma</span></code> (default for non <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> and non <code class="docutils literal notranslate"><span class="pre">.tab</span></code> files or when no file name extension is available), <code class="docutils literal notranslate"><span class="pre">tab</span></code> (default for <code class="docutils literal notranslate"><span class="pre">.tsv</span></code> and <code class="docutils literal notranslate"><span class="pre">.tab</span></code> files), <code class="docutils literal notranslate"><span class="pre">semicolon</span></code>, and <code class="docutils literal notranslate"><span class="pre">colon</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">IgnoreQuotes</span></code> - Double-quotes handling option to ignore (<code class="docutils literal notranslate"><span class="pre">true</span></code>) or preserve (<code class="docutils literal notranslate"><span class="pre">false</span></code>; default) double quotes surrounding data.</p></li>
 </ul>
 <p>CSV file and stream reading and writing predicates.</p>

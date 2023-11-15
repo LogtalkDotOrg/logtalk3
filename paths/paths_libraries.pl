@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on May 16, 2023
+%  Last updated on November 15, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -78,6 +78,7 @@ logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(statistics, library('statistics/')).
 logtalk_library_path(term_io, library('term_io/')).
 logtalk_library_path(timeout, library('timeout/')).
+logtalk_library_path(tsv, library('tsv/')).
 logtalk_library_path(types, library('types/')).
 logtalk_library_path(ulid, library('ulid/')).
 logtalk_library_path(union_find, library('union_find/')).

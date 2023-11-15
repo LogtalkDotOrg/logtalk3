@@ -231,6 +231,7 @@ Objects
    timeout <timeout_0>
    toychrdb <toychrdb_0>
    tsv <tsv_0>
+   tsv(Header) <tsv_1>
    tutor <tutor_0>
    type <type_0>
    ulid <ulid_0>
@@ -312,6 +313,7 @@ Protocols
    term_io_protocol <term_io_protocol_0>
    termp <termp_0>
    timep <timep_0>
+   tsv_protocol <tsv_protocol_0>
    ulid_protocol <ulid_protocol_0>
    union_find_protocol <union_find_protocol_0>
    uuid_protocol <uuid_protocol_0>

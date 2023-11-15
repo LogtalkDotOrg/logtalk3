@@ -171,7 +171,6 @@ To load an entity, always load the library that includes it using the goal ``log
    csv(Header,Separator,IgnoreQuotes) <csv_3>
    csv_guess_questions <csv_guess_questions_0>
    csv_protocol <csv_protocol_0>
-   tsv <tsv_0>
 
 ``library/dates/``
 ------------------
@@ -628,6 +627,18 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    timeout <timeout_0>
+
+``library/tsv/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tsv <tsv_0>
+   tsv(Header) <tsv_1>
+   tsv_protocol <tsv_protocol_0>
 
 ``library/types/``
 ------------------

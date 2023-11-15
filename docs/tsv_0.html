@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="date" href="date_0.html" />
-    <link rel="prev" title="csv_protocol" href="csv_protocol_0.html" />
+    <link rel="next" title="tsv(Header)" href="tsv_1.html" />
+    <link rel="prev" title="toychrdb" href="toychrdb_0.html" />
    
 </head>
 
@@ -72,14 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#code-metrics"><span class="xref std std-ref">code_metrics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="csv_0.html">csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="csv_3.html">csv(Header,Separator,IgnoreQuotes)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="csv_guess_questions_0.html">csv_guess_questions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="csv_protocol_0.html">csv_protocol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">tsv</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dead-code-scanner"><span class="xref std std-ref">dead_code_scanner</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#debug-messages"><span class="xref std std-ref">debug_messages</span></a></li>
@@ -136,6 +129,12 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tsv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_1.html">tsv(Header)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -195,17 +194,17 @@
   <p class="right" id="tsv-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="tsv">
 <h1><code class="docutils literal notranslate"><span class="pre">tsv</span></code><a class="headerlink" href="#tsv" title="Link to this heading"></a></h1>
-<p>TSV files reading and writing predicates using the options Header - <code class="docutils literal notranslate"><span class="pre">keep</span></code>, Separator - <code class="docutils literal notranslate"><span class="pre">tab</span></code>, and IgnoreQuotes - <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>TSV files reading and writing predicates using the option <code class="docutils literal notranslate"><span class="pre">Header-keep</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(csv(loader))</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(tsv(loader))</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2022-07-22</div>
+<div class="line"><strong>Date:</strong> 2023-11-15</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -216,7 +215,7 @@
 <div class="line-block">
 <div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="csv_3.html#csv-3"><span class="std std-ref">csv(keep,tab,false)</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="tsv_1.html#tsv-1"><span class="std std-ref">tsv(keep)</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -228,7 +227,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-guess-arity-2"><span class="std std-ref">guess_arity/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-guess-separator-2"><span class="std std-ref">guess_separator/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-file-2"><span class="std std-ref">read_file/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-file-3"><span class="std std-ref">read_file/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-file-by-line-2"><span class="std std-ref">read_file_by_line/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-file-by-line-3"><span class="std std-ref">read_file_by_line/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-stream-2"><span class="std std-ref">read_stream/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-stream-3"><span class="std std-ref">read_stream/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-stream-by-line-2"><span class="std std-ref">read_stream_by_line/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-stream-by-line-3"><span class="std std-ref">read_stream_by_line/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-write-file-3"><span class="std std-ref">write_file/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-write-stream-3"><span class="std std-ref">write_stream/3</span></a></div>
+<div class="line"> <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-file-2"><span class="std std-ref">read_file/2</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-file-3"><span class="std std-ref">read_file/3</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-file-by-line-2"><span class="std std-ref">read_file_by_line/2</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-file-by-line-3"><span class="std std-ref">read_file_by_line/3</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-stream-2"><span class="std std-ref">read_stream/2</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-stream-3"><span class="std std-ref">read_stream/3</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-stream-by-line-2"><span class="std std-ref">read_stream_by_line/2</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-read-stream-by-line-3"><span class="std std-ref">read_stream_by_line/3</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-write-file-3"><span class="std std-ref">write_file/3</span></a>  <a class="reference internal" href="tsv_protocol_0.html#tsv-protocol-0-write-stream-3"><span class="std std-ref">write_stream/3</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -261,8 +260,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="csv_protocol_0.html" class="btn btn-neutral float-left" title="csv_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="date_0.html" class="btn btn-neutral float-right" title="date" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="toychrdb_0.html" class="btn btn-neutral float-left" title="toychrdb" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tsv_1.html" class="btn btn-neutral float-right" title="tsv(Header)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

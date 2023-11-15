@@ -9,7 +9,7 @@
 ======================================
 
 * ``Header`` - Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).
-* ``Separator`` - Separator handling option with possible values ``comma`` (default for non ``.tsv`` files or when no file name is available), ``tab`` (default for ``.tsv`` files), ``semicolon``, and ``colon``.
+* ``Separator`` - Separator handling option with possible values ``comma`` (default for non ``.tsv`` and non ``.tab`` files or when no file name extension is available), ``tab`` (default for ``.tsv`` and ``.tab`` files), ``semicolon``, and ``colon``.
 * ``IgnoreQuotes`` - Double-quotes handling option to ignore (``true``) or preserve (``false``; default) double quotes surrounding data.
 
 

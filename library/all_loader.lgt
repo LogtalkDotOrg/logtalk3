@@ -62,6 +62,7 @@
 		git(loader),
 		grammars(loader),
 		csv(loader),
+		tsv(loader),
 		json(loader),
 		cbor(loader),
 		base64(loader),
