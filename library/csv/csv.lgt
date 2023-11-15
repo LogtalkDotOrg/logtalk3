@@ -24,9 +24,9 @@
 	implements(csv_protocol)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Jacinto Dávila and Paulo Moura',
-		date is 2023-05-29,
+		date is 2023-11-15,
 		comment is 'CSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``missing``, ``skip``, and ``keep`` (default).',
@@ -510,6 +510,8 @@
 			true
 		;	decompose_file_name(File, _, _, Extension),
 			(	Extension == '.tsv' ->
+				_Separator_ = tab
+			;	Extension == '.tab' ->
 				_Separator_ = tab
 			;	_Separator_ = comma
 			)

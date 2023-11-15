@@ -51,6 +51,9 @@ or a stream to a list of chars, codes, or bytes.
 
 * IMPROVED: Performance of the `term_io` library predicates.
 
+* UPDATED: The `csv` library to also recognize `.tab` file extension for TSV
+files.
+
 Tools
 --------
 
