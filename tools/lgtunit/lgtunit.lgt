@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:6:0,
+		version is 16:6:1,
 		author is 'Paulo Moura',
-		date is 2023-11-14,
+		date is 2023-11-15,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1742,31 +1742,31 @@
 		parse_quick_check_options(Options, QuickCheckOptions).
 
 	parse_quick_check_options(Options, [n(NumberOfTests), s(MaxShrinks), ec(EdgeCases), pc(Condition), l(Label), v(Verbose), pb(ProgressBar, Tick)| Other]) :-
-		(	memberchk(n(NumberOfTests), Options) ->
+		(	member(n(NumberOfTests), Options) ->
 			check(non_negative_integer, NumberOfTests, option_error(n(NumberOfTests)))
 		;	default_quick_check_option(n(NumberOfTests))
 		),
-		(	memberchk(s(MaxShrinks), Options) ->
+		(	member(s(MaxShrinks), Options) ->
 			check(non_negative_integer, MaxShrinks, option_error(s(MaxShrinks)))
 		;	default_quick_check_option(s(MaxShrinks))
 		),
-		(	memberchk(ec(EdgeCases), Options) ->
+		(	member(ec(EdgeCases), Options) ->
 			check(boolean, EdgeCases, option_error(ec(EdgeCases)))
 		;	default_quick_check_option(ec(EdgeCases))
 		),
-		(	memberchk(pc(Condition), Options) ->
+		(	member(pc(Condition), Options) ->
 			check(callable, Condition, option_error(pc(Condition)))
 		;	default_quick_check_option(pc(Condition))
 		),
-		(	memberchk(l(Label), Options) ->
+		(	member(l(Label), Options) ->
 			check(callable, Label, option_error(l(Label)))
 		;	default_quick_check_option(l(Label))
 		),
-		(	memberchk(v(Verbose), Options) ->
+		(	member(v(Verbose), Options) ->
 			check(boolean, Verbose, option_error(v(Verbose)))
 		;	default_quick_check_option(v(Verbose))
 		),
-		(	memberchk(pb(ProgressBar, Tick), Options) ->
+		(	member(pb(ProgressBar, Tick), Options) ->
 			check(boolean, ProgressBar, option_error(pb(ProgressBar, Tick))),
 			check(positive_integer, Tick, option_error(pb(ProgressBar, Tick)))
 		;	default_quick_check_option(pb(ProgressBar, Tick))
