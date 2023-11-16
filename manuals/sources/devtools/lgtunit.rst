@@ -1407,7 +1407,8 @@ simplifying testing automation). I.e. we want to *mock* (as in
 *imitate*) the login procedure. Ideally, this should be accomplished
 without requiring any changes to the code being tested. Logtalk provides
 two solutions that can be used for mocking: *term-expansion* and *hot
-patching*.
+patching*. A third solution is possible if the code we want to mock uses
+the *message printing mechanism*.
 
 Using the term-expansion mechanism, we would define a *hook object* that
 expands the login predicate into a fact:
@@ -1471,6 +1472,12 @@ standards prevent patching callers to local predicates being patched.
 But often both solutions can be used with the choice depending on code
 clarity and user preference. See the Handbook sections on term-expansion
 and hot patching for more details on these mechanisms.
+
+In those cases where the code we want to mock uses the message printing
+mechanism, the solution is to intercept and rewrite the messages being
+printed and/or the questions being asked using the
+``logtalk::message_hook/4`` and ``logtalk::question_hook/6`` hook
+predicates.
 
 Debugging messages in tests
 ---------------------------

@@ -40,7 +40,7 @@ Prolog adapter and integration files
 built-in predicate introduced in an upcoming version.
 
 * UPDATED: The SWI-Prolog adapter file to load the `prolog_evaluable` library
-when available (provides the evaluable_property/2 predicate used by the
+when available (provides the `evaluable_property/2` predicate used by the
 linter).
 
 Library
