@@ -33,6 +33,8 @@ Logtalk compiler and runtime
 * ADDED: Linter warnings for Quintus Prolog predicate versions of arithmetic
 functions.
 
+* ADDED: Additional legacy built-in predicates for linter deprecated warnings.
+
 Prolog adapter and integration files
 ------------------------------------
 

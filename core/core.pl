@@ -23621,7 +23621,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_prolog_deprecated_built_in_predicate'(ttyskip(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(ttyput(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(ttytab(_)).
-% DEC-10 Prolog I/O predicates
+% DEC-10 Prolog and C-Prolog legacy predicates
+'$lgt_prolog_deprecated_built_in_predicate'(reconsult(_)).
+'$lgt_prolog_deprecated_built_in_predicate'(display(_)).
+'$lgt_prolog_deprecated_built_in_predicate'(unknown(_, _)).
+'$lgt_prolog_deprecated_built_in_predicate'(fileerrors).
+'$lgt_prolog_deprecated_built_in_predicate'(nofileerrors).
 '$lgt_prolog_deprecated_built_in_predicate'(see(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(tell(_)).
 '$lgt_prolog_deprecated_built_in_predicate'(append(_)).
