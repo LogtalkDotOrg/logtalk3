@@ -89,35 +89,35 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1:1:0,
-		date is 2017-02-15,
+		version is 1:1:1,
+		date is 2023-11-17,
 		author is 'Paulo Moura',
 		comment is 'Block stacks. A stack is represented by top-bottom tuples.'
 	]).
 
 	:- public(tuple/1).
-	:- mode(tuple(?pair(object_identifier)), zero_or_more).
+	:- mode(tuple(?pair(object_identifier,object_identifier)), zero_or_more).
 	:- info(tuple/1, [
 		comment is 'Returns a relation tuple.',
 		argnames is ['Tuple']
 	]).
 
 	:- public(tuples/1).
-	:- mode(tuples(-list(pair(object_identifier))), one).
+	:- mode(tuples(-list(pair(object_identifier,object_identifier))), one).
 	:- info(tuples/1, [
 		comment is 'Returns a list of all relation tuples.',
 		argnames is ['Tuples']
 	]).
 
 	:- public(add_tuple/1).
-	:- mode(add_tuple(+pair(object_identifier)), zero_or_one).
+	:- mode(add_tuple(+pair(object_identifier,object_identifier)), zero_or_one).
 	:- info(add_tuple/1, [
 		comment is 'Adds a new relation tuple.',
 		argnames is ['Tuple']
 	]).
 
 	:- public(remove_tuple/1).
-	:- mode(remove_tuple(?pair(object_identifier)), zero_or_more).
+	:- mode(remove_tuple(?pair(object_identifier,object_identifier)), zero_or_more).
 	:- info(remove_tuple/1, [
 		comment is 'Removes a matching relation tuple.',
 		argnames is ['Tuple']
