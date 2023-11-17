@@ -23,9 +23,9 @@
 	implements(pseudo_random_protocol)).
 
 	:- info([
-		version is 1:17:0,
+		version is 1:18:0,
 		author is 'Paulo Moura',
-		date is 2023-10-02,
+		date is 2023-11-17,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',
@@ -62,6 +62,18 @@
 	select(Current, Index, Random, [Head| Tail], [Head| Rest]) :-
 		Next is Current + 1,
 		select(Next, Index, Random, Tail, Rest).
+
+	select(Random, List, New, Rest) :-
+		length(List, Length),
+		random(Float),
+		Index is truncate(Float*Length+1),
+		select(1, Index, Random, List, New, Rest).
+
+	select(Index, Index, Random, [Random| Tail], New, [New| Tail]) :-
+		!.
+	select(Current, Index, Random, [Head| OldTail], New, [Head| NewTail]) :-
+		Next is Current + 1,
+		select(Next, Index, Random, OldTail, New, NewTail).
 
 	enumerate(List, Random) :-
 		permutation(List, Permutation),

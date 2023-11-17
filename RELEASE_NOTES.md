@@ -61,6 +61,10 @@ Library
 * ADDED: Library predicates `list::occurrences/2-3` to count the number of
 occurrences of list elements.
 
+* ADDED: Predicate `select/4` to the `random` library for returning a random
+member of a list, replacing it by a new element and returning the resulting
+list.
+
 * IMPROVED: Performance of the `reader` library predicates that read a file
 or a stream to a list of chars, codes, or bytes.
 

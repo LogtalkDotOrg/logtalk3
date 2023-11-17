@@ -23,9 +23,9 @@
 	implements(pseudo_random_protocol)).
 
 	:- info([
-		version is 2:8:1,
+		version is 2:9:0,
 		author is 'Paulo Moura',
-		date is 2023-02-08,
+		date is 2023-11-17,
 		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.',
@@ -108,6 +108,18 @@
 	select(Current, Index, Random, [Head| Tail], [Head| Rest]) :-
 		Next is Current + 1,
 		select(Next, Index, Random, Tail, Rest).
+
+	select(Random, List, New, Rest) :-
+		length(List, Length),
+		random(Float),
+		Index is truncate(Float*Length+1),
+		select(1, Index, Random, List, New, Rest).
+
+	select(Index, Index, Random, [Random| Tail], New, [New| Tail]) :-
+		!.
+	select(Current, Index, Random, [Head| OldTail], New, [Head| NewTail]) :-
+		Next is Current + 1,
+		select(Next, Index, Random, OldTail, New, NewTail).
 
 	enumerate(List, Random) :-
 		permutation(List, Permutation),

@@ -22,9 +22,9 @@
 :- protocol(random_protocol).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2021-02-21,
+		date is 2023-11-17,
 		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		see_also is [random, backend_random, fast_random]
 	]).
@@ -55,6 +55,13 @@
 	:- info(select/3, [
 		comment is 'Returns a random member of a list and the rest of the list. Fails if the list is empty.',
 		argnames is ['Random', 'List', 'Rest']
+	]).
+
+	:- public(select/4).
+	:- mode(select(-term, +list(term), @term, -list(term)), zero_or_one).
+	:- info(select/4, [
+		comment is 'Returns a random member of a list, replacing it with a new element and returning the resulting list.',
+		argnames is ['Random', 'OldList', 'New', 'NewList']
 	]).
 
 	:- public(enumerate/2).
