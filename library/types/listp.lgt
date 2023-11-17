@@ -22,9 +22,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1:16:0,
+		version is 1:17:0,
 		author is 'Paulo Moura',
-		date is 2022-09-19,
+		date is 2023-11-17,
 		comment is 'List protocol.',
 		see_also is [list, list(_), numberlistp, varlistp]
 	]).
@@ -175,6 +175,21 @@
 	:- info(nth1/4, [
 		comment is 'Nth element of a list (counting from one). ``Rest`` is a list of all the other elements. Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
 		argnames is ['Nth', 'List', 'Element', 'Rest']
+	]).
+
+	:- public(occurrences/2).
+	:- mode(occurrences(@list, -list(pair(term,positive_integer))), one).
+	:- info(occurrences/2, [
+		comment is 'Counts the number of occurrences of each ``List`` element, unifying ``Occurrences`` with a sorted list of ``Element-Count`` pairs. Uses term equality for element comparison.',
+		argnames is ['List', 'Occurrences']
+	]).
+
+	:- public(occurrences/3).
+	:- meta_predicate(occurrences(*, 2, *)).
+	:- mode(occurrences(@list, @callable, -list(pair(term,positive_integer))), one).
+	:- info(occurrences/3, [
+		comment is 'Counts the number of occurrences of each ``List`` element, unifying ``Occurrences`` with a sorted list of ``Element-Count`` pairs. Uses ``Closure`` for element comparison.',
+		argnames is ['List', 'Closure', 'Occurrences']
 	]).
 
 	:- public(partition/5).

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2022-12-13,
+		date is 2023-11-17,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -120,6 +120,18 @@
 
 	test(integer_sequence_4_06, true(Sequence == [-100,-90,-80,-70,-60,-50,-40,-30,-20,-10])) :-
 		integer::sequence(-100, -10, 10, Sequence).
+
+	test(list_occurrences_2_01, true(Counts == [a(1)-2,b(2)-2,c(8)-1,c(9)-1,d(4)-1,e(5)-1])) :-
+		list::occurrences([a(1),b(2),d(4),e(5),a(1),b(2),c(8),c(9)], Counts).
+
+	test(list_occurrences_2_02, variant(Counts, [a(_)-1, a(_)-1, b(_)-1])) :-
+		list::occurrences([a(_), b(_), a(_)], Counts).
+
+	test(list_occurrences_3_01, variant(Counts, [a(_)-1, a(_)-1, b(_)-1])) :-
+		list::occurrences([a(_), b(_), a(_)], (==), Counts).
+
+	test(list_occurrences_3_02, variant(Counts, [a(_)-2, b(_)-1])) :-
+		list::occurrences([a(_), b(_), a(_)], (=), Counts).
 
 	test(list_sort_4_01, true(Sorted == [1,2,3])) :-
 		list::sort(0, @<, [3,2,1], Sorted).

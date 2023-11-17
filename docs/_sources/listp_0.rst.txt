@@ -14,8 +14,8 @@ List protocol.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:16:0
-| **Date:** 2022-09-19
+| **Version:** 1:17:0
+| **Date:** 2023-11-17
 
 | **Compilation flags:**
 |    ``static``
@@ -435,6 +435,46 @@ Nth element of a list (counting from one). ``Rest`` is a list of all the other e
 |    ``nth1(Nth,List,Element,Rest)``
 | **Mode and number of proofs:**
 |    ``nth1(?integer,?list,?term,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: occurrences/2
+.. _listp/0::occurrences/2:
+
+``occurrences/2``
+^^^^^^^^^^^^^^^^^
+
+Counts the number of occurrences of each ``List`` element, unifying ``Occurrences`` with a sorted list of ``Element-Count`` pairs. Uses term equality for element comparison.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``occurrences(List,Occurrences)``
+| **Mode and number of proofs:**
+|    ``occurrences(@list,-list(pair(term,positive_integer)))`` - ``one``
+
+
+------------
+
+.. index:: occurrences/3
+.. _listp/0::occurrences/3:
+
+``occurrences/3``
+^^^^^^^^^^^^^^^^^
+
+Counts the number of occurrences of each ``List`` element, unifying ``Occurrences`` with a sorted list of ``Element-Count`` pairs. Uses ``Closure`` for element comparison.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``occurrences(List,Closure,Occurrences)``
+| **Meta-predicate template:**
+|    ``occurrences(*,2,*)``
+| **Mode and number of proofs:**
+|    ``occurrences(@list,@callable,-list(pair(term,positive_integer)))`` - ``one``
 
 
 ------------

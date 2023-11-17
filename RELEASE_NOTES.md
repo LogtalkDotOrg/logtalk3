@@ -58,6 +58,9 @@ Library
 
 * ADDED: New `tsv` library for reading and writing TSV files.
 
+* ADDED: Library predicates `list::occurrences/2-3` to count the number of
+occurrences of list elements.
+
 * IMPROVED: Performance of the `reader` library predicates that read a file
 or a stream to a list of chars, codes, or bytes.
 
