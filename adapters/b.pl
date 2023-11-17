@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 8.1 and later versions
-%  Last updated on October 31, 2023
+%  Last updated on November 17, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -203,6 +203,24 @@ findall(Term, Goal, List, Tail) :-
 % compiler when checking if a predicate property is valid
 
 '$lgt_prolog_predicate_property'(_) :-
+	fail.
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable, ?callable)
+%
+% table of proprietary deprecated built-in predicates
+% when there's a Prolog system advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_, _) :-
+	fail.
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable)
+%
+% table of proprietary deprecated built-in predicates without
+% a direct advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_) :-
 	fail.
 
 

@@ -3534,7 +3534,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 73, 0, b01)).
+'$lgt_version_data'(logtalk(3, 73, 0, b02)).
 
 
 
@@ -16490,7 +16490,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % call to a deprecated Prolog built-in predicate
 
 '$lgt_compile_body'(Pred, Caller, TPred, DPred, Ctx) :-
-	'$lgt_prolog_deprecated_built_in_predicate'(Pred, RPred),
+	(	'$lgt_prolog_deprecated_built_in_predicate_hook'(Pred, RPred) ->
+		true
+	;	'$lgt_prolog_deprecated_built_in_predicate'(Pred, RPred)
+	),
 	'$lgt_prolog_built_in_predicate'(Pred),
 	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
 	!,
@@ -16511,7 +16514,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_compile_body'(Pred, _, _, _, Ctx) :-
-	'$lgt_prolog_deprecated_built_in_predicate'(Pred),
+	(	'$lgt_prolog_deprecated_built_in_predicate_hook'(Pred) ->
+		true
+	;	'$lgt_prolog_deprecated_built_in_predicate'(Pred)
+	),
 	'$lgt_prolog_built_in_predicate'(Pred),
 	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
 	% no standard alternative; just print a warning

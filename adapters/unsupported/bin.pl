@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on October 31, 2023
+%  Last updated on November 17, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -235,6 +235,24 @@ write_term(Stream, Term, _) :-
 % compiler when checking if a predicate property is valid
 
 '$lgt_prolog_predicate_property'(_) :-
+	fail.
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable, ?callable)
+%
+% table of proprietary deprecated built-in predicates
+% when there's a Prolog system advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_, _) :-
+	fail.
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable)
+%
+% table of proprietary deprecated built-in predicates without
+% a direct advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_) :-
 	fail.
 
 

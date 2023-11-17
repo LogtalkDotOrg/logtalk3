@@ -35,8 +35,14 @@ functions.
 
 * ADDED: Additional legacy built-in predicates for linter deprecated warnings.
 
+* ADDED: Support for using backend-declared deprecated built-in predicates in
+linter warnings.
+
 Prolog adapter and integration files
 ------------------------------------
+
+* ADDED: Support for declaring deprecated built-in predicates (with or without
+advised alternatives).
 
 * UPDATED: The LVM adapter file to prevent a clash with the `term_hash/4`
 built-in predicate introduced in an upcoming version.
