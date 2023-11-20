@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-11-15,
+		date is 2023-11-20,
 		comment is 'TSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``skip`` and ``keep`` (default).'
@@ -328,7 +328,7 @@
 	:- endif.
 	write_data([Next| Fields], Field, Stream) :-
 		write(Stream, Field),
-		put_code(Stream, '\t'),
+		put_char(Stream, '\t'),
 		write_data(Fields, Next, Stream).
 
 	ensure_bound_options :-
