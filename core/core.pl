@@ -3534,7 +3534,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 73, 0, b02)).
+'$lgt_version_data'(logtalk(3, 73, 0, b03)).
 
 
 
@@ -22522,8 +22522,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_unknown_predicate_call_aux'(warning, Functor/Arity, Lines) :-
 	% we may be compiling an auxiliary clause and thus unable
 	% to use the '$lgt_source_file_context'/4 predicate
-	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
-	'$lgt_pp_entity_'(Type, Entity, _),
+	(	'$lgt_source_file_context'(File, Lines, Type, Entity) ->
+		true
+	;	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
+		'$lgt_pp_entity_'(Type, Entity, _)
+	),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
 		'$lgt_print_message'(
@@ -22560,8 +22563,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_undefined_predicate_call_aux'(warning, Functor/Arity, Lines) :-
 	% we may be compiling an auxiliary clause and thus unable
 	% to use the '$lgt_source_file_context'/4 predicate
-	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
-	'$lgt_pp_entity_'(Type, Entity, _),
+	(	'$lgt_source_file_context'(File, Lines, Type, Entity) ->
+		true
+	;	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
+		'$lgt_pp_entity_'(Type, Entity, _)
+	),
 	'$lgt_increment_compiling_warnings_counter',
 	(	'$lgt_pp_calls_non_terminal_'(Functor, Arity2, Arity, _) ->
 		'$lgt_print_message'(

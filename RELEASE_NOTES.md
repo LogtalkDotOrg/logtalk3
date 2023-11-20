@@ -38,6 +38,9 @@ functions.
 * ADDED: Support for using backend-declared deprecated built-in predicates in
 linter warnings.
 
+* FIXED: Unknown and undefined predicate call warnings when the calls occur in
+an included file to report the actual location instead of the main file.
+
 Prolog adapter and integration files
 ------------------------------------
 
