@@ -92,7 +92,7 @@ by a backend bug.
 Examples
 --------
 
-* ADDED: tests to the `self_vs_this` example.
+* ADDED: Tests to the `poem` and `self_vs_this` examples.
 
 * UPDATED: The `errors` example for the new arithmetic function linter
 warnings.
