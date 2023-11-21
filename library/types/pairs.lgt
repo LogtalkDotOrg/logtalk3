@@ -22,8 +22,8 @@
 :- object(pairs).
 
 	:- info([
-		version is 2:1:0,
-		date is 2022-12-13,
+		version is 2:1:1,
+		date is 2023-11-21,
 		author is 'Paulo Moura',
 		comment is 'Useful predicates over lists of pairs (key-value terms).',
 		remarks is [
@@ -33,9 +33,9 @@
 
 	:- public(keys_values/3).
 	:- mode(keys_values(+list(pair), -list, -list), one).
-	:- mode(keys_values(-list(pair), +list, +list), one).
+	:- mode(keys_values(-list(pair), +list, +list), zero_or_one).
 	:- info(keys_values/3, [
-		comment is 'Converts between a list of pairs and lists of keys and values.',
+		comment is 'Converts between a list of pairs and lists of keys and values. When converting to pairs, this predicate fails if the list of keys and the list of values have different lengths.',
 		argnames is ['Pairs', 'Keys', 'Values']
 	]).
 

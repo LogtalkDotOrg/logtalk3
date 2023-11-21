@@ -223,8 +223,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:1:0</div>
-<div class="line"><strong>Date:</strong> 2022-12-13</div>
+<div class="line"><strong>Version:</strong> 2:1:1</div>
+<div class="line"><strong>Date:</strong> 2023-11-21</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -277,7 +277,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="keys-values-3">
 <span id="pairs-0-keys-values-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">keys_values/3</span></code></a><a class="headerlink" href="#keys-values-3" title="Link to this heading"></a></h3>
-<p>Converts between a list of pairs and lists of keys and values.</p>
+<p>Converts between a list of pairs and lists of keys and values. When converting to pairs, this predicate fails if the list of keys and the list of values have different lengths.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -292,7 +292,7 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">keys_values(+list(pair),-list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">keys_values(-list(pair),+list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">keys_values(-list(pair),+list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

@@ -14,8 +14,8 @@ Useful predicates over lists of pairs (key-value terms).
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:1:0
-| **Date:** 2022-12-13
+| **Version:** 2:1:1
+| **Date:** 2023-11-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -45,7 +45,7 @@ Public predicates
 ``keys_values/3``
 ^^^^^^^^^^^^^^^^^
 
-Converts between a list of pairs and lists of keys and values.
+Converts between a list of pairs and lists of keys and values. When converting to pairs, this predicate fails if the list of keys and the list of values have different lengths.
 
 | **Compilation flags:**
 |    ``static``
@@ -54,7 +54,7 @@ Converts between a list of pairs and lists of keys and values.
 |    ``keys_values(Pairs,Keys,Values)``
 | **Mode and number of proofs:**
 |    ``keys_values(+list(pair),-list,-list)`` - ``one``
-|    ``keys_values(-list(pair),+list,+list)`` - ``one``
+|    ``keys_values(-list(pair),+list,+list)`` - ``zero_or_one``
 
 
 ------------

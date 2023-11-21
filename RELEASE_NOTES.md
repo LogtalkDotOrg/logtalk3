@@ -76,6 +76,8 @@ or a stream to a list of chars, codes, or bytes.
 * UPDATED: The `csv` library to also recognize `.tab` file extension for TSV
 files.
 
+* FIXED: The documentation of the `pairs::keys_values/3` library predicate.
+
 Tools
 --------
 
@@ -83,9 +85,9 @@ Tools
 
 * UPDATED: The `tutor` tool for the new arithmetic function linter warnings.
 
-* FIXED: The `logtalk_tester.*` scripts to detect and report as broken test
-sets where the tests failed to run due to an unexpected loading error likely
-caused by a backend bug.
+* FIXED: The `logtalk_tester` scripts to detect and report as broken test sets
+where the tests failed to run due to an unexpected loading error likely caused
+by a backend bug.
 
 Examples
 --------
