@@ -41,6 +41,9 @@ linter warnings.
 * FIXED: Unknown and undefined predicate call warnings when the calls occur in
 an included file to report the actual location instead of the main file.
 
+* FIXED: Only print linter warnings related to grammar rules when the flag
+`grammar_rules` is set to `warning`.
+
 Prolog adapter and integration files
 ------------------------------------
 

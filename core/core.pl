@@ -3534,7 +3534,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 73, 0, b03)).
+'$lgt_version_data'(logtalk(3, 73, 0, b04)).
 
 
 
@@ -16342,6 +16342,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Pred, Functor, ExtArity),
 	'$lgt_pp_defines_non_terminal_'(Functor, Arity, ExtArity),
 	\+ '$lgt_pp_calls_non_terminal_'(Functor, Arity, ExtArity, Lines),
+	'$lgt_compiler_flag'(grammar_rules, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
@@ -22647,6 +22648,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % reports calls to predicates as non-terminals from grammar rules
 
 '$lgt_report_predicates_called_as_non_terminals'(protocol, _) :-
+	!.
+
+'$lgt_report_predicates_called_as_non_terminals'(_, _) :-
+	'$lgt_compiler_flag'(grammar_rules, silent),
 	!.
 
 '$lgt_report_predicates_called_as_non_terminals'(Type, Entity) :-
