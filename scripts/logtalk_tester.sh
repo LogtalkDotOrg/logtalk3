@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 2, 2023
+##   Last updated on November 21, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 set -o pipefail
 
 print_version() {
-	echo "$(basename "$0") 16.0"
+	echo "$(basename "$0") 17.0"
 	exit 0
 }
 
@@ -232,7 +232,10 @@ run_tests() {
 		fi
 	fi
 	exit=$?
-	if [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q -s "^object" "$results/$name.totals" && ! grep -q "tests skipped" "$results/$name.results"; then
+	if grep -q "Likely bug in the backend Prolog compiler. Please file a bug report." "$results/$name.errors"; then
+		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
+		return 5
+	elif [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q -s "^object" "$results/$name.totals" && ! grep -q "tests skipped" "$results/$name.results"; then
 		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
 		return 5
 	fi
