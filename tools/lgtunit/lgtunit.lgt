@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:6:1,
+		version is 16:6:2,
 		author is 'Paulo Moura',
-		date is 2023-11-15,
+		date is 2023-11-21,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1217,7 +1217,7 @@
 		::failed_(Failed, FailedTime),
 		::flaky_(Flaky),
 		Total is Skipped + Passed + Failed,
-		Time is PassedTime + FailedTime,
+		Time is float(PassedTime + FailedTime),
 		::note(Note),
 		print_message(information, lgtunit, tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note)),
 		print_message(information, lgtunit, tests_runtime(Object, Time)),
