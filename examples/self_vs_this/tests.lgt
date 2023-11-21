@@ -25,9 +25,17 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2020-02-12,
+		date is 2023-11-21,
 		comment is 'Unit tests for the "self_vs_this" example.'
 	]).
 
+	test(self_vs_this_01, true(ctx(Self,This,Sender) == ctx(aircraft,thing,tests))) :-
+		aircraft::context(Self, This, Sender).
+
+	test(self_vs_this_02, true(ctx(Self,This,Sender) == ctx(transport,thing,tests))) :-
+		transport::context(Self, This, Sender).
+
+	test(self_vs_this_03, true(ctx(Self,This,Sender) == ctx(thing,thing,tests))) :-
+		thing::context(Self, This, Sender).
 
 :- end_object.

@@ -92,6 +92,8 @@ by a backend bug.
 Examples
 --------
 
+* ADDED: tests to the `self_vs_this` example.
+
 * UPDATED: The `errors` example for the new arithmetic function linter
 warnings.
 
