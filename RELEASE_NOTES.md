@@ -81,6 +81,9 @@ files.
 
 * FIXED: The documentation of the `pairs::keys_values/3` library predicate.
 
+* FIXED: The `os` library tests calls to the `shell/1` predicate from auxiliary
+predicates.
+
 Tools
 --------
 

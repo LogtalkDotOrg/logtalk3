@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:35:0,
+		version is 0:35:1,
 		author is 'Paulo Moura',
-		date is 2023-08-05,
+		date is 2023-11-22,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -626,12 +626,12 @@
 
 	only_linux_and_bsd_systems :-
 		\+ os::operating_system_type(windows),
-		\+ shell('uname -s | grep -q Darwin').
+		\+ os::shell('uname -s | grep -q Darwin').
 
 	only_posix_systems :-
 		os::operating_system_type(unix).
 
 	only_mac_systems :-
-		shell('uname -s | grep -q Darwin').
+		os::shell('uname -s | grep -q Darwin').
 
 :- end_object.
