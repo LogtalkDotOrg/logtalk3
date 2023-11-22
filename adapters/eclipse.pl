@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on November 17, 2023
+%  Last updated on November 23, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -1085,9 +1085,11 @@ forall(Generate, Test) :-
 %
 % succeeds when Module defines Predicate
 
+'$lgt_current_module_predicate'(user, Predicate) :-
+	!,
+	current_module_predicate(defined, Predicate)@user.
 '$lgt_current_module_predicate'(Module, Predicate) :-
-	% avoid errors on locked modules
-	catch(current_predicate(Predicate)@Module, _, fail).
+	current_module_predicate(exported_reexported, Predicate)@Module.
 
 
 

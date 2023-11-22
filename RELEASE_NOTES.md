@@ -54,6 +54,9 @@ Prolog adapter and integration files
 * ADDED: Support for declaring deprecated built-in predicates (with or without
 advised alternatives) in the adapter files.
 
+* IMPROVED: ECLiPSe definition of the `'$lgt_current_module_predicate'/2`
+internal predicate.
+
 * UPDATED: The LVM adapter file to prevent a clash with the `term_hash/4`
 built-in predicate introduced in an upcoming version.
 
