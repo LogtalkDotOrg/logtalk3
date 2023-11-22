@@ -94,10 +94,10 @@ intersect_vars(V1,V2,Out) :-
 	intersect_sorted_vars(Sorted1,Sorted2,Out).
 
 make_dummy_name(N,Name) :-
-	name('_dummy_',L1),
-	name(N,L2),
+	atom_codes('_dummy_',L1),
+	number_codes(N,L2),
 	my_append(L1,L2,L),
-	name(Name,L).
+	atom_codes(Name,L).
 
 my_append([], L, L).
 my_append([H|L1], L2, [H|Res]) :- my_append(L1, L2, Res).
@@ -150,7 +150,7 @@ inst_vars(Term) :-
 
 inst_vars_list([], _).
 inst_vars_list([T|L], N) :-
-	name(T, [N]),
+	char_code(T, N),
 	N1 is N+1,
 	inst_vars_list(L, N1).
 

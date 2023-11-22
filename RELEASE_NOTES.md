@@ -100,6 +100,9 @@ Examples
 * UPDATED: The `errors` example for the new arithmetic function linter
 warnings.
 
+* UPDATED: The `bench` example to remove dependency on the deprecated `name/2`
+built-in predicate and eliminate all linter warnings.
+
 Installers and installation scripts
 -----------------------------------
 

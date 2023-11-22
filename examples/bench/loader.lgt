@@ -27,6 +27,7 @@
 		crypt,
 		derive,
 		divide10,
+		flatten,
 		log10,
 		meta_qsort,
 		mu,
@@ -76,19 +77,6 @@
 		], [
 			optimize(on),
 			singleton_variables(silent)
-		])
-	).
-
-:- endif.
-
-
-:- if(predicate_property(name(_,_), built_in)).
-
-	:- initialization(
-		logtalk_load([
-			flatten
-		], [
-			optimize(on)
 		])
 	).
 

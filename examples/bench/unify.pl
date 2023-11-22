@@ -11,7 +11,9 @@
 top :- main(X).
 %, write(X), nl.
 
-main(Size) :- u(X, [1,Y], [X], Code), size(Code, 0, Size).
+% PM: rewritten to use phrase/3
+%     the Start variable allows bypassing phrase/3 type-checking
+main(Size) :- u(X, [1,Y], [X], Code), Start = 0, phrase(size(Code), Start, Size).
 
 % Unify variable X with term T and write the result:
 u(X, T, In, Code) :- phrase(unify(X, T, In, _), Code).
