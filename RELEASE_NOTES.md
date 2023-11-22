@@ -38,6 +38,10 @@ functions.
 * ADDED: Support for using backend-declared deprecated built-in predicates in
 linter warnings.
 
+* IMPROVED: When checking the availability of predicates in `user` for `uses/2`
+and `use_module/2` directives, also check for an `imported_from/1` predicate
+property.
+
 * FIXED: Unknown and undefined predicate call warnings when the calls occur in
 an included file to report the actual location instead of the main file.
 

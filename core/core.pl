@@ -3534,7 +3534,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 73, 0, b04)).
+'$lgt_version_data'(logtalk(3, 73, 0, b05)).
 
 
 
@@ -20344,6 +20344,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Obj == user,
 		(	'$lgt_predicate_property'(Pred, built_in)
 		;	catch('$lgt_predicate_property'(Pred, foreign), _, fail)
+		;	catch('$lgt_predicate_property'(Pred, imported_from(_)), _, fail)
 		;	'$lgt_pp_directive_'(dynamic(Functor/Arity))
 		;	'$lgt_pp_directive_'(multifile(Functor/Arity))
 		) ->
@@ -20363,6 +20364,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Module == user,
 		(	'$lgt_predicate_property'(Pred, built_in)
 		;	catch('$lgt_predicate_property'(Pred, foreign), _, fail)
+		;	catch('$lgt_predicate_property'(Pred, imported_from(_)), _, fail)
 		;	'$lgt_pp_directive_'(dynamic(Functor/Arity))
 		;	'$lgt_pp_directive_'(multifile(Functor/Arity))
 		) ->
