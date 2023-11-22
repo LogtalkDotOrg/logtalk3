@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:35:1,
+		version is 0:35:2,
 		author is 'Paulo Moura',
 		date is 2023-11-22,
 		comment is 'Unit tests for the "os" library.'
@@ -116,7 +116,7 @@
 		os::internal_os_path(InternalPath, '/foo/bar/baz'),
 		os::internal_os_path(InternalPath, OSPath).
 
-	test(os_internal_os_path_2_02, true((OSPath == 'C:\\foo\\bar\\baz'; OSPath == 'c:\\foo\\bar\\baz')), [condition(os::operating_system_type(windows))]) :-
+	test(os_internal_os_path_2_02, true((OSPath == 'C:\\foo\\bar\\baz'; OSPath == 'c:\\foo\\bar\\baz')), [condition(only_windows_systems)]) :-
 		% some backends don't preserve case, which may depend on the Windows file system in use
 		os::internal_os_path(InternalPath, 'C:\\foo\\bar\\baz'),
 		os::internal_os_path(InternalPath, OSPath).
@@ -633,5 +633,8 @@
 
 	only_mac_systems :-
 		os::shell('uname -s | grep -q Darwin').
+
+	only_windows_systems :-
+		os::operating_system_type(windows).
 
 :- end_object.
