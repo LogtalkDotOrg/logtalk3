@@ -24,10 +24,24 @@
 	imports(monitor)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2006-12-14,
+		date is 2023-11-22,
 		comment is 'Message counter monitor.'
+	]).
+
+	:- public(counts/3).
+	:- mode(counts(?object_identifier, ?non_negative_integer, ?non_negative_integer), zero_or_more).
+	:- info(counts/3, [
+		comment is 'Returns current calls and exits message counts for an object. Used for testing.',
+		argnames is ['Object', 'Calls', 'Exits']
+	]).
+
+	:- public(counts/4).
+	:- mode(counts(?object_identifier, ?predicate_indicator, ?non_negative_integer, ?non_negative_integer), zero_or_more).
+	:- info(counts/4, [
+		comment is 'Returns current calls and exits message counts for an object predicate. Used for testing.',
+		argnames is ['Object', 'Predicate', 'Calls', 'Exits']
 	]).
 
 	:- public(report/0).
@@ -58,22 +72,36 @@
 	:- dynamic(exits/3).
 	:- mode(exits(?object, ?predicate_indicator,?integer), zero_or_more).
 
+	counts(Object, Calls, Exits) :-
+		calls(Object, Calls),
+		(	exits(Object, Exits) ->
+			true
+		;	Exits = 0
+		).
+
+	counts(Object, Predicate, Calls, Exits) :-
+		calls(Object, Predicate, Calls),
+		(	exits(Object, Predicate, Exits) ->
+			true
+		;	Exits = 0
+		).
+
 	report :-
 		forall(
-			::calls(Object, Calls),
+			calls(Object, Calls),
 			(	writeq(Object), nl,
 				write('  total of calls: '), write(Calls), nl,
 				write('  total of exits: '),
-				(	::exits(Object, Exits) ->
+				(	exits(Object, Exits) ->
 					write(Exits), nl, nl
 				;	write(0), nl, nl
 				),
 				forall(
-					::calls(Object, Functor/Arity, Calls2),
+					calls(Object, Functor/Arity, Calls2),
 					(	write('  '), writeq(Functor/Arity), nl,
 						write('    calls: '), write(Calls2), nl,
 						write('    exits: '),
-						(	::exits(Object, Functor/Arity, Exits2) ->
+						(	exits(Object, Functor/Arity, Exits2) ->
 							write(Exits2), nl, nl
 						;	write(0), nl, nl
 						)
@@ -83,36 +111,36 @@
 		).
 
 	stop :-
-		::retractall(calls(_, _)),
-		::retractall(exits(_, _)),
-		::retractall(calls(_, _, _)),
-		::retractall(exits(_, _, _)),
-		::reset_monitor.
+		retractall(calls(_, _)),
+		retractall(exits(_, _)),
+		retractall(calls(_, _, _)),
+		retractall(exits(_, _, _)),
+		^^reset_monitor.
 
 	before(Object, Message, _) :-
-		(	::retract(calls(Object, Old)) ->
+		(	retract(calls(Object, Old)) ->
 			New is Old + 1
 		;	New = 1
 		),
-		::assertz(calls(Object, New)),
+		assertz(calls(Object, New)),
 		functor(Message, Functor, Arity),
-		(	::retract(calls(Object, Functor/Arity, Old2)) ->
+		(	retract(calls(Object, Functor/Arity, Old2)) ->
 			New2 is Old2 + 1
 		;	New2 = 1
 		),
-		::assertz(calls(Object, Functor/Arity, New2)).
+		assertz(calls(Object, Functor/Arity, New2)).
 
 	after(Object, Message, _) :-
-		(	::retract(exits(Object, Old)) ->
+		(	retract(exits(Object, Old)) ->
 			New is Old + 1
 		;	New = 1
 		),
-		::assertz(exits(Object, New)),
+		assertz(exits(Object, New)),
 		functor(Message, Functor, Arity),
-		(	::retract(exits(Object, Functor/Arity, Old2)) ->
+		(	retract(exits(Object, Functor/Arity, Old2)) ->
 			New2 is Old2 + 1
 		;	New2 = 1
 		),
-		::assertz(exits(Object, Functor/Arity, New2)).
+		assertz(exits(Object, Functor/Arity, New2)).
 
 :- end_object.
