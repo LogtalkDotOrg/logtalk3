@@ -98,6 +98,8 @@ Tools
 
 * UPDATED: The `tutor` tool for the new arithmetic function linter warnings.
 
+* FIXED: The `debugger` tool checking for a deterministic goal for CxProlog.
+
 * FIXED: The `lgtunit` tool definition of the `deterministic/1-2` predicates
 for CxProlog.
 
