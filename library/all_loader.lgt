@@ -71,6 +71,7 @@
 		html(loader),
 		format(loader),
 		union_find(loader),
+		mutations(loader),
 		cloning,
 		counters,
 		streamvars

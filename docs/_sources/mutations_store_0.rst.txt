@@ -1,0 +1,136 @@
+.. index:: mutations_store
+.. _mutations_store/0:
+
+.. rst-class:: right
+
+**object**
+
+``mutations_store``
+===================
+
+Stores mutation definitions for selected types. User extensible by defining objects or categories defining clauses for the ``mutation/3`` predicate and using this object as a hook object for their compilation.
+
+| **Availability:** 
+|    ``logtalk_load(mutations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2023-11-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`expanding <expanding/0>`
+| **Uses:**
+|    :ref:`fast_random <fast_random/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`expanding/0::goal_expansion/2`  :ref:`expanding/0::term_expansion/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: mutation/3
+.. _mutations_store/0::mutation/3:
+
+``mutation/3``
+^^^^^^^^^^^^^^
+
+Returns a random mutation of a term into another term of the same type. The input ``Term`` is assumed to be valid for the given ``Type``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mutation(Type,Term,Mutation)``
+| **Mode and number of proofs:**
+|    ``mutation(@callable,@term,-term)`` - ``one``
+
+
+------------
+
+.. index:: counter/2
+.. _mutations_store/0::counter/2:
+
+``counter/2``
+^^^^^^^^^^^^^
+
+Table of the number of mutations available per type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``counter(Type,N)``
+| **Mode and number of proofs:**
+|    ``counter(?callable,?positive_integer)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: mutation/4
+.. _mutations_store/0::mutation/4:
+
+``mutation/4``
+^^^^^^^^^^^^^^
+
+Returns a random mutation of a term into another term of the same type using mutator ``N``. The input ``Term`` is assume to be valid for the given ``Type``.
+
+| **Compilation flags:**
+|    ``static, multifile``
+
+| **Template:**
+|    ``mutation(Type,N,Term,Mutation)``
+| **Mode and number of proofs:**
+|    ``mutation(?callable,?positive_integer,@term,-term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: counter_/2
+.. _mutations_store/0::counter_/2:
+
+``counter_/2``
+^^^^^^^^^^^^^^
+
+Internal counter for the number of mutations available for a given type.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``counter_(Type,N)``
+| **Mode and number of proofs:**
+|    ``counter_(?callable,?positive_integer)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`type <type/0>`
+

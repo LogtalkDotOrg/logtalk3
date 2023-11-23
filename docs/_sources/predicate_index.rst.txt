@@ -1363,6 +1363,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`counters <counters/0::counter/2>`
+* :ref:`mutations_store <mutations_store/0::counter/2>`
 
 ``cover/1``
 -----------
@@ -5551,6 +5552,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::msort/3>`
+
+``mutation/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mutations <mutations/0::mutation/3>`
+* :ref:`mutations_store <mutations_store/0::mutation/3>`
 
 ``name/1``
 ----------

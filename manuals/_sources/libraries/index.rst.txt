@@ -62,6 +62,7 @@ directory in the ``NOTES.md`` file.
    loops
    meta
    meta_compiler
+   mutations
    nested_dictionaries
    optionals
    options

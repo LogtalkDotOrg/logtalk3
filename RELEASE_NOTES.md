@@ -71,6 +71,9 @@ Library
 
 * REMOVED: The `tsv` object from the `csv` library.
 
+* ADDED: Experimental `mutations` library for generating random mutations of
+terms of selected types. Intended for eventual fuzz testing support.
+
 * ADDED: New `tsv` library for reading and writing TSV files.
 
 * ADDED: Library predicates `list::occurrences/2-3` to count the number of
