@@ -98,6 +98,9 @@ Tools
 
 * UPDATED: The `tutor` tool for the new arithmetic function linter warnings.
 
+* FIXED: The `lgtunit` tool definition of the `deterministic/1-2` predicates
+for CxProlog.
+
 * FIXED: The `logtalk_tester` scripts to detect and report as broken test sets
 where the tests failed to run due to an unexpected loading error likely caused
 by a backend bug.

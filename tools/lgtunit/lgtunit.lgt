@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:6:2,
+		version is 16:6:3,
 		author is 'Paulo Moura',
-		date is 2023-11-21,
+		date is 2023-11-23,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1833,7 +1833,7 @@
 
 	:- elif((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == cx; Dialect == ji; Dialect == sicstus; Dialect == xsb)
+		(Dialect == ji; Dialect == sicstus; Dialect == xsb)
 	)).
 
 		% avoid portability warnings
@@ -1868,6 +1868,19 @@
 
 		deterministic(Goal, Deterministic) :-
 			call_det(Goal, Deterministic),
+			!.
+
+	:- elif(current_logtalk_flag(prolog_dialect, cx)).
+
+		deterministic(Goal) :-
+			call(Goal),
+			{deterministic(Deterministic)},
+			!,
+			Deterministic == true.
+
+		deterministic(Goal, Deterministic) :-
+			call(Goal),
+			{deterministic(Deterministic)},
 			!.
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
