@@ -57,6 +57,8 @@ advised alternatives) in the adapter files.
 * IMPROVED: ECLiPSe definition of the `'$lgt_current_module_predicate'/2`
 internal predicate.
 
+* UPDATED: The CxProlog adapter file to require version 0.98.2 or later.
+
 * UPDATED: The LVM adapter file to prevent a clash with the `term_hash/4`
 built-in predicate introduced in an upcoming version.
 

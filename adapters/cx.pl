@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for CxProlog 0.98.1 or a later version
-%  Last updated on November 17, 2023
+%  Adapter file for CxProlog 0.98.2 or a later version
+%  Last updated on November 23, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -248,7 +248,7 @@ setup_call_cleanup(Setup, Call, Cleanup) :-
 '$lgt_prolog_feature'(prolog_dialect, cx).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	catch(current_prolog_flag(version_data, cxprolog(Major, Minor, Patch, _)), _, fail).
-'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(0,98,1))).
+'$lgt_prolog_feature'(prolog_compatible_version, @>=(v(0,98,2))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
