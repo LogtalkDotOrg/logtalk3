@@ -79,9 +79,10 @@ terms of selected types. Intended for eventual fuzz testing support.
 * ADDED: Library predicates `list::occurrences/2-3` to count the number of
 occurrences of list elements.
 
-* ADDED: Predicate `select/4` to the `random` library for returning a random
-member of a list, replacing it by a new element and returning the resulting
-list.
+* ADDED: Predicates `select/4` and `swap_consecutive/2` to the `random`
+library for returning a random member of a list, replacing it by a new
+element and returning the resulting list, and for swapping randomly chosen
+consecutive elements of a list.
 
 * IMPROVED: Performance of the `reader` library predicates that read a file
 or a stream to a list of chars, codes, or bytes.

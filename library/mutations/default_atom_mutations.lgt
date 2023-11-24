@@ -24,7 +24,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2023-11-23,
+		date is 2023-11-24,
 		comment is 'Default atom mutations.',
 		see_also is [type]
 	]).
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(fast_random, [
-		between/3, permutation/2, random/1, select/3, select/4
+		permutation/2, random/1, select/3, select/4, swap_consecutive/2
 	]).
 
 	% deletion of a random character
@@ -60,7 +60,7 @@
 	% exchanging two consecutive characters
 	mutation(atom, Atom, Mutation) :-
 		atom_codes(Atom, Codes),
-		exchange_two_consecutive_elements(Codes, MutationCodes),
+		swap_consecutive(Codes, MutationCodes),
 		atom_codes(Mutation, MutationCodes).
 	% permutation of the atom characters
 	mutation(atom, Atom, Mutation) :-
@@ -70,19 +70,5 @@
 		permutation(Codes, PermutedCodes),
 		atom_codes(Mutation, PermutedCodes),
 		Atom \== Mutation.
-
-	% auxiliary predicates
-
-	exchange_two_consecutive_elements(List, Mutation) :-
-		length(List, Length),
-		Limit is Length - 1,
-		between(1, Limit, N),
-		exchange_two_consecutive_elements(N, List, Mutation).
-
-	exchange_two_consecutive_elements(1, [Element1, Element2| Rest], [Element2, Element1| Rest]) :-
-		!.
-	exchange_two_consecutive_elements(N, [Head| Tail], [Head| Mutation]) :-
-		M is N - 1,
-		exchange_two_consecutive_elements(M, Tail, Mutation).
 
 :- end_object.

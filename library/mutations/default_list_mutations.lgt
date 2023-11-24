@@ -24,7 +24,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2023-11-23,
+		date is 2023-11-24,
 		comment is 'Default list mutations.',
 		see_also is [type]
 	]).
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(fast_random, [
-		between/3, member/2, permutation/2, random/1, select/3, select/4
+		member/2, permutation/2, random/1, select/3, select/4, swap_consecutive/2
 	]).
 
 	% mutate a random element
@@ -54,7 +54,7 @@
 		nth1(Index, Mutation, Element, List).
 	% exchange two consecutive elements
 	mutation(list, List, Mutation) :-
-		exchange_two_consecutive_elements(List, Mutation).
+		swap_consecutive(List, Mutation).
 	% permutation of the list elements
 	mutation(list, List, Mutation) :-
 		permutation(List, Mutation).
@@ -81,17 +81,5 @@
 		var(Element),
 		!.
 	type(_, term).
-
-	exchange_two_consecutive_elements(List, Mutation) :-
-		length(List, Length),
-		Limit is Length - 1,
-		between(1, Limit, N),
-		exchange_two_consecutive_elements(N, List, Mutation).
-
-	exchange_two_consecutive_elements(1, [Element1, Element2| Rest], [Element2, Element1| Rest]) :-
-		!.
-	exchange_two_consecutive_elements(N, [Head| Tail], [Head| Mutation]) :-
-		M is N - 1,
-		exchange_two_consecutive_elements(M, Tail, Mutation).
 
 :- end_object.

@@ -23,9 +23,9 @@
 	implements(pseudo_random_protocol)).
 
 	:- info([
-		version is 2:9:0,
+		version is 2:10:0,
 		author is 'Paulo Moura',
-		date is 2023-11-17,
+		date is 2023-11-24,
 		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.',
@@ -120,6 +120,18 @@
 	select(Current, Index, Random, [Head| OldTail], New, [Head| NewTail]) :-
 		Next is Current + 1,
 		select(Next, Index, Random, OldTail, New, NewTail).
+
+	swap_consecutive(List, Mutation) :-
+		length(List, Length),
+		Limit is Length - 1,
+		between(1, Limit, N),
+		swap_consecutive(N, List, Mutation).
+
+	swap_consecutive(1, [Element1, Element2| Rest], [Element2, Element1| Rest]) :-
+		!.
+	swap_consecutive(N, [Head| Tail], [Head| Mutation]) :-
+		M is N - 1,
+		swap_consecutive(M, Tail, Mutation).
 
 	enumerate(List, Random) :-
 		permutation(List, Permutation),
