@@ -176,8 +176,8 @@
 <p>Experimental library. Should not be used in production code. Details can
 be changed without advance notice.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">mutations</span></code> library provides support for generating random
-mutations of selected types. The library defines mutations for the
-following basic types:</p>
+mutations of selected types. The library defines default mutations for
+the following basic types:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">atom</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">integer</span></code></p></li>
@@ -189,8 +189,11 @@ following basic types:</p>
 defining objects or categories providing clauses for the <code class="docutils literal notranslate"><span class="pre">mutation/3</span></code>
 predicate and expanding the entity source files using the
 <code class="docutils literal notranslate"><span class="pre">mutations_store</span></code> object as the hook object.</p>
-<p>This library is expected to eventually be used to support <em>fuzz
-testing</em>.</p>
+<p>This library is expected to eventually be used to support mutation-based
+<em>fuzz testing</em>.</p>
+<p>By default, loading this library loads a set of default mutations. These
+can be overriden by defining alternative mutations and a custom loader
+file.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

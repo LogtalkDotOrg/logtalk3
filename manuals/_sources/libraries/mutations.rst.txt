@@ -7,8 +7,8 @@ Experimental library. Should not be used in production code. Details can
 be changed without advance notice.
 
 The ``mutations`` library provides support for generating random
-mutations of selected types. The library defines mutations for the
-following basic types:
+mutations of selected types. The library defines default mutations for
+the following basic types:
 
 -  ``atom``
 -  ``integer``
@@ -21,8 +21,12 @@ defining objects or categories providing clauses for the ``mutation/3``
 predicate and expanding the entity source files using the
 ``mutations_store`` object as the hook object.
 
-This library is expected to eventually be used to support *fuzz
-testing*.
+This library is expected to eventually be used to support mutation-based
+*fuzz testing*.
+
+By default, loading this library loads a set of default mutations. These
+can be overriden by defining alternative mutations and a custom loader
+file.
 
 API documentation
 -----------------

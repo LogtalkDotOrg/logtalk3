@@ -43,6 +43,7 @@ CONTRIBUTORS
 * Daniel Gross (bug reports, documentation feedback and suggestions)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
+* Domingo Alvarez Duarte (rewrite of the Handbook grammar section for compatibility with the [Railroad Diagram Generator](https://www.bottlecaps.de/rr/ui))
 * Douglas R. Miles (suggestions, bug reports, Logtalk on SWISH experiments)
 * Ebrahim Azarisooreh (code metrics tool, Arch Linux package, made [lgtinit](https://github.com/eazar001/lgtinit) available)
 * Eva Stöwe (PDT support for Logtalk)
