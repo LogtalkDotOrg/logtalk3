@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(fast_random, [
-		member/2, permutation/2, random/1, select/3, select/4, swap_consecutive/2
+		member/2, permutation/2, random/1, select/3, select/4, swap/2, swap_consecutive/2
 	]).
 
 	% mutate a random element
@@ -52,9 +52,12 @@
 		random(Float),
 		Index is truncate(Float*Length+1),
 		nth1(Index, Mutation, Element, List).
-	% exchange two consecutive elements
+	% swap two consecutive elements
 	mutation(list, List, Mutation) :-
 		swap_consecutive(List, Mutation).
+	% swap two elements
+	mutation(list, List, Mutation) :-
+		swap(List, Mutation).
 	% permutation of the list elements
 	mutation(list, List, Mutation) :-
 		permutation(List, Mutation).

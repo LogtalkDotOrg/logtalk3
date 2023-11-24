@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(fast_random, [
-		permutation/2, random/1, select/3, select/4, swap_consecutive/2
+		permutation/2, random/1, select/3, select/4, swap/2, swap_consecutive/2
 	]).
 
 	% deletion of a random character
@@ -57,10 +57,15 @@
 		type::arbitrary(code(ascii_identifier), New),
 		select(_Random, Codes, New, MutationCodes),
 		atom_codes(Mutation, MutationCodes).
-	% exchanging two consecutive characters
+	% swap two consecutive characters
 	mutation(atom, Atom, Mutation) :-
 		atom_codes(Atom, Codes),
 		swap_consecutive(Codes, MutationCodes),
+		atom_codes(Mutation, MutationCodes).
+	% swap two characters
+	mutation(atom, Atom, Mutation) :-
+		atom_codes(Atom, Codes),
+		swap(Codes, MutationCodes),
 		atom_codes(Mutation, MutationCodes).
 	% permutation of the atom characters
 	mutation(atom, Atom, Mutation) :-

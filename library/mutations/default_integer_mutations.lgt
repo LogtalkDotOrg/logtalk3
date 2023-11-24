@@ -34,16 +34,25 @@
 	]).
 
 	:- uses(fast_random, [
-		between/3, permutation/2, random/1, select/3, select/4, swap_consecutive/2
+		between/3, permutation/2, random/1, select/3, select/4, swap/2, swap_consecutive/2
 	]).
 
-	% exchange two consecutive digits
+	% swap two consecutive digits
 	mutation(integer, Integer, Mutation) :-
 		Absolute is abs(Integer),
 		Absolute > 9,
 		Sign is sign(Integer),
 		number_chars(Absolute, Chars),
 		swap_consecutive(Chars, MutationChars),
+		number_chars(Mutation0, MutationChars),
+		Mutation is Sign * Mutation0.
+	% swap two digits
+	mutation(integer, Integer, Mutation) :-
+		Absolute is abs(Integer),
+		Absolute > 9,
+		Sign is sign(Integer),
+		number_chars(Absolute, Chars),
+		swap(Chars, MutationChars),
 		number_chars(Mutation0, MutationChars),
 		Mutation is Sign * Mutation0.
 	% negate integer

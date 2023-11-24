@@ -43,7 +43,7 @@
 	quick_check(
 		mutations_user_defined,
 		type::mutation({pair(atom,integer)}, +pair(atom,integer), -pair(atom,integer)),
-		[ec(false), n(25)]
+		[ec(false), n(50)]
 	).
 
 :- end_object.
