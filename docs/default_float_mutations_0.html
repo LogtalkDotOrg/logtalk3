@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>metagol_example_protocol &mdash; Logtalk APIs v3.73.0-b05 documentation</title>
+  <title>default_float_mutations &mdash; Logtalk APIs v3.73.0-b05 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="default_atom_mutations" href="default_atom_mutations_0.html" />
-    <link rel="prev" title="metagol" href="metagol_0.html" />
+    <link rel="next" title="default_integer_mutations" href="default_integer_mutations_0.html" />
+    <link rel="prev" title="default_compound_mutations" href="default_compound_mutations_0.html" />
    
 </head>
 
@@ -112,12 +112,17 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="metagol_0.html">metagol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">metagol_example_protocol</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="default_atom_mutations_0.html">default_atom_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_compound_mutations_0.html">default_compound_mutations</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">default_float_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_integer_mutations_0.html">default_integer_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_list_mutations_0.html">default_list_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_0.html">mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_store_0.html">mutations_store</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -181,9 +186,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">metagol_example_protocol</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">default_float_mutations</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/metagol_example_protocol_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/default_float_mutations_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -191,34 +196,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="metagol-example-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
-<section id="metagol-example-protocol">
-<h1><code class="docutils literal notranslate"><span class="pre">metagol_example_protocol</span></code><a class="headerlink" href="#metagol-example-protocol" title="Link to this heading"></a></h1>
-<p>Convenient learning predicates for use in examples and unit tests.</p>
+  <p class="right" id="default-float-mutations-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="default-float-mutations">
+<h1><code class="docutils literal notranslate"><span class="pre">default_float_mutations</span></code><a class="headerlink" href="#default-float-mutations" title="Link to this heading"></a></h1>
+<p>Default float mutations.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(metagol(loader))</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(mutations(loader))</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Author:</strong> Paulo Moura.</div>
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 0:1:0</div>
-<div class="line"><strong>Date:</strong> 2019-05-07</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>License:</strong> BSD 3-Clause License</div>
+<div class="line"><strong>Date:</strong> 2023-11-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Dependencies:</strong></div>
+<div class="line"><strong>Provides:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"><a class="reference internal" href="mutations_store_0.html#mutations-store-0-mutation-4"><span class="std std-ref">mutations_store::mutation/4</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -235,69 +237,31 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#learn-1" id="id2"><code class="docutils literal notranslate"><span class="pre">learn/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#learn-0" id="id3"><code class="docutils literal notranslate"><span class="pre">learn/0</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="learn-1">
-<span id="metagol-example-protocol-0-learn-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/1</span></code></a><a class="headerlink" href="#learn-1" title="Link to this heading"></a></h3>
-<p>Learns and returns set of clauses.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(Clauses)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn(-list(clause))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="learn-0">
-<span id="metagol-example-protocol-0-learn-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/0</span></code></a><a class="headerlink" href="#learn-0" title="Link to this heading"></a></h3>
-<p>Learns and prints a set of clauses.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></p>
+</div>
 </section>
 </section>
 
@@ -305,8 +269,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="metagol_0.html" class="btn btn-neutral float-left" title="metagol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="default_atom_mutations_0.html" class="btn btn-neutral float-right" title="default_atom_mutations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="default_compound_mutations_0.html" class="btn btn-neutral float-left" title="default_compound_mutations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="default_integer_mutations_0.html" class="btn btn-neutral float-right" title="default_integer_mutations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

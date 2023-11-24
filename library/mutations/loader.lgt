@@ -28,5 +28,14 @@
 		mutations
 	], [
 		optimize(on)
+	]),
+	logtalk_load([
+		default_atom_mutations,
+		default_integer_mutations,
+		default_float_mutations,
+		default_list_mutations,
+		default_compound_mutations
+	], [
+		optimize(on), hook(mutations_store)
 	])
 )).

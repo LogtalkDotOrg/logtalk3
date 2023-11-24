@@ -1,0 +1,60 @@
+.. index:: default_float_mutations
+.. _default_float_mutations/0:
+
+.. rst-class:: right
+
+**object**
+
+``default_float_mutations``
+===========================
+
+Default float mutations.
+
+| **Availability:** 
+|    ``logtalk_load(mutations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2023-11-23
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`mutations_store::mutation/4 <mutations_store/0::mutation/4>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`type <type/0>`
+

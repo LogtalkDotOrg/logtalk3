@@ -19,18 +19,27 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(test_mutations).
+:- object(default_float_mutations).
 
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2023-11-23,
-		comment is 'Test support for user-defined mutations.'
+		comment is 'Default float mutations.',
+		see_also is [type]
 	]).
 
-	mutation(pair(atom,integer), Atom-Integer, AtomMutation-Integer) :-
-		mutations_store::mutation(atom, Atom, AtomMutation).
-	mutation(pair(atom,integer), Atom-Integer, Atom-IntegerMutation) :-
-		mutations_store::mutation(integer, Integer, IntegerMutation).
+	% negate float
+	mutation(float, Float, Mutation) :-
+		% fail on float overflow and underflow errors
+		catch(Mutation is -1 * Float, _, fail).
+	% move decimal point to the left
+	mutation(float, Float, Mutation) :-
+		% fail on float overflow and underflow errors
+		catch(Mutation is Float / 10, _, fail).
+	% move decimal point to the right
+	mutation(float, Float, Mutation) :-
+		% fail on float overflow and underflow errors
+		catch(Mutation is Float * 10, _, fail).
 
 :- end_object.

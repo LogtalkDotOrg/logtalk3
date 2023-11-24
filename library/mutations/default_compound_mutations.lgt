@@ -19,18 +19,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(test_mutations).
+:- object(default_compound_mutations).
 
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2023-11-23,
-		comment is 'Test support for user-defined mutations.'
+		comment is 'Default compound mutations.',
+		see_also is [type]
 	]).
 
-	mutation(pair(atom,integer), Atom-Integer, AtomMutation-Integer) :-
-		mutations_store::mutation(atom, Atom, AtomMutation).
-	mutation(pair(atom,integer), Atom-Integer, Atom-IntegerMutation) :-
-		mutations_store::mutation(integer, Integer, IntegerMutation).
+	% mutate the functor name
+	mutation(compound, Compound, Mutation) :-
+		Compound =.. [Name| Arguments],
+		mutations_store::mutation(atom, Name, NameMutation),
+		Mutation =.. [NameMutation| Arguments].
+	% mutate the arguments
+	mutation(compound, Compound, Mutation) :-
+		Compound =.. [Name| Arguments],
+		mutations_store::mutation(list, Arguments, ArgumentsMutation),
+		Mutation =.. [Name| ArgumentsMutation].
 
 :- end_object.

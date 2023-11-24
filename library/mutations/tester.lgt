@@ -24,9 +24,23 @@
 	logtalk_load(types(loader)),
 	logtalk_load(arbitrary(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load([mutations_store, mutations], [debug(on), source_data(on)]),
+	logtalk_load([
+		mutations_store,
+		mutations
+	], [
+		debug(on), source_data(on)
+	]),
+	logtalk_load([
+		default_atom_mutations,
+		default_integer_mutations,
+		default_float_mutations,
+		default_list_mutations,
+		default_compound_mutations
+	], [
+		optimize(on), hook(mutations_store)
+	]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(test_mutations),
+	logtalk_load(test_mutations, [hook(mutations_store)]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).
