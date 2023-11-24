@@ -22,7 +22,7 @@
 :- protocol(random_protocol).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
 		date is 2023-11-24,
 		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
@@ -64,10 +64,17 @@
 		argnames is ['Random', 'OldList', 'New', 'NewList']
 	]).
 
+	:- public(swap/2).
+	:- mode(swap(-term, +list(term)), zero_or_one).
+	:- info(swap/2, [
+		comment is 'Swaps two randomly selected elements of a list. Fails if the list is empty or contains a single element.',
+		argnames is ['OldList', 'NewList']
+	]).
+
 	:- public(swap_consecutive/2).
 	:- mode(swap_consecutive(-term, +list(term)), zero_or_one).
 	:- info(swap_consecutive/2, [
-		comment is 'Swaps two random selected consecutive elements of a list. Fails if the list is empty or contains a single element.',
+		comment is 'Swaps two randomly selected consecutive elements of a list. Fails if the list is empty or contains a single element.',
 		argnames is ['OldList', 'NewList']
 	]).
 

@@ -14,7 +14,7 @@ Random number generator protocol. The predicates are declared as synchronized wh
 |    ``logtalk_load(random(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:2:0
+| **Version:** 3:3:0
 | **Date:** 2023-11-24
 
 | **Compilation flags:**
@@ -133,13 +133,32 @@ Returns a random member of a list, replacing it with a new element and returning
 
 ------------
 
+.. index:: swap/2
+.. _random_protocol/0::swap/2:
+
+``swap/2``
+^^^^^^^^^^
+
+Swaps two randomly selected elements of a list. Fails if the list is empty or contains a single element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``swap(OldList,NewList)``
+| **Mode and number of proofs:**
+|    ``swap(-term,+list(term))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: swap_consecutive/2
 .. _random_protocol/0::swap_consecutive/2:
 
 ``swap_consecutive/2``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Swaps two random selected consecutive elements of a list. Fails if the list is empty or contains a single element.
+Swaps two randomly selected consecutive elements of a list. Fails if the list is empty or contains a single element.
 
 | **Compilation flags:**
 |    ``static``

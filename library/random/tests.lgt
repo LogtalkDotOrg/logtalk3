@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
 		date is 2023-11-24,
 		comment is 'Unit tests for the "random" library.',
@@ -67,6 +67,15 @@
 			-property(atom, [Random]>>(list::member(Random,[a,b,c,d,e,f,g,h,i,j]))),
 			{42},
 			-property(list(atomic), [All]>>(list::msort(All,[42,a,b,c,d,e,f,g,h,i,j])))
+		)
+	).
+
+	% swap/2 tests
+
+	quick_check(
+		random_swap_2_01,
+		random_swap_2(
+			-property(list(atom), [All]>>(list::msort(All,[a,b,c,d,e,f,g,h,i,j])))
 		)
 	).
 
@@ -176,6 +185,9 @@
 
 	random_select_4(Random, New, [Random| NewList]) :-
 		_RandomObject_::select(Random, [a,b,c,d,e,f,g,h,i,j], New, NewList).
+
+	random_swap_2(NewList) :-
+		_RandomObject_::swap([a,b,c,d,e,f,g,h,i,j], NewList).
 
 	random_swap_consecutive_2(NewList) :-
 		_RandomObject_::swap_consecutive([a,b,c,d,e,f,g,h,i,j], NewList).
