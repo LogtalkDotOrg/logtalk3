@@ -632,7 +632,7 @@ object_directive <span class="o">::=</span>
 <span id="grammar-category-directives"></span><h3>Category directives<a class="headerlink" href="#category-directives" title="Link to this heading"></a></h3>
 <div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>category_directives <span class="o">::=</span>
    category_directive
-   |category_directive category_directives
+   | category_directive category_directives
 
 category_directive <span class="o">::=</span>
    &quot;:- built_in.&quot;
@@ -1009,7 +1009,7 @@ object_alias <span class="o">::=</span>
 
 object_alias_sequence <span class="o">::=</span>
    object_alias
-   |object_alias &quot;,&quot; object_alias_sequence
+   | object_alias &quot;,&quot; object_alias_sequence
 
 object_alias_list <span class="o">::=</span>
    &quot;[&quot; object_alias_sequence &quot;]&quot;
@@ -1070,7 +1070,7 @@ external_call <span class="o">::=</span>
    &quot;{&quot; callable &quot;}&quot;
 
 context_switching_call <span class="o">::=</span>
-   object_identifier &quot;&lt;&lt;&quot; goal
+   object_identifier &quot;&lt;&lt;&quot; callable
 </pre></div>
 </div>
 </section>
@@ -1082,13 +1082,18 @@ context_switching_call <span class="o">::=</span>
    | lambda_parameters &quot;&gt;&gt;&quot; callable
 
 lambda_free_variables <span class="o">::=</span>
-   &quot;{&quot; conjunction_of_variables &quot;}&quot;
-   | &quot;{&quot; variable &quot;}&quot;
-   | &quot;{}&quot;
+   &quot;{&quot; variables? &quot;}&quot;
 
 lambda_parameters <span class="o">::=</span>
-   list_of_terms
-   | &quot;[]&quot;
+   &quot;[&quot; terms? &quot;]&quot;
+
+variables <span class="o">::=</span>
+   variable
+   | variable &quot;,&quot; variables
+
+terms <span class="o">::=</span>
+   term
+   | term &quot;,&quot; terms
 </pre></div>
 </div>
 </section>
@@ -1170,7 +1175,7 @@ predicate_declaration_property_list <span class="o">::=</span>
 
 predicate_declaration_property_sequence <span class="o">::=</span>
    predicate_declaration_property
-   |predicate_declaration_property &quot;,&quot; predicate_declaration_property_sequence
+   | predicate_declaration_property &quot;,&quot; predicate_declaration_property_sequence
 
 predicate_declaration_property <span class="o">::=</span>
    &quot;static&quot;

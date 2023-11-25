@@ -577,7 +577,7 @@ Category directives
 
    category_directives ::=
       category_directive
-      |category_directive category_directives
+      | category_directive category_directives
       
    category_directive ::=
       ":- built_in."
@@ -960,7 +960,7 @@ Predicate directives
    
    object_alias_sequence ::=
       object_alias
-      |object_alias "," object_alias_sequence
+      | object_alias "," object_alias_sequence
    
    object_alias_list ::=
       "[" object_alias_sequence "]"
@@ -1023,7 +1023,7 @@ Clauses and goals
       "{" callable "}"
    
    context_switching_call ::=
-      object_identifier "<<" goal
+      object_identifier "<<" callable
 
 .. _grammar_lambdas:
 
@@ -1038,13 +1038,18 @@ Lambda expressions
       | lambda_parameters ">>" callable
    
    lambda_free_variables ::=
-      "{" conjunction_of_variables "}"
-      | "{" variable "}"
-      | "{}"
+      "{" variables? "}"
    
    lambda_parameters ::=
-      list_of_terms
-      | "[]"
+      "[" terms? "]"
+
+   variables ::=
+      variable
+      | variable "," variables
+
+   terms ::=
+      term
+      | term "," terms
 
 .. _grammar_entity_properties:
 
@@ -1129,7 +1134,7 @@ Entity properties
    
    predicate_declaration_property_sequence ::=
       predicate_declaration_property
-      |predicate_declaration_property "," predicate_declaration_property_sequence
+      | predicate_declaration_property "," predicate_declaration_property_sequence
    
    predicate_declaration_property ::=
       "static" 
