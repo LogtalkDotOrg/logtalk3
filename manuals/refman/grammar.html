@@ -624,6 +624,7 @@ object_directive <span class="o">::=</span>
    | &quot;:- set_logtalk_flag(&quot; atom &quot;,&quot; nonvar &quot;).&quot;
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
    | &quot;:- uses(&quot; object_alias_list &quot;).&quot;
+   | conditional_compilation_directives
    | predicate_directives
 </pre></div>
 </div>
@@ -641,6 +642,7 @@ category_directive <span class="o">::=</span>
    | &quot;:- set_logtalk_flag(&quot; atom &quot;,&quot; nonvar &quot;).&quot;
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
    | &quot;:- uses(&quot; object_alias_list &quot;).&quot;
+   | conditional_compilation_directives
    | predicate_directives
 </pre></div>
 </div>
@@ -657,6 +659,7 @@ protocol_directive <span class="o">::=</span>
    | &quot;:- info(&quot; entity_info_list &quot;).&quot;
    | &quot;:- set_logtalk_flag(&quot; atom &quot;,&quot; nonvar &quot;).&quot;
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
+   | conditional_compilation_directives
    | predicate_directives
 </pre></div>
 </div>
@@ -990,8 +993,11 @@ meta_non_terminal_template_term <span class="o">::=</span>
    meta_predicate_template_term
 
 entity_info_list <span class="o">::=</span>
-   &quot;[]&quot;
-   | &quot;[&quot; entity_info_item &quot;is&quot; nonvar &quot;|&quot; entity_info_list &quot;]&quot;
+   &quot;[&quot; entity_info_sequence? &quot;]&quot;
+
+entity_info_sequence <span class="o">::=</span>
+   entity_info_item &quot;is&quot; nonvar
+   | entity_info_item &quot;is&quot; nonvar &quot;,&quot; entity_info_sequence
 
 entity_info_item <span class="o">::=</span>
    &quot;comment&quot;
@@ -1007,8 +1013,11 @@ entity_info_item <span class="o">::=</span>
    | atom
 
 predicate_info_list <span class="o">::=</span>
-   &quot;[]&quot;
-   |&quot;[&quot; predicate_info_item &quot;is&quot; nonvar &quot;|&quot; predicate_info_list &quot;]&quot;
+   &quot;[&quot; predicate_info_sequence? &quot;]&quot;
+
+predicate_info_sequence <span class="o">::=</span>
+   predicate_info_item &quot;is&quot; nonvar
+   | predicate_info_item &quot;is&quot; nonvar &quot;,&quot; predicate_info_sequence
 
 predicate_info_item <span class="o">::=</span>
    &quot;comment&quot;

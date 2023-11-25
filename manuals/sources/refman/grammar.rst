@@ -566,6 +566,7 @@ Object directives
       | ":- set_logtalk_flag(" atom "," nonvar ")."
       | ":- include(" source_file_name ")."
       | ":- uses(" object_alias_list ")."
+      | conditional_compilation_directives
       | predicate_directives
 
 .. _grammar_category_directives:
@@ -586,6 +587,7 @@ Category directives
       | ":- set_logtalk_flag(" atom "," nonvar ")."
       | ":- include(" source_file_name ")."
       | ":- uses(" object_alias_list ")."
+      | conditional_compilation_directives
       | predicate_directives
 
 .. _grammar_protocol_directives:
@@ -605,6 +607,7 @@ Protocol directives
       | ":- info(" entity_info_list ")."
       | ":- set_logtalk_flag(" atom "," nonvar ")."
       | ":- include(" source_file_name ")."
+      | conditional_compilation_directives
       | predicate_directives
 
 .. _grammar_predicate_directives:
@@ -941,8 +944,11 @@ Predicate directives
       meta_predicate_template_term
    
    entity_info_list ::=
-      "[]"
-      | "[" entity_info_item "is" nonvar "|" entity_info_list "]"
+      "[" entity_info_sequence? "]"
+   
+   entity_info_sequence ::=
+      entity_info_item "is" nonvar
+      | entity_info_item "is" nonvar "," entity_info_sequence
    
    entity_info_item ::=
       "comment" 
@@ -958,8 +964,11 @@ Predicate directives
       | atom
    
    predicate_info_list ::=
-      "[]"
-      |"[" predicate_info_item "is" nonvar "|" predicate_info_list "]"
+      "[" predicate_info_sequence? "]"
+   
+   predicate_info_sequence ::=
+      predicate_info_item "is" nonvar
+      | predicate_info_item "is" nonvar "," predicate_info_sequence
    
    predicate_info_item ::=
       "comment" 
