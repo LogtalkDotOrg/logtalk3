@@ -905,6 +905,8 @@ Predicate directives
       | "zero_or_error" 
       | "one_or_error"
       | "zero_or_one_or_error" 
+      | "zero_or_more_or_error" 
+      | "one_or_more_or_error" 
       | "error"
       
    meta_predicate_template_term ::=
@@ -968,6 +970,7 @@ Predicate directives
       | "allocation"
       | "examples" 
       | "exceptions"
+      | "see_also"
       | atom
    
    object_alias_list ::=
