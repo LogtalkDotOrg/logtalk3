@@ -684,21 +684,21 @@ predicate_directive <span class="o">::=</span>
    | operator_directive
 
 alias_directive <span class="o">::=</span>
-   &quot;:- alias(&quot; entity_identifier &quot;,&quot; ( predicate_indicator_alias_list | non_terminal_indicator_alias_list ) &quot;).&quot;
+   &quot;:- alias(&quot; entity_identifier &quot;,&quot; alias_directive_resource_list &quot;).&quot;
 
 synchronized_directive <span class="o">::=</span>
-   &quot;:- synchronized(&quot; ( predicate_indicator_term | non_terminal_indicator_term ) &quot;).&quot;
+   &quot;:- synchronized(&quot; synchronized_directive_resource_term &quot;).&quot;
 
 uses_directive <span class="o">::=</span>
-   &quot;:- uses(&quot; ( object_identifier | parameter_variable ) &quot;,&quot; ( predicate_indicator_alias_list | non_terminal_indicator_alias_list | operator_list ) &quot;).&quot;
+   &quot;:- uses(&quot; ( object_identifier | parameter_variable ) &quot;,&quot; uses_directive_resource_list &quot;).&quot;
 
 use_module_directive <span class="o">::=</span>
-   &quot;:- use_module(&quot; ( module_identifier | parameter_variable ) &quot;,&quot; ( module_predicate_indicator_alias_list | module_non_terminal_indicator_alias_list | operator_list ) &quot;).&quot;
+   &quot;:- use_module(&quot; ( module_identifier | parameter_variable ) &quot;,&quot; use_module_directive_resource_list &quot;).&quot;
 
 scope_directive <span class="o">::=</span>
-   &quot;:- public(&quot; ( predicate_indicator_term | non_terminal_indicator_term ) &quot;).&quot;
-   | &quot;:- protected(&quot; ( predicate_indicator_term | non_terminal_indicator_term ) &quot;).&quot;
-   | &quot;:- private(&quot; ( predicate_indicator_term | non_terminal_indicator_term ) &quot;).&quot;
+   &quot;:- public(&quot; scope_directive_resource_term &quot;).&quot;
+   | &quot;:- protected(&quot; scope_directive_resource_term &quot;).&quot;
+   | &quot;:- private(&quot; scope_directive_resource_term &quot;).&quot;
 
 mode_directive <span class="o">::=</span>
    &quot;:- mode(&quot; ( predicate_mode_term | non_terminal_mode_term ) &quot;,&quot; number_of_proofs &quot;).&quot;
@@ -710,25 +710,39 @@ meta_non_terminal_directive <span class="o">::=</span>
    &quot;:- meta_non_terminal(&quot; meta_non_terminal_template_term &quot;).&quot;
 
 info_directive <span class="o">::=</span>
-   &quot;:- info(&quot; predicate_indicator
-   | non_terminal_indicator &quot;,&quot; predicate_info_list &quot;).&quot;
+   &quot;:- info(&quot; ( predicate_indicator | non_terminal_indicator ) &quot;,&quot; predicate_info_list &quot;).&quot;
 
 dynamic_directive <span class="o">::=</span>
-   &quot;:- dynamic(&quot; qualified_predicate_indicator_term
-   | qualified_non_terminal_indicator_term &quot;).&quot;
+   &quot;:- dynamic(&quot; qualified_directive_resource_term &quot;).&quot;
 
 discontiguous_directive <span class="o">::=</span>
-   &quot;:- discontiguous(&quot; ( predicate_indicator_term | non_terminal_indicator_term ) &quot;).&quot;
+   &quot;:- discontiguous(&quot; qualified_directive_resource_term &quot;).&quot;
 
 multifile_directive <span class="o">::=</span>
-   &quot;:- multifile(&quot; qualified_predicate_indicator_term
-   | qualified_non_terminal_indicator_term &quot;).&quot;
+   &quot;:- multifile(&quot; qualified_directive_resource_term &quot;).&quot;
 
 coinductive_directive <span class="o">::=</span>
    &quot;:- coinductive(&quot; ( predicate_indicator_term | coinductive_predicate_template_term ) &quot;).&quot;
 
 parameter_variable <span class="o">::=</span>
    _variable_
+
+scope_directive_resource_term <span class="o">::=</span>
+   scope_directive_resource
+   | scope_directive_resource_sequence
+   | scope_directive_resource_list
+
+scope_directive_resource <span class="o">::=</span>
+   predicate_indicator
+   | non_terminal_indicator
+   | operator
+
+scope_directive_resource_sequence <span class="o">::=</span>
+   scope_directive_resource
+   | scope_directive_resource &quot;,&quot; scope_directive_resource_sequence
+
+scope_directive_resource_list <span class="o">::=</span>
+     &quot;[&quot; scope_directive_resource_sequence &quot;]&quot;
 
 entity_resources_list <span class="o">::=</span>
    predicate_indicator_list
@@ -746,28 +760,80 @@ predicate_indicator_sequence <span class="o">::=</span>
 predicate_indicator_list <span class="o">::=</span>
    &quot;[&quot; predicate_indicator_sequence &quot;]&quot;
 
-qualified_predicate_indicator_term <span class="o">::=</span>
-   qualified_predicate_indicator
-   | qualified_predicate_indicator_sequence
-   | qualified_predicate_indicator_list
+alias_directive_resource_list <span class="o">::=</span>
+   &quot;[&quot; alias_directive_resource_sequence &quot;]&quot;
 
-qualified_predicate_indicator_sequence <span class="o">::=</span>
-   qualified_predicate_indicator
-   | qualified_predicate_indicator &quot;,&quot; qualified_predicate_indicator_sequence
+alias_directive_resource_sequence <span class="o">::=</span>
+   alias_directive_resource
+   | alias_directive_resource &quot;,&quot; alias_directive_resource_sequence
 
-qualified_predicate_indicator_list <span class="o">::=</span>
-   &quot;[&quot; qualified_predicate_indicator_sequence &quot;]&quot;
+alias_directive_resource <span class="o">::=</span>
+   predicate_indicator_alias
+   | non_terminal_indicator_alias
 
-qualified_predicate_indicator <span class="o">::=</span>
+synchronized_directive_resource_term <span class="o">::=</span>
+   synchronized_directive_resource
+   | synchronized_directive_resource_sequence
+   | synchronized_directive_resource_list
+
+synchronized_directive_resource <span class="o">::=</span>
    predicate_indicator
-   | object_identifier &quot;::&quot; predicate_indicator
-   | category_identifier &quot;::&quot; predicate_indicator
-   | module_identifier &quot;:&quot; predicate_indicator
+   | non_terminal_indicator
+
+synchronized_directive_resource_sequence <span class="o">::=</span>
+   synchronized_directive_resource
+   | synchronized_directive_resource &quot;,&quot; synchronized_directive_resource_sequence
+
+synchronized_directive_resource_list <span class="o">::=</span>
+   &quot;[&quot; synchronized_directive_resource_sequence &quot;]&quot;
+
+uses_directive_resource_list <span class="o">::=</span>
+   &quot;[&quot; uses_directive_resource_sequence &quot;]&quot;
+
+uses_directive_resource_sequence <span class="o">::=</span>
+   uses_directive_resource
+   | uses_directive_resource &quot;,&quot; uses_directive_resource_sequence
+
+uses_directive_resource <span class="o">::=</span>
+   predicate_indicator
+   | non_terminal_indicator
+   | predicate_template_alias
+   | operator
+
+use_module_directive_resource_list <span class="o">::=</span>
+   &quot;[&quot; use_module_directive_resource_sequence &quot;]&quot;
+
+use_module_directive_resource_sequence <span class="o">::=</span>
+   use_module_directive_resource
+   | use_module_directive_resource &quot;,&quot; use_module_directive_resource_sequence
+
+use_module_directive_resource <span class="o">::=</span>
+   predicate_indicator
+   | non_terminal_indicator
+   | predicate_template_alias
+   | operator
+
+qualified_directive_resource_term <span class="o">::=</span>
+   qualified_directive_resource
+   | qualified_directive_resource_sequence
+   | qualified_directive_resource_list
+
+qualified_directive_resource_sequence <span class="o">::=</span>
+   qualified_directive_resource
+   | qualified_directive_resource &quot;,&quot; qualified_directive_resource_sequence
+
+qualified_directive_resource_list <span class="o">::=</span>
+   &quot;[&quot; qualified_directive_resource_sequence &quot;]&quot;
+
+qualified_directive_resource <span class="o">::=</span>
+   predicate_indicator
+   | non_terminal_indicator
+   | object_identifier &quot;::&quot; ( predicate_indicator | non_terminal_indicator)
+   | category_identifier &quot;::&quot; ( predicate_indicator | non_terminal_indicator)
+   | module_identifier &quot;:&quot; ( predicate_indicator | non_terminal_indicator)
 
 predicate_indicator_alias <span class="o">::=</span>
-   predicate_indicator
-   | predicate_indicator &quot;as&quot; predicate_indicator
-   | predicate_indicator &quot;::&quot; predicate_indicator
+   predicate_indicator &quot;as&quot; predicate_indicator
 
 predicate_indicator_alias_sequence <span class="o">::=</span>
    predicate_indicator_alias
@@ -778,7 +844,6 @@ predicate_indicator_alias_list <span class="o">::=</span>
 
 predicate_template_alias <span class="o">::=</span>
    callable &quot;as&quot; callable
-   | callable &quot;::&quot; callable
 
 predicate_template_alias_sequence <span class="o">::=</span>
    predicate_template_alias
@@ -786,30 +851,6 @@ predicate_template_alias_sequence <span class="o">::=</span>
 
 predicate_template_alias_list <span class="o">::=</span>
    &quot;[&quot; predicate_template_alias_sequence &quot;]&quot;
-
-module_predicate_indicator_alias <span class="o">::=</span>
-   predicate_indicator
-   | predicate_indicator &quot;as&quot; predicate_indicator
-   | predicate_indicator &quot;:&quot; predicate_indicator
-
-module_predicate_indicator_alias_sequence <span class="o">::=</span>
-   module_predicate_indicator_alias
-   | module_predicate_indicator_alias &quot;,&quot; module_predicate_indicator_alias_sequence
-
-module_predicate_indicator_alias_list <span class="o">::=</span>
-   &quot;[&quot; module_predicate_indicator_alias_sequence &quot;]&quot;
-
-module_non_terminal_indicator_alias <span class="o">::=</span>
-   non_terminal_indicator
-   | non_terminal_indicator &quot;as&quot; non_terminal_indicator
-   | non_terminal_indicator &quot;:&quot; non_terminal_indicator
-
-module_non_terminal_indicator_alias_sequence <span class="o">::=</span>
-   module_non_terminal_indicator_alias
-   | module_non_terminal_indicator_alias &quot;,&quot; module_non_terminal_indicator_alias_sequence
-
-module_non_terminal_indicator_alias_list <span class="o">::=</span>
-   &quot;[&quot; module_non_terminal_indicator_alias_sequence &quot;]&quot;
 
 non_terminal_indicator_term <span class="o">::=</span>
    non_terminal_indicator
@@ -826,35 +867,8 @@ non_terminal_indicator_list <span class="o">::=</span>
 non_terminal_indicator <span class="o">::=</span>
    functor &quot;//&quot; arity
 
-qualified_non_terminal_indicator_term <span class="o">::=</span>
-   qualified_non_terminal_indicator
-   | qualified_non_terminal_indicator_sequence
-   | qualified_non_terminal_indicator_list
-
-qualified_non_terminal_indicator_sequence <span class="o">::=</span>
-   qualified_non_terminal_indicator
-   | qualified_non_terminal_indicator &quot;, &quot; qualified_non_terminal_indicator_sequence
-
-qualified_non_terminal_indicator_list <span class="o">::=</span>
-   &quot;[&quot; qualified_non_terminal_indicator_sequence &quot;]&quot;
-
-qualified_non_terminal_indicator <span class="o">::=</span>
-   non_terminal_indicator
-   | object_identifier &quot;::&quot; non_terminal_indicator
-   | category_identifier &quot;::&quot; non_terminal_indicator
-   | module_identifier &quot;:&quot; non_terminal_indicator
-
 non_terminal_indicator_alias <span class="o">::=</span>
-   non_terminal_indicator
-   | non_terminal_indicator &quot;as&quot; non_terminal_indicator
-   | non_terminal_indicator &quot;::&quot; non_terminal_indicator
-
-non_terminal_indicator_alias_sequence <span class="o">::=</span>
-   non_terminal_indicator_alias
-   | non_terminal_indicator_alias &quot;,&quot; non_terminal_indicator_alias_sequence
-
-non_terminal_indicator_alias_list <span class="o">::=</span>
-   &quot;[&quot; non_terminal_indicator_alias_sequence &quot;]&quot;
+   non_terminal_indicator &quot;as&quot; non_terminal_indicator
 
 operator_sequence <span class="o">::=</span>
    operator specification
@@ -957,6 +971,7 @@ meta_predicate_template_list <span class="o">::=</span>
 meta_predicate_template <span class="o">::=</span>
    object_identifier &quot;::&quot; atom &quot;(&quot; meta_predicate_specifiers &quot;)&quot;
    | category_identifier &quot;::&quot; atom &quot;(&quot; meta_predicate_specifiers &quot;)&quot;
+   | module_identifier &quot;:&quot; atom &quot;(&quot; meta_predicate_specifiers &quot;)&quot;
    | atom &quot;(&quot; meta_predicate_specifiers &quot;)&quot;
 
 meta_predicate_specifiers <span class="o">::=</span>
@@ -964,7 +979,7 @@ meta_predicate_specifiers <span class="o">::=</span>
    | meta_predicate_specifier &quot;,&quot; meta_predicate_specifiers
 
 meta_predicate_specifier <span class="o">::=</span>
-   non-negative integer
+   non_negative_integer
    | &quot;::&quot;
    | &quot;^&quot;
    | &quot;*&quot;
@@ -1004,15 +1019,15 @@ predicate_info_item <span class="o">::=</span>
    | &quot;exceptions&quot;
    | atom
 
-object_alias <span class="o">::=</span>
-   object_identifier &quot;as&quot; object_identifier
+object_alias_list <span class="o">::=</span>
+   &quot;[&quot; object_alias_sequence &quot;]&quot;
 
 object_alias_sequence <span class="o">::=</span>
    object_alias
    | object_alias &quot;,&quot; object_alias_sequence
 
-object_alias_list <span class="o">::=</span>
-   &quot;[&quot; object_alias_sequence &quot;]&quot;
+object_alias <span class="o">::=</span>
+   object_identifier &quot;as&quot; object_identifier
 </pre></div>
 </div>
 </section>
@@ -1229,10 +1244,8 @@ predicate <span class="o">::=</span>
    predicate_indicator
    | &quot;^^&quot; predicate_indicator
    | &quot;::&quot; predicate_indicator
-   | variable &quot;::&quot; predicate_indicator
-   | object_identifier &quot;::&quot; predicate_indicator
-   | variable &quot;:&quot; predicate_indicator
-   | module_identifier &quot;:&quot; predicate_indicator
+   | ( variable | object_identifier ) &quot;::&quot; predicate_indicator
+   | ( variable | module_identifier ) &quot;:&quot; predicate_indicator
 
 predicate_call_update_property_list <span class="o">::=</span>
    &quot;[&quot; predicate_call_update_property_sequence &quot;]&quot;

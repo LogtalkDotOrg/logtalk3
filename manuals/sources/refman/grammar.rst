@@ -635,21 +635,21 @@ Predicate directives
       | operator_directive
 
    alias_directive ::=
-      ":- alias(" entity_identifier "," ( predicate_indicator_alias_list | non_terminal_indicator_alias_list ) ")."
+      ":- alias(" entity_identifier "," alias_directive_resource_list ")."
       
    synchronized_directive ::=
-      ":- synchronized(" ( predicate_indicator_term | non_terminal_indicator_term ) ")."
+      ":- synchronized(" synchronized_directive_resource_term ")."
       
    uses_directive ::=
-      ":- uses(" ( object_identifier | parameter_variable ) "," ( predicate_indicator_alias_list | non_terminal_indicator_alias_list | operator_list ) ")."
+      ":- uses(" ( object_identifier | parameter_variable ) "," uses_directive_resource_list ")."
       
    use_module_directive ::=
-      ":- use_module(" ( module_identifier | parameter_variable ) "," ( module_predicate_indicator_alias_list | module_non_terminal_indicator_alias_list | operator_list ) ")."
+      ":- use_module(" ( module_identifier | parameter_variable ) "," use_module_directive_resource_list ")."
       
    scope_directive ::=
-      ":- public(" ( predicate_indicator_term | non_terminal_indicator_term ) ")."
-      | ":- protected(" ( predicate_indicator_term | non_terminal_indicator_term ) ")."
-      | ":- private(" ( predicate_indicator_term | non_terminal_indicator_term ) ")."
+      ":- public(" scope_directive_resource_term ")."
+      | ":- protected(" scope_directive_resource_term ")."
+      | ":- private(" scope_directive_resource_term ")."
       
    mode_directive ::=
       ":- mode(" ( predicate_mode_term | non_terminal_mode_term ) "," number_of_proofs ")."
@@ -661,26 +661,40 @@ Predicate directives
       ":- meta_non_terminal(" meta_non_terminal_template_term ")."
    
    info_directive ::=
-      ":- info(" predicate_indicator 
-      | non_terminal_indicator "," predicate_info_list ")."
-      
+      ":- info(" ( predicate_indicator | non_terminal_indicator ) "," predicate_info_list ")."
+   	
    dynamic_directive ::=
-      ":- dynamic(" qualified_predicate_indicator_term 
-      | qualified_non_terminal_indicator_term ")."
+      ":- dynamic(" qualified_directive_resource_term ")."
    
    discontiguous_directive ::=
-      ":- discontiguous(" ( predicate_indicator_term | non_terminal_indicator_term ) ")."
+      ":- discontiguous(" qualified_directive_resource_term ")."
    
    multifile_directive ::=
-      ":- multifile(" qualified_predicate_indicator_term
-      | qualified_non_terminal_indicator_term ")."
+      ":- multifile(" qualified_directive_resource_term ")."
    
    coinductive_directive ::=
       ":- coinductive(" ( predicate_indicator_term | coinductive_predicate_template_term ) ")."
    
    parameter_variable ::=
       _variable_
+
+   scope_directive_resource_term ::=
+      scope_directive_resource
+      | scope_directive_resource_sequence
+      | scope_directive_resource_list
+   	
+   scope_directive_resource ::=
+      predicate_indicator
+      | non_terminal_indicator
+      | operator
    
+   scope_directive_resource_sequence ::=
+      scope_directive_resource
+      | scope_directive_resource "," scope_directive_resource_sequence
+   
+   scope_directive_resource_list ::=
+   	"[" scope_directive_resource_sequence "]"
+
    entity_resources_list ::=
       predicate_indicator_list
       | operator_list
@@ -696,29 +710,81 @@ Predicate directives
    
    predicate_indicator_list ::=
       "[" predicate_indicator_sequence "]"
+
+   alias_directive_resource_list ::=
+      "[" alias_directive_resource_sequence "]"
    
-   qualified_predicate_indicator_term ::=
-      qualified_predicate_indicator
-      | qualified_predicate_indicator_sequence
-      | qualified_predicate_indicator_list
+   alias_directive_resource_sequence ::=
+      alias_directive_resource
+      | alias_directive_resource "," alias_directive_resource_sequence
    
-   qualified_predicate_indicator_sequence ::=
-      qualified_predicate_indicator
-      | qualified_predicate_indicator "," qualified_predicate_indicator_sequence
+   alias_directive_resource ::=
+      predicate_indicator_alias
+      | non_terminal_indicator_alias
+
+   synchronized_directive_resource_term ::=
+      synchronized_directive_resource
+      | synchronized_directive_resource_sequence
+      | synchronized_directive_resource_list
    
-   qualified_predicate_indicator_list ::=
-      "[" qualified_predicate_indicator_sequence "]"
-   
-   qualified_predicate_indicator ::=
+   synchronized_directive_resource ::=
       predicate_indicator
-      | object_identifier "::" predicate_indicator
-      | category_identifier "::" predicate_indicator
-      | module_identifier ":" predicate_indicator
+      | non_terminal_indicator
+   
+   synchronized_directive_resource_sequence ::=
+      synchronized_directive_resource
+      | synchronized_directive_resource "," synchronized_directive_resource_sequence
+   
+   synchronized_directive_resource_list ::=
+      "[" synchronized_directive_resource_sequence "]"
+
+   uses_directive_resource_list ::=
+      "[" uses_directive_resource_sequence "]"
+   
+   uses_directive_resource_sequence ::=
+      uses_directive_resource
+      | uses_directive_resource "," uses_directive_resource_sequence
+   
+   uses_directive_resource ::=
+      predicate_indicator
+      | non_terminal_indicator
+      | predicate_template_alias
+      | operator
+
+   use_module_directive_resource_list ::=
+      "[" use_module_directive_resource_sequence "]"
+   
+   use_module_directive_resource_sequence ::=
+      use_module_directive_resource
+      | use_module_directive_resource "," use_module_directive_resource_sequence
+   
+   use_module_directive_resource ::=
+      predicate_indicator
+      | non_terminal_indicator
+      | predicate_template_alias
+      | operator
+
+   qualified_directive_resource_term ::=
+      qualified_directive_resource
+      | qualified_directive_resource_sequence
+      | qualified_directive_resource_list
+   
+   qualified_directive_resource_sequence ::=
+      qualified_directive_resource
+      | qualified_directive_resource "," qualified_directive_resource_sequence
+   
+   qualified_directive_resource_list ::=
+      "[" qualified_directive_resource_sequence "]"
+   
+   qualified_directive_resource ::=
+      predicate_indicator
+      | non_terminal_indicator
+      | object_identifier "::" ( predicate_indicator | non_terminal_indicator)
+      | category_identifier "::" ( predicate_indicator | non_terminal_indicator)
+      | module_identifier ":" ( predicate_indicator | non_terminal_indicator)
    
    predicate_indicator_alias ::=
-      predicate_indicator
-      | predicate_indicator "as" predicate_indicator
-      | predicate_indicator "::" predicate_indicator
+      predicate_indicator "as" predicate_indicator
    
    predicate_indicator_alias_sequence ::=
       predicate_indicator_alias
@@ -729,7 +795,6 @@ Predicate directives
    
    predicate_template_alias ::=
       callable "as" callable
-      | callable "::" callable
    
    predicate_template_alias_sequence ::=
       predicate_template_alias
@@ -737,31 +802,7 @@ Predicate directives
    
    predicate_template_alias_list ::=
       "[" predicate_template_alias_sequence "]"
-   
-   module_predicate_indicator_alias ::=
-      predicate_indicator
-      | predicate_indicator "as" predicate_indicator
-      | predicate_indicator ":" predicate_indicator
-   
-   module_predicate_indicator_alias_sequence ::=
-      module_predicate_indicator_alias
-      | module_predicate_indicator_alias "," module_predicate_indicator_alias_sequence
-   
-   module_predicate_indicator_alias_list ::=
-      "[" module_predicate_indicator_alias_sequence "]"
-   
-   module_non_terminal_indicator_alias ::=
-      non_terminal_indicator
-      | non_terminal_indicator "as" non_terminal_indicator 
-      | non_terminal_indicator ":" non_terminal_indicator
-   
-   module_non_terminal_indicator_alias_sequence ::=
-      module_non_terminal_indicator_alias
-      | module_non_terminal_indicator_alias "," module_non_terminal_indicator_alias_sequence
-   
-   module_non_terminal_indicator_alias_list ::=
-      "[" module_non_terminal_indicator_alias_sequence "]"
-   
+      
    non_terminal_indicator_term ::=
       non_terminal_indicator
       | non_terminal_indicator_sequence
@@ -777,35 +818,8 @@ Predicate directives
    non_terminal_indicator ::=
       functor "//" arity
    
-   qualified_non_terminal_indicator_term ::=
-      qualified_non_terminal_indicator
-      | qualified_non_terminal_indicator_sequence
-      | qualified_non_terminal_indicator_list
-   
-   qualified_non_terminal_indicator_sequence ::=
-      qualified_non_terminal_indicator
-      | qualified_non_terminal_indicator ", " qualified_non_terminal_indicator_sequence
-   
-   qualified_non_terminal_indicator_list ::=
-      "[" qualified_non_terminal_indicator_sequence "]"
-   
-   qualified_non_terminal_indicator ::=
-      non_terminal_indicator
-      | object_identifier "::" non_terminal_indicator
-      | category_identifier "::" non_terminal_indicator
-      | module_identifier ":" non_terminal_indicator
-   
    non_terminal_indicator_alias ::=
-      non_terminal_indicator
-      | non_terminal_indicator "as" non_terminal_indicator
-      | non_terminal_indicator "::" non_terminal_indicator
-      
-   non_terminal_indicator_alias_sequence ::=
-      non_terminal_indicator_alias
-      | non_terminal_indicator_alias "," non_terminal_indicator_alias_sequence
-      
-   non_terminal_indicator_alias_list ::=
-      "[" non_terminal_indicator_alias_sequence "]"
+      non_terminal_indicator "as" non_terminal_indicator
    
    operator_sequence ::=
       operator specification
@@ -908,6 +922,7 @@ Predicate directives
    meta_predicate_template ::=
       object_identifier "::" atom "(" meta_predicate_specifiers ")"
       | category_identifier "::" atom "(" meta_predicate_specifiers ")"
+      | module_identifier ":" atom "(" meta_predicate_specifiers ")"
       | atom "(" meta_predicate_specifiers ")"
    
    meta_predicate_specifiers ::=
@@ -915,8 +930,8 @@ Predicate directives
       | meta_predicate_specifier "," meta_predicate_specifiers
    
    meta_predicate_specifier ::=
-      non-negative integer 
-      | "::" 
+      non_negative_integer
+      | "::"
       | "^"
       | "*"
    
@@ -955,15 +970,15 @@ Predicate directives
       | "exceptions"
       | atom
    
-   object_alias ::=
-      object_identifier "as" object_identifier
+   object_alias_list ::=
+      "[" object_alias_sequence "]"
    
    object_alias_sequence ::=
       object_alias
       | object_alias "," object_alias_sequence
-   
-   object_alias_list ::=
-      "[" object_alias_sequence "]"
+
+   object_alias ::=
+      object_identifier "as" object_identifier
 
 .. _grammar_clauses:
 
@@ -1188,10 +1203,8 @@ Entity properties
       predicate_indicator
       | "^^" predicate_indicator
       | "::" predicate_indicator
-      | variable "::" predicate_indicator
-      | object_identifier "::" predicate_indicator
-      | variable ":" predicate_indicator
-      | module_identifier ":" predicate_indicator
+      | ( variable | object_identifier ) "::" predicate_indicator
+      | ( variable | module_identifier ) ":" predicate_indicator
    
    predicate_call_update_property_list ::=
       "[" predicate_call_update_property_sequence "]"
