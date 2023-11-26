@@ -89,6 +89,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#module-identifiers">Module identifiers</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#source-files">Source files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#source-file-names">Source file names</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#terms">Terms</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#object-terms">Object terms</a></li>
@@ -524,6 +525,23 @@ protocol_identifier_list <span class="o">::=</span>
 </pre></div>
 </div>
 </section>
+</section>
+<section id="source-files">
+<span id="grammar-source-files"></span><h2>Source files<a class="headerlink" href="#source-files" title="Link to this heading"></a></h2>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>source_file <span class="o">::=</span>
+   ( source_file_terms )?
+
+source_file_terms <span class="o">::=</span>
+   source_file_term
+   | source_file_term source_file_terms
+
+source_file_term <span class="o">::=</span>
+   prolog_directive
+   | clause
+   | grammar_rule
+   | entity
+</pre></div>
+</div>
 </section>
 <section id="source-file-names">
 <span id="grammar-source-file-names"></span><h2>Source file names<a class="headerlink" href="#source-file-names" title="Link to this heading"></a></h2>

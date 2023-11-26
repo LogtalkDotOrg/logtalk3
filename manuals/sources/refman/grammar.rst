@@ -442,6 +442,26 @@ Module identifiers
    module_identifier ::=
       atom
 
+.. _grammar_source_files:
+
+Source files
+------------
+
+.. code-block:: bnf
+
+   source_file ::=
+      ( source_file_terms )?
+
+   source_file_terms ::=
+      source_file_term
+      | source_file_term source_file_terms
+
+   source_file_term ::=
+      prolog_directive
+      | clause
+      | grammar_rule
+      | entity
+
 .. _grammar_source_file_names:
 
 Source file names
