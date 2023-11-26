@@ -71,7 +71,8 @@ Documentation
 
 * IMPROVED: Handbook grammar section now uses W3C-style EBNF syntax compatible
 with the [Railroad Diagram Generator](https://www.bottlecaps.de/rr/ui). Several
-typos are also fixed. Thanks to Domingo Alvarez Duarte for his contribution.
+typos and omissions are also fixed. Thanks to Domingo Alvarez Duarte for his
+contribution and bug report.
 
 Library
 -------

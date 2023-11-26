@@ -566,6 +566,7 @@ Object directives
       | ":- set_logtalk_flag(" atom "," nonvar ")."
       | ":- include(" source_file_name ")."
       | ":- uses(" object_alias_list ")."
+      | ":- use_module(" module_alias_list ")."
       | conditional_compilation_directives
       | predicate_directives
 
@@ -587,6 +588,7 @@ Category directives
       | ":- set_logtalk_flag(" atom "," nonvar ")."
       | ":- include(" source_file_name ")."
       | ":- uses(" object_alias_list ")."
+      | ":- use_module(" module_alias_list ")."
       | conditional_compilation_directives
       | predicate_directives
 
@@ -991,6 +993,16 @@ Predicate directives
 
    object_alias ::=
       object_identifier "as" object_identifier
+   
+   module_alias_list ::=
+      "[" module_alias_sequence "]"
+   
+   module_alias_sequence ::=
+      module_alias
+      | module_alias "," module_alias_sequence
+
+   module_alias ::=
+      module_identifier "as" module_identifier
 
 .. _grammar_clauses:
 

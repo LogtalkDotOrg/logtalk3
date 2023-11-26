@@ -624,6 +624,7 @@ object_directive <span class="o">::=</span>
    | &quot;:- set_logtalk_flag(&quot; atom &quot;,&quot; nonvar &quot;).&quot;
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
    | &quot;:- uses(&quot; object_alias_list &quot;).&quot;
+   | &quot;:- use_module(&quot; module_alias_list &quot;).&quot;
    | conditional_compilation_directives
    | predicate_directives
 </pre></div>
@@ -642,6 +643,7 @@ category_directive <span class="o">::=</span>
    | &quot;:- set_logtalk_flag(&quot; atom &quot;,&quot; nonvar &quot;).&quot;
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
    | &quot;:- uses(&quot; object_alias_list &quot;).&quot;
+   | &quot;:- use_module(&quot; module_alias_list &quot;).&quot;
    | conditional_compilation_directives
    | predicate_directives
 </pre></div>
@@ -1040,6 +1042,16 @@ object_alias_sequence <span class="o">::=</span>
 
 object_alias <span class="o">::=</span>
    object_identifier &quot;as&quot; object_identifier
+
+module_alias_list <span class="o">::=</span>
+   &quot;[&quot; module_alias_sequence &quot;]&quot;
+
+module_alias_sequence <span class="o">::=</span>
+   module_alias
+   | module_alias &quot;,&quot; module_alias_sequence
+
+module_alias <span class="o">::=</span>
+   module_identifier &quot;as&quot; module_identifier
 </pre></div>
 </div>
 </section>
