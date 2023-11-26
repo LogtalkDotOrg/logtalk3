@@ -178,7 +178,7 @@ Prolog Core standard. Terminal symbols are represented between double-quotes.</p
 <section id="object-definition">
 <span id="grammar-object-definition"></span><h2>Object definition<a class="headerlink" href="#object-definition" title="Link to this heading"></a></h2>
 <div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>object <span class="o">::=</span>
-   begin_object_directive object_terms? end_object_directive
+   begin_object_directive ( object_term )* end_object_directive
 
 begin_object_directive <span class="o">::=</span>
    &quot;:- object(&quot; object_identifier ( &quot;,&quot; object_relations )? &quot;).&quot;
@@ -214,7 +214,7 @@ non_prototype_relation <span class="o">::=</span>
 <section id="category-definition">
 <span id="grammar-category-definition"></span><h2>Category definition<a class="headerlink" href="#category-definition" title="Link to this heading"></a></h2>
 <div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>category <span class="o">::=</span>
-   begin_category_directive  category_terms? end_category_directive
+   begin_category_directive  ( category_term )* end_category_directive
 
 begin_category_directive <span class="o">::=</span>
    &quot;:- category(&quot; category_identifier ( &quot;,&quot; category_relations )? &quot;).&quot;
@@ -236,7 +236,7 @@ category_relation <span class="o">::=</span>
 <section id="protocol-definition">
 <span id="grammar-protocol-definition"></span><h2>Protocol definition<a class="headerlink" href="#protocol-definition" title="Link to this heading"></a></h2>
 <div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>protocol <span class="o">::=</span>
-   begin_protocol_directive  protocol_directives? end_protocol_directive
+   begin_protocol_directive  ( protocol_directive )* end_protocol_directive
 
 begin_protocol_directive <span class="o">::=</span>
    &quot;:- protocol(&quot; protocol_identifier ( &quot;,&quot; extends_protocols)? &quot;).&quot;
@@ -441,80 +441,32 @@ complemented_object_list <span class="o">::=</span>
 </section>
 <section id="entity-identifiers">
 <span id="grammar-entity-identifiers"></span><h2>Entity identifiers<a class="headerlink" href="#entity-identifiers" title="Link to this heading"></a></h2>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>entity_identifiers <span class="o">::=</span>
-   entity_identifier
-   | entity_identifier_sequence
-   | entity_identifier_list
-
-entity_identifier <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>entity_identifier <span class="o">::=</span>
    object_identifier
    | protocol_identifier
    | category_identifier
-
-entity_identifier_sequence <span class="o">::=</span>
-   entity_identifier
-   | entity_identifier &quot;,&quot; entity_identifier_sequence
-
-entity_identifier_list <span class="o">::=</span>
-   &quot;[&quot; entity_identifier_sequence &quot;]&quot;
 </pre></div>
 </div>
 <section id="object-identifiers">
 <span id="grammar-object-identifiers"></span><h3>Object identifiers<a class="headerlink" href="#object-identifiers" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>object_identifiers <span class="o">::=</span>
-   object_identifier
-   | object_identifier_sequence
-   | object_identifier_list
-
-object_identifier <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>object_identifier <span class="o">::=</span>
    atom
    | compound
-
-object_identifier_sequence <span class="o">::=</span>
-   object_identifier
-   | object_identifier &quot;,&quot; object_identifier_sequence
-
-object_identifier_list <span class="o">::=</span>
-   &quot;[&quot; object_identifier_sequence &quot;]&quot;
 </pre></div>
 </div>
 </section>
 <section id="category-identifiers">
 <span id="grammar-category-identifiers"></span><h3>Category identifiers<a class="headerlink" href="#category-identifiers" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>category_identifiers <span class="o">::=</span>
-   category_identifier
-   | category_identifier_sequence
-   | category_identifier_list
-
-category_identifier <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>category_identifier <span class="o">::=</span>
    atom
    | compound
-
-category_identifier_sequence <span class="o">::=</span>
-   category_identifier
-   | category_identifier &quot;,&quot; category_identifier_sequence
-
-category_identifier_list <span class="o">::=</span>
-   &quot;[&quot; category_identifier_sequence &quot;]&quot;
 </pre></div>
 </div>
 </section>
 <section id="protocol-identifiers">
 <span id="grammar-protocol-identifiers"></span><h3>Protocol identifiers<a class="headerlink" href="#protocol-identifiers" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>protocol_identifiers <span class="o">::=</span>
-   protocol_identifier
-   | protocol_identifier_sequence
-   | protocol_identifier_list
-
-protocol_identifier <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>protocol_identifier <span class="o">::=</span>
    atom
-
-protocol_identifier_sequence <span class="o">::=</span>
-   protocol_identifier
-   | protocol_identifier &quot;,&quot; protocol_identifier_sequence
-
-protocol_identifier_list <span class="o">::=</span>
-   &quot;[&quot; protocol_identifier_sequence &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -529,14 +481,10 @@ protocol_identifier_list <span class="o">::=</span>
 <section id="source-files">
 <span id="grammar-source-files"></span><h2>Source files<a class="headerlink" href="#source-files" title="Link to this heading"></a></h2>
 <div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>source_file <span class="o">::=</span>
-   ( source_file_terms )?
+   ( source_file_content )*
 
-source_file_terms <span class="o">::=</span>
-   source_file_term
-   | source_file_term source_file_terms
-
-source_file_term <span class="o">::=</span>
-   prolog_directive
+source_file_content <span class="o">::=</span>
+   source_file_directive
    | clause
    | grammar_rule
    | entity
@@ -545,11 +493,7 @@ source_file_term <span class="o">::=</span>
 </section>
 <section id="source-file-names">
 <span id="grammar-source-file-names"></span><h2>Source file names<a class="headerlink" href="#source-file-names" title="Link to this heading"></a></h2>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>source_file_names <span class="o">::=</span>
-   source_file_name
-   | source_file_name_list
-
-source_file_name <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>source_file_name <span class="o">::=</span>
    atom
    | library_source_file_name
 
@@ -558,13 +502,6 @@ library_source_file_name <span class="o">::=</span>
 
 library_name <span class="o">::=</span>
    atom
-
-source_file_name_sequence <span class="o">::=</span>
-   source_file_name
-   | source_file_name &quot;,&quot; source_file_name_sequence
-
-source_file_name_list <span class="o">::=</span>
-   &quot;[&quot; source_file_name_sequence &quot;]&quot;
 </pre></div>
 </div>
 </section>
@@ -572,11 +509,7 @@ source_file_name_list <span class="o">::=</span>
 <span id="grammar-terms"></span><h2>Terms<a class="headerlink" href="#terms" title="Link to this heading"></a></h2>
 <section id="object-terms">
 <span id="grammar-object-terms"></span><h3>Object terms<a class="headerlink" href="#object-terms" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>object_terms <span class="o">::=</span>
-   object_term
-   | object_term object_terms
-
-object_term <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>object_term <span class="o">::=</span>
    object_directive
    | clause
    | grammar_rule
@@ -585,11 +518,7 @@ object_term <span class="o">::=</span>
 </section>
 <section id="category-terms">
 <span id="grammar-category-terms"></span><h3>Category terms<a class="headerlink" href="#category-terms" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>category_terms <span class="o">::=</span>
-   category_term
-   | category_term category_terms
-
-category_term <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>category_term <span class="o">::=</span>
    category_directive
    | clause
    | grammar_rule
@@ -601,25 +530,17 @@ category_term <span class="o">::=</span>
 <span id="grammar-directives"></span><h2>Directives<a class="headerlink" href="#directives" title="Link to this heading"></a></h2>
 <section id="source-file-directives">
 <span id="grammar-source-file-directives"></span><h3>Source file directives<a class="headerlink" href="#source-file-directives" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>source_file_directives <span class="o">::=</span>
-   source_file_directive
-   | source_file_directive source_file_directives
-
-source_file_directive <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>source_file_directive <span class="o">::=</span>
    &quot;:- encoding(&quot; atom &quot;).&quot;
    | &quot;:- set_logtalk_flag(&quot; atom &quot;,&quot; nonvar &quot;).&quot;
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
-   | prolog_directives
+   | prolog_directive
 </pre></div>
 </div>
 </section>
 <section id="conditional-compilation-directives">
 <span id="grammar-conditional-compilation-directives"></span><h3>Conditional compilation directives<a class="headerlink" href="#conditional-compilation-directives" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>conditional_compilation_directives <span class="o">::=</span>
-   conditional_compilation_directive
-   | conditional_compilation_directive conditional_compilation_directives
-
-conditional_compilation_directive <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>conditional_compilation_directive <span class="o">::=</span>
    &quot;:- if(&quot; callable &quot;).&quot;
    | &quot;:- elif(&quot; callable &quot;).&quot;
    | &quot;:- else.&quot;
@@ -629,11 +550,7 @@ conditional_compilation_directive <span class="o">::=</span>
 </section>
 <section id="object-directives">
 <span id="grammar-object-directives"></span><h3>Object directives<a class="headerlink" href="#object-directives" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>object_directives <span class="o">::=</span>
-   object_directive
-   | object_directive object_directives
-
-object_directive <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>object_directive <span class="o">::=</span>
    &quot;:- initialization(&quot; callable &quot;).&quot;
    | &quot;:- built_in.&quot;
    | &quot;:- threaded.&quot;
@@ -643,18 +560,14 @@ object_directive <span class="o">::=</span>
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
    | &quot;:- uses(&quot; object_alias_list &quot;).&quot;
    | &quot;:- use_module(&quot; module_alias_list &quot;).&quot;
-   | conditional_compilation_directives
-   | predicate_directives
+   | conditional_compilation_directive
+   | predicate_directive
 </pre></div>
 </div>
 </section>
 <section id="category-directives">
 <span id="grammar-category-directives"></span><h3>Category directives<a class="headerlink" href="#category-directives" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>category_directives <span class="o">::=</span>
-   category_directive
-   | category_directive category_directives
-
-category_directive <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>category_directive <span class="o">::=</span>
    &quot;:- built_in.&quot;
    | &quot;:- dynamic.&quot;
    | &quot;:- info(&quot; entity_info_list &quot;).&quot;
@@ -662,35 +575,27 @@ category_directive <span class="o">::=</span>
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
    | &quot;:- uses(&quot; object_alias_list &quot;).&quot;
    | &quot;:- use_module(&quot; module_alias_list &quot;).&quot;
-   | conditional_compilation_directives
-   | predicate_directives
+   | conditional_compilation_directive
+   | predicate_directive
 </pre></div>
 </div>
 </section>
 <section id="protocol-directives">
 <span id="grammar-protocol-directives"></span><h3>Protocol directives<a class="headerlink" href="#protocol-directives" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>protocol_directives <span class="o">::=</span>
-   protocol_directive
-   | protocol_directive protocol_directives
-
-protocol_directive <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>protocol_directive <span class="o">::=</span>
    &quot;:- built_in.&quot;
    | &quot;:- dynamic.&quot;
    | &quot;:- info(&quot; entity_info_list &quot;).&quot;
    | &quot;:- set_logtalk_flag(&quot; atom &quot;,&quot; nonvar &quot;).&quot;
    | &quot;:- include(&quot; source_file_name &quot;).&quot;
-   | conditional_compilation_directives
-   | predicate_directives
+   | conditional_compilation_directive
+   | predicate_directive
 </pre></div>
 </div>
 </section>
 <section id="predicate-directives">
 <span id="grammar-predicate-directives"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Link to this heading"></a></h3>
-<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>predicate_directives <span class="o">::=</span>
-   predicate_directive
-   | predicate_directive predicate_directives
-
-predicate_directive <span class="o">::=</span>
+<div class="highlight-bnf notranslate"><div class="highlight"><pre><span></span>predicate_directive <span class="o">::=</span>
    alias_directive
    | synchronized_directive
    | uses_directive
@@ -858,34 +763,8 @@ qualified_directive_resource <span class="o">::=</span>
 predicate_indicator_alias <span class="o">::=</span>
    predicate_indicator &quot;as&quot; predicate_indicator
 
-predicate_indicator_alias_sequence <span class="o">::=</span>
-   predicate_indicator_alias
-   | predicate_indicator_alias &quot;,&quot; predicate_indicator_alias_sequence
-
-predicate_indicator_alias_list <span class="o">::=</span>
-   &quot;[&quot; predicate_indicator_alias_sequence &quot;]&quot;
-
 predicate_template_alias <span class="o">::=</span>
    callable &quot;as&quot; callable
-
-predicate_template_alias_sequence <span class="o">::=</span>
-   predicate_template_alias
-   | predicate_template_alias &quot;,&quot; predicate_template_alias_sequence
-
-predicate_template_alias_list <span class="o">::=</span>
-   &quot;[&quot; predicate_template_alias_sequence &quot;]&quot;
-
-non_terminal_indicator_term <span class="o">::=</span>
-   non_terminal_indicator
-   | non_terminal_indicator_sequence
-   | non_terminal_indicator_list
-
-non_terminal_indicator_sequence <span class="o">::=</span>
-   non_terminal_indicator
-   | non_terminal_indicator &quot;,&quot; non_terminal_indicator_sequence
-
-non_terminal_indicator_list <span class="o">::=</span>
-   &quot;[&quot; non_terminal_indicator_sequence &quot;]&quot;
 
 non_terminal_indicator <span class="o">::=</span>
    functor &quot;//&quot; arity

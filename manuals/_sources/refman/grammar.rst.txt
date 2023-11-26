@@ -45,7 +45,7 @@ Object definition
 .. code-block:: bnf
 
    object ::=
-      begin_object_directive object_terms? end_object_directive
+      begin_object_directive ( object_term )* end_object_directive
       
    begin_object_directive ::=
       ":- object(" object_identifier ( "," object_relations )? ")."
@@ -84,7 +84,7 @@ Category definition
 .. code-block:: bnf
 
    category ::=
-      begin_category_directive  category_terms? end_category_directive
+      begin_category_directive  ( category_term )* end_category_directive
    
    begin_category_directive ::=
       ":- category(" category_identifier ( "," category_relations )? ")."
@@ -109,7 +109,7 @@ Protocol definition
 .. code-block:: bnf
 
    protocol ::=
-      begin_protocol_directive  protocol_directives? end_protocol_directive
+      begin_protocol_directive  ( protocol_directive )* end_protocol_directive
    
    begin_protocol_directive ::=
       ":- protocol(" protocol_identifier ( "," extends_protocols)? ")."
@@ -346,23 +346,11 @@ Entity identifiers
 ------------------
 
 .. code-block:: bnf
-
-   entity_identifiers ::=
-      entity_identifier
-      | entity_identifier_sequence
-      | entity_identifier_list
       
    entity_identifier ::=
       object_identifier
       | protocol_identifier
       | category_identifier
-      
-   entity_identifier_sequence ::=
-      entity_identifier
-      | entity_identifier "," entity_identifier_sequence
-      
-   entity_identifier_list ::=
-      "[" entity_identifier_sequence "]"
 
 .. _grammar_object_identifiers:
 
@@ -370,22 +358,10 @@ Object identifiers
 ~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   object_identifiers ::=
-      object_identifier
-      | object_identifier_sequence
-      | object_identifier_list
       
    object_identifier ::=
       atom
       | compound
-      
-   object_identifier_sequence ::=
-      object_identifier
-      | object_identifier "," object_identifier_sequence
-      
-   object_identifier_list ::=
-      "[" object_identifier_sequence "]"
 
 .. _grammar_category_identifiers:
 
@@ -393,22 +369,10 @@ Category identifiers
 ~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   category_identifiers ::=
-      category_identifier
-      | category_identifier_sequence
-      | category_identifier_list
       
    category_identifier ::=
       atom
       | compound
-      
-   category_identifier_sequence ::=
-      category_identifier
-      | category_identifier "," category_identifier_sequence
-      
-   category_identifier_list ::=
-      "[" category_identifier_sequence "]"
 
 .. _grammar_protocol_identifiers:
 
@@ -416,21 +380,9 @@ Protocol identifiers
 ~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   protocol_identifiers ::=
-      protocol_identifier
-      | protocol_identifier_sequence
-      | protocol_identifier_list
    
    protocol_identifier ::=
       atom
-      
-   protocol_identifier_sequence ::=
-      protocol_identifier
-      | protocol_identifier "," protocol_identifier_sequence
-      
-   protocol_identifier_list ::=
-      "[" protocol_identifier_sequence "]"
 
 .. _grammar_module_identifiers:
 
@@ -450,14 +402,10 @@ Source files
 .. code-block:: bnf
 
    source_file ::=
-      ( source_file_terms )?
+      ( source_file_content )*
 
-   source_file_terms ::=
-      source_file_term
-      | source_file_term source_file_terms
-
-   source_file_term ::=
-      prolog_directive
+   source_file_content ::=
+      source_file_directive
       | clause
       | grammar_rule
       | entity
@@ -468,10 +416,6 @@ Source file names
 -----------------
 
 .. code-block:: bnf
-
-   source_file_names ::=
-      source_file_name
-      | source_file_name_list
       
    source_file_name ::=
       atom
@@ -482,13 +426,6 @@ Source file names
       
    library_name ::=
       atom
-      
-   source_file_name_sequence ::=
-      source_file_name
-      | source_file_name "," source_file_name_sequence
-      
-   source_file_name_list ::=
-      "[" source_file_name_sequence "]"
 
 .. _grammar_terms:
 
@@ -501,10 +438,6 @@ Object terms
 ~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   object_terms ::=
-      object_term
-      | object_term object_terms
       
    object_term ::=
       object_directive
@@ -517,10 +450,6 @@ Category terms
 ~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   category_terms ::=
-      category_term
-      | category_term category_terms
       
    category_term ::=
       category_directive
@@ -538,16 +467,12 @@ Source file directives
 ~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   source_file_directives ::=
-      source_file_directive
-      | source_file_directive source_file_directives
       
    source_file_directive ::=
       ":- encoding(" atom ")."
       | ":- set_logtalk_flag(" atom "," nonvar ")."
       | ":- include(" source_file_name ")."
-      | prolog_directives
+      | prolog_directive
 
 .. _grammar_conditional_compilation_directives:
 
@@ -555,10 +480,6 @@ Conditional compilation directives
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   conditional_compilation_directives ::=
-      conditional_compilation_directive
-      | conditional_compilation_directive conditional_compilation_directives
       
    conditional_compilation_directive ::=
       ":- if(" callable ")."
@@ -572,10 +493,6 @@ Object directives
 ~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   object_directives ::=
-      object_directive
-      | object_directive object_directives
       
    object_directive ::=
       ":- initialization(" callable ")."
@@ -587,8 +504,8 @@ Object directives
       | ":- include(" source_file_name ")."
       | ":- uses(" object_alias_list ")."
       | ":- use_module(" module_alias_list ")."
-      | conditional_compilation_directives
-      | predicate_directives
+      | conditional_compilation_directive
+      | predicate_directive
 
 .. _grammar_category_directives:
 
@@ -596,10 +513,6 @@ Category directives
 ~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   category_directives ::=
-      category_directive
-      | category_directive category_directives
       
    category_directive ::=
       ":- built_in."
@@ -609,8 +522,8 @@ Category directives
       | ":- include(" source_file_name ")."
       | ":- uses(" object_alias_list ")."
       | ":- use_module(" module_alias_list ")."
-      | conditional_compilation_directives
-      | predicate_directives
+      | conditional_compilation_directive
+      | predicate_directive
 
 .. _grammar_protocol_directives:
 
@@ -618,10 +531,6 @@ Protocol directives
 ~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   protocol_directives ::=
-      protocol_directive
-      | protocol_directive protocol_directives
       
    protocol_directive ::=
       ":- built_in."
@@ -629,8 +538,8 @@ Protocol directives
       | ":- info(" entity_info_list ")."
       | ":- set_logtalk_flag(" atom "," nonvar ")."
       | ":- include(" source_file_name ")."
-      | conditional_compilation_directives
-      | predicate_directives
+      | conditional_compilation_directive
+      | predicate_directive
 
 .. _grammar_predicate_directives:
 
@@ -638,10 +547,6 @@ Predicate directives
 ~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: bnf
-
-   predicate_directives ::=
-      predicate_directive
-      | predicate_directive predicate_directives
       
    predicate_directive ::=
       alias_directive
@@ -811,34 +716,8 @@ Predicate directives
    predicate_indicator_alias ::=
       predicate_indicator "as" predicate_indicator
    
-   predicate_indicator_alias_sequence ::=
-      predicate_indicator_alias
-      | predicate_indicator_alias "," predicate_indicator_alias_sequence
-   
-   predicate_indicator_alias_list ::=
-      "[" predicate_indicator_alias_sequence "]"
-   
    predicate_template_alias ::=
       callable "as" callable
-   
-   predicate_template_alias_sequence ::=
-      predicate_template_alias
-      | predicate_template_alias "," predicate_template_alias_sequence
-   
-   predicate_template_alias_list ::=
-      "[" predicate_template_alias_sequence "]"
-      
-   non_terminal_indicator_term ::=
-      non_terminal_indicator
-      | non_terminal_indicator_sequence
-      | non_terminal_indicator_list
-   
-   non_terminal_indicator_sequence ::=
-      non_terminal_indicator
-      | non_terminal_indicator "," non_terminal_indicator_sequence
-   
-   non_terminal_indicator_list ::=
-      "[" non_terminal_indicator_sequence "]"
    
    non_terminal_indicator ::=
       functor "//" arity
