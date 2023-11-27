@@ -3550,6 +3550,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`graph_language_protocol <graph_language_protocol/0::graph_header/5>`
 
+``greedy_without//2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`sequence_grammars <sequence_grammars/0::greedy_without//2>`
+
 ``ground/1``
 ------------
 
@@ -4536,6 +4546,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::last/2>`
 * :ref:`varlistp <varlistp/0::last/2>`
+
+``lazy_without//2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`sequence_grammars <sequence_grammars/0::lazy_without//2>`
 
 ``leaf/1``
 ----------
@@ -7381,6 +7401,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`fast_random <fast_random/0::reset_seed/0>`
 * :ref:`random <random/0::reset_seed/0>`
+
+``rest//1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`sequence_grammars <sequence_grammars/0::rest//1>`
 
 ``restore/1``
 -------------

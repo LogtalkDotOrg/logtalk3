@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2022-02-16,
+		date is 2023-11-27,
 		comment is 'Unit tests for the "grammars" library.',
 		parnames is ['Format']
 	]).
@@ -293,6 +293,40 @@
 			Solutions
 		),
 		list::length(Solutions, N).
+
+	test(lazy_without_2_01, true(Sequences == [[],[1],[1,2],[1,2,3]])) :-
+		findall(
+			Sequence,
+			phrase(sequence_grammars::lazy_without([0], Sequence), [1,2,3,0,4,5], _),
+			Sequences
+		).
+
+	test(lazy_without_2_02, true(Sequences == [[]])) :-
+		findall(
+			Sequence,
+			phrase(sequence_grammars::lazy_without([0], Sequence), [0,1,2,3,4,5], _),
+			Sequences
+		).
+
+	test(greedy_without_2_01, true(Sequences == [[]])) :-
+		findall(
+			Sequence,
+			phrase(sequence_grammars::greedy_without([0], Sequence), [0,1,2,3], _),
+			Sequences
+		).
+
+	test(greedy_without_2_02, true(Sequences == [[1,2,3]-[0]])) :-
+		findall(
+			Sequence-Rest,
+			phrase(sequence_grammars::greedy_without([0], Sequence), [1,2,3,0], Rest),
+			Sequences
+		).
+
+	test(rest_1_01, true(Terminals == [1,2,3])) :-
+		phrase(sequence_grammars::rest(Terminals), [1,2,3]).
+
+	test(rest_1_02, true(Terminals == [1,2,3])) :-
+		phrase(sequence_grammars::rest(Terminals), [1,2,3,4,5], [4,5]).
 
 	% auxiliary predicates
 

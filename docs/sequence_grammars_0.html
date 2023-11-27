@@ -205,8 +205,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:1:0</div>
-<div class="line"><strong>Date:</strong> 2023-01-30</div>
+<div class="line"><strong>Version:</strong> 0:2:0</div>
+<div class="line"><strong>Date:</strong> 2023-11-27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -240,11 +240,14 @@
 <li><p><a class="reference internal" href="#one-or-more-1" id="id3"><code class="docutils literal notranslate"><span class="pre">one_or_more//1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#zero-or-more-0" id="id4"><code class="docutils literal notranslate"><span class="pre">zero_or_more//0</span></code></a></p></li>
 <li><p><a class="reference internal" href="#one-or-more-0" id="id5"><code class="docutils literal notranslate"><span class="pre">one_or_more//0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lazy-without-2" id="id6"><code class="docutils literal notranslate"><span class="pre">lazy_without//2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#greedy-without-2" id="id7"><code class="docutils literal notranslate"><span class="pre">greedy_without//2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rest-1" id="id8"><code class="docutils literal notranslate"><span class="pre">rest//1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id9">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id10">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id11">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -321,6 +324,69 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">one_or_more</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="lazy-without-2">
+<span id="sequence-grammars-0-lazy-without-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lazy_without//2</span></code></a><a class="headerlink" href="#lazy-without-2" title="Link to this heading"></a></h3>
+<p>Lazily collect input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lazy_without(StopTerminals,Terminals)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lazy_without(+list(atomic),-list(atomic))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="greedy-without-2">
+<span id="sequence-grammars-0-greedy-without-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">greedy_without//2</span></code></a><a class="headerlink" href="#greedy-without-2" title="Link to this heading"></a></h3>
+<p>Greedly collect input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">greedy_without(StopTerminals,Terminals)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">greedy_without(+list(atomic),-list(atomic))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="rest-1">
+<span id="sequence-grammars-0-rest-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rest//1</span></code></a><a class="headerlink" href="#rest-1" title="Link to this heading"></a></h3>
+<p>Rest of the input terminals.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rest(Terminals)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rest(-list(atomic))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

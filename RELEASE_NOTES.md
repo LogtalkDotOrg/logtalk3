@@ -95,6 +95,9 @@ occurrences of list elements.
 a new element and returning the resulting list, and for swapping two randomly
 chosen elements of a list.
 
+* ADDED: Non-terminals `lazy_without//2`, `greedy_without//2`, and `rest//1`
+to the `sequence_grammars` library object.
+
 * IMPROVED: Performance of the `reader` library predicates that read a file
 or a stream to a list of chars, codes, or bytes.
 
