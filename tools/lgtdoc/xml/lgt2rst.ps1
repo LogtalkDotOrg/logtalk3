@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to reStructuredText files conversion script
-##   Last updated on March 15, 2023
+##   Last updated on November 27, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -270,6 +270,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$writer = New-Object System.IO.StreamWriter($fs)
 			$entity_xslt_object.Transform($reader, $xslArguments, $writer)
 			$writer.Close()
+			$reader.Dispose()
 		}
 	}
 	Get-ChildItem -Path . -Filter .\*.xml |
@@ -283,6 +284,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$writer = New-Object System.IO.StreamWriter($fs)
 			$index_xslt_object.Transform($reader, $xslArguments, $writer)
 			$writer.Close()
+			$reader.Dispose()
 		}
 	}
 	Write-Output "conversion done"

@@ -127,6 +127,9 @@ for CxProlog.
 where the tests failed to run due to an unexpected loading error likely caused
 by a backend bug.
 
+* FIXED: The `lgt2rst.ps1` PowerShell script to release the lock on the XML
+files after converting them to reStructuredText files.
+
 Examples
 --------
 
