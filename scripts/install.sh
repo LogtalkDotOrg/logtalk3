@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on October 10, 2023
+##   Last updated on November 27, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -99,7 +99,7 @@ if [ ! -w "$prefix" ] ; then
 fi
 
 echo
-echo "Installing Logtalk $version on $prefix/share ..."
+echo "Installing Logtalk $version on \"$prefix/share\" ..."
 echo
 
 mkdir -p "$prefix/share"
@@ -173,14 +173,14 @@ cd ../../info || exit 1
 if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
 	cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
 	if [ "$(command -v install-info)" != "" ]; then
-		install-info --delete LogtalkAPIs-*.info dir
+		install-info --silent --delete LogtalkAPIs-*.info
 		install-info LogtalkAPIs-$version_base.info dir
 	fi
 fi
 if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
 	cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
 	if [ "$(command -v install-info)" != "" ]; then
-		install-info --delete TheLogtalkHandbook-*.info dir
+		install-info --silent --delete TheLogtalkHandbook-*.info
 		install-info TheLogtalkHandbook-$version_base.info dir
 	fi
 fi
@@ -210,7 +210,7 @@ echo
 echo "Users should ensure that the environment variable LOGTALKHOME is set to"
 echo "\"$prefix/share/logtalk\" and then run the \"logtalk_user_setup\" shell script"
 echo "once before running the integration scripts. For more details on manual"
-echo "installation setup, see the INSTALL.md file."
+echo "installation setup, see the \"INSTALL.md\" file."
 echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
 echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"
