@@ -149,6 +149,9 @@ environment variable, and `/opt/local/share/info` to the default system
 * UPDATED: The macOS installer to inform the user about the additions to the
 `PATH`, `MANPATH`, and `INFOPATH` environment variables.
 
+* FIXED: The `logtalk_user_setup.ps1` PowerShell script to use a valid path
+for the backup directory.
+
 
 3.72.0 - November 9, 2023
 =========================

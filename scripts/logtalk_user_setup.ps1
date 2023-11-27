@@ -96,7 +96,7 @@ if ($env:LOGTALKHOME -eq $env:LOGTALKUSER) {
 
 function Create-Logtalkuser-Directory {
 	if (Test-Path $env:LOGTALKUSER) {
-		$date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
+		$date = Get-Date -Format "yyyy-MM-dd-HHmmss"
 		Move-Item -Path $env:LOGTALKUSER -Destination $env:LOGTALKUSER-backup-$date
 		Write-Output "Created a backup of the existing %LOGTALKUSER% directory:"
 		Write-Output ""
