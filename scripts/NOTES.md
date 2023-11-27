@@ -154,9 +154,10 @@ also available in the Logtalk website.
 	defined); must be run by each end-user in order to ensure proper
 	permissions for the copied files; the `LOGTALKHOME` environment
 	variable must be defined (pointing to the Logtalk installation
-	directory); the `logtalk_user_setup.ps1` script requires running
-	by a user with administration privileges due to the creation of
-	symbolic links
+	directory); the `logtalk_user_setup.ps1` script requires either
+	running by a user with administration privileges due to the creation
+	of symbolic links or turning on "Developer mode" in the
+	Settings -> Update & Security -> For Developers panel.
 - `logtalk_user_setup.bat`  
 	wrapper for the `logtalk_user_setup.js` script to simplify its use
 
