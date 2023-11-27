@@ -74,6 +74,9 @@ with the [Railroad Diagram Generator](https://www.bottlecaps.de/rr/ui). Several
 typos and omissions are also fixed. Thanks to Domingo Alvarez Duarte for his
 contribution and bug report.
 
+* UPDATED: The manual installation instructions on generating documentation
+human-readable formats.
+
 Library
 -------
 

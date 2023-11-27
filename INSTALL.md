@@ -196,11 +196,38 @@ If you're using Windows, the provided GUI installer (which supports both admin
 and non-admin users) takes care of the definition of the environment variables.
 
 
+Generating documentation human-readable formats
+-----------------------------------------------
+
+When downloading the source archive or cloning the git repo, the documentation
+human-readable formats are not included and must be manually generated afer
+the basic installation:
+
+* POSIX systems  
+
+		$ cd manuals/sources
+		$ ./build_manuals.sh
+		$ cd ../../scripts
+		$ ./update_html_docs.sh
+
+* Windows  
+
+		C:\> cd manuals\sources
+		C:\> build_manuals.ps1
+		C:\> cd ..\..\scripts
+		C:\> update_html_docs.ps1
+
+If you used the `install.sh` script for the basic installation, run it again
+(using the same options) to install the generated Texinfo versions of the
+Handbook and APIs.
+
+
 End-user setup
 --------------
 
 Skip this step if you have set both Logtalk environment variables
-(`LOGTALKHOME` and `LOGTALKUSER`) to point to the same directory.
+(`LOGTALKHOME` and `LOGTALKUSER`) to point to the same directory
+(e.g. when using a git repo clone for both).
 
 Each user must make a local copy of the Logtalk user-modifiable files (examples,
 libraries, tools, and other supporting files) in his/her home directory. These
@@ -208,9 +235,12 @@ copies can be easily made by running the `logtalk_user_setup` shell script (see
 the `scripts/NOTES.md` file for details):
 
 * POSIX systems  
-	`% logtalk_user_setup`
+
+		% logtalk_user_setup
+
 * Windows  
-	`C:\> logtalk_user_setup`
+
+		C:\> logtalk_user_setup
 
 The local copies made by the `logtalk_user_setup` scripts have both read and
 write permissions for the user running the script. When used with one of the
