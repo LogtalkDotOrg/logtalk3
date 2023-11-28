@@ -204,8 +204,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 5:1:0</div>
-<div class="line"><strong>Date:</strong> 2023-06-20</div>
+<div class="line"><strong>Version:</strong> 5:2:0</div>
+<div class="line"><strong>Date:</strong> 2023-11-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -225,20 +225,20 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Compiling files for generating XML documentation: All source files must be compiled with the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on.</p></li>
-<li><p>xml_spec(Specification) option: XML documenting files specification format. Possible option values are <code class="docutils literal notranslate"><span class="pre">dtd</span></code> (DTD specification; default) and <code class="docutils literal notranslate"><span class="pre">xsd</span></code> (XML Schema specification).</p></li>
-<li><p>xml_spec_reference(Reference) option: Reference to the XML specification file in XML documenting files. Possible values are <code class="docutils literal notranslate"><span class="pre">local</span></code> (default; DTD/XSD file in same folder as XML files), <code class="docutils literal notranslate"><span class="pre">web</span></code> (logtalk.org website DTD/XSD file), and <code class="docutils literal notranslate"><span class="pre">standalone</span></code> (no reference to specification files).</p></li>
-<li><p>entity_xsl_file(File) option: XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_entity_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
-<li><p>index_xsl_file(File) option: XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_index_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
-<li><p>xml_docs_directory(Directory) option: Directory where the XML documenting files will be generated. The default value is <code class="docutils literal notranslate"><span class="pre">./xml_docs</span></code>, a sub-directory of the source files directory.</p></li>
-<li><p>bom(Boolean) option: Defines if a BOM should be added to the generated XML documenting files.</p></li>
-<li><p>encoding(Encoding) option: Encoding to be used for the generated XML documenting files.</p></li>
-<li><p>omit_path_prefixes(Prefixes) option: List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</p></li>
-<li><p>exclude_files(List) option: List of files to exclude when generating the XML documenting files.</p></li>
-<li><p>exclude_paths(List) option: List of relative library paths to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
-<li><p>exclude_prefixes(List) option: List of path prefixes to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
-<li><p>exclude_entities(List) option: List of entities to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
-<li><p>sort_predicates(Boolean) option: Sort entity predicates (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
-<li><p>Known issues: The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xml_spec(Specification)</span></code> option: XML documenting files specification format. Possible option values are <code class="docutils literal notranslate"><span class="pre">dtd</span></code> (DTD specification; default) and <code class="docutils literal notranslate"><span class="pre">xsd</span></code> (XML Schema specification).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xml_spec_reference(Reference)</span></code> option: Reference to the XML specification file in XML documenting files. Possible values are <code class="docutils literal notranslate"><span class="pre">local</span></code> (default; DTD/XSD file in same folder as XML files), <code class="docutils literal notranslate"><span class="pre">web</span></code> (logtalk.org website DTD/XSD file), and <code class="docutils literal notranslate"><span class="pre">standalone</span></code> (no reference to specification files).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entity_xsl_file(File)</span></code> option: XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_entity_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index_xsl_file(File)</span></code> option: XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_index_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xml_docs_directory(Directory)</span></code> option: Directory where the XML documenting files will be generated. The default value is <code class="docutils literal notranslate"><span class="pre">./xml_docs</span></code>, a sub-directory of the source files directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bom(Boolean)</span></code> option: Defines if a BOM should be added to the generated XML documenting files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encoding(Encoding)</span></code> option: Encoding to be used for the generated XML documenting files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code> option: List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_files(List)</span></code> option: List of files to exclude when generating the XML documenting files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_paths(List)</span></code> option: List of relative library paths to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_prefixes(List)</span></code> option: List of path prefixes to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_entities(List)</span></code> option: List of entities to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sort_predicates(Boolean)</span></code> option: Sort entity predicates (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
+<li><p>Known issues: Some options may depend on the used XSL processor. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors (e.g. <code class="docutils literal notranslate"><span class="pre">fop2</span></code>) reject reference to a DTD.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

@@ -33,26 +33,26 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 5:1:0,
+		version is 5:2:0,
 		author is 'Paulo Moura',
-		date is 2023-06-20,
+		date is 2023-11-28,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the ``source_data`` flag turned on.',
-			'xml_spec(Specification) option' - 'XML documenting files specification format. Possible option values are ``dtd`` (DTD specification; default) and ``xsd`` (XML Schema specification).',
-			'xml_spec_reference(Reference) option' - 'Reference to the XML specification file in XML documenting files. Possible values are ``local`` (default; DTD/XSD file in same folder as XML files), ``web`` (logtalk.org website DTD/XSD file), and ``standalone`` (no reference to specification files).',
-			'entity_xsl_file(File) option' - 'XSLT file to use with generated XML documenting files. Default is ``logtalk_entity_to_xml.xsl``, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the ``lgt2xml.sh`` script on the output directory).',
-			'index_xsl_file(File) option' - 'XSLT file to use with generated XML documenting files. Default is ``logtalk_index_to_xml.xsl``, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the ``lgt2xml.sh`` script on the output directory).',
-			'xml_docs_directory(Directory) option' - 'Directory where the XML documenting files will be generated. The default value is ``./xml_docs``, a sub-directory of the source files directory.',
-			'bom(Boolean) option' - 'Defines if a BOM should be added to the generated XML documenting files.',
-			'encoding(Encoding) option' - 'Encoding to be used for the generated XML documenting files.',
-			'omit_path_prefixes(Prefixes) option' - 'List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.',
-			'exclude_files(List) option' - 'List of files to exclude when generating the XML documenting files.',
-			'exclude_paths(List) option' - 'List of relative library paths to exclude when generating the XML documenting files (default is ``[]``).',
-			'exclude_prefixes(List) option' - 'List of path prefixes to exclude when generating the XML documenting files (default is ``[]``).',
-			'exclude_entities(List) option' - 'List of entities to exclude when generating the XML documenting files (default is ``[]``).',
-			'sort_predicates(Boolean) option' - 'Sort entity predicates (default is ``false``).',
-			'Known issues' - 'The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.'
+			'``xml_spec(Specification)`` option' - 'XML documenting files specification format. Possible option values are ``dtd`` (DTD specification; default) and ``xsd`` (XML Schema specification).',
+			'``xml_spec_reference(Reference)`` option' - 'Reference to the XML specification file in XML documenting files. Possible values are ``local`` (default; DTD/XSD file in same folder as XML files), ``web`` (logtalk.org website DTD/XSD file), and ``standalone`` (no reference to specification files).',
+			'``entity_xsl_file(File)`` option' - 'XSLT file to use with generated XML documenting files. Default is ``logtalk_entity_to_xml.xsl``, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the ``lgt2xml.sh`` script on the output directory).',
+			'``index_xsl_file(File)`` option' - 'XSLT file to use with generated XML documenting files. Default is ``logtalk_index_to_xml.xsl``, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the ``lgt2xml.sh`` script on the output directory).',
+			'``xml_docs_directory(Directory)`` option' - 'Directory where the XML documenting files will be generated. The default value is ``./xml_docs``, a sub-directory of the source files directory.',
+			'``bom(Boolean)`` option' - 'Defines if a BOM should be added to the generated XML documenting files.',
+			'``encoding(Encoding)`` option' - 'Encoding to be used for the generated XML documenting files.',
+			'``omit_path_prefixes(Prefixes)`` option' - 'List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.',
+			'``exclude_files(List)`` option' - 'List of files to exclude when generating the XML documenting files.',
+			'``exclude_paths(List)`` option' - 'List of relative library paths to exclude when generating the XML documenting files (default is ``[]``).',
+			'``exclude_prefixes(List)`` option' - 'List of path prefixes to exclude when generating the XML documenting files (default is ``[]``).',
+			'``exclude_entities(List)`` option' - 'List of entities to exclude when generating the XML documenting files (default is ``[]``).',
+			'``sort_predicates(Boolean)`` option' - 'Sort entity predicates (default is ``false``).',
+			'Known issues' - 'Some options may depend on the used XSL processor. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors (e.g. ``fop2``) reject reference to a DTD.'
 		],
 		see_also is [lgtdoc]
 	]).
