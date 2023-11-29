@@ -146,6 +146,9 @@ warnings.
 * UPDATED: The `bench` example to remove dependency on the deprecated `name/2`
 built-in predicate and eliminate all linter warnings.
 
+* FIXED: The `bench` example to always load the `boyer` and `chat_parser`
+benchmarks and to also run by default the `flatten` benchmark.
+
 Installers and installation scripts
 -----------------------------------
 
