@@ -32,7 +32,10 @@
 		graph_language_registry,
 		graph_language_protocol,
 		dot_graph_language
-		], [source_data(on), debug(on)]),
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load([
 		diagram,
 		entity_diagram,
@@ -49,7 +52,10 @@
 		library_load_diagram,
 		library_dependency_diagram,
 		diagrams
-		], [source_data(on), debug(on)]),
+	], [
+		source_data(on),
+		debug(on)
+	]),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

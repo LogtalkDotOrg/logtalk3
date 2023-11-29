@@ -30,7 +30,9 @@
 		graph_language_registry,
 		graph_language_protocol,
 		dot_graph_language
-		], [optimize(on)]),
+	], [
+		optimize(on)
+	]),
 	logtalk_load([
 		diagram,
 		entity_diagram,
@@ -47,5 +49,7 @@
 		library_load_diagram,
 		library_dependency_diagram,
 		diagrams
-		], [optimize(on)])
+	], [
+		optimize(on)
+	])
 )).
