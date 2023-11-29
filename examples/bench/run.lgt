@@ -38,6 +38,7 @@ program(chat_parser).
 program(crypt).
 program(derive).
 program(divide10).
+program(flatten).
 program(log10).
 program(meta_qsort).
 program(mu).
@@ -59,9 +60,6 @@ program(zebra).
 :- if(predicate_property(length(_,_), built_in)).
 	program(browse).
 	program(fast_mu).
-:- endif.
-:- if(current_logtalk_flag(prolog_dialect, swi)).
-	program(flatten).
 :- endif.
 :- if(predicate_property(recorda(_,_,_), built_in)).
 	program(nand).
