@@ -24,6 +24,8 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load([
 		protocol,
+		boyer,
+		chat_parser,
 		crypt,
 		derive,
 		divide10,
@@ -51,21 +53,6 @@
 	]),
 	logtalk_load(run)
 )).
-
-
-:- if(predicate_property(statistics(_,_), built_in)).
-
-	:- initialization(
-		logtalk_load([
-			boyer,
-			chat_parser
-		], [
-			optimize(on),
-			singleton_variables(silent)
-		])
-	).
-
-:- endif.
 
 
 :- if(predicate_property(length(_,_), built_in)).
