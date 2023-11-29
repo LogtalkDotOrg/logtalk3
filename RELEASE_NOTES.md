@@ -131,6 +131,8 @@ by a backend bug.
 PowerShell scripts to release the lock on the XML files after converting them
 to reStructuredText files.
 
+* FIXED: Error in the `wrapper` tool when printing missing directives advice.
+
 Examples
 --------
 
