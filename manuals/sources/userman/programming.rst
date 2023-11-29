@@ -848,9 +848,9 @@ Lint flags
 .. index:: pair: trivial_goal_fails; Flag
 
 ``trivial_goal_fails(Option)``
-   Controls the printing of warnings warnings for calls to local static
-   predicates with no matching clauses. Possible option values are
-   ``warning`` (the usual default) and ``silent`` (not recommended).
+   Controls the printing of warnings for calls to local static predicates
+   with no matching clauses. Possible option values are ``warning`` (the
+   usual default) and ``silent`` (not recommended).
 
 .. _flag_always_true_or_false_goals:
 .. index:: pair: always_true_or_false_goals; Flag
