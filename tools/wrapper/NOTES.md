@@ -95,6 +95,16 @@ The API predicates also accept a set of options for customization:
 - `include_wrapped_files(Boolean)`  
 	generate `include/1` directives for the wrapped Prolog source files (default is `true`)
 
+The use, by default, of `include/1` directives to wrap the code in Prolog
+source files facilitates running in parallel the Logtalk port and the
+original Prolog code. This is specially useful when the Prolog code being
+ported lacks a comprehensive set of tests that could be adapted to verify
+the Logtalk port. The generated Logtalk files can also take advantage of
+`uses/2` directives, including predicate aliases and predicate shorthands
+to minimize the changes to the original Prolog code and help verify if
+replacement calls to Logtalk library predicates provide the same semantics
+as the original calls.
+
 
 Current limitations
 -------------------
