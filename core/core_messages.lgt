@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:126:0,
+		version is 1:127:0,
 		author is 'Paulo Moura',
-		date is 2023-11-13,
+		date is 2023-11-30,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -987,6 +987,8 @@
 		['as existential variables ~q do not exist in goal ~q '-[[Variable1, Variable2| Variables], Goal], nl].
 	suspicious_call_reason(float_comparison) -->
 		['as the goal compares float values for equality'-[], nl].
+	suspicious_call_reason(comparing_numbers_using_unification) -->
+		['as the goal compares numbers using unification'-[], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton])) -->
 		['in ~w goal contains singleton variable ~q'-[Predicate, Singleton], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton| Singletons])) -->

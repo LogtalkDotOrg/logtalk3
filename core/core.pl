@@ -3534,7 +3534,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 73, 0, b05)).
+'$lgt_version_data'(logtalk(3, 73, 0, b06)).
 
 
 
@@ -13005,6 +13005,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_compile_body'(Pred2, Caller, TPred2, DPred2, Ctx)
 	).
 
+'$lgt_compile_body'((If -> _; _), _, _, _, Ctx) :-
+	nonvar(If),
+	once((If = (Term1 = Term2); If = (Term1 \= Term2))),
+	once((number(Term1); number(Term2))),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(arithmetic_expressions),
+		suspicious_call(File, Lines, Type, Entity, If, reason(comparing_numbers_using_unification))
+	),
+	fail.
+
 '$lgt_compile_body'((IfThen; Else), Caller, (TIf -> TThen; TElse), (DIf -> DThen; DElse), Ctx) :-
 	nonvar(IfThen),
 	IfThen = (If -> Then),
@@ -13601,6 +13615,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 			warning(suspicious_calls),
 			suspicious_call(File, Lines, Type, Entity, unify_with_occurs_check(Term1, Term2), reason(no_variable_bindings_after_unification))
 		)
+	),
+	fail.
+
+'$lgt_compile_body'(Term1 \= Term2, _, _, _, Ctx) :-
+	once((number(Term1); number(Term2))),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(arithmetic_expressions),
+		suspicious_call(File, Lines, Type, Entity, Term1 \= Term2, reason(comparing_numbers_using_unification))
 	),
 	fail.
 

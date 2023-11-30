@@ -57,7 +57,7 @@ Lint checks include:
 - Predicates called as non-terminals (instead of via the `call//1` built-in method)
 - Non-portable predicate calls, predicate options, arithmetic function calls, directives, flags, and flag values
 - Missing arithmetic functions (with selected backends)
-- Suspicious calls (syntactically valid calls that are likely semantic errors; e.g. float comparisons using the standard arithmetic comparison operators)
+- Suspicious calls (syntactically valid calls that are likely semantic errors; e.g. float comparisons using the standard arithmetic comparison operators or comparing numbers using unification)
 - Deprecated directives, predicates, arithmetic functions, control constructs, and flags
 - References to unknown entities (objects, protocols, categories, or modules)
 - Top-level shortcuts used as directives

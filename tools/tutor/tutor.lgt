@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:59:0,
+		version is 0:60:0,
 		author is 'Paulo Moura',
-		date is 2023-11-13,
+		date is 2023-11-30,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -1000,6 +1000,11 @@
 			'expression with the relevant variables listed as lambda free variables.'-[], nl, nl
 		].
 
+	explain(suspicious_call(_, _, _, _, _, reason(comparing_numbers_using_unification))) -->
+		[	'Comparing numbers using unification can fail in cases where using instead'-[], nl,
+			'the standard (=:=)/2 or (=\\=)/2 arithmetic comparison built-in predicates'-[], nl,
+			'would succeed.'-[], nl, nl
+		].
 	explain(suspicious_call(_, _, _, _, _, reason(float_comparison))) -->
 		[	'Comparing floats is problematic as it can fail due to rounding errors and'-[], nl,
 			'loss of precision when converting from decimal to binary representation.'-[], nl,

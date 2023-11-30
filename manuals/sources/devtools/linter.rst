@@ -46,7 +46,7 @@ Lint checks include:
 -  Missing arithmetic functions (with selected backends)
 -  Suspicious calls (syntactically valid calls that are likely semantic
    errors; e.g. float comparisons using the standard arithmetic
-   comparison operators)
+   comparison operators or comparing numbers using unification)
 -  Deprecated directives, predicates, arithmetic functions, control
    constructs, and flags
 -  References to unknown entities (objects, protocols, categories, or

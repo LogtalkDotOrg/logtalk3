@@ -30,6 +30,8 @@ Logtalk compiler and runtime
 
 * ADDED: Linter warnings for deprecated arithmetic functions.
 
+* ADDED: Linter warning for comparing numbers using unification.
+
 * ADDED: Linter warnings for Quintus Prolog predicate versions of arithmetic
 functions.
 
@@ -118,7 +120,8 @@ Tools
 
 * UPDATED: The `lgtunit` tool to also print the tests runtime in seconds.
 
-* UPDATED: The `tutor` tool for the new arithmetic function linter warnings.
+* UPDATED: The `tutor` tool for the new arithmetic function linter warnings
+and the new linter warning for comparing numbers using unification.
 
 * FIXED: The `debugger` tool checking for a deterministic goal for CxProlog.
 

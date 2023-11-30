@@ -36,9 +36,9 @@
 	implements(interpreterp)).
 
 	:- info([
-		version is 1:1:2,
+		version is 1:1:3,
 		author is 'Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.',
-		date is 2022-05-23,
+		date is 2023-11-30,
 		comment is 'Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.'
 	]).
 
@@ -71,7 +71,7 @@
 	subsumption_iterate(Goal, _, DI, Pending, Pending, _, _, _) :-
 		list::member(Goal, DI).
 	subsumption_iterate(Goal, I, DI, Pending0, Pending, Fix, Limit, DB) :-
-		Limit \= 0,
+		Limit > 0,
 		Limit0 is Limit - 1,
 		debug((
 			write('I is: '), write(I), nl,
