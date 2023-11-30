@@ -59,8 +59,8 @@
 %	node(9).
 %	node(10).
 
-	member(Element, [Element| _]).
-	member(Element, [_| List]) :-
-		member(Element, List).
+	member(Head, [Head| _]).
+	member(Head, [_| Tail]) :-
+		member(Head, Tail).
 
 :- end_object.

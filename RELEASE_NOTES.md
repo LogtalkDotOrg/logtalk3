@@ -152,6 +152,9 @@ built-in predicate and eliminate all linter warnings.
 * FIXED: The `bench` example to always load the `boyer` and `chat_parser`
 benchmarks and to also run by default the `flatten` benchmark.
 
+* FIXED: The `benchmarks` example not loading the `module.pl` file from the
+`loader_events.lgt` and `loader_no_events.lgt` files when using Tau Prolog.
+
 Installers and installation scripts
 -----------------------------------
 
