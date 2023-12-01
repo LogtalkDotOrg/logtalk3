@@ -1,4 +1,4 @@
-.TH lgt2pdf 1 "September 16, 2019" "Logtalk 3.30.0" "Logtalk Documentation"
+.TH lgt2pdf 1 "December 1, 2023" "Logtalk 3.73.0" "Logtalk Documentation"
 
 .SH NAME
 lgt2pdf \- Logtalk script for converting XML documenting files into PDF files
@@ -33,7 +33,8 @@ XSL-FO processor.
 Prints a summary of the script options.
 
 .SH REQUIREMENTS
-Requires a compatible XSL-FO processor. See the script help screen for more information.
+Requires a compatible XSL-FO processor: \fIfop\fR (default), \fIfop2\fR, \fIxep\fR, or \fIxinc\fR.
+The \fIfop2\fR processor requires generating the XML documenting files using the option \fIxml_spec(xsd)\fR or \fIxml_spec_reference(standalone)\fR.
 
 .SH ENVIRONMENT
 .TP

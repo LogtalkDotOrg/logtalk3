@@ -81,6 +81,8 @@ contribution and bug report.
 * UPDATED: The manual installation instructions on generating documentation
 human-readable formats.
 
+* UPDATED: The man page for the `lgt2pdf` shell script.
+
 Library
 -------
 
