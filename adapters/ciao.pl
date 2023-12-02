@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Ciao Prolog 1.22.0
-%  Last updated on November 17, 2023
+%  Last updated on December 2, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -165,6 +165,15 @@
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(goal, 0).
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(pred(N), M) :-
 	M is N - 1.
+
+
+% '$lgt_prolog_phrase_predicate'(@callable)
+%
+% table of predicates that call non-terminals
+% (other than the de facto standard phrase/2-3 predicates)
+
+'$lgt_prolog_phrase_predicate'(_) :-
+	fail.
 
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)

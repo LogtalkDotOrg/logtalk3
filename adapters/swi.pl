@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on November 17, 2023
+%  Last updated on December 2, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -232,6 +232,18 @@
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
 
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'((//), 2).
+
+
+% '$lgt_prolog_phrase_predicate'(@callable)
+%
+% table of predicates that call non-terminals
+% (other than the de facto standard phrase/2-3 predicates)
+
+'$lgt_prolog_phrase_predicate'(call_dcg(_, _, _)).
+'$lgt_prolog_phrase_predicate'(pure_input:phrase_from_file(_, _)).
+'$lgt_prolog_phrase_predicate'(pure_input:phrase_from_file(_, _, _)).
+'$lgt_prolog_phrase_predicate'(pure_input:phrase_from_stream(_, _)).
+
 
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)

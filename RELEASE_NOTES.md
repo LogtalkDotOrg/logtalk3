@@ -53,6 +53,8 @@ an included file to report the actual location instead of the main file.
 Prolog adapter and integration files
 ------------------------------------
 
+* ADDED: Support for declaring phrase-like predicates that call non-terminals.
+
 * ADDED: Support for declaring deprecated built-in predicates (with or without
 advised alternatives) in the adapter files.
 
