@@ -20,7 +20,7 @@
 
 
 :- initialization((
-	set_prolog_flag(double_quotes, chars),
+	set_prolog_flag(double_quotes, codes),
 	logtalk_load(reader(loader)),
 	logtalk_load(trebuchet, [optimize(on)])
 )).

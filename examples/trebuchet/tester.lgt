@@ -21,7 +21,7 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-	set_prolog_flag(double_quotes, chars),
+	set_prolog_flag(double_quotes, codes),
 	logtalk_load(reader(loader)),
 	logtalk_load(trebuchet, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),

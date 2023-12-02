@@ -31,7 +31,7 @@
 
 	solution(File, Solution) :-
 		open(File, read, Stream),
-		reader::line_to_chars(Stream, Line),
+		reader::line_to_codes(Stream, Line),
 		solution(Line, Stream, 0, Solution),
 		close(Stream).
 
@@ -39,7 +39,7 @@
 	solution([Char| Chars], Stream, Solution0, Solution) :-
 		once(phrase(calibration(Calibration), [Char| Chars])),
 		Solution1 is Solution0 + Calibration,
-		reader::line_to_chars(Stream, Line),
+		reader::line_to_codes(Stream, Line),
 		solution(Line, Stream, Solution1, Solution).
 
 	calibration(Calibration) -->
@@ -75,15 +75,15 @@
 	digit(8) --> "8".
 	digit(9) --> "9".
 	% as letters (take into account possible overlaps)
-	digit(1), [e] --> "one".
-	digit(2), [o] --> "two".
-	digit(3), [e] --> "three".
-	digit(4) --> "four".
-	digit(5), [e] --> "five".
-	digit(6) --> "six".
-	digit(7), [n] --> "seven".
-	digit(8), [t] --> "eight".
-	digit(9), [e] --> "nine".
+	digit(1), "e" --> "one".
+	digit(2), "o" --> "two".
+	digit(3), "e" --> "three".
+	digit(4)      --> "four".
+	digit(5), "e" --> "five".
+	digit(6)      --> "six".
+	digit(7), "n" --> "seven".
+	digit(8), "t" --> "eight".
+	digit(9), "e" --> "nine".
 
 	last([], Last, Last).
 	last([Head| Tail], _, Last) :-
