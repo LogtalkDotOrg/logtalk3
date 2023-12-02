@@ -149,6 +149,9 @@ to reStructuredText files.
 Examples
 --------
 
+* ADDED: New `trebuchet` example, providing a solution for the Advent of Code
+2023 Day 1 problem.
+
 * ADDED: Tests to the `poem`, `profiling`, and `self_vs_this` examples.
 
 * UPDATED: The `errors` example for the new arithmetic function linter
