@@ -44,6 +44,10 @@ linter warnings.
 and `use_module/2` directives, also check for an `imported_from/1` predicate
 property.
 
+* IMPROVED: Avoid false positive linter warnings about non-terminals called as
+predicates when the caller is a phrase-like predicate declared in the backend
+adapter file. Thanks to Yurii Rashkovskii for the use-case report.
+
 * FIXED: Unknown and undefined predicate call warnings when the calls occur in
 an included file to report the actual location instead of the main file.
 

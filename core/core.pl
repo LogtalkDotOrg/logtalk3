@@ -3534,7 +3534,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 73, 0, b06)).
+'$lgt_version_data'(logtalk(3, 73, 0, b07)).
 
 
 
@@ -14854,7 +14854,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_member'(CMArg, CMArgs), CMArg == (::) ->
 			% the "::" meta-argument specifier is ambiguous in this context
 			throw(domain_error(meta_argument_specifier, Meta))
-		;	'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
+		;	(	'$lgt_prolog_phrase_predicate'(':'(Module, Pred)) ->
+				NewCaller = phrase
+			;	NewCaller = meta
+			),
+			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, NewCaller, Ctx, TArgs, DArgs) ->
 			TPred0 =.. [Functor| TArgs],
 			TPred = ':'(Module, TPred0),
 			DPred0 =.. [Functor| DArgs],
@@ -16291,7 +16295,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			Pred =.. [Functor| Args],
 			Meta =.. [Functor| MArgs],
 			(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-				'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
+				'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, meta, Ctx, TArgs, DArgs) ->
 				TPred =.. [Functor| TArgs],
 				DGoal =.. [Functor| DArgs],
 				(	Type == control_construct ->
@@ -16593,7 +16597,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, DArgs) ->
+			(	'$lgt_prolog_phrase_predicate'(Pred) ->
+				NewCaller = phrase
+			;	NewCaller = meta
+			),
+			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, NewCaller, Ctx, TArgs, DArgs) ->
 			TGoal =.. [Functor| TArgs],
 			DGoal =.. [Functor| DArgs],
 			'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
@@ -17314,7 +17322,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_compile_prolog_meta_arguments'(@list, @list, +compilation_context, -list, -list)
+% '$lgt_compile_prolog_meta_arguments'(@list, @list, +callable, +compilation_context, -list, -list)
 %
 % compiles the meta-arguments contained in the list of arguments of a call to a Prolog
 % meta-predicate or meta-directive (assumes Logtalk meta-predicate notation)
@@ -17322,9 +17330,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % this predicate fails when meta-arguments other than goal and closures are not
 % sufficiently instantiated or a meta-argument mode indicator is not supported
 
-'$lgt_compile_prolog_meta_arguments'([], [], _, [], []).
+'$lgt_compile_prolog_meta_arguments'([], [], _, _, [], []).
 
-'$lgt_compile_prolog_meta_arguments'([Arg| Args], [MArg| MArgs], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+'$lgt_compile_prolog_meta_arguments'([Arg| Args], [MArg| MArgs], Caller, Ctx, [TArg| TArgs], [DArg| DArgs]) :-
 	(	nonvar(Arg),
 		'$lgt_module_meta_argument'(MArg, Arg),
 		'$lgt_prolog_feature'(modules, supported) ->
@@ -17333,18 +17341,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	integer(MArg),
 		MArg > 0 ->
 		% closure meta-argument
-		'$lgt_compile_prolog_meta_argument'(closure(MArg), Arg, Ctx, TArg, DArg)
+		'$lgt_compile_prolog_meta_argument'(closure(MArg), Arg, Caller, Ctx, TArg, DArg)
 	;	% remaining cases
-		'$lgt_compile_prolog_meta_argument'(MArg, Arg, Ctx, TArg, DArg)
+		'$lgt_compile_prolog_meta_argument'(MArg, Arg, Caller, Ctx, TArg, DArg)
 	),
-	'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs).
+	'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Caller, Ctx, TArgs, DArgs).
 
 
 '$lgt_module_meta_argument'(0, ':'(_,_)).
 '$lgt_module_meta_argument'(1, ':'(_)).
 
 
-'$lgt_compile_prolog_meta_argument'(closure(N), Arg, Ctx, TArg, DArg) :-
+'$lgt_compile_prolog_meta_argument'(closure(N), Arg, Caller, Ctx, TArg, DArg) :-
 	% closure
 	'$lgt_check'(var_or_callable, Arg),
 	'$lgt_length'(ExtArgs, 0, N),
@@ -17354,7 +17362,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	throw(domain_error(closure, Arg))
 	),
-	'$lgt_compile_body'(ExtArg, meta, TArg0, DArg0, Ctx),
+	'$lgt_compile_body'(ExtArg, Caller, TArg0, DArg0, Ctx),
 	% generate an auxiliary predicate to allow the meta-predicate to extend
 	% the closure without clashing with the execution-context argument
 	'$lgt_generate_aux_predicate_functor'('_closure_', HelperFunctor),
@@ -17391,11 +17399,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DArg = THelper
 	).
 
-'$lgt_compile_prolog_meta_argument'((*), Arg, _, Arg, Arg).
+'$lgt_compile_prolog_meta_argument'((*), Arg, _, _, Arg, Arg).
 
-'$lgt_compile_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg) :-
+'$lgt_compile_prolog_meta_argument'((0), Arg, Caller, Ctx, TArg, DArg) :-
 	% goal
-	'$lgt_compile_body'(Arg, meta, TArg0, DArg0, Ctx),
+	'$lgt_compile_body'(Arg, Caller, TArg0, DArg0, Ctx),
 	(	TArg0 = ':'(_, _) ->
 		% the compiled call is already explicitly-qualified
 		TArg = TArg0,
@@ -17408,33 +17416,33 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DArg = DArg0
 	).
 
-'$lgt_compile_prolog_meta_argument'((^), Arg, Ctx, TArg, DArg) :-
+'$lgt_compile_prolog_meta_argument'((^), Arg, Caller, Ctx, TArg, DArg) :-
 	% existentially-quantified goal
 	(	Arg = Vars^Arg0 ->
-		'$lgt_compile_body'(Arg0, meta, TArg0, DArg0, Ctx),
+		'$lgt_compile_body'(Arg0, Caller, TArg0, DArg0, Ctx),
 		TArg = Vars^TArg0,
 		DArg = Vars^DArg0
-	;	'$lgt_compile_body'(Arg, meta, TArg, DArg, Ctx)
+	;	'$lgt_compile_body'(Arg, Caller, TArg, DArg, Ctx)
 	).
 
-'$lgt_compile_prolog_meta_argument'([0], [], _, [], []) :-
+'$lgt_compile_prolog_meta_argument'([0], [], _, _, [], []) :-
 	!.
-'$lgt_compile_prolog_meta_argument'([0], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+'$lgt_compile_prolog_meta_argument'([0], [Arg| Args], Caller, Ctx, [TArg| TArgs], [DArg| DArgs]) :-
 	!,
-	'$lgt_compile_prolog_meta_argument'((0), Arg, Ctx, TArg, DArg),
-	'$lgt_compile_prolog_meta_argument'([0], Args, Ctx, TArgs, DArgs).
+	'$lgt_compile_prolog_meta_argument'((0), Arg, Caller, Ctx, TArg, DArg),
+	'$lgt_compile_prolog_meta_argument'([0], Args, Caller, Ctx, TArgs, DArgs).
 
-'$lgt_compile_prolog_meta_argument'((/), [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+'$lgt_compile_prolog_meta_argument'((/), [Arg| Args], Caller, Ctx, [TArg| TArgs], [DArg| DArgs]) :-
 	!,
 	nonvar(Arg),
-	'$lgt_compile_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
-	'$lgt_compile_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
-'$lgt_compile_prolog_meta_argument'((/), (Arg, Args), Ctx, (TArg, TArgs), (DArg, DArgs)) :-
+	'$lgt_compile_prolog_meta_argument'((/), Arg, Caller, Ctx, TArg, DArg),
+	'$lgt_compile_prolog_meta_argument'([/], Args, Caller, Ctx, TArgs, DArgs).
+'$lgt_compile_prolog_meta_argument'((/), (Arg, Args), Caller, Ctx, (TArg, TArgs), (DArg, DArgs)) :-
 	!,
 	nonvar(Arg),
-	'$lgt_compile_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
-	'$lgt_compile_prolog_meta_argument'((/), Args, Ctx, TArgs, DArgs).
-'$lgt_compile_prolog_meta_argument'((/), Arg, _, TArg, TArg) :-
+	'$lgt_compile_prolog_meta_argument'((/), Arg, Caller, Ctx, TArg, DArg),
+	'$lgt_compile_prolog_meta_argument'((/), Args, Caller, Ctx, TArgs, DArgs).
+'$lgt_compile_prolog_meta_argument'((/), Arg, _, _, TArg, TArg) :-
 	'$lgt_compile_predicate_indicators'(Arg, _, TArg0),
 	(	'$lgt_prolog_feature'(modules, supported) ->
 		% make sure the predicate indicator refers to the correct context
@@ -17442,19 +17450,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TArg = TArg0
 	).
 
-'$lgt_compile_prolog_meta_argument'((//), Args, Ctx, TArgs, DArgs) :-
-	'$lgt_compile_prolog_meta_argument'((/), Args, Ctx, TArgs, DArgs).
+'$lgt_compile_prolog_meta_argument'((//), Args, Caller, Ctx, TArgs, DArgs) :-
+	'$lgt_compile_prolog_meta_argument'((/), Args, Caller, Ctx, TArgs, DArgs).
 
-'$lgt_compile_prolog_meta_argument'([/], [], _, [], []) :-
+'$lgt_compile_prolog_meta_argument'([/], [], _, _, [], []) :-
 	!.
-'$lgt_compile_prolog_meta_argument'([/], [Arg| Args], Ctx, [TArg| TArgs], [DArg| DArgs]) :-
+'$lgt_compile_prolog_meta_argument'([/], [Arg| Args], Caller, Ctx, [TArg| TArgs], [DArg| DArgs]) :-
 	!,
 	nonvar(Arg),
-	'$lgt_compile_prolog_meta_argument'((/), Arg, Ctx, TArg, DArg),
-	'$lgt_compile_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
+	'$lgt_compile_prolog_meta_argument'((/), Arg, Caller, Ctx, TArg, DArg),
+	'$lgt_compile_prolog_meta_argument'([/], Args, Caller, Ctx, TArgs, DArgs).
 
-'$lgt_compile_prolog_meta_argument'([//], Args, Ctx, TArgs, DArgs) :-
-	'$lgt_compile_prolog_meta_argument'([/], Args, Ctx, TArgs, DArgs).
+'$lgt_compile_prolog_meta_argument'([//], Args, Caller, Ctx, TArgs, DArgs) :-
+	'$lgt_compile_prolog_meta_argument'([/], Args, Caller, Ctx, TArgs, DArgs).
 
 
 
@@ -17874,7 +17882,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
 		(	'$lgt_prolog_to_logtalk_meta_argument_specifiers'(MArgs, CMArgs),
-			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, Ctx, TArgs, _) ->
+			'$lgt_compile_prolog_meta_arguments'(Args, CMArgs, meta, Ctx, TArgs, _) ->
 			TPred =.. [Functor| TArgs]
 		;	% meta-predicate template is not usable
 			throw(domain_error(meta_predicate_template, Meta))
@@ -22316,7 +22324,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% MetaVars = [] as we're compiling a local call
 	'$lgt_comp_ctx'(Ctx, _, _, Entity, Entity, Entity, Entity, Prefix, [], _, _, _, [], _, _),
 	(	catch(
-			'$lgt_compile_prolog_meta_arguments'(Args, MArgs, Ctx, TArgs, DArgs),
+			'$lgt_compile_prolog_meta_arguments'(Args, MArgs, meta, Ctx, TArgs, DArgs),
 			Error,
 			throw(error(Error, directive(Directive)))
 		) ->
