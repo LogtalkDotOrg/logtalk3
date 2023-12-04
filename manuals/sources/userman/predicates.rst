@@ -1197,12 +1197,8 @@ for parsing simple arithmetic expressions:
 
    :- end_object. 
 
-The predicate :ref:`methods_phrase_2` called
-in the definition of predicate ``parse/2`` above is a Logtalk built-in
-method, similar to the predicate with the same name found on most Prolog
-compilers that support definite clause grammars. After compiling and
-loading this object, we can test the grammar rules with calls such as
-the following one:
+After compiling and loading this object, we can test the grammar rules
+using the ``parse/2`` message:
 
 .. code-block:: text
 
@@ -1211,10 +1207,8 @@ the following one:
    Result = -9
    yes
 
-In most cases, the predicates resulting from the translation of the
-grammar rules to regular clauses are not declared. Instead, these
-predicates are usually called by using the built-in methods
-:ref:`methods_phrase_2` and :ref:`methods_phrase_3` as shown in the
+The non-terminals can be called from predicates using the private built-in
+methods :ref:`methods_phrase_2` and :ref:`methods_phrase_3` as shown in the
 example above. When we want to use the built-in methods ``phrase/2`` and
 ``phrase/3``, the non-terminal used as first argument must be within the
 scope of the *sender*. For the above example, assuming that we want the
@@ -1347,7 +1341,8 @@ directive, as in the following example:
    grammar rules using the ``call//1`` built-in method. This recommended
    practice, besides making your code forward compatible with future Logtalk
    versions, also make the code more clear. The linter prints warnings when
-   these guidelines are not followed.
+   these guidelines are not followed (notably, when a predicate is called as
+   a non-terminal or a non-terminal is called as a predicate).
 
 .. _predicates_methods:
 

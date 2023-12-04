@@ -58,6 +58,8 @@ Prolog adapter and integration files
 ------------------------------------
 
 * ADDED: Support for declaring phrase-like predicates that call non-terminals.
+This helps preventing false positive linter warnings of non-terminals called
+as predicates.
 
 * ADDED: Support for declaring deprecated built-in predicates (with or without
 advised alternatives) in the adapter files.

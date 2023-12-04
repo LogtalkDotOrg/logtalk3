@@ -1170,22 +1170,16 @@ for parsing simple arithmetic expressions:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>The predicate <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> called
-in the definition of predicate <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> above is a Logtalk built-in
-method, similar to the predicate with the same name found on most Prolog
-compilers that support definite clause grammars. After compiling and
-loading this object, we can test the grammar rules with calls such as
-the following one:</p>
+<p>After compiling and loading this object, we can test the grammar rules
+using the <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> message:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- calculator::parse(&quot;1+2-3*4&quot;, Result).
 
 Result = -9
 yes
 </pre></div>
 </div>
-<p>In most cases, the predicates resulting from the translation of the
-grammar rules to regular clauses are not declared. Instead, these
-predicates are usually called by using the built-in methods
-<a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> as shown in the
+<p>The non-terminals can be called from predicates using the private built-in
+methods <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> as shown in the
 example above. When we want to use the built-in methods <code class="docutils literal notranslate"><span class="pre">phrase/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>, the non-terminal used as first argument must be within the
 scope of the <em>sender</em>. For the above example, assuming that we want the
@@ -1303,7 +1297,8 @@ using the <code class="docutils literal notranslate"><span class="pre">phrase/2-
 grammar rules using the <code class="docutils literal notranslate"><span class="pre">call//1</span></code> built-in method. This recommended
 practice, besides making your code forward compatible with future Logtalk
 versions, also make the code more clear. The linter prints warnings when
-these guidelines are not followed.</p>
+these guidelines are not followed (notably, when a predicate is called as
+a non-terminal or a non-terminal is called as a predicate).</p>
 </div>
 </section>
 <section id="built-in-methods">
