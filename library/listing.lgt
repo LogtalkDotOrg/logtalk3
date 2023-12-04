@@ -22,9 +22,9 @@
 :- category(listing).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2022-10-18,
+		date is 2023-12-04,
 		comment is 'Listing predicates.'
 	]).
 
@@ -129,7 +129,7 @@
 		::clause(Head, Body),
 		::portray_clause((Head :- Body)),
 		fail.
-	listing_clauses(_).
+	listing_clauses(_, _, _).
 
 	portray_clause((Head :- true)) :-
 		!,

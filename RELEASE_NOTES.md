@@ -125,6 +125,9 @@ files.
 * FIXED: The `os` library tests calls to the `shell/1` predicate from auxiliary
 predicates.
 
+* FIXED: The `listing` library category implementation of the `listing/1`
+predicate.
+
 Tools
 --------
 
