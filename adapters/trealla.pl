@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 2.18.7 and later versions
-%  Last updated on December 2, 2023
+%  Last updated on December 4, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -154,8 +154,11 @@
 % table of predicates that call non-terminals
 % (other than the de facto standard phrase/2-3 predicates)
 
-'$lgt_prolog_phrase_predicate'(_) :-
-	fail.
+'$lgt_prolog_phrase_predicate'(pio:phrase_from_file(_, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_from_file(_, _, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_to_file(_, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_to_file(_, _, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_to_stream(_, _)).
 
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)

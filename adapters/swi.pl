@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on December 2, 2023
+%  Last updated on December 4, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -240,6 +240,9 @@
 % (other than the de facto standard phrase/2-3 predicates)
 
 '$lgt_prolog_phrase_predicate'(call_dcg(_, _, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_from_file(_, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_from_file(_, _, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_from_stream(_, _)).
 '$lgt_prolog_phrase_predicate'(pure_input:phrase_from_file(_, _)).
 '$lgt_prolog_phrase_predicate'(pure_input:phrase_from_file(_, _, _)).
 '$lgt_prolog_phrase_predicate'(pure_input:phrase_from_stream(_, _)).
