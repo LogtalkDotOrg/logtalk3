@@ -154,6 +154,9 @@ to reStructuredText files.
 Examples
 --------
 
+* ADDED: New `scratchcards` example, providing a solution for the Advent of
+Code 2023 Day 4 problem.
+
 * ADDED: New `trebuchet` example, providing a solution for the Advent of Code
 2023 Day 1 problem.
 

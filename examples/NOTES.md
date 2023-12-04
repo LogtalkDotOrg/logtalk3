@@ -439,6 +439,10 @@ Follows a short description of each included example (in alphabetical order):
 - `scopes`  
 	simple example illustrating predicate scope semantics
 
+- `scratchcards`  
+	solution for the Advent of Code 2023 Day 4 problem; illustrates the
+	use of the `grammars` library
+
 - `searching`  
 	state-space searching framework
 	(this example includes some code adapted from Ivan Bratko's "Prolog

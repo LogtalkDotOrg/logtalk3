@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on December 2, 2023
+%  Last updated on December 4, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -296,6 +296,7 @@ logtalk_library_path(relations, examples('relations/')).
 logtalk_library_path(roles, examples('roles/')).
 logtalk_library_path(roots, examples('roots/')).
 logtalk_library_path(scopes, examples('scopes/')).
+logtalk_library_path(scratchcards, examples('scratchcards/')).
 logtalk_library_path(searching, examples('searching/')).
 logtalk_library_path(securemp, examples('securemp/')).
 logtalk_library_path(self_messages, examples('self_messages/')).
