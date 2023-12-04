@@ -179,6 +179,8 @@ Tests
 
 * ADDED: Additional tests for the `phrase/2-3` built-in methods.
 
+* FIXED: Test for the `setof/3` built-in method.
+
 Installers and installation scripts
 -----------------------------------
 
