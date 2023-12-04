@@ -38,8 +38,8 @@
 
 	% use an explicit list in the second clause to benefit from first-argument indexing
 	solution(end_of_file, _, Solution, Solution).
-	solution([Char| Chars], Stream, Solution0, Solution) :-
-		once(phrase(calibration(Calibration), [Char| Chars])),
+	solution([Code| Codes], Stream, Solution0, Solution) :-
+		once(phrase(calibration(Calibration), [Code| Codes])),
 		Solution1 is Solution0 + Calibration,
 		reader::line_to_codes(Stream, Line),
 		solution(Line, Stream, Solution1, Solution).
