@@ -168,6 +168,11 @@ benchmarks and to also run by default the `flatten` benchmark.
 * FIXED: The `benchmarks` example not loading the `module.pl` file from the
 `loader_events.lgt` and `loader_no_events.lgt` files when using Tau Prolog.
 
+Tests
+-----
+
+* ADDED: Additional tests for the `phrase/2-3` built-in methods.
+
 Installers and installation scripts
 -----------------------------------
 
