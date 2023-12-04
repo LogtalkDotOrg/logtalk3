@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-02-24,
+		date is 2023-12-04,
 		comment is 'Unit tests for the "trebuchet" example.'
 	]).
 
