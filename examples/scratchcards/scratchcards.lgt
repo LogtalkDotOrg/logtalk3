@@ -29,7 +29,7 @@
 
 	:- public(points/2).
 
-	:- uses(list, [member/2, memberchk/2]).
+	:- uses(list, [length/2, member/2, memberchk/2]).
 	:- uses(blank_grammars(codes), [spaces//0]).
 	:- uses(number_grammars(codes), [natural//1]).
 	:- uses(reader, [line_to_codes/2]).
@@ -37,7 +37,7 @@
 	points(File, Points) :-
 		open(File, read, Stream),
 		line_to_codes(Stream, Line),
-		% use an accumulator pair to compute the sum of all calibration values
+		% use an accumulator pair to compute the sum of all card points
 		points(Line, Stream, 0, Points),
 		close(Stream).
 
