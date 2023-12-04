@@ -492,6 +492,10 @@ Follows a short description of each included example (in alphabetical order):
 	them intended only for benchmarking multi-threading Prolog compilers
 	(requires Logtalk to be run with a multi-threaded backend)
 
+- `trebuchet`  
+	solution for the Advent of Code 2023 Day 1 problem; illustrates the
+	use of push-bask lists in DCGs
+
 - `units`  
 	Logtalk version of a GNU Prolog/CX parametric unit example
 

@@ -23,7 +23,7 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		date is 2023-12-02,
+		date is 2023-12-04,
 		comment is 'Advent of Code 2023 Day 1 problem solution.'
 	]).
 
@@ -32,9 +32,11 @@
 	solution(File, Solution) :-
 		open(File, read, Stream),
 		reader::line_to_codes(Stream, Line),
+		% use an accumulator pair to compute the sum of all calibration values
 		solution(Line, Stream, 0, Solution),
 		close(Stream).
 
+	% use an explicit list in the second clause to benefit from first-argument indexing
 	solution(end_of_file, _, Solution, Solution).
 	solution([Char| Chars], Stream, Solution0, Solution) :-
 		once(phrase(calibration(Calibration), [Char| Chars])),
@@ -46,6 +48,8 @@
 		first_digit(First),
 		rest_digits(Digits),
 		{
+			% when a line contains a single digit, the missing
+			% second digit is the same as the first digit
 			last(Digits, First, Second),
 			Calibration is First*10 + Second
 		}.
@@ -74,7 +78,9 @@
 	digit(7) --> "7".
 	digit(8) --> "8".
 	digit(9) --> "9".
-	% as letters (take into account possible overlaps)
+	% as letters (take into account possible overlaps by pushing back
+	% the last letter if it can be the first letter of another digit;
+	% this allows e.g. "oneight" to be parsed as 18)
 	digit(1), "e" --> "one".
 	digit(2), "o" --> "two".
 	digit(3), "e" --> "three".
