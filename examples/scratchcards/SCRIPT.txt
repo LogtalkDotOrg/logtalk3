@@ -30,3 +30,11 @@ ________________________________________________________________________
 
 Points = 13
 yes
+
+
+% compute the total number of scratchcards for the test_files/input file:
+
+| ?- scratchcards::total('test_files/input', Total).
+
+Total = 6874754
+yes

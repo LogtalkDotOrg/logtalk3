@@ -25,18 +25,26 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-12-04,
+		date is 2023-12-05,
 		comment is 'Unit tests for the "scratchcards" example.'
 	]).
 
 	cover(scratchcards).
 
-	test(scratchcards_sample_file, true(Points == 13)) :-
+	test(scratchcards_points_sample_file, true(Points == 13)) :-
 		^^file_path('test_files/sample', Path),
 		scratchcards::points(Path, Points).
 
-	test(scratchcards_input_file, true(Points == 21088)) :-
+	test(scratchcards_points_input_file, true(Points == 21088)) :-
 		^^file_path('test_files/input', Path),
 		scratchcards::points(Path, Points).
+
+	test(scratchcards_scratchcards_sample_file, true(Total == 30)) :-
+		^^file_path('test_files/sample', Path),
+		scratchcards::total(Path, Total).
+
+	test(scratchcards_scratchcards_input_file, true(Total == 6874754)) :-
+		^^file_path('test_files/input', Path),
+		scratchcards::total(Path, Total).
 
 :- end_object.

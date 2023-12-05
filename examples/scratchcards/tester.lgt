@@ -22,7 +22,8 @@
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	set_prolog_flag(double_quotes, codes),
-	logtalk_load(basic_types(loader)),
+	logtalk_load(types(loader)),
+	logtalk_load(dictionaries(loader)),
 	logtalk_load(grammars(loader)),
 	logtalk_load(reader(loader)),
 	logtalk_load(scratchcards, [debug(on), source_data(on)]),
