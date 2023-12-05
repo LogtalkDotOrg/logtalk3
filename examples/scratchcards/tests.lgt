@@ -39,11 +39,11 @@
 		^^file_path('test_files/input', Path),
 		scratchcards::points(Path, Points).
 
-	test(scratchcards_scratchcards_sample_file, true(Total == 30)) :-
+	test(scratchcards_total_sample_file, true(Total == 30)) :-
 		^^file_path('test_files/sample', Path),
 		scratchcards::total(Path, Total).
 
-	test(scratchcards_scratchcards_input_file, true(Total == 6874754)) :-
+	test(scratchcards_total_input_file, true(Total == 6874754)) :-
 		^^file_path('test_files/input', Path),
 		scratchcards::total(Path, Total).
 
