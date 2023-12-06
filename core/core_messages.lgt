@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:127:0,
+		version is 1:128:0,
 		author is 'Paulo Moura',
-		date is 2023-11-30,
+		date is 2023-12-06,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -818,7 +818,7 @@
 		term_tokens(Term).
 	error_term_tokens(Error) -->
 		error_tokens(Error),
-		term_tokens(term(_)).
+		term_tokens(term).
 
 	% based on the ISO Prolog Core standard
 	error_tokens(instantiation_error) -->
@@ -890,9 +890,9 @@
 			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
 		;	['  in grammar rule'-[], nl]
 		).
-	term_tokens(term(_)) -->
-		['  in term'-[], nl].
-	term_tokens(_) -->
+	term_tokens(term(Term)) -->
+		['  in term ~q'-[Term], nl].
+	term_tokens(term) -->
 		['  in term'-[], nl].
 
 	first_found_at(File, OriginalLines, File) -->

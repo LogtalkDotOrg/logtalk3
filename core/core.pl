@@ -3534,7 +3534,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 73, 0, b07)).
+'$lgt_version_data'(logtalk(3, 73, 0, b08)).
 
 
 
@@ -7416,7 +7416,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_encoding_directive'(Term, _, _, _, _, _, _) :-
 	var(Term),
-	throw(error(instantiation_error, term(Term))).
+	throw(error(instantiation_error, term)).
 
 '$lgt_check_for_encoding_directive'((:- Term), _, _, _, _, _, _) :-
 	var(Term),
@@ -7512,7 +7512,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_file_term'((-), _, _, _, _) :-
 	% catch variables
-	throw(error(instantiation_error, term(_))).
+	throw(error(instantiation_error, term)).
 
 '$lgt_compile_file_term'(end_of_file, _, Lines, _, _) :-
 	!,
@@ -8885,7 +8885,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_include_file_terms'([Term-sd(VariableNames,Singletons,Lines)| Terms], File, Ctx) :-
 	retractall('$lgt_pp_term_source_data_'(_, _, _, _, _)),
 	assertz('$lgt_pp_term_source_data_'(Term, VariableNames, Singletons, File, Lines)),
-	'$lgt_check'(nonvar, Term, term(Term)),
+	'$lgt_check'(nonvar, Term, term),
 	% only the compilation context mode should be shared between different terms
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
 	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines, _),
@@ -9178,7 +9178,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_runtime_term'((-), _) :-
 	% catch variables
-	throw(error(instantiation_error, term(_))).
+	throw(error(instantiation_error, term)).
 
 '$lgt_compile_runtime_term'(begin_of_file, _) :-
 	!.

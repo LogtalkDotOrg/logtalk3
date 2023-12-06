@@ -48,6 +48,9 @@ property.
 predicates when the caller is a phrase-like predicate declared in the backend
 adapter file. Thanks to Yurii Rashkovskii for the use-case report.
 
+* IMPROVED: Compiler reporting of term-expansion errors to write the source
+term.
+
 * FIXED: Unknown and undefined predicate call warnings when the calls occur in
 an included file to report the actual location instead of the main file.
 
