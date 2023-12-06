@@ -30,7 +30,7 @@ Copy of the problem description:
 
 > --- Day 4: Scratchcards ---
 > 
-> --- Part Two ---
+> --- Part One ---
 > 
 > The gondola takes you up. Strangely, though, the ground doesn't seem to
 > be coming with you; you're not climbing a mountain. As the circle of Snow
