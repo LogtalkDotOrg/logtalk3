@@ -75,7 +75,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-new-object">Defining a new object</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#parametric-objects">Parametric objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parametric-objects">Parametric objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accessing-object-parameters">Accessing object parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#parametric-object-proxies">Parametric object proxies</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#finding-defined-objects">Finding defined objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creating-a-new-object-in-runtime">Creating a new object in runtime</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#abolishing-an-existing-object">Abolishing an existing object</a></li>
@@ -378,17 +382,39 @@ the <a class="reference internal" href="inheritance.html#inheritance-scope"><spa
 <section id="parametric-objects">
 <span id="objects-parametric"></span><h2>Parametric objects<a class="headerlink" href="#parametric-objects" title="Link to this heading"></a></h2>
 <p>Parametric objects have a compound term as identifier where all the
-arguments of the compound term are variables. These variables, the
-<em>object parameters</em>, can be instantiated when sending or as a consequence
-of sending a message to the object, thus acting as object parameters. The
-object predicates can then be coded to depend on those parameters, which
-are logical variables shared by all object predicates. When an object state
-is set at object creation and never changed, parameters provide a better
-solution than using the object’s database via asserts. Parametric objects
-can also be used to associate a set of predicates to terms that share a
-common functor and arity.</p>
-<p>In order to give access to an object parameter, Logtalk provides a
-<a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> built-in local method:</p>
+arguments of the compound term are variables. These variables can be
+bound when sending a message or become bound when a message to the object
+succeeds, thus acting as <em>object parameters</em>. The object predicates
+can be coded to depend on those parameters, which are logical variables
+shared by all object predicates. When an object state is set at object
+creation and never changed, parameters provide a better solution than
+using the object’s database via asserts. Parametric objects can also be
+used to associate a set of predicates to terms that share a common
+functor and arity.</p>
+<section id="accessing-object-parameters">
+<h3>Accessing object parameters<a class="headerlink" href="#accessing-object-parameters" title="Link to this heading"></a></h3>
+<p>Object parameters can be accessed using <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>
+or built-in execution context methods. Parameter variables is the
+recommended solution to access object parameters. Although they
+introduce a concept of entity global variables, their unique syntax,
+<code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code>, avoids conflicts and makes them easily
+recognizable. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Bar_</span>, <span class="nv">_Baz_</span>, ...)).
+
+    ...
+    bar(<span class="nv">_Bar_</span>).
+
+    baz <span class="o">:-</span>
+        baz(<span class="nv">_Baz_</span>),
+        ... .
+</pre></div>
+</div>
+<p>Note that using parameter variables doesn’t change the fact that entity
+parameters are logical variables. Parameter variables simplify code
+maintenance by allowing parameters to be added, reordered, or removed
+without having to specify or update parameter indexes.</p>
+<p>Logtalk provides also a <a class="reference internal" href="../refman/methods/parameter_2.html#methods-parameter-2"><span class="std std-ref">parameter/2</span></a> built-in local method
+to access individual parameters:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Bar</span>, <span class="nv">_Baz</span>, ...)).
 
     ...
@@ -402,7 +428,8 @@ common functor and arity.</p>
 </pre></div>
 </div>
 <p>An alternative solution is to use the built-in local method
-<a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a>. For example:</p>
+<a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a>, which allows to access all parameters with a single
+call. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Bar</span>, <span class="nv">_Baz</span>, ...)).
 
     ...
@@ -419,38 +446,45 @@ all calls of <code class="docutils literal notranslate"><span class="pre">this/1
 use these method with the message sending operators
 (<a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a>, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>, or
 <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a>).</p>
-<p>A third alternative to access object parameters is to use
-<a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>. Although parameter variables
-introduce a concept of entity global variables, their unique syntax,
-<code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code>, avoids conflicts and makes them easily recognizable. For
-example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Bar_</span>, <span class="nv">_Baz_</span>, ...)).
-
-    ...
-    bar(<span class="nv">_Bar_</span>).
-
-    baz <span class="o">:-</span>
-        baz(<span class="nv">_Baz_</span>),
-        ... .
-</pre></div>
-</div>
-<p>Note that using parameter variables doesn’t change the fact that entity parameters
-are logical variables. Parameter variables simplify code maintenance by allowing
-parameters to be added, reordered, or removed without having to specify or update
-parameter indexes.</p>
 <p>When storing a parametric object in its own source file, the convention
 is to name the file after the object, with the object arity appended.
 For instance, when defining an object named <code class="docutils literal notranslate"><span class="pre">sort(Type)</span></code>, we may save
 it in a <code class="docutils literal notranslate"><span class="pre">sort_1.lgt</span></code> text file. This way it is easy to avoid file name
 clashes when saving Logtalk entities that have the same functor but
 different arity.</p>
+</section>
+<section id="parametric-object-proxies">
+<h3>Parametric object proxies<a class="headerlink" href="#parametric-object-proxies" title="Link to this heading"></a></h3>
 <p>Compound terms with the same functor and with the same number of
 arguments as a parametric object identifier may act as <em>proxies</em> to a
 parametric object. Proxies may be stored on the database as Prolog facts
 and be used to represent different instantiations of a parametric object
-identifier. Logtalk provides a convenient notation for accessing proxies
+identifier. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(circle(<span class="nv">_Id_</span>, <span class="nv">_Radius_</span>, <span class="nv">_Color_</span>)).
+
+<span class="p">    :- </span><span class="k">public</span>(area<span class="o">/</span><span class="m">1</span>).
+    ...
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+<span class="c">% parametric object proxies:</span>
+circle(<span class="s">&#39;#1&#39;</span>, <span class="m">1.23</span>, blue).
+circle(<span class="s">&#39;#2&#39;</span>, <span class="m">3.71</span>, yellow).
+circle(<span class="s">&#39;#3&#39;</span>, <span class="m">0.39</span>, green).
+circle(<span class="s">&#39;#4&#39;</span>, <span class="m">5.74</span>, black).
+circle(<span class="s">&#39;#5&#39;</span>, <span class="m">8.32</span>, cyan).
+</pre></div>
+</div>
+<p>Logtalk provides a convenient notation for accessing proxies
 represented as Prolog facts when sending a message:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="k">{</span><span class="nv">Proxy</span><span class="k">}</span><span class="o">::</span><span class="nv">Message</span>, ...
+</pre></div>
+</div>
+<p>For example, using the <code class="docutils literal notranslate"><span class="pre">circle/3</span></code> parametric object above, we can
+compute a list with the areas of all circles using the following goal:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">findall</span>(<span class="nv">Area</span>, <span class="k">{</span>circle(<span class="nv">_</span>, <span class="nv">_</span>, <span class="nv">_</span>)<span class="k">}</span><span class="o">::</span>area(<span class="nv">Area</span>), <span class="nv">Areas</span>).
+
+<span class="nv">Areas</span> <span class="o">=</span> [<span class="m">4.75291</span>, <span class="m">43.2412</span>, <span class="m">0.477836</span>, <span class="m">103.508</span>, <span class="m">217.468</span>].
 </pre></div>
 </div>
 <p>In this context, the proxy argument is proved as a plain Prolog goal. If
@@ -459,6 +493,7 @@ Typically, the proof allows retrieving of parameter instantiations. This
 construct can either be used with a proxy argument that is sufficiently
 instantiated in order to unify with a single Prolog fact or with a proxy
 argument that unifies with several facts on backtracking.</p>
+</section>
 </section>
 <section id="finding-defined-objects">
 <span id="objects-finding"></span><h2>Finding defined objects<a class="headerlink" href="#finding-defined-objects" title="Link to this heading"></a></h2>
