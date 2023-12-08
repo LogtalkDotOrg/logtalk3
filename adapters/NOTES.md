@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on March 6, 2022
+Last updated on December 8, 2028
 
 This file is part of Logtalk <https://logtalk.org/>  
 SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
@@ -133,6 +133,9 @@ B-Prolog 8.1 and later versions
 -------------------------------
 
 	b.pl
+
+Experimental. Bugs and limitations on atom representation result in
+silent failures when loading libraries and tools (including `lgtunit`).
 
 Note that this adapter file redefines the B-Prolog `(::)/2` finite-domain
 built-in predicate (you may use the alternative `in/2` built-in predicate

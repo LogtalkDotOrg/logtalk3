@@ -60,6 +60,9 @@ an included file to report the actual location instead of the main file.
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: B-Prolog support status to "experimental". Bugs and limitations on
+atom representation result in silent failures when loading libraries and tools.
+
 * ADDED: Support for declaring phrase-like predicates that call non-terminals.
 This helps preventing false positive linter warnings of non-terminals called
 as predicates.

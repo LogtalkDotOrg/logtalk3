@@ -32,7 +32,7 @@ On POSIX operating-systems, the following shell scripts are installed
 by default for running Logtalk with the supported backend Prolog compilers
 (which must be installed and up-to-date before running these scripts):
 
-* B-Prolog:       `bplgt`
+* B-Prolog:       `bplgt`      (experimental)
 * Ciao Prolog:    `ciaolgt`    (experimental; first run may require `sudo`)
 * CxProlog:       `cxlgt`
 * ECLiPSe:        `eclipselgt`
@@ -43,7 +43,7 @@ by default for running Logtalk with the supported backend Prolog compilers
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
 * Tau Prolog:     `taulgt`
-* Trealla Prolog: `tplgt`      (experimental)
+* Trealla Prolog: `tplgt`
 * XSB:            `xsblgt`     (first run may require `sudo`)
 * YAP:            `yaplgt`
 
