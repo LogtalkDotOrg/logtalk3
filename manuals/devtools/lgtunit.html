@@ -1742,6 +1742,13 @@ requires compilation in debug mode. The solution is to use separate test
 objects for benchmarking and for code coverage. Note that the CPU
 execution time (in seconds) for each individual test is reported by
 default when running the tests.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">(=~=)/2</span></code> predicate is typically used by adding the following
+directive to the object (or category) calling it:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [
+    <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="o">=</span><span class="err">~</span><span class="o">=</span>), (<span class="o">=</span><span class="err">~</span><span class="o">=</span>)<span class="o">/</span><span class="m">2</span>
+]).
+</pre></div>
+</div>
 <p>Consult the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object API documentation for more details on
 these predicates.</p>
 </section>

@@ -30,7 +30,7 @@
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, '=~=')
+		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	condition :-

@@ -27,16 +27,17 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2023-08-04,
+		date is 2023-12-07,
 		comment is 'Unit tests for the "lgtunit" tool utility predicates.'
 	]).
 
 	:- uses(lgtunit, [
 		benchmark/2, benchmark_reified/3,
 		benchmark/3,
-		epsilon/1, ('=~=')/2,
+		epsilon/1,
+		op(700, xfx, =~=), (=~=)/2,
 		approximately_equal/2, approximately_equal/3,
 		essentially_equal/3, tolerance_equal/4,
 		deterministic/1, deterministic/2,
@@ -203,79 +204,79 @@ a(1).
 	test(tolerance_equal_4_12, error(type_error(number,a))) :-
 		tolerance_equal(100.0, 99.95, 1.0e-3, a).
 
-	% ('=~=')/2 tests
+	% (=~=)/2 tests
 
 	test('=~=_2_01', true) :-
-		'=~='(0.0, 0.0).
+		0.0 =~= 0.0.
 
 	test('=~=_2_02', true) :-
 		epsilon(Epsilon),
 		EpsilonX10 is Epsilon*10,
-		'=~='(Epsilon, EpsilonX10).
+		Epsilon =~= EpsilonX10.
 
 	test('=~=_2_03', true) :-
 		epsilon(Epsilon),
 		EpsilonX100 is Epsilon*100,
-		'=~='(Epsilon, EpsilonX100).
+		Epsilon =~= EpsilonX100.
 
 	test('=~=_2_04', false) :-
 		epsilon(Epsilon),
 		EpsilonX1000 is Epsilon*1000,
-		'=~='(Epsilon, EpsilonX1000).
+		Epsilon =~= EpsilonX1000.
 
 	test('=~=_2_05', false) :-
-		'=~='(0.0, 0.0001).
+		0.0 =~= 0.0001.
 
 	test('=~=_2_06', false) :-
-		'=~='(0.0, 1.0).
+		0.0 =~= 1.0.
 
 	test('=~=_2_07', true) :-
-		'=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,3.0]).
+		[0.0,1.0,2.0,3.0] =~= [0.0,1.0,2.0,3.0].
 
 	test('=~=_2_08', true) :-
-		\+ '=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,2.0]).
+		\+ [0.0,1.0,2.0,3.0] =~= [0.0,1.0,2.0,2.0].
 
 	test('=~=_2_09', true) :-
-		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,3.0]]).
+		[[0.0,1.0],[2.0,3.0]] =~= [[0.0,1.0],[2.0,3.0]].
 
 	test('=~=_2_10', true) :-
-		\+ '=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,2.0]]).
+		\+ [[0.0,1.0],[2.0,3.0]] =~= [[0.0,1.0],[2.0,2.0]].
 
 	test('=~=_2_11', error(instantiation_error)) :-
-		'=~='(1.0, _).
+		1.0 =~= _.
 
 	test('=~=_2_12', error(instantiation_error)) :-
-		'=~='(_, 2.0).
+		_ =~= 2.0.
 
 	test('=~=_2_13', error(instantiation_error)) :-
-		'=~='([0.0,1.0,2.0,_], [0.0,1.0,2.0,3.0]).
+		[0.0,1.0,2.0,_] =~= [0.0,1.0,2.0,3.0].
 
 	test('=~=_2_14', error(instantiation_error)) :-
-		'=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,_]).
+		[0.0,1.0,2.0,3.0] =~= [0.0,1.0,2.0,_].
 
 	test('=~=_2_15', error(instantiation_error)) :-
-		'=~='([[0.0,1.0],[2.0,_]], [[0.0,1.0],[2.0,3.0]]).
+		[[0.0,1.0],[2.0,_]] =~= [[0.0,1.0],[2.0,3.0]].
 
 	test('=~=_2_16', error(instantiation_error)) :-
-		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,_]]).
+		[[0.0,1.0],[2.0,3.0]] =~= [[0.0,1.0],[2.0,_]].
 
 	test('=~=_2_17', error(type_error(number,a))) :-
-		'=~='(1.0, a).
+		1.0 =~= a.
 
 	test('=~=_2_18', error(type_error(number,a))) :-
-		'=~='(a, 2.0).
+		a =~= 2.0.
 
 	test('=~=_2_19', error(type_error(number,a))) :-
-		'=~='([0.0,1.0,2.0,a], [0.0,1.0,2.0,3.0]).
+		[0.0,1.0,2.0,a] =~= [0.0,1.0,2.0,3.0].
 
 	test('=~=_2_20', error(type_error(number,a))) :-
-		'=~='([0.0,1.0,2.0,3.0], [0.0,1.0,2.0,a]).
+		[0.0,1.0,2.0,3.0] =~= [0.0,1.0,2.0,a].
 
 	test('=~=_2_21', error(type_error(number,a))) :-
-		'=~='([[0.0,1.0],[2.0,a]], [[0.0,1.0],[2.0,3.0]]).
+		[[0.0,1.0],[2.0,a]] =~= [[0.0,1.0],[2.0,3.0]].
 
 	test('=~=_2_22', error(type_error(number,a))) :-
-		'=~='([[0.0,1.0],[2.0,3.0]], [[0.0,1.0],[2.0,a]]).
+		[[0.0,1.0],[2.0,3.0]] =~= [[0.0,1.0],[2.0,a]].
 
 	% deterministic/1 tests
 

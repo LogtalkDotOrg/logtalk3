@@ -30,7 +30,7 @@
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, '=~='), '=~='/2
+		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	succeeds(lgt_epsilon_0_01) :-

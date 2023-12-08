@@ -1754,6 +1754,15 @@ objects for benchmarking and for code coverage. Note that the CPU
 execution time (in seconds) for each individual test is reported by
 default when running the tests.
 
+The ``(=~=)/2`` predicate is typically used by adding the following
+directive to the object (or category) calling it:
+
+::
+
+   :- uses(lgtunit, [
+       op(700, xfx, =~=), (=~=)/2
+   ]).
+
 Consult the ``lgtunit`` object API documentation for more details on
 these predicates.
 

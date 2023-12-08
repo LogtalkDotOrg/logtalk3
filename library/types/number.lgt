@@ -23,9 +23,9 @@
 	extends(atomic)).
 
 	:- info([
-		version is 1:13:0,
+		version is 1:14:0,
 		author is 'Paulo Moura',
-		date is 2023-10-02,
+		date is 2023-12-07,
 		comment is 'Number data type predicates.'
 	]).
 
@@ -64,11 +64,11 @@
 		argnames is ['Number1', 'Number2', 'RelativeTolerance', 'AbsoluteTolerance']
 	]).
 
-	:- public(op(700, xfx, ('=~='))).
-	:- public(('=~=')/2).
+	:- public(op(700, xfx, =~=)).
+	:- public((=~=)/2).
 	:- mode('=~='(+number, +number), zero_or_one).
 	:- mode('=~='(+list(number), +list(number)), zero_or_one).
-	:- info(('=~=')/2, [
+	:- info((=~=)/2, [
 		comment is 'Compares two floats (or lists of floats) for approximate equality using 100*epsilon for the absolute error and, if that fails, 99.999% accuracy for the relative error. Note that these precision values may not be adequate for all cases. No type-checking.',
 		argnames is ['Float1', 'Float2']
 	]).

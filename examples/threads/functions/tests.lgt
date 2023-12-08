@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "threads/functions" example.'
 	]).
 
-	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
+	:- uses(lgtunit, [op(700, xfx, =~=), (=~=)/2]).
 
 	test(functions_01, true(Zero =~= 2.0)) :-
 		bisection::find_root(f1, 1.0, 2.3, 1.0e-15, Zero).

@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "threads/integration2d" example.'
 	]).
 
-	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
+	:- uses(lgtunit, [op(700, xfx, =~=), (=~=)/2]).
 
 	test(integration2d_1) :-
 		quadsplit2d(1)::integrate(circle, -2, 2, -2, 2, 2, 2.5e-10, Integral),

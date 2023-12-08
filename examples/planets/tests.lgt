@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "planets" example.'
 	]).
 
-	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
+	:- uses(lgtunit, [op(700, xfx, =~=), (=~=)/2]).
 
 	cover(m1).
 	cover(m2).

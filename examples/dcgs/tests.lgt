@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
-	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
+	:- uses(lgtunit, [op(700, xfx, =~=), (=~=)/2]).
 
 	test(dcgs_01, true(Solutions == [-9])) :-
 		findall(Result, calculator::parse("1+2-3*4", Result), Solutions).

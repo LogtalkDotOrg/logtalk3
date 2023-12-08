@@ -43,7 +43,7 @@
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, '=~='), '=~='/2, variant/2
+		op(700, xfx, =~=), (=~=)/2, variant/2
 	]).
 
 	cover(term_io).

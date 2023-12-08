@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:6:3,
+		version is 16:7:0,
 		author is 'Paulo Moura',
-		date is 2023-11-23,
+		date is 2023-12-07,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -241,11 +241,11 @@
 		argnames is ['Number1', 'Number2', 'RelativeTolerance', 'AbsoluteTolerance']
 	]).
 
-	:- public(op(700, xfx, ('=~='))).
-	:- public(('=~=')/2).
+	:- public(op(700, xfx, =~=)).
+	:- public((=~=)/2).
 	:- mode('=~='(+number, +number), zero_or_one).
 	:- mode('=~='(+list(number), +list(number)), zero_or_one).
-	:- info(('=~=')/2, [
+	:- info((=~=)/2, [
 		comment is 'Compares two numbers (or lists of numbers) for approximate equality using ``100*epsilon`` for the absolute error and, if that fails, ``99.999%`` accuracy for the relative error. But these precision values may not be adequate for all cases. Type-checked.',
 		argnames is ['Number1', 'Number2']
 	]).
