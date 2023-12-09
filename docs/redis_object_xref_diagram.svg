@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-995.5 1021,-995.5 1021,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object redis</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2023&#45;11&#45;27, 16:06</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2023&#45;12&#45;09, 10:51</text>
 <g id="clust1" class="cluster">
 <title>cluster_redis_object</title>
 <g id="a_clust1"><a xlink:title="redis">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 997,-49.75 997,-49.75 1003,-49.75 1009,-55.75 1009,-61.75 1009,-61.75 1009,-971.5 1009,-971.5 1009,-977.5 1003,-983.5 997,-983.5 997,-983.5 20,-983.5 20,-983.5 14,-983.5 8,-977.5 8,-971.5 8,-971.5 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt">
 <text text-anchor="start" x="20" y="-966" font-family="Monospace" font-size="10.00" fill="dimgray">redis</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- connect/1 -->
 <g id="node1" class="node">
 <title>connect/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L35">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L35" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L35">
 <polygon fill="springgreen" stroke="black" points="650,-710.75 564,-710.75 564,-674.75 650,-674.75 650,-710.75"/>
 <text text-anchor="start" x="571.88" y="-693.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="576.62" y="-692.8" font-family="Monospace" font-size="11.00">connect/1</text>
@@ -41,7 +41,7 @@
 <!-- connect_to_server/3 -->
 <g id="node6" class="node">
 <title>connect_to_server/3</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L182">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L182">
 <polygon fill="cornsilk" stroke="black" points="793,-593 639,-593 639,-557 793,-557 793,-593"/>
 <text text-anchor="start" x="646.88" y="-575.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="651.88" y="-575.05" font-family="Monospace" font-size="11.00">connect_to_server/3</text>
@@ -55,12 +55,12 @@
 <!-- connect/1&#45;&gt;connect_to_server/3 -->
 <g id="edge1" class="edge">
 <title>connect/1&#45;&gt;connect_to_server/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L75" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M623.32,-674.42C641.46,-655.16 670.94,-623.85 691.78,-601.72"/>
 <polygon fill="black" stroke="black" points="694.22,-604.23 698.53,-594.55 689.13,-599.43 694.22,-604.23"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L75">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L75">
 <text text-anchor="start" x="664" y="-630.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- connect/3 -->
 <g id="node2" class="node">
 <title>connect/3</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L42">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L42">
 <polygon fill="springgreen" stroke="black" points="759,-710.75 673,-710.75 673,-674.75 759,-674.75 759,-710.75"/>
 <text text-anchor="start" x="680.88" y="-693.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="685.62" y="-692.8" font-family="Monospace" font-size="11.00">connect/3</text>
@@ -82,12 +82,12 @@
 <!-- connect/3&#45;&gt;connect_to_server/3 -->
 <g id="edge2" class="edge">
 <title>connect/3&#45;&gt;connect_to_server/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L83" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M716,-674.42C716,-656.01 716,-626.6 716,-604.71"/>
 <polygon fill="black" stroke="black" points="719.5,-604.96 716,-594.96 712.5,-604.96 719.5,-604.96"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L83">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L83">
 <text text-anchor="start" x="716" y="-630.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -95,7 +95,7 @@
 <!-- disconnect/1 -->
 <g id="node3" class="node">
 <title>disconnect/1</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L49">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L49" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L49">
 <polygon fill="springgreen" stroke="black" points="921.5,-710.75 814.5,-710.75 814.5,-674.75 921.5,-674.75 921.5,-710.75"/>
 <text text-anchor="start" x="822.38" y="-693.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="827.5" y="-692.8" font-family="Monospace" font-size="11.00">disconnect/1</text>
@@ -109,7 +109,7 @@
 <!-- disconnect_from_server/1 -->
 <g id="node7" class="node">
 <title>disconnect_from_server/1</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L188">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L188">
 <polygon fill="cornsilk" stroke="black" points="999,-593 811,-593 811,-557 999,-557 999,-593"/>
 <text text-anchor="start" x="818.88" y="-575.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="824" y="-575.05" font-family="Monospace" font-size="11.00">disconnect_from_server/1</text>
@@ -123,12 +123,12 @@
 <!-- disconnect/1&#45;&gt;disconnect_from_server/1 -->
 <g id="edge3" class="edge">
 <title>disconnect/1&#45;&gt;disconnect_from_server/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L91" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M873.54,-674.42C879.45,-655.92 888.91,-626.32 895.92,-604.41"/>
 <polygon fill="black" stroke="black" points="899.25,-605.48 898.96,-594.89 892.58,-603.35 899.25,-605.48"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L91">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L91">
 <text text-anchor="start" x="887" y="-630.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,7 +136,7 @@
 <!-- send/3 -->
 <g id="node4" class="node">
 <title>send/3</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L56">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L56">
 <polygon fill="springgreen" stroke="black" points="455,-828.5 389,-828.5 389,-792.5 455,-792.5 455,-828.5"/>
 <text text-anchor="start" x="396.88" y="-811.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="401.75" y="-810.55" font-family="Monospace" font-size="11.00">send/3</text>
@@ -150,7 +150,7 @@
 <!-- send_request/3 -->
 <g id="node9" class="node">
 <title>send_request/3</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219">
 <polygon fill="cornsilk" stroke="black" points="482,-710.75 362,-710.75 362,-674.75 482,-674.75 482,-710.75"/>
 <text text-anchor="start" x="369.88" y="-693.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="374.75" y="-692.8" font-family="Monospace" font-size="11.00">send_request/3</text>
@@ -164,12 +164,12 @@
 <!-- send/3&#45;&gt;send_request/3 -->
 <g id="edge4" class="edge">
 <title>send/3&#45;&gt;send_request/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L99" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M422,-792.17C422,-773.76 422,-744.35 422,-722.46"/>
 <polygon fill="black" stroke="black" points="425.5,-722.71 422,-712.71 418.5,-722.71 425.5,-722.71"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L99">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L99">
 <text text-anchor="start" x="422" y="-747.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -177,7 +177,7 @@
 <!-- console/1 -->
 <g id="node5" class="node">
 <title>console/1</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L63">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L63">
 <polygon fill="springgreen" stroke="black" points="599,-946.25 513,-946.25 513,-910.25 599,-910.25 599,-946.25"/>
 <text text-anchor="start" x="520.88" y="-929.08" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="525.62" y="-928.3" font-family="Monospace" font-size="11.00">console/1</text>
@@ -191,7 +191,7 @@
 <!-- console_request/1 -->
 <g id="node8" class="node">
 <title>console_request/1</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213">
 <polygon fill="cornsilk" stroke="black" points="626,-828.5 486,-828.5 486,-792.5 626,-792.5 626,-828.5"/>
 <text text-anchor="start" x="493.88" y="-811.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="498.62" y="-810.55" font-family="Monospace" font-size="11.00">console_request/1</text>
@@ -205,12 +205,12 @@
 <!-- console/1&#45;&gt;console_request/1 -->
 <g id="edge5" class="edge">
 <title>console/1&#45;&gt;console_request/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L107" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L107" xlink:title="calls">
 <path fill="none" stroke="black" d="M556,-909.92C556,-891.51 556,-862.1 556,-840.21"/>
 <polygon fill="black" stroke="black" points="559.5,-840.46 556,-830.46 552.5,-840.46 559.5,-840.46"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L107">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L107" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L107">
 <text text-anchor="start" x="556" y="-865.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -229,12 +229,12 @@
 <!-- connect_to_server/3&#45;&gt;socket:tcp_socket/1 -->
 <g id="edge36" class="edge">
 <title>connect_to_server/3&#45;&gt;socket:tcp_socket/1</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L182" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M688.15,-556.67C656.1,-536.73 603.3,-503.87 567.62,-481.66"/>
 <polygon fill="black" stroke="black" points="569.66,-478.81 559.32,-476.5 565.96,-484.75 569.66,-478.81"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L182">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L182">
 <text text-anchor="start" x="628" y="-512.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -253,12 +253,12 @@
 <!-- connect_to_server/3&#45;&gt;socket:tcp_connect/3 -->
 <g id="edge37" class="edge">
 <title>connect_to_server/3&#45;&gt;socket:tcp_connect/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L182" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M714.5,-556.67C712.91,-538.26 710.37,-508.85 708.48,-486.96"/>
 <polygon fill="black" stroke="black" points="711.99,-486.87 707.64,-477.21 705.01,-487.47 711.99,-486.87"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L182">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L182">
 <text text-anchor="start" x="711" y="-512.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -277,12 +277,12 @@
 <!-- disconnect_from_server/1&#45;&gt;socket:tcp_close_socket/1 -->
 <g id="edge38" class="edge">
 <title>disconnect_from_server/1&#45;&gt;socket:tcp_close_socket/1</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L188" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M904.55,-556.67C904.07,-538.26 903.31,-508.85 902.74,-486.96"/>
 <polygon fill="black" stroke="black" points="906.25,-487.12 902.49,-477.21 899.25,-487.3 906.25,-487.12"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L188">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L188">
 <text text-anchor="start" x="903" y="-512.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -290,12 +290,12 @@
 <!-- console_request/1&#45;&gt;connect/1 -->
 <g id="edge6" class="edge">
 <title>console_request/1&#45;&gt;connect/1</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M563.64,-792.17C571.86,-773.5 585.07,-743.53 594.75,-721.55"/>
 <polygon fill="black" stroke="black" points="597.87,-723.14 598.7,-712.58 591.47,-720.32 597.87,-723.14"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213">
 <text text-anchor="start" x="583" y="-747.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -303,12 +303,12 @@
 <!-- console_request/1&#45;&gt;disconnect/1 -->
 <g id="edge8" class="edge">
 <title>console_request/1&#45;&gt;disconnect/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M603.05,-792.05C658.5,-771.47 750.63,-737.29 810.33,-715.15"/>
 <polygon fill="black" stroke="black" points="811.5,-718.44 819.66,-711.68 809.07,-711.88 811.5,-718.44"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213">
 <text text-anchor="start" x="721" y="-747.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -316,12 +316,12 @@
 <!-- console_request/1&#45;&gt;send_request/3 -->
 <g id="edge7" class="edge">
 <title>console_request/1&#45;&gt;send_request/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M548.85,-792.09C542.58,-778.45 532.36,-759.68 519,-746.75 506.44,-734.6 490.55,-724.39 475.28,-716.27"/>
 <polygon fill="black" stroke="black" points="477.22,-713.33 466.72,-711.93 474.05,-719.57 477.22,-713.33"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213">
 <text text-anchor="start" x="526" y="-747.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -329,7 +329,7 @@
 <!-- print_reply/1 -->
 <g id="node26" class="node">
 <title>print_reply/1</title>
-<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L348">
+<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L348" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L348">
 <polygon fill="cornsilk" stroke="black" points="257.5,-710.75 144.5,-710.75 144.5,-674.75 257.5,-674.75 257.5,-710.75"/>
 <text text-anchor="start" x="152.38" y="-693.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="157.12" y="-692.8" font-family="Monospace" font-size="11.00">print_reply/1</text>
@@ -343,12 +343,12 @@
 <!-- console_request/1&#45;&gt;print_reply/1 -->
 <g id="edge9" class="edge">
 <title>console_request/1&#45;&gt;print_reply/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M532.41,-792.1C512.08,-777.9 481.43,-758.35 452,-746.75 392.49,-723.29 320.74,-709.47 269.22,-701.86"/>
 <polygon fill="black" stroke="black" points="269.79,-698.4 259.39,-700.45 268.79,-705.33 269.79,-698.4"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L213">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L213">
 <text text-anchor="start" x="473" y="-747.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -356,7 +356,7 @@
 <!-- parse_request/2 -->
 <g id="node10" class="node">
 <title>parse_request/2</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L224">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L224">
 <polygon fill="cornsilk" stroke="black" points="620.5,-593 493.5,-593 493.5,-557 620.5,-557 620.5,-593"/>
 <text text-anchor="start" x="501.38" y="-575.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="506.38" y="-575.05" font-family="Monospace" font-size="11.00">parse_request/2</text>
@@ -370,12 +370,12 @@
 <!-- send_request/3&#45;&gt;parse_request/2 -->
 <g id="edge10" class="edge">
 <title>send_request/3&#45;&gt;parse_request/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219" xlink:title="calls">
 <path fill="none" stroke="black" d="M442.21,-674.42C464.98,-654.9 502.17,-623.02 528.02,-600.85"/>
 <polygon fill="black" stroke="black" points="530.19,-603.6 535.5,-594.43 525.63,-598.28 530.19,-603.6"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219">
 <text text-anchor="start" x="493" y="-630.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -383,7 +383,7 @@
 <!-- send_request/2 -->
 <g id="node15" class="node">
 <title>send_request/2</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L258">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L258" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L258">
 <polygon fill="cornsilk" stroke="black" points="344,-593 224,-593 224,-557 344,-557 344,-593"/>
 <text text-anchor="start" x="231.88" y="-575.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="236.75" y="-575.05" font-family="Monospace" font-size="11.00">send_request/2</text>
@@ -397,12 +397,12 @@
 <!-- send_request/3&#45;&gt;send_request/2 -->
 <g id="edge11" class="edge">
 <title>send_request/3&#45;&gt;send_request/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219" xlink:title="calls">
 <path fill="none" stroke="black" d="M401.34,-674.42C377.97,-654.82 339.72,-622.74 313.28,-600.56"/>
 <polygon fill="black" stroke="black" points="315.87,-598.16 305.96,-594.42 311.37,-603.53 315.87,-598.16"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219">
 <text text-anchor="start" x="357" y="-630.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -410,7 +410,7 @@
 <!-- parse_reply/2 -->
 <g id="node16" class="node">
 <title>parse_reply/2</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L264">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L264">
 <polygon fill="cornsilk" stroke="black" points="475.5,-593 362.5,-593 362.5,-557 475.5,-557 475.5,-593"/>
 <text text-anchor="start" x="370.38" y="-575.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="375.12" y="-575.05" font-family="Monospace" font-size="11.00">parse_reply/2</text>
@@ -424,12 +424,12 @@
 <!-- send_request/3&#45;&gt;parse_reply/2 -->
 <g id="edge12" class="edge">
 <title>send_request/3&#45;&gt;parse_reply/2</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219" xlink:title="calls">
 <path fill="none" stroke="black" d="M421.55,-674.42C421.07,-656.01 420.31,-626.6 419.74,-604.71"/>
 <polygon fill="black" stroke="black" points="423.25,-604.87 419.49,-594.96 416.25,-605.05 423.25,-604.87"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L219">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L219">
 <text text-anchor="start" x="420" y="-630.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -437,7 +437,7 @@
 <!-- parse_request_command//1 -->
 <g id="node11" class="node">
 <title>parse_request_command//1</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228">
 <polygon fill="cornsilk" stroke="black" points="435,-475.25 247,-475.25 247,-439.25 435,-439.25 435,-475.25"/>
 <text text-anchor="start" x="254.88" y="-458.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="260" y="-457.3" font-family="Monospace" font-size="11.00">parse_request_command//1</text>
@@ -451,12 +451,12 @@
 <!-- parse_request/2&#45;&gt;parse_request_command//1 -->
 <g id="edge13" class="edge">
 <title>parse_request/2&#45;&gt;parse_request_command//1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L224" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M524.66,-556.67C487.12,-536.55 425.08,-503.3 383.63,-481.09"/>
 <polygon fill="black" stroke="black" points="385.36,-478.05 374.89,-476.41 382.05,-484.22 385.36,-478.05"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L224">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L224">
 <text text-anchor="start" x="455" y="-512.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -464,7 +464,7 @@
 <!-- parse_request_arguments//1 -->
 <g id="node12" class="node">
 <title>parse_request_arguments//1</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L235">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L235">
 <polygon fill="cornsilk" stroke="black" points="735.5,-357.5 534.5,-357.5 534.5,-321.5 735.5,-321.5 735.5,-357.5"/>
 <text text-anchor="start" x="542.38" y="-340.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="547.25" y="-339.55" font-family="Monospace" font-size="11.00">parse_request_arguments//1</text>
@@ -478,12 +478,12 @@
 <!-- parse_request_command//1&#45;&gt;parse_request_arguments//1 -->
 <g id="edge15" class="edge">
 <title>parse_request_command//1&#45;&gt;parse_request_arguments//1</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M385.33,-438.8C437.48,-418.27 524.04,-384.19 580.3,-362.03"/>
 <polygon fill="black" stroke="black" points="581.36,-365.38 589.38,-358.46 578.79,-358.87 581.36,-365.38"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228">
 <text text-anchor="start" x="496" y="-394.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -491,7 +491,7 @@
 <!-- codes//1 -->
 <g id="node25" class="node">
 <title>codes//1</title>
-<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L343">
+<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L343" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L343">
 <polygon fill="cornsilk" stroke="black" points="734,-95.75 654,-95.75 654,-59.75 734,-59.75 734,-95.75"/>
 <text text-anchor="start" x="661.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="667" y="-77.8" font-family="Monospace" font-size="11.00">codes//1</text>
@@ -505,12 +505,12 @@
 <!-- parse_request_command//1&#45;&gt;codes//1 -->
 <g id="edge14" class="edge">
 <title>parse_request_command//1&#45;&gt;codes//1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M435.25,-439.47C548.46,-418.38 725.66,-381.96 745,-357.5 769.81,-326.12 755.6,-216.33 746,-177.5 739.58,-151.51 724.94,-124.81 712.83,-105.74"/>
 <polygon fill="black" stroke="black" points="715.84,-103.95 707.43,-97.51 709.99,-107.79 715.84,-103.95"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228">
 <text text-anchor="start" x="758" y="-263.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -532,12 +532,12 @@
 <!-- parse_request_command//1&#45;&gt;list::length/2 -->
 <g id="edge33" class="edge">
 <title>parse_request_command//1&#45;&gt;list::length/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228" xlink:title="calls">
 <path fill="none" stroke="black" d="M435.43,-440.13C513.94,-426.58 615.83,-408.58 635,-403.25 689.99,-387.95 713.34,-396.52 755,-357.5 825.37,-291.6 821.57,-164.15 815.79,-107.32"/>
 <polygon fill="black" stroke="black" points="819.28,-107.05 814.69,-97.5 812.33,-107.83 819.28,-107.05"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L228">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L228">
 <text text-anchor="start" x="809" y="-263.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -545,7 +545,7 @@
 <!-- parse_request_argument//1 -->
 <g id="node13" class="node">
 <title>parse_request_argument//1</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241">
 <polygon fill="cornsilk" stroke="black" points="737,-213.5 543,-213.5 543,-177.5 737,-177.5 737,-213.5"/>
 <text text-anchor="start" x="550.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="555.62" y="-195.55" font-family="Monospace" font-size="11.00">parse_request_argument//1</text>
@@ -559,12 +559,12 @@
 <!-- parse_request_arguments//1&#45;&gt;parse_request_argument//1 -->
 <g id="edge16" class="edge">
 <title>parse_request_arguments//1&#45;&gt;parse_request_argument//1</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L237" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L237" xlink:title="calls">
 <path fill="none" stroke="black" d="M635.61,-321.09C636.46,-297.11 637.99,-253.64 639,-224.92"/>
 <polygon fill="black" stroke="black" points="642.49,-225.24 639.34,-215.12 635.49,-224.99 642.49,-225.24"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L237">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L237" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L237">
 <text text-anchor="start" x="638" y="-263.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -572,7 +572,7 @@
 <!-- parse_argument/2 -->
 <g id="node14" class="node">
 <title>parse_argument/2</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L248">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L248" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L248">
 <polygon fill="cornsilk" stroke="black" points="636,-95.75 502,-95.75 502,-59.75 636,-59.75 636,-95.75"/>
 <text text-anchor="start" x="509.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="515" y="-77.8" font-family="Monospace" font-size="11.00">parse_argument/2</text>
@@ -586,12 +586,12 @@
 <!-- parse_request_argument//1&#45;&gt;parse_argument/2 -->
 <g id="edge17" class="edge">
 <title>parse_request_argument//1&#45;&gt;parse_argument/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241" xlink:title="calls">
 <path fill="none" stroke="black" d="M629.37,-177.17C617.82,-158.33 599.2,-127.98 585.69,-105.96"/>
 <polygon fill="black" stroke="black" points="588.71,-104.18 580.49,-97.49 582.74,-107.84 588.71,-104.18"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241">
 <text text-anchor="start" x="606" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -599,12 +599,12 @@
 <!-- parse_request_argument//1&#45;&gt;codes//1 -->
 <g id="edge18" class="edge">
 <title>parse_request_argument//1&#45;&gt;codes//1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241" xlink:title="calls">
 <path fill="none" stroke="black" d="M648.08,-177.17C656.79,-158.5 670.78,-128.53 681.03,-106.55"/>
 <polygon fill="black" stroke="black" points="684.16,-108.11 685.22,-97.57 677.82,-105.15 684.16,-108.11"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241">
 <text text-anchor="start" x="668" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -612,12 +612,12 @@
 <!-- parse_request_argument//1&#45;&gt;list::length/2 -->
 <g id="edge34" class="edge">
 <title>parse_request_argument//1&#45;&gt;list::length/2</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241" xlink:title="calls">
 <path fill="none" stroke="black" d="M665.75,-177.17C695.26,-157.31 743.8,-124.65 776.79,-102.44"/>
 <polygon fill="black" stroke="black" points="778.48,-105.53 784.82,-97.04 774.57,-99.72 778.48,-105.53"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L241">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L241">
 <text text-anchor="start" x="731" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -625,7 +625,7 @@
 <!-- parse_reply/3 -->
 <g id="node17" class="node">
 <title>parse_reply/3</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L269">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L269">
 <polygon fill="cornsilk" stroke="black" points="228.5,-475.25 115.5,-475.25 115.5,-439.25 228.5,-439.25 228.5,-475.25"/>
 <text text-anchor="start" x="123.38" y="-458.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="128.12" y="-457.3" font-family="Monospace" font-size="11.00">parse_reply/3</text>
@@ -639,12 +639,12 @@
 <!-- parse_reply/2&#45;&gt;parse_reply/3 -->
 <g id="edge19" class="edge">
 <title>parse_reply/2&#45;&gt;parse_reply/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L264" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L264" xlink:title="calls">
 <path fill="none" stroke="black" d="M381.75,-556.55C338.4,-536.23 266.73,-502.64 219.43,-480.48"/>
 <polygon fill="black" stroke="black" points="221.06,-477.37 210.51,-476.3 218.08,-483.71 221.06,-477.37"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L264">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L264" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L264">
 <text text-anchor="start" x="302" y="-512.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -652,7 +652,7 @@
 <!-- parse_status/2 -->
 <g id="node18" class="node">
 <title>parse_status/2</title>
-<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L282">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L282">
 <polygon fill="cornsilk" stroke="black" points="187,-285.5 67,-285.5 67,-249.5 187,-249.5 187,-285.5"/>
 <text text-anchor="start" x="74.88" y="-268.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="79.75" y="-267.55" font-family="Monospace" font-size="11.00">parse_status/2</text>
@@ -666,12 +666,12 @@
 <!-- parse_reply/3&#45;&gt;parse_status/2 -->
 <g id="edge21" class="edge">
 <title>parse_reply/3&#45;&gt;parse_status/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L273" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L273" xlink:title="calls">
 <path fill="none" stroke="black" d="M157.55,-438.77C150.28,-428.95 142.11,-416.12 137.75,-403.25 125.81,-368.01 124.54,-324.74 125.3,-296.9"/>
 <polygon fill="black" stroke="black" points="128.78,-297.27 125.68,-287.14 121.79,-297 128.78,-297.27"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L273">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L273">
 <text text-anchor="start" x="137" y="-394.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -679,7 +679,7 @@
 <!-- parse_number/2 -->
 <g id="node19" class="node">
 <title>parse_number/2</title>
-<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L286">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L286">
 <polygon fill="cornsilk" stroke="black" points="379,-213.5 259,-213.5 259,-177.5 379,-177.5 379,-213.5"/>
 <text text-anchor="start" x="266.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="271.75" y="-195.55" font-family="Monospace" font-size="11.00">parse_number/2</text>
@@ -693,12 +693,12 @@
 <!-- parse_reply/3&#45;&gt;parse_number/2 -->
 <g id="edge22" class="edge">
 <title>parse_reply/3&#45;&gt;parse_number/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L275" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L275" xlink:title="calls">
 <path fill="none" stroke="black" d="M228,-438.91C265.87,-423.93 313.02,-398.15 336,-357.5 359.61,-315.73 344.17,-258.08 331.27,-224.3"/>
 <polygon fill="black" stroke="black" points="334.59,-223.19 327.61,-215.22 328.1,-225.8 334.59,-223.19"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L275">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L275" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L275">
 <text text-anchor="start" x="347" y="-335.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -706,7 +706,7 @@
 <!-- parse_bulk/2 -->
 <g id="node20" class="node">
 <title>parse_bulk/2</title>
-<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L290">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L290">
 <polygon fill="cornsilk" stroke="black" points="514.5,-357.5 407.5,-357.5 407.5,-321.5 514.5,-321.5 514.5,-357.5"/>
 <text text-anchor="start" x="415.38" y="-340.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="420.5" y="-339.55" font-family="Monospace" font-size="11.00">parse_bulk/2</text>
@@ -720,12 +720,12 @@
 <!-- parse_reply/3&#45;&gt;parse_bulk/2 -->
 <g id="edge23" class="edge">
 <title>parse_reply/3&#45;&gt;parse_bulk/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L277" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L277" xlink:title="calls">
 <path fill="none" stroke="black" d="M228.99,-441.33C284.51,-426.72 361.5,-406.22 368,-403.25 390.27,-393.07 413.1,-377.75 430.56,-364.8"/>
 <polygon fill="black" stroke="black" points="432.61,-367.64 438.47,-358.81 428.38,-362.06 432.61,-367.64"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L277">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L277" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L277">
 <text text-anchor="start" x="384" y="-394.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -733,7 +733,7 @@
 <!-- parse_mbulk/2 -->
 <g id="node22" class="node">
 <title>parse_mbulk/2</title>
-<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L312">
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L312">
 <polygon fill="cornsilk" stroke="black" points="326.5,-357.5 213.5,-357.5 213.5,-321.5 326.5,-321.5 326.5,-357.5"/>
 <text text-anchor="start" x="221.38" y="-340.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="226.12" y="-339.55" font-family="Monospace" font-size="11.00">parse_mbulk/2</text>
@@ -747,12 +747,12 @@
 <!-- parse_reply/3&#45;&gt;parse_mbulk/2 -->
 <g id="edge24" class="edge">
 <title>parse_reply/3&#45;&gt;parse_mbulk/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L279" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L279" xlink:title="calls">
 <path fill="none" stroke="black" d="M186.67,-438.92C202.91,-419.74 229.25,-388.63 247.97,-366.52"/>
 <polygon fill="black" stroke="black" points="250.46,-369 254.25,-359.1 245.12,-364.47 250.46,-369"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L279">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L279">
 <text text-anchor="start" x="223" y="-394.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -760,7 +760,7 @@
 <!-- parse_line//1 -->
 <g id="node24" class="node">
 <title>parse_line//1</title>
-<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L334">
+<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L334">
 <polygon fill="cornsilk" stroke="black" points="133.5,-95.75 20.5,-95.75 20.5,-59.75 133.5,-59.75 133.5,-95.75"/>
 <text text-anchor="start" x="28.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="33.12" y="-77.8" font-family="Monospace" font-size="11.00">parse_line//1</text>
@@ -774,12 +774,12 @@
 <!-- parse_reply/3&#45;&gt;parse_line//1 -->
 <g id="edge20" class="edge">
 <title>parse_reply/3&#45;&gt;parse_line//1</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L269" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L269" xlink:title="calls">
 <path fill="none" stroke="black" d="M150.33,-438.87C117.25,-410.77 55.48,-351.77 31.75,-285.5 9.46,-223.23 40.88,-146.32 61.51,-106.13"/>
 <polygon fill="black" stroke="black" points="64.55,-107.86 66.15,-97.39 58.37,-104.58 64.55,-107.86"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L269">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L269" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L269">
 <text text-anchor="start" x="32" y="-263.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -787,12 +787,12 @@
 <!-- parse_status/2&#45;&gt;parse_line//1 -->
 <g id="edge25" class="edge">
 <title>parse_status/2&#45;&gt;parse_line//1</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L282" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L282" xlink:title="calls">
 <path fill="none" stroke="black" d="M109.08,-249.07C100.41,-239.46 90.8,-226.8 85.75,-213.5 72.55,-178.76 72.34,-135.37 74.1,-107.36"/>
 <polygon fill="black" stroke="black" points="77.58,-107.77 74.86,-97.53 70.6,-107.23 77.58,-107.77"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L282">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L282" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L282">
 <text text-anchor="start" x="85" y="-191.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -800,12 +800,12 @@
 <!-- parse_number/2&#45;&gt;parse_line//1 -->
 <g id="edge26" class="edge">
 <title>parse_number/2&#45;&gt;parse_line//1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L286" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L286" xlink:title="calls">
 <path fill="none" stroke="black" d="M282.51,-177.05C240.12,-156.77 170.11,-123.28 123.77,-101.12"/>
 <polygon fill="black" stroke="black" points="125.29,-97.97 114.76,-96.81 122.27,-104.28 125.29,-97.97"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L286">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L286" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L286">
 <text text-anchor="start" x="205" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -813,12 +813,12 @@
 <!-- parse_bulk/2&#45;&gt;parse_number/2 -->
 <g id="edge27" class="edge">
 <title>parse_bulk/2&#45;&gt;parse_number/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L290" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L290" xlink:title="calls">
 <path fill="none" stroke="black" d="M443.59,-321.09C418.65,-296.15 372.62,-250.12 344.03,-221.53"/>
 <polygon fill="black" stroke="black" points="346.73,-219.28 337.18,-214.68 341.78,-224.23 346.73,-219.28"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L290">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L290">
 <text text-anchor="start" x="406" y="-263.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -826,7 +826,7 @@
 <!-- parse_string//2 -->
 <g id="node21" class="node">
 <title>parse_string//2</title>
-<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L299">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L299" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L299">
 <polygon fill="cornsilk" stroke="black" points="524.5,-213.5 397.5,-213.5 397.5,-177.5 524.5,-177.5 524.5,-213.5"/>
 <text text-anchor="start" x="405.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="410.38" y="-195.55" font-family="Monospace" font-size="11.00">parse_string//2</text>
@@ -840,12 +840,12 @@
 <!-- parse_bulk/2&#45;&gt;parse_string//2 -->
 <g id="edge28" class="edge">
 <title>parse_bulk/2&#45;&gt;parse_string//2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L290" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L290" xlink:title="calls">
 <path fill="none" stroke="black" d="M461,-321.09C461,-297.11 461,-253.64 461,-224.92"/>
 <polygon fill="black" stroke="black" points="464.5,-225.12 461,-215.12 457.5,-225.12 464.5,-225.12"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L290">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L290" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L290">
 <text text-anchor="start" x="461" y="-263.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -853,12 +853,12 @@
 <!-- parse_mbulk/2&#45;&gt;parse_number/2 -->
 <g id="edge29" class="edge">
 <title>parse_mbulk/2&#45;&gt;parse_number/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L312" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L312" xlink:title="calls">
 <path fill="none" stroke="black" d="M276.01,-321.09C284.36,-296.9 299.55,-252.86 309.46,-224.15"/>
 <polygon fill="black" stroke="black" points="312.65,-225.64 312.6,-215.04 306.03,-223.35 312.65,-225.64"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L312">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L312">
 <text text-anchor="start" x="300" y="-263.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -866,7 +866,7 @@
 <!-- parse_mbulk//2 -->
 <g id="node23" class="node">
 <title>parse_mbulk//2</title>
-<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L320">
+<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L320" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L320">
 <polygon fill="cornsilk" stroke="black" points="241,-213.5 121,-213.5 121,-177.5 241,-177.5 241,-213.5"/>
 <text text-anchor="start" x="128.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="133.75" y="-195.55" font-family="Monospace" font-size="11.00">parse_mbulk//2</text>
@@ -880,12 +880,12 @@
 <!-- parse_mbulk/2&#45;&gt;parse_mbulk//2 -->
 <g id="edge30" class="edge">
 <title>parse_mbulk/2&#45;&gt;parse_mbulk//2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L312" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L312" xlink:title="calls">
 <path fill="none" stroke="black" d="M259.09,-321.09C243.72,-296.58 215.59,-251.69 197.62,-223.02"/>
 <polygon fill="black" stroke="black" points="200.8,-221.51 192.53,-214.89 194.87,-225.23 200.8,-221.51"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L312">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L312" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L312">
 <text text-anchor="start" x="236" y="-263.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -893,12 +893,12 @@
 <!-- parse_mbulk//2&#45;&gt;parse_reply/3 -->
 <g id="edge31" class="edge">
 <title>parse_mbulk//2&#45;&gt;parse_reply/3</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L324" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L324" xlink:title="calls">
 <path fill="none" stroke="black" d="M183.84,-213.63C185.42,-223.98 187.21,-237.46 188,-249.5 189.05,-265.47 190.01,-269.63 188,-285.5 185.93,-301.89 181.23,-305.17 178.75,-321.5 173.23,-357.85 171.94,-400.28 171.77,-427.67"/>
 <polygon fill="black" stroke="black" points="168.27,-427.61 171.76,-437.61 175.27,-427.61 168.27,-427.61"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L324">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L324" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L324">
 <text text-anchor="start" x="178" y="-335.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -920,12 +920,12 @@
 <!-- print_reply/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge35" class="edge">
 <title>print_reply/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L352" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L352" xlink:title="calls">
 <path fill="none" stroke="black" d="M187.68,-674.42C172.99,-655.33 149.22,-624.4 132.23,-602.31"/>
 <polygon fill="black" stroke="black" points="135.21,-600.44 126.34,-594.65 129.66,-604.71 135.21,-600.44"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L352">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L352">
 <text text-anchor="start" x="159" y="-630.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -933,7 +933,7 @@
 <!-- message_tokens//1 -->
 <g id="node27" class="node">
 <title>message_tokens//1</title>
-<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L367">
+<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L367">
 <polygon fill="cornsilk" stroke="black" points="282,-828.5 142,-828.5 142,-792.5 282,-792.5 282,-828.5"/>
 <text text-anchor="start" x="149.88" y="-811.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="154.62" y="-810.55" font-family="Monospace" font-size="11.00">message_tokens//1</text>
@@ -947,7 +947,7 @@
 <!-- logtalk::message_tokens//2 -->
 <g id="node28" class="node">
 <title>logtalk::message_tokens//2</title>
-<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L364">
+<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L364">
 <polygon fill="skyblue" stroke="black" points="312.5,-946.25 111.5,-946.25 111.5,-910.25 312.5,-910.25 312.5,-946.25"/>
 <text text-anchor="start" x="119.38" y="-929.08" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="124.25" y="-928.3" font-family="Monospace" font-size="11.00">logtalk::message_tokens//2</text>
@@ -961,12 +961,12 @@
 <!-- logtalk::message_tokens//2&#45;&gt;message_tokens//1 -->
 <g id="edge32" class="edge">
 <title>logtalk::message_tokens//2&#45;&gt;message_tokens//1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L364" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L364" xlink:title="calls">
 <path fill="none" stroke="black" d="M212,-909.92C212,-891.51 212,-862.1 212,-840.21"/>
 <polygon fill="black" stroke="black" points="215.5,-840.46 212,-830.46 208.5,-840.46 215.5,-840.46"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/7cacd5db94010b65069b2bd473ebae13dd073ed5/library/redis/redis.lgt#L364">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9cbb5930878e702633c8e4f862a2abef79807d04/library/redis/redis.lgt#L364">
 <text text-anchor="start" x="212" y="-865.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
