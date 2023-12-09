@@ -31,6 +31,7 @@
 
 	solution(File, Solution) :-
 		open(File, read, Stream),
+		% input data is line-based
 		reader::line_to_codes(Stream, Line),
 		% use an accumulator pair to compute the sum of all calibration values
 		solution(Line, Stream, 0, Solution),
@@ -41,6 +42,7 @@
 	solution([Code| Codes], Stream, Solution0, Solution) :-
 		once(phrase(calibration(Calibration), [Code| Codes])),
 		Solution1 is Solution0 + Calibration,
+		% next line calibration (if any)
 		reader::line_to_codes(Stream, Line),
 		solution(Line, Stream, Solution1, Solution).
 

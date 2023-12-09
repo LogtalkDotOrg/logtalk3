@@ -44,6 +44,7 @@
 
 	points(File, Points) :-
 		open(File, read, Stream),
+		% input data is line-based
 		line_to_codes(Stream, Line),
 		% use an accumulator pair to compute the sum of all card points
 		points(Line, Stream, 0, Points),
@@ -79,6 +80,7 @@
 
 	total(File, Total) :-
 		open(File, read, Stream),
+		% input data is line-based
 		line_to_codes(Stream, Line),
 		% create a dictionary to hold the counts per card
 		new(Cards),
