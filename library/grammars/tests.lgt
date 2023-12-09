@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2023-11-27,
+		date is 2023-12-09,
 		comment is 'Unit tests for the "grammars" library.',
 		parnames is ['Format']
 	]).
@@ -264,71 +264,55 @@
 
 	% sequence_grammars tests
 
-	test(zero_or_more_1, true(Sequences == [[],[1],[1,2],[1,2,3]])) :-
-		findall(
-			Sequence,
-			phrase(sequence_grammars::zero_or_more(Sequence), [1,2,3], _),
-			Sequences
-		).
+	test(zero_or_more_2_01, true(Sequence-Rest == []-[w,i,u])) :-
+		phrase(sequence_grammars::zero_or_more(vowel, Sequence), [w,i,u], Rest).
 
-	test(one_or_more_1, true(Sequences == [[1],[1,2],[1,2,3]])) :-
-		findall(
-			Sequence,
-			phrase(sequence_grammars::one_or_more(Sequence), [1,2,3], _),
-			Sequences
-		).
+	test(zero_or_more_2_02, true(Sequence-Rest == [a,a]-[w,i,u])) :-
+		phrase(sequence_grammars::zero_or_more(vowel, Sequence), [a,a,w,i,u], Rest).
 
-	test(zero_or_more_0, true(N == 4)) :-
-		findall(
-			1,
-			phrase(sequence_grammars::zero_or_more, [1,2,3], _),
-			Solutions
-		),
-		list::length(Solutions, N).
+	test(one_or_more_2_01, false) :-
+		phrase(sequence_grammars::one_or_more(vowel, _), [w,i,u]).
 
-	test(one_or_more_0, true(N == 3)) :-
-		findall(
-			1,
-			phrase(sequence_grammars::one_or_more, [1,2,3], _),
-			Solutions
-		),
-		list::length(Solutions, N).
+	test(one_or_more_2_02, true(Sequence-Rest == [a,a]-[w,i,u])) :-
+		phrase(sequence_grammars::one_or_more(vowel, Sequence), [a,a,w,i,u], Rest).
 
-	test(lazy_without_2_01, true(Sequences == [[],[1],[1,2],[1,2,3]])) :-
-		findall(
-			Sequence,
-			phrase(sequence_grammars::lazy_without([0], Sequence), [1,2,3,0,4,5], _),
-			Sequences
-		).
+	test(zero_or_more_1_01, true(Sequence == [])) :-
+		phrase(sequence_grammars::zero_or_more(Sequence), []).
 
-	test(lazy_without_2_02, true(Sequences == [[]])) :-
-		findall(
-			Sequence,
-			phrase(sequence_grammars::lazy_without([0], Sequence), [0,1,2,3,4,5], _),
-			Sequences
-		).
+	test(zero_or_more_1_02, true(Sequence-Rest == [1,2,3]-[])) :-
+		phrase(sequence_grammars::zero_or_more(Sequence), [1,2,3], Rest).
 
-	test(greedy_without_2_01, true(Sequences == [[]])) :-
-		findall(
-			Sequence,
-			phrase(sequence_grammars::greedy_without([0], Sequence), [0,1,2,3], _),
-			Sequences
-		).
+	test(one_or_more_1_01, false) :-
+		phrase(sequence_grammars::one_or_more(_), []).
 
-	test(greedy_without_2_02, true(Sequences == [[1,2,3]-[0]])) :-
-		findall(
-			Sequence-Rest,
-			phrase(sequence_grammars::greedy_without([0], Sequence), [1,2,3,0], Rest),
-			Sequences
-		).
+	test(one_or_more_1_02, true(Sequence-Rest == [1,2,3]-[])) :-
+		phrase(sequence_grammars::one_or_more(Sequence), [1,2,3], Rest).
 
-	test(rest_1_01, true(Terminals == [1,2,3])) :-
-		phrase(sequence_grammars::rest(Terminals), [1,2,3]).
+	test(zero_or_more_0_01, true) :-
+		phrase(sequence_grammars::zero_or_more, []).
 
-	test(rest_1_02, true(Terminals == [1,2,3])) :-
-		phrase(sequence_grammars::rest(Terminals), [1,2,3,4,5], [4,5]).
+	test(zero_or_more_0_02, true(Rest == [])) :-
+		phrase(sequence_grammars::zero_or_more, [1,2,3], Rest).
 
-	% auxiliary predicates
+	test(one_or_more_0_01, false) :-
+		phrase(sequence_grammars::one_or_more, []).
+
+	test(one_or_more_0_02, true(Rest == [])) :-
+		phrase(sequence_grammars::one_or_more, [1,2,3], Rest).
+
+	test(without_2_01, true(Sequence-Rest == []-[0,1,2,3])) :-
+		phrase(sequence_grammars::without([0], Sequence), [0,1,2,3], Rest).
+
+	test(without_2_02, true(Sequence-Rest == [1,2,3]-[0])) :-
+		phrase(sequence_grammars::without([0], Sequence), [1,2,3,0], Rest).
+
+	% auxiliary predicates and non-terminals
+
+	vowel(a) --> [a].
+	vowel(e) --> [e].
+	vowel(i) --> [i].
+	vowel(o) --> [o].
+	vowel(u) --> [u].
 
 	convert(Atom, List) :-
 		convert(_Format_, Atom, List).

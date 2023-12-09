@@ -117,7 +117,7 @@ occurrences of list elements.
 a new element and returning the resulting list, and for swapping two randomly
 chosen elements of a list.
 
-* ADDED: Non-terminals `lazy_without//2`, `greedy_without//2`, and `rest//1`
+* ADDED: Non-terminals `zero_or_more//2`, 'one_or_more//2', and `without//2`
 to the `sequence_grammars` library object.
 
 * IMPROVED: Performance of the `reader` library predicates that read a file
@@ -135,6 +135,9 @@ predicates.
 
 * FIXED: The `listing` library category implementation of the `listing/1`
 predicate.
+
+* FIXED: The `sequence_grammars` library object definition of the non-terminals
+`zero_or_more//0-1` and `one_or_more//0-1` to consume tokens eagerly.
 
 Tools
 --------

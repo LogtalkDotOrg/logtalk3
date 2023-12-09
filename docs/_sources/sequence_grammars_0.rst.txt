@@ -14,8 +14,8 @@ Sequence grammars.
 |    ``logtalk_load(grammars(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2023-11-27
+| **Version:** 0:3:0
+| **Date:** 2023-12-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -38,13 +38,55 @@ Sequence grammars.
 Public predicates
 -----------------
 
+.. index:: zero_or_more//2
+.. _sequence_grammars/0::zero_or_more//2:
+
+``zero_or_more//2``
+^^^^^^^^^^^^^^^^^^^
+
+Eagerly collect zero or more terminals that satisfy the given closure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_or_more(Closure,Terminals)``
+| **Meta-predicate template:**
+|    ``zero_or_more(1,*)``
+| **Mode and number of proofs:**
+|    ``zero_or_more(+callable,-list(atomic))`` - ``one``
+
+
+------------
+
+.. index:: one_or_more//2
+.. _sequence_grammars/0::one_or_more//2:
+
+``one_or_more//2``
+^^^^^^^^^^^^^^^^^^
+
+Eagerly collect one or more terminals that satisfy the given closure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``one_or_more(Closure,Terminals)``
+| **Meta-predicate template:**
+|    ``one_or_more(1,*)``
+| **Mode and number of proofs:**
+|    ``one_or_more(+callable,-list(atomic))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: zero_or_more//1
 .. _sequence_grammars/0::zero_or_more//1:
 
 ``zero_or_more//1``
 ^^^^^^^^^^^^^^^^^^^
 
-Describes a sequence of zero or more terminals.
+Eagerly collect zero or more terminals.
 
 | **Compilation flags:**
 |    ``static``
@@ -52,7 +94,7 @@ Describes a sequence of zero or more terminals.
 | **Template:**
 |    ``zero_or_more(Terminals)``
 | **Mode and number of proofs:**
-|    ``zero_or_more(-list(atomic))`` - ``zero_or_one``
+|    ``zero_or_more(-list(atomic))`` - ``one``
 
 
 ------------
@@ -63,7 +105,7 @@ Describes a sequence of zero or more terminals.
 ``one_or_more//1``
 ^^^^^^^^^^^^^^^^^^
 
-Describes a sequence of one or more terminals.
+Eagerly collect one or more terminals.
 
 | **Compilation flags:**
 |    ``static``
@@ -82,7 +124,7 @@ Describes a sequence of one or more terminals.
 ``zero_or_more//0``
 ^^^^^^^^^^^^^^^^^^^
 
-Describes a sequence of zero or more terminals.
+Eagerly parse zero or more terminals.
 
 | **Compilation flags:**
 |    ``static``
@@ -99,70 +141,32 @@ Describes a sequence of zero or more terminals.
 ``one_or_more//0``
 ^^^^^^^^^^^^^^^^^^
 
-Describes a sequence of one or more terminals.
+Eagerly parse one or more terminals.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``one_or_more`` - ``one``
+|    ``one_or_more`` - ``zero_or_one``
 
 
 ------------
 
-.. index:: lazy_without//2
-.. _sequence_grammars/0::lazy_without//2:
+.. index:: without//2
+.. _sequence_grammars/0::without//2:
 
-``lazy_without//2``
-^^^^^^^^^^^^^^^^^^^
+``without//2``
+^^^^^^^^^^^^^^
 
-Lazily collect input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.
+Collects input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``lazy_without(StopTerminals,Terminals)``
+|    ``without(StopTerminals,Terminals)``
 | **Mode and number of proofs:**
-|    ``lazy_without(+list(atomic),-list(atomic))`` - ``zero_or_more``
-
-
-------------
-
-.. index:: greedy_without//2
-.. _sequence_grammars/0::greedy_without//2:
-
-``greedy_without//2``
-^^^^^^^^^^^^^^^^^^^^^
-
-Greedly collect input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``greedy_without(StopTerminals,Terminals)``
-| **Mode and number of proofs:**
-|    ``greedy_without(+list(atomic),-list(atomic))`` - ``one``
-
-
-------------
-
-.. index:: rest//1
-.. _sequence_grammars/0::rest//1:
-
-``rest//1``
-^^^^^^^^^^^
-
-Rest of the input terminals.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``rest(Terminals)``
-| **Mode and number of proofs:**
-|    ``rest(-list(atomic))`` - ``zero_or_one``
+|    ``without(+list(atomic),-list(atomic))`` - ``one``
 
 
 ------------

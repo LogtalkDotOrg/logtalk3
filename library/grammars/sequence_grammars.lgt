@@ -22,93 +22,90 @@
 :- object(sequence_grammars).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2023-11-27,
+		date is 2023-12-09,
 		comment is 'Sequence grammars.'
 	]).
 
+	:- public(zero_or_more//2).
+	:- meta_non_terminal(zero_or_more(1, *)).
+	:- mode(zero_or_more(+callable, -list(atomic)), one).
+	:- info(zero_or_more//2, [
+		comment is 'Eagerly collect zero or more terminals that satisfy the given closure.',
+		argnames is ['Closure', 'Terminals']
+	]).
+
+	:- public(one_or_more//2).
+	:- meta_non_terminal(one_or_more(1, *)).
+	:- mode(one_or_more(+callable, -list(atomic)), zero_or_one).
+	:- info(one_or_more//2, [
+		comment is 'Eagerly collect one or more terminals that satisfy the given closure.',
+		argnames is ['Closure', 'Terminals']
+	]).
+
 	:- public(zero_or_more//1).
-	:- mode(zero_or_more(-list(atomic)), zero_or_one).
+	:- mode(zero_or_more(-list(atomic)), one).
 	:- info(zero_or_more//1, [
-		comment is 'Describes a sequence of zero or more terminals.',
+		comment is 'Eagerly collect zero or more terminals.',
 		argnames is ['Terminals']
 	]).
 
 	:- public(one_or_more//1).
 	:- mode(one_or_more(-list(atomic)), zero_or_one).
 	:- info(one_or_more//1, [
-		comment is 'Describes a sequence of one or more terminals.',
+		comment is 'Eagerly collect one or more terminals.',
 		argnames is ['Terminals']
 	]).
 
 	:- public(zero_or_more//0).
 	:- mode(zero_or_more, one).
 	:- info(zero_or_more//0, [
-		comment is 'Describes a sequence of zero or more terminals.'
+		comment is 'Eagerly parse zero or more terminals.'
 	]).
 	:- public(one_or_more//0).
-	:- mode(one_or_more, one).
+	:- mode(one_or_more, zero_or_one).
 	:- info(one_or_more//0, [
-		comment is 'Describes a sequence of one or more terminals.'
+		comment is 'Eagerly parse one or more terminals.'
 	]).
 
-	:- public(lazy_without//2).
-	:- mode(lazy_without(+list(atomic), -list(atomic)), zero_or_more).
-	:- info(lazy_without//2, [
-		comment is 'Lazily collect input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.',
+	:- public(without//2).
+	:- mode(without(+list(atomic), -list(atomic)), one).
+	:- info(without//2, [
+		comment is 'Collects input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.',
 		argnames is ['StopTerminals', 'Terminals']
 	]).
 
-	:- public(greedy_without//2).
-	:- mode(greedy_without(+list(atomic), -list(atomic)), one).
-	:- info(greedy_without//2, [
-		comment is 'Greedly collect input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.',
-		argnames is ['StopTerminals', 'Terminals']
-	]).
+	zero_or_more(Closure, [Terminal| Terminals]) -->
+		call(Closure, Terminal), !, zero_or_more(Closure, Terminals).
+	zero_or_more(_, []) -->
+		[].
 
-	:- public(rest//1).
-	:- mode(rest(-list(atomic)), zero_or_one).
-	:- info(rest//1, [
-		comment is 'Rest of the input terminals.',
-		argnames is ['Terminals']
-	]).
+	one_or_more(Closure, [Terminal| Terminals]) -->
+		call(Closure, Terminal), !, zero_or_more(Closure, Terminals).
 
+	zero_or_more([Terminal| Terminals]) -->
+		[Terminal], !, zero_or_more(Terminals).
 	zero_or_more([]) -->
 		[].
-	zero_or_more([Terminal| Terminals]) -->
-		[Terminal], zero_or_more(Terminals).
 
 	one_or_more([Terminal| Terminals]) -->
-		[Terminal], zero_or_more(Terminals).
+		[Terminal], !, zero_or_more(Terminals).
 
 	zero_or_more -->
-		[].
+		[_], !, zero_or_more.
 	zero_or_more -->
-		[_], zero_or_more.
+		[].
 
 	one_or_more -->
-		[_], zero_or_more.
+		[_], !, zero_or_more.
 
-	lazy_without(_, []) -->
-		[].
-	lazy_without(StopTerminals, [Terminal| Terminals]) -->
-		[Terminal],
-		{ \+ member(Terminal, StopTerminals) },
-		lazy_without(StopTerminals, Terminals).
-
-	greedy_without(StopTerminals, [Terminal| Terminals]) -->
+	without(StopTerminals, [Terminal| Terminals]) -->
 		[Terminal],
 		{ \+ member(Terminal, StopTerminals) },
 		!,
-		greedy_without(StopTerminals, Terminals).
-	greedy_without(_, []) -->
-		[].
-
-	rest([Terminal| Terminals]) -->
-		[Terminal],
-		rest(Terminals).
-	rest([]) -->
+		without(StopTerminals, Terminals).
+	without(_, []) -->
 		[].
 
 	member(Head, [Head| _]).
