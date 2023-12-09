@@ -117,7 +117,7 @@ occurrences of list elements.
 a new element and returning the resulting list, and for swapping two randomly
 chosen elements of a list.
 
-* ADDED: Non-terminals `zero_or_more//2`, 'one_or_more//2', and `without//2`
+* ADDED: Non-terminals `zero_or_more//2`, `one_or_more//2`, and `without//2`
 to the `sequence_grammars` library object.
 
 * IMPROVED: Performance of the `reader` library predicates that read a file
@@ -164,6 +164,9 @@ to reStructuredText files.
 
 Examples
 --------
+
+* ADDED: New `haunted_wasteland` example, providing a solution for the Advent
+of Code 2023 Day 8 problem.
 
 * ADDED: New `scratchcards` example, providing a solution for the Advent of
 Code 2023 Day 4 problem.
