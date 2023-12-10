@@ -22,6 +22,7 @@
 :- object(trebuchet).
 
 	:- info([
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2023-12-04,
 		comment is 'Advent of Code 2023 Day 1 problem solution.'

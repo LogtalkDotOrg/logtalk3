@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:14:0,
+		version is 1:15:0,
 		author is 'Paulo Moura',
-		date is 2022-06-20,
+		date is 2023-12-10,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -280,6 +280,18 @@
 	rescale([X| Xs], Factor, [Y| Ys]) :-
 		Y is X * Factor,
 		rescale(Xs, Factor, Ys).
+
+	least_common_multiple([I1, I2| Is], Multiple) :-
+		I1 > 0,
+		I2 > 0,
+		Multiple0 is (I1 * I2) // gcd(I1, I2),
+		least_common_multiple(Is, Multiple0, Multiple).
+
+	least_common_multiple([], Multiple, Multiple).
+	least_common_multiple([I| Is], Multiple0, Multiple) :-
+		I > 0,
+		Multiple1 is (Multiple0 * I) // gcd(Multiple0, I),
+		least_common_multiple(Is, Multiple1, Multiple).
 
 	valid((-)) :-
 		% catch variables and lists with unbound tails

@@ -22,6 +22,7 @@
 :- object(scratchcards).
 
 	:- info([
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2023-12-05,
 		comment is 'Advent of Code 2023 Day 4 problem solution.'

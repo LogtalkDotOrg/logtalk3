@@ -22,9 +22,9 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2022-06-20,
+		date is 2023-12-10,
 		comment is 'List of numbers protocol.',
 		see_also is [numberlist, listp, varlistp]
 	]).
@@ -173,6 +173,13 @@
 	:- info(rescale/3, [
 		comment is 'Rescales all numbers in a list by the given factor.',
 		argnames is ['List', 'Factor', 'RescaledList']
+	]).
+
+	:- public(least_common_multiple/2).
+	:- mode(least_common_multiple(+list(positive_integer), -positive_integer), zero_or_one).
+	:- info(least_common_multiple/2, [
+		comment is 'Computes the least common multiple of a list of two or more positive integers. Fails if the list is empty or contains a single element. Fails also if any of the elements is zero. May require backend support for unbound integer arithmetic.',
+		argnames is ['Integers', 'LeastCommonMultiple']
 	]).
 
 :- end_protocol.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
-		date is 2023-11-17,
+		date is 2023-12-10,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -224,6 +224,9 @@
 
 	test(numberlist_rescale_3_01, true(Rescaled == [2,4,6,8])) :-
 		numberlist::rescale([1,2,3,4], 2, Rescaled).
+
+	test(numberlist_least_common_multiple_2_01, true(Multiple == 6)) :-
+		numberlist::least_common_multiple([2,3], Multiple).
 
 	test(pairs_keys_values_3_01, true(Keys-Values == [a,b,c]-[1,2,3])) :-
 		pairs::keys_values([a-1,b-2,c-3], Keys, Values).

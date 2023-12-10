@@ -112,6 +112,8 @@ terms of selected types. Intended for eventual fuzz testing support.
 * ADDED: Library predicates `list::occurrences/2-3` to count the number of
 occurrences of list elements.
 
+* ADDED: Library predicate `numberlist::least_common_multiple/2`.
+
 * ADDED: Predicates `select/4`, `swap/2`, and `swap_consecutive/2` to the
 `random` library for returning a random member of a list, replacing it by
 a new element and returning the resulting list, and for swapping two randomly

@@ -22,8 +22,9 @@
 :- object(haunted_wasteland).
 
 	:- info([
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-12-09,
+		date is 2023-12-10,
 		comment is 'Advent of Code 2023 Day 8: Haunted Wasteland.'
 	]).
 
@@ -34,6 +35,7 @@
 
 	:- uses(avltree, [new/1, insert/4, lookup/3]).
 	:- uses(list, [member/2]).
+	:- uses(numberlist, [least_common_multiple/2]).
 	:- uses(reader, [line_to_codes/2]).
 
 	% Part 1
@@ -87,12 +89,6 @@
 		lookup_next_label(Instruction, Label, Nodes, NextLabel),
 		Steps1 is Steps0 + 1,
 		steps_2(NextLabel, Instructions, Nodes, Steps1, Steps).
-
-	least_common_multiple([Multiple], Multiple) :-
-		!.
-	least_common_multiple([Steps1, Steps2| Steps], Multiple) :-
-		Multiple0 is (Steps1 * Steps2) // gcd(Steps1, Steps2),
-		least_common_multiple([Multiple0| Steps], Multiple).
 
 	% auxiliary predicates and non-terminals
 
