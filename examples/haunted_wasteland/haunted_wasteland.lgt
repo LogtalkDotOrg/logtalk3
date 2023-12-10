@@ -41,7 +41,6 @@
 	steps_1(File, Steps) :-
 		collect_data(File, Instructions, Nodes),
 		% use an accumulator pair to compute the number of steps
-		lookup('AAA', _, Nodes),
 		steps_1('AAA', Instructions, Nodes, 0, Steps).
 
 	steps_1('ZZZ', _, _, Steps, Steps) :-
@@ -73,7 +72,10 @@
 			),
 			LabelsSteps
 		),
-		% compute the least common multiple
+		% as the solution path for each label loops, with the lengths
+		% of the paths being different, compute the least common multiple
+		% of all lengths to find the length of the path when the paths
+		% for all labels will reach a final label at the same time
 		least_common_multiple(LabelsSteps, Steps).
 
 	steps_2(Label, _, _, Steps, Steps) :-
