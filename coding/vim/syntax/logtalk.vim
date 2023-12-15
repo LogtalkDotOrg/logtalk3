@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:   Paulo Moura <pmoura@logtalk.org>
-" Last Change:  November 6, 2022
+" Last Change:  December 15, 2023
 
 
 " Quit when a syntax file was already loaded:
@@ -42,7 +42,7 @@ syn match	logtalkEscapeSequence	contained	"\\\([\\abfnrtv\"\']\|\(x[a-fA-F0-9]\+
 " Logtalk message sending operators
 
 syn match	logtalkOperator		"::"
-syn match	logtalkOperator		":"
+syn match	logtalkOperator		"\(0'\)\@<!:"
 syn match	logtalkOperator		"\^\^"
 
 
@@ -174,8 +174,8 @@ syn match	logtalkBuiltInMethod	"\<phrase\ze("
 
 " Mode operators
 
-syn match	logtalkOperator		"?"
-syn match	logtalkOperator		"@"
+syn match	logtalkOperator		"\(0'\)\@<!?"
+syn match	logtalkOperator		"\(0'\)\@<!@"
 
 
 " Control constructs
@@ -184,9 +184,9 @@ syn match	logtalkKeyword		"\<true\>"
 syn match	logtalkKeyword		"\<fail\>"
 syn match	logtalkKeyword		"\<false\>"
 syn match	logtalkKeyword		"\<ca\(ll\|tch\)\ze("
-syn match	logtalkOperator		"!"
-" syn match	logtalkOperator		","
-syn match	logtalkOperator		";"
+syn match	logtalkOperator		"\(0'\)\@<!!"
+" syn match	logtalkOperator		"\(0'\)\@<!,"
+syn match	logtalkOperator		"\(0'\)\@<!;"
 syn match	logtalkOperator		"-->"
 syn match	logtalkOperator		"->"
 syn match	logtalkKeyword		"\<throw\ze("
@@ -196,7 +196,7 @@ syn match	logtalkKeyword		"\<\(uninstantiation\|type\|domain\|existence\|permiss
 
 " Term unification
 
-syn match	logtalkOperator		"="
+syn match	logtalkOperator		"\(0'\)\@<!="
 syn match	logtalkKeyword		"\<subsumes_term\ze("
 syn match	logtalkKeyword		"\<unify_with_occurs_check\ze("
 syn match	logtalkOperator		"\\="
@@ -249,9 +249,9 @@ syn match	logtalkOperator		"\<is\>"
 
 syn match	logtalkOperator		"=:="
 syn match	logtalkOperator		"=\\="
-syn match	logtalkOperator		"<"
+syn match	logtalkOperator		"\(0'\)\@<!<"
 syn match	logtalkOperator		"=<"
-syn match	logtalkOperator		">"
+syn match	logtalkOperator		"\(0'\)\@<!>"
 syn match	logtalkOperator		">="
 
 
@@ -313,11 +313,11 @@ syn match	logtalkKeyword		"\<\(key\)\?sort\ze("
 
 " Evaluable functors
 
-syn match	logtalkOperator		"+"
-syn match	logtalkOperator		"-"
-syn match	logtalkOperator		"\*"
+syn match	logtalkOperator		"\(0'\)\@<![+]"
+syn match	logtalkOperator		"\(0'\)\@<![-]"
+syn match	logtalkOperator		"\(0'\)\@<!\*"
 syn match	logtalkOperator		"//"
-syn match	logtalkOperator		"/"
+syn match	logtalkOperator		"\(0'\)\@<!/"
 syn match	logtalkKeyword		"\<div\ze("
 syn match	logtalkKeyword		"\<r\(ound\|em\)\ze("
 syn match	logtalkKeyword		"\<e\>"
@@ -349,18 +349,18 @@ syn match	logtalkOperator		">>"
 syn match	logtalkOperator		"<<"
 syn match	logtalkOperator		"/\\"
 syn match	logtalkOperator		"\\/"
-syn match	logtalkOperator		"\\"
+syn match	logtalkOperator		"0'\@<!\\"
 syn match	logtalkKeyword		"\<xor\ze("
 
 
 " Logtalk list operator
 
-syn match	logtalkOperator		"|"
+syn match	logtalkOperator		"\(0'\)\@<!|"
 
 
 " Logtalk existential quantifier operator
 
-syn match	logtalkOperator		"\^"
+syn match	logtalkOperator		"\(0'\)\@<!^"
 
 
 " Logtalk numbers 
@@ -369,7 +369,7 @@ syn match	logtalkNumber		"\<\d\+\>"
 syn match	logtalkNumber		"\<\d\+\.\d\+\>"
 syn match	logtalkNumber		"\<\d\+[eE][-+]\=\d\+\>"
 syn match	logtalkNumber		"\<\d\+\.\d\+[eE][-+]\=\d\+\>"
-syn match	logtalkNumber		"\<0'[\\]\?.\>"
+syn match	logtalkNumber		"0'[\\]\?."
 syn match	logtalkNumber		"\<0b[0-1]\+\>"
 syn match	logtalkNumber		"\<0o\o\+\>"
 syn match	logtalkNumber		"\<0x\x\+\>"
@@ -377,13 +377,13 @@ syn match	logtalkNumber		"\<0x\x\+\>"
 
 " Logtalk end-of-clause
 
-syn match	logtalkOperator		"\."
+syn match	logtalkOperator		"\(0'\)\@<!\."
 
 
 " Logtalk comments
 
 syn region	logtalkBlockComment	start="/\*"	end="\*/"	fold
-syn match	logtalkLineComment	"%.*"
+syn match	logtalkLineComment	"%.*$"
 
 syn cluster	logtalkComment		contains=logtalkBlockComment,logtalkLineComment
 

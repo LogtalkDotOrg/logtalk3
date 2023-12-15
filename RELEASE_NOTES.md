@@ -25,7 +25,10 @@ RELEASE NOTES
 3.74.0 - December ??, 2023
 ==========================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* FIXED: Vim support highlight of `0'Char` and `0'\Char` numbers.
 
 
 3.73.0 - December 12, 2023
