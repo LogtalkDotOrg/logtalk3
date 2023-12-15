@@ -1,7 +1,7 @@
 " Logtalk filetype plugin file
 " Language:         Logtalk
 " Maintainer:       Paulo Moura <pmoura@logtalk.org>
-" Latest Revision:  2007-07-06
+" Latest Revision:  2018-08-03
 
 if exists("b:did_ftplugin")
   finish

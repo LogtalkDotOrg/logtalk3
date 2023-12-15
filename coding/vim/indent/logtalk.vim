@@ -1,5 +1,6 @@
 "  Maintainer:	Paulo Moura <pmoura@logtalk.org>
-"  Revised on:	2021.09.24
+"  Revised on:	2018.08.04
+"		2023 Aug 28 by Vim Project (undo_indent)
 "  Language:	Logtalk
 
 " This Logtalk indent file is a modified version of the Prolog
@@ -16,7 +17,7 @@ setlocal indentexpr=GetLogtalkIndent()
 setlocal indentkeys-=:,0#
 setlocal indentkeys+=0%,-,0;,>,0)
 
-let b:undo_indent = "setl inde< indk<"
+let b:undo_indent = "setlocal indentexpr< indentkeys<"
 
 " Only define the function once.
 if exists("*GetLogtalkIndent")
@@ -40,27 +41,27 @@ function! GetLogtalkIndent()
 	endif
 	" Check for entity opening directive on previous line
 	if pline =~ '^\s*:-\s\(object\|protocol\|category\)\ze(.*,$'
-		let ind = ind + &sw
+		let ind = ind + shiftwidth()
 	" Check for clause head on previous line
 	elseif pline =~ ':-\s*\(%.*\)\?$'
-		let ind = ind + &sw
+		let ind = ind + shiftwidth()
 	" Check for grammar rule head on previous line
 	elseif pline =~ '-->\s*\(%.*\)\?$'
-		let ind = ind + &sw
+		let ind = ind + shiftwidth()
 	" Check for entity closing directive on previous line
 	elseif pline =~ '^\s*:-\send_\(object\|protocol\|category\)\.\(%.*\)\?$'
-		let ind = ind - &sw
+		let ind = ind - shiftwidth()
 	" Check for end of clause on previous line
 	elseif pline =~ '\.\s*\(%.*\)\?$'
-		let ind = ind - &sw
+		let ind = ind - shiftwidth()
 	endif
 	" Check for opening conditional on previous line
 	if pline =~ '^\s*\([(;]\|->\)' && pline !~ '\.\s*\(%.*\)\?$' && pline !~ '^.*\([)][,]\s*\(%.*\)\?$\)'
-		let ind = ind + &sw
+		let ind = ind + shiftwidth()
 	endif
 	" Check for closing an unclosed paren, or middle ; or ->
 	if line =~ '^\s*\([);]\|->\)'
-		let ind = ind - &sw
+		let ind = ind - shiftwidth()
 	endif
 	return ind
 endfunction
