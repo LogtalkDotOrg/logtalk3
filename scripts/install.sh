@@ -173,14 +173,14 @@ if [ "$(command -v install-info)" != "" ]; then
 	if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
 		cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
 		if [ -f dir ] ; then
-			install-info --silent --delete LogtalkAPIs-*.info dir
+			install-info --silent --delete LogtalkAPIs-*.info
 		fi
 		install-info LogtalkAPIs-$version_base.info dir
 	fi
 	if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
 		cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
 		if [ -f dir ] ; then
-			install-info --silent --delete TheLogtalkHandbook-*.info dir
+			install-info --silent --delete TheLogtalkHandbook-*.info
 		fi
 		install-info TheLogtalkHandbook-$version_base.info dir
 	fi
