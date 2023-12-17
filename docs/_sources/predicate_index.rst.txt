@@ -2583,6 +2583,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`intervalp <intervalp/0::equal/2>`
 * :ref:`setp <setp/0::equal/2>`
 
+``erase/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`recorded_database_core <recorded_database_core/0::erase/1>`
+
 ``essentially_equal/3``
 -----------------------
 
@@ -4003,6 +4013,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`class_hierarchyp <class_hierarchyp/0::instance/1>`
+
+``instance/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`recorded_database_core <recorded_database_core/0::instance/2>`
 
 ``instances/1``
 ---------------
@@ -7206,6 +7226,66 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs_common <packs_common/0::readme/2>`
+
+``recorda/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`recorded_database_core <recorded_database_core/0::recorda/2>`
+
+``recorda/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`recorded_database_core <recorded_database_core/0::recorda/3>`
+
+``recorded/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`recorded_database_core <recorded_database_core/0::recorded/2>`
+
+``recorded/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`recorded_database_core <recorded_database_core/0::recorded/3>`
+
+``recordz/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`recorded_database_core <recorded_database_core/0::recordz/2>`
+
+``recordz/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`recorded_database_core <recorded_database_core/0::recordz/3>`
 
 ``relative_standard_deviation/2``
 ---------------------------------

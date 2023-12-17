@@ -46,6 +46,7 @@
 		hook_objects(loader),
 		java(loader),
 		redis(loader),
+		recorded_database(loader),
 		optionals(loader),
 		options(loader),
 		expecteds(loader),

@@ -28,6 +28,8 @@ RELEASE NOTES
 Library
 -------
 
+* ADDED: Library `recorded_database` to help porting legacy Prolog code.
+
 * FIXED: Description of the `hierarchies` library.
 
 IDEs, text editors, and syntax highlighters support

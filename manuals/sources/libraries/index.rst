@@ -70,6 +70,7 @@ directory in the ``NOTES.md`` file.
    queues
    random
    reader
+   recorded_database
    redis
    sets
    statistics

@@ -588,6 +588,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    reader <reader_0>
 
+``library/recorded_database/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   recorded_database <recorded_database_0>
+   recorded_database_core <recorded_database_core_0>
+
 ``library/redis/``
 ------------------
 

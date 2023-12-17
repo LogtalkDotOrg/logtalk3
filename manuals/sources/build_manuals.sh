@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on November 27, 2023
+##   Last updated on December 16, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -114,6 +114,7 @@ sed '1,19d' ../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.rst
 sed '1,19d' ../../library/queues/NOTES.md | pandoc -f gfm -t rst -o libraries/queues.rst
 sed '1,19d' ../../library/random/NOTES.md | pandoc -f gfm -t rst -o libraries/random.rst
 sed '1,19d' ../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries/reader.rst
+sed '1,19d' ../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 sed '1,19d' ../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
 sed '1,19d' ../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
 sed '1,19d' ../../library/statistics/NOTES.md | pandoc -f gfm -t rst -o libraries/statistics.rst
