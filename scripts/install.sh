@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on December 8, 2023
+##   Last updated on December 17, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -143,8 +143,7 @@ echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet"
 echo "- lgt2svg, lgt2pdf, lgt2html, lgt2xml, lgt2md, lgt2rst, lgt2txt"
 echo "- lgtenv"
 echo
-echo "Ensure that the \"$prefix/bin\" directory is in your execution path."
-echo
+echo "Ensure that the \"$prefix/bin\" directory is in your PATH."
 
 ln -sf ../share/logtalk/integration/bplgt.sh bplgt
 ln -sf ../share/logtalk/integration/ciaolgt.sh ciaolgt
@@ -168,23 +167,27 @@ for file in ../../logtalk/man/man1/*.1.gz ; do
 	ln -sf "$file" "$(basename "$file")"
 done
 
-mkdir -p ../../info
-cd ../../info || exit 1
-if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
-	cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
-	if [ "$(command -v install-info)" != "" ]; then
-		install-info --silent --delete LogtalkAPIs-*.info
+if [ "$(command -v install-info)" != "" ]; then
+	mkdir -p ../../info
+	cd ../../info || exit 1
+	if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
+		cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
+		if [ -f dir ] ; then
+			install-info --silent --delete LogtalkAPIs-*.info dir
+		fi
 		install-info LogtalkAPIs-$version_base.info dir
 	fi
-fi
-if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
-	cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
-	if [ "$(command -v install-info)" != "" ]; then
-		install-info --silent --delete TheLogtalkHandbook-*.info
+	if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
+		cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
+		if [ -f dir ] ; then
+			install-info --silent --delete TheLogtalkHandbook-*.info dir
+		fi
 		install-info TheLogtalkHandbook-$version_base.info dir
 	fi
+	echo "Ensure that the \"$prefix/share/info\" directory is in your INFOPATH."
 fi
 
+echo
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo

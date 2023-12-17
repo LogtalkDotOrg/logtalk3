@@ -37,6 +37,12 @@ IDEs, text editors, and syntax highlighters support
 
 * FIXED: Vim support highlight of `0'Char` and `0'\Char` numbers.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The `install.sh` manual installation script to inform the user
+about the `INFOPATH` environment variable.
+
 
 3.73.0 - December 12, 2023
 ==========================
