@@ -25,6 +25,11 @@ RELEASE NOTES
 3.74.0 - December ??, 2023
 ==========================
 
+Library
+-------
+
+* FIXED: Description of the `hierarchies` library.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

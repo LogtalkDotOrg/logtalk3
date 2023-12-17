@@ -19,14 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- category(class_hierarchy,
 	implements(class_hierarchyp)).
 
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2006-2-20,
+		date is 2006-02-20,
 		comment is 'Class hierarchy predicates.'
 	]).
 
