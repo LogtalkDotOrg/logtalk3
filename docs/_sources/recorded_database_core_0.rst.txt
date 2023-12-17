@@ -15,21 +15,22 @@ Legacy recorded database predicates. Can be imported into an object to provide a
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2023-12-16
+| **Date:** 2023-12-17
 
 | **Compilation flags:**
 |    ``static``
 
 
-| **Extends:**
-|    ``public`` :ref:`gensym_core <gensym_core/0>`
+| **Dependencies:**
+|   (none)
+
 
 | **Remarks:**
 
    - References: Opaque ground terms.
 
 | **Inherited public predicates:**
-|     :ref:`gensym_core/0::gensym/2`  :ref:`gensym_core/0::reset_gensym/0`  :ref:`gensym_core/0::reset_gensym/1`  
+|    (none)
 
 .. contents::
    :local:
@@ -52,7 +53,7 @@ Adds a term as the first term for the given key, returning its reference.
 | **Template:**
 |    ``recorda(Key,Term,Reference)``
 | **Mode and number of proofs:**
-|    ``recorda(+key,+term,--reference)`` - ``one_or_error``
+|    ``recorda(+recorded_database_key,+term,--recorded_database_reference)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Key`` is a variable:
@@ -79,7 +80,7 @@ Adds a term as the first term for the given key.
 | **Template:**
 |    ``recorda(Key,Term)``
 | **Mode and number of proofs:**
-|    ``recorda(+key,+term)`` - ``one_or_error``
+|    ``recorda(+recorded_database_key,+term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Key`` is a variable:
@@ -104,7 +105,7 @@ Adds a term as the last term for the given key, returning its reference.
 | **Template:**
 |    ``recordz(Key,Term,Reference)``
 | **Mode and number of proofs:**
-|    ``recordz(+key,+term,--reference)`` - ``one_or_error``
+|    ``recordz(+recorded_database_key,+term,--recorded_database_reference)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Key`` is a variable:
@@ -131,7 +132,7 @@ Adds a term as the last term for the given key.
 | **Template:**
 |    ``recordz(Key,Term)``
 | **Mode and number of proofs:**
-|    ``recordz(+key,+term)`` - ``one_or_error``
+|    ``recordz(+recorded_database_key,+term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Key`` is a variable:
@@ -148,7 +149,7 @@ Adds a term as the last term for the given key.
 ``recorded/3``
 ^^^^^^^^^^^^^^
 
-Enumerates, by backtracking, all record key-value pairs and their references.
+Enumerates, by backtracking, all record key-term pairs and their references.
 
 | **Compilation flags:**
 |    ``static``
@@ -156,8 +157,8 @@ Enumerates, by backtracking, all record key-value pairs and their references.
 | **Template:**
 |    ``recorded(Key,Term,Reference)``
 | **Mode and number of proofs:**
-|    ``recorded(?key,?value,-reference)`` - ``zero_or_more``
-|    ``recorded(?key,?value,+reference)`` - ``zero_or_one``
+|    ``recorded(?recorded_database_key,?term,-recorded_database_reference)`` - ``zero_or_more``
+|    ``recorded(?recorded_database_key,?term,+recorded_database_reference)`` - ``zero_or_one``
 
 
 ------------
@@ -168,7 +169,7 @@ Enumerates, by backtracking, all record key-value pairs and their references.
 ``recorded/2``
 ^^^^^^^^^^^^^^
 
-Enumerates, by backtracking, all record key-value pairs.
+Enumerates, by backtracking, all record key-term pairs.
 
 | **Compilation flags:**
 |    ``static``
@@ -176,7 +177,7 @@ Enumerates, by backtracking, all record key-value pairs.
 | **Template:**
 |    ``recorded(Key,Term)``
 | **Mode and number of proofs:**
-|    ``recorded(?key,?value)`` - ``zero_or_more``
+|    ``recorded(?recorded_database_key,?term)`` - ``zero_or_more``
 
 
 ------------
@@ -195,7 +196,7 @@ Erases the record indexed by the given reference. Fails if there is no record wi
 | **Template:**
 |    ``erase(Reference)``
 | **Mode and number of proofs:**
-|    ``erase(+reference)`` - ``zero_or_one_or_error``
+|    ``erase(@recorded_database_reference)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
 |    ``Reference`` is a variable:
@@ -218,7 +219,7 @@ Erases the record indexed by the given reference. Fails if there is no record wi
 | **Template:**
 |    ``instance(Reference,Term)``
 | **Mode and number of proofs:**
-|    ``instance(+reference,?term)`` - ``zero_or_one_or_error``
+|    ``instance(@recorded_database_reference,?term)`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
 |    ``Reference`` is a variable:
@@ -230,7 +231,7 @@ Erases the record indexed by the given reference. Fails if there is no record wi
 Protected predicates
 --------------------
 
-(no local declarations; see entity ancestors if any)
+(none)
 
 Private predicates
 ------------------
@@ -249,7 +250,26 @@ Records table.
 | **Template:**
 |    ``record_(Key,Term,Reference)``
 | **Mode and number of proofs:**
-|    ``record_(?key,?value,?reference)`` - ``zero_or_more``
+|    ``record_(?recorded_database_key,?term,?recorded_database_reference)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: reference_/1
+.. _recorded_database_core/0::reference_/1:
+
+``reference_/1``
+^^^^^^^^^^^^^^^^
+
+Reference count.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``reference_(Reference)``
+| **Mode and number of proofs:**
+|    ``reference_(?non_negative_integer)`` - ``zero_or_one``
 
 
 ------------

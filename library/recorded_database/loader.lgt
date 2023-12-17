@@ -20,6 +20,5 @@
 
 
 :- initialization((
-	logtalk_load(gensym(loader)),
 	logtalk_load([recorded_database_core, recorded_database], [optimize(on)])
 )).

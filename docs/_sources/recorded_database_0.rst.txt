@@ -15,7 +15,7 @@ Legacy recorded database predicates. Provides an application global database.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2023-12-16
+| **Date:** 2023-12-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,7 @@ Legacy recorded database predicates. Provides an application global database.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`recorded_database_core/0::erase/1`  :ref:`gensym_core/0::gensym/2`  :ref:`recorded_database_core/0::instance/2`  :ref:`recorded_database_core/0::recorda/2`  :ref:`recorded_database_core/0::recorda/3`  :ref:`recorded_database_core/0::recorded/2`  :ref:`recorded_database_core/0::recorded/3`  :ref:`recorded_database_core/0::recordz/2`  :ref:`recorded_database_core/0::recordz/3`  :ref:`gensym_core/0::reset_gensym/0`  :ref:`gensym_core/0::reset_gensym/1`  
+|     :ref:`recorded_database_core/0::erase/1`  :ref:`recorded_database_core/0::instance/2`  :ref:`recorded_database_core/0::recorda/2`  :ref:`recorded_database_core/0::recorda/3`  :ref:`recorded_database_core/0::recorded/2`  :ref:`recorded_database_core/0::recorded/3`  :ref:`recorded_database_core/0::recordz/2`  :ref:`recorded_database_core/0::recordz/3`  
 
 .. contents::
    :local:

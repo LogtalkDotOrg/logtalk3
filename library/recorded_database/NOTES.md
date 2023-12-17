@@ -21,8 +21,10 @@ ________________________________________________________________________
 `recorded_database`
 ===================
 
-The `recorded_database` library aims to help port Prolog code using the
-legacy recorded database.
+The `recorded_database` library aims to help port Prolog code using
+the legacy recorded database. Ported applications should still consider
+migrating to more standard solutions to handle dynamic data that must
+survive backtracking.
 
 
 API documentation
@@ -66,3 +68,13 @@ the scope of the library predicates. For example:
 			...
 
 	:- end_object.
+
+
+Known issues
+------------
+
+Currently, references are non-negative integers. They still must be
+regarded as opaque terms and subject to change without notice. But
+using integers can result in integer overflows when running on backends
+with bounded integers in applications performing a large number of
+database updates.

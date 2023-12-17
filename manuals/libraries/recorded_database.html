@@ -117,6 +117,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
@@ -175,7 +176,9 @@
   <section id="recorded-database">
 <span id="library-recorded-database"></span><h1><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code><a class="headerlink" href="#recorded-database" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">recorded_database</span></code> library aims to help port Prolog code using
-the legacy recorded database.</p>
+the legacy recorded database. Ported applications should still consider
+migrating to more standard solutions to handle dynamic data that must
+survive backtracking.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -215,6 +218,14 @@ predicates. For example:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<p>Currently, references are non-negative integers. They still must be
+regarded as opaque terms and subject to change without notice. But using
+integers can result in integer overflows when running on backends with
+bounded integers in applications performing a large number of database
+updates.</p>
 </section>
 </section>
 
