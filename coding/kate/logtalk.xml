@@ -203,7 +203,7 @@
 				<!-- Scope operator -->
 				<Detect2Chars char = ":" char1 = ":" attribute = "Operator" context = "#stay" />
 				<!-- End of entity-opening directive -->
-				<Detect2Chars attribute = "Normal" context = "normal" char = ")" char1 = "." />
+				<Detect2Chars attribute = "Normal" context = "#pop#pop" char = ")" char1 = "." />
 			</context>
 
 			<context name = "single line comment" attribute = "Comment" lineEndContext = "#pop" />
