@@ -35,6 +35,8 @@ Library
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* FIXED: GtkSourceView support error with escaped characters highlighting.
+
 * FIXED: Vim support highlight of `0'Char` and `0'\Char` numbers.
 
 Installers and installation scripts
