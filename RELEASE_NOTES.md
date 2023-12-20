@@ -35,6 +35,9 @@ Library
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* UPDATED: EditorConfig support for the `.logtalk` and `.prolog` file name
+extensions.
+
 * FIXED: GtkSourceView support error with escaped characters highlighting.
 
 * FIXED: Merge upstream changes for the Kate text editor support.
