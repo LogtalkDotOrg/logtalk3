@@ -42,6 +42,9 @@ extensions.
 
 * FIXED: Merge upstream changes for the Kate text editor support.
 
+* FIXED: SubEthaEdit 4.x/5.x syntax highlight for the `threaded_cancel/1`
+built-in predicate.
+
 * FIXED: Vim support highlight of `0'Char` and `0'\Char` numbers.
 
 Installers and installation scripts
