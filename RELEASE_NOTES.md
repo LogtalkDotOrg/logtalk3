@@ -25,6 +25,14 @@ RELEASE NOTES
 3.74.0 - December ??, 2023
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Compilation of `phrase/2-3` goals where the first argument is a
+`(::)/1-2` or `(^^)/2` control construct with a variable grammar rule body
+argument would result in a compilation infinite loop. Thanks to Yurii
+Rashkovskii for the bug report.
+
 Documentation
 -------------
 

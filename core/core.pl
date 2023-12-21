@@ -15699,6 +15699,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % DCG predicates
+%
+% defer to runtime compilation of variable grammar rule
+% body arguments to prevent a compilation endless loop
 
 '$lgt_compile_body'(phrase(GRBody, Input), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input), TPred), ExCtx), Ctx) :-
 	var(GRBody),
@@ -15706,6 +15709,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(list_or_partial_list, Input),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_phrase'(GRBody, Input, ExCtx).
+
+'$lgt_compile_body'(phrase(::GRBody, Input), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input), TPred), ExCtx), Ctx) :-
+	var(GRBody),
+	!,
+	'$lgt_check'(list_or_partial_list, Input),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_phrase'(::GRBody, Input, ExCtx).
+
+'$lgt_compile_body'(phrase(Obj::GRBody, Input), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input), TPred), ExCtx), Ctx) :-
+	var(GRBody),
+	!,
+	'$lgt_check'(list_or_partial_list, Input),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_phrase'(Obj::GRBody, Input, ExCtx).
+
+'$lgt_compile_body'(phrase(^^GRBody, Input), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input), TPred), ExCtx), Ctx) :-
+	var(GRBody),
+	!,
+	'$lgt_check'(list_or_partial_list, Input),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_phrase'(^^GRBody, Input, ExCtx).
 
 '$lgt_compile_body'(phrase(GRBody, Input), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input), DPred), ExCtx), Ctx) :-
 	!,
@@ -15724,6 +15748,30 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(list_or_partial_list, Rest),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	TPred = '$lgt_phrase'(GRBody, Input, Rest, ExCtx).
+
+'$lgt_compile_body'(phrase(::GRBody, Input, Rest), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), TPred), ExCtx), Ctx) :-
+	var(GRBody),
+	!,
+	'$lgt_check'(list_or_partial_list, Input),
+	'$lgt_check'(list_or_partial_list, Rest),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_phrase'(::GRBody, Input, Rest, ExCtx).
+
+'$lgt_compile_body'(phrase(Obj::GRBody, Input, Rest), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), TPred), ExCtx), Ctx) :-
+	var(GRBody),
+	!,
+	'$lgt_check'(list_or_partial_list, Input),
+	'$lgt_check'(list_or_partial_list, Rest),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_phrase'(Obj::GRBody, Input, Rest, ExCtx).
+
+'$lgt_compile_body'(phrase(^^GRBody, Input, Rest), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), TPred), ExCtx), Ctx) :-
+	var(GRBody),
+	!,
+	'$lgt_check'(list_or_partial_list, Input),
+	'$lgt_check'(list_or_partial_list, Rest),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
+	TPred = '$lgt_phrase'(^^GRBody, Input, Rest, ExCtx).
 
 '$lgt_compile_body'(phrase(GRBody, Input, Rest), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), DPred), ExCtx), Ctx) :-
 	!,
