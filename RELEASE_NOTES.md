@@ -52,6 +52,10 @@ IDEs, text editors, and syntax highlighters support
 * UPDATED: EditorConfig support for the `.logtalk` and `.prolog` file name
 extensions.
 
+* UPDATED: Ace support for compatibility with its current version (v1.32.2).
+
+* FIXED: Ace support highlight of `0'Char` and `0'\Char` numbers.
+
 * FIXED: GtkSourceView support error with escaped characters highlighting.
 
 * FIXED: Merge upstream changes for the Kate text editor support.
