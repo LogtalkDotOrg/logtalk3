@@ -158,6 +158,15 @@ backend Prolog compiler supporting a module system, calls in the format
 <code class="docutils literal notranslate"><span class="pre">call(Module:Closure,</span> <span class="pre">Arg1,</span> <span class="pre">...)</span></code> may also be used.</p>
 <p>This meta-predicate is opaque to cuts in its arguments.</p>
 </section>
+<section id="meta-predicate-template">
+<h2>Meta-predicate template<a class="headerlink" href="#meta-predicate-template" title="Link to this heading"></a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">call</span>(<span class="m">0</span>)
+<span class="k">call</span>(<span class="m">1</span>, <span class="o">*</span>)
+<span class="k">call</span>(<span class="m">2</span>, <span class="o">*</span>, <span class="o">*</span>)
+...
+</pre></div>
+</div>
+</section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">call</span>(<span class="o">+</span>callable) <span class="o">-</span> zero_or_more

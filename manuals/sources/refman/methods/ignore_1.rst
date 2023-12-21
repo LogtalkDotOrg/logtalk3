@@ -39,6 +39,13 @@ method and thus cannot be used as a message to an object.
 
 This meta-predicate is opaque to cuts in its argument.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   ignore(0)
+
 Modes and number of proofs
 --------------------------
 

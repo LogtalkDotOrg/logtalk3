@@ -43,6 +43,13 @@ not be ignored as it will make the ``forall/2`` call fail.
 This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   forall(0, 0)
+
 Modes and number of proofs
 --------------------------
 

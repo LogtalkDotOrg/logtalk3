@@ -52,6 +52,14 @@ as opaque terms; users shall not rely on its type.
    :ref:`threads <flag_threads>` flag is set to ``supported`` when that
    is the case.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   threaded_once(0)
+   threaded_once(0, *)
+
 Modes and number of proofs
 --------------------------
 

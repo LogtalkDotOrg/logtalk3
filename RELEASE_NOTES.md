@@ -25,6 +25,12 @@ RELEASE NOTES
 3.74.0 - December ??, 2023
 ==========================
 
+Documentation
+-------------
+
+* IMPROVED: Handbook documentation of built-in meta-non-terminals and
+meta-predicates.
+
 Library
 -------
 

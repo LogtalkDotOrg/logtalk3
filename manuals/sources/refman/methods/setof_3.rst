@@ -49,6 +49,13 @@ returning an empty list.
 This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   setof(*, ^, *)
+
 Modes and number of proofs
 --------------------------
 

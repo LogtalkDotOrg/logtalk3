@@ -49,6 +49,13 @@ is compiled in order to eliminate the implicit overheads of converting
 the grammar rule body into a goal and meta-calling it. For performance
 reasons, the second argument is only type-checked at compile time.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   phrase(2, *)
+
 Modes and number of proofs
 --------------------------
 

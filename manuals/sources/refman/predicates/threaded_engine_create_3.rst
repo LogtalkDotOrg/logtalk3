@@ -47,6 +47,13 @@ type.
    :ref:`engines <flag_engines>` flag is set to ``supported`` when that
    is the case.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   threaded_engine_create(*, 0, *)
+
 Modes and number of proofs
 --------------------------
 

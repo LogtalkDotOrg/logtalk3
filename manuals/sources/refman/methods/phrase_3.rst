@@ -50,6 +50,13 @@ the grammar rule body into a goal and meta-calling it. For performance
 reasons, the second and third arguments are only type-checked at compile
 time.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   phrase(2, *, *)
+
 Modes and number of proofs
 --------------------------
 

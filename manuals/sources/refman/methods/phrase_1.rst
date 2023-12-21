@@ -37,6 +37,13 @@ This non-terminal takes a grammar rule body and parses it using the implicit
 difference list of tokens. A common use is to wrap what otherwise would be a
 :term:`naked meta-variable` in a grammar rule body.
 
+Meta-non-terminal template
+--------------------------
+
+::
+
+   phrase(0)
+
 Modes and number of proofs
 --------------------------
 

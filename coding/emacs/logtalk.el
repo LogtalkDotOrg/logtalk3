@@ -32,7 +32,7 @@
 
 (defvar logtalk-mode-hook nil)
 
-(defvar logtalk-mode-map nil) 
+(defvar logtalk-mode-map nil)
 
 (if logtalk-mode-map nil
 	(setq logtalk-mode-map (make-keymap)))
@@ -254,8 +254,7 @@
 		("\\<\\(0x[[:xdigit:]]+\\)\\>" 1 'logtalk-number-face)
 		("\\<\\(0o[0-7]+\\)\\>" 1 'logtalk-number-face)
 		("\\<\\(0b[0-1]+\\)\\>" 1 'logtalk-number-face)
-		("\\<\\(0['][\\].\\)\\>" 1 'logtalk-number-face)
-		("\\<\\(0['].\\)\\>" 1 'logtalk-number-face)
+		("\\(0'[\\]?.\\)" 1 'logtalk-number-face)
 		("\\<\\([0-9]+\\([.][0-9]+\\)?\\([eE][+-][0-9]+\\)?\\)\\>" 1 'logtalk-number-face)
 	))
 

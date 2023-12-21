@@ -45,6 +45,16 @@ backend Prolog compiler supporting a module system, calls in the format
 
 This meta-predicate is opaque to cuts in its arguments.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   call(0)
+   call(1, *)
+   call(2, *, *)
+   ...
+
 Modes and number of proofs
 --------------------------
 

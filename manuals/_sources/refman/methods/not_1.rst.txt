@@ -45,6 +45,13 @@ be used as a message to an object.
    Note that these semantics differ from the ISO Prolog Core standard
    specification for the ``(\+)/1`` built-in predicate.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   \+ 0
+
 Modes and number of proofs
 --------------------------
 

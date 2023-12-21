@@ -47,6 +47,13 @@ message queue of the object containing the call
    :ref:`threads <flag_threads>` flag is set to ``supported`` when that
    is the case.
 
+Meta-predicate template
+-----------------------
+
+::
+
+   threaded_ignore(0)
+
 Modes and number of proofs
 --------------------------
 

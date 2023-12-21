@@ -55,6 +55,16 @@ as argument a :term:`lambda expression`, this built-in non-terminal can
 provide controlled access to the input list of tokens and to the list of
 the remaining tokens processed by the grammar rule containing the call.
 
+Meta-non-terminal template
+--------------------------
+
+::
+
+   call(0)
+   call(1, *)
+   call(2, *, *)
+   ...
+
 Modes and number of proofs
 --------------------------
 
