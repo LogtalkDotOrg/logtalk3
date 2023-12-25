@@ -51,6 +51,9 @@ Tools
 
 * CHANGED: Default output directory for the `diagrams` tool to `./dot_dias`.
 
+* UPDATED: The `update_svg_diagrams.*` scripts for the new `diagrams` tool
+default output directory.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
