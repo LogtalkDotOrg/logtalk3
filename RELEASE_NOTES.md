@@ -46,6 +46,11 @@ Library
 
 * FIXED: Description of the `hierarchies` library.
 
+Tools
+-----
+
+* CHANGED: Default output directory for the `diagrams` tool to `./dot_dias`.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
@@ -192,7 +197,7 @@ predicate.
 `zero_or_more//0-1` and `one_or_more//0-1` to consume tokens eagerly.
 
 Tools
---------
+-----
 
 * UPDATED: The `lgtunit` tool to also print the tests runtime in seconds.
 
