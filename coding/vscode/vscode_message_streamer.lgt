@@ -45,16 +45,6 @@
 		message_hook(Tokens, warning(Class)),
 		fail.
 
-	% Considerations: We CANNOT:
-	% 1. Use sockets, because not everyone runs on Unix!
-	% 2. Take up an inet port, because that would be a nuisance (and 1).
-	% 2.a. Use a localserver, because (2 and 1). Also, Prolog on localhost.. not yet.
-	% 3. Use the local file-directory as a scratch.
-	% 4. Clog up processes trying to talk to node.
-	%
-	% Thus, we'll just use a logfile and get Node to read from it...
-	% in some classic-js-magical way.
-
 	message_hook(Tokens, Kind) :-
 		logtalk::expand_library_path(logtalk_user('scratch/.messages'), File),
 		open(File, append, Stream),
