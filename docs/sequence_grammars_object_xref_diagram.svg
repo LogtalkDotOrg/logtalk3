@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-262.75 556,-262.75 556,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object sequence_grammars</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2023&#45;12&#45;25, 11:47</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2023&#45;12&#45;31, 12:44</text>
 <g id="clust1" class="cluster">
 <title>cluster_sequence_grammars_object</title>
 <g id="a_clust1"><a xlink:title="sequence_grammars">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 532,-49.75 532,-49.75 538,-49.75 544,-55.75 544,-61.75 544,-61.75 544,-238.75 544,-238.75 544,-244.75 538,-250.75 532,-250.75 532,-250.75 20,-250.75 20,-250.75 14,-250.75 8,-244.75 8,-238.75 8,-238.75 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt">
 <text text-anchor="start" x="20" y="-233.25" font-family="Monospace" font-size="10.00" fill="dimgray">sequence_grammars</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- zero_or_more//2 -->
 <g id="node1" class="node">
 <title>zero_or_more//2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L31">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L31">
 <polygon fill="springgreen" stroke="black" points="533.5,-95.75 406.5,-95.75 406.5,-59.75 533.5,-59.75 533.5,-95.75"/>
 <text text-anchor="start" x="414.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="419.38" y="-77.8" font-family="Monospace" font-size="11.00">zero_or_more//2</text>
@@ -41,7 +41,7 @@
 <!-- one_or_more//2 -->
 <g id="node2" class="node">
 <title>one_or_more//2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L39">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L39">
 <polygon fill="springgreen" stroke="black" points="530,-213.5 410,-213.5 410,-177.5 530,-177.5 530,-213.5"/>
 <text text-anchor="start" x="417.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="422.75" y="-195.55" font-family="Monospace" font-size="11.00">one_or_more//2</text>
@@ -55,12 +55,12 @@
 <!-- one_or_more//2&#45;&gt;zero_or_more//2 -->
 <g id="edge1" class="edge">
 <title>one_or_more//2&#45;&gt;zero_or_more//2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L84" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L84" xlink:title="calls">
 <path fill="none" stroke="black" d="M470,-177.17C470,-158.76 470,-129.35 470,-107.46"/>
 <polygon fill="black" stroke="black" points="473.5,-107.71 470,-97.71 466.5,-107.71 473.5,-107.71"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L84">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L84">
 <text text-anchor="start" x="470" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- zero_or_more//1 -->
 <g id="node3" class="node">
 <title>zero_or_more//1</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L47">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L47">
 <polygon fill="springgreen" stroke="black" points="388.5,-95.75 261.5,-95.75 261.5,-59.75 388.5,-59.75 388.5,-95.75"/>
 <text text-anchor="start" x="269.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="274.38" y="-77.8" font-family="Monospace" font-size="11.00">zero_or_more//1</text>
@@ -82,7 +82,7 @@
 <!-- one_or_more//1 -->
 <g id="node4" class="node">
 <title>one_or_more//1</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L54">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L54">
 <polygon fill="springgreen" stroke="black" points="388,-213.5 268,-213.5 268,-177.5 388,-177.5 388,-213.5"/>
 <text text-anchor="start" x="275.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="280.75" y="-195.55" font-family="Monospace" font-size="11.00">one_or_more//1</text>
@@ -96,12 +96,12 @@
 <!-- one_or_more//1&#45;&gt;zero_or_more//1 -->
 <g id="edge2" class="edge">
 <title>one_or_more//1&#45;&gt;zero_or_more//1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L92" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M327.55,-177.17C327.07,-158.76 326.31,-129.35 325.74,-107.46"/>
 <polygon fill="black" stroke="black" points="329.25,-107.62 325.49,-97.71 322.25,-107.8 329.25,-107.62"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L92">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L92">
 <text text-anchor="start" x="326" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,7 +109,7 @@
 <!-- zero_or_more//0 -->
 <g id="node5" class="node">
 <title>zero_or_more//0</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L61">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L61">
 <polygon fill="springgreen" stroke="black" points="243.5,-95.75 116.5,-95.75 116.5,-59.75 243.5,-59.75 243.5,-95.75"/>
 <text text-anchor="start" x="124.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="129.38" y="-77.8" font-family="Monospace" font-size="11.00">zero_or_more//0</text>
@@ -123,7 +123,7 @@
 <!-- one_or_more//0 -->
 <g id="node6" class="node">
 <title>one_or_more//0</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L66">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L66">
 <polygon fill="springgreen" stroke="black" points="250,-213.5 130,-213.5 130,-177.5 250,-177.5 250,-213.5"/>
 <text text-anchor="start" x="137.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="142.75" y="-195.55" font-family="Monospace" font-size="11.00">one_or_more//0</text>
@@ -137,12 +137,12 @@
 <!-- one_or_more//0&#45;&gt;zero_or_more//0 -->
 <g id="edge3" class="edge">
 <title>one_or_more//0&#45;&gt;zero_or_more//0</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L100" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M188.5,-177.17C186.91,-158.76 184.37,-129.35 182.48,-107.46"/>
 <polygon fill="black" stroke="black" points="185.99,-107.37 181.64,-97.71 179.01,-107.97 185.99,-107.37"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L100">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L100">
 <text text-anchor="start" x="185" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -150,7 +150,7 @@
 <!-- without//2 -->
 <g id="node7" class="node">
 <title>without//2</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L72">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L72" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L72">
 <polygon fill="springgreen" stroke="black" points="111.5,-213.5 18.5,-213.5 18.5,-177.5 111.5,-177.5 111.5,-213.5"/>
 <text text-anchor="start" x="26.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.25" y="-195.55" font-family="Monospace" font-size="11.00">without//2</text>
@@ -164,7 +164,7 @@
 <!-- member/2 -->
 <g id="node8" class="node">
 <title>member/2</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L111">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L111">
 <polygon fill="cornsilk" stroke="black" points="98,-95.75 18,-95.75 18,-59.75 98,-59.75 98,-95.75"/>
 <text text-anchor="start" x="25.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31" y="-77.8" font-family="Monospace" font-size="11.00">member/2</text>
@@ -178,12 +178,12 @@
 <!-- without//2&#45;&gt;member/2 -->
 <g id="edge4" class="edge">
 <title>without//2&#45;&gt;member/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L103" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L103" xlink:title="calls">
 <path fill="none" stroke="black" d="M63.95,-177.17C62.84,-158.76 61.06,-129.35 59.74,-107.46"/>
 <polygon fill="black" stroke="black" points="63.24,-107.48 59.15,-97.71 56.26,-107.9 63.24,-107.48"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/460f70dafb445ef6c0690156bcf6f01dddf73d96/library/grammars/sequence_grammars.lgt#L103">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f0ef54f0957fd8cd098294ac60a8dcf87b21f0a9/library/grammars/sequence_grammars.lgt#L103">
 <text text-anchor="start" x="61" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
