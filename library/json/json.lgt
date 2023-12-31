@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:12:1,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2022-11-14,
+		date is 2023-12-31,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -309,12 +309,10 @@
 		!,
 		[0'\\, 0'u, H1, H2, H3, H4],
 		encode_string(Codes).
-	encode_string(34, Codes) -->
+	encode_string(0'", Codes) -->
 		!, [0'\\, 0'"], encode_string(Codes).
-	encode_string(92, Codes) -->
+	encode_string(0'\\, Codes) -->
 		!, [0'\\, 0'\\], encode_string(Codes).
-	encode_string(47, Codes) -->
-		!, [0'\\, 0'/], encode_string(Codes).
 	encode_string( 8, Codes) -->
 		!, [0'\\, 0'b], encode_string(Codes).
 	encode_string(12, Codes) -->
