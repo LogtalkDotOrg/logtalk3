@@ -13,16 +13,18 @@ __all__ = ['LogtalkLexer']
 
 class LogtalkLexer(RegexLexer):
     """
-    For `Logtalk <https://logtalk.org/>`_ source code.
+    For Logtalk source code.
 
     :copyright: 2008-2022 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
     """
 
     name = 'Logtalk'
+    url = 'http://logtalk.org/'
     aliases = ['logtalk']
     filenames = ['*.lgt', '*.logtalk']
     mimetypes = ['text/x-logtalk']
+    version_added = '0.10'
 
     tokens = {
         'root': [
