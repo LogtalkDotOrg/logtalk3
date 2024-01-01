@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on December 8, 2028
+Last updated on December 8, 2023
 
 This file is part of Logtalk <https://logtalk.org/>  
 SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  

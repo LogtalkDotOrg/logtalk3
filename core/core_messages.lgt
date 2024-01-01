@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:128:0,
+		version is 1:129:0,
 		author is 'Paulo Moura',
-		date is 2023-12-06,
+		date is 2024-01-01,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -237,8 +237,8 @@
 	message_tokens(banner) -->
 		{current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status))},
 		(	{Status == stable} ->
-			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2023 Paulo Moura'-[], nl, nl]
-		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2023 Paulo Moura'-[], nl, nl]
+			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2024 Paulo Moura'-[], nl, nl]
+		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2024 Paulo Moura'-[], nl, nl]
 		).
 
 	message_tokens(default_flags) -->
