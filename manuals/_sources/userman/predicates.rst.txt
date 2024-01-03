@@ -255,7 +255,9 @@ as :term:`closures <closure>` that will be used for constructing goals. To
 ensure that these goals will be executed in the correct context (i.e. in the
 :term:`calling context <predicate calling context>`, not in the meta-predicate
 :term:`definition context <predicate definition context>`) we need to
-use the :ref:`directives_meta_predicate_1` directive. For example:
+use the :ref:`directives_meta_predicate_1` directive (in the case of *meta
+non-terminals*, there's also a :ref:`directives_meta_non_terminal_1` directive).
+For example:
 
 ::
 
