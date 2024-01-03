@@ -78,6 +78,11 @@ built-in predicate.
 
 * FIXED: Vim support highlight of `0'Char` and `0'\Char` numbers.
 
+Examples
+--------
+
+* UPDATED: The `mtbatch` example to use the `format` and `os` libraries.
+
 Installers and installation scripts
 -----------------------------------
 

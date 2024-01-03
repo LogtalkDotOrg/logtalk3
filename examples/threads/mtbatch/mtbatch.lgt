@@ -425,13 +425,13 @@
 		), nl.
 
 	run(Id, N, Average) :-
-		walltime_begin(Walltime1),
+		os::wall_time(Walltime1),
 		do_benchmark(empty_loop, N),
-		walltime_end(Walltime2),
+		os::wall_time(Walltime2),
 		Looptime is Walltime2 - Walltime1,
-		walltime_begin(Walltime3),
+		os::wall_time(Walltime3),
 		do_benchmark(Id, N),
-		walltime_end(Walltime4),
+		os::wall_time(Walltime4),
 		Goaltime is Walltime4 - Walltime3,
 		Average is (Goaltime - Looptime)/N.
 
@@ -569,67 +569,10 @@
 		fail.
 	do_benchmark(cop_overhead(_, _, _, _), _).
 
-	:- if(current_logtalk_flag(prolog_dialect, swi)).
-
-		walltime_begin(Walltime) :-
-			get_time(Walltime).
-
-		walltime_end(Walltime) :-
-			get_time(Walltime).
-
-		write_average(Average) :-
-			put_char('\t'),
-			format('~4f', [Average]),
-			flush_output.
-
-	:- elif(current_logtalk_flag(prolog_dialect, yap)).
-
-		walltime_begin(0.0) :-
-			statistics(walltime, _).
-
-		walltime_end(Walltime) :-
-			statistics(walltime, [_, Time]),
-			Walltime is Time / 1000.
-
-		write_average(Average) :-
-			put_char('\t'),
-			format('~4f', [Average]),
-			flush_output.
-
-	:- elif(current_logtalk_flag(prolog_dialect, xsb)).
-
-		walltime_begin(Walltime) :-
-			walltime(Walltime).
-
-		walltime_end(Walltime) :-
-			walltime(Walltime).
-
-		write_average(Average) :-
-			put_char('\t'),
-			fmt_write("%4f", Average),
-			flush_output.
-
-	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
-
-		walltime_begin(Walltime) :-
-			statistics(times, [_, _, Walltime]).
-
-		walltime_end(Walltime) :-
-			statistics(times, [_, _, Walltime]).
-
-		write_average(Average) :-
-			put_char('\t'),
-			{format('~4f', [Average])},
-			flush_output.
-
-	:- else.
-
-		:- initialization((
-			write('Unsupported Prolog compiler for running Logtalk multi-threading features.'),
-			halt
-		)).
-
-	:- endif.
+	write_average(Average) :-
+		put_char('\t'),
+		format::format('~4f', [Average]),
+		flush_output.
 
 	repeat(_).
 	repeat(N) :-

@@ -21,7 +21,7 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This folder provides an object for running multi-threading benchmarks. The
-supported backend Prolog compilers are	SWI-Prolog, YAP, and XSB.
+supported backend Prolog compilers are SWI-Prolog, and YAP.
 
 For example, the following goal will run all benchmark tests:
 
