@@ -69,6 +69,8 @@ extensions.
 
 * UPDATED: Ace support for compatibility with its current version (v1.32.2).
 
+* UPDATED: Rouge support for compatibility with recent versions.
+
 * FIXED: Ace support highlight of `0'Char` and `0'\Char` numbers.
 
 * FIXED: GtkSourceView support error with escaped characters highlighting.

@@ -21,7 +21,7 @@ ________________________________________________________________________
 This directory contains the `logtalk.rb` file that provides syntax 
 coloring support for Rouge (version 1.9.1 or later):
 
-	http://rouge.jneen.net/
+	https://rouge.jneen.net
 
 These support files are dual-licensed under the Apache License 2.0 and the
 Rouge license.
