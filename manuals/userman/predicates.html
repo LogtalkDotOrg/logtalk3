@@ -1242,12 +1242,14 @@ we may also use other control constructs such as <code class="docutils literal n
 compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> control construct.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>The semantics of <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code> and <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control constructs in grammar
-rules with non-terminal arguments are problematic due to unrestricted look
-ahead that may or may not be valid considering the grammar rule implicit
-arguments. By default, the linter will print warnings for such calls
-(controlled by the <a class="reference internal" href="programming.html#flag-grammar-rules"><span class="std std-ref">grammar_rules</span></a> flag).
-Preferably restrit the use of these control constructs to <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> arguments.</p>
+<p>The semantics of <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code> and <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control constructs in grammar rules
+with a terminal or a non-terminal in the <strong>first</strong> argument are problematic due
+to unrestricted look ahead that may or may not be valid considering the grammar
+rule implicit arguments. By default, the linter will print warnings for such
+calls (controlled by the <a class="reference internal" href="programming.html#flag-grammar-rules"><span class="std std-ref">grammar_rules</span></a> flag).
+Preferably restrit the use of the <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code> control construct to <code class="docutils literal notranslate"><span class="pre">{}/1</span></code>
+arguments and the use of the <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control construct to <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> test
+arguments.</p>
 </div>
 <p>In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method

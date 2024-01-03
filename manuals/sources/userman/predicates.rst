@@ -1279,12 +1279,14 @@ compiler that supports modules, we may also use the ``(:)/2`` control construct.
 
 .. warning::
 
-   The semantics of ``(\+)/1`` and ``(->)/2`` control constructs in grammar
-   rules with non-terminal arguments are problematic due to unrestricted look
-   ahead that may or may not be valid considering the grammar rule implicit
-   arguments. By default, the linter will print warnings for such calls
-   (controlled by the :ref:`grammar_rules <flag_grammar_rules>` flag).
-   Preferably restrit the use of these control constructs to ``{}/1`` arguments.
+   The semantics of ``(\+)/1`` and ``(->)/2`` control constructs in grammar rules
+   with a terminal or a non-terminal in the **first** argument are problematic due
+   to unrestricted look ahead that may or may not be valid considering the grammar
+   rule implicit arguments. By default, the linter will print warnings for such
+   calls (controlled by the :ref:`grammar_rules <flag_grammar_rules>` flag).
+   Preferably restrit the use of the ``(\+)/1`` control construct to ``{}/1``
+   arguments and the use of the ``(->)/2`` control construct to ``{}/1`` test
+   arguments.
 
 In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
