@@ -356,8 +356,8 @@
 
 % '$lgt_pp_file_initialization_'(Goal, Lines)
 :- dynamic('$lgt_pp_file_initialization_'/2).
-% '$lgt_pp_file_object_initialization_'(Object, Goal, Lines)
-:- dynamic('$lgt_pp_file_object_initialization_'/3).
+% '$lgt_pp_file_entity_initialization_'(Object, Goal, Lines)
+:- dynamic('$lgt_pp_file_entity_initialization_'/3).
 
 % '$lgt_pp_object_initialization_'(Goal, SourceData, Lines)
 :- dynamic('$lgt_pp_object_initialization_'/3).
@@ -8304,7 +8304,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_clean_pp_file_clauses' :-
 	retractall('$lgt_pp_file_initialization_'(_, _)),
-	retractall('$lgt_pp_file_object_initialization_'(_, _, _)),
+	retractall('$lgt_pp_file_entity_initialization_'(_, _, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _, _, _)),
 	retractall('$lgt_pp_file_bom_'(_, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
@@ -20932,7 +20932,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_generate_def_table_clauses'(Ctx),
 	'$lgt_compile_predicate_calls'(compile_time),
 	'$lgt_generate_category_clauses',
-	'$lgt_generate_category_directives'.
+	'$lgt_generate_category_directives',
+	'$lgt_generate_file_category_initialization_goal'.
 
 
 
@@ -22948,7 +22949,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_initialization_goal'(InitializationGoal) :-
 	findall(
 		Line-Goal,
-		(	'$lgt_pp_file_object_initialization_'(_, Goal, Line-_)
+		(	'$lgt_pp_file_entity_initialization_'(_, Goal, Line-_)
 		;	'$lgt_pp_file_initialization_'(Goal, Line-_)
 		),
 		LineGoals
@@ -23017,7 +23018,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Goal == true ->
 		true
 	;	'$lgt_pp_referenced_object_'(Object, _File, Lines),
-		assertz('$lgt_pp_file_object_initialization_'(Object, Goal, Lines))
+		assertz('$lgt_pp_file_entity_initialization_'(Object, Goal, Lines))
+	).
+
+
+
+% generates and asserts the initialization goal for the category being compiled
+
+'$lgt_generate_file_category_initialization_goal' :-
+	(	'$lgt_prolog_feature'(threads, supported),
+		setof(Mutex, Head^File^Lines^'$lgt_pp_synchronized_'(Head, Mutex, File, Lines), Mutexes) ->
+		'$lgt_pp_referenced_category_'(Category, _File, Lines),
+		assertz('$lgt_pp_file_entity_initialization_'(Category, '$lgt_create_mutexes'(Mutexes), Lines))
+	;	true
 	).
 
 

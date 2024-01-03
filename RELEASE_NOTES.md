@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Compilation of `synchronized/1` directives in categories to not
+depend on the Prolog `with_mutex/2` built-in predicate implicitly creating
+mutexes.
+
 * FIXED: Compilation of `phrase/2-3` goals where the first argument is a
 `(::)/1-2` or `(^^)/2` control construct with a variable grammar rule body
 argument would result in a compilation infinite loop. Thanks to Yurii
