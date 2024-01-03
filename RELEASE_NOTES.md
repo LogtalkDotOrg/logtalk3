@@ -43,6 +43,8 @@ Documentation
 * IMPROVED: Handbook documentation of built-in meta-non-terminals and
 meta-predicates.
 
+* IMPROVED: Handbook documentation on grammar rules.
+
 Library
 -------
 

@@ -1276,9 +1276,30 @@ Along with the message sending operators (``(::)/1``, ``(::)/2``, and ``(^^)/1``
 we may also use other control constructs such as ``(\+)/1``, ``!/0``, ``(;)/2``,
 ``(->)/2``, and ``{}/1`` in the body of a grammar. When using a backend Prolog
 compiler that supports modules, we may also use the ``(:)/2`` control construct.
+
+.. warning::
+
+   The semantics of ``(\+)/1`` and ``(->)/2`` control constructs in grammar
+   rules with non-terminal arguments are problematic due to unrestricted look
+   ahead that may or may not be valid considering the grammar rule implicit
+   arguments. By default, the linter will print warnings for such calls
+   (controlled by the :ref:`grammar_rules <flag_grammar_rules>` flag).
+   Preferably restrit the use of these control constructs to ``{}/1`` arguments.
+
 In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
-``phrase/3``.
+``phrase/3``. The :ref:`directives_meta_non_terminal_1` directive allows the
+declaration of non-terminals that have arguments that are meta-called from
+grammar rules. For example:
+
+::
+
+   :- meta_non_terminal(zero_or_more(1, *)).
+
+   zero_or_more(Closure, [Terminal| Terminals]) -->
+       call(Closure, Terminal), !, zero_or_more(Closure, Terminals).
+   zero_or_more(_, []) -->
+       [].
 
 You may have noticed that Logtalk defines :ref:`control_external_call_1`
 as a control construct for bypassing the compiler when compiling a clause body
