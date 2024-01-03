@@ -154,8 +154,7 @@
 
 	run(0, _) :-
 		this(Philosopher),
-		message([Philosopher, ' terminated.'
-	]).
+		message([Philosopher, ' terminated.']).
 
 	run(Count, MaxTime) :-
 		Count > 0,
