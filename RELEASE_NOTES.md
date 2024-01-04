@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: The implementation of the `threaded_engine_create/3` predicate
+to use a single mutex.
+
 * FIXED: Compilation of `synchronized/1` directives in categories to not
 depend on the Prolog `with_mutex/2` built-in predicate implicitly creating
 mutexes.

@@ -23,10 +23,10 @@ Multi-threading programming is only supported on some Prolog compilers.
 Currently this includes SWI-Prolog, YAP, and some XSB versions (make sure
 that you use the multi-threading versions of these Prolog compilers!). 
 Moreover, multi-threading may be turned off by default. In order to run 
-the examples,  you may need to first turn on multi-threading support on
+the examples, you may need to first turn on multi-threading support on
 the Prolog adapter files.
 
-Some examples try to benchmark single-threaded and multi-threaded solutions.
+Some examples try to benchmark single-threaded vs multi-threaded solutions.
 Depending on the Prolog compiler, the operating-system, and the computer
 used, you may need to adjust the size of the problem data in order to find
 the threshold where multi-threading solutions begin to outperform the

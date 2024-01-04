@@ -225,6 +225,8 @@
 :- dynamic('$lgt_dynamic_entity_counter_'/3).
 % '$lgt_threaded_tag_counter_'(Tag)
 :- dynamic('$lgt_threaded_tag_counter_'/1).
+% '$lgt_threaded_engine_tag_counter_'(Tag)
+:- dynamic('$lgt_threaded_engine_tag_counter_'/1).
 
 
 % debugging hook predicates
@@ -26593,7 +26595,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_threaded_engine_create_protected'(AnswerTemplate, Goal, TGoal, ExCtx, Engine) :-
 	'$lgt_execution_context'(ExCtx, _, _, This, _, _, _),
 	(	var(Engine) ->
-		'$lgt_new_threaded_tag'(Engine)
+		'$lgt_new_threaded_engine_tag'(Engine)
 	;	'$lgt_current_engine_'(This, Engine, _, _) ->
 		throw(error(permission_error(create, engine, Engine), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), ExCtx)))
 	;	true
@@ -27127,6 +27129,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 			asserta('$lgt_threaded_tag_counter_'(New))
 		)
 	).
+
+
+
+% '$lgt_new_threaded_engine_tag'(-integer)
+%
+% generates a new threading engine tag (already protected by the '$lgt_engines' mutex)
+
+'$lgt_new_threaded_engine_tag'(New) :-
+	retract('$lgt_threaded_engine_tag_counter_'(Old)), !,
+	New is Old + 1,
+	asserta('$lgt_threaded_engine_tag_counter_'(New)).
 
 
 
@@ -28778,12 +28791,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_start_runtime_threading' :-
 	(	'$lgt_prolog_feature'(engines, supported) ->
-		mutex_create(_, [alias('$lgt_engines')])
+		mutex_create(_, [alias('$lgt_engines')]),
+		(	current_prolog_flag(bounded, true) ->
+			current_prolog_flag(min_integer, Min),
+			assertz('$lgt_threaded_engine_tag_counter_'(Min))
+		;	assertz('$lgt_threaded_engine_tag_counter_'(0))
+		)
 	;	true
 	),
-	(	(	'$lgt_prolog_feature'(engines, supported)
-		;	'$lgt_prolog_feature'(threads, supported)
-		) ->
+	(	'$lgt_prolog_feature'(threads, supported) ->
 		mutex_create(_, [alias('$lgt_threaded_tag')]),
 		(	current_prolog_flag(bounded, true) ->
 			current_prolog_flag(min_integer, Min),
