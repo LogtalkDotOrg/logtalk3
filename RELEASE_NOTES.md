@@ -58,6 +58,9 @@ encoding a string. Thanks to Yurii Rashkovskii for the bug report.
 
 * FIXED: Description of the `hierarchies` library.
 
+* FIXED: Compatibility of the `types` library with XSB due to the missing
+implementation of the de facto standard `gcd/2` arithmetic function.
+
 Tools
 -----
 

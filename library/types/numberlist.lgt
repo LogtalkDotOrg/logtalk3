@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:15:0,
+		version is 1:15:1,
 		author is 'Paulo Moura',
-		date is 2023-12-10,
+		date is 2024-01-08,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -281,17 +281,42 @@
 		Y is X * Factor,
 		rescale(Xs, Factor, Ys).
 
-	least_common_multiple([I1, I2| Is], Multiple) :-
-		I1 > 0,
-		I2 > 0,
-		Multiple0 is (I1 * I2) // gcd(I1, I2),
-		least_common_multiple(Is, Multiple0, Multiple).
+	:- if(current_logtalk_flag(prolog_dialect, xsb)).
 
-	least_common_multiple([], Multiple, Multiple).
-	least_common_multiple([I| Is], Multiple0, Multiple) :-
-		I > 0,
-		Multiple1 is (Multiple0 * I) // gcd(Multiple0, I),
-		least_common_multiple(Is, Multiple1, Multiple).
+		least_common_multiple([I1, I2| Is], Multiple) :-
+			I1 > 0,
+			I2 > 0,
+			gcd(I1, I2, GCD),
+			Multiple0 is (I1 * I2) // GCD,
+			least_common_multiple(Is, Multiple0, Multiple).
+
+		least_common_multiple([], Multiple, Multiple).
+		least_common_multiple([I| Is], Multiple0, Multiple) :-
+			I > 0,
+			gcd(Multiple0, I, GCD),
+			Multiple1 is (Multiple0 * I) // GCD,
+			least_common_multiple(Is, Multiple1, Multiple).
+
+		gcd(X, 0, X):- !.
+		gcd(0, X, X):- !.
+		gcd(X, Y, D):- X =< Y, !, Z is Y - X, gcd(X, Z, D).
+		gcd(X, Y, D):- gcd(Y, X, D).
+
+	:- else.
+
+		least_common_multiple([I1, I2| Is], Multiple) :-
+			I1 > 0,
+			I2 > 0,
+			Multiple0 is (I1 * I2) // gcd(I1, I2),
+			least_common_multiple(Is, Multiple0, Multiple).
+
+		least_common_multiple([], Multiple, Multiple).
+		least_common_multiple([I| Is], Multiple0, Multiple) :-
+			I > 0,
+			Multiple1 is (Multiple0 * I) // gcd(Multiple0, I),
+			least_common_multiple(Is, Multiple1, Multiple).
+
+	:- endif.
 
 	valid((-)) :-
 		% catch variables and lists with unbound tails
