@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-380.5 681,-380.5 681,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object ip_grammars/1</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;01&#45;08, 21:47</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;01&#45;08, 22:15</text>
 <g id="clust1" class="cluster">
 <title>cluster_ip_grammars_1_object</title>
 <g id="a_clust1"><a xlink:title="ip_grammars(Format)">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 657,-49.75 657,-49.75 663,-49.75 669,-55.75 669,-61.75 669,-61.75 669,-356.5 669,-356.5 669,-362.5 663,-368.5 657,-368.5 657,-368.5 20,-368.5 20,-368.5 14,-368.5 8,-362.5 8,-356.5 8,-356.5 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt">
 <text text-anchor="start" x="20" y="-351" font-family="Monospace" font-size="10.00" fill="dimgray">ip_grammars(Format)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- ipv4//1 -->
 <g id="node1" class="node">
 <title>ipv4//1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L32">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L32">
 <polygon fill="springgreen" stroke="black" points="464.5,-331.25 391.5,-331.25 391.5,-295.25 464.5,-295.25 464.5,-331.25"/>
 <text text-anchor="start" x="399.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="404.38" y="-313.3" font-family="Monospace" font-size="11.00">ipv4//1</text>
@@ -41,7 +41,7 @@
 <!-- octet//1 -->
 <g id="node4" class="node">
 <title>octet//1</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L53">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L53">
 <polygon fill="cornsilk" stroke="black" points="413,-213.5 333,-213.5 333,-177.5 413,-177.5 413,-213.5"/>
 <text text-anchor="start" x="340.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="346" y="-195.55" font-family="Monospace" font-size="11.00">octet//1</text>
@@ -55,12 +55,12 @@
 <!-- ipv4//1&#45;&gt;octet//1 -->
 <g id="edge1" class="edge">
 <title>ipv4//1&#45;&gt;octet//1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L50" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L50" xlink:title="calls">
 <path fill="none" stroke="black" d="M419.77,-294.92C410.9,-276.25 396.65,-246.28 386.21,-224.3"/>
 <polygon fill="black" stroke="black" points="389.39,-222.84 381.94,-215.31 383.07,-225.85 389.39,-222.84"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L50">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L50">
 <text text-anchor="start" x="402" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- ipv4//1&#45;&gt;number_grammars(Format)::dot/3 -->
 <g id="edge5" class="edge">
 <title>ipv4//1&#45;&gt;number_grammars(Format)::dot/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L50" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L50" xlink:title="calls">
 <path fill="none" stroke="black" d="M445.52,-294.92C465.07,-275.57 496.91,-244.07 519.3,-221.93"/>
 <polygon fill="black" stroke="black" points="521.64,-224.53 526.29,-215.01 516.72,-219.56 521.64,-224.53"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L50">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L50">
 <text text-anchor="start" x="490" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -95,7 +95,7 @@
 <!-- ipv6//1 -->
 <g id="node2" class="node">
 <title>ipv6//1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L39">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L39">
 <polygon fill="springgreen" stroke="black" points="173.5,-331.25 100.5,-331.25 100.5,-295.25 173.5,-295.25 173.5,-331.25"/>
 <text text-anchor="start" x="108.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="113.38" y="-313.3" font-family="Monospace" font-size="11.00">ipv6//1</text>
@@ -109,7 +109,7 @@
 <!-- colon//0 -->
 <g id="node3" class="node">
 <title>colon//0</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L63">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L63">
 <polygon fill="cornsilk" stroke="black" points="116,-213.5 36,-213.5 36,-177.5 116,-177.5 116,-213.5"/>
 <text text-anchor="start" x="43.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="49" y="-195.55" font-family="Monospace" font-size="11.00">colon//0</text>
@@ -123,12 +123,12 @@
 <!-- ipv6//1&#45;&gt;colon//0 -->
 <g id="edge3" class="edge">
 <title>ipv6//1&#45;&gt;colon//0</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L56" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M127.87,-294.92C117.99,-276.17 102.09,-246 90.49,-224"/>
 <polygon fill="black" stroke="black" points="93.66,-222.5 85.9,-215.29 87.47,-225.76 93.66,-222.5"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L56">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L56">
 <text text-anchor="start" x="108" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,7 +136,7 @@
 <!-- group//1 -->
 <g id="node5" class="node">
 <title>group//1</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L59">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L59">
 <polygon fill="cornsilk" stroke="black" points="238,-213.5 158,-213.5 158,-177.5 238,-177.5 238,-213.5"/>
 <text text-anchor="start" x="165.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="171" y="-195.55" font-family="Monospace" font-size="11.00">group//1</text>
@@ -150,12 +150,12 @@
 <!-- ipv6//1&#45;&gt;group//1 -->
 <g id="edge2" class="edge">
 <title>ipv6//1&#45;&gt;group//1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L56" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L56" xlink:title="calls">
 <path fill="none" stroke="black" d="M146.13,-294.92C156.01,-276.17 171.91,-246 183.51,-224"/>
 <polygon fill="black" stroke="black" points="186.53,-225.76 188.1,-215.29 180.34,-222.5 186.53,-225.76"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L56">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L56">
 <text text-anchor="start" x="169" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -163,7 +163,7 @@
 <!-- colon//1 -->
 <g id="node6" class="node">
 <title>colon//1</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L66">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L66">
 <polygon fill="cornsilk" stroke="black" points="98,-95.75 18,-95.75 18,-59.75 98,-59.75 98,-95.75"/>
 <text text-anchor="start" x="25.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31" y="-77.8" font-family="Monospace" font-size="11.00">colon//1</text>
@@ -177,12 +177,12 @@
 <!-- colon//0&#45;&gt;colon//1 -->
 <g id="edge4" class="edge">
 <title>colon//0&#45;&gt;colon//1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L63" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M73.31,-177.17C70.44,-158.76 65.87,-129.35 62.46,-107.46"/>
 <polygon fill="black" stroke="black" points="65.94,-107.04 60.95,-97.69 59.02,-108.11 65.94,-107.04"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L63">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L63">
 <text text-anchor="start" x="67" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -204,12 +204,12 @@
 <!-- octet//1&#45;&gt;number_grammars(Format)::natural/3 -->
 <g id="edge6" class="edge">
 <title>octet//1&#45;&gt;number_grammars(Format)::natural/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L53" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L53" xlink:title="calls">
 <path fill="none" stroke="black" d="M396.65,-177.17C423.65,-157.4 467.97,-124.93 498.27,-102.73"/>
 <polygon fill="black" stroke="black" points="499.96,-105.83 505.96,-97.09 495.83,-100.18 499.96,-105.83"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L53">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L53">
 <text text-anchor="start" x="456" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -231,12 +231,12 @@
 <!-- group//1&#45;&gt;number_grammars(Format)::hex_digit/3 -->
 <g id="edge7" class="edge">
 <title>group//1&#45;&gt;number_grammars(Format)::hex_digit/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L59" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M205.93,-177.17C214.48,-158.5 228.21,-128.53 238.27,-106.55"/>
 <polygon fill="black" stroke="black" points="241.4,-108.12 242.38,-97.57 235.04,-105.21 241.4,-108.12"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/80d4127e9beae2f408b6813a9d163658e68b27ba/library/grammars/ip_grammars.lgt#L59">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a592ff712e4fc692b71a7a0f3820a609b47a702d/library/grammars/ip_grammars.lgt#L59">
 <text text-anchor="start" x="226" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
