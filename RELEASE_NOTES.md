@@ -70,7 +70,7 @@ Tools
 default output directory.
 
 * UPDATED: The `lgtunit` tool xUnit.net v2 XML format output to include the
-`assemblies` tag `start-rtf` and `finish-rtf` attributes.
+`assemblies` and `assembly` tags `start-rtf` and `finish-rtf` attributes.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

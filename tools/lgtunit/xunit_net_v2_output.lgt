@@ -108,12 +108,15 @@
 	write_assembly_element(Object) :-
 		assembly_name(Object, Name),
 		assembly_config_file(Object, ConfigFile),
+		assembly_start_rtf(StartRtf),
+		assembly_finish_rtf(FinishRtf),
 		assembly_time(Object, Time),
 		assembly_run_date(RunDate),
 		assembly_run_time(RunTime),
 		assembly_stats(Object, Total, Skipped, Passed, Failed),
 		write_xml_open_tag(assembly,
 			[	name-Name, 'config-file'-ConfigFile, 'test-framework'-lgtunit,
+				'start-rtf' - StartRtf, 'finish-rtf' - FinishRtf,
 				'run-date'-RunDate, 'run-time'-RunTime,
 				time-Time,
 				total-Total, passed-Passed, failed-Failed, skipped-Skipped, errors-0
@@ -222,6 +225,12 @@
 		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], FinishRtf).
 
 	% "assembly" tag attributes
+
+	assembly_start_rtf(StartRtf) :-
+		assemblies_start_rtf(StartRtf).
+
+	assembly_finish_rtf(FinishRtf) :-
+		assemblies_finish_rtf(FinishRtf).
 
 	assembly_time(Object, Time) :-
 		findall(
