@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 3:5:0,
+		version is 3:6:0,
 		author is 'Paulo Moura',
-		date is 2023-08-11,
+		date is 2024-01-08,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -90,7 +90,12 @@
 		write('<?xml version="1.0" encoding="UTF-8"?>'), nl.
 
 	write_assemblies_element :-
-		write_xml_open_tag(assemblies, []),
+		assemblies_start_rtf(StartRtf),
+		assemblies_finish_rtf(FinishRtf),
+		write_xml_open_tag(assemblies, [
+			'start-rtf' - StartRtf,
+			'finish-rtf' - FinishRtf
+		]),
 		write_assembly_elements,
 		write_xml_close_tag(assemblies).
 
@@ -201,6 +206,20 @@
 	failed_test(quick_check_error(Error, _, _), 'QuickCheck test error', quick_check_error, Error).
 	failed_test(step_error(_, Error), 'Test step error', step_error, Error).
 	failed_test(step_failure(Step), 'Test step failure', step_failure, Step).
+
+	% "assemblies" tag attributes
+
+	assemblies_start_rtf(StartRtf) :-
+		message_cache_(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
+		integers_to_atoms([Year,Month,Day,Hours,Minutes,Seconds], [AYear,AMonth0,ADay0,AHours0,AMinutes0,ASeconds0]),
+		pad_single_char_atoms([AMonth0,ADay0,AHours0,AMinutes0,ASeconds0], [AMonth,ADay,AHours,AMinutes,ASeconds]),
+		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], StartRtf).
+
+	assemblies_finish_rtf(FinishRtf) :-
+		message_cache_(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
+		integers_to_atoms([Year,Month,Day,Hours,Minutes,Seconds], [AYear,AMonth0,ADay0,AHours0,AMinutes0,ASeconds0]),
+		pad_single_char_atoms([AMonth0,ADay0,AHours0,AMinutes0,ASeconds0], [AMonth,ADay,AHours,AMinutes,ASeconds]),
+		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], FinishRtf).
 
 	% "assembly" tag attributes
 
