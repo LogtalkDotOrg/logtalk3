@@ -18,7 +18,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This folder contains minimal support for using Exuberant Ctags  with Logtalk:
+This folder contains minimal support for using Exuberant Ctags with Logtalk:
 
 	http://ctags.sourceforge.net/
 

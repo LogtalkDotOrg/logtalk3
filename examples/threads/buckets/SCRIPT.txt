@@ -24,7 +24,9 @@ ________________________________________________________________________
 ...
 
 
-% start shuffling randomly the buckets contents:
+% start shuffling randomly the buckets contents (note that the bucket
+values are random numbers and thus their sum varies by run and by the
+backend):
 
 | ?- buckets::start.
 
