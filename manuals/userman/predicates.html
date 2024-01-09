@@ -426,11 +426,14 @@ indicators, or conjunction of predicate indicators.</p>
 <p>To the best of my knowledge, the use of non-negative integers to specify
 closures has first introduced on Quintus Prolog for providing
 information for predicate cross-reference tools.</p>
-<p>As each Logtalk entity is independently compiled, this directive must be
-included in every object or category that contains a definition for the
-described meta-predicate, even if the meta-predicate declaration is
-inherited from another entity, to ensure proper compilation of
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As each Logtalk entity is independently compiled, this directive must
+be included in every object or category that contains a definition for
+the described meta-predicate, even if the meta-predicate declaration
+is inherited from another entity, to ensure proper compilation of
 meta-arguments.</p>
+</div>
 </section>
 <section id="discontiguous-directive">
 <span id="predicates-discontiguous"></span><h3>Discontiguous directive<a class="headerlink" href="#discontiguous-directive" title="Link to this heading"></a></h3>
@@ -441,33 +444,40 @@ In that case, we must declare the predicate discontiguous by using the
 </pre></div>
 </div>
 <p>This is a directive that we should avoid using: it makes your code
-harder to read and it is not supported by some Prolog compilers.</p>
+harder to read and it is not supported by some Prolog backends.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>As each Logtalk entity is compiled independently of other entities,
 this directive must be included in every object or category that
-contains a definition for the described predicate (even if the predicate
-declaration is inherited from other entity).</p>
+contains a definition for the described predicate (even if the
+predicate declaration is inherited from other entity).</p>
+</div>
 </section>
 <section id="dynamic-directive">
 <span id="predicates-dynamic"></span><h3>Dynamic directive<a class="headerlink" href="#dynamic-directive" title="Link to this heading"></a></h3>
-<p>An object predicate can be static or dynamic. By default, all predicates of
-objects defined source files are static (predicates of objects dynamically
-created at runtime are implicitly dynamic). To declare a dynamic predicate
-we use the <a class="reference internal" href="../refman/directives/dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic/1</span></a> directive:</p>
+<p>An object predicate can be static or dynamic. By default, all predicates (and
+non-terminals) of static objects defined in source files are static. To declare
+a dynamic predicate (or non-terminal) we use the <a class="reference internal" href="../refman/directives/dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic/1</span></a>
+directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic</span>(foo<span class="o">/</span><span class="m">1</span>).
 </pre></div>
 </div>
-<p>This directive may also be used to declare dynamic grammar rule
-non-terminals. As each Logtalk entity is compiled independently from
-other entities, this directive must be included in every object that
-contains a definition for the described predicate (even if the predicate
-declaration is inherited from other object or imported from a category).
-If we omit the dynamic declaration then the predicate definition will be
-compiled static. In the case of dynamic objects, static predicates
-cannot be redefined using the database built-in methods (despite being
-internally compiled to dynamic code).</p>
-<p>Dynamic predicates can be used to represent persistent mutable object
-state. Note that static objects may declare and define dynamic
-predicates.</p>
+<p>Predicates of objects dynamically created at runtime (using the
+<a class="reference internal" href="../refman/predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a> built-in predicate) and predicates of
+dynamic objects defined in source files (using the <a class="reference internal" href="../refman/directives/dynamic_0.html#directives-dynamic-0"><span class="std std-ref">dynamic/0</span></a>
+directive) are implicitly dynamic.</p>
+<p>Dynamic predicates can be used to represent persistent mutable object state.
+Note that static objects may declare and define dynamic predicates. Categories
+can only declare dynamic predicates (with the importing objects holding the
+predicate definitions).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As each Logtalk entity is compiled independently from other entities, this
+directive must be included in every object that contains a definition for
+the described predicate (even if the predicate declaration is inherited
+from other object or imported from a category). If we omit the dynamic
+declaration then the predicate definition will be compiled static.</p>
+</div>
 </section>
 <section id="operator-directive">
 <span id="predicates-op"></span><h3>Operator directive<a class="headerlink" href="#operator-directive" title="Link to this heading"></a></h3>

@@ -305,11 +305,13 @@ To the best of my knowledge, the use of non-negative integers to specify
 closures has first introduced on Quintus Prolog for providing
 information for predicate cross-reference tools.
 
-As each Logtalk entity is independently compiled, this directive must be
-included in every object or category that contains a definition for the
-described meta-predicate, even if the meta-predicate declaration is
-inherited from another entity, to ensure proper compilation of
-meta-arguments.
+.. warning::
+
+   As each Logtalk entity is independently compiled, this directive must
+   be included in every object or category that contains a definition for
+   the described meta-predicate, even if the meta-predicate declaration
+   is inherited from another entity, to ensure proper compilation of
+   meta-arguments.
 
 .. _predicates_discontiguous:
 
@@ -325,40 +327,46 @@ In that case, we must declare the predicate discontiguous by using the
    :- discontiguous(foo/1).
 
 This is a directive that we should avoid using: it makes your code
-harder to read and it is not supported by some Prolog compilers.
+harder to read and it is not supported by some Prolog backends.
 
-As each Logtalk entity is compiled independently of other entities,
-this directive must be included in every object or category that
-contains a definition for the described predicate (even if the predicate
-declaration is inherited from other entity).
+.. warning::
+
+   As each Logtalk entity is compiled independently of other entities,
+   this directive must be included in every object or category that
+   contains a definition for the described predicate (even if the
+   predicate declaration is inherited from other entity).
 
 .. _predicates_dynamic:
 
 Dynamic directive
 ~~~~~~~~~~~~~~~~~
 
-An object predicate can be static or dynamic. By default, all predicates of
-objects defined source files are static (predicates of objects dynamically
-created at runtime are implicitly dynamic). To declare a dynamic predicate
-we use the :ref:`directives_dynamic_1` directive:
+An object predicate can be static or dynamic. By default, all predicates (and
+non-terminals) of static objects defined in source files are static. To declare
+a dynamic predicate (or non-terminal) we use the :ref:`directives_dynamic_1`
+directive. For example:
 
 ::
 
    :- dynamic(foo/1).
 
-This directive may also be used to declare dynamic grammar rule
-non-terminals. As each Logtalk entity is compiled independently from
-other entities, this directive must be included in every object that
-contains a definition for the described predicate (even if the predicate
-declaration is inherited from other object or imported from a category).
-If we omit the dynamic declaration then the predicate definition will be
-compiled static. In the case of dynamic objects, static predicates
-cannot be redefined using the database built-in methods (despite being
-internally compiled to dynamic code).
+Predicates of objects dynamically created at runtime (using the
+:ref:`predicates_create_object_4` built-in predicate) and predicates of
+dynamic objects defined in source files (using the :ref:`directives_dynamic_0`
+directive) are implicitly dynamic.
 
-Dynamic predicates can be used to represent persistent mutable object
-state. Note that static objects may declare and define dynamic
-predicates.
+Dynamic predicates can be used to represent persistent mutable object state.
+Note that static objects may declare and define dynamic predicates. Categories
+can only declare dynamic predicates (with the importing objects holding the
+predicate definitions).
+
+.. warning::
+
+   As each Logtalk entity is compiled independently from other entities, this
+   directive must be included in every object that contains a definition for
+   the described predicate (even if the predicate declaration is inherited
+   from other object or imported from a category). If we omit the dynamic
+   declaration then the predicate definition will be compiled static.
 
 .. _predicates_op:
 
