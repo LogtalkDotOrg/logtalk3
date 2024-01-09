@@ -106,6 +106,9 @@ Installers and installation scripts
 * UPDATED: The `install.sh` manual installation script to inform the user
 about the `INFOPATH` environment variable.
 
+* FIXED: The Bash shell embedding scripts to actually use the default settings
+file when no `-s` option is passed.
+
 
 3.73.0 - December 12, 2023
 ==========================
