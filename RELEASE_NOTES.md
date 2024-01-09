@@ -48,6 +48,9 @@ meta-predicates.
 
 * IMPROVED: Handbook documentation on grammar rules.
 
+* IMPROVED: Handbook documentation on dynamic predicates and the
+`create_object/4` built-in predicate.
+
 Library
 -------
 

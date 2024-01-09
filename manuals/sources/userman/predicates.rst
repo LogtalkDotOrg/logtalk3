@@ -337,9 +337,10 @@ declaration is inherited from other entity).
 Dynamic directive
 ~~~~~~~~~~~~~~~~~
 
-An object predicate can be static or dynamic. By default, all object
-predicates are static. To declare a dynamic predicate we use the
-:ref:`directives_dynamic_1` directive:
+An object predicate can be static or dynamic. By default, all predicates of
+objects defined source files are static (predicates of objects dynamically
+created at runtime are implicitly dynamic). To declare a dynamic predicate
+we use the :ref:`directives_dynamic_1` directive:
 
 ::
 

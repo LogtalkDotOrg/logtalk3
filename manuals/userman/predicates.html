@@ -449,9 +449,10 @@ declaration is inherited from other entity).</p>
 </section>
 <section id="dynamic-directive">
 <span id="predicates-dynamic"></span><h3>Dynamic directive<a class="headerlink" href="#dynamic-directive" title="Link to this heading"></a></h3>
-<p>An object predicate can be static or dynamic. By default, all object
-predicates are static. To declare a dynamic predicate we use the
-<a class="reference internal" href="../refman/directives/dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic/1</span></a> directive:</p>
+<p>An object predicate can be static or dynamic. By default, all predicates of
+objects defined source files are static (predicates of objects dynamically
+created at runtime are implicitly dynamic). To declare a dynamic predicate
+we use the <a class="reference internal" href="../refman/directives/dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic/1</span></a> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic</span>(foo<span class="o">/</span><span class="m">1</span>).
 </pre></div>
 </div>
