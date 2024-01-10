@@ -54,6 +54,9 @@ meta-predicates.
 Library
 -------
 
+* CHANGED: Deleted deprecated `library/genint.lgt` file, replaced by the
+`genint` library.
+
 * ADDED: Library `recorded_database` to help porting legacy Prolog code.
 
 * FIXED: The `json` library to avoid unnecessary escaping of slashes when
