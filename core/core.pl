@@ -25468,7 +25468,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(grammar_rules, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(grammar_rules),
 		suspicious_call(File, Lines, Type, Entity, '*->'(GRIf, GRThen), reason(unsound_construct_in_grammar_rule))
 	),
 	fail.
@@ -25486,7 +25486,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(grammar_rules, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(grammar_rules),
 		suspicious_call(File, Lines, Type, Entity, (GRIf -> GRThen), reason(unsound_construct_in_grammar_rule))
 	),
 	fail.
@@ -25522,7 +25522,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(grammar_rules, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(suspicious_calls),
+		warning(grammar_rules),
 		suspicious_call(File, Lines, Type, Entity, \+ GRBody, reason(unsound_construct_in_grammar_rule))
 	),
 	fail.
