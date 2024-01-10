@@ -1290,7 +1290,7 @@ compiler that supports modules, we may also use the ``(:)/2`` control construct.
 
    The semantics of ``(\+)/1`` and ``(->)/2`` control constructs in grammar rules
    with a terminal or a non-terminal in the **first** argument are problematic due
-   to unrestricted look ahead that may or may not be valid considering the grammar
+   to unrestricted look ahead that may or may not be valid depending on the grammar
    rule implicit arguments. By default, the linter will print warnings for such
    calls (controlled by the :ref:`grammar_rules <flag_grammar_rules>` flag).
    Preferably restrit the use of the ``(\+)/1`` control construct to ``{}/1``

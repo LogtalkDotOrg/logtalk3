@@ -154,19 +154,21 @@
 </pre></div>
 </div>
 <p>This non-terminal takes a <a class="reference internal" href="../../glossary.html#term-closure"><span class="xref std std-term">closure</span></a> and is processed by appending the
-input list of tokens and the list of remaining tokens to the arguments
-of the closure. This built-in non-terminal is interpreted as a private
-non-terminal and thus cannot be used as a message to an object.</p>
+two implicit grammar rule arguments to the arguments of the closure. This
+built-in non-terminal is interpreted as a private non-terminal and thus
+cannot be used as a message to an object.</p>
 <p>Using this non-terminal is recommended when calling a predicate whose
-last two arguments are the input list of tokens and the list of remaining
-tokens to avoid hard-coding assumptions about how grammar rules are
-compiled into clauses. Note that the compiler ensures zero overhead when
-using this non-terminal with a bound argument at compile time.</p>
+last two arguments are the two implicit grammar rule arguments to avoid
+hard-coding assumptions about how grammar rules are compiled into clauses.
+Note that the compiler ensures zero overhead when using this non-terminal
+with a bound argument at compile time. To call a predicate with a different
+argument order, use a <a class="reference internal" href="../../glossary.html#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>square <span class="o">--&gt;</span>
+    <span class="k">call</span>([<span class="nv">Number</span>, <span class="nv">Double</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Double</span> <span class="k">is</span> <span class="nv">Number</span><span class="o">*</span><span class="nv">Number</span>)).
+</pre></div>
+</div>
 <p>When using a <a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> supporting a module system,
-calls in the format <code class="docutils literal notranslate"><span class="pre">call(Module:Closure)</span></code> may also be used. By using
-as argument a <a class="reference internal" href="../../glossary.html#term-lambda-expression"><span class="xref std std-term">lambda expression</span></a>, this built-in non-terminal can
-provide controlled access to the input list of tokens and to the list of
-the remaining tokens processed by the grammar rule containing the call.</p>
+calls in the format <code class="docutils literal notranslate"><span class="pre">call(Module:Closure)</span></code> may also be used.</p>
 </section>
 <section id="meta-non-terminal-template">
 <h2>Meta-non-terminal template<a class="headerlink" href="#meta-non-terminal-template" title="Link to this heading"></a></h2>
@@ -202,19 +204,19 @@ the remaining tokens processed by the grammar rule containing the call.</p>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="line-block">
-<div class="line">Calls a goal, constructed by appending the tokens difference list to the closure, in in the context of the object or category containing the call:</div>
+<div class="line">Calls a goal, constructed by appending the two implicit grammar rule arguments to the closure, in in the context of the object or category containing the call:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">call(Closure)</span></code></div>
 </div>
-<div class="line">To make a <em>super</em> call, constructed by appending the tokens difference list to the closure:</div>
+<div class="line">To make a <em>super</em> call, constructed by appending the two implicit grammar rule arguments to the closure:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">call(^^Closure)</span></code></div>
 </div>
-<div class="line">To send a goal, constructed by appending the tokens difference list to the closure, as a message to <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</div>
+<div class="line">To send a goal, constructed by appending the two implicit grammar rule arguments to the closure, as a message to <a class="reference internal" href="../../glossary.html#term-self"><span class="xref std std-term">self</span></a>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">call(::Closure)</span></code></div>
 </div>
-<div class="line">To send a goal, constructed by appending the tokens difference list to the closure, as a message to an explicit object:</div>
+<div class="line">To send a goal, constructed by appending the two implicit grammar rule arguments to the closure, as a message to an explicit object:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">call(Object::Closure)</span></code></div>
 </div>
