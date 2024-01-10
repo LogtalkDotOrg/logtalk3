@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Printing of linter warnings about to the use of unsound control
+constructs in grammar rules to be controlled by the `grammar_rules` flag
+instead of the `suspicious_calls` flag.
+
 * IMPROVED: The implementation of the `threaded_engine_create/3` predicate
 to use a single mutex.
 

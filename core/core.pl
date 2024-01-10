@@ -25465,7 +25465,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(GRIf),
 	\+ functor(GRIf, {}, 1),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(grammar_rules, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
 		warning(suspicious_calls),
@@ -25483,7 +25483,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(GRIf),
 	\+ functor(GRIf, {}, 1),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(grammar_rules, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
 		warning(suspicious_calls),
@@ -25519,7 +25519,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(GRBody),
 	\+ functor(GRBody, {}, 1),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(grammar_rules, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
 		warning(suspicious_calls),
