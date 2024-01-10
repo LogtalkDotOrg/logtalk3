@@ -41,8 +41,8 @@
 	:- synchronized([bucket/2, buckets/1, transfer/3]).
 
 	% use the backend Prolog compiler random number generator as it is
-	% stateless and thus allows us to avoid inconsistent state issues
-	% when the threads are canceled
+	% assumed to be stateless and thus allows us to avoid inconsistent
+	% state issues when the threads are canceled
 	:- uses(backend_random, [random/3]).
 
 	start :-
