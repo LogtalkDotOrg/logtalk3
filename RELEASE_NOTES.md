@@ -30,7 +30,8 @@ Logtalk compiler and runtime
 
 * CHANGED: Printing of linter warnings about to the use of unsound control
 constructs in grammar rules to be controlled by the `grammar_rules` flag
-instead of the `suspicious_calls` flag.
+instead of the `suspicious_calls` flag. Also changed the format of warning
+message.
 
 * IMPROVED: The implementation of the `threaded_engine_create/3` predicate
 to use a single mutex.
@@ -81,6 +82,15 @@ default output directory.
 
 * UPDATED: The `lgtunit` tool xUnit.net v2 XML format output to include the
 `assemblies` and `assembly` tags `start-rtf` and `finish-rtf` attributes.
+
+* UPDATED: The `tutor` tool for the refactoring of the linter warnings on the
+use of unsound control constructs in grammar rules.
+
+Examples
+--------
+
+* UPDATED: The `errors` example for the linter warnings on the use of unsound
+control constructs in grammar rules.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

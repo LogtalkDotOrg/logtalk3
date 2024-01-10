@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:129:0,
+		version is 1:130:0,
 		author is 'Paulo Moura',
-		date is 2024-01-01,
+		date is 2024-01-10,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -546,14 +546,6 @@
 		['Unknown non-terminal called but not defined: ~q'-[NonTerminal], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(calls_non_terminal_as_predicate(File, Lines, Type, Entity, NonTerminal)) -->
-		['Non-terminal called as a predicate: ~q'-[NonTerminal], nl],
-		message_context(File, Lines, Type, Entity).
-
-	message_tokens(calls_predicate_as_non_terminal(File, Lines, Type, Entity, Predicate)) -->
-		['Predicate called as a non-terminal: ~q'-[Predicate], nl],
-		message_context(File, Lines, Type, Entity).
-
 	message_tokens(message_not_understood(File, Lines, Type, Entity, Obj, Pred)) -->
 		{functor(Pred, Name, Arity)},
 		['Unknown message sent to object: ~q'-[Obj::Name/Arity], nl],
@@ -692,6 +684,20 @@
 	message_tokens(disjunction_as_body(File, Lines, Type, Entity, Head, _)) -->
 		{functor(Head, Name, Arity)},
 		['Predicate ~q clause body is a disjunction'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	% grammar rules
+
+	message_tokens(calls_non_terminal_as_predicate(File, Lines, Type, Entity, NonTerminal)) -->
+		['Non-terminal called as a predicate: ~q'-[NonTerminal], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(calls_predicate_as_non_terminal(File, Lines, Type, Entity, Predicate)) -->
+		['Predicate called as a non-terminal: ~q'-[Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(unsound_construct_in_grammar_rule(File, Lines, Type, Entity, GRBody)) -->
+		['~q is not a sound construct in a grammar rule'-[GRBody], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% suspicious cuts
@@ -997,8 +1003,6 @@
 		['as ~w'-[Text], nl].
 	suspicious_call_reason(due_to(Text)) -->
 		['due to ~w'-[Text], nl].
-	suspicious_call_reason(unsound_construct_in_grammar_rule) -->
-		['is not a sound construct in a grammar rule'-[], nl].
 
 	missing_entities([]) -->
 		[].

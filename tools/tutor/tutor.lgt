@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:60:0,
+		version is 0:61:0,
 		author is 'Paulo Moura',
-		date is 2023-11-30,
+		date is 2024-01-10,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -435,6 +435,38 @@
 			'semantic versioning and forthcoming version management tools.'-[], nl, nl
 		].
 
+	% grammar rules
+
+	explain(calls_non_terminal_as_predicate(_, _, _, _, _)) -->
+		[	'Calls to non-terminals from predicates should always be made using the'-[], nl,
+			'phrase/2-3 built-in methods instead of assuming how grammar rules are'-[], nl,
+			'compiled into predicate clauses.'-[], nl, nl
+		].
+
+	explain(calls_predicate_as_non_terminal(_, _, _, _, _)) -->
+		[	'Calls to predicates from non-terminals should always be made using the'-[], nl,
+			'call//1 built-in method instead of assuming how grammar rules are'-[], nl,
+			'compiled into predicate clauses.'-[], nl, nl
+		].
+
+	explain(unsound_construct_in_grammar_rule(_, _, _, _, \+ _)) -->
+		[	'The use of this construct may result in unrestricted look ahead that may'-[], nl,
+			'or may not be valid depending on the grammar rule implicit arguments. It'-[], nl,
+			'is advisable to only use this construct with a {}/1 argument.'-[], nl, nl
+		].
+
+	explain(unsound_construct_in_grammar_rule(_, _, _, _, (_ -> _))) -->
+		[	'The use of this construct may result in an early commit that may or may not'-[], nl,
+			'be valid depending on the grammar rule implicit arguments. It is advisable'-[], nl,
+			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
+		].
+
+	explain(unsound_construct_in_grammar_rule(_, _, _, _, '*->'(_, _))) -->
+		[	'The use of this construct may result in an early commit that may or may not'-[], nl,
+			'be valid depending on the grammar rule implicit arguments. It is advisable'-[], nl,
+			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
+		].
+
 	% other warning messages
 
 	explain(complementing_category_ignored(_, _, _, _)) -->
@@ -460,18 +492,6 @@
 	explain(unknown_non_terminal_called_but_not_defined(_, _, _, _, _)) -->
 		[	'Calls to unknown and undefined grammar rules generate a runtime error.'-[], nl,
 			'Misspelt grammar rule name? Wrong number of arguments?'-[], nl, nl
-		].
-
-	explain(calls_non_terminal_as_predicate(_, _, _, _, _)) -->
-		[	'Calls to non-terminals from predicates should always be made using the'-[], nl,
-			'phrase/2-3 built-in methods instead of assuming how grammar rules are'-[], nl,
-			'compiled into predicate clauses.'-[], nl, nl
-		].
-
-	explain(calls_predicate_as_non_terminal(_, _, _, _, _)) -->
-		[	'Calls to predicates from non-terminals should always be made using the'-[], nl,
-			'call//1 built-in method instead of assuming how grammar rules are'-[], nl,
-			'compiled into predicate clauses.'-[], nl, nl
 		].
 
 	explain(redefined_logtalk_built_in_predicate(_, _, _, _, _)) -->
@@ -1010,24 +1030,6 @@
 			'loss of precision when converting from decimal to binary representation.'-[], nl,
 			'Check instead if the float values are within a given epsilon. The "float"'-[], nl,
 			'library object provides several predicates for comparing floats. '-[], nl, nl
-		].
-
-	explain(suspicious_call(_, _, _, _, \+ _, reason(unsound_construct_in_grammar_rule))) -->
-		[	'The use of this construct may result in unrestricted look ahead that may'-[], nl,
-			'or may not be valid considering the grammar rule implicit arguments. It'-[], nl,
-			'is advisable to only use this construct with a {}/1 argument.'-[], nl, nl
-		].
-
-	explain(suspicious_call(_, _, _, _, (_ -> _), reason(unsound_construct_in_grammar_rule))) -->
-		[	'The use of this construct may result in an early commit that may or may not'-[], nl,
-			'be valid considering the grammar rule implicit arguments. It is advisable'-[], nl,
-			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
-		].
-
-	explain(suspicious_call(_, _, _, _, '*->'(_, _), reason(unsound_construct_in_grammar_rule))) -->
-		[	'The use of this construct may result in an early commit that may or may not'-[], nl,
-			'be valid considering the grammar rule implicit arguments. It is advisable'-[], nl,
-			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
 		].
 
 	% encoding/1 directive messages

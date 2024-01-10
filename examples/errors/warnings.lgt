@@ -182,6 +182,16 @@
 
 
 
+:- object(unsound_construct_in_grammar_rule).
+
+	q(_) --> \+ p(_).
+
+	p(_) --> [].
+
+:- end_object.
+
+
+
 :- object(missing_protocol_reference).
 
 	before(_, _, _).
