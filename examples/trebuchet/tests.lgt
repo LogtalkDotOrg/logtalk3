@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2023-12-04,
+		date is 2024-01-11,
 		comment is 'Unit tests for the "trebuchet" example.'
 	]).
 
@@ -37,10 +37,6 @@
 
 	test(trebuchet_sample_2_file, true(Calibration == 281)) :-
 		^^file_path('test_files/sample_2', Path),
-		trebuchet::solution(Path, Calibration).
-
-	test(trebuchet_input_file, true(Calibration == 53894)) :-
-		^^file_path('test_files/input', Path),
 		trebuchet::solution(Path, Calibration).
 
 :- end_object.

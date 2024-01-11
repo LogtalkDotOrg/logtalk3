@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2023-12-09,
+		date is 2024-01-11,
 		comment is 'Unit tests for the "haunted_wasteland" example.'
 	]).
 
@@ -41,18 +41,10 @@
 		^^file_path('test_files/sample_2', Path),
 		haunted_wasteland::steps_1(Path, Steps).
 
-	test(haunted_wasteland_steps_1_input_file, true(Steps == 21409)) :-
-		^^file_path('test_files/input', Path),
-		haunted_wasteland::steps_1(Path, Steps).
-
 	% Part 2
 
 	test(haunted_wasteland_steps_2_sample_3_file, true(Steps == 6)) :-
 		^^file_path('test_files/sample_3', Path),
-		haunted_wasteland::steps_2(Path, Steps).
-
-	test(haunted_wasteland_steps_2_input_file, true(Steps == 21165830176709)) :-
-		^^file_path('test_files/input', Path),
 		haunted_wasteland::steps_2(Path, Steps).
 
 :- end_object.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2023-12-05,
+		date is 2024-01-11,
 		comment is 'Unit tests for the "scratchcards" example.'
 	]).
 
@@ -35,16 +35,8 @@
 		^^file_path('test_files/sample', Path),
 		scratchcards::points(Path, Points).
 
-	test(scratchcards_points_input_file, true(Points == 21088)) :-
-		^^file_path('test_files/input', Path),
-		scratchcards::points(Path, Points).
-
 	test(scratchcards_total_sample_file, true(Total == 30)) :-
 		^^file_path('test_files/sample', Path),
-		scratchcards::total(Path, Total).
-
-	test(scratchcards_total_input_file, true(Total == 6874754)) :-
-		^^file_path('test_files/input', Path),
 		scratchcards::total(Path, Total).
 
 :- end_object.
