@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2012-12-25,
+		date is 2024-01-12,
 		comment is 'Unit tests for the "threads/fft" example.'
 	]).
 
@@ -40,11 +40,11 @@
 		fft(4)::fft(N,L,_F4), fft(8)::fft(N,L,_F8).
 
 	test(fft_3) :-
-		N is 16384, cgenerator::list(N, L),
+		N is 8192, cgenerator::list(N, L),
 		fft(1)::fft(N,L,_F1), fft(2)::fft(N,L,_F2), fft(4)::fft(N,L,_F3).
 
 	test(fft_4) :-
-		N is 8192, cgenerator::list(N, L),
+		N is 16384, cgenerator::list(N, L),
 		fft(1)::fft(N,L,_F1), fft(2)::fft(N,L,_F2), fft(4)::fft(N,L,_F3).
 
 	test(fft_5) :-
