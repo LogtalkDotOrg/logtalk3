@@ -30,3 +30,6 @@ This is an alternative to accomplish the same goal by using a `uses/2`
 directive and implicit message sending. Note that both alternatives allow
 compiling the code in optimized mode to take advantage of static binding
 for the message sending calls.
+
+This example also illustrates defining an alias for an object defined at
+runtime using a _parameter variable_.

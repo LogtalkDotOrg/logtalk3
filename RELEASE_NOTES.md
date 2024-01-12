@@ -92,8 +92,8 @@ Examples
 * CHANGED: The `haunted_wasteland`, `scratchcards`, and `trebuchet` examples
 providing solutions for selected Advent of Code 2023 problems to comply with
 this event legal requirements by linking (instead of copying) to the problem
-descriptions and removing input files that are not samples found in the
-problem descriptions.
+descriptions and removing test files that are not samples found in the problem
+descriptions.
 
 * UPDATED: The `errors` example for the linter warnings on the use of unsound
 control constructs in grammar rules.
