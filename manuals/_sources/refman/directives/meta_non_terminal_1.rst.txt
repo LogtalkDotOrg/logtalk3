@@ -46,9 +46,9 @@ Description
 Declares meta-non-terminals, i.e., non-terminals that have arguments
 that will be called as non-terminals (or grammar rule bodies). An
 argument may also be a :term:`closure` instead of a goal if the
-non-terminal uses the :ref:`methods_call_1` Logtalk built-in
-methods to construct and call the actual non-terminal from the closure
-and the additional arguments.
+non-terminal uses the :ref:`methods_call_1` built-in methods to
+construct and call the actual non-terminal from the closure and the
+additional arguments or the :ref:`methods_phrase_1` built-in method.
 
 Meta-arguments which are non-terminals are represented by the integer
 ``0``. Meta-arguments which are closures are represented by a positive
