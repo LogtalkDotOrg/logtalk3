@@ -18,36 +18,14 @@ limitations under the License.
 ________________________________________________________________________
 
 
-DEPRECATED: For a more featured Logtalk extension for the Visual Studio
-Code text editor use instead:
+Logtalk support for the Visual Studio Code text editor is available using
+the "Logtalk for VSCode" extension:
+
+https://marketplace.visualstudio.com/items?itemName=LogtalkDotOrg.logtalk-for-vscode
+
+To install this extension, start VSCode, on the left click on "Extensions", type
+"Logtalk" in the search box at the top, select the extension, and click install.
+
+This extension is under development and its sources are available at:
 
 https://github.com/LogtalkDotOrg/logtalk-for-vscode
-
-Notes for the contents of this directory follows.
-
-This directory contains a preliminary extension for editing Logtalk source
-files with the Visual Studio Code text editor: 
-
-	http://code.visualstudio.com/
-
-To install, copy the `pmoura.logtalk-0.0.2` folder to the following folder:
-
-	~/.vscode/extensions
-
-Create the folder if it does not exist. This extension includes support
-for syntax highlighting and code folding. Snippets are also provided for
-entities and predicate declarations. In the case of entities, the defined
-triggers are `object`, `class`, `instance`, `protocol`, and `category`.
-In the case of predicates, the defined triggers are `public`, `protected`,
-and `private`.
-
-Copy the file `tasks.json` to the your workspace `.vscode` folder. Edit it to
-choose and customize the Prolog integration shortcut that you want to use.
-Defined tasks include file compilation, running unit tests, scanning for
-dead code, running doclets, generating HTML documentation, and generating
-SVG diagrams.
-
-Logtalk source files (including the library entities and the programming
-examples) are indented using tabs and are expected to remain perfectly 
-indented no matter your tab width preference (a common setting is a tab
-width equivalent to 4 spaces).
