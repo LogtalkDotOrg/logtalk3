@@ -104,6 +104,9 @@ IDEs, text editors, and syntax highlighters support
 * REMOVED: The old and deprecated VSCode support in favor of the "Logtalk for
 VSCode" extension available from the VSCode Marketplace.
 
+* UPDATED: The syntax highlighting test files to include the built-in
+non-terminals.
+
 * UPDATED: EditorConfig support for the `.logtalk` and `.prolog` file name
 extensions.
 
