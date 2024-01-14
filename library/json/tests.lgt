@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:16:1,
+		version is 0:17:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2023-04-11,
+		date is 2024-01-14,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.'
 	]).
 
@@ -157,6 +157,12 @@
 	test(encode_pair_colon_string_object, true(A == '{"a":{"b":"c"}}')) :-
 		generate(atom(A), {':'(a,{':'(b,c)})}).
 
+	test(roundtrip_object_representation, true(JSON-Chars == json([])-['{','}'])) :-
+		json(list,dash,atom)::(parse(chars(['{','}']), JSON), generate(chars(Chars), JSON)).
+
+	test(roundtrip_string_representation, true(JSON-Chars == {}-['"','{','}','"'])) :-
+		json(list,dash,atom)::(parse(chars(['"','{','}','"']), JSON), generate(chars(Chars), JSON)).
+
 	test(roundtrip_simple_files, true) :-
 		^^file_path('test_files/simple', Directory),
 		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
@@ -205,6 +211,12 @@
 
 	test(json_double_quote_escape_generate, true(Atom == '{"foo":"bar \\"1\\" baz"}')) :-
 		json(atom)::generate(atom(Atom), {foo-'bar "1" baz'}).
+
+	test(json_generate_error_object_list_representation, error(domain_error(json_sink, {a-b}))) :-
+		json(list,dash,atom)::generate(chars(_), {a-b}).
+
+	test(json_generate_error_object_curly_representation, error(domain_error(json_sink, json([a-b])))) :-
+		json(curly,dash,atom)::generate(chars(_), json([a-b])).
 
 	% auxiliary predicates
 

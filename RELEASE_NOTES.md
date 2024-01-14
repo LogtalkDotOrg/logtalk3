@@ -81,6 +81,12 @@ Library
 * FIXED: The `json` library to avoid unnecessary escaping of slashes when
 encoding a string. Thanks to Yurii Rashkovskii for the bug report.
 
+* FIXED: The `json` library ignoring the selected JSON object representation
+when generating JSON output. Thanks to Yurii Rashkovskii for the bug report.
+
+* FIXED: The `json` library domain error when trying to generate JSON output
+from an invalid JSON representation.
+
 * FIXED: Description of the `hierarchies` library.
 
 * FIXED: Compatibility of the `types` library with XSB due to the missing

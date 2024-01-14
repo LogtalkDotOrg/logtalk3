@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:12:1,
+		version is 0:12:2,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2023-12-31,
+		date is 2024-01-14,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -88,8 +88,8 @@
 		phrase(encode(Term), Codes),
 		atom_codes(Atom, Codes),
 		!.
-	generate(Sink, _) :-
-		domain_error(json_sink, Sink).
+	generate(_, Term) :-
+		domain_error(json_sink, Term).
 
 	json(JSON) -->
 		json_white_space, json_value(JSON), json_white_space.
@@ -245,13 +245,13 @@
 		!, {atom(Literal)}, encode_literal(Literal).
 
 	encode({}) -->
-		!, [0'{, 0'}].
+		{_ObjectRepresentation_ == curly}, !, [0'{, 0'}].
 	encode({Pairs}) -->
-		!, [0'{], encode_pairs(Pairs), [0'}].
+		{_ObjectRepresentation_ == curly}, !, [0'{], encode_pairs(Pairs), [0'}].
 	encode(json([])) -->
-		!, [0'{, 0'}].
+		{_ObjectRepresentation_ == list}, !, [0'{, 0'}].
 	encode(json(Pairs)) -->
-		!, [0'{], encode_pairs(Pairs), [0'}].
+		{_ObjectRepresentation_ == list}, !, [0'{], encode_pairs(Pairs), [0'}].
 
 	encode([]) -->
 		!, [0'[, 0']].
