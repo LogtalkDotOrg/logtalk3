@@ -33,6 +33,9 @@ constructs in grammar rules to be controlled by the `grammar_rules` flag
 instead of the `suspicious_calls` flag. Also changed the format of warning
 message.
 
+* IMPROVED: The implementation of the `threaded/1` built-in predicate to
+support calls where the argument is only bound at runtime.
+
 * IMPROVED: The implementation of the `threaded_engine_create/3` predicate
 to use a single mutex.
 

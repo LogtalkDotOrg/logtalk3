@@ -14415,6 +14415,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_object_'(_, _, _, _, _, _, _, _, _, _, _),
 	throw(resource_error(threads)).
 
+'$lgt_compile_body'(threaded(Goals), _, TGoal, '$lgt_debug'(goal(threaded(Goals), TGoal), ExCtx), Ctx) :-
+	var(Goals),
+	!,
+	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, _, _, _, _, _, MetaVars, _, _, Mode, _, _, _),
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred),
+	(	'$lgt_member_var'(Pred, MetaVars) ->
+		TGoal = '$lgt_threaded'(Goals, HeadExCtx, runtime)
+	;	TGoal = '$lgt_threaded'(Goals, HeadExCtx, local)
+	),
+	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx).
+
 '$lgt_compile_body'(threaded(Goals), _, MTGoals, '$lgt_debug'(goal(threaded(Goals), MDGoals), ExCtx), Ctx) :-
 	!,
 	'$lgt_compile_body'(Goals, meta, TGoals, DGoals, Ctx),
@@ -17336,6 +17347,58 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% '$lgt_threaded'(+callable, +execution_context, +atom)
+%
+% handling of threaded/1 calls when the argument is only bound at runtime
+
+'$lgt_threaded'(Goals, ExCtx, Where) :-
+	(	var(Goals) ->
+		throw(error(instantiation_error, threaded(Goals)))
+	;	\+ callable(Goals) ->
+		throw(error(type_error(callable, Goals), threaded(Goals)))
+	;	'$lgt_runtime_threaded_call'(Goals, MTGoals, ExCtx, Where),
+		call(MTGoals)
+	).
+
+
+
+% '$lgt_runtime_threaded_call'(+callable, -callable, +execution_context, +atom)
+%
+% runtime compilation of the argument of a call to the built-in predicate threaded/1
+
+'$lgt_runtime_threaded_call'((Goal; Goals), '$lgt_threaded_or'(Queue, MTGoals, Results), ExCtx, Where) :-
+	!,
+	'$lgt_runtime_threaded_or_call'((Goal; Goals), Queue, MTGoals, Results, ExCtx, Where).
+
+'$lgt_runtime_threaded_call'((Goal, Goals), '$lgt_threaded_and'(Queue, MTGoals, Results), ExCtx, Where) :-
+	!,
+	'$lgt_runtime_threaded_and_call'((Goal, Goals), Queue, MTGoals, Results, ExCtx, Where).
+
+'$lgt_runtime_threaded_call'(Goal, ('$lgt_metacall'(Goal, ExCtx, Where) -> true; fail), ExCtx, Where).
+
+
+'$lgt_runtime_threaded_or_call'((Goal; Goals), Queue, (MTGoal, MTGoals), [Result| Results], ExCtx, Where) :-
+	!,
+	'$lgt_runtime_threaded_goal'(Goal, Queue, MTGoal, Result, ExCtx, Where),
+	'$lgt_runtime_threaded_or_call'(Goals, Queue, MTGoals, Results, ExCtx, Where).
+
+'$lgt_runtime_threaded_or_call'(Goal, Queue, MTGoal, [Result], ExCtx, Where) :-
+	'$lgt_runtime_threaded_goal'(Goal, Queue, MTGoal, Result, ExCtx, Where).
+
+
+'$lgt_runtime_threaded_and_call'((Goal, Goals), Queue, (MTGoal, MTGoals), [Result| Results], ExCtx, Where) :-
+	!,
+	'$lgt_runtime_threaded_goal'(Goal, Queue, MTGoal, Result, ExCtx, Where),
+	'$lgt_runtime_threaded_and_call'(Goals, Queue, MTGoals, Results, ExCtx, Where).
+
+'$lgt_runtime_threaded_and_call'(Goal, Queue, MTGoal, [Result], ExCtx, Where) :-
+	'$lgt_runtime_threaded_goal'(Goal, Queue, MTGoal, Result, ExCtx, Where).
+
+
+'$lgt_runtime_threaded_goal'(Goal, Queue, '$lgt_threaded_goal'('$lgt_metacall'(Goal, ExCtx, Where), TVars, Queue, Id), id(Id, TVars, _), ExCtx, Where).
+
+
+
 % '$lgt_compile_threaded_call'(+callable, -callable)
 %
 % compiles the argument of a call to the built-in predicate threaded/1
@@ -17367,6 +17430,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_threaded_and_call'(TGoal, Queue, MTGoal, [Result]) :-
 	'$lgt_compile_threaded_goal'(TGoal, Queue, MTGoal, Result).
+
 
 '$lgt_compile_threaded_goal'(TGoal, Queue, '$lgt_threaded_goal'(TGoal, TVars, Queue, Id), id(Id, TVars, _)).
 
