@@ -5,7 +5,7 @@
 %  make/0, and to improve usability when using the XPCE profiler and XPCE
 %  graphical debugger
 %
-%  Last updated on April 24, 2023
+%  Last updated on January 14, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -841,6 +841,7 @@ prolog_clause:make_varnames_hook(_, (THead :- _), Offsets, Names, Bindings) :-
 :- meta_predicate '$lgt_assert_pred_def'(*,*,*,*,*,*,*,*).
 :- meta_predicate '$lgt_send_to_self_nv'(*,*,*).
 
+:- meta_predicate threaded(*).
 :- meta_predicate '$lgt_threaded_goal'(*,*,*,*).
 :- meta_predicate '$lgt_threaded_call'(*,*,*).
 :- meta_predicate '$lgt_threaded_once'(*,*,*).

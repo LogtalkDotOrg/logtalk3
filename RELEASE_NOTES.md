@@ -45,6 +45,13 @@ mutexes.
 argument would result in a compilation infinite loop. Thanks to Yurii
 Rashkovskii for the bug report.
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The SWI-Prolog `swihooks.pl` file to allow calls to the `threaded/1`
+built-in predicate in `user` to actually use multi-threading by preventing
+module-qualification of the predicate argument.
+
 Documentation
 -------------
 
