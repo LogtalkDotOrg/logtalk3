@@ -56,6 +56,8 @@ meta-predicates.
 * IMPROVED: Handbook documentation on dynamic predicates and the
 `create_object/4` built-in predicate.
 
+* IMPROVED: Handbook documentation of the `threaded/1` built-in predicate.
+
 * FIXED: Handbook description of the `if/1` conditional compilation directive.
 
 Library

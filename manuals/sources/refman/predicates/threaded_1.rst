@@ -31,14 +31,14 @@ Description
 
 ::
 
-   threaded(Goals)
-
    threaded(Conjunction)
    threaded(Disjunction)
 
-Proves each goal in a conjunction (disjunction) of goals in its own
-thread. This predicate is deterministic and opaque to cuts. The
-predicate argument is **not** flattened.
+Proves each goal in a conjunction or a disjunction of goals in its own
+thread. This meta-predicate is deterministic and opaque to cuts. The
+predicate argument is **not** flattened and it must be bound at
+compile-time to either a conjunction or a disjunction (the individual
+goals, however, can be bound only at runtime).
 
 When the argument is a conjunction of goals, a call to this predicate
 blocks until either all goals succeed, one of the goals fail, or one of
@@ -64,6 +64,13 @@ equivalent to a ``once/1`` predicate call.
    compatible multi-threading primitives. The value of the read-only
    :ref:`threads <flag_threads>` flag is set to ``supported`` when that
    is the case.
+
+Meta-predicate template
+-----------------------
+
+::
+
+   threaded(0)
 
 Modes and number of proofs
 --------------------------

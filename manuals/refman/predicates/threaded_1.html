@@ -146,15 +146,15 @@
 <span id="predicates-threaded-1"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">threaded/1</span></code><a class="headerlink" href="#threaded-1" title="Link to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded</span>(<span class="nv">Goals</span>)
-
-<span class="k">threaded</span>(<span class="nv">Conjunction</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded</span>(<span class="nv">Conjunction</span>)
 <span class="k">threaded</span>(<span class="nv">Disjunction</span>)
 </pre></div>
 </div>
-<p>Proves each goal in a conjunction (disjunction) of goals in its own
-thread. This predicate is deterministic and opaque to cuts. The
-predicate argument is <strong>not</strong> flattened.</p>
+<p>Proves each goal in a conjunction or a disjunction of goals in its own
+thread. This meta-predicate is deterministic and opaque to cuts. The
+predicate argument is <strong>not</strong> flattened and it must be bound at
+compile-time to either a conjunction or a disjunction (the individual
+goals, however, can be bound only at runtime).</p>
 <p>When the argument is a conjunction of goals, a call to this predicate
 blocks until either all goals succeed, one of the goals fail, or one of
 the goals generate an exception; the failure of one of the goals or an
@@ -176,6 +176,12 @@ equivalent to a <code class="docutils literal notranslate"><span class="pre">onc
 compatible multi-threading primitives. The value of the read-only
 <a class="reference internal" href="../../userman/programming.html#flag-threads"><span class="std std-ref">threads</span></a> flag is set to <code class="docutils literal notranslate"><span class="pre">supported</span></code> when that
 is the case.</p>
+</div>
+</section>
+<section id="meta-predicate-template">
+<h2>Meta-predicate template<a class="headerlink" href="#meta-predicate-template" title="Link to this heading"></a></h2>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded</span>(<span class="m">0</span>)
+</pre></div>
 </div>
 </section>
 <section id="modes-and-number-of-proofs">
