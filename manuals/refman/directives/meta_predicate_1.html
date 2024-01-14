@@ -160,20 +160,22 @@ meta_predicate([<span class="nv">Module</span><span class="o">:</span><span clas
 </pre></div>
 </div>
 <p>Declares <a class="reference internal" href="../../glossary.html#term-meta-predicate"><span class="xref std std-term">meta-predicates</span></a>, i.e., predicates that
-have arguments that will be called as goals. An argument may also be a
-<a class="reference internal" href="../../glossary.html#term-closure"><span class="xref std std-term">closure</span></a> instead of a goal if the meta-predicate uses the
-<a class="reference internal" href="../methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> Logtalk built-in methods to construct and call the
-actual goal from the closure and the additional arguments.</p>
+have arguments interpreted as goals, arguments interpreted as
+<a class="reference internal" href="../../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> used to construct goals, or arguments with
+sub-terms that will be interpreted as goals or closures. Meta-arguments
+are always called in the meta-predicate
+<a class="reference internal" href="../../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the
+meta-predicate <a class="reference internal" href="../../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>.</p>
 <p>Meta-arguments which are goals are represented by the integer <code class="docutils literal notranslate"><span class="pre">0</span></code>.
 Meta-arguments which are closures are represented by a positive integer,
 <code class="docutils literal notranslate"><span class="pre">N</span></code>, representing the number of additional arguments that will be
-appended to the closure in order to construct the corresponding meta-call.
-Meta-arguments that will be called using the <code class="docutils literal notranslate"><span class="pre">bagof/3</span></code> or <code class="docutils literal notranslate"><span class="pre">setof/3</span></code>
-predicates and that can thus be existentially-qualified are represented
-by the atom <code class="docutils literal notranslate"><span class="pre">^</span></code>. Normal arguments are represented by the atom <code class="docutils literal notranslate"><span class="pre">*</span></code>.
-Meta-arguments are always called in the meta-predicate
-<a class="reference internal" href="../../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the
-meta-predicate <a class="reference internal" href="../../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>.</p>
+appended to the closure in order to construct the corresponding goal
+(typically by calling the <a class="reference internal" href="../methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> built-in method).
+Meta-arguments with sub-terms that will be interpreted as goals or closures
+are represented by <code class="docutils literal notranslate"><span class="pre">::</span></code>. Meta-arguments that will be called using the
+<code class="docutils literal notranslate"><span class="pre">bagof/3</span></code> or <code class="docutils literal notranslate"><span class="pre">setof/3</span></code> predicates and that can thus be
+existentially-qualified are represented by the atom <code class="docutils literal notranslate"><span class="pre">^</span></code>. Normal arguments
+are represented by the atom <code class="docutils literal notranslate"><span class="pre">*</span></code>.</p>
 <p>Logtalk allows the use of this directive to override the original
 meta-predicate directive. This is sometimes necessary when calling
 Prolog built-in meta-predicates or Prolog module meta-predicates due

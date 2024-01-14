@@ -152,9 +152,7 @@
 </div>
 <p>Proves each goal in a conjunction or a disjunction of goals in its own
 thread. This meta-predicate is deterministic and opaque to cuts. The
-predicate argument is <strong>not</strong> flattened and it must be bound at
-compile-time to either a conjunction or a disjunction (the individual
-goals, however, can be bound only at runtime).</p>
+predicate argument is <strong>not</strong> flattened.</p>
 <p>When the argument is a conjunction of goals, a call to this predicate
 blocks until either all goals succeed, one of the goals fail, or one of
 the goals generate an exception; the failure of one of the goals or an

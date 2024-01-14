@@ -36,9 +36,7 @@ Description
 
 Proves each goal in a conjunction or a disjunction of goals in its own
 thread. This meta-predicate is deterministic and opaque to cuts. The
-predicate argument is **not** flattened and it must be bound at
-compile-time to either a conjunction or a disjunction (the individual
-goals, however, can be bound only at runtime).
+predicate argument is **not** flattened.
 
 When the argument is a conjunction of goals, a call to this predicate
 blocks until either all goals succeed, one of the goals fail, or one of

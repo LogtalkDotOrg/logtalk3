@@ -44,21 +44,23 @@ Description
    meta_predicate([Module:Template, ...])
 
 Declares :term:`meta-predicates <meta-predicate>`, i.e., predicates that
-have arguments that will be called as goals. An argument may also be a
-:term:`closure` instead of a goal if the meta-predicate uses the
-:ref:`methods_call_N` Logtalk built-in methods to construct and call the
-actual goal from the closure and the additional arguments.
+have arguments interpreted as goals, arguments interpreted as
+:term:`closures <closure>` used to construct goals, or arguments with
+sub-terms that will be interpreted as goals or closures. Meta-arguments
+are always called in the meta-predicate
+:term:`calling context <predicate calling context>`, not in the
+meta-predicate :term:`definition context <predicate definition context>`.
 
 Meta-arguments which are goals are represented by the integer ``0``.
 Meta-arguments which are closures are represented by a positive integer,
 ``N``, representing the number of additional arguments that will be
-appended to the closure in order to construct the corresponding meta-call.
-Meta-arguments that will be called using the ``bagof/3`` or ``setof/3``
-predicates and that can thus be existentially-qualified are represented
-by the atom ``^``. Normal arguments are represented by the atom ``*``.
-Meta-arguments are always called in the meta-predicate
-:term:`calling context <predicate calling context>`, not in the
-meta-predicate :term:`definition context <predicate definition context>`.
+appended to the closure in order to construct the corresponding goal
+(typically by calling the :ref:`methods_call_N` built-in method).
+Meta-arguments with sub-terms that will be interpreted as goals or closures
+are represented by ``::``. Meta-arguments that will be called using the
+``bagof/3`` or ``setof/3`` predicates and that can thus be
+existentially-qualified are represented by the atom ``^``. Normal arguments
+are represented by the atom ``*``.
 
 Logtalk allows the use of this directive to override the original
 meta-predicate directive. This is sometimes necessary when calling

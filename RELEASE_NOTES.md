@@ -68,6 +68,8 @@ meta-predicates.
 
 * IMPROVED: Handbook documentation of the `threaded/1` built-in predicate.
 
+* IMPROVED: Handbook documentation of the `meta_predicate/1` directive.
+
 * FIXED: Handbook description of the `if/1` conditional compilation directive.
 
 Library
