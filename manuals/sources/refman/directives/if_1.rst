@@ -33,12 +33,13 @@ Description
 
    if(Goal)
 
-Starts conditional compilation. The code following the directive is compiled
-iff ``Goal`` is true. If ``Goal`` throws an error instead of either succeeding
-or failing, the error is reported by the compiler and compilation of the
-enclosing source file or entity is aborted. The goal is subjected to
-:ref:`goal expansion <expansion_expansion>` when the directive occurs in a
-source file. Conditional compilation directives can be nested.
+Starts an *if-then* branch when performing conditional compilation. The code
+following the directive is compiled iff ``Goal`` is true. If ``Goal``
+throws an error instead of either succeeding or failing, the error is
+reported by the compiler and compilation of the enclosing source file
+or entity is aborted. The goal is subjected to
+:ref:`goal expansion <expansion_expansion>` when the directive occurs
+in a source file. Conditional compilation directives can be nested.
 
 .. warning::
 
