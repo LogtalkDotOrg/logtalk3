@@ -23,22 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:21:0,
+		version is 1:22:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2011-11-17,
+		date is 2024-01-15,
 		comment is 'Unit tests for the "threads/integration" example.'
 	]).
 
-	test(integration_1) :-
-		quadrec(4)::integrate(quiver, 0.001, 0.999, 0, 1.0e-10, Integral),
-		abs(Integral) =< 1.0e-10.
+	test(integration_1, true(abs(Integral) =< 1.0e-10)) :-
+		quadrec(4)::integrate(quiver, 0.001, 0.999, 0, 1.0e-10, Integral).
 
-	test(integration_2) :-
-		quadrec(8)::integrate(quiver, 0.001, 0.999, 4, 1.0e-10, Integral),
-		abs(Integral) =< 1.0e-10.
+	test(integration_2, true(abs(Integral) =< 1.0e-10)) :-
+		quadrec(8)::integrate(quiver, 0.001, 0.999, 4, 1.0e-10, Integral).
 
-	test(integration_3) :-
-		quadsplit(8)::integrate(quiver, 0.001, 0.999, 4, 1.0e-10, Integral),
-		abs(Integral) =< 1.0e-10.
+	test(integration_3, true(abs(Integral) =< 1.0e-10)) :-
+		quadsplit(8)::integrate(quiver, 0.001, 0.999, 4, 1.0e-10, Integral).
 
 :- end_object.

@@ -23,26 +23,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010-03-16,
+		date is 2024-01-15,
 		comment is 'Unit tests for the "threads/tak" example.'
 	]).
 
-	test(tak_1) :-
-		tak(1)::tak(18, 12, 6, R),
-		R == 7.
+	test(tak_1, true(R == 7)) :-
+		tak(1)::tak(18, 12, 6, R).
 
-	test(tak_2) :-
-		tak(3)::tak(18, 12, 6, R),
-		R == 7.
+	test(tak_2, true(R == 7)) :-
+		tak(3)::tak(18, 12, 6, R).
 
-	test(tak_3) :-
-		tak(1)::tak(21, 14, 7, R),
-		R == 14.
+	test(tak_3, true(R == 14)) :-
+		tak(1)::tak(21, 14, 7, R).
 
-	test(tak_4) :-
-		tak(3)::tak(21, 14, 7, R),
-		R == 14.
+	test(tak_4, true(R == 14)) :-
+		tak(3)::tak(21, 14, 7, R).
 
 :- end_object.

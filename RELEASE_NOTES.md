@@ -120,6 +120,8 @@ descriptions.
 * UPDATED: The `errors` example for the linter warnings on the use of unsound
 control constructs in grammar rules.
 
+* UPDATED: Several multi-threading example tests to use explicit assertions.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
