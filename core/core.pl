@@ -9137,7 +9137,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_grammar_rule'((Head --> Body), Ctx).
 
 '$lgt_compile_non_expanded_term'(Term, Ctx) :-
-	'$lgt_compile_clause'(Term, Ctx).
+	(	callable(Term) ->
+		'$lgt_compile_clause'(Term, Ctx)
+	;	throw(error(type_error(callable, Term), term(Term)))
+	).
 
 
 

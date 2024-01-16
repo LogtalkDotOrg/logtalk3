@@ -48,6 +48,9 @@ mutexes.
 argument would result in a compilation infinite loop. Thanks to Yurii
 Rashkovskii for the bug report.
 
+* FIXED: Regression where a compiler error when a source file term is not
+callable would be delegated to the backend.
+
 Prolog adapter and integration files
 ------------------------------------
 
