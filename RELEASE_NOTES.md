@@ -105,6 +105,8 @@ Tools
 * UPDATED: The `update_svg_diagrams.*` scripts for the new `diagrams` tool
 default output directory.
 
+* UPDATED: The `lgtunit` tool to report unbound test options.
+
 * UPDATED: The `lgtunit` tool xUnit.net v2 XML format output to include the
 `assemblies` and `assembly` tags `start-rtf` and `finish-rtf` attributes.
 

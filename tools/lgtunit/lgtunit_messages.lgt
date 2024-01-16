@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 8:5:0,
+		version is 8:6:0,
 		author is 'Paulo Moura',
-		date is 2023-11-14,
+		date is 2024-01-16,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -316,6 +316,9 @@
 		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl].
 
 	% messages for invalid test specifications
+
+	message_tokens(non_instantiated_test_option(Test)) -->
+		['non-instantiated test option found: ~q'-[Test], nl].
 
 	message_tokens(invalid_test_option(Test, Option)) -->
 		['test ~q option is invalid: ~q'-[Test, Option], nl].

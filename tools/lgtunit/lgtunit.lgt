@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 16:7:0,
+		version is 16:8:0,
 		author is 'Paulo Moura',
-		date is 2023-12-07,
+		date is 2024-01-16,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1696,13 +1696,15 @@
 			Note = ''
 		).
 	parse_test_options([Option| Options], Test, Condition, Setup, Cleanup, Flaky, Note, NoteFlag) :-
-		(	Option = condition(Goal) ->
+		(	var(Option) ->
+			print_message(warning, lgtunit, non_instantiated_test_option(Test))
+		;	Option = condition(Goal) ->
 			compile_test_step_aux_predicate(Test, '__condition', Goal, Condition)
 		;	Option = setup(Goal) ->
 			compile_test_step_aux_predicate(Test, '__setup', Goal, Setup)
 		;	Option = cleanup(Goal) ->
 			compile_test_step_aux_predicate(Test, '__cleanup', Goal, Cleanup)
-		;	Option = flaky ->
+		;	Option == flaky ->
 			Flaky = true
 		;	Option = note(Note) ->
 			NoteFlag = true,
