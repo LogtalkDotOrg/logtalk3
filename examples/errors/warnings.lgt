@@ -68,6 +68,9 @@
 	% redefinition of a Prolog built-in predicate
 	write(_).
 
+	% redefinition of a Prolog standard operator
+	:- op(123, xfx, @>).
+
 :- end_object.
 
 
@@ -446,6 +449,22 @@
 		bar(X).
 
 	bar(X) --> [X].
+
+:- end_object.
+
+
+
+:- object(conditionals).
+
+	% missing else part
+	a :-
+		(b -> c).
+
+	% cut in the test part
+	p :-
+		(! -> q; r).
+
+	b. c. q. r.
 
 :- end_object.
 

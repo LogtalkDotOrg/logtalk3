@@ -28,6 +28,7 @@
 		],
 		[
 			redefined_built_ins(warning),
+			redefined_operators(warning),
 			missing_directives(warning),
 			duplicated_directives(warning),
 			duplicated_clauses(warning),
@@ -46,7 +47,9 @@
 			steadfastness(warning),
 			naming(warning),
 			disjunctions(warning),
+			conditionals(warning),
 			catchall_catch(warning),
+			deprecated(warning),
 			report(on)
 		]
 	)

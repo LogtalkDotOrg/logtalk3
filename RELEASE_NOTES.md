@@ -123,7 +123,8 @@ descriptions and removing test files that are not samples found in the problem
 descriptions.
 
 * UPDATED: The `errors` example for the linter warnings on the use of unsound
-control constructs in grammar rules.
+control constructs in grammar rules, redefined operators, and suspicious tests
+in conditionals.
 
 * UPDATED: Several multi-threading example tests to use explicit assertions.
 
