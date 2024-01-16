@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:61:0,
+		version is 0:62:0,
 		author is 'Paulo Moura',
-		date is 2024-01-10,
+		date is 2024-01-16,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -777,23 +777,41 @@
 
 	% suspicious cuts
 
+	explain(suspicious_cut_in_if_then_else(_, _, _, _, _)) -->
+		[	'A cut in the if part of an if-then-else control construct is local to the if'-[], nl,
+			'part. It can thus be replaced by a call to the true/0 control construct. But'-[], nl,
+			'that means that the then part will always be called.'-[], nl, nl
+		].
+
 	explain(suspicious_cut_in_if_then_else(_, _, _, _, _, _)) -->
 		[	'A cut in the if part of an if-then-else control construct is local to the if'-[], nl,
 			'part. If the cut is meant to commit to the clause, add parenthesis around the'-[], nl,
-			'if-then-else control construct to fix the scope of the cut.'-[], nl, nl
+			'if-then-else control construct before the cut to fix its scope.'-[], nl, nl
+		].
+
+	explain(suspicious_cut_in_soft_cut(_, _, _, _, _)) -->
+		[	'A cut in the if part of a soft-cut control construct is local to the if'-[], nl,
+			'part. It can thus be replaced by a call to the true/0 control construct.'-[], nl,
+			'But that means that the then part will always be called and that there'-[], nl,
+			'are no choice-points in the if part to warrant using a soft-cut.'-[], nl, nl
 		].
 
 	explain(suspicious_cut_in_soft_cut(_, _, _, _, _, _)) -->
 		[	'A cut in the if part of a soft-cut control construct is local to the if'-[], nl,
 			'part. If the cut is meant to commit to the clause, add parenthesis around'-[], nl,
-			'the soft-cut control construct to fix the scope of the cut.'-[], nl, nl
+			'the soft-cut control construct before the cut to fix its scope.'-[], nl, nl
+		].
+
+	explain(suspicious_cut_in_disjunction(_, _, _, _, _)) -->
+		[	'A cut as the first argument of a disjunction control construct prevents'-[], nl,
+			'backtracking into the second argument, which will never be called.'-[], nl, nl
 		].
 
 	explain(suspicious_cut_in_disjunction(_, _, _, _, _, _)) -->
 		[	'A cut at the start of the first argument of a disjunction control construct'-[], nl,
 			'prevents backtracking into the second argument. If the cut is meant to commit'-[], nl,
-			'to the clause, add parenthesis around the disjunction control construct to'-[], nl,
-			'fix the scope of the cut.'-[], nl, nl
+			'to the clause, add parenthesis around the disjunction control construct before'-[], nl,
+			'the cut to fix its scope.'-[], nl, nl
 		].
 
 	% suspicious tests in if-then-else and soft-cut control constructs

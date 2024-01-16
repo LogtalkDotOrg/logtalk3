@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:130:0,
+		version is 1:131:0,
 		author is 'Paulo Moura',
-		date is 2024-01-10,
+		date is 2024-01-16,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -702,19 +702,33 @@
 
 	% suspicious cuts
 
-	message_tokens(suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, _IfThenElse)) -->
+	message_tokens(suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head)) -->
 		{functor(Head, Name, Arity)},
-		['Predicate ~q clause likely missing parenthesis around if-then-else'-[Name/Arity], nl],
+		['Suspicious cut in conditional test in clause for predicate: ~q'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, _SoftCut)) -->
+	message_tokens(suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, _If)) -->
 		{functor(Head, Name, Arity)},
-		['Predicate ~q clause likely missing parenthesis around soft-cut'-[Name/Arity], nl],
+		['Predicate ~q clause possibly missing parenthesis around if-then-else'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(suspicious_cut_in_disjunction(File, Lines, Type, Entity, Head, _Disjunction)) -->
+	message_tokens(suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head)) -->
 		{functor(Head, Name, Arity)},
-		['Predicate ~q clause likely missing parenthesis around disjunction'-[Name/Arity], nl],
+		['Suspicious cut in conditional test in clause for predicate: ~q'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, _If)) -->
+		{functor(Head, Name, Arity)},
+		['Predicate ~q clause possibly missing parenthesis around the soft-cut'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_cut_in_disjunction(File, Lines, Type, Entity, Head)) -->
+		{functor(Head, Name, Arity)},
+		['Suspicious cut as disjunction left goal in clause for predicate: ~q'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_cut_in_disjunction(File, Lines, Type, Entity, _Head, Disjunction)) -->
+		['Suspicious cut in disjunction left goal: ~q'-[Disjunction], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% suspicious tests in if-then-else and soft-cut control constructs

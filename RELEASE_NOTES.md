@@ -39,6 +39,8 @@ support calls where the argument is only bound at runtime.
 * IMPROVED: The implementation of the `threaded_engine_create/3` predicate
 to use a single mutex.
 
+* IMPROVED: Linter warnings for if-then-else and soft-cut control constructs.
+
 * FIXED: Compilation of `synchronized/1` directives in categories to not
 depend on the Prolog `with_mutex/2` built-in predicate implicitly creating
 mutexes.
