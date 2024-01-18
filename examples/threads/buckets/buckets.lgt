@@ -22,9 +22,9 @@
 :- object(buckets).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2017-12-13,
+		date is 2024-01-18,
 		comment is 'Example of atomic updates as described in the corresponding Rosetta Code task.'
 	]).
 
@@ -40,9 +40,7 @@
 	:- private([bucket/2, buckets/1, transfer/3]).
 	:- synchronized([bucket/2, buckets/1, transfer/3]).
 
-	% use the backend Prolog compiler random number generator as it is
-	% assumed to be stateless and thus allows us to avoid inconsistent
-	% state issues when the threads are canceled
+	% use the backend compiler random number generator, assumed to be stateless
 	:- uses(backend_random, [random/3]).
 
 	start :-
@@ -133,7 +131,7 @@
 	display_loop(N) :-
 		buckets(Values),
 		write(Values), nl,
-		thread_sleep(2),
+		thread_sleep(1),
 		M is N - 1,
 		display_loop(M).
 
