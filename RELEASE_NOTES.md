@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The implementation of the `threaded/1` built-in predicate to
+minimize possible leaks of individual thread results between calls that
+could cause unexpected failures.
+
 * CHANGED: Printing of linter warnings about to the use of unsound control
 constructs in grammar rules to be controlled by the `grammar_rules` flag
 instead of the `suspicious_calls` flag. Also changed the format of warning
