@@ -19,8 +19,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(functions2d),
-	logtalk_load(volumes2d),
-	logtalk_load(integration2d)
-)).
+:- initialization(
+	logtalk_load([
+		functions2d, volumes2d, integration2d
+	], [
+		optimize(on)
+	])
+).
