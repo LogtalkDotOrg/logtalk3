@@ -28,10 +28,6 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: The implementation of the `threaded/1` built-in predicate to
-minimize possible leaks of individual thread results between calls that
-could cause unexpected failures.
-
 * CHANGED: Printing of linter warnings about to the use of unsound control
 constructs in grammar rules to be controlled by the `grammar_rules` flag
 instead of the `suspicious_calls` flag. Also changed the format of warning
@@ -41,7 +37,9 @@ message.
 support calls where the argument is only bound at runtime.
 
 * IMPROVED: The implementation of the `threaded/1` built-in predicate to
-use a dedicated message queue per call.
+use a dedicated message queue per call. This prevents unlikely but still
+possible leaks of individual thread results between calls that could cause
+unexpected failures.
 
 * IMPROVED: The implementation of the `threaded_engine_create/3` predicate
 to use a single mutex.

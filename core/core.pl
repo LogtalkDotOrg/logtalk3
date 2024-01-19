@@ -27007,7 +27007,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_threaded_goal'(+callable, -list(var), +message_queue_identifier, -thread_identifier)
+% '$lgt_threaded_goal'(+callable, -list(var), +message_queue_identifier, --thread_identifier)
 %
 % implements the call to an individual goal in the threaded/1 built-in predicate
 %
@@ -27018,13 +27018,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_threaded_goal'(TGoal, TVars, Queue, Id) :-
 	term_variables(TGoal, TVars),
 	thread_create(
-		catch(
-			'$lgt_mt_threaded_call'(TGoal, TVars, Queue, Id),
-			Error,
-			catch(thread_send_message(Queue, '$lgt_result'(Id, exception(Error))), _, thread_detach(Id))
-		),
+		'$lgt_mt_threaded_call'(TGoal, TVars, Queue, Id),
 		Id,
-		[]
+		[at_exit('$lgt_mt_exit_handler'(Id, Queue))]
 	).
 
 
@@ -27041,6 +27037,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	call(TGoal) ->
 		thread_send_message(Queue, '$lgt_result'(Id, true(TVars)))
 	;	thread_send_message(Queue, '$lgt_result'(Id, false))
+	).
+
+
+
+% '$lgt_mt_exit_handler'(@thread_identifier, +message_queue_identifier)
+%
+% error handler for threaded/1 individual thread calls; an error generated
+% by the thread_send_message/2 call is interpreted as meaning that the
+% master/parent thread queue no longer exists leading to the detaching of
+% the worker thread
+
+'$lgt_mt_exit_handler'(Id, Queue) :-
+	(	thread_property(Id, status(exception(Error))) ->
+		catch(thread_send_message(Queue, '$lgt_result'(Id, exception(Error))), _, thread_detach(Id))
+	;	true
 	).
 
 
