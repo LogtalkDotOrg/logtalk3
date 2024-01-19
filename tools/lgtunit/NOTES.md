@@ -1706,7 +1706,7 @@ supported backends provide accurate line numbers.
 When using the Allure 2.24.0 or a later version, it's possible to generate
 single file reports. For example:
 
-	$ logtalk_allure_report -s	
+	$ logtalk_allure_report -s -t "My Amazing Tests Report"
 
 There are some caveats when generating Allure reports that users must be aware.
 First, Allure expects test names to be unique across different tests sets. If

@@ -1946,7 +1946,7 @@ generate single file reports. For example:
 
 ::
 
-   $ logtalk_allure_report -s  
+   $ logtalk_allure_report -s -t "My Amazing Tests Report"
 
 There are some caveats when generating Allure reports that users must be
 aware. First, Allure expects test names to be unique across different
