@@ -33,6 +33,10 @@ constructs in grammar rules to be controlled by the `grammar_rules` flag
 instead of the `suspicious_calls` flag. Also changed the format of warning
 message.
 
+* CHANGED: The implementation of the `threaded/1` built-in predicate to not
+abort execution when the argument is a disjunction of goals if one of them
+throws an exception.
+
 * IMPROVED: The implementation of the `threaded/1` built-in predicate to
 support calls where the argument is only bound at runtime.
 
@@ -134,6 +138,14 @@ control constructs in grammar rules, redefined operators, and suspicious tests
 in conditionals.
 
 * UPDATED: Several multi-threading example tests to use explicit assertions.
+
+* UPDATED: Simplified the `functions` and `mtbatch` multi-threading examples,
+accounting for the changes to the `threaded/1` built-in predicate.
+
+Tests
+-----
+
+* ADDED: Additional tests for the `threaded/1` built-in predicate.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

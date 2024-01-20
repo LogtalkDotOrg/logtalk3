@@ -43,14 +43,17 @@ blocks until either all goals succeed, one of the goals fail, or one of
 the goals generate an exception; the failure of one of the goals or an
 exception on the execution of one of the goals results in the
 termination of the remaining threads. The predicate call is true *iff*
-all goals are true.
+all goals are true. The predicate call fails if all goals fails. When
+one of the goals throw an exception, the predicate call re-throws that
+exception.
 
 When the argument is a disjunction of goals, a call to this predicate
-blocks until either one of the goals succeeds, all the goals fail, or
-one of the goals generate an exception; the success of one of the goals
-or an exception on the execution of one of the goals results in the
+blocks until either one of the goals succeeds or all the goals fail or
+throw exceptions; the success of one of the goals results in the
 termination of the remaining threads. The predicate call is true *iff*
-one of the goals is true.
+one of the goals is true. The predicate call fails if all goals fails.
+When no goal succeeds and one of the goals throws an exception, the
+predicate call re-throws that exception.
 
 When the predicate argument is neither a conjunction not a disjunction
 of goals, no threads are used. In this case, the predicate call is

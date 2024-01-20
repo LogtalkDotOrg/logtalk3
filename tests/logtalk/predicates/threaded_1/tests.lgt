@@ -23,30 +23,42 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2012-11-19,
+		date is 2024-01-20,
 		comment is 'Unit tests for the threaded/1 built-in predicate.'
 	]).
 
 	:- threaded.
 
-	throws(threaded_1_1, error(instantiation_error, logtalk(threaded(_), _))) :-
+	test(threaded_1_01, error(instantiation_error)) :-
 		{threaded(_)}.
 
-	throws(threaded_1_2, error(type_error(callable, 1), logtalk(threaded(_), _))) :-
+	test(threaded_1_02, error(type_error(callable, 1))) :-
 		{threaded(1)}.
 
-	succeeds(threaded_1_3) :-
-		{threaded((true, true))}.
+	test(threaded_1_03, true) :-
+		{threaded((true, true, true))}.
 
-	succeeds(threaded_1_4) :-
-		{threaded((fail; true))}.
+	test(threaded_1_04, true) :-
+		{threaded((fail; true; fail))}.
 
-	fails(threaded_1_5) :-
-		{threaded((true, fail))}.
+	test(threaded_1_05, false) :-
+		{threaded((true, fail, true))}.
 
-	fails(threaded_1_6) :-
-		{threaded((fail; fail))}.
+	test(threaded_1_06, false) :-
+		{threaded((fail; fail; fail))}.
+
+	test(threaded_1_07, ball(thing)) :-
+		{threaded((true, throw(thing), true))}.
+
+	test(threaded_1_08, true) :-
+		{threaded((throw(err); fail; true))}.
+
+	test(threaded_1_09, ball(_)) :-
+		{threaded((throw(err1); throw(err2); throw(err3)))}.
+
+	test(threaded_1_10, ball(_)) :-
+		{threaded((throw(err1); fail; fail))}.
 
 :- end_object.

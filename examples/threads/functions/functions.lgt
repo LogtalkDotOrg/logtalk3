@@ -271,9 +271,9 @@
 	implements(find_rootp)).
 
 	:- info([
-		version is 2:1:0,
+		version is 3:0:0,
 		author is 'Paulo Moura and Paulo Nunes',
-		date is 2008-02-08,
+		date is 2024-01-20,
 		comment is 'Multi-threading interface to root finding algorithms.'
 	]).
 
@@ -288,10 +288,10 @@
 
 	find_root(Function, A, B, Error, Zero, Algorithm) :-
 		threaded((
-				(catch(bisection::find_root(Function, A, B, Error, Zero), _, fail), Algorithm = bisection)
-			;	(catch(newton::find_root(Function, A, B, Error, Zero), _, fail), Algorithm = newton)
-			;	(catch(muller::find_root(Function, A, B, Error, Zero), _, fail), Algorithm = muller)
-			)).
+				(bisection::find_root(Function, A, B, Error, Zero), Algorithm = bisection)
+			;	(newton::find_root(Function, A, B, Error, Zero),    Algorithm = newton)
+			;	(muller::find_root(Function, A, B, Error, Zero),    Algorithm = muller)
+		)).
 
 	find_root(Function, A, B, Error, Zero) :-
 		find_root(Function, A, B, Error, Zero, _).

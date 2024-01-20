@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>threaded/1 &mdash; The Logtalk Handbook v3.74.0-b03 documentation</title>
+  <title>threaded/1 &mdash; The Logtalk Handbook v3.74.0-b04 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=ab1603d5"></script>
+        <script src="../../_static/documentation_options.js?v=609f9318"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -158,13 +158,16 @@ blocks until either all goals succeed, one of the goals fail, or one of
 the goals generate an exception; the failure of one of the goals or an
 exception on the execution of one of the goals results in the
 termination of the remaining threads. The predicate call is true <em>iff</em>
-all goals are true.</p>
+all goals are true. The predicate call fails if all goals fails. When
+one of the goals throw an exception, the predicate call re-throws that
+exception.</p>
 <p>When the argument is a disjunction of goals, a call to this predicate
-blocks until either one of the goals succeeds, all the goals fail, or
-one of the goals generate an exception; the success of one of the goals
-or an exception on the execution of one of the goals results in the
+blocks until either one of the goals succeeds or all the goals fail or
+throw exceptions; the success of one of the goals results in the
 termination of the remaining threads. The predicate call is true <em>iff</em>
-one of the goals is true.</p>
+one of the goals is true. The predicate call fails if all goals fails.
+When no goal succeeds and one of the goals throws an exception, the
+predicate call re-throws that exception.</p>
 <p>When the predicate argument is neither a conjunction not a disjunction
 of goals, no threads are used. In this case, the predicate call is
 equivalent to a <code class="docutils literal notranslate"><span class="pre">once/1</span></code> predicate call.</p>

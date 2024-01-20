@@ -22,9 +22,9 @@
 :- object(mtbatch).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2020-03-02,
+		date is 2024-01-20,
 		comment is 'Multi-threading benchmarks. Supports SWI-Prolog, XSB, and YAP.'
 	]).
 
@@ -550,9 +550,9 @@
 		Obj::initial_state(Initial),
 		repeat(N),
 			threaded((
-					catch(depth_first(MaxDepth)::solve(Obj, Initial, _), _, fail)
-				;	catch(hill_climbing(MaxDepth)::solve(Obj, Initial, _, _), _, fail)
-				;	catch(breadth_first(MaxDepth)::solve(Obj, Initial, _), _, fail)
+					depth_first(MaxDepth)::solve(Obj, Initial, _)
+				;	hill_climbing(MaxDepth)::solve(Obj, Initial, _, _)
+				;	breadth_first(MaxDepth)::solve(Obj, Initial, _)
 			)),
 		fail.
 	do_benchmark(cop_search(_, _, _, _), _).
