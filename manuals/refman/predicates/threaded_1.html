@@ -171,6 +171,8 @@ predicate call re-throws that exception.</p>
 <p>When the predicate argument is neither a conjunction not a disjunction
 of goals, no threads are used. In this case, the predicate call is
 equivalent to a <code class="docutils literal notranslate"><span class="pre">once/1</span></code> predicate call.</p>
+<p>A dedicated message queue is used per call of this predicate to collect
+the individual goal results.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This predicate requires a <a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> providing
