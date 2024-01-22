@@ -181,6 +181,8 @@ Examples
 
 * UPDATED: The `mtbatch` example to use the `format` and `os` libraries.
 
+* UPDATED: The `ebench` example for an upcoming LVM version.
+
 Installers and installation scripts
 -----------------------------------
 
