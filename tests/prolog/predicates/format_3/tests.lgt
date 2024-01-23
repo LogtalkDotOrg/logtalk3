@@ -336,15 +336,30 @@
 		{format(out, "~G", [0.39265e+3])},
 		^^text_output_assertion(out, '392.65', Assertion).
 
+	test(lgt_format_3_tab_atom_left_aligned_default_column_boundary, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~|~a~t~+", [abcd])},
+		^^text_output_assertion(out, 'abcd    ', Assertion).
+
 	test(lgt_format_3_tab_atom_left_aligned, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~|~a~t~8+", [abcd])},
 		^^text_output_assertion(out, 'abcd    ', Assertion).
 
+	test(lgt_format_3_tab_integer_left_aligned_default_column_boundary, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~|~d~t~+", [1234])},
+		^^text_output_assertion(out, '1234    ', Assertion).
+
 	test(lgt_format_3_tab_integer_left_aligned, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~|~d~t~8+", [1234])},
 		^^text_output_assertion(out, '1234    ', Assertion).
+
+	test(lgt_format_3_tab_atom_center_aligned_default_column_boundary, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~t~a~t~+", [abcd])},
+		^^text_output_assertion(out, '  abcd  ', Assertion).
 
 	test(lgt_format_3_tab_atom_center_aligned, true(Assertion)) :-
 		^^set_text_output(out, ''),
