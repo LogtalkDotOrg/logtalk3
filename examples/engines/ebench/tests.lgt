@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2024-01-22,
+		date is 2024-01-23,
 		comment is 'Unit tests for the "ebench" example.'
 	]).
 
@@ -60,13 +60,13 @@
 			Time
 		).
 
-	test(ebench_5, true, [note(create(loop)-seconds(Time)), condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
+	test(ebench_5, true, [note(create(loop)-seconds(Time))]) :-
 		benchmark(
 			(between(1,1000,_),threaded_engine_create(_,loop,_),fail;true),
 			Time
 		).
 
-	test(ebench_6, true, [note(destroy(loop)-seconds(Time)), condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
+	test(ebench_6, true, [note(destroy(loop)-seconds(Time))]) :-
 		benchmark(
 			(threaded_engine(Engine),threaded_engine_destroy(Engine),fail;true),
 			Time
