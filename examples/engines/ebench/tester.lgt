@@ -22,7 +22,7 @@
 :- if(current_logtalk_flag(engines, supported)).
 
 	:- if(current_logtalk_flag(prolog_dialect, lvm)).
-		:- set_prolog_flag(message_queue_default_size, 1200).
+		:- set_prolog_flag(message_queue_default_size, 2200).
 	:- endif.
 
 	:- initialization((

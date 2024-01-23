@@ -23,4 +23,4 @@ To load this example and for sample queries, please see the `SCRIPT.txt` file.
 This example provides benchmarking support for evaluating the performance of
 threaded engine creation and destroying. Currently it runs on ECLiPSe and
 SWI-Prolog. It should run also on YAP if and when this system threads bugs
-are get fixed.
+are fixed.
