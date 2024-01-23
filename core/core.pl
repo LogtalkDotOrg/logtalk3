@@ -3536,7 +3536,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 74, 0, b04)).
+'$lgt_version_data'(logtalk(3, 74, 0, b05)).
 
 
 
@@ -26992,8 +26992,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % implements the threaded/1 built-in predicate when the argument is a conjunction
 
 '$lgt_threaded_and'(Queue, MTGoals, Results) :-
-		message_queue_create(Queue),
-		catch((MTGoals, '$lgt_mt_threaded_and_exit'(Queue, Results)), '$lgt_terminated', fail).
+	message_queue_create(Queue),
+	call(MTGoals),
+	'$lgt_mt_threaded_and_exit'(Queue, Results).
 
 
 
@@ -27003,7 +27004,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_threaded_or'(Queue, MTGoals, Results) :-
 	message_queue_create(Queue),
-	catch((MTGoals, '$lgt_mt_threaded_or_exit'(Queue, Results)), '$lgt_terminated', fail).
+	call(MTGoals),
+	'$lgt_mt_threaded_or_exit'(Queue, Results).
 
 
 
@@ -27068,22 +27070,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_mt_threaded_and_exit'(exception(Error), Id, Queue, Results) :-
 	'$lgt_mt_threaded_and_record_result'(Results, Id, exception(Error)),
-	(	Error == '$lgt_terminated' ->
-		% messages can arrive out-of-order; if that's the case we need to keep looking
-		% for the thread result that lead to the termination of the other threads
-		'$lgt_mt_threaded_and_exit'(Queue, Results)
-	;	Error == '$lgt_aborted' ->
-		'$lgt_mt_threaded_call_cancel'(Queue, Results),
-		throw('$lgt_terminated')
-	;	'$lgt_mt_threaded_call_cancel'(Queue, Results),
-		throw(Error)
-	).
+	'$lgt_mt_threaded_call_cancel'(Queue, Results),
+	throw(Error).
 
 '$lgt_mt_threaded_and_exit'(true(TVars), Id, Queue, Results) :-
 	(	'$lgt_mt_threaded_and_add_result'(Results, Id, TVars, Continue) ->
 		(	Continue == false ->
+			% all thread goals succeeded
 			'$lgt_mt_threaded_call_join'(Results, Queue)
-		;	'$lgt_mt_threaded_and_exit'(Queue, Results)
+		;	% some thread goal results are still pending
+			'$lgt_mt_threaded_and_exit'(Queue, Results)
 		)
 	;	% adding a successful result can fail if the individual thread goals
 		% are not independent (i.e. they share variables with the same or
@@ -27098,7 +27094,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_mt_threaded_and_add_result'(+list, +thread_identifier, @callable, -atom)
+% '$lgt_mt_threaded_and_add_result'(+list, +thread_identifier, +list, -atom)
 %
 % adds the result of proving a goal and checks if all other goals have succeeded
 
@@ -27145,18 +27141,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_mt_threaded_or_exit'(exception(Error), Id, Queue, Results) :-
 	'$lgt_mt_threaded_or_record_exception'(Results, Id, exception(Error), Continue),
-	(	Error == '$lgt_terminated' ->
-		% messages can arrive out-of-order; if that's the case we need to keep looking
-		% for the thread result that lead to the termination of the other threads
-		'$lgt_mt_threaded_or_exit'(Queue, Results)
-	;	Error == '$lgt_aborted' ->
-		'$lgt_mt_threaded_call_cancel'(Queue, Results),
-		throw('$lgt_terminated')
-	;	Continue == true ->
+	(	Continue == true ->
 		% some thread goal results are still pending
 		'$lgt_mt_threaded_or_exit'(Queue, Results)
 	;	% no thread goal succeeded and at least one thread resulted in an exception
-		'$lgt_mt_threaded_call_cancel'(Queue, Results),
+		'$lgt_mt_threaded_call_join'(Results, Queue),
 		throw(Error)
 	).
 
@@ -27167,6 +27156,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_mt_threaded_or_exit'(false, Id, Queue, Results) :-
 	'$lgt_mt_threaded_or_record_failure'(Results, Id, Continue),
 	(	Continue == true ->
+		% some thread goal results are still pending
 		'$lgt_mt_threaded_or_exit'(Queue, Results)
 	;	% all goals terminated
 		'$lgt_mt_threaded_call_join'(Results, Queue),
