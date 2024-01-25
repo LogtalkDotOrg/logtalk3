@@ -73,6 +73,7 @@
 		format(loader),
 		union_find(loader),
 		mutations(loader),
+		listing(loader),
 		cloning,
 		counters,
 		streamvars
