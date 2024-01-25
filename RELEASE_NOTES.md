@@ -142,6 +142,9 @@ in conditionals.
 * UPDATED: Simplified the `functions` and `mtbatch` multi-threading examples,
 accounting for the changes to the `threaded/1` built-in predicate.
 
+* FIXED: The `emetas` example definition of the `best_of/3` predicate to
+destroy the threaded engine after computing the answer.
+
 Tests
 -----
 
