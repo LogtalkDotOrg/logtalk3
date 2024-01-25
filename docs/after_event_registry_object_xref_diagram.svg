@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-262.75 764,-262.75 764,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object after_event_registry</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;01&#45;25, 19:54</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;01&#45;25, 22:52</text>
 <g id="clust1" class="cluster">
 <title>cluster_after_event_registry_object</title>
 <g id="a_clust1"><a xlink:title="after_event_registry">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 740,-49.75 740,-49.75 746,-49.75 752,-55.75 752,-61.75 752,-61.75 752,-238.75 752,-238.75 752,-244.75 746,-250.75 740,-250.75 740,-250.75 20,-250.75 20,-250.75 14,-250.75 8,-244.75 8,-238.75 8,-238.75 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt">
 <text text-anchor="start" x="20" y="-233.25" font-family="Monospace" font-size="10.00" fill="dimgray">after_event_registry</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- monitor/1 -->
 <g id="node1" class="node">
 <title>monitor/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L33">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L33">
 <polygon fill="cornsilk" stroke="black" points="738,-95.75 652,-95.75 652,-59.75 738,-59.75 738,-95.75"/>
 <text text-anchor="start" x="659.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="664.62" y="-77.8" font-family="Monospace" font-size="11.00">monitor/1</text>
@@ -41,7 +41,7 @@
 <!-- monitors/1 -->
 <g id="node2" class="node">
 <title>monitors/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L36">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L36">
 <polygon fill="cornsilk" stroke="black" points="741.5,-213.5 648.5,-213.5 648.5,-177.5 741.5,-177.5 741.5,-213.5"/>
 <text text-anchor="start" x="656.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="661.25" y="-195.55" font-family="Monospace" font-size="11.00">monitors/1</text>
@@ -55,12 +55,12 @@
 <!-- monitors/1&#45;&gt;monitor/1 -->
 <g id="edge1" class="edge">
 <title>monitors/1&#45;&gt;monitor/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L36" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M695,-177.17C695,-158.76 695,-129.35 695,-107.46"/>
 <polygon fill="black" stroke="black" points="698.5,-107.71 695,-97.71 691.5,-107.71 698.5,-107.71"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L36">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L36">
 <text text-anchor="start" x="695" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- monitored/1 -->
 <g id="node3" class="node">
 <title>monitored/1</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L42">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L42" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L42">
 <polygon fill="cornsilk" stroke="black" points="630,-213.5 530,-213.5 530,-177.5 630,-177.5 630,-213.5"/>
 <text text-anchor="start" x="537.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="542.88" y="-195.55" font-family="Monospace" font-size="11.00">monitored/1</text>
@@ -82,7 +82,7 @@
 <!-- monitor/4 -->
 <g id="node4" class="node">
 <title>monitor/4</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L48">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L48">
 <polygon fill="cornsilk" stroke="black" points="512,-213.5 426,-213.5 426,-177.5 512,-177.5 512,-213.5"/>
 <text text-anchor="start" x="433.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="438.62" y="-195.55" font-family="Monospace" font-size="11.00">monitor/4</text>
@@ -96,7 +96,7 @@
 <!-- set_monitor/4 -->
 <g id="node5" class="node">
 <title>set_monitor/4</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L51">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L51">
 <polygon fill="cornsilk" stroke="black" points="407.5,-213.5 294.5,-213.5 294.5,-177.5 407.5,-177.5 407.5,-213.5"/>
 <text text-anchor="start" x="302.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="307.12" y="-195.55" font-family="Monospace" font-size="11.00">set_monitor/4</text>
@@ -110,7 +110,7 @@
 <!-- del_monitors/4 -->
 <g id="node6" class="node">
 <title>del_monitors/4</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L54">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L54">
 <polygon fill="cornsilk" stroke="black" points="276,-213.5 156,-213.5 156,-177.5 276,-177.5 276,-213.5"/>
 <text text-anchor="start" x="163.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="168.75" y="-195.55" font-family="Monospace" font-size="11.00">del_monitors/4</text>
@@ -124,7 +124,7 @@
 <!-- del_monitors/0 -->
 <g id="node7" class="node">
 <title>del_monitors/0</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/library/events/after_event_registry.lgt#L57">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L57" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/library/events/after_event_registry.lgt#L57">
 <polygon fill="cornsilk" stroke="black" points="138,-213.5 18,-213.5 18,-177.5 138,-177.5 138,-213.5"/>
 <text text-anchor="start" x="25.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="30.75" y="-195.55" font-family="Monospace" font-size="11.00">del_monitors/0</text>

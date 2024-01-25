@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-262.75 410,-262.75 410,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object assertions/1</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;01&#45;25, 19:54</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;01&#45;25, 22:52</text>
 <g id="clust1" class="cluster">
 <title>cluster_assertions_1_object</title>
 <g id="a_clust1"><a xlink:title="assertions(Mode)">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 386,-49.75 386,-49.75 392,-49.75 398,-55.75 398,-61.75 398,-61.75 398,-238.75 398,-238.75 398,-244.75 392,-250.75 386,-250.75 386,-250.75 20,-250.75 20,-250.75 14,-250.75 8,-244.75 8,-238.75 8,-238.75 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt">
 <text text-anchor="start" x="20" y="-233.25" font-family="Monospace" font-size="10.00" fill="dimgray">assertions(Mode)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- assertion/1 -->
 <g id="node1" class="node">
 <title>assertion/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L33">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L33">
 <polygon fill="springgreen" stroke="black" points="388,-213.5 288,-213.5 288,-177.5 388,-177.5 388,-213.5"/>
 <text text-anchor="start" x="295.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="300.88" y="-195.55" font-family="Monospace" font-size="11.00">assertion/1</text>
@@ -55,12 +55,12 @@
 <!-- assertion/1&#45;&gt;logtalk::print_message/3 -->
 <g id="edge1" class="edge">
 <title>assertion/1&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L55" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L55" xlink:title="calls">
 <path fill="none" stroke="black" d="M328.12,-177.17C317.38,-158.33 300.07,-127.98 287.51,-105.96"/>
 <polygon fill="black" stroke="black" points="290.69,-104.47 282.7,-97.51 284.61,-107.93 290.69,-104.47"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L55">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L55">
 <text text-anchor="start" x="306" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- assertion/2 -->
 <g id="node2" class="node">
 <title>assertion/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L41">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L41">
 <polygon fill="springgreen" stroke="black" points="270,-213.5 170,-213.5 170,-177.5 270,-177.5 270,-213.5"/>
 <text text-anchor="start" x="177.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="182.88" y="-195.55" font-family="Monospace" font-size="11.00">assertion/2</text>
@@ -82,12 +82,12 @@
 <!-- assertion/2&#45;&gt;logtalk::print_message/3 -->
 <g id="edge2" class="edge">
 <title>assertion/2&#45;&gt;logtalk::print_message/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L61" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L61" xlink:title="calls">
 <path fill="none" stroke="black" d="M227.78,-177.17C236.17,-158.5 249.64,-128.53 259.51,-106.55"/>
 <polygon fill="black" stroke="black" points="262.64,-108.13 263.54,-97.58 256.25,-105.27 262.64,-108.13"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L61">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L61">
 <text text-anchor="start" x="247" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -95,7 +95,7 @@
 <!-- goal_expansion/2 -->
 <g id="node3" class="node">
 <title>goal_expansion/2</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9992716d05472f4882940825804ad0124c5bd6f0/tools/assertions/assertions.lgt#L69">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/643d451e35eb5192a77aba683d2a64be3479d144/tools/assertions/assertions.lgt#L69">
 <polygon fill="cornsilk" stroke="black" points="152,-213.5 18,-213.5 18,-177.5 152,-177.5 152,-213.5"/>
 <text text-anchor="start" x="25.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31" y="-195.55" font-family="Monospace" font-size="11.00">goal_expansion/2</text>
