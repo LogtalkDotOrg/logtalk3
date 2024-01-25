@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 6.3.0 and later versions
-%  Last updated on December 2, 2023
+%  Last updated on January 25, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -267,8 +267,16 @@
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
-'$lgt_prolog_feature'(engines, unsupported).
-'$lgt_prolog_feature'(threads, unsupported).
+'$lgt_prolog_feature'(engines, Engines) :-
+	(	predicate_property(message_queue_create(_, _), built_in) ->
+		Engines = supported
+	;	Engines = unsupported
+	).
+'$lgt_prolog_feature'(threads, Threads) :-
+	(	predicate_property(message_queue_create(_, _), built_in) ->
+		Threads = supported
+	;	Threads = unsupported
+	).
 '$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, Coinduction) :-
 	(	catch(current_prolog_flag(unify_applies_occurs_check, true), _, fail) ->

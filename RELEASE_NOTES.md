@@ -65,6 +65,9 @@ callable would be delegated to the backend.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The LVM adapter file to set the `engines` and `threads` flags
+depending on the availability of the required built-in predicates.
+
 * FIXED: The SWI-Prolog `swihooks.pl` file to allow calls to the `threaded/1`
 built-in predicate in `user` to actually use multi-threading by preventing
 module-qualification of the predicate argument.
