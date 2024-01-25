@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2024-01-25,
 		comment is 'Unit tests for the threaded/1 built-in predicate.'
@@ -66,5 +66,14 @@
 
 	test(threaded_1_12, deterministic((X==1; X==2; X==3))) :-
 		{test_object::p((a(X); b(X); c(X)))}.
+
+	test(threaded_1_13, deterministic(s(A,B,C,D) == s(1,2,3,4))) :-
+		{test_object::p((a(A,B), b(B,C), c(C,D)))}.
+
+	test(threaded_1_14, deterministic(s(A,B,C,D) == s(1,2,3,4))) :-
+		{test_object::p((a(A,B), test_object::p((b(B,C), c(C,D)))))}.
+
+	test(threaded_1_15, deterministic((X==1; X==2; X==3))) :-
+		{test_object::p((test_object::p((a(X); b(X))); c(X)))}.
 
 :- end_object.
