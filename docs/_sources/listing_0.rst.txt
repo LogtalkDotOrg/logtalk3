@@ -1,0 +1,110 @@
+.. index:: listing
+.. _listing/0:
+
+.. rst-class:: right
+
+**category**
+
+``listing``
+===========
+
+Listing predicates.
+
+| **Availability:** 
+|    ``logtalk_load(listing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2024-01-25
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: listing/0
+.. _listing/0::listing/0:
+
+``listing/0``
+^^^^^^^^^^^^^
+
+Lists all clauses of all visible dynamic predicates to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``listing`` - ``one``
+
+
+------------
+
+.. index:: listing/1
+.. _listing/0::listing/1:
+
+``listing/1``
+^^^^^^^^^^^^^
+
+Lists all clauses of a visible dynamic predicate to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``listing(Predicate)``
+| **Mode and number of proofs:**
+|    ``listing(+predicate_indicator)`` - ``one``
+
+
+------------
+
+.. index:: portray_clause/1
+.. _listing/0::portray_clause/1:
+
+``portray_clause/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Pretty prints a clause to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``portray_clause(Clause)``
+| **Mode and number of proofs:**
+|    ``portray_clause(+clause)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
