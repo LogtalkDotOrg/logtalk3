@@ -26736,7 +26736,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	'$lgt_current_object_'(This, ThisQueue, _, _, _, _, _, _, _, _, _),
 	message_queue_create(TermQueue),
-	thread_create('$lgt_mt_engine_goal'(ThisQueue, TermQueue, AnswerTemplate, TGoal, Engine), Id, []),
+	thread_create('$lgt_mt_engine_goal'(ThisQueue, TermQueue, AnswerTemplate, TGoal, Engine, Id), Id, []),
 	assertz('$lgt_current_engine_'(This, Engine, TermQueue, Id)).
 
 
@@ -26749,8 +26749,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % accessing the '$lgt_current_engine_'/4 dynamic predicate that can result in
 % unexpected errors
 
-'$lgt_mt_engine_goal'(ThisQueue, TermQueue, Answer, Goal, Engine) :-
-	thread_self(Id),
+'$lgt_mt_engine_goal'(ThisQueue, TermQueue, Answer, Goal, Engine, Id) :-
 	thread_send_message(ThisQueue, '$lgt_engine_term_queue'(Engine, TermQueue, Id)),
 	(	setup_call_cleanup(true, catch(Goal, Error, true), Deterministic = true),
 		(	var(Error) ->
@@ -26763,7 +26762,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				thread_send_message(ThisQueue, '$lgt_answer'(Engine, Id, Answer, final))
 			)
 		;	Error == '$lgt_aborted' ->
-			% we are destrying the engine
+			% we are destroying the engine
 			true
 		;	% engine goal error
 			thread_send_message(ThisQueue, '$lgt_answer'(Engine, Id, _, error(Error)))
