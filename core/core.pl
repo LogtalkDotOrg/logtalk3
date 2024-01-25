@@ -3536,7 +3536,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 74, 0, b05)).
+'$lgt_version_data'(logtalk(3, 74, 0, b06)).
 
 
 
@@ -14489,8 +14489,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	var(Goals),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, _, _, _, _, _, MetaVars, _, _, Mode, _, _, _),
-	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Pred),
-	(	'$lgt_member_var'(Pred, MetaVars) ->
+	'$lgt_check_for_meta_predicate_directive'(Mode, Head, Goals),
+	(	'$lgt_member_var'(Goals, MetaVars) ->
 		TGoal = '$lgt_threaded'(Goals, HeadExCtx, runtime)
 	;	TGoal = '$lgt_threaded'(Goals, HeadExCtx, local)
 	),

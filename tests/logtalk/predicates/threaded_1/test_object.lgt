@@ -19,20 +19,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(threads, supported)).
+:- object(test_object).
 
-	:- initialization((
-		set_logtalk_flag(report, warnings),
-		logtalk_load(lgtunit(loader)),
-		logtalk_load(test_object),
-		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
-	)).
+	:- threaded.
 
-:- else.
+	:- public(p/1).
+	:- meta_predicate(p(::)).
 
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
+	p(A) :-
+		threaded(A).
 
-:- endif.
+:- end_object.
+
+
+a(1). a(11). a(111).
+
+b(2). b(22). b(222).
+
+c(3). c(33). c(333).
