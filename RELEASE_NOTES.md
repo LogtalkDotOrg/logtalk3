@@ -140,7 +140,11 @@ descriptions.
 control constructs in grammar rules, redefined operators, and suspicious tests
 in conditionals.
 
+* UPDATED: The `ebench` example for an upcoming LVM version.
+
 * UPDATED: Several multi-threading example tests to use explicit assertions.
+
+* UPDATED: The `mtbatch` example to use the `format` and `os` libraries.
 
 * UPDATED: Simplified the `functions` and `mtbatch` multi-threading examples,
 accounting for the changes to the `threaded/1` built-in predicate.
@@ -184,13 +188,6 @@ extensions.
 built-in predicate.
 
 * FIXED: Vim support highlight of `0'Char` and `0'\Char` numbers.
-
-Examples
---------
-
-* UPDATED: The `mtbatch` example to use the `format` and `os` libraries.
-
-* UPDATED: The `ebench` example for an upcoming LVM version.
 
 Installers and installation scripts
 -----------------------------------
