@@ -280,7 +280,28 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">listing(+predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">listing(+predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Predicate is not ground:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Predicate is ground but not a predicate indicator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(predicate_indicator,Predicate)</span></code></div>
+</div>
+<div class="line">Predicate is a predicate indicator but not a visible predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(predicate,Predicate)</span></code></div>
+</div>
+<div class="line">Predicate is visible but not a dynamic predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(access,predicate,Predicate)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

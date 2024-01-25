@@ -35,10 +35,16 @@
 	]).
 
 	:- public(listing/1).
-	:- mode(listing(+predicate_indicator), one).
+	:- mode(listing(+predicate_indicator), one_or_error).
 	:- info(listing/1, [
 		comment is 'Lists all clauses of a visible dynamic predicate to the current output stream.',
-		argnames is ['Predicate']
+		argnames is ['Predicate'],
+		exceptions is [
+			'Predicate is not ground' - instantiation_error,
+			'Predicate is ground but not a predicate indicator' - type_error(predicate_indicator, 'Predicate'),
+			'Predicate is a predicate indicator but not a visible predicate' - existence_error(predicate, 'Predicate'),
+			'Predicate is visible but not a dynamic predicate' - permission_error(access, predicate, 'Predicate')
+		]
 	]).
 
 	:- public(portray_clause/1).
@@ -66,17 +72,25 @@
 		\+ (atom(Functor), integer(Arity), Arity >= 0),
 		type_error(predicate_indicator, Functor/Arity).
 	listing(Functor/Arity) :-
+		\+ ::current_predicate(Functor/Arity),
+		existence_error(predicate, Functor/Arity).
+	listing(Functor/Arity) :-
 		::current_predicate(Functor/Arity),
 		functor(Head, Functor, Arity),
-		once(::predicate_property(Head, (dynamic))),
-		listing_clauses(Head, Functor, Arity).
+		(	::predicate_property(Head, (dynamic)) ->
+			listing_clauses(Head, Functor, Arity)
+		;	permission_error(access, predicate, Functor/Arity)
+		).
 
 	listing_clauses(Head, _, _) :-
 		::clause(Head, Body),
 		::portray_clause((Head :- Body)),
 		fail.
-	listing_clauses(_, _, _) :-
-		nl.
+	listing_clauses(Head, _, _) :-
+		(	::clause(Head, _) ->
+			nl
+		;	true
+		).
 
 	portray_clause(Clause) :-
 		var(Clause),

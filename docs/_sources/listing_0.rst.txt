@@ -69,7 +69,17 @@ Lists all clauses of a visible dynamic predicate to the current output stream.
 | **Template:**
 |    ``listing(Predicate)``
 | **Mode and number of proofs:**
-|    ``listing(+predicate_indicator)`` - ``one``
+|    ``listing(+predicate_indicator)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Predicate is not ground:
+|        ``instantiation_error``
+|    Predicate is ground but not a predicate indicator:
+|        ``type_error(predicate_indicator,Predicate)``
+|    Predicate is a predicate indicator but not a visible predicate:
+|        ``existence_error(predicate,Predicate)``
+|    Predicate is visible but not a dynamic predicate:
+|        ``permission_error(access,predicate,Predicate)``
 
 
 ------------

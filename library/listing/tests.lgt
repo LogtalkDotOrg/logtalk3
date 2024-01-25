@@ -19,6 +19,29 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- object(listing_test_object,
+	imports(listing)).
+
+	:- public(p/1).
+	p(7).
+
+	:- protected(a/1).
+	:- dynamic(a/1).
+	a(1). a(2). a(3).
+
+	:- private(b/1).
+	:- dynamic(b/1).
+	b(4). b(5).
+
+	:- private(c/1).
+	:- dynamic(c/1).
+
+	:- dynamic(d/1).
+	d(1).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
@@ -33,25 +56,44 @@
 
 	cover(listing).
 
-	setup :-
-		create_object(
-			listing_test_object,
-			[imports(listing)],
-			[protected(a/1), dynamic(a/1), private(b/1), dynamic(b/1)],
-			[a(1), a(2), a(3), b(4), b(5)]
-		).
+	% listing/0 tests
 
-	test(listing_0, true(Assertion)) :-
+	test(listing_0_01, true(Assertion)) :-
 		^^set_text_output(''),
 		listing_test_object::listing,
 		^^text_output_assertion('a(1).\na(2).\na(3).\n\nb(4).\nb(5).\n\n', Assertion).
 
-	test(listing_1, true(Assertion)) :-
+	% listing/1 tests
+
+	test(listing_1_01, error(instantiation_error)) :-
+		listing_test_object::listing(_).
+
+	test(listing_1_02, error(instantiation_error)) :-
+		listing_test_object::listing(a/_).
+
+	test(listing_1_03, error(instantiation_error)) :-
+		listing_test_object::listing(_/1).
+
+	test(listing_1_04, error(type_error(predicate_indicator,a))) :-
+		listing_test_object::listing(a).
+
+	test(listing_1_05, error(existence_error(predicate,r/2))) :-
+		listing_test_object::listing(r/2).
+
+	test(listing_1_06, error(existence_error(predicate,d/1))) :-
+		listing_test_object::listing(d/1).
+
+	test(listing_1_07, error(permission_error(access,predicate,p/1))) :-
+		listing_test_object::listing(p/1).
+
+	test(listing_1_08, true(Assertion)) :-
 		^^set_text_output(''),
 		listing_test_object::listing(a/1),
 		^^text_output_assertion('a(1).\na(2).\na(3).\n\n', Assertion).
 
-	cleanup :-
-		abolish_object(listing_test_object).
+	test(listing_1_09, true(Assertion)) :-
+		^^set_text_output(''),
+		listing_test_object::listing(c/1),
+		^^text_output_assertion('', Assertion).
 
 :- end_object.
