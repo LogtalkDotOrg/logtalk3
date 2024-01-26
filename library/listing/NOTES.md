@@ -21,7 +21,7 @@ ________________________________________________________________________
 `listing`
 =========
 
-This library provides support for listing object dynamic predicates clauses.
+This library provides support for listing object dynamic predicate clauses.
 The predicates must (also) be declared using a scope directive to make them
 visible to the listing predicates.
 
@@ -80,3 +80,7 @@ write:
 		...
 
 	:- end_object.
+
+The main predicate, `listing/1`, accepts as argument a predicate indicator,
+a non-terminal indicator, or a clause head template (to list only clauses
+with a matching head).

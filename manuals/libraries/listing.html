@@ -175,7 +175,7 @@
              
   <section id="listing">
 <span id="library-listing"></span><h1><code class="docutils literal notranslate"><span class="pre">listing</span></code><a class="headerlink" href="#listing" title="Link to this heading"></a></h1>
-<p>This library provides support for listing object dynamic predicates
+<p>This library provides support for listing object dynamic predicate
 clauses. The predicates must (also) be declared using a scope directive
 to make them visible to the listing predicates.</p>
 <section id="api-documentation">
@@ -230,6 +230,9 @@ provides <code class="docutils literal notranslate"><span class="pre">portray_cl
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>The main predicate, <code class="docutils literal notranslate"><span class="pre">listing/1</span></code>, accepts as argument a predicate
+indicator, a non-terminal indicator, or a clause head template (to list
+only clauses with a matching head).</p>
 </section>
 </section>
 
