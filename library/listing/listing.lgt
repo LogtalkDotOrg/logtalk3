@@ -70,7 +70,13 @@
 	listing.
 
 	listing(Predicate) :-
-		\+ ground(Predicate),
+		var(Predicate),
+		instantiation_error.
+	listing(Functor/Arity) :-
+		\+ ground(Functor/Arity),
+		instantiation_error.
+	listing(Functor//Arity) :-
+		\+ ground(Functor//Arity),
 		instantiation_error.
 	listing(Predicate) :-
 		\+ callable(Predicate),

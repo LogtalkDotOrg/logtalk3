@@ -233,6 +233,17 @@ provides <code class="docutils literal notranslate"><span class="pre">portray_cl
 <p>The main predicate, <code class="docutils literal notranslate"><span class="pre">listing/1</span></code>, accepts as argument a predicate
 indicator, a non-terminal indicator, or a clause head template (to list
 only clauses with a matching head).</p>
+<p>This library is often useful as a debugging helper. For example,
+assuming that the we want to list dynamic predicate clauses for an
+object <code class="docutils literal notranslate"><span class="pre">data</span></code> compiled (or created) with the <code class="docutils literal notranslate"><span class="pre">complements</span></code> flag set
+to <code class="docutils literal notranslate"><span class="pre">allow</span></code>, we can hot patch it to add the <code class="docutils literal notranslate"><span class="pre">listing</span></code> category:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">create_category</span>(patch, [extends(listing),complements(data)], [], []).
+yes
+
+| <span class="o">?-</span> data<span class="o">::</span>listing.
+...
+</pre></div>
+</div>
 </section>
 </section>
 

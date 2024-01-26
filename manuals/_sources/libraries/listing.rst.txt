@@ -72,3 +72,16 @@ provides ``portray_clause/1`` as a built-in predicate, we can write:
 The main predicate, ``listing/1``, accepts as argument a predicate
 indicator, a non-terminal indicator, or a clause head template (to list
 only clauses with a matching head).
+
+This library is often useful as a debugging helper. For example,
+assuming that the we want to list dynamic predicate clauses for an
+object ``data`` compiled (or created) with the ``complements`` flag set
+to ``allow``, we can hot patch it to add the ``listing`` category:
+
+::
+
+   | ?- create_category(patch, [extends(listing),complements(data)], [], []).
+   yes
+
+   | ?- data::listing.
+   ...
