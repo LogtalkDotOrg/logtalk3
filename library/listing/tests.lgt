@@ -25,6 +25,9 @@
 	:- public(p/1).
 	p(7).
 
+	:- public(q//1).
+	q(A) --> [A].
+
 	:- protected(a/1).
 	:- dynamic(a/1).
 	a(1). a(2). a(3).
@@ -39,6 +42,14 @@
 	:- dynamic(d/1).
 	d(1).
 
+	:- private(nt//0).
+	:- dynamic(nt//0).
+	nt --> [n].
+	nt --> [t].
+
+	:- dynamic(l//0).
+	l --> [].
+
 :- end_object.
 
 
@@ -48,7 +59,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-01-25,
+		date is 2024-01-26,
 		comment is 'Unit tests for the "listing" library.'
 	]).
 
@@ -58,10 +69,31 @@
 
 	% listing/0 tests
 
-	test(listing_0_01, true(Assertion)) :-
-		^^set_text_output(''),
-		listing_test_object::listing,
-		^^text_output_assertion('a(1).\na(2).\na(3).\n\nb(4).\nb(5).\n\n', Assertion).
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(listing_0_01, true(sub_atom(Contents, 0, _, _, 'a(1).\r\na(2).\r\na(3).\r\n\r\nb(4).\r\nb(5).\r\n\r\n'))) :-
+			^^set_text_output(''),
+			listing_test_object::listing,
+			^^text_output_contents(Chars),
+			atom_chars(Contents, Chars).
+
+	:- else.
+
+		test(listing_0_01, true(sub_atom(Contents, 0, _, _, 'a(1).\na(2).\na(3).\n\nb(4).\nb(5).\n\n'))) :-
+			^^set_text_output(''),
+			listing_test_object::listing,
+			^^text_output_contents(Chars),
+			atom_chars(Contents, Chars).
+
+	:- endif.
 
 	% listing/1 tests
 
@@ -74,24 +106,58 @@
 	test(listing_1_03, error(instantiation_error)) :-
 		listing_test_object::listing(_/1).
 
-	test(listing_1_04, error(type_error(predicate_indicator,a))) :-
+	test(listing_1_04, error(instantiation_error)) :-
+		listing_test_object::listing(a//_).
+
+	test(listing_1_05, error(instantiation_error)) :-
+		listing_test_object::listing(_//1).
+
+	test(listing_1_06, error(type_error(predicate_indicator,a))) :-
 		listing_test_object::listing(a).
 
-	test(listing_1_05, error(existence_error(predicate,r/2))) :-
+	test(listing_1_07, error(existence_error(predicate,r/2))) :-
 		listing_test_object::listing(r/2).
 
-	test(listing_1_06, error(existence_error(predicate,d/1))) :-
+	test(listing_1_08, error(existence_error(non_terminal,s//2))) :-
+		listing_test_object::listing(s//2).
+
+	test(listing_1_09, error(existence_error(predicate,d/1))) :-
 		listing_test_object::listing(d/1).
 
-	test(listing_1_07, error(permission_error(access,predicate,p/1))) :-
+	test(listing_1_10, error(existence_error(non_terminal,l//0))) :-
+		listing_test_object::listing(l//0).
+
+	test(listing_1_11, error(permission_error(access,predicate,p/1))) :-
 		listing_test_object::listing(p/1).
 
-	test(listing_1_08, true(Assertion)) :-
-		^^set_text_output(''),
-		listing_test_object::listing(a/1),
-		^^text_output_assertion('a(1).\na(2).\na(3).\n\n', Assertion).
+	test(listing_1_12, error(permission_error(access,non_terminal,q//1))) :-
+		listing_test_object::listing(q//1).
 
-	test(listing_1_09, true(Assertion)) :-
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(listing_1_13, true(Assertion)) :-
+			^^set_text_output(''),
+			listing_test_object::listing(a/1),
+			^^text_output_assertion('a(1).\r\na(2).\r\na(3).\r\n\r\n', Assertion).
+
+	:- else.
+
+		test(listing_1_13, true(Assertion)) :-
+			^^set_text_output(''),
+			listing_test_object::listing(a/1),
+			^^text_output_assertion('a(1).\na(2).\na(3).\n\n', Assertion).
+
+	:- endif.
+
+	test(listing_1_14, true(Assertion)) :-
 		^^set_text_output(''),
 		listing_test_object::listing(c/1),
 		^^text_output_assertion('', Assertion).

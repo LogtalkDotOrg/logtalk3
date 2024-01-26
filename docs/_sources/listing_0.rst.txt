@@ -15,7 +15,7 @@ Listing predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2024-01-25
+| **Date:** 2024-01-26
 
 | **Compilation flags:**
 |    ``static``
@@ -61,25 +61,32 @@ Lists all clauses of all visible dynamic predicates to the current output stream
 ``listing/1``
 ^^^^^^^^^^^^^
 
-Lists all clauses of a visible dynamic predicate to the current output stream.
+Lists all clauses of a visible dynamic predicate or non-terminal to the current output stream.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``listing(Predicate)``
+|    ``listing(Spec)``
 | **Mode and number of proofs:**
 |    ``listing(+predicate_indicator)`` - ``one_or_error``
+|    ``listing(+non_terminal_indicator)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Predicate is not ground:
+|    ``Spec`` is not ground:
 |        ``instantiation_error``
-|    Predicate is ground but not a predicate indicator:
-|        ``type_error(predicate_indicator,Predicate)``
-|    Predicate is a predicate indicator but not a visible predicate:
-|        ``existence_error(predicate,Predicate)``
-|    Predicate is visible but not a dynamic predicate:
-|        ``permission_error(access,predicate,Predicate)``
+|    ``Spec`` is ground but not a valid predicate indicator:
+|        ``type_error(predicate_indicator,Spec)``
+|    ``Spec`` is ground but not a valid non-terminal indicator:
+|        ``type_error(non_terminal_indicator,Spec)``
+|    ``Spec`` is a predicate indicator but not a visible predicate:
+|        ``existence_error(predicate,Spec)``
+|    ``Spec`` is a non-terminal indicator but not a visible non-terminal:
+|        ``existence_error(non_terminal,Spec)``
+|    ``Spec`` is a visible predicate but not a dynamic predicate:
+|        ``permission_error(access,predicate,Spec)``
+|    ``Spec`` is a visible non-terminal but not a dynamic non-terminal:
+|        ``permission_error(access,non_terminal,Spec)``
 
 
 ------------

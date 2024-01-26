@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-01-25,
+		date is 2024-01-26,
 		comment is 'Listing predicates.'
 	]).
 
@@ -36,14 +36,18 @@
 
 	:- public(listing/1).
 	:- mode(listing(+predicate_indicator), one_or_error).
+	:- mode(listing(+non_terminal_indicator), one_or_error).
 	:- info(listing/1, [
-		comment is 'Lists all clauses of a visible dynamic predicate to the current output stream.',
-		argnames is ['Predicate'],
+		comment is 'Lists all clauses of a visible dynamic predicate or non-terminal to the current output stream.',
+		argnames is ['Spec'],
 		exceptions is [
-			'Predicate is not ground' - instantiation_error,
-			'Predicate is ground but not a predicate indicator' - type_error(predicate_indicator, 'Predicate'),
-			'Predicate is a predicate indicator but not a visible predicate' - existence_error(predicate, 'Predicate'),
-			'Predicate is visible but not a dynamic predicate' - permission_error(access, predicate, 'Predicate')
+			'``Spec`` is not ground' - instantiation_error,
+			'``Spec`` is ground but not a valid predicate indicator' - type_error(predicate_indicator, 'Spec'),
+			'``Spec`` is ground but not a valid non-terminal indicator' - type_error(non_terminal_indicator, 'Spec'),
+			'``Spec`` is a predicate indicator but not a visible predicate' - existence_error(predicate, 'Spec'),
+			'``Spec`` is a non-terminal indicator but not a visible non-terminal' - existence_error(non_terminal, 'Spec'),
+			'``Spec`` is a visible predicate but not a dynamic predicate' - permission_error(access, predicate, 'Spec'),
+			'``Spec`` is a visible non-terminal but not a dynamic non-terminal' - permission_error(access, non_terminal, 'Spec')
 		]
 	]).
 
@@ -67,19 +71,39 @@
 		instantiation_error.
 	listing(Predicate) :-
 		Predicate \= _/_,
+		Predicate \= _//_,
 		type_error(predicate_indicator, Predicate).
 	listing(Functor/Arity) :-
 		\+ (atom(Functor), integer(Arity), Arity >= 0),
 		type_error(predicate_indicator, Functor/Arity).
+	listing(Functor//Arity) :-
+		\+ (atom(Functor), integer(Arity), Arity >= 0),
+		type_error(non_terminal_indicator, Functor/Arity).
 	listing(Functor/Arity) :-
 		\+ ::current_predicate(Functor/Arity),
 		existence_error(predicate, Functor/Arity).
+	listing(Functor//Arity) :-
+		ExtArity is Arity + 2,
+		\+ ::current_predicate(Functor/ExtArity),
+		existence_error(non_terminal, Functor//Arity).
+	listing(Functor//Arity) :-
+		ExtArity is Arity + 2,
+		::current_predicate(Functor/ExtArity),
+		functor(Head, Functor, ExtArity),
+		\+ ::predicate_property(Head, non_terminal(Functor//Arity)),
+		existence_error(non_terminal, Functor//Arity).
 	listing(Functor/Arity) :-
-		::current_predicate(Functor/Arity),
 		functor(Head, Functor, Arity),
 		(	::predicate_property(Head, (dynamic)) ->
 			listing_clauses(Head, Functor, Arity)
 		;	permission_error(access, predicate, Functor/Arity)
+		).
+	listing(Functor//Arity) :-
+		ExtArity is Arity + 2,
+		functor(Head, Functor, ExtArity),
+		(	::predicate_property(Head, (dynamic)) ->
+			listing_clauses(Head, Functor, ExtArity)
+		;	permission_error(access, non_terminal, Functor//Arity)
 		).
 
 	listing_clauses(Head, _, _) :-
