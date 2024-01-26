@@ -207,6 +207,8 @@ to restrict their scope, use protected or private import. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(data_store,
     <span class="k">imports</span>(private<span class="o">::</span>listing)).
 
+    debug <span class="o">:-</span>
+        <span class="o">^^</span>listing(data<span class="o">/</span><span class="m">4</span>).
     ...
 
 <span class="p">:- </span><span class="k">end_object</span>.
@@ -218,8 +220,7 @@ predicate implementation. As this predicate is called (by the
 object importing the category can easily override the inherited
 definition with its own or with a call to the backend system native
 implementation of the predicate. For example, assuming a backend that
-provides <code class="docutils literal notranslate"><span class="pre">portray_clause/1</span></code> as a built-in predicate (e.g. GNU Prolog),
-we can write:</p>
+provides <code class="docutils literal notranslate"><span class="pre">portray_clause/1</span></code> as a built-in predicate, we can write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(thing,
     <span class="k">imports</span>(listing)).
 

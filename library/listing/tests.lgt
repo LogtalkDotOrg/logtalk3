@@ -112,7 +112,7 @@
 	test(listing_1_05, error(instantiation_error)) :-
 		listing_test_object::listing(_//1).
 
-	test(listing_1_06, error(type_error(predicate_indicator,a))) :-
+	test(listing_1_06, error(existence_error(predicate,a/0))) :-
 		listing_test_object::listing(a).
 
 	test(listing_1_07, error(existence_error(predicate,r/2))) :-
@@ -148,6 +148,11 @@
 			listing_test_object::listing(a/1),
 			^^text_output_assertion('a(1).\r\na(2).\r\na(3).\r\n\r\n', Assertion).
 
+		test(listing_1_14, true(Assertion)) :-
+			^^set_text_output(''),
+			listing_test_object::listing(a(2)),
+			^^text_output_assertion('a(2).\r\n\r\n', Assertion).
+
 	:- else.
 
 		test(listing_1_13, true(Assertion)) :-
@@ -155,9 +160,14 @@
 			listing_test_object::listing(a/1),
 			^^text_output_assertion('a(1).\na(2).\na(3).\n\n', Assertion).
 
+		test(listing_1_14, true(Assertion)) :-
+			^^set_text_output(''),
+			listing_test_object::listing(a(2)),
+			^^text_output_assertion('a(2).\n\n', Assertion).
+
 	:- endif.
 
-	test(listing_1_14, true(Assertion)) :-
+	test(listing_1_15, true(Assertion)) :-
 		^^set_text_output(''),
 		listing_test_object::listing(c/1),
 		^^text_output_assertion('', Assertion).

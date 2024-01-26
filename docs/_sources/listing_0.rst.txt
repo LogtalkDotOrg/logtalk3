@@ -61,7 +61,7 @@ Lists all clauses of all visible dynamic predicates to the current output stream
 ``listing/1``
 ^^^^^^^^^^^^^
 
-Lists all clauses of a visible dynamic predicate or non-terminal to the current output stream.
+Lists all clauses of a visible dynamic predicate or non-terminal to the current output stream. When the argument is a clause head, lists all matching clauses.
 
 | **Compilation flags:**
 |    ``static``
@@ -71,6 +71,7 @@ Lists all clauses of a visible dynamic predicate or non-terminal to the current 
 | **Mode and number of proofs:**
 |    ``listing(+predicate_indicator)`` - ``one_or_error``
 |    ``listing(+non_terminal_indicator)`` - ``one_or_error``
+|    ``listing(+callable)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Spec`` is not ground:
@@ -83,10 +84,14 @@ Lists all clauses of a visible dynamic predicate or non-terminal to the current 
 |        ``existence_error(predicate,Spec)``
 |    ``Spec`` is a non-terminal indicator but not a visible non-terminal:
 |        ``existence_error(non_terminal,Spec)``
-|    ``Spec`` is a visible predicate but not a dynamic predicate:
+|    ``Spec`` is a callable term with a ``Functor/Arity`` indicator but not a visible predicate:
+|        ``existence_error(predicate,Functor/Arity)``
+|    ``Spec`` is a predicate indicator of a visible predicate but not a dynamic predicate:
 |        ``permission_error(access,predicate,Spec)``
-|    ``Spec`` is a visible non-terminal but not a dynamic non-terminal:
+|    ``Spec`` is a non-terminal indicator of a visible non-terminal but not a dynamic non-terminal:
 |        ``permission_error(access,non_terminal,Spec)``
+|    ``Spec`` is a callable term for a visible predicate with a ``Functor/Arity`` indicator but not a dynamic predicate:
+|        ``permission_error(access,predicate,Functor/Arity)``
 
 
 ------------

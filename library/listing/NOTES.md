@@ -59,6 +59,8 @@ their scope, use protected or private import. For example:
 	:- object(data_store,
 		imports(private::listing)).
 
+		debug :-
+			^^listing(data/4).
 		...
 
 	:- end_object.
@@ -68,8 +70,8 @@ implementation. As this predicate is called (by the `listing/0-1` predicates)
 using the `(::)/1` control construct, the object importing the category can
 easily override the inherited definition with its own or with a call to the
 backend system native implementation of the predicate. For example, assuming
-a backend that provides `portray_clause/1` as a built-in predicate (e.g. GNU
-Prolog), we can write:
+a backend that provides `portray_clause/1` as a built-in predicate, we can
+write:
 
 	:- object(thing,
 		imports(listing)).
