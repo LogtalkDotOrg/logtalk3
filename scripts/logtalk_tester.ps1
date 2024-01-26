@@ -1,10 +1,10 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on November 21, 2023
+##   Last updated on January 26, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identi}er: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 13.0")
+	Write-Output ($myName + " 13.1")
 }
 
 Function Run-TestSet() {
@@ -198,7 +198,7 @@ param(
 	if (Select-String -Path $results/$name.errors -Pattern "Likely bug in the backend Prolog compiler. Please file a bug report." -SimpleMatch -Quiet) {
 		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
 		return 5
-	} elif ($LASTEXITCODE -eq 0 -and
+	} elseif ($LASTEXITCODE -eq 0 -and
 		!(Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
 		!(Select-String -Path $results/$name.totals -Pattern "^object" -Quiet) -and
 		!(Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {

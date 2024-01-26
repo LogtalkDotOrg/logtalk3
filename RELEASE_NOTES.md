@@ -130,6 +130,8 @@ default output directory.
 * UPDATED: The `tutor` tool for the refactoring of the linter warnings on the
 use of unsound control constructs in grammar rules.
 
+* FIXED: Syntax error in the `logtalk_tester.ps1` script.
+
 Examples
 --------
 
