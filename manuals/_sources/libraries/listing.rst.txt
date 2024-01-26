@@ -85,3 +85,23 @@ to ``allow``, we can hot patch it to add the ``listing`` category:
 
    | ?- data::listing.
    ...
+
+Another example:
+
+::
+
+   | ?- create_category(
+            patch,
+            [extends(listing),complements(data)],
+            [public(debug/1)],
+            [(debug(Key) :- ::listing(p(Key,Datum)))]
+        ).
+   yes
+
+   | ?- data::debug(k42).
+   ...
+
+Note that the semantic of complementing categories require that we use
+the ``(::)/2`` control construct instead of the ``(^^)/2`` control
+construct as a *super* call would be interpreted as made from the
+complemented object.

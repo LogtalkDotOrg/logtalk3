@@ -244,6 +244,23 @@ yes
 ...
 </pre></div>
 </div>
+<p>Another example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">create_category</span>(
+         patch,
+         [extends(listing),complements(data)],
+         [public(debug<span class="o">/</span><span class="m">1</span>)],
+         [(debug(<span class="nv">Key</span>) <span class="o">:-</span> <span class="o">::</span>listing(p(<span class="nv">Key</span>,<span class="nv">Datum</span>)))]
+     ).
+yes
+
+| <span class="o">?-</span> data<span class="o">::</span>debug(k42).
+...
+</pre></div>
+</div>
+<p>Note that the semantic of complementing categories require that we use
+the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> control construct instead of the <code class="docutils literal notranslate"><span class="pre">(^^)/2</span></code> control
+construct as a <em>super</em> call would be interpreted as made from the
+complemented object.</p>
 </section>
 </section>
 
