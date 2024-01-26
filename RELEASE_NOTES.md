@@ -48,6 +48,8 @@ unexpected failures.
 * IMPROVED: The implementation of the `threaded_engine_create/3` predicate
 to use a single mutex.
 
+* IMPROVED: The implementation of the `threaded_cancel/1` predicate.
+
 * IMPROVED: Linter warnings for if-then-else and soft-cut control constructs.
 
 * FIXED: Compilation of `synchronized/1` directives in categories to not

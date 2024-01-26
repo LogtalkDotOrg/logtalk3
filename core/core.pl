@@ -3536,7 +3536,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 74, 0, b06)).
+'$lgt_version_data'(logtalk(3, 74, 0, b07)).
 
 
 
@@ -26604,8 +26604,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	thread_peek_message(Queue, '$lgt_thread_id'(_, _, This, Self, Tag, Id)) ->
 		% answering thread exists; go ahead and cancel it
 		thread_get_message(Queue, '$lgt_thread_id'(_, _, This, Self, Tag, Id)),
-		catch(thread_signal(Id, throw('$lgt_aborted')), _, true),
-		catch(thread_join(Id, _), _, true),
+		% the thread may be suspended waiting for a request for an alternative proof; tell it to exit
+		thread_send_message(Id, '$lgt_exit'),
+		% but the thread may also be busy computing a solution; cancel it
+		thread_signal(Id, throw('$lgt_aborted')),
+		thread_join(Id, _),
 		% delete any thread reply that is pending retrievel
 		forall(
 			thread_peek_message(Queue, '$lgt_reply'(_, This, Self, Tag, _, Id)),
@@ -26637,7 +26640,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				'$lgt_mt_non_det_reply'(Queue, Goal, This, Self, [], Id),
 				((	thread_property(Id, status(running)) ->
 					% thread still running, suspended waiting for a request to an alternative proof; tell it to exit
-					catch(thread_send_message(Id, '$lgt_exit'), _, true)
+					thread_send_message(Id, '$lgt_exit')
 				;	true
 				),
 				thread_join(Id, _))
@@ -26670,7 +26673,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				'$lgt_mt_non_det_reply'(Queue, Goal, This, Self, Tag, Id),
 				((	thread_property(Id, status(running)) ->
 					% thread still running, suspended waiting for a request to an alternative proof; tell it to exit
-					catch(thread_send_message(Id, '$lgt_exit'), _, true)
+					thread_send_message(Id, '$lgt_exit')
 				;	true
 				),
 				thread_join(Id, _))
