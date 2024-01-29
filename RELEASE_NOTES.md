@@ -119,6 +119,11 @@ implementation of the de facto standard `gcd/2` arithmetic function.
 Tools
 -----
 
+* CHANGED: Recent versions of both Texinfo and Sphinx broke index search in
+the Handbook and APIs documentation when using the `help::handbook/1` and
+`help::apis/1` predicates. The argument is now interpreted as a starting
+node instead of a search string.
+
 * CHANGED: Default output directory for the `diagrams` tool to `./dot_dias`.
 
 * UPDATED: The `update_svg_diagrams.*` scripts for the new `diagrams` tool

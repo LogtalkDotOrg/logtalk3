@@ -23,9 +23,9 @@
 	complements(help)).
 
 	:- info([
-		version is 0:7:1,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2023-10-17,
+		date is 2024-01-29,
 		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.'
 	]).
 
@@ -89,7 +89,7 @@
 		topic_to_atom(Topic, TopicAtom),
 		info_executable(Info),
 		handbook_file(File),
-		process_create(Info, ['-f', File, '--index-search', TopicAtom]).
+		process_create(Info, ['-f', File, '-n', TopicAtom]).
 
 	apis :-
 		info_executable(Info),
@@ -100,7 +100,7 @@
 		topic_to_atom(Topic, TopicAtom),
 		info_executable(Info),
 		apis_file(File),
-		process_create(Info, ['-f', File, '--index-search', TopicAtom]).
+		process_create(Info, ['-f', File, '-n', TopicAtom]).
 
 	man(Script) :-
 		info_executable(Info),
@@ -113,7 +113,7 @@
 			atomic_list_concat([Name, '/', Arity], TopicAtom)
 		;	Topic = Name//Arity, atom(Name), integer(Arity) ->
 			atomic_list_concat([Name, '//', Arity], TopicAtom)
-		;	write('Search topic must be an atom, a predicate indicator, or a non-terminal indicator!'), nl,
+		;	write('Starting node must be an atom, a predicate indicator, or a non-terminal indicator!'), nl,
 			fail
 		).
 

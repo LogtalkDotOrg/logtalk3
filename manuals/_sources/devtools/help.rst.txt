@@ -58,8 +58,10 @@ later version), LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB
 as the backend, ``apis/1`` and ``handbook/0-1`` predicates are made
 available. These predicates open inline at the top-level interpreter the
 Texinfo versions of the Handbook and the APIs documentation. The
-optional argument is a topic to search, which can be an atom, a
-predicate indicator, or a non-terminal indicator. Some examples:
+optional argument is a starting node, which can be an atom, a predicate
+indicator, or a non-terminal indicator. When there are several nodes for
+the same argument (e.g. multiple implementations of the ``member/2``
+predicate), one of them will be displayed. Some examples:
 
 ::
 
