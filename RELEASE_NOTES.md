@@ -102,6 +102,8 @@ clauses.
 
 * ADDED: Library `recorded_database` to help porting legacy Prolog code.
 
+* UPDATED: The `os::file_exists/1` predicate for YAP.
+
 * FIXED: The `json` library to avoid unnecessary escaping of slashes when
 encoding a string. Thanks to Yurii Rashkovskii for the bug report.
 
