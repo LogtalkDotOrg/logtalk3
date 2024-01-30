@@ -23,41 +23,55 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2019-02-12,
+		date is 2023-01-30,
 		comment is 'Unit tests for the threaded_peek/1-2 built-in predicates.'
 	]).
 
+	:- threaded.
+
 	% threaded_peek/1 tests
 
-	throws(threaded_peek_1_01, error(instantiation_error, logtalk(threaded_peek(_), _))) :-
-		{threaded_peek(_)}.
+	test(threaded_peek_1_01, error(instantiation_error)) :-
+		threaded_call(true),
+		threaded_peek(_).
 
-	throws(threaded_peek_1_02, error(type_error(callable, 1), logtalk(threaded_peek(_), _))) :-
-		{threaded_peek(1)}.
+	test(threaded_peek_1_02, error(type_error(callable, Int))) :-
+		% delay the error to runtime
+		int(Int),
+		threaded_call(true),
+		threaded_peek(Int).
 
 	% threaded_peek/2 tests
 
-	throws(threaded_peek_2_01, error(instantiation_error, logtalk(threaded_peek(_,_), _))) :-
-		{threaded_peek(_, _)}.
+	test(threaded_peek_2_01, error(instantiation_error)) :-
+		threaded_peek(a, _).
 
-	throws(threaded_peek_2_02, error(type_error(callable, 1), logtalk(threaded_peek(_,_), _))) :-
-		{threaded_peek(1, _)}.
+	test(threaded_peek_2_02, error(instantiation_error)) :-
+		threaded_call(true, Tag),
+		threaded_peek(_, Tag).
 
-	throws(threaded_peek_2_03, error(instantiation_error, logtalk(threaded_peek(_,_), _))) :-
-		{threaded_peek(true, _)}.
+	test(threaded_peek_2_03, error(type_error(callable, Int))) :-
+		% delay the error to runtime
+		int(Int),
+		threaded_call(true, Tag),
+		threaded_peek(Int, Tag).
 
-	succeeds(threaded_peek_2_04) :-
-		{	threaded_call(true, Tag),
-			thread_sleep(1),
-			threaded_peek(true, Tag)
-		}.
+	test(threaded_peek_2_04, true) :-
+		threaded_call(true, Tag),
+		thread_sleep(1),
+		threaded_peek(true, Tag).
 
-	succeeds(threaded_peek_2_05) :-
-		{	threaded_once(true, Tag),
-			thread_sleep(1),
-			threaded_peek(true, Tag)
-		}.
+	test(threaded_peek_2_05, true) :-
+		threaded_once(true, Tag),
+		thread_sleep(1),
+		threaded_peek(true, Tag).
+
+	% auxiliary predicates
+
+	int(1).
+
+	a.
 
 :- end_object.

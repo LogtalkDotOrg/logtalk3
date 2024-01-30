@@ -54,6 +54,9 @@ to use a single mutex.
 
 * IMPROVED: The implementation of the `threaded_cancel/1` predicate.
 
+* IMPROVED: Error checking of the `threaded_exit/1-2` and `threaded_peek/1-2`
+predicates.
+
 * IMPROVED: Linter warnings for if-then-else and soft-cut control constructs.
 
 * FIXED: Compilation of `synchronized/1` directives in categories to not

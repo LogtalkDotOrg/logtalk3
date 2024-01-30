@@ -2171,7 +2171,6 @@ threaded_exit(Goal, Tag) :-
 
 threaded_exit(Goal, Tag) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal, Tag), ExCtx)),
 	catch('$lgt_threaded_exit_tagged'(Goal, ExCtx, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -2184,7 +2183,6 @@ threaded_exit(Goal) :-
 
 threaded_exit(Goal) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal), ExCtx)),
 	catch('$lgt_threaded_exit'(Goal, ExCtx), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -2197,7 +2195,6 @@ threaded_peek(Goal, Tag) :-
 
 threaded_peek(Goal, Tag) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal, Tag), ExCtx)),
 	catch('$lgt_threaded_peek_tagged'(Goal, ExCtx, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -2210,7 +2207,6 @@ threaded_peek(Goal) :-
 
 threaded_peek(Goal) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal), ExCtx)),
 	catch('$lgt_threaded_peek'(Goal, ExCtx), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -26579,6 +26575,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_threaded_peek'(+callable, @execution_context)
 
 '$lgt_threaded_peek'(Goal, ExCtx) :-
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, [], _, _)).
@@ -26588,6 +26585,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_threaded_peek_tagged'(+callable, @execution_context, @nonvar)
 
 '$lgt_threaded_peek_tagged'(Goal, ExCtx, Tag) :-
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal, Tag), ExCtx)),
 	'$lgt_check'(nonvar, Tag, logtalk(threaded_peek(Goal, Tag), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
@@ -26623,6 +26621,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_threaded_exit'(+callable, @execution_context)
 
 '$lgt_threaded_exit'(Goal, ExCtx) :-
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	(	% first check if there is a thread running for proving the goal before proceeding
@@ -26655,6 +26654,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_threaded_exit_tagged'(+callable, @execution_context, @nonvar)
 
 '$lgt_threaded_exit_tagged'(Goal, ExCtx, Tag) :-
+	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_exit(Goal, Tag), ExCtx)),
 	'$lgt_check'(nonvar, Tag, logtalk(threaded_exit(Goal, Tag), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
