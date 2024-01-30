@@ -25,8 +25,8 @@
 	:- info([
 		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2024-01-29,
-		comment is 'Experimental help predicates for inline browsing and searching of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.'
+		date is 2024-01-30,
+		comment is 'Experimental help predicates for inline browsing of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, GNU Prolog, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or YAP as the backend running on a POSIX system.'
 	]).
 
 	:- public(handbook/0).
@@ -40,7 +40,7 @@
 	:- mode(handbook(+predicate_indicator), one).
 	:- mode(handbook(+non_terminal_indicator), one).
 	:- info(handbook/1, [
-		comment is 'Opens inline the Texinfo version of the Handbook and searches for the given topic.',
+		comment is 'Opens inline the Texinfo version of the Handbook at the given topic.',
 		argnames is ['Topic']
 	]).
 
@@ -55,7 +55,7 @@
 	:- mode(apis(+predicate_indicator), one).
 	:- mode(apis(+non_terminal_indicator), one).
 	:- info(apis/1, [
-		comment is 'Opens inline the Texinfo version of the APIs documentation and searches for the given topic.',
+		comment is 'Opens inline the Texinfo version of the APIs documentation at the given topic.',
 		argnames is ['Topic']
 	]).
 

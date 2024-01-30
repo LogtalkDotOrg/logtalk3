@@ -8,14 +8,14 @@
 ``help_info_support``
 =====================
 
-Experimental help predicates for inline browsing and searching of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.
+Experimental help predicates for inline browsing of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, GNU Prolog, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or YAP as the backend running on a POSIX system.
 
 | **Availability:** 
 |    ``logtalk_load(help(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 0:8:0
-| **Date:** 2024-01-29
+| **Date:** 2024-01-30
 
 | **Compilation flags:**
 |    ``static``
@@ -63,7 +63,7 @@ Opens inline the Texinfo version of the Handbook.
 ``handbook/1``
 ^^^^^^^^^^^^^^
 
-Opens inline the Texinfo version of the Handbook and searches for the given topic.
+Opens inline the Texinfo version of the Handbook at the given topic.
 
 | **Compilation flags:**
 |    ``static``
@@ -101,7 +101,7 @@ Opens inline the Texinfo version of the APIs documentation.
 ``apis/1``
 ^^^^^^^^^^
 
-Opens inline the Texinfo version of the APIs documentation and searches for the given topic.
+Opens inline the Texinfo version of the APIs documentation at the given topic.
 
 | **Compilation flags:**
 |    ``static``
