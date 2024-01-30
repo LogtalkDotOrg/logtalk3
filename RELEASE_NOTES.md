@@ -171,8 +171,9 @@ Tests
 
 * ADDED: Additional tests for the `threaded/1` built-in predicate.
 
-* ADDED: Additional tests for the `format/2-3` de facto standard predicate
-(the `~N+` column boundary control sequence is expected to default to N = 8).
+* ADDED: Additional tests for the `format/2-3` de facto standard predicates
+(`~Ng` and `~NG` plus the `~N+` column boundary control sequence is expected
+to default to N = 8).
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

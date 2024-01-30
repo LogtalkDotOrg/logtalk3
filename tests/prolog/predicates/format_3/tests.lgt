@@ -321,20 +321,40 @@
 		{format(out, "~g", [0.00000123])},
 		^^text_output_assertion(out, '1.23e-06', Assertion).
 
+	test(lgt_format_3_float_best_ne, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~2g", [0.00000123])},
+		^^text_output_assertion(out, '1.2e-06', Assertion).
+
 	test(lgt_format_3_float_best_f, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~g", [0.39265e+3])},
 		^^text_output_assertion(out, '392.65', Assertion).
+
+	test(lgt_format_3_float_best_nf, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~2g", [0.39265e+3])},
+		^^text_output_assertion(out, '3.9e+02', Assertion).
 
 	test(lgt_format_3_float_best_e_upper_case, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~G", [0.00000123])},
 		^^text_output_assertion(out, '1.23E-06', Assertion).
 
+	test(lgt_format_3_float_best_ne_upper_case, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~2G", [0.00000123])},
+		^^text_output_assertion(out, '1.2E-06', Assertion).
+
 	test(lgt_format_3_float_best_f_upper_case, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~G", [0.39265e+3])},
 		^^text_output_assertion(out, '392.65', Assertion).
+
+	test(lgt_format_3_float_best_nf_upper_case, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~2G", [0.39265e+3])},
+		^^text_output_assertion(out, '3.9E+02', Assertion).
 
 	test(lgt_format_3_tab_atom_left_aligned_default_column_boundary, true(Assertion)) :-
 		^^set_text_output(out, ''),

@@ -2240,7 +2240,7 @@ threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 	catch('$lgt_threaded_engine_create'(AnswerTemplate, Goal, Goal, ExCtx, Engine), Error, '$lgt_runtime_error_handler'(Error)).
 
 
-% threaded_engine(?nonvar)
+% threaded_engine_self(?nonvar)
 
 threaded_engine_self(Engine) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
