@@ -33,9 +33,13 @@ constructs in grammar rules to be controlled by the `grammar_rules` flag
 instead of the `suspicious_calls` flag. Also changed the format of warning
 message.
 
+* CHANGED: The implementation of the `context/1`, `threaded_call/2`, and
+`threaded_once/2` built-in methods to throw `uninstantiation_error(Term)`
+errors instead of `type_error(var, Term)` errors.
+
 * CHANGED: The implementation of the `threaded/1` built-in predicate to not
 abort execution when the argument is a disjunction of goals if one of them
-throws an exception.
+throws an exception while there are still thread goals running.
 
 * IMPROVED: The implementation of the `threaded/1` built-in predicate to
 support calls where the argument is only bound at runtime.
@@ -91,14 +95,19 @@ meta-predicates.
 
 * FIXED: Handbook description of the `if/1` conditional compilation directive.
 
+* FIXED: Documentation of the `context/1` built-in execution context method.
+
 Library
 -------
+
+* CHANGED: The `type` library object to to throw `uninstantiation_error(Term)`
+error instead of `type_error(var, Term)` error when checking the `var` type.
 
 * CHANGED: Deleted deprecated `library/genint.lgt` file, replaced by the
 `genint` library.
 
 * ADDED: Library `listing` supporting listing of object dynamic predicates
-clauses.
+clauses. This library replaces the old non-documented `listing` category.
 
 * ADDED: Library `recorded_database` to help porting legacy Prolog code.
 

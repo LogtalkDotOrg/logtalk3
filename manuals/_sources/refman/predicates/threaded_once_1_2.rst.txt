@@ -76,7 +76,7 @@ Errors
 | Goal is neither a variable nor a callable term:
 |     ``type_error(callable, Goal)``
 | Tag is not a variable:
-|     ``type_error(variable, Goal)``
+|     ``uninstantiation_error(Tag)``
 
 Examples
 --------

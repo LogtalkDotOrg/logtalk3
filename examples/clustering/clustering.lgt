@@ -22,9 +22,9 @@
 :- object(clustering).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2023-03-16,
+		date is 2024-01-30,
 		comment is 'Clustering example using the Apache commons math Java library.'
 	]).
 
@@ -42,7 +42,7 @@
 			'NumberOfClusters neither a variable nor a positive integer' - type_error(positive_integer, 'NumberOfClusters'),
 			'MaxIterations is not instantiated' - instantiation_error,
 			'MaxIterations neither a variable nor a positive integer' - type_error(positive_integer, 'MaxIterations'),
-			'Clusters is not a variable' - type_error(var, 'Clusters'),
+			'Clusters is not a variable' - uninstantiation_error('Clusters'),
 			'One of the arguments is illegal' - resource_error(math_illegal_argument_exception),
 			'Clustering algorithm convergence failure' - resource_error(convergence_exception),
 			'Number of values is too small' - resource_error(number_is_too_small_exception)

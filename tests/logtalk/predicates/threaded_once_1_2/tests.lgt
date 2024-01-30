@@ -23,29 +23,49 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2019-02-12,
+		date is 2024-01-30,
 		comment is 'Unit tests for the threaded_once/1-2 built-in predicates.'
 	]).
 
+	:- threaded.
+
 	% threaded_once/1 tests
 
-	throws(threaded_once_1_01, error(instantiation_error, logtalk(threaded_once(_), _))) :-
-		{threaded_once(_)}.
+	test(threaded_once_1_01, error(instantiation_error)) :-
+		% delay the error to runtime
+		variable(Var),
+		threaded_once(Var).
 
-	throws(threaded_once_1_02, error(type_error(callable, 1), logtalk(threaded_once(_), _))) :-
-		{threaded_once(1)}.
+	test(threaded_once_1_02, error(type_error(callable, Int))) :-
+		% delay the error to runtime
+		int(Int),
+		threaded_once(Int).
 
 	% threaded_once/2 tests
 
-	throws(threaded_once_2_01, error(instantiation_error, logtalk(threaded_once(_,_), _))) :-
-		{threaded_once(_, _)}.
+	test(threaded_once_2_01, error(instantiation_error)) :-
+		% delay the error to runtime
+		variable(Var),
+		threaded_once(Var, _).
 
-	throws(threaded_once_2_02, error(type_error(callable, 1), logtalk(threaded_once(_,_), _))) :-
-		{threaded_once(1, _)}.
+	test(threaded_once_2_02, error(type_error(callable, Int))) :-
+		% delay the error to runtime
+		int(Int),
+		threaded_once(Int, _).
 
-	throws(threaded_once_2_03, error(type_error(variable, tag), logtalk(threaded_once(_,_), _))) :-
-		{threaded_once(true, tag)}.
+	test(threaded_once_2_03, error(uninstantiation_error(Tag))) :-
+		% delay the error to runtime
+		bind(Tag),
+		threaded_once(true, Tag).
+
+	% auxiliary predicates
+
+	variable(_).
+
+	int(1).
+
+	bind(tag).
 
 :- end_object.

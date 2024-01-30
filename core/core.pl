@@ -2111,7 +2111,6 @@ threaded_call(Goal, Tag) :-
 
 threaded_call(Goal, Tag) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(var, Tag, logtalk(threaded_call(Goal, Tag), ExCtx)),
 	catch('$lgt_threaded_call_tagged'(Goal, Goal, ExCtx, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -2136,7 +2135,6 @@ threaded_once(Goal, Tag) :-
 
 threaded_once(Goal, Tag) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	'$lgt_check'(var, Tag, logtalk(threaded_once(Goal, Tag), ExCtx)),
 	catch('$lgt_threaded_once_tagged'(Goal, Goal, ExCtx, Tag), Error, '$lgt_runtime_error_handler'(Error)).
 
 
@@ -3536,7 +3534,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 74, 0, b07)).
+'$lgt_version_data'(logtalk(3, 74, 0, b08)).
 
 
 
@@ -26508,11 +26506,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_threaded_call_tagged'(@term, @callable, @execution_context, -nonvar)
 %
-% the thread is only created if the original goal is callable; this prevents
-% programming errors going unnoticed until we try to retrieve the first answer
+% the thread is only created if the original goal is callable and the tag is unbound;
+% this prevents programming errors going unnoticed until we try to retrieve the first answer
 
 '$lgt_threaded_call_tagged'(Goal, TGoal, ExCtx, Tag) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_call(Goal, Tag), ExCtx)),
+	'$lgt_check'(var, Tag, logtalk(threaded_call(Goal, Tag), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	'$lgt_new_threaded_tag'(Tag),
@@ -26523,11 +26522,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_threaded_once_tagged'(@term, @callable, @execution_context, -nonvar)
 %
-% the thread is only created if the original goal is callable; this prevents
-% programming errors going unnoticed until we try to retrieve the first answer
+% the thread is only created if the original goal is callable and the tag is unbound;
+% this programming errors going unnoticed until we try to retrieve the answer
 
 '$lgt_threaded_once_tagged'(Goal, TGoal, ExCtx, Tag) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_once(Goal, Tag), ExCtx)),
+	'$lgt_check'(var, Tag, logtalk(threaded_once(Goal, Tag), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 	'$lgt_new_threaded_tag'(Tag),
@@ -28158,7 +28158,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check'(var, Term, Context) :-
 	(	var(Term) ->
 		true
-	;	throw(error(type_error(variable, Term), Context))
+	;	throw(error(uninstantiation_error(Term), Context))
 	).
 
 '$lgt_check'(nonvar, Term, Context) :-
