@@ -23,22 +23,33 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2012-11-19,
+		date is 2024-01-30,
 		comment is 'Unit tests for the threaded_ignore/1 built-in predicate.'
 	]).
 
-	throws(threaded_ignore_1_1, error(instantiation_error, logtalk(threaded_ignore(_), _))) :-
-		{threaded_ignore(_)}.
+	:- threaded.
 
-	throws(threaded_ignore_1_2, error(type_error(callable, 1), logtalk(threaded_ignore(_), _))) :-
-		{threaded_ignore(1)}.
+	test(threaded_ignore_1_01, error(instantiation_error)) :-
+		threaded_ignore(_).
 
-	succeeds(threaded_ignore_1_3) :-
-		{threaded_ignore(true)}.
+	test(threaded_ignore_1_02, error(type_error(callable, Int))) :-
+		% delay the error to runtime
+		int(Int),
+		threaded_ignore(Int).
 
-	succeeds(threaded_ignore_1_4) :-
-		{threaded_ignore(fail)}.
+	test(threaded_ignore_1_03, true) :-
+		threaded_ignore(true).
+
+	test(threaded_ignore_1_04, true) :-
+		threaded_ignore(fail).
+
+	test(threaded_ignore_1_05, true) :-
+		threaded_ignore(throw(err)).
+
+	% auxiliary predicates
+
+	int(1).
 
 :- end_object.
