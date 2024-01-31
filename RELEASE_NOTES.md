@@ -33,9 +33,13 @@ constructs in grammar rules to be controlled by the `grammar_rules` flag
 instead of the `suspicious_calls` flag. Also changed the format of warning
 message.
 
-* CHANGED: The implementation of the `context/1`, `threaded_call/2`, and
-`threaded_once/2` built-in methods to throw `uninstantiation_error(Term)`
-errors instead of `type_error(var, Term)` errors.
+* CHANGED: The implementation of the `context/1` built-in method and the
+implementation of the `threaded_call/2` and `threaded_once/2` built-in
+predicates to throw `uninstantiation_error(Term)` errors instead of
+`type_error(var, Term)` errors.
+
+* CHANGED: The implementation of the `threaded_peek/1-2` built-in predicate
+to throw an exception when there is no thread proving the goal argument.
 
 * CHANGED: The implementation of the `threaded/1` built-in predicate to not
 abort execution when the argument is a disjunction of goals if one of them

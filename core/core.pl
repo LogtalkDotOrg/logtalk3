@@ -26578,8 +26578,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(qualified_callable, Goal, logtalk(threaded_peek(Goal), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-	thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, [], _, _)).
-
+	(	% first check if there is a thread running for proving the goal before proceeding
+		thread_peek_message(Queue, '$lgt_thread_id'(_, Goal, This, Self, [], Id)) ->
+		% answering thread exists; go ahead and peek a solution
+		thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, [], _, Id))
+	;	% answering thread don't exist; generate an exception
+		throw(error(existence_error(thread, This), logtalk(threaded_peek(Goal), ExCtx)))
+	).
 
 
 % '$lgt_threaded_peek_tagged'(+callable, @execution_context, @nonvar)
@@ -26589,7 +26594,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_check'(nonvar, Tag, logtalk(threaded_peek(Goal, Tag), ExCtx)),
 	'$lgt_execution_context'(ExCtx, _, _, This, Self, _, _),
 	'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
-	thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, _, _)).
+	(	% first check if there is a thread running for proving the goal before proceeding
+		thread_peek_message(Queue, '$lgt_thread_id'(_, Goal, This, Self, Tag, Id)) ->
+		% answering thread exists; go ahead and peek a solution
+		thread_peek_message(Queue, '$lgt_reply'(Goal, This, Self, Tag, _, Id))
+	;	% answering thread don't exist; generate an exception
+		throw(error(existence_error(thread, This), logtalk(threaded_peek(Goal, Tag), ExCtx)))
+	).
 
 
 

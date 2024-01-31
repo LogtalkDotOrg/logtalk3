@@ -33,11 +33,14 @@
 
 	% threaded_peek/1 tests
 
-	test(threaded_peek_1_01, error(instantiation_error)) :-
+	test(threaded_peek_1_01, error(existence_error(thread,tests))) :-
+		threaded_peek(true).
+
+	test(threaded_peek_1_02, error(instantiation_error)) :-
 		threaded_call(true),
 		threaded_peek(_).
 
-	test(threaded_peek_1_02, error(type_error(callable, Int))) :-
+	test(threaded_peek_1_03, error(type_error(callable, Int))) :-
 		% delay the error to runtime
 		int(Int),
 		threaded_call(true),
