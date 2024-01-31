@@ -136,6 +136,9 @@ from an invalid JSON representation.
 * FIXED: Compatibility of the `types` library with XSB due to the missing
 implementation of the de facto standard `gcd/2` arithmetic function.
 
+* FIXED: Two linter warnings when loading the `os` library using the CxProlog
+backend.
+
 Tools
 -----
 
