@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,9 +26,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:17:0,
+		version is 1:18:0,
 		author is 'Paulo Moura',
-		date is 2024-01-30,
+		date is 2024-01-31,
 		comment is 'Unit tests for the de facto Prolog standard format/2 built-in predicate with format strings specified using lists of codes.'
 	]).
 

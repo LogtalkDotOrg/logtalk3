@@ -199,8 +199,7 @@ Tests
 * ADDED: Additional tests for the multi-threading built-in predicates.
 
 * ADDED: Additional tests for the `format/2-3` de facto standard predicates
-(`~Ng` and `~NG` plus the `~N+` column boundary control sequence is expected
-to default to N = 8).
+(`~Ng`, `~NG`, `~|`, `~N|`, and `~N+` control sequences).
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

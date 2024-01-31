@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -355,6 +355,16 @@
 		^^set_text_output(''),
 		{format("~2G", [0.39265e+3])},
 		^^text_output_assertion('3.9E+02', Assertion).
+
+	test(lgt_format_2_tab_stop_default, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~|~a", [abcd])},
+		^^text_output_assertion('abcd', Assertion).
+
+	test(lgt_format_2_tab_stop_non_default, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~6|~a", [abcd])},
+		^^text_output_assertion('      abcd', Assertion).
 
 	test(lgt_format_2_tab_atom_left_aligned_default_column_boundary, true(Assertion)) :-
 		^^set_text_output(''),
