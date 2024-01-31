@@ -74,8 +74,8 @@ Errors
 |     ``instantiation_error``
 | ``Goal`` is neither a variable nor a callable term:
 |     ``type_error(callable, Goal)``
-| No thread is running for proving ``Goal``:
-|     ``existence_error(goal_thread, Goal)``
+| No thread is running for proving ``Goal`` in the ``Object`` calling context:
+|     ``existence_error(thread, Object)``
 | ``Tag`` is a variable:
 |     ``instantiation_error``
 

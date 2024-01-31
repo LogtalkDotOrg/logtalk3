@@ -100,6 +100,8 @@ meta-predicates.
 
 * FIXED: Documentation of the `context/1` built-in execution context method.
 
+* FIXED: Documentation of the `threaded_exit/1-2` exceptions.
+
 Library
 -------
 
@@ -181,7 +183,7 @@ destroy the threaded engine after computing the answer.
 Tests
 -----
 
-* ADDED: Additional tests for the `threaded/1` built-in predicate.
+* ADDED: Additional tests for the multi-threading built-in predicates.
 
 * ADDED: Additional tests for the `format/2-3` de facto standard predicates
 (`~Ng` and `~NG` plus the `~N+` column boundary control sequence is expected
