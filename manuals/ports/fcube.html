@@ -74,7 +74,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="metagol.html"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a></li>
@@ -126,9 +125,9 @@ Intuitionistic Propositional Logic available from:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>https<span class="o">://</span>www.vidal<span class="o">-</span>rosset.net<span class="o">/</span>fCube<span class="o">/</span>
 </pre></div>
 </div>
-<p>The port includes portability changes plus changes to use an ordered
-representation for sets. Also some code formatting changes for Logtalk
-coding guidelines.</p>
+<p>The port includes portability changes (notably, operator names) plus
+changes to use an ordered representation for sets. Also some code
+formatting changes for Logtalk coding guidelines.</p>
 <p>The port tests are adapted from the examples available from the web page
 above.</p>
 <p>To load this port and for sample queries, please see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code>
@@ -167,12 +166,6 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(fcube(tester)).
 </pre></div>
 </div>
-</section>
-<section id="known-issues">
-<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
-<p>This port cannot currently be loaded using LVM due to a clash with a
-built-in operator. Also, several tests fail when running on Tau Prolog,
-likely due to a bug in this system.</p>
 </section>
 </section>
 
