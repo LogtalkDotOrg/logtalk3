@@ -31,9 +31,9 @@ Intuitionistic Propositional Logic available from:
 
 	https://www.vidal-rosset.net/fCube/
 
-The port includes portability changes plus changes to use an ordered
-representation for sets. Also some code formatting changes for Logtalk
-coding guidelines.
+The port includes portability changes (notably, operator names) plus
+changes to use an ordered representation for sets. Also some code
+formatting changes for Logtalk coding guidelines.
 
 The port tests are adapted from the examples available from the web
 page above.
@@ -79,11 +79,3 @@ Testing
 To test this port predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(fcube(tester)).
-
-
-Known issues
-------------
-
-This port cannot currently be loaded using LVM due to a clash with a
-built-in operator. Also, several tests fail when running on Tau Prolog,
-likely due to a bug in this system.

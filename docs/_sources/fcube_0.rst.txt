@@ -14,10 +14,10 @@ FCube: An Efficient Prover for Intuitionistic Propositional Logic.
 |    ``logtalk_load(fcube(loader))``
 
 | **Author:** Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.
-| **Version:** 4:2:0
-| **Date:** 2022-10-08
+| **Version:** 5:0:0
+| **Date:** 2024-01-31
 
-| **Copyright:** Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura
+| **Copyright:** Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2020-2024 Paulo Moura
 | **License:** GNU GPL 2.0 or later version
 
 | **Compilation flags:**
@@ -124,14 +124,20 @@ Operators
 | **Scope:**
 |    ``public``
 
-``op(1000,xfy,&)``
-^^^^^^^^^^^^^^^^^^
+``op(1000,xfy,&&)``
+^^^^^^^^^^^^^^^^^^^
 
 | **Scope:**
 |    ``public``
 
 ``op(500,fy,~)``
 ^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
+``op(1100,xfy,v)``
+^^^^^^^^^^^^^^^^^^
 
 | **Scope:**
 |    ``public``

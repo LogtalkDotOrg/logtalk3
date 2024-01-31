@@ -44,7 +44,7 @@
 
 	test(fcube_excluded_middle, true(CounterModel == [swff(f,a),[swff(t,a)]])) :-
 		^^suppress_text_output,
-		decide((~ a | a), CounterModel).
+		decide((~ a v a), CounterModel).
 
 	test(fcube_double_negation_elimination, true(CounterModel == [[swff(f, a), [swff(t, a)]]])) :-
 		^^suppress_text_output,
@@ -56,19 +56,19 @@
 
 	test(fcube_dummett_formula, true(CounterModel == [[swff(fc, b), swff(t, a)], [swff(fc, a), swff(t, b)]])) :-
 		^^suppress_text_output,
-		decide(((a => b) | (b => a)), CounterModel).
+		decide(((a => b) v (b => a)), CounterModel).
 
 	test(fcube_classical_de_morgan_implication, true(CounterModel == [[[swff(fc, a), swff(t, b)], [swff(fc, b), swff(t, a)]]])) :-
 		^^suppress_text_output,
-		decide((~ (a & b) => (~ a | ~ b)), CounterModel).
+		decide((~ (a && b) => (~ a v ~ b)), CounterModel).
 
 	test(fcube_intuitionistic_de_morgan_implication, true(CounterModel == [valida])) :-
 		^^suppress_text_output,
-		decide(((~ a | ~ b) => ~ (a & b)), CounterModel).
+		decide(((~ a v ~ b) => ~ (a && b)), CounterModel).
 
 	test(fcube_intuitionistic_de_morgan_equivalence, true(CounterModel == [valida])) :-
 		^^suppress_text_output,
-		decide((~ (a | b) <=> (~ a & ~ b)), CounterModel).
+		decide((~ (a v b) <=> (~ a && ~ b)), CounterModel).
 
 	test(fcube_intuitionistic_equivalence, true(CounterModel ==  [valida])) :-
 		^^suppress_text_output,
@@ -76,19 +76,19 @@
 
 	test(fcube_pelletier_problem_13_SYN045_plus_1, true(CounterModel == [valida])) :-
 		^^suppress_text_output,
-		decide((( ( p | ( q & r ) ) <=> ( ( p | q ) & ( p | r ) ) )), CounterModel).
+		decide((( ( p v ( q && r ) ) <=> ( ( p v q ) && ( p v r ) ) )), CounterModel).
 
 	test(fcube_pelletier_problem_17_SYN047_plus_1, true(CounterModel == [[swff(f, s), swff(fc, r), swff(f, q), [swff(t, p), swff(t, q), swff(t, s)]]])) :-
 		^^suppress_text_output,
-		decide((( ( ( p & ( q => r ) ) => s ) <=> ( ( ~ p | q | s ) & ( ~ p | ~ r | s ) ) )), CounterModel).
+		decide((( ( ( p && ( q => r ) ) => s ) <=> ( ( ~ p v q v s ) && ( ~ p v ~ r v s ) ) )), CounterModel).
 
 	test(fcube_formula_1, true(CounterModel == [[swff(fc, a), swff(fc, c), swff(t, b)]])) :-
 		^^suppress_text_output,
-		decide((((a | b) => c) <=> ((a => c) & (b => b))), CounterModel).
+		decide((((a v b) => c) <=> ((a => c) && (b => b))), CounterModel).
 
 	test(fcube_formula_2, true(CounterModel == [[[swff(fc, a), swff(fc, c), swff(t, b)], [swff(fc, b), swff(fc, c), swff(t, a)]]])) :-
 		^^suppress_text_output,
-		decide((((a & b) => c) <=> ((a => c) | (b => c))), CounterModel).
+		decide((((a && b) => c) <=> ((a => c) v (b => c))), CounterModel).
 
 	test(fcube_formula_3, true(CounterModel ==  [valida])) :-
 		^^suppress_text_output,

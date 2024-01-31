@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2020-2021 Paulo Moura   <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2020-2024 Paulo Moura   <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2012 Mauro Ferrari      <mauro.ferrari@uninsubria.it>
 %  SPDX-FileCopyrightText: 2012 Camillo Fiorentini <fiorenti@dsi.unimi.it>
 %  SPDX-FileCopyrightText: 2012 Guido Fiorino      <guido.fiorino@unimib.it>
@@ -27,10 +27,10 @@
 :- object(fcube).
 
 	:- info([
-		version is 4:2:0,
+		version is 5:0:0,
 		author is 'Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.',
-		date is 2022-10-08,
-		copyright is 'Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura',
+		date is 2024-01-31,
+		copyright is 'Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2020-2024 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'FCube: An Efficient Prover for Intuitionistic Propositional Logic.'
 	]).
@@ -58,13 +58,10 @@
 	:- public([
 		op(1200, xfy, <=>),
 		op(1110, xfy, =>),
-		op(1000, xfy, &),
-		op(500, fy, ~)
+		op(1000, xfy, &&),
+		op(500, fy, ~),
+		op(1100, xfy, v)
 	]).
-
-	:- if((\+ current_logtalk_flag(prolog_dialect, xsb), \+ current_logtalk_flag(prolog_dialect, ji), \+ current_op(_, _, '|'))).
-		:- public(op(1100, xfy, '|')).
-	:- endif.
 
 	:- uses(integer, [
 		between/3
@@ -221,26 +218,26 @@
 	*/
 
 	findWFFalpha([], [], []).
-	findWFFalpha([H|T], [H], T) :-tipoalpha(H).
-	findWFFalpha([H|T], X, [H|Y]) :-findWFFalpha(T, X, Y).
+	findWFFalpha([H|T], [H], T) :- tipoalpha(H).
+	findWFFalpha([H|T], X, [H|Y]) :- findWFFalpha(T, X, Y).
 
 
 	/* formule di tipo 1*/
-	tipoalpha(swff(t, (_ & _))).
+	tipoalpha(swff(t, (_ && _))).
 	tipoalpha(swff(t, (_ <=> _))).
-	tipoalpha(swff(f, (_ | _))).
+	tipoalpha(swff(f, (_ v _))).
 		/*tipoalpha(swff(t,im(X,_))):-atom(X).*/
 		/* valutare se toglierlo e gestire tale formula sempre a parte come caso speciale */
-	tipoalpha(swff(t, ((_ & _) => _))).
+	tipoalpha(swff(t, ((_ && _) => _))).
 	tipoalpha(swff(t, ((_ <=> _) => _))).
-	tipoalpha(swff(t, ((_ | _) => _))).
-	tipoalpha(swff(fc, (_ | _))).
+	tipoalpha(swff(t, ((_ v _) => _))).
+	tipoalpha(swff(fc, (_ v _))).
 	tipoalpha(swff(t, ~ _)).
 
 	/*formule di tipo 2*/
-	tipobeta(swff(f, (_ & _))).
+	tipobeta(swff(f, (_ && _))).
 	tipobeta(swff(f, (_ <=> _))).
-	tipobeta(swff(t, (_ | _))).
+	tipobeta(swff(t, (_ v _))).
 
 
 	/*formule di tipo 3*/
@@ -256,7 +253,7 @@
 	tipo5(swff(fc, ~ _)).
 
 	/*formule tipo6*/
-	tipo6(swff(fc, (_ & _))).
+	tipo6(swff(fc, (_ && _))).
 	tipo6(swff(fc, (_ <=> _))).
 
 
@@ -330,9 +327,9 @@
 	Il segno di un atomo puo' essere positivo o negativo
 	*/
 	/*passo base*/
-	segnoAtomiInSwffTrue(X, [X], []) :-atom(X).
+	segnoAtomiInSwffTrue(X, [X], []) :- atom(X).
 	/*passo induttivo*/
-	segnoAtomiInSwffTrue((X & Y), Z, Atomi) :- segnoAtomiInSwffTrue(X, L, AtomiX),
+	segnoAtomiInSwffTrue((X && Y), Z, Atomi) :- segnoAtomiInSwffTrue(X, L, AtomiX),
 		segnoAtomiInSwffTrue(Y, M, AtomiY),
 		append(L, M, Z),
 		append(AtomiX, AtomiY, Atomi).
@@ -341,7 +338,7 @@
 		variabili(Y, VarY),
 		union(VarX, VarY, Z).
 
-	segnoAtomiInSwffTrue((X | Y), Z, Atomi) :- segnoAtomiInSwffTrue(X, L, AtomiX),
+	segnoAtomiInSwffTrue((X v Y), Z, Atomi) :- segnoAtomiInSwffTrue(X, L, AtomiX),
 		segnoAtomiInSwffTrue(Y, M, AtomiY),
 		append(L, M, Z),
 		append(AtomiX, AtomiY, Atomi).
@@ -354,10 +351,10 @@
 	segnoAtomiInSwffTrue(~X, L, Atomi) :- segnoAtomiInSwffFalse(X, L, Atomi).
 
 
-	segnoAtomiInSwffFalse(X, [], [X]) :-atom(X).
+	segnoAtomiInSwffFalse(X, [], [X]) :- atom(X).
 
 
-	segnoAtomiInSwffFalse((X & Y), Z, Atomi) :- segnoAtomiInSwffFalse(X, L, AtomiX),
+	segnoAtomiInSwffFalse((X && Y), Z, Atomi) :- segnoAtomiInSwffFalse(X, L, AtomiX),
 		segnoAtomiInSwffFalse(Y, M, AtomiY),
 		append(L, M, Z),
 		append(AtomiX, AtomiY, Atomi).
@@ -366,7 +363,7 @@
 		variabili(Y, VarY),
 		union(VarX, VarY, Z).
 
-	segnoAtomiInSwffFalse((X | Y), Z, Atomi) :- segnoAtomiInSwffFalse(X, L, AtomiX),
+	segnoAtomiInSwffFalse((X v Y), Z, Atomi) :- segnoAtomiInSwffFalse(X, L, AtomiX),
 		segnoAtomiInSwffFalse(Y, M, AtomiY),
 		append(L, M, Z),
 		append(AtomiX, AtomiY, Atomi).
@@ -388,7 +385,7 @@
 
 	variabili(X, [X]) :- atom(X).
 
-	variabili((X & Y), L) :- variabili(X, M),
+	variabili((X && Y), L) :- variabili(X, M),
 		variabili(Y, N),
 		append(M, N, L).
 
@@ -398,7 +395,7 @@
 		append(M, N, L).
 
 
-	variabili((X | Y), L) :- variabili(X, M),
+	variabili((X v Y), L) :- variabili(X, M),
 		variabili(Y, N),
 		append(M, N, L).
 
@@ -437,17 +434,17 @@
 
 	printSWFFSet([X|Y], SPAZIO) :- !, tab(SPAZIO*3), printSWFF(X), !, writeln(';'), printSWFFSet(Y, SPAZIO), !.
 
-	printSWFF(swff(S, 0)) :-upcase_atom(S, K), write(K), write(' 0').
-	printSWFF(swff(S, 1)) :-upcase_atom(S, K), write(K), write(' 1').
-	printSWFF(swff(S, X)) :-upcase_atom(S, K), write(K), write(' '), printWFF(X).
+	printSWFF(swff(S, 0)) :- upcase_atom(S, K), write(K), write(' 0').
+	printSWFF(swff(S, 1)) :- upcase_atom(S, K), write(K), write(' 1').
+	printSWFF(swff(S, X)) :- upcase_atom(S, K), write(K), write(' '), printWFF(X).
 
 
-	printWFF(X) :-atom(X), write(X).
-	printWFF((X => Y)) :-write('('), printWFF(X), !, write(' => '), printWFF(Y), !, write(')').
-	printWFF((X | Y)) :-write('('), printWFF(X), !, write(' | '), printWFF(Y), !, write(')').
-	printWFF((X & Y)) :-write('('), printWFF(X), !, write('&'), printWFF(Y), !, write(')').
-	printWFF((~ X)) :-write('~'), printWFF(X), !.
-	printWFF((X <=> Y)) :-write('('), printWFF(X), !, write(' <=> '), printWFF(Y), !, write(')').
+	printWFF(X) :- atom(X), write(X).
+	printWFF((X => Y)) :- write('('), printWFF(X), !, write(' => '), printWFF(Y), !, write(')').
+	printWFF((X v Y)) :- write('('), printWFF(X), !, write(' v '), printWFF(Y), !, write(')').
+	printWFF((X && Y)) :- write('('), printWFF(X), !, write('&&'), printWFF(Y), !, write(')').
+	printWFF((~ X)) :- write('~'), printWFF(X), !.
+	printWFF((X <=> Y)) :- write('('), printWFF(X), !, write(' <=> '), printWFF(Y), !, write(')').
 
 
 	/****************************************************************
@@ -462,10 +459,10 @@
 	/*passo base: il valore di un termine atomico Ã¨ se stesso */
 	valTerm(0, 0).
 	valTerm(1, 1).
-	valTerm(X, X) :-atom(X).
+	valTerm(X, X) :- atom(X).
 
 	/*passo induttivo: valore di un termine and */
-	valTerm((X & Y), RISP) :- valTerm(X, VALX), !,
+	valTerm((X && Y), RISP) :- valTerm(X, VALX), !,
 		andTable(VALX, Y, RISP) /*guarda la tabella di verita' dell'AND*/, !.
 
 	valTerm((X <=> Y), RISP) :- valTerm(X, VALX),
@@ -473,13 +470,13 @@
 		equivTable(VALX, VALY, RISP), /*guarda la tabella di verita' dell'EQUIV*/
 		!.
 
-	valTerm((X | Y), RISP) :- valTerm(X, VALX), !, /*valuta il termine di sx*/
+	valTerm((X v Y), RISP) :- valTerm(X, VALX), !, /*valuta il termine di sx*/
 		orTable(VALX, Y, RISP) /*guarda la tabella di verita' dell'OR*/, !.
 
-	valTerm((X => Y), RISP) :-valTerm(X, VALX), !, /*valuta il termine di sx*/
+	valTerm((X => Y), RISP) :- valTerm(X, VALX), !, /*valuta il termine di sx*/
 		imTable(VALX, Y, RISP) /*guarda la tabella di verita' dell'OR*/, !.
 
-	valTerm(~X, RISP) :-valTerm(X, VALX), !, nonTable(VALX, RISP).
+	valTerm(~X, RISP) :- valTerm(X, VALX), !, nonTable(VALX, RISP).
 
 	nonTable(0, 1).
 	nonTable(1, 0).
@@ -487,23 +484,23 @@
 
 
 	andTable(0, _, 0). /*se il congiunto di sx vale 0 allora la risposta vale 0 */
-	andTable(1, Y, RISP) :-valTerm(Y, RISP), !. /* se il congiunto di sx vale 1 allora la risposta vale il valore del congiunto di dx*/
-	andTable(VALX, Y, RISP) :-valTerm(Y, VALY), !, /*se il congiunto di sx Ã¨ un termine qualsiasi allora si valuta il congiunto di dx */
+	andTable(1, Y, RISP) :- valTerm(Y, RISP), !. /* se il congiunto di sx vale 1 allora la risposta vale il valore del congiunto di dx*/
+	andTable(VALX, Y, RISP) :- valTerm(Y, VALY), !, /*se il congiunto di sx Ã¨ un termine qualsiasi allora si valuta il congiunto di dx */
 		andTable2(VALX, VALY, RISP). /* e si guarda la tabella dell'and lungo la  colonna del secondo congiunto*/
 	andTable2(_, 0, 0). /* se il congiunto di dx vale 0,la risposta Ã¨ 0 */
 	andTable2(VALX, 1, VALX). /* se vale 1,la risposta Ã¨ il valore del congiunto di sx */
 	andTable2(VALX, VALX, VALX).
-	andTable2(VALX, VALY, (VALX & VALY)). /* altrimenti il valore Ã¨ l'and del valore dei 2 congiunti */
+	andTable2(VALX, VALY, (VALX && VALY)). /* altrimenti il valore Ã¨ l'and del valore dei 2 congiunti */
 
 
 	orTable(1, _, 1). /*se il congiunto di sx vale 1 allora la risposta vale 1 */
-	orTable(0, Y, RISP) :-valTerm(Y, RISP). /* se il congiunto di sx vale 1 allora la risposta vale il valore del congiunto di dx*/
-	orTable(VALX, Y, RISP) :-valTerm(Y, VALY), !, /*se il congiunto di sx Ã¨ un termine qualsiasi allora si valuta il congiunto di dx */
+	orTable(0, Y, RISP) :- valTerm(Y, RISP). /* se il congiunto di sx vale 1 allora la risposta vale il valore del congiunto di dx*/
+	orTable(VALX, Y, RISP) :- valTerm(Y, VALY), !, /*se il congiunto di sx Ã¨ un termine qualsiasi allora si valuta il congiunto di dx */
 		orTable2(VALX, VALY, RISP). /* e si guarda la tabella dell'and lungo la  colonna del secondo congiunto*/
 	orTable2(_, 1, 1). /* se il congiunto di dx vale 1,la risposta Ã¨ 1 */
 	orTable2(VALX, 0, VALX). /* se vale 0,la risposta Ã¨ il valore del congiunto di sx */
 	orTable2(VALX, VALX, VALX).
-	orTable2(VALX, VALY, (VALX | VALY)). /* altrimenti il valore Ã¨ l'and del valore dei 2 congiunti */
+	orTable2(VALX, VALY, (VALX v VALY)). /* altrimenti il valore Ã¨ l'and del valore dei 2 congiunti */
 
 	/*Semplificazioni per l'implica*/
 
@@ -531,7 +528,7 @@
 	**********************************************************/
 
 
-	valSWFF(swff(S, X), swff(S, Y)) :-valTerm(X, Y).
+	valSWFF(swff(S, X), swff(S, Y)) :- valTerm(X, Y).
 
 
 
@@ -548,8 +545,8 @@
 		data Fc X e S Y,esegue S Y[X/0],dove ...
 	*/
 
-	massacci(swff(t, X), swff(S, Y), swff(S, RISP)) :-massacciTrue(X, Y, RISP).
-	massacci(swff(fc, X), swff(S, Y), swff(S, RISP)) :-massacciFalsoCerto(X, Y, RISP).
+	massacci(swff(t, X), swff(S, Y), swff(S, RISP)) :- massacciTrue(X, Y, RISP).
+	massacci(swff(fc, X), swff(S, Y), swff(S, RISP)) :- massacciFalsoCerto(X, Y, RISP).
 
 
 	/*
@@ -558,21 +555,21 @@
 		e S e' il segno T o F MA NON Fc perche' Fc e' sinomimo di T non
 	*/
 
-	massacci(swff(f, X), swff(t, Y), swff(t, RISP)) :-massacciFalso(X, Y, RISP).
-	massacci(swff(f, X), swff(f, Y), swff(f, RISP)) :-massacciFalso(X, Y, RISP).
+	massacci(swff(f, X), swff(t, Y), swff(t, RISP)) :- massacciFalso(X, Y, RISP).
+	massacci(swff(f, X), swff(f, Y), swff(f, RISP)) :- massacciFalso(X, Y, RISP).
 	massacci(swff(f, _), swff(fc, Y), swff(fc, Y)). /* nelle formule Fc non vi Ã¨ rimpiazzamento */
 
 	massacciTrue(X, X, 1).
 	massacciTrue(_, 1, 1).
 	massacciTrue(_, 0, 0).
-	massacciTrue(_, Y, Y) :-atom(Y).
-	massacciTrue(X, (SX & DX), (Y & Z)) :- massacciTrue(X, SX, Y),
+	massacciTrue(_, Y, Y) :- atom(Y).
+	massacciTrue(X, (SX && DX), (Y && Z)) :- massacciTrue(X, SX, Y),
 		massacciTrue(X, DX, Z).
 
 	massacciTrue(X, (SX <=> DX), (Y <=> Z)) :- massacciTrue(X, SX, Y),
 		massacciTrue(X, DX, Z).
 
-	massacciTrue(X, (SX | DX), (Y | Z)) :- massacciTrue(X, SX, Y),
+	massacciTrue(X, (SX v DX), (Y v Z)) :- massacciTrue(X, SX, Y),
 		massacciTrue(X, DX, Z).
 	massacciTrue(X, (SX => DX),(Y => Z)) :- massacciTrue(X, SX, Y),
 		massacciTrue(X, DX, Z).
@@ -583,13 +580,13 @@
 	massacciFalsoCerto(_, 0, 0).
 	massacciFalsoCerto(_, 1, 1).
 	massacciFalsoCerto(_, Y, Y) :- atom(Y).
-	massacciFalsoCerto(X, (SX & DX), (Y & Z)) :- massacciFalsoCerto(X, SX, Y), !,
+	massacciFalsoCerto(X, (SX && DX), (Y && Z)) :- massacciFalsoCerto(X, SX, Y), !,
 		massacciFalsoCerto(X, DX, Z), !.
 
 	massacciFalsoCerto(X, (SX <=> DX), (Y <=> Z)) :- massacciFalsoCerto(X, SX, Y), !,
 		massacciFalsoCerto(X, DX, Z), !.
 
-	massacciFalsoCerto(X, (SX | DX), (Y | Z)) :- massacciFalsoCerto(X, SX, Y), !,
+	massacciFalsoCerto(X, (SX v DX), (Y v Z)) :- massacciFalsoCerto(X, SX, Y), !,
 		massacciFalsoCerto(X, DX, Z), !.
 	massacciFalsoCerto(X, (SX => DX),(Y => Z)) :- massacciFalsoCerto(X, SX, Y), !,
 		massacciFalsoCerto(X, DX, Z), !.
@@ -600,10 +597,10 @@
 	massacciFalso(X, X, 0).
 	massacciFalso(_, 0, 0).
 	massacciFalso(_, 1, 1).
-	massacciFalso(_, Y, Y) :-atom(Y).
-	massacciFalso(X, (SX & DX), (Y & Z)) :- massacciFalso(X, SX, Y), !,
+	massacciFalso(_, Y, Y) :- atom(Y).
+	massacciFalso(X, (SX && DX), (Y && Z)) :- massacciFalso(X, SX, Y), !,
 		massacciFalso(X, DX, Z), !.
-	massacciFalso(X, (SX | DX), (Y | Z)) :- massacciFalso(X, SX, Y), !,
+	massacciFalso(X, (SX v DX), (Y v Z)) :- massacciFalso(X, SX, Y), !,
 		massacciFalso(X, DX, Z), !.
 	massacciFalso(_, (SX => DX),(SX => DX)). /* su implica e non il rimpiazzamento si ferma */
 	massacciFalso(_, (SX <=> DX), (SX <=> DX)). /* su implica equiv e non il rimpiazzamento si ferma */
@@ -685,7 +682,7 @@
 		valSWFF(RR, RISP),
 	/*
 	 * TODO: se RISP e' formula contraddittoria
-	 *	allora TheReplacementResult = [RISP | T] e
+	 *	allora TheReplacementResult = [RISP v T] e
 	 *		NEWCANDIDATES = []
 	 *	altrimenti passo ricorsivo di rimpiazzamento di F in T.
 	 *	possiamo cosÃ¬ evitare la chiamata a coerente fatta sopra.
@@ -745,19 +742,19 @@
 	/*una F-atomica Ã¨ realizzata se la corrispondente T non appartiene al modello*/
 	realizzata(swff(f, WFF), M) :- atom(WFF), !, \+ member(swff(t, WFF), M).
 
-	realizzata(swff(t, (SX & DX)), M) :- realizzata(swff(t, SX), M), !, realizzata(swff(t, DX), M), !.
+	realizzata(swff(t, (SX && DX)), M) :- realizzata(swff(t, SX), M), !, realizzata(swff(t, DX), M), !.
 	realizzata(swff(t, (SX <=> DX)), M) :- realizzata(swff(t, (SX => DX)), M), !, realizzata(swff(t, (DX => SX)), M), !.
-	realizzata(swff(t, (SX | _)), M) :- realizzata(swff(t, SX), M), !.
-	realizzata(swff(t, (_ | DX)), M) :- realizzata(swff(t, DX), M), !.
+	realizzata(swff(t, (SX v _)), M) :- realizzata(swff(t, SX), M), !.
+	realizzata(swff(t, (_ v DX)), M) :- realizzata(swff(t, DX), M), !.
 	realizzata(swff(t, (_ => DX)), M) :- realizzata(swff(t, DX), M), !.
 	realizzata(swff(t, (SX => _)), M) :- realizzata(swff(f, SX), M), !.
 	realizzata(swff(t, ~ WFF), M) :- realizzata(swff(f, WFF), M), !.
 
-	realizzata(swff(f, (SX | DX)), M) :- realizzata(swff(f, SX), M), !, realizzata(swff(f, DX), M), !.
-	realizzata(swff(f, (SX & _)), M) :- realizzata(swff(f, SX), M), !.
-	realizzata(swff(f, (_ & DX)), M) :- realizzata(swff(f, DX), M), !.
+	realizzata(swff(f, (SX v DX)), M) :- realizzata(swff(f, SX), M), !, realizzata(swff(f, DX), M), !.
+	realizzata(swff(f, (SX && _)), M) :- realizzata(swff(f, SX), M), !.
+	realizzata(swff(f, (_ && DX)), M) :- realizzata(swff(f, DX), M), !.
 
-	realizzata(swff(f, (SX <=> DX)), M) :- realizzata(swff(f, ((SX => DX) & (DX => SX))), M), !.
+	realizzata(swff(f, (SX <=> DX)), M) :- realizzata(swff(f, ((SX => DX) && (DX => SX))), M), !.
 
 	realizzata(swff(f, (SX => DX)), M) :- realizzata(swff(t, SX), M), !, realizzata(swff(f, DX), M), !.
 	realizzata(swff(f, ~ WFF), M) :- realizzata(swff(t, WFF), M), !.
@@ -791,13 +788,13 @@
 	/*
 			COSTRUISCE CONTROMODELLO INTUIZIONISTA
 
-	intControModello(BACK,RESTO,COUNTERMODEL,SPAZIO,jumpbranch | safebranch,IdxNewAtom):
+	intControModello(BACK,RESTO,COUNTERMODEL,SPAZIO,jumpbranch v safebranch,IdxNewAtom):
 	costruisce il contromodello a BACK unione RESTO.
 	Se il contromodello non esiste
 	allora COUNTERMODEL contiene [no countermodel].
 	intControModello viene chiamato su un insieme coerente.
 	SPAZIO: variabile usata per la stampa;
-	jumpbranch | safebranch : specifica se la conclusione di rule ha Sc o no. L'informazione e' usata da
+	jumpbranch v safebranch : specifica se la conclusione di rule ha Sc o no. L'informazione e' usata da
 	continuaIterazione per trattare T->-> e T->non;
 	IdxNewAtom e' un intero che serve a generare sistematicamente nuovi atomi per T->->.
 	*/
@@ -1036,8 +1033,8 @@
 	isWffClassic(0, 1) :- writeln('isWFFClassic chiamato con wff uguale a 0').
 	/* le formule 1 e 0 sono classiche,questo caso non dovrebbe mai verificarsi */
 	isWffClassic(WFF, 1) :-atom(WFF), !.
-	isWffClassic((LEFT & RIGHT), 1) :- isWffClassic(LEFT, 1), !, isWffClassic(RIGHT, 1), !.
-	isWffClassic((LEFT | RIGHT), 1) :- isWffClassic(LEFT, 1), !, isWffClassic(RIGHT, 1), !.
+	isWffClassic((LEFT && RIGHT), 1) :- isWffClassic(LEFT, 1), !, isWffClassic(RIGHT, 1), !.
+	isWffClassic((LEFT v RIGHT), 1) :- isWffClassic(LEFT, 1), !, isWffClassic(RIGHT, 1), !.
 	isWffClassic(WFF, 0) :- \+ isWffClassic(WFF, 1), !. /* in tutti gli altri casi non Ã¨ wff classica */
 
 	/*
@@ -1208,7 +1205,7 @@
 	/*
 		REGOLE INTUIZIONISTE
 
-	rule(H,S,RESULT,safebranch | jumpbranch):
+	rule(H,S,RESULT,safebranch v jumpbranch):
 	H e' la main swff a cui applicare la regola;
 	S e' l'insieme;
 	NEWS e' l'insieme rislutato dopo la semplificazione
@@ -1217,9 +1214,9 @@
 
 
 	/*regola T and*/
-	rule(swff(t, (X & Y)), S, NEWS, safebranch, _) :-
+	rule(swff(t, (X && Y)), S, NEWS, safebranch, _) :-
 		!,
-		estraiListaTAnd((X & Y), ListaAnd),
+		estraiListaTAnd((X && Y), ListaAnd),
 		union(ListaAnd, S, S1),
 		semplificazioneBreve(ListaAnd, S1, NEWS).
 
@@ -1228,8 +1225,8 @@
 			[swff(t, (X => Y)), swff(t, (Y => X))|S], NEWS).
 
 	/*regola T or */
-	rule(swff(t, (X | Y)), S, NEWS, safebranch, _) :- !,
-		estraiListaTOr((X | Y), ListaOr),
+	rule(swff(t, (X v Y)), S, NEWS, safebranch, _) :- !,
+		estraiListaTOr((X v Y), ListaOr),
 		trattaListaTor(ListaOr, S, NEWS).
 
 
@@ -1247,18 +1244,18 @@
 		semplificazioneCerta([swff(t, Y)], [swff(t, Y)|S], NEWS).
 
 	/*regola T im and*/
-	rule(swff(t, ((A & B) => Y)), S, NEWS, safebranch, _) :-
+	rule(swff(t, ((A && B) => Y)), S, NEWS, safebranch, _) :-
 		!,
 		semplificazioneBreve([swff(t, (A => (B => Y)))], [swff(t, (A => (B => Y)))|S], NEWS).
 
 	/*regola T im equiv*/
 	rule(swff(t, ((A <=> B) => Y)), S, NEWS, safebranch, _) :-
 		!,
-		semplificazioneCerta([swff(t, (((A => B) & (B => A)) => Y))],
-			[swff(t, (((A => B) & (B => A)) => Y))|S], NEWS).
+		semplificazioneCerta([swff(t, (((A => B) && (B => A)) => Y))],
+			[swff(t, (((A => B) && (B => A)) => Y))|S], NEWS).
 
 	/*regola T im or*/
-	rule(swff(t, ((A | B) => Y)), S, NEWS, safebranch, _) :-
+	rule(swff(t, ((A v B) => Y)), S, NEWS, safebranch, _) :-
 		!,
 		semplificazioneBreve([swff(t, (A => Y)), swff(t, (B => Y))],
 			[swff(t, (A => Y)), swff(t, (B => Y))|S], NEWS).
@@ -1306,19 +1303,19 @@
 		semplificazioneBreve([swff(fc, X)], [swff(fc, X)|S], NEWS).
 
 	/* F or*/
-	rule(swff(f, (X | Y)), S, NEWS, safebranch, _) :-
+	rule(swff(f, (X v Y)), S, NEWS, safebranch, _) :-
 		!,
-		estraiListaFOr((X | Y), ListaOr),
+		estraiListaFOr((X v Y), ListaOr),
 		union(ListaOr, S, S1),
 		semplificazioneBreve(ListaOr, S1, NEWS).
 
 
 
-	rule(swff(f, (X & _)), S, NEWS, safebranch, _) :- write('Left branch of F and,'),
+	rule(swff(f, (X && _)), S, NEWS, safebranch, _) :- write('Left branch of F and,'),
 		semplificazioneBranch([swff(f, X)], [swff(f, X)|S], NEWS).
 
-	rule(swff(f, (X & Y)), S, NEWS, safebranch, _) :- !,
-		messageOnClosedSet([swff(f, (X & Y))|S]),
+	rule(swff(f, (X && Y)), S, NEWS, safebranch, _) :- !,
+		messageOnClosedSet([swff(f, (X && Y))|S]),
 		write('Rigth branch of F and,'),
 		semplificazioneBranch([swff(f, Y)], [swff(f, Y)|S], NEWS).
 
@@ -1364,18 +1361,18 @@
 		union(SetWithTheNewFimplica, S, NEWS).
 
 	/* Fc or*/
-	rule(swff(fc, (X | Y)), S, NEWS, safebranch, _) :-
+	rule(swff(fc, (X v Y)), S, NEWS, safebranch, _) :-
 		!,
 		semplificazioneBreve([swff(fc, X), swff(fc, Y)], [swff(fc, X), swff(fc, Y)|S], NEWS).
 
 
 	/* Fc and */
-	rule(swff(fc,(X & _)), S, NEWS, jumpbranch, _) :- partecerta(S, SCERTO),
+	rule(swff(fc,(X && _)), S, NEWS, jumpbranch, _) :- partecerta(S, SCERTO),
 		semplificazioneCerta([swff(fc, X)], [swff(fc, X)|SCERTO], NEWS).
 
 	/* Fc and */
-	rule(swff(fc, (X & Y)), S, NEWS, jumpbranch, _) :- !,
-		messageOnClosedSet([swff(fc, (X & Y))|S]),
+	rule(swff(fc, (X && Y)), S, NEWS, jumpbranch, _) :- !,
+		messageOnClosedSet([swff(fc, (X && Y))|S]),
 		partecerta(S, SCERTO),
 		semplificazioneCerta([swff(fc, Y)], [swff(fc, Y)|SCERTO], NEWS).
 
@@ -1456,9 +1453,9 @@
 	wff(X) :- wffIsCorrect(X), printWFF(X).
 
 	wffIsCorrect(X) :-atom(X).
-	wffIsCorrect((X & Y)) :- wffIsCorrect(X), wffIsCorrect(Y).
+	wffIsCorrect((X && Y)) :- wffIsCorrect(X), wffIsCorrect(Y).
 	wffIsCorrect((X <=> Y)) :- wffIsCorrect(X), wffIsCorrect(Y).
-	wffIsCorrect((X | Y)) :- wffIsCorrect(X), wffIsCorrect(Y).
+	wffIsCorrect((X v Y)) :- wffIsCorrect(X), wffIsCorrect(Y).
 	wffIsCorrect((X => Y)) :- wffIsCorrect(X), wffIsCorrect(Y).
 	wffIsCorrect((~X)) :- wffIsCorrect(X).
 
@@ -1476,7 +1473,7 @@
 	ccTAnd(0, [swff(t, 0)]). /* aggiunto nella versione V13 */
 	ccTAnd(1, [swff(t, 1)]). /* aggiunto nella versione V13 */
 	ccTAnd(F, [swff(t, F)]) :- atom(F).
-	ccTAnd((X & Y), SET) :- ccTAnd(X, XC),
+	ccTAnd((X && Y), SET) :- ccTAnd(X, XC),
 		ccTAnd(Y, YC),
 		append(XC, YC, SET).
 	ccTAnd(WFF, [swff(t, WFF)]).
@@ -1487,7 +1484,7 @@
 	ccFor(0, [swff(f, 0)]). /* aggiunto nella versione V13 */
 	ccFor(1, [swff(f, 1)]). /* aggiunto nella versione V13 */
 	ccFor(F, [swff(f, F)]) :- atom(F).
-	ccFor((X | Y), SET) :- ccFor(X, XC),
+	ccFor((X v Y), SET) :- ccFor(X, XC),
 		ccFor(Y, YC),
 		append(XC, YC, SET).
 	ccFor(WFF, [swff(f, WFF)]).
@@ -1513,22 +1510,22 @@
 	cc(swff(S, 1), [swff(S, 1)]). /* aggiunto nella versione V13 */
 	cc(swff(S, F), [swff(S, F)]) :- atom(F).
 
-	/* caso T a&B */
-	cc(swff(t, (X & Y)), C) :- cc(swff(t, X), XC), !,
+	/* caso T a&&B */
+	cc(swff(t, (X && Y)), C) :- cc(swff(t, X), XC), !,
 		cc(swff(t, Y), YC), !,
 		append(XC, YC, C).
 
-	cc(swff(t, (X <=> Y)), C) :- cc(swff(t, ((X =>Y) & (Y => X))), C), !.
+	cc(swff(t, (X <=> Y)), C) :- cc(swff(t, ((X =>Y) && (Y => X))), C), !.
 
-	cc(swff(f, (X | Y)), C) :- cc(swff(f, X), XC), !,
+	cc(swff(f, (X v Y)), C) :- cc(swff(f, X), XC), !,
 		cc(swff(f, Y), YC), !,
 		append(XC, YC, C).
 
-	cc(swff(t, (X | Y)), [swff(t, (X | Y))|C]) :- cc(swff(t, X), XC),
+	cc(swff(t, (X v Y)), [swff(t, (X v Y))|C]) :- cc(swff(t, X), XC),
 		cc(swff(t, Y), YC),
 		intersection(XC, YC, C).
 
-	cc(swff(f, (X & Y)), [swff(f, (X & Y))|C]) :- cc(swff(f, X), XC),
+	cc(swff(f, (X && Y)), [swff(f, (X && Y))|C]) :- cc(swff(f, X), XC),
 		cc(swff(f, Y), YC),
 		intersection(XC, YC, C).
 
@@ -1548,9 +1545,9 @@
 
 	cc(swff(f, ~X), [swff(f, ~X)]).
 
-	cc(swff(fc, (X & Y)), [swff(fc, (X & Y))]).
+	cc(swff(fc, (X && Y)), [swff(fc, (X && Y))]).
 	cc(swff(fc, (X <=> Y)), [swff(fc, (X <=> Y))]).
-	cc(swff(fc, (X | Y)), C) :- cc(swff(fc, X), XC),
+	cc(swff(fc, (X v Y)), C) :- cc(swff(fc, X), XC),
 		cc(swff(fc, Y), YC),
 		append(XC, YC, C).
 	cc(swff(fc, (X => Y)), [swff(fc, (X => Y))]).
@@ -1568,11 +1565,11 @@
 	pruning(swff(S, 0), swff(S, 0)).
 	pruning(swff(S, X), swff(S, X)) :- atom(X).
 
-	pruning(swff(t, (X <=> Y)), PRUNED) :- pruning(swff(t, ((X => Y) & (Y => X))), PRUNED).
+	pruning(swff(t, (X <=> Y)), PRUNED) :- pruning(swff(t, ((X => Y) && (Y => X))), PRUNED).
 
-	pruning(swff(t, (X & Y)), PRUNED) :-
+	pruning(swff(t, (X && Y)), PRUNED) :-
 	/*calcola il contesto congiuntivo della
-	formula	*/ ccTAnd((X & Y), CCX), !,
+	formula	*/ ccTAnd((X && Y), CCX), !,
 		list_to_set(CCX, CCXSET),
 		pruningSetSwff(CCXSET, CCXSetPruned),
 		simplification(CCXSetPruned, CCXSetPruned, RES), !,
@@ -1586,18 +1583,18 @@
 
 
 
-	pruning(swff(t, (X | Y)), PRUNED) :-
+	pruning(swff(t, (X v Y)), PRUNED) :-
 		pruning(swff(t, X), swff(t, HX)), !,
 		pruning(swff(t, Y), swff(t, HY)), !,
-		cc(swff(t, (HX | HY)), CCX), !,
+		cc(swff(t, (HX v HY)), CCX), !,
 		list_to_set(CCX, CCXSET),
-		simplification(CCXSET, [swff(t, (HX | HY))|CCXSET], RES), !,
+		simplification(CCXSET, [swff(t, (HX v HY))|CCXSET], RES), !,
 		list_to_set(RES, SET),
 		fromSetTotSwff(SET, H), !,
 		valSWFF(H, PRUNED).
 
 
-	pruning(swff(f, (X | Y)), PRUNED) :- ccFor((X | Y), CCX), !,
+	pruning(swff(f, (X v Y)), PRUNED) :- ccFor((X v Y), CCX), !,
 		list_to_set(CCX, CCXSET),
 		pruningSetSwff(CCXSET, CCXSetPruned),
 		simplification(CCXSetPruned, CCXSetPruned, RES), !,
@@ -1605,13 +1602,13 @@
 		fromSetTofSwff(SET, H), !,
 		valSWFF(H, PRUNED).
 
-	pruning(swff(f, (X <=> Y)), PRUNED) :- pruning(swff(f, ((X => Y) & (Y => X))), PRUNED).
+	pruning(swff(f, (X <=> Y)), PRUNED) :- pruning(swff(f, ((X => Y) && (Y => X))), PRUNED).
 
-	pruning(swff(f, (X & Y)), PRUNED) :- pruning(swff(f, X), swff(f, HX)), !,
+	pruning(swff(f, (X && Y)), PRUNED) :- pruning(swff(f, X), swff(f, HX)), !,
 		pruning(swff(f, Y), swff(f, HY)), !,
-		cc(swff(f, (HX & HY)), CCX), !,
+		cc(swff(f, (HX && HY)), CCX), !,
 		list_to_set(CCX, CCXSET),
-		simplification(CCXSET, [swff(f, (HX & HY))|CCXSET], RES), !,
+		simplification(CCXSET, [swff(f, (HX && HY))|CCXSET], RES), !,
 		list_to_set(RES, SET),
 		fromSetTofSwff(SET, H), !,
 		valSWFF(H, PRUNED).
@@ -1664,20 +1661,20 @@
 		/*esegue valutazione booleana*/ valSWFF(swff(fc, (TH => FH)), PRUNED).
 
 
-	pruning(swff(fc, (X | Y)), PRUNED) :- pruning(swff(fc, X), swff(fc, HX)), !,
+	pruning(swff(fc, (X v Y)), PRUNED) :- pruning(swff(fc, X), swff(fc, HX)), !,
 		pruning(swff(fc, Y), swff(fc, HY)), !,
-		cc(swff(fc, (HX | HY)), CCX), !,
+		cc(swff(fc, (HX v HY)), CCX), !,
 		list_to_set(CCX, CCXSET),
 		simplification([swff(fc, HX), swff(fc, HY)|CCXSET], [swff(fc, HX), swff(fc, HY)|CCXSET], RES), !,
 		list_to_set(RES, SET),
 		fromSetTofcSwff(SET, H), !,
 		valSWFF(H, PRUNED).
 
-	pruning(swff(fc, (X <=> Y)), PRUNED) :- pruning(swff(fc, ((X => Y) & (Y => X))), PRUNED).
+	pruning(swff(fc, (X <=> Y)), PRUNED) :- pruning(swff(fc, ((X => Y) && (Y => X))), PRUNED).
 
-	pruning(swff(fc, (X & Y)), PRUNED) :- pruning(swff(fc, X), swff(fc, HX)), !,
+	pruning(swff(fc, (X && Y)), PRUNED) :- pruning(swff(fc, X), swff(fc, HX)), !,
 		pruning(swff(fc, Y), swff(fc, HY)), !,
-		valSWFF(swff(fc, (HX & HY)), PRUNED).
+		valSWFF(swff(fc, (HX && HY)), PRUNED).
 	/*******************************
 	Versione piu' "aggressiva",non so se corretta. Inoltre,bisogna considerare se  vogliamo
 	calcolare il cc di un insieme S	di formule. Con l'attuale implementazione di pruningSetSwff la parte qui sotto
@@ -1705,31 +1702,31 @@
 
 
 
-	/*fromSetTotSwff([],_):-	writeln('ERRORE IN fromSetTotSwff'),abort.*/
+	/*fromSetTotSwff([],_) :- writeln('ERRORE IN fromSetTotSwff'),abort.*/
 
 	fromSetTotSwff([], swff(t, 1)). /* modificato in V13 */
 	fromSetTotSwff([swff(t, X)], swff(t, X)).
 	fromSetTotSwff([swff(fc, X)], swff(t, ~X)). /* caso aggiunto in V13 */
-	fromSetTotSwff([swff(t, X)|RES], swff(t, (X & Y))) :- fromSetTotSwff(RES, swff(t, Y)), !.
-	fromSetTotSwff([swff(fc, X)|RES], swff(t, (~X & Y))) :- fromSetTotSwff(RES, swff(t, Y)), !. /* caso aggiunto in V13*/
+	fromSetTotSwff([swff(t, X)|RES], swff(t, (X && Y))) :- fromSetTotSwff(RES, swff(t, Y)), !.
+	fromSetTotSwff([swff(fc, X)|RES], swff(t, (~X && Y))) :- fromSetTotSwff(RES, swff(t, Y)), !. /* caso aggiunto in V13*/
 	fromSetTotSwff(X, _) :- write('ERRORE IN fromSetTotSwff('), write(X), write(')'), abort.
 
 
 
 
-	/*fromSetTofSwff([],_):-	writeln('ERRORE IN fromSetTofSwff'),abort.*/
+	/*fromSetTofSwff([],_) :- writeln('ERRORE IN fromSetTofSwff'),abort.*/
 
 	fromSetTofSwff([], swff(f, 0)).
 	fromSetTofSwff([swff(f, X)], swff(f, X)).
-	fromSetTofSwff([swff(f, X)|RES], swff(f, (X | Y))) :- fromSetTofSwff(RES, swff(f, Y)), !.
+	fromSetTofSwff([swff(f, X)|RES], swff(f, (X v Y))) :- fromSetTofSwff(RES, swff(f, Y)), !.
 	fromSetTofSwff(X, _) :- write('ERRORE IN fromSetTofSwff('), write(X), write(')'), abort.
 
 
-	/*fromSetTofcSwff([],_):-	writeln('ERRORE IN fromSetTofSwff'),abort.*/
+	/*fromSetTofcSwff([],_) :- writeln('ERRORE IN fromSetTofSwff'),abort.*/
 
 	fromSetTofcSwff([], swff(fc, 0)).
 	fromSetTofcSwff([swff(fc, X)], swff(fc, X)).
-	fromSetTofcSwff([swff(fc, X)|RES], swff(fc, (X | Y))) :- fromSetTofcSwff(RES, swff(fc, Y)), !.
+	fromSetTofcSwff([swff(fc, X)|RES], swff(fc, (X v Y))) :- fromSetTofcSwff(RES, swff(fc, Y)), !.
 	fromSetTofcSwff(X, _) :- write('ERRORE IN fromSetTofSwff('), write(X), write(')'), abort.
 
 
@@ -1796,7 +1793,7 @@
 	clVarsInSWFFTrue(X, [X], []) :- atom(X).
 
 
-	clVarsInSWFFTrue((X & Y), PosVars, NegVars) :- clVarsInSWFFTrue(X, PVarsX, NVarsX),
+	clVarsInSWFFTrue((X && Y), PosVars, NegVars) :- clVarsInSWFFTrue(X, PVarsX, NVarsX),
 		clVarsInSWFFTrue(Y, PVarsY, NVarsY),
 		union(PVarsX, PVarsY, PosVars),
 		union(NVarsX, NVarsY, NegVars).
@@ -1806,7 +1803,7 @@
 		union(PVarsX, PVarsY, PosVars),
 		union(NVarsX, NVarsY, NegVars).
 
-	clVarsInSWFFTrue((X | Y), PosVars, NegVars) :- clVarsInSWFFTrue(X, PVarsX, NVarsX),
+	clVarsInSWFFTrue((X v Y), PosVars, NegVars) :- clVarsInSWFFTrue(X, PVarsX, NVarsX),
 		clVarsInSWFFTrue(Y, PVarsY, NVarsY),
 		union(PVarsX, PVarsY, PosVars),
 		union(NVarsX, NVarsY, NegVars).
@@ -1819,12 +1816,12 @@
 	clVarsInSWFFFalse(swff(f, 0), [], []).
 	clVarsInSWFFFalse(X, [], [X]) :- atom(X).
 
-	clVarsInSWFFFalse((X & Y), PosVars, NegVars) :- clVarsInSWFFFalse(X, PVarsX, NVarsX),
+	clVarsInSWFFFalse((X && Y), PosVars, NegVars) :- clVarsInSWFFFalse(X, PVarsX, NVarsX),
 		clVarsInSWFFFalse(Y, PVarsY, NVarsY),
 		union(PVarsX, PVarsY, PosVars),
 		union(NVarsX, NVarsY, NegVars).
 
-	clVarsInSWFFFalse((X | Y), PosVars, NegVars) :- clVarsInSWFFFalse(X, PVarsX, NVarsX),
+	clVarsInSWFFFalse((X v Y), PosVars, NegVars) :- clVarsInSWFFFalse(X, PVarsX, NVarsX),
 		clVarsInSWFFFalse(Y, PVarsY, NVarsY),
 		union(PVarsX, PVarsY, PosVars),
 		union(NVarsX, NVarsY, NegVars).
@@ -1961,7 +1958,7 @@
 	conservaTatomiche(_, _) :- writeln('*** ERRORE IN conservaTatomiche ***'),
 		abort.
 
-	estraiListaTAnd((X & Y), ListaAnd) :- !,
+	estraiListaTAnd((X && Y), ListaAnd) :- !,
 		estraiListaTAnd(X, ListaX),
 		estraiListaTAnd(Y, ListaY),
 		union(ListaX, ListaY, ListaAnd).
@@ -1969,7 +1966,7 @@
 	estraiListaTAnd(X, [swff(t, X)]).
 
 
-	estraiListaTOr((X | Y), ListaAnd) :- !,
+	estraiListaTOr((X v Y), ListaAnd) :- !,
 		estraiListaTOr(X, ListaX),
 		estraiListaTOr(Y, ListaY),
 		union(ListaX, ListaY, ListaAnd).
@@ -1977,14 +1974,14 @@
 	estraiListaTOr(X, [swff(t, X)]).
 
 
-	estraiListaFOr((X | Y), ListaOr) :- !,
+	estraiListaFOr((X v Y), ListaOr) :- !,
 		estraiListaFOr(X, ListaX),
 		estraiListaFOr(Y, ListaY),
 		union(ListaX, ListaY, ListaOr).
 
 	estraiListaFOr(X, [swff(f, X)]).
 
-	estraiListaFAnd((X & Y), ListaOr) :- !,
+	estraiListaFAnd((X && Y), ListaOr) :- !,
 		estraiListaFAnd(X, ListaX),
 		estraiListaFAnd(Y, ListaY),
 		union(ListaX, ListaY, ListaOr).
@@ -2018,24 +2015,24 @@
 			Res = (ResY <=> ResX)
 		).
 
-	orderEquiv((X & Y), Res) :- orderEquiv(X, ResX),
+	orderEquiv((X && Y), Res) :- orderEquiv(X, ResX),
 		orderEquiv(Y, ResY),
 		(
 			ResX @< ResY,
 			!,
-			Res = (ResX & ResY)
+			Res = (ResX && ResY)
 		;
-			Res = (ResY & ResX)
+			Res = (ResY && ResX)
 		).
 
-	orderEquiv((X | Y), Res) :- orderEquiv(X, ResX),
+	orderEquiv((X v Y), Res) :- orderEquiv(X, ResX),
 		orderEquiv(Y, ResY),
 		(
 			ResX @< ResY,
 			!,
-			Res = (ResX | ResY)
+			Res = (ResX v ResY)
 		;
-			Res = (ResY | ResX)
+			Res = (ResY v ResX)
 		).
 
 	orderEquiv((X => Y), (ResX => ResY)) :- orderEquiv(X, ResX),

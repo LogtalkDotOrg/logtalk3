@@ -24,28 +24,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- op(1200, xfy, <=>).
+:- op(1110, xfy, =>).
+:- op(1100, xfy, v).
+:- op(1000, xfy, &&).
+:- op(500, fy, ~).
+
 :- if(current_logtalk_flag(prolog_dialect, lvm)).
-
-	:- initialization((write('(not applicable)'), nl)).
-
-:- else.
-
-	:- op(1200, xfy, <=>).
-	:- op(1110, xfy, =>).
-	:- if((\+ current_logtalk_flag(prolog_dialect, xsb), \+ current_logtalk_flag(prolog_dialect, ji), \+ current_op(_, _, '|'))).
-		:- op(1100, xfy, '|').
-	:- endif.
-	:- op(1000, xfy, &).
-	:- op(500, fy, ~).
-
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(sets(loader)),
-		logtalk_load(os(loader)),
-		logtalk_load(fcube, [disjunctions(silent), source_data(on), debug(on)]),
-		logtalk_load(lgtunit(loader)),
-		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
-	)).
-
+	abort :-
+		throw(abort).
 :- endif.
+
+:- initialization((
+	logtalk_load(basic_types(loader)),
+	logtalk_load(sets(loader)),
+	logtalk_load(os(loader)),
+	logtalk_load(fcube, [disjunctions(silent), source_data(on), debug(on)]),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
+)).

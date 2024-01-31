@@ -24,25 +24,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- op(1200, xfy, <=>).
+:- op(1110, xfy, =>).
+:- op(1100, xfy, v).
+:- op(1000, xfy, &&).
+:- op(500, fy, ~).
+
 :- if(current_logtalk_flag(prolog_dialect, lvm)).
-
-	:- initialization((write('(currently not compatible with LVM due to a conflict with a built-in operator)'), nl)).
-
-:- else.
-
-	:- op(1200, xfy, <=>).
-	:- op(1110, xfy, =>).
-	:- if((\+ current_logtalk_flag(prolog_dialect, xsb), \+ current_logtalk_flag(prolog_dialect, ji), \+ current_op(_, _, '|'))).
-		:- op(1100, xfy, '|').
-	:- endif.
-	:- op(1000, xfy, &).
-	:- op(500, fy, ~).
-
-	:- initialization((
-		logtalk_load(basic_types(loader)),
-		logtalk_load(sets(loader)),
-		logtalk_load(os(loader)),
-		logtalk_load(fcube, [disjunctions(silent), optimize(on)])
-	)).
-
+	abort :-
+		throw(abort).
 :- endif.
+
+:- initialization((
+	logtalk_load(basic_types(loader)),
+	logtalk_load(sets(loader)),
+	logtalk_load(os(loader)),
+	logtalk_load(fcube, [disjunctions(silent), optimize(on)])
+)).

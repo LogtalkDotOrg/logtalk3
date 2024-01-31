@@ -159,6 +159,12 @@ use of unsound control constructs in grammar rules.
 
 * FIXED: Syntax error in the `logtalk_tester.ps1` script.
 
+Ports
+-----
+
+* IMPROVED: Portability of the `fcube` port by using less problematic operator
+names. This allows the port to run with LVM and SICStus Prolog.
+
 Examples
 --------
 
