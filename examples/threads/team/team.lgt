@@ -22,9 +22,9 @@
 :- object(team).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2013-10-14,
+		date is 2024-02-01,
 		comment is 'Example of synchronous concurrency as described in the corresponding Rosetta Code task.'
 	]).
 
@@ -38,7 +38,10 @@
 		)).
 
 	reader :-
-		open('input.txt', read, Stream),
+		this(This),
+		object_property(This, file(_, Directory)),
+		atom_concat(Directory, 'input.txt', File),
+		open(File, read, Stream),
 		repeat,
 			read_term(Stream, Term, []),
 			threaded_notify(term(Term)),

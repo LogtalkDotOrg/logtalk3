@@ -25,7 +25,11 @@ RELEASE NOTES
 3.75.0 - February ??, 2024
 ==========================
 
+Examples
+--------
 
+* FIXED: The `threads/team` example to allow running it independently of the
+current directory.
 
 
 3.74.0 - January 31, 2024
