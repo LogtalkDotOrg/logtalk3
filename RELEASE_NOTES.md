@@ -28,6 +28,9 @@ RELEASE NOTES
 Examples
 --------
 
+* UPDATED: The `engines/tbbt` and `threads/whisper` examples to use the
+`format` library.
+
 * FIXED: The `threads/team` example to allow running it independently of the
 current directory.
 

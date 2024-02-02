@@ -22,9 +22,9 @@
 :- object(game).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2022-02-22,
+		date is 2024-02-02,
 		comment is 'Implementation of the rock, paper, scissors, lizard, Spock game played in the "The Big Bang Theory" sitcom.'
 	]).
 
@@ -33,12 +33,14 @@
 	% create an engine to do all output from the other engines
 	:- initialization(threaded_engine_create(_, output, writer)).
 
-	:- uses(user, [format/2]).
-
 	:- public(explain/0).
 	:- mode(explain, one).
 	:- info(explain/0, [
 		comment is 'Explains the game of rock, paper, scissors, lizard, Spock to wannabe nerds.'
+	]).
+
+	:- uses(format, [
+		format/2
 	]).
 
 	explain :-

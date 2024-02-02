@@ -22,6 +22,7 @@
 :- if(current_logtalk_flag(engines, supported)).
 
 	:- initialization((
+		logtalk_load(format(loader)),
 		logtalk_load(random(loader)),
 		logtalk_load(game, [optimize(on)])
 	)).
