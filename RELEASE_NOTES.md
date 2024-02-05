@@ -28,6 +28,9 @@ RELEASE NOTES
 Examples
 --------
 
+* IMPROVED: Tests for the tests for the `threads/sorting` example by using
+explicit assertions.
+
 * UPDATED: The `engines/tbbt` and `threads/whisper` examples to use the
 `format` library.
 
