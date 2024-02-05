@@ -28,6 +28,8 @@ RELEASE NOTES
 Examples
 --------
 
+* ADDED: Tests for the `tbbt` threaded engine example.
+
 * IMPROVED: Tests for the tests for the `ping_pong`, `sorting`, and `team`
 multi-threading examples by using explicit assertions.
 
