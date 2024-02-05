@@ -28,10 +28,10 @@ RELEASE NOTES
 Examples
 --------
 
-* IMPROVED: Tests for the tests for the `threads/sorting` example by using
-explicit assertions.
+* IMPROVED: Tests for the tests for the `ping_pong`, `sorting`, and `team`
+multi-threading examples by using explicit assertions.
 
-* UPDATED: The `engines/tbbt` and `threads/whisper` examples to use the
+* UPDATED: The `tbbt` and `whisper` threaded engine examples to use the
 `format` library.
 
 * FIXED: The `threads/team` example to allow running it independently of the
