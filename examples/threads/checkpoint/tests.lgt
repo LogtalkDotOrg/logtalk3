@@ -23,15 +23,51 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2013-10-22,
+		date is 2024-02-06,
 		comment is 'Unit tests for the "threads/checkpoint" example.'
 	]).
 
 	cover(checkpoint).
 
-	test(checkpoint_1) :-
-		checkpoint::run.
+	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+
+		test(checkpoint_1, true) :-
+			checkpoint::run.
+
+	:- else.
+
+		test(checkpoint_1, true) :-
+			^^set_text_output(''),
+			checkpoint::run,
+			^^text_output_contents(Chars),
+			atom_chars(Atom, Chars),
+			atom::split(Atom, '\n', Lines),
+			list::msort(Lines, Sorted),
+			^^assertion(Sorted == [
+				'',
+				'All assemblies done.',
+				'Assembly of item 1 done.',
+				'Assembly of item 2 done.',
+				'Assembly of item 3 done.',
+				'Worker 1 item 1',
+				'Worker 1 item 2',
+				'Worker 1 item 3',
+				'Worker 2 item 1',
+				'Worker 2 item 2',
+				'Worker 2 item 3',
+				'Worker 3 item 1',
+				'Worker 3 item 2',
+				'Worker 3 item 3',
+				'Worker 4 item 1',
+				'Worker 4 item 2',
+				'Worker 4 item 3',
+				'Worker 5 item 1',
+				'Worker 5 item 2',
+				'Worker 5 item 3'
+			]).
+
+	:- endif.
 
 :- end_object.
