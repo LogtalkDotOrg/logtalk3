@@ -27,4 +27,4 @@ Rosetta Code website.
 
 For more information see:
 
-	http://rosettacode.org/wiki/Checkpoint_synchronization
+	https://rosettacode.org/wiki/Checkpoint_synchronization
