@@ -23,20 +23,23 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2012-12-25,
+		date is 2024-02-06,
 		comment is 'Unit tests for the "threads/buffer" example.'
 	]).
 
 	:- threaded.
 
-	cover(buffer(_)).
-	cover(producer(_)).
-	cover(consumer(_)).
-
-	test(buffer_1) :-
-		threaded_ignore(producer(2)::run(25)),
-		threaded_ignore(consumer(5)::run(25)).
+	test(buffer_1, true) :-
+		^^suppress_text_output,
+		threaded_call(producer(2)::run(25)),
+		threaded_call(consumer(5)::run(25)),
+		threaded_exit(producer(2)::run(25)),
+		threaded_exit(consumer(5)::run(25)),
+		findall(PItem, buffer(_)::produced(PItem), PItems),
+		^^assertion(PItems == [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]),
+		findall(CItem, buffer(_)::consumed(CItem), CItems),
+		^^assertion(CItems == [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]).
 
 :- end_object.

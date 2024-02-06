@@ -22,9 +22,9 @@
 :- object(buffer(_MaxCapacity_)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2021-02-07,
+		date is 2024-02-06,
 		comment is 'Producer-consumer problem with a bounded buffer.'
 	]).
 
@@ -42,11 +42,20 @@
 		comment is 'Get an item from the buffer.'
 	]).
 
+	% public predicates just for testing
+	:- public(produced/1).
+	:- dynamic(produced/1).
+
+	:- public(consumed/1).
+	:- dynamic(consumed/1).
+
 	:- private(item_/1).
 	:- dynamic(item_/1).
 
 	:- private(size_/1).
 	:- dynamic(size_/1).
+
+	:- uses(format, [format/2]).
 
 	size_(0).
 
@@ -57,16 +66,16 @@
 		retract(size_(N)),
 		N2 is N + 1,
 		assertz(size_(N2)),
-		write(' produced item '), write(Item),
-		write(' ('), write(N2), write('/'), write(_MaxCapacity_), write(' items in the buffer'), write(')'), nl.
+		format('produced item ~w (~w/~w items in the buffer)~n', [Item, N2, _MaxCapacity_]),
+		assertz(produced(Item)).
 
 	get_item(Item) :-
 		retract(item_(Item)),
 		retract(size_(N)),
 		N2 is N - 1,
 		assertz(size_(N2)),
-		write(' consumed item '), write(Item),
-		write(' ('), write(N2), write('/'), write(_MaxCapacity_), write(' items in the buffer'), write(')'), nl.
+		format('consumed item ~w (~w/~w items in the buffer)~n', [Item, N2, _MaxCapacity_]),
+		assertz(consumed(Item)).
 
 	put(Item) :-
 		size_(N),
