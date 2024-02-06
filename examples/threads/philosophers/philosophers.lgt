@@ -136,26 +136,18 @@
 	implements(philosopherp)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2013-02-09,
+		date is 2024-02-06,
 		comment is 'Dining philosophers problem: philosopher representation.'
 	]).
 
-	:- private(message/1).
-	:- synchronized(message/1).
-	:- mode(message(+list), one).
-	:- info(message/1, [
-		comment is 'Writes all the terms on a list as an atomic operation.',
-		argnames is ['Atoms']
-	]).
-
+	:- uses(format, [format/2]).
 	:- uses(random, [random/3]).
 
 	run(0, _) :-
 		this(Philosopher),
-		message([Philosopher, ' terminated.']).
-
+		format('~w terminated.~n', [Philosopher]).
 	run(Count, MaxTime) :-
 		Count > 0,
 		think(MaxTime),
@@ -166,7 +158,7 @@
 	think(MaxTime) :-
 		this(Philosopher),
 		random(1, MaxTime, ThinkTime),
-		message(['Philosopher ', Philosopher, ' thinking for ', ThinkTime, ' seconds.']),
+		format('Philosopher ~w thinking for ~w seconds.~n', [Philosopher, ThinkTime]),
 		thread_sleep(ThinkTime).
 
 	eat(MaxTime) :-
@@ -176,19 +168,10 @@
 		::right_chopstick(RightStick),
 		LeftStick::pick_up,
 		RightStick::pick_up,
-		message(['Philosopher ', Philosopher, ' eating for ', EatTime, ' seconds with chopsticks ', LeftStick, ' and ', RightStick, '.']),
+		format('Philosopher ~w eating for ~w seconds with chopsticks ~w and ~w.~n', [Philosopher, EatTime, LeftStick, RightStick]),
 		thread_sleep(EatTime),
 		LeftStick::put_down,
 		RightStick::put_down.
-
-	% writing a message needs to be synchronized as it's accomplished
-	% using a combination of individual write/1 and nl/0 calls:
-	message([]) :-
-		nl,
-		flush_output.
-	message([Atom| Atoms]) :-
-		write(Atom),
-		message(Atoms).
 
 :- end_category.
 
@@ -244,20 +227,17 @@
 	implements(philosopherp)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2021-02-07,
+		date is 2024-02-06,
 		comment is 'Dining philosophers problem: philosopher representation.'
 	]).
 
-	:- private(message/1).
-	:- synchronized(message/1).
-	:- mode(message(+list), one).
-	:- info(message/1, [
-		comment is 'Writes all the terms on a list as an atomic operation.',
-		argnames is ['Atoms']
-	]).
+	% public predicate just for testing support
+	:- public(terminated/1).
+	:- dynamic(terminated/1).
 
+	:- uses(format, [format/2]).
 	:- uses(random, [random/3]).
 
 	left_chopstick(_LeftChopstick_).
@@ -265,8 +245,8 @@
 	right_chopstick(_RightChopstick_).
 
 	run(0, _) :-
-		message([_Philosopher_, ' terminated.']).
-
+		format('~w terminated.~n', [_Philosopher_]),
+		assertz(terminated(_Philosopher_)).
 	run(Count, MaxTime) :-
 		Count > 0,
 		think(MaxTime),
@@ -276,25 +256,16 @@
 
 	think(MaxTime) :-
 		random(1, MaxTime, ThinkTime),
-		message(['Philosopher ', _Philosopher_, ' thinking for ', ThinkTime, ' seconds.']),
+		format('Philosopher ~w thinking for ~w seconds.~n', [_Philosopher_, ThinkTime]),
 		thread_sleep(ThinkTime).
 
 	eat(MaxTime) :-
 		random(1, MaxTime, EatTime),
 		_LeftChopstick_::pick_up,
 		_RightChopstick_::pick_up,
-		message(['Philosopher ', _Philosopher_, ' eating for ', EatTime, ' seconds with chopsticks ', _LeftChopstick_, ' and ', _RightChopstick_, '.']),
+		format('Philosopher ~w eating for ~w seconds with chopsticks ~w and ~w.~n', [_Philosopher_, EatTime, _LeftChopstick_, _RightChopstick_]),
 		thread_sleep(EatTime),
 		_LeftChopstick_::put_down,
 		_RightChopstick_::put_down.
-
-	% writing a message needs to be synchronized as it's accomplished
-	% using a combination of individual write/1 and nl/0 calls:
-	message([]) :-
-		nl,
-		flush_output.
-	message([Atom| Atoms]) :-
-		write(Atom),
-		message(Atoms).
 
 :- end_object.

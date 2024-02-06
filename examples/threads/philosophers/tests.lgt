@@ -23,33 +23,41 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-03-04,
+		date is 2024-02-06,
 		comment is 'Unit tests for the "threads/philosophers" example.'
 	]).
 
 	:- threaded.
 
-	cover(chopstick).
-	cover(philosopher).
-
-	cover(philosopher(_, _, _)).
-
-	test(philosophers_1) :-
+	test(philosophers_1, true) :-
 		^^suppress_text_output,
-		threaded_ignore(p1::run(5, 5)),
-		threaded_ignore(p2::run(5, 5)),
-		threaded_ignore(p3::run(5, 5)),
-		threaded_ignore(p4::run(5, 5)),
-		threaded_ignore(p5::run(5, 5)).
+		threaded_call(p1::run(5, 5)),
+		threaded_call(p2::run(5, 5)),
+		threaded_call(p3::run(5, 5)),
+		threaded_call(p4::run(5, 5)),
+		threaded_call(p5::run(5, 5)),
+		threaded_exit(p1::run(5, 5)),
+		threaded_exit(p2::run(5, 5)),
+		threaded_exit(p3::run(5, 5)),
+		threaded_exit(p4::run(5, 5)),
+		threaded_exit(p5::run(5, 5)).
 
-	test(philosophers_2) :-
+	test(philosophers_2, true(Philosophers == [p1,p2,p3,p4,p5])) :-
 		^^suppress_text_output,
-		threaded_ignore(philosopher(p1,cs1,cs2)::run(5, 5)),
-		threaded_ignore(philosopher(p2,cs2,cs3)::run(5, 5)),
-		threaded_ignore(philosopher(p3,cs3,cs4)::run(5, 5)),
-		threaded_ignore(philosopher(p4,cs4,cs5)::run(5, 5)),
-		threaded_ignore(philosopher(p5,cs1,cs5)::run(5, 5)).
+		philosopher(_,_,_)::retractall(terminated(_)),
+		threaded_call(philosopher(p1,cs1,cs2)::run(5, 5)),
+		threaded_call(philosopher(p2,cs2,cs3)::run(5, 5)),
+		threaded_call(philosopher(p3,cs3,cs4)::run(5, 5)),
+		threaded_call(philosopher(p4,cs4,cs5)::run(5, 5)),
+		threaded_call(philosopher(p5,cs1,cs5)::run(5, 5)),
+		threaded_exit(philosopher(p1,cs1,cs2)::run(5, 5)),
+		threaded_exit(philosopher(p2,cs2,cs3)::run(5, 5)),
+		threaded_exit(philosopher(p3,cs3,cs4)::run(5, 5)),
+		threaded_exit(philosopher(p4,cs4,cs5)::run(5, 5)),
+		threaded_exit(philosopher(p5,cs1,cs5)::run(5, 5)),
+		findall(Philosopher, philosopher(_,_,_)::terminated(Philosopher), Philosophers0),
+		sort(Philosophers0, Philosophers).
 
 :- end_object.

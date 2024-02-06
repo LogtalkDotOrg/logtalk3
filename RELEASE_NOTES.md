@@ -31,8 +31,8 @@ Examples
 * ADDED: Tests for the `tbbt` threaded engine example.
 
 * IMPROVED: Tests for the `barriers` `blackboard`, `buckets`, `buffer`,
-`checkpoint`, `metered_concurrency`, `ping_pong`, `sorting`, and `team`
-multi-threading examples by using explicit assertions.
+`checkpoint`, `metered_concurrency`, `philosophers`, `ping_pong`, `sorting`,
+and `team` multi-threading examples by using explicit assertions.
 
 * UPDATED: The `buffer`, `metered_concurrency`, `tbbt`, and `whisper`
 multi-threading examples to use the `format` library.
