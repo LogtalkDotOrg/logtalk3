@@ -23,17 +23,52 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2018-03-29,
+		date is 2024-02-06,
 		comment is 'Unit tests for the "threads/blackboard" example.'
 	]).
 
 	:- threaded.
 
-	test(blackboard_1) :-
-		^^suppress_text_output,
-		threaded_ignore(teacher::run(4)),
-		threaded_ignore(student::run(10)).
+	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+
+		test(blackboard_1, true) :-
+			threaded_call(student::run(10)),
+			threaded_call(teacher::run(4)),
+			threaded_exit(teacher::run(4)),
+			threaded_exit(student::run(10)).
+
+	:- else.
+
+		test(blackboard_1, true) :-
+			^^set_text_output(''),
+			threaded_call(student::run(10)),
+			threaded_call(teacher::run(4)),
+			threaded_exit(teacher::run(4)),
+			threaded_exit(student::run(10)),
+			^^text_output_contents(Chars),
+			atom_chars(Atom, Chars),
+			atom::split(Atom, '\n', Lines),
+			list::msort(Lines, Sorted),
+			^^assertion(Sorted == [
+				'',
+				'student is writing...',
+				'student is writing...',
+				'student is writing...',
+				'student is writing...',
+				'student is writing...',
+				'student is writing...',
+				'student is writing...',
+				'student is writing...',
+				'student is writing...',
+				'student is writing...',
+				'teacher is writing...',
+				'teacher is writing...',
+				'teacher is writing...',
+				'teacher is writing...'
+			]).
+
+	:- endif.
 
 :- end_object.
