@@ -22,9 +22,9 @@
 :- object(beatles).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2007-10-23,
+		date is 2024-02-06,
 		comment is 'Simple example of using a barrier to synchronize a set of threads.'
 	]).
 
@@ -36,21 +36,31 @@
 		comment is 'Wait for all threads to say "hello" and then proceed with the threads saying "goodbye".'
 	]).
 
+	% for testing
+	:- public([hello/1, goodbye/1]).
+	:- dynamic([hello/1, goodbye/1]).
+
 	:- uses(random, [random/3]).
 
 	sing(Thread) :-
 		% spend some time before saying hello
 		random(1, 3, BusyHello), thread_sleep(BusyHello),
 		write(hello(Thread)), flush_output,
+		assertz(hello(Thread)),
 		% notify barrier that you have arrived
 		threaded_notify(ready(Thread)),
 		% wait for green light to cross the barrier
 		threaded_wait(go(Thread)),
 		% spend some time before saying goodbye
 		random(1, 3, BusyGoodbye), thread_sleep(BusyGoodbye),
-		write(goodbye(Thread)), flush_output.
+		write(goodbye(Thread)), flush_output,
+		assertz(goodbye(Thread)),
+		threaded_notify(done(Thread)).
 
 	sing_along :-
+		% clean testing data
+		retractall(hello(_)),
+		retractall(goodbye(_)),
 		% start the threads
 		threaded_ignore(sing(1)),
 		threaded_ignore(sing(2)),
@@ -60,6 +70,8 @@
 		threaded_wait([ready(1), ready(2), ready(3), ready(4)]),
 		nl, write('Enough of hellos! Time for goodbyes!'), nl,
 		% give green light to all threads to cross the barrier
-		threaded_notify([go(1), go(2), go(3), go(4)]).
+		threaded_notify([go(1), go(2), go(3), go(4)]),
+		threaded_wait([done(1), done(2), done(3), done(4)]),
+		nl.
 
 :- end_object.

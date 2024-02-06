@@ -23,15 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2012-12-25,
+		date is 2024-02-06,
 		comment is 'Unit tests for the "threads/barriers" example.'
 	]).
 
-	cover(beatles).
-
-	test(barriers_1) :-
-		beatles::sing_along.
+	test(barriers_1, true) :-
+		beatles::sing_along,
+		setof(HelloThread, beatles::hello(HelloThread), HelloThreads),
+		^^assertion(HelloThreads == [1,2,3,4]),
+		setof(GoodbyeThread, beatles::goodbye(GoodbyeThread), GoodbyeThreads),
+		^^assertion(GoodbyeThreads == [1,2,3,4]).
 
 :- end_object.
