@@ -31,7 +31,38 @@
 
 	cover(metered_concurrency).
 
-	test(metered_concurrency_1) :-
-		metered_concurrency::run.
+	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+
+		test(metered_concurrency_1, true) :-
+			metered_concurrency::run.
+
+	:- else.
+
+		test(metered_concurrency_1, true) :-
+			^^set_text_output(''),
+			metered_concurrency::run,
+			^^text_output_contents(Chars),
+			atom_chars(Atom, Chars),
+			atom::split(Atom, '\n', Lines),
+			sort(Lines, Sorted),
+			^^assertion(Sorted == [
+				'',
+				'Worker 1 acquired semaphore',
+				'Worker 1 releasing semaphore',
+				'Worker 2 acquired semaphore',
+				'Worker 2 releasing semaphore',
+				'Worker 3 acquired semaphore',
+				'Worker 3 releasing semaphore',
+				'Worker 4 acquired semaphore',
+				'Worker 4 releasing semaphore',
+				'Worker 5 acquired semaphore',
+				'Worker 5 releasing semaphore',
+				'Worker 6 acquired semaphore',
+				'Worker 6 releasing semaphore',
+				'Worker 7 acquired semaphore',
+				'Worker 7 releasing semaphore'
+			]).
+
+	:- endif.
 
 :- end_object.

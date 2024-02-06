@@ -21,6 +21,7 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
+	logtalk_load(format(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load(metered_concurrency)
+	logtalk_load(metered_concurrency, [optimize(on)])
 )).
