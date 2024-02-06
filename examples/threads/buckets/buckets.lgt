@@ -22,15 +22,19 @@
 :- object(buckets).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2024-01-18,
+		date is 2024-02-06,
 		comment is 'Example of atomic updates as described in the corresponding Rosetta Code task.'
 	]).
 
 	:- threaded.
 
 	:- public([start/0, start/4]).
+
+	% for testing
+	:- public([sum/1, bucket/1]).
+	:- dynamic([sum/1, bucket/1]).
 
 	% bucket representation
 	:- private(bucket_/2).
@@ -44,6 +48,9 @@
 	:- uses(backend_random, [random/3]).
 
 	start :-
+		% cleanup test support predicates
+		retractall(sum(_)),
+		retractall(bucket(_)),
 		% by default, create ten buckets with initial random integer values
 		% in the interval [0, 10[ and print their contents ten times
 		start(10, 0, 10, 10).
@@ -53,6 +60,7 @@
 		% interval [Min, Max[ and return their sum
 		create_buckets(N, Min, Max, Sum),
 		write('Sum of all bucket values: '), write(Sum), nl, nl,
+		assertz(sum(Sum)),
 		% use competitive or-parallelism for the three loops such that
 		% the computations terminate when the display loop terminates
 		threaded((
@@ -131,6 +139,7 @@
 	display_loop(N) :-
 		buckets(Values),
 		write(Values), nl,
+		assertz(bucket(Values)),
 		thread_sleep(1),
 		M is N - 1,
 		display_loop(M).

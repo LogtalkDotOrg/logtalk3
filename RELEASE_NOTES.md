@@ -30,9 +30,9 @@ Examples
 
 * ADDED: Tests for the `tbbt` threaded engine example.
 
-* IMPROVED: Tests for the `blackboard`, `checkpoint`, `metered_concurrency`,
-`ping_pong`, `sorting`, and `team` multi-threading examples by using explicit
-assertions.
+* IMPROVED: Tests for the `blackboard`, `buckets`, `checkpoint`, `sorting`,
+`metered_concurrency`, `ping_pong`, and `team` multi-threading examples by
+using explicit assertions.
 
 * UPDATED: The `metered_concurrency`, `tbbt`, and `whisper` multi-threading
 examples to use the `format` library.
