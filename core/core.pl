@@ -26966,14 +26966,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 		retract('$lgt_current_engine_'(This, Engine, TermQueue, Id)) ->
 		(	thread_property(Id, status(running)) ->
-			% protect the call to thread_signal/2 as the thread may terminate
-			% between checking its status and this call
-			catch(thread_signal(Id, throw('$lgt_aborted')), _, true),
-			% send a term to the engine term queue first as this queue is explicitly
-			% created and destroyed and thus we can be sure it exists
+			% terminate the thread
+			thread_signal(Id, throw('$lgt_aborted')),
+			% send the '$lgt_aborted' term to the engine term queue
+			% to make any further threaded_engine_fetch/1 calls fail
 			thread_send_message(TermQueue, '$lgt_aborted'),
-			% on the other hand, the engine thread and therefore its queue may no longer exist
-			catch(thread_send_message(Id, '$lgt_aborted'), _, true)
+			% the engine thread may be waiting for a request to compute the next solution;
+			% send it a '$lgt_aborted' term to avoid backtracking into the next solution
+			thread_send_message(Id, '$lgt_aborted')
 		;	true
 		),
 		thread_join(Id, _),

@@ -25,6 +25,12 @@ RELEASE NOTES
 3.75.0 - February ??, 2024
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* IMPROVED: Simplified implementation of the `threaded_engine_destroy/1`
+built-in predicate.
+
 Examples
 --------
 
