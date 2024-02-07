@@ -149,7 +149,8 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">threaded_engine_self</span>(<span class="nv">Engine</span>)
 </pre></div>
 </div>
-<p>Queries the name of engine calling the predicate.</p>
+<p>Queries the name of engine calling the predicate. Fails if not called from
+within an engine or if the argument doesn’t unify with the engine name.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This predicate requires a <a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> providing

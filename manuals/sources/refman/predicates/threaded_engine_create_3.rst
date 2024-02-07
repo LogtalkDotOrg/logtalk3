@@ -54,13 +54,6 @@ Meta-predicate template
 
    threaded_engine_create(*, 0, *)
 
-Meta-predicate template
------------------------
-
-::
-
-   threaded_engine_create(*, 0, *)
-
 Modes and number of proofs
 --------------------------
 

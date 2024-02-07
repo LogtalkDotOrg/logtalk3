@@ -33,7 +33,8 @@ Description
 
    threaded_engine_self(Engine)
 
-Queries the name of engine calling the predicate.
+Queries the name of engine calling the predicate. Fails if not called from
+within an engine or if the argument doesn't unify with the engine name.
 
 .. note::
 
