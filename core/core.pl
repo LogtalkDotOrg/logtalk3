@@ -26966,14 +26966,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_current_object_'(This, Queue, _, _, _, _, _, _, _, _, _),
 		retract('$lgt_current_engine_'(This, Engine, TermQueue, Id)) ->
 		(	thread_property(Id, status(running)) ->
-			% terminate the thread
-			thread_signal(Id, throw('$lgt_aborted')),
+			% the engine thread may be suspended waiting for a client request
+			% to compute the next solution; send it a '$lgt_aborted' term to
+			% prevent further requests for backtracking into the next solution
+			thread_send_message(Id, '$lgt_aborted'),
 			% send the '$lgt_aborted' term to the engine term queue
 			% to make any further threaded_engine_fetch/1 calls fail
 			thread_send_message(TermQueue, '$lgt_aborted'),
-			% the engine thread may be waiting for a request to compute the next solution;
-			% send it a '$lgt_aborted' term to avoid backtracking into the next solution
-			thread_send_message(Id, '$lgt_aborted')
+			% ensure that thread is terminated
+			thread_signal(Id, throw('$lgt_aborted'))
 		;	true
 		),
 		thread_join(Id, _),
