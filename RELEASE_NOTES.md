@@ -49,6 +49,8 @@ and `team` multi-threading examples by using explicit assertions.
 * UPDATED: The `buffer`, `metered_concurrency`, `tbbt`, and `whisper`
 multi-threading examples to use the `format` library.
 
+* UPDATED: The `ebench` threading engines example tests for LVM.
+
 * FIXED: The `threads/team` example to allow running it independently of the
 current directory.
 
