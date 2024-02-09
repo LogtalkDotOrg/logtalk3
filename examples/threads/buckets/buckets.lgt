@@ -22,9 +22,9 @@
 :- object(buckets).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2024-02-06,
+		date is 2024-02-09,
 		comment is 'Example of atomic updates as described in the corresponding Rosetta Code task.'
 	]).
 
@@ -44,6 +44,7 @@
 	:- private([bucket/2, buckets/1, transfer/3]).
 	:- synchronized([bucket/2, buckets/1, transfer/3]).
 
+	:- uses(format, [format/2]).
 	% use the backend compiler random number generator, assumed to be stateless
 	:- uses(backend_random, [random/3]).
 
@@ -59,7 +60,7 @@
 		% create the buckets with random values in the
 		% interval [Min, Max[ and return their sum
 		create_buckets(N, Min, Max, Sum),
-		write('Sum of all bucket values: '), write(Sum), nl, nl,
+		format('Sum of all bucket values: ~w~n~n', [Sum]),
 		assertz(sum(Sum)),
 		% use competitive or-parallelism for the three loops such that
 		% the computations terminate when the display loop terminates
@@ -120,6 +121,7 @@
 			transfer(Bucket2, Delta, Bucket1)
 		;	true
 		),
+		thread_yield,
 		match_loop(N).
 
 	redistribute_loop(N) :-
@@ -132,16 +134,21 @@
 		Limit is Current + 1,
 		random(0, Limit, Delta),
 		transfer(FromBucket, Delta, ToBucket),
+		thread_yield,
 		redistribute_loop(N).
 
 	display_loop(0) :-
 		!.
 	display_loop(N) :-
 		buckets(Values),
-		write(Values), nl,
+		format('~w~n', [Values]),
 		assertz(bucket(Values)),
-		thread_sleep(1),
+		thread_sleep(0.5),
 		M is N - 1,
 		display_loop(M).
+
+	:- if(\+ predicate_property(thread_yield, built_in)).
+		thread_yield.
+	:- endif.
 
 :- end_object.

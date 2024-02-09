@@ -49,8 +49,11 @@ Examples
 `checkpoint`, `metered_concurrency`, `philosophers`, `ping_pong`, `sorting`,
 and `team` multi-threading examples by using explicit assertions.
 
-* UPDATED: The `buffer`, `metered_concurrency`, `tbbt`, and `whisper`
-multi-threading examples to use the `format` library.
+* UPDATED: The `buckets`, `buffer`, `metered_concurrency`, `tbbt`, and
+`whisper` multi-threading examples to use the `format` library.
+
+* UPDATED: The `buckets` multi-threading example to call the `thread_yield/0`
+predicate in the redistribute and match loops.
 
 * UPDATED: The `ebench` threading engines example tests for LVM.
 
