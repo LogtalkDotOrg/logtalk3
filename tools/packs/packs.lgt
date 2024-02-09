@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:68:0,
+		version is 0:68:1,
 		author is 'Paulo Moura',
-		date is 2023-10-09,
+		date is 2024-02-09,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -390,7 +390,7 @@
 	:- public(clean/1).
 	:- mode(clean(+atom), zero_or_one).
 	:- info(clean/1, [
-		comment is 'Cleans all pack archives. Fails if the pack is not unknown.',
+		comment is 'Cleans all pack archives. Fails if the pack is unknown.',
 		argnames is ['Pack'],
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,

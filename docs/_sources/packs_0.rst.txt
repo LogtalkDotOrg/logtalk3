@@ -14,8 +14,8 @@ Pack handling predicates.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:68:0
-| **Date:** 2023-10-09
+| **Version:** 0:68:1
+| **Date:** 2024-02-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -829,7 +829,7 @@ Cleans all pack archives. Fails if the the pack is unknown.
 ``clean/1``
 ^^^^^^^^^^^
 
-Cleans all pack archives. Fails if the pack is not unknown.
+Cleans all pack archives. Fails if the pack is unknown.
 
 | **Compilation flags:**
 |    ``static``
