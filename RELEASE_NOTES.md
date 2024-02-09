@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * IMPROVED: Simplified implementation of the `threaded_engine_destroy/1`
 built-in predicate.
 
+* FIXED: Workaround SWI-Prolog throwing existence errors when calling
+`thread_signal/2 or `thread_send_message/2` on a terminated thread. 
+
 Documentation
 -------------
 
