@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2023-05-19,
+		date is 2024-02-11,
 		comment is 'Unit tests for the ISO Prolog standard current_op/3 built-in predicate.'
 	]).
 
@@ -152,19 +152,19 @@
 	test(iso_current_op_3_39, exists(P-T == 200-fy)) :-
 		{current_op(P, T, '\\')}.
 
-	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.4.1 NOTES
+	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.4.1 NOTES 1
 
-	test(iso_current_op_3_40, true(Ops == [baz,quux])) :-
-		findall(
-			Op,
-			{	op(444, fy, baz),
+	test(iso_current_op_3_40, true((Contents ==  [b,a,z,q,u,u,x]; Contents == [q,u,u,x,b,a,z]))) :-
+		^^set_text_output(''),
+		(	{	op(444, fy, baz),
 				op(444, fy, quux),
 				current_op(444, fy, Op),
-				op(0, fy, quux)
-			},
-			Ops0
-		),
-		msort(Ops0, Ops).
+				write(Op),
+				op(0, fy, quux),
+				fail
+			}
+		;	^^text_output_contents(Contents)
+		).
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 

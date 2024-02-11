@@ -67,6 +67,8 @@ Tests
 
 * ADDED: Additional test for the ISO Prolog standard `op/3` predicate.
 
+* IMPROVED: Test for the  ISO Prolog standard `current_op/3` predicate.
+
 
 3.74.0 - January 31, 2024
 =========================
