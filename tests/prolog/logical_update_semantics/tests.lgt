@@ -83,6 +83,8 @@
 		;	^^text_output_assertion('123', Assertion)
 		).
 
+	% for operators, see also the ISO/IEC 13211-1:1995(E) standard section 8.14.4.1 NOTES 1
+
 	:- if((
 		os::operating_system_type(windows),
 		\+ current_logtalk_flag(prolog_dialect, b),
