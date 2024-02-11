@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,13 +19,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% database for tests
+
+o(1).
+o(2).
+o(3).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2023-05-18,
+		date is 2024-02-11,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -105,67 +112,109 @@
 	test(iso_op_3_19, error(permission_error(modify,operator,(',')))) :-
 		{op(0, xfx, (','))}.
 
+	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.4.1 NOTES 1
+
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(iso_op_3_20, true(Assertion)) :-
+			^^set_text_output(''),
+			(	{	op(555, fx, o),
+					o(X),
+					write(o(X)), nl,
+					op(555, xf, o),
+					fail
+				}
+			;	^^text_output_assertion('o 1\r\no 2\r\no 3\r\n', Assertion)
+			).
+
+	:- else.
+
+		test(iso_op_3_20, true(Assertion)) :-
+			^^set_text_output(''),
+			(	{	op(555, fx, o),
+					o(X),
+					write(o(X)), nl,
+					op(555, xf, o),
+					fail
+				}
+			;	^^text_output_assertion('o 1\no 2\no 3\n', Assertion)
+			).
+
+	:- endif.
+
 	% next test updated for the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 6.3.4.3
 
 	:- if(\+ current_op(_, _, '|')).
-		test(iso_op_3_20, true) :-
+
+		test(iso_op_3_21, true) :-
 			{op(1105, xfy, '|')},
 			{current_op(Priority, Specifier, '|')},
 			Priority == 1105,
 			Specifier == xfy.
+
 	:- else.
-		test(iso_op_3_20, true) :-
+
+		test(iso_op_3_21, true) :-
 			{current_op(Priority, Specifier, '|')},
 			Priority >= 1001,
 			(	Specifier == xfy
 			;	Specifier == xfx
 			;	Specifier == yfx
 			).
+
 	:- endif.
 
-	test(iso_op_3_21, true) :-
+	test(iso_op_3_22, true) :-
 		{op(0, xfy, '|')},
 		{\+ current_op(_, xfy, '|')}.
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
-	test(sics_op_3_22, error(instantiation_error)) :-
+	test(sics_op_3_23, error(instantiation_error)) :-
 		{op(_, xfx, ++)}.
 
-	test(sics_op_3_23, error(instantiation_error)) :-
+	test(sics_op_3_24, error(instantiation_error)) :-
 		{op(100, xfx, _)}.
 
-	test(sics_op_3_24, error(instantiation_error)) :-
+	test(sics_op_3_25, error(instantiation_error)) :-
 		{op(100, xfx, [a|_])}.
 
-	test(sics_op_3_25, error(instantiation_error)) :-
+	test(sics_op_3_26, error(instantiation_error)) :-
 		{op(100, xfx, [a,_])}.
 
-	test(sics_op_3_26, error(type_error(atom,200))) :-
+	test(sics_op_3_27, error(type_error(atom,200))) :-
 		{op(100, 200, [a])}.
 
-	test(sics_op_3_27, error(type_error(atom,f(1)))) :-
+	test(sics_op_3_28, error(type_error(atom,f(1)))) :-
 		{op(100, f(1), [a])}.
 
-	test(sics_op_3_28, error(type_error(atom,a+b))) :-
+	test(sics_op_3_29, error(type_error(atom,a+b))) :-
 		{op(100, xfx, [a,a+b])}.
 
-	test(sics_op_3_29, error(permission_error(modify,operator,(',')))) :-
+	test(sics_op_3_30, error(permission_error(modify,operator,(',')))) :-
 		{op(100, xfx, (','))}.
 
-	test(sics_op_3_30, error(permission_error(modify,operator,(',')))) :-
+	test(sics_op_3_31, error(permission_error(modify,operator,(',')))) :-
 		{op(100, xfx, [a,(',')])}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_op_3_31, true) :-
+	test(lgt_op_3_32, true) :-
 		{op(0, fx, foo)}.
 
-	test(lgt_op_3_32, true) :-
+	test(lgt_op_3_33, true) :-
 		{op(0, fx, bar)},
 		{\+ current_op(_, _, bar)}.
 
-	test(lgt_op_3_33, true) :-
+	test(lgt_op_3_34, true) :-
 		{op(700, xfx, xyz)},
 		^^set_text_input('1 xyz 2. '),
 		read(T),
