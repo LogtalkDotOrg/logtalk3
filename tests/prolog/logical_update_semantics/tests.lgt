@@ -23,17 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2023-06-02,
+		date is 2024-02-11,
 		comment is 'Unit tests for the ISO Prolog standard logical update semantics.'
 	]).
 
 	:- uses(user, [
-		aa/1, az/1, r/1, ra/1
+		aa/1, az/1, r/1, ra/1, o/1
 	]).
 	:- dynamic([
-		user::aa/1, user::az/1, user::r/1, user::ra/1
+		user::aa/1, user::az/1, user::r/1, user::ra/1, user::o/1
 	]).
 
 	% tests for the ISO/IEC 13211-1:1995(E) standard section 7.5.4
@@ -42,7 +42,8 @@
 		retractall(aa(_)), assertz(aa(1)), assertz(aa(2)), assertz(aa(3)),
 		retractall(az(_)), assertz(az(1)), assertz(az(2)), assertz(az(3)),
 		retractall(r(_)),  assertz(r(1)),  assertz(r(2)),  assertz(r(3)),
-		retractall(ra(_)), assertz(ra(1)), assertz(ra(2)), assertz(ra(3)).
+		retractall(ra(_)), assertz(ra(1)), assertz(ra(2)), assertz(ra(3)),
+		retractall(o(_)),  assertz(o(1)),  assertz(o(2)),  assertz(o(3)).
 
 	test(logical_update_semantics_asserta, true(Assertion)) :-
 		^^set_text_output(''),
@@ -81,5 +82,39 @@
 			fail
 		;	^^text_output_assertion('123', Assertion)
 		).
+
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(logical_update_semantics_operators, true(Assertion)) :-
+			^^set_text_output(''),
+			(	op(555, fx, o),
+				o(X),
+				write(o(X)), nl,
+				op(555, xf, o),
+				fail
+			;	^^text_output_assertion('o 1\r\no 2\r\no 3\r\n', Assertion)
+			).
+
+	:- else.
+
+		test(logical_update_semantics_operators, true(Assertion)) :-
+			^^set_text_output(''),
+			(	op(555, fx, o),
+				o(X),
+				write(o(X)), nl,
+				op(555, xf, o),
+				fail
+			;	^^text_output_assertion('o 1\no 2\no 3\n', Assertion)
+			).
+
+	:- endif.
 
 :- end_object.
