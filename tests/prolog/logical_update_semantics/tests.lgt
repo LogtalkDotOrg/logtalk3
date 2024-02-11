@@ -119,4 +119,15 @@
 
 	:- endif.
 
+	test(logical_update_semantics_current_operators, true((Contents ==  [f,o,o,b,a,r]; Contents == [b,a,r,f,o,o]))) :-
+		^^set_text_output(''),
+		(	op(444, fy, foo),
+			op(444, fy, bar),
+			current_op(444, fy, Op),
+			write(Op),
+			op(0, fy, bar),
+			fail
+		;	^^text_output_contents(Contents)
+		).
+
 :- end_object.
