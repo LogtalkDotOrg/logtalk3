@@ -60,6 +60,11 @@ predicate in the redistribute and match loops.
 * FIXED: The `threads/team` example to allow running it independently of the
 current directory.
 
+Tests
+-----
+
+* ADDED: Test set for ISO Prolog standard logical update semantics.
+
 
 3.74.0 - January 31, 2024
 =========================
