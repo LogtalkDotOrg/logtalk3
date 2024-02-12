@@ -25,15 +25,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-02-11,
+		date is 2024-02-12,
 		comment is 'Unit tests for the ISO Prolog standard logical update semantics.'
 	]).
 
 	:- uses(user, [
-		aa/1, az/1, r/1, ra/1, o/1
+		aa/1, az/1, r/1, ra/1, o/1, n/1
 	]).
 	:- dynamic([
-		user::aa/1, user::az/1, user::r/1, user::ra/1, user::o/1
+		user::aa/1, user::az/1, user::r/1, user::ra/1, user::o/1, user::n/1
 	]).
 
 	% tests for the ISO/IEC 13211-1:1995(E) standard section 7.5.4
@@ -43,7 +43,8 @@
 		retractall(az(_)), assertz(az(1)), assertz(az(2)), assertz(az(3)),
 		retractall(r(_)),  assertz(r(1)),  assertz(r(2)),  assertz(r(3)),
 		retractall(ra(_)), assertz(ra(1)), assertz(ra(2)), assertz(ra(3)),
-		retractall(o(_)),  assertz(o(1)),  assertz(o(2)),  assertz(o(3)).
+		retractall(o(_)),  assertz(o(1)),  assertz(o(2)),  assertz(o(3)),
+		retractall(n(_)).
 
 	test(logical_update_semantics_asserta, true(Assertion)) :-
 		^^set_text_output(''),
@@ -81,6 +82,15 @@
 			retractall(ra(_)),
 			fail
 		;	^^text_output_assertion('123', Assertion)
+		).
+
+	test(logical_update_semantics_negation, true(L == [2,4,6])) :-
+		(	integer::between(1, 5, N),
+			\+ n(N),
+			M is N + 1,
+			assertz(n(M)),
+			fail
+		;	findall(X, n(X), L)
 		).
 
 :- end_object.
