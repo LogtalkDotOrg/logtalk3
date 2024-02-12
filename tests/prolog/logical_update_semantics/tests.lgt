@@ -30,10 +30,10 @@
 	]).
 
 	:- uses(user, [
-		aa/1, az/1, r/1, ra/1, o/1, n/1
+		aa/1, az/1, r/1, ra/1, o/1, ca/1, cr/1, n/1
 	]).
 	:- dynamic([
-		user::aa/1, user::az/1, user::r/1, user::ra/1, user::o/1, user::n/1
+		user::aa/1, user::az/1, user::r/1, user::ra/1, user::o/1, user::ca/1, user::cr/1, user::n/1
 	]).
 
 	% tests for the ISO/IEC 13211-1:1995(E) standard section 7.5.4
@@ -44,6 +44,8 @@
 		retractall(r(_)),  assertz(r(1)),  assertz(r(2)),  assertz(r(3)),
 		retractall(ra(_)), assertz(ra(1)), assertz(ra(2)), assertz(ra(3)),
 		retractall(o(_)),  assertz(o(1)),  assertz(o(2)),  assertz(o(3)),
+		retractall(ca(_)), assertz(ca(1)), assertz(ca(2)), assertz(ca(3)),
+		retractall(cr(_)), assertz(cr(1)), assertz(cr(2)), assertz(cr(3)),
 		retractall(n(_)).
 
 	test(logical_update_semantics_asserta, true(Assertion)) :-
@@ -80,6 +82,25 @@
 		(	ra(X),
 			write(X),
 			retractall(ra(_)),
+			fail
+		;	^^text_output_assertion('123', Assertion)
+		).
+
+	test(logical_update_semantics_clause_assert, true(Assertion)) :-
+		^^set_text_output(''),
+		(	clause(ca(X), _),
+			write(X),
+			assertz(ca(4)),
+			assertz(ca(5)),
+			fail
+		;	^^text_output_assertion('123', Assertion)
+		).
+
+	test(logical_update_semantics_clause_retract, true(Assertion)) :-
+		^^set_text_output(''),
+		(	clause(cr(X), _),
+			write(X),
+			retract(cr(_)),
 			fail
 		;	^^text_output_assertion('123', Assertion)
 		).
