@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:68:1,
+		version is 0:68:2,
 		author is 'Paulo Moura',
-		date is 2024-02-09,
+		date is 2024-02-13,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1645,7 +1645,7 @@
 			atom(DependencyPack),
 			DependencyPack \== Pack
 		),
-		memberchk(Operator, [(@>=), (@>), (==), (@=<), (@<)]),
+		memberchk(Operator, [(@>=), (@>), (\==), (==), (@=<), (@<)]),
 		arg(2, Dependency, Version),
 		valid_dependency_version(Version).
 

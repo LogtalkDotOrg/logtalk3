@@ -40,6 +40,12 @@ Documentation
 * IMPROVED: Handbook documentation of the `threaded_engine_self/1`
 built-in predicate.
 
+Tools
+-----
+
+* FIXED: The `packs` linter for pack definitions would not recognize the
+`(\==)/2` operator as valid when specifying dependencies.
+
 Examples
 --------
 
