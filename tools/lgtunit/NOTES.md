@@ -1420,6 +1420,7 @@ the depth of printed terms that can be useful:
 - SICStus Prolog: `toplevel_print_options` flag
 - SWI-Prolog 7.1.10 or earlier: `toplevel_print_options` flag
 - SWI-Prolog 7.1.11 or later: `answer_write_options` flag
+- Trealla Prolog: `answer_write_options` flag
 - XSB: `set_file_write_depth/1` predicate
 - YAP: `write_depth/2-3` predicates
 
