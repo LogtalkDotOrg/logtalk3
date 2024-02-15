@@ -3,10 +3,10 @@
 #############################################################################
 ## 
 ##   Set CLASSPATH environment variable for LVM
-##   Last updated on July 21, 2023
+##   Last updated on February 14, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 cwd="$(dirname "${BASH_SOURCE[0]}")"
 
 for jar in "$cwd"/jars/*.jar; do
-	CLASSPATH="$jar"
+	CLASSPATH=$CLASSPATH:"$jar"
 done
 
 export CLASSPATH
