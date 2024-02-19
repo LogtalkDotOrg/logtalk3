@@ -24,9 +24,11 @@ ________________________________________________________________________
 ...
 
 
-% start the producer and the consumer, each one running in its own thread:
+% start the producer and the consumer, each one running in its own thread,
+% using a buffer capable of holding at most 7 items, with the consumer being
+% slower than the producer:
 
-| ?- threaded_ignore(producer(2)::run(25)), threaded_ignore(consumer(5)::run(25)).
+| ?- threaded_ignore(producer(7,2)::run(25)), threaded_ignore(consumer(7,3)::run(25)).
 
 produced item 0 (1/7 items in the buffer)
 consumed item 0 (0/7 items in the buffer)

@@ -23,23 +23,38 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2024-02-06,
+		date is 2024-02-19,
 		comment is 'Unit tests for the "threads/buffer" example.'
 	]).
 
 	:- threaded.
 
-	test(buffer_1, true) :-
+	clean :-
+		buffer(_)::retractall(produced(_)),
+		buffer(_)::retractall(consumed(_)).
+
+	test(buffer_slower_consumer, true, [setup(clean)]) :-
 		^^suppress_text_output,
-		threaded_call(producer(2)::run(25)),
-		threaded_call(consumer(5)::run(25)),
-		threaded_exit(producer(2)::run(25)),
-		threaded_exit(consumer(5)::run(25)),
-		findall(PItem, buffer(_)::produced(PItem), PItems),
-		^^assertion(PItems == [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]),
-		findall(CItem, buffer(_)::consumed(CItem), CItems),
-		^^assertion(CItems == [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]).
+		threaded_call(producer(4,0.3)::run(13)),
+		threaded_call(consumer(4,0.8)::run(13)),
+		threaded_exit(producer(4,0.3)::run(13)),
+		threaded_exit(consumer(4,0.8)::run(13)),
+		setof(PItem, buffer(4)::produced(PItem), PItems),
+		^^assertion(PItems == [0,1,2,3,4,5,6,7,8,9,10,11,12]),
+		setof(CItem, buffer(4)::consumed(CItem), CItems),
+		^^assertion(CItems == [0,1,2,3,4,5,6,7,8,9,10,11,12]).
+
+	test(buffer_slower_producer, true, [setup(clean)]) :-
+		^^suppress_text_output,
+		threaded_call(producer(4,0.8)::run(13)),
+		threaded_call(consumer(4,0.3)::run(13)),
+		threaded_exit(producer(4,0.8)::run(13)),
+		threaded_exit(consumer(4,0.3)::run(13)),
+		setof(PItem, buffer(4)::produced(PItem), PItems),
+		^^assertion(PItems == [0,1,2,3,4,5,6,7,8,9,10,11,12]),
+		setof(CItem, buffer(4)::consumed(CItem), CItems),
+		^^assertion(CItems == [0,1,2,3,4,5,6,7,8,9,10,11,12]).
 
 :- end_object.

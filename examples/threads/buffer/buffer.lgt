@@ -22,9 +22,9 @@
 :- object(buffer(_MaxCapacity_)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2024-02-06,
+		date is 2024-02-19,
 		comment is 'Producer-consumer problem with a bounded buffer.'
 	]).
 
@@ -109,7 +109,7 @@
 :- end_object.
 
 
-:- object(producer(_MaxTime_)).
+:- object(producer(_MaxCapacity_, _MaxTime_)).
 
 	:- public(run/1).
 
@@ -120,16 +120,16 @@
 	run(M, N) :-
 		M < N,
 		% simulate a variable amount of time to produce a new item
-		random::random(1, _MaxTime_, Random),
+		random::random(0.1, _MaxTime_, Random),
 		thread_sleep(Random),
-		buffer(7)::put(M),
+		buffer(_MaxCapacity_)::put(M),
 		M2 is M + 1,
 		run(M2, N).
 
 :- end_object.
 
 
-:- object(consumer(_MaxTime_)).
+:- object(consumer(_MaxCapacity_, _MaxTime_)).
 
 	:- public(run/1).
 
@@ -139,10 +139,10 @@
 	run(N, N) :- !.
 	run(M, N) :-
 		M < N,
-		% simulate a variable amount of time to produce a new item
-		random::random(1, _MaxTime_, Random),
+		% simulate a variable amount of time to consume an item
+		random::random(0.1, _MaxTime_, Random),
 		thread_sleep(Random),
-		buffer(7)::get(_Item),
+		buffer(_MaxCapacity_)::get(_Item),
 		M2 is M + 1,
 		run(M2, N).
 
