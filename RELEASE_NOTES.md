@@ -45,6 +45,9 @@ Tools
 
 * CHANGED: The `lgtunit` tool now prints both CPU time and wall time for tests.
 
+* CHANGED: The `lgtunit` tool xUnit reports now use the tests wall time instead
+of CPU time.
+
 * FIXED: The `packs` linter for pack definitions would not recognize the
 `(\==)/2` operator as valid when specifying dependencies.
 

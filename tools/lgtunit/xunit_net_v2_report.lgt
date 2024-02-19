@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,9 +36,9 @@
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 4:7:0,
+		version is 5:0:0,
 		author is 'Paulo Moura',
-		date is 2024-01-08,
+		date is 2024-02-19,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_report))``.'
@@ -94,12 +94,12 @@
 		assertz(message_cache_(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds))),
 		generate_xml_report.
 	% "testcase" tag predicates
-	message_hook(passed_test(Object, Test, File, Position, Note, Time)) :-
+	message_hook(passed_test(Object, Test, File, Position, Note, CPUTime, WallTime)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, Time)))).
-	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
+		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, CPUTime, WallTime)))).
+	message_hook(failed_test(Object, Test, File, Position, Reason, Note, CPUTime, WallTime)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, Time)))).
+		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, CPUTime, WallTime)))).
 	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Note)))).
@@ -198,14 +198,14 @@
 		fail.
 	write_test_elements(_).
 
-	write_test_element_tags(passed_test(File, Position, Note, Time), Name, Object) :-
+	write_test_element_tags(passed_test(File, Position, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-(Name::Object), type-(Short::Object), method-Name, time-Time, result-'Pass']),
+		write_xml_open_tag(test, [name-(Name::Object), type-(Short::Object), method-Name, time-WallTime, result-'Pass']),
 		write_test_element_traits(Short, Position, Note),
 		write_xml_close_tag(test).
-	write_test_element_tags(failed_test(File, Position, Reason, Note, Time), Name, Object) :-
+	write_test_element_tags(failed_test(File, Position, Reason, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-(Name::Object), type-(Short::Object), method-Name, time-Time, result-'Fail']),
+		write_xml_open_tag(test, [name-(Name::Object), type-(Short::Object), method-Name, time-WallTime, result-'Fail']),
 		write_test_element_traits(Short, Position, Note),
 		write_xml_open_tag(failure, []),
 		failed_test(Reason, Description, _, Error),
@@ -261,13 +261,13 @@
 
 	assembly_time(Object, Time) :-
 		findall(
-			TestTime,
-			(	message_cache_(test(Object, _, passed_test(_, _, _, TestTime)))
-			;	message_cache_(test(Object, _, failed_test(_, _, _, _, TestTime)))
+			WallTime,
+			(	message_cache_(test(Object, _, passed_test(_, _, _, _, WallTime)))
+			;	message_cache_(test(Object, _, failed_test(_, _, _, _, _, WallTime)))
 			),
-			TestTimes
+			WallTimes
 		),
-		sum(TestTimes, 0, Time).
+		sum(WallTimes, 0, Time).
 
 	assembly_stats(Object, Total, Total, 0, 0) :-
 		message_cache_(tests_skipped(Object, _File, _Note)),
