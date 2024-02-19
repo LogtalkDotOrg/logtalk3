@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 8:6:0,
+		version is 9:0:0,
 		author is 'Paulo Moura',
-		date is 2024-01-16,
+		date is 2024-02-19,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -115,38 +115,38 @@
 
 	:- if(\+ current_logtalk_flag(prolog_dialect, ji)).
 
-		message_tokens(tests_runtime(_Object, Time)) -->
-			['runtime: ~9f seconds'-[Time], nl].
+		message_tokens(tests_runtime(_Object, CPUTime, WallTime)) -->
+			['runtime: ~9f/~9f seconds'-[CPUTime, WallTime], nl].
 
-		message_tokens(passed_test(_Object, Test, _File, _Position, Note, Time)) -->
+		message_tokens(passed_test(_Object, Test, _File, _Position, Note, CPUTime, WallTime)) -->
 			(	{Note == ''} ->
-				['~q: success (in ~9f seconds)'-[Test, Time], nl]
-			;	['~q: success (~w) (in ~9f seconds)'-[Test, Note, Time], nl]
+				['~q: success (in ~9f/~9f seconds)'-[Test, CPUTime, WallTime], nl]
+			;	['~q: success (~w) (in ~9f/~9f seconds)'-[Test, Note, CPUTime, WallTime], nl]
 			).
 
-		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, Time)) -->
+		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, CPUTime, WallTime)) -->
 			(	{Note == ''} ->
-				['~q: failure'-[Test]], flaky(Flaky), ['(in ~9f seconds)'-[Time], nl]
-			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~9f seconds)'-[Time], nl]
+				['~q: failure'-[Test]], flaky(Flaky), ['(in ~9f/~9f seconds)'-[CPUTime, WallTime], nl]
+			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~9f/~9f seconds)'-[CPUTime, WallTime], nl]
 			),
 			failed_test_reason(Reason),
 			file_position(File, Position).
 
 	:- else.
 
-		message_tokens(tests_runtime(_Object, Time)) -->
-			['runtime: ~w seconds'-[Time], nl].
+		message_tokens(tests_runtime(_Object, CPUTime, WallTime)) -->
+			['runtime: ~w/~w seconds'-[CPUTime, WallTime], nl].
 
-		message_tokens(passed_test(_Object, Test, _File, _Position, Note, Time)) -->
+		message_tokens(passed_test(_Object, Test, _File, _Position, Note, CPUTime, WallTime)) -->
 			(	{Note == ''} ->
-				['~q: success (in ~w seconds)'-[Test, Time], nl]
-			;	['~q: success (~w) (in ~w seconds)'-[Test, Note, Time], nl]
+				['~q: success (in ~w/~w seconds)'-[Test, CPUTime, WallTime], nl]
+			;	['~q: success (~w) (in ~w/~w seconds)'-[Test, Note, CPUTime, WallTime], nl]
 			).
 
-		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, Time)) -->
+		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, CPUTime, WallTime)) -->
 			(	{Note == ''} ->
-				['~q: failure'-[Test]], flaky(Flaky), ['(in ~9f seconds)'-[Time], nl]
-			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~9f seconds)'-[Time], nl]
+				['~q: failure'-[Test]], flaky(Flaky), ['(in ~9f/~9f seconds)'-[CPUTime, WallTime], nl]
+			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~9f/~9f seconds)'-[CPUTime, WallTime], nl]
 			),
 			failed_test_reason(Reason),
 			file_position(File, Position).

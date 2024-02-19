@@ -214,8 +214,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 16:8:0</div>
-<div class="line"><strong>Date:</strong> 2024-01-16</div>
+<div class="line"><strong>Version:</strong> 17:0:0</div>
+<div class="line"><strong>Date:</strong> 2024-02-19</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -366,8 +366,8 @@
 <li><p><a class="reference internal" href="#auxiliary-predicate-counter-1" id="id100"><code class="docutils literal notranslate"><span class="pre">auxiliary_predicate_counter_/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#id2" id="id101"><code class="docutils literal notranslate"><span class="pre">test_/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#skipped-1" id="id102"><code class="docutils literal notranslate"><span class="pre">skipped_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#passed-2" id="id103"><code class="docutils literal notranslate"><span class="pre">passed_/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#failed-2" id="id104"><code class="docutils literal notranslate"><span class="pre">failed_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#passed-3" id="id103"><code class="docutils literal notranslate"><span class="pre">passed_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#failed-3" id="id104"><code class="docutils literal notranslate"><span class="pre">failed_/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#flaky-1" id="id105"><code class="docutils literal notranslate"><span class="pre">flaky_/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#fired-3" id="id106"><code class="docutils literal notranslate"><span class="pre">fired_/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#covered-4" id="id107"><code class="docutils literal notranslate"><span class="pre">covered_/4</span></code></a></p></li>
@@ -2813,8 +2813,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="passed-2">
-<span id="lgtunit-0-passed-2"></span><span id="index-97"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">passed_/2</span></code></a><a class="headerlink" href="#passed-2" title="Link to this heading"></a></h3>
+<section id="passed-3">
+<span id="lgtunit-0-passed-3"></span><span id="index-97"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">passed_/3</span></code></a><a class="headerlink" href="#passed-3" title="Link to this heading"></a></h3>
 <p>Counter and total time for passed tests.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2825,17 +2825,17 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">passed_(Counter,Time)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">passed_(Counter,CPUTime,WallTime)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">passed_(?integer,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">passed_(?integer,-float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="failed-2">
-<span id="lgtunit-0-failed-2"></span><span id="index-98"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">failed_/2</span></code></a><a class="headerlink" href="#failed-2" title="Link to this heading"></a></h3>
+<section id="failed-3">
+<span id="lgtunit-0-failed-3"></span><span id="index-98"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">failed_/3</span></code></a><a class="headerlink" href="#failed-3" title="Link to this heading"></a></h3>
 <p>Counter and total time for failed tests.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2846,11 +2846,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">failed_(Counter,Time)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">failed_(Counter,CPUTime,WallTime)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">failed_(?integer,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">failed_(?integer,-float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

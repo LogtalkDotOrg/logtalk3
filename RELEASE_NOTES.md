@@ -43,6 +43,8 @@ built-in predicate.
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool now prints both CPU time and wall time for tests.
+
 * FIXED: The `packs` linter for pack definitions would not recognize the
 `(\==)/2` operator as valid when specifying dependencies.
 

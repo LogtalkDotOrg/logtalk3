@@ -1317,14 +1317,16 @@ the same line as the test results.</p>
 </section>
 <section id="test-execution-times-and-memory-usage">
 <h2>Test execution times and memory usage<a class="headerlink" href="#test-execution-times-and-memory-usage" title="Link to this heading"></a></h2>
-<p>Individual test CPU execution time (in seconds) is reported by default
-when running the tests. Total runtime for passed and failed tests is
-reported after the tests complete. Starting and ending date and time
-when running a set of tests is also reported by default. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>
-object also provides several public benchmarking predicates that can be
-useful for e.g. reporting test sub-goals execution times using either
-cpu or wall clocks.</p>
-<p>Test memory usage is not reported y default due to the lack of a
+<p>Individual test CPU and wall execution times (in seconds) are reported
+by default when running the tests. Total CPU and wall execution times
+for passed and failed tests are reported after the tests complete.
+Starting and ending date and time when running a set of tests is also
+reported by default. The <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object also provides several public
+benchmarking predicates that can be useful for e.g. reporting test
+sub-goals execution times using either CPU or wall clocks. When running
+multi-threaded code, the CPU time may or may not include all threads CPU
+time depending on the backend.</p>
+<p>Test memory usage is not reported by default due to the lack of a
 portable solution to access memory data. However, several backend Prolog
 systems provide a <code class="docutils literal notranslate"><span class="pre">statistics/2</span></code> or similar predicate that can be used
 for a custom solution. Depending on the system, individual keys may be
@@ -1740,9 +1742,9 @@ sent from the <code class="docutils literal notranslate"><span class="pre">lgtun
 the meta-argument, which would add an overhead to the timing results.
 But this advice conflicts with collecting code coverage data, which
 requires compilation in debug mode. The solution is to use separate test
-objects for benchmarking and for code coverage. Note that the CPU
-execution time (in seconds) for each individual test is reported by
-default when running the tests.</p>
+objects for benchmarking and for code coverage. Note that the CPU and
+wall execution times (in seconds) for each individual test are reported
+by default when running the tests.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">(=~=)/2</span></code> predicate is typically used by adding the following
 directive to the object (or category) calling it:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [

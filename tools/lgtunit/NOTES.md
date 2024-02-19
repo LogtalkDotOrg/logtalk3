@@ -1140,14 +1140,16 @@ same line as the test results.
 Test execution times and memory usage
 -------------------------------------
 
-Individual test CPU execution time (in seconds) is reported by default when
-running the tests. Total runtime for passed and failed tests is reported after
-the tests complete. Starting and ending date and time when running a set of
-tests is also reported by default. The `lgtunit` object also provides several
-public benchmarking predicates that can be useful for e.g. reporting test
-sub-goals execution times using either cpu or wall clocks.
+Individual test CPU and wall execution times (in seconds) are reported by
+default when running the tests. Total CPU and wall execution times for passed
+and failed tests are reported after the tests complete. Starting and ending
+date and time when running a set of tests is also reported by default. The
+`lgtunit` object also provides several public benchmarking predicates that
+can be useful for e.g. reporting test sub-goals execution times using either
+CPU or wall clocks. When running multi-threaded code, the CPU time may or
+may not include all threads CPU time depending on the backend.
 
-Test memory usage is not reported y default due to the lack of a portable
+Test memory usage is not reported by default due to the lack of a portable
 solution to access memory data. However, several backend Prolog systems
 provide a `statistics/2` or similar predicate that can be used for a custom
 solution. Depending on the system, individual keys may be provided for each
@@ -1536,8 +1538,8 @@ As the `benchmark/2-4` predicates are meta-predicates, turning on the
 meta-argument, which would add an overhead to the timing results. But
 this advice conflicts with collecting code coverage data, which requires
 compilation in debug mode. The solution is to use separate test objects
-for benchmarking and for code coverage. Note that the CPU execution
-time (in seconds) for each individual test is reported by default when
+for benchmarking and for code coverage. Note that the CPU and wall execution
+times (in seconds) for each individual test are reported by default when
 running the tests.
 
 The `(=~=)/2` predicate is typically used by adding the following directive

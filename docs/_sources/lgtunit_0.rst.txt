@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 16:8:0
-| **Date:** 2024-01-16
+| **Version:** 17:0:0
+| **Date:** 2024-02-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -2131,10 +2131,10 @@ Counter for skipped tests.
 
 ------------
 
-.. index:: passed_/2
-.. _lgtunit/0::passed_/2:
+.. index:: passed_/3
+.. _lgtunit/0::passed_/3:
 
-``passed_/2``
+``passed_/3``
 ^^^^^^^^^^^^^
 
 Counter and total time for passed tests.
@@ -2143,17 +2143,17 @@ Counter and total time for passed tests.
 |    ``dynamic``
 
 | **Template:**
-|    ``passed_(Counter,Time)``
+|    ``passed_(Counter,CPUTime,WallTime)``
 | **Mode and number of proofs:**
-|    ``passed_(?integer,-float)`` - ``zero_or_one``
+|    ``passed_(?integer,-float,-float)`` - ``zero_or_one``
 
 
 ------------
 
-.. index:: failed_/2
-.. _lgtunit/0::failed_/2:
+.. index:: failed_/3
+.. _lgtunit/0::failed_/3:
 
-``failed_/2``
+``failed_/3``
 ^^^^^^^^^^^^^
 
 Counter and total time for failed tests.
@@ -2162,9 +2162,9 @@ Counter and total time for failed tests.
 |    ``dynamic``
 
 | **Template:**
-|    ``failed_(Counter,Time)``
+|    ``failed_(Counter,CPUTime,WallTime)``
 | **Mode and number of proofs:**
-|    ``failed_(?integer,-float)`` - ``zero_or_one``
+|    ``failed_(?integer,-float,-float)`` - ``zero_or_one``
 
 
 ------------
