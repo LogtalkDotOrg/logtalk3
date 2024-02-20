@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,9 +34,9 @@
 :- object(automation_report).
 
 	:- info([
-		version is 4:1:0,
+		version is 5:0:0,
 		author is 'Paulo Moura',
-		date is 2023-04-11,
+		date is 2024-02-20,
 		comment is 'Intercepts unit test execution messages and generates a ``*.totals`` files for parsing by the ``logtalk_tester.sh`` automation shell script.',
 		remarks is [
 			'Usage' - 'Automatically loaded by the ``logtalk_tester.sh`` shell script.'
@@ -75,7 +75,7 @@
 		write(results_file, '\t'), write(results_file, Failed),
 		write(results_file, '\t'), write(results_file, Flaky), nl(results_file).
 	% failed tests
-	message_hook(failed_test(Object, Test, File, _, _, Flaky, Note, _)) :-
+	message_hook(failed_test(Object, Test, File, _, _, Flaky, Note, _, _)) :-
 		write(results_file, 'failed\t'), write(results_file, File), write(results_file, '\t'),
 		writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object),
 		(	Flaky == true ->
