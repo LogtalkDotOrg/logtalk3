@@ -20,6 +20,9 @@
 
 
 % for testing the ~p control sequence
+:- multifile(portray/1).
+:- dynamic(portray/1).
+
 portray(Atom) :-
 	atom(Atom),
 	write(Atom),
