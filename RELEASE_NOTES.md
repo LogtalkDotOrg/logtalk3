@@ -32,7 +32,8 @@ Logtalk compiler and runtime
 built-in predicate.
 
 * FIXED: Workaround SWI-Prolog throwing existence errors when calling
-`thread_signal/2 or `thread_send_message/2` on a terminated thread. 
+`thread_signal/2 or `thread_send_message/2` on a terminated but not yet
+joined thread. 
 
 Documentation
 -------------
@@ -77,6 +78,9 @@ Tests
 * ADDED: Test set for ISO Prolog standard logical update semantics.
 
 * ADDED: Additional test for the ISO Prolog standard `op/3` predicate.
+
+* ADDED: Additional tests for the de facto Prolog standard `format/2-3`
+predicates (`~p` control sequence).
 
 * IMPROVED: Test for the  ISO Prolog standard `current_op/3` predicate.
 

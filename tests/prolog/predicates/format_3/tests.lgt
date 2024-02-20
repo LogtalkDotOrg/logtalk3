@@ -68,6 +68,16 @@
 		{format(out, "~k", [(:-a)])},
 		^^text_output_assertion(out, ':-(a)', Assertion).
 
+	test(lgt_format_3_print_default, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~p", [42])},
+		^^text_output_assertion(out, '42', Assertion).
+
+	test(lgt_format_3_print_portray, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~p", [foo])},
+		^^text_output_assertion(out, foofoo, Assertion).
+
 	test(lgt_format_3_atom, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~a", [abc])},
