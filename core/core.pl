@@ -26187,7 +26187,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % the following flags are not part of the ISO/IEC 13211-1 Prolog standard
 % but can be found either on the Core Revision standardization proposal or,
-% more important, these flags are becoming de facto standards
+% more important, these flags are de facto standard
 
 '$lgt_iso_spec_flag'(dialect).
 '$lgt_iso_spec_flag'(version_data).
