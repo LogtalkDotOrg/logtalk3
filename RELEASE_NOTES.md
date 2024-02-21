@@ -35,6 +35,13 @@ built-in predicate.
 `thread_signal/2 or `thread_send_message/2` on a terminated but not yet
 joined thread. 
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Trealla Prolog adapter file to set the `threads` and `engines`
+flags to `supported` when running on a recent version providing the required
+built-in predicates.
+
 Documentation
 -------------
 

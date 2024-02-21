@@ -1,10 +1,10 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on December 8, 2023
+Last updated on February 21, 2024
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -94,7 +94,7 @@ following table summarizes the availability of these features:
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |      yes      |  
 |  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |       no      |  
-|  Trealla Prolog  |       no      |       no      |      yes      |       no      |       no      |      yes      |  
+|  Trealla Prolog  |       no      |       no      |      yes      |      yes      |      yes      |      yes      |  
 |  XSB             |      yes      |       no      |       no      |       no      |       no      |       no      |  
 |  YAP             |      yes      |      yes      |      yes      |       no      |       no      |      yes      |  
 
@@ -109,9 +109,9 @@ Support for these features (with the exception of unbound integer arithmetic)
 can be tested using the `tabling`, `coinduction`, `unicode`, `engines`, and
 `threads` Logtalk flags. For some systems, such as YAP, support for some
 features may depend on the options used when the system was compiled. Some
-other systems, such as ECLiPSe, only recently implemented features such as
-threads. Thus, the best practice is to always test for a feature instead of
-simply testing for a Prolog backend.
+other systems, such as ECLiPSe and Trealla Prolog, only recently implemented
+features such as threads. Thus, the best practice, when possible and reliable,
+is to test for a feature instead of simply testing for a Prolog backend.
 
 Support for unbound integer arithmetic can be checked using the `bounded`
 Prolog flag. This feature is not strictly required by the compiler/runtime

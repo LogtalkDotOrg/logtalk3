@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 2.18.7 and later versions
-%  Last updated on December 4, 2023
+%  Last updated on February 21, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -260,8 +260,16 @@
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
-'$lgt_prolog_feature'(engines, unsupported).
-'$lgt_prolog_feature'(threads, unsupported).
+'$lgt_prolog_feature'(engines, Engines) :-
+	(	predicate_property(message_queue_create(_, _), built_in) ->
+		Engines = supported
+	;	Engines = unsupported
+	).
+'$lgt_prolog_feature'(threads, Threads) :-
+	(	predicate_property(message_queue_create(_, _), built_in) ->
+		Threads = supported
+	;	Threads = unsupported
+	).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
 '$lgt_prolog_feature'(unicode, full).
