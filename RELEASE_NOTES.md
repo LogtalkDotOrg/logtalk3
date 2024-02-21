@@ -61,6 +61,8 @@ Examples
 `checkpoint`, `metered_concurrency`, `philosophers`, `ping_pong`, `sorting`,
 and `team` multi-threading examples by using explicit assertions.
 
+* IMPROVED: Portability of the `whisper` multi-threading example.
+
 * UPDATED: The `buckets`, `buffer`, `metered_concurrency`, `tbbt`, and
 `whisper` multi-threading examples to use the `format` library.
 

@@ -22,9 +22,9 @@
 :- object(whisper).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Jan Wielemaker. Adapted to Logtalk by Paulo Moura',
-		date is 2024-02-02,
+		date is 2024-02-21,
 		comment is 'Example of chaining threaded engines. Original example uses coroutining engines.'
 	]).
 
@@ -62,7 +62,7 @@
 	add1_and_tell(Next) :-
 		threaded_engine_fetch(X),
 		X2 is X + 1,
-		format('Sending ~d to engine ~p\n', [X2, Next]),
+		format('Sending ~d to engine ~q\n', [X2, Next]),
 		threaded_engine_post(Next, X2).
 
 :- end_object.
