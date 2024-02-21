@@ -41,6 +41,26 @@
 		^^clean_file('test_files/sample.docx.txt'),
 		^^clean_file('test_files/sample.odt.txt').
 
+	% contents/2 tests
+
+	test(document_converter_get_pdf_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.pdf', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_doc_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.doc', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_docx_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.docx', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_odt_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.odt', Source),
+		document::contents(Source, Contents).
+
+	% convert/2 tests
+
 	test(document_converter_convert_pdf_to_text, true(os::file_exists(Target))) :-
 		^^file_path('test_files/sample.pdf', Source),
 		^^file_path('test_files/sample.pdf.txt', Target),
@@ -60,22 +80,6 @@
 		^^file_path('test_files/sample.odt', Source),
 		^^file_path('test_files/sample.odt.txt', Target),
 		document::convert(Source, Target).
-
-	test(document_converter_get_pdf_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
-		^^file_path('test_files/sample.pdf', Source),
-		document::contents(Source, Contents).
-
-	test(document_converter_get_doc_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
-		^^file_path('test_files/sample.doc', Source),
-		document::contents(Source, Contents).
-
-	test(document_converter_get_docx_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
-		^^file_path('test_files/sample.docx', Source),
-		document::contents(Source, Contents).
-
-	test(document_converter_get_odt_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
-		^^file_path('test_files/sample.odt', Source),
-		document::contents(Source, Contents).
 
 	test(document_converter_sequential_convert, true, [condition(current_logtalk_flag(threads, supported)), setup(cleanup)]) :-
 		^^file_path('test_files/sample.pdf', Source1),
