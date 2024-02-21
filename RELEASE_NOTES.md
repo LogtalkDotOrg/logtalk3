@@ -64,6 +64,8 @@ of CPU time.
 Examples
 --------
 
+* ADDED: Additional test for the `document_converter` example.
+
 * ADDED: Tests for the `tbbt` threaded engine example.
 
 * IMPROVED: Tests for the `barriers` `blackboard`, `buckets`, `buffer`,

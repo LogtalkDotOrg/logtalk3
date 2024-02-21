@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2023-08-16,
+		date is 2024-02-21,
 		comment is 'Tests for the "document_converter" example.'
 	]).
 
@@ -76,6 +76,24 @@
 	test(document_converter_get_odt_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
 		^^file_path('test_files/sample.odt', Source),
 		document::contents(Source, Contents).
+
+	test(document_converter_sequential_convert, true, [condition(current_logtalk_flag(threads, supported)), setup(cleanup)]) :-
+		^^file_path('test_files/sample.pdf', Source1),
+		^^file_path('test_files/sample.pdf.txt', Target1),
+		^^file_path('test_files/sample.doc', Source2),
+		^^file_path('test_files/sample.doc.txt', Target2),
+		^^file_path('test_files/sample.docx', Source3),
+		^^file_path('test_files/sample.docx.txt', Target3),
+		^^file_path('test_files/sample.odt', Source4),
+		^^file_path('test_files/sample.odt.txt', Target4),
+		document::convert(Source1, Target1),
+		document::convert(Source2, Target2),
+		document::convert(Source3, Target3),
+		document::convert(Source4, Target4),
+		^^assertion(os::file_exists(Target1)),
+		^^assertion(os::file_exists(Target2)),
+		^^assertion(os::file_exists(Target3)),
+		^^assertion(os::file_exists(Target4)).
 
 	test(document_converter_concurrent_convert, true, [condition(current_logtalk_flag(threads, supported)), setup(cleanup)]) :-
 		^^file_path('test_files/sample.pdf', Source1),
