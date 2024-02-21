@@ -48,6 +48,8 @@ Documentation
 * IMPROVED: Handbook documentation of the `threaded_engine_self/1`
 built-in predicate.
 
+* IMPROVED: Documentation of the `arbitrary` library.
+
 Tools
 -----
 
