@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-262.75 1136,-262.75 1136,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category proto_hierarchy</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;02&#45;19, 20:01</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;02&#45;21, 10:44</text>
 <g id="clust1" class="cluster">
 <title>cluster_proto_hierarchy_category</title>
 <g id="a_clust1"><a xlink:title="proto_hierarchy">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 1112,-49.75 1112,-49.75 1118,-49.75 1124,-55.75 1124,-61.75 1124,-61.75 1124,-238.75 1124,-238.75 1124,-244.75 1118,-250.75 1112,-250.75 1112,-250.75 20,-250.75 20,-250.75 14,-250.75 8,-244.75 8,-238.75 8,-238.75 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt">
 <text text-anchor="start" x="20" y="-233.25" font-family="Monospace" font-size="10.00" fill="dimgray">proto_hierarchy</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- descendant/1 -->
 <g id="node1" class="node">
 <title>descendant/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L80">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L80">
 <polygon fill="cornsilk" stroke="black" points="125.5,-213.5 18.5,-213.5 18.5,-177.5 125.5,-177.5 125.5,-213.5"/>
 <text text-anchor="start" x="26.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.5" y="-195.55" font-family="Monospace" font-size="11.00">descendant/1</text>
@@ -41,7 +41,7 @@
 <!-- descendant/2 -->
 <g id="node12" class="node">
 <title>descendant/2</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L84">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L84" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L84">
 <polygon fill="cornsilk" stroke="black" points="170.5,-95.75 63.5,-95.75 63.5,-59.75 170.5,-59.75 170.5,-95.75"/>
 <text text-anchor="start" x="71.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="76.5" y="-77.8" font-family="Monospace" font-size="11.00">descendant/2</text>
@@ -55,12 +55,12 @@
 <!-- descendant/1&#45;&gt;descendant/2 -->
 <g id="edge5" class="edge">
 <title>descendant/1&#45;&gt;descendant/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L80" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M78.74,-177.17C85.96,-158.59 97.54,-128.8 106.07,-106.86"/>
 <polygon fill="black" stroke="black" points="109.31,-108.2 109.67,-97.61 102.78,-105.66 109.31,-108.2"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L80">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L80">
 <text text-anchor="start" x="95" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- leaf/1 -->
 <g id="node2" class="node">
 <title>leaf/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L62">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L62">
 <polygon fill="cornsilk" stroke="black" points="341,-213.5 275,-213.5 275,-177.5 341,-177.5 341,-213.5"/>
 <text text-anchor="start" x="282.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="287.75" y="-195.55" font-family="Monospace" font-size="11.00">leaf/1</text>
@@ -82,7 +82,7 @@
 <!-- leaf/2 -->
 <g id="node10" class="node">
 <title>leaf/2</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L66">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L66">
 <polygon fill="cornsilk" stroke="black" points="427,-95.75 361,-95.75 361,-59.75 427,-59.75 427,-95.75"/>
 <text text-anchor="start" x="368.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="373.75" y="-77.8" font-family="Monospace" font-size="11.00">leaf/2</text>
@@ -96,12 +96,12 @@
 <!-- leaf/1&#45;&gt;leaf/2 -->
 <g id="edge3" class="edge">
 <title>leaf/1&#45;&gt;leaf/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L62" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L62" xlink:title="calls">
 <path fill="none" stroke="black" d="M320.88,-177.17C335,-158.16 357.83,-127.43 374.23,-105.36"/>
 <polygon fill="black" stroke="black" points="376.98,-107.53 380.13,-97.41 371.36,-103.35 376.98,-107.53"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L62">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L62">
 <text text-anchor="start" x="353" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,7 +109,7 @@
 <!-- ancestor/1 -->
 <g id="node3" class="node">
 <title>ancestor/1</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L40">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L40">
 <polygon fill="cornsilk" stroke="black" points="995.5,-213.5 902.5,-213.5 902.5,-177.5 995.5,-177.5 995.5,-213.5"/>
 <text text-anchor="start" x="910.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="915.25" y="-195.55" font-family="Monospace" font-size="11.00">ancestor/1</text>
@@ -123,7 +123,7 @@
 <!-- ancestor/2 -->
 <g id="node6" class="node">
 <title>ancestor/2</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L44">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L44">
 <polygon fill="cornsilk" stroke="black" points="1035.5,-95.75 942.5,-95.75 942.5,-59.75 1035.5,-59.75 1035.5,-95.75"/>
 <text text-anchor="start" x="950.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="955.25" y="-77.8" font-family="Monospace" font-size="11.00">ancestor/2</text>
@@ -137,12 +137,12 @@
 <!-- ancestor/1&#45;&gt;ancestor/2 -->
 <g id="edge1" class="edge">
 <title>ancestor/1&#45;&gt;ancestor/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L40" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M954.99,-177.17C961.41,-158.59 971.7,-128.8 979.29,-106.86"/>
 <polygon fill="black" stroke="black" points="982.52,-108.22 982.48,-97.63 975.9,-105.94 982.52,-108.22"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L40">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L40">
 <text text-anchor="start" x="970" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -150,7 +150,7 @@
 <!-- parent/1 -->
 <g id="node4" class="node">
 <title>parent/1</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L32">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L32">
 <polygon fill="cornsilk" stroke="black" points="439,-213.5 359,-213.5 359,-177.5 439,-177.5 439,-213.5"/>
 <text text-anchor="start" x="366.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="372" y="-195.55" font-family="Monospace" font-size="11.00">parent/1</text>
@@ -164,7 +164,7 @@
 <!-- parents/1 -->
 <g id="node5" class="node">
 <title>parents/1</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L36">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L36">
 <polygon fill="cornsilk" stroke="black" points="543,-213.5 457,-213.5 457,-177.5 543,-177.5 543,-213.5"/>
 <text text-anchor="start" x="464.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="469.62" y="-195.55" font-family="Monospace" font-size="11.00">parents/1</text>
@@ -178,7 +178,7 @@
 <!-- ancestors/1 -->
 <g id="node7" class="node">
 <title>ancestors/1</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L50">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L50">
 <polygon fill="cornsilk" stroke="black" points="1114,-213.5 1014,-213.5 1014,-177.5 1114,-177.5 1114,-213.5"/>
 <text text-anchor="start" x="1021.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1026.88" y="-195.55" font-family="Monospace" font-size="11.00">ancestors/1</text>
@@ -192,12 +192,12 @@
 <!-- ancestors/1&#45;&gt;ancestor/2 -->
 <g id="edge2" class="edge">
 <title>ancestors/1&#45;&gt;ancestor/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L50" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L50" xlink:title="calls">
 <path fill="none" stroke="black" d="M1052.77,-177.17C1040.51,-158.25 1020.72,-127.7 1006.43,-105.66"/>
 <polygon fill="black" stroke="black" points="1009.5,-103.96 1001.13,-97.47 1003.63,-107.76 1009.5,-103.96"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L50">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L50">
 <text text-anchor="start" x="1028" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -205,7 +205,7 @@
 <!-- extension/1 -->
 <g id="node8" class="node">
 <title>extension/1</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L54">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L54">
 <polygon fill="cornsilk" stroke="black" points="759,-213.5 659,-213.5 659,-177.5 759,-177.5 759,-213.5"/>
 <text text-anchor="start" x="666.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="671.88" y="-195.55" font-family="Monospace" font-size="11.00">extension/1</text>
@@ -219,7 +219,7 @@
 <!-- extensions/1 -->
 <g id="node9" class="node">
 <title>extensions/1</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L58">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L58">
 <polygon fill="cornsilk" stroke="black" points="884.5,-213.5 777.5,-213.5 777.5,-177.5 884.5,-177.5 884.5,-213.5"/>
 <text text-anchor="start" x="785.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="790.5" y="-195.55" font-family="Monospace" font-size="11.00">extensions/1</text>
@@ -233,7 +233,7 @@
 <!-- leaves/1 -->
 <g id="node11" class="node">
 <title>leaves/1</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L73">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L73">
 <polygon fill="cornsilk" stroke="black" points="641,-213.5 561,-213.5 561,-177.5 641,-177.5 641,-213.5"/>
 <text text-anchor="start" x="568.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="574" y="-195.55" font-family="Monospace" font-size="11.00">leaves/1</text>
@@ -247,12 +247,12 @@
 <!-- leaves/1&#45;&gt;leaf/2 -->
 <g id="edge4" class="edge">
 <title>leaves/1&#45;&gt;leaf/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L73" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L73" xlink:title="calls">
 <path fill="none" stroke="black" d="M570.01,-177.17C534.11,-157.1 474.82,-123.95 435.1,-101.73"/>
 <polygon fill="black" stroke="black" points="436.96,-98.76 426.52,-96.94 433.54,-104.87 436.96,-98.76"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L73">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L73">
 <text text-anchor="start" x="503" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -260,7 +260,7 @@
 <!-- descendants/1 -->
 <g id="node13" class="node">
 <title>descendants/1</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L93">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L93">
 <polygon fill="cornsilk" stroke="black" points="256.5,-213.5 143.5,-213.5 143.5,-177.5 256.5,-177.5 256.5,-213.5"/>
 <text text-anchor="start" x="151.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="156.12" y="-195.55" font-family="Monospace" font-size="11.00">descendants/1</text>
@@ -274,12 +274,12 @@
 <!-- descendants/1&#45;&gt;descendant/2 -->
 <g id="edge6" class="edge">
 <title>descendants/1&#45;&gt;descendant/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L93" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L93" xlink:title="calls">
 <path fill="none" stroke="black" d="M187.57,-177.17C173.94,-158.16 151.9,-127.43 136.08,-105.36"/>
 <polygon fill="black" stroke="black" points="139.06,-103.51 130.39,-97.43 133.38,-107.59 139.06,-103.51"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a6f88c98fc2d0765da91f95d3379d8715d1f66fc/library/hierarchies/proto_hierarchy.lgt#L93">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L93" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/0f7e75d1ddcbf7bb069f2792d842a9a299f76f0f/library/hierarchies/proto_hierarchy.lgt#L93">
 <text text-anchor="start" x="160" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
