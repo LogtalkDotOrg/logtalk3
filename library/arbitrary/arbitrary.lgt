@@ -23,7 +23,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2:29:0,
+		version is 2:30:0,
 		author is 'Paulo Moura',
 		date is 2024-02-22,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
@@ -41,7 +41,7 @@
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
 			'List and difference list types length' - 'The types that do not take a fixed length generate lists with a length in the ``[0,42]`` interval (``[1,42]`` for non-empty list types).',
 			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,42]`` interval.',
-			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
+			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
 			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
 			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception.',
@@ -55,7 +55,7 @@
 	]).
 
 	:- uses(integer, [between/3 as for/3]).
-	:- uses(list, [append/3, length/2]).
+	:- uses(list, [append/3, length/2, member/2 as in/2]).
 	:- uses(fast_random, [between/3, maybe/0, maybe/2, member/2, permutation/2, random/1]).
 
 	:- public(arbitrary/1).
@@ -191,6 +191,7 @@
 	arbitrary(operator_specifier).
 	arbitrary(hex_char).
 	% compound derived types
+	arbitrary(compound(_Name, _Types)).
 	arbitrary(predicate_indicator).
 	arbitrary(non_terminal_indicator).
 	arbitrary(predicate_or_non_terminal_indicator).
@@ -539,6 +540,10 @@
 		member(Arbitrary, [0'0, 0'1, 0'2, 0'3, 0'4, 0'5, 0'6, 0'7, 0'8, 0'9, 0'a, 0'b, 0'c, 0'd, 0'e, 0'f]).
 
 	% compound derived types
+
+	arbitrary(compound(Name, Types), Arbitrary) :-
+		findall(Argument, (in(Type, Types), arbitrary(Type, Argument)), Arguments),
+		Arbitrary =.. [Name| Arguments].
 
 	arbitrary(predicate_indicator, Name/Arity) :-
 		arbitrary(non_empty_atom(ascii_identifier), Name),

@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
 		date is 2024-02-22,
 		comment is 'Unit tests for the "arbitrary" library.'
@@ -274,6 +274,11 @@
 		^^assertion(type(types_frequency(Pairs),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_28) :-
+		Type = compound(node,[atom,integer]),
+		lgtunit::quick_check(type::arbitrary({Type}, -Type), Result, [n(25)]),
+		^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result)).
+
+	test(arbitrary_arbitrary_2_29) :-
 		forall(
 			(	type::arbitrary(Type),
 				ground(Type)

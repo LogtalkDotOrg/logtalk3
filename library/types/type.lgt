@@ -22,7 +22,7 @@
 :- object(type).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:2:0,
 		author is 'Paulo Moura',
 		date is 2024-02-22,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
@@ -38,7 +38,7 @@
 			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``.',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``.',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
-			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``.',
+			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``.',
 			'Stream types' - '``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``.',
 			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``type``.',
 			'Type ``predicate`` notes' - 'This type is used to check for an object public predicate specified as ``Object::Functor/Arity``.',
@@ -46,6 +46,7 @@
 			'Stream types notes' - 'In the case of the ``stream(Property)`` and ``stream_or_alias(Property)`` types, Property must be a valid stream property.',
 			'Type ``order`` notes' - 'The three possible values of this type are the single character atoms ``<``, ``=``, and ``>``.',
 			'Type ``character_code`` notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
+			'Type ``compound(Name,Types)`` notes' - 'This type verifies that a compound term have the given ``Name`` and its arguments conform to ``Types``.',
 			'Type ``between(Type, Lower, Upper)`` notes' - 'The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
 			'Type ``property(Type, Lambda)`` notes' - 'Verifies that ``Term`` satisfies a property described using a lambda expression of the form ``[Parameter]>>Goal``. The lambda expression is applied in the context of ``user``. The term is type-checked before calling the goal.',
 			'Type ``one_of(Type, Set)`` notes' - 'For checking if a given term is an element of a set. The set is represented using a list. The term is type-checked before testing for set membership.',
@@ -191,6 +192,7 @@
 	type(operator_specifier).
 	type(hex_char).
 	% compound derived types
+	type(compound(_Name, _Types)).
 	type(predicate_indicator).
 	type(non_terminal_indicator).
 	type(predicate_or_non_terminal_indicator).
@@ -377,6 +379,15 @@
 	:- endif.
 
 	% object public predicate
+
+	check(compound(Name, Types), Term) :-
+		(	compound(Term),
+			Term =.. [Name| Arguments] ->
+			catch(check_compound_arguments(Types, Arguments), _, throw(type_error(compound(Name, Types), Term)))
+		;	var(Term) ->
+			throw(instantiation_error)
+		;	throw(type_error(compound(Name, Types), Term))
+		).
 
 	check(predicate, Term) :-
 		(	Term = (Object::Predicate) ->
@@ -1222,6 +1233,15 @@
 
 	% auxiliary predicates; we could use the Logtalk standard library
 	% for some of them but we prefer to avoid any object dependencies
+
+	check_compound_arguments([], []) :-
+		!.
+	check_compound_arguments([Type| Types], [Argument| Arguments]) :-
+		!,
+		check(Type, Argument),
+		check_compound_arguments(Types, Arguments).
+	check_compound_arguments(_, _) :-
+		throw(type_error(_, _)).
 
 	check_list(Type, Term, Original) :-
 		(	var(Term) ->

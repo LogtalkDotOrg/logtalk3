@@ -53,8 +53,8 @@ built-in predicate.
 Library
 -------
 
-* ADDED: New `types_frequency(Pairs)` type to the `types` and `arbitrary`
-libraries. Joint work with Yurii Rashkovskii.
+* ADDED: New `compound(Name,Types)` and `types_frequency(Pairs)` types to
+the `types` and `arbitrary` libraries. Joint work with Yurii Rashkovskii.
 
 Tools
 -----
