@@ -23,13 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2024-02-21,
+		date is 2024-02-22,
 		comment is 'Tests for the "document_converter" example.'
 	]).
 
-	:- threaded.
+	:- if(current_logtalk_flag(threads, supported)).
+		:- threaded.
+	:- endif.
 
 	condition :-
 		os::environment_variable('CLASSPATH', CLASSPATH),
