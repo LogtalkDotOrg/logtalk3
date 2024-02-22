@@ -14,8 +14,8 @@ Adds predicates for generating and shrinking random values for selected types to
 |    ``logtalk_load(arbitrary(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:28:0
-| **Date:** 2024-02-21
+| **Version:** 2:29:0
+| **Date:** 2024-02-22
 
 | **Compilation flags:**
 |    ``static``
@@ -45,7 +45,7 @@ Adds predicates for generating and shrinking random values for selected types to
    - List and difference list types length: The types that do not take a fixed length generate lists with a length in the ``[0,42]`` interval (``[1,42]`` for non-empty list types).
    - Predicate and non-terminal indicator types arity: These types generate indicators with an arity in the ``[0,42]`` interval.
    - Other compound derived types: ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.
-   - Other types: ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``.
+   - Other types: ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.
    - Registering new types: Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.
    - Shrinking values: The ``shrink/3`` should either succeed or fail but never throw an exception.
    - Character sets: ``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``.

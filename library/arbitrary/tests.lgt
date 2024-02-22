@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2024-06-06,
+		date is 2024-02-22,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -269,6 +269,11 @@
 		^^assertion(type(types(Types),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_27) :-
+		Pairs = [var-2, atom-4, integer-3, compound-1],
+		lgtunit::quick_check(type::arbitrary({types_frequency(Pairs)}, -types_frequency(Pairs)), Result, [n(25)]),
+		^^assertion(type(types_frequency(Pairs),Result), subsumes_term(passed(_,_,_), Result)).
+
+	test(arbitrary_arbitrary_2_28) :-
 		forall(
 			(	type::arbitrary(Type),
 				ground(Type)

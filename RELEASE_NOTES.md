@@ -50,6 +50,12 @@ built-in predicate.
 
 * IMPROVED: Documentation of the `arbitrary` library.
 
+Library
+-------
+
+* ADDED: New `types_frequency(Pairs)` type to the `types` and `arbitrary`
+libraries. Joint work with Yurii Rashkovskii.
+
 Tools
 -----
 

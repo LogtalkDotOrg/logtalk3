@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- object(type).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2024-01-30,
+		date is 2024-02-22,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -40,7 +40,7 @@
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
 			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``.',
 			'Stream types' - '``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``.',
-			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``type``.',
+			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``type``.',
 			'Type ``predicate`` notes' - 'This type is used to check for an object public predicate specified as ``Object::Functor/Arity``.',
 			'Type ``boolean`` notes' - 'The two value of this type are the atoms ``true`` and ``false``.',
 			'Stream types notes' - 'In the case of the ``stream(Property)`` and ``stream_or_alias(Property)`` types, Property must be a valid stream property.',
@@ -52,6 +52,7 @@
 			'Type ``var_or(Type)`` notes' - 'Allows checking if a term is either a variable or a valid value of the given type.',
 			'Type ``ground(Type)`` notes' - 'Allows checking if a term is ground and a valid value of the given type.',
 			'Type ``types(Types)`` notes' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
+			'Type ``types_frequency(Pairs)`` notes' - 'Allows checking if a term is a valid value for one of the types in a list of ``Type-Frequency`` pairs.',
 			'Type ``type`` notes' - 'Allows checking if a term is a valid type.',
 			'Type ``qualified_callable`` notes' - 'Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.',
 			'Design choices' - 'The main predicates are ``valid/2`` and ``check/3``. These are defined using the predicate ``check/2``. Defining clauses for ``check/2`` instead of ``valid/2`` gives the user full control of exception terms without requiring an additional predicate.',
@@ -224,6 +225,7 @@
 	type(var_or(_Type)).
 	type(ground(_Type)).
 	type(types(_Types)).
+	type(types_frequency(_Types)).
 	type(type).
 
 	meta_type(list(Type), [Type], []).
@@ -237,6 +239,8 @@
 	meta_type(var_or(Type), [Type], []).
 	meta_type(ground(Type), [Type], []).
 	meta_type(types(Types), Types, []).
+	meta_type(types_frequency(Pairs), Types, []) :-
+		findall(Type, member(Type-_, Pairs), Types).
 
 	valid(Type, Term) :-
 		catch(check(Type, Term), _, fail).
@@ -1194,6 +1198,13 @@
 			valid(Type, Term) ->
 			true
 		;	throw(domain_error(types(Types), Term))
+		).
+
+	check(types_frequency(Pairs), Term) :-
+		(	member(Type-_, Pairs),
+			valid(Type, Term) ->
+			true
+		;	throw(domain_error(types_frequency(Pairs), Term))
 		).
 
 	check(type, Term) :-

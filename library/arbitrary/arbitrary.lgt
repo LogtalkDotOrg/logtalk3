@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:28:0,
+		version is 2:29:0,
 		author is 'Paulo Moura',
-		date is 2024-02-21,
+		date is 2024-02-22,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -42,7 +42,7 @@
 			'List and difference list types length' - 'The types that do not take a fixed length generate lists with a length in the ``[0,42]`` interval (``[1,42]`` for non-empty list types).',
 			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,42]`` interval.',
 			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
-			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``.',
+			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
 			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception.',
 			'Character sets' - '``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``.',
@@ -217,6 +217,7 @@
 	arbitrary(var_or(_Type)).
 	arbitrary(ground(_Type)).
 	arbitrary(types(_Types)).
+	arbitrary(types_frequency(_Pairs)).
 
 	% arbitrary/2
 
@@ -683,6 +684,11 @@
 		arbitrary_ground(Type, Arbitrary).
 
 	arbitrary(types(Types), Arbitrary) :-
+		member(Type, Types),
+		arbitrary(Type, Arbitrary).
+
+	arbitrary(types_frequency(Pairs), Arbitrary) :-
+		types_frequency_to_types_list(Pairs, Types),
 		member(Type, Types),
 		arbitrary(Type, Arbitrary).
 
@@ -1438,5 +1444,14 @@
 		Small = List-Back.
 	shrink_difference_list_keep_next([Head| Tail]-Back, [Head| Small]-Back) :-
 		shrink_difference_list(Tail-Back, Small-Back).
+
+	types_frequency_to_types_list([], []).
+	types_frequency_to_types_list([Type-N| TypesFrequency], WeightedList) :-
+		(	N > 0 ->
+			WeightedList = [Type| Types],
+			M is N - 1,
+			types_frequency_to_types_list([Type-M| TypesFrequency], Types)
+		;	types_frequency_to_types_list(TypesFrequency, WeightedList)
+		).
 
 :- end_category.
