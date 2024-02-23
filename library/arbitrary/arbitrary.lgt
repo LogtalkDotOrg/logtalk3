@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:30:0,
+		version is 2:31:0,
 		author is 'Paulo Moura',
-		date is 2024-02-22,
+		date is 2024-02-23,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -43,6 +43,8 @@
 			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,42]`` interval.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
 			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.',
+			'Type ``compound(Name,Types)`` notes' - 'Generate a random compound term with the given name with a random argument for each type.',
+			'Type ``types_frequency(Pairs)`` notes' - 'Generate a random term for one of the types in a list of ``Type-Frequency`` pairs. The type is randomly selected taking into account the types frequency.',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
 			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception.',
 			'Character sets' - '``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``.',
