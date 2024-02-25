@@ -75,7 +75,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reproducing-sequences-of-arbitrary-terms">Reproducing sequences of arbitrary terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
@@ -183,7 +183,8 @@ predicates for generating random values for selected types to the
 object and the category predicates can be extended by the user with
 definitions for new types by defining clauses for multifile predicates.
 This library is notably used in the QuickCheck implementation by the
-<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool.</p>
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool. See also the documentation of the <code class="docutils literal notranslate"><span class="pre">mutations</span></code>
+library for related functionality.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -216,38 +217,148 @@ yes
 <p>To define a generator of arbitrary values for a type, define a clause
 for the <code class="docutils literal notranslate"><span class="pre">arbitrary::arbitrary/1</span></code> multifile predicate specifying the
 type and a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary::arbitrary/2</span></code> multifile predicate
-generating an arbitrary term of the specified type. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">1</span>).
-arbitrary<span class="o">::</span>arbitrary(foo).
+generating an arbitrary term of the specified type. As a simple example,
+assume that we want to define an “odd integer type”. We start by
+defining both the type checker and the arbitrary generator:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
+type<span class="o">::</span>type(odd).
+
+<span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>check<span class="o">/</span><span class="m">2</span>).
+type<span class="o">::</span>check(odd, <span class="nv">Term</span>) <span class="o">:-</span>
+    (   <span class="k">var</span>(<span class="nv">Term</span>) <span class="o">-&gt;</span>
+        <span class="k">throw</span>(<span class="k">instantiation_error</span>)
+    <span class="o">;</span>   <span class="k">integer</span>(<span class="nv">Term</span>),
+        <span class="nv">Term</span> <span class="o">mod</span> <span class="m">2</span> <span class="o">=:=</span> <span class="m">1</span> <span class="o">-&gt;</span>
+        <span class="k">true</span>
+    <span class="o">;</span>   <span class="k">throw</span>(<span class="k">type_error</span>(odd, <span class="nv">Term</span>))
+    ).
+
+<span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">1</span>).
+arbitrary<span class="o">::</span>arbitrary(odd).
 
 <span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">2</span>).
-arbitrary<span class="o">::</span>arbitrary(foo, <span class="nv">Arbitrary</span>) <span class="o">:-</span>
-    ...
+arbitrary<span class="o">::</span>arbitrary(odd, <span class="nv">Arbitrary</span>) <span class="o">:-</span>
+    type<span class="o">::</span>arbitrary(integer, <span class="nv">Arbitrary0</span>),
+    (   <span class="nv">Arbitrary0</span> <span class="o">mod</span> <span class="m">2</span> <span class="o">=:=</span> <span class="m">1</span> <span class="o">-&gt;</span>
+        <span class="nv">Arbitrary</span> <span class="o">=</span> <span class="nv">Arbitrary0</span>
+    <span class="o">;</span>   <span class="nv">Arbitrary</span> <span class="k">is</span> <span class="nv">Arbitrary0</span> <span class="o">+</span> <span class="m">1</span>
+    ).
 </pre></div>
 </div>
-<p>Optionally, define a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary::shrinker/1</span></code> multifile
+<p>We can also define a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary::shrinker/1</span></code> multifile
 predicate to declare a new shrinker and a <code class="docutils literal notranslate"><span class="pre">arbitrary::shrink/3</span></code>
-multifile predicate for shrinking arbitrary values for QuickCheck usage.
-For example:</p>
+multifile predicate for shrinking arbitrary values for QuickCheck usage:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>shrinker<span class="o">/</span><span class="m">1</span>).
-arbitrary<span class="o">::</span>shrinker(foo).
+arbitrary<span class="o">::</span>shrinker(odd).
 
 <span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>shrink<span class="o">/</span><span class="m">3</span>).
-arbitrary<span class="o">::</span>shrink(foo, <span class="nv">Large</span>, <span class="nv">Small</span>) <span class="o">:-</span>
-    ...
+arbitrary<span class="o">::</span>shrink(odd, <span class="nv">Large</span>, <span class="nv">Small</span>) <span class="o">:-</span>
+    <span class="k">integer</span>(<span class="nv">Large</span>),
+    (   <span class="nv">Large</span> <span class="o">&lt;</span> <span class="o">-</span><span class="m">1</span> <span class="o">-&gt;</span>
+        <span class="nv">Small</span> <span class="k">is</span> <span class="nv">Large</span> <span class="o">+</span> <span class="m">2</span>
+    <span class="o">;</span>   <span class="nv">Large</span> <span class="o">&gt;</span> <span class="m">1</span>,
+        <span class="nv">Small</span> <span class="k">is</span> <span class="nv">Large</span> <span class="o">-</span> <span class="m">2</span>
+    ).
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> should either succeed or fail but never throw an
-exception.</p>
+<p>Definitions for the <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> predicate should either succeed or fail
+but never throw an exception.</p>
 <p>It is also possible to define edge cases for a given type for use with
 QuickCheck implementations. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>edge_case<span class="o">/</span><span class="m">2</span>).
-arbitrary<span class="o">::</span>edge_case(cost, <span class="m">0</span>).
+arbitrary<span class="o">::</span>edge_case(odd,  <span class="m">1</span>).
+arbitrary<span class="o">::</span>edge_case(odd, <span class="o">-</span><span class="m">1</span>).
 </pre></div>
 </div>
-<p>Edge cases are usually tried before resorting to generating arbitrary
-values for a type.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category also provides access to the pseudo-random
+<p>Edge cases are tried before resorting to generating arbitrary values for
+a type.</p>
+<p>A more comple example is generating arbitrary values for a recursive
+type. A simple example of a recursive type is a binary tree. Assuming
+that we are working with a binary tree holding integers where each node
+is represented by a <code class="docutils literal notranslate"><span class="pre">node(Left,</span> <span class="pre">Right)</span></code> compound term, we can define a
+<code class="docutils literal notranslate"><span class="pre">node(Depth)</span></code> type where <code class="docutils literal notranslate"><span class="pre">Depth</span></code> is the maximum depth of the tree.
+This argument allows us to prevent excessively deep trees:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(binary_tree).
+
+<span class="p">    :- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
+    type<span class="o">::</span>type(node(<span class="nv">_</span>)).
+
+<span class="p">    :- </span><span class="k">multifile</span>(type<span class="o">::</span>check<span class="o">/</span><span class="m">2</span>).
+    type<span class="o">::</span>check(node(<span class="nv">_</span>), <span class="nv">Term</span>) <span class="o">:-</span>
+        (   check(<span class="nv">Term</span>) <span class="o">-&gt;</span>
+            <span class="k">true</span>
+        <span class="o">;</span>   <span class="k">var</span>(<span class="nv">Term</span>) <span class="o">-&gt;</span>
+            <span class="k">throw</span>(<span class="k">instantiation_error</span>)
+        <span class="o">;</span>   <span class="k">throw</span>(<span class="k">type_error</span>(node(<span class="nv">_</span>), <span class="nv">Term</span>))
+        ).
+
+    check(<span class="nv">Term</span>) <span class="o">:-</span>
+        (   <span class="k">integer</span>(<span class="nv">Term</span>) <span class="o">-&gt;</span>
+            <span class="k">true</span>
+        <span class="o">;</span>   <span class="k">compound</span>(<span class="nv">Term</span>),
+            <span class="nv">Term</span> <span class="o">=</span> node(<span class="nv">Left</span>, <span class="nv">Right</span>),
+            check(<span class="nv">Left</span>),
+            check(<span class="nv">Right</span>)
+        ).
+
+<span class="p">    :- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">1</span>).
+    arbitrary<span class="o">::</span>arbitrary(node(<span class="nv">_</span>)).
+
+<span class="p">    :- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>arbitrary<span class="o">/</span><span class="m">2</span>).
+    arbitrary<span class="o">::</span>arbitrary(node(<span class="nv">Depth</span>), <span class="nv">Arbitrary</span>) <span class="o">:-</span>
+    (   <span class="nv">Depth</span> <span class="o">&gt;</span> <span class="m">1</span> <span class="o">-&gt;</span>
+        <span class="nv">NewDepth</span> <span class="k">is</span> <span class="nv">Depth</span> <span class="o">-</span> <span class="m">1</span>,
+        type<span class="o">::</span>arbitrary(
+            types_frequency([
+                integer <span class="o">-</span> <span class="m">1</span>,
+                <span class="k">compound</span>(
+                    node,
+                    [
+                        types([node(<span class="nv">NewDepth</span>), integer]),
+                        types([node(<span class="nv">NewDepth</span>), integer])
+                    ]
+                ) <span class="o">-</span> <span class="m">3</span>
+            ]),
+            <span class="nv">Arbitrary</span>
+        )
+    <span class="o">;</span>   type<span class="o">::</span>arbitrary(
+    integer, <span class="nv">Arbitrary</span>)
+    ).
+
+<span class="p">:- </span><span class="k">end_category</span>.
+</pre></div>
+</div>
+<p>In this second example, we use some of the pre-defined types provided by
+the library. The <code class="docutils literal notranslate"><span class="pre">types_frequency(Pairs)</span></code> type supports generating
+random terms for a type in the <code class="docutils literal notranslate"><span class="pre">Type-Frequency</span></code> pairs list where the
+type ie randomly chosen after the types relative frequency. The
+<code class="docutils literal notranslate"><span class="pre">compound(Name,</span> <span class="pre">Types)</span></code> type supports generating compound term with a
+given name and random arguments after the given types:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>arbitrary(node(<span class="m">4</span>), <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="m">907</span>
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(node(<span class="m">4</span>), <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> node(node(node(<span class="m">522</span>, <span class="m">509</span>), node(<span class="m">83</span>, <span class="m">453</span>)), node(<span class="m">454</span>, <span class="o">-</span><span class="m">197</span>))
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(node(<span class="m">4</span>), <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> node(node(<span class="o">-</span><span class="m">875</span>, <span class="o">-</span><span class="m">866</span>), <span class="o">-</span><span class="m">254</span>)
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>arbitrary(node(<span class="m">4</span>), <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> node(<span class="o">-</span><span class="m">133</span>, <span class="o">-</span><span class="m">831</span>)
+yes
+</pre></div>
+</div>
+<p>The source code of these examples can be found in the
+<code class="docutils literal notranslate"><span class="pre">test_files/custom.lgt</span></code> file. Other examples of arbitrary term
+generators can be found in the implementation of the <code class="docutils literal notranslate"><span class="pre">optionals</span></code> and
+<code class="docutils literal notranslate"><span class="pre">expecteds</span></code> libraries.</p>
+</section>
+<section id="reproducing-sequences-of-arbitrary-terms">
+<h2>Reproducing sequences of arbitrary terms<a class="headerlink" href="#reproducing-sequences-of-arbitrary-terms" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category provides access to the pseudo-random
 generator it uses via the <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code>. This allows
 sequences of arbitrary values to be reproduced. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>get_seed(<span class="nv">Seed</span>).
@@ -285,12 +396,6 @@ yes
 <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates. These predicates are
 notably used in the QuickCheck implementation provided by the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool.</p>
-</section>
-<section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<p>See the implementation of the <code class="docutils literal notranslate"><span class="pre">optionals</span></code> and <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> libraries.
-See also the <code class="docutils literal notranslate"><span class="pre">test_files/custom.lgt</span></code> source file for an example of
-defining custom arbitrary term generators.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>

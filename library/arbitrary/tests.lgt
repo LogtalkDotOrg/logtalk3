@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
-		date is 2024-02-22,
+		date is 2024-02-25,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -316,6 +316,9 @@
 
 	test(arbitrary_custom_generator_05, subsumes(passed(_,_,_), Result)) :-
 		lgtunit::quick_check(type::arbitrary({odd}, -odd), Result, []).
+
+	test(arbitrary_custom_generator_06, subsumes(passed(_,_,_), Result)) :-
+		lgtunit::quick_check(type::arbitrary({node(7)}, -node(7)), Result, []).
 
 	% auxiliary predicates
 

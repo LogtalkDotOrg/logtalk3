@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(custom).
+:- category(odd).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2022-07-17,
-		comment is 'Custom arbitrary generators.'
+		date is 2024-02-25,
+		comment is 'Arbitrary generator for the odd integer type.'
 	]).
 
 	:- multifile(type::type/1).
@@ -69,4 +69,62 @@
 	arbitrary::edge_case(odd,  1).
 	arbitrary::edge_case(odd, -1).
 
-:- end_object.
+:- end_category.
+
+
+:- category(binary_tree).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2024-02-25,
+		comment is 'Arbitrary generator for the binary tress of integers type.'
+	]).
+
+	:- multifile(type::type/1).
+	type::type(node(_)).
+
+	% add the actual checking code for the new type
+	:- multifile(type::check/2).
+	type::check(node(_), Term) :-
+		(	check(Term) ->
+			true
+		;	var(Term) ->
+			throw(instantiation_error)
+		;	throw(type_error(node(_), Term))
+		).
+
+	check(Term) :-
+		(	integer(Term) ->
+			true
+		;	compound(Term),
+			Term = node(Left, Right),
+			check(Left),
+			check(Right)
+		).
+
+	:- multifile(arbitrary::arbitrary/1).
+	arbitrary::arbitrary(node(_)).
+
+	:- multifile(arbitrary::arbitrary/2).
+	arbitrary::arbitrary(node(Depth), Arbitrary) :-
+	(	Depth > 1 ->
+		NewDepth is Depth - 1,
+		type::arbitrary(
+			types_frequency([
+				integer - 1,
+				compound(
+					node,
+					[
+						types([node(NewDepth), integer]),
+						types([node(NewDepth), integer])
+					]
+				) - 3
+			]),
+			Arbitrary
+		)
+	;	type::arbitrary(
+	integer, Arbitrary)
+	).
+
+:- end_category.
