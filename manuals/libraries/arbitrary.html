@@ -74,6 +74,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pre-defined-types">Pre-defined types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#reproducing-sequences-of-arbitrary-terms">Reproducing sequences of arbitrary terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
@@ -205,6 +206,13 @@ link in a web browser.</p>
 </pre></div>
 </div>
 </section>
+<section id="pre-defined-types">
+<h2>Pre-defined types<a class="headerlink" href="#pre-defined-types" title="Link to this heading"></a></h2>
+<p>This library defines random generators for most common Logtalk and
+Prolog types. See the <a class="reference external" href="../../docs/library_index.html#arbitrary">API
+documentation</a> for a listing
+of all the pre-defined types.</p>
+</section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> category complements the <code class="docutils literal notranslate"><span class="pre">type</span></code> object and thus its
@@ -272,7 +280,7 @@ arbitrary<span class="o">::</span>edge_case(odd, <span class="o">-</span><span c
 </div>
 <p>Edge cases are tried before resorting to generating arbitrary values for
 a type.</p>
-<p>A more comple example is generating arbitrary values for a recursive
+<p>A more complex example is generating arbitrary values for a recursive
 type. A simple example of a recursive type is a binary tree. Assuming
 that we are working with a binary tree holding integers where each node
 is represented by a <code class="docutils literal notranslate"><span class="pre">node(Left,</span> <span class="pre">Right)</span></code> compound term, we can define a

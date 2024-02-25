@@ -178,7 +178,7 @@
   <section id="types">
 <span id="library-types"></span><h1><code class="docutils literal notranslate"><span class="pre">types</span></code><a class="headerlink" href="#types" title="Link to this heading"></a></h1>
 <p>This library implements predicates over standard Prolog term types and
-also term representing common data structures such as lists and pairs.</p>
+also terms representing common data structures such as lists and pairs.</p>
 <p>It also includes a user-extensible <code class="docutils literal notranslate"><span class="pre">type</span></code> object defining type
 checking predicates over common Logtalk and Prolog term types. The types
 define a hierarchy with the Prolog type <code class="docutils literal notranslate"><span class="pre">term</span></code> at the root (i.e.
@@ -216,7 +216,8 @@ alternative the file:</p>
 <section id="type-checking">
 <h2>Type-checking<a class="headerlink" href="#type-checking" title="Link to this heading"></a></h2>
 <p>This library <code class="docutils literal notranslate"><span class="pre">type</span></code> object can be used to type-check common Logtalk
-and Prolog term types. The <code class="docutils literal notranslate"><span class="pre">valid/2</span></code> predicate succeeds or fails if a
+and Prolog term types (see the object documentation for a listing of all
+the pre-defined types). The <code class="docutils literal notranslate"><span class="pre">valid/2</span></code> predicate succeeds or fails if a
 term is of a given type. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>valid(positive_integer, <span class="m">42</span>).
 yes

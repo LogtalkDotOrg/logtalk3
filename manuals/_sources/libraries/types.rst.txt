@@ -4,7 +4,7 @@
 =========
 
 This library implements predicates over standard Prolog term types and
-also term representing common data structures such as lists and pairs.
+also terms representing common data structures such as lists and pairs.
 
 It also includes a user-extensible ``type`` object defining type
 checking predicates over common Logtalk and Prolog term types. The types
@@ -53,7 +53,8 @@ Type-checking
 -------------
 
 This library ``type`` object can be used to type-check common Logtalk
-and Prolog term types. The ``valid/2`` predicate succeeds or fails if a
+and Prolog term types (see the object documentation for a listing of all
+the pre-defined types). The ``valid/2`` predicate succeeds or fails if a
 term is of a given type. For example:
 
 ::

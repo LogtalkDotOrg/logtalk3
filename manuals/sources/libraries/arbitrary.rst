@@ -37,6 +37,14 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(arbitrary(tester)).
 
+Pre-defined types
+-----------------
+
+This library defines random generators for most common Logtalk and
+Prolog types. See the `API
+documentation <../../docs/library_index.html#arbitrary>`__ for a listing
+of all the pre-defined types.
+
 Usage
 -----
 
@@ -115,7 +123,7 @@ QuickCheck implementations. For example:
 Edge cases are tried before resorting to generating arbitrary values for
 a type.
 
-A more comple example is generating arbitrary values for a recursive
+A more complex example is generating arbitrary values for a recursive
 type. A simple example of a recursive type is a binary tree. Assuming
 that we are working with a binary tree holding integers where each node
 is represented by a ``node(Left, Right)`` compound term, we can define a
