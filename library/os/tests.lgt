@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:35:2,
+		version is 0:36:0,
 		author is 'Paulo Moura',
-		date is 2023-11-22,
+		date is 2024-02-26,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -134,6 +134,15 @@
 
 	test(os_operating_system_type_1_01, true((Type == unix; Type == windows; Type == unknown))) :-
 		os::operating_system_type(Type).
+
+	test(os_operating_system_name_1_01, true(Name \== '')) :-
+		os::operating_system_name(Name).
+
+	test(os_operating_system_machine_1_01, true(Machine \== '')) :-
+		os::operating_system_machine(Machine).
+
+	test(os_operating_system_release_1_01, true(Release \== '')) :-
+		os::operating_system_release(Release).
 
 	test(os_environment_variable_2_01, true(atom(Path))) :-
 		os::environment_variable('PATH', Path).
