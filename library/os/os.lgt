@@ -2337,7 +2337,9 @@
 			shell(Command),
 			open(File0, read, Stream),
 			line_to_codes(Stream, Codes),
-			atom_codes(Release, Codes)
+			close(Stream),
+			atom_codes(Release, Codes),
+			delete_file(File0)
 		;	operating_system_data('uname -r > ', Release)
 		).
 
@@ -2348,7 +2350,9 @@
 		shell(Command),
 		open(File, read, Stream),
 		line_to_codes(Stream, Codes),
-		atom_codes(Value, Codes).
+		close(Stream),
+		atom_codes(Value, Codes),
+		delete_file(File).
 
 	line_to_codes(Stream, Codes) :-
 		(	at_end_of_stream(Stream) ->

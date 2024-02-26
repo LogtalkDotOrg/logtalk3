@@ -206,8 +206,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:37:0</div>
-<div class="line"><strong>Date:</strong> 2023-08-05</div>
+<div class="line"><strong>Version:</strong> 1:38:0</div>
+<div class="line"><strong>Date:</strong> 2024-02-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -275,13 +275,16 @@
 <li><p><a class="reference internal" href="#cpu-time-1" id="id35"><code class="docutils literal notranslate"><span class="pre">cpu_time/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#wall-time-1" id="id36"><code class="docutils literal notranslate"><span class="pre">wall_time/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#operating-system-type-1" id="id37"><code class="docutils literal notranslate"><span class="pre">operating_system_type/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#command-line-arguments-1" id="id38"><code class="docutils literal notranslate"><span class="pre">command_line_arguments/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#sleep-1" id="id39"><code class="docutils literal notranslate"><span class="pre">sleep/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#operating-system-name-1" id="id38"><code class="docutils literal notranslate"><span class="pre">operating_system_name/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#operating-system-machine-1" id="id39"><code class="docutils literal notranslate"><span class="pre">operating_system_machine/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#operating-system-release-1" id="id40"><code class="docutils literal notranslate"><span class="pre">operating_system_release/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#command-line-arguments-1" id="id41"><code class="docutils literal notranslate"><span class="pre">command_line_arguments/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sleep-1" id="id42"><code class="docutils literal notranslate"><span class="pre">sleep/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id40">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id41">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id42">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id43">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id44">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id45">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -1056,8 +1059,71 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="operating-system-name-1">
+<span id="osp-0-operating-system-name-1"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">operating_system_name/1</span></code></a><a class="headerlink" href="#operating-system-name-1" title="Link to this heading"></a></h3>
+<p>Operating system name. On POSIX systems, it returns the value of <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-s</span></code>. On Windows systems, it returns <code class="docutils literal notranslate"><span class="pre">'Windows'</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_name(Name)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_name(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="operating-system-machine-1">
+<span id="osp-0-operating-system-machine-1"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">operating_system_machine/1</span></code></a><a class="headerlink" href="#operating-system-machine-1" title="Link to this heading"></a></h3>
+<p>Operating system hardware platform. On POSIX systems, it returns the value of <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-m</span></code>. On Windows systems, it returns the value of the <code class="docutils literal notranslate"><span class="pre">PROCESSOR_ARCHITECTURE</span></code> environment variable.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_machine(Machine)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_machine(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="operating-system-release-1">
+<span id="osp-0-operating-system-release-1"></span><span id="index-39"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">operating_system_release/1</span></code></a><a class="headerlink" href="#operating-system-release-1" title="Link to this heading"></a></h3>
+<p>Operating system release. On POSIX systems, it returns the value of <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-r</span></code>. On Windows systems, it uses <code class="docutils literal notranslate"><span class="pre">WMI</span></code> code.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_release(Release)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">operating_system_release(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="command-line-arguments-1">
-<span id="osp-0-command-line-arguments-1"></span><span id="index-37"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">command_line_arguments/1</span></code></a><a class="headerlink" href="#command-line-arguments-1" title="Link to this heading"></a></h3>
+<span id="osp-0-command-line-arguments-1"></span><span id="index-40"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">command_line_arguments/1</span></code></a><a class="headerlink" href="#command-line-arguments-1" title="Link to this heading"></a></h3>
 <p>Returns a list with the command line arguments that occur after <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1078,7 +1144,7 @@
 <hr class="docutils" />
 </section>
 <section id="sleep-1">
-<span id="osp-0-sleep-1"></span><span id="index-38"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sleep/1</span></code></a><a class="headerlink" href="#sleep-1" title="Link to this heading"></a></h3>
+<span id="osp-0-sleep-1"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sleep/1</span></code></a><a class="headerlink" href="#sleep-1" title="Link to this heading"></a></h3>
 <p>Suspends execution the given number of seconds.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -53,6 +53,9 @@ built-in predicate.
 Library
 -------
 
+* ADDED: New `os` library predicates `operating_system_name/1`,
+`operating_system_machine/1`, and `operating_system_release/1`.
+
 * ADDED: New `compound(Name,Types)` and `types_frequency(Pairs)` types to
 the `types` and `arbitrary` libraries. Joint work with Yurii Rashkovskii.
 
