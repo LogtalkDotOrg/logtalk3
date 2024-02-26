@@ -2331,10 +2331,11 @@
 	operating_system_release(Release) :-
 		(	environment_variable('COMSPEC', _) ->
 			temporary_directory(Directory),
-			atom_concat(Directory, '/os_data.txt', File),
+			atom_concat(Directory, '/os_data.txt', File0),
+			internal_os_path(File0, File),
 			{atomic_list_concat(['pwsh.exe -Command "(Get-CimInstance Win32_OperatingSystem).version > ', File, '"'], Command)},
 			shell(Command),
-			open(File, read, Stream),
+			open(File0, read, Stream),
 			line_to_codes(Stream, Codes),
 			atom_codes(Release, Codes)
 		;	operating_system_data('uname -r > ', Release)
