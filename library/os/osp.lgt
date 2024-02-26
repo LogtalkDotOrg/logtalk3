@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:37:0,
+		version is 1:38:0,
 		author is 'Paulo Moura',
-		date is 2023-08-05,
+		date is 2024-02-26,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -291,6 +291,27 @@
 	:- info(operating_system_type/1, [
 		comment is 'Operating system type. Possible values are ``unix``, ``windows``, and ``unknown``.',
 		argnames is ['Type']
+	]).
+
+	:- public(operating_system_name/1).
+	:- mode(operating_system_name(?atom), one).
+	:- info(operating_system_name/1, [
+		comment is 'Operating system name. On POSIX systems, it returns the value of ``uname -s``. On Windows systems, it returns ``\'Windows\'``.',
+		argnames is ['Name']
+	]).
+
+	:- public(operating_system_machine/1).
+	:- mode(operating_system_machine(?atom), one).
+	:- info(operating_system_machine/1, [
+		comment is 'Operating system hardware platform. On POSIX systems, it returns the value of ``uname -m``. On Windows systems, it returns the value of the ``PROCESSOR_ARCHITECTURE`` environment variable.',
+		argnames is ['Machine']
+	]).
+
+	:- public(operating_system_release/1).
+	:- mode(operating_system_release(?atom), one).
+	:- info(operating_system_release/1, [
+		comment is 'Operating system release. On POSIX systems, it returns the value of ``uname -r``. On Windows systems, it uses ``WMI`` code.',
+		argnames is ['Release']
 	]).
 
 	:- public(command_line_arguments/1).

@@ -50,9 +50,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:99:2,
+		version is 1:100:0,
 		author is 'Paulo Moura',
-		date is 2024-01-31,
+		date is 2024-02-26,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2315,5 +2315,58 @@
 			).
 
 	:- endif.
+
+	operating_system_name(Name) :-
+		(	environment_variable('COMSPEC', _) ->
+			Name = 'Windows'
+		;	operating_system_data('uname -s > ', Name)
+		).
+
+	operating_system_machine(Machine) :-
+		(	environment_variable('COMSPEC', _) ->
+			environment_variable('PROCESSOR_ARCHITECTURE', Machine)
+		;	operating_system_data('uname -m > ', Machine)
+		).
+
+	operating_system_release(Release) :-
+		(	environment_variable('COMSPEC', _) ->
+			temporary_directory(Directory),
+			atom_concat(Directory, '/os_data.txt', File),
+			{atomic_list_concat(['pwsh.exe -Command "(Get-CimInstance Win32_OperatingSystem).version > ', File, '"'], Command)},
+			shell(Command),
+			open(File, read, Stream),
+			line_to_codes(Stream, Codes),
+			atom_codes(Release, Codes)
+		;	operating_system_data('uname -r > ', Release)
+		).
+
+	operating_system_data(Query, Value) :-
+		temporary_directory(Directory),
+		atom_concat(Directory, '/os_data.txt', File),
+		atom_concat(Query, File, Command),
+		shell(Command),
+		open(File, read, Stream),
+		line_to_codes(Stream, Codes),
+		atom_codes(Value, Codes).
+
+	line_to_codes(Stream, Codes) :-
+		(	at_end_of_stream(Stream) ->
+			Codes = []
+		;	get_code(Stream, Code),
+			(	Code == -1 ->
+				Codes = []
+			;	line_to_codes(Code, Stream, Codes)
+			)
+		).
+
+	line_to_codes(-1, _, []) :-
+		!.
+	line_to_codes(10, _, []) :-
+		!.
+	line_to_codes(13, _, []) :-
+		!.
+	line_to_codes(Code, Stream, [Code| Codes]) :-
+		get_code(Stream, NextCode),
+		line_to_codes(NextCode, Stream, Codes).
 
 :- end_object.
