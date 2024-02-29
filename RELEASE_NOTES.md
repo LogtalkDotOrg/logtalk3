@@ -34,6 +34,11 @@ shrinkers.
 
 * FIXED: The `arbitrary` library tests when run with the GNU Prolog backend.
 
+Tools
+-----
+
+* FIXED: The `packs` tool lint checking of pack manifest notes.
+
 
 3.75.0 - February 27, 2024
 ==========================

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:68:2,
+		version is 0:68:3,
 		author is 'Paulo Moura',
-		date is 2024-02-13,
+		date is 2024-02-29,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1497,6 +1497,7 @@
 		lint_check(license, Pack, PackObject),
 		lint_check(home, Pack, PackObject),
 		lint_check(version, Pack, PackObject),
+		lint_check(notes, Pack, PackObject),
 		print_message(comment, packs, linted_pack(Registry, Pack)).
 
 	lint_check(name, Pack, PackObject) :-
@@ -1604,7 +1605,7 @@
 	lint_check_note(Action, Version, Note) :-
 		(	var(Action) ->
 			true
-		;	member(Action, [add, update, delete]) ->
+		;	member(Action, [install, update, uninstall]) ->
 			true
 		;	print_message(warning, packs, @'The notes/3 predicate action argument is neither a variable nor install, update, or uninstall!'),
 			fail
