@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:68:3,
+		version is 0:69:0,
 		author is 'Paulo Moura',
 		date is 2024-02-29,
 		comment is 'Pack handling predicates.'
@@ -554,7 +554,8 @@
 		decompose_file_name/3, decompose_file_name/4,
 		ensure_file/1, file_exists/1, file_size/2,
 		internal_os_path/2, make_directory_path/1, operating_system_type/1,
-		path_concat/3
+		path_concat/3,
+		operating_system_name/1, operating_system_machine/1, operating_system_release/1
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, ciao)).
@@ -1641,14 +1642,17 @@
 			true
 		;	atom(What), valid_backend(What) ->
 			true
-		;	What = (DependencyRegistry::DependencyPack),
+		;	What = (DependencyRegistry::DependencyPack) ->
 			atom(DependencyRegistry),
 			atom(DependencyPack),
 			DependencyPack \== Pack
+		;	What = os(Name, Machine),
+			atom(Name),
+			atom(Machine)
 		),
 		memberchk(Operator, [(@>=), (@>), (\==), (==), (@=<), (@<)]),
 		arg(2, Dependency, Version),
-		valid_dependency_version(Version).
+		valid_dependency_version(Version, What).
 
 	valid_backend(b).
 	valid_backend(ciao).
@@ -1665,17 +1669,20 @@
 	valid_backend(xsb).
 	valid_backend(yap).
 
-	valid_dependency_version(Major:Minor:Patch) :-
+	valid_dependency_version(Major:Minor:Patch, _) :-
 		integer(Major),
 		integer(Minor),
 		integer(Patch),
 		!.
-	valid_dependency_version(Major:Minor) :-
+	valid_dependency_version(Major:Minor, _) :-
 		integer(Major),
 		integer(Minor),
 		!.
-	valid_dependency_version(Major) :-
-		integer(Major).
+	valid_dependency_version(Major, _) :-
+		integer(Major),
+		!.
+	valid_dependency_version(Version, os(_, _)) :-
+		atom(Version).
 
 	% check availability of a pack update
 
@@ -1733,6 +1740,10 @@
 		Dependency1 =.. [Operator1, Registry::Pack, Lower],
 		Dependency2 =.. [Operator2, Registry::Pack, Upper],
 		!.
+	range_dependency(Dependency1, Dependency2, os(Name,Machine), Lower, Operator1, Upper, Operator2) :-
+		Dependency1 =.. [Operator1, os(Name,Machine), Lower],
+		Dependency2 =.. [Operator2, os(Name,Machine), Upper],
+		!.
 	range_dependency(Dependency1, Dependency2, Backend, Lower, Operator1, Upper, Operator2) :-
 		backend(Backend, _),
 		Dependency1 =.. [Operator1, Backend, Lower],
@@ -1758,6 +1769,16 @@
 			Action = install(Registry, Pack, Version)
 		;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
 			fail
+		).
+	check_range_dependency(os(Name,Machine), Lower, Operator1, Upper, Operator2, Action) :-
+		!,
+		(	operating_system_name(Name),
+			operating_system_machine(Machine),
+			operating_system_release(Version),
+			{call(Operator1, Version, Lower)},
+			{call(Operator2, Version, Upper)} ->
+			Action = none
+		;	Action = os(Name, Machine, Operator1, Lower, Operator2, Upper)
 		).
 	check_range_dependency(logtalk, Lower, Operator1, Upper, Operator2, Action) :-
 		!,
@@ -1813,6 +1834,15 @@
 		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 			fail
 		).
+	check_version(Operator, os(Name,Machine), RequiredVersion, _, Action) :-
+		!,
+		(	operating_system_name(Name),
+			operating_system_machine(Machine),
+			operating_system_release(Version),
+			{call(Operator, Version, RequiredVersion)} ->
+			Action = none
+		;	Action = os(Name, Machine, RequiredVersion)
+		).
 	check_version(Operator, logtalk, Version, _, Action) :-
 		!,
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
@@ -1844,12 +1874,17 @@
 	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) :-
 		registry_pack(Registry, Pack, PackObject),
 		fix_version_for_availability(RequiredVersion, RequiredVersionFixed),
-		(	% first try to find a version that verifies both Logtalk and Prolog backend dependencies
+		(	% first try to find a version that verifies both Logtalk,
+			% Prolog backend, and operating-system dependencies
 			PackObject::version(Version, _, _, _, Dependencies, _),
 			{call(Operator, Version, RequiredVersionFixed)},
 			check_dependencies(Dependencies, Actions),
 			\+ member(logtalk(_, _, _, _), Actions),
-			\+ member(backend(_, _, _, _, _), Actions)
+			\+ member(logtalk(_, _), Actions),
+			\+ member(backend(_, _, _, _, _), Actions),
+			\+ member(backend(_, _, _), Actions),
+			\+ member(os(_, _, _, _, _, _), Actions),
+			\+ member(os(_, _, _), Actions)
 		;	% if none found, use the first version required by the parent pack
 			PackObject::version(Version, _, _, _, _, _),
 			{call(Operator, Version, RequiredVersionFixed)}
@@ -1869,6 +1904,10 @@
 		print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q and ~w ~q'+[Name, Operator1, Lower, Operator2, Upper]).
 	install_dependency(backend(Name, Operator, Version)) :-
 		print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator, Version]).
+	install_dependency(os(Name, Machine, Operator1, Lower, Operator2, Upper)) :-
+		print_message(warning, packs, 'Pack requires the ~w operating-system running on ~w at version ~w ~q and ~w ~q'+[Name, Machine, Operator1, Lower, Operator2, Upper]).
+	install_dependency(os(Name, Machine, Version)) :-
+		print_message(warning, packs, 'Pack requires the ~w operating-system running on ~w at version ~w'+[Name, Machine, Version]).
 	install_dependency(install(Registry, Pack, Version)) :-
 		install(Registry, Pack, Version).
 	install_dependency(update(_Registry, Pack, Version)) :-

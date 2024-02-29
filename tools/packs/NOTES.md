@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -549,10 +549,18 @@ Pack dependencies
 
 Pack dependencies on other packs can be specified using the syntax
 `Registry::Pack Operator Version` where `Operator` is a standard term
-comparison operator as described below. When a pack depends on a Logtalk
-or backend version, the name `logtalk` or the identifier of the backend
-can be used in place of `Registry::Pack` (see below for the table of
-backend specifiers).
+comparison operator as described below.
+
+When a pack also depends on a Logtalk or backend version, the name `logtalk`
+or the identifier of the backend can be used in place of `Registry::Pack`
+(see below for the table of backend specifiers).
+
+When a pack also depends on an operating-system version (e.g. a pack
+containing shared libraries with executable code), the `os(Name,Machine)`
+compound term can also be used in place of `Registry::Pack`. The
+operating-system data (name, machine, and version) is queried using the
+corresponding `os` library predicates (see the library documentation for
+details).
 
 Dependencies are specified using a list of the following elements:
 
@@ -593,8 +601,9 @@ Pack portability
 ----------------
 
 Ideally, packs are fully portable and can be used with all Logtalk supported
-Prolog backends. This can be declared by using the atom `all` in the last
-argument of the `version/6` predicate (see example above).
+Prolog backends in any operating-system. This can be declared by using the
+atom `all` in the last argument of the `version/6` predicate (see example
+above).
 
 When a pack can only be used with a subset of the Prolog backends, the last
 argument of the `version/6` predicate is a list of backend identifiers

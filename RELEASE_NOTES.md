@@ -37,6 +37,9 @@ shrinkers.
 Tools
 -----
 
+* ADDED: Support to the `packs` tool to represent operating-system dependencies
+in pack manifest files.
+
 * FIXED: The `packs` tool lint checking of pack manifest notes.
 
 

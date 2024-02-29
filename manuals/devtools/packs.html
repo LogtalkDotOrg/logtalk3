@@ -661,10 +661,16 @@ installing (or updating to) the latest version of the pack.</p>
 <h2>Pack dependencies<a class="headerlink" href="#pack-dependencies" title="Link to this heading"></a></h2>
 <p>Pack dependencies on other packs can be specified using the syntax
 <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">Operator</span> <span class="pre">Version</span></code> where <code class="docutils literal notranslate"><span class="pre">Operator</span></code> is a standard
-term comparison operator as described below. When a pack depends on a
-Logtalk or backend version, the name <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> or the identifier of
-the backend can be used in place of <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code> (see below for
-the table of backend specifiers).</p>
+term comparison operator as described below.</p>
+<p>When a pack also depends on a Logtalk or backend version, the name
+<code class="docutils literal notranslate"><span class="pre">logtalk</span></code> or the identifier of the backend can be used in place of
+<code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code> (see below for the table of backend specifiers).</p>
+<p>When a pack also depends on an operating-system version (e.g. a pack
+containing shared libraries with executable code), the
+<code class="docutils literal notranslate"><span class="pre">os(Name,Machine)</span></code> compound term can also be used in place of
+<code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code>. The operating-system data (name, machine, and
+version) is queried using the corresponding <code class="docutils literal notranslate"><span class="pre">os</span></code> library predicates
+(see the library documentation for details).</p>
 <p>Dependencies are specified using a list of the following elements:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&gt;=</span> <span class="pre">Version</span></code> - the pack requires a dependency with
@@ -702,9 +708,9 @@ For example, <code class="docutils literal notranslate"><span class="pre">[commo
 <section id="pack-portability">
 <h2>Pack portability<a class="headerlink" href="#pack-portability" title="Link to this heading"></a></h2>
 <p>Ideally, packs are fully portable and can be used with all Logtalk
-supported Prolog backends. This can be declared by using the atom
-<code class="docutils literal notranslate"><span class="pre">all</span></code> in the last argument of the <code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate (see example
-above).</p>
+supported Prolog backends in any operating-system. This can be declared
+by using the atom <code class="docutils literal notranslate"><span class="pre">all</span></code> in the last argument of the <code class="docutils literal notranslate"><span class="pre">version/6</span></code>
+predicate (see example above).</p>
 <p>When a pack can only be used with a subset of the Prolog backends, the
 last argument of the <code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate is a list of backend
 identifiers (atoms):</p>
