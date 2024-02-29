@@ -204,7 +204,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:32:0</div>
+<div class="line"><strong>Version:</strong> 2:33:0</div>
 <div class="line"><strong>Date:</strong> 2024-02-29</div>
 </div>
 <div class="line-block">
@@ -242,8 +242,8 @@
 <li><p>Integer derived parametric types: <code class="docutils literal notranslate"><span class="pre">character_code(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">in_character_code(CharSet)</span></code>, <code class="docutils literal notranslate"><span class="pre">code(CharSet)</span></code>.</p></li>
 <li><p>List types (compound derived types): <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">non_empty_list</span></code>, <code class="docutils literal notranslate"><span class="pre">partial_list</span></code>, <code class="docutils literal notranslate"><span class="pre">list_or_partial_list</span></code>, <code class="docutils literal notranslate"><span class="pre">list(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">list(Type,Length)</span></code>, <code class="docutils literal notranslate"><span class="pre">list(Type,Min,Max)</span></code>, <code class="docutils literal notranslate"><span class="pre">list(Type,Length,Min,Max)</span></code>, <code class="docutils literal notranslate"><span class="pre">non_empty_list(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">codes</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>.</p></li>
 <li><p>Difference list types (compound derived types): <code class="docutils literal notranslate"><span class="pre">difference_list</span></code>, <code class="docutils literal notranslate"><span class="pre">difference_list(Type)</span></code>.</p></li>
-<li><p>List and difference list types length: The types that do not take a fixed length generate lists with a length in the <code class="docutils literal notranslate"><span class="pre">[0,42]</span></code> interval (<code class="docutils literal notranslate"><span class="pre">[1,42]</span></code> for non-empty list types).</p></li>
-<li><p>Predicate and non-terminal indicator types arity: These types generate indicators with an arity in the <code class="docutils literal notranslate"><span class="pre">[0,42]</span></code> interval.</p></li>
+<li><p>List and difference list types length: The types that do not take a fixed length generate lists with a length in the <code class="docutils literal notranslate"><span class="pre">[0,MaxSize]</span></code> interval (<code class="docutils literal notranslate"><span class="pre">[1,MaxSize]</span></code> for non-empty list types).</p></li>
+<li><p>Predicate and non-terminal indicator types arity: These types generate indicators with an arity in the <code class="docutils literal notranslate"><span class="pre">[0,MaxSize]</span></code> interval.</p></li>
 <li><p>Other compound derived types: <code class="docutils literal notranslate"><span class="pre">compound(Name,Types)</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">non_terminal_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate_or_non_terminal_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">clause</span></code>, <code class="docutils literal notranslate"><span class="pre">grammar_rule</span></code>, <code class="docutils literal notranslate"><span class="pre">pair</span></code>, <code class="docutils literal notranslate"><span class="pre">pair(KeyType,ValueType)</span></code>.</p></li>
 <li><p>Other types: <code class="docutils literal notranslate"><span class="pre">Object::Closure</span></code>, <code class="docutils literal notranslate"><span class="pre">between(Type,Lower,Upper)</span></code>, <code class="docutils literal notranslate"><span class="pre">property(Type,LambdaExpression)</span></code>, <code class="docutils literal notranslate"><span class="pre">one_of(Type,Set)</span></code>, <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">ground(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">types(Types)</span></code>, <code class="docutils literal notranslate"><span class="pre">types_frequency(Pairs)</span></code>.</p></li>
 <li><p>Type <code class="docutils literal notranslate"><span class="pre">Object::Closure</span></code> notes: Allows calling public object predicates as generators and shrinkers. The <code class="docutils literal notranslate"><span class="pre">Closure</span></code> closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.</p></li>
@@ -275,11 +275,12 @@
 <li><p><a class="reference internal" href="#edge-case-2" id="id6"><code class="docutils literal notranslate"><span class="pre">edge_case/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#get-seed-1" id="id7"><code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#set-seed-1" id="id8"><code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#max-size-1" id="id9"><code class="docutils literal notranslate"><span class="pre">max_size/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id9">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id10">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id11">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id10">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id11">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id12">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -427,6 +428,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">set_seed(+ground)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="max-size-1">
+<span id="arbitrary-0-max-size-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max_size/1</span></code></a><a class="headerlink" href="#max-size-1" title="Link to this heading"></a></h3>
+<p>User defined maximum size for types where its meaningful and implicit. When not defined, defaults to 42. When multiple definitions exist, the first valid one found is used.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic,</span> <span class="pre">multifile</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max_size(Size)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max_size(?positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

@@ -305,6 +305,18 @@ The seed should be regarded as an opaque term and handled using the
 `get_seed/1` and `set_seed/1` predicates. These predicates are notably used
 in the QuickCheck implementation provided by the `lgtunit` tool.
 
+
+Default size of generated terms
+-------------------------------
+
+The library uses the value 42 for the default size of generated terms for
+types where size is meaningful and implicit. To override this default value,
+define a clause for dynamic and multifile `arbitrary::max_size/1` predicate.
+The new default size must be a positive integer. When multiple definitions
+exist, the first valid one found is used. When no definition is valid, the
+default value of 42 is used.
+
+
 Known issues
 ------------
 

@@ -23,7 +23,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2:32:0,
+		version is 2:33:0,
 		author is 'Paulo Moura',
 		date is 2024-02-29,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
@@ -39,8 +39,8 @@
 			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``.',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``.',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
-			'List and difference list types length' - 'The types that do not take a fixed length generate lists with a length in the ``[0,42]`` interval (``[1,42]`` for non-empty list types).',
-			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,42]`` interval.',
+			'List and difference list types length' - 'The types that do not take a fixed length generate lists with a length in the ``[0,MaxSize]`` interval (``[1,MaxSize]`` for non-empty list types).',
+			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,MaxSize]`` interval.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
 			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.',
 			'Type ``Object::Closure`` notes' - 'Allows calling public object predicates as generators and shrinkers. The ``Closure`` closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.',
@@ -113,6 +113,15 @@
 	:- info(set_seed/1, [
 		comment is 'Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.',
 		argnames is ['Seed']
+	]).
+
+	:- public(max_size/1).
+	:- dynamic(max_size/1).
+	:- multifile(max_size/1).
+	:- mode(max_size(?positive_integer), zero_or_one).
+	:- info(max_size/1, [
+		comment is 'User defined maximum size for types where its meaningful and implicit. When not defined, defaults to 42. When multiple definitions exist, the first valid one found is used.',
+		argnames is ['Size']
 	]).
 
 	% arbitrary/1
@@ -551,11 +560,13 @@
 
 	arbitrary(predicate_indicator, Name/Arity) :-
 		arbitrary(non_empty_atom(ascii_identifier), Name),
-		arbitrary(between(integer,0,42), Arity).
+		max_size_value(Size),
+		arbitrary(between(integer,0,Size), Arity).
 
 	arbitrary(non_terminal_indicator, Name//Arity) :-
 		arbitrary(non_empty_atom(ascii_identifier), Name),
-		arbitrary(between(integer,0,42), Arity).
+		max_size_value(Size),
+		arbitrary(between(integer,0,Size), Arity).
 
 	arbitrary(predicate_or_non_terminal_indicator, Arbitrary) :-
 		arbitrary(types([predicate_indicator, non_terminal_indicator]), Arbitrary).
@@ -612,7 +623,8 @@
 		).
 
 	arbitrary(list(Type), Arbitrary) :-
-		between(0, 42, Length),
+		max_size_value(Size),
+		between(0, Size, Length),
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type).
 
@@ -621,12 +633,14 @@
 		map_arbitrary(Arbitrary, Type).
 
 	arbitrary(non_empty_list(Type), Arbitrary) :-
-		between(1, 42, Length),
+		max_size_value(Size),
+		between(1, Size, Length),
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type).
 
 	arbitrary(list(Type,Min,Max), Arbitrary) :-
-		between(0, 42, Length),
+		max_size_value(Size),
+		between(0, Size, Length),
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type, Min, Max).
 
@@ -638,7 +652,8 @@
 		arbitrary(difference_list(types([var,atom,integer,float])), Arbitrary).
 
 	arbitrary(difference_list(Type), Arbitrary) :-
-		between(0, 42, Length),
+		max_size_value(Size),
+		between(0, Size, Length),
 		length(Arbitrary0, Length),
 		map_arbitrary(Arbitrary0, Arbitrary, Type).
 
@@ -1265,6 +1280,14 @@
 		fast_random::set_seed(Seed).
 
 	% auxiliary predicates
+
+	max_size_value(Size) :-
+		(	max_size(Size),
+			integer(Size),
+			Size > 0 ->
+			true
+		;	Size = 42
+		).
 
 	arbitrary_between(Type, Lower, Upper, Arbitrary) :-
 		repeat,

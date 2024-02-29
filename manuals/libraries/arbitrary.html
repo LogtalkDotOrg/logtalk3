@@ -78,6 +78,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scoped-generators-and-shrinkers">Scoped generators and shrinkers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#reproducing-sequences-of-arbitrary-terms">Reproducing sequences of arbitrary terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#default-size-of-generated-terms">Default size of generated terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
@@ -452,6 +453,16 @@ yes
 <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates. These predicates are
 notably used in the QuickCheck implementation provided by the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool.</p>
+</section>
+<section id="default-size-of-generated-terms">
+<h2>Default size of generated terms<a class="headerlink" href="#default-size-of-generated-terms" title="Link to this heading"></a></h2>
+<p>The library uses the value 42 for the default size of generated terms
+for types where size is meaningful and implicit. To override this
+default value, define a clause for dynamic and multifile
+<code class="docutils literal notranslate"><span class="pre">arbitrary::max_size/1</span></code> predicate. The new default size must be a
+positive integer. When multiple definitions exist, the first valid one
+found is used. When no definition is valid, the default value of 42 is
+used.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
