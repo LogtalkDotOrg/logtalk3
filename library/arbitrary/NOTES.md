@@ -210,9 +210,9 @@ after the given types:
 	Arbitrary = node(-133, -831)
 	yes
 
-The source code of these examples can be found in the `test_files/custom.lgt`
-file. Other examples of arbitrary term generators can be found in the
-implementation of the `optionals` and `expecteds` libraries.
+The source code of these examples can be found in the `test_files` directory.
+Other examples of arbitrary term generators can be found in the implementation
+of the `optionals` and `expecteds` libraries.
 
 
 Scoped generators and shrinkers
@@ -260,6 +260,8 @@ Some sample calls:
 	| ?- type::shrink(scoped::custom, 0.42, Smaller).
 	Smaller = 0.21
 	yes
+
+The source code of this example can be found in the `test_files` directory.
 
 
 Reproducing sequences of arbitrary terms

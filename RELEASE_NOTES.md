@@ -32,6 +32,8 @@ Library
 allows using object public predicates as scoped type-checkers, generators, and
 shrinkers.
 
+* FIXED: The `arbitrary` library tests when run with the GNU Prolog backend.
+
 
 3.75.0 - February 27, 2024
 ==========================

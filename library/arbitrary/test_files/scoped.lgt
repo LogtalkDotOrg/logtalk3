@@ -19,21 +19,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% to avoid problems with backend Prolog compilers such as ECLiPSe where
-% reloading a file defining clauses for a multifile predicate results in
-% the duplication of the clauses, below we load the required libraries
-% for the "lgtunit" tool separately so that we can load the "arbitrary"
-% library under testing in debug mode
+:- object(scoped).
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(types(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load(os(loader)),
-	% load the "arbitrary" category in debug mode to support collecting code coverage data
-	logtalk_load(arbitrary, [debug(on), source_data(on), clean(on)]),
-	logtalk_load([lgtunit(lgtunit), lgtunit(lgtunit_messages)], [optimize(on)]),
-	logtalk_load(['test_files/binary_tree', 'test_files/odd', 'test_files/scoped']),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+	% the same predicate is used for both generating and validating
+	:- public(custom/1).
+	custom(Term) :-
+		(	var(Term) ->
+			% assume predicate used as a generator
+			random::random(Term)
+		;	% assume predicate used as a validator
+			float(Term)
+		).
+
+	% a predicate with the same name is used for shrinking
+	:- public(custom/2).
+	custom(Larger, Small) :-
+		Small is Larger / 2.
+
+:- end_object.
