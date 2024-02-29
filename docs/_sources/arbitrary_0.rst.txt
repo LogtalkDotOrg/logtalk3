@@ -209,7 +209,7 @@ Sets the random generator seed to a given value returned by calling the ``get_se
 User defined maximum size for types where its meaningful and implicit. When not defined, defaults to 42. When multiple definitions exist, the first valid one found is used.
 
 | **Compilation flags:**
-|    ``dynamic, multifile``
+|    ``static, multifile``
 
 | **Template:**
 |    ``max_size(Size)``

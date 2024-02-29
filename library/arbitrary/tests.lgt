@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
 		date is 2024-02-29,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
+
+	:- multifile(arbitrary::max_size/1).
+	arbitrary::max_size(7).
 
 	cover(arbitrary).
 
@@ -295,6 +298,13 @@
 			),
 			^^assertion(Type, lgtunit::deterministic(type::arbitrary(Type,_)))
 		).
+
+	% override of the default maximum size
+
+	test(arbitrary_max_size_01, all(Length =< 7)) :-
+		integer::between(1, 25, _),
+		type::arbitrary(list(integer), List),
+		list::length(List, Length).
 
 	% random seed predicates
 

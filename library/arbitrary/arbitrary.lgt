@@ -116,7 +116,6 @@
 	]).
 
 	:- public(max_size/1).
-	:- dynamic(max_size/1).
 	:- multifile(max_size/1).
 	:- mode(max_size(?positive_integer), zero_or_one).
 	:- info(max_size/1, [

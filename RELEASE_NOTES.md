@@ -32,8 +32,8 @@ Library
 allows using object public predicates as scoped type-checkers, generators, and
 shrinkers.
 
-* ADDED: New `arbitrary::max_size/1` multifile and dynamic predicate to allow
-overriding the maximum size for types where its meaningful and implicit.
+* ADDED: New `arbitrary::max_size/1` multifile predicate to allow overriding
+the maximum size for types where its meaningful and implicit.
 
 * FIXED: The `arbitrary` library tests when run with the GNU Prolog backend.
 
