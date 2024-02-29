@@ -458,9 +458,9 @@ notably used in the QuickCheck implementation provided by the
 <h2>Default size of generated terms<a class="headerlink" href="#default-size-of-generated-terms" title="Link to this heading"></a></h2>
 <p>The library uses the value 42 for the default size of generated terms
 for types where size is meaningful and implicit. To override this
-default value, define a clause for the multifile
-<code class="docutils literal notranslate"><span class="pre">arbitrary::max_size/1</span></code> predicate. The new default size must be a
-positive integer. For example:</p>
+default value, define a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary::max_size/1</span></code>
+multifile predicate. The new default size must be a positive integer.
+For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>max_size<span class="o">/</span><span class="m">1</span>).
 arbitrary<span class="o">::</span>max_size(<span class="m">7</span>).
 </pre></div>

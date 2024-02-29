@@ -594,22 +594,9 @@ installing (or updating to) the latest version of the pack.
 Pack dependencies
 -----------------
 
-Pack dependencies on other packs can be specified using the syntax
-``Registry::Pack Operator Version`` where ``Operator`` is a standard
-term comparison operator as described below.
-
-When a pack also depends on a Logtalk or backend version, the name
-``logtalk`` or the identifier of the backend can be used in place of
-``Registry::Pack`` (see below for the table of backend specifiers).
-
-When a pack also depends on an operating-system version (e.g. a pack
-containing shared libraries with executable code), the
-``os(Name,Machine)`` compound term can also be used in place of
-``Registry::Pack``. The operating-system data (name, machine, and
-version) is queried using the corresponding ``os`` library predicates
-(see the library documentation for details).
-
-Dependencies are specified using a list of the following elements:
+Pack dependencies on other packs can be specified using a list of
+``Registry::Pack Operator Version`` terms where ``Operator`` is a
+standard term comparison operator:
 
 -  ``Registry::Pack @>= Version`` - the pack requires a dependency with
    version equal or above the specified one. For example,
@@ -648,13 +635,26 @@ consecutive elements with the lower bound followed by the upper bound.
 For example, ``[common::bits @>= 2, common::bits @< 3]`` means all
 ``common::bits`` 2.x versions but not older or newer major versions.
 
+When a pack also depends on a Logtalk or backend version, the name
+``logtalk`` or the backend identifier atom can be used in place of
+``Registry::Pack`` (see below for the table of backend specifiers). For
+example, ``logtalk @>= 3.36.0``.
+
+When a pack also depends on an operating-system version (e.g. a pack
+containing shared libraries with executable code), the
+``os(Name,Machine)`` compound term can also be used in place of
+``Registry::Pack``. For example, ``os('Darwin',x86_64) @>= '23.0.0'``.
+Note that, in this case, the release is an atom. The operating-system
+data (name, machine, and release) is queried using the corresponding
+``os`` library predicates (see the library documentation for details).
+
 Pack portability
 ----------------
 
 Ideally, packs are fully portable and can be used with all Logtalk
-supported Prolog backends in any operating-system. This can be declared
-by using the atom ``all`` in the last argument of the ``version/6``
-predicate (see example above).
+supported Prolog backends. This can be declared by using the atom
+``all`` in the last argument of the ``version/6`` predicate (see example
+above).
 
 When a pack can only be used with a subset of the Prolog backends, the
 last argument of the ``version/6`` predicate is a list of backend

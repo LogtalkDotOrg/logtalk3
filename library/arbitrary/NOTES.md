@@ -311,7 +311,7 @@ Default size of generated terms
 
 The library uses the value 42 for the default size of generated terms for
 types where size is meaningful and implicit. To override this default value,
-define a clause for the multifile `arbitrary::max_size/1` predicate. The
+define a clause for the `arbitrary::max_size/1` multifile predicate. The
 new default size must be a positive integer. For example:
 
 	:- multifile(arbitrary::max_size/1).
