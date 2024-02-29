@@ -25,7 +25,12 @@ RELEASE NOTES
 3.76.0 - March ??, 2024
 =======================
 
+Library
+-------
 
+* ADDED: New `(::)/2` type to the `types` and `arbitrary` libraries. This type
+allows using object public predicates as scoped type-checkers, generators, and
+shrinkers.
 
 
 3.75.0 - February 27, 2024

@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:31:0,
+		version is 2:32:0,
 		author is 'Paulo Moura',
-		date is 2024-02-23,
+		date is 2024-02-29,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -42,7 +42,8 @@
 			'List and difference list types length' - 'The types that do not take a fixed length generate lists with a length in the ``[0,42]`` interval (``[1,42]`` for non-empty list types).',
 			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,42]`` interval.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
-			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.',
+			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.',
+			'Type ``Object::Closure`` notes' - 'Allows calling public object predicates as generators and shrinkers. The ``Closure`` closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.',
 			'Type ``compound(Name,Types)`` notes' - 'Generate a random compound term with the given name with a random argument for each type.',
 			'Type ``types_frequency(Pairs)`` notes' - 'Generate a random term for one of the types in a list of ``Type-Frequency`` pairs. The type is randomly selected taking into account the types frequency.',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
@@ -216,6 +217,7 @@
 	arbitrary(between(_Type, _Lower, _Upper)).
 	arbitrary(property(_Type, _LambdaExpression)).
 	% other types
+	arbitrary(_Object::_Closure).
 	arbitrary(one_of(_Type, _Set)).
 	arbitrary(var_or(_Type)).
 	arbitrary(ground(_Type)).
@@ -677,6 +679,12 @@
 		arbitrary(Type, Arbitrary),
 		{once(Goal)}.
 
+	arbitrary(Object::Closure, Arbitrary) :-
+		(	call(Object::Closure, Arbitrary) ->
+			true
+		;	fail
+		).
+
 	arbitrary(one_of(_Type, Set), Arbitrary) :-
 		member(Arbitrary, Set).
 
@@ -764,6 +772,7 @@
 	shrinker(pair).
 	shrinker(pair(_KeyType, _ValueType)).
 	% other types
+	shrinker(_Object::_Closure).
 	shrinker(var_or(_Type)).
 	shrinker(ground(_Type)).
 	shrinker(types(_Types)).
@@ -1009,6 +1018,12 @@
 
 	shrink(ground(Type), Large, Small) :-
 		shrink(Type, Large, Small).
+
+	shrink(Object::Closure, Large, Small) :-
+		(	call(Object::Closure, Large, Small) ->
+			true
+		;	fail
+		).
 
 	shrink(var_or(Type), Large, Small) :-
 		nonvar(Large),

@@ -214,6 +214,54 @@ The source code of these examples can be found in the `test_files/custom.lgt`
 file. Other examples of arbitrary term generators can be found in the
 implementation of the `optionals` and `expecteds` libraries.
 
+
+Scoped generators and shrinkers
+-------------------------------
+
+Declaring a new generator and possibly a shrinker for a custom type rises the
+possibility of a conflict with third-party defined generators and shrinkers.
+An alternative is to use the `(::)/2` meta-type to define scoped generators
+and shrinkers. For example:
+
+	:- object(scoped).
+	
+		% the same predicate is used for both generating and validating
+		:- public(custom/1).
+		custom(Term) :-
+			(	var(Term) ->
+				% assume predicate used as a generator
+				random::random(Term)
+			;	% assume predicate used as a validator
+				float(Term)
+			).
+	
+		% a predicate with the same name is used for shrinking
+		:- public(custom/2).
+		custom(Larger, Small) :-
+			Small is Larger / 2.
+	
+	:- end_object.
+
+Some sample calls:
+
+	| ?- type::arbitrary(scoped::custom, Arbitrary).
+	Arbitrary = 0.5788130906607927
+	yes
+	
+	| ?- type::valid(scoped::custom, foo).
+	no
+	
+	| ?- type::check(scoped::custom, _).
+	ERROR: type_error(instantiation_error)
+	
+	| ?- type::check(scoped::custom, foo).
+	ERROR: type_error(scoped::custom, foo)
+	
+	| ?- type::shrink(scoped::custom, 0.42, Smaller).
+	Smaller = 0.21
+	yes
+
+
 Reproducing sequences of arbitrary terms
 ----------------------------------------
 

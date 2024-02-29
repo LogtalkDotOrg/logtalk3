@@ -40,12 +40,13 @@
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``.',
 			'Stream types' - '``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``.',
-			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``type``.',
+			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``type``.',
 			'Type ``predicate`` notes' - 'This type is used to check for an object public predicate specified as ``Object::Functor/Arity``.',
 			'Type ``boolean`` notes' - 'The two value of this type are the atoms ``true`` and ``false``.',
 			'Stream types notes' - 'In the case of the ``stream(Property)`` and ``stream_or_alias(Property)`` types, Property must be a valid stream property.',
 			'Type ``order`` notes' - 'The three possible values of this type are the single character atoms ``<``, ``=``, and ``>``.',
 			'Type ``character_code`` notes' - 'This type takes into account Unicode support by the backend compiler. When Unicode is supported, it distinguishes between BMP and full support. When Unicode is not supported, it assumes a byte representation for characters.',
+			'Type ``Object::Closure`` notes' - 'Allows calling a public object predicate for type-checking. The predicate should provide ``valid/2`` predicate semantics and assume called with a bound argument. The ``Closure`` closure is extended with a single argument, the value to be checked.',
 			'Type ``compound(Name,Types)`` notes' - 'This type verifies that a compound term have the given ``Name`` and its arguments conform to ``Types``.',
 			'Type ``between(Type, Lower, Upper)`` notes' - 'The type argument allows distinguishing between numbers and other types. It also allows choosing between mixed integer/float comparisons and strict float or integer comparisons. The term is type-checked before testing for interval membership.',
 			'Type ``property(Type, Lambda)`` notes' - 'Verifies that ``Term`` satisfies a property described using a lambda expression of the form ``[Parameter]>>Goal``. The lambda expression is applied in the context of ``user``. The term is type-checked before calling the goal.',
@@ -223,6 +224,7 @@
 	type(stream).
 	type(stream(_Type)).
 	% other types
+	type(_Object::_Closure).
 	type(one_of(_Type, _Set)).
 	type(var_or(_Type)).
 	type(ground(_Type)).
@@ -378,7 +380,7 @@
 
 	:- endif.
 
-	% object public predicate
+	% compound terms
 
 	check(compound(Name, Types), Term) :-
 		(	compound(Term),
@@ -388,6 +390,8 @@
 			throw(instantiation_error)
 		;	throw(type_error(compound(Name, Types), Term))
 		).
+
+	% object public predicate
 
 	check(predicate, Term) :-
 		(	Term = (Object::Predicate) ->
@@ -1183,6 +1187,14 @@
 		).
 
 	% other types
+
+	check(Object::Closure, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	call(Object::Closure, Term) ->
+			true
+		;	throw(type_error(Object::Closure, Term))
+		).
 
 	check(one_of(Type, Set), Term) :-
 		check(Type, Term),

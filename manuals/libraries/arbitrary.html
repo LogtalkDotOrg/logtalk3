@@ -76,6 +76,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pre-defined-types">Pre-defined types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scoped-generators-and-shrinkers">Scoped generators and shrinkers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#reproducing-sequences-of-arbitrary-terms">Reproducing sequences of arbitrary terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
@@ -363,6 +364,52 @@ yes
 <code class="docutils literal notranslate"><span class="pre">test_files/custom.lgt</span></code> file. Other examples of arbitrary term
 generators can be found in the implementation of the <code class="docutils literal notranslate"><span class="pre">optionals</span></code> and
 <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> libraries.</p>
+</section>
+<section id="scoped-generators-and-shrinkers">
+<h2>Scoped generators and shrinkers<a class="headerlink" href="#scoped-generators-and-shrinkers" title="Link to this heading"></a></h2>
+<p>Declaring a new generator and possibly a shrinker for a custom type
+rises the possibility of a conflict with third-party defined generators
+and shrinkers. An alternative is to use the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> meta-type to
+define scoped generators and shrinkers. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(scoped).
+
+    <span class="c">% the same predicate is used for both generating and validating</span>
+<span class="p">    :- </span><span class="k">public</span>(custom<span class="o">/</span><span class="m">1</span>).
+    custom(<span class="nv">Term</span>) <span class="o">:-</span>
+        (   <span class="k">var</span>(<span class="nv">Term</span>) <span class="o">-&gt;</span>
+            <span class="c">% assume predicate used as a generator</span>
+            random<span class="o">::</span>random(<span class="nv">Term</span>)
+        <span class="o">;</span>   <span class="c">% assume predicate used as a validator</span>
+            <span class="k">float</span>(<span class="nv">Term</span>)
+        ).
+
+    <span class="c">% a predicate with the same name is used for shrinking</span>
+<span class="p">    :- </span><span class="k">public</span>(custom<span class="o">/</span><span class="m">2</span>).
+    custom(<span class="nv">Larger</span>, <span class="nv">Small</span>) <span class="o">:-</span>
+        <span class="nv">Small</span> <span class="k">is</span> <span class="nv">Larger</span> <span class="o">/</span> <span class="m">2.</span>
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Some sample calls:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>arbitrary(scoped<span class="o">::</span>custom, <span class="nv">Arbitrary</span>).
+<span class="nv">Arbitrary</span> <span class="o">=</span> <span class="m">0.5788130906607927</span>
+yes
+
+| <span class="o">?-</span> type<span class="o">::</span>valid(scoped<span class="o">::</span>custom, foo).
+no
+
+| <span class="o">?-</span> type<span class="o">::</span>check(scoped<span class="o">::</span>custom, <span class="nv">_</span>).
+<span class="nv">ERROR</span><span class="o">:</span> <span class="k">type_error</span>(<span class="k">instantiation_error</span>)
+
+| <span class="o">?-</span> type<span class="o">::</span>check(scoped<span class="o">::</span>custom, foo).
+<span class="nv">ERROR</span><span class="o">:</span> <span class="k">type_error</span>(scoped<span class="o">::</span>custom, foo)
+
+| <span class="o">?-</span> type<span class="o">::</span>shrink(scoped<span class="o">::</span>custom, <span class="m">0.42</span>, <span class="nv">Smaller</span>).
+<span class="nv">Smaller</span> <span class="o">=</span> <span class="m">0.21</span>
+yes
+</pre></div>
+</div>
 </section>
 <section id="reproducing-sequences-of-arbitrary-terms">
 <h2>Reproducing sequences of arbitrary terms<a class="headerlink" href="#reproducing-sequences-of-arbitrary-terms" title="Link to this heading"></a></h2>

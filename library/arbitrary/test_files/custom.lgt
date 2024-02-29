@@ -128,3 +128,23 @@
 	).
 
 :- end_category.
+
+
+:- object(scoped).
+
+	% the same predicate is used for both generating and validating
+	:- public(custom/1).
+	custom(Term) :-
+		(	var(Term) ->
+			% assume predicate used as a generator
+			random::random(Term)
+		;	% assume predicate used as a validator
+			float(Term)
+		).
+
+	% a predicate with the same name is used for shrinking
+	:- public(custom/2).
+	custom(Larger, Small) :-
+		Small is Larger / 2.
+
+:- end_object.
