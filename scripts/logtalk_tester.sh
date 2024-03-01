@@ -27,8 +27,13 @@
 
 set -o pipefail
 
+function cleanup {
+	pkill -9 -P $$
+}
+trap cleanup EXIT
+
 print_version() {
-	echo "$(basename "$0") 18.0"
+	echo "$(basename "$0") 19.0"
 	exit 0
 }
 

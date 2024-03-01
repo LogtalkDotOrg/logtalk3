@@ -52,6 +52,9 @@ in pack manifest files.
 * IMPROVED: The `logtalk_tester.sh` Bash script can now be interrupted using
 Ctrl-C when the timeout option is used.
 
+* IMPROVED: The `logtalk_tester.sh` Bash script now kills all created child
+processes on exit.
+
 * FIXED: The `packs` tool lint checking of pack manifest notes.
 
 
