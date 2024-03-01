@@ -49,6 +49,9 @@ Tools
 * ADDED: Support to the `packs` tool to represent operating-system dependencies
 in pack manifest files.
 
+* IMPROVED: The `logtalk_tester.sh` Bash script can now be interrupted using
+Ctrl-C when the timeout option is used.
+
 * FIXED: The `packs` tool lint checking of pack manifest notes.
 
 

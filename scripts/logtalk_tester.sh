@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on November 21, 2023
+##   Last updated on March 1, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 set -o pipefail
 
 print_version() {
-	echo "$(basename "$0") 17.0"
+	echo "$(basename "$0") 18.0"
 	exit 0
 }
 
@@ -49,9 +49,9 @@ if [[ "$(command -v timeout)" == *"System32"* ]] || [[ "$(command -v timeout)" =
 	timeout_command=""
 # second, look for GNU coreutils package timeout command
 elif [ -x "$(command -v timeout)" ] && [[ "$(timeout --version)" == *"GNU coreutils"* ]] ; then
-	timeout_command="timeout -s 9 -k 1.0s"
+	timeout_command="timeout --foreground -s 9 -k 1.0s"
 elif [ -x "$(command -v gtimeout)" ] && [[ "$(gtimeout --version)" == *"GNU coreutils"* ]] ; then
-	timeout_command="gtimeout -s 9 -k 1.0s"
+	timeout_command="gtimeout --foreground -s 9 -k 1.0s"
 else
 	timeout_command=""
 fi
