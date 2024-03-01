@@ -93,6 +93,13 @@
 		argnames is ['Type', 'Large', 'Small']
 	]).
 
+	:- public(shrink_sequence/3).
+	:- mode(shrink_sequence(@callable, @term, -list(term)), zero_or_one).
+	:- info(shrink_sequence/3, [
+		comment is 'Shrinks a value repeatedly until shrinking is no longer possible returning the sequence of values (ordered from larger to smaller value). Fails if the type is not supported.',
+		argnames is ['Type', 'Value', 'Sequence']
+	]).
+
 	:- public(edge_case/2).
 	:- multifile(edge_case/2).
 	:- mode(edge_case(?callable, ?term), zero_or_more).
@@ -1278,6 +1285,14 @@
 
 	set_seed(Seed) :-
 		fast_random::set_seed(Seed).
+
+	% srinker tester predicates
+
+	shrink_sequence(Type, Value, [Next| Sequence]) :-
+		shrink(Type, Value, Next),
+		!,
+		shrink_sequence(Type, Next, Sequence).
+	shrink_sequence(_, _, []).
 
 	% auxiliary predicates
 

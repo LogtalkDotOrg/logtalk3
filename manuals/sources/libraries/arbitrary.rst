@@ -57,6 +57,9 @@ predicates are accessed via this object. For example:
    Arbitrary = -816
    yes
 
+Defining new generators and shrinkers
+-------------------------------------
+
 To define a generator of arbitrary values for a type, define a clause
 for the ``arbitrary::arbitrary/1`` multifile predicate specifying the
 type and a clause for the ``arbitrary::arbitrary/2`` multifile predicate
@@ -109,7 +112,9 @@ multifile predicate for shrinking arbitrary values for QuickCheck usage:
        ).
 
 Definitions for the ``shrink/3`` predicate should either succeed or fail
-but never throw an exception.
+but never throw an exception. The ``shrink_sequence/3`` predicate can be
+used to help testing that shrinking a value results in a finite sequence
+of values.
 
 It is also possible to define edge cases for a given type for use with
 QuickCheck implementations. For example:
