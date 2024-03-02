@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: The compiler report of errors and warnings clause context for
+multifile predicates.
+
 * FIXED: The compiler to detect and report attempts to declare category
 predicates or non-terminals as both multifile and dynamic.
 

@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:131:0,
+		version is 1:132:0,
 		author is 'Paulo Moura',
-		date is 2024-01-16,
+		date is 2024-03-02,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -889,10 +889,16 @@
 			['  in clause'-[], nl]
 		;	{\+ callable(Clause)} ->
 			['  in clause'-[], nl]
+		;	{Clause = (Entity::Head :- _), callable(Head), Head \= '$VAR'(_)} ->
+			{functor(Head, Name, Arity)},
+			['  in clause for multifile predicate ~q::~q/~w'-[Entity, Name, Arity], nl]
 		;	{Clause = (Head :- _), callable(Head), Head \= '$VAR'(_)} ->
 			{functor(Head, Name, Arity)},
 			['  in clause for predicate ~q/~w'-[Name, Arity], nl]
-		;	{Clause \= (_ :- _), Clause \= '$VAR'(_)} ->
+		;	{Clause \= (_ :- _), Clause = Entity::Head, callable(Head), Head \= '$VAR'(_)} ->
+			{functor(Head, Name, Arity)},
+			['  in clause for multifile predicate ~q::~q/~w'-[Entity, Name, Arity], nl]
+		;	{Clause \= (_ :- _), callable(Clause)} ->
 			{functor(Clause, Name, Arity)},
 			['  in clause for predicate ~q/~w'-[Name, Arity], nl]
 		;	['  in clause'-[], nl]
@@ -905,7 +911,7 @@
 		;	{Left = ','(Head, _), callable(Head), Head \= '$VAR'(_)} ->
 			{functor(Head, Name, Arity)},
 			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
-		;	{Left \= ','(_, _), Left \= '$VAR'(_)} ->
+		;	{Left \= ','(_, _), callable(Left)} ->
 			{functor(Left, Name, Arity)},
 			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
 		;	['  in grammar rule'-[], nl]
