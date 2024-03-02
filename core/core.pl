@@ -10710,7 +10710,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_entity_'(category, _, _),
 		'$lgt_pp_multifile_'(Head, _, _) ->
 		% categories cannot contain non-terminals that are both multifile and dynamic
-		throw(permission_error(declare, dynamic, Functor/Arity))
+		throw(permission_error(declare, dynamic, Functor//Arity))
 	;	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
@@ -11108,7 +11108,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	Type == category,
 	 	'$lgt_pp_dynamic_'(Head, _, _) ->
 		% categories cannot contain non-terminals that are both multifile and dynamic
-	 	throw(permission_error(declare, multifile, Functor/Arity))
+	 	throw(permission_error(declare, multifile, Functor//Arity))
 	;	'$lgt_check_for_duplicated_multifile_directive'(Head, NonTerminal),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, File, Lines)),

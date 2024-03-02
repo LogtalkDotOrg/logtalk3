@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:62:0,
+		version is 0:63:0,
 		author is 'Paulo Moura',
-		date is 2024-01-16,
+		date is 2024-03-02,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -249,6 +249,23 @@
 	error(permission_error(repeat, object_alias, _)) -->
 		[	'This name is already declared as an alias to the same object.'-[], nl,
 			'Simply delete the repeated declaration to fix this error.'-[], nl, nl
+		].
+
+	error(permission_error(declare, (dynamic), _/_)) -->
+		[	'Category predicates cannot be declared as both multifile and dynamic'-[], nl,
+			'as categories cannot contain clauses for dynamic predicates.'-[], nl, nl
+		].
+	error(permission_error(declare, (dynamic), _//_)) -->
+		[	'Category non-terminals cannot be declared as both multifile and dynamic'-[], nl,
+			'as categories cannot contain grammar rules for dynamic non-terminals.'-[], nl, nl
+		].
+	error(permission_error(declare, (multifile), _/_)) -->
+		[	'Category predicates cannot be declared as both multifile and dynamic'-[], nl,
+			'as categories cannot contain clauses for dynamic predicates.'-[], nl, nl
+		].
+	error(permission_error(declare, (multifile), _//_)) -->
+		[	'Category non-terminals cannot be declared as both multifile and dynamic'-[], nl,
+			'as categories cannot contain grammar rules for dynamic non-terminals.'-[], nl, nl
 		].
 
 	error(permission_error(define, dynamic_predicate, _)) -->

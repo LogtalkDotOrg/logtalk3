@@ -64,6 +64,9 @@ Ctrl-C when the timeout option is used.
 * IMPROVED: The `logtalk_tester.sh` Bash script now kills all created child
 processes on exit.
 
+* IMPROVED: The `tutor` tool explanation for permission errors when trying to
+declare a category predicate as both multifile and dynamic.
+
 * FIXED: The `packs` tool lint checking of pack manifest notes.
 
 
