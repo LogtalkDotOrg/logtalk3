@@ -25,6 +25,12 @@ RELEASE NOTES
 3.76.0 - March ??, 2024
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The compiler to detect and report attempts to declare category
+predicates or non-terminals as both multifile and dynamic.
+
 Library
 -------
 

@@ -10690,7 +10690,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	functor(Head, Functor, Arity),
 	'$lgt_check_predicate_name_conflict'((dynamic), Head, Functor/Arity),
-	(	'$lgt_pp_synchronized_'(Head, _, _, _) ->
+	(	'$lgt_pp_entity_'(category, _, _),
+		'$lgt_pp_multifile_'(Head, _, _) ->
+		% categories cannot contain predicates that are both multifile and dynamic
+		throw(permission_error(declare, dynamic, Functor/Arity))
+	;	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized predicates must be static
 		throw(permission_error(modify, synchronized_predicate, Functor/Arity))
 	;	'$lgt_check_for_duplicated_dynamic_directive'(Head, Pred),
@@ -10703,7 +10707,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	functor(Head, Functor, ExtArity),
 	'$lgt_check_predicate_name_conflict'((dynamic), Head, Functor//Arity),
-	(	'$lgt_pp_synchronized_'(Head, _, _, _) ->
+	(	'$lgt_pp_entity_'(category, _, _),
+		'$lgt_pp_multifile_'(Head, _, _) ->
+		% categories cannot contain non-terminals that are both multifile and dynamic
+		throw(permission_error(declare, dynamic, Functor/Arity))
+	;	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
 	;	'$lgt_check_for_duplicated_dynamic_directive'(Head, NonTerminal),
@@ -11073,12 +11081,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_multifile_directive_resource'(Pred, Ctx) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
+	functor(Head, Functor, Arity),
 	'$lgt_pp_entity_'(Type, _, Prefix),
 	(	Type == protocol ->
 		% protocols cannot contain predicate definitions
 		throw(permission_error(declare, multifile, Functor/Arity))
-	;	functor(Head, Functor, Arity),
-		'$lgt_check_for_duplicated_multifile_directive'(Head, Pred),
+	;	Type == category,
+	 	'$lgt_pp_dynamic_'(Head, _, _) ->
+		% categories cannot contain predicates that are both multifile and dynamic
+	 	throw(permission_error(declare, multifile, Functor/Arity))
+	;	'$lgt_check_for_duplicated_multifile_directive'(Head, Pred),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
@@ -11088,12 +11100,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_multifile_directive_resource'(NonTerminal, Ctx) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
+	functor(Head, Functor, ExtArity),
 	'$lgt_pp_entity_'(Type, _, Prefix),
 	(	Type == protocol ->
 		% protocols cannot contain non-terminal definitions
 		throw(permission_error(declare, multifile, Functor//Arity))
-	;	functor(Head, Functor, ExtArity),
-		'$lgt_check_for_duplicated_multifile_directive'(Head, NonTerminal),
+	;	Type == category,
+	 	'$lgt_pp_dynamic_'(Head, _, _) ->
+		% categories cannot contain non-terminals that are both multifile and dynamic
+	 	throw(permission_error(declare, multifile, Functor/Arity))
+	;	'$lgt_check_for_duplicated_multifile_directive'(Head, NonTerminal),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
