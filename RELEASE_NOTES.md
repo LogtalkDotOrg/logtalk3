@@ -50,6 +50,9 @@ definitions of the `arbitrary::shrink/3` predicate.
 * FIXED: Bugs in the `arbitrary` library `shrink/3` predicate definitions for
 some of the pre-defined types that could result in non-terminating sequences.
 
+* FIXED: Protect `arbitrary` library `shrink/3` predicate definitions for
+float types from underflow errors.
+
 * FIXED: The `arbitrary` library tests when run with the GNU Prolog backend.
 
 Tools
