@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-380.5 3409,-380.5 3409,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object java</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;01, 16:52</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;02, 16:24</text>
 <g id="clust1" class="cluster">
 <title>cluster_java_object</title>
 <g id="a_clust1"><a xlink:title="java">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 3385,-49.75 3385,-49.75 3391,-49.75 3397,-55.75 3397,-61.75 3397,-61.75 3397,-356.5 3397,-356.5 3397,-362.5 3391,-368.5 3385,-368.5 3385,-368.5 20,-368.5 20,-368.5 14,-368.5 8,-362.5 8,-356.5 8,-356.5 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt">
 <text text-anchor="start" x="20" y="-351" font-family="Monospace" font-size="10.00" fill="dimgray">java</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- set_element/2 -->
 <g id="node1" class="node">
 <title>set_element/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L213">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L213">
 <polygon fill="cornsilk" stroke="black" points="158.5,-331.25 45.5,-331.25 45.5,-295.25 158.5,-295.25 158.5,-331.25"/>
 <text text-anchor="start" x="53.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="58.12" y="-313.3" font-family="Monospace" font-size="11.00">set_element/2</text>
@@ -52,12 +52,12 @@
 <!-- set_element/2&#45;&gt;jpl:jpl_set_element/2 -->
 <g id="edge25" class="edge">
 <title>set_element/2&#45;&gt;jpl:jpl_set_element/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L213" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L213" xlink:title="calls">
 <path fill="none" stroke="black" d="M102,-294.92C102,-276.51 102,-247.1 102,-225.21"/>
 <polygon fill="black" stroke="black" points="105.5,-225.46 102,-215.46 98.5,-225.46 105.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L213">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L213">
 <text text-anchor="start" x="102" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -65,7 +65,7 @@
 <!-- map_element/2 -->
 <g id="node2" class="node">
 <title>map_element/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L210">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L210">
 <polygon fill="cornsilk" stroke="black" points="343.5,-331.25 230.5,-331.25 230.5,-295.25 343.5,-295.25 343.5,-331.25"/>
 <text text-anchor="start" x="238.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="243.12" y="-313.3" font-family="Monospace" font-size="11.00">map_element/2</text>
@@ -90,12 +90,12 @@
 <!-- map_element/2&#45;&gt;jpl:jpl_map_element/2 -->
 <g id="edge24" class="edge">
 <title>map_element/2&#45;&gt;jpl:jpl_map_element/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L210" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L210" xlink:title="calls">
 <path fill="none" stroke="black" d="M287,-294.92C287,-276.51 287,-247.1 287,-225.21"/>
 <polygon fill="black" stroke="black" points="290.5,-225.46 287,-215.46 283.5,-225.46 290.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L210">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L210" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L210">
 <text text-anchor="start" x="287" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -103,7 +103,7 @@
 <!-- iterator_element/2 -->
 <g id="node3" class="node">
 <title>iterator_element/2</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L207">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L207">
 <polygon fill="cornsilk" stroke="black" points="562.5,-331.25 415.5,-331.25 415.5,-295.25 562.5,-295.25 562.5,-331.25"/>
 <text text-anchor="start" x="423.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="428.25" y="-313.3" font-family="Monospace" font-size="11.00">iterator_element/2</text>
@@ -128,12 +128,12 @@
 <!-- iterator_element/2&#45;&gt;jpl:jpl_iterator_element/2 -->
 <g id="edge23" class="edge">
 <title>iterator_element/2&#45;&gt;jpl:jpl_iterator_element/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L207" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L207" xlink:title="calls">
 <path fill="none" stroke="black" d="M489,-294.92C489,-276.51 489,-247.1 489,-225.21"/>
 <polygon fill="black" stroke="black" points="492.5,-225.46 489,-215.46 485.5,-225.46 492.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L207">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L207">
 <text text-anchor="start" x="489" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <!-- list_to_array/2 -->
 <g id="node4" class="node">
 <title>list_to_array/2</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L198">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L198">
 <polygon fill="cornsilk" stroke="black" points="2157.5,-331.25 2030.5,-331.25 2030.5,-295.25 2157.5,-295.25 2157.5,-331.25"/>
 <text text-anchor="start" x="2038.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2043.38" y="-313.3" font-family="Monospace" font-size="11.00">list_to_array/2</text>
@@ -166,12 +166,12 @@
 <!-- list_to_array/2&#45;&gt;jpl:jpl_list_to_array/2 -->
 <g id="edge20" class="edge">
 <title>list_to_array/2&#45;&gt;jpl:jpl_list_to_array/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L198" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L198" xlink:title="calls">
 <path fill="none" stroke="black" d="M2097.74,-294.92C2101.74,-276.42 2108.13,-246.82 2112.86,-224.91"/>
 <polygon fill="black" stroke="black" points="2116.22,-225.94 2114.91,-215.43 2109.38,-224.46 2116.22,-225.94"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L198">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L198">
 <text text-anchor="start" x="2107" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -179,7 +179,7 @@
 <!-- array_to_list/2 -->
 <g id="node5" class="node">
 <title>array_to_list/2</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L195">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L195">
 <polygon fill="cornsilk" stroke="black" points="2427.5,-331.25 2300.5,-331.25 2300.5,-295.25 2427.5,-295.25 2427.5,-331.25"/>
 <text text-anchor="start" x="2308.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2313.38" y="-313.3" font-family="Monospace" font-size="11.00">array_to_list/2</text>
@@ -204,12 +204,12 @@
 <!-- array_to_list/2&#45;&gt;jpl:jpl_array_to_list/2 -->
 <g id="edge19" class="edge">
 <title>array_to_list/2&#45;&gt;jpl:jpl_array_to_list/2</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L195" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L195" xlink:title="calls">
 <path fill="none" stroke="black" d="M2357.11,-294.92C2349.73,-276.34 2337.89,-246.55 2329.17,-224.61"/>
 <polygon fill="black" stroke="black" points="2332.44,-223.35 2325.49,-215.35 2325.93,-225.94 2332.44,-223.35"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L195">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L195" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L195">
 <text text-anchor="start" x="2342" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <!-- array_to_terms/2 -->
 <g id="node6" class="node">
 <title>array_to_terms/2</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L192">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L192">
 <polygon fill="cornsilk" stroke="black" points="2719,-213.5 2585,-213.5 2585,-177.5 2719,-177.5 2719,-213.5"/>
 <text text-anchor="start" x="2592.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2598" y="-195.55" font-family="Monospace" font-size="11.00">array_to_terms/2</text>
@@ -242,12 +242,12 @@
 <!-- array_to_terms/2&#45;&gt;jpl:jpl_call/4 -->
 <g id="edge18" class="edge">
 <title>array_to_terms/2&#45;&gt;jpl:jpl_call/4</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L192" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L192" xlink:title="calls">
 <path fill="none" stroke="black" d="M2703.72,-177.05C2765.06,-156.35 2867.23,-121.87 2932.82,-99.73"/>
 <polygon fill="black" stroke="black" points="2933.63,-103.15 2941.98,-96.64 2931.39,-96.52 2933.63,-103.15"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L192">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L192">
 <text text-anchor="start" x="2833" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -255,7 +255,7 @@
 <!-- terms_to_array/2 -->
 <g id="node7" class="node">
 <title>terms_to_array/2</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L185">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L185">
 <polygon fill="cornsilk" stroke="black" points="769,-331.25 635,-331.25 635,-295.25 769,-295.25 769,-331.25"/>
 <text text-anchor="start" x="642.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="648" y="-313.3" font-family="Monospace" font-size="11.00">terms_to_array/2</text>
@@ -280,12 +280,12 @@
 <!-- terms_to_array/2&#45;&gt;jpl:jpl_terms_to_array/2 -->
 <g id="edge16" class="edge">
 <title>terms_to_array/2&#45;&gt;jpl:jpl_terms_to_array/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L185" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L185" xlink:title="calls">
 <path fill="none" stroke="black" d="M702,-294.92C702,-276.51 702,-247.1 702,-225.21"/>
 <polygon fill="black" stroke="black" points="705.5,-225.46 702,-215.46 698.5,-225.46 705.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L185">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L185">
 <text text-anchor="start" x="702" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -293,7 +293,7 @@
 <!-- is_object/1 -->
 <g id="node8" class="node">
 <title>is_object/1</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L182">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L182">
 <polygon fill="cornsilk" stroke="black" points="941,-331.25 841,-331.25 841,-295.25 941,-295.25 941,-331.25"/>
 <text text-anchor="start" x="848.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="853.88" y="-313.3" font-family="Monospace" font-size="11.00">is_object/1</text>
@@ -318,12 +318,12 @@
 <!-- is_object/1&#45;&gt;jpl:jpl_is_object/1 -->
 <g id="edge15" class="edge">
 <title>is_object/1&#45;&gt;jpl:jpl_is_object/1</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L182" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M891,-294.92C891,-276.51 891,-247.1 891,-225.21"/>
 <polygon fill="black" stroke="black" points="894.5,-225.46 891,-215.46 887.5,-225.46 894.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L182">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L182">
 <text text-anchor="start" x="891" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -331,7 +331,7 @@
 <!-- is_null/1 -->
 <g id="node9" class="node">
 <title>is_null/1</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L179">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L179">
 <polygon fill="cornsilk" stroke="black" points="2540,-331.25 2454,-331.25 2454,-295.25 2540,-295.25 2540,-331.25"/>
 <text text-anchor="start" x="2461.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2466.62" y="-313.3" font-family="Monospace" font-size="11.00">is_null/1</text>
@@ -356,12 +356,12 @@
 <!-- is_null/1&#45;&gt;jpl:jpl_is_null/1 -->
 <g id="edge14" class="edge">
 <title>is_null/1&#45;&gt;jpl:jpl_is_null/1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L179" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L179" xlink:title="calls">
 <path fill="none" stroke="black" d="M2497,-294.92C2497,-276.51 2497,-247.1 2497,-225.21"/>
 <polygon fill="black" stroke="black" points="2500.5,-225.46 2497,-215.46 2493.5,-225.46 2500.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L179">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L179">
 <text text-anchor="start" x="2497" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -369,7 +369,7 @@
 <!-- is_void/1 -->
 <g id="node10" class="node">
 <title>is_void/1</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L176">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L176">
 <polygon fill="cornsilk" stroke="black" points="1099,-331.25 1013,-331.25 1013,-295.25 1099,-295.25 1099,-331.25"/>
 <text text-anchor="start" x="1020.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1025.62" y="-313.3" font-family="Monospace" font-size="11.00">is_void/1</text>
@@ -394,12 +394,12 @@
 <!-- is_void/1&#45;&gt;jpl:jpl_is_void/1 -->
 <g id="edge13" class="edge">
 <title>is_void/1&#45;&gt;jpl:jpl_is_void/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L176" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M1056,-294.92C1056,-276.51 1056,-247.1 1056,-225.21"/>
 <polygon fill="black" stroke="black" points="1059.5,-225.46 1056,-215.46 1052.5,-225.46 1059.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L176">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L176">
 <text text-anchor="start" x="1056" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -407,7 +407,7 @@
 <!-- is_false/1 -->
 <g id="node11" class="node">
 <title>is_false/1</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L173">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L173">
 <polygon fill="cornsilk" stroke="black" points="1264.5,-331.25 1171.5,-331.25 1171.5,-295.25 1264.5,-295.25 1264.5,-331.25"/>
 <text text-anchor="start" x="1179.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1184.25" y="-313.3" font-family="Monospace" font-size="11.00">is_false/1</text>
@@ -432,12 +432,12 @@
 <!-- is_false/1&#45;&gt;jpl:jpl_is_false/1 -->
 <g id="edge12" class="edge">
 <title>is_false/1&#45;&gt;jpl:jpl_is_false/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L173" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L173" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218,-294.92C1218,-276.51 1218,-247.1 1218,-225.21"/>
 <polygon fill="black" stroke="black" points="1221.5,-225.46 1218,-215.46 1214.5,-225.46 1221.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L173">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L173" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L173">
 <text text-anchor="start" x="1218" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -445,7 +445,7 @@
 <!-- is_true/1 -->
 <g id="node12" class="node">
 <title>is_true/1</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L170">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L170">
 <polygon fill="cornsilk" stroke="black" points="1423,-331.25 1337,-331.25 1337,-295.25 1423,-295.25 1423,-331.25"/>
 <text text-anchor="start" x="1344.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1349.62" y="-313.3" font-family="Monospace" font-size="11.00">is_true/1</text>
@@ -470,12 +470,12 @@
 <!-- is_true/1&#45;&gt;jpl:jpl_is_true/1 -->
 <g id="edge11" class="edge">
 <title>is_true/1&#45;&gt;jpl:jpl_is_true/1</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L170" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L170" xlink:title="calls">
 <path fill="none" stroke="black" d="M1380,-294.92C1380,-276.51 1380,-247.1 1380,-225.21"/>
 <polygon fill="black" stroke="black" points="1383.5,-225.46 1380,-215.46 1376.5,-225.46 1383.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L170">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L170">
 <text text-anchor="start" x="1380" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -483,7 +483,7 @@
 <!-- null/1 -->
 <g id="node13" class="node">
 <title>null/1</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L167">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L167">
 <polygon fill="cornsilk" stroke="black" points="1897,-331.25 1831,-331.25 1831,-295.25 1897,-295.25 1897,-331.25"/>
 <text text-anchor="start" x="1838.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1843.75" y="-313.3" font-family="Monospace" font-size="11.00">null/1</text>
@@ -508,12 +508,12 @@
 <!-- null/1&#45;&gt;jpl:jpl_null/1 -->
 <g id="edge10" class="edge">
 <title>null/1&#45;&gt;jpl:jpl_null/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L167" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M1856.22,-294.92C1847.83,-276.25 1834.36,-246.28 1824.49,-224.3"/>
 <polygon fill="black" stroke="black" points="1827.75,-223.02 1820.46,-215.33 1821.36,-225.88 1827.75,-223.02"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L167">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L167">
 <text text-anchor="start" x="1839" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -521,7 +521,7 @@
 <!-- void/1 -->
 <g id="node14" class="node">
 <title>void/1</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L164">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L164">
 <polygon fill="cornsilk" stroke="black" points="1655,-331.25 1589,-331.25 1589,-295.25 1655,-295.25 1655,-331.25"/>
 <text text-anchor="start" x="1596.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1601.75" y="-313.3" font-family="Monospace" font-size="11.00">void/1</text>
@@ -546,12 +546,12 @@
 <!-- void/1&#45;&gt;jpl:jpl_void/1 -->
 <g id="edge9" class="edge">
 <title>void/1&#45;&gt;jpl:jpl_void/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L164" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L164" xlink:title="calls">
 <path fill="none" stroke="black" d="M1623.48,-294.85C1625.06,-281.9 1628.28,-264.02 1634.75,-249.5 1638.9,-240.18 1644.92,-230.92 1651,-222.82"/>
 <polygon fill="black" stroke="black" points="1653.66,-225.1 1657.12,-215.08 1648.17,-220.75 1653.66,-225.1"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L164">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L164" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L164">
 <text text-anchor="start" x="1634" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -559,7 +559,7 @@
 <!-- false/1 -->
 <g id="node15" class="node">
 <title>false/1</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L161">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L161">
 <polygon fill="cornsilk" stroke="black" points="1568.5,-331.25 1495.5,-331.25 1495.5,-295.25 1568.5,-295.25 1568.5,-331.25"/>
 <text text-anchor="start" x="1503.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1508.38" y="-313.3" font-family="Monospace" font-size="11.00">false/1</text>
@@ -584,12 +584,12 @@
 <!-- false/1&#45;&gt;jpl:jpl_false/1 -->
 <g id="edge8" class="edge">
 <title>false/1&#45;&gt;jpl:jpl_false/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L161" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L161" xlink:title="calls">
 <path fill="none" stroke="black" d="M1532,-294.92C1532,-276.51 1532,-247.1 1532,-225.21"/>
 <polygon fill="black" stroke="black" points="1535.5,-225.46 1532,-215.46 1528.5,-225.46 1535.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L161">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L161" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L161">
 <text text-anchor="start" x="1532" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -597,7 +597,7 @@
 <!-- true/1 -->
 <g id="node16" class="node">
 <title>true/1</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L158">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L158">
 <polygon fill="cornsilk" stroke="black" points="1983,-331.25 1917,-331.25 1917,-295.25 1983,-295.25 1983,-331.25"/>
 <text text-anchor="start" x="1924.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1929.75" y="-313.3" font-family="Monospace" font-size="11.00">true/1</text>
@@ -622,12 +622,12 @@
 <!-- true/1&#45;&gt;jpl:jpl_true/1 -->
 <g id="edge7" class="edge">
 <title>true/1&#45;&gt;jpl:jpl_true/1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L158" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M1950,-294.92C1950,-276.51 1950,-247.1 1950,-225.21"/>
 <polygon fill="black" stroke="black" points="1953.5,-225.46 1950,-215.46 1946.5,-225.46 1953.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L158">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L158">
 <text text-anchor="start" x="1950" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -635,7 +635,7 @@
 <!-- value_reference/2 -->
 <g id="node17" class="node">
 <title>value_reference/2</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L149">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L149">
 <polygon fill="cornsilk" stroke="black" points="1813,-331.25 1673,-331.25 1673,-295.25 1813,-295.25 1813,-331.25"/>
 <text text-anchor="start" x="1680.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1685.62" y="-313.3" font-family="Monospace" font-size="11.00">value_reference/2</text>
@@ -649,12 +649,12 @@
 <!-- value_reference/2&#45;&gt;jpl:jpl_true/1 -->
 <g id="edge3" class="edge">
 <title>value_reference/2&#45;&gt;jpl:jpl_true/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L149" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L149" xlink:title="calls">
 <path fill="none" stroke="black" d="M1792.59,-294.85C1816.4,-285.63 1844.92,-273.31 1869,-259.25 1887.7,-248.33 1906.93,-233.6 1921.96,-221.16"/>
 <polygon fill="black" stroke="black" points="1924.19,-223.87 1929.57,-214.74 1919.67,-218.51 1924.19,-223.87"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L149">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L149">
 <text text-anchor="start" x="1883" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -662,12 +662,12 @@
 <!-- value_reference/2&#45;&gt;jpl:jpl_false/1 -->
 <g id="edge4" class="edge">
 <title>value_reference/2&#45;&gt;jpl:jpl_false/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L151" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1723.49,-294.95C1707.49,-281.37 1683.85,-262.63 1661,-249.5 1639.89,-237.37 1615.46,-226.59 1593.58,-217.98"/>
 <polygon fill="black" stroke="black" points="1595.07,-214.8 1584.48,-214.47 1592.55,-221.33 1595.07,-214.8"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L151">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L151">
 <text text-anchor="start" x="1675" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -675,12 +675,12 @@
 <!-- value_reference/2&#45;&gt;jpl:jpl_void/1 -->
 <g id="edge5" class="edge">
 <title>value_reference/2&#45;&gt;jpl:jpl_void/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L153" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L153" xlink:title="calls">
 <path fill="none" stroke="black" d="M1734.93,-294.86C1728.8,-282.07 1719.94,-264.39 1711,-249.5 1705.69,-240.65 1699.41,-231.31 1693.56,-222.99"/>
 <polygon fill="black" stroke="black" points="1696.5,-221.09 1687.84,-214.99 1690.81,-225.16 1696.5,-221.09"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L153">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L153">
 <text text-anchor="start" x="1715" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -688,12 +688,12 @@
 <!-- value_reference/2&#45;&gt;jpl:jpl_null/1 -->
 <g id="edge6" class="edge">
 <title>value_reference/2&#45;&gt;jpl:jpl_null/1</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L155" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M1753.33,-294.92C1764.56,-276.08 1782.65,-245.73 1795.78,-223.71"/>
 <polygon fill="black" stroke="black" points="1798.71,-225.63 1800.82,-215.25 1792.7,-222.04 1798.71,-225.63"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L155">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L155">
 <text text-anchor="start" x="1779" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -701,7 +701,7 @@
 <!-- array_to_terms/3 -->
 <g id="node18" class="node">
 <title>array_to_terms/3</title>
-<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L188">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L188">
 <polygon fill="cornsilk" stroke="black" points="3387,-213.5 3253,-213.5 3253,-177.5 3387,-177.5 3387,-213.5"/>
 <text text-anchor="start" x="3260.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3266" y="-195.55" font-family="Monospace" font-size="11.00">array_to_terms/3</text>
@@ -726,12 +726,12 @@
 <!-- array_to_terms/3&#45;&gt;user::length/2 -->
 <g id="edge2" class="edge">
 <title>array_to_terms/3&#45;&gt;user::length/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L188" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M3320,-177.17C3320,-158.76 3320,-129.35 3320,-107.46"/>
 <polygon fill="black" stroke="black" points="3323.5,-107.71 3320,-97.71 3316.5,-107.71 3323.5,-107.71"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L188">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L188">
 <text text-anchor="start" x="3320" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -739,12 +739,12 @@
 <!-- array_to_terms/3&#45;&gt;jpl:jpl_call/4 -->
 <g id="edge17" class="edge">
 <title>array_to_terms/3&#45;&gt;jpl:jpl_call/4</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L188" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M3295.4,-177.06C3274.59,-163.03 3243.52,-143.75 3214,-131.75 3166.33,-112.38 3109.82,-98.92 3066.15,-90.41"/>
 <polygon fill="black" stroke="black" points="3067.01,-87.02 3056.53,-88.59 3065.71,-93.89 3067.01,-87.02"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L188">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L188">
 <text text-anchor="start" x="3235" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -752,7 +752,7 @@
 <!-- array_list/2 -->
 <g id="node19" class="node">
 <title>array_list/2</title>
-<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L201">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L201">
 <polygon fill="cornsilk" stroke="black" points="2282.5,-331.25 2175.5,-331.25 2175.5,-295.25 2282.5,-295.25 2282.5,-331.25"/>
 <text text-anchor="start" x="2183.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2188.5" y="-313.3" font-family="Monospace" font-size="11.00">array_list/2</text>
@@ -766,12 +766,12 @@
 <!-- array_list/2&#45;&gt;jpl:jpl_array_to_list/2 -->
 <g id="edge22" class="edge">
 <title>array_list/2&#45;&gt;jpl:jpl_array_to_list/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L201" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L201" xlink:title="calls">
 <path fill="none" stroke="black" d="M2242.32,-294.92C2257.01,-275.83 2280.78,-244.9 2297.77,-222.81"/>
 <polygon fill="black" stroke="black" points="2300.34,-225.21 2303.66,-215.15 2294.79,-220.94 2300.34,-225.21"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L201">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L201">
 <text text-anchor="start" x="2276" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -779,12 +779,12 @@
 <!-- array_list/2&#45;&gt;jpl:jpl_list_to_array/2 -->
 <g id="edge21" class="edge">
 <title>array_list/2&#45;&gt;jpl:jpl_list_to_array/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L201" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L201" xlink:title="calls">
 <path fill="none" stroke="black" d="M2212.53,-294.92C2194.22,-275.66 2164.47,-244.35 2143.45,-222.22"/>
 <polygon fill="black" stroke="black" points="2146.05,-219.88 2136.62,-215.04 2140.97,-224.7 2146.05,-219.88"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L201">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L201" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L201">
 <text text-anchor="start" x="2177" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -792,7 +792,7 @@
 <!-- decode_exception/2 -->
 <g id="node20" class="node">
 <title>decode_exception/2</title>
-<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L216">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L216">
 <polygon fill="cornsilk" stroke="black" points="3190.5,-331.25 3043.5,-331.25 3043.5,-295.25 3190.5,-295.25 3190.5,-331.25"/>
 <text text-anchor="start" x="3051.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3056.25" y="-313.3" font-family="Monospace" font-size="11.00">decode_exception/2</text>
@@ -806,12 +806,12 @@
 <!-- decode_exception/2&#45;&gt;jpl:jpl_is_null/1 -->
 <g id="edge27" class="edge">
 <title>decode_exception/2&#45;&gt;jpl:jpl_is_null/1</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222" xlink:title="calls">
 <path fill="none" stroke="black" d="M3059.56,-294.78C3011.46,-280.73 2940.8,-261.43 2878,-249.5 2748.7,-224.94 2711.29,-235.16 2578.18,-213.76"/>
 <polygon fill="black" stroke="black" points="2579.07,-210.36 2568.64,-212.2 2577.94,-217.27 2579.07,-210.36"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222">
 <text text-anchor="start" x="2924" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -819,12 +819,12 @@
 <!-- decode_exception/2&#45;&gt;jpl:jpl_call/4 -->
 <g id="edge28" class="edge">
 <title>decode_exception/2&#45;&gt;jpl:jpl_call/4</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222" xlink:title="calls">
 <path fill="none" stroke="black" d="M3136.27,-295.13C3163.26,-269.01 3206.4,-217.99 3182,-177.5 3156.89,-135.85 3107.7,-110.86 3066.07,-96.44"/>
 <polygon fill="black" stroke="black" points="3067.42,-93.2 3056.82,-93.39 3065.22,-99.85 3067.42,-93.2"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222">
 <text text-anchor="start" x="3189" y="-191.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -843,12 +843,12 @@
 <!-- decode_exception/2&#45;&gt;jpl:jpl_is_ref/1 -->
 <g id="edge26" class="edge">
 <title>decode_exception/2&#45;&gt;jpl:jpl_is_ref/1</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222" xlink:title="calls">
 <path fill="none" stroke="black" d="M3115.35,-294.92C3113.6,-276.51 3110.81,-247.1 3108.73,-225.21"/>
 <polygon fill="black" stroke="black" points="3112.23,-225.08 3107.8,-215.45 3105.26,-225.74 3112.23,-225.08"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L222">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L222">
 <text text-anchor="start" x="3111" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -856,7 +856,7 @@
 <!-- decode_exception/3 -->
 <g id="node21" class="node">
 <title>decode_exception/3</title>
-<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L227">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L227">
 <polygon fill="cornsilk" stroke="black" points="2921.5,-331.25 2774.5,-331.25 2774.5,-295.25 2921.5,-295.25 2921.5,-331.25"/>
 <text text-anchor="start" x="2782.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2787.25" y="-313.3" font-family="Monospace" font-size="11.00">decode_exception/3</text>
@@ -870,7 +870,7 @@
 <!-- decode_stack_trace_elements/2 -->
 <g id="node22" class="node">
 <title>decode_stack_trace_elements/2</title>
-<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L241">
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L241">
 <polygon fill="cornsilk" stroke="black" points="2958.5,-213.5 2737.5,-213.5 2737.5,-177.5 2958.5,-177.5 2958.5,-213.5"/>
 <text text-anchor="start" x="2745.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2750.12" y="-195.55" font-family="Monospace" font-size="11.00">decode_stack_trace_elements/2</text>
@@ -884,12 +884,12 @@
 <!-- decode_exception/3&#45;&gt;decode_stack_trace_elements/2 -->
 <g id="edge1" class="edge">
 <title>decode_exception/3&#45;&gt;decode_stack_trace_elements/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M2848,-294.92C2848,-276.51 2848,-247.1 2848,-225.21"/>
 <polygon fill="black" stroke="black" points="2851.5,-225.46 2848,-215.46 2844.5,-225.46 2851.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233">
 <text text-anchor="start" x="2848" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -897,12 +897,12 @@
 <!-- decode_exception/3&#45;&gt;jpl:jpl_is_null/1 -->
 <g id="edge30" class="edge">
 <title>decode_exception/3&#45;&gt;jpl:jpl_is_null/1</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M2795.07,-294.8C2732.3,-274.1 2627.75,-239.62 2560.63,-217.48"/>
 <polygon fill="black" stroke="black" points="2561.81,-214.19 2551.22,-214.38 2559.62,-220.84 2561.81,-214.19"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233">
 <text text-anchor="start" x="2683" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -910,12 +910,12 @@
 <!-- decode_exception/3&#45;&gt;jpl:jpl_call/4 -->
 <g id="edge31" class="edge">
 <title>decode_exception/3&#45;&gt;jpl:jpl_call/4</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M2879.53,-294.85C2907.3,-277.82 2946.57,-249.25 2968,-213.5 2987.64,-180.73 2993.28,-136.24 2994.74,-107.51"/>
 <polygon fill="black" stroke="black" points="2998.23,-107.87 2995.09,-97.75 2991.23,-107.62 2998.23,-107.87"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233">
 <text text-anchor="start" x="2982" y="-191.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -923,12 +923,12 @@
 <!-- decode_exception/3&#45;&gt;jpl:jpl_array_to_list/2 -->
 <g id="edge32" class="edge">
 <title>decode_exception/3&#45;&gt;jpl:jpl_array_to_list/2</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M2774.12,-307.71C2696.46,-301.62 2571.29,-288.03 2466.75,-259.25 2430.53,-249.28 2391.46,-232.55 2362.45,-218.87"/>
 <polygon fill="black" stroke="black" points="2364.14,-215.79 2353.61,-214.64 2361.12,-222.11 2364.14,-215.79"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233">
 <text text-anchor="start" x="2466" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -936,12 +936,12 @@
 <!-- decode_exception/3&#45;&gt;jpl:jpl_is_ref/1 -->
 <g id="edge29" class="edge">
 <title>decode_exception/3&#45;&gt;jpl:jpl_is_ref/1</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="calls">
 <path fill="none" stroke="black" d="M2921.83,-302.35C2960.78,-294.77 3008.19,-281.64 3046,-259.25 3061.65,-249.98 3075.89,-235.5 3086.55,-222.79"/>
 <polygon fill="black" stroke="black" points="3089.18,-225.11 3092.72,-215.12 3083.72,-220.72 3089.18,-225.11"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L233">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L233">
 <text text-anchor="start" x="3059" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -949,12 +949,12 @@
 <!-- decode_stack_trace_elements/2&#45;&gt;jpl:jpl_call/4 -->
 <g id="edge33" class="edge">
 <title>decode_stack_trace_elements/2&#45;&gt;jpl:jpl_call/4</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L242" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L242" xlink:title="calls">
 <path fill="none" stroke="black" d="M2870.01,-177.17C2894.91,-157.57 2935.65,-125.49 2963.81,-103.31"/>
 <polygon fill="black" stroke="black" points="2965.96,-106.07 2971.65,-97.13 2961.63,-100.57 2965.96,-106.07"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/6db52cfdf2cbf07e5827d82755567e8510347ded/library/java/java_jpl.lgt#L242">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/40c7257c77afd0be891309e3c4592c79d2d98f0d/library/java/java_jpl.lgt#L242">
 <text text-anchor="start" x="2925" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
