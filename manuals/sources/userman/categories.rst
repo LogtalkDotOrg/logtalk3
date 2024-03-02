@@ -109,9 +109,11 @@ Categories cannot inherit from objects. In addition, categories cannot
 define clauses for dynamic predicates. This restriction applies because
 a category can be imported by several objects and because we cannot use
 the database handling built-in methods with categories (messages can
-only be sent to objects). However, categories may contain declarations
-for dynamic predicates and they can contain predicates which handle
-dynamic predicates. For example:
+only be sent to objects). A consequence of this restriction is that a
+category cannot declare a predicate (or non-terminal) as both multifile
+and dynamic. However, categories may contain declarations for dynamic
+predicates and they can contain predicates which handle dynamic predicates.
+For example:
 
 ::
 
