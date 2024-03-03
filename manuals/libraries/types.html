@@ -245,8 +245,9 @@ method.</p>
 </section>
 <section id="defining-new-types">
 <h2>Defining new types<a class="headerlink" href="#defining-new-types" title="Link to this heading"></a></h2>
-<p>To define a custom type, define clauses for both the <code class="docutils literal notranslate"><span class="pre">type::type/1</span></code>
-and <code class="docutils literal notranslate"><span class="pre">type::check/2</span></code> multifile predicates. For example:</p>
+<p>To define a custom type, define clauses for the multifile predicates
+<code class="docutils literal notranslate"><span class="pre">type::type/1</span></code> (to declare the type) and <code class="docutils literal notranslate"><span class="pre">type::check/2</span></code> (to
+type-check values). For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
 type<span class="o">::</span>type(age).
 
@@ -257,7 +258,8 @@ type<span class="o">::</span>check(age, <span class="nv">Term</span>) <span clas
 </div>
 <p>Be careful to ensure that new type definitions don’t introduce spurious
 choice-points for these predicates. The unit tests of the <code class="docutils literal notranslate"><span class="pre">types</span></code>
-library perform this check for ground types.</p>
+library perform this check for pre-defined and loaded user-defined
+ground types.</p>
 <p>When defining a meta-type (i.e. a type with arguments that are also
 types), add also a clause for the <code class="docutils literal notranslate"><span class="pre">type::meta_type/3</span></code> multifile
 predicate. For example:</p>
