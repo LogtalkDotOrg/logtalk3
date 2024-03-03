@@ -52,6 +52,10 @@ To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(arbitrary(tester)).
 
+Several of provided tests are generic and verify correct behavior of all
+pre-defined and loaded user-defined generators and shrinkers for all ground
+types.
+
 
 Pre-defined types
 -----------------
