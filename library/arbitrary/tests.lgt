@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
-		date is 2024-03-01,
+		date is 2024-03-03,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -284,9 +284,8 @@
 			(	type::shrinker(Type),
 				ground(Type)
 			),
-			(	type::arbitrary(Type, Value),
-				type::shrink_sequence(Type, Value, Sequence),
-				^^assertion(type(Type), type::check(list(Type), Sequence))
+			(	lgtunit::quick_check(shrink_sequence({Type}, -list(Type)), Result, [n(25)]),
+				^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result))
 			)
 		).
 
@@ -361,5 +360,9 @@
 		;	% shrinking is not always possible
 			Small = Arbitrary
 		).
+
+	shrink_sequence(Type, Sequence) :-
+		type::arbitrary(Type, Value),
+		type::shrink_sequence(Type, Value, Sequence).
 
 :- end_object.
