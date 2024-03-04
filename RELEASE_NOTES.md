@@ -72,6 +72,11 @@ declare a category predicate as both multifile and dynamic.
 
 * FIXED: The `packs` tool lint checking of pack manifest notes.
 
+* FIXED: The `dead_code_scanner` tool to not report non-terminals and
+predicates listed in `uses/2` or `use_module/2` directives when a local
+scope directive exists or when they are used only as arguments in calls
+to the built-in database methods.
+
 
 3.75.0 - February 27, 2024
 ==========================
