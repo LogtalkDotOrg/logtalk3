@@ -15125,7 +15125,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Alias, AliasFunctor, Arity),
 	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
 		functor(Head, HeadFunctor, Arity),
-		'$lgt_compile_body'(Obj::abolish(HeadFunctor/Arity), Caller, TCond, DCond, Ctx)
+		'$lgt_compile_body'(Obj::abolish(HeadFunctor/Arity), Caller, TCond, DCond, Ctx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+		'$lgt_remember_updated_predicate'(Mode, Obj::HeadFunctor/Arity, CallerHead)
 	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		functor(Head, HeadFunctor, Arity),
 		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
@@ -15195,7 +15197,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::asserta((Head :- Body)), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::asserta((Head :- Body)), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = asserta((':'(Module,Head) :- Body)),
@@ -15207,7 +15212,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	Clause = Alias,
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::asserta(Head), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::asserta(Head), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = asserta(':'(Module,Head)),
@@ -15274,7 +15282,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::assertz((Head :- Body)), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::assertz((Head :- Body)), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = assertz((':'(Module,Head) :- Body)),
@@ -15286,7 +15297,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	Clause = Alias,
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::assertz(Head), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::assertz(Head), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = assertz(':'(Module,Head)),
@@ -15351,7 +15365,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(clause(Alias, Body), Caller, TCond, DCond, Ctx) :-
 	nonvar(Alias),
 	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-		'$lgt_compile_body'(Obj::clause(Head, Body), Caller, TCond, DCond, Ctx)
+		'$lgt_compile_body'(Obj::clause(Head, Body), Caller, TCond, DCond, Ctx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 		TCond = clause(':'(Module,Head), Body),
@@ -15409,7 +15426,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::retract((Head :- Body)), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::retract((Head :- Body)), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = retract((':'(Module,Head) :- Body)),
@@ -15421,7 +15441,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	Clause = Alias,
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::retract(Head), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::retract(Head), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = retract(':'(Module,Head)),
@@ -15487,7 +15510,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(retractall(Alias), Caller, TCond, DCond, Ctx) :-
 	nonvar(Alias),
 	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-		'$lgt_compile_body'(Obj::retractall(Head), Caller, TCond, DCond, Ctx)
+		'$lgt_compile_body'(Obj::retractall(Head), Caller, TCond, DCond, Ctx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 		TCond = retractall(':'(Module,Head)),
@@ -15569,7 +15595,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::asserta((Head :- Body), Ref), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::asserta((Head :- Body), Ref), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = asserta((':'(Module,Head) :- Body), Ref),
@@ -15581,7 +15610,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	Clause = Alias,
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::asserta(Head, Ref), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::asserta(Head, Ref), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = asserta(':'(Module,Head), Ref),
@@ -15654,7 +15686,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Clause = (Alias :- Body) ->
 		nonvar(Alias),
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::assertz((Head :- Body), Ref), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::assertz((Head :- Body), Ref), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = assertz((':'(Module,Head) :- Body), Ref),
@@ -15666,7 +15701,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	Clause = Alias,
 		(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-			'$lgt_compile_body'(Obj::assertz(Head, Ref), Caller, TCond, DCond, Ctx)
+			'$lgt_compile_body'(Obj::assertz(Head, Ref), Caller, TCond, DCond, Ctx),
+			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+			functor(Head, Functor, Arity),
+			'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 		;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 			'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 			TCond = assertz(':'(Module,Head), Ref),
@@ -15737,7 +15775,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_defines_predicate_'(clause(_, _, _), _, _, _, _, _),
 	nonvar(Alias),
 	(	'$lgt_pp_uses_predicate_'(Obj, Head, Alias, Ctx, _, _) ->
-		'$lgt_compile_body'(Obj::clause(Head, Body, Ref), Caller, TCond, DCond, Ctx)
+		'$lgt_compile_body'(Obj::clause(Head, Body, Ref), Caller, TCond, DCond, Ctx),
+		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
+		functor(Head, Functor, Arity),
+		'$lgt_remember_updated_predicate'(Mode, Obj::Functor/Arity, CallerHead)
 	;	'$lgt_pp_use_module_predicate_'(Module, Head, Alias, Ctx, _, _) ->
 		'$lgt_comp_ctx'(Ctx, CallerHead, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 		TCond = clause(':'(Module,Head), Body, Ref),

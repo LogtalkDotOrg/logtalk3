@@ -34,6 +34,9 @@ multifile predicates.
 * FIXED: The compiler to detect and report attempts to declare category
 predicates or non-terminals as both multifile and dynamic.
 
+* FIXED: The `updates/2` object and category property would not be reported
+for updated predicates in `user`.
+
 Library
 -------
 
