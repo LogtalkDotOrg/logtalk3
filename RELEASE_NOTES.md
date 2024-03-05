@@ -80,6 +80,10 @@ predicates listed in `uses/2` or `use_module/2` directives when a local
 scope directive exists or when they are used only as arguments in calls
 to the built-in database methods.
 
+* FIXED: The `dead_code_scanner` tool to report unused non-terminals and
+predicates listed in `uses/2` or `use_module/2` directives when aliases
+are defined.
+
 
 3.75.0 - February 27, 2024
 ==========================

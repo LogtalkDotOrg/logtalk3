@@ -23,9 +23,9 @@
 :- object(dead_code_scanner).
 
 	:- info([
-		version is 0:12:1,
+		version is 0:12:2,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2024-03-04,
+		date is 2024-03-05,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -130,8 +130,12 @@
 	% unused predicates and non-terminals listed in the uses/2 directives
 	predicate(Entity, Object::Resource, File, Line) :-
 		entity_property(Entity, calls(Object::Predicate, CallsProperties)),
-		memberchk(caller(Predicate), CallsProperties),
-		entity_property(Entity, defines(Predicate, DefinesProperties)),
+		(	member(caller(Predicate), CallsProperties) ->
+			entity_property(Entity, defines(Predicate, DefinesProperties))
+		;	memberchk(alias(Alias), CallsProperties),
+			memberchk(caller(Alias), CallsProperties),
+			entity_property(Entity, defines(Alias, DefinesProperties))
+		),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
 		% Predicate :- Object::Predicate linking clause that is generated when
@@ -139,7 +143,8 @@
 		\+ (
 			entity_property(Entity, calls(Object::Predicate, OtherCallsProperties)),
 			memberchk(caller(Caller), OtherCallsProperties),
-			Caller \== Predicate
+			Caller \== Predicate,
+			\+ member(alias(Caller), OtherCallsProperties)
 		),
 		% no other callers for Object::Predicate
 		\+ entity_property(Entity, updates(Object::Predicate, _)),
@@ -161,8 +166,12 @@
 	% unused predicates and non-terminals listed in the use_module/2 directives
 	predicate(Entity, ':'(Module,Resource), File, Line) :-
 		entity_property(Entity, calls(':'(Module,Predicate), CallsProperties)),
-		memberchk(caller(Predicate), CallsProperties),
-		entity_property(Entity, defines(Predicate, DefinesProperties)),
+		(	member(caller(Predicate), CallsProperties),
+			entity_property(Entity, defines(Predicate, DefinesProperties))
+		;	memberchk(alias(Alias), CallsProperties),
+			memberchk(caller(Alias), CallsProperties),
+			entity_property(Entity, defines(Alias, DefinesProperties))
+		),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
 		% Predicate :- Module:Predicate linking clause that is generated when
@@ -170,7 +179,8 @@
 		\+ (
 			entity_property(Entity, calls(':'(Module,Predicate), OtherCallsProperties)),
 			memberchk(caller(Caller), OtherCallsProperties),
-			Caller \== Predicate
+			Caller \== Predicate,
+			\+ member(alias(Caller), OtherCallsProperties)
 		),
 		% no other callers for Module:Predicate
 		\+ entity_property(Entity, updates(':'(Module,Predicate), _)),
