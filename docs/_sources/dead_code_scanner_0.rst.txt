@@ -14,17 +14,20 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
 |    ``logtalk_load(dead_code_scanner(loader))``
 
 | **Author:** Barry Evans and Paulo Moura
-| **Version:** 0:12:2
+| **Version:** 0:13:0
 | **Date:** 2024-03-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 
@@ -33,7 +36,7 @@ A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog 
    - Requirements: Source files must be compiled with the ``source_data`` flag turned on. To avoid false positives do to meta-calls, compilation of source files with the ``optimized`` flag turned on is also advised.
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -61,13 +64,32 @@ Scans a loaded entity for dead code. Fails if the entity does not exist.
 
 ------------
 
+.. index:: file/2
+.. _dead_code_scanner/0::file/2:
+
+``file/2``
+^^^^^^^^^^
+
+Scans all entities in a loaded source file for dead code using the given options. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file(File,Options)``
+| **Mode and number of proofs:**
+|    ``file(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: file/1
 .. _dead_code_scanner/0::file/1:
 
 ``file/1``
 ^^^^^^^^^^
 
-Scans all entities in a loaded source file for dead code. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.
+Scans all entities in a loaded source file for dead code using default options. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.
 
 | **Compilation flags:**
 |    ``static``
@@ -80,13 +102,32 @@ Scans all entities in a loaded source file for dead code. The file can be given 
 
 ------------
 
+.. index:: directory/2
+.. _dead_code_scanner/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Scans all entities in all loaded files from a given directory for dead code using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``directory(+atom,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: directory/1
 .. _dead_code_scanner/0::directory/1:
 
 ``directory/1``
 ^^^^^^^^^^^^^^^
 
-Scans all entities in all loaded files from a given directory for dead code.
+Scans all entities in all loaded files from a given directory for dead code using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -99,13 +140,32 @@ Scans all entities in all loaded files from a given directory for dead code.
 
 ------------
 
+.. index:: rdirectory/2
+.. _dead_code_scanner/0::rdirectory/2:
+
+``rdirectory/2``
+^^^^^^^^^^^^^^^^
+
+Scans all entities in all loaded files from a given directory and its sub-directories for dead code using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: rdirectory/1
 .. _dead_code_scanner/0::rdirectory/1:
 
 ``rdirectory/1``
 ^^^^^^^^^^^^^^^^
 
-Scans all entities in all loaded files from a given directory and its sub-directories for dead code.
+Scans all entities in all loaded files from a given directory and its sub-directories for dead code using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -118,13 +178,32 @@ Scans all entities in all loaded files from a given directory and its sub-direct
 
 ------------
 
+.. index:: library/2
+.. _dead_code_scanner/0::library/2:
+
+``library/2``
+^^^^^^^^^^^^^
+
+Scans all entities in all loaded files from a given library for dead code using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library(Library,Options)``
+| **Mode and number of proofs:**
+|    ``library(+atom,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: library/1
 .. _dead_code_scanner/0::library/1:
 
 ``library/1``
 ^^^^^^^^^^^^^
 
-Scans all entities in all loaded files from a given library for dead code.
+Scans all entities in all loaded files from a given library for dead code using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -137,13 +216,32 @@ Scans all entities in all loaded files from a given library for dead code.
 
 ------------
 
+.. index:: rlibrary/2
+.. _dead_code_scanner/0::rlibrary/2:
+
+``rlibrary/2``
+^^^^^^^^^^^^^^
+
+Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rlibrary(Library,Options)``
+| **Mode and number of proofs:**
+|    ``rlibrary(+atom,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: rlibrary/1
 .. _dead_code_scanner/0::rlibrary/1:
 
 ``rlibrary/1``
 ^^^^^^^^^^^^^^
 
-Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.
+Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -156,13 +254,32 @@ Scans all entities in all loaded files in a loaded library and its sub-libraries
 
 ------------
 
+.. index:: all/1
+.. _dead_code_scanner/0::all/1:
+
+``all/1``
+^^^^^^^^^
+
+Scans all entities for dead code using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``all(Options)``
+| **Mode and number of proofs:**
+|    ``all(+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: all/0
 .. _dead_code_scanner/0::all/0:
 
 ``all/0``
 ^^^^^^^^^
 
-Scans all entities for dead code.
+Scans all entities for dead code using default options.
 
 | **Compilation flags:**
 |    ``static``

@@ -77,6 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#excluding-code-from-analysis">Excluding code from analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#integration-with-the-make-tool">Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caveats">Caveats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scanning-prolog-modules">Scanning Prolog modules</a></li>
@@ -195,7 +196,7 @@ directory.</p>
 <p>This tool provides a set of predicates that allows scanning entities,
 libraries, files, and directories. See the tool API documentation for
 details. The source code to be analyzed should be loaded with the
-<code class="docutils literal notranslate"><span class="pre">source_data</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flags turned on (possibly set in a
+<code class="docutils literal notranslate"><span class="pre">source_data</span></code> and <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flags turned on (possibly set from a
 loader file).</p>
 <p>As an example, assume that we want to scan an application with a library
 alias <code class="docutils literal notranslate"><span class="pre">my_app</span></code>. The following goals could be used:</p>
@@ -211,16 +212,44 @@ yes
 ...
 </pre></div>
 </div>
-<p>For complex applications that make use of sub-libraries, there is also a
-<code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code> predicate that performs a recursive scan of a library and
-all its sub-libraries. Conversely, we may be interested in scanning a
-single entity:</p>
+<p>For complex applications that make use of sub-libraries, there are also
+<code class="docutils literal notranslate"><span class="pre">rlibrary/1-2</span></code> predicates that performs a recursive scan of a library
+and all its sub-libraries. Conversely, we may be interested in scanning
+a single entity:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> dead_code_scanner<span class="o">::</span>entity(some_object).
 ...
 </pre></div>
 </div>
 <p>For other usage examples, see the <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool
 directory.</p>
+</section>
+<section id="excluding-code-from-analysis">
+<h2>Excluding code from analysis<a class="headerlink" href="#excluding-code-from-analysis" title="Link to this heading"></a></h2>
+<p>A set of options are available to specify code that should be excluded
+when looking for unused predicates (and non-terminals):</p>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code></div>
+<div class="line">list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code></div>
+<div class="line">list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_libraries(Libraries)</span></code></div>
+<div class="line">list of libraries to exclude (default is
+<code class="docutils literal notranslate"><span class="pre">[startup,</span> <span class="pre">scratch_directory]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_entities(Entities)</span></code></div>
+<div class="line">list of entities to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+</ul>
 </section>
 <section id="integration-with-the-make-tool">
 <h2>Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool<a class="headerlink" href="#integration-with-the-make-tool" title="Link to this heading"></a></h2>

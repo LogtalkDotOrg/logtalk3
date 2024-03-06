@@ -61,6 +61,10 @@ float types from underflow errors.
 Tools
 -----
 
+* ADDED: New public predicates to the `dead_code_scanner` tool that take a
+list of options to selectively exclude from analysis libraries, directories,
+files, and entities.
+
 * ADDED: Support to the `packs` tool to represent operating-system dependencies
 in pack manifest files.
 

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2016-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2016-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2016 Barry Evans <barryevans@kyndi.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -20,10 +20,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(dead_code_scanner).
+:- object(dead_code_scanner,
+	imports(options)).
 
 	:- info([
-		version is 0:12:2,
+		version is 0:13:0,
 		author is 'Barry Evans and Paulo Moura',
 		date is 2024-03-06,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
@@ -44,6 +45,10 @@
 		print_message/3
 	]).
 
+	:- uses(type, [
+		valid/2
+	]).
+
 	:- public(entity/1).
 	:- mode(entity(+entity_identifier), zero_or_one).
 	:- info(entity/1, [
@@ -51,45 +56,87 @@
 		argnames is ['Entity']
 	]).
 
+	:- public(file/2).
+	:- mode(file(+atom, +list(compound)), zero_or_one).
+	:- info(file/2, [
+		comment is 'Scans all entities in a loaded source file for dead code using the given options. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.',
+		argnames is ['File', 'Options']
+	]).
+
 	:- public(file/1).
 	:- mode(file(+atom), zero_or_one).
 	:- info(file/1, [
-		comment is 'Scans all entities in a loaded source file for dead code. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.',
+		comment is 'Scans all entities in a loaded source file for dead code using default options. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.',
 		argnames is ['File']
+	]).
+
+	:- public(directory/2).
+	:- mode(directory(+atom, +list(compound)), one).
+	:- info(directory/2, [
+		comment is 'Scans all entities in all loaded files from a given directory for dead code using the given options.',
+		argnames is ['Directory', 'Options']
 	]).
 
 	:- public(directory/1).
 	:- mode(directory(+atom), one).
 	:- info(directory/1, [
-		comment is 'Scans all entities in all loaded files from a given directory for dead code.',
+		comment is 'Scans all entities in all loaded files from a given directory for dead code using default options.',
 		argnames is ['Directory']
+	]).
+
+	:- public(rdirectory/2).
+	:- mode(rdirectory(+atom, +list(compound)), one).
+	:- info(rdirectory/2, [
+		comment is 'Scans all entities in all loaded files from a given directory and its sub-directories for dead code using the given options.',
+		argnames is ['Directory', 'Options']
 	]).
 
 	:- public(rdirectory/1).
 	:- mode(rdirectory(+atom), one).
 	:- info(rdirectory/1, [
-		comment is 'Scans all entities in all loaded files from a given directory and its sub-directories for dead code.',
+		comment is 'Scans all entities in all loaded files from a given directory and its sub-directories for dead code using default options.',
 		argnames is ['Directory']
+	]).
+
+	:- public(library/2).
+	:- mode(library(+atom, +list(compound)), one).
+	:- info(library/2, [
+		comment is 'Scans all entities in all loaded files from a given library for dead code using the given options.',
+		argnames is ['Library', 'Options']
 	]).
 
 	:- public(library/1).
 	:- mode(library(+atom), one).
 	:- info(library/1, [
-		comment is 'Scans all entities in all loaded files from a given library for dead code.',
+		comment is 'Scans all entities in all loaded files from a given library for dead code using default options.',
 		argnames is ['Library']
+	]).
+
+	:- public(rlibrary/2).
+	:- mode(rlibrary(+atom, +list(compound)), one).
+	:- info(rlibrary/2, [
+		comment is 'Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code using the given options.',
+		argnames is ['Library', 'Options']
 	]).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
 	:- info(rlibrary/1, [
-		comment is 'Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.',
+		comment is 'Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code using default options.',
 		argnames is ['Library']
+	]).
+
+	:- public(all/1).
+	:- mode(all(+list(compound)), one).
+	:- info(all/1, [
+		comment is 'Scans all entities for dead code using the given options.',
+		argnames is ['Options']
 	]).
 
 	:- public(all/0).
 	:- mode(all, one).
 	:- info(all/0, [
-		comment is 'Scans all entities for dead code.'
+		comment is 'Scans all entities for dead code using default options.'
 	]).
 
 	:- public(predicates/2).
@@ -335,54 +382,79 @@
 			fail
 		).
 
-	rlibrary(Library) :-
+	rlibrary(Library, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	logtalk::expand_library_path(Library, TopPath) ->
 			write_scan_header('Recursive library'),
-			output_rlibrary(TopPath),
+			output_rlibrary(TopPath, Options),
 			write_scan_footer('Recursive library')
 		;	print_message(warning, dead_code_scanner, unknown(library,Library)),
 			fail
 		).
 
-	output_rlibrary(TopPath) :-
+	rlibrary(Library) :-
+		rlibrary(Library, []).
+
+	output_rlibrary(TopPath, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
 		forall(
-			sub_library(TopPath, LibraryPath),
-			output_directory_files(LibraryPath)
+			(	sub_library(TopPath, Library, LibraryPath),
+				\+ member(Library, ExcludedLibraries)
+			),
+			output_directory_files(LibraryPath, Options)
 		).
 
-	sub_library(TopPath, LibraryPath) :-
+	sub_library(TopPath, Library, LibraryPath) :-
 		logtalk_library_path(Library, _),
 		logtalk::expand_library_path(Library, LibraryPath),
 		atom_concat(TopPath, _RelativePath, LibraryPath).
 
-	library(Library) :-
+	library(Library, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	logtalk::expand_library_path(Library, Path) ->
 			write_scan_header('Library'),
-			output_directory_files(Path),
+			output_directory_files(Path, Options),
 			write_scan_footer('Library')
 		;	print_message(warning, dead_code_scanner, unknown(library,Library)),
 			fail
 		).
 
-	rdirectory(Directory) :-
+	library(Library) :-
+		library(Library, []).
+
+	rdirectory(Directory, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	os::absolute_file_name(Directory, Path),
 			os::directory_exists(Path) ->
 			write_scan_header('Recursive directory'),
-			output_rdirectory(Path),
+			output_rdirectory(Path, Options),
 			write_scan_footer('Recursive directory')
 		;	print_message(warning, dead_code_scanner, unknown(directory,Directory)),
 			fail
 		).
 
-	output_rdirectory(Directory) :-
+	rdirectory(Directory) :-
+		rdirectory(Directory, []).
+
+	output_rdirectory(Directory, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		setof(
 			SubDirectory,
-			sub_directory(Directory, SubDirectory),
+			Length^After^(
+				sub_directory(Directory, SubDirectory),
+				\+ (
+					member(ExcludedDirectory, ExcludedDirectories),
+					sub_atom(SubDirectory, 0, Length, After, ExcludedDirectory)
+				)
+			),
 			SubDirectories
 		),
 		forall(
 			member(SubDirectory, SubDirectories),
-			output_directory_files(SubDirectory)
+			output_directory_files(SubDirectory, Options)
 		).
 
 	sub_directory(Directory, SubDirectory) :-
@@ -390,26 +462,34 @@
 		os::decompose_file_name(Path, SubDirectory, _),
 		atom_concat(Directory, _RelativePath, SubDirectory).
 
-	directory(Directory) :-
+	directory(Directory, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	os::absolute_file_name(Directory, Path),
 			os::directory_exists(Path) ->
 			write_scan_header('Directory'),
-			output_directory_files(Path),
+			output_directory_files(Path, Options),
 			write_scan_footer('Directory')
 		;	print_message(warning, dead_code_scanner, unknown(directory,Directory)),
 			fail
 		).
 
-	output_directory_files(Directory) :-
+	directory(Directory) :-
+		directory(Directory, []).
+
+	output_directory_files(Directory, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		print_message(silent, dead_code_scanner, scanning_directory(Directory)),
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
 		logtalk::loaded_file_property(Path, directory(DirectorySlash)),
-		process_file(Path),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		not_excluded_file(ExcludedFiles, Path, Basename),
+		process_file(Path, Options),
 		fail.
-	output_directory_files(_).
+	output_directory_files(_, _).
 
 	entity(Entity) :-
 		(	current_object(Entity) ->
@@ -433,11 +513,16 @@
 		fail.
 	process_entity(_, _).
 
-	file(Source) :-
+	file(Source, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		locate_file(Source, Path),
 		write_scan_header('File'),
-		process_file(Path),
+		process_file(Path, Options),
 		write_scan_footer('File').
+
+	file(Source) :-
+		file(Source, []).
 
 	% file given in library notation
 	locate_file(LibraryNotation, Path) :-
@@ -478,27 +563,36 @@
 			atom_concat(Source, Extension, SourceWithExtension)
 		).
 
-	process_file(Path) :-
+	process_file(Path, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		print_message(silent, dead_code_scanner, scanning_file(Path)),
 		(	logtalk::loaded_file_property(Path, object(Entity)),
 			Kind = object
 		;	logtalk::loaded_file_property(Path, category(Entity)),
 			Kind = category
 		),
+		\+ member(Entity, ExcludedEntities),
 		process_entity(Kind, Entity),
 		fail.
-	process_file(_).
+	process_file(_, _).
+
+	all(UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		^^option(exclude_entities(ExcludedEntities), Options),
+		(	current_object(Entity),
+			Kind = object
+		;	current_category(Entity),
+			Kind = category
+		),
+		\+ member(Entity, ExcludedEntities),
+		process_entity(Kind, Entity),
+		fail.
+	all(_).
 
 	all :-
 		write_scan_header('All entities'),
-		current_object(Object),
-		process_entity(object, Object),
-		fail.
-	all :-
-		current_category(Category),
-		process_entity(category, Category),
-		fail.
-	all :-
+		all([]),
 		write_scan_footer('All entities').
 
 	write_scan_header(Type) :-
@@ -512,6 +606,39 @@
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(silent, dead_code_scanner, scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(silent, dead_code_scanner, scan_ended).
+
+	% by default, don't exclude any directories:
+	default_option(exclude_directories([])).
+	% by default, don't exclude any source files:
+	default_option(exclude_files([])).
+	% by default, don't exclude any entities:
+	default_option(exclude_entities([])).
+	% by default, exclude only the "startup" and "scratch_directory" libraries:
+	default_option(exclude_libraries([startup, scratch_directory])).
+
+	valid_option(exclude_directories(Directories)) :-
+		valid(list(atom), Directories).
+	valid_option(exclude_files(Files)) :-
+		valid(list(atom), Files).
+	valid_option(exclude_entities(Entities)) :-
+		valid(list(atom), Entities).
+	valid_option(exclude_libraries(Libraries)) :-
+		valid(list(atom), Libraries).
+
+	not_excluded_file([], _, _).
+	not_excluded_file([ExcludedFile| ExcludedFiles], Path, Basename) :-
+		% files in the exclusion list may be given by full path or by basename
+		\+ member(Path, [ExcludedFile| ExcludedFiles]),
+		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
+		% files in the exclusion list may be given with or without extension
+		\+ (	logtalk::file_type_extension(logtalk, Extension),
+				atom_concat(Source, Extension, Path),
+				member(Source, [ExcludedFile| ExcludedFiles])
+		),
+		\+ (	logtalk::file_type_extension(logtalk, Extension),
+				atom_concat(Source, Extension, Basename),
+				member(Source, [ExcludedFile| ExcludedFiles])
+		).
 
 :- end_object.
 
