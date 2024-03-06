@@ -40,6 +40,9 @@ predicates or non-terminals as both multifile and dynamic.
 * FIXED: The `updates/2` object and category property would not be reported
 for updated predicates in `user`.
 
+* FIXED: The compiler to not create object and category `calls/2` properties
+for built-in database predicate calls updating predicates in `user`.
+
 Documentation
 -------------
 

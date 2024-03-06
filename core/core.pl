@@ -18161,7 +18161,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		TPred = Pred
 	),
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, Mode, _, _, _),
-	'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Pred, Head).
+	(	'$lgt_prolog_built_in_database_predicate'(Pred) ->
+		% update to a dynamic predicate in "user" declared in a uses/2 directive
+		true
+	;	'$lgt_add_referenced_object_message'(Mode, Obj, Pred, Pred, Head)
+	).
 
 % suppress debug messages when compiling in optimized mode
 
