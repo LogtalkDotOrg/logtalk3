@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Implemented the object and category `updates/2` property `alias/2`
+and `non_terminal/1` predicate properties.
+
 * IMPROVED: The compiler report of errors and warnings clause context for
 multifile predicates.
 

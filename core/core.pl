@@ -7776,8 +7776,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
 	'$lgt_pp_updates_predicate_'(Dynamic, Updater, File, Line-_),
+	'$lgt_updates_property_alias_non_terminal'(Dynamic, Alias, NonTerminal),
 	'$lgt_property_location'(MainFile, File, Line, Location),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, updates(Dynamic, Updater, no, no, Location)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, updates(Dynamic, Updater, Alias, NonTerminal, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, _) :-
@@ -7830,6 +7831,40 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, _, _).
+
+
+% auxiliary predicate to compute the updates/2 object/category property
+% alias and non-terminal indicators for the update predicate
+
+'$lgt_updates_property_alias_non_terminal'(Object::PredicateFunctor/PredicateArity, AliasIndicator, NonTerminalIndicator) :-
+	!,
+	functor(Predicate, PredicateFunctor, PredicateArity),
+	(	'$lgt_pp_uses_predicate_'(Object, Predicate, Alias, _, _, _) ->
+		functor(Alias, AliasFunctor, AliasArity),
+		AliasIndicator = AliasFunctor/AliasArity
+	;	AliasIndicator = no
+	),
+	(	'$lgt_pp_uses_non_terminal_'(Object, _, _, Predicate, _, _, _, _) ->
+		NonTerminalArity is PredicateArity - 2,
+		NonTerminalIndicator = PredicateFunctor//NonTerminalArity
+	;	NonTerminalIndicator = no
+	).
+
+'$lgt_updates_property_alias_non_terminal'(':'(Module,PredicateFunctor/PredicateArity), AliasIndicator, NonTerminalIndicator) :-
+	!,
+	functor(Predicate, PredicateFunctor, PredicateArity),
+	(	'$lgt_pp_use_module_predicate_'(Module, Predicate, Alias, _, _, _) ->
+		functor(Alias, AliasFunctor, AliasArity),
+		AliasIndicator = AliasFunctor/AliasArity
+	;	AliasIndicator = no
+	),
+	(	'$lgt_pp_use_module_non_terminal_'(Module, _, _, Predicate, _, _, _, _) ->
+		NonTerminalArity is PredicateArity - 2,
+		NonTerminalIndicator = PredicateFunctor//NonTerminalArity
+	;	NonTerminalIndicator = no
+	).
+
+'$lgt_updates_property_alias_non_terminal'(_, no, no).
 
 
 
