@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-616 1837,-616 1837,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object fast_random</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;05, 23:57</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;06, 10:20</text>
 <g id="clust1" class="cluster">
 <title>cluster_fast_random_object</title>
 <g id="a_clust1"><a xlink:title="fast_random">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 1813,-49.75 1813,-49.75 1819,-49.75 1825,-55.75 1825,-61.75 1825,-61.75 1825,-592 1825,-592 1825,-598 1819,-604 1813,-604 1813,-604 20,-604 20,-604 14,-604 8,-598 8,-592 8,-592 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt">
 <text text-anchor="start" x="20" y="-586.5" font-family="Monospace" font-size="10.00" fill="dimgray">fast_random</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- reset_seed/0 -->
 <g id="node1" class="node">
 <title>reset_seed/0</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L37">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L37">
 <polygon fill="springgreen" stroke="black" points="1529,-331.25 1413,-331.25 1413,-295.25 1529,-295.25 1529,-331.25"/>
 <text text-anchor="start" x="1420.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1430.5" y="-313.3" font-family="Monospace" font-size="11.00">reset_seed/0</text>
@@ -41,7 +41,7 @@
 <!-- seed_/3 -->
 <g id="node3" class="node">
 <title>seed_/3</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L65">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L65">
 <polygon fill="#ff6a6a" stroke="black" points="1302,-213.5 1204,-213.5 1204,-177.5 1302,-177.5 1302,-213.5"/>
 <text text-anchor="start" x="1211.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1229.38" y="-195.55" font-family="Monospace" font-size="11.00">seed_/3</text>
@@ -55,12 +55,12 @@
 <!-- reset_seed/0&#45;&gt;seed_/3 -->
 <g id="edge49" class="edge">
 <title>reset_seed/0&#45;&gt;seed_/3</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L314" xlink:title="updates">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L314" xlink:title="updates">
 <path fill="none" stroke="black" d="M1438.36,-294.92C1400.88,-275.02 1339.18,-242.26 1297.36,-220.05"/>
 <polygon fill="black" stroke="black" points="1297.25,-220 1290.08,-220.72 1286.66,-214.37 1293.83,-213.65 1297.25,-220"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L314">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L314">
 <text text-anchor="start" x="1368" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- randomize/1 -->
 <g id="node2" class="node">
 <title>randomize/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L43">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L43">
 <polygon fill="springgreen" stroke="black" points="1172,-331.25 1056,-331.25 1056,-295.25 1172,-295.25 1172,-331.25"/>
 <text text-anchor="start" x="1063.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1076.88" y="-313.3" font-family="Monospace" font-size="11.00">randomize/1</text>
@@ -82,12 +82,12 @@
 <!-- randomize/1&#45;&gt;seed_/3 -->
 <g id="edge51" class="edge">
 <title>randomize/1&#45;&gt;seed_/3</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L325" xlink:title="updates">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L325" xlink:title="updates">
 <path fill="none" stroke="black" d="M1134.81,-294.92C1157.94,-275.66 1195.54,-244.35 1222.11,-222.22"/>
 <polygon fill="black" stroke="black" points="1222.13,-222.2 1224.19,-215.29 1231.36,-214.52 1229.3,-221.44 1222.13,-222.2"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L325">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L325" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L325">
 <text text-anchor="start" x="1187" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -95,7 +95,7 @@
 <!-- random/1 -->
 <g id="node4" class="node">
 <title>random/1</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L73">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L73">
 <polygon fill="cornsilk" stroke="black" points="1038,-331.25 958,-331.25 958,-295.25 1038,-295.25 1038,-331.25"/>
 <text text-anchor="start" x="965.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="971" y="-313.3" font-family="Monospace" font-size="11.00">random/1</text>
@@ -109,12 +109,12 @@
 <!-- random/1&#45;&gt;seed_/3 -->
 <g id="edge43" class="edge">
 <title>random/1&#45;&gt;seed_/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L73" xlink:title="updates">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L73" xlink:title="updates">
 <path fill="none" stroke="black" d="M1036.45,-294.8C1080.83,-274.65 1153.96,-241.46 1202.79,-219.29"/>
 <polygon fill="black" stroke="black" points="1202.9,-219.24 1206.71,-213.12 1213.83,-214.28 1210.02,-220.4 1202.9,-219.24"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L73">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L73">
 <text text-anchor="start" x="1133" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -122,7 +122,7 @@
 <!-- random/7 -->
 <g id="node5" class="node">
 <title>random/7</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L78">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L78">
 <polygon fill="cornsilk" stroke="black" points="1163,-95.75 1083,-95.75 1083,-59.75 1163,-59.75 1163,-95.75"/>
 <text text-anchor="start" x="1090.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1096" y="-77.8" font-family="Monospace" font-size="11.00">random/7</text>
@@ -136,12 +136,12 @@
 <!-- random/1&#45;&gt;random/7 -->
 <g id="edge1" class="edge">
 <title>random/1&#45;&gt;random/7</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L73" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L73" xlink:title="calls">
 <path fill="none" stroke="black" d="M1038.11,-295.31C1054,-286.7 1071.05,-274.74 1082,-259.25 1114.57,-213.21 1121.75,-145.46 1123.05,-107.41"/>
 <polygon fill="black" stroke="black" points="1126.54,-107.75 1123.26,-97.67 1119.54,-107.6 1126.54,-107.75"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L73">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L73">
 <text text-anchor="start" x="1114" y="-191.82" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <!-- between/3 -->
 <g id="node6" class="node">
 <title>between/3</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L87">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L87">
 <polygon fill="cornsilk" stroke="black" points="1051,-449 965,-449 965,-413 1051,-413 1051,-449"/>
 <text text-anchor="start" x="972.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="977.62" y="-431.05" font-family="Monospace" font-size="11.00">between/3</text>
@@ -163,12 +163,12 @@
 <!-- between/3&#45;&gt;random/1 -->
 <g id="edge2" class="edge">
 <title>between/3&#45;&gt;random/1</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L87" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L87" xlink:title="calls">
 <path fill="none" stroke="black" d="M1006.5,-412.67C1004.91,-394.26 1002.37,-364.85 1000.48,-342.96"/>
 <polygon fill="black" stroke="black" points="1003.99,-342.87 999.64,-333.21 997.01,-343.47 1003.99,-342.87"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L87">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L87">
 <text text-anchor="start" x="1003" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -176,7 +176,7 @@
 <!-- member/2 -->
 <g id="node7" class="node">
 <title>member/2</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94">
 <polygon fill="cornsilk" stroke="black" points="659,-449 579,-449 579,-413 659,-413 659,-449"/>
 <text text-anchor="start" x="586.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="592" y="-431.05" font-family="Monospace" font-size="11.00">member/2</text>
@@ -190,12 +190,12 @@
 <!-- member/2&#45;&gt;random/1 -->
 <g id="edge3" class="edge">
 <title>member/2&#45;&gt;random/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94" xlink:title="calls">
 <path fill="none" stroke="black" d="M659.29,-412.96C682.72,-402.87 712.72,-389.62 739,-377 747.47,-372.93 748.87,-370.32 757.75,-367.25 836.14,-340.15 863.19,-352.37 946.5,-331.66"/>
 <polygon fill="black" stroke="black" points="947.23,-335.09 956.04,-329.2 945.48,-328.31 947.23,-335.09"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94">
 <text text-anchor="start" x="757" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- member/2&#45;&gt;list::length/2 -->
 <g id="edge36" class="edge">
 <title>member/2&#45;&gt;list::length/2</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94" xlink:title="calls">
 <path fill="none" stroke="black" d="M605.82,-412.63C598.24,-402.42 588.68,-389.17 580.75,-377 573.26,-365.5 565.5,-352.45 559.06,-341.24"/>
 <polygon fill="black" stroke="black" points="562.28,-339.84 554.3,-332.88 556.2,-343.3 562.28,-339.84"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94">
 <text text-anchor="start" x="580" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -244,12 +244,12 @@
 <!-- member/2&#45;&gt;list::nth1/3 -->
 <g id="edge37" class="edge">
 <title>member/2&#45;&gt;list::nth1/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94" xlink:title="calls">
 <path fill="none" stroke="black" d="M613.52,-412.69C610.38,-399.62 608.21,-381.55 614.75,-367.25 619.8,-356.2 628.42,-346.57 637.62,-338.67"/>
 <polygon fill="black" stroke="black" points="639.66,-341.51 645.34,-332.56 635.32,-336.02 639.66,-341.51"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L94">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L94">
 <text text-anchor="start" x="614" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -257,7 +257,7 @@
 <!-- select/3 -->
 <g id="node8" class="node">
 <title>select/3</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100">
 <polygon fill="cornsilk" stroke="black" points="757,-449 677,-449 677,-413 757,-413 757,-449"/>
 <text text-anchor="start" x="684.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="690" y="-431.05" font-family="Monospace" font-size="11.00">select/3</text>
@@ -271,12 +271,12 @@
 <!-- select/3&#45;&gt;random/1 -->
 <g id="edge4" class="edge">
 <title>select/3&#45;&gt;random/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M757.26,-413.42C807.34,-392.79 892.87,-357.55 947.35,-335.11"/>
 <polygon fill="black" stroke="black" points="948.5,-338.42 956.41,-331.38 945.84,-331.95 948.5,-338.42"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100">
 <text text-anchor="start" x="865" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -284,7 +284,7 @@
 <!-- select/5 -->
 <g id="node9" class="node">
 <title>select/5</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L106">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L106" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L106">
 <polygon fill="cornsilk" stroke="black" points="828,-331.25 748,-331.25 748,-295.25 828,-295.25 828,-331.25"/>
 <text text-anchor="start" x="755.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="761" y="-313.3" font-family="Monospace" font-size="11.00">select/5</text>
@@ -298,12 +298,12 @@
 <!-- select/3&#45;&gt;select/5 -->
 <g id="edge5" class="edge">
 <title>select/3&#45;&gt;select/5</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M752.54,-412.71C766.24,-404.04 780.42,-392.13 788,-377 793.16,-366.7 794.06,-354.2 793.34,-343.08"/>
 <polygon fill="black" stroke="black" points="796.82,-342.76 792.21,-333.22 789.87,-343.56 796.82,-342.76"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100">
 <text text-anchor="start" x="791" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -311,12 +311,12 @@
 <!-- select/3&#45;&gt;list::length/2 -->
 <g id="edge38" class="edge">
 <title>select/3&#45;&gt;list::length/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M698.11,-412.68C683.2,-399.44 661.54,-381.16 641,-367.25 624.81,-356.29 606.15,-345.66 589.55,-336.84"/>
 <polygon fill="black" stroke="black" points="591.34,-333.82 580.85,-332.29 588.09,-340.03 591.34,-333.82"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L100">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L100">
 <text text-anchor="start" x="654" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -324,7 +324,7 @@
 <!-- select/4 -->
 <g id="node10" class="node">
 <title>select/4</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112">
 <polygon fill="cornsilk" stroke="black" points="499,-449 419,-449 419,-413 499,-413 499,-449"/>
 <text text-anchor="start" x="426.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="432" y="-431.05" font-family="Monospace" font-size="11.00">select/4</text>
@@ -338,12 +338,12 @@
 <!-- select/4&#45;&gt;random/1 -->
 <g id="edge6" class="edge">
 <title>select/4&#45;&gt;random/1</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M499.27,-416.85C503.88,-415.48 508.53,-414.17 513,-413 588.13,-393.32 609.61,-399.31 684,-377 695.32,-373.6 697.33,-370.31 708.75,-367.25 809.57,-340.21 842.01,-355.93 946.51,-331.59"/>
 <polygon fill="black" stroke="black" points="947.16,-335.03 956.06,-329.29 945.52,-328.23 947.16,-335.03"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112">
 <text text-anchor="start" x="708" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -351,7 +351,7 @@
 <!-- select/6 -->
 <g id="node11" class="node">
 <title>select/6</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L118">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L118">
 <polygon fill="cornsilk" stroke="black" points="466,-331.25 386,-331.25 386,-295.25 466,-295.25 466,-331.25"/>
 <text text-anchor="start" x="393.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="399" y="-313.3" font-family="Monospace" font-size="11.00">select/6</text>
@@ -365,12 +365,12 @@
 <!-- select/4&#45;&gt;select/6 -->
 <g id="edge7" class="edge">
 <title>select/4&#45;&gt;select/6</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M450.56,-412.7C445.89,-402.51 440.32,-389.26 436.75,-377 433.53,-365.93 431.14,-353.47 429.45,-342.59"/>
 <polygon fill="black" stroke="black" points="432.97,-342.44 428.1,-333.03 426.04,-343.43 432.97,-342.44"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112">
 <text text-anchor="start" x="436" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -378,12 +378,12 @@
 <!-- select/4&#45;&gt;list::length/2 -->
 <g id="edge39" class="edge">
 <title>select/4&#45;&gt;list::length/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M471.21,-412.59C480.13,-399.94 492.57,-382.44 503.75,-367.25 510.22,-358.46 517.39,-348.94 523.87,-340.43"/>
 <polygon fill="black" stroke="black" points="526.61,-342.61 529.9,-332.54 521.05,-338.36 526.61,-342.61"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L112">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L112">
 <text text-anchor="start" x="503" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -391,7 +391,7 @@
 <!-- swap/2 -->
 <g id="node12" class="node">
 <title>swap/2</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124">
 <polygon fill="cornsilk" stroke="black" points="408,-566.75 342,-566.75 342,-530.75 408,-530.75 408,-566.75"/>
 <text text-anchor="start" x="349.88" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="354.75" y="-548.8" font-family="Monospace" font-size="11.00">swap/2</text>
@@ -405,12 +405,12 @@
 <!-- swap/2&#45;&gt;between/3 -->
 <g id="edge8" class="edge">
 <title>swap/2&#45;&gt;between/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M408.43,-543.82C496.5,-533.11 742.05,-500.86 953.72,-449.38"/>
 <polygon fill="black" stroke="black" points="954.38,-452.82 963.26,-447.04 952.71,-446.02 954.38,-452.82"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124">
 <text text-anchor="start" x="781" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -418,7 +418,7 @@
 <!-- swap_1/4 -->
 <g id="node13" class="node">
 <title>swap_1/4</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L137">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L137">
 <polygon fill="cornsilk" stroke="black" points="339,-449 259,-449 259,-413 339,-413 339,-449"/>
 <text text-anchor="start" x="266.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="272" y="-431.05" font-family="Monospace" font-size="11.00">swap_1/4</text>
@@ -432,12 +432,12 @@
 <!-- swap/2&#45;&gt;swap_1/4 -->
 <g id="edge9" class="edge">
 <title>swap/2&#45;&gt;swap_1/4</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M363.62,-530.42C351.2,-511.5 331.14,-480.95 316.67,-458.91"/>
 <polygon fill="black" stroke="black" points="319.7,-457.15 311.29,-450.71 313.85,-460.99 319.7,-457.15"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124">
 <text text-anchor="start" x="339" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -445,12 +445,12 @@
 <!-- swap/2&#45;&gt;list::length/2 -->
 <g id="edge40" class="edge">
 <title>swap/2&#45;&gt;list::length/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124" xlink:title="calls">
 <path fill="none" stroke="black" d="M372.39,-530.65C369.13,-504.12 365.95,-452.03 383.75,-413 400.78,-375.65 439.67,-351.18 474.88,-335.94"/>
 <polygon fill="black" stroke="black" points="475.86,-339.32 483.77,-332.27 473.19,-332.85 475.86,-339.32"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L124">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L124">
 <text text-anchor="start" x="383" y="-427.32" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -458,7 +458,7 @@
 <!-- swap_2/5 -->
 <g id="node14" class="node">
 <title>swap_2/5</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L145">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L145">
 <polygon fill="cornsilk" stroke="black" points="368,-331.25 288,-331.25 288,-295.25 368,-295.25 368,-331.25"/>
 <text text-anchor="start" x="295.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="301" y="-313.3" font-family="Monospace" font-size="11.00">swap_2/5</text>
@@ -472,12 +472,12 @@
 <!-- swap_1/4&#45;&gt;swap_2/5 -->
 <g id="edge10" class="edge">
 <title>swap_1/4&#45;&gt;swap_2/5</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L137" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L137" xlink:title="calls">
 <path fill="none" stroke="black" d="M303.34,-412.67C307.98,-394.17 315.39,-364.57 320.88,-342.66"/>
 <polygon fill="black" stroke="black" points="324.23,-343.72 323.26,-333.17 317.44,-342.02 324.23,-343.72"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L137">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L137" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L137">
 <text text-anchor="start" x="314" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -485,7 +485,7 @@
 <!-- swap_consecutive/2 -->
 <g id="node15" class="node">
 <title>swap_consecutive/2</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151">
 <polygon fill="cornsilk" stroke="black" points="1081.5,-566.75 934.5,-566.75 934.5,-530.75 1081.5,-530.75 1081.5,-566.75"/>
 <text text-anchor="start" x="942.38" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="947.25" y="-548.8" font-family="Monospace" font-size="11.00">swap_consecutive/2</text>
@@ -499,12 +499,12 @@
 <!-- swap_consecutive/2&#45;&gt;between/3 -->
 <g id="edge11" class="edge">
 <title>swap_consecutive/2&#45;&gt;between/3</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1008,-530.42C1008,-512.01 1008,-482.6 1008,-460.71"/>
 <polygon fill="black" stroke="black" points="1011.5,-460.96 1008,-450.96 1004.5,-460.96 1011.5,-460.96"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151">
 <text text-anchor="start" x="1008" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -512,7 +512,7 @@
 <!-- swap_consecutive/3 -->
 <g id="node16" class="node">
 <title>swap_consecutive/3</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L157">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L157">
 <polygon fill="cornsilk" stroke="black" points="1648.5,-449 1501.5,-449 1501.5,-413 1648.5,-413 1648.5,-449"/>
 <text text-anchor="start" x="1509.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1514.25" y="-431.05" font-family="Monospace" font-size="11.00">swap_consecutive/3</text>
@@ -526,12 +526,12 @@
 <!-- swap_consecutive/2&#45;&gt;swap_consecutive/3 -->
 <g id="edge12" class="edge">
 <title>swap_consecutive/2&#45;&gt;swap_consecutive/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M1081.97,-532.77C1174.86,-513.95 1339.44,-480.53 1490.4,-449.53"/>
 <polygon fill="black" stroke="black" points="1490.67,-453.05 1499.76,-447.61 1489.26,-446.19 1490.67,-453.05"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151">
 <text text-anchor="start" x="1306" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -539,12 +539,12 @@
 <!-- swap_consecutive/2&#45;&gt;list::length/2 -->
 <g id="edge41" class="edge">
 <title>swap_consecutive/2&#45;&gt;list::length/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M934.14,-543.03C815.8,-533.77 592.04,-508.64 543.75,-449 531.04,-433.31 535.59,-377.49 539.9,-342.81"/>
 <polygon fill="black" stroke="black" points="543.35,-343.4 541.18,-333.03 536.41,-342.49 543.35,-343.4"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L151">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L151">
 <text text-anchor="start" x="543" y="-427.32" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -552,7 +552,7 @@
 <!-- enumerate/2 -->
 <g id="node17" class="node">
 <title>enumerate/2</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L163">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L163">
 <polygon fill="cornsilk" stroke="black" points="166,-449 66,-449 66,-413 166,-413 166,-449"/>
 <text text-anchor="start" x="73.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="78.88" y="-431.05" font-family="Monospace" font-size="11.00">enumerate/2</text>
@@ -566,7 +566,7 @@
 <!-- permutation/2 -->
 <g id="node22" class="node">
 <title>permutation/2</title>
-<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208">
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208">
 <polygon fill="cornsilk" stroke="black" points="131.5,-331.25 18.5,-331.25 18.5,-295.25 131.5,-295.25 131.5,-331.25"/>
 <text text-anchor="start" x="26.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.12" y="-313.3" font-family="Monospace" font-size="11.00">permutation/2</text>
@@ -580,12 +580,12 @@
 <!-- enumerate/2&#45;&gt;permutation/2 -->
 <g id="edge13" class="edge">
 <title>enumerate/2&#45;&gt;permutation/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L163" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M109.86,-412.67C103.28,-394.09 92.73,-364.3 84.96,-342.36"/>
 <polygon fill="black" stroke="black" points="88.32,-341.38 81.69,-333.12 81.73,-343.72 88.32,-341.38"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L163">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L163">
 <text text-anchor="start" x="96" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -607,12 +607,12 @@
 <!-- enumerate/2&#45;&gt;list::member/2 -->
 <g id="edge42" class="edge">
 <title>enumerate/2&#45;&gt;list::member/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L163" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M130.07,-412.67C145.58,-393.58 170.69,-362.65 188.63,-340.56"/>
 <polygon fill="black" stroke="black" points="191.29,-342.84 194.88,-332.87 185.86,-338.43 191.29,-342.84"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L163">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L163">
 <text text-anchor="start" x="165" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -620,7 +620,7 @@
 <!-- sequence/4 -->
 <g id="node18" class="node">
 <title>sequence/4</title>
-<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L167">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L167">
 <polygon fill="cornsilk" stroke="black" points="939.5,-331.25 846.5,-331.25 846.5,-295.25 939.5,-295.25 939.5,-331.25"/>
 <text text-anchor="start" x="854.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="859.25" y="-313.3" font-family="Monospace" font-size="11.00">sequence/4</text>
@@ -634,12 +634,12 @@
 <!-- sequence/4&#45;&gt;seed_/3 -->
 <g id="edge44" class="edge">
 <title>sequence/4&#45;&gt;seed_/3</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L167" xlink:title="updates">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L167" xlink:title="updates">
 <path fill="none" stroke="black" d="M939.91,-295.63C976.84,-282.68 1029.66,-264.45 1076.25,-249.5 1114.42,-237.25 1157.5,-224.31 1191.58,-214.28"/>
 <polygon fill="black" stroke="black" points="1191.32,-214.36 1195.95,-208.83 1202.84,-210.98 1198.2,-216.51 1191.32,-214.36"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L167">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L167">
 <text text-anchor="start" x="1076" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -647,7 +647,7 @@
 <!-- sequence/10 -->
 <g id="node19" class="node">
 <title>sequence/10</title>
-<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L177">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L177" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L177">
 <polygon fill="cornsilk" stroke="black" points="999,-213.5 899,-213.5 899,-177.5 999,-177.5 999,-213.5"/>
 <text text-anchor="start" x="906.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="911.88" y="-195.55" font-family="Monospace" font-size="11.00">sequence/10</text>
@@ -661,12 +661,12 @@
 <!-- sequence/4&#45;&gt;sequence/10 -->
 <g id="edge14" class="edge">
 <title>sequence/4&#45;&gt;sequence/10</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L167" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L167" xlink:title="calls">
 <path fill="none" stroke="black" d="M891.99,-294.97C891.88,-281.92 893.2,-263.86 899.75,-249.5 904.39,-239.32 911.77,-229.81 919.41,-221.73"/>
 <polygon fill="black" stroke="black" points="921.64,-224.45 926.29,-214.93 916.72,-219.47 921.64,-224.45"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L167">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L167">
 <text text-anchor="start" x="899" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -674,12 +674,12 @@
 <!-- sequence/10&#45;&gt;random/7 -->
 <g id="edge15" class="edge">
 <title>sequence/10&#45;&gt;random/7</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L179" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L179" xlink:title="calls">
 <path fill="none" stroke="black" d="M975.05,-177.17C1004.9,-157.31 1054,-124.65 1087.38,-102.44"/>
 <polygon fill="black" stroke="black" points="1089.12,-105.49 1095.51,-97.04 1085.25,-99.66 1089.12,-105.49"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L179">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L179" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L179">
 <text text-anchor="start" x="1041" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -687,7 +687,7 @@
 <!-- set/4 -->
 <g id="node20" class="node">
 <title>set/4</title>
-<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L185">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L185">
 <polygon fill="cornsilk" stroke="black" points="1710.5,-331.25 1651.5,-331.25 1651.5,-295.25 1710.5,-295.25 1710.5,-331.25"/>
 <text text-anchor="start" x="1659.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1664.12" y="-313.3" font-family="Monospace" font-size="11.00">set/4</text>
@@ -701,12 +701,12 @@
 <!-- set/4&#45;&gt;seed_/3 -->
 <g id="edge45" class="edge">
 <title>set/4&#45;&gt;seed_/3</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L185" xlink:title="updates">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L185" xlink:title="updates">
 <path fill="none" stroke="black" d="M1651.4,-298.71C1648.26,-297.46 1645.08,-296.28 1642,-295.25 1577.1,-273.49 1556.73,-282.23 1492.25,-259.25 1482.84,-255.9 1481.41,-252.86 1472,-249.5 1420.2,-231 1359.23,-216.83 1314.79,-207.82"/>
 <polygon fill="black" stroke="black" points="1314.79,-207.82 1308.13,-210.57 1303.02,-205.48 1309.69,-202.72 1314.79,-207.82"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L185">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L185">
 <text text-anchor="start" x="1492" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -714,7 +714,7 @@
 <!-- set/11 -->
 <g id="node21" class="node">
 <title>set/11</title>
-<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L196">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L196">
 <polygon fill="cornsilk" stroke="black" points="1539,-213.5 1473,-213.5 1473,-177.5 1539,-177.5 1539,-213.5"/>
 <text text-anchor="start" x="1480.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1485.75" y="-195.55" font-family="Monospace" font-size="11.00">set/11</text>
@@ -728,12 +728,12 @@
 <!-- set/4&#45;&gt;set/11 -->
 <g id="edge16" class="edge">
 <title>set/4&#45;&gt;set/11</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L185" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L185" xlink:title="calls">
 <path fill="none" stroke="black" d="M1654.8,-294.92C1624.77,-275.06 1575.39,-242.4 1541.82,-220.19"/>
 <polygon fill="black" stroke="black" points="1543.91,-217.38 1533.64,-214.78 1540.05,-223.22 1543.91,-217.38"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L185">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L185" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L185">
 <text text-anchor="start" x="1598" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -741,12 +741,12 @@
 <!-- set/11&#45;&gt;random/7 -->
 <g id="edge17" class="edge">
 <title>set/11&#45;&gt;random/7</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L199" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L199" xlink:title="calls">
 <path fill="none" stroke="black" d="M1472.65,-180.64C1469.74,-179.54 1466.82,-178.48 1464,-177.5 1362.69,-142.43 1241.63,-109.43 1174.43,-91.88"/>
 <polygon fill="black" stroke="black" points="1175.34,-88.5 1164.78,-89.37 1173.58,-95.27 1175.34,-88.5"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L199">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L199">
 <text text-anchor="start" x="1343" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -754,7 +754,7 @@
 <!-- not_member/2 -->
 <g id="node31" class="node">
 <title>not_member/2</title>
-<g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L309">
+<g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L309">
 <polygon fill="cornsilk" stroke="black" points="1511.5,-95.75 1404.5,-95.75 1404.5,-59.75 1511.5,-59.75 1511.5,-95.75"/>
 <text text-anchor="start" x="1412.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1417.5" y="-77.8" font-family="Monospace" font-size="11.00">not_member/2</text>
@@ -768,12 +768,12 @@
 <!-- set/11&#45;&gt;not_member/2 -->
 <g id="edge18" class="edge">
 <title>set/11&#45;&gt;not_member/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L199" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L199" xlink:title="calls">
 <path fill="none" stroke="black" d="M1498.81,-177.17C1491.07,-158.5 1478.64,-128.53 1469.53,-106.55"/>
 <polygon fill="black" stroke="black" points="1472.88,-105.49 1465.81,-97.6 1466.41,-108.17 1472.88,-105.49"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L199">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L199" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L199">
 <text text-anchor="start" x="1483" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -781,12 +781,12 @@
 <!-- permutation/2&#45;&gt;seed_/3 -->
 <g id="edge46" class="edge">
 <title>permutation/2&#45;&gt;seed_/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208" xlink:title="updates">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208" xlink:title="updates">
 <path fill="none" stroke="black" d="M131.73,-296.85C134.85,-296.25 137.96,-295.71 141,-295.25 486.39,-243.42 579.16,-300.27 926,-259.25 1019.24,-248.22 1125.8,-225.93 1191.24,-211.1"/>
 <polygon fill="black" stroke="black" points="1191.19,-211.12 1196.14,-205.88 1202.88,-208.44 1197.93,-213.68 1191.19,-211.12"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208">
 <text text-anchor="start" x="989" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -794,7 +794,7 @@
 <!-- add_random_key/8 -->
 <g id="node23" class="node">
 <title>add_random_key/8</title>
-<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L215">
+<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L215" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L215">
 <polygon fill="cornsilk" stroke="black" points="152,-213.5 18,-213.5 18,-177.5 152,-177.5 152,-213.5"/>
 <text text-anchor="start" x="25.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31" y="-195.55" font-family="Monospace" font-size="11.00">add_random_key/8</text>
@@ -808,12 +808,12 @@
 <!-- permutation/2&#45;&gt;add_random_key/8 -->
 <g id="edge19" class="edge">
 <title>permutation/2&#45;&gt;add_random_key/8</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M76.5,-294.92C78.09,-276.51 80.63,-247.1 82.52,-225.21"/>
 <polygon fill="black" stroke="black" points="85.99,-225.72 83.36,-215.46 79.01,-225.12 85.99,-225.72"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208">
 <text text-anchor="start" x="80" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -821,7 +821,7 @@
 <!-- remove_random_key/2 -->
 <g id="node24" class="node">
 <title>remove_random_key/2</title>
-<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L220">
+<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L220" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L220">
 <polygon fill="cornsilk" stroke="black" points="324,-213.5 170,-213.5 170,-177.5 324,-177.5 324,-213.5"/>
 <text text-anchor="start" x="177.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="182.88" y="-195.55" font-family="Monospace" font-size="11.00">remove_random_key/2</text>
@@ -835,12 +835,12 @@
 <!-- permutation/2&#45;&gt;remove_random_key/2 -->
 <g id="edge20" class="edge">
 <title>permutation/2&#45;&gt;remove_random_key/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208" xlink:title="calls">
 <path fill="none" stroke="black" d="M100.75,-294.92C130.26,-275.06 178.8,-242.4 211.79,-220.19"/>
 <polygon fill="black" stroke="black" points="213.48,-223.28 219.82,-214.79 209.57,-217.47 213.48,-223.28"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L208">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L208">
 <text text-anchor="start" x="166" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -848,12 +848,12 @@
 <!-- add_random_key/8&#45;&gt;random/7 -->
 <g id="edge21" class="edge">
 <title>add_random_key/8&#45;&gt;random/7</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L216" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L216" xlink:title="calls">
 <path fill="none" stroke="black" d="M152.46,-178.98C155.34,-178.45 158.2,-177.96 161,-177.5 506.68,-121.3 927.75,-91.12 1071.83,-81.87"/>
 <polygon fill="black" stroke="black" points="1071.65,-85.39 1081.41,-81.26 1071.2,-78.4 1071.65,-85.39"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L216">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L216" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L216">
 <text text-anchor="start" x="477" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -861,7 +861,7 @@
 <!-- random/3 -->
 <g id="node25" class="node">
 <title>random/3</title>
-<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L224">
+<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L224">
 <polygon fill="cornsilk" stroke="black" points="855,-449 775,-449 775,-413 855,-413 855,-449"/>
 <text text-anchor="start" x="782.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="788" y="-431.05" font-family="Monospace" font-size="11.00">random/3</text>
@@ -875,12 +875,12 @@
 <!-- random/3&#45;&gt;random/1 -->
 <g id="edge22" class="edge">
 <title>random/3&#45;&gt;random/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L224" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L224" xlink:title="calls">
 <path fill="none" stroke="black" d="M842.4,-412.67C873.93,-392.73 925.88,-359.87 960.99,-337.66"/>
 <polygon fill="black" stroke="black" points="962.56,-340.81 969.14,-332.51 958.81,-334.89 962.56,-340.81"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L224">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L224" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L224">
 <text text-anchor="start" x="911" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -888,7 +888,7 @@
 <!-- randseq/4 -->
 <g id="node26" class="node">
 <title>randseq/4</title>
-<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238">
+<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238">
 <polygon fill="cornsilk" stroke="black" points="1815,-331.25 1729,-331.25 1729,-295.25 1815,-295.25 1815,-331.25"/>
 <text text-anchor="start" x="1736.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1741.62" y="-313.3" font-family="Monospace" font-size="11.00">randseq/4</text>
@@ -902,12 +902,12 @@
 <!-- randseq/4&#45;&gt;seed_/3 -->
 <g id="edge47" class="edge">
 <title>randseq/4&#45;&gt;seed_/3</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238" xlink:title="updates">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238" xlink:title="updates">
 <path fill="none" stroke="black" d="M1732.51,-294.88C1690.82,-276.58 1630.73,-250.26 1628,-249.5 1512.25,-217.18 1478.91,-230.93 1360,-213.5 1345.39,-211.36 1329.68,-208.93 1314.91,-206.6"/>
 <polygon fill="black" stroke="black" points="1314.98,-206.61 1308.42,-209.61 1303.13,-204.72 1309.68,-201.71 1314.98,-206.61"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238">
 <text text-anchor="start" x="1650" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -915,7 +915,7 @@
 <!-- randseq/6 -->
 <g id="node27" class="node">
 <title>randseq/6</title>
-<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L259">
+<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L259" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L259">
 <polygon fill="cornsilk" stroke="black" points="1652,-213.5 1566,-213.5 1566,-177.5 1652,-177.5 1652,-213.5"/>
 <text text-anchor="start" x="1573.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1578.62" y="-195.55" font-family="Monospace" font-size="11.00">randseq/6</text>
@@ -929,12 +929,12 @@
 <!-- randseq/4&#45;&gt;randseq/6 -->
 <g id="edge23" class="edge">
 <title>randseq/4&#45;&gt;randseq/6</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238" xlink:title="calls">
 <path fill="none" stroke="black" d="M1751.04,-294.9C1735.14,-281.97 1712.59,-264.1 1692,-249.5 1677.72,-239.38 1661.59,-228.87 1647.37,-219.92"/>
 <polygon fill="black" stroke="black" points="1649.5,-217.12 1639.16,-214.78 1645.79,-223.05 1649.5,-217.12"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238">
 <text text-anchor="start" x="1703" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -942,7 +942,7 @@
 <!-- map_truncate/2 -->
 <g id="node28" class="node">
 <title>map_truncate/2</title>
-<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L267">
+<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L267" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L267">
 <polygon fill="cornsilk" stroke="black" points="1815,-213.5 1695,-213.5 1695,-177.5 1815,-177.5 1815,-213.5"/>
 <text text-anchor="start" x="1702.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1707.75" y="-195.55" font-family="Monospace" font-size="11.00">map_truncate/2</text>
@@ -956,12 +956,12 @@
 <!-- randseq/4&#45;&gt;map_truncate/2 -->
 <g id="edge24" class="edge">
 <title>randseq/4&#45;&gt;map_truncate/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238" xlink:title="calls">
 <path fill="none" stroke="black" d="M1769.45,-294.92C1766.75,-276.51 1762.43,-247.1 1759.22,-225.21"/>
 <polygon fill="black" stroke="black" points="1762.7,-224.83 1757.78,-215.44 1755.77,-225.85 1762.7,-224.83"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L238">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L238">
 <text text-anchor="start" x="1764" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -969,12 +969,12 @@
 <!-- randseq/6&#45;&gt;random/7 -->
 <g id="edge25" class="edge">
 <title>randseq/6&#45;&gt;random/7</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L261" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L261" xlink:title="calls">
 <path fill="none" stroke="black" d="M1588.38,-177.08C1569.88,-162.47 1541.36,-142.33 1513,-131.75 1397.45,-88.65 1250.98,-79.98 1174.62,-78.61"/>
 <polygon fill="black" stroke="black" points="1174.99,-75.12 1164.94,-78.48 1174.89,-82.12 1174.99,-75.12"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L261">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L261" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L261">
 <text text-anchor="start" x="1532" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -982,7 +982,7 @@
 <!-- randset/4 -->
 <g id="node29" class="node">
 <title>randset/4</title>
-<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L272">
+<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L272">
 <polygon fill="cornsilk" stroke="black" points="1633,-331.25 1547,-331.25 1547,-295.25 1633,-295.25 1633,-331.25"/>
 <text text-anchor="start" x="1554.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1559.62" y="-313.3" font-family="Monospace" font-size="11.00">randset/4</text>
@@ -996,12 +996,12 @@
 <!-- randset/4&#45;&gt;seed_/3 -->
 <g id="edge48" class="edge">
 <title>randset/4&#45;&gt;seed_/3</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L272" xlink:title="updates">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L272" xlink:title="updates">
 <path fill="none" stroke="black" d="M1546.54,-297.7C1515.47,-287.21 1472.69,-272.61 1435.25,-259.25 1423.53,-255.07 1420.73,-253.67 1409,-249.5 1378.01,-238.48 1343.39,-226.67 1314.65,-217"/>
 <polygon fill="black" stroke="black" points="1314.54,-216.96 1307.57,-218.84 1303.16,-213.14 1310.12,-211.26 1314.54,-216.96"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L272">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L272">
 <text text-anchor="start" x="1435" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -1009,7 +1009,7 @@
 <!-- randset/7 -->
 <g id="node30" class="node">
 <title>randset/7</title>
-<g id="a_node30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L293">
+<g id="a_node30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L293" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L293">
 <polygon fill="cornsilk" stroke="black" points="1455,-213.5 1369,-213.5 1369,-177.5 1455,-177.5 1455,-213.5"/>
 <text text-anchor="start" x="1376.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1381.62" y="-195.55" font-family="Monospace" font-size="11.00">randset/7</text>
@@ -1023,12 +1023,12 @@
 <!-- randset/4&#45;&gt;randset/7 -->
 <g id="edge26" class="edge">
 <title>randset/4&#45;&gt;randset/7</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L272" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L272" xlink:title="calls">
 <path fill="none" stroke="black" d="M1577.57,-294.96C1566.98,-281.2 1550.69,-262.21 1533,-249.5 1512.75,-234.95 1487.88,-223.2 1465.97,-214.5"/>
 <polygon fill="black" stroke="black" points="1467.48,-211.33 1456.89,-211.01 1464.97,-217.86 1467.48,-211.33"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L272">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L272" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L272">
 <text text-anchor="start" x="1543" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1036,12 +1036,12 @@
 <!-- randset/7&#45;&gt;random/7 -->
 <g id="edge27" class="edge">
 <title>randset/7&#45;&gt;random/7</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L296" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L296" xlink:title="calls">
 <path fill="none" stroke="black" d="M1368.73,-177.53C1342.4,-167.18 1308.11,-153.65 1277.75,-141.5 1242.96,-127.58 1203.85,-111.72 1173.65,-99.43"/>
 <polygon fill="black" stroke="black" points="1175.35,-96.34 1164.76,-95.81 1172.7,-102.82 1175.35,-96.34"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L296">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L296">
 <text text-anchor="start" x="1277" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1049,12 +1049,12 @@
 <!-- randset/7&#45;&gt;not_member/2 -->
 <g id="edge28" class="edge">
 <title>randset/7&#45;&gt;not_member/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L296" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L296" xlink:title="calls">
 <path fill="none" stroke="black" d="M1418.89,-177.17C1426.27,-158.59 1438.11,-128.8 1446.83,-106.86"/>
 <polygon fill="black" stroke="black" points="1450.07,-108.19 1450.51,-97.6 1443.56,-105.6 1450.07,-108.19"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L296">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L296" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L296">
 <text text-anchor="start" x="1436" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1062,7 +1062,7 @@
 <!-- get_seed/1 -->
 <g id="node32" class="node">
 <title>get_seed/1</title>
-<g id="a_node32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L318">
+<g id="a_node32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L318">
 <polygon fill="cornsilk" stroke="black" points="1283.5,-331.25 1190.5,-331.25 1190.5,-295.25 1283.5,-295.25 1283.5,-331.25"/>
 <text text-anchor="start" x="1198.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1203.25" y="-313.3" font-family="Monospace" font-size="11.00">get_seed/1</text>
@@ -1076,12 +1076,12 @@
 <!-- get_seed/1&#45;&gt;seed_/3 -->
 <g id="edge29" class="edge">
 <title>get_seed/1&#45;&gt;seed_/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L318" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L318" xlink:title="calls">
 <path fill="none" stroke="black" d="M1239.4,-294.92C1241.94,-276.51 1246.01,-247.1 1249.03,-225.21"/>
 <polygon fill="black" stroke="black" points="1252.48,-225.83 1250.38,-215.45 1245.54,-224.87 1252.48,-225.83"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L318">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L318">
 <text text-anchor="start" x="1245" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1089,7 +1089,7 @@
 <!-- set_seed/1 -->
 <g id="node33" class="node">
 <title>set_seed/1</title>
-<g id="a_node33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L321">
+<g id="a_node33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L321">
 <polygon fill="cornsilk" stroke="black" points="1394.5,-331.25 1301.5,-331.25 1301.5,-295.25 1394.5,-295.25 1394.5,-331.25"/>
 <text text-anchor="start" x="1309.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1314.25" y="-313.3" font-family="Monospace" font-size="11.00">set_seed/1</text>
@@ -1103,12 +1103,12 @@
 <!-- set_seed/1&#45;&gt;seed_/3 -->
 <g id="edge50" class="edge">
 <title>set_seed/1&#45;&gt;seed_/3</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L321" xlink:title="updates">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L321" xlink:title="updates">
 <path fill="none" stroke="black" d="M1333.78,-294.92C1318.39,-276.17 1293.63,-246 1275.57,-224"/>
 <polygon fill="black" stroke="black" points="1275.5,-223.92 1268.61,-221.82 1267.89,-214.64 1274.79,-216.74 1275.5,-223.92"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L321">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L321" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L321">
 <text text-anchor="start" x="1303" y="-250.7" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -1116,7 +1116,7 @@
 <!-- maybe/0 -->
 <g id="node34" class="node">
 <title>maybe/0</title>
-<g id="a_node34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L334">
+<g id="a_node34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L334">
 <polygon fill="cornsilk" stroke="black" points="946.5,-449 873.5,-449 873.5,-413 946.5,-413 946.5,-449"/>
 <text text-anchor="start" x="881.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="886.38" y="-431.05" font-family="Monospace" font-size="11.00">maybe/0</text>
@@ -1130,12 +1130,12 @@
 <!-- maybe/0&#45;&gt;random/1 -->
 <g id="edge30" class="edge">
 <title>maybe/0&#45;&gt;random/1</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L334" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L334" xlink:title="calls">
 <path fill="none" stroke="black" d="M923.17,-412.67C937.63,-393.66 960.99,-362.93 977.77,-340.86"/>
 <polygon fill="black" stroke="black" points="980.55,-342.98 983.82,-332.9 974.98,-338.74 980.55,-342.98"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L334">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L334">
 <text text-anchor="start" x="956" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1143,7 +1143,7 @@
 <!-- maybe/1 -->
 <g id="node35" class="node">
 <title>maybe/1</title>
-<g id="a_node35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L338">
+<g id="a_node35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L338">
 <polygon fill="cornsilk" stroke="black" points="1142.5,-449 1069.5,-449 1069.5,-413 1142.5,-413 1142.5,-449"/>
 <text text-anchor="start" x="1077.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1082.38" y="-431.05" font-family="Monospace" font-size="11.00">maybe/1</text>
@@ -1157,12 +1157,12 @@
 <!-- maybe/1&#45;&gt;random/1 -->
 <g id="edge31" class="edge">
 <title>maybe/1&#45;&gt;random/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L338" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L338" xlink:title="calls">
 <path fill="none" stroke="black" d="M1089.83,-412.67C1071.86,-393.41 1042.64,-362.1 1022,-339.97"/>
 <polygon fill="black" stroke="black" points="1024.69,-337.73 1015.31,-332.8 1019.57,-342.5 1024.69,-337.73"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L338">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L338">
 <text text-anchor="start" x="1055" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1170,7 +1170,7 @@
 <!-- maybe/2 -->
 <g id="node36" class="node">
 <title>maybe/2</title>
-<g id="a_node36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L344">
+<g id="a_node36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L344">
 <polygon fill="cornsilk" stroke="black" points="1233.5,-449 1160.5,-449 1160.5,-413 1233.5,-413 1233.5,-449"/>
 <text text-anchor="start" x="1168.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1173.38" y="-431.05" font-family="Monospace" font-size="11.00">maybe/2</text>
@@ -1184,12 +1184,12 @@
 <!-- maybe/2&#45;&gt;random/1 -->
 <g id="edge32" class="edge">
 <title>maybe/2&#45;&gt;random/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L344" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L344" xlink:title="calls">
 <path fill="none" stroke="black" d="M1167.21,-412.67C1132.77,-392.64 1075.94,-359.59 1037.76,-337.38"/>
 <polygon fill="black" stroke="black" points="1039.71,-334.46 1029.3,-332.46 1036.19,-340.51 1039.71,-334.46"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L344">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L344">
 <text text-anchor="start" x="1103" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1197,7 +1197,7 @@
 <!-- maybe_call/1 -->
 <g id="node37" class="node">
 <title>maybe_call/1</title>
-<g id="a_node37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L352">
+<g id="a_node37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L352">
 <polygon fill="cornsilk" stroke="black" points="1358.5,-449 1251.5,-449 1251.5,-413 1358.5,-413 1358.5,-449"/>
 <text text-anchor="start" x="1259.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1264.5" y="-431.05" font-family="Monospace" font-size="11.00">maybe_call/1</text>
@@ -1211,12 +1211,12 @@
 <!-- maybe_call/1&#45;&gt;random/1 -->
 <g id="edge33" class="edge">
 <title>maybe_call/1&#45;&gt;random/1</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L352" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L352" xlink:title="calls">
 <path fill="none" stroke="black" d="M1258.71,-412.55C1202.25,-391.26 1107.16,-355.41 1048.75,-333.39"/>
 <polygon fill="black" stroke="black" points="1050.3,-330.23 1039.71,-329.98 1047.83,-336.78 1050.3,-330.23"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L352">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L352">
 <text text-anchor="start" x="1160" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1224,7 +1224,7 @@
 <!-- maybe_call/2 -->
 <g id="node38" class="node">
 <title>maybe_call/2</title>
-<g id="a_node38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L358">
+<g id="a_node38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L358">
 <polygon fill="cornsilk" stroke="black" points="1483.5,-449 1376.5,-449 1376.5,-413 1483.5,-413 1483.5,-449"/>
 <text text-anchor="start" x="1384.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1389.5" y="-431.05" font-family="Monospace" font-size="11.00">maybe_call/2</text>
@@ -1238,12 +1238,12 @@
 <!-- maybe_call/2&#45;&gt;random/1 -->
 <g id="edge34" class="edge">
 <title>maybe_call/2&#45;&gt;random/1</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L358" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L358" xlink:title="calls">
 <path fill="none" stroke="black" d="M1376.25,-415.2C1373.46,-414.45 1370.7,-413.72 1368,-413 1289.05,-392.03 1269.16,-387.39 1190,-367.25 1129.83,-351.94 1111.69,-350.16 1049.16,-331.77"/>
 <polygon fill="black" stroke="black" points="1050.32,-328.47 1039.74,-328.97 1048.32,-335.18 1050.32,-328.47"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L358">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L358">
 <text text-anchor="start" x="1227" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1251,7 +1251,7 @@
 <!-- (:&#45;)/1 -->
 <g id="node39" class="node">
 <title>(:&#45;)/1</title>
-<g id="a_node39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L63">
+<g id="a_node39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L63">
 <polygon fill="bisque" stroke="black" points="1733,-449 1667,-449 1667,-413 1733,-413 1733,-449"/>
 <text text-anchor="start" x="1674.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1679.75" y="-431.05" font-family="Monospace" font-size="11.00">(:&#45;)/1</text>
@@ -1265,12 +1265,12 @@
 <!-- (:&#45;)/1&#45;&gt;reset_seed/0 -->
 <g id="edge35" class="edge">
 <title>(:&#45;)/1&#45;&gt;reset_seed/0</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L63" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1666.7,-413.17C1626.85,-393.03 1559.97,-359.22 1515.66,-336.82"/>
 <polygon fill="black" stroke="black" points="1517.32,-333.74 1506.81,-332.35 1514.16,-339.99 1517.32,-333.74"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/random/fast_random.lgt#L63">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/random/fast_random.lgt#L63">
 <text text-anchor="start" x="1592" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

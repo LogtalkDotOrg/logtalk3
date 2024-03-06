@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-145 3750,-145 3750,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol term_io_protocol</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;05, 23:57</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;06, 10:20</text>
 <g id="clust1" class="cluster">
 <title>cluster_term_io_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="term_io_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 3726,-49.75 3726,-49.75 3732,-49.75 3738,-55.75 3738,-61.75 3738,-61.75 3738,-121 3738,-121 3738,-127 3732,-133 3726,-133 3726,-133 20,-133 20,-133 14,-133 8,-127 8,-121 8,-121 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt">
 <text text-anchor="start" x="20" y="-115.5" font-family="Monospace" font-size="10.00" fill="dimgray">term_io_protocol</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- read_term_from_atom/3 -->
 <g id="node1" class="node">
 <title>read_term_from_atom/3</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L34">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L34">
 <polygon fill="springgreen" stroke="black" points="185.5,-95.75 18.5,-95.75 18.5,-59.75 185.5,-59.75 185.5,-95.75"/>
 <text text-anchor="start" x="26.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.12" y="-77.8" font-family="Monospace" font-size="11.00">read_term_from_atom/3</text>
@@ -41,7 +41,7 @@
 <!-- read_from_atom/2 -->
 <g id="node2" class="node">
 <title>read_from_atom/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L41">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L41">
 <polygon fill="springgreen" stroke="black" points="338,-95.75 204,-95.75 204,-59.75 338,-59.75 338,-95.75"/>
 <text text-anchor="start" x="211.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="217" y="-77.8" font-family="Monospace" font-size="11.00">read_from_atom/2</text>
@@ -55,7 +55,7 @@
 <!-- read_term_from_chars/3 -->
 <g id="node3" class="node">
 <title>read_term_from_chars/3</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L48">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L48">
 <polygon fill="springgreen" stroke="black" points="530,-95.75 356,-95.75 356,-59.75 530,-59.75 530,-95.75"/>
 <text text-anchor="start" x="363.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="368.75" y="-77.8" font-family="Monospace" font-size="11.00">read_term_from_chars/3</text>
@@ -69,7 +69,7 @@
 <!-- read_term_from_chars/4 -->
 <g id="node4" class="node">
 <title>read_term_from_chars/4</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L55">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L55">
 <polygon fill="springgreen" stroke="black" points="722,-95.75 548,-95.75 548,-59.75 722,-59.75 722,-95.75"/>
 <text text-anchor="start" x="555.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="560.75" y="-77.8" font-family="Monospace" font-size="11.00">read_term_from_chars/4</text>
@@ -83,7 +83,7 @@
 <!-- read_from_chars/2 -->
 <g id="node5" class="node">
 <title>read_from_chars/2</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L62">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L62">
 <polygon fill="springgreen" stroke="black" points="880,-95.75 740,-95.75 740,-59.75 880,-59.75 880,-95.75"/>
 <text text-anchor="start" x="747.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="752.62" y="-77.8" font-family="Monospace" font-size="11.00">read_from_chars/2</text>
@@ -97,7 +97,7 @@
 <!-- read_term_from_codes/3 -->
 <g id="node6" class="node">
 <title>read_term_from_codes/3</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L69">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L69">
 <polygon fill="springgreen" stroke="black" points="1072,-95.75 898,-95.75 898,-59.75 1072,-59.75 1072,-95.75"/>
 <text text-anchor="start" x="905.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="910.75" y="-77.8" font-family="Monospace" font-size="11.00">read_term_from_codes/3</text>
@@ -111,7 +111,7 @@
 <!-- read_term_from_codes/4 -->
 <g id="node7" class="node">
 <title>read_term_from_codes/4</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L76">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L76">
 <polygon fill="springgreen" stroke="black" points="1264,-95.75 1090,-95.75 1090,-59.75 1264,-59.75 1264,-95.75"/>
 <text text-anchor="start" x="1097.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1102.75" y="-77.8" font-family="Monospace" font-size="11.00">read_term_from_codes/4</text>
@@ -125,7 +125,7 @@
 <!-- read_from_codes/2 -->
 <g id="node8" class="node">
 <title>read_from_codes/2</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L83">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L83">
 <polygon fill="springgreen" stroke="black" points="1422,-95.75 1282,-95.75 1282,-59.75 1422,-59.75 1422,-95.75"/>
 <text text-anchor="start" x="1289.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1294.62" y="-77.8" font-family="Monospace" font-size="11.00">read_from_codes/2</text>
@@ -139,7 +139,7 @@
 <!-- write_term_to_atom/3 -->
 <g id="node9" class="node">
 <title>write_term_to_atom/3</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L90">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L90">
 <polygon fill="springgreen" stroke="black" points="1601.5,-95.75 1440.5,-95.75 1440.5,-59.75 1601.5,-59.75 1601.5,-95.75"/>
 <text text-anchor="start" x="1448.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1453.5" y="-77.8" font-family="Monospace" font-size="11.00">write_term_to_atom/3</text>
@@ -153,7 +153,7 @@
 <!-- write_to_atom/2 -->
 <g id="node10" class="node">
 <title>write_to_atom/2</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L97">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L97">
 <polygon fill="springgreen" stroke="black" points="1746.5,-95.75 1619.5,-95.75 1619.5,-59.75 1746.5,-59.75 1746.5,-95.75"/>
 <text text-anchor="start" x="1627.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1632.38" y="-77.8" font-family="Monospace" font-size="11.00">write_to_atom/2</text>
@@ -167,7 +167,7 @@
 <!-- write_term_to_chars/3 -->
 <g id="node11" class="node">
 <title>write_term_to_chars/3</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L104">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L104">
 <polygon fill="springgreen" stroke="black" points="1931.5,-95.75 1764.5,-95.75 1764.5,-59.75 1931.5,-59.75 1931.5,-95.75"/>
 <text text-anchor="start" x="1772.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1777.12" y="-77.8" font-family="Monospace" font-size="11.00">write_term_to_chars/3</text>
@@ -181,7 +181,7 @@
 <!-- write_term_to_chars/4 -->
 <g id="node12" class="node">
 <title>write_term_to_chars/4</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L111">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L111">
 <polygon fill="springgreen" stroke="black" points="2116.5,-95.75 1949.5,-95.75 1949.5,-59.75 2116.5,-59.75 2116.5,-95.75"/>
 <text text-anchor="start" x="1957.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1962.12" y="-77.8" font-family="Monospace" font-size="11.00">write_term_to_chars/4</text>
@@ -195,7 +195,7 @@
 <!-- write_to_chars/2 -->
 <g id="node13" class="node">
 <title>write_to_chars/2</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L118">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L118">
 <polygon fill="springgreen" stroke="black" points="2269,-95.75 2135,-95.75 2135,-59.75 2269,-59.75 2269,-95.75"/>
 <text text-anchor="start" x="2142.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2148" y="-77.8" font-family="Monospace" font-size="11.00">write_to_chars/2</text>
@@ -209,7 +209,7 @@
 <!-- write_term_to_codes/3 -->
 <g id="node14" class="node">
 <title>write_term_to_codes/3</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L125">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L125">
 <polygon fill="springgreen" stroke="black" points="2454.5,-95.75 2287.5,-95.75 2287.5,-59.75 2454.5,-59.75 2454.5,-95.75"/>
 <text text-anchor="start" x="2295.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2300.12" y="-77.8" font-family="Monospace" font-size="11.00">write_term_to_codes/3</text>
@@ -223,7 +223,7 @@
 <!-- write_term_to_codes/4 -->
 <g id="node15" class="node">
 <title>write_term_to_codes/4</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L132">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L132">
 <polygon fill="springgreen" stroke="black" points="2639.5,-95.75 2472.5,-95.75 2472.5,-59.75 2639.5,-59.75 2639.5,-95.75"/>
 <text text-anchor="start" x="2480.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2485.12" y="-77.8" font-family="Monospace" font-size="11.00">write_term_to_codes/4</text>
@@ -237,7 +237,7 @@
 <!-- write_to_codes/2 -->
 <g id="node16" class="node">
 <title>write_to_codes/2</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L139">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L139">
 <polygon fill="springgreen" stroke="black" points="2792,-95.75 2658,-95.75 2658,-59.75 2792,-59.75 2792,-95.75"/>
 <text text-anchor="start" x="2665.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2671" y="-77.8" font-family="Monospace" font-size="11.00">write_to_codes/2</text>
@@ -251,7 +251,7 @@
 <!-- format_to_atom/3 -->
 <g id="node17" class="node">
 <title>format_to_atom/3</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L146">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L146">
 <polygon fill="springgreen" stroke="black" points="2944,-95.75 2810,-95.75 2810,-59.75 2944,-59.75 2944,-95.75"/>
 <text text-anchor="start" x="2817.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2823" y="-77.8" font-family="Monospace" font-size="11.00">format_to_atom/3</text>
@@ -265,7 +265,7 @@
 <!-- format_to_chars/3 -->
 <g id="node18" class="node">
 <title>format_to_chars/3</title>
-<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L153">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L153" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L153">
 <polygon fill="springgreen" stroke="black" points="3102,-95.75 2962,-95.75 2962,-59.75 3102,-59.75 3102,-95.75"/>
 <text text-anchor="start" x="2969.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2974.62" y="-77.8" font-family="Monospace" font-size="11.00">format_to_chars/3</text>
@@ -279,7 +279,7 @@
 <!-- format_to_chars/4 -->
 <g id="node19" class="node">
 <title>format_to_chars/4</title>
-<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L160" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L160">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L160" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L160">
 <polygon fill="springgreen" stroke="black" points="3260,-95.75 3120,-95.75 3120,-59.75 3260,-59.75 3260,-95.75"/>
 <text text-anchor="start" x="3127.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3132.62" y="-77.8" font-family="Monospace" font-size="11.00">format_to_chars/4</text>
@@ -293,7 +293,7 @@
 <!-- format_to_codes/3 -->
 <g id="node20" class="node">
 <title>format_to_codes/3</title>
-<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L167">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L167" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L167">
 <polygon fill="springgreen" stroke="black" points="3418,-95.75 3278,-95.75 3278,-59.75 3418,-59.75 3418,-95.75"/>
 <text text-anchor="start" x="3285.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3290.62" y="-77.8" font-family="Monospace" font-size="11.00">format_to_codes/3</text>
@@ -307,7 +307,7 @@
 <!-- format_to_codes/4 -->
 <g id="node21" class="node">
 <title>format_to_codes/4</title>
-<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L174">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L174" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L174">
 <polygon fill="springgreen" stroke="black" points="3576,-95.75 3436,-95.75 3436,-59.75 3576,-59.75 3576,-95.75"/>
 <text text-anchor="start" x="3443.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3448.62" y="-77.8" font-family="Monospace" font-size="11.00">format_to_codes/4</text>
@@ -321,7 +321,7 @@
 <!-- with_output_to/2 -->
 <g id="node22" class="node">
 <title>with_output_to/2</title>
-<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/02c915c757b7175af2372f6f3ca2fbe4872901c9/library/term_io/term_io_protocol.lgt#L181">
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/607722814b80a7c036209c00a33ee3b195880c1b/library/term_io/term_io_protocol.lgt#L181">
 <polygon fill="springgreen" stroke="black" points="3728,-95.75 3594,-95.75 3594,-59.75 3728,-59.75 3728,-95.75"/>
 <text text-anchor="start" x="3601.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3607" y="-77.8" font-family="Monospace" font-size="11.00">with_output_to/2</text>
