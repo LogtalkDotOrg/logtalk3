@@ -1140,7 +1140,8 @@ Entity properties
       "caller(" predicate_indicator ")"
       | "include(" atom ")"
       | "line_count(" integer ")"
-      | "as(" predicate_indicator ")"
+      | "alias(" predicate_indicator ")"
+      | "non_terminal(" non_terminal_indicator ")"
 
 .. _grammar_predicate_properties:
 

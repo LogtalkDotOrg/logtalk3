@@ -801,9 +801,9 @@ The following object properties are supported:
    ``(::)/1-2`` or ``(^^)/1`` with a predicate indicator as argument; note
    that ``Call`` may not be ground in case of a call to a control
    construct where its argument is only know at runtime; the properties
-   include ``caller(Caller)``, ``alias(Alias)``, and
-   ``line_count(Line)`` with both ``Caller`` and ``Alias`` being
-   predicate indicators and ``Line`` being the begin line of the
+   include ``caller(Caller)``, ``alias(Alias)``, ``non_terminal(NonTerminal)``,
+   and ``line_count(Line)`` with ``Caller``, ``Alias``, and ``NonTerminal``
+   being predicate indicators and ``Line`` being the begin line of the
    predicate clause or directive making the call)
 ``updates(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for dynamic predicate updates (and also access
@@ -812,10 +812,11 @@ The following object properties are supported:
    ``(::)/1-2`` or ``(:)/2`` with a predicate indicator as argument; note
    that ``Predicate`` may not be ground in case of a control construct
    argument only know at runtime; the properties include
-   ``updater(Updater)``, ``alias(Alias)``, and ``line_count(Line)`` with
-   ``Updater`` being a (possibly multifile) predicate indicator,
-   ``Alias`` being a predicate indicator, and ``Line`` being the begin
-   line of the predicate clause or directive updating the predicate)
+   ``updater(Updater)``, ``alias(Alias)``, ``non_terminal(NonTerminal)``,
+   and ``line_count(Line)`` with ``Updater`` being a (possibly multifile)
+   predicate indicator, ``Alias`` and ``NonTerminal`` being predicate
+   indicators, and ``Line`` being the begin line of the predicate clause
+   or directive updating the predicate)
 ``number_of_clauses(Number)``
    Total number of predicate clauses defined in the object at compilation
    time (includes both user-defined clauses and auxiliary clauses generated

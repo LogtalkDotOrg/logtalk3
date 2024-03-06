@@ -37,6 +37,13 @@ predicates or non-terminals as both multifile and dynamic.
 * FIXED: The `updates/2` object and category property would not be reported
 for updated predicates in `user`.
 
+Documentation
+-------------
+
+* FIXED: Handbook description of object and category `calls/2` and `updates/2`
+properties missing the `non_terminal/1` predicate property and wrongly
+specifying `as/2` instead of `alias/2` predicate property. 
+
 Library
 -------
 
