@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:52:1,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2023-05-29,
+		date is 2024-03-06,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -786,7 +786,10 @@
 	sub_directory(TopPath, ExcludedDirectories, SubDirectory, SubDirectoryPath) :-
 		os::directory_files(TopPath, SubDirectories, [type(directory), dot_files(false), paths(relative)]),
 		member(Directory, SubDirectories),
-		\+ member(Directory, ExcludedDirectories),
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(Directory, 0, _, _, ExcludedDirectory)
+		),
 		atom_concat(TopPath, Directory, DirectoryPath0),
 		(	sub_atom(DirectoryPath0, _, 1, 0, '/') ->
 			DirectoryPath = DirectoryPath0

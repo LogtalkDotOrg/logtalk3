@@ -350,7 +350,7 @@ generated diagrams. For entity diagrams the options are:
 	directory for the .dot files (an atom; default is `'./dot_dias'`)
 
 - `exclude_directories(Directories)`  
-	list of directories to exclude (default is `[]`)
+	list of directories to exclude (default is `[]`; all sub-directories of the excluded directories are also excluded)
 
 - `exclude_files(Files)`  
 	list of source files to exclude (default is `[]`)

@@ -61,6 +61,9 @@ float types from underflow errors.
 Tools
 -----
 
+* CHANGED: The `diagrams` tool interpretation of the `excluded_directories/1`
+option to exclude also all sub-directories of the excluded directories.
+
 * ADDED: New public predicates to the `dead_code_scanner` tool that take a
 list of options to selectively exclude from analysis libraries, directories,
 files, and entities.
