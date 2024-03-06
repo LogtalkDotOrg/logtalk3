@@ -640,6 +640,19 @@
 				member(Source, [ExcludedFile| ExcludedFiles])
 		).
 
+	fix_option(exclude_directories(Directories0), exclude_directories(Directories)) :-
+		normalize_directory_paths(Directories0, Directories).
+
+	normalize_directory_paths([], []).
+	normalize_directory_paths([Directory0| Directories0], [Directory| Directories]) :-
+		os::internal_os_path(Directory1, Directory0),
+		os::absolute_file_name(Directory1, Directory2),
+		(	sub_atom(Directory2, _, _, 0, '/') ->
+			Directory = Directory2
+		;	atom_concat(Directory2, '/', Directory)
+		),
+		normalize_directory_paths(Directories0, Directories).
+
 :- end_object.
 
 

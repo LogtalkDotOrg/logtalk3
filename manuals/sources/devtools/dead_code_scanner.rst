@@ -106,7 +106,8 @@ A set of options are available to specify code that should be excluded
 when looking for unused predicates (and non-terminals):
 
 -  | ``exclude_directories(Directories)``
-   | list of directories to exclude (default is ``[]``)
+   | list of directories to exclude (default is ``[]``; all
+     sub-directories of the excluded directories are also excluded)
 
 -  | ``exclude_files(Files)``
    | list of source files to exclude (default is ``[]``)
