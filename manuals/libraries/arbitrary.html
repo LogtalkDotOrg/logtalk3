@@ -262,6 +262,21 @@ arbitrary<span class="o">::</span>arbitrary(odd, <span class="nv">Arbitrary</spa
     ).
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">arbitrary</span></code> library also provides <em>meta-types</em> that can simplify
+the definition of new generators. For example, the <code class="docutils literal notranslate"><span class="pre">odd</span></code> type above
+can also be defined using the <code class="docutils literal notranslate"><span class="pre">constrain/2</span></code> meta-type to only generate
+values that satisfy a closure:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>arbitrary<span class="o">::</span>arbitrary(odd, <span class="nv">Arbitrary</span>) <span class="o">:-</span>
+    arbitrary(constrain(integer, [<span class="nv">Arbitrary</span>]<span class="o">&gt;&gt;</span>(<span class="nv">Arbitrary</span> <span class="o">mod</span> <span class="m">2</span> <span class="o">=:=</span> <span class="m">1</span>)), <span class="nv">Arbitrary</span>).
+</pre></div>
+</div>
+<p>Another example is using the <code class="docutils literal notranslate"><span class="pre">transform/2</span></code> meta-type to transform
+generated values for a base type using a closure. Assuming that we want
+to generate sorted list of random integers, we can write:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>arbitrary<span class="o">::</span>arbitrary(sorted_integer_list, <span class="nv">Arbitrary</span>) <span class="o">:-</span>
+    arbitrary(transform(list(integer), sort), <span class="nv">Arbitrary</span>).
+</pre></div>
+</div>
 <p>We can also define a clause for the <code class="docutils literal notranslate"><span class="pre">arbitrary::shrinker/1</span></code> multifile
 predicate to declare a new shrinker and a <code class="docutils literal notranslate"><span class="pre">arbitrary::shrink/3</span></code>
 multifile predicate for shrinking arbitrary values for QuickCheck usage:</p>

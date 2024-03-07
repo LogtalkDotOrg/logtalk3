@@ -109,6 +109,21 @@ arbitrary generator:
 		;	Arbitrary is Arbitrary0 + 1
 		).
 
+The `arbitrary` library also provides _meta-types_ that can simplify the
+definition of new generators. For example, the `odd` type above can also
+be defined using the `constrain/2` meta-type to only generate values that
+satisfy a closure:
+
+	arbitrary::arbitrary(odd, Arbitrary) :-
+		arbitrary(constrain(integer, [Arbitrary]>>(Arbitrary mod 2 =:= 1)), Arbitrary).
+
+Another example is using the `transform/2` meta-type to transform generated
+values for a base type using a closure. Assuming that we want to generate
+sorted list of random integers, we can write:
+
+	arbitrary::arbitrary(sorted_integer_list, Arbitrary) :-
+		arbitrary(transform(list(integer), sort), Arbitrary).
+
 We can also define a clause for the `arbitrary::shrinker/1` multifile predicate
 to declare a new shrinker and a `arbitrary::shrink/3` multifile predicate for
 shrinking arbitrary values for QuickCheck usage:
