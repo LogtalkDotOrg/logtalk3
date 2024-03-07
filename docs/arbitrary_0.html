@@ -204,8 +204,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 2:33:2</div>
-<div class="line"><strong>Date:</strong> 2024-03-02</div>
+<div class="line"><strong>Version:</strong> 2:35:0</div>
+<div class="line"><strong>Date:</strong> 2024-03-07</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -245,10 +245,12 @@
 <li><p>List and difference list types length: The types that do not take a fixed length generate lists with a length in the <code class="docutils literal notranslate"><span class="pre">[0,MaxSize]</span></code> interval (<code class="docutils literal notranslate"><span class="pre">[1,MaxSize]</span></code> for non-empty list types).</p></li>
 <li><p>Predicate and non-terminal indicator types arity: These types generate indicators with an arity in the <code class="docutils literal notranslate"><span class="pre">[0,MaxSize]</span></code> interval.</p></li>
 <li><p>Other compound derived types: <code class="docutils literal notranslate"><span class="pre">compound(Name,Types)</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">non_terminal_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">predicate_or_non_terminal_indicator</span></code>, <code class="docutils literal notranslate"><span class="pre">clause</span></code>, <code class="docutils literal notranslate"><span class="pre">grammar_rule</span></code>, <code class="docutils literal notranslate"><span class="pre">pair</span></code>, <code class="docutils literal notranslate"><span class="pre">pair(KeyType,ValueType)</span></code>.</p></li>
-<li><p>Other types: <code class="docutils literal notranslate"><span class="pre">Object::Closure</span></code>, <code class="docutils literal notranslate"><span class="pre">between(Type,Lower,Upper)</span></code>, <code class="docutils literal notranslate"><span class="pre">property(Type,LambdaExpression)</span></code>, <code class="docutils literal notranslate"><span class="pre">one_of(Type,Set)</span></code>, <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">ground(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">types(Types)</span></code>, <code class="docutils literal notranslate"><span class="pre">types_frequency(Pairs)</span></code>.</p></li>
+<li><p>Other types: <code class="docutils literal notranslate"><span class="pre">Object::Closure</span></code>, <code class="docutils literal notranslate"><span class="pre">between(Type,Lower,Upper)</span></code>, <code class="docutils literal notranslate"><span class="pre">property(Type,LambdaExpression)</span></code>, <code class="docutils literal notranslate"><span class="pre">one_of(Type,Set)</span></code>, <code class="docutils literal notranslate"><span class="pre">var_or(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">ground(Type)</span></code>, <code class="docutils literal notranslate"><span class="pre">types(Types)</span></code>, <code class="docutils literal notranslate"><span class="pre">types_frequency(Pairs)</span></code>, <code class="docutils literal notranslate"><span class="pre">transform(Type,Closure)</span></code>, <code class="docutils literal notranslate"><span class="pre">constrain(Type,Closure)</span></code>.</p></li>
 <li><p>Type <code class="docutils literal notranslate"><span class="pre">Object::Closure</span></code> notes: Allows calling public object predicates as generators and shrinkers. The <code class="docutils literal notranslate"><span class="pre">Closure</span></code> closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.</p></li>
 <li><p>Type <code class="docutils literal notranslate"><span class="pre">compound(Name,Types)</span></code> notes: Generate a random compound term with the given name with a random argument for each type.</p></li>
 <li><p>Type <code class="docutils literal notranslate"><span class="pre">types_frequency(Pairs)</span></code> notes: Generate a random term for one of the types in a list of <code class="docutils literal notranslate"><span class="pre">Type-Frequency</span></code> pairs. The type is randomly selected taking into account the types frequency.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">transform(Type,Closure)</span></code> notes: Generate a random term by transforming the term generated for the given type using the given closure.</p></li>
+<li><p>Type <code class="docutils literal notranslate"><span class="pre">constrain(Type,Closure)</span></code> notes: Generate a random term for the given type that satisfy the given closure.</p></li>
 <li><p>Registering new types: Add clauses for the <code class="docutils literal notranslate"><span class="pre">arbitrary/1-2</span></code> multifile predicates and optionally for the <code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code> and <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.</p></li>
 <li><p>Shrinking values: The <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> should either succeed or fail but never throw an exception.</p></li>
 <li><p>Character sets: <code class="docutils literal notranslate"><span class="pre">ascii_identifier</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_printable</span></code>, <code class="docutils literal notranslate"><span class="pre">ascii_full</span></code>, <code class="docutils literal notranslate"><span class="pre">byte</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_bmp</span></code>, <code class="docutils literal notranslate"><span class="pre">unicode_full</span></code>.</p></li>
@@ -320,6 +322,10 @@
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(Type,Term)</span></code></div>
+</div>
+<div class="line"><strong>Meta-predicate template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">arbitrary(::,*)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">

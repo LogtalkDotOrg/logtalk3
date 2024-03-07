@@ -53,9 +53,6 @@ specifying `as/2` instead of `alias/2` predicate property.
 Library
 -------
 
-* ADDED: New `(::)/2` type to the `types` and `arbitrary` libraries. This type
-allows using object public predicates as scoped type-checkers, generators, and
-shrinkers.
 * CHANGED: No longer require arbitrary term generators to have a type-checker.
 
 * CHANGED: The `type::check/2` and the `arbitrary::arbitrary/2` predicates are
@@ -63,6 +60,14 @@ now also declared as meta-predicates to support new meta-types.
 
 * REMOVED: The `types_frequency/1` type from the `type` library (use instead
 the `types/1` type for type-checking).
+
+* ADDED: New `(::)/2` and `constrain/2` types to the `types` and `arbitrary`
+libraries. This `(::)/2` type allows using object public predicates as scoped
+type-checkers, generators, and shrinkers. The `constrain/2` type allows
+constraining a base type using a closure.
+
+* ADDED: New `transform/2` type to the `arbitrary` library. This type allows
+transforming generated values of a base type using a closure.
 
 * ADDED: New `arbitrary::max_size/1` multifile predicate to allow overriding
 the maximum size for types where its meaningful and implicit.

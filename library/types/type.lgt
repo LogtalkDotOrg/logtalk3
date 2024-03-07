@@ -22,7 +22,7 @@
 :- object(type).
 
 	:- info([
-		version is 2:4:0,
+		version is 2:5:0,
 		author is 'Paulo Moura',
 		date is 2024-03-07,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
@@ -40,7 +40,7 @@
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``, ``cyclic``, ``acyclic``.',
 			'Stream types' - '``stream``, ``stream_or_alias``, ``stream(Property)``, ``stream_or_alias(Property)``.',
-			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``type``.',
+			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``constrain(Type,Closure)``, ``type``.',
 			'Type ``predicate`` notes' - 'This type is used to check for an object public predicate specified as ``Object::Functor/Arity``.',
 			'Type ``boolean`` notes' - 'The two value of this type are the atoms ``true`` and ``false``.',
 			'Stream types notes' - 'In the case of the ``stream(Property)`` and ``stream_or_alias(Property)`` types, Property must be a valid stream property.',
@@ -54,6 +54,7 @@
 			'Type ``var_or(Type)`` notes' - 'Allows checking if a term is either a variable or a valid value of the given type.',
 			'Type ``ground(Type)`` notes' - 'Allows checking if a term is ground and a valid value of the given type.',
 			'Type ``types(Types)`` notes' - 'Allows checking if a term is a valid value for one of the types in a list of types.',
+			'Type ``constrain(Type,Closure)`` notes' - 'Allows checking if a term is a valid value for the given type and satisfies the given closure.',
 			'Type ``type`` notes' - 'Allows checking if a term is a valid type.',
 			'Type ``qualified_callable`` notes' - 'Allows checking if a term is a possibly module-qualified callable term. When the term is qualified, it also checks that the qualification modules are type correct. When the term is not qualified, its semantics are the same as the callable type.',
 			'Design choices' - 'The main predicates are ``valid/2`` and ``check/3``. These are defined using the predicate ``check/2``. Defining clauses for ``check/2`` instead of ``valid/2`` gives the user full control of exception terms without requiring an additional predicate.',
@@ -229,6 +230,7 @@
 	type(var_or(_Type)).
 	type(ground(_Type)).
 	type(types(_Types)).
+	type(constrain(_Type, _Closure)).
 	type(type).
 
 	meta_type(list(Type), [Type], []).
@@ -242,6 +244,7 @@
 	meta_type(var_or(Type), [Type], []).
 	meta_type(ground(Type), [Type], []).
 	meta_type(types(Types), Types, []).
+	meta_type(constrain(Type, _), [Type], []).
 
 	valid(Type, Term) :-
 		catch(check(Type, Term), _, fail).
@@ -1218,6 +1221,14 @@
 			valid(Type, Term) ->
 			true
 		;	throw(domain_error(types(Types), Term))
+		).
+
+	check(constrain(Type, Closure), Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	call(Closure, Term) ->
+			true
+		;	throw(domain_error(constrain(Type, Closure), Term))
 		).
 
 	check(type, Term) :-

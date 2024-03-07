@@ -227,7 +227,7 @@
 
 	test(arbitrary_arbitrary_2_22) :-
 		Pairs = [var-2, atom-4, integer-3, compound-1],
-		lgtunit::quick_check(type::arbitrary({types_frequency(Pairs)}, -types_frequency(Pairs)), Result, [n(25)]),
+		lgtunit::quick_check(type::arbitrary({types_frequency(Pairs)}, -types([var,atom,integer,compound])), Result, [n(25)]),
 		^^assertion(type(types_frequency(Pairs),Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_23) :-
@@ -246,6 +246,14 @@
 		^^assertion(type(Type,Result), subsumes_term(passed(_,_,_), Result)).
 
 	test(arbitrary_arbitrary_2_26) :-
+		lgtunit::quick_check(type::arbitrary({transform(list,sort)}, -list), Result, [n(25)]),
+		^^assertion(type(transform(list,sort),Result), subsumes_term(passed(_,_,_), Result)).
+
+	test(arbitrary_arbitrary_2_27) :-
+		lgtunit::quick_check(type::arbitrary({constrain(integer, [A]>>((A > 2, A < 9)))}, -between(integer,2,9)), Result, [n(25)]),
+		^^assertion(type(constrain(integer, [A]>>((A > 2, A < 9))),Result), subsumes_term(passed(_,_,_), Result)).
+
+	test(arbitrary_arbitrary_2_28) :-
 		forall(
 			(	type::arbitrary(Type),
 				ground(Type)

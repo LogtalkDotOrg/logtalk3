@@ -14,8 +14,8 @@ Adds predicates for generating and shrinking random values for selected types to
 |    ``logtalk_load(arbitrary(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:33:2
-| **Date:** 2024-03-02
+| **Version:** 2:35:0
+| **Date:** 2024-03-07
 
 | **Compilation flags:**
 |    ``static``
@@ -45,10 +45,12 @@ Adds predicates for generating and shrinking random values for selected types to
    - List and difference list types length: The types that do not take a fixed length generate lists with a length in the ``[0,MaxSize]`` interval (``[1,MaxSize]`` for non-empty list types).
    - Predicate and non-terminal indicator types arity: These types generate indicators with an arity in the ``[0,MaxSize]`` interval.
    - Other compound derived types: ``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.
-   - Other types: ``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.
+   - Other types: ``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``transform(Type,Closure)``, ``constrain(Type,Closure)``.
    - Type ``Object::Closure`` notes: Allows calling public object predicates as generators and shrinkers. The ``Closure`` closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.
    - Type ``compound(Name,Types)`` notes: Generate a random compound term with the given name with a random argument for each type.
    - Type ``types_frequency(Pairs)`` notes: Generate a random term for one of the types in a list of ``Type-Frequency`` pairs. The type is randomly selected taking into account the types frequency.
+   - Type ``transform(Type,Closure)`` notes: Generate a random term by transforming the term generated for the given type using the given closure.
+   - Type ``constrain(Type,Closure)`` notes: Generate a random term for the given type that satisfy the given closure.
    - Registering new types: Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.
    - Shrinking values: The ``shrink/3`` should either succeed or fail but never throw an exception.
    - Character sets: ``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``.
@@ -99,6 +101,8 @@ Generates an arbitrary term of the specified type. Fails if the type is not supp
 
 | **Template:**
 |    ``arbitrary(Type,Term)``
+| **Meta-predicate template:**
+|    ``arbitrary(::,*)``
 | **Mode and number of proofs:**
 |    ``arbitrary(@callable,-term)`` - ``zero_or_one``
 

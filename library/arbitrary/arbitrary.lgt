@@ -23,7 +23,7 @@
 	complements(type)).
 
 	:- info([
-		version is 2:34:0,
+		version is 2:35:0,
 		author is 'Paulo Moura',
 		date is 2024-03-07,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
@@ -42,10 +42,12 @@
 			'List and difference list types length' - 'The types that do not take a fixed length generate lists with a length in the ``[0,MaxSize]`` interval (``[1,MaxSize]`` for non-empty list types).',
 			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,MaxSize]`` interval.',
 			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
-			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``.',
+			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``transform(Type,Closure)``, ``constrain(Type,Closure)``.',
 			'Type ``Object::Closure`` notes' - 'Allows calling public object predicates as generators and shrinkers. The ``Closure`` closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.',
 			'Type ``compound(Name,Types)`` notes' - 'Generate a random compound term with the given name with a random argument for each type.',
 			'Type ``types_frequency(Pairs)`` notes' - 'Generate a random term for one of the types in a list of ``Type-Frequency`` pairs. The type is randomly selected taking into account the types frequency.',
+			'Type ``transform(Type,Closure)`` notes' - 'Generate a random term by transforming the term generated for the given type using the given closure.',
+			'Type ``constrain(Type,Closure)`` notes' - 'Generate a random term for the given type that satisfy the given closure.',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
 			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception.',
 			'Character sets' - '``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``.',
@@ -239,6 +241,8 @@
 	arbitrary(ground(_Type)).
 	arbitrary(types(_Types)).
 	arbitrary(types_frequency(_Pairs)).
+	arbitrary(transform(_Type, _Closure)).
+	arbitrary(constrain(_Type, _Closure)).
 
 	% arbitrary/2
 
@@ -728,6 +732,13 @@
 		types_frequency_to_types_list(Pairs, Types),
 		member(Type, Types),
 		arbitrary(Type, Arbitrary).
+
+	arbitrary(transform(Type, Closure), Arbitrary) :-
+		arbitrary(Type, Arbitrary0),
+		call(Closure, Arbitrary0, Arbitrary).
+
+	arbitrary(constrain(Type, Closure), Arbitrary) :-
+		arbitrary_constrain(Type, Closure, Arbitrary).
 
 	% shrinker/1
 
@@ -1449,6 +1460,13 @@
 	map_arbitrary([Head| Tail], [Head| TailBack]-Back, Type) :-
 		arbitrary(Type, Head),
 		map_arbitrary(Tail, TailBack-Back, Type).
+
+	:- meta_predicate(arbitrary_constrain(*, 1, *)).
+	arbitrary_constrain(Type, Closure, Arbitrary) :-
+		repeat,
+			arbitrary(Type, Arbitrary),
+			call(Closure, Arbitrary),
+		!.
 
 	shrink_list([Head| Tail], Type, Small) :-
 		(	Tail == [] ->
