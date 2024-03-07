@@ -57,6 +57,9 @@ Library
 allows using object public predicates as scoped type-checkers, generators, and
 shrinkers.
 
+* CHANGED: The `type::check/2` and the `arbitrary::arbitrary/2` predicates are
+now also declared as meta-predicates to support new meta-types.
+
 * ADDED: New `arbitrary::max_size/1` multifile predicate to allow overriding
 the maximum size for types where its meaningful and implicit.
 

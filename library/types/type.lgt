@@ -22,9 +22,9 @@
 :- object(type).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:3:0,
 		author is 'Paulo Moura',
-		date is 2024-02-22,
+		date is 2024-03-07,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -101,6 +101,7 @@
 	]).
 
 	:- public(check/2).
+	:- meta_predicate(check(::, *)).
 	:- multifile(check/2).
 	:- mode(check(@callable, @term), one_or_error).
 	:- info(check/2, [
