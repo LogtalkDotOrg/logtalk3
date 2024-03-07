@@ -1654,7 +1654,7 @@ simplify writing the tests. In alternative, we can use the
 
 ::
 
-   | ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
+   | ?- logtalk_load(hook_objects(loader)).
    ...
 
    | ?- logtalk_load(plain, [hook(object_wrapper_hook)]).
