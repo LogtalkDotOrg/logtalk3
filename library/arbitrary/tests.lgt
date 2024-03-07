@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
-		date is 2024-03-03,
+		date is 2024-03-07,
 		comment is 'Unit tests for the "arbitrary" library.'
 	]).
 
@@ -33,13 +33,6 @@
 	arbitrary::max_size(7).
 
 	cover(arbitrary).
-
-	% all arbitrary types must also be supported type-checked types
-	test(arbitrary_arbitrary_1_01) :-
-		forall(
-			type::arbitrary(Type),
-			^^assertion(type(Type), type::type(Type))
-		).
 
 	% arbitrary types must generate valid values
 	test(arbitrary_arbitrary_2_01) :-

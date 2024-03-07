@@ -56,6 +56,7 @@ Library
 * ADDED: New `(::)/2` type to the `types` and `arbitrary` libraries. This type
 allows using object public predicates as scoped type-checkers, generators, and
 shrinkers.
+* CHANGED: No longer require arbitrary term generators to have a type-checker.
 
 * CHANGED: The `type::check/2` and the `arbitrary::arbitrary/2` predicates are
 now also declared as meta-predicates to support new meta-types.
