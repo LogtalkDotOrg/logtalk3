@@ -61,6 +61,9 @@ shrinkers.
 * CHANGED: The `type::check/2` and the `arbitrary::arbitrary/2` predicates are
 now also declared as meta-predicates to support new meta-types.
 
+* REMOVED: The `types_frequency/1` type from the `type` library (use instead
+the `types/1` type for type-checking).
+
 * ADDED: New `arbitrary::max_size/1` multifile predicate to allow overriding
 the maximum size for types where its meaningful and implicit.
 
