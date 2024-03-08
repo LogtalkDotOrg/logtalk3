@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:5:0,
+		version is 10:0:0,
 		author is 'Paulo Moura',
-		date is 2023-10-10,
+		date is 2024-03-08,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -139,7 +139,10 @@
 			sub_atom(LibraryPath, 0, _, _, ExcludedPrefix)
 		),
 		atom_concat(TopPath, RelativePath, LibraryPath),
-		\+ member(RelativePath, ExcludedPaths).
+		\+ (
+			member(ExcludedPath, ExcludedPaths),
+			sub_atom(RelativePath, 0, _, _, ExcludedPath)
+		).
 
 	libraries(Libraries, UserOptions) :-
 		^^check_options(UserOptions),
