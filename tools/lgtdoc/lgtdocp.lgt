@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,9 +33,9 @@
 :- protocol(lgtdocp).
 
 	:- info([
-		version is 5:2:0,
+		version is 6:0:0,
 		author is 'Paulo Moura',
-		date is 2023-11-28,
+		date is 2024-03-08,
 		comment is 'Documenting tool protocol.',
 		remarks is [
 			'Compiling files for generating XML documentation' - 'All source files must be compiled with the ``source_data`` flag turned on.',
@@ -48,7 +48,7 @@
 			'``encoding(Encoding)`` option' - 'Encoding to be used for the generated XML documenting files.',
 			'``omit_path_prefixes(Prefixes)`` option' - 'List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.',
 			'``exclude_files(List)`` option' - 'List of files to exclude when generating the XML documenting files.',
-			'``exclude_paths(List)`` option' - 'List of relative library paths to exclude when generating the XML documenting files (default is ``[]``).',
+			'``exclude_paths(List)`` option' - 'List of relative library paths to exclude when generating the XML documenting files (default is ``[]``). All sub-directories of the excluded directories are also excluded.',
 			'``exclude_prefixes(List)`` option' - 'List of path prefixes to exclude when generating the XML documenting files (default is ``[]``).',
 			'``exclude_entities(List)`` option' - 'List of entities to exclude when generating the XML documenting files (default is ``[]``).',
 			'``sort_predicates(Boolean)`` option' - 'Sort entity predicates (default is ``false``).',
