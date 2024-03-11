@@ -23,15 +23,14 @@
 	implements(git_protocol)).
 
 	:- info([
-		version is 2:1:1,
+		version is 2:1:2,
 		author is 'Paulo Moura',
-		date is 2023-04-13,
+		date is 2024-03-11,
 		comment is 'Predicates for accessing a git project current branch and latest commit data.'
 	]).
 
 	:- uses(os, [
-		delete_file/1, internal_os_path/2, path_concat/3,
-		pid/1, temporary_directory/1, shell/1
+		delete_file/1, path_concat/3, pid/1, temporary_directory/1, shell/1
 	]).
 
 	:- uses(user, [
@@ -39,6 +38,10 @@
 	]).
 
 	:- if(os::operating_system_type(windows)).
+
+		:- uses(os, [
+			internal_os_path/2
+		]).
 
 		branch(Directory, Branch) :-
 			temporary_file(Temporary),

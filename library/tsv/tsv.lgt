@@ -24,9 +24,9 @@
 	implements(tsv_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2023-11-20,
+		date is 2024-03-11,
 		comment is 'TSV file and stream reading and writing predicates.',
 		parameters is [
 			'Header' - 'Header handling option with possible values ``skip`` and ``keep`` (default).'
@@ -35,10 +35,6 @@
 
 	:- uses(logtalk, [
 		print_message(debug, tsv, Message) as dbg(Message)
-	]).
-
-	:- uses(os, [
-		decompose_file_name/4
 	]).
 
 	read_file(File, Object, Predicate) :-

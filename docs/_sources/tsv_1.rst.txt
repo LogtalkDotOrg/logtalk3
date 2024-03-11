@@ -17,8 +17,8 @@ TSV file and stream reading and writing predicates.
 |    ``logtalk_load(tsv(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2023-11-20
+| **Version:** 1:0:1
+| **Date:** 2024-03-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -29,7 +29,6 @@ TSV file and stream reading and writing predicates.
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
-|    :ref:`os <os/0>`
 |    :ref:`reader <reader/0>`
 |    :ref:`type <type/0>`
 
