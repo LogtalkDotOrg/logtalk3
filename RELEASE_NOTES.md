@@ -34,6 +34,9 @@ and `non_terminal/1` predicate properties.
 * IMPROVED: The compiler report of errors and warnings clause context for
 multifile predicates.
 
+* IMPROVED: Print a warning only for the first successful call to the
+`logtalk_linter_hook/7` hook predicate.
+
 * FIXED: The compiler to detect and report attempts to declare category
 predicates or non-terminals as both multifile and dynamic.
 

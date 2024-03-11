@@ -146,11 +146,12 @@ warnings. Experimental. The <code class="docutils literal notranslate"><span cla
 <code class="docutils literal notranslate"><span class="pre">Object::Message</span></code>, a call to a Prolog built-in predicate, or a call to a
 module predicate, <code class="docutils literal notranslate"><span class="pre">Module:Predicate</span></code>. The <code class="docutils literal notranslate"><span class="pre">Flag</span></code> argument must be a
 supported linter flag. The <code class="docutils literal notranslate"><span class="pre">Warning</span></code> argument must be a valid <code class="docutils literal notranslate"><span class="pre">core</span></code>
-message term.</p>
+message term. For a given <code class="docutils literal notranslate"><span class="pre">Goal</span></code>, only the first successful call to this
+predicate is considered.</p>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_linter_hook(<span class="o">@</span>callable, <span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">+</span>pair(integer), <span class="o">+</span>atom, <span class="o">@</span>object_identifier, <span class="o">--</span>callable) <span class="o">-</span> zero_or_more
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>logtalk_linter_hook(<span class="o">@</span>callable, <span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">+</span>pair(integer), <span class="o">+</span>atom, <span class="o">@</span>object_identifier, <span class="o">--</span>callable) <span class="o">-</span> zero_or_one
 </pre></div>
 </div>
 </section>

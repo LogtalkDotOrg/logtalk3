@@ -18630,7 +18630,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	logtalk_linter_hook(Obj::Pred, Flag, File, Lines, Type, Entity, Warning),
+	once(logtalk_linter_hook(Obj::Pred, Flag, File, Lines, Type, Entity, Warning)),
 	nonvar(Flag),
 	'$lgt_valid_flag'(Flag),
 	'$lgt_compiler_flag'(Flag, warning),
