@@ -78,6 +78,8 @@ the maximum size for types where its meaningful and implicit.
 * ADDED: New `arbitrary::shrink_sequence/3` predicate to help testing
 definitions of the `arbitrary::shrink/3` predicate.
 
+* IMPROVED: Linter warnings for calls to the `list::append/3` predicate.
+
 * FIXED: Bugs in the `arbitrary` library `shrink/3` predicate definitions for
 some of the pre-defined types that could result in non-terminating sequences.
 

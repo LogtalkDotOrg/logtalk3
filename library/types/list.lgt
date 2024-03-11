@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 4:1:0,
+		version is 4:2:0,
 		author is 'Paulo Moura',
-		date is 2023-11-17,
+		date is 2024-03-11,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -646,10 +646,10 @@
 	user::logtalk_linter_hook(
 		list::append(L1, L2, L), suspicious_calls,
 		File, Lines, Type, Entity,
-		suspicious_call(File, Lines, Type, Entity, list::append(L1, L2, L), [L = [X| L2]])
+		suspicious_call(File, Lines, Type, Entity, list::append(L1, L2, L), [L = List])
 	) :-
-		L1 = [X| Tail],
-		Tail == [].
+		valid(L1),
+		append(L1, L2, List).
 	user::logtalk_linter_hook(
 		list::append([L1, L2], L), suspicious_calls,
 		File, Lines, Type, Entity,
