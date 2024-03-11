@@ -3109,6 +3109,7 @@ logtalk_make(Target) :-
 			% prototype
 			\+ call(Dcl, Template, _, _, _, _, _)
 		;	% instance and/or class
+			\+ call(Dcl, Template, _, _, _, _, _),
 			\+ call(IDcl, Template, _, _, _, _, _)
 		)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _),
@@ -3125,6 +3126,7 @@ logtalk_make(Target) :-
 			% prototype
 			\+ call(Dcl, Template, _, _, _, _, _)
 		;	% instance and/or class
+			\+ call(Dcl, Template, _, _, _, _, _),
 			\+ call(IDcl, Template, _, _, _, _, _)
 		)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _),

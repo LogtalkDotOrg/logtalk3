@@ -46,6 +46,10 @@ for updated predicates in `user`.
 * FIXED: The compiler to not create object and category `calls/2` properties
 for built-in database predicate calls updating predicates in `user`.
 
+* FIXED: False positive missing predicate linter warnings in `logtalk_make/1`
+calls for the `check` target when analyzing `(^^)/1` and  `(::)/1` calls from
+objects playing the role of instances.
+
 Documentation
 -------------
 
