@@ -128,6 +128,9 @@ to the built-in database methods.
 predicates listed in `uses/2` or `use_module/2` directives when aliases
 are defined.
 
+* FIXED: The `diagrams` tool predicate call cross-referencing diagrams to
+ensure that caller nodes are not created for auxiliary predicates.
+
 Ports
 -----
 

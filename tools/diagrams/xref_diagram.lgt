@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:68:0,
+		version is 2:68:1,
 		author is 'Paulo Moura',
-		date is 2023-12-25,
+		date is 2024-03-12,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -459,9 +459,11 @@
 			;	Caller = (From::Predicate)
 			)
 		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
-			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
-			Caller = CallerNonTerminal
-		;	Caller = Caller0
+			\+ member(auxiliary, CallerDefinesProperties),
+			(	member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
+				Caller = CallerNonTerminal
+			;	Caller = Caller0
+			)
 		).
 
 	calls_super_predicate(Kind, Entity, Caller, Line, Callee) :-
@@ -493,9 +495,11 @@
 			)
 		;	% local predicate caller
 			entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
-			member(non_terminal(CallerNonTerminal), CallerProperties) ->
-			Caller = CallerNonTerminal
-		;	Caller = Caller0
+			\+ member(auxiliary, CallerProperties),
+			(	member(non_terminal(CallerNonTerminal), CallerProperties) ->
+				Caller = CallerNonTerminal
+			;	Caller = Caller0
+			)
 		),
 		% usually caller and callee are the same predicate but that's not required
 		(	entity_property(Kind, Entity, defines(Callee0, CalleeProperties)),
@@ -533,9 +537,11 @@
 			)
 		;	% local predicate caller
 			entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
-			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
-			Caller = CallerNonTerminal
-		;	Caller = Caller0
+			\+ member(auxiliary, CallerDefinesProperties),
+			(	member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
+				Caller = CallerNonTerminal
+			;	Caller = Caller0
+			)
 		).
 
 	calls_external_predicate(module, Entity, Caller, Line, Callee) :-
