@@ -35,9 +35,9 @@
 :- object(shell(_Interpreters_)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Victor Lagerkvist and Paulo Moura',
-		date is 2022-05-23,
+		date is 2024-03-12,
 		comment is 'Prolog shell for the interpreters.',
 		parnames is ['Interpreters']
 	]).
@@ -322,10 +322,6 @@
 	writeln(X) :-
 		write(X),
 		nl.
-
-	writeln(Stream, X) :-
-		write(Stream, X),
-		nl(Stream).
 
 :- end_object.
 
