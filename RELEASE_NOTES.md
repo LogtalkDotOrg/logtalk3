@@ -28,6 +28,11 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The reflection API now also includes `calls/2` object and category
+properties when the callers are auxiliary predicates. This change allows the
+`dead_code_scanner` tool to avoid false positives when reporting non called
+predicates.
+
 * ADDED: Implemented the object and category `updates/2` property `alias/2`
 and `non_terminal/1` predicate properties.
 

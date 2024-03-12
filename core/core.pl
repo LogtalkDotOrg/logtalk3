@@ -17275,10 +17275,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_remember_called_predicate'(runtime, _, _, _).
 
-'$lgt_remember_called_predicate'(compile(aux,_,_), _, _, _) :-
-	!.
-
-'$lgt_remember_called_predicate'(compile(user,_,_), Functor/Arity, TFunctor/TArity, Head) :-
+'$lgt_remember_called_predicate'(compile(_,_,_), Functor/Arity, TFunctor/TArity, Head) :-
 	% currently, the returned line numbers are for the start and end lines of the clause containing the call
 	(	Head = Object::Predicate ->
 		% call from the body of a Logtalk multifile predicate clause
@@ -17291,7 +17288,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Caller = HeadFunctor/HeadArity
 	),
 	functor(Predicate, HeadFunctor, HeadArity),
-	'$lgt_source_file_context'(File, Lines),
+	(	'$lgt_source_file_context'(File, Lines) ->
+		true
+	;	'$lgt_pp_file_paths_flags_'(_, _, File, _, _),
+		Lines = '-'(0, 0)
+	),
 	(	Caller == Functor/Arity ->
 		% recursive call
 		(	retract('$lgt_pp_predicate_recursive_calls_'(Functor, Arity, Count0)) ->
