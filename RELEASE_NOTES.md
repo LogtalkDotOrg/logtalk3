@@ -53,6 +53,9 @@ objects playing the role of instances.
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `diagrams` tool on known issues when
+generating predicate call cross-referencing diagrams.
+
 * FIXED: Handbook description of object and category `calls/2` and `updates/2`
 properties missing the `non_terminal/1` predicate property and wrongly
 specifying `as/2` instead of `alias/2` predicate property. 

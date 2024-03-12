@@ -717,6 +717,16 @@ loaded. When that is not the case, notably when generating
 cross-referencing diagrams, missing entities can result in incomplete
 diagrams.
 
+When generating entity predicate call cross-reference diagrams, caller
+nodes are not created for auxiliary predicates. For example, if the
+``meta_compiler`` library is used to optimize meta-predicates calls, the
+diagrams may show predicates that are not apparently called by any other
+predicate when the callers are from the optimized meta-predicate goals
+(which are called via library generated auxiliary predicates). A
+workaround in this case would be creating a dedicated loader file that
+doesn't load (and apply) the ``meta_compiler`` library when generating
+the diagrams.
+
 The zoom icons, ``zoom.png`` and ``zoom.svg`` have been designed by Xinh
 Studio:
 

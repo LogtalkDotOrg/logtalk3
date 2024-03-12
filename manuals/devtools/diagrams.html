@@ -984,6 +984,15 @@ the Prolog file and then load it and create the diagram:</p>
 loaded. When that is not the case, notably when generating
 cross-referencing diagrams, missing entities can result in incomplete
 diagrams.</p>
+<p>When generating entity predicate call cross-reference diagrams, caller
+nodes are not created for auxiliary predicates. For example, if the
+<code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code> library is used to optimize meta-predicates calls, the
+diagrams may show predicates that are not apparently called by any other
+predicate when the callers are from the optimized meta-predicate goals
+(which are called via library generated auxiliary predicates). A
+workaround in this case would be creating a dedicated loader file that
+doesn’t load (and apply) the <code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code> library when generating
+the diagrams.</p>
 <p>The zoom icons, <code class="docutils literal notranslate"><span class="pre">zoom.png</span></code> and <code class="docutils literal notranslate"><span class="pre">zoom.svg</span></code> have been designed by Xinh
 Studio:</p>
 <p><a class="reference external" href="https://www.iconfinder.com/xinhstudio">https://www.iconfinder.com/xinhstudio</a></p>
