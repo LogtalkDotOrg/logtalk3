@@ -128,6 +128,11 @@ to the built-in database methods.
 predicates listed in `uses/2` or `use_module/2` directives when aliases
 are defined.
 
+Ports
+-----
+
+* FIXED: The `metagol` port `learn_with_timeout/4` predicate definition.
+
 
 3.75.0 - February 27, 2024
 ==========================

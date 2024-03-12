@@ -2,7 +2,7 @@
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %
-%  SPDX-FileCopyrightText: 2018-2019 Paulo Moura
+%  SPDX-FileCopyrightText: 2018-2024 Paulo Moura
 %  SPDX-FileCopyrightText: 2016 Metagol authors
 %  SPDX-License-Identifier: BSD-3-Clause
 %
@@ -38,10 +38,10 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:24:2,
+		version is 0:24:3,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2024-03-11,
-		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
+		date is 2024-03-12,
+		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2024 Paulo Moura',
 		license is 'BSD 3-Clause License',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
 	]).
@@ -129,7 +129,7 @@
 		print_message(comment, metagol, unable_to_learn),
 		fail.
 
-	learn(Pos, Neg, Prog, Timeout) :-
+	learn_with_timeout(Pos, Neg, Prog, Timeout) :-
 		::timeout(Timeout),
 		call_with_timeout(learn(Pos,Neg,Prog), Timeout).
 
