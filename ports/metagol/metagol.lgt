@@ -68,10 +68,14 @@
 	]).
 
 	:- public(learn_with_timeout/4).
-	:- mode(learn_with_timeout(@list(example), @list(example), -list(term), +number), zero_or_one).
+	:- mode(learn_with_timeout(@list(example), @list(example), -list(term), +number), zero_or_one_or_error).
+	:- mode(learn_with_timeout(@list(example), @list(example), -list(term), -number), zero_or_one_or_error).
 	:- info(learn_with_timeout/4, [
-		comment is 'Learns from a set of positive examples and a set of negative examples and returns the learned program.',
-		argnames is ['PositiveExamples', 'NegativeExamples', 'Program', 'Timeout']
+		comment is 'Learns from a set of positive examples and a set of negative examples and returns the learned program constrained by the given timeout or its default value.',
+		argnames is ['PositiveExamples', 'NegativeExamples', 'Program', 'Timeout'],
+		exceptions is [
+			'Learning does not complete in the allowed time' - timeout(learn('PositiveExamples','NegativeExamples','Program'))
+		]
 	]).
 
 	:- public(program_to_clauses/2).
@@ -130,7 +134,10 @@
 		fail.
 
 	learn_with_timeout(Pos, Neg, Prog, Timeout) :-
-		::timeout(Timeout),
+		(	var(Timeout) ->
+			::timeout(Timeout)
+		;	true
+		),
 		call_with_timeout(learn(Pos,Neg,Prog), Timeout).
 
 	proveall(Atoms,Sig,Prog) :-

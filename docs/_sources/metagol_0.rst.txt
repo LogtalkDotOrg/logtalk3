@@ -113,7 +113,7 @@ Learns from a sequence of examples represented as a list of PositiveExamples/Neg
 ``learn_with_timeout/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Learns from a set of positive examples and a set of negative examples and returns the learned program.
+Learns from a set of positive examples and a set of negative examples and returns the learned program constrained by the given timeout or its default value.
 
 | **Compilation flags:**
 |    ``static``
@@ -121,7 +121,12 @@ Learns from a set of positive examples and a set of negative examples and return
 | **Template:**
 |    ``learn_with_timeout(PositiveExamples,NegativeExamples,Program,Timeout)``
 | **Mode and number of proofs:**
-|    ``learn_with_timeout(@list(example),@list(example),-list(term),+number)`` - ``zero_or_one``
+|    ``learn_with_timeout(@list(example),@list(example),-list(term),+number)`` - ``zero_or_one_or_error``
+|    ``learn_with_timeout(@list(example),@list(example),-list(term),-number)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    Learning does not complete in the allowed time:
+|        ``timeout(learn(PositiveExamples,NegativeExamples,Program))``
 
 
 ------------
