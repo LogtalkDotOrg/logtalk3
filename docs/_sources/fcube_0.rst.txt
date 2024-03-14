@@ -14,8 +14,8 @@ FCube: An Efficient Prover for Intuitionistic Propositional Logic.
 |    ``logtalk_load(fcube(loader))``
 
 | **Author:** Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.
-| **Version:** 5:0:0
-| **Date:** 2024-01-31
+| **Version:** 5:0:1
+| **Date:** 2024-03-314
 
 | **Copyright:** Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2020-2024 Paulo Moura
 | **License:** GNU GPL 2.0 or later version
@@ -43,6 +43,23 @@ FCube: An Efficient Prover for Intuitionistic Propositional Logic.
 
 Public predicates
 -----------------
+
+.. index:: gnu/0
+.. _fcube/0::gnu/0:
+
+``gnu/0``
+^^^^^^^^^
+
+Prints banner with copyright and license information.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``gnu`` - ``one``
+
+
+------------
 
 .. index:: fcube/0
 .. _fcube/0::fcube/0:

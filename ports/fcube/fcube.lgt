@@ -27,12 +27,18 @@
 :- object(fcube).
 
 	:- info([
-		version is 5:0:0,
+		version is 5:0:1,
 		author is 'Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.',
-		date is 2024-01-31,
+		date is 2024-03-314,
 		copyright is 'Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2020-2024 Paulo Moura',
 		license is 'GNU GPL 2.0 or later version',
 		comment is 'FCube: An Efficient Prover for Intuitionistic Propositional Logic.'
+	]).
+
+	:- public(gnu/0).
+	:- mode(gnu, one).
+	:- info(gnu/0, [
+		comment is 'Prints banner with copyright and license information.'
 	]).
 
 	:- public(fcube/0).
@@ -90,7 +96,8 @@
 	****************************/
 
 	gnu :-
-		writeln('This is Fcube\nCopyright (C) 2012'),
+		writeln('This is Fcube\nCopyright (C) 2012, 2020-2024'),
+		writeln('Paulo Moura,        email: pmoura@logtalk.org,'),
 		writeln('Mauro Ferrari,      email: mauro.ferrari@uninsubria.it,'),
 		writeln('Camillo Fiorentini, email: fiorenti@dsi.unimi.it'),
 		writeln('Guido Fiorino,      email: guido.fiorino@unimib.it'),
