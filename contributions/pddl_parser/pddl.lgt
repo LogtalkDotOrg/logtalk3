@@ -56,9 +56,9 @@
 	imports(read_file)).
 
 	:- info([
-		version is 1:2:1,
+		version is 1:2:2,
 		author is 'Robert Sasak, Charles University in Prague. Adapted to Logtalk by Paulo Moura.',
-		date is 2021-10-25,
+		date is 2024-03-14,
 		comment is 'Simple parser of PDDL 3.0 files.'
 	]).
 
@@ -205,6 +205,7 @@
 	type(PrimitiveType) -->
 		primitive_type(PrimitiveType).
 
+	:- meta_non_terminal(function_typed_list(1, *)).
 	function_typed_list(W, [F| Ls])	-->
 		oneOrMore(W, L), ['-'], !, function_type(T), function_typed_list(W, Ls),
 		{F =.. [T| L]}.	%:typing
@@ -392,41 +393,41 @@
 
 %	constraints(Constraints) -->
 %		['(', ':', constraints], pref_con_GD(Constraints), [')'].					%:constraints
-
-	pref_con_GD(and(P)) -->
-		['(', and], zeroOrMore(pref_con_GD, P), [')'].
+%
+%	pref_con_GD(and(P)) -->
+%		['(', and], zeroOrMore(pref_con_GD, P), [')'].
 %	pref_con_GD(forall(L, P)) -->
 %		['(', forall, '('], typed_list(variable, L), [')'], pref_con_GD(P), [')'].	%universal-preconditions
 %	pref_con_GD(preference(N, P)) -->
 %		['(', preference], (pref_name(N) ; []), con_GD(P), [')'].					%preferences
-	pref_con_GD(P) -->
-		con_GD(P).
-
-	con_GD(and(L)) -->
-		['(', and], zeroOrMore(con_GD, L), [')'].
-	con_GD(forall(L, P)) -->
-		['(', forall, '('], typed_list(variable, L), [')'], con_GD(P), [')'].
-	con_GD(at_end(P)) -->
-		['(', at, end], gd(P), [')'].
-	con_GD(always(P)) -->
-		['(', always], gd(P), [')'].
-	con_GD(sometime(P)) -->
-		['(', sometime], gd(P), [')'].
-	con_GD(within(N, P)) -->
-		['(', within], number(N), gd(P), [')'].
-
-	con_GD(at_most_once(P)) -->
-		['(', 'at-most-once'], gd(P), [')'].
-	con_GD(some_time_after(P1, P2)) -->
-		['(', 'sometime-after'], gd(P1), gd(P2), [')'].
-	con_GD(some_time_before(P1, P2)) -->
-		['(', 'sometime-before'], gd(P1), gd(P2), [')'].
-	con_GD(always_within(N, P1, P2)) -->
-		['(', 'always-within'], number(N), gd(P1), gd(P2), [')'].
-	con_GD(hold_during(N1, N2, P)) -->
-		['(', 'hold-during'], number(N1), number(N2), gd(P), [')'].
-	con_GD(hold_after(N, P)) -->
-		['(', 'hold-after'], number(N), gd(P), [')'].
+%	pref_con_GD(P) -->
+%		con_GD(P).
+%
+%	con_GD(and(L)) -->
+%		['(', and], zeroOrMore(con_GD, L), [')'].
+%	con_GD(forall(L, P)) -->
+%		['(', forall, '('], typed_list(variable, L), [')'], con_GD(P), [')'].
+%	con_GD(at_end(P)) -->
+%		['(', at, end], gd(P), [')'].
+%	con_GD(always(P)) -->
+%		['(', always], gd(P), [')'].
+%	con_GD(sometime(P)) -->
+%		['(', sometime], gd(P), [')'].
+%	con_GD(within(N, P)) -->
+%		['(', within], number(N), gd(P), [')'].
+%
+%	con_GD(at_most_once(P)) -->
+%		['(', 'at-most-once'], gd(P), [')'].
+%	con_GD(some_time_after(P1, P2)) -->
+%		['(', 'sometime-after'], gd(P1), gd(P2), [')'].
+%	con_GD(some_time_before(P1, P2)) -->
+%		['(', 'sometime-before'], gd(P1), gd(P2), [')'].
+%	con_GD(always_within(N, P1, P2)) -->
+%		['(', 'always-within'], number(N), gd(P1), gd(P2), [')'].
+%	con_GD(hold_during(N1, N2, P)) -->
+%		['(', 'hold-during'], number(N1), number(N2), gd(P), [')'].
+%	con_GD(hold_after(N, P)) -->
+%		['(', 'hold-after'], number(N), gd(P), [')'].
 
 	metric_spec(metric(Optimization, Expression)) -->
 		['(', ':', metric], optimization(Optimization), metric_f_exp(Expression), [')'].
@@ -459,6 +460,7 @@
 	length_spec([]) --> [not_defined].	% there is no definition???
 
 	% BNF operator <term>*
+	:- meta_non_terminal(zeroOrMore(1, *)).
 	zeroOrMore(W, R)  --> oneOrMore(W, R).
 	zeroOrMore(_, []) --> [].
 

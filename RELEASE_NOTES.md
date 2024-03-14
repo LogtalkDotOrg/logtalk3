@@ -144,6 +144,13 @@ Ports
 
 * FIXED: The `metagol` port `learn_with_timeout/4` predicate definition.
 
+Contributions
+-------------
+
+* FIXED: Unused predicate warnings when analyzing the `pddl_parser`,
+`verdi_neruda`, and `xml_parser` contributions using the `dead_code_scanner`
+tool.
+
 
 3.75.0 - February 27, 2024
 ==========================
