@@ -17,9 +17,9 @@
 :- object(xml).
 
 	:- info([
-		version is 3:8:3,
+		version is 3:8:4,
 		author is 'John Fletcher; adapted to Logtalk by Paulo Moura.',
-		date is 2023-05-08,
+		date is 2024-03-14,
 		copyright is 'Copyright (C) 2001-2005 Binding Time Limited, Copyright (C) 2005-2013 John Fletcher',
 		license is 'This program is offered free of charge, as unsupported source code. You may use it, copy it, distribute it, modify it or sell it without restriction, but entirely at your own risk.',
 		comment is 'Bi-directional XML parser.',
@@ -550,11 +550,11 @@
 		append( _Codes, [0'-,0'-|Minus], Plus ),
 		!.
 
-	nmtokens( [Name|Names] ) -->
-		call(spaces),
-		nmtoken( Name ),
-		nmtokens( Names ).
-	nmtokens( [] ) --> [].
+%	nmtokens( [Name|Names] ) -->
+%		call(spaces),
+%		nmtoken( Name ),
+%		nmtokens( Names ).
+%	nmtokens( [] ) --> [].
 
 	entity_value( Quote, Namespaces, String, [Code|Plus], Minus ) :-
 		(	Code == Quote ->
