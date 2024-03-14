@@ -100,6 +100,8 @@ float types from underflow errors.
 
 * FIXED: The `arbitrary` library tests when run with the GNU Prolog backend.
 
+* FIXED: Deleted unused non-terminals from the `number_grammars/1` object.
+
 Tools
 -----
 

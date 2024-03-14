@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- object(number_grammars(_Format_)).
 
 	:- info([
-		version is 0:2:1,
+		version is 0:2:2,
 		author is 'Paulo Moura',
-		date is 2022-10-08,
+		date is 2024-03-14,
 		comment is 'Number grammars.',
 		parnames is ['Format']
 	]).
@@ -252,12 +252,8 @@
 		;	{append(MantissaElements, RadixElements, NumberElements)}
 		).
 
-	mantissa(_Format_, Mantissa) -->
-		integer_elements(_Format_, Digits0), dot(_Format_, Dot), digit(_Format_, Digit1), digits(_Format_, Digits1),
-		{append(Digits0, [Dot, Digit1| Digits1], Mantissa)}.
-
-	radix(_Format_, [Exp| Elements]) -->
-		exp(_Format_, Exp), !, integer_elements(_Format_, Elements).
+	radix(_Format_, [E| Elements]) -->
+		e(_Format_, E), !, integer_elements(_Format_, Elements).
 	radix(_, []) -->
 		[].
 
@@ -280,17 +276,14 @@
 	dot(codes, 0'.) -->
 		[0'.].
 
-	exp(Exp) -->
-		exp(_Format_, Exp).
-
-	exp(chars, 'e') -->
+	e(chars, 'e') -->
 		['e'], !.
-	exp(chars, 'e') -->
+	e(chars, 'e') -->
 		['E'].
 
-	exp(codes, 0'e) -->
+	e(codes, 0'e) -->
 		[0'e], !.
-	exp(codes, 0'e) -->
+	e(codes, 0'e) -->
 		[0'E].
 
 :- end_object.
