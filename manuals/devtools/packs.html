@@ -581,6 +581,9 @@ An example of a registry specification object would be:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">license/1</span></code> argument must be an atom and should whenever possible
+be a license identifier as specified in the <a class="reference external" href="https://spdx.org/licenses/">SPDX
+standard</a>.</p>
 <p>Optionally, the pack object can also define a
 <code class="docutils literal notranslate"><span class="pre">note(Action,</span> <span class="pre">Version,</span> <span class="pre">Note)</span></code> predicate. The <code class="docutils literal notranslate"><span class="pre">Action</span></code> argument is an
 atom: <code class="docutils literal notranslate"><span class="pre">install</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, or <code class="docutils literal notranslate"><span class="pre">uninstall</span></code>. The <code class="docutils literal notranslate"><span class="pre">Note</span></code> argument

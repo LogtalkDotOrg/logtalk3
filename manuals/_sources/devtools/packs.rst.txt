@@ -505,6 +505,10 @@ An example of a registry specification object would be:
 
    :- end_object.
 
+The ``license/1`` argument must be an atom and should whenever possible
+be a license identifier as specified in the `SPDX
+standard <https://spdx.org/licenses/>`__.
+
 Optionally, the pack object can also define a
 ``note(Action, Version, Note)`` predicate. The ``Action`` argument is an
 atom: ``install``, ``update``, or ``uninstall``. The ``Note`` argument

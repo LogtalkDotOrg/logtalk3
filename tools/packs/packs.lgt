@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:69:0,
+		version is 0:69:1,
 		author is 'Paulo Moura',
-		date is 2024-02-29,
+		date is 2024-03-15,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1515,8 +1515,8 @@
 			fail
 		).
 	lint_check(license, _Pack, PackObject) :-
-		(	PackObject::license(_) ->
-			true
+		(	PackObject::license(License),
+			atom(License) ->
 		;	print_message(warning, packs, @'The license/1 predicate is missing or failed safety check!'),
 			fail
 		).

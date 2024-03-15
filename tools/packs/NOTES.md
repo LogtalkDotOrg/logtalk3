@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-``packs``
-=========
+`packs`
+=======
 
 This tool provides predicates for downloading, installing, upgrading, and
 uninstalling third-party libraries and applications, generically known as
@@ -293,11 +293,11 @@ An example of a registry specification object would be:
 
 	:- end_object.
 
-Optionally, the registry object can also define a ``note(Action, Note)``
-predicate. The ``Action`` argument is an atom: ``add``, ``update``, or
-``delete``. The ``Note`` argument is also an atom. The tool will print
+Optionally, the registry object can also define a `note(Action, Note)`
+predicate. The `Action` argument is an atom: `add`, `update`, or
+`delete`. The `Note` argument is also an atom. The tool will print
 any available notes when executing one of the registry actions. See the
-``registry_protocol`` documentation for more details.
+`registry_protocol` documentation for more details.
 
 The registry directory should also contain `LICENSE` and `README.md` files
 (individual packs can use a different license, however). The path to the
@@ -467,11 +467,14 @@ registry specification object would be:
 
 	:- end_object.
 
-Optionally, the pack object can also define a ``note(Action, Version, Note)``
-predicate. The ``Action`` argument is an atom: ``install``, ``update``, or
-``uninstall``. The ``Note`` argument is also an atom. The tool will print
+The `license/1` argument must be an atom and should whenever possible be
+a license identifier as specified in the [SPDX standard](https://spdx.org/licenses/).
+
+Optionally, the pack object can also define a `note(Action, Version, Note)`
+predicate. The `Action` argument is an atom: `install`, `update`, or
+`uninstall`. The `Note` argument is also an atom. The tool will print
 any available notes when executing one of the registry actions. See the
-``pack_protocol`` documentation for more details.
+`pack_protocol` documentation for more details.
 
 The pack sources must be available either as a local directory (when using
 a `file://` URL) or for downloading as a supported archive. The checksum for

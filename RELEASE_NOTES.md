@@ -58,6 +58,9 @@ objects playing the role of instances.
 Documentation
 -------------
 
+* IMPROVED: Clarify that license information in `info/1` directives and pack
+manifest files should preferably use a SPDX standard license identifier.
+
 * IMPROVED: Documentation of the `diagrams` tool on known issues when
 generating predicate call cross-referencing diagrams.
 

@@ -38,11 +38,11 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:24:3,
+		version is 0:24:4,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2024-03-12,
+		date is 2024-03-15,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2024 Paulo Moura',
-		license is 'BSD 3-Clause License',
+		license is 'BSD-3-Clause',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
 	]).
 

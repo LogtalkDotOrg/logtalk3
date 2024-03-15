@@ -31,7 +31,7 @@
 		author is 'Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.',
 		date is 2024-03-314,
 		copyright is 'Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2020-2024 Paulo Moura',
-		license is 'GNU GPL 2.0 or later version',
+		license is 'GPL-2.0-or-later',
 		comment is 'FCube: An Efficient Prover for Intuitionistic Propositional Logic.'
 	]).
 
