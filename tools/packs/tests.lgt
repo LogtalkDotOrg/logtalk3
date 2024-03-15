@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:25:0,
+		version is 0:25:1,
 		author is 'Paulo Moura',
-		date is 2023-08-28,
+		date is 2024-03-15,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -175,10 +175,12 @@
 
 	% registry readme
 
-	test(packs_registries_readme_2_01, true(Readme == File)) :-
+	test(packs_registries_readme_2_01, true((Readme == FileUpperCase; Readme == FileLowerCase))) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/README.md', File),
+		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/README.md', FileUpperCase),
+		% some backends convert paths to lower case on Windows
+		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/readme.md', FileLowerCase),
 		registries::readme(local_1_d, Readme).
 
 	test(packs_registries_readme_1_01, true) :-
