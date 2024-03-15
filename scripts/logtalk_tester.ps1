@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on January 26, 2024
+##   Last updated on March 15, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 13.1")
+	Write-Output ($myName + " 13.2")
 }
 
 Function Run-TestSet() {
@@ -196,6 +196,9 @@ param(
 		}
 	}
 	if (Select-String -Path $results/$name.errors -Pattern "Likely bug in the backend Prolog compiler. Please file a bug report." -SimpleMatch -Quiet) {
+		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
+		return 5
+	} elseif ($LASTEXITCODE -eq 0 -and !(Test-Path $results/$name.totals -PathType Leaf)) {
 		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
 		return 5
 	} elseif ($LASTEXITCODE -eq 0 -and

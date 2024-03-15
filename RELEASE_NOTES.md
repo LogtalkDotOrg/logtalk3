@@ -144,6 +144,9 @@ are defined.
 * FIXED: The `diagrams` tool predicate call cross-referencing diagrams to
 ensure that caller nodes are not created for auxiliary predicates.
 
+* FIXED: The `logtalk_tester.ps1` script reporting of broken test sets when
+the tests cannot be compiled due to syntax errors.
+
 Examples
 --------
 
