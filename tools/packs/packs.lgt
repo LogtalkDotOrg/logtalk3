@@ -1517,6 +1517,7 @@
 	lint_check(license, _Pack, PackObject) :-
 		(	PackObject::license(License),
 			atom(License) ->
+			true
 		;	print_message(warning, packs, @'The license/1 predicate is missing or failed safety check!'),
 			fail
 		).
