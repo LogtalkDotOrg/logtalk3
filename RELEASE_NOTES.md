@@ -141,6 +141,11 @@ are defined.
 * FIXED: The `diagrams` tool predicate call cross-referencing diagrams to
 ensure that caller nodes are not created for auxiliary predicates.
 
+Examples
+--------
+
+* ADDED: Additional tests for the `hooks` example.
+
 Ports
 -----
 
