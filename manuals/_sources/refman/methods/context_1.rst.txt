@@ -36,9 +36,9 @@ Description
 Returns the execution context for a predicate clause using the term
 ``logtalk(Head,ExecutionContext)`` where ``Head`` is the head of the
 clause containing the call. This private predicate is mainly used for
-providing a default error context when type-checking predicate
-arguments. The ``ExecutionContext`` term should be regarded as an opaque
-term, which can be decoded using the
+providing an error context when type-checking predicate arguments. The
+``ExecutionContext`` term should be regarded as an opaque term, which
+can be decoded using the
 :ref:`logtalk::execution_context/7 <apis:logtalk/0::execution_context/7>`
 predicate. Calls to this predicate are inlined at compilation time.
 
