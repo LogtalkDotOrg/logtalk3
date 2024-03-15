@@ -148,11 +148,11 @@
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">sender</span>(<span class="nv">Sender</span>)
 </pre></div>
 </div>
-<p>Returns the object that has sent the message under processing. This
-private method is translated into a unification between its argument and
+<p>Unifies its argument with the object that sent the message under processing.
+This private method is translated into a unification between its argument and
 the corresponding implicit context argument in the predicate clause making
-the call. This unification occurs at the clause head when the argument
-is not instantiated (the most common case).</p>
+the call. This unification occurs at the clause head when the argument is not
+bound at compile time (the most common case).</p>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Link to this heading"></a></h2>
