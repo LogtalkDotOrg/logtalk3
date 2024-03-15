@@ -677,9 +677,9 @@ Push-Location $results
 
 $testsetskipped = (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped').count + (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)').count
 
-$timeouts = (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_TIMEOUT').count
-$crashed =  (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_CRASH').count
-$broken =   (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'LOGTALK_BROKEN').count
+$timeouts = (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT').count
+$crashed =  (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH').count
+$broken =   (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN').count
 
 $testsetruns = $testsets - $testsetskipped - $timeouts - $crashed - $broken
 
