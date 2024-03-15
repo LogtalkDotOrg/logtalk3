@@ -153,6 +153,9 @@ Contributions
 `verdi_neruda`, and `xml_parser` contributions using the `dead_code_scanner`
 tool.
 
+* FIXED: Linter warnings for the `verdi_neruda` contribution with backends
+not providing a `statistics/2` built-in predicate.
+
 
 3.75.0 - February 27, 2024
 ==========================

@@ -35,9 +35,9 @@
 :- object(shell(_Interpreters_)).
 
 	:- info([
-		version is 1:1:2,
+		version is 1:1:3,
 		author is 'Victor Lagerkvist and Paulo Moura',
-		date is 2024-03-12,
+		date is 2024-03-15,
 		comment is 'Prolog shell for the interpreters.',
 		parnames is ['Interpreters']
 	]).
@@ -217,6 +217,7 @@
 			\+ Interpreter::prove(Goal, 1000000, Database),
 			statistics(Statistic, After),
 			Res is Res0 + (After - Before).
+
 	:- endif.
 
 	benchmark(Interpreter, Goal, Inferences, Database) :-
@@ -299,19 +300,25 @@
 		write('and'), nl,
 		write_body(Gs).
 
-	write_benchmark(Stream, Interpreter, Statistic, N, Goal, Database) :-
-		write(Stream, ' '),
-		(	benchmark(Interpreter, Statistic, N, Goal, Res, Database), !
-		;	benchmark_failure(Interpreter, Statistic, N, Goal, Res, Database),
-			write(Stream, '(F) ')
-		),
-		write(Stream, Goal),
-		write(Stream, '-'),
-		write_statistics(Stream, Statistic, N, Res).
+	:- if(predicate_property(statistics(_,_), built_in)).
+
+		write_benchmark(Stream, Interpreter, Statistic, N, Goal, Database) :-
+			write(Stream, ' '),
+			(	benchmark(Interpreter, Statistic, N, Goal, Res, Database) ->
+				true
+			;	benchmark_failure(Interpreter, Statistic, N, Goal, Res, Database),
+				write(Stream, '(F) ')
+			),
+			write(Stream, Goal),
+			write(Stream, '-'),
+			write_statistics(Stream, Statistic, N, Res).
+
+	:- endif.
 
 	write_benchmark(Stream, Interpreter, Goal, Database) :-
 		write(Stream, ' '),
-		(	benchmark(Interpreter, Goal, Inferences, Database), !
+		(	benchmark(Interpreter, Goal, Inferences, Database) ->
+			true
 		;	benchmark_failure(Interpreter,  Goal, Inferences, Database),
 			write(Stream, '(F) ')
 		),
