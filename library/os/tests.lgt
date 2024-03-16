@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:36:0,
+		version is 0:36:1,
 		author is 'Paulo Moura',
-		date is 2024-02-26,
+		date is 2024-03-16,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -303,16 +303,12 @@
 	test(os_working_directory_01, true(atom(WorkingDirectory))) :-
 		os::working_directory(WorkingDirectory).
 
-	test(os_change_directory_01, true) :-
+	test(os_change_directory_01, true((WorkingDirectory == Directory; WorkingDirectory == DirectoryNoSlash))) :-
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::change_directory(Directory),
 		os::working_directory(WorkingDirectory),
-		(	WorkingDirectory == Directory ->
-			true
-		;	sub_atom(Directory, 0, _, 1, DirectoryNoSlash),
-			WorkingDirectory == DirectoryNoSlash
-		).
+		sub_atom(Directory, 0, _, 1, DirectoryNoSlash).
 
 	test(os_change_directory_02, error(_)) :-
 		os::change_directory(non_existing_directory).
@@ -635,7 +631,10 @@
 
 	only_linux_and_bsd_systems :-
 		\+ os::operating_system_type(windows),
-		\+ os::shell('uname -s | grep -q Darwin').
+		(	shell('uname | grep -q Linux') ->
+			true
+		;	shell('uname | grep -q BSD')
+		).
 
 	only_posix_systems :-
 		os::operating_system_type(unix).

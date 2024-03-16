@@ -14,11 +14,11 @@ Simple CHR interpreter/debugger based on the refined operational semantics of CH
 |    ``logtalk_load(toychr(loader))``
 
 | **Author:** Gregory J. Duck; adapted to Logtalk by Paulo Moura.
-| **Version:** 0:7:0
-| **Date:** 2023-10-02
+| **Version:** 0:7:1
+| **Date:** 2024-03-15
 
-| **Copyright:** Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura
-| **License:** GNU GPL 2.0 or later version
+| **Copyright:** Copright 2004 Gregory J. Duck; Copyright 2019-2024 Paulo Moura
+| **License:** GPL-2.0-or-later
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

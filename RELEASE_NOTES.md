@@ -105,6 +105,9 @@ float types from underflow errors.
 
 * FIXED: Deleted unused non-terminals from the `number_grammars/1` object.
 
+* IMPROVED: Implementation of the `os` library predicates `full_device_path/1`
+and `read_only_device_path/1`.
+
 Tools
 -----
 

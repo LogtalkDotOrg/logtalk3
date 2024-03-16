@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -50,9 +50,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:100:0,
+		version is 1:100:1,
 		author is 'Paulo Moura',
-		date is 2024-02-26,
+		date is 2024-03-16,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2034,7 +2034,9 @@
 		).
 
 	full_device_path(Path) :-
-		(	shell('uname | grep -q Linux') ->
+		(	operating_system_type(windows) ->
+			fail
+		;	shell('uname | grep -q Linux') ->
 			Path = '/dev/full'
 		;	shell('uname | grep -q BSD') ->
 			Path = '/dev/full'
@@ -2042,7 +2044,7 @@
 		).
 
 	read_only_device_path('/dev/urandom') :-
-		shell('uname -s | grep -q Darwin').
+		operating_system_name('Darwin').
 
 	ensure_directory(Directory) :-
 		(	directory_exists(Directory) ->
