@@ -533,13 +533,19 @@
 		os::shell(cd).
 
 	test(os_shell_1_02, false) :-
-		os::shell('cd non_existing_directory > /dev/null 2>&1').
+		(	os::operating_system_type(windows) ->
+			os::shell('cd non_existing_directory 2>&1> nul')
+		;	os::shell('cd non_existing_directory > /dev/null 2>&1')
+		).
 
 	test(os_shell_2_01, true(Exit == 0)) :-
 		os::shell(cd, Exit).
 
 	test(os_shell_2_02, true(Exit \== 0)) :-
-		os::shell('cd non_existing_directory > /dev/null 2>&1', Exit).
+		(	os::operating_system_type(windows) ->
+			os::shell('cd non_existing_directory 2>&1> nul', Exit)
+		;	os::shell('cd non_existing_directory > /dev/null 2>&1', Exit)
+		).
 
 	% os_types category tests
 
@@ -640,6 +646,7 @@
 		os::operating_system_type(unix).
 
 	only_mac_systems :-
+		\+ os::operating_system_type(windows),
 		os::shell('uname -s | grep -q Darwin').
 
 	only_windows_systems :-
