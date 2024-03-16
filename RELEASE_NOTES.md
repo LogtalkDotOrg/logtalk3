@@ -170,6 +170,11 @@ tool.
 * FIXED: Linter warnings for the `verdi_neruda` contribution with backends
 not providing a `statistics/2` built-in predicate.
 
+Tests
+-----
+
+* IMPROVED: Tests for the standard `stream_property/2` built-in predicate.
+
 
 3.75.0 - February 27, 2024
 ==========================
