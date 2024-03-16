@@ -198,7 +198,10 @@ param(
 	if (Select-String -Path $results/$name.errors -Pattern "Likely bug in the backend Prolog compiler. Please file a bug report." -SimpleMatch -Quiet) {
 		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
 		return 5
-	} elseif ($LASTEXITCODE -eq 0 -and !(Test-Path $results/$name.totals -PathType Leaf)) {
+	} elseif ($LASTEXITCODE -eq 0 -and
+		!(Test-Path $results/$name.totals -PathType Leaf) -and
+		!(Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
+		!(Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
 		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
 		return 5
 	} elseif ($LASTEXITCODE -eq 0 -and
