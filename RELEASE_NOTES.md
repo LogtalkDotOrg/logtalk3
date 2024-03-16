@@ -178,6 +178,9 @@ Tests
 
 * IMPROVED: Tests for the standard `stream_property/2` built-in predicate.
 
+* FIXED: Tests for the `get_char/2`, `get_code/2`, and `peek_char/2` standard
+predicates that caused failures when run on Windows.
+
 
 3.75.0 - February 27, 2024
 ==========================

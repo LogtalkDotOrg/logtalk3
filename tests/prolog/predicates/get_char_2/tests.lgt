@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:12:1,
 		author is 'Paulo Moura',
-		date is 2022-10-30,
+		date is 2024-03-16,
 		comment is 'Unit tests for the ISO Prolog standard get_char/1-2 built-in predicates.'
 	]).
 
@@ -109,7 +109,7 @@
 		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_get_char_2_16) :-
-		^^file_path(t, Path),
+		^^file_path(tt, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, S, [eof_action(eof_code)]),
 		{get_char(S, C1), get_char(S, C1), get_char(S, C2)},
@@ -117,7 +117,7 @@
 		stream_property(S, end_of_stream(past)).
 
 	succeeds(sics_get_char_2_17) :-
-		^^file_path(t, Path),
+		^^file_path(tb, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, S),
 		catch({get_char(S, _)}, Error, subsumes_term(error(representation_error(character),_), Error)).
@@ -147,7 +147,8 @@
 		{get_char(st_i, ab)}.
 
 	cleanup :-
-		^^clean_file(t),
+		^^clean_file(tt),
+		^^clean_file(tb),
 		^^clean_text_input,
 		^^clean_binary_input,
 		^^clean_text_output.
