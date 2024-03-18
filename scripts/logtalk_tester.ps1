@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 13.3")
+	Write-Output ($myName + " 13.4")
 }
 
 Function Run-TestSet() {
@@ -285,7 +285,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are b, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -o output (valid values are verbose and minimal; default is " + $o + ")")
@@ -336,11 +336,6 @@ Function Check-Parameters() {
 		$script:prolog = 'B-Prolog'
 		$script:logtalk = "bplgt.ps1"
 		$script:logtalk_option = "-g"
-	} elseif ($p -eq "ciao") {
-		$script:backend = 'ciao'
-		$script:prolog = 'Ciao Prolog'
-		$script:logtalk = "ciaolgt.ps1"
-		$script:logtalk_option = "-e"
 	} elseif ($p -eq "cx") {
 		$script:backend = 'cx'
 		$script:prolog = 'CxProlog'
