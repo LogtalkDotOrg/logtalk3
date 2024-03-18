@@ -136,6 +136,9 @@ processes on exit.
 * IMPROVED: The `tutor` tool explanation for permission errors when trying to
 declare a category predicate as both multifile and dynamic.
 
+* IMPROVED: The `packs` tool to clean the pack installation directory when
+restoring or (re)installing a pack from an archive.
+
 * FIXED: The `packs` tool lint checking of pack manifest notes.
 
 * FIXED: Test for the `packs` tool when running on Windows with backends that

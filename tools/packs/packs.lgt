@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:69:1,
+		version is 0:70:0,
 		author is 'Paulo Moura',
-		date is 2024-03-15,
+		date is 2024-03-18,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1986,6 +1986,25 @@
 	uninstall_pack(Registry, Pack, Options) :-
 		directory(Pack, Directory0),
 		internal_os_path(Directory0, Directory),
+		delete_pack_installation_directory_command(Directory, Options, Command),
+		^^command(Command, pack_uninstall_failed(Pack, Directory)),
+		(	^^option(clean(true), Options) ->
+			delete_archives(Registry, Pack)
+		;	true
+		).
+
+	clean_pack_installation_directory(Pack, Path, Options, OSPath) :-
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Packs),
+		path_concat(Packs, Pack, Path),
+		internal_os_path(Path, OSPath),
+		(	\+ directory_exists(Path) ->
+			true
+		;	delete_pack_installation_directory_command(OSPath, Options, Command),
+			^^command(Command, pack_directory_clean_failed(Pack, Path))
+		).
+
+	delete_pack_installation_directory_command(Directory, Options, Command) :-
 		(	operating_system_type(windows) ->
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['del /f /s /q "', Directory, '" && rmdir /s /q "',       Directory, '"'],       Command)
@@ -1996,11 +2015,6 @@
 				atomic_list_concat(['rm -rvf "', Directory, '"'], Command)
 			;	atomic_list_concat(['rm -rf "',  Directory, '"'], Command)
 			)
-		),
-		^^command(Command, pack_uninstall_failed(Pack, Directory)),
-		(	^^option(clean(true), Options) ->
-			delete_archives(Registry, Pack)
-		;	true
 		).
 
 	make_pack_installation_directory(Pack, Path, OSPath) :-
@@ -2087,7 +2101,8 @@
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).
 
 	uncompress(Pack, Archive, Path, Options, Downloader) :-
-		make_pack_installation_directory(Pack, Path, OSPath),
+		clean_pack_installation_directory(Pack, Path, Options, OSPath),
+		make_directory_path(Path),
 		^^tar_command(Tar),
 		^^option(tar(TarExtraOptions), Options),
 		(	Downloader == git ->

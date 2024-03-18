@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:32:1,
+		version is 0:33:0,
 		author is 'Paulo Moura',
-		date is 2023-10-31,
+		date is 2024-03-18,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -218,6 +218,9 @@
 
 	message_tokens(pack_uninstall_failed(Pack, Directory)) -->
 		['Pack uninstall failed: ~q (~q)'-[Pack, Directory], nl].
+
+	message_tokens(pack_directory_clean_failed(Pack, Directory)) -->
+		['Pack directory clean failed: ~q (~q)'-[Pack, Directory], nl].
 
 	% pack update messages
 
