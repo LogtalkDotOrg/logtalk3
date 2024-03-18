@@ -162,6 +162,9 @@ ensure that caller nodes are not created for auxiliary predicates.
 * FIXED: The `logtalk_tester.ps1` script reporting of broken test sets when
 the tests cannot be compiled due to syntax errors.
 
+* FIXED: Workaround a XSB command-line options handling bug on Windows in the
+`logtalk_tester.ps1` script.
+
 Examples
 --------
 

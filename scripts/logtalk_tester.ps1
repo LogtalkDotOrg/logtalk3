@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 13.4")
+	Write-Output ($myName + " 13.5")
 }
 
 Function Run-TestSet() {
@@ -399,7 +399,7 @@ Function Check-Parameters() {
 		$script:prolog = 'XSB'
 		$script:logtalk = "xsblgt.ps1"
 		$script:logtalk_option = "-e"
-		$script:dot = "."
+		$script:dot = " ."
 	} elseif ($p -eq "yap") {
 		$script:backend = 'yap'
 		$script:prolog = 'YAP'
