@@ -139,6 +139,9 @@ declare a category predicate as both multifile and dynamic.
 * IMPROVED: The `packs` tool to clean the pack installation directory when
 restoring or (re)installing a pack from an archive.
 
+* FIXED: The `packs` tool to respect the `verbose(true)` option when adding
+or updating packs and registries from directories.
+
 * FIXED: The `packs` tool lint checking of pack manifest notes.
 
 * FIXED: Test for the `packs` tool when running on Windows with backends that

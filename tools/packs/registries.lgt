@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:57:0,
+		version is 0:57:1,
 		author is 'Paulo Moura',
-		date is 2023-08-28,
+		date is 2024-03-18,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -455,10 +455,16 @@
 			^^command(Command, registry_cloning_failed(Registry, URL))
 		;	operating_system_type(windows) ->
 			internal_os_path(Directory, OSDirectory),
-			atomic_list_concat(['xcopy /E /I "', OSDirectory, '" "', OSPath, '"'], Command),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['xcopy /E /I /Y "', OSDirectory, '" "', OSPath, '"'], Command)
+			;	atomic_list_concat(['xcopy /E /I /Y /Q "', OSDirectory, '" "', OSPath, '"'], Command)
+			),
 			^^command(Command, registry_directory_copy_failed(Registry, URL))
 		;	internal_os_path(Directory, OSDirectory),
-			atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['cp -R -v "', OSDirectory, '/." "', OSPath, '"'], Command)
+			;	atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command)
+			),
 			^^command(Command, registry_directory_copy_failed(Registry, URL))
 		).
 
@@ -595,12 +601,18 @@
 		;	operating_system_type(windows) ->
 			internal_os_path(Directory, OSDirectory),
 			internal_os_path(Path, OSPath),
-			atomic_list_concat(['xcopy /E /I /Y "', OSDirectory, '" "', OSPath, '"'], Command),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['xcopy /e /i /y "', OSDirectory, '" "', OSPath, '"'], Command)
+			;	atomic_list_concat(['xcopy /e /i /y /q "', OSDirectory, '" "', OSPath, '"'], Command)
+			),
 			^^command(Command, registry_directory_copy_failed(Registry, URL)),
 			Updated = true
 		;	internal_os_path(Directory, OSDirectory),
 			internal_os_path(Path, OSPath),
-			atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['cp -R -v "', OSDirectory, '/." "', OSPath, '"'], Command)
+			;	atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command)
+			),
 			^^command(Command, registry_directory_copy_failed(Registry, URL)),
 			Updated = true
 		).
