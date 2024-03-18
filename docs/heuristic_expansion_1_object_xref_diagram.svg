@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-262.75 622,-262.75 622,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk third&#45;party contributions</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object heuristic_expansion/1</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;16, 16:08</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;18, 10:34</text>
 <g id="clust1" class="cluster">
 <title>cluster_heuristic_expansion_1_object</title>
 <g id="a_clust1"><a xlink:title="heuristic_expansion(Mode)">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 598,-49.75 598,-49.75 604,-49.75 610,-55.75 610,-61.75 610,-61.75 610,-238.75 610,-238.75 610,-244.75 604,-250.75 598,-250.75 598,-250.75 20,-250.75 20,-250.75 14,-250.75 8,-244.75 8,-238.75 8,-238.75 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt">
 <text text-anchor="start" x="20" y="-233.25" font-family="Monospace" font-size="10.00" fill="dimgray">heuristic_expansion(Mode)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- goal_expansion/2 -->
 <g id="node1" class="node">
 <title>goal_expansion/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L47">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L47">
 <polygon fill="cornsilk" stroke="black" points="159,-213.5 25,-213.5 25,-177.5 159,-177.5 159,-213.5"/>
 <text text-anchor="start" x="32.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="38" y="-195.55" font-family="Monospace" font-size="11.00">goal_expansion/2</text>
@@ -52,12 +52,12 @@
 <!-- goal_expansion/2&#45;&gt;^^goal_expansion/2 -->
 <g id="edge2" class="edge">
 <title>goal_expansion/2&#45;&gt;^^goal_expansion/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L47" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M92,-177.17C92,-158.76 92,-129.35 92,-107.46"/>
 <polygon fill="black" stroke="black" points="95.5,-107.71 92,-97.71 88.5,-107.71 95.5,-107.71"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L47">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L47">
 <text text-anchor="start" x="92" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -65,7 +65,7 @@
 <!-- term_expansion/2 -->
 <g id="node2" class="node">
 <title>term_expansion/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50">
 <polygon fill="cornsilk" stroke="black" points="449,-213.5 315,-213.5 315,-177.5 449,-177.5 449,-213.5"/>
 <text text-anchor="start" x="322.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="328" y="-195.55" font-family="Monospace" font-size="11.00">term_expansion/2</text>
@@ -93,12 +93,12 @@
 <!-- term_expansion/2&#45;&gt;list::length/2 -->
 <g id="edge3" class="edge">
 <title>term_expansion/2&#45;&gt;list::length/2</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="calls">
 <path fill="none" stroke="black" d="M361.34,-177.17C337.97,-157.57 299.72,-125.49 273.28,-103.31"/>
 <polygon fill="black" stroke="black" points="275.87,-100.91 265.96,-97.17 271.37,-106.28 275.87,-100.91"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50">
 <text text-anchor="start" x="317" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -120,12 +120,12 @@
 <!-- term_expansion/2&#45;&gt;list::append/3 -->
 <g id="edge4" class="edge">
 <title>term_expansion/2&#45;&gt;list::append/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="calls">
 <path fill="none" stroke="black" d="M382,-177.17C382,-158.76 382,-129.35 382,-107.46"/>
 <polygon fill="black" stroke="black" points="385.5,-107.71 382,-97.71 378.5,-107.71 385.5,-107.71"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50">
 <text text-anchor="start" x="382" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -144,12 +144,12 @@
 <!-- term_expansion/2&#45;&gt;::flatten_goals/3 -->
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;::flatten_goals/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="calls">
 <path fill="none" stroke="black" d="M404.16,-177.17C429.33,-157.48 470.6,-125.21 498.97,-103.02"/>
 <polygon fill="black" stroke="black" points="500.78,-106.05 506.5,-97.13 496.47,-100.53 500.78,-106.05"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c8ad04ad7ff282145be143890145518da33df328/contributions/verdi_neruda/heuristic_expansion.lgt#L50">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a96ddff2270b66c7a57bb1c972486ef211b1570a/contributions/verdi_neruda/heuristic_expansion.lgt#L50">
 <text text-anchor="start" x="460" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
