@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 13.5")
+	Write-Output ($myName + " 13.6")
 }
 
 Function Run-TestSet() {
@@ -334,22 +334,22 @@ Function Check-Parameters() {
 	} elseif ($p -eq "b") {
 		$script:backend = 'b'
 		$script:prolog = 'B-Prolog'
-		$script:logtalk = "bplgt.ps1"
+		$script:logtalk = "bplgt"
 		$script:logtalk_option = "-g"
 	} elseif ($p -eq "cx") {
 		$script:backend = 'cx'
 		$script:prolog = 'CxProlog'
-		$script:logtalk = "cxlgt.ps1"
+		$script:logtalk = "cxlgt"
 		$script:logtalk_option = "--goal"
 	} elseif ($p -eq "eclipse") {
 		$script:backend = eclipse
 		$script:prolog = 'ECLiPSe'
-		$script:logtalk = "eclipselgt.ps1"
+		$script:logtalk = "eclipselgt"
 		$script:logtalk_option = "-e"
 	} elseif ($p -eq "gnu") {
 		$script:backend = 'gnu'
 		$script:prolog = 'GNU Prolog'
-		$script:logtalk = "gplgt.ps1"
+		$script:logtalk = "gplgt"
 		$script:logtalk_option = "--query-goal"
 	} elseif ($p -eq "gnunc") {
 		$script:backend = 'gnu'
@@ -359,24 +359,24 @@ Function Check-Parameters() {
 	} elseif ($p -eq "ji") {
 		$script:backend = 'ji'
 		$script:prolog = 'JIProlog'
-		$script:logtalk = "jiplgt.ps1"
+		$script:logtalk = "jiplgt"
 		$script:logtalk_option = "-n -g"
 	} elseif ($p -eq "lvm") {
 		$script:backend = 'lvm'
 		$script:prolog = 'LVM'
-		$script:logtalk = "lvmlgt.ps1"
+		$script:logtalk = "lvmlgt"
 		$script:logtalk_option = "-g"
 		$script:dot = "."
 	} elseif ($p -eq "sicstus") {
 		$script:backend = 'sicstus'
 		$script:prolog = 'SICStus Prolog'
-		$script:logtalk = "sicstuslgt.ps1"
+		$script:logtalk = "sicstuslgt"
 		$script:logtalk_option = "--goal"
 		$script:dot = "."
 	} elseif ($p -eq "swi") {
 		$script:backend = 'swi'
 		$script:prolog = 'SWI-Prolog'
-		$script:logtalk = "swilgt.ps1"
+		$script:logtalk = "swilgt"
 		$script:logtalk_option = "-g"
 	} elseif ($p -eq "swipack") {
 		$script:backend = 'swipack'
@@ -386,24 +386,24 @@ Function Check-Parameters() {
 	} elseif ($p -eq "tau") {
 		$script:backend = 'tau'
 		$script:prolog = 'Tau Prolog'
-		$script:logtalk = "taulgt.ps1"
+		$script:logtalk = "taulgt"
 		$script:logtalk_option = "-g"
 		$script:dot = "."
 	} elseif ($p -eq "trealla") {
 		$script:backend = 'trealla'
 		$script:prolog = 'Trealla Prolog'
-		$script:logtalk = "tplgt.ps1"
+		$script:logtalk = "tplgt"
 		$script:logtalk_option = "-g"
 	} elseif ($p -eq "xsb") {
 		$script:backend = 'xsb'
 		$script:prolog = 'XSB'
-		$script:logtalk = "xsblgt.ps1"
+		$script:logtalk = "xsblgt"
 		$script:logtalk_option = "-e"
 		$script:dot = " ."
 	} elseif ($p -eq "yap") {
 		$script:backend = 'yap'
 		$script:prolog = 'YAP'
-		$script:logtalk = "yaplgt.ps1"
+		$script:logtalk = "yaplgt"
 		$script:logtalk_option = "-g"
 	} else {
 		Write-Output ("Error! Unsupported backend Prolog compiler: " + $p)
@@ -514,7 +514,7 @@ $allargs = $PSBoundParameters
 
 $backend = "swi"
 $prolog = "SWI-Prolog"
-$logtalk = "swilgt.ps1"
+$logtalk = "swilgt"
 $logtalk_option = "-g"
 $dot = ""
 $base = $pwd
