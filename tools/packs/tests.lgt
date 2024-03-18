@@ -45,7 +45,7 @@
 
 	setup :-
 		% the sample packs are defined using relative paths, which require
-		% setting the working directory; but this hack to allows testing
+		% setting the working directory; but this hack to allow testing
 		% pack installation may not work with all backend Prolog systems
 		object_property(packs, file(_, Directory)),
 		os::change_directory(Directory).
