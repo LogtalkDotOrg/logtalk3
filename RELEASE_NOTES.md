@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.76.0 - March ??, 2024
+3.76.0 - March 19, 2024
 =======================
 
 Logtalk compiler and runtime
@@ -127,10 +127,10 @@ files, and entities.
 * ADDED: Support to the `packs` tool to represent operating-system dependencies
 in pack manifest files.
 
-* IMPROVED: The `logtalk_tester.sh` Bash script can now be interrupted using
-Ctrl-C when the timeout option is used.
+* IMPROVED: The `logtalk_tester.sh` script can now be interrupted using Ctrl-C
+when the timeout option is used.
 
-* IMPROVED: The `logtalk_tester.sh` Bash script now kills all created child
+* IMPROVED: The `logtalk_tester.sh` script now kills all created child
 processes on exit.
 
 * IMPROVED: The `tutor` tool explanation for permission errors when trying to

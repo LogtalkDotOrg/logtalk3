@@ -103,7 +103,7 @@ CONTRIBUTORS
 * Victor Noel (bug reports)
 * Vítor Santos Costa (red-black tree library)
 * Xin Wang (bug reports)
-* Yurii Rashkovskii (bug reports, feedback and suggestions, SWI-Prolog embedding scripts improvements)
+* Yurii Rashkovskii (bug reports, feedback and suggestions, code contributions, SWI-Prolog embedding scripts improvements)
 
 A special thanks to all the Prolog implementers who fixed bugs and
 implemented enhancements that greatly helped in improving Logtalk
