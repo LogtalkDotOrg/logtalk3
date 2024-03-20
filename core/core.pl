@@ -1186,18 +1186,22 @@ protocol_property(Ptc, Prop) :-
 		Properties0 = [number_of_clauses(Clauses), number_of_rules(Rules)]
 	;	Properties0 = [line_count(Location), number_of_clauses(Clauses), number_of_rules(Rules)]
 	),
-	(	Flags /\ 4 =:= 4 ->
-		Properties1 = [inline| Properties0]
+	(	Flags /\ 8 =:= 8 ->
+		Properties1 = [recursive| Properties0]
 	;	Properties1 = Properties0
+	),
+	(	Flags /\ 4 =:= 4 ->
+		Properties2 = [inline| Properties1]
+	;	Properties2 = Properties1
 	),
 	(	Flags /\ 2 =:= 2 ->
 		Arity2 is Arity - 2,
-		Properties2 = [non_terminal(Functor//Arity2)| Properties1]
-	;	Properties2 = Properties1
+		Properties3 = [non_terminal(Functor//Arity2)| Properties2]
+	;	Properties3 = Properties2
 	),
 	(	Flags /\ 1 =:= 1 ->
-		Properties = [auxiliary| Properties2]
-	;	Properties = Properties2
+		Properties = [auxiliary| Properties3]
+	;	Properties = Properties3
 	).
 % likely a dynamic or a multifile predicate with no local clauses
 '$lgt_entity_property_defines'(_, _, Flags, [number_of_clauses(0), number_of_rules(0)]) :-
@@ -3807,6 +3811,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 				true
 			;	Location = Line
 			)
+		;	fail
+		)
+	;	fail
+	).
+'$lgt_predicate_property_user'(recursive, Alias, Original, _, _, _, _, _, _, Def, _) :-
+	(	call(Def, Alias, _, _, _, DCtn) ->
+		(	functor(Original, Functor, Arity),
+			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_location(Flags, _, _, _)) ->
+			Flags /\ 8 =:= 8
 		;	fail
 		)
 	;	fail
@@ -7894,19 +7907,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_add_entity_predicate_properties'(Entity, MainFile) :-
 	'$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, Origin),
-	(	'$lgt_pp_inline_predicate_'(Functor/Arity) ->
-		Flags0 is 4
+	(	'$lgt_pp_predicate_recursive_calls_'(Functor, Arity, _) ->
+		Flags0 is 8
 	;	Flags0 is 0
 	),
-	(	'$lgt_pp_defines_non_terminal_'(Functor, _, Arity) ->
-		Flags1 is Flags0 + 2
+	(	'$lgt_pp_inline_predicate_'(Functor/Arity) ->
+		Flags1 is Flags0 + 4
 	;	Flags1 is Flags0
 	),
+	(	'$lgt_pp_defines_non_terminal_'(Functor, _, Arity) ->
+		Flags2 is Flags1 + 2
+	;	Flags2 is Flags1
+	),
 	(	Origin == aux ->
-		Flags is Flags1 + 1,
+		Flags is Flags2 + 1,
 		File = MainFile,
 		Line is 0
-	;	Flags is Flags1,
+	;	Flags is Flags2,
 		'$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Line)
 	),
 	'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses, Rules),
@@ -24863,6 +24880,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_predicate_property'(auxiliary).
 % predicate definition is inlined
 '$lgt_valid_predicate_property'(inline).
+% predicate definition is recursive
+'$lgt_valid_predicate_property'(recursive).
 
 
 

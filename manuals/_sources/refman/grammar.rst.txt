@@ -1165,6 +1165,7 @@ Predicate properties
       | "synchronized"
       | "built_in"
       | "inline"
+      | "recursive"
       | "declared_in(" entity_identifier ")"
       | "defined_in(" ( object_identifier | category_identifier ) ")"
       | "redefined_from(" ( object_identifier | category_identifier ) ")"

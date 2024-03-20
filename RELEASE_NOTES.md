@@ -25,6 +25,12 @@ RELEASE NOTES
 3.77.0 - April ??, 2024
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Predicate property `recursive` to the reflection API to document
+that a predicate definition includes at least one recursive rule.
+
 Documentation
 -------------
 

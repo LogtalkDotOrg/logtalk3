@@ -1751,6 +1751,8 @@ Some properties are only available when the entities are defined in
 source files and when those source files are compiled with the
 :ref:`source_data <flag_source_data>` flag turned on:
 
+``recursive``
+   The predicate definition includes at least one recursive rule
 ``inline``
    The predicate definition is inlined
 ``auxiliary``
