@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-1675.75 1450,-1675.75 1450,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object xunit_report</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;18, 15:35</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;20, 11:51</text>
 <g id="clust1" class="cluster">
 <title>cluster_xunit_report_object</title>
 <g id="a_clust1"><a xlink:title="xunit_report">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 1426,-49.75 1426,-49.75 1432,-49.75 1438,-55.75 1438,-61.75 1438,-61.75 1438,-1651.75 1438,-1651.75 1438,-1657.75 1432,-1663.75 1426,-1663.75 1426,-1663.75 20,-1663.75 20,-1663.75 14,-1663.75 8,-1657.75 8,-1651.75 8,-1651.75 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt">
 <text text-anchor="start" x="20" y="-1646.25" font-family="Monospace" font-size="10.00" fill="dimgray">xunit_report</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- message_cache_/1 -->
 <g id="node1" class="node">
 <title>message_cache_/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L48">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L48">
 <polygon fill="#ff6a6a" stroke="black" points="1016,-802.25 882,-802.25 882,-766.25 1016,-766.25 1016,-802.25"/>
 <text text-anchor="start" x="889.88" y="-785.08" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="895" y="-784.3" font-family="Monospace" font-size="11.00">message_cache_/1</text>
@@ -41,7 +41,7 @@
 <!-- message_hook/1 -->
 <g id="node2" class="node">
 <title>message_hook/1</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L71">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L71">
 <polygon fill="cornsilk" stroke="black" points="1389,-1508.75 1269,-1508.75 1269,-1472.75 1389,-1472.75 1389,-1508.75"/>
 <text text-anchor="start" x="1276.88" y="-1491.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1281.75" y="-1490.8" font-family="Monospace" font-size="11.00">message_hook/1</text>
@@ -55,12 +55,12 @@
 <!-- message_hook/1&#45;&gt;message_cache_/1 -->
 <g id="edge60" class="edge">
 <title>message_hook/1&#45;&gt;message_cache_/1</title>
-<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L71" xlink:title="updates">
+<g id="a_edge60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L71" xlink:title="updates">
 <path fill="none" stroke="black" d="M1329,-1472.49C1329,-1449.87 1329,-1408.97 1329,-1374 1329,-1374 1329,-1374 1329,-1195.38 1329,-1161.06 1334.37,-1152.64 1343.25,-1119.5 1353.22,-1082.3 1365.52,-1075.72 1372,-1037.75 1387.33,-947.96 1403.33,-884.76 1325,-838.25 1276.43,-809.41 1124.39,-795.43 1029.18,-789.34"/>
 <polygon fill="black" stroke="black" points="1029.3,-789.35 1023.07,-792.97 1017.32,-788.61 1023.56,-784.99 1029.3,-789.35"/>
 </a>
 </g>
-<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L71">
+<g id="a_edge60&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L71">
 <text text-anchor="start" x="1343" y="-1133.83" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- generate_xml_report/0 -->
 <g id="node3" class="node">
 <title>generate_xml_report/0</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L112">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L112">
 <polygon fill="cornsilk" stroke="black" points="1125.5,-1391 958.5,-1391 958.5,-1355 1125.5,-1355 1125.5,-1391"/>
 <text text-anchor="start" x="966.38" y="-1373.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="971.12" y="-1373.05" font-family="Monospace" font-size="11.00">generate_xml_report/0</text>
@@ -82,12 +82,12 @@
 <!-- message_hook/1&#45;&gt;generate_xml_report/0 -->
 <g id="edge2" class="edge">
 <title>message_hook/1&#45;&gt;generate_xml_report/0</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L92" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M1285.72,-1472.3C1234.93,-1451.81 1150.67,-1417.83 1095.74,-1395.67"/>
 <polygon fill="black" stroke="black" points="1097.15,-1392.47 1086.56,-1391.97 1094.53,-1398.96 1097.15,-1392.47"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L92">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L92">
 <text text-anchor="start" x="1194" y="-1428.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- message_hook/1&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge56" class="edge">
 <title>message_hook/1&#45;&gt;logtalk::loaded_file_property/2</title>
-<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L75" xlink:title="calls">
+<g id="a_edge56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L75" xlink:title="calls">
 <path fill="none" stroke="black" d="M1348.95,-1472.27C1370.56,-1451.29 1402,-1413.91 1402,-1374 1402,-1374 1402,-1374 1402,-901 1402,-872.33 1403.93,-861.39 1387,-838.25 1378.02,-825.98 1365.26,-816 1352.23,-808.15"/>
 <polygon fill="black" stroke="black" points="1354.03,-805.15 1343.6,-803.3 1350.6,-811.25 1354.03,-805.15"/>
 </a>
 </g>
-<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L75">
+<g id="a_edge56&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L75" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L75">
 <text text-anchor="start" x="1402" y="-1133.83" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -122,7 +122,7 @@
 <!-- write_report_header/0 -->
 <g id="node4" class="node">
 <title>write_report_header/0</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L116">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L116">
 <polygon fill="cornsilk" stroke="black" points="1125.5,-1273.25 958.5,-1273.25 958.5,-1237.25 1125.5,-1237.25 1125.5,-1273.25"/>
 <text text-anchor="start" x="966.38" y="-1256.08" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="971.12" y="-1255.3" font-family="Monospace" font-size="11.00">write_report_header/0</text>
@@ -136,12 +136,12 @@
 <!-- generate_xml_report/0&#45;&gt;write_report_header/0 -->
 <g id="edge3" class="edge">
 <title>generate_xml_report/0&#45;&gt;write_report_header/0</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L112" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M1042,-1354.67C1042,-1336.26 1042,-1306.85 1042,-1284.96"/>
 <polygon fill="black" stroke="black" points="1045.5,-1285.21 1042,-1275.21 1038.5,-1285.21 1045.5,-1285.21"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L112">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L112">
 <text text-anchor="start" x="1042" y="-1310.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -149,7 +149,7 @@
 <!-- write_testsuites_element/0 -->
 <g id="node5" class="node">
 <title>write_testsuites_element/0</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119">
 <polygon fill="cornsilk" stroke="black" points="632.5,-1273.25 431.5,-1273.25 431.5,-1237.25 632.5,-1237.25 632.5,-1273.25"/>
 <text text-anchor="start" x="439.38" y="-1256.08" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="444.25" y="-1255.3" font-family="Monospace" font-size="11.00">write_testsuites_element/0</text>
@@ -163,12 +163,12 @@
 <!-- generate_xml_report/0&#45;&gt;write_testsuites_element/0 -->
 <g id="edge4" class="edge">
 <title>generate_xml_report/0&#45;&gt;write_testsuites_element/0</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L112" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M965.1,-1354.55C872.39,-1333.5 716.95,-1298.23 619.68,-1276.15"/>
 <polygon fill="black" stroke="black" points="620.7,-1272.79 610.17,-1273.99 619.15,-1279.62 620.7,-1272.79"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L112">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L112">
 <text text-anchor="start" x="802" y="-1310.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -176,7 +176,7 @@
 <!-- write_testsuite_elements/0 -->
 <g id="node6" class="node">
 <title>write_testsuite_elements/0</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L125">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L125">
 <polygon fill="cornsilk" stroke="black" points="632.5,-1155.5 431.5,-1155.5 431.5,-1119.5 632.5,-1119.5 632.5,-1155.5"/>
 <text text-anchor="start" x="439.38" y="-1138.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="444.25" y="-1137.55" font-family="Monospace" font-size="11.00">write_testsuite_elements/0</text>
@@ -190,12 +190,12 @@
 <!-- write_testsuites_element/0&#45;&gt;write_testsuite_elements/0 -->
 <g id="edge7" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_testsuite_elements/0</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="calls">
 <path fill="none" stroke="black" d="M532,-1236.92C532,-1218.51 532,-1189.1 532,-1167.21"/>
 <polygon fill="black" stroke="black" points="535.5,-1167.46 532,-1157.46 528.5,-1167.46 535.5,-1167.46"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119">
 <text text-anchor="start" x="532" y="-1192.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -203,7 +203,7 @@
 <!-- testsuites_duration/1 -->
 <g id="node11" class="node">
 <title>testsuites_duration/1</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L196">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L196">
 <polygon fill="cornsilk" stroke="black" points="1292.5,-1155.5 1125.5,-1155.5 1125.5,-1119.5 1292.5,-1119.5 1292.5,-1155.5"/>
 <text text-anchor="start" x="1133.38" y="-1138.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1138.12" y="-1137.55" font-family="Monospace" font-size="11.00">testsuites_duration/1</text>
@@ -217,12 +217,12 @@
 <!-- write_testsuites_element/0&#45;&gt;testsuites_duration/1 -->
 <g id="edge5" class="edge">
 <title>write_testsuites_element/0&#45;&gt;testsuites_duration/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="calls">
 <path fill="none" stroke="black" d="M632.99,-1236.98C762.87,-1214.78 986.8,-1176.49 1113.81,-1154.77"/>
 <polygon fill="black" stroke="black" points="1114.28,-1158.25 1123.55,-1153.11 1113.1,-1151.35 1114.28,-1158.25"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119">
 <text text-anchor="start" x="890" y="-1192.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -230,7 +230,7 @@
 <!-- write_xml_open_tag/2 -->
 <g id="node25" class="node">
 <title>write_xml_open_tag/2</title>
-<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L338">
+<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L338">
 <polygon fill="cornsilk" stroke="black" points="940.5,-566.75 779.5,-566.75 779.5,-530.75 940.5,-530.75 940.5,-566.75"/>
 <text text-anchor="start" x="787.38" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="792.5" y="-548.8" font-family="Monospace" font-size="11.00">write_xml_open_tag/2</text>
@@ -244,12 +244,12 @@
 <!-- write_testsuites_element/0&#45;&gt;write_xml_open_tag/2 -->
 <g id="edge6" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_xml_open_tag/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="calls">
 <path fill="none" stroke="black" d="M431.13,-1237.99C336.36,-1219.77 209,-1186.38 209,-1138.5 209,-1138.5 209,-1138.5 209,-959.88 209,-925.88 198.08,-910.99 218.75,-884 244.26,-850.7 267.37,-864.36 306,-848 389.89,-812.46 408.66,-798.17 494,-766.25 557.29,-742.58 573.86,-738.47 639,-720.5 705.93,-702.04 736.37,-727.34 791,-684.5 795.67,-680.84 828.06,-615.33 846.76,-577.03"/>
 <polygon fill="black" stroke="black" points="849.74,-578.9 850.97,-568.38 843.45,-575.83 849.74,-578.9"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119">
 <text text-anchor="start" x="218" y="-898.33" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -257,7 +257,7 @@
 <!-- write_xml_close_tag/1 -->
 <g id="node30" class="node">
 <title>write_xml_close_tag/1</title>
-<g id="a_node30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L384" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L384">
+<g id="a_node30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L384" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L384">
 <polygon fill="cornsilk" stroke="black" points="190.5,-566.75 23.5,-566.75 23.5,-530.75 190.5,-530.75 190.5,-566.75"/>
 <text text-anchor="start" x="31.38" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="36.12" y="-548.8" font-family="Monospace" font-size="11.00">write_xml_close_tag/1</text>
@@ -271,12 +271,12 @@
 <!-- write_testsuites_element/0&#45;&gt;write_xml_close_tag/1 -->
 <g id="edge8" class="edge">
 <title>write_testsuites_element/0&#45;&gt;write_xml_close_tag/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="calls">
 <path fill="none" stroke="black" d="M431.03,-1250.97C286.01,-1243.46 36,-1218.86 36,-1138.5 36,-1138.5 36,-1138.5 36,-959.88 36,-821.37 22.97,-784.54 49,-648.5 53.05,-627.34 54.61,-621.62 65,-602.75 70.18,-593.33 77.03,-583.88 83.69,-575.61"/>
 <polygon fill="black" stroke="black" points="86.32,-577.92 90.06,-568.01 80.95,-573.43 86.32,-577.92"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L119">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L119">
 <text text-anchor="start" x="35" y="-898.33" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -284,12 +284,12 @@
 <!-- write_testsuite_elements/0&#45;&gt;message_cache_/1 -->
 <g id="edge9" class="edge">
 <title>write_testsuite_elements/0&#45;&gt;message_cache_/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L125" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M519.01,-1119.26C497.67,-1089.73 456.02,-1026.72 440.75,-965.75 432.54,-932.96 447.23,-903.49 471,-884 609.16,-770.7 691.36,-837.51 870.76,-802.61"/>
 <polygon fill="black" stroke="black" points="871.3,-806.07 880.4,-800.64 869.9,-799.21 871.3,-806.07"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L125">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L125">
 <text text-anchor="start" x="440" y="-957.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -297,7 +297,7 @@
 <!-- write_testsuite_element/1 -->
 <g id="node7" class="node">
 <title>write_testsuite_element/1</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <polygon fill="cornsilk" stroke="black" points="724,-1037.75 530,-1037.75 530,-1001.75 724,-1001.75 724,-1037.75"/>
 <text text-anchor="start" x="537.88" y="-1020.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="542.62" y="-1019.8" font-family="Monospace" font-size="11.00">write_testsuite_element/1</text>
@@ -311,12 +311,12 @@
 <!-- write_testsuite_elements/0&#45;&gt;write_testsuite_element/1 -->
 <g id="edge10" class="edge">
 <title>write_testsuite_elements/0&#45;&gt;write_testsuite_element/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L125" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M546.22,-1119.17C561.89,-1100.08 587.27,-1069.15 605.4,-1047.06"/>
 <polygon fill="black" stroke="black" points="608.08,-1049.32 611.72,-1039.37 602.67,-1044.88 608.08,-1049.32"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L125">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L125">
 <text text-anchor="start" x="582" y="-1074.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -324,12 +324,12 @@
 <!-- write_testsuite_element/1&#45;&gt;message_cache_/1 -->
 <g id="edge11" class="edge">
 <title>write_testsuite_element/1&#45;&gt;message_cache_/1</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M666.38,-1001.35C704.43,-983.62 762.78,-953.96 808,-920 826.03,-906.46 827.58,-899.72 843.75,-884 869.96,-858.52 900.48,-830.01 921.89,-810.2"/>
 <polygon fill="black" stroke="black" points="924.1,-812.92 929.07,-803.56 919.35,-807.78 924.1,-812.92"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="843" y="-898.33" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -337,7 +337,7 @@
 <!-- write_test_elements/1 -->
 <g id="node8" class="node">
 <title>write_test_elements/1</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L147">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L147">
 <polygon fill="cornsilk" stroke="black" points="646.5,-920 479.5,-920 479.5,-884 646.5,-884 646.5,-920"/>
 <text text-anchor="start" x="487.38" y="-902.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="492.12" y="-902.05" font-family="Monospace" font-size="11.00">write_test_elements/1</text>
@@ -351,12 +351,12 @@
 <!-- write_testsuite_element/1&#45;&gt;write_test_elements/1 -->
 <g id="edge18" class="edge">
 <title>write_testsuite_element/1&#45;&gt;write_test_elements/1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M617.42,-1001.42C607.05,-982.67 590.37,-952.5 578.21,-930.5"/>
 <polygon fill="black" stroke="black" points="581.28,-928.83 573.38,-921.77 575.16,-932.22 581.28,-928.83"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="596" y="-957.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -364,7 +364,7 @@
 <!-- testsuite_stats/5 -->
 <g id="node12" class="node">
 <title>testsuite_stats/5</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L209">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L209">
 <polygon fill="cornsilk" stroke="black" points="1019,-920 879,-920 879,-884 1019,-884 1019,-920"/>
 <text text-anchor="start" x="886.88" y="-902.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="891.62" y="-902.05" font-family="Monospace" font-size="11.00">testsuite_stats/5</text>
@@ -378,12 +378,12 @@
 <!-- write_testsuite_element/1&#45;&gt;testsuite_stats/5 -->
 <g id="edge12" class="edge">
 <title>write_testsuite_element/1&#45;&gt;testsuite_stats/5</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M721.04,-1001.28C758.77,-992.75 802.18,-980.99 840,-965.75 865.93,-955.3 893.19,-939.6 913.97,-926.52"/>
 <polygon fill="black" stroke="black" points="915.8,-929.51 922.33,-921.17 912.02,-923.61 915.8,-929.51"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="858" y="-957.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -391,7 +391,7 @@
 <!-- testsuite_name/2 -->
 <g id="node13" class="node">
 <title>testsuite_name/2</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L217">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L217">
 <polygon fill="cornsilk" stroke="black" points="1171,-920 1037,-920 1037,-884 1171,-884 1171,-920"/>
 <text text-anchor="start" x="1044.88" y="-902.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1050" y="-902.05" font-family="Monospace" font-size="11.00">testsuite_name/2</text>
@@ -405,12 +405,12 @@
 <!-- write_testsuite_element/1&#45;&gt;testsuite_name/2 -->
 <g id="edge13" class="edge">
 <title>write_testsuite_element/1&#45;&gt;testsuite_name/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M722.57,-1001.3C772.14,-991.76 833.56,-979.16 888,-965.75 938.75,-953.25 995.48,-936.67 1038.06,-923.69"/>
 <polygon fill="black" stroke="black" points="1038.86,-927.1 1047.4,-920.83 1036.81,-920.41 1038.86,-927.1"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="923" y="-957.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -418,7 +418,7 @@
 <!-- testsuite_package/2 -->
 <g id="node14" class="node">
 <title>testsuite_package/2</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L226">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L226">
 <polygon fill="cornsilk" stroke="black" points="1343,-920 1189,-920 1189,-884 1343,-884 1343,-920"/>
 <text text-anchor="start" x="1196.88" y="-902.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1201.88" y="-902.05" font-family="Monospace" font-size="11.00">testsuite_package/2</text>
@@ -432,12 +432,12 @@
 <!-- write_testsuite_element/1&#45;&gt;testsuite_package/2 -->
 <g id="edge14" class="edge">
 <title>write_testsuite_element/1&#45;&gt;testsuite_package/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M724.16,-1003.91C789.06,-993.76 876.27,-979.67 953,-965.75 1029.01,-951.96 1115.03,-934.58 1177.64,-921.61"/>
 <polygon fill="black" stroke="black" points="1178.09,-925.1 1187.17,-919.64 1176.67,-918.24 1178.09,-925.1"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="1004" y="-957.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -445,7 +445,7 @@
 <!-- testsuite_time/2 -->
 <g id="node15" class="node">
 <title>testsuite_time/2</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L241">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L241">
 <polygon fill="cornsilk" stroke="black" points="799,-920 665,-920 665,-884 799,-884 799,-920"/>
 <text text-anchor="start" x="672.88" y="-902.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="678" y="-902.05" font-family="Monospace" font-size="11.00">testsuite_time/2</text>
@@ -459,12 +459,12 @@
 <!-- write_testsuite_element/1&#45;&gt;testsuite_time/2 -->
 <g id="edge15" class="edge">
 <title>write_testsuite_element/1&#45;&gt;testsuite_time/2</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M642.72,-1001.42C660.19,-982.16 688.6,-950.85 708.67,-928.72"/>
 <polygon fill="black" stroke="black" points="711.03,-931.33 715.16,-921.57 705.84,-926.62 711.03,-931.33"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="682" y="-957.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -472,7 +472,7 @@
 <!-- testsuite_timestamp/1 -->
 <g id="node16" class="node">
 <title>testsuite_timestamp/1</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L251">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L251">
 <polygon fill="cornsilk" stroke="black" points="420.5,-920 253.5,-920 253.5,-884 420.5,-884 420.5,-920"/>
 <text text-anchor="start" x="261.38" y="-902.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="266.12" y="-902.05" font-family="Monospace" font-size="11.00">testsuite_timestamp/1</text>
@@ -486,12 +486,12 @@
 <!-- write_testsuite_element/1&#45;&gt;testsuite_timestamp/1 -->
 <g id="edge16" class="edge">
 <title>write_testsuite_element/1&#45;&gt;testsuite_timestamp/1</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M529.73,-1010.75C485.23,-1003.71 433.29,-990.51 391.75,-965.75 376.81,-956.84 363.81,-942.45 354.24,-929.69"/>
 <polygon fill="black" stroke="black" points="357.14,-927.72 348.49,-921.6 351.43,-931.78 357.14,-927.72"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="391" y="-957.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -499,12 +499,12 @@
 <!-- write_testsuite_element/1&#45;&gt;write_xml_open_tag/2 -->
 <g id="edge17" class="edge">
 <title>write_testsuite_element/1&#45;&gt;write_xml_open_tag/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M577.12,-1001.27C518.7,-978.01 434.26,-933.95 471,-884 543.28,-785.74 628.3,-864.84 733,-802.25 752.63,-790.52 749.44,-776.75 769.75,-766.25 849.29,-725.11 880.24,-748.05 968,-730.25 1059.06,-711.78 1113.93,-757.04 1172,-684.5 1182,-672.01 1180.62,-661.98 1172,-648.5 1145.89,-607.66 1118.72,-618.84 1073,-602.75 1034.07,-589.05 989.95,-577.45 952.01,-568.64"/>
 <polygon fill="black" stroke="black" points="952.97,-565.27 942.44,-566.44 951.4,-572.09 952.97,-565.27"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="769" y="-780.58" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -512,12 +512,12 @@
 <!-- write_testsuite_element/1&#45;&gt;write_xml_close_tag/1 -->
 <g id="edge19" class="edge">
 <title>write_testsuite_element/1&#45;&gt;write_xml_close_tag/1</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="calls">
 <path fill="none" stroke="black" d="M529.81,-1016.24C435.27,-1009.59 291.07,-987.94 187,-920 86.71,-854.52 75.86,-802.61 56,-684.5 53.35,-668.72 52.22,-664.05 56,-648.5 62.33,-622.43 76.83,-595.56 88.75,-576.44"/>
 <polygon fill="black" stroke="black" points="91.58,-578.51 94.05,-568.2 85.7,-574.72 91.58,-578.51"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L131">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L131">
 <text text-anchor="start" x="82" y="-780.58" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -525,12 +525,12 @@
 <!-- write_test_elements/1&#45;&gt;message_cache_/1 -->
 <g id="edge20" class="edge">
 <title>write_test_elements/1&#45;&gt;message_cache_/1</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L147" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L147" xlink:title="calls">
 <path fill="none" stroke="black" d="M620.26,-883.57C653.06,-873.46 694.94,-860.32 732,-848 744.41,-843.88 747.28,-842.18 759.75,-838.25 796.31,-826.72 837.22,-815.11 871.63,-805.7"/>
 <polygon fill="black" stroke="black" points="872.37,-809.12 881.1,-803.12 870.54,-802.37 872.37,-809.12"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L147">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L147">
 <text text-anchor="start" x="759" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -538,7 +538,7 @@
 <!-- write_testcase_element_tags/3 -->
 <g id="node9" class="node">
 <title>write_testcase_element_tags/3</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158">
 <polygon fill="cornsilk" stroke="black" points="723.5,-802.25 502.5,-802.25 502.5,-766.25 723.5,-766.25 723.5,-802.25"/>
 <text text-anchor="start" x="510.38" y="-785.08" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="515.12" y="-784.3" font-family="Monospace" font-size="11.00">write_testcase_element_tags/3</text>
@@ -552,12 +552,12 @@
 <!-- write_test_elements/1&#45;&gt;write_testcase_element_tags/3 -->
 <g id="edge21" class="edge">
 <title>write_test_elements/1&#45;&gt;write_testcase_element_tags/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L147" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L147" xlink:title="calls">
 <path fill="none" stroke="black" d="M479.28,-888.86C415.8,-877.77 342.2,-859.86 359.75,-838.25 368.7,-827.23 430.54,-814.18 490.86,-803.78"/>
 <polygon fill="black" stroke="black" points="491.33,-807.25 500.6,-802.12 490.15,-800.35 491.33,-807.25"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L147">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L147" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L147">
 <text text-anchor="start" x="359" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -565,7 +565,7 @@
 <!-- failed_test/4 -->
 <g id="node10" class="node">
 <title>failed_test/4</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L181">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L181" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L181">
 <polygon fill="cornsilk" stroke="black" points="933.5,-684.5 820.5,-684.5 820.5,-648.5 933.5,-648.5 933.5,-684.5"/>
 <text text-anchor="start" x="828.38" y="-667.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="833.12" y="-666.55" font-family="Monospace" font-size="11.00">failed_test/4</text>
@@ -579,12 +579,12 @@
 <!-- write_testcase_element_tags/3&#45;&gt;failed_test/4 -->
 <g id="edge26" class="edge">
 <title>write_testcase_element_tags/3&#45;&gt;failed_test/4</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M652.81,-765.8C699.34,-745.39 776.39,-711.61 826.94,-689.45"/>
 <polygon fill="black" stroke="black" points="828.16,-692.74 835.91,-685.51 825.35,-686.32 828.16,-692.74"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163">
 <text text-anchor="start" x="752" y="-721.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -592,7 +592,7 @@
 <!-- suppress_path_prefix/2 -->
 <g id="node17" class="node">
 <title>suppress_path_prefix/2</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L257">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L257">
 <polygon fill="cornsilk" stroke="black" points="1126,-684.5 952,-684.5 952,-648.5 1126,-648.5 1126,-684.5"/>
 <text text-anchor="start" x="959.88" y="-667.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="964.75" y="-666.55" font-family="Monospace" font-size="11.00">suppress_path_prefix/2</text>
@@ -606,12 +606,12 @@
 <!-- write_testcase_element_tags/3&#45;&gt;suppress_path_prefix/2 -->
 <g id="edge22" class="edge">
 <title>write_testcase_element_tags/3&#45;&gt;suppress_path_prefix/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M677.24,-765.8C754.2,-744.88 882.93,-709.91 964.28,-687.8"/>
 <polygon fill="black" stroke="black" points="964.74,-691.3 973.48,-685.3 962.91,-684.55 964.74,-691.3"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158">
 <text text-anchor="start" x="838" y="-721.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -619,7 +619,7 @@
 <!-- write_testcase_properties/3 -->
 <g id="node18" class="node">
 <title>write_testcase_properties/3</title>
-<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265">
 <polygon fill="cornsilk" stroke="black" points="782,-684.5 574,-684.5 574,-648.5 782,-648.5 782,-684.5"/>
 <text text-anchor="start" x="581.88" y="-667.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="586.88" y="-666.55" font-family="Monospace" font-size="11.00">write_testcase_properties/3</text>
@@ -633,12 +633,12 @@
 <!-- write_testcase_element_tags/3&#45;&gt;write_testcase_properties/3 -->
 <g id="edge24" class="edge">
 <title>write_testcase_element_tags/3&#45;&gt;write_testcase_properties/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M622.73,-765.92C633.31,-747.08 650.36,-716.73 662.72,-694.71"/>
 <polygon fill="black" stroke="black" points="665.62,-696.7 667.46,-686.27 659.51,-693.27 665.62,-696.7"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158">
 <text text-anchor="start" x="647" y="-721.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -646,7 +646,7 @@
 <!-- write_xml_empty_tag/2 -->
 <g id="node24" class="node">
 <title>write_xml_empty_tag/2</title>
-<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L332">
+<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L332">
 <polygon fill="cornsilk" stroke="black" points="761.5,-566.75 594.5,-566.75 594.5,-530.75 761.5,-530.75 761.5,-566.75"/>
 <text text-anchor="start" x="602.38" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="607.12" y="-548.8" font-family="Monospace" font-size="11.00">write_xml_empty_tag/2</text>
@@ -660,12 +660,12 @@
 <!-- write_testcase_element_tags/3&#45;&gt;write_xml_empty_tag/2 -->
 <g id="edge27" class="edge">
 <title>write_testcase_element_tags/3&#45;&gt;write_xml_empty_tag/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M591.42,-765.97C562.35,-740.48 516.68,-691.21 538.75,-648.5 556.8,-613.58 593.53,-588.33 624.73,-572.11"/>
 <polygon fill="black" stroke="black" points="625.91,-575.44 633.29,-567.84 622.78,-569.18 625.91,-575.44"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163">
 <text text-anchor="start" x="538" y="-662.83" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -673,12 +673,12 @@
 <!-- write_testcase_element_tags/3&#45;&gt;write_xml_open_tag/2 -->
 <g id="edge23" class="edge">
 <title>write_testcase_element_tags/3&#45;&gt;write_xml_open_tag/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M723.95,-765.94C873.26,-742.1 1121.87,-700.35 1135,-684.5 1145.21,-672.18 1144.21,-661.59 1135,-648.5 1112.9,-617.08 1020.67,-588.27 949.04,-569.98"/>
 <polygon fill="black" stroke="black" points="950.21,-566.66 939.66,-567.62 948.5,-573.45 950.21,-566.66"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158">
 <text text-anchor="start" x="1142" y="-662.83" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -686,7 +686,7 @@
 <!-- writeq_xml_cdata_element/3 -->
 <g id="node27" class="node">
 <title>writeq_xml_cdata_element/3</title>
-<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L354">
+<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L354">
 <polygon fill="cornsilk" stroke="black" points="1427.5,-684.5 1226.5,-684.5 1226.5,-648.5 1427.5,-648.5 1427.5,-684.5"/>
 <text text-anchor="start" x="1234.38" y="-667.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1239.25" y="-666.55" font-family="Monospace" font-size="11.00">writeq_xml_cdata_element/3</text>
@@ -700,12 +700,12 @@
 <!-- write_testcase_element_tags/3&#45;&gt;writeq_xml_cdata_element/3 -->
 <g id="edge28" class="edge">
 <title>write_testcase_element_tags/3&#45;&gt;writeq_xml_cdata_element/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M723.72,-767.88C728.54,-767.31 733.32,-766.76 738,-766.25 928.19,-745.35 980.65,-773.64 1167,-730.25 1206.82,-720.98 1249.84,-703.66 1281.24,-689.56"/>
 <polygon fill="black" stroke="black" points="1282.4,-692.88 1290.04,-685.55 1279.49,-686.51 1282.4,-692.88"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L163">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L163">
 <text text-anchor="start" x="1198" y="-721.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -713,12 +713,12 @@
 <!-- write_testcase_element_tags/3&#45;&gt;write_xml_close_tag/1 -->
 <g id="edge25" class="edge">
 <title>write_testcase_element_tags/3&#45;&gt;write_xml_close_tag/1</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M591.51,-765.92C547.32,-730.35 449.64,-652.12 441,-648.5 325.67,-600.22 272.33,-671.31 162,-612.5 146.26,-604.11 132.94,-589.28 123.35,-576.14"/>
 <polygon fill="black" stroke="black" points="126.46,-574.48 117.91,-568.23 120.7,-578.45 126.46,-574.48"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L158">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L158">
 <text text-anchor="start" x="488" y="-662.83" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -726,12 +726,12 @@
 <!-- testsuites_duration/1&#45;&gt;message_cache_/1 -->
 <g id="edge29" class="edge">
 <title>testsuites_duration/1&#45;&gt;message_cache_/1</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L196" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1210.4,-1119.33C1213.33,-1092.24 1222.04,-1038.86 1247,-1001.75 1286.13,-943.57 1376.24,-949.8 1352,-884 1342.76,-858.93 1336.39,-851.17 1313,-838.25 1265.31,-811.9 1119.48,-797.13 1027.52,-790.21"/>
 <polygon fill="black" stroke="black" points="1028.05,-786.74 1017.82,-789.5 1027.54,-793.72 1028.05,-786.74"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L196">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L196">
 <text text-anchor="start" x="1304" y="-957.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -739,7 +739,7 @@
 <!-- julian_day/4 -->
 <g id="node20" class="node">
 <title>julian_day/4</title>
-<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L303" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L303">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L303" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L303">
 <polygon fill="cornsilk" stroke="black" points="1362.5,-1037.75 1255.5,-1037.75 1255.5,-1001.75 1362.5,-1001.75 1362.5,-1037.75"/>
 <text text-anchor="start" x="1263.38" y="-1020.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1268.5" y="-1019.8" font-family="Monospace" font-size="11.00">julian_day/4</text>
@@ -753,12 +753,12 @@
 <!-- testsuites_duration/1&#45;&gt;julian_day/4 -->
 <g id="edge30" class="edge">
 <title>testsuites_duration/1&#45;&gt;julian_day/4</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L196" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L196" xlink:title="calls">
 <path fill="none" stroke="black" d="M1223.97,-1119.17C1240.54,-1099.99 1267.42,-1068.88 1286.52,-1046.77"/>
 <polygon fill="black" stroke="black" points="1289.05,-1049.2 1292.94,-1039.34 1283.75,-1044.62 1289.05,-1049.2"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L196">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L196">
 <text text-anchor="start" x="1261" y="-1074.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -766,12 +766,12 @@
 <!-- testsuite_stats/5&#45;&gt;message_cache_/1 -->
 <g id="edge31" class="edge">
 <title>testsuite_stats/5&#45;&gt;message_cache_/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L209" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M949,-883.67C949,-865.26 949,-835.85 949,-813.96"/>
 <polygon fill="black" stroke="black" points="952.5,-814.21 949,-804.21 945.5,-814.21 952.5,-814.21"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L209">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L209">
 <text text-anchor="start" x="949" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -779,12 +779,12 @@
 <!-- testsuite_name/2&#45;&gt;message_cache_/1 -->
 <g id="edge32" class="edge">
 <title>testsuite_name/2&#45;&gt;message_cache_/1</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L217" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L217" xlink:title="calls">
 <path fill="none" stroke="black" d="M1080.79,-883.67C1054.43,-863.98 1011.21,-831.71 981.5,-809.52"/>
 <polygon fill="black" stroke="black" points="983.68,-806.78 973.58,-803.6 979.49,-812.39 983.68,-806.78"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L217">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L217" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L217">
 <text text-anchor="start" x="1031" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -792,12 +792,12 @@
 <!-- testsuite_package/2&#45;&gt;message_cache_/1 -->
 <g id="edge33" class="edge">
 <title>testsuite_package/2&#45;&gt;message_cache_/1</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L226" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L226" xlink:title="calls">
 <path fill="none" stroke="black" d="M1218.2,-883.55C1161.74,-862.93 1067.86,-828.65 1007.22,-806.51"/>
 <polygon fill="black" stroke="black" points="1008.69,-803.32 998.09,-803.18 1006.29,-809.89 1008.69,-803.32"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L226">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L226">
 <text text-anchor="start" x="1117" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -805,12 +805,12 @@
 <!-- testsuite_package/2&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge57" class="edge">
 <title>testsuite_package/2&#45;&gt;logtalk::loaded_file_property/2</title>
-<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L226" xlink:title="calls">
+<g id="a_edge57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L226" xlink:title="calls">
 <path fill="none" stroke="black" d="M1270.94,-883.67C1276.21,-865.17 1284.65,-835.57 1290.9,-813.66"/>
 <polygon fill="black" stroke="black" points="1294.23,-814.73 1293.61,-804.15 1287.5,-812.81 1294.23,-814.73"/>
 </a>
 </g>
-<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L226">
+<g id="a_edge57&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L226">
 <text text-anchor="start" x="1283" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -818,12 +818,12 @@
 <!-- testsuite_time/2&#45;&gt;message_cache_/1 -->
 <g id="edge34" class="edge">
 <title>testsuite_time/2&#45;&gt;message_cache_/1</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L241" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L241" xlink:title="calls">
 <path fill="none" stroke="black" d="M748.28,-883.58C761.98,-869.74 782.67,-850.72 803.75,-838.25 825.79,-825.21 851.57,-814.53 875.25,-806.26"/>
 <polygon fill="black" stroke="black" points="876.17,-809.64 884.52,-803.12 873.93,-803.01 876.17,-809.64"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L241">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L241">
 <text text-anchor="start" x="803" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -831,7 +831,7 @@
 <!-- sum/3 -->
 <g id="node37" class="node">
 <title>sum/3</title>
-<g id="a_node37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L436" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L436">
+<g id="a_node37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L436" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L436">
 <polygon fill="cornsilk" stroke="black" points="863.5,-802.25 804.5,-802.25 804.5,-766.25 863.5,-766.25 863.5,-802.25"/>
 <text text-anchor="start" x="812.38" y="-785.08" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="817.12" y="-784.3" font-family="Monospace" font-size="11.00">sum/3</text>
@@ -845,12 +845,12 @@
 <!-- testsuite_time/2&#45;&gt;sum/3 -->
 <g id="edge35" class="edge">
 <title>testsuite_time/2&#45;&gt;sum/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L241" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L241" xlink:title="calls">
 <path fill="none" stroke="black" d="M715.89,-883.59C705.78,-870.47 696.3,-852.39 705.75,-838.25 707.08,-836.26 756.4,-816.23 793.48,-801.38"/>
 <polygon fill="black" stroke="black" points="794.66,-804.68 802.64,-797.71 792.06,-798.18 794.66,-804.68"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L241">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L241" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L241">
 <text text-anchor="start" x="705" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -858,12 +858,12 @@
 <!-- testsuite_timestamp/1&#45;&gt;message_cache_/1 -->
 <g id="edge36" class="edge">
 <title>testsuite_timestamp/1&#45;&gt;message_cache_/1</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L251" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L251" xlink:title="calls">
 <path fill="none" stroke="black" d="M350.91,-883.76C364.06,-868.83 385.26,-848.13 408.75,-838.25 501.06,-799.44 753.67,-816.39 870.35,-802.37"/>
 <polygon fill="black" stroke="black" points="870.61,-805.87 880.05,-801.06 869.67,-798.93 870.61,-805.87"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L251">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L251">
 <text text-anchor="start" x="408" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -871,7 +871,7 @@
 <!-- date_time_to_timestamp/7 -->
 <g id="node21" class="node">
 <title>date_time_to_timestamp/7</title>
-<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311">
 <polygon fill="cornsilk" stroke="black" points="320,-802.25 132,-802.25 132,-766.25 320,-766.25 320,-802.25"/>
 <text text-anchor="start" x="139.88" y="-785.08" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="145" y="-784.3" font-family="Monospace" font-size="11.00">date_time_to_timestamp/7</text>
@@ -885,12 +885,12 @@
 <!-- testsuite_timestamp/1&#45;&gt;date_time_to_timestamp/7 -->
 <g id="edge37" class="edge">
 <title>testsuite_timestamp/1&#45;&gt;date_time_to_timestamp/7</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L251" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L251" xlink:title="calls">
 <path fill="none" stroke="black" d="M320.38,-883.67C301.91,-864.41 271.89,-833.1 250.67,-810.97"/>
 <polygon fill="black" stroke="black" points="253.23,-808.58 243.78,-803.79 248.17,-813.43 253.23,-808.58"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L251">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L251" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L251">
 <text text-anchor="start" x="284" y="-839.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -898,7 +898,7 @@
 <!-- tests_url/3 -->
 <g id="node19" class="node">
 <title>tests_url/3</title>
-<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L279">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L279">
 <polygon fill="cornsilk" stroke="black" points="354,-566.75 254,-566.75 254,-530.75 354,-530.75 354,-566.75"/>
 <text text-anchor="start" x="261.88" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="266.88" y="-548.8" font-family="Monospace" font-size="11.00">tests_url/3</text>
@@ -912,12 +912,12 @@
 <!-- write_testcase_properties/3&#45;&gt;tests_url/3 -->
 <g id="edge40" class="edge">
 <title>write_testcase_properties/3&#45;&gt;tests_url/3</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="calls">
 <path fill="none" stroke="black" d="M621.6,-648.05C552.5,-626.66 435.88,-590.57 364.82,-568.57"/>
 <polygon fill="black" stroke="black" points="366.29,-565.36 355.7,-565.75 364.22,-572.05 366.29,-565.36"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265">
 <text text-anchor="start" x="502" y="-603.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -925,12 +925,12 @@
 <!-- write_testcase_properties/3&#45;&gt;write_xml_empty_tag/2 -->
 <g id="edge39" class="edge">
 <title>write_testcase_properties/3&#45;&gt;write_xml_empty_tag/2</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="calls">
 <path fill="none" stroke="black" d="M678,-648.17C678,-629.76 678,-600.35 678,-578.46"/>
 <polygon fill="black" stroke="black" points="681.5,-578.71 678,-568.71 674.5,-578.71 681.5,-578.71"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265">
 <text text-anchor="start" x="678" y="-603.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -938,12 +938,12 @@
 <!-- write_testcase_properties/3&#45;&gt;write_xml_open_tag/2 -->
 <g id="edge38" class="edge">
 <title>write_testcase_properties/3&#45;&gt;write_xml_open_tag/2</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="calls">
 <path fill="none" stroke="black" d="M702.23,-648.26C720.55,-635.38 746.45,-617.54 769.75,-602.75 785.73,-592.61 803.65,-581.94 819.29,-572.86"/>
 <polygon fill="black" stroke="black" points="820.97,-575.93 827.88,-567.9 817.47,-569.87 820.97,-575.93"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265">
 <text text-anchor="start" x="769" y="-603.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -951,12 +951,12 @@
 <!-- write_testcase_properties/3&#45;&gt;write_xml_close_tag/1 -->
 <g id="edge41" class="edge">
 <title>write_testcase_properties/3&#45;&gt;write_xml_close_tag/1</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="calls">
 <path fill="none" stroke="black" d="M573.8,-650.21C569.14,-649.61 564.52,-649.04 560,-648.5 392.32,-628.45 337.51,-677.73 181.75,-612.5 161.95,-604.21 143.44,-588.75 129.79,-575.26"/>
 <polygon fill="black" stroke="black" points="132.48,-573.01 123.01,-568.27 127.46,-577.88 132.48,-573.01"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L265">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L265">
 <text text-anchor="start" x="181" y="-603.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -975,12 +975,12 @@
 <!-- tests_url/3&#45;&gt;user::atomic_list_concat/2 -->
 <g id="edge58" class="edge">
 <title>tests_url/3&#45;&gt;user::atomic_list_concat/2</title>
-<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L279" xlink:title="calls">
+<g id="a_edge58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L279" xlink:title="calls">
 <path fill="none" stroke="black" d="M296.36,-530.42C288.14,-511.75 274.93,-481.78 265.25,-459.8"/>
 <polygon fill="black" stroke="black" points="268.53,-458.57 261.3,-450.83 262.13,-461.39 268.53,-458.57"/>
 </a>
 </g>
-<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L279">
+<g id="a_edge58&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L279" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L279">
 <text text-anchor="start" x="280" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -988,7 +988,7 @@
 <!-- integers_to_atoms/2 -->
 <g id="node22" class="node">
 <title>integers_to_atoms/2</title>
-<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L316">
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L316" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L316">
 <polygon fill="cornsilk" stroke="black" points="432,-684.5 278,-684.5 278,-648.5 432,-648.5 432,-684.5"/>
 <text text-anchor="start" x="285.88" y="-667.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="290.88" y="-666.55" font-family="Monospace" font-size="11.00">integers_to_atoms/2</text>
@@ -1002,12 +1002,12 @@
 <!-- date_time_to_timestamp/7&#45;&gt;integers_to_atoms/2 -->
 <g id="edge42" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;integers_to_atoms/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M245.31,-765.92C267.07,-746.4 302.6,-714.52 327.31,-692.35"/>
 <polygon fill="black" stroke="black" points="329.32,-695.24 334.43,-685.96 324.65,-690.03 329.32,-695.24"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311">
 <text text-anchor="start" x="294" y="-721.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1015,7 +1015,7 @@
 <!-- pad_single_char_atoms/2 -->
 <g id="node23" class="node">
 <title>pad_single_char_atoms/2</title>
-<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L322">
+<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L322" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L322">
 <polygon fill="cornsilk" stroke="black" points="259.5,-684.5 78.5,-684.5 78.5,-648.5 259.5,-648.5 259.5,-684.5"/>
 <text text-anchor="start" x="86.38" y="-667.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="91.38" y="-666.55" font-family="Monospace" font-size="11.00">pad_single_char_atoms/2</text>
@@ -1029,12 +1029,12 @@
 <!-- date_time_to_timestamp/7&#45;&gt;pad_single_char_atoms/2 -->
 <g id="edge43" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;pad_single_char_atoms/2</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M217.47,-765.92C208.23,-747.17 193.38,-717 182.54,-695"/>
 <polygon fill="black" stroke="black" points="185.82,-693.73 178.26,-686.31 179.54,-696.82 185.82,-693.73"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311">
 <text text-anchor="start" x="199" y="-721.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1042,12 +1042,12 @@
 <!-- date_time_to_timestamp/7&#45;&gt;user::atomic_list_concat/2 -->
 <g id="edge59" class="edge">
 <title>date_time_to_timestamp/7&#45;&gt;user::atomic_list_concat/2</title>
-<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311" xlink:title="calls">
+<g id="a_edge59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311" xlink:title="calls">
 <path fill="none" stroke="black" d="M176.52,-765.8C117.68,-742.32 31.93,-697.78 70,-648.5 108.75,-598.34 163.42,-657.56 208,-612.5 229.06,-591.21 243.23,-506 249.43,-460.69"/>
 <polygon fill="black" stroke="black" points="252.9,-461.18 250.74,-450.81 245.96,-460.26 252.9,-461.18"/>
 </a>
 </g>
-<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L311">
+<g id="a_edge59&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L311">
 <text text-anchor="start" x="214" y="-603.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1055,7 +1055,7 @@
 <!-- write_xml_tag_attributes/1 -->
 <g id="node29" class="node">
 <title>write_xml_tag_attributes/1</title>
-<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L374">
+<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L374" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L374">
 <polygon fill="cornsilk" stroke="black" points="960.5,-449 759.5,-449 759.5,-413 960.5,-413 960.5,-449"/>
 <text text-anchor="start" x="767.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="772.25" y="-431.05" font-family="Monospace" font-size="11.00">write_xml_tag_attributes/1</text>
@@ -1069,12 +1069,12 @@
 <!-- write_xml_empty_tag/2&#45;&gt;write_xml_tag_attributes/1 -->
 <g id="edge44" class="edge">
 <title>write_xml_empty_tag/2&#45;&gt;write_xml_tag_attributes/1</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L332" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L332" xlink:title="calls">
 <path fill="none" stroke="black" d="M705.25,-530.42C736.61,-510.48 788.27,-477.62 823.19,-455.41"/>
 <polygon fill="black" stroke="black" points="824.73,-458.58 831.29,-450.26 820.97,-452.67 824.73,-458.58"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L332">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L332" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L332">
 <text text-anchor="start" x="774" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1082,12 +1082,12 @@
 <!-- write_xml_open_tag/2&#45;&gt;write_xml_tag_attributes/1 -->
 <g id="edge45" class="edge">
 <title>write_xml_open_tag/2&#45;&gt;write_xml_tag_attributes/1</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L338" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L338" xlink:title="calls">
 <path fill="none" stroke="black" d="M860,-530.42C860,-512.01 860,-482.6 860,-460.71"/>
 <polygon fill="black" stroke="black" points="863.5,-460.96 860,-450.96 856.5,-460.96 863.5,-460.96"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L338">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L338" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L338">
 <text text-anchor="start" x="860" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1095,7 +1095,7 @@
 <!-- write_xml_element/3 -->
 <g id="node26" class="node">
 <title>write_xml_element/3</title>
-<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L344">
+<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L344">
 <polygon fill="cornsilk" stroke="black" points="1113,-566.75 959,-566.75 959,-530.75 1113,-530.75 1113,-566.75"/>
 <text text-anchor="start" x="966.88" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="971.88" y="-548.8" font-family="Monospace" font-size="11.00">write_xml_element/3</text>
@@ -1109,12 +1109,12 @@
 <!-- write_xml_element/3&#45;&gt;write_xml_tag_attributes/1 -->
 <g id="edge46" class="edge">
 <title>write_xml_element/3&#45;&gt;write_xml_tag_attributes/1</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L344" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L344" xlink:title="calls">
 <path fill="none" stroke="black" d="M1009.65,-530.42C979.45,-510.56 929.79,-477.9 896.03,-455.69"/>
 <polygon fill="black" stroke="black" points="898.07,-452.85 887.79,-450.28 894.23,-458.7 898.07,-452.85"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L344">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L344" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L344">
 <text text-anchor="start" x="953" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1122,12 +1122,12 @@
 <!-- writeq_xml_cdata_element/3&#45;&gt;write_xml_tag_attributes/1 -->
 <g id="edge47" class="edge">
 <title>writeq_xml_cdata_element/3&#45;&gt;write_xml_tag_attributes/1</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L354" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M1304.35,-648.18C1267.59,-620.66 1192.02,-566.41 1122,-530.75 1058.48,-498.4 981.76,-470.71 927.8,-452.96"/>
 <polygon fill="black" stroke="black" points="929.02,-449.67 918.43,-449.9 926.85,-456.33 929.02,-449.67"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L354">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L354">
 <text text-anchor="start" x="1183" y="-545.08" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1135,7 +1135,7 @@
 <!-- pretty_print_vars_quoted/1 -->
 <g id="node36" class="node">
 <title>pretty_print_vars_quoted/1</title>
-<g id="a_node36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L430" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L430">
+<g id="a_node36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L430" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L430">
 <polygon fill="cornsilk" stroke="black" points="1427.5,-566.75 1226.5,-566.75 1226.5,-530.75 1427.5,-530.75 1427.5,-566.75"/>
 <text text-anchor="start" x="1234.38" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1239.25" y="-548.8" font-family="Monospace" font-size="11.00">pretty_print_vars_quoted/1</text>
@@ -1149,12 +1149,12 @@
 <!-- writeq_xml_cdata_element/3&#45;&gt;pretty_print_vars_quoted/1 -->
 <g id="edge48" class="edge">
 <title>writeq_xml_cdata_element/3&#45;&gt;pretty_print_vars_quoted/1</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L354" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L354" xlink:title="calls">
 <path fill="none" stroke="black" d="M1327,-648.17C1327,-629.76 1327,-600.35 1327,-578.46"/>
 <polygon fill="black" stroke="black" points="1330.5,-578.71 1327,-568.71 1323.5,-578.71 1330.5,-578.71"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L354">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L354" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L354">
 <text text-anchor="start" x="1327" y="-603.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1162,7 +1162,7 @@
 <!-- write_xml_cdata_element/3 -->
 <g id="node28" class="node">
 <title>write_xml_cdata_element/3</title>
-<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L364">
+<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L364">
 <polygon fill="cornsilk" stroke="black" points="576,-566.75 382,-566.75 382,-530.75 576,-530.75 576,-566.75"/>
 <text text-anchor="start" x="389.88" y="-549.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="394.62" y="-548.8" font-family="Monospace" font-size="11.00">write_xml_cdata_element/3</text>
@@ -1176,12 +1176,12 @@
 <!-- write_xml_cdata_element/3&#45;&gt;write_xml_tag_attributes/1 -->
 <g id="edge49" class="edge">
 <title>write_xml_cdata_element/3&#45;&gt;write_xml_tag_attributes/1</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L364" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L364" xlink:title="calls">
 <path fill="none" stroke="black" d="M536.45,-530.3C604.87,-509.51 719.01,-474.83 791.83,-452.71"/>
 <polygon fill="black" stroke="black" points="792.71,-456.1 801.26,-449.85 790.67,-449.4 792.71,-456.1"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L364">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L364">
 <text text-anchor="start" x="680" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1189,7 +1189,7 @@
 <!-- pretty_print_vars/1 -->
 <g id="node35" class="node">
 <title>pretty_print_vars/1</title>
-<g id="a_node35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L424" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L424">
+<g id="a_node35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L424" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L424">
 <polygon fill="cornsilk" stroke="black" points="556,-449 402,-449 402,-413 556,-413 556,-449"/>
 <text text-anchor="start" x="409.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="414.88" y="-431.05" font-family="Monospace" font-size="11.00">pretty_print_vars/1</text>
@@ -1203,12 +1203,12 @@
 <!-- write_xml_cdata_element/3&#45;&gt;pretty_print_vars/1 -->
 <g id="edge50" class="edge">
 <title>write_xml_cdata_element/3&#45;&gt;pretty_print_vars/1</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L364" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L364" xlink:title="calls">
 <path fill="none" stroke="black" d="M479,-530.42C479,-512.01 479,-482.6 479,-460.71"/>
 <polygon fill="black" stroke="black" points="482.5,-460.96 479,-450.96 475.5,-460.96 482.5,-460.96"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L364">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L364" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L364">
 <text text-anchor="start" x="479" y="-486.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1216,7 +1216,7 @@
 <!-- escape_special_characters/2 -->
 <g id="node31" class="node">
 <title>escape_special_characters/2</title>
-<g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L389">
+<g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L389">
 <polygon fill="cornsilk" stroke="black" points="964,-331.25 756,-331.25 756,-295.25 964,-295.25 964,-331.25"/>
 <text text-anchor="start" x="763.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="768.88" y="-313.3" font-family="Monospace" font-size="11.00">escape_special_characters/2</text>
@@ -1230,12 +1230,12 @@
 <!-- write_xml_tag_attributes/1&#45;&gt;escape_special_characters/2 -->
 <g id="edge51" class="edge">
 <title>write_xml_tag_attributes/1&#45;&gt;escape_special_characters/2</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L375" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L375" xlink:title="calls">
 <path fill="none" stroke="black" d="M860,-412.67C860,-394.26 860,-364.85 860,-342.96"/>
 <polygon fill="black" stroke="black" points="863.5,-343.21 860,-333.21 856.5,-343.21 863.5,-343.21"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L375">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L375" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L375">
 <text text-anchor="start" x="860" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1243,7 +1243,7 @@
 <!-- escape_special_characters//1 -->
 <g id="node33" class="node">
 <title>escape_special_characters//1</title>
-<g id="a_node33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L409" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L409">
+<g id="a_node33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L409" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L409">
 <polygon fill="cornsilk" stroke="black" points="769.5,-213.5 554.5,-213.5 554.5,-177.5 769.5,-177.5 769.5,-213.5"/>
 <text text-anchor="start" x="562.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="567.5" y="-195.55" font-family="Monospace" font-size="11.00">escape_special_characters//1</text>
@@ -1257,12 +1257,12 @@
 <!-- escape_special_characters/2&#45;&gt;escape_special_characters//1 -->
 <g id="edge52" class="edge">
 <title>escape_special_characters/2&#45;&gt;escape_special_characters//1</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L389" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L389" xlink:title="calls">
 <path fill="none" stroke="black" d="M830.36,-294.92C796.09,-274.89 739.55,-241.84 701.56,-219.63"/>
 <polygon fill="black" stroke="black" points="703.55,-216.74 693.15,-214.71 700.02,-222.78 703.55,-216.74"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L389">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L389">
 <text text-anchor="start" x="766" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1270,7 +1270,7 @@
 <!-- escape_special_characters_list/2 -->
 <g id="node34" class="node">
 <title>escape_special_characters_list/2</title>
-<g id="a_node34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L419" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L419">
+<g id="a_node34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L419" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L419">
 <polygon fill="cornsilk" stroke="black" points="1030,-213.5 788,-213.5 788,-177.5 1030,-177.5 1030,-213.5"/>
 <text text-anchor="start" x="795.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="801" y="-195.55" font-family="Monospace" font-size="11.00">escape_special_characters_list/2</text>
@@ -1284,12 +1284,12 @@
 <!-- escape_special_characters/2&#45;&gt;escape_special_characters_list/2 -->
 <g id="edge53" class="edge">
 <title>escape_special_characters/2&#45;&gt;escape_special_characters_list/2</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L389" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L389" xlink:title="calls">
 <path fill="none" stroke="black" d="M869.6,-294.86C875.05,-284.65 881.8,-271.4 887,-259.25 891.78,-248.06 896.36,-235.45 900.08,-224.49"/>
 <polygon fill="black" stroke="black" points="903.33,-225.81 903.16,-215.22 896.69,-223.61 903.33,-225.81"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L389">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L389" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L389">
 <text text-anchor="start" x="890" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1297,7 +1297,7 @@
 <!-- escape_special_character//1 -->
 <g id="node32" class="node">
 <title>escape_special_character//1</title>
-<g id="a_node32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L403">
+<g id="a_node32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L403" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L403">
 <polygon fill="cornsilk" stroke="black" points="766,-95.75 558,-95.75 558,-59.75 766,-59.75 766,-95.75"/>
 <text text-anchor="start" x="565.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="570.88" y="-77.8" font-family="Monospace" font-size="11.00">escape_special_character//1</text>
@@ -1311,12 +1311,12 @@
 <!-- escape_special_characters//1&#45;&gt;escape_special_character//1 -->
 <g id="edge54" class="edge">
 <title>escape_special_characters//1&#45;&gt;escape_special_character//1</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L411" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L411" xlink:title="calls">
 <path fill="none" stroke="black" d="M662,-177.17C662,-158.76 662,-129.35 662,-107.46"/>
 <polygon fill="black" stroke="black" points="665.5,-107.71 662,-97.71 658.5,-107.71 665.5,-107.71"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L411">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L411" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L411">
 <text text-anchor="start" x="662" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1324,12 +1324,12 @@
 <!-- escape_special_characters_list/2&#45;&gt;escape_special_characters/2 -->
 <g id="edge55" class="edge">
 <title>escape_special_characters_list/2&#45;&gt;escape_special_characters/2</title>
-<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L420" xlink:title="calls">
+<g id="a_edge55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L420" xlink:title="calls">
 <path fill="none" stroke="black" d="M884.86,-213.8C874.09,-223.03 862.53,-235.39 856.75,-249.5 852.4,-260.1 852.17,-272.56 853.41,-283.58"/>
 <polygon fill="black" stroke="black" points="849.93,-283.98 854.96,-293.31 856.84,-282.88 849.93,-283.98"/>
 </a>
 </g>
-<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L420" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L420">
+<g id="a_edge55&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L420" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L420">
 <text text-anchor="start" x="856" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1337,7 +1337,7 @@
 <!-- logtalk::message_hook/4 -->
 <g id="node38" class="node">
 <title>logtalk::message_hook/4</title>
-<g id="a_node38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L65">
+<g id="a_node38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L65">
 <polygon fill="skyblue" stroke="black" points="1419.5,-1626.5 1238.5,-1626.5 1238.5,-1590.5 1419.5,-1590.5 1419.5,-1626.5"/>
 <text text-anchor="start" x="1246.38" y="-1609.33" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1251.38" y="-1608.55" font-family="Monospace" font-size="11.00">logtalk::message_hook/4</text>
@@ -1351,12 +1351,12 @@
 <!-- logtalk::message_hook/4&#45;&gt;message_hook/1 -->
 <g id="edge1" class="edge">
 <title>logtalk::message_hook/4&#45;&gt;message_hook/1</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L65" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M1329,-1590.17C1329,-1571.76 1329,-1542.35 1329,-1520.46"/>
 <polygon fill="black" stroke="black" points="1332.5,-1520.71 1329,-1510.71 1325.5,-1520.71 1332.5,-1520.71"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f1cc6e55bacbf42ed7adb4138ed86815dfb4909d/tools/lgtunit/xunit_report.lgt#L65">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f5b121b830a5fa875dcebdee3ec1fb831d024f6e/tools/lgtunit/xunit_report.lgt#L65">
 <text text-anchor="start" x="1329" y="-1545.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
