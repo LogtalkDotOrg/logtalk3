@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:31:0,
+		version is 2:32:0,
 		author is 'Paulo Moura',
-		date is 2023-12-25,
+		date is 2024-03-20,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
@@ -124,6 +124,8 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, don't omit any prefix when printing paths:
 	default_option(omit_path_prefixes(Prefixes)) :-
 		(	logtalk::expand_library_path(home, Home) ->

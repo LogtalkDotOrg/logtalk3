@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -93,8 +93,20 @@
 			integer_to_padded_atom(Day, PaddedDay),
 			integer_to_padded_atom(Hours, PaddedHours),
 			integer_to_padded_atom(Minutes, PaddedMinutes),
-			atomic_list_concat([Label0, 'Generated on ', Year, '-', PaddedMonth, '-', PaddedDay, ', ', PaddedHours, ':', PaddedMinutes, '\\l'], Label)
-		;	Label = Label0
+			atomic_list_concat([Label0, 'Generated on ', Year, '-', PaddedMonth, '-', PaddedDay, ', ', PaddedHours, ':', PaddedMinutes, '\\l'], Label1)
+		;	Label1 = Label0
+		),
+		(	^^option(versions(true), Options) ->
+			current_logtalk_flag(version_data, logtalk(LogtalkMajor, LogtalkMinor, LogtalkPatch, LogtalkStatus)),
+			current_logtalk_flag(prolog_dialect, BackendId),
+			backend(BackendId, BackendName),
+			current_logtalk_flag(prolog_version, v(BackendMajor, BackendMinor, BackendPatch)),
+			atomic_list_concat([
+				Label1,
+				'Generated with Logtalk ', LogtalkMajor, '.', LogtalkMinor, '.', LogtalkPatch, '-', LogtalkStatus,
+				' running on ', BackendName, ' ', BackendMajor, '.', BackendMinor, '.', BackendPatch
+			], Label)
+		;	Label = Label1
 		).
 
 	integer_to_padded_atom(Integer, Atom) :-
@@ -103,6 +115,22 @@
 			atom_codes(Atom, [0'0| Codes])
 		;	atom_codes(Atom, Codes)
 		).
+
+	% Prolog backend identifier table
+	backend(b,       'B-Prolog').
+	backend(ciao,    'Ciao Prolog').
+	backend(cx,      'CxProlog').
+	backend(eclipse, 'ECLiPSe').
+	backend(gnu,     'GNU Prolog').
+	backend(ji,      'JIProlog').
+	backend(lvm,     'LVM').
+	backend(quintus, 'Quintus Prolog').
+	backend(sicstus, 'SICStus Prolog').
+	backend(swi,     'SWI-Prolog').
+	backend(tau,     'Tau Prolog').
+	backend(trealla, 'Trealla Prolog').
+	backend(xsb,     'XSB').
+	backend(yap,     'YAP').
 
 	file_footer(Stream, _Identifier, _Options) :-
 		write(Stream, '}\n').

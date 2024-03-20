@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:20:0,
+		version is 2:21:0,
 		author is 'Paulo Moura',
-		date is 2023-12-25,
+		date is 2024-03-20,
 		comment is 'Predicates for generating entity diagrams with only ``uses/2`` and ``use_module/2`` relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), xref_diagram(_)]
@@ -37,6 +37,8 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, print entity public predicates:
 	default_option(interface(true)).
 	% by default, print file labels:

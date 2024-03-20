@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -316,6 +316,9 @@ generated diagrams. For entity diagrams the options are:
 - `date(Boolean)`  
 	print current date and time (`true` or `false`; default is `true`)
 
+- `versions(Boolean)`  
+	print Logtalk and backend version data (`true` or `false`; default is `false`)
+
 - `interface(Boolean)`  
 	print public predicates (`true` or `false`; default is `true`)
 
@@ -396,6 +399,9 @@ For directory and file diagrams the options are:
 - `date(Boolean)`  
 	print current date and time (`true` or `false`; default is `true`)
 
+- `versions(Boolean)`  
+	print Logtalk and backend version data (`true` or `false`; default is `false`)
+
 - `directory_paths(Boolean)`  
 	print file directory paths (`true` or `false`; default is `false`)
 
@@ -445,6 +451,9 @@ For library diagrams the options are:
 
 - `date(Boolean)`  
 	print current date and time (`true` or `false`; default is `true`)
+
+- `versions(Boolean)`  
+	print Logtalk and backend version data (`true` or `false`; default is `false`)
 
 - `directory_paths(Boolean)`  
 	print file directory paths (`true` or `false`; default is `false`)

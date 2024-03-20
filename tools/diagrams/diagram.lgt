@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2024-03-06,
+		date is 2024-03-20,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -671,6 +671,8 @@
 	valid_option(title(Title)) :-
 		atom(Title).
 	valid_option(date(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(versions(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(interface(Boolean)) :-
 		valid(boolean, Boolean).

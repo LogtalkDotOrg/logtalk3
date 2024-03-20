@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:68:1,
+		version is 2:69:0,
 		author is 'Paulo Moura',
-		date is 2024-03-12,
+		date is 2024-03-20,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -699,6 +699,8 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, print entity public predicates:
 	default_option(interface(true)).
 	% by default, print file labels:

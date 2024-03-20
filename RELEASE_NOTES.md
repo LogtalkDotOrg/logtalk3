@@ -30,6 +30,12 @@ Documentation
 
 * ADDED: Also generate ePub and PDF versions of the APIs documentation.
 
+Tools
+-----
+
+* ADDED: New `diagrams` tool `versions/1` boolean option (default is `false`)
+to print the Logtalk and backend version data.
+
 
 3.76.0 - March 19, 2024
 =======================

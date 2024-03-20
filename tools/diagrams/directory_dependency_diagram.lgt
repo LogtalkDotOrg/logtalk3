@@ -23,9 +23,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2024-03-06,
+		date is 2024-03-20,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -152,6 +152,8 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, don't omit any prefix when printing paths:
 	default_option(omit_path_prefixes(Prefixes)) :-
 		(	logtalk::expand_library_path(home, Home) ->
