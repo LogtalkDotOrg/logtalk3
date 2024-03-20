@@ -23,7 +23,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:69:0,
+		version is 2:70:0,
 		author is 'Paulo Moura',
 		date is 2024-03-20,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -197,7 +197,7 @@
 		),
 		fail.
 	process_entity(Kind, Entity, Options) :-
-		calls_local_predicate(Kind, Entity, Caller, Line, Callee),
+		calls_local_predicate(Kind, Entity, Caller, Line, Callee, Options),
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
 		remember_referenced_predicate(Caller),
 		remember_referenced_predicate(Callee),
@@ -414,7 +414,7 @@
 			XRefOptions = [url('')| Options]
 		).
 
-	calls_local_predicate(module, Entity, Caller, Line, Callee) :-
+	calls_local_predicate(module, Entity, Caller, Line, Callee, _) :-
 		!,
 		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
 		Callee \= (_ :: _),
@@ -424,7 +424,7 @@
 			true
 		;	Line = -1
 		).
-	calls_local_predicate(Kind, Entity, Caller, Line, Callee) :-
+	calls_local_predicate(Kind, Entity, Caller, Line, Callee, _) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Callee0, CallsProperties)),
 		Callee0 \= (_ :: _),
@@ -464,6 +464,21 @@
 				Caller = CallerNonTerminal
 			;	Caller = Caller0
 			)
+		).
+	calls_local_predicate(Kind, Entity, Caller, Line, Caller, Options) :-
+		^^option(recursive_relations(true), Options),
+		Kind \== protocol,
+		entity_property(Kind, Entity, defines(Caller, CalleeDefinesProperties)),
+		Caller \= (_ :: _),
+		Caller \= (:: _),
+		Caller \= (^^ _),
+		Caller \= (_ << _),
+		Caller \= ':'(_, _),
+		\+ member(auxiliary, CalleeDefinesProperties),
+		memberchk(recursive, CalleeDefinesProperties),
+		(	member(line_count(Line), CalleeDefinesProperties) ->
+			true
+		;	Line = -1
 		).
 
 	calls_super_predicate(Kind, Entity, Caller, Line, Callee) :-
@@ -705,6 +720,8 @@
 	default_option(interface(true)).
 	% by default, print file labels:
 	default_option(file_labels(true)).
+	% by default, don't write recursive predicate definition links:
+	default_option(recursive_relations(false)).
 	% by default, don't write inheritance links:
 	default_option(inheritance_relations(false)).
 	% by default, don't write provide links:

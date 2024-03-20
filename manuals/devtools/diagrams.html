@@ -651,12 +651,21 @@ entity nodes (<code class="docutils literal notranslate"><span class="pre">true<
 </ul>
 <p>In the particular case of cross-referencing diagrams, there is also the
 option:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">url_line_references(Host)</span></code>
-syntax for the URL source file line part (an atom; possible values
-are <code class="docutils literal notranslate"><span class="pre">{github,gitlab,bitbucket}</span></code>; default is <code class="docutils literal notranslate"><span class="pre">github</span></code>); when using
-this option, the <code class="docutils literal notranslate"><span class="pre">CodeURLPrefix</span></code> should be a permanent link (i.e.
-it should include the commit SHA1)</p></li>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">recursive_relations(Boolean)</span></code></div>
+<div class="line">print recursive predicate relations (<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>; default
+is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">url_line_references(Host)</span></code></div>
+<div class="line">syntax for the URL source file line part (an atom; possible values
+are <code class="docutils literal notranslate"><span class="pre">{github,gitlab,bitbucket}</span></code>; default is <code class="docutils literal notranslate"><span class="pre">github</span></code>); when
+using this option, the <code class="docutils literal notranslate"><span class="pre">CodeURLPrefix</span></code> should be a permanent link
+(i.e. it should include the commit SHA1)</div>
+</div>
+</li>
 </ul>
 <p>For directory and file diagrams the options are:</p>
 <ul>

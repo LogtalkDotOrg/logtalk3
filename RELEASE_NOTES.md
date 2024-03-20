@@ -39,6 +39,10 @@ Documentation
 Tools
 -----
 
+* ADDED: New `diagrams` tool `recursive_relations/1` boolean option (default 
+is `false`) to output recursive `calls` links in predicate cross-referencing
+diagrams.
+
 * ADDED: New `diagrams` tool `versions/1` boolean option (default is `false`)
 to print the Logtalk and backend version data.
 

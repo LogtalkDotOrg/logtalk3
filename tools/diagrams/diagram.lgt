@@ -23,7 +23,7 @@
 	extends(options)).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:2:0,
 		author is 'Paulo Moura',
 		date is 2024-03-20,
 		comment is 'Common predicates for generating diagrams.',
@@ -679,6 +679,8 @@
 	valid_option(directory_paths(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(file_labels(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(recursive_relations(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(inheritance_relations(Boolean)) :-
 		valid(boolean, Boolean).
