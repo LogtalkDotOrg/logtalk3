@@ -5,10 +5,10 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on January 12, 2023
+##   Last updated on March 20, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -168,9 +168,11 @@ mv _conf.py conf.py
 make clean
 make html
 make info
+make latexpdf
 #make linkcheck
 cp -R _build/html/* ../
 cp _build/texinfo/LogtalkAPIs-*.info ../
+cp _build/latex/LogtalkAPIs-*.pdf ../
 make clean
 rm _templates/layout.html
 mv conf.py _conf.py

@@ -25,7 +25,10 @@ RELEASE NOTES
 3.77.0 - April ??, 2024
 =======================
 
+Documentation
+-------------
 
+* ADDED: Also generate a PDF version of the APIs documentation.
 
 
 3.76.0 - March 19, 2024
