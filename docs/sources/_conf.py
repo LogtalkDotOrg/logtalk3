@@ -178,8 +178,12 @@ texinfo_documents = [
 # -- Options for Epub output -------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = project
+epub_title = project + '\n\n' + release
+epub_author = author
+epub_publisher = author
+epub_copyright = copyright
 
+epub_basename = 'LogtalkAPIs-' + version
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #

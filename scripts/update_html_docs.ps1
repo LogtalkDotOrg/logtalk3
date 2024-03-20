@@ -160,10 +160,12 @@ Move-Item -Path _conf.py -Destination conf.py
 .\make.bat html
 .\make.bat info
 .\make.bat latexpdf
+.\make.bat epub
 #.\make linkcheck
 Copy-Item -Path .\_build\html\* -Destination .. -Recurse -Force
 Copy-Item -Path .\_build\texinfo\LogtalkAPIs-*.info -Destination ..
 Copy-Item -Path .\_build\latex\LogtalkAPIs-*.pdf -Destination ..
+Copy-Item -Path .\_build\epub\LogtalkAPIs-*.epub -Destination ..
 .\make.bat clean
 Remove-Item _templates/layout.html
 Move-Item -Path conf.py -Destination _conf.py

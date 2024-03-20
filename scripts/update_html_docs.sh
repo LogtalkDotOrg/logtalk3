@@ -169,10 +169,12 @@ make clean
 make html
 make info
 make latexpdf
+make epub
 #make linkcheck
 cp -R _build/html/* ../
 cp _build/texinfo/LogtalkAPIs-*.info ../
 cp _build/latex/LogtalkAPIs-*.pdf ../
+cp _build/epub/LogtalkAPIs-*.epub ../
 make clean
 rm _templates/layout.html
 mv conf.py _conf.py

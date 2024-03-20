@@ -28,7 +28,7 @@ RELEASE NOTES
 Documentation
 -------------
 
-* ADDED: Also generate a PDF version of the APIs documentation.
+* ADDED: Also generate ePub and PDF versions of the APIs documentation.
 
 
 3.76.0 - March 19, 2024
