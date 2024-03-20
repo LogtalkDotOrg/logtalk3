@@ -46,6 +46,12 @@ diagrams.
 * ADDED: New `diagrams` tool `versions/1` boolean option (default is `false`)
 to print the Logtalk and backend version data.
 
+Tests
+-----
+
+* ADDED: Preliminary test set for the Prolog `encoding/1` directive supported
+by some of the backends that support Unicode and multiple text encodings.
+
 
 3.76.0 - March 19, 2024
 =======================
