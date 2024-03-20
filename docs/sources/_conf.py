@@ -25,9 +25,9 @@ copyright = '1998-2024, Paulo Moura'
 author = 'Paulo Moura'
 
 # The short X.Y version
-version = '3.76.0'
+version = '3.77.0'
 # The full version, including alpha/beta/rc tags
-release = u'v3.76.0'
+release = u'v3.77.0-b01'
 
 
 # -- General configuration ---------------------------------------------------
@@ -130,6 +130,12 @@ latex_elements = {
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
+    'preamble': r'''
+        \usepackage{charter}
+        \usepackage[defaultsans]{lato}
+        \usepackage{inconsolata}
+        \usepackage[utf8]{inputenc}
+    ''',
 
     # Latex figure (float) alignment
     #
@@ -140,9 +146,11 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'LogtalkAPIs.tex', 'Logtalk APIs',
-     'PM', 'manual'),
+    (master_doc, 'LogtalkAPIs-' + version + '.tex', u'Logtalk APIs',
+     u'Paulo Moura', 'manual'),
 ]
+latex_engine = 'xelatex'
+latex_use_xindy = False
 
 
 # -- Options for manual page output ------------------------------------------
