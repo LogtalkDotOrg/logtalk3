@@ -238,11 +238,10 @@ Supported graph languages
 -------------------------
 
 Currently only the DOT graph language is supported (tested with Graphviz
-version 2.43 on macOS; visit the <http://www.graphviz.org/> website for
-more information). Some recent versions have a nasty regression in the
-SVG exporter where text overflows the boxes that should contain it. Also,
-old stable versions such as 2.40.1 have a bug (fixed in the recent versions)
-that can result in very long edges.
+version 10.0 on macOS; visit the <http://www.graphviz.org/> website for
+more information). There's also preliminary support for Mermaid (which is
+not loaded by default as its current version lacks required features for
+parity with Graphviz).
 
 The diagrams `.dot` files are created on the current directory by default.
 These files can be easily converted into a printable format such as SVG,

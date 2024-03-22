@@ -46,6 +46,9 @@ diagrams.
 * ADDED: New `diagrams` tool `versions/1` boolean option (default is `false`)
 to print the Logtalk and backend version data.
 
+* ADDED: Preliminary support for Mermaid to the `diagrams` tool (not loaded by
+default as its current version lacks parity with required Graphviz features).
+
 Tests
 -----
 
