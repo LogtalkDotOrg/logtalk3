@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
-		date is 2024-03-20,
+		date is 2024-03-22,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -75,7 +75,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', libraries, Options),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -139,7 +139,7 @@
 			::output_externals(Options),
 			::output_edges(Options),
 			::output_missing_externals(Options),
-			Format::file_footer(diagram_output_file, libraries, Options) ->
+			Format::file_footer(diagram_output_file, libraries, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -205,7 +205,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rlibrary, GraphOptions),
-			Format::file_footer(diagram_output_file, Library, Options) ->
+			Format::file_footer(diagram_output_file, Library, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rlibrary(Library, UserOptions)))
@@ -251,7 +251,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
-			Format::file_footer(diagram_output_file, Library, Options) ->
+			Format::file_footer(diagram_output_file, Library, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::library(Library, UserOptions)))
@@ -312,7 +312,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', directories, Options),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -389,7 +389,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rdirectory, GraphOptions),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, NormalizedDirectory, UserOptions)))
@@ -450,7 +450,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, directory, GraphOptions),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, NormalizedDirectory, UserOptions)))
@@ -503,7 +503,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', files, Options),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -562,7 +562,7 @@
 			::output_externals(Options),
 			::output_edges(Options),
 			::output_missing_externals(Options),
-			Format::file_footer(diagram_output_file, files, Options) ->
+			Format::file_footer(diagram_output_file, files, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),

@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:70:0,
+		version is 2:71:0,
 		author is 'Paulo Moura',
-		date is 2024-03-20,
+		date is 2024-03-22,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -102,7 +102,7 @@
 			output_externals(Options),
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
-			Format::file_footer(diagram_output_file, Identifier, Options) ->
+			Format::file_footer(diagram_output_file, Identifier, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, Kind, Entity))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::entity(Entity, UserOptions)))

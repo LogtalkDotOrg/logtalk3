@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:56:0,
+		version is 2:57:0,
 		author is 'Paulo Moura',
-		date is 2024-03-20,
+		date is 2024-03-22,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -107,7 +107,7 @@
 			^^output_edges(Options),
 			output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
-			Format::file_footer(diagram_output_file, Basename, Options) ->
+			Format::file_footer(diagram_output_file, Basename, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Source))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::file(Source, UserOptions)))

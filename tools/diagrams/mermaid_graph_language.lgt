@@ -27,7 +27,7 @@
 		version is 0:1:0,
 		author is 'Paulo Moura',
 		date is 2024-08-22,
-		comment is 'Predicates for generating graph files in the mermaid language (version 2.36.0 or later).'
+		comment is 'Predicates for generating graph files using Mermaid.'
 	]).
 
 	:- uses(list, [
@@ -82,7 +82,7 @@
 			integer_to_padded_atom(Day, PaddedDay),
 			integer_to_padded_atom(Hours, PaddedHours),
 			integer_to_padded_atom(Minutes, PaddedMinutes),
-			atomic_list_concat([Label0, 'Generated on ', Year, '-', PaddedMonth, '-', PaddedDay, ', ', PaddedHours, ':', PaddedMinutes, '\\l'], Label1)
+			atomic_list_concat([Label0, '<br/ >Generated on ', Year, '-', PaddedMonth, '-', PaddedDay, ', ', PaddedHours, ':', PaddedMinutes, '<br/ >'], Label1)
 		;	Label1 = Label0
 		),
 		(	^^option(versions(true), Options) ->
@@ -121,8 +121,11 @@
 	backend(xsb,     'XSB').
 	backend(yap,     'YAP').
 
-	file_footer(Stream, _Identifier, _Options) :-
-		write(Stream, '</pre>\n</body>\n</html>\n').
+	file_footer(Stream, _Identifier, Options) :-
+		write(Stream, '</pre>\n<p>\n'),
+		diagram_label(Options, Label),
+		write(Stream, Label),
+		write(Stream, '</p></body>\n</html>\n').
 
 	graph_header(Stream, Identifier, Label, Kind, _Options) :-
 		graph_style_margin_color(Kind, _Style, _Margin, Color),
