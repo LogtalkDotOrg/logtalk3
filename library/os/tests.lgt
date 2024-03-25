@@ -637,9 +637,9 @@
 
 	only_linux_and_bsd_systems :-
 		\+ os::operating_system_type(windows),
-		(	shell('uname | grep -q Linux') ->
+		(	os::shell('uname | grep -q Linux') ->
 			true
-		;	shell('uname | grep -q BSD')
+		;	os::shell('uname | grep -q BSD')
 		).
 
 	only_posix_systems :-
