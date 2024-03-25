@@ -36,6 +36,12 @@ Documentation
 
 * ADDED: Also generate ePub and PDF versions of the APIs documentation.
 
+Library
+-------
+
+* FIXED: The `os` library `date_time/7` predicate for XSB to return the local
+date and time.
+
 Tools
 -----
 

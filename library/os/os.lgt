@@ -38,7 +38,7 @@
 	:- use_module(library(lists)).
 	:- use_module(library(statistics)).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
-	:- import(from(/(datime,1), standard)).
+	:- import(from(/(get_localdate,6), standard)).
 	:- import(from(/(expand_atom,2), standard)).
 	:- import(from(/(xsb_configuration,2), xsb_configuration)).
 	:- import(from(/(sys_pid,1), shell)).
@@ -50,9 +50,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:100:1,
+		version is 1:100:2,
 		author is 'Paulo Moura',
-		date is 2024-03-16,
+		date is 2024-03-25,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -475,7 +475,7 @@
 			{datime(Time)}.
 
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, 0) :-
-			{datime(datime(Year, Month, Day, Hours, Minutes, Seconds))}.
+			{get_localdate(Year, Month, Day, Hours, Minutes, Seconds)}.
 
 		cpu_time(Time) :-
 			{cputime(Time)}.
