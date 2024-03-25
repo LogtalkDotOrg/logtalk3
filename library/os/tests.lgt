@@ -135,14 +135,26 @@
 	test(os_operating_system_type_1_01, true((Type == unix; Type == windows; Type == unknown))) :-
 		os::operating_system_type(Type).
 
+	test(os_operating_system_type_1_02, false) :-
+		os::operating_system_type(foo).
+
 	test(os_operating_system_name_1_01, true(Name \== '')) :-
 		os::operating_system_name(Name).
+
+	test(os_operating_system_name_1_02, false) :-
+		os::operating_system_name(foo).
 
 	test(os_operating_system_machine_1_01, true(Machine \== '')) :-
 		os::operating_system_machine(Machine).
 
+	test(os_operating_system_machine_1_02, false) :-
+		os::operating_system_machine(foo).
+
 	test(os_operating_system_release_1_01, true(Release \== '')) :-
 		os::operating_system_release(Release).
+
+	test(os_operating_system_release_1_02, false) :-
+		os::operating_system_release(foo).
 
 	test(os_environment_variable_2_01, true(atom(Path))) :-
 		os::environment_variable('PATH', Path).

@@ -14,8 +14,8 @@ Portable operating-system access protocol.
 |    ``logtalk_load(os(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:38:0
-| **Date:** 2024-02-26
+| **Version:** 1:38:1
+| **Date:** 2024-03-25
 
 | **Compilation flags:**
 |    ``static``
@@ -728,7 +728,7 @@ Operating system type. Possible values are ``unix``, ``windows``, and ``unknown`
 | **Template:**
 |    ``operating_system_type(Type)``
 | **Mode and number of proofs:**
-|    ``operating_system_type(?atom)`` - ``one``
+|    ``operating_system_type(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -747,7 +747,7 @@ Operating system name. On POSIX systems, it returns the value of ``uname -s``. O
 | **Template:**
 |    ``operating_system_name(Name)``
 | **Mode and number of proofs:**
-|    ``operating_system_name(?atom)`` - ``one``
+|    ``operating_system_name(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -766,7 +766,7 @@ Operating system hardware platform. On POSIX systems, it returns the value of ``
 | **Template:**
 |    ``operating_system_machine(Machine)``
 | **Mode and number of proofs:**
-|    ``operating_system_machine(?atom)`` - ``one``
+|    ``operating_system_machine(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -785,7 +785,7 @@ Operating system release. On POSIX systems, it returns the value of ``uname -r``
 | **Template:**
 |    ``operating_system_release(Release)``
 | **Mode and number of proofs:**
-|    ``operating_system_release(?atom)`` - ``one``
+|    ``operating_system_release(?atom)`` - ``zero_or_one``
 
 
 ------------
