@@ -39,6 +39,8 @@ Documentation
 Library
 -------
 
+* IMPROVED: Tests for the `os` library.
+
 * FIXED: The `os` library `date_time/7` predicate for XSB to return the local
 date and time.
 

@@ -38,6 +38,7 @@
 	:- use_module(library(lists)).
 	:- use_module(library(statistics)).
 :- elif(current_logtalk_flag(prolog_dialect, xsb)).
+	:- import(from(/(datime,1), standard)).
 	:- import(from(/(get_localdate,6), standard)).
 	:- import(from(/(expand_atom,2), standard)).
 	:- import(from(/(xsb_configuration,2), xsb_configuration)).

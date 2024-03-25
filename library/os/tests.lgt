@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:36:1,
+		version is 0:37:0,
 		author is 'Paulo Moura',
-		date is 2024-03-16,
+		date is 2024-03-25,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -43,57 +43,57 @@
 
 	test(os_date_time_7_01, true) :-
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds),
-		integer(Year),
-		integer(Month),
-		integer(Day),
-		integer(Hours),
-		integer(Minutes),
-		integer(Seconds),
-		integer(Milliseconds).
+		^^assertion(integer(Year)),
+		^^assertion(integer(Month)),
+		^^assertion(integer(Day)),
+		^^assertion(integer(Hours)),
+		^^assertion(integer(Minutes)),
+		^^assertion(integer(Seconds)),
+		^^assertion(integer(Milliseconds)).
 
 	test(os_decompose_file_name_3_01, true) :-
 		os::decompose_file_name('/home/user/foo.bar', Directory, Basename),
-		Directory == '/home/user/',
-		Basename == 'foo.bar'.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Basename == 'foo.bar').
 
 	test(os_decompose_file_name_3_02, true) :-
 		os::decompose_file_name('/home/user/foo', Directory, Basename),
-		Directory == '/home/user/',
-		Basename == foo.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Basename == foo).
 
 	test(os_decompose_file_name_3_03, true) :-
 		os::decompose_file_name('/home/user/', Directory, Basename),
-		Directory == '/home/user/',
-		Basename == ''.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Basename == '').
 
 	test(os_decompose_file_name_3_04, true) :-
 		os::decompose_file_name('foo.bar', Directory, Basename),
-		Directory == './',
-		Basename == 'foo.bar'.
+		^^assertion(Directory == './'),
+		^^assertion(Basename == 'foo.bar').
 
 	test(os_decompose_file_name_4_01, true) :-
 		os::decompose_file_name('/home/user/foo.bar', Directory, Name, Extension),
-		Directory == '/home/user/',
-		Name == foo,
-		Extension == '.bar'.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Name == foo),
+		^^assertion(Extension == '.bar').
 
 	test(os_decompose_file_name_4_02, true) :-
 		os::decompose_file_name('/home/user/foo', Directory, Name, Extension),
-		Directory == '/home/user/',
-		Name == foo,
-		Extension == ''.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Name == foo),
+		^^assertion(Extension == '').
 
 	test(os_decompose_file_name_4_03, true) :-
 		os::decompose_file_name('/home/user/', Directory, Name, Extension),
-		Directory == '/home/user/',
-		Name == '',
-		Extension == ''.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Name == ''),
+		^^assertion(Extension == '').
 
 	test(os_decompose_file_name_4_04, true) :-
 		os::decompose_file_name('foo.bar', Directory, Name, Extension),
-		Directory == './',
-		Name == 'foo',
-		Extension == '.bar'.
+		^^assertion(Directory == './'),
+		^^assertion(Name == 'foo'),
+		^^assertion(Extension == '.bar').
 
 	test(os_path_concat_3_01, true(Path == File)) :-
 		this(This),
