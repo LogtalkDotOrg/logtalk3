@@ -819,6 +819,7 @@ predicates that accept a list of options:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">update(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compatible(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
@@ -826,6 +827,10 @@ predicates that accept a list of options:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 </ul>
+<p>Note that, by default, only compatible packs can be installed. To
+install a pack that is incompatible with the current Logtalk version,
+backend version, or operating-system version, use the <code class="docutils literal notranslate"><span class="pre">install/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicates with the option <code class="docutils literal notranslate"><span class="pre">compatible(false)</span></code>.</p>
 <p>When a pack may be already installed, you can use the <code class="docutils literal notranslate"><span class="pre">update(true)</span></code>
 option to ensure that the installation will by updated to the specified
 version:</p>

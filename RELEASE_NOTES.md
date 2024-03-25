@@ -47,6 +47,12 @@ date and time.
 Tools
 -----
 
+* CHANGED: The `packs` tool to only install or restore, by default, packs that
+are compatible with the current Logtalk, backed, and operating-system versions.
+Add a new `compatible/1` boolean option for the `install/4`, `update/3`, and
+`restore/2` predicates (default is `true`) to allow overriding the new default
+behavior.
+
 * ADDED: New `diagrams` tool `recursive_relations/1` boolean option (default 
 is `false`) to output recursive `calls` links in predicate cross-referencing
 diagrams.

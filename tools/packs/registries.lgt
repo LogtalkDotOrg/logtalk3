@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:57:1,
+		version is 0:58:0,
 		author is 'Paulo Moura',
-		date is 2024-03-18,
+		date is 2024-03-25,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -694,6 +694,7 @@
 	default_option(clean(false)).
 	default_option(install(false)).
 	default_option(update(false)).
+	default_option(compatible(false)).
 	default_option(force(false)).
 	default_option(checksum(true)).
 	default_option(checksig(false)).
@@ -710,6 +711,8 @@
 	valid_option(install(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(update(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(compatible(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(force(Boolean)) :-
 		valid(boolean, Boolean).

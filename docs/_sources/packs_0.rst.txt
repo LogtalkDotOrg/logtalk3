@@ -14,8 +14,8 @@ Pack handling predicates.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:70:1
-| **Date:** 2024-03-18
+| **Version:** 0:71:0
+| **Date:** 2024-03-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -473,6 +473,7 @@ Installs a new pack using the specified options. Fails if the pack is unknown or
 
     - ``update(Boolean)`` option: Update pack if already installed. Default is ``false``. Overrides the ``force/1`` option.
     - ``force(Boolean)`` option: Force pack re-installation if already installed. Default is ``false``.
+    - ``compatible(Boolean)`` option: Restrict installation to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean pack archive after installation. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose installing steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
@@ -611,6 +612,7 @@ Updates an outdated pack to the specified version using the specified options. F
 
     - ``install(Boolean)`` option: Install pack latest version if not already installed. Default is ``false``.
     - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
+    - ``compatible(Boolean)`` option: Restrict updating to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
@@ -658,6 +660,7 @@ Updates an outdated pack to its latest version using the specified options. Fail
 
     - ``install(Boolean)`` option: Install pack latest version if not already installed. Default is ``false``.
     - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
+    - ``compatible(Boolean)`` option: Restrict updating to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
@@ -968,6 +971,7 @@ Restores a list of registries and packs plus their pinning status from a file us
 | **Remarks:**
 
     - ``force(Boolean)`` option: Force restoring if a registry is already defined or a pack is already installed. Default is ``true``.
+    - ``compatible(Boolean)`` option: Restrict installation to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean registry and pack archives after restoring. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose restoring steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksums. Default is ``true``.

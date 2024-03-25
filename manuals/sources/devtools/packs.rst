@@ -787,12 +787,18 @@ predicates that accept a list of options:
 -  ``clean(Boolean)`` (default is ``false``)
 -  ``update(Boolean)`` (default is ``false``)
 -  ``force(Boolean)`` (default is ``false``)
+-  ``compatible(Boolean)`` (default is ``true``)
 -  ``checksum(Boolean)`` (default is ``true``)
 -  ``checksig(Boolean)`` (default is ``false``)
 -  ``git(Atom)`` (extra command-line options; default is ``''``)
 -  ``curl(Atom)`` (extra command-line options; default is ``''``)
 -  ``gpg(Atom)`` (extra command-line options; default is ``''``)
 -  ``tar(Atom)`` (extra command-line options; default is ``''``)
+
+Note that, by default, only compatible packs can be installed. To
+install a pack that is incompatible with the current Logtalk version,
+backend version, or operating-system version, use the ``install/4`` or
+``update/3`` predicates with the option ``compatible(false)``.
 
 When a pack may be already installed, you can use the ``update(true)``
 option to ensure that the installation will by updated to the specified

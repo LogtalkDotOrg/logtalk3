@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:25:1,
+		version is 0:26:0,
 		author is 'Paulo Moura',
-		date is 2024-03-15,
+		date is 2024-03-25,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -284,17 +284,17 @@
 
 	% install packs with dependencies
 
-	test(packs_packs_install_3_01, true) :-
-		packs::install(local_1_d, foo, 1:0:0).
+	test(packs_packs_install_4_01, true) :-
+		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]).
 
-	test(packs_packs_install_3_02, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_install_4_02, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_1_d, foo, Version, Pinned).
 
-	test(packs_packs_install_3_03, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_install_4_03, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
-	test(packs_packs_install_3_04, true(Version-Pinned == (2:0:0)-false)) :-
-		packs::install(local_1_d, foo, 2:0:0, [update(true)]),
+	test(packs_packs_install_4_04, true(Version-Pinned == (2:0:0)-false)) :-
+		packs::install(local_1_d, foo, 2:0:0, [update(true), compatible(false)]),
 		packs::installed(local_1_d, foo, Version, Pinned).
 
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
@@ -302,10 +302,10 @@
 
 	% update all installed packs
 
-	test(packs_packs_update_1_02, true(Version-Pinned == (2:0:0)-false)) :-
+	test(packs_packs_update_2_02, true(Version-Pinned == (2:0:0)-false)) :-
 		packs::uninstall(foo),
-		packs::install(local_1_d, foo, 1:0:0),
-		packs::update,
+		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]),
+		packs::update(foo, [compatible(false)]),
 		packs::installed(local_1_d, foo, Version, Pinned).
 
 	% update packs
@@ -318,8 +318,8 @@
 
 	test(packs_packs_update_3_01, true) :-
 		packs::uninstall(foo),
-		packs::install(local_1_d, foo, 1:0:0),
-		packs::update(foo, 2:0:0, [clean(true)]).
+		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]),
+		packs::update(foo, 2:0:0, [clean(true), compatible(false)]).
 
 	% clean pack archives
 
@@ -386,40 +386,40 @@
 
 	% save and restore setups
 
-	test(packs_packs_save_1_01, true(os::file_exists(Setup))) :-
+	test(packs_packs_save_2_01, true(os::file_exists(Setup))) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'test_files/setup.txt', Setup),
 		packs::save(Setup).
 
-	test(packs_packs_restore_1_01, true) :-
+	test(packs_packs_restore_2_01, true) :-
 		packs::uninstall,
 		packs::clean,
 		registries::delete,
 		registries::clean.
 
-	test(packs_packs_restore_1_02, false) :-
+	test(packs_packs_restore_2_02, false) :-
 		packs::installed(_, _, _, _).
 
-	test(packs_packs_restore_1_03, false) :-
+	test(packs_packs_restore_2_03, false) :-
 		registries::defined(_, _, _, _).
 
-	test(packs_packs_restore_1_04, true) :-
+	test(packs_packs_restore_2_04, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'test_files/setup.txt', Setup),
-		packs::restore(Setup).
+		packs::restore(Setup, [compatible(false)]).
 
-	test(packs_packs_restore_1_05, true(HowDefined-Pinned == directory-true)) :-
+	test(packs_packs_restore_2_05, true(HowDefined-Pinned == directory-true)) :-
 		registries::defined(local_1_d, _, HowDefined, Pinned).
 
-	test(packs_packs_restore_1_06, true(HowDefined-Pinned == archive-true)) :-
+	test(packs_packs_restore_2_06, true(HowDefined-Pinned == archive-true)) :-
 		registries::defined(local_2_d, _, HowDefined, Pinned).
 
-	test(packs_packs_restore_1_07, true(Version-Pinned == (2:0:0)-false)) :-
+	test(packs_packs_restore_2_07, true(Version-Pinned == (2:0:0)-false)) :-
 		packs::installed(local_1_d, foo, Version, Pinned).
 
-	test(packs_packs_restore_1_08, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_restore_2_08, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
 	% broken registry and pack specs
