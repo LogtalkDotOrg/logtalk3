@@ -1805,6 +1805,23 @@
 		;	print_message(warning, packs, 'No pack version compatible with the current Logtalk version is available: ~w'+[Major:Minor:Patch]),
 			fail
 		).
+	check_range_dependency(Backend, Lower, (==), Upper, (==), Action, Options) :-
+		current_logtalk_flag(prolog_dialect, Backend),
+		!,
+		current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
+		fix_version_for_comparison(Lower, Major:Minor:Patch, LowerFixedVersion),
+		fix_version_for_comparison(Upper, Major:Minor:Patch, UpperFixedVersion),
+		(	(	LowerFixedVersion == Lower
+			;	UpperFixedVersion == Upper
+			) ->
+			Action = none
+		;	^^option(compatible(false), Options) ->
+			backend(Backend, Name),
+			Action = backend(Name, (==), Lower, (==), Upper)
+		;	backend(Backend, Name),
+			print_message(warning, packs, 'No pack version compatible with the current backend version is available: ~w ~w'+[Name, Major:Minor:Patch]),
+			fail
+		).
 	check_range_dependency(Backend, Lower, Operator1, Upper, Operator2, Action, Options) :-
 		current_logtalk_flag(prolog_dialect, Backend),
 		!,
@@ -1823,10 +1840,16 @@
 		).
 	check_range_dependency(_, _, _, _, _, none, _).
 
+%	check_dependency((Dependency; Dependencies), Action, Options) :-
+%		!,
+%		(	check_dependency(Dependency, Action, Options) ->
+%			true
+%		;	check_dependency(Dependencies, Action, Options)
+%		).
 	check_dependency(Dependency, Action, Options) :-
-		Dependency =.. [Operator, Pack, Version],
-		check_availability(Pack),
-		check_version(Operator, Pack, Version, Dependency, Action, Options).
+		Dependency =.. [Operator, Resource, Version],
+		check_availability(Resource),
+		check_version(Operator, Resource, Version, Dependency, Action, Options).
 
 	check_availability(Registry::Pack) :-
 		!,
