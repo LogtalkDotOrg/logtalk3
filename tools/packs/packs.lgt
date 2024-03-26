@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:71:0,
 		author is 'Paulo Moura',
-		date is 2024-03-25,
+		date is 2024-03-26,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1789,7 +1789,7 @@
 			Action = none
 		;	^^option(compatible(false), Options) ->
 			Action = os(Name, Machine, Operator1, Lower, Operator2, Upper)
-		;	print_message(warning, packs, @'No compatible pack version is available!'),
+		;	print_message(warning, packs, 'No pack version compatible with the current operating-system is available: ~w ~w ~w'+[Name, Machine, Version]),
 			fail
 		).
 	check_range_dependency(logtalk, Lower, Operator1, Upper, Operator2, Action, Options) :-
@@ -1965,11 +1965,14 @@
 		(	member(Dialect, [Backend| Backends]) ->
 			true
 		;	^^option(compatible(true), Options) ->
-			print_message(warning, packs, 'No pack version compatible with the current backend was found: ~q'+[Dialect]),
+			backend(Dialect, Name),
+			print_message(warning, packs, 'No pack version compatible with the current backend was found: ~w'+[Name]),
 			fail
 		;	Backends == [] ->
-			print_message(warning, packs, 'Using the pack requires a different backend: ~q'+[Backend])
-		;	print_message(warning, packs, 'Using the pack requires one of the following backends: ~q'+[[Backend| Backends]])
+			backend(Dialect, Name),
+			print_message(warning, packs, 'Using the pack requires a different backend: ~w'+[Name])
+		;	backends([Backend| Backends], Names),
+			print_message(warning, packs, 'Using the pack requires one of the following backends: ~w'+[Names])
 		).
 
 	% auxiliary predicates
@@ -2210,6 +2213,11 @@
 	backend(trealla, 'Trealla Prolog').
 	backend(xsb,     'XSB').
 	backend(yap,     'YAP').
+
+	backends([], []).
+	backends([Backend| Backends], [Name| Names]) :-
+		backend(Backend, Name),
+		backends(Backends, Names).
 
 	% options handling
 
