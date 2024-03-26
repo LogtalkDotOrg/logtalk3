@@ -709,6 +709,10 @@ calling the `packs::update/0` predicate or update a single pack using the
 
 	| ?- packs::update(bar).
 
+By default, updating a pack fails if it would break any dependent pack
+(the `force(true)` option, described below, can be used to force updating
+in this case).
+
 The tool provides versions of the pack install, update, and uninstall
 predicates that accept a list of options:
 

@@ -211,7 +211,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:72:1</div>
+<div class="line"><strong>Version:</strong> 0:73:0</div>
 <div class="line"><strong>Date:</strong> 2024-03-26</div>
 </div>
 <div class="line-block">
@@ -1088,7 +1088,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">install(Boolean)</span></code> option: Install pack latest version if not already installed. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force update if the pack is pinned. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force update if the pack is pinned or breaks installed packs. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">compatible(Boolean)</span></code> option: Restrict updating to compatible packs. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> option: Clean pack archive after updating. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose updating steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
@@ -1159,7 +1159,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">install(Boolean)</span></code> option: Install pack latest version if not already installed. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force update if the pack is pinned. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> option: Force update if the pack is pinned or breaks installed packs. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">compatible(Boolean)</span></code> option: Restrict updating to compatible packs. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> option: Clean pack archive after updating. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose updating steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
@@ -1174,7 +1174,7 @@
 </section>
 <section id="update-1">
 <span id="packs-0-update-1"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update/1</span></code></a><a class="headerlink" href="#update-1" title="Link to this heading"></a></h3>
-<p>Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, orphaned, not installed, or unknown.</p>
+<p>Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, orphaned, not installed, unknown, or breaks installed packs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

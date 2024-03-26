@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:72:1,
+		version is 0:73:0,
 		author is 'Paulo Moura',
 		date is 2024-03-26,
 		comment is 'Pack handling predicates.'
@@ -271,7 +271,7 @@
 		argnames is ['Pack', 'Version', 'Options'],
 		remarks is [
 			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
-			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
+			'``force(Boolean)`` option' - 'Force update if the pack is pinned or breaks installed packs. Default is ``false``.',
 			'``compatible(Boolean)`` option' - 'Restrict updating to compatible packs. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
@@ -301,7 +301,7 @@
 		argnames is ['Pack', 'Options'],
 		remarks is [
 			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
-			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
+			'``force(Boolean)`` option' - 'Force update if the pack is pinned or breaks installed packs. Default is ``false``.',
 			'``compatible(Boolean)`` option' - 'Restrict updating to compatible packs. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
@@ -325,7 +325,7 @@
 	:- public(update/1).
 	:- mode(update(+atom), zero_or_one).
 	:- info(update/1, [
-		comment is 'Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, orphaned, not installed, or unknown.',
+		comment is 'Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, orphaned, not installed, unknown, or breaks installed packs.',
 		argnames is ['Pack'],
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,
@@ -1180,6 +1180,7 @@
 				check_availability(Registry, Pack, URL, CheckSum, Options),
 				check_dependencies(Dependencies, Installs, Options),
 				check_portability(Portability, Options),
+				check_dependents(Registry, Pack, NewVersion, Options),
 				uninstall_pack(Registry, Pack, Options),
 				install_dependencies(Installs),
 				install_pack(Registry, Pack, NewVersion, URL, CheckSum, Options) ->
@@ -1204,6 +1205,7 @@
 			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
 				check_dependencies(Dependencies, Installs, Options),
 				check_portability(Portability, Options),
+				check_dependents(Registry, Pack, LatestVersion, Options),
 				uninstall_pack(Registry, Pack, Options),
 				install_dependencies(Installs),
 				install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options) ->
@@ -2018,6 +2020,44 @@
 		;	backends([Backend| Backends], Names),
 			print_message(warning, packs, 'Using the pack requires one of the following backends: ~w'+[Names])
 		).
+
+	check_dependents(Registry, Pack, NewVersion, Options) :-
+		dependents(Registry, Pack, Dependents),
+		check_dependents(Dependents, Registry, Pack, NewVersion, Options).
+
+	check_dependents([], _, _, _, _).
+	check_dependents([Dependent| Dependents], Registry, Pack, NewVersion, Options) :-
+		check_dependent(Dependent, Registry, Pack, NewVersion, Options),
+		check_dependents(Dependents, Registry, Pack, NewVersion, Options).
+
+	check_dependent(Dependent, Registry, Pack, NewVersion, Options) :-
+		pack_object(Dependent, DependentObject),
+		installed_pack(_, Dependent, Version, _),
+		DependentObject::version(Version, _, _, _, Dependencies, _),
+		check_dependent_dependencies(Dependencies, Dependent, Registry, Pack, NewVersion, Options).
+
+	check_dependent_dependencies([], _, _, _, _, _).
+	check_dependent_dependencies([Dependency| Dependencies], Dependent, Registry, Pack, NewVersion, Options) :-
+		(	check_dependent_dependency(Dependency, Registry, Pack, NewVersion) ->
+			check_dependent_dependencies(Dependencies, Dependent, Registry, Pack, NewVersion, Options)
+		;	^^option(force(false), Options) ->
+			print_message(error, packs, 'Updating ~q to ~q would break installed pack ~q'+[Registry::Pack, NewVersion, Dependent]),
+			fail
+		;	print_message(warning, packs, 'Updating ~q to ~q breaks installed pack ~q'+[Registry::Pack, NewVersion, Dependent])
+		).
+
+	check_dependent_dependency((Dependency; Dependencies), Registry, Pack, NewVersion) :-
+		!,
+		(	check_dependent_dependency(Dependency, Registry, Pack, NewVersion) ->
+			true
+		;	check_dependent_dependency(Dependencies, Registry, Pack, NewVersion)
+		).
+	check_dependent_dependency(Dependency, Registry, Pack, NewVersion) :-
+		Dependency =.. [Operator, Registry::Pack, RequiredVersion],
+		!,
+		fix_version_for_availability(RequiredVersion, FixedVersion),
+		{call(Operator, NewVersion, FixedVersion)}.
+	check_dependent_dependency(_, _, _, _).
 
 	% auxiliary predicates
 

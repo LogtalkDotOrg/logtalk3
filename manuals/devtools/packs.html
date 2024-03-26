@@ -816,6 +816,9 @@ pack using the <code class="docutils literal notranslate"><span class="pre">pack
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>update(bar).
 </pre></div>
 </div>
+<p>By default, updating a pack fails if it would break any dependent pack
+(the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option, described below, can be used to force
+updating in this case).</p>
 <p>The tool provides versions of the pack install, update, and uninstall
 predicates that accept a list of options:</p>
 <ul class="simple">

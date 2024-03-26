@@ -66,6 +66,9 @@ to print the Logtalk and backend version data.
 * ADDED: Preliminary support for Mermaid to the `diagrams` tool (not loaded by
 default as its current version lacks parity with required Graphviz features).
 
+* IMPROVED: The `packs` tool now checks when updating a pack if any dependent
+pack will break.
+
 * FIXED: The `packs` tool to pass pack installing and updating options to any
 required dependencies that must also be installed or updated.
 
