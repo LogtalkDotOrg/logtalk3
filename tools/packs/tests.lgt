@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:26:0,
+		version is 0:27:0,
 		author is 'Paulo Moura',
-		date is 2024-03-25,
+		date is 2024-03-26,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -186,7 +186,7 @@
 	test(packs_registries_readme_1_01, true) :-
 		registries::readme(local_1_d).
 
-	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-bar, local_1_d-foo])) :-
+	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-bar, local_1_d-foo])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
 	test(packs_registries_update_1_01, true) :-
@@ -226,7 +226,7 @@
 	test(packs_packs_versions_3_01, true(Versions == [2:0:0,1:0:0])) :-
 		packs::versions(local_1_d, foo, Versions).
 
-	test(packs_packs_available_2_01, true(Packs == [local_1_d-bar, local_1_d-foo])) :-
+	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-bar, local_1_d-foo])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
@@ -296,6 +296,12 @@
 	test(packs_packs_install_4_04, true(Version-Pinned == (2:0:0)-false)) :-
 		packs::install(local_1_d, foo, 2:0:0, [update(true), compatible(false)]),
 		packs::installed(local_1_d, foo, Version, Pinned).
+
+	test(packs_packs_install_4_05, true) :-
+		packs::install(local_1_d, alt, 1:0:0, [compatible(false)]).
+
+	test(packs_packs_install_4_06, true(Version-Pinned == (1:0:0)-false)) :-
+		packs::installed(local_1_d, alt, Version, Pinned).
 
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
 		packs::dependents(local_2_d, baz, Dependents).

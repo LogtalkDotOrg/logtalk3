@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:72:0,
+		version is 0:72:1,
 		author is 'Paulo Moura',
 		date is 2024-03-26,
 		comment is 'Pack handling predicates.'
@@ -1303,9 +1303,15 @@
 				writeq(Stream, registry(Registry, URL)), write(Stream, '.\n')
 			)
 		),
-		forall(
+		findall(
+			pack(Registry, Pack, Version),
 			installed_pack(Registry, Pack, Version, _),
-			(writeq(Stream, pack(Registry, Pack, Version)), write(Stream, '.\n'))
+			PacksData0
+		),
+		sort(PacksData0, PacksData),
+		forall(
+			member(PackData, PacksData),
+			(writeq(Stream, PackData), write(Stream, '.\n'))
 		),
 		forall(
 			(member(Registry, SortedRegistries), registries::defined(Registry, _, _, true)),
@@ -1774,12 +1780,12 @@
 				{call(Operator2, UpperFixedVersion, Upper)} ->
 				Action = none
 			;	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) ->
-				Action = update(Registry, Pack, Version)
+				Action = update(Registry, Pack, Version, Options)
 			;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
 				fail
 			)
 		;	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) ->
-			Action = install(Registry, Pack, Version)
+			Action = install(Registry, Pack, Version, Options)
 		;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
 			fail
 		).
@@ -1872,12 +1878,12 @@
 			(	{call(Operator, FixedVersion, RequiredVersion)} ->
 				Action = none
 			;	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) ->
-				Action = update(Registry, Pack, Version)
+				Action = update(Registry, Pack, Version, Options)
 			;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 				fail
 			)
 		;	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) ->
-			Action = install(Registry, Pack, Version)
+			Action = install(Registry, Pack, Version, Options)
 		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 			fail
 		).
@@ -1992,10 +1998,10 @@
 		print_message(warning, packs, 'Pack requires the ~w operating-system running on ~w at version ~w ~q and ~w ~q'+[Name, Machine, Operator1, Lower, Operator2, Upper]).
 	install_dependency(os(Name, Machine, Version)) :-
 		print_message(warning, packs, 'Pack requires the ~w operating-system running on ~w at version ~w'+[Name, Machine, Version]).
-	install_dependency(install(Registry, Pack, Version)) :-
-		install(Registry, Pack, Version).
-	install_dependency(update(_Registry, Pack, Version)) :-
-		update(Pack, Version, []).
+	install_dependency(install(Registry, Pack, Version, Options)) :-
+		install(Registry, Pack, Version, Options).
+	install_dependency(update(_Registry, Pack, Version, Options)) :-
+		update(Pack, Version, Options).
 
 	check_portability(all, _).
 	check_portability([Backend| Backends], Options) :-

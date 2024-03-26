@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -19,9 +18,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(local_1_d_registry),
-	logtalk_load(alt_pack),
-	logtalk_load(bar_pack),
-	logtalk_load(foo_pack)
-)).
+:- object(alt_pack,
+	implements(pack_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2024-03-26,
+		comment is 'A local pack for testing.'
+	]).
+
+	name(alt).
+
+	description('A local pack for testing').
+
+	license('Apache-2.0').
+
+	home('file://test_files/alt').
+
+	version(
+		1:0:0,
+		stable,
+		'file://test_files/alt',
+		none,
+		[logtalk @>= 3:42:0, (local_1_d::foo == 1:0:0; local_1_d::foo == 2:0:0)],
+		all
+	).
+
+:- end_object.
