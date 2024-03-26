@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:71:0,
+		version is 0:72:0,
 		author is 'Paulo Moura',
 		date is 2024-03-26,
 		comment is 'Pack handling predicates.'
@@ -1805,6 +1805,7 @@
 		;	print_message(warning, packs, 'No pack version compatible with the current Logtalk version is available: ~w'+[Major:Minor:Patch]),
 			fail
 		).
+	% workaround the interim solution for allowing specifying two distinct compatible backend versions for a pack version
 	check_range_dependency(Backend, Lower, (==), Upper, (==), Action, Options) :-
 		current_logtalk_flag(prolog_dialect, Backend),
 		!,
@@ -1840,12 +1841,12 @@
 		).
 	check_range_dependency(_, _, _, _, _, none, _).
 
-%	check_dependency((Dependency; Dependencies), Action, Options) :-
-%		!,
-%		(	check_dependency(Dependency, Action, Options) ->
-%			true
-%		;	check_dependency(Dependencies, Action, Options)
-%		).
+	check_dependency((Dependency; Dependencies), Action, Options) :-
+		!,
+		(	check_dependency(Dependency, Action, Options) ->
+			true
+		;	check_dependency(Dependencies, Action, Options)
+		).
 	check_dependency(Dependency, Action, Options) :-
 		Dependency =.. [Operator, Resource, Version],
 		check_availability(Resource),
@@ -1858,7 +1859,7 @@
 		;	print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
 			fail
 		).
-	check_availability(_Backend).
+	check_availability(_).
 
 	check_version(Operator, Registry::Pack, RequiredVersion, Dependency, Action, Options) :-
 		!,
@@ -1876,36 +1877,46 @@
 		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 			fail
 		).
-	check_version(Operator, os(Name,Machine), RequiredVersion, _, Action, Options) :-
+	check_version(Operator, os(Name,Machine), RequiredVersion, Dependency, Action, Options) :-
 		!,
 		(	operating_system_name(Name),
 			operating_system_machine(Machine),
 			operating_system_release(Version),
 			{call(Operator, Version, RequiredVersion)} ->
 			Action = none
-		;	^^option(compatible(false), Options),
+		;	^^option(compatible(false), Options) ->
 			Action = os(Name, Machine, RequiredVersion)
+		;	print_message(error, packs, 'Operating-system dependency not available: ~q'+[Dependency]),
+			fail
 		).
-	check_version(Operator, logtalk, Version, _, Action, Options) :-
+	check_version(Operator, logtalk, Version, Dependency, Action, Options) :-
 		!,
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
 		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
 		(	{call(Operator, FixedVersion, Version)} ->
 			Action = none
-		;	^^option(compatible(false), Options),
+		;	^^option(compatible(false), Options) ->
 			Action = logtalk(Operator, Version)
+		;	print_message(error, packs, 'Logtalk dependency not available: ~q'+[Dependency]),
+			fail
 		).
-	check_version(Operator, Backend, Version, _, Action, Options) :-
+	check_version(Operator, Backend, Version, Dependency, Action, Options) :-
 		(	current_logtalk_flag(prolog_dialect, Backend) ->
 			current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
 			fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
 			(	{call(Operator, FixedVersion, Version)} ->
 				Action = none
-			;	^^option(compatible(false), Options),
+			;	^^option(compatible(false), Options) ->
 				backend(Backend, Name),
 				Action = backend(Name, Operator, Version)
+			;	print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
+				fail
 			)
-		;	Action = none
+		;	^^option(compatible(false), Options) ->
+			backend(Backend, Name),
+			Action = backend(Name, Operator, Version)
+		;	print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
+			fail
 		).
 
 	fix_version_for_comparison(_:_:_, Major:Minor:Patch, Major:Minor:Patch) :- !.
@@ -1992,7 +2003,7 @@
 			print_message(warning, packs, 'No pack version compatible with the current backend was found: ~w'+[Name]),
 			fail
 		;	Backends == [] ->
-			backend(Dialect, Name),
+			backend(Backend, Name),
 			print_message(warning, packs, 'Using the pack requires a different backend: ~w'+[Name])
 		;	backends([Backend| Backends], Names),
 			print_message(warning, packs, 'Using the pack requires one of the following backends: ~w'+[Names])

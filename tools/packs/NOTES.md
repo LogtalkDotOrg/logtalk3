@@ -581,10 +581,13 @@ for version 2.1).
 other than then the one specified. For example, `common::bits \== 2.1` means that
 the pack requires a `common::bits` pack version other than any 2.1.x version.
 
-It's also possible to specify _range_ dependencies by using two consecutive
-elements with the lower bound followed by the upper bound. For example,
-`[common::bits @>= 2, common::bits @< 3]` means all `common::bits` 2.x versions
-but not older or newer major versions.
+To specify _range_ dependencies by using two consecutive elements with the lower
+bound followed by the upper bound. For example, `common::bits @>= 2, common::bits @< 3`
+means all `common::bits` 2.x versions but not older or newer major versions.
+
+It's also possible to specify _alternative_ dependencies using the `(;)/2`
+operator. For example, `(common::bits == 1:9; common::bits @>= 2:3)` means
+either `common::bits` 1.9.x versions or 2.3.x and later versions.
 
 When a pack also depends on a Logtalk or backend version, the name `logtalk`
 or the backend identifier atom can be used in place of `Registry::Pack` (see

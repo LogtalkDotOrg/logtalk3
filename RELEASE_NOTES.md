@@ -53,6 +53,9 @@ Add a new `compatible/1` boolean option for the `install/4`, `update/3`, and
 `restore/2` predicates (default is `true`) to allow overriding the new default
 behavior.
 
+* ADDED: Support to the `packs` tool for specifying packs alternative
+dependencies using the `(;)/2` operator.
+
 * ADDED: New `diagrams` tool `recursive_relations/1` boolean option (default 
 is `false`) to output recursive `calls` links in predicate cross-referencing
 diagrams.
