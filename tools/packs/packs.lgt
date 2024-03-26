@@ -1646,6 +1646,10 @@
 	valid_status(alpha).
 	valid_status(deprecated).
 
+	valid_dependency((Dependency; Dependencies), Pack) :-
+		!,
+		valid_dependency(Dependency, Pack),
+		valid_dependency(Dependencies, Pack).
 	valid_dependency(Dependency, Pack) :-
 		functor(Dependency, Operator, 2),
 		arg(1, Dependency, What),
