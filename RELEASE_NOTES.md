@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * ADDED: Predicate property `recursive` to the reflection API to document
 that a predicate definition includes at least one recursive rule.
 
+* ADDED: Linter warnings for `logtalk::print_message/3` goals (specifically,
+missing message tokenization and misuse of `Format+Arguments` meta-message).
+
 Documentation
 -------------
 
