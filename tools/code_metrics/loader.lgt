@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -23,6 +23,7 @@
 :- initialization((
 	logtalk_load(types(loader)),
 	logtalk_load(os(loader)),
+	logtalk_load(options(loader)),
 	logtalk_load([
 		code_metrics_utilities,
 		code_metrics_messages,

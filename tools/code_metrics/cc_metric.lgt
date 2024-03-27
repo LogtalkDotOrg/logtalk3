@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -24,15 +24,23 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2024-03-27,
 		comment is 'Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.'
 	]).
 
-	:- uses(list, [length/2, member/2, memberchk/2]).
-	:- uses(numberlist, [sum/2]).
-	:- uses(logtalk, [expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3]).
+	:- uses(list, [
+		length/2, member/2, memberchk/2
+	]).
+
+	:- uses(numberlist, [
+		sum/2
+	]).
+
+	:- uses(logtalk, [
+		expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3
+	]).
 
 	entity_score(Entity, Score) :-
 		^^current_entity(Entity),
@@ -126,39 +134,45 @@
 		entity_score(Kind, Entity, Score),
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
-	file_score(File, Score) :-
+	file_score(File, Score, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		findall(
 			EntityScore,
 			(	loaded_file_property(File, object(Object)),
+				\+ member(Object, ExcludedEntities),
 				entity_score(object, Object, EntityScore)
 			;	loaded_file_property(File, category(Category)),
+				\+ member(Category, ExcludedEntities),
 				entity_score(category, Category, EntityScore)
 			),
 			EntityScores
 		),
 		sum(EntityScores, Score).
 
-	process_file(File) :-
-		file_score(File, Score),
+	process_file(File, Options) :-
+		file_score(File, Score, Options),
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
-	directory_score(Directory, Score) :-
-		findall(FileScore, directory_file_score(Directory, _, FileScore), FileScores),
+	directory_score(Directory, Score, Options) :-
+		findall(FileScore, directory_file_score(Directory, _, FileScore, Options), FileScores),
 		sum(FileScores, Score).
 
-	process_directory(Directory) :-
-		directory_score(Directory, Score),
+	process_directory(Directory, Options) :-
+		directory_score(Directory, Score, Options),
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
-	directory_file_score(Directory, File, Nocs) :-
+	directory_file_score(Directory, File, Nocs, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
 		loaded_file_property(File, directory(DirectorySlash)),
-		file_score(File, Nocs).
+		\+ member(File, ExcludedFiles),
+		file_score(File, Nocs, Options).
 
-	rdirectory_score(Directory, Score) :-
+	rdirectory_score(Directory, Score, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		setof(
 			SubDirectory,
 			^^sub_directory(Directory, SubDirectory),
@@ -167,25 +181,30 @@
 		findall(
 			DirectoryScore,
 			(	member(SubDirectory, SubDirectories),
-				directory_file_score(SubDirectory, _, DirectoryScore)
+				\+ (
+					member(ExcludedDirectory, ExcludedDirectories),
+					sub_atom(SubDirectory, 0, _, _, ExcludedDirectory)
+				),
+				directory_file_score(SubDirectory, _, DirectoryScore, Options)
 			),
 			DirectoryScores
 		),
 		sum(DirectoryScores, Score).
 
-	process_rdirectory(Directory) :-
-		rdirectory_score(Directory, Score),
+	process_rdirectory(Directory, Options) :-
+		rdirectory_score(Directory, Score, Options),
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
-	library_score(Library, Score) :-
+	library_score(Library, Score, Options) :-
 		expand_library_path(Library, Directory),
-		directory_score(Directory, Score).
+		directory_score(Directory, Score, Options).
 
-	process_library(Library) :-
-		library_score(Library, Score),
+	process_library(Library, Options) :-
+		library_score(Library, Score, Options),
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
-	rlibrary_score(Library, Score) :-
+	rlibrary_score(Library, Score, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		setof(
 			Path,
 			^^sub_library(Library, Path),
@@ -194,28 +213,34 @@
 		findall(
 			DirectoryScore,
 			(	member(Path, Paths),
-				directory_file_score(Path, _, DirectoryScore)
+				\+ (
+					member(ExcludedDirectory, ExcludedDirectories),
+					sub_atom(Path, 0, _, _, ExcludedDirectory)
+				),
+				directory_file_score(Path, _, DirectoryScore, Options)
 			),
 			DirectoryScores
 		),
 		sum(DirectoryScores, Score).
 
-	process_rlibrary(Library) :-
-		rlibrary_score(Library, Score),
+	process_rlibrary(Library, Options) :-
+		rlibrary_score(Library, Score, Options),
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
-	all_score(Score) :-
+	all_score(Score, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		findall(
 			FileScore,
 			(	loaded_file(File),
-				file_score(File, FileScore)
+				\+ member(File, ExcludedFiles),
+				file_score(File, FileScore, Options)
 			),
 			FileScores
 		),
 		sum(FileScores, Score).
 
-	process_all :-
-		all_score(Score),
+	process_all(Options) :-
+		all_score(Score, Options),
 		print_message(information, code_metrics, cyclomatic_complexity(Score)).
 
 	format_entity_score(_Entity, Total) -->

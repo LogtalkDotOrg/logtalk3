@@ -77,6 +77,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-metrics">Available metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#excluding-code-from-analysis">Excluding code from analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-new-metrics">Defining new metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#third-party-tools">Third-party tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#applying-metrics-to-prolog-modules">Applying metrics to Prolog modules</a></li>
@@ -260,6 +261,35 @@ or decision process.</p>
 <p>All metrics require the source code to be analyzed to be loaded with the
 <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on. For usage examples, see the
 <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory.</p>
+</section>
+<section id="excluding-code-from-analysis">
+<h2>Excluding code from analysis<a class="headerlink" href="#excluding-code-from-analysis" title="Link to this heading"></a></h2>
+<p>A set of options are available to specify code that should be excluded
+when applying code metrics:</p>
+<ul>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code></div>
+<div class="line">list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>; all
+sub-directories of the excluded directories are also excluded)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code></div>
+<div class="line">list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_libraries(Libraries)</span></code></div>
+<div class="line">list of libraries to exclude (default is
+<code class="docutils literal notranslate"><span class="pre">[startup,</span> <span class="pre">scratch_directory]</span></code>)</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_entities(Entities)</span></code></div>
+<div class="line">list of entities to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+</div>
+</li>
+</ul>
 </section>
 <section id="defining-new-metrics">
 <h2>Defining new metrics<a class="headerlink" href="#defining-new-metrics" title="Link to this heading"></a></h2>

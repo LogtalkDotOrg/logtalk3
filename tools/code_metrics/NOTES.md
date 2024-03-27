@@ -1,8 +1,8 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>  
-SPDX-FileCopyrightText: 2017 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
+SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -147,9 +147,28 @@ or decision process.
 Usage
 -----
 
-All metrics require the source code to be analyzed to be loaded
-with the `source_data` flag turned on. For usage examples, see
-the `SCRIPT.txt` file in the tool directory.
+All metrics require the source code to be analyzed to be loaded with the
+`source_data` flag turned on. For usage examples, see the `SCRIPT.txt`
+file in the tool directory.
+
+
+Excluding code from analysis
+----------------------------
+
+A set of options are available to specify code that should be excluded when
+applying code metrics:
+
+- `exclude_directories(Directories)`  
+	list of directories to exclude (default is `[]`; all sub-directories of the excluded directories are also excluded)
+
+- `exclude_files(Files)`  
+	list of source files to exclude (default is `[]`)
+
+- `exclude_libraries(Libraries)`  
+	list of libraries to exclude (default is `[startup, scratch_directory]`)
+
+- `exclude_entities(Entities)`  
+	list of entities to exclude (default is `[]`)
 
 
 Defining new metrics

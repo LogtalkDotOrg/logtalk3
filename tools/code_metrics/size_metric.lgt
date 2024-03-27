@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -24,45 +24,64 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2024-03-27,
 		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).'
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
+	:- uses(logtalk, [
+		expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3
+	]).
+
+	:- uses(numberlist, [
+		sum/2
+	]).
+
+	:- uses(os, [
+		file_size/2
 	]).
 
 	entity_score(Entity, Size) :-
 		^^entity_property(Entity, file(File)),
-		os::file_size(File, Size).
+		file_size(File, Size).
 
 	process_entity(_, Entity) :-
 		entity_score(Entity, Size),
-		logtalk::print_message(information, code_metrics, source_code_size(Size)).
+		print_message(information, code_metrics, source_code_size(Size)).
 
 	file_score(File, Size) :-
-		os::file_size(File, Size).
+		file_size(File, Size).
 
-	process_file(File) :-
+	process_file(File, _) :-
 		file_score(File, Size),
-		logtalk::print_message(information, code_metrics, source_code_size(Size)).
+		print_message(information, code_metrics, source_code_size(Size)).
 
-	directory_score(Directory, TotalSize) :-
-		findall(Size, directory_file_size(Directory, _, Size), Sizes),
-		numberlist::sum(Sizes, TotalSize).
+	directory_score(Directory, TotalSize, Options) :-
+		findall(Size, directory_file_size(Directory, _, Size, Options), Sizes),
+		sum(Sizes, TotalSize).
 
-	process_directory(Directory) :-
-		directory_score(Directory, TotalSize),
-		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
+	process_directory(Directory, Options) :-
+		directory_score(Directory, TotalSize, Options),
+		print_message(information, code_metrics, source_code_size(TotalSize)).
 
-	directory_file_size(Directory, File, Size) :-
+	directory_file_size(Directory, File, Size, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
-		logtalk::loaded_file_property(File, directory(DirectorySlash)),
-		os::file_size(File, Size).
+		loaded_file_property(File, directory(DirectorySlash)),
+		\+ member(File, ExcludedFiles),
+		file_size(File, Size).
 
-	rdirectory_score(Directory, TotalSize) :-
-		directory_score(Directory, DirectorySize),
+	rdirectory_score(Directory, TotalSize, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		directory_score(Directory, DirectorySize, Options),
 		(	setof(
 				SubDirectory,
 				^^sub_directory(Directory, SubDirectory),
@@ -73,23 +92,28 @@
 		),
 		findall(
 			SubDirectorySize,
-			(	list::member(SubDirectory, SubDirectories),
-				directory_file_size(SubDirectory, _, SubDirectorySize)
+			(	member(SubDirectory, SubDirectories),
+				\+ (
+					member(ExcludedDirectory, ExcludedDirectories),
+					sub_atom(SubDirectory, 0, _, _, ExcludedDirectory)
+				),
+				directory_file_size(SubDirectory, _, SubDirectorySize, Options)
 			),
 			SubDirectorySizes
 		),
-		numberlist::sum([DirectorySize| SubDirectorySizes], TotalSize).
+		sum([DirectorySize| SubDirectorySizes], TotalSize).
 
-	process_rdirectory(Directory) :-
-		rdirectory_score(Directory, TotalSize),
-		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
+	process_rdirectory(Directory, Options) :-
+		rdirectory_score(Directory, TotalSize, Options),
+		print_message(information, code_metrics, source_code_size(TotalSize)).
 
-	process_library(Library) :-
-		logtalk::expand_library_path(Library, Directory),
-		process_directory(Directory).
+	process_library(Library, Options) :-
+		expand_library_path(Library, Directory),
+		process_directory(Directory, Options).
 
-	rlibrary_score(Library, TotalSize) :-
-		library_score(Library, LibrarySize),
+	rlibrary_score(Library, TotalSize, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		library_score(Library, LibrarySize, Options),
 		(	setof(
 				SubLibrary,
 				^^sub_library(Library, SubLibrary),
@@ -100,34 +124,37 @@
 		),
 		findall(
 			SubLibrarySize,
-			(	list::member(SubLibrary, SubLibraries),
-				library_score(SubLibrary, SubLibrarySize)
+			(	member(SubLibrary, SubLibraries),
+				\+ member(SubLibrary, ExcludedLibraries),
+				library_score(SubLibrary, SubLibrarySize, Options)
 			),
 			SubLibrarySizes
 		),
-		numberlist::sum([LibrarySize| SubLibrarySizes], TotalSize).
+		sum([LibrarySize| SubLibrarySizes], TotalSize).
 
-	process_rlibrary(Library) :-
-		rlibrary_score(Library, TotalSize),
-		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
+	process_rlibrary(Library, Options) :-
+		rlibrary_score(Library, TotalSize, Options),
+		print_message(information, code_metrics, source_code_size(TotalSize)).
 
-	library_score(Library, Size) :-
-		logtalk::expand_library_path(Library, Directory),
-		directory_score(Directory, Size).
+	library_score(Library, Size, Options) :-
+		expand_library_path(Library, Directory),
+		directory_score(Directory, Size, Options).
 
-	all_score(TotalSize) :-
+	all_score(TotalSize, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		findall(
 			Size,
-			(	logtalk::loaded_file(File),
-				os::file_size(File, Size)
+			(	loaded_file(File),
+				\+ member(File, ExcludedFiles),
+				file_size(File, Size)
 			),
 			Sizes
 		),
-		numberlist::sum(Sizes, TotalSize).
+		sum(Sizes, TotalSize).
 
-	process_all :-
-		all_score(TotalSize),
-		logtalk::print_message(information, code_metrics, source_code_size(TotalSize)).
+	process_all(Options) :-
+		all_score(TotalSize, Options),
+		print_message(information, code_metrics, source_code_size(TotalSize)).
 
 	format_entity_score(_Entity, Size) -->
 		logtalk::message_tokens(source_code_size(Size), code_metrics).

@@ -14,23 +14,26 @@ Core predicates for computing source code metrics.
 |    ``logtalk_load(code_metrics(loader))``
 
 | **Author:** Ebrahim Azarisooreh and Paulo Moura
-| **Version:** 0:10:0
-| **Date:** 2022-05-05
+| **Version:** 0:11:0
+| **Date:** 2024-03-27
 
 | **Compilation flags:**
 |    ``static``
 
 
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`os <os/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -58,13 +61,32 @@ Scans an entity and prints its metric score.
 
 ------------
 
+.. index:: file/2
+.. _code_metric/0::file/2:
+
+``file/2``
+^^^^^^^^^^
+
+Prints metric scores for all the entities defined in a loaded source file using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``file(File,Options)``
+| **Mode and number of proofs:**
+|    ``file(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: file/1
 .. _code_metric/0::file/1:
 
 ``file/1``
 ^^^^^^^^^^
 
-Prints metric scores for all the entities defined in a loaded source file.
+Prints metric scores for all the entities defined in a loaded source file using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -77,13 +99,32 @@ Prints metric scores for all the entities defined in a loaded source file.
 
 ------------
 
+.. index:: directory/2
+.. _code_metric/0::directory/2:
+
+``directory/2``
+^^^^^^^^^^^^^^^
+
+Scans a directory and prints metric scores for all entities defined in its loaded source files using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``directory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``directory(+atom,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: directory/1
 .. _code_metric/0::directory/1:
 
 ``directory/1``
 ^^^^^^^^^^^^^^^
 
-Scans a directory and prints metric scores for all entities defined in its loaded source files.
+Scans a directory and prints metric scores for all entities defined in its loaded source files using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -96,13 +137,32 @@ Scans a directory and prints metric scores for all entities defined in its loade
 
 ------------
 
+.. index:: rdirectory/2
+.. _code_metric/0::rdirectory/2:
+
+``rdirectory/2``
+^^^^^^^^^^^^^^^^
+
+Recursive version of the ``directory/1`` predicate using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rdirectory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``rdirectory(+atom,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: rdirectory/1
 .. _code_metric/0::rdirectory/1:
 
 ``rdirectory/1``
 ^^^^^^^^^^^^^^^^
 
-Recursive version of the ``directory/1`` predicate.
+Recursive version of the ``directory/1`` predicate using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -115,13 +175,32 @@ Recursive version of the ``directory/1`` predicate.
 
 ------------
 
+.. index:: library/2
+.. _code_metric/0::library/2:
+
+``library/2``
+^^^^^^^^^^^^^
+
+Prints metrics scores for all loaded entities from a given library using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``library(Library,Options)``
+| **Mode and number of proofs:**
+|    ``library(+atom,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: library/1
 .. _code_metric/0::library/1:
 
 ``library/1``
 ^^^^^^^^^^^^^
 
-Prints metrics scores for all loaded entities from a given library.
+Prints metrics scores for all loaded entities from a given library using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -134,13 +213,32 @@ Prints metrics scores for all loaded entities from a given library.
 
 ------------
 
+.. index:: rlibrary/2
+.. _code_metric/0::rlibrary/2:
+
+``rlibrary/2``
+^^^^^^^^^^^^^^
+
+Recursive version of the ``library/1`` predicate using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rlibrary(Library,Options)``
+| **Mode and number of proofs:**
+|    ``rlibrary(+atom,+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: rlibrary/1
 .. _code_metric/0::rlibrary/1:
 
 ``rlibrary/1``
 ^^^^^^^^^^^^^^
 
-Recursive version of the ``library/1`` predicate.
+Recursive version of the ``library/1`` predicate using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -153,13 +251,32 @@ Recursive version of the ``library/1`` predicate.
 
 ------------
 
+.. index:: all/1
+.. _code_metric/0::all/1:
+
+``all/1``
+^^^^^^^^^
+
+Scans all loaded entities and prints their metric scores using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``all(Options)``
+| **Mode and number of proofs:**
+|    ``all(+list(compound))`` - ``one``
+
+
+------------
+
 .. index:: all/0
 .. _code_metric/0::all/0:
 
 ``all/0``
 ^^^^^^^^^
 
-Scans all loaded entities and prints their metric scores.
+Scans all loaded entities and prints their metric scores using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -344,114 +461,116 @@ Processes an entity of the given kind.
 
 ------------
 
-.. index:: process_file/1
-.. _code_metric/0::process_file/1:
+.. index:: process_file/2
+.. _code_metric/0::process_file/2:
 
-``process_file/1``
+``process_file/2``
 ^^^^^^^^^^^^^^^^^^
 
-Processes a source file.
+Processes a source file using the given options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``process_file(Path)``
+|    ``process_file(Path,Options)``
 | **Mode and number of proofs:**
-|    ``process_file(+atom)`` - ``one``
+|    ``process_file(+atom,+list(compound))`` - ``one``
 
 
 ------------
 
-.. index:: process_directory/1
-.. _code_metric/0::process_directory/1:
+.. index:: process_directory/2
+.. _code_metric/0::process_directory/2:
 
-``process_directory/1``
+``process_directory/2``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Processes a directory of source files.
+Processes a directory of source files using the given options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``process_directory(Path)``
+|    ``process_directory(Path,Options)``
 | **Mode and number of proofs:**
-|    ``process_directory(+atom)`` - ``one``
+|    ``process_directory(+atom,+list(compound))`` - ``one``
 
 
 ------------
 
-.. index:: process_rdirectory/1
-.. _code_metric/0::process_rdirectory/1:
+.. index:: process_rdirectory/2
+.. _code_metric/0::process_rdirectory/2:
 
-``process_rdirectory/1``
+``process_rdirectory/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Recursively process a directory of source files.
+Recursively process a directory of source files using the given options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``process_rdirectory(Path)``
+|    ``process_rdirectory(Path,Options)``
 | **Mode and number of proofs:**
-|    ``process_rdirectory(+atom)`` - ``one``
+|    ``process_rdirectory(+atom,+list(compound))`` - ``one``
 
 
 ------------
 
-.. index:: process_library/1
-.. _code_metric/0::process_library/1:
+.. index:: process_library/2
+.. _code_metric/0::process_library/2:
 
-``process_library/1``
+``process_library/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Processes a library of source files.
+Processes a library of source files using the given options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``process_library(Library)``
+|    ``process_library(Library,Options)``
 | **Mode and number of proofs:**
-|    ``process_library(+atom)`` - ``one``
+|    ``process_library(+atom,+list(compound))`` - ``one``
 
 
 ------------
 
-.. index:: process_rlibrary/1
-.. _code_metric/0::process_rlibrary/1:
+.. index:: process_rlibrary/2
+.. _code_metric/0::process_rlibrary/2:
 
-``process_rlibrary/1``
+``process_rlibrary/2``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Recursively process a library of source files.
+Recursively process a library of source files using the given options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``process_rlibrary(Library)``
+|    ``process_rlibrary(Library,Options)``
 | **Mode and number of proofs:**
-|    ``process_rlibrary(+atom)`` - ``one``
+|    ``process_rlibrary(+atom,+list(compound))`` - ``one``
 
 
 ------------
 
-.. index:: process_all/0
-.. _code_metric/0::process_all/0:
+.. index:: process_all/1
+.. _code_metric/0::process_all/1:
 
-``process_all/0``
+``process_all/1``
 ^^^^^^^^^^^^^^^^^
 
-Processes all loaded source code.
+Processes all loaded source code using the given options.
 
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``process_all(Options)``
 | **Mode and number of proofs:**
-|    ``process_all`` - ``one``
+|    ``process_all(+list(compound))`` - ``one``
 
 
 ------------

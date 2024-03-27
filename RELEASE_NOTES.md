@@ -59,6 +59,10 @@ behavior.
 * ADDED: Support to the `packs` tool for specifying packs alternative
 dependencies using the `(;)/2` operator.
 
+* ADDED: New public predicates to the `code_metrics` tool that take a list of
+options to selectively exclude from analysis libraries, directories, files,
+and entities.
+
 * ADDED: New `diagrams` tool `recursive_relations/1` boolean option (default 
 is `false`) to output recursive `calls` links in predicate cross-referencing
 diagrams.

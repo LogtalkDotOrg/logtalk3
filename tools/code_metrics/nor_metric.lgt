@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -24,10 +24,18 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2024-03-27,
 		comment is 'Number of entity rules metric. The score is represented using the compound term ``number_of_rules(Total, User)``.'
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
+	:- uses(logtalk, [
+		expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3
 	]).
 
 	entity_score(Entity, Score) :-
@@ -45,42 +53,48 @@
 
 	process_entity(Kind, Entity) :-
 		entity_score(Kind, Entity, Score),
-		logtalk::print_message(information, code_metrics, Score).
+		print_message(information, code_metrics, Score).
 
-	file_score(File, Score) :-
+	file_score(File, Score, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		findall(
 			EntityScore,
-			(	logtalk::loaded_file_property(File, object(Object)),
+			(	loaded_file_property(File, object(Object)),
+				\+ member(Object, ExcludedEntities),
 				entity_score(object, Object, EntityScore)
-			;	logtalk::loaded_file_property(File, category(Category)),
+			;	loaded_file_property(File, category(Category)),
+				\+ member(Category, ExcludedEntities),
 				entity_score(category, Category, EntityScore)
 			),
 			EntityScores
 		),
 		sum_scores(EntityScores, Score).
 
-	process_file(File) :-
-		file_score(File, Score),
-		logtalk::print_message(information, code_metrics, Score).
+	process_file(File, Options) :-
+		file_score(File, Score, Options),
+		print_message(information, code_metrics, Score).
 
-	directory_score(Directory, Score) :-
-		findall(FileScore, directory_file_score(Directory, _, FileScore), FileScores),
+	directory_score(Directory, Score, Options) :-
+		findall(FileScore, directory_file_score(Directory, _, FileScore, Options), FileScores),
 		sum_scores(FileScores, Score).
 
-	process_directory(Directory) :-
-		directory_score(Directory, Score),
-		logtalk::print_message(information, code_metrics, Score).
+	process_directory(Directory, Options) :-
+		directory_score(Directory, Score, Options),
+		print_message(information, code_metrics, Score).
 
-	directory_file_score(Directory, File, Nocs) :-
+	directory_file_score(Directory, File, Nocs, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		(	sub_atom(Directory, _, 1, 0, '/') ->
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
-		logtalk::loaded_file_property(File, directory(DirectorySlash)),
-		file_score(File, Nocs).
+		loaded_file_property(File, directory(DirectorySlash)),
+		\+ member(File, ExcludedFiles),
+		file_score(File, Nocs, Options).
 
-	rdirectory_score(Directory, Score) :-
-		directory_score(Directory, DirectoryScore),
+	rdirectory_score(Directory, Score, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		directory_score(Directory, DirectoryScore, Options),
 		(	setof(
 				SubDirectory,
 				^^sub_directory(Directory, SubDirectory),
@@ -91,27 +105,32 @@
 		),
 		findall(
 			SubDirectoryScore,
-			(	list::member(SubDirectory, SubDirectories),
-				directory_file_score(SubDirectory, _, SubDirectoryScore)
+			(	member(SubDirectory, SubDirectories),
+				\+ (
+					member(ExcludedDirectory, ExcludedDirectories),
+					sub_atom(SubDirectory, 0, _, _, ExcludedDirectory)
+				),
+				directory_file_score(SubDirectory, _, SubDirectoryScore, Options)
 			),
 			SubDirectoryScores
 		),
 		sum_scores([DirectoryScore| SubDirectoryScores], Score).
 
-	process_rdirectory(Directory) :-
-		rdirectory_score(Directory, Score),
-		logtalk::print_message(information, code_metrics, Score).
+	process_rdirectory(Directory, Options) :-
+		rdirectory_score(Directory, Score, Options),
+		print_message(information, code_metrics, Score).
 
-	library_score(Library, Score) :-
-		logtalk::expand_library_path(Library, Directory),
-		directory_score(Directory, Score).
+	library_score(Library, Score, Options) :-
+		expand_library_path(Library, Directory),
+		directory_score(Directory, Score, Options).
 
-	process_library(Library) :-
-		library_score(Library, Score),
-		logtalk::print_message(information, code_metrics, Score).
+	process_library(Library, Options) :-
+		library_score(Library, Score, Options),
+		print_message(information, code_metrics, Score).
 
-	rlibrary_score(Library, Score) :-
-		library_score(Library, LibraryScore),
+	rlibrary_score(Library, Score, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		library_score(Library, LibraryScore, Options),
 		(	setof(
 				SubLibrary,
 				^^sub_library(Library, SubLibrary),
@@ -122,30 +141,33 @@
 		),
 		findall(
 			SubLibraryScore,
-			(	list::member(SubLibrary, SubLibraries),
-				library_score(SubLibrary, SubLibraryScore)
+			(	member(SubLibrary, SubLibraries),
+				\+ member(SubLibrary, ExcludedLibraries),
+				library_score(SubLibrary, SubLibraryScore, Options)
 			),
 			SubLibraryScores
 		),
 		sum_scores([LibraryScore| SubLibraryScores], Score).
 
-	process_rlibrary(Library) :-
-		rlibrary_score(Library, Score),
-		logtalk::print_message(information, code_metrics, Score).
+	process_rlibrary(Library, Options) :-
+		rlibrary_score(Library, Score, Options),
+		print_message(information, code_metrics, Score).
 
-	all_score(Score) :-
+	all_score(Score, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		findall(
 			FileScore,
-			(	logtalk::loaded_file(File),
-				file_score(File, FileScore)
+			(	loaded_file(File),
+				\+ member(File, ExcludedFiles),
+				file_score(File, FileScore, Options)
 			),
 			FileScores
 		),
 		sum_scores(FileScores, Score).
 
-	process_all :-
-		all_score(Score),
-		logtalk::print_message(information, code_metrics, Score).
+	process_all(Options) :-
+		all_score(Score, Options),
+		print_message(information, code_metrics, Score).
 
 	format_entity_score(_Entity, number_of_rules(Total, User)) -->
 		['Number of Rules: ~w'-[Total], nl],

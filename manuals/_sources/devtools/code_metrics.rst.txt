@@ -140,6 +140,26 @@ All metrics require the source code to be analyzed to be loaded with the
 ``source_data`` flag turned on. For usage examples, see the
 ``SCRIPT.txt`` file in the tool directory.
 
+Excluding code from analysis
+----------------------------
+
+A set of options are available to specify code that should be excluded
+when applying code metrics:
+
+-  | ``exclude_directories(Directories)``
+   | list of directories to exclude (default is ``[]``; all
+     sub-directories of the excluded directories are also excluded)
+
+-  | ``exclude_files(Files)``
+   | list of source files to exclude (default is ``[]``)
+
+-  | ``exclude_libraries(Libraries)``
+   | list of libraries to exclude (default is
+     ``[startup, scratch_directory]``)
+
+-  | ``exclude_entities(Entities)``
+   | list of entities to exclude (default is ``[]``)
+
 Defining new metrics
 --------------------
 

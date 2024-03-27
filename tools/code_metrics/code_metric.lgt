@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -20,12 +20,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(code_metric).
+:- category(code_metric,
+	extends(options)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2022-05-05,
+		date is 2024-03-27,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -40,45 +41,87 @@
 		argnames is ['Entity']
 	]).
 
+	:- public(file/2).
+	:- mode(file(+atom, +list(compound)), zero_or_one).
+	:- info(file/2, [
+		comment is 'Prints metric scores for all the entities defined in a loaded source file using the given options.',
+		argnames is ['File', 'Options']
+	]).
+
 	:- public(file/1).
 	:- mode(file(+atom), zero_or_one).
 	:- info(file/1, [
-		comment is 'Prints metric scores for all the entities defined in a loaded source file.',
+		comment is 'Prints metric scores for all the entities defined in a loaded source file using default options.',
 		argnames is ['File']
+	]).
+
+	:- public(directory/2).
+	:- mode(directory(+atom, +list(compound)), one).
+	:- info(directory/2, [
+		comment is 'Scans a directory and prints metric scores for all entities defined in its loaded source files using the given options.',
+		argnames is ['Directory', 'Options']
 	]).
 
 	:- public(directory/1).
 	:- mode(directory(+atom), one).
 	:- info(directory/1, [
-		comment is 'Scans a directory and prints metric scores for all entities defined in its loaded source files.',
+		comment is 'Scans a directory and prints metric scores for all entities defined in its loaded source files using default options.',
 		argnames is ['Directory']
+	]).
+
+	:- public(rdirectory/2).
+	:- mode(rdirectory(+atom, +list(compound)), one).
+	:- info(rdirectory/2, [
+		comment is 'Recursive version of the ``directory/1`` predicate using the given options.',
+		argnames is ['Directory', 'Options']
 	]).
 
 	:- public(rdirectory/1).
 	:- mode(rdirectory(+atom), one).
 	:- info(rdirectory/1, [
-		comment is 'Recursive version of the ``directory/1`` predicate.',
+		comment is 'Recursive version of the ``directory/1`` predicate using default options.',
 		argnames is ['Directory']
+	]).
+
+	:- public(library/2).
+	:- mode(library(+atom, +list(compound)), one).
+	:- info(library/2, [
+		comment is 'Prints metrics scores for all loaded entities from a given library using the given options.',
+		argnames is ['Library', 'Options']
 	]).
 
 	:- public(library/1).
 	:- mode(library(+atom), one).
 	:- info(library/1, [
-		comment is 'Prints metrics scores for all loaded entities from a given library.',
+		comment is 'Prints metrics scores for all loaded entities from a given library using default options.',
 		argnames is ['Library']
+	]).
+
+	:- public(rlibrary/2).
+	:- mode(rlibrary(+atom, +list(compound)), one).
+	:- info(rlibrary/2, [
+		comment is 'Recursive version of the ``library/1`` predicate using the given options.',
+		argnames is ['Library', 'Options']
 	]).
 
 	:- public(rlibrary/1).
 	:- mode(rlibrary(+atom), one).
 	:- info(rlibrary/1, [
-		comment is 'Recursive version of the ``library/1`` predicate.',
+		comment is 'Recursive version of the ``library/1`` predicate using default options.',
 		argnames is ['Library']
+	]).
+
+	:- public(all/1).
+	:- mode(all(+list(compound)), one).
+	:- info(all/1, [
+		comment is 'Scans all loaded entities and prints their metric scores using the given options.',
+		argnames is ['Options']
 	]).
 
 	:- public(all/0).
 	:- mode(all, one).
 	:- info(all/0, [
-		comment is 'Scans all loaded entities and prints their metric scores.'
+		comment is 'Scans all loaded entities and prints their metric scores using default options.'
 	]).
 
 	:- public(entity_score/2).
@@ -144,45 +187,46 @@
 		argnames is ['Kind', 'Entity']
 	]).
 
-	:- protected(process_file/1).
-	:- mode(process_file(+atom), one).
-	:- info(process_file/1, [
-		comment is 'Processes a source file.',
-		argnames is ['Path']
+	:- protected(process_file/2).
+	:- mode(process_file(+atom, +list(compound)), one).
+	:- info(process_file/2, [
+		comment is 'Processes a source file using the given options.',
+		argnames is ['Path', 'Options']
 	]).
 
-	:- protected(process_directory/1).
-	:- mode(process_directory(+atom), one).
-	:- info(process_directory/1, [
-		comment is 'Processes a directory of source files.',
-		argnames is ['Path']
+	:- protected(process_directory/2).
+	:- mode(process_directory(+atom, +list(compound)), one).
+	:- info(process_directory/2, [
+		comment is 'Processes a directory of source files using the given options.',
+		argnames is ['Path', 'Options']
 	]).
 
-	:- protected(process_rdirectory/1).
-	:- mode(process_rdirectory(+atom), one).
-	:- info(process_rdirectory/1, [
-		comment is 'Recursively process a directory of source files.',
-		argnames is ['Path']
+	:- protected(process_rdirectory/2).
+	:- mode(process_rdirectory(+atom, +list(compound)), one).
+	:- info(process_rdirectory/2, [
+		comment is 'Recursively process a directory of source files using the given options.',
+		argnames is ['Path', 'Options']
 	]).
 
-	:- protected(process_library/1).
-	:- mode(process_library(+atom), one).
-	:- info(process_library/1, [
-		comment is 'Processes a library of source files.',
-		argnames is ['Library']
+	:- protected(process_library/2).
+	:- mode(process_library(+atom, +list(compound)), one).
+	:- info(process_library/2, [
+		comment is 'Processes a library of source files using the given options.',
+		argnames is ['Library', 'Options']
 	]).
 
-	:- protected(process_rlibrary/1).
-	:- mode(process_rlibrary(+atom), one).
-	:- info(process_rlibrary/1, [
-		comment is 'Recursively process a library of source files.',
-		argnames is ['Library']
+	:- protected(process_rlibrary/2).
+	:- mode(process_rlibrary(+atom, +list(compound)), one).
+	:- info(process_rlibrary/2, [
+		comment is 'Recursively process a library of source files using the given options.',
+		argnames is ['Library', 'Options']
 	]).
 
-	:- protected(process_all/0).
-	:- mode(process_all, one).
-	:- info(process_all/0, [
-		comment is 'Processes all loaded source code.'
+	:- protected(process_all/1).
+	:- mode(process_all(+list(compound)), one).
+	:- info(process_all/1, [
+		comment is 'Processes all loaded source code using the given options.',
+		argnames is ['Options']
 	]).
 
 	:- protected(sub_directory/2).
@@ -199,8 +243,25 @@
 		argnames is ['Library', 'SubLibrary']
 	]).
 
-	:- uses(logtalk, [print_message/3]).
-	:- uses(list, [member/2]).
+	:- uses(logtalk, [
+		expand_library_path/2, file_type_extension/2,
+		loaded_file/1, loaded_file_property/2,
+		print_message/3
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
+	:- uses(os, [
+		absolute_file_name/2, date_time/7,
+		decompose_file_name/3, decompose_file_name/4,
+		directory_exists/1
+	]).
+
+	:- uses(type, [
+		valid/2
+	]).
 
 	%%%%%%%%%%%%%%%%%%
 	%% Entity scans %%
@@ -224,65 +285,73 @@
 	%% File scans %%
 	%%%%%%%%%%%%%%%%
 
-	file(Source) :-
+	file(Source, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	locate_file(Source, Path) ->
 			write_scan_header('File'),
-			::process_file(Path),
+			::process_file(Path, Options),
 			write_scan_footer('File')
 		;	print_message(warning, code_metrics, unknown(file,Source)),
 			fail
 		).
 
-	process_file(Path) :-
+	file(Source) :-
+		file(Source, []).
+
+	process_file(Path, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		print_message(information, code_metrics, scanning_file(Path)),
 		forall(
-			file_entity(Path, Kind, Entity),
+			(	file_entity(Path, Kind, Entity),
+				\+ member(Entity, ExcludedEntities)
+			),
 			::process_entity(Kind, Entity)
 		).
 
 	file_entity(Path, object, Entity) :-
-		logtalk::loaded_file_property(Path, object(Entity)).
+		loaded_file_property(Path, object(Entity)).
 	file_entity(Path, protocol, Entity) :-
-		logtalk::loaded_file_property(Path, protocol(Entity)).
+		loaded_file_property(Path, protocol(Entity)).
 	file_entity(Path, category, Entity) :-
-		logtalk::loaded_file_property(Path, category(Entity)).
+		loaded_file_property(Path, category(Entity)).
 
 	% file given in library notation
 	locate_file(LibraryNotation, Path) :-
 		compound(LibraryNotation),
 		!,
 		LibraryNotation =.. [Library, Name],
-		logtalk::expand_library_path(Library, LibraryPath),
+		expand_library_path(Library, LibraryPath),
 		atom_concat(LibraryPath, Name, Source),
 		locate_file(Source, Path).
 	% file given using its name or basename
 	locate_file(Source, Path) :-
 		add_extension(Source, Basename),
-		logtalk::loaded_file_property(Path, basename(Basename)),
+		loaded_file_property(Path, basename(Basename)),
 		% check that there isn't another file with the same basename
 		% from a different directory
 		\+ (
-			logtalk::loaded_file_property(OtherPath, basename(Basename)),
+			loaded_file_property(OtherPath, basename(Basename)),
 			Path \== OtherPath
 		),
 		!.
 	% file given using a full path
 	locate_file(Source, Path) :-
 		add_extension(Source, SourceWithExtension),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
+		loaded_file_property(Path, basename(Basename)),
+		loaded_file_property(Path, directory(Directory)),
 		atom_concat(Directory, Basename, SourceWithExtension),
 		!.
 
 	add_extension(Source, SourceWithExtension) :-
 		% ensure that Source is not specified using library notation
 		atom(Source),
-		os::decompose_file_name(Source, _, _, SourceExtension),
-		(	logtalk::file_type_extension(source, SourceExtension) ->
+		decompose_file_name(Source, _, _, SourceExtension),
+		(	file_type_extension(source, SourceExtension) ->
 			% source file extension present
 			SourceWithExtension = Source
 		;	% try possible source extensions
-			logtalk::file_type_extension(source, Extension),
+			file_type_extension(source, Extension),
 			atom_concat(Source, Extension, SourceWithExtension)
 		).
 
@@ -290,31 +359,42 @@
 	%% Directory scans %%
 	%%%%%%%%%%%%%%%%%%%%%
 
-	directory(Directory) :-
-		(	os::absolute_file_name(Directory, Path),
-			os::directory_exists(Path) ->
+	directory(Directory, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		(	absolute_file_name(Directory, Path),
+			directory_exists(Path) ->
 			write_scan_header('Directory'),
-			::process_directory(Path),
+			::process_directory(Path, Options),
 			write_scan_footer('Directory')
 		;	print_message(warning, code_metrics, unknown(directory,Directory)),
 			fail
 		).
 
+	directory(Directory) :-
+		directory(Directory, []).
+
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% Recursive directory scans %%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-	rdirectory(Directory) :-
-		(	os::absolute_file_name(Directory, Path),
-			os::directory_exists(Path) ->
+	rdirectory(Directory, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		(	absolute_file_name(Directory, Path),
+			directory_exists(Path) ->
 			write_scan_header('Recursive directory'),
-			::process_rdirectory(Path),
+			::process_rdirectory(Path, Options),
 			write_scan_footer('Recursive directory')
 		;	print_message(warning, code_metrics, unknown(directory,Directory)),
 			fail
 		).
 
-	process_rdirectory(Directory) :-
+	rdirectory(Directory) :-
+		rdirectory(Directory, []).
+
+	process_rdirectory(Directory, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		(	setof(
 				SubDirectory,
 				::sub_directory(Directory, SubDirectory),
@@ -324,13 +404,18 @@
 		;	SubDirectories = []
 		),
 		forall(
-			member(SubDirectory, [Directory| SubDirectories]),
-			::process_directory(SubDirectory)
+			(	member(SubDirectory, [Directory| SubDirectories]),
+				\+ (
+					member(ExcludedDirectory, ExcludedDirectories),
+					sub_atom(SubDirectory, 0, _, _, ExcludedDirectory)
+				)
+			),
+			::process_directory(SubDirectory, Options)
 		).
 
 	sub_directory(Directory, SubDirectory) :-
-		logtalk::loaded_file(Path),
-		os::decompose_file_name(Path, SubDirectory, _),
+		loaded_file(Path),
+		decompose_file_name(Path, SubDirectory, _),
 		Directory \== SubDirectory,
 		atom_concat(Directory, _RelativePath, SubDirectory).
 
@@ -338,58 +423,79 @@
 	%% Library scans %%
 	%%%%%%%%%%%%%%%%%%%
 
-	library(Library) :-
+	library(Library, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	logtalk_library_path(Library, _) ->
 			write_scan_header('Library'),
-			::process_library(Library),
+			::process_library(Library, Options),
 			write_scan_footer('Library')
 		;	print_message(warning, code_metrics, unknown(library,Library)),
 			fail
 		).
 
-	process_library(Library) :-
-		logtalk::expand_library_path(Library, LibraryPath),
-		::process_directory(LibraryPath).
+	library(Library) :-
+		library(Library, []).
+
+	process_library(Library, Options) :-
+		expand_library_path(Library, LibraryPath),
+		::process_directory(LibraryPath, Options).
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%% Recursive library scans %%
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-	rlibrary(Library) :-
+	rlibrary(Library, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		(	logtalk_library_path(Library, _) ->
 			write_scan_header('Recursive library'),
-			::process_rlibrary(Library),
+			::process_rlibrary(Library, Options),
 			write_scan_footer('Recursive library')
 		;	print_message(warning, code_metrics, unknown(library,Library)),
 			fail
 		).
 
-	process_rlibrary(Library) :-
-		::process_library(Library),
+	rlibrary(Library) :-
+		rlibrary(Library, []).
+
+	process_rlibrary(Library, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		::process_library(Library, Options),
 		forall(
-			sub_library(Library, SubLibrary),
-			::process_library(SubLibrary)
+			(	sub_library(Library, SubLibrary),
+				\+ member(Library, ExcludedLibraries)
+			),
+			::process_library(SubLibrary, Options)
 		).
 
 	sub_library(Library, SubLibrary) :-
-		logtalk::expand_library_path(Library, Path),
+		expand_library_path(Library, Path),
 		logtalk_library_path(SubLibrary, _),
 		Library \== SubLibrary,
-		logtalk::expand_library_path(SubLibrary, SubPath),
+		expand_library_path(SubLibrary, SubPath),
 		atom_concat(Path, _RelativePath, SubPath).
 
 	%%%%%%%%%%%%%%%%%%%%%%%
 	%% Scan all entities %%
 	%%%%%%%%%%%%%%%%%%%%%%%
 
-	all :-
+	all(UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
 		write_scan_header('All entities'),
-		::process_all,
+		::process_all(Options),
 		write_scan_footer('All entities').
 
-	process_all :-
+	all :-
+		all([]).
+
+	process_all(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		forall(
-			all(Kind, Entity),
+			(	all(Kind, Entity),
+				\+ member(Entity, ExcludedEntities)
+			),
 			::process_entity(Kind, Entity)
 		).
 
@@ -402,11 +508,14 @@
 
 	% internal/common predicates
 
-	process_directory(Directory) :-
+	process_directory(Directory, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		print_message(information, code_metrics, scanning_directory(Directory)),
 		forall(
-			directory_file(Directory, Path),
-			::process_file(Path)
+			(	directory_file(Directory, File),
+				\+ member(File, ExcludedFiles)
+			),
+			::process_file(File, Options)
 		).
 
 	directory_file(Directory, Path) :-
@@ -414,11 +523,11 @@
 			DirectorySlash = Directory
 		;	atom_concat(Directory, '/', DirectorySlash)
 		),
-		logtalk::loaded_file_property(Path, directory(DirectorySlash)).
+		loaded_file_property(Path, directory(DirectorySlash)).
 
 	write_scan_header(Type) :-
 		print_message(silent, code_metrics, scan_started),
-		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(
 			information,
 			code_metrics,
@@ -426,7 +535,7 @@
 		).
 
 	write_scan_footer(Type) :-
-		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(
 			information,
 			code_metrics,
@@ -447,6 +556,26 @@
 	format_entity_score(_Entity, Score) -->
 		{self(Metric)},
 		['~w score: ~w'-[Metric, Score], nl].
+
+	% options
+
+	% by default, don't exclude any directories:
+	default_option(exclude_directories([])).
+	% by default, don't exclude any source files:
+	default_option(exclude_files([])).
+	% by default, don't exclude any entities:
+	default_option(exclude_entities([])).
+	% by default, exclude only the "startup" and "scratch_directory" libraries:
+	default_option(exclude_libraries([startup, scratch_directory])).
+
+	valid_option(exclude_directories(Directories)) :-
+		valid(list(atom), Directories).
+	valid_option(exclude_files(Files)) :-
+		valid(list(atom), Files).
+	valid_option(exclude_entities(Entities)) :-
+		valid(list(atom), Entities).
+	valid_option(exclude_libraries(Libraries)) :-
+		valid(list(atom), Libraries).
 
 :- end_category.
 
