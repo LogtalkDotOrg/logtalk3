@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-498.25 2575,-498.25 2575,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object bintree</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;26, 22:36</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;03&#45;27, 15:43</text>
 <g id="clust1" class="cluster">
 <title>cluster_bintree_object</title>
 <g id="a_clust1"><a xlink:title="bintree">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 2551,-49.75 2551,-49.75 2557,-49.75 2563,-55.75 2563,-61.75 2563,-61.75 2563,-474.25 2563,-474.25 2563,-480.25 2557,-486.25 2551,-486.25 2551,-486.25 20,-486.25 20,-486.25 14,-486.25 8,-480.25 8,-474.25 8,-474.25 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt">
 <text text-anchor="start" x="20" y="-468.75" font-family="Monospace" font-size="10.00" fill="dimgray">bintree</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- preorder/2 -->
 <g id="node1" class="node">
 <title>preorder/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L34">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L34">
 <polygon fill="springgreen" stroke="black" points="111.5,-449 18.5,-449 18.5,-413 111.5,-413 111.5,-449"/>
 <text text-anchor="start" x="26.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.25" y="-431.05" font-family="Monospace" font-size="11.00">preorder/2</text>
@@ -41,7 +41,7 @@
 <!-- preorder/3 -->
 <g id="node17" class="node">
 <title>preorder/3</title>
-<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L58">
+<g id="a_node17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L58">
 <polygon fill="cornsilk" stroke="black" points="111.5,-331.25 18.5,-331.25 18.5,-295.25 111.5,-295.25 111.5,-331.25"/>
 <text text-anchor="start" x="26.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.25" y="-313.3" font-family="Monospace" font-size="11.00">preorder/3</text>
@@ -55,12 +55,12 @@
 <!-- preorder/2&#45;&gt;preorder/3 -->
 <g id="edge1" class="edge">
 <title>preorder/2&#45;&gt;preorder/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L55" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L55" xlink:title="calls">
 <path fill="none" stroke="black" d="M65,-412.67C65,-394.26 65,-364.85 65,-342.96"/>
 <polygon fill="black" stroke="black" points="68.5,-343.21 65,-333.21 61.5,-343.21 68.5,-343.21"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L55">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L55">
 <text text-anchor="start" x="65" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- inorder/2 -->
 <g id="node2" class="node">
 <title>inorder/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L41">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L41">
 <polygon fill="springgreen" stroke="black" points="1776,-331.25 1690,-331.25 1690,-295.25 1776,-295.25 1776,-331.25"/>
 <text text-anchor="start" x="1697.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1702.62" y="-313.3" font-family="Monospace" font-size="11.00">inorder/2</text>
@@ -82,7 +82,7 @@
 <!-- inorder/3 -->
 <g id="node18" class="node">
 <title>inorder/3</title>
-<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L66">
+<g id="a_node18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L66">
 <polygon fill="cornsilk" stroke="black" points="1776,-213.5 1690,-213.5 1690,-177.5 1776,-177.5 1776,-213.5"/>
 <text text-anchor="start" x="1697.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1702.62" y="-195.55" font-family="Monospace" font-size="11.00">inorder/3</text>
@@ -96,12 +96,12 @@
 <!-- inorder/2&#45;&gt;inorder/3 -->
 <g id="edge2" class="edge">
 <title>inorder/2&#45;&gt;inorder/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L63" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L63" xlink:title="calls">
 <path fill="none" stroke="black" d="M1733,-294.92C1733,-276.51 1733,-247.1 1733,-225.21"/>
 <polygon fill="black" stroke="black" points="1736.5,-225.46 1733,-215.46 1729.5,-225.46 1736.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L63">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L63" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L63">
 <text text-anchor="start" x="1733" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,7 +109,7 @@
 <!-- postorder/2 -->
 <g id="node3" class="node">
 <title>postorder/2</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L48">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L48">
 <polygon fill="springgreen" stroke="black" points="230,-449 130,-449 130,-413 230,-413 230,-449"/>
 <text text-anchor="start" x="137.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="142.88" y="-431.05" font-family="Monospace" font-size="11.00">postorder/2</text>
@@ -123,7 +123,7 @@
 <!-- postorder/3 -->
 <g id="node19" class="node">
 <title>postorder/3</title>
-<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L74">
+<g id="a_node19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L74">
 <polygon fill="cornsilk" stroke="black" points="230,-331.25 130,-331.25 130,-295.25 230,-295.25 230,-331.25"/>
 <text text-anchor="start" x="137.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="142.88" y="-313.3" font-family="Monospace" font-size="11.00">postorder/3</text>
@@ -137,12 +137,12 @@
 <!-- postorder/2&#45;&gt;postorder/3 -->
 <g id="edge3" class="edge">
 <title>postorder/2&#45;&gt;postorder/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L71" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M180,-412.67C180,-394.26 180,-364.85 180,-342.96"/>
 <polygon fill="black" stroke="black" points="183.5,-343.21 180,-333.21 176.5,-343.21 183.5,-343.21"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L71">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L71">
 <text text-anchor="start" x="180" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -150,7 +150,7 @@
 <!-- size/2 -->
 <g id="node4" class="node">
 <title>size/2</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L401" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L401">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L401" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L401">
 <polygon fill="cornsilk" stroke="black" points="314,-449 248,-449 248,-413 314,-413 314,-449"/>
 <text text-anchor="start" x="255.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="260.75" y="-431.05" font-family="Monospace" font-size="11.00">size/2</text>
@@ -164,7 +164,7 @@
 <!-- size/3 -->
 <g id="node64" class="node">
 <title>size/3</title>
-<g id="a_node64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L404">
+<g id="a_node64"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L404" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L404">
 <polygon fill="cornsilk" stroke="black" points="314,-331.25 248,-331.25 248,-295.25 314,-295.25 314,-331.25"/>
 <text text-anchor="start" x="255.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="260.75" y="-313.3" font-family="Monospace" font-size="11.00">size/3</text>
@@ -178,12 +178,12 @@
 <!-- size/2&#45;&gt;size/3 -->
 <g id="edge53" class="edge">
 <title>size/2&#45;&gt;size/3</title>
-<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L401" xlink:title="calls">
+<g id="a_edge53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L401" xlink:title="calls">
 <path fill="none" stroke="black" d="M281,-412.67C281,-394.26 281,-364.85 281,-342.96"/>
 <polygon fill="black" stroke="black" points="284.5,-343.21 281,-333.21 277.5,-343.21 284.5,-343.21"/>
 </a>
 </g>
-<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L401" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L401">
+<g id="a_edge53&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L401" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L401">
 <text text-anchor="start" x="281" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -191,7 +191,7 @@
 <!-- apply/4 -->
 <g id="node5" class="node">
 <title>apply/4</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L358">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L358">
 <polygon fill="cornsilk" stroke="black" points="405.5,-449 332.5,-449 332.5,-413 405.5,-413 405.5,-449"/>
 <text text-anchor="start" x="340.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="345.38" y="-431.05" font-family="Monospace" font-size="11.00">apply/4</text>
@@ -205,7 +205,7 @@
 <!-- apply_/4 -->
 <g id="node58" class="node">
 <title>apply_/4</title>
-<g id="a_node58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L345">
+<g id="a_node58"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L345">
 <polygon fill="cornsilk" stroke="black" points="412,-331.25 332,-331.25 332,-295.25 412,-295.25 412,-331.25"/>
 <text text-anchor="start" x="339.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="345" y="-313.3" font-family="Monospace" font-size="11.00">apply_/4</text>
@@ -219,12 +219,12 @@
 <!-- apply/4&#45;&gt;apply_/4 -->
 <g id="edge49" class="edge">
 <title>apply/4&#45;&gt;apply_/4</title>
-<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L358" xlink:title="calls">
+<g id="a_edge49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L358" xlink:title="calls">
 <path fill="none" stroke="black" d="M369.45,-412.67C369.93,-394.26 370.69,-364.85 371.26,-342.96"/>
 <polygon fill="black" stroke="black" points="374.75,-343.3 371.51,-333.21 367.75,-343.12 374.75,-343.3"/>
 </a>
 </g>
-<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L358">
+<g id="a_edge49&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L358" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L358">
 <text text-anchor="start" x="370" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,7 +232,7 @@
 <!-- map/3 -->
 <g id="node6" class="node">
 <title>map/3</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L341">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L341">
 <polygon fill="cornsilk" stroke="black" points="482.5,-449 423.5,-449 423.5,-413 482.5,-413 482.5,-449"/>
 <text text-anchor="start" x="431.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="436.12" y="-431.05" font-family="Monospace" font-size="11.00">map/3</text>
@@ -246,7 +246,7 @@
 <!-- map_/3 -->
 <g id="node57" class="node">
 <title>map_/3</title>
-<g id="a_node57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L334">
+<g id="a_node57"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L334" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L334">
 <polygon fill="cornsilk" stroke="black" points="496,-331.25 430,-331.25 430,-295.25 496,-295.25 496,-331.25"/>
 <text text-anchor="start" x="437.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="442.75" y="-313.3" font-family="Monospace" font-size="11.00">map_/3</text>
@@ -260,12 +260,12 @@
 <!-- map/3&#45;&gt;map_/3 -->
 <g id="edge46" class="edge">
 <title>map/3&#45;&gt;map_/3</title>
-<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L341" xlink:title="calls">
+<g id="a_edge46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L341" xlink:title="calls">
 <path fill="none" stroke="black" d="M454.5,-412.67C456.09,-394.26 458.63,-364.85 460.52,-342.96"/>
 <polygon fill="black" stroke="black" points="463.99,-343.47 461.36,-333.21 457.01,-342.87 463.99,-343.47"/>
 </a>
 </g>
-<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L341">
+<g id="a_edge46&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L341" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L341">
 <text text-anchor="start" x="458" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -273,7 +273,7 @@
 <!-- map/2 -->
 <g id="node7" class="node">
 <title>map/2</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L330">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L330">
 <polygon fill="cornsilk" stroke="black" points="559.5,-449 500.5,-449 500.5,-413 559.5,-413 559.5,-449"/>
 <text text-anchor="start" x="508.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="513.12" y="-431.05" font-family="Monospace" font-size="11.00">map/2</text>
@@ -287,7 +287,7 @@
 <!-- map_/2 -->
 <g id="node56" class="node">
 <title>map_/2</title>
-<g id="a_node56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L323" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L323">
+<g id="a_node56"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L323" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L323">
 <polygon fill="cornsilk" stroke="black" points="580,-331.25 514,-331.25 514,-295.25 580,-295.25 580,-331.25"/>
 <text text-anchor="start" x="521.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="526.75" y="-313.3" font-family="Monospace" font-size="11.00">map_/2</text>
@@ -301,12 +301,12 @@
 <!-- map/2&#45;&gt;map_/2 -->
 <g id="edge45" class="edge">
 <title>map/2&#45;&gt;map_/2</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L330" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L330" xlink:title="calls">
 <path fill="none" stroke="black" d="M532.55,-412.67C535.25,-394.26 539.57,-364.85 542.78,-342.96"/>
 <polygon fill="black" stroke="black" points="546.23,-343.6 544.22,-333.19 539.3,-342.58 546.23,-343.6"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L330">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L330" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L330">
 <text text-anchor="start" x="539" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -314,7 +314,7 @@
 <!-- update/3 -->
 <g id="node8" class="node">
 <title>update/3</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L314">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L314">
 <polygon fill="cornsilk" stroke="black" points="1454,-449 1374,-449 1374,-413 1454,-413 1454,-449"/>
 <text text-anchor="start" x="1381.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1387" y="-431.05" font-family="Monospace" font-size="11.00">update/3</text>
@@ -328,7 +328,7 @@
 <!-- update_/3 -->
 <g id="node55" class="node">
 <title>update_/3</title>
-<g id="a_node55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L317">
+<g id="a_node55"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L317" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L317">
 <polygon fill="cornsilk" stroke="black" points="1422,-331.25 1336,-331.25 1336,-295.25 1422,-295.25 1422,-331.25"/>
 <text text-anchor="start" x="1343.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1348.62" y="-313.3" font-family="Monospace" font-size="11.00">update_/3</text>
@@ -342,12 +342,12 @@
 <!-- update/3&#45;&gt;update_/3 -->
 <g id="edge43" class="edge">
 <title>update/3&#45;&gt;update_/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L314" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L314" xlink:title="calls">
 <path fill="none" stroke="black" d="M1408.76,-412.67C1403.17,-394.17 1394.22,-364.57 1387.59,-342.66"/>
 <polygon fill="black" stroke="black" points="1390.96,-341.71 1384.71,-333.15 1384.26,-343.73 1390.96,-341.71"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L314">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L314" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L314">
 <text text-anchor="start" x="1397" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -355,7 +355,7 @@
 <!-- values/2 -->
 <g id="node9" class="node">
 <title>values/2</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L273">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L273">
 <polygon fill="cornsilk" stroke="black" points="769,-449 689,-449 689,-413 769,-413 769,-449"/>
 <text text-anchor="start" x="696.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="702" y="-431.05" font-family="Monospace" font-size="11.00">values/2</text>
@@ -369,7 +369,7 @@
 <!-- values/3 -->
 <g id="node48" class="node">
 <title>values/3</title>
-<g id="a_node48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L276">
+<g id="a_node48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L276" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L276">
 <polygon fill="cornsilk" stroke="black" points="790,-331.25 710,-331.25 710,-295.25 790,-295.25 790,-331.25"/>
 <text text-anchor="start" x="717.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="723" y="-313.3" font-family="Monospace" font-size="11.00">values/3</text>
@@ -383,12 +383,12 @@
 <!-- values/2&#45;&gt;values/3 -->
 <g id="edge36" class="edge">
 <title>values/2&#45;&gt;values/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L273" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L273" xlink:title="calls">
 <path fill="none" stroke="black" d="M732.14,-412.67C735.48,-394.26 740.82,-364.85 744.79,-342.96"/>
 <polygon fill="black" stroke="black" points="748.22,-343.65 746.56,-333.19 741.34,-342.4 748.22,-343.65"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L273">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L273" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L273">
 <text text-anchor="start" x="740" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -396,7 +396,7 @@
 <!-- keys/2 -->
 <g id="node10" class="node">
 <title>keys/2</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L265">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L265">
 <polygon fill="cornsilk" stroke="black" points="853,-449 787,-449 787,-413 853,-413 853,-449"/>
 <text text-anchor="start" x="794.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="799.75" y="-431.05" font-family="Monospace" font-size="11.00">keys/2</text>
@@ -410,7 +410,7 @@
 <!-- keys/3 -->
 <g id="node47" class="node">
 <title>keys/3</title>
-<g id="a_node47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L268">
+<g id="a_node47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L268" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L268">
 <polygon fill="cornsilk" stroke="black" points="874,-331.25 808,-331.25 808,-295.25 874,-295.25 874,-331.25"/>
 <text text-anchor="start" x="815.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="820.75" y="-313.3" font-family="Monospace" font-size="11.00">keys/3</text>
@@ -424,12 +424,12 @@
 <!-- keys/2&#45;&gt;keys/3 -->
 <g id="edge35" class="edge">
 <title>keys/2&#45;&gt;keys/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L265" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L265" xlink:title="calls">
 <path fill="none" stroke="black" d="M823.14,-412.67C826.48,-394.26 831.82,-364.85 835.79,-342.96"/>
 <polygon fill="black" stroke="black" points="839.22,-343.65 837.56,-333.19 832.34,-342.4 839.22,-343.65"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L265">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L265" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L265">
 <text text-anchor="start" x="831" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -437,7 +437,7 @@
 <!-- previous/4 -->
 <g id="node11" class="node">
 <title>previous/4</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L165">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L165">
 <polygon fill="cornsilk" stroke="black" points="670.5,-449 577.5,-449 577.5,-413 670.5,-413 670.5,-449"/>
 <text text-anchor="start" x="585.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="590.25" y="-431.05" font-family="Monospace" font-size="11.00">previous/4</text>
@@ -451,7 +451,7 @@
 <!-- previous/5 -->
 <g id="node32" class="node">
 <title>previous/5</title>
-<g id="a_node32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L168">
+<g id="a_node32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L168">
 <polygon fill="cornsilk" stroke="black" points="691.5,-331.25 598.5,-331.25 598.5,-295.25 691.5,-295.25 691.5,-331.25"/>
 <text text-anchor="start" x="606.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="611.25" y="-313.3" font-family="Monospace" font-size="11.00">previous/5</text>
@@ -465,12 +465,12 @@
 <!-- previous/4&#45;&gt;previous/5 -->
 <g id="edge18" class="edge">
 <title>previous/4&#45;&gt;previous/5</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L165" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L165" xlink:title="calls">
 <path fill="none" stroke="black" d="M627.14,-412.67C630.48,-394.26 635.82,-364.85 639.79,-342.96"/>
 <polygon fill="black" stroke="black" points="643.22,-343.65 641.56,-333.19 636.34,-342.4 643.22,-343.65"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L165">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L165" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L165">
 <text text-anchor="start" x="635" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -478,7 +478,7 @@
 <!-- next/4 -->
 <g id="node12" class="node">
 <title>next/4</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L148">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L148">
 <polygon fill="cornsilk" stroke="black" points="937,-449 871,-449 871,-413 937,-413 937,-449"/>
 <text text-anchor="start" x="878.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="883.75" y="-431.05" font-family="Monospace" font-size="11.00">next/4</text>
@@ -492,7 +492,7 @@
 <!-- next/5 -->
 <g id="node30" class="node">
 <title>next/5</title>
-<g id="a_node30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L151">
+<g id="a_node30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L151">
 <polygon fill="cornsilk" stroke="black" points="958,-331.25 892,-331.25 892,-295.25 958,-295.25 958,-331.25"/>
 <text text-anchor="start" x="899.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="904.75" y="-313.3" font-family="Monospace" font-size="11.00">next/5</text>
@@ -506,12 +506,12 @@
 <!-- next/4&#45;&gt;next/5 -->
 <g id="edge14" class="edge">
 <title>next/4&#45;&gt;next/5</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L148" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L148" xlink:title="calls">
 <path fill="none" stroke="black" d="M907.14,-412.67C910.48,-394.26 915.82,-364.85 919.79,-342.96"/>
 <polygon fill="black" stroke="black" points="923.22,-343.65 921.56,-333.19 916.34,-342.4 923.22,-343.65"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L148">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L148">
 <text text-anchor="start" x="915" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -519,7 +519,7 @@
 <!-- empty/1 -->
 <g id="node13" class="node">
 <title>empty/1</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L133">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L133" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L133">
 <polygon fill="cornsilk" stroke="black" points="1173.5,-449 1100.5,-449 1100.5,-413 1173.5,-413 1173.5,-449"/>
 <text text-anchor="start" x="1108.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1113.38" y="-431.05" font-family="Monospace" font-size="11.00">empty/1</text>
@@ -533,7 +533,7 @@
 <!-- clone/4 -->
 <g id="node14" class="node">
 <title>clone/4</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L125">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L125">
 <polygon fill="cornsilk" stroke="black" points="1264.5,-449 1191.5,-449 1191.5,-413 1264.5,-413 1264.5,-449"/>
 <text text-anchor="start" x="1199.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1204.38" y="-431.05" font-family="Monospace" font-size="11.00">clone/4</text>
@@ -547,7 +547,7 @@
 <!-- clone_4/6 -->
 <g id="node27" class="node">
 <title>clone_4/6</title>
-<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L128">
+<g id="a_node27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L128">
 <polygon fill="cornsilk" stroke="black" points="1214,-331.25 1128,-331.25 1128,-295.25 1214,-295.25 1214,-331.25"/>
 <text text-anchor="start" x="1135.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1140.62" y="-313.3" font-family="Monospace" font-size="11.00">clone_4/6</text>
@@ -561,12 +561,12 @@
 <!-- clone/4&#45;&gt;clone_4/6 -->
 <g id="edge11" class="edge">
 <title>clone/4&#45;&gt;clone_4/6</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L125" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L125" xlink:title="calls">
 <path fill="none" stroke="black" d="M1219.47,-412.67C1210.23,-393.92 1195.38,-363.75 1184.54,-341.75"/>
 <polygon fill="black" stroke="black" points="1187.82,-340.48 1180.26,-333.06 1181.54,-343.57 1187.82,-340.48"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L125">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L125">
 <text text-anchor="start" x="1201" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -574,7 +574,7 @@
 <!-- clone/3 -->
 <g id="node15" class="node">
 <title>clone/3</title>
-<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L117">
+<g id="a_node15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L117">
 <polygon fill="cornsilk" stroke="black" points="1355.5,-449 1282.5,-449 1282.5,-413 1355.5,-413 1355.5,-449"/>
 <text text-anchor="start" x="1290.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1295.38" y="-431.05" font-family="Monospace" font-size="11.00">clone/3</text>
@@ -588,7 +588,7 @@
 <!-- clone_3/4 -->
 <g id="node26" class="node">
 <title>clone_3/4</title>
-<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L120">
+<g id="a_node26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L120" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L120">
 <polygon fill="cornsilk" stroke="black" points="1318,-331.25 1232,-331.25 1232,-295.25 1318,-295.25 1318,-331.25"/>
 <text text-anchor="start" x="1239.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1244.62" y="-313.3" font-family="Monospace" font-size="11.00">clone_3/4</text>
@@ -602,12 +602,12 @@
 <!-- clone/3&#45;&gt;clone_3/4 -->
 <g id="edge10" class="edge">
 <title>clone/3&#45;&gt;clone_3/4</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L117" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M1312.41,-412.67C1305.35,-394.09 1294.03,-364.3 1285.68,-342.36"/>
 <polygon fill="black" stroke="black" points="1288.99,-341.22 1282.17,-333.11 1282.45,-343.7 1288.99,-341.22"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L117">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L117">
 <text text-anchor="start" x="1298" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -615,7 +615,7 @@
 <!-- as_list/2 -->
 <g id="node16" class="node">
 <title>as_list/2</title>
-<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L102">
+<g id="a_node16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L102">
 <polygon fill="cornsilk" stroke="black" points="1738,-449 1652,-449 1652,-413 1738,-413 1738,-449"/>
 <text text-anchor="start" x="1659.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1664.62" y="-431.05" font-family="Monospace" font-size="11.00">as_list/2</text>
@@ -629,12 +629,12 @@
 <!-- as_list/2&#45;&gt;inorder/2 -->
 <g id="edge6" class="edge">
 <title>as_list/2&#45;&gt;inorder/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L102" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M1700.69,-412.67C1706.79,-394.09 1716.57,-364.3 1723.77,-342.36"/>
 <polygon fill="black" stroke="black" points="1727.01,-343.73 1726.8,-333.14 1720.36,-341.54 1727.01,-343.73"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L102">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L102">
 <text text-anchor="start" x="1715" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -642,7 +642,7 @@
 <!-- as_dictionary/2 -->
 <g id="node20" class="node">
 <title>as_dictionary/2</title>
-<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L79">
+<g id="a_node20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L79">
 <polygon fill="cornsilk" stroke="black" points="1082.5,-449 955.5,-449 955.5,-413 1082.5,-413 1082.5,-449"/>
 <text text-anchor="start" x="963.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="968.38" y="-431.05" font-family="Monospace" font-size="11.00">as_dictionary/2</text>
@@ -656,7 +656,7 @@
 <!-- as_dictionary_/2 -->
 <g id="node21" class="node">
 <title>as_dictionary_/2</title>
-<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L83">
+<g id="a_node21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L83">
 <polygon fill="cornsilk" stroke="black" points="1110,-331.25 976,-331.25 976,-295.25 1110,-295.25 1110,-331.25"/>
 <text text-anchor="start" x="983.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="989" y="-313.3" font-family="Monospace" font-size="11.00">as_dictionary_/2</text>
@@ -670,12 +670,12 @@
 <!-- as_dictionary/2&#45;&gt;as_dictionary_/2 -->
 <g id="edge4" class="edge">
 <title>as_dictionary/2&#45;&gt;as_dictionary_/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L79" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M1022.59,-412.67C1026.41,-394.26 1032.51,-364.85 1037.05,-342.96"/>
 <polygon fill="black" stroke="black" points="1040.47,-343.68 1039.08,-333.18 1033.62,-342.26 1040.47,-343.68"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L79">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L79">
 <text text-anchor="start" x="1031" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -683,7 +683,7 @@
 <!-- split/4 -->
 <g id="node22" class="node">
 <title>split/4</title>
-<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L96">
+<g id="a_node22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L96">
 <polygon fill="cornsilk" stroke="black" points="1185.5,-213.5 1112.5,-213.5 1112.5,-177.5 1185.5,-177.5 1185.5,-213.5"/>
 <text text-anchor="start" x="1120.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1125.38" y="-195.55" font-family="Monospace" font-size="11.00">split/4</text>
@@ -697,12 +697,12 @@
 <!-- as_dictionary_/2&#45;&gt;split/4 -->
 <g id="edge5" class="edge">
 <title>as_dictionary_/2&#45;&gt;split/4</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L89" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M1058.87,-294.92C1076.51,-275.66 1105.18,-244.35 1125.44,-222.22"/>
 <polygon fill="black" stroke="black" points="1127.83,-224.8 1132,-215.06 1122.67,-220.07 1127.83,-224.8"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L89">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L89">
 <text text-anchor="start" x="1099" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -724,12 +724,12 @@
 <!-- as_dictionary_/2&#45;&gt;list::length/2 -->
 <g id="edge54" class="edge">
 <title>as_dictionary_/2&#45;&gt;list::length/2</title>
-<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L89" xlink:title="calls">
+<g id="a_edge54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M1041.65,-294.92C1040.22,-276.51 1037.93,-247.1 1036.23,-225.21"/>
 <polygon fill="black" stroke="black" points="1039.74,-225.15 1035.47,-215.46 1032.76,-225.7 1039.74,-225.15"/>
 </a>
 </g>
-<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L89">
+<g id="a_edge54&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L89">
 <text text-anchor="start" x="1038" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -737,7 +737,7 @@
 <!-- as_curly_bracketed/2 -->
 <g id="node23" class="node">
 <title>as_curly_bracketed/2</title>
-<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L105">
+<g id="a_node23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L105">
 <polygon fill="cornsilk" stroke="black" points="1633.5,-449 1472.5,-449 1472.5,-413 1633.5,-413 1633.5,-449"/>
 <text text-anchor="start" x="1480.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1485.5" y="-431.05" font-family="Monospace" font-size="11.00">as_curly_bracketed/2</text>
@@ -751,12 +751,12 @@
 <!-- as_curly_bracketed/2&#45;&gt;inorder/2 -->
 <g id="edge7" class="edge">
 <title>as_curly_bracketed/2&#45;&gt;inorder/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L105" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M1579.95,-412.67C1610.97,-392.73 1662.06,-359.87 1696.6,-337.66"/>
 <polygon fill="black" stroke="black" points="1698.08,-340.87 1704.59,-332.52 1694.29,-334.98 1698.08,-340.87"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L105">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L105">
 <text text-anchor="start" x="1648" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -764,7 +764,7 @@
 <!-- pairs_to_curly/2 -->
 <g id="node24" class="node">
 <title>pairs_to_curly/2</title>
-<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L109">
+<g id="a_node24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L109" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L109">
 <polygon fill="cornsilk" stroke="black" points="1672,-331.25 1538,-331.25 1538,-295.25 1672,-295.25 1672,-331.25"/>
 <text text-anchor="start" x="1545.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1551" y="-313.3" font-family="Monospace" font-size="11.00">pairs_to_curly/2</text>
@@ -778,12 +778,12 @@
 <!-- as_curly_bracketed/2&#45;&gt;pairs_to_curly/2 -->
 <g id="edge8" class="edge">
 <title>as_curly_bracketed/2&#45;&gt;pairs_to_curly/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L105" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M1560.78,-412.67C1569.17,-394 1582.64,-364.03 1592.51,-342.05"/>
 <polygon fill="black" stroke="black" points="1595.64,-343.63 1596.54,-333.08 1589.25,-340.77 1595.64,-343.63"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L105">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L105">
 <text text-anchor="start" x="1580" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -791,7 +791,7 @@
 <!-- pairs_to_curly/3 -->
 <g id="node25" class="node">
 <title>pairs_to_curly/3</title>
-<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L113">
+<g id="a_node25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L113">
 <polygon fill="cornsilk" stroke="black" points="1672,-213.5 1538,-213.5 1538,-177.5 1672,-177.5 1672,-213.5"/>
 <text text-anchor="start" x="1545.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1551" y="-195.55" font-family="Monospace" font-size="11.00">pairs_to_curly/3</text>
@@ -805,12 +805,12 @@
 <!-- pairs_to_curly/2&#45;&gt;pairs_to_curly/3 -->
 <g id="edge9" class="edge">
 <title>pairs_to_curly/2&#45;&gt;pairs_to_curly/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L110" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L110" xlink:title="calls">
 <path fill="none" stroke="black" d="M1605,-294.92C1605,-276.51 1605,-247.1 1605,-225.21"/>
 <polygon fill="black" stroke="black" points="1608.5,-225.46 1605,-215.46 1601.5,-225.46 1608.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L110">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L110" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L110">
 <text text-anchor="start" x="1605" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -818,7 +818,7 @@
 <!-- insert/4 -->
 <g id="node28" class="node">
 <title>insert/4</title>
-<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L136">
+<g id="a_node28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L136" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L136">
 <polygon fill="cornsilk" stroke="black" points="2219,-213.5 2139,-213.5 2139,-177.5 2219,-177.5 2219,-213.5"/>
 <text text-anchor="start" x="2146.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2152" y="-195.55" font-family="Monospace" font-size="11.00">insert/4</text>
@@ -832,7 +832,7 @@
 <!-- insert/8 -->
 <g id="node29" class="node">
 <title>insert/8</title>
-<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L142">
+<g id="a_node29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L142">
 <polygon fill="cornsilk" stroke="black" points="2219,-95.75 2139,-95.75 2139,-59.75 2219,-59.75 2219,-95.75"/>
 <text text-anchor="start" x="2146.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2152" y="-77.8" font-family="Monospace" font-size="11.00">insert/8</text>
@@ -846,12 +846,12 @@
 <!-- insert/4&#45;&gt;insert/8 -->
 <g id="edge12" class="edge">
 <title>insert/4&#45;&gt;insert/8</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L138" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L138" xlink:title="calls">
 <path fill="none" stroke="black" d="M2166.27,-177.1C2158.74,-164.75 2151.29,-147.61 2154.75,-131.75 2156.62,-123.19 2160,-114.35 2163.65,-106.4"/>
 <polygon fill="black" stroke="black" points="2166.72,-108.1 2168.02,-97.59 2160.44,-105 2166.72,-108.1"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L138">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L138" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L138">
 <text text-anchor="start" x="2154" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -859,12 +859,12 @@
 <!-- insert/8&#45;&gt;insert/4 -->
 <g id="edge13" class="edge">
 <title>insert/8&#45;&gt;insert/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L143" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L143" xlink:title="calls">
 <path fill="none" stroke="black" d="M2180.02,-96.06C2180.65,-108.66 2181.29,-126.13 2181,-141.5 2180.85,-149.45 2180.57,-158.06 2180.27,-165.99"/>
 <polygon fill="black" stroke="black" points="2176.78,-165.67 2179.87,-175.81 2183.78,-165.96 2176.78,-165.67"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L143">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L143">
 <text text-anchor="start" x="2181" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -872,7 +872,7 @@
 <!-- next/9 -->
 <g id="node31" class="node">
 <title>next/9</title>
-<g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L155">
+<g id="a_node31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L155">
 <polygon fill="cornsilk" stroke="black" points="943,-213.5 877,-213.5 877,-177.5 943,-177.5 943,-213.5"/>
 <text text-anchor="start" x="884.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="889.75" y="-195.55" font-family="Monospace" font-size="11.00">next/9</text>
@@ -886,12 +886,12 @@
 <!-- next/5&#45;&gt;next/9 -->
 <g id="edge15" class="edge">
 <title>next/5&#45;&gt;next/9</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L151" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L151" xlink:title="calls">
 <path fill="none" stroke="black" d="M922.75,-294.92C920.37,-276.51 916.56,-247.1 913.72,-225.21"/>
 <polygon fill="black" stroke="black" points="917.21,-224.92 912.46,-215.45 910.27,-225.82 917.21,-224.92"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L151">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L151">
 <text text-anchor="start" x="917" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -899,12 +899,12 @@
 <!-- next/9&#45;&gt;next/5 -->
 <g id="edge16" class="edge">
 <title>next/9&#45;&gt;next/5</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L155" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L155" xlink:title="calls">
 <path fill="none" stroke="black" d="M896.92,-213.94C889.17,-226.46 881.75,-243.77 886.75,-259.25 889.86,-268.87 895.44,-278.22 901.39,-286.32"/>
 <polygon fill="black" stroke="black" points="898.53,-288.34 907.49,-294 904.02,-283.99 898.53,-288.34"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L155">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L155" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L155">
 <text text-anchor="start" x="886" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -912,7 +912,7 @@
 <!-- min/3 -->
 <g id="node43" class="node">
 <title>min/3</title>
-<g id="a_node43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L235">
+<g id="a_node43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L235" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L235">
 <polygon fill="cornsilk" stroke="black" points="939.5,-95.75 880.5,-95.75 880.5,-59.75 939.5,-59.75 939.5,-95.75"/>
 <text text-anchor="start" x="888.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="893.12" y="-77.8" font-family="Monospace" font-size="11.00">min/3</text>
@@ -926,12 +926,12 @@
 <!-- next/9&#45;&gt;min/3 -->
 <g id="edge17" class="edge">
 <title>next/9&#45;&gt;min/3</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L159" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L159" xlink:title="calls">
 <path fill="none" stroke="black" d="M910,-177.17C910,-158.76 910,-129.35 910,-107.46"/>
 <polygon fill="black" stroke="black" points="913.5,-107.71 910,-97.71 906.5,-107.71 913.5,-107.71"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L159">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L159" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L159">
 <text text-anchor="start" x="910" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -939,7 +939,7 @@
 <!-- previous/9 -->
 <g id="node33" class="node">
 <title>previous/9</title>
-<g id="a_node33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L172">
+<g id="a_node33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L172">
 <polygon fill="cornsilk" stroke="black" points="691.5,-213.5 598.5,-213.5 598.5,-177.5 691.5,-177.5 691.5,-213.5"/>
 <text text-anchor="start" x="606.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="611.25" y="-195.55" font-family="Monospace" font-size="11.00">previous/9</text>
@@ -953,12 +953,12 @@
 <!-- previous/5&#45;&gt;previous/9 -->
 <g id="edge19" class="edge">
 <title>previous/5&#45;&gt;previous/9</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L168" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L168" xlink:title="calls">
 <path fill="none" stroke="black" d="M645.81,-295.07C646.26,-284.7 646.77,-271.22 647,-259.25 647.21,-248.09 646.93,-235.81 646.52,-225.1"/>
 <polygon fill="black" stroke="black" points="650.03,-225.16 646.09,-215.32 643.04,-225.47 650.03,-225.16"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L168">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L168">
 <text text-anchor="start" x="647" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -966,12 +966,12 @@
 <!-- previous/9&#45;&gt;previous/5 -->
 <g id="edge20" class="edge">
 <title>previous/9&#45;&gt;previous/5</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L172" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L172" xlink:title="calls">
 <path fill="none" stroke="black" d="M633.01,-213.76C626.83,-223.72 619.93,-236.75 616.75,-249.5 613.7,-261.71 617.94,-274.5 623.99,-285.32"/>
 <polygon fill="black" stroke="black" points="621.03,-287.18 629.36,-293.73 626.93,-283.42 621.03,-287.18"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L172">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L172" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L172">
 <text text-anchor="start" x="616" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -979,7 +979,7 @@
 <!-- max/3 -->
 <g id="node44" class="node">
 <title>max/3</title>
-<g id="a_node44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L242">
+<g id="a_node44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L242" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L242">
 <polygon fill="cornsilk" stroke="black" points="674.5,-95.75 615.5,-95.75 615.5,-59.75 674.5,-59.75 674.5,-95.75"/>
 <text text-anchor="start" x="623.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="628.12" y="-77.8" font-family="Monospace" font-size="11.00">max/3</text>
@@ -993,12 +993,12 @@
 <!-- previous/9&#45;&gt;max/3 -->
 <g id="edge21" class="edge">
 <title>previous/9&#45;&gt;max/3</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L176" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L176" xlink:title="calls">
 <path fill="none" stroke="black" d="M645,-177.17C645,-158.76 645,-129.35 645,-107.46"/>
 <polygon fill="black" stroke="black" points="648.5,-107.71 645,-97.71 641.5,-107.71 648.5,-107.71"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L176">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L176" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L176">
 <text text-anchor="start" x="645" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1006,7 +1006,7 @@
 <!-- lookup/3 -->
 <g id="node34" class="node">
 <title>lookup/3</title>
-<g id="a_node34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L182">
+<g id="a_node34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L182">
 <polygon fill="cornsilk" stroke="black" points="2020,-331.25 1940,-331.25 1940,-295.25 2020,-295.25 2020,-331.25"/>
 <text text-anchor="start" x="1947.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1953" y="-313.3" font-family="Monospace" font-size="11.00">lookup/3</text>
@@ -1020,7 +1020,7 @@
 <!-- lookup_nonvar/3 -->
 <g id="node35" class="node">
 <title>lookup_nonvar/3</title>
-<g id="a_node35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L188">
+<g id="a_node35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L188">
 <polygon fill="cornsilk" stroke="black" points="2083.5,-213.5 1956.5,-213.5 1956.5,-177.5 2083.5,-177.5 2083.5,-213.5"/>
 <text text-anchor="start" x="1964.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1969.38" y="-195.55" font-family="Monospace" font-size="11.00">lookup_nonvar/3</text>
@@ -1034,12 +1034,12 @@
 <!-- lookup/3&#45;&gt;lookup_nonvar/3 -->
 <g id="edge23" class="edge">
 <title>lookup/3&#45;&gt;lookup_nonvar/3</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L182" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M1985.99,-294.92C1992.41,-276.34 2002.7,-246.55 2010.29,-224.61"/>
 <polygon fill="black" stroke="black" points="2013.52,-225.97 2013.48,-215.38 2006.9,-223.69 2013.52,-225.97"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L182">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L182">
 <text text-anchor="start" x="2001" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1047,7 +1047,7 @@
 <!-- lookup_var/3 -->
 <g id="node37" class="node">
 <title>lookup_var/3</title>
-<g id="a_node37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L198">
+<g id="a_node37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L198">
 <polygon fill="cornsilk" stroke="black" points="1938.5,-213.5 1831.5,-213.5 1831.5,-177.5 1938.5,-177.5 1938.5,-213.5"/>
 <text text-anchor="start" x="1839.38" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1844.5" y="-195.55" font-family="Monospace" font-size="11.00">lookup_var/3</text>
@@ -1061,12 +1061,12 @@
 <!-- lookup/3&#45;&gt;lookup_var/3 -->
 <g id="edge22" class="edge">
 <title>lookup/3&#45;&gt;lookup_var/3</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L182" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L182" xlink:title="calls">
 <path fill="none" stroke="black" d="M1965.78,-294.92C1950.11,-275.83 1924.73,-244.9 1906.6,-222.81"/>
 <polygon fill="black" stroke="black" points="1909.33,-220.63 1900.28,-215.12 1903.92,-225.07 1909.33,-220.63"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L182">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L182">
 <text text-anchor="start" x="1935" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1074,7 +1074,7 @@
 <!-- lookup_nonvar/6 -->
 <g id="node36" class="node">
 <title>lookup_nonvar/6</title>
-<g id="a_node36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L192">
+<g id="a_node36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L192" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L192">
 <polygon fill="cornsilk" stroke="black" points="2083.5,-95.75 1956.5,-95.75 1956.5,-59.75 2083.5,-59.75 2083.5,-95.75"/>
 <text text-anchor="start" x="1964.38" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1969.38" y="-77.8" font-family="Monospace" font-size="11.00">lookup_nonvar/6</text>
@@ -1088,12 +1088,12 @@
 <!-- lookup_nonvar/3&#45;&gt;lookup_nonvar/6 -->
 <g id="edge24" class="edge">
 <title>lookup_nonvar/3&#45;&gt;lookup_nonvar/6</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L188" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L188" xlink:title="calls">
 <path fill="none" stroke="black" d="M2007.27,-177.1C1999.74,-164.75 1992.29,-147.61 1995.75,-131.75 1997.62,-123.19 2001,-114.35 2004.65,-106.4"/>
 <polygon fill="black" stroke="black" points="2007.72,-108.1 2009.02,-97.59 2001.44,-105 2007.72,-108.1"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L188">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L188" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L188">
 <text text-anchor="start" x="1995" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1101,12 +1101,12 @@
 <!-- lookup_nonvar/6&#45;&gt;lookup_nonvar/3 -->
 <g id="edge25" class="edge">
 <title>lookup_nonvar/6&#45;&gt;lookup_nonvar/3</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L193" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L193" xlink:title="calls">
 <path fill="none" stroke="black" d="M2021.02,-96.06C2021.65,-108.66 2022.29,-126.13 2022,-141.5 2021.85,-149.45 2021.57,-158.06 2021.27,-165.99"/>
 <polygon fill="black" stroke="black" points="2017.78,-165.67 2020.87,-175.81 2024.78,-165.96 2017.78,-165.67"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L193">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L193" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L193">
 <text text-anchor="start" x="2022" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1114,7 +1114,7 @@
 <!-- lookup/2 -->
 <g id="node38" class="node">
 <title>lookup/2</title>
-<g id="a_node38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L204">
+<g id="a_node38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L204" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L204">
 <polygon fill="cornsilk" stroke="black" points="1974,-449 1894,-449 1894,-413 1974,-413 1974,-449"/>
 <text text-anchor="start" x="1901.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1907" y="-431.05" font-family="Monospace" font-size="11.00">lookup/2</text>
@@ -1128,12 +1128,12 @@
 <!-- lookup/2&#45;&gt;lookup/3 -->
 <g id="edge26" class="edge">
 <title>lookup/2&#45;&gt;lookup/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L205" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L205" xlink:title="calls">
 <path fill="none" stroke="black" d="M1935.02,-412.7C1936.24,-399.8 1938.91,-381.94 1944.75,-367.25 1948.41,-358.05 1953.82,-348.8 1959.31,-340.66"/>
 <polygon fill="black" stroke="black" points="1962.11,-342.77 1965.06,-332.59 1956.41,-338.71 1962.11,-342.77"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L205" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L205">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L205" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L205">
 <text text-anchor="start" x="1944" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1141,7 +1141,7 @@
 <!-- intersection/2 -->
 <g id="node39" class="node">
 <title>intersection/2</title>
-<g id="a_node39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L209">
+<g id="a_node39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L209">
 <polygon fill="cornsilk" stroke="black" points="1876,-449 1756,-449 1756,-413 1876,-413 1876,-449"/>
 <text text-anchor="start" x="1763.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1768.75" y="-431.05" font-family="Monospace" font-size="11.00">intersection/2</text>
@@ -1155,12 +1155,12 @@
 <!-- intersection/2&#45;&gt;inorder/2 -->
 <g id="edge27" class="edge">
 <title>intersection/2&#45;&gt;inorder/2</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L209" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M1803.57,-412.67C1789.94,-393.66 1767.9,-362.93 1752.08,-340.86"/>
 <polygon fill="black" stroke="black" points="1755.06,-339.01 1746.39,-332.93 1749.38,-343.09 1755.06,-339.01"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L209">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L209">
 <text text-anchor="start" x="1776" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1168,7 +1168,7 @@
 <!-- intersection_/2 -->
 <g id="node40" class="node">
 <title>intersection_/2</title>
-<g id="a_node40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L213">
+<g id="a_node40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L213" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L213">
 <polygon fill="cornsilk" stroke="black" points="1921.5,-331.25 1794.5,-331.25 1794.5,-295.25 1921.5,-295.25 1921.5,-331.25"/>
 <text text-anchor="start" x="1802.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1807.38" y="-313.3" font-family="Monospace" font-size="11.00">intersection_/2</text>
@@ -1182,12 +1182,12 @@
 <!-- intersection/2&#45;&gt;intersection_/2 -->
 <g id="edge28" class="edge">
 <title>intersection/2&#45;&gt;intersection_/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L209" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L209" xlink:title="calls">
 <path fill="none" stroke="black" d="M1822.29,-412.67C1829.03,-394.09 1839.84,-364.3 1847.8,-342.36"/>
 <polygon fill="black" stroke="black" points="1851.03,-343.71 1851.15,-333.12 1844.45,-341.33 1851.03,-343.71"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L209">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L209" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L209">
 <text text-anchor="start" x="1838" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1195,12 +1195,12 @@
 <!-- intersection_/2&#45;&gt;lookup_nonvar/3 -->
 <g id="edge29" class="edge">
 <title>intersection_/2&#45;&gt;lookup_nonvar/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L214" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L214" xlink:title="calls">
 <path fill="none" stroke="black" d="M1865.81,-294.81C1872.76,-280.97 1884.09,-261.94 1898.75,-249.5 1914.13,-236.46 1933.21,-226.13 1951.65,-218.19"/>
 <polygon fill="black" stroke="black" points="1952.78,-221.51 1960.7,-214.47 1950.12,-215.03 1952.78,-221.51"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L214">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L214" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L214">
 <text text-anchor="start" x="1898" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1208,7 +1208,7 @@
 <!-- intersection/3 -->
 <g id="node41" class="node">
 <title>intersection/3</title>
-<g id="a_node41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221">
+<g id="a_node41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221">
 <polygon fill="cornsilk" stroke="black" points="2112,-449 1992,-449 1992,-413 2112,-413 2112,-449"/>
 <text text-anchor="start" x="1999.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2004.75" y="-431.05" font-family="Monospace" font-size="11.00">intersection/3</text>
@@ -1222,12 +1222,12 @@
 <!-- intersection/3&#45;&gt;inorder/2 -->
 <g id="edge30" class="edge">
 <title>intersection/3&#45;&gt;inorder/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221" xlink:title="calls">
 <path fill="none" stroke="black" d="M2034.65,-412.59C2019.25,-398.18 1995.46,-378.34 1971,-367.25 1897.91,-334.11 1869.54,-350.54 1787.39,-331.33"/>
 <polygon fill="black" stroke="black" points="1788.28,-327.94 1777.73,-328.95 1786.61,-334.74 1788.28,-327.94"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221">
 <text text-anchor="start" x="1988" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1235,7 +1235,7 @@
 <!-- intersection_/4 -->
 <g id="node42" class="node">
 <title>intersection_/4</title>
-<g id="a_node42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L226">
+<g id="a_node42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L226" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L226">
 <polygon fill="cornsilk" stroke="black" points="2242.5,-331.25 2115.5,-331.25 2115.5,-295.25 2242.5,-295.25 2242.5,-331.25"/>
 <text text-anchor="start" x="2123.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2128.38" y="-313.3" font-family="Monospace" font-size="11.00">intersection_/4</text>
@@ -1249,12 +1249,12 @@
 <!-- intersection/3&#45;&gt;intersection_/4 -->
 <g id="edge32" class="edge">
 <title>intersection/3&#45;&gt;intersection_/4</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221" xlink:title="calls">
 <path fill="none" stroke="black" d="M2071.01,-412.67C2092.34,-393.24 2127.11,-361.54 2151.42,-339.39"/>
 <polygon fill="black" stroke="black" points="2153.71,-342.04 2158.74,-332.72 2148.99,-336.87 2153.71,-342.04"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221">
 <text text-anchor="start" x="2119" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1262,7 +1262,7 @@
 <!-- new/1 -->
 <g id="node60" class="node">
 <title>new/1</title>
-<g id="a_node60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L361">
+<g id="a_node60"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L361" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L361">
 <polygon fill="cornsilk" stroke="black" points="2097.5,-331.25 2038.5,-331.25 2038.5,-295.25 2097.5,-295.25 2097.5,-331.25"/>
 <text text-anchor="start" x="2046.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2051.12" y="-313.3" font-family="Monospace" font-size="11.00">new/1</text>
@@ -1276,12 +1276,12 @@
 <!-- intersection/3&#45;&gt;new/1 -->
 <g id="edge31" class="edge">
 <title>intersection/3&#45;&gt;new/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221" xlink:title="calls">
 <path fill="none" stroke="black" d="M2054.4,-412.67C2056.94,-394.26 2061.01,-364.85 2064.03,-342.96"/>
 <polygon fill="black" stroke="black" points="2067.48,-343.58 2065.38,-333.2 2060.54,-342.62 2067.48,-343.58"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L221">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L221">
 <text text-anchor="start" x="2060" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1289,12 +1289,12 @@
 <!-- intersection_/4&#45;&gt;insert/4 -->
 <g id="edge34" class="edge">
 <title>intersection_/4&#45;&gt;insert/4</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L227" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L227" xlink:title="calls">
 <path fill="none" stroke="black" d="M2179,-294.92C2179,-276.51 2179,-247.1 2179,-225.21"/>
 <polygon fill="black" stroke="black" points="2182.5,-225.46 2179,-215.46 2175.5,-225.46 2182.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L227">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L227">
 <text text-anchor="start" x="2179" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1302,12 +1302,12 @@
 <!-- intersection_/4&#45;&gt;lookup_nonvar/3 -->
 <g id="edge33" class="edge">
 <title>intersection_/4&#45;&gt;lookup_nonvar/3</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L227" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L227" xlink:title="calls">
 <path fill="none" stroke="black" d="M2155.2,-294.92C2128.03,-275.15 2083.43,-242.68 2052.94,-220.48"/>
 <polygon fill="black" stroke="black" points="2055.33,-217.89 2045.19,-214.84 2051.21,-223.55 2055.33,-217.89"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L227">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L227" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L227">
 <text text-anchor="start" x="2104" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1315,7 +1315,7 @@
 <!-- delete_min/4 -->
 <g id="node45" class="node">
 <title>delete_min/4</title>
-<g id="a_node45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L249">
+<g id="a_node45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L249" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L249">
 <polygon fill="cornsilk" stroke="black" points="2237.5,-449 2130.5,-449 2130.5,-413 2237.5,-413 2237.5,-449"/>
 <text text-anchor="start" x="2138.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2143.5" y="-431.05" font-family="Monospace" font-size="11.00">delete_min/4</text>
@@ -1329,7 +1329,7 @@
 <!-- delete_max/4 -->
 <g id="node46" class="node">
 <title>delete_max/4</title>
-<g id="a_node46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L257">
+<g id="a_node46"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L257" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L257">
 <polygon fill="cornsilk" stroke="black" points="2362.5,-449 2255.5,-449 2255.5,-413 2362.5,-413 2362.5,-449"/>
 <text text-anchor="start" x="2263.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2268.5" y="-431.05" font-family="Monospace" font-size="11.00">delete_max/4</text>
@@ -1343,7 +1343,7 @@
 <!-- delete/4 -->
 <g id="node49" class="node">
 <title>delete/4</title>
-<g id="a_node49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L281">
+<g id="a_node49"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L281" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L281">
 <polygon fill="cornsilk" stroke="black" points="2461,-449 2381,-449 2381,-413 2461,-413 2461,-449"/>
 <text text-anchor="start" x="2388.88" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2394" y="-431.05" font-family="Monospace" font-size="11.00">delete/4</text>
@@ -1357,7 +1357,7 @@
 <!-- delete/8 -->
 <g id="node50" class="node">
 <title>delete/8</title>
-<g id="a_node50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L287">
+<g id="a_node50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L287">
 <polygon fill="cornsilk" stroke="black" points="2442,-331.25 2362,-331.25 2362,-295.25 2442,-295.25 2442,-331.25"/>
 <text text-anchor="start" x="2369.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2375" y="-313.3" font-family="Monospace" font-size="11.00">delete/8</text>
@@ -1371,12 +1371,12 @@
 <!-- delete/4&#45;&gt;delete/8 -->
 <g id="edge37" class="edge">
 <title>delete/4&#45;&gt;delete/8</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L283" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L283" xlink:title="calls">
 <path fill="none" stroke="black" d="M2402.72,-412.7C2393.95,-403.12 2384.37,-390.45 2379.75,-377 2375.74,-365.32 2378.95,-352.46 2384.06,-341.43"/>
 <polygon fill="black" stroke="black" points="2387.01,-343.33 2388.65,-332.86 2380.84,-340.03 2387.01,-343.33"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L283">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L283" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L283">
 <text text-anchor="start" x="2379" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1384,12 +1384,12 @@
 <!-- delete/8&#45;&gt;delete/4 -->
 <g id="edge39" class="edge">
 <title>delete/8&#45;&gt;delete/4</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L289" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L289" xlink:title="calls">
 <path fill="none" stroke="black" d="M2404.86,-331.7C2407.89,-350.16 2412.72,-379.58 2416.31,-401.43"/>
 <polygon fill="black" stroke="black" points="2412.84,-401.88 2417.91,-411.18 2419.74,-400.74 2412.84,-401.88"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L289">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L289" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L289">
 <text text-anchor="start" x="2412" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1397,7 +1397,7 @@
 <!-- join/3 -->
 <g id="node51" class="node">
 <title>join/3</title>
-<g id="a_node51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L294" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L294">
+<g id="a_node51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L294" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L294">
 <polygon fill="cornsilk" stroke="black" points="2435,-213.5 2369,-213.5 2369,-177.5 2435,-177.5 2435,-213.5"/>
 <text text-anchor="start" x="2376.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2381.75" y="-195.55" font-family="Monospace" font-size="11.00">join/3</text>
@@ -1411,12 +1411,12 @@
 <!-- delete/8&#45;&gt;join/3 -->
 <g id="edge38" class="edge">
 <title>delete/8&#45;&gt;join/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L287" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L287" xlink:title="calls">
 <path fill="none" stroke="black" d="M2402,-294.92C2402,-276.51 2402,-247.1 2402,-225.21"/>
 <polygon fill="black" stroke="black" points="2405.5,-225.46 2402,-215.46 2398.5,-225.46 2405.5,-225.46"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L287">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L287" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L287">
 <text text-anchor="start" x="2402" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1424,7 +1424,7 @@
 <!-- update/4 -->
 <g id="node52" class="node">
 <title>update/4</title>
-<g id="a_node52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L301">
+<g id="a_node52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L301">
 <polygon fill="cornsilk" stroke="black" points="1520,-331.25 1440,-331.25 1440,-295.25 1520,-295.25 1520,-331.25"/>
 <text text-anchor="start" x="1447.88" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1453" y="-313.3" font-family="Monospace" font-size="11.00">update/4</text>
@@ -1438,7 +1438,7 @@
 <!-- update/5 -->
 <g id="node53" class="node">
 <title>update/5</title>
-<g id="a_node53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L304">
+<g id="a_node53"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L304">
 <polygon fill="cornsilk" stroke="black" points="1482,-213.5 1402,-213.5 1402,-177.5 1482,-177.5 1482,-213.5"/>
 <text text-anchor="start" x="1409.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1415" y="-195.55" font-family="Monospace" font-size="11.00">update/5</text>
@@ -1452,12 +1452,12 @@
 <!-- update/4&#45;&gt;update/5 -->
 <g id="edge40" class="edge">
 <title>update/4&#45;&gt;update/5</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L301" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L301" xlink:title="calls">
 <path fill="none" stroke="black" d="M1474.31,-294.92C1468.21,-276.34 1458.43,-246.55 1451.23,-224.61"/>
 <polygon fill="black" stroke="black" points="1454.64,-223.79 1448.2,-215.39 1447.99,-225.98 1454.64,-223.79"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L301">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L301" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L301">
 <text text-anchor="start" x="1462" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1465,7 +1465,7 @@
 <!-- update/9 -->
 <g id="node54" class="node">
 <title>update/9</title>
-<g id="a_node54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L308">
+<g id="a_node54"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L308" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L308">
 <polygon fill="cornsilk" stroke="black" points="1482,-95.75 1402,-95.75 1402,-59.75 1482,-59.75 1482,-95.75"/>
 <text text-anchor="start" x="1409.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1415" y="-77.8" font-family="Monospace" font-size="11.00">update/9</text>
@@ -1479,12 +1479,12 @@
 <!-- update/5&#45;&gt;update/9 -->
 <g id="edge41" class="edge">
 <title>update/5&#45;&gt;update/9</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L304" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L304" xlink:title="calls">
 <path fill="none" stroke="black" d="M1429.27,-177.1C1421.74,-164.75 1414.29,-147.61 1417.75,-131.75 1419.62,-123.19 1423,-114.35 1426.65,-106.4"/>
 <polygon fill="black" stroke="black" points="1429.72,-108.1 1431.02,-97.59 1423.44,-105 1429.72,-108.1"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L304">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L304" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L304">
 <text text-anchor="start" x="1417" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1492,12 +1492,12 @@
 <!-- update/9&#45;&gt;update/5 -->
 <g id="edge42" class="edge">
 <title>update/9&#45;&gt;update/5</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L309" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L309" xlink:title="calls">
 <path fill="none" stroke="black" d="M1443.02,-96.06C1443.65,-108.66 1444.29,-126.13 1444,-141.5 1443.85,-149.45 1443.57,-158.06 1443.27,-165.99"/>
 <polygon fill="black" stroke="black" points="1439.78,-165.67 1442.87,-175.81 1446.78,-165.96 1439.78,-165.67"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L309">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L309" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L309">
 <text text-anchor="start" x="1444" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1505,12 +1505,12 @@
 <!-- update_/3&#45;&gt;update/5 -->
 <g id="edge44" class="edge">
 <title>update_/3&#45;&gt;update/5</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L318" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L318" xlink:title="calls">
 <path fill="none" stroke="black" d="M1388.43,-294.92C1398.64,-276.17 1415.06,-246 1427.03,-224"/>
 <polygon fill="black" stroke="black" points="1430.07,-225.73 1431.78,-215.28 1423.93,-222.39 1430.07,-225.73"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L318">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L318" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L318">
 <text text-anchor="start" x="1412" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1518,7 +1518,7 @@
 <!-- apply_/8 -->
 <g id="node59" class="node">
 <title>apply_/8</title>
-<g id="a_node59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L350">
+<g id="a_node59"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L350" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L350">
 <polygon fill="cornsilk" stroke="black" points="413,-213.5 333,-213.5 333,-177.5 413,-177.5 413,-213.5"/>
 <text text-anchor="start" x="340.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="346" y="-195.55" font-family="Monospace" font-size="11.00">apply_/8</text>
@@ -1532,12 +1532,12 @@
 <!-- apply_/4&#45;&gt;apply_/8 -->
 <g id="edge47" class="edge">
 <title>apply_/4&#45;&gt;apply_/8</title>
-<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L345" xlink:title="calls">
+<g id="a_edge47"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L345" xlink:title="calls">
 <path fill="none" stroke="black" d="M359.72,-294.8C352.46,-282.42 345.31,-265.28 348.75,-249.5 350.62,-240.94 354,-232.1 357.65,-224.15"/>
 <polygon fill="black" stroke="black" points="360.72,-225.85 362.02,-215.34 354.44,-222.75 360.72,-225.85"/>
 </a>
 </g>
-<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L345">
+<g id="a_edge47&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L345" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L345">
 <text text-anchor="start" x="348" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1545,12 +1545,12 @@
 <!-- apply_/8&#45;&gt;apply_/4 -->
 <g id="edge48" class="edge">
 <title>apply_/8&#45;&gt;apply_/4</title>
-<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L352" xlink:title="calls">
+<g id="a_edge48"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L352" xlink:title="calls">
 <path fill="none" stroke="black" d="M374.11,-213.81C374.78,-226.41 375.43,-243.89 375,-259.25 374.78,-267.2 374.36,-275.82 373.91,-283.75"/>
 <polygon fill="black" stroke="black" points="370.43,-283.37 373.31,-293.56 377.41,-283.8 370.43,-283.37"/>
 </a>
 </g>
-<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L352">
+<g id="a_edge48&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L352" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L352">
 <text text-anchor="start" x="375" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1558,7 +1558,7 @@
 <!-- valid/1 -->
 <g id="node61" class="node">
 <title>valid/1</title>
-<g id="a_node61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L363" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L363">
+<g id="a_node61"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L363" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L363">
 <polygon fill="cornsilk" stroke="black" points="2552.5,-331.25 2479.5,-331.25 2479.5,-295.25 2552.5,-295.25 2552.5,-331.25"/>
 <text text-anchor="start" x="2487.38" y="-314.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2492.38" y="-313.3" font-family="Monospace" font-size="11.00">valid/1</text>
@@ -1572,7 +1572,7 @@
 <!-- valid_/1 -->
 <g id="node62" class="node">
 <title>valid_/1</title>
-<g id="a_node62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L367">
+<g id="a_node62"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L367" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L367">
 <polygon fill="cornsilk" stroke="black" points="2540,-213.5 2460,-213.5 2460,-177.5 2540,-177.5 2540,-213.5"/>
 <text text-anchor="start" x="2467.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2473" y="-195.55" font-family="Monospace" font-size="11.00">valid_/1</text>
@@ -1586,12 +1586,12 @@
 <!-- valid/1&#45;&gt;valid_/1 -->
 <g id="edge50" class="edge">
 <title>valid/1&#45;&gt;valid_/1</title>
-<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L363" xlink:title="calls">
+<g id="a_edge50"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L363" xlink:title="calls">
 <path fill="none" stroke="black" d="M2496.85,-295.11C2487.66,-285.58 2477.61,-272.9 2472.75,-259.25 2468.48,-247.26 2472.56,-234.31 2478.75,-223.3"/>
 <polygon fill="black" stroke="black" points="2481.56,-225.4 2484.03,-215.1 2475.67,-221.62 2481.56,-225.4"/>
 </a>
 </g>
-<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L363" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L363">
+<g id="a_edge50&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L363" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L363">
 <text text-anchor="start" x="2472" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1599,12 +1599,12 @@
 <!-- valid_/1&#45;&gt;valid/1 -->
 <g id="edge51" class="edge">
 <title>valid_/1&#45;&gt;valid/1</title>
-<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L371" xlink:title="calls">
+<g id="a_edge51"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L371" xlink:title="calls">
 <path fill="none" stroke="black" d="M2502.41,-213.95C2504.96,-232.41 2509.03,-261.83 2512.05,-283.68"/>
 <polygon fill="black" stroke="black" points="2508.56,-284 2513.4,-293.42 2515.5,-283.04 2508.56,-284"/>
 </a>
 </g>
-<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L371">
+<g id="a_edge51&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L371" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L371">
 <text text-anchor="start" x="2508" y="-250.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1612,7 +1612,7 @@
 <!-- check/1 -->
 <g id="node63" class="node">
 <title>check/1</title>
-<g id="a_node63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L393" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L393">
+<g id="a_node63"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L393" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L393">
 <polygon fill="cornsilk" stroke="black" points="2552.5,-449 2479.5,-449 2479.5,-413 2552.5,-413 2552.5,-449"/>
 <text text-anchor="start" x="2487.38" y="-431.82" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="2492.38" y="-431.05" font-family="Monospace" font-size="11.00">check/1</text>
@@ -1626,12 +1626,12 @@
 <!-- check/1&#45;&gt;valid/1 -->
 <g id="edge52" class="edge">
 <title>check/1&#45;&gt;valid/1</title>
-<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L393" xlink:title="calls">
+<g id="a_edge52"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L393" xlink:title="calls">
 <path fill="none" stroke="black" d="M2516,-412.67C2516,-394.26 2516,-364.85 2516,-342.96"/>
 <polygon fill="black" stroke="black" points="2519.5,-343.21 2516,-333.21 2512.5,-343.21 2519.5,-343.21"/>
 </a>
 </g>
-<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L393" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/a34aadeb0f40704fa6164f91881ef37bfe3ad8c8/library/dictionaries/bintree.lgt#L393">
+<g id="a_edge52&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L393" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/547c4be437dce8caffc096ebbe54ab79d05447fb/library/dictionaries/bintree.lgt#L393">
 <text text-anchor="start" x="2516" y="-368.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
