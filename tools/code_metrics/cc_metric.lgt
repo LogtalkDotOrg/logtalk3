@@ -97,13 +97,13 @@
 		length(AllEdgesSorted, Edges).
 
 	predicate_nodes(object, Entity, Nodes) :-
-		findall(Caller, object_property(Entity, defines(Caller, _)), Bag0),
+		findall(Caller, (object_property(Entity, defines(Caller, DefinesProperties)), \+ member(auxiliary, DefinesProperties)), Bag0),
 		findall(Callee, (object_property(Entity, calls(Callee, _)), ground(Callee)), Bag1, Bag0),
 		findall(Dynamic, (object_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag1),
 		sort(Bag, Sorted),
 		length(Sorted, Nodes).
 	predicate_nodes(category, Entity, Nodes) :-
-		findall(Caller, category_property(Entity, defines(Caller, _)), Bag0),
+		findall(Caller, (category_property(Entity, defines(Caller, DefinesProperties)), \+ member(auxiliary, DefinesProperties)), Bag0),
 		findall(Callee, (category_property(Entity, calls(Callee, _)), ground(Callee)), Bag1, Bag0),
 		findall(Dynamic, (category_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag1),
 		sort(Bag, Sorted),
@@ -112,7 +112,8 @@
 	connected_components(object, Entity, Components) :-
 		findall(
 			Predicate,
-			(	object_property(Entity, defines(Predicate, _)),
+			(	object_property(Entity, defines(Predicate, DefinesProperties)),
+				\+ member(auxiliary, DefinesProperties),
 				\+ object_property(Entity, calls(Predicate, _)),
 				\+ object_property(Entity, updates(Predicate, _))
 			),
@@ -122,7 +123,8 @@
 	connected_components(category, Entity, Components) :-
 		findall(
 			Predicate,
-			(	category_property(Entity, defines(Predicate, _)),
+			(	category_property(Entity, defines(Predicate, DefinesProperties)),
+				\+ member(auxiliary, DefinesProperties),
 				\+ category_property(Entity, calls(Predicate, _)),
 				\+ category_property(Entity, updates(Predicate, _))
 			),
