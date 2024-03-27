@@ -462,8 +462,8 @@ implements the ``pack_protocol``. The source file should be named after
 the pack with a ``_pack`` suffix. This naming convention helps
 preventing name conflicts, notably with the pack own objects. The file
 must be available from a declared pack registry (by having the registry
-loader file loading it). The pack name is ideally a valid unquoted atom.
-An example of a registry specification object would be:
+loader file loading it). The pack name is preferably a valid unquoted
+atom. An example of a pack specification object would be:
 
 ::
 
@@ -490,7 +490,7 @@ An example of a registry specification object would be:
            stable,
            'https://github.com/l-flat/lflat/archive/refs/tags/v2.1.0.tar.gz',
            sha256 - '9c298c2a08c4e2a1972c14720ef1498e7f116c7cd8bf7702c8d22d8ff549b6a1',
-           [logtalk @>= 3:36:0],
+           [logtalk @>= 3:42:0],
            all
        ).
 
@@ -643,6 +643,7 @@ It's also possible to specify *alternative* dependencies using the
 ``(;)/2`` operator. For example,
 ``(common::bits == 1:9; common::bits @>= 2:3)`` means either
 ``common::bits`` 1.9.x versions or 2.3.x and later versions.
+Alternatives should be listed in decreasing order of preference.
 
 When a pack also depends on a Logtalk or backend version, the name
 ``logtalk`` or the backend identifier atom can be used in place of
@@ -1027,9 +1028,9 @@ Best practices
    simplifying usage. Use descriptive names with underscores if
    necessary to link words.
 
--  Name registry and pack specification objects after their names with a
-   ``_registry`` or ``_pack`` suffix. Save the objects in files named
-   after the objects.
+-  Name the registry and pack specification objects after their names
+   with a ``_registry`` or ``_pack`` suffix. Save the objects in files
+   named after the objects.
 
 -  Create new pack versions from git tags.
 
@@ -1037,7 +1038,7 @@ Best practices
    using signed commits and signed tags for increased security.
 
 -  When a new pack version breaks backwards compatibility, list both the
-   old and the new versions on the pack spec file.
+   old and the new versions on the pack specification file.
 
 -  Pin registries and packs when specific versions are critical for your
    work so that you can still easily batch update the remaining packs
