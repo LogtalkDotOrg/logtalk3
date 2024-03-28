@@ -39,6 +39,8 @@ Documentation
 
 * ADDED: Also generate ePub and PDF versions of the APIs documentation.
 
+* IMPROVED: Documentation of the `code_metrics` tool.
+
 Library
 -------
 

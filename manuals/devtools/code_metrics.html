@@ -76,6 +76,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-metrics">Available metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coupling-metrics">Coupling metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#halstead-metric">Halstead metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upn-metric">UPN metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#excluding-code-from-analysis">Excluding code from analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-new-metrics">Defining new metrics</a></li>
@@ -192,8 +196,36 @@ standard output. A second set of predicates computes and returns a score
 <p>A helper object, <code class="docutils literal notranslate"><span class="pre">code_metrics</span></code>, is also provided allowing running all
 loaded individual metrics. For code coverage metrics, see the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool documentation.</p>
-<p>For interpretation of the coupling metric scores, see e.g. the original
-paper by Robert Martin, “OO Design Quality Metrics”:</p>
+</section>
+<section id="coupling-metrics">
+<h2>Coupling metrics<a class="headerlink" href="#coupling-metrics" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Efferent coupling (<code class="docutils literal notranslate"><span class="pre">Ce</span></code>): Number of entities that an entity depends
+on. These include objects receiving messages from the entity plus the
+implemented protocols, imported categories, and
+extended/instantiated/specialized objects.</p></li>
+<li><p>Afferent coupling (<code class="docutils literal notranslate"><span class="pre">Ca</span></code>): Number of entities that depend on an
+entity. For a protocol, the number of protocols that extend it plus
+the number of objects and categories that implement it. For a
+category, the number of objects that import it. For an object, the
+number of categories and objects that send messages to it plus the
+number of objects that extend/instantiate/specialize it.</p></li>
+<li><p>Instability: Computed as <code class="docutils literal notranslate"><span class="pre">Ce</span> <span class="pre">/</span> <span class="pre">(Ce</span> <span class="pre">+</span> <span class="pre">Ca)</span></code>. Measures the entity
+resilience to change. Ranging from 0.0 to 1.0, with 0.0 indicating a
+maximally stable entity and 1.0 indicating a maximally unstable
+entity. Ideally, an entity is either maximally stable or maximally
+unstable.</p></li>
+<li><p>Abstractness: Computed as the ratio between the number of static
+predicates with scope directives without a local definition and the
+number of static predicates with scope directives. Measures the
+rigidity of an entity. Ranging from 0.0 to 1.0, with 0.0 indicating a
+fully concrete entity and 1.0 indicating a fully abstract entity.</p></li>
+</ul>
+<p>The dependencies count include direct entity relations plus predicate
+calls or dynamic updates to predicates in external objects or
+categories.</p>
+<p>For more information on the interpretation of the coupling metric
+scores, see e.g. the original paper by Robert Martin:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span>citeulike<span class="o">:</span><span class="m">1579528</span>,
     author <span class="o">=</span> <span class="s">&quot;Martin, Robert&quot;</span>,
     booktitle <span class="o">=</span> <span class="s">&quot;Workshop Pragmatic and Theoretical Directions in Object-Oriented Software Metrics&quot;</span>,
@@ -209,15 +241,43 @@ paper by Robert Martin, “OO Design Quality Metrics”:</p>
 <span class="k">}</span>
 </pre></div>
 </div>
-<p>The Halstead metric computation uses the reflection API for performance.
-The main consequence of this choice is that we abstract all predicate
-arguments. A computation closer to the original definition of the metric
-would require switching to use the parser to collect information on
-syntactic literals, which would imply a much large computation cost.</p>
 <p>The coupling metric was also influenced by the metrics rating system in
 Microsoft Visual Studio and aims to eventually emulate the functionality
 of a maintainability index score.</p>
-<p>The unique predicate nodes (UPN) metric is described in the following
+</section>
+<section id="halstead-metric">
+<h2>Halstead metric<a class="headerlink" href="#halstead-metric" title="Link to this heading"></a></h2>
+<p>Predicates declared, user-defined, and called are interpreted as
+<em>operators</em>. Built-in predicates and built-in control constructs are
+ignored. Predicate arguments are abstracted, assumed distinct, and
+interpreted as <em>operands</em>. Note that this definition of operands is a
+significant deviation from the original definition, which used syntactic
+literals. A computation closer to the original definition of the metric
+would require switching to use the parser to collect information on
+syntactic literals, which would imply a much large computation cost.</p>
+<p>The computation of this metric is parameterized by the <em>Stroud</em>
+coefficient for computing the time required to program (default is 18).
+The following individual measures are computed:</p>
+<ul class="simple">
+<li><p>Number of distinct predicates (declared, defined, called, or updated;
+<code class="docutils literal notranslate"><span class="pre">Pn</span></code>).</p></li>
+<li><p>Number of predicate arguments (assumed distinct; <code class="docutils literal notranslate"><span class="pre">PAn</span></code>).</p></li>
+<li><p>Number of predicate calls/updates + number of clauses (<code class="docutils literal notranslate"><span class="pre">Cn</span></code>).</p></li>
+<li><p>Number of predicate call/update arguments + number of clause head
+arguments (<code class="docutils literal notranslate"><span class="pre">CAn</span></code>).</p></li>
+<li><p>Entity vocabulary (<code class="docutils literal notranslate"><span class="pre">EV</span></code>). Computed as <code class="docutils literal notranslate"><span class="pre">EV</span> <span class="pre">=</span> <span class="pre">Pn</span> <span class="pre">+</span> <span class="pre">PAn</span></code>.</p></li>
+<li><p>Entity length (<code class="docutils literal notranslate"><span class="pre">EL</span></code>). Computed as <code class="docutils literal notranslate"><span class="pre">EL</span> <span class="pre">=</span> <span class="pre">Cn</span> <span class="pre">+</span> <span class="pre">CAn</span></code>.</p></li>
+<li><p>Volume (<code class="docutils literal notranslate"><span class="pre">V</span></code>). Computed as <code class="docutils literal notranslate"><span class="pre">V</span> <span class="pre">=</span> <span class="pre">EL</span> <span class="pre">*</span> <span class="pre">log2(EV)</span></code>.</p></li>
+<li><p>Difficulty (<code class="docutils literal notranslate"><span class="pre">D</span></code>). Computed as <code class="docutils literal notranslate"><span class="pre">D</span> <span class="pre">=</span> <span class="pre">(Pn/2)</span> <span class="pre">*</span> <span class="pre">(CAn/An)</span></code>.</p></li>
+<li><p>Effort (<code class="docutils literal notranslate"><span class="pre">E</span></code>). Computed as <code class="docutils literal notranslate"><span class="pre">E</span> <span class="pre">=</span> <span class="pre">D</span> <span class="pre">*</span> <span class="pre">V</span></code>.</p></li>
+<li><p>Time required to program (<code class="docutils literal notranslate"><span class="pre">T</span></code>). Computed as <code class="docutils literal notranslate"><span class="pre">T</span> <span class="pre">=</span> <span class="pre">E/k</span></code> seconds
+(where <code class="docutils literal notranslate"><span class="pre">k</span></code> is the Stroud number; defaults to 18).</p></li>
+<li><p>Number of delivered bugs (<code class="docutils literal notranslate"><span class="pre">B</span></code>). Computed as <code class="docutils literal notranslate"><span class="pre">B</span> <span class="pre">=</span> <span class="pre">V/3000</span></code>.</p></li>
+</ul>
+</section>
+<section id="upn-metric">
+<h2>UPN metric<a class="headerlink" href="#upn-metric" title="Link to this heading"></a></h2>
+<p>The Unique Predicate Nodes (UPN) metric is described in the following
 paper:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>article<span class="k">{</span><span class="nv">MOORES199845</span>,
     title <span class="o">=</span> <span class="s">&quot;Applying Complexity Measures to Rule-Based Prolog Programs&quot;</span>,
@@ -233,9 +293,19 @@ paper:</p>
 <span class="k">}</span>
 </pre></div>
 </div>
-<p>The cyclomatic complexity metric uses the same predicate abstraction as
-the UPN metric and it is also described in the above paper besides the
-original paper by Thomas J. McCabe:</p>
+<p>The nodes include called and updated predicates independently of where
+they are defined.</p>
+</section>
+<section id="cyclomatic-complexity-metric">
+<h2>Cyclomatic complexity metric<a class="headerlink" href="#cyclomatic-complexity-metric" title="Link to this heading"></a></h2>
+<p>The cyclomatic complexity metric evaluates code complexity by measuring
+the number of linearly independent paths through the code. In its
+current implementation, all defined predicates that are not called or
+updated are counted as graph connected components (the reasoning being
+that these predicates can be considered entry points). The
+implementation uses the same predicate abstraction as the UPN metric.</p>
+<p>For more details on this metric, see the original paper by Thomas J.
+McCabe:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span><span class="nv">McCabe</span><span class="o">:</span><span class="m">1976</span><span class="o">:</span><span class="nv">CM</span><span class="o">:</span><span class="m">800253.807712</span>,
     author <span class="o">=</span> <span class="s">&quot;McCabe, Thomas J.&quot;</span>,
     title <span class="o">=</span> <span class="s">&quot;A Complexity Measure&quot;</span>,
@@ -252,15 +322,15 @@ original paper by Thomas J. McCabe:</p>
 <span class="k">}</span>
 </pre></div>
 </div>
-<p>Be sure to fully understand the metrics individual meanings and any
-implementation limitations before using them to support any evaluation
-or decision process.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>All metrics require the source code to be analyzed to be loaded with the
 <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on. For usage examples, see the
 <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> file in the tool directory.</p>
+<p>Be sure to fully understand the metrics individual meanings and any
+implementation limitations before using them to support any evaluation
+or decision process.</p>
 </section>
 <section id="excluding-code-from-analysis">
 <h2>Excluding code from analysis<a class="headerlink" href="#excluding-code-from-analysis" title="Link to this heading"></a></h2>
