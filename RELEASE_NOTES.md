@@ -55,6 +55,9 @@ Tools
 * CHANGED: The `code_metrics` tool to exclude auxiliary predicates from
 analysis.
 
+* CHANGED: The `diagrams` tool to omit from directory loading and directory
+dependency diagrams directories that are not loaded or have no dependencies.
+
 * CHANGED: The `packs` tool to only install or restore, by default, packs that
 are compatible with the current Logtalk, backed, and operating-system versions.
 Add a new `compatible/1` boolean option for the `install/4`, `update/3`, and

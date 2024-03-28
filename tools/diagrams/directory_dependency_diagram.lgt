@@ -23,9 +23,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 2:1:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2024-03-20,
+		date is 2024-03-28,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -47,16 +47,18 @@
 	output_library(Project, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		(	(	logtalk::loaded_file_property(_, directory(Directory))
-			;	modules_diagram_support::loaded_file_property(_, directory(Directory))
-			) ->
-			parameter(1, Format),
-			file_dependency_diagram(Format)::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Project, Suffix, LinkingOptions, NodeOptions),
-			assertz((sub_diagram_(Project, Directory)))
-		;	% no files for this directory
-			NodeOptions = LinkingOptions
-		),
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		once((
+			depends_directory(Directory, OtherDirectory, _),
+			\+ (
+				member(ExcludedDirectory, ExcludedDirectories),
+				sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)
+			)
+		)),
+		parameter(1, Format),
+		file_dependency_diagram(Format)::diagram_name_suffix(Suffix),
+		^^add_node_zoom_option(Project, Suffix, LinkingOptions, NodeOptions),
+		assertz((sub_diagram_(Project, Directory))),
 		^^output_node(Directory, Relative, directory, [], directory, NodeOptions),
 		^^remember_included_directory(Directory),
 		fail.
