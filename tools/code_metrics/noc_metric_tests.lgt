@@ -30,11 +30,13 @@
 		comment is 'Unit tests for the entity number of clauses metric.'
 	]).
 
+	:- uses(noc_metric, [
+		entity_score/2
+	]).
+
 	cover(code_metric).
 	cover(code_metrics_utilities).
 	cover(noc_metric).
-
-	:- uses(noc_metric, [entity_score/2]).
 
 	test(noc_cat_a, true(Score == number_of_clauses(0, 0))) :-
 		entity_score(cat_a, Score).

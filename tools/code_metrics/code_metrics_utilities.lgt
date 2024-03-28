@@ -33,7 +33,9 @@
 		]
 	]).
 
-	:- uses(list, [member/2, memberchk/2]).
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
 
 	:- private(ancestor/4).
 	:- mode(ancestor(?entity, ?entity_identifier, ?entity, ?entity_identifier), zero_or_more).

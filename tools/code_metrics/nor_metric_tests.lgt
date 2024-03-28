@@ -30,11 +30,13 @@
 		comment is 'Unit tests for the entity number of rules metric.'
 	]).
 
+	:- uses(nor_metric, [
+		entity_score/2
+	]).
+
 	cover(code_metric).
 	cover(code_metrics_utilities).
 	cover(nor_metric).
-
-	:- uses(nor_metric, [entity_score/2]).
 
 	test(nor_cat_a, true(Score == number_of_rules(0, 0))) :-
 		entity_score(cat_a, Score).

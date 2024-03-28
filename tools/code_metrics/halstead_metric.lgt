@@ -46,9 +46,17 @@
 		]
 	]).
 
-	:- uses(list, [length/2, member/2, memberchk/2]).
-	:- uses(numberlist, [sum/2]).
-	:- uses(pairs, [values/2]).
+	:- uses(list, [
+		length/2, member/2, memberchk/2
+	]).
+
+	:- uses(numberlist, [
+		sum/2
+	]).
+
+	:- uses(pairs, [
+		values/2
+	]).
 
 	entity_score(Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) :-
 		parameter(1, Stroud),
