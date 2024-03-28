@@ -90,6 +90,8 @@ Tests
 * ADDED: Preliminary test set for the Prolog `encoding/1` directive supported
 by some of the backends that support Unicode and multiple text encodings.
 
+* ADDED: Additional tests for the Prolog standard `number_codes/2` predicate.
+
 
 3.76.0 - March 19, 2024
 =======================
