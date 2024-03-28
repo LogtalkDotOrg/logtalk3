@@ -84,6 +84,9 @@ pack will break.
 * FIXED: The `packs` tool to pass pack installing and updating options to any
 required dependencies that must also be installed or updated.
 
+* FIXED: A `diagrams` tool bug where generating a directory loading diagram for
+a Prolog module application would ignore the `exclude_directories/1` option.
+
 Tests
 -----
 

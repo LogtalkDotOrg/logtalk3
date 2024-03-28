@@ -23,9 +23,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 2:1:0,
+		version is 2:1:1,
 		author is 'Paulo Moura',
-		date is 2024-03-20,
+		date is 2024-03-28,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
@@ -67,20 +67,19 @@
 		;	modules_diagram_support::loaded_file_property(File, directory(Directory))
 		),
 		% look for a file in another directory that have this file as parent
-		(	^^option(exclude_directories(ExcludedDirectories), Options),
-			logtalk::loaded_file_property(Other, parent(File)),
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		(	logtalk::loaded_file_property(Other, parent(File)),
 			logtalk::loaded_file_property(Other, directory(OtherDirectory)),
-			OtherDirectory \== Directory,
-			\+ (
-				member(ExcludedDirectory, ExcludedDirectories),
-				sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)
-			),
-			logtalk::loaded_file_property(Other, directory(OtherDirectory))
+			OtherDirectory \== Directory
 		;	modules_diagram_support::loaded_file_property(Other, parent(File)),
 			modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
 			OtherDirectory \== Directory,
 			% not a Logtalk generated intermediate Prolog file
 			\+ logtalk::loaded_file_property(_, target(Other))
+		),
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)
 		),
 		% edge not previously recorded
 		\+ ^^edge(Directory, OtherDirectory, _, _, _),
