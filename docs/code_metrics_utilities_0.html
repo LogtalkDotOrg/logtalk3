@@ -217,8 +217,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Ebrahim Azarisooreh</div>
-<div class="line"><strong>Version:</strong> 0:6:0</div>
-<div class="line"><strong>Date:</strong> 2018-06-08</div>
+<div class="line"><strong>Version:</strong> 0:7:0</div>
+<div class="line"><strong>Date:</strong> 2024-03-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -230,6 +230,7 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -238,7 +239,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Usage: This is meant to be imported by any metric added to the system.</p></li>
-<li><p>Predicate Scope: This is meant for internal use by metrics only. As such, all provided predicates are private.</p></li>
+<li><p>Predicate Scope: This is meant for internal use by metrics only. As such, all provided predicates are protected.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -250,21 +251,22 @@
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#ancestor-4" id="id4"><code class="docutils literal notranslate"><span class="pre">ancestor/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#current-entity-1" id="id5"><code class="docutils literal notranslate"><span class="pre">current_entity/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#declares-predicate-2" id="id6"><code class="docutils literal notranslate"><span class="pre">declares_predicate/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#defines-predicate-2" id="id7"><code class="docutils literal notranslate"><span class="pre">defines_predicate/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#defines-predicate-3" id="id8"><code class="docutils literal notranslate"><span class="pre">defines_predicate/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-calls-3" id="id9"><code class="docutils literal notranslate"><span class="pre">entity_calls/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-kind-2" id="id10"><code class="docutils literal notranslate"><span class="pre">entity_kind/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-property-2" id="id11"><code class="docutils literal notranslate"><span class="pre">entity_property/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-updates-3" id="id12"><code class="docutils literal notranslate"><span class="pre">entity_updates/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ancestor-4" id="id3"><code class="docutils literal notranslate"><span class="pre">ancestor/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#current-entity-1" id="id4"><code class="docutils literal notranslate"><span class="pre">current_entity/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#declares-predicate-2" id="id5"><code class="docutils literal notranslate"><span class="pre">declares_predicate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#defines-predicate-2" id="id6"><code class="docutils literal notranslate"><span class="pre">defines_predicate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#defines-predicate-3" id="id7"><code class="docutils literal notranslate"><span class="pre">defines_predicate/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-calls-3" id="id8"><code class="docutils literal notranslate"><span class="pre">entity_calls/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-kind-2" id="id9"><code class="docutils literal notranslate"><span class="pre">entity_kind/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-property-2" id="id10"><code class="docutils literal notranslate"><span class="pre">entity_property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-updates-3" id="id11"><code class="docutils literal notranslate"><span class="pre">entity_updates/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#not-excluded-file-3" id="id12"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id13">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id14">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -273,10 +275,6 @@
 </section>
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
-</section>
-<section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="ancestor-4">
 <span id="code-metrics-utilities-0-ancestor-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ancestor/4</span></code></a><a class="headerlink" href="#ancestor-4" title="Link to this heading"></a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Entity</span></code> descends from <code class="docutils literal notranslate"><span class="pre">Ancestor</span></code>, and <code class="docutils literal notranslate"><span class="pre">EntityKind</span></code> and <code class="docutils literal notranslate"><span class="pre">AncestorKind</span></code> unify with their respective entity types.</p>
@@ -464,9 +462,34 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<hr class="docutils" />
+</section>
+<section id="not-excluded-file-3">
+<span id="code-metrics-utilities-0-not-excluded-file-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a><a class="headerlink" href="#not-excluded-file-3" title="Link to this heading"></a></h3>
+<p>True if the file is not being excluded.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">not_excluded_file(ExcludedFiles,Path,Basename)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">not_excluded_file(+list(atom),+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
+<section id="private-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<p>(no local declarations; see entity ancestors if any)</p>
+</section>
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>

@@ -24,29 +24,15 @@
 	imports(options)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2024-03-11,
+		date is 2024-03-28,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
 			'Known issues' - 'Use of local meta-calls with goal arguments only know at runtime can result in false positives. Calls from non-standard meta-predicates may be missed if the meta-calls are not optimized.',
 			'Requirements' - 'Source files must be compiled with the ``source_data`` flag turned on. To avoid false positives do to meta-calls, compilation of source files with the ``optimized`` flag turned on is also advised.'
 		]
-	]).
-
-	:- uses(list, [
-		member/2, memberchk/2
-	]).
-
-	% Use the structured printing mechanism in order to allow results to be
-	% intercepted for alternative reporting by e.g. GUI IDEs
-	:- uses(logtalk, [
-		print_message/3
-	]).
-
-	:- uses(type, [
-		valid/2
 	]).
 
 	:- public(entity/1).
@@ -151,6 +137,24 @@
 	:- info(predicate/2, [
 		comment is 'Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.',
 		argnames is ['Entity', 'Predicate']
+	]).
+
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
+
+	% Use the structured printing mechanism in order to allow results to be
+	% intercepted for alternative reporting by e.g. GUI IDEs
+	:- uses(logtalk, [
+		expand_library_path/2, file_type_extension/2, loaded_file_property/2, print_message/3
+	]).
+
+	:- uses(os, [
+		date_time/7, decompose_file_name/3, decompose_file_name/4, directory_exists/1, internal_os_path/2
+	]).
+
+	:- uses(type, [
+		valid/2
 	]).
 
 	predicates(Entity, Predicates) :-
@@ -381,7 +385,7 @@
 	rlibrary(Library, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	logtalk::expand_library_path(Library, TopPath) ->
+		(	expand_library_path(Library, TopPath) ->
 			write_scan_header('Recursive library'),
 			output_rlibrary(TopPath, Options),
 			write_scan_footer('Recursive library')
@@ -403,13 +407,13 @@
 
 	sub_library(TopPath, Library, LibraryPath) :-
 		logtalk_library_path(Library, _),
-		logtalk::expand_library_path(Library, LibraryPath),
+		expand_library_path(Library, LibraryPath),
 		atom_concat(TopPath, _RelativePath, LibraryPath).
 
 	library(Library, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	logtalk::expand_library_path(Library, Path) ->
+		(	expand_library_path(Library, Path) ->
 			write_scan_header('Library'),
 			output_directory_files(Path, Options),
 			write_scan_footer('Library')
@@ -423,8 +427,8 @@
 	rdirectory(Directory, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	os::absolute_file_name(Directory, Path),
-			os::directory_exists(Path) ->
+		(	normalize_directory_path(Directory, Path),
+			directory_exists(Path) ->
 			write_scan_header('Recursive directory'),
 			output_rdirectory(Path, Options),
 			write_scan_footer('Recursive directory')
@@ -436,33 +440,37 @@
 		rdirectory(Directory, []).
 
 	output_rdirectory(Directory, Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
-		setof(
-			SubDirectory,
-			Length^After^(
-				sub_directory(Directory, SubDirectory),
-				\+ (
-					member(ExcludedDirectory, ExcludedDirectories),
-					sub_atom(SubDirectory, 0, Length, After, ExcludedDirectory)
-				)
-			),
-			SubDirectories
+		(	setof(
+				SubDirectory,
+				sub_directory(Directory, Options, SubDirectory),
+				SubDirectories
+			) ->
+			true
+		;	SubDirectories = []
 		),
 		forall(
-			member(SubDirectory, SubDirectories),
+			member(SubDirectory, [Directory| SubDirectories]),
 			output_directory_files(SubDirectory, Options)
 		).
 
-	sub_directory(Directory, SubDirectory) :-
-		logtalk::loaded_file(Path),
-		os::decompose_file_name(Path, SubDirectory, _),
-		atom_concat(Directory, _RelativePath, SubDirectory).
+	sub_directory(Directory, Options, SubDirectory) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
+		loaded_file_property(Path, basename(Basename)),
+		not_excluded_file(ExcludedFiles, Path, Basename),
+		decompose_file_name(Path, SubDirectory, _),
+		Directory \== SubDirectory,
+		sub_atom(SubDirectory, 0, _, _, Directory),
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(SubDirectory, 0, _, _, ExcludedDirectory)
+		).
 
 	directory(Directory, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	os::absolute_file_name(Directory, Path),
-			os::directory_exists(Path) ->
+		(	normalize_directory_path(Directory, Path),
+			directory_exists(Path) ->
 			write_scan_header('Directory'),
 			output_directory_files(Path, Options),
 			write_scan_footer('Directory')
@@ -476,12 +484,8 @@
 	output_directory_files(Directory, Options) :-
 		^^option(exclude_files(ExcludedFiles), Options),
 		print_message(silent, dead_code_scanner, scanning_directory(Directory)),
-		(	sub_atom(Directory, _, 1, 0, '/') ->
-			DirectorySlash = Directory
-		;	atom_concat(Directory, '/', DirectorySlash)
-		),
-		logtalk::loaded_file_property(Path, directory(DirectorySlash)),
-		logtalk::loaded_file_property(Path, basename(Basename)),
+		loaded_file_property(Path, directory(Directory)),
+		loaded_file_property(Path, basename(Basename)),
 		not_excluded_file(ExcludedFiles, Path, Basename),
 		process_file(Path, Options),
 		fail.
@@ -525,46 +529,46 @@
 		compound(LibraryNotation),
 		!,
 		LibraryNotation =.. [Library, Name],
-		logtalk::expand_library_path(Library, LibraryPath),
+		expand_library_path(Library, LibraryPath),
 		atom_concat(LibraryPath, Name, Source),
 		locate_file(Source, Path).
 	% file given using its name or basename
 	locate_file(Source, Path) :-
 		add_extension(Source, Basename),
-		logtalk::loaded_file_property(Path, basename(Basename)),
+		loaded_file_property(Path, basename(Basename)),
 		% check that there isn't another file with the same basename
 		% from a different directory
 		\+ (
-			logtalk::loaded_file_property(OtherPath, basename(Basename)),
+			loaded_file_property(OtherPath, basename(Basename)),
 			Path \== OtherPath
 		),
 		!.
 	% file given using a full path
 	locate_file(Source, Path) :-
 		add_extension(Source, SourceWithExtension),
-		logtalk::loaded_file_property(Path, basename(Basename)),
-		logtalk::loaded_file_property(Path, directory(Directory)),
+		loaded_file_property(Path, basename(Basename)),
+		loaded_file_property(Path, directory(Directory)),
 		atom_concat(Directory, Basename, SourceWithExtension),
 		!.
 
 	add_extension(Source, SourceWithExtension) :-
 		% ensure that Source is not specified using library notation
 		atom(Source),
-		os::decompose_file_name(Source, _, _, SourceExtension),
-		(	logtalk::file_type_extension(source, SourceExtension) ->
+		decompose_file_name(Source, _, _, SourceExtension),
+		(	file_type_extension(source, SourceExtension) ->
 			% source file extension present
 			SourceWithExtension = Source
 		;	% try possible source extensions
-			logtalk::file_type_extension(source, Extension),
+			file_type_extension(source, Extension),
 			atom_concat(Source, Extension, SourceWithExtension)
 		).
 
 	process_file(Path, Options) :-
 		^^option(exclude_entities(ExcludedEntities), Options),
 		print_message(silent, dead_code_scanner, scanning_file(Path)),
-		(	logtalk::loaded_file_property(Path, object(Entity)),
+		(	loaded_file_property(Path, object(Entity)),
 			Kind = object
-		;	logtalk::loaded_file_property(Path, category(Entity)),
+		;	loaded_file_property(Path, category(Entity)),
 			Kind = category
 		),
 		\+ member(Entity, ExcludedEntities),
@@ -593,13 +597,13 @@
 
 	write_scan_header(Type) :-
 		print_message(silent, dead_code_scanner, scan_started),
-		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(silent, dead_code_scanner, scan_start_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(comment, dead_code_scanner, scanning_for_dead_code).
 
 	write_scan_footer(Type) :-
 		print_message(comment, dead_code_scanner, completed_scanning_for_dead_code),
-		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
+		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		print_message(silent, dead_code_scanner, scan_end_date_time(Type, Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(silent, dead_code_scanner, scan_ended).
 
@@ -627,11 +631,11 @@
 		\+ member(Path, [ExcludedFile| ExcludedFiles]),
 		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
 		% files in the exclusion list may be given with or without extension
-		\+ (	logtalk::file_type_extension(logtalk, Extension),
+		\+ (	file_type_extension(logtalk, Extension),
 				atom_concat(Source, Extension, Path),
 				member(Source, [ExcludedFile| ExcludedFiles])
 		),
-		\+ (	logtalk::file_type_extension(logtalk, Extension),
+		\+ (	file_type_extension(logtalk, Extension),
 				atom_concat(Source, Extension, Basename),
 				member(Source, [ExcludedFile| ExcludedFiles])
 		).
@@ -641,13 +645,16 @@
 
 	normalize_directory_paths([], []).
 	normalize_directory_paths([Directory0| Directories0], [Directory| Directories]) :-
-		os::internal_os_path(Directory1, Directory0),
-		os::absolute_file_name(Directory1, Directory2),
+		normalize_directory_path(Directory0, Directory),
+		normalize_directory_paths(Directories0, Directories).
+
+	normalize_directory_path(Directory0, Directory) :-
+		internal_os_path(Directory1, Directory0),
+		absolute_file_name(Directory1, Directory2),
 		(	sub_atom(Directory2, _, _, 0, '/') ->
 			Directory = Directory2
 		;	atom_concat(Directory2, '/', Directory)
-		),
-		normalize_directory_paths(Directories0, Directories).
+		).
 
 :- end_object.
 

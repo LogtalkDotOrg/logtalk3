@@ -116,10 +116,10 @@ A set of options are available to specify code that should be excluded when
 looking for unused predicates (and non-terminals):
 
 - `exclude_directories(Directories)`  
-	list of directories to exclude (default is `[]`; all sub-directories of the excluded directories are also excluded)
+	list of directories to exclude (default is `[]`); all sub-directories of the excluded directories are also excluded; directories may be listed by full or relative path
 
 - `exclude_files(Files)`  
-	list of source files to exclude (default is `[]`)
+	list of source files to exclude (default is `[]`); files may be listed by full path or basename, with or without extension
 
 - `exclude_libraries(Libraries)`  
 	list of libraries to exclude (default is `[startup, scratch_directory]`)

@@ -14,14 +14,15 @@ Core predicates for computing source code metrics.
 |    ``logtalk_load(code_metrics(loader))``
 
 | **Author:** Ebrahim Azarisooreh and Paulo Moura
-| **Version:** 0:11:0
-| **Date:** 2024-03-27
+| **Version:** 0:12:0
+| **Date:** 2024-03-28
 
 | **Compilation flags:**
 |    ``static``
 
 
 | **Extends:**
+|    ``public`` :ref:`code_metrics_utilities <code_metrics_utilities/0>`
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`list <list/0>`

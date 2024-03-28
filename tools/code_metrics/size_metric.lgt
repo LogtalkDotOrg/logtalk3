@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2024-03-27,
+		date is 2024-03-28,
 		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).'
 	]).
 
@@ -71,12 +71,9 @@
 
 	directory_file_size(Directory, File, Size, Options) :-
 		^^option(exclude_files(ExcludedFiles), Options),
-		(	sub_atom(Directory, _, 1, 0, '/') ->
-			DirectorySlash = Directory
-		;	atom_concat(Directory, '/', DirectorySlash)
-		),
-		loaded_file_property(File, directory(DirectorySlash)),
-		\+ member(File, ExcludedFiles),
+		loaded_file_property(File, directory(Directory)),
+		loaded_file_property(File, basename(Basename)),
+		^^not_excluded_file(ExcludedFiles, File, Basename),
 		file_size(File, Size).
 
 	rdirectory_score(Directory, TotalSize, Options) :-
@@ -144,8 +141,8 @@
 		^^option(exclude_files(ExcludedFiles), Options),
 		findall(
 			Size,
-			(	loaded_file(File),
-				\+ member(File, ExcludedFiles),
+			(	loaded_file_property(File, basename(Basename)),
+				^^not_excluded_file(ExcludedFiles, File, Basename),
 				file_size(File, Size)
 			),
 			Sizes

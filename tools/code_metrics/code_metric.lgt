@@ -21,12 +21,12 @@
 
 
 :- category(code_metric,
-	extends(options)).
+	extends((code_metrics_utilities, options))).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2024-03-27,
+		date is 2024-03-28,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -254,9 +254,10 @@
 	]).
 
 	:- uses(os, [
-		absolute_file_name/2, date_time/7,
+		absolute_file_name/2, internal_os_path/2,
 		decompose_file_name/3, decompose_file_name/4,
-		directory_exists/1
+		directory_exists/1,
+		date_time/7
 	]).
 
 	:- uses(type, [
@@ -362,7 +363,7 @@
 	directory(Directory, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	absolute_file_name(Directory, Path),
+		(	normalize_directory_path(Directory, Path),
 			directory_exists(Path) ->
 			write_scan_header('Directory'),
 			::process_directory(Path, Options),
@@ -381,7 +382,7 @@
 	rdirectory(Directory, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	absolute_file_name(Directory, Path),
+		(	normalize_directory_path(Directory, Path),
 			directory_exists(Path) ->
 			write_scan_header('Recursive directory'),
 			::process_rdirectory(Path, Options),
@@ -394,30 +395,31 @@
 		rdirectory(Directory, []).
 
 	process_rdirectory(Directory, Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
 		(	setof(
 				SubDirectory,
-				::sub_directory(Directory, SubDirectory),
+				sub_directory(Directory, Options, SubDirectory),
 				SubDirectories
 			) ->
 			true
 		;	SubDirectories = []
 		),
 		forall(
-			(	member(SubDirectory, [Directory| SubDirectories]),
-				\+ (
-					member(ExcludedDirectory, ExcludedDirectories),
-					sub_atom(SubDirectory, 0, _, _, ExcludedDirectory)
-				)
-			),
+			member(SubDirectory, [Directory| SubDirectories]),
 			::process_directory(SubDirectory, Options)
 		).
 
-	sub_directory(Directory, SubDirectory) :-
-		loaded_file(Path),
+	sub_directory(Directory, Options, SubDirectory) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
+		logtalk::loaded_file_property(Path, basename(Basename)),
+		^^not_excluded_file(ExcludedFiles, Path, Basename),
 		decompose_file_name(Path, SubDirectory, _),
 		Directory \== SubDirectory,
-		atom_concat(Directory, _RelativePath, SubDirectory).
+		sub_atom(SubDirectory, 0, _, _, Directory),
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(SubDirectory, 0, _, _, ExcludedDirectory)
+		).
 
 	%%%%%%%%%%%%%%%%%%%
 	%% Library scans %%
@@ -509,21 +511,17 @@
 	% internal/common predicates
 
 	process_directory(Directory, Options) :-
-		^^option(exclude_files(ExcludedFiles), Options),
 		print_message(information, code_metrics, scanning_directory(Directory)),
 		forall(
-			(	directory_file(Directory, File),
-				\+ member(File, ExcludedFiles)
-			),
+			directory_file(Directory, Options, File),
 			::process_file(File, Options)
 		).
 
-	directory_file(Directory, Path) :-
-		(	sub_atom(Directory, _, 1, 0, '/') ->
-			DirectorySlash = Directory
-		;	atom_concat(Directory, '/', DirectorySlash)
-		),
-		loaded_file_property(Path, directory(DirectorySlash)).
+	directory_file(Directory, Options, File) :-
+		^^option(exclude_files(ExcludedFiles), Options),
+		loaded_file_property(File, directory(Directory)),
+		loaded_file_property(File, basename(Basename)),
+		^^not_excluded_file(ExcludedFiles, File, Basename).
 
 	write_scan_header(Type) :-
 		print_message(silent, code_metrics, scan_started),
@@ -576,6 +574,22 @@
 		valid(list(atom), Entities).
 	valid_option(exclude_libraries(Libraries)) :-
 		valid(list(atom), Libraries).
+
+	fix_option(exclude_directories(Directories0), exclude_directories(Directories)) :-
+		normalize_directory_paths(Directories0, Directories).
+
+	normalize_directory_paths([], []).
+	normalize_directory_paths([Directory0| Directories0], [Directory| Directories]) :-
+		normalize_directory_path(Directory0, Directory),
+		normalize_directory_paths(Directories0, Directories).
+
+	normalize_directory_path(Directory0, Directory) :-
+		internal_os_path(Directory1, Directory0),
+		absolute_file_name(Directory1, Directory2),
+		(	sub_atom(Directory2, _, _, 0, '/') ->
+			Directory = Directory2
+		;	atom_concat(Directory2, '/', Directory)
+		).
 
 :- end_category.
 

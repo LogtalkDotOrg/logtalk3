@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2024-03-27,
+		date is 2024-03-28,
 		comment is 'Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.'
 	]).
 
@@ -165,12 +165,9 @@
 
 	directory_file_score(Directory, File, Nocs, Options) :-
 		^^option(exclude_files(ExcludedFiles), Options),
-		(	sub_atom(Directory, _, 1, 0, '/') ->
-			DirectorySlash = Directory
-		;	atom_concat(Directory, '/', DirectorySlash)
-		),
-		loaded_file_property(File, directory(DirectorySlash)),
-		\+ member(File, ExcludedFiles),
+		loaded_file_property(File, directory(Directory)),
+		loaded_file_property(File, basename(Basename)),
+		^^not_excluded_file(ExcludedFiles, File, Basename),
 		file_score(File, Nocs, Options).
 
 	rdirectory_score(Directory, Score, Options) :-
@@ -233,8 +230,8 @@
 		^^option(exclude_files(ExcludedFiles), Options),
 		findall(
 			FileScore,
-			(	loaded_file(File),
-				\+ member(File, ExcludedFiles),
+			(	loaded_file_property(File, basename(Basename)),
+				^^not_excluded_file(ExcludedFiles, File, Basename),
 				file_score(File, FileScore, Options)
 			),
 			FileScores
