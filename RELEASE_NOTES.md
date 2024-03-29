@@ -71,6 +71,9 @@ dependencies using the `(;)/2` operator.
 options to selectively exclude from analysis libraries, directories, files,
 and entities.
 
+* ADDED: The `diagrams` tool directory diagrams now generate file nodes that
+link to file entity diagrams when using the `zoom(true)` option.
+
 * ADDED: New `diagrams` tool `recursive_relations/1` boolean option (default 
 is `false`) to output recursive `calls` links in predicate cross-referencing
 diagrams.

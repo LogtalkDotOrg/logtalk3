@@ -58,7 +58,7 @@
 		parameter(1, Format),
 		file_dependency_diagram(Format)::diagram_name_suffix(Suffix),
 		^^add_node_zoom_option(Project, Suffix, LinkingOptions, NodeOptions),
-		assertz((sub_diagram_(Project, Directory))),
+		assertz(sub_diagram_(Project, Directory)),
 		^^output_node(Directory, Relative, directory, [], directory, NodeOptions),
 		^^remember_included_directory(Directory),
 		fail.

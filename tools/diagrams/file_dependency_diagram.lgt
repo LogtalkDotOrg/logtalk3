@@ -23,12 +23,20 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:27:0,
+		version is 2:28:0,
 		author is 'Paulo Moura',
-		date is 2024-03-20,
+		date is 2024-03-29,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [file_load_diagram(_), directory_load_diagram(_), library_load_diagram(_)]
+	]).
+
+	:- private(sub_diagram_/1).
+	:- dynamic(sub_diagram_/1).
+	:- mode(sub_diagram_(?atom), zero_or_more).
+	:- info(sub_diagram_/1, [
+		comment is 'Table of file sub-diagrams to support their generation.',
+		argnames is ['File']
 	]).
 
 	:- uses(list, [
@@ -40,9 +48,14 @@
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
+		parameter(1, Format),
+		entity_diagram(Format)::diagram_name_suffix(Suffix),
+		os::decompose_file_name(Path, _, File, _),
+		^^add_node_zoom_option(File, Suffix, LinkingOptions, NodeOptions),
+		assertz(sub_diagram_(Path)),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Path, Name, file, [Relative], file, LinkingOptions)
-		;	^^output_node(Path, Name, file, [], file, LinkingOptions)
+			^^output_node(Path, Name, file, [Relative], file, NodeOptions)
+		;	^^output_node(Path, Name, file, [], file, NodeOptions)
 		),
 		^^remember_included_file(Path),
 		fail.
@@ -122,6 +135,18 @@
 		category_property(Entity, file(Basename, Directory)).
 	entity_basename_directory(module, Entity, Basename, Directory) :-
 		modules_diagram_support::module_property(Entity, file(Basename, Directory)).
+
+	output_sub_diagrams(Options) :-
+		parameter(1, Format),
+		^^option(zoom(true), Options),
+		sub_diagram_(File),
+		entity_diagram(Format)::file(File, Options),
+		fail.
+	output_sub_diagrams(_).
+
+	reset :-
+		^^reset,
+		retractall(sub_diagram_(_)).
 
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).
