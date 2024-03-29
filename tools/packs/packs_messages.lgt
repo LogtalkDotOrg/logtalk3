@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:33:0,
+		version is 0:33:1,
 		author is 'Paulo Moura',
-		date is 2024-03-18,
+		date is 2024-03-29,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -357,11 +357,11 @@
 		['    Dependencies: ~q'-[Dependencies], nl],
 		['    Portability:  ~q'-[Portability], nl].
 
+	defined_registries([]) -->
+		[].
 	defined_registries([defined(Registry,_,HowDefined,Pinned)| DefinedRegistries]) -->
 		['  ~q'-[Registry]], registry_data(HowDefined, Pinned),
 		defined_registries(DefinedRegistries).
-	defined_registries([]) -->
-		[].
 
 	registry_data(git, true) -->
 		[' (git; pinned)'-[], nl].
