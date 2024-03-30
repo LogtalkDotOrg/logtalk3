@@ -99,8 +99,8 @@ required dependencies that must also be installed or updated.
 * FIXED: The `diagrams` tool to always consider the exclude options when
 outputting external nodes and edges.
 
-* FIXED: A `diagrams` tool bug where generating a directory loading diagram for
-a Prolog module application would ignore the `exclude_directories/1` option.
+* FIXED: The `diagrams` tool to avoid adding zoom icons/links when the linked
+diagrams are empty.
 
 Tests
 -----

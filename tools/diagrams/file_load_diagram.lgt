@@ -23,7 +23,7 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:30:1,
+		version is 2:30:2,
 		author is 'Paulo Moura',
 		date is 2024-03-30,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
@@ -44,14 +44,22 @@
 	]).
 
 	% output the file node
-	output_file(Path, Basename, _, Options) :-
+	output_file(Path, Basename, _Directory, Options) :-
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
-		parameter(1, Format),
-		entity_diagram(Format)::diagram_name_suffix(Suffix),
-		os::decompose_file_name(Path, _, File, _),
-		^^add_node_zoom_option(File, Suffix, LinkingOptions, NodeOptions),
+		(	(	logtalk::loaded_file_property(Path, object(_))
+			;	logtalk::loaded_file_property(Path, protocol(_))
+			;	logtalk::loaded_file_property(Path, category(_))
+			;	modules_diagram_support::module_property(_, file(Path))
+			) ->
+			parameter(1, Format),
+			entity_diagram(Format)::diagram_name_suffix(Suffix),
+			os::decompose_file_name(Path, _, File, _),
+			^^add_node_zoom_option(File, Suffix, LinkingOptions, NodeOptions)
+		;	% file doesn't define any entity
+			NodeOptions = LinkingOptions
+		),
 		assertz(sub_diagram_(Path)),
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Path, Name, file, [Relative], file, NodeOptions)

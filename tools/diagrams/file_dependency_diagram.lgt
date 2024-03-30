@@ -23,7 +23,7 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:28:1,
+		version is 2:28:2,
 		author is 'Paulo Moura',
 		date is 2024-03-30,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
@@ -48,11 +48,19 @@
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
-		parameter(1, Format),
-		entity_diagram(Format)::diagram_name_suffix(Suffix),
-		os::decompose_file_name(Path, _, File, _),
-		^^add_node_zoom_option(File, Suffix, LinkingOptions, NodeOptions),
-		assertz(sub_diagram_(Path)),
+		(	(	logtalk::loaded_file_property(Path, object(_))
+			;	logtalk::loaded_file_property(Path, protocol(_))
+			;	logtalk::loaded_file_property(Path, category(_))
+			;	modules_diagram_support::module_property(_, file(Path))
+			) ->
+			parameter(1, Format),
+			entity_diagram(Format)::diagram_name_suffix(Suffix),
+			os::decompose_file_name(Path, _, File, _),
+			^^add_node_zoom_option(File, Suffix, LinkingOptions, NodeOptions),
+			assertz(sub_diagram_(Path))
+		;	% file doesn't define any entity
+			NodeOptions = LinkingOptions
+		),
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Path, Name, file, [Relative], file, NodeOptions)
 		;	^^output_node(Path, Name, file, [], file, NodeOptions)
