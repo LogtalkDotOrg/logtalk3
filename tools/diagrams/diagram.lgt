@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:3:1,
 		author is 'Paulo Moura',
-		date is 2024-03-22,
+		date is 2024-03-30,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -713,6 +713,8 @@
 		normalize_directory_paths(Prefixes0, Prefixes).
 	fix_option(output_directory(Directory0), output_directory(Directory)) :-
 		normalize_directory_paths([Directory0], [Directory]).
+	fix_option(exclude_directories(Directories0), exclude_directories(Directories)) :-
+		normalize_directory_paths(Directories0, Directories).
 
 	:- protected(diagram_caption/3).
 	:- mode(diagram_caption(+atom, +callable, -atom), one).

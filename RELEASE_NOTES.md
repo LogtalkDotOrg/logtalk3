@@ -93,6 +93,9 @@ pack will break.
 * FIXED: The `packs` tool to pass pack installing and updating options to any
 required dependencies that must also be installed or updated.
 
+* FIXED: The `diagrams` tool to normalize the directories listed in the
+`exclude_directories/1` option.
+
 * FIXED: A `diagrams` tool bug where generating a directory loading diagram for
 a Prolog module application would ignore the `exclude_directories/1` option.
 
