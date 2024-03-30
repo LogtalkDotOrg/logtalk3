@@ -23,9 +23,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:30:0,
+		version is 2:30:1,
 		author is 'Paulo Moura',
-		date is 2024-03-29,
+		date is 2024-03-30,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
@@ -61,10 +61,11 @@
 		fail.
 	% output nodes for all included files
 	output_file(Path, _, _, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, includes(IncludePath)),
 		os::decompose_file_name(IncludePath, _, IncludeBasename),
-		::not_excluded_file(ExcludedFiles, IncludePath, IncludeBasename),
+		^^not_excluded_file(IncludePath, IncludeBasename, ExcludedDirectories, ExcludedFiles),
 		^^filter_file_extension(IncludeBasename, Options, Name),
 		^^add_link_options(IncludePath, Options, LinkingOptions),
 		^^omit_path_prefix(IncludePath, Options, Relative),
@@ -76,28 +77,31 @@
 		fail.
 	% output edges for all files loaded by this file
 	output_file(Path, _, _, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(OtherPath, parent(Path)),
 		logtalk::loaded_file_property(OtherPath, basename(OtherBasename)),
-			::not_excluded_file(ExcludedFiles, OtherPath, OtherBasename),
+			^^not_excluded_file(OtherPath, OtherBasename, ExcludedDirectories, ExcludedFiles),
 			^^remember_referenced_logtalk_file(OtherPath),
 			^^save_edge(Path, OtherPath, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	% output edges for all files included by this file
 	output_file(Path, _, _, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, includes(IncludePath)),
 		logtalk::loaded_file_property(IncludePath, basename(IncludeBasename)),
-			::not_excluded_file(ExcludedFiles, IncludePath, IncludeBasename),
+			^^not_excluded_file(IncludePath, IncludeBasename, ExcludedDirectories, ExcludedFiles),
 			^^remember_referenced_logtalk_file(IncludePath),
 			^^save_edge(Path, IncludePath, [includes], includes_file, [tooltip(includes)| Options]),
 		fail.
 	% output edges for loaded Prolog module files
 	output_file(Path, _, _, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(OtherPath, parent(Path)),
 		modules_diagram_support::loaded_file_property(OtherPath, basename(OtherBasename)),
-			::not_excluded_file(ExcludedFiles, OtherPath, OtherBasename),
+			^^not_excluded_file(OtherPath, OtherBasename, ExcludedDirectories, ExcludedFiles),
 			(	logtalk::loaded_file_property(OriginalPath, target(OtherPath)) ->
 				(	% make sure we don't get circular references as Path can be a Logtalk
 					% file and the generated intermediate Prolog file may have a link to

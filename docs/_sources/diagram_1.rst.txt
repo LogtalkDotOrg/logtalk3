@@ -17,7 +17,7 @@ Common predicates for generating diagrams.
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:1
+| **Version:** 3:3:2
 | **Date:** 2024-03-30
 
 | **Compilation flags:**
@@ -809,21 +809,21 @@ Outputs missing external nodes (usually due to unloaded resources) that are refe
 
 ------------
 
-.. index:: not_excluded_file/3
-.. _diagram/1::not_excluded_file/3:
+.. index:: not_excluded_file/4
+.. _diagram/1::not_excluded_file/4:
 
-``not_excluded_file/3``
+``not_excluded_file/4``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.
+True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension. Excluded directories may be listed by full or relative path.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``not_excluded_file(ExcludedFiles,Path,Basename)``
+|    ``not_excluded_file(Path,Basename,ExcludedDirectories,ExcludedFiles)``
 | **Mode and number of proofs:**
-|    ``not_excluded_file(+list(atom),+atom,+atom)`` - ``zero_or_one``
+|    ``not_excluded_file(+atom,+atom,+list(atom),+list(atom))`` - ``zero_or_one``
 
 
 ------------

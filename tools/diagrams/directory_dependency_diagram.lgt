@@ -64,8 +64,8 @@
 		fail.
 	% second, output edges for all directories that this directory refers to
 	output_library(_, Directory, Options) :-
-		depends_directory(Directory, OtherDirectory, Kind),
 		^^option(exclude_directories(ExcludedDirectories), Options),
+		depends_directory(Directory, OtherDirectory, Kind),
 		\+ (
 			member(ExcludedDirectory, ExcludedDirectories),
 			sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)

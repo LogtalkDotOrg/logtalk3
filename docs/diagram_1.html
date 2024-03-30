@@ -236,7 +236,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 3:3:1</div>
+<div class="line"><strong>Version:</strong> 3:3:2</div>
 <div class="line"><strong>Date:</strong> 2024-03-30</div>
 </div>
 <div class="line-block">
@@ -327,7 +327,7 @@
 <li><p><a class="reference internal" href="#output-edges-1" id="id44"><code class="docutils literal notranslate"><span class="pre">output_edges/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#save-edge-5" id="id45"><code class="docutils literal notranslate"><span class="pre">save_edge/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#output-missing-externals-1" id="id46"><code class="docutils literal notranslate"><span class="pre">output_missing_externals/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#not-excluded-file-3" id="id47"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#not-excluded-file-4" id="id47"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#output-file-path-4" id="id48"><code class="docutils literal notranslate"><span class="pre">output_file_path/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#locate-library-2" id="id49"><code class="docutils literal notranslate"><span class="pre">locate_library/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#locate-directory-2" id="id50"><code class="docutils literal notranslate"><span class="pre">locate_directory/2</span></code></a></p></li>
@@ -1182,9 +1182,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="not-excluded-file-3">
-<span id="diagram-1-not-excluded-file-3"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a><a class="headerlink" href="#not-excluded-file-3" title="Link to this heading"></a></h3>
-<p>True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.</p>
+<section id="not-excluded-file-4">
+<span id="diagram-1-not-excluded-file-4"></span><span id="index-41"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/4</span></code></a><a class="headerlink" href="#not-excluded-file-4" title="Link to this heading"></a></h3>
+<p>True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension. Excluded directories may be listed by full or relative path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1194,11 +1194,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">not_excluded_file(ExcludedFiles,Path,Basename)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">not_excluded_file(Path,Basename,ExcludedDirectories,ExcludedFiles)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">not_excluded_file(+list(atom),+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">not_excluded_file(+atom,+atom,+list(atom),+list(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />

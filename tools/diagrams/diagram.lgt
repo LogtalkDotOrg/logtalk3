@@ -23,7 +23,7 @@
 	extends(options)).
 
 	:- info([
-		version is 3:3:1,
+		version is 3:3:2,
 		author is 'Paulo Moura',
 		date is 2024-03-30,
 		comment is 'Common predicates for generating diagrams.',
@@ -260,20 +260,22 @@
 		::output_sub_diagrams(UserOptions).
 
 	output_library(_Library, Directory, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library(_Library, Directory, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
 		\+ logtalk::loaded_file(Path),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library(_, _, _).
@@ -573,20 +575,22 @@
 
 	output_all_files(Options) :-
 		self(Self),
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file(Path),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Path)),
 		::output_file(Path, Basename, Directory, Options),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Path)),
 		fail.
 	output_all_files(Options) :-
 		self(Self),
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
 		\+ logtalk::loaded_file(Path),
@@ -958,34 +962,40 @@
 	% do nothing by default
 	output_missing_externals(_).
 
-	:- protected(not_excluded_file/3).
-	:- mode(not_excluded_file(+list(atom), +atom, +atom), zero_or_one).
-	:- info(not_excluded_file/3, [
-		comment is 'True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.',
-		argnames is ['ExcludedFiles', 'Path', 'Basename']
+	:- protected(not_excluded_file/4).
+	:- mode(not_excluded_file(+atom, +atom, +list(atom), +list(atom)), zero_or_one).
+	:- info(not_excluded_file/4, [
+		comment is 'True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension. Excluded directories may be listed by full or relative path.',
+		argnames is ['Path', 'Basename', 'ExcludedDirectories', 'ExcludedFiles']
 	]).
 
-	not_excluded_file([], _, _).
-	not_excluded_file([ExcludedFile| ExcludedFiles], Path, Basename) :-
+	not_excluded_file(_, _, [], []) :-
+		% most common case
+		!.
+	not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles) :-
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(Path, 0, _, _, ExcludedDirectory)
+		),
 		% files in the exclusion list may be given by full path or by basename
-		\+ member(Path, [ExcludedFile| ExcludedFiles]),
-		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
+		\+ member(Path, ExcludedFiles),
+		\+ member(Basename, ExcludedFiles),
 		% files in the exclusion list may be given with or without extension
 		\+ (	logtalk::file_type_extension(logtalk, Extension),
 				atom_concat(Source, Extension, Path),
-				member(Source, [ExcludedFile| ExcludedFiles])
+				member(Source, ExcludedFiles)
 		),
 		\+ (	logtalk::file_type_extension(logtalk, Extension),
 				atom_concat(Source, Extension, Basename),
-				member(Source, [ExcludedFile| ExcludedFiles])
+				member(Source, ExcludedFiles)
 		),
 		\+ (	modules_diagram_support::source_file_extension(Extension),
 				atom_concat(Source, Extension, Path),
-				member(Source, [ExcludedFile| ExcludedFiles])
+				member(Source, ExcludedFiles)
 		),
 		\+ (	modules_diagram_support::source_file_extension(Extension),
 				atom_concat(Source, Extension, Basename),
-				member(Source, [ExcludedFile| ExcludedFiles])
+				member(Source, ExcludedFiles)
 		).
 
 	:- protected(output_file_path/4).

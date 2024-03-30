@@ -60,12 +60,12 @@
 		fail.
 	% second, output edges for all directories loaded by files in this directory
 	output_library(_, Directory, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		% any Logtalk or Prolog directory file may load other files
 		(	logtalk::loaded_file_property(File, directory(Directory))
 		;	modules_diagram_support::loaded_file_property(File, directory(Directory))
 		),
 		% look for a file in another directory that have this file as parent
-		^^option(exclude_directories(ExcludedDirectories), Options),
 		(	logtalk::loaded_file_property(Other, parent(File)),
 			logtalk::loaded_file_property(Other, directory(OtherDirectory)),
 			OtherDirectory \== Directory

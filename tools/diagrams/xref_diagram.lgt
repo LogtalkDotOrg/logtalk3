@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:71:0,
+		version is 2:71:1,
 		author is 'Paulo Moura',
-		date is 2024-03-22,
+		date is 2024-03-30,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -221,7 +221,7 @@
 		^^save_edge(Caller, ^^Callee, [calls], calls_super_predicate, [tooltip(calls)| XRefOptions]),
 		fail.
 	process_entity(Kind, Entity, Options) :-
-		calls_external_predicate(Kind, Entity, Caller, Line, Callee0),
+		calls_external_predicate(Kind, Entity, Caller, Line, Callee0, Options),
 		remember_referenced_predicate(Caller),
 		remember_external_predicate(Callee0),
 		\+ ^^edge(Caller, Callee0, [calls], calls_predicate, _),
@@ -559,21 +559,24 @@
 			)
 		).
 
-	calls_external_predicate(module, Entity, Caller, Line, Callee) :-
+	calls_external_predicate(module, Entity, Caller, Line, Callee, Options) :-
 		!,
+		^^option(exclude_entities(ExcludedEntities), Options),
 		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
-		(	Callee = (Object::_), nonvar(Object)
-		;	Callee = ':'(Module,_), nonvar(Module)
+		(	Callee = (Object::_), nonvar(Object), \+ member(Object, ExcludedEntities)
+		;	Callee = ':'(Module,_), nonvar(Module), \+ member(Module, ExcludedEntities)
 		),
 		memberchk(caller(Caller), Properties),
 		(	member(line_count(Line), Properties) ->
 			true
 		;	Line = -1
 		).
-	calls_external_predicate(Kind, Entity, Caller, Line, Object::Callee) :-
+	calls_external_predicate(Kind, Entity, Caller, Line, Object::Callee, Options) :-
 		Kind \== protocol,
+		^^option(exclude_entities(ExcludedEntities), Options),
 		entity_property(Kind, Entity, calls(Object::Callee0, CallsProperties)),
 		nonvar(Object),
+		\+ member(Object, ExcludedEntities),
 		memberchk(caller(Caller0), CallsProperties),
 		(	member(line_count(Line), CallsProperties) ->
 			true
@@ -597,10 +600,12 @@
 			Caller = CallerNonTerminal
 		;	Caller = Caller0
 		).
-	calls_external_predicate(Kind, Entity, Caller, Line, ':'(Module,Callee)) :-
+	calls_external_predicate(Kind, Entity, Caller, Line, ':'(Module,Callee), Options) :-
 		Kind \== protocol,
+		^^option(exclude_entities(ExcludedEntities), Options),
 		entity_property(Kind, Entity, calls(':'(Module,Callee), Properties)),
 		nonvar(Module),
+		\+ member(Module, ExcludedEntities),
 		memberchk(caller(Caller), Properties),
 		(	member(line_count(Line), Properties) ->
 			true
@@ -687,13 +692,17 @@
 		member(externals(false), Options),
 		!.
 	output_externals(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		retract(external_predicate_(Object::Predicate)),
+		\+ member(Object, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, Name),
 		add_predicate_documentation_url(Options, Object, Predicate, PredicateOptions),
 		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
 		fail.
 	output_externals(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		retract(external_predicate_(':'(Module,Predicate))),
+		\+ member(Module, ExcludedEntities),
 		(	modules_diagram_support::module_property(Module, defines(Predicate,Properties)) ->
 			add_predicate_code_url(Options, module, Module, Properties, PredicateOptions),
 			^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, PredicateOptions)
