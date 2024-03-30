@@ -43,7 +43,7 @@
 		argnames is ['Project', 'Directory']
 	]).
 
-	% first, output the directory node
+	% first, output the directory node if it depends on other directories
 	output_library(Project, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),

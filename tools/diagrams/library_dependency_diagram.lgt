@@ -43,7 +43,7 @@
 		argnames is ['Library']
 	]).
 
-	% first, output the library node
+	% first, output the library node if it depends on one or more libraries
 	output_library(Library, Directory, Options) :-
 		parameter(1, Format),
 		^^add_link_options(Directory, Options, LinkingOptions),
