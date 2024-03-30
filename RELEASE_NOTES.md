@@ -55,6 +55,9 @@ Tools
 * CHANGED: The `code_metrics` tool to exclude auxiliary predicates from
 analysis.
 
+* CHANGED: The `diagrams` tool to omit from library loading and library
+dependency diagrams libraries that are not loaded or have no dependencies.
+
 * CHANGED: The `diagrams` tool to omit from directory loading and directory
 dependency diagrams directories that are not loaded or have no dependencies.
 

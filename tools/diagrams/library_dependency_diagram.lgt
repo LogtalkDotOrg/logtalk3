@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:32:0,
+		version is 2:33:0,
 		author is 'Paulo Moura',
-		date is 2024-03-20,
+		date is 2024-03-30,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_), entity_diagram(_)]
@@ -49,17 +49,10 @@
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions0),
-		(	logtalk::loaded_file_property(File, library(Library)),
-			(	logtalk::loaded_file_property(File, object(_))
-			;	logtalk::loaded_file_property(File, protocol(_))
-			;	logtalk::loaded_file_property(File, category(_))
-			) ->
-			entity_diagram(Format)::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Library, Suffix, NodeOptions0, NodeOptions),
-			assertz(sub_diagram_(Library))
-		;	% no entities for this library; entity diagram empty
-			NodeOptions = NodeOptions0
-		),
+		once(depends_library(Library, Directory, _, _, _)),
+		entity_diagram(Format)::diagram_name_suffix(Suffix),
+		^^add_node_zoom_option(Library, Suffix, NodeOptions0, NodeOptions),
+		assertz(sub_diagram_(Library)),
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Directory, Library, library, [Relative], library, NodeOptions)
 		;	^^output_node(Directory, Library, library, [], library, NodeOptions)
