@@ -102,6 +102,9 @@ outputting external nodes and edges.
 * FIXED: The `diagrams` tool to avoid adding zoom icons/links when the linked
 diagrams are empty.
 
+* FIXED: The `diagrams` tool to show relative paths in external file nodes
+after the `omit_path_prefixes/1` option instead of just basenames.
+
 Tests
 -----
 

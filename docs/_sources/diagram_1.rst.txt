@@ -17,8 +17,8 @@ Common predicates for generating diagrams.
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:2
-| **Date:** 2024-03-30
+| **Version:** 3:4:0
+| **Date:** 2024-03-31
 
 | **Compilation flags:**
 |    ``static``
@@ -938,6 +938,25 @@ Filters the file name extension depending on the ``file_extensions/1`` option.
 |    ``filter_file_extension(Basename,Options,Name)``
 | **Mode and number of proofs:**
 |    ``filter_file_extension(+atom,+list(compound),-atom)`` - ``one``
+
+
+------------
+
+.. index:: filter_external_file_extension/3
+.. _diagram/1::filter_external_file_extension/3:
+
+``filter_external_file_extension/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Filters the external file name extension depending on the ``file_extensions/1`` option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_external_file_extension(Path,Options,Name)``
+| **Mode and number of proofs:**
+|    ``filter_external_file_extension(+atom,+list(compound),-atom)`` - ``one``
 
 
 ------------

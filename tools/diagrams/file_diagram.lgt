@@ -23,9 +23,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2:13:1,
+		version is 2:13:2,
 		author is 'Paulo Moura',
-		date is 2022-05-30,
+		date is 2022-05-31,
 		comment is 'Common predicates for generating file diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -117,7 +117,7 @@
 		::retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		^^not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
-		^^filter_file_extension(Basename, Options, Name),
+		^^filter_external_file_extension(Path, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->
@@ -131,7 +131,7 @@
 		::retract(referenced_prolog_file_(Path)),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
 		^^not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
-		^^filter_file_extension(Basename, Options, Name),
+		^^filter_external_file_extension(Path, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->

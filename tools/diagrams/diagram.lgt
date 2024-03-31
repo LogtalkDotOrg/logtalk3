@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:3:2,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2024-03-30,
+		date is 2024-03-31,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -1203,6 +1203,22 @@
 		(	Boolean == true ->
 			Name = Basename
 		;	os::decompose_file_name(Basename, _, Name, _)
+		).
+
+	:- protected(filter_external_file_extension/3).
+	:- mode(filter_external_file_extension(+atom, +list(compound), -atom), one).
+	:- info(filter_external_file_extension/3, [
+		comment is 'Filters the external file name extension depending on the ``file_extensions/1`` option.',
+		argnames is ['Path', 'Options', 'Name']
+	]).
+
+	filter_external_file_extension(Path, Options, Name) :-
+		^^option(file_extensions(Boolean), Options),
+		omit_path_prefix(Path, Options, Relative),
+		os::decompose_file_name(Path, Directory, Basename, _),
+		(	Boolean == true ->
+			Name = Relative
+		;	atom_concat(Directory, Basename, Name)
 		).
 
 	:- protected(add_link_options/3).
