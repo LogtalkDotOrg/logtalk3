@@ -438,8 +438,8 @@ generated diagrams. For entity diagrams the options are:
 -  | ``zoom_url_suffix(Suffix)``
    | extension for linked diagrams (an atom; default is ``'.svg'``)
 
-In the particular case of cross-referencing diagrams, there is also the
-option:
+In the particular case of cross-referencing diagrams, there are also the
+options:
 
 -  | ``recursive_relations(Boolean)``
    | print recursive predicate relations (``true`` or ``false``; default
@@ -450,6 +450,10 @@ option:
      are ``{github,gitlab,bitbucket}``; default is ``github``); when
      using this option, the ``CodeURLPrefix`` should be a permanent link
      (i.e. it should include the commit SHA1)
+
+-  | ``predicate_url_target_format(Generator)``
+   | documentation final format generator (an atom; default is
+     ``sphinx``)
 
 For directory and file diagrams the options are:
 
