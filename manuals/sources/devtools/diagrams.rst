@@ -585,6 +585,10 @@ For library diagrams the options are:
 -  | ``zoom_url_suffix(Suffix)``
    | extension for linked diagrams (an atom; default is ``'.svg'``)
 
+When using the ``zoom(true)`` option, the ``layout(Layout)`` option
+applies only to the top diagram; sub-diagrams will use their own layout
+default.
+
 The option ``omit_path_prefixes(Prefixes)`` with a non-empty list of
 prefixes should preferably be used together with the option
 ``directory_paths(true)`` when generating library or file diagrams that
