@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-262.75 474,-262.75 474,4 -4,4"/>
 <text text-anchor="start" x="8" y="-28.25" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-17" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object expand_library_alias_paths</text>
-<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;04&#45;01, 11:32</text>
+<text text-anchor="start" x="8" y="-5.75" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;04&#45;01, 21:13</text>
 <g id="clust1" class="cluster">
 <title>cluster_expand_library_alias_paths_object</title>
 <g id="a_clust1"><a xlink:title="expand_library_alias_paths">
 <path fill="snow" stroke="dimgray" d="M20,-49.75C20,-49.75 450,-49.75 450,-49.75 456,-49.75 462,-55.75 462,-61.75 462,-61.75 462,-238.75 462,-238.75 462,-244.75 456,-250.75 450,-250.75 450,-250.75 20,-250.75 20,-250.75 14,-250.75 8,-244.75 8,-238.75 8,-238.75 8,-61.75 8,-61.75 8,-55.75 14,-49.75 20,-49.75"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt">
 <text text-anchor="start" x="20" y="-233.25" font-family="Monospace" font-size="10.00" fill="dimgray">expand_library_alias_paths</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- term_expansion/2 -->
 <g id="node1" class="node">
 <title>term_expansion/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32">
 <polygon fill="cornsilk" stroke="black" points="292,-213.5 158,-213.5 158,-177.5 292,-177.5 292,-213.5"/>
 <text text-anchor="start" x="165.88" y="-196.32" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="171" y="-195.55" font-family="Monospace" font-size="11.00">term_expansion/2</text>
@@ -41,7 +41,7 @@
 <!-- os::absolute_file_name/2 -->
 <g id="node2" class="node">
 <title>os::absolute_file_name/2</title>
-<g id="a_node2"><a xlink:href="https://logtalk.org/library/osp_0.html#absolute_file_name/2" xlink:title="https://logtalk.org/library/osp_0.html#absolute_file_name/2">
+<g id="a_node2"><a xlink:href="https://logtalk.org/library/osp_0.html#absolute-file-name-2" xlink:title="https://logtalk.org/library/osp_0.html#absolute&#45;file&#45;name&#45;2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="206,-95.75 18,-95.75 18,-59.75 206,-59.75 206,-95.75"/>
 <text text-anchor="start" x="25.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31" y="-77.8" font-family="Monospace" font-size="11.00">os::absolute_file_name/2</text>
@@ -55,12 +55,12 @@
 <!-- term_expansion/2&#45;&gt;os::absolute_file_name/2 -->
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;os::absolute_file_name/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="calls">
 <path fill="none" stroke="black" d="M208.08,-177.17C189.19,-157.82 158.44,-126.32 136.83,-104.18"/>
 <polygon fill="black" stroke="black" points="139.58,-101.99 130.09,-97.28 134.57,-106.88 139.58,-101.99"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32">
 <text text-anchor="start" x="171" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- logtalk::expand_library_path/2 -->
 <g id="node3" class="node">
 <title>logtalk::expand_library_path/2</title>
-<g id="a_node3"><a xlink:href="https://logtalk.org/library/logtalk_0.html#expand_library_path/2" xlink:title="https://logtalk.org/library/logtalk_0.html#expand_library_path/2">
+<g id="a_node3"><a xlink:href="https://logtalk.org/library/logtalk_0.html#expand-library-path-2" xlink:title="https://logtalk.org/library/logtalk_0.html#expand&#45;library&#45;path&#45;2">
 <polygon fill="beige" stroke="black" stroke-dasharray="5,2" points="452,-95.75 224,-95.75 224,-59.75 452,-59.75 452,-95.75"/>
 <text text-anchor="start" x="231.88" y="-78.58" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="236.75" y="-77.8" font-family="Monospace" font-size="11.00">logtalk::expand_library_path/2</text>
@@ -82,12 +82,12 @@
 <!-- term_expansion/2&#45;&gt;logtalk::expand_library_path/2 -->
 <g id="edge2" class="edge">
 <title>term_expansion/2&#45;&gt;logtalk::expand_library_path/2</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="calls">
 <path fill="none" stroke="black" d="M241.92,-177.17C260.81,-157.82 291.56,-126.32 313.17,-104.18"/>
 <polygon fill="black" stroke="black" points="315.43,-106.88 319.91,-97.28 310.42,-101.99 315.43,-106.88"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5ad9490aeeb7d7a2106b2903b6515a48873b04de/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/023b74fd5f8e705ff02a846fe43ba9b6cd2825b7/library/expand_library_alias_paths/expand_library_alias_paths.lgt#L32">
 <text text-anchor="start" x="284" y="-132.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
