@@ -111,6 +111,9 @@ diagrams are empty.
 * FIXED: The `diagrams` tool to show relative paths in external file nodes
 after the `omit_path_prefixes/1` option instead of just basenames.
 
+* FIXED: The `lgtunit` tool xUnit.net v2 XML format support to output errors
+quoted.
+
 Tests
 -----
 

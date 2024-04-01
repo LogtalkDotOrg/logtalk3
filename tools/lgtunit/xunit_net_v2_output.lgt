@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:0:1,
 		author is 'Paulo Moura',
-		date is 2024-02-19,
+		date is 2024-04-01,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -135,7 +135,7 @@
 		message_cache_(broken_step(Step, Object, Error)),
 		write_xml_open_tag(error, [type-error, name-Step]),
 		write_xml_open_tag(failure, []),
-		write_xml_cdata_element('stack-trace', [], Error),
+		writeq_xml_cdata_element('stack-trace', [], Error),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(error),
 		fail.
@@ -182,10 +182,10 @@
 		write_test_element_traits(Short, Position, Note),
 		write_xml_open_tag(failure, []),
 		failed_test(Reason, Description, _, Error),
-		write_xml_cdata_element(message, [], Description),
+		write_xml_element(message, [], Description),
 		(	Error == '' ->
 			true
-		;	write_xml_cdata_element('stack-trace', [], Error)
+		;	writeq_xml_cdata_element('stack-trace', [], Error)
 		),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
@@ -193,7 +193,7 @@
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-0.0, result-'Skip']),
 		write_test_element_traits(Short, Position, Note),
-		write_xml_cdata_element(reason, [], 'Skipped test'),
+		write_xml_element(reason, [], 'Skipped test'),
 		write_xml_close_tag(test).
 
 	% failed_test(Reason, Description, Type, Error)
@@ -287,19 +287,6 @@
 		assembly_time(Object, Time).
 
 	% date and time auxiliary predicates
-
-	julian_day(Year, Month, Day, JulianDay) :-
-		% code copied from Daniel L. Dudley iso8601 contribution to Logtalk
-		A is (14 - Month) // 12,
-		Y is Year + 4800 - A,
-		M is Month + (12 * A) - 3,
-		D is Day + ((153 * M + 2) // 5) + (365 * Y) + (Y // 4),
-		JulianDay is D - (Y // 100) + (Y // 400) - 32045.
-
-	date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp) :-
-		integers_to_atoms([Year,Month,Day,Hours,Minutes,Seconds], [AYear,AMonth0,ADay0,AHours0,AMinutes0,ASeconds0]),
-		pad_single_char_atoms([AMonth0,ADay0,AHours0,AMinutes0,ASeconds0], [AMonth,ADay,AHours,AMinutes,ASeconds]),
-		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], TimeStamp).
 
 	integers_to_atoms([], []).
 	integers_to_atoms([Integer| Integers], [Atom| Atoms]) :-
@@ -395,16 +382,6 @@
 		write(Tag),
 		write('>'), nl.
 
-	write_xml_cdata_element(Tag, Atts, Text) :-
-		write('<'),
-		write(Tag),
-		write_xml_tag_attributes(Atts),
-		write('><![CDATA['),
-		pretty_print_vars(Text),
-		write(']]></'),
-		write(Tag),
-		write('>'), nl.
-
 	write_xml_tag_attributes([]).
 	write_xml_tag_attributes([Attribute-Value| Rest]) :-
 		write(' '),
@@ -455,12 +432,6 @@
 	escape_special_characters_list([Argument| Arguments], [EscapedArgument| EscapedArguments]) :-
 		escape_special_characters(Argument, EscapedArgument),
 		escape_special_characters_list(Arguments, EscapedArguments).
-
-	pretty_print_vars(Term) :-
-		\+ \+ (
-			numbervars(Term, 0, _),
-			write_term(Term, [numbervars(true)])
-		).
 
 	pretty_print_vars_quoted(Term) :-
 		\+ \+ (

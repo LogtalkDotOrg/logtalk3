@@ -33,9 +33,9 @@
 :- object(tap_report).
 
 	:- info([
-		version is 5:0:0,
+		version is 5:0:1,
 		author is 'Paulo Moura',
-		date is 2024-02-19,
+		date is 2024-04-01,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_report))``.'
@@ -197,13 +197,5 @@
 			numbervars(Term, 0, _),
 			write_term(tap_report, Term, [numbervars(true), quoted(true)])
 		).
-
-	sum(List, Sum) :-
-		sum(List, 0, Sum).
-
-	sum([], Sum, Sum).
-	sum([N| Ns], Sum0, Sum) :-
-		Sum1 is Sum0 + N,
-		sum(Ns, Sum1, Sum).
 
 :- end_object.

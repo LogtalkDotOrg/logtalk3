@@ -29,9 +29,9 @@
 :- object(tap_output).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:0:1,
 		author is 'Paulo Moura',
-		date is 2024-02-19,
+		date is 2024-04-01,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.'
@@ -189,13 +189,5 @@
 			numbervars(Term, 0, _),
 			write_term(Term, [numbervars(true), quoted(true)])
 		).
-
-	sum(List, Sum) :-
-		sum(List, 0, Sum).
-
-	sum([], Sum, Sum).
-	sum([N| Ns], Sum0, Sum) :-
-		Sum1 is Sum0 + N,
-		sum(Ns, Sum1, Sum).
 
 :- end_object.

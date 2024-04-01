@@ -36,9 +36,9 @@
 :- object(xunit_report).
 
 	:- info([
-		version is 5:0:0,
+		version is 5:0:1,
 		author is 'Paulo Moura',
-		date is 2024-01-19,
+		date is 2024-04-01,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit XML format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_report))``.'
@@ -341,32 +341,12 @@
 		write_xml_tag_attributes(Atts),
 		write(xunit_report, '>'), nl(xunit_report).
 
-	write_xml_element(Tag, Atts, Text) :-
-		write(xunit_report, '<'),
-		write(xunit_report, Tag),
-		write_xml_tag_attributes(Atts),
-		write(xunit_report, '>'),
-		write(xunit_report, Text),
-		write(xunit_report, '</'),
-		write(xunit_report, Tag),
-		write(xunit_report, '>'), nl(xunit_report).
-
 	writeq_xml_cdata_element(Tag, Atts, Text) :-
 		write(xunit_report, '<'),
 		write(xunit_report, Tag),
 		write_xml_tag_attributes(Atts),
 		write(xunit_report, '><![CDATA['),
 		pretty_print_vars_quoted(Text),
-		write(xunit_report, ']]></'),
-		write(xunit_report, Tag),
-		write(xunit_report, '>'), nl(xunit_report).
-
-	write_xml_cdata_element(Tag, Atts, Text) :-
-		write(xunit_report, '<'),
-		write(xunit_report, Tag),
-		write_xml_tag_attributes(Atts),
-		write(xunit_report, '><![CDATA['),
-		pretty_print_vars(Text),
 		write(xunit_report, ']]></'),
 		write(xunit_report, Tag),
 		write(xunit_report, '>'), nl(xunit_report).
@@ -420,12 +400,6 @@
 	escape_special_characters_list([Argument| Arguments], [EscapedArgument| EscapedArguments]) :-
 		escape_special_characters(Argument, EscapedArgument),
 		escape_special_characters_list(Arguments, EscapedArguments).
-
-	pretty_print_vars(Term) :-
-		\+ \+ (
-			numbervars(Term, 0, _),
-			write_term(xunit_report, Term, [numbervars(true)])
-		).
 
 	pretty_print_vars_quoted(Term) :-
 		\+ \+ (

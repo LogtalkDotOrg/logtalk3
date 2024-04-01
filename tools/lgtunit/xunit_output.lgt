@@ -29,9 +29,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:0:1,
 		author is 'Paulo Moura',
-		date is 2024-02-19,
+		date is 2024-04-01,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -313,32 +313,12 @@
 		write_xml_tag_attributes(Atts),
 		write('>'), nl.
 
-	write_xml_element(Tag, Atts, Text) :-
-		write('<'),
-		write(Tag),
-		write_xml_tag_attributes(Atts),
-		write('>'),
-		write(Text),
-		write('</'),
-		write(Tag),
-		write('>'), nl.
-
 	writeq_xml_cdata_element(Tag, Atts, Text) :-
 		write('<'),
 		write(Tag),
 		write_xml_tag_attributes(Atts),
 		write('><![CDATA['),
 		pretty_print_vars_quoted(Text),
-		write(']]></'),
-		write(Tag),
-		write('>'), nl.
-
-	write_xml_cdata_element(Tag, Atts, Text) :-
-		write('<'),
-		write(Tag),
-		write_xml_tag_attributes(Atts),
-		write('><![CDATA['),
-		pretty_print_vars(Text),
 		write(']]></'),
 		write(Tag),
 		write('>'), nl.
@@ -393,12 +373,6 @@
 	escape_special_characters_list([Argument| Arguments], [EscapedArgument| EscapedArguments]) :-
 		escape_special_characters(Argument, EscapedArgument),
 		escape_special_characters_list(Arguments, EscapedArguments).
-
-	pretty_print_vars(Term) :-
-		\+ \+ (
-			numbervars(Term, 0, _),
-			write_term(Term, [numbervars(true)])
-		).
 
 	pretty_print_vars_quoted(Term) :-
 		\+ \+ (
