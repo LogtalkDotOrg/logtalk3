@@ -23,9 +23,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:30:2,
+		version is 2:30:1,
 		author is 'Paulo Moura',
-		date is 2024-03-30,
+		date is 2024-04-01,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
@@ -130,8 +130,9 @@
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
 		^^option(zoom(true), Options),
+		entity_diagram(Format)::default_option(layout(Layout)),
 		sub_diagram_(File),
-		entity_diagram(Format)::file(File, Options),
+		entity_diagram(Format)::file(File, [layout(Layout)| Options]),
 		fail.
 	output_sub_diagrams(_).
 

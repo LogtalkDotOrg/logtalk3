@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:57:1,
+		version is 2:57:2,
 		author is 'Paulo Moura',
-		date is 2024-03-30,
+		date is 2024-04-01,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -197,19 +197,21 @@
 		fail.
 	output_missing_externals(_).
 
+	% use the {}/1 control construct to avoid a warning due to the circular
+	% reference between this object and the xref_diagram object
 	output_sub_diagrams(Options) :-
+		parameter(1, Format),
 		^^option(zoom(true), Options),
+		{xref_diagram(Format)::default_option(layout(Layout))},
 		included_entity_(Entity),
-		% use the {}/1 control construct to avoid a warning due to the circular
-		% reference between this object and the xref_diagram object
-		{xref_diagram::entity(Entity, Options)},
+		{xref_diagram(Format)::entity(Entity, [layout(Layout)| Options])},
 		fail.
 	output_sub_diagrams(Options) :-
+		parameter(1, Format),
 		^^option(zoom(true), Options),
+		{xref_diagram(Format)::default_option(layout(Layout))},
 		included_module_(Module),
-		% use the {}/1 control construct to avoid a warning due to the circular
-		% reference between this object and the xref_diagram object
-		{xref_diagram::entity(Module, Options)},
+		{xref_diagram(Format)::entity(Module, [layout(Layout)| Options])},
 		fail.
 	output_sub_diagrams(_).
 

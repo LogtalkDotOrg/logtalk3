@@ -23,9 +23,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:0:1,
 		author is 'Paulo Moura',
-		date is 2024-03-28,
+		date is 2024-04-01,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
@@ -93,8 +93,9 @@
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
 		^^option(zoom(true), Options),
+		file_dependency_diagram(Format)::default_option(layout(Layout)),
 		sub_diagram_(Project, Directory),
-		file_load_diagram(Format)::directory(Project, Directory, Options),
+		file_load_diagram(Format)::directory(Project, Directory, [layout(Layout)| Options]),
 		fail.
 	output_sub_diagrams(_).
 

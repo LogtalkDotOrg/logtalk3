@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:33:0,
+		version is 2:33:1,
 		author is 'Paulo Moura',
-		date is 2024-03-30,
+		date is 2024-04-01,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
@@ -110,8 +110,9 @@
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
 		^^option(zoom(true), Options),
+		entity_diagram(Format)::default_option(layout(Layout)),
 		sub_diagram_(Library),
-		entity_diagram(Format)::library(Library, Options),
+		entity_diagram(Format)::library(Library, [layout(Layout)| Options]),
 		fail.
 	output_sub_diagrams(_).
 
