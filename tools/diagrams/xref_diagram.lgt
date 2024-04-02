@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:72:0,
+		version is 2:72:1,
 		author is 'Paulo Moura',
-		date is 2024-04-01,
+		date is 2024-04-02,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -468,6 +468,7 @@
 		;	fail
 		),
 		(	Caller0 = (From::Predicate) ->
+			% multifile predicate caller
 			(	current_object(From) ->
 				FromKind = object
 			;	FromKind = category
@@ -477,7 +478,11 @@
 				Caller = (From::NonTerminal)
 			;	Caller = (From::Predicate)
 			)
-		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
+		;	Caller0 == (:-)/1 ->
+			% initialization/1 directive
+			Caller = Caller0
+		;	% local predicate caller
+			entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
 			\+ member(auxiliary, CallerDefinesProperties),
 			(	member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
 				Caller = CallerNonTerminal
@@ -487,15 +492,19 @@
 	calls_local_predicate(Kind, Entity, Caller, Line, Caller, Options) :-
 		^^option(recursive_relations(true), Options),
 		Kind \== protocol,
-		entity_property(Kind, Entity, defines(Caller, CalleeDefinesProperties)),
+		entity_property(Kind, Entity, defines(Caller, CallerDefinesProperties)),
 		Caller \= (_ :: _),
 		Caller \= (:: _),
 		Caller \= (^^ _),
 		Caller \= (_ << _),
 		Caller \= ':'(_, _),
-		\+ member(auxiliary, CalleeDefinesProperties),
-		memberchk(recursive, CalleeDefinesProperties),
-		(	member(line_count(Line), CalleeDefinesProperties) ->
+		(	Caller == (:-)/1 ->
+			% initialization/1 directive
+			true
+		;	\+ member(auxiliary, CallerDefinesProperties)
+		),
+		memberchk(recursive, CallerDefinesProperties),
+		(	member(line_count(Line), CallerDefinesProperties) ->
 			true
 		;	Line = -1
 		).
@@ -528,7 +537,10 @@
 			;	Caller = (From::Predicate)
 			)
 		;	% local predicate caller
-			entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
+			Caller0 == (:-)/1 ->
+			% initialization/1 directive
+			Caller = Caller0
+		;	entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
 			\+ member(auxiliary, CallerProperties),
 			(	member(non_terminal(CallerNonTerminal), CallerProperties) ->
 				Caller = CallerNonTerminal
@@ -536,6 +548,7 @@
 			)
 		),
 		% usually caller and callee are the same predicate but that's not required
+		% (e.g. when the call is from an initialization/1 directive)
 		(	entity_property(Kind, Entity, defines(Callee0, CalleeProperties)),
 			member(non_terminal(CalleeNonTerminal), CalleeProperties) ->
 			Callee = CalleeNonTerminal
@@ -569,6 +582,9 @@
 				Caller = (From::NonTerminal)
 			;	Caller = (From::Predicate)
 			)
+		;	Caller0 == (:-)/1 ->
+			% initialization/1 directive
+			Caller = Caller0
 		;	% local predicate caller
 			entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
 			\+ member(auxiliary, CallerDefinesProperties),
@@ -601,8 +617,12 @@
 			true
 		;	Line = -1
 		),
-		entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
-		\+ member(auxiliary, CallerProperties),
+		(	Caller0 == (:-)/1 ->
+			% initialization/1 directive
+			true
+		;	entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
+			\+ member(auxiliary, CallerProperties)
+		),
 		Callee0 = Functor/Arity,
 		functor(Template, Functor, Arity),
 		(	current_object(Object) ->
@@ -630,8 +650,12 @@
 			true
 		;	Line = -1
 		),
-		entity_property(Kind, Entity, defines(Caller, CallerProperties)),
-		\+ member(auxiliary, CallerProperties).
+		(	Caller == (:-)/1 ->
+			% initialization/1 directive
+			true
+		;	entity_property(Kind, Entity, defines(Caller, CallerProperties)),
+			\+ member(auxiliary, CallerProperties)
+		).
 
 	updates_predicate(Kind, Entity, Updater, Line, Dynamic) :-
 		Kind \== protocol,
@@ -647,6 +671,7 @@
 		;	Line = -1
 		),
 		(	Updater0 = (From::Predicate) ->
+			% multifile predicate updater
 			(	current_object(From) ->
 				FromKind = object
 			;	FromKind = category
@@ -656,6 +681,9 @@
 				Updater = (From::NonTerminal)
 			;	Updater = (From::Predicate)
 			)
+		;	Updater0 == (:-)/1 ->
+			% initialization/1 directive updater
+			Updater = Updater0
 		;	entity_property(Kind, Entity, defines(Updater0, DefinesProperties)),
 			member(non_terminal(UpdaterNonTerminal), DefinesProperties) ->
 			Updater = UpdaterNonTerminal
