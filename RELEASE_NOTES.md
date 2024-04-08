@@ -36,6 +36,9 @@ Examples
 * FIXED: The SICStus Prolog specific `constraints/sicstus` example to not
 depend on the default `double_quotes` flag value.
 
+* FIXED: The SWI-Prolog specific `constraints/swipl` example to not depend
+on the default `double_quotes` flag value.
+
 * FIXED: The SWI-Prolog specific `pengines` example to not depend on the
 default `double_quotes` flag value.
 

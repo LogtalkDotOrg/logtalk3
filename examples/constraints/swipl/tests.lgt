@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,15 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2010-04-10,
+		date is 2024-04-08,
 		comment is 'Unit tests for the "constraints/swi" example.'
 	]).
 
 	test(constraints_swi_1) :-
 		puzzle::solve(Sum=Rs),
-		Sum == [9, 5, 6, 7] + [1, 0, 8, 5],
-		Rs == [1, 0, 6, 5, 2].
+		^^assertion(Sum == [9, 5, 6, 7] + [1, 0, 8, 5]),
+		^^assertion(Rs == [1, 0, 6, 5, 2]).
 
 :- end_object.
