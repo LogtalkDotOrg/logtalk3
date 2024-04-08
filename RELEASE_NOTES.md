@@ -25,7 +25,11 @@ RELEASE NOTES
 3.78.0 - May ??, 2024
 =====================
 
+Examples
+--------
 
+* FIXED: The SWI-Prolog specific `pengines` example to not depend on the
+`double_quotes` flag value.
 
 
 3.77.0 - April 2, 2024

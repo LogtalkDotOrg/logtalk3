@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2020 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2020-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2020 Michael T. Richter
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -23,9 +23,9 @@
 :- object(engines).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Michael T. Richter and Paulo Moura',
-		date is 2020-02-24,
+		date is 2024-04-08,
 		comment is 'Simple example of using pengines from objects. Derived from a pengines documentation example.'
 	]).
 
@@ -51,10 +51,7 @@
 	ask_server :-
 		pengine_create([
 			server('http://localhost:7777'),
-			src_text("
-				q(X) :- p(X).
-				p(a). p(b). p(c).
-			")
+			src_text('q(X) :- p(X). p(a). p(b). p(c).')
 		]),
 		pengine_event_loop(handle, []),
 		% fail when the event loop terminates to avoid a spurious answer
