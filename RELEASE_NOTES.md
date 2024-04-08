@@ -25,6 +25,11 @@ RELEASE NOTES
 3.78.0 - May ??, 2024
 =====================
 
+Documentation
+-------------
+
+* UPDATED: The `help` tool documentation on known issues.
+
 Tools
 -----
 

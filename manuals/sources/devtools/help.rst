@@ -127,6 +127,11 @@ The open commands used to open documentation URLs drop the fragment
 part, thus preventing navigating to the specified position on the
 documentation page.
 
+When browsing the Texinfo versions of the Handbook and the APIs
+documentation generated with a recent version of Sphinx and using a
+recent version of Texinfo, the Texinfo search feature often displays the
+previous nodes of the searched nodes.
+
 ECLiPSe defines a ``help`` prefix operator that forces wrapping this
 atom between parenthesis when sending messages to the tool. E.g. use
 ``(help)::help`` instead of ``help::help``.
