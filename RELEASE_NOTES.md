@@ -28,8 +28,11 @@ RELEASE NOTES
 Examples
 --------
 
+* FIXED: The SICStus Prolog specific `constraints/sicstus` example to not
+depend on the default `double_quotes` flag value.
+
 * FIXED: The SWI-Prolog specific `pengines` example to not depend on the
-`double_quotes` flag value.
+default `double_quotes` flag value.
 
 
 3.77.0 - April 2, 2024
