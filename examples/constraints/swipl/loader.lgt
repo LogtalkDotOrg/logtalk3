@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,9 +30,5 @@
 :- initialization((
 	logtalk_load(basic_types(loader)),
 	logtalk_load(meta(loader)),
-	logtalk_load([hexagon, queens, puzzle, sudoku, oneground])
+	logtalk_load([hexagon, queens, puzzle, sudoku, oneground, knight])
 )).
-
-:- if((current_prolog_flag(version_data, swi(Major, Minor, _, _)), Major >= 5, Minor >= 8)).
-	:- initialization(logtalk_load(knight)).
-:- endif.

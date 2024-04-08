@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -110,13 +110,13 @@
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 	antescript -->
-		"/init {  5 5 translate  \
-		   /N exch def 500 N div dup /scalefactor exch def dup scale \
-		   2 scalefactor div setlinewidth 0 0 N N rectstroke  \
-		   1 1 N { dup 0 moveto N lineto stroke } for  \
-		   1 1 N { dup 0 exch moveto N exch lineto stroke } for \
-		   0 0 1 setrgbcolor -.5 dup translate 1 N moveto } bind def \
-		 /jump { N exch sub 1 add lineto gsave currentpoint newpath \
+		"/init {  5 5 translate  \c
+		   /N exch def 500 N div dup /scalefactor exch def dup scale \c
+		   2 scalefactor div setlinewidth 0 0 N N rectstroke  \c
+		   1 1 N { dup 0 moveto N lineto stroke } for  \c
+		   1 1 N { dup 0 exch moveto N exch lineto stroke } for \c
+		   0 0 1 setrgbcolor -.5 dup translate 1 N moveto } bind def \c
+		 /jump { N exch sub 1 add lineto gsave currentpoint newpath \c
 		         4 scalefactor div 0 360 arc fill grestore } bind def".
 
 	tour_postscript(Ts) :-
