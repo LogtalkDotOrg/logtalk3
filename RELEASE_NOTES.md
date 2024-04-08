@@ -25,6 +25,11 @@ RELEASE NOTES
 3.78.0 - May ??, 2024
 =====================
 
+Tools
+-----
+
+* FIXED: Harmless Texinfo warning when using the `help::man/1` predicate.
+
 Examples
 --------
 

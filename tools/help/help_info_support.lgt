@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	complements(help)).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:8:1,
 		author is 'Paulo Moura',
-		date is 2024-01-30,
+		date is 2024-04-08,
 		comment is 'Experimental help predicates for inline browsing of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, GNU Prolog, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or YAP as the backend running on a POSIX system.'
 	]).
 
@@ -104,7 +104,7 @@
 
 	man(Script) :-
 		info_executable(Info),
-		process_create(Info, [Script]).
+		process_create(Info, ['-a', Script]).
 
 	topic_to_atom(Topic, TopicAtom) :-
 		(	atom(Topic) ->
