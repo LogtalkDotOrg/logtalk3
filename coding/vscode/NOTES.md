@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,18 @@ the "Logtalk for VSCode" extension:
 
 https://marketplace.visualstudio.com/items?itemName=LogtalkDotOrg.logtalk-for-vscode
 
-To install this extension, start VSCode, on the left click on "Extensions", type
-"Logtalk" in the search box at the top, select the extension, and click install.
+https://open-vsx.org/extension/LogtalkDotOrg/logtalk-for-vscode
+
+To install this extension, start VSCode or VSCodium, on the left click
+on "Extensions", type "Logtalk" in the search box at the top, select the
+extension, and click install.
 
 This extension is under development and its sources are available at:
 
 https://github.com/LogtalkDotOrg/logtalk-for-vscode
+
+You can also download the extension `.vsix` file from the repo releases
+page:
+
+https://github.com/LogtalkDotOrg/logtalk-for-vscode/releases
+
