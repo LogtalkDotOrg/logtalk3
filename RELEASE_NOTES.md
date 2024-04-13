@@ -52,6 +52,11 @@ the `knight` object.
 * FIXED: The SWI-Prolog specific `pengines` example to not depend on the
 default `double_quotes` flag value.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: VSCode support.
+
 
 3.77.0 - April 2, 2024
 ======================
