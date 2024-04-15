@@ -59,7 +59,7 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:5:0,
 		author is 'Paulo Moura',
 		date is 2024-04-15,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
@@ -125,6 +125,13 @@
 	:- mode(find_references(+atom, @callable, +atom, +integer), one).
 	:- info(find_references/4, [
 		comment is 'Find the called predicate references.',
+		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
+	]).
+
+	:- public(find_implementations/4).
+	:- mode(find_implementations(+atom, @callable, +atom, +integer), one).
+	:- info(find_implementations/4, [
+		comment is 'Find predicate implementations predicate.',
 		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
 	]).
 
@@ -389,6 +396,49 @@
 		entity_property(Entity, Kind, calls(Object::Name/Arity, Properties)),
 		memberchk(line_count(Line), Properties).
 
+	% implementations
+
+	find_implementations(Directory, Predicate, ReferenceFile, ReferenceLine) :-
+		atom_concat(Directory, '/.implementations_done', Data),
+		open(Data, write, Stream),
+		(	find_implementations_(Predicate, ReferenceFile, ReferenceLine, Implementations) ->
+			forall(
+				member(ImplementationFile-ImplementationLine, Implementations),
+				{format(Stream, 'File:~w;Line:~d~n', [ImplementationFile, ImplementationLine])}
+			)
+		;	true
+		),
+		close(Stream).
+
+	find_implementations_(Predicate, File, Line, Implementations) :-
+		entity(File, Line, Entity),
+		findall(
+			Implementation,
+			find_implementation(Predicate, Entity, Implementation),
+			Implementations
+		).
+
+	find_implementation(Name/Arity, Entity, File-Line) :-
+		ground(Name/Arity),
+		functor(Template, Name, Arity),
+		entity_property(ImplementationEntity, Kind, file(File)),
+		entity_property(ImplementationEntity, Kind, defines(Name/Arity, Properties)),
+		(	current_object(ImplementationEntity) ->
+			(	\+ instantiates_class(ImplementationEntity, _),
+				\+ specializes_class(ImplementationEntity, _) ->
+				ImplementationEntity<<predicate_property(Template, declared_in(DeclarationEntity))
+			;	create_object(Obj, [instantiates(ImplementationEntity)], [], []),
+				Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
+				abolish_object(Obj)
+			)
+		;	%current_category(ImplementationEntity) ->
+			create_object(Obj, [imports(ImplementationEntity)], [], []),
+			Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
+			abolish_object(Obj)
+		),
+		DeclarationEntity = Entity,
+		memberchk(line_count(Line), Properties).
+
 	% auxiliary predicates
 
 	entity(File, Line, Entity) :-
@@ -396,6 +446,8 @@
         	object_property(Entity, lines(BeginLine, EndLine))
 		;	category_property(Entity, file(File)),
         	category_property(Entity, lines(BeginLine, EndLine))
+		;	protocol_property(Entity, file(File)),
+        	protocol_property(Entity, lines(BeginLine, EndLine))
 		),
         BeginLine =< Line, Line =< EndLine,
 		!.
