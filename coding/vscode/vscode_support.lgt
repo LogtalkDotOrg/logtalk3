@@ -59,7 +59,7 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:4:0,
 		author is 'Paulo Moura',
 		date is 2024-04-15,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
@@ -114,14 +114,19 @@
 		argnames is ['Directory', 'Entity']
 	]).
 
-	entity(File, Line, Entity) :-
-        (	object_property(Entity, file(File)),
-        	object_property(Entity, lines(BeginLine, EndLine))
-		;	category_property(Entity, file(File)),
-        	category_property(Entity, lines(BeginLine, EndLine))
-		),
-        BeginLine =< Line, Line =< EndLine,
-		!.
+%	:- public(find_references/5).
+%	:- mode(find_references(@callable, +atom, +integer, -atom, -integer), zero_or_one).
+%	:- info(find_references/5, [
+%		comment is 'Find the called predicate references.',
+%		argnames is ['Call', 'CallFile', 'CallLine', 'References']
+%	]).
+
+	:- public(find_references/4).
+	:- mode(find_references(+atom, @callable, +atom, +integer), one).
+	:- info(find_references/4, [
+		comment is 'Find the called predicate references.',
+		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
+	]).
 
 	% declarations
 
@@ -355,7 +360,45 @@
 		),
 		close(Stream).
 
+	% references
+
+	find_references(Directory, Call, CallFile, CallLine) :-
+		atom_concat(Directory, '/.references_done', Data),
+		open(Data, write, Stream),
+		(	find_references_(Call, CallFile, CallLine, References) ->
+			forall(
+				member(DeclarationFile-DeclarationLine, References),
+				{format(Stream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
+			)
+		;	true
+		),
+		close(Stream).
+
+	find_references_(Call, CallFile, CallLine, References) :-
+		entity(CallFile, CallLine, CallerEntity),
+		findall(
+			Reference,
+			find_reference(Call, CallerEntity, Reference),
+			References
+		).
+
+	find_reference(Object::Name/Arity, _, File-Line) :-
+		nonvar(Object),
+		ground(Name/Arity),
+		entity_property(Entity, Kind, file(File)),
+		entity_property(Entity, Kind, calls(Object::Name/Arity, Properties)),
+		memberchk(line_count(Line), Properties).
+
 	% auxiliary predicates
+
+	entity(File, Line, Entity) :-
+        (	object_property(Entity, file(File)),
+        	object_property(Entity, lines(BeginLine, EndLine))
+		;	category_property(Entity, file(File)),
+        	category_property(Entity, lines(BeginLine, EndLine))
+		),
+        BeginLine =< Line, Line =< EndLine,
+		!.
 
 	entity_property(Object, object, Property) :-
 		catch(object_property(Object, Property), _, fail).
