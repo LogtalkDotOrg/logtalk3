@@ -59,9 +59,9 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2024-04-13,
+		date is 2024-04-15,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
 	]).
 
@@ -79,11 +79,39 @@
 		argnames is ['Call', 'CallFile', 'CallLine', 'DeclarationFile', 'DeclarationLine']
 	]).
 
+	:- public(find_declaration/4).
+	:- mode(find_declaration(+atom, @callable, +atom, +integer), one).
+	:- info(find_declaration/4, [
+		comment is 'Find the called predicate declaration file and line.',
+		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
+	]).
+
 	:- public(find_definition/5).
 	:- mode(find_definition(@callable, +atom, +integer, -atom, -integer), zero_or_one).
 	:- info(find_definition/5, [
 		comment is 'Find the called predicate definition file and line.',
 		argnames is ['Call', 'CallFile', 'CallLine', 'DefinitionFile', 'DefinitionLine']
+	]).
+
+	:- public(find_definition/4).
+	:- mode(find_definition(+atom, @callable, +atom, +integer), one).
+	:- info(find_definition/4, [
+		comment is 'Find the called predicate definition file and line.',
+		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
+	]).
+
+	:- public(find_type_definition/3).
+	:- mode(find_type_definition(@entity_identifier, -atom, -integer), zero_or_one).
+	:- info(find_type_definition/3, [
+		comment is 'Find the referenced entity file and line.',
+		argnames is ['Entity', 'DefinitionFile', 'DefinitionLine']
+	]).
+
+	:- public(find_type_definition/2).
+	:- mode(find_type_definition(+atom, @entity_identifier), one).
+	:- info(find_type_definition/2, [
+		comment is 'Find the referenced entity file and line.',
+		argnames is ['Directory', 'Entity']
 	]).
 
 	entity(File, Line, Entity) :-
@@ -99,9 +127,18 @@
 
 	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) :-
 		entity(CallFile, CallLine, CallerEntity),
-		find_declaration(Call, CallerEntity, DeclarationFile, DeclarationLine).
+		find_declaration_(Call, CallerEntity, DeclarationFile, DeclarationLine).
 
-	find_declaration(Object::Functor/Arity, _, File, Line) :-
+	find_declaration(Directory, Call, CallFile, CallLine) :-
+		atom_concat(Directory, '/.declaration_done', Data),
+		open(Data, write, Stream),
+		(	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
+			{format(Stream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
+		;	true
+		),
+		close(Stream).
+
+	find_declaration_(Object::Functor/Arity, _, File, Line) :-
 		!,
 		nonvar(Object),
 		nonvar(Functor),
@@ -113,7 +150,7 @@
 		entity_property(Entity, _, file(File)),
 		memberchk(line_count(Line), Properties).
 
-	find_declaration(::Functor/Arity, This, File, Line) :-
+	find_declaration_(::Functor/Arity, This, File, Line) :-
 		!,
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
@@ -134,7 +171,7 @@
 		entity_property(DeclarationEntity, _, file(File)),
 		memberchk(line_count(Line), Properties).
 
-	find_declaration(^^Functor/Arity, This, File, Line) :-
+	find_declaration_(^^Functor/Arity, This, File, Line) :-
 		!,
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
@@ -155,7 +192,7 @@
 		entity_property(Entity, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 
-	find_declaration(Functor/Arity, This, File, Line) :-
+	find_declaration_(Functor/Arity, This, File, Line) :-
 		% predicate listed in a uses/2 directive
 		ground(Functor/Arity),
 		(	entity_property(This, _, calls(Object::Functor/Arity, _)) ->
@@ -164,9 +201,9 @@
 			member(as(Functor/Arity), Properties)
 		),
 		!,
-		find_declaration(Object::OriginalFunctor/Arity, This, File, Line).
+		find_declaration_(Object::OriginalFunctor/Arity, This, File, Line).
 
-	find_declaration(Functor/Arity, This, File, Line) :-
+	find_declaration_(Functor/Arity, This, File, Line) :-
 		% local predicate
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
@@ -191,9 +228,18 @@
 
 	find_definition(Call, CallFile, CallLine, DefinitionFile, DefinitionLine) :-
 		entity(CallFile, CallLine, CallerEntity),
-		find_definition(Call, CallerEntity, DefinitionFile, DefinitionLine).
+		find_definition_(Call, CallerEntity, DefinitionFile, DefinitionLine).
 
-	find_definition(Object::Functor/Arity, _, File, Line) :-
+	find_definition(Directory, Call, CallFile, CallLine) :-
+		atom_concat(Directory, '/.definition_done', Data),
+		open(Data, write, Stream),
+		(	find_definition(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
+			{format(Stream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
+		;	true
+		),
+		close(Stream).
+
+	find_definition_(Object::Functor/Arity, _, File, Line) :-
 		!,
 		nonvar(Object),
 		nonvar(Functor),
@@ -213,7 +259,7 @@
 		entity_property(Entity, _, file(File)),
 		memberchk(line_count(Line), Properties).
 
-	find_definition(::Functor/Arity, This, File, Line) :-
+	find_definition_(::Functor/Arity, This, File, Line) :-
 		!,
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
@@ -245,7 +291,7 @@
 		entity_property(Entity, _, file(File)),
 		memberchk(line_count(Line), Properties).
 
-	find_definition(^^Functor/Arity, This, File, Line) :-
+	find_definition_(^^Functor/Arity, This, File, Line) :-
 		!,
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
@@ -269,7 +315,7 @@
 		entity_property(Entity, _, file(File)),
 		memberchk(line_count(Line), Properties).
 
-	find_definition(Functor/Arity, This, File, Line) :-
+	find_definition_(Functor/Arity, This, File, Line) :-
 		% predicate listed in a uses/2 directive
 		ground(Functor/Arity),
 		(	entity_property(This, _, calls(Object::Functor/Arity, _)) ->
@@ -278,9 +324,9 @@
 			member(as(Functor/Arity), Properties)
 		),
 		!,
-		find_definition(Object::OriginalFunctor/Arity, This, File, Line).
+		find_definition_(Object::OriginalFunctor/Arity, This, File, Line).
 
-	find_definition(Functor/Arity, This, File, Line) :-
+	find_definition_(Functor/Arity, This, File, Line) :-
 		% local predicate
 		ground(Functor/Arity),
 		(	% definition
@@ -292,6 +338,24 @@
 		),
 		entity_property(Entity, _, file(File)),
 		memberchk(line_count(Line), Properties).
+
+	% type definitions (entities)
+
+	find_type_definition(Name/Arity, DefinitionFile, DefinitionLine) :-
+		functor(Entity, Name, Arity),
+		entity_property(Entity, Type, file(DefinitionFile)),
+		entity_property(Entity, Type, lines(DefinitionLine, _)).
+
+	find_type_definition(Directory, Name/Arity) :-
+		atom_concat(Directory, '/.type_definition_done', Data),
+		open(Data, write, Stream),
+		(	find_type_definition(Name/Arity, File, Line) ->
+			{format(Stream, 'File:~w;Line:~d~n', [File, Line])}
+		;	true
+		),
+		close(Stream).
+
+	% auxiliary predicates
 
 	entity_property(Object, object, Property) :-
 		catch(object_property(Object, Property), _, fail).
