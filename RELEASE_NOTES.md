@@ -52,6 +52,11 @@ the `knight` object.
 * FIXED: The SWI-Prolog specific `pengines` example to not depend on the
 default `double_quotes` flag value.
 
+Tests
+-----
+
+* ADDED: Additional test for the Prolog standard `is/2` predicate.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

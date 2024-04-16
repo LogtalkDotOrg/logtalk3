@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2022-06-16,
+		date is 2024-04-16,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
@@ -189,32 +189,37 @@
 	test(lgt_is_2_41, fail) :-
 		{foo42(_) is 4 - 2}.
 
+	test(lgt_is_2_42, error(type_error(evaluable,foo42/0))) :-
+		% try to delay the error to runtime
+		foo42(Foo42),
+		{foo42 is Foo42}.
+
 	% also check zero divisor error for integer division
 
-	test(lgt_is_2_42, error(evaluation_error(zero_divisor))) :-
+	test(lgt_is_2_43, error(evaluation_error(zero_divisor))) :-
 		% try to delay the expected error to runtime
 		{G = (_X is '//'(3, 0)), call(G)}.
 
 	% also check integer overflow for other functions
 
-	test(lgt_is_2_43, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+	test(lgt_is_2_44, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is truncate(R)}.
 
-	test(lgt_is_2_44, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+	test(lgt_is_2_45, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is round(R)}.
 
-	test(lgt_is_2_45, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
+	test(lgt_is_2_46, error(evaluation_error(int_overflow)), [condition(current_prolog_flag(bounded,true))]) :-
 		{current_prolog_flag(max_integer, MI), R is float(MI)*2, _X is ceiling(R)}.
 
 	% check evaluation of runtime bound arithmetic expressions
 
-	test(lgt_is_2_46, true(X == 2)) :-
+	test(lgt_is_2_47, true(X == 2)) :-
 		{Exp = (4 - 2), X is Exp}.
 
-	test(lgt_is_2_47, true(X == 2)) :-
+	test(lgt_is_2_48, true(X == 2)) :-
 		{Exp =.. [(-), 4, 2], X is Exp}.
 
-	test(lgt_is_2_48, true(X == 2)) :-
+	test(lgt_is_2_49, true(X == 2)) :-
 		^^set_text_input('4 - 2. '),
 		read(Exp),
 		{X is Exp}.
@@ -225,5 +230,7 @@
 
 	foo(0, foo).
 	foo(1, foo(1)).
+
+	foo42(foo42).
 
 :- end_object.
