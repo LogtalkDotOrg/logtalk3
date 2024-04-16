@@ -229,11 +229,11 @@
 			(	\+ instantiates_class(This, _),
 				\+ specializes_class(This, _) ->
 				This<<predicate_property(Template, declared_in(Entity))
-			;	\+ instantiates_class(This, _) ->
-				create_object(Obj, [instantiates(This)], [], []),
-				Obj<<predicate_property(Template, declared_in(Entity)),
-				abolish_object(Obj)
-			;	This<<predicate_property(Template, declared_in(Entity))
+			;	(	create_object(Obj, [instantiates(This)], [], []),
+					Obj<<predicate_property(Template, declared_in(Entity)),
+					abolish_object(Obj)
+				;	This<<predicate_property(Template, declared_in(Entity))
+				)
 			)
 		;	%current_category(This) ->
 			create_object(Obj, [imports(This)], [], []),
