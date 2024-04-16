@@ -59,9 +59,9 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Paulo Moura',
-		date is 2024-04-15,
+		date is 2024-04-16,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
 	]).
 
@@ -223,9 +223,11 @@
 			(	\+ instantiates_class(This, _),
 				\+ specializes_class(This, _) ->
 				This<<predicate_property(Template, declared_in(Entity))
-			;	create_object(Obj, [instantiates(This)], [], []),
+			;	\+ instantiates_class(This, _) ->
+				create_object(Obj, [instantiates(This)], [], []),
 				Obj<<predicate_property(Template, declared_in(Entity)),
 				abolish_object(Obj)
+			;	This<<predicate_property(Template, declared_in(Entity))
 			)
 		;	%current_category(This) ->
 			create_object(Obj, [imports(This)], [], []),
@@ -260,16 +262,20 @@
 		functor(Template, Functor, Arity),
 		Object::predicate_property(Template, defined_in(Primary)),
 		(	% local definitions
-			Entity = Primary,
-			entity_property(Primary, _, defines(Functor/Arity, Properties))
+			entity_property(Primary, _, defines(Functor/Arity, Properties)),
+			Entity = Primary
 		;	% multifile definitions
 			entity_property(Primary, _, includes(Functor/Arity, Entity, Properties))
-		;	% local definition
-			Entity = This,
-			entity_property(This, _, defines(Functor/Arity, Properties))
 		),
-		entity_property(Entity, _, file(File)),
-		memberchk(line_count(Line), Properties).
+		(	memberchk(auxiliary, Properties),
+			entity_property(Entity, _, calls(_, CallsProperties)),
+			memberchk(alias(Functor/Arity), CallsProperties) ->
+			% predicate listed in a uses/2 directive
+			entity_property(Entity, _, file(File)),
+			memberchk(line_count(Line), CallsProperties)
+		;	entity_property(Entity, _, file(File)),
+			memberchk(line_count(Line), Properties)
+		).
 
 	find_definition_(::Functor/Arity, This, File, Line) :-
 		!,
@@ -333,7 +339,7 @@
 		(	entity_property(This, _, calls(Object::Functor/Arity, _)) ->
 			OriginalFunctor = Functor
 		;	entity_property(This, _, calls(Object::OriginalFunctor/Arity, Properties)),
-			member(as(Functor/Arity), Properties)
+			memberchk(alias(Functor/Arity), Properties)
 		),
 		!,
 		find_definition_(Object::OriginalFunctor/Arity, This, File, Line).
@@ -456,7 +462,9 @@
 			;	specializes_class(Entity, Template)
 			)
 		;	current_category(Template),
-			imports_category(Entity, Template)
+			(	extends_category(Entity, Template)
+			;	imports_category(Entity, Template)
+			)
 		),
 		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, lines(Line, _)).
