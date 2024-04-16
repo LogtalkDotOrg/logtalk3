@@ -317,21 +317,28 @@
 			(	\+ instantiates_class(This, _),
 				\+ specializes_class(This, _) ->
 				This<<predicate_property(Template, declared_in(DeclarationEntity)),
-				This<<predicate_property(Template, redefined_from(Entity))
+				(	This<<predicate_property(Template, redefined_from(Entity, Line)) ->
+					true
+				;	This<<predicate_property(Template, defined_in(Entity, Line))
+				)
 			;	create_object(Obj, [instantiates(This)], [], []),
 				Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
-				Obj<<predicate_property(Template, redefined_from(Entity)),
+				(	Obj<<predicate_property(Template, redefined_from(Entity, Line)) ->
+					true
+				;	Obj<<predicate_property(Template, defined_in(Entity, Line))
+				),
 				abolish_object(Obj)
 			)
 		;	%current_category(This) ->
 			create_object(Obj, [imports(This)], [], []),
 			Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
-			Obj<<predicate_property(Template, redefined_from(Entity)),
+			(	Obj<<predicate_property(Template, redefined_from(Entity, Line)) ->
+				true
+			;	Obj<<predicate_property(Template, defined_in(Entity, Line))
+			),
 			abolish_object(Obj)
 		),
-		entity_property(Entity, _, defines(Functor/Arity, Properties)),
-		entity_property(Entity, _, file(File)),
-		memberchk(line_count(Line), Properties).
+		entity_property(Entity, _, file(File)).
 
 	find_definition_(Functor/Arity, This, File, Line) :-
 		% predicate listed in a uses/2 directive
