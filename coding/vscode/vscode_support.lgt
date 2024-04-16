@@ -128,11 +128,11 @@
 		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
 	]).
 
-	:- public(find_implementations/4).
-	:- mode(find_implementations(+atom, @callable, +atom, +integer), one).
-	:- info(find_implementations/4, [
+	:- public(find_implementations/5).
+	:- mode(find_implementations(+atom, +atom, @predicate_indicator, +atom, +integer), one).
+	:- info(find_implementations/5, [
 		comment is 'Find predicate implementations predicate.',
-		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
+		argnames is ['Directory', 'Kind', 'Resource', 'CallFile', 'CallLine']
 	]).
 
 	% declarations
@@ -398,10 +398,10 @@
 
 	% implementations
 
-	find_implementations(Directory, Predicate, ReferenceFile, ReferenceLine) :-
+	find_implementations(Directory, Kind, Resource, ReferenceFile, ReferenceLine) :-
 		atom_concat(Directory, '/.implementations_done', Data),
 		open(Data, write, Stream),
-		(	find_implementations_(Predicate, ReferenceFile, ReferenceLine, Implementations) ->
+		(	find_implementations_(Kind, Resource, ReferenceFile, ReferenceLine, Implementations) ->
 			forall(
 				member(ImplementationFile-ImplementationLine, Implementations),
 				{format(Stream, 'File:~w;Line:~d~n', [ImplementationFile, ImplementationLine])}
@@ -410,15 +410,22 @@
 		),
 		close(Stream).
 
-	find_implementations_(Predicate, File, Line, Implementations) :-
+	find_implementations_(predicate, Predicate, File, Line, Implementations) :-
 		entity(File, Line, Entity),
 		findall(
 			Implementation,
-			find_implementation(Predicate, Entity, Implementation),
+			find_predicate_implementation(Predicate, Entity, Implementation),
 			Implementations
 		).
 
-	find_implementation(Name/Arity, Entity, File-Line) :-
+	find_implementations_(entity, Entity, _, _, Implementations) :-
+		findall(
+			Implementation,
+			find_entity_implementation(Entity, Implementation),
+			Implementations
+		).
+
+	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
 		ground(Name/Arity),
 		functor(Template, Name, Arity),
 		entity_property(ImplementationEntity, Kind, file(File)),
@@ -438,6 +445,21 @@
 		),
 		DeclarationEntity = Entity,
 		memberchk(line_count(Line), Properties).
+
+	find_entity_implementation(Name/Arity, File-Line) :-
+		functor(Template, Name, Arity),
+		(	current_protocol(Name) ->
+			implements_protocol(Entity, Name)
+		;	current_object(Template) ->
+			(	extends_object(Entity, Template)
+			;	instantiates_class(Entity, Template)
+			;	specializes_class(Entity, Template)
+			)
+		;	current_category(Template),
+			imports_category(Entity, Template)
+		),
+		entity_property(Entity, Kind, file(File)),
+		entity_property(Entity, Kind, lines(Line, _)).
 
 	% auxiliary predicates
 
