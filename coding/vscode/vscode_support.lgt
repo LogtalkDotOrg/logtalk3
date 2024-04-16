@@ -218,6 +218,12 @@
 	find_declaration_(Functor/Arity, This, File, Line) :-
 		% local predicate
 		ground(Functor/Arity),
+		entity_property(This, Kind, declares(Functor/Arity, Properties)),
+		entity_property(This, Kind, file(File)),
+		memberchk(line_count(Line), Properties).
+	find_declaration_(Functor/Arity, This, File, Line) :-
+		% local predicate
+		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
 		(	current_object(This) ->
 			(	\+ instantiates_class(This, _),
@@ -234,6 +240,7 @@
 			Obj<<predicate_property(Template, declared_in(Entity)),
 			abolish_object(Obj)
 		),
+		Entity \= This,
 		entity_property(Entity, Kind, declares(Functor/Arity, Properties)),
 		entity_property(Entity, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
@@ -435,6 +442,7 @@
 		close(Stream).
 
 	find_implementations_(predicate, Predicate, File, Line, Implementations) :-
+		ground(Predicate),
 		entity(File, Line, Entity),
 		findall(
 			Implementation,
@@ -443,6 +451,7 @@
 		).
 
 	find_implementations_(entity, Entity, _, _, Implementations) :-
+		ground(Entity),
 		findall(
 			Implementation,
 			find_entity_implementation(Entity, Implementation),
@@ -450,17 +459,22 @@
 		).
 
 	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
-		ground(Name/Arity),
+		entity_property(Entity, Kind, defines(Name/Arity, Properties)),
+		entity_property(Entity, Kind, file(File)),
+		memberchk(line_count(Line), Properties).
+	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
 		functor(Template, Name, Arity),
-		entity_property(ImplementationEntity, Kind, file(File)),
 		entity_property(ImplementationEntity, Kind, defines(Name/Arity, Properties)),
+		ImplementationEntity \= Entity,
 		(	current_object(ImplementationEntity) ->
 			(	\+ instantiates_class(ImplementationEntity, _),
 				\+ specializes_class(ImplementationEntity, _) ->
 				ImplementationEntity<<predicate_property(Template, declared_in(DeclarationEntity))
-			;	create_object(Obj, [instantiates(ImplementationEntity)], [], []),
-				Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
-				abolish_object(Obj)
+			;	(	create_object(Obj, [instantiates(ImplementationEntity)], [], []),
+					Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
+					abolish_object(Obj)
+				;	ImplementationEntity<<predicate_property(Template, declared_in(DeclarationEntity))
+				)
 			)
 		;	%current_category(ImplementationEntity) ->
 			create_object(Obj, [imports(ImplementationEntity)], [], []),
@@ -468,6 +482,7 @@
 			abolish_object(Obj)
 		),
 		DeclarationEntity = Entity,
+		entity_property(ImplementationEntity, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 
 	find_entity_implementation(Name/Arity, File-Line) :-
