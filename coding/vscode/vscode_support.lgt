@@ -59,7 +59,7 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
 		date is 2024-04-17,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
@@ -139,7 +139,7 @@
 
 	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) :-
 		entity(CallFile, CallLine, CallerEntity),
-		find_declaration_(Call, CallerEntity, DeclarationFile, DeclarationLine).
+		find_declaration_(Call, CallerEntity, CallLine, DeclarationFile, DeclarationLine).
 
 	find_declaration(Directory, Call, CallFile, CallLine) :-
 		atom_concat(Directory, '/.declaration_done', Data),
@@ -150,20 +150,32 @@
 		),
 		close(Stream).
 
-	find_declaration_(Object::Functor/Arity, _, File, Line) :-
+	find_declaration_(Object::Functor/Arity, _, _, File, Line) :-
 		callable(Object),
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
 		Object::predicate_property(Template, declared_in(DeclarationEntity, Line)),
 		entity_property(DeclarationEntity, _, file(File)).
 
-	find_declaration_(::Functor/Arity, Entity, File, Line) :-
-		find_declaration_(Functor/Arity, Entity, File, Line).
+	find_declaration_(::Name/Arity, Entity, CallerLine, File, Line) :-
+		(	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) ->
+			true
+		;	ExtArity is Arity + 2,
+			entity_property(Entity, _, calls(::Name/ExtArity, Properties)),
+			memberchk(line_count(CallerLine), Properties),
+			find_declaration_(::Name/ExtArity, Entity, CallerLine, File, Line)
+		).
 
-	find_declaration_(^^Functor/Arity, Entity, File, Line) :-
-		find_declaration_(Functor/Arity, Entity, File, Line).
+	find_declaration_(^^Name/Arity, Entity, CallerLine, File, Line) :-
+		(	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) ->
+			true
+		;	ExtArity is Arity + 2,
+			entity_property(Entity, _, calls(^^Name/ExtArity, Properties)),
+			memberchk(line_count(CallerLine), Properties),
+			find_declaration_(^^Name/ExtArity, Entity, CallerLine, File, Line)
+		).
 
-	find_declaration_(Functor/Arity, Entity, File, Line) :-
+	find_declaration_(Functor/Arity, Entity, CallerLine, File, Line) :-
 		% predicate listed in a uses/2 directive
 		ground(Functor/Arity),
 		(	entity_property(Entity, _, calls(Object::Functor/Arity, _)) ->
@@ -172,9 +184,9 @@
 			member(as(Functor/Arity), Properties)
 		),
 		!,
-		find_declaration_(Object::OriginalFunctor/Arity, Entity, File, Line).
+		find_declaration_(Object::OriginalFunctor/Arity, Entity, CallerLine, File, Line).
 
-	find_declaration_(Functor/Arity, Entity, File, Line) :-
+	find_declaration_(Functor/Arity, Entity, _, File, Line) :-
 		% locally declared
 		ground(Functor/Arity),
 		entity_property(Entity, Kind, declares(Functor/Arity, Properties)),
@@ -182,7 +194,7 @@
 		memberchk(line_count(Line), Properties),
 		!.
 
-	find_declaration_(Functor/Arity, Entity, File, Line) :-
+	find_declaration_(Functor/Arity, Entity, _, File, Line) :-
 		% non-local declaration
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
@@ -204,13 +216,21 @@
 			true
 		;	abolish_object(Obj)
 		),
-		entity_property(DeclarationEntity, _, file(File)).
+		entity_property(DeclarationEntity, _, file(File)),
+		!.
+
+	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
+		% non-terminal
+		ExtArity is Arity + 2,
+		entity_property(Entity, _, defines(Name/ExtArity, Properties)),
+		memberchk(non_terminal(Name//Arity), Properties),
+		find_declaration_(Name/ExtArity, Entity, CallerLine, File, Line).
 
 	% definitions
 
 	find_definition(Call, CallFile, CallLine, DefinitionFile, DefinitionLine) :-
 		entity(CallFile, CallLine, CallerEntity),
-		find_definition_(Call, CallerEntity, DefinitionFile, DefinitionLine).
+		find_definition_(Call, CallerEntity, CallLine, DefinitionFile, DefinitionLine).
 
 	find_definition(Directory, Call, CallFile, CallLine) :-
 		atom_concat(Directory, '/.definition_done', Data),
@@ -221,7 +241,7 @@
 		),
 		close(Stream).
 
-	find_definition_(Object::Functor/Arity, _, File, Line) :-
+	find_definition_(Object::Functor/Arity, _, _, File, Line) :-
 		callable(Object),
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
@@ -242,7 +262,7 @@
 			memberchk(line_count(Line), Properties)
 		).
 
-	find_definition_(::Functor/Arity, This, File, Line) :-
+	find_definition_(::Functor/Arity, This, _, File, Line) :-
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
 		(	% definition
@@ -273,7 +293,7 @@
 		entity_property(Entity, _, file(File)),
 		memberchk(line_count(Line), Properties).
 
-	find_definition_(^^Functor/Arity, This, File, Line) :-
+	find_definition_(^^Functor/Arity, This, _, File, Line) :-
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
 		(	current_object(This) ->
@@ -303,29 +323,34 @@
 		),
 		entity_property(Entity, _, file(File)).
 
-	find_definition_(Functor/Arity, This, File, Line) :-
+	find_definition_(Functor/Arity, Entity, CallerLine, File, Line) :-
 		% predicate listed in a uses/2 directive
 		ground(Functor/Arity),
-		(	entity_property(This, _, calls(Object::Functor/Arity, _)) ->
+		(	entity_property(Entity, _, calls(Object::Functor/Arity, _)) ->
 			OriginalFunctor = Functor
-		;	entity_property(This, _, calls(Object::OriginalFunctor/Arity, Properties)),
+		;	entity_property(Entity, _, calls(Object::OriginalFunctor/Arity, Properties)),
 			memberchk(alias(Functor/Arity), Properties)
 		),
 		!,
-		find_definition_(Object::OriginalFunctor/Arity, This, File, Line).
+		find_definition_(Object::OriginalFunctor/Arity, Entity, CallerLine, File, Line).
 
-	find_definition_(Functor/Arity, This, File, Line) :-
+	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
 		% local predicate
-		ground(Functor/Arity),
+		ground(Name/Arity),
 		(	% definition
-			Entity = This,
-			entity_property(Entity, _, defines(Functor/Arity, Properties)) ->
-			true
+			entity_property(Entity, _, defines(Name/Arity, Properties)) ->
+			entity_property(Entity, _, file(File)),
+			memberchk(line_count(Line), Properties)
 		;	% multifile definitions
-			entity_property(This, _, includes(Functor/Arity, Entity, Properties))
-		),
-		entity_property(Entity, _, file(File)),
-		memberchk(line_count(Line), Properties).
+			entity_property(Entity, _, includes(Name/Arity, DefinitionEntity, Properties)) ->
+			entity_property(DefinitionEntity, _, file(File)),
+			memberchk(line_count(Line), Properties)
+		;	% non-terminal
+			ExtArity is Arity + 2,
+			entity_property(Entity, _, calls(Name/ExtArity, CallsProperties)),
+			memberchk(line_count(CallerLine), CallsProperties),
+			find_definition_(Name/ExtArity, Entity, CallerLine, File, Line)
+		).
 
 	% type definitions (entities)
 
