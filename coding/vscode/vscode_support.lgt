@@ -59,9 +59,9 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2024-04-16,
+		date is 2024-04-17,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
 	]).
 
@@ -151,99 +151,60 @@
 		close(Stream).
 
 	find_declaration_(Object::Functor/Arity, _, File, Line) :-
-		!,
-		nonvar(Object),
-		nonvar(Functor),
-		nonvar(Arity),
-		Object::current_predicate(Functor/Arity),
-		functor(Template, Functor, Arity),
-		Object::predicate_property(Template, declared_in(Entity)),
-		entity_property(Entity, _, declares(Functor/Arity, Properties)),
-		entity_property(Entity, _, file(File)),
-		memberchk(line_count(Line), Properties).
-
-	find_declaration_(::Functor/Arity, This, File, Line) :-
-		!,
+		callable(Object),
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
-		(	current_object(This) ->
-			(	\+ instantiates_class(This, _),
-				\+ specializes_class(This, _) ->
-				This<<predicate_property(Template, declared_in(DeclarationEntity))
-			;	create_object(Obj, [instantiates(This)], [], []),
-				Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
-				abolish_object(Obj)
-			)
-		;	%current_category(This) ->
-			create_object(Obj, [imports(This)], [], []),
-			Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
-			abolish_object(Obj)
-		),
-		entity_property(DeclarationEntity, _, declares(Functor/Arity, Properties)),
-		entity_property(DeclarationEntity, _, file(File)),
-		memberchk(line_count(Line), Properties).
+		Object::predicate_property(Template, declared_in(DeclarationEntity, Line)),
+		entity_property(DeclarationEntity, _, file(File)).
 
-	find_declaration_(^^Functor/Arity, This, File, Line) :-
-		!,
-		ground(Functor/Arity),
-		functor(Template, Functor, Arity),
-		(	current_object(This) ->
-			(	\+ instantiates_class(This, _),
-				\+ specializes_class(This, _) ->
-				This<<predicate_property(Template, declared_in(Entity))
-			;	create_object(Obj, [instantiates(This)], [], []),
-				Obj<<predicate_property(Template, declared_in(Entity)),
-				abolish_object(Obj)
-			)
-		;	%current_category(This) ->
-			create_object(Obj, [imports(This)], [], []),
-			Obj<<predicate_property(Template, declared_in(Entity)),
-			abolish_object(Obj)
-		),
-		entity_property(Entity, Kind, declares(Functor/Arity, Properties)),
-		entity_property(Entity, Kind, file(File)),
-		memberchk(line_count(Line), Properties).
+	find_declaration_(::Functor/Arity, Entity, File, Line) :-
+		find_declaration_(Functor/Arity, Entity, File, Line).
 
-	find_declaration_(Functor/Arity, This, File, Line) :-
+	find_declaration_(^^Functor/Arity, Entity, File, Line) :-
+		find_declaration_(Functor/Arity, Entity, File, Line).
+
+	find_declaration_(Functor/Arity, Entity, File, Line) :-
 		% predicate listed in a uses/2 directive
 		ground(Functor/Arity),
-		(	entity_property(This, _, calls(Object::Functor/Arity, _)) ->
+		(	entity_property(Entity, _, calls(Object::Functor/Arity, _)) ->
 			OriginalFunctor = Functor
-		;	entity_property(This, _, calls(Object::OriginalFunctor/Arity, Properties)),
+		;	entity_property(Entity, _, calls(Object::OriginalFunctor/Arity, Properties)),
 			member(as(Functor/Arity), Properties)
 		),
 		!,
-		find_declaration_(Object::OriginalFunctor/Arity, This, File, Line).
+		find_declaration_(Object::OriginalFunctor/Arity, Entity, File, Line).
 
-	find_declaration_(Functor/Arity, This, File, Line) :-
-		% local predicate
+	find_declaration_(Functor/Arity, Entity, File, Line) :-
+		% locally declared
 		ground(Functor/Arity),
-		entity_property(This, Kind, declares(Functor/Arity, Properties)),
-		entity_property(This, Kind, file(File)),
-		memberchk(line_count(Line), Properties).
-	find_declaration_(Functor/Arity, This, File, Line) :-
-		% local predicate
-		ground(Functor/Arity),
-		functor(Template, Functor, Arity),
-		(	current_object(This) ->
-			(	\+ instantiates_class(This, _),
-				\+ specializes_class(This, _) ->
-				This<<predicate_property(Template, declared_in(Entity))
-			;	(	create_object(Obj, [instantiates(This)], [], []),
-					Obj<<predicate_property(Template, declared_in(Entity)),
-					abolish_object(Obj)
-				;	This<<predicate_property(Template, declared_in(Entity))
-				)
-			)
-		;	%current_category(This) ->
-			create_object(Obj, [imports(This)], [], []),
-			Obj<<predicate_property(Template, declared_in(Entity)),
-			abolish_object(Obj)
-		),
-		Entity \= This,
 		entity_property(Entity, Kind, declares(Functor/Arity, Properties)),
 		entity_property(Entity, Kind, file(File)),
-		memberchk(line_count(Line), Properties).
+		memberchk(line_count(Line), Properties),
+		!.
+
+	find_declaration_(Functor/Arity, Entity, File, Line) :-
+		% non-local declaration
+		ground(Functor/Arity),
+		functor(Template, Functor, Arity),
+		(	current_object(Entity) ->
+			(	Entity<<predicate_property(Template, declared_in(DeclarationEntity, Line)) ->
+				true
+			;	once((
+					instantiates_class(Entity, _)
+				;	specializes_class(Entity, _)
+				)),
+				create_object(Obj, [instantiates(Entity)], [], []),
+				Obj<<predicate_property(Template, declared_in(DeclarationEntity, Line))
+			)
+		;	% current_category(Entity),
+			create_object(Obj, [imports(Entity)], [], []),
+			Obj<<predicate_property(Template, declared_in(DeclarationEntity, Line))
+		),
+		(	var(Obj) ->
+			true
+		;	abolish_object(Obj)
+		),
+		entity_property(DeclarationEntity, _, file(File)).
 
 	% definitions
 
@@ -261,11 +222,8 @@
 		close(Stream).
 
 	find_definition_(Object::Functor/Arity, _, File, Line) :-
-		!,
-		nonvar(Object),
-		nonvar(Functor),
-		nonvar(Arity),
-		Object::current_predicate(Functor/Arity),
+		callable(Object),
+		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
 		Object::predicate_property(Template, defined_in(Primary)),
 		(	% local definitions
@@ -285,7 +243,6 @@
 		).
 
 	find_definition_(::Functor/Arity, This, File, Line) :-
-		!,
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
 		(	% definition
@@ -317,7 +274,6 @@
 		memberchk(line_count(Line), Properties).
 
 	find_definition_(^^Functor/Arity, This, File, Line) :-
-		!,
 		ground(Functor/Arity),
 		functor(Template, Functor, Arity),
 		(	current_object(This) ->
