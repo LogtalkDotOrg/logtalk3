@@ -260,7 +260,16 @@
 			memberchk(line_count(Line), CallsProperties)
 		;	entity_property(Entity, _, file(File)),
 			memberchk(line_count(Line), Properties)
-		).
+		),
+		!.
+
+	find_definition_(Object::Name/Arity, Entity, CallLine, File, Line) :-
+		% non-terminal
+		ground(Name/Arity),
+		ExtArity is Arity + 2,
+		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
+		memberchk(line_count(CallLine), Properties),
+		find_definition_(Object::Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(::Functor/Arity, This, _, File, Line) :-
 		ground(Functor/Arity),
@@ -291,7 +300,16 @@
 			entity_property(This, _, defines(Functor/Arity, Properties))
 		),
 		entity_property(Entity, _, file(File)),
-		memberchk(line_count(Line), Properties).
+		memberchk(line_count(Line), Properties),
+		!.
+
+	find_definition_(::Name/Arity, Entity, CallLine, File, Line) :-
+		% non-terminal
+		ground(Name/Arity),
+		ExtArity is Arity + 2,
+		entity_property(Entity, _, calls(::Name/ExtArity, Properties)),
+		memberchk(line_count(CallLine), Properties),
+		find_definition_(::Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(^^Functor/Arity, This, _, File, Line) :-
 		ground(Functor/Arity),
@@ -321,7 +339,16 @@
 			),
 			abolish_object(Obj)
 		),
-		entity_property(Entity, _, file(File)).
+		entity_property(Entity, _, file(File)),
+		!.
+
+	find_definition_(^^Name/Arity, Entity, CallLine, File, Line) :-
+		% non-terminal
+		ground(Name/Arity),
+		ExtArity is Arity + 2,
+		entity_property(Entity, _, calls(^^Name/ExtArity, Properties)),
+		memberchk(line_count(CallLine), Properties),
+		find_definition_(^^Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(Functor/Arity, Entity, CallerLine, File, Line) :-
 		% predicate listed in a uses/2 directive
