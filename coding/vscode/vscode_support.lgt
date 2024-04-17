@@ -414,6 +414,9 @@
 			Implementations
 		).
 
+	find_predicate_implementation(Name//Arity, Entity, File-Line) :-
+		ExtArity is Arity + 2,
+		find_predicate_implementation(Name/ExtArity, Entity, File-Line).
 	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
 		entity_property(Entity, Kind, defines(Name/Arity, Properties)),
 		entity_property(Entity, Kind, file(File)),
