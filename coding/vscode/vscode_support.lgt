@@ -425,7 +425,9 @@
 			Reference,
 			find_reference(Call, CallerEntity, Reference),
 			References
-		).
+		),
+		% require at least one reference other than the selected one
+		References = [_, _| _].
 
 	find_reference(Alias::Name/Arity, Entity, File-Line) :-
 		callable(Alias),
@@ -436,7 +438,6 @@
 		;	Object = Alias
 		),
 		entity_property(Other, Kind, calls(Object::Name/Arity, Properties)),
-		Other \= Entity,
 		entity_property(Other, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 
