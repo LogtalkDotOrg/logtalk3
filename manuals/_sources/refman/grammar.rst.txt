@@ -1012,6 +1012,7 @@ Entity properties
       | "defines(" predicate_indicator "," predicate_definition_property_list ")"
       | "includes(" predicate_indicator "," ( object_identifier | category_identifier ) "," predicate_definition_property_list ")"
       | "provides(" predicate_indicator "," ( object_identifier | category_identifier ) "," predicate_definition_property_list ")"
+      | "alias(" ( object_identifier | module_identifier ) "," entity_alias_property_list ")"
       | "alias(" predicate_indicator "," predicate_alias_property_list ")"
       | "calls(" predicate "," predicate_call_update_property_list ")"
       | "updates(" predicate "," predicate_call_update_property_list ")"
@@ -1042,6 +1043,7 @@ Entity properties
       | "defines(" predicate_indicator "," predicate_definition_property_list ")"
       | "includes(" predicate_indicator "," ( object_identifier | category_identifier ) "," predicate_definition_property_list ")"
       | "provides(" predicate_indicator "," ( object_identifier | category_identifier ) "," predicate_definition_property_list ")"
+      | "alias(" ( object_identifier | module_identifier ) "," entity_alias_property_list ")"
       | "alias(" predicate_indicator "," predicate_alias_property_list ")"
       | "calls(" predicate "," predicate_call_update_property_list ")"
       | "updates(" predicate "," predicate_call_update_property_list ")"
@@ -1107,6 +1109,18 @@ Entity properties
       | "line_count(" integer ")"
       | "number_of_clauses(" integer ")"
       | "number_of_rules(" integer ")"
+   
+   entity_alias_property_list ::=
+      "[" entity_alias_property_sequence "]"
+   
+   entity_alias_property_sequence ::=
+      entity_alias_property
+      | entity_alias_property "," entity_alias_property_sequence
+   
+   entity_alias_property ::=
+      "for(" ( object_identifier | module_identifier ) ")"
+      | "include(" atom ")"
+      | "line_count(" integer ")"
    
    predicate_alias_property_list ::=
       "[" predicate_alias_property_sequence "]"

@@ -115,6 +115,14 @@ Glossary
       values of its arguments (e.g. ``foo(bar)`` and ``foo(baz)`` are
       different parameterizations of the same parametric entity, ``foo/1``).
 
+   entity alias
+      An alternative name for an entity. Entity aliases can be defined using
+      the :ref:`directives_uses_1` and :ref:`directives_use_module_1` directives.
+      Entity aliases can be used to improve code clarity by using alternative
+      names that are more meaningful in the calling context, to bind parametric
+      entity parameters, and to simplify experimenting with alternative entities
+      implementing the same protocol.
+
    static entity
       See :term:`entity`.
 

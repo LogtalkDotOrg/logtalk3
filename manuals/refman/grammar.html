@@ -1051,6 +1051,7 @@ terms <span class="o">::=</span>
    | &quot;defines(&quot; predicate_indicator &quot;,&quot; predicate_definition_property_list &quot;)&quot;
    | &quot;includes(&quot; predicate_indicator &quot;,&quot; ( object_identifier | category_identifier ) &quot;,&quot; predicate_definition_property_list &quot;)&quot;
    | &quot;provides(&quot; predicate_indicator &quot;,&quot; ( object_identifier | category_identifier ) &quot;,&quot; predicate_definition_property_list &quot;)&quot;
+   | &quot;alias(&quot; ( object_identifier | module_identifier ) &quot;,&quot; entity_alias_property_list &quot;)&quot;
    | &quot;alias(&quot; predicate_indicator &quot;,&quot; predicate_alias_property_list &quot;)&quot;
    | &quot;calls(&quot; predicate &quot;,&quot; predicate_call_update_property_list &quot;)&quot;
    | &quot;updates(&quot; predicate &quot;,&quot; predicate_call_update_property_list &quot;)&quot;
@@ -1081,6 +1082,7 @@ object_property <span class="o">::=</span>
    | &quot;defines(&quot; predicate_indicator &quot;,&quot; predicate_definition_property_list &quot;)&quot;
    | &quot;includes(&quot; predicate_indicator &quot;,&quot; ( object_identifier | category_identifier ) &quot;,&quot; predicate_definition_property_list &quot;)&quot;
    | &quot;provides(&quot; predicate_indicator &quot;,&quot; ( object_identifier | category_identifier ) &quot;,&quot; predicate_definition_property_list &quot;)&quot;
+   | &quot;alias(&quot; ( object_identifier | module_identifier ) &quot;,&quot; entity_alias_property_list &quot;)&quot;
    | &quot;alias(&quot; predicate_indicator &quot;,&quot; predicate_alias_property_list &quot;)&quot;
    | &quot;calls(&quot; predicate &quot;,&quot; predicate_call_update_property_list &quot;)&quot;
    | &quot;updates(&quot; predicate &quot;,&quot; predicate_call_update_property_list &quot;)&quot;
@@ -1146,6 +1148,18 @@ predicate_definition_property <span class="o">::=</span>
    | &quot;line_count(&quot; integer &quot;)&quot;
    | &quot;number_of_clauses(&quot; integer &quot;)&quot;
    | &quot;number_of_rules(&quot; integer &quot;)&quot;
+
+entity_alias_property_list <span class="o">::=</span>
+   &quot;[&quot; entity_alias_property_sequence &quot;]&quot;
+
+entity_alias_property_sequence <span class="o">::=</span>
+   entity_alias_property
+   | entity_alias_property &quot;,&quot; entity_alias_property_sequence
+
+entity_alias_property <span class="o">::=</span>
+   &quot;for(&quot; ( object_identifier | module_identifier ) &quot;)&quot;
+   | &quot;include(&quot; atom &quot;)&quot;
+   | &quot;line_count(&quot; integer &quot;)&quot;
 
 predicate_alias_property_list <span class="o">::=</span>
    &quot;[&quot; predicate_alias_property_sequence &quot;]&quot;

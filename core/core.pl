@@ -320,11 +320,11 @@
 % '$lgt_pp_parameter_variables_'(ParameterVariables)
 :- dynamic('$lgt_pp_parameter_variables_'/1).
 
-% '$lgt_pp_object_alias_'(Obj, Alias, CompilationContext)
-:- dynamic('$lgt_pp_object_alias_'/3).
+% '$lgt_pp_object_alias_'(Obj, Alias, CompilationContext, File, Lines)
+:- dynamic('$lgt_pp_object_alias_'/5).
 
-% '$lgt_pp_module_alias_'(Module, Alias, CompilationContext)
-:- dynamic('$lgt_pp_module_alias_'/3).
+% '$lgt_pp_module_alias_'(Module, Alias, CompilationContext, File, Lines)
+:- dynamic('$lgt_pp_module_alias_'/5).
 
 % '$lgt_pp_uses_predicate_'(Obj, Predicate, Alias, CompilationContext, File, Lines)
 :- dynamic('$lgt_pp_uses_predicate_'/6).
@@ -1231,10 +1231,22 @@ protocol_property(Ptc, Prop) :-
 	Properties = [number_of_clauses(Clauses), number_of_rules(Rules)| LocationProperties].
 
 
-'$lgt_entity_property_alias'(Entity, Rnm, Flags, AliasFunctor/Arity, Properties) :-
+'$lgt_entity_property_alias'(Entity, _, Flags, Alias, Properties) :-
+	'$lgt_entity_property_'(Entity, alias(Original, Alias, Location)),
 	(	Flags /\ 8 =:= 8 ->
 		% entity compiled with the source_data flag turned on
-		'$lgt_entity_property_'(Entity, alias(From, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)),
+		(	Location = File-Line ->
+			Properties = [for(Original), include(File), line_count(Line)]
+		;	Properties = [for(Original), line_count(Location)]
+		)
+	;	% entity compiled with the source_data flag turned off
+		Properties = [for(Original)]
+	).
+
+'$lgt_entity_property_alias'(Entity, Rnm, Flags, AliasFunctor/Arity, Properties) :-
+	'$lgt_entity_property_'(Entity, alias(From, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)),
+	(	Flags /\ 8 =:= 8 ->
+		% entity compiled with the source_data flag turned on
 		(	Location = File-Line ->
 			LocationProperties = [include(File), line_count(Line)]
 		;	LocationProperties = [line_count(Location)]
@@ -7838,6 +7850,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
+	'$lgt_pp_object_alias_'(Original, Alias, _, File, Line-_),
+	'$lgt_property_location'(MainFile, File, Line, Location),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(Original, Alias, Location)))),
+	fail.
+
+'$lgt_add_entity_properties'(_, Entity, MainFile) :-
+	'$lgt_pp_module_alias_'(Original, Alias, _, File, Line-_),
+	'$lgt_property_location'(MainFile, File, Line, Location),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(Original, Alias, Location)))),
+	fail.
+
+'$lgt_add_entity_properties'(_, Entity, MainFile) :-
 	'$lgt_pp_predicate_alias_'(For, Original, Alias, NonTerminalFlag, File, Line-_),
 	'$lgt_property_location'(MainFile, File, Line, Location),
 	functor(Original, OriginalFunctor, Arity),
@@ -8434,8 +8458,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_clean_pp_common_object_category_clauses' :-
 	retractall('$lgt_pp_implemented_protocol_'(_, _, _, _, _)),
 	retractall('$lgt_pp_parameter_variables_'(_)),
-	retractall('$lgt_pp_object_alias_'(_, _, _)),
-	retractall('$lgt_pp_module_alias_'(_, _, _)),
+	retractall('$lgt_pp_object_alias_'(_, _, _, _, _)),
+	retractall('$lgt_pp_module_alias_'(_, _, _, _, _)),
 	retractall('$lgt_pp_uses_predicate_'(_, _, _, _, _, _)),
 	retractall('$lgt_pp_uses_non_terminal_'(_, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_use_module_predicate_'(_, _, _, _, _, _)),
@@ -11343,29 +11367,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% object argument is a parameter variable
 	!,
 	'$lgt_check'(object_identifier, Alias),
-	(	\+ \+ ('$lgt_pp_object_alias_'(Other, Alias, _), Obj == Other) ->
+	(	\+ \+ ('$lgt_pp_object_alias_'(Other, Alias, _, _, _), Obj == Other) ->
 		throw(permission_error(repeat, object_alias, Alias))
-	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias, _) ->
+	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias, _, _, _) ->
 		throw(permission_error(modify, object_alias, Alias))
 	;	% use a minimal compilation-context to preserve the binding
 		% between the parameter variable and the object argument
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-		assertz('$lgt_pp_object_alias_'(Obj, Alias, NewCtx))
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_object_alias_'(Obj, Alias, NewCtx, File, Lines))
 	).
 
 '$lgt_compile_uses_directive_alias'(Obj as Alias, Argument, Ctx) :-
 	!,
 	'$lgt_check'(object_identifier, Obj),
 	'$lgt_check'(object_identifier, Alias),
-	(	\+ \+ '$lgt_pp_object_alias_'(Obj, Alias, _) ->
+	(	\+ \+ '$lgt_pp_object_alias_'(Obj, Alias, _, _, _) ->
 		throw(permission_error(repeat, object_alias, Alias))
-	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias, _) ->
+	;	\+ \+ '$lgt_pp_object_alias_'(_, Alias, _, _, _) ->
 		throw(permission_error(modify, object_alias, Alias))
-	;	\+ \+ '$lgt_pp_object_alias_'(_, Obj, _) ->
+	;	\+ \+ '$lgt_pp_object_alias_'(_, Obj, _, _, _) ->
 		throw(permission_error(create, alias_alias, Alias))
 	;	'$lgt_add_referenced_object'(Obj, Ctx),
 		'$lgt_warn_on_alias_same_as_original'(Obj, Alias, Ctx),
+		'$lgt_source_file_context'(Ctx, File, Lines),
 		(	term_variables(Obj, Variables),
 			'$lgt_pp_term_source_data_'((:- uses(Argument)), VariableNames, _, _, _),
 			'$lgt_member'(VariableName=Variable, VariableNames),
@@ -11377,8 +11403,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 			% between the parameter variable and the object argument
 			'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 			'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-			assertz('$lgt_pp_object_alias_'(Obj, Alias, NewCtx))
-		;	assertz('$lgt_pp_object_alias_'(Obj, Alias, _))
+			assertz('$lgt_pp_object_alias_'(Obj, Alias, NewCtx, File, Lines))
+		;	assertz('$lgt_pp_object_alias_'(Obj, Alias, _, File, Lines))
 		)
 	).
 
@@ -11622,30 +11648,32 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% module argument is a parameter variable
 	!,
 	'$lgt_check'(module_identifier, Alias),
-	(	\+ \+ ('$lgt_pp_module_alias_'(Other, Alias, _), Module == Other) ->
+	(	\+ \+ ('$lgt_pp_module_alias_'(Other, Alias, _, _, _), Module == Other) ->
 		throw(permission_error(repeat, module_alias, Alias))
-	;	\+ \+ '$lgt_pp_module_alias_'(_, Alias, _) ->
+	;	\+ \+ '$lgt_pp_module_alias_'(_, Alias, _, _, _) ->
 		throw(permission_error(modify, module_alias, Alias))
 	;	% use a minimal compilation-context to preserve the binding
 		% between the parameter variable and the module argument
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		'$lgt_comp_ctx_exec_ctx'(NewCtx, ExCtx),
-		assertz('$lgt_pp_module_alias_'(Module, Alias, NewCtx))
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_module_alias_'(Module, Alias, NewCtx, File, Lines))
 	).
 
 '$lgt_compile_use_module_directive_alias'(Module as Alias, _, Ctx) :-
 	!,
 	'$lgt_check'(module_identifier, Module),
 	'$lgt_check'(module_identifier, Alias),
-	(	\+ \+ '$lgt_pp_module_alias_'(Module, Alias, _) ->
+	(	\+ \+ '$lgt_pp_module_alias_'(Module, Alias, _, _, _) ->
 		throw(permission_error(repeat, module_alias, Alias))
-	;	\+ \+ '$lgt_pp_module_alias_'(_, Alias, _) ->
+	;	\+ \+ '$lgt_pp_module_alias_'(_, Alias, _, _, _) ->
 		throw(permission_error(modify, module_alias, Alias))
-	;	\+ \+ '$lgt_pp_module_alias_'(_, Module, _) ->
+	;	\+ \+ '$lgt_pp_module_alias_'(_, Module, _, _, _) ->
 		throw(permission_error(create, module_alias, Alias))
 	;	'$lgt_warn_on_alias_same_as_original'(Module, Alias, Ctx),
 		'$lgt_add_referenced_module'(Module, Ctx),
-		assertz('$lgt_pp_module_alias_'(Module, Alias, _))
+		'$lgt_source_file_context'(Ctx, File, Lines),
+		assertz('$lgt_pp_module_alias_'(Module, Alias, _, File, Lines))
 	).
 
 '$lgt_compile_use_module_directive_alias'(Term, _, _) :-
@@ -13004,7 +13032,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'([Alias::Pred], Caller, TPred, DPred, Ctx) :-
 	callable(Alias),
-	'$lgt_pp_object_alias_'(Obj, Alias, Ctx),
+	'$lgt_pp_object_alias_'(Obj, Alias, Ctx, _, _),
 	!,
 	'$lgt_compile_body'([Obj::Pred], Caller, TPred, DPred, Ctx).
 
@@ -14860,7 +14888,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Alias::Pred, _, TPred, '$lgt_debug'(goal(Alias::Pred, TPred), ExCtx), Ctx) :-
 	callable(Alias),
-	'$lgt_pp_object_alias_'(Obj, Alias, Ctx),
+	'$lgt_pp_object_alias_'(Obj, Alias, Ctx, _, _),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compiler_flag'(events, Events),
@@ -14932,7 +14960,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(':'(Alias, Pred), Caller, TPred, '$lgt_debug'(goal(':'(Alias, Pred), TPred), ExCtx), Ctx) :-
 	atom(Alias),
-	'$lgt_pp_module_alias_'(Module, Alias, Ctx),
+	'$lgt_pp_module_alias_'(Module, Alias, Ctx, _, _),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_compile_body'(':'(Module, Pred), Caller, TPred, _, Ctx).

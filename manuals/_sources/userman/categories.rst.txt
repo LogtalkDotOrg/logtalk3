@@ -545,6 +545,10 @@ The following category properties are supported:
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
    ``line_count(Line)`` with ``Line`` being the begin line of the
    first multifile predicate clause)
+``alias(Entity, Properties)``
+   List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the category
+   (the properties include ``for(Original)``, and ``line_count(Line)`` with ``Line``
+   being the begin line of the ``uses/1`` or ``use_module/1`` directive)
 ``alias(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the category
    (the properties include ``for(Original)``, ``from(Entity)``,

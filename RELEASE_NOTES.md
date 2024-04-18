@@ -25,6 +25,12 @@ RELEASE NOTES
 3.78.0 - May ??, 2024
 =====================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Object and category `alias/2` property for object and module aliases
+declared using the `uses/1` and `use_module/1` directives.
+
 Documentation
 -------------
 
