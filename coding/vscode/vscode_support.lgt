@@ -59,24 +59,10 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
 		date is 2024-04-18,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
-	]).
-
-	:- public(entity/3).
-	:- mode(entity(+atom, +integer, -entity_identifier), zero_or_one).
-	:- info(entity/3, [
-		comment is 'Find the entity (object or category) defined in the given file at the given line.',
-		argnames is ['File', 'Line', 'Entity']
-	]).
-
-	:- public(find_declaration/5).
-	:- mode(find_declaration(@callable, +atom, +integer, -atom, -integer), zero_or_one).
-	:- info(find_declaration/5, [
-		comment is 'Find the called predicate declaration file and line.',
-		argnames is ['Call', 'CallFile', 'CallLine', 'DeclarationFile', 'DeclarationLine']
 	]).
 
 	:- public(find_declaration/4).
@@ -86,25 +72,11 @@
 		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
 	]).
 
-	:- public(find_definition/5).
-	:- mode(find_definition(@callable, +atom, +integer, -atom, -integer), zero_or_one).
-	:- info(find_definition/5, [
-		comment is 'Find the called predicate definition file and line.',
-		argnames is ['Call', 'CallFile', 'CallLine', 'DefinitionFile', 'DefinitionLine']
-	]).
-
 	:- public(find_definition/4).
 	:- mode(find_definition(+atom, @callable, +atom, +integer), one).
 	:- info(find_definition/4, [
 		comment is 'Find the called predicate definition file and line.',
 		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
-	]).
-
-	:- public(find_type_definition/3).
-	:- mode(find_type_definition(@entity_identifier, -atom, -integer), zero_or_one).
-	:- info(find_type_definition/3, [
-		comment is 'Find the referenced entity file and line.',
-		argnames is ['Entity', 'DefinitionFile', 'DefinitionLine']
 	]).
 
 	:- public(find_type_definition/2).
@@ -113,13 +85,6 @@
 		comment is 'Find the referenced entity file and line.',
 		argnames is ['Directory', 'Entity']
 	]).
-
-%	:- public(find_references/5).
-%	:- mode(find_references(@callable, +atom, +integer, -atom, -integer), zero_or_one).
-%	:- info(find_references/5, [
-%		comment is 'Find the called predicate references.',
-%		argnames is ['Call', 'CallFile', 'CallLine', 'References']
-%	]).
 
 	:- public(find_references/4).
 	:- mode(find_references(+atom, @callable, +atom, +integer), one).
@@ -137,11 +102,8 @@
 
 	% declarations
 
-	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) :-
-		entity(CallFile, CallLine, CallerEntity),
-		find_declaration_(Call, CallerEntity, CallLine, DeclarationFile, DeclarationLine).
-
 	find_declaration(Directory, Call, CallFile0, CallLine) :-
+		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(CallFile0, CallFile)},
 		atom_concat(Directory, '/.declaration_done', Data),
 		open(Data, write, Stream),
@@ -150,6 +112,10 @@
 		;	true
 		),
 		close(Stream).
+
+	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) :-
+		entity(CallFile, CallLine, CallerEntity),
+		find_declaration_(Call, CallerEntity, CallLine, DeclarationFile, DeclarationLine).
 
 	find_declaration_(Alias::Name/Arity, Entity, _, File, Line) :-
 		callable(Alias),
@@ -234,11 +200,8 @@
 
 	% definitions
 
-	find_definition(Call, CallFile, CallLine, DefinitionFile, DefinitionLine) :-
-		entity(CallFile, CallLine, CallerEntity),
-		find_definition_(Call, CallerEntity, CallLine, DefinitionFile, DefinitionLine).
-
 	find_definition(Directory, Call, CallFile0, CallLine) :-
+		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(CallFile0, CallFile)},
 		atom_concat(Directory, '/.definition_done', Data),
 		open(Data, write, Stream),
@@ -247,6 +210,10 @@
 		;	true
 		),
 		close(Stream).
+
+	find_definition(Call, CallFile, CallLine, DefinitionFile, DefinitionLine) :-
+		entity(CallFile, CallLine, CallerEntity),
+		find_definition_(Call, CallerEntity, CallLine, DefinitionFile, DefinitionLine).
 
 	find_definition_(Alias::Name/Arity, Entity, _, File, Line) :-
 		callable(Alias),
@@ -393,11 +360,6 @@
 
 	% type definitions (entities)
 
-	find_type_definition(Name/Arity, DefinitionFile, DefinitionLine) :-
-		functor(Entity, Name, Arity),
-		entity_property(Entity, Type, file(DefinitionFile)),
-		entity_property(Entity, Type, lines(DefinitionLine, _)).
-
 	find_type_definition(Directory, Name/Arity) :-
 		atom_concat(Directory, '/.type_definition_done', Data),
 		open(Data, write, Stream),
@@ -407,9 +369,15 @@
 		),
 		close(Stream).
 
+	find_type_definition(Name/Arity, DefinitionFile, DefinitionLine) :-
+		functor(Entity, Name, Arity),
+		entity_property(Entity, Type, file(DefinitionFile)),
+		entity_property(Entity, Type, lines(DefinitionLine, _)).
+
 	% references
 
 	find_references(Directory, Call, CallFile0, CallLine) :-
+		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(CallFile0, CallFile)},
 		atom_concat(Directory, '/.references_done', Data),
 		open(Data, write, Stream),
@@ -465,6 +433,7 @@
 	% implementations
 
 	find_implementations(Directory, Kind, Resource, ReferenceFile0, ReferenceLine) :-
+		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(ReferenceFile0, ReferenceFile)},
 		atom_concat(Directory, '/.implementations_done', Data),
 		open(Data, write, Stream),
