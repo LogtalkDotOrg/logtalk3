@@ -59,7 +59,7 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:11:0,
+		version is 0:12:0,
 		author is 'Paulo Moura',
 		date is 2024-04-18,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
@@ -445,13 +445,19 @@
 		% predicate listed in a uses/2 directive
 		ground(Name/Arity),
 		(	entity_property(Entity, _, calls(Object::Name/Arity, _)) ->
-			OriginalName = Name
+			OriginalName = Name,
+			ExtArity = Arity
 		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-			memberchk(alias(Name/Arity), Properties)
+			memberchk(alias(Name/Arity), Properties) ->
+			ExtArity = Arity
+		;	ExtArity is Arity + 2,
+			entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
+			memberchk(non_terminal(Name//Arity), Properties),
+			OriginalName = Name
 		),
 		callable(Object),
 		!,
-		find_reference(Object::OriginalName/Arity, Entity, Reference).
+		find_reference(Object::OriginalName/ExtArity, Entity, Reference).
 
 	% implementations
 
