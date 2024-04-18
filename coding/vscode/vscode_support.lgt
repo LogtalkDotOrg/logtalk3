@@ -59,7 +59,7 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
 		date is 2024-04-18,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
@@ -141,7 +141,8 @@
 		entity(CallFile, CallLine, CallerEntity),
 		find_declaration_(Call, CallerEntity, CallLine, DeclarationFile, DeclarationLine).
 
-	find_declaration(Directory, Call, CallFile, CallLine) :-
+	find_declaration(Directory, Call, CallFile0, CallLine) :-
+		{'$lgt_expand_path'(CallFile0, CallFile)},
 		atom_concat(Directory, '/.declaration_done', Data),
 		open(Data, write, Stream),
 		(	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
@@ -237,7 +238,8 @@
 		entity(CallFile, CallLine, CallerEntity),
 		find_definition_(Call, CallerEntity, CallLine, DefinitionFile, DefinitionLine).
 
-	find_definition(Directory, Call, CallFile, CallLine) :-
+	find_definition(Directory, Call, CallFile0, CallLine) :-
+		{'$lgt_expand_path'(CallFile0, CallFile)},
 		atom_concat(Directory, '/.definition_done', Data),
 		open(Data, write, Stream),
 		(	find_definition(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
@@ -407,7 +409,8 @@
 
 	% references
 
-	find_references(Directory, Call, CallFile, CallLine) :-
+	find_references(Directory, Call, CallFile0, CallLine) :-
+		{'$lgt_expand_path'(CallFile0, CallFile)},
 		atom_concat(Directory, '/.references_done', Data),
 		open(Data, write, Stream),
 		(	find_references_(Call, CallFile, CallLine, References) ->
@@ -461,7 +464,8 @@
 
 	% implementations
 
-	find_implementations(Directory, Kind, Resource, ReferenceFile, ReferenceLine) :-
+	find_implementations(Directory, Kind, Resource, ReferenceFile0, ReferenceLine) :-
+		{'$lgt_expand_path'(ReferenceFile0, ReferenceFile)},
 		atom_concat(Directory, '/.implementations_done', Data),
 		open(Data, write, Stream),
 		(	find_implementations_(Kind, Resource, ReferenceFile, ReferenceLine, Implementations) ->
