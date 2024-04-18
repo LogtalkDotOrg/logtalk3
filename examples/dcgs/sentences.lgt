@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,8 +25,10 @@
 
 :- category(determiners).
 
-	:- private(determiner//0).	% private category non-terminals become private
-								% non-terminals of the objects importing the category
+	% private category non-terminals become private
+	% non-terminals of the objects importing the category
+	:- private(determiner//0).
+
 	determiner --> [the].
 	determiner --> [a].
 
@@ -63,8 +65,10 @@
 
 	sentence --> noun_phrase, verb_phrase.
 
-	noun_phrase --> ::determiner, ::noun.	% the ::/1 control construct is used to call grammar
-	noun_phrase --> ::noun.					% rules encapsulated on the imported categories
+	% the ::/1 control construct is used to call grammar
+	% rules encapsulated on the imported categories
+	noun_phrase --> ::determiner, ::noun.
+	noun_phrase --> ::noun.
 
 	verb_phrase --> ::verb.
 	verb_phrase --> ::verb, noun_phrase.
