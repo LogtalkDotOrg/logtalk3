@@ -59,7 +59,7 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:11:0,
 		author is 'Paulo Moura',
 		date is 2024-04-18,
 		comment is 'Reflection support for Visual Studio Code programatic features.'
@@ -427,23 +427,30 @@
 			References
 		).
 
-	find_reference(Object::Name/Arity, _, File-Line) :-
-		nonvar(Object),
+	find_reference(Alias::Name/Arity, Entity, File-Line) :-
+		callable(Alias),
 		ground(Name/Arity),
-		entity_property(Entity, Kind, file(File)),
-		entity_property(Entity, Kind, calls(Object::Name/Arity, Properties)),
+		(	entity_property(Entity, _, alias(Alias, Properties)),
+			member(for(Object), Properties) ->
+			true
+		;	Object = Alias
+		),
+		entity_property(Other, Kind, calls(Object::Name/Arity, Properties)),
+		Other \= Entity,
+		entity_property(Other, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 
-	find_reference(Name/Arity, This, Reference) :-
+	find_reference(Name/Arity, Entity, Reference) :-
 		% predicate listed in a uses/2 directive
 		ground(Name/Arity),
-		(	entity_property(This, _, calls(Object::Name/Arity, _)) ->
+		(	entity_property(Entity, _, calls(Object::Name/Arity, _)) ->
 			OriginalName = Name
-		;	entity_property(This, _, calls(Object::OriginalName/Arity, Properties)),
+		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
 			memberchk(alias(Name/Arity), Properties)
 		),
+		callable(Object),
 		!,
-		find_reference(Object::OriginalName/Arity, This, Reference).
+		find_reference(Object::OriginalName/Arity, Entity, Reference).
 
 	% implementations
 
