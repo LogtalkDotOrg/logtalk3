@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,8 +29,8 @@
 	specializes(object)).
 
 	:- info([
-		version is 1:0:0,
-		date is 2016-05-25,
+		version is 1:0:1,
+		date is 2024-04-18,
 		author is 'Paulo Moura',
 		comment is 'Two-dimensional block (or should I say square?) class.'
 	]).
@@ -65,20 +65,14 @@
 		::assertz(position_(X, Y)).
 
 	default_init_option(position-(0, 0)).
-	default_init_option(Default) :-
-		^^default_init_option(Default).
 
 	process_init_option(position-(X, Y)) :-
 		::assertz(position_(X, Y)).
-	process_init_option(Option) :-
-		^^process_init_option(Option).
 
 	valid_init_option(position-(X, Y)) :-
 		!,
 		integer(X),
 		integer(Y).
-	valid_init_option(Option) :-
-		^^valid_init_option(Option).
 
 	instance_base_name(b).
 
@@ -203,8 +197,8 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1:0:0,
-		date is 2016-05-25,
+		version is 1:0:1,
+		date is 2024-04-18,
 		author is 'Paulo Moura',
 		comment is 'Block stack monitor. Prints an ASCII representation of all block stacks when a block is moved.'
 	]).
@@ -217,21 +211,21 @@
 	after(_, move(_, _), _) :-
 		% find the position of all blocks
 		findall(
-			(Block, X, Y),
+			b(Block, X, Y),
 			(instantiates_class(Block, block), Block::position(X, Y)),
 			Blocks
 		),
 		% find the larger X coordinate
-		setof(X, Block^Y^ member((Block,X,Y), Blocks), Xs),
+		setof(X, Block^Y^ member(b(Block,X,Y), Blocks), Xs),
 		last(Xs, Xmax),
 		% find the larger Y coordinate
-		setof(Y, Block^X^ member((Block,X,Y), Blocks), Ys),
+		setof(Y, Block^X^ member(b(Block,X,Y), Blocks), Ys),
 		last(Ys, Ymax),
 		% draw a representation of the position of all the blocks
 		fordownto(Y, Ymax, 1,
 			(	write('|'),
 				forto(X, 1, Xmax,
-					(member((Block, X, Y), Blocks) -> write(Block); write('.'))
+					(member(b(Block, X, Y), Blocks) -> write(Block); write('.'))
 				),
 				nl
 			)

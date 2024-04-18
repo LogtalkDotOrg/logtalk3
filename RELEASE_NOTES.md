@@ -46,6 +46,8 @@ Tools
 Examples
 --------
 
+* FIXED: Spurious choice-points in the `blocks` and `bricks` examples.
+
 * FIXED: The SICStus Prolog specific `constraints/sicstus` example to not
 depend on the default `double_quotes` flag value.
 

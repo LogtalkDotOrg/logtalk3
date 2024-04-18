@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,8 +29,8 @@
 	specializes(object)).
 
 	:- info([
-		version is 1:1:0,
-		date is 2000-10-31,
+		version is 1:1:1,
+		date is 2024-04-18,
 		author is 'Paulo Moura',
 		comment is 'Two-dimensional brick (or should I say square?) class.'
 	]).
@@ -146,8 +146,8 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1:2:0,
-		date is 2010-03-28,
+		version is 1:2:1,
+		date is 2024-04-18,
 		author is 'Paulo Moura',
 		comment is 'Monitor for brick movements printing an ASCII representation of each brick position.'
 	]).
@@ -159,17 +159,17 @@
 
 	after(_, move(_, _), _) :-
 		findall(
-			(Brick, X, Y),
+			b(Brick, X, Y),
 			(instantiates_class(Brick, brick), Brick::position(X, Y)),
 			Bricks),
-		setof(X, Brick^Y^ member((Brick,X,Y), Bricks), Xs),
+		setof(X, Brick^Y^ member(b(Brick,X,Y), Bricks), Xs),
 		last(Xs, Xmax),
-		setof(Y, Brick^X^ member((Brick,X,Y), Bricks), Ys),
+		setof(Y, Brick^X^ member(b(Brick,X,Y), Bricks), Ys),
 		last(Ys, Ymax),
 		fordownto(Y, Ymax, 1,
 			(	write('|'),
 				forto(X, 1, Xmax,
-					(member((Brick, X, Y), Bricks) -> write(Brick); write('.'))
+					(member(b(Brick, X, Y), Bricks) -> write(Brick); write('.'))
 				),
 				nl
 			)
