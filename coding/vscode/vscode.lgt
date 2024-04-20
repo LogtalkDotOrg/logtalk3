@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-20,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -450,6 +450,19 @@
 		callable(Object),
 		!,
 		find_reference(Object::OriginalName/ExtArity, Entity, Reference).
+
+	find_reference(Name/Arity, Entity, File-Line) :-
+		% local predicate
+		ground(Name/Arity),
+		entity_property(Entity, Kind, file(File)),
+		(	entity_property(Entity, Kind, calls(Name/Arity, _)) ->
+			ExtArity = Arity
+		;	ExtArity is Arity + 2,
+			entity_property(Entity, Kind, defines(Name/ExtArity, DefinesProperties)),
+			memberchk(non_terminal(Name//Arity), DefinesProperties)
+		),
+		entity_property(Entity, Kind, calls(Name/ExtArity, CallsProperties)),
+		memberchk(line_count(Line), CallsProperties).
 
 	% implementations
 
