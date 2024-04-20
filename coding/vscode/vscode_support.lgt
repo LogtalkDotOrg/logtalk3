@@ -59,10 +59,33 @@
 :- object(vscode_reflection).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:15:0,
 		author is 'Paulo Moura',
-		date is 2024-04-18,
-		comment is 'Reflection support for Visual Studio Code programatic features.'
+		date is 2024-04-20,
+		comment is 'Support for Visual Studio Code programatic features.'
+	]).
+
+	:- set_logtalk_flag(unknown_entities, silent).
+
+	:- public(load/2).
+	:- mode(load(+atom, +atom), one).
+	:- info(load/2, [
+		comment is 'Loads a file from a directory.',
+		argnames is ['Directory', 'File']
+	]).
+
+	:- public(documentation/2).
+	:- mode(documentation(+atom, +atom), one).
+	:- info(documentation/2, [
+		comment is 'Generates documentation given a loader file and a marker directory.',
+		argnames is ['Directory', 'File']
+	]).
+
+	:- public(diagrams/3).
+	:- mode(diagrams(+atom, +atom, +atom), one).
+	:- info(diagrams/3, [
+		comment is 'Generates diagrams given a loader file and a marker directory.',
+		argnames is ['Project', 'Directory', 'File']
 	]).
 
 	:- public(find_declaration/4).
@@ -99,6 +122,40 @@
 		comment is 'Find predicate implementations predicate.',
 		argnames is ['Directory', 'Kind', 'Resource', 'CallFile', 'CallLine']
 	]).
+
+	% loading
+
+	load(Directory, File) :-
+		atom_concat(Directory, '/.loading_done', Marker),
+		ignore(logtalk_load(File)),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	% documentation
+
+	documentation(Directory, File) :-
+		atom_concat(Directory, '/.xml_files_done', Marker),
+		atom_concat(Directory, '/xml_docs', XMLDocs),
+		ignore((
+			logtalk_load(lgtdoc(loader)),
+			logtalk_load(File),
+			lgtdoc::directory(Directory, [xml_docs_directory(XMLDocs)])
+		)),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	% diagrams
+
+	diagrams(Project, Directory, File) :-
+		atom_concat(Directory, '/.dot_files_done', Marker),
+		atom_concat(Directory, '/dot_dias', DotDias),
+		ignore((
+			logtalk_load(diagrams(loader)),
+			logtalk_load(File),
+			diagrams::directory(Project, Directory, [output_directory(DotDias)])
+		)),
+		open(Marker, append, Stream),
+		close(Stream).
 
 	% declarations
 
