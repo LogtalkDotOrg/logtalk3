@@ -20,47 +20,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(vscode_message_streamer).
+:- object(vscode).
 
 	:- info([
-		version is 0:1:0,
-		author is 'Jacob Friedman',
-		date is 2021-08-28,
-		comment is 'Rewrite compiler error and warnings messages for parsing with Visual Studio Code.'
-	]).
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-
-	% allow default processing of the messages
-	logtalk::message_hook(_Message, error, core, Tokens) :-
-		message_hook(Tokens, error),
-		fail.
-	logtalk::message_hook(_Message, error(Class), core, Tokens) :-
-		message_hook(Tokens, error(Class)),
-		fail.
-	logtalk::message_hook(_Message, warning, core, Tokens) :-
-		message_hook(Tokens, warning),
-		fail.
-	logtalk::message_hook(_Message, warning(Class), core, Tokens) :-
-		message_hook(Tokens, warning(Class)),
-		fail.
-
-	message_hook(Tokens, Kind) :-
-		logtalk::expand_library_path(logtalk_user('scratch/.messages'), File),
-		open(File, append, Stream),
-		logtalk::message_prefix_stream(Kind, core, Prefix, user_error),
-		logtalk::print_message_tokens(Stream, Prefix, Tokens),
-		close(Stream).
-
-:- end_category.
-
-
-:- object(vscode_reflection).
-
-	:- info([
-		version is 0:15:0,
-		author is 'Paulo Moura',
+		version is 0:16:0,
+		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-20,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
@@ -595,5 +559,31 @@
 		!.
 	memberchk(Element, [_| List]) :-
 		memberchk(Element, List).
+
+	% rewrite compiler error and warnings messages for parsing with Visual Studio Code
+
+	:- multifile(logtalk::message_hook/4).
+	:- dynamic(logtalk::message_hook/4).
+
+	% fail after processing to allow default processing of the messages
+	logtalk::message_hook(_Message, error, core, Tokens) :-
+		message_hook(Tokens, error),
+		fail.
+	logtalk::message_hook(_Message, error(Class), core, Tokens) :-
+		message_hook(Tokens, error(Class)),
+		fail.
+	logtalk::message_hook(_Message, warning, core, Tokens) :-
+		message_hook(Tokens, warning),
+		fail.
+	logtalk::message_hook(_Message, warning(Class), core, Tokens) :-
+		message_hook(Tokens, warning(Class)),
+		fail.
+
+	message_hook(Tokens, Kind) :-
+		logtalk::expand_library_path(logtalk_user('scratch/.messages'), File),
+		open(File, append, Stream),
+		logtalk::message_prefix_stream(Kind, core, Prefix, user_error),
+		logtalk::print_message_tokens(Stream, Prefix, Tokens),
+		close(Stream).
 
 :- end_object.
