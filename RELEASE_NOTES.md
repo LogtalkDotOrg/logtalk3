@@ -41,6 +41,8 @@ Documentation
 Tools
 -----
 
+* FIXED: Dependency on non-standard predicate in the `dead_code_scanner` tool.
+
 * FIXED: Harmless Texinfo warning when using the `help::man/1` predicate.
 
 Examples

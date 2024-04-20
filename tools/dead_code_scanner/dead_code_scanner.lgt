@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:14:1,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2024-03-28,
+		date is 2024-04-20,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -150,7 +150,9 @@
 	]).
 
 	:- uses(os, [
-		date_time/7, decompose_file_name/3, decompose_file_name/4, directory_exists/1, internal_os_path/2
+		date_time/7,
+		decompose_file_name/3, decompose_file_name/4,
+		absolute_file_name/2, directory_exists/1, internal_os_path/2
 	]).
 
 	:- uses(type, [
