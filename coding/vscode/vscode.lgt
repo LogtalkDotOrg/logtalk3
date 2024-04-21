@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:19:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-04-20,
+		date is 2024-04-22,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -85,6 +85,13 @@
 	:- info(find_implementations/5, [
 		comment is 'Find predicate implementations predicate.',
 		argnames is ['Directory', 'Kind', 'Resource', 'CallFile', 'CallLine']
+	]).
+
+	:- public(find_symbols/2).
+	:- mode(find_symbols(+atom, +atom), one).
+	:- info(find_symbols/2, [
+		comment is 'Find document symbols.',
+		argnames is ['Directory', 'File']
 	]).
 
 	% loading
@@ -557,6 +564,29 @@
 		),
 		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, lines(Line, _)).
+
+	% symbols
+
+	find_symbols(Directory, File0) :-
+		% workaround path downcasing on Windows
+		{'$lgt_expand_path'(File0, File)},
+		atom_concat(Directory, '/.symbols_done', Data),
+		open(Data, write, Stream),
+		forall(
+			find_symbol(File, Symbol, Kind, Line),
+			{format(Stream, 'Symbol:~w;Kind:~d;Line:~d~n', [Symbol, Kind, Line])}
+		),
+		close(Stream).
+
+	find_symbol(File, Object, 18, Line) :-
+		logtalk::loaded_file_property(File, object(Object)),
+		object_property(Object, lines(Line, _)).
+	find_symbol(File, Protocol, 10, Line) :-
+		logtalk::loaded_file_property(File, protocol(Protocol)),
+		protocol_property(Protocol, lines(Line, _)).
+	find_symbol(File, Category, 3, Line) :-
+		logtalk::loaded_file_property(File, category(Category)),
+		category_property(Category, lines(Line, _)).
 
 	% auxiliary predicates
 
