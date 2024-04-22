@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:19:0,
+		version is 0:20:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-22,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -87,11 +87,11 @@
 		argnames is ['Directory', 'Kind', 'Resource', 'CallFile', 'CallLine']
 	]).
 
-	:- public(find_symbols/2).
-	:- mode(find_symbols(+atom, +atom), one).
-	:- info(find_symbols/2, [
-		comment is 'Find document symbols.',
-		argnames is ['Directory', 'File']
+	:- public(find_symbols/1).
+	:- mode(find_symbols(+atom), one).
+	:- info(find_symbols/1, [
+		comment is 'Find workspace symbols.',
+		argnames is ['Directory']
 	]).
 
 	% loading
@@ -567,26 +567,46 @@
 
 	% symbols
 
-	find_symbols(Directory, File0) :-
-		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(File0, File)},
+	find_symbols(Directory) :-
 		atom_concat(Directory, '/.symbols_done', Data),
 		open(Data, write, Stream),
 		forall(
-			find_symbol(File, Symbol, Kind, Line),
-			{format(Stream, 'Symbol:~w;Kind:~d;Line:~d~n', [Symbol, Kind, Line])}
+			find_symbol(Directory, File, Symbol, Kind, Line),
+			{format(Stream, 'Symbol:~w;Kind:~d;Line:~d;File:~w~n', [Symbol, Kind, Line, File])}
 		),
 		close(Stream).
 
+	find_symbol(Directory, File, Symbol, Kind, Line) :-
+		logtalk::loaded_file(File),
+		sub_atom(File, 0, _, _, Directory),
+		find_symbol(File, Symbol, Kind, Line).
+
+	% entities
 	find_symbol(File, Object, 18, Line) :-
 		logtalk::loaded_file_property(File, object(Object)),
 		object_property(Object, lines(Line, _)).
 	find_symbol(File, Protocol, 10, Line) :-
 		logtalk::loaded_file_property(File, protocol(Protocol)),
 		protocol_property(Protocol, lines(Line, _)).
-	find_symbol(File, Category, 3, Line) :-
+	find_symbol(File, Category, 22, Line) :-
 		logtalk::loaded_file_property(File, category(Category)),
 		category_property(Category, lines(Line, _)).
+	% predicates and non-terminals
+	find_symbol(File, Resource, Kind, Line) :-
+		(	logtalk::loaded_file_property(File, object(Object)),
+			object_property(Object, declares(Predicate, Properties))
+		;	logtalk::loaded_file_property(File, protocol(Protocol)),
+			protocol_property(Protocol, declares(Predicate, Properties))
+		;	logtalk::loaded_file_property(File, category(Category)),
+			category_property(Category, declares(Predicate, Properties))
+		),
+		memberchk(line_count(Line), Properties),
+		(	member(non_terminal(NonTerminal), Properties) ->
+			Resource = NonTerminal,
+			Kind = 7
+		;	Resource = Predicate,
+			Kind = 11
+		).
 
 	% auxiliary predicates
 
