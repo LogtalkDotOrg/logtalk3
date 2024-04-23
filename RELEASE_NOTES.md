@@ -29,7 +29,8 @@ Logtalk compiler and runtime
 ----------------------------
 
 * ADDED: Object and category `alias/2` property for object and module aliases
-declared using the `uses/1` and `use_module/1` directives.
+declared using the `uses/1` and `use_module/1` directives. Also added the alias
+properties `object`, `module`, and `predicate`.
 
 Documentation
 -------------

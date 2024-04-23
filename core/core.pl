@@ -856,8 +856,8 @@ object_property(Obj, Prop) :-
 	'$lgt_entity_property_includes'(Obj, Predicate, From, Properties).
 '$lgt_object_property'(provides(Predicate, To, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_provides'(Obj, Predicate, To, Properties).
-'$lgt_object_property'(alias(Alias, Properties), Obj, _, _, _, _, Rnm, Flags) :-
-	'$lgt_entity_property_alias'(Obj, Rnm, Flags, Alias, Properties).
+'$lgt_object_property'(alias(Alias, Properties), Obj, _, _, _, _, _, _) :-
+	'$lgt_entity_property_alias'(Obj, Alias, Properties).
 '$lgt_object_property'(calls(Predicate, Properties), Obj, _, _, _, _, _, _) :-
 	'$lgt_entity_property_calls'(Obj, Predicate, Properties).
 '$lgt_object_property'(updates(Predicate, Properties), Obj, _, _, _, _, _, _) :-
@@ -975,8 +975,8 @@ category_property(Ctg, Prop) :-
 	'$lgt_entity_property_calls'(Ctg, Predicate, Properties).
 '$lgt_category_property'(updates(Predicate, Properties), Ctg, _, _, _, _) :-
 	'$lgt_entity_property_updates'(Ctg, Predicate, Properties).
-'$lgt_category_property'(alias(Alias, Properties), Ctg, _, _, Rnm, Flags) :-
-	'$lgt_entity_property_alias'(Ctg, Rnm, Flags, Alias, Properties).
+'$lgt_category_property'(alias(Alias, Properties), Ctg, _, _, _, _) :-
+	'$lgt_entity_property_alias'(Ctg, Alias, Properties).
 '$lgt_category_property'(number_of_clauses(Total), Ctg, _, _, _, _) :-
 	(	'$lgt_entity_property_'(Ctg, number_of_clauses(Total, _)) ->
 		true
@@ -1071,8 +1071,8 @@ protocol_property(Ptc, Prop) :-
 	'$lgt_protocol_property_resources'(Ptc, Dcl, Flags, p, Resources).
 '$lgt_protocol_property'(declares(Predicate, Properties), Ptc, Dcl, _, _) :-
 	'$lgt_protocol_property_declares'(Ptc, Dcl, Predicate, Properties).
-'$lgt_protocol_property'(alias(Alias, Properties), Ptc, _, Rnm, Flags) :-
-	'$lgt_entity_property_alias'(Ptc, Rnm, Flags, Alias, Properties).
+'$lgt_protocol_property'(alias(Alias, Properties), Ptc, _, _, _) :-
+	'$lgt_entity_property_alias'(Ptc, Alias, Properties).
 
 
 '$lgt_protocol_property_resources'(Ptc, Dcl, Flags, Scope, Resources) :-
@@ -1231,37 +1231,30 @@ protocol_property(Ptc, Prop) :-
 	Properties = [number_of_clauses(Clauses), number_of_rules(Rules)| LocationProperties].
 
 
-'$lgt_entity_property_alias'(Entity, _, Flags, Alias, Properties) :-
-	'$lgt_entity_property_'(Entity, alias(Original, Alias, Location)),
-	(	Flags /\ 8 =:= 8 ->
-		% entity compiled with the source_data flag turned on
-		(	Location = File-Line ->
-			Properties = [for(Original), include(File), line_count(Line)]
-		;	Properties = [for(Original), line_count(Location)]
-		)
-	;	% entity compiled with the source_data flag turned off
-		Properties = [for(Original)]
+'$lgt_entity_property_alias'(Entity, Alias, Properties) :-
+	'$lgt_entity_property_'(Entity, object_alias(Original, Alias, Location)),
+	(	Location = File-Line ->
+		Properties = [object, for(Original), include(File), line_count(Line)]
+	;	Properties = [object, for(Original), line_count(Location)]
 	).
 
-'$lgt_entity_property_alias'(Entity, Rnm, Flags, AliasFunctor/Arity, Properties) :-
-	'$lgt_entity_property_'(Entity, alias(From, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)),
-	(	Flags /\ 8 =:= 8 ->
-		% entity compiled with the source_data flag turned on
-		(	Location = File-Line ->
-			LocationProperties = [include(File), line_count(Line)]
-		;	LocationProperties = [line_count(Location)]
-		),
-		(	NonTerminalFlag =:= 1 ->
-			Arity2 is Arity - 2,
-			Properties = [non_terminal(AliasFunctor//Arity2), for(OriginalFunctor/Arity), from(From)| LocationProperties]
-		;	Properties = [for(OriginalFunctor/Arity), from(From)| LocationProperties]
-		)
-	;	% entity compiled with the source_data flag turned off
-		call(Rnm, From, Original, Alias),
-		nonvar(From),
-		functor(Original, OriginalFunctor, Arity),
-		functor(Alias, AliasFunctor, Arity),
-		Properties = [for(OriginalFunctor/Arity), from(From)]
+'$lgt_entity_property_alias'(Entity, Alias, Properties) :-
+	'$lgt_entity_property_'(Entity, module_alias(Original, Alias, Location)),
+	(	Location = File-Line ->
+		Properties = [module, for(Original), include(File), line_count(Line)]
+	;	Properties = [module, for(Original), line_count(Location)]
+	).
+
+'$lgt_entity_property_alias'(Entity, AliasFunctor/Arity, Properties) :-
+	'$lgt_entity_property_'(Entity, predicate_alias(From, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)),
+	(	Location = File-Line ->
+		LocationProperties = [include(File), line_count(Line)]
+	;	LocationProperties = [line_count(Location)]
+	),
+	(	NonTerminalFlag =:= 1 ->
+		Arity2 is Arity - 2,
+		Properties = [predicate, for(OriginalFunctor/Arity), from(From), non_terminal(AliasFunctor//Arity2)| LocationProperties]
+	;	Properties = [predicate, for(OriginalFunctor/Arity), from(From)| LocationProperties]
 	).
 
 
@@ -3769,7 +3762,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Alias \= Original,
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	'$lgt_entity_property_'(Entity, alias(_, OriginalFunctor/Arity, AliasFunctor/Arity, _, Line)).
+	'$lgt_entity_property_'(Entity, predicate_alias(_, OriginalFunctor/Arity, AliasFunctor/Arity, _, Line)).
 '$lgt_predicate_property_user'(logtalk, _, _, _, _, _, _, _, _, _, _).
 '$lgt_predicate_property_user'(scope(Scope), _, _, _, Scope, _, _, _, _, _, _).
 '$lgt_predicate_property_user'((public), _, _, _, (public), _, _, _, _, _, _).
@@ -7852,13 +7845,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
 	'$lgt_pp_object_alias_'(Original, Alias, _, File, Line-_),
 	'$lgt_property_location'(MainFile, File, Line, Location),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(Original, Alias, Location)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, object_alias(Original, Alias, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
 	'$lgt_pp_module_alias_'(Original, Alias, _, File, Line-_),
 	'$lgt_property_location'(MainFile, File, Line, Location),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(Original, Alias, Location)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, module_alias(Original, Alias, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
@@ -7866,7 +7859,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_property_location'(MainFile, File, Line, Location),
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, alias(For, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, predicate_alias(For, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, _, _).

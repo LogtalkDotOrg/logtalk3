@@ -546,14 +546,14 @@ The following category properties are supported:
    ``line_count(Line)`` with ``Line`` being the begin line of the
    first multifile predicate clause)
 ``alias(Entity, Properties)``
-   List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the category
-   (the properties include ``for(Original)``, and ``line_count(Line)`` with ``Line``
-   being the begin line of the ``uses/1`` or ``use_module/1`` directive)
+   List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the object
+   (the properties include ``object`` in case of an object alias, ``module`` in case of a module alias,
+   ``for(Original)``, and ``line_count(Line)`` with ``Line`` being the begin line of the ``uses/1`` or
+   ``use_module/1`` directive)
 ``alias(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the category
-   (the properties include ``for(Original)``, ``from(Entity)``,
-   ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
-   being the begin line of the alias directive)
+   (the properties include ``predicate``, ``for(Original)``, ``from(Entity)``, ``non_terminal(NonTerminal)``,
+   and ``line_count(Line)`` with ``Line`` being the begin line of the alias directive)
 ``calls(Call, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for predicate calls made by the category (``Call``
    is either a predicate indicator or a control construct such as

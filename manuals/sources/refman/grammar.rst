@@ -1118,7 +1118,9 @@ Entity properties
       | entity_alias_property "," entity_alias_property_sequence
    
    entity_alias_property ::=
-      "for(" ( object_identifier | module_identifier ) ")"
+      "object"
+      | "module"
+      | "for(" ( object_identifier | module_identifier ) ")"
       | "include(" atom ")"
       | "line_count(" integer ")"
    
@@ -1130,7 +1132,8 @@ Entity properties
       | predicate_alias_property "," predicate_alias_property_sequence
    
    predicate_alias_property ::=
-      "for(" predicate_indicator ")"
+      "predicate"
+      | "for(" predicate_indicator ")"
       | "from(" entity_identifier ")"
       | "non_terminal(" non_terminal_indicator ")"
       | "include(" atom ")"

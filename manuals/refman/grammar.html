@@ -1157,7 +1157,9 @@ entity_alias_property_sequence <span class="o">::=</span>
    | entity_alias_property &quot;,&quot; entity_alias_property_sequence
 
 entity_alias_property <span class="o">::=</span>
-   &quot;for(&quot; ( object_identifier | module_identifier ) &quot;)&quot;
+   &quot;object&quot;
+   | &quot;module&quot;
+   | &quot;for(&quot; ( object_identifier | module_identifier ) &quot;)&quot;
    | &quot;include(&quot; atom &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
 
@@ -1169,7 +1171,8 @@ predicate_alias_property_sequence <span class="o">::=</span>
    | predicate_alias_property &quot;,&quot; predicate_alias_property_sequence
 
 predicate_alias_property <span class="o">::=</span>
-   &quot;for(&quot; predicate_indicator &quot;)&quot;
+   &quot;predicate&quot;
+   | &quot;for(&quot; predicate_indicator &quot;)&quot;
    | &quot;from(&quot; entity_identifier &quot;)&quot;
    | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;
    | &quot;include(&quot; atom &quot;)&quot;
