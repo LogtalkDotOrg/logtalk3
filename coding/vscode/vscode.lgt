@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:20:0,
+		version is 0:20:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-04-22,
+		date is 2024-04-23,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -175,17 +175,6 @@
 			find_declaration_(^^Name/ExtArity, Entity, CallerLine, File, Line)
 		).
 
-	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
-		% predicate listed in a uses/2 directive
-		ground(Name/Arity),
-		(	entity_property(Entity, _, calls(Object::Name/Arity, _)) ->
-			OriginalName = Name
-		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-			member(as(Name/Arity), Properties)
-		),
-		!,
-		find_declaration_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
-
 	find_declaration_(Name/Arity, Entity, _, File, Line) :-
 		% locally declared
 		ground(Name/Arity),
@@ -224,7 +213,20 @@
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, defines(Name/ExtArity, Properties)),
 		memberchk(non_terminal(Name//Arity), Properties),
+		!,
 		find_declaration_(Name/ExtArity, Entity, CallerLine, File, Line).
+
+	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
+		% predicate listed in a uses/2 directive
+		ground(Name/Arity),
+		(	entity_property(Entity, _, calls(Object::Name/Arity, Properties)) ->
+			OriginalName = Name
+		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
+			member(alias(Name/Arity), Properties)
+		),
+		callable(Object),
+		memberchk(caller(Name/Arity), Properties),
+		find_declaration_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
 
 	% definitions
 
@@ -358,17 +360,6 @@
 		find_definition_(^^Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
-		% predicate listed in a uses/2 directive
-		ground(Name/Arity),
-		(	entity_property(Entity, _, calls(Object::Name/Arity, _)) ->
-			OriginalName = Name
-		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-			memberchk(alias(Name/Arity), Properties)
-		),
-		!,
-		find_definition_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
-
-	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
 		% local predicate
 		ground(Name/Arity),
 		(	% definition
@@ -384,7 +375,20 @@
 			entity_property(Entity, _, calls(Name/ExtArity, CallsProperties)),
 			memberchk(line_count(CallerLine), CallsProperties),
 			find_definition_(Name/ExtArity, Entity, CallerLine, File, Line)
-		).
+		),
+		!.
+
+	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
+		% predicate listed in a uses/2 directive
+		ground(Name/Arity),
+		(	entity_property(Entity, _, calls(Object::Name/Arity, Properties)) ->
+			OriginalName = Name
+		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
+			memberchk(alias(Name/Arity), Properties)
+		),
+		callable(Object),
+		memberchk(caller(Name/Arity), Properties),
+		find_definition_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
 
 	% type definitions (entities)
 
