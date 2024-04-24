@@ -81,6 +81,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#redhat">RedHat</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-chocolatey">Windows - Chocolatey</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-installers">Windows - installers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows-powershell-add-ons">Windows - PowerShell add-ons</a></li>
 </ul>
 </li>
 </ul>
@@ -234,7 +235,8 @@ listed, see the dependency websites for installation instructions.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code>: <code class="docutils literal notranslate"><span class="pre">gh</span></code>, <code class="docutils literal notranslate"><span class="pre">glab</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>: Sphinx, <code class="docutils literal notranslate"><span class="pre">libxslt</span></code>, <code class="docutils literal notranslate"><span class="pre">fop</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>: Allure</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">packs</span></code>: <code class="docutils literal notranslate"><span class="pre">coreutils</span></code>, <code class="docutils literal notranslate"><span class="pre">libarchive</span></code>, <code class="docutils literal notranslate"><span class="pre">gnupg2</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">packs</span></code>: <code class="docutils literal notranslate"><span class="pre">coreutils</span></code>, <code class="docutils literal notranslate"><span class="pre">libarchive</span></code>, <code class="docutils literal notranslate"><span class="pre">gnupg2</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code>,
+<code class="docutils literal notranslate"><span class="pre">curl</span></code>, <code class="docutils literal notranslate"><span class="pre">direnv</span></code></p></li>
 </ul>
 </section>
 <section id="python-dependencies-all-operating-systems">
@@ -250,7 +252,7 @@ listed, see the dependency websites for installation instructions.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install graphviz
 <span class="err">$</span> sudo port install texinfo
 <span class="err">$</span> sudo port install libxslt fop
-<span class="err">$</span> sudo port install coreutils libarchive gnupg2 git
+<span class="err">$</span> sudo port install coreutils libarchive gnupg2 git curl direnv
 <span class="err">$</span> sudo port install gh glab
 </pre></div>
 </div>
@@ -261,7 +263,7 @@ listed, see the dependency websites for installation instructions.</p>
 <span class="err">$</span> brew install texinfo
 <span class="err">$</span> brew install libxslt fop
 <span class="err">$</span> brew install allure
-<span class="err">$</span> brew install coreutils libarchive gnupg2 git
+<span class="err">$</span> brew install coreutils libarchive gnupg2 git curl direnv
 <span class="err">$</span> brew install gh glab
 </pre></div>
 </div>
@@ -272,7 +274,7 @@ listed, see the dependency websites for installation instructions.</p>
 <span class="err">$</span> sudo apt install info
 <span class="err">$</span> sudo apt install xsltproc fop
 <span class="err">$</span> sudo apt<span class="o">-</span>add<span class="o">-</span>repository ppa<span class="o">:</span>qameta<span class="o">/</span>allure <span class="err">&amp;&amp;</span> sudo apt install allure
-<span class="err">$</span> sudo apt install libarchive<span class="o">-</span>tools gnupg2 git
+<span class="err">$</span> sudo apt install libarchive<span class="o">-</span>tools gnupg2 git curl direnv
 </pre></div>
 </div>
 </section>
@@ -280,7 +282,7 @@ listed, see the dependency websites for installation instructions.</p>
 <h3>RedHat<a class="headerlink" href="#redhat" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo dnf install graphviz
 <span class="err">$</span> sudo dnf install libxslt fop
-<span class="err">$</span> sudo dnf install bsdtar gnupg2 git
+<span class="err">$</span> sudo dnf install bsdtar gnupg2 git curl direnv
 </pre></div>
 </div>
 </section>
@@ -302,6 +304,12 @@ listed, see the dependency websites for installation instructions.</p>
 <div class="line"><a class="reference external" href="https://gitforwindows.org">https://gitforwindows.org</a></div>
 <div class="line"><a class="reference external" href="https://cli.github.com">https://cli.github.com</a></div>
 <div class="line"><a class="reference external" href="https://glab.readthedocs.io">https://glab.readthedocs.io</a></div>
+</div>
+</section>
+<section id="windows-powershell-add-ons">
+<h3>Windows - PowerShell add-ons<a class="headerlink" href="#windows-powershell-add-ons" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PS</span><span class="o">&gt;</span> <span class="nv">Install</span><span class="o">-</span><span class="nv">Module</span> <span class="o">-</span><span class="nv">Name</span> <span class="nv">Set</span><span class="o">-</span><span class="nv">PsEnv</span>
+</pre></div>
 </div>
 </section>
 </section>
