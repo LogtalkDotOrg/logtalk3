@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:21:0,
+		version is 0:22:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-04-23,
+		date is 2024-04-24,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -422,8 +422,15 @@
 		),
 		close(Stream).
 
+	find_references_(Name//Arity, File, Line, References) :-
+		% predicate scope directive
+		ground(Name/Arity),
+		ExtArity is Arity + 2,
+		find_references_(Name/ExtArity, File, Line, References).
+
 	find_references_(Name/Arity, File, Line, References) :-
 		% predicate scope directive
+		ground(Name/Arity),
 		entity(File, Line, Entity),
 		entity_property(Entity, _, declares(Name/Arity, Properties)),
 		memberchk(line_count(Line), Properties),
@@ -467,46 +474,79 @@
 			References2
 		).
 
-	find_references_(Call, CallFile, CallLine, References) :-
-		% predicate call
-		entity(CallFile, CallLine, CallerEntity),
+	find_references_(Name/Arity, File, CallerLine, References) :-
+		% predicate listed in a uses/2 directive
+		ground(Name/Arity),
+		entity(File, CallerLine, Caller),
+		(	entity_property(Caller, _, calls(Object::Name/Arity, _)) ->
+			OriginalName = Name,
+			ExtArity = Arity
+		;	entity_property(Caller, _, calls(Object::OriginalName/Arity, Properties)),
+			memberchk(alias(Name/Arity), Properties) ->
+			ExtArity = Arity
+		;	ExtArity is Arity + 2,
+			entity_property(Caller, _, calls(Object::Name/ExtArity, Properties)),
+			memberchk(non_terminal(Name//Arity), Properties),
+			OriginalName = Name
+		),
+		callable(Object),
+		!,
+		find_declaration_(Object::OriginalName/ExtArity, Caller, CallerLine, DeclarationFile, DeclarationLine),
+		find_references_(OriginalName/ExtArity, DeclarationFile, DeclarationLine, References).
+
+	find_references_(Name/Arity, File, CallerLine, References) :-
+		% local predicate call; no declaration
+		entity(File, CallerLine, Caller),
 		findall(
 			Reference,
-			find_reference(Call, CallerEntity, Reference),
+			find_local_reference(Name/Arity, Caller, Reference),
 			References
 		),
 		% require at least one reference other than the selected one
 		References = [_, _| _].
 
-	find_reference(Alias::Name/Arity, Entity, File-Line) :-
+	find_references_(Alias::Name/Arity, File, CallerLine, [DeclarationFile-DeclarationLine| References]) :-
+		!,
 		callable(Alias),
 		ground(Name/Arity),
-		(	entity_property(Entity, _, alias(Alias, Properties)),
+		entity(File, CallerLine, Caller),
+		(	entity_property(Caller, _, alias(Alias, Properties)),
 			member(for(Object), Properties) ->
 			true
 		;	Object = Alias
 		),
-		entity_property(Other, Kind, calls(Object0::Name/Arity, Properties)),
-		callable(Object0),
-		Object0 = Object,
-		entity_property(Other, Kind, file(File)),
-		memberchk(line_count(Line), Properties).
+		find_declaration_(Object::Name/Arity, Caller, CallerLine, DeclarationFile, DeclarationLine),
+		find_references_(Name/Arity, DeclarationFile, DeclarationLine, References).
 
-	find_reference(::Name/Arity, Entity, File-Line) :-
-		% find only local references
+	find_references_(::Name/Arity, File, CallerLine, [DeclarationFile-DeclarationLine| References]) :-
+		!,
 		ground(Name/Arity),
-		entity_property(Entity, Kind, file(File)),
-		entity_property(Entity, Kind, calls(::Name/Arity, CallsProperties)),
-		memberchk(line_count(Line), CallsProperties).
+		entity(File, CallerLine, Caller),
+		(	find_declaration_(::Name/Arity, Caller, CallerLine, DeclarationFile, DeclarationLine),
+			find_references_(Name/Arity, DeclarationFile, DeclarationLine, References) ->
+			true
+		;	ExtArity is Arity + 2,
+			entity_property(Caller, _, calls(::Name/ExtArity, Properties)),
+			memberchk(line_count(CallerLine), Properties),
+			find_declaration_(::Name/ExtArity, Caller, CallerLine, DeclarationFile, DeclarationLine),
+			find_references_(Name/ExtArity, DeclarationFile, DeclarationLine, References)
+		).
 
-	find_reference(^^Name/Arity, Entity, File-Line) :-
-		% find only local references
+	find_references_(^^Name/Arity, File, CallerLine, [DeclarationFile-DeclarationLine| References]) :-
+		!,
 		ground(Name/Arity),
-		entity_property(Entity, Kind, file(File)),
-		entity_property(Entity, Kind, calls(^^Name/Arity, CallsProperties)),
-		memberchk(line_count(Line), CallsProperties).
+		entity(File, CallerLine, Caller),
+		(	find_declaration_(^^Name/Arity, Caller, CallerLine, DeclarationFile, DeclarationLine),
+			find_references_(Name/Arity, DeclarationFile, DeclarationLine, References) ->
+			true
+		;	ExtArity is Arity + 2,
+			entity_property(Caller, _, calls(^^Name/ExtArity, Properties)),
+			memberchk(line_count(CallerLine), Properties),
+			find_declaration_(^^Name/ExtArity, Caller, CallerLine, DeclarationFile, DeclarationLine),
+			find_references_(Name/ExtArity, DeclarationFile, DeclarationLine, References)
+		).
 
-	find_reference(Name/Arity, Entity, File-Line) :-
+	find_local_reference(Name/Arity, Entity, File-Line) :-
 		% local predicate
 		ground(Name/Arity),
 		entity_property(Entity, Kind, file(File)),
@@ -518,23 +558,6 @@
 		),
 		entity_property(Entity, Kind, calls(Name/ExtArity, CallsProperties)),
 		memberchk(line_count(Line), CallsProperties).
-
-	find_reference(Name/Arity, Entity, Reference) :-
-		% predicate listed in a uses/2 directive
-		ground(Name/Arity),
-		(	entity_property(Entity, _, calls(Object::Name/Arity, _)) ->
-			OriginalName = Name,
-			ExtArity = Arity
-		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-			memberchk(alias(Name/Arity), Properties) ->
-			ExtArity = Arity
-		;	ExtArity is Arity + 2,
-			entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
-			memberchk(non_terminal(Name//Arity), Properties),
-			OriginalName = Name
-		),
-		callable(Object),
-		find_reference(Object::OriginalName/ExtArity, Entity, Reference).
 
 	% implementations
 
