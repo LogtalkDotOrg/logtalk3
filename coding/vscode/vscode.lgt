@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:22:0,
+		version is 0:23:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-24,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -87,17 +87,10 @@
 		argnames is ['Directory', 'Kind', 'Resource', 'CallFile', 'CallLine']
 	]).
 
-	:- public(find_symbols/1).
-	:- mode(find_symbols(+atom), one).
-	:- info(find_symbols/1, [
-		comment is 'Find workspace symbols.',
-		argnames is ['Directory']
-	]).
-
 	% loading
 
 	load(Directory, File) :-
-		atom_concat(Directory, '/.loading_done', Marker),
+		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		ignore(logtalk_load(File)),
 		open(Marker, append, Stream),
 		close(Stream).
@@ -105,7 +98,7 @@
 	% documentation
 
 	documentation(Directory, File) :-
-		atom_concat(Directory, '/.xml_files_done', Marker),
+		atom_concat(Directory, '/.vscode_xml_files_done', Marker),
 		atom_concat(Directory, '/xml_docs', XMLDocs),
 		ignore((
 			logtalk_load(lgtdoc(loader)),
@@ -118,7 +111,7 @@
 	% diagrams
 
 	diagrams(Project, Directory, File) :-
-		atom_concat(Directory, '/.dot_files_done', Marker),
+		atom_concat(Directory, '/.vscode_dot_files_done', Marker),
 		atom_concat(Directory, '/dot_dias', DotDias),
 		ignore((
 			logtalk_load(diagrams(loader)),
@@ -133,13 +126,16 @@
 	find_declaration(Directory, Call, CallFile0, CallLine) :-
 		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(CallFile0, CallFile)},
-		atom_concat(Directory, '/.declaration_done', Data),
-		open(Data, write, Stream),
+		atom_concat(Directory, '/.vscode_declaration', Data),
+		atom_concat(Directory, '/.vscode_declaration_done', Marker),
+		open(Data, write, DataStream),
 		(	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
-			{format(Stream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
+			{format(DataStream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
 		;	true
 		),
-		close(Stream).
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
 
 	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) :-
 		entity(CallFile, CallLine, CallerEntity),
@@ -233,13 +229,16 @@
 	find_definition(Directory, Call, CallFile0, CallLine) :-
 		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(CallFile0, CallFile)},
-		atom_concat(Directory, '/.definition_done', Data),
-		open(Data, write, Stream),
+		atom_concat(Directory, '/.vscode_definition', Data),
+		atom_concat(Directory, '/.vscode_definition_done', Marker),
+		open(Data, write, DataStream),
 		(	find_definition(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
-			{format(Stream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
+			{format(DataStream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
 		;	true
 		),
-		close(Stream).
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
 
 	find_definition(Call, CallFile, CallLine, DefinitionFile, DefinitionLine) :-
 		entity(CallFile, CallLine, CallerEntity),
@@ -393,13 +392,16 @@
 	% type definitions (entities)
 
 	find_type_definition(Directory, Name/Arity) :-
-		atom_concat(Directory, '/.type_definition_done', Data),
-		open(Data, write, Stream),
+		atom_concat(Directory, '/.vscode_type_definition', Data),
+		atom_concat(Directory, '/.vscode_type_definition_done', Marker),
+		open(Data, write, DataStream),
 		(	find_type_definition(Name/Arity, File, Line) ->
-			{format(Stream, 'File:~w;Line:~d~n', [File, Line])}
+			{format(DataStream, 'File:~w;Line:~d~n', [File, Line])}
 		;	true
 		),
-		close(Stream).
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
 
 	find_type_definition(Name/Arity, DefinitionFile, DefinitionLine) :-
 		functor(Entity, Name, Arity),
@@ -411,16 +413,19 @@
 	find_references(Directory, Call, CallFile0, CallLine) :-
 		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(CallFile0, CallFile)},
-		atom_concat(Directory, '/.references_done', Data),
-		open(Data, write, Stream),
+		atom_concat(Directory, '/.vscode_references', Data),
+		atom_concat(Directory, '/.vscode_references_done', Marker),
+		open(Data, write, DataStream),
 		(	find_references_(Call, CallFile, CallLine, References) ->
 			forall(
 				member(DeclarationFile-DeclarationLine, References),
-				{format(Stream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
+				{format(DataStream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
 			)
 		;	true
 		),
-		close(Stream).
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
 
 	find_references_(Name//Arity, File, Line, References) :-
 		% predicate scope directive
@@ -564,16 +569,19 @@
 	find_implementations(Directory, Kind, Resource, ReferenceFile0, ReferenceLine) :-
 		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(ReferenceFile0, ReferenceFile)},
-		atom_concat(Directory, '/.implementations_done', Data),
-		open(Data, write, Stream),
+		atom_concat(Directory, '/.vscode_implementations', Data),
+		atom_concat(Directory, '/.vscode_implementations_done', Marker),
+		open(Data, write, DataStream),
 		(	find_implementations_(Kind, Resource, ReferenceFile, ReferenceLine, Implementations) ->
 			forall(
 				member(ImplementationFile-ImplementationLine, Implementations),
-				{format(Stream, 'File:~w;Line:~d~n', [ImplementationFile, ImplementationLine])}
+				{format(DataStream, 'File:~w;Line:~d~n', [ImplementationFile, ImplementationLine])}
 			)
 		;	true
 		),
-		close(Stream).
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
 
 	find_implementations_(predicate, Predicate, File, Line, Implementations) :-
 		ground(Predicate),
@@ -638,49 +646,6 @@
 		),
 		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, lines(Line, _)).
-
-	% symbols
-
-	find_symbols(Directory) :-
-		atom_concat(Directory, '/.symbols_done', Data),
-		open(Data, write, Stream),
-		forall(
-			find_symbol(Directory, File, Symbol, Kind, Line),
-			{format(Stream, 'Symbol:~w;Kind:~d;Line:~d;File:~w~n', [Symbol, Kind, Line, File])}
-		),
-		close(Stream).
-
-	find_symbol(Directory, File, Symbol, Kind, Line) :-
-		logtalk::loaded_file(File),
-		sub_atom(File, 0, _, _, Directory),
-		find_symbol(File, Symbol, Kind, Line).
-
-	% entities
-	find_symbol(File, Object, 18, Line) :-
-		logtalk::loaded_file_property(File, object(Object)),
-		object_property(Object, lines(Line, _)).
-	find_symbol(File, Protocol, 10, Line) :-
-		logtalk::loaded_file_property(File, protocol(Protocol)),
-		protocol_property(Protocol, lines(Line, _)).
-	find_symbol(File, Category, 22, Line) :-
-		logtalk::loaded_file_property(File, category(Category)),
-		category_property(Category, lines(Line, _)).
-	% predicates and non-terminals
-	find_symbol(File, Resource, Kind, Line) :-
-		(	logtalk::loaded_file_property(File, object(Object)),
-			object_property(Object, declares(Predicate, Properties))
-		;	logtalk::loaded_file_property(File, protocol(Protocol)),
-			protocol_property(Protocol, declares(Predicate, Properties))
-		;	logtalk::loaded_file_property(File, category(Category)),
-			category_property(Category, declares(Predicate, Properties))
-		),
-		memberchk(line_count(Line), Properties),
-		(	member(non_terminal(NonTerminal), Properties) ->
-			Resource = NonTerminal,
-			Kind = 7
-		;	Resource = Predicate,
-			Kind = 11
-		).
 
 	% auxiliary predicates
 
