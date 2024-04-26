@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:25:0,
+		version is 0:26:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-26,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -212,22 +212,41 @@
 		!,
 		find_declaration_(Name/ExtArity, Entity, CallerLine, File, Line).
 
+	% predicate listed in a uses/2 directive
 	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
-		% predicate listed in a uses/2 directive
 		ground(Name/Arity),
-		(	entity_property(Entity, _, calls(Object::Name/Arity, Properties)) ->
-			OriginalName = Name
-		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-			member(alias(Name/Arity), Properties)
-		),
+		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
 		callable(Object),
-		memberchk(caller(Caller), Properties),
-		(	Caller == Name/Arity ->
-			true
-		;	memberchk(alias(Alias), Properties),
-			Alias == Caller
-		),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
+		find_declaration_(Object::Name/Arity, Entity, CallerLine, File, Line).
+	% predicate alias listed in a uses/2 directive
+	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
+		ground(Name/Arity),
+		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
+		memberchk(alias(Name/Arity), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
 		find_declaration_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
+
+	% predicate listed in an alias/2 directive
+	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
+		ground(Name/Arity),
+		entity_property(Entity, _, alias(_/Arity, Properties)),
+		memberchk(for(Name/Arity), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
+		memberchk(from(Entity), Properties),
+		find_declaration_(Entity::Name/Arity, Entity, CallerLine, File, Line).
+	% predicate alias listed in an alias/2 directive
+	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
+		ground(Name/Arity),
+		entity_property(Entity, _, alias(Name/Arity, Properties)),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
+		memberchk(for(OriginalName/Arity), Properties),
+		memberchk(from(Entity), Properties),
+		find_declaration_(Entity::OriginalName/Arity, Entity, CallerLine, File, Line).
 
 	% definitions
 
@@ -363,14 +382,24 @@
 		memberchk(line_count(CallLine), Properties),
 		find_definition_(^^Name/ExtArity, Entity, CallLine, File, Line).
 
-	% inherited predicate definition
-	find_definition_(Name/Arity, Entity, _, File, Line) :-
+	find_definition_(Name/Arity, This, _, File, Line) :-
 		ground(Name/Arity),
 		functor(Template, Name, Arity),
-		current_object(Entity),
-		Entity << predicate_property(Template, defined_in(Other, Line)),
-		!,
-		entity_property(Other, _, file(File)).
+		(	current_object(This) ->
+			(	\+ instantiates_class(This, _),
+				\+ specializes_class(This, _) ->
+				This<<predicate_property(Template, defined_in(Entity, Line))
+			;	create_object(Obj, [instantiates(This)], [], []),
+				Obj<<predicate_property(Template, defined_in(Entity, Line)),
+				abolish_object(Obj)
+			)
+		;	%current_category(This) ->
+			create_object(Obj, [imports(This)], [], []),
+			Obj<<predicate_property(Template, defined_in(Entity, Line)),
+			abolish_object(Obj)
+		),
+		entity_property(Entity, _, file(File)),
+		!.
 
 	% local predicate
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
@@ -391,22 +420,41 @@
 		),
 		!.
 
+	% predicate listed in a uses/2 directive
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
-		% predicate listed in a uses/2 directive
 		ground(Name/Arity),
-		(	entity_property(Entity, _, calls(Object::Name/Arity, Properties)) ->
-			OriginalName = Name
-		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-			memberchk(alias(Name/Arity), Properties)
-		),
+		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
 		callable(Object),
-		memberchk(caller(Caller), Properties),
-		(	Caller == Name/Arity ->
-			true
-		;	memberchk(alias(Alias), Properties),
-			Alias == Caller
-		),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
+		find_definition_(Object::Name/Arity, Entity, CallerLine, File, Line).
+	% predicate alias listed in a uses/2 directive
+	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
+		ground(Name/Arity),
+		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
+		memberchk(alias(Name/Arity), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
 		find_definition_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
+
+	% predicate listed in an alias/2 directive
+	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
+		ground(Name/Arity),
+		entity_property(Entity, _, alias(_/Arity, Properties)),
+		memberchk(for(Name/Arity), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
+		memberchk(from(Entity), Properties),
+		find_definition_(Entity::Name/Arity, Entity, CallerLine, File, Line).
+	% predicate alias listed in an alias/2 directive
+	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
+		ground(Name/Arity),
+		entity_property(Entity, _, alias(Name/Arity, Properties)),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
+		memberchk(for(OriginalName/Arity), Properties),
+		memberchk(from(Entity), Properties),
+		find_definition_(Entity::OriginalName/Arity, Entity, CallerLine, File, Line).
 
 	% type definitions (entities)
 
