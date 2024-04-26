@@ -390,16 +390,16 @@
 % '$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, NumberOfClauses, NumberOfRules)
 :- dynamic('$lgt_pp_number_of_clauses_rules_'/5).
 
-% '$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line)
+% '$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Lines)
 :- dynamic('$lgt_pp_predicate_declaration_location_'/4).
-% '$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Line)
+% '$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Lines)
 :- dynamic('$lgt_pp_predicate_definition_location_'/4).
 % '$lgt_pp_defines_predicate_'(Head, Functor/Arity, ExCtx, THead, Mode, Origin)
 :- dynamic('$lgt_pp_defines_predicate_'/6).
 % '$lgt_pp_inline_predicate_'(Functor/Arity)
 :- dynamic('$lgt_pp_inline_predicate_'/1).
 
-% '$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Line)
+% '$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Lines)
 :- dynamic('$lgt_pp_predicate_definition_location_'/5).
 
 % '$lgt_pp_non_tail_recursive_predicate_'(Functor, Arity, File, Lines)
@@ -1127,9 +1127,10 @@ protocol_property(Ptc, Prop) :-
 	findall(mode(Mode, Solutions), '$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions)), Modes),
 	'$lgt_append'(Modes, Properties0, Properties1),
 	(	'$lgt_predicate_property_'(Entity, Functor/Arity, declaration_location(Location)) ->
-		(	Location = File-Line ->
-			Properties2 = [include(File), line_count(Line)| Properties1]
-		;	Properties2 = [line_count(Location)| Properties1]
+		(	Location = File-(BeginLine-EndLine) ->
+			Properties2 = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)| Properties1]
+		;	Location = BeginLine-EndLine,
+			Properties2 = [lines(BeginLine,EndLine), line_count(BeginLine)| Properties1]
 		)
 	;	Properties2 = Properties1
 	),
@@ -1179,12 +1180,13 @@ protocol_property(Ptc, Prop) :-
 '$lgt_entity_property_defines'(Entity, Functor/Arity, _, Properties) :-
 	'$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_location(Flags, Clauses, Rules, Location)),
 	!,
-	(	Location = File-Line ->
-		Properties0 = [include(File), line_count(Line), number_of_clauses(Clauses), number_of_rules(Rules)]
-	;	Location =:= 0 ->
+	(	Location = File-(BeginLine-EndLine) ->
+		Properties0 = [include(File), lines(BeginLine,EndLine), line_count(BeginLine), number_of_clauses(Clauses), number_of_rules(Rules)]
+	;	Location == 0-0 ->
 		% auxiliary predicate
 		Properties0 = [number_of_clauses(Clauses), number_of_rules(Rules)]
-	;	Properties0 = [line_count(Location), number_of_clauses(Clauses), number_of_rules(Rules)]
+	;	Location = BeginLine-EndLine,
+		Properties0 = [lines(BeginLine,EndLine), line_count(BeginLine), number_of_clauses(Clauses), number_of_rules(Rules)]
 	),
 	(	Flags /\ 8 =:= 8 ->
 		Properties1 = [recursive| Properties0]
@@ -1215,41 +1217,46 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_entity_property_includes'(Entity, Functor/Arity, From, Properties) :-
 	'$lgt_predicate_property_'(Entity, Functor/Arity, clauses_rules_location_from(Clauses, Rules, Location, From)),
-	(	Location = File-Line ->
-		LocationProperties = [include(File), line_count(Line)]
-	;	LocationProperties = [line_count(Location)]
+	(	Location = File-(BeginLine-EndLine) ->
+		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
+	;	Location = BeginLine-EndLine,
+		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)]
 	),
 	Properties = [number_of_clauses(Clauses), number_of_rules(Rules)| LocationProperties].
 
 
 '$lgt_entity_property_provides'(Entity, Functor/Arity, To, Properties) :-
 	'$lgt_predicate_property_'(To, Functor/Arity, clauses_rules_location_from(Clauses, Rules, Location, Entity)),
-	(	Location = File-Line ->
-		LocationProperties = [include(File), line_count(Line)]
-	;	LocationProperties = [line_count(Location)]
+	(	Location = File-(BeginLine-EndLine) ->
+		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
+	;	Location = BeginLine-EndLine,
+		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)]
 	),
 	Properties = [number_of_clauses(Clauses), number_of_rules(Rules)| LocationProperties].
 
 
 '$lgt_entity_property_alias'(Entity, Alias, Properties) :-
 	'$lgt_entity_property_'(Entity, object_alias(Original, Alias, Location)),
-	(	Location = File-Line ->
-		Properties = [object, for(Original), include(File), line_count(Line)]
-	;	Properties = [object, for(Original), line_count(Location)]
+	(	Location = File-(BeginLine-EndLine) ->
+		Properties = [object, for(Original), include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
+	;	Location = BeginLine-EndLine,
+		Properties = [object, for(Original), lines(BeginLine,EndLine), line_count(BeginLine)]
 	).
 
 '$lgt_entity_property_alias'(Entity, Alias, Properties) :-
 	'$lgt_entity_property_'(Entity, module_alias(Original, Alias, Location)),
-	(	Location = File-Line ->
-		Properties = [module, for(Original), include(File), line_count(Line)]
-	;	Properties = [module, for(Original), line_count(Location)]
+	(	Location = File-(BeginLine-EndLine) ->
+		Properties = [module, for(Original), include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
+	;	Location = BeginLine-EndLine,
+		Properties = [module, for(Original), lines(BeginLine,EndLine), line_count(BeginLine)]
 	).
 
 '$lgt_entity_property_alias'(Entity, AliasFunctor/Arity, Properties) :-
 	'$lgt_entity_property_'(Entity, predicate_alias(From, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)),
-	(	Location = File-Line ->
-		LocationProperties = [include(File), line_count(Line)]
-	;	LocationProperties = [line_count(Location)]
+	(	Location = File-(BeginLine-EndLine) ->
+		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
+	;	Location = BeginLine-EndLine,
+		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)]
 	),
 	(	NonTerminalFlag =:= 1 ->
 		Arity2 is Arity - 2,
@@ -1264,9 +1271,10 @@ protocol_property(Ptc, Prop) :-
 		NonTerminalProperty = []
 	;	NonTerminalProperty = [non_terminal(NonTerminal)]
 	),
-	(	Location = File-Line ->
-		LocationProperties = [include(File), line_count(Line)| NonTerminalProperty]
-	;	LocationProperties = [line_count(Location)| NonTerminalProperty]
+	(	Location = File-(BeginLine-EndLine) ->
+		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)| NonTerminalProperty]
+	;	Location = BeginLine-EndLine,
+		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)| NonTerminalProperty]
 	),
 	(	Alias == no ->
 		OtherProperties = LocationProperties
@@ -1281,9 +1289,10 @@ protocol_property(Ptc, Prop) :-
 		NonTerminalProperty = []
 	;	NonTerminalProperty = [non_terminal(NonTerminal)]
 	),
-	(	Location = File-Line ->
-		LocationProperties = [include(File), line_count(Line)| NonTerminalProperty]
-	;	LocationProperties = [line_count(Location)| NonTerminalProperty]
+	(	Location = File-(BeginLine-EndLine) ->
+		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)| NonTerminalProperty]
+	;	Location = BeginLine-EndLine,
+		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)| NonTerminalProperty]
 	),
 	(	Alias == no ->
 		OtherProperties = LocationProperties
@@ -3776,9 +3785,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property_user'(declared_in(TCtn, Line), _, Original, _, _, _, _, TCtn, _, _, _) :-
 	functor(Original, Functor, Arity),
 	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, declaration_location(Location)) ->
-		(	Location = _-Line ->
+		(	Location = _-(Line-_) ->
 			true
-		;	Location = Line
+		;	Location = Line-_
 		)
 	;	fail
 	).
@@ -3812,9 +3821,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		(	functor(Original, Functor, Arity),
 			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_location(_, _, _, Location)) ->
-			(	Location = _-Line ->
+			(	Location = _-(Line-_) ->
 				true
-			;	Location = Line
+			;	Location = Line-_
 			)
 		;	fail
 		)
@@ -3848,9 +3857,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_find_overridden_predicate'(DCtn, Obj, Alias, Super),
 			functor(Original, Functor, Arity),
 			'$lgt_predicate_property_'(Super, Functor/Arity, flags_clauses_rules_location(_, _, _, Location)) ->
-			(	Location = _-Line ->
+			(	Location = _-(Line-_) ->
 				true
-			;	Location = Line
+			;	Location = Line-_
 			)
 		;	fail
 		)
@@ -7747,8 +7756,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_referenced_object_message_'(Object, PredicateFunctor/PredicateArity, AliasFunctor/AliasArity, Caller, File, Line-_),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_pp_referenced_object_message_'(Object, PredicateFunctor/PredicateArity, AliasFunctor/AliasArity, Caller, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	functor(Predicate, PredicateFunctor, PredicateArity),
 	(	'$lgt_pp_uses_non_terminal_'(Object, _, _, Predicate, _, _, _, _) ->
 		PredicateArity2 is PredicateArity - 2,
@@ -7762,8 +7771,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_referenced_module_predicate_'(Module, PredicateFunctor/PredicateArity, AliasFunctor/AliasArity, Caller, File, Line-_),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_pp_referenced_module_predicate_'(Module, PredicateFunctor/PredicateArity, AliasFunctor/AliasArity, Caller, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	functor(Predicate, PredicateFunctor, PredicateArity),
 	(	'$lgt_pp_use_module_non_terminal_'(Module, _, _, Predicate, _, _, _, _) ->
 		PredicateArity2 is PredicateArity - 2,
@@ -7777,27 +7786,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_calls_self_predicate_'(Predicate, Caller, File, Line-_),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_pp_calls_self_predicate_'(Predicate, Caller, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(::Predicate, Caller, no, no, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_calls_super_predicate_'(Predicate, Caller, File, Line-_),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_pp_calls_super_predicate_'(Predicate, Caller, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(^^Predicate, Caller, no, no, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_calls_predicate_'(Predicate, _, Caller, File, Line-_),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_pp_calls_predicate_'(Predicate, _, Caller, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, calls(Predicate, Caller, no, no, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_updates_predicate_'(Dynamic, Updater, File, Line-_),
+	'$lgt_pp_updates_predicate_'(Dynamic, Updater, File, Lines),
 	'$lgt_updates_property_alias_non_terminal'(Dynamic, Alias, NonTerminal),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, updates(Dynamic, Updater, Alias, NonTerminal, Location)))),
 	fail.
 
@@ -7843,20 +7852,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_object_alias_'(Original, Alias, _, File, Line-_),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_pp_object_alias_'(Original, Alias, _, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, object_alias(Original, Alias, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_module_alias_'(Original, Alias, _, File, Line-_),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_pp_module_alias_'(Original, Alias, _, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, module_alias(Original, Alias, Location)))),
 	fail.
 
 '$lgt_add_entity_properties'(_, Entity, MainFile) :-
-	'$lgt_pp_predicate_alias_'(For, Original, Alias, NonTerminalFlag, File, Line-_),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_pp_predicate_alias_'(For, Original, Alias, NonTerminalFlag, File, Lines),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	functor(Original, OriginalFunctor, Arity),
 	functor(Alias, AliasFunctor, Arity),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, predicate_alias(For, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)))),
@@ -7906,20 +7915,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 % for use with the reflection built-in predicates and methods
 
 '$lgt_add_entity_predicate_properties'(Entity, MainFile) :-
-	'$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Line),
+	'$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Lines),
 	% multifile predicate clauses defined in Entity for Other
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	'$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, clauses_rules_location_from(Clauses,Rules,Location,Entity)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity, MainFile) :-
-	'$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Line),
+	'$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, Lines),
 	% local predicate clauses
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, declaration_location(Location)))),
 	\+ '$lgt_pp_defines_predicate_'(_, Functor/Arity, _, _, _, _),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_location(0, 0, 0, 0)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_location(0, 0, 0, 0-0)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity, MainFile) :-
@@ -7939,12 +7948,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Origin == aux ->
 		Flags is Flags2 + 1,
 		File = MainFile,
-		Line is 0
+		Lines is 0-0
 	;	Flags is Flags2,
-		'$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Line)
+		'$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Lines)
 	),
 	'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses, Rules),
-	'$lgt_property_location'(MainFile, File, Line, Location),
+	'$lgt_property_location'(MainFile, File, Lines, Location),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_location(Flags, Clauses, Rules, Location)))),
 	fail.
 
@@ -7968,10 +7977,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % the property location is just the line when found on the main file
 % or a compound term File-Line when found in an included file
 
-'$lgt_property_location'(MainFile, MainFile, Line, Line) :-
+'$lgt_property_location'(MainFile, MainFile, Lines, Lines) :-
 	!.
 
-'$lgt_property_location'(_, File, Line, File-Line).
+'$lgt_property_location'(_, File, Lines, File-Lines).
 
 
 
@@ -10562,7 +10571,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	!,
 		'$lgt_check_for_duplicated_scope_directives'(Functor/Arity, Scope),
 		'$lgt_add_predicate_scope_directive'(Scope, Functor, Arity, File, StartLine-EndLine),
-		assertz('$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, StartLine))
+		assertz('$lgt_pp_predicate_declaration_location_'(Functor, Arity, File, StartLine-EndLine))
 	).
 
 '$lgt_compile_scope_directive_resource'(Functor//Arity, Scope, File, StartLine-EndLine, _) :-
@@ -10575,7 +10584,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_check_for_duplicated_scope_directives'(Functor//Arity+ExtArity, Scope),
 		assertz('$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)),
 		'$lgt_add_predicate_scope_directive'(Scope, Functor, ExtArity, File, StartLine-EndLine),
-		assertz('$lgt_pp_predicate_declaration_location_'(Functor, ExtArity, File, StartLine))
+		assertz('$lgt_pp_predicate_declaration_location_'(Functor, ExtArity, File, StartLine-EndLine))
 	).
 
 '$lgt_compile_scope_directive_resource'(Resource, _, _, _, _) :-
@@ -12664,13 +12673,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TClause = srule(THead, Body, BodyCtx),
 		DClause = dsrule(THead, DHead, Body, BodyCtx)
 	),
-	'$lgt_clause_number'(PI, rule, File, BeginLine, N).
+	'$lgt_clause_number'(PI, rule, File, BeginLine-EndLine, N).
 
 '$lgt_compile_clause'(Fact, Entity, fact(TFact,Ctx), dfact(TFact,DHead,Ctx), Ctx) :-
 	'$lgt_check'(callable, Fact, clause(Fact)),
 	'$lgt_compile_head'(Fact, PI, TFact, Ctx),
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	'$lgt_source_file_context'(Ctx, File, BeginLine-_),
+	'$lgt_source_file_context'(Ctx, File, BeginLine-EndLine),
 	(	Fact = {UserFact} ->
 		% fact for a multifile predicate in "user"
 		DHead = '$lgt_debug'(fact(Entity, user::UserFact, N, File, BeginLine), ExCtx)
@@ -12696,7 +12705,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_unify_head_thead_arguments'(Fact, TFact, ExCtx),
 		DHead = '$lgt_debug'(fact(Entity, Fact, N, File, BeginLine), ExCtx)
 	),
-	'$lgt_clause_number'(PI, fact, File, BeginLine, N).
+	'$lgt_clause_number'(PI, fact, File, BeginLine-EndLine, N).
 
 
 
@@ -12707,7 +12716,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % file (assuming that we're not compiling a clause for a dynamically created
 % entity) for use with the reflection built-in predicates and methods
 
-'$lgt_clause_number'(Other::Functor/Arity, fact, File, Line, Clauses) :-
+'$lgt_clause_number'(Other::Functor/Arity, fact, File, Lines, Clauses) :-
 	!,
 	% object or category multifile predicate
 	(	retract('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses0, Rules)) ->
@@ -12715,11 +12724,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% first clause found for this predicate
 		Clauses = 1,
 		Rules = 0,
-		assertz('$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Line))
+		assertz('$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Lines))
 	),
 	assertz('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules)).
 
-'$lgt_clause_number'(Other::Functor/Arity, rule, File, Line, Clauses) :-
+'$lgt_clause_number'(Other::Functor/Arity, rule, File, Lines, Clauses) :-
 	% object or category multifile predicate
 	(	retract('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses0, Rules0)) ->
 		Clauses is Clauses0 + 1,
@@ -12727,18 +12736,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% first clause found for this predicate
 		Clauses = 1,
 		Rules = 1,
-		assertz('$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Line))
+		assertz('$lgt_pp_predicate_definition_location_'(Other, Functor, Arity, File, Lines))
 	),
 	assertz('$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules)).
 
 % module multifile predicate clause
 '$lgt_clause_number'(':'(_, _), _, _, _, 0).
 
-'$lgt_clause_number'({Head}, Kind, File, Line, Clauses) :-
+'$lgt_clause_number'({Head}, Kind, File, Lines, Clauses) :-
 	% pre-compiled predicate clause head
-	'$lgt_clause_number'(user::Head, Kind, File, Line, Clauses).
+	'$lgt_clause_number'(user::Head, Kind, File, Lines, Clauses).
 
-'$lgt_clause_number'(Functor/Arity, fact, File, Line, Clauses) :-
+'$lgt_clause_number'(Functor/Arity, fact, File, Lines, Clauses) :-
 	!,
 	% predicate clause for the entity being compiled
 	(	retract('$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses0, Rules)) ->
@@ -12746,11 +12755,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% first clause found for this predicate
 		Clauses = 1,
 		Rules = 0,
-		assertz('$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Line))
+		assertz('$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Lines))
 	),
 	assertz('$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses, Rules)).
 
-'$lgt_clause_number'(Functor/Arity, rule, File, Line, Clauses) :-
+'$lgt_clause_number'(Functor/Arity, rule, File, Lines, Clauses) :-
 	% predicate clause for the entity being compiled
 	(	retract('$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses0, Rules0)) ->
 		Clauses is Clauses0 + 1,
@@ -12758,7 +12767,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	% first clause found for this predicate
 		Clauses = 1,
 		Rules = 1,
-		assertz('$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Line))
+		assertz('$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Lines))
 	),
 	assertz('$lgt_pp_number_of_clauses_rules_'(Functor, Arity, Clauses, Rules)).
 
@@ -17699,7 +17708,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_pp_def_'(Clause)),
 	% add, if applicable, source data information for the auxiliary clause
 	(	'$lgt_compiler_flag'(source_data, on) ->
-		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, flags_clauses_rules_location(1,1,1,0))))
+		assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, HelperFunctor/Arity, flags_clauses_rules_location(1,1,1,0-0))))
 	;	true
 	),
 	(	'$lgt_prolog_feature'(modules, supported) ->
@@ -20776,15 +20785,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% not defined
 	atom_chars(Name, Chars),
 	(	'$lgt_camel_case_name'(Chars),
-		Warning = camel_case_predicate_name(File, Line-Line, Type, Entity, Name/Arity)
+		Warning = camel_case_predicate_name(File, Lines, Type, Entity, Name/Arity)
 	;	'$lgt_name_with_digits_in_the_middle'(Chars),
-		Warning = predicate_name_with_digits_in_the_middle(File, Line-Line, Type, Entity, Name/Arity)
+		Warning = predicate_name_with_digits_in_the_middle(File, Lines, Type, Entity, Name/Arity)
 	),
 	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_predicate_declaration_location_'(Name, Arity, File, Line) ->
+	(	'$lgt_pp_predicate_declaration_location_'(Name, Arity, File, Lines) ->
 		true
 	;	'$lgt_source_file_context'(File, _),
-		Line = -1
+		Lines = '-'(-1, -1)
 	),
 	'$lgt_print_message'(warning(naming), Warning),
 	fail.
@@ -20797,15 +20806,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% not defined
 	atom_chars(Name, Chars),
 	(	'$lgt_camel_case_name'(Chars),
-		Warning = camel_case_non_terminal_name(File, Line-Line, Type, Entity, Name//Arity)
+		Warning = camel_case_non_terminal_name(File, Lines, Type, Entity, Name//Arity)
 	;	'$lgt_name_with_digits_in_the_middle'(Chars),
-		Warning = non_terminal_name_with_digits_in_the_middle(File, Line-Line, Type, Entity, Name//Arity)
+		Warning = non_terminal_name_with_digits_in_the_middle(File, Lines, Type, Entity, Name//Arity)
 	),
 	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_predicate_declaration_location_'(Name, ExtArity, File, Line) ->
+	(	'$lgt_pp_predicate_declaration_location_'(Name, ExtArity, File, Lines) ->
 		true
 	;	'$lgt_source_file_context'(File, _),
-		Line = -1
+		Lines = '-'(-1, -1)
 	),
 	'$lgt_print_message'(warning(naming), Warning),
 	fail.
@@ -20820,15 +20829,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% user-defined local predicate
 	atom_chars(Name, Chars),
 	(	'$lgt_camel_case_name'(Chars),
-		Warning = camel_case_predicate_name(File, Line-Line, Type, Entity, Name/Arity)
+		Warning = camel_case_predicate_name(File, Lines, Type, Entity, Name/Arity)
 	;	'$lgt_name_with_digits_in_the_middle'(Chars),
-		Warning = predicate_name_with_digits_in_the_middle(File, Line-Line, Type, Entity, Name/Arity)
+		Warning = predicate_name_with_digits_in_the_middle(File, Lines, Type, Entity, Name/Arity)
 	),
 	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_predicate_definition_location_'(Name, Arity, File, Line) ->
+	(	'$lgt_pp_predicate_definition_location_'(Name, Arity, File, Lines) ->
 		true
 	;	'$lgt_source_file_context'(File, _),
-		Line = -1
+		Lines = '-'(-1, -1)
 	),
 	'$lgt_print_message'(warning(naming), Warning),
 	fail.
@@ -20843,15 +20852,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% user-defined local non-terminal
 	atom_chars(Name, Chars),
 	(	'$lgt_camel_case_name'(Chars),
-		Warning = camel_case_non_terminal_name(File, Line-Line, Type, Entity, Name//Arity)
+		Warning = camel_case_non_terminal_name(File, Lines, Type, Entity, Name//Arity)
 	;	'$lgt_name_with_digits_in_the_middle'(Chars),
-		Warning = non_terminal_name_with_digits_in_the_middle(File, Line-Line, Type, Entity, Name//Arity)
+		Warning = non_terminal_name_with_digits_in_the_middle(File, Lines, Type, Entity, Name//Arity)
 	),
 	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_predicate_definition_location_'(Name, ExtArity, File, Line) ->
+	(	'$lgt_pp_predicate_definition_location_'(Name, ExtArity, File, Lines) ->
 		true
 	;	'$lgt_source_file_context'(File, _),
-		Line = -1
+		Lines = '-'(-1, -1)
 	),
 	'$lgt_print_message'(warning(naming), Warning),
 	fail.

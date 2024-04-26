@@ -32,6 +32,10 @@ Logtalk compiler and runtime
 declared using the `uses/1` and `use_module/1` directives. Also added the alias
 properties `object`, `module`, and `predicate`.
 
+* ADDED: Object and category `declares/2`, `defines/2`, `alias/2,`, `calls/2`,
+`updates/2`, `includes/3`, and `provides/3` properties now include an entity
+and predicate `lines/2` property.
+
 Documentation
 -------------
 

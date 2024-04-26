@@ -1129,6 +1129,7 @@ predicate_declaration_property <span class="o">::=</span>
    | &quot;coinductive(&quot; coinductive_predicate_template &quot;)&quot;
    | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;
    | &quot;include(&quot; atom &quot;)&quot;
+   | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
    | &quot;mode(&quot; ( predicate_mode_term | non_terminal_mode_term ) &quot;,&quot; number_of_proofs &quot;)&quot;
    | &quot;info(&quot; list &quot;)&quot;
@@ -1145,6 +1146,7 @@ predicate_definition_property <span class="o">::=</span>
    | &quot;auxiliary&quot;
    | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;
    | &quot;include(&quot; atom &quot;)&quot;
+   | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
    | &quot;number_of_clauses(&quot; integer &quot;)&quot;
    | &quot;number_of_rules(&quot; integer &quot;)&quot;
@@ -1161,6 +1163,7 @@ entity_alias_property <span class="o">::=</span>
    | &quot;module&quot;
    | &quot;for(&quot; ( object_identifier | module_identifier ) &quot;)&quot;
    | &quot;include(&quot; atom &quot;)&quot;
+   | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
 
 predicate_alias_property_list <span class="o">::=</span>
@@ -1176,6 +1179,7 @@ predicate_alias_property <span class="o">::=</span>
    | &quot;from(&quot; entity_identifier &quot;)&quot;
    | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;
    | &quot;include(&quot; atom &quot;)&quot;
+   | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
 
 predicate <span class="o">::=</span>
@@ -1195,6 +1199,7 @@ predicate_call_update_property_sequence <span class="o">::=</span>
 predicate_call_update_property <span class="o">::=</span>
    &quot;caller(&quot; predicate_indicator &quot;)&quot;
    | &quot;include(&quot; atom &quot;)&quot;
+   | &quot;lines(&quot; integer  &quot;,&quot; integer &quot;)&quot;
    | &quot;line_count(&quot; integer &quot;)&quot;
    | &quot;alias(&quot; predicate_indicator &quot;)&quot;
    | &quot;non_terminal(&quot; non_terminal_indicator &quot;)&quot;

@@ -1090,6 +1090,7 @@ Entity properties
       | "coinductive(" coinductive_predicate_template ")"
       | "non_terminal(" non_terminal_indicator ")"
       | "include(" atom ")"
+      | "lines(" integer  "," integer ")"
       | "line_count(" integer ")"
       | "mode(" ( predicate_mode_term | non_terminal_mode_term ) "," number_of_proofs ")"
       | "info(" list ")"
@@ -1106,6 +1107,7 @@ Entity properties
       | "auxiliary"
       | "non_terminal(" non_terminal_indicator ")"
       | "include(" atom ")"
+      | "lines(" integer  "," integer ")"
       | "line_count(" integer ")"
       | "number_of_clauses(" integer ")"
       | "number_of_rules(" integer ")"
@@ -1122,6 +1124,7 @@ Entity properties
       | "module"
       | "for(" ( object_identifier | module_identifier ) ")"
       | "include(" atom ")"
+      | "lines(" integer  "," integer ")"
       | "line_count(" integer ")"
    
    predicate_alias_property_list ::=
@@ -1137,6 +1140,7 @@ Entity properties
       | "from(" entity_identifier ")"
       | "non_terminal(" non_terminal_indicator ")"
       | "include(" atom ")"
+      | "lines(" integer  "," integer ")"
       | "line_count(" integer ")"
    
    predicate ::=
@@ -1156,6 +1160,7 @@ Entity properties
    predicate_call_update_property ::=
       "caller(" predicate_indicator ")"
       | "include(" atom ")"
+      | "lines(" integer  "," integer ")"
       | "line_count(" integer ")"
       | "alias(" predicate_indicator ")"
       | "non_terminal(" non_terminal_indicator ")"
