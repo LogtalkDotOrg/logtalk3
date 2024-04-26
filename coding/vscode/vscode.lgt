@@ -221,7 +221,12 @@
 			member(alias(Name/Arity), Properties)
 		),
 		callable(Object),
-		memberchk(caller(Name/Arity), Properties),
+		memberchk(caller(Caller), Properties),
+		(	Caller == Name/Arity ->
+			true
+		;	memberchk(alias(Alias), Properties),
+			Alias == Caller
+		),
 		find_declaration_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
 
 	% definitions
@@ -362,6 +367,7 @@
 	find_definition_(Name/Arity, Entity, _, File, Line) :-
 		ground(Name/Arity),
 		functor(Template, Name, Arity),
+		current_object(Entity),
 		Entity << predicate_property(Template, defined_in(Other, Line)),
 		!,
 		entity_property(Other, _, file(File)).
@@ -384,6 +390,23 @@
 			find_definition_(Name/ExtArity, Entity, CallerLine, File, Line)
 		),
 		!.
+
+	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
+		% predicate listed in a uses/2 directive
+		ground(Name/Arity),
+		(	entity_property(Entity, _, calls(Object::Name/Arity, Properties)) ->
+			OriginalName = Name
+		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
+			memberchk(alias(Name/Arity), Properties)
+		),
+		callable(Object),
+		memberchk(caller(Caller), Properties),
+		(	Caller == Name/Arity ->
+			true
+		;	memberchk(alias(Alias), Properties),
+			Alias == Caller
+		),
+		find_definition_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
 
 	% type definitions (entities)
 
