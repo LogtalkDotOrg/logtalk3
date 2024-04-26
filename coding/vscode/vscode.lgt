@@ -66,11 +66,11 @@
 		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
 	]).
 
-	:- public(find_type_definition/2).
-	:- mode(find_type_definition(+atom, @entity_identifier), one).
-	:- info(find_type_definition/2, [
+	:- public(find_type_definition/4).
+	:- mode(find_type_definition(+atom, @entity_identifier, +atom, +integer), one).
+	:- info(find_type_definition/4, [
 		comment is 'Find the referenced entity file and line.',
-		argnames is ['Directory', 'Entity']
+		argnames is ['Directory', 'Entity', 'CallFile', 'CallLine']
 	]).
 
 	:- public(find_references/4).
@@ -387,11 +387,12 @@
 
 	% type definitions (entities)
 
-	find_type_definition(Directory, Name/Arity) :-
+	find_type_definition(Directory, Name/Arity, ReferenceFile, ReferenceLine) :-
 		atom_concat(Directory, '/.vscode_type_definition', Data),
 		atom_concat(Directory, '/.vscode_type_definition_done', Marker),
+		entity(ReferenceFile, ReferenceLine, ReferenceEntity),
 		open(Data, write, DataStream),
-		(	find_type_definition(Name/Arity, File, Line) ->
+		(	find_type_definition_(Name/Arity, ReferenceEntity, File, Line) ->
 			{format(DataStream, 'File:~w;Line:~d~n', [File, Line])}
 		;	true
 		),
@@ -399,10 +400,17 @@
 		open(Marker, append, MarkerStream),
 		close(MarkerStream).
 
-	find_type_definition(Name/Arity, DefinitionFile, DefinitionLine) :-
+	find_type_definition_(Name/Arity, _, DefinitionFile, DefinitionLine) :-
 		functor(Entity, Name, Arity),
 		entity_property(Entity, Type, file(DefinitionFile)),
 		entity_property(Entity, Type, lines(DefinitionLine, _)).
+	% object alias
+	find_type_definition_(Name/Arity, ReferenceEntity, DefinitionFile, DefinitionLine) :-
+		functor(Entity, Name, Arity),
+		entity_property(ReferenceEntity, _, alias(Entity, Properties)),
+		memberchk(for(Other), Properties),
+		entity_property(Other, Type, file(DefinitionFile)),
+		entity_property(Other, Type, lines(DefinitionLine, _)).
 
 	% references
 
