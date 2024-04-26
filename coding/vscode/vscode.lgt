@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:25:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-26,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -358,8 +358,16 @@
 		memberchk(line_count(CallLine), Properties),
 		find_definition_(^^Name/ExtArity, Entity, CallLine, File, Line).
 
+	% inherited predicate definition
+	find_definition_(Name/Arity, Entity, _, File, Line) :-
+		ground(Name/Arity),
+		functor(Template, Name, Arity),
+		Entity << predicate_property(Template, defined_in(Other, Line)),
+		!,
+		entity_property(Other, _, file(File)).
+
+	% local predicate
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
-		% local predicate
 		ground(Name/Arity),
 		(	% definition
 			entity_property(Entity, _, defines(Name/Arity, Properties)) ->
@@ -376,18 +384,6 @@
 			find_definition_(Name/ExtArity, Entity, CallerLine, File, Line)
 		),
 		!.
-
-	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
-		% predicate listed in a uses/2 directive
-		ground(Name/Arity),
-		(	entity_property(Entity, _, calls(Object::Name/Arity, Properties)) ->
-			OriginalName = Name
-		;	entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-			memberchk(alias(Name/Arity), Properties)
-		),
-		callable(Object),
-		memberchk(caller(Name/Arity), Properties),
-		find_definition_(Object::OriginalName/Arity, Entity, CallerLine, File, Line).
 
 	% type definitions (entities)
 
@@ -487,8 +483,8 @@
 			References2
 		).
 
+	% predicate listed in a uses/2 directive
 	find_predicate_references(Name/Arity, File, CallerLine, References) :-
-		% predicate listed in a uses/2 directive
 		ground(Name/Arity),
 		entity(File, CallerLine, Caller),
 		(	entity_property(Caller, _, calls(Object::Name/Arity, _)) ->
@@ -507,8 +503,23 @@
 		find_declaration_(Object::OriginalName/ExtArity, Caller, CallerLine, DeclarationFile, DeclarationLine),
 		find_predicate_references(OriginalName/ExtArity, DeclarationFile, DeclarationLine, References).
 
+	% predicate listed in an alias/2 directive
 	find_predicate_references(Name/Arity, File, CallerLine, References) :-
-		% local predicate call; no declaration
+		ground(Name/Arity),
+		entity(File, CallerLine, Caller),
+		entity_property(Caller, Kind, alias(Alias, Properties)),
+		(	Alias == Name/Arity ->
+			memberchk(for(OriginalName/Arity), Properties)
+		;	memberchk(for(Name/Arity), Properties),
+			OriginalName = Name
+		),
+		!,
+		entity_property(Caller, Kind, from(Entity)),
+		find_declaration_(Entity::OriginalName/Arity, Caller, CallerLine, DeclarationFile, DeclarationLine),
+		find_predicate_references(OriginalName/Arity, DeclarationFile, DeclarationLine, References).
+
+	% local predicate call; no declaration
+	find_predicate_references(Name/Arity, File, CallerLine, References) :-
 		entity(File, CallerLine, Caller),
 		findall(
 			Reference,
