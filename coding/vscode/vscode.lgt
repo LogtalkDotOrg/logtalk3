@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:26:0,
+		version is 0:27:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-04-26,
+		date is 2024-04-27,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -485,13 +485,13 @@
 
 	% references
 
-	find_references(Directory, Resource, CallerFile0, CallerLine) :-
+	find_references(Directory, Resource, ResourceFile0, ResourceLine) :-
 		% workaround path downcasing on Windows
-		{'$lgt_expand_path'(CallerFile0, CallerFile)},
+		{'$lgt_expand_path'(ResourceFile0, ResourceFile)},
 		atom_concat(Directory, '/.vscode_references', Data),
 		atom_concat(Directory, '/.vscode_references_done', Marker),
 		open(Data, write, DataStream),
-		(	find_references_(Resource, CallerFile, CallerLine, References) ->
+		(	find_references_(Resource, ResourceFile, ResourceLine, References) ->
 			forall(
 				member(File-Line, References),
 				{format(DataStream, 'File:~w;Line:~d~n', [File, Line])}
@@ -507,19 +507,18 @@
 		(	entity_property(Entity, _, file(File)),
 			entity_property(Entity, _, lines(Line, _)) ->
 			find_entity_references(Resource, References)
-		;	find_predicate_references(Resource, File, Line, References)
+		;	find_predicate_references(Resource, Entity, File, Line, References)
 		).
 
-	find_predicate_references(Name//Arity, File, Line, References) :-
+	find_predicate_references(Name//Arity, _, File, Line, References) :-
 		% predicate scope directive
 		ground(Name/Arity),
 		ExtArity is Arity + 2,
 		find_references_(Name/ExtArity, File, Line, References).
 
-	find_predicate_references(Name/Arity, File, Line, References) :-
+	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
 		% predicate scope directive
 		ground(Name/Arity),
-		entity(File, Line, Entity),
 		entity_property(Entity, _, declares(Name/Arity, Properties)),
 		memberchk(line_count(Line), Properties),
 		!,
@@ -563,90 +562,100 @@
 		).
 
 	% predicate listed in a uses/2 directive
-	find_predicate_references(Name/Arity, File, CallerLine, References) :-
+	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
 		ground(Name/Arity),
-		entity(File, CallerLine, Caller),
-		(	entity_property(Caller, _, calls(Object::Name/Arity, _)) ->
-			OriginalName = Name,
-			ExtArity = Arity
-		;	entity_property(Caller, _, calls(Object::OriginalName/Arity, Properties)),
-			memberchk(alias(Name/Arity), Properties) ->
-			ExtArity = Arity
-		;	ExtArity is Arity + 2,
-			entity_property(Caller, _, calls(Object::Name/ExtArity, Properties)),
-			memberchk(non_terminal(Name//Arity), Properties),
-			OriginalName = Name
-		),
+		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
 		callable(Object),
-		!,
-		find_declaration_(Object::OriginalName/ExtArity, Caller, CallerLine, DeclarationFile, DeclarationLine),
-		find_predicate_references(OriginalName/ExtArity, DeclarationFile, DeclarationLine, References).
+		memberchk(lines(Start, End), Properties),
+		Start =< Line, Line =< End,
+		find_declaration_(Object::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
+	% predicate alias listed in a uses/2 directive
+	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+		ground(Name/Arity),
+		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
+		memberchk(alias(Name/Arity), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< Line, Line =< End,
+		find_declaration_(Object::OriginalName/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+		find_predicate_references(OriginalName/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	% predicate listed in an alias/2 directive
-	find_predicate_references(Name/Arity, File, CallerLine, References) :-
+	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
 		ground(Name/Arity),
-		entity(File, CallerLine, Caller),
-		entity_property(Caller, Kind, alias(Alias, Properties)),
-		(	Alias == Name/Arity ->
-			memberchk(for(OriginalName/Arity), Properties)
-		;	memberchk(for(Name/Arity), Properties),
-			OriginalName = Name
-		),
-		!,
-		entity_property(Caller, Kind, from(Entity)),
-		find_declaration_(Entity::OriginalName/Arity, Caller, CallerLine, DeclarationFile, DeclarationLine),
-		find_predicate_references(OriginalName/Arity, DeclarationFile, DeclarationLine, References).
+		entity_property(Entity, _, alias(_/Arity, Properties)),
+		memberchk(for(Name/Arity), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< Line, Line =< End,
+		memberchk(from(Object), Properties),
+		find_declaration_(Object::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
+	% predicate alias listed in an alias/2 directive
+	find_predicate_references(Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
+		ground(Name/Arity),
+		entity_property(Entity, _, alias(Name/Arity, Properties)),
+		memberchk(lines(Start, End), Properties),
+		Start =< Line, Line =< End,
+		memberchk(for(OriginalName/Arity), Properties),
+		memberchk(from(Object), Properties),
+		find_declaration_(Object::OriginalName/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+		find_predicate_references(OriginalName/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	% local predicate call; no declaration
-	find_predicate_references(Name/Arity, File, CallerLine, References) :-
-		entity(File, CallerLine, Caller),
+	find_predicate_references(Name/Arity, Entity, _, _, References) :-
 		findall(
 			Reference,
-			find_predicate_local_reference(Name/Arity, Caller, Reference),
+			find_predicate_local_reference(Name/Arity, Entity, Reference),
 			References
 		),
 		% require at least one reference other than the selected one
 		References = [_, _| _].
 
-	find_predicate_references(Alias::Name/Arity, File, CallerLine, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(Alias::Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
 		!,
 		callable(Alias),
 		ground(Name/Arity),
-		entity(File, CallerLine, Caller),
-		(	entity_property(Caller, _, alias(Alias, Properties)),
+		(	entity_property(Entity, _, alias(Alias, Properties)),
 			member(for(Object), Properties) ->
 			true
 		;	Object = Alias
 		),
-		find_declaration_(Object::Name/Arity, Caller, CallerLine, DeclarationFile, DeclarationLine),
-		find_predicate_references(Name/Arity, DeclarationFile, DeclarationLine, References).
+		find_declaration_(Object::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
-	find_predicate_references(::Name/Arity, File, CallerLine, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(::Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
 		!,
 		ground(Name/Arity),
-		entity(File, CallerLine, Caller),
-		(	find_declaration_(::Name/Arity, Caller, CallerLine, DeclarationFile, DeclarationLine),
-			find_predicate_references(Name/Arity, DeclarationFile, DeclarationLine, References) ->
+		(	find_declaration_(::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+			find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References) ->
 			true
 		;	ExtArity is Arity + 2,
-			entity_property(Caller, _, calls(::Name/ExtArity, Properties)),
-			memberchk(line_count(CallerLine), Properties),
-			find_declaration_(::Name/ExtArity, Caller, CallerLine, DeclarationFile, DeclarationLine),
-			find_predicate_references(Name/ExtArity, DeclarationFile, DeclarationLine, References)
+			entity_property(Entity, _, calls(::Name/ExtArity, Properties)),
+			memberchk(line_count(Line), Properties),
+			find_declaration_(::Name/ExtArity, Entity, Line, DeclarationFile, DeclarationLine),
+			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+			find_predicate_references(Name/ExtArity, DeclarationEntity, DeclarationFile, DeclarationLine, References)
 		).
 
-	find_predicate_references(^^Name/Arity, File, CallerLine, [DeclarationFile-DeclarationLine| References]) :-
+	find_predicate_references(^^Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
 		!,
 		ground(Name/Arity),
-		entity(File, CallerLine, Caller),
-		(	find_declaration_(^^Name/Arity, Caller, CallerLine, DeclarationFile, DeclarationLine),
-			find_predicate_references(Name/Arity, DeclarationFile, DeclarationLine, References) ->
+		(	find_declaration_(^^Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+			find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References) ->
 			true
 		;	ExtArity is Arity + 2,
-			entity_property(Caller, _, calls(^^Name/ExtArity, Properties)),
-			memberchk(line_count(CallerLine), Properties),
-			find_declaration_(^^Name/ExtArity, Caller, CallerLine, DeclarationFile, DeclarationLine),
-			find_predicate_references(Name/ExtArity, DeclarationFile, DeclarationLine, References)
+			entity_property(Entity, _, calls(^^Name/ExtArity, Properties)),
+			memberchk(line_count(Line), Properties),
+			find_declaration_(^^Name/ExtArity, Entity, Line, DeclarationFile, DeclarationLine),
+			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+			find_predicate_references(Name/ExtArity, DeclarationEntity, DeclarationFile, DeclarationLine, References)
 		).
 
 	find_predicate_local_reference(Name/Arity, Entity, File-Line) :-
