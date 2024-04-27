@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:28:0,
+		version is 0:29:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-27,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -291,6 +291,7 @@
 		;	Object = Alias
 		),
 		functor(Template, Name, Arity),
+		current_object(Object),
 		Object::predicate_property(Template, defined_in(Primary)),
 		(	% local definitions
 			entity_property(Primary, _, defines(Name/Arity, DefinitionProperties)),
@@ -311,6 +312,7 @@
 
 	find_definition_(Object::Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
+		callable(Object),
 		ground(Name/Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
@@ -803,8 +805,7 @@
 		atom_concat(Directory, '/.vscode_callers', Data),
 		atom_concat(Directory, '/.vscode_callers_done', Marker),
 		open(Data, write, DataStream),
-		entity(ReferenceFile, ReferenceLine, Entity),
-		(	find_callers(Predicate, Entity, ReferenceFile, ReferenceLine, Callers) ->
+		(	find_callers_(Predicate, ReferenceFile, ReferenceLine, Callers) ->
 			forall(
 				member(c(Name, CallerFile, CallerLine), Callers),
 				{format(DataStream, 'Name:~w;File:~w;Line:~d~n', [Name, CallerFile, CallerLine])}
@@ -815,169 +816,27 @@
 		open(Marker, append, MarkerStream),
 		close(MarkerStream).
 
-	find_callers(Name//Arity, _, File, Line, Callers) :-
-		% predicate scope directive
-		ground(Name/Arity),
-		ExtArity is Arity + 2,
-		find_callers(Name/ExtArity, File, Line, Callers).
-
-	find_callers(Name/Arity, Entity, File, Line, Callers) :-
-		% predicate scope directive
-		ground(Name/Arity),
-		entity_property(Entity, _, declares(Name/Arity, Properties)),
-		memberchk(line_count(Line), Properties),
+	find_callers_(Predicate, ReferenceFile, ReferenceLine, Callers) :-
+		find_definition(Predicate, ReferenceFile, ReferenceLine, DefinitionFile, DefinitionLine),
+		entity(DefinitionFile, DefinitionLine, DefinitionEntity),
+		entity_property(DefinitionEntity, _, defines(Name/Arity, DefinitionProperties)),
+		memberchk(line_count(DefinitionLine), DefinitionProperties),
 		!,
 		findall(
 			c(CallerPredicate, CallerFile, CallerLine),
-			(	entity_property(Caller, _, calls(Object::Name/Arity, CallsProperties)),
-				callable(Object),
-				memberchk(caller(CallerPredicate), CallsProperties),
+			(	(	Callee = Name/Arity
+				;	Callee = ^^Name/Arity
+				;	Callee = ::Name/Arity
+				;	Callee = _::Name/Arity
+				),
+				entity_property(CallerEntity, _, calls(Callee, CallsProperties)),
+				entity_property(CallerEntity, _, file(CallerFile)),
 				memberchk(line_count(CallerLine), CallsProperties),
-				find_declaration_(Object::Name/Arity, Caller, CallerLine, File, Line),
-				entity_property(Caller, _, file(CallerFile))
+				find_definition(Callee, CallerFile, CallerLine, DefinitionFile, DefinitionLine),
+				memberchk(caller(CallerPredicate), CallsProperties)
 			),
-			Callers0
-		),
-		findall(
-			c(CallerPredicate, CallerFile, CallerLine),
-			(	entity_property(Caller, _, calls(::Name/Arity, CallsProperties)),
-				memberchk(caller(CallerPredicate), CallsProperties),
-				memberchk(line_count(CallerLine), CallsProperties),
-				find_declaration_(::Name/Arity, Caller, CallerLine, File, Line),
-				entity_property(Caller, _, file(CallerFile))
-			),
-			Callers1,
-			Callers0
-		),
-		findall(
-			c(CallerPredicate, CallerFile, CallerLine),
-			(	entity_property(Caller, _, calls(^^Name/Arity, CallsProperties)),
-				memberchk(caller(CallerPredicate), CallsProperties),
-				memberchk(line_count(CallerLine), CallsProperties),
-				find_declaration_(^^Name/Arity, Caller, CallerLine, File, Line),
-				entity_property(Caller, _, file(CallerFile))
-			),
-			Callers2,
-			Callers1
-		),
-		findall(
-			c(CallerPredicate, File, CallerLine),
-			(	entity_property(Entity, _, calls(Name/Arity, CallsProperties)),
-				memberchk(caller(CallerPredicate), CallsProperties),
-				memberchk(line_count(CallerLine), CallsProperties)
-			),
-			Callers,
-			Callers2
-		).
-
-	% predicate listed in a uses/2 directive
-	find_callers(Name/Arity, Entity, _, Line, Callers) :-
-		ground(Name/Arity),
-		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
-		callable(Object),
-		memberchk(lines(Start, End), Properties),
-		Start =< Line, Line =< End,
-		find_declaration_(Object::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
-		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-		find_callers(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers).
-	% predicate alias listed in a uses/2 directive
-	find_callers(Name/Arity, Entity, _, Line, Callers) :-
-		ground(Name/Arity),
-		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-		memberchk(alias(Name/Arity), Properties),
-		memberchk(lines(Start, End), Properties),
-		Start =< Line, Line =< End,
-		find_declaration_(Object::OriginalName/Arity, Entity, Line, DeclarationFile, DeclarationLine),
-		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-		find_callers(OriginalName/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers).
-
-	% predicate listed in an alias/2 directive
-	find_callers(Name/Arity, Entity, _, Line, Callers) :-
-		ground(Name/Arity),
-		entity_property(Entity, _, alias(_/Arity, Properties)),
-		memberchk(for(Name/Arity), Properties),
-		memberchk(lines(Start, End), Properties),
-		Start =< Line, Line =< End,
-		memberchk(from(Object), Properties),
-		find_declaration_(Object::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
-		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-		find_callers(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers).
-	% predicate alias listed in an alias/2 directive
-	find_callers(Name/Arity, Entity, _, Line, Callers) :-
-		ground(Name/Arity),
-		entity_property(Entity, _, alias(Name/Arity, Properties)),
-		memberchk(lines(Start, End), Properties),
-		Start =< Line, Line =< End,
-		memberchk(for(OriginalName/Arity), Properties),
-		memberchk(from(Object), Properties),
-		find_declaration_(Object::OriginalName/Arity, Entity, Line, DeclarationFile, DeclarationLine),
-		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-		find_callers(OriginalName/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers).
-
-	% local predicate call; no declaration
-	find_callers(Name/Arity, Entity, _, _, Callers) :-
-		findall(
-			Reference,
-			find_local_caller(Name/Arity, Entity, Reference),
 			Callers
 		).
-
-	find_callers(Alias::Name/Arity, Entity, _, Line, Callers) :-
-		!,
-		callable(Alias),
-		ground(Name/Arity),
-		(	entity_property(Entity, _, alias(Alias, Properties)),
-			member(for(Object), Properties) ->
-			true
-		;	Object = Alias
-		),
-		find_declaration_(Object::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
-		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-		find_callers(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers).
-
-	find_callers(::Name/Arity, Entity, _, Line, Callers) :-
-		!,
-		ground(Name/Arity),
-		(	find_declaration_(::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
-			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-			find_callers(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers) ->
-			true
-		;	ExtArity is Arity + 2,
-			entity_property(Entity, _, calls(::Name/ExtArity, Properties)),
-			memberchk(line_count(Line), Properties),
-			find_declaration_(::Name/ExtArity, Entity, Line, DeclarationFile, DeclarationLine),
-			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-			find_callers(Name/ExtArity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers)
-		).
-
-	find_callers(^^Name/Arity, Entity, _, Line, Callers) :-
-		!,
-		ground(Name/Arity),
-		(	find_declaration_(^^Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
-			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-			find_callers(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers) ->
-			true
-		;	ExtArity is Arity + 2,
-			entity_property(Entity, _, calls(^^Name/ExtArity, Properties)),
-			memberchk(line_count(Line), Properties),
-			find_declaration_(^^Name/ExtArity, Entity, Line, DeclarationFile, DeclarationLine),
-			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
-			find_callers(Name/ExtArity, DeclarationEntity, DeclarationFile, DeclarationLine, Callers)
-		).
-
-	find_local_caller(Name/Arity, Entity, c(Caller, File, Line)) :-
-		% local predicate
-		ground(Name/Arity),
-		entity_property(Entity, Kind, file(File)),
-		(	entity_property(Entity, Kind, calls(Name/Arity, _)) ->
-			ExtArity = Arity
-		;	ExtArity is Arity + 2,
-			entity_property(Entity, Kind, defines(Name/ExtArity, DefinesProperties)),
-			memberchk(non_terminal(Name//Arity), DefinesProperties)
-		),
-		entity_property(Entity, Kind, calls(Name/ExtArity, CallsProperties)),
-		memberchk(caller(Caller), CallsProperties),
-		memberchk(line_count(Line), CallsProperties).
 
 	% callees
 
@@ -987,8 +846,7 @@
 		atom_concat(Directory, '/.vscode_callees', Data),
 		atom_concat(Directory, '/.vscode_callees_done', Marker),
 		open(Data, write, DataStream),
-		entity(ReferenceFile, ReferenceLine, Entity),
-		(	find_callees(Predicate, Entity, ReferenceFile, ReferenceLine, Callees) ->
+		(	find_callees_(Predicate, ReferenceFile, ReferenceLine, Callees) ->
 			forall(
 				member(c(Name, CalleeFile, CalleeLine), Callees),
 				{format(DataStream, 'Name:~w;File:~w;Line:~d~n', [Name, CalleeFile, CalleeLine])}
@@ -999,137 +857,21 @@
 		open(Marker, append, MarkerStream),
 		close(MarkerStream).
 
-	find_callees(Name//Arity, _, File, Line, Callees) :-
-		% predicate scope directive
-		ground(Name/Arity),
-		ExtArity is Arity + 2,
-		find_callees(Name/ExtArity, File, Line, Callees).
-
-	find_callees(Name/Arity, Entity, _File, _Line, Callees) :-
-		% predicate scope directive
-		ground(Name/Arity),
-		entity_property(Entity, _, defines(Name/Arity, _)),
+	find_callees_(Predicate, ReferenceFile, ReferenceLine, Callees) :-
+		find_definition(Predicate, ReferenceFile, ReferenceLine, DefinitionFile, DefinitionLine),
+		entity(DefinitionFile, DefinitionLine, DefinitionEntity),
+		entity_property(DefinitionEntity, _, defines(Name/Arity, DefinitionProperties)),
+		memberchk(line_count(DefinitionLine), DefinitionProperties),
 		!,
 		findall(
 			c(CalleePredicate, CalleeFile, CalleeLine),
-			(	entity_property(Entity, _, calls(CalleePredicate, CallsProperties)),
+			(	entity_property(DefinitionEntity, _, calls(CalleePredicate, CallsProperties)),
 				memberchk(caller(Name/Arity), CallsProperties),
 				memberchk(line_count(CallerLine), CallsProperties),
-				find_definition_(CalleePredicate, Entity, CallerLine, CalleeFile, CalleeLine)
+				find_definition_(CalleePredicate, DefinitionEntity, CallerLine, CalleeFile, CalleeLine)
 			),
 			Callees
 		).
-
-	% predicate listed in a uses/2 directive
-	find_callees(Name/Arity, Entity, _, Line, Callees) :-
-		ground(Name/Arity),
-		entity_property(Entity, _, calls(Object::Name/Arity, Properties)),
-		callable(Object),
-		memberchk(lines(Start, End), Properties),
-		Start =< Line, Line =< End,
-		find_definition_(Object::Name/Arity, Entity, Line, DefinitionFile, DefinitionLine),
-		entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-		find_callees(Name/Arity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees).
-	% predicate alias listed in a uses/2 directive
-	find_callees(Name/Arity, Entity, _, Line, Callees) :-
-		ground(Name/Arity),
-		entity_property(Entity, _, calls(Object::OriginalName/Arity, Properties)),
-		memberchk(alias(Name/Arity), Properties),
-		memberchk(lines(Start, End), Properties),
-		Start =< Line, Line =< End,
-		find_definition_(Object::OriginalName/Arity, Entity, Line, DefinitionFile, DefinitionLine),
-		entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-		find_callees(OriginalName/Arity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees).
-
-	% predicate listed in an alias/2 directive
-	find_callees(Name/Arity, Entity, _, Line, Callees) :-
-		ground(Name/Arity),
-		entity_property(Entity, _, alias(_/Arity, Properties)),
-		memberchk(for(Name/Arity), Properties),
-		memberchk(lines(Start, End), Properties),
-		Start =< Line, Line =< End,
-		memberchk(from(Object), Properties),
-		find_definition_(Object::Name/Arity, Entity, Line, DefinitionFile, DefinitionLine),
-		entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-		find_callees(Name/Arity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees).
-	% predicate alias listed in an alias/2 directive
-	find_callees(Name/Arity, Entity, _, Line, Callees) :-
-		ground(Name/Arity),
-		entity_property(Entity, _, alias(Name/Arity, Properties)),
-		memberchk(lines(Start, End), Properties),
-		Start =< Line, Line =< End,
-		memberchk(for(OriginalName/Arity), Properties),
-		memberchk(from(Object), Properties),
-		find_definition_(Object::OriginalName/Arity, Entity, Line, DefinitionFile, DefinitionLine),
-		entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-		find_callees(OriginalName/Arity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees).
-
-	% local predicate call; no declaration
-	find_callees(Name/Arity, Entity, _, _, Callees) :-
-		findall(
-			Reference,
-			find_local_callee(Name/Arity, Entity, Reference),
-			Callees
-		),
-		% require at least one reference other than the selected one
-		Callees = [_, _| _].
-
-	find_callees(Alias::Name/Arity, Entity, _, Line, Callees) :-
-		!,
-		callable(Alias),
-		ground(Name/Arity),
-		(	entity_property(Entity, _, alias(Alias, Properties)),
-			member(for(Object), Properties) ->
-			true
-		;	Object = Alias
-		),
-		find_definition_(Object::Name/Arity, Entity, Line, DefinitionFile, DefinitionLine),
-		entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-		find_callers(Name/Arity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees).
-
-	find_callees(::Name/Arity, Entity, _, Line, Callees) :-
-		!,
-		ground(Name/Arity),
-		(	find_definition_(::Name/Arity, Entity, Line, DefinitionFile, DefinitionLine),
-			entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-			find_callers(Name/Arity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees) ->
-			true
-		;	ExtArity is Arity + 2,
-			entity_property(Entity, _, calls(::Name/ExtArity, Properties)),
-			memberchk(line_count(Line), Properties),
-			find_definition_(::Name/ExtArity, Entity, Line, DefinitionFile, DefinitionLine),
-			entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-			find_callers(Name/ExtArity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees)
-		).
-
-	find_callees(^^Name/Arity, Entity, _, Line, Callees) :-
-		!,
-		ground(Name/Arity),
-		(	find_definition_(^^Name/Arity, Entity, Line, DefinitionFile, DefinitionLine),
-			entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-			find_callers(Name/Arity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees) ->
-			true
-		;	ExtArity is Arity + 2,
-			entity_property(Entity, _, calls(^^Name/ExtArity, Properties)),
-			memberchk(line_count(Line), Properties),
-			find_definition_(^^Name/ExtArity, Entity, Line, DefinitionFile, DefinitionLine),
-			entity(DefinitionFile, DefinitionLine, DeclarationEntity),
-			find_callers(Name/ExtArity, DeclarationEntity, DefinitionFile, DefinitionLine, Callees)
-		).
-
-	find_local_callee(Name/Arity, Entity, c(Caller, File, Line)) :-
-		% local predicate
-		ground(Name/Arity),
-		entity_property(Entity, Kind, file(File)),
-		(	entity_property(Entity, Kind, calls(Name/Arity, _)) ->
-			ExtArity = Arity
-		;	ExtArity is Arity + 2,
-			entity_property(Entity, Kind, defines(Name/ExtArity, DefinesProperties)),
-			memberchk(non_terminal(Name//Arity), DefinesProperties)
-		),
-		entity_property(Entity, Kind, calls(Name/ExtArity, CallsProperties)),
-		memberchk(caller(Caller), CallsProperties),
-		memberchk(line_count(Line), CallsProperties).
 
 	% auxiliary predicates
 
