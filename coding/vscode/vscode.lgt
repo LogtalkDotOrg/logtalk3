@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:30:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-04-27,
+		date is 2024-04-28,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -418,7 +418,7 @@
 		!.
 
 	% local predicate
-	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
+	find_definition_(Name/Arity, Entity, _CallerLine, File, Line) :-
 		ground(Name/Arity),
 		(	% definition
 			entity_property(Entity, _, defines(Name/Arity, Properties)) ->
@@ -430,9 +430,9 @@
 			memberchk(line_count(Line), Properties)
 		;	% non-terminal
 			ExtArity is Arity + 2,
-			entity_property(Entity, _, calls(Name/ExtArity, CallsProperties)),
-			memberchk(line_count(CallerLine), CallsProperties),
-			find_definition_(Name/ExtArity, Entity, CallerLine, File, Line)
+			entity_property(Entity, _, defines(Name/ExtArity, Properties)),
+			entity_property(Entity, _, file(File)),
+			memberchk(line_count(Line), Properties)
 		),
 		!.
 
