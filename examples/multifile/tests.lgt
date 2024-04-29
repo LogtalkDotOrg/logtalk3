@@ -75,4 +75,22 @@
 	test(multifile_08, true(N == 1)) :-
 		object_property(main, number_of_user_rules(N)).
 
+	test(multifile_09, true(L ==[1-[2,3], end-[1,2,3]])) :-
+		findall(X-Rest, phrase(main::nt(X), [1,2,3], Rest), L).
+
+	test(multifile_10a, true) :-
+		main::current_predicate(nt/3).
+
+	test(multifile_10b, true) :-
+		main::predicate_property(nt(_,_,_), public).
+
+	test(multifile_10c, true) :-
+		main::predicate_property(nt(_,_,_), multifile).
+
+	test(multifile_10d, true(NT == nt//1)) :-
+		main::predicate_property(nt(_,_,_), non_terminal(NT)).
+
+	test(multifile_10e, true) :-
+		main::predicate_property(nt(_,_,_), number_of_clauses(2)).
+
 :- end_object.
