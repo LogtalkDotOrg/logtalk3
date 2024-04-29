@@ -101,6 +101,13 @@
 		argnames is ['Directory', 'Resource', 'CallFile', 'CallLine']
 	]).
 
+	:- public(find_loader_file/2).
+	:- mode(find_loader_file(+atom, +atom), one).
+	:- info(find_loader_file/2, [
+		comment is 'Find the loader file.',
+		argnames is ['Directory', 'File']
+	]).
+
 	% loading
 
 	load(Directory, File) :-
@@ -896,6 +903,22 @@
 		;	% likely dynamic predicate with no clauses
 			find_declaration_(CalleePredicate, DefinitionEntity, CallerLine, CalleeFile, CalleeLine)
 		).
+
+	% loader file
+
+	find_loader_file(Directory, File0) :-
+		% workaround path downcasing on Windows
+		{'$lgt_expand_path'(File0, File)},
+		atom_concat(Directory, '/.vscode_find_loader', Data),
+		atom_concat(Directory, '/.vscode_find_loader_done', Marker),
+		open(Data, write, DataStream),
+		(	logtalk::loaded_file_property(File, parent(Loader)) ->
+			{format(DataStream, '~w', [Loader])}
+		;	true
+		),
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
 
 	% auxiliary predicates
 
