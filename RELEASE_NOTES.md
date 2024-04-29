@@ -53,6 +53,8 @@ Tools
 Examples
 --------
 
+* UPDATED: The `multifile` example to also illustrate multifile non-terminals.
+
 * FIXED: Spurious choice-points in the `blocks` and `bricks` examples.
 
 * FIXED: The SICStus Prolog specific `constraints/sicstus` example to not
