@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:31:1,
+		version is 0:31:2,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-28,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -167,6 +167,26 @@
 		Object::predicate_property(Template, declared_in(DeclarationEntity, Line)),
 		entity_property(DeclarationEntity, _, file(File)).
 
+	% multifile predicate
+	find_declaration_(Other::Name/Arity, Entity, _, File, Line) :-
+		callable(Other),
+		ground(Name/Arity),
+		entity_property(Entity, _, provides(Name/Arity, Other, _)),
+		entity_property(Other, Kind, declares(Name/Arity, Line, Properties)),
+		entity_property(Other, Kind, file(File)),
+		memberchk(line_count(Line), Properties).
+
+	% multifile non-terminal
+	find_declaration_(Other::Name/Arity, Entity, _, File, Line) :-
+		callable(Other),
+		ground(Name/Arity),
+		ExtArity is Arity + 2,
+		entity_property(Entity, _, provides(Name/ExtArity, Other, _)),
+		entity_property(Other, Kind, declares(Name/ExtArity, Properties)),
+		memberchk(non_terminal(Name//Arity), Properties),
+		entity_property(Other, Kind, file(File)),
+		memberchk(line_count(Line), Properties).
+
 	find_declaration_(::Name/Arity, Entity, CallerLine, File, Line) :-
 		(	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) ->
 			true
@@ -185,16 +205,15 @@
 			find_declaration_(^^Name/ExtArity, Entity, CallerLine, File, Line)
 		).
 
+	% locally declared
 	find_declaration_(Name/Arity, Entity, _, File, Line) :-
-		% locally declared
 		ground(Name/Arity),
 		entity_property(Entity, Kind, declares(Name/Arity, Properties)),
 		entity_property(Entity, Kind, file(File)),
-		memberchk(line_count(Line), Properties),
-		!.
+		memberchk(line_count(Line), Properties).
 
+	% non-local declaration
 	find_declaration_(Name/Arity, Entity, _, File, Line) :-
-		% non-local declaration
 		ground(Name/Arity),
 		functor(Template, Name, Arity),
 		(	current_object(Entity) ->
@@ -215,15 +234,13 @@
 			true
 		;	abolish_object(Obj)
 		),
-		entity_property(DeclarationEntity, _, file(File)),
-		!.
+		entity_property(DeclarationEntity, _, file(File)).
 
+	% non-terminal
 	find_declaration_(Name/Arity, Entity, CallerLine, File, Line) :-
-		% non-terminal
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, defines(Name/ExtArity, Properties)),
 		memberchk(non_terminal(Name//Arity), Properties),
-		!,
 		find_declaration_(Name/ExtArity, Entity, CallerLine, File, Line).
 
 	% predicate listed in a uses/2 directive
