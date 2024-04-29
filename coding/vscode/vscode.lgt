@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:30:0,
+		version is 0:31:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-28,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -767,13 +767,21 @@
 			Implementations
 		).
 
+	% non-terminal
 	find_implementation(Name//Arity, Entity, File-Line) :-
 		ExtArity is Arity + 2,
 		find_implementation(Name/ExtArity, Entity, File-Line).
+	% locally defined predicate
 	find_implementation(Name/Arity, Entity, File-Line) :-
 		entity_property(Entity, Kind, defines(Name/Arity, Properties)),
 		entity_property(Entity, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
+	% multifile predicate
+	find_implementation(Name/Arity, Entity, File-Line) :-
+		entity_property(Entity, Kind, includes(Name/Arity, Other, Properties)),
+		entity_property(Other, Kind, file(File)),
+		memberchk(line_count(Line), Properties).
+	% descendant definitions
 	find_implementation(Name/Arity, Entity, File-Line) :-
 		functor(Template, Name, Arity),
 		entity_property(ImplementationEntity, Kind, defines(Name/Arity, Properties)),
