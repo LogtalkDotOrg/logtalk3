@@ -1216,7 +1216,7 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_entity_property_includes'(Entity, Functor/Arity, From, Properties) :-
-	'$lgt_predicate_property_'(Entity, Functor/Arity, clauses_rules_location_from(Clauses, Rules, Location, From)),
+	'$lgt_predicate_property_'(From, Functor/Arity, clauses_rules_location_to(Clauses, Rules, Location, Entity)),
 	(	Location = File-(BeginLine-EndLine) ->
 		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
 	;	Location = BeginLine-EndLine,
@@ -1226,7 +1226,7 @@ protocol_property(Ptc, Prop) :-
 
 
 '$lgt_entity_property_provides'(Entity, Functor/Arity, To, Properties) :-
-	'$lgt_predicate_property_'(To, Functor/Arity, clauses_rules_location_from(Clauses, Rules, Location, Entity)),
+	'$lgt_predicate_property_'(Entity, Functor/Arity, clauses_rules_location_to(Clauses, Rules, Location, To)),
 	(	Location = File-(BeginLine-EndLine) ->
 		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
 	;	Location = BeginLine-EndLine,
@@ -3550,7 +3550,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 78, 0, b01)).
+'$lgt_version_data'(logtalk(3, 78, 0, b02)).
 
 
 
@@ -3890,7 +3890,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		),
 		(	PredFlags /\ 16 =:= 16 ->
 			% multifile predicate
-			findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_rules_location_from(N1, _, _, _)), N1s),
+			findall(N1, '$lgt_predicate_property_'(_, Functor/Arity, clauses_rules_location_to(N1, _, _, DCtn)), N1s),
 			'$lgt_sum_list'([N0| N1s], N)
 		;	N is N0
 		)
@@ -3908,7 +3908,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		),
 		(	PredFlags /\ 16 =:= 16 ->
 			% multifile predicate
-			findall(N1, '$lgt_predicate_property_'(DCtn, Functor/Arity, clauses_rules_location_from(_, N1, _, _)), N1s),
+			findall(N1, '$lgt_predicate_property_'(_, Functor/Arity, clauses_rules_location_to(_, N1, _, DCtn)), N1s),
 			'$lgt_sum_list'([N0| N1s], N)
 		;	N is N0
 		)
@@ -7919,7 +7919,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% multifile predicate clauses defined in Entity for Other
 	'$lgt_property_location'(MainFile, File, Lines, Location),
 	'$lgt_pp_number_of_clauses_rules_'(Other, Functor, Arity, Clauses, Rules),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Other, Functor/Arity, clauses_rules_location_from(Clauses,Rules,Location,Entity)))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_predicate_property_'(Entity, Functor/Arity, clauses_rules_location_to(Clauses,Rules,Location,Other)))),
 	fail.
 
 '$lgt_add_entity_predicate_properties'(Entity, MainFile) :-

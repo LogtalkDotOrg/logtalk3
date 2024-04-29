@@ -36,6 +36,10 @@ properties `object`, `module`, and `predicate`.
 `updates/2`, `includes/3`, and `provides/3` properties now include an entity
 and predicate `lines/2` property.
 
+* FIXED: Bug where the entity properties `includes/3` and `provides/3` could
+be missing after reloading modified source files containing predicate multifile
+directives.
+
 Documentation
 -------------
 
