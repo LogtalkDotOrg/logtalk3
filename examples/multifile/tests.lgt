@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2021-06-06,
+		date is 2024-04-29,
 		comment is 'Unit tests for the "multifile" example.'
 	]).
 
@@ -63,16 +63,16 @@
 	test(multifile_04d, true) :-
 		main::predicate_property(b(_), number_of_clauses(2)).
 
-	test(multifile_05, true(N == 2)) :-
+	test(multifile_05, true(N == 3)) :-
 		object_property(main, number_of_clauses(N)).
 
-	test(multifile_06, true(N == 2)) :-
+	test(multifile_06, true(N == 3)) :-
 		object_property(main, number_of_user_clauses(N)).
 
-	test(multifile_07, true(N == 0)) :-
+	test(multifile_07, true(N == 1)) :-
 		object_property(main, number_of_rules(N)).
 
-	test(multifile_08, true(N == 0)) :-
+	test(multifile_08, true(N == 1)) :-
 		object_property(main, number_of_user_rules(N)).
 
 :- end_object.
