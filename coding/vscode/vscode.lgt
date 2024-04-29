@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:31:2,
+		version is 0:31:3,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-28,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -311,21 +311,18 @@
 		current_object(Object),
 		Object::predicate_property(Template, defined_in(Primary)),
 		(	% local definitions
-			entity_property(Primary, _, defines(Name/Arity, DefinitionProperties)),
+			entity_property(Primary, _, defines(Name/Arity, Properties)),
 			DefinitionEntity = Primary
 		;	% multifile definitions
-			entity_property(Primary, _, includes(Name/Arity, DefinitionEntity, DefinitionProperties))
+			entity_property(Primary, _, includes(Name/Arity, DefinitionEntity, Properties))
+		;	% predicate listed in a uses/2 directive
+			entity_property(Primary, _, calls(_, Properties)),
+			memberchk(alias(Name/Arity), Properties),
+			memberchk(caller(Name/Arity), Properties),
+			DefinitionEntity = Primary
 		),
-		(	memberchk(auxiliary, DefinitionProperties),
-			entity_property(DefinitionEntity, _, calls(_, CallsProperties)),
-			memberchk(alias(Name/Arity), CallsProperties) ->
-			% predicate listed in a uses/2 directive
-			entity_property(DefinitionEntity, _, file(File)),
-			memberchk(line_count(Line), CallsProperties)
-		;	entity_property(DefinitionEntity, _, file(File)),
-			memberchk(line_count(Line), DefinitionProperties)
-		),
-		!.
+		entity_property(DefinitionEntity, _, file(File)),
+		memberchk(line_count(Line), Properties).
 
 	find_definition_(Object::Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
@@ -365,8 +362,7 @@
 			entity_property(This, _, defines(Name/Arity, Properties))
 		),
 		entity_property(Entity, _, file(File)),
-		memberchk(line_count(Line), Properties),
-		!.
+		memberchk(line_count(Line), Properties).
 
 	find_definition_(::Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
@@ -404,8 +400,7 @@
 			),
 			abolish_object(Obj)
 		),
-		entity_property(Entity, _, file(File)),
-		!.
+		entity_property(Entity, _, file(File)).
 
 	find_definition_(^^Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
@@ -431,8 +426,7 @@
 			Obj<<predicate_property(Template, defined_in(Entity, Line)),
 			abolish_object(Obj)
 		),
-		entity_property(Entity, _, file(File)),
-		!.
+		entity_property(Entity, _, file(File)).
 
 	% local predicate
 	find_definition_(Name/Arity, Entity, _CallerLine, File, Line) :-
@@ -450,8 +444,7 @@
 			entity_property(Entity, _, defines(Name/ExtArity, Properties)),
 			entity_property(Entity, _, file(File)),
 			memberchk(line_count(Line), Properties)
-		),
-		!.
+		).
 
 	% predicate listed in a uses/2 directive
 	find_definition_(Name/Arity, Entity, CallerLine, File, Line) :-
@@ -890,12 +883,18 @@
 		!,
 		findall(
 			c(CalleePredicate, CalleeFile, CalleeLine),
-			(	entity_property(DefinitionEntity, _, calls(CalleePredicate, CallsProperties)),
-				memberchk(caller(Name/Arity), CallsProperties),
-				memberchk(line_count(CallerLine), CallsProperties),
-				find_definition_(CalleePredicate, DefinitionEntity, CallerLine, CalleeFile, CalleeLine)
-			),
+			find_callee(DefinitionEntity, Name/Arity, CalleePredicate, CalleeFile, CalleeLine),
 			Callees
+		).
+
+	find_callee(DefinitionEntity, Caller, CalleePredicate, CalleeFile, CalleeLine) :-
+		entity_property(DefinitionEntity, _, calls(CalleePredicate, CallsProperties)),
+		memberchk(caller(Caller), CallsProperties),
+		memberchk(line_count(CallerLine), CallsProperties),
+		(	find_definition_(CalleePredicate, DefinitionEntity, CallerLine, CalleeFile, CalleeLine) ->
+			true
+		;	% likely dynamic predicate with no clauses
+			find_declaration_(CalleePredicate, DefinitionEntity, CallerLine, CalleeFile, CalleeLine)
 		).
 
 	% auxiliary predicates
