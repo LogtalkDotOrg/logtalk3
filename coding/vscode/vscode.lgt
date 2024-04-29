@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:31:0,
+		version is 0:31:1,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-28,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -778,8 +778,8 @@
 		memberchk(line_count(Line), Properties).
 	% multifile predicate
 	find_implementation(Name/Arity, Entity, File-Line) :-
-		entity_property(Entity, Kind, includes(Name/Arity, Other, Properties)),
-		entity_property(Other, Kind, file(File)),
+		entity_property(Entity, _, includes(Name/Arity, Other, Properties)),
+		entity_property(Other, _, file(File)),
 		memberchk(line_count(Line), Properties).
 	% descendant definitions
 	find_implementation(Name/Arity, Entity, File-Line) :-
