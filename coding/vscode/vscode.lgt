@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:33:0,
+		version is 0:34:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-30,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -112,6 +112,13 @@
 	:- mode(find_descendants(+atom, @callable), one).
 	:- info(find_descendants/2, [
 		comment is 'Find the entity descendants.',
+		argnames is ['Directory', 'Entity']
+	]).
+
+	:- public(find_entity_type/2).
+	:- mode(find_entity_type(+atom, @callable), one).
+	:- info(find_entity_type/2, [
+		comment is 'Find the entity type.',
 		argnames is ['Directory', 'Entity']
 	]).
 
@@ -960,8 +967,8 @@
 		open(Data, write, DataStream),
 		(	find_ancestors_(Entity, Ancestors) ->
 			forall(
-				member(a(Ancestor, AncestorFile, AncestorLine), Ancestors),
-				{format(DataStream, 'Name:~w;File:~w;Line:~d~n', [Ancestor, AncestorFile, AncestorLine])}
+				member(a(Type, Ancestor, AncestorFile, AncestorLine), Ancestors),
+				{format(DataStream, 'Type:~w;Name:~w;File:~w;Line:~d~n', [Type, Ancestor, AncestorFile, AncestorLine])}
 			)
 		;	true
 		),
@@ -973,12 +980,12 @@
 		callable(Entity),
 		(	current_object(Entity) ->
 			findall(
-				a(Ancestor, File, Line),
-				(	(	implements_protocol(Entity, Ancestor)
-					;	imports_category(Entity, Ancestor)
-					;	extends_object(Entity, Ancestor)
-					;	instantiates_class(Entity, Ancestor)
-					;	specializes_class(Entity, Ancestor)
+				a(Type, Ancestor, File, Line),
+				(	(	implements_protocol(Entity, Ancestor), Type = protocol
+					;	imports_category(Entity, Ancestor), Type = category
+					;	extends_object(Entity, Ancestor), Type = object
+					;	instantiates_class(Entity, Ancestor), Type = object
+					;	specializes_class(Entity, Ancestor), Type = object
 					),
 					entity_property(Ancestor, _, file(File)),
 					entity_property(Ancestor, _, lines(Line, _)),
@@ -989,10 +996,8 @@
 		;	atom(Entity),
 			current_protocol(Entity) ->
 			findall(
-				a(Ancestor, File, Line),
-				(	(	extends_protocol(Entity, Ancestor)
-					;	implements_protocol(Entity, Ancestor)
-					),
+				a(Type, Ancestor, File, Line),
+				(	extends_protocol(Entity, Ancestor), Type = protocol,
 					entity_property(Ancestor, _, file(File)),
 					entity_property(Ancestor, _, lines(Line, _)),
 					ground_entity(Ancestor)
@@ -1001,9 +1006,9 @@
 			)
 		;	current_category(Entity),
 			findall(
-				a(Ancestor, File, Line),
-				(	(	extends_category(Entity, Ancestor)
-					;	imports_category(Entity, Ancestor)
+				a(Type, Ancestor, File, Line),
+				(	(	extends_category(Entity, Ancestor), Type = category
+					;	implements_protocol(Entity, Ancestor), Type = protocol
 					),
 					entity_property(Ancestor, _, file(File)),
 					entity_property(Ancestor, _, lines(Line, _)),
@@ -1021,8 +1026,8 @@
 		open(Data, write, DataStream),
 		(	find_descendants_(Entity, Descendants) ->
 			forall(
-				member(d(Descendant, DescendantsFile, DescendantsLine), Descendants),
-				{format(DataStream, 'Name:~w;File:~w;Line:~d~n', [Descendant, DescendantsFile, DescendantsLine])}
+				member(d(Type, Descendant, DescendantsFile, DescendantsLine), Descendants),
+				{format(DataStream, 'Type:~w;Name:~w;File:~w;Line:~d~n', [Type, Descendant, DescendantsFile, DescendantsLine])}
 			)
 		;	true
 		),
@@ -1034,10 +1039,10 @@
 		callable(Entity),
 		(	current_object(Entity) ->
 			findall(
-				d(Descendant, File, Line),
-				(	(	extends_object(Descendant, Entity)
-					;	instantiates_class(Descendant, Entity)
-					;	specializes_class(Descendant, Entity)
+				d(Type, Descendant, File, Line),
+				(	(	extends_object(Descendant, Entity), Type = object
+					;	instantiates_class(Descendant, Entity), Type = object
+					;	specializes_class(Descendant, Entity), Type = object
 					),
 					entity_property(Descendant, _, file(File)),
 					entity_property(Descendant, _, lines(Line, _)),
@@ -1048,9 +1053,9 @@
 		;	atom(Entity),
 			current_protocol(Entity) ->
 			findall(
-				d(Descendant, File, Line),
-				(	(	extends_protocol(Descendant, Entity)
-					;	implements_protocol(Descendant, Entity)
+				d(Type, Descendant, File, Line),
+				(	(	extends_protocol(Descendant, Entity), Type = protocol
+					;	implements_protocol(Descendant, Entity), (current_object(Descendant) -> Type = object; Type = category)
 					),
 					entity_property(Descendant, _, file(File)),
 					entity_property(Descendant, _, lines(Line, _)),
@@ -1060,10 +1065,10 @@
 			)
 		;	current_category(Entity),
 			findall(
-				d(Descendant, File, Line),
-				(	(	extends_category(Descendant, Entity)
-					;	imports_category(Descendant, Entity)
-					;	complements_object(Entity, Descendant)
+				d(Type, Descendant, File, Line),
+				(	(	extends_category(Descendant, Entity), Type = category
+					;	imports_category(Descendant, Entity), Type = object
+					;	complements_object(Entity, Descendant), Type = object
 					),
 					entity_property(Descendant, _, file(File)),
 					entity_property(Descendant, _, lines(Line, _)),
@@ -1072,6 +1077,25 @@
 				Descendants
 			)
 		).
+
+	% entity type
+
+	find_entity_type(Directory, Entity) :-
+		atom_concat(Directory, '/.vscode_type', Data),
+		atom_concat(Directory, '/.vscode_type_done', Marker),
+		open(Data, write, DataStream),
+		(	current_object(Entity) ->
+			Type = object
+		;	atom(Entity),
+			current_protocol(Entity) ->
+			Type = protocol
+		;	% current_category(Entity),
+			Type = category
+		),
+		{format(DataStream, '~w', [Type])},
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
 
 	% loader file
 
