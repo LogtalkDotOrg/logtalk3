@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:32:3,
+		version is 0:33:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-30,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -101,11 +101,29 @@
 		argnames is ['Directory', 'Resource', 'CallFile', 'CallLine']
 	]).
 
+	:- public(find_ancestors/2).
+	:- mode(find_ancestors(+atom, @callable), one).
+	:- info(find_ancestors/2, [
+		comment is 'Find the entity ancestors.',
+		argnames is ['Directory', 'Entity']
+	]).
+
+	:- public(find_descendants/2).
+	:- mode(find_descendants(+atom, @callable), one).
+	:- info(find_descendants/2, [
+		comment is 'Find the entity descendants.',
+		argnames is ['Directory', 'Entity']
+	]).
+
 	:- public(find_parent_file/2).
 	:- mode(find_parent_file(+atom, +atom), one).
 	:- info(find_parent_file/2, [
 		comment is 'Find the loader file.',
 		argnames is ['Directory', 'File']
+	]).
+
+	:- uses(user, [
+		numbervars/3
 	]).
 
 	% loading
@@ -934,6 +952,127 @@
 			find_declaration_(CalleePredicate, DefinitionEntity, CallerLine, CalleeFile, CalleeLine)
 		).
 
+	% ancestors
+
+	find_ancestors(Directory, Entity) :-
+		atom_concat(Directory, '/.vscode_ancestors', Data),
+		atom_concat(Directory, '/.vscode_ancestors_done', Marker),
+		open(Data, write, DataStream),
+		(	find_ancestors_(Entity, Ancestors) ->
+			forall(
+				member(a(Ancestor, AncestorFile, AncestorLine), Ancestors),
+				{format(DataStream, 'Name:~w;File:~w;Line:~d~n', [Ancestor, AncestorFile, AncestorLine])}
+			)
+		;	true
+		),
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
+
+	find_ancestors_(Entity, Ancestors) :-
+		callable(Entity),
+		(	current_object(Entity) ->
+			findall(
+				a(Ancestor, File, Line),
+				(	(	implements_protocol(Entity, Ancestor)
+					;	imports_category(Entity, Ancestor)
+					;	extends_object(Entity, Ancestor)
+					;	instantiates_class(Entity, Ancestor)
+					;	specializes_class(Entity, Ancestor)
+					),
+					entity_property(Ancestor, _, file(File)),
+					entity_property(Ancestor, _, lines(Line, _)),
+					ground_entity(Ancestor)
+				),
+				Ancestors
+			)
+		;	atom(Entity),
+			current_protocol(Entity) ->
+			findall(
+				a(Ancestor, File, Line),
+				(	(	extends_protocol(Entity, Ancestor)
+					;	implements_protocol(Entity, Ancestor)
+					),
+					entity_property(Ancestor, _, file(File)),
+					entity_property(Ancestor, _, lines(Line, _)),
+					ground_entity(Ancestor)
+				),
+				Ancestors
+			)
+		;	current_category(Entity),
+			findall(
+				a(Ancestor, File, Line),
+				(	(	extends_category(Entity, Ancestor)
+					;	imports_category(Entity, Ancestor)
+					),
+					entity_property(Ancestor, _, file(File)),
+					entity_property(Ancestor, _, lines(Line, _)),
+					ground_entity(Ancestor)
+				),
+				Ancestors
+			)
+		).
+
+	% descendants
+
+	find_descendants(Directory, Entity) :-
+		atom_concat(Directory, '/.vscode_descendants', Data),
+		atom_concat(Directory, '/.vscode_descendants_done', Marker),
+		open(Data, write, DataStream),
+		(	find_descendants_(Entity, Descendants) ->
+			forall(
+				member(d(Descendant, DescendantsFile, DescendantsLine), Descendants),
+				{format(DataStream, 'Name:~w;File:~w;Line:~d~n', [Descendant, DescendantsFile, DescendantsLine])}
+			)
+		;	true
+		),
+		close(DataStream),
+		open(Marker, append, MarkerStream),
+		close(MarkerStream).
+
+	find_descendants_(Entity, Descendants) :-
+		callable(Entity),
+		(	current_object(Entity) ->
+			findall(
+				d(Descendant, File, Line),
+				(	(	extends_object(Descendant, Entity)
+					;	instantiates_class(Descendant, Entity)
+					;	specializes_class(Descendant, Entity)
+					),
+					entity_property(Descendant, _, file(File)),
+					entity_property(Descendant, _, lines(Line, _)),
+					ground_entity(Descendant)
+				),
+				Descendants
+			)
+		;	atom(Entity),
+			current_protocol(Entity) ->
+			findall(
+				d(Descendant, File, Line),
+				(	(	extends_protocol(Descendant, Entity)
+					;	implements_protocol(Descendant, Entity)
+					),
+					entity_property(Descendant, _, file(File)),
+					entity_property(Descendant, _, lines(Line, _)),
+					ground_entity(Descendant)
+				),
+				Descendants
+			)
+		;	current_category(Entity),
+			findall(
+				d(Descendant, File, Line),
+				(	(	extends_category(Descendant, Entity)
+					;	imports_category(Descendant, Entity)
+					;	complements_object(Entity, Descendant)
+					),
+					entity_property(Descendant, _, file(File)),
+					entity_property(Descendant, _, lines(Line, _)),
+					ground_entity(Descendant)
+				),
+				Descendants
+			)
+		).
+
 	% loader file
 
 	find_parent_file(Directory, File0) :-
@@ -969,6 +1108,40 @@
 		catch(category_property(Category, Property), _, fail).
 	entity_property(Protocol, protocol, Property) :-
 		catch(protocol_property(Protocol, Property), _, fail).
+
+	ground_entity(Entity) :-
+		(	atom(Entity) ->
+			true
+		;	entity_property(Entity, _, info(Info)),
+			(	member(parameters(Parameters), Info) ->
+				ground_entity_parameters(Entity, Parameters)
+			;	member(parnames(Parnames), Info) ->
+				ground_entity_parnames(Entity, Parnames)
+			;	numbervars(Entity, 0, _)
+			)
+		).
+
+	ground_entity_parameters(Entity, Parameters) :-
+		Entity =.. [_| Arguments],
+		ground_entity_parameters_(Arguments, Parameters).
+
+	ground_entity_parameters_([], []).
+	ground_entity_parameters_([Argument| Arguments], [Argument-_| Parameters]) :-
+		!,
+		ground_entity_parameters_(Arguments, Parameters).
+	ground_entity_parameters_([_| Arguments], [_| Parameters]) :-
+		ground_entity_parameters_(Arguments, Parameters).
+
+	ground_entity_parnames(Entity, Parnames) :-
+		Entity =.. [_| Arguments],
+		ground_entity_parnames_(Arguments, Parnames).
+
+	ground_entity_parnames_([], []).
+	ground_entity_parnames_([Argument| Arguments], [Argument| Parnames]) :-
+		!,
+		ground_entity_parnames_(Arguments, Parnames).
+	ground_entity_parnames_([_| Arguments], [_| Parnames]) :-
+		ground_entity_parnames_(Arguments, Parnames).
 
 	member(Element, [Element| _]).
 	member(Element, [_| List]) :-
