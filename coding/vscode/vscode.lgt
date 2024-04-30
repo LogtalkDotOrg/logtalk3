@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:31:3,
+		version is 0:32:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-04-28,
+		date is 2024-04-30,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -101,9 +101,9 @@
 		argnames is ['Directory', 'Resource', 'CallFile', 'CallLine']
 	]).
 
-	:- public(find_loader_file/2).
-	:- mode(find_loader_file(+atom, +atom), one).
-	:- info(find_loader_file/2, [
+	:- public(find_parent_file/2).
+	:- mode(find_parent_file(+atom, +atom), one).
+	:- info(find_parent_file/2, [
 		comment is 'Find the loader file.',
 		argnames is ['Directory', 'File']
 	]).
@@ -906,11 +906,11 @@
 
 	% loader file
 
-	find_loader_file(Directory, File0) :-
+	find_parent_file(Directory, File0) :-
 		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(File0, File)},
-		atom_concat(Directory, '/.vscode_find_loader', Data),
-		atom_concat(Directory, '/.vscode_find_loader_done', Marker),
+		atom_concat(Directory, '/.vscode_find_parent', Data),
+		atom_concat(Directory, '/.vscode_find_parent_done', Marker),
 		open(Data, write, DataStream),
 		(	logtalk::loaded_file_property(File, parent(Loader)) ->
 			{format(DataStream, '~w', [Loader])}
