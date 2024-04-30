@@ -552,18 +552,17 @@
 		;	find_predicate_references(Resource, Entity, File, Line, References)
 		).
 
+	% non-terminal
 	find_predicate_references(Name//Arity, _, File, Line, References) :-
-		% predicate scope directive
 		ground(Name/Arity),
 		ExtArity is Arity + 2,
 		find_references_(Name/ExtArity, File, Line, References).
 
+	% predicate scope directive
 	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
-		% predicate scope directive
 		ground(Name/Arity),
 		entity_property(Entity, _, declares(Name/Arity, Properties)),
 		memberchk(line_count(Line), Properties),
-		!,
 		findall(
 			CallerFile-CallerLine,
 			(	entity_property(Caller, _, calls(Object::Name/Arity, CallsProperties)),
@@ -648,13 +647,19 @@
 		find_predicate_references(OriginalName/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	% local predicate call; declared
-	find_predicate_references(Name/Arity, Entity, _, Line, References) :-
+	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
+		ground(Name/Arity),
 		find_declaration_(Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+		once((
+			DeclarationFile \== File
+		;	DeclarationLine \== Line
+		)),
 		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	% local predicate call; no declaration
 	find_predicate_references(Name/Arity, Entity, _, _, References) :-
+		ground(Name/Arity),
 		findall(
 			Reference,
 			find_predicate_local_reference(Name/Arity, Entity, Reference),
@@ -663,8 +668,19 @@
 		% require at least one reference other than the selected one
 		References = [_, _| _].
 
+	% non-terminal
+	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
+		ground(Name/Arity),
+		ExtArity is Arity + 2,
+		once((
+			(	entity_property(Entity, Kind, defines(Name/ExtArity, Properties))
+			;	entity_property(Entity, Kind, calls(Name/ExtArity, Properties))
+			),
+			memberchk(non_terminal(Name//Arity), Properties)
+		)),
+		find_references_(Name/ExtArity, File, Line, References).
+
 	find_predicate_references(Alias::Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		!,
 		callable(Alias),
 		ground(Name/Arity),
 		(	entity_property(Entity, _, alias(Alias, Properties)),
@@ -678,7 +694,6 @@
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	find_predicate_references(::Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		!,
 		ground(Name/Arity),
 		(	find_declaration_(::Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
 			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
@@ -693,7 +708,6 @@
 		).
 
 	find_predicate_references(^^Name/Arity, Entity, _, Line, [DeclarationFile-DeclarationLine| References]) :-
-		!,
 		ground(Name/Arity),
 		(	find_declaration_(^^Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
 			entity(DeclarationFile, DeclarationLine, DeclarationEntity),
