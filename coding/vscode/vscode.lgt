@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:32:2,
+		version is 0:32:3,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-30,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -646,6 +646,12 @@
 		find_declaration_(Object::OriginalName/Arity, Entity, Line, DeclarationFile, DeclarationLine),
 		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
 		find_predicate_references(OriginalName/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
+
+	% local predicate call; declared
+	find_predicate_references(Name/Arity, Entity, _, Line, References) :-
+		find_declaration_(Name/Arity, Entity, Line, DeclarationFile, DeclarationLine),
+		entity(DeclarationFile, DeclarationLine, DeclarationEntity),
+		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	% local predicate call; no declaration
 	find_predicate_references(Name/Arity, Entity, _, _, References) :-
