@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:32:1,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-30,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -354,7 +354,7 @@
 					Obj<<predicate_property(Template, defined_in(Primary)),
 					abolish_object(Obj)
 				)
-			;	%current_category(This) ->
+			;	% current_category(This),
 				create_object(Obj, [imports(This)], [], []),
 				Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
 				Obj<<predicate_property(Template, defined_in(Primary)),
@@ -428,6 +428,8 @@
 				Obj<<predicate_property(Template, defined_in(Entity, Line)),
 				abolish_object(Obj)
 			)
+		;	current_protocol(This) ->
+			fail
 		;	%current_category(This) ->
 			create_object(Obj, [imports(This)], [], []),
 			Obj<<predicate_property(Template, defined_in(Entity, Line)),
@@ -813,7 +815,7 @@
 				;	ImplementationEntity<<predicate_property(Template, declared_in(DeclarationEntity))
 				)
 			)
-		;	%current_category(ImplementationEntity) ->
+		;	% current_category(ImplementationEntity),
 			create_object(Obj, [imports(ImplementationEntity)], [], []),
 			Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
 			abolish_object(Obj)
