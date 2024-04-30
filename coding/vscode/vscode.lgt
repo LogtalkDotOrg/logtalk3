@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:34:0,
+		version is 0:34:1,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-30,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -458,9 +458,7 @@
 				Obj<<predicate_property(Template, defined_in(Entity, Line)),
 				abolish_object(Obj)
 			)
-		;	current_protocol(This) ->
-			fail
-		;	%current_category(This) ->
+		;	current_category(This),
 			create_object(Obj, [imports(This)], [], []),
 			Obj<<predicate_property(Template, defined_in(Entity, Line)),
 			abolish_object(Obj)
