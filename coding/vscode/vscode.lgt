@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:32:1,
+		version is 0:32:2,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-04-30,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -166,10 +166,12 @@
 		callable(Alias),
 		ground(Name/Arity),
 		(	entity_property(Entity, _, alias(Alias, Properties)),
+			\+ member(predicate, Properties),
 			member(for(Object), Properties) ->
 			true
 		;	Object = Alias
 		),
+		Object \== user,
 		functor(Template, Name, Arity),
 		Object::predicate_property(Template, declared_in(DeclarationEntity, Line)),
 		entity_property(DeclarationEntity, _, file(File)).
@@ -224,6 +226,7 @@
 		ground(Name/Arity),
 		functor(Template, Name, Arity),
 		(	current_object(Entity) ->
+			Entity \== user,
 			(	Entity<<predicate_property(Template, declared_in(DeclarationEntity, Line)) ->
 				true
 			;	once((
@@ -310,12 +313,14 @@
 		callable(Alias),
 		ground(Name/Arity),
 		(	entity_property(Entity, _, alias(Alias, AliasProperties)),
+			\+ member(predicate, AliasProperties),
 			member(for(Object), AliasProperties) ->
 			true
 		;	Object = Alias
 		),
 		functor(Template, Name, Arity),
 		current_object(Object),
+		Object \== user,
 		Object::predicate_property(Template, defined_in(Primary)),
 		(	% local definitions
 			entity_property(Primary, _, defines(Name/Arity, Properties)),
@@ -506,17 +511,19 @@
 		open(Marker, append, MarkerStream),
 		close(MarkerStream).
 
-	find_type_definition_(Name/Arity, _, DefinitionFile, DefinitionLine) :-
-		functor(Entity, Name, Arity),
-		entity_property(Entity, Type, file(DefinitionFile)),
-		entity_property(Entity, Type, lines(DefinitionLine, _)).
-	% object alias
 	find_type_definition_(Name/Arity, ReferenceEntity, DefinitionFile, DefinitionLine) :-
+		ground(Name/Arity),
 		functor(Entity, Name, Arity),
-		entity_property(ReferenceEntity, _, alias(Entity, Properties)),
-		memberchk(for(Other), Properties),
-		entity_property(Other, Type, file(DefinitionFile)),
-		entity_property(Other, Type, lines(DefinitionLine, _)).
+		(	entity_property(ReferenceEntity, _, alias(Entity, Properties)),
+			\+ member(predicate, Properties),
+			memberchk(for(Original), Properties) ->
+			% object alias
+			entity_property(Original, Type, file(DefinitionFile)),
+			entity_property(Original, Type, lines(DefinitionLine, _))
+		;	% not an alias
+			entity_property(Entity, Type, file(DefinitionFile)),
+			entity_property(Entity, Type, lines(DefinitionLine, _))
+		).
 
 	% references
 
@@ -655,6 +662,7 @@
 		callable(Alias),
 		ground(Name/Arity),
 		(	entity_property(Entity, _, alias(Alias, Properties)),
+			\+ member(predicate, Properties),
 			member(for(Object), Properties) ->
 			true
 		;	Object = Alias
