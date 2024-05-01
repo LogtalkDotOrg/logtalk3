@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:34:1,
+		version is 0:34:2,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-04-30,
+		date is 2024-05-01,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -883,7 +883,9 @@
 		atom_concat(Directory, '/.vscode_callers', Data),
 		atom_concat(Directory, '/.vscode_callers_done', Marker),
 		open(Data, write, DataStream),
-		(	find_callers_(Predicate, ReferenceFile, ReferenceLine, Callers) ->
+		(	find_callers_(Predicate, ReferenceFile, ReferenceLine, Callers0) ->
+			% multiple clauses can result in repeated callers
+			sort(Callers0, Callers),
 			forall(
 				member(c(Name, CallerFile, CallerLine), Callers),
 				{format(DataStream, 'Name:~w;File:~w;Line:~d~n', [Name, CallerFile, CallerLine])}
@@ -924,7 +926,9 @@
 		atom_concat(Directory, '/.vscode_callees', Data),
 		atom_concat(Directory, '/.vscode_callees_done', Marker),
 		open(Data, write, DataStream),
-		(	find_callees_(Predicate, ReferenceFile, ReferenceLine, Callees) ->
+		(	find_callees_(Predicate, ReferenceFile, ReferenceLine, Callees0) ->
+			% multiple clauses can result in repeated callees
+			sort(Callees0, Callees),
 			forall(
 				member(c(Name, CalleeFile, CalleeLine), Callees),
 				{format(DataStream, 'Name:~w;File:~w;Line:~d~n', [Name, CalleeFile, CalleeLine])}
