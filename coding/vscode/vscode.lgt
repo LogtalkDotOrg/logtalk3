@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:34:2,
+		version is 0:34:3,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-01,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -988,6 +988,7 @@
 					;	extends_object(Entity, Ancestor), Type = object
 					;	instantiates_class(Entity, Ancestor), Type = object
 					;	specializes_class(Entity, Ancestor), Type = object
+					;	complements_object(Ancestor, Entity), Type = category
 					),
 					entity_property(Ancestor, _, file(File)),
 					entity_property(Ancestor, _, lines(Line, _)),
