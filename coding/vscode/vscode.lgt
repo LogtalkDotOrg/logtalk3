@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:35:0,
+		version is 0:35:1,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-01,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -805,7 +805,6 @@
 	% uses/1 and alias/2 directives
 	find_entity_reference(Name/Arity, File-Line) :-
 		functor(Template, Name, Arity),
-		current_object(Template),
 		entity_property(Entity, Kind, alias(_, Properties)),
 		(	member(from(Template), Properties) ->
 			% predicate alias
