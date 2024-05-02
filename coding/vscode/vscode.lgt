@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:35:1,
+		version is 0:36:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-01,
+		date is 2024-05-02,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -757,8 +757,9 @@
 		entity_property(Entity, Kind, calls(Name/ExtArity, CallsProperties)),
 		memberchk(line_count(Line), CallsProperties).
 
-	find_entity_references(Entity, References) :-
-		ground(Entity),
+	find_entity_references(Name/Arity, References) :-
+		ground(Name/Arity),
+		functor(Entity, Name, Arity),
 		findall(
 			Reference,
 			find_entity_reference(Entity, Reference),
@@ -766,53 +767,56 @@
 		).
 
 	% entity opening directives
-	find_entity_reference(Name/Arity, File-Line) :-
-		functor(Template, Name, Arity),
-		(	atom(Template),
-			current_protocol(Template) ->
-			(	extends_protocol(Entity, Template)
-			;	extends_protocol(Template, Entity)
-			;	implements_protocol(Entity, Template)
+	find_entity_reference(Entity, File-Line) :-
+		(	atom(Entity),
+			current_protocol(Entity) ->
+			(	extends_protocol(Other, Entity)
+			;	extends_protocol(Entity, Other)
+			;	implements_protocol(Other, Entity)
 			)
-		;	current_object(Template) ->
-			(	extends_object(Entity, Template)
-			;	extends_object(Template, Entity)
-			;	instantiates_class(Entity, Template)
-			;	instantiates_class(Template, Entity)
-			;	specializes_class(Entity, Template)
-			;	specializes_class(Template, Entity)
-			;	complements_object(Entity, Template)
+		;	current_object(Entity) ->
+			(	extends_object(Other, Entity)
+			;	extends_object(Entity, Other)
+			;	instantiates_class(Other, Entity)
+			;	instantiates_class(Entity, Other)
+			;	specializes_class(Other, Entity)
+			;	specializes_class(Entity, Other)
+			;	complements_object(Other, Entity)
 			)
-		;	current_category(Template),
-			(	extends_category(Entity, Template)
-			;	extends_category(Template, Entity)
-			;	imports_category(Entity, Template)
-			;	complements_object(Template, Entity)
+		;	current_category(Entity),
+			(	extends_category(Other, Entity)
+			;	extends_category(Entity, Other)
+			;	imports_category(Other, Entity)
+			;	complements_object(Entity, Other)
 			)
 		),
-		entity_property(Entity, Kind, file(File)),
-		entity_property(Entity, Kind, lines(Line, _)).
+		entity_property(Other, Kind, file(File)),
+		entity_property(Other, Kind, lines(Line, _)).
 	% uses/2 directives
-	find_entity_reference(Name/Arity, File-Line) :-
-		functor(Template, Name, Arity),
-		current_object(Template),
-		entity_property(Entity, Kind, calls(Object::Predicate, Properties)),
+	find_entity_reference(Entity, File-Line) :-
+		current_object(Entity),
+		% Object may not be bound
+		entity_property(Other, Kind, calls(Object::Predicate, Properties)),
 		callable(Object),
-		Object = Template,
+		Object = Entity,
 		memberchk(caller(Predicate), Properties),
-		entity_property(Entity, Kind, file(File)),
+		entity_property(Other, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 	% uses/1 and alias/2 directives
-	find_entity_reference(Name/Arity, File-Line) :-
-		functor(Template, Name, Arity),
-		entity_property(Entity, Kind, alias(_, Properties)),
-		(	member(from(Template), Properties) ->
+	find_entity_reference(Entity, File-Line) :-
+		entity_property(Other, Kind, alias(_, Properties)),
+		(	member(from(Entity), Properties) ->
 			% predicate alias
 			true
 		;	% object alias
-			memberchk(for(Template), Properties)
+			memberchk(for(Entity), Properties)
 		),
-		entity_property(Entity, Kind, file(File)),
+		entity_property(Other, Kind, file(File)),
+		memberchk(line_count(Line), Properties).
+	% multifile/1 predicate clauses
+	find_entity_reference(Entity, File-Line) :-
+		entity_property(Other, Kind, provides(_, Entity, Properties)),
+		entity_property(Other, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 
 	% implementations
