@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,8 +27,8 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:0:0,
-		date is 2003-2-3,
+		version is 1:0:1,
+		date is 2024-05-02,
 		comment is 'Generic geometric shape.'
 	]).
 
@@ -40,7 +40,7 @@
 	]).
 
 	:- public(position/2).
-	:- mode(position(?integer, ?integer), zero_or_one).
+	:- mode(position(?number, ?number), zero_or_one).
 	:- info(position/2, [
 		comment is 'Shape position.',
 		argnames is ['X', 'Y']
@@ -63,8 +63,8 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:1:0,
-		date is 2004-1-8,
+		version is 1:1:1,
+		date is 2024-05-02,
 		comment is 'Generic polygon.'
 	]).
 
@@ -76,14 +76,14 @@
 	]).
 
 	:- public(area/1).
-	:- mode(area(-float), zero_or_one).
+	:- mode(area(-number), zero_or_one).
 	:- info(area/1, [
 		comment is 'Polygon area.',
 		argnames is ['Area']
 	]).
 
 	:- public(perimeter/1).
-	:- mode(perimeter(?atom), zero_or_one).
+	:- mode(perimeter(?number), zero_or_one).
 	:- info(perimeter/1, [
 		comment is 'Polygon perimeter.',
 		argnames is ['Perimeter']
@@ -100,13 +100,13 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:1:0,
-		date is 2004-1-8,
+		version is 1:1:1,
+		date is 2024-05-02,
 		comment is 'Generic regular polygon.'
 	]).
 
 	:- public(side/1).
-	:- mode(side(?atom), zero_or_one).
+	:- mode(side(?number), zero_or_one).
 	:- info(side/1, [
 		comment is 'Regular polygon side length.',
 		argnames is ['Length']
@@ -132,7 +132,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1:0:0,
-		date is 2003-2-3,
+		date is 2003-02-03,
 		comment is 'Geometric square.'
 	]).
 
