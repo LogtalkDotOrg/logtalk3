@@ -143,7 +143,7 @@ concept, is not a significant concept in <em>declarative</em> object-oriented pr
 Declarative object-oriented programming concepts can be materialized in both
 logic and functional languages. In this section, we focus only in declarative
 object-oriented logic programming.</p>
-<p>The first critical generalization of object-oriented programming concepts is the
+<p>The first key generalization of object-oriented programming concepts is the
 concept of object itself. What an object encapsulates depends on the <em>base programming
 paradigm</em> where we apply object-oriented programming concepts. When these concepts
 are applied to an imperative language, where mutable state and destructive assignment
@@ -155,8 +155,8 @@ are usually static and thus Logtalk objects are static by default. This contrast
 imperative object-oriented languages where usually classes are static and objects are
 dynamic. This view of an object as a set of predicates also forgo a distinction
 between <em>data</em> and <em>procedures</em> that is central to imperative object-oriented
-languages but moot in declarative, homoiconic logic languages.</p>
-<p>The second critical generalization concerns the relation between objects and other
+languages but moot in declarative, <a class="reference internal" href="../glossary.html#term-homoiconic"><span class="xref std std-term">homoiconic</span></a> logic languages.</p>
+<p>The second key generalization concerns the relation between objects and other
 entities such as protocols (interfaces) and ancestor objects. The idea is that entity
 relations define <em>reuse patterns</em> and the <em>roles</em> played by the participating entities.
 A common reuse pattern is <em>inheritance</em>. In this case, an entity inherits, and thus
@@ -170,13 +170,16 @@ its predicate declarations by providing an implementation for those predicates a
 exposing those predicates to its clients. An essential consequence of this
 generalization is that protocols, objects, and categories are first-class entities
 while e.g. <em>prototype</em>, <em>parent</em>, <em>class</em>, <em>instance</em>, <em>metaclass</em>, <em>subclass</em>,
-<em>superclass</em>, or <em>ancestor</em> are just <em>roles</em> that an object can play. Moreover, a
-language can provide multiple reuse patterns instead of selecting a set of patterns
-and supporting this set as a design choice that excludes other reuse patterns. For
-example, most imperative object-oriented languages are either class-based or
-prototype-based. In contrast, Logtalk naturally supports both classes and prototypes
-by providing the corresponding reuse patterns using objects as first-class entities
-capable of playing multiple roles.</p>
+<em>superclass</em>, or <em>ancestor</em> are just <em>roles</em> that an object can play. When sending
+a message to an object, the corresponding predicate <em>declaration</em> and predicate
+<em>definition</em> lookup procedures (reuse patterns) depend on the role or roles that
+the object plays (see the <a class="reference internal" href="inheritance.html#inheritance-inheritance"><span class="std std-ref">Inheritance</span></a> section for details).
+Another consequence of this generalization is that a language can provide multiple
+reuse patterns instead of selecting a set of patterns and supporting this set as a
+design choice that excludes other reuse patterns. For example, most imperative
+object-oriented languages are either class-based or prototype-based. In contrast,
+Logtalk supports both classes and prototypes by providing the corresponding reuse
+patterns using objects as first-class entities capable of playing multiple roles.</p>
 </section>
 
 

@@ -638,3 +638,10 @@ Glossary
       grammar rule or used in a cut-transparent argument of a control
       construct. The "naked" designation highlights that the meta-variable
       is not wrapped by ``call/1`` or ``phrase//1`` goals.
+
+   homoiconic
+      A property of programming languages where *code* and *data* use the
+      same representation. Logtalk (and Prolog) are examples of homoiconic
+      programming languages. A Logtalk program is a set of terms (clauses
+      and directives) that can be handled as *data* by e.g. the term-expansion
+      mechanism.

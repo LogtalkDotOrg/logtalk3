@@ -43,6 +43,10 @@ directives.
 Documentation
 -------------
 
+* ADDED: A glossary definition for _homoiconic_ programming languages.
+
+* IMPROVED: Handbook section on declarative object-oriented programming.
+
 * UPDATED: The `help` tool documentation on known issues.
 
 * UPDATED: Notes on the VSCode and VSCodium text editors support.
