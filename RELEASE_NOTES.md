@@ -47,6 +47,8 @@ Documentation
 
 * IMPROVED: Handbook section on declarative object-oriented programming.
 
+* UPDATED: Handbook documentation on developer tools requirements.
+
 * UPDATED: The `help` tool documentation on known issues.
 
 * UPDATED: Notes on the VSCode and VSCodium text editors support.
