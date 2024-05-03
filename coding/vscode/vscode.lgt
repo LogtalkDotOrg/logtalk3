@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:36:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-03,
+		date is 2024-05-02,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -979,10 +979,7 @@
 		open(Data, write, DataStream),
 		(	find_ancestors_(Entity, Ancestors) ->
 			forall(
-				(	member(a(Type, Ancestor, AncestorFile, AncestorLine), Ancestors),
-					% avoid cases where an object instantiates itself
-					Ancestor \= Entity
-				),
+				member(a(Type, Ancestor, AncestorFile, AncestorLine), Ancestors),
 				{format(DataStream, 'Type:~w;Name:~w;File:~w;Line:~d~n', [Type, Ancestor, AncestorFile, AncestorLine])}
 			)
 		;	true
@@ -1042,10 +1039,7 @@
 		open(Data, write, DataStream),
 		(	find_descendants_(Entity, Descendants) ->
 			forall(
-				(	member(d(Type, Descendant, DescendantsFile, DescendantsLine), Descendants),
-					% avoid cases where an object instantiates itself
-					Descendant \= Entity
-				),
+				member(d(Type, Descendant, DescendantsFile, DescendantsLine), Descendants),
 				{format(DataStream, 'Type:~w;Name:~w;File:~w;Line:~d~n', [Type, Descendant, DescendantsFile, DescendantsLine])}
 			)
 		;	true
