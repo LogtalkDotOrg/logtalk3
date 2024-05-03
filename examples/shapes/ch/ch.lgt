@@ -19,6 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% this example reuses the "roots" example, which provides three (objects
+% playing the role of) classes that are used here:
+%
+% - abstract_class
+%	default metaclass for all abstract classes
+% - class
+%	default metaclass for all classes
+% - object
+%	root class for class-based hierarchies
+%
+% see the documentation of the "roots" example for more details
+
+
 % "shape" abstract class
 
 :- object(shape,
@@ -115,6 +128,12 @@
 	% default side length
 	side(1).
 
+	% the perimeter depends on the number of sides of the specific type
+	% of regular polygon, defined in descendant classes, and the length
+	% of the side, which can be redefined from the default value here in
+	% descendant classes and instances; thus, we must sent the messages
+	% to _self_ (i.e. the instance that receives the perimeter/1 message)
+	% using the ::/1 control construct
 	perimeter(Perimeter) :-
 		::nsides(Number),
 		::side(Side),
@@ -136,8 +155,14 @@
 		comment is 'Geometric square.'
 	]).
 
+	% as all squares have 4 sides, we can define the nsides/1 predicate here
+	% instead of repeating the definition in all descendants of this class
 	nsides(4).
 
+	% the area depends on the length of the side, which can be redefined
+	% from the inherited default value in descendant classes and instances;
+	% thus, we must sent the side/1 message to _self_ (i.e. the instance that
+	% receives the perimeter/1 message) using the ::/1 control construct
 	area(Area) :-
 		::side(Side),
 		Area is Side*Side.
@@ -145,16 +170,22 @@
 :- end_object.
 
 
+% "q1" static instance of "square"
+
 :- object(q1,
 	instantiates(square)).
 
-	% inherits default values for position/2, color/1, and side/1
+	% inherits default definitions for position/2, color/1, and side/1
 
 :- end_object.
 
 
+% "q2" static instance of "square"
+
 :- object(q2,
 	instantiates(square)).
+
+	% overrides inherited default definitions for position/2, color/1, and side/1
 
 	position(2, 3).
 

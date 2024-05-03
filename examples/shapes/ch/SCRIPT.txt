@@ -27,6 +27,9 @@ ________________________________________________________________________
 % try some simple queries:
 
 
+% objects playing the role of classes define predicates for their (descendant)
+% instances, not for themselves:
+
 | ?- square::nsides(N).
 
 ! error(

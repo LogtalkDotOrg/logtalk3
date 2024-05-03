@@ -61,6 +61,8 @@ Tools
 Examples
 --------
 
+* IMPROVED: Documentation of the `shapes` example.
+
 * UPDATED: The `multifile` example to also illustrate multifile non-terminals.
 
 * FIXED: Spurious choice-points in the `blocks` and `bricks` examples.
