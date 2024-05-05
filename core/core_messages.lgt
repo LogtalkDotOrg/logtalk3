@@ -700,6 +700,8 @@
 		['~q is not a sound construct in a grammar rule'-[GRBody], nl],
 		message_context(File, Lines, Type, Entity).
 
+	% left-recursion
+
 	message_tokens(left_recursion(File, Lines, Type, Entity, Term)) -->
 		(	{functor(Term, (-->), 2)} ->
 			['left-recursion in grammar rule: ~q'-[Term], nl]

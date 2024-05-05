@@ -12619,9 +12619,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_clause'((Head :- Body), _, _, _, Ctx) :-
 	once((
-		Body == Head
+		'$lgt_variant'(Body, Head)
 	;	Body = (Goal, _),
-		Goal == Head
+		'$lgt_variant'(Goal, Head)
 	)),
 	'$lgt_comp_ctx_term'(Ctx, Term),
 	callable(Term),
@@ -25500,9 +25500,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), _, Ctx) :-
 	once((
-		GRBody == NonTerminal
+		'$lgt_variant'(GRBody, NonTerminal)
 	;	GRBody = (GRFirst, _),
-		GRFirst == NonTerminal
+		'$lgt_variant'(GRFirst, NonTerminal)
 	)),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -25549,9 +25549,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_dcg_rule'((NonTerminal --> GRBody), _, Ctx) :-
 	once((
-		GRBody == NonTerminal
+		'$lgt_variant'(GRBody, NonTerminal)
 	;	GRBody = (GRFirst, _),
-		GRFirst == NonTerminal
+		'$lgt_variant'(GRFirst, NonTerminal)
 	)),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
