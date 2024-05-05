@@ -67,6 +67,9 @@ Examples
 
 * IMPROVED: Documentation of the `shapes` example.
 
+* UPDATED: The `errors` example to illustrate the new linter warning for
+left-recursion in clauses and grammar rules.
+
 * UPDATED: The `multifile` example to also illustrate multifile non-terminals.
 
 * FIXED: Spurious choice-points in the `blocks` and `bricks` examples.
