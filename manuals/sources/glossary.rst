@@ -181,7 +181,7 @@ Glossary
       :term:`protected inheritance` and :term:`private inheritance`.
 
    instance
-      An :term:`object` that instantiates one another object, interpreted as
+      An :term:`object` that instantiates another object, interpreted as
       its :term:`class`. An object may instantiate multiple objects (also
       known as multiple instantiation).
 
@@ -509,8 +509,8 @@ Glossary
       dynamic.
 
    specialization
-      A :term:`class` is specialized by defining a new class that inherit its
-      predicates and possibly add new ones.
+      A :term:`class` is specialized by defining a new class that inherits its
+      predicates and possibly adds new ones.
 
    source file
       A text file defining Logtalk and/or Prolog code. Multiple Logtalk
