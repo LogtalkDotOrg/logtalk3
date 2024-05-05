@@ -12627,9 +12627,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Term),
 	\+ functor(Term, (-->), 2),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(left_recursion, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(general),
+		warning(left_recursion),
 		left_recursion(File, Lines, Type, Entity, (Head :- Body))
 	),
 	fail.
@@ -25045,6 +25046,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(catchall_catch).
 '$lgt_valid_flag'(grammar_rules).
 '$lgt_valid_flag'(arithmetic_expressions).
+'$lgt_valid_flag'(left_recursion).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
 '$lgt_valid_flag'(dynamic_declarations).
@@ -25178,6 +25180,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(arithmetic_expressions, silent) :- !.
 '$lgt_valid_flag_value'(arithmetic_expressions, warning) :- !.
+
+'$lgt_valid_flag_value'(left_recursion, silent) :- !.
+'$lgt_valid_flag_value'(left_recursion, warning) :- !.
 
 '$lgt_valid_flag_value'(report, on) :- !.
 '$lgt_valid_flag_value'(report, warnings) :- !.
@@ -25505,9 +25510,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_variant'(GRFirst, NonTerminal)
 	)),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(left_recursion, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(general),
+		warning(left_recursion),
 		left_recursion(File, Lines, Type, Entity, (NonTerminal, Terminals --> GRBody))
 	),
 	fail.
@@ -25554,9 +25560,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_variant'(GRFirst, NonTerminal)
 	)),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(left_recursion, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
-		warning(general),
+		warning(left_recursion),
 		left_recursion(File, Lines, Type, Entity, (NonTerminal --> GRBody))
 	),
 	fail.

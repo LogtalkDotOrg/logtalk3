@@ -29,6 +29,7 @@ Logtalk compiler and runtime
 ----------------------------
 
 * ADDED: Linter warning for left-recursion in clauses and grammar rules.
+Controlled by the new `left_recursion` flag with default value `warning`.
 
 * ADDED: Object and category `alias/2` property for object and module aliases
 declared using the `uses/1` and `use_module/1` directives. Also added the alias

@@ -981,6 +981,15 @@ Lint flags
    standardization often makes it tricky or cumbersome to avoid too generic
    ``catch/3`` goals when writing portable code.
 
+.. _flag_left_recursion:
+.. index:: pair: left_recursion; Flag
+
+``left_recursion(Option)``
+   Controls warnings of left-recursion on clauses and grammar rules.
+   Specifically, when the clause or grammar rule head and the left
+   most goal in the body are variants. Possible option values are
+   ``warning`` (the usual default) and ``silent``.
+
 .. _flag_tail_recursive:
 .. index:: pair: tail_recursive; Flag
 

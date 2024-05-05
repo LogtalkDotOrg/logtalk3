@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on December 4, 2023
+%  Last updated on May 5, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -404,6 +404,7 @@
 '$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(naming, silent).
 '$lgt_default_flag'(duplicated_clauses, silent).
+'$lgt_default_flag'(left_recursion, warning).
 '$lgt_default_flag'(tail_recursive, silent).
 '$lgt_default_flag'(disjunctions, warning).
 '$lgt_default_flag'(conditionals, warning).

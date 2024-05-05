@@ -1078,6 +1078,7 @@
 			current_logtalk_flag(disjunctions, Disjunctions0), align(Disjunctions0, Disjunctions),
 			current_logtalk_flag(conditionals, Conditionals0), align(Conditionals0, Conditionals),
 			current_logtalk_flag(catchall_catch, CatchallCatch0), align(CatchallCatch0, CatchallCatch),
+			current_logtalk_flag(left_recursion, LeftRecursion0), align(LeftRecursion0, LeftRecursion),
 			current_logtalk_flag(tail_recursive, TailRecursive0), align(TailRecursive0, TailRecursive),
 			current_logtalk_flag(portability, Portability0), align(Portability0, Portability),
 			current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns0), align(RedefinedBuiltIns0, RedefinedBuiltIns),
@@ -1106,9 +1107,10 @@
 			'  grammar_rules:        ~w    arithmetic_expressions:     ~w'-[GrammarRules, ArithmeticExpressions], nl,
 			'  lambda_variables:     ~w    suspicious_calls:           ~w'-[Lambda, SuspiciousCalls], nl,
 			'  disjunctions:         ~w    conditionals:               ~w'-[Disjunctions, Conditionals], nl,
-			'  catchall_catch:       ~w    tail_recursive:             ~w'-[CatchallCatch, TailRecursive], nl,
 			'  singleton_variables:  ~w    underscore_variables:       ~w'-[Singletons, Underscore], nl,
-			'  deprecated:           ~w    naming:                     ~w'-[Deprecated, Naming], nl
+			'  deprecated:           ~w    naming:                     ~w'-[Deprecated, Naming], nl,
+			'  left_recursion:       ~w    tail_recursive:             ~w'-[LeftRecursion, TailRecursive], nl,
+			'  catchall_catch:       ~w'-[CatchallCatch], nl
 		].
 
 	default_optional_features_flags -->
