@@ -3550,7 +3550,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 78, 0, b02)).
+'$lgt_version_data'(logtalk(3, 78, 0, b03)).
 
 
 
@@ -12616,6 +12616,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 % calls to the parameter/2 method in the clause body will access parameters
 % for the defining entity; parameters for the entity for which the clause
 % is defined can be accessed through simple unification at the clause head
+
+'$lgt_compile_clause'((Head :- Body), _, _, _, Ctx) :-
+	once((
+		Body == Head
+	;	Body = (Goal, _),
+		Goal == Head
+	)),
+	'$lgt_comp_ctx_term'(Ctx, Term),
+	callable(Term),
+	\+ functor(Term, (-->), 2),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(general),
+		left_recursion(File, Lines, Type, Entity, (Head :- Body))
+	),
+	fail.
 
 '$lgt_compile_clause'((Head:-Body), Entity, TClause, DClause, Ctx) :-
 	!,
@@ -25481,6 +25498,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 	Arity >= 1,
 	throw(permission_error(modify, built_in_non_terminal, call//Arity)).
 
+'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), _, Ctx) :-
+	once((
+		GRBody == NonTerminal
+	;	GRBody = (GRFirst, _),
+		GRFirst == NonTerminal
+	)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(general),
+		left_recursion(File, Lines, Type, Entity, (NonTerminal, Terminals --> GRBody))
+	),
+	fail.
+
 '$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body), Ctx) :-
 	!,
 	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
@@ -25515,6 +25546,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_dcg_rule'((eos --> _), _, _) :-
 	throw(permission_error(modify, built_in_non_terminal, eos//0)).
+
+'$lgt_dcg_rule'((NonTerminal --> GRBody), _, Ctx) :-
+	once((
+		GRBody == NonTerminal
+	;	GRBody = (GRFirst, _),
+		GRFirst == NonTerminal
+	)),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_print_message'(
+		warning(general),
+		left_recursion(File, Lines, Type, Entity, (NonTerminal --> GRBody))
+	),
+	fail.
 
 '$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx) :-
 	!,

@@ -88,6 +88,7 @@ Lint checks include:
 -  Clauses whose body is a disjunction (and that can be rewritten as
    multiple clauses per coding guidelines)
 -  Naked meta-variables in cut-transparent control constructs
+-  Left-recursion in clauses and grammar rules
 
 Additional lint checks are provided by the ``lgtunit``, ``lgtdoc``,
 ``make``, and ``dead_code_scanner`` tools. For large projects, the data

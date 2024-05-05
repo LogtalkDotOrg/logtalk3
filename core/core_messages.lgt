@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:132:0,
+		version is 1:133:0,
 		author is 'Paulo Moura',
-		date is 2024-03-02,
+		date is 2024-05-05,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -698,6 +698,13 @@
 
 	message_tokens(unsound_construct_in_grammar_rule(File, Lines, Type, Entity, GRBody)) -->
 		['~q is not a sound construct in a grammar rule'-[GRBody], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(left_recursion(File, Lines, Type, Entity, Term)) -->
+		(	{functor(Term, (-->), 2)} ->
+			['left-recursion in grammar rule: ~q'-[Term], nl]
+		;	['left-recursion in clause: ~q'-[Term], nl]
+		),
 		message_context(File, Lines, Type, Entity).
 
 	% suspicious cuts
