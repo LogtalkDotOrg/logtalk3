@@ -93,7 +93,8 @@ default `double_quotes` flag value.
 Tests
 -----
 
-* ADDED: Additional test for the Prolog standard `is/2` predicate.
+* ADDED: Additional tests for the Prolog standard `(=..)/2` and `is/2`
+predicates.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------

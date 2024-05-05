@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2023-04-13,
+		date is 2024-05-06,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -131,13 +131,22 @@
 	test(lgt_univ_2_24, true(L == [a])) :-
 		{a =.. L}.
 
-	test(lgt_univ_2_25, true(L == [1])) :-
+	test(lgt_univ_2_25, true(L == [a,1])) :-
+		{a(1) =.. L}.
+
+	test(lgt_univ_2_26, true(L == [[]])) :-
+		{[] =.. L}.
+
+	test(lgt_univ_2_27, true(L == ['.',1,[]])) :-
+		{[1] =.. L}.
+
+	test(lgt_univ_2_28, true(L == [1])) :-
 		{1 =.. L}.
 
-	test(lgt_univ_2_26, true(L == [1.0])) :-
+	test(lgt_univ_2_29, true(L == [1.0])) :-
 		{1.0 =.. L}.
 
-	test(lgt_univ_2_27, true(T == f(A,B,C))) :-
+	test(lgt_univ_2_30, true(T == f(A,B,C))) :-
 		{L = [A,B,C], T =.. [f| L]}.
 
 	:- if((
@@ -146,12 +155,12 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		test(lgt_univ_2_28, true(L == [f,f(X)])) :-
+		test(lgt_univ_2_31, true(L == [f,f(X)])) :-
 			{X = f(X), X =.. L}.
 
 	:- else.
 
-		- test(lgt_univ_2_28, true(L == [f,f(X)]), [note('STO')]) :-
+		- test(lgt_univ_2_32, true(L == [f,f(X)]), [note('STO')]) :-
 			% STO; Undefined
 			{X = f(X), X =.. L}.
 
