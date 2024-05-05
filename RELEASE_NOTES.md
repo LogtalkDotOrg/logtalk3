@@ -59,6 +59,9 @@ Documentation
 Tools
 -----
 
+* UPDATED: The `tutor` tool to explain the new linter warning for
+left-recursion in clauses and grammar rules.
+
 * FIXED: Dependency on non-standard predicate in the `dead_code_scanner` tool.
 
 * FIXED: Harmless Texinfo warning when using the `help::man/1` predicate.

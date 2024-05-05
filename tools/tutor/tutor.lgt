@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:63:0,
+		version is 0:64:0,
 		author is 'Paulo Moura',
-		date is 2024-03-02,
+		date is 2024-05-05,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -473,15 +473,25 @@
 		].
 
 	explain(unsound_construct_in_grammar_rule(_, _, _, _, (_ -> _))) -->
-		[	'The use of this construct may result in an early commit that may or may not'-[], nl,
+		[	'Using this construct may result in an early commit that may or may not'-[], nl,
 			'be valid depending on the grammar rule implicit arguments. It is advisable'-[], nl,
 			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
 		].
 
 	explain(unsound_construct_in_grammar_rule(_, _, _, _, '*->'(_, _))) -->
-		[	'The use of this construct may result in an early commit that may or may not'-[], nl,
+		[	'Using this construct may result in an early commit that may or may not'-[], nl,
 			'be valid depending on the grammar rule implicit arguments. It is advisable'-[], nl,
 			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
+		].
+
+	% left-recursion
+
+	explain(left_recursion(_, _, _, _, _)) -->
+		[	'The use of left-recursion in clauses and grammar rules usually results in'-[], nl,
+			'non-terminating programs (assuming the default SLD resolution inference.'-[], nl,
+			'rule). Consider rewriting your code to use right-recursion. Tabling (when'-[], nl,
+			'suportedby the backend) provides an alternative solution (due to its SLG'-[], nl,
+			'resolution inference rule).'-[], nl, nl
 		].
 
 	% other warning messages
