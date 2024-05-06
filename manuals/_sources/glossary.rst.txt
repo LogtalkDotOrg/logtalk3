@@ -57,7 +57,7 @@ Glossary
       classes.
 
    metaclass
-      The :term:`class` of a class, when interpreted as an instance.
+      The :term:`class` of a class, when interpreted as an :term:`instance`.
       Metaclass instances are themselves classes. Metaclasses are optional,
       except for the root class, and can be shared by several classes.
 
@@ -225,12 +225,12 @@ Glossary
       :term:`predicates directives <predicate directive>` and clauses.
       Prolog modules are usually static although some Prolog systems
       allow the creation of dynamic modules at runtime. Prolog modules
-      can be seen as prototypes.
+      can be interpreted as prototypes.
 
    message
-      A query sent to an object. In logical terms, a message can be seen as
-      a request for proof construction using an object database and the
-      databases of related entities.
+      A query sent to an object. In logical terms, a message can be
+      interpreted as a request for proof construction using an object
+      database and the databases of related entities.
 
    message lookup
       Sending a message to an object requires a lookup for the
