@@ -7948,7 +7948,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Origin == aux ->
 		Flags is Flags2 + 1,
 		File = MainFile,
-		Lines is 0-0
+		Lines = 0-0
 	;	Flags is Flags2,
 		'$lgt_pp_predicate_definition_location_'(Functor, Arity, File, Lines)
 	),
