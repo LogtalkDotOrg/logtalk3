@@ -41,6 +41,8 @@ using the same format used by the compiler.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: VSCode support predicates for using the `dead_code_scanner` tool.
+
 * FIXED: Avoid missing entity warnings when loading the VSCode support.
 
 

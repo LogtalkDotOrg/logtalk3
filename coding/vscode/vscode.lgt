@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:36:1,
+		version is 0:37:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-07,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -50,6 +50,20 @@
 	:- info(diagrams/3, [
 		comment is 'Generates diagrams given a loader file and a marker directory.',
 		argnames is ['Project', 'Directory', 'File']
+	]).
+
+	:- public(dead_code/2).
+	:- mode(dead_code(+atom, +atom), one).
+	:- info(dead_code/2, [
+		comment is 'Scans a directory for dead code.',
+		argnames is ['Directory', 'File']
+	]).
+
+	:- public(dead_code_recursive/2).
+	:- mode(dead_code_recursive(+atom, +atom), one).
+	:- info(dead_code_recursive/2, [
+		comment is 'Recursively scans a directory for dead code.',
+		argnames is ['Directory', 'File']
 	]).
 
 	:- public(find_declaration/4).
@@ -163,6 +177,28 @@
 			logtalk_load(diagrams(loader)),
 			logtalk_load(File),
 			diagrams::directory(Project, Directory, [output_directory(DotDias)])
+		}),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	% dead code
+
+	dead_code(Directory, File) :-
+		atom_concat(Directory, '/.vscode_dead_code_scanning_done', Marker),
+		ignore({
+			logtalk_load(dead_code_scanner(loader)),
+			logtalk_load(File),
+			dead_code_scanner::directory(Directory)
+		}),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	dead_code_recursive(Directory, File) :-
+		atom_concat(Directory, '/.vscode_dead_code_scanning_done', Marker),
+		ignore({
+			logtalk_load(dead_code_scanner(loader)),
+			logtalk_load(File),
+			dead_code_scanner::rdirectory(Directory)
 		}),
 		open(Marker, append, Stream),
 		close(Stream).
@@ -1195,23 +1231,29 @@
 	:- dynamic(logtalk::message_hook/4).
 
 	% fail after processing to allow default processing of the messages
+
+	% compiler warnings and errors
 	logtalk::message_hook(_Message, error, core, Tokens) :-
-		message_hook(Tokens, error),
+		message_hook(Tokens, core, error),
 		fail.
 	logtalk::message_hook(_Message, error(Class), core, Tokens) :-
-		message_hook(Tokens, error(Class)),
+		message_hook(Tokens, core, error(Class)),
 		fail.
 	logtalk::message_hook(_Message, warning, core, Tokens) :-
-		message_hook(Tokens, warning),
+		message_hook(Tokens, core, warning),
 		fail.
 	logtalk::message_hook(_Message, warning(Class), core, Tokens) :-
-		message_hook(Tokens, warning(Class)),
+		message_hook(Tokens, core, warning(Class)),
+		fail.
+	% dead_code_scanner tool warnings
+	logtalk::message_hook(_Message, warning, dead_code_scanner, Tokens) :-
+		message_hook(Tokens, dead_code_scanner, warning),
 		fail.
 
-	message_hook(Tokens, Kind) :-
+	message_hook(Tokens, Component, Kind) :-
 		logtalk::expand_library_path(logtalk_user('scratch/.messages'), File),
 		open(File, append, Stream),
-		logtalk::message_prefix_stream(Kind, core, Prefix, user_error),
+		logtalk::message_prefix_stream(Kind, Component, Prefix, _),
 		logtalk::print_message_tokens(Stream, Prefix, Tokens),
 		close(Stream).
 
