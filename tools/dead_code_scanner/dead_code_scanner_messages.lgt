@@ -121,20 +121,6 @@
 		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
 		).
 
-	message_context(File, Lines) -->
-		['  while compiling file'-[], nl],
-		(	{Lines == 0-0} ->
-			['  in auxiliary clause generated for file ~w'-[File], nl, nl]
-		;	{Lines == 1-1} ->
-			['  in file ~w at line 1'-[File], nl, nl]
-		;	{Lines = Line-Line} ->
-			['  in file ~w at or above line ~d'-[File, Line], nl, nl]
-		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
-		).
-
-	message_context(File) -->
-		['  while compiling file ~w'-[File], nl, nl].
-
 	% auxiliary predicates
 
 	ground_term_copy(Term, GroundTerm) :-
