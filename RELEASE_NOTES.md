@@ -32,6 +32,12 @@ Logtalk compiler and runtime
 the file location for a missing predicate reference would not be reported
 correctly.
 
+Tools
+-----
+
+* UPDATED: The `dead_code_scanner` tool to print dead predicates warnings
+using the same format used by the compiler.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

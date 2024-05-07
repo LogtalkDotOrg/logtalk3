@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:14:1,
+		version is 0:15:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2024-04-20,
+		date is 2024-05-07,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -170,8 +170,8 @@
 		predicate(Entity, Predicate, _, _).
 
 	% local predicates not called, directly or indirectly, by scoped predicates
-	predicate(Entity, Predicate, File, Line) :-
-		non_scoped_predicate(Entity, Predicate0, File, Line),
+	predicate(Entity, Predicate, File, Lines) :-
+		non_scoped_predicate(Entity, Predicate0, File, Lines),
 		\+ used_by_scoped_predicate(Entity, Predicate0),
 		% likely dead predicate found; check if it resulted
 		% from the compilation of a non-terminal
@@ -181,7 +181,7 @@
 		;	Predicate = Predicate0
 		).
 	% unused predicates and non-terminals listed in the uses/2 directives
-	predicate(Entity, Object::Resource, File, Line) :-
+	predicate(Entity, Object::Resource, File, Start-End) :-
 		entity_property(Entity, calls(Object::Original, CallsProperties)),
 		(	member(caller(Original), CallsProperties) ->
 			Predicate = Original,
@@ -215,9 +215,9 @@
 			true
 		;	entity_property(Entity, file(File))
 		),
-		memberchk(line_count(Line), CallsProperties).
+		memberchk(lines(Start, End), CallsProperties).
 	% unused predicates and non-terminals listed in the use_module/2 directives
-	predicate(Entity, ':'(Module,Resource), File, Line) :-
+	predicate(Entity, ':'(Module,Resource), File, Start-End) :-
 		entity_property(Entity, calls(':'(Module,Original), CallsProperties)),
 		(	member(caller(Original), CallsProperties),
 			Predicate = Original,
@@ -251,9 +251,9 @@
 			true
 		;	entity_property(Entity, file(File))
 		),
-		memberchk(line_count(Line), CallsProperties).
+		memberchk(lines(Start, End), CallsProperties).
 
-	non_scoped_predicate(Entity, Alias, File, Line) :-
+	non_scoped_predicate(Entity, Alias, File, Start-End) :-
 		entity_property(Entity, defines(Alias, Properties)),
 		Alias \= (_ :: _),
 		% not a Logtalk multifile predicate definition
@@ -279,7 +279,7 @@
 			true
 		;	entity_property(Entity, file(File))
 		),
-		memberchk(line_count(Line), Properties).
+		memberchk(lines(Start, End), Properties).
 
 	inherited_scope_directive(Entity, Predicate) :-
 		(	current_category(Entity) ->
@@ -510,8 +510,8 @@
 	process_entity(Kind, Entity) :-
 		print_message(silent, dead_code_scanner, scanning_entity(Kind, Entity)),
 		Kind \== protocol,
-		predicate(Entity, Predicate, File, Line),
-		print_message(warning, dead_code_scanner, dead_predicate(Entity, Predicate, File, Line)),
+		predicate(Entity, Predicate, File, Lines),
+		print_message(warning, dead_code_scanner, dead_predicate(Kind, Entity, Predicate, File, Lines)),
 		fail.
 	process_entity(_, _).
 

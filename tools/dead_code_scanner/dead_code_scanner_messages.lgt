@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2016-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2016-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2016 Barry Evans <barryevans@kyndi.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -23,9 +23,9 @@
 :- category(dead_code_scanner_messages).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2020-02-05,
+		date is 2024-05-07,
 		comment is 'Logtalk ``dead_code_scanner`` tool default message translations.'
 	]).
 	:- multifile(logtalk::message_prefix_stream/4).
@@ -86,9 +86,9 @@
 	message_tokens(scanning_entity(Kind, Entity)) -->
 		['Scanning ~q ~w ...'-[Entity, Kind], nl].
 
-	message_tokens(dead_predicate(_Entity, Predicate, File, Line)) -->
+	message_tokens(dead_predicate(Type, Entity, Predicate, File, Lines)) -->
 		likely_dead_predicate(Predicate),
-		['  in file ~w at or above line ~d'-[File, Line], nl].
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(unknown(library, Library)) -->
 		['Library not defined: ~q'-[Library], nl].
@@ -109,6 +109,31 @@
 		['Likely dead predicate: ~q'-[Functor/Arity], nl].
 	likely_dead_predicate(Functor//Arity) -->
 		['Likely dead non-terminal: ~q'-[Functor//Arity], nl].
+
+	message_context(File, Lines, Type, Entity) -->
+		['  while compiling ~w ~q'-[Type, Entity], nl],
+		(	{Lines == 0-0} ->
+			['  in auxiliary clause generated for file ~w'-[File], nl, nl]
+		;	{Lines == 1-1} ->
+			['  in file ~w at line 1'-[File], nl, nl]
+		;	{Lines = Line-Line} ->
+			['  in file ~w at or above line ~d'-[File, Line], nl, nl]
+		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
+		).
+
+	message_context(File, Lines) -->
+		['  while compiling file'-[], nl],
+		(	{Lines == 0-0} ->
+			['  in auxiliary clause generated for file ~w'-[File], nl, nl]
+		;	{Lines == 1-1} ->
+			['  in file ~w at line 1'-[File], nl, nl]
+		;	{Lines = Line-Line} ->
+			['  in file ~w at or above line ~d'-[File, Line], nl, nl]
+		;	['  in file ~w between lines ~w'-[File, Lines], nl, nl]
+		).
+
+	message_context(File) -->
+		['  while compiling file ~w'-[File], nl, nl].
 
 	% auxiliary predicates
 
