@@ -28,8 +28,14 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Bug in the `logtalk_make/1` predicate `check` target where the file
-location for a missing predicate reference would not be reported correctly.
+* FIXED: Regression in the `logtalk_make/1` predicate `check` target where
+the file location for a missing predicate reference would not be reported
+correctly.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Avoid missing entity warnings when loading the VSCode support.
 
 
 3.78.0 - May 6, 2024

@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:36:0,
+		version is 0:36:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-02,
+		date is 2024-05-07,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -146,11 +146,11 @@
 	documentation(Directory, File) :-
 		atom_concat(Directory, '/.vscode_xml_files_done', Marker),
 		atom_concat(Directory, '/xml_docs', XMLDocs),
-		ignore((
+		ignore({
 			logtalk_load(lgtdoc(loader)),
 			logtalk_load(File),
 			lgtdoc::directory(Directory, [xml_docs_directory(XMLDocs)])
-		)),
+		}),
 		open(Marker, append, Stream),
 		close(Stream).
 
@@ -159,11 +159,11 @@
 	diagrams(Project, Directory, File) :-
 		atom_concat(Directory, '/.vscode_dot_files_done', Marker),
 		atom_concat(Directory, '/dot_dias', DotDias),
-		ignore((
+		ignore({
 			logtalk_load(diagrams(loader)),
 			logtalk_load(File),
 			diagrams::directory(Project, Directory, [output_directory(DotDias)])
-		)),
+		}),
 		open(Marker, append, Stream),
 		close(Stream).
 
