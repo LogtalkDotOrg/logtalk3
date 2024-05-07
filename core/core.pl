@@ -3201,8 +3201,8 @@ logtalk_make(Target) :-
 			Path = '',
 			EntityLine = -1
 		),
-		(	integer(Location) ->
-			StartLine = Location
+		(	Location = Line-_ ->
+			StartLine = Line
 		;	% either dynamically created entity or backend Prolog
 			% system that doesn't report line numbers
 			StartLine = EntityLine
