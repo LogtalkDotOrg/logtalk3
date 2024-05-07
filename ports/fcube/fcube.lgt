@@ -29,7 +29,7 @@
 	:- info([
 		version is 5:0:1,
 		author is 'Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.',
-		date is 2024-03-314,
+		date is 2024-03-14,
 		copyright is 'Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2020-2024 Paulo Moura',
 		license is 'GPL-2.0-or-later',
 		comment is 'FCube: An Efficient Prover for Intuitionistic Propositional Logic.'

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2020-2021 Paulo Moura   <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2020-2022 Paulo Moura   <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2012 Mauro Ferrari      <mauro.ferrari@uninsubria.it>
 %  SPDX-FileCopyrightText: 2012 Camillo Fiorentini <fiorenti@dsi.unimi.it>
 %  SPDX-FileCopyrightText: 2012 Guido Fiorino      <guido.fiorino@unimib.it>
