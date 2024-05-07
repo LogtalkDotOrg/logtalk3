@@ -22,6 +22,16 @@ RELEASE NOTES
 =============
 
 
+3.79.0 - June ??, 2024
+======================
+
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Bug in the `logtalk_make/1` predicate `check` target where the file
+location for a missing predicate reference would not be reported correctly.
+
+
 3.78.0 - May 6, 2024
 ====================
 

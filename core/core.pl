@@ -3187,7 +3187,7 @@ logtalk_make(Target) :-
 	),
 	% find the reference file and line
 	(	nonvar(Location),
-		Location = Path-Line ->
+		Location = Path-(Line-_) ->
 		% reference found in included file
 		(	integer(Line) ->
 			StartLine = Line
@@ -3550,7 +3550,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 78, 0, stable)).
+'$lgt_version_data'(logtalk(3, 79, 0, b01)).
 
 
 
