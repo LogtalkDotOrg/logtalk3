@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:38:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-07,
+		date is 2024-05-08,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1248,6 +1248,10 @@
 	% dead_code_scanner tool warnings
 	logtalk::message_hook(_Message, warning, dead_code_scanner, Tokens) :-
 		message_hook(Tokens, dead_code_scanner, warning),
+		fail.
+	% lgtdoc tool warnings
+	logtalk::message_hook(_Message, warning, lgtdoc, Tokens) :-
+		message_hook(Tokens, lgtdoc, warning),
 		fail.
 
 	message_hook(Tokens, Component, Kind) :-
