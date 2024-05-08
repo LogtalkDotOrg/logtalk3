@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:40:0,
+		version is 0:41:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-08,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -78,6 +78,13 @@
 	:- info(dead_code_recursive/1, [
 		comment is 'Recursively scans a directory for dead code.',
 		argnames is ['Directory']
+	]).
+
+	:- public(make/2).
+	:- mode(make(+atom, +atom), one).
+	:- info(make/2, [
+		comment is 'Runs the make tool with the given target and marker directory.',
+		argnames is ['Directory', 'Target']
 	]).
 
 	:- public(find_declaration/4).
@@ -230,6 +237,14 @@
 			logtalk_load(dead_code_scanner(loader)),
 			dead_code_scanner::rdirectory(Directory)
 		}),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	% make
+
+	make(Directory, Target) :-
+		atom_concat(Directory, '/.vscode_make_done', Marker),
+		logtalk_make(Target),
 		open(Marker, append, Stream),
 		close(Stream).
 

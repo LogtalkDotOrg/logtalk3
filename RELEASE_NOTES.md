@@ -43,8 +43,8 @@ the same format used by the compiler.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: VSCode support predicates for using the `dead_code_scanner` tool and
-for recursively generate documentation and diagrams.
+* ADDED: VSCode support predicates for using the `dead_code_scanner` and
+`make` tools and for recursively generate documentation and diagrams.
 
 * FIXED: Avoid missing entity warnings when loading the VSCode support.
 
