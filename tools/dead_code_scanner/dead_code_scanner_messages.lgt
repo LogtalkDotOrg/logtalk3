@@ -28,6 +28,7 @@
 		date is 2024-05-07,
 		comment is 'Logtalk ``dead_code_scanner`` tool default message translations.'
 	]).
+
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
 

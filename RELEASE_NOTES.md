@@ -35,8 +35,8 @@ correctly.
 Tools
 -----
 
-* UPDATED: The `dead_code_scanner` tool to print dead predicates warnings
-using the same format used by the compiler.
+* UPDATED: The `dead_code_scanner` and `lgtdoc` tools to print warnings using
+the same format used by the compiler.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
