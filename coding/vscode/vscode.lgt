@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:38:0,
+		version is 0:39:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-08,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -45,9 +45,23 @@
 		argnames is ['Directory', 'File']
 	]).
 
+	:- public(documentation_recursive/2).
+	:- mode(documentation_recursive(+atom, +atom), one).
+	:- info(documentation_recursive/2, [
+		comment is 'Recursively generates documentation given a loader file and a marker directory.',
+		argnames is ['Directory', 'File']
+	]).
+
 	:- public(diagrams/3).
 	:- mode(diagrams(+atom, +atom, +atom), one).
 	:- info(diagrams/3, [
+		comment is 'Generates diagrams given a loader file and a marker directory.',
+		argnames is ['Project', 'Directory', 'File']
+	]).
+
+	:- public(diagrams_recursive/3).
+	:- mode(diagrams_recursive(+atom, +atom, +atom), one).
+	:- info(diagrams_recursive/3, [
 		comment is 'Generates diagrams given a loader file and a marker directory.',
 		argnames is ['Project', 'Directory', 'File']
 	]).
@@ -168,6 +182,17 @@
 		open(Marker, append, Stream),
 		close(Stream).
 
+	documentation_recursive(Directory, File) :-
+		atom_concat(Directory, '/.vscode_xml_files_done', Marker),
+		atom_concat(Directory, '/xml_docs', XMLDocs),
+		ignore({
+			logtalk_load(lgtdoc(loader)),
+			logtalk_load(File),
+			lgtdoc::rdirectory(Directory, [xml_docs_directory(XMLDocs)])
+		}),
+		open(Marker, append, Stream),
+		close(Stream).
+
 	% diagrams
 
 	diagrams(Project, Directory, File) :-
@@ -177,6 +202,17 @@
 			logtalk_load(diagrams(loader)),
 			logtalk_load(File),
 			diagrams::directory(Project, Directory, [output_directory(DotDias)])
+		}),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	diagrams_recursive(Project, Directory, File) :-
+		atom_concat(Directory, '/.vscode_dot_files_done', Marker),
+		atom_concat(Directory, '/dot_dias', DotDias),
+		ignore({
+			logtalk_load(diagrams(loader)),
+			logtalk_load(File),
+			diagrams::rdirectory(Project, Directory, [output_directory(DotDias)])
 		}),
 		open(Marker, append, Stream),
 		close(Stream).
