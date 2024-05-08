@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:7:1,
 		author is 'Paulo Moura',
-		date is 2024-03-28,
+		date is 2024-05-08,
 		comment is 'Source code size metric. Returned scores are upper bounds and based solely in source file sizes (expressed in bytes).'
 	]).
 
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(logtalk, [
-		expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3
+		expand_library_path/2, loaded_file_property/2, print_message/3
 	]).
 
 	:- uses(numberlist, [

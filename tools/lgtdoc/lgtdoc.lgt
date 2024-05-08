@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:0:0,
+		version is 11:0:1,
 		author is 'Paulo Moura',
-		date is 2024-05-07,
+		date is 2024-05-08,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -78,8 +78,7 @@
 
 	:- uses(os, [
 		absolute_file_name/2, internal_os_path/2, make_directory/1,
-		decompose_file_name/3, decompose_file_name/4,
-		operating_system_type/1
+		decompose_file_name/3, decompose_file_name/4
 	]).
 
 	:- uses(type, [
@@ -442,7 +441,7 @@
 		convert_encoding('UTF-16BE', unicode_be).
 		convert_encoding('UTF-16LE', unicode_le).
 		convert_encoding('UTF-16', Encoding) :-
-			operating_system_type(Type),
+			os::operating_system_type(Type),
 			(	Type == windows ->
 				Encoding = unicode_le
 			;	% other operating-systems can be either big-endian or little-endian

@@ -35,13 +35,16 @@ correctly.
 Tools
 -----
 
-* UPDATED: The `dead_code_scanner` and `lgtdoc` tools to print warnings using
+* CHANGED: The `dead_code_scanner` and `lgtdoc` tools to print warnings using
 the same format used by the compiler.
+
+* FIXED: Deleted dead code in the `code_metrics` and `lgtdoc` tools.
 
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: VSCode support predicates for using the `dead_code_scanner` tool.
+* ADDED: VSCode support predicates for using the `dead_code_scanner` tool and
+for recursively generate documentation and diagrams.
 
 * FIXED: Avoid missing entity warnings when loading the VSCode support.
 

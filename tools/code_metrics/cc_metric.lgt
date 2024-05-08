@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paulo Moura',
-		date is 2024-03-28,
+		date is 2024-05-08,
 		comment is 'Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.'
 	]).
 
@@ -39,7 +39,7 @@
 	]).
 
 	:- uses(logtalk, [
-		expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3
+		expand_library_path/2, loaded_file_property/2, print_message/3
 	]).
 
 	entity_score(Entity, Score) :-

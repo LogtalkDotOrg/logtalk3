@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:14:1,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2024-03-28,
+		date is 2024-05-08,
 		comment is 'Number of entity clauses metric. The score is represented using the compound term ``number_of_clauses(Total, User)``.'
 	]).
 
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(logtalk, [
-		expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3
+		expand_library_path/2, loaded_file_property/2, print_message/3
 	]).
 
 	entity_score(Entity, Score) :-

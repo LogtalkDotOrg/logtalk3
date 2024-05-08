@@ -24,9 +24,9 @@
 	extends((code_metrics_utilities, options))).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:12:1,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2024-03-28,
+		date is 2024-05-08,
 		comment is 'Core predicates for computing source code metrics.'
 	]).
 
@@ -245,7 +245,7 @@
 
 	:- uses(logtalk, [
 		expand_library_path/2, file_type_extension/2,
-		loaded_file/1, loaded_file_property/2,
+		loaded_file_property/2,
 		print_message/3
 	]).
 
