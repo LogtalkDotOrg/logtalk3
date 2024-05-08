@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:39:0,
+		version is 0:40:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-08,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -38,46 +38,46 @@
 		argnames is ['Directory', 'File']
 	]).
 
-	:- public(documentation/2).
-	:- mode(documentation(+atom, +atom), one).
-	:- info(documentation/2, [
+	:- public(documentation/1).
+	:- mode(documentation(+atom), one).
+	:- info(documentation/1, [
 		comment is 'Generates documentation given a loader file and a marker directory.',
-		argnames is ['Directory', 'File']
+		argnames is ['Directory']
 	]).
 
-	:- public(documentation_recursive/2).
-	:- mode(documentation_recursive(+atom, +atom), one).
-	:- info(documentation_recursive/2, [
+	:- public(documentation_recursive/1).
+	:- mode(documentation_recursive(+atom), one).
+	:- info(documentation_recursive/1, [
 		comment is 'Recursively generates documentation given a loader file and a marker directory.',
-		argnames is ['Directory', 'File']
+		argnames is ['Directory']
 	]).
 
-	:- public(diagrams/3).
-	:- mode(diagrams(+atom, +atom, +atom), one).
-	:- info(diagrams/3, [
+	:- public(diagrams/2).
+	:- mode(diagrams(+atom, +atom), one).
+	:- info(diagrams/2, [
 		comment is 'Generates diagrams given a loader file and a marker directory.',
-		argnames is ['Project', 'Directory', 'File']
+		argnames is ['Project', 'Directory']
 	]).
 
-	:- public(diagrams_recursive/3).
-	:- mode(diagrams_recursive(+atom, +atom, +atom), one).
-	:- info(diagrams_recursive/3, [
+	:- public(diagrams_recursive/2).
+	:- mode(diagrams_recursive(+atom, +atom), one).
+	:- info(diagrams_recursive/2, [
 		comment is 'Generates diagrams given a loader file and a marker directory.',
-		argnames is ['Project', 'Directory', 'File']
+		argnames is ['Project', 'Directory']
 	]).
 
-	:- public(dead_code/2).
-	:- mode(dead_code(+atom, +atom), one).
-	:- info(dead_code/2, [
+	:- public(dead_code/1).
+	:- mode(dead_code(+atom), one).
+	:- info(dead_code/1, [
 		comment is 'Scans a directory for dead code.',
-		argnames is ['Directory', 'File']
+		argnames is ['Directory']
 	]).
 
-	:- public(dead_code_recursive/2).
-	:- mode(dead_code_recursive(+atom, +atom), one).
-	:- info(dead_code_recursive/2, [
+	:- public(dead_code_recursive/1).
+	:- mode(dead_code_recursive(+atom), one).
+	:- info(dead_code_recursive/1, [
 		comment is 'Recursively scans a directory for dead code.',
-		argnames is ['Directory', 'File']
+		argnames is ['Directory']
 	]).
 
 	:- public(find_declaration/4).
@@ -171,23 +171,21 @@
 
 	% documentation
 
-	documentation(Directory, File) :-
+	documentation(Directory) :-
 		atom_concat(Directory, '/.vscode_xml_files_done', Marker),
 		atom_concat(Directory, '/xml_docs', XMLDocs),
 		ignore({
 			logtalk_load(lgtdoc(loader)),
-			logtalk_load(File),
 			lgtdoc::directory(Directory, [xml_docs_directory(XMLDocs)])
 		}),
 		open(Marker, append, Stream),
 		close(Stream).
 
-	documentation_recursive(Directory, File) :-
+	documentation_recursive(Directory) :-
 		atom_concat(Directory, '/.vscode_xml_files_done', Marker),
 		atom_concat(Directory, '/xml_docs', XMLDocs),
 		ignore({
 			logtalk_load(lgtdoc(loader)),
-			logtalk_load(File),
 			lgtdoc::rdirectory(Directory, [xml_docs_directory(XMLDocs)])
 		}),
 		open(Marker, append, Stream),
@@ -195,23 +193,21 @@
 
 	% diagrams
 
-	diagrams(Project, Directory, File) :-
+	diagrams(Project, Directory) :-
 		atom_concat(Directory, '/.vscode_dot_files_done', Marker),
 		atom_concat(Directory, '/dot_dias', DotDias),
 		ignore({
 			logtalk_load(diagrams(loader)),
-			logtalk_load(File),
 			diagrams::directory(Project, Directory, [output_directory(DotDias)])
 		}),
 		open(Marker, append, Stream),
 		close(Stream).
 
-	diagrams_recursive(Project, Directory, File) :-
+	diagrams_recursive(Project, Directory) :-
 		atom_concat(Directory, '/.vscode_dot_files_done', Marker),
 		atom_concat(Directory, '/dot_dias', DotDias),
 		ignore({
 			logtalk_load(diagrams(loader)),
-			logtalk_load(File),
 			diagrams::rdirectory(Project, Directory, [output_directory(DotDias)])
 		}),
 		open(Marker, append, Stream),
@@ -219,21 +215,19 @@
 
 	% dead code
 
-	dead_code(Directory, File) :-
+	dead_code(Directory) :-
 		atom_concat(Directory, '/.vscode_dead_code_scanning_done', Marker),
 		ignore({
 			logtalk_load(dead_code_scanner(loader)),
-			logtalk_load(File),
 			dead_code_scanner::directory(Directory)
 		}),
 		open(Marker, append, Stream),
 		close(Stream).
 
-	dead_code_recursive(Directory, File) :-
+	dead_code_recursive(Directory) :-
 		atom_concat(Directory, '/.vscode_dead_code_scanning_done', Marker),
 		ignore({
 			logtalk_load(dead_code_scanner(loader)),
-			logtalk_load(File),
 			dead_code_scanner::rdirectory(Directory)
 		}),
 		open(Marker, append, Stream),
