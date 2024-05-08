@@ -40,6 +40,11 @@ the same format used by the compiler.
 
 * FIXED: Deleted dead code in the `code_metrics` and `lgtdoc` tools.
 
+Examples
+--------
+
+* FIXED: Missing predicates in the `relations` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

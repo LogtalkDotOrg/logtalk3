@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -265,8 +265,8 @@
 	specializes(object)).
 
 	:- info([
-		version is 1:32:0,
-		date is 2017-06-29,
+		version is 1:32:1,
+		date is 2024-05-08,
 		author is 'Esteban Zimanyi, Paulo Moura',
 		comment is 'Enables the representation of relations between independent objects.'
 	]).
@@ -414,7 +414,6 @@
 		::descriptor(Descriptor),
 		set_domains(Domains, Descriptor).
 
-
 	set_domains([], []).
 	set_domains([Role| Roles], [Domain| Domains]) :-
 		::retractall(domain_(Role, _)),
@@ -436,9 +435,12 @@
 
 	set_role_defaults([]).
 	set_role_defaults([Role| Roles]) :-
-		::set_domain(Role, object),
-		::set_cardinality(Role, 0, n),
-		::set_delete_option(Role, cascade),
+		::retractall(domain_(Role, _)),
+		::assertz(domain_(Role, object)),
+		::retractall(cardinality_(Role, _, _)),
+		::assertz(cardinality_(Role, 0, n)),
+		::retractall(delete_option_(Role, _)),
+		::assertz(delete_option_(Role, cascade)),
 		set_role_defaults(Roles).
 
 	key(Key) :-
