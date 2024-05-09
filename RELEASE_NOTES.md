@@ -32,6 +32,8 @@ Logtalk compiler and runtime
 the file location for a missing predicate reference would not be reported
 correctly.
 
+* FIXED: Don't print left-recursion linter warnings for coinductive predicates.
+
 Tools
 -----
 

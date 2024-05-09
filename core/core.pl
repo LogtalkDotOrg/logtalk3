@@ -12628,6 +12628,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ functor(Term, (-->), 2),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(left_recursion, warning),
+	\+ '$lgt_pp_coinductive_'(Head, _, _, _, _, _, _, _, _),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_print_message'(
 		warning(left_recursion),
