@@ -34,6 +34,12 @@ correctly.
 
 * FIXED: Don't print left-recursion linter warnings for coinductive predicates.
 
+Library
+-------
+
+* FIXED: Silence harmless left-recursion linter warning in the `timeout`
+library tests.
+
 Tools
 -----
 
@@ -44,6 +50,8 @@ the same format used by the compiler.
 
 Examples
 --------
+
+* FIXED: Silence harmless left-recursion linter warning in the `tbbt` example.
 
 * FIXED: Missing predicates in the `relations` example.
 
