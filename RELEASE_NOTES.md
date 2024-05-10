@@ -34,7 +34,8 @@ correctly.
 
 * FIXED: Don't print left-recursion linter warnings for coinductive predicates.
 
-* FIXED: Allow term-expansion to generate multiple entity definitions.
+* FIXED: Allow term-expansion to generate multiple entity definitions. Thanks
+to Alex Kouznetsov for the bug report.
 
 Library
 -------
@@ -49,6 +50,9 @@ Tools
 the same format used by the compiler.
 
 * FIXED: Deleted dead code in the `code_metrics` and `lgtdoc` tools.
+
+* FIXED: The `wrapper` reporting of missing `meta_predicate/1` directives.
+Thanks to Alex Kouznetsov for the bug report.
 
 Examples
 --------
