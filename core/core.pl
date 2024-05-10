@@ -9034,10 +9034,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_expanded_terms'([ExpandedTerm| ExpandedTerms], Term, Ctx) :-
 	!,
 	'$lgt_compile_expanded_term'(ExpandedTerm, Term, Ctx),
-	% ensure that only the compilation context mode and the entity prefix are
-	% shared between different clauses but keep the current clause position
-	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines, _),
-	'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines, _),
+	(	ExpandedTerm \== (:- end_object),
+		ExpandedTerm \== (:- end_protocol),
+		ExpandedTerm \== (:- end_category) ->
+		% ensure that only the compilation context mode and the entity prefix are
+		% shared between different terms but keep the current term position
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines, _),
+		'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines, _)
+	;	% share only the compilation context mode and the current term position
+		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines, _),
+		'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines, _)
+	),
 	'$lgt_compile_expanded_terms'(ExpandedTerms, Term, NewCtx).
 
 '$lgt_compile_expanded_terms'([], _, _) :-

@@ -34,6 +34,8 @@ correctly.
 
 * FIXED: Don't print left-recursion linter warnings for coinductive predicates.
 
+* FIXED: Allow term-expansion to generate multiple entity definitions.
+
 Library
 -------
 
