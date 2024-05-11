@@ -122,5 +122,5 @@ dependencies are also loaded.
 found in different directories). If that is not the case, the name conflicts
 must be manually solved before using the tool.
 
-- There isn't yet any support for dealing with meta-predicates and advise on
-missing meta-predicate directives.
+- There's only preliminary support for dealing with meta-predicates and advise
+on missing meta-predicate directives.
