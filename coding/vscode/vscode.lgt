@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:42:0,
+		version is 0:43:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-12,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -91,7 +91,14 @@
 	:- mode(tests(+atom, +atom), one).
 	:- info(tests/2, [
 		comment is 'Runs the tests with the given tests driver file and marker directory.',
-		argnames is ['Directory', 'File']
+		argnames is ['Directory', 'Tester']
+	]).
+
+	:- public(doclet/2).
+	:- mode(doclet(+atom, +atom), one).
+	:- info(doclet/2, [
+		comment is 'Loads the doclet file given the marker directory.',
+		argnames is ['Directory', 'Doclet']
 	]).
 
 	:- public(find_declaration/4).
@@ -260,6 +267,17 @@
 	tests(Directory, Tester) :-
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		ignore(logtalk_load(Tester)),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	% doclet
+
+	doclet(Directory, Doclet) :-
+		atom_concat(Directory, '/.vscode_loading_done', Marker),
+		ignore((
+			logtalk_load(doclet(loader)),
+			logtalk_load(Doclet)
+		)),
 		open(Marker, append, Stream),
 		close(Stream).
 
