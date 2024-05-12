@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:41:0,
+		version is 0:42:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-08,
+		date is 2024-05-12,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -85,6 +85,13 @@
 	:- info(make/2, [
 		comment is 'Runs the make tool with the given target and marker directory.',
 		argnames is ['Directory', 'Target']
+	]).
+
+	:- public(tests/2).
+	:- mode(tests(+atom, +atom), one).
+	:- info(tests/2, [
+		comment is 'Runs the tests with the given tests driver file and marker directory.',
+		argnames is ['Directory', 'File']
 	]).
 
 	:- public(find_declaration/4).
@@ -245,6 +252,14 @@
 	make(Directory, Target) :-
 		atom_concat(Directory, '/.vscode_make_done', Marker),
 		logtalk_make(Target),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	% tests
+
+	tests(Directory, Tester) :-
+		atom_concat(Directory, '/.vscode_loading_done', Marker),
+		ignore(logtalk_load(Tester)),
 		open(Marker, append, Stream),
 		close(Stream).
 
