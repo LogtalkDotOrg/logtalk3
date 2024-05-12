@@ -298,9 +298,9 @@ Accessing object parameters
 Object parameters can be accessed using :term:`parameter variables <parameter variable>`
 or built-in execution context methods. Parameter variables is the
 recommended solution to access object parameters. Although they
-introduce a concept of entity global variables, their unique syntax,
-``_ParameterName_``, avoids conflicts and makes them easily
-recognizable. For example:
+introduce a concept of entity global variables, their unique syntax
+(``_ParameterName_``) avoids conflicts, makes them easily recognizable,
+and distinguishes them from other named anonymous variables. For example:
 
 ::
 

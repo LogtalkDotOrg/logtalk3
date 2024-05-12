@@ -735,6 +735,7 @@ of the compound term are variables. These variables, the *category parameters*,
 can be accessed by calling the :ref:`methods_parameter_2` or
 :ref:`methods_this_1` built-in local methods in the category predicate
 clauses or by using :term:`parameter variables <parameter variable>`.
+
 Category parameter values can be defined by the importing objects.
 For example:
 
@@ -746,8 +747,8 @@ For example:
    :- end_object.
 
 Note that access to category parameters is only possible from within the
-category. In particular, calls to the :ref:`methods_this_1` built-in local method
-from category predicates always access the importing object identifier
+category. In particular, calls to the :ref:`methods_this_1` built-in local
+method from category predicates always access the importing object identifier
 (and thus object parameters, not category parameters).
 
 .. _categories_built_in:

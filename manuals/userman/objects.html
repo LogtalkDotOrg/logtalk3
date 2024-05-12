@@ -396,9 +396,9 @@ functor and arity.</p>
 <p>Object parameters can be accessed using <a class="reference internal" href="../glossary.html#term-parameter-variable"><span class="xref std std-term">parameter variables</span></a>
 or built-in execution context methods. Parameter variables is the
 recommended solution to access object parameters. Although they
-introduce a concept of entity global variables, their unique syntax,
-<code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code>, avoids conflicts and makes them easily
-recognizable. For example:</p>
+introduce a concept of entity global variables, their unique syntax
+(<code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code>) avoids conflicts, makes them easily recognizable,
+and distinguishes them from other named anonymous variables. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo(<span class="nv">_Bar_</span>, <span class="nv">_Baz_</span>, ...)).
 
     ...
