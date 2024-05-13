@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:43:0,
+		version is 0:44:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-12,
+		date is 2024-05-13,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -266,7 +266,10 @@
 
 	tests(Directory, Tester) :-
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
-		ignore(logtalk_load(Tester)),
+		atom_concat(Directory, '/.vscode_test_results', Data),
+		open(Data, write, _, [alias(vscode_test_results)]),
+		ignore(logtalk_load(Tester, [reload(always)])),
+		close(vscode_test_results),
 		open(Marker, append, Stream),
 		close(Stream).
 
@@ -1330,6 +1333,43 @@
 	% lgtdoc tool warnings
 	logtalk::message_hook(_Message, warning, lgtdoc, Tokens) :-
 		message_hook(Tokens, lgtdoc, warning),
+		fail.
+	% lgtunit test results
+
+	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
+		entity_property(Object, Kind, file(File)),
+		entity_property(Object, Kind, lines(Line, _)),
+		(	Note == '' ->
+			{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky)~n', [File, Line, Total, Skipped, Passed, Failed, Flaky])}
+		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Total, Skipped, Passed, Failed, Flaky, Note])}
+		),
+		fail.
+	logtalk::message_hook(passed_test(_Object, _Test, File, Line-_, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		{format(vscode_test_results, 'File:~w;Line:~d;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
+		fail.
+	logtalk::message_hook(failed_test(_Object, _Test, File, Line-_, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
+		fail.
+	logtalk::message_hook(skipped_test(_Object, _Test, File, Line-_, _Note), _, lgtunit, _) :-
+		{format(vscode_test_results, 'File:~w;Line:~d;Status:skipped~n', [File, Line])},
+		fail.
+	logtalk::message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses), _, lgtunit, _) :-
+		entity_property(Entity, Kind, file(File)),
+		entity_property(Entity, Kind, defines(Predicate, Properties)),
+		memberchk(lines(Line, _), Properties),
+		(	Covered =:= Total ->
+			% all clause are covered
+			{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests clause coverage: ~w - ~w~n', [File, Line, Covered/Total, '(all)'])}
+		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests clause coverage: ~w - ~w~n', [File, Line, Covered/Total, Clauses])}
+		),
+		fail.
+	logtalk::message_hook(entity_coverage(Entity, Covered, Total, Percentage), _, lgtunit, _) :-
+		entity_property(Entity, Kind, file(File)),
+		entity_property(Entity, Kind, lines(Line, _)),
+		(	Total =:= 1 ->
+			{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
+		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
+		),
 		fail.
 
 	message_hook(Tokens, Component, Kind) :-
