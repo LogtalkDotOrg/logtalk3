@@ -64,8 +64,9 @@ Examples
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: VSCode support predicates for using the `dead_code_scanner` and
-`make` tools and for recursively generate documentation and diagrams.
+* ADDED: VSCode support predicates for using the `dead_code_scanner`, `make`,
+and `code_metrics` tools and for recursively generating documentation and
+diagrams.
 
 * UPDATED: VSCode support predicates for running tests and doclets to add
 compiler warnings and errors to the "Problems" pane.

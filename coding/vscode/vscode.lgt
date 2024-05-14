@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:45:0,
+		version is 0:46:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-14,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -92,6 +92,13 @@
 	:- info(tests/2, [
 		comment is 'Runs the tests with the given tests driver file and marker directory.',
 		argnames is ['Directory', 'Tester']
+	]).
+
+	:- public(metrics/1).
+	:- mode(metrics(+atom), one).
+	:- info(metrics/1, [
+		comment is 'Computes metrics given a marker directory.',
+		argnames is ['Directory']
 	]).
 
 	:- public(doclet/2).
@@ -270,6 +277,34 @@
 		open(Data, write, _, [alias(vscode_test_results)]),
 		ignore(logtalk_load(Tester, [reload(always)])),
 		close(vscode_test_results),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	% metrics
+
+	metrics(Directory) :-
+		atom_concat(Directory, '/.vscode_metrics_done', Marker),
+		atom_concat(Directory, '/.vscode_metrics_results', Data),
+		open(Data, write, DataStream),
+		(	sub_atom(Directory, _, 1, 0, '/') ->
+			DirectorySlash = Directory
+		;	atom_concat(Directory, '/', DirectorySlash)
+		),
+		ignore((
+			logtalk_load(code_metrics(loader)),
+			forall(
+				(	logtalk::loaded_file_property(File, directory(DirectorySlash)),
+					(	logtalk::loaded_file_property(File, object(Entity))
+					;	logtalk::loaded_file_property(File, category(Entity))
+					)
+				),
+				(	cc_metric::entity_score(Entity, Score),
+					entity_property(Entity, _, lines(Line, _)),
+					{format(DataStream, 'File:~w;Line:~d;Score:~d~n', [File, Line, Score])}
+				)
+			)
+		)),
+		close(DataStream),
 		open(Marker, append, Stream),
 		close(Stream).
 
