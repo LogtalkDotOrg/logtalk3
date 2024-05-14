@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:44:0,
+		version is 0:45:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-13,
+		date is 2024-05-14,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1236,6 +1236,8 @@
 		atom_concat(Directory, '/.vscode_find_parent_done', Marker),
 		open(Data, write, DataStream),
 		(	logtalk::loaded_file_property(File, parent(Loader)) ->
+			{format(DataStream, '~w', [Loader])}
+		;	logtalk::loaded_file_property(Loader, includes(File)) ->
 			{format(DataStream, '~w', [Loader])}
 		;	true
 		),

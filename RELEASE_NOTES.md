@@ -67,6 +67,15 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: VSCode support predicates for using the `dead_code_scanner` and
 `make` tools and for recursively generate documentation and diagrams.
 
+* UPDATED: VSCode support predicates for running tests and doclets to add
+compiler warnings and errors to the "Problems" pane.
+
+* UPDATED: VSCode support predicates for running tests the VSCode to make
+the tests results available for code lens.
+
+* UPDATED: VSCode support predicate that finds the parent file of a loaded
+file to also work for included files.
+
 * FIXED: Avoid missing entity warnings when loading the VSCode support.
 
 
