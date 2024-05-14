@@ -51,6 +51,8 @@ the same format used by the compiler.
 
 * FIXED: Deleted dead code in the `code_metrics` and `lgtdoc` tools.
 
+* FIXED: Code coverage for tests of the Halstead complexity metric.
+
 * FIXED: The `wrapper` reporting of missing `meta_predicate/1` directives.
 Thanks to Alex Kouznetsov for the bug report.
 
