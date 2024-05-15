@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:46:0,
+		version is 0:47:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-14,
+		date is 2024-05-17,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -285,26 +285,12 @@
 	metrics(Directory) :-
 		atom_concat(Directory, '/.vscode_metrics_done', Marker),
 		atom_concat(Directory, '/.vscode_metrics_results', Data),
-		open(Data, write, DataStream),
-		(	sub_atom(Directory, _, 1, 0, '/') ->
-			DirectorySlash = Directory
-		;	atom_concat(Directory, '/', DirectorySlash)
-		),
+		open(Data, write, _, [alias(vscode_metrics_results)]),
 		ignore((
 			logtalk_load(code_metrics(loader)),
-			forall(
-				(	logtalk::loaded_file_property(File, directory(DirectorySlash)),
-					(	logtalk::loaded_file_property(File, object(Entity))
-					;	logtalk::loaded_file_property(File, category(Entity))
-					)
-				),
-				(	cc_metric::entity_score(Entity, Score),
-					entity_property(Entity, _, lines(Line, _)),
-					{format(DataStream, 'File:~w;Line:~d;Score:~d~n', [File, Line, Score])}
-				)
-			)
+			{code_metrics::directory(Directory)}
 		)),
-		close(DataStream),
+		close(vscode_metrics_results),
 		open(Marker, append, Stream),
 		close(Stream).
 
@@ -1372,7 +1358,6 @@
 		message_hook(Tokens, lgtdoc, warning),
 		fail.
 	% lgtunit test results
-
 	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
 		entity_property(Object, Kind, file(File)),
 		entity_property(Object, Kind, lines(Line, _)),
@@ -1407,6 +1392,12 @@
 			{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
 		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
 		),
+		fail.
+	% code_metrics tool results
+	logtalk::message_hook(entity_score(cc_metric, Entity, Score), _, code_metrics, _) :-
+		entity_property(Entity, Kind, file(File)),
+		entity_property(Entity, Kind, lines(Line, _)),
+		{format(vscode_metrics_results, 'File:~w;Line:~d;Score:~d~n', [File, Line, Score])},
 		fail.
 
 	message_hook(Tokens, Component, Kind) :-
