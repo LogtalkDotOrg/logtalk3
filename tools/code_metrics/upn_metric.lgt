@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:6:1,
+		version is 0:6:2,
 		author is 'Paulo Moura',
-		date is 2024-05-08,
+		date is 2024-05-15,
 		comment is 'Number of unique predicates nodes metric. The nodes include called and updated predicates independently of where they are defined. The score is represented by a non-negative integer.'
 	]).
 
@@ -48,15 +48,17 @@
 		entity_score(Kind, Entity, Score).
 
 	entity_score(object, Entity, Score) :-
-		findall(Caller, (object_property(Entity, defines(Caller, DefinesProperties)), \+ member(auxiliary, DefinesProperties)), Bag0),
-		findall(Callee, (object_property(Entity, calls(Callee, _)), ground(Callee)), Bag1, Bag0),
-		findall(Dynamic, (object_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag1),
+		findall(Caller, (object_property(Entity, defines(Caller, Properties)), \+ member(auxiliary, Properties)), Bag0),
+		findall(Other::Predicate, (object_property(Entity, provides(Predicate, Other, Properties)), \+ member(auxiliary, Properties)), Bag1, Bag0),
+		findall(Callee, (object_property(Entity, calls(Callee, _)), ground(Callee)), Bag2, Bag1),
+		findall(Dynamic, (object_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag2),
 		sort(Bag, Sorted),
 		length(Sorted, Score).
 	entity_score(category, Entity, Score) :-
-		findall(Caller, (category_property(Entity, defines(Caller, DefinesProperties)), \+ member(auxiliary, DefinesProperties)), Bag0),
-		findall(Callee, (category_property(Entity, calls(Callee, _)), ground(Callee)), Bag1, Bag0),
-		findall(Dynamic, (category_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag1),
+		findall(Caller, (category_property(Entity, defines(Caller, Properties)), \+ member(auxiliary, Properties)), Bag0),
+		findall(Other::Predicate, (category_property(Entity, provides(Predicate, Other, Properties)), \+ member(auxiliary, Properties)), Bag1, Bag0),
+		findall(Callee, (category_property(Entity, calls(Callee, _)), ground(Callee)), Bag2, Bag1),
+		findall(Dynamic, (category_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag2),
 		sort(Bag, Sorted),
 		length(Sorted, Score).
 	entity_score(protocol, _, 0).

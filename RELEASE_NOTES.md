@@ -58,6 +58,10 @@ the same format used by the compiler.
 to also consider multifile predicate definitions contributed by the entity to
 other entities when computing graph connected components.
 
+* FIXED: The `code_metrics` tool computation of entity Unique Predicate Nodes
+(UPN) to also count multifile predicate definitions contributed by the entity
+to other entities.
+
 * FIXED: Code coverage for tests of the Halstead complexity metric.
 
 * FIXED: Deleted dead code in the `code_metrics` and `lgtdoc` tools.

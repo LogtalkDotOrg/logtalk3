@@ -168,7 +168,8 @@ paper:
    }
 
 The nodes include called and updated predicates independently of where
-they are defined.
+they are defined. It also includes multifile predicates contributed to
+other entities.
 
 Cyclomatic complexity metric
 ----------------------------
