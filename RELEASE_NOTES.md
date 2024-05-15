@@ -37,6 +37,11 @@ correctly.
 * FIXED: Allow term-expansion to generate multiple entity definitions. Thanks
 to Alex Kouznetsov for the bug report.
 
+Documentation
+-------------
+
+* IMPROVED: Handbook documentation of the term-expansion mechanism.
+
 Library
 -------
 
