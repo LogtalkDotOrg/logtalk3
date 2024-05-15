@@ -173,12 +173,14 @@ they are defined.
 Cyclomatic complexity metric
 ----------------------------
 
-The cyclomatic complexity metric evaluates code complexity by measuring
-the number of linearly independent paths through the code. In its
-current implementation, all defined predicates that are not called or
-updated are counted as graph connected components (the reasoning being
-that these predicates can be considered entry points). The
+The cyclomatic complexity metric evaluates an entity code complexity by
+measuring the number of linearly independent paths through the code. In
+its current implementation, all defined predicates that are not called
+or updated are counted as graph connected components (the reasoning
+being that these predicates can be considered entry points). The
 implementation uses the same predicate abstraction as the UPN metric.
+The defined predicates include multifile predicate definitions
+contributed by the entity to other entities.
 
 For more details on this metric, see the original paper by Thomas J.
 McCabe:

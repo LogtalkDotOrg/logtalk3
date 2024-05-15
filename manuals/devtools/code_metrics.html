@@ -298,12 +298,14 @@ they are defined.</p>
 </section>
 <section id="cyclomatic-complexity-metric">
 <h2>Cyclomatic complexity metric<a class="headerlink" href="#cyclomatic-complexity-metric" title="Link to this heading"></a></h2>
-<p>The cyclomatic complexity metric evaluates code complexity by measuring
-the number of linearly independent paths through the code. In its
-current implementation, all defined predicates that are not called or
-updated are counted as graph connected components (the reasoning being
-that these predicates can be considered entry points). The
-implementation uses the same predicate abstraction as the UPN metric.</p>
+<p>The cyclomatic complexity metric evaluates an entity code complexity by
+measuring the number of linearly independent paths through the code. In
+its current implementation, all defined predicates that are not called
+or updated are counted as graph connected components (the reasoning
+being that these predicates can be considered entry points). The
+implementation uses the same predicate abstraction as the UPN metric.
+The defined predicates include multifile predicate definitions
+contributed by the entity to other entities.</p>
 <p>For more details on this metric, see the original paper by Thomas J.
 McCabe:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span><span class="nv">McCabe</span><span class="o">:</span><span class="m">1976</span><span class="o">:</span><span class="nv">CM</span><span class="o">:</span><span class="m">800253.807712</span>,

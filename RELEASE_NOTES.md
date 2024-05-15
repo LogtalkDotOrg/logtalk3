@@ -54,9 +54,13 @@ Tools
 * CHANGED: The `dead_code_scanner` and `lgtdoc` tools to print warnings using
 the same format used by the compiler.
 
-* FIXED: Deleted dead code in the `code_metrics` and `lgtdoc` tools.
+* FIXED: The `code_metrics` tool computation of entity cyclomatic complexity
+to also consider multifile predicate definitions contributed by the entity to
+other entities when computing graph connected components.
 
 * FIXED: Code coverage for tests of the Halstead complexity metric.
+
+* FIXED: Deleted dead code in the `code_metrics` and `lgtdoc` tools.
 
 * FIXED: The `wrapper` reporting of missing `meta_predicate/1` directives.
 Thanks to Alex Kouznetsov for the bug report.

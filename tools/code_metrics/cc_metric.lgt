@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:5:1,
+		version is 0:5:2,
 		author is 'Paulo Moura',
-		date is 2024-05-08,
+		date is 2024-05-15,
 		comment is 'Cyclomatic complexity metric. All defined predicates that are not called or updated are counted as graph connected components (the reasoning being that these predicates can be considered entry points). The score is represented by a non-negative integer.'
 	]).
 
@@ -112,23 +112,43 @@
 	connected_components(object, Entity, Components) :-
 		findall(
 			Predicate,
-			(	object_property(Entity, defines(Predicate, DefinesProperties)),
-				\+ member(auxiliary, DefinesProperties),
+			(	object_property(Entity, provides(Predicate, Other, Properties)),
+				\+ member(auxiliary, Properties),
+				\+ (object_property(Entity, calls(Object::Predicate, _)), callable(Object), Object = Other),
+				\+ (object_property(Entity, updates(Object::Predicate, _)), callable(Object), Object = Other)
+			),
+			Predicates0
+		),
+		findall(
+			Predicate,
+			(	object_property(Entity, defines(Predicate, Properties)),
+				\+ member(auxiliary, Properties),
 				\+ object_property(Entity, calls(Predicate, _)),
 				\+ object_property(Entity, updates(Predicate, _))
 			),
-			Predicates
+			Predicates,
+			Predicates0
 		),
 		length(Predicates, Components).
 	connected_components(category, Entity, Components) :-
 		findall(
 			Predicate,
-			(	category_property(Entity, defines(Predicate, DefinesProperties)),
-				\+ member(auxiliary, DefinesProperties),
+			(	category_property(Entity, provides(Predicate, Other, Properties)),
+				\+ member(auxiliary, Properties),
+				\+ (category_property(Entity, calls(Object::Predicate, _)), callable(Object), Object = Other),
+				\+ (category_property(Entity, updates(Object::Predicate, _)), callable(Object), Object = Other)
+			),
+			Predicates0
+		),
+		findall(
+			Predicate,
+			(	category_property(Entity, defines(Predicate, Properties)),
+				\+ member(auxiliary, Properties),
 				\+ category_property(Entity, calls(Predicate, _)),
 				\+ category_property(Entity, updates(Predicate, _))
 			),
-			Predicates
+			Predicates,
+			Predicates0
 		),
 		length(Predicates, Components).
 
