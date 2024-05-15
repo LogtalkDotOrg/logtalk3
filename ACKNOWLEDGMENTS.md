@@ -29,6 +29,7 @@ CONTRIBUTORS
 
 * Abramo Bagnara (efficient expansion of once/1 goals and bug reports in corner cases when compiling disjunctions)
 * Adrián Arroyo Calle (library enhancements)
+* Alex Kouznetsov (bug reports and documentation feedback)
 * Andreas Becker (PDT support for Logtalk, bug reports)
 * Andrew Davison (help with Trealla Prolog integration; bug reports; test suggestions)
 * Anne Ogborn (bug reports, usability suggestions)
