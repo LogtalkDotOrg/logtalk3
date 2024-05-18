@@ -6742,7 +6742,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_debug'(Event, ExCtx) :-
-	'$logtalk#0.active_debug_handler#1'(Provider, _),
+	'$logtalk#0.active_debug_handler_#1'(Provider, _),
 	!,
 	'$logtalk#0.debug_handler#3'(Provider, Event, ExCtx, _).
 
