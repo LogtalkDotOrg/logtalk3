@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,10 +25,22 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 1:13:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2023-10-02,
+		date is 2024-05-18,
 		comment is 'Predicate execution box model port profiler.'
+	]).
+
+	:- public(start/0).
+	:- mode(start, one).
+	:- info(start/0, [
+		comment is 'Activates thr ports profiler for followup goals.'
+	]).
+
+	:- public(stop/0).
+	:- mode(stop, one).
+	:- info(stop/0, [
+		comment is 'Deactivates thr ports profiler.'
 	]).
 
 	:- public(data/0).
@@ -123,15 +135,19 @@
 		atomic_list_concat/2
 	]).
 
-	% there can only be one debug handler provider loaded at the same time;
-	% the Logtalk runtime uses the logtalk::debug_handler_provider/1 hook
-	% predicate for detecting multiple instances of the handler and for
-	% better error reporting
-	:- multifile(logtalk::debug_handler_provider/1).
-	logtalk::debug_handler_provider(ports_profiler).
+	start :-
+		logtalk::activate_debug_handler(ports_profiler),
+		logtalk::print_message(comment, ports_profiler, @'Ports profiling activated.').
 
-	:- multifile(logtalk::debug_handler/2).
-	logtalk::debug_handler(Event, ExCtx) :-
+	stop :-
+		logtalk::deactivate_debug_handler,
+		logtalk::print_message(comment, ports_profiler, @'Ports profiling deactivated.').
+
+	:- multifile(logtalk::debug_handler/1).
+	logtalk::debug_handler(ports_profiler).
+
+	:- multifile(logtalk::debug_handler/3).
+	logtalk::debug_handler(ports_profiler, Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
 	debug_handler(fact(Entity, Goal, ClauseNumber, File, BeginLine), _) :-
@@ -228,8 +244,10 @@
 		).
 
 	reset :-
+		retractall(entity_defines_(_, _)),
 		retractall(port_(_, _, _, _, _)),
-		retractall(entity_defines_(_, _)).
+		retractall(clause_location_(_, _, _, _, _, _)),
+		retractall(clause_(_, _, _, _, _)).
 
 	data(Entity) :-
 		entity_spec_to_template(Entity, EntityTemplate),
@@ -264,6 +282,7 @@
 
 	reset(Entity) :-
 		entity_spec_to_template(Entity, EntityTemplate),
+		retractall(entity_defines_(EntityTemplate, _)),
 		retractall(port_(_, EntityTemplate, _, _, _)),
 		retractall(clause_location_(_, _, _, _, _, _)),
 		retractall(clause_(_, _, _, _, _)).
@@ -290,45 +309,45 @@
 		).
 
 	write_data(Predicates, Entity) :-
-		maximum_width_entity(Predicates, MaximumWidthEntity),
-		maximum_width_predicate(Predicates, MaximumWidthPredicate),
-		maximum_width_port_count(Entity, MaximumWidthCount),
-		table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount, Ruler),
-		write(Ruler), nl,
-		write_entity_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount),
-		write(Ruler), nl,
 		(	Predicates == [] ->
 			write('(no profiling data available)'), nl
-		;	write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount)
-		),
-		write(Ruler), nl.
+		;	maximum_width_entity(Predicates, MaximumWidthEntity),
+			maximum_width_predicate(Predicates, MaximumWidthPredicate),
+			maximum_width_port_count(Entity, MaximumWidthCount),
+			table_ruler(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount, Ruler),
+			write(Ruler), nl,
+			write_entity_table_label(MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount),
+			write(Ruler), nl,
+			write_data_rows(Predicates, MaximumWidthEntity, MaximumWidthPredicate, MaximumWidthCount),
+			write(Ruler), nl
+		).
 
 	write_data_entity(Predicates, Entity) :-
-		maximum_width_predicate(Predicates, MaximumWidthPredicate),
-		maximum_width_port_count(Entity, MaximumWidthCount),
-		table_ruler(MaximumWidthPredicate, MaximumWidthCount, Ruler),
-		write(Ruler), nl,
-		write_predicate_table_label(MaximumWidthPredicate, MaximumWidthCount),
-		write(Ruler), nl,
 		(	Predicates == [] ->
 			write('(no profiling data available)'), nl
-		;	write_data_rows(Predicates, MaximumWidthPredicate, MaximumWidthCount)
-		),
-		write(Ruler), nl.
+		;	maximum_width_predicate(Predicates, MaximumWidthPredicate),
+			maximum_width_port_count(Entity, MaximumWidthCount),
+			table_ruler(MaximumWidthPredicate, MaximumWidthCount, Ruler),
+			write(Ruler), nl,
+			write_predicate_table_label(MaximumWidthPredicate, MaximumWidthCount),
+			write(Ruler), nl,
+			write_data_rows(Predicates, MaximumWidthPredicate, MaximumWidthCount),
+			write(Ruler), nl
+		).
 
 	write_data_predicate(ClauseCounts) :-
-		maximum_width_clause_number(ClauseCounts, MaximumWidthNumber),
-		maximum_width_clause_count(ClauseCounts, MaximumWidthCount),
-		Length is MaximumWidthNumber + 2 + MaximumWidthCount,
-		generate_atom(Length, '-', Ruler),
-		write(Ruler), nl,
-		write_clause_table_label(MaximumWidthNumber, MaximumWidthCount),
-		write(Ruler), nl,
 		(	ClauseCounts == [] ->
 			write('(no profiling data available)'), nl
-		;	write_clause_data_rows(ClauseCounts, MaximumWidthNumber, MaximumWidthCount)
-		),
-		write(Ruler), nl.
+		;	maximum_width_clause_number(ClauseCounts, MaximumWidthNumber),
+			maximum_width_clause_count(ClauseCounts, MaximumWidthCount),
+			Length is MaximumWidthNumber + 2 + MaximumWidthCount,
+			generate_atom(Length, '-', Ruler),
+			write(Ruler), nl,
+			write_clause_table_label(MaximumWidthNumber, MaximumWidthCount),
+			write(Ruler), nl,
+			write_clause_data_rows(ClauseCounts, MaximumWidthNumber, MaximumWidthCount),
+			write(Ruler), nl
+		).
 
 	maximum_width_entity(Predicates, MaximumWidthEntity) :-
 		maximum_width_entity(Predicates, 0, MaximumWidthEntity).

@@ -777,12 +777,68 @@ Debug and trace events
 
 The debugging API defines two multifile predicates,
 :ref:`logtalk::trace_event/2 <apis:logtalk/0::trace_event/2>` and
-:ref:`logtalk::debug_handler/2 <apis:logtalk/0::debug_handler/2>` for handiling
+:ref:`logtalk::debug_handler/3 <apis:logtalk/0::debug_handler/3>` for handiling
 trace and debug events. It also provides a
-:ref:`logtalk::debug_handler_provider/1 <apis:logtalk/0::debug_handler_provider/1>`
-multifile predicate that allows an object (or a category) to declare itself
+:ref:`logtalk::debug_handler/1 <apis:logtalk/0::debug_handler/1>` multifile
+predicate that allows an object (or a category) to declare itself
 as a debug handler provider. The Logtalk ``debugger`` and  ``ports_profiler``
 tools are regular applications thar are implemented using this API, which
 can also be used to implement alternative or new debugging related tools.
 See the API documentation for details and the source code of the ``debugger``
 and  ``ports_profiler`` tools for usage examples.
+
+To define a new debug handler provider, add (to an object or category) clauses
+for the ``debug_handler/1`` and  ``debug_handler/3`` predicates. For example:
+
+::
+
+   % declare my_debug_handler as a debug handler provider
+   :- multifile(logtalk::debug_handler/1).
+   logtalk::debug_handler(my_debug_handler).
+   
+   % handle debug events
+   :- multifile(logtalk::debug_handler/3).
+   logtalk::debug_handler(my_debug_handler, Event, ExCtx) :-
+       debug_handler(Event, ExCtx).
+   
+   debug_handler(fact(Entity,Fact,Clause,File,Line), ExCtx) :-
+       ...
+   debug_handler(rule(Entity,Head,Clause,File,Line), ExCtx) :-
+       ...
+   debug_handler(top_goal(Goal, TGoal), ExCtx) :-
+       ...
+   debug_handler(goal(Goal, TGoal), ExCtx) :-
+       ...
+
+Your debug handler provider should also either automatically call the
+:ref:`logtalk::activate_debug_handler/1 <apis:logtalk/0::activate_debug_handler/1>`
+and :ref:`logtalk::deactivate_debug_handler/0 <apis:logtalk/0::deactivate_debug_handler/0>`
+predicate or provide public predicates to simplify calling these predicates.
+For example:
+
+::
+
+   :- public(start/0).
+   start :-
+      logtalk::activate_debug_handler(my_debug_handler).
+
+   :- public(stop/0).
+   stop :-
+      logtalk::deactivate_debug_handler.
+
+If you only need to define a trace event handler, then simply define clauses
+for the :ref:`logtalk::trace_event/2 <apis:logtalk/0::trace_event/2>` multifile
+predicate:
+
+::
+
+   :- multifile(logtalk::trace_event/2).
+   :- dynamic(logtalk::trace_event/2).
+   
+   % the Logtalk runtime calls all defined logtalk::trace_event/2 hooks using
+   % a failure-driven loop; thus we don't have to worry about handling all
+   % events or failing after handling an event to give other hooks a chance
+   logtalk::trace_event(fact(Entity, Fact, N, _, _), _) :-
+       ...
+   logtalk::trace_event(rule(Entity, Head, N, _, _), _) :-
+       ...

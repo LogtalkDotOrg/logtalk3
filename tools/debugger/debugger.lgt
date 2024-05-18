@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 6:1:1,
+		version is 7:0:0,
 		author is 'Paulo Moura',
-		date is 2023-11-23,
+		date is 2024-05-18,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -158,6 +158,7 @@
 		reset_invocation_number(_).
 
 	debug :-
+		logtalk::activate_debug_handler(debugger),
 		(	debugging_ ->
 			print_message(comment, debugger, debugger_spying_on)
 		;	assertz(debugging_),
@@ -173,9 +174,11 @@
 			retractall(leaping_(_)),
 			print_message(comment, debugger, debugger_switched_off)
 		;	print_message(comment, debugger, debugger_off)
-		).
+		),
+		logtalk::deactivate_debug_handler.
 
 	trace :-
+		logtalk::activate_debug_handler(debugger),
 		(	tracing_ ->
 			print_message(comment, debugger, debugger_tracing_on)
 		;	assertz(tracing_),
@@ -457,41 +460,35 @@
 		subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal)),
 		!.
 
-	:- multifile(logtalk::debug_handler_provider/1).
+	:- multifile(logtalk::debug_handler/1).
+	logtalk::debug_handler(debugger).
 
-	% there can only be one debug handler provider loaded at the same time;
-	% the Logtalk runtime uses the logtalk::debug_handler_provider/1 hook
-	% predicate for detecting multiple instances of the handler and for
-	% better error reporting
-	logtalk::debug_handler_provider(debugger).
-
-	:- multifile(logtalk::debug_handler/2).
-
-	logtalk::debug_handler(Event, ExCtx) :-
+	:- multifile(logtalk::debug_handler/3).
+	logtalk::debug_handler(debugger, Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
 	:- meta_predicate(debug_handler((::), (*))).
 
 	debug_handler(fact(Entity,Fact,Clause,File,Line), ExCtx) :-
-		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
 				\+ quasi_skipping_
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
+			invocation_number_(N),
 			port(fact(Entity,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
 	debug_handler(rule(Entity,Head,Clause,File,Line), ExCtx) :-
-		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
 				\+ quasi_skipping_
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
+			invocation_number_(N),
 			port(rule(Entity,Clause,File,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true

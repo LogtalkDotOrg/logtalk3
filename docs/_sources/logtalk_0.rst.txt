@@ -14,8 +14,8 @@ Built-in object providing message printing, debugging, library, source file, and
 |    ``built_in``
 
 | **Author:** Paulo Moura
-| **Version:** 1:23:0
-| **Date:** 2024-03-27
+| **Version:** 2:0:0
+| **Date:** 2024-05-18
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -253,40 +253,99 @@ Trace event handler. The runtime calls all trace event handlers using a failure-
 
 ------------
 
-.. index:: debug_handler_provider/1
-.. _logtalk/0::debug_handler_provider/1:
+.. index:: debug_handler/1
+.. _logtalk/0::debug_handler/1:
 
-``debug_handler_provider/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``debug_handler/1``
+^^^^^^^^^^^^^^^^^^^
 
-Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.
+Enumerates, by backtracking, all declared debug handler providers. Define a clause for this predicate to declare a new debug handler provider.
 
 | **Compilation flags:**
 |    ``static, multifile``
 
 | **Template:**
-|    ``debug_handler_provider(Provider)``
+|    ``debug_handler(Provider)``
 | **Mode and number of proofs:**
-|    ``debug_handler_provider(?object_identifier)`` - ``zero_or_one``
+|    ``debug_handler(?object_identifier)`` - ``zero_or_more``
+|    ``debug_handler(?category_identifier)`` - ``zero_or_more``
 
 
 ------------
 
-.. index:: debug_handler/2
-.. _logtalk/0::debug_handler/2:
+.. index:: active_debug_handler/1
+.. _logtalk/0::active_debug_handler/1:
 
-``debug_handler/2``
+``active_debug_handler/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Current active debug handler provider if any. There is at most one active debug handler provider at any given moment.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``active_debug_handler(Provider)``
+| **Mode and number of proofs:**
+|    ``active_debug_handler(?category_identifier)`` - ``zero_or_one``
+|    ``active_debug_handler(?category_identifier)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: activate_debug_handler/1
+.. _logtalk/0::activate_debug_handler/1:
+
+``activate_debug_handler/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Activates the given debug handler provider. There is at most one active debug handler provider at any given moment. Fails if the object or category is not declared as a debug handler provider.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``activate_debug_handler(Provider)``
+| **Mode and number of proofs:**
+|    ``activate_debug_handler(@object_identifier)`` - ``zero_or_one``
+|    ``activate_debug_handler(@category_identifier)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: deactivate_debug_handler/0
+.. _logtalk/0::deactivate_debug_handler/0:
+
+``deactivate_debug_handler/0``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deactivates the current debug handler provider if any.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``deactivate_debug_handler`` - ``one``
+
+
+------------
+
+.. index:: debug_handler/3
+.. _logtalk/0::debug_handler/3:
+
+``debug_handler/3``
 ^^^^^^^^^^^^^^^^^^^
 
-Debug event handler. Called by the runtime. When the call succeeds, the runtime assumes the event have been handled. In the case of a goal event, that the goal succeeded (possibly leaving choice-points that can be explored by backtracking).
+Debug event handler. Called by the runtime when the given provider is active.
 
 | **Compilation flags:**
 |    ``static, multifile``
 
 | **Template:**
-|    ``debug_handler(Event,ExecutionContext)``
+|    ``debug_handler(Provider,Event,ExecutionContext)``
 | **Mode and number of proofs:**
-|    ``debug_handler(?entity_identifier,?atom)`` - ``zero_or_more``
+|    ``debug_handler(+object_identifier,+callable,+execution_context)`` - ``zero_or_more``
+|    ``debug_handler(+category_identifier,+callable,+execution_context)`` - ``zero_or_more``
 
 | **Remarks:**
 
@@ -538,7 +597,24 @@ Protected predicates
 Private predicates
 ------------------
 
-(none)
+.. index:: active_debug_handler_/1
+.. _logtalk/0::active_debug_handler_/1:
+
+``active_debug_handler_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Current active debug handler provider. There is at most one active debug handler provider at any given moment.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``active_debug_handler_(Provider)``
+| **Mode and number of proofs:**
+|    ``active_debug_handler_(?entity_identifier)`` - ``zero_or_one``
+
+
+------------
 
 Operators
 ---------

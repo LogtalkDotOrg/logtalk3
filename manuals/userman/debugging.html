@@ -830,15 +830,65 @@ details.</p>
 <span id="debugging-events"></span><h2>Debug and trace events<a class="headerlink" href="#debug-and-trace-events" title="Link to this heading"></a></h2>
 <p>The debugging API defines two multifile predicates,
 <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> and
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-2" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::debug_handler/2</span></a> for handiling
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-3" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::debug_handler/3</span></a> for handiling
 trace and debug events. It also provides a
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-provider-1" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::debug_handler_provider/1</span></a>
-multifile predicate that allows an object (or a category) to declare itself
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-1" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::debug_handler/1</span></a> multifile
+predicate that allows an object (or a category) to declare itself
 as a debug handler provider. The Logtalk <code class="docutils literal notranslate"><span class="pre">debugger</span></code> and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code>
 tools are regular applications thar are implemented using this API, which
 can also be used to implement alternative or new debugging related tools.
 See the API documentation for details and the source code of the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
 and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tools for usage examples.</p>
+<p>To define a new debug handler provider, add (to an object or category) clauses
+for the <code class="docutils literal notranslate"><span class="pre">debug_handler/1</span></code> and  <code class="docutils literal notranslate"><span class="pre">debug_handler/3</span></code> predicates. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% declare my_debug_handler as a debug handler provider</span>
+<span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>debug_handler<span class="o">/</span><span class="m">1</span>).
+logtalk<span class="o">::</span>debug_handler(my_debug_handler).
+
+<span class="c">% handle debug events</span>
+<span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>debug_handler<span class="o">/</span><span class="m">3</span>).
+logtalk<span class="o">::</span>debug_handler(my_debug_handler, <span class="nv">Event</span>, <span class="nv">ExCtx</span>) <span class="o">:-</span>
+    debug_handler(<span class="nv">Event</span>, <span class="nv">ExCtx</span>).
+
+debug_handler(fact(<span class="nv">Entity</span>,<span class="nv">Fact</span>,<span class="nv">Clause</span>,<span class="nv">File</span>,<span class="nv">Line</span>), <span class="nv">ExCtx</span>) <span class="o">:-</span>
+    ...
+debug_handler(rule(<span class="nv">Entity</span>,<span class="nv">Head</span>,<span class="nv">Clause</span>,<span class="nv">File</span>,<span class="nv">Line</span>), <span class="nv">ExCtx</span>) <span class="o">:-</span>
+    ...
+debug_handler(top_goal(<span class="nv">Goal</span>, <span class="nv">TGoal</span>), <span class="nv">ExCtx</span>) <span class="o">:-</span>
+    ...
+debug_handler(goal(<span class="nv">Goal</span>, <span class="nv">TGoal</span>), <span class="nv">ExCtx</span>) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
+<p>Your debug handler provider should also either automatically call the
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-activate-debug-handler-1" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::activate_debug_handler/1</span></a>
+and <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-deactivate-debug-handler-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::deactivate_debug_handler/0</span></a>
+predicate or provide public predicates to simplify calling these predicates.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(start<span class="o">/</span><span class="m">0</span>).
+start <span class="o">:-</span>
+   logtalk<span class="o">::</span>activate_debug_handler(my_debug_handler).
+
+<span class="p">:- </span><span class="k">public</span>(stop<span class="o">/</span><span class="m">0</span>).
+stop <span class="o">:-</span>
+   logtalk<span class="o">::</span>deactivate_debug_handler.
+</pre></div>
+</div>
+<p>If you only need to define a trace event handler, then simply define clauses
+for the <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> multifile
+predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>trace_event<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>trace_event<span class="o">/</span><span class="m">2</span>).
+
+<span class="c">% the Logtalk runtime calls all defined logtalk::trace_event/2 hooks using</span>
+<span class="c">% a failure-driven loop; thus we don&#39;t have to worry about handling all</span>
+<span class="c">% events or failing after handling an event to give other hooks a chance</span>
+logtalk<span class="o">::</span>trace_event(fact(<span class="nv">Entity</span>, <span class="nv">Fact</span>, <span class="nv">N</span>, <span class="nv">_</span>, <span class="nv">_</span>), <span class="nv">_</span>) <span class="o">:-</span>
+    ...
+logtalk<span class="o">::</span>trace_event(rule(<span class="nv">Entity</span>, <span class="nv">Head</span>, <span class="nv">N</span>, <span class="nv">_</span>, <span class="nv">_</span>), <span class="nv">_</span>) <span class="o">:-</span>
+    ...
+</pre></div>
+</div>
 </section>
 </section>
 

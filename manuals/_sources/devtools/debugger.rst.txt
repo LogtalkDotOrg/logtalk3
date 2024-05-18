@@ -25,10 +25,6 @@ This tool can be loaded using the query:
 
    | ?- logtalk_load(debugger(loader)).
 
-Note that this tool cannot be loaded at the same time as other tools
-(e.g. the ports profiler) that also provide a debug handler, which must
-be unique in a running session.
-
 When the code to be debugged runs computationally expensive
 initializations, loading this tool after the code may have a noticeable
 impact in loading times.

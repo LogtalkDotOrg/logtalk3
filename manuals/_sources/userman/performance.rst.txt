@@ -190,7 +190,7 @@ generated when running the application. A debug event is simply a pass on a
 call or unification port of the :ref:`procedure box model <debugging_box_model>`.
 These debug events can be intercepted by defined clauses for the
 :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
-and :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>` multifile
+and :ref:`logtalk::debug_handler/3 <logtalk/0::debug_handler/3>` multifile
 predicates. With no application (such as a debugger or a port profiler)
 loaded defining clauses for these predicates, each goal have an overhead of
 four extra inferences due to the runtime checking for a definition of the

@@ -14,8 +14,8 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 6:1:1
-| **Date:** 2023-11-23
+| **Version:** 7:0:0
+| **Date:** 2024-05-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,8 +24,8 @@ Command-line debugger based on an extended procedure box model supporting execut
 | **Implements:**
 |    ``public`` :ref:`debuggerp <debuggerp/0>`
 | **Provides:**
-|    :ref:`logtalk::debug_handler_provider/1 <logtalk/0::debug_handler_provider/1>`
-|    :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>`
+|    :ref:`logtalk::debug_handler/1 <logtalk/0::debug_handler/1>`
+|    :ref:`logtalk::debug_handler/3 <logtalk/0::debug_handler/3>`
 | **Uses:**
 |    :ref:`logtalk <logtalk/0>`
 

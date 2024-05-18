@@ -234,9 +234,9 @@
 :- multifile('$logtalk#0.trace_event#2'/3).
 :- dynamic('$logtalk#0.trace_event#2'/3).
 
-:- multifile('$logtalk#0.debug_handler_provider#1'/2).
+:- multifile('$logtalk#0.debug_handler#1'/2).
 
-:- multifile('$logtalk#0.debug_handler#2'/3).
+:- multifile('$logtalk#0.debug_handler#3'/4).
 
 
 % internal initialization flags
@@ -6742,9 +6742,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 '$lgt_debug'(Event, ExCtx) :-
-	'$logtalk#0.debug_handler_provider#1'(_, _),
+	'$logtalk#0.active_debug_handler#1'(Provider, _),
 	!,
-	'$logtalk#0.debug_handler#2'(Event, ExCtx, _).
+	'$logtalk#0.debug_handler#3'(Provider, Event, ExCtx, _).
 
 % top_goal(Goal, TGoal)
 '$lgt_debug'(top_goal(_, TGoal), _) :-
@@ -12897,20 +12897,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_source_file_context'(File, Lines),
 		assertz('$lgt_pp_missing_multifile_directive_'(user::Functor/Arity, File, Lines))
 	).
-
-'$lgt_compile_head'(logtalk::debug_handler_provider(NewProvider), _, _, Ctx) :-
-	'$lgt_check'(object_identifier, NewProvider),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$logtalk#0.debug_handler_provider#1'(OldProvider, _),
-	functor(NewProvider, Functor, Arity),
-	\+ functor(OldProvider, Functor, Arity),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_print_message'(
-		warning(general),
-		debug_handler_provider_already_exists(File, Lines, Type, Entity, OldProvider)
-	),
-	fail.
 
 '$lgt_compile_head'(Other::Head, Other::Functor/Arity, THead, Ctx) :-
 	!,

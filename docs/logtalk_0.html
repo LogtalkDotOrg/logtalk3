@@ -209,8 +209,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:23:0</div>
-<div class="line"><strong>Date:</strong> 2024-03-27</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2024-05-18</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -255,36 +255,43 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<li><p><a class="reference internal" href="#public-predicates" id="id3">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#print-message-3" id="id2"><code class="docutils literal notranslate"><span class="pre">print_message/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#print-message-tokens-3" id="id3"><code class="docutils literal notranslate"><span class="pre">print_message_tokens/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#print-message-token-4" id="id4"><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#message-tokens-2" id="id5"><code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#message-prefix-stream-4" id="id6"><code class="docutils literal notranslate"><span class="pre">message_prefix_stream/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#message-hook-4" id="id7"><code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ask-question-5" id="id8"><code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#question-hook-6" id="id9"><code class="docutils literal notranslate"><span class="pre">question_hook/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#question-prompt-stream-4" id="id10"><code class="docutils literal notranslate"><span class="pre">question_prompt_stream/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#trace-event-2" id="id11"><code class="docutils literal notranslate"><span class="pre">trace_event/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#debug-handler-provider-1" id="id12"><code class="docutils literal notranslate"><span class="pre">debug_handler_provider/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#debug-handler-2" id="id13"><code class="docutils literal notranslate"><span class="pre">debug_handler/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#expand-library-path-2" id="id14"><code class="docutils literal notranslate"><span class="pre">expand_library_path/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#loaded-file-1" id="id15"><code class="docutils literal notranslate"><span class="pre">loaded_file/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#loaded-file-property-2" id="id16"><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#file-type-extension-2" id="id17"><code class="docutils literal notranslate"><span class="pre">file_type_extension/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#compile-aux-clauses-1" id="id18"><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-prefix-2" id="id19"><code class="docutils literal notranslate"><span class="pre">entity_prefix/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#compile-predicate-heads-4" id="id20"><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#compile-predicate-indicators-3" id="id21"><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#decompile-predicate-heads-4" id="id22"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#decompile-predicate-indicators-4" id="id23"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#execution-context-7" id="id24"><code class="docutils literal notranslate"><span class="pre">execution_context/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#print-message-3" id="id4"><code class="docutils literal notranslate"><span class="pre">print_message/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#print-message-tokens-3" id="id5"><code class="docutils literal notranslate"><span class="pre">print_message_tokens/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#print-message-token-4" id="id6"><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-tokens-2" id="id7"><code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-prefix-stream-4" id="id8"><code class="docutils literal notranslate"><span class="pre">message_prefix_stream/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#message-hook-4" id="id9"><code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ask-question-5" id="id10"><code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#question-hook-6" id="id11"><code class="docutils literal notranslate"><span class="pre">question_hook/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#question-prompt-stream-4" id="id12"><code class="docutils literal notranslate"><span class="pre">question_prompt_stream/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#trace-event-2" id="id13"><code class="docutils literal notranslate"><span class="pre">trace_event/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#debug-handler-1" id="id14"><code class="docutils literal notranslate"><span class="pre">debug_handler/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#active-debug-handler-1" id="id15"><code class="docutils literal notranslate"><span class="pre">active_debug_handler/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#activate-debug-handler-1" id="id16"><code class="docutils literal notranslate"><span class="pre">activate_debug_handler/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#deactivate-debug-handler-0" id="id17"><code class="docutils literal notranslate"><span class="pre">deactivate_debug_handler/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#debug-handler-3" id="id18"><code class="docutils literal notranslate"><span class="pre">debug_handler/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#expand-library-path-2" id="id19"><code class="docutils literal notranslate"><span class="pre">expand_library_path/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#loaded-file-1" id="id20"><code class="docutils literal notranslate"><span class="pre">loaded_file/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#loaded-file-property-2" id="id21"><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-type-extension-2" id="id22"><code class="docutils literal notranslate"><span class="pre">file_type_extension/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#compile-aux-clauses-1" id="id23"><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-prefix-2" id="id24"><code class="docutils literal notranslate"><span class="pre">entity_prefix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#compile-predicate-heads-4" id="id25"><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#compile-predicate-indicators-3" id="id26"><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decompile-predicate-heads-4" id="id27"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#decompile-predicate-indicators-4" id="id28"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#execution-context-7" id="id29"><code class="docutils literal notranslate"><span class="pre">execution_context/7</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id25">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id30">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id31">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id32"><code class="docutils literal notranslate"><span class="pre">active_debug_handler_/1</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id33">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -516,9 +523,9 @@
 </div></blockquote>
 <hr class="docutils" />
 </section>
-<section id="debug-handler-provider-1">
-<span id="logtalk-0-debug-handler-provider-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">debug_handler_provider/1</span></code></a><a class="headerlink" href="#debug-handler-provider-1" title="Link to this heading"></a></h3>
-<p>Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.</p>
+<section id="debug-handler-1">
+<span id="logtalk-0-debug-handler-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">debug_handler/1</span></code></a><a class="headerlink" href="#debug-handler-1" title="Link to this heading"></a></h3>
+<p>Enumerates, by backtracking, all declared debug handler providers. Define a clause for this predicate to declare a new debug handler provider.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -528,18 +535,80 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler_provider(Provider)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(Provider)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler_provider(?object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(?object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(?category_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="debug-handler-2">
-<span id="logtalk-0-debug-handler-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">debug_handler/2</span></code></a><a class="headerlink" href="#debug-handler-2" title="Link to this heading"></a></h3>
-<p>Debug event handler. Called by the runtime. When the call succeeds, the runtime assumes the event have been handled. In the case of a goal event, that the goal succeeded (possibly leaving choice-points that can be explored by backtracking).</p>
+<section id="active-debug-handler-1">
+<span id="logtalk-0-active-debug-handler-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">active_debug_handler/1</span></code></a><a class="headerlink" href="#active-debug-handler-1" title="Link to this heading"></a></h3>
+<p>Current active debug handler provider if any. There is at most one active debug handler provider at any given moment.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">active_debug_handler(Provider)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">active_debug_handler(?category_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">active_debug_handler(?category_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="activate-debug-handler-1">
+<span id="logtalk-0-activate-debug-handler-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">activate_debug_handler/1</span></code></a><a class="headerlink" href="#activate-debug-handler-1" title="Link to this heading"></a></h3>
+<p>Activates the given debug handler provider. There is at most one active debug handler provider at any given moment. Fails if the object or category is not declared as a debug handler provider.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">activate_debug_handler(Provider)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">activate_debug_handler(&#64;object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">activate_debug_handler(&#64;category_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="deactivate-debug-handler-0">
+<span id="logtalk-0-deactivate-debug-handler-0"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">deactivate_debug_handler/0</span></code></a><a class="headerlink" href="#deactivate-debug-handler-0" title="Link to this heading"></a></h3>
+<p>Deactivates the current debug handler provider if any.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">deactivate_debug_handler</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="debug-handler-3">
+<span id="logtalk-0-debug-handler-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">debug_handler/3</span></code></a><a class="headerlink" href="#debug-handler-3" title="Link to this heading"></a></h3>
+<p>Debug event handler. Called by the runtime when the given provider is active.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -549,11 +618,12 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(Event,ExecutionContext)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(Provider,Event,ExecutionContext)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(?entity_identifier,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(+object_identifier,+callable,+execution_context)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">debug_handler(+category_identifier,+callable,+execution_context)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -568,7 +638,7 @@
 <hr class="docutils" />
 </section>
 <section id="expand-library-path-2">
-<span id="logtalk-0-expand-library-path-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">expand_library_path/2</span></code></a><a class="headerlink" href="#expand-library-path-2" title="Link to this heading"></a></h3>
+<span id="logtalk-0-expand-library-path-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">expand_library_path/2</span></code></a><a class="headerlink" href="#expand-library-path-2" title="Link to this heading"></a></h3>
 <p>Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -590,7 +660,7 @@
 <hr class="docutils" />
 </section>
 <section id="loaded-file-1">
-<span id="logtalk-0-loaded-file-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">loaded_file/1</span></code></a><a class="headerlink" href="#loaded-file-1" title="Link to this heading"></a></h3>
+<span id="logtalk-0-loaded-file-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">loaded_file/1</span></code></a><a class="headerlink" href="#loaded-file-1" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, all loaded files, returning their full paths.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -611,7 +681,7 @@
 <hr class="docutils" />
 </section>
 <section id="loaded-file-property-2">
-<span id="logtalk-0-loaded-file-property-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code></a><a class="headerlink" href="#loaded-file-property-2" title="Link to this heading"></a></h3>
+<span id="logtalk-0-loaded-file-property-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code></a><a class="headerlink" href="#loaded-file-property-2" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, loaded file properties.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -652,7 +722,7 @@
 <hr class="docutils" />
 </section>
 <section id="file-type-extension-2">
-<span id="logtalk-0-file-type-extension-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_type_extension/2</span></code></a><a class="headerlink" href="#file-type-extension-2" title="Link to this heading"></a></h3>
+<span id="logtalk-0-file-type-extension-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_type_extension/2</span></code></a><a class="headerlink" href="#file-type-extension-2" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, all defined file type extensions. The defined types are: <code class="docutils literal notranslate"><span class="pre">source</span></code>, <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">logtalk</span></code>, <code class="docutils literal notranslate"><span class="pre">prolog</span></code>, and <code class="docutils literal notranslate"><span class="pre">tmp</span></code>. The source type returns both <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> and <code class="docutils literal notranslate"><span class="pre">prolog</span></code> type extensions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -673,7 +743,7 @@
 <hr class="docutils" />
 </section>
 <section id="compile-aux-clauses-1">
-<span id="logtalk-0-compile-aux-clauses-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses/1</span></code></a><a class="headerlink" href="#compile-aux-clauses-1" title="Link to this heading"></a></h3>
+<span id="logtalk-0-compile-aux-clauses-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compile_aux_clauses/1</span></code></a><a class="headerlink" href="#compile-aux-clauses-1" title="Link to this heading"></a></h3>
 <p>Compiles a list of auxiliary clauses. Can only be called during source file compilation, usually from <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> or <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code> hook predicate definitions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -694,7 +764,7 @@
 <hr class="docutils" />
 </section>
 <section id="entity-prefix-2">
-<span id="logtalk-0-entity-prefix-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_prefix/2</span></code></a><a class="headerlink" href="#entity-prefix-2" title="Link to this heading"></a></h3>
+<span id="logtalk-0-entity-prefix-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_prefix/2</span></code></a><a class="headerlink" href="#entity-prefix-2" title="Link to this heading"></a></h3>
 <p>Converts between an entity identifier and the entity prefix that is used for its compiled code. When none of the arguments is instantiated, it returns the identifier and the prefix of the entity under compilation, if any.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -715,7 +785,7 @@
 <hr class="docutils" />
 </section>
 <section id="compile-predicate-heads-4">
-<span id="logtalk-0-compile-predicate-heads-4"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads/4</span></code></a><a class="headerlink" href="#compile-predicate-heads-4" title="Link to this heading"></a></h3>
+<span id="logtalk-0-compile-predicate-heads-4"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compile_predicate_heads/4</span></code></a><a class="headerlink" href="#compile-predicate-heads-4" title="Link to this heading"></a></h3>
 <p>Compiles clause heads. The heads are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -738,7 +808,7 @@
 <hr class="docutils" />
 </section>
 <section id="compile-predicate-indicators-3">
-<span id="logtalk-0-compile-predicate-indicators-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators/3</span></code></a><a class="headerlink" href="#compile-predicate-indicators-3" title="Link to this heading"></a></h3>
+<span id="logtalk-0-compile-predicate-indicators-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compile_predicate_indicators/3</span></code></a><a class="headerlink" href="#compile-predicate-indicators-3" title="Link to this heading"></a></h3>
 <p>Compiles predicate indicators. The predicate are compiled in the context of the entity under compilation when the entity argument is not instantiated.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -761,7 +831,7 @@
 <hr class="docutils" />
 </section>
 <section id="decompile-predicate-heads-4">
-<span id="logtalk-0-decompile-predicate-heads-4"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads/4</span></code></a><a class="headerlink" href="#decompile-predicate-heads-4" title="Link to this heading"></a></h3>
+<span id="logtalk-0-decompile-predicate-heads-4"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_heads/4</span></code></a><a class="headerlink" href="#decompile-predicate-heads-4" title="Link to this heading"></a></h3>
 <p>Decompiles clause heads. All compiled clause heads must belong to the same entity, which must be loaded.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -784,7 +854,7 @@
 <hr class="docutils" />
 </section>
 <section id="decompile-predicate-indicators-4">
-<span id="logtalk-0-decompile-predicate-indicators-4"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators/4</span></code></a><a class="headerlink" href="#decompile-predicate-indicators-4" title="Link to this heading"></a></h3>
+<span id="logtalk-0-decompile-predicate-indicators-4"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators/4</span></code></a><a class="headerlink" href="#decompile-predicate-indicators-4" title="Link to this heading"></a></h3>
 <p>Decompiles predicate indicators. All compiled predicate indicators must belong to the same entity, which must be loaded.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -807,7 +877,7 @@
 <hr class="docutils" />
 </section>
 <section id="execution-context-7">
-<span id="logtalk-0-execution-context-7"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">execution_context/7</span></code></a><a class="headerlink" href="#execution-context-7" title="Link to this heading"></a></h3>
+<span id="logtalk-0-execution-context-7"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">execution_context/7</span></code></a><a class="headerlink" href="#execution-context-7" title="Link to this heading"></a></h3>
 <p>Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -834,8 +904,28 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<section id="id1">
+<span id="index-27"></span><span id="id2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">active_debug_handler_/1</span></code></a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>Current active debug handler provider. There is at most one active debug handler provider at any given moment.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">active_debug_handler_(Provider)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">active_debug_handler_(?entity_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>

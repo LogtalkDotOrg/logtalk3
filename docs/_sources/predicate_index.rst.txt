@@ -131,6 +131,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::absolute_file_name/2>`
 
+``activate_debug_handler/1``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::activate_debug_handler/1>`
+
 ``activate_monitor/0``
 ----------------------
 
@@ -140,6 +150,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`monitorp <monitorp/0::activate_monitor/0>`
+
+``active_debug_handler/1``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::active_debug_handler/1>`
 
 ``add/1``
 ---------
@@ -1498,6 +1518,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::days_in_month/3>`
 
+``deactivate_debug_handler/0``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`logtalk <logtalk/0::deactivate_debug_handler/0>`
+
 ``debug/0``
 -----------
 
@@ -1508,7 +1538,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`debuggerp <debuggerp/0::debug/0>`
 
-``debug_handler/2``
+``debug_handler/1``
 -------------------
 
 .. toctree::
@@ -1516,17 +1546,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`logtalk <logtalk/0::debug_handler/2>`
+* :ref:`logtalk <logtalk/0::debug_handler/1>`
 
-``debug_handler_provider/1``
-----------------------------
+``debug_handler/3``
+-------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-* :ref:`logtalk <logtalk/0::debug_handler_provider/1>`
+* :ref:`logtalk <logtalk/0::debug_handler/3>`
 
 ``debugging/0``
 ---------------
@@ -8310,6 +8340,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ports_profiler <ports_profiler/0::start/0>`
 * :ref:`shell <shell/0::start/0>`
 
 ``start_redirect_to_file/2``
@@ -8341,6 +8372,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`intervalp <intervalp/0::starts/2>`
+
+``stop/0``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ports_profiler <ports_profiler/0::stop/0>`
 
 ``stop_redirect_to_file/0``
 ---------------------------

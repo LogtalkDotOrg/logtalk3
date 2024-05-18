@@ -25,7 +25,37 @@ RELEASE NOTES
 3.80.0 - June ??, 2024
 ======================
 
+Logtalk compiler and runtime
+----------------------------
 
+* CHANGED: Renamed the `logtalk` object `debug_handler_provider/1` predicate
+to `debug_handler/1` and the `debug_handler/2` predicate to `debug_handler/3`.
+
+* ADDED: New `activate_debug_handler/1`, `deactivate_debug_handler/0`, and
+`active_debug_handler/1` predicates to the `logtalk` object supporting the
+activation and deactivation of debug handler providers.
+
+* IMPROVED: Allow multiple debug handler providers to be loaded simultaneously
+(with the restriction that only one of them can be active at any given time).
+
+Documentation
+-------------
+
+* ADDED: Handbook documentation on how to define debug handler providers.
+
+Tools
+-----
+
+* CHANGED: The `debugger` and `ports_profiler` tools for the new debug handler
+predicates.
+
+* ADDED: New `start/0` and `stop/0` predicates to the `ports_profiler` object
+to simplify activating and deactivating it as the debug handler provider.
+
+* UPDATED: The `debugger` object `debug/0` and `trace/0` predicates to activate
+the object as the current debug handler provider. Updated also the `nodebug/0`
+predicate to deactivate the `debugger` object as the current debug handler
+provider.
 
 
 3.79.0 - May 15, 2024

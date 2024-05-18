@@ -168,9 +168,6 @@ directory.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ports_profiler(loader)).
 </pre></div>
 </div>
-<p>Note that this tool cannot be loaded at the same time as other tools
-(e.g. the debugger) that also provide a debug handler, which must be
-unique in a running session.</p>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
@@ -199,7 +196,9 @@ themselves.</p>
 <section id="generating-profiling-data">
 <h2>Generating profiling data<a class="headerlink" href="#generating-profiling-data" title="Link to this heading"></a></h2>
 <p>After loading this tool and compiling the source files that you want to
-profile in debug mode, simply call the goals to be profiled.</p>
+profile in debug mode, simply call the <code class="docutils literal notranslate"><span class="pre">ports_profiler::start</span></code> goal
+followed by the goals to be profiled. Use the <code class="docutils literal notranslate"><span class="pre">ports_profiler::stop</span></code>
+goal to stop profiling.</p>
 </section>
 <section id="printing-profiling-data-reports">
 <h2>Printing profiling data reports<a class="headerlink" href="#printing-profiling-data-reports" title="Link to this heading"></a></h2>
@@ -237,6 +236,9 @@ yes
 
 | <span class="o">?-</span> <span class="k">logtalk_load</span>(family(loader)).
 ...
+yes
+
+| <span class="o">?-</span> ports_profiler<span class="o">::</span>start.
 yes
 
 | <span class="o">?-</span> addams<span class="o">::</span>sister(<span class="nv">Sister</span>, <span class="nv">Sibling</span>).

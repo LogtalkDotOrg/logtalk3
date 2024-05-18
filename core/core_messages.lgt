@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:133:0,
+		version is 1:134:0,
 		author is 'Paulo Moura',
-		date is 2024-05-05,
+		date is 2024-05-18,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -278,10 +278,6 @@
 
 	message_tokens(logtalk_debugger_aborted) -->
 		['Debugging session aborted by user. Debugger still on.'-[], nl].
-
-	message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider)) -->
-		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
-		message_context(File, Lines, Type, Entity).
 
 	% runtime error
 

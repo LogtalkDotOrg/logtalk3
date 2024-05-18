@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:23:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2024-03-27,
+		date is 2024-05-18,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -158,20 +158,44 @@
 		]
 	]).
 
-	:- public(debug_handler_provider/1).
-	:- multifile(debug_handler_provider/1).
-	:- mode(debug_handler_provider(?object_identifier), zero_or_one).
-	:- info(debug_handler_provider/1, [
-		comment is 'Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.',
+	:- public(debug_handler/1).
+	:- multifile(debug_handler/1).
+	:- mode(debug_handler(?object_identifier), zero_or_more).
+	:- mode(debug_handler(?category_identifier), zero_or_more).
+	:- info(debug_handler/1, [
+		comment is 'Enumerates, by backtracking, all declared debug handler providers. Define a clause for this predicate to declare a new debug handler provider.',
 		argnames is ['Provider']
 	]).
 
-	:- public(debug_handler/2).
-	:- multifile(debug_handler/2).
-	:- mode(debug_handler(?entity_identifier, ?atom), zero_or_more).
-	:- info(debug_handler/2, [
-		comment is 'Debug event handler. Called by the runtime. When the call succeeds, the runtime assumes the event have been handled. In the case of a goal event, that the goal succeeded (possibly leaving choice-points that can be explored by backtracking).',
-		argnames is ['Event', 'ExecutionContext'],
+	:- public(active_debug_handler/1).
+	:- mode(active_debug_handler(?category_identifier), zero_or_one).
+	:- mode(active_debug_handler(?category_identifier), zero_or_one).
+	:- info(active_debug_handler/1, [
+		comment is 'Current active debug handler provider if any. There is at most one active debug handler provider at any given moment.',
+		argnames is ['Provider']
+	]).
+
+	:- public(activate_debug_handler/1).
+	:- mode(activate_debug_handler(@object_identifier), zero_or_one).
+	:- mode(activate_debug_handler(@category_identifier), zero_or_one).
+	:- info(activate_debug_handler/1, [
+		comment is 'Activates the given debug handler provider. There is at most one active debug handler provider at any given moment. Fails if the object or category is not declared as a debug handler provider.',
+		argnames is ['Provider']
+	]).
+
+	:- public(deactivate_debug_handler/0).
+	:- mode(deactivate_debug_handler, one).
+	:- info(deactivate_debug_handler/0, [
+		comment is 'Deactivates the current debug handler provider if any.'
+	]).
+
+	:- public(debug_handler/3).
+	:- multifile(debug_handler/3).
+	:- mode(debug_handler(+object_identifier, +callable, +execution_context), zero_or_more).
+	:- mode(debug_handler(+category_identifier, +callable, +execution_context), zero_or_more).
+	:- info(debug_handler/3, [
+		comment is 'Debug event handler. Called by the runtime when the given provider is active.',
+		argnames is ['Provider', 'Event', 'ExecutionContext'],
 		remarks is [
 			'Unification events' - 'Generated after a successful unification with a fact - ``fact(Entity,Fact,Clause,File,Line)`` - or a rule head - ``rule(Entity,Head,Clause,File,Line)``.',
 			'Goal events' - 'Generated when calling a goal: ``top_goal(Goal,CompiledGoal)`` or ``goal(Goal,CompiledGoal)``.'
@@ -282,6 +306,26 @@
 		comment is 'Execution context term data. Execution context terms should be considered opaque terms subject to change without notice.',
 		argnames is ['ExecutionContext', 'Entity', 'Sender', 'This', 'Self', 'MetaCallContext', 'CoinductionStack']
 	]).
+
+	:- private(active_debug_handler_/1).
+	:- dynamic(active_debug_handler_/1).
+	:- mode(active_debug_handler_(?entity_identifier), zero_or_one).
+	:- info(active_debug_handler_/1, [
+		comment is 'Current active debug handler provider. There is at most one active debug handler provider at any given moment.',
+		argnames is ['Provider']
+	]).
+
+	activate_debug_handler(Provider) :-
+		callable(Provider),
+		debug_handler(Provider),
+		retractall(active_debug_handler_(_)),
+		assertz(active_debug_handler_(Provider)).
+
+	deactivate_debug_handler :-
+		retractall(active_debug_handler_(_)).
+
+	active_debug_handler(Provider) :-
+		active_debug_handler_(Provider).
 
 	print_message(Kind, Component, Message) :-
 		message_term_to_tokens(Message, Kind, Component, Tokens),
