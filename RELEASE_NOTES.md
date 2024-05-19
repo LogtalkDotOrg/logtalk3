@@ -57,6 +57,12 @@ the object as the current debug handler provider. Updated also the `nodebug/0`
 predicate to deactivate the `debugger` object as the current debug handler
 provider.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* ADDED: VSCode handling of `compiling_file/2` messages to support clearing
+file diagnostics when recompiling files.
+
 
 3.79.0 - May 15, 2024
 =====================

@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:47:0,
+		version is 0:48:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-17,
+		date is 2024-05-19,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1336,6 +1336,10 @@
 
 	% fail after processing to allow default processing of the messages
 
+	% compiling file message
+	logtalk::message_hook(compiling_file(_, _), _, core, Tokens) :-
+		message_hook(Tokens, core, comment),
+		fail.
 	% compiler warnings and errors
 	logtalk::message_hook(_Message, error, core, Tokens) :-
 		message_hook(Tokens, core, error),
