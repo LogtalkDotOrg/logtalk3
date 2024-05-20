@@ -73,6 +73,12 @@ profile in debug mode, simply call the ``ports_profiler::start`` goal
 followed by the goals to be profiled. Use the ``ports_profiler::stop``
 goal to stop profiling.
 
+Note that the ``ports_profiler::start/0`` predicate implicitly selects
+the ``ports_profiler`` tool as the active debug handler. If you have
+additional debug handlers loaded (e.g. the ``debugger`` tool), those
+would no longer be active (there can be only one active debug handler at
+any given time).
+
 Printing profiling data reports
 -------------------------------
 

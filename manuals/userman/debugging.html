@@ -84,6 +84,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Debugging</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#compiling-source-files-in-debug-mode">Compiling source files in debug mode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#procedure-box-model">Procedure box model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#activating-the-debugger">Activating the debugger</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-spy-points">Defining spy points</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#defining-line-number-and-predicate-spy-points">Defining line number and predicate spy points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-context-spy-points">Defining context spy points</a></li>
@@ -308,6 +309,16 @@ some Prolog compilers:</p>
 </div>
 </div>
 <p>By default, the debugger pauses at every port for user interaction.</p>
+</section>
+<section id="activating-the-debugger">
+<h2>Activating the debugger<a class="headerlink" href="#activating-the-debugger" title="Link to this heading"></a></h2>
+<p>The <a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-trace-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">debuggerp::trace/0</span></a> and
+<a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-debug-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">debuggerp::debug/0</span></a> predicates implicitly
+select the <cite>debugger</cite> tool as the active debug handler. If you have additional
+debug handlers loaded (e.g. the <cite>ports_profiler</cite> tool), those would no longer
+be active (there can be only one active debug handler at any given time). The
+<a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-nodebug-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">debuggerp::nodebug/0</span></a> predicate implicitly
+deselects the <cite>debugger</cite> tool as the active debug handler.</p>
 </section>
 <section id="defining-spy-points">
 <h2>Defining spy points<a class="headerlink" href="#defining-spy-points" title="Link to this heading"></a></h2>

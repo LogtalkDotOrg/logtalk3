@@ -199,6 +199,11 @@ themselves.</p>
 profile in debug mode, simply call the <code class="docutils literal notranslate"><span class="pre">ports_profiler::start</span></code> goal
 followed by the goals to be profiled. Use the <code class="docutils literal notranslate"><span class="pre">ports_profiler::stop</span></code>
 goal to stop profiling.</p>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">ports_profiler::start/0</span></code> predicate implicitly selects
+the <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tool as the active debug handler. If you have
+additional debug handlers loaded (e.g. the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool), those
+would no longer be active (there can be only one active debug handler at
+any given time).</p>
 </section>
 <section id="printing-profiling-data-reports">
 <h2>Printing profiling data reports<a class="headerlink" href="#printing-profiling-data-reports" title="Link to this heading"></a></h2>

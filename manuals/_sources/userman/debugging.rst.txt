@@ -168,6 +168,19 @@ some Prolog compilers:
 
 By default, the debugger pauses at every port for user interaction.
 
+
+Activating the debugger
+-----------------------
+
+The :ref:`debuggerp::trace/0 <apis:debuggerp/0::trace/0>` and
+:ref:`debuggerp::debug/0 <apis:debuggerp/0::debug/0>` predicates implicitly
+select the `debugger` tool as the active debug handler. If you have additional
+debug handlers loaded (e.g. the `ports_profiler` tool), those would no longer
+be active (there can be only one active debug handler at any given time). The
+:ref:`debuggerp::nodebug/0 <apis:debuggerp/0::nodebug/0>` predicate implicitly
+deselects the `debugger` tool as the active debug handler.
+
+
 Defining spy points
 -------------------
 
