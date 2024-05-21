@@ -38,6 +38,9 @@ activation and deactivation of debug handler providers.
 * IMPROVED: Allow multiple debug handler providers to be loaded simultaneously
 (with the restriction that only one of them can be active at any given time).
 
+* FIXED: Regression preventing linter warnings for duplicated clauses and
+grammar rules.
+
 Documentation
 -------------
 

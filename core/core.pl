@@ -22485,23 +22485,23 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_compile_predicate_calls'(warning, Optimize) :-
-	% user-defined terms
+	% user-defined terms; as SourceData may be nil, we cannot perform the
+	% unification in the retract/1 goal otherwise we could skip terms
 	retract('$lgt_pp_entity_term_'(Term, SourceData, _)),
-	(	SourceData = sd(_, _, OriginalFile, OriginalLines),
+	(	SourceData = sd(Original, _, _, OriginalFile, OriginalLines),
 		'$lgt_pp_entity_'(Type, Entity, _),
-		'$lgt_clause_from_term'(Term, Clause, Template, OriginalTerm),
-		'$lgt_pp_entity_term_'(Template, sd(_, _, File, Lines), _),
-		'$lgt_clause_from_term'(Template, Duplicate, _, _),
-		'$lgt_variant'(Clause, Duplicate) ->
+		'$lgt_internal_term_template'(Term, Template),
+		'$lgt_pp_entity_term_'(Template, sd(Duplicate, _, _, File, Lines), _),
+		'$lgt_variant'(Original, Duplicate) ->
 		'$lgt_increment_compiling_warnings_counter',
-		(	OriginalTerm = (_ --> _) ->
+		(	Original = (_ --> _) ->
 			'$lgt_print_message'(
 				warning(duplicated_clauses),
-				duplicated_grammar_rule(File, Lines, Type, Entity, OriginalTerm, OriginalFile, OriginalLines)
+				duplicated_grammar_rule(File, Lines, Type, Entity, Original, OriginalFile, OriginalLines)
 			)
 		;	'$lgt_print_message'(
 				warning(duplicated_clauses),
-				duplicated_clause(File, Lines, Type, Entity, Duplicate, OriginalFile, OriginalLines)
+				duplicated_clause(File, Lines, Type, Entity, Original, OriginalFile, OriginalLines)
 			)
 		)
 	;	true
@@ -22549,23 +22549,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % auxiliary predicate used when checking for duplicated clauses
 
-'$lgt_clause_from_term'(srule(_,Body,Ctx), (Head:-Body), srule(_,_,_), Term) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
+'$lgt_internal_term_template'(srule(_,_,_), srule(_,_,_)).
 
-'$lgt_clause_from_term'(dsrule(_,_,Body,Ctx), (Head:-Body), dsrule(_,_,_,_), Term) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
+'$lgt_internal_term_template'(dsrule(_,_,_,_), dsrule(_,_,_,_)).
 
-'$lgt_clause_from_term'(drule(_,_,Body,Ctx), (Head:-Body), drule(_,_,_,_), Term) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
+'$lgt_internal_term_template'(drule(_,_,_,_), drule(_,_,_,_)).
 
-'$lgt_clause_from_term'(ddrule(_,_,_,Body,Ctx), (Head:-Body), ddrule(_,_,_,_,_), Term) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, _, _, _, _, Term).
+'$lgt_internal_term_template'(ddrule(_,_,_,_,_), ddrule(_,_,_,_,_)).
 
-'$lgt_clause_from_term'(fact(_,Ctx), Fact, fact(_,_), Term) :-
-	'$lgt_comp_ctx'(Ctx, Fact, _, _, _, _, _, _, _, _, _, _, _, _, Term).
+'$lgt_internal_term_template'(fact(_,_), fact(_,_)).
 
-'$lgt_clause_from_term'(dfact(_,_,Ctx), Fact, dfact(_,_,_), Term) :-
-	'$lgt_comp_ctx'(Ctx, Fact, _, _, _, _, _, _, _, _, _, _, _, _, Term).
+'$lgt_internal_term_template'(dfact(_,_,_), dfact(_,_,_)).
 
 
 % '$lgt_compile_predicate_calls'(+callable, +compound, +atom, -callable)
