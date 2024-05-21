@@ -28302,6 +28302,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	throw(existence_error(file, File))
 	),
+	(	Mode = compile(_,_,_) ->
+		'$lgt_print_message'(silent(compiling), compiling_file(SourceFile, []))
+	;	true
+	),
 	catch(
 		'$lgt_open'(SourceFile, read, Stream, []),
 		error(OpenError, _),

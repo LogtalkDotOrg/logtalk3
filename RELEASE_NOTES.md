@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Also print a silent `compiling_file/2` message when processing
+`include/1` directives that can be intercepted by tools.
+
 * CHANGED: Renamed the `logtalk` object `debug_handler_provider/1` predicate
 to `debug_handler/1` and the `debug_handler/2` predicate to `debug_handler/3`.
 
