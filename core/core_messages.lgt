@@ -700,8 +700,8 @@
 
 	message_tokens(left_recursion(File, Lines, Type, Entity, Term)) -->
 		(	{functor(Term, (-->), 2)} ->
-			['left-recursion in grammar rule: ~q'-[Term], nl]
-		;	['left-recursion in clause: ~q'-[Term], nl]
+			['Left-recursion in grammar rule: ~q'-[Term], nl]
+		;	['Left-recursion in clause: ~q'-[Term], nl]
 		),
 		message_context(File, Lines, Type, Entity).
 

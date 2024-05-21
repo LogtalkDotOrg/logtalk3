@@ -41,6 +41,9 @@ activation and deactivation of debug handler providers.
 * FIXED: Regression preventing linter warnings for duplicated clauses and
 grammar rules.
 
+* FIXED: Reporting of the number of compilation warnings will fail to count
+some of the warnings.
+
 Documentation
 -------------
 
