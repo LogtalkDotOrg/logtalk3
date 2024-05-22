@@ -22482,6 +22482,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% unification in the retract/1 goal otherwise we could skip terms
 	retract('$lgt_pp_entity_term_'(Term, SourceData, _)),
 	(	SourceData = sd(Original, _, _, OriginalFile, OriginalLines),
+		% exclude directives
+		Original \= (:- _),
 		'$lgt_pp_entity_'(Type, Entity, _),
 		'$lgt_internal_term_template'(Term, Template),
 		'$lgt_pp_entity_term_'(Template, sd(Duplicate, _, _, File, Lines), _),
