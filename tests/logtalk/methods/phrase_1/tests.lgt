@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2021-08-18,
+		date is 2024-05-22,
 		comment is 'Unit tests for the phrase//1 built-in method.'
 	]).
 
@@ -37,6 +37,7 @@
 
 	% test DCG
 
+	:- meta_non_terminal(list(0)).
 	list(_) --> [].
 	list(NonTerminal) --> phrase(NonTerminal), list(NonTerminal).
 

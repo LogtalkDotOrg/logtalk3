@@ -5294,22 +5294,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 % phrase/2 built-in method implementation for calls where the first argument is only known at runtime
 
 '$lgt_phrase'(GRBody, Input, ExCtx) :-
-	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
+	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack),
 	'$lgt_check'(callable, GRBody, logtalk(phrase(GRBody, Input), ExCtx)),
-	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
-	'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _, _),
+	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _),
+	'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], MetaCallCtx, ExCtx, runtime, Stack, _, _),
 	catch(
 		'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
 		Error,
 		throw(error(Error, logtalk(phrase(GRBody, Input), ExCtx)))
 	),
-	'$lgt_compile_body'(Pred, phrase, TPred, DPred, Ctx),
 	Input = S0, [] = S,
-	(	Flags /\ 512 =:= 512 ->
-		% object compiled in debug mode
-		call(DPred)
-	;	call(TPred)
-	).
+	'$lgt_metacall'(Pred, ExCtx, runtime).
 
 
 
@@ -5318,22 +5313,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 % phrase/3 built-in method implementation for calls where the first argument is only known at runtime
 
 '$lgt_phrase'(GRBody, Input, Rest, ExCtx) :-
-	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, _, _),
+	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack),
 	'$lgt_check'(callable, GRBody, logtalk(phrase(GRBody, Input, Rest), ExCtx)),
-	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, Flags),
-	'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], _, ExCtx, runtime, _, _, _),
+	'$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _),
+	'$lgt_comp_ctx'(Ctx, _, ExCtx, Entity, Sender, This, Self, Prefix, [], MetaCallCtx, ExCtx, runtime, Stack, _, _),
 	catch(
 		'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
 		Error,
 		throw(error(Error, logtalk(phrase(GRBody, Input, Rest), ExCtx)))
 	),
-	'$lgt_compile_body'(Pred, phrase, TPred, DPred, Ctx),
 	Input = S0, Rest = S,
-	(	Flags /\ 512 =:= 512 ->
-		% object compiled in debug mode
-		call(DPred)
-	;	call(TPred)
-	).
+	'$lgt_metacall'(Pred, ExCtx, runtime).
 
 
 

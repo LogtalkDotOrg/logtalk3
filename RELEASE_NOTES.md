@@ -47,6 +47,10 @@ grammar rules.
 * FIXED: Reporting of the number of compilation warnings will fail to count
 some of the warnings.
 
+* FIXED: The `phrase/2-3` built-in methods to properly handle a runtime bound
+first argument when called from a meta-predicate. Thanks to Alex Kouznetsov
+for the bug report.
+
 Documentation
 -------------
 
