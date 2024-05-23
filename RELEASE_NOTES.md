@@ -56,6 +56,8 @@ Documentation
 
 * ADDED: Handbook documentation on how to define debug handler providers.
 
+* ADDED: A "Known issues" section to the embedding scripts documentation.
+
 Tools
 -----
 

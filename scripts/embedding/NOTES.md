@@ -115,3 +115,10 @@ of the Logtalk resources. For example, in a POSIX system, you can
 use something like:
 
 	$ LOGTALKHOME=/usr/local/share/logtalk LOGTALKUSER=/home/user/logtalk ./saved_state
+
+Known issues
+------------
+
+The Bash version of the embedding scripts use GNU `sed` when available.
+Notably on macOS, if you get `sed` errors when running the embedding
+scripts, try installing GNU `sed` (using e.g. Homebrew or MacPorts).
