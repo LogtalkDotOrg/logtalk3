@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 4:2:0,
+		version is 4:3:0,
 		author is 'Paulo Moura',
-		date is 2024-03-11,
+		date is 2024-05-24,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -253,6 +253,12 @@
 	nth_aux(Element, [Head| Tail], Position0, Position, [Head| Rest]) :-
 		Position1 is Position0 + 1,
 		nth_aux(Element, Tail, Position1, Position, Rest).
+
+	sequential_occurrences(List, Counts) :-
+		occurrences_sorted(List, Counts).
+
+	sequential_occurrences(List, Closure, Counts) :-
+		occurrences_sorted(List, Closure, Counts).
 
 	occurrences(List, Counts) :-
 		msort(List, Sorted),

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1:17:0,
+		version is 1:18:0,
 		author is 'Paulo Moura',
-		date is 2023-11-17,
+		date is 2024-05-24,
 		comment is 'List protocol.',
 		see_also is [list, list(_), numberlistp, varlistp]
 	]).
@@ -175,6 +175,20 @@
 	:- info(nth1/4, [
 		comment is 'Nth element of a list (counting from one). ``Rest`` is a list of all the other elements. Can be used to either select the nth element of ``List`` or to insert an element before the nth element in ``Rest``.',
 		argnames is ['Nth', 'List', 'Element', 'Rest']
+	]).
+
+	:- public(sequential_occurrences/2).
+	:- mode(sequential_occurrences(@list, -list(pair(term,positive_integer))), one).
+	:- info(sequential_occurrences/2, [
+		comment is 'Counts the number of sequential occurrences of each ``List`` element, unifying ``Occurrences`` with a list of ``Element-Count`` pairs. Uses term equality for element comparison.',
+		argnames is ['List', 'Occurrences']
+	]).
+
+	:- public(sequential_occurrences/3).
+	:- mode(sequential_occurrences(@list, @callable, -list(pair(term,positive_integer))), one).
+	:- info(sequential_occurrences/3, [
+		comment is 'Counts the number of sequential occurrences of each ``List`` element, unifying ``Occurrences`` with a list of ``Element-Count`` pairs. Uses ``Closure`` for element comparison.',
+		argnames is ['List', 'Closure', 'Occurrences']
 	]).
 
 	:- public(occurrences/2).

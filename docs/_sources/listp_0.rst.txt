@@ -14,8 +14,8 @@ List protocol.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:17:0
-| **Date:** 2023-11-17
+| **Version:** 1:18:0
+| **Date:** 2024-05-24
 
 | **Compilation flags:**
 |    ``static``
@@ -435,6 +435,44 @@ Nth element of a list (counting from one). ``Rest`` is a list of all the other e
 |    ``nth1(Nth,List,Element,Rest)``
 | **Mode and number of proofs:**
 |    ``nth1(?integer,?list,?term,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: sequential_occurrences/2
+.. _listp/0::sequential_occurrences/2:
+
+``sequential_occurrences/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of sequential occurrences of each ``List`` element, unifying ``Occurrences`` with a list of ``Element-Count`` pairs. Uses term equality for element comparison.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequential_occurrences(List,Occurrences)``
+| **Mode and number of proofs:**
+|    ``sequential_occurrences(@list,-list(pair(term,positive_integer)))`` - ``one``
+
+
+------------
+
+.. index:: sequential_occurrences/3
+.. _listp/0::sequential_occurrences/3:
+
+``sequential_occurrences/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Counts the number of sequential occurrences of each ``List`` element, unifying ``Occurrences`` with a list of ``Element-Count`` pairs. Uses ``Closure`` for element comparison.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequential_occurrences(List,Closure,Occurrences)``
+| **Mode and number of proofs:**
+|    ``sequential_occurrences(@list,@callable,-list(pair(term,positive_integer)))`` - ``one``
 
 
 ------------

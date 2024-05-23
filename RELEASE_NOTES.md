@@ -58,6 +58,12 @@ Documentation
 
 * ADDED: A "Known issues" section to the embedding scripts documentation.
 
+Library
+-------
+
+* ADDED: New `sequential_occurrences/2-3` list predicates to the `types`
+library.
+
 Tools
 -----
 

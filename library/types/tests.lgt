@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:16:0,
 		author is 'Paulo Moura',
-		date is 2023-12-10,
+		date is 2024-05-24,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -120,6 +120,12 @@
 
 	test(integer_sequence_4_06, true(Sequence == [-100,-90,-80,-70,-60,-50,-40,-30,-20,-10])) :-
 		integer::sequence(-100, -10, 10, Sequence).
+
+	test(list_sequential_occurrences_2_01, true(Counts == [a-2, b-1, a-4, c-3])) :-
+		list::sequential_occurrences([a,a,b,a,a,a,a,c,c,c], Counts).
+
+	test(list_sequential_occurrences_3_01, variant(Counts, [a(_)-2, b(_)-1, a(_)-4, c(_)-3])) :-
+		list::sequential_occurrences([a(_), a(_), b(_), a(_), a(_), a(_), a(_), c(_), c(_), c(_)], (=), Counts).
 
 	test(list_occurrences_2_01, true(Counts == [a(1)-2,b(2)-2,c(8)-1,c(9)-1,d(4)-1,e(5)-1])) :-
 		list::occurrences([a(1),b(2),d(4),e(5),a(1),b(2),c(8),c(9)], Counts).
