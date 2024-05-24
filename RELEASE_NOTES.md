@@ -2272,7 +2272,9 @@ files.
 * IMPROVED: The Handbook inheritance section on the predicate lookups order.
 
 * IMPROVED: The Handbook pages on some predicate directives by linking to the
-corresponding glossary definitions. 
+corresponding glossary definitions.
+
+* IMPROVED: The Handbook documentation of the `(\+)/1` built-in method.
 
 * UPDATED: The manual installation instructions in the `INSTALL.md` file for
 `zsh` users.

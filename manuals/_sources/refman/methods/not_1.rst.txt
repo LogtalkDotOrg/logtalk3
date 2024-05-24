@@ -39,11 +39,34 @@ be used as a message to an object.
 
 .. warning::
 
-   The argument is always compiled. As a consequence, when the argument
-   is a control construct (e.g. a conjunction), any meta-variables will
-   be wrapped with the equivalent to the ``call/1`` control construct.
-   Note that these semantics differ from the ISO Prolog Core standard
-   specification for the ``(\+)/1`` built-in predicate.
+   The argument is always compiled (for improved performance). As a
+   consequence, when the argument is a control construct (e.g. a
+   conjunction), any meta-variables will be wrapped with the equivalent
+   to the ``call/1`` control construct. Note that these semantics differ
+   from the ISO Prolog Core standard specification for the ``(\+)/1``
+   built-in predicate. For example, assuming a conforming system:
+   
+   ::
+   
+      | ?- X = !, \+ (member(Y,[1,2,3]), X, write(Y), fail).
+      1
+      
+      X = !
+   
+   But in Logtalk ``X`` is compiled into a meta-call, which is not
+   cut-transparent:
+   
+   ::
+   
+      yes
+      | ?- logtalk << (X = !, \+ (member(Y,[1,2,3]), X, write(Y), fail)).
+      123
+      
+      X = !
+   
+   Note that the ISO Prolog Core standard doesn't specify a cut-transparent
+   meta-call control construct or built-in predicate.
+
 
 Meta-predicate template
 -----------------------
