@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:33:1,
+		version is 0:34:0,
 		author is 'Paulo Moura',
-		date is 2024-03-29,
+		date is 2024-05-24,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -192,6 +192,9 @@
 
 	message_tokens(unknown_pack_version(Registry, Pack, Version)) -->
 		['Unknown pack version: ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(pack_already_installed_from_different_registry(Registry, Pack, Version)) -->
+		['Pack is already installed but from a different registry: ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	message_tokens(pack_already_installed(Pack)) -->
 		['Pack is already installed: ~q'-[Pack], nl].

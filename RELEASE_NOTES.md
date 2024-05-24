@@ -85,6 +85,9 @@ the object as the current debug handler provider. Updated also the `nodebug/0`
 predicate to deactivate the `debugger` object as the current debug handler
 provider.
 
+* IMPROVED: The `packs` tool to clarify when trying to install a pack that's
+already installed if it's installed from a different registry.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

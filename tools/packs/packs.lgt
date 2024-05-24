@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:73:0,
+		version is 0:74:0,
 		author is 'Paulo Moura',
-		date is 2024-03-26,
+		date is 2024-05-24,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -806,10 +806,14 @@
 		check(pack_version, Version),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	installed_pack(_, Pack, OldVersion, _),
+		(	installed_pack(OtherRegistry, Pack, OldVersion, _),
+			Registry \== OtherRegistry ->
+			print_message(error, packs, pack_already_installed_from_different_registry(OtherRegistry, Pack, OldVersion)),
+			fail
+		;	installed_pack(Registry, Pack, OldVersion, _),
 			^^option(update(true), Options) ->
 			update_pack(Registry, Pack, OldVersion, Version, Options)
-		;	installed_pack(_, Pack, _, _),
+		;	installed_pack(Registry, Pack, _, _),
 			^^option(force(false), Options) ->
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
