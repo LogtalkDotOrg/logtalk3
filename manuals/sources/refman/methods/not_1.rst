@@ -65,7 +65,7 @@ be used as a message to an object.
       X = !
    
    Note that the ISO Prolog Core standard doesn't specify a cut-transparent
-   meta-call control construct or built-in predicate.
+   alternative to the ``call/1`` control construct.
 
 
 Meta-predicate template
