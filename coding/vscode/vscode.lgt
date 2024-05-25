@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:49:0,
+		version is 0:49:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-21,
+		date is 2024-05-25,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1363,6 +1363,7 @@
 		fail.
 	% lgtunit test results
 	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
+		stream_property(_, alias(vscode_test_results)),
 		entity_property(Object, Kind, file(File)),
 		entity_property(Object, Kind, lines(Line, _)),
 		(	Note == '' ->
@@ -1371,15 +1372,19 @@
 		),
 		fail.
 	logtalk::message_hook(passed_test(_Object, _Test, File, Line-_, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
 		fail.
 	logtalk::message_hook(failed_test(_Object, _Test, File, Line-_, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
 		fail.
 	logtalk::message_hook(skipped_test(_Object, _Test, File, Line-_, _Note), _, lgtunit, _) :-
+		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:skipped~n', [File, Line])},
 		fail.
 	logtalk::message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses), _, lgtunit, _) :-
+		stream_property(_, alias(vscode_test_results)),
 		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, defines(Predicate, Properties)),
 		memberchk(lines(Line, _), Properties),
@@ -1390,6 +1395,7 @@
 		),
 		fail.
 	logtalk::message_hook(entity_coverage(Entity, Covered, Total, Percentage), _, lgtunit, _) :-
+		stream_property(_, alias(vscode_test_results)),
 		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, lines(Line, _)),
 		(	Total =:= 1 ->
@@ -1399,6 +1405,7 @@
 		fail.
 	% code_metrics tool results
 	logtalk::message_hook(entity_score(cc_metric, Entity, Score), _, code_metrics, _) :-
+		stream_property(_, alias(vscode_metrics_results)),
 		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, lines(Line, _)),
 		{format(vscode_metrics_results, 'File:~w;Line:~d;Score:~d~n', [File, Line, Score])},
