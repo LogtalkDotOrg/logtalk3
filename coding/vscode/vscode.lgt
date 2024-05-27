@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:50:1,
+		version is 0:51:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-27,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -707,8 +707,8 @@
 
 	find_references_(Resource, File, Line, References) :-
 		entity(File, Line, Entity),
-		(	entity_property(Entity, _, file(File)),
-			entity_property(Entity, _, lines(Line, _)) ->
+		(	entity_property(Entity, _, directive(Start, End)),
+			Start =< Line, Line =< End ->
 			find_entity_references(Resource, References)
 		;	find_predicate_references(Resource, Entity, File, Line, References)
 		).
@@ -898,7 +898,7 @@
 	find_entity_references(Name/Arity, References) :-
 		ground(Name/Arity),
 		functor(Entity, Name, Arity),
-		findall(
+		setof(
 			Reference,
 			find_entity_reference(Entity, Reference),
 			References
@@ -932,6 +932,18 @@
 		callable(Object),
 		Object = Entity,
 		memberchk(caller(Predicate), Properties),
+		entity_property(Other, Kind, file(File)),
+		memberchk(line_count(Line), Properties).
+	% explicit messages
+	find_entity_reference(Entity, File-Line) :-
+		current_object(Entity),
+		% Object may not be bound
+		entity_property(Other, Kind, calls(Object::_, Properties)),
+		callable(Object),
+		Object = Entity,
+		memberchk(caller(Caller), Properties),
+		entity_property(Other, Kind, defines(Caller, DefinesProperties)),
+		\+ member(auxiliary, DefinesProperties),
 		entity_property(Other, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 	% uses/1 and alias/2 directives
@@ -972,17 +984,16 @@
 
 	find_implementations_(Resource, File, Line, Implementations) :-
 		entity(File, Line, Entity),
-		(	entity_property(Entity, _, file(File)),
-			entity_property(Entity, _, lines(Line, _)) ->
-			(	atom(Entity),
-				current_protocol(Entity) ->
-				find_protocol_implementations(Entity, Implementations)
-			;	Implementations = []
-			)
+		(	entity_property(Entity, _, directive(Start, End)),
+			Start =< Line, Line =< End ->
+			find_protocol_implementations(Resource, Implementations)
 		;	find_predicate_implementations(Resource, Entity, Implementations)
 		).
 
-	find_protocol_implementations(Protocol, Implementations) :-
+	find_protocol_implementations(Resource, Implementations) :-
+		ground(Resource),
+		Resource = Protocol/0,
+		current_protocol(Protocol),
 		findall(
 			File-Line,
 			(	implements_protocol(Entity, Protocol),
