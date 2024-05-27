@@ -38,6 +38,9 @@ to `debug_handler/1` and the `debug_handler/2` predicate to `debug_handler/3`.
 `active_debug_handler/1` predicates to the `logtalk` object supporting the
 activation and deactivation of debug handler providers.
 
+* ADDED: New entity property, `directive/2`, providing the entity opening
+directive start and end lines when defined in a source file.
+
 * IMPROVED: Allow multiple debug handler providers to be loaded simultaneously
 (with the restriction that only one of them can be active at any given time).
 

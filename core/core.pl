@@ -317,6 +317,9 @@
 % '$lgt_pp_module_'(Module)
 :- dynamic('$lgt_pp_module_'/1).
 
+% '$lgt_pp_entity_lines_'(Entity, Lines)
+:- dynamic('$lgt_pp_entity_lines_'/2).
+
 % '$lgt_pp_parameter_variables_'(ParameterVariables)
 :- dynamic('$lgt_pp_parameter_variables_'/1).
 
@@ -837,6 +840,11 @@ object_property(Obj, Prop) :-
 		true
 	;	fail
 	).
+'$lgt_object_property'(directive(Start, End), Obj, _, _, _, _, _, _) :-
+	(	'$lgt_entity_property_'(Obj, directive(Start, End)) ->
+		true
+	;	fail
+	).
 '$lgt_object_property'(info(Info), Obj, _, _, _, _, _, _) :-
 	(	'$lgt_entity_property_'(Obj, info(Info)) ->
 		true
@@ -952,6 +960,11 @@ category_property(Ctg, Prop) :-
 		true
 	;	fail
 	).
+'$lgt_category_property'(directive(Start, End), Ctg, _, _, _, _) :-
+	(	'$lgt_entity_property_'(Ctg, directive(Start, End)) ->
+		true
+	;	fail
+	).
 '$lgt_category_property'(info(Info), Ctg, _, _, _, _) :-
 	(	'$lgt_entity_property_'(Ctg, info(Info)) ->
 		true
@@ -1055,6 +1068,11 @@ protocol_property(Ptc, Prop) :-
 	).
 '$lgt_protocol_property'(lines(Start, End), Ptc, _, _, _) :-
 	(	'$lgt_entity_property_'(Ptc, file_lines(_, _, Start, End)) ->
+		true
+	;	fail
+	).
+'$lgt_protocol_property'(directive(Start, End), Ptc, _, _, _) :-
+	(	'$lgt_entity_property_'(Ptc, directive(Start, End)) ->
 		true
 	;	fail
 	).
@@ -3186,7 +3204,7 @@ logtalk_make(Target) :-
 		Kind = object
 	),
 	% find the reference file and line
-	(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,StartLine,_)) ->
+	(	'$lgt_entity_property_'(Entity, file_lines(File, Directory, StartLine, _)) ->
 		atom_concat(Directory, File, Path)
 	;	% dynamically created entity
 		Path = '',
@@ -3207,7 +3225,7 @@ logtalk_make(Target) :-
 		% reference found in included file
 		true
 	;	Location = StartLine-_,
-		(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,_,_)) ->
+		(	'$lgt_entity_property_'(Entity, file_lines(File, Directory, _, _)) ->
 			atom_concat(Directory, File, Path)
 		;	% dynamically created entity
 			Path = ''
@@ -3262,7 +3280,7 @@ logtalk_make(Target) :-
 
 
 '$lgt_circular_reference_object_path'(Object, Path) :-
-	(	'$lgt_entity_property_'(Object, file_lines(File,Directory,_,_)) ->
+	(	'$lgt_entity_property_'(Object, file_lines(File, Directory, _, _)) ->
 		atom_concat(Directory, File, Path)
 	;	Path = ''
 	).
@@ -7739,14 +7757,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 % adds entity properties related to the entity source file
 
 '$lgt_add_entity_properties'(Kind, Entity, _) :-
-	'$lgt_pp_file_paths_flags_'(Basename, Directory, _, _, _),
 	(	Kind == object ->
-		'$lgt_pp_referenced_object_'(Entity, _, Start-End)
+		'$lgt_pp_referenced_object_'(Entity, _, StartDirective-EndDirective)
 	;	Kind == protocol ->
-		'$lgt_pp_referenced_protocol_'(Entity, _, Start-End)
+		'$lgt_pp_referenced_protocol_'(Entity, _, StartDirective-EndDirective)
 	;	% Kind == category,
-		'$lgt_pp_referenced_category_'(Entity, _, Start-End)
+		'$lgt_pp_referenced_category_'(Entity, _, StartDirective-EndDirective)
 	),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, directive(StartDirective, EndDirective)))),
+	'$lgt_pp_file_paths_flags_'(Basename, Directory, _, _, _),
+	'$lgt_pp_entity_lines_'(Entity, Start-End),
 	assertz('$lgt_pp_runtime_clause_'('$lgt_entity_property_'(Entity, file_lines(Basename, Directory, Start, End)))),
 	fail.
 
@@ -8495,6 +8515,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_referenced_module_predicate_'(_, _, _, _, _, _)).
 
 '$lgt_clean_pp_common_entity_clauses' :-
+	retractall('$lgt_pp_entity_lines_'(_, _)),
 	retractall('$lgt_pp_entity_compiler_flag_'(_, _)),
 	retractall('$lgt_pp_entity_'(_, _, _)),
 	retractall('$lgt_pp_entity_info_'(_, _, _)),
@@ -9069,9 +9090,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% module definitions start with an opening module/1-2 directive and are assumed
 	% to end at the end of a source file; there is no module closing directive; set
 	% the initial compilation context and the position for compiling the end_of_file term
-	once(retract('$lgt_pp_referenced_object_'(Module, File, Start-_))),
+	'$lgt_pp_referenced_object_'(Module, _, Start-_),
 	'$lgt_comp_ctx_lines'(Ctx, _-End),
-	assertz('$lgt_pp_referenced_object_'(Module, File, Start-End)),
+	assertz('$lgt_pp_entity_lines_'(Module, Start-End)),
 	'$lgt_second_stage'(object, Module, Ctx),
 	'$lgt_print_message'(silent(compiling), compiled_entity(module, Module)).
 
@@ -9153,9 +9174,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% module definitions start with an opening module/1-2 directive and are assumed
 	% to end at the end of a source file; there is no module closing directive; set
 	% the initial compilation context and the position for compiling the end_of_file term
-	once(retract('$lgt_pp_referenced_object_'(Module, File, Start-_))),
+	'$lgt_pp_referenced_object_'(Module, _, Start-_),
 	'$lgt_comp_ctx_lines'(Ctx, _-End),
-	assertz('$lgt_pp_referenced_object_'(Module, File, Start-End)),
+	assertz('$lgt_pp_entity_lines_'(Module, Start-End)),
 	'$lgt_second_stage'(object, Module, Ctx),
 	'$lgt_print_message'(silent(compiling), compiled_entity(module, Module)).
 
@@ -9910,9 +9931,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_object, Ctx) :-
 	(	'$lgt_pp_object_'(Obj, _, _, _, _, _, _, _, _, _, _) ->
 		% we're indeed compiling an object
-		once(retract('$lgt_pp_referenced_object_'(Obj, File, Start-_))),
+		'$lgt_pp_referenced_object_'(Obj, _, Start-_),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_object_'(Obj, File, Start-End)),
+		assertz('$lgt_pp_entity_lines_'(Obj, Start-End)),
 		'$lgt_second_stage'(object, Obj, Ctx),
 		'$lgt_print_message'(silent(compiling), compiled_entity(object, Obj))
 	;	% entity ending directive mismatch
@@ -9959,9 +9980,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_protocol, Ctx) :-
 	(	'$lgt_pp_protocol_'(Ptc, _, _, _, _) ->
 		% we're indeed compiling a protocol
-		once(retract('$lgt_pp_referenced_protocol_'(Ptc, File, Start-_))),
+		'$lgt_pp_referenced_protocol_'(Ptc, _, Start-_),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_protocol_'(Ptc, File, Start-End)),
+		assertz('$lgt_pp_entity_lines_'(Ptc, Start-End)),
 		'$lgt_second_stage'(protocol, Ptc, Ctx),
 		'$lgt_print_message'(silent(compiling), compiled_entity(protocol, Ptc))
 	;	% entity ending directive mismatch
@@ -10015,9 +10036,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_logtalk_directive'(end_category, Ctx) :-
 	(	'$lgt_pp_category_'(Ctg, _, _, _, _, _) ->
 		% we're indeed compiling a category
-		once(retract('$lgt_pp_referenced_category_'(Ctg, File, Start-_))),
+		'$lgt_pp_referenced_category_'(Ctg, _, Start-_),
 		'$lgt_comp_ctx_lines'(Ctx, _-End),
-		assertz('$lgt_pp_referenced_category_'(Ctg, File, Start-End)),
+		assertz('$lgt_pp_entity_lines_'(Ctg, Start-End)),
 		'$lgt_second_stage'(category, Ctg, Ctx),
 		'$lgt_print_message'(silent(compiling), compiled_entity(category, Ctg))
 	;	% entity ending directive mismatch
@@ -24954,6 +24975,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_protocol_property'(file(_, _)).
 % start and end lines in a source file
 '$lgt_valid_protocol_property'(lines(_, _)).
+% start and end lines in a source file of the entity opening directive
+'$lgt_valid_protocol_property'(directive(_, _)).
 
 
 

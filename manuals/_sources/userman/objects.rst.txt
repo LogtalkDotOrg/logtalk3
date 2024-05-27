@@ -754,6 +754,9 @@ The following object properties are supported:
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the object definition (if
    applicable)
+``directive(BeginLine, EndLine)``
+   Source file begin and end lines of the object opening directive (if
+   applicable)
 ``context_switching_calls``
    The object supports context switching calls (i.e. can be used with
    the :ref:`control_context_switch_2` debugging control construct)

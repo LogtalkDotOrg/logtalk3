@@ -519,6 +519,9 @@ The following category properties are supported:
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the category definition (if
    applicable)
+``directive(BeginLine, EndLine)``
+   Source file begin and end lines of the category opening directive (if
+   applicable)
 ``events``
    Messages sent from the category generate events
 ``source_data``

@@ -284,6 +284,9 @@ The following protocol properties are supported:
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the protocol definition (if
    applicable)
+``directive(BeginLine, EndLine)``
+   Source file begin and end lines of the protocol opening directive (if
+   applicable)
 ``public(Resources)``
    List of public predicates and operators declared by the protocol
 ``protected(Resources)``
