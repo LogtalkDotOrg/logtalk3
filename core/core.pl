@@ -1127,7 +1127,7 @@ protocol_property(Ptc, Prop) :-
 	findall(mode(Mode, Solutions), '$lgt_predicate_property_'(Entity, Functor/Arity, mode(Mode, Solutions)), Modes),
 	'$lgt_append'(Modes, Properties0, Properties1),
 	(	'$lgt_predicate_property_'(Entity, Functor/Arity, declaration_location(Location)) ->
-		(	Location = File-(BeginLine-EndLine) ->
+		(	Location = include(File, BeginLine-EndLine) ->
 			Properties2 = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)| Properties1]
 		;	Location = BeginLine-EndLine,
 			Properties2 = [lines(BeginLine,EndLine), line_count(BeginLine)| Properties1]
@@ -1180,7 +1180,7 @@ protocol_property(Ptc, Prop) :-
 '$lgt_entity_property_defines'(Entity, Functor/Arity, _, Properties) :-
 	'$lgt_predicate_property_'(Entity, Functor/Arity, flags_clauses_rules_location(Flags, Clauses, Rules, Location)),
 	!,
-	(	Location = File-(BeginLine-EndLine) ->
+	(	Location = include(File, BeginLine-EndLine) ->
 		Properties0 = [include(File), lines(BeginLine,EndLine), line_count(BeginLine), number_of_clauses(Clauses), number_of_rules(Rules)]
 	;	Location == 0-0 ->
 		% auxiliary predicate
@@ -1217,7 +1217,7 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_entity_property_includes'(Entity, Functor/Arity, From, Properties) :-
 	'$lgt_predicate_property_'(From, Functor/Arity, clauses_rules_location_to(Clauses, Rules, Location, Entity)),
-	(	Location = File-(BeginLine-EndLine) ->
+	(	Location = include(File, BeginLine-EndLine) ->
 		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
 	;	Location = BeginLine-EndLine,
 		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)]
@@ -1227,7 +1227,7 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_entity_property_provides'(Entity, Functor/Arity, To, Properties) :-
 	'$lgt_predicate_property_'(Entity, Functor/Arity, clauses_rules_location_to(Clauses, Rules, Location, To)),
-	(	Location = File-(BeginLine-EndLine) ->
+	(	Location = include(File, BeginLine-EndLine) ->
 		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
 	;	Location = BeginLine-EndLine,
 		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)]
@@ -1237,7 +1237,7 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_entity_property_alias'(Entity, Alias, Properties) :-
 	'$lgt_entity_property_'(Entity, object_alias(Original, Alias, Location)),
-	(	Location = File-(BeginLine-EndLine) ->
+	(	Location = include(File, BeginLine-EndLine) ->
 		Properties = [object, for(Original), include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
 	;	Location = BeginLine-EndLine,
 		Properties = [object, for(Original), lines(BeginLine,EndLine), line_count(BeginLine)]
@@ -1245,7 +1245,7 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_entity_property_alias'(Entity, Alias, Properties) :-
 	'$lgt_entity_property_'(Entity, module_alias(Original, Alias, Location)),
-	(	Location = File-(BeginLine-EndLine) ->
+	(	Location = include(File, BeginLine-EndLine) ->
 		Properties = [module, for(Original), include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
 	;	Location = BeginLine-EndLine,
 		Properties = [module, for(Original), lines(BeginLine,EndLine), line_count(BeginLine)]
@@ -1253,7 +1253,7 @@ protocol_property(Ptc, Prop) :-
 
 '$lgt_entity_property_alias'(Entity, AliasFunctor/Arity, Properties) :-
 	'$lgt_entity_property_'(Entity, predicate_alias(From, OriginalFunctor/Arity, AliasFunctor/Arity, NonTerminalFlag, Location)),
-	(	Location = File-(BeginLine-EndLine) ->
+	(	Location = include(File, BeginLine-EndLine) ->
 		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)]
 	;	Location = BeginLine-EndLine,
 		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)]
@@ -1271,7 +1271,7 @@ protocol_property(Ptc, Prop) :-
 		NonTerminalProperty = []
 	;	NonTerminalProperty = [non_terminal(NonTerminal)]
 	),
-	(	Location = File-(BeginLine-EndLine) ->
+	(	Location = include(File, BeginLine-EndLine) ->
 		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)| NonTerminalProperty]
 	;	Location = BeginLine-EndLine,
 		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)| NonTerminalProperty]
@@ -1289,7 +1289,7 @@ protocol_property(Ptc, Prop) :-
 		NonTerminalProperty = []
 	;	NonTerminalProperty = [non_terminal(NonTerminal)]
 	),
-	(	Location = File-(BeginLine-EndLine) ->
+	(	Location = include(File, BeginLine-EndLine) ->
 		LocationProperties = [include(File), lines(BeginLine,EndLine), line_count(BeginLine)| NonTerminalProperty]
 	;	Location = BeginLine-EndLine,
 		LocationProperties = [lines(BeginLine,EndLine), line_count(BeginLine)| NonTerminalProperty]
@@ -3051,44 +3051,44 @@ logtalk_make(Target) :-
 '$lgt_missing_protocol'(Protocol-Reference) :-
 	'$lgt_implements_protocol_'(Entity, Protocol, _),
 	\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
-	'$lgt_missing_reference'(Entity, _, Reference).
+	'$lgt_missing_reference'(Entity, Reference).
 
 '$lgt_missing_protocol'(Protocol-Reference) :-
 	'$lgt_extends_protocol_'(Entity, Protocol, _),
 	\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
-	'$lgt_missing_reference'(Entity, _, Reference).
+	'$lgt_missing_reference'(Entity, Reference).
 
 
 '$lgt_missing_category'(Category-Reference) :-
 	'$lgt_imports_category_'(Entity, Category, _),
 	\+ '$lgt_current_category_'(Category, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, _, Reference).
+	'$lgt_missing_reference'(Entity, Reference).
 
 '$lgt_missing_category'(Category-Reference) :-
 	'$lgt_extends_category_'(Entity, Category, _),
 	\+ '$lgt_current_category_'(Category, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, _, Reference).
+	'$lgt_missing_reference'(Entity, Reference).
 
 
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_extends_object_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, _, Reference).
+	'$lgt_missing_reference'(Entity, Reference).
 
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_instantiates_class_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, _, Reference).
+	'$lgt_missing_reference'(Entity, Reference).
 
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_specializes_class_'(Entity, Object, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, _, Reference).
+	'$lgt_missing_reference'(Entity, Reference).
 
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_complemented_object_'(Object, Entity, _, _, _),
 	\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-	'$lgt_missing_reference'(Entity, _, Reference).
+	'$lgt_missing_reference'(Entity, Reference).
 
 '$lgt_missing_object'(Object-Reference) :-
 	'$lgt_entity_property_'(Entity, calls(Object::_, _, _, _, Location)),
@@ -3176,6 +3176,23 @@ logtalk_make(Target) :-
 
 % construct reference term for missing entities and predicates
 
+'$lgt_missing_reference'(Entity, reference(Kind,Entity,Path,StartLine)) :-
+	% find the entity type
+	(	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
+		Kind = protocol
+	;	'$lgt_current_category_'(Entity, _, _, _, _, _) ->
+		Kind = category
+	;	'$lgt_current_object_'(Entity, _, _, _, _, _, _, _, _, _, _),
+		Kind = object
+	),
+	% find the reference file and line
+	(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,StartLine,_)) ->
+		atom_concat(Directory, File, Path)
+	;	% dynamically created entity
+		Path = '',
+		StartLine = -1
+	).
+
 '$lgt_missing_reference'(Entity, Location, reference(Kind,Entity,Path,StartLine)) :-
 	% find the entity type
 	(	'$lgt_current_protocol_'(Entity, _, _, _, _) ->
@@ -3186,26 +3203,14 @@ logtalk_make(Target) :-
 		Kind = object
 	),
 	% find the reference file and line
-	(	nonvar(Location),
-		Location = Path-(Line-_) ->
+	(	Location = include(Path, StartLine-_) ->
 		% reference found in included file
-		(	integer(Line) ->
-			StartLine = Line
-		;	% backend Prolog system that doesn't report line numbers
-			StartLine = -1
-		)
-	;	% either reference found in main file or dynamically created entity
-		(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,EntityLine,_)) ->
+		true
+	;	Location = StartLine-_,
+		(	'$lgt_entity_property_'(Entity, file_lines(File,Directory,_,_)) ->
 			atom_concat(Directory, File, Path)
 		;	% dynamically created entity
-			Path = '',
-			EntityLine = -1
-		),
-		(	Location = Line-_ ->
-			StartLine = Line
-		;	% either dynamically created entity or backend Prolog
-			% system that doesn't report line numbers
-			StartLine = EntityLine
+			Path = ''
 		)
 	).
 
@@ -3785,7 +3790,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_predicate_property_user'(declared_in(TCtn, Line), _, Original, _, _, _, _, TCtn, _, _, _) :-
 	functor(Original, Functor, Arity),
 	(	'$lgt_predicate_property_'(TCtn, Functor/Arity, declaration_location(Location)) ->
-		(	Location = _-(Line-_) ->
+		(	Location = include(_, Line-_) ->
 			true
 		;	Location = Line-_
 		)
@@ -3821,7 +3826,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	call(Def, Alias, _, _, _, DCtn) ->
 		(	functor(Original, Functor, Arity),
 			'$lgt_predicate_property_'(DCtn, Functor/Arity, flags_clauses_rules_location(_, _, _, Location)) ->
-			(	Location = _-(Line-_) ->
+			(	Location = include(_, Line-_) ->
 				true
 			;	Location = Line-_
 			)
@@ -3857,7 +3862,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	'$lgt_find_overridden_predicate'(DCtn, Obj, Alias, Super),
 			functor(Original, Functor, Arity),
 			'$lgt_predicate_property_'(Super, Functor/Arity, flags_clauses_rules_location(_, _, _, Location)) ->
-			(	Location = _-(Line-_) ->
+			(	Location = include(_, Line-_) ->
 				true
 			;	Location = Line-_
 			)
@@ -7964,13 +7969,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_add_entity_predicate_properties'(_, _).
 
 
-% the property location is just the line when found on the main file
-% or a compound term File-Line when found in an included file
+% the property location is the lines pair when found on the main file
+% or a include(File,Lines) term when found in an included file
 
 '$lgt_property_location'(MainFile, MainFile, Lines, Lines) :-
 	!.
 
-'$lgt_property_location'(_, File, Lines, File-Lines).
+'$lgt_property_location'(_, File, Lines, include(File, Lines)).
 
 
 
