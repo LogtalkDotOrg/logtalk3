@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:50:0,
+		version is 0:50:1,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-27,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -909,23 +909,17 @@
 		(	atom(Entity),
 			current_protocol(Entity) ->
 			(	extends_protocol(Other, Entity)
-			;	extends_protocol(Entity, Other)
 			;	implements_protocol(Other, Entity)
 			)
 		;	current_object(Entity) ->
 			(	extends_object(Other, Entity)
-			;	extends_object(Entity, Other)
 			;	instantiates_class(Other, Entity)
-			;	instantiates_class(Entity, Other)
 			;	specializes_class(Other, Entity)
-			;	specializes_class(Entity, Other)
 			;	complements_object(Other, Entity)
 			)
 		;	current_category(Entity),
 			(	extends_category(Other, Entity)
-			;	extends_category(Entity, Other)
 			;	imports_category(Other, Entity)
-			;	complements_object(Entity, Other)
 			)
 		),
 		entity_property(Other, Kind, file(File)),
