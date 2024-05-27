@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:49:1,
+		version is 0:50:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-25,
+		date is 2024-05-27,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -132,14 +132,14 @@
 	:- public(find_references/4).
 	:- mode(find_references(+atom, @callable, +atom, +integer), one).
 	:- info(find_references/4, [
-		comment is 'Find the called predicate references.',
+		comment is 'Find entity and called predicate references.',
 		argnames is ['Directory', 'Call', 'CallFile', 'CallLine']
 	]).
 
 	:- public(find_implementations/4).
 	:- mode(find_implementations(+atom, @predicate_indicator, +atom, +integer), one).
 	:- info(find_implementations/4, [
-		comment is 'Find the called predicate implementations.',
+		comment is 'Find protocol and predicate implementations.',
 		argnames is ['Directory', 'Resource', 'CallFile', 'CallLine']
 	]).
 
@@ -959,13 +959,13 @@
 
 	% implementations
 
-	find_implementations(Directory, Predicate, ReferenceFile0, ReferenceLine) :-
+	find_implementations(Directory, Resource, ReferenceFile0, ReferenceLine) :-
 		% workaround path downcasing on Windows
 		{'$lgt_expand_path'(ReferenceFile0, ReferenceFile)},
 		atom_concat(Directory, '/.vscode_implementations', Data),
 		atom_concat(Directory, '/.vscode_implementations_done', Marker),
 		open(Data, write, DataStream),
-		(	find_implementations_(Predicate, ReferenceFile, ReferenceLine, Implementations) ->
+		(	find_implementations_(Resource, ReferenceFile, ReferenceLine, Implementations) ->
 			forall(
 				member(ImplementationFile-ImplementationLine, Implementations),
 				{format(DataStream, 'File:~w;Line:~d~n', [ImplementationFile, ImplementationLine])}
@@ -976,31 +976,52 @@
 		open(Marker, append, MarkerStream),
 		close(MarkerStream).
 
-	find_implementations_(Predicate, File, Line, Implementations) :-
-		ground(Predicate),
+	find_implementations_(Resource, File, Line, Implementations) :-
 		entity(File, Line, Entity),
+		(	entity_property(Entity, _, file(File)),
+			entity_property(Entity, _, lines(Line, _)) ->
+			(	atom(Entity),
+				current_protocol(Entity) ->
+				find_protocol_implementations(Entity, Implementations)
+			;	Implementations = []
+			)
+		;	find_predicate_implementations(Resource, Entity, Implementations)
+		).
+
+	find_protocol_implementations(Protocol, Implementations) :-
+		findall(
+			File-Line,
+			(	implements_protocol(Entity, Protocol),
+				entity_property(Entity, _, file(File)),
+				entity_property(Entity, _, lines(Line, _))
+			),
+			Implementations
+		).
+
+	find_predicate_implementations(Predicate, Entity, Implementations) :-
+		ground(Predicate),
 		findall(
 			Implementation,
-			find_implementation(Predicate, Entity, Implementation),
+			find_predicate_implementation(Predicate, Entity, Implementation),
 			Implementations
 		).
 
 	% non-terminal
-	find_implementation(Name//Arity, Entity, File-Line) :-
+	find_predicate_implementation(Name//Arity, Entity, File-Line) :-
 		ExtArity is Arity + 2,
-		find_implementation(Name/ExtArity, Entity, File-Line).
+		find_predicate_implementation(Name/ExtArity, Entity, File-Line).
 	% locally defined predicate
-	find_implementation(Name/Arity, Entity, File-Line) :-
+	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
 		entity_property(Entity, Kind, defines(Name/Arity, Properties)),
 		entity_property(Entity, Kind, file(File)),
 		memberchk(line_count(Line), Properties).
 	% multifile predicate
-	find_implementation(Name/Arity, Entity, File-Line) :-
+	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
 		entity_property(Entity, _, includes(Name/Arity, Other, Properties)),
 		entity_property(Other, _, file(File)),
 		memberchk(line_count(Line), Properties).
 	% descendant definitions
-	find_implementation(Name/Arity, Entity, File-Line) :-
+	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
 		functor(Template, Name, Arity),
 		entity_property(ImplementationEntity, Kind, defines(Name/Arity, Properties)),
 		ImplementationEntity \= Entity,
