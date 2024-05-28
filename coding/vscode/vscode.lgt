@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:51:1,
+		version is 0:51:2,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-28,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -318,7 +318,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) :-
@@ -465,7 +465,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_definition(Call, CallFile, CallLine, DefinitionFile, DefinitionLine) :-
@@ -671,7 +671,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_type_definition_(Name/Arity, ReferenceEntity, DefinitionFile, DefinitionLine) :-
@@ -704,7 +704,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_references_(Resource, File, Line, References) :-
@@ -981,7 +981,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_implementations_(Resource, File, Line, Implementations) :-
@@ -1069,7 +1069,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_callers_(Predicate, ReferenceFile, ReferenceLine, Callers) :-
@@ -1112,7 +1112,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_callees_(Predicate, ReferenceFile, ReferenceLine, Callees) :-
@@ -1151,7 +1151,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_ancestors_(Entity, Ancestors) :-
@@ -1211,7 +1211,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	find_descendants_(Entity, Descendants) :-
@@ -1273,7 +1273,7 @@
 		),
 		{format(DataStream, '~w', [Type])},
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	% loader file
@@ -1291,7 +1291,7 @@
 		;	true
 		),
 		close(DataStream),
-		open(Marker, append, MarkerStream),
+		open(Marker, write, MarkerStream),
 		close(MarkerStream).
 
 	% auxiliary predicates
