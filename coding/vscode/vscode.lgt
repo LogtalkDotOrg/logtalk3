@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:51:2,
+		version is 0:51:3,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-28,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -658,6 +658,23 @@
 		memberchk(for(OriginalName/Arity), Properties),
 		memberchk(from(Entity), Properties),
 		find_definition_(Entity::OriginalName/Arity, Entity, CallerLine, File, Line).
+
+	find_definition_(Name/Arity, Entity, CallLine, File, Line) :-
+		% non-terminal
+		ground(Name/Arity),
+		ExtArity is Arity + 2,
+		entity_property(Entity, _, calls(Name/ExtArity, Properties)),
+		memberchk(non_terminal(Name//Arity), Properties),
+		find_definition_(Name/ExtArity, Entity, CallLine, File, Line).
+
+	find_definition_(Name/Arity, Entity, CallLine, File, Line) :-
+		% non-terminal
+		ground(Name/Arity),
+		ExtArity is Arity + 2,
+		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
+		callable(Object),
+		memberchk(non_terminal(Name//Arity), Properties),
+		find_definition_(Object::Name/ExtArity, Entity, CallLine, File, Line).
 
 	% type definitions (entities)
 
