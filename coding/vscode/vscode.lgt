@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:51:0,
+		version is 0:51:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-27,
+		date is 2024-05-28,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -487,12 +487,14 @@
 		Object::predicate_property(Template, defined_in(Primary)),
 		(	% local definitions
 			entity_property(Primary, _, defines(Name/Arity, Properties)),
+			\+ member(auxiliary, Properties),
 			DefinitionEntity = Primary
 		;	% multifile definitions
 			entity_property(Primary, _, includes(Name/Arity, DefinitionEntity, Properties))
 		;	% predicate listed in a uses/2 directive
+			entity_property(Primary, _, defines(Name/Arity, DefinesProperties)),
+			memberchk(auxiliary, DefinesProperties),
 			entity_property(Primary, _, calls(_, Properties)),
-			memberchk(alias(Name/Arity), Properties),
 			memberchk(caller(Name/Arity), Properties),
 			DefinitionEntity = Primary
 		),
