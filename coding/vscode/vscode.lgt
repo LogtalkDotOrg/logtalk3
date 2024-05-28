@@ -663,18 +663,28 @@
 		% non-terminal
 		ground(Name/Arity),
 		ExtArity is Arity + 2,
-		entity_property(Entity, _, calls(Name/ExtArity, Properties)),
-		memberchk(non_terminal(Name//Arity), Properties),
-		find_definition_(Name/ExtArity, Entity, CallLine, File, Line).
+		(	entity_property(Entity, _, calls(Name/ExtArity, Properties)),
+			memberchk(non_terminal(Name//Arity), Properties),
+			OriginalName = Name
+		;	entity_property(Entity, _, calls(OriginalName/ExtArity, Properties)),
+			memberchk(alias(Name/ExtArity), Properties),
+			memberchk(non_terminal(OriginalName//Arity), Properties)
+		),
+		find_definition_(OriginalName/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(Name/Arity, Entity, CallLine, File, Line) :-
 		% non-terminal
 		ground(Name/Arity),
 		ExtArity is Arity + 2,
-		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
+		(	entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
+			memberchk(non_terminal(Name//Arity), Properties),
+			OriginalName = Name
+		;	entity_property(Entity, _, calls(Object::OriginalName/ExtArity, Properties)),
+			memberchk(alias(Name/ExtArity), Properties),
+			memberchk(non_terminal(OriginalName//Arity), Properties)
+		),
 		callable(Object),
-		memberchk(non_terminal(Name//Arity), Properties),
-		find_definition_(Object::Name/ExtArity, Entity, CallLine, File, Line).
+		find_definition_(Object::OriginalName/ExtArity, Entity, CallLine, File, Line).
 
 	% type definitions (entities)
 
