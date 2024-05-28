@@ -97,6 +97,20 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: VSCode handling of `compiling_file/2` messages to support clearing
 file diagnostics when recompiling files.
 
+* UPDATED: VSCode support to allow the `find_implementations/4` predicate to
+also find protocol implementations.
+
+* FIXED: VSCode cases where non-terminal definitions would not be found.
+
+* FIXED: VSCode case where the definition for a predicate listed in a `uses/2`
+directive would not be found.
+
+* FIXED: VSCode finding of entity references to avoid false positives.
+
+* FIXED: VSCode support when (re-)running tests without using the GUI command.
+
+* FIXED: VSCode support for clearing file diagnostics when recompiling files.
+
 
 3.79.0 - May 15, 2024
 =====================
