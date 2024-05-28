@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LVM 6.3.0 and later versions
-%  Last updated on May 24, 2024
+%  Last updated on May 28, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -448,9 +448,14 @@
 % compile to disk a Prolog file, resulting from a
 % Logtalk source file, given a list of flags
 
-'$lgt_compile_prolog_code'(File, _, Options) :-
+'$lgt_compile_prolog_code'(File, Source, Options) :-
 	(	member(encrypt(true), Options) ->
-		encrypt_program(File)
+		encrypt_program(File),
+		decompose_file_name(File, FileDirectory, FileName, _),
+		decompose_file_name(Source, SourceDirectory, SourceName, _),
+		atomic_list_concat([FileDirectory, FileName, '.plx'], Encrypted0),
+		atomic_list_concat([SourceDirectory, SourceName, '.plx'], Encrypted),
+		rename_file(Encrypted0, Encrypted)
 	;	true
 	).
 
