@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:51:3,
+		version is 0:51:4,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-28,
+		date is 2024-05-29,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -364,7 +364,8 @@
 			true
 		;	ExtArity is Arity + 2,
 			entity_property(Entity, _, calls(::Name/ExtArity, Properties)),
-			memberchk(line_count(CallerLine), Properties),
+			memberchk(lines(Start, End), Properties),
+			Start =< CallerLine, CallerLine =< End,
 			find_declaration_(::Name/ExtArity, Entity, CallerLine, File, Line)
 		).
 
@@ -373,7 +374,8 @@
 			true
 		;	ExtArity is Arity + 2,
 			entity_property(Entity, _, calls(^^Name/ExtArity, Properties)),
-			memberchk(line_count(CallerLine), Properties),
+			memberchk(lines(Start, End), Properties),
+			Start =< CallerLine, CallerLine =< End,
 			find_declaration_(^^Name/ExtArity, Entity, CallerLine, File, Line)
 		).
 
@@ -507,7 +509,8 @@
 		ground(Name/Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
-		memberchk(line_count(CallLine), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallLine, CallLine =< End,
 		find_definition_(Object::Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(::Name/Arity, This, _, File, Line) :-
@@ -546,7 +549,8 @@
 		ground(Name/Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(::Name/ExtArity, Properties)),
-		memberchk(line_count(CallLine), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallLine, CallLine =< End,
 		find_definition_(::Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(^^Name/Arity, This, _, File, Line) :-
@@ -584,7 +588,8 @@
 		ground(Name/Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(^^Name/ExtArity, Properties)),
-		memberchk(line_count(CallLine), Properties),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallLine, CallLine =< End,
 		find_definition_(^^Name/ExtArity, Entity, CallLine, File, Line).
 
 	find_definition_(Name/Arity, This, _, File, Line) :-
