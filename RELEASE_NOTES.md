@@ -96,6 +96,8 @@ Examples
 
 * FIXED: The `missing_data` example loader file.
 
+* FIXED: Lambda expression warnings when loading the `missing_data` example.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
