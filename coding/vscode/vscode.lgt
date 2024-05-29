@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:51:4,
+		version is 0:51:5,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-05-29,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -339,7 +339,10 @@
 		Object::predicate_property(Template, declared_in(DeclarationEntity, Line)),
 		entity_property(DeclarationEntity, _, file(File)).
 
+	% non-terminal
 	find_declaration_(Object::Name/Arity, Entity, CallerLine, File, Line) :-
+		callable(Object),
+		ground(Name/Arity),
 		ExtArity is Arity + 2,
 		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
 		memberchk(lines(Start, End), Properties),
