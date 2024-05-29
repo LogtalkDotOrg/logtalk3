@@ -107,7 +107,8 @@ file diagnostics when recompiling files.
 * UPDATED: VSCode support to allow the `find_implementations/4` predicate to
 also find protocol implementations.
 
-* FIXED: VSCode cases where non-terminal definitions would not be found.
+* FIXED: VSCode cases where non-terminal declarations and definitions would
+not be found.
 
 * FIXED: VSCode case where the definition for a predicate listed in a `uses/2`
 directive would not be found.

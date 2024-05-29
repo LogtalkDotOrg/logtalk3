@@ -339,6 +339,13 @@
 		Object::predicate_property(Template, declared_in(DeclarationEntity, Line)),
 		entity_property(DeclarationEntity, _, file(File)).
 
+	find_declaration_(Object::Name/Arity, Entity, CallerLine, File, Line) :-
+		ExtArity is Arity + 2,
+		entity_property(Entity, _, calls(Object::Name/ExtArity, Properties)),
+		memberchk(lines(Start, End), Properties),
+		Start =< CallerLine, CallerLine =< End,
+		find_declaration_(Object::Name/ExtArity, Entity, CallerLine, File, Line).
+
 	% multifile predicate
 	find_declaration_(Other::Name/Arity, Entity, _, File, Line) :-
 		callable(Other),
