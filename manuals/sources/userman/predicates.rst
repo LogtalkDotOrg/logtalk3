@@ -1125,16 +1125,16 @@ The redefinition of Prolog built-in predicates can be combined with the
 :ref:`conditional compilation directives <conditional_compilation_directives>`
 when writing portable applications where some of the supported backends
 don't provide a built-in predicate found in the other backends. As an example,
-consider the de facto standard list length predicate, ``length/2``. This
-predicate is provided as a built-in predicate in most but not all backends.
-The ``list`` library object includes the code:
+consider the de facto standard ``msort/2`` predicate (which sorts a list while
+keeping duplicates). This predicate is provided as a built-in predicate in most
+but not all backends. The ``list`` library object includes the code:
 
 ::
 
-   :- if(predicate_property(length(_, _), built_in)).
+   :- if(predicate_property(msort(_, _), built_in)).
    
-       length(List, Length) :-
-           {length(List, Length)}.
+       msort(List, Sorted) :-
+           {msort(List, Sorted)}.
    
    :- else.
    
@@ -1144,7 +1144,7 @@ The ``list`` library object includes the code:
    :- endif.
 
 I.e. the object will use the built-in predicate when available. Otherwise,
-it will use the object provided predicate definition.
+it will use the predicate definition provided by the ``list`` object.
 
 The redefinition of built-in predicates can also be accomplished using
 :term:`predicate shorthands <predicate shorthand>`. This can be useful

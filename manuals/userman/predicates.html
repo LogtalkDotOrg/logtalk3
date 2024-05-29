@@ -1109,13 +1109,13 @@ to alert the user of any redefined Logtalk or Prolog built-in predicate.</p>
 <a class="reference internal" href="../refman/directives/conditional_compilation_directives.html#conditional-compilation-directives"><span class="std std-ref">conditional compilation directives</span></a>
 when writing portable applications where some of the supported backends
 don’t provide a built-in predicate found in the other backends. As an example,
-consider the de facto standard list length predicate, <code class="docutils literal notranslate"><span class="pre">length/2</span></code>. This
-predicate is provided as a built-in predicate in most but not all backends.
-The <code class="docutils literal notranslate"><span class="pre">list</span></code> library object includes the code:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">predicate_property</span>(length(<span class="nv">_</span>, <span class="nv">_</span>), built_in)).
+consider the de facto standard <code class="docutils literal notranslate"><span class="pre">msort/2</span></code> predicate (which sorts a list while
+keeping duplicates). This predicate is provided as a built-in predicate in most
+but not all backends. The <code class="docutils literal notranslate"><span class="pre">list</span></code> library object includes the code:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">predicate_property</span>(msort(<span class="nv">_</span>, <span class="nv">_</span>), built_in)).
 
-    length(<span class="nv">List</span>, <span class="nv">Length</span>) <span class="o">:-</span>
-        <span class="k">{</span>length(<span class="nv">List</span>, <span class="nv">Length</span>)<span class="k">}</span>.
+    msort(<span class="nv">List</span>, <span class="nv">Sorted</span>) <span class="o">:-</span>
+        <span class="k">{</span>msort(<span class="nv">List</span>, <span class="nv">Sorted</span>)<span class="k">}</span>.
 
 <span class="p">:- </span><span class="k">else</span>.
 
@@ -1126,7 +1126,7 @@ The <code class="docutils literal notranslate"><span class="pre">list</span></co
 </pre></div>
 </div>
 <p>I.e. the object will use the built-in predicate when available. Otherwise,
-it will use the object provided predicate definition.</p>
+it will use the predicate definition provided by the <code class="docutils literal notranslate"><span class="pre">list</span></code> object.</p>
 <p>The redefinition of built-in predicates can also be accomplished using
 <a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a>. This can be useful
 when porting code while minimizing the changes. For example, assume
