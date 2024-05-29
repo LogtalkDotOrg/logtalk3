@@ -91,6 +91,11 @@ provider.
 * IMPROVED: The `packs` tool to clarify when trying to install a pack that's
 already installed if it's installed from a different registry.
 
+Examples
+--------
+
+* FIXED: The `missing_data` example loader file.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
