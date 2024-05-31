@@ -23,11 +23,14 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:51:5,
+		version is 0:52:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-05-29,
+		date is 2024-05-31,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
+
+	% avoid a catch-22...
+	:- set_logtalk_flag(debug, off).
 
 	:- set_logtalk_flag(unknown_entities, silent).
 
@@ -1479,6 +1482,19 @@
 		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, lines(Line, _)),
 		{format(vscode_metrics_results, 'File:~w;Line:~d;Score:~d~n', [File, Line, Score])},
+		fail.
+	% debugger messages
+	logtalk::message_hook(fact(_, _, _, File, Line), _, debugger, _) :-
+		logtalk::expand_library_path(logtalk_user('scratch/.debug_info'), DebugInfo),
+		open(DebugInfo, write, Stream),
+		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
+		close(Stream),
+		fail.
+	logtalk::message_hook(rule(_, _, _, File, Line), _, debugger, _) :-
+		logtalk::expand_library_path(logtalk_user('scratch/.debug_info'), DebugInfo),
+		open(DebugInfo, write, Stream),
+		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
+		close(Stream),
 		fail.
 
 	message_hook(Tokens, Component, Kind) :-

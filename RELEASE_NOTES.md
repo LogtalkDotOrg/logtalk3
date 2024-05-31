@@ -186,6 +186,9 @@ IDEs, text editors, and syntax highlighters support
 and `code_metrics` tools and for recursively generating documentation and
 diagrams.
 
+* ADDED: VSCode support for showing the current clause in the active text
+editor when debugging.
+
 * UPDATED: VSCode support predicates for running tests and doclets to add
 compiler warnings and errors to the "Problems" pane.
 
