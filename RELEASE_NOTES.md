@@ -83,10 +83,15 @@ predicates.
 * ADDED: New `start/0` and `stop/0` predicates to the `ports_profiler` object
 to simplify activating and deactivating it as the debug handler provider.
 
+* ADDED: New public `explain//1` non-terminal to the `tutor` tool.
+
 * UPDATED: The `debugger` object `debug/0` and `trace/0` predicates to activate
 the object as the current debug handler provider. Updated also the `nodebug/0`
 predicate to deactivate the `debugger` object as the current debug handler
 provider.
+
+* UPDATED: The `debugger` tool to print silent `fact/5` and `rule/5` messages
+at the unification ports that can be intercepted by tools.
 
 * IMPROVED: The `packs` tool to clarify when trying to install a pack that's
 already installed if it's installed from a different registry.

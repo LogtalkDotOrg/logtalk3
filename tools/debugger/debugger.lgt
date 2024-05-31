@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:0:0,
+		version is 7:1:0,
 		author is 'Paulo Moura',
-		date is 2024-05-18,
+		date is 2024-05-31,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -476,6 +476,7 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
+			print_message(silent, debugger, fact(Entity,Fact,Clause,File,Line)),
 			invocation_number_(N),
 			port(fact(Entity,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
@@ -488,6 +489,7 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
+			print_message(silent, debugger, rule(Entity,Head,Clause,File,Line)),
 			invocation_number_(N),
 			port(rule(Entity,Clause,File,Line), N, Head, _, _, ExCtx, Action),
 			{Action}

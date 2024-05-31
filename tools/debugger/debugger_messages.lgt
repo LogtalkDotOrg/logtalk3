@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2023-06-21,
+		date is 2024-05-31,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -117,6 +117,12 @@
 		['     Maximum write depth for terms: ~w'-[MaxDepth], nl].
 
 	% at port
+
+	message_tokens(fact(_Entity, _Fact, _Clause, _File, _Line)) -->
+		[].
+
+	message_tokens(rule(_Entity, _Fact, _Clause, _File, _Line)) -->
+		[].
 
 	message_tokens(leashing_port(Code, Port, N, Goal, MaxDepth)) -->
 		['~w'-[Code]], port_name(Port), invocation_number(N), [term(Goal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), ' ? '-[]].
