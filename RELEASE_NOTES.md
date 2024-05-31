@@ -90,8 +90,8 @@ the object as the current debug handler provider. Updated also the `nodebug/0`
 predicate to deactivate the `debugger` object as the current debug handler
 provider.
 
-* UPDATED: The `debugger` tool to print silent `fact/5` and `rule/5` messages
-at the unification ports that can be intercepted by tools.
+* UPDATED: The `debugger` tool to print silent port messages (when leashed)
+that can be intercepted by tools.
 
 * IMPROVED: The `packs` tool to clarify when trying to install a pack that's
 already installed if it's installed from a different registry.

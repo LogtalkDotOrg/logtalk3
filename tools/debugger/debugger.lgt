@@ -476,7 +476,6 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
-			print_message(silent, debugger, fact(Entity,Fact,Clause,File,Line)),
 			invocation_number_(N),
 			port(fact(Entity,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
@@ -489,7 +488,6 @@
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
-			print_message(silent, debugger, rule(Entity,Head,Clause,File,Line)),
 			invocation_number_(N),
 			port(rule(Entity,Clause,File,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
@@ -608,6 +606,7 @@
 				% the do_port_option/7 call can fail but still change the value of Code
 				% (e.g. when adding or removing a spy point)
 				leashing(Port, PortUserName, N, Goal, ExCtx, Code),
+				print_message(silent, debugger, Port),
 				(	write_max_depth_(MaxDepth),
 					MaxDepth > 0 ->
 					print_message(information, debugger, leashing_port(Code, Port, N, Goal, MaxDepth))

@@ -118,10 +118,21 @@
 
 	% at port
 
-	message_tokens(fact(_Entity, _Fact, _Clause, _File, _Line)) -->
+	message_tokens(fact(_, _, _, _)) -->
 		[].
-
-	message_tokens(rule(_Entity, _Fact, _Clause, _File, _Line)) -->
+	message_tokens(rule(_, _, _, _)) -->
+		[].
+	message_tokens(call) -->
+		[].
+	message_tokens(exit) -->
+		[].
+	message_tokens(nd_exit) -->
+		[].
+	message_tokens(redo) -->
+		[].
+	message_tokens(fail) -->
+		[].
+	message_tokens(exception) -->
 		[].
 
 	message_tokens(leashing_port(Code, Port, N, Goal, MaxDepth)) -->
