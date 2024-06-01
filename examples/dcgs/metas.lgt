@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,8 +36,8 @@
 	list(_, []) --> [].
 	list(X, [T|Ts]) --> phrase(X, T), list(X, Ts).
 
-	% phrase//1-N is more general than call//1-N but only the
-	% latter is currently provided as a built-in non-terminal
+	% phrase//1-N is more general than call//1-N but only phase//1
+	% is currently provided as a built-in non-terminal
 	phrase(X, T) --> call(X, T).
 
 :- end_object.
