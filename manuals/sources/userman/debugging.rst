@@ -309,8 +309,10 @@ Logtalk log points are similar to line number spy points and thus the line
 number must correspond to the first line of an entity clause. When the
 debugger reaches a log point, it prints the corresponding unification port
 data followed, optionally, by a log message and continues without halting
-execution for taking a port command. Log points are defined using the `log/3`
-predicate. For example:
+execution for taking a port command. The log message must be a valid atom
+when quoted. The debugger prints a ``@`` character at the beginning of the
+line for easy recognition of log points output. Log points are defined using
+the ``log/3`` predicate. For example:
 
 .. code-block:: text
 
@@ -318,9 +320,9 @@ predicate. For example:
         Log point added.
    yes
 
-Predicates `logging/3` and `nolog/3` can be used to, respectively, query
-and remove log points. There's also a `nologall/0` that removes all log
-points.
+Predicates ``logging/3`` and ``nolog/3`` can be used to, respectively, query
+and remove log points. There's also a ``nologall/0`` predicate that removes
+all log points.
 
 .. _programming_trace:
 

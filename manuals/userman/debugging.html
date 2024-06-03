@@ -91,6 +91,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#removing-all-spy-points">Removing all spy points</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-log-points">Defining log points</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tracing-program-execution">Tracing program execution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-using-spy-points">Debugging using spy points</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-commands">Debugging commands</a></li>
@@ -422,6 +423,25 @@ yes
 <p>There’s also a <code class="docutils literal notranslate"><span class="pre">reset/0</span></code> predicate that can be used to reset the debugger
 to its default settings.</p>
 </section>
+</section>
+<section id="defining-log-points">
+<h2>Defining log points<a class="headerlink" href="#defining-log-points" title="Link to this heading"></a></h2>
+<p>Logtalk log points are similar to line number spy points and thus the line
+number must correspond to the first line of an entity clause. When the
+debugger reaches a log point, it prints the corresponding unification port
+data followed, optionally, by a log message and continues without halting
+execution for taking a port command. The log message must be a valid atom
+when quoted. The debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> character at the beginning of the
+line for easy recognition of log points output. Log points are defined using
+the <code class="docutils literal notranslate"><span class="pre">log/3</span></code> predicate. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::log(agent, 99, &#39;At the secret headquarter!&#39;).
+     Log point added.
+yes
+</pre></div>
+</div>
+<p>Predicates <code class="docutils literal notranslate"><span class="pre">logging/3</span></code> and <code class="docutils literal notranslate"><span class="pre">nolog/3</span></code> can be used to, respectively, query
+and remove log points. There’s also a <code class="docutils literal notranslate"><span class="pre">nologall/0</span></code> predicate that removes
+all log points.</p>
 </section>
 <section id="tracing-program-execution">
 <span id="programming-trace"></span><h2>Tracing program execution<a class="headerlink" href="#tracing-program-execution" title="Link to this heading"></a></h2>
