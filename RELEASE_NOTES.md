@@ -64,9 +64,11 @@ to `[encrypt(true)]` and the `clean` flag to `off`.
 Documentation
 -------------
 
+* ADDED: A "Known issues" section to the embedding scripts documentation.
+
 * ADDED: Handbook documentation on how to define debug handler providers.
 
-* ADDED: A "Known issues" section to the embedding scripts documentation.
+* ADDED: Handbook documentation on debugging using log points.
 
 Library
 -------
@@ -82,6 +84,8 @@ predicates.
 
 * ADDED: New `start/0` and `stop/0` predicates to the `ports_profiler` object
 to simplify activating and deactivating it as the debug handler provider.
+
+* ADDED: Support for log points to the `debugger` tool.
 
 * ADDED: New public `explain//1` non-terminal to the `tutor` tool.
 

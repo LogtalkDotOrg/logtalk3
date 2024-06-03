@@ -14,8 +14,8 @@ Debugger protocol.
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:0:0
-| **Date:** 2023-04-26
+| **Version:** 3:1:0
+| **Date:** 2024-06-03
 
 | **Compilation flags:**
 |    ``static``
@@ -31,6 +31,8 @@ Debugger protocol.
    - Predicate spy point: Specified as a ground term ``Functor/Arity``.
    - Non-terminal spy point: Specified as a ground term ``Functor//Arity``.
    - Line number spy point (aka breakpoint): Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.
+   - Context spy point: Specified as a ``(Sender, This, Self, Goal)`` tuple.
+   - Log point: Specified as a ``(Entity, Line, Message)`` tuple.
    - Leash port shorthands: ``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.
 
 | **Inherited public predicates:**
@@ -49,7 +51,7 @@ Public predicates
 ``reset/0``
 ^^^^^^^^^^^
 
-Resets all debugging settings, including spy points and leashed ports, and turns off debugging.
+Resets all debugging settings (including log points, spy points, and leashed ports) and turns off debugging.
 
 | **Compilation flags:**
 |    ``static``
@@ -106,7 +108,7 @@ Stops debugging for all defined spy points. Also turns off tracing. Does not rem
 ``debugging/0``
 ^^^^^^^^^^^^^^^
 
-Reports current debugging settings, including spy points.
+Reports current debugging settings, including spy points and log points.
 
 | **Compilation flags:**
 |    ``static``
@@ -342,6 +344,82 @@ Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule
 |    ``leashing(Port)``
 | **Mode and number of proofs:**
 |    ``leashing(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: log/3
+.. _debuggerp/0::log/3:
+
+``log/3``
+^^^^^^^^^
+
+Sets a log point. Fails if the log point is invalid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``log(Entity,Line,Message)``
+| **Mode and number of proofs:**
+|    ``log(@object_identifier,+integer,+atom)`` - ``zero_or_one``
+|    ``log(@category_identifier,+integer,+atom)`` - ``zero_or_one``
+|    ``log(?object_identifier,?integer,?atom)`` - ``zero_or_more``
+|    ``log(?category_identifier,?integer,?atom)`` - ``zero_or_more``
+|    ``log(@var_or(object_identifier),@var_or(integer),@var_or(atom))`` - ``one``
+|    ``log(@var_or(category_identifier),@var_or(integer),@var_or(atom))`` - ``one``
+
+
+------------
+
+.. index:: logging/3
+.. _debuggerp/0::logging/3:
+
+``logging/3``
+^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all defined log points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logging(Entity,Line,Message)``
+
+------------
+
+.. index:: nolog/3
+.. _debuggerp/0::nolog/3:
+
+``nolog/3``
+^^^^^^^^^^^
+
+Removes all matching log points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nolog(Entity,Line,Message)``
+
+------------
+
+.. index:: nologall/0
+.. _debuggerp/0::nologall/0:
+
+``nologall/0``
+^^^^^^^^^^^^^^
+
+Removes all log points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``nologall`` - ``one``
+
+| **See also:**
+|    :ref:`debuggerp/0::reset/0`
 
 
 ------------

@@ -14,8 +14,8 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 7:1:0
-| **Date:** 2024-05-31
+| **Version:** 7:2:0
+| **Date:** 2024-06-03
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,7 +33,7 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`debuggerp/0::debug/0`  :ref:`debuggerp/0::debugging/0`  :ref:`debuggerp/0::debugging/1`  :ref:`debuggerp/0::leash/1`  :ref:`debuggerp/0::leashing/1`  :ref:`debuggerp/0::nodebug/0`  :ref:`debuggerp/0::nospy/1`  :ref:`debuggerp/0::nospy/4`  :ref:`debuggerp/0::nospyall/0`  :ref:`debuggerp/0::notrace/0`  :ref:`debuggerp/0::reset/0`  :ref:`debuggerp/0::spy/1`  :ref:`debuggerp/0::spy/4`  :ref:`debuggerp/0::spying/1`  :ref:`debuggerp/0::spying/4`  :ref:`debuggerp/0::trace/0`  
+|     :ref:`debuggerp/0::debug/0`  :ref:`debuggerp/0::debugging/0`  :ref:`debuggerp/0::debugging/1`  :ref:`debuggerp/0::leash/1`  :ref:`debuggerp/0::leashing/1`  :ref:`debuggerp/0::log/3`  :ref:`debuggerp/0::logging/3`  :ref:`debuggerp/0::nodebug/0`  :ref:`debuggerp/0::nolog/3`  :ref:`debuggerp/0::nologall/0`  :ref:`debuggerp/0::nospy/1`  :ref:`debuggerp/0::nospy/4`  :ref:`debuggerp/0::nospyall/0`  :ref:`debuggerp/0::notrace/0`  :ref:`debuggerp/0::reset/0`  :ref:`debuggerp/0::spy/1`  :ref:`debuggerp/0::spy/4`  :ref:`debuggerp/0::spying/1`  :ref:`debuggerp/0::spying/4`  :ref:`debuggerp/0::trace/0`  
 
 .. contents::
    :local:
@@ -308,6 +308,26 @@ Current term maximum depth.
 |    ``write_max_depth_(MaxDepth)``
 | **Mode and number of proofs:**
 |    ``write_max_depth_(?integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: logging_line_number_/3
+.. _debugger/0::logging_line_number_/3:
+
+``logging_line_number_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of log points.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``logging_line_number_(Entity,Line,Message)``
+| **Mode and number of proofs:**
+|    ``logging_line_number_(?object_identifier,?integer,?atom)`` - ``zero_or_more``
+|    ``logging_line_number_(?category_identifier,?integer,?atom)`` - ``zero_or_more``
 
 
 ------------

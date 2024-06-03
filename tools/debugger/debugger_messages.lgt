@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
-		date is 2024-05-31,
+		date is 2024-06-03,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -146,6 +146,30 @@
 
 	message_tokens(tracing_port(Code, Port, N, Goal)) -->
 		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q'-[Goal], nl].
+
+	% log points
+
+	message_tokens(logging_port(Code, Port, N, Goal, Message, MaxDepth)) -->
+		['~w'-[Code]], port_name(Port), invocation_number(N), [term(Goal,[quoted(true),numbervars(true),max_depth(MaxDepth)])], [' % ~w~n'-[Message]].
+
+	message_tokens(logging_port(Code, Port, N, Goal, Message)) -->
+		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q % ~w~n'-[Goal, Message]].
+
+	message_tokens(log_point_added) -->
+		['     Log point added.'-[], nl].
+
+	message_tokens(matching_log_points_removed) -->
+		['     All matching log points removed.'-[], nl].
+
+	message_tokens(all_log_points_removed) -->
+		['     All log points removed.'-[], nl].
+
+	message_tokens(log_points(LogPoints)) -->
+		['     Defined log points (Entity-Line):'-[], nl],
+		log_points(LogPoints).
+
+	message_tokens(no_log_points_defined) -->
+		['     No log points are defined.'-[], nl].
 
 	% spy points
 
@@ -398,10 +422,18 @@
 
 	% auxiliary grammar rules
 
+	log_points([Entity-Line| SpyPoints]) -->
+		{ground_term_copy(Entity, GroundEntity)},
+		['        ~q'-[GroundEntity-Line], nl],
+		log_points(SpyPoints).
+	log_points([]) -->
+		[].
+
 	spy_points([SpyPoint| SpyPoints]) -->
 		spy_point(SpyPoint),
 		spy_points(SpyPoints).
-	spy_points([]) --> [].
+	spy_points([]) -->
+		[].
 
 	spy_point(Entity-Line) -->
 		{ground_term_copy(Entity, GroundEntity)},
@@ -414,7 +446,8 @@
 	context_spy_points([SpyPoint| SpyPoints]) -->
 		context_spy_point(SpyPoint),
 		context_spy_points(SpyPoints).
-	context_spy_points([]) --> [].
+	context_spy_points([]) -->
+		[].
 
 	context_spy_point((Sender,This,Self,Goal)) -->
 		['        '-[]],

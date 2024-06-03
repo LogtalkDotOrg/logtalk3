@@ -302,6 +302,26 @@ using the debugger ``nospyall/0`` predicate:
 There's also a ``reset/0`` predicate that can be used to reset the debugger
 to its default settings.
 
+Defining log points
+-------------------
+
+Logtalk log points are similar to line number spy points and thus the line
+number must correspond to the first line of an entity clause. When the
+debugger reaches a log point, it prints the corresponding unification port
+data followed, optionally, by a log message and continues without halting
+execution for taking a port command. Log points are defined using the `log/3`
+predicate. For example:
+
+.. code-block:: text
+
+   | ?- debugger::log(agent, 99, 'At the secret headquarter!').
+        Log point added.
+   yes
+
+Predicates `logging/3` and `nolog/3` can be used to, respectively, query
+and remove log points. There's also a `nologall/0` that removes all log
+points.
+
 .. _programming_trace:
 
 Tracing program execution

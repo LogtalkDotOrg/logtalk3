@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:1:0,
+		version is 7:2:0,
 		author is 'Paulo Moura',
-		date is 2024-05-31,
+		date is 2024-06-03,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -142,6 +142,15 @@
 		argnames is ['MaxDepth']
 	]).
 
+	:- private(logging_line_number_/3).
+	:- dynamic(logging_line_number_/3).
+	:- mode(logging_line_number_(?object_identifier, ?integer, ?atom), zero_or_more).
+	:- mode(logging_line_number_(?category_identifier, ?integer, ?atom), zero_or_more).
+	:- info(logging_line_number_/3, [
+		comment is 'Table of log points.',
+		argnames is ['Entity', 'Line', 'Message']
+	]).
+
 	% we use the structured printing and question asking mechanisms to allow debugger
 	% input and output to be intercepted for alternative interaction by e.g. GUI IDEs
 	:- uses(logtalk, [
@@ -152,6 +161,7 @@
 	:- initialization(reset_invocation_number(_)).
 
 	reset :-
+		nologall,
 		nospyall,
 		leash(full),
 		nodebug,
@@ -208,6 +218,11 @@
 		debugging_details.
 
 	debugging_details :-
+		(	logging_line_number_(_, _, _) ->
+			findall(Entity-Line, logging_line_number_(Entity,Line,_), LogPoints),
+			print_message(information, debugger, log_points(LogPoints))
+		;	print_message(information, debugger, no_log_points_defined)
+		),
 		(	spying_line_number_(_, _) ->
 			findall(Entity-Line, spying_line_number_(Entity,Line), LineNumberSpyPoints),
 			print_message(information, debugger, line_number_spy_points(LineNumberSpyPoints))
@@ -250,6 +265,8 @@
 	debugging(Entity) :-
 		current_category(Entity),
 		category_property(Entity, debugging).
+
+	% spy point predicates
 
 	spy(SpyPoints) :-
 		spy_aux(SpyPoints),
@@ -424,7 +441,7 @@
 	leashing(Port) :-
 		leashing_(Port).
 
-	leashing(Port, PortUserName, N, Goal, ExCtx, Code) :-
+	leashing_port(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),
 		(	spying_port_code(Port, Goal, ExCtx, Code) ->
 			retractall(leaping_(_)),
@@ -459,6 +476,47 @@
 		spying_context_(Sender0, This0, Self0, Goal0),
 		subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal)),
 		!.
+
+	% log point predicates
+
+	log(Entity, Line, Message) :-
+		callable(Entity),
+		integer(Line),
+		functor(Entity, Functor, Arity),
+		functor(Template, Functor, Arity),
+		(	logging_line_number_(Template, Line, Message) ->
+			% log point already defined
+			true
+		;	logging_line_number_(Template, Line, _) ->
+			% assume updating log point message
+			retractall(logging_line_number_(Template, Line, _)),
+			assertz(logging_line_number_(Template, Line, Message))
+		;	% new log point
+			assertz(logging_line_number_(Template, Line, Message))
+		),
+		print_message(information, debugger, log_point_added),
+		(	debugging_ ->
+			true
+		;	debug
+		).
+
+	logging(Entity, Line, Message) :-
+		logging_line_number_(Entity, Line, Message).
+
+	nolog(Entity, Line, Message) :-
+		retractall(logging_line_number_(Entity, Line, Message)),
+		print_message(information, debugger, matching_log_points_removed).
+
+	nologall :-
+		retractall(logging_line_number_(_, _, _)),
+		print_message(comment, debugger, all_log_points_removed).
+
+	logging_port(fact(Entity, _, _, Line), Message, '@') :-
+		logging_line_number_(Entity, Line, Message).
+	logging_port(rule(Entity, _, _, Line), Message, '@') :-
+		logging_line_number_(Entity, Line, Message).
+
+	% debug handler
 
 	:- multifile(logtalk::debug_handler/1).
 	logtalk::debug_handler(debugger).
@@ -600,12 +658,19 @@
 		debugging_,
 		!,
 		port_user_name(Port, PortUserName),
-		(	leashing(Port, PortUserName, N, Goal, ExCtx, _),
+		(	logging_port(Port, Message, Code) ->
+			(	write_max_depth_(MaxDepth),
+				MaxDepth > 0 ->
+				print_message(information, debugger, logging_port(Code, Port, N, Goal, Message, MaxDepth))
+			;	print_message(information, debugger, logging_port(Code, Port, N, Goal, Message))
+			),
+			Action = true
+		;	leashing_port(Port, PortUserName, N, Goal, ExCtx, _),
 			\+ skipping_unleashed_(_) ->
 			repeat,
 				% the do_port_option/7 call can fail but still change the value of Code
 				% (e.g. when adding or removing a spy point)
-				leashing(Port, PortUserName, N, Goal, ExCtx, Code),
+				leashing_port(Port, PortUserName, N, Goal, ExCtx, Code),
 				print_message(silent, debugger, Port),
 				(	write_max_depth_(MaxDepth),
 					MaxDepth > 0 ->
