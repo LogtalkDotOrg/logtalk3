@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on May 5, 2024
+%  Last updated on June 3, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -209,9 +209,11 @@
 '$lgt_prolog_meta_predicate'(load_files(_), load_files(*), predicate).
 '$lgt_prolog_meta_predicate'(load_files(_, _), load_files(*, *), predicate).
 '$lgt_prolog_meta_predicate'(op(_, _, _), op(*, *, *), predicate).
+'$lgt_prolog_meta_predicate'(table(_), table(/), predicate).
 :- if(predicate_property(tnot(_), built_in)).
 	'$lgt_prolog_meta_predicate'(tnot(_), tnot(0), predicate).
 :- endif.
+'$lgt_prolog_meta_predicate'(untable(_), untable(/), predicate).
 '$lgt_prolog_meta_predicate'(use_module(_), use_module(*), predicate).
 '$lgt_prolog_meta_predicate'(use_module(_, _), use_module(*, *), predicate).
 
@@ -222,6 +224,7 @@
 '$lgt_prolog_meta_directive'(format_predicate(_, _), format_predicate(*, 0)).
 '$lgt_prolog_meta_directive'(initialization(_, _), initialization(0, *)).
 '$lgt_prolog_meta_directive'(noprofile(_), noprofile(/)).
+'$lgt_prolog_meta_directive'(table(_), table(/)).
 '$lgt_prolog_meta_directive'(thread_initialization(_), thread_initialization(0)).
 '$lgt_prolog_meta_directive'(thread_local(_), thread_local(/)) :-
 	logtalk_load_context(entity_type, Type),
