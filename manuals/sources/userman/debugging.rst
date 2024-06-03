@@ -199,8 +199,9 @@ Defining line number and predicate spy points
 
 Line number and predicate spy points are specified using the debugger
 ``spy/1`` predicate. The argument can be a breakpoint (expressed as a
-``Entity-Line`` pair), a predicate indicator (``Name/Arity``), or a
-list of spy points. For example:
+``Entity-Line`` pair), a predicate indicator (``Name/Arity``), a
+non-terminal indicator (``Name//Arity``), or a list of spy points. For
+example:
 
 .. code-block:: text
 
@@ -214,7 +215,7 @@ list of spy points. For example:
    Spy points set.
    yes
 
-   | ?- debugger::spy([foo/4, bar/1]).
+   | ?- debugger::spy([foo/4, bar//1, agent-99]).
 
    Spy points set.
    yes

@@ -335,8 +335,9 @@ be defined in a single file).</p>
 <h3>Defining line number and predicate spy points<a class="headerlink" href="#defining-line-number-and-predicate-spy-points" title="Link to this heading"></a></h3>
 <p>Line number and predicate spy points are specified using the debugger
 <code class="docutils literal notranslate"><span class="pre">spy/1</span></code> predicate. The argument can be a breakpoint (expressed as a
-<code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), or a
-list of spy points. For example:</p>
+<code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a
+non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), or a list of spy points. For
+example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(person-42).
 
 Spy points set.
@@ -347,7 +348,7 @@ yes
 Spy points set.
 yes
 
-| ?- debugger::spy([foo/4, bar/1]).
+| ?- debugger::spy([foo/4, bar//1, agent-99]).
 
 Spy points set.
 yes
