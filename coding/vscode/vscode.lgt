@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:55:0,
+		version is 0:56:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-06-03,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -189,9 +189,10 @@
 	]).
 
 	:- public(spy/1).
-	:- mode(spy(+predicate_indicator), one).
+	:- mode(spy(@predicate_indicator), one).
+	:- mode(spy(@non_terminal_indicator), one).
 	:- info(spy/1, [
-		comment is 'Adds a spy point for the given predicate.',
+		comment is 'Adds a spy point for the given predicate or non-terminal.',
 		argnames is ['Predicate']
 	]).
 
@@ -213,6 +214,20 @@
 	:- mode(nospy(+atom, +integer), one).
 	:- info(nospy/2, [
 		comment is 'Removes a breakpoint for the given file and line.',
+		argnames is ['File', 'Line']
+	]).
+
+	:- public(log/3).
+	:- mode(log(+atom, +integer, +atom), one).
+	:- info(log/3, [
+		comment is 'Adds a log point for the given file and line.',
+		argnames is ['File', 'Line', 'Message']
+	]).
+
+	:- public(nolog/2).
+	:- mode(nolog(+atom, +integer), one).
+	:- info(nolog/2, [
+		comment is 'Removes a log point for the given file and line.',
 		argnames is ['File', 'Line']
 	]).
 
@@ -1370,10 +1385,7 @@
 	% debugger support
 
 	spy(Predicate) :-
-		(	current_object(debugger) ->
-			true
-		;	logtalk_load(debugger(loader))
-		),
+		ensure_debbugger,
 		spy_(Predicate).
 
 	spy_(Name/Arity) :-
@@ -1384,25 +1396,21 @@
 		{debugger::spy(Sender, This, Self, Goal)}.
 
 	spy(File, Line) :-
-		(	current_object(debugger) ->
-			true
-		;	logtalk_load(debugger(loader))
-		),
+		ensure_debbugger,
 		(	logtalk::loaded_file_property(File, object(Entity)),
 			object_property(Entity, lines(Start, End)),
 			Start =< Line, Line =< End ->
 			true
 		;	logtalk::loaded_file_property(File, category(Entity)),
 			category_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End
+			Start =< Line, Line =< End ->
+			true
+		;	fail
 		),
 		{debugger::spy(Entity-Line)}.
 
 	nospy(Predicate) :-
-		(	current_object(debugger) ->
-			true
-		;	logtalk_load(debugger(loader))
-		),
+		ensure_debbugger,
 		nospy_(Predicate).
 
 	nospy_(Name/Arity) :-
@@ -1413,19 +1421,52 @@
 		{debugger::nospy(Sender, This, Self, Goal)}.
 
 	nospy(File, Line) :-
-		(	current_object(debugger) ->
-			true
-		;	logtalk_load(debugger(loader))
-		),
+		ensure_debbugger,
 		(	logtalk::loaded_file_property(File, object(Entity)),
 			object_property(Entity, lines(Start, End)),
 			Start =< Line, Line =< End ->
 			true
 		;	logtalk::loaded_file_property(File, category(Entity)),
 			category_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End
+			Start =< Line, Line =< End ->
+			true
+		;	fail
 		),
 		{debugger::nospy(Entity-Line)}.
+
+	log(File, Line, Message) :-
+		ensure_debbugger,
+		(	logtalk::loaded_file_property(File, object(Entity)),
+			object_property(Entity, lines(Start, End)),
+			Start =< Line, Line =< End ->
+			true
+		;	logtalk::loaded_file_property(File, category(Entity)),
+			category_property(Entity, lines(Start, End)),
+			Start =< Line, Line =< End ->
+			true
+		;	fail
+		),
+		{debugger::log(Entity, Line, Message)}.
+
+	nolog(File, Line) :-
+		ensure_debbugger,
+		(	logtalk::loaded_file_property(File, object(Entity)),
+			object_property(Entity, lines(Start, End)),
+			Start =< Line, Line =< End ->
+			true
+		;	logtalk::loaded_file_property(File, category(Entity)),
+			category_property(Entity, lines(Start, End)),
+			Start =< Line, Line =< End ->
+			true
+		;	fail
+		),
+		{debugger::nolog(Entity, Line, _)}.
+
+	ensure_debbugger :-
+		(	current_object(debugger) ->
+			true
+		;	logtalk_load(debugger(loader))
+		).
 
 	% auxiliary predicates
 

@@ -110,7 +110,7 @@ Examples
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* ADDED: VSCode support for managing spy points.
+* ADDED: VSCode support for managing spy points and log points.
 
 * ADDED: VSCode handling of `compiling_file/2` messages to support clearing
 file diagnostics when recompiling files.
