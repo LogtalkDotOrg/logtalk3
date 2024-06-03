@@ -41,6 +41,9 @@ activation and deactivation of debug handler providers.
 * ADDED: New entity property, `directive/2`, providing the entity opening
 directive start and end lines when defined in a source file.
 
+* ADDED: Compiler support for using tabling directives in calls to the
+`create_object/4` and `create_category/4` built-in predicates.
+
 * IMPROVED: Allow multiple debug handler providers to be loaded simultaneously
 (with the restriction that only one of them can be active at any given time).
 
