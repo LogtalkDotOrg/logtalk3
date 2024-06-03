@@ -10,6 +10,9 @@
 
 This hook object writes term-expansion results to a file in canonical format. The terms are terminated by a period and a new line.
 
+| **Availability:** 
+|    ``logtalk_load(hook_objects(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2022-07-06

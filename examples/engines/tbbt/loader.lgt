@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,8 +22,9 @@
 :- if(current_logtalk_flag(engines, supported)).
 
 	:- initialization((
+		logtalk_load(format(loader)),
 		logtalk_load(random(loader)),
-		logtalk_load(game, [optimize(on)])
+		logtalk_load(game, [optimize(on), left_recursion(silent)])
 	)).
 
 :- else.

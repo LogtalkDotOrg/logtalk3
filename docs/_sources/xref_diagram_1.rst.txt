@@ -13,9 +13,12 @@
 
 Predicates for generating predicate call cross-referencing diagrams.
 
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 2:67:0
-| **Date:** 2023-04-12
+| **Version:** 2:72:1
+| **Date:** 2024-04-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,6 +27,7 @@ Predicates for generating predicate call cross-referencing diagrams.
 | **Extends:**
 |    ``public`` :ref:`entity_diagram(Format) <entity_diagram/1>`
 | **Uses:**
+|    :ref:`atom <atom/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
 |    :ref:`modules_diagram_support <modules_diagram_support/0>`

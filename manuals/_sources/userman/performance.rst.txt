@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -83,21 +83,21 @@ Messages
 Logtalk implements :term:`static binding` and :term:`dynamic binding`
 for message sending calls. For dynamic binding, a caching mechanism is
 used by the runtime. It's useful to measure the performance overhead in
-*number of inferences* compared with plain Prolog and Prolog modules.
-Note that the number of inferences is a metric independent of the chosen
-backend Prolog compiler. The results for Logtalk 3.17.0 and later versions
-are:
+*number of logic inferences* compared with plain Prolog and Prolog modules.
+Note that the number of logic inferences is a metric independent of the
+chosen backend Prolog compiler. The results for Logtalk 3.17.0 and later
+versions are:
 
 -  Static binding: 0
--  Dynamic binding (object bound at compile time): 1
--  Dynamic binding (object bound at runtime time): 2
+-  Dynamic binding (object bound at compile time): +1
+-  Dynamic binding (object bound at runtime): +2
 
 Static binding is the common case with libraries and most application
 code; it requires compiling code with the :ref:`optimize <flag_optimize>`
 flag turned on. Dynamic binding numbers are after the first call (i.e.
 after the generalization of the query is cached). All numbers with the
 :ref:`events <flag_events>` flag set to ``deny`` (setting this flag to
-``allow`` adds an overhead of 5 inferences to the results above; note
+``allow`` adds an overhead of +5 inferences to the results above; note
 that this flag can be defined in a per-object basis as needed instead
 of globally and thus minimizing the performance impact).
 
@@ -106,13 +106,27 @@ does indexing of dynamic predicates. This is a common feature of modern
 Prolog systems but the actual details vary from system to system and may
 have an impact on dynamic binding performance.
 
-Note that messages to *self* (:ref:`control_send_to_self_1` calls) always
-use dynamic binding as the object that receives the message is only know
-at runtime.
+Note that messages to *self* (:ref:`control_send_to_self_1` calls) and
+messages to an object (:ref:`control_send_to_object_2` calls) from the
+top-level interpreter always use dynamic binding as the object that
+receives the message is only know at runtime.
 
 Messages sent from Prolog modules may use static binding depending on the
-used backend Prolog compiler when the ``optimize`` flag is turned on.
-Consult the Prolog compiler adapter file notes for details.
+used backend Prolog compiler native support for goal-expansion. Consult
+the Prolog compiler documentation and adapter file notes for details.
+
+.. warning::
+
+   Some Prolog systems provide a ``time/1`` predicate that also reports
+   the number of inferences. But the reported numbers are often misleading
+   when the predicate is called from the top-level. Besides common top-level
+   bookkeeping operations (e.g. keeping track of goal history or applying
+   goal-expansion) that may influence the inference counting, the Logtalk
+   runtime code for a ``::/2`` top-level goal is necessarily different
+   from the code generated for a ``::/2`` goal from a compiled object as
+   it requires *runtime* compilation of the goal into the same low-level
+   message-sending primitive (assuming dynamic-binding is also required
+   for the compiled object goal).
 
 Automatic expansion of built-in meta-predicates
 -----------------------------------------------
@@ -122,6 +136,7 @@ The compiler always expands calls to the :ref:`methods_forall_2`,
 equivalent definitions using the negation and conditional control constructs.
 It also expands calls to the :ref:`methods_call_N`, :ref:`methods_phrase_2`,
 and :ref:`methods_phrase_3` meta-predicates when the first argument is bound.
+These expansions are performed independently of the ``optimize`` flag value.
 
 Inlining
 --------
@@ -175,7 +190,7 @@ generated when running the application. A debug event is simply a pass on a
 call or unification port of the :ref:`procedure box model <debugging_box_model>`.
 These debug events can be intercepted by defined clauses for the
 :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
-and :ref:`logtalk::debug_handler/2 <logtalk/0::debug_handler/2>` multifile
+and :ref:`logtalk::debug_handler/3 <logtalk/0::debug_handler/3>` multifile
 predicates. With no application (such as a debugger or a port profiler)
 loaded defining clauses for these predicates, each goal have an overhead of
 four extra inferences due to the runtime checking for a definition of the

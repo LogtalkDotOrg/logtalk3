@@ -46,4 +46,4 @@ in this example. Such an extension is also available in Prolog III.)".
 
 Note that the use of the `dif` library limits the backend Prolog systems
 that can be used to run this example to B-Prolog, ECLiPSe, LVM, SICStus
-Prolog, Scryer Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.
+Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.

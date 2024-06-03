@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>statisticsp &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>statisticsp &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -105,11 +108,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -120,6 +125,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a><ul class="current">
@@ -132,6 +138,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -190,8 +197,14 @@
              
   <p class="right" id="statisticsp-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="statisticsp">
-<h1><code class="docutils literal notranslate"><span class="pre">statisticsp</span></code><a class="headerlink" href="#statisticsp" title="Permalink to this heading"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">statisticsp</span></code><a class="headerlink" href="#statisticsp" title="Link to this heading"></a></h1>
 <p>Statistical calculations over a list of numbers protocol.</p>
+<div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(statistics(loader))</span></code></div>
+</div>
+</div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:3:0</div>
@@ -257,9 +270,9 @@
 </ul>
 </nav>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="product-2">
-<span id="statisticsp-0-product-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">product/2</span></code></a><a class="headerlink" href="#product-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-product-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">product/2</span></code></a><a class="headerlink" href="#product-2" title="Link to this heading"></a></h3>
 <p>Calculates the product of all list numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -280,7 +293,7 @@
 <hr class="docutils" />
 </section>
 <section id="sum-2">
-<span id="statisticsp-0-sum-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sum/2</span></code></a><a class="headerlink" href="#sum-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-sum-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sum/2</span></code></a><a class="headerlink" href="#sum-2" title="Link to this heading"></a></h3>
 <p>Calculates the sum of all list numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -301,7 +314,7 @@
 <hr class="docutils" />
 </section>
 <section id="min-2">
-<span id="statisticsp-0-min-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">min/2</span></code></a><a class="headerlink" href="#min-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-min-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">min/2</span></code></a><a class="headerlink" href="#min-2" title="Link to this heading"></a></h3>
 <p>Determines the minimum value in a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -322,7 +335,7 @@
 <hr class="docutils" />
 </section>
 <section id="max-2">
-<span id="statisticsp-0-max-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max/2</span></code></a><a class="headerlink" href="#max-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-max-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max/2</span></code></a><a class="headerlink" href="#max-2" title="Link to this heading"></a></h3>
 <p>Determines the list maximum value in a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -343,7 +356,7 @@
 <hr class="docutils" />
 </section>
 <section id="min-max-3">
-<span id="statisticsp-0-min-max-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">min_max/3</span></code></a><a class="headerlink" href="#min-max-3" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-min-max-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">min_max/3</span></code></a><a class="headerlink" href="#min-max-3" title="Link to this heading"></a></h3>
 <p>Determines the minimum and maximum values in a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -364,7 +377,7 @@
 <hr class="docutils" />
 </section>
 <section id="range-2">
-<span id="statisticsp-0-range-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">range/2</span></code></a><a class="headerlink" href="#range-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-range-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">range/2</span></code></a><a class="headerlink" href="#range-2" title="Link to this heading"></a></h3>
 <p>Range is the length of the smallest interval which contains all the numbers in List. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -385,7 +398,7 @@
 <hr class="docutils" />
 </section>
 <section id="arithmetic-mean-2">
-<span id="statisticsp-0-arithmetic-mean-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">arithmetic_mean/2</span></code></a><a class="headerlink" href="#arithmetic-mean-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-arithmetic-mean-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">arithmetic_mean/2</span></code></a><a class="headerlink" href="#arithmetic-mean-2" title="Link to this heading"></a></h3>
 <p>Calculates the arithmetic mean of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -406,7 +419,7 @@
 <hr class="docutils" />
 </section>
 <section id="geometric-mean-2">
-<span id="statisticsp-0-geometric-mean-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">geometric_mean/2</span></code></a><a class="headerlink" href="#geometric-mean-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-geometric-mean-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">geometric_mean/2</span></code></a><a class="headerlink" href="#geometric-mean-2" title="Link to this heading"></a></h3>
 <p>Calculates the geometric mean of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -427,7 +440,7 @@
 <hr class="docutils" />
 </section>
 <section id="harmonic-mean-2">
-<span id="statisticsp-0-harmonic-mean-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">harmonic_mean/2</span></code></a><a class="headerlink" href="#harmonic-mean-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-harmonic-mean-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">harmonic_mean/2</span></code></a><a class="headerlink" href="#harmonic-mean-2" title="Link to this heading"></a></h3>
 <p>Calculates the harmonic mean of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -448,7 +461,7 @@
 <hr class="docutils" />
 </section>
 <section id="weighted-mean-3">
-<span id="statisticsp-0-weighted-mean-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weighted_mean/3</span></code></a><a class="headerlink" href="#weighted-mean-3" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-weighted-mean-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weighted_mean/3</span></code></a><a class="headerlink" href="#weighted-mean-3" title="Link to this heading"></a></h3>
 <p>Calculates the weighted mean of a list of numbers. Fails if the list is empty or if the two lists have different lengths. Wights are assume to be non-negative.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -469,7 +482,7 @@
 <hr class="docutils" />
 </section>
 <section id="median-2">
-<span id="statisticsp-0-median-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">median/2</span></code></a><a class="headerlink" href="#median-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-median-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">median/2</span></code></a><a class="headerlink" href="#median-2" title="Link to this heading"></a></h3>
 <p>Calculates the median of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -490,7 +503,7 @@
 <hr class="docutils" />
 </section>
 <section id="modes-2">
-<span id="statisticsp-0-modes-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">modes/2</span></code></a><a class="headerlink" href="#modes-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-modes-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">modes/2</span></code></a><a class="headerlink" href="#modes-2" title="Link to this heading"></a></h3>
 <p>Returns the list of modes of a list of numbers in ascending order. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -511,7 +524,7 @@
 <hr class="docutils" />
 </section>
 <section id="average-deviation-3">
-<span id="statisticsp-0-average-deviation-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">average_deviation/3</span></code></a><a class="headerlink" href="#average-deviation-3" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-average-deviation-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">average_deviation/3</span></code></a><a class="headerlink" href="#average-deviation-3" title="Link to this heading"></a></h3>
 <p>Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -532,7 +545,7 @@
 <hr class="docutils" />
 </section>
 <section id="mean-deviation-2">
-<span id="statisticsp-0-mean-deviation-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_deviation/2</span></code></a><a class="headerlink" href="#mean-deviation-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-mean-deviation-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mean_deviation/2</span></code></a><a class="headerlink" href="#mean-deviation-2" title="Link to this heading"></a></h3>
 <p>Calculates the mean absolute deviation of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -553,7 +566,7 @@
 <hr class="docutils" />
 </section>
 <section id="median-deviation-2">
-<span id="statisticsp-0-median-deviation-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">median_deviation/2</span></code></a><a class="headerlink" href="#median-deviation-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-median-deviation-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">median_deviation/2</span></code></a><a class="headerlink" href="#median-deviation-2" title="Link to this heading"></a></h3>
 <p>Calculates the median absolute deviation of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -574,7 +587,7 @@
 <hr class="docutils" />
 </section>
 <section id="standard-deviation-2">
-<span id="statisticsp-0-standard-deviation-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">standard_deviation/2</span></code></a><a class="headerlink" href="#standard-deviation-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-standard-deviation-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">standard_deviation/2</span></code></a><a class="headerlink" href="#standard-deviation-2" title="Link to this heading"></a></h3>
 <p>Calculates the standard deviation of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -595,7 +608,7 @@
 <hr class="docutils" />
 </section>
 <section id="coefficient-of-variation-2">
-<span id="statisticsp-0-coefficient-of-variation-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation/2</span></code></a><a class="headerlink" href="#coefficient-of-variation-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-coefficient-of-variation-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">coefficient_of_variation/2</span></code></a><a class="headerlink" href="#coefficient-of-variation-2" title="Link to this heading"></a></h3>
 <p>Calculates the coefficient of variation of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -616,7 +629,7 @@
 <hr class="docutils" />
 </section>
 <section id="relative-standard-deviation-2">
-<span id="statisticsp-0-relative-standard-deviation-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation/2</span></code></a><a class="headerlink" href="#relative-standard-deviation-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-relative-standard-deviation-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation/2</span></code></a><a class="headerlink" href="#relative-standard-deviation-2" title="Link to this heading"></a></h3>
 <p>Calculates the relative standard deviation of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -637,7 +650,7 @@
 <hr class="docutils" />
 </section>
 <section id="skewness-2">
-<span id="statisticsp-0-skewness-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">skewness/2</span></code></a><a class="headerlink" href="#skewness-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-skewness-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">skewness/2</span></code></a><a class="headerlink" href="#skewness-2" title="Link to this heading"></a></h3>
 <p>Calculates the (moment) skewness of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -658,7 +671,7 @@
 <hr class="docutils" />
 </section>
 <section id="kurtosis-2">
-<span id="statisticsp-0-kurtosis-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">kurtosis/2</span></code></a><a class="headerlink" href="#kurtosis-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-kurtosis-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">kurtosis/2</span></code></a><a class="headerlink" href="#kurtosis-2" title="Link to this heading"></a></h3>
 <p>Calculates the (excess) kurtosis of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -679,7 +692,7 @@
 <hr class="docutils" />
 </section>
 <section id="variance-2">
-<span id="statisticsp-0-variance-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">variance/2</span></code></a><a class="headerlink" href="#variance-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-variance-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">variance/2</span></code></a><a class="headerlink" href="#variance-2" title="Link to this heading"></a></h3>
 <p>Calculates the unbiased variance of a list of numbers. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -700,7 +713,7 @@
 <hr class="docutils" />
 </section>
 <section id="z-normalization-2">
-<span id="statisticsp-0-z-normalization-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">z_normalization/2</span></code></a><a class="headerlink" href="#z-normalization-2" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-z-normalization-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">z_normalization/2</span></code></a><a class="headerlink" href="#z-normalization-2" title="Link to this heading"></a></h3>
 <p>Normalizes a list of number such that for the resulting list the mean of is close to zero and the standard deviation is close to 1. Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -721,8 +734,8 @@
 <hr class="docutils" />
 </section>
 <section id="fractile-3">
-<span id="statisticsp-0-fractile-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fractile/3</span></code></a><a class="headerlink" href="#fractile-3" title="Permalink to this heading"></a></h3>
-<p>Calculates the smalest value in a list of numbers such that the list elements in its fraction <code class="docutils literal notranslate"><span class="pre">P</span></code> are less or equal to that value (with <code class="docutils literal notranslate"><span class="pre">P</span></code> in the open interval <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></code>). Fails if the list is empty.</p>
+<span id="statisticsp-0-fractile-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">fractile/3</span></code></a><a class="headerlink" href="#fractile-3" title="Link to this heading"></a></h3>
+<p>Calculates the smallest value in a list of numbers such that the list elements in its fraction <code class="docutils literal notranslate"><span class="pre">P</span></code> are less or equal to that value (with <code class="docutils literal notranslate"><span class="pre">P</span></code> in the open interval <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">1.0)</span></code>). Fails if the list is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -743,7 +756,7 @@
 <hr class="docutils" />
 </section>
 <section id="valid-1">
-<span id="statisticsp-0-valid-1"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a><a class="headerlink" href="#valid-1" title="Permalink to this heading"></a></h3>
+<span id="statisticsp-0-valid-1"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">valid/1</span></code></a><a class="headerlink" href="#valid-1" title="Link to this heading"></a></h3>
 <p>Term is a closed list of numbers.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -765,15 +778,15 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -793,7 +806,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

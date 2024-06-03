@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for ECLiPSe 6.1#143 and later versions
-%  Last updated on June 13, 2023
+%  Last updated on May 5, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -278,6 +278,15 @@ forall(Generate, Test) :-
 '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(++, *).	% ground normal argument
 
 
+% '$lgt_prolog_phrase_predicate'(@callable)
+%
+% table of predicates that call non-terminals
+% (other than the de facto standard phrase/2-3 predicates)
+
+'$lgt_prolog_phrase_predicate'(_) :-
+	fail.
+
+
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
 %
 % valid candidates are proprietary built-in predicates with
@@ -308,6 +317,24 @@ forall(Generate, Test) :-
 	fail.
 
 
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable, ?callable)
+%
+% table of proprietary deprecated built-in predicates
+% when there's a Prolog system advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_, _) :-
+	fail.
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable)
+%
+% table of proprietary deprecated built-in predicates without
+% a direct advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_) :-
+	fail.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -330,6 +357,7 @@ forall(Generate, Test) :-
 
 '$lgt_file_extension'(logtalk, '.lgt').
 '$lgt_file_extension'(logtalk, '.logtalk').
+% there must be a single object file extension
 '$lgt_file_extension'(object, '.pl').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.ecl').
@@ -392,6 +420,7 @@ forall(Generate, Test) :-
 '$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(naming, silent).
 '$lgt_default_flag'(duplicated_clauses, silent).
+'$lgt_default_flag'(left_recursion, warning).
 '$lgt_default_flag'(tail_recursive, silent).
 '$lgt_default_flag'(disjunctions, warning).
 '$lgt_default_flag'(conditionals, warning).
@@ -529,26 +558,19 @@ forall(Generate, Test) :-
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
-	term_hash(Directory, 1, 2147483647, Hash0),
+'$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
+	term_hash(Directory, 1, 2147483647, Hash),
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atomics_to_string(['_', Hash0, '_', Dialect], HashString),
-	atom_string(Hash, HashString).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
-	term_hash(Directory, 1, 2147483647, Hash0),
 	get_flag(pid, PID),
-	atomics_to_string(['_', Hash0, '_', PID], HashString),
-	atom_string(Hash, HashString).
+	atomics_to_string(['_', Hash, '_', Dialect], HashDialectString),
+	atom_string(HashDialect, HashDialectString),
+	atomics_to_string(['_', Hash, '_', PID], HashPidString),
+	atom_string(HashPid, HashPidString).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -1073,9 +1095,11 @@ forall(Generate, Test) :-
 %
 % succeeds when Module defines Predicate
 
+'$lgt_current_module_predicate'(user, Predicate) :-
+	!,
+	current_module_predicate(defined, Predicate)@user.
 '$lgt_current_module_predicate'(Module, Predicate) :-
-	% avoid errors on locked modules
-	catch(current_predicate(Predicate)@Module, _, fail).
+	current_module_predicate(exported_reexported, Predicate)@Module.
 
 
 

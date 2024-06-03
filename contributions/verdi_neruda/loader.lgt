@@ -74,6 +74,6 @@
 			report(warnings)
 		]
 	),
-	logtalk_load(shell, [hook(debug_expansion(production)), report(warnings)]),
+	logtalk_load(shell, [optimize(on), report(warnings)]),
 	shell::welcome
 )).

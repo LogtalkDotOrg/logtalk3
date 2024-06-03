@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -95,7 +95,9 @@ Logtalk tools:
 ``license``
    License terms for the entity source code; usually, just the license
    name (an atom or a compound term ``{entity}`` where ``entity`` is the
-   name of an XML entity in a user defined ``custom.ent`` file).
+   name of an XML entity in a user defined ``custom.ent`` file). License
+   names should whenever possible be a license identifier as specified
+   in the `SPDX standard <https://spdx.org/licenses/>`_.
 ``remarks``
    List of general remarks about the entity using ``Topic-Text`` pairs
    where both the topic and the text must be atoms. End the ``Text``

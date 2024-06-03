@@ -10,12 +10,15 @@
 
 FCube: An Efficient Prover for Intuitionistic Propositional Logic.
 
-| **Author:** Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.
-| **Version:** 4:2:0
-| **Date:** 2022-10-08
+| **Availability:** 
+|    ``logtalk_load(fcube(loader))``
 
-| **Copyright:** Copright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2022 Paulo Moura
-| **License:** GNU GPL 2.0 or later version
+| **Author:** Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; ported to Logtalk by Paulo Moura.
+| **Version:** 5:0:1
+| **Date:** 2024-03-14
+
+| **Copyright:** Copyright 2012 Mauro Ferrari, Camillo Fiorentini, Guido Fiorino; Copyright 2020-2024 Paulo Moura
+| **License:** GPL-2.0-or-later
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -41,13 +44,30 @@ FCube: An Efficient Prover for Intuitionistic Propositional Logic.
 Public predicates
 -----------------
 
+.. index:: gnu/0
+.. _fcube/0::gnu/0:
+
+``gnu/0``
+^^^^^^^^^
+
+Prints banner with copyright and license information.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``gnu`` - ``one``
+
+
+------------
+
 .. index:: fcube/0
 .. _fcube/0::fcube/0:
 
 ``fcube/0``
 ^^^^^^^^^^^
 
-Reads a formula and aplies the prover to it, priting its counter-model.
+Reads a formula and applies the prover to it, printing its counter-model.
 
 | **Compilation flags:**
 |    ``static``
@@ -121,14 +141,20 @@ Operators
 | **Scope:**
 |    ``public``
 
-``op(1000,xfy,&)``
-^^^^^^^^^^^^^^^^^^
+``op(1000,xfy,&&)``
+^^^^^^^^^^^^^^^^^^^
 
 | **Scope:**
 |    ``public``
 
 ``op(500,fy,~)``
 ^^^^^^^^^^^^^^^^
+
+| **Scope:**
+|    ``public``
+
+``op(1100,xfy,v)``
+^^^^^^^^^^^^^^^^^^
 
 | **Scope:**
 |    ``public``

@@ -21,6 +21,7 @@
 
 :- initialization((
 	set_logtalk_flag(report, on),
+	(logtalk_load(invalid_clause_first_line) -> true; true),
 	(logtalk_load(object_redefines_built_in_method) -> true; true),
 	(logtalk_load(invalid_clause_head) -> true; true),
 	(logtalk_load(unknown_directive) -> true; true),

@@ -3,7 +3,7 @@ root = true
 [*]
 insert_final_newline = true
 
-[*.{lgt,pl}]
+[*.{lgt,logtalk,pl,prolog}]
 indent_style = tab
 indent_size = 4
 trim_trailing_whitespace = true

@@ -10,6 +10,9 @@
 
 Universally Unique Lexicographically Sortable Identifier (ULID) generator protocol.
 
+| **Availability:** 
+|    ``logtalk_load(ulid(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2023-05-17
@@ -60,7 +63,7 @@ Generates a new ULID.
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates a new ULID from a timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).
+Generates a new ULID from a timestamp (number of milliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).
 
 | **Compilation flags:**
 |    ``static``
@@ -98,7 +101,7 @@ Generates a new ULID from a timestamp discrete components.
 ``timestamp/2``
 ^^^^^^^^^^^^^^^
 
-Returns the given ULID timestamp (number of miliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).
+Returns the given ULID timestamp (number of milliseconds since the Unix epoch: 00:00:00 UTC on January 1, 1970).
 
 | **Compilation flags:**
 |    ``static``

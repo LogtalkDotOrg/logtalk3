@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:24:0,
+		version is 0:27:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2024-03-26,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -45,7 +45,7 @@
 
 	setup :-
 		% the sample packs are defined using relative paths, which require
-		% setting the working directory; but this hack to allows testing
+		% setting the working directory; but this hack to allow testing
 		% pack installation may not work with all backend Prolog systems
 		object_property(packs, file(_, Directory)),
 		os::change_directory(Directory).
@@ -175,16 +175,18 @@
 
 	% registry readme
 
-	test(packs_registries_readme_2_01, true(Readme == File)) :-
+	test(packs_registries_readme_2_01, true((Readme == FileUpperCase; Readme == FileLowerCase))) :-
 		this(This),
 		object_property(This, file(_, Directory)),
-		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/README.md', File),
+		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/README.md', FileUpperCase),
+		% some backends convert paths to lower case on Windows
+		atom_concat(Directory, 'test_files/logtalk_packs/registries/local_1_d/readme.md', FileLowerCase),
 		registries::readme(local_1_d, Readme).
 
 	test(packs_registries_readme_1_01, true) :-
 		registries::readme(local_1_d).
 
-	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-bar, local_1_d-foo])) :-
+	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-bar, local_1_d-foo])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
 	test(packs_registries_update_1_01, true) :-
@@ -224,7 +226,7 @@
 	test(packs_packs_versions_3_01, true(Versions == [2:0:0,1:0:0])) :-
 		packs::versions(local_1_d, foo, Versions).
 
-	test(packs_packs_available_2_01, true(Packs == [local_1_d-bar, local_1_d-foo])) :-
+	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-bar, local_1_d-foo])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
@@ -282,17 +284,35 @@
 
 	% install packs with dependencies
 
-	test(packs_packs_install_3_01, true) :-
-		packs::install(local_1_d, foo, 1:0:0).
+	test(packs_packs_install_4_01, true) :-
+		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]).
 
-	test(packs_packs_install_3_02, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_install_4_02, true(Version-Pinned == (1:0:0)-false)) :-
+		packs::installed(local_1_d, foo, Version, Pinned).
+
+	test(packs_packs_install_4_03, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
-	test(packs_packs_install_3_03, true) :-
-		packs::install(local_1_d, foo, 2:0:0, [update(true)]).
+	test(packs_packs_install_4_04, true(Version-Pinned == (2:0:0)-false)) :-
+		packs::install(local_1_d, foo, 2:0:0, [update(true), compatible(false)]),
+		packs::installed(local_1_d, foo, Version, Pinned).
+
+	test(packs_packs_install_4_05, true) :-
+		packs::install(local_1_d, alt, 1:0:0, [compatible(false)]).
+
+	test(packs_packs_install_4_06, true(Version-Pinned == (1:0:0)-false)) :-
+		packs::installed(local_1_d, alt, Version, Pinned).
 
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
 		packs::dependents(local_2_d, baz, Dependents).
+
+	% update all installed packs
+
+	test(packs_packs_update_2_02, true(Version-Pinned == (2:0:0)-false)) :-
+		packs::uninstall(foo),
+		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]),
+		packs::update(foo, [compatible(false)]),
+		packs::installed(local_1_d, foo, Version, Pinned).
 
 	% update packs
 
@@ -304,8 +324,8 @@
 
 	test(packs_packs_update_3_01, true) :-
 		packs::uninstall(foo),
-		packs::install(local_1_d, foo, 1:0:0),
-		packs::update(foo, 2:0:0, [clean(true)]).
+		packs::install(local_1_d, foo, 1:0:0, [compatible(false)]),
+		packs::update(foo, 2:0:0, [clean(true), compatible(false)]).
 
 	% clean pack archives
 
@@ -372,40 +392,40 @@
 
 	% save and restore setups
 
-	test(packs_packs_save_1_01, true(os::file_exists(Setup))) :-
+	test(packs_packs_save_2_01, true(os::file_exists(Setup))) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'test_files/setup.txt', Setup),
 		packs::save(Setup).
 
-	test(packs_packs_restore_1_01, true) :-
+	test(packs_packs_restore_2_01, true) :-
 		packs::uninstall,
 		packs::clean,
 		registries::delete,
 		registries::clean.
 
-	test(packs_packs_restore_1_02, false) :-
+	test(packs_packs_restore_2_02, false) :-
 		packs::installed(_, _, _, _).
 
-	test(packs_packs_restore_1_03, false) :-
+	test(packs_packs_restore_2_03, false) :-
 		registries::defined(_, _, _, _).
 
-	test(packs_packs_restore_1_04, true) :-
+	test(packs_packs_restore_2_04, true) :-
 		this(This),
 		object_property(This, file(_, Directory)),
 		atom_concat(Directory, 'test_files/setup.txt', Setup),
-		packs::restore(Setup).
+		packs::restore(Setup, [compatible(false)]).
 
-	test(packs_packs_restore_1_05, true(HowDefined-Pinned == directory-true)) :-
+	test(packs_packs_restore_2_05, true(HowDefined-Pinned == directory-true)) :-
 		registries::defined(local_1_d, _, HowDefined, Pinned).
 
-	test(packs_packs_restore_1_06, true(HowDefined-Pinned == archive-true)) :-
+	test(packs_packs_restore_2_06, true(HowDefined-Pinned == archive-true)) :-
 		registries::defined(local_2_d, _, HowDefined, Pinned).
 
-	test(packs_packs_restore_1_07, true(Version-Pinned == (2:0:0)-false)) :-
+	test(packs_packs_restore_2_07, true(Version-Pinned == (2:0:0)-false)) :-
 		packs::installed(local_1_d, foo, Version, Pinned).
 
-	test(packs_packs_restore_1_08, true(Version-Pinned == (1:0:0)-false)) :-
+	test(packs_packs_restore_2_08, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_2_d, baz, Version, Pinned).
 
 	% broken registry and pack specs

@@ -29,7 +29,7 @@
 		comment is 'Unit tests for the "classmethods" example.'
 	]).
 
-	:- uses(lgtunit, [op(700, xfx, '=~='), '=~='/2]).
+	:- uses(lgtunit, [op(700, xfx, =~=), (=~=)/2]).
 
 	cover(metacircle).
 	cover(circle).

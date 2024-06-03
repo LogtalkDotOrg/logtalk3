@@ -4,10 +4,11 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on March 15, 2023
+##   Last updated on September 6, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2022 Hans N. Beck
+##   SPDX-FileCopyrightText: 2022 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,7 +38,6 @@ param(
 	[String]$n = "application",
 	[String]$p = ($env:LOGTALKHOME + '\paths\paths.pl'),
 	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
-	[String]$s, 
 	[String]$l,
 	[String]$g = "true",
 	[Switch]$v,
@@ -47,7 +47,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.14")
+	Write-Output ($myName + " 0.17")
 }
 
 function Get-Logtalkhome {
@@ -104,7 +104,7 @@ function Write-Usage-Help() {
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
-	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
+	Write-Output ("  -s settings file (absolute path or 'none'; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
@@ -129,8 +129,8 @@ function Check-Parameters() {
 		Exit
 	}
 
-	if (($s -ne "") -and (-not(Test-Path $s))) {
-	Write-Output ("The " + $s + " settings file does not exist!")
+	if (($s -ne "") -and ($s -ne "none") -and (-not(Test-Path $s))) {
+		Write-Output ("The " + $s + " settings file does not exist!")
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -220,16 +220,16 @@ $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwardin
 gplgt --query-goal $GoalParam
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
 	gplgt --query-goal $GoalParam
 } else {
 	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
 }
 
-if ($s -eq "") {
+if (($s -eq "") -or ($s -eq "none")) {
 	Set-Content -Path settings_lgt.pl -Value ""
 } elseif ($c -eq $true) {
-	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
 	gplgt --query-goal $GoalParam
 } else {
 	$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
@@ -254,6 +254,10 @@ if ($l -ne "") {
 	gplgt --query-goal $GoalParam
 
 	Pop-Location
+}
+
+if ($s -ne "") {
+	gnu.pl -replace 'settings_file, allow' 'settings_file, deny'
 }
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {

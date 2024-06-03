@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:34:0,
 		author is 'Paulo Moura',
-		date is 2023-05-05,
+		date is 2024-05-24,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -148,8 +148,8 @@
 	message_tokens(registry_directory_copy_failed(Registry, URL)) -->
 		['Registry directory copy failed: ~q (~q)'-[Registry, URL], nl].
 
-	message_tokens(registry_download_failed(Registry, URL)) -->
-		['Registry archive download failed: ~q (~q)'-[Registry, URL], nl].
+	message_tokens(registry_download_failed(Registry, Command)) -->
+		['Registry archive download failed: ~q (~q)'-[Registry, Command], nl].
 
 	message_tokens(registry_archive_uncompress_failed(Registry, Path)) -->
 		['Registry archive uncompress failed: ~q (~q)'-[Registry, Path], nl].
@@ -193,6 +193,9 @@
 	message_tokens(unknown_pack_version(Registry, Pack, Version)) -->
 		['Unknown pack version: ~q::~q@~q'-[Registry, Pack, Version], nl].
 
+	message_tokens(pack_already_installed_from_different_registry(Registry, Pack, Version)) -->
+		['Pack is already installed but from a different registry: ~q::~q@~q'-[Registry, Pack, Version], nl].
+
 	message_tokens(pack_already_installed(Pack)) -->
 		['Pack is already installed: ~q'-[Pack], nl].
 
@@ -219,6 +222,9 @@
 	message_tokens(pack_uninstall_failed(Pack, Directory)) -->
 		['Pack uninstall failed: ~q (~q)'-[Pack, Directory], nl].
 
+	message_tokens(pack_directory_clean_failed(Pack, Directory)) -->
+		['Pack directory clean failed: ~q (~q)'-[Pack, Directory], nl].
+
 	% pack update messages
 
 	message_tokens(updating_pack(Registry, Pack, Version, LatestVersion)) -->
@@ -231,13 +237,19 @@
 		['Pack is up-to-date: ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	message_tokens(pinned_pack(Registry, Pack, Version)) -->
-		['Pack is pinned: ~q::~q@~q'-[Registry, Pack, Version], nl].
+		['Pack is pinned:     ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(orphaned_pack(Registry, Pack, Version)) -->
+		['Pack is orphaned:   ~q::~q@~q'-[Registry, Pack, Version], nl].
+
+	message_tokens(pack_update_failed(Registry, Pack, Version)) -->
+		['Pack update failed: ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	% pack installed messages
 
-	message_tokens(instaled_pack(Registry, Pack, Version, true)) -->
+	message_tokens(installed_pack(Registry, Pack, Version, true)) -->
 		['  ~q::~q@~q (pinned)'-[Registry, Pack, Version], nl].
-	message_tokens(instaled_pack(Registry, Pack, Version, false)) -->
+	message_tokens(installed_pack(Registry, Pack, Version, false)) -->
 		['  ~q::~q@~q'-[Registry, Pack, Version], nl].
 
 	% pack outdated messages
@@ -294,8 +306,8 @@
 	message_tokens(pack_directory_not_found(Pack, Directory)) -->
 		['Pack directory not found: ~q (~q)'-[Pack, Directory], nl].
 
-	message_tokens(pack_archive_download_failed(Pack, Archive)) -->
-		['Pack archive download failed: ~q (~q)'-[Pack, Archive], nl].
+	message_tokens(pack_archive_download_failed(Pack, Command)) -->
+		['Pack archive download failed: ~q (~q)'-[Pack, Command], nl].
 
 	message_tokens(pack_archive_checksum_failed(Pack, Archive)) -->
 		['Pack archive checksum check failed: ~q (~q)'-[Pack, Archive], nl].
@@ -304,7 +316,7 @@
 		['Pack archive signature check failed: ~q (~q)'-[Pack, Archive], nl].
 
 	message_tokens(pack_archive_uncompress_failed(Pack, Archive)) -->
-		['Registry archive uncompress failed: ~q (~q)'-[Pack, Archive], nl].
+		['Pack archive uncompress failed: ~q (~q)'-[Pack, Archive], nl].
 
 	% pack describe messages
 
@@ -348,11 +360,11 @@
 		['    Dependencies: ~q'-[Dependencies], nl],
 		['    Portability:  ~q'-[Portability], nl].
 
+	defined_registries([]) -->
+		[].
 	defined_registries([defined(Registry,_,HowDefined,Pinned)| DefinedRegistries]) -->
 		['  ~q'-[Registry]], registry_data(HowDefined, Pinned),
 		defined_registries(DefinedRegistries).
-	defined_registries([]) -->
-		[].
 
 	registry_data(git, true) -->
 		[' (git; pinned)'-[], nl].

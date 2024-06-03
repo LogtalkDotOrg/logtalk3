@@ -38,28 +38,28 @@
 
 % for examples see the tests.lgt file; e.g.:
 
-| ?- ?- fcube::decide((((a & b) => c) <=> ((a => c) | (b => c))), CounterModel).
+| ?- fcube::decide((((a && b) => c) <=> ((a => c) v (b => c))), CounterModel).
 Input Formula:
-F (((a&b) => c) <=> ((a => c) | (b => c)))
+F (((a&&b) => c) <=> ((a => c) v (b => c)))
 
 Sign Permanence tried,input formula equivalent to: 
-   F (((a&b) => c) <=> ((a => c) | (b => c)));
-Left branch of F equiv,Main SWFF: F (((a&b) => c) <=> ((a => c) | (b => c)))
+   F (((a&&b) => c) <=> ((a => c) v (b => c)));
+Left branch of F equiv,Main SWFF: F (((a&&b) => c) <=> ((a => c) v (b => c)))
 
-      F (((a&b) => c) => ((a => c) | (b => c)));
+      F (((a&&b) => c) => ((a => c) v (b => c)));
  
-F->,Main SWFF: F (((a&b) => c) => ((a => c) | (b => c)))
+F->,Main SWFF: F (((a&&b) => c) => ((a => c) v (b => c)))
 
-         F ((a => c) | (b => c));
-         T ((a&b) => c);
+         F ((a => c) v (b => c));
+         T ((a&&b) => c);
  
-Main SWFF: F ((a => c) | (b => c))
+Main SWFF: F ((a => c) v (b => c))
 
             F (a => c);
             F (b => c);
-            T ((a&b) => c);
+            T ((a&&b) => c);
  
-Main SWFF: T ((a&b) => c)
+Main SWFF: T ((a&&b) => c)
 
                T (a => (b => c));
                F (b => c);

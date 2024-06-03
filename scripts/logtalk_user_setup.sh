@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on January 10, 2023
+##   Last updated on November 27, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -25,8 +25,8 @@
 
 echo
 echo "This script copies all the Logtalk per-user files and directories to the"
-echo "user home directory. The location can be set by the environment variable"
-echo "\$LOGTALKUSER (defaults to \"~/logtalk\" when the variable is not defined)."
+echo "user home directory. The location can be set by defining the LOGTALKUSER"
+echo "environment variable (defaults to \"~/logtalk\" when not defined)."
 echo
 
 if ! [ "$LOGTALKHOME" ]; then
@@ -175,8 +175,8 @@ ln -sf "$LOGTALKHOME"/tools/lgtdoc/xml/logtalk_index.xsd "$LOGTALKUSER"/tools/lg
 ln -sf "$LOGTALKHOME"/tools/packs/lgtenv.sh "$LOGTALKUSER"/tools/packs/lgtenv
 echo "Finished copying Logtalk files and directories."
 echo
-echo "You may want to customize the default Logtalk compiler flags by renaming"
-echo "and editing the \"settings-sample.lgt\" source file found in the directory"
-echo "\"\$LOGTALKUSER\". For more information on how to customize Logtalk and the"
-echo "working environment, consult the \"\$LOGTALKUSER/CUSTOMIZE.md\" file."
+echo "You may want to customize the default compiler flags and preload developer"
+echo "tools by renaming and editing the \"settings-sample.lgt\" file found in the"
+echo "\"\$LOGTALKUSER\" directory. Consult the \"\$LOGTALKUSER/CUSTOMIZE.md\" file for"
+echo "more information."
 echo

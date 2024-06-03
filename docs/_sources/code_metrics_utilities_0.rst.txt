@@ -10,9 +10,12 @@
 
 Internal predicates for analyzing source code.
 
+| **Availability:** 
+|    ``logtalk_load(code_metrics(loader))``
+
 | **Author:** Ebrahim Azarisooreh
-| **Version:** 0:6:0
-| **Date:** 2018-06-08
+| **Version:** 0:7:0
+| **Date:** 2024-03-28
 
 | **Compilation flags:**
 |    ``static``
@@ -20,11 +23,12 @@ Internal predicates for analyzing source code.
 
 | **Uses:**
 |    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
 
 | **Remarks:**
 
    - Usage: This is meant to be imported by any metric added to the system.
-   - Predicate Scope: This is meant for internal use by metrics only. As such, all provided predicates are private.
+   - Predicate Scope: This is meant for internal use by metrics only. As such, all provided predicates are protected.
 
 | **Inherited public predicates:**
 |    (none)
@@ -40,11 +44,6 @@ Public predicates
 
 Protected predicates
 --------------------
-
-(no local declarations; see entity ancestors if any)
-
-Private predicates
-------------------
 
 .. index:: ancestor/4
 .. _code_metrics_utilities/0::ancestor/4:
@@ -216,6 +215,30 @@ True if a predicate ``Updater`` within ``Entity`` makes a dynamic update to ``Up
 
 
 ------------
+
+.. index:: not_excluded_file/3
+.. _code_metrics_utilities/0::not_excluded_file/3:
+
+``not_excluded_file/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+True if the file is not being excluded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``not_excluded_file(ExcludedFiles,Path,Basename)``
+| **Mode and number of proofs:**
+|    ``not_excluded_file(+list(atom),+atom,+atom)`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

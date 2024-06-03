@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2023-04-09,
+		date is 2023-07-05,
 		comment is 'Unit tests for the ISO Prolog standard term_variables/2 built-in predicate.'
 	]).
 
@@ -106,5 +106,10 @@
 			{X = f(X,X), term_variables(X, Vars)}.
 
 	:- endif.
+
+	% tests from the WG17 test suite
+
+	test(wg17_term_variables_2_12, variant(Vs, [_, _])) :-
+		term_variables(_ + _, Vs).
 
 :- end_object.

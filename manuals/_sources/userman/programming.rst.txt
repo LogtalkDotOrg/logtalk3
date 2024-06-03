@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -848,9 +848,9 @@ Lint flags
 .. index:: pair: trivial_goal_fails; Flag
 
 ``trivial_goal_fails(Option)``
-   Controls the printing of warnings warnings for calls to local static
-   predicates with no matching clauses. Possible option values are
-   ``warning`` (the usual default) and ``silent`` (not recommended).
+   Controls the printing of warnings for calls to local static predicates
+   with no matching clauses. Possible option values are ``warning`` (the
+   usual default) and ``silent`` (not recommended).
 
 .. _flag_always_true_or_false_goals:
 .. index:: pair: always_true_or_false_goals; Flag
@@ -980,6 +980,15 @@ Lint flags
    option values are ``warning`` and ``silent`` (the usual default). Lack of
    standardization often makes it tricky or cumbersome to avoid too generic
    ``catch/3`` goals when writing portable code.
+
+.. _flag_left_recursion:
+.. index:: pair: left_recursion; Flag
+
+``left_recursion(Option)``
+   Controls warnings of left-recursion on clauses and grammar rules.
+   Specifically, when the clause or grammar rule head and the left
+   most goal in the body are variants. Possible option values are
+   ``warning`` (the usual default) and ``silent``.
 
 .. _flag_tail_recursive:
 .. index:: pair: tail_recursive; Flag

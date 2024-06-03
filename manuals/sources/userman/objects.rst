@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -282,18 +282,44 @@ Parametric objects
 ------------------
 
 Parametric objects have a compound term as identifier where all the
-arguments of the compound term are variables. These variables, the
-*object parameters*, can be instantiated when sending or as a consequence
-of sending a message to the object, thus acting as object parameters. The
-object predicates can then be coded to depend on those parameters, which
-are logical variables shared by all object predicates. When an object state
-is set at object creation and never changed, parameters provide a better
-solution than using the object's database via asserts. Parametric objects
-can also be used to associate a set of predicates to terms that share a
-common functor and arity.
+arguments of the compound term are variables. These variables can be
+bound when sending a message or become bound when a message to the object
+succeeds, thus acting as *object parameters*. The object predicates
+can be coded to depend on those parameters, which are logical variables
+shared by all object predicates. When an object state is set at object
+creation and never changed, parameters provide a better solution than
+using the object's database via asserts. Parametric objects can also be
+used to associate a set of predicates to terms that share a common
+functor and arity.
 
-In order to give access to an object parameter, Logtalk provides a
-:ref:`methods_parameter_2` built-in local method:
+Accessing object parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Object parameters can be accessed using :term:`parameter variables <parameter variable>`
+or built-in execution context methods. Parameter variables is the
+recommended solution to access object parameters. Although they
+introduce a concept of entity global variables, their unique syntax
+(``_ParameterName_``) avoids conflicts, makes them easily recognizable,
+and distinguishes them from other named anonymous variables. For example:
+
+::
+
+   :- object(foo(_Bar_, _Baz_, ...)).
+
+       ...
+       bar(_Bar_).
+
+       baz :-
+           baz(_Baz_),
+           ... .
+
+Note that using parameter variables doesn't change the fact that entity
+parameters are logical variables. Parameter variables simplify code
+maintenance by allowing parameters to be added, reordered, or removed
+without having to specify or update parameter indexes.
+
+Logtalk provides also a :ref:`methods_parameter_2` built-in local method
+to access individual parameters:
 
 ::
 
@@ -309,7 +335,8 @@ In order to give access to an object parameter, Logtalk provides a
            ... .
 
 An alternative solution is to use the built-in local method
-:ref:`methods_this_1`. For example:
+:ref:`methods_this_1`, which allows to access all parameters with a single
+call. For example:
 
 ::
 
@@ -329,28 +356,6 @@ use these method with the message sending operators
 (:ref:`control_send_to_object_2`, :ref:`control_send_to_self_1`, or
 :ref:`control_call_super_1`).
 
-A third alternative to access object parameters is to use
-:term:`parameter variables <parameter variable>`. Although parameter variables
-introduce a concept of entity global variables, their unique syntax,
-``_ParameterName_``, avoids conflicts and makes them easily recognizable. For
-example:
-
-::
-
-   :- object(foo(_Bar_, _Baz_, ...)).
-
-       ...
-       bar(_Bar_).
-
-       baz :-
-           baz(_Baz_),
-           ... .
-
-Note that using parameter variables doesn't change the fact that entity parameters
-are logical variables. Parameter variables simplify code maintenance by allowing
-parameters to be added, reordered, or removed without having to specify or update
-parameter indexes.
-
 When storing a parametric object in its own source file, the convention
 is to name the file after the object, with the object arity appended.
 For instance, when defining an object named ``sort(Type)``, we may save
@@ -358,16 +363,46 @@ it in a ``sort_1.lgt`` text file. This way it is easy to avoid file name
 clashes when saving Logtalk entities that have the same functor but
 different arity.
 
+Parametric object proxies
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Compound terms with the same functor and with the same number of
 arguments as a parametric object identifier may act as *proxies* to a
 parametric object. Proxies may be stored on the database as Prolog facts
 and be used to represent different instantiations of a parametric object
-identifier. Logtalk provides a convenient notation for accessing proxies
+identifier. For example:
+
+::
+
+   :- object(circle(_Id_, _Radius_, _Color_)).
+   
+       :- public(area/1).
+       ...
+   
+   :- end_object.
+   
+   % parametric object proxies:
+   circle('#1', 1.23, blue).
+   circle('#2', 3.71, yellow).
+   circle('#3', 0.39, green).
+   circle('#4', 5.74, black).
+   circle('#5', 8.32, cyan).
+
+Logtalk provides a convenient notation for accessing proxies
 represented as Prolog facts when sending a message:
 
 ::
 
    ..., {Proxy}::Message, ...
+
+For example, using the ``circle/3`` parametric object above, we can
+compute a list with the areas of all circles using the following goal:
+
+::
+
+   | ?- findall(Area, {circle(_, _, _)}::area(Area), Areas).
+
+   Areas = [4.75291, 43.2412, 0.477836, 103.508, 217.468].
 
 In this context, the proxy argument is proved as a plain Prolog goal. If
 successful, the message is sent to the corresponding parametric object.
@@ -719,6 +754,9 @@ The following object properties are supported:
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the object definition (if
    applicable)
+``directive(BeginLine, EndLine)``
+   Source file begin and end lines of the object opening directive (if
+   applicable)
 ``context_switching_calls``
    The object supports context switching calls (i.e. can be used with
    the :ref:`control_context_switch_2` debugging control construct)
@@ -745,30 +783,32 @@ The following object properties are supported:
    List of :ref:`properties <grammar_entity_properties>` for a predicate defined by the object
 ``includes(Predicate, Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for an object multifile predicate that are defined
-   in the specified entity (the properties include
-   ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
-   ``line_count(Line)`` with ``Line`` being the begin line of the
+   in the specified entity (the properties include ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the
    first multifile predicate clause)
 ``provides(Predicate, Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for other entity multifile predicate that are
-   defined in the object (the properties include
-   ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
-   ``line_count(Line)`` with ``Line`` being the begin line of the
+   defined in the object (the properties include ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the
    first multifile predicate clause)
+``alias(Entity, Properties)``
+   List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the object
+   (the properties include ``object`` in case of an object alias, ``module`` in case of a module alias,
+   ``for(Original)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the ``uses/1`` or
+   ``use_module/1`` directive)
 ``alias(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the object
-   (the properties include ``for(Original)``, ``from(Entity)``,
-   ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
-   being the begin line of the alias directive)
+   (the properties include ``predicate``, ``for(Original)``, ``from(Entity)``, ``non_terminal(NonTerminal)``,
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the alias directive)
 ``calls(Call, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for predicate calls made by the object (``Call``
    is either a predicate indicator or a control construct such as
    ``(::)/1-2`` or ``(^^)/1`` with a predicate indicator as argument; note
    that ``Call`` may not be ground in case of a call to a control
    construct where its argument is only know at runtime; the properties
-   include ``caller(Caller)``, ``alias(Alias)``, and
-   ``line_count(Line)`` with both ``Caller`` and ``Alias`` being
-   predicate indicators and ``Line`` being the begin line of the
+   include ``caller(Caller)``, ``alias(Alias)``, ``non_terminal(NonTerminal)``,
+   ``lines(Start,End)``, ``line_count(Start)`` with ``Caller``, ``Alias``, and ``NonTerminal``
+   being predicate indicators and ``Start`` being the begin line of the
    predicate clause or directive making the call)
 ``updates(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for dynamic predicate updates (and also access
@@ -777,10 +817,11 @@ The following object properties are supported:
    ``(::)/1-2`` or ``(:)/2`` with a predicate indicator as argument; note
    that ``Predicate`` may not be ground in case of a control construct
    argument only know at runtime; the properties include
-   ``updater(Updater)``, ``alias(Alias)``, and ``line_count(Line)`` with
-   ``Updater`` being a (possibly multifile) predicate indicator,
-   ``Alias`` being a predicate indicator, and ``Line`` being the begin
-   line of the predicate clause or directive updating the predicate)
+   ``updater(Updater)``, ``alias(Alias)``, ``non_terminal(NonTerminal)``,
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Updater`` being a (possibly multifile)
+   predicate indicator, ``Alias`` and ``NonTerminal`` being predicate
+   indicators, and ``Start`` being the begin line of the predicate clause
+   or directive updating the predicate)
 ``number_of_clauses(Number)``
    Total number of predicate clauses defined in the object at compilation
    time (includes both user-defined clauses and auxiliary clauses generated

@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,12 +34,22 @@ Description
    asserta(Head)
    asserta((Head:-Body))
 
-Asserts a clause as the first one for an object dynamic predicate. If the
-predicate is not previously declared (using a scope directive), then a
-dynamic predicate declaration is added to the object (assuming that we are
-asserting locally or that the
-:ref:`dynamic_declarations <flag_dynamic_declarations>` compiler flag was
-set to ``allow`` when the object was created or compiled).
+Asserts a clause as the first one for an object dynamic predicate.
+
+When the predicate was not previously declared (using a scope directive),
+a dynamic predicate declaration is added to the object. In this case, the
+predicate scope depends on how this method is called:
+
+``asserta(Clause)``
+   The predicate is dynamically declared as :term:`private <private predicate>`.
+``::asserta(Clause)``
+   The predicate is dynamically declared as :term:`protected <protected predicate>`.
+``Object::asserta(Clause)``
+   The predicate is dynamically declared as :term:`public <public predicate>`.
+
+Note, however, that dynamically declaring a new predicate requires either a
+local assert or the :ref:`dynamic_declarations <flag_dynamic_declarations>`
+compiler flag set to ``allow`` when the object was created or compiled.
 
 When the predicate indicator for ``Head`` is declared in a
 :ref:`directives_uses_2` or :ref:`directives_use_module_2` directive, the

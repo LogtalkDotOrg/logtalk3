@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,13 +22,12 @@
 % an object with no hierarchy relations with other
 % objects is always compiled as a prototype
 
-
 :- object(shape).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:0:0,
-		date is 2003-2-3,
+		version is 1:0:1,
+		date is 2024-05-02,
 		comment is 'Generic geometric shape.'
 	]).
 
@@ -40,7 +39,7 @@
 	]).
 
 	:- public(position/2).
-	:- mode(position(?integer, ?integer), zero_or_one).
+	:- mode(position(?number, ?number), zero_or_one).
 	:- info(position/2, [
 		comment is 'Shape position.',
 		argnames is ['X', 'Y']
@@ -55,13 +54,15 @@
 :- end_object.
 
 
+% an object that extends another object is also compiled as a prototype
+
 :- object(polygon,
 	extends(shape)).
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:1:0,
-		date is 2004-1-8,
+		version is 1:1:1,
+		date is 2024-05-02,
 		comment is 'Generic polygon.'
 	]).
 
@@ -73,14 +74,14 @@
 	]).
 
 	:- public(area/1).
-	:- mode(area(-float), zero_or_one).
+	:- mode(area(-number), zero_or_one).
 	:- info(area/1, [
 		comment is 'Polygon area.',
 		argnames is ['Area']
 	]).
 
 	:- public(perimeter/1).
-	:- mode(perimeter(?atom), zero_or_one).
+	:- mode(perimeter(?number), zero_or_one).
 	:- info(perimeter/1, [
 		comment is 'Polygon perimeter.',
 		argnames is ['Perimeter']
@@ -94,13 +95,13 @@
 
 	:- info([
 		author is 'Paulo Moura',
-		version is 1:1:0,
-		date is 2004-1-8,
+		version is 1:1:1,
+		date is 2024-05-02,
 		comment is 'Generic regular polygon.'
 	]).
 
 	:- public(side/1).
-	:- mode(side(?atom), zero_or_one).
+	:- mode(side(?number), zero_or_one).
 	:- info(side/1, [
 		comment is 'Regular polygon side length.',
 		argnames is ['Length']
@@ -109,6 +110,12 @@
 	% default side length
 	side(1).
 
+	% the perimeter depends on the number of sides of the specific type
+	% of regular polygon, defined in the descendants, and the length of
+	% the side, which can be redefined from the default value here in
+	% descendants; thus, we must sent the messages to _self_ (i.e. the
+	% object that receives the perimeter/1 message) using the ::/1
+	% control construct
 	perimeter(Perimeter) :-
 		::nsides(Number),
 		::side(Side),
@@ -127,8 +134,14 @@
 		comment is 'Geometric square.'
 	]).
 
+	% as all squares have 4 sides, we can define the nsides/1 predicate
+	% here instead of repeating the definition in all descendants
 	nsides(4).
 
+	% the area depends on the length of the side, which can be redefined
+	% from the inherited default value in descendants; thus, we must sent
+	% the side/1 message to _self_ (i.e. the object that receives the
+	% perimeter/1 message) using the ::/1 control construct
 	area(Area) :-
 		::side(Side),
 		Area is Side*Side.
@@ -139,11 +152,15 @@
 :- object(q1,
 	extends(square)).
 
+	% inherits default definitions for position/2, color/1, and side/1
+
 :- end_object.
 
 
 :- object(q2,
 	extends(square)).
+
+	% overrides inherited default definitions for position/2, color/1, and side/1
 
 	position(2, 3).
 

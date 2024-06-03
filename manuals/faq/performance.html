@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Performance &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>Performance &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -126,7 +129,7 @@
            <div itemprop="articleBody">
              
   <section id="performance">
-<span id="id1"></span><h1>Performance<a class="headerlink" href="#performance" title="Permalink to this heading"></a></h1>
+<span id="id1"></span><h1>Performance<a class="headerlink" href="#performance" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#performance-meta-interpreter"><span class="std std-ref">Is Logtalk implemented as a meta-interpreter?</span></a></p></li>
 <li><p><a class="reference internal" href="#performance-code-generated"><span class="std std-ref">What kind of code Logtalk generates when compiling objects? Dynamic code? Static code?</span></a></p></li>
@@ -134,14 +137,14 @@
 <li><p><a class="reference internal" href="#performance-prolog"><span class="std std-ref">How does Logtalk performance compare with plain Prolog and with Prolog modules?</span></a></p></li>
 </ul>
 <section id="is-logtalk-implemented-as-a-meta-interpreter">
-<span id="performance-meta-interpreter"></span><h2>Is Logtalk implemented as a meta-interpreter?<a class="headerlink" href="#is-logtalk-implemented-as-a-meta-interpreter" title="Permalink to this heading"></a></h2>
+<span id="performance-meta-interpreter"></span><h2>Is Logtalk implemented as a meta-interpreter?<a class="headerlink" href="#is-logtalk-implemented-as-a-meta-interpreter" title="Link to this heading"></a></h2>
 <p>No. Objects and their encapsulated predicates are compiled, not
 meta-interpreted. In particular, inheritance relations are
 pre-compiled for improved performance. Moreover, no meta-interpreter
 is used even for objects compiled in debug mode.</p>
 </section>
 <section id="what-kind-of-code-logtalk-generates-when-compiling-objects-dynamic-code-static-code">
-<span id="performance-code-generated"></span><h2>What kind of code Logtalk generates when compiling objects? Dynamic code? Static code?<a class="headerlink" href="#what-kind-of-code-logtalk-generates-when-compiling-objects-dynamic-code-static-code" title="Permalink to this heading"></a></h2>
+<span id="performance-code-generated"></span><h2>What kind of code Logtalk generates when compiling objects? Dynamic code? Static code?<a class="headerlink" href="#what-kind-of-code-logtalk-generates-when-compiling-objects-dynamic-code-static-code" title="Link to this heading"></a></h2>
 <p>Static objects are compiled to static code. Static objects containing
 dynamic predicates are also compiled to static code, except, of
 course, for the dynamic predicates themselves. Dynamic objects are
@@ -150,7 +153,7 @@ best performance, dynamic object predicates and dynamic objects
 should only be used when truly needed.</p>
 </section>
 <section id="how-about-message-sending-performance-does-logtalk-use-static-binding-or-dynamic-binding">
-<span id="performance-binding"></span><h2>How about message-sending performance? Does Logtalk use static binding or dynamic binding?<a class="headerlink" href="#how-about-message-sending-performance-does-logtalk-use-static-binding-or-dynamic-binding" title="Permalink to this heading"></a></h2>
+<span id="performance-binding"></span><h2>How about message-sending performance? Does Logtalk use static binding or dynamic binding?<a class="headerlink" href="#how-about-message-sending-performance-does-logtalk-use-static-binding-or-dynamic-binding" title="Link to this heading"></a></h2>
 <p>Logtalk supports both static binding and dynamic binding. When static
 binding is not possible, Logtalk uses dynamic binding coupled with a
 caching mechanism that avoids repeated lookups of predicate
@@ -167,7 +170,7 @@ User Manual section on <a class="reference internal" href="../userman/performanc
 for more details.</p>
 </section>
 <section id="which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance">
-<h2>Which Prolog-dependent factors are most crucial for good Logtalk performance?<a class="headerlink" href="#which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance" title="Permalink to this heading"></a></h2>
+<h2>Which Prolog-dependent factors are most crucial for good Logtalk performance?<a class="headerlink" href="#which-prolog-dependent-factors-are-most-crucial-for-good-logtalk-performance" title="Link to this heading"></a></h2>
 <p>Logtalk compiles objects assuming first-argument indexing for static
 code. First-argument indexing of dynamic code, when available, helps
 to improve performance due to the automatic caching of method lookups
@@ -179,7 +182,7 @@ availability of multi-argument indexing, notably for dynamic
 predicates, also benefits dynamic binding performance.</p>
 </section>
 <section id="how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules">
-<span id="performance-prolog"></span><h2>How does Logtalk performance compare with plain Prolog and with Prolog modules?<a class="headerlink" href="#how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules" title="Permalink to this heading"></a></h2>
+<span id="performance-prolog"></span><h2>How does Logtalk performance compare with plain Prolog and with Prolog modules?<a class="headerlink" href="#how-does-logtalk-performance-compare-with-plain-prolog-and-with-prolog-modules" title="Link to this heading"></a></h2>
 <p>Plain Prolog, Prolog modules, and Logtalk objects provide different
 trade-offs between performance and features. In general, for a given
 predicate definition, the best performance will be attained using
@@ -204,7 +207,7 @@ popular Prolog compilers.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

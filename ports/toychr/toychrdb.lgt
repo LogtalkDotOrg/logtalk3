@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2020-2021 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2020-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2004 Gregory J. Duck
 %  SPDX-License-Identifier: GPL-2.0-or-later
 %
@@ -134,11 +134,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0:6:1,
+		version is 0:7:1,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2022-05-23,
-		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019 Paulo Moura',
-		license is 'GNU GPL 2.0 or later version',
+		date is 2024-03-15,
+		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019-2024 Paulo Moura',
+		license is 'GPL-2.0-or-later',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'
 	]).
 
@@ -1041,11 +1041,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 				true
 			;	skip(10)
 			).
-
-	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
-
-		read_single_char(Char) :-
-			{':'(charsio,get_single_char(Char))}, put_char(Char), nl.
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 

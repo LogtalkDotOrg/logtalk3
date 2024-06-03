@@ -34,10 +34,6 @@ Loading
 
    | ?- logtalk_load(ports_profiler(loader)).
 
-Note that this tool cannot be loaded at the same time as other tools
-(e.g. the debugger) that also provide a debug handler, which must be
-unique in a running session.
-
 Testing
 -------
 
@@ -73,7 +69,15 @@ Generating profiling data
 -------------------------
 
 After loading this tool and compiling the source files that you want to
-profile in debug mode, simply call the goals to be profiled.
+profile in debug mode, simply call the ``ports_profiler::start`` goal
+followed by the goals to be profiled. Use the ``ports_profiler::stop``
+goal to stop profiling.
+
+Note that the ``ports_profiler::start/0`` predicate implicitly selects
+the ``ports_profiler`` tool as the active debug handler. If you have
+additional debug handlers loaded (e.g. the ``debugger`` tool), those
+would no longer be active (there can be only one active debug handler at
+any given time).
 
 Printing profiling data reports
 -------------------------------
@@ -126,6 +130,9 @@ Logtalk distribution:
 
    | ?- logtalk_load(family(loader)).
    ...
+   yes
+
+   | ?- ports_profiler::start.
    yes
 
    | ?- addams::sister(Sister, Sibling).
@@ -235,7 +242,7 @@ In alternative, use the ``object_wrapper_hook`` provided by the
 
 ::
 
-   | ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
+   | ?- logtalk_load(hook_objects(loader)).
    ...
 
    | ?- logtalk_load(

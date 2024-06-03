@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 3:4:1,
+		version is 4:0:1,
 		author is 'Paulo Moura',
-		date is 2023-04-12,
+		date is 2024-04-01,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -67,15 +67,12 @@
 		assertz(message_cache_(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds))),
 		generate_xml_report.
 	% "testcase" tag predicates
-	message_hook(passed_test(Object, Test, File, Position, Note, Time)) :-
+	message_hook(passed_test(Object, Test, File, Position, Note, CPUTime, WallTime)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, Time)))).
-	message_hook(non_deterministic_success(Object, Test, File, Position, Note, Time)) :-
+		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, CPUTime, WallTime)))).
+	message_hook(failed_test(Object, Test, File, Position, Reason, Note, CPUTime, WallTime)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, non_deterministic_success(File, Position, Note, Time)))).
-	message_hook(failed_test(Object, Test, File, Position, Reason, Note, Time)) :-
-		!,
-		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, Time)))).
+		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, CPUTime, WallTime)))).
 	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Note)))).
@@ -93,7 +90,12 @@
 		write('<?xml version="1.0" encoding="UTF-8"?>'), nl.
 
 	write_assemblies_element :-
-		write_xml_open_tag(assemblies, []),
+		assemblies_start_rtf(StartRtf),
+		assemblies_finish_rtf(FinishRtf),
+		write_xml_open_tag(assemblies, [
+			'start-rtf' - StartRtf,
+			'finish-rtf' - FinishRtf
+		]),
 		write_assembly_elements,
 		write_xml_close_tag(assemblies).
 
@@ -106,12 +108,15 @@
 	write_assembly_element(Object) :-
 		assembly_name(Object, Name),
 		assembly_config_file(Object, ConfigFile),
+		assembly_start_rtf(StartRtf),
+		assembly_finish_rtf(FinishRtf),
 		assembly_time(Object, Time),
 		assembly_run_date(RunDate),
 		assembly_run_time(RunTime),
 		assembly_stats(Object, Total, Skipped, Passed, Failed),
 		write_xml_open_tag(assembly,
 			[	name-Name, 'config-file'-ConfigFile, 'test-framework'-lgtunit,
+				'start-rtf' - StartRtf, 'finish-rtf' - FinishRtf,
 				'run-date'-RunDate, 'run-time'-RunTime,
 				time-Time,
 				total-Total, passed-Passed, failed-Failed, skipped-Skipped, errors-0
@@ -130,7 +135,7 @@
 		message_cache_(broken_step(Step, Object, Error)),
 		write_xml_open_tag(error, [type-error, name-Step]),
 		write_xml_open_tag(failure, []),
-		write_xml_cdata_element('stack-trace', [], Error),
+		writeq_xml_cdata_element('stack-trace', [], Error),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(error),
 		fail.
@@ -166,29 +171,21 @@
 		fail.
 	write_test_elements(_).
 
-	write_test_element_tags(passed_test(File, Position, Note, Time), Name, Object) :-
+	write_test_element_tags(passed_test(File, Position, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-Time, result-'Pass']),
+		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-WallTime, result-'Pass']),
 		write_test_element_traits(Short, Position, Note),
 		write_xml_close_tag(test).
-	write_test_element_tags(non_deterministic_success(File, Position, Note, Time), Name, Object) :-
+	write_test_element_tags(failed_test(File, Position, Reason, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-Time, result-'Fail']),
-		write_test_element_traits(Short, Position, Note),
-		write_xml_open_tag(failure, []),
-		write_xml_cdata_element(message, [], 'Non-deterministic success'),
-		write_xml_close_tag(failure),
-		write_xml_close_tag(test).
-	write_test_element_tags(failed_test(File, Position, Reason, Note, Time), Name, Object) :-
-		suppress_path_prefix(File, Short),
-		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-Time, result-'Fail']),
+		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-WallTime, result-'Fail']),
 		write_test_element_traits(Short, Position, Note),
 		write_xml_open_tag(failure, []),
 		failed_test(Reason, Description, _, Error),
-		write_xml_cdata_element(message, [], Description),
+		write_xml_element(message, [], Description),
 		(	Error == '' ->
 			true
-		;	write_xml_cdata_element('stack-trace', [], Error)
+		;	writeq_xml_cdata_element('stack-trace', [], Error)
 		),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
@@ -196,7 +193,7 @@
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-0.0, result-'Skip']),
 		write_test_element_traits(Short, Position, Note),
-		write_xml_cdata_element(reason, [], 'Skipped test'),
+		write_xml_element(reason, [], 'Skipped test'),
 		write_xml_close_tag(test).
 
 	% failed_test(Reason, Description, Type, Error)
@@ -213,18 +210,37 @@
 	failed_test(step_error(_, Error), 'Test step error', step_error, Error).
 	failed_test(step_failure(Step), 'Test step failure', step_failure, Step).
 
+	% "assemblies" tag attributes
+
+	assemblies_start_rtf(StartRtf) :-
+		message_cache_(tests_start_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
+		integers_to_atoms([Year,Month,Day,Hours,Minutes,Seconds], [AYear,AMonth0,ADay0,AHours0,AMinutes0,ASeconds0]),
+		pad_single_char_atoms([AMonth0,ADay0,AHours0,AMinutes0,ASeconds0], [AMonth,ADay,AHours,AMinutes,ASeconds]),
+		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], StartRtf).
+
+	assemblies_finish_rtf(FinishRtf) :-
+		message_cache_(tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
+		integers_to_atoms([Year,Month,Day,Hours,Minutes,Seconds], [AYear,AMonth0,ADay0,AHours0,AMinutes0,ASeconds0]),
+		pad_single_char_atoms([AMonth0,ADay0,AHours0,AMinutes0,ASeconds0], [AMonth,ADay,AHours,AMinutes,ASeconds]),
+		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], FinishRtf).
+
 	% "assembly" tag attributes
+
+	assembly_start_rtf(StartRtf) :-
+		assemblies_start_rtf(StartRtf).
+
+	assembly_finish_rtf(FinishRtf) :-
+		assemblies_finish_rtf(FinishRtf).
 
 	assembly_time(Object, Time) :-
 		findall(
-			TestTime,
-			(	message_cache_(test(Object, _, passed_test(_, _, _, TestTime)))
-			;	message_cache_(test(Object, _, non_deterministic_success(_, _, _, TestTime)))
-			;	message_cache_(test(Object, _, failed_test(_, _, _, _, TestTime)))
+			WallTime,
+			(	message_cache_(test(Object, _, passed_test(_, _, _, _, WallTime)))
+			;	message_cache_(test(Object, _, failed_test(_, _, _, _, _, WallTime)))
 			),
-			TestTimes
+			WallTimes
 		),
-		sum(TestTimes, 0, Time).
+		sum(WallTimes, 0, Time).
 
 	assembly_stats(Object, Total, Total, 0, 0) :-
 		message_cache_(tests_skipped(Object, _File, _Note)),
@@ -271,19 +287,6 @@
 		assembly_time(Object, Time).
 
 	% date and time auxiliary predicates
-
-	julian_day(Year, Month, Day, JulianDay) :-
-		% code copied from Daniel L. Dudley iso8601 contribution to Logtalk
-		A is (14 - Month) // 12,
-		Y is Year + 4800 - A,
-		M is Month + (12 * A) - 3,
-		D is Day + ((153 * M + 2) // 5) + (365 * Y) + (Y // 4),
-		JulianDay is D - (Y // 100) + (Y // 400) - 32045.
-
-	date_time_to_timestamp(Year, Month, Day, Hours, Minutes, Seconds, TimeStamp) :-
-		integers_to_atoms([Year,Month,Day,Hours,Minutes,Seconds], [AYear,AMonth0,ADay0,AHours0,AMinutes0,ASeconds0]),
-		pad_single_char_atoms([AMonth0,ADay0,AHours0,AMinutes0,ASeconds0], [AMonth,ADay,AHours,AMinutes,ASeconds]),
-		atomic_list_concat([AYear,'-',AMonth,'-',ADay,'T',AHours,':',AMinutes,':',ASeconds], TimeStamp).
 
 	integers_to_atoms([], []).
 	integers_to_atoms([Integer| Integers], [Atom| Atoms]) :-
@@ -379,16 +382,6 @@
 		write(Tag),
 		write('>'), nl.
 
-	write_xml_cdata_element(Tag, Atts, Text) :-
-		write('<'),
-		write(Tag),
-		write_xml_tag_attributes(Atts),
-		write('><![CDATA['),
-		pretty_print_vars(Text),
-		write(']]></'),
-		write(Tag),
-		write('>'), nl.
-
 	write_xml_tag_attributes([]).
 	write_xml_tag_attributes([Attribute-Value| Rest]) :-
 		write(' '),
@@ -408,8 +401,10 @@
 	escape_special_characters(Term, Escaped) :-
 		(	var(Term) ->
 			Escaped = Term
-		;	escape_special_character(Term, Escaped) ->
-			true
+		;	atom(Term) ->
+			atom_chars(Term, List),
+			phrase(escape_special_characters(List), EscapedList),
+			atom_chars(Escaped, EscapedList)
 		;	compound(Term) ->
 			Term =.. List,
 			escape_special_characters_list(List, EscapedList),
@@ -417,22 +412,26 @@
 		;	Escaped = Term
 		).
 
-	escape_special_character((<),  '&lt;').
-	escape_special_character((>),  '&gt;').
-	escape_special_character('"',  '&quot;').
-	escape_special_character('\'', '&apos;').
-	escape_special_character((&),  '&amp;').
+	escape_special_character((<))  --> [(&),l,t,';'].
+	escape_special_character((>))  --> [(&),g,t,';'].
+	escape_special_character('"')  --> [(&),q,u,o,t,';'].
+	escape_special_character('\'') --> [(&),a,p,o,s,';'].
+	escape_special_character((&))  --> [(&),a,m,p,';'].
+
+	escape_special_characters([]) -->
+		[].
+	escape_special_characters([Char| Chars]) -->
+		escape_special_character(Char),
+		!,
+		escape_special_characters(Chars).
+	escape_special_characters([Char| Chars]) -->
+		[Char],
+		escape_special_characters(Chars).
 
 	escape_special_characters_list([], []).
 	escape_special_characters_list([Argument| Arguments], [EscapedArgument| EscapedArguments]) :-
 		escape_special_characters(Argument, EscapedArgument),
 		escape_special_characters_list(Arguments, EscapedArguments).
-
-	pretty_print_vars(Term) :-
-		\+ \+ (
-			numbervars(Term, 0, _),
-			write_term(Term, [numbervars(true)])
-		).
 
 	pretty_print_vars_quoted(Term) :-
 		\+ \+ (

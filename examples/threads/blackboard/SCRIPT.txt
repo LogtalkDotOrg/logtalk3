@@ -26,7 +26,7 @@ ________________________________________________________________________
 
 % start the producer and the consumer, each one running in its own thread:
 
-| ?- threaded_ignore(teacher::run(4)), threaded_ignore(student::run(10)).
+| ?- threaded_ignore(student::run(10)), threaded_ignore(teacher::run(4)).
 
 teacher is writing...
 student is writing...

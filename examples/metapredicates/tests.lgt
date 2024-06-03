@@ -201,9 +201,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2022-03-07,
+		date is 2023-08-06,
 		comment is 'Unit tests for the "metapredicates" example.'
 	]).
 
@@ -355,8 +355,14 @@
 	test(metapredicates_43) :-
 		simple_client::test_whatever.
 
-	test(metapredicates_44) :-
-		^^suppress_text_output,
-		simple_client::test_whatever_all.
+	test(metapredicates_44, true(Assertion)) :-
+		^^set_text_output(''),
+		simple_client::test_whatever_all,
+		^^text_output_assertion('Hello world!', Assertion).
+
+	test(metapredicates_45, true(Assertion)) :-
+		^^set_text_output(''),
+		simple_client_alt::test_whatever_all,
+		^^text_output_assertion('Hello world!', Assertion).
 
 :- end_object.

@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk backend Prolog compiler select script
-##   Last updated on June 21, 2023
+##   Last updated on October 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -56,9 +56,6 @@ list_backends() {
 	fi
 	if [ -e "$(command -v lvmlgt)" ] && [ "$(command -v lvmpl)" != "" ] ; then
 		echo -n "  lvmlgt"
-	fi
-	if [ -e "$(command -v scryerlgt)" ] && [ "$(command -v scryer-prolog)" != "" ] ; then
-		echo -n "  scryerlgt"
 	fi
 	if [ -e "$(command -v sicstuslgt)" ] && [ "$(command -v sicstus)" != "" ] ; then
 		echo -n "  sicstuslgt"
@@ -150,8 +147,6 @@ valid_backend() {
 	elif [ "$1" == "jiplgt" ] && [ -e "$(command -v jiplgt)" ]  && [ "$(command -v jipconsole.sh)" != "" ] ; then
 		return 0
 	elif [ "$1" == "lvmlgt" ] && [ -e "$(command -v lvmlgt)" ]  && [ "$(command -v lvmpl)" != "" ] ; then
-		return 0
-	elif [ "$1" == "scryerlgt" ] && [ -e "$(command -v scryerlgt)" ]  && [ "$(command -v scryer-prolog)" != "" ] ; then
 		return 0
 	elif [ "$1" == "sicstuslgt" ] && [ -e "$(command -v sicstuslgt)" ]  && [ "$(command -v sicstus)" != "" ] ; then
 		return 0

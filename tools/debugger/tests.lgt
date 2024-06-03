@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2016 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2021-09-25,
+		date is 2024-06-03,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -34,6 +34,7 @@
 		debug/0, nodebug/0,
 		debugging/0, debugging/1,
 		trace/0, notrace/0,
+		log/3, logging/3, nolog/3, nologall/0,
 		(spy)/1, spying/1, (nospy)/1,
 		(spy)/4, spying/4, (nospy)/4,
 		nospyall/0,
@@ -180,6 +181,50 @@
 				PortsSorted == SetSorted
 			)
 		).
+
+	test(debugger_log_3_01, deterministic) :-
+		log(logtalk, 13, none).
+
+	% setting a log point already set must still succeed deterministically
+	test(debugger_log_3_02, deterministic) :-
+		reset,
+		log(logtalk, 13, none),
+		log(logtalk, 13, none).
+
+	% updating a log point message
+	test(debugger_log_3_03, deterministic) :-
+		reset,
+		log(logtalk, 13, none),
+		log(logtalk, 13, new).
+
+	test(debugger_log_3_04, deterministic(LogPoints == [lp(logtalk,13,foo), lp(logtalk,33,bar)])) :-
+		reset,
+		log(logtalk, 13, foo),
+		log(logtalk, 33, bar),
+		setof(lp(Entity,Line,Message), logging(Entity, Line, Message), LogPoints).
+
+	test(debugger_log_3_05, deterministic(LogPoints == [lp(logtalk,13,bar)])) :-
+		reset,
+		log(logtalk, 13, foo),
+		log(logtalk, 13, bar),
+		setof(lp(Entity,Line,Message), logging(Entity, Line, Message), LogPoints).
+
+	test(debugger_nolog_3_01, deterministic) :-
+		reset,
+		nolog(_, _, _).
+
+	test(debugger_nolog_3_02, deterministic) :-
+		reset,
+		log(logtalk, 13, foo),
+		nolog(logtalk, _, _),
+		\+ logging(_, _, _).
+
+	test(debugger_nologall_0_01, deterministic) :-
+		reset,
+		log(logtalk, 13, foo),
+		log(logtalk, 33, bar),
+		nologall,
+		\+ logging(_, _, _).
 
 	test(debugger_spy_1_01, deterministic) :-
 		spy(logtalk-13).

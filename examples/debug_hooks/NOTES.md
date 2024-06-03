@@ -21,10 +21,10 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains a very simple example of using the compiler flag 
-`hook/1` and the term expansion mechanism to either discard or activate 
-debugging goals. For debugging goals in clause bodies, one defines clauses 
-for `goal_expansion/2`. For debugging goals in directives (e.g. in the 
+This folder contains a very simple example of using the compiler flag
+`hook/1` and the term expansion mechanism to either discard or activate
+debugging goals. For debugging goals in clause bodies, one defines clauses
+for `goal_expansion/2`. For debugging goals in directives (e.g. in the
 `initialization/1` directive), one defines clauses for `term_expansion/2`.
 
 We can use two hook objects, one for developing and debugging code and

@@ -23,13 +23,13 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1:3:1,
+		version is 1:3:2,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2023-07-24,
 		comment is 'Bridge puzzle.'
 	]).
 
-	:- uses(numberlist, [min/2, max/2]).
+	:- uses(numberlist, [min/2]).
 	:- uses(set, [insert/3, insert_all/3, select/3]).
 
 	initial_state(start, s([], right, [1,3,6,8,12])).

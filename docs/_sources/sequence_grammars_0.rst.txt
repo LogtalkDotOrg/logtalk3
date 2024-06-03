@@ -10,9 +10,12 @@
 
 Sequence grammars.
 
+| **Availability:** 
+|    ``logtalk_load(grammars(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2023-01-30
+| **Version:** 0:3:0
+| **Date:** 2023-12-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -35,13 +38,55 @@ Sequence grammars.
 Public predicates
 -----------------
 
+.. index:: zero_or_more//2
+.. _sequence_grammars/0::zero_or_more//2:
+
+``zero_or_more//2``
+^^^^^^^^^^^^^^^^^^^
+
+Eagerly collect zero or more terminals that satisfy the given closure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``zero_or_more(Closure,Terminals)``
+| **Meta-predicate template:**
+|    ``zero_or_more(1,*)``
+| **Mode and number of proofs:**
+|    ``zero_or_more(+callable,-list(atomic))`` - ``one``
+
+
+------------
+
+.. index:: one_or_more//2
+.. _sequence_grammars/0::one_or_more//2:
+
+``one_or_more//2``
+^^^^^^^^^^^^^^^^^^
+
+Eagerly collect one or more terminals that satisfy the given closure.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``one_or_more(Closure,Terminals)``
+| **Meta-predicate template:**
+|    ``one_or_more(1,*)``
+| **Mode and number of proofs:**
+|    ``one_or_more(+callable,-list(atomic))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: zero_or_more//1
 .. _sequence_grammars/0::zero_or_more//1:
 
 ``zero_or_more//1``
 ^^^^^^^^^^^^^^^^^^^
 
-Describes a sequence of zero or more terminals.
+Eagerly collect zero or more terminals.
 
 | **Compilation flags:**
 |    ``static``
@@ -49,7 +94,7 @@ Describes a sequence of zero or more terminals.
 | **Template:**
 |    ``zero_or_more(Terminals)``
 | **Mode and number of proofs:**
-|    ``zero_or_more(-list(atomic))`` - ``zero_or_one``
+|    ``zero_or_more(-list(atomic))`` - ``one``
 
 
 ------------
@@ -60,7 +105,7 @@ Describes a sequence of zero or more terminals.
 ``one_or_more//1``
 ^^^^^^^^^^^^^^^^^^
 
-Describes a sequence of one or more terminals.
+Eagerly collect one or more terminals.
 
 | **Compilation flags:**
 |    ``static``
@@ -79,7 +124,7 @@ Describes a sequence of one or more terminals.
 ``zero_or_more//0``
 ^^^^^^^^^^^^^^^^^^^
 
-Describes a sequence of zero or more terminals.
+Eagerly parse zero or more terminals.
 
 | **Compilation flags:**
 |    ``static``
@@ -96,13 +141,32 @@ Describes a sequence of zero or more terminals.
 ``one_or_more//0``
 ^^^^^^^^^^^^^^^^^^
 
-Describes a sequence of one or more terminals.
+Eagerly parse one or more terminals.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Mode and number of proofs:**
-|    ``one_or_more`` - ``one``
+|    ``one_or_more`` - ``zero_or_one``
+
+
+------------
+
+.. index:: without//2
+.. _sequence_grammars/0::without//2:
+
+``without//2``
+^^^^^^^^^^^^^^
+
+Collects input terminals until one of the stop terminals is found. The stop terminals are excluded from the collected terminals.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``without(StopTerminals,Terminals)``
+| **Mode and number of proofs:**
+|    ``without(+list(atomic),-list(atomic))`` - ``one``
 
 
 ------------

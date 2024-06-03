@@ -21,7 +21,7 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-This folder contains an example that show how to use a category to 
+This folder contains an example that show how to use a category to
 explicitly complement an existing object compiled with the `complements`
 flag set to `restrict`. With this setting, a category can only add new
 functionality to the complemented object.

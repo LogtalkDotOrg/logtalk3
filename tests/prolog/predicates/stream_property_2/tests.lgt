@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,31 +23,27 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:9:1,
 		author is 'Paulo Moura',
-		date is 2022-10-30,
+		date is 2024-03-16,
 		comment is 'Unit tests for the ISO Prolog standard stream_property/2 built-in predicate.'
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.11.8.4
 
-	test(iso_stream_property_2_01, deterministic) :-
+	test(iso_stream_property_2_01, true((memberchk(S1-FooPath, L), memberchk(S2-BarPath, L))), [cleanup((close(S1), close(S2)))]) :-
 		^^file_path(foo, FooPath),
 		^^file_path(bar, BarPath),
 		^^create_text_file(FooPath, ''),
 		open(FooPath, read, S1),
 		open(BarPath, write, S2),
-		findall(S-F, {stream_property(S, file_name(F))}, L),
-		memberchk(S1-FooPath, L),
-		memberchk(S2-BarPath, L).
+		findall(S-F, {stream_property(S, file_name(F))}, L).
 
-	test(iso_stream_property_2_02, deterministic) :-
+	test(iso_stream_property_2_02, true((memberchk(FOut, L), memberchk(COut, L))), [cleanup(close(FOut))]) :-
 		^^file_path(bar, BarPath),
 		open(BarPath, write, FOut),
 		current_output(COut),
-		findall(S, {stream_property(S, output)}, L),
-		memberchk(FOut, L),
-		memberchk(COut, L).
+		findall(S, {stream_property(S, output)}, L).
 
 	% tests from the Prolog ISO conformance testing framework written by Péter Szabó and Péter Szeredi
 
@@ -190,45 +186,39 @@
 
 	% tests for the file_name/1 stream property
 
-	test(lgt_stream_property_2_14, true(File == Path)) :-
+	test(lgt_stream_property_2_14, true(File == Path), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, write, Stream),
-		{stream_property(Stream, file_name(File))},
-		close(Stream).
+		{stream_property(Stream, file_name(File))}.
 
-	test(lgt_stream_property_2_15, true(File == Path)) :-
+	test(lgt_stream_property_2_15, true(File == Path), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, append, Stream),
-		{stream_property(Stream, file_name(File))},
-		close(Stream).
+		{stream_property(Stream, file_name(File))}.
 
-	test(lgt_stream_property_2_16, true(File == Path)) :-
+	test(lgt_stream_property_2_16, true(File == Path), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
-		{stream_property(Stream, file_name(File))},
-		close(Stream).
+		{stream_property(Stream, file_name(File))}.
 
 	% tests for the mode/1 stream property
 
-	test(lgt_stream_property_2_17, true(Mode == write)) :-
+	test(lgt_stream_property_2_17, true(Mode == write), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, write, Stream),
-		{stream_property(Stream, mode(Mode))},
-		close(Stream).
+		{stream_property(Stream, mode(Mode))}.
 
-	test(lgt_stream_property_2_18, true(Mode == append)) :-
+	test(lgt_stream_property_2_18, true(Mode == append), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, append, Stream),
-		{stream_property(Stream, mode(Mode))},
-		close(Stream).
+		{stream_property(Stream, mode(Mode))}.
 
-	test(lgt_stream_property_2_19, true(Mode == read)) :-
+	test(lgt_stream_property_2_19, true(Mode == read), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
-		{stream_property(Stream, mode(Mode))},
-		close(Stream).
+		{stream_property(Stream, mode(Mode))}.
 
 	% tests for the input/0 stream property
 
@@ -268,38 +258,35 @@
 
 	% tests for the alias/1 stream property
 
-	test(lgt_stream_property_2_26, true(Alias == w)) :-
+	test(lgt_stream_property_2_26, true(Alias == w), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, write, Stream, [alias(w)]),
-		{stream_property(Stream, alias(Alias))},
-		close(Stream).
+		{stream_property(Stream, alias(Alias))}.
 
-	test(lgt_stream_property_2_27, true(Alias == a)) :-
+	test(lgt_stream_property_2_27, true(Alias == a), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, append, Stream, [alias(a)]),
-		{stream_property(Stream, alias(Alias))},
-		close(Stream).
+		{stream_property(Stream, alias(Alias))}.
 
-	test(lgt_stream_property_2_28, true(Alias == r)) :-
+	test(lgt_stream_property_2_28, true(Alias == r), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [alias(r)]),
-		{stream_property(Stream, alias(Alias))},
-		close(Stream).
+		{stream_property(Stream, alias(Alias))}.
 
 	% tests for the position/1 stream property
 
-	test(lgt_stream_property_2_29, true(ground(Position)), [cleanup(close(out))]) :-
+	test(lgt_stream_property_2_29, true(ground(Position)), [cleanup(catch(close(out),_,true))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, write, Stream, [reposition(true), alias(out)]),
 		{stream_property(Stream, position(Position))}.
 
-	test(lgt_stream_property_2_30, true(ground(Position)), [cleanup(close(out))]) :-
+	test(lgt_stream_property_2_30, true(ground(Position)), [cleanup(catch(close(out),_,true))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, append, Stream, [reposition(true), alias(out)]),
 		{stream_property(Stream, position(Position))}.
 
-	test(lgt_stream_property_2_31, true(ground(Position)), [cleanup(close(in))]) :-
+	test(lgt_stream_property_2_31, true(ground(Position)), [cleanup(catch(close(in),_,true))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [reposition(true), alias(in)]),
@@ -307,157 +294,135 @@
 
 	% tests for the end_of_stream/1 stream property
 
-	test(lgt_stream_property_2_32, true((EndOfStream == not; EndOfStream == at))) :-
+	test(lgt_stream_property_2_32, true((EndOfStream == not; EndOfStream == at)), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
-		{stream_property(Stream, end_of_stream(EndOfStream))},
-		close(Stream).
+		{stream_property(Stream, end_of_stream(EndOfStream))}.
 
-	test(lgt_stream_property_2_33, true((EndOfStream == not; EndOfStream == at))) :-
+	test(lgt_stream_property_2_33, true((EndOfStream == not; EndOfStream == at)), [cleanup(close(Stream))]) :-
 		^^file_path(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [type(binary)]),
-		{stream_property(Stream, end_of_stream(EndOfStream))},
-		close(Stream).
+		{stream_property(Stream, end_of_stream(EndOfStream))}.
 
 	% tests for the eof_action/1 stream property
 
-	test(lgt_stream_property_2_34, true(EOFAction == error)) :-
+	test(lgt_stream_property_2_34, true(EOFAction == error), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [eof_action(error)]),
-		{stream_property(Stream, eof_action(EOFAction))},
-		close(Stream).
+		{stream_property(Stream, eof_action(EOFAction))}.
 
-	test(lgt_stream_property_2_35, true(EOFAction == eof_code)) :-
+	test(lgt_stream_property_2_35, true(EOFAction == eof_code), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [eof_action(eof_code)]),
-		{stream_property(Stream, eof_action(EOFAction))},
-		close(Stream).
+		{stream_property(Stream, eof_action(EOFAction))}.
 
-	test(lgt_stream_property_2_36, true(EOFAction == reset)) :-
+	test(lgt_stream_property_2_36, true(EOFAction == reset), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [eof_action(reset)]),
-		{stream_property(Stream, eof_action(EOFAction))},
-		close(Stream).
+		{stream_property(Stream, eof_action(EOFAction))}.
 
-	test(lgt_stream_property_2_37, true((EOFAction == error; EOFAction == eof_code; EOFAction == reset))) :-
+	test(lgt_stream_property_2_37, true((EOFAction == error; EOFAction == eof_code; EOFAction == reset)), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
-		{stream_property(Stream, eof_action(EOFAction))},
-		close(Stream).
+		{stream_property(Stream, eof_action(EOFAction))}.
 
-	test(lgt_stream_property_2_38, true(EOFAction == error)) :-
+	test(lgt_stream_property_2_38, true(EOFAction == error), [cleanup(close(Stream))]) :-
 		^^file_path(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [eof_action(error), type(binary)]),
-		{stream_property(Stream, eof_action(EOFAction))},
-		close(Stream).
+		{stream_property(Stream, eof_action(EOFAction))}.
 
-	test(lgt_stream_property_2_39, true(EOFAction == eof_code)) :-
+	test(lgt_stream_property_2_39, true(EOFAction == eof_code), [cleanup(close(Stream))]) :-
 		^^file_path(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [eof_action(eof_code), type(binary)]),
-		{stream_property(Stream, eof_action(EOFAction))},
-		close(Stream).
+		{stream_property(Stream, eof_action(EOFAction))}.
 
-	test(lgt_stream_property_2_40, true(EOFAction == reset)) :-
+	test(lgt_stream_property_2_40, true(EOFAction == reset), [cleanup(close(Stream))]) :-
 		^^file_path(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [eof_action(reset), type(binary)]),
-		{stream_property(Stream, eof_action(EOFAction))},
-		close(Stream).
+		{stream_property(Stream, eof_action(EOFAction))}.
 
-	test(lgt_stream_property_2_41, true((EOFAction == error; EOFAction == eof_code; EOFAction == reset))) :-
+	test(lgt_stream_property_2_41, true((EOFAction == error; EOFAction == eof_code; EOFAction == reset)), [cleanup(close(Stream))]) :-
 		^^file_path(input_binary_file, Path),
 		^^create_binary_file(Path, []),
 		open(Path, read, Stream, [type(binary)]),
-		{stream_property(Stream, eof_action(EOFAction))},
-		close(Stream).
+		{stream_property(Stream, eof_action(EOFAction))}.
 
 	% tests for the reposition/1 stream property
 
-	test(lgt_stream_property_2_42, true(Reposition == true)) :-
+	test(lgt_stream_property_2_42, true(Reposition == true), [cleanup(catch(close(Stream),_,true))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, write, Stream, [reposition(true)]),
-		{stream_property(Stream, reposition(Reposition))},
-		close(Stream).
+		{stream_property(Stream, reposition(Reposition))}.
 
-	test(lgt_stream_property_2_43, true((Reposition == false; Reposition == true))) :-
+	test(lgt_stream_property_2_43, true((Reposition == false; Reposition == true)), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, write, Stream, [reposition(false)]),
-		{stream_property(Stream, reposition(Reposition))},
-		close(Stream).
+		{stream_property(Stream, reposition(Reposition))}.
 
-	test(lgt_stream_property_2_44, true(Reposition == true)) :-
+	test(lgt_stream_property_2_44, true(Reposition == true), [cleanup(catch(close(Stream),_,true))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, append, Stream, [reposition(true)]),
-		{stream_property(Stream, reposition(Reposition))},
-		close(Stream).
+		{stream_property(Stream, reposition(Reposition))}.
 
-	test(lgt_stream_property_2_45, true((Reposition == false; Reposition == true))) :-
+	test(lgt_stream_property_2_45, true((Reposition == false; Reposition == true)), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, append, Stream, [reposition(false)]),
-		{stream_property(Stream, reposition(Reposition))},
-		close(Stream).
+		{stream_property(Stream, reposition(Reposition))}.
 
-	test(lgt_stream_property_2_46, true(Reposition == true)) :-
+	test(lgt_stream_property_2_46, true(Reposition == true), [cleanup(catch(close(Stream),_,true))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [reposition(true)]),
-		{stream_property(Stream, reposition(Reposition))},
-		close(Stream).
+		{stream_property(Stream, reposition(Reposition))}.
 
-	test(lgt_stream_property_2_47, true((Reposition == false; Reposition == true))) :-
+	test(lgt_stream_property_2_47, true((Reposition == false; Reposition == true)), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [reposition(false)]),
-		{stream_property(Stream, reposition(Reposition))},
-		close(Stream).
+		{stream_property(Stream, reposition(Reposition))}.
 
 	% tests for the type/1 stream property
 
-	test(lgt_stream_property_2_48, true(Type == text)) :-
+	test(lgt_stream_property_2_48, true(Type == text), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, write, Stream, [type(text)]),
-		{stream_property(Stream, type(Type))},
-		close(Stream).
+		{stream_property(Stream, type(Type))}.
 
-	test(lgt_stream_property_2_49, true(Type == binary)) :-
+	test(lgt_stream_property_2_49, true(Type == binary), [cleanup(close(Stream))]) :-
 		^^file_path(output_binary_file, Path),
 		open(Path, write, Stream, [type(binary)]),
-		{stream_property(Stream, type(Type))},
-		close(Stream).
+		{stream_property(Stream, type(Type))}.
 
-	test(lgt_stream_property_2_50, true(Type == text)) :-
+	test(lgt_stream_property_2_50, true(Type == text), [cleanup(close(Stream))]) :-
 		^^file_path(output_text_file, Path),
 		open(Path, append, Stream, [type(text)]),
-		{stream_property(Stream, type(Type))},
-		close(Stream).
+		{stream_property(Stream, type(Type))}.
 
-	test(lgt_stream_property_2_51, true(Type == binary)) :-
+	test(lgt_stream_property_2_51, true(Type == binary), [cleanup(close(Stream))]) :-
 		^^file_path(output_binary_file, Path),
 		open(Path, append, Stream, [type(binary)]),
-		{stream_property(Stream, type(Type))},
-		close(Stream).
+		{stream_property(Stream, type(Type))}.
 
-	test(lgt_stream_property_2_52, true(Type == text)) :-
+	test(lgt_stream_property_2_52, true(Type == text), [cleanup(close(Stream))]) :-
 		^^file_path(input_text_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [type(text)]),
-		{stream_property(Stream, type(Type))},
-		close(Stream).
+		{stream_property(Stream, type(Type))}.
 
-	test(lgt_stream_property_2_53, true(Type == binary)) :-
+	test(lgt_stream_property_2_53, true(Type == binary), [cleanup(close(Stream))]) :-
 		^^file_path(input_binary_file, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream, [type(binary)]),
-		{stream_property(Stream, type(Type))},
-		close(Stream).
+		{stream_property(Stream, type(Type))}.
 
 	cleanup :-
 		^^clean_file(foo),

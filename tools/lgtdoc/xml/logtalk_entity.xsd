@@ -37,12 +37,13 @@
 
 <xsd:complexType name="logtalk">
 	<xsd:sequence>
-		<xsd:element name="entity"		type="entity"/>
-		<xsd:element name="relations"	type="relations"/>
-		<xsd:element name="predicates"	type="predicates"/>
-		<xsd:element name="operators"	type="operators"/>
-		<xsd:element name="remarks"	type="remarks"/>
-		<xsd:element name="see_also"	type="see_also"/>
+		<xsd:element name="entity"			type="entity"/>
+		<xsd:element name="relations"		type="relations"/>
+		<xsd:element name="predicates"		type="predicates"/>
+		<xsd:element name="operators"		type="operators"/>
+		<xsd:element name="remarks"			type="remarks"/>
+		<xsd:element name="see_also"		type="see_also"/>
+		<xsd:element name="availability"	type="xsd:string"/>
 	</xsd:sequence>
 </xsd:complexType>
 

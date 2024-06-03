@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -28,52 +28,46 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
 	logtalk_load(os(loader)),
+	logtalk_load(options(loader)),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(
-		[
-			code_metrics_utilities,
-			code_metric,
-			code_metrics_messages,
-			dit_metric,
-			coupling_metric,
-			noc_metric,
-			nor_metric,
-			upn_metric,
-			doc_metric,
-			size_metric,
-			cc_metric,
-			halstead_metric,
-			code_metrics
-		],
-		[
-			source_data(on),
-			debug(on)
-		]
-	),
-	logtalk_load(
-		[
-			test_entities,
-			third_party_test_entities
-		], [
-			source_data(on)
-		]
-	),
-	logtalk_load(
-		[
-			coupling_metric_tests,
-			dit_metric_tests,
-			doc_metric_tests,
-			noc_metric_tests,
-			nor_metric_tests,
-			upn_metric_tests,
-			size_metric_tests,
-			cc_metric_tests,
-			halstead_metric_tests,
-			code_metrics_tests
-		], [
-			hook(lgtunit), optimize(on)
-		]
-	),
+	logtalk_load([
+		code_metrics_utilities,
+		code_metric,
+		code_metrics_messages,
+		dit_metric,
+		coupling_metric,
+		noc_metric,
+		nor_metric,
+		upn_metric,
+		doc_metric,
+		size_metric,
+		cc_metric,
+		halstead_metric,
+		code_metrics
+	], [
+		source_data(on),
+		debug(on)
+	]),
+	logtalk_load([
+		test_entities,
+		third_party_test_entities
+	], [
+		source_data(on)
+	]),
+	logtalk_load([
+		coupling_metric_tests,
+		dit_metric_tests,
+		doc_metric_tests,
+		noc_metric_tests,
+		nor_metric_tests,
+		upn_metric_tests,
+		size_metric_tests,
+		cc_metric_tests,
+		halstead_metric_tests,
+		code_metrics_tests
+	], [
+		hook(lgtunit), optimize(on)
+	]),
 	lgtunit::run_test_sets([
 		coupling_metric_tests,
 		dit_metric_tests,

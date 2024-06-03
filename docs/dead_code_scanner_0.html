@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>dead_code_scanner &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>dead_code_scanner &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -109,11 +112,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -124,12 +129,14 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -188,12 +195,18 @@
              
   <p class="right" id="dead-code-scanner-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="dead-code-scanner">
-<h1><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code><a class="headerlink" href="#dead-code-scanner" title="Permalink to this heading"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code><a class="headerlink" href="#dead-code-scanner" title="Link to this heading"></a></h1>
 <p>A tool for detecting <em>likely</em> dead code in compiled Logtalk entities and Prolog modules compiled as objects.</p>
 <div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(dead_code_scanner(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Author:</strong> Barry Evans and Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:12:0</div>
-<div class="line"><strong>Date:</strong> 2023-05-29</div>
+<div class="line"><strong>Version:</strong> 0:15:0</div>
+<div class="line"><strong>Date:</strong> 2024-05-07</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -202,11 +215,16 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Imports:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
+</div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
 <div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
+<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -222,7 +240,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -230,25 +248,31 @@
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#entity-1" id="id2"><code class="docutils literal notranslate"><span class="pre">entity/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#file-1" id="id3"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#directory-1" id="id4"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rdirectory-1" id="id5"><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#library-1" id="id6"><code class="docutils literal notranslate"><span class="pre">library/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#rlibrary-1" id="id7"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#all-0" id="id8"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predicates-2" id="id9"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#predicate-2" id="id10"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-2" id="id3"><code class="docutils literal notranslate"><span class="pre">file/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-1" id="id4"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#directory-2" id="id5"><code class="docutils literal notranslate"><span class="pre">directory/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#directory-1" id="id6"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rdirectory-2" id="id7"><code class="docutils literal notranslate"><span class="pre">rdirectory/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rdirectory-1" id="id8"><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#library-2" id="id9"><code class="docutils literal notranslate"><span class="pre">library/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#library-1" id="id10"><code class="docutils literal notranslate"><span class="pre">library/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rlibrary-2" id="id11"><code class="docutils literal notranslate"><span class="pre">rlibrary/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#rlibrary-1" id="id12"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#all-1" id="id13"><code class="docutils literal notranslate"><span class="pre">all/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#all-0" id="id14"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicates-2" id="id15"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#predicate-2" id="id16"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id11">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id12">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id17">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id18">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="entity-1">
-<span id="dead-code-scanner-0-entity-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity/1</span></code></a><a class="headerlink" href="#entity-1" title="Permalink to this heading"></a></h3>
+<span id="dead-code-scanner-0-entity-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity/1</span></code></a><a class="headerlink" href="#entity-1" title="Link to this heading"></a></h3>
 <p>Scans a loaded entity for dead code. Fails if the entity does not exist.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -268,9 +292,30 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="file-2">
+<span id="dead-code-scanner-0-file-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/2</span></code></a><a class="headerlink" href="#file-2" title="Link to this heading"></a></h3>
+<p>Scans all entities in a loaded source file for dead code using the given options. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(File,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">file(+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="file-1">
-<span id="dead-code-scanner-0-file-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a><a class="headerlink" href="#file-1" title="Permalink to this heading"></a></h3>
-<p>Scans all entities in a loaded source file for dead code. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.</p>
+<span id="dead-code-scanner-0-file-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a><a class="headerlink" href="#file-1" title="Link to this heading"></a></h3>
+<p>Scans all entities in a loaded source file for dead code using default options. The file can be given by name, basename, full path, or using library notation. Fails if the file is not loaded.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -289,9 +334,30 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="directory-2">
+<span id="dead-code-scanner-0-directory-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory/2</span></code></a><a class="headerlink" href="#directory-2" title="Link to this heading"></a></h3>
+<p>Scans all entities in all loaded files from a given directory for dead code using the given options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(Directory,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">directory(+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="directory-1">
-<span id="dead-code-scanner-0-directory-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a><a class="headerlink" href="#directory-1" title="Permalink to this heading"></a></h3>
-<p>Scans all entities in all loaded files from a given directory for dead code.</p>
+<span id="dead-code-scanner-0-directory-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a><a class="headerlink" href="#directory-1" title="Link to this heading"></a></h3>
+<p>Scans all entities in all loaded files from a given directory for dead code using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -310,9 +376,30 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="rdirectory-2">
+<span id="dead-code-scanner-0-rdirectory-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectory/2</span></code></a><a class="headerlink" href="#rdirectory-2" title="Link to this heading"></a></h3>
+<p>Scans all entities in all loaded files from a given directory and its sub-directories for dead code using the given options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory(Directory,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rdirectory(+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="rdirectory-1">
-<span id="dead-code-scanner-0-rdirectory-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code></a><a class="headerlink" href="#rdirectory-1" title="Permalink to this heading"></a></h3>
-<p>Scans all entities in all loaded files from a given directory and its sub-directories for dead code.</p>
+<span id="dead-code-scanner-0-rdirectory-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code></a><a class="headerlink" href="#rdirectory-1" title="Link to this heading"></a></h3>
+<p>Scans all entities in all loaded files from a given directory and its sub-directories for dead code using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -331,9 +418,30 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="library-2">
+<span id="dead-code-scanner-0-library-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">library/2</span></code></a><a class="headerlink" href="#library-2" title="Link to this heading"></a></h3>
+<p>Scans all entities in all loaded files from a given library for dead code using the given options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(Library,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">library(+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="library-1">
-<span id="dead-code-scanner-0-library-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">library/1</span></code></a><a class="headerlink" href="#library-1" title="Permalink to this heading"></a></h3>
-<p>Scans all entities in all loaded files from a given library for dead code.</p>
+<span id="dead-code-scanner-0-library-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">library/1</span></code></a><a class="headerlink" href="#library-1" title="Link to this heading"></a></h3>
+<p>Scans all entities in all loaded files from a given library for dead code using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -352,9 +460,30 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="rlibrary-2">
+<span id="dead-code-scanner-0-rlibrary-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibrary/2</span></code></a><a class="headerlink" href="#rlibrary-2" title="Link to this heading"></a></h3>
+<p>Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code using the given options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(Library,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">rlibrary(+atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="rlibrary-1">
-<span id="dead-code-scanner-0-rlibrary-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a><a class="headerlink" href="#rlibrary-1" title="Permalink to this heading"></a></h3>
-<p>Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code.</p>
+<span id="dead-code-scanner-0-rlibrary-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a><a class="headerlink" href="#rlibrary-1" title="Link to this heading"></a></h3>
+<p>Scans all entities in all loaded files in a loaded library and its sub-libraries for dead code using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -373,9 +502,30 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="all-1">
+<span id="dead-code-scanner-0-all-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">all/1</span></code></a><a class="headerlink" href="#all-1" title="Link to this heading"></a></h3>
+<p>Scans all entities for dead code using the given options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all(Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">all(+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="all-0">
-<span id="dead-code-scanner-0-all-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a><a class="headerlink" href="#all-0" title="Permalink to this heading"></a></h3>
-<p>Scans all entities for dead code.</p>
+<span id="dead-code-scanner-0-all-0"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a><a class="headerlink" href="#all-0" title="Link to this heading"></a></h3>
+<p>Scans all entities for dead code using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -391,7 +541,7 @@
 <hr class="docutils" />
 </section>
 <section id="predicates-2">
-<span id="dead-code-scanner-0-predicates-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a><a class="headerlink" href="#predicates-2" title="Permalink to this heading"></a></h3>
+<span id="dead-code-scanner-0-predicates-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicates/2</span></code></a><a class="headerlink" href="#predicates-2" title="Link to this heading"></a></h3>
 <p>Returns an ordered set of local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -412,7 +562,7 @@
 <hr class="docutils" />
 </section>
 <section id="predicate-2">
-<span id="dead-code-scanner-0-predicate-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a><a class="headerlink" href="#predicate-2" title="Permalink to this heading"></a></h3>
+<span id="dead-code-scanner-0-predicate-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">predicate/2</span></code></a><a class="headerlink" href="#predicate-2" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, local predicates (and non-terminals) that are not used, directly or indirectly, by scoped predicates for a loaded entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -434,15 +584,15 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 </section>
@@ -458,7 +608,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

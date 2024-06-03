@@ -10,6 +10,9 @@
 
 Constructors for expected terms. An expected term contains either a value or an error. Expected terms should be regarded as opaque terms and always used with the ``expected/1`` object by passing the expected term as a parameter.
 
+| **Availability:** 
+|    ``logtalk_load(expecteds(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 2:1:0
 | **Date:** 2021-01-03

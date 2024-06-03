@@ -1,11 +1,11 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on October 16, 2019
+##   Last updated on July 5, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
-##   Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2017 Sergio Castro <sergioc78@gmail.com>
+##   SPDX-FileCopyrightText: 2017 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,8 @@
 ## 
 #############################################################################
 
-FROM swipl:latest
+
+FROM swipl:stable
 
 MAINTAINER Sergio Castro <sergioc78@gmail.com>
 

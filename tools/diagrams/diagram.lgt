@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 2:52:1,
+		version is 3:5:0,
 		author is 'Paulo Moura',
-		date is 2023-05-29,
+		date is 2024-04-01,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -75,7 +75,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', libraries, Options),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -139,7 +139,7 @@
 			::output_externals(Options),
 			::output_edges(Options),
 			::output_missing_externals(Options),
-			Format::file_footer(diagram_output_file, libraries, Options) ->
+			Format::file_footer(diagram_output_file, libraries, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -205,7 +205,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rlibrary, GraphOptions),
-			Format::file_footer(diagram_output_file, Library, Options) ->
+			Format::file_footer(diagram_output_file, Library, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rlibrary(Library, UserOptions)))
@@ -251,7 +251,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
-			Format::file_footer(diagram_output_file, Library, Options) ->
+			Format::file_footer(diagram_output_file, Library, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::library(Library, UserOptions)))
@@ -260,20 +260,22 @@
 		::output_sub_diagrams(UserOptions).
 
 	output_library(_Library, Directory, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library(_Library, Directory, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
 		\+ logtalk::loaded_file(Path),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library(_, _, _).
@@ -312,7 +314,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', directories, Options),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -389,7 +391,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, rdirectory, GraphOptions),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::rdirectory(Project, NormalizedDirectory, UserOptions)))
@@ -450,7 +452,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, directory, GraphOptions),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, directory, NormalizedDirectory))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::directory(Project, NormalizedDirectory, UserOptions)))
@@ -503,7 +505,7 @@
 			::output_edges(Options),
 			::output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, '', files, Options),
-			Format::file_footer(diagram_output_file, Project, Options) ->
+			Format::file_footer(diagram_output_file, Project, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -562,7 +564,7 @@
 			::output_externals(Options),
 			::output_edges(Options),
 			::output_missing_externals(Options),
-			Format::file_footer(diagram_output_file, files, Options) ->
+			Format::file_footer(diagram_output_file, files, [description(Description)| Options]) ->
 			true
 		;	% failure is usually caused by errors in the source itself
 			self(Self),
@@ -573,20 +575,22 @@
 
 	output_all_files(Options) :-
 		self(Self),
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file(Path),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Path)),
 		::output_file(Path, Basename, Directory, Options),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Path)),
 		fail.
 	output_all_files(Options) :-
 		self(Self),
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		::not_excluded_file(ExcludedFiles, Path, Basename),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
 		\+ logtalk::loaded_file(Path),
@@ -672,11 +676,15 @@
 		atom(Title).
 	valid_option(date(Boolean)) :-
 		valid(boolean, Boolean).
+	valid_option(versions(Boolean)) :-
+		valid(boolean, Boolean).
 	valid_option(interface(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(directory_paths(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(file_labels(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(recursive_relations(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(inheritance_relations(Boolean)) :-
 		valid(boolean, Boolean).
@@ -693,6 +701,8 @@
 	valid_option(entity_url_suffix_target(Suffix, Target)) :-
 		atom(Suffix),
 		atom(Target).
+	valid_option(predicate_url_target_format(Generator)) :-
+		atom(Generator).
 	valid_option(zoom(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(zoom_url_suffix(Suffix)) :-
@@ -709,6 +719,8 @@
 		normalize_directory_paths(Prefixes0, Prefixes).
 	fix_option(output_directory(Directory0), output_directory(Directory)) :-
 		normalize_directory_paths([Directory0], [Directory]).
+	fix_option(exclude_directories(Directories0), exclude_directories(Directories)) :-
+		normalize_directory_paths(Directories0, Directories).
 
 	:- protected(diagram_caption/3).
 	:- mode(diagram_caption(+atom, +callable, -atom), one).
@@ -786,7 +798,10 @@
 	sub_directory(TopPath, ExcludedDirectories, SubDirectory, SubDirectoryPath) :-
 		os::directory_files(TopPath, SubDirectories, [type(directory), dot_files(false), paths(relative)]),
 		member(Directory, SubDirectories),
-		\+ member(Directory, ExcludedDirectories),
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(Directory, 0, _, _, ExcludedDirectory)
+		),
 		atom_concat(TopPath, Directory, DirectoryPath0),
 		(	sub_atom(DirectoryPath0, _, 1, 0, '/') ->
 			DirectoryPath = DirectoryPath0
@@ -949,34 +964,40 @@
 	% do nothing by default
 	output_missing_externals(_).
 
-	:- protected(not_excluded_file/3).
-	:- mode(not_excluded_file(+list(atom), +atom, +atom), zero_or_one).
-	:- info(not_excluded_file/3, [
-		comment is 'True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.',
-		argnames is ['ExcludedFiles', 'Path', 'Basename']
+	:- protected(not_excluded_file/4).
+	:- mode(not_excluded_file(+atom, +atom, +list(atom), +list(atom)), zero_or_one).
+	:- info(not_excluded_file/4, [
+		comment is 'True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension. Excluded directories may be listed by full or relative path.',
+		argnames is ['Path', 'Basename', 'ExcludedDirectories', 'ExcludedFiles']
 	]).
 
-	not_excluded_file([], _, _).
-	not_excluded_file([ExcludedFile| ExcludedFiles], Path, Basename) :-
+	not_excluded_file(_, _, [], []) :-
+		% most common case
+		!.
+	not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles) :-
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(Path, 0, _, _, ExcludedDirectory)
+		),
 		% files in the exclusion list may be given by full path or by basename
-		\+ member(Path, [ExcludedFile| ExcludedFiles]),
-		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
+		\+ member(Path, ExcludedFiles),
+		\+ member(Basename, ExcludedFiles),
 		% files in the exclusion list may be given with or without extension
 		\+ (	logtalk::file_type_extension(logtalk, Extension),
 				atom_concat(Source, Extension, Path),
-				member(Source, [ExcludedFile| ExcludedFiles])
+				member(Source, ExcludedFiles)
 		),
 		\+ (	logtalk::file_type_extension(logtalk, Extension),
 				atom_concat(Source, Extension, Basename),
-				member(Source, [ExcludedFile| ExcludedFiles])
+				member(Source, ExcludedFiles)
 		),
 		\+ (	modules_diagram_support::source_file_extension(Extension),
 				atom_concat(Source, Extension, Path),
-				member(Source, [ExcludedFile| ExcludedFiles])
+				member(Source, ExcludedFiles)
 		),
 		\+ (	modules_diagram_support::source_file_extension(Extension),
 				atom_concat(Source, Extension, Basename),
-				member(Source, [ExcludedFile| ExcludedFiles])
+				member(Source, ExcludedFiles)
 		).
 
 	:- protected(output_file_path/4).
@@ -1184,6 +1205,22 @@
 		(	Boolean == true ->
 			Name = Basename
 		;	os::decompose_file_name(Basename, _, Name, _)
+		).
+
+	:- protected(filter_external_file_extension/3).
+	:- mode(filter_external_file_extension(+atom, +list(compound), -atom), one).
+	:- info(filter_external_file_extension/3, [
+		comment is 'Filters the external file name extension depending on the ``file_extensions/1`` option.',
+		argnames is ['Path', 'Options', 'Name']
+	]).
+
+	filter_external_file_extension(Path, Options, Name) :-
+		^^option(file_extensions(Boolean), Options),
+		omit_path_prefix(Path, Options, Relative),
+		os::decompose_file_name(Path, Directory, Basename, _),
+		(	Boolean == true ->
+			Name = Relative
+		;	atom_concat(Directory, Basename, Name)
 		).
 
 	:- protected(add_link_options/3).

@@ -6,10 +6,10 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on August 21, 2022
+##   Last updated on January 9, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.1"
+	echo "$(basename "$0") 0.5"
 	exit 0
 }
 
@@ -122,7 +122,7 @@ usage_help()
 	echo "  -d directory for generated Prolog files (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -p library paths file (absolute path; default is $paths)"
-	echo "  -s settings file (absolute path; default is $settings)"
+	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
@@ -161,15 +161,15 @@ if [ "$p_arg" != "" ] ; then
 	fi
 fi
 
-if [ "$s_arg" != "" ] ; then
+if [ "$s_arg" != "" ] && [ "$s_arg" != "none" ] ; then
 	if [ -f "$s_arg" ] ; then
 		settings="$s_arg"
 	else
 		echo "The $s_arg settings file does not exist!" >&2
 		exit 1
 	fi
-else
-	settings=""
+elif [ "$s_arg" == "none" ] ; then
+	settings="none"
 fi
 
 if [ "$l_arg" != "" ] ; then
@@ -210,6 +210,13 @@ else
 	extension=''
 fi
 
+# use GNU sed if available instead of BSD sed
+if gsed --version >/dev/null 2>&1 ; then
+	sed="gsed"
+else
+	sed="sed"
+fi
+
 cp "$LOGTALKHOME/adapters/ciao.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
@@ -231,17 +238,18 @@ echo ":- discontiguous('\$lgt_included_file_'/4)." >> header.pl
 ciaolgt$extension -e "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')]),halt"
 
 if [ "$compile" != "false" ] ; then
-	ciaolgt$extension -e "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt"
+	ciaolgt$extension -e "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt"
 else
 	cp "$paths" "$temporary/paths_lgt.pl"
 fi
 
-if [ "$settings" != "" ] ; then
+if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 	if [ "$compile" != "false" ] ; then
-		ciaolgt$extension -e "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
+		ciaolgt$extension -e "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
 	else
 		ciaolgt$extension -e "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt"
 	fi
+	$sed -i "s/settings_file, allow/settings_file, deny/" ciao.pl
 	cat \
 		header.pl \
 		ciao.pl \

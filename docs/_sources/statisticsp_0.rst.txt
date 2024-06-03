@@ -10,6 +10,9 @@
 
 Statistical calculations over a list of numbers protocol.
 
+| **Availability:** 
+|    ``logtalk_load(statistics(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:3:0
 | **Date:** 2022-06-20
@@ -459,7 +462,7 @@ Normalizes a list of number such that for the resulting list the mean of is clos
 ``fractile/3``
 ^^^^^^^^^^^^^^
 
-Calculates the smalest value in a list of numbers such that the list elements in its fraction ``P`` are less or equal to that value (with ``P`` in the open interval ``(0.0, 1.0)``). Fails if the list is empty.
+Calculates the smallest value in a list of numbers such that the list elements in its fraction ``P`` are less or equal to that value (with ``P`` in the open interval ``(0.0, 1.0)``). Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``

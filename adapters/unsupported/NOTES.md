@@ -28,26 +28,26 @@ Amzi! Prolog 7.6.1 and later versions
 
 	amzi.pl
 
-For Amzi! Prolog 7.6.1 and later versions. You need to patch the Logtalk 
-compiler (the "core/core.pl" file) by searching for all calls of 
+For Amzi! Prolog 7.6.1 and later versions. You need to patch the Logtalk
+compiler (the "core/core.pl" file) by searching for all calls of
 ':'/2 and wrap them inside call/1 (search for the text "':'(" to locate
-the calls). For better performance, use the Amzi! "acmp" command-line 
-compiler to compile the files "adapters/amzi.pl", "core/core.pl", 
-and "paths/paths.pl" and then load the resulting ".plm" files 
-using the predicate load/1 (you will need to edit the "paths.pl" file 
+the calls). For better performance, use the Amzi! "acmp" command-line
+compiler to compile the files "adapters/amzi.pl", "core/core.pl",
+and "paths/paths.pl" and then load the resulting ".plm" files
+using the predicate load/1 (you will need to edit the "paths.pl" file
 by following the instructions on the "paths/NOTES.md" file).
 
-You will probably need to increase some of the default values (e.g. the 
-"control" parameter) in the "amzi.cfg" file in order to be able to load 
+You will probably need to increase some of the default values (e.g. the
+"control" parameter) in the "amzi.cfg" file in order to be able to load
 some of the libraries or some of the examples.
 
-One potential problem is that the compiler definition of the compare/3 
-built-in predicate returns the atom == instead of = for identical terms 
-(contrary to every other Prolog compiler!). Search the library files for 
+One potential problem is that the compiler definition of the compare/3
+built-in predicate returns the atom == instead of = for identical terms
+(contrary to every other Prolog compiler!). Search the library files for
 all calls of the compare/3 predicate and make the necessary changes.
-The built-in sort/2 predicate does not eliminate duplicates, which may 
-result in problems with some of the examples. Don't forget to use the 
-chdir/1 predicate to set the working directory before loading a library 
+The built-in sort/2 predicate does not eliminate duplicates, which may
+result in problems with some of the examples. Don't forget to use the
+chdir/1 predicate to set the working directory before loading a library
 or an example. Support for settings files not tested.
 
 
@@ -56,8 +56,8 @@ Bin-Prolog 8.x~10.x
 
 	bin.pl
 
-Start BinProlog using "bp -l4". You will need to create project files to 
-workaround the restriction of only one top-level file per interactive 
+Start BinProlog using "bp -l4". You will need to create project files to
+workaround the restriction of only one top-level file per interactive
 session. For instance, the project file for the "metapredicates" example
 will look like (in the Unix version):
 
@@ -70,10 +70,10 @@ will look like (in the Unix version):
 
 You will probably want to have a project file including only the adapter
 and the compiler/runtime files (core.pl) in order to compile the
-examples using logtalk_compile/1-2 (do NOT use logtalk_load/1-2 or the 
-provided loader files). Don't forget to call the cd/1 predicate to set 
-the working directory before compiling the library or an example. 
-Supports smart compilation of source files. Support for settings files 
+examples using logtalk_compile/1-2 (do NOT use logtalk_load/1-2 or the
+provided loader files). Don't forget to call the cd/1 predicate to set
+the working directory before compiling the library or an example.
+Supports smart compilation of source files. Support for settings files
 not tested.
 
 Updated and tested with help of Arun Majumdar.
@@ -86,9 +86,9 @@ IF/Prolog 5.3 and later versions
 
 IF/Prolog 5.3 supports the ISO Prolog standard. No problems expected
 but not tested (my email requests for an evaluation version were never
-answered). Don't forget to use the chdir/1 predicate to set the 
-working directory before loading the library or an example. Supports 
-smart compilation of source files. Does not support the "altdirs" 
+answered). Don't forget to use the chdir/1 predicate to set the
+working directory before loading the library or an example. Supports
+smart compilation of source files. Does not support the "altdirs"
 compiler flag. Full support for settings files on POSIX operating-
 systems. Support for settings files on Windows unknown.
 
@@ -139,19 +139,19 @@ LPA MacProlog32 1.25
 	lpamac.pl
 
 This is my old Prolog development environment. Two known problems: (1) an
-LPA bug in operator handling that make calls like "\+ ::Pred" be 
-interpreted like "::(\+ Pred)" instead of "\+ (::Pred)". A workaround is 
+LPA bug in operator handling that make calls like "\+ ::Pred" be
+interpreted like "::(\+ Pred)" instead of "\+ (::Pred)". A workaround is
 to replace all occurrences of "\+ ::Pred" by "\+ (::Pred)"; (2) If you call
-the \+ operator in your code the writeq/1 built-in don't always output a 
-space after the operator resulting in calls like "\+(...)". Because \+ is 
-not defined as a predicate this will fail. Don't forget to use the dvol/1 
+the \+ operator in your code the writeq/1 built-in don't always output a
+space after the operator resulting in calls like "\+(...)". Because \+ is
+not defined as a predicate this will fail. Don't forget to use the dvol/1
 predicate to set the working directory before loading an example.
-Due to the size of the Logtalk compiler/runtime file, you must load it by 
+Due to the size of the Logtalk compiler/runtime file, you must load it by
 using the consult/1 predicate instead of using the File:Open menu option.
 Be aware that this adapter file redefines some built-ins that
-you may use in your own programs. You must be careful to not consult the 
-adapter file twice. Supports smart compilation of source files. Does not 
-support the "altdirs" compiler flag. Settings files are not supported 
+you may use in your own programs. You must be careful to not consult the
+adapter file twice. Supports smart compilation of source files. Does not
+support the "altdirs" compiler flag. Settings files are not supported
 (must be manually loaded after starting Logtalk).
 
 
@@ -162,11 +162,11 @@ LPA WinProlog32 4.0x
 
 Written with the help of the LPA support team. Of course, if you find
 any bugs please direct your flames to me ;-). Be aware that this adapter
-file redefines some built-ins that you may use in your programs. Don't 
-forget to use the chdir/1 predicate to set the working directory before 
-loading the library or an example. Be careful to not consult the adapter 
-file twice. Supports smart compilation of source files. Does not support 
-the "altdirs" compiler flag. Settings files are not supported (must be 
+file redefines some built-ins that you may use in your programs. Don't
+forget to use the chdir/1 predicate to set the working directory before
+loading the library or an example. Be careful to not consult the adapter
+file twice. Supports smart compilation of source files. Does not support
+the "altdirs" compiler flag. Settings files are not supported (must be
 manually loaded).
 
 

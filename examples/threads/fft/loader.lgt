@@ -22,5 +22,5 @@
 :- initialization((
 	logtalk_load(random(loader)),
 	logtalk_load(cgenerator),
-	logtalk_load(fft)
+	logtalk_load(fft, [optimize(on)])
 )).

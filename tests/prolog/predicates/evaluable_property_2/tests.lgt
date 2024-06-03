@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:3:1,
 		author is 'Paulo Moura',
-		date is 2023-06-24,
+		date is 2023-07-15,
 		comment is 'Unit tests for the proposed evaluable_property/2 built-in predicate.'
 	]).
 
@@ -39,13 +39,13 @@
 		{evaluable_property(abs(_), 1)}.
 
 	test(commons_evaluable_property_2_04, errors([type_error(callable,1), domain_error(evaluable_property,1)])) :-
-		evaluable_property(foo(_), 1).
+		{evaluable_property(foo(_), 1)}.
 
 	test(commons_evaluable_property_2_05, error(domain_error(evaluable_property,foobar))) :-
 		{evaluable_property(abs(_), foobar)}.
 
 	test(commons_evaluable_property_2_06, error(domain_error(evaluable_property,foobar))) :-
-		evaluable_property(foo(_), foobar).
+		{evaluable_property(foo(_), foobar)}.
 
 	test(commons_evaluable_property_2_07, true) :-
 		{evaluable_property(abs(_), built_in)}.

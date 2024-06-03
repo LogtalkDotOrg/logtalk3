@@ -10,9 +10,12 @@
 
 List of numbers protocol.
 
+| **Availability:** 
+|    ``logtalk_load(types(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 1:8:0
-| **Date:** 2022-06-20
+| **Version:** 1:9:0
+| **Date:** 2023-12-10
 
 | **Compilation flags:**
 |    ``static``
@@ -417,6 +420,25 @@ Rescales all numbers in a list by the given factor.
 | **Mode and number of proofs:**
 |    ``rescale(+list(integer),+integer,-list(integer))`` - ``one``
 |    ``rescale(+list(number),+float,-list(float))`` - ``one``
+
+
+------------
+
+.. index:: least_common_multiple/2
+.. _numberlistp/0::least_common_multiple/2:
+
+``least_common_multiple/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the least common multiple of a list of two or more positive integers. Fails if the list is empty or contains a single element. Fails also if any of the elements is zero. May require backend support for unbound integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``least_common_multiple(Integers,LeastCommonMultiple)``
+| **Mode and number of proofs:**
+|    ``least_common_multiple(+list(positive_integer),-positive_integer)`` - ``zero_or_one``
 
 
 ------------

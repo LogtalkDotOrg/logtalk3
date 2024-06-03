@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,10 +39,10 @@ importing the category that contains the predicate clause). This private
 method is implemented as a unification between its argument and the
 corresponding implicit execution-context argument in the predicate
 clause making the call. This unification occurs at the clause head when
-the argument is not instantiated (the most common case). This method is
-useful for avoiding hard-coding references to an object identifier or
-for retrieving all object parameters with a single call when using
-parametric objects.
+the argument is not bound at compile time (the most common case). This
+method is useful for avoiding hard-coding references to an object
+identifier or for retrieving all object parameters with a single call
+when using parametric objects.
 
 Modes and number of proofs
 --------------------------

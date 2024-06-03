@@ -21,17 +21,17 @@ ________________________________________________________________________
 `xml_parser`
 ============
 
-This folder contains a Logtalk version of John Fletcher's Prolog XML 
+This folder contains a Logtalk version of John Fletcher's Prolog XML
 parser:
 
 https://binding-time.co.uk/index.php/Parsing_XML_with_Prolog
 
-For a detailed description of this XML parser, please see the comments 
-in the `xml.lgt` source file or convert the automatically generated 
+For a detailed description of this XML parser, please see the comments
+in the `xml.lgt` source file or convert the automatically generated
 documentation to HTML or PDF. For sample queries, please see the `SCRIPT.txt`
 file.
 
-See the copyright and license information on the contributed files for 
+See the copyright and license information on the contributed files for
 usage and distributions conditions.
 
 

@@ -24,7 +24,7 @@
 
 	:- info([
 		version is 0:0:0,
-		author is 'Orginal example by Paul Tarau et al. Adapted to Logtalk by Paulo Moura.',
+		author is 'Original example by Paul Tarau et al. Adapted to Logtalk by Paulo Moura.',
 		date is 2014-06-26,
 		comment is 'Implementation of Hidden Accumulator Grammars (HAGs) using linear assumptions.'
 	]).

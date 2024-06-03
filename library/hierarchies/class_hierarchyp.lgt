@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2000-7-24,
+		date is 2000-07-24,
 		comment is 'Class hierarchy protocol.',
 		see_also is [class_hierarchy]
 	]).

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,7 +30,9 @@
 		graph_language_registry,
 		graph_language_protocol,
 		dot_graph_language
-		], [optimize(on)]),
+	], [
+		optimize(on)
+	]),
 	logtalk_load([
 		diagram,
 		entity_diagram,
@@ -47,5 +49,7 @@
 		library_load_diagram,
 		library_dependency_diagram,
 		diagrams
-		], [optimize(on)])
+	], [
+		optimize(on)
+	])
 )).

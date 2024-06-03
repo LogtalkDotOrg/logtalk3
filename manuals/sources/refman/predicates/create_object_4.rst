@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,6 +46,9 @@ recycle, whenever possible, the identifiers.
 
 When creating a new dynamic parametric object, access to the object parameters
 must use the :ref:`methods_parameter_2` built-in execution context method.
+
+Declared predicates (using scope clauses in the ``Directives`` argument)
+are implicitly declared also as dynamic.
 
 When using Logtalk multi-threading features, predicates calling this
 built-in predicate may need to be declared synchronized in order to

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,15 +22,17 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2023-04-26,
+		date is 2024-06-03,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
 			'Predicate spy point' - 'Specified as a ground term ``Functor/Arity``.',
 			'Non-terminal spy point' - 'Specified as a ground term ``Functor//Arity``.',
 			'Line number spy point (aka breakpoint)' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
+			'Context spy point' - 'Specified as a ``(Sender, This, Self, Goal)`` tuple.',
+			'Log point' - 'Specified as a ``(Entity, Line, Message)`` tuple.',
 			'Leash port shorthands' - '``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.'
 		],
 		see_also is [debugger]
@@ -42,7 +44,7 @@
 	:- public(reset/0).
 	:- mode(reset, one).
 	:- info(reset/0, [
-		comment is 'Resets all debugging settings, including spy points and leashed ports, and turns off debugging.',
+		comment is 'Resets all debugging settings (including log points, spy points, and leashed ports) and turns off debugging.',
 		see_also is [nospyall/0]
 	]).
 
@@ -62,7 +64,7 @@
 	:- public(debugging/0).
 	:- mode(debugging, one).
 	:- info(debugging/0, [
-		comment is 'Reports current debugging settings, including spy points.'
+		comment is 'Reports current debugging settings, including spy points and log points.'
 	]).
 
 	:- public(debugging/1).
@@ -149,6 +151,37 @@
 	:- info(leashing/1, [
 		comment is 'Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).',
 		argnames is ['Port']
+	]).
+
+	:- public(log/3).
+	:- mode(log(@object_identifier, +integer, +atom), zero_or_one).
+	:- mode(log(@category_identifier, +integer, +atom), zero_or_one).
+	:- info(log/3, [
+		comment is 'Sets a log point. Fails if the log point is invalid.',
+		argnames is ['Entity', 'Line', 'Message']
+	]).
+
+	:- public(logging/3).
+	:- mode(log(?object_identifier, ?integer, ?atom), zero_or_more).
+	:- mode(log(?category_identifier, ?integer, ?atom), zero_or_more).
+	:- info(logging/3, [
+		comment is 'Enumerates, by backtracking, all defined log points.',
+		argnames is ['Entity', 'Line', 'Message']
+	]).
+
+	:- public(nolog/3).
+	:- mode(log(@var_or(object_identifier), @var_or(integer), @var_or(atom)), one).
+	:- mode(log(@var_or(category_identifier), @var_or(integer), @var_or(atom)), one).
+	:- info(nolog/3, [
+		comment is 'Removes all matching log points.',
+		argnames is ['Entity', 'Line', 'Message']
+	]).
+
+	:- public(nologall/0).
+	:- mode(nologall, one).
+	:- info(nologall/0, [
+		comment is 'Removes all log points.',
+		see_also is [reset/0]
 	]).
 
 :- end_protocol.

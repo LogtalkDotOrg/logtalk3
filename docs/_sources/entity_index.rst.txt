@@ -4,7 +4,7 @@
 Entities
 ========
 
-To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used.
+To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used. The loading goal can be found in the entity documentation.
 
 
 
@@ -40,8 +40,10 @@ Categories
    lgtdoc_messages <lgtdoc_messages_0>
    lgtunit_messages <lgtunit_messages_0>
    library_diagram(Format) <library_diagram_1>
+   listing <listing_0>
    logging <logging_0>
    monitor <monitor_0>
+   mutations <mutations_0>
    observer <observer_0>
    options <options_0>
    os_types <os_types_0>
@@ -49,6 +51,7 @@ Categories
    packs_messages <packs_messages_0>
    proto_hierarchy <proto_hierarchy_0>
    read_file <read_file_0>
+   recorded_database_core <recorded_database_core_0>
    statistics <statistics_0>
    subject <subject_0>
    ulid_types <ulid_types_0>
@@ -98,6 +101,11 @@ Objects
    debug_expansion(Mode) <debug_expansion_1>
    debug_messages <debug_messages_0>
    debugger <debugger_0>
+   default_atom_mutations <default_atom_mutations_0>
+   default_compound_mutations <default_compound_mutations_0>
+   default_float_mutations <default_float_mutations_0>
+   default_integer_mutations <default_integer_mutations_0>
+   default_list_mutations <default_list_mutations_0>
    default_workflow_hook <default_workflow_hook_0>
    demodb <demodb_0>
    dfs_interpreter <dfs_interpreter_0>
@@ -182,6 +190,7 @@ Objects
    minheap <minheap_0>
    minimal_output <minimal_output_0>
    modules_diagram_support <modules_diagram_support_0>
+   mutations_store <mutations_store_0>
    natural <natural_0>
    navltree <navltree_0>
    nbintree <nbintree_0>
@@ -209,6 +218,7 @@ Objects
    random <random_0>
    rbtree <rbtree_0>
    reader <reader_0>
+   recorded_database <recorded_database_0>
    redis <redis_0>
    registries <registries_0>
    registry_loader_hook <registry_loader_hook_0>
@@ -231,6 +241,7 @@ Objects
    timeout <timeout_0>
    toychrdb <toychrdb_0>
    tsv <tsv_0>
+   tsv(Header) <tsv_1>
    tutor <tutor_0>
    type <type_0>
    ulid <ulid_0>
@@ -312,6 +323,7 @@ Protocols
    term_io_protocol <term_io_protocol_0>
    termp <termp_0>
    timep <timep_0>
+   tsv_protocol <tsv_protocol_0>
    ulid_protocol <ulid_protocol_0>
    union_find_protocol <union_find_protocol_0>
    uuid_protocol <uuid_protocol_0>

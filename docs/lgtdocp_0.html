@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lgtdocp &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>lgtdocp &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -110,11 +113,13 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -125,12 +130,14 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -189,12 +196,18 @@
              
   <p class="right" id="lgtdocp-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="lgtdocp">
-<h1><code class="docutils literal notranslate"><span class="pre">lgtdocp</span></code><a class="headerlink" href="#lgtdocp" title="Permalink to this heading"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">lgtdocp</span></code><a class="headerlink" href="#lgtdocp" title="Link to this heading"></a></h1>
 <p>Documenting tool protocol.</p>
 <div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(lgtdoc(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 5:1:0</div>
-<div class="line"><strong>Date:</strong> 2023-06-20</div>
+<div class="line"><strong>Version:</strong> 6:0:0</div>
+<div class="line"><strong>Date:</strong> 2024-03-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -214,20 +227,20 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Compiling files for generating XML documentation: All source files must be compiled with the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag turned on.</p></li>
-<li><p>xml_spec(Specification) option: XML documenting files specification format. Possible option values are <code class="docutils literal notranslate"><span class="pre">dtd</span></code> (DTD specification; default) and <code class="docutils literal notranslate"><span class="pre">xsd</span></code> (XML Schema specification).</p></li>
-<li><p>xml_spec_reference(Reference) option: Reference to the XML specification file in XML documenting files. Possible values are <code class="docutils literal notranslate"><span class="pre">local</span></code> (default; DTD/XSD file in same folder as XML files), <code class="docutils literal notranslate"><span class="pre">web</span></code> (logtalk.org website DTD/XSD file), and <code class="docutils literal notranslate"><span class="pre">standalone</span></code> (no reference to specification files).</p></li>
-<li><p>entity_xsl_file(File) option: XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_entity_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
-<li><p>index_xsl_file(File) option: XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_index_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
-<li><p>xml_docs_directory(Directory) option: Directory where the XML documenting files will be generated. The default value is <code class="docutils literal notranslate"><span class="pre">./xml_docs</span></code>, a sub-directory of the source files directory.</p></li>
-<li><p>bom(Boolean) option: Defines if a BOM should be added to the generated XML documenting files.</p></li>
-<li><p>encoding(Encoding) option: Encoding to be used for the generated XML documenting files.</p></li>
-<li><p>omit_path_prefixes(Prefixes) option: List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</p></li>
-<li><p>exclude_files(List) option: List of files to exclude when generating the XML documenting files.</p></li>
-<li><p>exclude_paths(List) option: List of relative library paths to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
-<li><p>exclude_prefixes(List) option: List of path prefixes to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
-<li><p>exclude_entities(List) option: List of entities to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
-<li><p>sort_predicates(Boolean) option: Sort entity predicates (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
-<li><p>Known issues: The most appropriated options may depends on the XSL processor you intend to use. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors are buggy an may not work with the default option values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xml_spec(Specification)</span></code> option: XML documenting files specification format. Possible option values are <code class="docutils literal notranslate"><span class="pre">dtd</span></code> (DTD specification; default) and <code class="docutils literal notranslate"><span class="pre">xsd</span></code> (XML Schema specification).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xml_spec_reference(Reference)</span></code> option: Reference to the XML specification file in XML documenting files. Possible values are <code class="docutils literal notranslate"><span class="pre">local</span></code> (default; DTD/XSD file in same folder as XML files), <code class="docutils literal notranslate"><span class="pre">web</span></code> (logtalk.org website DTD/XSD file), and <code class="docutils literal notranslate"><span class="pre">standalone</span></code> (no reference to specification files).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entity_xsl_file(File)</span></code> option: XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_entity_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">index_xsl_file(File)</span></code> option: XSLT file to use with generated XML documenting files. Default is <code class="docutils literal notranslate"><span class="pre">logtalk_index_to_xml.xsl</span></code>, allowing the XML files to be viewed by opening them with a browser supporting XSLT (after running the <code class="docutils literal notranslate"><span class="pre">lgt2xml.sh</span></code> script on the output directory).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xml_docs_directory(Directory)</span></code> option: Directory where the XML documenting files will be generated. The default value is <code class="docutils literal notranslate"><span class="pre">./xml_docs</span></code>, a sub-directory of the source files directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bom(Boolean)</span></code> option: Defines if a BOM should be added to the generated XML documenting files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encoding(Encoding)</span></code> option: Encoding to be used for the generated XML documenting files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">omit_path_prefixes(Prefixes)</span></code> option: List of path prefixes (atoms) to omit when writing directory paths. The default value is to omit the home directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_files(List)</span></code> option: List of files to exclude when generating the XML documenting files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_paths(List)</span></code> option: List of relative library paths to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>). All sub-directories of the excluded directories are also excluded.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_prefixes(List)</span></code> option: List of path prefixes to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_entities(List)</span></code> option: List of entities to exclude when generating the XML documenting files (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sort_predicates(Boolean)</span></code> option: Sort entity predicates (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>).</p></li>
+<li><p>Known issues: Some options may depend on the used XSL processor. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors (e.g. <code class="docutils literal notranslate"><span class="pre">fop2</span></code>) reject reference to a DTD.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -270,9 +283,9 @@
 </ul>
 </nav>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="rlibraries-2">
-<span id="lgtdocp-0-rlibraries-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibraries/2</span></code></a><a class="headerlink" href="#rlibraries-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-rlibraries-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibraries/2</span></code></a><a class="headerlink" href="#rlibraries-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in all given libraries and their sub-libraries using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -293,7 +306,7 @@
 <hr class="docutils" />
 </section>
 <section id="rlibraries-1">
-<span id="lgtdocp-0-rlibraries-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibraries/1</span></code></a><a class="headerlink" href="#rlibraries-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-rlibraries-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibraries/1</span></code></a><a class="headerlink" href="#rlibraries-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in all given libraries and their sub-libraries using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -314,7 +327,7 @@
 <hr class="docutils" />
 </section>
 <section id="rlibrary-2">
-<span id="lgtdocp-0-rlibrary-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibrary/2</span></code></a><a class="headerlink" href="#rlibrary-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-rlibrary-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibrary/2</span></code></a><a class="headerlink" href="#rlibrary-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a library and its sub-libraries using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -345,7 +358,7 @@
 <hr class="docutils" />
 </section>
 <section id="rlibrary-1">
-<span id="lgtdocp-0-rlibrary-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a><a class="headerlink" href="#rlibrary-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-rlibrary-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code></a><a class="headerlink" href="#rlibrary-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a library and its sub-libraries using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -376,7 +389,7 @@
 <hr class="docutils" />
 </section>
 <section id="libraries-2">
-<span id="lgtdocp-0-libraries-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">libraries/2</span></code></a><a class="headerlink" href="#libraries-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-libraries-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">libraries/2</span></code></a><a class="headerlink" href="#libraries-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in all given libraries using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -397,7 +410,7 @@
 <hr class="docutils" />
 </section>
 <section id="libraries-1">
-<span id="lgtdocp-0-libraries-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">libraries/1</span></code></a><a class="headerlink" href="#libraries-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-libraries-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">libraries/1</span></code></a><a class="headerlink" href="#libraries-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in all given libraries using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -418,7 +431,7 @@
 <hr class="docutils" />
 </section>
 <section id="library-2">
-<span id="lgtdocp-0-library-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">library/2</span></code></a><a class="headerlink" href="#library-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-library-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">library/2</span></code></a><a class="headerlink" href="#library-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a library using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -449,7 +462,7 @@
 <hr class="docutils" />
 </section>
 <section id="library-1">
-<span id="lgtdocp-0-library-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">library/1</span></code></a><a class="headerlink" href="#library-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-library-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">library/1</span></code></a><a class="headerlink" href="#library-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a library using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -470,7 +483,7 @@
 <hr class="docutils" />
 </section>
 <section id="rdirectories-2">
-<span id="lgtdocp-0-rdirectories-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectories/2</span></code></a><a class="headerlink" href="#rdirectories-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-rdirectories-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectories/2</span></code></a><a class="headerlink" href="#rdirectories-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in all given directories and their sub-directories using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -491,7 +504,7 @@
 <hr class="docutils" />
 </section>
 <section id="rdirectories-1">
-<span id="lgtdocp-0-rdirectories-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectories/1</span></code></a><a class="headerlink" href="#rdirectories-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-rdirectories-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectories/1</span></code></a><a class="headerlink" href="#rdirectories-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in all given directories and their sub-directories using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -512,7 +525,7 @@
 <hr class="docutils" />
 </section>
 <section id="rdirectory-2">
-<span id="lgtdocp-0-rdirectory-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectory/2</span></code></a><a class="headerlink" href="#rdirectory-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-rdirectory-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectory/2</span></code></a><a class="headerlink" href="#rdirectory-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a directory and its sub-directories using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -543,7 +556,7 @@
 <hr class="docutils" />
 </section>
 <section id="rdirectory-1">
-<span id="lgtdocp-0-rdirectory-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code></a><a class="headerlink" href="#rdirectory-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-rdirectory-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code></a><a class="headerlink" href="#rdirectory-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a directory and its sub-directories using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -574,7 +587,7 @@
 <hr class="docutils" />
 </section>
 <section id="directories-2">
-<span id="lgtdocp-0-directories-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directories/2</span></code></a><a class="headerlink" href="#directories-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-directories-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directories/2</span></code></a><a class="headerlink" href="#directories-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in all given directories using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -595,7 +608,7 @@
 <hr class="docutils" />
 </section>
 <section id="directories-1">
-<span id="lgtdocp-0-directories-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directories/1</span></code></a><a class="headerlink" href="#directories-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-directories-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directories/1</span></code></a><a class="headerlink" href="#directories-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in all given directories using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -616,7 +629,7 @@
 <hr class="docutils" />
 </section>
 <section id="directory-2">
-<span id="lgtdocp-0-directory-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory/2</span></code></a><a class="headerlink" href="#directory-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-directory-2"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory/2</span></code></a><a class="headerlink" href="#directory-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a directory using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -647,7 +660,7 @@
 <hr class="docutils" />
 </section>
 <section id="directory-1">
-<span id="lgtdocp-0-directory-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a><a class="headerlink" href="#directory-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-directory-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">directory/1</span></code></a><a class="headerlink" href="#directory-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a directory using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -668,7 +681,7 @@
 <hr class="docutils" />
 </section>
 <section id="files-2">
-<span id="lgtdocp-0-files-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">files/2</span></code></a><a class="headerlink" href="#files-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-files-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">files/2</span></code></a><a class="headerlink" href="#files-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in loaded source files using the specified options. The files can be given by name, basename, full path, or using library notation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -689,7 +702,7 @@
 <hr class="docutils" />
 </section>
 <section id="files-1">
-<span id="lgtdocp-0-files-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">files/1</span></code></a><a class="headerlink" href="#files-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-files-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">files/1</span></code></a><a class="headerlink" href="#files-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in loaded source files using default options. The files can be given by name, basename, full path, or using library notation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -710,7 +723,7 @@
 <hr class="docutils" />
 </section>
 <section id="file-2">
-<span id="lgtdocp-0-file-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/2</span></code></a><a class="headerlink" href="#file-2" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-file-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/2</span></code></a><a class="headerlink" href="#file-2" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a loaded source file using the specified options. The file can be given by name, basename, full path, or using library notation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -731,7 +744,7 @@
 <hr class="docutils" />
 </section>
 <section id="file-1">
-<span id="lgtdocp-0-file-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a><a class="headerlink" href="#file-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-file-1"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file/1</span></code></a><a class="headerlink" href="#file-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all entities in a loaded source file using default options. The file can be given by name, basename, full path, or using library notation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -752,7 +765,7 @@
 <hr class="docutils" />
 </section>
 <section id="all-1">
-<span id="lgtdocp-0-all-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">all/1</span></code></a><a class="headerlink" href="#all-1" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-all-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">all/1</span></code></a><a class="headerlink" href="#all-1" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all loaded entities using the specified options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -773,7 +786,7 @@
 <hr class="docutils" />
 </section>
 <section id="all-0">
-<span id="lgtdocp-0-all-0"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a><a class="headerlink" href="#all-0" title="Permalink to this heading"></a></h3>
+<span id="lgtdocp-0-all-0"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">all/0</span></code></a><a class="headerlink" href="#all-0" title="Link to this heading"></a></h3>
 <p>Creates XML documenting files for all loaded entities using default options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -791,15 +804,15 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -819,7 +832,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-06-06,
+		date is 2024-03-15,
 		comment is 'Unit tests for the "hooks" example.'
 	]).
 
@@ -34,5 +34,13 @@
 
 	test(hooks_02, true(Items == [alpha, omega, zeta])) :-
 		object::items(Items).
+
+	test(hooks_03, true(Author == 'Paulo Moura')) :-
+		object_property(object, info(Items)),
+		list::memberchk(author(Author), Items).
+
+	test(hooks_04, true(License == 'Apache-2.0')) :-
+		object_property(object, info(Items)),
+		list::memberchk(license(License), Items).
 
 :- end_object.

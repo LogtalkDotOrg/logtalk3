@@ -13,9 +13,12 @@
 
 Common predicates for generating diagrams.
 
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 2:52:1
-| **Date:** 2023-05-29
+| **Version:** 3:5:0
+| **Date:** 2024-04-01
 
 | **Compilation flags:**
 |    ``static``
@@ -806,21 +809,21 @@ Outputs missing external nodes (usually due to unloaded resources) that are refe
 
 ------------
 
-.. index:: not_excluded_file/3
-.. _diagram/1::not_excluded_file/3:
+.. index:: not_excluded_file/4
+.. _diagram/1::not_excluded_file/4:
 
-``not_excluded_file/3``
+``not_excluded_file/4``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension.
+True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension. Excluded directories may be listed by full or relative path.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``not_excluded_file(ExcludedFiles,Path,Basename)``
+|    ``not_excluded_file(Path,Basename,ExcludedDirectories,ExcludedFiles)``
 | **Mode and number of proofs:**
-|    ``not_excluded_file(+list(atom),+atom,+atom)`` - ``zero_or_one``
+|    ``not_excluded_file(+atom,+atom,+list(atom),+list(atom))`` - ``zero_or_one``
 
 
 ------------
@@ -935,6 +938,25 @@ Filters the file name extension depending on the ``file_extensions/1`` option.
 |    ``filter_file_extension(Basename,Options,Name)``
 | **Mode and number of proofs:**
 |    ``filter_file_extension(+atom,+list(compound),-atom)`` - ``one``
+
+
+------------
+
+.. index:: filter_external_file_extension/3
+.. _diagram/1::filter_external_file_extension/3:
+
+``filter_external_file_extension/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Filters the external file name extension depending on the ``file_extensions/1`` option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``filter_external_file_extension(Path,Options,Name)``
+| **Mode and number of proofs:**
+|    ``filter_external_file_extension(+atom,+list(compound),-atom)`` - ``one``
 
 
 ------------

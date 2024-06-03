@@ -28,5 +28,5 @@ have side effects.
 The `slow_print` example was originally coded for a Rosetta Code contribution
 available at:
 
-	http://rosettacode.org/wiki/Mutex#Logtalk
+	https://rosettacode.org/wiki/Mutex#Logtalk
 

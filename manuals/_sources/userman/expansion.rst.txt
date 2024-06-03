@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,12 +30,13 @@ systems by providing the user with fine-grained control on *if*, *when*,
 and *how* expansions are applied. It allows declaring in a source file itself
 which expansions, if any, will be used when compiling it. It allows declaring
 which expansions will be used when compiling a file using compile and loading
-predicate options. It defines a concept of *hook objects* that can be used
-as building blocks to create custom and reusable *expansion workflows* with
-explicit and well defined semantics. It prevents the simply act of loading
-expansion rules affecting subsequent compilation of files. It prevents
-conflicts between groups of expansion rules of different origins. It avoids
-a set of buggy expansion rules from breaking other sets of expansions rules.
+predicate options. It also allows defining a default expansion for all source
+files. It defines a concept of *hook objects* that can be used as building
+blocks to create custom and reusable *expansion workflows* with explicit and
+well defined semantics. It prevents the simply act of loading expansion rules
+affecting subsequent compilation of files. It prevents conflicts between groups
+of expansion rules of different origins. It avoids a set of buggy expansion
+rules from breaking other sets of expansions rules.
 
 
 Defining expansions
@@ -75,9 +76,17 @@ and :ref:`methods_expand_goal_2` built-in methods or called automatically
 by the compiler when compiling a source file (see the section below on *hook
 objects*).
 
+In the case of source files referenced in :ref:`directives_include_1`
+directives, expansions are only applied automatically when the directives are
+found in source files, not when used as arguments in the :ref:`predicates_create_object_4`,
+:ref:`predicates_create_protocol_3`, and :ref:`predicates_create_category_4`,
+predicates. This restriction prevents inconsistent results when, for example,
+an expansion is defined for a predicate with clauses found in both an included
+file and as argument in a call to the ``create_object/4`` predicate.
+
 Clauses for the ``term_expansion/2`` predicate are called until of them
-succeeds. The returned expansion can be a single term or a list of terms. 
-For example:
+succeeds. The returned expansion can be a single term or a list of terms
+(including the empty list). For example:
 
 .. code-block:: text
 
@@ -145,6 +154,12 @@ expansion of the same goal. For example, consider the following object:
 The expansion of the goal ``a`` results in the goal ``(a -> b; c)`` with no
 attempt to further expand the ``a``, ``b``, and ``c`` goals as they have
 already been expanded.
+
+Goal-expansion applies to goal arguments of control constructs, meta-arguments
+in built-in or ``user`` defined meta-predicates, meta-arguments in local
+user-defined meta-predicates, meta-arguments in meta-predicate messages when
+static binding is possible, and ``initialization/1``, ``if/1``, and ``elif/1``
+directives.
 
 
 Expanding grammar rules
@@ -344,7 +359,7 @@ Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
 
    When a source file also contains plain Prolog directives and predicates,
    these are term-expanded but not goal-expanded (with the exception of the
-   ``initialization/1``, ``if/``, and ``elif/1`` directives, where the goal
+   ``initialization/1``, ``if/1``, and ``elif/1`` directives, where the goal
    argument is expanded to improve code portability across backends).
 
 

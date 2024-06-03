@@ -20,6 +20,7 @@
 
 
 :- set_logtalk_flag(singleton_variables, silent).
+:- set_logtalk_flag(unknown_entities, silent).
 
 
 :- object(sample(_PV1_, _PV2_)).
@@ -27,3 +28,46 @@
 	a(A,B,C,B,A).
 
 :- end_object.
+
+
+:- protocol(ptc1).
+
+:- end_protocol.
+
+
+:- protocol(ptc2,
+	extends(ptc1)).
+
+:- end_protocol.
+
+
+:- category(ctg2,
+	implements(ptc1),
+	extends(protected::ctg1)).
+
+:- end_category.
+
+
+:- object(obj1,
+	implements((ptc1, ptc2)),
+	imports(ctg1),
+	extends(private::obj2)).
+
+:- end_object.
+
+
+:- object(obj3,
+	implements(ptc2),
+	imports(private::ctg2),
+	instantiates(obj4),
+	specializes(obj5)).
+
+	:- set_logtalk_flag(complements, allow).
+
+:- end_object.
+
+
+:- category(ctg3,
+	complements(obj3)).
+
+:- end_category.

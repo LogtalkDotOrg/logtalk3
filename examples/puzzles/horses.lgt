@@ -40,8 +40,8 @@ Published on the web:
 :- object(horses).
 
 	:- info([
-		version is 1:0:0,
-		date is 2004-5-1,
+		version is 1:0:1,
+		date is 2023-11-30,
 		author is 'Paulo Moura',
 		comment is 'Horse show logical puzzle'
 	]).
@@ -69,7 +69,7 @@ Published on the web:
 		member(h(gopher, gelding, _, _, _), Solution),
 		member(h(doc, gelding, _, _, _), Solution),
 		member(h(danny, gelding, _, _, _), Solution),
-		member(h(gopher, _, gray, _, P), Solution), P \= 1, P \= 5,
+		member(h(gopher, _, gray, _, P), Solution), P =\= 1, P =\= 5,
 		member(h(_, mare, white, danny, _), Solution),
 		member(h(_, _, _, sue, Pi), Solution), member(h(april, _, _, _, Pj), Solution), Pi < Pj,
 		member(h(april, _, _, _, Pj), Solution), member(h(_, mare, black, _, Pk), Solution), Pj < Pk,

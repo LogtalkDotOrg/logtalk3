@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,12 +23,20 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:27:1,
+		version is 2:30:1,
 		author is 'Paulo Moura',
-		date is 2022-07-11,
+		date is 2024-04-01,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
+	]).
+
+	:- private(sub_diagram_/1).
+	:- dynamic(sub_diagram_/1).
+	:- mode(sub_diagram_(?atom), zero_or_more).
+	:- info(sub_diagram_/1, [
+		comment is 'Table of file sub-diagrams to support their generation.',
+		argnames is ['File']
 	]).
 
 	:- uses(list, [
@@ -36,22 +44,36 @@
 	]).
 
 	% output the file node
-	output_file(Path, Basename, _, Options) :-
+	output_file(Path, Basename, _Directory, Options) :-
 		^^filter_file_extension(Basename, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
+		(	(	logtalk::loaded_file_property(Path, object(_))
+			;	logtalk::loaded_file_property(Path, protocol(_))
+			;	logtalk::loaded_file_property(Path, category(_))
+			;	modules_diagram_support::module_property(_, file(Path))
+			) ->
+			parameter(1, Format),
+			entity_diagram(Format)::diagram_name_suffix(Suffix),
+			os::decompose_file_name(Path, _, File, _),
+			^^add_node_zoom_option(File, Suffix, LinkingOptions, NodeOptions)
+		;	% file doesn't define any entity
+			NodeOptions = LinkingOptions
+		),
+		assertz(sub_diagram_(Path)),
 		(	member(directory_paths(true), Options) ->
-			^^output_node(Path, Name, file, [Relative], file, LinkingOptions)
-		;	^^output_node(Path, Name, file, [], file, LinkingOptions)
+			^^output_node(Path, Name, file, [Relative], file, NodeOptions)
+		;	^^output_node(Path, Name, file, [], file, NodeOptions)
 		),
 		^^remember_included_file(Path),
 		fail.
 	% output nodes for all included files
 	output_file(Path, _, _, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, includes(IncludePath)),
 		os::decompose_file_name(IncludePath, _, IncludeBasename),
-		::not_excluded_file(ExcludedFiles, IncludePath, IncludeBasename),
+		^^not_excluded_file(IncludePath, IncludeBasename, ExcludedDirectories, ExcludedFiles),
 		^^filter_file_extension(IncludeBasename, Options, Name),
 		^^add_link_options(IncludePath, Options, LinkingOptions),
 		^^omit_path_prefix(IncludePath, Options, Relative),
@@ -63,28 +85,31 @@
 		fail.
 	% output edges for all files loaded by this file
 	output_file(Path, _, _, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(OtherPath, parent(Path)),
 		logtalk::loaded_file_property(OtherPath, basename(OtherBasename)),
-			::not_excluded_file(ExcludedFiles, OtherPath, OtherBasename),
+			^^not_excluded_file(OtherPath, OtherBasename, ExcludedDirectories, ExcludedFiles),
 			^^remember_referenced_logtalk_file(OtherPath),
 			^^save_edge(Path, OtherPath, [loads], loads_file, [tooltip(loads)| Options]),
 		fail.
 	% output edges for all files included by this file
 	output_file(Path, _, _, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, includes(IncludePath)),
 		logtalk::loaded_file_property(IncludePath, basename(IncludeBasename)),
-			::not_excluded_file(ExcludedFiles, IncludePath, IncludeBasename),
+			^^not_excluded_file(IncludePath, IncludeBasename, ExcludedDirectories, ExcludedFiles),
 			^^remember_referenced_logtalk_file(IncludePath),
 			^^save_edge(Path, IncludePath, [includes], includes_file, [tooltip(includes)| Options]),
 		fail.
 	% output edges for loaded Prolog module files
 	output_file(Path, _, _, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(OtherPath, parent(Path)),
 		modules_diagram_support::loaded_file_property(OtherPath, basename(OtherBasename)),
-			::not_excluded_file(ExcludedFiles, OtherPath, OtherBasename),
+			^^not_excluded_file(OtherPath, OtherBasename, ExcludedDirectories, ExcludedFiles),
 			(	logtalk::loaded_file_property(OriginalPath, target(OtherPath)) ->
 				(	% make sure we don't get circular references as Path can be a Logtalk
 					% file and the generated intermediate Prolog file may have a link to
@@ -102,12 +127,27 @@
 		fail.
 	output_file(_, _, _, _).
 
+	output_sub_diagrams(Options) :-
+		parameter(1, Format),
+		^^option(zoom(true), Options),
+		entity_diagram(Format)::default_option(layout(Layout)),
+		sub_diagram_(File),
+		entity_diagram(Format)::file(File, [layout(Layout)| Options]),
+		fail.
+	output_sub_diagrams(_).
+
+	reset :-
+		^^reset,
+		retractall(sub_diagram_(_)).
+
 	% by default, diagram layout is top to bottom:
 	default_option(layout(top_to_bottom)).
 	% by default, diagram title is empty:
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, don't omit any prefix when printing paths:
 	default_option(omit_path_prefixes(Prefixes)) :-
 		(	logtalk::expand_library_path(home, Home) ->
@@ -125,7 +165,7 @@
 	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
-	default_option(output_directory('./')).
+	default_option(output_directory('./dot_dias')).
 	% by default, don't exclude any directories:
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:

@@ -23,23 +23,28 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-02-12,
+		date is 2024-01-30,
 		comment is 'Unit tests for the threaded_cancel/1 built-in predicate.'
 	]).
 
-	throws(threaded_cancel_1_01, error(instantiation_error, logtalk(threaded_cancel(_), _))) :-
-		{threaded_cancel(_)}.
+	:- threaded.
 
-	succeeds(threaded_cancel_1_02) :-
-		{	threaded_call(true, Tag),
-			threaded_cancel(Tag)
-		}.
+	test(threaded_cancel_1_01, error(instantiation_error)) :-
+		threaded_cancel(_).
 
-	succeeds(threaded_cancel_1_03) :-
-		{	threaded_once(true, Tag),
-			threaded_cancel(Tag)
-		}.
+	test(threaded_cancel_1_02, true) :-
+		threaded_call(true, Tag),
+		threaded_cancel(Tag).
+
+	test(threaded_cancel_1_03, true) :-
+		threaded_once(true, Tag),
+		threaded_cancel(Tag).
+
+	test(threaded_cancel_1_04, true) :-
+		threaded_once(true, Tag),
+		threaded_cancel(Tag),
+		threaded_cancel(Tag).
 
 :- end_object.

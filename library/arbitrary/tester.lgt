@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@
 	% load the "arbitrary" category in debug mode to support collecting code coverage data
 	logtalk_load(arbitrary, [debug(on), source_data(on), clean(on)]),
 	logtalk_load([lgtunit(lgtunit), lgtunit(lgtunit_messages)], [optimize(on)]),
-	logtalk_load('test_files/custom'),
+	logtalk_load(['test_files/binary_tree', 'test_files/odd', 'test_files/scoped']),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run
 )).

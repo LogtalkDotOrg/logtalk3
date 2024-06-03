@@ -27,15 +27,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:1,
+		version is 2:1:0,
 		author is 'Jacinto Dávila',
-		date is 2023-03-13,
+		date is 2023-11-21,
 		comment is 'Tests for the CSV library.'
 	]).
 
 	cover(csv(_, _, _)).
 	cover(csv).
-	cover(tsv).
 
 	setup :-
 		^^clean_file('test_files/output00.csv'),

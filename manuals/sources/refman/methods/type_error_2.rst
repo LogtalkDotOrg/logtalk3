@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,7 +34,7 @@ Description
    type_error(Type, Culprit)
 
 Throws a type error. Used when the type of an argument is incorrect. For example,
-trying ot use a non-callable term as a message. This built-in method is declared
+trying to use a non-callable term as a message. This built-in method is declared
 private and thus cannot be used as a message to an object. Calling this predicate
 is equivalent to the following sequence of goals:
 

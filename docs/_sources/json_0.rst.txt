@@ -10,6 +10,9 @@
 
 JSON parser and generator. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.
 
+| **Availability:** 
+|    ``logtalk_load(json(loader))``
+
 | **Author:** Paulo Moura and Jacinto Dávila
 | **Version:** 1:1:0
 | **Date:** 2022-11-14

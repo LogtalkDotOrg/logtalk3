@@ -4,7 +4,7 @@
 Directories
 ===========
 
-To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of using its path. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used.
+To load an entity, always load the library that includes it using the goal ``logtalk_load(library_name(loader))`` instead of using its path. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used. The loading goal can be found in the entity documentation.
 
 
 
@@ -171,7 +171,6 @@ To load an entity, always load the library that includes it using the goal ``log
    csv(Header,Separator,IgnoreQuotes) <csv_3>
    csv_guess_questions <csv_guess_questions_0>
    csv_protocol <csv_protocol_0>
-   tsv <tsv_0>
 
 ``library/dates/``
 ------------------
@@ -446,6 +445,16 @@ To load an entity, always load the library that includes it using the goal ``log
    json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_3>
    json_protocol <json_protocol_0>
 
+``library/listing/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   listing <listing_0>
+
 ``library/logging/``
 --------------------
 
@@ -489,6 +498,22 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    meta_compiler <meta_compiler_0>
+
+``library/mutations/``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   default_atom_mutations <default_atom_mutations_0>
+   default_compound_mutations <default_compound_mutations_0>
+   default_float_mutations <default_float_mutations_0>
+   default_integer_mutations <default_integer_mutations_0>
+   default_list_mutations <default_list_mutations_0>
+   mutations <mutations_0>
+   mutations_store <mutations_store_0>
 
 ``library/nested_dictionaries/``
 --------------------------------
@@ -573,6 +598,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    reader <reader_0>
 
+``library/recorded_database/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   recorded_database <recorded_database_0>
+   recorded_database_core <recorded_database_core_0>
+
 ``library/redis/``
 ------------------
 
@@ -628,6 +664,18 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    timeout <timeout_0>
+
+``library/tsv/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tsv <tsv_0>
+   tsv(Header) <tsv_1>
+   tsv_protocol <tsv_protocol_0>
 
 ``library/types/``
 ------------------

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,13 +22,20 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:55:0,
+		version is 0:65:0,
 		author is 'Paulo Moura',
-		date is 2023-05-18,
+		date is 2024-05-28,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
 		]
+	]).
+
+	:- public(explain//1).
+	:- mode(explain(@callable), zero_or_one).
+	:- info(explain//1, [
+		comment is 'Generates an explanation for a message.',
+		aergnames is ['Message']
 	]).
 
 	% intercept all compiler warning and error messages
@@ -251,6 +258,23 @@
 			'Simply delete the repeated declaration to fix this error.'-[], nl, nl
 		].
 
+	error(permission_error(declare, (dynamic), _/_)) -->
+		[	'Category predicates cannot be declared as both multifile and dynamic'-[], nl,
+			'as categories cannot contain clauses for dynamic predicates.'-[], nl, nl
+		].
+	error(permission_error(declare, (dynamic), _//_)) -->
+		[	'Category non-terminals cannot be declared as both multifile and dynamic'-[], nl,
+			'as categories cannot contain grammar rules for dynamic non-terminals.'-[], nl, nl
+		].
+	error(permission_error(declare, (multifile), _/_)) -->
+		[	'Category predicates cannot be declared as both multifile and dynamic'-[], nl,
+			'as categories cannot contain clauses for dynamic predicates.'-[], nl, nl
+		].
+	error(permission_error(declare, (multifile), _//_)) -->
+		[	'Category non-terminals cannot be declared as both multifile and dynamic'-[], nl,
+			'as categories cannot contain grammar rules for dynamic non-terminals.'-[], nl, nl
+		].
+
 	error(permission_error(define, dynamic_predicate, _)) -->
 		[	'Categories cannot define clauses for dynamic predicates'-[], nl,
 			'as they can be imported by any number of objects.'-[], nl, nl
@@ -409,12 +433,20 @@
 			'directives are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
 	explain(deprecated_predicate(_, _, _, _, _)) -->
-		[	'Code that uses deprecated predicates will likely break when those'-[], nl,
+		[	'Code that calls deprecated predicates will likely break when those'-[], nl,
 			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
 	explain(deprecated_predicate(_, _, _, _, _, _)) -->
-		[	'Code that uses deprecated predicates will likely break when those'-[], nl,
+		[	'Code that calls deprecated predicates will likely break when those'-[], nl,
 			'predicates are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
+	explain(deprecated_function(_, _, _, _, _)) -->
+		[	'Code that calls deprecated arithmetic functions will likely break when'-[], nl,
+			'those functions are removed in future Logtalk or Prolog versions.'-[], nl, nl
+		].
+	explain(deprecated_function(_, _, _, _, _, _)) -->
+		[	'Code that calls deprecated arithmetic functions will likely break when'-[], nl,
+			'those functions are removed in future Logtalk or Prolog versions.'-[], nl, nl
 		].
 
 	explain(deprecated_date_format(_, _, _, _, _, _)) -->
@@ -425,6 +457,48 @@
 	explain(deprecated_version_format(_, _, _, _, _)) -->
 		[	'Version representation is changing to a compound term to simplify'-[], nl,
 			'semantic versioning and forthcoming version management tools.'-[], nl, nl
+		].
+
+	% grammar rules
+
+	explain(calls_non_terminal_as_predicate(_, _, _, _, _)) -->
+		[	'Calls to non-terminals from predicates should always be made using the'-[], nl,
+			'phrase/2-3 built-in methods instead of assuming how grammar rules are'-[], nl,
+			'compiled into predicate clauses.'-[], nl, nl
+		].
+
+	explain(calls_predicate_as_non_terminal(_, _, _, _, _)) -->
+		[	'Calls to predicates from non-terminals should always be made using the'-[], nl,
+			'call//1 built-in method instead of assuming how grammar rules are'-[], nl,
+			'compiled into predicate clauses.'-[], nl, nl
+		].
+
+	explain(unsound_construct_in_grammar_rule(_, _, _, _, \+ _)) -->
+		[	'The use of this construct may result in unrestricted look ahead that may'-[], nl,
+			'or may not be valid depending on the grammar rule implicit arguments. It'-[], nl,
+			'is advisable to only use this construct with a {}/1 argument.'-[], nl, nl
+		].
+
+	explain(unsound_construct_in_grammar_rule(_, _, _, _, (_ -> _))) -->
+		[	'Using this construct may result in an early commit that may or may not'-[], nl,
+			'be valid depending on the grammar rule implicit arguments. It is advisable'-[], nl,
+			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
+		].
+
+	explain(unsound_construct_in_grammar_rule(_, _, _, _, '*->'(_, _))) -->
+		[	'Using this construct may result in an early commit that may or may not'-[], nl,
+			'be valid depending on the grammar rule implicit arguments. It is advisable'-[], nl,
+			'to only use this construct when the condition is a {}/1 argument.'-[], nl, nl
+		].
+
+	% left-recursion
+
+	explain(left_recursion(_, _, _, _, _)) -->
+		[	'The use of left-recursion in clauses and grammar rules usually results in'-[], nl,
+			'non-terminating programs (assuming the default SLD resolution inference.'-[], nl,
+			'rule). Consider rewriting your code to use right-recursion. Tabling (when'-[], nl,
+			'suportedby the backend) provides an alternative solution (due to its SLG'-[], nl,
+			'resolution inference rule).'-[], nl, nl
 		].
 
 	% other warning messages
@@ -452,18 +526,6 @@
 	explain(unknown_non_terminal_called_but_not_defined(_, _, _, _, _)) -->
 		[	'Calls to unknown and undefined grammar rules generate a runtime error.'-[], nl,
 			'Misspelt grammar rule name? Wrong number of arguments?'-[], nl, nl
-		].
-
-	explain(calls_non_terminal_as_predicate(_, _, _, _, _)) -->
-		[	'Calls to non-terminals from predicates should always be made using the'-[], nl,
-			'phrase/2-3 built-in methods instead of assuming how grammar rules are'-[], nl,
-			'compiled into predicate clauses.'-[], nl, nl
-		].
-
-	explain(calls_predicate_as_non_terminal(_, _, _, _, _)) -->
-		[	'Calls to predicates from non-terminals should always be made using the'-[], nl,
-			'call//1 built-in method instead of assuming how grammar rules are'-[], nl,
-			'compiled into predicate clauses.'-[], nl, nl
 		].
 
 	explain(redefined_logtalk_built_in_predicate(_, _, _, _, _)) -->
@@ -545,8 +607,8 @@
 	% lambda expression messages
 
 	explain(parameter_variable_used_elsewhere(_, _, _, _, _, _)) -->
-		[	'An occurence of a lambda parameter variable before the lambda expression'-[], nl,
-			'is a common source of errors. An occurence of a lambda parameter variable'-[], nl,
+		[	'An occurrence of a lambda parameter variable before the lambda expression'-[], nl,
+			'is a common source of errors. An occurrence of a lambda parameter variable'-[], nl,
 			'after the lambda expression is bad programming style.'-[], nl, nl
 		].
 
@@ -737,6 +799,9 @@
 			'directive, check for a typo in the predicate name or number of arguments.'-[], nl, nl
 		].
 
+	explain(missing_function(_, _, _, _, _)) -->
+		['Check for a typo in the function name or number of arguments.'-[], nl, nl].
+
 	% disjunction guidelines messages
 
 	explain(disjunction_as_body(_, _, _, _, _, _)) -->
@@ -746,23 +811,41 @@
 
 	% suspicious cuts
 
+	explain(suspicious_cut_in_if_then_else(_, _, _, _, _)) -->
+		[	'A cut in the if part of an if-then-else control construct is local to the if'-[], nl,
+			'part. It can thus be replaced by a call to the true/0 control construct. But'-[], nl,
+			'that means that the then part will always be called.'-[], nl, nl
+		].
+
 	explain(suspicious_cut_in_if_then_else(_, _, _, _, _, _)) -->
 		[	'A cut in the if part of an if-then-else control construct is local to the if'-[], nl,
 			'part. If the cut is meant to commit to the clause, add parenthesis around the'-[], nl,
-			'if-then-else control construct to fix the scope of the cut.'-[], nl, nl
+			'if-then-else control construct before the cut to fix its scope.'-[], nl, nl
+		].
+
+	explain(suspicious_cut_in_soft_cut(_, _, _, _, _)) -->
+		[	'A cut in the if part of a soft-cut control construct is local to the if'-[], nl,
+			'part. It can thus be replaced by a call to the true/0 control construct.'-[], nl,
+			'But that means that the then part will always be called and that there'-[], nl,
+			'are no choice-points in the if part to warrant using a soft-cut.'-[], nl, nl
 		].
 
 	explain(suspicious_cut_in_soft_cut(_, _, _, _, _, _)) -->
 		[	'A cut in the if part of a soft-cut control construct is local to the if'-[], nl,
 			'part. If the cut is meant to commit to the clause, add parenthesis around'-[], nl,
-			'the soft-cut control construct to fix the scope of the cut.'-[], nl, nl
+			'the soft-cut control construct before the cut to fix its scope.'-[], nl, nl
+		].
+
+	explain(suspicious_cut_in_disjunction(_, _, _, _, _)) -->
+		[	'A cut as the first argument of a disjunction control construct prevents'-[], nl,
+			'backtracking into the second argument, which will never be called.'-[], nl, nl
 		].
 
 	explain(suspicious_cut_in_disjunction(_, _, _, _, _, _)) -->
 		[	'A cut at the start of the first argument of a disjunction control construct'-[], nl,
 			'prevents backtracking into the second argument. If the cut is meant to commit'-[], nl,
-			'to the clause, add parenthesis around the disjunction control construct to'-[], nl,
-			'fix the scope of the cut.'-[], nl, nl
+			'to the clause, add parenthesis around the disjunction control construct before'-[], nl,
+			'the cut to fix its scope.'-[], nl, nl
 		].
 
 	% suspicious tests in if-then-else and soft-cut control constructs
@@ -890,7 +973,7 @@
 			'to a coding error or use the (If *-> Then; fail) pattern instead.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, Var, [call(Var)])) -->
-		[	'Naked mata-variables in control constructs that are cut-transparent'-[], nl,
+		[	'Naked meta-variables in control constructs that are cut-transparent'-[], nl,
 			'may have different semantics across Prolog systems. Use instead the '-[], nl,
 			'suggested alternative to avoid portability issues.'-[], nl, nl
 		].
@@ -913,14 +996,14 @@
 			'requiring sending a message to the "user" pseudo-object.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _::Pred, [Pred])) -->
-		[	'Only use message sending to call a local predicate when is necessary to'-[], nl,
-			'generate an event for the message. Otherwise, simply call the predicate'-[], nl,
-			'directly.'-[], nl, nl
+		[	'Using message sending to call a local predicate is usually only required'-[], nl,
+			'when we want to generate an event for the message. Otherwise, simply call'-[], nl,
+			'the predicate directly.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _::Pred, [::Pred])) -->
-		[	'Only use an explicit message sending instead of a message to "self" when'-[], nl,
-			'you need to generate an event for the message. Otherwise, simply send'-[], nl,
-			'a message to "self".'-[], nl, nl
+		[	'Using an object explicit message sending instead of a message to'-[], nl,
+			'"self" is usually only required when we want to generate an event'-[], nl,
+			'for the message. Otherwise, simply send a message to "self".'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, ::Pred, [Pred, ^^Pred])) -->
 		[	'Sending a message to self to call the same predicate being defined is'-[], nl,
@@ -989,6 +1072,11 @@
 			'expression with the relevant variables listed as lambda free variables.'-[], nl, nl
 		].
 
+	explain(suspicious_call(_, _, _, _, _, reason(comparing_numbers_using_unification))) -->
+		[	'Comparing numbers using unification can fail in cases where using instead'-[], nl,
+			'the standard (=:=)/2 or (=\\=)/2 arithmetic comparison built-in predicates'-[], nl,
+			'would succeed.'-[], nl, nl
+		].
 	explain(suspicious_call(_, _, _, _, _, reason(float_comparison))) -->
 		[	'Comparing floats is problematic as it can fail due to rounding errors and'-[], nl,
 			'loss of precision when converting from decimal to binary representation.'-[], nl,

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:1,
+		version is 0:7:0,
 		author is 'Paulo Moura',
-		date is 2023-06-05,
+		date is 2023-12-25,
 		comment is 'Unit tests for the "diagrams" tool.'
 	]).
 
@@ -66,12 +66,14 @@
 		os::change_directory(Directory).
 
 	cleanup :-
-		logtalk::expand_library_path(logtalk_user(scratch), Directory),
-		os::directory_files(Directory, Files, [paths(absolute), extensions(['.dot'])]),
+		logtalk::expand_library_path(logtalk_user(scratch), ScratchDirectory),
+		os::path_concat(ScratchDirectory, 'dot_dias', OutputDirectory),
+		os::directory_files(OutputDirectory, Files, [paths(absolute), extensions(['.dot'])]),
 		forall(
 			list::member(File, Files),
 			os::delete_file(File)
-		).
+		),
+		os::delete_directory(OutputDirectory).
 
 	% the following tests ony check (for now) that the called
 	% predicates succeed as expected and are deterministic

@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-08-26,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -578,6 +578,12 @@
 
 	test(lgt_unicode_sub_atom_5_07, true(L == [0-3-'你好',1-2-'好世',2-1-'世界',3-0-'界!'])) :-
 		findall(B-A-S, sub_atom('你好世界!',B,2,A,S), L).
+
+	test(lgt_unicode_sub_atom_5_08, true(L == [3-'矢量'])) :-
+		findall(A-S, sub_atom('矢量 空间',0,2,A,S), L).
+
+	test(lgt_unicode_sub_atom_5_09, true(L == [0-3-'矢量',1-2-'量 ',2-1-' 空',3-0-'空间'])) :-
+		findall(B-A-S, sub_atom('矢量 空间',B,2,A,S), L).
 
 	test(sics_unicode_sub_atom_5_31, true(A-S == 5-'ók')) :-
 		sub_atom('Bartók Béla', 4, 2, A, S).

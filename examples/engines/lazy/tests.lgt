@@ -23,21 +23,22 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2016-06-01,
+		date is 2024-01-15,
 		comment is 'Unit tests for the "lazy" example.'
 	]).
 
 	test(lazy_1) :-
 		lazy::find_all(X, list::member(X,[1,2,3]), List),
-		list::nth1(1, List, E1), E1 == 1,
-		list::nth1(2, List, E2), E2 == 2,
-		list::nth1(3, List, E3), E3 == 3,
+		list::nth1(1, List, E1), ^^assertion(E1 == 1),
+		list::nth1(2, List, E2), ^^assertion(E2 == 2),
+		list::nth1(3, List, E3), ^^assertion(E3 == 3),
 		\+ list::nth1(4, List, _).
 
 	test(lazy_2) :-
 		lazy::find_all(X, list::member(X,[1,2,3]), [Head| Tail]),
-		Head == 1, var(Tail).
+		^^assertion(Head == 1),
+		^^assertion(var(Tail)).
 
 :- end_object.

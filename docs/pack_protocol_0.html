@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>pack_protocol &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>pack_protocol &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -105,11 +108,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -130,12 +135,14 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -194,12 +201,18 @@
              
   <p class="right" id="pack-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="pack-protocol">
-<h1><code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code><a class="headerlink" href="#pack-protocol" title="Permalink to this heading"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code><a class="headerlink" href="#pack-protocol" title="Link to this heading"></a></h1>
 <p>Pack specification protocol. Objects implementing this protocol should be named after the pack with a <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix and saved in a file with the same name as the object.</p>
 <div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(packs(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:16:0</div>
-<div class="line"><strong>Date:</strong> 2022-11-20</div>
+<div class="line"><strong>Version:</strong> 0:17:0</div>
+<div class="line"><strong>Date:</strong> 2024-02-29</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -243,9 +256,9 @@
 </ul>
 </nav>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="name-1">
-<span id="pack-protocol-0-name-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">name/1</span></code></a><a class="headerlink" href="#name-1" title="Permalink to this heading"></a></h3>
+<span id="pack-protocol-0-name-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">name/1</span></code></a><a class="headerlink" href="#name-1" title="Link to this heading"></a></h3>
 <p>Pack name.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -266,7 +279,7 @@
 <hr class="docutils" />
 </section>
 <section id="description-1">
-<span id="pack-protocol-0-description-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">description/1</span></code></a><a class="headerlink" href="#description-1" title="Permalink to this heading"></a></h3>
+<span id="pack-protocol-0-description-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">description/1</span></code></a><a class="headerlink" href="#description-1" title="Link to this heading"></a></h3>
 <p>Pack one line description.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -287,7 +300,7 @@
 <hr class="docutils" />
 </section>
 <section id="license-1">
-<span id="pack-protocol-0-license-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">license/1</span></code></a><a class="headerlink" href="#license-1" title="Permalink to this heading"></a></h3>
+<span id="pack-protocol-0-license-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">license/1</span></code></a><a class="headerlink" href="#license-1" title="Link to this heading"></a></h3>
 <p>Pack license. Specified using the identifier from the SPDX License List (<a class="reference external" href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>) when possible.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -308,7 +321,7 @@
 <hr class="docutils" />
 </section>
 <section id="home-1">
-<span id="pack-protocol-0-home-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">home/1</span></code></a><a class="headerlink" href="#home-1" title="Permalink to this heading"></a></h3>
+<span id="pack-protocol-0-home-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">home/1</span></code></a><a class="headerlink" href="#home-1" title="Link to this heading"></a></h3>
 <p>Pack home HTTPS or file URL.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -329,7 +342,7 @@
 <hr class="docutils" />
 </section>
 <section id="version-6">
-<span id="pack-protocol-0-version-6"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">version/6</span></code></a><a class="headerlink" href="#version-6" title="Permalink to this heading"></a></h3>
+<span id="pack-protocol-0-version-6"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">version/6</span></code></a><a class="headerlink" href="#version-6" title="Link to this heading"></a></h3>
 <p>Table of available versions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -353,11 +366,11 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Version: This argument uses the same format as entity versions: <code class="docutils literal notranslate"><span class="pre">Major:Minor:Pathch</span></code>. Semantic versioning should be used.</p></li>
+<li><p>Version: This argument uses the same format as entity versions: <code class="docutils literal notranslate"><span class="pre">Major:Minor:Patch</span></code>. Semantic versioning should be used.</p></li>
 <li><p>Status: Version development status. E.g <code class="docutils literal notranslate"><span class="pre">stable</span></code>, <code class="docutils literal notranslate"><span class="pre">rc</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>, <code class="docutils literal notranslate"><span class="pre">alpha</span></code>, or <code class="docutils literal notranslate"><span class="pre">deprecated</span></code>.</p></li>
 <li><p>URL: File URL for a local directory, file URL for a local archive, download HTTPS URL for the pack archive, or download git archive URL for the pack archive.</p></li>
 <li><p>Checksum: A pair where the key is the hash algorithm and the value is the checksum. Currently, the hash algorithm must be <code class="docutils literal notranslate"><span class="pre">sha256</span></code>. For <code class="docutils literal notranslate"><span class="pre">file://</span></code> URLs of local directories, use <code class="docutils literal notranslate"><span class="pre">none</span></code> instead of a pair.</p></li>
-<li><p>Dependencies: A list of the pack dependencies. Each dependency is a compound term <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">Operator</span> <span class="pre">Version</span></code> where <code class="docutils literal notranslate"><span class="pre">Operator</span></code> is a term comparison operator. The atom <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> or a backend identifier atom can also be used in place of <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code>.</p></li>
+<li><p>Dependencies: Pack dependencies list. Each dependency is a <code class="docutils literal notranslate"><span class="pre">Dependency</span> <span class="pre">Operator</span> <span class="pre">Version</span></code> term. <code class="docutils literal notranslate"><span class="pre">Operator</span></code> is a term comparison operator. Valid <code class="docutils literal notranslate"><span class="pre">Dependency</span></code> values are <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code>,  <code class="docutils literal notranslate"><span class="pre">os(Name,Machine)</span></code>, <code class="docutils literal notranslate"><span class="pre">logtalk</span></code>, and a backend identifier atom.</p></li>
 <li><p>Portability: Either the atom <code class="docutils literal notranslate"><span class="pre">all</span></code> or a list of the supported backend Prolog compilers (using the identifier atoms used by the <code class="docutils literal notranslate"><span class="pre">prolog_dialect</span></code> flag).</p></li>
 <li><p>Clause order: Versions must be listed ordered from newest to oldest.</p></li>
 </ul>
@@ -365,7 +378,7 @@
 <hr class="docutils" />
 </section>
 <section id="note-3">
-<span id="pack-protocol-0-note-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">note/3</span></code></a><a class="headerlink" href="#note-3" title="Permalink to this heading"></a></h3>
+<span id="pack-protocol-0-note-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">note/3</span></code></a><a class="headerlink" href="#note-3" title="Link to this heading"></a></h3>
 <p>Table of notes per action and version.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -397,15 +410,15 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 </section>
@@ -421,7 +434,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

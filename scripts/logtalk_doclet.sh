@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on June 21, 2023
+##   Last updated on October 2, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 2.5"
+	echo "$(basename "$0") 2.6"
 	exit 0
 }
 
@@ -113,7 +113,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (possible values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (possible values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -169,6 +169,10 @@ elif [ "$p_arg" == "gnu" ] ; then
 	prolog='GNU Prolog'
 	logtalk=gplgt$extension
 	logtalk_call="$logtalk --query-goal"
+elif [ "$p_arg" == "gnunc" ] ; then
+	prolog='GNU Prolog (native code)'
+	logtalk=gplgtnc
+	logtalk_call="$logtalk --query-goal"
 elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
@@ -178,10 +182,6 @@ elif [ "$p_arg" == "lvm" ] ; then
 	logtalk=lvmlgt$extension
 	logtalk_call="$logtalk -g"
 	dot="."
-elif [ "$p_arg" == "scryer" ] ; then
-	prolog='Scryer Prolog'
-	logtalk=scryerlgt$extension
-	logtalk_call="$logtalk -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension

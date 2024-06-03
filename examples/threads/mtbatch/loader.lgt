@@ -19,31 +19,44 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(optimize, on),
-	logtalk_load(basic_types(loader)),
-	logtalk_load(loops(loader)),
-	logtalk_load(meta(loader)),
-	logtalk_load(primes(loader)),
-	logtalk_load(sorting(loader)),
-	logtalk_load(fibonacci(loader)),
-	logtalk_load(hanoi(loader)),
-	logtalk_load(tak(loader)),
-	logtalk_load(fft(loader)),
-	logtalk_load(integration(loader)),
-	logtalk_load(integration2d(loader)),
-	logtalk_load(roots(loader)),
-	logtalk_load([
-		searching(state_space),
-		searching(heuristic_state_space),
-		searching(salt3),
-		searching(search_strategy),
-		searching(blind_search1),
-		searching(breadth_first1),
-		searching(depth_first1),
-		searching(heuristic_search1),
-		searching(best_first1),
-		searching(hill_climbing1)
-	]),
-	logtalk_load(mtbatch)
-)).
+:- if(current_logtalk_flag(threads, supported)).
+
+	:- initialization((
+		set_logtalk_flag(optimize, on),
+		logtalk_load(basic_types(loader)),
+		logtalk_load(format(loader)),
+		logtalk_load(loops(loader)),
+		logtalk_load(meta(loader)),
+		logtalk_load(os(loader)),
+		logtalk_load(primes(loader)),
+		logtalk_load(sorting(loader)),
+		logtalk_load(fibonacci(loader)),
+		logtalk_load(hanoi(loader)),
+		logtalk_load(tak(loader)),
+		logtalk_load(fft(loader)),
+		logtalk_load(integration(loader)),
+		logtalk_load(integration2d(loader)),
+		logtalk_load(roots(loader)),
+		logtalk_load([
+			searching(state_space),
+			searching(heuristic_state_space),
+			searching(salt3),
+			searching(search_strategy),
+			searching(blind_search1),
+			searching(breadth_first1),
+			searching(depth_first1),
+			searching(heuristic_search1),
+			searching(best_first1),
+			searching(hill_climbing1)
+		]),
+		logtalk_load(mtbatch)
+	)).
+
+:- else.
+
+	:- initialization((
+		write('Unsupported Prolog compiler for running Logtalk multi-threading features.'),
+		halt
+	)).
+
+:- endif.

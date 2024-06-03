@@ -2,7 +2,7 @@
 <!--
 
  Author: Paulo Moura <pmoura@logtalk.org>
- Copyright (c) 2007-2022 Paulo Moura <pmoura@logtalk.org>
+ Copyright (c) 2007-2023 Paulo Moura <pmoura@logtalk.org>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Library General Public
@@ -45,7 +45,7 @@
 
   <definitions>
 
-    <define-regex id="escaped-character" extended="true">
+    <define-regex id="escaped-characters" extended="true">
       \\([\\abfnrtv"\']|(x[a-fA-F0-9]+|[0-7]+)\\)
     </define-regex>
 
@@ -53,8 +53,8 @@
       <start>"</start>
       <end>"</end>
       <include>
-        <context id="escaped-character" style-ref="escaped-character">
-          <match>\%{escaped-character}</match>
+        <context id="escaped-character-string" style-ref="escaped-character">
+          <match>\%{escaped-characters}</match>
         </context>
       </include>
     </context>
@@ -63,8 +63,8 @@
       <start>'</start>
       <end>'</end>
       <include>
-        <context id="escaped-character" style-ref="escaped-character">
-          <match>\%{escaped-character}</match>
+        <context id="escaped-character-atom" style-ref="escaped-character">
+          <match>\%{escaped-characters}</match>
         </context>
       </include>
     </context>

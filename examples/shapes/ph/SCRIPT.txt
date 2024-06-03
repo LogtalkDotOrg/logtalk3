@@ -27,6 +27,9 @@ ________________________________________________________________________
 % try some simple queries:
 
 
+% objects playing the role of prototypes define predicates for themselves and
+% their descendants:
+
 | ?- square::nsides(N).
 
 N = 4

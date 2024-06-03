@@ -10,6 +10,9 @@
 
 Expands debug/1 calls. The parameter Mode can be either the atom "debug" or "production".
 
+| **Availability:** 
+|    ``logtalk_load(verdi_neruda(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2010-04-15

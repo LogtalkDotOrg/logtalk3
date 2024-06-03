@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,5 +20,5 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
-This example illustrates how to use multifile predicates within Logtalk objects
-and categories.
+This example illustrates how to use multifile predicates/non-terminals within
+Logtalk objects and categories.

@@ -4,7 +4,7 @@
 %  Last updated on April 8, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -466,6 +466,13 @@ logtalk_library_path(Library, third_party_libraries(LibraryPath)) :-
 
 /*
 :- category(my_terse_logtalk_startup_settings).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2023-07-21,
+		comment is 'Terse Logtalk startup settings.'
+	]).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

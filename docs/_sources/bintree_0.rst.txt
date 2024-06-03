@@ -10,6 +10,9 @@
 
 Simple binary tree implementation of the dictionary protocol. Uses standard order to compare keys.
 
+| **Availability:** 
+|    ``logtalk_load(dictionaries(loader))``
+
 | **Author:** Paulo Moura and Paul Fodor
 | **Version:** 2:11:1
 | **Date:** 2022-05-05

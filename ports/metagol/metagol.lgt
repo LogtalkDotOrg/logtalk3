@@ -2,7 +2,7 @@
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %
-%  SPDX-FileCopyrightText: 2018-2019 Paulo Moura
+%  SPDX-FileCopyrightText: 2018-2024 Paulo Moura
 %  SPDX-FileCopyrightText: 2016 Metagol authors
 %  SPDX-License-Identifier: BSD-3-Clause
 %
@@ -38,11 +38,11 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:24:1,
+		version is 0:24:4,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2020-12-20,
-		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura',
-		license is 'BSD 3-Clause License',
+		date is 2024-03-15,
+		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2024 Paulo Moura',
+		license is 'BSD-3-Clause',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
 	]).
 
@@ -68,10 +68,14 @@
 	]).
 
 	:- public(learn_with_timeout/4).
-	:- mode(learn_with_timeout(@list(example), @list(example), -list(term), +number), zero_or_one).
+	:- mode(learn_with_timeout(@list(example), @list(example), -list(term), +number), zero_or_one_or_error).
+	:- mode(learn_with_timeout(@list(example), @list(example), -list(term), -number), zero_or_one_or_error).
 	:- info(learn_with_timeout/4, [
-		comment is 'Learns from a set of positive examples and a set of negative examples and returns the learned program.',
-		argnames is ['PositiveExamples', 'NegativeExamples', 'Program', 'Timeout']
+		comment is 'Learns from a set of positive examples and a set of negative examples and returns the learned program constrained by the given timeout or its default value.',
+		argnames is ['PositiveExamples', 'NegativeExamples', 'Program', 'Timeout'],
+		exceptions is [
+			'Learning does not complete in the allowed time' - timeout(learn('PositiveExamples','NegativeExamples','Program'))
+		]
 	]).
 
 	:- public(program_to_clauses/2).
@@ -104,7 +108,6 @@
 	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, remove_duplicates/2 as list_to_set/2, reverse/2]).
 	:- uses(logtalk, [print_message/3]).
 	:- uses(meta, [include/3, maplist/2, maplist/3]).
-	:- uses(pairs, [map/3 as map_list_to_pairs/3, values/2 as pairs_values/2]).
 	:- uses(timeout, [call_with_timeout/2]).
 
 	% defaults
@@ -130,8 +133,11 @@
 		print_message(comment, metagol, unable_to_learn),
 		fail.
 
-	learn(Pos, Neg, Prog, Timeout) :-
-		::timeout(Timeout),
+	learn_with_timeout(Pos, Neg, Prog, Timeout) :-
+		(	var(Timeout) ->
+			::timeout(Timeout)
+		;	true
+		),
 		call_with_timeout(learn(Pos,Neg,Prog), Timeout).
 
 	proveall(Atoms,Sig,Prog) :-

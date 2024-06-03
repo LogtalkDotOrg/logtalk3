@@ -13,9 +13,12 @@
 
 Predicates for generating entity diagrams in the specified format with inheritance relation edges but no cross-referencing relation edges.
 
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 2:18:0
-| **Date:** 2022-05-18
+| **Version:** 2:20:0
+| **Date:** 2024-03-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

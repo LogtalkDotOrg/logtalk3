@@ -31,7 +31,7 @@ ________________________________________________________________________
 yes
 
 
-% set up ascii stack monitor so we can watch the bricks moving
+% set up ASCII stack monitor so we can watch the bricks moving
 
 | ?- after_event_registry::set_monitor(_, move(_,_), _, stack_monitor).
 yes

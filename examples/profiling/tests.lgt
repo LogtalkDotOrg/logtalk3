@@ -25,12 +25,31 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2012-08-13,
+		date is 2023-11-22,
 		comment is 'Unit tests for the "profiling" example.'
 	]).
 
-	cover(message_counter).
-	cover(stop_watch).
-	cover(timer).
+	:- set_logtalk_flag(events, allow).
+
+	setup :-
+		message_counter::stop,
+		message_counter::set_spy_point(_, list, _, _),
+		message_counter::activate_monitor.
+
+	test(profiling_message_counter_object, true(Calls-Exits == 2-4)) :-
+		(	list::empty([]),
+			list::member(_, [1, 2, 3]),
+			fail
+		;	message_counter::counts(list, Calls, Exits)
+		).
+
+	test(profiling_message_counter_object_predicate_1, true(Calls-Exits == 1-1)) :-
+		message_counter::counts(list, empty/1, Calls, Exits).
+
+	test(profiling_message_counter_object_predicate_2, true(Calls-Exits == 1-3)) :-
+		message_counter::counts(list, member/2, Calls, Exits).
+
+	cleanup :-
+		message_counter::stop.
 
 :- end_object.

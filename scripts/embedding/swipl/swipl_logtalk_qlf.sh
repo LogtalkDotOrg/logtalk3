@@ -6,10 +6,10 @@
 ##   compiler and runtime and optionally an application.qlf file with a
 ##   Logtalk application
 ## 
-##   Last updated on April 9, 2022
+##   Last updated on January 9, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.15"
+	echo "$(basename "$0") 0.20"
 	exit 0
 }
 
@@ -108,6 +108,7 @@ paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 hooks="$LOGTALKHOME/adapters/swihooks.pl"
 compile="false"
+foreign=""
 
 usage_help()
 {
@@ -117,19 +118,20 @@ usage_help()
 	echo "code given its loader file. It can also generate a standalone saved state."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-x] [-d directory] [-t tmpdir] [-n name] [-p paths] [-k hooks] [-s settings] [-l loader] [-g goal]"
+	echo "  $(basename "$0") [-c] [-x] [-f foreign] [-d directory] [-t tmpdir] [-n name] [-p paths] [-k hooks] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -c compile library alias paths in paths and settings files"
 	echo "  -x also generate a standalone saved state"
+	echo "  -f foreign object action for standalone saved state (requires -x option; no default)"
 	echo "  -d directory for generated QLF files (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -n name of the generated saved state (default is application)"
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -k hooks file (absolute path; default is $hooks)"
-	echo "  -s settings file (absolute path; default is $settings)"
+	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -g startup goal for the saved state in canonical syntax (default is true)"
 	echo "  -v print version of $(basename "$0")"
@@ -137,11 +139,12 @@ usage_help()
 	echo
 }
 
-while getopts "cxd:t:n:p:k:s:l:g:vh" option
+while getopts "cxf:d:t:n:p:k:s:l:g:vh" option
 do
 	case $option in
 		c) compile="true";;
 		x) saved_state="true";;
+		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		n) n_arg="$OPTARG";;
@@ -155,6 +158,10 @@ do
 		*) usage_help; exit;;
 	esac
 done
+
+if [ "$f_arg" != "" ] ; then
+	foreign=",foreign($f_arg)"
+fi
 
 if [ "$d_arg" != "" ] ; then
 	directory="$d_arg"
@@ -186,15 +193,15 @@ if [ "$k_arg" != "" ] ; then
 	fi
 fi
 
-if [ "$s_arg" != "" ] ; then
+if [ "$s_arg" != "" ] && [ "$s_arg" != "none" ] ; then
 	if [ -f "$s_arg" ] ; then
 		settings="$s_arg"
 	else
 		echo "The $s_arg settings file does not exist!" >&2
 		exit 1
 	fi
-else
-	settings=""
+elif [ "$s_arg" == "none" ] ; then
+	settings="none"
 fi
 
 if [ "$l_arg" != "" ] ; then
@@ -239,23 +246,31 @@ else
 	extension=''
 fi
 
+# use GNU sed if available instead of BSD sed
+if gsed --version >/dev/null 2>&1 ; then
+	sed="gsed"
+else
+	sed="sed"
+fi
+
 cp "$LOGTALKHOME/adapters/swi.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
 swilgt$extension -g "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')])" -t "halt"
 
 if [ "$compile" != "false" ] ; then
-	swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')])" -t "halt"
+	swilgt$extension -g "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')])" -t "halt"
 else
 	cp "$paths" "$temporary/paths_lgt.pl"
 fi
 
-if [ "$settings" != "" ] ; then
+if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 	if [ "$compile" != "false" ] ; then
-		swilgt$extension -g "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')])" -t "halt"
+		swilgt$extension -g "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')])" -t "halt"
 	else
 		swilgt$extension -g "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')])" -t "halt"
 	fi
+	$sed -i "s/settings_file, allow/settings_file, deny/" swi.pl
 	cat \
 		swi.pl \
 		paths_*.pl \
@@ -299,9 +314,9 @@ fi
 if [ "$saved_state" == "true" ] ; then
 	cd "$directory" || exit 1
 	if [ "$loader" != "" ] ; then
-		swipl -g "[logtalk, application], qsave_program('$name', [goal($goal), stand_alone(true)])" -t "halt"
+		swipl -g "[logtalk, application], qsave_program('$name', [goal($goal),stand_alone(true)$foreign])" -t "halt"
 	else
-		swipl -g "[logtalk], qsave_program('$name', [goal($goal), stand_alone(true)])" -t "halt"
+		swipl -g "[logtalk], qsave_program('$name', [goal($goal),stand_alone(true)$foreign])" -t "halt"
 	fi
 fi
 

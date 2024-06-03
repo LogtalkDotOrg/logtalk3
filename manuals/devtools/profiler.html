@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>profiler &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>profiler &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -134,10 +137,10 @@
            <div itemprop="articleBody">
              
   <section id="profiler">
-<span id="library-profiler"></span><h1><code class="docutils literal notranslate"><span class="pre">profiler</span></code><a class="headerlink" href="#profiler" title="Permalink to this heading"></a></h1>
+<span id="library-profiler"></span><h1><code class="docutils literal notranslate"><span class="pre">profiler</span></code><a class="headerlink" href="#profiler" title="Link to this heading"></a></h1>
 <p>This tool contains simple wrappers for selected Prolog profiler tools.</p>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(loader)).
 </pre></div>
@@ -146,14 +149,14 @@
 directory.</p>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(profiler(tester)).
 </pre></div>
 </div>
 </section>
 <section id="supported-backend-prolog-compilers">
-<h2>Supported backend Prolog compilers<a class="headerlink" href="#supported-backend-prolog-compilers" title="Permalink to this heading"></a></h2>
+<h2>Supported backend Prolog compilers<a class="headerlink" href="#supported-backend-prolog-compilers" title="Link to this heading"></a></h2>
 <p>Currently, this tool supports the profilers provided with SICStus Prolog
 4, SWI-Prolog, and YAP. The tool includes two files:</p>
 <ul>
@@ -206,7 +209,7 @@ time and the number of calls/redos of concealed predicates is added to
 the caller predicates.</p>
 </section>
 <section id="compiling-source-code-for-profiling">
-<h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Permalink to this heading"></a></h2>
+<h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Link to this heading"></a></h2>
 <p>In order to get user-level object and predicate names instead of
 compiler generated internal names when using the SWI-Prolog and YAP
 profilers, you must set <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> flag to a character other than
@@ -230,7 +233,7 @@ setup at Logtalk startup.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

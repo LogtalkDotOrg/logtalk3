@@ -10,6 +10,9 @@
 
 CSV file and stream reading and writing protocol.
 
+| **Availability:** 
+|    ``logtalk_load(csv(loader))``
+
 | **Author:** Jacinto Dávila and Paulo Moura
 | **Version:** 2:0:0
 | **Date:** 2023-03-13
@@ -24,7 +27,7 @@ CSV file and stream reading and writing protocol.
 
 | **Remarks:**
 
-   - Type-checking: Some of the predicate file and stream argument type-checking exceptions depend on the Prolgo backend compliance with standards.
+   - Type-checking: Some of the predicate file and stream argument type-checking exceptions depend on the Prolog backend compliance with standards.
 
 | **Inherited public predicates:**
 |    (none)

@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>code_metrics_utilities &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>code_metrics_utilities &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -121,11 +124,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -136,12 +141,14 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -200,12 +207,18 @@
              
   <p class="right" id="code-metrics-utilities-0"><span id="index-0"></span><strong>category</strong></p>
 <section id="code-metrics-utilities">
-<h1><code class="docutils literal notranslate"><span class="pre">code_metrics_utilities</span></code><a class="headerlink" href="#code-metrics-utilities" title="Permalink to this heading"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">code_metrics_utilities</span></code><a class="headerlink" href="#code-metrics-utilities" title="Link to this heading"></a></h1>
 <p>Internal predicates for analyzing source code.</p>
 <div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(code_metrics(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Author:</strong> Ebrahim Azarisooreh</div>
-<div class="line"><strong>Version:</strong> 0:6:0</div>
-<div class="line"><strong>Date:</strong> 2018-06-08</div>
+<div class="line"><strong>Version:</strong> 0:7:0</div>
+<div class="line"><strong>Date:</strong> 2024-03-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -217,6 +230,7 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -225,7 +239,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Usage: This is meant to be imported by any metric added to the system.</p></li>
-<li><p>Predicate Scope: This is meant for internal use by metrics only. As such, all provided predicates are private.</p></li>
+<li><p>Predicate Scope: This is meant for internal use by metrics only. As such, all provided predicates are protected.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -237,35 +251,32 @@
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#ancestor-4" id="id4"><code class="docutils literal notranslate"><span class="pre">ancestor/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#current-entity-1" id="id5"><code class="docutils literal notranslate"><span class="pre">current_entity/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#declares-predicate-2" id="id6"><code class="docutils literal notranslate"><span class="pre">declares_predicate/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#defines-predicate-2" id="id7"><code class="docutils literal notranslate"><span class="pre">defines_predicate/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#defines-predicate-3" id="id8"><code class="docutils literal notranslate"><span class="pre">defines_predicate/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-calls-3" id="id9"><code class="docutils literal notranslate"><span class="pre">entity_calls/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-kind-2" id="id10"><code class="docutils literal notranslate"><span class="pre">entity_kind/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-property-2" id="id11"><code class="docutils literal notranslate"><span class="pre">entity_property/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-updates-3" id="id12"><code class="docutils literal notranslate"><span class="pre">entity_updates/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ancestor-4" id="id3"><code class="docutils literal notranslate"><span class="pre">ancestor/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#current-entity-1" id="id4"><code class="docutils literal notranslate"><span class="pre">current_entity/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#declares-predicate-2" id="id5"><code class="docutils literal notranslate"><span class="pre">declares_predicate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#defines-predicate-2" id="id6"><code class="docutils literal notranslate"><span class="pre">defines_predicate/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#defines-predicate-3" id="id7"><code class="docutils literal notranslate"><span class="pre">defines_predicate/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-calls-3" id="id8"><code class="docutils literal notranslate"><span class="pre">entity_calls/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-kind-2" id="id9"><code class="docutils literal notranslate"><span class="pre">entity_kind/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-property-2" id="id10"><code class="docutils literal notranslate"><span class="pre">entity_property/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-updates-3" id="id11"><code class="docutils literal notranslate"><span class="pre">entity_updates/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#not-excluded-file-3" id="id12"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id13">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id14">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
-</section>
-<section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <section id="ancestor-4">
-<span id="code-metrics-utilities-0-ancestor-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ancestor/4</span></code></a><a class="headerlink" href="#ancestor-4" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-ancestor-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ancestor/4</span></code></a><a class="headerlink" href="#ancestor-4" title="Link to this heading"></a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Entity</span></code> descends from <code class="docutils literal notranslate"><span class="pre">Ancestor</span></code>, and <code class="docutils literal notranslate"><span class="pre">EntityKind</span></code> and <code class="docutils literal notranslate"><span class="pre">AncestorKind</span></code> unify with their respective entity types.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -286,7 +297,7 @@
 <hr class="docutils" />
 </section>
 <section id="current-entity-1">
-<span id="code-metrics-utilities-0-current-entity-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_entity/1</span></code></a><a class="headerlink" href="#current-entity-1" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-current-entity-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_entity/1</span></code></a><a class="headerlink" href="#current-entity-1" title="Link to this heading"></a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Entity</span></code> is a currently loaded entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -307,7 +318,7 @@
 <hr class="docutils" />
 </section>
 <section id="declares-predicate-2">
-<span id="code-metrics-utilities-0-declares-predicate-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">declares_predicate/2</span></code></a><a class="headerlink" href="#declares-predicate-2" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-declares-predicate-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">declares_predicate/2</span></code></a><a class="headerlink" href="#declares-predicate-2" title="Link to this heading"></a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Entity</span></code> declares <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> internally.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -328,7 +339,7 @@
 <hr class="docutils" />
 </section>
 <section id="defines-predicate-2">
-<span id="code-metrics-utilities-0-defines-predicate-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">defines_predicate/2</span></code></a><a class="headerlink" href="#defines-predicate-2" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-defines-predicate-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">defines_predicate/2</span></code></a><a class="headerlink" href="#defines-predicate-2" title="Link to this heading"></a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Entity</span></code> defines an implementation of <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> internally. Auxiliary predicates are excluded from results.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -349,7 +360,7 @@
 <hr class="docutils" />
 </section>
 <section id="defines-predicate-3">
-<span id="code-metrics-utilities-0-defines-predicate-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">defines_predicate/3</span></code></a><a class="headerlink" href="#defines-predicate-3" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-defines-predicate-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">defines_predicate/3</span></code></a><a class="headerlink" href="#defines-predicate-3" title="Link to this heading"></a></h3>
 <p>Same as <code class="docutils literal notranslate"><span class="pre">defines_predicate/2</span></code>, except <code class="docutils literal notranslate"><span class="pre">Property</span></code> is unified with a property of the predicate.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -370,7 +381,7 @@
 <hr class="docutils" />
 </section>
 <section id="entity-calls-3">
-<span id="code-metrics-utilities-0-entity-calls-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_calls/3</span></code></a><a class="headerlink" href="#entity-calls-3" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-entity-calls-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_calls/3</span></code></a><a class="headerlink" href="#entity-calls-3" title="Link to this heading"></a></h3>
 <p>True if a predicate <code class="docutils literal notranslate"><span class="pre">Caller</span></code> within <code class="docutils literal notranslate"><span class="pre">Entity</span></code> makes a <code class="docutils literal notranslate"><span class="pre">Call</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -391,7 +402,7 @@
 <hr class="docutils" />
 </section>
 <section id="entity-kind-2">
-<span id="code-metrics-utilities-0-entity-kind-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_kind/2</span></code></a><a class="headerlink" href="#entity-kind-2" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-entity-kind-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_kind/2</span></code></a><a class="headerlink" href="#entity-kind-2" title="Link to this heading"></a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Kind</span></code> defines <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and is one of category, protocol, or object.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -412,7 +423,7 @@
 <hr class="docutils" />
 </section>
 <section id="entity-property-2">
-<span id="code-metrics-utilities-0-entity-property-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_property/2</span></code></a><a class="headerlink" href="#entity-property-2" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-entity-property-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_property/2</span></code></a><a class="headerlink" href="#entity-property-2" title="Link to this heading"></a></h3>
 <p>True if <code class="docutils literal notranslate"><span class="pre">Property</span></code> is a valid property of <code class="docutils literal notranslate"><span class="pre">Entity</span></code>. Entity can be either a category, a protocol, or an object.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -433,7 +444,7 @@
 <hr class="docutils" />
 </section>
 <section id="entity-updates-3">
-<span id="code-metrics-utilities-0-entity-updates-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_updates/3</span></code></a><a class="headerlink" href="#entity-updates-3" title="Permalink to this heading"></a></h3>
+<span id="code-metrics-utilities-0-entity-updates-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_updates/3</span></code></a><a class="headerlink" href="#entity-updates-3" title="Link to this heading"></a></h3>
 <p>True if a predicate <code class="docutils literal notranslate"><span class="pre">Updater</span></code> within <code class="docutils literal notranslate"><span class="pre">Entity</span></code> makes a dynamic update to <code class="docutils literal notranslate"><span class="pre">Updated</span></code> (by using e.g. the <code class="docutils literal notranslate"><span class="pre">asserta/1</span></code> or <code class="docutils literal notranslate"><span class="pre">retract/1</span></code> predicates).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -451,11 +462,36 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">entity_updates(+entity_identifier,?predicate_indicator,?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<hr class="docutils" />
+</section>
+<section id="not-excluded-file-3">
+<span id="code-metrics-utilities-0-not-excluded-file-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">not_excluded_file/3</span></code></a><a class="headerlink" href="#not-excluded-file-3" title="Link to this heading"></a></h3>
+<p>True if the file is not being excluded.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">not_excluded_file(ExcludedFiles,Path,Basename)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">not_excluded_file(+list(atom),+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
+<section id="private-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
+<p>(no local declarations; see entity ancestors if any)</p>
+</section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 </section>
@@ -471,7 +507,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

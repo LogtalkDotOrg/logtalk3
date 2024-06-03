@@ -86,7 +86,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/jiplgt
 /usr/local/bin/lvmlgt
 /usr/local/bin/quintuslgt
-/usr/local/bin/scryerlgt
 /usr/local/bin/sicstuslgt
 /usr/local/bin/swilgt
 /usr/local/bin/taulgt
@@ -94,8 +93,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/xsblgt
 /usr/local/bin/yaplgt
 /usr/local/share/info/dir
-/usr/local/share/info/LogtalkAPIs.info
-/usr/local/share/info/TheLogtalkHandbook.info
+/usr/local/share/info/LogtalkAPIs-LOGTALK_VERSION.info
+/usr/local/share/info/TheLogtalkHandbook-LOGTALK_VERSION.info
 /usr/local/share/man/man1/arribalgt.1.gz
 /usr/local/share/man/man1/bplgt.1.gz
 /usr/local/share/man/man1/ciaolgt.1.gz
@@ -119,7 +118,6 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/logtalk_version_select.1.gz
 /usr/local/share/man/man1/lvmlgt.1.gz
 /usr/local/share/man/man1/quintuslgt.1.gz
-/usr/local/share/man/man1/scryerlgt.1.gz
 /usr/local/share/man/man1/sicstuslgt.1.gz
 /usr/local/share/man/man1/swilgt.1.gz
 /usr/local/share/man/man1/taulgt.1.gz
@@ -144,15 +142,14 @@ echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo
 echo "* Arriba (7.0.0 or later):           arribalgt"
-echo "* B-Prolog (8.1 or later):           bplgt"
+echo "* B-Prolog (8.1 or later):           bplgt       (experimental)"
 echo "* Ciao Prolog (1.22.0 or later):     ciaolgt     (experimental; first run may require sudo)"
 echo "* CxProlog (0.98.1 or later):        cxlgt"
 echo "* ECLiPSe (6.1#143 or later):        eclipselgt"
 echo "* GNU Prolog (1.4.5 or later):       gplgt"
 echo "* JIProlog (4.1.7.1 or later):       jiplgt      (first run may require sudo)"
-echo "* LVM (4.1.0 or later):              lvmlgt"
+echo "* LVM (6.3.0 or later):              lvmlgt"
 echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
-echo "* Scryer Prolog (0.9.1 or later):    scryerlgt   (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.2 or later):       taulgt"

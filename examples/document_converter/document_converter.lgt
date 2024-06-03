@@ -22,16 +22,16 @@
 :- object(document).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-12-10,
+		date is 2023-09-18,
 		comment is 'Document to text conversion example using the Apache Tika Java library.'
 	]).
 
 	:- public(convert/2).
 	:- mode(convert(+atom, +atom), one).
 	:- info(convert/2, [
-		comment is 'Converts a document given its path to a text file.',
+		comment is 'Converts a document given its path to a text file using UTF-8 encoding.',
 		argnames is ['Document', 'Text']
 	]).
 
@@ -49,31 +49,48 @@
 		context(Context),
 		check(file, Document, Context),
 		check(atom, Text, Context),
-		convert_file(Document, Contents),
-		setup_call_cleanup(
-			open(Text, write, Stream),
-			write(Stream, Contents),
-			close(Stream)
+		convert_file(Document, Text).
+
+	convert_file(Document, Text) :-
+		catch(
+			convert_file_java(Document, Text),
+			error(_, JavaException),
+			resource_error(JavaException)
 		).
+
+	convert_file_java(Document, Text) :-
+		% parse method arguments
+		java('org.apache.tika.parser.AutoDetectParser')::new(AutoDetectParser),
+		java('java.io.FileOutputStream')::new([Text], FileOutputStream),
+		java('java.nio.charset.Charset', Charset)::forName('UTF8'),
+		java('java.io.OutputStreamWriter')::new([FileOutputStream, Charset], OutputStreamWriter),
+		java('org.apache.tika.sax.BodyContentHandler')::new([OutputStreamWriter], BodyContentHandler),
+		java('org.apache.tika.metadata.Metadata')::new(Metadata),
+		java('java.io.FileInputStream')::new([Document], FileInputStream),
+		java('org.apache.tika.parser.ParseContext')::new(ParseContext),
+		% file parsing
+		java(AutoDetectParser)::parse(FileInputStream, BodyContentHandler, Metadata, ParseContext),
+		java(FileInputStream)::close,
+		java(FileOutputStream)::close.
 
 	contents(Document, Contents) :-
 		% type check argument to minimize the possible exceptions in the Java side
 		context(Context),
 		check(file, Document, Context),
 		check(var, Contents, Context),
-		convert_file(Document, Contents).
+		contents_file(Document, Contents).
 
-	convert_file(Document, Contents) :-
+	contents_file(Document, Text) :-
 		catch(
-			convert_file_java(Document, Contents),
+			contents_file_java(Document, Text),
 			error(_, JavaException),
 			resource_error(JavaException)
 		).
 
-	convert_file_java(Document, Contents) :-
+	contents_file_java(Document, Contents) :-
 		% parse method arguments
 		java('org.apache.tika.parser.AutoDetectParser')::new(AutoDetectParser),
-		java('org.apache.tika.sax.BodyContentHandler')::new(BodyContentHandler),
+		java('org.apache.tika.sax.BodyContentHandler')::new([-1], BodyContentHandler),
 		java('org.apache.tika.metadata.Metadata')::new(Metadata),
 		java('java.io.FileInputStream')::new([Document], FileInputStream),
 		java('org.apache.tika.parser.ParseContext')::new(ParseContext),

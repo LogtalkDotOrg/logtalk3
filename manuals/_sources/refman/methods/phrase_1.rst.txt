@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,9 +33,17 @@ Description
 
    phrase(GrammarRuleBody)
 
-This non-terminal takes a grammar rule body and parses it using the implicit
-difference list of tokens. A common use is to wrap what otherwise would be a
-:term:`naked meta-variable` in a grammar rule body.
+This non-terminal takes a grammar rule body and parses it using the two
+implicit grammar rule arguments. A common use is to wrap what otherwise
+would be a :term:`naked meta-variable` in a grammar rule body when defining
+a meta non-terminal.
+
+Meta-non-terminal template
+--------------------------
+
+::
+
+   phrase(0)
 
 Modes and number of proofs
 --------------------------

@@ -1,8 +1,8 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>  
-SPDX-FileCopyrightText: 2017 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
+SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -78,8 +78,37 @@ A helper object, `code_metrics`, is also provided allowing running all
 loaded individual metrics. For code coverage metrics, see the `lgtunit`
 tool documentation.
 
-For interpretation of the coupling metric scores, see e.g. the original
-paper by Robert Martin, "OO Design Quality Metrics":
+
+Coupling metrics
+----------------
+
+- Efferent coupling (`Ce`): Number of entities that an entity depends on.
+These include objects receiving messages from the entity plus the implemented
+protocols, imported categories, and extended/instantiated/specialized objects.
+
+- Afferent coupling (`Ca`): Number of entities that depend on an entity. For
+a protocol, the number of protocols that extend it plus the number of objects
+and categories that implement it. For a category, the number of objects that
+import it. For an object, the number of categories and objects that send
+messages to it plus the number of objects that extend/instantiate/specialize
+it.
+
+- Instability: Computed as `Ce / (Ce + Ca)`. Measures the entity resilience
+to change. Ranging from 0.0 to 1.0, with 0.0 indicating a maximally stable
+entity and 1.0 indicating a maximally unstable entity. Ideally, an entity
+is either maximally stable or maximally unstable.
+
+- Abstractness: Computed as the ratio between the number of static predicates
+with scope directives without a local definition and the number of static
+predicates with scope directives. Measures the rigidity of an entity. Ranging
+from 0.0 to 1.0, with 0.0 indicating a fully concrete entity and 1.0
+indicating a fully abstract entity.
+
+The dependencies count include direct entity relations plus predicate calls
+or dynamic updates to predicates in external objects or categories.
+
+For more information on the interpretation of the coupling metric scores,
+see e.g. the original paper by Robert Martin:
 
 	@inproceedings{citeulike:1579528,
 		author = "Martin, Robert",
@@ -95,17 +124,44 @@ paper by Robert Martin, "OO Design Quality Metrics":
 		year = 1994
 	}
 
-The Halstead metric computation uses the reflection API for performance.
-The main consequence of this choice is that we abstract all predicate
-arguments. A computation closer to the original definition of the metric
-would require switching to use the parser to collect information on
-syntactic literals, which would imply a much large computation cost.
-
 The coupling metric was also influenced by the metrics rating system in
 Microsoft Visual Studio and aims to eventually emulate the functionality
 of a maintainability index score.
 
-The unique predicate nodes (UPN) metric is described in the following
+
+Halstead metric
+---------------
+
+Predicates declared, user-defined, and called are interpreted as _operators_.
+Built-in predicates and built-in control constructs are ignored. Predicate
+arguments are abstracted, assumed distinct, and interpreted as _operands_.
+Note that this definition of operands is a significant deviation from the
+original definition, which used syntactic literals. A computation closer to
+the original definition of the metric would require switching to use the
+parser to collect information on syntactic literals, which would imply a
+much large computation cost.
+
+The computation of this metric is parameterized by the _Stroud_ coefficient
+for computing the time required to program (default is 18). The following
+individual measures are computed:
+
+- Number of distinct predicates (declared, defined, called, or updated; `Pn`).
+- Number of predicate arguments (assumed distinct; `PAn`).
+- Number of predicate calls/updates + number of clauses (`Cn`).
+- Number of predicate call/update arguments + number of clause head arguments (`CAn`).
+- Entity vocabulary (`EV`). Computed as `EV = Pn + PAn`.
+- Entity length (`EL`). Computed as `EL = Cn + CAn`.
+- Volume (`V`). Computed as `V = EL * log2(EV)`.
+- Difficulty (`D`). Computed as `D = (Pn/2) * (CAn/An)`.
+- Effort (`E`). Computed as `E = D * V`.
+- Time required to program (`T`). Computed as `T = E/k` seconds (where `k` is the Stroud number; defaults to 18).
+- Number of delivered bugs (`B`). Computed as `B = V/3000`.
+
+
+UPN metric
+----------
+
+The Unique Predicate Nodes (UPN) metric is described in the following
 paper:
 
 	@article{MOORES199845,
@@ -121,9 +177,24 @@ paper:
 		author = "Trevor T Moores"
 	}
 
-The cyclomatic complexity metric uses the same predicate abstraction as the
-UPN metric and it is also described in the above paper besides the original
-paper by Thomas J. McCabe:
+The nodes include called and updated predicates independently of where
+they are defined. It also includes multifile predicates contributed to
+other entities.
+
+
+Cyclomatic complexity metric
+----------------------------
+
+The cyclomatic complexity metric evaluates an entity code complexity by
+measuring the number of linearly independent paths through the code. In
+its current implementation, all defined predicates that are not called
+or updated are counted as graph connected components (the reasoning being
+that these predicates can be considered entry points). The implementation
+uses the same predicate abstraction as the UPN metric. The defined predicates
+include multifile predicate definitions contributed by the entity to other
+entities.
+
+For more details on this metric, see the original paper by Thomas J. McCabe:
 
 	@inproceedings{McCabe:1976:CM:800253.807712,
 		author = "McCabe, Thomas J.",
@@ -140,16 +211,36 @@ paper by Thomas J. McCabe:
 		keywords = "Basis, Complexity measure, Control flow, Decomposition, Graph theory, Independence, Linear, Modularization, Programming, Reduction, Software, Testing",
 	} 
 
-Be sure to fully understand the metrics individual meanings and any
-implementation limitations before using them to support any evaluation
-or decision process.
 
 Usage
 -----
 
-All metrics require the source code to be analyzed to be loaded
-with the `source_data` flag turned on. For usage examples, see
-the `SCRIPT.txt` file in the tool directory.
+All metrics require the source code to be analyzed to be loaded with the
+`source_data` flag turned on. For usage examples, see the `SCRIPT.txt`
+file in the tool directory.
+
+Be sure to fully understand the metrics individual meanings and any
+implementation limitations before using them to support any evaluation
+or decision process.
+
+
+Excluding code from analysis
+----------------------------
+
+A set of options are available to specify code that should be excluded when
+applying code metrics:
+
+- `exclude_directories(Directories)`  
+	list of directories to exclude (default is `[]`); all sub-directories of the excluded directories are also excluded; directories may be listed by full or relative path
+
+- `exclude_files(Files)`  
+	list of source files to exclude (default is `[]`); files may be listed by full path or basename, with or without extension
+
+- `exclude_libraries(Libraries)`  
+	list of libraries to exclude (default is `[startup, scratch_directory]`)
+
+- `exclude_entities(Entities)`  
+	list of entities to exclude (default is `[]`)
 
 
 Defining new metrics
@@ -209,7 +300,7 @@ Prolog file and then load it in debug mode:
 In alternative, use the `object_wrapper_hook` provided by the `hook_objects`
 library:
 
-	| ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
+	| ?- logtalk_load(hook_objects(loader)).
 	...
 
 	| ?- logtalk_load(code, [hook(object_wrapper_hook), source_data(on)]).

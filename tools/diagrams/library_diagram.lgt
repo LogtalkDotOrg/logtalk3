@@ -1,11 +1,32 @@
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 :- category(library_diagram(Format),
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2:16:0,
+		version is 2:16:1,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2024-03-30,
 		comment is 'Common predicates for generating library diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), entity_diagram(_)]
@@ -117,7 +138,9 @@
 		::retractall(referenced_prolog_library_(Library, Path)),
 		fail.
 	output_externals(Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
 		::retract(referenced_logtalk_library_(Library, Directory)),
+		\+ member(Library, ExcludedLibraries),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions),
@@ -127,7 +150,9 @@
 		),
 		fail.
 	output_externals(Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
 		::retract(referenced_prolog_library_(Library, Directory)),
+		\+ member(Library, ExcludedLibraries),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(prolog, LinkingOptions, Library, NodeOptions),

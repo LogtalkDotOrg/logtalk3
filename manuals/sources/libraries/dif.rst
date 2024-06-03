@@ -5,8 +5,8 @@
 
 The ``dif`` object provides a portable abstraction over how the
 ``dif/2`` predicate is made available by the supported backend Prolog
-systems that implement it (B-Prolog, ECLiPSe, LVM, Scryer Prolog,
-SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP).
+systems that implement it (B-Prolog, ECLiPSe, LVM, SICStus Prolog,
+SWI-Prolog, Trealla Prolog, XSB, and YAP).
 
 Calls to the library predicates are inlined when compiled with the
 ``optimize`` flag turned on. In this case, there is no overhead compared

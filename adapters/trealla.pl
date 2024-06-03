@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 2.18.7 and later versions
-%  Last updated on June 13, 2023
+%  Last updated on May 5, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -149,6 +149,18 @@
 	fail.
 
 
+% '$lgt_prolog_phrase_predicate'(@callable)
+%
+% table of predicates that call non-terminals
+% (other than the de facto standard phrase/2-3 predicates)
+
+'$lgt_prolog_phrase_predicate'(pio:phrase_from_file(_, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_from_file(_, _, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_to_file(_, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_to_file(_, _, _)).
+'$lgt_prolog_phrase_predicate'(pio:phrase_to_stream(_, _)).
+
+
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
 %
 % valid candidates are proprietary built-in predicates with
@@ -182,6 +194,24 @@
 '$lgt_prolog_predicate_property'(native_code).
 
 
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable, ?callable)
+%
+% table of proprietary deprecated built-in predicates
+% when there's a Prolog system advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_, _) :-
+	fail.
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable)
+%
+% table of proprietary deprecated built-in predicates without
+% a direct advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_) :-
+	fail.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -204,6 +234,7 @@
 
 '$lgt_file_extension'(logtalk, '.lgt').
 '$lgt_file_extension'(logtalk, '.logtalk').
+% there must be a single object file extension
 '$lgt_file_extension'(object, '.pl').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.prolog').
@@ -229,8 +260,16 @@
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
-'$lgt_prolog_feature'(engines, unsupported).
-'$lgt_prolog_feature'(threads, unsupported).
+'$lgt_prolog_feature'(engines, Engines) :-
+	(	predicate_property(message_queue_create(_, _), built_in) ->
+		Engines = supported
+	;	Engines = unsupported
+	).
+'$lgt_prolog_feature'(threads, Threads) :-
+	(	predicate_property(message_queue_create(_, _), built_in) ->
+		Threads = supported
+	;	Threads = unsupported
+	).
 '$lgt_prolog_feature'(modules, supported).
 '$lgt_prolog_feature'(coinduction, unsupported).
 '$lgt_prolog_feature'(unicode, full).
@@ -258,6 +297,7 @@
 '$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(naming, silent).
 '$lgt_default_flag'(duplicated_clauses, silent).
+'$lgt_default_flag'(left_recursion, warning).
 '$lgt_default_flag'(tail_recursive, silent).
 '$lgt_default_flag'(disjunctions, warning).
 '$lgt_default_flag'(conditionals, warning).
@@ -375,24 +415,17 @@
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
-	term_hash(Directory, Hash0),
+'$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
+	term_hash(Directory, Hash),
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atomic_list_concat(['_', Hash0, '_', Dialect], Hash).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
-	term_hash(Directory, Hash0),
 	pid(PID),
-	atomic_list_concat(['_', Hash0, '_', PID], Hash).
+	atomic_list_concat(['_', Hash, '_', Dialect], HashDialect),
+	atomic_list_concat(['_', Hash, '_', PID], HashPid).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)

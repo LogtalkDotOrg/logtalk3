@@ -2,14 +2,12 @@
 "
 " Language:	Logtalk
 " Maintainer:   Paulo Moura <pmoura@logtalk.org>
-" Last Change:  November 6, 2022
+" Last Change:  December 16, 2023
 
 
-" Quit when a syntax file was already loaded:
 
-if version < 600
-	syntax clear
-elseif exists("b:current_syntax")
+" quit when a syntax file was already loaded
+if exists("b:current_syntax")
 	finish
 endif
 
@@ -42,7 +40,7 @@ syn match	logtalkEscapeSequence	contained	"\\\([\\abfnrtv\"\']\|\(x[a-fA-F0-9]\+
 " Logtalk message sending operators
 
 syn match	logtalkOperator		"::"
-syn match	logtalkOperator		":"
+syn match	logtalkOperator		"\(0'\)\@<!:"
 syn match	logtalkOperator		"\^\^"
 
 
@@ -174,8 +172,8 @@ syn match	logtalkBuiltInMethod	"\<phrase\ze("
 
 " Mode operators
 
-syn match	logtalkOperator		"?"
-syn match	logtalkOperator		"@"
+syn match	logtalkOperator		"\(0'\)\@<!?"
+syn match	logtalkOperator		"\(0'\)\@<!@"
 
 
 " Control constructs
@@ -184,9 +182,9 @@ syn match	logtalkKeyword		"\<true\>"
 syn match	logtalkKeyword		"\<fail\>"
 syn match	logtalkKeyword		"\<false\>"
 syn match	logtalkKeyword		"\<ca\(ll\|tch\)\ze("
-syn match	logtalkOperator		"!"
-" syn match	logtalkOperator		","
-syn match	logtalkOperator		";"
+syn match	logtalkOperator		"\(0'\)\@<!!"
+" syn match	logtalkOperator		"\(0'\)\@<!,"
+syn match	logtalkOperator		"\(0'\)\@<!;"
 syn match	logtalkOperator		"-->"
 syn match	logtalkOperator		"->"
 syn match	logtalkKeyword		"\<throw\ze("
@@ -196,7 +194,7 @@ syn match	logtalkKeyword		"\<\(uninstantiation\|type\|domain\|existence\|permiss
 
 " Term unification
 
-syn match	logtalkOperator		"="
+syn match	logtalkOperator		"\(0'\)\@<!="
 syn match	logtalkKeyword		"\<subsumes_term\ze("
 syn match	logtalkKeyword		"\<unify_with_occurs_check\ze("
 syn match	logtalkOperator		"\\="
@@ -249,9 +247,9 @@ syn match	logtalkOperator		"\<is\>"
 
 syn match	logtalkOperator		"=:="
 syn match	logtalkOperator		"=\\="
-syn match	logtalkOperator		"<"
+syn match	logtalkOperator		"\(0'\)\@<!<"
 syn match	logtalkOperator		"=<"
-syn match	logtalkOperator		">"
+syn match	logtalkOperator		"\(0'\)\@<!>"
 syn match	logtalkOperator		">="
 
 
@@ -313,11 +311,11 @@ syn match	logtalkKeyword		"\<\(key\)\?sort\ze("
 
 " Evaluable functors
 
-syn match	logtalkOperator		"+"
-syn match	logtalkOperator		"-"
-syn match	logtalkOperator		"\*"
+syn match	logtalkOperator		"\(0'\)\@<![+]"
+syn match	logtalkOperator		"\(0'\)\@<![-]"
+syn match	logtalkOperator		"\(0'\)\@<!\*"
 syn match	logtalkOperator		"//"
-syn match	logtalkOperator		"/"
+syn match	logtalkOperator		"\(0'\)\@<!/"
 syn match	logtalkKeyword		"\<div\ze("
 syn match	logtalkKeyword		"\<r\(ound\|em\)\ze("
 syn match	logtalkKeyword		"\<e\>"
@@ -349,18 +347,18 @@ syn match	logtalkOperator		">>"
 syn match	logtalkOperator		"<<"
 syn match	logtalkOperator		"/\\"
 syn match	logtalkOperator		"\\/"
-syn match	logtalkOperator		"\\"
+syn match	logtalkOperator		"0'\@<!\\"
 syn match	logtalkKeyword		"\<xor\ze("
 
 
 " Logtalk list operator
 
-syn match	logtalkOperator		"|"
+syn match	logtalkOperator		"\(0'\)\@<!|"
 
 
 " Logtalk existential quantifier operator
 
-syn match	logtalkOperator		"\^"
+syn match	logtalkOperator		"\(0'\)\@<!^"
 
 
 " Logtalk numbers 
@@ -369,7 +367,7 @@ syn match	logtalkNumber		"\<\d\+\>"
 syn match	logtalkNumber		"\<\d\+\.\d\+\>"
 syn match	logtalkNumber		"\<\d\+[eE][-+]\=\d\+\>"
 syn match	logtalkNumber		"\<\d\+\.\d\+[eE][-+]\=\d\+\>"
-syn match	logtalkNumber		"\<0'[\\]\?.\>"
+syn match	logtalkNumber		"0'[\\]\?."
 syn match	logtalkNumber		"\<0b[0-1]\+\>"
 syn match	logtalkNumber		"\<0o\o\+\>"
 syn match	logtalkNumber		"\<0x\x\+\>"
@@ -377,13 +375,13 @@ syn match	logtalkNumber		"\<0x\x\+\>"
 
 " Logtalk end-of-clause
 
-syn match	logtalkOperator		"\."
+syn match	logtalkOperator		"\(0'\)\@<!\."
 
 
 " Logtalk comments
 
 syn region	logtalkBlockComment	start="/\*"	end="\*/"	fold
-syn match	logtalkLineComment	"%.*"
+syn match	logtalkLineComment	"%.*$"
 
 syn cluster	logtalkComment		contains=logtalkBlockComment,logtalkLineComment
 
@@ -408,59 +406,47 @@ syn sync ccomment logtalkBlockComment maxlines=50
 
 
 " Define the default highlighting.
-" For version 5.7 and earlier: only when not done already
-" For version 5.8 and later: only when an item doesn't have highlighting yet
+" Only when an item doesn't have highlighting yet
 
-if version >= 508 || !exists("did_logtalk_syn_inits")
-	if version < 508
-		let did_logtalk_syn_inits = 1
-		command -nargs=+ HiLink hi link <args>
-	else
-		command -nargs=+ HiLink hi def link <args>
-	endif
+hi def link logtalkBlockComment	Comment
+hi def link logtalkLineComment	Comment
 
-	HiLink	logtalkBlockComment	Comment
-	HiLink	logtalkLineComment	Comment
+hi def link logtalkOpenEntityDir	Normal
+hi def link logtalkOpenEntityDirTag	PreProc
 
-	HiLink	logtalkOpenEntityDir	Normal
-	HiLink	logtalkOpenEntityDirTag	PreProc
+hi def link logtalkIfContainer	PreProc
+hi def link logtalkIf		PreProc
+hi def link logtalkElseIf		PreProc
+hi def link logtalkElse		PreProc
 
-	HiLink	logtalkIfContainer	PreProc
-	HiLink	logtalkIf		PreProc
-	HiLink	logtalkElseIf		PreProc
-	HiLink	logtalkElse		PreProc
+hi def link logtalkEntity		Normal
 
-	HiLink	logtalkEntity		Normal
+hi def link logtalkEntityRel	Normal
+hi def link logtalkEntityRelTag	PreProc
 
-	HiLink	logtalkEntityRel	Normal
-	HiLink	logtalkEntityRelTag	PreProc
+hi def link logtalkCloseEntityDir	PreProc
 
-	HiLink	logtalkCloseEntityDir	PreProc
+hi def link logtalkDir		Normal
+hi def link logtalkDirTag		PreProc
 
-	HiLink	logtalkDir		Normal
-	HiLink	logtalkDirTag		PreProc
+hi def link logtalkAtom		String
+hi def link logtalkString		String
+hi def link logtalkEscapeSequence	SpecialChar
 
-	HiLink	logtalkAtom		String
-	HiLink	logtalkString		String
-	HiLink	logtalkEscapeSequence	SpecialChar
+hi def link logtalkNumber		Number
 
-	HiLink	logtalkNumber		Number
+hi def link logtalkKeyword		Keyword
 
-	HiLink	logtalkKeyword		Keyword
+hi def link logtalkBuiltIn		Keyword
+hi def link logtalkBuiltInMethod	Keyword
 
-	HiLink	logtalkBuiltIn		Keyword
-	HiLink	logtalkBuiltInMethod	Keyword
+hi def link logtalkOperator		Operator
 
-	HiLink	logtalkOperator		Operator
+hi def link logtalkExtCall		Normal
+hi def link logtalkExtCallTag	Operator
 
-	HiLink	logtalkExtCall		Normal
-	HiLink	logtalkExtCallTag	Operator
+hi def link logtalkVariable		Identifier
 
-	HiLink	logtalkVariable		Identifier
-
-	delcommand HiLink
-
-endif
 
 
 let b:current_syntax = "logtalk"

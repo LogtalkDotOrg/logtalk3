@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,15 +38,15 @@ warnings. Experimental. The ``Goal`` argument can be a message sending goal,
 ``Object::Message``, a call to a Prolog built-in predicate, or a call to a
 module predicate, ``Module:Predicate``. The ``Flag`` argument must be a
 supported linter flag. The ``Warning`` argument must be a valid ``core``
-message term.
-
+message term. For a given ``Goal``, only the first successful call to this
+predicate is considered.
 
 Modes and number of proofs
 --------------------------
 
 ::
 
-   logtalk_linter_hook(@callable, +atom, +atom, +pair(integer), +atom, @object_identifier, --callable) - zero_or_more
+   logtalk_linter_hook(@callable, +atom, +atom, +pair(integer), +atom, @object_identifier, --callable) - zero_or_one
 
 Errors
 ------

@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 4.1.0 and later versions
-%  Last updated on June 13, 2023
+%  Adapter file for LVM 6.3.0 and later versions
+%  Last updated on May 28, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -145,6 +145,15 @@
 	fail.
 
 
+% '$lgt_prolog_phrase_predicate'(@callable)
+%
+% table of predicates that call non-terminals
+% (other than the de facto standard phrase/2-3 predicates)
+
+'$lgt_prolog_phrase_predicate'(_) :-
+	fail.
+
+
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
 %
 % valid candidates are proprietary built-in predicates with
@@ -180,15 +189,34 @@
 % compiler when checking if a predicate property is valid
 
 '$lgt_prolog_predicate_property'(control_construct).
-'$lgt_prolog_predicate_property'(file(_)).
-'$lgt_prolog_predicate_property'(line_).
 '$lgt_prolog_predicate_property'(discontiguous).
+'$lgt_prolog_predicate_property'(disk_predicate(_)).
+'$lgt_prolog_predicate_property'(file(_)).
+'$lgt_prolog_predicate_property'(foreign).
+'$lgt_prolog_predicate_property'(hidden_clauses).
 '$lgt_prolog_predicate_property'(indexed).
 '$lgt_prolog_predicate_property'(last_modified_generation(_)).
-'$lgt_prolog_predicate_property'(foreign).
+'$lgt_prolog_predicate_property'(line_).
 '$lgt_prolog_predicate_property'(number_of_clauses(_)).
 '$lgt_prolog_predicate_property'(spy).
-'$lgt_prolog_predicate_property'(disk_predicate(_)).
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable, ?callable)
+%
+% table of proprietary deprecated built-in predicates
+% when there's a Prolog system advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_, _) :-
+	fail.
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable)
+%
+% table of proprietary deprecated built-in predicates without
+% a direct advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_) :-
+	fail.
 
 
 
@@ -213,6 +241,7 @@
 
 '$lgt_file_extension'(logtalk, '.lgt').
 '$lgt_file_extension'(logtalk, '.logtalk').
+% there must be a single object file extension
 '$lgt_file_extension'(object, '.pl').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.prolog').
@@ -234,12 +263,20 @@
 '$lgt_prolog_feature'(prolog_dialect, lvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
 	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
-'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(4, 1, 0))).
+'$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(6, 3, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
 '$lgt_prolog_feature'(tabling, unsupported).
-'$lgt_prolog_feature'(engines, unsupported).
-'$lgt_prolog_feature'(threads, unsupported).
+'$lgt_prolog_feature'(engines, Engines) :-
+	(	predicate_property(message_queue_create(_, _), built_in) ->
+		Engines = supported
+	;	Engines = unsupported
+	).
+'$lgt_prolog_feature'(threads, Threads) :-
+	(	predicate_property(message_queue_create(_, _), built_in) ->
+		Threads = supported
+	;	Threads = unsupported
+	).
 '$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, Coinduction) :-
 	(	catch(current_prolog_flag(unify_applies_occurs_check, true), _, fail) ->
@@ -271,6 +308,7 @@
 '$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(naming, silent).
 '$lgt_default_flag'(duplicated_clauses, silent).
+'$lgt_default_flag'(left_recursion, warning).
 '$lgt_default_flag'(tail_recursive, silent).
 '$lgt_default_flag'(disjunctions, warning).
 '$lgt_default_flag'(conditionals, warning).
@@ -392,24 +430,17 @@
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
-	atom_hash(Directory, Hash0),
+'$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
+	atom_hash(Directory, Hash),
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	atomic_list_concat(['_', Hash0, '_', Dialect], Hash).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
-	atom_hash(Directory, Hash0),
 	pid(PID),
-	atomic_list_concat(['_', Hash0, '_', PID], Hash).
+	atomic_list_concat(['_', Hash, '_', Dialect], HashDialect),
+	atomic_list_concat(['_', Hash, '_', PID], HashPid).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -417,7 +448,16 @@
 % compile to disk a Prolog file, resulting from a
 % Logtalk source file, given a list of flags
 
-'$lgt_compile_prolog_code'(_, _, _).
+'$lgt_compile_prolog_code'(File, Source, Options) :-
+	(	member(encrypt(true), Options) ->
+		encrypt_program(File),
+		decompose_file_name(File, FileDirectory, FileName, _),
+		decompose_file_name(Source, SourceDirectory, SourceName, _),
+		atomic_list_concat([FileDirectory, FileName, '.plx'], Encrypted0),
+		atomic_list_concat([SourceDirectory, SourceName, '.plx'], Encrypted),
+		rename_file(Encrypted0, Encrypted)
+	;	true
+	).
 
 
 % '$lgt_load_prolog_code'(+atom, +atom, +list)
@@ -547,6 +587,8 @@
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
+'$lgt_prolog_goal_expansion'(load_foreign_library(Path), '$lgt_lvm_load_foreign_library'(Path)).
+
 '$lgt_prolog_goal_expansion'(add_csv(Predicate,File,Options), {add_csv(CPredicate,File,Options)}) :-
 	logtalk_load_context(entity_type, object),
 	!,
@@ -588,6 +630,18 @@
 		(this(This), {open_db(DB, DBFile), '$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _), '$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix)})
 	) :-
 	logtalk_load_context(entity_type, category).
+
+
+'$lgt_lvm_load_foreign_library'(Path) :-
+	% workaround embedding issue where a plug-in shared library may be already
+	% pre-loaded from a directory different from the original plug-in directory
+	(	decompose_file_name(Path, _, Basename, _),
+		current_plugin(PlugIn),
+		plugin_property(PlugIn, file(File)),
+		decompose_file_name(File, _, Basename, _) ->
+		true
+	;	load_foreign_library(Path)
+	).
 
 
 '$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix) :-
@@ -728,8 +782,12 @@
 
 % term_hash(@callable, +integer, +integer, -integer)
 
-term_hash(_, _, _, _) :-
-	fail.
+:- if(\+ predicate_property(term_hash(_,_,_,_), built_in)).
+
+	term_hash(_, _, _, _) :-
+		fail.
+
+:- endif.
 
 
 

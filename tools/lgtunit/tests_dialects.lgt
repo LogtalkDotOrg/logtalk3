@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 3:2:0,
+		version is 4:0:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2024-02-19,
 		comment is 'Unit tests for the "lgtunit" tool testing dialects.'
 	]).
 
@@ -164,10 +164,16 @@
 
 	% flaky tests
 
-	test(test_flaky_01, true, [note('flaky; test expected to fail')]) :-
+	test(test_flaky_01, true, [flaky, note('test expected to fail')]) :-
 		Goal = (1 == 2), call(Goal).
 
-	test(test_flaky_02, false, [note('flaky; test expected to fail')]) :-
+	test(test_flaky_02, false, [flaky, note('test expected to fail')]) :-
+		Goal = (1 == 1), call(Goal).
+
+	test(test_flaky_03, true, [note('flaky; test expected to fail')]) :-
+		Goal = (1 == 2), call(Goal).
+
+	test(test_flaky_04, false, [note('flaky; test expected to fail')]) :-
 		Goal = (1 == 1), call(Goal).
 
 	% "explicit" dialects
@@ -234,7 +240,7 @@
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
-	logtalk::message_hook(passed_test(_, _, _, _, Note, _), _, lgtunit, _) :-
+	logtalk::message_hook(passed_test(_, _, _, _, Note, _, _), _, lgtunit, _) :-
 		g(Note),
 		fail.
 

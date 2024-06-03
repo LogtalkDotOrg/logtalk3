@@ -4,7 +4,7 @@
 Libraries
 =========
 
-To load any library (including developer tools, ports, and contributions), use the goal ``logtalk_load(library_name(loader))``. To run the library tests, use the goal ``logtalk_load(library_name(tester))``. To load an entity, always load the loader file of the library that includes it to ensure that all required dependencies are also loaded and that any required flags are used.
+To load any library (including developer tools, ports, and contributions), use the goal ``logtalk_load(library_name(loader))``. To run the library tests, use the goal ``logtalk_load(library_name(tester))``. To load an entity, always load the loader file of the library that includes it to ensure that all required dependencies are also loaded and that any required flags are used. The loading goal can be found in the entity documentation.
 
 
 
@@ -123,7 +123,6 @@ To load any library (including developer tools, ports, and contributions), use t
    csv(Header,Separator,IgnoreQuotes) <csv_3>
    csv_guess_questions <csv_guess_questions_0>
    csv_protocol <csv_protocol_0>
-   tsv <tsv_0>
 
 :ref:`dates <library_dates>`
 ----------------------------
@@ -577,6 +576,16 @@ To load any library (including developer tools, ports, and contributions), use t
    counters <counters_0>
    streamvars <streamvars_0>
 
+:ref:`listing <library_listing>`
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   listing <listing_0>
+
 :ref:`logging <library_logging>`
 --------------------------------
 
@@ -631,6 +640,22 @@ To load any library (including developer tools, ports, and contributions), use t
 
    metagol <metagol_0>
    metagol_example_protocol <metagol_example_protocol_0>
+
+:ref:`mutations <library_mutations>`
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   default_atom_mutations <default_atom_mutations_0>
+   default_compound_mutations <default_compound_mutations_0>
+   default_float_mutations <default_float_mutations_0>
+   default_integer_mutations <default_integer_mutations_0>
+   default_list_mutations <default_list_mutations_0>
+   mutations <mutations_0>
+   mutations_store <mutations_store_0>
 
 :ref:`nested_dictionaries <library_nested_dictionaries>`
 --------------------------------------------------------
@@ -753,6 +778,17 @@ To load any library (including developer tools, ports, and contributions), use t
 
    reader <reader_0>
 
+:ref:`recorded_database <library_recorded_database>`
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   recorded_database <recorded_database_0>
+   recorded_database_core <recorded_database_core_0>
+
 :ref:`redis <library_redis>`
 ----------------------------
 
@@ -818,6 +854,18 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
    toychrdb <toychrdb_0>
+
+:ref:`tsv <library_tsv>`
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tsv <tsv_0>
+   tsv(Header) <tsv_1>
+   tsv_protocol <tsv_protocol_0>
 
 :ref:`tutor <library_tutor>`
 ----------------------------

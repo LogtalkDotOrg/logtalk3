@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on June 5, 2023
+%  Last updated on January 25, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -132,10 +132,12 @@ logtalk_library_path(ids, library('ids/')).
 logtalk_library_path(intervals, library('intervals/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
+logtalk_library_path(listing, library('listing/')).
 logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(loops, library('loops/')).
 logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
+logtalk_library_path(mutations, library('mutations/')).
 logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
@@ -143,11 +145,13 @@ logtalk_library_path(os, library('os/')).
 logtalk_library_path(queues, library('queues/')).
 logtalk_library_path(random, library('random/')).
 logtalk_library_path(reader, library('reader/')).
+logtalk_library_path(recorded_database, library('recorded_database/')).
 logtalk_library_path(redis, library('redis/')).
 logtalk_library_path(sets, library('sets/')).
 logtalk_library_path(statistics, library('statistics/')).
 logtalk_library_path(term_io, library('term_io/')).
 logtalk_library_path(timeout, library('timeout/')).
+logtalk_library_path(tsv, library('tsv/')).
 logtalk_library_path(types, library('types/')).
 logtalk_library_path(ulid, library('ulid/')).
 logtalk_library_path(union_find, library('union_find/')).
@@ -221,6 +225,7 @@ logtalk_library_path(functions, threads('functions/')).
 logtalk_library_path(futures, examples('futures/')).
 logtalk_library_path(hailstone, examples('hailstone/')).
 logtalk_library_path(hanoi, threads('hanoi/')).
+logtalk_library_path(haunted_wasteland, examples('haunted_wasteland/')).
 logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
 logtalk_library_path(includes, examples('includes/')).
@@ -294,6 +299,7 @@ logtalk_library_path(relations, examples('relations/')).
 logtalk_library_path(roles, examples('roles/')).
 logtalk_library_path(roots, examples('roots/')).
 logtalk_library_path(scopes, examples('scopes/')).
+logtalk_library_path(scratchcards, examples('scratchcards/')).
 logtalk_library_path(searching, examples('searching/')).
 logtalk_library_path(securemp, examples('securemp/')).
 logtalk_library_path(self_messages, examples('self_messages/')).
@@ -316,6 +322,7 @@ logtalk_library_path(tbbt, engines('tbbt/')).
 logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
 logtalk_library_path(threads, examples('threads/')).
+logtalk_library_path(trebuchet, examples('trebuchet/')).
 logtalk_library_path(units, examples('units/')).
 logtalk_library_path(viewpoints, examples('viewpoints/')).
 logtalk_library_path(whisper, engines('whisper/')).

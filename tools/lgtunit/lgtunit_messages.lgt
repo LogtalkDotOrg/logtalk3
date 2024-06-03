@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 8:1:0,
+		version is 9:0:0,
 		author is 'Paulo Moura',
-		date is 2023-06-02,
+		date is 2024-02-20,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -113,27 +113,45 @@
 		;	[nl, '~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w)'-[Total, Skipped, Passed, Failed, Flaky, Note], nl]
 		).
 
-	message_tokens(passed_test(_Object, Test, _File, _Position, Note, Time)) -->
-		(	{Note == ''} ->
-			['~q: success (in ~w seconds)'-[Test, Time], nl]
-		;	['~q: success (~w) (in ~w seconds)'-[Test, Note, Time], nl]
-		).
+	:- if(\+ current_logtalk_flag(prolog_dialect, ji)).
 
-	message_tokens(non_deterministic_success(_Object, Test, File, Position, Note, Time)) -->
-		(	{Note == ''} ->
-			['~q: failure (in ~w seconds)'-[Test, Time], nl]
-		;	['~q: failure (~w) (in ~w seconds)'-[Test, Note, Time], nl]
-		),
-		failed_test_reason(non_deterministic_success),
-		file_position(File, Position).
+		message_tokens(tests_runtime(_Object, CPUTime, WallTime)) -->
+			['runtime: ~9f/~9f cpu/wall seconds'-[CPUTime, WallTime], nl].
 
-	message_tokens(failed_test(_Object, Test, File, Position, Reason, Note, Time)) -->
-		(	{Note == ''} ->
-			['~q: failure (in ~w seconds)'-[Test, Time], nl]
-		;	['~q: failure (~w) (in ~w seconds)'-[Test, Note, Time], nl]
-		),
-		failed_test_reason(Reason),
-		file_position(File, Position).
+		message_tokens(passed_test(_Object, Test, _File, _Position, Note, CPUTime, WallTime)) -->
+			(	{Note == ''} ->
+				['~q: success (in ~9f/~9f cpu/wall seconds)'-[Test, CPUTime, WallTime], nl]
+			;	['~q: success (~w) (in ~9f/~9f cpu/wall seconds)'-[Test, Note, CPUTime, WallTime], nl]
+			).
+
+		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, CPUTime, WallTime)) -->
+			(	{Note == ''} ->
+				['~q: failure'-[Test]], flaky(Flaky), ['(in ~9f/~9f cpu/wall seconds)'-[CPUTime, WallTime], nl]
+			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~9f/~9f cpu/wall seconds)'-[CPUTime, WallTime], nl]
+			),
+			failed_test_reason(Reason),
+			file_position(File, Position).
+
+	:- else.
+
+		message_tokens(tests_runtime(_Object, CPUTime, WallTime)) -->
+			['runtime: ~w/~w seconds'-[CPUTime, WallTime], nl].
+
+		message_tokens(passed_test(_Object, Test, _File, _Position, Note, CPUTime, WallTime)) -->
+			(	{Note == ''} ->
+				['~q: success (in ~w/~w cpu/wall seconds)'-[Test, CPUTime, WallTime], nl]
+			;	['~q: success (~w) (in ~w/~w cpu/wall seconds)'-[Test, Note, CPUTime, WallTime], nl]
+			).
+
+		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, CPUTime, WallTime)) -->
+			(	{Note == ''} ->
+				['~q: failure'-[Test]], flaky(Flaky), ['(in ~w/~w cpu/wall seconds)'-[CPUTime, WallTime], nl]
+			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~w/~w cpu/wall seconds)'-[CPUTime, WallTime], nl]
+			),
+			failed_test_reason(Reason),
+			file_position(File, Position).
+
+	:- endif.
 
 	message_tokens(skipped_test(_Object, Test, _File, _Position, Note)) -->
 		(	{Note == ''} ->
@@ -297,7 +315,10 @@
 	message_tokens(invalid_test_outcome(Test, Outcome)) -->
 		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl].
 
-	% messages for invald test specifications
+	% messages for invalid test specifications
+
+	message_tokens(non_instantiated_test_option(Test)) -->
+		['non-instantiated test option found: ~q'-[Test], nl].
 
 	message_tokens(invalid_test_option(Test, Option)) -->
 		['test ~q option is invalid: ~q'-[Test, Option], nl].
@@ -361,6 +382,11 @@
 		['  test ~q cleanup goal throws an error but should have succeeded: ~q'-[Test, Error], nl].
 	failed_cleanup_reason(failure, _Object, Test) -->
 		['  test ~q cleanup goal failed but should have succeeded'-[Test], nl].
+
+	flaky(true) -->
+		[' [flaky] '-[]].
+	flaky(false) -->
+		[' '-[]].
 
 	file_position(Path, Position) -->
 		{suppress_path_prefix(Path, ShortPath)},

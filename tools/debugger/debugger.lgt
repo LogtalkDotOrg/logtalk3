@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 5:1:0,
+		version is 7:2:0,
 		author is 'Paulo Moura',
-		date is 2023-06-21,
+		date is 2024-06-03,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -142,6 +142,15 @@
 		argnames is ['MaxDepth']
 	]).
 
+	:- private(logging_line_number_/3).
+	:- dynamic(logging_line_number_/3).
+	:- mode(logging_line_number_(?object_identifier, ?integer, ?atom), zero_or_more).
+	:- mode(logging_line_number_(?category_identifier, ?integer, ?atom), zero_or_more).
+	:- info(logging_line_number_/3, [
+		comment is 'Table of log points.',
+		argnames is ['Entity', 'Line', 'Message']
+	]).
+
 	% we use the structured printing and question asking mechanisms to allow debugger
 	% input and output to be intercepted for alternative interaction by e.g. GUI IDEs
 	:- uses(logtalk, [
@@ -152,12 +161,14 @@
 	:- initialization(reset_invocation_number(_)).
 
 	reset :-
+		nologall,
 		nospyall,
 		leash(full),
 		nodebug,
 		reset_invocation_number(_).
 
 	debug :-
+		logtalk::activate_debug_handler(debugger),
 		(	debugging_ ->
 			print_message(comment, debugger, debugger_spying_on)
 		;	assertz(debugging_),
@@ -173,9 +184,11 @@
 			retractall(leaping_(_)),
 			print_message(comment, debugger, debugger_switched_off)
 		;	print_message(comment, debugger, debugger_off)
-		).
+		),
+		logtalk::deactivate_debug_handler.
 
 	trace :-
+		logtalk::activate_debug_handler(debugger),
 		(	tracing_ ->
 			print_message(comment, debugger, debugger_tracing_on)
 		;	assertz(tracing_),
@@ -205,6 +218,11 @@
 		debugging_details.
 
 	debugging_details :-
+		(	logging_line_number_(_, _, _) ->
+			findall(Entity-Line, logging_line_number_(Entity,Line,_), LogPoints),
+			print_message(information, debugger, log_points(LogPoints))
+		;	print_message(information, debugger, no_log_points_defined)
+		),
 		(	spying_line_number_(_, _) ->
 			findall(Entity-Line, spying_line_number_(Entity,Line), LineNumberSpyPoints),
 			print_message(information, debugger, line_number_spy_points(LineNumberSpyPoints))
@@ -247,6 +265,8 @@
 	debugging(Entity) :-
 		current_category(Entity),
 		category_property(Entity, debugging).
+
+	% spy point predicates
 
 	spy(SpyPoints) :-
 		spy_aux(SpyPoints),
@@ -421,7 +441,7 @@
 	leashing(Port) :-
 		leashing_(Port).
 
-	leashing(Port, PortUserName, N, Goal, ExCtx, Code) :-
+	leashing_port(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),
 		(	spying_port_code(Port, Goal, ExCtx, Code) ->
 			retractall(leaping_(_)),
@@ -457,41 +477,76 @@
 		subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal)),
 		!.
 
-	:- multifile(logtalk::debug_handler_provider/1).
+	% log point predicates
 
-	% there can only be one debug handler provider loaded at the same time;
-	% the Logtalk runtime uses the logtalk::debug_handler_provider/1 hook
-	% predicate for detecting multiple instances of the handler and for
-	% better error reporting
-	logtalk::debug_handler_provider(debugger).
+	log(Entity, Line, Message) :-
+		callable(Entity),
+		integer(Line),
+		functor(Entity, Functor, Arity),
+		functor(Template, Functor, Arity),
+		(	logging_line_number_(Template, Line, Message) ->
+			% log point already defined
+			true
+		;	logging_line_number_(Template, Line, _) ->
+			% assume updating log point message
+			retractall(logging_line_number_(Template, Line, _)),
+			assertz(logging_line_number_(Template, Line, Message))
+		;	% new log point
+			assertz(logging_line_number_(Template, Line, Message))
+		),
+		print_message(information, debugger, log_point_added),
+		(	debugging_ ->
+			true
+		;	debug
+		).
 
-	:- multifile(logtalk::debug_handler/2).
+	logging(Entity, Line, Message) :-
+		logging_line_number_(Entity, Line, Message).
 
-	logtalk::debug_handler(Event, ExCtx) :-
+	nolog(Entity, Line, Message) :-
+		retractall(logging_line_number_(Entity, Line, Message)),
+		print_message(information, debugger, matching_log_points_removed).
+
+	nologall :-
+		retractall(logging_line_number_(_, _, _)),
+		print_message(comment, debugger, all_log_points_removed).
+
+	logging_port(fact(Entity, _, _, Line), Message, '@') :-
+		logging_line_number_(Entity, Line, Message).
+	logging_port(rule(Entity, _, _, Line), Message, '@') :-
+		logging_line_number_(Entity, Line, Message).
+
+	% debug handler
+
+	:- multifile(logtalk::debug_handler/1).
+	logtalk::debug_handler(debugger).
+
+	:- multifile(logtalk::debug_handler/3).
+	logtalk::debug_handler(debugger, Event, ExCtx) :-
 		debug_handler(Event, ExCtx).
 
 	:- meta_predicate(debug_handler((::), (*))).
 
 	debug_handler(fact(Entity,Fact,Clause,File,Line), ExCtx) :-
-		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
 				\+ quasi_skipping_
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
+			invocation_number_(N),
 			port(fact(Entity,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
 			{Action}
 		;	true
 		).
 	debug_handler(rule(Entity,Head,Clause,File,Line), ExCtx) :-
-		invocation_number_(N),
 		(	debugging_,
 			(	\+ skipping_,
 				\+ quasi_skipping_
 			;	quasi_skipping_,
 				spying_line_number_(Entity, Line)
 			) ->
+			invocation_number_(N),
 			port(rule(Entity,Clause,File,Line), N, Head, _, _, ExCtx, Action),
 			{Action}
 		;	true
@@ -549,13 +604,13 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == b; Dialect == scryer; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
+		(Dialect == b; Dialect == swi; Dialect == tau; Dialect == trealla; Dialect == yap)
 	)).
 
 		call_goal(TGoal, Deterministic) :-
 			{setup_call_cleanup(true, TGoal, Deterministic = true)}.
 
-	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == cx; Dialect == sicstus; Dialect == xsb))).
+	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == sicstus; Dialect == xsb))).
 
 		call_goal(TGoal, Deterministic) :-
 			{call_cleanup(TGoal, Deterministic = true)}.
@@ -564,6 +619,11 @@
 
 		call_goal(TGoal, Deterministic) :-
 			{call_det(TGoal, Deterministic)}.
+
+	:- elif(current_logtalk_flag(prolog_dialect, cx)).
+
+		call_goal(TGoal, Deterministic) :-
+			{call(TGoal), deterministic(Deterministic)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, eclipse)).
 
@@ -598,12 +658,20 @@
 		debugging_,
 		!,
 		port_user_name(Port, PortUserName),
-		(	leashing(Port, PortUserName, N, Goal, ExCtx, _),
+		(	logging_port(Port, Message, Code) ->
+			(	write_max_depth_(MaxDepth),
+				MaxDepth > 0 ->
+				print_message(information, debugger, logging_port(Code, Port, N, Goal, Message, MaxDepth))
+			;	print_message(information, debugger, logging_port(Code, Port, N, Goal, Message))
+			),
+			Action = true
+		;	leashing_port(Port, PortUserName, N, Goal, ExCtx, _),
 			\+ skipping_unleashed_(_) ->
 			repeat,
 				% the do_port_option/7 call can fail but still change the value of Code
 				% (e.g. when adding or removing a spy point)
-				leashing(Port, PortUserName, N, Goal, ExCtx, Code),
+				leashing_port(Port, PortUserName, N, Goal, ExCtx, Code),
+				print_message(silent, debugger, Port),
 				(	write_max_depth_(MaxDepth),
 					MaxDepth > 0 ->
 					print_message(information, debugger, leashing_port(Code, Port, N, Goal, MaxDepth))
@@ -614,14 +682,16 @@
 			do_port_option(Option, Port, N, Goal, TGoal, Error, ExCtx, Action),
 			!
 		;	(	tracing_ ->
-				(	write_max_depth_(MaxDepth),
-					MaxDepth > 0 ->
-					print_message(information, debugger, tracing_port(' ', Port, N, Goal, MaxDepth))
-				;	print_message(information, debugger, tracing_port(' ', Port, N, Goal))
-				)
-			;	true
+				Code = ' '
+			;	spying_port_code(Port, Goal, ExCtx, Code)
+			) ->
+			(	write_max_depth_(MaxDepth),
+				MaxDepth > 0 ->
+				print_message(information, debugger, tracing_port(Code, Port, N, Goal, MaxDepth))
+			;	print_message(information, debugger, tracing_port(Code, Port, N, Goal))
 			),
 			Action = true
+		;	Action = true
 		).
 
 	port(_, _, _, _, _, _, true).
@@ -1053,11 +1123,6 @@
 				true
 			;	skip(10)
 			).
-
-	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
-
-		read_single_char(Char) :-
-			{':'(charsio,get_single_char(Char))}, put_char(Char), nl.
 
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 

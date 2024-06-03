@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Logtalk Handbook &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>The Logtalk Handbook &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -46,7 +49,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -104,7 +107,7 @@
            <div itemprop="articleBody">
              
   <section id="the-logtalk-handbook">
-<h1>The Logtalk Handbook<a class="headerlink" href="#the-logtalk-handbook" title="Permalink to this heading"></a></h1>
+<h1>The Logtalk Handbook<a class="headerlink" href="#the-logtalk-handbook" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
@@ -294,6 +297,7 @@
 <li class="toctree-l2"><a class="reference internal" href="userman/debugging.html">Debugging</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#compiling-source-files-in-debug-mode">Compiling source files in debug mode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#procedure-box-model">Procedure box model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#activating-the-debugger">Activating the debugger</a></li>
 <li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#defining-spy-points">Defining spy points</a></li>
 <li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#tracing-program-execution">Tracing program execution</a></li>
 <li class="toctree-l3"><a class="reference internal" href="userman/debugging.html#debugging-using-spy-points">Debugging using spy points</a></li>
@@ -347,6 +351,7 @@
 <li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#protocol-definition">Protocol definition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#entity-relations">Entity relations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#entity-identifiers">Entity identifiers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#source-files">Source files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#source-file-names">Source file names</a></li>
 <li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#terms">Terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="refman/grammar.html#directives">Directives</a></li>
@@ -526,7 +531,12 @@
 <li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#available-metrics">Available metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#coupling-metrics">Coupling metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#halstead-metric">Halstead metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#upn-metric">UPN metric</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#excluding-code-from-analysis">Excluding code from analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#defining-new-metrics">Defining new metrics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#third-party-tools">Third-party tools</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/code_metrics.html#applying-metrics-to-prolog-modules">Applying metrics to Prolog modules</a></li>
@@ -538,6 +548,7 @@
 <li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#excluding-code-from-analysis">Excluding code from analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#integration-with-the-make-tool">Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#caveats">Caveats</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/dead_code_scanner.html#scanning-prolog-modules">Scanning Prolog modules</a></li>
@@ -613,8 +624,8 @@
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#testing">Testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#writing-and-loading-tests">Writing and loading tests</a></li>
-<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#running-unit-tests">Running unit tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#writing-and-running-tests">Writing and running tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#automating-running-tests">Automating running tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#parametric-test-objects">Parametric test objects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#test-dialects">Test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#user-defined-test-dialects">User-defined test dialects</a></li>
@@ -629,12 +640,13 @@
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#tests-with-timeout-limits">Tests with timeout limits</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#setup-and-cleanup-goals">Setup and cleanup goals</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#test-annotations">Test annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#test-execution-times-and-memory-usage">Test execution times and memory usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#working-with-test-data-files">Working with test data files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#flaky-tests">Flaky tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#mocking">Mocking</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#debugging-messages-in-tests">Debugging messages in tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#code-coverage">Code coverage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#automating-running-tests">Automating running tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#utility-predicates">Utility predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
 <li class="toctree-l3"><a class="reference internal" href="devtools/lgtunit.html#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
@@ -733,8 +745,12 @@
 <li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#pre-defined-types">Pre-defined types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#usage">Usage</a></li>
-<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#defining-new-generators-and-shrinkers">Defining new generators and shrinkers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#scoped-generators-and-shrinkers">Scoped generators and shrinkers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#reproducing-sequences-of-arbitrary-terms">Reproducing sequences of arbitrary terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#default-size-of-generated-terms">Default size of generated terms</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/arbitrary.html#known-issues">Known issues</a></li>
 </ul>
 </li>
@@ -948,6 +964,13 @@
 <li class="toctree-l3"><a class="reference internal" href="libraries/json.html#known-issues">Known issues</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/listing.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/listing.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/listing.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/listing.html#usage">Usage</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="libraries/logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="libraries/logging.html#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/logging.html#loading">Loading</a></li>
@@ -972,6 +995,13 @@
 <li class="toctree-l3"><a class="reference internal" href="libraries/meta_compiler.html#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/meta_compiler.html#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/meta_compiler.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/mutations.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/mutations.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/mutations.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/mutations.html#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="libraries/nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a><ul>
@@ -1024,6 +1054,14 @@
 <li class="toctree-l3"><a class="reference internal" href="libraries/reader.html#testing">Testing</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/recorded_database.html#known-issues">Known issues</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="libraries/redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="libraries/redis.html#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/redis.html#loading">Loading</a></li>
@@ -1057,6 +1095,13 @@
 <li class="toctree-l3"><a class="reference internal" href="libraries/timeout.html#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/timeout.html#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="libraries/timeout.html#known-issues">Known issues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libraries/tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="libraries/tsv.html#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/tsv.html#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/tsv.html#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="libraries/tsv.html#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="libraries/types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a><ul>
@@ -1117,7 +1162,6 @@
 <li class="toctree-l3"><a class="reference internal" href="ports/fcube.html#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ports/fcube.html#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ports/fcube.html#testing">Testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ports/fcube.html#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ports/metagol.html"><code class="docutils literal notranslate"><span class="pre">metagol</span></code></a><ul>
@@ -1183,7 +1227,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

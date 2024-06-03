@@ -23,22 +23,21 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2016-06-01,
+		date is 2024-01-15,
 		comment is 'Unit tests for the "fluents" example.'
 	]).
 
-	test(fluents_1) :-
+	test(fluents_1, true(n(N1,N2,N3) == n(1,2,3))) :-
 		fluents::next(N1),
 		fluents::next(N2),
-		fluents::next(N3),
-		N1 == 1, N2 == 2, N3 == 3.
+		fluents::next(N3).
 
-	test(fluents_2) :-
-		\+ fluents::next(_).
+	test(fluents_2, false) :-
+		fluents::next(_).
 
-	test(fluents_3) :-
-		\+ fluents::next(_).
+	test(fluents_3, false) :-
+		fluents::next(_).
 
 :- end_object.

@@ -35,4 +35,4 @@ and it was coded for a contribution to the Rosetta Code website:
 
 For more information see:
 
-	http://rosettacode.org/wiki/Synchronous_concurrency
+	https://rosettacode.org/wiki/Synchronous_concurrency

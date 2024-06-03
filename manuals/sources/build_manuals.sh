@@ -3,10 +3,10 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on May 16, 2023
+##   Last updated on January 25, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -102,10 +102,12 @@ sed '1,19d' ../../library/ids/NOTES.md | pandoc -f gfm -t rst -o libraries/ids.r
 sed '1,19d' ../../library/intervals/NOTES.md | pandoc -f gfm -t rst -o libraries/intervals.rst
 sed '1,19d' ../../library/java/NOTES.md | pandoc -f gfm -t rst -o libraries/java.rst
 sed '1,19d' ../../library/json/NOTES.md | pandoc -f gfm -t rst -o libraries/json.rst
+sed '1,19d' ../../library/listing/NOTES.md | pandoc -f gfm -t rst -o libraries/listing.rst
 sed '1,19d' ../../library/logging/NOTES.md | pandoc -f gfm -t rst -o libraries/logging.rst
 sed '1,19d' ../../library/loops/NOTES.md | pandoc -f gfm -t rst -o libraries/loops.rst
 sed '1,19d' ../../library/meta/NOTES.md | pandoc -f gfm -t rst -o libraries/meta.rst
 sed '1,19d' ../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
+sed '1,19d' ../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
 sed '1,19d' ../../library/nested_dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
 sed '1,19d' ../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
 sed '1,19d' ../../library/options/NOTES.md | pandoc -f gfm -t rst -o libraries/options.rst
@@ -113,11 +115,13 @@ sed '1,19d' ../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.rst
 sed '1,19d' ../../library/queues/NOTES.md | pandoc -f gfm -t rst -o libraries/queues.rst
 sed '1,19d' ../../library/random/NOTES.md | pandoc -f gfm -t rst -o libraries/random.rst
 sed '1,19d' ../../library/reader/NOTES.md | pandoc -f gfm -t rst -o libraries/reader.rst
+sed '1,19d' ../../library/recorded_database/NOTES.md | pandoc -f gfm -t rst -o libraries/recorded_database.rst
 sed '1,19d' ../../library/redis/NOTES.md | pandoc -f gfm -t rst -o libraries/redis.rst
 sed '1,19d' ../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst
 sed '1,19d' ../../library/statistics/NOTES.md | pandoc -f gfm -t rst -o libraries/statistics.rst
 sed '1,19d' ../../library/term_io/NOTES.md | pandoc -f gfm -t rst -o libraries/term_io.rst
 sed '1,19d' ../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
+sed '1,19d' ../../library/tsv/NOTES.md | pandoc -f gfm -t rst -o libraries/tsv.rst
 sed '1,19d' ../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst
 cat ../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/unicode_data.rst
 sed '1,19d' ../../library/ulid/NOTES.md | pandoc -f gfm -t rst -o libraries/ulid.rst

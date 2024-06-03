@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:54:0,
+		version is 2:57:2,
 		author is 'Paulo Moura',
-		date is 2023-04-12,
+		date is 2024-04-01,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -107,7 +107,7 @@
 			^^output_edges(Options),
 			output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
-			Format::file_footer(diagram_output_file, Basename, Options) ->
+			Format::file_footer(diagram_output_file, Basename, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Source))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::file(Source, UserOptions)))
@@ -159,15 +159,19 @@
 		member(externals(false), Options),
 		!.
 	output_externals(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		referenced_entity_(_, Entity),
 		\+ included_entity_(Entity),
+		\+ member(Entity, ExcludedEntities),
 		add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
 		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		referenced_module_(_, Module),
 		\+ included_module_(Module),
+		\+ member(Module, ExcludedEntities),
 		add_external_entity_code_url(module, Module, Options, EntityOptions),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
@@ -177,31 +181,37 @@
 		member(externals(false), Options),
 		!.
 	output_missing_externals(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		referenced_entity_(_, Entity),
+		\+ member(Entity, ExcludedEntities),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
 		\+ ::node_(Name, _, _, _, _, _),
 		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| Options]),
 		fail.
 	output_missing_externals(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		referenced_module_(_, Module),
+		\+ member(Module, ExcludedEntities),
 		\+ ::node_(Module, _, _, _, _, _),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| Options]),
 		fail.
 	output_missing_externals(_).
 
+	% use the {}/1 control construct to avoid a warning due to the circular
+	% reference between this object and the xref_diagram object
 	output_sub_diagrams(Options) :-
+		parameter(1, Format),
 		^^option(zoom(true), Options),
+		{xref_diagram(Format)::default_option(layout(Layout))},
 		included_entity_(Entity),
-		% use the {}/1 control construct to avoid a warning due to the circular
-		% reference between this object and the xref_diagram object
-		{xref_diagram::entity(Entity, Options)},
+		{xref_diagram(Format)::entity(Entity, [layout(Layout)| Options])},
 		fail.
 	output_sub_diagrams(Options) :-
+		parameter(1, Format),
 		^^option(zoom(true), Options),
+		{xref_diagram(Format)::default_option(layout(Layout))},
 		included_module_(Module),
-		% use the {}/1 control construct to avoid a warning due to the circular
-		% reference between this object and the xref_diagram object
-		{xref_diagram::entity(Module, Options)},
+		{xref_diagram(Format)::entity(Module, [layout(Layout)| Options])},
 		fail.
 	output_sub_diagrams(_).
 
@@ -481,7 +491,9 @@
 		).
 
 	output_protocol_inheritance_relations(Protocol, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		extends_protocol(Protocol, ExtendedProtocol, Scope),
+		\+ member(ExtendedProtocol, ExcludedEntities),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		^^ground_entity_identifier(protocol, ExtendedProtocol, ExtendedProtocolName),
 		scope_relation_label(Scope, extends, Label),
@@ -507,7 +519,9 @@
 		).
 
 	output_object_inheritance_relations(Object, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		implements_protocol(Object, Protocol, Scope),
+		\+ member(Protocol, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		scope_relation_label(Scope, implements, Label),
@@ -515,7 +529,9 @@
 		remember_referenced_entity(Object, Protocol),
 		fail.
 	output_object_inheritance_relations(Instance, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		instantiates_class(Instance, Class, Scope),
+		\+ member(Class, ExcludedEntities),
 		^^ground_entity_identifier(object, Instance, InstanceName),
 		^^ground_entity_identifier(object, Class, ClassName),
 		scope_relation_label(Scope, instantiates, Label),
@@ -523,7 +539,9 @@
 		remember_referenced_entity(Instance, Class),
 		fail.
 	output_object_inheritance_relations(Class, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		specializes_class(Class, SuperClass, Scope),
+		\+ member(SuperClass, ExcludedEntities),
 		^^ground_entity_identifier(object, Class, ClassName),
 		^^ground_entity_identifier(object, SuperClass, SuperClassName),
 		scope_relation_label(Scope, specializes, Label),
@@ -531,7 +549,9 @@
 		remember_referenced_entity(Class, SuperClass),
 		fail.
 	output_object_inheritance_relations(Prototype, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		extends_object(Prototype, Parent, Scope),
+		\+ member(Parent, ExcludedEntities),
 		^^ground_entity_identifier(object, Prototype, PrototypeName),
 		^^ground_entity_identifier(object, Parent, ParentName),
 		scope_relation_label(Scope, extends, Label),
@@ -539,7 +559,9 @@
 		remember_referenced_entity(Prototype, Parent),
 		fail.
 	output_object_inheritance_relations(Object, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		imports_category(Object, Category, Scope),
+		\+ member(Category, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		scope_relation_label(Scope, imports, Label),
@@ -549,11 +571,13 @@
 	output_object_inheritance_relations(_, _).
 
 	output_object_provide_relations(Object, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Properties^object_property(Object, provides(Predicate, To, Properties)),
 			_
 		),
+		\+ member(To, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		(	current_object(To) ->
 			^^ground_entity_identifier(object, To, ToName)
@@ -568,8 +592,10 @@
 	output_object_provide_relations(_, _).
 
 	output_object_xref_relations(Object, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		object_property(Object, calls(Other::_, _)),
 		nonvar(Other),
+		\+ member(Other, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(object, Other, OtherName),
 		\+ ^^edge(ObjectName, OtherName, [uses], calls_predicate, _),
@@ -577,8 +603,10 @@
 		remember_referenced_entity(Object, Other),
 		fail.
 	output_object_xref_relations(Object, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		object_property(Object, calls(':'(Module,_), _)),
 		nonvar(Module),
+		\+ member(Module, ExcludedEntities),
 		\+ referenced_module_(Object, Module),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		\+ ^^edge(ObjectName, Module, [use_module], calls_predicate, _),
@@ -588,6 +616,7 @@
 	output_object_xref_relations(_, _).
 
 	output_object_xref_calls(Object, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Predicate0^Properties^NonTerminal^(
@@ -600,17 +629,20 @@
 			),
 			Predicates
 		),
+		\+ member(Other, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(object, Other, OtherName),
 		^^save_edge(ObjectName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Object, Other),
 		fail.
 	output_object_xref_calls(Object, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Properties^(object_property(Object, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
 			Predicates
 		),
+		\+ member(Module, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(ObjectName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Object, Module),
@@ -634,7 +666,9 @@
 		).
 
 	output_category_inheritance_relations(Category, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		extends_category(Category, ExtendedCategory, Scope),
+		\+ member(ExtendedCategory, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(category, ExtendedCategory, ExtendedCategoryName),
 		scope_relation_label(Scope, extends, Label),
@@ -642,7 +676,9 @@
 		remember_referenced_entity(Category, ExtendedCategory),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		implements_protocol(Category, Protocol, Scope),
+		\+ member(Protocol, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		scope_relation_label(Scope, implements, Label),
@@ -650,7 +686,9 @@
 		remember_referenced_entity(Category, Protocol),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		complements_object(Category, Object),
+		\+ member(Category, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(ObjectName, CategoryName, [complements], complements_object, [tooltip(complements)| Options]),
@@ -659,11 +697,13 @@
 	output_category_inheritance_relations(_, _).
 
 	output_category_provide_relations(Category, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Properties^category_property(Category, provides(Predicate, To, Properties)),
 			_
 		),
+		\+ member(To, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		(	current_object(To) ->
 			^^ground_entity_identifier(object, To, ToName)
@@ -678,8 +718,10 @@
 	output_category_provide_relations(_, _).
 
 	output_category_xref_relations(Category, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		category_property(Category, calls(Object::_, _)),
 		nonvar(Object),
+		\+ member(Object, ExcludedEntities),
 		\+ referenced_entity_(Category, Object),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
@@ -688,8 +730,10 @@
 		remember_referenced_entity(Category, Object),
 		fail.
 	output_category_xref_relations(Category, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		category_property(Category, calls(':'(Module,_), _)),
 		nonvar(Module),
+		\+ member(Module, ExcludedEntities),
 		\+ referenced_module_(Category, Module),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		\+ ^^edge(CategoryName, Module, [use_module], calls_predicate, _),
@@ -699,6 +743,7 @@
 	output_category_xref_relations(_, _).
 
 	output_category_xref_calls(Category, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Predicate0^Properties^NonTerminal^(
@@ -711,17 +756,20 @@
 			),
 			Predicates
 		),
+		\+ member(Object, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(CategoryName, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Category, Object),
 		fail.
 	output_category_xref_calls(Category, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Properties^(category_property(Category, calls(':'(Module,Predicate), Properties)), nonvar(Module)),
 			Predicates
 		),
+		\+ member(Module, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^save_edge(CategoryName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Category, Module),
@@ -741,19 +789,23 @@
 		).
 
 	output_module_provide_relations(Module, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Properties^(modules_diagram_support::module_property(Module, provides(Predicate, To, Properties))),
 			_
 		),
+		\+ member(To, ExcludedEntities),
 		^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options]),
 		remember_referenced_module(Module, To),
 		fail.
 	output_module_provide_relations(_, _).
 
 	output_module_xref_relations(Module, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		modules_diagram_support::module_property(Module, calls(Object::_, _)),
 		nonvar(Object),
+		\+ member(Object, ExcludedEntities),
 		\+ referenced_entity_(Module, Object),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		\+ ^^edge(Module, ObjectName, [uses], calls_predicate, _),
@@ -761,8 +813,10 @@
 		remember_referenced_entity(Module, Object),
 		fail.
 	output_module_xref_relations(Module, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		modules_diagram_support::module_property(Module, calls(':'(FromModule,_), _)),
 		nonvar(FromModule),
+		\+ member(FromModule, ExcludedEntities),
 		\+ referenced_module_(Module, FromModule),
 		\+ ^^edge(Module, FromModule, [use_module], calls_predicate, _),
 		^^save_edge(Module, FromModule, [use_module], calls_predicate, [tooltip(use_module)| Options]),
@@ -771,21 +825,25 @@
 	output_module_xref_relations(_, _).
 
 	output_module_xref_calls(Module, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Properties^(modules_diagram_support::module_property(Module, calls(Object::Predicate, Properties)), nonvar(Object)),
 			Predicates
 		),
+		\+ member(Object, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^save_edge(Module, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_entity(Module, Object),
 		fail.
 	output_module_xref_calls(Module, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		setof(
 			Predicate,
 			Properties^(modules_diagram_support::module_property(Module, calls(':'(FromModule,Predicate), Properties)), nonvar(Module)),
 			Predicates
 		),
+		\+ member(FromModule, ExcludedEntities),
 		^^save_edge(Module, FromModule, Predicates, calls_predicate, [tooltip(calls)| Options]),
 		remember_referenced_module(Module, FromModule),
 		fail.
@@ -856,6 +914,8 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, print entity public predicates:
 	default_option(interface(true)).
 	% by default, print file labels:
@@ -877,7 +937,7 @@
 	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
-	default_option(output_directory('./')).
+	default_option(output_directory('./dot_dias')).
 	% by default, don't exclude any directories:
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:

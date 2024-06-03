@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -24,9 +24,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:14:0,
 		author is 'Ebrahim Azarisooreh and Paulo Moura',
-		date is 2022-05-05,
+		date is 2024-03-27,
 		comment is 'Computes entity efferent coupling, afferent coupling, and instability.',
 		remarks is [
 			'Efferent coupling (Ce)' - 'Number of entities that an entity depends on.',
@@ -143,7 +143,8 @@
 		findall(
 			DefinedPredicate,
 			(	member(DefinedPredicate, DeclaredPredicates),
-				category_property(Entity, defines(DefinedPredicate, _))
+				category_property(Entity, defines(DefinedPredicate, DefinesProperties)),
+				\+ member(auxiliary, DefinesProperties)
 			),
 			DefinedPredicates
 		),
@@ -164,7 +165,8 @@
 		findall(
 			DefinedPredicate,
 			(	member(DefinedPredicate, DeclaredPredicates),
-				object_property(Entity, defines(DefinedPredicate, _))
+				object_property(Entity, defines(DefinedPredicate, DefinesProperties)),
+				\+ member(auxiliary, DefinesProperties)
 			),
 			DefinedPredicates
 		),

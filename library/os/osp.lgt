@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:34:0,
+		version is 1:38:1,
 		author is 'Paulo Moura',
-		date is 2023-05-24,
+		date is 2024-03-25,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -142,6 +142,20 @@
 	:- mode(null_device_path(?atom), one).
 	:- info(null_device_path/1, [
 		comment is 'Null device path: ``nul`` on Windows systems and ``/dev/null`` on POSIX systems.',
+		argnames is ['Path']
+	]).
+
+	:- public(full_device_path/1).
+	:- mode(full_device_path(?atom), zero_or_one).
+	:- info(full_device_path/1, [
+		comment is 'Full device path: ``/dev/full`` on Linux and BSD systems. Fails on other systems. Experimental.',
+		argnames is ['Path']
+	]).
+
+	:- public(read_only_device_path/1).
+	:- mode(read_only_device_path(?atom), zero_or_one).
+	:- info(read_only_device_path/1, [
+		comment is 'Read-only device path: ``/dev/urandom`` on macOS. Fails on other systems. Experimental.',
 		argnames is ['Path']
 	]).
 
@@ -273,10 +287,31 @@
 	]).
 
 	:- public(operating_system_type/1).
-	:- mode(operating_system_type(?atom), one).
+	:- mode(operating_system_type(?atom), zero_or_one).
 	:- info(operating_system_type/1, [
 		comment is 'Operating system type. Possible values are ``unix``, ``windows``, and ``unknown``.',
 		argnames is ['Type']
+	]).
+
+	:- public(operating_system_name/1).
+	:- mode(operating_system_name(?atom), zero_or_one).
+	:- info(operating_system_name/1, [
+		comment is 'Operating system name. On POSIX systems, it returns the value of ``uname -s``. On Windows systems, it returns ``\'Windows\'``.',
+		argnames is ['Name']
+	]).
+
+	:- public(operating_system_machine/1).
+	:- mode(operating_system_machine(?atom), zero_or_one).
+	:- info(operating_system_machine/1, [
+		comment is 'Operating system hardware platform. On POSIX systems, it returns the value of ``uname -m``. On Windows systems, it returns the value of the ``PROCESSOR_ARCHITECTURE`` environment variable.',
+		argnames is ['Machine']
+	]).
+
+	:- public(operating_system_release/1).
+	:- mode(operating_system_release(?atom), zero_or_one).
+	:- info(operating_system_release/1, [
+		comment is 'Operating system release. On POSIX systems, it returns the value of ``uname -r``. On Windows systems, it uses ``WMI`` code.',
+		argnames is ['Release']
 	]).
 
 	:- public(command_line_arguments/1).

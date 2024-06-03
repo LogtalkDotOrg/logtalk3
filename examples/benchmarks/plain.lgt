@@ -39,15 +39,15 @@ my_length([_| Tail], Acc, Length) :-
 	my_length(Tail, Acc2, Length).
 
 
-my_member(Element, [Element| _]).
-my_member(Element, [_| List]) :-
-	my_member(Element, List).
+my_member(Head, [Head| _]).
+my_member(Head, [_| Tail]) :-
+	my_member(Head, Tail).
 
 
 :- dynamic(pred_plain/4).
 
 plain_dyndb(N) :-
-	retractall(pred_plain(N, _, _,    _)),
+	retractall(pred_plain(N, _, _, _)),
 	assertz(pred_plain(N, _, a, 3.14)).
 
 

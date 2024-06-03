@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,14 +41,14 @@ directory in the distribution.
 
 The required Python packages can be installed using the commands:
 
-	$ sudo pip install --upgrade pygments
-	$ sudo pip install --upgrade sphinx
-	$ sudo pip install --upgrade sphinx_rtd_theme
+	$ python3 -m pip install --upgrade pygments
+	$ python3 -m pip install --upgrade sphinx
+	$ python3 -m pip install --upgrade sphinx_rtd_theme
 
 Required versions are:
 
-- Sphinx 6.1.3 or later
-- RTD theme 1.2.0 or later
+- Sphinx 7.2.6 or later
+- RTD theme 1.3.0 or later
 - Pygments 2.10.0 or later
 
 Also required is `pandoc` (used e.g. to convert the general, non-API,

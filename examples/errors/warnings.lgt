@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -68,6 +68,9 @@
 	% redefinition of a Prolog built-in predicate
 	write(_).
 
+	% redefinition of a Prolog standard operator
+	:- op(123, xfx, @>).
+
 :- end_object.
 
 
@@ -97,6 +100,12 @@
 		retractall(result(Result, _)),
 		sort([], []),
 		tell(file).
+	% clause with calls to non-ISO Prolog standard arithmetic functions
+	predicate :-
+		_ is popcount(42).
+	% clause with calls to missing arithmetic functions
+	predicate :-
+		_ is fun(42).
 
 :- end_object.
 
@@ -171,6 +180,16 @@
 	q(_) --> p(_).
 
 	p(_, _, _).
+
+:- end_object.
+
+
+
+:- object(unsound_construct_in_grammar_rule).
+
+	q(_) --> \+ p(_).
+
+	p(_) --> [].
 
 :- end_object.
 
@@ -435,6 +454,27 @@
 
 
 
+:- object(conditionals).
+
+	% missing else part
+	a :-
+		(b -> c).
+
+	% cut in the test part
+	p :-
+		(! -> q; r).
+
+	% missing parenthesis in the presence of cuts
+	qux :-
+		!,
+		a(1) -> a(2) ; a(3).
+
+	b. c. q. r. a(_).
+
+:- end_object.
+
+
+
 :- object(suspicious_calls).
 
 	% calling local predicates doesn't require message sending
@@ -476,17 +516,7 @@
 	misuse :-
 		findall(_, a(_), _).
 
-	a(1). a(2). a(3).
-
-	% missing parenthesis in the presence of cuts
-
-	qux :-
-		!,
-		a(1) -> a(2) ; a(3).
-
-	quux :-
-		!,
-		a(1) ; a(2).
+	a(1).
 
 	% suspicious tests
 
@@ -694,6 +724,12 @@
 	baz(X) :-
 		get(X).
 
+	qux(X, Y) :-
+		X is integer(Y).
+
+	quux(X, Y) :-
+		abs(X, Y).
+
 :- end_object.
 
 
@@ -736,12 +772,16 @@
 
 :- object(disjunctions).
 
+	% clause body is a disjunction
 	foo :-
 		(bar; baz).
 
-	bar.
+	% missing parenthesis in the presence of cuts
+	quux :-
+		!,
+		a(1) ; a(2).
 
-	baz.
+	bar. baz. a(_).
 
 :- end_object.
 
@@ -792,5 +832,21 @@
 		X = 1.
 
 	qux(_, _, _).
+
+:- end_object.
+
+
+
+:- object(left_recursion).
+
+	a --> [].
+	a --> a, b.
+
+	b --> [].
+
+	p.
+	p :- p, q.
+
+	q.
 
 :- end_object.

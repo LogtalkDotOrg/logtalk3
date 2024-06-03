@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -126,13 +126,13 @@ This prevents an application breaking when e.g. an updated third-party
 library adds new operators. It also allows loading entities that provide
 conflicting operator definitions. Here the usual programming idiom is to
 copy the operator definitions to a ``uses/2`` directive. For example, the
-``lgtunit`` tool makes available a ``'=~='/2`` predicate (for approximate
+``lgtunit`` tool makes available a ``(=~=)/2`` predicate (for approximate
 float equality) that is intended to be used as an infix operator:
 
 ::
 
    :- uses(lgtunit, [
-       op(700, xfx, '=~='), '=~='/2
+       op(700, xfx, =~=), (=~=)/2
    ]).
 
 Thus, in practice, the solution to use library entity operators in client
@@ -255,7 +255,9 @@ as :term:`closures <closure>` that will be used for constructing goals. To
 ensure that these goals will be executed in the correct context (i.e. in the
 :term:`calling context <predicate calling context>`, not in the meta-predicate
 :term:`definition context <predicate definition context>`) we need to
-use the :ref:`directives_meta_predicate_1` directive. For example:
+use the :ref:`directives_meta_predicate_1` directive (in the case of *meta
+non-terminals*, there's also a :ref:`directives_meta_non_terminal_1` directive).
+For example:
 
 ::
 
@@ -303,11 +305,13 @@ To the best of my knowledge, the use of non-negative integers to specify
 closures has first introduced on Quintus Prolog for providing
 information for predicate cross-reference tools.
 
-As each Logtalk entity is independently compiled, this directive must be
-included in every object or category that contains a definition for the
-described meta-predicate, even if the meta-predicate declaration is
-inherited from another entity, to ensure proper compilation of
-meta-arguments.
+.. warning::
+
+   As each Logtalk entity is independently compiled, this directive must
+   be included in every object or category that contains a definition for
+   the described meta-predicate, even if the meta-predicate declaration
+   is inherited from another entity, to ensure proper compilation of
+   meta-arguments.
 
 .. _predicates_discontiguous:
 
@@ -323,39 +327,46 @@ In that case, we must declare the predicate discontiguous by using the
    :- discontiguous(foo/1).
 
 This is a directive that we should avoid using: it makes your code
-harder to read and it is not supported by some Prolog compilers.
+harder to read and it is not supported by some Prolog backends.
 
-As each Logtalk entity is compiled independently of other entities,
-this directive must be included in every object or category that
-contains a definition for the described predicate (even if the predicate
-declaration is inherited from other entity).
+.. warning::
+
+   As each Logtalk entity is compiled independently of other entities,
+   this directive must be included in every object or category that
+   contains a definition for the described predicate (even if the
+   predicate declaration is inherited from other entity).
 
 .. _predicates_dynamic:
 
 Dynamic directive
 ~~~~~~~~~~~~~~~~~
 
-An object predicate can be static or dynamic. By default, all object
-predicates are static. To declare a dynamic predicate we use the
-:ref:`directives_dynamic_1` directive:
+An object predicate can be static or dynamic. By default, all predicates (and
+non-terminals) of static objects defined in source files are static. To declare
+a dynamic predicate (or non-terminal) we use the :ref:`directives_dynamic_1`
+directive. For example:
 
 ::
 
    :- dynamic(foo/1).
 
-This directive may also be used to declare dynamic grammar rule
-non-terminals. As each Logtalk entity is compiled independently from
-other entities, this directive must be included in every object that
-contains a definition for the described predicate (even if the predicate
-declaration is inherited from other object or imported from a category).
-If we omit the dynamic declaration then the predicate definition will be
-compiled static. In the case of dynamic objects, static predicates
-cannot be redefined using the database built-in methods (despite being
-internally compiled to dynamic code).
+Predicates of objects dynamically created at runtime (using the
+:ref:`predicates_create_object_4` built-in predicate) and predicates of
+dynamic objects defined in source files (using the :ref:`directives_dynamic_0`
+directive) are implicitly dynamic.
 
-Dynamic predicates can be used to represent persistent mutable object
-state. Note that static objects may declare and define dynamic
-predicates.
+Dynamic predicates can be used to represent persistent mutable object state.
+Note that static objects may declare and define dynamic predicates. Categories
+can only declare dynamic predicates (with the importing objects holding the
+predicate definitions).
+
+.. warning::
+
+   As each Logtalk entity is compiled independently from other entities, this
+   directive must be included in every object that contains a definition for
+   the described predicate (even if the predicate declaration is inherited
+   from other object or imported from a category). If we omit the dynamic
+   declaration then the predicate definition will be compiled static.
 
 .. _predicates_op:
 
@@ -1114,16 +1125,16 @@ The redefinition of Prolog built-in predicates can be combined with the
 :ref:`conditional compilation directives <conditional_compilation_directives>`
 when writing portable applications where some of the supported backends
 don't provide a built-in predicate found in the other backends. As an example,
-consider the de facto standard list length predicate, ``length/2``. This
-predicate is provided as a built-in predicate in most but not all backends.
-The ``list`` library object includes the code:
+consider the de facto standard ``msort/2`` predicate (which sorts a list while
+keeping duplicates). This predicate is provided as a built-in predicate in most
+but not all backends. The ``list`` library object includes the code:
 
 ::
 
-   :- if(predicate_property(length(_, _), built_in)).
+   :- if(predicate_property(msort(_, _), built_in)).
    
-       length(List, Length) :-
-           {length(List, Length)}.
+       msort(List, Sorted) :-
+           {msort(List, Sorted)}.
    
    :- else.
    
@@ -1133,7 +1144,7 @@ The ``list`` library object includes the code:
    :- endif.
 
 I.e. the object will use the built-in predicate when available. Otherwise,
-it will use the object provided predicate definition.
+it will use the predicate definition provided by the ``list`` object.
 
 The redefinition of built-in predicates can also be accomplished using
 :term:`predicate shorthands <predicate shorthand>`. This can be useful
@@ -1197,12 +1208,8 @@ for parsing simple arithmetic expressions:
 
    :- end_object. 
 
-The predicate :ref:`methods_phrase_2` called
-in the definition of predicate ``parse/2`` above is a Logtalk built-in
-method, similar to the predicate with the same name found on most Prolog
-compilers that support definite clause grammars. After compiling and
-loading this object, we can test the grammar rules with calls such as
-the following one:
+After compiling and loading this object, we can test the grammar rules
+using the ``parse/2`` message:
 
 .. code-block:: text
 
@@ -1211,10 +1218,8 @@ the following one:
    Result = -9
    yes
 
-In most cases, the predicates resulting from the translation of the
-grammar rules to regular clauses are not declared. Instead, these
-predicates are usually called by using the built-in methods
-:ref:`methods_phrase_2` and :ref:`methods_phrase_3` as shown in the
+The non-terminals can be called from predicates using the private built-in
+methods :ref:`methods_phrase_2` and :ref:`methods_phrase_3` as shown in the
 example above. When we want to use the built-in methods ``phrase/2`` and
 ``phrase/3``, the non-terminal used as first argument must be within the
 scope of the *sender*. For the above example, assuming that we want the
@@ -1280,9 +1285,32 @@ Along with the message sending operators (``(::)/1``, ``(::)/2``, and ``(^^)/1``
 we may also use other control constructs such as ``(\+)/1``, ``!/0``, ``(;)/2``,
 ``(->)/2``, and ``{}/1`` in the body of a grammar. When using a backend Prolog
 compiler that supports modules, we may also use the ``(:)/2`` control construct.
+
+.. warning::
+
+   The semantics of ``(\+)/1`` and ``(->)/2`` control constructs in grammar rules
+   with a terminal or a non-terminal in the **first** argument are problematic due
+   to unrestricted look ahead that may or may not be valid depending on the grammar
+   rule implicit arguments. By default, the linter will print warnings for such
+   calls (controlled by the :ref:`grammar_rules <flag_grammar_rules>` flag).
+   Preferably restrit the use of the ``(\+)/1`` control construct to ``{}/1``
+   arguments and the use of the ``(->)/2`` control construct to ``{}/1`` test
+   arguments.
+
 In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
-``phrase/3``.
+``phrase/3``. The :ref:`directives_meta_non_terminal_1` directive allows the
+declaration of non-terminals that have arguments that are meta-called from
+grammar rules. For example:
+
+::
+
+   :- meta_non_terminal(zero_or_more(1, *)).
+
+   zero_or_more(Closure, [Terminal| Terminals]) -->
+       call(Closure, Terminal), !, zero_or_more(Closure, Terminals).
+   zero_or_more(_, []) -->
+       [].
 
 You may have noticed that Logtalk defines :ref:`control_external_call_1`
 as a control construct for bypassing the compiler when compiling a clause body
@@ -1347,7 +1375,8 @@ directive, as in the following example:
    grammar rules using the ``call//1`` built-in method. This recommended
    practice, besides making your code forward compatible with future Logtalk
    versions, also make the code more clear. The linter prints warnings when
-   these guidelines are not followed.
+   these guidelines are not followed (notably, when a predicate is called as
+   a non-terminal or a non-terminal is called as a predicate).
 
 .. _predicates_methods:
 
@@ -1722,6 +1751,8 @@ Some properties are only available when the entities are defined in
 source files and when those source files are compiled with the
 :ref:`source_data <flag_source_data>` flag turned on:
 
+``recursive``
+   The predicate definition includes at least one recursive rule
 ``inline``
    The predicate definition is inlined
 ``auxiliary``

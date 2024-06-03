@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on June 7, 2023
+##   Last updated on December 17, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -42,7 +42,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.11"
+	echo "  0.12"
 	exit 0
 }
 
@@ -99,7 +99,7 @@ if [ ! -w "$prefix" ] ; then
 fi
 
 echo
-echo "Installing Logtalk $version on $prefix/share ..."
+echo "Installing Logtalk $version on \"$prefix/share\" ..."
 echo
 
 mkdir -p "$prefix/share"
@@ -143,8 +143,7 @@ echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet"
 echo "- lgt2svg, lgt2pdf, lgt2html, lgt2xml, lgt2md, lgt2rst, lgt2txt"
 echo "- lgtenv"
 echo
-echo "Ensure that the \"$prefix/bin\" directory is in your execution path."
-echo
+echo "Ensure that the \"$prefix/bin\" directory is in your PATH."
 
 ln -sf ../share/logtalk/integration/arribalgt.sh arribalgt
 ln -sf ../share/logtalk/integration/bplgt.sh bplgt
@@ -155,7 +154,6 @@ ln -sf ../share/logtalk/integration/gplgt.sh gplgt
 ln -sf ../share/logtalk/integration/jiplgt.sh jiplgt
 ln -sf ../share/logtalk/integration/lvmlgt.sh lvmlgt
 ln -sf ../share/logtalk/integration/quintuslgt.sh quintuslgt
-ln -sf ../share/logtalk/integration/scryerlgt.sh scryerlgt
 ln -sf ../share/logtalk/integration/sicstuslgt.sh sicstuslgt
 ln -sf ../share/logtalk/integration/swilgt.sh swilgt
 ln -sf ../share/logtalk/integration/taulgt.sh taulgt
@@ -170,34 +168,39 @@ for file in ../../logtalk/man/man1/*.1.gz ; do
 	ln -sf "$file" "$(basename "$file")"
 done
 
-mkdir -p ../../info
-cd ../../info || exit 1
-if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
-	cp ../logtalk/docs/LogtalkAPIs-$version_base.info ./LogtalkAPIs.info
-	if [ "$(command -v install-info)" != "" ]; then
-		install-info LogtalkAPIs.info dir
+if [ "$(command -v install-info)" != "" ]; then
+	mkdir -p ../../info
+	cd ../../info || exit 1
+	if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
+		cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
+		if [ -f dir ] ; then
+			install-info --silent --delete LogtalkAPIs-*.info
+		fi
+		install-info LogtalkAPIs-$version_base.info dir
 	fi
-fi
-if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
-	cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ./TheLogtalkHandbook.info
-	if [ "$(command -v install-info)" != "" ]; then
-		install-info TheLogtalkHandbook.info dir
+	if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
+		cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
+		if [ -f dir ] ; then
+			install-info --silent --delete TheLogtalkHandbook-*.info
+		fi
+		install-info TheLogtalkHandbook-$version_base.info dir
 	fi
+	echo "Ensure that the \"$prefix/share/info\" directory is in your INFOPATH."
 fi
 
+echo
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo
 echo "* Arriba (7.0.0 or later):           arribalgt"
-echo "* B-Prolog (8.1 or later):           bplgt"
+echo "* B-Prolog (8.1 or later):           bplgt       (experimental)"
 echo "* Ciao Prolog (1.22.0 or later):     ciaolgt     (experimental; first run may require sudo)"
 echo "* CxProlog (0.98.1 or later):        cxlgt"
 echo "* ECLiPSe (6.1#143 or later):        eclipselgt"
 echo "* GNU Prolog (1.4.5 or later):       gplgt"
 echo "* JIProlog (4.1.7.1 or later):       jiplgt      (first run may require sudo)"
-echo "* LVM (4.1.0 or later):              lvmlgt"
+echo "* LVM (6.3.0 or later):              lvmlgt"
 echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
-echo "* Scryer Prolog (0.9.1 or later):    scryerlgt   (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.2 or later):       taulgt"
@@ -212,7 +215,7 @@ echo
 echo "Users should ensure that the environment variable LOGTALKHOME is set to"
 echo "\"$prefix/share/logtalk\" and then run the \"logtalk_user_setup\" shell script"
 echo "once before running the integration scripts. For more details on manual"
-echo "installation setup, see the INSTALL.md file."
+echo "installation setup, see the \"INSTALL.md\" file."
 echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
 echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"

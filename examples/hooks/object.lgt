@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,11 +22,12 @@
 :- object(object).
 
 	:- info([
-		version is 1:21:0,
+		version is 1:21:1,
 		author is pm,
-		date is 2012-08-02,
+		date is 2024-03-15,
 		comment is 'Example object for illustrating the use of compiler hooks.',
-		license is gpl3]).
+		license is apache2
+	]).
 
 	:- public(out/0).
 

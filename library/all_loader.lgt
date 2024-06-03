@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,6 +46,7 @@
 		hook_objects(loader),
 		java(loader),
 		redis(loader),
+		recorded_database(loader),
 		optionals(loader),
 		options(loader),
 		expecteds(loader),
@@ -62,6 +63,7 @@
 		git(loader),
 		grammars(loader),
 		csv(loader),
+		tsv(loader),
 		json(loader),
 		cbor(loader),
 		base64(loader),
@@ -70,6 +72,8 @@
 		html(loader),
 		format(loader),
 		union_find(loader),
+		mutations(loader),
+		listing(loader),
 		cloning,
 		counters,
 		streamvars

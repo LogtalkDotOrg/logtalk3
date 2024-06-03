@@ -22,7 +22,7 @@
 -->
 
 
-<!ELEMENT logtalk (entity, relations, predicates, operators, remarks, see_also)>
+<!ELEMENT logtalk (entity, relations, predicates, operators, remarks, see_also, availability)>
 
 
 <!ELEMENT entity (name, functor, file, type, compilation, comment?, (parnames|parameters)?, author?, version?, date?, copyright?, license?, info*)>
@@ -64,6 +64,8 @@
 <!ELEMENT see_also (reference*)>
 
 <!ELEMENT reference (name, file)>
+
+<!ELEMENT availability (#PCDATA)>
 
 
 <!ELEMENT relations (implements*, imports*, extends*, instantiates*, specializes*, complements*, provides*, uses*, alias*)>

@@ -1,0 +1,64 @@
+.. index:: default_list_mutations
+.. _default_list_mutations/0:
+
+.. rst-class:: right
+
+**object**
+
+``default_list_mutations``
+==========================
+
+Default list mutations.
+
+| **Availability:** 
+|    ``logtalk_load(mutations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2023-11-24
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Provides:**
+|    :ref:`mutations_store::mutation/4 <mutations_store/0::mutation/4>`
+| **Uses:**
+|    :ref:`fast_random <fast_random/0>`
+|    :ref:`list <list/0>`
+|    :ref:`mutations_store <mutations_store/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`type <type/0>`
+

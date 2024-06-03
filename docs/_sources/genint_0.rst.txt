@@ -10,6 +10,9 @@
 
 Global object for generating increasing non-negative integers for named counters. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
+| **Availability:** 
+|    ``logtalk_load(genint(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
 | **Date:** 2022-07-21

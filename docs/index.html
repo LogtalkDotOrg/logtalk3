@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Logtalk APIs &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>Logtalk APIs &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -46,7 +49,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -105,7 +108,7 @@
            <div itemprop="articleBody">
              
   <section id="logtalk-apis">
-<h1>Logtalk APIs<a class="headerlink" href="#logtalk-apis" title="Permalink to this heading"></a></h1>
+<h1>Logtalk APIs<a class="headerlink" href="#logtalk-apis" title="Link to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
@@ -170,7 +173,6 @@
 <li class="toctree-l3"><a class="reference internal" href="csv_3.html">csv(Header,Separator,IgnoreQuotes)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_guess_questions_0.html">csv_guess_questions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_protocol_0.html">csv_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#dates"><span class="xref std std-ref">dates</span></a><ul>
@@ -415,6 +417,10 @@
 <li class="toctree-l3"><a class="reference internal" href="streamvars_0.html">streamvars</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="listing_0.html">listing</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
 <li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
@@ -438,6 +444,16 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="metagol_0.html">metagol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="metagol_example_protocol_0.html">metagol_example_protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="default_atom_mutations_0.html">default_atom_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_compound_mutations_0.html">default_compound_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_float_mutations_0.html">default_float_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_integer_mutations_0.html">default_integer_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_list_mutations_0.html">default_list_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_0.html">mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_store_0.html">mutations_store</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a><ul>
@@ -501,6 +517,11 @@
 <li class="toctree-l3"><a class="reference internal" href="reader_0.html">reader</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_0.html">recorded_database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_core_0.html">recorded_database_core</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
 </ul>
@@ -529,6 +550,12 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="toychrdb_0.html">toychrdb</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_1.html">tsv(Header)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a><ul>
@@ -702,7 +729,6 @@
 <li class="toctree-l3"><a class="reference internal" href="csv_3.html">csv(Header,Separator,IgnoreQuotes)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_guess_questions_0.html">csv_guess_questions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="csv_protocol_0.html">csv_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-dates"><code class="docutils literal notranslate"><span class="pre">library/dates/</span></code></a><ul>
@@ -846,6 +872,10 @@
 <li class="toctree-l3"><a class="reference internal" href="json_protocol_0.html">json_protocol</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-listing"><code class="docutils literal notranslate"><span class="pre">library/listing/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="listing_0.html">listing</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-logging"><code class="docutils literal notranslate"><span class="pre">library/logging/</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="logger_0.html">logger</a></li>
 <li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
@@ -864,6 +894,16 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-meta-compiler"><code class="docutils literal notranslate"><span class="pre">library/meta_compiler/</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="meta_compiler_0.html">meta_compiler</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-mutations"><code class="docutils literal notranslate"><span class="pre">library/mutations/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="default_atom_mutations_0.html">default_atom_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_compound_mutations_0.html">default_compound_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_float_mutations_0.html">default_float_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_integer_mutations_0.html">default_integer_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_list_mutations_0.html">default_list_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_0.html">mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_store_0.html">mutations_store</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-nested-dictionaries"><code class="docutils literal notranslate"><span class="pre">library/nested_dictionaries/</span></code></a><ul>
@@ -907,6 +947,11 @@
 <li class="toctree-l3"><a class="reference internal" href="reader_0.html">reader</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-recorded-database"><code class="docutils literal notranslate"><span class="pre">library/recorded_database/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_0.html">recorded_database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_core_0.html">recorded_database_core</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-redis"><code class="docutils literal notranslate"><span class="pre">library/redis/</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
 </ul>
@@ -931,6 +976,12 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-timeout"><code class="docutils literal notranslate"><span class="pre">library/timeout/</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="timeout_0.html">timeout</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-tsv"><code class="docutils literal notranslate"><span class="pre">library/tsv/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_1.html">tsv(Header)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-types"><code class="docutils literal notranslate"><span class="pre">library/types/</span></code></a><ul>
@@ -1151,8 +1202,10 @@
 <li class="toctree-l3"><a class="reference internal" href="lgtdoc_messages_0.html">lgtdoc_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lgtunit_messages_0.html">lgtunit_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="library_diagram_1.html">library_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listing_0.html">listing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_0.html">mutations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="options_0.html">options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
@@ -1160,6 +1213,7 @@
 <li class="toctree-l3"><a class="reference internal" href="packs_messages_0.html">packs_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="read_file_0.html">read_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_core_0.html">recorded_database_core</a></li>
 <li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ulid_types_0.html">ulid_types</a></li>
@@ -1203,6 +1257,11 @@
 <li class="toctree-l3"><a class="reference internal" href="debug_expansion_1.html">debug_expansion(Mode)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="debug_messages_0.html">debug_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="debugger_0.html">debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_atom_mutations_0.html">default_atom_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_compound_mutations_0.html">default_compound_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_float_mutations_0.html">default_float_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_integer_mutations_0.html">default_integer_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_list_mutations_0.html">default_list_mutations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="default_workflow_hook_0.html">default_workflow_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="demodb_0.html">demodb</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dfs_interpreter_0.html">dfs_interpreter</a></li>
@@ -1287,6 +1346,7 @@
 <li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="minimal_output_0.html">minimal_output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules_diagram_support_0.html">modules_diagram_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_store_0.html">mutations_store</a></li>
 <li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
 <li class="toctree-l3"><a class="reference internal" href="navltree_0.html">navltree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nbintree_0.html">nbintree</a></li>
@@ -1314,6 +1374,7 @@
 <li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reader_0.html">reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_0.html">recorded_database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="registries_0.html">registries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="registry_loader_hook_0.html">registry_loader_hook</a></li>
@@ -1336,6 +1397,7 @@
 <li class="toctree-l3"><a class="reference internal" href="timeout_0.html">timeout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="toychrdb_0.html">toychrdb</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_1.html">tsv(Header)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutor_0.html">tutor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ulid_0.html">ulid</a></li>
@@ -1411,6 +1473,7 @@
 <li class="toctree-l3"><a class="reference internal" href="term_io_protocol_0.html">term_io_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ulid_protocol_0.html">ulid_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="union_find_protocol_0.html">union_find_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uuid_protocol_0.html">uuid_protocol</a></li>
@@ -1457,7 +1520,13 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#absolute-file-name-2"><code class="docutils literal notranslate"><span class="pre">absolute_file_name/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#activate-debug-handler-1"><code class="docutils literal notranslate"><span class="pre">activate_debug_handler/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#activate-monitor-0"><code class="docutils literal notranslate"><span class="pre">activate_monitor/0</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#active-debug-handler-1"><code class="docutils literal notranslate"><span class="pre">active_debug_handler/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#add-1"><code class="docutils literal notranslate"><span class="pre">add/1</span></code></a><ul class="simple">
@@ -1521,6 +1590,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#apply-4"><code class="docutils literal notranslate"><span class="pre">apply/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#approximately-equal-2"><code class="docutils literal notranslate"><span class="pre">approximately_equal/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#approximately-equal-3"><code class="docutils literal notranslate"><span class="pre">approximately_equal/3</span></code></a><ul class="simple">
@@ -1856,13 +1928,16 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#days-in-month-3"><code class="docutils literal notranslate"><span class="pre">days_in_month/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#deactivate-debug-handler-0"><code class="docutils literal notranslate"><span class="pre">deactivate_debug_handler/0</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#debug-0"><code class="docutils literal notranslate"><span class="pre">debug/0</span></code></a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#debug-handler-2"><code class="docutils literal notranslate"><span class="pre">debug_handler/2</span></code></a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#debug-handler-1"><code class="docutils literal notranslate"><span class="pre">debug_handler/1</span></code></a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#debug-handler-provider-1"><code class="docutils literal notranslate"><span class="pre">debug_handler_provider/1</span></code></a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#debug-handler-3"><code class="docutils literal notranslate"><span class="pre">debug_handler/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#debugging-0"><code class="docutils literal notranslate"><span class="pre">debugging/0</span></code></a><ul class="simple">
@@ -2171,6 +2246,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#equal-2"><code class="docutils literal notranslate"><span class="pre">equal/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#erase-1"><code class="docutils literal notranslate"><span class="pre">erase/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#essentially-equal-3"><code class="docutils literal notranslate"><span class="pre">essentially_equal/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2193,6 +2271,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#expecteds-2"><code class="docutils literal notranslate"><span class="pre">expecteds/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#explain-1"><code class="docutils literal notranslate"><span class="pre">explain//1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#extension-1"><code class="docutils literal notranslate"><span class="pre">extension/1</span></code></a><ul class="simple">
@@ -2405,6 +2486,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#frozen-2"><code class="docutils literal notranslate"><span class="pre">frozen/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#full-device-path-1"><code class="docutils literal notranslate"><span class="pre">full_device_path/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#func-test-3"><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2439,6 +2523,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#get-seed-1"><code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#gnu-0"><code class="docutils literal notranslate"><span class="pre">gnu/0</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#goal-expansion-2"><code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code></a><ul class="simple">
@@ -2583,6 +2670,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#instance-1"><code class="docutils literal notranslate"><span class="pre">instance/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#instance-2"><code class="docutils literal notranslate"><span class="pre">instance/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#instances-1"><code class="docutils literal notranslate"><span class="pre">instances/1</span></code></a><ul class="simple">
@@ -2786,6 +2876,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#leashing-1"><code class="docutils literal notranslate"><span class="pre">leashing/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#least-common-multiple-2"><code class="docutils literal notranslate"><span class="pre">least_common_multiple/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#leaves-1"><code class="docutils literal notranslate"><span class="pre">leaves/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2843,10 +2936,19 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#list-to-array-2"><code class="docutils literal notranslate"><span class="pre">list_to_array/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#listing-0"><code class="docutils literal notranslate"><span class="pre">listing/0</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#listing-1"><code class="docutils literal notranslate"><span class="pre">listing/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#loaded-file-1"><code class="docutils literal notranslate"><span class="pre">loaded_file/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#loaded-file-property-2"><code class="docutils literal notranslate"><span class="pre">loaded_file_property/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#log-3"><code class="docutils literal notranslate"><span class="pre">log/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#log-event-2"><code class="docutils literal notranslate"><span class="pre">log_event/2</span></code></a><ul class="simple">
@@ -2856,6 +2958,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#logging-1"><code class="docutils literal notranslate"><span class="pre">logging/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#logging-3"><code class="docutils literal notranslate"><span class="pre">logging/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#logtalk-packs-0"><code class="docutils literal notranslate"><span class="pre">logtalk_packs/0</span></code></a><ul class="simple">
@@ -2889,6 +2994,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#make-set-3"><code class="docutils literal notranslate"><span class="pre">make_set/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#man-1"><code class="docutils literal notranslate"><span class="pre">man/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#manhattan-distance-3"><code class="docutils literal notranslate"><span class="pre">manhattan_distance/3</span></code></a><ul class="simple">
@@ -2937,6 +3045,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#max-inv-preds-1"><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#max-size-1"><code class="docutils literal notranslate"><span class="pre">max_size/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#maybe-0"><code class="docutils literal notranslate"><span class="pre">maybe/0</span></code></a><ul class="simple">
@@ -3035,6 +3146,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#msort-3"><code class="docutils literal notranslate"><span class="pre">msort/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#mutation-3"><code class="docutils literal notranslate"><span class="pre">mutation/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#name-1"><code class="docutils literal notranslate"><span class="pre">name/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3078,6 +3192,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#nodebug-0"><code class="docutils literal notranslate"><span class="pre">nodebug/0</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#nolog-3"><code class="docutils literal notranslate"><span class="pre">nolog/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#nologall-0"><code class="docutils literal notranslate"><span class="pre">nologall/0</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#non-blank-1"><code class="docutils literal notranslate"><span class="pre">non_blank//1</span></code></a><ul class="simple">
@@ -3152,6 +3272,12 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#numbervars-3"><code class="docutils literal notranslate"><span class="pre">numbervars/3</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#occurrences-2"><code class="docutils literal notranslate"><span class="pre">occurrences/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#occurrences-3"><code class="docutils literal notranslate"><span class="pre">occurrences/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#occurs-2"><code class="docutils literal notranslate"><span class="pre">occurs/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3168,6 +3294,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#one-or-more-1"><code class="docutils literal notranslate"><span class="pre">one_or_more//1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#one-or-more-2"><code class="docutils literal notranslate"><span class="pre">one_or_more//2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#operating-system-machine-1"><code class="docutils literal notranslate"><span class="pre">operating_system_machine/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#operating-system-name-1"><code class="docutils literal notranslate"><span class="pre">operating_system_name/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#operating-system-release-1"><code class="docutils literal notranslate"><span class="pre">operating_system_release/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#operating-system-type-1"><code class="docutils literal notranslate"><span class="pre">operating_system_type/1</span></code></a><ul class="simple">
@@ -3288,6 +3426,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#port-5"><code class="docutils literal notranslate"><span class="pre">port/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#portray-clause-1"><code class="docutils literal notranslate"><span class="pre">portray_clause/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#postorder-2"><code class="docutils literal notranslate"><span class="pre">postorder/2</span></code></a><ul class="simple">
@@ -3467,6 +3608,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#read-from-codes-2"><code class="docutils literal notranslate"><span class="pre">read_from_codes/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#read-only-device-path-1"><code class="docutils literal notranslate"><span class="pre">read_only_device_path/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#read-stream-2"><code class="docutils literal notranslate"><span class="pre">read_stream/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3498,6 +3642,24 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#readme-2"><code class="docutils literal notranslate"><span class="pre">readme/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#recorda-2"><code class="docutils literal notranslate"><span class="pre">recorda/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#recorda-3"><code class="docutils literal notranslate"><span class="pre">recorda/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#recorded-2"><code class="docutils literal notranslate"><span class="pre">recorded/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#recorded-3"><code class="docutils literal notranslate"><span class="pre">recorded/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#recordz-2"><code class="docutils literal notranslate"><span class="pre">recordz/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#recordz-3"><code class="docutils literal notranslate"><span class="pre">recordz/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#relative-standard-deviation-2"><code class="docutils literal notranslate"><span class="pre">relative_standard_deviation/2</span></code></a><ul class="simple">
@@ -3662,6 +3824,12 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#sequence-4"><code class="docutils literal notranslate"><span class="pre">sequence/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#sequential-occurrences-2"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#sequential-occurrences-3"><code class="docutils literal notranslate"><span class="pre">sequential_occurrences/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#serve-3"><code class="docutils literal notranslate"><span class="pre">serve/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -3705,6 +3873,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#shrink-3"><code class="docutils literal notranslate"><span class="pre">shrink/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#shrink-sequence-3"><code class="docutils literal notranslate"><span class="pre">shrink_sequence/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#shrinker-1"><code class="docutils literal notranslate"><span class="pre">shrinker/1</span></code></a><ul class="simple">
@@ -3777,6 +3948,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#starts-2"><code class="docutils literal notranslate"><span class="pre">starts/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#stop-0"><code class="docutils literal notranslate"><span class="pre">stop/0</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#stop-redirect-to-file-0"><code class="docutils literal notranslate"><span class="pre">stop_redirect_to_file/0</span></code></a><ul class="simple">
@@ -3855,6 +4029,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#suspend-monitor-0"><code class="docutils literal notranslate"><span class="pre">suspend_monitor/0</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#swap-2"><code class="docutils literal notranslate"><span class="pre">swap/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#swap-consecutive-2"><code class="docutils literal notranslate"><span class="pre">swap_consecutive/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#symdiff-3"><code class="docutils literal notranslate"><span class="pre">symdiff/3</span></code></a><ul class="simple">
@@ -4073,6 +4253,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#with-output-to-2"><code class="docutils literal notranslate"><span class="pre">with_output_to/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#without-2"><code class="docutils literal notranslate"><span class="pre">without//2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#working-directory-1"><code class="docutils literal notranslate"><span class="pre">working_directory/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4115,6 +4298,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#zero-or-more-1"><code class="docutils literal notranslate"><span class="pre">zero_or_more//1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#zero-or-more-2"><code class="docutils literal notranslate"><span class="pre">zero_or_more//2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#zip-2"><code class="docutils literal notranslate"><span class="pre">zip/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4130,12 +4316,12 @@
 </div>
 </section>
 <section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-<p>Generated on Thu Jun 29 09:03:55 WEST 2023</p>
+<p>Generated on Mon Jun  3 17:09:04 WEST 2024</p>
 </section>
 
 
@@ -4148,7 +4334,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

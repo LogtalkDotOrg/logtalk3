@@ -1,0 +1,56 @@
+.. index:: recorded_database
+.. _recorded_database/0:
+
+.. rst-class:: right
+
+**object**
+
+``recorded_database``
+=====================
+
+Legacy recorded database predicates. Provides an application global database.
+
+| **Availability:** 
+|    ``logtalk_load(recorded_database(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2023-12-17
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`recorded_database_core <recorded_database_core/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`recorded_database_core/0::erase/1`  :ref:`recorded_database_core/0::instance/2`  :ref:`recorded_database_core/0::recorda/2`  :ref:`recorded_database_core/0::recorda/3`  :ref:`recorded_database_core/0::recorded/2`  :ref:`recorded_database_core/0::recorded/3`  :ref:`recorded_database_core/0::recordz/2`  :ref:`recorded_database_core/0::recordz/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

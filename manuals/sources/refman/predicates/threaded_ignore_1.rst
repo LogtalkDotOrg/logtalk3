@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,6 +46,13 @@ message queue of the object containing the call
    compatible multi-threading primitives. The value of the read-only
    :ref:`threads <flag_threads>` flag is set to ``supported`` when that
    is the case.
+
+Meta-predicate template
+-----------------------
+
+::
+
+   threaded_ignore(0)
 
 Modes and number of proofs
 --------------------------

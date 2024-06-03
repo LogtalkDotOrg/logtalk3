@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Predicates &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>Predicates &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -180,7 +183,7 @@
            <div itemprop="articleBody">
              
   <section id="predicates">
-<span id="predicates-predicates"></span><h1>Predicates<a class="headerlink" href="#predicates" title="Permalink to this heading"></a></h1>
+<span id="predicates-predicates"></span><h1>Predicates<a class="headerlink" href="#predicates" title="Link to this heading"></a></h1>
 <p>Predicate directives and clauses can be encapsulated inside objects and
 categories. Protocols can only contain predicate directives. From the
 point-of-view of a traditional imperative object-oriented language,
@@ -189,21 +192,21 @@ Mutable object state can be represented using dynamic object predicates
 but should only be used when strictly necessary as it breaks declarative
 semantics.</p>
 <section id="reserved-predicate-names">
-<span id="predicates-reserved"></span><h2>Reserved predicate names<a class="headerlink" href="#reserved-predicate-names" title="Permalink to this heading"></a></h2>
+<span id="predicates-reserved"></span><h2>Reserved predicate names<a class="headerlink" href="#reserved-predicate-names" title="Link to this heading"></a></h2>
 <p>For practical and performance reasons, some predicate names have a fixed
 interpretation. These predicates are declared in the built-protocols.
 They are: <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a>,
-declared in the <a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.67.0)"><span class="xref std std-ref">expanding</span></a> protocol;
+declared in the <a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">expanding</span></a> protocol;
 <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>, declared in the
-<a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.67.0)"><span class="xref std std-ref">monitoring</span></a> protocol; and
+<a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">monitoring</span></a> protocol; and
 <a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a>, declared in the
-<a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.67.0)"><span class="xref std std-ref">forwarding</span></a> protocol.
+<a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">forwarding</span></a> protocol.
 By default, the compiler prints a warning when
 a definition for one of these predicates is found but the reference to
 the corresponding built-in protocol is missing.</p>
 </section>
 <section id="declaring-predicates">
-<span id="predicates-declaring"></span><h2>Declaring predicates<a class="headerlink" href="#declaring-predicates" title="Permalink to this heading"></a></h2>
+<span id="predicates-declaring"></span><h2>Declaring predicates<a class="headerlink" href="#declaring-predicates" title="Link to this heading"></a></h2>
 <p>Logtalk provides a clear distinction between <em>declaring a predicate</em> and
 <em>defining a predicate</em> and thus clear <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a> semantics.
 Messages or calls for declared but undefined predicates fail. Messages or
@@ -216,7 +219,7 @@ declaration must contain, at least, a <em>scope</em> directive. Other
 directives may be used to document the predicate or to ensure proper
 compilation of the predicate clauses.</p>
 <section id="scope-directives">
-<span id="predicates-scope"></span><h3>Scope directives<a class="headerlink" href="#scope-directives" title="Permalink to this heading"></a></h3>
+<span id="predicates-scope"></span><h3>Scope directives<a class="headerlink" href="#scope-directives" title="Link to this heading"></a></h3>
 <p>A predicate scope directive specifies <em>from where</em> the predicate can be
 called, i.e. its <em>visibility</em>. Predicates can be <em>public</em>, <em>protected</em>,
 <em>private</em>, or <em>local</em>. Public predicates can be called from any object.
@@ -267,10 +270,10 @@ This prevents an application breaking when e.g. an updated third-party
 library adds new operators. It also allows loading entities that provide
 conflicting operator definitions. Here the usual programming idiom is to
 copy the operator definitions to a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive. For example, the
-<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool makes available a <code class="docutils literal notranslate"><span class="pre">'=~='/2</span></code> predicate (for approximate
+<code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool makes available a <code class="docutils literal notranslate"><span class="pre">(=~=)/2</span></code> predicate (for approximate
 float equality) that is intended to be used as an infix operator:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [
-    <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="s">&#39;=~=&#39;</span>), <span class="s">&#39;=~=&#39;</span><span class="o">/</span><span class="m">2</span>
+    <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="o">=</span><span class="err">~</span><span class="o">=</span>), (<span class="o">=</span><span class="err">~</span><span class="o">=</span>)<span class="o">/</span><span class="m">2</span>
 ]).
 </pre></div>
 </div>
@@ -279,7 +282,7 @@ entities is the same for using library entity predicates with implicit
 message sending.</p>
 </section>
 <section id="mode-directive">
-<span id="predicates-mode"></span><h3>Mode directive<a class="headerlink" href="#mode-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-mode"></span><h3>Mode directive<a class="headerlink" href="#mode-directive" title="Link to this heading"></a></h3>
 <p>Often predicates can only be called using specific argument patterns.
 The valid arguments and instantiation modes of those arguments can be
 documented by using the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> directive. For
@@ -370,13 +373,15 @@ simply parses this directive for collecting its information for use in the
 of mode directives is a good starting point for documenting your predicates.</p>
 </section>
 <section id="meta-predicate-directive">
-<span id="predicates-meta"></span><h3>Meta-predicate directive<a class="headerlink" href="#meta-predicate-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-meta"></span><h3>Meta-predicate directive<a class="headerlink" href="#meta-predicate-directive" title="Link to this heading"></a></h3>
 <p>Some predicates may have arguments that will be called as goals or interpreted
 as <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> that will be used for constructing goals. To
 ensure that these goals will be executed in the correct context (i.e. in the
 <a class="reference internal" href="../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the meta-predicate
 <a class="reference internal" href="../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>) we need to
-use the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive. For example:</p>
+use the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive (in the case of <em>meta
+non-terminals</em>, there’s also a <a class="reference internal" href="../refman/directives/meta_non_terminal_1.html#directives-meta-non-terminal-1"><span class="std std-ref">meta_non_terminal/1</span></a> directive).
+For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(<span class="k">findall</span>(<span class="o">*</span>, <span class="m">0</span>, <span class="o">*</span>)).
 <span class="p">:- </span><span class="k">meta_predicate</span>(map(<span class="m">2</span>, <span class="o">*</span>, <span class="o">*</span>)).
 </pre></div>
@@ -421,14 +426,17 @@ indicators, or conjunction of predicate indicators.</p>
 <p>To the best of my knowledge, the use of non-negative integers to specify
 closures has first introduced on Quintus Prolog for providing
 information for predicate cross-reference tools.</p>
-<p>As each Logtalk entity is independently compiled, this directive must be
-included in every object or category that contains a definition for the
-described meta-predicate, even if the meta-predicate declaration is
-inherited from another entity, to ensure proper compilation of
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As each Logtalk entity is independently compiled, this directive must
+be included in every object or category that contains a definition for
+the described meta-predicate, even if the meta-predicate declaration
+is inherited from another entity, to ensure proper compilation of
 meta-arguments.</p>
+</div>
 </section>
 <section id="discontiguous-directive">
-<span id="predicates-discontiguous"></span><h3>Discontiguous directive<a class="headerlink" href="#discontiguous-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-discontiguous"></span><h3>Discontiguous directive<a class="headerlink" href="#discontiguous-directive" title="Link to this heading"></a></h3>
 <p>The clause of an object (or category) predicate may not be contiguous.
 In that case, we must declare the predicate discontiguous by using the
 <a class="reference internal" href="../refman/directives/discontiguous_1.html#directives-discontiguous-1"><span class="std std-ref">discontiguous/1</span></a> directive:</p>
@@ -436,35 +444,43 @@ In that case, we must declare the predicate discontiguous by using the
 </pre></div>
 </div>
 <p>This is a directive that we should avoid using: it makes your code
-harder to read and it is not supported by some Prolog compilers.</p>
+harder to read and it is not supported by some Prolog backends.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>As each Logtalk entity is compiled independently of other entities,
 this directive must be included in every object or category that
-contains a definition for the described predicate (even if the predicate
-declaration is inherited from other entity).</p>
+contains a definition for the described predicate (even if the
+predicate declaration is inherited from other entity).</p>
+</div>
 </section>
 <section id="dynamic-directive">
-<span id="predicates-dynamic"></span><h3>Dynamic directive<a class="headerlink" href="#dynamic-directive" title="Permalink to this heading"></a></h3>
-<p>An object predicate can be static or dynamic. By default, all object
-predicates are static. To declare a dynamic predicate we use the
-<a class="reference internal" href="../refman/directives/dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic/1</span></a> directive:</p>
+<span id="predicates-dynamic"></span><h3>Dynamic directive<a class="headerlink" href="#dynamic-directive" title="Link to this heading"></a></h3>
+<p>An object predicate can be static or dynamic. By default, all predicates (and
+non-terminals) of static objects defined in source files are static. To declare
+a dynamic predicate (or non-terminal) we use the <a class="reference internal" href="../refman/directives/dynamic_1.html#directives-dynamic-1"><span class="std std-ref">dynamic/1</span></a>
+directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">dynamic</span>(foo<span class="o">/</span><span class="m">1</span>).
 </pre></div>
 </div>
-<p>This directive may also be used to declare dynamic grammar rule
-non-terminals. As each Logtalk entity is compiled independently from
-other entities, this directive must be included in every object that
-contains a definition for the described predicate (even if the predicate
-declaration is inherited from other object or imported from a category).
-If we omit the dynamic declaration then the predicate definition will be
-compiled static. In the case of dynamic objects, static predicates
-cannot be redefined using the database built-in methods (despite being
-internally compiled to dynamic code).</p>
-<p>Dynamic predicates can be used to represent persistent mutable object
-state. Note that static objects may declare and define dynamic
-predicates.</p>
+<p>Predicates of objects dynamically created at runtime (using the
+<a class="reference internal" href="../refman/predicates/create_object_4.html#predicates-create-object-4"><span class="std std-ref">create_object/4</span></a> built-in predicate) and predicates of
+dynamic objects defined in source files (using the <a class="reference internal" href="../refman/directives/dynamic_0.html#directives-dynamic-0"><span class="std std-ref">dynamic/0</span></a>
+directive) are implicitly dynamic.</p>
+<p>Dynamic predicates can be used to represent persistent mutable object state.
+Note that static objects may declare and define dynamic predicates. Categories
+can only declare dynamic predicates (with the importing objects holding the
+predicate definitions).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As each Logtalk entity is compiled independently from other entities, this
+directive must be included in every object that contains a definition for
+the described predicate (even if the predicate declaration is inherited
+from other object or imported from a category). If we omit the dynamic
+declaration then the predicate definition will be compiled static.</p>
+</div>
 </section>
 <section id="operator-directive">
-<span id="predicates-op"></span><h3>Operator directive<a class="headerlink" href="#operator-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-op"></span><h3>Operator directive<a class="headerlink" href="#operator-directive" title="Link to this heading"></a></h3>
 <p>An object (or category) predicate can be declared as an operator using
 the familiar <a class="reference internal" href="../refman/directives/op_3.html#directives-op-3"><span class="std std-ref">op/3</span></a> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">op</span>(<span class="nv">Priority</span>, <span class="nv">Specifier</span>, <span class="nv">Operator</span>).
@@ -498,7 +514,7 @@ to the source file, just <em>undefine</em> them at the end of the file. For exam
 <p>Global operators can be declared in the application loader file.</p>
 </section>
 <section id="uses-directive">
-<span id="predicates-uses"></span><h3>Uses directive<a class="headerlink" href="#uses-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-uses"></span><h3>Uses directive<a class="headerlink" href="#uses-directive" title="Link to this heading"></a></h3>
 <p>When a predicate makes heavy use of predicates defined on other objects,
 its predicate clauses can be verbose due to all the necessary message
 sending goals. Consider the following example:</p>
@@ -581,7 +597,7 @@ definition for the <code class="docutils literal notranslate"><span class="pre">
 error).</p>
 </section>
 <section id="alias-directive">
-<span id="predicates-alias"></span><h3>Alias directive<a class="headerlink" href="#alias-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-alias"></span><h3>Alias directive<a class="headerlink" href="#alias-directive" title="Link to this heading"></a></h3>
 <p>Logtalk allows the definition of an alternative name for an inherited or
 imported predicate (or for an inherited or imported grammar rule
 non-terminal) through the use of the <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> directive:</p>
@@ -685,7 +701,7 @@ the predicate definition in <code class="docutils literal notranslate"><span cla
 contained in <code class="docutils literal notranslate"><span class="pre">list</span></code>.</p>
 </section>
 <section id="documenting-directive">
-<span id="predicates-info"></span><h3>Documenting directive<a class="headerlink" href="#documenting-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-info"></span><h3>Documenting directive<a class="headerlink" href="#documenting-directive" title="Link to this heading"></a></h3>
 <p>A predicate can be documented with arbitrary user-defined information by
 using the <a class="reference internal" href="../refman/directives/info_2.html#directives-info-2"><span class="std std-ref">info/2</span></a> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, <span class="nv">List</span>).
@@ -695,7 +711,7 @@ using the <a class="reference internal" href="../refman/directives/info_2.html#d
 <a class="reference internal" href="documenting.html#documenting-documenting"><span class="std std-ref">Documenting</span></a> section for details.</p>
 </section>
 <section id="multifile-directive">
-<span id="predicates-multifile"></span><h3>Multifile directive<a class="headerlink" href="#multifile-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-multifile"></span><h3>Multifile directive<a class="headerlink" href="#multifile-directive" title="Link to this heading"></a></h3>
 <p>A predicate can be declared <em>multifile</em> by using the
 <a class="reference internal" href="../refman/directives/multifile_1.html#directives-multifile-1"><span class="std std-ref">multifile/1</span></a> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>).
@@ -788,7 +804,7 @@ database instead of the database of the entity holding the multifile
 predicate primary declaration.</p>
 </section>
 <section id="coinductive-directive">
-<span id="predicates-coinductive"></span><h3>Coinductive directive<a class="headerlink" href="#coinductive-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-coinductive"></span><h3>Coinductive directive<a class="headerlink" href="#coinductive-directive" title="Link to this heading"></a></h3>
 <p>A predicate can be declared <em>coinductive</em> by using the
 <a class="reference internal" href="../refman/directives/coinductive_1.html#directives-coinductive-1"><span class="std std-ref">coinductive/1</span></a> directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">coinductive</span>(comember<span class="o">/</span><span class="m">2</span>).
@@ -800,7 +816,7 @@ value of the read-only <a class="reference internal" href="programming.html#flag
 <code class="docutils literal notranslate"><span class="pre">supported</span></code> for the backend Prolog compilers providing that support.</p>
 </section>
 <section id="synchronized-directive">
-<span id="predicates-synchronized"></span><h3>Synchronized directive<a class="headerlink" href="#synchronized-directive" title="Permalink to this heading"></a></h3>
+<span id="predicates-synchronized"></span><h3>Synchronized directive<a class="headerlink" href="#synchronized-directive" title="Link to this heading"></a></h3>
 <p>A predicate can be declared <em>synchronized</em> by using the
 <a class="reference internal" href="../refman/directives/synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a> directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(write_log_entry<span class="o">/</span><span class="m">2</span>).
@@ -813,9 +829,9 @@ for details.</p>
 </section>
 </section>
 <section id="defining-predicates">
-<span id="predicates-defining"></span><h2>Defining predicates<a class="headerlink" href="#defining-predicates" title="Permalink to this heading"></a></h2>
+<span id="predicates-defining"></span><h2>Defining predicates<a class="headerlink" href="#defining-predicates" title="Link to this heading"></a></h2>
 <section id="object-predicates">
-<span id="predicates-objects"></span><h3>Object predicates<a class="headerlink" href="#object-predicates" title="Permalink to this heading"></a></h3>
+<span id="predicates-objects"></span><h3>Object predicates<a class="headerlink" href="#object-predicates" title="Link to this heading"></a></h3>
 <p>We define object predicates as we have always defined Prolog predicates,
 the only difference be that we have four more control structures (the
 three message sending operators plus the external call operator) to play
@@ -847,7 +863,7 @@ need to add the necessary encapsulation and scope directives to the old
 code.</p>
 </section>
 <section id="category-predicates">
-<span id="predicates-categories"></span><h3>Category predicates<a class="headerlink" href="#category-predicates" title="Permalink to this heading"></a></h3>
+<span id="predicates-categories"></span><h3>Category predicates<a class="headerlink" href="#category-predicates" title="Link to this heading"></a></h3>
 <p>A category can only contain clauses for static predicates. But there are
 no restrictions in declaring and calling dynamic predicates from inside
 a category. Because a category can be imported by multiple objects, dynamic
@@ -901,7 +917,7 @@ dynamic database of <em>this</em>, we would write instead:</p>
 for the <code class="docutils literal notranslate"><span class="pre">attribute_/2</span></code> private dynamic predicate.</p>
 </section>
 <section id="meta-predicates">
-<span id="predicates-metadef"></span><h3>Meta-predicates<a class="headerlink" href="#meta-predicates" title="Permalink to this heading"></a></h3>
+<span id="predicates-metadef"></span><h3>Meta-predicates<a class="headerlink" href="#meta-predicates" title="Link to this heading"></a></h3>
 <p>Meta-predicates may be defined inside objects and categories as any other
 predicate. A meta-predicate is declared using the
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive as described earlier on
@@ -977,7 +993,7 @@ predicate prefixing mechanism. Thus, the meta-argument calling context
 is not part of the meta-argument itself.</p>
 </section>
 <section id="lambda-expressions">
-<span id="predicates-lambdas"></span><h3>Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Permalink to this heading"></a></h3>
+<span id="predicates-lambdas"></span><h3>Lambda expressions<a class="headerlink" href="#lambda-expressions" title="Link to this heading"></a></h3>
 <p>The use of <a class="reference external" href="https://en.wikipedia.org/wiki/Lambda_calculus">lambda
 expressions</a> as
 meta-predicate goal and <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closure</span></a> arguments often saves writing
@@ -1080,7 +1096,7 @@ the <a class="reference internal" href="expansion.html#expansion-expansion"><spa
 as a standard library for practical performance.</p>
 </section>
 <section id="redefining-built-in-predicates">
-<span id="predicates-redefining"></span><h3>Redefining built-in predicates<a class="headerlink" href="#redefining-built-in-predicates" title="Permalink to this heading"></a></h3>
+<span id="predicates-redefining"></span><h3>Redefining built-in predicates<a class="headerlink" href="#redefining-built-in-predicates" title="Link to this heading"></a></h3>
 <p>Logtalk built-in predicates and Prolog built-in predicates can be redefined
 inside objects and categories. Although the redefinition of Logtalk built-in
 predicates should be avoided, the support for redefining Prolog built-in
@@ -1093,13 +1109,13 @@ to alert the user of any redefined Logtalk or Prolog built-in predicate.</p>
 <a class="reference internal" href="../refman/directives/conditional_compilation_directives.html#conditional-compilation-directives"><span class="std std-ref">conditional compilation directives</span></a>
 when writing portable applications where some of the supported backends
 don’t provide a built-in predicate found in the other backends. As an example,
-consider the de facto standard list length predicate, <code class="docutils literal notranslate"><span class="pre">length/2</span></code>. This
-predicate is provided as a built-in predicate in most but not all backends.
-The <code class="docutils literal notranslate"><span class="pre">list</span></code> library object includes the code:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">predicate_property</span>(length(<span class="nv">_</span>, <span class="nv">_</span>), built_in)).
+consider the de facto standard <code class="docutils literal notranslate"><span class="pre">msort/2</span></code> predicate (which sorts a list while
+keeping duplicates). This predicate is provided as a built-in predicate in most
+but not all backends. The <code class="docutils literal notranslate"><span class="pre">list</span></code> library object includes the code:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">if</span>(<span class="k">predicate_property</span>(msort(<span class="nv">_</span>, <span class="nv">_</span>), built_in)).
 
-    length(<span class="nv">List</span>, <span class="nv">Length</span>) <span class="o">:-</span>
-        <span class="k">{</span>length(<span class="nv">List</span>, <span class="nv">Length</span>)<span class="k">}</span>.
+    msort(<span class="nv">List</span>, <span class="nv">Sorted</span>) <span class="o">:-</span>
+        <span class="k">{</span>msort(<span class="nv">List</span>, <span class="nv">Sorted</span>)<span class="k">}</span>.
 
 <span class="p">:- </span><span class="k">else</span>.
 
@@ -1110,7 +1126,7 @@ The <code class="docutils literal notranslate"><span class="pre">list</span></co
 </pre></div>
 </div>
 <p>I.e. the object will use the built-in predicate when available. Otherwise,
-it will use the object provided predicate definition.</p>
+it will use the predicate definition provided by the <code class="docutils literal notranslate"><span class="pre">list</span></code> object.</p>
 <p>The redefinition of built-in predicates can also be accomplished using
 <a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a>. This can be useful
 when porting code while minimizing the changes. For example, assume
@@ -1134,7 +1150,7 @@ the code without changes.</p>
 </section>
 </section>
 <section id="definite-clause-grammar-rules">
-<span id="predicates-dcgs"></span><h2>Definite clause grammar rules<a class="headerlink" href="#definite-clause-grammar-rules" title="Permalink to this heading"></a></h2>
+<span id="predicates-dcgs"></span><h2>Definite clause grammar rules<a class="headerlink" href="#definite-clause-grammar-rules" title="Link to this heading"></a></h2>
 <p>Definite clause grammar rules (DCGs) provide a convenient notation to
 represent the parsing and rewrite rules common of most grammars in
 Prolog. In Logtalk, definite clause grammar rules can be encapsulated
@@ -1167,22 +1183,16 @@ for parsing simple arithmetic expressions:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>The predicate <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> called
-in the definition of predicate <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> above is a Logtalk built-in
-method, similar to the predicate with the same name found on most Prolog
-compilers that support definite clause grammars. After compiling and
-loading this object, we can test the grammar rules with calls such as
-the following one:</p>
+<p>After compiling and loading this object, we can test the grammar rules
+using the <code class="docutils literal notranslate"><span class="pre">parse/2</span></code> message:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- calculator::parse(&quot;1+2-3*4&quot;, Result).
 
 Result = -9
 yes
 </pre></div>
 </div>
-<p>In most cases, the predicates resulting from the translation of the
-grammar rules to regular clauses are not declared. Instead, these
-predicates are usually called by using the built-in methods
-<a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> as shown in the
+<p>The non-terminals can be called from predicates using the private built-in
+methods <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a> as shown in the
 example above. When we want to use the built-in methods <code class="docutils literal notranslate"><span class="pre">phrase/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>, the non-terminal used as first argument must be within the
 scope of the <em>sender</em>. For the above example, assuming that we want the
@@ -1240,10 +1250,31 @@ grammar rules for parsing determiners, nouns, and verbs. For example:</p>
 <p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">(::)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code>),
 we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> in the body of a grammar. When using a backend Prolog
-compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> control construct.
-In addition, grammar rules may contain meta-calls (a variable taking the place
+compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> control construct.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The semantics of <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code> and <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control constructs in grammar rules
+with a terminal or a non-terminal in the <strong>first</strong> argument are problematic due
+to unrestricted look ahead that may or may not be valid depending on the grammar
+rule implicit arguments. By default, the linter will print warnings for such
+calls (controlled by the <a class="reference internal" href="programming.html#flag-grammar-rules"><span class="std std-ref">grammar_rules</span></a> flag).
+Preferably restrit the use of the <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code> control construct to <code class="docutils literal notranslate"><span class="pre">{}/1</span></code>
+arguments and the use of the <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control construct to <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> test
+arguments.</p>
+</div>
+<p>In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
-<code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>. The <a class="reference internal" href="../refman/directives/meta_non_terminal_1.html#directives-meta-non-terminal-1"><span class="std std-ref">meta_non_terminal/1</span></a> directive allows the
+declaration of non-terminals that have arguments that are meta-called from
+grammar rules. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_non_terminal</span>(zero_or_more(<span class="m">1</span>, <span class="o">*</span>)).
+
+zero_or_more(<span class="nv">Closure</span>, [<span class="nv">Terminal</span>| <span class="nv">Terminals</span>]) <span class="o">--&gt;</span>
+    <span class="k">call</span>(<span class="nv">Closure</span>, <span class="nv">Terminal</span>), <span class="o">!</span>, zero_or_more(<span class="nv">Closure</span>, <span class="nv">Terminals</span>).
+zero_or_more(<span class="nv">_</span>, []) <span class="o">--&gt;</span>
+    [].
+</pre></div>
+</div>
 <p>You may have noticed that Logtalk defines <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a>
 as a control construct for bypassing the compiler when compiling a clause body
 goal. As exemplified above, this is the same control construct that is used in
@@ -1300,11 +1331,12 @@ using the <code class="docutils literal notranslate"><span class="pre">phrase/2-
 grammar rules using the <code class="docutils literal notranslate"><span class="pre">call//1</span></code> built-in method. This recommended
 practice, besides making your code forward compatible with future Logtalk
 versions, also make the code more clear. The linter prints warnings when
-these guidelines are not followed.</p>
+these guidelines are not followed (notably, when a predicate is called as
+a non-terminal or a non-terminal is called as a predicate).</p>
 </div>
 </section>
 <section id="built-in-methods">
-<span id="predicates-methods"></span><h2>Built-in methods<a class="headerlink" href="#built-in-methods" title="Permalink to this heading"></a></h2>
+<span id="predicates-methods"></span><h2>Built-in methods<a class="headerlink" href="#built-in-methods" title="Link to this heading"></a></h2>
 <p>Built-in methods are built-in object and category predicates. These include
 methods to access message execution context, to find sets of solutions, to
 inspect objects, for database handling, for term and goal expansion, and
@@ -1312,7 +1344,7 @@ for printing messages. Some of them are counterparts to standard Prolog
 built-in predicates that take into account Logtalk semantics. Similar to
 Prolog built-in predicates, built-in methods cannot not be redefined.</p>
 <section id="logic-and-control-methods">
-<span id="predicates-logic"></span><h3>Logic and control methods<a class="headerlink" href="#logic-and-control-methods" title="Permalink to this heading"></a></h3>
+<span id="predicates-logic"></span><h3>Logic and control methods<a class="headerlink" href="#logic-and-control-methods" title="Link to this heading"></a></h3>
 <p>The <a class="reference internal" href="../refman/methods/cut_0.html#methods-cut-0"><span class="std std-ref">!/0</span></a>, <a class="reference internal" href="../refman/methods/true_0.html#methods-true-0"><span class="std std-ref">true/0</span></a>, <a class="reference internal" href="../refman/methods/fail_0.html#methods-fail-0"><span class="std std-ref">fail/0</span></a>,
 <a class="reference internal" href="../refman/methods/false_0.html#methods-false-0"><span class="std std-ref">false/0</span></a>, and <a class="reference internal" href="../refman/methods/repeat_0.html#methods-repeat-0"><span class="std std-ref">repeat/0</span></a> standard control
 constructs and logic predicates are interpreted as built-in public methods
@@ -1321,7 +1353,7 @@ used as messages when sending multiple messages to the same object
 (see the section on <a class="reference internal" href="messages.html#messages-broadcasting"><span class="std std-ref">message broadcasting</span></a>).</p>
 </section>
 <section id="execution-context-methods">
-<span id="predicates-context"></span><h3>Execution context methods<a class="headerlink" href="#execution-context-methods" title="Permalink to this heading"></a></h3>
+<span id="predicates-context"></span><h3>Execution context methods<a class="headerlink" href="#execution-context-methods" title="Link to this heading"></a></h3>
 <p>Logtalk defines five built-in private methods to access an object
 execution context. These methods are in the common usage scenarios
 translated to a single unification performed at compile time with a
@@ -1451,7 +1483,7 @@ arguments by writing (using the library <code class="docutils literal notranslat
 </div>
 </section>
 <section id="error-handling-and-throwing-methods">
-<span id="predicates-errors"></span><h3>Error handling and throwing methods<a class="headerlink" href="#error-handling-and-throwing-methods" title="Permalink to this heading"></a></h3>
+<span id="predicates-errors"></span><h3>Error handling and throwing methods<a class="headerlink" href="#error-handling-and-throwing-methods" title="Link to this heading"></a></h3>
 <p>Besides the <a class="reference internal" href="../refman/methods/catch_3.html#methods-catch-3"><span class="std std-ref">catch/3</span></a> and <a class="reference internal" href="../refman/methods/throw_1.html#methods-throw-1"><span class="std std-ref">throw/1</span></a> methods inherited from
 Prolog, Logtalk also provides a set of convenience methods to throw
 standard <code class="docutils literal notranslate"><span class="pre">error/2</span></code> exception terms:
@@ -1468,7 +1500,7 @@ standard <code class="docutils literal notranslate"><span class="pre">error/2</s
 <a class="reference internal" href="../refman/methods/system_error_0.html#methods-system-error-0"><span class="std std-ref">system_error/0</span></a>.</p>
 </section>
 <section id="database-methods">
-<span id="predicates-database"></span><h3>Database methods<a class="headerlink" href="#database-methods" title="Permalink to this heading"></a></h3>
+<span id="predicates-database"></span><h3>Database methods<a class="headerlink" href="#database-methods" title="Link to this heading"></a></h3>
 <p>Logtalk provides a set of built-in methods for <a class="reference internal" href="../glossary.html#term-object-database"><span class="xref std std-term">object database</span></a> handling
 similar to the usual database Prolog predicates:
 <a class="reference internal" href="../refman/methods/abolish_1.html#methods-abolish-1"><span class="std std-ref">abolish/1</span></a>,
@@ -1501,7 +1533,7 @@ grammar rule into a clause that can then be used with the database
 methods.</p>
 </section>
 <section id="meta-call-methods">
-<span id="predicates-metacalls"></span><h3>Meta-call methods<a class="headerlink" href="#meta-call-methods" title="Permalink to this heading"></a></h3>
+<span id="predicates-metacalls"></span><h3>Meta-call methods<a class="headerlink" href="#meta-call-methods" title="Link to this heading"></a></h3>
 <p>Logtalk supports the generalized <a class="reference internal" href="../refman/methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> meta-predicate. This
 built-in private meta-predicate must be used in the implementation of
 meta-predicates which work with <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> instead of goals.
@@ -1510,7 +1542,7 @@ In addition, Logtalk supports the built-in private meta-predicates
 <a class="reference internal" href="../refman/methods/not_1.html#methods-not-1"><span class="std std-ref">(\+)/1</span></a>. These methods cannot be used as messages to objects.</p>
 </section>
 <section id="all-solutions-methods">
-<span id="predicates-solutions"></span><h3>All solutions methods<a class="headerlink" href="#all-solutions-methods" title="Permalink to this heading"></a></h3>
+<span id="predicates-solutions"></span><h3>All solutions methods<a class="headerlink" href="#all-solutions-methods" title="Link to this heading"></a></h3>
 <p>The usual all solutions meta-predicates are built-in private methods in
 Logtalk: <a class="reference internal" href="../refman/methods/bagof_3.html#methods-bagof-3"><span class="std std-ref">bagof/3</span></a>, <a class="reference internal" href="../refman/methods/findall_3.html#methods-findall-3"><span class="std std-ref">findall/3</span></a>,
 <a class="reference internal" href="../refman/methods/findall_4.html#methods-findall-4"><span class="std std-ref">findall/4</span></a>, and <a class="reference internal" href="../refman/methods/setof_3.html#methods-setof-3"><span class="std std-ref">setof/3</span></a>. There is also a
@@ -1518,7 +1550,7 @@ Logtalk: <a class="reference internal" href="../refman/methods/bagof_3.html#meth
 These methods cannot be used as messages to objects.</p>
 </section>
 <section id="reflection-methods">
-<span id="predicates-reflection"></span><h3>Reflection methods<a class="headerlink" href="#reflection-methods" title="Permalink to this heading"></a></h3>
+<span id="predicates-reflection"></span><h3>Reflection methods<a class="headerlink" href="#reflection-methods" title="Link to this heading"></a></h3>
 <p>Logtalk provides a comprehensive set of built-in predicates and built-in
 methods for querying about entities and predicates. Some of the information,
 however, requires that the source files are compiled with the
@@ -1539,7 +1571,7 @@ user-defined predicate definitions. See below for a more detailed description
 of these methods.</p>
 </section>
 <section id="definite-clause-grammar-parsing-methods-and-non-terminals">
-<span id="predicates-parsing"></span><h3>Definite clause grammar parsing methods and non-terminals<a class="headerlink" href="#definite-clause-grammar-parsing-methods-and-non-terminals" title="Permalink to this heading"></a></h3>
+<span id="predicates-parsing"></span><h3>Definite clause grammar parsing methods and non-terminals<a class="headerlink" href="#definite-clause-grammar-parsing-methods-and-non-terminals" title="Link to this heading"></a></h3>
 <p>Logtalk supports two definite clause grammar parsing built-in private
 methods, <a class="reference internal" href="../refman/methods/phrase_2.html#methods-phrase-2"><span class="std std-ref">phrase/2</span></a> and <a class="reference internal" href="../refman/methods/phrase_3.html#methods-phrase-3"><span class="std std-ref">phrase/3</span></a>, with definitions
 similar to the predicates with the same name found on most Prolog
@@ -1554,7 +1586,7 @@ the arguments.</p>
 </section>
 </section>
 <section id="predicate-properties">
-<span id="predicates-properties"></span><h2>Predicate properties<a class="headerlink" href="#predicate-properties" title="Permalink to this heading"></a></h2>
+<span id="predicates-properties"></span><h2>Predicate properties<a class="headerlink" href="#predicate-properties" title="Link to this heading"></a></h2>
 <p>We can find the properties of visible predicates by calling the
 <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a> built-in method. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- bar::predicate_property(foo(_), Property).
@@ -1619,6 +1651,8 @@ compiler supporting a compatible multi-threading implementation)</p>
 source files and when those source files are compiled with the
 <a class="reference internal" href="programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag turned on:</p>
 <dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">recursive</span></code></dt><dd><p>The predicate definition includes at least one recursive rule</p>
+</dd>
 <dt><code class="docutils literal notranslate"><span class="pre">inline</span></code></dt><dd><p>The predicate definition is inlined</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">auxiliary</span></code></dt><dd><p>The predicate is not user-defined but rather automatically generated
@@ -1666,7 +1700,7 @@ that provide access to the start line of a read term. When such support is
 not available, the value <code class="docutils literal notranslate"><span class="pre">-1</span></code> is returned for the start and end lines.</p>
 </section>
 <section id="finding-declared-predicates">
-<span id="predicates-finding"></span><h2>Finding declared predicates<a class="headerlink" href="#finding-declared-predicates" title="Permalink to this heading"></a></h2>
+<span id="predicates-finding"></span><h2>Finding declared predicates<a class="headerlink" href="#finding-declared-predicates" title="Link to this heading"></a></h2>
 <p>We can find, by backtracking, all visible user predicates by calling the
 <a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a> built-in method. This method takes into
 account predicate scope declarations. For example, the following call will
@@ -1686,7 +1720,7 @@ grammar rule non-terminals declared for an object. For example:</p>
 functor but users should not rely on this always being true.</p>
 </section>
 <section id="calling-prolog-predicates">
-<span id="predicates-prolog"></span><h2>Calling Prolog predicates<a class="headerlink" href="#calling-prolog-predicates" title="Permalink to this heading"></a></h2>
+<span id="predicates-prolog"></span><h2>Calling Prolog predicates<a class="headerlink" href="#calling-prolog-predicates" title="Link to this heading"></a></h2>
 <p>Logtalk is designed for both <em>robustness</em> and <em>portability</em>. In the context
 of calling Prolog predicates, robustness requires that the compilation of
 Logtalk source code must not have <em>accidental</em> dependencies on Prolog code that
@@ -1698,7 +1732,7 @@ predicates is often unavoidable, however, due to the narrow scope of Prolog
 standards. Logtalk applications may also require calling user-defined Prolog
 predicates, either in <code class="docutils literal notranslate"><span class="pre">user</span></code> or in Prolog modules.</p>
 <section id="calling-prolog-built-in-predicates">
-<h3>Calling Prolog built-in predicates<a class="headerlink" href="#calling-prolog-built-in-predicates" title="Permalink to this heading"></a></h3>
+<h3>Calling Prolog built-in predicates<a class="headerlink" href="#calling-prolog-built-in-predicates" title="Link to this heading"></a></h3>
 <p>In predicate clauses and object <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives, predicate
 calls that are not prefixed with a message sending, super call, or module
 qualification operator (<code class="docutils literal notranslate"><span class="pre">::</span></code>, <code class="docutils literal notranslate"><span class="pre">^^</span></code>, or <code class="docutils literal notranslate"><span class="pre">:</span></code>), are compiled to either
@@ -1736,7 +1770,7 @@ on a non-standard built-in predicate, this directive will also silence the
 compiler portability warning.</p>
 </section>
 <section id="calling-prolog-non-standard-built-in-meta-predicates">
-<span id="predicates-prolog-meta"></span><h3>Calling Prolog non-standard built-in meta-predicates<a class="headerlink" href="#calling-prolog-non-standard-built-in-meta-predicates" title="Permalink to this heading"></a></h3>
+<span id="predicates-prolog-meta"></span><h3>Calling Prolog non-standard built-in meta-predicates<a class="headerlink" href="#calling-prolog-non-standard-built-in-meta-predicates" title="Link to this heading"></a></h3>
 <p>Prolog built-in meta-predicates may only be called locally within
 objects or categories, i.e. they cannot be used as messages. Compiling
 calls to non-standard, Prolog built-in meta-predicates can be tricky,
@@ -1761,7 +1795,7 @@ predicate <code class="docutils literal notranslate"><span class="pre">'$lgt_pro
 debug mode.</p>
 </section>
 <section id="calling-prolog-foreign-predicates">
-<span id="predicates-prolog-foreign"></span><h3>Calling Prolog foreign predicates<a class="headerlink" href="#calling-prolog-foreign-predicates" title="Permalink to this heading"></a></h3>
+<span id="predicates-prolog-foreign"></span><h3>Calling Prolog foreign predicates<a class="headerlink" href="#calling-prolog-foreign-predicates" title="Link to this heading"></a></h3>
 <p>Prolog systems often support defining <cite>foreign</cite> predicates, i.e. predicates
 defined using languages other than Prolog using a <cite>foreign language interface</cite>.
 There isn’t, however, any standard for defining, making available, and
@@ -1780,7 +1814,7 @@ recognizing foreign predicates that allows the Logtalk compiler to inline
 calls to the predicates (thus avoiding call indirection overheads).</p>
 </section>
 <section id="calling-prolog-user-defined-plain-predicates">
-<span id="predicates-prolog-user"></span><h3>Calling Prolog user-defined plain predicates<a class="headerlink" href="#calling-prolog-user-defined-plain-predicates" title="Permalink to this heading"></a></h3>
+<span id="predicates-prolog-user"></span><h3>Calling Prolog user-defined plain predicates<a class="headerlink" href="#calling-prolog-user-defined-plain-predicates" title="Link to this heading"></a></h3>
 <p>User-defined Prolog plain predicates (i.e. predicates that are not defined
 in a Prolog module) can be called from within objects or categories by
 sending the corresponding message to <code class="docutils literal notranslate"><span class="pre">user</span></code>. For example:</p>
@@ -1816,7 +1850,7 @@ will not record the dependency of the <code class="docutils literal notranslate"
 <code class="docutils literal notranslate"><span class="pre">bar/0</span></code> predicate as we are effectively bypassing the compiler.</p>
 </section>
 <section id="calling-prolog-module-predicates">
-<span id="predicates-prolog-module"></span><h3>Calling Prolog module predicates<a class="headerlink" href="#calling-prolog-module-predicates" title="Permalink to this heading"></a></h3>
+<span id="predicates-prolog-module"></span><h3>Calling Prolog module predicates<a class="headerlink" href="#calling-prolog-module-predicates" title="Link to this heading"></a></h3>
 <p>Prolog module predicates can be called from within objects or categories by
 using explicit qualification. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
@@ -1855,27 +1889,27 @@ specification. In the loader file, we would add:</p>
 exported predicates to plain Prolog. In the objects and categories we can
 then call the library predicates, using implicit or explicit qualification,
 as explained. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>:- object(puzzle).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(puzzle).
 
-    :- public(puzzle/1).
+<span class="p">    :- </span><span class="k">public</span>(puzzle<span class="o">/</span><span class="m">1</span>).
 
-    :- use_module(clpfd, [
-        all_different/1, ins/2, label/1,
-        (#=)/2, (#\=)/2,
-        op(700, xfx, #=), op(700, xfx, #\=)
+<span class="p">    :- </span><span class="k">use_module</span>(clpfd, [
+        all_different<span class="o">/</span><span class="m">1</span>, ins<span class="o">/</span><span class="m">2</span>, label<span class="o">/</span><span class="m">1</span>,
+        (<span class="err">#</span><span class="o">=</span>)<span class="o">/</span><span class="m">2</span>, (<span class="err">#</span><span class="o">\=</span>)<span class="o">/</span><span class="m">2</span>,
+        <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="err">#</span><span class="o">=</span>), <span class="k">op</span>(<span class="m">700</span>, xfx, <span class="err">#</span><span class="o">\=</span>)
     ]).
 
-    puzzle([S,E,N,D] + [M,O,R,E] = [M,O,N,E,Y]) :-
-        Vars = [S,E,N,D,M,O,R,Y],
-        Vars ins 0..9,
-        all_different(Vars),
-                  S*1000 + E*100 + N*10 + D +
-                  M*1000 + O*100 + R*10 + E #=
-        M*10000 + O*1000 + N*100 + E*10 + Y,
-        M #\= 0, S #\= 0,
-        label([M,O,N,E,Y]).
+    puzzle([<span class="nv">S</span>,<span class="nv">E</span>,<span class="nv">N</span>,<span class="nv">D</span>] <span class="o">+</span> [<span class="nv">M</span>,<span class="nv">O</span>,<span class="nv">R</span>,<span class="nv">E</span>] <span class="o">=</span> [<span class="nv">M</span>,<span class="nv">O</span>,<span class="nv">N</span>,<span class="nv">E</span>,<span class="nv">Y</span>]) <span class="o">:-</span>
+        <span class="nv">Vars</span> <span class="o">=</span> [<span class="nv">S</span>,<span class="nv">E</span>,<span class="nv">N</span>,<span class="nv">D</span>,<span class="nv">M</span>,<span class="nv">O</span>,<span class="nv">R</span>,<span class="nv">Y</span>],
+        <span class="nv">Vars</span> ins <span class="m">0.</span>.<span class="m">9</span>,
+        all_different(<span class="nv">Vars</span>),
+                  <span class="nv">S</span><span class="o">*</span><span class="m">1000</span> <span class="o">+</span> <span class="nv">E</span><span class="o">*</span><span class="m">100</span> <span class="o">+</span> <span class="nv">N</span><span class="o">*</span><span class="m">10</span> <span class="o">+</span> <span class="nv">D</span> <span class="o">+</span>
+                  <span class="nv">M</span><span class="o">*</span><span class="m">1000</span> <span class="o">+</span> <span class="nv">O</span><span class="o">*</span><span class="m">100</span> <span class="o">+</span> <span class="nv">R</span><span class="o">*</span><span class="m">10</span> <span class="o">+</span> <span class="nv">E</span> <span class="err">#</span><span class="o">=</span>
+        <span class="nv">M</span><span class="o">*</span><span class="m">10000</span> <span class="o">+</span> <span class="nv">O</span><span class="o">*</span><span class="m">1000</span> <span class="o">+</span> <span class="nv">N</span><span class="o">*</span><span class="m">100</span> <span class="o">+</span> <span class="nv">E</span><span class="o">*</span><span class="m">10</span> <span class="o">+</span> <span class="nv">Y</span>,
+        <span class="nv">M</span> <span class="err">#</span><span class="o">\=</span> <span class="m">0</span>, <span class="nv">S</span> <span class="err">#</span><span class="o">\=</span> <span class="m">0</span>,
+        label([<span class="nv">M</span>,<span class="nv">O</span>,<span class="nv">N</span>,<span class="nv">E</span>,<span class="nv">Y</span>]).
 
-:- end_object.
+<span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
 <div class="admonition warning">
@@ -1892,7 +1926,7 @@ predicates (and non-terminals). The parameter variable must be instantiated
 at runtime when the calls are made.</p>
 </section>
 <section id="calling-prolog-module-meta-predicates">
-<h3>Calling Prolog module meta-predicates<a class="headerlink" href="#calling-prolog-module-meta-predicates" title="Permalink to this heading"></a></h3>
+<h3>Calling Prolog module meta-predicates<a class="headerlink" href="#calling-prolog-module-meta-predicates" title="Link to this heading"></a></h3>
 <p>The Logtalk library provides implementations of common meta-predicates,
 which can be used in place of module meta-predicates (e.g. list mapping
 meta-predicates). If that is not the case, the Logtalk compiler may need
@@ -1944,7 +1978,7 @@ module library from the reflection API and thus from the developer tools.</p>
 </section>
 </section>
 <section id="defining-prolog-multifile-predicates">
-<span id="predicates-prolog-multifile"></span><h2>Defining Prolog multifile predicates<a class="headerlink" href="#defining-prolog-multifile-predicates" title="Permalink to this heading"></a></h2>
+<span id="predicates-prolog-multifile"></span><h2>Defining Prolog multifile predicates<a class="headerlink" href="#defining-prolog-multifile-predicates" title="Link to this heading"></a></h2>
 <p>Some Prolog module libraries, e.g. constraint packages, expect clauses
 for some library predicates to be defined in other modules. This is
 accomplished by declaring the library predicate <em>multifile</em> and by
@@ -1974,7 +2008,7 @@ directive is missing. These multifile predicates may also be declared
 dynamic using the same <code class="docutils literal notranslate"><span class="pre">Module:Name/Arity</span></code> notation.</p>
 </section>
 <section id="asserting-and-retracting-prolog-predicates">
-<span id="predicates-prolog-dynamic"></span><h2>Asserting and retracting Prolog predicates<a class="headerlink" href="#asserting-and-retracting-prolog-predicates" title="Permalink to this heading"></a></h2>
+<span id="predicates-prolog-dynamic"></span><h2>Asserting and retracting Prolog predicates<a class="headerlink" href="#asserting-and-retracting-prolog-predicates" title="Link to this heading"></a></h2>
 <p>To assert and retract clauses for Prolog dynamic predicates, we can use an
 explicitly qualified module argument. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).
@@ -2055,7 +2089,7 @@ argument or the <a class="reference internal" href="../refman/control/external_c
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

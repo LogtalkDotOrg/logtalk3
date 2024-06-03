@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -127,14 +127,18 @@ yes
 % so that e.g. line numbers in links to clauses will always be valid. For
 % example, assuming a git clone of the Logtalk repo at `$HOME/logtalk3`:
 
-| ?- logtalk_load(git(loader)).
+| ?- set_logtalk_flag(source_data,on), logtalk_load([git(loader), tools(loader), issue_creator(loader), ports_profiler(loader),tutor(loader), wrapper(loader), lgtunit(coverage_report), lgtunit(automation_report), lgtunit(minimal_output), lgtunit(tap_output), lgtunit(tap_report), lgtunit(xunit_output), lgtunit(xunit_report), lgtunit(xunit_net_v2_output), lgtunit(xunit_net_v2_report)]).
 yes
 
 | ?- git::commit_hash('$HOME/logtalk3', Hash),
-     atom_concat('https://github.com/LogtalkDotOrg/logtalk3/tree/', Hash, Git),
-     library_load_diagram::rlibrary(tools, [title('Logtalk development tools'), url_prefixes(Git, 'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER', '$LOGTALKHOME']), zoom(true)]).
+     atom_concat('https://github.com/LogtalkDotOrg/logtalk3/tree/', Hash, GitHub),
+     library_load_diagram::rlibrary(tools, [title('Logtalk development tools'), zoom(true), path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'), path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/']), exclude_directories(['$HOME/logtalk_packs/', '$HOME/lib'])]).
 yes
 
+| ?- git::commit_hash('$HOME/logtalk3', Hash),
+     atomic_list_concat(['https://github.com/LogtalkDotOrg/logtalk3/tree/',Hash,'/'],GitHub),
+     directory_load_diagram::rdirectory(tools, '$LOGTALKUSER/tools', [title('Logtalk development tools'), zoom(true), path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'), path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/']), exclude_directories(['$HOME/logtalk_packs/', '$HOME/lib'])]).
+yes
 
 % the utility objects diagrams/0-1 allows generating all supported diagrams
 % at once:

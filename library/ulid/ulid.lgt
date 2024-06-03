@@ -36,9 +36,9 @@
 	generate(ULID) :-
 		iso8601::date(Start, 1970, 1, 1),
 		iso8601::date(Current, _, _, _),
-		SecondsBetweenEpocs is (Current - Start) * 86400,
+		SecondsBetweenEpochs is (Current - Start) * 86400,
 		os::date_time(_, _, _, Hours, Minutes, Seconds, Milliseconds),
-		TotalMilliseconds is (SecondsBetweenEpocs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
+		TotalMilliseconds is (SecondsBetweenEpochs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
 		generate(TotalMilliseconds, ULID).
 
 	generate(Milliseconds, ULID) :-
@@ -50,8 +50,8 @@
 	generate(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds, ULID) :-
 		iso8601::date(Start, 1970, 1, 1),
 		iso8601::date(Current, Year, Month, Day),
-		SecondsBetweenEpocs is (Current - Start) * 86400,
-		TotalMilliseconds is (SecondsBetweenEpocs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
+		SecondsBetweenEpochs is (Current - Start) * 86400,
+		TotalMilliseconds is (SecondsBetweenEpochs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
 		generate(TotalMilliseconds, ULID).
 
 	timestamp(ULID, Milliseconds) :-

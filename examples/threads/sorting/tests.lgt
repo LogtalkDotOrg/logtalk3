@@ -23,38 +23,48 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2012-08-13,
+		date is 2024-02-05,
 		comment is 'Unit tests for the "threads/sorting" example.'
+	]).
+
+	:- uses(list, [
+		msort/2
 	]).
 
 	cover(generator).
 	cover(msort(_)).
 	cover(qsort(_)).
 
-	test(sorting_1) :-
+	test(sorting_1, true(Sorted == Sorted0)) :-
 		generator::list(20000, List),
-		msort(1)::msort(List, _Sorted).
+		msort(1)::msort(List, Sorted),
+		msort(List, Sorted0).
 
-	test(sorting_2) :-
+	test(sorting_2, true(Sorted == Sorted0)) :-
 		generator::list(20000, List),
-		msort(2)::msort(List, _Sorted).
+		msort(2)::msort(List, Sorted),
+		msort(List, Sorted0).
 
-	test(sorting_3) :-
+	test(sorting_3, true(Sorted == Sorted0)) :-
 		generator::list(20000, List),
-		msort(4)::msort(List, _Sorted).
+		msort(4)::msort(List, Sorted),
+		msort(List, Sorted0).
 
-	test(sorting_4) :-
+	test(sorting_4, true(Sorted == Sorted0)) :-
 		generator::list(20000, List),
-		qsort(1)::qsort(List, _Sorted).
+		qsort(1)::qsort(List, Sorted),
+		msort(List, Sorted0).
 
-	test(sorting_5) :-
+	test(sorting_5, true(Sorted == Sorted0)) :-
 		generator::list(20000, List),
-		qsort(2)::qsort(List, _Sorted).
+		qsort(2)::qsort(List, Sorted),
+		msort(List, Sorted0).
 
-	test(sorting_6) :-
+	test(sorting_6, true(Sorted == Sorted0)) :-
 		generator::list(20000, List),
-		qsort(4)::qsort(List, _Sorted).
+		qsort(4)::qsort(List, Sorted),
+		msort(List, Sorted0).
 
 :- end_object.

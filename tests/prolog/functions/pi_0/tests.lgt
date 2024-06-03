@@ -30,7 +30,7 @@
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, '=~='), '=~='/2
+		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 9.3.15.4

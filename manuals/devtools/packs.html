@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>packs &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>packs &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -154,7 +157,7 @@
            <div itemprop="articleBody">
              
   <section id="packs">
-<span id="library-packs"></span><h1><code class="docutils literal notranslate"><span class="pre">packs</span></code><a class="headerlink" href="#packs" title="Permalink to this heading"></a></h1>
+<span id="library-packs"></span><h1><code class="docutils literal notranslate"><span class="pre">packs</span></code><a class="headerlink" href="#packs" title="Link to this heading"></a></h1>
 <p>This tool provides predicates for downloading, installing, upgrading,
 and uninstalling third-party libraries and applications, generically
 known as <em>packs</em>. Collections of pack specifications are made available
@@ -173,7 +176,7 @@ resources between multiple systems.</p>
 <p><a class="reference external" href="https://github.com/LogtalkDotOrg/pack-registries">https://github.com/LogtalkDotOrg/pack-registries</a></p>
 <p>This tool is the beta stage of development. Feedback is most welcome.</p>
 <section id="requirements">
-<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this heading"></a></h2>
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <p>On POSIX systems (Linux, macOS, …), the following shell commands are
 required:</p>
 <ul class="simple">
@@ -211,34 +214,34 @@ the PowerShell Gallery:</p>
 name <code class="docutils literal notranslate"><span class="pre">tar</span></code>; you can simply create a <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> alias or install a more
 recent version). The required commands can be easily installed using
 MacPorts:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo port install coreutils libarchive gnupg2 git direnv
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install coreutils libarchive gnupg2 git direnv
 </pre></div>
 </div>
 <p>Or using Homebrew:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ brew install coretutils libarchive gnupg2 git direnv
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install coreutils libarchive gnupg2 git direnv
 </pre></div>
 </div>
 <p>On Linux systems, use the distribution own package manager to install
 any missing command. For example, in recent Ubuntu versions:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ sudo apt update
-$ sudo apt install coreutils curl libarchive-tools gnupg2 git direnv
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt update
+<span class="err">$</span> sudo apt install coreutils curl libarchive<span class="o">-</span>tools gnupg2 git direnv
 </pre></div>
 </div>
 </section>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#packs">../../docs/library_index.html#packs</a></p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(packs(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To run the tool tests, use the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(packs(tester)).
 </pre></div>
@@ -246,7 +249,7 @@ $ sudo apt install coreutils curl libarchive-tools gnupg2 git direnv
 <p>The tests can be run without interfering with the user packs setup.</p>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool loads at startup all the currently defined registry
 and pack specifications (from the registries/packs storage directory;
 see below). When no registry/pack setup exists, a new one is
@@ -256,7 +259,7 @@ handling, respectively, registries and packs. Both objects accept a
 <code class="docutils literal notranslate"><span class="pre">help/0</span></code> message that describes the most common queries.</p>
 </section>
 <section id="registries-and-packs-storage">
-<h2>Registries and packs storage<a class="headerlink" href="#registries-and-packs-storage" title="Permalink to this heading"></a></h2>
+<h2>Registries and packs storage<a class="headerlink" href="#registries-and-packs-storage" title="Link to this heading"></a></h2>
 <p>The tool uses a directory specified using the <code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> library
 alias when defined (in a settings file or in a backend Prolog
 initialization file). When this library alias is not defined, the tool
@@ -281,7 +284,7 @@ about virtual environments. If necessary, before restoring, the
 registries and installed packs.</p>
 </section>
 <section id="virtual-environments">
-<h2>Virtual environments<a class="headerlink" href="#virtual-environments" title="Permalink to this heading"></a></h2>
+<h2>Virtual environments<a class="headerlink" href="#virtual-environments" title="Link to this heading"></a></h2>
 <p>An application may require specific pack versions. These requirements
 may differ between applications. Different applications may also have
 conflicting requirements. Therefore, a <em>virtual environment</em> where an
@@ -313,10 +316,10 @@ variables to point to its pack directory (which can be queried by using
 the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> message).</p>
 <p>Experimental <code class="docutils literal notranslate"><span class="pre">lgtenv.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtenv.ps1</span></code> scripts are included to
 simplify creating virtual environments. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ lgtenv -d ~/my_venv -c
-$ cd ~/my_venv/
-direnv: loading ~/my_venv/.envrc
-direnv: export +LOGTALKPACKS
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> lgtenv <span class="o">-</span>d <span class="err">~</span><span class="o">/</span>my_venv <span class="o">-</span>c
+<span class="err">$</span> cd <span class="err">~</span><span class="o">/</span>my_venv<span class="o">/</span>
+direnv<span class="o">:</span> loading <span class="err">~</span><span class="o">/</span>my_venv<span class="o">/</span>.envrc
+direnv<span class="o">:</span> export <span class="o">+</span><span class="nv">LOGTALKPACKS</span>
 </pre></div>
 </div>
 <p>These scripts require, respectively,
@@ -328,10 +331,10 @@ changing the current directory. On Windows systems, when using the
 in a profile file (e.g. <code class="docutils literal notranslate"><span class="pre">$HOME\Documents\PowerShell\Profile.ps1</span></code>) to
 mimic the functionality of <code class="docutils literal notranslate"><span class="pre">direnv</span></code> of automatically loading an
 existing <code class="docutils literal notranslate"><span class="pre">.env</span></code> file when changing to its directory. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>function prompt {
-    Set-PsEnv
-    &#39;PS &#39; + $(Get-Location) + &#39;&gt; &#39;
-}
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>function prompt <span class="k">{</span>
+    <span class="nv">Set</span><span class="o">-</span><span class="nv">PsEnv</span>
+    <span class="s">&#39;PS &#39;</span> <span class="o">+</span> <span class="err">$</span>(<span class="nv">Get</span><span class="o">-</span><span class="nv">Location</span>) <span class="o">+</span> <span class="s">&#39;&gt; &#39;</span>
+<span class="k">}</span>
 </pre></div>
 </div>
 <p>A virtual environment setup (i.e. the currently defined registries and
@@ -371,7 +374,7 @@ packs using their loader files:</p>
 </div>
 </section>
 <section id="registry-specification">
-<h2>Registry specification<a class="headerlink" href="#registry-specification" title="Permalink to this heading"></a></h2>
+<h2>Registry specification<a class="headerlink" href="#registry-specification" title="Link to this heading"></a></h2>
 <p>A registry is a git remote repo that can be cloned, a downloadable
 archive, or a local directory containing a Logtalk loader file that
 loads source files defining the registry itself and the packs it
@@ -451,7 +454,7 @@ performs a git repo cloning, they should only contain the strictly
 required files.</p>
 </section>
 <section id="registry-handling">
-<h2>Registry handling<a class="headerlink" href="#registry-handling" title="Permalink to this heading"></a></h2>
+<h2>Registry handling<a class="headerlink" href="#registry-handling" title="Link to this heading"></a></h2>
 <p>Registries can be added using the <code class="docutils literal notranslate"><span class="pre">registries::add/1-3</span></code> predicates,
 which take a registry URL. Using the example above:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> registries<span class="o">::</span>add(<span class="s">&#39;https://github.com/jdoe/jdoe_awesome_packs.git&#39;</span>).
@@ -516,7 +519,7 @@ packs that are installed.</p>
 predicates.</p>
 </section>
 <section id="registry-development">
-<h2>Registry development<a class="headerlink" href="#registry-development" title="Permalink to this heading"></a></h2>
+<h2>Registry development<a class="headerlink" href="#registry-development" title="Link to this heading"></a></h2>
 <p>To simplify registry development and testing, use a local directory and
 a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL when calling the <code class="docutils literal notranslate"><span class="pre">registries::add/1</span></code> predicate. For
 example:</p>
@@ -531,14 +534,14 @@ without consequences for the original registry source files.</p>
 predicates after adding the registry.</p>
 </section>
 <section id="pack-specification">
-<h2>Pack specification<a class="headerlink" href="#pack-specification" title="Permalink to this heading"></a></h2>
+<h2>Pack specification<a class="headerlink" href="#pack-specification" title="Link to this heading"></a></h2>
 <p>A pack is specified using a Logtalk source file defining an object that
 implements the <code class="docutils literal notranslate"><span class="pre">pack_protocol</span></code>. The source file should be named after
 the pack with a <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix. This naming convention helps
 preventing name conflicts, notably with the pack own objects. The file
-must be available from a declared pack registry. The pack name is
-ideally a valid unquoted atom. An example of a registry specification
-object would be:</p>
+must be available from a declared pack registry (by having the registry
+loader file loading it). The pack name is preferably a valid unquoted
+atom. An example of a pack specification object would be:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(lflat_pack,
     <span class="k">implements</span>(pack_protocol)).
 
@@ -562,7 +565,7 @@ object would be:</p>
         stable,
         <span class="s">&#39;https://github.com/l-flat/lflat/archive/refs/tags/v2.1.0.tar.gz&#39;</span>,
         sha256 <span class="o">-</span> <span class="s">&#39;9c298c2a08c4e2a1972c14720ef1498e7f116c7cd8bf7702c8d22d8ff549b6a1&#39;</span>,
-        [logtalk <span class="o">@&gt;=</span> <span class="m">3</span><span class="o">:</span><span class="m">36</span><span class="o">:</span><span class="m">0</span>],
+        [logtalk <span class="o">@&gt;=</span> <span class="m">3</span><span class="o">:</span><span class="m">42</span><span class="o">:</span><span class="m">0</span>],
         all
     ).
 
@@ -578,6 +581,9 @@ object would be:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">license/1</span></code> argument must be an atom and should whenever possible
+be a license identifier as specified in the <a class="reference external" href="https://spdx.org/licenses/">SPDX
+standard</a>.</p>
 <p>Optionally, the pack object can also define a
 <code class="docutils literal notranslate"><span class="pre">note(Action,</span> <span class="pre">Version,</span> <span class="pre">Note)</span></code> predicate. The <code class="docutils literal notranslate"><span class="pre">Action</span></code> argument is an
 atom: <code class="docutils literal notranslate"><span class="pre">install</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, or <code class="docutils literal notranslate"><span class="pre">uninstall</span></code>. The <code class="docutils literal notranslate"><span class="pre">Note</span></code> argument
@@ -594,13 +600,15 @@ formats and extensions are:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">.tgz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.tbz2</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code></p></li>
 </ul>
-<p>The pack sources should contain <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> (or <code class="docutils literal notranslate"><span class="pre">loader.logtalk</span></code>) files. The path to the
-<code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the pack is installed or updated. It
-can also be queried using the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> predicate.</p>
+<p>The pack sources should contain <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code>), and <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> (or <code class="docutils literal notranslate"><span class="pre">loader.logtalk</span></code>) files.
+Ideally, it should also contain a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> (<code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code>)
+file. The path to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the pack is
+installed or updated. It can also be queried using the
+<code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> predicate.</p>
 </section>
 <section id="pack-urls-and-single-sign-on">
-<h2>Pack URLs and Single Sign-On<a class="headerlink" href="#pack-urls-and-single-sign-on" title="Permalink to this heading"></a></h2>
+<h2>Pack URLs and Single Sign-On<a class="headerlink" href="#pack-urls-and-single-sign-on" title="Link to this heading"></a></h2>
 <p>Typically, pack archive download URLs are HTTPS URLs and handled using
 <code class="docutils literal notranslate"><span class="pre">curl</span></code>. It’s also possible to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">archive</span></code> to download pack
 archives, provided that the server supports it (as of this writing,
@@ -631,8 +639,8 @@ the format:</p>
 <p>They can usually be easily copied from the hosting service repo webpage.
 To compute the checksum, you must first download the archive. For
 example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ git archive --output=foo-v1.0.1.zip --remote=git@gitlab.com:me/foo.git v1.0.1
-$ openssl sha256 foo-v1.0.1.zip
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> git archive <span class="o">--</span>output<span class="o">=</span>foo<span class="o">-</span>v1.<span class="m">0.1</span>.zip <span class="o">--</span>remote<span class="o">=</span>git<span class="o">@</span>gitlab.com<span class="o">:</span>me<span class="o">/</span>foo.git v1.<span class="m">0.1</span>
+<span class="err">$</span> openssl sha256 foo<span class="o">-</span>v1.<span class="m">0.1</span>.zip
 </pre></div>
 </div>
 <p>Be sure to use a format that is supported by both the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool and
@@ -643,7 +651,7 @@ implementations of the archiving and compressing algorithms may be used
 resulting in mismatched checksums.</p>
 </section>
 <section id="multiple-pack-versions">
-<h2>Multiple pack versions<a class="headerlink" href="#multiple-pack-versions" title="Permalink to this heading"></a></h2>
+<h2>Multiple pack versions<a class="headerlink" href="#multiple-pack-versions" title="Link to this heading"></a></h2>
 <p>A pack may specify multiple versions. Each version is described using a
 <code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate clause as illustrated in the example above. The
 versions must be listed ordered from newest to oldest. For details, see
@@ -653,14 +661,10 @@ the <code class="docutils literal notranslate"><span class="pre">pack_protocol</
 installing (or updating to) the latest version of the pack.</p>
 </section>
 <section id="pack-dependencies">
-<h2>Pack dependencies<a class="headerlink" href="#pack-dependencies" title="Permalink to this heading"></a></h2>
-<p>Pack dependencies on other packs can be specified using the syntax
-<code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">Operator</span> <span class="pre">Version</span></code> where <code class="docutils literal notranslate"><span class="pre">Operator</span></code> is a standard
-term comparison operator as described below. When a pack depends on a
-Logtalk or backend version, the name <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> or the identifier of
-the backend can be used in place of <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code> (see below for
-the table of backend specifiers).</p>
-<p>Dependencies are specified using a list of the following elements:</p>
+<h2>Pack dependencies<a class="headerlink" href="#pack-dependencies" title="Link to this heading"></a></h2>
+<p>Pack dependencies on other packs can be specified using a list of
+<code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">Operator</span> <span class="pre">Version</span></code> terms where <code class="docutils literal notranslate"><span class="pre">Operator</span></code> is a
+standard term comparison operator:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&gt;=</span> <span class="pre">Version</span></code> - the pack requires a dependency with
 version equal or above the specified one. For example,
@@ -689,13 +693,29 @@ any version other than then the one specified. For example,
 <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">\==</span> <span class="pre">2.1</span></code> means that the pack requires a
 <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack version other than any 2.1.x version.</p></li>
 </ul>
-<p>It’s also possible to specify <em>range</em> dependencies by using two
-consecutive elements with the lower bound followed by the upper bound.
-For example, <code class="docutils literal notranslate"><span class="pre">[common::bits</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3]</span></code> means all
-<code class="docutils literal notranslate"><span class="pre">common::bits</span></code> 2.x versions but not older or newer major versions.</p>
+<p>To specify <em>range</em> dependencies by using two consecutive elements with
+the lower bound followed by the upper bound. For example,
+<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2,</span> <span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3</span></code> means all <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> 2.x
+versions but not older or newer major versions.</p>
+<p>It’s also possible to specify <em>alternative</em> dependencies using the
+<code class="docutils literal notranslate"><span class="pre">(;)/2</span></code> operator. For example,
+<code class="docutils literal notranslate"><span class="pre">(common::bits</span> <span class="pre">==</span> <span class="pre">1:9;</span> <span class="pre">common::bits</span> <span class="pre">&#64;&gt;=</span> <span class="pre">2:3)</span></code> means either
+<code class="docutils literal notranslate"><span class="pre">common::bits</span></code> 1.9.x versions or 2.3.x and later versions.
+Alternatives should be listed in decreasing order of preference.</p>
+<p>When a pack also depends on a Logtalk or backend version, the name
+<code class="docutils literal notranslate"><span class="pre">logtalk</span></code> or the backend identifier atom can be used in place of
+<code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code> (see below for the table of backend specifiers). For
+example, <code class="docutils literal notranslate"><span class="pre">logtalk</span> <span class="pre">&#64;&gt;=</span> <span class="pre">3.36.0</span></code>.</p>
+<p>When a pack also depends on an operating-system version (e.g. a pack
+containing shared libraries with executable code), the
+<code class="docutils literal notranslate"><span class="pre">os(Name,Machine)</span></code> compound term can also be used in place of
+<code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">os('Darwin',x86_64)</span> <span class="pre">&#64;&gt;=</span> <span class="pre">'23.0.0'</span></code>.
+Note that, in this case, the release is an atom. The operating-system
+data (name, machine, and release) is queried using the corresponding
+<code class="docutils literal notranslate"><span class="pre">os</span></code> library predicates (see the library documentation for details).</p>
 </section>
 <section id="pack-portability">
-<h2>Pack portability<a class="headerlink" href="#pack-portability" title="Permalink to this heading"></a></h2>
+<h2>Pack portability<a class="headerlink" href="#pack-portability" title="Link to this heading"></a></h2>
 <p>Ideally, packs are fully portable and can be used with all Logtalk
 supported Prolog backends. This can be declared by using the atom
 <code class="docutils literal notranslate"><span class="pre">all</span></code> in the last argument of the <code class="docutils literal notranslate"><span class="pre">version/6</span></code> predicate (see example
@@ -712,7 +732,6 @@ identifiers (atoms):</p>
 <li><p>JIProlog: <code class="docutils literal notranslate"><span class="pre">ji</span></code></p></li>
 <li><p>LVM: <code class="docutils literal notranslate"><span class="pre">lvm</span></code></p></li>
 <li><p>Quintus Prolog: <code class="docutils literal notranslate"><span class="pre">quintus</span></code></p></li>
-<li><p>Scryer Prolog: <code class="docutils literal notranslate"><span class="pre">scryer</span></code></p></li>
 <li><p>SICStus Prolog: <code class="docutils literal notranslate"><span class="pre">sicstus</span></code></p></li>
 <li><p>SWI-Prolog: <code class="docutils literal notranslate"><span class="pre">swi</span></code></p></li>
 <li><p>Tau Prolog: <code class="docutils literal notranslate"><span class="pre">tau</span></code></p></li>
@@ -722,7 +741,7 @@ identifiers (atoms):</p>
 </ul>
 </section>
 <section id="pack-development">
-<h2>Pack development<a class="headerlink" href="#pack-development" title="Permalink to this heading"></a></h2>
+<h2>Pack development<a class="headerlink" href="#pack-development" title="Link to this heading"></a></h2>
 <p>To simplify pack development and testing, define a local registry and
 add to it a pack specification with the development version available
 from a local directory. For example:</p>
@@ -746,7 +765,7 @@ loading them with the <code class="docutils literal notranslate"><span class="pr
 predicates after adding the registry that provides the packs.</p>
 </section>
 <section id="pack-handling">
-<h2>Pack handling<a class="headerlink" href="#pack-handling" title="Permalink to this heading"></a></h2>
+<h2>Pack handling<a class="headerlink" href="#pack-handling" title="Link to this heading"></a></h2>
 <p>Packs must be available from a defined registry. To list all packs that
 are available for installation, use the <code class="docutils literal notranslate"><span class="pre">packs::available/0</span></code>
 predicate:</p>
@@ -798,6 +817,9 @@ pack using the <code class="docutils literal notranslate"><span class="pre">pack
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>update(bar).
 </pre></div>
 </div>
+<p>By default, updating a pack fails if it would break any dependent pack
+(the <code class="docutils literal notranslate"><span class="pre">force(true)</span></code> option, described below, can be used to force
+updating in this case).</p>
 <p>The tool provides versions of the pack install, update, and uninstall
 predicates that accept a list of options:</p>
 <ul class="simple">
@@ -805,6 +827,7 @@ predicates that accept a list of options:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">clean(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">update(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">force(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compatible(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> (default is <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
@@ -812,6 +835,10 @@ predicates that accept a list of options:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar(Atom)</span></code> (extra command-line options; default is <code class="docutils literal notranslate"><span class="pre">''</span></code>)</p></li>
 </ul>
+<p>Note that, by default, only compatible packs can be installed. To
+install a pack that is incompatible with the current Logtalk version,
+backend version, or operating-system version, use the <code class="docutils literal notranslate"><span class="pre">install/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">update/3</span></code> predicates with the option <code class="docutils literal notranslate"><span class="pre">compatible(false)</span></code>.</p>
 <p>When a pack may be already installed, you can use the <code class="docutils literal notranslate"><span class="pre">update(true)</span></code>
 option to ensure that the installation will by updated to the specified
 version:</p>
@@ -856,7 +883,7 @@ predicates. For example:</p>
 <a class="reference external" href="../../docs/packs_0.html">packs</a> object for other useful predicates.</p>
 </section>
 <section id="pack-documentation">
-<h2>Pack documentation<a class="headerlink" href="#pack-documentation" title="Permalink to this heading"></a></h2>
+<h2>Pack documentation<a class="headerlink" href="#pack-documentation" title="Link to this heading"></a></h2>
 <p>The path to the pack <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the pack is
 installed or updated. It can also be retrieved at any time by using the
 <code class="docutils literal notranslate"><span class="pre">readme/2</span></code> predicate. For example:</p>
@@ -891,8 +918,8 @@ organization). For example:</p>
 The XML documentation files can then be converted into a final format,
 e.g. HTML, using one of the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool provided scripts. For
 example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>$ cd xml_docs
-$ lgt2html
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cd xml_docs
+<span class="err">$</span> lgt2html
 </pre></div>
 </div>
 <p>For more details and alternatives, see the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool
@@ -904,7 +931,7 @@ scripts with the <code class="docutils literal notranslate"><span class="pre">-i
 details.</p>
 </section>
 <section id="pinning-registries-and-packs">
-<h2>Pinning registries and packs<a class="headerlink" href="#pinning-registries-and-packs" title="Permalink to this heading"></a></h2>
+<h2>Pinning registries and packs<a class="headerlink" href="#pinning-registries-and-packs" title="Link to this heading"></a></h2>
 <p>Registries and packs can be <em>pinned</em> after installation to prevent
 accidental updating or deleting, e.g. when using the batch <code class="docutils literal notranslate"><span class="pre">update/0</span></code>
 predicate. This is useful when your application requires a specific
@@ -935,7 +962,7 @@ note that registries added after or packs installed after will not be
 automatically pinned.</p>
 </section>
 <section id="testing-packs">
-<h2>Testing packs<a class="headerlink" href="#testing-packs" title="Permalink to this heading"></a></h2>
+<h2>Testing packs<a class="headerlink" href="#testing-packs" title="Link to this heading"></a></h2>
 <p>Logtalk packs (as most Logtalk libraries, tools, and examples) are
 expected to have a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> or <code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code> tests driver
 file at the root of their directory, which can be used for both
@@ -956,7 +983,7 @@ system. Always take into account the security considerations discussed
 below.</p>
 </section>
 <section id="security-considerations">
-<h2>Security considerations<a class="headerlink" href="#security-considerations" title="Permalink to this heading"></a></h2>
+<h2>Security considerations<a class="headerlink" href="#security-considerations" title="Link to this heading"></a></h2>
 <p>New pack registries should be examined before being added, specially if
 public and from a previously unknown source. The same precautions should
 be taken when adding or updating a pack. Note that a registry can always
@@ -982,21 +1009,21 @@ accidentally updated to a version that you may not had the chance to
 audit.</p>
 </section>
 <section id="best-practices">
-<h2>Best practices<a class="headerlink" href="#best-practices" title="Permalink to this heading"></a></h2>
+<h2>Best practices<a class="headerlink" href="#best-practices" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Make available a new pack registry as a git repo. This simplifies
 updating the registry and rolling back to a previous version.</p></li>
 <li><p>Use registry and pack names that are valid unquoted atoms, thus
 simplifying usage. Use descriptive names with underscores if
 necessary to link words.</p></li>
-<li><p>Name registry and pack specification objects after their names with a
-<code class="docutils literal notranslate"><span class="pre">_registry</span></code> or <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix. Save the objects in files named
-after the objects.</p></li>
+<li><p>Name the registry and pack specification objects after their names
+with a <code class="docutils literal notranslate"><span class="pre">_registry</span></code> or <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix. Save the objects in files
+named after the objects.</p></li>
 <li><p>Create new pack versions from git tags.</p></li>
 <li><p>If the sources of a pack are available from a git repo, consider
 using signed commits and signed tags for increased security.</p></li>
 <li><p>When a new pack version breaks backwards compatibility, list both the
-old and the new versions on the pack spec file.</p></li>
+old and the new versions on the pack specification file.</p></li>
 <li><p>Pin registries and packs when specific versions are critical for your
 work so that you can still easily batch update the remaining packs
 and registries.</p></li>
@@ -1005,7 +1032,7 @@ and registries.</p></li>
 </ul>
 </section>
 <section id="installing-prolog-packs">
-<h2>Installing Prolog packs<a class="headerlink" href="#installing-prolog-packs" title="Permalink to this heading"></a></h2>
+<h2>Installing Prolog packs<a class="headerlink" href="#installing-prolog-packs" title="Link to this heading"></a></h2>
 <p>This tool can also be used to install Prolog packs that don’t use
 Logtalk. After installing a <code class="docutils literal notranslate"><span class="pre">pl_pack</span></code> Prolog pack from a <code class="docutils literal notranslate"><span class="pre">pl_reg</span></code>
 registry, it can be found in the <code class="docutils literal notranslate"><span class="pre">$LOGTALKPACKS/packs/pl_reg/pl_pack</span></code>
@@ -1027,7 +1054,7 @@ file_search_path(library, <span class="s">&#39;$LOGTALKPACKS/packs/pl_pack&#39;<
 startup, the above definition could be added there.</p>
 </section>
 <section id="known-issues">
-<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
 <p>Using the <code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> option on Windows systems may not provide
 the shell commands output depending on the backend.</p>
 <p>On Windows systems, the reset, delete, and uninstall predicates may fail
@@ -1065,7 +1092,7 @@ representation issues.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

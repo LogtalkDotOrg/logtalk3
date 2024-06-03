@@ -3,10 +3,10 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on Arriba 21, 2023
+##   Last updated on March 20, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,7 +58,7 @@ function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -p backend Prolog compiler (default is " + $p + ")")
-	Write-Output "     (valid values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output "  -i include all installed packs"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
@@ -105,9 +105,6 @@ if ("$p" -eq "arriba") {
 } elseif ("$p" -eq "lvm") {
 	$prolog='LVM'
 	$logtalk="lvmlgt -g"
-} elseif ("$p" -eq "scryer") {
-	$prolog='Scryer Prolog'
-	$logtalk="scryerlgt -g"
 } elseif ("$p" -eq "sicstus") {
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt --goal"
@@ -165,9 +162,13 @@ Move-Item -Path _conf.py -Destination conf.py
 .\make.bat clean
 .\make.bat html
 .\make.bat info
+.\make.bat latexpdf
+.\make.bat epub
 #.\make linkcheck
 Copy-Item -Path .\_build\html\* -Destination .. -Recurse -Force
 Copy-Item -Path .\_build\texinfo\LogtalkAPIs-*.info -Destination ..
+Copy-Item -Path .\_build\latex\LogtalkAPIs-*.pdf -Destination ..
+Copy-Item -Path .\_build\epub\LogtalkAPIs-*.epub -Destination ..
 .\make.bat clean
 Remove-Item _templates/layout.html
 Move-Item -Path conf.py -Destination _conf.py

@@ -30,11 +30,13 @@
 		comment is 'Unit tests for the cyclomatic complexity metric.'
 	]).
 
+	:- uses(cc_metric, [
+		entity_score/2
+	]).
+
 	cover(code_metric).
 	cover(code_metrics_utilities).
 	cover(cc_metric).
-
-	:- uses(cc_metric, [entity_score/2]).
 
 	test(cc_metric_01, true(Score == 2)) :-
 		entity_score(expert_system, Score).

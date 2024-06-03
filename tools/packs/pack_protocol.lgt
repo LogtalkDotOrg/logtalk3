@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- protocol(pack_protocol).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
-		date is 2022-11-20,
+		date is 2024-02-29,
 		comment is 'Pack specification protocol. Objects implementing this protocol should be named after the pack with a ``_pack`` suffix and saved in a file with the same name as the object.'
 	]).
 
@@ -63,11 +63,11 @@
 		comment is 'Table of available versions.',
 		argnames is ['Version', 'Status', 'URL', 'Checksum', 'Dependencies', 'Portability'],
 		remarks is [
-			'Version' - 'This argument uses the same format as entity versions: ``Major:Minor:Pathch``. Semantic versioning should be used.',
+			'Version' - 'This argument uses the same format as entity versions: ``Major:Minor:Patch``. Semantic versioning should be used.',
 			'Status' - 'Version development status. E.g ``stable``, ``rc``, ``beta``, ``alpha``, or ``deprecated``.',
 			'URL' - 'File URL for a local directory, file URL for a local archive, download HTTPS URL for the pack archive, or download git archive URL for the pack archive.',
 			'Checksum' - 'A pair where the key is the hash algorithm and the value is the checksum. Currently, the hash algorithm must be ``sha256``. For ``file://`` URLs of local directories, use ``none`` instead of a pair.',
-			'Dependencies' - 'A list of the pack dependencies. Each dependency is a compound term ``Registry::Pack Operator Version`` where ``Operator`` is a term comparison operator. The atom ``logtalk`` or a backend identifier atom can also be used in place of ``Registry::Pack``.',
+			'Dependencies' - 'Pack dependencies list. Each dependency is a ``Dependency Operator Version`` term. ``Operator`` is a term comparison operator. Valid ``Dependency`` values are ``Registry::Pack``,  ``os(Name,Machine)``, ``logtalk``, and a backend identifier atom.',
 			'Portability' - 'Either the atom ``all`` or a list of the supported backend Prolog compilers (using the identifier atoms used by the ``prolog_dialect`` flag).',
 			'Clause order' - 'Versions must be listed ordered from newest to oldest.'
 		]

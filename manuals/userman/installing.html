@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Installing Logtalk &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>Installing Logtalk &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -146,7 +149,7 @@
            <div itemprop="articleBody">
              
   <section id="installing-logtalk">
-<span id="installing-installing"></span><h1>Installing Logtalk<a class="headerlink" href="#installing-logtalk" title="Permalink to this heading"></a></h1>
+<span id="installing-installing"></span><h1>Installing Logtalk<a class="headerlink" href="#installing-logtalk" title="Link to this heading"></a></h1>
 <p>This page provides an overview of Logtalk installation requirements and
 instructions and a description of the files contained on the Logtalk
 distribution. For detailed, up-to-date installation and configuration
@@ -175,14 +178,14 @@ often results in updating the contents of this folder. If your
 applications depend on customizations to the distribution files, backup
 those changes before updating Logtalk.</p>
 <section id="hardware-and-software-requirements">
-<span id="installing-requirements"></span><h2>Hardware and software requirements<a class="headerlink" href="#hardware-and-software-requirements" title="Permalink to this heading"></a></h2>
+<span id="installing-requirements"></span><h2>Hardware and software requirements<a class="headerlink" href="#hardware-and-software-requirements" title="Link to this heading"></a></h2>
 <section id="computer-and-operating-system">
-<span id="installing-computer"></span><h3>Computer and operating system<a class="headerlink" href="#computer-and-operating-system" title="Permalink to this heading"></a></h3>
+<span id="installing-computer"></span><h3>Computer and operating system<a class="headerlink" href="#computer-and-operating-system" title="Link to this heading"></a></h3>
 <p>Logtalk is compatible with almost any computer/operating-system with a
 modern, standards compliant, Prolog compiler available.</p>
 </section>
 <section id="prolog-compiler">
-<span id="installing-compiler"></span><h3>Prolog compiler<a class="headerlink" href="#prolog-compiler" title="Permalink to this heading"></a></h3>
+<span id="installing-compiler"></span><h3>Prolog compiler<a class="headerlink" href="#prolog-compiler" title="Link to this heading"></a></h3>
 <p>Logtalk requires a <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> supporting official and
 de facto standards. Capabilities needed by Logtalk that are not defined in
 the official ISO Prolog Core standard include:</p>
@@ -209,14 +212,14 @@ to use the most recent version of your favorite Prolog compiler.</p>
 </section>
 </section>
 <section id="logtalk-installers">
-<span id="installing-installers"></span><h2>Logtalk installers<a class="headerlink" href="#logtalk-installers" title="Permalink to this heading"></a></h2>
+<span id="installing-installers"></span><h2>Logtalk installers<a class="headerlink" href="#logtalk-installers" title="Link to this heading"></a></h2>
 <p>Logtalk installers are available for macOS, Linux, and Microsoft
 Windows. Depending on the chosen installer, some tasks (e.g. setting
 environment variables or integrating Logtalk with some Prolog compilers)
 may need to be performed manually.</p>
 </section>
 <section id="source-distribution">
-<span id="installing-sources"></span><h2>Source distribution<a class="headerlink" href="#source-distribution" title="Permalink to this heading"></a></h2>
+<span id="installing-sources"></span><h2>Source distribution<a class="headerlink" href="#source-distribution" title="Link to this heading"></a></h2>
 <p>Logtalk sources are available in a <code class="docutils literal notranslate"><span class="pre">tar</span></code> archive compressed with
 <code class="docutils literal notranslate"><span class="pre">bzip2</span></code>, <code class="docutils literal notranslate"><span class="pre">lgt3xxx.tar.bz2</span></code>. You may expand the archive by using a
 decompressing utility or by typing the following commands at the
@@ -231,7 +234,7 @@ files. Ensure that your decompressing utility converts the end-of-lines
 of all text files to match your operating system.</p>
 </section>
 <section id="distribution-overview">
-<span id="installing-organization"></span><h2>Distribution overview<a class="headerlink" href="#distribution-overview" title="Permalink to this heading"></a></h2>
+<span id="installing-organization"></span><h2>Distribution overview<a class="headerlink" href="#distribution-overview" title="Link to this heading"></a></h2>
 <p>In the Logtalk installation directory, you will find the following files
 and directories:</p>
 <p><code class="docutils literal notranslate"><span class="pre">ACKNOWLEDGMENTS.md</span></code> - List of authors, contributors, sponsors, and open source credits</p>
@@ -322,7 +325,7 @@ and installation
 </dd>
 </dl>
 <section id="adapter-files">
-<span id="installing-adapters"></span><h3>Adapter files<a class="headerlink" href="#adapter-files" title="Permalink to this heading"></a></h3>
+<span id="installing-adapters"></span><h3>Adapter files<a class="headerlink" href="#adapter-files" title="Link to this heading"></a></h3>
 <p>Adapter files provide the glue code between the Logtalk compiler/runtime
 and a Prolog compiler. Each adapter file contains two sets of
 predicates: ISO Prolog standard predicates and directives not built-in
@@ -346,20 +349,20 @@ I can include it in the next release of Logtalk.</p>
 read-only flags that are used to describe Prolog backend specific features.</p>
 </section>
 <section id="compiler-and-runtime">
-<span id="installing-runtime"></span><h3>Compiler and runtime<a class="headerlink" href="#compiler-and-runtime" title="Permalink to this heading"></a></h3>
+<span id="installing-runtime"></span><h3>Compiler and runtime<a class="headerlink" href="#compiler-and-runtime" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">core</span></code> sub-directory contains the Prolog and Logtalk source files that
 implement the Logtalk compiler and the Logtalk runtime. The compiler and
 the runtime may be split in two (or more) separate files or combined in
 a single file, depending on the Logtalk release that you are installing.</p>
 </section>
 <section id="library">
-<span id="installing-library"></span><h3>Library<a class="headerlink" href="#library" title="Permalink to this heading"></a></h3>
+<span id="installing-library"></span><h3>Library<a class="headerlink" href="#library" title="Link to this heading"></a></h3>
 <p>The Logtalk distribution includes a standard library of useful objects,
 categories, and protocols. Read the corresponding <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> file for
 details about the library contents.</p>
 </section>
 <section id="examples">
-<span id="installing-examples"></span><h3>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h3>
+<span id="installing-examples"></span><h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
 <p>The Logtalk distribution includes a large number of programing examples.
 The sources of each one of these examples can be found included in a
 subdirectory with the same name, inside the directory examples. The
@@ -369,7 +372,7 @@ library objects to work properly. Read the corresponding <code class="docutils l
 file for details before running an example.</p>
 </section>
 <section id="logtalk-source-files">
-<span id="installing-entities"></span><h3>Logtalk source files<a class="headerlink" href="#logtalk-source-files" title="Permalink to this heading"></a></h3>
+<span id="installing-entities"></span><h3>Logtalk source files<a class="headerlink" href="#logtalk-source-files" title="Link to this heading"></a></h3>
 <p>Logtalk source files are text files containing one or more entity
 definitions (objects, categories, or protocols). The Logtalk source
 files may also contain plain Prolog code. The extension <code class="docutils literal notranslate"><span class="pre">.lgt</span></code> is
@@ -394,7 +397,7 @@ corresponding adapter file).</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

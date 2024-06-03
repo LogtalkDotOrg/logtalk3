@@ -1,10 +1,10 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on March 6, 2022
+Last updated on February 21, 2024
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,13 +26,13 @@ This file contains some notes about the adapter files provided. The folder
 or no longer officially supported.
 
 If you improve or correct some of these files, or write new ones for other
-Prolog compilers, please send me a copy. It is simply not feasible to 
+Prolog compilers, please send me a copy. It is simply not feasible to
 individually test Logtalk under all possible combinations of compatible
 Prolog versions and operating-system versions.
 
-As a general rule, always try to use the latest version of your Prolog 
-compiler of choice. For Prolog compilers with long release cycles, this 
-may require use of development versions. Most Prolog compilers are moving 
+As a general rule, always try to use the latest version of your Prolog
+compiler of choice. For Prolog compilers with long release cycles, this
+may require use of development versions. Most Prolog compilers are moving
 towards better compatibility with de facto and official standards and thus
 improved Logtalk compatibility. Also, visit the issue tracker on the Logtalk
 development website and check for any known Prolog compiler bugs that break
@@ -92,11 +92,10 @@ following table summarizes the availability of these features:
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |       no      |  
 |  LVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |       no      |  
-|  Scryer Prolog   |       no      |       no      |       no      |       no      |       no      |      yes      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |      yes      |  
 |  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |       no      |  
-|  Trealla Prolog  |       no      |       no      |      yes      |       no      |       no      |      yes      |  
+|  Trealla Prolog  |       no      |       no      |      yes      |      yes      |      yes      |      yes      |  
 |  XSB             |      yes      |       no      |       no      |       no      |       no      |       no      |  
 |  YAP             |      yes      |      yes      |      yes      |       no      |       no      |      yes      |  
 
@@ -111,9 +110,9 @@ Support for these features (with the exception of unbound integer arithmetic)
 can be tested using the `tabling`, `coinduction`, `unicode`, `engines`, and
 `threads` Logtalk flags. For some systems, such as YAP, support for some
 features may depend on the options used when the system was compiled. Some
-other systems, such as ECLiPSe, only recently implemented features such as
-threads. Thus, the best practice is to always test for a feature instead of
-simply testing for a Prolog backend.
+other systems, such as ECLiPSe and Trealla Prolog, only recently implemented
+features such as threads. Thus, the best practice, when possible and reliable,
+is to test for a feature instead of simply testing for a Prolog backend.
 
 Support for unbound integer arithmetic can be checked using the `bounded`
 Prolog flag. This feature is not strictly required by the compiler/runtime
@@ -125,9 +124,9 @@ template adapter file
 
 	template.pl
 
-If an adapter file for your favorite Prolog is not available, use this 
-file as a template for writing one. For each predicate in the file, 
-check if it is built-in in your Prolog, available in a library, or if 
+If an adapter file for your favorite Prolog is not available, use this
+file as a template for writing one. For each predicate in the file,
+check if it is built-in in your Prolog, available in a library, or if
 you can write a better definition.
 
 
@@ -142,14 +141,17 @@ B-Prolog 8.1 and later versions
 
 	b.pl
 
+Experimental. Bugs and limitations on atom representation result in
+silent failures when loading libraries and tools (including `lgtunit`).
+
 Note that this adapter file redefines the B-Prolog `(::)/2` finite-domain
 built-in predicate (you may use the alternative `in/2` built-in predicate
 instead).
 
-Some B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`) 
-are not core predicates and can be redefined by the user. The predicate 
-`predicate_property/2` does not return the property `built_in` for these 
-predicates. The solution is to encapsulate calls to these predicates 
+Some B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`)
+are not core predicates and can be redefined by the user. The predicate
+`predicate_property/2` does not return the property `built_in` for these
+predicates. The solution is to encapsulate calls to these predicates
 within objects and categories using the Logtalk `{}/1` control construct.
 
 You may need to increase the sizes of the code areas on the integration
@@ -197,15 +199,15 @@ ECLiPSe 6.1#143 or later versions
 	eclipse.pl
 
 There is a clash between Logtalk and ECLiPSe regarding the `(::)/2` operator.
-You may still use the `(::)/2` operator defined on the ECLiPSe constraint 
-solver libraries by using explicit module qualification by writing 
-`{library:(Var::Domain)}` (replace `library` by the actual library name; 
+You may still use the `(::)/2` operator defined on the ECLiPSe constraint
+solver libraries by using explicit module qualification by writing
+`{library:(Var::Domain)}` (replace `library` by the actual library name;
 the `{}/1` control construct allows you to bypass the Logtalk compiler).
 
 ECLiPSe defines an alias `in_set_range/2` for `(::)/2` that can be used to
 avoid conflicts with Logtalk `(::)/2` message sending operator.
 
-Adopted from an adapter file written and tested with help of Taner Bilgic 
+Adopted from an adapter file written and tested with help of Taner Bilgic
 for Logtalk 1.x.
 
 With this Prolog compiler, avoid reloading Logtalk source files defining
@@ -219,7 +221,7 @@ built-in predicates for separate compilation and loading. To generate
 flag to `off` and add the option `output:eco` to the Logtalk `prolog_loader`
 flag.
 
-ECLiPSe 7.0.25 and later versions multi-threading and engines support 
+ECLiPSe 7.0.25 and later versions multi-threading and engines support
 provide enough support for Logtalk threaded engines. But other Logtalk
 multi-threading features cannot currently be supported due to missing
 mutex predicates and missing thread creation options.
@@ -256,10 +258,16 @@ documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
 
 
-LVM 4.1.0 and later versions
+LVM 6.3.0 and later versions
 ----------------------------
 
 	lvm.pl
+
+Coinduction support requires setting the `unify_applies_occurs_check` to
+`true`. This can be accomplished e.g. by using the `--enable-occurs-check`
+command-line option:
+
+	$ lvmlgt --enable-occurs-check
 
 
 Quintus Prolog 3.3~3.5
@@ -277,14 +285,6 @@ some of these issues using the dialect-level goal-expansion mechanism.
 The original version of this adapter file was written and tested with help
 of a friend of mine, Paulo Urbano, for a previous version. Adopted for the
 current release using version 3.5 for Windows for testing.
-
-
-Scryer Prolog 0.9.1 and later versions
-----------------------------------------
-
-	scryer.pl
-
-Experimental.
 
 
 SICStus Prolog 4.1.0 and later versions
@@ -326,16 +326,16 @@ calls. To try it, copy the code to your Logtalk settings file that is
 loaded at startup.
 
 The adapter file may set the `iso` SWI-Prolog flag to `true`. This setting
-may improve compatibility of Logtalk code across different backend 
-Prolog compilers buy may also cause compatibility problems with some 
-SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2` 
+may improve compatibility of Logtalk code across different backend
+Prolog compilers buy may also cause compatibility problems with some
+SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2`
 directive if necessary.
 
 For using XPCE from Logtalk, see the `xpce` example in the Logtalk
 distribution.
 
 With multi-threading support turned on, you may get a harmless message
-when halting the system regarding threads that wouldn't die: you can 
+when halting the system regarding threads that wouldn't die: you can
 suppress the message on POSIX systems by using `% swilgt 2> /dev/null`.
 
 The definition of the predicate `{}/1` at the end of the adapter files
@@ -348,7 +348,7 @@ construct but this is only used within objects and categories.
 Logtalk doesn't rely on the SWI-Prolog auto-loading mechanism for library
 predicates. Calls of these predicates within objects and categories must
 be explicitly qualified or implicit qualified by listing the predicates
-in `use_module/2` directives). You may also set the Logtalk `portability`,
+in `use_module/2` directives. You may also set the Logtalk `portability`,
 and `unknown_predicates` compiler flags to `warning` in order to detect
 unqualified calls to library predicates. All the module libraries must
 be loaded prior to compilation of object and categories containing calls

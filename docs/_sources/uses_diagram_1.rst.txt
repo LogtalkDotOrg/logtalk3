@@ -13,9 +13,12 @@
 
 Predicates for generating entity diagrams with only ``uses/2`` and ``use_module/2`` relation edges.
 
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 2:19:0
-| **Date:** 2020-05-18
+| **Version:** 2:21:0
+| **Date:** 2024-03-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

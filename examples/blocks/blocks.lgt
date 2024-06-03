@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,8 +29,8 @@
 	specializes(object)).
 
 	:- info([
-		version is 1:0:0,
-		date is 2016-05-25,
+		version is 1:0:1,
+		date is 2024-04-18,
 		author is 'Paulo Moura',
 		comment is 'Two-dimensional block (or should I say square?) class.'
 	]).
@@ -65,20 +65,14 @@
 		::assertz(position_(X, Y)).
 
 	default_init_option(position-(0, 0)).
-	default_init_option(Default) :-
-		^^default_init_option(Default).
 
 	process_init_option(position-(X, Y)) :-
 		::assertz(position_(X, Y)).
-	process_init_option(Option) :-
-		^^process_init_option(Option).
 
 	valid_init_option(position-(X, Y)) :-
 		!,
 		integer(X),
 		integer(Y).
-	valid_init_option(Option) :-
-		^^valid_init_option(Option).
 
 	instance_base_name(b).
 
@@ -89,35 +83,35 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1:1:0,
-		date is 2017-02-15,
+		version is 1:1:1,
+		date is 2023-11-17,
 		author is 'Paulo Moura',
 		comment is 'Block stacks. A stack is represented by top-bottom tuples.'
 	]).
 
 	:- public(tuple/1).
-	:- mode(tuple(?pair(object_identifier)), zero_or_more).
+	:- mode(tuple(?pair(object_identifier,object_identifier)), zero_or_more).
 	:- info(tuple/1, [
 		comment is 'Returns a relation tuple.',
 		argnames is ['Tuple']
 	]).
 
 	:- public(tuples/1).
-	:- mode(tuples(-list(pair(object_identifier))), one).
+	:- mode(tuples(-list(pair(object_identifier,object_identifier))), one).
 	:- info(tuples/1, [
 		comment is 'Returns a list of all relation tuples.',
 		argnames is ['Tuples']
 	]).
 
 	:- public(add_tuple/1).
-	:- mode(add_tuple(+pair(object_identifier)), zero_or_one).
+	:- mode(add_tuple(+pair(object_identifier,object_identifier)), zero_or_one).
 	:- info(add_tuple/1, [
 		comment is 'Adds a new relation tuple.',
 		argnames is ['Tuple']
 	]).
 
 	:- public(remove_tuple/1).
-	:- mode(remove_tuple(?pair(object_identifier)), zero_or_more).
+	:- mode(remove_tuple(?pair(object_identifier,object_identifier)), zero_or_more).
 	:- info(remove_tuple/1, [
 		comment is 'Removes a matching relation tuple.',
 		argnames is ['Tuple']
@@ -203,8 +197,8 @@
 	implements(monitoring)).
 
 	:- info([
-		version is 1:0:0,
-		date is 2016-05-25,
+		version is 1:0:1,
+		date is 2024-04-18,
 		author is 'Paulo Moura',
 		comment is 'Block stack monitor. Prints an ASCII representation of all block stacks when a block is moved.'
 	]).
@@ -217,21 +211,21 @@
 	after(_, move(_, _), _) :-
 		% find the position of all blocks
 		findall(
-			(Block, X, Y),
+			b(Block, X, Y),
 			(instantiates_class(Block, block), Block::position(X, Y)),
 			Blocks
 		),
 		% find the larger X coordinate
-		setof(X, Block^Y^ member((Block,X,Y), Blocks), Xs),
+		setof(X, Block^Y^ member(b(Block,X,Y), Blocks), Xs),
 		last(Xs, Xmax),
 		% find the larger Y coordinate
-		setof(Y, Block^X^ member((Block,X,Y), Blocks), Ys),
+		setof(Y, Block^X^ member(b(Block,X,Y), Blocks), Ys),
 		last(Ys, Ymax),
 		% draw a representation of the position of all the blocks
 		fordownto(Y, Ymax, 1,
 			(	write('|'),
 				forto(X, 1, Xmax,
-					(member((Block, X, Y), Blocks) -> write(Block); write('.'))
+					(member(b(Block, X, Y), Blocks) -> write(Block); write('.'))
 				),
 				nl
 			)

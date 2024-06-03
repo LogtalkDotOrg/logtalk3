@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk Debian package auxiliary script
-##   Last updated on June 21, 2023
+##   Last updated on December 8, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -57,15 +57,14 @@ echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"
 echo
 echo "* Arriba (7.0.0 or later):           arribalgt"
-echo "* B-Prolog (8.1 or later):           bplgt"
+echo "* B-Prolog (8.1 or later):           bplgt       (experimental)"
 echo "* Ciao Prolog (1.22.0 or later):     ciaolgt     (experimental; first run may require sudo)"
 echo "* CxProlog (0.98.1 or later):        cxlgt"
 echo "* ECLiPSe (6.1#143 or later):        eclipselgt"
 echo "* GNU Prolog (1.4.5 or later):       gplgt"
 echo "* JIProlog (4.1.7.1 or later):       jiplgt      (first run may require sudo)"
-echo "* LVM (4.1.0 or later):              lvmlgt"
+echo "* LVM (6.3.0 or later):              lvmlgt"
 echo "* Quintus Prolog (3.3 or later):     quintuslgt  (experimental)"
-echo "* Scryer Prolog (0.9.1 or later):    scryerlgt   (experimental)"
 echo "* SICStus Prolog (4.1.0 or later):   sicstuslgt"
 echo "* SWI-Prolog (6.6.0 or later):       swilgt"
 echo "* Tau Prolog (0.3.2 or later):       taulgt"

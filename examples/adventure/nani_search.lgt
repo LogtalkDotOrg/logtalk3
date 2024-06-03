@@ -209,7 +209,7 @@
 		respond(['You can''t get to ', Room, ' from here']),
 		fail.
 
-	% update the logicbase with the new room
+	% update the database with the new room
 	moveto(Room) :-
 		retractall(here(_)),
 		asserta(here(Room)).
@@ -315,7 +315,7 @@
 	eat2(Thing) :-
 		respond(['You can''t eat a ', Thing]).
 
-	% inventory list your possesions
+	% inventory list your possessions
 
 	inventory :-
 		% make sure you have at least one thing

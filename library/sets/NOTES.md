@@ -110,7 +110,7 @@ must implement the `comparingp` protocol. For example:
 
 		...
 
-	:- end_protocol.
+	:- end_object.
 
 We can then use this object with the `set/1` parametric object. For example:
 

@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,10 +35,20 @@ Description
 
 For all solutions of ``Generator``, ``Test`` is true. This meta-predicate
 implements a *generate-and-test* loop using a definition equivalent to
-``\+ (Generator, \+ Test)``.
+``\+ (Generator, \+ Test)``. As a consequence, no variables in the arguments
+are bound by a call to this predicate. This predicate often provides a better
+alternative to a *failure-driven loop* as an unexpected ``Test`` failure will
+not be ignored as it will make the ``forall/2`` call fail.
 
 This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.
+
+Meta-predicate template
+-----------------------
+
+::
+
+   forall(0, 0)
 
 Modes and number of proofs
 --------------------------

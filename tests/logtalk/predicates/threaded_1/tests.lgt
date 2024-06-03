@@ -23,30 +23,57 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2012-11-19,
+		date is 2024-01-25,
 		comment is 'Unit tests for the threaded/1 built-in predicate.'
 	]).
 
 	:- threaded.
 
-	throws(threaded_1_1, error(instantiation_error, logtalk(threaded(_), _))) :-
+	test(threaded_1_01, error(instantiation_error)) :-
 		{threaded(_)}.
 
-	throws(threaded_1_2, error(type_error(callable, 1), logtalk(threaded(_), _))) :-
+	test(threaded_1_02, error(type_error(callable, 1))) :-
 		{threaded(1)}.
 
-	succeeds(threaded_1_3) :-
-		{threaded((true, true))}.
+	test(threaded_1_03, true) :-
+		{threaded((true, true, true))}.
 
-	succeeds(threaded_1_4) :-
-		{threaded((fail; true))}.
+	test(threaded_1_04, true) :-
+		{threaded((fail; true; fail))}.
 
-	fails(threaded_1_5) :-
-		{threaded((true, fail))}.
+	test(threaded_1_05, false) :-
+		{threaded((true, fail, true))}.
 
-	fails(threaded_1_6) :-
-		{threaded((fail; fail))}.
+	test(threaded_1_06, false) :-
+		{threaded((fail; fail; fail))}.
+
+	test(threaded_1_07, ball(thing)) :-
+		{threaded((true, throw(thing), true))}.
+
+	test(threaded_1_08, true) :-
+		{threaded((throw(err); fail; true))}.
+
+	test(threaded_1_09, ball(_)) :-
+		{threaded((throw(err1); throw(err2); throw(err3)))}.
+
+	test(threaded_1_10, ball(_)) :-
+		{threaded((throw(err1); fail; fail))}.
+
+	test(threaded_1_11, deterministic(s(A,B,C) == s(1,2,3))) :-
+		{test_object::p((a(A), b(B), c(C)))}.
+
+	test(threaded_1_12, deterministic((X==1; X==2; X==3))) :-
+		{test_object::p((a(X); b(X); c(X)))}.
+
+	test(threaded_1_13, deterministic(s(A,B,C,D) == s(1,2,3,4))) :-
+		{test_object::p((a(A,B), b(B,C), c(C,D)))}.
+
+	test(threaded_1_14, deterministic(s(A,B,C,D) == s(1,2,3,4))) :-
+		{test_object::p((a(A,B), test_object::p((b(B,C), c(C,D)))))}.
+
+	test(threaded_1_15, deterministic((X==1; X==2; X==3))) :-
+		{test_object::p((test_object::p((a(X); b(X))); c(X)))}.
 
 :- end_object.

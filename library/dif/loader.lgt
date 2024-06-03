@@ -22,7 +22,7 @@
 :- if((
 	current_logtalk_flag(prolog_dialect, Dialect),
 	(	Dialect == b; Dialect == eclipse; Dialect == lvm;
-		Dialect == sicstus; Dialect == scryer; Dialect == swi;
+		Dialect == sicstus; Dialect == swi;
 		Dialect == trealla; Dialect == xsb; Dialect == yap;
 		Dialect == arriba
 	)
@@ -30,8 +30,6 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 		:- ensure_loaded(library(sicstus)).
-	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
-		:- use_module(library(dif)).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(dif), []).
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).

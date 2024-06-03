@@ -10,9 +10,12 @@
 
 This object adds explanations and suggestions to selected compiler warning and error messages.
 
+| **Availability:** 
+|    ``logtalk_load(tutor(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 0:55:0
-| **Date:** 2023-05-18
+| **Version:** 0:65:0
+| **Date:** 2024-05-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -38,7 +41,24 @@ This object adds explanations and suggestions to selected compiler warning and e
 Public predicates
 -----------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: explain//1
+.. _tutor/0::explain//1:
+
+``explain//1``
+^^^^^^^^^^^^^^
+
+Generates an explanation for a message.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``explain(@callable)`` - ``zero_or_one``
+
+| **aergnames:**
+|    [Message]
+
+------------
 
 Protected predicates
 --------------------

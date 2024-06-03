@@ -57,7 +57,7 @@ To test this tool, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(lgtunit(tester)).
 
-Writing and loading tests
+Writing and running tests
 -------------------------
 
 In order to write your own unit tests, define objects extending the
@@ -86,7 +86,8 @@ the source files defining the test objects using the option
 
 ::
 
-   | ?- logtalk_load(tests, [hook(lgtunit)]).
+   | ?- logtalk_load(lgtunit(loader)),
+        logtalk_load(tests, [hook(lgtunit)]).
 
 As the term-expansion mechanism applies to all the contents of a source
 file, the source files defining the test objects should preferably not
@@ -123,34 +124,42 @@ after loading:
        logtalk_load(source, [source_data(on), debug(on)]),
        % compile the unit tests file expanding it using "lgtunit" as the hook
        % object to preprocess the tests; if you have failing tests, add the
-       % option debug(on) to debug them
+       % option debug(on) to debug them (see "tools/lgtunit/NOTES.md" for
+       % debugging advice); tests should be loaded after the code being tested
+       % is loaded to avoid warnings such as references to unknown entities
        logtalk_load(tests, [hook(lgtunit)]),
        % run all the unit tests; assuming your tests object is named "tests"
        tests::run
    )).
 
 You may copy this sample file to a ``tester.lgt`` file in your project
-directory and edit it to load your project and tests files (the
+directory and edit it to load your project and tests files. The
 ``logtalk_tester`` testing automation script defaults to look for test
-driver files named ``tester.lgt`` or ``tester.logtalk``).
+driver files named ``tester.lgt`` or ``tester.logtalk`` (if you have
+work-in-progress test sets that you don't want to run by default, simply
+use a different file name such as ``tester_wip.lgt``; you can still run
+them automated by using ``logtalk_tester -n tester_wip``).
 
 Debugged test sets should preferably be compiled in optimal mode,
 specially when containing deterministic tests and when using the utility
 benchmarking predicates.
 
-Running unit tests
-------------------
+Assuming a ``tester.lgt`` driver file as exemplified above, the tests
+can be run by simply loading this file:
 
-Assuming that your test object is named ``tests``, after compiling and
-loading its source file, you can run the tests by typing:
+::
+
+   | ?- logtalk_load(tester).
+
+Assuming your test object is named ``tests``, you can re-run the tests
+by typing:
 
 ::
 
    | ?- tests::run.
 
-Usually, this goal is called automatically from an ``initialization/1``
-directive in a ``tester.lgt`` loader file. You can also run a single
-test (or a list of tests) using the ``run/1`` predicate:
+You can also re-run a single test (or a list of tests) using the
+``run/1`` predicate:
 
 ::
 
@@ -205,6 +214,96 @@ Note that you can have multiple test driver files. For example, one
 driver file that runs the tests collecting code coverage data and a
 quicker driver file that skips code coverage and compiles the code to be
 tested in optimized mode.
+
+Automating running tests
+------------------------
+
+You can use the ``scripts/logtalk_tester.sh`` Bash shell script or the
+``scripts/logtalk_tester.ps1`` PowerShell script for automating running
+unit tests (e.g. from a CI/CD pipeline). For example, assuming your
+current directory (or sub-directories) contain one or more
+``tester.lgt`` files:
+
+::
+
+   $ logtalk_tester -p gnu
+
+The only required argument is the identifier of the backend Prolog
+system. For other options, see the ``scripts/NOTES.md`` file or type:
+
+::
+
+   $ logtalk_tester -h
+
+On POSIX systems, you can also access extended documentation by
+consulting the script man page:
+
+::
+
+   $ man logtalk_tester
+
+The scripts support the same set of options but the option for passing
+additional arguments to the tests use different syntax. For example:
+
+::
+
+   $ logtalk_tester -p gnu -- foo bar baz
+
+   PS> logtalk_tester -p gnu -a foo,bar,baz
+
+On POSIX systems, assuming Logtalk was installed using one of the
+provided installers or installation scripts, there is also a ``man``
+page for the script:
+
+::
+
+   $ man logtalk_tester
+
+Alternatively, an HTML version of this man page can be found at:
+
+https://logtalk.org/man/logtalk_tester.html
+
+The ``logtalk_tester.ps1`` PowerShell script timeout option requires
+that Git for Windows is also installed as it requires the GNU timeout
+command bundled with it.
+
+In alternative to using the ``logtalk_tester.ps1`` PowerShell script,
+the Bash shell version of the automation script can also be used in
+Windows operating-systems with selected backends by using the Bash shell
+included in the Git for Windows installer. That requires defining a
+``.profile`` file setting the paths to the Logtalk scripts and the
+Prolog backend executables. For example:
+
+::
+
+   $ cat ~/.profile
+   # YAP
+   export PATH="/C/Program Files/Yap64/bin":$PATH
+   # GNU Prolog
+   export PATH="/C/GNU-Prolog/bin":$PATH
+   # SWI/Prolog
+   export PATH="/C/Program Files/swipl/bin":$PATH
+   # ECLiPSe
+   export PATH="/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt":$PATH
+   # SICStus Prolog
+   export PATH="/C/Program Files/SICStus Prolog VC16 4.6.0/bin":$PATH
+   # Logtalk
+   export PATH="$LOGTALKHOME/scripts":"$LOGTALKHOME/integration":$PATH
+
+The Git for Windows installer also includes GNU ``coreutils`` and its
+``timeout`` command, which is used by the ``logtalk_tester`` script
+``-t`` option.
+
+Note that some tests may give different results when run from within the
+Bash shell compared with running the tests manually using a Windows GUI
+version of the Prolog backend. Some backends may also not be usable for
+automated testing due to the way their are made available as Windows
+applications.
+
+Additional advice on testing and on automating testing using continuous
+integration servers can be found at:
+
+https://logtalk.org/testing.html
 
 Parametric test objects
 -----------------------
@@ -391,6 +490,9 @@ ignored):
 
 -  | ``cleanup(Goal)``
    | Cleanup goal for the test (default goal is ``true``).
+
+-  | ``flaky``
+   | Declare the test as a flaky test.
 
 -  | ``note(Term)``
    | Annotation to print (between parenthesis by default) after the test
@@ -824,7 +926,7 @@ For example:
 
 ::
 
-   - test(xyz_reset, true, ['Feature xyz reset not yet implemented']) :-
+   - test(xyz_reset, true, [note('Feature xyz reset not yet implemented')]) :-
        ...
 
 The number of skipped tests is reported together with the numbers of
@@ -1035,6 +1137,25 @@ For example:
        put_char(out, y),
        ^^text_output_assertion(out, 'qwerty', Assertion).
 
+The ``set_text_output/1`` predicate diverts only the standard output
+stream (to a temporary file) using the standard ``set_output/1``
+predicate. Most backend Prolog systems also support writing to the de
+facto standard error stream. But there's no standard solution to divert
+this stream. However, several systems provide a ``set_stream/2`` or
+similar predicate that can be used for stream redirection. For example,
+assume that you wanted to test a backend Prolog system warning when an
+``initialization/1`` directive fails that is written to ``user_error``.
+An hypothetical test could be:
+
+::
+
+   test(singletons_warning, true(Assertion)) :-
+       ^^set_text_output(''),
+       current_output(Stream),
+       set_stream(Stream, alias(user_error)),
+       consult(broken_file),
+       ^^text_output_assertion('WARNING: initialization/1 directive failed', Assertion).
+
 For testing binary input/output predicates, equivalent testing
 predicates are provided. There is also a small set of helper predicates
 for dealing with stream handles and stream positions. For testing with
@@ -1059,6 +1180,12 @@ it by using the goals ``^^suppress_text_output`` or
    test(proxies_04, true(Color == yellow)) :-
        ^^suppress_text_output,
        {circle('#2', Color)}::print.
+
+The ``suppress_text_output/0`` and ``suppress_binary_output/0``
+predicates work by redirecting standard output to the operating-system
+null device. But the application may also output to e.g. ``user_error``
+and other streams. If this output must also be suppressed, several
+alternatives are described next.
 
 Output of expected warnings can be suppressed by turning off the
 corresponding linter flags. In this case, it is advisable to restrict
@@ -1089,15 +1216,20 @@ component. For example:
 
    logtalk::message_hook(_Message, _Kind, code_metrics, _Tokens).
 
+Note that there's no portable solution to suppress *all* output.
+However, several systems provide a ``set_stream/2`` or similar predicate
+that can be used for stream redirection. Check the documentation of the
+backend Prolog systems you're using for details.
+
 Tests with timeout limits
 -------------------------
 
 There's no portable way to call a goal with a timeout limit. However,
 some backend Prolog compilers provide this functionality:
 
--  B-Prolog: ``time_out/3`` predicate
+-  B-Prolog: ``time_out/3`` built-in predicate
 -  ECLiPSe: ``timeout/3`` and ``timeout/7`` library predicates
--  LVM: ``call_with_timeout/2-3`` library predicates
+-  LVM: ``call_with_timeout/2-3`` built-in predicates
 -  SICStus Prolog: ``time_out/3`` library predicate
 -  SWI-Prolog: ``call_with_time_limit/2`` library predicate
 -  Trealla Prolog: ``call_with_time_limit/2`` and ``time_out/3`` library
@@ -1157,8 +1289,50 @@ skipped by writing:
    - test(foo_1, true, [note('Waiting for Deep Thought answer')]) :-
        ...
 
+Another common use is to return the execution time of one of the test
+sub-goals. For example:
+
+::
+
+   test(foobar, true, [note(bar(seconds-Time))]) :-
+       foo(...),
+       benchmark(bar(...), Time).
+
 Annotations are written, by default, between parenthesis after and in
 the same line as the test results.
+
+Test execution times and memory usage
+-------------------------------------
+
+Individual test CPU and wall execution times (in seconds) are reported
+by default when running the tests. Total CPU and wall execution times
+for passed and failed tests are reported after the tests complete.
+Starting and ending date and time when running a set of tests is also
+reported by default. The ``lgtunit`` object also provides several public
+benchmarking predicates that can be useful for e.g. reporting test
+sub-goals execution times using either CPU or wall clocks. When running
+multi-threaded code, the CPU time may or may not include all threads CPU
+time depending on the backend.
+
+Test memory usage is not reported by default due to the lack of a
+portable solution to access memory data. However, several backend Prolog
+systems provide a ``statistics/2`` or similar predicate that can be used
+for a custom solution. Depending on the system, individual keys may be
+provided for each memory area (heap, trail, atom table, ...).
+Aggregating keys may also be provided. As an hypothetical example,
+assume you're running Logtalk with a backend providing a
+``statistics/2`` predicate with a ``memory_used`` key:
+
+::
+
+   test(ack_3, true(Result == 125), [note(memory-Memory)]) :-
+       statistics(memory_used, Memory0),
+       ack::ack(3, 4, Result),
+       statistics(memory_used, Memory1),
+       Memory is Memory1 - Memory0.
+
+Consult the documentation of the backend Prolog systems for actual
+details.
 
 Working with test data files
 ----------------------------
@@ -1206,12 +1380,106 @@ Flaky tests
 Flaky tests are tests that pass or fail non-deterministically, usually
 due to external conditions (e.g. computer or network load). Thus, flaky
 tests often don't result from bugs in the code being tested itself but
-from test execution conditions that are not predictable. The ``note/1``
-annotation can be used to alert that a test failure is for a flaky test.
-If the ``note/1`` argument is an atom containing the sub-atom ``flaky``,
-the testing automation support outputs the text ``[flaky]`` when
-reporting failed tests. Moreover, the ``logtalk_tester`` automation
-script will ignore failed flaky tests when setting its exit status.
+from test execution conditions that are not predictable. The ``flaky/0``
+test option declares a test to be flaky. For example:
+
+::
+
+   test(foo, true, [flaky]) :-
+       ...
+
+For backawards compatibility, the ``note/1`` annotation can also be used
+to alert that a test failure is for a flaky test when its argument is an
+atom containing the sub-atom ``flaky``.
+
+The testing automation support outputs the text ``[flaky]`` when
+reporting failed flaky tests. Moreover, the ``logtalk_tester``
+automation script will ignore failed flaky tests when setting its exit
+status.
+
+Mocking
+-------
+
+Sometimes the code being tested performs complex tasks that are not
+feasible or desirable when running tests. For example, the code may
+perform a login operation requiring the user to provide a username and a
+password using some GUI widget. In this case, the tests may required the
+login operation to still be performed but using canned data (also
+simplifying testing automation). I.e. we want to *mock* (as in
+*imitate*) the login procedure. Ideally, this should be accomplished
+without requiring any changes to the code being tested. Logtalk provides
+two solutions that can be used for mocking: *term-expansion* and *hot
+patching*. A third solution is possible if the code we want to mock uses
+the *message printing mechanism*.
+
+Using the term-expansion mechanism, we would define a *hook object* that
+expands the login predicate into a fact:
+
+::
+
+   :- object(mock_login,
+       implements(expanding)).
+
+       term_expansion((login(_, _) :- _), login(jdoe, test123)).
+
+   :- end_object.
+
+The tests driver file would then load the application object responsible
+for user management using this hook object:
+
+::
+
+   :- initialization((
+       ...,
+       logtalk_load(mock_login),
+       logtalk_load(user_management, [hook(mock_login)]),
+       ...
+   )).
+
+Using hot patching, we would define a *complementing category* patching
+the object that defines the login predicate:
+
+::
+
+   :- category(mock_login,
+       complements(user_management)).
+
+       login(jdoe, test123).
+
+   :- end_category.
+
+The tests driver file would then set the ``complements`` flag to
+``allow`` and load the patch after loading application code:
+
+::
+
+   :- initialization((
+       ...,
+       set_logtalk_flag(complements, allow),
+       logtalk_load(application),
+       logtalk_load(mock_login),
+       ...
+   )).
+
+There are pros and cons for each solution. Term-expansion works by
+defining hook objects that are used at compile time while hot patching
+happens at runtime. Complementing categories can also be dynamically
+created, stacked, and abolished. Hot patching disables static binding
+optimizations but that's usually not a problem as the code being tested
+if often compiled in debug mode to collect code coverage data. Two
+advantages of the term-expansion solution is that it allows defining
+conditions for expanding terms and goals and can replace both predicate
+definitions and predicate calls. Limitations in the current Prolog
+standards prevent patching callers to local predicates being patched.
+But often both solutions can be used with the choice depending on code
+clarity and user preference. See the Handbook sections on term-expansion
+and hot patching for more details on these mechanisms.
+
+In those cases where the code we want to mock uses the message printing
+mechanism, the solution is to intercept and rewrite the messages being
+printed and/or the questions being asked using the
+``logtalk::message_hook/4`` and ``logtalk::question_hook/6`` hook
+predicates.
 
 Debugging messages in tests
 ---------------------------
@@ -1353,6 +1621,7 @@ the depth of printed terms that can be useful:
 -  SICStus Prolog: ``toplevel_print_options`` flag
 -  SWI-Prolog 7.1.10 or earlier: ``toplevel_print_options`` flag
 -  SWI-Prolog 7.1.11 or later: ``answer_write_options`` flag
+-  Trealla Prolog: ``answer_write_options`` flag
 -  XSB: ``set_file_write_depth/1`` predicate
 -  YAP: ``write_depth/2-3`` predicates
 
@@ -1385,7 +1654,7 @@ simplify writing the tests. In alternative, we can use the
 
 ::
 
-   | ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
+   | ?- logtalk_load(hook_objects(loader)).
    ...
 
    | ?- logtalk_load(plain, [hook(object_wrapper_hook)]).
@@ -1397,80 +1666,6 @@ construct to call the Prolog predicates.
 
 See also the section below on exporting code coverage results to XML
 files, which can be easily converted and published as e.g. HTML reports.
-
-Automating running tests
-------------------------
-
-You can use the ``scripts/logtalk_tester.sh`` Bash shell script or the
-``scripts/logtalk_tester.ps1`` PowerShell script for automating running
-unit tests. See the ``scripts/NOTES.md`` file for details or type:
-
-::
-
-   $ logtalk_tester -h
-
-The scripts support the same set of options but the option for passing
-additional arguments to the tests use different syntax. For example:
-
-::
-
-   $ logtalk_tester -p gnu -- foo bar baz
-
-   PS> logtalk_tester -p gnu -a foo,bar,baz
-
-On POSIX systems, assuming Logtalk was installed using one of the
-provided installers or installation scripts, there is also a ``man``
-page for the script:
-
-::
-
-   $ man logtalk_tester
-
-Alternatively, an HTML version of this man page can be found at:
-
-https://logtalk.org/man/logtalk_tester.html
-
-The ``logtalk_tester.ps1`` PowerShell script timeout option requires
-that Git for Windows is also installed as it requires the GNU timeout
-command bundled with it.
-
-In alternative to using the ``logtalk_tester.ps1`` PowerShell script,
-the Bash shell version of the automation script can also be used in
-Windows operating-systems with selected backends by using the Bash shell
-included in the Git for Windows installer. That requires defining a
-``.profile`` file setting the paths to the Logtalk scripts and the
-Prolog backend executables. For example:
-
-::
-
-   $ cat ~/.profile
-   # YAP
-   export PATH="/C/Program Files/Yap64/bin":$PATH
-   # GNU Prolog
-   export PATH="/C/GNU-Prolog/bin":$PATH
-   # SWI/Prolog
-   export PATH="/C/Program Files/swipl/bin":$PATH
-   # ECLiPSe
-   export PATH="/C/Program Files/ECLiPSe 7.0/lib/x86_64_nt":$PATH
-   # SICStus Prolog
-   export PATH="/C/Program Files/SICStus Prolog VC16 4.6.0/bin":$PATH
-   # Logtalk
-   export PATH="$LOGTALKHOME/scripts":"$LOGTALKHOME/integration":$PATH
-
-The Git for Windows installer also includes GNU ``coreutils`` and its
-``timeout`` command, which is used by the ``logtalk_tester`` script
-``-t`` option.
-
-Note that some tests may give different results when run from within the
-Bash shell compared with running the tests manually using a Windows GUI
-version of the Prolog backend. Some backends may also not be usable for
-automated testing due to the way their are made available as Windows
-applications.
-
-Additional advice on testing and on automating testing using continuous
-integration servers can be found at:
-
-https://logtalk.org/testing.html
 
 Utility predicates
 ------------------
@@ -1492,11 +1687,17 @@ simplify writing unit tests and for general use:
      an error (the first argument allows assertion failures to be
      distinguished when using multiple assertions).
 
+-  | ``approximately_equal(Number1, Number2)``
+   | For number approximate equality using the ``epsilon`` arithmetic
+     constant value.
+
 -  | ``approximately_equal(Number1, Number2, Epsilon)``
-   | For number approximate equality.
+   | For number approximate equality. Weaker equality than essential
+     equality.
 
 -  | ``essentially_equal(Number1, Number2, Epsilon)``
-   | For number essential equality.
+   | For number essential equality. Stronger equality than approximate
+     equality.
 
 -  | ``tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)``
    | For number equality within tolerances.
@@ -1515,8 +1716,8 @@ simplify writing unit tests and for general use:
    | For finding the average time to prove a goal.
 
 -  | ``benchmark(Goal, Repetitions, Clock, Time)``
-   | For finding the average time to prove a goal using a cpu or a wall
-     clock.
+   | For finding the average time to prove a goal using a ``cpu`` or a
+     ``wall`` clock.
 
 -  | ``deterministic(Goal)``
    | For checking that a predicate succeeds without leaving a
@@ -1552,12 +1753,21 @@ As the ``benchmark/2-4`` predicates are meta-predicates, turning on the
 the meta-argument, which would add an overhead to the timing results.
 But this advice conflicts with collecting code coverage data, which
 requires compilation in debug mode. The solution is to use separate test
-objects for benchmarking and for code coverage. But note that the CPU
-execution time (in seconds) for each individual test is reported by
-default when running the tests.
+objects for benchmarking and for code coverage. Note that the CPU and
+wall execution times (in seconds) for each individual test are reported
+by default when running the tests.
 
-Consult the ``lgtunit`` object documentation for more details on these
-predicates.
+The ``(=~=)/2`` predicate is typically used by adding the following
+directive to the object (or category) calling it:
+
+::
+
+   :- uses(lgtunit, [
+       op(700, xfx, =~=), (=~=)/2
+   ]).
+
+Consult the ``lgtunit`` object API documentation for more details on
+these predicates.
 
 Exporting test results in xUnit XML format
 ------------------------------------------
@@ -1734,14 +1944,21 @@ links include the line number for the tests in the tests files (assuming
 that the git repo is stored in a BitBucket, GitHub, or GitLab server).
 But note that not all supported backends provide accurate line numbers.
 
+When using the Allure 2.24.0 or a later version, it's possible to
+generate single file reports. For example:
+
+::
+
+   $ logtalk_allure_report -s -t "My Amazing Tests Report"
+
 There are some caveats when generating Allure reports that users must be
 aware. First, Allure expects test names to be unique across different
 tests sets. If there are two test with the same name in two different
-test sets, only one of them will be reported. Second, skipped test sets
-are not reported. Third, when using the ``xunit`` format, dates are
-reported as MM/DD/YYYY. Finally, when using the ``xunit_net_v2`` format,
-tests are reported in a random order instead of their run order and
-dates are displayed as "unknown" in the overview page.
+test sets, only one of them will be reported. Second, when using the
+``xunit`` format, dates are reported as MM/DD/YYYY. Finally, when using
+the ``xunit_net_v2`` format, tests are reported in a random order
+instead of their run order and dates are displayed as "unknown" in the
+overview page.
 
 Exporting code coverage results in XML format
 ---------------------------------------------
@@ -1809,7 +2026,7 @@ Automatically creating bug reports at issue trackers
 ----------------------------------------------------
 
 To automatically create bug report issues for failed tests in GitHub or
-GitLab servers, see the ``issue_tracker`` tool.
+GitLab servers, see the ``issue_creator`` tool.
 
 Minimizing test results output
 ------------------------------

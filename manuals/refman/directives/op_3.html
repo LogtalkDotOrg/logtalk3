@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>op/3 &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <title>op/3 &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -129,29 +132,73 @@
              
   <p class="align-right"><strong>directive</strong></p>
 <section id="op-3">
-<span id="directives-op-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">op/3</span></code><a class="headerlink" href="#op-3" title="Permalink to this heading"></a></h1>
+<span id="directives-op-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">op/3</span></code><a class="headerlink" href="#op-3" title="Link to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">op</span>(<span class="nv">Precedence</span>, <span class="nv">Associativity</span>, <span class="nv">Operator</span>)
 <span class="k">op</span>(<span class="nv">Precedence</span>, <span class="nv">Associativity</span>, [<span class="nv">Operator</span>, ...])
 </pre></div>
 </div>
-<p>Declares operators. Operators declared inside entities have local scope.
-Global operators can be declared inside a source file by writing the
-respective directives before the entity opening directives.</p>
+<p>Declares operators. Global operators can be declared inside a source file
+by writing the respective directives before the entity opening directives.
+Operators declared inside entities have local scope. Calls to the standard
+term input and output predicates take into account any locally defined
+operators.</p>
 </section>
 <section id="template-and-modes">
-<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this heading"></a></h2>
+<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">op</span>(<span class="o">+</span>integer, <span class="o">+</span>associativity, <span class="o">+</span>atom_or_atom_list)
 </pre></div>
 </div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<p>Some of the predicate argument instantiation mode operators used by Logtalk:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">op</span>(<span class="m">200</span>, fy, <span class="o">+</span>).
 <span class="p">:- </span><span class="k">op</span>(<span class="m">200</span>, fy, <span class="o">?</span>).
 <span class="p">:- </span><span class="k">op</span>(<span class="m">200</span>, fy, <span class="o">@</span>).
 <span class="p">:- </span><span class="k">op</span>(<span class="m">200</span>, fy, <span class="o">-</span>).
+</pre></div>
+</div>
+<p>An example of using entity local operators. Consider the following <code class="docutils literal notranslate"><span class="pre">ops.lgt</span></code>
+file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((<span class="k">write</span>(<span class="o">&lt;=&gt;</span>(<span class="m">1</span>,<span class="m">2</span>)), <span class="k">nl</span>)).
+
+<span class="p">:- </span><span class="k">object</span>(ops).
+
+<span class="p">    :- </span><span class="k">op</span>(<span class="m">700</span>, xfx, <span class="o">&lt;=&gt;</span>).
+
+<span class="p">    :- </span><span class="k">public</span>(w<span class="o">/</span><span class="m">1</span>).
+    w(<span class="nv">Term</span>) <span class="o">:-</span>
+        <span class="k">write</span>(<span class="nv">Term</span>), <span class="k">nl</span>.
+
+<span class="p">    :- </span><span class="k">public</span>(r<span class="o">/</span><span class="m">1</span>).
+    r(<span class="nv">Term</span>) <span class="o">:-</span>
+        <span class="k">read</span>(<span class="nv">Term</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>Loading the file automatically calls the initialization goal. Compare its
+output with the output of the <code class="docutils literal notranslate"><span class="pre">ops::w/1</span></code> predicate. Compare also reading
+a term from within the <code class="docutils literal notranslate"><span class="pre">ops</span></code> object versus reading from <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- {ops}.
+&lt;=&gt;(1,2)
+true.
+
+| ?- ops::w(&lt;=&gt;(1,2)).
+1&lt;=&gt;2
+true.
+
+| ?- ops::r(T).
+|: 3&lt;=&gt;4.
+
+T = &lt;=&gt;(3, 4).
+
+| ?- read(T).
+|: 5&lt;=&gt;6.
+
+SYNTAX ERROR: operator expected
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -172,7 +219,7 @@ respective directives before the entity opening directives.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

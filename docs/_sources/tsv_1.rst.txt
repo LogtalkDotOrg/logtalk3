@@ -1,0 +1,64 @@
+.. index:: tsv(Header)
+.. _tsv/1:
+
+.. rst-class:: right
+
+**object**
+
+``tsv(Header)``
+===============
+
+* ``Header`` - Header handling option with possible values ``skip`` and ``keep`` (default).
+
+
+TSV file and stream reading and writing predicates.
+
+| **Availability:** 
+|    ``logtalk_load(tsv(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:1
+| **Date:** 2024-03-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`tsv_protocol <tsv_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`logtalk <logtalk/0>`
+|    :ref:`reader <reader/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`tsv_protocol/0::read_file/2`  :ref:`tsv_protocol/0::read_file/3`  :ref:`tsv_protocol/0::read_file_by_line/2`  :ref:`tsv_protocol/0::read_file_by_line/3`  :ref:`tsv_protocol/0::read_stream/2`  :ref:`tsv_protocol/0::read_stream/3`  :ref:`tsv_protocol/0::read_stream_by_line/2`  :ref:`tsv_protocol/0::read_stream_by_line/3`  :ref:`tsv_protocol/0::write_file/3`  :ref:`tsv_protocol/0::write_stream/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

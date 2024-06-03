@@ -25,12 +25,12 @@
 	:- info([
 		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2023-06-21,
+		date is 2023-08-26,
 		comment is 'Unit tests for the "java" library.'
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, '=~='), '=~='/2
+		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	cover(java(_, _)).
@@ -46,8 +46,14 @@
 		java('java.util.Date')::new(Date),
 		java(Date, Time)::getTime.
 
-	test(java_2_new_2_02, true) :-
-		java('java.lang.String')::new([abc], _).
+	test(java_2_new_2_02, true(String == abc)) :-
+		java('java.lang.String')::new([abc], String).
+
+	test(java_2_new_2_03, true(String == 'àçé')) :-
+		java('java.lang.String')::new(['àçé'], String).
+
+	test(java_2_new_2_04, true(String == '较好地解决了上述问')) :-
+		java('java.lang.String')::new(['较好地解决了上述问'], String).
 
 	% invoke/1-2 tests
 

@@ -23,15 +23,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2013-10-14,
+		date is 2024-02-05,
 		comment is 'Unit tests for the "threads/team" example.'
 	]).
 
 	cover(team).
 
-	test(team_1) :-
-		team::start.
+	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+
+		test(team_01, true) :-
+			team::start.
+
+	:- else.
+
+		test(team_01, true(Assertion)) :-
+			^^set_text_output(''),
+			team::start,
+			^^text_output_assertion('a(0)\na(1)\na(2)\na(3)\na(4)\na(5)\na(6)\na(7)\na(8)\na(9)\nNumber of lines: 10\n', Assertion).
+
+	:- endif.
 
 :- end_object.

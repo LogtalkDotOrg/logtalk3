@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:30:1,
+		version is 2:33:1,
 		author is 'Paulo Moura',
-		date is 2023-02-10,
+		date is 2024-04-01,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_), entity_diagram(_)]
@@ -43,23 +43,16 @@
 		argnames is ['Library']
 	]).
 
-	% first, output the library node
+	% first, output the library node if it depends on one or more libraries
 	output_library(Library, Directory, Options) :-
 		parameter(1, Format),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions0),
-		(	logtalk::loaded_file_property(File, library(Library)),
-			(	logtalk::loaded_file_property(File, object(_))
-			;	logtalk::loaded_file_property(File, protocol(_))
-			;	logtalk::loaded_file_property(File, category(_))
-			) ->
-			entity_diagram(Format)::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Library, Suffix, NodeOptions0, NodeOptions),
-			assertz(sub_diagram_(Library))
-		;	% no entities for this library; entity diagram empty
-			NodeOptions = NodeOptions0
-		),
+		once(depends_library(Library, Directory, _, _, _)),
+		entity_diagram(Format)::diagram_name_suffix(Suffix),
+		^^add_node_zoom_option(Library, Suffix, NodeOptions0, NodeOptions),
+		assertz(sub_diagram_(Library)),
 		(	member(directory_paths(true), Options) ->
 			^^output_node(Directory, Library, library, [Relative], library, NodeOptions)
 		;	^^output_node(Directory, Library, library, [], library, NodeOptions)
@@ -153,8 +146,9 @@
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
 		^^option(zoom(true), Options),
+		entity_diagram(Format)::default_option(layout(Layout)),
 		sub_diagram_(Library),
-		entity_diagram(Format)::library(Library, Options),
+		entity_diagram(Format)::library(Library, [layout(Layout)| Options]),
 		fail.
 	output_sub_diagrams(_).
 
@@ -168,6 +162,8 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, don't omit any prefix when printing paths:
 	default_option(omit_path_prefixes(Prefixes)) :-
 		(	logtalk::expand_library_path(home, Home) ->
@@ -183,7 +179,7 @@
 	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
-	default_option(output_directory('./')).
+	default_option(output_directory('./dot_dias')).
 	% by default, exclude only the "startup" and "scratch_directory" libraries:
 	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, use a 'library_index.html' suffix for entity documentation URLs:

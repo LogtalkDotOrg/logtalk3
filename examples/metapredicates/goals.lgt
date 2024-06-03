@@ -78,3 +78,36 @@
 	baz :- write('!').
 
 :- end_object.
+
+
+:- object(simple_client_alt).
+
+	% predicates for testing calls to the
+	% "simple" object meta-predicates
+
+	:- public(test_whatever/0).
+
+	% in this alternative, a uses/2 directive
+	% is used for implicit message sending
+
+	:- uses(simple, [
+		whatever/1, whatever_all/1
+	]).
+
+	test_whatever :-
+		whatever(true),
+		whatever(oops),
+		whatever(repeat).
+
+	oops :- fail.
+
+	:- public(test_whatever_all/0).
+
+	test_whatever_all :-
+		whatever_all([foo,fail,bar,false,baz]).
+
+	foo :- write('Hello ').
+	bar :- write('world').
+	baz :- write('!').
+
+:- end_object.

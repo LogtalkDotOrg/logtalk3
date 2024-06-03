@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1:32:0,
+		version is 1:33:0,
 		author is 'Paulo Moura',
-		date is 2015-09-07,
+		date is 2024-03-15,
 		comment is 'Example of an object defining compiler hook predicates.'
 	]).
 
@@ -49,7 +49,7 @@
 		),
 		expand_key_values(Infos, ExpInfos).
 
-	key_value(author, pm, 'Paulo Moura, pmoura@logtalk.org').
-	key_value(license, apache2, 'Apache License 2.0').
+	key_value(author, pm, 'Paulo Moura').
+	key_value(license, apache2, 'Apache-2.0').
 
 :- end_object.

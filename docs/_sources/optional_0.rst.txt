@@ -10,6 +10,9 @@
 
 Constructors for optional terms. An optional term is either empty or holds a value. Optional terms should be regarded as opaque terms and always used with the ``optional/1`` object by passing the optional term as a parameter.
 
+| **Availability:** 
+|    ``logtalk_load(optionals(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 2:1:0
 | **Date:** 2021-01-03

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 1:22:0,
+		version is 3:0:1,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2024-04-01,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -43,28 +43,33 @@
 		argnames is ['Project', 'Directory']
 	]).
 
-	% first, output the directory node
+	% first, output the directory node if it depends on other directories
 	output_library(Project, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		(	(	logtalk::loaded_file_property(_, directory(Directory))
-			;	modules_diagram_support::loaded_file_property(_, directory(Directory))
-			) ->
-			parameter(1, Format),
-			file_dependency_diagram(Format)::diagram_name_suffix(Suffix),
-			^^add_node_zoom_option(Project, Suffix, LinkingOptions, NodeOptions),
-			assertz((sub_diagram_(Project, Directory)))
-		;	% no files for this directory
-			NodeOptions = LinkingOptions
-		),
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		once((
+			depends_directory(Directory, OtherDirectory, _),
+			\+ (
+				member(ExcludedDirectory, ExcludedDirectories),
+				sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)
+			)
+		)),
+		parameter(1, Format),
+		file_dependency_diagram(Format)::diagram_name_suffix(Suffix),
+		^^add_node_zoom_option(Project, Suffix, LinkingOptions, NodeOptions),
+		assertz(sub_diagram_(Project, Directory)),
 		^^output_node(Directory, Relative, directory, [], directory, NodeOptions),
 		^^remember_included_directory(Directory),
 		fail.
 	% second, output edges for all directories that this directory refers to
 	output_library(_, Directory, Options) :-
-		depends_directory(Directory, OtherDirectory, Kind),
 		^^option(exclude_directories(ExcludedDirectories), Options),
-		\+ member(OtherDirectory, ExcludedDirectories),
+		depends_directory(Directory, OtherDirectory, Kind),
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)
+		),
 		% ensure that this dependency is not already recorded
 		\+ ^^edge(Directory, OtherDirectory, _, _, _),
 		^^save_edge(Directory, OtherDirectory, [depends], depends_on_directory, [tooltip(depends)| Options]),
@@ -134,8 +139,9 @@
 	output_sub_diagrams(Options) :-
 		parameter(1, Format),
 		^^option(zoom(true), Options),
+		file_dependency_diagram(Format)::default_option(layout(Layout)),
 		sub_diagram_(Project, Directory),
-		file_dependency_diagram(Format)::directory(Project, Directory, Options),
+		file_dependency_diagram(Format)::directory(Project, Directory, [layout(Layout)| Options]),
 		fail.
 	output_sub_diagrams(_).
 
@@ -149,6 +155,8 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, don't omit any prefix when printing paths:
 	default_option(omit_path_prefixes(Prefixes)) :-
 		(	logtalk::expand_library_path(home, Home) ->
@@ -164,7 +172,7 @@
 	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
-	default_option(output_directory('./')).
+	default_option(output_directory('./dot_dias')).
 	% by default, don't exclude any directories:
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:

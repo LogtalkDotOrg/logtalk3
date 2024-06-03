@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,9 +29,9 @@
 :- object(tap_output).
 
 	:- info([
-		version is 3:0:1,
+		version is 4:0:1,
 		author is 'Paulo Moura',
-		date is 2022-10-08,
+		date is 2024-04-01,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.'
@@ -112,12 +112,12 @@
 		),
 		nl.
 	% passed test
-	message_hook(passed_test(Object, Test, _, _, Note, _)) :-
+	message_hook(passed_test(Object, Test, _, _, Note, _, _)) :-
 		test_count(N),
 		write('ok '), write(N), write(' - '), writeq(Test), write(' @ '), writeq(Object),
 		write_test_note(passed, Note).
 	% failed test
-	message_hook(failed_test(Object, Test, _, _, Reason, Note, _)) :-
+	message_hook(failed_test(Object, Test, _, _, Reason, Note, _, _)) :-
 		test_count(N),
 		write('not ok '), write(N), write(' - '), writeq(Test), write(' @ '), writeq(Object),
 		write_test_note(failed, Note),
@@ -189,13 +189,5 @@
 			numbervars(Term, 0, _),
 			write_term(Term, [numbervars(true), quoted(true)])
 		).
-
-	sum(List, Sum) :-
-		sum(List, 0, Sum).
-
-	sum([], Sum, Sum).
-	sum([N| Ns], Sum0, Sum) :-
-		Sum1 is Sum0 + N,
-		sum(Ns, Sum1, Sum).
 
 :- end_object.

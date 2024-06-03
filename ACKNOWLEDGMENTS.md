@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,6 +29,7 @@ CONTRIBUTORS
 
 * Abramo Bagnara (efficient expansion of once/1 goals and bug reports in corner cases when compiling disjunctions)
 * Adrián Arroyo Calle (library enhancements)
+* Alex Kouznetsov (bug reports and documentation feedback)
 * Andreas Becker (PDT support for Logtalk, bug reports)
 * Andrew Davison (help with Trealla Prolog integration; bug reports; test suggestions)
 * Anne Ogborn (bug reports, usability suggestions)
@@ -39,9 +40,11 @@ CONTRIBUTORS
 * Camilo Correa Restrepo (bug reports)
 * Clara Dimene (GeSHi syntax highlighter)
 * Damien Roch (Docker support)
+* Daniel Diaz (testing and tools feedback and suggestions)
 * Daniel Gross (bug reports, documentation feedback and suggestions)
 * Daniel L. Dudley (made the ISO 8601 library object available)
 * Davide Ancona (coinduction examples)
+* Domingo Alvarez Duarte (rewrite of the Handbook grammar section for compatibility with the [Railroad Diagram Generator](https://www.bottlecaps.de/rr/ui))
 * Douglas R. Miles (suggestions, bug reports, Logtalk on SWISH experiments)
 * Ebrahim Azarisooreh (code metrics tool, Arch Linux package, made [lgtinit](https://github.com/eazar001/lgtinit) available)
 * Eva Stöwe (PDT support for Logtalk)
@@ -101,6 +104,7 @@ CONTRIBUTORS
 * Victor Noel (bug reports)
 * Vítor Santos Costa (red-black tree library)
 * Xin Wang (bug reports)
+* Yurii Rashkovskii (bug reports, feedback and suggestions, code contributions, SWI-Prolog embedding scripts improvements)
 
 A special thanks to all the Prolog implementers who fixed bugs and
 implemented enhancements that greatly helped in improving Logtalk
@@ -151,7 +155,6 @@ HOSTING AND TESTING SERVICES USED IN LOGTALK DEVELOPMENT AND DISTRIBUTION
 =========================================================================
 
 * GitHub
-* Travis CI
 * AppVeyor
 * Docker
 * Read the Docs

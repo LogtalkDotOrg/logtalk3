@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>meta_predicate/1 &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/css/custom.css" type="text/css" />
+  <title>meta_predicate/1 &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-        <script src="../../_static/doctools.js"></script>
-        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -140,9 +143,9 @@
              
   <p class="align-right"><strong>directive</strong></p>
 <section id="meta-predicate-1">
-<span id="directives-meta-predicate-1"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code><a class="headerlink" href="#meta-predicate-1" title="Permalink to this heading"></a></h1>
+<span id="directives-meta-predicate-1"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code><a class="headerlink" href="#meta-predicate-1" title="Link to this heading"></a></h1>
 <section id="description">
-<h2>Description<a class="headerlink" href="#description" title="Permalink to this heading"></a></h2>
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>meta_predicate(<span class="nv">Template</span>)
 meta_predicate((<span class="nv">Template</span>, ...))
 meta_predicate([<span class="nv">Template</span>, ...])
@@ -157,20 +160,22 @@ meta_predicate([<span class="nv">Module</span><span class="o">:</span><span clas
 </pre></div>
 </div>
 <p>Declares <a class="reference internal" href="../../glossary.html#term-meta-predicate"><span class="xref std std-term">meta-predicates</span></a>, i.e., predicates that
-have arguments that will be called as goals. An argument may also be a
-<a class="reference internal" href="../../glossary.html#term-closure"><span class="xref std std-term">closure</span></a> instead of a goal if the meta-predicate uses the
-<a class="reference internal" href="../methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> Logtalk built-in methods to construct and call the
-actual goal from the closure and the additional arguments.</p>
+have arguments interpreted as goals, arguments interpreted as
+<a class="reference internal" href="../../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> used to construct goals, or arguments with
+sub-terms that will be interpreted as goals or closures. Meta-arguments
+are always called in the meta-predicate
+<a class="reference internal" href="../../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the
+meta-predicate <a class="reference internal" href="../../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>.</p>
 <p>Meta-arguments which are goals are represented by the integer <code class="docutils literal notranslate"><span class="pre">0</span></code>.
 Meta-arguments which are closures are represented by a positive integer,
 <code class="docutils literal notranslate"><span class="pre">N</span></code>, representing the number of additional arguments that will be
-appended to the closure in order to construct the corresponding meta-call.
-Meta-arguments that will be called using the <code class="docutils literal notranslate"><span class="pre">bagof/3</span></code> or <code class="docutils literal notranslate"><span class="pre">setof/3</span></code>
-predicates and that can thus be existentially-qualified are represented
-by the atom <code class="docutils literal notranslate"><span class="pre">^</span></code>. Normal arguments are represented by the atom <code class="docutils literal notranslate"><span class="pre">*</span></code>.
-Meta-arguments are always called in the meta-predicate
-<a class="reference internal" href="../../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the
-meta-predicate <a class="reference internal" href="../../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>.</p>
+appended to the closure in order to construct the corresponding goal
+(typically by calling the <a class="reference internal" href="../methods/call_N.html#methods-call-n"><span class="std std-ref">call/1-N</span></a> built-in method).
+Meta-arguments with sub-terms that will be interpreted as goals or closures
+are represented by <code class="docutils literal notranslate"><span class="pre">::</span></code>. Meta-arguments that will be called using the
+<code class="docutils literal notranslate"><span class="pre">bagof/3</span></code> or <code class="docutils literal notranslate"><span class="pre">setof/3</span></code> predicates and that can thus be
+existentially-qualified are represented by the atom <code class="docutils literal notranslate"><span class="pre">^</span></code>. Normal arguments
+are represented by the atom <code class="docutils literal notranslate"><span class="pre">*</span></code>.</p>
 <p>Logtalk allows the use of this directive to override the original
 meta-predicate directive. This is sometimes necessary when calling
 Prolog built-in meta-predicates or Prolog module meta-predicates due
@@ -184,7 +189,7 @@ and is therefore a practice best avoided.</p>
 </div>
 </section>
 <section id="template-and-modes">
-<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Permalink to this heading"></a></h2>
+<h2>Template and modes<a class="headerlink" href="#template-and-modes" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>meta_predicate(<span class="o">+</span>meta_predicate_template_term)
 
 meta_predicate(<span class="o">+</span>object_identifier<span class="o">::+</span>meta_predicate_template_term)
@@ -195,7 +200,7 @@ meta_predicate(<span class="o">+</span>module_identifier<span class="o">:+</span
 </div>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% findall/3 second argument is interpreted as a goal:</span>
 <span class="p">:- </span><span class="k">meta_predicate</span>(<span class="k">findall</span>(<span class="o">*</span>, <span class="m">0</span>, <span class="o">*</span>)).
 
@@ -227,7 +232,7 @@ meta_predicate(<span class="o">+</span>module_identifier<span class="o">:+</span
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

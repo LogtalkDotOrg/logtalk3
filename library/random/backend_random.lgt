@@ -23,13 +23,13 @@
 	implements(pseudo_random_protocol)).
 
 	:- info([
-		version is 1:16:0,
+		version is 1:20:0,
 		author is 'Paulo Moura',
-		date is 2023-06-21,
+		date is 2023-11-24,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',
-			'Portability' - 'B-Prolog, CxProlog, ECLiPSe, JIProlog, Qu-Prolog, Quintus Prolog, and Scryer Prolog do not provide implementations for the ``get_seed/1`` and ``set_seed/1`` predicates and calling these predicates simply succeed without performing any action.'
+			'Portability' - 'B-Prolog, CxProlog, ECLiPSe, JIProlog, Qu-Prolog, and Quintus Prolog do not provide implementations for the ``get_seed/1`` and ``set_seed/1`` predicates and calling these predicates simply succeed without performing any action.'
 		],
 		see_also is [random, fast_random]
 	]).
@@ -62,6 +62,57 @@
 	select(Current, Index, Random, [Head| Tail], [Head| Rest]) :-
 		Next is Current + 1,
 		select(Next, Index, Random, Tail, Rest).
+
+	select(Random, List, New, Rest) :-
+		length(List, Length),
+		random(Float),
+		Index is truncate(Float*Length+1),
+		select(1, Index, Random, List, New, Rest).
+
+	select(Index, Index, Random, [Random| Tail], New, [New| Tail]) :-
+		!.
+	select(Current, Index, Random, [Head| OldTail], New, [Head| NewTail]) :-
+		Next is Current + 1,
+		select(Next, Index, Random, OldTail, New, NewTail).
+
+	swap(List, Mutation) :-
+		length(List, Length),
+		Length > 1,
+		repeat,
+			between(1, Length, N1),
+			between(1, Length, N2),
+		N1 =\= N2,
+		!,
+		(	N1 < N2 ->
+			swap_1(N1, N2, List, Mutation)
+		;	swap_1(N2, N1, List, Mutation)
+		).
+
+	swap_1(1, N2, [Element1| Rest0], [Element2| Rest]) :-
+		!,
+		swap_2(N2, Element1, Element2, Rest0, Rest).
+	swap_1(N1, N2, [Head| Tail], [Head| Mutation]) :-
+		M1 is N1 - 1,
+		M2 is N2 - 1,
+		swap_1(M1, M2, Tail, Mutation).
+
+	swap_2(2, Element1, Element2, [Element2| Rest], [Element1| Rest]) :-
+		!.
+	swap_2(N2, Element1, Element2, [Head| Rest0], [Head| Rest]) :-
+		M is N2 - 1,
+		swap_2(M, Element1, Element2, Rest0, Rest).
+
+	swap_consecutive(List, Mutation) :-
+		length(List, Length),
+		Limit is Length - 1,
+		between(1, Limit, N),
+		swap_consecutive(N, List, Mutation).
+
+	swap_consecutive(1, [Element1, Element2| Rest], [Element2, Element1| Rest]) :-
+		!.
+	swap_consecutive(N, [Head| Tail], [Head| Mutation]) :-
+		M is N - 1,
+		swap_consecutive(M, Tail, Mutation).
 
 	enumerate(List, Random) :-
 		permutation(List, Permutation),
@@ -238,11 +289,6 @@
 		set_seed(Seed) :- {srandom(Seed)}.
 		random(Random) :- {random(Random)}.
 	:- elif(current_logtalk_flag(prolog_dialect, quintus)).
-		get_seed(_).
-		set_seed(_).
-		{:- use_module(library(random), [random/1])}.
-		random(Random) :- {random(Random)}.
-	:- elif(current_logtalk_flag(prolog_dialect, scryer)).
 		get_seed(_).
 		set_seed(_).
 		{:- use_module(library(random), [random/1])}.

@@ -30,11 +30,13 @@
 		comment is 'Unit tests for the unique predicate nodes metric.'
 	]).
 
+	:- uses(upn_metric, [
+		entity_score/2
+	]).
+
 	cover(code_metric).
 	cover(code_metrics_utilities).
 	cover(upn_metric).
-
-	:- uses(upn_metric, [entity_score/2]).
 
 	test(upn_metric_01, true(Score == 5)) :-
 		entity_score(expert_system, Score).

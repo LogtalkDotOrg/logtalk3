@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:37:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2024-03-25,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -43,57 +43,57 @@
 
 	test(os_date_time_7_01, true) :-
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds),
-		integer(Year),
-		integer(Month),
-		integer(Day),
-		integer(Hours),
-		integer(Minutes),
-		integer(Seconds),
-		integer(Milliseconds).
+		^^assertion(integer(Year)),
+		^^assertion(integer(Month)),
+		^^assertion(integer(Day)),
+		^^assertion(integer(Hours)),
+		^^assertion(integer(Minutes)),
+		^^assertion(integer(Seconds)),
+		^^assertion(integer(Milliseconds)).
 
 	test(os_decompose_file_name_3_01, true) :-
 		os::decompose_file_name('/home/user/foo.bar', Directory, Basename),
-		Directory == '/home/user/',
-		Basename == 'foo.bar'.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Basename == 'foo.bar').
 
 	test(os_decompose_file_name_3_02, true) :-
 		os::decompose_file_name('/home/user/foo', Directory, Basename),
-		Directory == '/home/user/',
-		Basename == foo.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Basename == foo).
 
 	test(os_decompose_file_name_3_03, true) :-
 		os::decompose_file_name('/home/user/', Directory, Basename),
-		Directory == '/home/user/',
-		Basename == ''.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Basename == '').
 
 	test(os_decompose_file_name_3_04, true) :-
 		os::decompose_file_name('foo.bar', Directory, Basename),
-		Directory == './',
-		Basename == 'foo.bar'.
+		^^assertion(Directory == './'),
+		^^assertion(Basename == 'foo.bar').
 
 	test(os_decompose_file_name_4_01, true) :-
 		os::decompose_file_name('/home/user/foo.bar', Directory, Name, Extension),
-		Directory == '/home/user/',
-		Name == foo,
-		Extension == '.bar'.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Name == foo),
+		^^assertion(Extension == '.bar').
 
 	test(os_decompose_file_name_4_02, true) :-
 		os::decompose_file_name('/home/user/foo', Directory, Name, Extension),
-		Directory == '/home/user/',
-		Name == foo,
-		Extension == ''.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Name == foo),
+		^^assertion(Extension == '').
 
 	test(os_decompose_file_name_4_03, true) :-
 		os::decompose_file_name('/home/user/', Directory, Name, Extension),
-		Directory == '/home/user/',
-		Name == '',
-		Extension == ''.
+		^^assertion(Directory == '/home/user/'),
+		^^assertion(Name == ''),
+		^^assertion(Extension == '').
 
 	test(os_decompose_file_name_4_04, true) :-
 		os::decompose_file_name('foo.bar', Directory, Name, Extension),
-		Directory == './',
-		Name == 'foo',
-		Extension == '.bar'.
+		^^assertion(Directory == './'),
+		^^assertion(Name == 'foo'),
+		^^assertion(Extension == '.bar').
 
 	test(os_path_concat_3_01, true(Path == File)) :-
 		this(This),
@@ -112,11 +112,11 @@
 	test(os_path_concat_3_05, true(Path == 'foo/bar')) :-
 		os::path_concat('foo', 'bar', Path).
 
-	test(os_internal_os_path_2_01, true(OSPath == '/foo/bar/baz'), [condition(os::operating_system_type(unix))]) :-
+	test(os_internal_os_path_2_01, true(OSPath == '/foo/bar/baz'), [condition(only_posix_systems)]) :-
 		os::internal_os_path(InternalPath, '/foo/bar/baz'),
 		os::internal_os_path(InternalPath, OSPath).
 
-	test(os_internal_os_path_2_02, true((OSPath == 'C:\\foo\\bar\\baz'; OSPath == 'c:\\foo\\bar\\baz')), [condition(os::operating_system_type(windows))]) :-
+	test(os_internal_os_path_2_02, true((OSPath == 'C:\\foo\\bar\\baz'; OSPath == 'c:\\foo\\bar\\baz')), [condition(only_windows_systems)]) :-
 		% some backends don't preserve case, which may depend on the Windows file system in use
 		os::internal_os_path(InternalPath, 'C:\\foo\\bar\\baz'),
 		os::internal_os_path(InternalPath, OSPath).
@@ -134,6 +134,27 @@
 
 	test(os_operating_system_type_1_01, true((Type == unix; Type == windows; Type == unknown))) :-
 		os::operating_system_type(Type).
+
+	test(os_operating_system_type_1_02, false) :-
+		os::operating_system_type(foo).
+
+	test(os_operating_system_name_1_01, true(Name \== '')) :-
+		os::operating_system_name(Name).
+
+	test(os_operating_system_name_1_02, false) :-
+		os::operating_system_name(foo).
+
+	test(os_operating_system_machine_1_01, true(Machine \== '')) :-
+		os::operating_system_machine(Machine).
+
+	test(os_operating_system_machine_1_02, false) :-
+		os::operating_system_machine(foo).
+
+	test(os_operating_system_release_1_01, true(Release \== '')) :-
+		os::operating_system_release(Release).
+
+	test(os_operating_system_release_1_02, false) :-
+		os::operating_system_release(foo).
 
 	test(os_environment_variable_2_01, true(atom(Path))) :-
 		os::environment_variable('PATH', Path).
@@ -294,16 +315,12 @@
 	test(os_working_directory_01, true(atom(WorkingDirectory))) :-
 		os::working_directory(WorkingDirectory).
 
-	test(os_change_directory_01, true) :-
+	test(os_change_directory_01, true((WorkingDirectory == Directory; WorkingDirectory == DirectoryNoSlash))) :-
 		this(This),
 		object_property(This, file(_,Directory)),
 		os::change_directory(Directory),
 		os::working_directory(WorkingDirectory),
-		(	WorkingDirectory == Directory ->
-			true
-		;	sub_atom(Directory, 0, _, 1, DirectoryNoSlash),
-			WorkingDirectory == DirectoryNoSlash
-		).
+		sub_atom(Directory, 0, _, 1, DirectoryNoSlash).
 
 	test(os_change_directory_02, error(_)) :-
 		os::change_directory(non_existing_directory).
@@ -366,16 +383,16 @@
 		os::absolute_file_name(Path, ExpandedPath),
 		\+ sub_atom(ExpandedPath, _, _, 0, '.').
 
-	test(os_absolute_file_name_2_04, true(\+ sub_atom(ExpandedPath, _, 2, _, '..')), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_04, true(\+ sub_atom(ExpandedPath, _, 2, _, '..')), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('../d', ExpandedPath).
 
-	test(os_absolute_file_name_2_05, true(ExpandedPath == '/a/d'), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_05, true(ExpandedPath == '/a/d'), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('/a/b/c/../../d', ExpandedPath).
 
-	test(os_absolute_file_name_2_06, true(\+ sub_atom(ExpandedPath, _, 2, _, '.')), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_06, true(\+ sub_atom(ExpandedPath, _, 2, _, '.')), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('./d', ExpandedPath).
 
-	test(os_absolute_file_name_2_07, true(ExpandedPath == '/a/b/c/d'), [condition(os::operating_system_type(unix))]) :-
+	test(os_absolute_file_name_2_07, true(ExpandedPath == '/a/b/c/d'), [condition(only_posix_systems)]) :-
 		os::absolute_file_name('/a/b/c/././d', ExpandedPath).
 
 	test(os_temporary_directory_1_01, true) :-
@@ -405,6 +422,24 @@
 		write(Stream, abc),
 		close(Stream),
 		os::file_size(Path, Size).
+
+	test(os_full_device_path_1_01, true(atom(Path)), [condition(only_linux_and_bsd_systems)]) :-
+		os::full_device_path(Path).
+
+	test(os_full_device_path_1_02, error(_), [condition(only_linux_and_bsd_systems)]) :-
+		os::full_device_path(Path),
+		open(Path, write, Stream),
+		write(Stream, abc),
+		flush_output(Stream).
+
+	test(os_read_only_device_path_1_01, true(atom(Path)), [condition(only_mac_systems)]) :-
+		os::read_only_device_path(Path).
+
+	test(os_read_only_device_path_1_02, error(_), [condition(only_mac_systems)]) :-
+		os::read_only_device_path(Path),
+		open(Path, write, Stream),
+		write(Stream, abc),
+		flush_output(Stream).
 
 	test(os_directory_files_2_01, true) :-
 		this(This),
@@ -510,13 +545,19 @@
 		os::shell(cd).
 
 	test(os_shell_1_02, false) :-
-		os::shell('cd non_existing_directory').
+		(	os::operating_system_type(windows) ->
+			os::shell('cd non_existing_directory 2>&1> nul')
+		;	os::shell('cd non_existing_directory > /dev/null 2>&1')
+		).
 
 	test(os_shell_2_01, true(Exit == 0)) :-
 		os::shell(cd, Exit).
 
 	test(os_shell_2_02, true(Exit \== 0)) :-
-		os::shell('cd non_existing_directory', Exit).
+		(	os::operating_system_type(windows) ->
+			os::shell('cd non_existing_directory 2>&1> nul', Exit)
+		;	os::shell('cd non_existing_directory > /dev/null 2>&1', Exit)
+		).
 
 	% os_types category tests
 
@@ -603,5 +644,24 @@
 		^^clean_directory('a'),
 		^^clean_directory('1/2'),
 		^^clean_directory('1').
+
+	% auxiliary predicates
+
+	only_linux_and_bsd_systems :-
+		\+ os::operating_system_type(windows),
+		(	os::shell('uname | grep -q Linux') ->
+			true
+		;	os::shell('uname | grep -q BSD')
+		).
+
+	only_posix_systems :-
+		os::operating_system_type(unix).
+
+	only_mac_systems :-
+		\+ os::operating_system_type(windows),
+		os::shell('uname -s | grep -q Darwin').
+
+	only_windows_systems :-
+		os::operating_system_type(windows).
 
 :- end_object.

@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,21 +39,34 @@ Description
    ...
 
 This non-terminal takes a :term:`closure` and is processed by appending the
-input list of tokens and the list of remaining tokens to the arguments
-of the closure. This built-in non-terminal is interpreted as a private
-non-terminal and thus cannot be used as a message to an object.
+two implicit grammar rule arguments to the arguments of the closure. This
+built-in non-terminal is interpreted as a private non-terminal and thus
+cannot be used as a message to an object.
 
 Using this non-terminal is recommended when calling a predicate whose
-last two arguments are the input list of tokens and the list of remaining
-tokens to avoid hard-coding assumptions about how grammar rules are
-compiled into clauses. Note that the compiler ensures zero overhead when
-using this non-terminal with a bound argument at compile time.
+last two arguments are the two implicit grammar rule arguments to avoid
+hard-coding assumptions about how grammar rules are compiled into clauses.
+Note that the compiler ensures zero overhead when using this non-terminal
+with a bound argument at compile time. To call a predicate with a different
+argument order, use a :term:`lambda expression`. For example:
+
+::
+
+   square -->
+       call([Number, Double]>>(Double is Number*Number)).
 
 When using a :term:`backend Prolog compiler` supporting a module system,
-calls in the format ``call(Module:Closure)`` may also be used. By using
-as argument a :term:`lambda expression`, this built-in non-terminal can
-provide controlled access to the input list of tokens and to the list of
-the remaining tokens processed by the grammar rule containing the call.
+calls in the format ``call(Module:Closure)`` may also be used.
+
+Meta-non-terminal template
+--------------------------
+
+::
+
+   call(0)
+   call(1, *)
+   call(2, *, *)
+   ...
 
 Modes and number of proofs
 --------------------------
@@ -76,13 +89,13 @@ Errors
 Examples
 --------
 
-| Calls a goal, constructed by appending the tokens difference list to the closure, in in the context of the object or category containing the call:
+| Calls a goal, constructed by appending the two implicit grammar rule arguments to the closure, in in the context of the object or category containing the call:
 |     ``call(Closure)``
-| To make a *super* call, constructed by appending the tokens difference list to the closure:
+| To make a *super* call, constructed by appending the two implicit grammar rule arguments to the closure:
 |     ``call(^^Closure)``
-| To send a goal, constructed by appending the tokens difference list to the closure, as a message to :term:`self`:
+| To send a goal, constructed by appending the two implicit grammar rule arguments to the closure, as a message to :term:`self`:
 |     ``call(::Closure)``
-| To send a goal, constructed by appending the tokens difference list to the closure, as a message to an explicit object:
+| To send a goal, constructed by appending the two implicit grammar rule arguments to the closure, as a message to an explicit object:
 |     ``call(Object::Closure)``
 
 .. seealso::

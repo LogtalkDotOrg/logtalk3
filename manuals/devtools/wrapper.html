@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>wrapper &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>wrapper &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -135,7 +138,7 @@
            <div itemprop="articleBody">
              
   <section id="wrapper">
-<span id="library-wrapper"></span><h1><code class="docutils literal notranslate"><span class="pre">wrapper</span></code><a class="headerlink" href="#wrapper" title="Permalink to this heading"></a></h1>
+<span id="library-wrapper"></span><h1><code class="docutils literal notranslate"><span class="pre">wrapper</span></code><a class="headerlink" href="#wrapper" title="Link to this heading"></a></h1>
 <p>This is a prototype tool to help port a plain Prolog application to
 Logtalk. It can also be used to enable applying other Logtalk developer
 tools, such as the documenting and diagramming tools, to plain Prolog
@@ -151,19 +154,19 @@ objects use <code class="docutils literal notranslate"><span class="pre">include
 be loaded for testing and for use with other tools. The wrapped Prolog
 files are not modified and thus require only read permission.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#wrapper">../../docs/library_index.html#wrapper</a></p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(wrapper(loader)).
 </pre></div>
 </div>
 </section>
 <section id="workflows">
-<h2>Workflows<a class="headerlink" href="#workflows" title="Permalink to this heading"></a></h2>
+<h2>Workflows<a class="headerlink" href="#workflows" title="Link to this heading"></a></h2>
 <p>The typical porting workflow is simply:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> wrapper<span class="o">::</span>rdirectory(root_directory_of_prolog_code).
 ...
@@ -175,7 +178,7 @@ files are not modified and thus require only read permission.</p>
 processing.</p>
 </section>
 <section id="customization">
-<h2>Customization<a class="headerlink" href="#customization" title="Permalink to this heading"></a></h2>
+<h2>Customization<a class="headerlink" href="#customization" title="Link to this heading"></a></h2>
 <p>The tool can be customized by extending the <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> object. A common
 scenario is when wrapping plain Prolog code just to take advantage, for
 example, of the documenting tool or for generating cross-referencing
@@ -215,9 +218,18 @@ files (default is <code class="docutils literal notranslate"><span class="pre">t
 </div>
 </li>
 </ul>
+<p>The use, by default, of <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directives to wrap the code in
+Prolog source files facilitates running in parallel the Logtalk port and
+the original Prolog code. This is specially useful when the Prolog code
+being ported lacks a comprehensive set of tests that could be adapted to
+verify the Logtalk port. The generated Logtalk files can also take
+advantage of <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directives, including predicate aliases and
+predicate shorthands to minimize the changes to the original Prolog code
+and help verify if replacement calls to Logtalk library predicates
+provide the same semantics as the original calls.</p>
 </section>
 <section id="current-limitations">
-<h2>Current limitations<a class="headerlink" href="#current-limitations" title="Permalink to this heading"></a></h2>
+<h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>The tool cannot deal with syntax errors in the Prolog files. These
 errors usually occur when using a backend Prolog system different
@@ -231,7 +243,7 @@ dependencies are also loaded.</p></li>
 <li><p>The tool assumes that all files to be wrapped have different names
 (even if found in different directories). If that is not the case,
 the name conflicts must be manually solved before using the tool.</p></li>
-<li><p>There isn’t yet any support for dealing with meta-predicates and
+<li><p>There’s only preliminary support for dealing with meta-predicates and
 advise on missing meta-predicate directives.</p></li>
 </ul>
 </section>
@@ -248,7 +260,7 @@ advise on missing meta-predicate directives.</p></li>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

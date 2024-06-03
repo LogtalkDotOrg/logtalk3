@@ -25,8 +25,16 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2016-06-01,
+		date is 2024-02-05,
 		comment is 'Unit tests for the "tbbt" example.'
 	]).
+
+	test(tbbt_01, true) :-
+		^^suppress_text_output,
+		game::explain.
+
+	test(tbbt_02, true) :-
+		^^suppress_text_output,
+		game::play.
 
 :- end_object.

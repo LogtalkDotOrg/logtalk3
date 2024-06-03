@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2018 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2018-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:2:1,
 		author is 'Paulo Moura',
-		date is 2021-05-08,
+		date is 2024-05-14,
 		comment is 'Unit tests for the Halstead complexity metric.'
 	]).
 
@@ -33,6 +33,7 @@
 
 	cover(code_metric).
 	cover(halstead_metric).
+	cover(halstead_metric(_)).
 
 	% basic validity tests
 

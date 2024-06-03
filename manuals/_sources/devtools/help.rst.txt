@@ -58,8 +58,10 @@ later version), LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB
 as the backend, ``apis/1`` and ``handbook/0-1`` predicates are made
 available. These predicates open inline at the top-level interpreter the
 Texinfo versions of the Handbook and the APIs documentation. The
-optional argument is a topic to search, which can be an atom, a
-predicate indicator, or a non-terminal indicator. Some examples:
+optional argument is a starting node, which can be an atom, a predicate
+indicator, or a non-terminal indicator. When there are several nodes for
+the same argument (e.g. multiple implementations of the ``member/2``
+predicate), one of them will be displayed. Some examples:
 
 ::
 
@@ -74,6 +76,13 @@ predicate indicator, or a non-terminal indicator. Some examples:
    | ?- help::apis(check/2).
 
    | ?- help::apis(message_tokens//2).
+
+Although less useful, you can also browse the ``man`` pages of Logtalk
+scripts. For example:
+
+::
+
+   | ?- help::man(logtalk_tester).
 
 When you finish consult the documentation and quit the ``info`` process,
 you will be back to the top-level prompt (if you find that the top-level
@@ -117,6 +126,11 @@ Known issues
 The open commands used to open documentation URLs drop the fragment
 part, thus preventing navigating to the specified position on the
 documentation page.
+
+When browsing the Texinfo versions of the Handbook and the APIs
+documentation generated with a recent version of Sphinx and using a
+recent version of Texinfo, the Texinfo search feature often displays the
+previous nodes of the searched nodes.
 
 ECLiPSe defines a ``help`` prefix operator that forces wrapping this
 atom between parenthesis when sending messages to the tool. E.g. use

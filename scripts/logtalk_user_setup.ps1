@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on March 15, 2023
+##   Last updated on November 27, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -30,8 +30,9 @@ param ()
 function Describe-Script {
 	Write-Output ""
 	Write-Output "This script copies all the Logtalk per-user files and directories to the"
-	Write-Output "user home directory. The location can be set by the environment variable"
-	Write-Output "%LOGTALKUSER% (default value is %USERPROFILE%\Documents\Logtalk)."
+	Write-Output "user home directory. The location can be set by defining the LOGTALKUSER"
+	Write-Output "environment variable (defaults to %USERPROFILE%\Documents\Logtalk when"
+	Write-Output "not defined)."
 	Write-Output ""
 }
 
@@ -95,7 +96,7 @@ if ($env:LOGTALKHOME -eq $env:LOGTALKUSER) {
 
 function Create-Logtalkuser-Directory {
 	if (Test-Path $env:LOGTALKUSER) {
-		$date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
+		$date = Get-Date -Format "yyyy-MM-dd-HHmmss"
 		Move-Item -Path $env:LOGTALKUSER -Destination $env:LOGTALKUSER-backup-$date
 		Write-Output "Created a backup of the existing %LOGTALKUSER% directory:"
 		Write-Output ""
@@ -176,14 +177,14 @@ function Create-Logtalkuser-Directory {
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.dtd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.dtd > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.rng -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.rng > $null
 	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index.xsd -Target $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd > $null
-	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\packs\lgtenv.ps1 -Target $env:LOGTALKHOME\tools\packs\lgtenv.ps1 > $null
+	New-Item -ItemType SymbolicLink -Path $env:LOGTALKUSER\tools\packs\lgtenv.ps1 -Target $env:LOGTALKHOME\tools\packs\lgtenv.ps1 -Force > $null
 
 	Write-Output "Finished copying Logtalk files and directories."
 	Write-Output ""
-	Write-Output "You may want to customize the default Logtalk compiler flags by renaming"
-	Write-Output "and editing the settings-sample.lgt source file found in the directory"
-	Write-Output "%LOGTALKUSER%. For more information on how to customize Logtalk and the"
-	Write-Output "working environment, consult the %LOGTALKUSER%\CUSTOMIZE.md file."
+	Write-Output "You may want to customize the default compiler flags and preload developer"
+	Write-Output "tools by renaming and editing the `"settings-sample.lgt`" file found in the"
+	Write-Output "%LOGTALKUSER% directory. Consult the %LOGTALKUSER%\CUSTOMIZE.md file for"
+	Write-Output "more information."
 	Write-Output ""
 }
 

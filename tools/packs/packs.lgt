@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:63:0,
+		version is 0:74:0,
 		author is 'Paulo Moura',
-		date is 2023-06-21,
+		date is 2024-05-24,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -201,6 +201,7 @@
 		remarks is [
 			'``update(Boolean)`` option' - 'Update pack if already installed. Default is ``false``. Overrides the ``force/1`` option.',
 			'``force(Boolean)`` option' - 'Force pack re-installation if already installed. Default is ``false``.',
+			'``compatible(Boolean)`` option' - 'Restrict installation to compatible packs. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after installation. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose installing steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
@@ -266,11 +267,12 @@
 	:- public(update/3).
 	:- mode(update(+atom, ++callable, ++list(callable)), zero_or_one).
 	:- info(update/3, [
-		comment is 'Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
+		comment is 'Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is orphaned or pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Version', 'Options'],
 		remarks is [
 			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
-			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
+			'``force(Boolean)`` option' - 'Force update if the pack is pinned or breaks installed packs. Default is ``false``.',
+			'``compatible(Boolean)`` option' - 'Restrict updating to compatible packs. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
@@ -295,11 +297,12 @@
 	:- public(update/2).
 	:- mode(update(+atom, ++list(callable)), zero_or_one).
 	:- info(update/2, [
-		comment is 'Updates an outdated pack to its latest version using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
+		comment is 'Updates an outdated pack to its latest version using the specified options. Fails if the pack is orphaned, unknown, or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.',
 		argnames is ['Pack', 'Options'],
 		remarks is [
 			'``install(Boolean)`` option' - 'Install pack latest version if not already installed. Default is ``false``.',
-			'``force(Boolean)`` option' - 'Force update if the pack is pinned. Default is ``false``.',
+			'``force(Boolean)`` option' - 'Force update if the pack is pinned or breaks installed packs. Default is ``false``.',
+			'``compatible(Boolean)`` option' - 'Restrict updating to compatible packs. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean pack archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
@@ -322,7 +325,7 @@
 	:- public(update/1).
 	:- mode(update(+atom), zero_or_one).
 	:- info(update/1, [
-		comment is 'Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, not installed, or unknown.',
+		comment is 'Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, orphaned, not installed, unknown, or breaks installed packs.',
 		argnames is ['Pack'],
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,
@@ -333,7 +336,7 @@
 	:- public(update/0).
 	:- mode(update, zero_or_one).
 	:- info(update/0, [
-		comment is 'Updades all outdated packs (that are not pinned) using default options.'
+		comment is 'Updates all outdated packs (that are not pinned) using default options.'
 	]).
 
 	:- public(uninstall/2).
@@ -390,7 +393,7 @@
 	:- public(clean/1).
 	:- mode(clean(+atom), zero_or_one).
 	:- info(clean/1, [
-		comment is 'Cleans all pack archives. Fails if the pack is not unknown.',
+		comment is 'Cleans all pack archives. Fails if the pack is unknown.',
 		argnames is ['Pack'],
 		exceptions is [
 			'``Pack`` is a variable' - instantiation_error,
@@ -440,6 +443,7 @@
 		argnames is ['File', 'Options'],
 		remarks is [
 			'``force(Boolean)`` option' - 'Force restoring if a registry is already defined or a pack is already installed. Default is ``true``.',
+			'``compatible(Boolean)`` option' - 'Restrict installation to compatible packs. Default is ``true``.',
 			'``clean(Boolean)`` option' - 'Clean registry and pack archives after restoring. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose restoring steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksums. Default is ``true``.',
@@ -551,9 +555,11 @@
 
 	:- uses(os, [
 		delete_file/1, delete_directory/1, directory_exists/1, directory_files/3,
-		decompose_file_name/3, decompose_file_name/4, ensure_file/1, file_exists/1,
+		decompose_file_name/3, decompose_file_name/4,
+		ensure_file/1, file_exists/1, file_size/2,
 		internal_os_path/2, make_directory_path/1, operating_system_type/1,
-		path_concat/3
+		path_concat/3,
+		operating_system_name/1, operating_system_machine/1, operating_system_release/1
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, ciao)).
@@ -682,8 +688,15 @@
 		).
 	installed(Registry) :-
 		print_message(information, packs, 'Installed packs from the ~q registry:'+[Registry]),
-		installed_pack(Registry, Pack, Version, Pinned),
-		print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned)),
+		setof(
+			p(Registry, Pack, Version, Pinned),
+			installed_pack(Registry, Pack, Version, Pinned),
+			Packs
+		),
+		forall(
+			member(p(Registry, Pack, Version, Pinned), Packs),
+			print_message(information, packs, installed_pack(Registry, Pack, Version, Pinned))
+		),
 		fail.
 	installed(Registry) :-
 		\+ installed_pack(Registry, _, _, _),
@@ -693,8 +706,15 @@
 
 	installed :-
 		print_message(information, packs, @'Installed packs:'),
-		installed_pack(Registry, Pack, Version, Pinned),
-		print_message(information, packs, instaled_pack(Registry, Pack, Version, Pinned)),
+		setof(
+			p(Registry, Pack, Version, Pinned),
+			installed_pack(Registry, Pack, Version, Pinned),
+			Packs
+		),
+		forall(
+			member(p(Registry, Pack, Version, Pinned), Packs),
+			print_message(information, packs, installed_pack(Registry, Pack, Version, Pinned))
+		),
 		fail.
 	installed :-
 		\+ installed_pack(_, _, _, _),
@@ -714,8 +734,15 @@
 	outdated(Registry) :-
 		check(atom, Registry),
 		print_message(information, packs, 'Outdated packs from the ~q registry:'+[Registry]),
-		outdated(Registry, Pack, Version, LatestVersion),
-		print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion)),
+		setof(
+			p(Registry, Pack, Version, LatestVersion),
+			outdated(Registry, Pack, Version, LatestVersion),
+			Packs
+		),
+		forall(
+			member(p(Registry, Pack, Version, LatestVersion), Packs),
+			print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion))
+		),
 		fail.
 	outdated(Registry) :-
 		\+ outdated_pack(Registry, _, _, _),
@@ -725,8 +752,15 @@
 
 	outdated :-
 		print_message(information, packs, @'Outdated packs:'),
-		outdated(Registry, Pack, Version, LatestVersion),
-		print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion)),
+		setof(
+			p(Registry, Pack, Version, LatestVersion),
+			outdated(Registry, Pack, Version, LatestVersion),
+			Packs
+		),
+		forall(
+			member(p(Registry, Pack, Version, LatestVersion), Packs),
+			print_message(information, packs, outdated_pack(Registry, Pack, Version, LatestVersion))
+		),
 		fail.
 	outdated :-
 		\+ outdated_pack(_, _, _, _),
@@ -772,18 +806,22 @@
 		check(pack_version, Version),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	installed_pack(_, Pack, OldVersion, _),
+		(	installed_pack(OtherRegistry, Pack, OldVersion, _),
+			Registry \== OtherRegistry ->
+			print_message(error, packs, pack_already_installed_from_different_registry(OtherRegistry, Pack, OldVersion)),
+			fail
+		;	installed_pack(Registry, Pack, OldVersion, _),
 			^^option(update(true), Options) ->
 			update_pack(Registry, Pack, OldVersion, Version, Options)
-		;	installed_pack(_, Pack, _, _),
+		;	installed_pack(Registry, Pack, _, _),
 			^^option(force(false), Options) ->
 			print_message(error, packs, pack_already_installed(Pack)),
 			fail
 		;	registry_pack(Registry, Pack, PackObject) ->
 			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability) ->
 				print_message(comment, packs, installing_pack(Registry, Pack, Version)),
-				check_dependencies(Dependencies, Installs),
-				check_portability(Portability),
+				check_dependencies(Dependencies, Installs, Options),
+				check_portability(Portability, Options),
 				install_dependencies(Installs),
 				install_pack(Registry, Pack, Version, URL, CheckSum, Options),
 				print_message(comment, packs, pack_installed(Registry, Pack, Version)),
@@ -806,10 +844,10 @@
 			fail
 		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability) ->
 			print_message(comment, packs, installing_pack(Registry, Pack, LatestVersion)),
-			check_dependencies(Dependencies, Installs),
-			check_portability(Portability),
-			install_dependencies(Installs),
 			^^merge_options([], Options),
+			check_dependencies(Dependencies, Installs, Options),
+			check_portability(Portability, Options),
+			install_dependencies(Installs),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
 			print_message(comment, packs, pack_installed(Registry, Pack, LatestVersion)),
 			print_note(install, LatestVersion, Pack)
@@ -867,10 +905,16 @@
 			^^command(Command, pack_cloning_failed(Pack, URL))
 		;	operating_system_type(windows) ->
 			internal_os_path(Directory, OSDirectory),
-			atomic_list_concat(['xcopy /E /I /Y "', OSDirectory, '" "', OSPath, '"'], Command),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['xcopy /e /i /y "', OSDirectory, '" "', OSPath, '"'], Command)
+			;	atomic_list_concat(['xcopy /e /i /y /q "', OSDirectory, '" "', OSPath, '"'], Command)
+			),
 			^^command(Command, pack_directory_copy_failed(Pack, URL))
 		;	internal_os_path(Directory, OSDirectory),
-			atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['cp -R -v "', OSDirectory, '/." "', OSPath, '"'], Command)
+			;	atomic_list_concat(['cp -R "', OSDirectory, '/." "', OSPath, '"'], Command)
+			),
 			^^command(Command, pack_directory_copy_failed(Pack, URL))
 		),
 		save_version(Path, Version),
@@ -1091,7 +1135,10 @@
 		check(atom, Pack),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	installed_pack(Registry, Pack, Version, Pinned) ->
+		(	orphaned(Registry, Pack) ->
+			print_message(error, packs, orphaned_pack(Registry, Pack)),
+			fail
+		;	installed_pack(Registry, Pack, Version, Pinned) ->
 			(	Pinned == true ->
 				print_message(error, packs, cannot_update_pinned_pack(Pack)),
 				fail
@@ -1117,7 +1164,8 @@
 		print_message(comment, packs, @'Updating installed packs:'),
 		installed_pack(Registry, Pack, Version, Pinned),
 		(	Pinned == false ->
-			update_pack(Registry, Pack, Version, [])
+			^^default_options(Options),
+			update_pack(Registry, Pack, Version, Options)
 		;	print_message(comment, packs, pinned_pack(Registry, Pack, Version))
 		),
 		fail.
@@ -1127,17 +1175,24 @@
 	update_pack(Registry, Pack, Version, NewVersion, Options) :-
 		(	Version == NewVersion ->
 			print_message(comment, packs, up_to_date_pack(Registry, Pack, NewVersion))
+		;	orphaned(Registry, Pack) ->
+			print_message(error, packs, orphaned_pack(Registry, Pack)),
+			fail
 		;	pack_object(Pack, PackObject),
 			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
-			print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
-			check_availability(Registry, Pack, URL, CheckSum, Options),
-			check_dependencies(Dependencies, Installs),
-			check_portability(Portability),
-			uninstall_pack(Registry, Pack, Options),
-			install_dependencies(Installs),
-			install_pack(Registry, Pack, NewVersion, URL, CheckSum, Options),
-			print_message(comment, packs, pack_updated(Registry, Pack, NewVersion)),
-			print_note(update, NewVersion, Pack)
+			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
+				check_availability(Registry, Pack, URL, CheckSum, Options),
+				check_dependencies(Dependencies, Installs, Options),
+				check_portability(Portability, Options),
+				check_dependents(Registry, Pack, NewVersion, Options),
+				uninstall_pack(Registry, Pack, Options),
+				install_dependencies(Installs),
+				install_pack(Registry, Pack, NewVersion, URL, CheckSum, Options) ->
+				print_message(comment, packs, pack_updated(Registry, Pack, NewVersion)),
+				print_note(update, NewVersion, Pack)
+			;	print_message(error, packs, pack_update_failed(Registry, Pack, NewVersion)),
+				fail
+			)
 		;	print_message(error, packs, unknown_pack_version(Registry, Pack, NewVersion)),
 			fail
 		),
@@ -1147,16 +1202,22 @@
 		).
 
 	update_pack(Registry, Pack, Version, Options) :-
-		(	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability),
+		(	orphaned(Registry, Pack) ->
+			print_message(comment, packs, orphaned_pack(Registry, Pack, Version))
+		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability),
 			Version @< LatestVersion ->
-			print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
-			check_dependencies(Dependencies, Installs),
-			check_portability(Portability),
-			uninstall_pack(Registry, Pack, Options),
-			install_dependencies(Installs),
-			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
-			print_message(comment, packs, pack_updated(Registry, Pack, LatestVersion)),
-			print_note(update, LatestVersion, Pack)
+			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
+				check_dependencies(Dependencies, Installs, Options),
+				check_portability(Portability, Options),
+				check_dependents(Registry, Pack, LatestVersion, Options),
+				uninstall_pack(Registry, Pack, Options),
+				install_dependencies(Installs),
+				install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options) ->
+				print_message(comment, packs, pack_updated(Registry, Pack, LatestVersion)),
+				print_note(update, LatestVersion, Pack)
+			;	print_message(error, packs, pack_update_failed(Registry, Pack, LatestVersion)),
+				fail
+			)
 		;	print_message(comment, packs, up_to_date_pack(Registry, Pack, Version))
 		),
 		(	^^option(clean(true), Options) ->
@@ -1248,9 +1309,15 @@
 				writeq(Stream, registry(Registry, URL)), write(Stream, '.\n')
 			)
 		),
-		forall(
+		findall(
+			pack(Registry, Pack, Version),
 			installed_pack(Registry, Pack, Version, _),
-			(writeq(Stream, pack(Registry, Pack, Version)), write(Stream, '.\n'))
+			PacksData0
+		),
+		sort(PacksData0, PacksData),
+		forall(
+			member(PackData, PacksData),
+			(writeq(Stream, PackData), write(Stream, '.\n'))
 		),
 		forall(
 			(member(Registry, SortedRegistries), registries::defined(Registry, _, _, true)),
@@ -1453,6 +1520,7 @@
 		lint_check(license, Pack, PackObject),
 		lint_check(home, Pack, PackObject),
 		lint_check(version, Pack, PackObject),
+		lint_check(notes, Pack, PackObject),
 		print_message(comment, packs, linted_pack(Registry, Pack)).
 
 	lint_check(name, Pack, PackObject) :-
@@ -1469,7 +1537,8 @@
 			fail
 		).
 	lint_check(license, _Pack, PackObject) :-
-		(	PackObject::license(_) ->
+		(	PackObject::license(License),
+			atom(License) ->
 			true
 		;	print_message(warning, packs, @'The license/1 predicate is missing or failed safety check!'),
 			fail
@@ -1548,12 +1617,19 @@
 		;	true
 		),
 		fail.
+	lint_check_versions(_, PackObject) :-
+		findall(Version, PackObject::version(Version, _, _, _, _, _), Versions),
+		(	sort(0, (@>), Versions, Versions) ->
+			true
+		;	print_message(warning, packs, 'Pack versions are not listed from newest to oldest: ~q'+[Versions])
+		),
+		fail.
 	lint_check_versions(_, _).
 
 	lint_check_note(Action, Version, Note) :-
 		(	var(Action) ->
 			true
-		;	member(Action, [add, update, delete]) ->
+		;	member(Action, [install, update, uninstall]) ->
 			true
 		;	print_message(warning, packs, @'The notes/3 predicate action argument is neither a variable nor install, update, or uninstall!'),
 			fail
@@ -1582,6 +1658,10 @@
 	valid_status(alpha).
 	valid_status(deprecated).
 
+	valid_dependency((Dependency; Dependencies), Pack) :-
+		!,
+		valid_dependency(Dependency, Pack),
+		valid_dependency(Dependencies, Pack).
 	valid_dependency(Dependency, Pack) :-
 		functor(Dependency, Operator, 2),
 		arg(1, Dependency, What),
@@ -1589,14 +1669,17 @@
 			true
 		;	atom(What), valid_backend(What) ->
 			true
-		;	What = (DependencyRegistry::DependencyPack),
+		;	What = (DependencyRegistry::DependencyPack) ->
 			atom(DependencyRegistry),
 			atom(DependencyPack),
 			DependencyPack \== Pack
+		;	What = os(Name, Machine),
+			atom(Name),
+			atom(Machine)
 		),
-		memberchk(Operator, [(@>=), (@>), (==), (@=<), (@<)]),
+		memberchk(Operator, [(@>=), (@>), (\==), (==), (@=<), (@<)]),
 		arg(2, Dependency, Version),
-		valid_version(Version).
+		valid_dependency_version(Version, What).
 
 	valid_backend(arriba).
 	valid_backend(b).
@@ -1607,13 +1690,27 @@
 	valid_backend(ji).
 	valid_backend(lvm).
 	valid_backend(quintus).
-	valid_backend(scryer).
 	valid_backend(sicstus).
 	valid_backend(swi).
 	valid_backend(tau).
 	valid_backend(trealla).
 	valid_backend(xsb).
 	valid_backend(yap).
+
+	valid_dependency_version(Major:Minor:Patch, _) :-
+		integer(Major),
+		integer(Minor),
+		integer(Patch),
+		!.
+	valid_dependency_version(Major:Minor, _) :-
+		integer(Major),
+		integer(Minor),
+		!.
+	valid_dependency_version(Major, _) :-
+		integer(Major),
+		!.
+	valid_dependency_version(Version, os(_, _)) :-
+		atom(Version).
 
 	% check availability of a pack update
 
@@ -1657,26 +1754,30 @@
 
 	% dependency checking predicates
 
-	check_dependencies([], []).
-	check_dependencies([Dependency1, Dependency2| Dependencies], [Action| Actions]) :-
+	check_dependencies([], [], _).
+	check_dependencies([Dependency1, Dependency2| Dependencies], [Action| Actions], Options) :-
 		range_dependency(Dependency1, Dependency2, Dependency, Lower, Operator1, Upper, Operator2),
 		!,
-		check_range_dependency(Dependency, Lower, Operator1, Upper, Operator2, Action),
-		check_dependencies(Dependencies, Actions).
-	check_dependencies([Dependency| Dependencies], [Action| Actions]) :-
-		check_dependency(Dependency, Action),
-		check_dependencies(Dependencies, Actions).
+		check_range_dependency(Dependency, Lower, Operator1, Upper, Operator2, Action, Options),
+		check_dependencies(Dependencies, Actions, Options).
+	check_dependencies([Dependency| Dependencies], [Action| Actions], Options) :-
+		check_dependency(Dependency, Action, Options),
+		check_dependencies(Dependencies, Actions, Options).
 
 	range_dependency(Dependency1, Dependency2, Registry::Pack, Lower, Operator1, Upper, Operator2) :-
 		Dependency1 =.. [Operator1, Registry::Pack, Lower],
 		Dependency2 =.. [Operator2, Registry::Pack, Upper],
+		!.
+	range_dependency(Dependency1, Dependency2, os(Name,Machine), Lower, Operator1, Upper, Operator2) :-
+		Dependency1 =.. [Operator1, os(Name,Machine), Lower],
+		Dependency2 =.. [Operator2, os(Name,Machine), Upper],
 		!.
 	range_dependency(Dependency1, Dependency2, Backend, Lower, Operator1, Upper, Operator2) :-
 		backend(Backend, _),
 		Dependency1 =.. [Operator1, Backend, Lower],
 		Dependency2 =.. [Operator2, Backend, Upper].
 
-	check_range_dependency(Registry::Pack, Lower, Operator1, Upper, Operator2, Action) :-
+	check_range_dependency(Registry::Pack, Lower, Operator1, Upper, Operator2, Action, Options) :-
 		!,
 		check_availability(Registry::Pack),
 		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
@@ -1685,29 +1786,61 @@
 			(	{call(Operator1, LowerFixedVersion, Lower)},
 				{call(Operator2, UpperFixedVersion, Upper)} ->
 				Action = none
-			;	find_dependency_version(Operator1, Registry, Pack, Lower, Version),
-				{call(Operator2, Version, Upper)} ->
-				Action = update(Registry, Pack, Version)
+			;	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) ->
+				Action = update(Registry, Pack, Version, Options)
 			;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
 				fail
 			)
-		;	find_dependency_version(Operator1, Registry, Pack, Lower, Version),
-			{call(Operator2, Version, Upper)} ->
-			Action = install(Registry, Pack, Version)
+		;	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) ->
+			Action = install(Registry, Pack, Version, Options)
 		;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
 			fail
 		).
-	check_range_dependency(logtalk, Lower, Operator1, Upper, Operator2, none) :-
+	check_range_dependency(os(Name,Machine), Lower, Operator1, Upper, Operator2, Action, Options) :-
+		!,
+		(	operating_system_name(Name),
+			operating_system_machine(Machine),
+			operating_system_release(Version),
+			{call(Operator1, Version, Lower)},
+			{call(Operator2, Version, Upper)} ->
+			Action = none
+		;	^^option(compatible(false), Options) ->
+			Action = os(Name, Machine, Operator1, Lower, Operator2, Upper)
+		;	print_message(warning, packs, 'No pack version compatible with the current operating-system is available: ~w ~w ~w'+[Name, Machine, Version]),
+			fail
+		).
+	check_range_dependency(logtalk, Lower, Operator1, Upper, Operator2, Action, Options) :-
 		!,
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
 		fix_version_for_comparison(Lower, Major:Minor:Patch, LowerFixedVersion),
 		fix_version_for_comparison(Upper, Major:Minor:Patch, UpperFixedVersion),
 		(	{call(Operator1, LowerFixedVersion, Lower)},
 			{call(Operator2, UpperFixedVersion, Upper)} ->
-			true
-		;	print_message(warning, packs, 'Pack requires updating Logtalk to a version ~w ~q and ~w ~q'+[Operator1, Lower, Operator2, Upper])
+			Action = none
+		;	^^option(compatible(false), Options) ->
+			Action = logtalk(Operator1, Lower, Operator2, Upper)
+		;	print_message(warning, packs, 'No pack version compatible with the current Logtalk version is available: ~w'+[Major:Minor:Patch]),
+			fail
 		).
-	check_range_dependency(Backend, Lower, Operator1, Upper, Operator2, none) :-
+	% workaround the interim solution for allowing specifying two distinct compatible backend versions for a pack version
+	check_range_dependency(Backend, Lower, (==), Upper, (==), Action, Options) :-
+		current_logtalk_flag(prolog_dialect, Backend),
+		!,
+		current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
+		fix_version_for_comparison(Lower, Major:Minor:Patch, LowerFixedVersion),
+		fix_version_for_comparison(Upper, Major:Minor:Patch, UpperFixedVersion),
+		(	(	LowerFixedVersion == Lower
+			;	UpperFixedVersion == Upper
+			) ->
+			Action = none
+		;	^^option(compatible(false), Options) ->
+			backend(Backend, Name),
+			Action = backend(Name, (==), Lower, (==), Upper)
+		;	backend(Backend, Name),
+			print_message(warning, packs, 'No pack version compatible with the current backend version is available: ~w ~w'+[Name, Major:Minor:Patch]),
+			fail
+		).
+	check_range_dependency(Backend, Lower, Operator1, Upper, Operator2, Action, Options) :-
 		current_logtalk_flag(prolog_dialect, Backend),
 		!,
 		current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
@@ -1715,16 +1848,26 @@
 		fix_version_for_comparison(Upper, Major:Minor:Patch, UpperFixedVersion),
 		(	{call(Operator1, LowerFixedVersion, Lower)},
 			{call(Operator2, UpperFixedVersion, Upper)} ->
-			true
+			Action = none
+		;	^^option(compatible(false), Options) ->
+			backend(Backend, Name),
+			Action = backend(Name, Operator1, Lower, Operator2, Upper)
 		;	backend(Backend, Name),
-			print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator1, Lower, Operator2, Upper])
+			print_message(warning, packs, 'No pack version compatible with the current backend version is available: ~w ~w'+[Name, Major:Minor:Patch]),
+			fail
 		).
-	check_range_dependency(_, _, _, _, _, none).
+	check_range_dependency(_, _, _, _, _, none, _).
 
-	check_dependency(Dependency, Action) :-
-		Dependency =.. [Operator, Pack, Version],
-		check_availability(Pack),
-		check_version(Operator, Pack, Version, Dependency, Action).
+	check_dependency((Dependency; Dependencies), Action, Options) :-
+		!,
+		(	check_dependency(Dependency, Action, Options) ->
+			true
+		;	check_dependency(Dependencies, Action, Options)
+		).
+	check_dependency(Dependency, Action, Options) :-
+		Dependency =.. [Operator, Resource, Version],
+		check_availability(Resource),
+		check_version(Operator, Resource, Version, Dependency, Action, Options).
 
 	check_availability(Registry::Pack) :-
 		!,
@@ -1733,42 +1876,64 @@
 		;	print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
 			fail
 		).
-	check_availability(_Backend).
+	check_availability(_).
 
-	check_version(Operator, Registry::Pack, RequiredVersion, Dependency, Action) :-
+	check_version(Operator, Registry::Pack, RequiredVersion, Dependency, Action, Options) :-
 		!,
 		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
 			fix_version_for_comparison(RequiredVersion, InstalledVersion, FixedVersion),
 			(	{call(Operator, FixedVersion, RequiredVersion)} ->
 				Action = none
-			;	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) ->
-				Action = update(Registry, Pack, Version)
+			;	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) ->
+				Action = update(Registry, Pack, Version, Options)
 			;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 				fail
 			)
-		;	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) ->
-			Action = install(Registry, Pack, Version)
+		;	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) ->
+			Action = install(Registry, Pack, Version, Options)
 		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 			fail
 		).
-	check_version(Operator, logtalk, Version, _, none) :-
+	check_version(Operator, os(Name,Machine), RequiredVersion, Dependency, Action, Options) :-
+		!,
+		(	operating_system_name(Name),
+			operating_system_machine(Machine),
+			operating_system_release(Version),
+			{call(Operator, Version, RequiredVersion)} ->
+			Action = none
+		;	^^option(compatible(false), Options) ->
+			Action = os(Name, Machine, RequiredVersion)
+		;	print_message(error, packs, 'Operating-system dependency not available: ~q'+[Dependency]),
+			fail
+		).
+	check_version(Operator, logtalk, Version, Dependency, Action, Options) :-
 		!,
 		current_logtalk_flag(version_data, logtalk(Major,Minor,Patch,_)),
 		fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
 		(	{call(Operator, FixedVersion, Version)} ->
-			true
-		;	print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version])
+			Action = none
+		;	^^option(compatible(false), Options) ->
+			Action = logtalk(Operator, Version)
+		;	print_message(error, packs, 'Logtalk dependency not available: ~q'+[Dependency]),
+			fail
 		).
-	check_version(Operator, Backend, Version, _, none) :-
+	check_version(Operator, Backend, Version, Dependency, Action, Options) :-
 		(	current_logtalk_flag(prolog_dialect, Backend) ->
 			current_logtalk_flag(prolog_version, v(Major,Minor,Patch)),
 			fix_version_for_comparison(Version, Major:Minor:Patch, FixedVersion),
 			(	{call(Operator, FixedVersion, Version)} ->
-				true
-			;	backend(Backend, Name),
-				print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator, Version])
+				Action = none
+			;	^^option(compatible(false), Options) ->
+				backend(Backend, Name),
+				Action = backend(Name, Operator, Version)
+			;	print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
+				fail
 			)
-		;	true
+		;	^^option(compatible(false), Options) ->
+			backend(Backend, Name),
+			Action = backend(Name, Operator, Version)
+		;	print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
+			fail
 		).
 
 	fix_version_for_comparison(_:_:_, Major:Minor:Patch, Major:Minor:Patch) :- !.
@@ -1779,11 +1944,48 @@
 	fix_version_for_availability(Major:Minor,       Major:Minor:_) :- !.
 	fix_version_for_availability(Major,             Major:_:_).
 
-	find_dependency_version(Operator, Registry, Pack, RequiredVersion, Version) :-
+	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) :-
 		registry_pack(Registry, Pack, PackObject),
-		fix_version_for_availability(RequiredVersion, Version),
-		PackObject::version(Version, _, _, _, _, _),
-		{call(Operator, Version, RequiredVersion)}.
+		fix_version_for_availability(Lower, LowerFixed),
+		fix_version_for_availability(Upper, UpperFixed),
+		(	% first try to find a version that verifies both Logtalk,
+			% Prolog backend, and operating-system dependencies
+			PackObject::version(Version, _, _, _, Dependencies, _),
+			{call(Operator1, Version, LowerFixed)},
+			{call(Operator2, Version, UpperFixed)},
+			check_dependencies(Dependencies, Actions, Options),
+			\+ member(logtalk(_, _, _, _), Actions),
+			\+ member(logtalk(_, _), Actions),
+			\+ member(backend(_, _, _, _, _), Actions),
+			\+ member(backend(_, _, _), Actions),
+			\+ member(os(_, _, _, _, _, _), Actions),
+			\+ member(os(_, _, _), Actions)
+		;	% if none found, use the first version required by the pack
+			^^option(compatible(false), Options),
+			PackObject::version(Version, _, _, _, _, _),
+			{call(Operator1, Version, LowerFixed)},
+			{call(Operator2, Version, UpperFixed)}
+		).
+
+	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) :-
+		registry_pack(Registry, Pack, PackObject),
+		fix_version_for_availability(RequiredVersion, RequiredVersionFixed),
+		(	% first try to find a version that verifies both Logtalk,
+			% Prolog backend, and operating-system dependencies
+			PackObject::version(Version, _, _, _, Dependencies, _),
+			{call(Operator, Version, RequiredVersionFixed)},
+			check_dependencies(Dependencies, Actions, Options),
+			\+ member(logtalk(_, _, _, _), Actions),
+			\+ member(logtalk(_, _), Actions),
+			\+ member(backend(_, _, _, _, _), Actions),
+			\+ member(backend(_, _, _), Actions),
+			\+ member(os(_, _, _, _, _, _), Actions),
+			\+ member(os(_, _, _), Actions)
+		;	% if none found, use the first version required by the pack
+			^^option(compatible(false), Options),
+			PackObject::version(Version, _, _, _, _, _),
+			{call(Operator, Version, RequiredVersionFixed)}
+		).
 
 	install_dependencies([]).
 	install_dependencies([Dependency| Dependencies]) :-
@@ -1791,18 +1993,76 @@
 		install_dependencies(Dependencies).
 
 	install_dependency(none).
-	install_dependency(install(Registry, Pack, Version)) :-
-		install(Registry, Pack, Version).
+	install_dependency(logtalk(Operator1, Lower, Operator2, Upper)) :-
+		print_message(warning, packs, 'Pack requires updating Logtalk to a version ~w ~q and ~w ~q'+[Operator1, Lower, Operator2, Upper]).
+	install_dependency(logtalk(Operator, Version)) :-
+		print_message(warning, packs, 'Pack requires updating Logtalk to version ~w ~q'+[Operator, Version]).
+	install_dependency(backend(Name, Operator1, Lower, Operator2, Upper)) :-
+		print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q and ~w ~q'+[Name, Operator1, Lower, Operator2, Upper]).
+	install_dependency(backend(Name, Operator, Version)) :-
+		print_message(warning, packs, 'Pack requires updating ~w to version ~w ~q'+[Name, Operator, Version]).
+	install_dependency(os(Name, Machine, Operator1, Lower, Operator2, Upper)) :-
+		print_message(warning, packs, 'Pack requires the ~w operating-system running on ~w at version ~w ~q and ~w ~q'+[Name, Machine, Operator1, Lower, Operator2, Upper]).
+	install_dependency(os(Name, Machine, Version)) :-
+		print_message(warning, packs, 'Pack requires the ~w operating-system running on ~w at version ~w'+[Name, Machine, Version]).
+	install_dependency(install(Registry, Pack, Version, Options)) :-
+		install(Registry, Pack, Version, Options).
+	install_dependency(update(_Registry, Pack, Version, Options)) :-
+		update(Pack, Version, Options).
 
-	check_portability(all).
-	check_portability([Backend| Backends]) :-
+	check_portability(all, _).
+	check_portability([Backend| Backends], Options) :-
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(	member(Dialect, [Backend| Backends]) ->
 			true
+		;	^^option(compatible(true), Options) ->
+			backend(Dialect, Name),
+			print_message(warning, packs, 'No pack version compatible with the current backend was found: ~w'+[Name]),
+			fail
 		;	Backends == [] ->
-			print_message(warning, packs, 'Using the pack requires a different backend: ~q'+[Backend])
-		;	print_message(warning, packs, 'Using the pack requires one of the following backends: ~q'+[[Backend| Backends]])
+			backend(Backend, Name),
+			print_message(warning, packs, 'Using the pack requires a different backend: ~w'+[Name])
+		;	backends([Backend| Backends], Names),
+			print_message(warning, packs, 'Using the pack requires one of the following backends: ~w'+[Names])
 		).
+
+	check_dependents(Registry, Pack, NewVersion, Options) :-
+		dependents(Registry, Pack, Dependents),
+		check_dependents(Dependents, Registry, Pack, NewVersion, Options).
+
+	check_dependents([], _, _, _, _).
+	check_dependents([Dependent| Dependents], Registry, Pack, NewVersion, Options) :-
+		check_dependent(Dependent, Registry, Pack, NewVersion, Options),
+		check_dependents(Dependents, Registry, Pack, NewVersion, Options).
+
+	check_dependent(Dependent, Registry, Pack, NewVersion, Options) :-
+		pack_object(Dependent, DependentObject),
+		installed_pack(_, Dependent, Version, _),
+		DependentObject::version(Version, _, _, _, Dependencies, _),
+		check_dependent_dependencies(Dependencies, Dependent, Registry, Pack, NewVersion, Options).
+
+	check_dependent_dependencies([], _, _, _, _, _).
+	check_dependent_dependencies([Dependency| Dependencies], Dependent, Registry, Pack, NewVersion, Options) :-
+		(	check_dependent_dependency(Dependency, Registry, Pack, NewVersion) ->
+			check_dependent_dependencies(Dependencies, Dependent, Registry, Pack, NewVersion, Options)
+		;	^^option(force(false), Options) ->
+			print_message(error, packs, 'Updating ~q to ~q would break installed pack ~q'+[Registry::Pack, NewVersion, Dependent]),
+			fail
+		;	print_message(warning, packs, 'Updating ~q to ~q breaks installed pack ~q'+[Registry::Pack, NewVersion, Dependent])
+		).
+
+	check_dependent_dependency((Dependency; Dependencies), Registry, Pack, NewVersion) :-
+		!,
+		(	check_dependent_dependency(Dependency, Registry, Pack, NewVersion) ->
+			true
+		;	check_dependent_dependency(Dependencies, Registry, Pack, NewVersion)
+		).
+	check_dependent_dependency(Dependency, Registry, Pack, NewVersion) :-
+		Dependency =.. [Operator, Registry::Pack, RequiredVersion],
+		!,
+		fix_version_for_availability(RequiredVersion, FixedVersion),
+		{call(Operator, NewVersion, FixedVersion)}.
+	check_dependent_dependency(_, _, _, _).
 
 	% auxiliary predicates
 
@@ -1866,6 +2126,25 @@
 	uninstall_pack(Registry, Pack, Options) :-
 		directory(Pack, Directory0),
 		internal_os_path(Directory0, Directory),
+		delete_pack_installation_directory_command(Directory, Options, Command),
+		^^command(Command, pack_uninstall_failed(Pack, Directory)),
+		(	^^option(clean(true), Options) ->
+			delete_archives(Registry, Pack)
+		;	true
+		).
+
+	clean_pack_installation_directory(Pack, Path, Options, OSPath) :-
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, packs, Packs),
+		path_concat(Packs, Pack, Path),
+		internal_os_path(Path, OSPath),
+		(	\+ directory_exists(Path) ->
+			true
+		;	delete_pack_installation_directory_command(OSPath, Options, Command),
+			^^command(Command, pack_directory_clean_failed(Pack, Path))
+		).
+
+	delete_pack_installation_directory_command(Directory, Options, Command) :-
 		(	operating_system_type(windows) ->
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['del /f /s /q "', Directory, '" && rmdir /s /q "',       Directory, '"'],       Command)
@@ -1876,11 +2155,6 @@
 				atomic_list_concat(['rm -rvf "', Directory, '"'], Command)
 			;	atomic_list_concat(['rm -rf "',  Directory, '"'], Command)
 			)
-		),
-		^^command(Command, pack_uninstall_failed(Pack, Directory)),
-		(	^^option(clean(true), Options) ->
-			delete_archives(Registry, Pack)
-		;	true
 		).
 
 	make_pack_installation_directory(Pack, Path, OSPath) :-
@@ -1901,21 +2175,30 @@
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesPacksRegistryPack),
 		(	file_exists(Archive) ->
-			true
+			(	git_archive_url(URL, _, _) ->
+				Downloader = git
+			;	Downloader = curl
+			)
 		;	git_archive_url(URL, Remote, Tag) ->
 			^^option(git(GitExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['git archive ', GitExtraOptions, ' -v -o "', Archive, '" --remote="', Remote, '" ', Tag], Command)
 			;	atomic_list_concat(['git archive ', GitExtraOptions, ' -o "',    Archive, '" --remote="', Remote, '" ', Tag], Command)
 			),
-			^^command(Command, pack_archive_download_failed(Pack, Archive)),
-			Downloader = git
+			(	^^command(Command, pack_archive_download_failed(Pack, Command)) ->
+				Downloader = git
+			;	% when the remote connection fails, git archive still creates an empty file
+				file_exists(Archive),
+				file_size(Archive, 0),
+				delete_file(Archive),
+				fail
+			)
 		;	^^option(curl(CurlExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
-				atomic_list_concat(['curl ', CurlExtraOptions, ' -v -L -o "',    Archive, '" "', URL, '"'], Command)
-			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -s -S -L -o "', Archive, '" "', URL, '"'], Command)
+				atomic_list_concat(['curl ', CurlExtraOptions, ' -f -v -L -o "',    Archive, '" "', URL, '"'], Command)
+			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
-			^^command(Command, pack_archive_download_failed(Pack, Archive)),
+			^^command(Command, pack_archive_download_failed(Pack, Command)),
 			Downloader = curl
 		).
 
@@ -1958,7 +2241,8 @@
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).
 
 	uncompress(Pack, Archive, Path, Options, Downloader) :-
-		make_pack_installation_directory(Pack, Path, OSPath),
+		clean_pack_installation_directory(Pack, Path, Options, OSPath),
+		make_directory_path(Path),
 		^^tar_command(Tar),
 		^^option(tar(TarExtraOptions), Options),
 		(	Downloader == git ->
@@ -1966,8 +2250,8 @@
 		;	Strip = 1
 		),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip ', Strip, ' --directory "', OSPath, '"'], Command)
-		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip ', Strip, ' --directory "', OSPath, '"'], Command)
+			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
+		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
 		),
 		^^command(Command, pack_archive_uncompress_failed(Pack, Archive)).
 
@@ -2013,7 +2297,6 @@
 	backend(ji,      'JIProlog').
 	backend(lvm,     'LVM').
 	backend(quintus, 'Quintus Prolog').
-	backend(scryer,  'Scryer Prolog').
 	backend(sicstus, 'SICStus Prolog').
 	backend(swi,     'SWI-Prolog').
 	backend(tau,     'Tau Prolog').
@@ -2021,12 +2304,18 @@
 	backend(xsb,     'XSB').
 	backend(yap,     'YAP').
 
+	backends([], []).
+	backends([Backend| Backends], [Name| Names]) :-
+		backend(Backend, Name),
+		backends(Backends, Names).
+
 	% options handling
 
 	default_option(verbose(false)).
 	default_option(clean(false)).
 	default_option(install(false)).
 	default_option(update(false)).
+	default_option(compatible(true)).
 	% the restore/1-2 predicates use force(true) instead
 	default_option(force(false)).
 	default_option(checksum(true)).
@@ -2044,6 +2333,8 @@
 	valid_option(install(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(update(Boolean)) :-
+		valid(boolean, Boolean).
+	valid_option(compatible(Boolean)) :-
 		valid(boolean, Boolean).
 	valid_option(force(Boolean)) :-
 		valid(boolean, Boolean).

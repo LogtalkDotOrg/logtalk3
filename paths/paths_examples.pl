@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on June 5, 2023
+%  Last updated on December 9, 2023
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -99,6 +99,7 @@ logtalk_library_path(functions, threads('functions/')).
 logtalk_library_path(futures, examples('futures/')).
 logtalk_library_path(hailstone, examples('hailstone/')).
 logtalk_library_path(hanoi, threads('hanoi/')).
+logtalk_library_path(haunted_wasteland, examples('haunted_wasteland/')).
 logtalk_library_path(hello_world, examples('hello_world/')).
 logtalk_library_path(hooks, examples('hooks/')).
 logtalk_library_path(includes, examples('includes/')).
@@ -172,6 +173,7 @@ logtalk_library_path(relations, examples('relations/')).
 logtalk_library_path(roles, examples('roles/')).
 logtalk_library_path(roots, examples('roots/')).
 logtalk_library_path(scopes, examples('scopes/')).
+logtalk_library_path(scratchcards, examples('scratchcards/')).
 logtalk_library_path(searching, examples('searching/')).
 logtalk_library_path(securemp, examples('securemp/')).
 logtalk_library_path(self_messages, examples('self_messages/')).
@@ -194,6 +196,7 @@ logtalk_library_path(tbbt, engines('tbbt/')).
 logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
 logtalk_library_path(threads, examples('threads/')).
+logtalk_library_path(trebuchet, examples('trebuchet/')).
 logtalk_library_path(units, examples('units/')).
 logtalk_library_path(viewpoints, examples('viewpoints/')).
 logtalk_library_path(whisper, engines('whisper/')).

@@ -26,3 +26,8 @@ https://editorconfig.org
 
 To use the sample file, copy it to a file named `.editorconfig` at the root
 of your project or repository, and edit it for your preferences.
+
+The `.editorconfig` settings for Logtalk source files follow the coding
+style guidelines recommendations at:
+
+https://logtalk.org/coding_style_guidelines.html

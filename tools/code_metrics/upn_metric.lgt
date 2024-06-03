@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -24,15 +24,23 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:4:0,
+		version is 0:6:2,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2024-05-15,
 		comment is 'Number of unique predicates nodes metric. The nodes include called and updated predicates independently of where they are defined. The score is represented by a non-negative integer.'
 	]).
 
-	:- uses(list, [length/2, member/2]).
-	:- uses(numberlist, [sum/2]).
-	:- uses(logtalk, [expand_library_path/2, loaded_file/1, loaded_file_property/2, print_message/3]).
+	:- uses(list, [
+		length/2, member/2
+	]).
+
+	:- uses(numberlist, [
+		sum/2
+	]).
+
+	:- uses(logtalk, [
+		expand_library_path/2, loaded_file_property/2, print_message/3
+	]).
 
 	entity_score(Entity, Score) :-
 		^^current_entity(Entity),
@@ -40,15 +48,17 @@
 		entity_score(Kind, Entity, Score).
 
 	entity_score(object, Entity, Score) :-
-		findall(Caller, object_property(Entity, defines(Caller, _)), Bag0),
-		findall(Callee, (object_property(Entity, calls(Callee, _)), ground(Callee)), Bag1, Bag0),
-		findall(Dynamic, (object_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag1),
+		findall(Caller, (object_property(Entity, defines(Caller, Properties)), \+ member(auxiliary, Properties)), Bag0),
+		findall(Other::Predicate, (object_property(Entity, provides(Predicate, Other, Properties)), \+ member(auxiliary, Properties)), Bag1, Bag0),
+		findall(Callee, (object_property(Entity, calls(Callee, _)), ground(Callee)), Bag2, Bag1),
+		findall(Dynamic, (object_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag2),
 		sort(Bag, Sorted),
 		length(Sorted, Score).
 	entity_score(category, Entity, Score) :-
-		findall(Caller, category_property(Entity, defines(Caller, _)), Bag0),
-		findall(Callee, (category_property(Entity, calls(Callee, _)), ground(Callee)), Bag1, Bag0),
-		findall(Dynamic, (category_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag1),
+		findall(Caller, (category_property(Entity, defines(Caller, Properties)), \+ member(auxiliary, Properties)), Bag0),
+		findall(Other::Predicate, (category_property(Entity, provides(Predicate, Other, Properties)), \+ member(auxiliary, Properties)), Bag1, Bag0),
+		findall(Callee, (category_property(Entity, calls(Callee, _)), ground(Callee)), Bag2, Bag1),
+		findall(Dynamic, (category_property(Entity, updates(Dynamic, _)), ground(Dynamic)), Bag, Bag2),
 		sort(Bag, Sorted),
 		length(Sorted, Score).
 	entity_score(protocol, _, 0).
@@ -57,40 +67,43 @@
 		entity_score(Kind, Entity, Score),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
-	file_score(File, Score) :-
+	file_score(File, Score, Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		findall(
 			EntityScore,
 			(	loaded_file_property(File, object(Object)),
+				\+ member(Object, ExcludedEntities),
 				entity_score(object, Object, EntityScore)
 			;	loaded_file_property(File, category(Category)),
+				\+ member(Category, ExcludedEntities),
 				entity_score(category, Category, EntityScore)
 			),
 			EntityScores
 		),
 		sum(EntityScores, Score).
 
-	process_file(File) :-
-		file_score(File, Score),
+	process_file(File, Options) :-
+		file_score(File, Score, Options),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
-	directory_score(Directory, Score) :-
-		findall(FileScore, directory_file_score(Directory, _, FileScore), FileScores),
+	directory_score(Directory, Score, Options) :-
+		findall(FileScore, directory_file_score(Directory, _, FileScore, Options), FileScores),
 		sum(FileScores, Score).
 
-	process_directory(Directory) :-
-		directory_score(Directory, Score),
+	process_directory(Directory, Options) :-
+		directory_score(Directory, Score, Options),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
-	directory_file_score(Directory, File, Nocs) :-
-		(	sub_atom(Directory, _, 1, 0, '/') ->
-			DirectorySlash = Directory
-		;	atom_concat(Directory, '/', DirectorySlash)
-		),
-		loaded_file_property(File, directory(DirectorySlash)),
-		file_score(File, Nocs).
+	directory_file_score(Directory, File, Nocs, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
+		loaded_file_property(File, directory(Directory)),
+		loaded_file_property(File, basename(Basename)),
+		^^not_excluded_file(ExcludedFiles, File, Basename),
+		file_score(File, Nocs, Options).
 
-	rdirectory_score(Directory, Score) :-
-		directory_score(Directory, DirectoryScore),
+	rdirectory_score(Directory, Score, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		directory_score(Directory, DirectoryScore, Options),
 		(	setof(
 				SubDirectory,
 				^^sub_directory(Directory, SubDirectory),
@@ -101,27 +114,32 @@
 		),
 		findall(
 			SubDirectoryScore,
-			(	list::member(SubDirectory, SubDirectories),
-				directory_file_score(SubDirectory, _, SubDirectoryScore)
+			(	member(SubDirectory, SubDirectories),
+				\+ (
+					member(ExcludedDirectory, ExcludedDirectories),
+					sub_atom(SubDirectory, 0, _, _, ExcludedDirectory)
+				),
+				directory_file_score(SubDirectory, _, SubDirectoryScore, Options)
 			),
 			SubDirectoryScores
 		),
 		sum([DirectoryScore| SubDirectoryScores], Score).
 
-	process_rdirectory(Directory) :-
-		rdirectory_score(Directory, Score),
+	process_rdirectory(Directory, Options) :-
+		rdirectory_score(Directory, Score, Options),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
-	library_score(Library, Score) :-
+	library_score(Library, Score, Options) :-
 		expand_library_path(Library, Directory),
-		directory_score(Directory, Score).
+		directory_score(Directory, Score, Options).
 
-	process_library(Library) :-
-		library_score(Library, Score),
+	process_library(Library, Options) :-
+		library_score(Library, Score, Options),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
-	rlibrary_score(Library, Score) :-
-		library_score(Library, LibraryScore),
+	rlibrary_score(Library, Score, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		library_score(Library, LibraryScore, Options),
 		(	setof(
 				SubLibrary,
 				^^sub_library(Library, SubLibrary),
@@ -132,29 +150,32 @@
 		),
 		findall(
 			SubLibraryScore,
-			(	list::member(SubLibrary, SubLibraries),
-				library_score(SubLibrary, SubLibraryScore)
+			(	member(SubLibrary, SubLibraries),
+				\+ member(SubLibrary, ExcludedLibraries),
+				library_score(SubLibrary, SubLibraryScore, Options)
 			),
 			SubLibraryScores
 		),
 		sum([LibraryScore| SubLibraryScores], Score).
 
-	process_rlibrary(Library) :-
-		rlibrary_score(Library, Score),
+	process_rlibrary(Library, Options) :-
+		rlibrary_score(Library, Score, Options),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
-	all_score(Score) :-
+	all_score(Score, Options) :-
+		^^option(exclude_files(ExcludedFiles), Options),
 		findall(
 			FileScore,
-			(	loaded_file(File),
-				file_score(File, FileScore)
+			(	loaded_file_property(File, basename(Basename)),
+				^^not_excluded_file(ExcludedFiles, File, Basename),
+				file_score(File, FileScore, Options)
 			),
 			FileScores
 		),
 		sum(FileScores, Score).
 
-	process_all :-
-		all_score(Score),
+	process_all(Options) :-
+		all_score(Score, Options),
 		print_message(information, code_metrics, unique_predicates_nodes(Score)).
 
 	format_entity_score(_Entity, Total) -->

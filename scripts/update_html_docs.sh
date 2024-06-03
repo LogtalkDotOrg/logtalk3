@@ -5,10 +5,10 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on June 21, 2023
+##   Last updated on March 20, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -87,7 +87,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (valid values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are arriba, b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo "  -i include all installed packs"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
@@ -131,9 +131,6 @@ elif [ "$p_arg" == "ji" ] ; then
 elif [ "$p_arg" == "lvm" ] ; then
 	prolog='LVM'
 	logtalk="lvmlgt$extension -g"
-elif [ "$p_arg" == "scryer" ] ; then
-	prolog='Scryer Prolog'
-	logtalk="scryerlgt$extension -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"
@@ -174,9 +171,13 @@ mv _conf.py conf.py
 make clean
 make html
 make info
+make latexpdf
+make epub
 #make linkcheck
 cp -R _build/html/* ../
 cp _build/texinfo/LogtalkAPIs-*.info ../
+cp _build/latex/LogtalkAPIs-*.pdf ../
+cp _build/epub/LogtalkAPIs-*.epub ../
 make clean
 rm _templates/layout.html
 mv conf.py _conf.py

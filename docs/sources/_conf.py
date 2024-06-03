@@ -21,13 +21,13 @@ def setup(app):
 # -- Project information -----------------------------------------------------
 
 project = 'Logtalk APIs'
-copyright = '1998-2023, Paulo Moura'
+copyright = '1998-2024, Paulo Moura'
 author = 'Paulo Moura'
 
 # The short X.Y version
-version = '3.67.0'
+version = '3.80.0'
 # The full version, including alpha/beta/rc tags
-release = u'v3.67.0-b02'
+release = u'v3.80.0-b01'
 
 
 # -- General configuration ---------------------------------------------------
@@ -130,6 +130,12 @@ latex_elements = {
     # Additional stuff for the LaTeX preamble.
     #
     # 'preamble': '',
+    'preamble': r'''
+        \usepackage{charter}
+        \usepackage[defaultsans]{lato}
+        \usepackage{inconsolata}
+        \usepackage[utf8]{inputenc}
+    ''',
 
     # Latex figure (float) alignment
     #
@@ -140,9 +146,11 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'LogtalkAPIs.tex', 'Logtalk APIs',
-     'PM', 'manual'),
+    (master_doc, 'LogtalkAPIs-' + version + '.tex', u'Logtalk APIs',
+     u'Paulo Moura', 'manual'),
 ]
+latex_engine = 'xelatex'
+latex_use_xindy = False
 
 
 # -- Options for manual page output ------------------------------------------
@@ -170,8 +178,12 @@ texinfo_documents = [
 # -- Options for Epub output -------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = project
+epub_title = project + '\n\n' + release
+epub_author = author
+epub_publisher = author
+epub_copyright = copyright
 
+epub_basename = 'LogtalkAPIs-' + version
 # The unique identifier of the text. This can be a ISBN number
 # or the project homepage.
 #

@@ -21,10 +21,21 @@
 
 :- object(thing).
 
+	:- public(context/3).
+	:- mode(context(?object_identifier, ?object_identifier, ?object_identifier), one).
+	:- info(context/3, [
+		comment is 'Accesses the execution context (self, this and sender). Used to support tests.'
+	]).
+
+	context(Self, This, Sender) :-
+		self(Self),
+		this(This),
+		sender(Sender).
+
 	:- public(context/0).
 	:- mode(context, one).
 	:- info(context/0, [
-		comment is 'Shows execution context (self, this and sender values).'
+		comment is 'Shows execution context (self, this and sender objects).'
 	]).
 
 	context :-

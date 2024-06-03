@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -283,6 +283,9 @@ The following protocol properties are supported:
    applicable); ``Directory`` always ends with a ``/``
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the protocol definition (if
+   applicable)
+``directive(BeginLine, EndLine)``
+   Source file begin and end lines of the protocol opening directive (if
    applicable)
 ``public(Resources)``
    List of public predicates and operators declared by the protocol

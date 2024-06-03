@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -109,9 +109,11 @@ Categories cannot inherit from objects. In addition, categories cannot
 define clauses for dynamic predicates. This restriction applies because
 a category can be imported by several objects and because we cannot use
 the database handling built-in methods with categories (messages can
-only be sent to objects). However, categories may contain declarations
-for dynamic predicates and they can contain predicates which handle
-dynamic predicates. For example:
+only be sent to objects). A consequence of this restriction is that a
+category cannot declare a predicate (or non-terminal) as both multifile
+and dynamic. However, categories may contain declarations for dynamic
+predicates and they can contain predicates which handle dynamic predicates.
+For example:
 
 ::
 
@@ -517,6 +519,9 @@ The following category properties are supported:
 ``lines(BeginLine, EndLine)``
    Source file begin and end lines of the category definition (if
    applicable)
+``directive(BeginLine, EndLine)``
+   Source file begin and end lines of the category opening directive (if
+   applicable)
 ``events``
    Messages sent from the category generate events
 ``source_data``
@@ -534,29 +539,33 @@ The following category properties are supported:
 ``includes(Predicate, Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for an object multifile predicate that are defined
    in the specified entity (the properties include
-   ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
-   ``line_count(Line)`` with ``Line`` being the begin line of the
+   ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the
    first multifile predicate clause)
 ``provides(Predicate, Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for other entity multifile predicate that are
    defined in the category (the properties include
-   ``number_of_clauses(Number)``, ``number_of_rules(Number)``, and
-   ``line_count(Line)`` with ``Line`` being the begin line of the
+   ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
+   ``lines(Start,End)``, and``line_count(Start)`` with ``Start`` being the begin line of the
    first multifile predicate clause)
+``alias(Entity, Properties)``
+   List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the object
+   (the properties include ``object`` in case of an object alias, ``module`` in case of a module alias,
+   ``for(Original)``, ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the ``uses/1`` or
+   ``use_module/1`` directive)
 ``alias(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for a :term:`predicate alias` declared by the category
-   (the properties include ``for(Original)``, ``from(Entity)``,
-   ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
-   being the begin line of the alias directive)
+   (the properties include ``predicate``, ``for(Original)``, ``from(Entity)``, ``non_terminal(NonTerminal)``,
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the alias directive)
 ``calls(Call, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for predicate calls made by the category (``Call``
    is either a predicate indicator or a control construct such as
    ``(::)/1-2`` or ``(^^)/1`` with a predicate indicator as argument; note
    that ``Call`` may not be ground in case of a call to a control
    construct where its argument is only know at runtime; the properties
-   include ``caller(Caller)``, ``alias(Alias)``, and
-   ``line_count(Line)`` with both ``Caller`` and ``Alias`` being
-   predicate indicators and ``Line`` being the begin line of the
+   include ``caller(Caller)``, ``alias(Alias)``, ``non_terminal(NonTerminal)``,
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Caller``, ``Alias``, and ``NonTerminal``
+   being predicate indicators and ``Start`` being the begin line of the
    predicate clause or directive making the call)
 ``updates(Predicate, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for dynamic predicate updates (and also access
@@ -565,10 +574,11 @@ The following category properties are supported:
    ``(::)/1-2`` or ``(:)/2`` with a predicate indicator as argument; note
    that ``Predicate`` may not be ground in case of a control construct
    argument only know at runtime; the properties include
-   ``updater(Updater)``, ``alias(Alias)``, and ``line_count(Line)`` with
-   ``Updater`` being a (possibly multifile) predicate indicator,
-   ``Alias`` being a predicate indicator, and ``Line`` being the begin
-   line of the predicate clause or directive updating the predicate)
+   ``updater(Updater)``, ``alias(Alias)``, ``non_terminal(NonTerminal)``,
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Updater`` being a (possibly multifile)
+   predicate indicator, ``Alias`` and ``NonTerminal`` being predicate
+   indicators, and ``Start`` being the begin line of the predicate clause
+   or directive updating the predicate)
 ``number_of_clauses(Number)``
    Total number of predicate clauses defined in the category (includes
    both user-defined clauses and auxiliary clauses generated by the
@@ -728,6 +738,7 @@ of the compound term are variables. These variables, the *category parameters*,
 can be accessed by calling the :ref:`methods_parameter_2` or
 :ref:`methods_this_1` built-in local methods in the category predicate
 clauses or by using :term:`parameter variables <parameter variable>`.
+
 Category parameter values can be defined by the importing objects.
 For example:
 
@@ -739,8 +750,8 @@ For example:
    :- end_object.
 
 Note that access to category parameters is only possible from within the
-category. In particular, calls to the :ref:`methods_this_1` built-in local method
-from category predicates always access the importing object identifier
+category. In particular, calls to the :ref:`methods_this_1` built-in local
+method from category predicates always access the importing object identifier
 (and thus object parameters, not category parameters).
 
 .. _categories_built_in:

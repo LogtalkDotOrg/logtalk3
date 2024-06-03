@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,19 +23,24 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2021-06-01,
+		date is 2024-05-18,
 		comment is 'Unit tests for the "ports_profiler" tool.'
 	]).
 
 	:- uses(ports_profiler, [
+		start/0, stop/0,
 		data/0, data/1, port/5,
 		reset/0, reset/1
 	]).
 
 	setup :-
+		start,
 		foo::solutions.
+
+	cleanup :-
+		stop.
 
 	test(ports_profiler_data_0_01, deterministic) :-
 		^^suppress_text_output,

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2023-04-29,
+		date is 2024-03-28,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
 	]).
 
@@ -89,12 +89,10 @@
 		{number_chars(X, [' ','0','x','1','1','1']), number_codes(X, Y)}.
 
 	test(sics_number_codes_2_20, true(X-Y == 73-[55,51])) :-
-		{number_chars(X, [' ','0','o','1','1','1']), number_codes(X, Y)},
-		X == 73, Y == [55,51].
+		{number_chars(X, [' ','0','o','1','1','1']), number_codes(X, Y)}.
 
 	test(sics_number_codes_2_21, true(X-Y == 7-[55])) :-
-		{number_chars(X, [' ','0','b','1','1','1']), number_codes(X, Y)},
-		X == 7, Y == [55].
+		{number_chars(X, [' ','0','b','1','1','1']), number_codes(X, Y)}.
 
 	test(sics_number_codes_2_22, true(N == 10)) :-
 		{number_codes(N, [48,39,92,110])}. % 0'\n
@@ -134,30 +132,39 @@
 	test(lgt_number_codes_2_31, error(syntax_error(_))) :-
 		{number_codes(_, [0'3,0'/,0'*,0'-,0'*,0'/])}.
 
+	test(sics_number_codes_2_32, true(X == 273)) :-
+		{number_codes(X, [0'0,0'x,0'1,0'1,0'1])}.
+
+	test(sics_number_codes_2_33, true(X == 73)) :-
+		{number_codes(X, [0'0,0'o,0'1,0'1,0'1])}.
+
+	test(sics_number_codes_2_34, true(X == 7)) :-
+		{number_codes(X, [0'0,0'b,0'1,0'1,0'1])}.
+
 	% tests from (or derived from) the WG17 test suite
 
-	test(wg17_number_codes_2_32, true) :-
+	test(wg17_number_codes_2_35, true) :-
 		{number_codes(1.0e9, [0'1,0'.,0'0,0'E,0'9])}.
 
-	test(wg17_number_codes_2_33, true) :-
+	test(wg17_number_codes_2_36, true) :-
 		{number_codes(1.0e9, [0'1,0'.,0'0,0'E,0'+,0'9])}.
 
-	test(wg17_number_codes_2_34, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_37, error(syntax_error(_))) :-
 		{number_codes(1, [])}.
 
-	test(wg17_number_codes_2_35, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_38, error(syntax_error(_))) :-
 		{number_codes(_, [0'3,0'.])}.
 
-	test(wg17_number_codes_2_36, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_39, error(syntax_error(_))) :-
 		{number_codes(_, [0'0,0'B,0'1])}.
 
-	test(wg17_number_codes_2_37, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_40, error(syntax_error(_))) :-
 		{number_codes(_, [0'0,0'O,0'7])}.
 
-	test(wg17_number_codes_2_38, error(syntax_error(_))) :-
+	test(wg17_number_codes_2_41, error(syntax_error(_))) :-
 		{number_codes(_, [0'0,0'X,0'f])}.
 
-	test(wg17_number_codes_2_39, true(X == 32)) :-
+	test(wg17_number_codes_2_42, true(X == 32)) :-
 		{number_codes(X, [48,39,32])}.
 
 	% auxiliary predicates

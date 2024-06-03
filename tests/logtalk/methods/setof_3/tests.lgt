@@ -27,9 +27,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2023-12-04,
 		comment is 'Unit tests for the setof/3 built-in method.'
 	]).
 
@@ -106,7 +106,11 @@
 		bagof(Y-L, setof(X, (X=Y; X=Z; Y=1), L), LL),
 		(	variant(LL, [Y-[Y,Z], 1-[_]]) ->
 			true
-		;	variant(LL, [1-[_], Y-[Y,Z]])
+		;	variant(LL, [Y-[Z,Y], 1-[_]]) ->
+			true
+		;	variant(LL, [1-[_], Y-[Y,Z]]) ->
+			true
+		;	variant(LL, [1-[_], Y-[Z,Y]])
 		).
 
 	test(setof_3_18, variant(LL, [f(_)-[1,2]])) :-

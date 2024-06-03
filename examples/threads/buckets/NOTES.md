@@ -26,4 +26,4 @@ was coded for a contribution to the Rosetta Code website.
 
 For more information see:
 
-	http://rosettacode.org/wiki/Atomic_updates
+	https://rosettacode.org/wiki/Atomic_updates

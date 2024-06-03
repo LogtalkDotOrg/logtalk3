@@ -10,6 +10,9 @@
 
 Predicates for generating entity diagrams in DOT format with only ``uses/2`` and ``use_module/2`` relation edges.
 
+| **Availability:** 
+|    ``logtalk_load(diagrams(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 2:0:1
 | **Date:** 2020-03-27

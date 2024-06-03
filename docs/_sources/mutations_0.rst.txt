@@ -1,0 +1,75 @@
+.. index:: mutations
+.. _mutations/0:
+
+.. rst-class:: right
+
+**category**
+
+``mutations``
+=============
+
+Adds mutations support to the library ``type`` object.
+
+| **Availability:** 
+|    ``logtalk_load(mutations(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2023-11-23
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Complements:**
+|    :ref:`type <type/0>`
+| **Uses:**
+|    :ref:`mutations_store <mutations_store/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: mutation/3
+.. _mutations/0::mutation/3:
+
+``mutation/3``
+^^^^^^^^^^^^^^
+
+Returns a random mutation of a term into another term of the same type. The input ``Term`` is assume to be valid for the given ``Type``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mutation(Type,Term,Mutation)``
+| **Mode and number of proofs:**
+|    ``mutation(@callable,@term,-term)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:27:0,
+		version is 2:35:0,
 		author is 'Paulo Moura',
-		date is 2023-06-21,
+		date is 2024-03-07,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -39,8 +39,15 @@
 			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``.',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``.',
 			'Difference list types (compound derived types)' - '``difference_list``, ``difference_list(Type)``.',
-			'Other compound derived types' - '``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
-			'Other types' - '``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``.',
+			'List and difference list types length' - 'The types that do not take a fixed length generate lists with a length in the ``[0,MaxSize]`` interval (``[1,MaxSize]`` for non-empty list types).',
+			'Predicate and non-terminal indicator types arity' - 'These types generate indicators with an arity in the ``[0,MaxSize]`` interval.',
+			'Other compound derived types' - '``compound(Name,Types)``, ``predicate_indicator``, ``non_terminal_indicator``, ``predicate_or_non_terminal_indicator``, ``clause``, ``grammar_rule``, ``pair``, ``pair(KeyType,ValueType)``.',
+			'Other types' - '``Object::Closure``, ``between(Type,Lower,Upper)``, ``property(Type,LambdaExpression)``, ``one_of(Type,Set)``, ``var_or(Type)``, ``ground(Type)``, ``types(Types)``, ``types_frequency(Pairs)``, ``transform(Type,Closure)``, ``constrain(Type,Closure)``.',
+			'Type ``Object::Closure`` notes' - 'Allows calling public object predicates as generators and shrinkers. The ``Closure`` closure is extended with either a single argument, the generated arbitrary value, or with two arguments, when shrinking a value.',
+			'Type ``compound(Name,Types)`` notes' - 'Generate a random compound term with the given name with a random argument for each type.',
+			'Type ``types_frequency(Pairs)`` notes' - 'Generate a random term for one of the types in a list of ``Type-Frequency`` pairs. The type is randomly selected taking into account the types frequency.',
+			'Type ``transform(Type,Closure)`` notes' - 'Generate a random term by transforming the term generated for the given type using the given closure.',
+			'Type ``constrain(Type,Closure)`` notes' - 'Generate a random term for the given type that satisfy the given closure.',
 			'Registering new types' - 'Add clauses for the ``arbitrary/1-2`` multifile predicates and optionally for the ``shrinker/1`` and ``shrink/3`` multifile predicates. The clauses must have a bound first argument to avoid introducing spurious choice-points.',
 			'Shrinking values' - 'The ``shrink/3`` should either succeed or fail but never throw an exception.',
 			'Character sets' - '``ascii_identifier``, ``ascii_printable``, ``ascii_full``, ``byte``, ``unicode_bmp``, ``unicode_full``.',
@@ -53,7 +60,7 @@
 	]).
 
 	:- uses(integer, [between/3 as for/3]).
-	:- uses(list, [append/3, length/2]).
+	:- uses(list, [append/3, length/2, member/2 as in/2]).
 	:- uses(fast_random, [between/3, maybe/0, maybe/2, member/2, permutation/2, random/1]).
 
 	:- public(arbitrary/1).
@@ -65,6 +72,7 @@
 	]).
 
 	:- public(arbitrary/2).
+	:- meta_predicate(arbitrary(::, *)).
 	:- multifile(arbitrary/2).
 	:- mode(arbitrary(@callable, -term), zero_or_one).
 	:- info(arbitrary/2, [
@@ -88,6 +96,13 @@
 		argnames is ['Type', 'Large', 'Small']
 	]).
 
+	:- public(shrink_sequence/3).
+	:- mode(shrink_sequence(@callable, @term, -list(term)), zero_or_one).
+	:- info(shrink_sequence/3, [
+		comment is 'Shrinks a value repeatedly until shrinking is no longer possible returning the sequence of values (ordered from larger to smaller value). Fails if the type is not supported.',
+		argnames is ['Type', 'Value', 'Sequence']
+	]).
+
 	:- public(edge_case/2).
 	:- multifile(edge_case/2).
 	:- mode(edge_case(?callable, ?term), zero_or_more).
@@ -108,6 +123,14 @@
 	:- info(set_seed/1, [
 		comment is 'Sets the random generator seed to a given value returned by calling the ``get_seed/1`` predicate.',
 		argnames is ['Seed']
+	]).
+
+	:- public(max_size/1).
+	:- multifile(max_size/1).
+	:- mode(max_size(?positive_integer), zero_or_one).
+	:- info(max_size/1, [
+		comment is 'User defined maximum size for types where its meaningful and implicit. When not defined, defaults to 42. When multiple definitions exist, the first valid one found is used.',
+		argnames is ['Size']
 	]).
 
 	% arbitrary/1
@@ -189,6 +212,7 @@
 	arbitrary(operator_specifier).
 	arbitrary(hex_char).
 	% compound derived types
+	arbitrary(compound(_Name, _Types)).
 	arbitrary(predicate_indicator).
 	arbitrary(non_terminal_indicator).
 	arbitrary(predicate_or_non_terminal_indicator).
@@ -211,10 +235,14 @@
 	arbitrary(between(_Type, _Lower, _Upper)).
 	arbitrary(property(_Type, _LambdaExpression)).
 	% other types
+	arbitrary(_Object::_Closure).
 	arbitrary(one_of(_Type, _Set)).
 	arbitrary(var_or(_Type)).
 	arbitrary(ground(_Type)).
 	arbitrary(types(_Types)).
+	arbitrary(types_frequency(_Pairs)).
+	arbitrary(transform(_Type, _Closure)).
+	arbitrary(constrain(_Type, _Closure)).
 
 	% arbitrary/2
 
@@ -537,13 +565,19 @@
 
 	% compound derived types
 
+	arbitrary(compound(Name, Types), Arbitrary) :-
+		findall(Argument, (in(Type, Types), arbitrary(Type, Argument)), Arguments),
+		Arbitrary =.. [Name| Arguments].
+
 	arbitrary(predicate_indicator, Name/Arity) :-
 		arbitrary(non_empty_atom(ascii_identifier), Name),
-		arbitrary(between(integer,0,42), Arity).
+		max_size_value(Size),
+		arbitrary(between(integer,0,Size), Arity).
 
 	arbitrary(non_terminal_indicator, Name//Arity) :-
 		arbitrary(non_empty_atom(ascii_identifier), Name),
-		arbitrary(between(integer,0,42), Arity).
+		max_size_value(Size),
+		arbitrary(between(integer,0,Size), Arity).
 
 	arbitrary(predicate_or_non_terminal_indicator, Arbitrary) :-
 		arbitrary(types([predicate_indicator, non_terminal_indicator]), Arbitrary).
@@ -600,7 +634,8 @@
 		).
 
 	arbitrary(list(Type), Arbitrary) :-
-		between(0, 42, Length),
+		max_size_value(Size),
+		between(0, Size, Length),
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type).
 
@@ -609,12 +644,14 @@
 		map_arbitrary(Arbitrary, Type).
 
 	arbitrary(non_empty_list(Type), Arbitrary) :-
-		between(1, 42, Length),
+		max_size_value(Size),
+		between(1, Size, Length),
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type).
 
 	arbitrary(list(Type,Min,Max), Arbitrary) :-
-		between(0, 42, Length),
+		max_size_value(Size),
+		between(0, Size, Length),
 		length(Arbitrary, Length),
 		map_arbitrary(Arbitrary, Type, Min, Max).
 
@@ -626,7 +663,8 @@
 		arbitrary(difference_list(types([var,atom,integer,float])), Arbitrary).
 
 	arbitrary(difference_list(Type), Arbitrary) :-
-		between(0, 42, Length),
+		max_size_value(Size),
+		between(0, Size, Length),
 		length(Arbitrary0, Length),
 		map_arbitrary(Arbitrary0, Arbitrary, Type).
 
@@ -667,6 +705,12 @@
 		arbitrary(Type, Arbitrary),
 		{once(Goal)}.
 
+	arbitrary(Object::Closure, Arbitrary) :-
+		(	call(Object::Closure, Arbitrary) ->
+			true
+		;	fail
+		).
+
 	arbitrary(one_of(_Type, Set), Arbitrary) :-
 		member(Arbitrary, Set).
 
@@ -683,6 +727,18 @@
 	arbitrary(types(Types), Arbitrary) :-
 		member(Type, Types),
 		arbitrary(Type, Arbitrary).
+
+	arbitrary(types_frequency(Pairs), Arbitrary) :-
+		types_frequency_to_types_list(Pairs, Types),
+		member(Type, Types),
+		arbitrary(Type, Arbitrary).
+
+	arbitrary(transform(Type, Closure), Arbitrary) :-
+		arbitrary(Type, Arbitrary0),
+		call(Closure, Arbitrary0, Arbitrary).
+
+	arbitrary(constrain(Type, Closure), Arbitrary) :-
+		arbitrary_constrain(Type, Closure, Arbitrary).
 
 	% shrinker/1
 
@@ -749,6 +805,7 @@
 	shrinker(pair).
 	shrinker(pair(_KeyType, _ValueType)).
 	% other types
+	shrinker(_Object::_Closure).
 	shrinker(var_or(_Type)).
 	shrinker(ground(_Type)).
 	shrinker(types(_Types)).
@@ -853,31 +910,32 @@
 
 	shrink(float, Large, Small) :-
 		float(Large),
-		Small is Large / 2.0.
+		catch(Small is Large / 2.0, _, fail),
+		Small =\= Large.
 
 	shrink(non_positive_float, Large, Small) :-
 		float(Large),
-		Small is Large / 2.0,
+		catch(Small is Large / 2.0, _, fail),
 		Small =\= Large.
 
 	shrink(non_negative_float, Large, Small) :-
 		float(Large),
-		Small is Large / 2.0,
+		catch(Small is Large / 2.0, _, fail),
 		Small =\= Large.
 
 	shrink(positive_float, Large, Small) :-
 		float(Large),
-		Small is Large / 2.0,
+		catch(Small is Large / 2.0, _, fail),
 		Small > 0.0.
 
 	shrink(negative_float, Large, Small) :-
 		float(Large),
-		Small is Large / 2.0,
+		catch(Small is Large / 2.0, _, fail),
 		Small < 0.0.
 
 	shrink(probability, Large, Small) :-
 		float(Large),
-		Small is Large / 2.0,
+		catch(Small is Large / 2.0, _, fail),
 		Small =\= Large.
 
 	shrink(nonvar, Large, Small) :-
@@ -995,6 +1053,12 @@
 	shrink(ground(Type), Large, Small) :-
 		shrink(Type, Large, Small).
 
+	shrink(Object::Closure, Large, Small) :-
+		(	call(Object::Closure, Large, Small) ->
+			true
+		;	fail
+		).
+
 	shrink(var_or(Type), Large, Small) :-
 		nonvar(Large),
 		shrink(Type, Large, Small).
@@ -1096,7 +1160,7 @@
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b; Dialect == cx;
-			Dialect == tau; Dialect == arriba; Dialect == lvm; Dialect == scryer; Dialect == trealla
+			Dialect == tau; Dialect == arriba; Dialect == lvm; Dialect == trealla
 		)
 	)).
 		edge_case(float, Epsilon) :-
@@ -1234,7 +1298,23 @@
 	set_seed(Seed) :-
 		fast_random::set_seed(Seed).
 
+	% srinker tester predicates
+
+	shrink_sequence(Type, Value, [Next| Sequence]) :-
+		shrink(Type, Value, Next),
+		!,
+		shrink_sequence(Type, Next, Sequence).
+	shrink_sequence(_, _, []).
+
 	% auxiliary predicates
+
+	max_size_value(Size) :-
+		(	max_size(Size),
+			integer(Size),
+			Size > 0 ->
+			true
+		;	Size = 42
+		).
 
 	arbitrary_between(Type, Lower, Upper, Arbitrary) :-
 		repeat,
@@ -1381,6 +1461,13 @@
 		arbitrary(Type, Head),
 		map_arbitrary(Tail, TailBack-Back, Type).
 
+	:- meta_predicate(arbitrary_constrain(*, 1, *)).
+	arbitrary_constrain(Type, Closure, Arbitrary) :-
+		repeat,
+			arbitrary(Type, Arbitrary),
+			call(Closure, Arbitrary),
+		!.
+
 	shrink_list([Head| Tail], Type, Small) :-
 		(	Tail == [] ->
 			Small0 = [Head]
@@ -1389,7 +1476,8 @@
 		),
 		(	Small = Small0
 		;	shrink_list_elements(Small0, Type, Small)
-		).
+		),
+		[Head| Tail] \== Small.
 	shrink_list([_| _], _, []).
 
 	shrink_list(List, _, N, _, Small) :-
@@ -1436,5 +1524,14 @@
 		Small = List-Back.
 	shrink_difference_list_keep_next([Head| Tail]-Back, [Head| Small]-Back) :-
 		shrink_difference_list(Tail-Back, Small-Back).
+
+	types_frequency_to_types_list([], []).
+	types_frequency_to_types_list([Type-N| TypesFrequency], WeightedList) :-
+		(	N > 0 ->
+			WeightedList = [Type| Types],
+			M is N - 1,
+			types_frequency_to_types_list([Type-M| TypesFrequency], Types)
+		;	types_frequency_to_types_list(TypesFrequency, WeightedList)
+		).
 
 :- end_category.

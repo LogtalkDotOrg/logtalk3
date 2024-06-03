@@ -202,7 +202,7 @@
 
 	entity_predicates_weights(20, 80).
 
-	% entity info/1 defauls
+	% entity info/1 defaults
 
 	entity_info_score(Entity, MaximumScore) :-
 		(	atom(Entity) ->

@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for GNU Prolog 1.4.5 (and later versions)
-%  Last updated on June 13, 2023
+%  Last updated on May 5, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -153,6 +153,15 @@ setup_call_cleanup(_, _, _) :-
 	fail.
 
 
+% '$lgt_prolog_phrase_predicate'(@callable)
+%
+% table of predicates that call non-terminals
+% (other than the de facto standard phrase/2-3 predicates)
+
+'$lgt_prolog_phrase_predicate'(_) :-
+	fail.
+
+
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
 %
 % valid candidates are proprietary built-in predicates with
@@ -186,6 +195,24 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_prolog_predicate_property'(prolog_line_).
 
 
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable, ?callable)
+%
+% table of proprietary deprecated built-in predicates
+% when there's a Prolog system advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_, _) :-
+	fail.
+
+
+% '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable)
+%
+% table of proprietary deprecated built-in predicates without
+% a direct advised alternative
+
+'$lgt_prolog_deprecated_built_in_predicate_hook'(_) :-
+	fail.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -208,6 +235,7 @@ setup_call_cleanup(_, _, _) :-
 
 '$lgt_file_extension'(logtalk, '.lgt').
 '$lgt_file_extension'(logtalk, '.logtalk').
+% there must be a single object file extension
 '$lgt_file_extension'(object, '.pl').
 '$lgt_file_extension'(prolog, '.pl').
 '$lgt_file_extension'(prolog, '.prolog').
@@ -266,6 +294,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_default_flag'(steadfastness, silent).
 '$lgt_default_flag'(naming, silent).
 '$lgt_default_flag'(duplicated_clauses, silent).
+'$lgt_default_flag'(left_recursion, warning).
 '$lgt_default_flag'(tail_recursive, silent).
 '$lgt_default_flag'(disjunctions, warning).
 '$lgt_default_flag'(conditionals, warning).
@@ -296,7 +325,7 @@ setup_call_cleanup(_, _, _) :-
 	;	ScratchDirectory = './.lgt_tmp/'
 	).
 '$lgt_default_flag'(report, Report) :-
-	(	catch(current_prolog_flag(show_information, off), _, fail) ->
+	(	catch(current_prolog_flag(show_banner, off), _, fail) ->
 		Report = warnings
 	;	Report = on
 	).
@@ -389,30 +418,22 @@ setup_call_cleanup(_, _, _) :-
 	).
 
 
-% '$lgt_directory_hash_dialect_as_atom'(+atom, -atom)
+% '$lgt_directory_hashes'(+atom, -atom, -atom)
 %
 % returns the directory hash and dialect as an atom with the format _hash_dialect
+% plus the the directory hash and PID as an atom with the format _hash_pid
 
-'$lgt_directory_hash_dialect_as_atom'(Directory, Hash) :-
-	term_hash(Directory, Hash0),
+'$lgt_directory_hashes'(Directory, HashDialect, HashPid) :-
+	term_hash(Directory, Hash),
 	'$lgt_prolog_feature'(prolog_dialect, Dialect),
-	number_codes(Hash0, Hash0Codes),
-	atom_codes(Dialect, DialectCodes),
-	append([0'_| Hash0Codes], [0'_| DialectCodes], HashCodes),
-	atom_codes(Hash, HashCodes).
-
-
-% '$lgt_directory_hash_pid_as_atom'(+atom, -atom)
-%
-% returns the directory hash and PID as an atom with the format _hash_pid
-
-'$lgt_directory_hash_pid_as_atom'(Directory, Hash) :-
-	term_hash(Directory, Hash0),
 	prolog_pid(PID),
-	number_codes(Hash0, Hash0Codes),
+	number_codes(Hash, HashCodes),
+	atom_codes(Dialect, DialectCodes),
+	append([0'_| HashCodes], [0'_| DialectCodes], HashDialectCodes),
+	atom_codes(HashDialect, HashDialectCodes),
 	number_codes(PID, PIDCodes),
-	append([0'_| Hash0Codes], [0'_| PIDCodes], HashCodes),
-	atom_codes(Hash, HashCodes).
+	append([0'_| HashCodes], [0'_| PIDCodes], HashPidCodes),
+	atom_codes(HashPid, HashPidCodes).
 
 
 % '$lgt_compile_prolog_code'(+atom, +atom, +list)
@@ -703,24 +724,28 @@ message_queue_destroy(_) :- fail.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- multifile('$logtalk#0.print_message_token#4'/5).
-:- dynamic('$logtalk#0.print_message_token#4'/5).
+:- if((current_prolog_flag(version_data, gprolog(Major,Minor,Patch,_)), Major:Minor:Patch @< 1:6:0)).
 
-% workaround non-standard format/3 predicate feature that uses "%" as a
-% format control sequence
+	:- multifile('$logtalk#0.print_message_token#4'/5).
+	:- dynamic('$logtalk#0.print_message_token#4'/5).
 
-'$logtalk#0.print_message_token#4'(Stream, _, Format-Args, _, _) :-
-	atom_codes(Format, FormatCodes),
-	'$lgt_gnu_filter_format_codes'(FormatCodes, FilteredFormatCodes),
-	format(Stream, FilteredFormatCodes, Args).
+	% workaround non-standard format/3 predicate feature that uses "%"
+	% as a format control sequence; changed to "~%" in version 1.6.0
 
-'$lgt_gnu_filter_format_codes'([], []).
-'$lgt_gnu_filter_format_codes'([0'%| Codes], [0'%, 0'%| FilteredCodes]) :-
-	!,
-	'$lgt_gnu_filter_format_codes'(Codes, FilteredCodes).
-'$lgt_gnu_filter_format_codes'([Code| Codes], [Code| FilteredCodes]) :-
-	!,
-	'$lgt_gnu_filter_format_codes'(Codes, FilteredCodes).
+	'$logtalk#0.print_message_token#4'(Stream, _, Format-Args, _, _) :-
+		atom_codes(Format, FormatCodes),
+		'$lgt_gnu_filter_format_codes'(FormatCodes, FilteredFormatCodes),
+		format(Stream, FilteredFormatCodes, Args).
+
+	'$lgt_gnu_filter_format_codes'([], []).
+	'$lgt_gnu_filter_format_codes'([0'%| Codes], [0'%, 0'%| FilteredCodes]) :-
+		!,
+		'$lgt_gnu_filter_format_codes'(Codes, FilteredCodes).
+	'$lgt_gnu_filter_format_codes'([Code| Codes], [Code| FilteredCodes]) :-
+		!,
+		'$lgt_gnu_filter_format_codes'(Codes, FilteredCodes).
+
+:- endif.
 
 
 

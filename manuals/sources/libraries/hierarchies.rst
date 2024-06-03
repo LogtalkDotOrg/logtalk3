@@ -3,8 +3,9 @@
 ``hierarchies``
 ===============
 
-This library provides objects implementing reflection predicates over
-class and prototype hierarchies.
+This library provides categories implementing reflection predicates over
+class and prototype hierarchies. These categories can be imported by any
+object that requires reasoning about hierarchies.
 
 API documentation
 -----------------

@@ -59,9 +59,9 @@ comment
 	extends(parent)).
 
 	:- info([
-		version is 1:49:0,
+		version is 1:50:0,
 		author is 'Paulo Moura',
-		date is 2022-11-04,
+		date is 2024-01-13,
 		comment is 'Sample prototype for testing syntax coloring.'
 	]).
 
@@ -248,6 +248,7 @@ comment
 		forward(Message).
 
 	dcg_rules_parsing_methods :-
+		phrase(NonTerminal, Input),
 		phrase(NonTerminal, Input, Rest).
 
 	term_expansion_methods :-
@@ -425,6 +426,9 @@ comment
 	sorting :-
 		keysort(List, Sorted),
 		sort(List, Sorted).
+
+	built_in_non_terminals(NonTerminal) -->
+		phrase(NonTerminal), call(NonTerminal), eos.
 
 	number(C) --> "+", number(C).
 	number(C) --> "-", number(X), {C is -X}.

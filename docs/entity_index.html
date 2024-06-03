@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Entities &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>Entities &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -88,8 +91,10 @@
 <li class="toctree-l3"><a class="reference internal" href="lgtdoc_messages_0.html">lgtdoc_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lgtunit_messages_0.html">lgtunit_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="library_diagram_1.html">library_diagram(Format)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="listing_0.html">listing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="logging_0.html">logging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_0.html">mutations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="observer_0.html">observer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="options_0.html">options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="os_types_0.html">os_types</a></li>
@@ -97,6 +102,7 @@
 <li class="toctree-l3"><a class="reference internal" href="packs_messages_0.html">packs_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="read_file_0.html">read_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_core_0.html">recorded_database_core</a></li>
 <li class="toctree-l3"><a class="reference internal" href="statistics_0.html">statistics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="subject_0.html">subject</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ulid_types_0.html">ulid_types</a></li>
@@ -140,6 +146,11 @@
 <li class="toctree-l3"><a class="reference internal" href="debug_expansion_1.html">debug_expansion(Mode)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="debug_messages_0.html">debug_messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="debugger_0.html">debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_atom_mutations_0.html">default_atom_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_compound_mutations_0.html">default_compound_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_float_mutations_0.html">default_float_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_integer_mutations_0.html">default_integer_mutations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="default_list_mutations_0.html">default_list_mutations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="default_workflow_hook_0.html">default_workflow_hook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="demodb_0.html">demodb</a></li>
 <li class="toctree-l3"><a class="reference internal" href="dfs_interpreter_0.html">dfs_interpreter</a></li>
@@ -224,6 +235,7 @@
 <li class="toctree-l3"><a class="reference internal" href="minheap_0.html">minheap</a></li>
 <li class="toctree-l3"><a class="reference internal" href="minimal_output_0.html">minimal_output</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modules_diagram_support_0.html">modules_diagram_support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mutations_store_0.html">mutations_store</a></li>
 <li class="toctree-l3"><a class="reference internal" href="natural_0.html">natural</a></li>
 <li class="toctree-l3"><a class="reference internal" href="navltree_0.html">navltree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nbintree_0.html">nbintree</a></li>
@@ -251,6 +263,7 @@
 <li class="toctree-l3"><a class="reference internal" href="random_0.html">random</a></li>
 <li class="toctree-l3"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
 <li class="toctree-l3"><a class="reference internal" href="reader_0.html">reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recorded_database_0.html">recorded_database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="redis_0.html">redis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="registries_0.html">registries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="registry_loader_hook_0.html">registry_loader_hook</a></li>
@@ -273,6 +286,7 @@
 <li class="toctree-l3"><a class="reference internal" href="timeout_0.html">timeout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="toychrdb_0.html">toychrdb</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tsv_0.html">tsv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_1.html">tsv(Header)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="tutor_0.html">tutor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="type_0.html">type</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ulid_0.html">ulid</a></li>
@@ -348,6 +362,7 @@
 <li class="toctree-l3"><a class="reference internal" href="term_io_protocol_0.html">term_io_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="termp_0.html">termp</a></li>
 <li class="toctree-l3"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ulid_protocol_0.html">ulid_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="union_find_protocol_0.html">union_find_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="uuid_protocol_0.html">uuid_protocol</a></li>
@@ -400,10 +415,10 @@
            <div itemprop="articleBody">
              
   <section id="entities">
-<span id="entity-index"></span><h1>Entities<a class="headerlink" href="#entities" title="Permalink to this heading"></a></h1>
-<p>To load an entity, always load the library that includes it using the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load(library_name(loader))</span></code> instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used.</p>
+<span id="entity-index"></span><h1>Entities<a class="headerlink" href="#entities" title="Link to this heading"></a></h1>
+<p>To load an entity, always load the library that includes it using the goal <code class="docutils literal notranslate"><span class="pre">logtalk_load(library_name(loader))</span></code> instead of loading just the entity. The library loader file ensures that all the required dependencies are also loaded and that any required flags are used. The loading goal can be found in the entity documentation.</p>
 <section id="categories">
-<h2>Categories<a class="headerlink" href="#categories" title="Permalink to this heading"></a></h2>
+<h2>Categories<a class="headerlink" href="#categories" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="arbitrary_0.html">arbitrary</a></li>
@@ -430,8 +445,10 @@
 <li class="toctree-l1"><a class="reference internal" href="lgtdoc_messages_0.html">lgtdoc_messages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lgtunit_messages_0.html">lgtunit_messages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="library_diagram_1.html">library_diagram(Format)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="listing_0.html">listing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging_0.html">logging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="monitor_0.html">monitor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutations_0.html">mutations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observer_0.html">observer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="options_0.html">options</a></li>
 <li class="toctree-l1"><a class="reference internal" href="os_types_0.html">os_types</a></li>
@@ -439,6 +456,7 @@
 <li class="toctree-l1"><a class="reference internal" href="packs_messages_0.html">packs_messages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="proto_hierarchy_0.html">proto_hierarchy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="read_file_0.html">read_file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recorded_database_core_0.html">recorded_database_core</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statistics_0.html">statistics</a></li>
 <li class="toctree-l1"><a class="reference internal" href="subject_0.html">subject</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ulid_types_0.html">ulid_types</a></li>
@@ -446,7 +464,7 @@
 </div>
 </section>
 <section id="objects">
-<h2>Objects<a class="headerlink" href="#objects" title="Permalink to this heading"></a></h2>
+<h2>Objects<a class="headerlink" href="#objects" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="a_star_interpreter_1.html">a_star_interpreter(W)</a></li>
@@ -486,6 +504,11 @@
 <li class="toctree-l1"><a class="reference internal" href="debug_expansion_1.html">debug_expansion(Mode)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debug_messages_0.html">debug_messages</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugger_0.html">debugger</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_atom_mutations_0.html">default_atom_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_compound_mutations_0.html">default_compound_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_float_mutations_0.html">default_float_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_integer_mutations_0.html">default_integer_mutations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="default_list_mutations_0.html">default_list_mutations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="default_workflow_hook_0.html">default_workflow_hook</a></li>
 <li class="toctree-l1"><a class="reference internal" href="demodb_0.html">demodb</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dfs_interpreter_0.html">dfs_interpreter</a></li>
@@ -570,6 +593,7 @@
 <li class="toctree-l1"><a class="reference internal" href="minheap_0.html">minheap</a></li>
 <li class="toctree-l1"><a class="reference internal" href="minimal_output_0.html">minimal_output</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules_diagram_support_0.html">modules_diagram_support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mutations_store_0.html">mutations_store</a></li>
 <li class="toctree-l1"><a class="reference internal" href="natural_0.html">natural</a></li>
 <li class="toctree-l1"><a class="reference internal" href="navltree_0.html">navltree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nbintree_0.html">nbintree</a></li>
@@ -597,6 +621,7 @@
 <li class="toctree-l1"><a class="reference internal" href="random_0.html">random</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rbtree_0.html">rbtree</a></li>
 <li class="toctree-l1"><a class="reference internal" href="reader_0.html">reader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recorded_database_0.html">recorded_database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="redis_0.html">redis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registries_0.html">registries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="registry_loader_hook_0.html">registry_loader_hook</a></li>
@@ -619,6 +644,7 @@
 <li class="toctree-l1"><a class="reference internal" href="timeout_0.html">timeout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="toychrdb_0.html">toychrdb</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tsv_0.html">tsv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tsv_1.html">tsv(Header)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutor_0.html">tutor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="type_0.html">type</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ulid_0.html">ulid</a></li>
@@ -649,7 +675,7 @@
 </div>
 </section>
 <section id="protocols">
-<h2>Protocols<a class="headerlink" href="#protocols" title="Permalink to this heading"></a></h2>
+<h2>Protocols<a class="headerlink" href="#protocols" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="assignvarsp_0.html">assignvarsp</a></li>
@@ -698,6 +724,7 @@
 <li class="toctree-l1"><a class="reference internal" href="term_io_protocol_0.html">term_io_protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="termp_0.html">termp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="timep_0.html">timep</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tsv_protocol_0.html">tsv_protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ulid_protocol_0.html">ulid_protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="union_find_protocol_0.html">union_find_protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="uuid_protocol_0.html">uuid_protocol</a></li>
@@ -719,7 +746,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

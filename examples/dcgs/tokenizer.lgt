@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -89,9 +89,12 @@
 
 	numeral([C1, C2, C3| N]) --> ",", digit(C1), digit(C2), digit(C3), numeral(N).
 	numeral([C1, C2, C3]) --> ",", digit(C1), digit(C2), digit(C3).
-	numeral([C| N]) --> digit(C), numeral(N).	% multiple digits
-	numeral([C]) --> digit(C).					% single digit
-	numeral(N) --> decimal_part(N).				% decimal point and more digits
+	% multiple digits
+	numeral([C| N]) --> digit(C), numeral(N).
+	% single digit
+	numeral([C]) --> digit(C).
+	% decimal point and more digits
+	numeral(N) --> decimal_part(N).
 
 	decimal_part([46| Rest]) --> ".", digit_string(Rest).
 
@@ -104,33 +107,39 @@
 
 	special([C]) --> [C], {char_type(C, special)}.
 
+	% Conversion to lowercase
 	letter(C) --> [C], {char_type(C, lowercase)}.
-	letter(C) --> [U], {char_type(U, uppercase), C is U + 32}.	% Conversion to lowercase
+	letter(C) --> [U], {char_type(U, uppercase), C is U + 32}.
 
 	% char_type(+Code, ?Type)
 	% Classifies a character (ASCII code) as blank, numeric, uppercase, lowercase, or special.
 	% Adapted from Covington 1994.
 
-	char_type(Code, Type) :-	% blanks, other ctrl codes
+	% blanks, other ctrl codes
+	char_type(Code, Type) :-
 		Code =< 32,
 		!,
 		Type = blank.
 
-	char_type(Code, Type) :-	% digits
+	% digits
+	char_type(Code, Type) :-
 		48 =< Code, Code =< 57,
 		!,
 		Type = numeric.
 
-	char_type(Code, Type) :-	% lowercase letters
+	% lowercase letters
+	char_type(Code, Type) :-
 		97 =< Code, Code =< 122,
 		!,
 		Type = lowercase.
 
-	char_type(Code, Type) :-	% uppercase letters
+	% uppercase letters
+	char_type(Code, Type) :-
 		65 =< Code, Code =< 90,
 		!,
 		Type = uppercase.
 
-	char_type(_, special).		% all others
+	% all others
+	char_type(_, special).
 
 :- end_object.

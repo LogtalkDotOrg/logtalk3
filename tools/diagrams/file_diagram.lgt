@@ -1,11 +1,31 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 :- category(file_diagram(Format),
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2:13:0,
+		version is 2:13:2,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2022-05-31,
 		comment is 'Common predicates for generating file diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -92,9 +112,12 @@
 		::retractall(referenced_prolog_file_(Path)),
 		fail.
 	output_externals(Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
 		::retract(referenced_logtalk_file_(Path)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		^^filter_file_extension(Basename, Options, Name),
+		^^not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
+		^^filter_external_file_extension(Path, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->
@@ -103,9 +126,12 @@
 		),
 		fail.
 	output_externals(Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
 		::retract(referenced_prolog_file_(Path)),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		^^filter_file_extension(Basename, Options, Name),
+		^^not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
+		^^filter_external_file_extension(Path, Options, Name),
 		^^add_link_options(Path, Options, LinkingOptions),
 		^^omit_path_prefix(Path, Options, Relative),
 		(	member(directory_paths(true), Options) ->

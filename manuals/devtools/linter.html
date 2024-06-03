@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>linter &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>linter &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -135,7 +138,7 @@
            <div itemprop="articleBody">
              
   <section id="linter">
-<span id="library-linter"></span><h1><code class="docutils literal notranslate"><span class="pre">linter</span></code><a class="headerlink" href="#linter" title="Permalink to this heading"></a></h1>
+<span id="library-linter"></span><h1><code class="docutils literal notranslate"><span class="pre">linter</span></code><a class="headerlink" href="#linter" title="Link to this heading"></a></h1>
 <p>Logtalk provides a built-in linter tool that runs automatically when
 compiling and loading source files. The lint warnings are controlled by
 a <a class="reference external" href="../userman/programming.html#programming-flags-lint">set of flags</a>.
@@ -157,7 +160,7 @@ intended, usually result from programming issues. When a code rewrite is
 not a sensible solution to avoid the warning, the workaround is to turn
 off as locally as possible the flag that controls the warning.</p>
 <section id="main-linter-checks">
-<h2>Main linter checks<a class="headerlink" href="#main-linter-checks" title="Permalink to this heading"></a></h2>
+<h2>Main linter checks<a class="headerlink" href="#main-linter-checks" title="Link to this heading"></a></h2>
 <p>Lint checks include:</p>
 <ul class="simple">
 <li><p>Missing directives (including scope, meta-predicate, dynamic,
@@ -172,10 +175,12 @@ built-in methods)</p></li>
 built-in method)</p></li>
 <li><p>Non-portable predicate calls, predicate options, arithmetic function
 calls, directives, flags, and flag values</p></li>
+<li><p>Missing arithmetic functions (with selected backends)</p></li>
 <li><p>Suspicious calls (syntactically valid calls that are likely semantic
 errors; e.g. float comparisons using the standard arithmetic
-comparison operators)</p></li>
-<li><p>Deprecated directives, predicates, control constructs, and flags</p></li>
+comparison operators or comparing numbers using unification)</p></li>
+<li><p>Deprecated directives, predicates, arithmetic functions, control
+constructs, and flags</p></li>
 <li><p>References to unknown entities (objects, protocols, categories, or
 modules)</p></li>
 <li><p>Top-level shortcuts used as directives</p></li>
@@ -208,20 +213,22 @@ singleton variables</p></li>
 without collecting them</p></li>
 <li><p>Calls to <code class="docutils literal notranslate"><span class="pre">catch/3</span></code> that catch all exceptions</p></li>
 <li><p>Calls to standard predicates that have more efficient alternatives</p></li>
+<li><p>Unsound calls in grammar rules</p></li>
 <li><p>File, entity, predicate, and variable names not following official
 coding guidelines</p></li>
 <li><p>Variable names that differ only on case</p></li>
 <li><p>Clauses whose body is a disjunction (and that can be rewritten as
 multiple clauses per coding guidelines)</p></li>
 <li><p>Naked meta-variables in cut-transparent control constructs</p></li>
+<li><p>Left-recursion in clauses and grammar rules</p></li>
 </ul>
 <p>Additional lint checks are provided by the <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>, <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>,
 <code class="docutils literal notranslate"><span class="pre">make</span></code>, and <code class="docutils literal notranslate"><span class="pre">dead_code_scanner</span></code> tools. For large projects, the data
 generated by the <code class="docutils literal notranslate"><span class="pre">code_metrics</span></code> tool may also be relevant in accessing
-code quality.</p>
+code quality and suggesting code refactoring candidates.</p>
 </section>
 <section id="help-on-linter-warnings">
-<h2>Help on linter warnings<a class="headerlink" href="#help-on-linter-warnings" title="Permalink to this heading"></a></h2>
+<h2>Help on linter warnings<a class="headerlink" href="#help-on-linter-warnings" title="Link to this heading"></a></h2>
 <p>By loading the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool, most lint warnings are expanded with
 explanations and suggestions on how to fix the reported issues. See also
 the <a class="reference external" href="https://logtalk.org/coding_style_guidelines.html">coding
@@ -229,16 +236,17 @@ guidelines</a> for
 additional explanations.</p>
 </section>
 <section id="extending-the-linter">
-<h2>Extending the linter<a class="headerlink" href="#extending-the-linter" title="Permalink to this heading"></a></h2>
+<h2>Extending the linter<a class="headerlink" href="#extending-the-linter" title="Link to this heading"></a></h2>
 <p>Experimental support for extending the linter with user-defined warnings
 is available using the
 <a class="reference external" href="../refman/predicates/logtalk_linter_hook_7.html">logtalk_linter_hook/7</a>
-multifile hook predicate. For example, the <code class="docutils literal notranslate"><span class="pre">list</span></code> library object
-defines this hook predicate to lint calls to the <code class="docutils literal notranslate"><span class="pre">append/3</span></code> predicate
-for common misuses.</p>
+multifile hook predicate. For example, the <code class="docutils literal notranslate"><span class="pre">format</span></code> and <code class="docutils literal notranslate"><span class="pre">list</span></code>
+library objects define this hook predicate to lint calls to the
+<code class="docutils literal notranslate"><span class="pre">format/2-3</span></code> and <code class="docutils literal notranslate"><span class="pre">append/3</span></code> predicates for common errors and
+misuses.</p>
 </section>
 <section id="linting-prolog-modules">
-<h2>Linting Prolog modules<a class="headerlink" href="#linting-prolog-modules" title="Permalink to this heading"></a></h2>
+<h2>Linting Prolog modules<a class="headerlink" href="#linting-prolog-modules" title="Link to this heading"></a></h2>
 <p>This tool can also be applied to Prolog modules that Logtalk is able to
 compile as objects. For example, if the Prolog module file is named
 <code class="docutils literal notranslate"><span class="pre">module.pl</span></code>, try:</p>
@@ -250,7 +258,7 @@ of proprietary extensions, this solution is not expected to work for all
 cases.</p>
 </section>
 <section id="linting-plain-prolog-files">
-<h2>Linting plain Prolog files<a class="headerlink" href="#linting-plain-prolog-files" title="Permalink to this heading"></a></h2>
+<h2>Linting plain Prolog files<a class="headerlink" href="#linting-plain-prolog-files" title="Link to this heading"></a></h2>
 <p>This tool can also be applied to plain Prolog code. For example, if the
 Prolog file is named <code class="docutils literal notranslate"><span class="pre">code.pl</span></code>, simply define an object including its
 code:</p>
@@ -266,7 +274,7 @@ the Prolog file and then load it:</p>
 </div>
 <p>In alternative, use the <code class="docutils literal notranslate"><span class="pre">object_wrapper_hook</span></code> provided by the
 <code class="docutils literal notranslate"><span class="pre">hook_objects</span></code> library:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>([os(loader), hook_objects(object_wrapper_hook)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(loader)).
 ...
 
 | <span class="o">?-</span> <span class="k">logtalk_load</span>(code, [hook(object_wrapper_hook), source_data(on)]).
@@ -289,7 +297,7 @@ being fully checked when wrapped by an object.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

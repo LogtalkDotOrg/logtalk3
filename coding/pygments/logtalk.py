@@ -13,16 +13,18 @@ __all__ = ['LogtalkLexer']
 
 class LogtalkLexer(RegexLexer):
     """
-    For `Logtalk <https://logtalk.org/>`_ source code.
+    For Logtalk source code.
 
-    :copyright: 2008-2022 by Paulo Moura, Clara Dimene.
+    :copyright: 2008-2024 by Paulo Moura, Clara Dimene.
     :license: BSD, see LICENSE for more details.
     """
 
     name = 'Logtalk'
+    url = 'http://logtalk.org/'
     aliases = ['logtalk']
     filenames = ['*.lgt', '*.logtalk']
     mimetypes = ['text/x-logtalk']
+    version_added = '0.10'
 
     tokens = {
         'root': [
@@ -129,9 +131,9 @@ class LogtalkLexer(RegexLexer):
             (r'(>>|<<|/\\|\\\\|\\)', Operator),
             # Predicate aliases
             (r'\bas\b', Operator),
-            # Arithemtic evaluation
+            # Arithmetic evaluation
             (r'\bis\b', Keyword),
-            # Arithemtic comparison
+            # Arithmetic comparison
             (r'(=:=|=\\=|<|=<|>=|>)', Operator),
             # Term creation and decomposition
             (r'=\.\.', Operator),
@@ -142,7 +144,7 @@ class LogtalkLexer(RegexLexer):
             # Evaluable functors
             (r'(//|[-+*/])', Operator),
             (r'\b(e|pi|div|mod|rem)\b', Operator),
-            # Other arithemtic functors
+            # Other arithmetic functors
             (r'\b\*\*\b', Operator),
             # DCG rules
             (r'-->', Operator),

@@ -10,9 +10,12 @@
 
 Semi-naive bottom-up interpreter for general (stratified) logic programs. Magic transformation is realized through an expansion hook.
 
+| **Availability:** 
+|    ``logtalk_load(verdi_neruda(loader))``
+
 | **Author:** Ulf Nilsson. Ported to Logtalk and augmented with negation by Victor Lagerkvist.
-| **Version:** 1:1:2
-| **Date:** 2022-05-23
+| **Version:** 1:1:3
+| **Date:** 2023-11-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

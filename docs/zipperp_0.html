@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>zipperp &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>zipperp &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -105,11 +108,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -120,12 +125,14 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -188,8 +195,14 @@
              
   <p class="right" id="zipperp-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="zipperp">
-<h1><code class="docutils literal notranslate"><span class="pre">zipperp</span></code><a class="headerlink" href="#zipperp" title="Permalink to this heading"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">zipperp</span></code><a class="headerlink" href="#zipperp" title="Link to this heading"></a></h1>
 <p>Zipper protocol.</p>
+<div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(zippers(loader))</span></code></div>
+</div>
+</div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
@@ -254,9 +267,9 @@
 </ul>
 </nav>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="zip-2">
-<span id="zipperp-0-zip-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zip/2</span></code></a><a class="headerlink" href="#zip-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-zip-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zip/2</span></code></a><a class="headerlink" href="#zip-2" title="Link to this heading"></a></h3>
 <p>Adds a zipper to a compound term holding a sequence of elements. Fails if the sequence is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -277,7 +290,7 @@
 <hr class="docutils" />
 </section>
 <section id="zip-3">
-<span id="zipperp-0-zip-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zip/3</span></code></a><a class="headerlink" href="#zip-3" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-zip-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">zip/3</span></code></a><a class="headerlink" href="#zip-3" title="Link to this heading"></a></h3>
 <p>Adds a zipper to a compound term holding a sequence of elements. Also returns the first element. Fails if the sequence is empty.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -298,7 +311,7 @@
 <hr class="docutils" />
 </section>
 <section id="unzip-2">
-<span id="zipperp-0-unzip-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">unzip/2</span></code></a><a class="headerlink" href="#unzip-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-unzip-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">unzip/2</span></code></a><a class="headerlink" href="#unzip-2" title="Link to this heading"></a></h3>
 <p>Removes a zipper from a sequence.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -319,7 +332,7 @@
 <hr class="docutils" />
 </section>
 <section id="current-2">
-<span id="zipperp-0-current-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current/2</span></code></a><a class="headerlink" href="#current-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-current-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current/2</span></code></a><a class="headerlink" href="#current-2" title="Link to this heading"></a></h3>
 <p>Current element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -340,7 +353,7 @@
 <hr class="docutils" />
 </section>
 <section id="next-2">
-<span id="zipperp-0-next-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">next/2</span></code></a><a class="headerlink" href="#next-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-next-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">next/2</span></code></a><a class="headerlink" href="#next-2" title="Link to this heading"></a></h3>
 <p>Moves to the next element. Fails if already at the last elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -361,7 +374,7 @@
 <hr class="docutils" />
 </section>
 <section id="next-3">
-<span id="zipperp-0-next-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">next/3</span></code></a><a class="headerlink" href="#next-3" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-next-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">next/3</span></code></a><a class="headerlink" href="#next-3" title="Link to this heading"></a></h3>
 <p>Moves to and returns the next element. Fails if already at the last elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -382,7 +395,7 @@
 <hr class="docutils" />
 </section>
 <section id="previous-2">
-<span id="zipperp-0-previous-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">previous/2</span></code></a><a class="headerlink" href="#previous-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-previous-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">previous/2</span></code></a><a class="headerlink" href="#previous-2" title="Link to this heading"></a></h3>
 <p>Moves to the previous element. Fails if already at the first elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -403,7 +416,7 @@
 <hr class="docutils" />
 </section>
 <section id="previous-3">
-<span id="zipperp-0-previous-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">previous/3</span></code></a><a class="headerlink" href="#previous-3" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-previous-3"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">previous/3</span></code></a><a class="headerlink" href="#previous-3" title="Link to this heading"></a></h3>
 <p>Moves to and returns the previous element. Fails if already at the first element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -424,7 +437,7 @@
 <hr class="docutils" />
 </section>
 <section id="rewind-2">
-<span id="zipperp-0-rewind-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rewind/2</span></code></a><a class="headerlink" href="#rewind-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-rewind-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rewind/2</span></code></a><a class="headerlink" href="#rewind-2" title="Link to this heading"></a></h3>
 <p>Rewinds the zipper so that the first element becomes the current element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -445,7 +458,7 @@
 <hr class="docutils" />
 </section>
 <section id="rewind-3">
-<span id="zipperp-0-rewind-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rewind/3</span></code></a><a class="headerlink" href="#rewind-3" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-rewind-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">rewind/3</span></code></a><a class="headerlink" href="#rewind-3" title="Link to this heading"></a></h3>
 <p>Rewinds the zipper so that the first element becomes the current element. Also returns the first element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -466,7 +479,7 @@
 <hr class="docutils" />
 </section>
 <section id="forward-2">
-<span id="zipperp-0-forward-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forward/2</span></code></a><a class="headerlink" href="#forward-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-forward-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forward/2</span></code></a><a class="headerlink" href="#forward-2" title="Link to this heading"></a></h3>
 <p>Forward the zipper so that the last element becomes the current element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -487,7 +500,7 @@
 <hr class="docutils" />
 </section>
 <section id="forward-3">
-<span id="zipperp-0-forward-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forward/3</span></code></a><a class="headerlink" href="#forward-3" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-forward-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">forward/3</span></code></a><a class="headerlink" href="#forward-3" title="Link to this heading"></a></h3>
 <p>Forward the zipper so that the last element becomes the current element. Also returns the last element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -508,7 +521,7 @@
 <hr class="docutils" />
 </section>
 <section id="apply-2">
-<span id="zipperp-0-apply-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">apply/2</span></code></a><a class="headerlink" href="#apply-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-apply-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">apply/2</span></code></a><a class="headerlink" href="#apply-2" title="Link to this heading"></a></h3>
 <p>Applies a closure to the current element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -533,7 +546,7 @@
 <hr class="docutils" />
 </section>
 <section id="insert-before-3">
-<span id="zipperp-0-insert-before-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">insert_before/3</span></code></a><a class="headerlink" href="#insert-before-3" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-insert-before-3"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">insert_before/3</span></code></a><a class="headerlink" href="#insert-before-3" title="Link to this heading"></a></h3>
 <p>Inserts an element before the current one.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -554,7 +567,7 @@
 <hr class="docutils" />
 </section>
 <section id="insert-after-3">
-<span id="zipperp-0-insert-after-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">insert_after/3</span></code></a><a class="headerlink" href="#insert-after-3" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-insert-after-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">insert_after/3</span></code></a><a class="headerlink" href="#insert-after-3" title="Link to this heading"></a></h3>
 <p>Inserts an element after the current one.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -575,7 +588,7 @@
 <hr class="docutils" />
 </section>
 <section id="replace-3">
-<span id="zipperp-0-replace-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">replace/3</span></code></a><a class="headerlink" href="#replace-3" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-replace-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">replace/3</span></code></a><a class="headerlink" href="#replace-3" title="Link to this heading"></a></h3>
 <p>Replaces the current element with a new element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -596,7 +609,7 @@
 <hr class="docutils" />
 </section>
 <section id="delete-and-previous-2">
-<span id="zipperp-0-delete-and-previous-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_and_previous/2</span></code></a><a class="headerlink" href="#delete-and-previous-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-delete-and-previous-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_and_previous/2</span></code></a><a class="headerlink" href="#delete-and-previous-2" title="Link to this heading"></a></h3>
 <p>Deletes the current element and moves to the previous element. Fails if no previous element exists.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -617,7 +630,7 @@
 <hr class="docutils" />
 </section>
 <section id="delete-and-next-2">
-<span id="zipperp-0-delete-and-next-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_and_next/2</span></code></a><a class="headerlink" href="#delete-and-next-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-delete-and-next-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_and_next/2</span></code></a><a class="headerlink" href="#delete-and-next-2" title="Link to this heading"></a></h3>
 <p>Deletes the current element and moves to the next element. Fails if no next element exists.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -638,7 +651,7 @@
 <hr class="docutils" />
 </section>
 <section id="delete-and-unzip-2">
-<span id="zipperp-0-delete-and-unzip-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_and_unzip/2</span></code></a><a class="headerlink" href="#delete-and-unzip-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-delete-and-unzip-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_and_unzip/2</span></code></a><a class="headerlink" href="#delete-and-unzip-2" title="Link to this heading"></a></h3>
 <p>Deletes the current element and removes the zipper returning the resulting sequence.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -659,7 +672,7 @@
 <hr class="docutils" />
 </section>
 <section id="delete-all-before-2">
-<span id="zipperp-0-delete-all-before-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_all_before/2</span></code></a><a class="headerlink" href="#delete-all-before-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-delete-all-before-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_all_before/2</span></code></a><a class="headerlink" href="#delete-all-before-2" title="Link to this heading"></a></h3>
 <p>Deletes all elements before the current element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -680,7 +693,7 @@
 <hr class="docutils" />
 </section>
 <section id="delete-all-before-and-unzip-2">
-<span id="zipperp-0-delete-all-before-and-unzip-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_all_before_and_unzip/2</span></code></a><a class="headerlink" href="#delete-all-before-and-unzip-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-delete-all-before-and-unzip-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_all_before_and_unzip/2</span></code></a><a class="headerlink" href="#delete-all-before-and-unzip-2" title="Link to this heading"></a></h3>
 <p>Deletes all elements before the current element and removes the zipper returning the resulting sequence.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -701,7 +714,7 @@
 <hr class="docutils" />
 </section>
 <section id="delete-all-after-2">
-<span id="zipperp-0-delete-all-after-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_all_after/2</span></code></a><a class="headerlink" href="#delete-all-after-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-delete-all-after-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_all_after/2</span></code></a><a class="headerlink" href="#delete-all-after-2" title="Link to this heading"></a></h3>
 <p>Deletes all elements after the current element.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -722,7 +735,7 @@
 <hr class="docutils" />
 </section>
 <section id="delete-all-after-and-unzip-2">
-<span id="zipperp-0-delete-all-after-and-unzip-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_all_after_and_unzip/2</span></code></a><a class="headerlink" href="#delete-all-after-and-unzip-2" title="Permalink to this heading"></a></h3>
+<span id="zipperp-0-delete-all-after-and-unzip-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">delete_all_after_and_unzip/2</span></code></a><a class="headerlink" href="#delete-all-after-and-unzip-2" title="Link to this heading"></a></h3>
 <p>Deletes all elements after the current element and removes the zipper returning the resulting sequence.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -744,15 +757,15 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -772,7 +785,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

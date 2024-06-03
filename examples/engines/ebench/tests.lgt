@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2019-01-19,
+		date is 2024-02-08,
 		comment is 'Unit tests for the "ebench" example.'
 	]).
 

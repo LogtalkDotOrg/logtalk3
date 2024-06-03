@@ -23,51 +23,45 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2010-03-16,
+		date is 2024-01-15,
 		comment is 'Unit tests for the "threads/nondet" example.'
 	]).
 
 	:- threaded.
 
-	test(nondet_01) :-
+	test(nondet_01, true) :-
 		threaded_call(lists::member(_, [1,2,3])).
 
-	test(nondet_02) :-
-		findall(X, threaded_exit(lists::member(X, [1,2,3])), Xs),
-		Xs == [1, 2, 3].
+	test(nondet_02, true(Xs == [1, 2, 3])) :-
+		findall(X, threaded_exit(lists::member(X, [1,2,3])), Xs).
 
-	test(nondet_03) :-
+	test(nondet_03, true) :-
 		threaded_once(lists::member(_, [1,2,3])).
 
-	test(nondet_04) :-
-		findall(X, threaded_exit(lists::member(X, [1,2,3])), Xs),
-		Xs == [1].
+	test(nondet_04, true(Xs == [1])) :-
+		findall(X, threaded_exit(lists::member(X, [1,2,3])), Xs).
 
-	test(nondet_05) :-
+	test(nondet_05, true) :-
 		threaded_call(lists::member(_, [1,2,3])),
 		threaded_call(lists::member(_, [1,2,3])).
 
-	test(nondet_06) :-
-		findall(X, threaded_exit(lists::member(X, [1,2,3])), Xs),
-		Xs == [1, 2, 3].
+	test(nondet_06, true(Xs == [1, 2, 3])) :-
+		findall(X, threaded_exit(lists::member(X, [1,2,3])), Xs).
 
-	test(nondet_07) :-
-		findall(X, threaded_exit(lists::member(X, [1,2,3])), Xs),
-		Xs == [1, 2, 3].
+	test(nondet_07, true(Xs == [1, 2, 3])) :-
+		findall(X, threaded_exit(lists::member(X, [1,2,3])), Xs).
 
-	test(nondet_08) :-
+	test(nondet_08, true(Xs == [1, 2, 3])) :-
 		threaded_call(lists::member(_, [1,2,3]), _),
 		threaded_call(lists::member(_, [1,2,3]), Tag),
-		findall(X, threaded_exit(lists::member(X, [1,2,3]), Tag), Xs),
-		Xs == [1, 2, 3].
+		findall(X, threaded_exit(lists::member(X, [1,2,3]), Tag), Xs).
 
-	test(nondet_09) :-
+	test(nondet_09, true) :-
 		threaded_call(lists::member(_, [1,2,3,2])).
 
-	test(nondet_10) :-
-		findall(1, threaded_exit(lists::member(2, [1,2,3,2])), L),
-		L == [1, 1].
+	test(nondet_10, true(L == [1, 1])) :-
+		findall(1, threaded_exit(lists::member(2, [1,2,3,2])), L).
 
 :- end_object.

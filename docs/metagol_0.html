@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>metagol &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>metagol &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -105,6 +108,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
@@ -114,6 +118,7 @@
 <li class="toctree-l3"><a class="reference internal" href="metagol_example_protocol_0.html">metagol_example_protocol</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -124,12 +129,14 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -188,16 +195,22 @@
              
   <p class="right" id="metagol-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="metagol">
-<h1><code class="docutils literal notranslate"><span class="pre">metagol</span></code><a class="headerlink" href="#metagol" title="Permalink to this heading"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">metagol</span></code><a class="headerlink" href="#metagol" title="Link to this heading"></a></h1>
 <p>Inductive logic programming (ILP) system based on meta-interpretive learning.</p>
 <div class="line-block">
-<div class="line"><strong>Author:</strong> Metagol authors; adapted to Logtalk by Paulo Moura.</div>
-<div class="line"><strong>Version:</strong> 0:24:1</div>
-<div class="line"><strong>Date:</strong> 2020-12-20</div>
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(metagol(loader))</span></code></div>
+</div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Copyright:</strong> Copyright 2016 Metagol authors; Copyright 2018-2019 Paulo Moura</div>
-<div class="line"><strong>License:</strong> BSD 3-Clause License</div>
+<div class="line"><strong>Author:</strong> Metagol authors; adapted to Logtalk by Paulo Moura.</div>
+<div class="line"><strong>Version:</strong> 0:24:4</div>
+<div class="line"><strong>Date:</strong> 2024-03-15</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Copyright:</strong> Copyright 2016 Metagol authors; Copyright 2018-2024 Paulo Moura</div>
+<div class="line"><strong>License:</strong> BSD-3-Clause</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -222,7 +235,6 @@
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0"><span class="std std-ref">logtalk</span></a></div>
 <div class="line"><a class="reference internal" href="meta_0.html#meta-0"><span class="std std-ref">meta</span></a></div>
-<div class="line"><a class="reference internal" href="pairs_0.html#pairs-0"><span class="std std-ref">pairs</span></a></div>
 <div class="line"><a class="reference internal" href="timeout_0.html#timeout-0"><span class="std std-ref">timeout</span></a></div>
 </div>
 </div>
@@ -275,9 +287,9 @@
 </ul>
 </nav>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="learn-3">
-<span id="metagol-0-learn-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a><a class="headerlink" href="#learn-3" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-learn-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/3</span></code></a><a class="headerlink" href="#learn-3" title="Link to this heading"></a></h3>
 <p>Learns from a set of positive examples and a set of negative examples and returns the learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -298,7 +310,7 @@
 <hr class="docutils" />
 </section>
 <section id="learn-2">
-<span id="metagol-0-learn-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/2</span></code></a><a class="headerlink" href="#learn-2" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-learn-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn/2</span></code></a><a class="headerlink" href="#learn-2" title="Link to this heading"></a></h3>
 <p>Learns from a set of positive examples and a set of negative examples and pretty prints the learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -319,7 +331,7 @@
 <hr class="docutils" />
 </section>
 <section id="learn-seq-2">
-<span id="metagol-0-learn-seq-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn_seq/2</span></code></a><a class="headerlink" href="#learn-seq-2" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-learn-seq-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn_seq/2</span></code></a><a class="headerlink" href="#learn-seq-2" title="Link to this heading"></a></h3>
 <p>Learns from a sequence of examples represented as a list of PositiveExamples/NegativeExamples elements and returns the learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -340,8 +352,8 @@
 <hr class="docutils" />
 </section>
 <section id="learn-with-timeout-4">
-<span id="metagol-0-learn-with-timeout-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn_with_timeout/4</span></code></a><a class="headerlink" href="#learn-with-timeout-4" title="Permalink to this heading"></a></h3>
-<p>Learns from a set of positive examples and a set of negative examples and returns the learned program.</p>
+<span id="metagol-0-learn-with-timeout-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">learn_with_timeout/4</span></code></a><a class="headerlink" href="#learn-with-timeout-4" title="Link to this heading"></a></h3>
+<p>Learns from a set of positive examples and a set of negative examples and returns the learned program constrained by the given timeout or its default value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -355,13 +367,23 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_with_timeout(&#64;list(example),&#64;list(example),-list(term),+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_with_timeout(&#64;list(example),&#64;list(example),-list(term),+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">learn_with_timeout(&#64;list(example),&#64;list(example),-list(term),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Learning does not complete in the allowed time:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timeout(learn(PositiveExamples,NegativeExamples,Program))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="program-to-clauses-2">
-<span id="metagol-0-program-to-clauses-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">program_to_clauses/2</span></code></a><a class="headerlink" href="#program-to-clauses-2" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-program-to-clauses-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">program_to_clauses/2</span></code></a><a class="headerlink" href="#program-to-clauses-2" title="Link to this heading"></a></h3>
 <p>Converts a learned program into a list of clauses.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -382,7 +404,7 @@
 <hr class="docutils" />
 </section>
 <section id="pprint-1">
-<span id="metagol-0-pprint-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pprint/1</span></code></a><a class="headerlink" href="#pprint-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-pprint-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pprint/1</span></code></a><a class="headerlink" href="#pprint-1" title="Link to this heading"></a></h3>
 <p>Pretty prints a learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -403,7 +425,7 @@
 <hr class="docutils" />
 </section>
 <section id="metarule-6">
-<span id="metagol-0-metarule-6"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">metarule/6</span></code></a><a class="headerlink" href="#metarule-6" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-metarule-6"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">metarule/6</span></code></a><a class="headerlink" href="#metarule-6" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -413,7 +435,7 @@
 <hr class="docutils" />
 </section>
 <section id="head-pred-1">
-<span id="metagol-0-head-pred-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">head_pred/1</span></code></a><a class="headerlink" href="#head-pred-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-head-pred-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">head_pred/1</span></code></a><a class="headerlink" href="#head-pred-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -423,7 +445,7 @@
 <hr class="docutils" />
 </section>
 <section id="body-pred-1">
-<span id="metagol-0-body-pred-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code></a><a class="headerlink" href="#body-pred-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-body-pred-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code></a><a class="headerlink" href="#body-pred-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -433,7 +455,7 @@
 <hr class="docutils" />
 </section>
 <section id="ibk-3">
-<span id="metagol-0-ibk-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ibk/3</span></code></a><a class="headerlink" href="#ibk-3" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-ibk-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ibk/3</span></code></a><a class="headerlink" href="#ibk-3" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -443,7 +465,7 @@
 <hr class="docutils" />
 </section>
 <section id="func-test-3">
-<span id="metagol-0-func-test-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code></a><a class="headerlink" href="#func-test-3" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-func-test-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code></a><a class="headerlink" href="#func-test-3" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -453,7 +475,7 @@
 <hr class="docutils" />
 </section>
 <section id="functional-0">
-<span id="metagol-0-functional-0"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">functional/0</span></code></a><a class="headerlink" href="#functional-0" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-functional-0"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">functional/0</span></code></a><a class="headerlink" href="#functional-0" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -463,7 +485,7 @@
 <hr class="docutils" />
 </section>
 <section id="min-clauses-1">
-<span id="metagol-0-min-clauses-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code></a><a class="headerlink" href="#min-clauses-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-min-clauses-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code></a><a class="headerlink" href="#min-clauses-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -473,7 +495,7 @@
 <hr class="docutils" />
 </section>
 <section id="max-clauses-1">
-<span id="metagol-0-max-clauses-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code></a><a class="headerlink" href="#max-clauses-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-max-clauses-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code></a><a class="headerlink" href="#max-clauses-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -483,7 +505,7 @@
 <hr class="docutils" />
 </section>
 <section id="max-inv-preds-1">
-<span id="metagol-0-max-inv-preds-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code></a><a class="headerlink" href="#max-inv-preds-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-max-inv-preds-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code></a><a class="headerlink" href="#max-inv-preds-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -493,7 +515,7 @@
 <hr class="docutils" />
 </section>
 <section id="metarule-next-id-1">
-<span id="metagol-0-metarule-next-id-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code></a><a class="headerlink" href="#metarule-next-id-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-metarule-next-id-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code></a><a class="headerlink" href="#metarule-next-id-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -503,7 +525,7 @@
 <hr class="docutils" />
 </section>
 <section id="timeout-1">
-<span id="metagol-0-timeout-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">timeout/1</span></code></a><a class="headerlink" href="#timeout-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-timeout-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">timeout/1</span></code></a><a class="headerlink" href="#timeout-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -514,9 +536,9 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <section id="pprint-clause-1">
-<span id="metagol-0-pprint-clause-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pprint_clause/1</span></code></a><a class="headerlink" href="#pprint-clause-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-pprint-clause-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pprint_clause/1</span></code></a><a class="headerlink" href="#pprint-clause-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -526,7 +548,7 @@
 <hr class="docutils" />
 </section>
 <section id="pprint-clauses-1">
-<span id="metagol-0-pprint-clauses-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pprint_clauses/1</span></code></a><a class="headerlink" href="#pprint-clauses-1" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-pprint-clauses-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pprint_clauses/1</span></code></a><a class="headerlink" href="#pprint-clauses-1" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -536,7 +558,7 @@
 <hr class="docutils" />
 </section>
 <section id="compiled-pred-call-2">
-<span id="metagol-0-compiled-pred-call-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compiled_pred_call/2</span></code></a><a class="headerlink" href="#compiled-pred-call-2" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-compiled-pred-call-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compiled_pred_call/2</span></code></a><a class="headerlink" href="#compiled-pred-call-2" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -546,7 +568,7 @@
 <hr class="docutils" />
 </section>
 <section id="body-pred-call-2">
-<span id="metagol-0-body-pred-call-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body_pred_call/2</span></code></a><a class="headerlink" href="#body-pred-call-2" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-body-pred-call-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body_pred_call/2</span></code></a><a class="headerlink" href="#body-pred-call-2" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -556,7 +578,7 @@
 <hr class="docutils" />
 </section>
 <section id="type-3">
-<span id="metagol-0-type-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">type/3</span></code></a><a class="headerlink" href="#type-3" title="Permalink to this heading"></a></h3>
+<span id="metagol-0-type-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">type/3</span></code></a><a class="headerlink" href="#type-3" title="Link to this heading"></a></h3>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -567,11 +589,11 @@
 </section>
 <hr class="docutils" />
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="operators">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 </section>
@@ -587,7 +609,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

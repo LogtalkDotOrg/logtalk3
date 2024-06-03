@@ -10,6 +10,9 @@
 
 CSV files reading and writing predicates using the options Header - ``keep``, Separator - ``comma``, and IgnoreQuotes - ``false``.
 
+| **Availability:** 
+|    ``logtalk_load(csv(loader))``
+
 | **Author:** Jacinto Dávila
 | **Version:** 1:0:0
 | **Date:** 2021-02-02

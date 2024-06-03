@@ -114,7 +114,7 @@ not listed, see the dependency websites for installation instructions.
 - `issue_creator`: `gh`, `glab`
 - `lgtdoc`: Sphinx, `libxslt`, `fop`
 - `lgtunit`: Allure
-- `packs`: `coreutils`, `libarchive`, `gnupg2`, `git`
+- `packs`: `coreutils`, `libarchive`, `gnupg2`, `git`, `curl`, `direnv`
 
 ### Python dependencies (all operating-systems)
 
@@ -127,7 +127,7 @@ not listed, see the dependency websites for installation instructions.
 	$ sudo port install graphviz
 	$ sudo port install texinfo
 	$ sudo port install libxslt fop
-	$ sudo port install coreutils libarchive gnupg2 git
+	$ sudo port install coreutils libarchive gnupg2 git curl direnv
 	$ sudo port install gh glab
 
 ### macOS - Homebrew
@@ -136,7 +136,7 @@ not listed, see the dependency websites for installation instructions.
 	$ brew install texinfo
 	$ brew install libxslt fop
 	$ brew install allure
-	$ brew install coreutils libarchive gnupg2 git
+	$ brew install coreutils libarchive gnupg2 git curl direnv
 	$ brew install gh glab
 
 ### Ubuntu
@@ -145,13 +145,13 @@ not listed, see the dependency websites for installation instructions.
 	$ sudo apt install info
 	$ sudo apt install xsltproc fop
 	$ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
-	$ sudo apt install libarchive-tools gnupg2 git
+	$ sudo apt install libarchive-tools gnupg2 git curl direnv
 
 ### RedHat
 
 	$ sudo dnf install graphviz
 	$ sudo dnf install libxslt fop
-	$ sudo dnf install bsdtar gnupg2 git
+	$ sudo dnf install bsdtar gnupg2 git curl direnv
 
 ### Windows - Chocolatey
 
@@ -168,3 +168,7 @@ https://www.gnupg.org/
 https://gitforwindows.org  
 https://cli.github.com  
 https://glab.readthedocs.io
+
+### Windows - PowerShell add-ons
+
+	PS> Install-Module -Name Set-PsEnv

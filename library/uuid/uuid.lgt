@@ -36,9 +36,9 @@
 	uuid_v1([Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID) :-
 		iso8601::date(Start, 1582, 10, 15),
 		iso8601::date(Current, _, _, _),
-		SecondsBetweenEpocs is (Current - Start) * 86400,
+		SecondsBetweenEpochs is (Current - Start) * 86400,
 		os::date_time(_, _, _, Hours, Minutes, Seconds, Milliseconds),
-		HundredsOfNanoseconds is (SecondsBetweenEpocs + Hours*3600 + Minutes*60 + Seconds + Milliseconds//1000) * 10000000,
+		HundredsOfNanoseconds is (SecondsBetweenEpochs + Hours*3600 + Minutes*60 + Seconds + Milliseconds//1000) * 10000000,
 		TimeLow is HundredsOfNanoseconds /\ 0xffffffff,
 		TimeMid is (HundredsOfNanoseconds >> 32) /\ 0xffff,
 		TimeHiAndVersion is ((HundredsOfNanoseconds >> 48) /\ 0x0fff) \/ 0b0001000000000000,
@@ -87,15 +87,15 @@
 		codes_to_uuid(_Representation_, Codes, UUID).
 
 	bytes_to_uuid(Sequence1, Sequence2, Sequence3, Sequence4, Sequence5) -->
-		bytes_to_hexdecimal_codes(Sequence1),
+		bytes_to_hexadecimal_codes(Sequence1),
 		[0'-],
-		bytes_to_hexdecimal_codes(Sequence2),
+		bytes_to_hexadecimal_codes(Sequence2),
 		[0'-],
-		bytes_to_hexdecimal_codes(Sequence3),
+		bytes_to_hexadecimal_codes(Sequence3),
 		[0'-],
-		bytes_to_hexdecimal_codes(Sequence4),
+		bytes_to_hexadecimal_codes(Sequence4),
 		[0'-],
-		bytes_to_hexdecimal_codes(Sequence5).
+		bytes_to_hexadecimal_codes(Sequence5).
 
 	codes_to_uuid(atom, Codes, UUID) :-
 		atom_codes(UUID, Codes).
@@ -115,33 +115,33 @@
 
 	% auxiliary predicates
 
-	bytes_to_hexdecimal_codes([]) -->
+	bytes_to_hexadecimal_codes([]) -->
 		[].
-	bytes_to_hexdecimal_codes([Byte| Bytes]) -->
-		byte_to_hexdecimal_codes(Byte),
-		bytes_to_hexdecimal_codes(Bytes).
+	bytes_to_hexadecimal_codes([Byte| Bytes]) -->
+		byte_to_hexadecimal_codes(Byte),
+		bytes_to_hexadecimal_codes(Bytes).
 
-	byte_to_hexdecimal_codes(Byte) -->
+	byte_to_hexadecimal_codes(Byte) -->
 		{Code1 is Byte div 16, Code2 is Byte rem 16},
-		decimal_hexdecimal_code(Code1),
-		decimal_hexdecimal_code(Code2).
+		decimal_hexadecimal_code(Code1),
+		decimal_hexadecimal_code(Code2).
 
-	decimal_hexdecimal_code( 0) --> [0'0].
-	decimal_hexdecimal_code( 1) --> [0'1].
-	decimal_hexdecimal_code( 2) --> [0'2].
-	decimal_hexdecimal_code( 3) --> [0'3].
-	decimal_hexdecimal_code( 4) --> [0'4].
-	decimal_hexdecimal_code( 5) --> [0'5].
-	decimal_hexdecimal_code( 6) --> [0'6].
-	decimal_hexdecimal_code( 7) --> [0'7].
-	decimal_hexdecimal_code( 8) --> [0'8].
-	decimal_hexdecimal_code( 9) --> [0'9].
-	decimal_hexdecimal_code(10) --> [0'a].
-	decimal_hexdecimal_code(11) --> [0'b].
-	decimal_hexdecimal_code(12) --> [0'c].
-	decimal_hexdecimal_code(13) --> [0'd].
-	decimal_hexdecimal_code(14) --> [0'e].
-	decimal_hexdecimal_code(15) --> [0'f].
+	decimal_hexadecimal_code( 0) --> [0'0].
+	decimal_hexadecimal_code( 1) --> [0'1].
+	decimal_hexadecimal_code( 2) --> [0'2].
+	decimal_hexadecimal_code( 3) --> [0'3].
+	decimal_hexadecimal_code( 4) --> [0'4].
+	decimal_hexadecimal_code( 5) --> [0'5].
+	decimal_hexadecimal_code( 6) --> [0'6].
+	decimal_hexadecimal_code( 7) --> [0'7].
+	decimal_hexadecimal_code( 8) --> [0'8].
+	decimal_hexadecimal_code( 9) --> [0'9].
+	decimal_hexadecimal_code(10) --> [0'a].
+	decimal_hexadecimal_code(11) --> [0'b].
+	decimal_hexadecimal_code(12) --> [0'c].
+	decimal_hexadecimal_code(13) --> [0'd].
+	decimal_hexadecimal_code(14) --> [0'e].
+	decimal_hexadecimal_code(15) --> [0'f].
 
 	random_bytes(N, Bytes) :-
 		catch(open('/dev/urandom', read, Stream, [type(binary)]), _, fail),

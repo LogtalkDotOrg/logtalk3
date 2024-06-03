@@ -226,6 +226,10 @@ Follows a short description of each included example (in alphabetical order):
 - `hailstone`  
 	example of computing Hailstone sequences
 
+- `haunted_wasteland`  
+	solution for the Advent of Code 2023 Day 8 problem; illustrates the
+	use of the `dictionaries` and `grammars` libraries plus cyclic terms
+
 - `hello_world`  
 	the unavoidable "hello world" programming example
 
@@ -439,6 +443,10 @@ Follows a short description of each included example (in alphabetical order):
 - `scopes`  
 	simple example illustrating predicate scope semantics
 
+- `scratchcards`  
+	solution for the Advent of Code 2023 Day 4 problem; illustrates the
+	use of the `dictionaries` and `grammars` libraries
+
 - `searching`  
 	state-space searching framework
 	(this example includes some code adapted from Ivan Bratko's "Prolog
@@ -491,6 +499,10 @@ Follows a short description of each included example (in alphabetical order):
 	several simple examples of multi-threading programming, some of
 	them intended only for benchmarking multi-threading Prolog compilers
 	(requires Logtalk to be run with a multi-threaded backend)
+
+- `trebuchet`  
+	solution for the Advent of Code 2023 Day 1 problem; illustrates the
+	use of push-bask lists in DCGs
 
 - `units`  
 	Logtalk version of a GNU Prolog/CX parametric unit example

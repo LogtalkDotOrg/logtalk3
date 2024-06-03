@@ -10,9 +10,12 @@
 
 Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.
 
+| **Availability:** 
+|    ``logtalk_load(random(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 3:0:0
-| **Date:** 2021-02-21
+| **Version:** 3:3:0
+| **Date:** 2023-11-24
 
 | **Compilation flags:**
 |    ``static``
@@ -107,6 +110,63 @@ Returns a random member of a list and the rest of the list. Fails if the list is
 |    ``select(Random,List,Rest)``
 | **Mode and number of proofs:**
 |    ``select(-term,+list(term),-list(term))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: select/4
+.. _random_protocol/0::select/4:
+
+``select/4``
+^^^^^^^^^^^^
+
+Returns a random member of a list, replacing it with a new element and returning the resulting list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select(Random,OldList,New,NewList)``
+| **Mode and number of proofs:**
+|    ``select(-term,+list(term),@term,-list(term))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: swap/2
+.. _random_protocol/0::swap/2:
+
+``swap/2``
+^^^^^^^^^^
+
+Swaps two randomly selected elements of a list. Fails if the list is empty or contains a single element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``swap(OldList,NewList)``
+| **Mode and number of proofs:**
+|    ``swap(-term,+list(term))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: swap_consecutive/2
+.. _random_protocol/0::swap_consecutive/2:
+
+``swap_consecutive/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Swaps two randomly selected consecutive elements of a list. Fails if the list is empty or contains a single element.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``swap_consecutive(OldList,NewList)``
+| **Mode and number of proofs:**
+|    ``swap_consecutive(-term,+list(term))`` - ``zero_or_one``
 
 
 ------------

@@ -5,10 +5,10 @@
 ##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on April 9, 2022
+##   Last updated on January 9, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.4"
+	echo "$(basename "$0") 0.11"
 	exit 0
 }
 
@@ -103,16 +103,19 @@ temporary=""
 paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 compile="false"
+foreign="false"
+encrypt="false"
 
 usage_help()
 {
 	echo 
-	echo "This script creates a LVM logtalk.pl file with the Logtalk compiler and"
-	echo "runtime and an optional application.pl file from an application source"
-	echo "code given its loader file."
+	echo "This script creates a LVM logtalk.pl file with the Logtalk compiler/runtime"
+	echo "and an optional application.pl file from an application source code given"
+	echo "its loader file. When embedding an application, this script also creates a"
+	echo "loader.pl file for loading all generated Prolog and foreign library files."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-f] [-x]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -121,14 +124,16 @@ usage_help()
 	echo "  -d directory for generated Prolog files (absolute path; default is current directory)"
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -p library paths file (absolute path; default is $paths)"
-	echo "  -s settings file (absolute path; default is $settings)"
+	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
+	echo "  -f copy foreign library files loaded by the application"
+	echo "  -x encrypt the generated logtalk.pl and application.pl files"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }
 
-while getopts "cd:t:p:l:s:vh" option
+while getopts "cd:t:p:l:s:fxvh" option
 do
 	case $option in
 		c) compile="true";;
@@ -137,6 +142,8 @@ do
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		f) foreign="true";;
+		x) encrypt="true";;
 		v) print_version;;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
@@ -160,15 +167,15 @@ if [ "$p_arg" != "" ] ; then
 	fi
 fi
 
-if [ "$s_arg" != "" ] ; then
+if [ "$s_arg" != "" ] && [ "$s_arg" != "none" ] ; then
 	if [ -f "$s_arg" ] ; then
 		settings="$s_arg"
 	else
 		echo "The $s_arg settings file does not exist!" >&2
 		exit 1
 	fi
-else
-	settings=""
+elif [ "$s_arg" == "none" ] ; then
+	settings="none"
 fi
 
 if [ "$l_arg" != "" ] ; then
@@ -209,23 +216,31 @@ else
 	extension=''
 fi
 
+# use GNU sed if available instead of BSD sed
+if gsed --version >/dev/null 2>&1 ; then
+	sed="gsed"
+else
+	sed="sed"
+fi
+
 cp "$LOGTALKHOME/adapters/lvm.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
 lvmlgt$extension --goal "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')]),halt."
 
-if [ "$compile" != "false" ] ; then
-	lvmlgt$extension --goal "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt."
+if [ "$compile" = "true" ] ; then
+	lvmlgt$extension --goal "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt."
 else
 	cp "$paths" "$temporary/paths_lgt.pl"
 fi
 
-if [ "$settings" != "" ] ; then
-	if [ "$compile" != "false" ] ; then
-		lvmlgt$extension --goal "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt."
+if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
+	if [ "$compile" = "true" ] ; then
+		lvmlgt$extension --goal "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt."
 	else
 		lvmlgt$extension --goal "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt."
 	fi
+	$sed -i "s/settings_file, allow/settings_file, deny/" lvm.pl
 	cat \
 		lvm.pl \
 		paths*.pl \
@@ -255,8 +270,30 @@ fi
 if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
-	lvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
+	if [ "$foreign" = "true" ] ; then
+		lvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),forall((current_plugin(PlugIn),plugin_property(PlugIn,file(File))),(decompose_file_name(File,_,Basename),atom_concat('$directory/',Basename,Copy),copy_file(File,Copy))),halt."
+	else
+		lvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
+	fi
 	cat $(ls -rt *.pl) > "$directory"/application.pl
+
+	echo ":- initialization((" > "$directory"/loader.pl
+	if [ "$encrypt" = "true" ] ; then
+		lvmpl --goal "encrypt_program('$directory/logtalk.pl'),halt."
+		lvmpl --goal "encrypt_program('$directory/application.pl'),halt."
+		rm "$directory"/logtalk.pl
+		rm "$directory"/application.pl
+	fi
+	if [ "$foreign" = "true" ] ; then
+		lvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(report,off),logtalk_load('$loader'),open('$directory/loader.pl',append,Stream),forall((current_plugin(PlugIn),plugin_property(PlugIn,file(File))),(decompose_file_name(File,_,Basename,_),format(Stream,'\tload_foreign_library(~q),~n',[Basename]))),close(Stream),halt."
+	fi
+	echo "	consult(logtalk)," >> "$directory"/loader.pl
+	echo "	consult(application)" >> "$directory"/loader.pl
+	echo "))." >> "$directory"/loader.pl
+	if [ "$encrypt" = "true" ] ; then
+		lvmpl --goal "encrypt_program('$directory/loader.pl'),halt."
+		rm "$directory"/loader.pl
+	fi
 fi
 
 function cleanup {

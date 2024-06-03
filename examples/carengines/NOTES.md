@@ -21,5 +21,5 @@ ________________________________________________________________________
 To load this example and for sample queries, please see the `SCRIPT.txt`
 file.
 
-For a description of this example, please see the comments in the 
+For a description of this example, please see the comments in the
 `carengines.lgt` source file.

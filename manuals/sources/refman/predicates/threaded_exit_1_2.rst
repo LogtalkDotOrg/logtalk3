@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -74,8 +74,8 @@ Errors
 |     ``instantiation_error``
 | ``Goal`` is neither a variable nor a callable term:
 |     ``type_error(callable, Goal)``
-| No thread is running for proving ``Goal``:
-|     ``existence_error(goal_thread, Goal)``
+| No thread is running for proving ``Goal`` in the ``Object`` calling context:
+|     ``existence_error(thread, Object)``
 | ``Tag`` is a variable:
 |     ``instantiation_error``
 

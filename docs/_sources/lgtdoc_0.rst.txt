@@ -10,9 +10,12 @@
 
 Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.
 
+| **Availability:** 
+|    ``logtalk_load(lgtdoc(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 9:3:1
-| **Date:** 2023-06-23
+| **Version:** 11:0:1
+| **Date:** 2024-05-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

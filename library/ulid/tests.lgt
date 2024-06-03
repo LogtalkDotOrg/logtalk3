@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2023-05-24,
+		date is 2024-03-16,
 		comment is 'Unit tests for the "ulid" library.'
 	]).
 
@@ -45,9 +45,11 @@
 
 	test(ulid_generate_1_monotonic_sort_order, true(ULIDs == SortedULIDs)) :-
 		% per spec, within the same millisecond, monotonic sort order is not guaranteed
+		% sleep 1.1 seconds between generating new ULIDs as some backends don't provide
+		% millisecond accurancy
 		findall(
 			ULID,
-			(integer::between(1, 10, _), ulid(atom)::generate(ULID), os::sleep(1)),
+			(integer::between(1, 10, _), ulid(atom)::generate(ULID), os::sleep(1.1)),
 			ULIDs
 		),
 		sort(ULIDs, SortedULIDs).

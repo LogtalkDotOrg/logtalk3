@@ -20,13 +20,13 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
-This folder contains an example that shows how to implement class variables 
+This folder contains an example that shows how to implement class variables
 as defined in Smalltalk. The name shared instance variables is however much
-more accurate. In systems like Logtalk, which enables the use of explicit 
-metaclasses, true class variables are just the class (as an object) own 
+more accurate. In systems like Logtalk, which enables the use of explicit
+metaclasses, true class variables are just the class (as an object) own
 instance variables!
 
-This example defines a root class, `root` and three instances, `instance1`, 
-`instance2`, and `instance3`. The root class defines a shared instance variable 
-(using a dynamic predicate) and the setter and getter methods which implement 
+This example defines a root class, `root` and three instances, `instance1`,
+`instance2`, and `instance3`. The root class defines a shared instance variable
+(using a dynamic predicate) and the setter and getter methods which implement
 the variable sharing behavior.

@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,13 +31,11 @@ Description
 
 ::
 
-   threaded(Goals)
-
    threaded(Conjunction)
    threaded(Disjunction)
 
-Proves each goal in a conjunction (disjunction) of goals in its own
-thread. This predicate is deterministic and opaque to cuts. The
+Proves each goal in a conjunction or a disjunction of goals in its own
+thread. This meta-predicate is deterministic and opaque to cuts. The
 predicate argument is **not** flattened.
 
 When the argument is a conjunction of goals, a call to this predicate
@@ -45,18 +43,24 @@ blocks until either all goals succeed, one of the goals fail, or one of
 the goals generate an exception; the failure of one of the goals or an
 exception on the execution of one of the goals results in the
 termination of the remaining threads. The predicate call is true *iff*
-all goals are true.
+all goals are true. The predicate call fails if all goals fails. When
+one of the goals throw an exception, the predicate call re-throws that
+exception.
 
 When the argument is a disjunction of goals, a call to this predicate
-blocks until either one of the goals succeeds, all the goals fail, or
-one of the goals generate an exception; the success of one of the goals
-or an exception on the execution of one of the goals results in the
+blocks until either one of the goals succeeds or all the goals fail or
+throw exceptions; the success of one of the goals results in the
 termination of the remaining threads. The predicate call is true *iff*
-one of the goals is true.
+one of the goals is true. The predicate call fails if all goals fails.
+When no goal succeeds and one of the goals throws an exception, the
+predicate call re-throws that exception.
 
 When the predicate argument is neither a conjunction not a disjunction
 of goals, no threads are used. In this case, the predicate call is
 equivalent to a ``once/1`` predicate call.
+
+A dedicated message queue is used per call of this predicate to collect
+the individual goal results.
 
 .. note::
 
@@ -64,6 +68,13 @@ equivalent to a ``once/1`` predicate call.
    compatible multi-threading primitives. The value of the read-only
    :ref:`threads <flag_threads>` flag is set to ``supported`` when that
    is the case.
+
+Meta-predicate template
+-----------------------
+
+::
+
+   threaded(0)
 
 Modes and number of proofs
 --------------------------

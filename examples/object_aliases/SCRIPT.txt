@@ -35,7 +35,8 @@ Total = 42
 yes
 
 
-% demonstration of using aliases for parametric objects:
+% demonstration of using aliases for objects defined at runtime
+% using parameters:
 
 | ?- simple(<)::insert_top([3-c,1-a,2-b], Top).
 

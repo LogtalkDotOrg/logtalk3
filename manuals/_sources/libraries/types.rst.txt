@@ -4,7 +4,7 @@
 =========
 
 This library implements predicates over standard Prolog term types and
-also term representing common data structures such as lists and pairs.
+also terms representing common data structures such as lists and pairs.
 
 It also includes a user-extensible ``type`` object defining type
 checking predicates over common Logtalk and Prolog term types. The types
@@ -53,7 +53,8 @@ Type-checking
 -------------
 
 This library ``type`` object can be used to type-check common Logtalk
-and Prolog term types. The ``valid/2`` predicate succeeds or fails if a
+and Prolog term types (see the object documentation for a listing of all
+the pre-defined types). The ``valid/2`` predicate succeeds or fails if a
 term is of a given type. For example:
 
 ::
@@ -88,8 +89,9 @@ method.
 Defining new types
 ------------------
 
-To define a custom type, define clauses for both the ``type::type/1``
-and ``type::check/2`` multifile predicates. For example:
+To define a custom type, define clauses for the multifile predicates
+``type::type/1`` (to declare the type) and ``type::check/2`` (to
+type-check values). For example:
 
 ::
 
@@ -102,7 +104,8 @@ and ``type::check/2`` multifile predicates. For example:
 
 Be careful to ensure that new type definitions don't introduce spurious
 choice-points for these predicates. The unit tests of the ``types``
-library perform this check for ground types.
+library perform this check for pre-defined and loaded user-defined
+ground types.
 
 When defining a meta-type (i.e. a type with arguments that are also
 types), add also a clause for the ``type::meta_type/3`` multifile

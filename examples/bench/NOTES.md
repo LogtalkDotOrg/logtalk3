@@ -30,6 +30,11 @@ features of modern day Prolog and Logtalk programming (e.g. meta-predicates).
 All plain Prolog programs define a `top/0` predicate to run the benchmark.
 The Logtalk versions provide a `top/0` public predicate.
 
+Some of the benchmarks have dependencies on some built-in predicates that
+are not universal. But we load by default those benchmarks when their
+dependencies don't actually prevent running the `top/0` predicate. See the
+`loader.lgt` and `run.lgt` files for details.
+
 Note that some benchmark programs cannot be loaded when using some backend
 Prolog compilers due to portability issues. We decided to keep the original
 code as-is instead of modifying them to fix those issues. See the `loader.lgt`

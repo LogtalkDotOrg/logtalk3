@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,6 +48,13 @@ argument is sufficiently instantiated at compile time, the method call
 is compiled in order to eliminate the implicit overheads of converting
 the grammar rule body into a goal and meta-calling it. For performance
 reasons, the second argument is only type-checked at compile time.
+
+Meta-predicate template
+-----------------------
+
+::
+
+   phrase(2, *)
 
 Modes and number of proofs
 --------------------------

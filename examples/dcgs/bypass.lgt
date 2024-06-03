@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-bar :-					% test predicate
+% test predicate
+bar :-
 	write('bar predicate called'), nl.
 
 
@@ -31,6 +32,8 @@ bar :-					% test predicate
 		comment is 'Just the almighty and famous old foo.'
 	]).
 
-	foo --> {{bar}}.	% the external pair of {}'s have the usual DCG semantics;
-						% the internal pair of {}'s is the Logtalk compiler bypass control construct
+	% the external pair of {}'s have the usual DCG semantics;
+	% the internal pair of {}'s is the Logtalk compiler bypass control construct
+	foo --> {{bar}}.
+
 :- end_object.

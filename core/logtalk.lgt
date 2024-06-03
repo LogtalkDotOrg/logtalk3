@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 1:22:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2023-05-02,
+		date is 2024-05-18,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -158,20 +158,44 @@
 		]
 	]).
 
-	:- public(debug_handler_provider/1).
-	:- multifile(debug_handler_provider/1).
-	:- mode(debug_handler_provider(?object_identifier), zero_or_one).
-	:- info(debug_handler_provider/1, [
-		comment is 'Declares an object as the debug handler provider. There should be at most one debug handler provider loaded at any given moment.',
+	:- public(debug_handler/1).
+	:- multifile(debug_handler/1).
+	:- mode(debug_handler(?object_identifier), zero_or_more).
+	:- mode(debug_handler(?category_identifier), zero_or_more).
+	:- info(debug_handler/1, [
+		comment is 'Enumerates, by backtracking, all declared debug handler providers. Define a clause for this predicate to declare a new debug handler provider.',
 		argnames is ['Provider']
 	]).
 
-	:- public(debug_handler/2).
-	:- multifile(debug_handler/2).
-	:- mode(debug_handler(?entity_identifier, ?atom), zero_or_more).
-	:- info(debug_handler/2, [
-		comment is 'Debug event handler. Called by the runtime. When the call succeeds, the runtime assumes the event have been handled. In the case of a goal event, that the goal succeeded (possibly leaving choice-points that can be explored by backtracking).',
-		argnames is ['Event', 'ExecutionContext'],
+	:- public(active_debug_handler/1).
+	:- mode(active_debug_handler(?category_identifier), zero_or_one).
+	:- mode(active_debug_handler(?category_identifier), zero_or_one).
+	:- info(active_debug_handler/1, [
+		comment is 'Current active debug handler provider if any. There is at most one active debug handler provider at any given moment.',
+		argnames is ['Provider']
+	]).
+
+	:- public(activate_debug_handler/1).
+	:- mode(activate_debug_handler(@object_identifier), zero_or_one).
+	:- mode(activate_debug_handler(@category_identifier), zero_or_one).
+	:- info(activate_debug_handler/1, [
+		comment is 'Activates the given debug handler provider. There is at most one active debug handler provider at any given moment. Fails if the object or category is not declared as a debug handler provider.',
+		argnames is ['Provider']
+	]).
+
+	:- public(deactivate_debug_handler/0).
+	:- mode(deactivate_debug_handler, one).
+	:- info(deactivate_debug_handler/0, [
+		comment is 'Deactivates the current debug handler provider if any.'
+	]).
+
+	:- public(debug_handler/3).
+	:- multifile(debug_handler/3).
+	:- mode(debug_handler(+object_identifier, +callable, +execution_context), zero_or_more).
+	:- mode(debug_handler(+category_identifier, +callable, +execution_context), zero_or_more).
+	:- info(debug_handler/3, [
+		comment is 'Debug event handler. Called by the runtime when the given provider is active.',
+		argnames is ['Provider', 'Event', 'ExecutionContext'],
 		remarks is [
 			'Unification events' - 'Generated after a successful unification with a fact - ``fact(Entity,Fact,Clause,File,Line)`` - or a rule head - ``rule(Entity,Head,Clause,File,Line)``.',
 			'Goal events' - 'Generated when calling a goal: ``top_goal(Goal,CompiledGoal)`` or ``goal(Goal,CompiledGoal)``.'
@@ -283,6 +307,26 @@
 		argnames is ['ExecutionContext', 'Entity', 'Sender', 'This', 'Self', 'MetaCallContext', 'CoinductionStack']
 	]).
 
+	:- private(active_debug_handler_/1).
+	:- dynamic(active_debug_handler_/1).
+	:- mode(active_debug_handler_(?entity_identifier), zero_or_one).
+	:- info(active_debug_handler_/1, [
+		comment is 'Current active debug handler provider. There is at most one active debug handler provider at any given moment.',
+		argnames is ['Provider']
+	]).
+
+	activate_debug_handler(Provider) :-
+		callable(Provider),
+		debug_handler(Provider),
+		retractall(active_debug_handler_(_)),
+		assertz(active_debug_handler_(Provider)).
+
+	deactivate_debug_handler :-
+		retractall(active_debug_handler_(_)).
+
+	active_debug_handler(Provider) :-
+		active_debug_handler_(Provider).
+
 	print_message(Kind, Component, Message) :-
 		message_term_to_tokens(Message, Kind, Component, Tokens),
 		(	nonvar(Message),
@@ -382,7 +426,7 @@
 		;	Tokens = [[_, _]>>_| _] ->
 			% user-defined print goal; printing the prefix is delegated to the goal
 			print_message_tokens_(Tokens, Stream, Prefix)
-		;	Tokens = [begin(Kind, Context), [_, _]>>_| _] ->
+		;	Tokens = [begin(_, _), [_, _]>>_| _] ->
 			% user-defined print goal; printing the prefix is delegated to the goal
 			print_message_tokens_(Tokens, Stream, Prefix)
 		;	Tokens = [begin(Kind, Context)| Rest] ->
@@ -632,6 +676,96 @@
 
 	execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack) :-
 		{'$lgt_execution_context'(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack)}.
+
+	% linter warning definitions
+
+	:- multifile(user::logtalk_linter_hook/7).
+	user::logtalk_linter_hook(
+		logtalk::print_message(Kind, Component, Message), suspicious_calls,
+		File, Lines, Type, Entity,
+		suspicious_call(File, Lines, Type, Entity, logtalk::print_message(Kind, Component, Message), reason(Reason))
+	) :-
+		nonvar(Message),
+		(	Message = Format + Arguments ->
+			verify_arguments(Format, Arguments, Reason)
+		;	meta_message(Message) ->
+			fail
+		;	catch(\+ message_term_to_tokens(Message, Kind, Component, _), _, fail),
+			Reason = due_to('missing tokenization')
+		).
+
+	meta_message(_ + _).
+	meta_message(@ _).
+	meta_message(_ - _).
+	meta_message([_| _]).
+	meta_message(_ :: [_| _]).
+	meta_message([_, _] >> _).
+	meta_message([_] >> _).
+
+	verify_arguments(_, Arguments, as('arguments is not a list')) :-
+		Arguments \== [],
+		Arguments \= [_| _],
+		!.
+	verify_arguments(Format, Arguments, Reason) :-
+		nonvar(Format),
+		(	atom(Format) ->
+			atom_chars(Format, Chars),
+			verify_arguments_chars(Chars, Arguments, Reason)
+		;	Format = [Head| Tail], atom(Head) ->
+			Chars = [Head| Tail],
+			verify_arguments_chars(Chars, Arguments, Reason)
+		;	Format = [Head| Tail], integer(Head),
+			codes_to_chars([Head| Tail], Chars),
+			verify_arguments_chars(Chars, Arguments, Reason)
+		).
+
+	verify_arguments_chars([], [_| _], due_to('too many arguments')) :-
+		!.
+	verify_arguments_chars(['~'| Chars], Arguments, Reason) :-
+		phrase(non_arg_control_sequence, Chars, Rest),
+		!,
+		verify_arguments_chars(Rest, Arguments, Reason).
+	verify_arguments_chars(['~'| Chars], [], due_to('too few arguments')) :-
+		phrase(control_sequence, Chars, _),
+		!.
+	verify_arguments_chars(['~'| Chars], [_| Arguments], Reason) :-
+		!,
+		phrase(control_sequence, Chars, Rest),
+		verify_arguments_chars(Rest, Arguments, Reason).
+	verify_arguments_chars([_ | Chars], Arguments, Reason) :-
+		verify_arguments_chars(Chars, Arguments, Reason).
+
+	non_arg_control_sequence -->
+		['~'].
+	non_arg_control_sequence -->
+		['N'].
+	non_arg_control_sequence -->
+		possible_integer, non_arg_control_code.
+
+	non_arg_control_code -->
+		['n'].
+	non_arg_control_code -->
+		['|'].
+	non_arg_control_code -->
+		['+'].
+	non_arg_control_code -->
+		['t'].
+
+	control_sequence -->
+		possible_integer, char.
+
+	possible_integer -->
+		[Digit], {'0' @=< Digit, Digit @=< '9'}, !, possible_integer.
+	possible_integer -->
+		[].
+
+	char -->
+		[Char], {once(('a' @=< Char, Char @=< 'z'; 'A' @=< Char, Char @=< 'Z'))}.
+
+	codes_to_chars([], []).
+	codes_to_chars([Code| Codes], [Char| Chars]) :-
+		char_code(Char, Code),
+		codes_to_chars(Codes, Chars).
 
 :- end_object.
 

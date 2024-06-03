@@ -10,6 +10,9 @@
 
 Use this object as the default hook object to restore the default expansion pipeline semantics used by the compiler.
 
+| **Availability:** 
+|    ``logtalk_load(hook_objects(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:0:1
 | **Date:** 2020-03-24

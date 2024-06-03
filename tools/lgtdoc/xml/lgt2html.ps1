@@ -277,6 +277,8 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
 			$writer = [System.Xml.XmlTextWriter]::Create($html)
 			$entity_xslt_object.Transform($reader, $writer)
+			$writer.Dispose()
+			$reader.Dispose()
 		}
 	}
 	Get-ChildItem -Path . -Filter .\*.xml |
@@ -288,6 +290,8 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
 			$writer = [System.Xml.XmlTextWriter]::Create($html)
 			$index_xslt_object.Transform($reader, $writer)
+			$writer.Dispose()
+			$reader.Dispose()
 		}
 	}
 	Write-Output "conversion done"

@@ -32,6 +32,7 @@
 			<ref name="operators"/>
 			<ref name="remarks"/>
 			<ref name="see_also"/>
+			<ref name="availability"/>
 		</element>
 	</define>
 
@@ -221,6 +222,12 @@
 		<element name="reference">
 			<ref name="name"/>
 			<ref name="file"/>
+		</element>
+	</define>
+
+	<define name="availability">
+		<element name="availability">
+			<text/>
 		</element>
 	</define>
 

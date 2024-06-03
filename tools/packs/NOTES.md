@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,8 +18,8 @@ limitations under the License.
 ________________________________________________________________________
 
 
-``packs``
-=========
+`packs`
+=======
 
 This tool provides predicates for downloading, installing, upgrading, and
 uninstalling third-party libraries and applications, generically known as
@@ -91,7 +91,7 @@ version). The required commands can be easily installed using MacPorts:
 
 Or using Homebrew:
 
-	$ brew install coretutils libarchive gnupg2 git direnv
+	$ brew install coreutils libarchive gnupg2 git direnv
 
 On Linux systems, use the distribution own package manager to install any
 missing command. For example, in recent Ubuntu versions:
@@ -293,11 +293,11 @@ An example of a registry specification object would be:
 
 	:- end_object.
 
-Optionally, the registry object can also define a ``note(Action, Note)``
-predicate. The ``Action`` argument is an atom: ``add``, ``update``, or
-``delete``. The ``Note`` argument is also an atom. The tool will print
+Optionally, the registry object can also define a `note(Action, Note)`
+predicate. The `Action` argument is an atom: `add`, `update`, or
+`delete`. The `Note` argument is also an atom. The tool will print
 any available notes when executing one of the registry actions. See the
-``registry_protocol`` documentation for more details.
+`registry_protocol` documentation for more details.
 
 The registry directory should also contain `LICENSE` and `README.md` files
 (individual packs can use a different license, however). The path to the
@@ -425,8 +425,9 @@ A pack is specified using a Logtalk source file defining an object that
 implements the `pack_protocol`. The source file should be named after the
 pack with a `_pack` suffix. This naming convention helps preventing name
 conflicts, notably with the pack own objects. The file must be available
-from a declared pack registry. The pack name is ideally a valid unquoted
-atom. An example of a registry specification object would be:
+from a declared pack registry (by having the registry loader file loading
+it). The pack name is preferably a valid unquoted atom. An example of a
+pack specification object would be:
 
 	:- object(lflat_pack,
 		implements(pack_protocol)).
@@ -451,7 +452,7 @@ atom. An example of a registry specification object would be:
 			stable,
 			'https://github.com/l-flat/lflat/archive/refs/tags/v2.1.0.tar.gz',
 			sha256 - '9c298c2a08c4e2a1972c14720ef1498e7f116c7cd8bf7702c8d22d8ff549b6a1',
-			[logtalk @>= 3:36:0],
+			[logtalk @>= 3:42:0],
 			all
 		).
 
@@ -466,11 +467,14 @@ atom. An example of a registry specification object would be:
 
 	:- end_object.
 
-Optionally, the pack object can also define a ``note(Action, Version, Note)``
-predicate. The ``Action`` argument is an atom: ``install``, ``update``, or
-``uninstall``. The ``Note`` argument is also an atom. The tool will print
+The `license/1` argument must be an atom and should whenever possible be
+a license identifier as specified in the [SPDX standard](https://spdx.org/licenses/).
+
+Optionally, the pack object can also define a `note(Action, Version, Note)`
+predicate. The `Action` argument is an atom: `install`, `update`, or
+`uninstall`. The `Note` argument is also an atom. The tool will print
 any available notes when executing one of the registry actions. See the
-``pack_protocol`` documentation for more details.
+`pack_protocol` documentation for more details.
 
 The pack sources must be available either as a local directory (when using
 a `file://` URL) or for downloading as a supported archive. The checksum for
@@ -481,10 +485,11 @@ optionally be signed. Supported archive formats and extensions are:
 - `.tgz`, `.tar.gz`
 - `.tbz2`, `.tar.bz2`
 
-The pack sources should contain `LICENSE`, `README.md`, and `loader.lgt`
-(or `loader.logtalk`) files. The path to the `README.md` file is printed
-when the pack is installed or updated. It can also be queried using the
-`packs::directory/2` predicate.
+The pack sources should contain `LICENSE`, `README.md` (or `NOTES.md`), and
+`loader.lgt` (or `loader.logtalk`) files. Ideally, it should also contain a
+`tester.lgt` (`tester.logtalk`) file. The path to the `README.md` file is
+printed when the pack is installed or updated. It can also be queried using
+the `packs::directory/2` predicate.
 
 
 Pack URLs and Single Sign-On
@@ -545,14 +550,9 @@ updating to) the latest version of the pack.
 Pack dependencies
 -----------------
 
-Pack dependencies on other packs can be specified using the syntax
-`Registry::Pack Operator Version` where `Operator` is a standard term
-comparison operator as described below. When a pack depends on a Logtalk
-or backend version, the name `logtalk` or the identifier of the backend
-can be used in place of `Registry::Pack` (see below for the table of
-backend specifiers).
-
-Dependencies are specified using a list of the following elements:
+Pack dependencies on other packs can be specified using a list of
+`Registry::Pack Operator Version` terms where `Operator` is a standard term
+comparison operator:
 
 - `Registry::Pack @>= Version` - the pack requires a dependency with version
 equal or above the specified one. For example, `logtalk @>= 3:36:0` means that
@@ -581,10 +581,26 @@ for version 2.1).
 other than then the one specified. For example, `common::bits \== 2.1` means that
 the pack requires a `common::bits` pack version other than any 2.1.x version.
 
-It's also possible to specify _range_ dependencies by using two consecutive
-elements with the lower bound followed by the upper bound. For example,
-`[common::bits @>= 2, common::bits @< 3]` means all `common::bits` 2.x versions
-but not older or newer major versions.
+To specify _range_ dependencies by using two consecutive elements with the lower
+bound followed by the upper bound. For example, `common::bits @>= 2, common::bits @< 3`
+means all `common::bits` 2.x versions but not older or newer major versions.
+
+It's also possible to specify _alternative_ dependencies using the `(;)/2`
+operator. For example, `(common::bits == 1:9; common::bits @>= 2:3)` means
+either `common::bits` 1.9.x versions or 2.3.x and later versions. Alternatives
+should be listed in decreasing order of preference.
+
+When a pack also depends on a Logtalk or backend version, the name `logtalk`
+or the backend identifier atom can be used in place of `Registry::Pack` (see
+below for the table of backend specifiers). For example, `logtalk @>= 3.36.0`.
+
+When a pack also depends on an operating-system version (e.g. a pack
+containing shared libraries with executable code), the `os(Name,Machine)`
+compound term can also be used in place of `Registry::Pack`. For example,
+`os('Darwin',x86_64) @>= '23.0.0'`. Note that, in this case, the release
+is an atom. The operating-system data (name, machine, and release) is
+queried using the corresponding `os` library predicates (see the library
+documentation for details).
 
 
 Pack portability
@@ -607,7 +623,6 @@ argument of the `version/6` predicate is a list of backend identifiers
 - JIProlog: `ji`
 - LVM: `lvm`
 - Quintus Prolog: `quintus`
-- Scryer Prolog: `scryer`
 - SICStus Prolog: `sicstus`
 - SWI-Prolog: `swi`
 - Tau Prolog: `tau`
@@ -696,6 +711,10 @@ calling the `packs::update/0` predicate or update a single pack using the
 
 	| ?- packs::update(bar).
 
+By default, updating a pack fails if it would break any dependent pack
+(the `force(true)` option, described below, can be used to force updating
+in this case).
+
 The tool provides versions of the pack install, update, and uninstall
 predicates that accept a list of options:
 
@@ -703,12 +722,18 @@ predicates that accept a list of options:
 - `clean(Boolean)` (default is `false`)
 - `update(Boolean)` (default is `false`)
 - `force(Boolean)` (default is `false`)
+- `compatible(Boolean)` (default is `true`)
 - `checksum(Boolean)` (default is `true`)
 - `checksig(Boolean)` (default is `false`)
 - `git(Atom)` (extra command-line options; default is `''`)
 - `curl(Atom)` (extra command-line options; default is `''`)
 - `gpg(Atom)` (extra command-line options; default is `''`)
 - `tar(Atom)` (extra command-line options; default is `''`)
+
+Note that, by default, only compatible packs can be installed. To install
+a pack that is incompatible with the current Logtalk version, backend
+version, or operating-system version, use the `install/4` or `update/3`
+predicates with the option `compatible(false)`.
 
 When a pack may be already installed, you can use the `update(true)` option
 to ensure that the installation will by updated to the specified version:
@@ -889,7 +914,7 @@ the registry and rolling back to a previous version.
 - Use registry and pack names that are valid unquoted atoms, thus simplifying
 usage. Use descriptive names with underscores if necessary to link words.
 
-- Name registry and pack specification objects after their names with a
+- Name the registry and pack specification objects after their names with a
 `_registry` or `_pack` suffix. Save the objects in files named after the
 objects.
 
@@ -899,7 +924,7 @@ objects.
 signed commits and signed tags for increased security.
 
 - When a new pack version breaks backwards compatibility, list both the old
-and the new versions on the pack spec file.
+and the new versions on the pack specification file.
 
 - Pin registries and packs when specific versions are critical for your work
 so that you can still easily batch update the remaining packs and registries.

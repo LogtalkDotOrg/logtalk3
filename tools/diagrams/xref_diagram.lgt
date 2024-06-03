@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,12 +23,16 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:67:0,
+		version is 2:72:1,
 		author is 'Paulo Moura',
-		date is 2023-04-12,
+		date is 2024-04-02,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
+	]).
+
+	:- uses(atom, [
+		replace_sub_atom/4
 	]).
 
 	:- uses(list, [
@@ -102,7 +106,7 @@
 			output_externals(Options),
 			^^output_edges(Options),
 			Format::graph_footer(diagram_output_file, Identifier, GroundEntity, entity, GraphOptions),
-			Format::file_footer(diagram_output_file, Identifier, Options) ->
+			Format::file_footer(diagram_output_file, Identifier, [description(Description)| Options]) ->
 			logtalk::print_message(comment, diagrams, generated_diagram(Self, Kind, Entity))
 		;	% failure is usually caused by errors in the source itself
 			logtalk::print_message(warning, diagrams, generating_diagram_failed(Self::entity(Entity, UserOptions)))
@@ -197,7 +201,7 @@
 		),
 		fail.
 	process_entity(Kind, Entity, Options) :-
-		calls_local_predicate(Kind, Entity, Caller, Line, Callee),
+		calls_local_predicate(Kind, Entity, Caller, Line, Callee, Options),
 		\+ ^^edge(Caller, Callee, [calls], calls_predicate, _),
 		remember_referenced_predicate(Caller),
 		remember_referenced_predicate(Callee),
@@ -221,7 +225,7 @@
 		^^save_edge(Caller, ^^Callee, [calls], calls_super_predicate, [tooltip(calls)| XRefOptions]),
 		fail.
 	process_entity(Kind, Entity, Options) :-
-		calls_external_predicate(Kind, Entity, Caller, Line, Callee0),
+		calls_external_predicate(Kind, Entity, Caller, Line, Callee0, Options),
 		remember_referenced_predicate(Caller),
 		remember_external_predicate(Callee0),
 		\+ ^^edge(Caller, Callee0, [calls], calls_predicate, _),
@@ -327,19 +331,20 @@
 			;	% entity is not loaded
 				fail
 			),
-			% third, find the documentation URL prefix, looking for a
-			% path specific prefix before considering the generic prefix
+			% third, find the documentation URL prefix, looking for a path specific
+			% prefix before considering the generic prefix; note that this option can
+			% be specified multiple times
 			(	member(path_url_prefixes(Prefix, _, DocPrefix), Options),
 				sub_atom(Path, 0, _, _, Prefix) ->
 				true
-			;	member(url_prefixes(_, DocPrefix), Options)
+			;	^^option(url_prefixes(_, DocPrefix), Options)
 			),
 			DocPrefix \== '' ->
 			functor(Entity, EntityFunctor, EntityArity),
 			^^option(entity_url_suffix_target(Suffix, Target), Options),
 			(	Target == '' ->
 				atomic_list_concat([DocPrefix, EntityFunctor, '_', EntityArity, Suffix], DocURL)
-			;	predicate_target_value(Predicate, TargetValue),
+			;	predicate_target_value(Predicate, TargetValue, Options),
 				atomic_list_concat([DocPrefix, EntityFunctor, '_', EntityArity, Suffix, Target, TargetValue], DocURL)
 			),
 			XRefOptions = [url(DocURL)| Options]
@@ -347,7 +352,20 @@
 			XRefOptions = [url('')| Options]
 		).
 
-	predicate_target_value(Predicate, TargetValue) :-
+	predicate_target_value(Predicate, TargetValue, Options) :-
+		^^option(predicate_url_target_format(Generator), Options),
+		predicate_target_value_(Generator, Predicate, TargetValue).
+
+	predicate_target_value_(sphinx, Predicate, TargetValue) :-
+		!,
+		% Sphinx replaces underscores and slashes with dashes
+		(	Predicate = Functor0/Arity ->
+			true
+		;	Predicate = Functor0//Arity
+		),
+		replace_sub_atom('_', '-', Functor0, Functor),
+		atomic_list_concat([Functor, '-', Arity], TargetValue).
+	predicate_target_value_(_, Predicate, TargetValue) :-
 		(	Predicate = Functor/Arity ->
 			atomic_list_concat([Functor, '/', Arity], TargetValue)
 		;	Predicate = Functor//Arity,
@@ -374,8 +392,9 @@
 			;	% entity is not loaded
 				fail
 			),
-			% second, find the code URL prefix, looking for a path
-			% specific prefix before considering the generic prefix
+			% second, find the code URL prefix, looking for a path specific prefix
+			% before considering the generic prefix; note that this option can be
+			% specified multiple times
 			(	member(path_url_prefixes(Prefix, CodePrefix, _), Options),
 				sub_atom(Path, 0, _, _, Prefix) ->
 				true
@@ -403,7 +422,7 @@
 				CodeURL = CodeURL0
 			;	% append line number; check first for BitBucket code hosting
 				% style URL line reference
-				member(url_line_references(bitbucket), Options) ->
+				^^option(url_line_references(bitbucket), Options) ->
 				decompose_file_name(RelativePath, _, File),
 				atomic_list_concat([CodeURL0, '?fileviewer=file-view-default#', File, '-', Line], CodeURL)
 			;	% assume github or gitlab line reference syntax
@@ -414,7 +433,7 @@
 			XRefOptions = [url('')| Options]
 		).
 
-	calls_local_predicate(module, Entity, Caller, Line, Callee) :-
+	calls_local_predicate(module, Entity, Caller, Line, Callee, _) :-
 		!,
 		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
 		Callee \= (_ :: _),
@@ -424,7 +443,7 @@
 			true
 		;	Line = -1
 		).
-	calls_local_predicate(Kind, Entity, Caller, Line, Callee) :-
+	calls_local_predicate(Kind, Entity, Caller, Line, Callee, _) :-
 		Kind \== protocol,
 		entity_property(Kind, Entity, calls(Callee0, CallsProperties)),
 		Callee0 \= (_ :: _),
@@ -449,6 +468,7 @@
 		;	fail
 		),
 		(	Caller0 = (From::Predicate) ->
+			% multifile predicate caller
 			(	current_object(From) ->
 				FromKind = object
 			;	FromKind = category
@@ -458,10 +478,35 @@
 				Caller = (From::NonTerminal)
 			;	Caller = (From::Predicate)
 			)
-		;	entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
-			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
-			Caller = CallerNonTerminal
-		;	Caller = Caller0
+		;	Caller0 == (:-)/1 ->
+			% initialization/1 directive
+			Caller = Caller0
+		;	% local predicate caller
+			entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
+			\+ member(auxiliary, CallerDefinesProperties),
+			(	member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
+				Caller = CallerNonTerminal
+			;	Caller = Caller0
+			)
+		).
+	calls_local_predicate(Kind, Entity, Caller, Line, Caller, Options) :-
+		^^option(recursive_relations(true), Options),
+		Kind \== protocol,
+		entity_property(Kind, Entity, defines(Caller, CallerDefinesProperties)),
+		Caller \= (_ :: _),
+		Caller \= (:: _),
+		Caller \= (^^ _),
+		Caller \= (_ << _),
+		Caller \= ':'(_, _),
+		(	Caller == (:-)/1 ->
+			% initialization/1 directive
+			true
+		;	\+ member(auxiliary, CallerDefinesProperties)
+		),
+		memberchk(recursive, CallerDefinesProperties),
+		(	member(line_count(Line), CallerDefinesProperties) ->
+			true
+		;	Line = -1
 		).
 
 	calls_super_predicate(Kind, Entity, Caller, Line, Callee) :-
@@ -492,12 +537,18 @@
 			;	Caller = (From::Predicate)
 			)
 		;	% local predicate caller
-			entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
-			member(non_terminal(CallerNonTerminal), CallerProperties) ->
-			Caller = CallerNonTerminal
-		;	Caller = Caller0
+			Caller0 == (:-)/1 ->
+			% initialization/1 directive
+			Caller = Caller0
+		;	entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
+			\+ member(auxiliary, CallerProperties),
+			(	member(non_terminal(CallerNonTerminal), CallerProperties) ->
+				Caller = CallerNonTerminal
+			;	Caller = Caller0
+			)
 		),
 		% usually caller and callee are the same predicate but that's not required
+		% (e.g. when the call is from an initialization/1 directive)
 		(	entity_property(Kind, Entity, defines(Callee0, CalleeProperties)),
 			member(non_terminal(CalleeNonTerminal), CalleeProperties) ->
 			Callee = CalleeNonTerminal
@@ -531,35 +582,47 @@
 				Caller = (From::NonTerminal)
 			;	Caller = (From::Predicate)
 			)
+		;	Caller0 == (:-)/1 ->
+			% initialization/1 directive
+			Caller = Caller0
 		;	% local predicate caller
 			entity_property(Kind, Entity, defines(Caller0, CallerDefinesProperties)),
-			member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
-			Caller = CallerNonTerminal
-		;	Caller = Caller0
+			\+ member(auxiliary, CallerDefinesProperties),
+			(	member(non_terminal(CallerNonTerminal), CallerDefinesProperties) ->
+				Caller = CallerNonTerminal
+			;	Caller = Caller0
+			)
 		).
 
-	calls_external_predicate(module, Entity, Caller, Line, Callee) :-
+	calls_external_predicate(module, Entity, Caller, Line, Callee, Options) :-
 		!,
+		^^option(exclude_entities(ExcludedEntities), Options),
 		modules_diagram_support::module_property(Entity, calls(Callee, Properties)),
-		(	Callee = (Object::_), nonvar(Object)
-		;	Callee = ':'(Module,_), nonvar(Module)
+		(	Callee = (Object::_), nonvar(Object), \+ member(Object, ExcludedEntities)
+		;	Callee = ':'(Module,_), nonvar(Module), \+ member(Module, ExcludedEntities)
 		),
 		memberchk(caller(Caller), Properties),
 		(	member(line_count(Line), Properties) ->
 			true
 		;	Line = -1
 		).
-	calls_external_predicate(Kind, Entity, Caller, Line, Object::Callee) :-
+	calls_external_predicate(Kind, Entity, Caller, Line, Object::Callee, Options) :-
 		Kind \== protocol,
+		^^option(exclude_entities(ExcludedEntities), Options),
 		entity_property(Kind, Entity, calls(Object::Callee0, CallsProperties)),
 		nonvar(Object),
+		\+ member(Object, ExcludedEntities),
 		memberchk(caller(Caller0), CallsProperties),
 		(	member(line_count(Line), CallsProperties) ->
 			true
 		;	Line = -1
 		),
-		entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
-		\+ member(auxiliary, CallerProperties),
+		(	Caller0 == (:-)/1 ->
+			% initialization/1 directive
+			true
+		;	entity_property(Kind, Entity, defines(Caller0, CallerProperties)),
+			\+ member(auxiliary, CallerProperties)
+		),
 		Callee0 = Functor/Arity,
 		functor(Template, Functor, Arity),
 		(	current_object(Object) ->
@@ -576,17 +639,23 @@
 			Caller = CallerNonTerminal
 		;	Caller = Caller0
 		).
-	calls_external_predicate(Kind, Entity, Caller, Line, ':'(Module,Callee)) :-
+	calls_external_predicate(Kind, Entity, Caller, Line, ':'(Module,Callee), Options) :-
 		Kind \== protocol,
+		^^option(exclude_entities(ExcludedEntities), Options),
 		entity_property(Kind, Entity, calls(':'(Module,Callee), Properties)),
 		nonvar(Module),
+		\+ member(Module, ExcludedEntities),
 		memberchk(caller(Caller), Properties),
 		(	member(line_count(Line), Properties) ->
 			true
 		;	Line = -1
 		),
-		entity_property(Kind, Entity, defines(Caller, CallerProperties)),
-		\+ member(auxiliary, CallerProperties).
+		(	Caller == (:-)/1 ->
+			% initialization/1 directive
+			true
+		;	entity_property(Kind, Entity, defines(Caller, CallerProperties)),
+			\+ member(auxiliary, CallerProperties)
+		).
 
 	updates_predicate(Kind, Entity, Updater, Line, Dynamic) :-
 		Kind \== protocol,
@@ -602,6 +671,7 @@
 		;	Line = -1
 		),
 		(	Updater0 = (From::Predicate) ->
+			% multifile predicate updater
 			(	current_object(From) ->
 				FromKind = object
 			;	FromKind = category
@@ -611,6 +681,9 @@
 				Updater = (From::NonTerminal)
 			;	Updater = (From::Predicate)
 			)
+		;	Updater0 == (:-)/1 ->
+			% initialization/1 directive updater
+			Updater = Updater0
 		;	entity_property(Kind, Entity, defines(Updater0, DefinesProperties)),
 			member(non_terminal(UpdaterNonTerminal), DefinesProperties) ->
 			Updater = UpdaterNonTerminal
@@ -666,13 +739,17 @@
 		member(externals(false), Options),
 		!.
 	output_externals(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		retract(external_predicate_(Object::Predicate)),
+		\+ member(Object, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, Name),
 		add_predicate_documentation_url(Options, Object, Predicate, PredicateOptions),
 		^^output_node(Name::Predicate, Name::Predicate, external, [], external_predicate, PredicateOptions),
 		fail.
 	output_externals(Options) :-
+		^^option(exclude_entities(ExcludedEntities), Options),
 		retract(external_predicate_(':'(Module,Predicate))),
+		\+ member(Module, ExcludedEntities),
 		(	modules_diagram_support::module_property(Module, defines(Predicate,Properties)) ->
 			add_predicate_code_url(Options, module, Module, Properties, PredicateOptions),
 			^^output_node(':'(Module,Predicate), ':'(Module,Predicate), external, [], external_predicate, PredicateOptions)
@@ -693,10 +770,14 @@
 	default_option(title('')).
 	% by default, print current date:
 	default_option(date(true)).
+	% by default, don't print Logtalk and backend version data:
+	default_option(versions(false)).
 	% by default, print entity public predicates:
 	default_option(interface(true)).
 	% by default, print file labels:
 	default_option(file_labels(true)).
+	% by default, don't write recursive predicate definition links:
+	default_option(recursive_relations(false)).
 	% by default, don't write inheritance links:
 	default_option(inheritance_relations(false)).
 	% by default, don't write provide links:
@@ -714,7 +795,7 @@
 	% by default, print node type captions:
 	default_option(node_type_captions(true)).
 	% by default, write diagram to the current directory:
-	default_option(output_directory('./')).
+	default_option(output_directory('./dot_dias')).
 	% by default, don't exclude any directories:
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
@@ -737,6 +818,8 @@
 	default_option(zoom_url_suffix('.svg')).
 	% by default, assume GitHub/GitLab line references in URLs
 	default_option(url_line_references(github)).
+	% by default, assume documentation generated by Sphinx
+	default_option(predicate_url_target_format(sphinx)).
 
 	diagram_description('Cross-referencing diagram').
 

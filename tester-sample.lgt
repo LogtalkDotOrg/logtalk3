@@ -4,7 +4,7 @@
 %  Last updated on May 21, 2017
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,7 +47,8 @@
 	% compile the unit tests file expanding it using "lgtunit" as the hook
 	% object to preprocess the tests; if you have failing tests, add the
 	% option debug(on) to debug them (see "tools/lgtunit/NOTES.md" for
-	% debugging advice)
+	% debugging advice); tests should be loaded after the code being tested
+	% is loaded to avoid warnings such as references to unknown entities
 	logtalk_load(tests, [hook(lgtunit)]),
 	% run all the unit tests; assuming your tests object is named "tests"
 	tests::run

@@ -16,7 +16,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% benchmark test module for Ciao, SICStus Prolog, SWI-Prolog, Tau Prolog, XSB, and YAP
+% benchmark test module for Ciao, SICStus Prolog, SWI-Prolog, Tau Prolog,
+% Trealla Prolog, XSB, and YAP
 
 :- module(module, [mod_nrev/2, mod_length/2, mod_maze_solve/3, mod_graph_path/3]).
 
@@ -69,9 +70,9 @@ mod_arc(3, 6).
 mod_arc(4, 5). mod_arc(4, 7).
 mod_arc(5, 8).
 
-mod_member(Element, [Element| _]).
-mod_member(Element, [_| List]) :-
-	mod_member(Element, List).
+mod_member(Head, [Head| _]).
+mod_member(Head, [_| Tail]) :-
+	mod_member(Head, Tail).
 
 mod_reverse(List, Reversed) :-
 	mod_reverse(List, [], Reversed, Reversed).

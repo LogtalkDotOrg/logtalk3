@@ -8,11 +8,14 @@
 ``help_info_support``
 =====================
 
-Experimental help predicates for inline browsing and searching of the Texinfo versiosn of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB as the backend running on a POSIX system.
+Experimental help predicates for inline browsing of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, GNU Prolog, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or YAP as the backend running on a POSIX system.
+
+| **Availability:** 
+|    ``logtalk_load(help(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:7:0
-| **Date:** 2023-02-06
+| **Version:** 0:8:1
+| **Date:** 2024-04-08
 
 | **Compilation flags:**
 |    ``static``
@@ -43,7 +46,7 @@ Public predicates
 ``handbook/0``
 ^^^^^^^^^^^^^^
 
-Opens inline the Texinfo verison of the Handbook.
+Opens inline the Texinfo version of the Handbook.
 
 | **Compilation flags:**
 |    ``static``
@@ -60,7 +63,7 @@ Opens inline the Texinfo verison of the Handbook.
 ``handbook/1``
 ^^^^^^^^^^^^^^
 
-Opens inline the Texinfo verison of the Handbook and searches for the given topic.
+Opens inline the Texinfo version of the Handbook at the given topic.
 
 | **Compilation flags:**
 |    ``static``
@@ -81,7 +84,7 @@ Opens inline the Texinfo verison of the Handbook and searches for the given topi
 ``apis/0``
 ^^^^^^^^^^
 
-Opens inline the Texinfo verison of the APIs documentation.
+Opens inline the Texinfo version of the APIs documentation.
 
 | **Compilation flags:**
 |    ``static``
@@ -98,7 +101,7 @@ Opens inline the Texinfo verison of the APIs documentation.
 ``apis/1``
 ^^^^^^^^^^
 
-Opens inline the Texinfo verison of the APIs documentation and searches for the given topic.
+Opens inline the Texinfo version of the APIs documentation at the given topic.
 
 | **Compilation flags:**
 |    ``static``
@@ -109,6 +112,25 @@ Opens inline the Texinfo verison of the APIs documentation and searches for the 
 |    ``apis(+atom)`` - ``one``
 |    ``apis(+predicate_indicator)`` - ``one``
 |    ``apis(+non_terminal_indicator)`` - ``one``
+
+
+------------
+
+.. index:: man/1
+.. _help_info_support/0::man/1:
+
+``man/1``
+^^^^^^^^^
+
+Opens inline the man page of the given script.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``man(Script)``
+| **Mode and number of proofs:**
+|    ``man(+atom)`` - ``one``
 
 
 ------------

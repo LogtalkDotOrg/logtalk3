@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Developer Tools &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>Developer Tools &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -127,7 +130,7 @@
            <div itemprop="articleBody">
              
   <section id="developer-tools">
-<h1>Developer Tools<a class="headerlink" href="#developer-tools" title="Permalink to this heading"></a></h1>
+<h1>Developer Tools<a class="headerlink" href="#developer-tools" title="Link to this heading"></a></h1>
 <p>The documentation of each developer tool can also be found in the tool
 directory in the <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> file.</p>
 <div class="toctree-wrapper compound">
@@ -156,7 +159,12 @@ directory in the <code class="docutils literal notranslate"><span class="pre">NO
 <li class="toctree-l2"><a class="reference internal" href="code_metrics.html#loading">Loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_metrics.html#testing">Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_metrics.html#available-metrics">Available metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html#coupling-metrics">Coupling metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html#halstead-metric">Halstead metric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html#upn-metric">UPN metric</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html#cyclomatic-complexity-metric">Cyclomatic complexity metric</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_metrics.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code_metrics.html#excluding-code-from-analysis">Excluding code from analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_metrics.html#defining-new-metrics">Defining new metrics</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_metrics.html#third-party-tools">Third-party tools</a></li>
 <li class="toctree-l2"><a class="reference internal" href="code_metrics.html#applying-metrics-to-prolog-modules">Applying metrics to Prolog modules</a></li>
@@ -168,6 +176,7 @@ directory in the <code class="docutils literal notranslate"><span class="pre">NO
 <li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html#loading">Loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html#testing">Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html#excluding-code-from-analysis">Excluding code from analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html#integration-with-the-make-tool">Integration with the <code class="docutils literal notranslate"><span class="pre">make</span></code> tool</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html#caveats">Caveats</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dead_code_scanner.html#scanning-prolog-modules">Scanning Prolog modules</a></li>
@@ -243,8 +252,8 @@ directory in the <code class="docutils literal notranslate"><span class="pre">NO
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#api-documentation">API documentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#loading">Loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#testing">Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lgtunit.html#writing-and-loading-tests">Writing and loading tests</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lgtunit.html#running-unit-tests">Running unit tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html#writing-and-running-tests">Writing and running tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html#automating-running-tests">Automating running tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#parametric-test-objects">Parametric test objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#test-dialects">Test dialects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#user-defined-test-dialects">User-defined test dialects</a></li>
@@ -259,12 +268,13 @@ directory in the <code class="docutils literal notranslate"><span class="pre">NO
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#tests-with-timeout-limits">Tests with timeout limits</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#setup-and-cleanup-goals">Setup and cleanup goals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#test-annotations">Test annotations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html#test-execution-times-and-memory-usage">Test execution times and memory usage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#working-with-test-data-files">Working with test data files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#flaky-tests">Flaky tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lgtunit.html#mocking">Mocking</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#debugging-messages-in-tests">Debugging messages in tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#debugging-failed-tests">Debugging failed tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#code-coverage">Code coverage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lgtunit.html#automating-running-tests">Automating running tests</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#utility-predicates">Utility predicates</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#exporting-test-results-in-xunit-xml-format">Exporting test results in xUnit XML format</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lgtunit.html#exporting-test-results-in-the-tap-output-format">Exporting test results in the TAP output format</a></li>
@@ -363,7 +373,7 @@ directory in the <code class="docutils literal notranslate"><span class="pre">NO
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

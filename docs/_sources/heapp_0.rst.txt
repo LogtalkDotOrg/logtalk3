@@ -10,6 +10,9 @@
 
 Heap protocol. Key-value pairs are represented as ``Key-Value``.
 
+| **Availability:** 
+|    ``logtalk_load(heaps(loader))``
+
 | **Author:** Richard O'Keefe; adapted to Logtalk by Paulo Moura and Victor Lagerkvist.
 | **Version:** 1:0:1
 | **Date:** 2010-11-13

@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,6 +38,13 @@ This built-in meta-predicate is declared as a private method and thus
 cannot be used as a message to an object.
 
 This meta-predicate is opaque to cuts in its argument.
+
+Meta-predicate template
+-----------------------
+
+::
+
+   once(0)
 
 Modes and number of proofs
 --------------------------

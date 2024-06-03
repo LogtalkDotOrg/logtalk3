@@ -2,7 +2,7 @@
 
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,10 +58,12 @@ directory in the ``NOTES.md`` file.
    intervals
    java
    json
+   listing
    logging
    loops
    meta
    meta_compiler
+   mutations
    nested_dictionaries
    optionals
    options
@@ -69,11 +71,13 @@ directory in the ``NOTES.md`` file.
    queues
    random
    reader
+   recorded_database
    redis
    sets
    statistics
    term_io
    timeout
+   tsv
    types
    unicode_data
    ulid

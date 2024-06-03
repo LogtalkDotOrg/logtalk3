@@ -30,7 +30,7 @@
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, '=~='), '=~='/2, assertion/2
+		op(700, xfx, =~=), (=~=)/2, assertion/2
 	]).
 
 	test(lambdas_01, true(R == 25)) :-

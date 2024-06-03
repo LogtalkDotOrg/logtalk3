@@ -20,6 +20,7 @@
 
 
 :- initialization((
+	logtalk_load(format(loader)),
 	logtalk_load(random(loader)),
-	logtalk_load(philosophers)
+	logtalk_load(philosophers, [optimize(on)])
 )).

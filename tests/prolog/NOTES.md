@@ -20,11 +20,11 @@ ________________________________________________________________________
 
 This directory contains a set of unit tests for Prolog official and de facto
 standard syntax, control constructs, arithmetic functions, numeric constants,
-and built-in predicates. There are also test sets for unbounded integer
-arithmetic and for Unicode support for Prolog systems supporting these
-features. Several of these unit tests are taken from the official ISO Prolog
-standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard and the
-follow up corrigenda). Several tests originate from SICS, ECLiPSe, and
+and built-in predicates. There are also test sets for logical update semantics,
+unbounded integer arithmetic, and Unicode support for Prolog systems supporting
+these features. Several of these unit tests are taken from the official ISO
+Prolog standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard
+and the follow up corrigenda). Several tests originate from SICS, ECLiPSe, and
 SWI-Prolog and are used here with permission.
 
 This conformance suite also includes unit tests for Prolog features that
@@ -91,8 +91,8 @@ specifying a source file text encoding plus a common extended text encoding
 Tests that are specified as undefined in the standards due to the potential
 of creating cyclic terms are skipped when using a backend Prolog compiler
 that either doesn't support cyclic terms or whose support for cyclic terms
-is limited. Currently, these tests are only run when using SICStus Prolog,
-SWI-Prolog, or YAP as the backend Prolog compiler.
+is limited (see the table column for coinduction in the `adapters/NOTES.md`
+file).
 
 There is some overlap between a few test sets. Notably, between tests sets
 for arithmetic functions and the tests for the `is/2` built-in predicate.

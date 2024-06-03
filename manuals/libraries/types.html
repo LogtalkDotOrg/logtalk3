@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>types &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>types &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -30,7 +33,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="unicode_data" href="unicode_data.html" />
-    <link rel="prev" title="timeout" href="timeout.html" />
+    <link rel="prev" title="tsv" href="tsv.html" />
    
 </head>
 
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -97,10 +100,12 @@
 <li class="toctree-l2"><a class="reference internal" href="intervals.html"><code class="docutils literal notranslate"><span class="pre">intervals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="java.html"><code class="docutils literal notranslate"><span class="pre">java</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="listing.html"><code class="docutils literal notranslate"><span class="pre">listing</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="logging.html"><code class="docutils literal notranslate"><span class="pre">logging</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="loops.html"><code class="docutils literal notranslate"><span class="pre">loops</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta.html"><code class="docutils literal notranslate"><span class="pre">meta</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="meta_compiler.html"><code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="mutations.html"><code class="docutils literal notranslate"><span class="pre">mutations</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="nested_dictionaries.html"><code class="docutils literal notranslate"><span class="pre">nested_dictionaries</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="optionals.html"><code class="docutils literal notranslate"><span class="pre">optionals</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="options.html"><code class="docutils literal notranslate"><span class="pre">options</span></code></a></li>
@@ -108,11 +113,13 @@
 <li class="toctree-l2"><a class="reference internal" href="queues.html"><code class="docutils literal notranslate"><span class="pre">queues</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="random.html"><code class="docutils literal notranslate"><span class="pre">random</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="reader.html"><code class="docutils literal notranslate"><span class="pre">reader</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="recorded_database.html"><code class="docutils literal notranslate"><span class="pre">recorded_database</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="redis.html"><code class="docutils literal notranslate"><span class="pre">redis</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sets.html"><code class="docutils literal notranslate"><span class="pre">sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="statistics.html"><code class="docutils literal notranslate"><span class="pre">statistics</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">types</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
@@ -169,9 +176,9 @@
            <div itemprop="articleBody">
              
   <section id="types">
-<span id="library-types"></span><h1><code class="docutils literal notranslate"><span class="pre">types</span></code><a class="headerlink" href="#types" title="Permalink to this heading"></a></h1>
+<span id="library-types"></span><h1><code class="docutils literal notranslate"><span class="pre">types</span></code><a class="headerlink" href="#types" title="Link to this heading"></a></h1>
 <p>This library implements predicates over standard Prolog term types and
-also term representing common data structures such as lists and pairs.</p>
+also terms representing common data structures such as lists and pairs.</p>
 <p>It also includes a user-extensible <code class="docutils literal notranslate"><span class="pre">type</span></code> object defining type
 checking predicates over common Logtalk and Prolog term types. The types
 define a hierarchy with the Prolog type <code class="docutils literal notranslate"><span class="pre">term</span></code> at the root (i.e.
@@ -181,13 +188,13 @@ non-universal features (e.g. <code class="docutils literal notranslate"><span cl
 Unicode character set). See the API documentation for a full list of the
 types defined by default.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../docs/library_index.html#types">../../docs/library_index.html#types</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(types(loader)).
 </pre></div>
@@ -200,16 +207,17 @@ alternative the file:</p>
 <p>See the notes on the <code class="docutils literal notranslate"><span class="pre">basic_types</span></code> virtual library for details.</p>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(types(tester)).
 </pre></div>
 </div>
 </section>
 <section id="type-checking">
-<h2>Type-checking<a class="headerlink" href="#type-checking" title="Permalink to this heading"></a></h2>
+<h2>Type-checking<a class="headerlink" href="#type-checking" title="Link to this heading"></a></h2>
 <p>This library <code class="docutils literal notranslate"><span class="pre">type</span></code> object can be used to type-check common Logtalk
-and Prolog term types. The <code class="docutils literal notranslate"><span class="pre">valid/2</span></code> predicate succeeds or fails if a
+and Prolog term types (see the object documentation for a listing of all
+the pre-defined types). The <code class="docutils literal notranslate"><span class="pre">valid/2</span></code> predicate succeeds or fails if a
 term is of a given type. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>valid(positive_integer, <span class="m">42</span>).
 yes
@@ -236,9 +244,10 @@ yes
 method.</p>
 </section>
 <section id="defining-new-types">
-<h2>Defining new types<a class="headerlink" href="#defining-new-types" title="Permalink to this heading"></a></h2>
-<p>To define a custom type, define clauses for both the <code class="docutils literal notranslate"><span class="pre">type::type/1</span></code>
-and <code class="docutils literal notranslate"><span class="pre">type::check/2</span></code> multifile predicates. For example:</p>
+<h2>Defining new types<a class="headerlink" href="#defining-new-types" title="Link to this heading"></a></h2>
+<p>To define a custom type, define clauses for the multifile predicates
+<code class="docutils literal notranslate"><span class="pre">type::type/1</span></code> (to declare the type) and <code class="docutils literal notranslate"><span class="pre">type::check/2</span></code> (to
+type-check values). For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>type<span class="o">/</span><span class="m">1</span>).
 type<span class="o">::</span>type(age).
 
@@ -249,7 +258,8 @@ type<span class="o">::</span>check(age, <span class="nv">Term</span>) <span clas
 </div>
 <p>Be careful to ensure that new type definitions don’t introduce spurious
 choice-points for these predicates. The unit tests of the <code class="docutils literal notranslate"><span class="pre">types</span></code>
-library perform this check for ground types.</p>
+library perform this check for pre-defined and loaded user-defined
+ground types.</p>
 <p>When defining a meta-type (i.e. a type with arguments that are also
 types), add also a clause for the <code class="docutils literal notranslate"><span class="pre">type::meta_type/3</span></code> multifile
 predicate. For example:</p>
@@ -261,7 +271,7 @@ type<span class="o">::</span>meta_type(tuple(<span class="nv">Type1</span>, <spa
 meta-types, that check must extend to the sub-types.</p>
 </section>
 <section id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
 <p>See e.g. the <code class="docutils literal notranslate"><span class="pre">os</span></code> library implementation of custom types for files and
 directories. Or the <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> and <code class="docutils literal notranslate"><span class="pre">optionals</span></code> libraries custom
 types. See also the <code class="docutils literal notranslate"><span class="pre">my_types</span></code> programming example.</p>
@@ -272,14 +282,14 @@ types. See also the <code class="docutils literal notranslate"><span class="pre"
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="timeout.html" class="btn btn-neutral float-left" title="timeout" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tsv.html" class="btn btn-neutral float-left" title="tsv" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="unicode_data.html" class="btn btn-neutral float-right" title="unicode_data" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

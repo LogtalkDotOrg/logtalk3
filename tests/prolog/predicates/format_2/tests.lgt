@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -67,6 +67,16 @@
 		^^set_text_output(''),
 		{format("~k", [(:-a)])},
 		^^text_output_assertion(':-(a)', Assertion).
+
+	test(lgt_format_2_print_default, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~p", [42])},
+		^^text_output_assertion('42', Assertion).
+
+	test(lgt_format_2_print_portray, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~p", [foo])},
+		^^text_output_assertion(foofoo, Assertion).
 
 	test(lgt_format_2_atom, true(Assertion)) :-
 		^^set_text_output(''),
@@ -321,35 +331,85 @@
 		{format("~g", [0.00000123])},
 		^^text_output_assertion('1.23e-06', Assertion).
 
+	test(lgt_format_2_float_best_ne, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~2g", [0.00000123])},
+		^^text_output_assertion('1.2e-06', Assertion).
+
 	test(lgt_format_2_float_best_f, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~g", [0.39265e+3])},
 		^^text_output_assertion('392.65', Assertion).
+
+	test(lgt_format_2_float_best_nf, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~2g", [0.39265e+3])},
+		^^text_output_assertion('3.9e+02', Assertion).
 
 	test(lgt_format_2_float_best_e_upper_case, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~G", [0.00000123])},
 		^^text_output_assertion('1.23E-06', Assertion).
 
+	test(lgt_format_2_float_best_ne_upper_case, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~2G", [0.00000123])},
+		^^text_output_assertion('1.2E-06', Assertion).
+
 	test(lgt_format_2_float_best_f_upper_case, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~G", [0.39265e+3])},
 		^^text_output_assertion('392.65', Assertion).
+
+	test(lgt_format_2_float_best_nf_upper_case, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~2G", [0.39265e+3])},
+		^^text_output_assertion('3.9E+02', Assertion).
+
+	test(lgt_format_2_tab_stop_default, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~|~a", [abcd])},
+		^^text_output_assertion('abcd', Assertion).
+
+	test(lgt_format_2_tab_stop_non_default, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~6|~a", [abcd])},
+		^^text_output_assertion('      abcd', Assertion).
+
+	test(lgt_format_2_tab_atom_left_aligned_default_column_boundary, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~|~a~t~+", [abcd])},
+		^^text_output_assertion('abcd    ', Assertion).
 
 	test(lgt_format_2_tab_atom_left_aligned, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~|~a~t~8+", [abcd])},
 		^^text_output_assertion('abcd    ', Assertion).
 
+	test(lgt_format_2_tab_integer_left_aligned_default_column_boundary, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~|~d~t~+", [1234])},
+		^^text_output_assertion('1234    ', Assertion).
+
 	test(lgt_format_2_tab_integer_left_aligned, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~|~d~t~8+", [1234])},
 		^^text_output_assertion('1234    ', Assertion).
 
+	test(lgt_format_2_tab_atom_center_aligned_default_column_boundary, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~t~a~t~+", [abcd])},
+		^^text_output_assertion('  abcd  ', Assertion).
+
 	test(lgt_format_2_tab_atom_center_aligned, true(Assertion)) :-
 		^^set_text_output(''),
 		{format("~t~a~t~8+", [abcd])},
 		^^text_output_assertion('  abcd  ', Assertion).
+
+	test(lgt_format_2_tab_integer_center_aligned_default_column_boundary, true(Assertion)) :-
+		^^set_text_output(''),
+		{format("~t~d~t~+", [1234])},
+		^^text_output_assertion('  1234  ', Assertion).
 
 	test(lgt_format_2_tab_integer_center_aligned, true(Assertion)) :-
 		^^set_text_output(''),

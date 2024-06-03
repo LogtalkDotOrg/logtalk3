@@ -22,9 +22,9 @@
 :- object(buffer(_MaxCapacity_)).
 
 	:- info([
-		version is 2:2:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2021-02-07,
+		date is 2024-02-19,
 		comment is 'Producer-consumer problem with a bounded buffer.'
 	]).
 
@@ -42,11 +42,20 @@
 		comment is 'Get an item from the buffer.'
 	]).
 
+	% public predicates just for testing
+	:- public(produced/1).
+	:- dynamic(produced/1).
+
+	:- public(consumed/1).
+	:- dynamic(consumed/1).
+
 	:- private(item_/1).
 	:- dynamic(item_/1).
 
 	:- private(size_/1).
 	:- dynamic(size_/1).
+
+	:- uses(format, [format/2]).
 
 	size_(0).
 
@@ -57,16 +66,16 @@
 		retract(size_(N)),
 		N2 is N + 1,
 		assertz(size_(N2)),
-		write(' produced item '), write(Item),
-		write(' ('), write(N2), write('/'), write(_MaxCapacity_), write(' items in the buffer'), write(')'), nl.
+		format('produced item ~w (~w/~w items in the buffer)~n', [Item, N2, _MaxCapacity_]),
+		assertz(produced(Item)).
 
 	get_item(Item) :-
 		retract(item_(Item)),
 		retract(size_(N)),
 		N2 is N - 1,
 		assertz(size_(N2)),
-		write(' consumed item '), write(Item),
-		write(' ('), write(N2), write('/'), write(_MaxCapacity_), write(' items in the buffer'), write(')'), nl.
+		format('consumed item ~w (~w/~w items in the buffer)~n', [Item, N2, _MaxCapacity_]),
+		assertz(consumed(Item)).
 
 	put(Item) :-
 		size_(N),
@@ -100,7 +109,7 @@
 :- end_object.
 
 
-:- object(producer(_MaxTime_)).
+:- object(producer(_MaxCapacity_, _MaxTime_)).
 
 	:- public(run/1).
 
@@ -111,16 +120,16 @@
 	run(M, N) :-
 		M < N,
 		% simulate a variable amount of time to produce a new item
-		random::random(1, _MaxTime_, Random),
+		random::random(0.1, _MaxTime_, Random),
 		thread_sleep(Random),
-		buffer(7)::put(M),
+		buffer(_MaxCapacity_)::put(M),
 		M2 is M + 1,
 		run(M2, N).
 
 :- end_object.
 
 
-:- object(consumer(_MaxTime_)).
+:- object(consumer(_MaxCapacity_, _MaxTime_)).
 
 	:- public(run/1).
 
@@ -130,10 +139,10 @@
 	run(N, N) :- !.
 	run(M, N) :-
 		M < N,
-		% simulate a variable amount of time to produce a new item
-		random::random(1, _MaxTime_, Random),
+		% simulate a variable amount of time to consume an item
+		random::random(0.1, _MaxTime_, Random),
 		thread_sleep(Random),
-		buffer(7)::get(_Item),
+		buffer(_MaxCapacity_)::get(_Item),
 		M2 is M + 1,
 		run(M2, N).
 

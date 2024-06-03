@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:12:1,
 		author is 'Paulo Moura',
-		date is 2022-10-30,
+		date is 2024-03-16,
 		comment is 'Unit tests for the ISO Prolog standard peek_char/1-2 built-in predicates.'
 	]).
 
@@ -116,14 +116,15 @@
 		{peek_char(s, _)}.
 
 	succeeds(sics_peek_char_2_17) :-
-		^^file_path(t, Path),
+		^^file_path(tt, Path),
 		^^create_text_file(Path, ''),
 		open(Path, read, Stream),
 		{peek_char(Stream, C1), peek_char(Stream, C1), peek_char(Stream, C2)},
+		close(Stream),
 		C1 == end_of_file, C2 == end_of_file.
 
 	succeeds(sics_peek_char_2_18) :-
-		^^file_path(t, Path),
+		^^file_path(tb, Path),
 		^^create_binary_file(Path, [0]),
 		open(Path, read, Stream),
 		catch({peek_char(Stream, _)}, Error, subsumes_term(error(representation_error(character),_), Error)).
@@ -143,7 +144,8 @@
 		{peek_char(s, _)}.
 
 	cleanup :-
-		^^clean_file(t),
+		^^clean_file(tt),
+		^^clean_file(tb),
 		^^clean_text_input,
 		^^clean_binary_input,
 		^^clean_text_output.

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2017-2022 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -23,71 +23,66 @@
 :- category(code_metrics_utilities).
 
 	:- info([
-		version is 0:6:0,
+		version is 0:7:0,
 		author is 'Ebrahim Azarisooreh',
-		date is 2018-06-08,
+		date is 2024-03-28,
 		comment is 'Internal predicates for analyzing source code.',
 		remarks is [
 			'Usage' - 'This is meant to be imported by any metric added to the system.',
-			'Predicate Scope' - 'This is meant for internal use by metrics only. As such, all provided predicates are private.'
+			'Predicate Scope' - 'This is meant for internal use by metrics only. As such, all provided predicates are protected.'
 		]
 	]).
 
-	:- uses(list, [member/2, memberchk/2]).
-
-	:- private(ancestor/4).
+	:- protected(ancestor/4).
 	:- mode(ancestor(?entity, ?entity_identifier, ?entity, ?entity_identifier), zero_or_more).
 	:- info(ancestor/4, [
 		comment is 'True if ``Entity`` descends from ``Ancestor``, and ``EntityKind`` and ``AncestorKind`` unify with their respective entity types.',
 		argnames is ['EntityKind', 'Entity', 'AncestorKind', 'Ancestor']
 	]).
 
-	:- private(current_entity/1).
+	:- protected(current_entity/1).
 	:- mode(current_entity(?entity_identifier), zero_or_more).
 	:- info(current_entity/1, [
 		comment is 'True if ``Entity`` is a currently loaded entity.',
 		argnames is ['Entity']
 	]).
 
-	:- private(declares_predicate/2).
+	:- protected(declares_predicate/2).
 	:- mode(declares_predicate(?entity_identifier, ?predicate_indicator), zero_or_more).
 	:- info(declares_predicate/2, [
 		comment is 'True if ``Entity`` declares ``Predicate`` internally.',
 		argnames is ['Entity', 'Predicate']
 	]).
 
-	:- private(defines_predicate/2).
+	:- protected(defines_predicate/2).
 	:- mode(defines_predicate(?entity_identifier, ?predicate_indicator), zero_or_more).
 	:- info(defines_predicate/2, [
 		comment is 'True if ``Entity`` defines an implementation of ``Predicate`` internally. Auxiliary predicates are excluded from results.',
 		argnames is ['Entity', 'Predicate']
 	]).
 
-	:- private(defines_predicate/3).
+	:- protected(defines_predicate/3).
 	:- mode(defines_predicate(?entity_identifier, ?predicate_indicator, ?term), zero_or_more).
 	:- info(defines_predicate/3, [
 		comment is 'Same as ``defines_predicate/2``, except ``Property`` is unified with a property of the predicate.',
 		argnames is ['Entity', 'Predicate', 'Property']
 	]).
 
-	:- private(entity_calls/3).
-	:- mode(
-		entity_calls(?entity_identifier, ?predicate_indicator, ?predicate_indicator),
-		zero_or_one
-	).
+	:- protected(entity_calls/3).
+	:- mode(entity_calls(?entity_identifier, ?predicate_indicator, ?predicate_indicator), zero_or_one).
 	:- info(entity_calls/3, [
 		comment is 'True if a predicate ``Caller`` within ``Entity`` makes a ``Call``.',
 		argnames is ['Entity', 'Caller', 'Call']
 	]).
 
-	:- private(entity_kind/2).
+	:- protected(entity_kind/2).
 	:- mode(entity_kind(+entity_identifier, -entity), zero_or_one).
 	:- info(entity_kind/2, [
 		comment is 'True if ``Kind`` defines ``Entity`` and is one of category, protocol, or object.',
 		argnames is ['Entity', 'Kind']
 	]).
 
-	:- private(entity_property/2).
+	:- protected(entity_property/2).
 	:- mode(entity_property(+entity_identifier, -term), zero_or_more).
 	:- info(entity_property/2, [
 		comment is 'True if ``Property`` is a valid property of ``Entity``. Entity can be either a category, a protocol, or an object.',
@@ -95,14 +90,26 @@
 
 	]).
 
-	:- private(entity_updates/3).
-	:- mode(
-		entity_updates(+entity_identifier, ?predicate_indicator, ?predicate_indicator),
-		zero_or_one
-	).
+	:- protected(entity_updates/3).
+	:- mode(entity_updates(+entity_identifier, ?predicate_indicator, ?predicate_indicator), zero_or_one).
 	:- info(entity_updates/3, [
 		comment is 'True if a predicate ``Updater`` within ``Entity`` makes a dynamic update to ``Updated`` (by using e.g. the ``asserta/1`` or ``retract/1`` predicates).',
 		argnames is ['Entity', 'Updater', 'Updated']
+	]).
+
+	:- protected(not_excluded_file/3).
+	:- mode(not_excluded_file(+list(atom), +atom, +atom), zero_or_one).
+	:- info(not_excluded_file/3, [
+		comment is 'True if the file is not being excluded.',
+		argnames is ['ExcludedFiles', 'Path', 'Basename']
+	]).
+
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
+
+	:- uses(logtalk, [
+		file_type_extension/2
 	]).
 
 	current_entity(Entity) :-
@@ -217,5 +224,20 @@
 		specializes_class(Entity, Ancestor),
 		\+ instantiates_class(Ancestor, Entity),
 		\+ specializes_class(Ancestor, Entity).
+
+	not_excluded_file([], _, _).
+	not_excluded_file([ExcludedFile| ExcludedFiles], Path, Basename) :-
+		% files in the exclusion list may be given by full path or by basename
+		\+ member(Path, [ExcludedFile| ExcludedFiles]),
+		\+ member(Basename, [ExcludedFile| ExcludedFiles]),
+		% files in the exclusion list may be given with or without extension
+		\+ (	file_type_extension(logtalk, Extension),
+				atom_concat(Source, Extension, Path),
+				member(Source, [ExcludedFile| ExcludedFiles])
+		),
+		\+ (	file_type_extension(logtalk, Extension),
+				atom_concat(Source, Extension, Basename),
+				member(Source, [ExcludedFile| ExcludedFiles])
+		).
 
 :- end_category.

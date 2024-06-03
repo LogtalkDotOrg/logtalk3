@@ -21,7 +21,7 @@ ________________________________________________________________________
 % create a GNU Prolog executable that includes the Logtalk compiler/runtime:
 
 $ cd "$LOGTALKHOME/scripts/embedding/gprolog/"
-$ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect
+$ ./gprolog_embed_logtalk.sh -c -d "$HOME"/collect -s none
 $ ~/collect/logtalk
 
 

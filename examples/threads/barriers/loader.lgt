@@ -21,5 +21,5 @@
 
 :- initialization((
 	logtalk_load(random(loader)),
-	logtalk_load(beatles)
+	logtalk_load(beatles, [optimize(on)])
 )).

@@ -23,36 +23,60 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2019-02-12,
+		date is 2024-01-30,
 		comment is 'Unit tests for the threaded_exit/1-2 built-in predicates.'
 	]).
 
+	:- threaded.
+
 	% threaded_exit/1 tests
 
-	throws(threaded_exit_1_01, error(instantiation_error, logtalk(threaded_exit(_), _))) :-
-		{threaded_exit(_)}.
+	test(threaded_exit_1_01, error(existence_error(thread,tests))) :-
+		threaded_exit(true).
 
-	throws(threaded_exit_1_02, error(type_error(callable, 1), logtalk(threaded_exit(_), _))) :-
-		{threaded_exit(1)}.
+	test(threaded_exit_1_02, error(instantiation_error)) :-
+		threaded_call(true),
+		threaded_exit(_).
+
+	test(threaded_exit_1_03, error(type_error(callable, Int))) :-
+		% delay the error to runtime
+		int(Int),
+		threaded_call(true),
+		threaded_exit(Int).
 
 	% threaded_exit/2 tests
 
-	throws(threaded_exit_2_01, error(instantiation_error, logtalk(threaded_exit(_,_), _))) :-
-		{threaded_exit(_, _)}.
+	test(threaded_exit_2_01, error(instantiation_error)) :-
+		threaded_exit(a, _).
 
-	throws(threaded_exit_2_02, error(type_error(callable, 1), logtalk(threaded_exit(_,_), _))) :-
-		{threaded_exit(1, _)}.
+	test(threaded_exit_2_02, error(instantiation_error)) :-
+		threaded_call(true, Tag),
+		threaded_exit(_, Tag).
 
-	succeeds(threaded_exit_2_03) :-
-		{	threaded_call(true, Tag),
-			threaded_exit(true, Tag)
-		}.
+	test(threaded_exit_2_03, error(type_error(callable, Int))) :-
+		% delay the error to runtime
+		int(Int),
+		threaded_call(true, Tag),
+		threaded_exit(Int, Tag).
 
-	succeeds(threaded_exit_2_04) :-
-		{	threaded_once(true, Tag),
-			threaded_exit(true, Tag)
-		}.
+	test(threaded_exit_2_04, true) :-
+		threaded_call(true, Tag),
+		threaded_exit(true, Tag).
+
+	test(threaded_exit_2_05, true(L == [1,2,3])) :-
+		threaded_call(list::member(X,[1,2,3]), Tag),
+		findall(X, threaded_exit(list::member(X,[1,2,3]), Tag), L).
+
+	test(threaded_exit_2_06, true) :-
+		threaded_once(true, Tag),
+		threaded_exit(true, Tag).
+
+	% auxiliary predicates
+
+	int(1).
+
+	a.
 
 :- end_object.

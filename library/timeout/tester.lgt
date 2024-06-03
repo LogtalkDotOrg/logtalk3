@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +41,7 @@
 		set_logtalk_flag(report, warnings),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(timeout, [debug(on), source_data(on)]),
-		logtalk_load(tests, [hook(lgtunit)]),
+		logtalk_load(tests, [hook(lgtunit), left_recursion(silent)]),
 		tests::run
 	)).
 

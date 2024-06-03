@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prolog integration and migration &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>Prolog integration and migration &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -147,7 +150,7 @@
            <div itemprop="articleBody">
              
   <section id="prolog-integration-and-migration">
-<span id="migration-migration"></span><h1>Prolog integration and migration<a class="headerlink" href="#prolog-integration-and-migration" title="Permalink to this heading"></a></h1>
+<span id="migration-migration"></span><h1>Prolog integration and migration<a class="headerlink" href="#prolog-integration-and-migration" title="Link to this heading"></a></h1>
 <p>This section provides suggestions for integrating and migrating plain Prolog
 code and Prolog module code to Logtalk. Detailed instructions are provided
 for encapsulating plain Prolog code in objects, converting Prolog modules
@@ -157,7 +160,7 @@ in this section is a solution for running a Prolog application which uses
 modules on a Prolog compiler with no module system. The <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> tool
 can be used to help in migrating Prolog code.</p>
 <section id="source-files-with-both-prolog-code-and-logtalk-code">
-<span id="migration-hybrid"></span><h2>Source files with both Prolog code and Logtalk code<a class="headerlink" href="#source-files-with-both-prolog-code-and-logtalk-code" title="Permalink to this heading"></a></h2>
+<span id="migration-hybrid"></span><h2>Source files with both Prolog code and Logtalk code<a class="headerlink" href="#source-files-with-both-prolog-code-and-logtalk-code" title="Link to this heading"></a></h2>
 <p>Logtalk source files may contain plain Prolog code intermixed with
 Logtalk code. The Logtalk compiler simply copies the plain Prolog code
 as-is to the generated Prolog file. With Prolog modules, it is assumed
@@ -171,7 +174,7 @@ directive, it assumes that all code that follows until the end of the
 file belongs to the module.</p>
 </section>
 <section id="encapsulating-plain-prolog-code-in-objects">
-<span id="migration-encapsulating"></span><h2>Encapsulating plain Prolog code in objects<a class="headerlink" href="#encapsulating-plain-prolog-code-in-objects" title="Permalink to this heading"></a></h2>
+<span id="migration-encapsulating"></span><h2>Encapsulating plain Prolog code in objects<a class="headerlink" href="#encapsulating-plain-prolog-code-in-objects" title="Link to this heading"></a></h2>
 <p>Most applications consist of several plain Prolog source files, each one
 defining a few top-level predicates and auxiliary predicates that are
 not meant to be directly called by the user. Encapsulating plain Prolog
@@ -202,7 +205,7 @@ calls. Compiling the resulting objects with the Logtalk
 help you identify calls to predicates defined on other converted source
 files and possible portability issues.</p>
 <section id="prolog-multifile-predicates">
-<span id="migration-multifile"></span><h3>Prolog multifile predicates<a class="headerlink" href="#prolog-multifile-predicates" title="Permalink to this heading"></a></h3>
+<span id="migration-multifile"></span><h3>Prolog multifile predicates<a class="headerlink" href="#prolog-multifile-predicates" title="Link to this heading"></a></h3>
 <p>Prolog <em>multifile</em> predicates are used when clauses for the same
 predicate are spread among several source files. When encapsulating
 plain Prolog code that uses multifile predicates, is often the case that
@@ -245,7 +248,7 @@ for more details.</p>
 </section>
 </section>
 <section id="converting-prolog-modules-into-objects">
-<span id="migration-converting"></span><h2>Converting Prolog modules into objects<a class="headerlink" href="#converting-prolog-modules-into-objects" title="Permalink to this heading"></a></h2>
+<span id="migration-converting"></span><h2>Converting Prolog modules into objects<a class="headerlink" href="#converting-prolog-modules-into-objects" title="Link to this heading"></a></h2>
 <p>Converting Prolog modules into objects may allow an application to run
 on a wider range of Prolog compilers, overcoming portability problems.
 Some Prolog compilers don’t support a module system. Among those Prolog
@@ -323,7 +326,7 @@ supports compiling Prolog files as Logtalk source code without requiring
 changes to the file name extensions.</p>
 </section>
 <section id="compiling-prolog-modules-as-objects">
-<span id="migration-compiling"></span><h2>Compiling Prolog modules as objects<a class="headerlink" href="#compiling-prolog-modules-as-objects" title="Permalink to this heading"></a></h2>
+<span id="migration-compiling"></span><h2>Compiling Prolog modules as objects<a class="headerlink" href="#compiling-prolog-modules-as-objects" title="Link to this heading"></a></h2>
 <p>A possible alternative to port Prolog code to Logtalk is to compile the Prolog
 source files using the <code class="docutils literal notranslate"><span class="pre">logtalk_load/1-2</span></code> and <code class="docutils literal notranslate"><span class="pre">logtalk_compile/1-2</span></code>
 predicates. The Logtalk compiler provides partial support for compiling Prolog
@@ -347,7 +350,7 @@ reason is that, unlike in Logtalk, calls to implicitly and explicitly
 qualified module meta-predicates have different semantics. Follows a
 discussion of other limitations of this approach that you should be aware.</p>
 <section id="supported-module-directives">
-<span id="migration-compatibility"></span><h3>Supported module directives<a class="headerlink" href="#supported-module-directives" title="Permalink to this heading"></a></h3>
+<span id="migration-compatibility"></span><h3>Supported module directives<a class="headerlink" href="#supported-module-directives" title="Link to this heading"></a></h3>
 <p>Currently, Logtalk supports the following module directives:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">module/1</span></code></dt><dd><p>The module name becomes the object name.</p>
@@ -422,7 +425,7 @@ turned on. You may use the <a class="reference internal" href="programming.html#
 small performance gain for the compiled code.</p>
 </section>
 <section id="unsupported-module-directives">
-<span id="migration-unsupported-module-directives"></span><h3>Unsupported module directives<a class="headerlink" href="#unsupported-module-directives" title="Permalink to this heading"></a></h3>
+<span id="migration-unsupported-module-directives"></span><h3>Unsupported module directives<a class="headerlink" href="#unsupported-module-directives" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">reexport/1</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> directives are not directly
 supported by the Logtalk compiler. But most Prolog adapter files provide
 support for compiling these directives using Logtalk first stage of
@@ -441,7 +444,7 @@ that are called but never defined. Second, use this list to replace the
 then be able to compile the modified Prolog module as an object.</p>
 </section>
 <section id="modules-using-a-term-expansion-mechanism">
-<span id="migration-module-expansions"></span><h3>Modules using a term-expansion mechanism<a class="headerlink" href="#modules-using-a-term-expansion-mechanism" title="Permalink to this heading"></a></h3>
+<span id="migration-module-expansions"></span><h3>Modules using a term-expansion mechanism<a class="headerlink" href="#modules-using-a-term-expansion-mechanism" title="Link to this heading"></a></h3>
 <p>Although Logtalk supports
 <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term and goal expansion mechanisms</span></a>, the usage
 semantics are different from similar mechanisms found in some Prolog
@@ -484,7 +487,7 @@ be possible to rewrite the expansion rules to use the
 <a class="reference internal" href="../refman/predicates/logtalk_load_context_2.html#predicates-logtalk-load-context-2"><span class="std std-ref">logtalk_load_context/2</span></a> predicate instead.</p>
 </section>
 <section id="file-search-paths">
-<span id="migration-file-search-paths"></span><h3>File search paths<a class="headerlink" href="#file-search-paths" title="Permalink to this heading"></a></h3>
+<span id="migration-file-search-paths"></span><h3>File search paths<a class="headerlink" href="#file-search-paths" title="Link to this heading"></a></h3>
 <p>Some Prolog systems provide a mechanism for defining file search paths
 (this mechanism works differently from Logtalk own suport for defining
 library path aliases). When porting Prolog code that defines file search
@@ -496,7 +499,7 @@ use file directives such as <code class="docutils literal notranslate"><span cla
 </section>
 </section>
 <section id="dealing-with-proprietary-prolog-directives-and-predicates">
-<span id="migration-proprietary"></span><h2>Dealing with proprietary Prolog directives and predicates<a class="headerlink" href="#dealing-with-proprietary-prolog-directives-and-predicates" title="Permalink to this heading"></a></h2>
+<span id="migration-proprietary"></span><h2>Dealing with proprietary Prolog directives and predicates<a class="headerlink" href="#dealing-with-proprietary-prolog-directives-and-predicates" title="Link to this heading"></a></h2>
 <p>Most Prolog compilers define proprietary, non-standard, directives and
 predicates that may be used in both plain code and module code.
 Non-standard Prolog built-in predicates are usually not problematic, as
@@ -545,7 +548,7 @@ the Logtalk compiler calling the <code class="docutils literal notranslate"><spa
 predicate.</p>
 </section>
 <section id="calling-prolog-module-predicates">
-<span id="migration-calling"></span><h2>Calling Prolog module predicates<a class="headerlink" href="#calling-prolog-module-predicates" title="Permalink to this heading"></a></h2>
+<span id="migration-calling"></span><h2>Calling Prolog module predicates<a class="headerlink" href="#calling-prolog-module-predicates" title="Link to this heading"></a></h2>
 <p>Prolog module predicates can be called from within objects or categories
 by simply using explicit module qualification, i.e. by writing
 <code class="docutils literal notranslate"><span class="pre">Module:Goal</span></code> or <code class="docutils literal notranslate"><span class="pre">Goal&#64;Module</span></code> (depending on the module system).
@@ -596,7 +599,7 @@ as-is or also compiled as objects.</p>
 <p>For more details, see the <a class="reference internal" href="predicates.html#predicates-prolog"><span class="std std-ref">Calling Prolog predicates</span></a> section.</p>
 </section>
 <section id="loading-converted-prolog-applications">
-<span id="migration-loading"></span><h2>Loading converted Prolog applications<a class="headerlink" href="#loading-converted-prolog-applications" title="Permalink to this heading"></a></h2>
+<span id="migration-loading"></span><h2>Loading converted Prolog applications<a class="headerlink" href="#loading-converted-prolog-applications" title="Link to this heading"></a></h2>
 <p>Logtalk strongly favors and advises users to provide a main
 <a class="reference internal" href="programming.html#programming-loaders"><span class="std std-ref">loader file</span></a> for applications that explicitly
 load any required libraries and the application source files. In contrast,
@@ -630,7 +633,7 @@ useful in understanding applications architecture.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

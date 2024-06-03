@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on April 13, 2022
+##   Last updated on November 28, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.1"
+	echo "$(basename "$0") 2.2"
 	exit 0
 }
 
@@ -112,7 +112,7 @@ usage_help()
 	echo "Optional arguments:"
 	echo "  -f paper format (either a4 or us; default is $format)"
 	echo "  -d output directory for the PDF files (default is $directory)"
-	echo "  -p XSL-FO processor (either fop, xep, or xinc; default is $processor)"
+	echo "  -p XSL-FO processor (either fop, fop2, xep, or xinc; default is $processor)"
 	echo "  -v print version"
 	echo "  -h help"
 	echo

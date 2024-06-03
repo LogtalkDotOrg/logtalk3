@@ -14,6 +14,9 @@
 
 Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.
 
+| **Availability:** 
+|    ``logtalk_load(java(loader))``
+
 | **Author:** Paulo Moura and Sergio Castro
 | **Version:** 1:4:0
 | **Date:** 2023-03-13

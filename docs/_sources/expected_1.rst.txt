@@ -10,6 +10,9 @@
 
 Expected term predicates. Requires passing an expected term (constructed using the ``expected`` object predicates) as a parameter.
 
+| **Availability:** 
+|    ``logtalk_load(expecteds(loader))``
+
 | **Author:** Paulo Moura
 | **Version:** 1:5:0
 | **Date:** 2020-01-06

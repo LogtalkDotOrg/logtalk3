@@ -25,4 +25,4 @@ was coded for a contribution to the Rosetta Code website.
 
 For more information see:
 
-	http://rosettacode.org/wiki/Metered_concurrency#Logtalk
+	https://rosettacode.org/wiki/Metered_concurrency#Logtalk

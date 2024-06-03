@@ -2,7 +2,7 @@
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %
-%  SPDX-FileCopyrightText: 2018-2019 Paulo Moura
+%  SPDX-FileCopyrightText: 2018-2024 Paulo Moura
 %  SPDX-FileCopyrightText: 2016 Metagol authors
 %  SPDX-License-Identifier: BSD-3-Clause
 %
@@ -37,10 +37,10 @@
 :- protocol(metagol_example_protocol).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:1:1,
 		author is 'Paulo Moura.',
-		date is 2019-05-07,
-		license is 'BSD 3-Clause License',
+		date is 2024-03-15,
+		license is 'BSD-3-Clause',
 		comment is 'Convenient learning predicates for use in examples and unit tests.'
 	]).
 

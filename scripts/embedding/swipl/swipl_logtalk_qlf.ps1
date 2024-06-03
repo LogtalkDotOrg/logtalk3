@@ -5,10 +5,11 @@
 ##   compiler and runtime and optionally an application.qlf file with a
 ##   Logtalk application
 ## 
-##   Last updated on March 15, 2023
+##   Last updated on September 6, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2022 Hans N. Beck
+##   SPDX-FileCopyrightText: 2022 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,13 +34,13 @@ param(
 	[Parameter()]
 	[Switch]$c, 
 	[Switch]$x, 
+	[String]$f,
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "application",
 	[String]$p = ($env:LOGTALKHOME + '\paths\paths.pl'),
 	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
 	[String]$k = ($env:LOGTALKHOME + '\adapters\swihooks.pl'),
-	[String]$s, 
 	[String]$l,
 	[String]$g = "true",
 	[Switch]$v,
@@ -49,7 +50,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.15")
+	Write-Output ($myName + " 0.19")
 }
 
 function Get-Logtalkhome {
@@ -103,12 +104,13 @@ function Write-Usage-Help() {
 	Write-Output "Optional arguments:"
 	Write-Output "  -c compile library alias paths in paths and settings files"
 	Write-Output "  -x also generate a standalone saved state"
+	Write-Output "  -f foreign object action for standalone saved state (requires -x option; no default)"
 	Write-Output "  -d directory for generated QLF files (absolute path; default is current directory)"
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
 	Write-Output ("  -k hooks file (absolute path; default is " + $k + ")")
-	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
+	Write-Output ("  -s settings file (absolute path or 'none'; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output "  -g startup goal for the saved state in canonical syntax (default is true)"
 	Write-Output ("  -v print version of " +  $myName)
@@ -128,6 +130,12 @@ function Check-Parameters() {
 		Exit
 	}
 
+	if ($f -ne "") {
+		$foreign = ",foreign($f)"
+	} else {
+		$foreign = ""
+	}
+
 	if (-not(Test-Path $p)) { # cannot be ""
 		Write-Output ("The " + $p + " library paths file does not exist!")
 		Start-Sleep -Seconds 2
@@ -140,8 +148,8 @@ function Check-Parameters() {
 		Exit
 	}
 
-	if (($s -ne "") -and (-not(Test-Path $s))) {
-	Write-Output ("The " + $s + " settings file does not exist!")
+	if (($s -ne "") -and ($s -ne "none") -and (-not(Test-Path $s))) {
+		Write-Output ("The " + $s + " settings file does not exist!")
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -229,13 +237,13 @@ $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwardin
 swilgt -g $GoalParam -t "halt" 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "])"
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "])"
 	swilgt -g $GoalParam -t "halt"
 } else {
 	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
 }
 
-if ($s -eq "") {
+if (($s -eq "") -or ($s -eq "none")) {
 	Get-Content -Path swi.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
@@ -248,11 +256,12 @@ if ($s -eq "") {
 		$k | Set-Content logtalk.pl
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "])"
+		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "])"
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "])" 
 	}
 	swilgt -g $GoalParam -t "halt"
+	swi.pl -replace 'settings_file, allow' 'settings_file, deny'
 	Get-Content -Path swi.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
@@ -298,10 +307,10 @@ if ($l -ne "") {
 if ($x -eq $true) {
 	Set-Location $d
 	if ($l -ne "") {
-		$GoalParam = "[logtalk, application], qsave_program('" + $n + "', [goal($g), stand_alone(true)])"
+		$GoalParam = "[logtalk, application], qsave_program('" + $n + "', [goal($g),stand_alone(true)$foreign])"
 		swipl -g $GoalParam -t "halt"
 	} else {
-		$GoalParam = "[logtalk], qsave_program('" + $n + "', [goal($g), stand_alone(true)])"
+		$GoalParam = "[logtalk], qsave_program('" + $n + "', [goal($g),stand_alone(true)$foreign])"
 		swipl -g $GoalParam -t "halt"
 	}
 }

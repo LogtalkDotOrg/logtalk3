@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,9 +59,9 @@
 :- object(data_processing).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2018-06-10,
+		date is 2024-05-29,
 		comment is 'Data processing example, which is fully decoupled from data acquisition details.'
 	]).
 
@@ -107,8 +107,8 @@
 		forall(
 			data_acquisition::parents(Person, ExpectedFather, ExpectedMother),
 			% throw an error if the expected father or mother names are missing
-			(	expected(ExpectedFather)::if_unexpected({Person}/[Error]>>throw(Error-Person)),
-				expected(ExpectedMother)::if_unexpected({Person}/[Error]>>throw(Error-Person))
+			(	expected(ExpectedFather)::if_unexpected({Person}/[FatherError]>>throw(FatherError-Person)),
+				expected(ExpectedMother)::if_unexpected({Person}/[MotherError]>>throw(MotherError-Person))
 			)
 		).
 

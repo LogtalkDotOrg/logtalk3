@@ -23,20 +23,34 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-11-15,
+		date is 2024-02-05,
 		comment is 'Unit tests for the "threads/ping_pong" example.'
 	]).
 
 	cover(ping_pong).
 
-	succeeds(ping_pong_02) :-
-		^^suppress_text_output,
-		ping_pong::play(1).
+	:- if(current_logtalk_flag(prolog_dialect, lvm)).
 
-	succeeds(ping_pong_03) :-
-		^^suppress_text_output,
-		ping_pong::play(5).
+		test(ping_pong_01, true) :-
+			ping_pong::play(1).
+
+		test(ping_pong_02, true) :-
+			ping_pong::play(5).
+
+	:- else.
+
+		test(ping_pong_01, true(Assertion)) :-
+			^^set_text_output(''),
+			ping_pong::play(1),
+			^^text_output_assertion('Ping ...\n.... Pong\nGame over!\n', Assertion).
+
+		test(ping_pong_02, true(Assertion)) :-
+			^^set_text_output(''),
+			ping_pong::play(5),
+			^^text_output_assertion('Ping ...\n.... Pong\nPing ...\n.... Pong\nPing ...\n.... Pong\nPing ...\n.... Pong\nPing ...\n.... Pong\nGame over!\n', Assertion).
+
+	:- endif.
 
 :- end_object.

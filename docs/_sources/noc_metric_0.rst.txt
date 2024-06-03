@@ -10,9 +10,12 @@
 
 Number of entity clauses metric. The score is represented using the compound term ``number_of_clauses(Total, User)``.
 
+| **Availability:** 
+|    ``logtalk_load(code_metrics(loader))``
+
 | **Author:** Ebrahim Azarisooreh and Paulo Moura
-| **Version:** 0:12:0
-| **Date:** 2022-05-05
+| **Version:** 0:14:1
+| **Date:** 2024-05-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -31,7 +34,7 @@ Number of entity clauses metric. The score is represented using the compound ter
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`code_metric/0::all/0`  :ref:`code_metric/0::all_score/1`  :ref:`code_metric/0::directory/1`  :ref:`code_metric/0::directory_score/2`  :ref:`code_metric/0::entity/1`  :ref:`code_metric/0::entity_score/2`  :ref:`code_metric/0::file/1`  :ref:`code_metric/0::file_score/2`  :ref:`code_metric/0::format_entity_score//2`  :ref:`code_metric/0::library/1`  :ref:`code_metric/0::library_score/2`  :ref:`code_metric/0::rdirectory/1`  :ref:`code_metric/0::rdirectory_score/2`  :ref:`code_metric/0::rlibrary/1`  :ref:`code_metric/0::rlibrary_score/2`  
+|     :ref:`code_metric/0::all/0`  :ref:`code_metric/0::all/1`  :ref:`code_metric/0::all_score/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`code_metric/0::directory/1`  :ref:`code_metric/0::directory/2`  :ref:`code_metric/0::directory_score/2`  :ref:`code_metric/0::entity/1`  :ref:`code_metric/0::entity_score/2`  :ref:`code_metric/0::file/1`  :ref:`code_metric/0::file/2`  :ref:`code_metric/0::file_score/2`  :ref:`code_metric/0::format_entity_score//2`  :ref:`code_metric/0::library/1`  :ref:`code_metric/0::library/2`  :ref:`code_metric/0::library_score/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`code_metric/0::rdirectory/1`  :ref:`code_metric/0::rdirectory/2`  :ref:`code_metric/0::rdirectory_score/2`  :ref:`code_metric/0::rlibrary/1`  :ref:`code_metric/0::rlibrary/2`  :ref:`code_metric/0::rlibrary_score/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

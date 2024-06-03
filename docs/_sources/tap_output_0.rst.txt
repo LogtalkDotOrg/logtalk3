@@ -10,9 +10,12 @@
 
 Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.
 
+| **Availability:** 
+|    ``logtalk_load(lgtunit(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 3:0:1
-| **Date:** 2022-10-08
+| **Version:** 4:0:1
+| **Date:** 2024-04-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

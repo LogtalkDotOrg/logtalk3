@@ -100,6 +100,18 @@
 		logtalk_load_context(entity_type, Type),
 		assertz(result(entity_type, Type)),
 		fail.
+	term_expansion((:- end_protocol), _) :-
+		logtalk_load_context(entity_relation, Relation),
+		assertz(result(entity_relation, Relation)),
+		fail.
+	term_expansion((:- end_category), _) :-
+		logtalk_load_context(entity_relation, Relation),
+		assertz(result(entity_relation, Relation)),
+		fail.
+	term_expansion((:- end_object), _) :-
+		logtalk_load_context(entity_relation, Relation),
+		assertz(result(entity_relation, Relation)),
+		fail.
 	term_expansion((:- end_object), _) :-
 		logtalk_load_context(stream, Stream),
 		assertz(result(stream, Stream)),
@@ -123,9 +135,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2023-05-28,
+		date is 2023-07-14,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -224,5 +236,63 @@
 	test(logtalk_load_context_2_22, true(File0 == File)) :-
 		object_property(hook, file(File0)),
 		logtalk_library_path(hook_file, File).
+
+	% entity relation key
+
+	test(logtalk_load_context_2_23, true(Relations == [r(ptc2,ptc1,(public))])) :-
+		findall(
+			r(Protocol, ParentProtocol, Scope),
+			result(entity_relation, extends_protocol(Protocol, ParentProtocol, Scope)),
+			Relations
+		).
+
+	test(logtalk_load_context_2_24, true(Relations == [r(ctg2,ptc1,(public)), r(obj1,ptc1,(public)), r(obj1,ptc2,(public)), r(obj3,ptc2,(public))])) :-
+		findall(
+			r(Entity, Protocol, Scope),
+			result(entity_relation, implements_protocol(Entity, Protocol, Scope)),
+			Relations
+		).
+
+	test(logtalk_load_context_2_25, true(Relations == [r(ctg2,ctg1,protected)])) :-
+		findall(
+			r(Category, ParentCategory, Scope),
+			result(entity_relation, extends_category(Category, ParentCategory, Scope)),
+			Relations
+		).
+
+	test(logtalk_load_context_2_26, true(Relations == [r(obj1,ctg1,(public)), r(obj3,ctg2,private)])) :-
+		findall(
+			r(Object, Category, Scope),
+			result(entity_relation, imports_category(Object, Category, Scope)),
+			Relations
+		).
+
+	test(logtalk_load_context_2_27, true(Relations == [r(obj1,obj2,private)])) :-
+		findall(
+			r(Prototype, Parent, Scope),
+			result(entity_relation, extends_object(Prototype, Parent, Scope)),
+			Relations
+		).
+
+	test(logtalk_load_context_2_28, true(Relations == [r(obj3,obj4,(public))])) :-
+		findall(
+			r(Instance, Class, Scope),
+			result(entity_relation, instantiates_class(Instance, Class, Scope)),
+			Relations
+		).
+
+	test(logtalk_load_context_2_29, true(Relations == [r(obj3,obj5,(public))])) :-
+		findall(
+			r(Class, Superclass, Scope),
+			result(entity_relation, specializes_class(Class, Superclass, Scope)),
+			Relations
+		).
+
+	test(logtalk_load_context_2_30, true(Relations == [r(ctg3,obj3)])) :-
+		findall(
+			r(Category, Object),
+			result(entity_relation, complements_object(Category, Object)),
+			Relations
+		).
 
 :- end_object.

@@ -4,10 +4,11 @@
 ##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on March 15, 2023
+##   Last updated on September 6, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2022 Hans N. Beck
+##   SPDX-FileCopyrightText: 2022 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,15 +31,16 @@
 [CmdletBinding()]
 param(
 	[Parameter()]
-	[Switch]$c, 
-	[Switch]$x, 
+	[Switch]$c,
+	[Switch]$x,
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "application",
 	[String]$p = ($env:LOGTALKHOME + '\paths\paths.pl'),
-	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
-	[String]$s, 
+	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'),
 	[String]$l,
+	[Switch]$f,
+	[Switch]$x,
 	[String]$g = "true",
 	[Switch]$v,
 	[Switch]$h
@@ -47,7 +49,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.4")
+	Write-Output ($myName + " 0.10")
 }
 
 function Get-Logtalkhome {
@@ -89,12 +91,13 @@ function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
-	Write-Output "This script creates a LVM logtalk.pl file with the Logtalk compiler and"
-	Write-Output "runtime and an optional application.pl file from an application source"
-	Write-Output "code given its loader file."
+	Write-Output "This script creates a LVM logtalk.pl file with the Logtalk compiler/runtime"
+	Write-Output "and an optional application.pl file from an application source code given"
+	Write-Output "its loader file. When embedding an application, this script also creates a"
+	Write-Output "loader.pl file for loading all generated Prolog and foreign library files."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader]")
+	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-f] [-x]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
@@ -104,8 +107,10 @@ function Write-Usage-Help() {
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
-	Write-Output ("  -s settings file (absolute path; default is " + $s + ")")
+	Write-Output ("  -s settings file (absolute path or 'none'; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
+	Write-Output "  -f copy foreign library files loaded by the application"
+	Write-Output "  -x encrypt the generated logtalk.pl and application.pl files"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
 	Write-Output ""
@@ -129,8 +134,8 @@ function Check-Parameters() {
 		Exit
 	}
 
-	if (($s -ne "") -and (-not(Test-Path $s))) {
-	Write-Output ("The " + $s + " settings file does not exist!")
+	if (($s -ne "") -and ($s -ne "none") -and (-not(Test-Path $s))) {
+		Write-Output ("The " + $s + " settings file does not exist!")
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -218,13 +223,13 @@ $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwardin
 lvmlgt --goal $GoalParam 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt."
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt."
 	lvmlgt --goal $GoalParam
 } else {
 	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
 }
 
-if ($s -eq "") {
+if (($s -eq "") -or ($s -eq "none")) {
 	Get-Content -Path lvm.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
@@ -236,11 +241,12 @@ if ($s -eq "") {
 		core.pl | Set-Content $d/logtalk.pl
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
+		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt."
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
 	}
 	lvmlgt --goal $GoalParam
+	lvm.pl -replace 'settings_file, allow' 'settings_file, deny'
 	Get-Content -Path lvm.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
@@ -263,13 +269,38 @@ if ($l -ne "") {
 		Exit 
 	}
 
-	$GoalParam = "consult('" + $d.Replace('\', '/') +  "/logtalk.pl'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt." 
+	if ($f -eq $true) {
+		$GoalParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/') + "'), forall((current_plugin(PlugIn), plugin_property(PlugIn,file(File))), (decompose_file_name(File,_,Basename), atom_concat('" + $d.Replace('\', '/') + "',Basename,Copy), copy_file(File,Copy))), halt." 
+	} else {
+		$GoalParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/') + "'), halt." 
+	}
 
 	lvmpl --goal $GoalParam
 	Get-Item *.pl | 
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
 		Set-Content $d/application.pl
+
+	Set-Content -Path $d/loader.pl -Value ":- initialization(("
+
+	if ($x -eq $true) {
+		$GoalEncryptLogtalk = "encrypt_program('" + $d.Replace('\', '/') + "/logtalk.pl'),halt."
+		$GoalEncryptApplication = "encrypt_program('" + $d.Replace('\', '/') + "/application.pl'),halt."
+		lvmpl --goal $GoalEncryptLogtalk
+		lvmpl --goal $GoalEncryptApplication
+		Remove-Item $d/logtalk.pl -Confirm
+		Remove-Item $d/application.pl -Confirm
+	}
+
+	if ($f -eq $true) {
+		$LoaderParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(report,off), logtalk_load('$loader'), open('" + $d.Replace('\', '/') + "/loader.pl',append,Stream), forall((current_plugin(PlugIn), plugin_property(PlugIn,file(File))), (decompose_file_name(File,_,Basename,_), format(Stream,'\tload_foreign_library(~q),~n',[Basename]))), close(Stream), halt."
+
+		lvmpl --goal $LoaderParam
+	}
+
+	Add-Content -Path $d/loader.pl -Value  "	consult(logtalk),"
+	Add-Content -Path $d/loader.pl -Value  "	consult(application)"
+	Add-Content -Path $d/loader.pl -Value  "))."
 
 	Pop-Location
 }

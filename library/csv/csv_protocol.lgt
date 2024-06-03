@@ -28,7 +28,7 @@
 		date is 2023-03-13,
 		comment is 'CSV file and stream reading and writing protocol.',
 		remarks is [
-			'Type-checking' - 'Some of the predicate file and stream argument type-checking exceptions depend on the Prolgo backend compliance with standards.'
+			'Type-checking' - 'Some of the predicate file and stream argument type-checking exceptions depend on the Prolog backend compliance with standards.'
 		]
 	]).
 

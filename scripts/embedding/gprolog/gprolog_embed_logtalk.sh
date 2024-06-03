@@ -5,10 +5,10 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ## 
-##   Last updated on April 9, 2022
+##   Last updated on January 9, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.14"
+	echo "$(basename "$0") 0.18"
 	exit 0
 }
 
@@ -123,7 +123,7 @@ usage_help()
 	echo "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	echo "  -n name of the generated top-level (default is logtalk)"
 	echo "  -p library paths file (absolute path; default is $paths)"
-	echo "  -s settings file (absolute path; default is $settings)"
+	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
 	echo "  -- arguments to be passed to gplc (no default)"
 	echo "  -v print version of $(basename "$0")"
@@ -171,6 +171,17 @@ if [ "$p_arg" != "" ] ; then
 	fi
 fi
 
+if [ "$s_arg" != "" ] && [ "$s_arg" != "none" ] ; then
+	if [ -f "$s_arg" ] ; then
+		settings="$s_arg"
+	else
+		echo "The $s_arg settings file does not exist!" >&2
+		exit 1
+	fi
+elif [ "$s_arg" == "none" ] ; then
+	settings="none"
+fi
+
 if [ "$l_arg" != "" ] ; then
 	if [ -f "$l_arg" ] ; then
 		loader="$l_arg"
@@ -180,17 +191,6 @@ if [ "$l_arg" != "" ] ; then
 	fi
 else
 	loader=""
-fi
-
-if [ "$s_arg" != "" ] ; then
-	if [ -f "$s_arg" ] ; then
-		settings="$s_arg"
-	else
-		echo "The $s_arg settings file does not exist!" >&2
-		exit 1
-	fi
-else
-	settings=""
 fi
 
 mkdir -p "$directory"
@@ -220,23 +220,31 @@ else
 	extension=''
 fi
 
+# use GNU sed if available instead of BSD sed
+if gsed --version >/dev/null 2>&1 ; then
+	sed="gsed"
+else
+	sed="sed"
+fi
+
 cp "$LOGTALKHOME/adapters/gnu.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
 
 gplgt$extension --query-goal "logtalk_compile([core(expanding),core(monitoring),core(forwarding),core(user),core(logtalk),core(core_messages)],[optimize(on),scratch_directory('$temporary')]),halt"
 
 if [ "$compile" != "false" ] ; then
-	gplgt$extension --query-goal "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt"
+	gplgt$extension --query-goal "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$paths',[hook(expand_library_alias_paths),scratch_directory('$temporary')]),halt"
 else
 	cp "$paths" "$temporary/paths_lgt.pl"
 fi
 
-if [ "$settings" != "" ] ; then
+if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 	if [ "$compile" != "false" ] ; then
-		gplgt$extension --query-goal "logtalk_load(library(expand_library_alias_paths_loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
+		gplgt$extension --query-goal "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$settings',[hook(expand_library_alias_paths),optimize(on),scratch_directory('$temporary')]),halt"
 	else
 		gplgt$extension --query-goal "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt"
 	fi
+	$sed -i "s/settings_file, allow/settings_file, deny/" gnu.pl
 else
 	touch settings_lgt.pl
 fi
@@ -244,7 +252,7 @@ fi
 if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
-	if [ "$settings" != "" ] ; then
+	if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 		cp "$settings" ./settings.lgt
 	fi
 	gplgt$extension --query-goal "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"

@@ -23,15 +23,19 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2013-10-15,
+		date is 2024-02-19,
 		comment is 'Unit tests for the "threads/buckets" example.'
 	]).
 
-	cover(buckets).
-
-	test(buckets_1) :-
-		buckets::start.
+	test(buckets_1, all(BucketSum =:= Sum)) :-
+		^^suppress_text_output,
+		buckets::start,
+		buckets::sum(Sum),
+		findall(Bucket, buckets::bucket(Bucket), Buckets),
+		^^assertion(list::length(Buckets, 10)),
+		list::member(Bucket, Buckets),
+		numberlist::sum(Bucket, BucketSum).
 
 :- end_object.

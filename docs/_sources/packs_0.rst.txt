@@ -10,9 +10,12 @@
 
 Pack handling predicates.
 
+| **Availability:** 
+|    ``logtalk_load(packs(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 0:62:0
-| **Date:** 2023-06-19
+| **Version:** 0:74:0
+| **Date:** 2024-05-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -470,6 +473,7 @@ Installs a new pack using the specified options. Fails if the pack is unknown or
 
     - ``update(Boolean)`` option: Update pack if already installed. Default is ``false``. Overrides the ``force/1`` option.
     - ``force(Boolean)`` option: Force pack re-installation if already installed. Default is ``false``.
+    - ``compatible(Boolean)`` option: Restrict installation to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean pack archive after installation. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose installing steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
@@ -574,7 +578,7 @@ Installs a pack (if its name is unique among all registries) using default optio
 ``update/3``
 ^^^^^^^^^^^^
 
-Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+Updates an outdated pack to the specified version using the specified options. Fails if the pack or the pack version is unknown or if the pack is not installed. Fails also if the pack is orphaned or pinned and not using a ``force(true)`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -607,7 +611,8 @@ Updates an outdated pack to the specified version using the specified options. F
 | **Remarks:**
 
     - ``install(Boolean)`` option: Install pack latest version if not already installed. Default is ``false``.
-    - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
+    - ``force(Boolean)`` option: Force update if the pack is pinned or breaks installed packs. Default is ``false``.
+    - ``compatible(Boolean)`` option: Restrict updating to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
@@ -625,7 +630,7 @@ Updates an outdated pack to the specified version using the specified options. F
 ``update/2``
 ^^^^^^^^^^^^
 
-Updates an outdated pack to its latest version using the specified options. Fails if the pack is unknown or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
+Updates an outdated pack to its latest version using the specified options. Fails if the pack is orphaned, unknown, or not installed. Fails also if the pack is pinned and not using a ``force(true)`` option.
 
 | **Compilation flags:**
 |    ``static``
@@ -654,7 +659,8 @@ Updates an outdated pack to its latest version using the specified options. Fail
 | **Remarks:**
 
     - ``install(Boolean)`` option: Install pack latest version if not already installed. Default is ``false``.
-    - ``force(Boolean)`` option: Force update if the pack is pinned. Default is ``false``.
+    - ``force(Boolean)`` option: Force update if the pack is pinned or breaks installed packs. Default is ``false``.
+    - ``compatible(Boolean)`` option: Restrict updating to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean pack archive after updating. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
@@ -672,7 +678,7 @@ Updates an outdated pack to its latest version using the specified options. Fail
 ``update/1``
 ^^^^^^^^^^^^
 
-Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, not installed, or unknown.
+Updates an outdated pack to its latest version using default options. Fails if the pack is pinned, orphaned, not installed, unknown, or breaks installed packs.
 
 | **Compilation flags:**
 |    ``static``
@@ -697,7 +703,7 @@ Updates an outdated pack to its latest version using default options. Fails if t
 ``update/0``
 ^^^^^^^^^^^^
 
-Updades all outdated packs (that are not pinned) using default options.
+Updates all outdated packs (that are not pinned) using default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -826,7 +832,7 @@ Cleans all pack archives. Fails if the the pack is unknown.
 ``clean/1``
 ^^^^^^^^^^^
 
-Cleans all pack archives. Fails if the pack is not unknown.
+Cleans all pack archives. Fails if the pack is unknown.
 
 | **Compilation flags:**
 |    ``static``
@@ -965,6 +971,7 @@ Restores a list of registries and packs plus their pinning status from a file us
 | **Remarks:**
 
     - ``force(Boolean)`` option: Force restoring if a registry is already defined or a pack is already installed. Default is ``true``.
+    - ``compatible(Boolean)`` option: Restrict installation to compatible packs. Default is ``true``.
     - ``clean(Boolean)`` option: Clean registry and pack archives after restoring. Default is ``false``.
     - ``verbose(Boolean)`` option: Verbose restoring steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksums. Default is ``true``.

@@ -81,8 +81,8 @@ Usage
 This tool provides a set of predicates that allows scanning entities,
 libraries, files, and directories. See the tool API documentation for
 details. The source code to be analyzed should be loaded with the
-`source_data` and `optimize` flags turned on (possibly set in a loader
-file).
+`source_data` and `optimize` flags turned on (possibly set from a
+loader file).
 
 As an example, assume that we want to scan an application with a library
 alias `my_app`. The following goals could be used:
@@ -98,15 +98,34 @@ alias `my_app`. The following goals could be used:
 	| ?- dead_code_scanner::library(my_app).
 	...
 
-For complex applications that make use of sub-libraries, there is also a
-`rlibrary/1` predicate that performs a recursive scan of a library and all
-its sub-libraries. Conversely, we may be interested in scanning a single
+For complex applications that make use of sub-libraries, there are also
+`rlibrary/1-2` predicates that performs a recursive scan of a library and
+all its sub-libraries. Conversely, we may be interested in scanning a single
 entity:
 
 	| ?- dead_code_scanner::entity(some_object).
 	...
 
 For other usage examples, see the `SCRIPT.txt` file in the tool directory.
+
+
+Excluding code from analysis
+----------------------------
+
+A set of options are available to specify code that should be excluded when
+looking for unused predicates (and non-terminals):
+
+- `exclude_directories(Directories)`  
+	list of directories to exclude (default is `[]`); all sub-directories of the excluded directories are also excluded; directories may be listed by full or relative path
+
+- `exclude_files(Files)`  
+	list of source files to exclude (default is `[]`); files may be listed by full path or basename, with or without extension
+
+- `exclude_libraries(Libraries)`  
+	list of libraries to exclude (default is `[startup, scratch_directory]`)
+
+- `exclude_entities(Entities)`  
+	list of entities to exclude (default is `[]`)
 
 
 Integration with the `make` tool
@@ -158,7 +177,7 @@ Prolog file and then load it in debug mode:
 In alternative, use the `object_wrapper_hook` provided by the `hook_objects`
 library:
 
-	| ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
+	| ?- logtalk_load(hook_objects(loader)).
 	...
 
 	| ?- logtalk_load(code, [hook(object_wrapper_hook), source_data(on), optimize(on)]).

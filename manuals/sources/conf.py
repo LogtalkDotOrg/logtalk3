@@ -22,13 +22,13 @@ def setup(app):
 # -- Project information -----------------------------------------------------
 
 project = u'The Logtalk Handbook'
-copyright = u'1998-2023, Paulo Moura'
+copyright = u'1998-2024, Paulo Moura'
 author = u'Paulo Moura'
 
 # The short X.Y version
-version = '3.67.0'
+version = '3.80.0'
 # The full version, including alpha/beta/rc tags
-release = u'v3.67.0-b02'
+release = u'v3.80.0-b01'
 
 
 # -- General configuration ---------------------------------------------------

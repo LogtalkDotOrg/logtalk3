@@ -10,6 +10,9 @@
 
 AVL tree implementation of the dictionary protocol. Uses standard order to compare keys.
 
+| **Availability:** 
+|    ``logtalk_load(dictionaries(loader))``
+
 | **Author:** R.A.O'Keefe, L.Damas, V.S.Costa, Glenn Burgess, Jiri Spitz, and Jan Wielemaker; Logtalk port and additional predicates by Paulo Moura
 | **Version:** 1:4:0
 | **Date:** 2021-04-12

@@ -56,11 +56,11 @@
 	path(Node, Destination, Path0, Path) :-
 		link(Node, Next),
 		\+ member(Next, Path0),
-		path(Next, Destination, [Next | Path0], Path).
+		path(Next, Destination, [Next| Path0], Path).
 
-	link(Node1, Node2 ) :-
+	link(Node1, Node2) :-
 		arc(Node1, Node2).
-	link(Node1, Node2 ) :-
+	link(Node1, Node2) :-
 		arc(Node2, Node1).
 
 	arc(1, 2). arc(1, 3). arc(1, 4). arc(1, 5). arc(1, 9).
@@ -69,9 +69,9 @@
 	arc(4, 5). arc(4, 7).
 	arc(5, 8).
 
-	member(Element, [Element| _]).
-	member(Element, [_| List]) :-
-		member(Element, List).
+	member(Head, [Head| _]).
+	member(Head, [_| Tail]) :-
+		member(Head, Tail).
 
 	reverse(List, Reversed) :-
 		reverse(List, [], Reversed, Reversed).

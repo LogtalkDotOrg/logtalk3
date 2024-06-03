@@ -1,0 +1,132 @@
+.. index:: listing
+.. _listing/0:
+
+.. rst-class:: right
+
+**category**
+
+``listing``
+===========
+
+Listing predicates.
+
+| **Availability:** 
+|    ``logtalk_load(listing(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2024-01-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: listing/0
+.. _listing/0::listing/0:
+
+``listing/0``
+^^^^^^^^^^^^^
+
+Lists all clauses of all visible dynamic predicates to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``listing`` - ``one``
+
+
+------------
+
+.. index:: listing/1
+.. _listing/0::listing/1:
+
+``listing/1``
+^^^^^^^^^^^^^
+
+Lists all clauses of a visible dynamic predicate or non-terminal to the current output stream. When the argument is a clause head, lists all matching clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``listing(Spec)``
+| **Mode and number of proofs:**
+|    ``listing(+predicate_indicator)`` - ``one_or_error``
+|    ``listing(+non_terminal_indicator)`` - ``one_or_error``
+|    ``listing(+callable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Spec`` is not ground:
+|        ``instantiation_error``
+|    ``Spec`` is ground but not a valid predicate indicator:
+|        ``type_error(predicate_indicator,Spec)``
+|    ``Spec`` is ground but not a valid non-terminal indicator:
+|        ``type_error(non_terminal_indicator,Spec)``
+|    ``Spec`` is a predicate indicator but not a visible predicate:
+|        ``existence_error(predicate,Spec)``
+|    ``Spec`` is a non-terminal indicator but not a visible non-terminal:
+|        ``existence_error(non_terminal,Spec)``
+|    ``Spec`` is a callable term with a ``Functor/Arity`` indicator but not a visible predicate:
+|        ``existence_error(predicate,Functor/Arity)``
+|    ``Spec`` is a predicate indicator of a visible predicate but not a dynamic predicate:
+|        ``permission_error(access,predicate,Spec)``
+|    ``Spec`` is a non-terminal indicator of a visible non-terminal but not a dynamic non-terminal:
+|        ``permission_error(access,non_terminal,Spec)``
+|    ``Spec`` is a callable term for a visible predicate with a ``Functor/Arity`` indicator but not a dynamic predicate:
+|        ``permission_error(access,predicate,Functor/Arity)``
+
+
+------------
+
+.. index:: portray_clause/1
+.. _listing/0::portray_clause/1:
+
+``portray_clause/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Pretty prints a clause to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``portray_clause(Clause)``
+| **Mode and number of proofs:**
+|    ``portray_clause(+clause)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

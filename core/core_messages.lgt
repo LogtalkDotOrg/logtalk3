@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:123:0,
+		version is 1:134:0,
 		author is 'Paulo Moura',
-		date is 2023-06-13,
+		date is 2024-05-18,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -237,8 +237,8 @@
 	message_tokens(banner) -->
 		{current_logtalk_flag(version_data, logtalk(Major, Minor, Patch, Status))},
 		(	{Status == stable} ->
-			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2023 Paulo Moura'-[], nl, nl]
-		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2023 Paulo Moura'-[], nl, nl]
+			[nl, 'Logtalk ~d.~d.~d'-[Major, Minor, Patch], nl, 'Copyright (c) 1998-2024 Paulo Moura'-[], nl, nl]
+		;	[nl, 'Logtalk ~d.~d.~d-~w'-[Major, Minor, Patch, Status], nl, 'Copyright (c) 1998-2024 Paulo Moura'-[], nl, nl]
 		).
 
 	message_tokens(default_flags) -->
@@ -278,10 +278,6 @@
 
 	message_tokens(logtalk_debugger_aborted) -->
 		['Debugging session aborted by user. Debugger still on.'-[], nl].
-
-	message_tokens(debug_handler_provider_already_exists(File, Lines, Type, Entity, Provider)) -->
-		['A definition for the debug handler predicate already exists in: ~q'-[Provider], nl],
-		message_context(File, Lines, Type, Entity).
 
 	% runtime error
 
@@ -480,6 +476,10 @@
 		['Use of Logtalk or Prolog top-level shortcut as a directive: ~q'-[Directive], nl],
 		message_context(File, Lines).
 
+	message_tokens(missing_function(File, Lines, Type, Entity, Function)) -->
+		['Missing arithmetic function: ~q'-[Function], nl],
+		message_context(File, Lines, Type, Entity).
+
 	% lambda expression messages
 
 	message_tokens(parameter_variable_used_elsewhere(File, Lines, Type, Entity, Lambda, Variable)) -->
@@ -540,14 +540,6 @@
 
 	message_tokens(unknown_non_terminal_called_but_not_defined(File, Lines, Type, Entity, NonTerminal)) -->
 		['Unknown non-terminal called but not defined: ~q'-[NonTerminal], nl],
-		message_context(File, Lines, Type, Entity).
-
-	message_tokens(calls_non_terminal_as_predicate(File, Lines, Type, Entity, NonTerminal)) -->
-		['Non-terminal called as a predicate: ~q'-[NonTerminal], nl],
-		message_context(File, Lines, Type, Entity).
-
-	message_tokens(calls_predicate_as_non_terminal(File, Lines, Type, Entity, Predicate)) -->
-		['Predicate called as a non-terminal: ~q'-[Predicate], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(message_not_understood(File, Lines, Type, Entity, Obj, Pred)) -->
@@ -655,6 +647,14 @@
 		['Deprecated predicate: ~q (compiled as a call to ~q)'-[Predicate, Replacement], nl],
 		message_context(File, Lines, Type, Entity).
 
+	message_tokens(deprecated_function(File, Lines, Type, Entity, Function)) -->
+		['Deprecated function: ~q'-[Function], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(deprecated_function(File, Lines, Type, Entity, Function, Replacement)) -->
+		['Deprecated function: ~q (replaceable by the standard ~q function)'-[Function, Replacement], nl],
+		message_context(File, Lines, Type, Entity).
+
 	% encoding/1 directive messages
 
 	message_tokens(ignored_encoding_directive(File, Lines)) -->
@@ -682,21 +682,58 @@
 		['Predicate ~q clause body is a disjunction'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
+	% grammar rules
+
+	message_tokens(calls_non_terminal_as_predicate(File, Lines, Type, Entity, NonTerminal)) -->
+		['Non-terminal called as a predicate: ~q'-[NonTerminal], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(calls_predicate_as_non_terminal(File, Lines, Type, Entity, Predicate)) -->
+		['Predicate called as a non-terminal: ~q'-[Predicate], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(unsound_construct_in_grammar_rule(File, Lines, Type, Entity, GRBody)) -->
+		['~q is not a sound construct in a grammar rule'-[GRBody], nl],
+		message_context(File, Lines, Type, Entity).
+
+	% left-recursion
+
+	message_tokens(left_recursion(File, Lines, Type, Entity, Term)) -->
+		(	{functor(Term, (-->), 2)} ->
+			['Left-recursion in grammar rule: ~q'-[Term], nl]
+		;	['Left-recursion in clause: ~q'-[Term], nl]
+		),
+		message_context(File, Lines, Type, Entity).
+
 	% suspicious cuts
 
-	message_tokens(suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, _IfThenElse)) -->
+	message_tokens(suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head)) -->
 		{functor(Head, Name, Arity)},
-		['Predicate ~q clause likely missing parenthesis around if-then-else'-[Name/Arity], nl],
+		['Suspicious cut in conditional test in clause for predicate: ~q'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, _SoftCut)) -->
+	message_tokens(suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, _If)) -->
 		{functor(Head, Name, Arity)},
-		['Predicate ~q clause likely missing parenthesis around soft-cut'-[Name/Arity], nl],
+		['Predicate ~q clause possibly missing parenthesis around if-then-else'-[Name/Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(suspicious_cut_in_disjunction(File, Lines, Type, Entity, Head, _Disjunction)) -->
+	message_tokens(suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head)) -->
 		{functor(Head, Name, Arity)},
-		['Predicate ~q clause likely missing parenthesis around disjunction'-[Name/Arity], nl],
+		['Suspicious cut in conditional test in clause for predicate: ~q'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, _If)) -->
+		{functor(Head, Name, Arity)},
+		['Predicate ~q clause possibly missing parenthesis around the soft-cut'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_cut_in_disjunction(File, Lines, Type, Entity, Head)) -->
+		{functor(Head, Name, Arity)},
+		['Suspicious cut as disjunction left goal in clause for predicate: ~q'-[Name/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(suspicious_cut_in_disjunction(File, Lines, Type, Entity, _Head, Disjunction)) -->
+		['Suspicious cut in disjunction left goal: ~q'-[Disjunction], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% suspicious tests in if-then-else and soft-cut control constructs
@@ -806,7 +843,7 @@
 		term_tokens(Term).
 	error_term_tokens(Error) -->
 		error_tokens(Error),
-		term_tokens(term(_)).
+		term_tokens(term).
 
 	% based on the ISO Prolog Core standard
 	error_tokens(instantiation_error) -->
@@ -853,30 +890,40 @@
 		;	['  in directive'-[], nl]
 		).
 	term_tokens(clause(Clause)) -->
-		(	{\+ callable(Clause)} ->
+		(	{Clause = '$VAR'(_)} ->
 			['  in clause'-[], nl]
-		;	{Clause = (Head :- _), callable(Head)} ->
+		;	{\+ callable(Clause)} ->
+			['  in clause'-[], nl]
+		;	{Clause = (Entity::Head :- _), callable(Head), Head \= '$VAR'(_)} ->
+			{functor(Head, Name, Arity)},
+			['  in clause for multifile predicate ~q::~q/~w'-[Entity, Name, Arity], nl]
+		;	{Clause = (Head :- _), callable(Head), Head \= '$VAR'(_)} ->
 			{functor(Head, Name, Arity)},
 			['  in clause for predicate ~q/~w'-[Name, Arity], nl]
-		;	{Clause \= (_ :- _)} ->
+		;	{Clause \= (_ :- _), Clause = Entity::Head, callable(Head), Head \= '$VAR'(_)} ->
+			{functor(Head, Name, Arity)},
+			['  in clause for multifile predicate ~q::~q/~w'-[Entity, Name, Arity], nl]
+		;	{Clause \= (_ :- _), callable(Clause)} ->
 			{functor(Clause, Name, Arity)},
 			['  in clause for predicate ~q/~w'-[Name, Arity], nl]
 		;	['  in clause'-[], nl]
 		).
 	term_tokens(grammar_rule('-->'(Left, _))) -->
-		(	{\+ callable(Left)} ->
+		(	{Left = '$VAR'(_)} ->
 			['  in grammar rule'-[], nl]
-		;	{Left = ','(Head, _), callable(Head)} ->
+		;	{\+ callable(Left)} ->
+			['  in grammar rule'-[], nl]
+		;	{Left = ','(Head, _), callable(Head), Head \= '$VAR'(_)} ->
 			{functor(Head, Name, Arity)},
 			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
-		;	{Left \= ','(_, _)} ->
+		;	{Left \= ','(_, _), callable(Left)} ->
 			{functor(Left, Name, Arity)},
 			['  in grammar rule for non-terminal ~q//~w'-[Name, Arity], nl]
 		;	['  in grammar rule'-[], nl]
 		).
-	term_tokens(term(_)) -->
-		['  in term'-[], nl].
-	term_tokens(_) -->
+	term_tokens(term(Term)) -->
+		['  in term ~q'-[Term], nl].
+	term_tokens(term) -->
 		['  in term'-[], nl].
 
 	first_found_at(File, OriginalLines, File) -->
@@ -971,6 +1018,8 @@
 		['as existential variables ~q do not exist in goal ~q '-[[Variable1, Variable2| Variables], Goal], nl].
 	suspicious_call_reason(float_comparison) -->
 		['as the goal compares float values for equality'-[], nl].
+	suspicious_call_reason(comparing_numbers_using_unification) -->
+		['as the goal compares numbers using unification'-[], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton])) -->
 		['in ~w goal contains singleton variable ~q'-[Predicate, Singleton], nl].
 	suspicious_call_reason(singleton_variables(Predicate, _, [Singleton| Singletons])) -->
@@ -1025,6 +1074,7 @@
 			current_logtalk_flag(disjunctions, Disjunctions0), align(Disjunctions0, Disjunctions),
 			current_logtalk_flag(conditionals, Conditionals0), align(Conditionals0, Conditionals),
 			current_logtalk_flag(catchall_catch, CatchallCatch0), align(CatchallCatch0, CatchallCatch),
+			current_logtalk_flag(left_recursion, LeftRecursion0), align(LeftRecursion0, LeftRecursion),
 			current_logtalk_flag(tail_recursive, TailRecursive0), align(TailRecursive0, TailRecursive),
 			current_logtalk_flag(portability, Portability0), align(Portability0, Portability),
 			current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns0), align(RedefinedBuiltIns0, RedefinedBuiltIns),
@@ -1053,9 +1103,10 @@
 			'  grammar_rules:        ~w    arithmetic_expressions:     ~w'-[GrammarRules, ArithmeticExpressions], nl,
 			'  lambda_variables:     ~w    suspicious_calls:           ~w'-[Lambda, SuspiciousCalls], nl,
 			'  disjunctions:         ~w    conditionals:               ~w'-[Disjunctions, Conditionals], nl,
-			'  catchall_catch:       ~w    tail_recursive:             ~w'-[CatchallCatch, TailRecursive], nl,
 			'  singleton_variables:  ~w    underscore_variables:       ~w'-[Singletons, Underscore], nl,
-			'  deprecated:           ~w    naming:                     ~w'-[Deprecated, Naming], nl
+			'  deprecated:           ~w    naming:                     ~w'-[Deprecated, Naming], nl,
+			'  left_recursion:       ~w    tail_recursive:             ~w'-[LeftRecursion, TailRecursive], nl,
+			'  catchall_catch:       ~w'-[CatchallCatch], nl
 		].
 
 	default_optional_features_flags -->

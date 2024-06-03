@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,36 +18,23 @@ limitations under the License.
 ________________________________________________________________________
 
 
-DEPRECATED: For a more featured Logtalk extension for the Visual Studio
-Code text editor use instead:
+Logtalk support for the Visual Studio Code text editor is available using
+the "Logtalk for VSCode" extension:
 
-https://github.com/jacobfriedman/vsc-logtalk
+https://marketplace.visualstudio.com/items?itemName=LogtalkDotOrg.logtalk-for-vscode
 
-Notes for the contents of this directory follows.
+https://open-vsx.org/extension/LogtalkDotOrg/logtalk-for-vscode
 
-This directory contains a preliminary extension for editing Logtalk source
-files with the Visual Studio Code text editor: 
+To install this extension, start VSCode or VSCodium, on the left click
+on "Extensions", type "Logtalk" in the search box at the top, select the
+extension, and click install.
 
-	http://code.visualstudio.com/
+This extension is under development and its sources are available at:
 
-To install, copy the `pmoura.logtalk-0.0.2` folder to the following folder:
+https://github.com/LogtalkDotOrg/logtalk-for-vscode
 
-	~/.vscode/extensions
+You can also download the extension `.vsix` file from the repo releases
+page:
 
-Create the folder if it does not exist. This extension includes support
-for syntax highlighting and code folding. Snippets are also provided for
-entities and predicate declarations. In the case of entities, the defined
-triggers are `object`, `class`, `instance`, `protocol`, and `category`.
-In the case of predicates, the defined triggers are `public`, `protected`,
-and `private`.
+https://github.com/LogtalkDotOrg/logtalk-for-vscode/releases
 
-Copy the file `tasks.json` to the your workspace `.vscode` folder. Edit it to
-choose and customize the Prolog integration shortcut that you want to use.
-Defined tasks include file compilation, running unit tests, scanning for
-dead code, running doclets, generating HTML documentation, and generating
-SVG diagrams.
-
-Logtalk source files (including the library entities and the programming
-examples) are indented using tabs and are expected to remain perfectly 
-indented no matter your tab width preference (a common setting is a tab
-width equivalent to 4 spaces).

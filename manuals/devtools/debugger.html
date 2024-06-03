@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>debugger &mdash; The Logtalk Handbook v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/custom.css" type="text/css" />
+  <title>debugger &mdash; The Logtalk Handbook v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=8413e588"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -136,39 +139,36 @@
            <div itemprop="articleBody">
              
   <section id="debugger">
-<span id="library-debugger"></span><h1><code class="docutils literal notranslate"><span class="pre">debugger</span></code><a class="headerlink" href="#debugger" title="Permalink to this heading"></a></h1>
+<span id="library-debugger"></span><h1><code class="docutils literal notranslate"><span class="pre">debugger</span></code><a class="headerlink" href="#debugger" title="Link to this heading"></a></h1>
 <p>This tool provides the default Logtalk command-line debugger. Unlike
 Prolog systems, the Logtalk debugger is a regular application, using a
 public API. As a consequence, it must be explicitly loaded by the
 programmer, either manually at the top-level interpreter or
 automatically from a settings file.</p>
 <section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this heading"></a></h2>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
 <p><a class="reference external" href="../../docs/library_index.html#debugger">../../docs/library_index.html#debugger</a></p>
 </section>
 <section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Permalink to this heading"></a></h2>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>This tool can be loaded using the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(loader)).
 </pre></div>
 </div>
-<p>Note that this tool cannot be loaded at the same time as other tools
-(e.g. the ports profiler) that also provide a debug handler, which must
-be unique in a running session.</p>
 <p>When the code to be debugged runs computationally expensive
 initializations, loading this tool after the code may have a noticeable
 impact in loading times.</p>
 </section>
 <section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading"></a></h2>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this tool, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(debugger(tester)).
 </pre></div>
 </div>
 </section>
 <section id="usage">
-<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Debugging Logtalk source code (with this debugger) requires compiling
 source files using the <code class="docutils literal notranslate"><span class="pre">debug(on)</span></code> compiler flag. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(my_buggy_code, [debug(on)]).
@@ -197,7 +197,7 @@ trace to a file. For example:</p>
 (Skip) command at the call port for the top-levle goal when tracing it.</p>
 </section>
 <section id="alternative-debugger-tools">
-<h2>Alternative debugger tools<a class="headerlink" href="#alternative-debugger-tools" title="Permalink to this heading"></a></h2>
+<h2>Alternative debugger tools<a class="headerlink" href="#alternative-debugger-tools" title="Link to this heading"></a></h2>
 <p>Logtalk provides basic support for the SWI-Prolog graphical tracer. The
 <strong>required</strong> settings are described in the <code class="docutils literal notranslate"><span class="pre">settings-sample.lgt</span></code> file.
 Logtalk queries can be traced using this tool by using the
@@ -218,7 +218,7 @@ results from the non-availability of source code for the predicates
 being traced.</p>
 </section>
 <section id="known-issues">
-<h2>Known issues<a class="headerlink" href="#known-issues" title="Permalink to this heading"></a></h2>
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
 <p>Line number spy points (aka breakpoints) require a Prolog backend
 compiler that supports accessing read term starting line but only some
 backends (B-Prolog, GNU Prolog, JIProlog, LVM, SICStus Prolog,
@@ -248,7 +248,7 @@ Prolog backend compiler.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

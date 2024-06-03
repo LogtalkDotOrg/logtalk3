@@ -299,8 +299,8 @@
 
 	ride :-
 		in(river),
-		write('You board the boat and it wisks you on an exciting'), nl,
-		write('rafting trip down the river.  You end up at a dock.'), nl,
+		write('You board the boat and it whisk you on an exciting'), nl,
+		write('rafting trip down the river. You end up at a dock.'), nl,
 		retract(in(_)),
 		asserta(in(dock)),
 		retract(location(boat, river)),

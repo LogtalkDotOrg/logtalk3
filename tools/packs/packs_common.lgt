@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:30:1,
+		version is 0:31:0,
 		author is 'Paulo Moura',
-		date is 2023-05-20,
+		date is 2023-11-23,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -393,11 +393,13 @@
 
 	readme_file_name('README.MD').
 	readme_file_name('README.md').
+	readme_file_name('ReadMe.md').
 	readme_file_name('Readme.md').
 	readme_file_name('readme.md').
 	readme_file_name('README').
 	readme_file_name('README.TXT').
 	readme_file_name('README.txt').
+	readme_file_name('ReadMe.txt').
 	readme_file_name('Readme.txt').
 	readme_file_name('readme.txt').
 	readme_file_name('NOTES.MD').

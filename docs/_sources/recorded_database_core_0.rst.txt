@@ -1,0 +1,281 @@
+.. index:: recorded_database_core
+.. _recorded_database_core/0:
+
+.. rst-class:: right
+
+**category**
+
+``recorded_database_core``
+==========================
+
+Legacy recorded database predicates. Can be imported into an object to provide a local database.
+
+| **Availability:** 
+|    ``logtalk_load(recorded_database(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2023-12-17
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - References: Opaque ground terms.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: recorda/3
+.. _recorded_database_core/0::recorda/3:
+
+``recorda/3``
+^^^^^^^^^^^^^
+
+Adds a term as the first term for the given key, returning its reference.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recorda(Key,Term,Reference)``
+| **Mode and number of proofs:**
+|    ``recorda(+recorded_database_key,+term,--recorded_database_reference)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atomic term or compound term:
+|        ``type_error(recorded_database_key,Key)``
+|    ``Reference`` is a not a variable:
+|        ``uninstantiation_error(Reference)``
+
+
+------------
+
+.. index:: recorda/2
+.. _recorded_database_core/0::recorda/2:
+
+``recorda/2``
+^^^^^^^^^^^^^
+
+Adds a term as the first term for the given key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recorda(Key,Term)``
+| **Mode and number of proofs:**
+|    ``recorda(+recorded_database_key,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atomic term or compound term:
+|        ``type_error(recorded_database_key,Key)``
+
+
+------------
+
+.. index:: recordz/3
+.. _recorded_database_core/0::recordz/3:
+
+``recordz/3``
+^^^^^^^^^^^^^
+
+Adds a term as the last term for the given key, returning its reference.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recordz(Key,Term,Reference)``
+| **Mode and number of proofs:**
+|    ``recordz(+recorded_database_key,+term,--recorded_database_reference)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atomic term or compound term:
+|        ``type_error(recorded_database_key,Key)``
+|    ``Reference`` is a not a variable:
+|        ``uninstantiation_error(Reference)``
+
+
+------------
+
+.. index:: recordz/2
+.. _recorded_database_core/0::recordz/2:
+
+``recordz/2``
+^^^^^^^^^^^^^
+
+Adds a term as the last term for the given key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recordz(Key,Term)``
+| **Mode and number of proofs:**
+|    ``recordz(+recorded_database_key,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atomic term or compound term:
+|        ``type_error(recorded_database_key,Key)``
+
+
+------------
+
+.. index:: recorded/3
+.. _recorded_database_core/0::recorded/3:
+
+``recorded/3``
+^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all record key-term pairs and their references.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recorded(Key,Term,Reference)``
+| **Mode and number of proofs:**
+|    ``recorded(?recorded_database_key,?term,-recorded_database_reference)`` - ``zero_or_more``
+|    ``recorded(?recorded_database_key,?term,+recorded_database_reference)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: recorded/2
+.. _recorded_database_core/0::recorded/2:
+
+``recorded/2``
+^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all record key-term pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``recorded(Key,Term)``
+| **Mode and number of proofs:**
+|    ``recorded(?recorded_database_key,?term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: erase/1
+.. _recorded_database_core/0::erase/1:
+
+``erase/1``
+^^^^^^^^^^^
+
+Erases the record indexed by the given reference. Fails if there is no record with the given reference.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``erase(Reference)``
+| **Mode and number of proofs:**
+|    ``erase(@recorded_database_reference)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Reference`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: instance/2
+.. _recorded_database_core/0::instance/2:
+
+``instance/2``
+^^^^^^^^^^^^^^
+
+.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``instance(Reference,Term)``
+| **Mode and number of proofs:**
+|    ``instance(@recorded_database_reference,?term)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Reference`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+.. index:: record_/3
+.. _recorded_database_core/0::record_/3:
+
+``record_/3``
+^^^^^^^^^^^^^
+
+Records table.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``record_(Key,Term,Reference)``
+| **Mode and number of proofs:**
+|    ``record_(?recorded_database_key,?term,?recorded_database_reference)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: reference_/1
+.. _recorded_database_core/0::reference_/1:
+
+``reference_/1``
+^^^^^^^^^^^^^^^^
+
+Reference count.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``reference_(Reference)``
+| **Mode and number of proofs:**
+|    ``reference_(?non_negative_integer)`` - ``zero_or_one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

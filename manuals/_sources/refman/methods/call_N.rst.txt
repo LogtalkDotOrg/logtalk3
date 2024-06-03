@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,6 +44,16 @@ backend Prolog compiler supporting a module system, calls in the format
 ``call(Module:Closure, Arg1, ...)`` may also be used.
 
 This meta-predicate is opaque to cuts in its arguments.
+
+Meta-predicate template
+-----------------------
+
+::
+
+   call(0)
+   call(1, *)
+   call(2, *, *)
+   ...
 
 Modes and number of proofs
 --------------------------

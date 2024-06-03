@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,26 +23,106 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:3:2,
 		author is 'Paulo Moura',
-		date is 2023-03-13,
+		date is 2024-03-14,
 		comment is 'Tests for the "document_converter" example.'
 	]).
+
+	:- if(current_logtalk_flag(threads, supported)).
+		:- threaded.
+	:- endif.
 
 	condition :-
 		os::environment_variable('CLASSPATH', CLASSPATH),
 		sub_atom(CLASSPATH, _, _, _, 'tika-app-').
 
 	cleanup :-
-		^^clean_file('sample.txt').
+		^^clean_file('test_files/sample.pdf.txt'),
+		^^clean_file('test_files/sample.doc.txt'),
+		^^clean_file('test_files/sample.docx.txt'),
+		^^clean_file('test_files/sample.odt.txt').
 
-	test(document_converter_convert_to_text, true(os::file_exists(Target))) :-
-		^^file_path('sample.pdf', Source),
-		^^file_path('sample.txt', Target),
+	% contents/2 tests
+
+	test(document_converter_get_pdf_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.pdf', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_doc_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.doc', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_docx_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.docx', Source),
+		document::contents(Source, Contents).
+
+	test(document_converter_get_odt_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
+		^^file_path('test_files/sample.odt', Source),
+		document::contents(Source, Contents).
+
+	% convert/2 tests
+
+	test(document_converter_convert_pdf_to_text, true(os::file_exists(Target))) :-
+		^^file_path('test_files/sample.pdf', Source),
+		^^file_path('test_files/sample.pdf.txt', Target),
 		document::convert(Source, Target).
 
-	test(document_converter_get_contents, true(sub_atom(Contents, _, _, _, 'Universal Declaration of Human Rights'))) :-
-		^^file_path('sample.pdf', Source),
-		document::contents(Source, Contents).
+	test(document_converter_convert_doc_to_text, true(os::file_exists(Target))) :-
+		^^file_path('test_files/sample.doc', Source),
+		^^file_path('test_files/sample.doc.txt', Target),
+		document::convert(Source, Target).
+
+	test(document_converter_convert_docx_to_text, true(os::file_exists(Target))) :-
+		^^file_path('test_files/sample.docx', Source),
+		^^file_path('test_files/sample.docx.txt', Target),
+		document::convert(Source, Target).
+
+	test(document_converter_convert_odt_to_text, true(os::file_exists(Target))) :-
+		^^file_path('test_files/sample.odt', Source),
+		^^file_path('test_files/sample.odt.txt', Target),
+		document::convert(Source, Target).
+
+	:- if(current_logtalk_flag(threads, supported)).
+
+		test(document_converter_sequential_convert, true, [setup(cleanup)]) :-
+			^^file_path('test_files/sample.pdf', Source1),
+			^^file_path('test_files/sample.pdf.txt', Target1),
+			^^file_path('test_files/sample.doc', Source2),
+			^^file_path('test_files/sample.doc.txt', Target2),
+			^^file_path('test_files/sample.docx', Source3),
+			^^file_path('test_files/sample.docx.txt', Target3),
+			^^file_path('test_files/sample.odt', Source4),
+			^^file_path('test_files/sample.odt.txt', Target4),
+			document::convert(Source1, Target1),
+			document::convert(Source2, Target2),
+			document::convert(Source3, Target3),
+			document::convert(Source4, Target4),
+			^^assertion(os::file_exists(Target1)),
+			^^assertion(os::file_exists(Target2)),
+			^^assertion(os::file_exists(Target3)),
+			^^assertion(os::file_exists(Target4)).
+
+		test(document_converter_concurrent_convert, true, [setup(cleanup)]) :-
+			^^file_path('test_files/sample.pdf', Source1),
+			^^file_path('test_files/sample.pdf.txt', Target1),
+			^^file_path('test_files/sample.doc', Source2),
+			^^file_path('test_files/sample.doc.txt', Target2),
+			^^file_path('test_files/sample.docx', Source3),
+			^^file_path('test_files/sample.docx.txt', Target3),
+			^^file_path('test_files/sample.odt', Source4),
+			^^file_path('test_files/sample.odt.txt', Target4),
+			threaded((
+				document::convert(Source1, Target1),
+				document::convert(Source2, Target2),
+				document::convert(Source3, Target3),
+				document::convert(Source4, Target4)
+			)),
+			^^assertion(os::file_exists(Target1)),
+			^^assertion(os::file_exists(Target2)),
+			^^assertion(os::file_exists(Target3)),
+			^^assertion(os::file_exists(Target4)).
+
+	:- endif.
 
 :- end_object.

@@ -20,9 +20,9 @@ ________________________________________________________________________
 
 To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
-This folder provides simple benchmark tests for comparing Logtalk message 
+This folder provides simple benchmark tests for comparing Logtalk message
 sending performance with direct predicates calls in plain Prolog.
-These benchmarks may also be used for comparing Logtalk message sending 
+These benchmarks may also be used for comparing Logtalk message sending
 performance across Prolog compilers.
 
 This example is made of four loader files and five source files:

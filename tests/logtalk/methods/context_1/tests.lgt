@@ -23,52 +23,36 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2017-06-29,
+		date is 2024-01-30,
 		comment is 'Unit tests for the context/1 built-in method.'
 	]).
 
-	test(context_1) :-
+	test(context_1_01, true) :-
 		context(Context),
-		functor(Context, logtalk, 2),
-		arg(1, Context, Call), callable(Call),
-		arg(2, Context, ExecutionContext), nonvar(ExecutionContext).
+		^^assertion(functor(Context, logtalk, 2)),
+		arg(1, Context, Call),
+		^^assertion(callable(Call)),
+		arg(2, Context, ExecutionContext),
+		^^assertion(nonvar(ExecutionContext)).
 
-	test(context_2) :-
+	test(context_1_02, true) :-
 		catch({context_1_test_object::foo(a,b)}, error(Error,logtalk(Call,ExecutionContext)), true),
-		Error == type_error(integer, b),
-		Call == foo(a, b),
+		^^assertion(Error-Call == type_error(integer,b)-foo(a,b)),
 		logtalk::execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack),
-		Entity == context_1_test_object,
-		Sender == user,
-		This == context_1_test_object,
-		Self == context_1_test_object,
-		MetaCallContext == [],
-		CoinductionStack == [].
+		^^assertion(c(Entity,Sender,This,Self,MetaCallContext,CoinductionStack) == c(context_1_test_object,user,context_1_test_object,context_1_test_object,[],[])).
 
-	test(context_3) :-
+	test(context_1_03, true) :-
 		catch({context_1_test_object::bar(1)}, error(Error,logtalk(Call,ExecutionContext)), true),
-		Error == type_error(list, 1),
-		Call == bar(1),
+		^^assertion(Error-Call == type_error(list,1)-bar(1)),
 		logtalk::execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack),
-		Entity == context_1_test_category,
-		Sender == user,
-		This == context_1_test_object,
-		Self == context_1_test_object,
-		MetaCallContext == [],
-		CoinductionStack == [].
+		^^assertion(c(Entity,Sender,This,Self,MetaCallContext,CoinductionStack) == c(context_1_test_category,user,context_1_test_object,context_1_test_object,[],[])).
 
-	test(context_4) :-
+	test(context_1_04, true) :-
 		catch({logtalk::message_hook(a,b,c,d)}, error(Error,logtalk(Call,ExecutionContext)), true),
-		Error == type_error(integer, d),
-		Call == message_hook(a,b,c,d),
+		^^assertion(Error-Call == type_error(integer,d)-message_hook(a,b,c,d)),
 		logtalk::execution_context(ExecutionContext, Entity, Sender, This, Self, MetaCallContext, CoinductionStack),
-		Entity == logtalk,
-		Sender == user,
-		This == logtalk,
-		Self == logtalk,
-		MetaCallContext == [],
-		CoinductionStack == [].
+		^^assertion(c(Entity,Sender,This,Self,MetaCallContext,CoinductionStack) == c(logtalk,user,logtalk,logtalk,[],[])).
 
 :- end_object.

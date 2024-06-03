@@ -22,15 +22,19 @@
 :- object(buckets).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2017-12-13,
+		date is 2024-02-09,
 		comment is 'Example of atomic updates as described in the corresponding Rosetta Code task.'
 	]).
 
 	:- threaded.
 
 	:- public([start/0, start/4]).
+
+	% for testing
+	:- public([sum/1, bucket/1]).
+	:- dynamic([sum/1, bucket/1]).
 
 	% bucket representation
 	:- private(bucket_/2).
@@ -40,12 +44,14 @@
 	:- private([bucket/2, buckets/1, transfer/3]).
 	:- synchronized([bucket/2, buckets/1, transfer/3]).
 
-	% use the backend Prolog compiler random number generator as it is
-	% stateless and thus allows us to avoid inconsistent state issues
-	% when the threads are canceled
+	:- uses(format, [format/2]).
+	% use the backend compiler random number generator, assumed to be stateless
 	:- uses(backend_random, [random/3]).
 
 	start :-
+		% cleanup test support predicates
+		retractall(sum(_)),
+		retractall(bucket(_)),
 		% by default, create ten buckets with initial random integer values
 		% in the interval [0, 10[ and print their contents ten times
 		start(10, 0, 10, 10).
@@ -54,7 +60,8 @@
 		% create the buckets with random values in the
 		% interval [Min, Max[ and return their sum
 		create_buckets(N, Min, Max, Sum),
-		write('Sum of all bucket values: '), write(Sum), nl, nl,
+		format('Sum of all bucket values: ~w~n~n', [Sum]),
+		assertz(sum(Sum)),
 		% use competitive or-parallelism for the three loops such that
 		% the computations terminate when the display loop terminates
 		threaded((
@@ -114,6 +121,7 @@
 			transfer(Bucket2, Delta, Bucket1)
 		;	true
 		),
+		thread_yield,
 		match_loop(N).
 
 	redistribute_loop(N) :-
@@ -126,15 +134,21 @@
 		Limit is Current + 1,
 		random(0, Limit, Delta),
 		transfer(FromBucket, Delta, ToBucket),
+		thread_yield,
 		redistribute_loop(N).
 
 	display_loop(0) :-
 		!.
 	display_loop(N) :-
 		buckets(Values),
-		write(Values), nl,
-		thread_sleep(2),
+		format('~w~n', [Values]),
+		assertz(bucket(Values)),
+		thread_sleep(0.5),
 		M is N - 1,
 		display_loop(M).
+
+	:- if(\+ predicate_property(thread_yield, built_in)).
+		thread_yield.
+	:- endif.
 
 :- end_object.

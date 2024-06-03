@@ -10,15 +10,19 @@
 
 Logtalk documentation tool default message translations.
 
+| **Availability:** 
+|    ``logtalk_load(lgtdoc(loader))``
+
 | **Author:** Paulo Moura
-| **Version:** 3:0:0
-| **Date:** 2022-10-25
+| **Version:** 4:0:0
+| **Date:** 2024-05-07
 
 | **Compilation flags:**
 |    ``static``
 
 
 | **Provides:**
+|    :ref:`logtalk::message_prefix_stream/4 <logtalk/0::message_prefix_stream/4>`
 |    :ref:`logtalk::message_tokens//2 <logtalk/0::message_tokens//2>`
 
 | **Remarks:**

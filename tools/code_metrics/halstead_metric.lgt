@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2018 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2018-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:8:0,
+		version is 0:9:0,
 		author is 'Paulo Moura',
-		date is 2022-05-05,
+		date is 2024-03-27,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		parameters is ['Stroud' - 'Coefficient for computing the time required to program.'],
 		remarks is [
@@ -46,9 +46,17 @@
 		]
 	]).
 
-	:- uses(list, [length/2, memberchk/2]).
-	:- uses(numberlist, [sum/2]).
-	:- uses(pairs, [values/2]).
+	:- uses(list, [
+		length/2, member/2, memberchk/2
+	]).
+
+	:- uses(numberlist, [
+		sum/2
+	]).
+
+	:- uses(pairs, [
+		values/2
+	]).
 
 	entity_score(Entity, pn_pan_cn_can_ev_el_v_d_e_t_b(Pn,PAn,Cn,CAn,EV,EL,V,D,E,T,B)) :-
 		parameter(1, Stroud),
@@ -88,7 +96,8 @@
 		findall(
 			Predicate-Arity,
 			(	(	category_property(Entity, declares(Predicate, _))
-				;	category_property(Entity, defines(Predicate, _))
+				;	category_property(Entity, defines(Predicate, DefinesProperties)),
+					\+ member(auxiliary, DefinesProperties)
 				;	category_property(Entity, calls(Predicate, _))
 				;	category_property(Entity, updates(Predicate, _))
 				),
@@ -116,6 +125,7 @@
 		findall(
 			CallerDatum,
 			(	category_property(Entity, defines(_/CallerArity, Properties)),
+				\+ member(auxiliary, Properties),
 				memberchk(number_of_clauses(NumberOfClauses), Properties),
 				CallerDatum is CallerArity * NumberOfClauses
 			),
@@ -127,7 +137,8 @@
 		findall(
 			Predicate-Arity,
 			(	(	object_property(Entity, declares(Predicate, _))
-				;	object_property(Entity, defines(Predicate, _))
+				;	object_property(Entity, defines(Predicate, DefinesProperties)),
+					\+ member(auxiliary, DefinesProperties)
 				;	object_property(Entity, calls(Predicate, _))
 				;	object_property(Entity, updates(Predicate, _))
 				),
@@ -155,6 +166,7 @@
 		findall(
 			CallerDatum,
 			(	object_property(Entity, defines(_/CallerArity, Properties)),
+				\+ member(auxiliary, Properties),
 				memberchk(number_of_clauses(NumberOfClauses), Properties),
 				CallerDatum is CallerArity * NumberOfClauses
 			),

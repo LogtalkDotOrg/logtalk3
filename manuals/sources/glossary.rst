@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -57,7 +57,7 @@ Glossary
       classes.
 
    metaclass
-      The :term:`class` of a class, when interpreted as an instance.
+      The :term:`class` of a class, when interpreted as an :term:`instance`.
       Metaclass instances are themselves classes. Metaclasses are optional,
       except for the root class, and can be shared by several classes.
 
@@ -114,6 +114,14 @@ Glossary
       of a parametric entity is its functor, irrespective of the possible
       values of its arguments (e.g. ``foo(bar)`` and ``foo(baz)`` are
       different parameterizations of the same parametric entity, ``foo/1``).
+
+   entity alias
+      An alternative name for an entity. Entity aliases can be defined using
+      the :ref:`directives_uses_1` and :ref:`directives_use_module_1` directives.
+      Entity aliases can be used to improve code clarity by using alternative
+      names that are more meaningful in the calling context, to bind parametric
+      entity parameters, and to simplify experimenting with alternative entities
+      implementing the same protocol.
 
    static entity
       See :term:`entity`.
@@ -173,7 +181,7 @@ Glossary
       :term:`protected inheritance` and :term:`private inheritance`.
 
    instance
-      An :term:`object` that instantiates one another object, interpreted as
+      An :term:`object` that instantiates another object, interpreted as
       its :term:`class`. An object may instantiate multiple objects (also
       known as multiple instantiation).
 
@@ -217,12 +225,12 @@ Glossary
       :term:`predicates directives <predicate directive>` and clauses.
       Prolog modules are usually static although some Prolog systems
       allow the creation of dynamic modules at runtime. Prolog modules
-      can be seen as prototypes.
+      can be interpreted as prototypes.
 
    message
-      A query sent to an object. In logical terms, a message can be seen as
-      a request for proof construction using an object database and the
-      databases of related entities.
+      A query sent to an object. In logical terms, a message can be
+      interpreted as a request for proof construction using an object
+      database and the databases of related entities.
 
    message lookup
       Sending a message to an object requires a lookup for the
@@ -314,11 +322,11 @@ Glossary
 
    parameter variable
       A variable used as parameter in a parametric object or a parametric
-      category using the syntax ``_ParameterName_``. Parameter variables
-      are *logical variables* shared by all entity terms. Occurrences of
-      parameter variables in :term:`entity directives <entity directive>`
-      and clauses are implicitly unified with the corresponding entity
-      parameters.
+      category using the syntax ``_ParameterName_`` (i.e. a variable whose
+      name stars and ends with an underscore). Parameter variables are
+      *logical variables* shared by all entity terms. Occurrences of parameter
+      variables in :term:`entity directives <entity directive>` and clauses
+      are implicitly unified with the corresponding entity parameters.
 
    parent
       A prototype that is extended by another prototype.
@@ -501,8 +509,8 @@ Glossary
       dynamic.
 
    specialization
-      A :term:`class` is specialized by defining a new class that inherit its
-      predicates and possibly add new ones.
+      A :term:`class` is specialized by defining a new class that inherits its
+      predicates and possibly adds new ones.
 
    source file
       A text file defining Logtalk and/or Prolog code. Multiple Logtalk
@@ -630,3 +638,10 @@ Glossary
       grammar rule or used in a cut-transparent argument of a control
       construct. The "naked" designation highlights that the meta-variable
       is not wrapped by ``call/1`` or ``phrase//1`` goals.
+
+   homoiconic
+      A property of programming languages where *code* and *data* use the
+      same representation. Logtalk (and Prolog) are examples of homoiconic
+      programming languages. A Logtalk program is a set of terms (clauses
+      and directives) that can be handled as *data* by e.g. the term-expansion
+      mechanism.

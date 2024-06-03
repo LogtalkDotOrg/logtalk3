@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ports_profiler &mdash; Logtalk APIs v3.67.0-b02 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/custom.css" type="text/css" />
+  <title>ports_profiler &mdash; Logtalk APIs v3.80.0-b01 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=8413e588"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <!-- begin favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -47,7 +50,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.67.0
+                3.80.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -105,11 +108,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtdoc"><span class="xref std std-ref">lgtdoc</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lgtunit"><span class="xref std std-ref">lgtunit</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#library"><span class="xref std std-ref">library</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#listing"><span class="xref std std-ref">listing</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#logging"><span class="xref std std-ref">logging</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta"><span class="xref std std-ref">meta</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#meta-compiler"><span class="xref std std-ref">meta_compiler</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#metagol"><span class="xref std std-ref">metagol</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#mutations"><span class="xref std std-ref">mutations</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#nested-dictionaries"><span class="xref std std-ref">nested_dictionaries</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optionals"><span class="xref std std-ref">optionals</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#options"><span class="xref std std-ref">options</span></a></li>
@@ -123,12 +128,14 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#queues"><span class="xref std std-ref">queues</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#random"><span class="xref std std-ref">random</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#reader"><span class="xref std std-ref">reader</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#recorded-database"><span class="xref std std-ref">recorded_database</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#redis"><span class="xref std std-ref">redis</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#sets"><span class="xref std std-ref">sets</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#statistics"><span class="xref std std-ref">statistics</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#timeout"><span class="xref std std-ref">timeout</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#toychr"><span class="xref std std-ref">toychr</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#tsv"><span class="xref std std-ref">tsv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tutor"><span class="xref std std-ref">tutor</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#types"><span class="xref std std-ref">types</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#ulid"><span class="xref std std-ref">ulid</span></a></li>
@@ -187,12 +194,18 @@
              
   <p class="right" id="ports-profiler-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="ports-profiler">
-<h1><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code><a class="headerlink" href="#ports-profiler" title="Permalink to this heading"></a></h1>
+<h1><code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code><a class="headerlink" href="#ports-profiler" title="Link to this heading"></a></h1>
 <p>Predicate execution box model port profiler.</p>
 <div class="line-block">
+<div class="line"><strong>Availability:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(ports_profiler(loader))</span></code></div>
+</div>
+</div>
+<div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:12:0</div>
-<div class="line"><strong>Date:</strong> 2022-05-12</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2024-05-18</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -203,8 +216,8 @@
 <div class="line-block">
 <div class="line"><strong>Provides:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-debug-handler-provider-1"><span class="std std-ref">logtalk::debug_handler_provider/1</span></a></div>
-<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-debug-handler-2"><span class="std std-ref">logtalk::debug_handler/2</span></a></div>
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-debug-handler-1"><span class="std std-ref">logtalk::debug_handler/1</span></a></div>
+<div class="line"><a class="reference internal" href="logtalk_0.html#logtalk-0-debug-handler-3"><span class="std std-ref">logtalk::debug_handler/3</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
@@ -228,32 +241,68 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id7">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#data-0" id="id8"><code class="docutils literal notranslate"><span class="pre">data/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#data-1" id="id9"><code class="docutils literal notranslate"><span class="pre">data/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#data-2" id="id10"><code class="docutils literal notranslate"><span class="pre">data/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#reset-0" id="id11"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#reset-1" id="id12"><code class="docutils literal notranslate"><span class="pre">reset/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#port-5" id="id13"><code class="docutils literal notranslate"><span class="pre">port/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#clause-location-6" id="id14"><code class="docutils literal notranslate"><span class="pre">clause_location/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#clause-5" id="id15"><code class="docutils literal notranslate"><span class="pre">clause/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#start-0" id="id8"><code class="docutils literal notranslate"><span class="pre">start/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#stop-0" id="id9"><code class="docutils literal notranslate"><span class="pre">stop/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#data-0" id="id10"><code class="docutils literal notranslate"><span class="pre">data/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#data-1" id="id11"><code class="docutils literal notranslate"><span class="pre">data/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#data-2" id="id12"><code class="docutils literal notranslate"><span class="pre">data/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reset-0" id="id13"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#reset-1" id="id14"><code class="docutils literal notranslate"><span class="pre">reset/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#port-5" id="id15"><code class="docutils literal notranslate"><span class="pre">port/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#clause-location-6" id="id16"><code class="docutils literal notranslate"><span class="pre">clause_location/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#clause-5" id="id17"><code class="docutils literal notranslate"><span class="pre">clause/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id16">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id18">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id19">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id1" id="id18"><code class="docutils literal notranslate"><span class="pre">clause_location_/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#id3" id="id19"><code class="docutils literal notranslate"><span class="pre">port_/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#id5" id="id20"><code class="docutils literal notranslate"><span class="pre">clause_/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#entity-defines-2" id="id21"><code class="docutils literal notranslate"><span class="pre">entity_defines_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id20"><code class="docutils literal notranslate"><span class="pre">clause_location_/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id21"><code class="docutils literal notranslate"><span class="pre">port_/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id22"><code class="docutils literal notranslate"><span class="pre">clause_/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#entity-defines-2" id="id23"><code class="docutils literal notranslate"><span class="pre">entity_defines_/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id24">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
+<section id="start-0">
+<span id="ports-profiler-0-start-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">start/0</span></code></a><a class="headerlink" href="#start-0" title="Link to this heading"></a></h3>
+<p>Activates thr ports profiler for followup goals.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">start</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="stop-0">
+<span id="ports-profiler-0-stop-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">stop/0</span></code></a><a class="headerlink" href="#stop-0" title="Link to this heading"></a></h3>
+<p>Deactivates thr ports profiler.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">stop</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="data-0">
-<span id="ports-profiler-0-data-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">data/0</span></code></a><a class="headerlink" href="#data-0" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-data-0"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">data/0</span></code></a><a class="headerlink" href="#data-0" title="Link to this heading"></a></h3>
 <p>Prints a table with all port profiling data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -270,7 +319,7 @@
 <hr class="docutils" />
 </section>
 <section id="data-1">
-<span id="ports-profiler-0-data-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">data/1</span></code></a><a class="headerlink" href="#data-1" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-data-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">data/1</span></code></a><a class="headerlink" href="#data-1" title="Link to this heading"></a></h3>
 <p>Prints a table with all port profiling data for the specified entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -291,7 +340,7 @@
 <hr class="docutils" />
 </section>
 <section id="data-2">
-<span id="ports-profiler-0-data-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">data/2</span></code></a><a class="headerlink" href="#data-2" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-data-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">data/2</span></code></a><a class="headerlink" href="#data-2" title="Link to this heading"></a></h3>
 <p>Prints a table with all port profiling data for the specified entity predicate (or non-terminal).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -313,7 +362,7 @@
 <hr class="docutils" />
 </section>
 <section id="reset-0">
-<span id="ports-profiler-0-reset-0"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a><a class="headerlink" href="#reset-0" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-reset-0"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a><a class="headerlink" href="#reset-0" title="Link to this heading"></a></h3>
 <p>Resets all port profiling data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -330,7 +379,7 @@
 <hr class="docutils" />
 </section>
 <section id="reset-1">
-<span id="ports-profiler-0-reset-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reset/1</span></code></a><a class="headerlink" href="#reset-1" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-reset-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reset/1</span></code></a><a class="headerlink" href="#reset-1" title="Link to this heading"></a></h3>
 <p>Resets all port profiling data for the specified entity.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -351,7 +400,7 @@
 <hr class="docutils" />
 </section>
 <section id="port-5">
-<span id="ports-profiler-0-port-5"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">port/5</span></code></a><a class="headerlink" href="#port-5" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-port-5"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">port/5</span></code></a><a class="headerlink" href="#port-5" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, all collected port profiling data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -372,7 +421,7 @@
 <hr class="docutils" />
 </section>
 <section id="clause-location-6">
-<span id="ports-profiler-0-clause-location-6"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clause_location/6</span></code></a><a class="headerlink" href="#clause-location-6" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-clause-location-6"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clause_location/6</span></code></a><a class="headerlink" href="#clause-location-6" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, all collected profiled clause location data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -393,7 +442,7 @@
 <hr class="docutils" />
 </section>
 <section id="clause-5">
-<span id="ports-profiler-0-clause-5"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clause/5</span></code></a><a class="headerlink" href="#clause-5" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-clause-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clause/5</span></code></a><a class="headerlink" href="#clause-5" title="Link to this heading"></a></h3>
 <p>Enumerates, by backtracking, all collected clause profiling data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -415,13 +464,13 @@
 </section>
 <hr class="docutils" />
 <section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="id1">
-<span id="index-9"></span><span id="id2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clause_location_/6</span></code></a><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<span id="index-11"></span><span id="id2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clause_location_/6</span></code></a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p>Internal table of collected profiled clause location data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -442,7 +491,7 @@
 <hr class="docutils" />
 </section>
 <section id="id3">
-<span id="index-10"></span><span id="id4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">port_/5</span></code></a><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<span id="index-12"></span><span id="id4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">port_/5</span></code></a><a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <p>Internal table of collected port profiling data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -463,7 +512,7 @@
 <hr class="docutils" />
 </section>
 <section id="id5">
-<span id="index-11"></span><span id="id6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clause_/5</span></code></a><a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<span id="index-13"></span><span id="id6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">clause_/5</span></code></a><a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <p>Internal table of collected clause profiling data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -484,7 +533,7 @@
 <hr class="docutils" />
 </section>
 <section id="entity-defines-2">
-<span id="ports-profiler-0-entity-defines-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_defines_/2</span></code></a><a class="headerlink" href="#entity-defines-2" title="Permalink to this heading"></a></h3>
+<span id="ports-profiler-0-entity-defines-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">entity_defines_/2</span></code></a><a class="headerlink" href="#entity-defines-2" title="Link to this heading"></a></h3>
 <p>Internal cache for profiled predicates.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -506,7 +555,7 @@
 </section>
 <hr class="docutils" />
 <section id="operators">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Permalink to this heading"></a></h2>
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
 </section>
 </section>
@@ -522,7 +571,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 1998-2023, Paulo Moura.</p>
+    <p>&#169; Copyright 1998-2024, Paulo Moura.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

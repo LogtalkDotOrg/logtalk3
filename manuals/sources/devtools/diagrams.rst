@@ -260,11 +260,10 @@ Supported graph languages
 -------------------------
 
 Currently only the DOT graph language is supported (tested with Graphviz
-version 2.43 on macOS; visit the http://www.graphviz.org/ website for
-more information). Some recent versions have a nasty regression in the
-SVG exporter where text overflows the boxes that should contain it.
-Also, old stable versions such as 2.40.1 have a bug (fixed in the recent
-versions) that can result in very long edges.
+version 10.0 on macOS; visit the http://www.graphviz.org/ website for
+more information). There's also preliminary support for Mermaid (which
+is not loaded by default as its current version lacks required features
+for parity with Graphviz).
 
 The diagrams ``.dot`` files are created on the current directory by
 default. These files can be easily converted into a printable format
@@ -351,6 +350,10 @@ generated diagrams. For entity diagrams the options are:
    | print current date and time (``true`` or ``false``; default is
      ``true``)
 
+-  | ``versions(Boolean)``
+   | print Logtalk and backend version data (``true`` or ``false``;
+     default is ``false``)
+
 -  | ``interface(Boolean)``
    | print public predicates (``true`` or ``false``; default is
      ``true``)
@@ -391,13 +394,16 @@ generated diagrams. For entity diagrams the options are:
      default depends on the specific diagram)
 
 -  | ``output_directory(Directory)``
-   | directory for the .dot files (an atom; default is ``'./'``)
+   | directory for the .dot files (an atom; default is ``'./dot_dias'``)
 
 -  | ``exclude_directories(Directories)``
-   | list of directories to exclude (default is ``[]``)
+   | list of directories to exclude (default is ``[]``); all
+     sub-directories of the excluded directories are also excluded;
+     directories may be listed by full or relative path
 
 -  | ``exclude_files(Files)``
-   | list of source files to exclude (default is ``[]``)
+   | list of source files to exclude (default is ``[]``); files may be
+     listed by full path or basename, with or without extension
 
 -  | ``exclude_libraries(Libraries)``
    | list of libraries to exclude (default is
@@ -432,14 +438,22 @@ generated diagrams. For entity diagrams the options are:
 -  | ``zoom_url_suffix(Suffix)``
    | extension for linked diagrams (an atom; default is ``'.svg'``)
 
-In the particular case of cross-referencing diagrams, there is also the
-option:
+In the particular case of cross-referencing diagrams, there are also the
+options:
 
--  ``url_line_references(Host)``
-   syntax for the URL source file line part (an atom; possible values
-   are ``{github,gitlab,bitbucket}``; default is ``github``); when using
-   this option, the ``CodeURLPrefix`` should be a permanent link (i.e.
-   it should include the commit SHA1)
+-  | ``recursive_relations(Boolean)``
+   | print recursive predicate relations (``true`` or ``false``; default
+     is ``false``)
+
+-  | ``url_line_references(Host)``
+   | syntax for the URL source file line part (an atom; possible values
+     are ``{github,gitlab,bitbucket}``; default is ``github``); when
+     using this option, the ``CodeURLPrefix`` should be a permanent link
+     (i.e. it should include the commit SHA1)
+
+-  | ``predicate_url_target_format(Generator)``
+   | documentation final format generator (an atom; default is
+     ``sphinx``)
 
 For directory and file diagrams the options are:
 
@@ -454,6 +468,10 @@ For directory and file diagrams the options are:
 -  | ``date(Boolean)``
    | print current date and time (``true`` or ``false``; default is
      ``true``)
+
+-  | ``versions(Boolean)``
+   | print Logtalk and backend version data (``true`` or ``false``;
+     default is ``false``)
 
 -  | ``directory_paths(Boolean)``
    | print file directory paths (``true`` or ``false``; default is
@@ -489,7 +507,7 @@ For directory and file diagrams the options are:
      ``false``)
 
 -  | ``output_directory(Directory)``
-   | directory for the .dot files (an atom; default is ``'./'``)
+   | directory for the .dot files (an atom; default is ``'./dot_dias'``)
 
 -  | ``exclude_directories(Directories)``
    | list of directories to exclude (default is ``[]``)
@@ -517,6 +535,10 @@ For library diagrams the options are:
 -  | ``date(Boolean)``
    | print current date and time (``true`` or ``false``; default is
      ``true``)
+
+-  | ``versions(Boolean)``
+   | print Logtalk and backend version data (``true`` or ``false``;
+     default is ``false``)
 
 -  | ``directory_paths(Boolean)``
    | print file directory paths (``true`` or ``false``; default is
@@ -548,7 +570,7 @@ For library diagrams the options are:
      ``false``)
 
 -  | ``output_directory(Directory)``
-   | directory for the .dot files (an atom; default is ``'./'``)
+   | directory for the .dot files (an atom; default is ``'./dot_dias'``)
 
 -  | ``exclude_directories(Directories)``
    | list of directories to exclude (default is ``[]``)
@@ -566,6 +588,10 @@ For library diagrams the options are:
 
 -  | ``zoom_url_suffix(Suffix)``
    | extension for linked diagrams (an atom; default is ``'.svg'``)
+
+When using the ``zoom(true)`` option, the ``layout(Layout)`` option
+applies only to the top diagram; sub-diagrams will use their own layout
+default.
 
 The option ``omit_path_prefixes(Prefixes)`` with a non-empty list of
 prefixes should preferably be used together with the option
@@ -654,6 +680,10 @@ that all the paths and URLs must end with a slash for proper handling.
 The ``git`` library may be useful to retrieve the commit SHA1 from a
 local repo directory.
 
+For both ``path_url_prefixes/3`` and ``omit_path_prefixes/1`` options,
+when a path prefix is itself a prefix of another path, the shorter path
+must come last to ensure correct links.
+
 See the ``SCRIPT.txt`` file in the tool directory for additional
 examples. To avoid retyping such complex goals when updating diagrams,
 use the ``doclet`` tool to save and reapply them easily (e.g. by using
@@ -698,7 +728,7 @@ An alternative is to use the ``object_wrapper_hook`` provided by the
 
 ::
 
-   | ?- logtalk_load([os(loader), hook_objects(object_wrapper_hook)]).
+   | ?- logtalk_load(hook_objects(loader)).
    ...
 
    | ?- logtalk_load(code, [hook(object_wrapper_hook)]),
@@ -711,6 +741,16 @@ Generating complete diagrams requires that all referenced entities are
 loaded. When that is not the case, notably when generating
 cross-referencing diagrams, missing entities can result in incomplete
 diagrams.
+
+When generating entity predicate call cross-reference diagrams, caller
+nodes are not created for auxiliary predicates. For example, if the
+``meta_compiler`` library is used to optimize meta-predicates calls, the
+diagrams may show predicates that are not apparently called by any other
+predicate when the callers are from the optimized meta-predicate goals
+(which are called via library generated auxiliary predicates). A
+workaround in this case would be creating a dedicated loader file that
+doesn't load (and apply) the ``meta_compiler`` library when generating
+the diagrams.
 
 The zoom icons, ``zoom.png`` and ``zoom.svg`` have been designed by Xinh
 Studio:

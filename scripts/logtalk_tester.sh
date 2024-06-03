@@ -3,10 +3,10 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on July 3, 2023
+##   Last updated on March 1, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,8 +27,13 @@
 
 set -o pipefail
 
+function cleanup {
+	pkill -9 -P $$
+}
+trap cleanup EXIT
+
 print_version() {
-	echo "$(basename "$0") 15.0"
+	echo "$(basename "$0") 19.0"
 	exit 0
 }
 
@@ -49,9 +54,9 @@ if [[ "$(command -v timeout)" == *"System32"* ]] || [[ "$(command -v timeout)" =
 	timeout_command=""
 # second, look for GNU coreutils package timeout command
 elif [ -x "$(command -v timeout)" ] && [[ "$(timeout --version)" == *"GNU coreutils"* ]] ; then
-	timeout_command="timeout -s 9 -k 1.0s"
+	timeout_command="timeout --foreground -s 9 -k 1.0s"
 elif [ -x "$(command -v gtimeout)" ] && [[ "$(gtimeout --version)" == *"GNU coreutils"* ]] ; then
-	timeout_command="gtimeout -s 9 -k 1.0s"
+	timeout_command="gtimeout --foreground -s 9 -k 1.0s"
 else
 	timeout_command=""
 fi
@@ -232,7 +237,10 @@ run_tests() {
 		fi
 	fi
 	exit=$?
-	if [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q -s "^object" "$results/$name.totals" && ! grep -q "tests skipped" "$results/$name.results"; then
+	if grep -q "Likely bug in the backend Prolog compiler. Please file a bug report." "$results/$name.errors"; then
+		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
+		return 5
+	elif [ $exit -eq 0 ] && ! grep -q "(not applicable)" "$results/$name.results" && ! grep -q -s "^object" "$results/$name.totals" && ! grep -q "tests skipped" "$results/$name.results"; then
 		echo "LOGTALK_BROKEN" >> "$results/$name.errors"
 		return 5
 	fi
@@ -301,7 +309,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (valid values are arriba, b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are arriba, b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
@@ -410,10 +418,6 @@ elif [ "$p_arg" == "lvm" ] ; then
 		*"--custom-top-level"*) dot="?";;
 		*) dot=".";;
 	esac
-elif [ "$p_arg" == "scryer" ] ; then
-	prolog='Scryer Prolog'
-	logtalk=scryerlgt$extension
-	logtalk_call="$logtalk $i_arg -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk=sicstuslgt$extension

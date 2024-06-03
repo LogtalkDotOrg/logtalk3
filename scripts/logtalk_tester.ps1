@@ -1,10 +1,10 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on July 3, 2023
+##   Last updated on March 18, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identi}er: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 11.0")
+	Write-Output ($myName + " 13.6")
 }
 
 Function Run-TestSet() {
@@ -195,7 +195,16 @@ param(
 			& $logtalk $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	}
-	if ($LASTEXITCODE -eq 0 -and
+	if (Select-String -Path $results/$name.errors -Pattern "Likely bug in the backend Prolog compiler. Please file a bug report." -SimpleMatch -Quiet) {
+		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
+		return 5
+	} elseif ($LASTEXITCODE -eq 0 -and
+		!(Test-Path $results/$name.totals -PathType Leaf) -and
+		!(Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
+		!(Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
+		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
+		return 5
+	} elseif ($LASTEXITCODE -eq 0 -and
 		!(Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
 		!(Select-String -Path $results/$name.totals -Pattern "^object" -Quiet) -and
 		!(Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
@@ -276,7 +285,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (valid values are arriba, b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, scryer, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are arriba, b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -o output (valid values are verbose and minimal; default is " + $o + ")")
@@ -333,11 +342,6 @@ Function Check-Parameters() {
 		$script:prolog = 'B-Prolog'
 		$script:logtalk = "bplgt"
 		$script:logtalk_option = "-g"
-	} elseif ($p -eq "ciao") {
-		$script:backend = 'ciao'
-		$script:prolog = 'Ciao Prolog'
-		$script:logtalk = "ciaolgt"
-		$script:logtalk_option = "-e"
 	} elseif ($p -eq "cx") {
 		$script:backend = 'cx'
 		$script:prolog = 'CxProlog'
@@ -369,11 +373,6 @@ Function Check-Parameters() {
 		$script:logtalk = "lvmlgt"
 		$script:logtalk_option = "-g"
 		$script:dot = "."
-	} elseif ($p -eq "scryer") {
-		$script:backend = 'scryer'
-		$script:prolog = 'Scryer Prolog'
-		$script:logtalk = "scryerlgt"
-		$script:logtalk_option = "-g"
 	} elseif ($p -eq "sicstus") {
 		$script:backend = 'sicstus'
 		$script:prolog = 'SICStus Prolog'
@@ -406,7 +405,7 @@ Function Check-Parameters() {
 		$script:prolog = 'XSB'
 		$script:logtalk = "xsblgt"
 		$script:logtalk_option = "-e"
-		$script:dot = "."
+		$script:dot = " ."
 	} elseif ($p -eq "yap") {
 		$script:backend = 'yap'
 		$script:prolog = 'YAP'
@@ -682,9 +681,9 @@ Push-Location $results
 
 $testsetskipped = (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'tests skipped').count + (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern '(not applicable)').count
 
-$timeouts = (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_TIMEOUT').count
-$crashed =  (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_CRASH').count
-$broken =   (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'LOGTALK_BROKEN').count
+$timeouts = (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT').count
+$crashed =  (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH').count
+$broken =   (Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_BROKEN').count
 
 $testsetruns = $testsets - $testsetskipped - $timeouts - $crashed - $broken
 

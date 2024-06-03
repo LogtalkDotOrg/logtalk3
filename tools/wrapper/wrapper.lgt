@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:12:2,
 		author is 'Paulo Moura',
-		date is 2022-04-15,
+		date is 2024-05-10,
 		comment is 'Adviser tool for porting and wrapping plain Prolog applications.',
 		remarks is [
 			'prolog_extensions(Extensions) option' - 'List of file name extensions used to recognize Prolog source files (default is ``[''.pl'',''.pro'',''.prolog'']``).',
@@ -554,13 +554,20 @@
 	% missing public/1 directives are only generated for
 	% predicates declared as multifile
 	missing_predicate_directives_advise(Object) :-
-		missing_predicate_directive_(Object, (public), Predicate),
+		missing_predicate_directive_(Object, (public)/1, Predicate),
 		assertz(add_directive_(Object, public(Predicate), multifile(Predicate))),
+		fail.
+	% meta-predicate directives
+	missing_predicate_directives_advise(Object) :-
+		missing_predicate_directive_(Object, (meta_predicate)/1, Predicate),
+		meta_predicate_template(Predicate, Template),
+		assertz(add_directive_(Object, meta_predicate(Template))),
 		fail.
 	% other missing directives
 	missing_predicate_directives_advise(Object) :-
-		missing_predicate_directive_(Object, DirectiveFunctor, Predicate),
+		missing_predicate_directive_(Object, DirectiveFunctor/_, Predicate),
 		DirectiveFunctor \== (public),
+		DirectiveFunctor \== (meta_predicate),
 		Directive =.. [DirectiveFunctor, Predicate],
 		assertz(add_directive_(Object, Directive)),
 		fail.
@@ -568,9 +575,9 @@
 
 	predicates_called_but_not_defined(Object) :-
 		predicate_called_but_not_defined_(Object, Predicate),
-		(	missing_predicate_directive_(Object, (dynamic), Predicate) ->
+		(	missing_predicate_directive_(Object, (dynamic)/1, Predicate) ->
 			true
-		;	missing_predicate_directive_(Object, (multifile), Predicate) ->
+		;	missing_predicate_directive_(Object, (multifile)/1, Predicate) ->
 			true
 		;	object_property(Other, defines(Predicate, DefinitionProperties)),
 			\+ member(auxiliary, DefinitionProperties),
@@ -780,8 +787,8 @@
 	logtalk::message_hook(unknown_predicate_called_but_not_defined(_, _, _, Object, Predicate), _, core, _) :-
 		assertz(predicate_called_but_not_defined_(Object, Predicate)).
 
-	logtalk::message_hook(missing_predicate_directive(_, _, _, Object, DirectiveFunctor, Predicate), _, core, _) :-
-		assertz(missing_predicate_directive_(Object, DirectiveFunctor, Predicate)).
+	logtalk::message_hook(missing_predicate_directive(_, _, _, Object, Directive, Predicate), _, core, _) :-
+		assertz(missing_predicate_directive_(Object, Directive, Predicate)).
 
 	logtalk::message_hook(non_standard_predicate_call(_, _, _, Object, Predicate), _, core, _) :-
 		assertz(non_standard_predicate_call_(Object, Predicate)).
@@ -798,7 +805,7 @@
 	message_prefix_stream(raw,               '',       Stream) :-
 		current_output(Stream).
 
-	% wraper messages
+	% wrapper messages
 
 	:- multifile(logtalk::message_tokens//2).
 	:- dynamic(logtalk::message_tokens//2).
@@ -892,6 +899,15 @@
 	:- endif.
 
 	% auxiliary predicates
+
+	meta_predicate_template(Name/Arity, Template) :-
+		functor(Template, Name, Arity),
+		Template =.. [Name| Arguments],
+		map_meta_predicate_arguments(Arguments).
+
+	map_meta_predicate_arguments([]).
+	map_meta_predicate_arguments([(*)| Arguments]) :-
+		map_meta_predicate_arguments(Arguments).
 
 	% flattens an item, a list of items, or a conjunction of items into a list
 	flatten_to_list([A| B], [A| B]) :-

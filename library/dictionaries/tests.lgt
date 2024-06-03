@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2023-06-14,
+		date is 2023-07-04,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -332,8 +332,7 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete_min(Dictionary, Key, Value, NewDictionary),
 		^^assertion(pair, Key-Value == a-1),
-		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs0),
-		msort(OtherPairs0, OtherPairs),
+		as_list(NewDictionary, OtherPairs),
 		^^assertion(pairs, OtherPairs == [b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% delete_max/4 tests
@@ -346,8 +345,7 @@
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete_max(Dictionary, Key, Value, NewDictionary),
 		^^assertion(pair, Key-Value == j-0),
-		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs0),
-		msort(OtherPairs0, OtherPairs),
+		as_list(NewDictionary, OtherPairs),
 		^^assertion(pairs, OtherPairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9]).
 
 	% keys/2 tests
@@ -389,8 +387,7 @@
 	test(dictionary_map_3_01) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		map([Key-Value, Key-NewValue]>>(integer::succ(Value,NewValue)), Dictionary, NewDictionary),
-		findall(OtherKey-OtherValue, lookup(OtherKey, OtherValue, NewDictionary), OtherPairs0),
-		msort(OtherPairs0, OtherPairs),
+		as_list(NewDictionary, OtherPairs),
 		^^assertion(OtherPairs == [a-2,b-3,c-4,d-5,e-6,f-7,g-8,h-9,i-10,j-1]).
 
 	% apply/4 tests
@@ -467,18 +464,16 @@
 		as_dictionary([x-X, y-2], Dictionary2),
 		intersection(Dictionary1, Dictionary2, Intersection),
 		as_list(Intersection, Pairs),
-		msort(Pairs, SortedPairs),
 		^^assertion(xy, X-Y == 1-2),
-		^^assertion(pairs, SortedPairs == [x-1, y-2]).
+		^^assertion(pairs, Pairs == [x-1, y-2]).
 
 	deterministic(dictionary_intersection_3_05) :-
 		as_dictionary([x-1, y-Y, z-3], Dictionary1),
 		as_dictionary([x-X, y-2, t-4], Dictionary2),
 		intersection(Dictionary1, Dictionary2, Intersection),
 		as_list(Intersection, Pairs),
-		msort(Pairs, SortedPairs),
 		^^assertion(xy, X-Y == 1-2),
-		^^assertion(pairs, SortedPairs == [x-1, y-2]).
+		^^assertion(pairs, Pairs == [x-1, y-2]).
 
 	% valid/1 tests
 

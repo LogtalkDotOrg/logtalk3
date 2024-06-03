@@ -1,6 +1,6 @@
 ..
    This file is part of Logtalk <https://logtalk.org/>  
-   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,8 @@ Description
 
 Checks if the result of proving ``Goal`` in a new thread is already
 available. This call succeeds or fails without blocking execution
-waiting for a reply to be available.
+waiting for a reply to be available. When there is no thread proving
+the goal, the predicate generates an exception.
 
 The argument of this predicate should be a *variant* of the argument of
 the corresponding :ref:`threaded_call/1 <predicates_threaded_call_1_2>`
@@ -73,6 +74,8 @@ Errors
 |     ``instantiation_error``
 | ``Goal`` is neither a variable nor a callable term:
 |     ``type_error(callable, Goal)``
+| No thread is running for proving ``Goal`` in the ``Object`` calling context:
+|     ``existence_error(thread, Object)``
 | ``Tag`` is a variable:
 |     ``instantiation_error``
 

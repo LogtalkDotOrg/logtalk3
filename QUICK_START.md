@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ by default for running Logtalk with the supported backend Prolog compilers
 (which must be installed and up-to-date before running these scripts):
 
 * Arriba:         `arribalgt`
-* B-Prolog:       `bplgt`
+* B-Prolog:       `bplgt`      (experimental)
 * Ciao Prolog:    `ciaolgt`    (experimental; first run may require `sudo`)
 * CxProlog:       `cxlgt`
 * ECLiPSe:        `eclipselgt`
@@ -41,13 +41,15 @@ by default for running Logtalk with the supported backend Prolog compilers
 * JIProlog:       `jiplgt`     (first run may require `sudo`)
 * LVM:            `lvmlgt`
 * Quintus Prolog: `quintuslgt` (experimental)
-* Scryer Prolog:  `scryerlgt`  (experimental)
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
 * Tau Prolog:     `taulgt`
-* Trealla Prolog: `tplgt`      (experimental)
+* Trealla Prolog: `tplgt`
 * XSB:            `xsblgt`     (first run may require `sudo`)
 * YAP:            `yaplgt`
+
+Man pages for all scripts are also provided on POSIX systems. HTML versions
+of the man pages are available in the Logtalk website.
 
 On macOS systems, `/opt/local/bin` must be in your `PATH` to run the scripts
 when using the provided installer. Terminal command files for running Logtalk

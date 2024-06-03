@@ -19,8 +19,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(functions),
-	logtalk_load(areas),
-	logtalk_load(integration)
-)).
+:- initialization(
+	logtalk_load([
+		functions, areas, integration
+	], [
+		optimize(on)
+	])
+).

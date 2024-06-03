@@ -37,12 +37,8 @@ loading predicates. For example:
 
    | ?- logtalk_load(random(loader)).
 
-For existing applications still relying on the old library
-``*_loader.lgt`` files, these loader files are still provided but are
-considered deprecated.
-
-There is a file named ``all_loader.lgt`` that will load all libraries.
-Simply type the goal:
+There is also a file named ``all_loader.lgt`` that will load all
+libraries. Simply type the goal:
 
 ::
 

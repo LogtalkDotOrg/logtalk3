@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 9:3:1,
+		version is 11:0:1,
 		author is 'Paulo Moura',
-		date is 2023-06-23,
+		date is 2024-05-08,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -78,8 +78,7 @@
 
 	:- uses(os, [
 		absolute_file_name/2, internal_os_path/2, make_directory/1,
-		decompose_file_name/3, decompose_file_name/4,
-		operating_system_type/1
+		decompose_file_name/3, decompose_file_name/4
 	]).
 
 	:- uses(type, [
@@ -139,7 +138,10 @@
 			sub_atom(LibraryPath, 0, _, _, ExcludedPrefix)
 		),
 		atom_concat(TopPath, RelativePath, LibraryPath),
-		\+ member(RelativePath, ExcludedPaths).
+		\+ (
+			member(ExcludedPath, ExcludedPaths),
+			sub_atom(RelativePath, 0, _, _, ExcludedPath)
+		).
 
 	libraries(Libraries, UserOptions) :-
 		^^check_options(UserOptions),
@@ -371,11 +373,18 @@
 		entity_property(Entity, file(File, Path)),
 		\+ member(Entity, ExcludedEntities),
 		functor(Entity, Functor, _),
-		(	(	logtalk_library_path(Library, _),
-				Library \== startup
-			;	logtalk_library_path(Library, _)
+		% find the library name, if any; support documenting libraries
+		% where source files are organized in multiple sub-directories
+		(	findall(
+				Length-Library,
+				(	logtalk_library_path(Library, _),
+					expand_library_path(Library, LibraryPath),
+					sub_atom(Path, 0, _, _, LibraryPath),
+					atom_length(LibraryPath, Length)
+				),
+				LengthsLibraries
 			),
-			expand_library_path(Library, Path) ->
+			sort(1, @>, LengthsLibraries, [_-Library| _]) ->
 			assertz(library_entity_(Library, Library, Functor, Entity))
 		;	true
 		),
@@ -432,7 +441,7 @@
 		convert_encoding('UTF-16BE', unicode_be).
 		convert_encoding('UTF-16LE', unicode_le).
 		convert_encoding('UTF-16', Encoding) :-
-			operating_system_type(Type),
+			os::operating_system_type(Type),
 			(	Type == windows ->
 				Encoding = unicode_le
 			;	% other operating-systems can be either big-endian or little-endian
@@ -450,12 +459,13 @@
 
 	write_entity_xml_file(File, Stream, Entity, Type, Options, StreamOptions) :-
 		write_entity_xml_header(Stream, Options, StreamOptions),
-		write_entity_xml_entity(File, Stream, Entity),
+		write_entity_xml_entity(File, Stream, Type, Entity),
 		write_entity_xml_relations(Stream, Entity),
-		write_entity_xml_predicates(Stream, Entity, Type, Options),
+		write_entity_xml_predicates(Stream, Type, Entity, Options),
 		write_entity_xml_operators(Stream, Entity),
-		write_entity_xml_remarks(Stream, Entity),
+		write_entity_xml_remarks(Stream, Type, Entity),
 		write_entity_xml_see_also(Stream, Entity),
+		write_entity_xml_availability(Stream, Entity),
 		write_entity_xml_footer(Stream).
 
 	write_entity_xml_header(Stream, Options, StreamOptions) :-
@@ -503,7 +513,7 @@
 	write_entity_xml_footer(Stream) :-
 		write_xml_close_tag(Stream, logtalk_entity).
 
-	write_entity_xml_entity(File, Stream, Entity) :-
+	write_entity_xml_entity(File, Stream, Type, Entity) :-
 		entity_type(Entity, Type),
 		write_xml_open_tag(Stream, entity, []),
 		entity_to_xml_term(Entity),
@@ -516,7 +526,7 @@
 		xml_entity_compilation_text(Type, Entity, Compilation),
 		write_xml_element(Stream, compilation, [], Compilation),
 		(	entity_property(Entity, info(Info)) ->
-			write_xml_entity_info(Stream, Entity, Info)
+			write_xml_entity_info(Stream, Type, Entity, Info)
 		;	warn_on_missing_entity_directive(info/1, Type, Entity)
 		),
 		write_xml_close_tag(Stream, entity).
@@ -577,16 +587,16 @@
 		;	Flags = Mode
 		).
 
-	% write_xml_entity_info(+stream, +entity_indentifier, +list)
+	% write_xml_entity_info(+stream, +atom, +entity_indentifier, +list)
 	%
 	% outputs the contents of entity info/1 directive
 	% in the order specified in the Logtalk DTD file
 
-	write_xml_entity_info(Stream, Entity, Info) :-
+	write_xml_entity_info(Stream, Type, Entity, Info) :-
 		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment),
-			warn_on_missing_punctuation(Entity, Comment)
-		;	warn_on_missing_info_key(Entity, comment)
+			warn_on_missing_punctuation(Comment, Type, Entity)
+		;	warn_on_missing_entity_info_key(comment, Type, Entity)
 		),
 		(	member(parameters(Parameters), Info) ->
 			write_xml_open_tag(Stream, parameters, []),
@@ -596,13 +606,13 @@
 					write_xml_cdata_element(Stream, name, [], Parname),
 					write_xml_cdata_element(Stream, description, [], Description),
 					write_xml_close_tag(Stream, parameter),
-					warn_on_missing_punctuation(Entity, Description)
+					warn_on_missing_punctuation(Description, Type, Entity)
 				)
 			),
 			write_xml_close_tag(Stream, parameters)
 		;	compound(Entity),
 			\+ member(parnames(_), Info) ->
-			warn_on_missing_info_key(Entity, parameters)
+			warn_on_missing_entity_info_key(parameters, Type, EntityName)
 		;	true
 		),
 		(	member(author(Author), Info) ->
@@ -625,7 +635,7 @@
 		(	member(date(Date), Info) ->
 			date_to_padded_atom(Date, DateAtom),
 			write_xml_element(Stream, date, [], DateAtom),
-			warn_on_invalid_date(Entity, Date)
+			warn_on_invalid_date(Date, Type, Entity)
 		;	true
 		),
 		(	member(copyright(Copyright), Info) ->
@@ -842,23 +852,23 @@
 		functor(Relation, Functor, Arity),
 		atomic_list_concat([Functor, '_', Arity], File).
 
-	% write_entity_xml_predicates(@stream, @entity_identifier, +atom, @list)
+	% write_entity_xml_predicates(@stream, +atom, @entity_identifier, @list)
 	%
 	% writes the predicate documentation
 
-	write_entity_xml_predicates(Stream, Entity, Type, Options) :-
+	write_entity_xml_predicates(Stream, Type, Entity, Options) :-
 		write_xml_open_tag(Stream, predicates, []),
-		write_xml_inherited_predicates(Stream, Entity, Type, Options),
-		write_xml_public_predicates(Stream, Entity, Options),
-		write_xml_protected_predicates(Stream, Entity, Options),
-		write_xml_private_predicates(Stream, Entity, Options),
+		write_xml_inherited_predicates(Stream, Type, Entity, Options),
+		write_xml_public_predicates(Stream, Type, Entity, Options),
+		write_xml_protected_predicates(Stream, Type, Entity, Options),
+		write_xml_private_predicates(Stream, Type, Entity, Options),
 		write_xml_close_tag(Stream, predicates).
 
 	% write_xml_inherited_predicates(@stream, @entity_identifier, +atom, @list)
 	%
 	% writes the list of inherited public predicates
 
-	write_xml_inherited_predicates(Stream, Entity, Type, Options) :-
+	write_xml_inherited_predicates(Stream, Type, Entity, Options) :-
 		write_xml_open_tag(Stream, inherited, []),
 		inherited_predicates(Type, Entity, Predicates0),
 		(	member(sort_predicates(true), Options) ->
@@ -871,11 +881,11 @@
 	write_xml_inherited_predicates(Stream, _, _, _) :-
 		write_xml_close_tag(Stream, inherited).
 
-	% write_xml_public_predicates(@stream, @entity_identifier, @list)
+	% write_xml_public_predicates(@stream, +atom, @entity_identifier, @list)
 	%
 	% writes the documentation of public predicates
 
-	write_xml_public_predicates(Stream, Entity, Options) :-
+	write_xml_public_predicates(Stream, Type, Entity, Options) :-
 		write_xml_open_tag(Stream, (public), []),
 		entity_property(Entity, public(Predicates0)),
 		(	member(sort_predicates(true), Options) ->
@@ -887,19 +897,19 @@
 		functor(Entity, EntityFunctor, _),
 		(	member(non_terminal(Functor//Args), Properties) ->
 			assertz(predicate_entity_(Functor//Args, Functor, EntityFunctor, Entity)),
-			write_xml_predicate(Stream, Entity, Functor//Args, Functor, Arity, (public))
+			write_xml_predicate(Stream, Type, Entity, Functor//Args, Functor, Arity, (public))
 		;	assertz(predicate_entity_(Functor/Arity, Functor, EntityFunctor, Entity)),
-			write_xml_predicate(Stream, Entity, Functor/Arity, Functor, Arity, (public))
+			write_xml_predicate(Stream, Type, Entity, Functor/Arity, Functor, Arity, (public))
 		),
 		fail.
-	write_xml_public_predicates(Stream, _, _) :-
+	write_xml_public_predicates(Stream, _, _, _) :-
 		write_xml_close_tag(Stream, (public)).
 
-	% write_xml_protected_predicates(@stream, @entity_identifier, @list)
+	% write_xml_protected_predicates(@stream, +atom, @entity_identifier, @list)
 	%
 	% writes the documentation protected predicates
 
-	write_xml_protected_predicates(Stream, Entity, Options) :-
+	write_xml_protected_predicates(Stream, Type, Entity, Options) :-
 		write_xml_open_tag(Stream, protected, []),
 		entity_property(Entity, protected(Predicates0)),
 		(	member(sort_predicates(true), Options) ->
@@ -909,18 +919,18 @@
 		member(Functor/Arity, Predicates),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		(	member(non_terminal(Functor//Args), Properties) ->
-			write_xml_predicate(Stream, Entity, Functor//Args, Functor, Arity, protected)
-		;	write_xml_predicate(Stream, Entity, Functor/Arity, Functor, Arity, protected)
+			write_xml_predicate(Stream, Type, Entity, Functor//Args, Functor, Arity, protected)
+		;	write_xml_predicate(Stream, Type, Entity, Functor/Arity, Functor, Arity, protected)
 		),
 		fail.
-	write_xml_protected_predicates(Stream, _, _) :-
+	write_xml_protected_predicates(Stream, _, _, _) :-
 		write_xml_close_tag(Stream, protected).
 
-	% write_xml_private_predicates(@stream, @entity_identifier, @list)
+	% write_xml_private_predicates(@stream, +atom, @entity_identifier, @list)
 	%
 	% writes the documentation of private predicates
 
-	write_xml_private_predicates(Stream, Entity, Options) :-
+	write_xml_private_predicates(Stream, Type, Entity, Options) :-
 		write_xml_open_tag(Stream, private, []),
 		entity_property(Entity, private(Predicates0)),
 		(	member(sort_predicates(true), Options) ->
@@ -930,11 +940,11 @@
 		member(Functor/Arity, Predicates),
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		(	member(non_terminal(Functor//Args), Properties) ->
-			write_xml_predicate(Stream, Entity, Functor//Args, Functor, Arity, private)
-		;	write_xml_predicate(Stream, Entity, Functor/Arity, Functor, Arity, private)
+			write_xml_predicate(Stream, Type, Entity, Functor//Args, Functor, Arity, private)
+		;	write_xml_predicate(Stream, Type, Entity, Functor/Arity, Functor, Arity, private)
 		),
 		fail.
-	write_xml_private_predicates(Stream, _, _) :-
+	write_xml_private_predicates(Stream, _, _, _) :-
 		write_xml_close_tag(Stream, private).
 
 	% write_xml_inherited_predicate(@stream, @compound)
@@ -949,12 +959,12 @@
 		write_xml_cdata_element(Stream, file, [], File),
 		write_xml_close_tag(Stream, inherited_predicate).
 
-	% write_xml_predicate(@stream, @entity_identifier, +predicate_indicator, +atom, +integer, +term)
-	% write_xml_predicate(@stream, @entity_identifier, +non_terminal_indicator, +atom, +integer, +term)
+	% write_xml_predicate(@stream, +atom, @entity_identifier, +predicate_indicator, +atom, +integer, +term)
+	% write_xml_predicate(@stream, +atom, @entity_identifier, +non_terminal_indicator, +atom, +integer, +term)
 	%
 	% writes the documentation of a predicate
 
-	write_xml_predicate(Stream, Entity, Name, Functor, Arity, Scope) :-
+	write_xml_predicate(Stream, Type, Entity, Name, Functor, Arity, Scope) :-
 		entity_property(Entity, declares(Functor/Arity, Properties)),
 		write_xml_open_tag(Stream, predicate, []),
 		write_xml_cdata_element(Stream, name, [], Name),
@@ -1003,11 +1013,11 @@
 		),
 		(	member(mode(_, _), Properties) ->
 			true
-		;	warn_on_missing_predicate_directive((mode)/2, Entity, Name)
+		;	warn_on_missing_predicate_directive((mode)/2, Name, Type, Entity)
 		),
 		(	member(info(Info), Properties) ->
-			write_xml_predicate_info(Stream, Entity, Name, Functor, Arity, Info)
-		;	warn_on_missing_predicate_directive(info/2, Entity, Name)
+			write_xml_predicate_info(Stream, Type, Entity, Name, Functor, Arity, Info)
+		;	warn_on_missing_predicate_directive(info/2, Name, Type, Entity)
 		),
 		write_xml_close_tag(Stream, predicate).
 
@@ -1035,11 +1045,11 @@
 	convert_coinductive_to_coinductive_non_terminal_args([Arg| Args], [Arg| NonTerminalArgs]) :-
 		convert_coinductive_to_coinductive_non_terminal_args(Args, NonTerminalArgs).
 
-	write_xml_predicate_info(Stream, Entity, Indicator, Functor, Arity, Info) :-
+	write_xml_predicate_info(Stream, Type, Entity, Indicator, Functor, Arity, Info) :-
 		(	member(comment(Comment), Info) ->
 			write_xml_cdata_element(Stream, comment, [], Comment),
-			warn_on_missing_punctuation(Entity, Indicator, Comment)
-		;	warn_on_missing_info_key(Entity, Indicator, comment)
+			warn_on_missing_punctuation(Indicator, Comment, Type, Entity)
+		;	warn_on_missing_predicate_info_key(Indicator, comment, Type, Entity)
 		),
 		(	member(arguments(Arguments), Info) ->
 			findall(Name, member(Name - _, Arguments), Names),
@@ -1052,7 +1062,7 @@
 					write_xml_cdata_element(Stream, name, [], Name),
 					write_xml_cdata_element(Stream, description, [], Description),
 					write_xml_close_tag(Stream, argument),
-					warn_on_missing_punctuation(Entity, Indicator, Description)
+					warn_on_missing_punctuation(Indicator, Description, Type, Entity)
 				)
 			),
 			write_xml_close_tag(Stream, arguments)
@@ -1061,7 +1071,7 @@
 			write_xml_cdata_element(Stream, template, [], Template)
 		;	arg(2, Indicator, IndicatorArity),
 			IndicatorArity > 0 ->
-			warn_on_missing_info_key(Entity, Indicator, arguments)
+			warn_on_missing_predicate_info_key(Indicator, arguments, Type, Entity)
 		;	true
 		),
 		(	member(exceptions(Exceptions), Info) ->
@@ -1072,7 +1082,7 @@
 					write_xml_cdata_element(Stream, condition, [], Cond),
 					write_xml_cdata_element(Stream, term, [], Term),
 					write_xml_close_tag(Stream, exception),
-					warn_on_non_standard_exception(Entity, Indicator, Term)
+					warn_on_non_standard_exception(Type, Entity, Indicator, Term)
 				)
 			),
 			write_xml_close_tag(Stream, exceptions)
@@ -1086,7 +1096,7 @@
 					write_xml_cdata_element(Stream, topic, [], Topic),
 					write_xml_cdata_element(Stream, text, [], Text),
 					write_xml_close_tag(Stream, remark),
-					warn_on_missing_punctuation(Entity, Indicator, Text)
+					warn_on_missing_punctuation(Indicator, Text, Type, Entity)
 				)
 			),
 			write_xml_close_tag(Stream, remarks)
@@ -1323,7 +1333,7 @@
 		),
 		write_xml_close_tag(Stream, operators).
 
-	write_entity_xml_remarks(Stream, Entity) :-
+	write_entity_xml_remarks(Stream, Type, Entity) :-
 		write_xml_open_tag(Stream, remarks, []),
 		(	entity_property(Entity, info(Info)), member(remarks(Remarks), Info) ->
 			forall(
@@ -1332,7 +1342,7 @@
 					write_xml_cdata_element(Stream, topic, [], Topic),
 					write_xml_cdata_element(Stream, text, [], Text),
 					write_xml_close_tag(Stream, remark),
-					warn_on_missing_punctuation(Entity, Text)
+					warn_on_missing_punctuation(Text, Type, Entity)
 				)
 			)
 		;	true
@@ -1357,6 +1367,14 @@
 		;	true
 		),
 		write_xml_close_tag(Stream, see_also).
+
+	write_entity_xml_availability(Stream, Entity) :-
+		(	library_entity_(Library, _, _, Entity),
+			Library \== core ->
+			atomic_list_concat(['logtalk_load(', Library, '(loader))'], Availability)
+		;	Availability = 'built_in'
+		),
+		write_xml_element(Stream, availability, [], Availability).
 
 	% write_xml_open_tag(@stream, @atom, @list)
 	%
@@ -1555,11 +1573,11 @@
 		close(Stream).
 
 	kind_ref_doctype_xsd(entity, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/5.0/logtalk_entity.dtd', 'https://logtalk.org/xml/5.0/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/6.0/logtalk_entity.dtd', 'https://logtalk.org/xml/6.0/logtalk_entity.xsd').
 	kind_ref_doctype_xsd(entity, standalone, logtalk_entity-none, none).
 
 	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/5.0/logtalk_index.dtd', 'https://logtalk.org/xml/5.0/logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/6.0/logtalk_index.dtd', 'https://logtalk.org/xml/6.0/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
 	sorted_keys_to_keys([], []).
@@ -1710,44 +1728,44 @@
 		;	true
 		).
 
-	warn_on_missing_predicate_directive(Directive, Entity, Indicator) :-
+	warn_on_missing_predicate_directive(Directive, Indicator, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_directives, warning) ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
-			print_message(warning, lgtdoc, missing_predicate_directive(Directive, Entity, Indicator, File, Line))
+			print_message(warning, lgtdoc, missing_predicate_directive(Directive, Indicator, Type, Entity, File, Line))
 		;	true
 		).
 
-	warn_on_missing_info_key(Entity, Key) :-
+	warn_on_missing_entity_info_key(Key, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
 			entity_file_line(Entity, File, Line),
-			print_message(warning, lgtdoc, missing_info_key(Entity, Key, File, Line))
+			print_message(warning, lgtdoc, missing_entity_info_key(Key, Type, Entity, File, Line))
 		;	true
 		).
 
-	warn_on_missing_info_key(Entity, Indicator, Key) :-
+	warn_on_missing_predicate_info_key(Predicate, Key, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_info_key, warning) ->
-			entity_predicate_file_line(Entity, Indicator, File, Line),
-			print_message(warning, lgtdoc, missing_info_key(Entity, Indicator, Key, File, Line))
+			entity_predicate_file_line(Entity, Predicate, File, Line),
+			print_message(warning, lgtdoc, missing_predicate_info_key(Predicate, Key, Type, Entity, File, Line))
 		;	true
 		).
 
-	warn_on_invalid_date(Entity, Date) :-
+	warn_on_invalid_date(Date, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_invalid_dates, warning),
 			% don't check deprecated date format
 			Date = Year-Month-Day ->
 			(	\+ valid_date(Year, Month, Day) ->
 				entity_file_line(Entity, File, Line),
-				print_message(warning, lgtdoc, invalid_date(Entity, Date, File, Line))
+				print_message(warning, lgtdoc, invalid_date(Date, Type, Entity, File, Line))
 			;	today(TodayYear, TodayMonth, TodayDay),
 				d(Year, Month, Day) @> d(TodayYear, TodayMonth, TodayDay) ->
 				entity_file_line(Entity, File, Line),
-				print_message(warning, lgtdoc, date_in_the_future(Entity, Date, File, Line))
+				print_message(warning, lgtdoc, date_in_the_future(Date, Type, Entity, File, Line))
 			;	true
 			)
 		;	true
 		).
 
-	warn_on_missing_punctuation(Entity, Text) :-
+	warn_on_missing_punctuation(Text, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_punctuation, warning),
 			\+ sub_atom(Text, _, 1, 0, '.'),
 			\+ sub_atom(Text, _, 1, 0, '!'),
@@ -1755,11 +1773,11 @@
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_file_line(Entity, File, Line),
-			print_message(warning, lgtdoc, missing_punctuation(Entity, Text, File, Line))
+			print_message(warning, lgtdoc, missing_punctuation(Text, Type, Entity, File, Line))
 		;	true
 		).
 
-	warn_on_missing_punctuation(Entity, Indicator, Text) :-
+	warn_on_missing_punctuation(Indicator, Text, Type, Entity) :-
 		(	current_logtalk_flag(lgtdoc_missing_punctuation, warning),
 			\+ sub_atom(Text, _, 1, 0, '.'),
 			\+ sub_atom(Text, _, 1, 0, '!'),
@@ -1767,15 +1785,15 @@
 			\+ sub_atom(Text, 0, _, _, 'http'),
 			\+ sub_atom(Text, 0, _, _, 'ftp') ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
-			print_message(warning, lgtdoc, missing_punctuation(Entity, Text, File, Line))
+			print_message(warning, lgtdoc, missing_punctuation(Text, Type, Entity, File, Line))
 		;	true
 		).
 
-	warn_on_non_standard_exception(Entity, Indicator, Exception) :-
+	warn_on_non_standard_exception(Type, Entity, Indicator, Exception) :-
 		(	current_logtalk_flag(lgtdoc_non_standard_exceptions, warning),
 			\+ standard_exception(Exception) ->
 			entity_predicate_file_line(Entity, Indicator, File, Line),
-			print_message(warning, lgtdoc, non_standard_exception(Entity, Indicator, Exception, File, Line))
+			print_message(warning, lgtdoc, non_standard_exception(Indicator, Exception, Type, Entity, File, Line))
 		;	true
 		).
 

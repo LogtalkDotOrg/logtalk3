@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:3:0,
 		author is 'Paulo Moura',
-		date is 2021-08-24,
+		date is 2024-05-24,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -253,6 +253,47 @@
 	nth_aux(Element, [Head| Tail], Position0, Position, [Head| Rest]) :-
 		Position1 is Position0 + 1,
 		nth_aux(Element, Tail, Position1, Position, Rest).
+
+	sequential_occurrences(List, Counts) :-
+		occurrences_sorted(List, Counts).
+
+	sequential_occurrences(List, Closure, Counts) :-
+		occurrences_sorted(List, Closure, Counts).
+
+	occurrences(List, Counts) :-
+		msort(List, Sorted),
+		occurrences_sorted(Sorted, Counts).
+
+	occurrences_sorted([], []).
+	occurrences_sorted([Item| Items], [Item-Count| Counts]) :-
+		occurrence_count(Items, Item, 1, Count, Rest),
+		occurrences_sorted(Rest, Counts).
+
+	occurrence_count([], _, Count, Count, []).
+	occurrence_count([Item| Items], CurrentItem, Count0, Count, Rest) :-
+		Item == CurrentItem,
+		!,
+		Count1 is Count0 + 1,
+		occurrence_count(Items, Item, Count1, Count, Rest).
+	occurrence_count([Item| Items], _, Count, Count, [Item| Items]).
+
+	occurrences(List, Closure, Counts) :-
+		msort(List, Sorted),
+		occurrences_sorted(Sorted, Closure, Counts).
+
+	occurrences_sorted([], _, []).
+	occurrences_sorted([Item| Items], Closure, [Item-Count| Counts]) :-
+		occurrence_count(Items, Item, Closure, 1, Count, Rest),
+		occurrences_sorted(Rest, Closure, Counts).
+
+	:- meta_predicate(occurrence_count(*, *, 2, *, *, *)).
+	occurrence_count([], _, _, Count, Count, []).
+	occurrence_count([Item| Items], CurrentItem, Closure, Count0, Count, Rest) :-
+		call(Closure, Item, CurrentItem),
+		!,
+		Count1 is Count0 + 1,
+		occurrence_count(Items, Item, Closure, Count1, Count, Rest).
+	occurrence_count([Item| Items], _, _, Count, Count, [Item| Items]).
 
 	partition([], _, [], [], []).
 	partition([X| Xs], Y, Less, Equal, Greater) :-
@@ -611,10 +652,10 @@
 	user::logtalk_linter_hook(
 		list::append(L1, L2, L), suspicious_calls,
 		File, Lines, Type, Entity,
-		suspicious_call(File, Lines, Type, Entity, list::append(L1, L2, L), [L = [X| L2]])
+		suspicious_call(File, Lines, Type, Entity, list::append(L1, L2, L), [L = List])
 	) :-
-		L1 = [X| Tail],
-		Tail == [].
+		valid(L1),
+		append(L1, L2, List).
 	user::logtalk_linter_hook(
 		list::append([L1, L2], L), suspicious_calls,
 		File, Lines, Type, Entity,

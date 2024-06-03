@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:10:0,
+		version is 0:13:0,
 		author is 'Paulo Moura',
-		date is 2021-06-12,
+		date is 2023-11-24,
 		comment is 'Unit tests for the "random" library.',
 		parnames is ['RandomObject']
 	]).
@@ -55,6 +55,35 @@
 		random_select_3_01,
 		random_select_3(
 			-property(atom, [Random]>>(list::member(Random,[a,b,c,d,e,f,g,h,i,j]))),
+			-property(list(atom), [All]>>(list::msort(All,[a,b,c,d,e,f,g,h,i,j])))
+		)
+	).
+
+	% select/4 tests
+
+	quick_check(
+		random_select_4_01,
+		random_select_4(
+			-property(atom, [Random]>>(list::member(Random,[a,b,c,d,e,f,g,h,i,j]))),
+			{42},
+			-property(list(atomic), [All]>>(list::msort(All,[42,a,b,c,d,e,f,g,h,i,j])))
+		)
+	).
+
+	% swap/2 tests
+
+	quick_check(
+		random_swap_2_01,
+		random_swap_2(
+			-property(list(atom), [All]>>(list::msort(All,[a,b,c,d,e,f,g,h,i,j])))
+		)
+	).
+
+	% swap_consecutive/2 tests
+
+	quick_check(
+		random_swap_consecutive_2_01,
+		random_swap_consecutive_2(
 			-property(list(atom), [All]>>(list::msort(All,[a,b,c,d,e,f,g,h,i,j])))
 		)
 	).
@@ -153,6 +182,15 @@
 
 	random_select_3(Random, [Random| Rest]) :-
 		_RandomObject_::select(Random, [a,b,c,d,e,f,g,h,i,j], Rest).
+
+	random_select_4(Random, New, [Random| NewList]) :-
+		_RandomObject_::select(Random, [a,b,c,d,e,f,g,h,i,j], New, NewList).
+
+	random_swap_2(NewList) :-
+		_RandomObject_::swap([a,b,c,d,e,f,g,h,i,j], NewList).
+
+	random_swap_consecutive_2(NewList) :-
+		_RandomObject_::swap_consecutive([a,b,c,d,e,f,g,h,i,j], NewList).
 
 	random_enumerate_2(List) :-
 		findall(N, _RandomObject_::enumerate([0,1,2,3,4,5,6,7,8,9], N), List).
