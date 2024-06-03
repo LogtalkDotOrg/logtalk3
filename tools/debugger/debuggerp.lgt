@@ -90,7 +90,7 @@
 	:- mode(spy(@spy_point), zero_or_one).
 	:- mode(spy(@list(spy_point)), zero_or_one).
 	:- info((spy)/1, [
-		comment is 'Sets a line number spy point, a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
+		comment is 'Sets a line number spy point (removing any existing log point defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
 		argnames is ['SpyPoint']
 	]).
 
@@ -157,7 +157,7 @@
 	:- mode(log(@object_identifier, +integer, +atom), zero_or_one).
 	:- mode(log(@category_identifier, +integer, +atom), zero_or_one).
 	:- info(log/3, [
-		comment is 'Sets a log point. Fails if the log point is invalid.',
+		comment is 'Sets a log point (removing any existing line number spy point defined for the same location). Fails if the log point is invalid.',
 		argnames is ['Entity', 'Line', 'Message']
 	]).
 

@@ -355,6 +355,8 @@ Spy points set.
 yes
 </pre></div>
 </div>
+<p>Note that setting a line number spy point will remove any existing log
+point for the same location.</p>
 <p>Line numbers and predicate spy points can be removed by using the
 debugger <code class="docutils literal notranslate"><span class="pre">nospy/1</span></code> predicate. The argument can be a spy point, a
 list of spy points, or a non-instantiated variable in which case all
@@ -442,6 +444,8 @@ yes
 <p>Predicates <code class="docutils literal notranslate"><span class="pre">logging/3</span></code> and <code class="docutils literal notranslate"><span class="pre">nolog/3</span></code> can be used to, respectively, query
 and remove log points. There’s also a <code class="docutils literal notranslate"><span class="pre">nologall/0</span></code> predicate that removes
 all log points.</p>
+<p>Note that setting a log point will remove any existing line number spy point
+for the same location.</p>
 </section>
 <section id="tracing-program-execution">
 <span id="programming-trace"></span><h2>Tracing program execution<a class="headerlink" href="#tracing-program-execution" title="Link to this heading"></a></h2>

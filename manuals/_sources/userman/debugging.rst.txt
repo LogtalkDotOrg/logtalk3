@@ -220,6 +220,9 @@ example:
    Spy points set.
    yes
 
+Note that setting a line number spy point will remove any existing log
+point for the same location.
+
 Line numbers and predicate spy points can be removed by using the
 debugger ``nospy/1`` predicate. The argument can be a spy point, a
 list of spy points, or a non-instantiated variable in which case all
@@ -323,6 +326,9 @@ the ``log/3`` predicate. For example:
 Predicates ``logging/3`` and ``nolog/3`` can be used to, respectively, query
 and remove log points. There's also a ``nologall/0`` predicate that removes
 all log points.
+
+Note that setting a log point will remove any existing line number spy point
+for the same location.
 
 .. _programming_trace:
 
