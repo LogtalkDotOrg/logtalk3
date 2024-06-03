@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:54:0,
+		version is 0:55:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-06-02,
+		date is 2024-06-03,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1374,7 +1374,14 @@
 			true
 		;	logtalk_load(debugger(loader))
 		),
-		{debugger::spy(Predicate)}.
+		spy_(Predicate).
+
+	spy_(Name/Arity) :-
+		{debugger::spy(Name/Arity)}.
+	spy_(Name//Arity) :-
+		{debugger::spy(Name//Arity)}.
+	spy_((Sender, This, Self, Goal)) :-
+		{debugger::spy(Sender, This, Self, Goal)}.
 
 	spy(File, Line) :-
 		(	current_object(debugger) ->
@@ -1396,7 +1403,14 @@
 			true
 		;	logtalk_load(debugger(loader))
 		),
-		{debugger::nospy(Predicate)}.
+		nospy_(Predicate).
+
+	nospy_(Name/Arity) :-
+		{debugger::nospy(Name/Arity)}.
+	nospy_(Name//Arity) :-
+		{debugger::nospy(Name//Arity)}.
+	nospy_((Sender, This, Self, Goal)) :-
+		{debugger::nospy(Sender, This, Self, Goal)}.
 
 	nospy(File, Line) :-
 		(	current_object(debugger) ->
