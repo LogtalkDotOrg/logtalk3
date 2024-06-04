@@ -31,7 +31,7 @@
 
 	:- threaded.
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+	:- if((current_logtalk_flag(prolog_dialect, lvm);current_logtalk_flag(prolog_dialect, arriba))).
 
 		test(blackboard_1, true) :-
 			threaded_call(student::run(10)),

@@ -87,7 +87,7 @@
 		;	mkdir(Directory)
 		).
 
-:- elif(current_prolog_flag(dialect, lvm)).
+:- elif((current_logtalk_flag(prolog_dialect, lvm);current_logtalk_flag(prolog_dialect, arriba))).
 
 	% usage: lvmlgt -i parallel_logtalk_processes_setup.pl
 

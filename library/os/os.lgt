@@ -1968,7 +1968,7 @@
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif((current_logtalk_flag(prolog_dialect, lvm);current_logtalk_flag(prolog_dialect, arriba))).
 
 		pid(PID) :-
 			{pid(PID)}.

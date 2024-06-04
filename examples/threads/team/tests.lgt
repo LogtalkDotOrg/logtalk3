@@ -31,7 +31,7 @@
 
 	cover(team).
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+	:- if((current_logtalk_flag(prolog_dialect, lvm);current_logtalk_flag(prolog_dialect, arriba))).
 
 		test(team_01, true) :-
 			team::start.
