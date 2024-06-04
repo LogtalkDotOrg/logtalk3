@@ -31,7 +31,7 @@
 
 	cover(ping_pong).
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+	:- if((current_logtalk_flag(prolog_dialect, lvm);current_logtalk_flag(prolog_dialect, arriba))).
 
 		test(ping_pong_01, true) :-
 			ping_pong::play(1).

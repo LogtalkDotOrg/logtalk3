@@ -99,7 +99,7 @@
 		when(Condition, Goal) :-
 			user::when(Condition, Goal).
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif((current_logtalk_flag(prolog_dialect, lvm);current_logtalk_flag(prolog_dialect, arriba))).
 
 		dif(Term1, Term2) :-
 			user::dif(Term1, Term2).

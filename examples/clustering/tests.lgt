@@ -37,7 +37,7 @@
 		os::environment_variable('CLASSPATH', CLASSPATH),
 		sub_atom(CLASSPATH, _, _, _, 'commons-math3-').
 
-	test(clustering_01, true, [condition(\+ current_logtalk_flag(prolog_dialect, lvm))]) :-
+	test(clustering_01, true, [condition(\+ (current_logtalk_flag(prolog_dialect, lvm);current_logtalk_flag(prolog_dialect, arriba)))]) :-
 		clustering::clusters([1.0,1.5,1.8,3.5,3.6,4.0,4.2], 4, 10000, Clusters),
 		list::length(Clusters, Length),
 		^^assertion(Length == 4),
