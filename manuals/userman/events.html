@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Event-driven programming &mdash; The Logtalk Handbook v3.80.0 documentation</title>
+  <title>Event-driven programming &mdash; The Logtalk Handbook v3.81.0-b01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d70dcbd0"></script>
+        <script src="../_static/documentation_options.js?v=9456dd46"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.80.0
+                3.81.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -228,7 +228,7 @@ properties:</p>
 <dl class="simple">
 <dt>Any object can act as a monitor</dt><dd><p>The monitor status is a role that any object can perform during its
 existence. The minimum protocol necessary is declared in the built-in
-<a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">monitoring</span></a> protocol. Strictly speaking, the
+<a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">monitoring</span></a> protocol. Strictly speaking, the
 reference to this protocol is only needed when specializing event handlers.
 Nevertheless, it is considered good programming practice to always
 refer the protocol when defining event handlers.</p>
@@ -267,7 +267,7 @@ corresponding event handlers directly for all registered monitors. These
 calls are internally made bypassing the message sending primitives in order
 to avoid potential endless loops. The event handlers consist in user
 definitions for the public predicates declared in the built-in
-<a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">monitoring</span></a> protocol (see below for more details).</p>
+<a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">monitoring</span></a> protocol (see below for more details).</p>
 </section>
 <section id="performance-concerns">
 <span id="events-performance"></span><h2>Performance concerns<a class="headerlink" href="#performance-concerns" title="Link to this heading"></a></h2>
@@ -362,7 +362,7 @@ of the returned arguments are free variables or contain free variables.</p>
 </section>
 <section id="defining-event-handlers">
 <span id="events-handlers"></span><h3>Defining event handlers<a class="headerlink" href="#defining-event-handlers" title="Link to this heading"></a></h3>
-<p>The <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">monitoring</span></a> built-in protocol declares two
+<p>The <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">monitoring</span></a> built-in protocol declares two
 public predicates, <a class="reference internal" href="../refman/methods/before_3.html#methods-before-3"><span class="std std-ref">before/3</span></a> and <a class="reference internal" href="../refman/methods/after_3.html#methods-after-3"><span class="std std-ref">after/3</span></a>, that
 are automatically called to handle <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code> events. Any
 object that plays the role of monitor must define one or both of these
@@ -439,7 +439,7 @@ built-in predicate:</p>
 yes
 </pre></div>
 </div>
-<p>The <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">monitoring</span></a> protocol declares the event
+<p>The <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">monitoring</span></a> protocol declares the event
 handlers as public predicates. If necessary, <a class="reference internal" href="protocols.html#protocols-implementing"><span class="std std-ref">protected or private
 implementation of the protocol</span></a> may be used in
 order to change the scope of the event handler predicates. Note that the

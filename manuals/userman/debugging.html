@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Debugging &mdash; The Logtalk Handbook v3.80.0 documentation</title>
+  <title>Debugging &mdash; The Logtalk Handbook v3.81.0-b01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d70dcbd0"></script>
+        <script src="../_static/documentation_options.js?v=9456dd46"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.80.0
+                3.81.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -313,12 +313,12 @@ some Prolog compilers:</p>
 </section>
 <section id="activating-the-debugger">
 <h2>Activating the debugger<a class="headerlink" href="#activating-the-debugger" title="Link to this heading"></a></h2>
-<p>The <a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-trace-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">debuggerp::trace/0</span></a> and
-<a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-debug-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">debuggerp::debug/0</span></a> predicates implicitly
+<p>The <a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-trace-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">debuggerp::trace/0</span></a> and
+<a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-debug-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">debuggerp::debug/0</span></a> predicates implicitly
 select the <cite>debugger</cite> tool as the active debug handler. If you have additional
 debug handlers loaded (e.g. the <cite>ports_profiler</cite> tool), those would no longer
 be active (there can be only one active debug handler at any given time). The
-<a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-nodebug-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">debuggerp::nodebug/0</span></a> predicate implicitly
+<a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-nodebug-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">debuggerp::nodebug/0</span></a> predicate implicitly
 deselects the <cite>debugger</cite> tool as the active debug handler.</p>
 </section>
 <section id="defining-spy-points">
@@ -848,7 +848,7 @@ however, be intercepted to perform other actions. An alternative is to use
 instead the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a> for
 conditional compilation of debugging goals. For example, the
 <a class="reference internal" href="../libraries/hook_objects.html"><span class="doc">hook_objects</span></a> library provides a
-<a class="reference external" href="../../docs/print_goal_hook_0.html#print-goal-hook-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">print_goal_hook</span></a> object that simplifies
+<a class="reference external" href="../../docs/print_goal_hook_0.html#print-goal-hook-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">print_goal_hook</span></a> object that simplifies
 printing entity goals before or after calling them by simply prefixing them
 with an operator. See the library and hook object documentation for details.
 You can also define your own specialized hook objects for custom debugging
@@ -865,10 +865,10 @@ details.</p>
 <section id="debug-and-trace-events">
 <span id="debugging-events"></span><h2>Debug and trace events<a class="headerlink" href="#debug-and-trace-events" title="Link to this heading"></a></h2>
 <p>The debugging API defines two multifile predicates,
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> and
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-3" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::debug_handler/3</span></a> for handiling
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> and
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-3" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">logtalk::debug_handler/3</span></a> for handiling
 trace and debug events. It also provides a
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-1" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::debug_handler/1</span></a> multifile
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-1" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">logtalk::debug_handler/1</span></a> multifile
 predicate that allows an object (or a category) to declare itself
 as a debug handler provider. The Logtalk <code class="docutils literal notranslate"><span class="pre">debugger</span></code> and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code>
 tools are regular applications thar are implemented using this API, which
@@ -897,8 +897,8 @@ debug_handler(goal(<span class="nv">Goal</span>, <span class="nv">TGoal</span>),
 </pre></div>
 </div>
 <p>Your debug handler provider should also either automatically call the
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-activate-debug-handler-1" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::activate_debug_handler/1</span></a>
-and <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-deactivate-debug-handler-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::deactivate_debug_handler/0</span></a>
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-activate-debug-handler-1" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">logtalk::activate_debug_handler/1</span></a>
+and <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-deactivate-debug-handler-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">logtalk::deactivate_debug_handler/0</span></a>
 predicate or provide public predicates to simplify calling these predicates.
 For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(start<span class="o">/</span><span class="m">0</span>).
@@ -911,7 +911,7 @@ stop <span class="o">:-</span>
 </pre></div>
 </div>
 <p>If you only need to define a trace event handler, then simply define clauses
-for the <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> multifile
+for the <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> multifile
 predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>trace_event<span class="o">/</span><span class="m">2</span>).
 <span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>trace_event<span class="o">/</span><span class="m">2</span>).

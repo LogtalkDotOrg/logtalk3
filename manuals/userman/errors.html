@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Error handling &mdash; The Logtalk Handbook v3.80.0 documentation</title>
+  <title>Error handling &mdash; The Logtalk Handbook v3.81.0-b01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d70dcbd0"></script>
+        <script src="../_static/documentation_options.js?v=9456dd46"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.80.0
+                3.81.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -185,7 +185,7 @@ partially instantiated when the corresponding information is not available
 (e.g. due to compiler optimizations that throw away the necessary error context
 information). The <code class="docutils literal notranslate"><span class="pre">ExecutionContext</span></code> argument is an opaque term that
 can be decoded using the
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-execution-context-7" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">logtalk::execution_context/7</span></a> predicate.</p>
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-execution-context-7" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">logtalk::execution_context/7</span></a> predicate.</p>
 <section id="raising-exceptions">
 <h2>Raising Exceptions<a class="headerlink" href="#raising-exceptions" title="Link to this heading"></a></h2>
 <p>The <a class="reference internal" href="../refman/methods/error_handling_methods.html#error-handling-methods"><span class="std std-ref">error handling section</span></a> in the reference
@@ -209,7 +209,7 @@ the ISO Prolog Core standard.</p>
 <h2>Type-checking<a class="headerlink" href="#type-checking" title="Link to this heading"></a></h2>
 <p>One of the most common case where errors may be generated is when
 type-checking predicate arguments and input data before processing it.
-The standard library includes a <a class="reference external" href="../../docs/type_0.html#type-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">type</span></a> object that
+The standard library includes a <a class="reference external" href="../../docs/type_0.html#type-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">type</span></a> object that
 defines an extensive set of types, together with predicates for validating
 and checking terms. The set of types is user extensible and new types can
 be defined by adding clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile
@@ -243,16 +243,16 @@ type? If we want just to test if a temperature is valid, we can write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>valid(temperature(celsius), <span class="m">42.0</span>), ...
 </pre></div>
 </div>
-<p>The <a class="reference external" href="../../docs/type_0.html#type-0-valid-2" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">type::valid/2</span></a> predicate succeeds or fails
+<p>The <a class="reference external" href="../../docs/type_0.html#type-0-valid-2" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">type::valid/2</span></a> predicate succeeds or fails
 depending on the second argument being of the type specified in the first
 argument. If instead of success or failure we want to generate an error for
-invalid values, we can use the <a class="reference external" href="../../docs/type_0.html#type-0-check-2" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">type::check/2</span></a>
+invalid values, we can use the <a class="reference external" href="../../docs/type_0.html#type-0-check-2" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">type::check/2</span></a>
 predicate instead:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>check(temperature(celsius), <span class="m">42.0</span>), ...
 </pre></div>
 </div>
 <p>If we require an <code class="docutils literal notranslate"><span class="pre">error/2</span></code> exception term with the error context, we can
-use instead the <a class="reference external" href="../../docs/type_0.html#type-0-check-3" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">type::check/3</span></a> predicate:</p>
+use instead the <a class="reference external" href="../../docs/type_0.html#type-0-check-3" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">type::check/3</span></a> predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
 type<span class="o">::</span>check(temperature(celsius), <span class="m">42.0</span>, <span class="nv">Context</span>),
@@ -421,7 +421,7 @@ arguments, throwing an exception in case of misuse.</p>
 <p>The message sending mechanisms always check if the receiver of a message
 is a defined object and if the message corresponds to a declared
 predicate within the scope of the sender. The built-in protocol
-<a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">forwarding</span></a> declares a predicate,
+<a class="reference external" href="../../docs/forwarding_0.html#forwarding-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">forwarding</span></a> declares a predicate,
 <a class="reference internal" href="../refman/methods/forward_1.html#methods-forward-1"><span class="std std-ref">forward/1</span></a>, which is automatically called (if defined) by
 the runtime for any message that the receiving object does not understand.
 The usual definition for this error handler is to delegate or forward the

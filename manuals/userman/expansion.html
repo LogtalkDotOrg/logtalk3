@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Term and goal expansion &mdash; The Logtalk Handbook v3.80.0 documentation</title>
+  <title>Term and goal expansion &mdash; The Logtalk Handbook v3.81.0-b01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=649a27d8" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d70dcbd0"></script>
+        <script src="../_static/documentation_options.js?v=9456dd46"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.80.0
+                3.81.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -163,7 +163,7 @@ rules from breaking other sets of expansions rules.</p>
 <h2>Defining expansions<a class="headerlink" href="#defining-expansions" title="Link to this heading"></a></h2>
 <p>Term and goal expansions are defined using, respectively, the predicates
 <a class="reference internal" href="../refman/methods/term_expansion_2.html#methods-term-expansion-2"><span class="std std-ref">term_expansion/2</span></a> and <a class="reference internal" href="../refman/methods/goal_expansion_2.html#methods-goal-expansion-2"><span class="std std-ref">goal_expansion/2</span></a>, which
-are declared in the <a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol.
+are declared in the <a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol.
 Note that, unlike Prolog systems also providing these two predicates, they
 are <strong>not</strong> declared as <a class="reference internal" href="../glossary.html#term-multifile-predicate"><span class="xref std std-term">multifile predicates</span></a>
 in the protocol. This design decision is key to give the programmer full
@@ -301,7 +301,7 @@ objects (discussed next).</p>
 <h2>Hook objects<a class="headerlink" href="#hook-objects" title="Link to this heading"></a></h2>
 <p>Term and goal expansion of a source file during its compilation is performed
 by using <em>hook objects</em>. A hook object is simply an object implementing the
-<a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol and defining clauses
+<a class="reference external" href="../../docs/expanding_0.html#expanding-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">expanding</span></a> built-in protocol and defining clauses
 for the term and goal expansion hook predicates. Hook objects must be compiled
 and loaded prior to be used to expand a source file.</p>
 <p>To compile a source file using a hook object, we can use the
@@ -451,9 +451,9 @@ Prolog features).</p>
 <h2>User defined expansion workflows<a class="headerlink" href="#user-defined-expansion-workflows" title="Link to this heading"></a></h2>
 <p>Sometimes we have multiple hook objects that we need to combine and use in
 the compilation of a source file. Logtalk includes a <a class="reference internal" href="../libraries/hook_flows.html"><span class="doc">hook_flows</span></a>
-library that supports two basic expansion workflows: a <a class="reference external" href="../../docs/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">pipeline</span></a>
+library that supports two basic expansion workflows: a <a class="reference external" href="../../docs/hook_pipeline_1.html#hook-pipeline-1" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">pipeline</span></a>
 of hook objects, where the expansion results from a hook object are feed to
-the next hook object in the pipeline, and a <a class="reference external" href="../../docs/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">set</span></a> of
+the next hook object in the pipeline, and a <a class="reference external" href="../../docs/hook_set_1.html#hook-set-1" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">set</span></a> of
 hook objects, where expansions are tried until one of them succeeds. These
 workflows are implemented as parametric objects allowing combining them to
 implement more sophisticated expansion workflows. There is also a
@@ -463,7 +463,7 @@ hook object that can be used to restore the default expansion workflow used
 by the compiler.</p>
 <p>For example, assuming that you want to apply the Prolog backend specific
 expansion rules defined in its adapter file, using the
-<a class="reference external" href="../../docs/backend_adapter_hook_0.html#backend-adapter-hook-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">backend_adapter_hook</span></a> library object,
+<a class="reference external" href="../../docs/backend_adapter_hook_0.html#backend-adapter-hook-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">backend_adapter_hook</span></a> library object,
 passing the resulting terms to your own expansion when compiling a source
 file, we could use the goal:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(
@@ -473,7 +473,7 @@ file, we could use the goal:</p>
 </pre></div>
 </div>
 <p>As a second example, we can prevent expansion of a source file using the library
-object <a class="reference external" href="../../docs/identity_hook_0.html#identity-hook-0" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">identity_hook</span></a> by adding as the first term in a
+object <a class="reference external" href="../../docs/identity_hook_0.html#identity-hook-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">identity_hook</span></a> by adding as the first term in a
 source file the directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, identity_hook).
 </pre></div>
@@ -491,7 +491,7 @@ as the hook object when compiling source files. When using
 module system, it can also be specified a module containing clauses for the
 expanding predicates as long as the module name doesn’t coincide with an
 object name. When defining a custom workflow, the library object
-<a class="reference external" href="../../docs/prolog_module_hook_1.html#prolog-module-hook-1" title="(in Logtalk APIs v3.80.0)"><span class="xref std std-ref">prolog_module_hook/1</span></a> can be used as a
+<a class="reference external" href="../../docs/prolog_module_hook_1.html#prolog-module-hook-1" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">prolog_module_hook/1</span></a> can be used as a
 workflow step. For example, assuming a module <code class="docutils literal notranslate"><span class="pre">functions</span></code> defining expansion
 rules that we want to use:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(

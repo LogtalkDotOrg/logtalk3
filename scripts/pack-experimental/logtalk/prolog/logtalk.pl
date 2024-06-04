@@ -111,7 +111,7 @@ goal_expansion(current_op(A,B,C), current_op(A,B,user:C)) :-
 	\+ functor(C, (:), 2).
 
 :-	prolog_load_context(directory, Directory),
-	atom_concat(Directory, '/../logtalk-3.80.0/', Location),
+	atom_concat(Directory, '/../logtalk-3.81.0/', Location),
 	setenv('LOGTALKHOME', Location),
 	setenv('LOGTALKUSER', Location),
-	load_files('../logtalk-3.80.0/integration/logtalk_swi.pl').
+	load_files('../logtalk-3.81.0/integration/logtalk_swi.pl').
