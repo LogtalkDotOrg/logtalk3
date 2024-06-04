@@ -178,7 +178,7 @@ Stops tracing of calls compiled in debug mode. Debugger will still stop at defin
 ``spy/1``
 ^^^^^^^^^
 
-Sets a line number spy point, a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
+Sets a line number spy point (removing any existing log point defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -354,7 +354,7 @@ Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule
 ``log/3``
 ^^^^^^^^^
 
-Sets a log point. Fails if the log point is invalid.
+Sets a log point (removing any existing line number spy point defined for the same location). Fails if the log point is invalid.
 
 | **Compilation flags:**
 |    ``static``
