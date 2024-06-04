@@ -3573,7 +3573,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % versions, 'rcNN' for release candidates (with N being a decimal digit),
 % and 'stable' for stable versions
 
-'$lgt_version_data'(logtalk(3, 80, 0, b01)).
+'$lgt_version_data'(logtalk(3, 80, 0, stable)).
 
 
 
@@ -9837,6 +9837,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, _, _, _, _, Mode, _, Lines, _),
 		'$lgt_comp_ctx'(NewCtx, _, _, _, _, _, _, _, _, _, _, Mode, _, Lines, _),
 		'$lgt_compile_logtalk_directives'(Directives, NewCtx)
+	;	'$lgt_prolog_meta_directive'(Directive, _) ->
+		'$lgt_compile_directive'(Directive, Ctx)
 	;	functor(Directive, Functor, Arity),
 		throw(domain_error(directive, Functor/Arity))
 	).

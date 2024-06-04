@@ -300,7 +300,8 @@
 		(	spying_line_number_(Template, Line) ->
 			true
 		;	assertz(spying_line_number_(Template, Line))
-		).
+		),
+		retractall(logging_line_number_(Template, Line, _)).
 
 	spy_predicate(Functor, Arity, Original) :-
 		atom(Functor),
@@ -494,6 +495,7 @@
 		;	% new log point
 			assertz(logging_line_number_(Template, Line, Message))
 		),
+		retractall(spying_line_number_(Template, Line)),
 		print_message(information, debugger, log_point_added),
 		(	debugging_ ->
 			true
