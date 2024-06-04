@@ -25,7 +25,11 @@ RELEASE NOTES
 3.81.0 - July ??, 2024
 ======================
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
 
+* FIXED: VSCode support to workaround SICStus Prolog and SWI-Prolog down-casing
+file paths on Windows and breaking handling of breakpoints.
 
 
 3.80.0 - June 4, 2024

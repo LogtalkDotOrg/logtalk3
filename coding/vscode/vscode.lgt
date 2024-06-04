@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:56:0,
+		version is 0:56:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-06-03,
+		date is 2024-06-04,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1397,16 +1397,7 @@
 
 	spy(File, Line) :-
 		ensure_debbugger,
-		(	logtalk::loaded_file_property(File, object(Entity)),
-			object_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End ->
-			true
-		;	logtalk::loaded_file_property(File, category(Entity)),
-			category_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End ->
-			true
-		;	fail
-		),
+		entity(File, Line, Entity),
 		{debugger::spy(Entity-Line)}.
 
 	nospy(Predicate) :-
@@ -1422,44 +1413,17 @@
 
 	nospy(File, Line) :-
 		ensure_debbugger,
-		(	logtalk::loaded_file_property(File, object(Entity)),
-			object_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End ->
-			true
-		;	logtalk::loaded_file_property(File, category(Entity)),
-			category_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End ->
-			true
-		;	fail
-		),
+		entity(File, Line, Entity),
 		{debugger::nospy(Entity-Line)}.
 
 	log(File, Line, Message) :-
 		ensure_debbugger,
-		(	logtalk::loaded_file_property(File, object(Entity)),
-			object_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End ->
-			true
-		;	logtalk::loaded_file_property(File, category(Entity)),
-			category_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End ->
-			true
-		;	fail
-		),
+		entity(File, Line, Entity),
 		{debugger::log(Entity, Line, Message)}.
 
 	nolog(File, Line) :-
 		ensure_debbugger,
-		(	logtalk::loaded_file_property(File, object(Entity)),
-			object_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End ->
-			true
-		;	logtalk::loaded_file_property(File, category(Entity)),
-			category_property(Entity, lines(Start, End)),
-			Start =< Line, Line =< End ->
-			true
-		;	fail
-		),
+		entity(File, Line, Entity),
 		{debugger::nolog(Entity, Line, _)}.
 
 	ensure_debbugger :-
@@ -1476,6 +1440,25 @@
 		;	category_property(Entity, file(File)),
         	category_property(Entity, lines(BeginLine, EndLine))
 		;	protocol_property(Entity, file(File)),
+        	protocol_property(Entity, lines(BeginLine, EndLine))
+		),
+        BeginLine =< Line, Line =< EndLine,
+		!.
+	entity(File, Line, Entity) :-
+		{'$lgt_environment_variable'('COMSPEC', _)},
+		% assume running on Windows
+		current_logtalk_flag(prolog_dialect, Dialect),
+		% workaround backends downcasing file paths on Windows
+		(	Dialect == swi ->
+			{downcase_atom(File, FileLowerCase)}
+		;	Dialect == sicstus,
+			downcase_atom_portable(File, FileLowerCase)
+		),
+        (	object_property(Entity, file(FileLowerCase)),
+        	object_property(Entity, lines(BeginLine, EndLine))
+		;	category_property(Entity, file(FileLowerCase)),
+        	category_property(Entity, lines(BeginLine, EndLine))
+		;	protocol_property(Entity, file(FileLowerCase)),
         	protocol_property(Entity, lines(BeginLine, EndLine))
 		),
         BeginLine =< Line, Line =< EndLine,
@@ -1530,6 +1513,22 @@
 		!.
 	memberchk(Element, [_| List]) :-
 		memberchk(Element, List).
+
+	downcase_atom_portable(AnyAtom, Lower) :-
+		atom_chars(AnyAtom, AnyChars),
+		downcase_atom_portable_(AnyChars, LowerChars),
+		atom_chars(Lower, LowerChars).
+
+	% ASCII only and avoiding 0'Char notation that would break some backends!
+	downcase_atom_portable_([], []).
+	downcase_atom_portable_([AnyChar| AnyChars], [LowerChar| LowerChars]) :-
+		(	'A' @=< AnyChar, AnyChar @=< 'Z' ->
+			char_code(AnyChar, AnyCode),
+			LowerCode is AnyCode + 32,
+			char_code(LowerChar, LowerCode)
+		;	LowerChar = AnyChar
+		),
+		downcase_atom_portable_(AnyChars, LowerChars).
 
 	% rewrite compiler error and warnings messages for parsing with Visual Studio Code
 
