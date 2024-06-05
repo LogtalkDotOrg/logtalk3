@@ -57,8 +57,9 @@ websites.
 Volumes
 -------
 
-- `/source`  
-The work directory where Logtalk is started. The code base can be mounted here.
+* `/source`  
+The work directory where Logtalk is started. The source of your project can
+be mounted here.
 
 
 Building a local image
@@ -99,8 +100,10 @@ you're running.
 
 5. Install the "Logtalk for VSCode" extension in the container and configure
 it by going into "Settings", typing "Logtalk" in the search box, and selecting
-"Remote". You can open an integrated terminal in the remote to find the values
-to be used in the configuration. For example:
+"Remote".
+
+You can open an integrated terminal in the remote to find the values to be used
+in the configuration. For example:
 
 	echo $LOGTALKHOME
 	echo $LOGTALKUSER
