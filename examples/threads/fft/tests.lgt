@@ -43,11 +43,11 @@
 		N is 8192, cgenerator::list(N, L),
 		fft(1)::fft(N,L,_F1), fft(2)::fft(N,L,_F2), fft(4)::fft(N,L,_F3).
 
-	test(fft_4, true, [condition(\+ current_logtalk_flag(prolog_dialect,lvm))]) :-
+	test(fft_4, true, [condition(\+ (current_logtalk_flag(prolog_dialect,lvm);current_logtalk_flag(prolog_dialect,arriba)))]) :-
 		N is 16384, cgenerator::list(N, L),
 		fft(1)::fft(N,L,_F1), fft(2)::fft(N,L,_F2), fft(4)::fft(N,L,_F3).
 
-	test(fft_5, true, [condition(\+ current_logtalk_flag(prolog_dialect,lvm))]) :-
+	test(fft_5, true, [condition(\+ (current_logtalk_flag(prolog_dialect,lvm);current_logtalk_flag(prolog_dialect,arriba)))]) :-
 		N is 65536, cgenerator::list(N, L),
 		fft(1)::fft(N,L,_F1), fft(2)::fft(N,L,_F2), fft(4)::fft(N,L,_F3).
 
