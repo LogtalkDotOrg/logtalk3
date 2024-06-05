@@ -1,11 +1,11 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on July 5, 2023
+##   Last updated on June 5, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
+##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-FileCopyrightText: 2017 Sergio Castro <sergioc78@gmail.com>
-##   SPDX-FileCopyrightText: 2017 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +25,7 @@
 
 FROM swipl:stable
 
-MAINTAINER Sergio Castro <sergioc78@gmail.com>
+MAINTAINER Paulo Moura <pmoura@logtalk.org>
 
 VOLUME ["/source", "/logtalkuser_prefix"]
 
@@ -35,6 +35,7 @@ ENV LOGTALKHOME=$LOGTALK_INSTALL_PREFIX/share/logtalk
 ENV LOGTALKUSER=/logtalkuser_prefix/logtalk
 ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
 ENV MANPATH=$MANPATH:$LOGTALKHOME/man
+ENV INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
 
 # Preparation for downloading
 ENV LOGTALK_DOWNLOAD=/download

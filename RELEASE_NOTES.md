@@ -25,6 +25,12 @@ RELEASE NOTES
 3.81.0 - July ??, 2024
 ======================
 
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The SWI-Prolog based Docker image to also define the `INFOPATH`
+environment variable.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

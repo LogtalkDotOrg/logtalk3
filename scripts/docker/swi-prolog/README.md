@@ -1,8 +1,8 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
+SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-FileCopyrightText: 2017 Sergio Castro <sergioc78@gmail.com>  
-SPDX-FileCopyrightText: 2017 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,11 +59,14 @@ Update the `lgt3091stable` and `3091` strings for the current version number.
 Running a Logtalk container
 ---------------------------
 
-#### From the nightly build
+#### From the nightly build (providing a top-level interpreter)
 
 	docker run -it --name logtalk_nightly "logtalk/logtalk3-swi:nightly"
 
-
-#### From the last stable release
+#### From the last stable release (providing a top-level interpreter)
 
 	docker run -it --name logtalk_latest "logtalk/logtalk3-swi:latest"
+
+### From the last stable release (adding a ~/project directory as a volume)
+
+	docker run -it --name logtalk_latest -v $(HOME)/project:/source "logtalk/logtalk3-swi:latest"
