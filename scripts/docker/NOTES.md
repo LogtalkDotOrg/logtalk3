@@ -20,20 +20,17 @@ ________________________________________________________________________
 
 
 This directory contains files and resources required to run Logtalk in a
-Docker container. It also contains the read-me files that are displayed
-at Docker Hub. The files are organized in directories per supported
-backend Prolog compiler. Note that we are currently limited to Prolog
-systems with available Docker containers. Each one of these directories
-includes the following files:
+Docker container. It also contains the readme files that are displayed at
+Docker Hub. Each one of these directories includes the following files:
 
 - `Dockerfile`  
-	the docker file configuring Logtalk with a specific Prolog engine
+	the docker file configuring Logtalk with a specific Prolog backend
+	or a selection of the supported backends
 
 - `README.md`  
 	the `README.md` file automatically used as the project description
 	when creating an automated build at Docker Hub
 
-The stable and nightly Docker images are available for downloading at
-the Docker Hub website:
+The Docker images are available for downloading at the Docker Hub website:
 
 	https://hub.docker.com/u/logtalk/

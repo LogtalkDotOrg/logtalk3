@@ -1,0 +1,110 @@
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>  
+SPDX-FileCopyrightText: 2024 Paulo Moura <pmoura@logtalk.org>  
+SPDX-License-Identifier: Apache-2.0
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+Logtalk Docker image
+====================
+
+Includes Logtalk and a subset of the supported Prolog backends:
+
+- Ciao Prolog
+- CxProlog
+- ECLiPSe
+- GNU Prolog
+- SWI-Prolog
+- Trealla Prolog
+- XSB
+- YAP
+
+
+Build arguments and their defaults
+----------------------------------
+
+* `LOGTALK_VERSION` (`master`)
+
+Valid identifiers are as shown in the Logtalk GitHub repository at
+[release names](https://github.com/LogtalkDotOrg/logtalk3/releases).
+
+* `CIAO_VERSION (`v1.23.0-m1`)
+* `CX_VERSION (`0.98.3`)
+* `ECLIPSE_VERSION` (`7.1_13`)
+* `GNU_VERSION` (`master`)
+* `SWI_VERSION` (`master`)
+* `TREALLA_VERSION` (`main`)
+* `XSB_VERSION` (`git-origin`)
+* `YAP_VERSION` (`master`)
+
+Valid identifiers are as shown in the backend repositories or download
+websites.
+
+
+Volumes
+-------
+
+- `/source`  
+The work directory where Logtalk is started. The code base can be mounted here.
+
+
+Building a local image
+----------------------
+
+	docker build -t logtalk3 .
+
+
+Running a container
+-------------------
+
+#### Providing a shell
+
+	docker run -it --name=test logtalk3
+
+#### Adding a ~/project directory as a volume
+
+	docker run -it --name test -v /home/jdoe/project:/source logtalk3
+
+
+Editing your project
+--------------------
+
+The recommended solution to work in a project using the image resources is
+to mount the project directory and then use VSCode with the "Dev Containers"
+extension installed:
+
+1. Run the Docker image while mounting your project directory as a volume
+(see above; you must use absolute paths).
+
+2. In the VSCode lower left corner, click on the "Open a Remote Window" icon.
+
+3. Select the option "Attach to Running Container..." and select the container
+you're running.
+
+4. Open the project directory mounted in the container by using the "File" menu
+"Open Folder..." item.
+
+5. Install the "Logtalk for VSCode" extension in the container and configure
+it by going into "Settings", typing "Logtalk" in the search box, and selecting
+"Remote". You can open an integrated terminal in the remote to find the values
+to be used in the configuration. For example:
+
+	echo $LOGTALKHOME
+	echo $LOGTALKUSER
+
+Similar for the integration script that you want to use. For example:
+
+	which gplgt

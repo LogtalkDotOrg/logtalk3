@@ -33,6 +33,9 @@ Tools
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: Docker file for building an image with Logtalk and a subset of the
+supported Prolog backends.
+
 * FIXED: The SWI-Prolog based Docker image to also define the `INFOPATH`
 environment variable.
 
