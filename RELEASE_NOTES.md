@@ -25,6 +25,11 @@ RELEASE NOTES
 3.81.0 - July ??, 2024
 ======================
 
+Tools
+-----
+
+* UPDATED: Documentation on developer tools requirements.
+
 Installers and installation scripts
 -----------------------------------
 

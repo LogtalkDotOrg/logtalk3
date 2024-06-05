@@ -112,7 +112,7 @@ not listed, see the dependency websites for installation instructions.
 - `diagrams`: Graphviz
 - `help`: `info`
 - `issue_creator`: `gh`, `glab`
-- `lgtdoc`: Sphinx, `libxslt`, `fop`
+- `lgtdoc`: Sphinx, `libxslt`, `fop`, `texlive`, `texinfo`
 - `lgtunit`: Allure
 - `packs`: `coreutils`, `libarchive`, `gnupg2`, `git`, `curl`, `direnv`
 
@@ -126,15 +126,15 @@ not listed, see the dependency websites for installation instructions.
 
 	$ sudo port install graphviz
 	$ sudo port install texinfo
-	$ sudo port install libxslt fop
-	$ sudo port install coreutils libarchive gnupg2 git curl direnv
 	$ sudo port install gh glab
+	$ sudo port install libxslt fop texlive
+	$ sudo port install coreutils libarchive gnupg2 git curl direnv
 
 ### macOS - Homebrew
 
 	$ brew install graphviz
 	$ brew install texinfo
-	$ brew install libxslt fop
+	$ brew install libxslt fop texlive
 	$ brew install allure
 	$ brew install coreutils libarchive gnupg2 git curl direnv
 	$ brew install gh glab
@@ -143,7 +143,7 @@ not listed, see the dependency websites for installation instructions.
 
 	$ sudo apt install graphviz
 	$ sudo apt install info
-	$ sudo apt install xsltproc fop
+	$ sudo apt install xsltproc fop texlive
 	$ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
 	$ sudo apt install libarchive-tools gnupg2 git curl direnv
 
@@ -156,7 +156,7 @@ not listed, see the dependency websites for installation instructions.
 ### Windows - Chocolatey
 
 	> choco install graphviz
-	> choco install xsltproc apache-fop
+	> choco install xsltproc apache-fop texlive
 	> choco install gnupg git
 	> choco install gh glab
 

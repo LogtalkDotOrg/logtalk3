@@ -233,7 +233,7 @@ listed, see the dependency websites for installation instructions.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">diagrams</span></code>: Graphviz</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">help</span></code>: <code class="docutils literal notranslate"><span class="pre">info</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code>: <code class="docutils literal notranslate"><span class="pre">gh</span></code>, <code class="docutils literal notranslate"><span class="pre">glab</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>: Sphinx, <code class="docutils literal notranslate"><span class="pre">libxslt</span></code>, <code class="docutils literal notranslate"><span class="pre">fop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>: Sphinx, <code class="docutils literal notranslate"><span class="pre">libxslt</span></code>, <code class="docutils literal notranslate"><span class="pre">fop</span></code>, <code class="docutils literal notranslate"><span class="pre">texlive</span></code>, <code class="docutils literal notranslate"><span class="pre">texinfo</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>: Allure</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">packs</span></code>: <code class="docutils literal notranslate"><span class="pre">coreutils</span></code>, <code class="docutils literal notranslate"><span class="pre">libarchive</span></code>, <code class="docutils literal notranslate"><span class="pre">gnupg2</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code>,
 <code class="docutils literal notranslate"><span class="pre">curl</span></code>, <code class="docutils literal notranslate"><span class="pre">direnv</span></code></p></li>
@@ -251,9 +251,9 @@ listed, see the dependency websites for installation instructions.</p>
 <h3>macOS - MacPorts<a class="headerlink" href="#macos-macports" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install graphviz
 <span class="err">$</span> sudo port install texinfo
-<span class="err">$</span> sudo port install libxslt fop
-<span class="err">$</span> sudo port install coreutils libarchive gnupg2 git curl direnv
 <span class="err">$</span> sudo port install gh glab
+<span class="err">$</span> sudo port install libxslt fop texlive
+<span class="err">$</span> sudo port install coreutils libarchive gnupg2 git curl direnv
 </pre></div>
 </div>
 </section>
@@ -261,7 +261,7 @@ listed, see the dependency websites for installation instructions.</p>
 <h3>macOS - Homebrew<a class="headerlink" href="#macos-homebrew" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install graphviz
 <span class="err">$</span> brew install texinfo
-<span class="err">$</span> brew install libxslt fop
+<span class="err">$</span> brew install libxslt fop texlive
 <span class="err">$</span> brew install allure
 <span class="err">$</span> brew install coreutils libarchive gnupg2 git curl direnv
 <span class="err">$</span> brew install gh glab
@@ -272,7 +272,7 @@ listed, see the dependency websites for installation instructions.</p>
 <h3>Ubuntu<a class="headerlink" href="#ubuntu" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install graphviz
 <span class="err">$</span> sudo apt install info
-<span class="err">$</span> sudo apt install xsltproc fop
+<span class="err">$</span> sudo apt install xsltproc fop texlive
 <span class="err">$</span> sudo apt<span class="o">-</span>add<span class="o">-</span>repository ppa<span class="o">:</span>qameta<span class="o">/</span>allure <span class="err">&amp;&amp;</span> sudo apt install allure
 <span class="err">$</span> sudo apt install libarchive<span class="o">-</span>tools gnupg2 git curl direnv
 </pre></div>
@@ -289,7 +289,7 @@ listed, see the dependency websites for installation instructions.</p>
 <section id="windows-chocolatey">
 <h3>Windows - Chocolatey<a class="headerlink" href="#windows-chocolatey" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install graphviz
-<span class="o">&gt;</span> choco install xsltproc apache<span class="o">-</span>fop
+<span class="o">&gt;</span> choco install xsltproc apache<span class="o">-</span>fop texlive
 <span class="o">&gt;</span> choco install gnupg git
 <span class="o">&gt;</span> choco install gh glab
 </pre></div>
