@@ -137,6 +137,10 @@ Alternatively, download the file from:
 
 https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/tree/master/logtalk_kernel
 
+A Logtalk kernel overview notebook a Logtalk tutorial notebook can be found at:
+
+https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/tree/master/notebooks
+
 
 Running the JupyterLab server
 -----------------------------
