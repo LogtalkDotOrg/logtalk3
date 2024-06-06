@@ -55,7 +55,11 @@ RUN apt-get update
 RUN apt-get install -y graphviz info xsltproc fop libarchive-tools gnupg2 git curl direnv texlive texinfo
 RUN apt-get install -y software-properties-common
 RUN apt-add-repository ppa:qameta/allure
-RUN apt install -y allure
+RUN apt-get install -y allure
+RUN apt-get install -y python3-pip
+RUN apt-get install -y python3-pygments
+RUN apt-get install -y python3-sphinx
+RUN apt-get install -y python3-sphinx-rtd-theme
 # Install backend dependencies
 RUN apt-get install -y cmake
 RUN apt-get install -y xxd
