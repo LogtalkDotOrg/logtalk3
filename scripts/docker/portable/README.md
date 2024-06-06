@@ -106,7 +106,10 @@ Note that you can open an integrated terminal in the remote to find the values
 to be used for the configuration of the Logtalk extension. For example:
 
 	echo $LOGTALKHOME
-	echo $LOGTALKUSER
+
+For the value of the `LOGTALKUSER` environment variable, you'll need the full
+path to `~/logtalk`. By default, the container user is `root` and therefore
+the `LOGTALKUSER` environment variable would be set to `/root/logtalk`.
 
 Similar for the integration script that you want to use. For example:
 

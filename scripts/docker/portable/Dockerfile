@@ -43,9 +43,7 @@ ARG XSB_VERSION=git-origin
 ARG YAP_VERSION=master
 
 # Logtalk environment
-ENV LOGTALK_INSTALL_PREFIX=/usr/local
-ENV LOGTALKHOME=$LOGTALK_INSTALL_PREFIX/share/logtalk
-ENV LOGTALKUSER=$HOME/logtalk
+ENV LOGTALKHOME=/usr/share/logtalk
 ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
 ENV MANPATH=$MANPATH:$LOGTALKHOME/man
 ENV INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
@@ -94,7 +92,7 @@ RUN apt-get install -y imagemagick
 
 # Install Logtalk
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
-RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p $LOGTALK_INSTALL_PREFIX
+RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh
 #RUN logtalk_user_setup.sh
 
 # Install Ciao Prolog
