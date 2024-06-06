@@ -169,5 +169,11 @@ RUN echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.bashrc
 RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.profile
 RUN echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.profile
 
+# Define locales (required e.g. by Sphinx)
+RUN apt-get install -y locales locales-all
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+
 WORKDIR /source
 ENTRYPOINT ["bash"]
