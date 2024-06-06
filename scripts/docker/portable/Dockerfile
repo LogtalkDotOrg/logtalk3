@@ -22,7 +22,7 @@
 #############################################################################
 
 
-FROM ubuntu:latest
+FROM ubuntu:jammy
 
 MAINTAINER Paulo Moura <pmoura@logtalk.org>
 
@@ -43,7 +43,7 @@ ARG XSB_VERSION=git-origin
 ARG YAP_VERSION=master
 
 # Logtalk environment
-ENV LOGTALKHOME=/usr/share/logtalk
+ENV LOGTALKHOME=/usr/local/share/logtalk
 ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
 ENV MANPATH=$MANPATH:$LOGTALKHOME/man
 ENV INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
@@ -57,10 +57,17 @@ RUN apt-get install -y software-properties-common
 RUN apt-add-repository ppa:qameta/allure
 RUN apt-get install -y allure
 RUN apt-get install -y python3-pip
-RUN apt-get install -y python3-pygments
-RUN apt-get install -y python3-sphinx
-RUN apt-get install -y python3-sphinx-rtd-theme
+RUN python3 -m pip install --upgrade pygments
+RUN python3 -m pip install --upgrade sphinx
+RUN python3 -m pip install --upgrade sphinx-rtd-theme
+# Install Jupyter and the Logtalk kernel
+RUN python3 -m pip install --upgrade jupyter_core
+RUN python3 -m pip install --upgrade jupyterlab
+RUN python3 -m pip install --upgrade notebook
+RUN python3 -m pip install --upgrade logtalk-jupyter-kernel
+RUN python3 -m logtalk_kernel.install
 # Install backend dependencies
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install tzdata
 RUN apt-get install -y cmake
 RUN apt-get install -y xxd
 RUN apt-get install -y build-essential
@@ -96,7 +103,7 @@ RUN apt-get install -y imagemagick
 
 # Install Logtalk
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
-RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh
+RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local
 #RUN logtalk_user_setup.sh
 
 # Install Ciao Prolog
@@ -155,6 +162,12 @@ WORKDIR /downloads
 RUN git clone --depth 1 --branch ${YAP_VERSION} https://github.com/vscosta/yap
 WORKDIR yap/build
 RUN cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && make install
+
+# Add the Logtalk environment variables to .bashrc and .profile
+RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.bashrc
+RUN echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.bashrc
+RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.profile
+RUN echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.profile
 
 WORKDIR /source
 ENTRYPOINT ["bash"]

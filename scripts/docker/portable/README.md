@@ -32,6 +32,8 @@ Includes Logtalk and a subset of the supported Prolog backends:
 - XSB
 - YAP
 
+Also includes Jupyter, JupyterLab, and the Logtalk kernel.
+
 
 Build arguments and their defaults
 ----------------------------------
@@ -114,3 +116,47 @@ the `LOGTALKUSER` environment variable would be set to `/root/logtalk`.
 Similar for the integration script that you want to use. For example:
 
 	which gplgt
+
+
+Creating Jupyter notebooks
+--------------------------
+
+Install the "Jupyter" extension in the container. Create a new notebook by
+selecting the "File" menu "New File..." item and selecting the Jupyter
+notebook file type or open an existing notebook in your mounted volume.
+If necessary, select the Logtalk kernel by clicking in the "Select Kernel"
+button in the top right corner of the notebook file.
+
+To select the backend used to run the notebook (default is SWI-Prolog),
+create in the same directory a file named "logtalk_kernel_config.py" and
+edit it to select the backend. A copy of this file can be found at:
+
+	/usr/local/lib/python3.10/dist-packages/logtalk_kernel
+
+Alternatively, download the file from:
+
+https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/tree/master/logtalk_kernel
+
+
+Running the JupyterLab server
+-----------------------------
+
+Open a new integrated terminal in VSCode and run the following command:
+
+	jupyter-lab --allow-root --NotebookApp.token='' --NotebookApp.password=''
+
+VSCode will display a dialog with a button to open the JupyterLab start page
+on your host web browser. If you need a different port than the default 8888,
+e.g. 8891, use instead:
+
+	jupyter-lab --allow-root --NotebookApp.token='' --NotebookApp.password='' --port=8891
+
+See the JupyterLab documentation for more details on available options.
+
+To check that everything is running, create a new Logtalk notebook using the
+JupyterLab interface and type in a cell:
+
+	%versions
+
+Executing the cell (by default, Shift-Enter) should print the Logtalk version,
+the backend version, and the Logtalk Jupyter kernel version.
