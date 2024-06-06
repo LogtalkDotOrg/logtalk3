@@ -41,8 +41,8 @@ Build arguments and their defaults
 Valid identifiers are as shown in the Logtalk GitHub repository at
 [release names](https://github.com/LogtalkDotOrg/logtalk3/releases).
 
-* `CIAO_VERSION (`v1.23.0-m1`)
-* `CX_VERSION (`0.98.3`)
+* `CIAO_VERSION` (`v1.23.0-m1`)
+* `CX_VERSION` (`0.98.3`)
 * `ECLIPSE_VERSION` (`7.1_13`)
 * `GNU_VERSION` (`master`)
 * `SWI_VERSION` (`master`)
@@ -100,10 +100,10 @@ you're running.
 
 5. Install the "Logtalk for VSCode" extension in the container and configure
 it by going into "Settings", typing "Logtalk" in the search box, and selecting
-"Remote".
+"Remote" settings.
 
-You can open an integrated terminal in the remote to find the values to be used
-in the configuration. For example:
+Note that you can open an integrated terminal in the remote to find the values
+to be used for the configuration of the Logtalk extension. For example:
 
 	echo $LOGTALKHOME
 	echo $LOGTALKUSER

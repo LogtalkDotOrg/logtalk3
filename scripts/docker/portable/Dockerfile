@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on June 5, 2024
+##   Last updated on June 6, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -121,7 +121,7 @@ ENV PATH=$PATH:/downloads/eclipse/bin/x86_64_linux
 
 # Install GNU Prolog
 WORKDIR /downloads
-RUN git clone --depth 1 https://github.com/didoudiaz/gprolog
+RUN git clone --depth 1 --branch ${GNU_VERSION} https://github.com/didoudiaz/gprolog
 WORKDIR gprolog/src
 RUN ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install
 
