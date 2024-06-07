@@ -114,13 +114,13 @@ ENV PATH=$PATH:/downloads/BProlog/
 WORKDIR /downloads
 RUN if [ "$CIAO_VERSION" != "none" ] ; then git clone --depth 1 --branch ${CIAO_VERSION} https://github.com/ciao-lang/ciao ; fi
 WORKDIR ciao
-RUN if [ "$CIAO_VERSION" != "none" ] ; then ./ciao-boot.sh global-install ; fi
+RUN if [ "$CIAO_VERSION" != "none" ] ; then ./ciao-boot.sh global-install && ./ciao-boot.sh realclean; fi
 
 # Install CxProlog
 WORKDIR /downloads
 RUN if [ "$CX_VERSION" != "none" ] ; then curl -sL http://ctp.di.fct.unl.pt/~amd/cxprolog/cxunix/cxprolog-${CX_VERSION}.src.tgz | tar xz ; fi
 WORKDIR cxprolog-${CX_VERSION}
-RUN if [ "$CX_VERSION" != "none" ] ; then make install ; fi
+RUN if [ "$CX_VERSION" != "none" ] ; then make install && make clean ; fi
 
 # Install ECLiPSe
 WORKDIR /downloads/eclipse
@@ -136,7 +136,7 @@ ENV PATH=$PATH:/downloads/eclipse/bin/x86_64_linux
 WORKDIR /downloads
 RUN if [ "$GNU_VERSION" != "none" ] ; then git clone --depth 1 --branch ${GNU_VERSION} https://github.com/didoudiaz/gprolog ; fi
 WORKDIR gprolog/src
-RUN if [ "$GNU_VERSION" != "none" ] ; then ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install ; fi
+RUN if [ "$GNU_VERSION" != "none" ] ; then ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install && make distclean ; fi
 
 # Install SWI-Prolog
 WORKDIR /downloads
@@ -145,8 +145,7 @@ WORKDIR swipl-devel
 RUN if [ "$SWI_VERSION" != "none" ] ; then git submodule update --init ; fi
 WORKDIR build
 RUN if [ "$SWI_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. ; fi
-RUN if [ "$SWI_VERSION" != "none" ] ; then ninja ; fi
-RUN if [ "$SWI_VERSION" != "none" ] ; then ninja install ; fi
+RUN if [ "$SWI_VERSION" != "none" ] ; then ninja && ninja install && ninja clean ; fi
 
 # Install Trealla Prolog
 WORKDIR /downloads
@@ -158,14 +157,14 @@ ENV PATH=$PATH:/downloads/trealla
 # Install XSB
 WORKDIR /downloads
 RUN if [ "$XSB_VERSION" != "none" ] ; then git clone --depth 1 --branch ${XSB_VERSION} https://git.code.sf.net/p/xsb/code xsb ; fi
-RUN if [ "$XSB_VERSION" != "none" ] ; then cd xsb/XSB/build && ./configure && ./makexsb ; fi
+RUN if [ "$XSB_VERSION" != "none" ] ; then cd xsb/XSB/build && ./configure && ./makexsb && ./makexsb clean ; fi
 ENV PATH=$PATH:/downloads/xsb/XSB/bin
 
 # Install YAP
 WORKDIR /downloads
 RUN if [ "$YAP_VERSION" != "none" ] ; then git clone --depth 1 --branch ${YAP_VERSION} https://github.com/vscosta/yap ; fi
 WORKDIR yap/build
-RUN if [ "$YAP_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && make install ; fi
+RUN if [ "$YAP_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && make install && make clean ; fi
 
 # Add the Logtalk environment variables to .bashrc and .profile
 RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.bashrc
