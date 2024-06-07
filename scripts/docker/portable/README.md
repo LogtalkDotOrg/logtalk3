@@ -50,13 +50,14 @@ Valid identifiers are as shown in the Logtalk GitHub repository at
 * `CX_VERSION` (`0.98.3`)
 * `ECLIPSE_VERSION` (`7.1_13`)
 * `GNU_VERSION` (`master`)
-* `SWI_VERSION` (`master`)
+* `SWI_VERSION` (`swipl-devel` repo; `master`)
 * `TREALLA_VERSION` (`main`)
 * `XSB_VERSION` (`git-origin`)
 * `YAP_VERSION` (`master`)
 
 Valid identifiers are as shown in the backend repositories or download
-websites.
+websites. Setting the backend version build argument to `none` skips
+installing the backend.
 
 
 Volumes
@@ -70,7 +71,14 @@ be mounted here.
 Building a local image
 ----------------------
 
+With all the the backends support by the Docker file:
+
 	docker build -t logtalk3 .
+
+Excluding a backend from the image. For example, excluding the B-Prolog legacy
+system:
+
+	docker build -t logtalk3 --build-arg B_VERSION=none .
 
 
 Running a container
@@ -137,7 +145,7 @@ If necessary, select the Logtalk kernel by clicking in the "Select Kernel"
 button in the top right corner of the notebook file.
 
 To select the backend used to run the notebook (default is SWI-Prolog),
-create in the same directory a file named "logtalk_kernel_config.py" and
+create in the same directory a file named `logtalk_kernel_config.py` and
 edit it to select the backend. A copy of this file can be found at:
 
 	/usr/local/lib/python3.10/dist-packages/logtalk_kernel
@@ -146,7 +154,8 @@ Alternatively, download the file from:
 
 https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/tree/master/logtalk_kernel
 
-A Logtalk kernel overview notebook a Logtalk tutorial notebook can be found at:
+A Logtalk kernel overview notebook and a Logtalk tutorial notebook can be
+found at:
 
 https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/tree/master/notebooks
 

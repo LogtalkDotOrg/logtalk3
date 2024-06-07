@@ -24,8 +24,6 @@
 
 FROM ubuntu:jammy
 
-MAINTAINER Paulo Moura <pmoura@logtalk.org>
-
 VOLUME ["/source"]
 
 # Arguments
@@ -109,65 +107,65 @@ RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local
 
 # Install B-Prolog
 WORKDIR /downloads
-RUN curl -sL http://www.picat-lang.org/bprolog/download/bp${B_VERSION}_linux64.tar.gz | tar xz
+RUN if [ "$B_VERSION" != "none" ] ; then curl -sL http://www.picat-lang.org/bprolog/download/bp${B_VERSION}_linux64.tar.gz | tar xz ; fi
 ENV PATH=$PATH:/downloads/BProlog/
 
 # Install Ciao Prolog
 WORKDIR /downloads
-RUN git clone --depth 1 --branch ${CIAO_VERSION} https://github.com/ciao-lang/ciao
+RUN if [ "$CIAO_VERSION" != "none" ] ; then git clone --depth 1 --branch ${CIAO_VERSION} https://github.com/ciao-lang/ciao ; fi
 WORKDIR ciao
-RUN ./ciao-boot.sh global-install
+RUN if [ "$CIAO_VERSION" != "none" ] ; then ./ciao-boot.sh global-install ; fi
 
 # Install CxProlog
 WORKDIR /downloads
-RUN curl -sL http://ctp.di.fct.unl.pt/~amd/cxprolog/cxunix/cxprolog-${CX_VERSION}.src.tgz | tar xz
+RUN if [ "$CX_VERSION" != "none" ] ; then curl -sL http://ctp.di.fct.unl.pt/~amd/cxprolog/cxunix/cxprolog-${CX_VERSION}.src.tgz | tar xz ; fi
 WORKDIR cxprolog-${CX_VERSION}
-RUN make install
+RUN if [ "$CX_VERSION" != "none" ] ; then make install ; fi
 
 # Install ECLiPSe
 WORKDIR /downloads/eclipse
-RUN curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_basic.tgz
-RUN curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_doc.tgz
-RUN curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/UNPACK
-RUN chmod a+x UNPACK
-RUN ./UNPACK
-RUN echo -n "\n\n\n\n\n\n" | ./RUNME
+RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_basic.tgz ; fi
+RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_doc.tgz ; fi
+RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/UNPACK ; fi
+RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then chmod a+x UNPACK ; fi
+RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then ./UNPACK ; fi
+RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then echo -n "\n\n\n\n\n\n" | ./RUNME ; fi
 ENV PATH=$PATH:/downloads/eclipse/bin/x86_64_linux
 
 # Install GNU Prolog
 WORKDIR /downloads
-RUN git clone --depth 1 --branch ${GNU_VERSION} https://github.com/didoudiaz/gprolog
+RUN if [ "$GNU_VERSION" != "none" ] ; then git clone --depth 1 --branch ${GNU_VERSION} https://github.com/didoudiaz/gprolog ; fi
 WORKDIR gprolog/src
-RUN ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install
+RUN if [ "$GNU_VERSION" != "none" ] ; then ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install ; fi
 
 # Install SWI-Prolog
 WORKDIR /downloads
-RUN git clone --depth 1 --branch ${SWI_VERSION} https://github.com/SWI-Prolog/swipl-devel.git
+RUN if [ "$SWI_VERSION" != "none" ] ; then git clone --depth 1 --branch ${SWI_VERSION} https://github.com/SWI-Prolog/swipl-devel.git ; fi
 WORKDIR swipl-devel
-RUN git submodule update --init
+RUN if [ "$SWI_VERSION" != "none" ] ; then git submodule update --init ; fi
 WORKDIR build
-RUN cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja ..
-RUN ninja
-RUN ninja install
+RUN if [ "$SWI_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. ; fi
+RUN if [ "$SWI_VERSION" != "none" ] ; then ninja ; fi
+RUN if [ "$SWI_VERSION" != "none" ] ; then ninja install ; fi
 
 # Install Trealla Prolog
 WORKDIR /downloads
-RUN git clone --depth 1 --branch ${TREALLA_VERSION} https://github.com/trealla-prolog/trealla
+RUN if [ "$TREALLA_VERSION" != "none" ] ; then git clone --depth 1 --branch ${TREALLA_VERSION} https://github.com/trealla-prolog/trealla ; fi
 WORKDIR trealla
-RUN make clean && make
+RUN if [ "$TREALLA_VERSION" != "none" ] ; then make clean && make ; fi
 ENV PATH=$PATH:/downloads/trealla
 
 # Install XSB
 WORKDIR /downloads
-RUN git clone --depth 1 --branch ${XSB_VERSION} https://git.code.sf.net/p/xsb/code xsb
-RUN cd xsb/XSB/build && ./configure && ./makexsb
+RUN if [ "$XSB_VERSION" != "none" ] ; then git clone --depth 1 --branch ${XSB_VERSION} https://git.code.sf.net/p/xsb/code xsb ; fi
+RUN if [ "$XSB_VERSION" != "none" ] ; then cd xsb/XSB/build && ./configure && ./makexsb ; fi
 ENV PATH=$PATH:/downloads/xsb/XSB/bin
 
 # Install YAP
 WORKDIR /downloads
-RUN git clone --depth 1 --branch ${YAP_VERSION} https://github.com/vscosta/yap
+RUN if [ "$YAP_VERSION" != "none" ] ; then git clone --depth 1 --branch ${YAP_VERSION} https://github.com/vscosta/yap ; fi
 WORKDIR yap/build
-RUN cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && make install
+RUN if [ "$YAP_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && make install ; fi
 
 # Add the Logtalk environment variables to .bashrc and .profile
 RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.bashrc
