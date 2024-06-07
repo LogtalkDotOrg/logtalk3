@@ -50,55 +50,73 @@ ENV INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
 WORKDIR /downloads
 
 # Install Logtalk developer tools dependencies
-RUN apt-get update && rm -rf /var/lib/apt/lists/*
-RUN apt-get install --no-install-recommends -y graphviz info xsltproc fop libarchive-tools gnupg2 git curl direnv texlive texinfo
-RUN apt-get install --no-install-recommends -y software-properties-common
-RUN apt-add-repository ppa:qameta/allure
-RUN apt-get install --no-install-recommends -y allure
-RUN apt-get install --no-install-recommends -y python3-pip
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    curl \
+    direnv \
+    fop \
+    git \
+    gnupg2 \
+    graphviz \
+    info \
+    libarchive-tools \
+    python3-pip \
+    software-properties-common \
+    texinfo \
+    texlive \
+    xsltproc \
+&& rm -rf /var/lib/apt/lists/*
+RUN apt-add-repository ppa:qameta/allure \
+    && apt-get install --no-install-recommends -y allure \
+    && add-apt-repository --remove ppa:qameta/allure
 RUN python3 -m pip install --upgrade pygments
 RUN python3 -m pip install --upgrade sphinx
 RUN python3 -m pip install --upgrade sphinx-rtd-theme
+
 # Install Jupyter and the Logtalk kernel
 RUN python3 -m pip install --upgrade jupyter_core
 RUN python3 -m pip install --upgrade jupyterlab
 RUN python3 -m pip install --upgrade notebook
 RUN python3 -m pip install --upgrade logtalk-jupyter-kernel
 RUN python3 -m logtalk_kernel.install
+
 # Install backend dependencies
-RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install tzdata
-RUN apt-get install --no-install-recommends -y cmake
-RUN apt-get install --no-install-recommends -y xxd
-RUN apt-get install --no-install-recommends -y build-essential
-RUN apt-get install --no-install-recommends -y ninja-build
-RUN apt-get install --no-install-recommends -y pkg-config
-RUN apt-get install --no-install-recommends -y ncurses-dev
-RUN apt-get install --no-install-recommends -y libreadline-dev
-RUN apt-get install --no-install-recommends -y libedit-dev
-RUN apt-get install --no-install-recommends -y libgoogle-perftools-dev
-RUN apt-get install --no-install-recommends -y libgmp-dev
-RUN apt-get install --no-install-recommends -y libssl-dev
-RUN apt-get install --no-install-recommends -y unixodbc-dev
-RUN apt-get install --no-install-recommends -y zlib1g-dev
-RUN apt-get install --no-install-recommends -y libarchive-dev
-RUN apt-get install --no-install-recommends -y libossp-uuid-dev
-RUN apt-get install --no-install-recommends -y libxext-dev
-RUN apt-get install --no-install-recommends -y libice-dev
-RUN apt-get install --no-install-recommends -y libjpeg-dev
-RUN apt-get install --no-install-recommends -y libxinerama-dev
-RUN apt-get install --no-install-recommends -y libxft-dev
-RUN apt-get install --no-install-recommends -y libxpm-dev libxt-dev
-RUN apt-get install --no-install-recommends -y libdb-dev
-RUN apt-get install --no-install-recommends -y libpcre2-dev
-RUN apt-get install --no-install-recommends -y libyaml-dev
-RUN apt-get install --no-install-recommends -y default-jdk
-RUN apt-get install --no-install-recommends -y junit4
-RUN apt-get install --no-install-recommends -y tcl
-RUN apt-get install --no-install-recommends -y tk
-RUN apt-get install --no-install-recommends -y libffi-dev
-RUN apt-get install --no-install-recommends -y rlwrap
-RUN apt-get install --no-install-recommends -y emacs
-RUN apt-get install --no-install-recommends -y imagemagick
+RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install \
+    tzdata \
+&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    build-essential \
+    cmake \
+    default-jdk \
+    junit4 \
+    libarchive-dev \
+    libdb-dev \
+    libedit-dev \
+    libffi-dev \
+    libgmp-dev \
+    libgoogle-perftools-dev \
+    libice-dev \
+    libjpeg-dev \
+    libossp-uuid-dev \
+    libpcre2-dev \
+    libreadline-dev \
+    libssl-dev \
+    libxext-dev \
+    libxft-dev \
+    libxinerama-dev \
+    libxpm-dev \
+    libxt-dev \
+    libyaml-dev \
+    nano \
+    ncurses-dev \
+    ninja-build \
+    pkg-config \
+    rlwrap \
+    tcl \
+    tk \
+    unixodbc-dev \
+    xxd \
+    zlib1g-dev \
+&& rm -rf /var/lib/apt/lists/*
 
 # Install Logtalk
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
@@ -173,7 +191,10 @@ RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.profile
 RUN echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.profile
 
 # Define locales (required e.g. by Sphinx)
-RUN apt-get install --no-install-recommends -y locales locales-all
+RUN apt-get update && apt-get install --no-install-recommends -y \
+    locales \
+    locales-all \
+&& rm -rf /var/lib/apt/lists/*
 ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8

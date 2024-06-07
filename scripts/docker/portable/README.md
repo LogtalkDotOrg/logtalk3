@@ -34,7 +34,10 @@ Prolog backends:
 - XSB
 - YAP
 
-Also includes Jupyter, JupyterLab, and the Logtalk kernel.
+Includes Jupyter, JupyterLab, and the Logtalk kernel.
+
+The `nano` text editor is also included for small editing tasks. For actual
+development, use the VSCode recommended setup as described below.
 
 
 Build arguments and their defaults
