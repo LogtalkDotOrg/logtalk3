@@ -181,5 +181,8 @@ ENV LC_ALL en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
+# Create the LOGTALKUSER directory for the root user
+RUN logtalk_user_setup
+
 WORKDIR /source
 ENTRYPOINT ["bash"]

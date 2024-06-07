@@ -63,7 +63,7 @@ Volumes
 -------
 
 * `/source`  
-The work directory where Logtalk is started. The source of your project can
+The working directory where Logtalk is started. The source of your project can
 be mounted here.
 
 
@@ -76,13 +76,19 @@ Building a local image
 Running a container
 -------------------
 
-#### Providing a shell
+Providing a shell:
 
 	docker run -it --name=test logtalk3
 
-#### Adding a ~/project directory as a volume
+You can then run Logtalk with any of the installed backends. For details, see:
+
+https://github.com/LogtalkDotOrg/logtalk3/blob/master/QUICK_START.md
+
+Adding a ~/project directory as a volume:
 
 	docker run -it --name test -v /home/jdoe/project:/source logtalk3
+
+Note that you need to use absolute paths for your project directory.
 
 
 Editing your project
