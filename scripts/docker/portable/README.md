@@ -21,8 +21,10 @@ ________________________________________________________________________
 Logtalk Docker image
 ====================
 
-Includes Logtalk and a subset of the supported Prolog backends:
+Includes Logtalk and a subset of the supported (and experimental/legacy)
+Prolog backends:
 
+- B-Prolog
 - Ciao Prolog
 - CxProlog
 - ECLiPSe
@@ -43,6 +45,7 @@ Build arguments and their defaults
 Valid identifiers are as shown in the Logtalk GitHub repository at
 [release names](https://github.com/LogtalkDotOrg/logtalk3/releases).
 
+* `B_VERSION` (`81`)
 * `CIAO_VERSION` (`v1.23.0-m1`)
 * `CX_VERSION` (`0.98.3`)
 * `ECLIPSE_VERSION` (`7.1_13`)

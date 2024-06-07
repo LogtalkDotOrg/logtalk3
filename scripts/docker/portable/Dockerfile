@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on June 6, 2024
+##   Last updated on June 7, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -33,6 +33,7 @@ VOLUME ["/source"]
 # Logtalk
 ARG LOGTALK_VERSION=master
 # Backends
+ARG B_VERSION=81
 ARG CIAO_VERSION=v1.23.0-m1
 ARG CX_VERSION=0.98.3
 ARG ECLIPSE_VERSION=7.1_13
@@ -105,6 +106,11 @@ RUN apt-get install -y imagemagick
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
 RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local
 #RUN logtalk_user_setup.sh
+
+# Install B-Prolog
+WORKDIR /downloads
+RUN curl -sL http://www.picat-lang.org/bprolog/download/bp${B_VERSION}_linux64.tar.gz | tar xz
+ENV PATH=$PATH:/downloads/BProlog/
 
 # Install Ciao Prolog
 WORKDIR /downloads
