@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on June 7, 2024
+##   Last updated on June 8, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -121,7 +121,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Install Logtalk
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
 RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local
-#RUN logtalk_user_setup.sh
 
 # Install B-Prolog
 WORKDIR /downloads
@@ -160,7 +159,7 @@ RUN if [ "$GNU_VERSION" != "none" ] ; then ./configure --prefix=/usr/local --wit
 WORKDIR /downloads
 RUN if [ "$SWI_VERSION" != "none" ] ; then git clone --depth 1 --branch ${SWI_VERSION} https://github.com/SWI-Prolog/swipl-devel.git ; fi
 WORKDIR swipl-devel
-RUN if [ "$SWI_VERSION" != "none" ] ; then git submodule update --init ; fi
+RUN if [ "$SWI_VERSION" != "none" ] ; then git submodule update --init --depth 1 ; fi
 WORKDIR build
 RUN if [ "$SWI_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. ; fi
 RUN if [ "$SWI_VERSION" != "none" ] ; then ninja && ninja install && ninja clean ; fi
