@@ -42,6 +42,8 @@ environment variable.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* REMOVED: Outdated VSCode support file `vscode_message_streamer.lgt`.
+
 * FIXED: VSCode support to workaround SICStus Prolog and SWI-Prolog down-casing
 file paths on Windows and breaking handling of breakpoints.
 

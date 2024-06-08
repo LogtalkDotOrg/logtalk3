@@ -34,7 +34,6 @@ This extension is under development and its sources are available at:
 https://github.com/LogtalkDotOrg/logtalk-for-vscode
 
 You can also download the extension `.vsix` file from the repo releases
-page:
+page for manual installation:
 
 https://github.com/LogtalkDotOrg/logtalk-for-vscode/releases
-
