@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 9:0:0,
+		version is 9:1:0,
 		author is 'Paulo Moura',
-		date is 2024-02-20,
+		date is 2024-06-09,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -130,7 +130,8 @@
 			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~9f/~9f cpu/wall seconds)'-[CPUTime, WallTime], nl]
 			),
 			failed_test_reason(Reason),
-			file_position(File, Position).
+			file_position(File, Position),
+			[nl].
 
 	:- else.
 
@@ -149,7 +150,8 @@
 			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~w/~w cpu/wall seconds)'-[CPUTime, WallTime], nl]
 			),
 			failed_test_reason(Reason),
-			file_position(File, Position).
+			file_position(File, Position),
+			[nl].
 
 	:- endif.
 

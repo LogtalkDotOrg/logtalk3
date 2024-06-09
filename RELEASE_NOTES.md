@@ -30,6 +30,9 @@ Tools
 
 * UPDATED: Documentation on developer tools requirements.
 
+* UPDATED: The `lgtunit` tool to print a new line after reporting a failed
+test to simplify parsing by other tools.
+
 Installers and installation scripts
 -----------------------------------
 
