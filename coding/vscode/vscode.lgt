@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:56:1,
+		version is 0:57:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-06-04,
+		date is 2024-06-09,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1576,9 +1576,10 @@
 		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
 		fail.
-	logtalk::message_hook(failed_test(_Object, _Test, File, Line-_, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+	logtalk::message_hook(failed_test(_Object, _Test, File, Line-_, _Reason, _Flaky, _Note, CPUTime, WallTime), Kind, lgtunit, Tokens) :-
 		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
+		message_hook(Tokens, lgtunit, Kind),
 		fail.
 	logtalk::message_hook(skipped_test(_Object, _Test, File, Line-_, _Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
