@@ -109,7 +109,7 @@ Editing your project
 
 The recommended solution to work in a project using the image resources is
 to mount the project directory and then use VSCode with the "Dev Containers"
-extension installed:
+extension installed (note that this extension is not available for VSCodium):
 
 1. Run the Docker image while mounting your project directory as a volume
 (see above; you must use absolute paths).
