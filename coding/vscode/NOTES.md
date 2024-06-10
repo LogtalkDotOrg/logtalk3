@@ -37,3 +37,10 @@ You can also download the extension `.vsix` file from the repo releases
 page for manual installation:
 
 https://github.com/LogtalkDotOrg/logtalk-for-vscode/releases
+
+For convenience, there's also a VSCode Extension Pack that installs all
+recommended extensions for Logtalk development:
+
+https://marketplace.visualstudio.com/items?itemName=LogtalkDotOrg.logtalk-extension-pack
+
+https://open-vsx.org/extension/LogtalkDotOrg/logtalk-extension-pack
