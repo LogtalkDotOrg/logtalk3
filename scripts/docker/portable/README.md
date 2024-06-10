@@ -36,7 +36,9 @@ Prolog backends:
 
 Includes Jupyter, JupyterLab, and the Logtalk kernel.
 
-The `nano` text editor is also included for small editing tasks. For actual
+Includes all Logtalk developer tool dependencies. 
+
+Includes the `nano` text editor for small editing tasks. For actual
 development, use the VSCode recommended setup as described below.
 
 
