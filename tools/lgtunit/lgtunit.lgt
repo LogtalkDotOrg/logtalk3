@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 17:0:0,
+		version is 17:0:1,
 		author is 'Paulo Moura',
-		date is 2024-02-19,
+		date is 2024-06-10,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -279,7 +279,7 @@
 	:- protected(run_quick_check_tests/5).
 	:- mode(run_quick_check_tests(@callable, +list, --nonvar, --number, --list(pair)), one_or_error).
 	:- info(run_quick_check_tests/5, [
-		comment is 'Runs a list of defined tests using the given options. Returns the starting seed used to generate the random tests, the number of discarded tests, and the test label statistics.',
+		comment is 'Runs a QuickCheck test using the given options. Returns the starting seed used to generate the random tests, the number of discarded tests, and the test label statistics.',
 		argnames is ['Template', 'Options', 'Seed', 'Discarded', 'Labels']
 	]).
 

@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 17:0:0
-| **Date:** 2024-02-19
+| **Version:** 17:0:1
+| **Date:** 2024-06-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -646,7 +646,7 @@ Runs a test set as part of running two or more test sets as a unified set.
 ``run_quick_check_tests/5``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Runs a list of defined tests using the given options. Returns the starting seed used to generate the random tests, the number of discarded tests, and the test label statistics.
+Runs a QuickCheck test using the given options. Returns the starting seed used to generate the random tests, the number of discarded tests, and the test label statistics.
 
 | **Compilation flags:**
 |    ``static``
