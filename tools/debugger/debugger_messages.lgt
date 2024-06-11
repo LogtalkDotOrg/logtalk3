@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2024-06-03,
+		date is 2024-06-11,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -150,10 +150,16 @@
 	% log points
 
 	message_tokens(logging_port(Code, Port, N, Goal, Message, MaxDepth)) -->
-		['~w'-[Code]], port_name(Port), invocation_number(N), [term(Goal,[quoted(true),numbervars(true),max_depth(MaxDepth)])], [' % ~w~n'-[Message]].
+		['~w'-[Code]], port_name(Port), invocation_number(N), [term(Goal,[quoted(true),numbervars(true),max_depth(MaxDepth)]), '~w'-[Message], nl].
 
 	message_tokens(logging_port(Code, Port, N, Goal, Message)) -->
-		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q % ~w~n'-[Goal, Message]].
+		['~w'-[Code]], port_name(Port), invocation_number(N), ['~q ~w'-[Goal, Message], nl].
+
+	message_tokens(logging_port([])) -->
+		[nl].
+	message_tokens(logging_port([Token| Tokens])) -->
+		[Token],
+		message_tokens(logging_port(Tokens)).
 
 	message_tokens(log_point_added) -->
 		['     Log point added.'-[], nl].

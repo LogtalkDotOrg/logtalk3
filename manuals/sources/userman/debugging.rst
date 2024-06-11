@@ -310,16 +310,40 @@ Defining log points
 
 Logtalk log points are similar to line number spy points and thus the line
 number must correspond to the first line of an entity clause. When the
-debugger reaches a log point, it prints the corresponding unification port
-data followed, optionally, by a log message and continues without halting
-execution for taking a port command. The log message must be a valid atom
-when quoted. The debugger prints a ``@`` character at the beginning of the
-line for easy recognition of log points output. Log points are defined using
-the ``log/3`` predicate. For example:
+debugger reaches a log point, it prints a log message and continues without
+halting execution for taking a port command. When the log message is an
+empty atom, the default port output message is printed. When the log message
+starts with a ``%`` character, the default port output message is printed
+followed by the log message. In these two cases, the debugger prints a ``@``
+character at the beginning of the line for easy recognition of log points
+output. When the log message is neither empty or start with a ``%`` character,
+the log message is printed instead of the default port output message. In this
+case, the message can contain ``$KEYWORD`` placeholders that are expanded at
+runtime. The valid keywords are:
+
+- ``PORT``
+- ``ENTITY``
+- ``CLAUSE_NUMBER``
+- ``FILE``
+- ``LINE``
+- ``INVOCATION_NUMBER``
+- ``GOAL``
+- ``PREDICATE``
+- ``EXECUTION_CONTEXT``
+- ``SENDER``
+- ``THIS``
+- ``SELF``
+- ``METACALL_CONTEXT``
+- ``COINDUCTION_STACK``
+- ``THREAD``
+
+In all cases, the log messages must always be valid atoms when quoted.
+
+Log points are defined using the ``log/3`` predicate. For example:
 
 .. code-block:: text
 
-   | ?- debugger::log(agent, 99, 'At the secret headquarter!').
+   | ?- debugger::log(agent, 99, '% At the secret headquarters!').
         Log point added.
    yes
 

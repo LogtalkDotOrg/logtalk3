@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:2:0,
+		version is 7:3:0,
 		author is 'Paulo Moura',
-		date is 2024-06-03,
+		date is 2024-06-11,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -513,10 +513,86 @@
 		retractall(logging_line_number_(_, _, _)),
 		print_message(comment, debugger, all_log_points_removed).
 
-	logging_port(fact(Entity, _, _, Line), Message, '@') :-
-		logging_line_number_(Entity, Line, Message).
-	logging_port(rule(Entity, _, _, Line), Message, '@') :-
-		logging_line_number_(Entity, Line, Message).
+	logging_port(fact(Entity, Clause, File, Line), N, Goal, ExCtx) :-
+		logging_line_number_(Entity, Line, Message),
+		logging_message_to_token(Message, 'Fact', Entity, Clause, File, Line, N, Goal, ExCtx).
+	logging_port(rule(Entity, Clause, File, Line), N, Goal, ExCtx) :-
+		logging_line_number_(Entity, Line, Message),
+		logging_message_to_token(Message, 'Rule', Entity, Clause, File, Line, N, Goal, ExCtx).
+
+	logging_message_to_token(Message, _Port, _Entity, _Clause, _File, _Line, N, Goal, _ExCtx) :-
+		(	Message == ''
+			% default port message
+		;	sub_atom(Message, 0, 1, _, '%')
+			% comment after default port message
+		),
+		!,
+		(	write_max_depth_(MaxDepth),
+			MaxDepth > 0 ->
+			print_message(information, debugger, logging_port('@', Port, N, Goal, Message, MaxDepth))
+		;	print_message(information, debugger, logging_port('@', Port, N, Goal, Message))
+		).
+	logging_message_to_token(Message, Port, Entity, Clause, File, Line, N, Goal, ExCtx) :-
+		% default port message replacement
+		atom_chars(Message, MessageChars),
+		message_to_token_(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens),
+		print_message(information, debugger, logging_port(Tokens)).
+
+	message_to_token_([], _Port, _Entity, _Clause, _File, _Line, _N, _Goal, _ExCtx, []).
+	message_to_token_(['$'| MessageChars0], Port, Entity, Clause, File, Line, N, Goal, ExCtx, [Token| Tokens]) :-
+		message_argument(MessageChars0, MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Token),
+		!,
+		message_to_token_(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens).
+	message_to_token_([Char| MessageChars0], Port, Entity, Clause, File, Line, N, Goal, ExCtx, [Atom-[]| Tokens]) :-
+		message_chars(MessageChars0, Chars, MessageChars),
+		atom_chars(Atom, [Char| Chars]),
+		message_to_token_(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens).
+
+	message_argument(['P','O','R','T'| MessageChars], MessageChars, Port, _, _, _, _, _, _, _, '~w'-[Port]).
+	message_argument(['E','N','T','I','T','Y'| MessageChars], MessageChars, _, Entity, _, _, _, _, _, _, Token) :-
+		term_to_token(Entity, Token).
+	message_argument(['C','L','A','U','S','E','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, Clause, _, _, _, _, _, '~d'-[Clause]).
+	message_argument(['F','I','L','E'| MessageChars], MessageChars, _, _, _, File, _, _, _, _, '~q'-[File]).
+	message_argument(['L','I','N','E'| MessageChars], MessageChars, _, _, _, _, Line, _, _, _, '~d'-[Line]).
+	message_argument(['I','N','V','O','C','A','T','I','O','N','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, _, _, _, N, _, _, '~d'-[N]).
+	message_argument(['G','O','A','L'| MessageChars], MessageChars, _, _, _, _, _, _, Goal, _, Token) :-
+		term_to_token(Goal, Token).
+	message_argument(['P','R','E','D','I','C','A','T','E'| MessageChars], MessageChars, _, _, _, _, _, _, Goal, _, '~q'-[Name/Arity]) :-
+		functor(Goal, Name, Arity).
+	message_argument(['E','X','E','C','U','T','I','O','N','_','C','O','N','T','E','X','T'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		term_to_token(ExCtx, Token).
+	message_argument(['S','E','N','D','E','R'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logtalk::execution_context(ExCtx, _, Sender, _, _, _, _),
+		term_to_token(Sender, Token).
+	message_argument(['T','H','I','S'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logtalk::execution_context(ExCtx, _, _, This, _, _, _),
+		term_to_token(This, Token).
+	message_argument(['S','E','L','F'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logtalk::execution_context(ExCtx, _, _, _, Self, _, _),
+		term_to_token(Self, Token).
+	message_argument(['M','E','T','A','C','A','L','L','_','C','O','N','T','E','X','T'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logtalk::execution_context(ExCtx, _, _, _, _, MetaCallContext, _),
+		term_to_token(MetaCallContext, Token).
+	message_argument(['C','O','I','N','D','U','C','T','I','O','N','_','S','T','A','C','K'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logtalk::execution_context(ExCtx, _, _, _, _, _, CoinductionStack),
+		term_to_token(CoinductionStack, Token).
+	:- if(current_logtalk_flag(threads, supported)).
+		message_argument(['T','H','R','E','A','D'| MessageChars], MessageChars, _, _, _, _, _, _, _, _, '~q'-[Thread]) :-
+			thread_self(Thread).
+	:- endif.
+
+	term_to_token(Term, Token) :-
+		(	write_max_depth_(MaxDepth),
+			MaxDepth > 0 ->
+			Token = term(Term,[quoted(true),numbervars(true),max_depth(MaxDepth)])
+		;	Token = '~q'-[Term]
+		).
+
+	message_chars([], [], []).
+	message_chars(['$'| Chars], [], ['$'| Chars]) :-
+		!.
+	message_chars([Char| MessageChars0], [Char| Chars], MessageChars) :-
+		message_chars(MessageChars0, Chars, MessageChars).
 
 	% debug handler
 
@@ -660,12 +736,7 @@
 		debugging_,
 		!,
 		port_user_name(Port, PortUserName),
-		(	logging_port(Port, Message, Code) ->
-			(	write_max_depth_(MaxDepth),
-				MaxDepth > 0 ->
-				print_message(information, debugger, logging_port(Code, Port, N, Goal, Message, MaxDepth))
-			;	print_message(information, debugger, logging_port(Code, Port, N, Goal, Message))
-			),
+		(	logging_port(Port, N, Goal, ExCtx) ->
 			Action = true
 		;	leashing_port(Port, PortUserName, N, Goal, ExCtx, _),
 			\+ skipping_unleashed_(_) ->

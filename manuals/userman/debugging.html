@@ -430,13 +430,36 @@ to its default settings.</p>
 <h2>Defining log points<a class="headerlink" href="#defining-log-points" title="Link to this heading"></a></h2>
 <p>Logtalk log points are similar to line number spy points and thus the line
 number must correspond to the first line of an entity clause. When the
-debugger reaches a log point, it prints the corresponding unification port
-data followed, optionally, by a log message and continues without halting
-execution for taking a port command. The log message must be a valid atom
-when quoted. The debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> character at the beginning of the
-line for easy recognition of log points output. Log points are defined using
-the <code class="docutils literal notranslate"><span class="pre">log/3</span></code> predicate. For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::log(agent, 99, &#39;At the secret headquarter!&#39;).
+debugger reaches a log point, it prints a log message and continues without
+halting execution for taking a port command. When the log message is an
+empty atom, the default port output message is printed. When the log message
+starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the default port output message is printed
+followed by the log message. In these two cases, the debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>
+character at the beginning of the line for easy recognition of log points
+output. When the log message is neither empty or start with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character,
+the log message is printed instead of the default port output message. In this
+case, the message can contain <code class="docutils literal notranslate"><span class="pre">$KEYWORD</span></code> placeholders that are expanded at
+runtime. The valid keywords are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PORT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ENTITY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLAUSE_NUMBER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FILE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LINE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">INVOCATION_NUMBER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GOAL</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PREDICATE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EXECUTION_CONTEXT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SENDER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">THIS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SELF</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">METACALL_CONTEXT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COINDUCTION_STACK</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">THREAD</span></code></p></li>
+</ul>
+<p>In all cases, the log messages must always be valid atoms when quoted.</p>
+<p>Log points are defined using the <code class="docutils literal notranslate"><span class="pre">log/3</span></code> predicate. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::log(agent, 99, &#39;% At the secret headquarters!&#39;).
      Log point added.
 yes
 </pre></div>

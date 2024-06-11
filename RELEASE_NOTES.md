@@ -25,8 +25,18 @@ RELEASE NOTES
 3.81.0 - July ??, 2024
 ======================
 
+Documentation
+-------------
+
+* UPDATED: Handbook documentation on debugging using log points.
+
 Tools
 -----
+
+* IMPROVED: The `debugger` tool implementation of log points to support
+printing the default port message, the default port message followed by
+a comment, and replacing the default port message with a text with term
+placeholders that are expanded at runtime.
 
 * UPDATED: Documentation on developer tools requirements.
 
@@ -36,8 +46,8 @@ test to simplify parsing by other tools.
 Installers and installation scripts
 -----------------------------------
 
-* ADDED: Docker file for building an image with Logtalk and a subset of the
-supported Prolog backends.
+* ADDED: Docker file for building an image with Logtalk, a subset of the
+supported Prolog backends, Jupyter, JupyterLab, and the Logtalk kernel.
 
 * FIXED: The SWI-Prolog based Docker image to also define the `INFOPATH`
 environment variable.
