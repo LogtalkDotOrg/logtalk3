@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:57:0,
+		version is 0:58:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-06-09,
+		date is 2024-06-12,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -188,19 +188,26 @@
 		argnames is ['Directory', 'File']
 	]).
 
-	:- public(spy/1).
+	:- public((spy)/1).
 	:- mode(spy(@predicate_indicator), one).
 	:- mode(spy(@non_terminal_indicator), one).
-	:- info(spy/1, [
+	:- info((spy)/1, [
 		comment is 'Adds a spy point for the given predicate or non-terminal.',
 		argnames is ['Predicate']
 	]).
 
-	:- public(spy/2).
+	:- public((spy)/2).
 	:- mode(spy(+atom, +integer), one).
-	:- info(spy/2, [
-		comment is 'Adds a breakpoint for the given file and line.',
+	:- info((spy)/2, [
+		comment is 'Adds a breakpoint at the given file and line.',
 		argnames is ['File', 'Line']
+	]).
+
+	:- public((spy)/3).
+	:- mode(spy(+atom, +integer, @callable), one).
+	:- info((spy)/3, [
+		comment is 'Adds a conditional breakpoint at the given file and line.',
+		argnames is ['File', 'Line', 'Condition']
 	]).
 
 	:- public(nospy/1).
@@ -1400,6 +1407,11 @@
 		entity(File, Line, Entity),
 		{debugger::spy(Entity-Line)}.
 
+	spy(File, Line, Condition) :-
+		ensure_debbugger,
+		entity(File, Line, Entity),
+		{debugger::spy(Entity, Line, Condition)}.
+
 	nospy(Predicate) :-
 		ensure_debbugger,
 		nospy_(Predicate).
@@ -1414,7 +1426,8 @@
 	nospy(File, Line) :-
 		ensure_debbugger,
 		entity(File, Line, Entity),
-		{debugger::nospy(Entity-Line)}.
+		{debugger::nospy(Entity-Line)},
+		{debugger::nospy(Entity, Line, _)}.
 
 	log(File, Line, Message) :-
 		ensure_debbugger,

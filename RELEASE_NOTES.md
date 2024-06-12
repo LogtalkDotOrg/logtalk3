@@ -59,10 +59,13 @@ IDEs, text editors, and syntax highlighters support
 
 * REMOVED: Outdated VSCode support file `vscode_message_streamer.lgt`.
 
+* UPDATED: VSCode support to support setting conditional line number spy
+points.
+
 * UPDATED: VSCode support to add failed tests to the "Problems" pane.
 
-* FIXED: VSCode support to workaround SICStus Prolog and SWI-Prolog down-casing
-file paths on Windows and breaking handling of breakpoints.
+* FIXED: VSCode support to workaround SICStus Prolog and SWI-Prolog
+down-casing file paths on Windows and breaking handling of breakpoints.
 
 
 3.80.0 - June 4, 2024
