@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:15:1,
+		version is 1:15:2,
 		author is 'Paulo Moura',
-		date is 2024-01-08,
+		date is 2024-06-12,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -283,6 +283,8 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, xsb)).
 
+		:- set_logtalk_flag(left_recursion, silent).
+
 		least_common_multiple([I1, I2| Is], Multiple) :-
 			I1 > 0,
 			I2 > 0,
@@ -297,10 +299,10 @@
 			Multiple1 is (Multiple0 * I) // GCD,
 			least_common_multiple(Is, Multiple1, Multiple).
 
-		gcd(X, 0, X):- !.
-		gcd(0, X, X):- !.
-		gcd(X, Y, D):- X =< Y, !, Z is Y - X, gcd(X, Z, D).
-		gcd(X, Y, D):- gcd(Y, X, D).
+		gcd(X, 0, X) :- !.
+		gcd(0, X, X) :- !.
+		gcd(X, Y, D) :- X =< Y, !, Z is Y - X, gcd(X, Z, D).
+		gcd(X, Y, D) :- gcd(Y, X, D).
 
 	:- else.
 

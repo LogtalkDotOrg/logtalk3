@@ -30,6 +30,11 @@ Documentation
 
 * UPDATED: Handbook documentation on debugging using log points.
 
+Library
+-------
+
+* FIXED: Harmless linter warning when loading the `types` library using XSB.
+
 Tools
 -----
 
