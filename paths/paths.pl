@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on January 25, 2024
+%  Last updated on June 12, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -303,6 +303,7 @@ logtalk_library_path(scratchcards, examples('scratchcards/')).
 logtalk_library_path(searching, examples('searching/')).
 logtalk_library_path(securemp, examples('securemp/')).
 logtalk_library_path(self_messages, examples('self_messages/')).
+logtalk_library_path(self_vs_super, examples('self_vs_super/')).
 logtalk_library_path(self_vs_this, examples('self_vs_this/')).
 logtalk_library_path(serialization, examples('serialization/')).
 logtalk_library_path(shapes_ch, examples('shapes/ch/')).

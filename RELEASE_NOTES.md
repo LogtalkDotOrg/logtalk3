@@ -45,6 +45,13 @@ placeholders that are expanded at runtime.
 * UPDATED: The `lgtunit` tool to print a new line after reporting a failed
 test to simplify parsing by other tools.
 
+Examples
+--------
+
+ADDED: New `self_vs_super` example illustrating the semantics of calling an
+inherited meta-predicate using a message to "self" versus using a "super"
+call.
+
 Installers and installation scripts
 -----------------------------------
 

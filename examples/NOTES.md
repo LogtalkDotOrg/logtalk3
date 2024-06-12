@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -458,6 +458,13 @@ Follows a short description of each included example (in alphabetical order):
 
 - `self_messages`  
 	simple example illustrating the semantics of messages to "self"
+
+- `self_vs_super`  
+	simple example illustrating the semantics of calling an inherited
+	meta-predicate using a message to "self" versus using a "super" call
+
+- `self_vs_this`  
+	simple example illustrating the difference between "self" and "this"
 
 - `serialization`  
 	simple example of serializing objects to a file
