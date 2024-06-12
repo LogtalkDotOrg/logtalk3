@@ -25764,6 +25764,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_dcg_super_call'(RGoal, S0, S, CGoal).
 
+'$lgt_dcg_body'(Obj<<RGoal, S0, S, Obj<<CGoal, Ctx) :-
+	!,
+	'$lgt_dcg_body'(RGoal, S0, S, CGoal, Ctx).
+
 '$lgt_dcg_body'(':'(Module, RGoal), S0, S, CGoal, _) :-
 	!,
 	(	callable(RGoal) ->

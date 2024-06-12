@@ -25,10 +25,17 @@ RELEASE NOTES
 3.81.0 - July ??, 2024
 ======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: Support for using the `(<<)/2` debugging control construct in a
+grammar rule body.
+
 Documentation
 -------------
 
-* UPDATED: Handbook documentation on debugging using log points.
+* UPDATED: Handbook documentation on debugging using conditional breakpoints
+and log points.
 
 Library
 -------
@@ -38,7 +45,7 @@ Library
 Tools
 -----
 
-* ADDED: Support for conditional line number spy points to the `debugger` tool.
+* ADDED: Support for conditional breakpoints to the `debugger` tool.
 
 * IMPROVED: The `debugger` tool implementation of log points to support
 printing the default port message, the default port message followed by
