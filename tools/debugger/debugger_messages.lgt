@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:4:0,
+		version is 3:5:0,
 		author is 'Paulo Moura',
-		date is 2024-06-11,
+		date is 2024-06-12,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -176,6 +176,21 @@
 
 	message_tokens(no_log_points_defined) -->
 		['     No log points are defined.'-[], nl].
+
+	% conditional line number spy points
+
+	message_tokens(conditional_spy_point_added) -->
+		['     Conditional line number spy point added.'-[], nl].
+
+	message_tokens(matching_conditional_spy_points_removed) -->
+		['     All matching conditional line number spy points removed.'-[], nl].
+
+	message_tokens(conditional_line_number_spy_points(ConditionalPoints)) -->
+		['     Defined conditional line number spy points (Entity-Line):'-[], nl],
+		log_points(ConditionalPoints).
+
+	message_tokens(no_conditional_line_number_spy_points_defined) -->
+		['     No conditional line number spy points are defined.'-[], nl].
 
 	% spy points
 

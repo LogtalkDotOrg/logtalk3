@@ -22,9 +22,9 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2024-06-03,
+		date is 2024-06-12,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
@@ -101,6 +101,20 @@
 		argnames is ['SpyPoint']
 	]).
 
+	:- public((spy)/3).
+	:- mode(spy(+atom, +integer, @callable), one).
+	:- info((spy)/3, [
+		comment is 'Sets a conditional line number spy point.',
+		argnames is ['Entity', 'Line', 'Condition']
+	]).
+
+	:- public(spying/3).
+	:- mode(spying(?atom, ?integer, ?callable), zero_or_more).
+	:- info(spying/3, [
+		comment is 'Enumerates, by backtracking, all conditional line number spy points.',
+		argnames is ['Entity', 'Line', 'Condition']
+	]).
+
 	:- public((spy)/4).
 	:- mode(spy(@term, @term, @term, @term), one).
 	:- info((spy)/4, [
@@ -122,6 +136,13 @@
 	:- info((nospy)/1, [
 		comment is 'Removes all matching line number, predicate, and non-terminal spy points.',
 		argnames is ['SpyPoint']
+	]).
+
+	:- public((nospy)/3).
+	:- mode(nospy(@term, @term, @term), one).
+	:- info((nospy)/3, [
+		comment is 'Removes all matching conditional line number spy points.',
+		argnames is ['Entity', 'Line', 'Condition']
 	]).
 
 	:- public((nospy)/4).

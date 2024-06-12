@@ -14,8 +14,8 @@ Debugger protocol.
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:1:0
-| **Date:** 2024-06-03
+| **Version:** 3:2:0
+| **Date:** 2024-06-12
 
 | **Compilation flags:**
 |    ``static``
@@ -211,6 +211,44 @@ Enumerates, by backtracking, all defined line number, predicate, and non-termina
 
 ------------
 
+.. index:: spy/3
+.. _debuggerp/0::spy/3:
+
+``spy/3``
+^^^^^^^^^
+
+Sets a conditional line number spy point.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``spy(Entity,Line,Condition)``
+| **Mode and number of proofs:**
+|    ``spy(+atom,+integer,@callable)`` - ``one``
+
+
+------------
+
+.. index:: spying/3
+.. _debuggerp/0::spying/3:
+
+``spying/3``
+^^^^^^^^^^^^
+
+Enumerates, by backtracking, all conditional line number spy points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``spying(Entity,Line,Condition)``
+| **Mode and number of proofs:**
+|    ``spying(?atom,?integer,?callable)`` - ``zero_or_more``
+
+
+------------
+
 .. index:: spy/4
 .. _debuggerp/0::spy/4:
 
@@ -266,6 +304,25 @@ Removes all matching line number, predicate, and non-terminal spy points.
 |    ``nospy(@var)`` - ``one``
 |    ``nospy(@spy_point)`` - ``one``
 |    ``nospy(@list(spy_point))`` - ``one``
+
+
+------------
+
+.. index:: nospy/3
+.. _debuggerp/0::nospy/3:
+
+``nospy/3``
+^^^^^^^^^^^
+
+Removes all matching conditional line number spy points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nospy(Entity,Line,Condition)``
+| **Mode and number of proofs:**
+|    ``nospy(@term,@term,@term)`` - ``one``
 
 
 ------------

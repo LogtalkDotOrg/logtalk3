@@ -87,6 +87,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#activating-the-debugger">Activating the debugger</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-spy-points">Defining spy points</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#defining-line-number-and-predicate-spy-points">Defining line number and predicate spy points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-conditional-line-number-spy-points">Defining conditional line number spy points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-context-spy-points">Defining context spy points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#removing-all-spy-points">Removing all spy points</a></li>
 </ul>
@@ -372,6 +373,33 @@ want to spy. But note that only some Prolog backends provide accurate source
 file term line numbers. Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool documentation
 for details.</p>
 </section>
+<section id="defining-conditional-line-number-spy-points">
+<h3>Defining conditional line number spy points<a class="headerlink" href="#defining-conditional-line-number-spy-points" title="Link to this heading"></a></h3>
+<p>Conditional line number spy points are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code>
+predicate. The condition must be either a <code class="docutils literal notranslate"><span class="pre">[N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> or
+<code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code> lambda expression where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the invocation number
+and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause head. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 76, [weight(m1,_)]&gt;&gt;true).
+
+     Conditional line number spy point added.
+yes
+</pre></div>
+</div>
+<p>Note that setting a conditional line number spy point will remove any existing
+log point for the same location.</p>
+<p>Conditional line numbers spy points can be removed by using the debugger
+<code class="docutils literal notranslate"><span class="pre">nospy/3</span></code> predicate. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(planet, _, _).
+
+     All matching conditional line number spy points removed.
+yes
+</pre></div>
+</div>
+<p>The line number must for the first line of a clause that we want to conditionally
+spy. But note that only some Prolog backends provide accurate source
+file term line numbers. Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool documentation
+for details.</p>
+</section>
 <section id="defining-context-spy-points">
 <h3>Defining context spy points<a class="headerlink" href="#defining-context-spy-points" title="Link to this heading"></a></h3>
 <p>A context spy point is a tuple describing a message execution context and
@@ -462,6 +490,10 @@ runtime. The valid keywords are:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::log(agent, 99, &#39;% At the secret headquarters!&#39;).
      Log point added.
 yes
+
+| ?- debugger::log(loop, 42, &#39;Message $PREDICATE from $SENDER at thread $THREAD&#39;).
+     Log point added.
+yes
 </pre></div>
 </div>
 <p>Predicates <code class="docutils literal notranslate"><span class="pre">logging/3</span></code> and <code class="docutils literal notranslate"><span class="pre">nolog/3</span></code> can be used to, respectively, query
@@ -501,11 +533,11 @@ succeeds with the answer <code class="docutils literal notranslate"><span class=
 determinism information by prefixing the <code class="docutils literal notranslate"><span class="pre">exit</span></code> port with a <code class="docutils literal notranslate"><span class="pre">*</span></code> character
 when a call succeeds with choice-points pending, thus indicating that there
 might be alternative solutions for the goal.</p>
-<p>Note that, when tracing, spy points will be ignored. Before the
-port number, when a spy point is set for the current clause or goal, the
-debugger will print a <code class="docutils literal notranslate"><span class="pre">#</span></code> character for line number spy points, a
-<code class="docutils literal notranslate"><span class="pre">+</span></code> character for predicate spy points, and a <code class="docutils literal notranslate"><span class="pre">*</span></code> character for
-context spy points. For example:</p>
+<p>Note that, when tracing, spy points will be ignored. Before the port number,
+when a spy point is set for the current clause or goal, the debugger will
+print a <code class="docutils literal notranslate"><span class="pre">#</span></code> character for line number spy points, a <code class="docutils literal notranslate"><span class="pre">?</span></code> character for
+conditional line number spy points, a <code class="docutils literal notranslate"><span class="pre">+</span></code> character for predicate spy
+points, and a <code class="docutils literal notranslate"><span class="pre">*</span></code> character for context spy points. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(female/2).
 
 yes

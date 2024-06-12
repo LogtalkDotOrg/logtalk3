@@ -240,6 +240,39 @@ want to spy. But note that only some Prolog backends provide accurate source
 file term line numbers. Check the :doc:`../devtools/debugger` tool documentation
 for details.
 
+Defining conditional line number spy points
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Conditional line number spy points are specified using the debugger ``spy/3``
+predicate. The condition must be either a ``[N, Goal]>>Condition`` or
+``[Goal]>>Condition`` lambda expression where ``N`` is the invocation number
+and ``Goal`` is the goal that unified with the clause head. For example:
+
+.. code-block:: text
+
+   | ?- debugger::spy(planet, 76, [weight(m1,_)]>>true).
+
+        Conditional line number spy point added.
+   yes
+
+Note that setting a conditional line number spy point will remove any existing
+log point for the same location.
+
+Conditional line numbers spy points can be removed by using the debugger
+``nospy/3`` predicate. For example:
+
+.. code-block:: text
+
+   | ?- debugger::nospy(planet, _, _).
+
+        All matching conditional line number spy points removed.
+   yes
+
+The line number must for the first line of a clause that we want to conditionally
+spy. But note that only some Prolog backends provide accurate source
+file term line numbers. Check the :doc:`../devtools/debugger` tool documentation
+for details.
+
 Defining context spy points
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -347,6 +380,10 @@ Log points are defined using the ``log/3`` predicate. For example:
         Log point added.
    yes
 
+   | ?- debugger::log(loop, 42, 'Message $PREDICATE from $SENDER at thread $THREAD').
+        Log point added.
+   yes
+
 Predicates ``logging/3`` and ``nolog/3`` can be used to, respectively, query
 and remove log points. There's also a ``nologall/0`` predicate that removes
 all log points.
@@ -393,11 +430,11 @@ determinism information by prefixing the ``exit`` port with a ``*`` character
 when a call succeeds with choice-points pending, thus indicating that there
 might be alternative solutions for the goal.
 
-Note that, when tracing, spy points will be ignored. Before the
-port number, when a spy point is set for the current clause or goal, the
-debugger will print a ``#`` character for line number spy points, a
-``+`` character for predicate spy points, and a ``*`` character for
-context spy points. For example:
+Note that, when tracing, spy points will be ignored. Before the port number,
+when a spy point is set for the current clause or goal, the debugger will
+print a ``#`` character for line number spy points, a ``?`` character for
+conditional line number spy points, a ``+`` character for predicate spy
+points, and a ``*`` character for context spy points. For example:
 
 .. code-block:: text
 

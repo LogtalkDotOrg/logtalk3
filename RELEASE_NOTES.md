@@ -33,6 +33,8 @@ Documentation
 Tools
 -----
 
+* ADDED: Support for conditional line number spy points to the `debugger` tool.
+
 * IMPROVED: The `debugger` tool implementation of log points to support
 printing the default port message, the default port message followed by
 a comment, and replacing the default port message with a text with term

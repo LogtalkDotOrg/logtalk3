@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:3:0,
+		version is 7:4:0,
 		author is 'Paulo Moura',
-		date is 2024-06-11,
+		date is 2024-06-12,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -151,6 +151,15 @@
 		argnames is ['Entity', 'Line', 'Message']
 	]).
 
+	:- private(conditional_line_number_/3).
+	:- dynamic(conditional_line_number_/3).
+	:- mode(conditional_line_number_(?object_identifier, ?integer, ?callable), zero_or_more).
+	:- mode(conditional_line_number_(?category_identifier, ?integer, ?callable), zero_or_more).
+	:- info(conditional_line_number_/3, [
+		comment is 'Table of log points.',
+		argnames is ['Entity', 'Line', 'Condition']
+	]).
+
 	% we use the structured printing and question asking mechanisms to allow debugger
 	% input and output to be intercepted for alternative interaction by e.g. GUI IDEs
 	:- uses(logtalk, [
@@ -222,6 +231,11 @@
 			findall(Entity-Line, logging_line_number_(Entity,Line,_), LogPoints),
 			print_message(information, debugger, log_points(LogPoints))
 		;	print_message(information, debugger, no_log_points_defined)
+		),
+		(	conditional_line_number_(_, _, _) ->
+			findall(Entity-Line, conditional_line_number_(Entity, Line, _), ConditionalPoints),
+			print_message(information, debugger, conditional_line_number_spy_points(ConditionalPoints))
+		;	print_message(information, debugger, no_conditional_line_number_spy_points_defined)
 		),
 		(	spying_line_number_(_, _) ->
 			findall(Entity-Line, spying_line_number_(Entity,Line), LineNumberSpyPoints),
@@ -301,7 +315,8 @@
 			true
 		;	assertz(spying_line_number_(Template, Line))
 		),
-		retractall(logging_line_number_(Template, Line, _)).
+		retractall(logging_line_number_(Template, Line, _)),
+		retractall(conditional_line_number_(Template, Line, _)).
 
 	spy_predicate(Functor, Arity, Original) :-
 		atom(Functor),
@@ -356,6 +371,28 @@
 			retractall(spying_predicate_(Functor, ExtArity, _))
 		;	true
 		).
+
+	spy(Entity, Line, Condition) :-
+		callable(Entity),
+		integer(Line),
+		functor(Entity, Functor, Arity),
+		functor(Template, Functor, Arity),
+		retractall(conditional_line_number_(Template, Line, _)),
+		assertz(conditional_line_number_(Template, Line, Condition)),
+		print_message(information, debugger, conditional_spy_point_added),
+		(	debugging_ ->
+			true
+		;	debug
+		),
+		retractall(spying_line_number_(Template, Line)),
+		retractall(logging_line_number_(Template, Line, _)).
+
+	spying(Entity, Line, Lambda) :-
+		conditional_line_number_(Entity, Line, Lambda).
+
+	nospy(Entity, Line, Lambda) :-
+		retractall(conditional_line_number_(Entity, Line, Lambda)),
+		print_message(comment, debugger, matching_conditional_spy_points_removed).
 
 	spy(Sender, This, Self, Goal) :-
 		asserta(spying_context_(Sender, This, Self, Goal)),
@@ -444,7 +481,11 @@
 
 	leashing_port(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),
-		(	spying_port_code(Port, Goal, ExCtx, Code) ->
+		(	conditional_port(Port, N, Goal, Code) ->
+			retractall(leaping_(_)),
+			retractall(tracing_),
+			assertz(tracing_)
+		;	spying_port_code(Port, Goal, ExCtx, Code) ->
 			retractall(leaping_(_)),
 			retractall(tracing_),
 			assertz(tracing_)
@@ -478,7 +519,7 @@
 		subsumes_term(sp(Sender0, This0, Self0, Goal0), sp(Sender, This, Self, Goal)),
 		!.
 
-	% log point predicates
+	% log breakpoint predicates
 
 	log(Entity, Line, Message) :-
 		callable(Entity),
@@ -496,6 +537,7 @@
 			assertz(logging_line_number_(Template, Line, Message))
 		),
 		retractall(spying_line_number_(Template, Line)),
+		retractall(conditional_line_number_(Template, Line, _)),
 		print_message(information, debugger, log_point_added),
 		(	debugging_ ->
 			true
@@ -515,12 +557,12 @@
 
 	logging_port(fact(Entity, Clause, File, Line), N, Goal, ExCtx) :-
 		logging_line_number_(Entity, Line, Message),
-		logging_message_to_token(Message, 'Fact', Entity, Clause, File, Line, N, Goal, ExCtx).
+		logging_message(Message, 'Fact', Entity, Clause, File, Line, N, Goal, ExCtx).
 	logging_port(rule(Entity, Clause, File, Line), N, Goal, ExCtx) :-
 		logging_line_number_(Entity, Line, Message),
-		logging_message_to_token(Message, 'Rule', Entity, Clause, File, Line, N, Goal, ExCtx).
+		logging_message(Message, 'Rule', Entity, Clause, File, Line, N, Goal, ExCtx).
 
-	logging_message_to_token(Message, _Port, _Entity, _Clause, _File, _Line, N, Goal, _ExCtx) :-
+	logging_message(Message, _Port, _Entity, _Clause, _File, _Line, N, Goal, _ExCtx) :-
 		(	Message == ''
 			% default port message
 		;	sub_atom(Message, 0, 1, _, '%')
@@ -532,67 +574,82 @@
 			print_message(information, debugger, logging_port('@', Port, N, Goal, Message, MaxDepth))
 		;	print_message(information, debugger, logging_port('@', Port, N, Goal, Message))
 		).
-	logging_message_to_token(Message, Port, Entity, Clause, File, Line, N, Goal, ExCtx) :-
+	logging_message(Message, Port, Entity, Clause, File, Line, N, Goal, ExCtx) :-
 		% default port message replacement
 		atom_chars(Message, MessageChars),
-		message_to_token_(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens),
+		logging_message_tokens(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens),
 		print_message(information, debugger, logging_port(Tokens)).
 
-	message_to_token_([], _Port, _Entity, _Clause, _File, _Line, _N, _Goal, _ExCtx, []).
-	message_to_token_(['$'| MessageChars0], Port, Entity, Clause, File, Line, N, Goal, ExCtx, [Token| Tokens]) :-
-		message_argument(MessageChars0, MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Token),
+	logging_message_tokens([], _Port, _Entity, _Clause, _File, _Line, _N, _Goal, _ExCtx, []).
+	logging_message_tokens(['$'| MessageChars0], Port, Entity, Clause, File, Line, N, Goal, ExCtx, [Token| Tokens]) :-
+		logging_message_argument(MessageChars0, MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Token),
 		!,
-		message_to_token_(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens).
-	message_to_token_([Char| MessageChars0], Port, Entity, Clause, File, Line, N, Goal, ExCtx, [Atom-[]| Tokens]) :-
-		message_chars(MessageChars0, Chars, MessageChars),
+		logging_message_tokens(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens).
+	logging_message_tokens([Char| MessageChars0], Port, Entity, Clause, File, Line, N, Goal, ExCtx, [Atom-[]| Tokens]) :-
+		logging_message_chars(MessageChars0, Chars, MessageChars),
 		atom_chars(Atom, [Char| Chars]),
-		message_to_token_(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens).
+		logging_message_tokens(MessageChars, Port, Entity, Clause, File, Line, N, Goal, ExCtx, Tokens).
 
-	message_argument(['P','O','R','T'| MessageChars], MessageChars, Port, _, _, _, _, _, _, _, '~w'-[Port]).
-	message_argument(['E','N','T','I','T','Y'| MessageChars], MessageChars, _, Entity, _, _, _, _, _, _, Token) :-
-		term_to_token(Entity, Token).
-	message_argument(['C','L','A','U','S','E','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, Clause, _, _, _, _, _, '~d'-[Clause]).
-	message_argument(['F','I','L','E'| MessageChars], MessageChars, _, _, _, File, _, _, _, _, '~q'-[File]).
-	message_argument(['L','I','N','E'| MessageChars], MessageChars, _, _, _, _, Line, _, _, _, '~d'-[Line]).
-	message_argument(['I','N','V','O','C','A','T','I','O','N','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, _, _, _, N, _, _, '~d'-[N]).
-	message_argument(['G','O','A','L'| MessageChars], MessageChars, _, _, _, _, _, _, Goal, _, Token) :-
-		term_to_token(Goal, Token).
-	message_argument(['P','R','E','D','I','C','A','T','E'| MessageChars], MessageChars, _, _, _, _, _, _, Goal, _, '~q'-[Name/Arity]) :-
+	logging_message_argument(['P','O','R','T'| MessageChars], MessageChars, Port, _, _, _, _, _, _, _, '~w'-[Port]).
+	logging_message_argument(['E','N','T','I','T','Y'| MessageChars], MessageChars, _, Entity, _, _, _, _, _, _, Token) :-
+		logging_message_argument_token(Entity, Token).
+	logging_message_argument(['C','L','A','U','S','E','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, Clause, _, _, _, _, _, '~d'-[Clause]).
+	logging_message_argument(['F','I','L','E'| MessageChars], MessageChars, _, _, _, File, _, _, _, _, '~q'-[File]).
+	logging_message_argument(['L','I','N','E'| MessageChars], MessageChars, _, _, _, _, Line, _, _, _, '~d'-[Line]).
+	logging_message_argument(['I','N','V','O','C','A','T','I','O','N','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, _, _, _, N, _, _, '~d'-[N]).
+	logging_message_argument(['G','O','A','L'| MessageChars], MessageChars, _, _, _, _, _, _, Goal, _, Token) :-
+		logging_message_argument_token(Goal, Token).
+	logging_message_argument(['P','R','E','D','I','C','A','T','E'| MessageChars], MessageChars, _, _, _, _, _, _, Goal, _, '~q'-[Name/Arity]) :-
 		functor(Goal, Name, Arity).
-	message_argument(['E','X','E','C','U','T','I','O','N','_','C','O','N','T','E','X','T'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
-		term_to_token(ExCtx, Token).
-	message_argument(['S','E','N','D','E','R'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+	logging_message_argument(['E','X','E','C','U','T','I','O','N','_','C','O','N','T','E','X','T'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logging_message_argument_token(ExCtx, Token).
+	logging_message_argument(['S','E','N','D','E','R'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
 		logtalk::execution_context(ExCtx, _, Sender, _, _, _, _),
-		term_to_token(Sender, Token).
-	message_argument(['T','H','I','S'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logging_message_argument_token(Sender, Token).
+	logging_message_argument(['T','H','I','S'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
 		logtalk::execution_context(ExCtx, _, _, This, _, _, _),
-		term_to_token(This, Token).
-	message_argument(['S','E','L','F'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logging_message_argument_token(This, Token).
+	logging_message_argument(['S','E','L','F'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
 		logtalk::execution_context(ExCtx, _, _, _, Self, _, _),
-		term_to_token(Self, Token).
-	message_argument(['M','E','T','A','C','A','L','L','_','C','O','N','T','E','X','T'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logging_message_argument_token(Self, Token).
+	logging_message_argument(['M','E','T','A','C','A','L','L','_','C','O','N','T','E','X','T'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
 		logtalk::execution_context(ExCtx, _, _, _, _, MetaCallContext, _),
-		term_to_token(MetaCallContext, Token).
-	message_argument(['C','O','I','N','D','U','C','T','I','O','N','_','S','T','A','C','K'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
+		logging_message_argument_token(MetaCallContext, Token).
+	logging_message_argument(['C','O','I','N','D','U','C','T','I','O','N','_','S','T','A','C','K'| MessageChars], MessageChars, _, _, _, _, _, _, _, ExCtx, Token) :-
 		logtalk::execution_context(ExCtx, _, _, _, _, _, CoinductionStack),
-		term_to_token(CoinductionStack, Token).
+		logging_message_argument_token(CoinductionStack, Token).
 	:- if(current_logtalk_flag(threads, supported)).
-		message_argument(['T','H','R','E','A','D'| MessageChars], MessageChars, _, _, _, _, _, _, _, _, '~q'-[Thread]) :-
+		logging_message_argument(['T','H','R','E','A','D'| MessageChars], MessageChars, _, _, _, _, _, _, _, _, '~q'-[Thread]) :-
 			thread_self(Thread).
 	:- endif.
 
-	term_to_token(Term, Token) :-
+	logging_message_argument_token(Term, Token) :-
 		(	write_max_depth_(MaxDepth),
 			MaxDepth > 0 ->
 			Token = term(Term,[quoted(true),numbervars(true),max_depth(MaxDepth)])
 		;	Token = '~q'-[Term]
 		).
 
-	message_chars([], [], []).
-	message_chars(['$'| Chars], [], ['$'| Chars]) :-
+	logging_message_chars([], [], []).
+	logging_message_chars(['$'| Chars], [], ['$'| Chars]) :-
 		!.
-	message_chars([Char| MessageChars0], [Char| Chars], MessageChars) :-
-		message_chars(MessageChars0, Chars, MessageChars).
+	logging_message_chars([Char| MessageChars0], [Char| Chars], MessageChars) :-
+		logging_message_chars(MessageChars0, Chars, MessageChars).
+
+	% conditional breakpoint predicates
+
+	conditional_port(fact(Entity, Clause, File, Line), N, Goal, '?') :-
+		conditional_line_number_(Entity, Line, Condition),
+		conditional_port_check(Condition, fact(Entity, Clause, File, Line), N, Goal).
+	conditional_port(rule(Entity, Clause, File, Line), N, Goal, '?') :-
+		conditional_line_number_(Entity, Line, Condition),
+		conditional_port_check(Condition, rule(Entity, Clause, File, Line), N, Goal).
+
+	:- meta_predicate(conditional_port_check(*, *, *, *)).
+	conditional_port_check([N, Goal]>>Condition, _, N, Goal) :-
+		catch({Condition}, _, fail).
+	conditional_port_check([Goal]>>Condition, _, _, Goal) :-
+		catch({Condition}, _, fail).
 
 	% debug handler
 
