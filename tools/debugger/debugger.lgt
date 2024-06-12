@@ -638,18 +638,20 @@
 
 	% conditional breakpoint predicates
 
-	conditional_port(fact(Entity, Clause, File, Line), N, Goal, '?') :-
+	conditional_port(fact(Entity, _, _, Line), N, Goal, '?') :-
 		conditional_line_number_(Entity, Line, Condition),
-		conditional_port_check(Condition, fact(Entity, Clause, File, Line), N, Goal).
-	conditional_port(rule(Entity, Clause, File, Line), N, Goal, '?') :-
+		conditional_port_check(Condition, N, Goal).
+	conditional_port(rule(Entity, _, _, Line), N, Goal, '?') :-
 		conditional_line_number_(Entity, Line, Condition),
-		conditional_port_check(Condition, rule(Entity, Clause, File, Line), N, Goal).
+		conditional_port_check(Condition, N, Goal).
 
-	:- meta_predicate(conditional_port_check(*, *, *, *)).
-	conditional_port_check([N, Goal]>>Condition, _, N, Goal) :-
+	:- meta_predicate(conditional_port_check(*, *, *)).
+	conditional_port_check([N, Goal]>>Condition, N, Goal) :-
 		catch({Condition}, _, fail).
-	conditional_port_check([Goal]>>Condition, _, _, Goal) :-
+	conditional_port_check([Goal]>>Condition, _, Goal) :-
 		catch({Condition}, _, fail).
+	conditional_port_check(M, N, _) :-
+		N >= M.
 
 	% debug handler
 

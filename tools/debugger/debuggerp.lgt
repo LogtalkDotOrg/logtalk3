@@ -104,7 +104,7 @@
 	:- public((spy)/3).
 	:- mode(spy(+atom, +integer, @callable), one).
 	:- info((spy)/3, [
-		comment is 'Sets a conditional line number spy point.',
+		comment is 'Sets a conditional line number spy point. The condition can be the minimum number of invocations or a lambda expression (``[N,Goal]>>Condition`` or ``[Goal]>>Condition`` where ``N`` is the invocation number and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``).',
 		argnames is ['Entity', 'Line', 'Condition']
 	]).
 

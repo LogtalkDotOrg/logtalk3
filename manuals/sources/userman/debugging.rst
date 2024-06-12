@@ -235,24 +235,26 @@ spy points will be removed. For example:
    All matching predicate spy points removed.
    yes
 
-In breakpoints, the line number must for the first line of a clause that we
-want to spy. But note that only some Prolog backends provide accurate source
-file term line numbers. Check the :doc:`../devtools/debugger` tool documentation
-for details.
+In breakpoints, the line number must for the first line of a clause that
+we want to spy. But note that only some Prolog backends provide accurate
+source file term line numbers. Check the :doc:`../devtools/debugger` tool
+documentation for details.
 
 Defining conditional line number spy points
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Conditional line number spy points are specified using the debugger ``spy/3``
-predicate. The condition must be either a ``[N, Goal]>>Condition`` or
-``[Goal]>>Condition`` lambda expression where ``N`` is the invocation number
-and ``Goal`` is the goal that unified with the clause head. For example:
+predicate. The condition can be either the minimum number of invocations or
+a lambda expression (``[N, Goal]>>Condition`` or ``[Goal]>>Condition``  where
+``N`` is the invocation number and ``Goal`` is the goal that unified with
+the clause head; ``Condition`` is called in the context of the ``user``
+pseudo-object). For example:
 
 .. code-block:: text
 
    | ?- debugger::spy(planet, 76, [weight(m1,_)]>>true).
 
-        Conditional line number spy point added.
+   Conditional line number spy point added.
    yes
 
 Note that setting a conditional line number spy point will remove any existing
@@ -265,7 +267,7 @@ Conditional line numbers spy points can be removed by using the debugger
 
    | ?- debugger::nospy(planet, _, _).
 
-        All matching conditional line number spy points removed.
+   All matching conditional line number spy points removed.
    yes
 
 The line number must for the first line of a clause that we want to conditionally

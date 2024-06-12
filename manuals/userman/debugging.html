@@ -368,20 +368,22 @@ All matching predicate spy points removed.
 yes
 </pre></div>
 </div>
-<p>In breakpoints, the line number must for the first line of a clause that we
-want to spy. But note that only some Prolog backends provide accurate source
-file term line numbers. Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool documentation
-for details.</p>
+<p>In breakpoints, the line number must for the first line of a clause that
+we want to spy. But note that only some Prolog backends provide accurate
+source file term line numbers. Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool
+documentation for details.</p>
 </section>
 <section id="defining-conditional-line-number-spy-points">
 <h3>Defining conditional line number spy points<a class="headerlink" href="#defining-conditional-line-number-spy-points" title="Link to this heading"></a></h3>
 <p>Conditional line number spy points are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code>
-predicate. The condition must be either a <code class="docutils literal notranslate"><span class="pre">[N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> or
-<code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code> lambda expression where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the invocation number
-and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause head. For example:</p>
+predicate. The condition can be either the minimum number of invocations or
+a lambda expression (<code class="docutils literal notranslate"><span class="pre">[N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> or <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code>  where
+<code class="docutils literal notranslate"><span class="pre">N</span></code> is the invocation number and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with
+the clause head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code>
+pseudo-object). For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 76, [weight(m1,_)]&gt;&gt;true).
 
-     Conditional line number spy point added.
+Conditional line number spy point added.
 yes
 </pre></div>
 </div>
@@ -391,7 +393,7 @@ log point for the same location.</p>
 <code class="docutils literal notranslate"><span class="pre">nospy/3</span></code> predicate. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(planet, _, _).
 
-     All matching conditional line number spy points removed.
+All matching conditional line number spy points removed.
 yes
 </pre></div>
 </div>
