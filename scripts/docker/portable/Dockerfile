@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on June 8, 2024
+##   Last updated on June 13, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -121,6 +121,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 # Install Logtalk
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
 RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local
+RUN rm -rf logtalk3-${LOGTALK_VERSION}
 
 # Install B-Prolog
 WORKDIR /downloads
@@ -132,12 +133,14 @@ WORKDIR /downloads
 RUN if [ "$CIAO_VERSION" != "none" ] ; then git clone --depth 1 --branch ${CIAO_VERSION} https://github.com/ciao-lang/ciao ; fi
 WORKDIR ciao
 RUN if [ "$CIAO_VERSION" != "none" ] ; then ./ciao-boot.sh global-install && ./ciao-boot.sh realclean; fi
+RUN rm -rf /downloads/ciao
 
 # Install CxProlog
 WORKDIR /downloads
 RUN if [ "$CX_VERSION" != "none" ] ; then curl -sL http://ctp.di.fct.unl.pt/~amd/cxprolog/cxunix/cxprolog-${CX_VERSION}.src.tgz | tar xz ; fi
 WORKDIR cxprolog-${CX_VERSION}
 RUN if [ "$CX_VERSION" != "none" ] ; then make install && make clean ; fi
+RUN rm -rf /downloads/cxprolog-${CX_VERSION}
 
 # Install ECLiPSe
 WORKDIR /downloads/eclipse
@@ -148,12 +151,14 @@ RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then chmod a+x UNPACK ; fi
 RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then ./UNPACK ; fi
 RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then echo -n "\n\n\n\n\n\n" | ./RUNME ; fi
 ENV PATH=$PATH:/downloads/eclipse/bin/x86_64_linux
+RUN rm eclipse_basic.tgz eclipse_doc.tgz
 
 # Install GNU Prolog
 WORKDIR /downloads
 RUN if [ "$GNU_VERSION" != "none" ] ; then git clone --depth 1 --branch ${GNU_VERSION} https://github.com/didoudiaz/gprolog ; fi
 WORKDIR gprolog/src
 RUN if [ "$GNU_VERSION" != "none" ] ; then ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install && make distclean ; fi
+RUN rm -rf /downloads/gprolog
 
 # Install SWI-Prolog
 WORKDIR /downloads
@@ -163,6 +168,7 @@ RUN if [ "$SWI_VERSION" != "none" ] ; then git submodule update --init --depth 1
 WORKDIR build
 RUN if [ "$SWI_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. ; fi
 RUN if [ "$SWI_VERSION" != "none" ] ; then ninja && ninja install && ninja clean ; fi
+RUN rm -rf /downloads/swipl-devel
 
 # Install Trealla Prolog
 WORKDIR /downloads
@@ -182,6 +188,7 @@ WORKDIR /downloads
 RUN if [ "$YAP_VERSION" != "none" ] ; then git clone --depth 1 --branch ${YAP_VERSION} https://github.com/vscosta/yap ; fi
 WORKDIR yap/build
 RUN if [ "$YAP_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && make install && make clean ; fi
+RUN rm -rf /downloads/yap
 
 # Add the Logtalk environment variables to .bashrc and .profile
 RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.bashrc

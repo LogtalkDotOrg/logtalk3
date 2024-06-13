@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:4:0,
+		version is 7:5:0,
 		author is 'Paulo Moura',
-		date is 2024-06-12,
+		date is 2024-06-13,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -160,6 +160,14 @@
 		argnames is ['Entity', 'Line', 'Condition']
 	]).
 
+	:- private(file_line_hit_count_/3).
+	:- dynamic(file_line_hit_count_/3).
+	:- mode(file_line_hit_count_(?atom, ?integer, ?integer), zero_or_one).
+	:- info(file_line_hit_count_/3, [
+		comment is 'Current call stack invocation number.',
+		argnames is ['File', 'Line', 'Count']
+	]).
+
 	% we use the structured printing and question asking mechanisms to allow debugger
 	% input and output to be intercepted for alternative interaction by e.g. GUI IDEs
 	:- uses(logtalk, [
@@ -174,7 +182,8 @@
 		nospyall,
 		leash(full),
 		nodebug,
-		reset_invocation_number(_).
+		reset_invocation_number(_),
+		retractall(file_line_hit_count_(_, _, _)).
 
 	debug :-
 		logtalk::activate_debug_handler(debugger),
@@ -183,6 +192,7 @@
 		;	assertz(debugging_),
 			retractall(tracing_),
 			reset_invocation_number(_),
+			retractall(file_line_hit_count_(_, _, _)),
 			print_message(comment, debugger, debugger_spying_switched_on)
 		).
 
@@ -205,6 +215,7 @@
 			assertz(debugging_),
 			retractall(leaping_(_)),
 			reset_invocation_number(_),
+			retractall(file_line_hit_count_(_, _, _)),
 			print_message(comment, debugger, debugger_tracing_switched_on)
 		).
 
@@ -385,7 +396,14 @@
 		;	debug
 		),
 		retractall(spying_line_number_(Template, Line)),
-		retractall(logging_line_number_(Template, Line, _)).
+		retractall(logging_line_number_(Template, Line, _)),
+		(	object_property(Entity, file(File)) ->
+			retractall(file_line_hit_count_(File, Line, _))
+		;	category_property(Entity, file(File)) ->
+			retractall(file_line_hit_count_(File, Line, _))
+		;	% assume entity not yet loaded
+			true
+		).
 
 	spying(Entity, Line, Lambda) :-
 		conditional_line_number_(Entity, Line, Lambda).
@@ -638,20 +656,48 @@
 
 	% conditional breakpoint predicates
 
-	conditional_port(fact(Entity, _, _, Line), N, Goal, '?') :-
+	conditional_port(fact(Entity, _, File, Line), N, Goal, '?') :-
 		conditional_line_number_(Entity, Line, Condition),
-		conditional_port_check(Condition, N, Goal).
-	conditional_port(rule(Entity, _, _, Line), N, Goal, '?') :-
+		conditional_port_check(Condition, File, Line, N, Goal).
+	conditional_port(rule(Entity, _, File, Line), N, Goal, '?') :-
 		conditional_line_number_(Entity, Line, Condition),
-		conditional_port_check(Condition, N, Goal).
+		conditional_port_check(Condition, File, Line, N, Goal).
 
-	:- meta_predicate(conditional_port_check(*, *, *)).
-	conditional_port_check([N, Goal]>>Condition, N, Goal) :-
+	:- meta_predicate(conditional_port_check(*, *, *, *, *)).
+	conditional_port_check([Count,N,Goal]>>Condition, File, Line, N, Goal) :-
+		!,
+		file_line_hit_count_(File, Line, Count),
 		catch({Condition}, _, fail).
-	conditional_port_check([Goal]>>Condition, _, Goal) :-
+	conditional_port_check([Goal]>>Condition, _, _, _, Goal) :-
+		!,
 		catch({Condition}, _, fail).
-	conditional_port_check(M, N, _) :-
-		N >= M.
+	conditional_port_check(>(HitCount), File, Line, _, _) :-
+		!,
+		file_line_hit_count_(File, Line, Count),
+		Count > HitCount.
+	conditional_port_check(>=(HitCount), File, Line, _, _) :-
+		!,
+		file_line_hit_count_(File, Line, Count),
+		Count >= HitCount.
+	conditional_port_check(=:=(HitCount), File, Line, _, _) :-
+		!,
+		file_line_hit_count_(File, Line, Count),
+		Count =:= HitCount.
+	conditional_port_check(=<(HitCount), File, Line, _, _) :-
+		!,
+		file_line_hit_count_(File, Line, Count),
+		Count =< HitCount.
+	conditional_port_check(<(HitCount), File, Line, _, _) :-
+		!,
+		file_line_hit_count_(File, Line, Count),
+		Count < HitCount.
+	conditional_port_check(mod(M), File, Line, _, _) :-
+		!,
+		file_line_hit_count_(File, Line, Count),
+		Count mod M =:= 0.
+	conditional_port_check(HitCount, File, Line, _, _) :-
+		file_line_hit_count_(File, Line, Count),
+		Count >= HitCount.
 
 	% debug handler
 
@@ -665,6 +711,7 @@
 	:- meta_predicate(debug_handler((::), (*))).
 
 	debug_handler(fact(Entity,Fact,Clause,File,Line), ExCtx) :-
+		inc_file_line_hit_count(File, Line),
 		(	debugging_,
 			(	\+ skipping_,
 				\+ quasi_skipping_
@@ -677,6 +724,7 @@
 		;	true
 		).
 	debug_handler(rule(Entity,Head,Clause,File,Line), ExCtx) :-
+		inc_file_line_hit_count(File, Line),
 		(	debugging_,
 			(	\+ skipping_,
 				\+ quasi_skipping_
@@ -690,6 +738,7 @@
 		).
 	debug_handler(top_goal(Goal, TGoal), ExCtx) :-
 		reset_invocation_number(_),
+		retractall(file_line_hit_count_(_, _, _)),
 		retractall(leaping_(_)),
 		retractall(skipping_),
 		retractall(quasi_skipping_),
@@ -1194,7 +1243,8 @@
 		).
 
 	:- synchronized([
-		inc_invocation_number/1, reset_invocation_number/1
+		inc_invocation_number/1, reset_invocation_number/1,
+		inc_file_line_hit_count/2
 	]).
 
 	inc_invocation_number(New) :-
@@ -1209,6 +1259,14 @@
 		retractall(invocation_number_(_)),
 		asserta(invocation_number_(0)),
 		retractall(jump_to_invocation_number_(_)).
+
+	inc_file_line_hit_count(File, Line) :-
+		(	retract(file_line_hit_count_(File, Line, Old)) ->
+			New is Old + 1,
+			asserta(file_line_hit_count_(File, Line, New))
+		;	% something weird happen as the previous call should never fail
+			asserta(file_line_hit_count_(File, Line, 1))
+		).
 
 	:- if(predicate_property(get_unbuffered_char(_), built_in)). % e.g. LVM or Trealla Prolog
 

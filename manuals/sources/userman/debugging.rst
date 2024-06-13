@@ -244,11 +244,12 @@ Defining conditional line number spy points
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Conditional line number spy points are specified using the debugger ``spy/3``
-predicate. The condition can be either the minimum number of invocations or
-a lambda expression (``[N, Goal]>>Condition`` or ``[Goal]>>Condition``  where
-``N`` is the invocation number and ``Goal`` is the goal that unified with
-the clause head; ``Condition`` is called in the context of the ``user``
-pseudo-object). For example:
+predicate. The condition can be a clause head successful unification count
+expression or a lambda expression (``[Count, N, Goal]>>Condition`` or
+``[Goal]>>Condition``  where ``Count`` is the unification count, ``N`` is the
+goal invocation number, and ``Goal`` is the goal that unified with the clause
+head; ``Condition`` is called in the context of the ``user`` pseudo-object).
+For example:
 
 .. code-block:: text
 
@@ -256,6 +257,21 @@ pseudo-object). For example:
 
    Conditional line number spy point added.
    yes
+
+   | ?- debugger::spy(planet, 41, =<(2)).
+
+   Conditional line number spy point added.
+   yes
+
+The valid unification count expressions are:
+
+- ``>(Count)`` - break when the unification count is greater than ``Count``
+- ``>=(Count)`` - break when the unification count is greater than or equal to ``Count``
+- ``=:=(Count)`` - break when the unification count is equal to ``Count``
+- ``=<(Count)`` - break when the unification count is less than or equal to ``Count``
+- ``<(Count)`` - break when the unification count is less than ``Count``
+- ``mod(M)`` - break when the unification count module ``M`` is zero
+- ``Count`` - break when the unification count is greater than or equal to ``Count``
 
 Note that setting a conditional line number spy point will remove any existing
 log point for the same location.

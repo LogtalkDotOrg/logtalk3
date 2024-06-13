@@ -376,17 +376,33 @@ documentation for details.</p>
 <section id="defining-conditional-line-number-spy-points">
 <h3>Defining conditional line number spy points<a class="headerlink" href="#defining-conditional-line-number-spy-points" title="Link to this heading"></a></h3>
 <p>Conditional line number spy points are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code>
-predicate. The condition can be either the minimum number of invocations or
-a lambda expression (<code class="docutils literal notranslate"><span class="pre">[N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> or <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code>  where
-<code class="docutils literal notranslate"><span class="pre">N</span></code> is the invocation number and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with
-the clause head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code>
-pseudo-object). For example:</p>
+predicate. The condition can be a clause head successful unification count
+expression or a lambda expression (<code class="docutils literal notranslate"><span class="pre">[Count,</span> <span class="pre">N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> or
+<code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code>  where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
+goal invocation number, and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause
+head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object).
+For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 76, [weight(m1,_)]&gt;&gt;true).
+
+Conditional line number spy point added.
+yes
+
+| ?- debugger::spy(planet, 41, =&lt;(2)).
 
 Conditional line number spy point added.
 yes
 </pre></div>
 </div>
+<p>The valid unification count expressions are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;(Count)</span></code> - break when the unification count is greater than <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&gt;=(Count)</span></code> - break when the unification count is greater than or equal to <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">=:=(Count)</span></code> - break when the unification count is equal to <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">=&lt;(Count)</span></code> - break when the unification count is less than or equal to <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;(Count)</span></code> - break when the unification count is less than <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mod(M)</span></code> - break when the unification count module <code class="docutils literal notranslate"><span class="pre">M</span></code> is zero</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Count</span></code> - break when the unification count is greater than or equal to <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
+</ul>
 <p>Note that setting a conditional line number spy point will remove any existing
 log point for the same location.</p>
 <p>Conditional line numbers spy points can be removed by using the debugger
