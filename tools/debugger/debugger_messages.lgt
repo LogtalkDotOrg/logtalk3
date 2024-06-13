@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:5:0,
+		version is 3:6:0,
 		author is 'Paulo Moura',
-		date is 2024-06-12,
+		date is 2024-06-13,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -186,8 +186,8 @@
 		['     All matching conditional line number spy points removed.'-[], nl].
 
 	message_tokens(conditional_line_number_spy_points(ConditionalPoints)) -->
-		['     Defined conditional line number spy points (Entity-Line):'-[], nl],
-		log_points(ConditionalPoints).
+		['     Defined conditional line number spy points: Entity-Line (Condition):'-[], nl],
+		conditional_points(ConditionalPoints).
 
 	message_tokens(no_conditional_line_number_spy_points_defined) -->
 		['     No conditional line number spy points are defined.'-[], nl].
@@ -221,7 +221,7 @@
 	% line number spy points
 
 	message_tokens(line_number_spy_points(SpyPoints)) -->
-		['     Defined line number spy points (Entity-Line):'-[], nl],
+		['     Defined line number spy points: Entity-Line:'-[], nl],
 		spy_points(SpyPoints).
 
 	message_tokens(all_line_number_spy_points_removed) -->
@@ -448,6 +448,13 @@
 		['        ~q'-[GroundEntity-Line], nl],
 		log_points(SpyPoints).
 	log_points([]) -->
+		[].
+
+	conditional_points([cln(Entity,Line,Condition)| ConditionalPoints]) -->
+		{ground_term_copy(Entity, GroundEntity)},
+		['        ~q-~q (~q)'-[GroundEntity,Line,Condition], nl],
+		conditional_points(ConditionalPoints).
+	conditional_points([]) -->
 		[].
 
 	spy_points([SpyPoint| SpyPoints]) -->

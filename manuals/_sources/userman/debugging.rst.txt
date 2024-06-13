@@ -270,7 +270,7 @@ The valid unification count expressions are:
 - ``=:=(Count)`` - break when the unification count is equal to ``Count``
 - ``=<(Count)`` - break when the unification count is less than or equal to ``Count``
 - ``<(Count)`` - break when the unification count is less than ``Count``
-- ``mod(M)`` - break when the unification count module ``M`` is zero
+- ``mod(M)`` - break when the unification count modulo ``M`` is zero
 - ``Count`` - break when the unification count is greater than or equal to ``Count``
 
 Note that setting a conditional line number spy point will remove any existing

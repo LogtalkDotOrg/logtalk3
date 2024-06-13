@@ -14,8 +14,8 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 7:4:0
-| **Date:** 2024-06-12
+| **Version:** 7:6:0
+| **Date:** 2024-06-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -348,6 +348,25 @@ Table of log points.
 | **Mode and number of proofs:**
 |    ``conditional_line_number_(?object_identifier,?integer,?callable)`` - ``zero_or_more``
 |    ``conditional_line_number_(?category_identifier,?integer,?callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: file_line_hit_count_/3
+.. _debugger/0::file_line_hit_count_/3:
+
+``file_line_hit_count_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Current call stack invocation number.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``file_line_hit_count_(File,Line,Count)``
+| **Mode and number of proofs:**
+|    ``file_line_hit_count_(?atom,?integer,?integer)`` - ``zero_or_one``
 
 
 ------------

@@ -23,7 +23,7 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:5:0,
+		version is 7:6:0,
 		author is 'Paulo Moura',
 		date is 2024-06-13,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
@@ -244,7 +244,7 @@
 		;	print_message(information, debugger, no_log_points_defined)
 		),
 		(	conditional_line_number_(_, _, _) ->
-			findall(Entity-Line, conditional_line_number_(Entity, Line, _), ConditionalPoints),
+			findall(cln(Entity,Line,Condition), conditional_line_number_(Entity,Line,Condition), ConditionalPoints),
 			print_message(information, debugger, conditional_line_number_spy_points(ConditionalPoints))
 		;	print_message(information, debugger, no_conditional_line_number_spy_points_defined)
 		),
