@@ -29,7 +29,7 @@ foo(3).
 
 	:- public(meta/2).
 	:- meta_predicate(meta(1, *)).
-	:- mode(meta(+callable, ?tern), zero_or_more).
+	:- mode(meta(+callable, ?term), zero_or_more).
 	:- info(meta/2, [
 		comment is 'Simple meta-predicate to illustrate inheritance semantics.',
 		argnames is ['Closure', 'Argument']
@@ -49,27 +49,32 @@ foo(3).
 :- object(proto,
 	extends(parent)).
 
+	% declare meta_self/2 itself as a meta-predicate to make the closure
+	% argument a meta-argument when sending meta_self/2 messages
 	:- public(meta_self/2).
 	:- meta_predicate(meta_self(1, *)).
-	:- mode(meta_self(+callable, ?tern), zero_or_more).
+	:- mode(meta_self(+callable, ?term), zero_or_more).
 	:- info(meta_self/2, [
 		comment is 'Calls the inherited meta-predicate using a message to self.',
 		argnames is ['Closure', 'Argument']
 	]).
 
 	% a message to "self" resets the "sender" to the object sending the message
+	% and thus changes the meta-call context for the closure argument
 	meta_self(Closure, Argument) :-
 		::meta(Closure, Argument).
 
+	% declare meta_super/2 itself as a meta-predicate to make the closure
+	% argument a meta-argument when sending meta_super/2 messages
 	:- public(meta_super/2).
 	:- meta_predicate(meta_super(1, *)).
-	:- mode(meta_super(+callable, ?tern), zero_or_more).
+	:- mode(meta_super(+callable, ?term), zero_or_more).
 	:- info(meta_super/2, [
 		comment is 'Calls the inherited meta-predicate using a super call.',
 		argnames is ['Closure', 'Argument']
 	]).
 
-	% "super" calls preserve both "self" and "sender"
+	% a "super" calls preserves both "self" and "sender"
 	meta_super(Closure, Argument) :-
 		^^meta(Closure, Argument).
 

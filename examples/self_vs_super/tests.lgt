@@ -30,9 +30,11 @@
 	]).
 
 	test(self_vs_super_01, true(L == [1,2,3])) :-
+		% make "user" the sender of the message
 		findall(X, {proto::meta_super(foo, X)}, L).
 
 	test(self_vs_super_02, error(existence_error(procedure,_))) :-
+		% make "user" the sender of the message
 		{proto::meta_self(foo, _)}.
 
 :- end_object.
