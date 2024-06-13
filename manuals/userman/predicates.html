@@ -374,14 +374,15 @@ of mode directives is a good starting point for documenting your predicates.</p>
 </section>
 <section id="meta-predicate-directive">
 <span id="predicates-meta"></span><h3>Meta-predicate directive<a class="headerlink" href="#meta-predicate-directive" title="Link to this heading"></a></h3>
-<p>Some predicates may have arguments that will be called as goals or interpreted
-as <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> that will be used for constructing goals. To
-ensure that these goals will be executed in the correct context (i.e. in the
-<a class="reference internal" href="../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the meta-predicate
-<a class="reference internal" href="../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>) we need to
-use the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive (in the case of <em>meta
-non-terminals</em>, there’s also a <a class="reference internal" href="../refman/directives/meta_non_terminal_1.html#directives-meta-non-terminal-1"><span class="std std-ref">meta_non_terminal/1</span></a> directive).
-For example:</p>
+<p>Some predicates may have arguments that will be called as goals, interpreted
+as <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> that will be used for constructing goals, or
+passing meta-arguments to calls to other meta-predicates. To ensure that these
+goals will be executed in the correct context
+(i.e. in the <a class="reference internal" href="../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the
+meta-predicate <a class="reference internal" href="../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>) we
+need to use the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive (in the case of
+<em>meta non-terminals</em>, there’s also a <a class="reference internal" href="../refman/directives/meta_non_terminal_1.html#directives-meta-non-terminal-1"><span class="std std-ref">meta_non_terminal/1</span></a>
+directive). For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(<span class="k">findall</span>(<span class="o">*</span>, <span class="m">0</span>, <span class="o">*</span>)).
 <span class="p">:- </span><span class="k">meta_predicate</span>(map(<span class="m">2</span>, <span class="o">*</span>, <span class="o">*</span>)).
 </pre></div>

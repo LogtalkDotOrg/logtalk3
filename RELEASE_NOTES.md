@@ -37,6 +37,8 @@ Documentation
 * UPDATED: Handbook documentation on debugging using conditional breakpoints
 and log points.
 
+* IMPROVED: Handbook documentation on the `meta_predicate/1` directive.
+
 Library
 -------
 
