@@ -30,7 +30,7 @@
 :- op(1000, xfy, &&).
 :- op(500, fy, ~).
 
-:- if(current_logtalk_flag(prolog_dialect, lvm)).
+:- if(current_logtalk_flag(prolog_dialect, xvm)).
 	abort :-
 		throw(abort).
 :- endif.

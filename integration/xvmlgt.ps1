@@ -1,6 +1,6 @@
 #############################################################################
 ## 
-##   Integration script for LVM
+##   Integration script for XVM
 ##   Last updated on March 15, 2023
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
@@ -95,13 +95,13 @@ if (Test-Path $env:LOGTALKUSER) {
 
 $env:LOGTALK_STARTUP_DIRECTORY= $pwd
 
-$source = $env:LOGTALKHOME + '\integration\logtalk_lvm.pl'
+$source = $env:LOGTALKHOME + '\integration\logtalk_xvm.pl'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
     $n = $args.Count - 3
-    lvmpl.exe -f $source $args[0..$n] -- (-Split $args[$args.Count-1])
+    xvmpl.exe -f $source $args[0..$n] -- (-Split $args[$args.Count-1])
 } elseif ($args.Count -eq 2 -and $args[0] -eq "--%") {
-    lvmpl.exe -f $source -- (-Split $args[$args.Count-1])
+    xvmpl.exe -f $source -- (-Split $args[$args.Count-1])
 } else {
-    lvmpl.exe -f $source $args
+    xvmpl.exe -f $source $args
 }

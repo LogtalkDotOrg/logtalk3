@@ -144,7 +144,7 @@
 	disconnect_from_server(redis(_, _, Socket)) :-
 		socket_close(Socket).
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 	connect_to_server(Host, Port, redis(Input, Output, Socket)) :-
 		socket('AF_INET', Socket),

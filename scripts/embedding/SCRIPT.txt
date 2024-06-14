@@ -74,12 +74,12 @@ $ ./yap_logtalk_pl.sh -c -x -d "$HOME"/collect -n wumpus -l "$LOGTALKUSER/exampl
 $ ~/collect/wumpus
 
 
-% create LVM Prolog files for embedding the "wumpus" text adventure example:
+% create XVM Prolog files for embedding the "wumpus" text adventure example:
 
-$ cd "$LOGTALKHOME/scripts/embedding/lvm/"
-$ ./lvm_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt"
+$ cd "$LOGTALKHOME/scripts/embedding/xvm/"
+$ ./xvm_logtalk_pl.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/wumpus.lgt"
 $ cd ~/collect/
-$ lvmpl -f logtalk.pl -f application.pl
+$ xvmpl -f logtalk.pl -f application.pl
 ?- wumpus::main.
 
 

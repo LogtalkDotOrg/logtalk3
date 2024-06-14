@@ -87,9 +87,9 @@
 		;	mkdir(Directory)
 		).
 
-:- elif(current_prolog_flag(dialect, lvm)).
+:- elif(current_prolog_flag(dialect, xvm)).
 
-	% usage: lvmlgt -i parallel_logtalk_processes_setup.pl
+	% usage: xvmlgt -i parallel_logtalk_processes_setup.pl
 
 	logtalk_library_path(scratch_directory, Directory) :-
 		config_property(system/tempDir, TMP_DIR),

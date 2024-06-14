@@ -2,7 +2,7 @@
 
 #############################################################################
 ## 
-##   Integration script for LVM
+##   Integration script for XVM
 ##   Last updated on September 30, 2022
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
@@ -97,7 +97,7 @@ LOGTALK_STARTUP_DIRECTORY=$(pwd)
 export LOGTALK_STARTUP_DIRECTORY
 
 if [ -e "$(command -v rlwrap)" ] ; then
-	exec rlwrap -n lvmpl -f "$LOGTALKHOME/integration/logtalk_lvm.pl" "$@"
+	exec rlwrap -n xvmpl -f "$LOGTALKHOME/integration/logtalk_xvm.pl" "$@"
 else
-	exec lvmpl -f "$LOGTALKHOME/integration/logtalk_lvm.pl" "$@"
+	exec xvmpl -f "$LOGTALKHOME/integration/logtalk_xvm.pl" "$@"
 fi

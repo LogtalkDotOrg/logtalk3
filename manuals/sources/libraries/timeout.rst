@@ -5,7 +5,7 @@
 
 The ``timeout`` object provides a portable abstraction over calling a
 goal deterministically with a time limit as made available in some form
-by some of the supported backend Prolog systems (B-Prolog, ECLiPSe, LVM,
+by some of the supported backend Prolog systems (B-Prolog, ECLiPSe, XVM,
 SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP).
 
 For better performance, compile calls to this library meta-predicates

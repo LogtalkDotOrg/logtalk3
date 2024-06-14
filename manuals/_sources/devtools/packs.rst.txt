@@ -676,7 +676,7 @@ identifiers (atoms):
 -  ECLiPSe: ``eclipse``
 -  GNU Prolog: ``gnu``
 -  JIProlog: ``ji``
--  LVM: ``lvm``
+-  XVM: ``xvm``
 -  Quintus Prolog: ``quintus``
 -  SICStus Prolog: ``sicstus``
 -  SWI-Prolog: ``swi``

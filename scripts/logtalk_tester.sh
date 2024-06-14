@@ -309,7 +309,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
@@ -400,9 +400,9 @@ elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
 	logtalk_call="$logtalk $i_arg -n -g"
-elif [ "$p_arg" == "lvm" ] ; then
-	prolog='LVM'
-	logtalk=lvmlgt$extension
+elif [ "$p_arg" == "xvm" ] ; then
+	prolog='XVM'
+	logtalk=xvmlgt$extension
 	logtalk_call="$logtalk $i_arg -g"
 	case "$i_arg" in 
 		*"--standard-top-level"*) dot=".";;

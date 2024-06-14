@@ -45,5 +45,5 @@ all different variables to be bound to different objects, is essential
 in this example. Such an extension is also available in Prolog III.)".
 
 Note that the use of the `dif` library limits the backend Prolog systems
-that can be used to run this example to B-Prolog, ECLiPSe, LVM, SICStus
+that can be used to run this example to B-Prolog, ECLiPSe, XVM, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.

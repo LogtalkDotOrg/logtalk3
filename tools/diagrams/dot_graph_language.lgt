@@ -123,7 +123,7 @@
 	backend(eclipse, 'ECLiPSe').
 	backend(gnu,     'GNU Prolog').
 	backend(ji,      'JIProlog').
-	backend(lvm,     'LVM').
+	backend(xvm,     'XVM').
 	backend(quintus, 'Quintus Prolog').
 	backend(sicstus, 'SICStus Prolog').
 	backend(swi,     'SWI-Prolog').

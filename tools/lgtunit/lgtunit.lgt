@@ -1936,7 +1936,7 @@
 			;	Deterministic = false
 			).
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 		% avoid portability warnings
 		:- uses(user, [call_det/2]).
@@ -2027,7 +2027,7 @@
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b;
-			Dialect == cx; Dialect == tau; Dialect == lvm; Dialect == trealla
+			Dialect == cx; Dialect == tau; Dialect == xvm; Dialect == trealla
 		)
 	)).
 		epsilon(Epsilon) :-

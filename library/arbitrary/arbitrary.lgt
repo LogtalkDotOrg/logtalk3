@@ -54,7 +54,7 @@
 			'Default character sets' - 'The default character set when using a parameterizable type that takes a character set parameter depends on the type.',
 			'Default character sets' - 'Entity, predicate, and non-terminal identifier types plus compound and callable types default to an ``ascii_identifier`` functor. Character and character code types default to ``ascii_full``. Other types default to ``ascii_printable``.',
 			'Caveats' - 'The type argument (and any type parameterization) to the predicates is not type-checked (or checked for consistency) for performance reasons.',
-			'Unicode limitations' - 'Currently, correct character/code generation is only ensured for LVM and SWI-Prolog as other backends do not provide support for querying a Unicode code point category.'
+			'Unicode limitations' - 'Currently, correct character/code generation is only ensured for XVM and SWI-Prolog as other backends do not provide support for querying a Unicode code point category.'
 		],
 		see_also is [type]
 	]).
@@ -1160,7 +1160,7 @@
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
 		(	Dialect == swi; Dialect == yap; Dialect == gnu; Dialect == b;
-			Dialect == cx; Dialect == tau; Dialect == lvm; Dialect == trealla
+			Dialect == cx; Dialect == tau; Dialect == xvm; Dialect == trealla
 		)
 	)).
 		edge_case(float, Epsilon) :-
@@ -1396,7 +1396,7 @@
 		'_'
 	]).
 
-	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == lvm; Dialect == swi))).
+	:- if((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == xvm; Dialect == swi))).
 		:- if(current_logtalk_flag(prolog_dialect, swi)).
 			:- use_module(library(unicode), [unicode_property/2]).
 		:- endif.

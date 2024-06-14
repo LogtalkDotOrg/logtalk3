@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 To load this example and for sample queries, please see the `SCRIPT.txt`
-file. Running all the examples and the benchmarks requires LVM (with its
+file. Running all the examples and the benchmarks requires XVM (with its
 `jni` plug-in installed) or SWI-Prolog (with the JPL library installed).
 YAP most likely would be usable when the old JPL library bundled with it
 is updated. Some examples (but not the benchmarks) can also be used with

@@ -620,7 +620,7 @@ argument of the `version/6` predicate is a list of backend identifiers
 - ECLiPSe: `eclipse`
 - GNU Prolog: `gnu`
 - JIProlog: `ji`
-- LVM: `lvm`
+- XVM: `xvm`
 - Quintus Prolog: `quintus`
 - SICStus Prolog: `sicstus`
 - SWI-Prolog: `swi`

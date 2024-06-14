@@ -39,7 +39,7 @@
 		]
 	]).
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 		:- uses(user, [
 			jpl_get/3, jpl_set/3,
@@ -118,7 +118,7 @@
 		]
 	]).
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 		:- uses(user, [
 			jpl_true/1, jpl_false/1, jpl_void/1, jpl_null/1,

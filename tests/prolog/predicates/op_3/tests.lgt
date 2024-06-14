@@ -70,7 +70,7 @@ o(3).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap; Dialect == lvm)
+		(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap; Dialect == xvm)
 	)).
 		% these Prolog systems support the definition of an atom as both an infix and a postfix operator
 		test(iso_op_3_10, true) :-

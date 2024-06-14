@@ -32,7 +32,7 @@ system path):
 * ECLiPSe (6.1#143 or later):        `eclipselgt`
 * GNU Prolog (1.4.5 or later):       `gplgt`
 * JIProlog (4.1.7.1 or later):       `jiplgt`     (first run may require `sudo`)
-* LVM (6.3.0 or later):              `lvmlgt`
+* XVM (6.3.0 or later):              `xvmlgt`
 * Quintus Prolog (3.3 or later):     `quintuslgt`
 * SICStus Prolog (4.1.0 or later):   `sicstuslgt`
 * SWI-Prolog (6.6.0 or later):       `swilgt`

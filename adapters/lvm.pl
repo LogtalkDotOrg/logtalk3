@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Adapter file for LVM 6.3.0 and later versions
+%  Adapter file for XVM 6.3.0 and later versions
 %  Last updated on May 28, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
@@ -260,9 +260,9 @@
 %
 % backend Prolog compiler supported features (that are compatible with Logtalk)
 
-'$lgt_prolog_feature'(prolog_dialect, lvm).
+'$lgt_prolog_feature'(prolog_dialect, xvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
-	current_prolog_flag(version_data, lvm(Major, Minor, Patch, _)).
+	current_prolog_flag(version_data, xvm(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(6, 3, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
@@ -577,9 +577,9 @@
 '$lgt_prolog_term_expansion'((:- Directive), Expanded) :-
 	nonvar(Directive),
 	% allow first-argument indexing
-	catch('$lgt_lvm_directive_expansion'(Directive, Expanded), _, fail).
+	catch('$lgt_xvm_directive_expansion'(Directive, Expanded), _, fail).
 
-'$lgt_lvm_directive_expansion'(disk_predicate(Template,Mode,Database), [{:- disk_predicate(CTemplate,Mode,Database)}, (:- dynamic(Functor/Arity))]) :-
+'$lgt_xvm_directive_expansion'(disk_predicate(Template,Mode,Database), [{:- disk_predicate(CTemplate,Mode,Database)}, (:- dynamic(Functor/Arity))]) :-
 	logtalk_load_context(entity_type, _),
 	'$lgt_compile_predicate_heads'(Template, _, CTemplate, ignore),
 	functor(Template, Functor, Arity).
@@ -587,7 +587,7 @@
 
 % '$lgt_prolog_goal_expansion'(@callable, -callable)
 
-'$lgt_prolog_goal_expansion'(load_foreign_library(Path), '$lgt_lvm_load_foreign_library'(Path)).
+'$lgt_prolog_goal_expansion'(load_foreign_library(Path), '$lgt_xvm_load_foreign_library'(Path)).
 
 '$lgt_prolog_goal_expansion'(add_csv(Predicate,File,Options), {add_csv(CPredicate,File,Options)}) :-
 	logtalk_load_context(entity_type, object),
@@ -621,18 +621,18 @@
 
 '$lgt_prolog_goal_expansion'(
 		open_db(DB, DBFile),
-		{open_db(DB, DBFile), '$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix)}) :-
+		{open_db(DB, DBFile), '$lgt_xvm_add_disk_predicate_ddefs'(DB, Prefix)}) :-
 	logtalk_load_context(entity_type, object),
 	!,
 	logtalk_load_context(entity_prefix, Prefix).
 '$lgt_prolog_goal_expansion'(
 		open_db(DB, DBFile),
-		(this(This), {open_db(DB, DBFile), '$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _), '$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix)})
+		(this(This), {open_db(DB, DBFile), '$lgt_current_object_'(This, Prefix, _, _, _, _, _, _, _, _, _), '$lgt_xvm_add_disk_predicate_ddefs'(DB, Prefix)})
 	) :-
 	logtalk_load_context(entity_type, category).
 
 
-'$lgt_lvm_load_foreign_library'(Path) :-
+'$lgt_xvm_load_foreign_library'(Path) :-
 	% workaround embedding issue where a plug-in shared library may be already
 	% pre-loaded from a directory different from the original plug-in directory
 	(	decompose_file_name(Path, _, Basename, _),
@@ -644,16 +644,16 @@
 	).
 
 
-'$lgt_lvm_add_disk_predicate_ddefs'(DB, Prefix) :-
+'$lgt_xvm_add_disk_predicate_ddefs'(DB, Prefix) :-
 	database_property(DB, predicates(CPIs)),
 	atom_concat(Prefix, '_def', Def),
 	atom_concat(Prefix, '_ddef', DDef),
 	forall(
 		member(CPI, CPIs),
-		'$lgt_lvm_add_disk_predicate_ddef'(Def, DDef, CPI)
+		'$lgt_xvm_add_disk_predicate_ddef'(Def, DDef, CPI)
 	).
 
-'$lgt_lvm_add_disk_predicate_ddef'(Def, DDef, CFunctor/CArity) :-
+'$lgt_xvm_add_disk_predicate_ddef'(Def, DDef, CFunctor/CArity) :-
 	'$lgt_decompile_predicate_indicators'(CFunctor/CArity, _, _, Functor/Arity),
 	!,
 	functor(Template, Functor, Arity),
@@ -669,7 +669,7 @@
 			assertz(DDefFact)
 		)
 	).
-'$lgt_lvm_add_disk_predicate_ddef'(_, _, _).
+'$lgt_xvm_add_disk_predicate_ddef'(_, _, _).
 
 
 

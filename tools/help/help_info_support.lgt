@@ -26,7 +26,7 @@
 		version is 0:8:1,
 		author is 'Paulo Moura',
 		date is 2024-04-08,
-		comment is 'Experimental help predicates for inline browsing of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, GNU Prolog, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or YAP as the backend running on a POSIX system.'
+		comment is 'Experimental help predicates for inline browsing of the Texinfo versions of the Handbook and APIs documentation. Currently requires Ciao Prolog, ECLiPSe, GNU Prolog, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, or YAP as the backend running on a POSIX system.'
 	]).
 
 	:- public(handbook/0).
@@ -162,7 +162,7 @@
 			atomic_list_concat([Process| Arguments], ' ', Command),
 			{exec(Command, user_input, user_output, user_error)}.
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 		process_create(Process, Arguments) :-
 			{process_create(Process, Arguments, [stdout(std)])}.

@@ -31,7 +31,7 @@
 
 	cover(metered_concurrency).
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 		test(metered_concurrency_1, true) :-
 			metered_concurrency::run.

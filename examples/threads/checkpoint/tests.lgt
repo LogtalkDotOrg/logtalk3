@@ -31,7 +31,7 @@
 
 	cover(checkpoint).
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 		test(checkpoint_1, true) :-
 			checkpoint::run.

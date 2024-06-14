@@ -33,7 +33,7 @@
 	:- initialization(logtalk_load(help_info_support)).
 :- elif(current_logtalk_flag(prolog_dialect, gnu)).
 	:- initialization(logtalk_load(help_info_support)).
-:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 	:- initialization(logtalk_load(help_info_support)).
 :- elif(current_logtalk_flag(prolog_dialect, sicstus)).
 	:- use_module(library(process)).

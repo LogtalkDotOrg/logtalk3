@@ -89,7 +89,7 @@ following table summarizes the availability of these features:
 |  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |      yes      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |       no      |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |       no      |  
-|  LVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
+|  XVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |      yes      |  
@@ -251,16 +251,16 @@ documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
 
 
-LVM 6.3.0 and later versions
+XVM 6.3.0 and later versions
 ----------------------------
 
-	lvm.pl
+	xvm.pl
 
 Coinduction support requires setting the `unify_applies_occurs_check` to
 `true`. This can be accomplished e.g. by using the `--enable-occurs-check`
 command-line option:
 
-	$ lvmlgt --enable-occurs-check
+	$ xvmlgt --enable-occurs-check
 
 
 Quintus Prolog 3.3~3.5

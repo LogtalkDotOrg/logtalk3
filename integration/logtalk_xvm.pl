@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Integration file for LVM
+%  Integration file for XVM
 %  Last updated on October 2, 2020
 %
 %  This file is part of Logtalk <https://logtalk.org/>
@@ -23,6 +23,6 @@
 
 
 % load Logtalk core files
-:- ensure_loaded('$LOGTALKHOME/adapters/lvm.pl').
+:- ensure_loaded('$LOGTALKHOME/adapters/xvm.pl').
 :- ensure_loaded('$LOGTALKHOME/paths/paths.pl').
 :- ensure_loaded('$LOGTALKHOME/core/core.pl').

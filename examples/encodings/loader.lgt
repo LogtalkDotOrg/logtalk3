@@ -29,7 +29,7 @@
 	% neither CxProlog and SICStus Prolog provide up-to-date support for UTF-16
 	:- initialization(logtalk_load([asian, babel, latin, mythology])).
 
-:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 	% the mahjong.lgt source file requires up-to-date support for UTF-16
 	:- initialization(logtalk_load([mahjong, asian, babel, latin, mythology])).

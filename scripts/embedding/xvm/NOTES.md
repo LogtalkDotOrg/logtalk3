@@ -18,14 +18,14 @@ limitations under the License.
 ________________________________________________________________________
 
 
-This directory contains example scripts for creating LVM Prolog files
+This directory contains example scripts for creating XVM Prolog files
 from Logtalk core files and Logtalk source files.
 
 The following scripts are provided:
 
-- `lvm_logtalk_pl.sh`  
+- `xvm_logtalk_pl.sh`  
 	Bash shell script for POSIX systems
-- `lvm_logtalk_pl.ps1`  
+- `xvm_logtalk_pl.ps1`  
 	PowerShell script for Windows systems
 
 Both scripts create a `logtalk.pl` file with the Logtalk compiler and
@@ -38,7 +38,7 @@ of `*.pl` files.
 Usage
 -----
 
-Use `lvm_logtalk_pl.sh -h` or `lvm_logtalk_pl.ps1 -h` for a list and
+Use `xvm_logtalk_pl.sh -h` or `xvm_logtalk_pl.ps1 -h` for a list and
 description of the script options.
 
 See the script usage examples in the `../SCRIPT.txt` file.

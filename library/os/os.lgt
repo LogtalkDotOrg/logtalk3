@@ -1855,7 +1855,7 @@
 		sleep(Seconds) :-
 			{sleep(Seconds)}.
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 		pid(PID) :-
 			{pid(PID)}.
@@ -2210,7 +2210,7 @@
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		Dialect \== swi, Dialect \== quintus, Dialect \== trealla, Dialect \== lvm
+		Dialect \== swi, Dialect \== quintus, Dialect \== trealla, Dialect \== xvm
 	)).
 
 		make_directory_path_portable(Path) :-

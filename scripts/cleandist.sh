@@ -45,7 +45,7 @@ chmod a-x scripts/*.js
 chmod a+x scripts/embedding/eclipse/*.sh
 chmod a+x scripts/embedding/gprolog/*.sh
 chmod a+x scripts/embedding/jiprolog/*.sh
-chmod a+x scripts/embedding/lvm/*.sh
+chmod a+x scripts/embedding/xvm/*.sh
 chmod a+x scripts/embedding/sicstus/*.sh
 chmod a+x scripts/embedding/swipl/*.sh
 chmod a+x scripts/embedding/trealla/*.sh

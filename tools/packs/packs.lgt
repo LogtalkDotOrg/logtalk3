@@ -1687,7 +1687,7 @@
 	valid_backend(eclipse).
 	valid_backend(gnu).
 	valid_backend(ji).
-	valid_backend(lvm).
+	valid_backend(xvm).
 	valid_backend(quintus).
 	valid_backend(sicstus).
 	valid_backend(swi).
@@ -2293,7 +2293,7 @@
 	backend(eclipse, 'ECLiPSe').
 	backend(gnu,     'GNU Prolog').
 	backend(ji,      'JIProlog').
-	backend(lvm,     'LVM').
+	backend(xvm,     'XVM').
 	backend(quintus, 'Quintus Prolog').
 	backend(sicstus, 'SICStus Prolog').
 	backend(swi,     'SWI-Prolog').

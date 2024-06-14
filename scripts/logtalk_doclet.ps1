@@ -100,7 +100,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -156,9 +156,9 @@ Function Check-Parameters() {
 		$script:prolog='JIProlog'
 		$script:logtalk="jiplgt"
 		$script:logtalk_option="-n -g"
-	} elseif ($p -eq "lvm") {
-		$script:prolog='LVM'
-		$script:logtalk="lvmlgt"
+	} elseif ($p -eq "xvm") {
+		$script:prolog='XVM'
+		$script:logtalk="xvmlgt"
 		$script:logtalk_option="-g"
 		$script:dot="."
 	} elseif ($p -eq "sicstus") {

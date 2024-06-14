@@ -113,7 +113,7 @@ usage_help()
 	echo
 	echo "Required arguments:"
 	echo "  -p backend Prolog compiler"
-	echo "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (possible values are b, ciao, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo
 	echo "Optional arguments:"
 	echo "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
@@ -172,9 +172,9 @@ elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk=jiplgt$extension
 	logtalk_call="$logtalk -n -g"
-elif [ "$p_arg" == "lvm" ] ; then
-	prolog='LVM'
-	logtalk=lvmlgt$extension
+elif [ "$p_arg" == "xvm" ] ; then
+	prolog='XVM'
+	logtalk=xvmlgt$extension
 	logtalk_call="$logtalk -g"
 	dot="."
 elif [ "$p_arg" == "sicstus" ] ; then
