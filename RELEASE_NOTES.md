@@ -85,6 +85,9 @@ points.
 
 * UPDATED: VSCode support to add failed tests to the "Problems" pane.
 
+* UPDATED: VSCode support to ensure the `debugger` tool is loaded when
+calling the "Make - Debug" command.
+
 * FIXED: VSCode support to workaround SICStus Prolog and SWI-Prolog
 down-casing file paths on Windows and breaking handling of breakpoints.
 

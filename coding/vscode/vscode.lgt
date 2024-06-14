@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:58:0,
+		version is 0:59:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-06-12,
+		date is 2024-06-14,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -320,7 +320,11 @@
 		atom_concat(Directory, '/.vscode_make_done', Marker),
 		logtalk_make(Target),
 		open(Marker, append, Stream),
-		close(Stream).
+		close(Stream),
+		(	Target == debug ->
+			ensure_debbugger
+		;	true
+		).
 
 	% tests
 
