@@ -248,8 +248,8 @@ predicate. The condition can be a clause head successful unification count
 expression or a lambda expression (``[Count, N, Goal]>>Condition`` or
 ``[Goal]>>Condition``  where ``Count`` is the unification count, ``N`` is the
 goal invocation number, and ``Goal`` is the goal that unified with the clause
-head; ``Condition`` is called in the context of the ``user`` pseudo-object).
-For example:
+head; ``Condition`` is called in the context of the ``user`` pseudo-object and
+must not have any side effects). For example:
 
 .. code-block:: text
 

@@ -380,8 +380,8 @@ predicate. The condition can be a clause head successful unification count
 expression or a lambda expression (<code class="docutils literal notranslate"><span class="pre">[Count,</span> <span class="pre">N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> or
 <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code>  where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
 goal invocation number, and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause
-head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object).
-For example:</p>
+head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object and
+must not have any side effects). For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 76, [weight(m1,_)]&gt;&gt;true).
 
 Conditional line number spy point added.

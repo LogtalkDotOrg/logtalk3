@@ -54,6 +54,8 @@ printing the default port message, the default port message followed by
 a comment, and replacing the default port message with a text with term
 placeholders that are expanded at runtime.
 
+* IMPROVED: The `debugger` tool performance when checking for leashed ports.
+
 * UPDATED: Documentation on developer tools requirements.
 
 * UPDATED: The `lgtunit` tool to print a new line after reporting a failed

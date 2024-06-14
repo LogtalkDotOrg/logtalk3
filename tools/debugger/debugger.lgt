@@ -23,7 +23,7 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:7:0,
+		version is 7:8:0,
 		author is 'Paulo Moura',
 		date is 2024-06-14,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
@@ -497,6 +497,23 @@
 	leashing(Port) :-
 		leashing_(Port).
 
+	% simplified version of the leashing_port/6 predicate just for checking
+	% for a leashed port before entering the port interaction loop
+	leashing_port(Port, PortUserName, N, Goal, ExCtx) :-
+		leashing_(PortUserName),
+		(	conditional_port(Port, N, Goal, _) ->
+			true
+		;	spying_port_code(Port, Goal, ExCtx, _) ->
+			true
+		;	tracing_ ->
+			true
+		;	jump_to_invocation_number_(N) ->
+			true
+		;	zap_to_port_(PortUserName) ->
+			true
+		;	fail
+		).
+
 	leashing_port(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),
 		(	conditional_port(Port, N, Goal, Code) ->
@@ -848,7 +865,7 @@
 		port_user_name(Port, PortUserName),
 		(	logging_port(Port, N, Goal, ExCtx) ->
 			Action = true
-		;	leashing_port(Port, PortUserName, N, Goal, ExCtx, _),
+		;	leashing_port(Port, PortUserName, N, Goal, ExCtx),
 			\+ skipping_unleashed_(_) ->
 			repeat,
 				% the do_port_option/7 call can fail but still change the value of Code
