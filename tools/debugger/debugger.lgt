@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:6:0,
+		version is 7:7:0,
 		author is 'Paulo Moura',
-		date is 2024-06-13,
+		date is 2024-06-14,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -614,6 +614,8 @@
 	logging_message_argument(['C','L','A','U','S','E','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, Clause, _, _, _, _, _, '~d'-[Clause]).
 	logging_message_argument(['F','I','L','E'| MessageChars], MessageChars, _, _, _, File, _, _, _, _, '~q'-[File]).
 	logging_message_argument(['L','I','N','E'| MessageChars], MessageChars, _, _, _, _, Line, _, _, _, '~d'-[Line]).
+	logging_message_argument(['U','N','I','F','I','C','A','T','I','O','N','_','C','O','U','N','T'| MessageChars], MessageChars, _, _, _, File, Line, _, _, _, '~d'-[Count]) :-
+		file_line_hit_count_(File, Line, Count).
 	logging_message_argument(['I','N','V','O','C','A','T','I','O','N','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, _, _, _, N, _, _, '~d'-[N]).
 	logging_message_argument(['G','O','A','L'| MessageChars], MessageChars, _, _, _, _, _, _, Goal, _, Token) :-
 		logging_message_argument_token(Goal, Token).

@@ -367,7 +367,7 @@ empty atom, the default port output message is printed. When the log message
 starts with a ``%`` character, the default port output message is printed
 followed by the log message. In these two cases, the debugger prints a ``@``
 character at the beginning of the line for easy recognition of log points
-output. When the log message is neither empty or start with a ``%`` character,
+output. When the log message is neither empty or starts with a ``%`` character,
 the log message is printed instead of the default port output message. In this
 case, the message can contain ``$KEYWORD`` placeholders that are expanded at
 runtime. The valid keywords are:
@@ -377,6 +377,7 @@ runtime. The valid keywords are:
 - ``CLAUSE_NUMBER``
 - ``FILE``
 - ``LINE``
+- ``UNIFICATION_COUNT``
 - ``INVOCATION_NUMBER``
 - ``GOAL``
 - ``PREDICATE``
