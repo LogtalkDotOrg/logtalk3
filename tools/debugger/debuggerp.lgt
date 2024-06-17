@@ -24,7 +24,7 @@
 	:- info([
 		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2024-06-12,
+		date is 2024-06-17,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
@@ -104,7 +104,7 @@
 	:- public((spy)/3).
 	:- mode(spy(+atom, +integer, @callable), one).
 	:- info((spy)/3, [
-		comment is 'Sets a conditional line number spy point. The condition can be the minimum number of invocations or a lambda expression (``[N,Goal]>>Condition`` or ``[Goal]>>Condition`` where ``N`` is the invocation number and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``).',
+		comment is 'Sets a conditional line number spy point. The condition can be a unification count expression or a lambda expression (``[Count,N,Goal]>>Condition`` or ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``).',
 		argnames is ['Entity', 'Line', 'Condition']
 	]).
 
