@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:8:0,
+		version is 7:8:1,
 		author is 'Paulo Moura',
-		date is 2024-06-14,
+		date is 2024-06-17,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -683,12 +683,15 @@
 		conditional_port_check(Condition, File, Line, N, Goal).
 
 	:- meta_predicate(conditional_port_check(*, *, *, *, *)).
-	conditional_port_check([Count,N,Goal]>>Condition, File, Line, N, Goal) :-
+	conditional_port_check([Count,N0,Goal0]>>Condition, File, Line, N, Goal) :-
 		!,
+		N = N0,
+		Goal = Goal0,
 		file_line_hit_count_(File, Line, Count),
 		catch({Condition}, _, fail).
-	conditional_port_check([Goal]>>Condition, _, _, _, Goal) :-
+	conditional_port_check([Goal0]>>Condition, _, _, _, Goal) :-
 		!,
+		Goal = Goal0,
 		catch({Condition}, _, fail).
 	conditional_port_check(>(HitCount), File, Line, _, _) :-
 		!,
