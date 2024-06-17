@@ -389,8 +389,6 @@ runtime. The valid keywords are:
 - ``COINDUCTION_STACK``
 - ``THREAD``
 
-In all cases, the log messages must always be valid atoms when quoted.
-
 Log points are defined using the ``log/3`` predicate. For example:
 
 .. code-block:: text
