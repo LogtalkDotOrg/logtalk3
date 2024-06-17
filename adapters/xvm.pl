@@ -262,7 +262,7 @@
 
 '$lgt_prolog_feature'(prolog_dialect, xvm).
 '$lgt_prolog_feature'(prolog_version, v(Major, Minor, Patch)) :-
-	current_prolog_flag(version_data, xvm(Major, Minor, Patch, _)).
+	current_prolog_flag(version_data, xvmpl(Major, Minor, Patch, _)).
 '$lgt_prolog_feature'(prolog_compatible_version, '@>='(v(6, 3, 0))).
 
 '$lgt_prolog_feature'(encoding_directive, source).
