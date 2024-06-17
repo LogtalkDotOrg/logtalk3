@@ -248,8 +248,8 @@ predicate. The condition can be a clause head successful unification count
 expression or a lambda expression (``[Count, N, Goal]>>Condition`` or
 ``[Goal]>>Condition``  where ``Count`` is the unification count, ``N`` is the
 goal invocation number, and ``Goal`` is the goal that unified with the clause
-head; ``Condition`` is called in the context of the ``user`` pseudo-object).
-For example:
+head; ``Condition`` is called in the context of the ``user`` pseudo-object and
+must not have any side effects). For example:
 
 .. code-block:: text
 
@@ -367,7 +367,7 @@ empty atom, the default port output message is printed. When the log message
 starts with a ``%`` character, the default port output message is printed
 followed by the log message. In these two cases, the debugger prints a ``@``
 character at the beginning of the line for easy recognition of log points
-output. When the log message is neither empty or start with a ``%`` character,
+output. When the log message is neither empty or starts with a ``%`` character,
 the log message is printed instead of the default port output message. In this
 case, the message can contain ``$KEYWORD`` placeholders that are expanded at
 runtime. The valid keywords are:
@@ -377,6 +377,7 @@ runtime. The valid keywords are:
 - ``CLAUSE_NUMBER``
 - ``FILE``
 - ``LINE``
+- ``UNIFICATION_COUNT``
 - ``INVOCATION_NUMBER``
 - ``GOAL``
 - ``PREDICATE``
@@ -387,8 +388,6 @@ runtime. The valid keywords are:
 - ``METACALL_CONTEXT``
 - ``COINDUCTION_STACK``
 - ``THREAD``
-
-In all cases, the log messages must always be valid atoms when quoted.
 
 Log points are defined using the ``log/3`` predicate. For example:
 

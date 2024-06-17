@@ -380,8 +380,8 @@ predicate. The condition can be a clause head successful unification count
 expression or a lambda expression (<code class="docutils literal notranslate"><span class="pre">[Count,</span> <span class="pre">N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> or
 <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code>  where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
 goal invocation number, and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause
-head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object).
-For example:</p>
+head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object and
+must not have any side effects). For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 76, [weight(m1,_)]&gt;&gt;true).
 
 Conditional line number spy point added.
@@ -482,7 +482,7 @@ empty atom, the default port output message is printed. When the log message
 starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the default port output message is printed
 followed by the log message. In these two cases, the debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>
 character at the beginning of the line for easy recognition of log points
-output. When the log message is neither empty or start with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character,
+output. When the log message is neither empty or starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character,
 the log message is printed instead of the default port output message. In this
 case, the message can contain <code class="docutils literal notranslate"><span class="pre">$KEYWORD</span></code> placeholders that are expanded at
 runtime. The valid keywords are:</p>
@@ -492,6 +492,7 @@ runtime. The valid keywords are:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">CLAUSE_NUMBER</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FILE</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">LINE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UNIFICATION_COUNT</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">INVOCATION_NUMBER</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">GOAL</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">PREDICATE</span></code></p></li>
@@ -503,7 +504,6 @@ runtime. The valid keywords are:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">COINDUCTION_STACK</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">THREAD</span></code></p></li>
 </ul>
-<p>In all cases, the log messages must always be valid atoms when quoted.</p>
 <p>Log points are defined using the <code class="docutils literal notranslate"><span class="pre">log/3</span></code> predicate. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::log(agent, 99, &#39;% At the secret headquarters!&#39;).
      Log point added.

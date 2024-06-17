@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:6:0,
+		version is 7:8:1,
 		author is 'Paulo Moura',
-		date is 2024-06-13,
+		date is 2024-06-17,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -497,6 +497,23 @@
 	leashing(Port) :-
 		leashing_(Port).
 
+	% simplified version of the leashing_port/6 predicate just for checking
+	% for a leashed port before entering the port interaction loop
+	leashing_port(Port, PortUserName, N, Goal, ExCtx) :-
+		leashing_(PortUserName),
+		(	conditional_port(Port, N, Goal, _) ->
+			true
+		;	spying_port_code(Port, Goal, ExCtx, _) ->
+			true
+		;	tracing_ ->
+			true
+		;	jump_to_invocation_number_(N) ->
+			true
+		;	zap_to_port_(PortUserName) ->
+			true
+		;	fail
+		).
+
 	leashing_port(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),
 		(	conditional_port(Port, N, Goal, Code) ->
@@ -614,6 +631,8 @@
 	logging_message_argument(['C','L','A','U','S','E','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, Clause, _, _, _, _, _, '~d'-[Clause]).
 	logging_message_argument(['F','I','L','E'| MessageChars], MessageChars, _, _, _, File, _, _, _, _, '~q'-[File]).
 	logging_message_argument(['L','I','N','E'| MessageChars], MessageChars, _, _, _, _, Line, _, _, _, '~d'-[Line]).
+	logging_message_argument(['U','N','I','F','I','C','A','T','I','O','N','_','C','O','U','N','T'| MessageChars], MessageChars, _, _, _, File, Line, _, _, _, '~d'-[Count]) :-
+		file_line_hit_count_(File, Line, Count).
 	logging_message_argument(['I','N','V','O','C','A','T','I','O','N','_','N','U','M','B','E','R'| MessageChars], MessageChars, _, _, _, _, _, N, _, _, '~d'-[N]).
 	logging_message_argument(['G','O','A','L'| MessageChars], MessageChars, _, _, _, _, _, _, Goal, _, Token) :-
 		logging_message_argument_token(Goal, Token).
@@ -664,12 +683,15 @@
 		conditional_port_check(Condition, File, Line, N, Goal).
 
 	:- meta_predicate(conditional_port_check(*, *, *, *, *)).
-	conditional_port_check([Count,N,Goal]>>Condition, File, Line, N, Goal) :-
+	conditional_port_check([Count,N0,Goal0]>>Condition, File, Line, N, Goal) :-
 		!,
+		N = N0,
+		Goal = Goal0,
 		file_line_hit_count_(File, Line, Count),
 		catch({Condition}, _, fail).
-	conditional_port_check([Goal]>>Condition, _, _, _, Goal) :-
+	conditional_port_check([Goal0]>>Condition, _, _, _, Goal) :-
 		!,
+		Goal = Goal0,
 		catch({Condition}, _, fail).
 	conditional_port_check(>(HitCount), File, Line, _, _) :-
 		!,
@@ -846,7 +868,7 @@
 		port_user_name(Port, PortUserName),
 		(	logging_port(Port, N, Goal, ExCtx) ->
 			Action = true
-		;	leashing_port(Port, PortUserName, N, Goal, ExCtx, _),
+		;	leashing_port(Port, PortUserName, N, Goal, ExCtx),
 			\+ skipping_unleashed_(_) ->
 			repeat,
 				% the do_port_option/7 call can fail but still change the value of Code

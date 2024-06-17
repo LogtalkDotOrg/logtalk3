@@ -15,7 +15,7 @@ Debugger protocol.
 
 | **Author:** Paulo Moura
 | **Version:** 3:2:0
-| **Date:** 2024-06-12
+| **Date:** 2024-06-17
 
 | **Compilation flags:**
 |    ``static``
@@ -217,7 +217,7 @@ Enumerates, by backtracking, all defined line number, predicate, and non-termina
 ``spy/3``
 ^^^^^^^^^
 
-Sets a conditional line number spy point. The condition can be the minimum number of invocations or a lambda expression (``[N,Goal]>>Condition`` or ``[Goal]>>Condition`` where ``N`` is the invocation number and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``).
+Sets a conditional line number spy point. The condition can be a unification count expression or a lambda expression (``[Count,N,Goal]>>Condition`` or ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``).
 
 | **Compilation flags:**
 |    ``static``

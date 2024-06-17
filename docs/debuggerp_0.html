@@ -208,7 +208,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 3:2:0</div>
-<div class="line"><strong>Date:</strong> 2024-06-12</div>
+<div class="line"><strong>Date:</strong> 2024-06-17</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -458,7 +458,7 @@
 </section>
 <section id="spy-3">
 <span id="debuggerp-0-spy-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spy/3</span></code></a><a class="headerlink" href="#spy-3" title="Link to this heading"></a></h3>
-<p>Sets a conditional line number spy point. The condition can be the minimum number of invocations or a lambda expression (<code class="docutils literal notranslate"><span class="pre">[N,Goal]&gt;&gt;Condition</span></code> or <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code> where <code class="docutils literal notranslate"><span class="pre">N</span></code> is the invocation number and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of <code class="docutils literal notranslate"><span class="pre">user</span></code>).</p>
+<p>Sets a conditional line number spy point. The condition can be a unification count expression or a lambda expression (<code class="docutils literal notranslate"><span class="pre">[Count,N,Goal]&gt;&gt;Condition</span></code> or <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code> where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the invocation number, and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of <code class="docutils literal notranslate"><span class="pre">user</span></code>).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
