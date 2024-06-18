@@ -229,7 +229,7 @@
 	test(debugger_spy_1_01, deterministic) :-
 		spy(logtalk-13).
 
-	% setting a unconditional breakpoint already set must still succeed deterministically
+	% setting an unconditional breakpoint already set must still succeed deterministically
 	test(debugger_spy_1_02, deterministic) :-
 		reset,
 		spy(logtalk-13),

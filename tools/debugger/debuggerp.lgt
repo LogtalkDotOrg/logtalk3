@@ -30,9 +30,9 @@
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
 			'Predicate spy point' - 'Specified as a ground term ``Functor/Arity``.',
 			'Non-terminal spy point' - 'Specified as a ground term ``Functor//Arity``.',
-			'Line number spy point (aka breakpoint)' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
+			'Breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
 			'Context spy point' - 'Specified as a ``(Sender, This, Self, Goal)`` tuple.',
-			'Log point' - 'Specified as a ``(Entity, Line, Message)`` tuple.',
+			'Log point' - 'Specified as an ``(Entity, Line, Message)`` tuple.',
 			'Leash port shorthands' - '``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.'
 		],
 		see_also is [debugger]
@@ -44,7 +44,7 @@
 	:- public(reset/0).
 	:- mode(reset, one).
 	:- info(reset/0, [
-		comment is 'Resets all debugging settings (including log points, spy points, and leashed ports) and turns off debugging.',
+		comment is 'Resets all debugging settings (including breakpoints, log points, spy points, and leashed ports) and turns off debugging.',
 		see_also is [nospyall/0]
 	]).
 
@@ -86,11 +86,26 @@
 		comment is 'Stops tracing of calls compiled in debug mode. Debugger will still stop at defined spy points.'
 	]).
 
+	:- public(leash/1).
+	:- mode(leash(+atom), one).
+	:- mode(leash(+list(atom)), one).
+	:- info(leash/1, [
+		comment is 'Sets the debugger leash ports using an abbreviation (``none``, ``loose``, ``half``, ``tight``, or ``full``) or a list of ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).',
+		argnames is ['Ports']
+	]).
+
+	:- public(leashing/1).
+	:- mode(leashing(?atom), zero_or_more).
+	:- info(leashing/1, [
+		comment is 'Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).',
+		argnames is ['Port']
+	]).
+
 	:- public((spy)/1).
 	:- mode(spy(@spy_point), zero_or_one).
 	:- mode(spy(@list(spy_point)), zero_or_one).
 	:- info((spy)/1, [
-		comment is 'Sets a unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
+		comment is 'Sets an unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
 		argnames is ['SpyPoint']
 	]).
 
@@ -98,6 +113,15 @@
 	:- mode(spying(?spy_point), zero_or_more).
 	:- info(spying/1, [
 		comment is 'Enumerates, by backtracking, all defined unconditional breakpoints, predicate spy points, and non-terminal spy points.',
+		argnames is ['SpyPoint']
+	]).
+
+	:- public((nospy)/1).
+	:- mode(nospy(@var), one).
+	:- mode(nospy(@spy_point), one).
+	:- mode(nospy(@list(spy_point)), one).
+	:- info((nospy)/1, [
+		comment is 'Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.',
 		argnames is ['SpyPoint']
 	]).
 
@@ -120,6 +144,13 @@
 		argnames is ['Entity', 'Line', 'Condition']
 	]).
 
+	:- public((nospy)/3).
+	:- mode(nospy(@term, @term, @term), one).
+	:- info((nospy)/3, [
+		comment is 'Removes all matching conditional and triggered breakpoints.',
+		argnames is ['Entity', 'Line', 'Condition']
+	]).
+
 	:- public((spy)/4).
 	:- mode(spy(@term, @term, @term, @term), one).
 	:- info((spy)/4, [
@@ -134,22 +165,6 @@
 		argnames is ['Sender', 'This', 'Self', 'Goal']
 	]).
 
-	:- public((nospy)/1).
-	:- mode(nospy(@var), one).
-	:- mode(nospy(@spy_point), one).
-	:- mode(nospy(@list(spy_point)), one).
-	:- info((nospy)/1, [
-		comment is 'Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.',
-		argnames is ['SpyPoint']
-	]).
-
-	:- public((nospy)/3).
-	:- mode(nospy(@term, @term, @term), one).
-	:- info((nospy)/3, [
-		comment is 'Removes all matching conditional and triggered breakpoints.',
-		argnames is ['Entity', 'Line', 'Condition']
-	]).
-
 	:- public((nospy)/4).
 	:- mode(nospy(@term, @term, @term, @term), one).
 	:- info((nospy)/4, [
@@ -160,23 +175,8 @@
 	:- public(nospyall/0).
 	:- mode(nospyall, one).
 	:- info(nospyall/0, [
-		comment is 'Removes all breakpoints, predicate spy points, non-terminal spy points, and context spy points.',
+		comment is 'Removes all breakpoints, log points, and spy points.',
 		see_also is [reset/0]
-	]).
-
-	:- public(leash/1).
-	:- mode(leash(+atom), one).
-	:- mode(leash(+list(atom)), one).
-	:- info(leash/1, [
-		comment is 'Sets the debugger leash ports using an abbreviation (``none``, ``loose``, ``half``, ``tight``, or ``full``) or a list of ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).',
-		argnames is ['Ports']
-	]).
-
-	:- public(leashing/1).
-	:- mode(leashing(?atom), zero_or_more).
-	:- info(leashing/1, [
-		comment is 'Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).',
-		argnames is ['Port']
 	]).
 
 	:- public(log/3).

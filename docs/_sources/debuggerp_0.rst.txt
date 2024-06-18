@@ -30,9 +30,9 @@ Debugger protocol.
    - Debugger help: Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.
    - Predicate spy point: Specified as a ground term ``Functor/Arity``.
    - Non-terminal spy point: Specified as a ground term ``Functor//Arity``.
-   - Line number spy point (aka breakpoint): Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.
+   - Breakpoint: Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.
    - Context spy point: Specified as a ``(Sender, This, Self, Goal)`` tuple.
-   - Log point: Specified as a ``(Entity, Line, Message)`` tuple.
+   - Log point: Specified as an ``(Entity, Line, Message)`` tuple.
    - Leash port shorthands: ``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.
 
 | **Inherited public predicates:**
@@ -51,7 +51,7 @@ Public predicates
 ``reset/0``
 ^^^^^^^^^^^
 
-Resets all debugging settings (including log points, spy points, and leashed ports) and turns off debugging.
+Resets all debugging settings (including breakpoints, log points, spy points, and leashed ports) and turns off debugging.
 
 | **Compilation flags:**
 |    ``static``
@@ -172,13 +172,52 @@ Stops tracing of calls compiled in debug mode. Debugger will still stop at defin
 
 ------------
 
+.. index:: leash/1
+.. _debuggerp/0::leash/1:
+
+``leash/1``
+^^^^^^^^^^^
+
+Sets the debugger leash ports using an abbreviation (``none``, ``loose``, ``half``, ``tight``, or ``full``) or a list of ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leash(Ports)``
+| **Mode and number of proofs:**
+|    ``leash(+atom)`` - ``one``
+|    ``leash(+list(atom))`` - ``one``
+
+
+------------
+
+.. index:: leashing/1
+.. _debuggerp/0::leashing/1:
+
+``leashing/1``
+^^^^^^^^^^^^^^
+
+Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``leashing(Port)``
+| **Mode and number of proofs:**
+|    ``leashing(?atom)`` - ``zero_or_more``
+
+
+------------
+
 .. index:: spy/1
 .. _debuggerp/0::spy/1:
 
 ``spy/1``
 ^^^^^^^^^
 
-Sets a unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
+Sets an unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -207,6 +246,27 @@ Enumerates, by backtracking, all defined unconditional breakpoints, predicate sp
 |    ``spying(SpyPoint)``
 | **Mode and number of proofs:**
 |    ``spying(?spy_point)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: nospy/1
+.. _debuggerp/0::nospy/1:
+
+``nospy/1``
+^^^^^^^^^^^
+
+Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nospy(SpyPoint)``
+| **Mode and number of proofs:**
+|    ``nospy(@var)`` - ``one``
+|    ``nospy(@spy_point)`` - ``one``
+|    ``nospy(@list(spy_point))`` - ``one``
 
 
 ------------
@@ -255,6 +315,25 @@ Enumerates, by backtracking, all conditional and triggered breakpoints.
 
 ------------
 
+.. index:: nospy/3
+.. _debuggerp/0::nospy/3:
+
+``nospy/3``
+^^^^^^^^^^^
+
+Removes all matching conditional and triggered breakpoints.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nospy(Entity,Line,Condition)``
+| **Mode and number of proofs:**
+|    ``nospy(@term,@term,@term)`` - ``one``
+
+
+------------
+
 .. index:: spy/4
 .. _debuggerp/0::spy/4:
 
@@ -293,46 +372,6 @@ Enumerates, by backtracking, all defined context spy points.
 
 ------------
 
-.. index:: nospy/1
-.. _debuggerp/0::nospy/1:
-
-``nospy/1``
-^^^^^^^^^^^
-
-Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``nospy(SpyPoint)``
-| **Mode and number of proofs:**
-|    ``nospy(@var)`` - ``one``
-|    ``nospy(@spy_point)`` - ``one``
-|    ``nospy(@list(spy_point))`` - ``one``
-
-
-------------
-
-.. index:: nospy/3
-.. _debuggerp/0::nospy/3:
-
-``nospy/3``
-^^^^^^^^^^^
-
-Removes all matching conditional and triggered breakpoints.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``nospy(Entity,Line,Condition)``
-| **Mode and number of proofs:**
-|    ``nospy(@term,@term,@term)`` - ``one``
-
-
-------------
-
 .. index:: nospy/4
 .. _debuggerp/0::nospy/4:
 
@@ -358,7 +397,7 @@ Removes all matching context spy points.
 ``nospyall/0``
 ^^^^^^^^^^^^^^
 
-Removes all breakpoints, predicate spy points, non-terminal spy points, and context spy points.
+Removes all breakpoints, log points, and spy points.
 
 | **Compilation flags:**
 |    ``static``
@@ -368,45 +407,6 @@ Removes all breakpoints, predicate spy points, non-terminal spy points, and cont
 
 | **See also:**
 |    :ref:`debuggerp/0::reset/0`
-
-
-------------
-
-.. index:: leash/1
-.. _debuggerp/0::leash/1:
-
-``leash/1``
-^^^^^^^^^^^
-
-Sets the debugger leash ports using an abbreviation (``none``, ``loose``, ``half``, ``tight``, or ``full``) or a list of ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``leash(Ports)``
-| **Mode and number of proofs:**
-|    ``leash(+atom)`` - ``one``
-|    ``leash(+list(atom))`` - ``one``
-
-
-------------
-
-.. index:: leashing/1
-.. _debuggerp/0::leashing/1:
-
-``leashing/1``
-^^^^^^^^^^^^^^
-
-Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule``, ``call``, ``exit``, ``redo``, ``fail``, and ``exception``).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``leashing(Port)``
-| **Mode and number of proofs:**
-|    ``leashing(?atom)`` - ``zero_or_more``
 
 
 ------------
