@@ -178,7 +178,7 @@ Stops tracing of calls compiled in debug mode. Debugger will still stop at defin
 ``spy/1``
 ^^^^^^^^^
 
-Sets a line number spy point (removing any existing log point or conditional breakpoint defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
+Sets a unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -198,7 +198,7 @@ Sets a line number spy point (removing any existing log point or conditional bre
 ``spying/1``
 ^^^^^^^^^^^^
 
-Enumerates, by backtracking, all defined line number, predicate, and non-terminal spy points.
+Enumerates, by backtracking, all defined unconditional breakpoints, predicate spy points, and non-terminal spy points.
 
 | **Compilation flags:**
 |    ``static``
@@ -217,7 +217,7 @@ Enumerates, by backtracking, all defined line number, predicate, and non-termina
 ``spy/3``
 ^^^^^^^^^
 
-Sets a conditional or a triggered line number spy point (removing any existing log point or spy point defined for the same location). The condition can be a unification count expression, a lambda expression, or another line number spy point. Fails if the spy point is invalid.
+Sets a conditional or triggered breakpoint (removing any existing log point or breakpoints defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -231,7 +231,7 @@ Sets a conditional or a triggered line number spy point (removing any existing l
 
     - Unification count expression conditions: ``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.
     - Lambda expression conditions: ``[Count,N,Goal]>>Condition`` and ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``.
-    - Line number spy point conditions: ``Entity-Line``.
+    - Triggered breakpoint conditions: ``Entity-Line``.
 
 
 ------------
@@ -242,7 +242,7 @@ Sets a conditional or a triggered line number spy point (removing any existing l
 ``spying/3``
 ^^^^^^^^^^^^
 
-Enumerates, by backtracking, all conditional line number spy points.
+Enumerates, by backtracking, all conditional and triggered breakpoints.
 
 | **Compilation flags:**
 |    ``static``
@@ -299,7 +299,7 @@ Enumerates, by backtracking, all defined context spy points.
 ``nospy/1``
 ^^^^^^^^^^^
 
-Removes all matching line number, predicate, and non-terminal spy points.
+Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.
 
 | **Compilation flags:**
 |    ``static``
@@ -320,7 +320,7 @@ Removes all matching line number, predicate, and non-terminal spy points.
 ``nospy/3``
 ^^^^^^^^^^^
 
-Removes all matching conditional line number spy points.
+Removes all matching conditional and triggered breakpoints.
 
 | **Compilation flags:**
 |    ``static``
@@ -358,7 +358,7 @@ Removes all matching context spy points.
 ``nospyall/0``
 ^^^^^^^^^^^^^^
 
-Removes all line number, predicate, non-terminal, and context spy points.
+Removes all breakpoints, predicate spy points, non-terminal spy points, and context spy points.
 
 | **Compilation flags:**
 |    ``static``
@@ -417,7 +417,7 @@ Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule
 ``log/3``
 ^^^^^^^^^
 
-Sets a log point (removing any existing line number spy point defined for the same location). Fails if the log point is invalid.
+Sets a log point (removing any existing breakpoint defined for the same location). Fails if the log point is invalid.
 
 | **Compilation flags:**
 |    ``static``

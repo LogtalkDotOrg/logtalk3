@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:6:1,
+		version is 3:7:0,
 		author is 'Paulo Moura',
-		date is 2024-06-17,
+		date is 2024-06-18,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -177,20 +177,35 @@
 	message_tokens(no_log_points_defined) -->
 		['     No log points are defined.'-[], nl].
 
-	% conditional line number spy points
+	% conditional breakpoints
 
-	message_tokens(conditional_spy_point_added) -->
-		['     Conditional line number spy point added.'-[], nl].
+	message_tokens(conditional_breakpoint_added) -->
+		['     Conditional breakpoint added.'-[], nl].
 
-	message_tokens(matching_conditional_spy_points_removed) -->
-		['     All matching conditional line number spy points removed.'-[], nl].
+	message_tokens(matching_conditional_breakpoints_removed) -->
+		['     All matching conditional breakpoints removed.'-[], nl].
 
-	message_tokens(conditional_line_number_spy_points(ConditionalPoints)) -->
-		['     Defined conditional line number spy points: Entity-Line (Condition):'-[], nl],
-		conditional_points(ConditionalPoints).
+	message_tokens(conditional_breakpoints(Breakpoints)) -->
+		['     Defined conditional breakpoints: Entity-Line (Condition):'-[], nl],
+		conditional_points(Breakpoints).
 
-	message_tokens(no_conditional_line_number_spy_points_defined) -->
-		['     No conditional line number spy points are defined.'-[], nl].
+	message_tokens(no_conditional_breakpoints_defined) -->
+		['     No conditional breakpoints are defined.'-[], nl].
+
+	% triggered breakpoints
+
+	message_tokens(triggered_breakpoint_added) -->
+		['     Triggered breakpoint added.'-[], nl].
+
+	message_tokens(matching_triggered_breakpoints_removed) -->
+		['     All matching triggered breakpoints removed.'-[], nl].
+
+	message_tokens(triggered_breakpoints(Breakpoints)) -->
+		['     Defined triggered breakpoints: Entity-Line (TriggerEntity-TriggerLine):'-[], nl],
+		conditional_points(Breakpoints).
+
+	message_tokens(no_triggered_breakpoints_defined) -->
+		['     No triggered breakpoints are defined.'-[], nl].
 
 	% spy points
 
@@ -198,7 +213,7 @@
 		['     All specified spy points added.'-[], nl].
 
 	message_tokens(matching_spy_points_removed) -->
-		['     All matching line number, predicate, and non-terminal spy points removed.'-[], nl].
+		['     All matching unconditional breakpoints, predicate spy points, and non-terminal spy points removed.'-[], nl].
 
 	% predicate spy points
 
@@ -218,23 +233,25 @@
 	message_tokens(predicate_spy_point_removed) -->
 		['     Predicate spy point removed.'-[], nl].
 
-	% line number spy points
+	% breakpoints
 
-	message_tokens(line_number_spy_points(SpyPoints)) -->
-		['     Defined line number spy points: Entity-Line:'-[], nl],
-		spy_points(SpyPoints).
+	message_tokens(all_breakpoints_removed) -->
+		['     All breakpoints removed.'-[], nl].
 
-	message_tokens(all_line_number_spy_points_removed) -->
-		['     All line number spy points removed.'-[], nl].
+	% unconditional breakpoints
 
-	message_tokens(no_line_number_spy_points_defined) -->
-		['     No line number spy points are defined.'-[], nl].
+	message_tokens(unconditional_breakpoints(Breakpoints)) -->
+		['     Defined unconditional breakpoints: Entity-Line:'-[], nl],
+		spy_points(Breakpoints).
 
-	message_tokens(line_number_spy_point_added) -->
-		['     Line number spy point added.'-[], nl].
+	message_tokens(no_unconditional_breakpoints_defined) -->
+		['     No unconditional breakpoints are defined.'-[], nl].
 
-	message_tokens(line_number_spy_point_removed) -->
-		['     Line number spy point removed.'-[], nl].
+	message_tokens(unconditional_breakpoint_added) -->
+		['     Unconditional breakpoint added.'-[], nl].
+
+	message_tokens(unconditional_breakpoint_removed) -->
+		['     Unconditional breakpoint removed.'-[], nl].
 
 	% context spy points
 
@@ -384,8 +401,8 @@
 			'       l - leap             f - fail       / - remove context spy point'-[], nl,
 			'       s - skip             u - unify      + - add predicate spy point'-[], nl,
 			'       S - Skip             n - nodebug    - - remove predicate spy point'-[], nl,
-			'       q - quasi-skip       N - notrace    # - add line number spy point'-[], nl,
-			'       r - retry            ! - command    | - remove line number spy point'-[], nl,
+			'       q - quasi-skip       N - notrace    # - add unconditional breakpoint'-[], nl,
+			'       r - retry            ! - command    | - remove unconditional breakpoint'-[], nl,
 			'       j - jump             @ - command'-[], nl,
 			'       z - zap              b - break'-[], nl,
 			'       p - print            a - abort'-[], nl,
@@ -450,7 +467,7 @@
 	log_points([]) -->
 		[].
 
-	conditional_points([cln(Entity,Line,Condition)| ConditionalPoints]) -->
+	conditional_points([bp(Entity,Line,Condition)| ConditionalPoints]) -->
 		{ground_term_copy(Entity, GroundEntity)},
 		['        ~q-~q (~q)'-[GroundEntity,Line,Condition], nl],
 		conditional_points(ConditionalPoints).

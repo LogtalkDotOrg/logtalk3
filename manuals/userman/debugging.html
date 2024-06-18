@@ -85,12 +85,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#compiling-source-files-in-debug-mode">Compiling source files in debug mode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#procedure-box-model">Procedure box model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#activating-the-debugger">Activating the debugger</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#defining-spy-points">Defining spy points</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#defining-line-number-and-predicate-spy-points">Defining line number and predicate spy points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#defining-conditional-line-number-spy-points">Defining conditional line number spy points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#defining-triggered-line-number-spy-points">Defining triggered line number spy points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-spy-points-and-breakpoints">Defining spy points and breakpoints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defining-breakpoints-and-predicate-spy-points">Defining breakpoints and predicate spy points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-conditional-breakpoints">Defining conditional breakpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-triggered-breakpoints">Defining triggered breakpoints</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-context-spy-points">Defining context spy points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#removing-all-spy-points">Removing all spy points</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-log-points">Defining log points</a></li>
@@ -323,20 +322,18 @@ be active (there can be only one active debug handler at any given time). The
 <a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-nodebug-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">debuggerp::nodebug/0</span></a> predicate implicitly
 deselects the <cite>debugger</cite> tool as the active debug handler.</p>
 </section>
-<section id="defining-spy-points">
-<h2>Defining spy points<a class="headerlink" href="#defining-spy-points" title="Link to this heading"></a></h2>
-<p>Logtalk spy points can be defined by simply stating which predicates should
-be spied (as in most Prolog debuggers), by stating which predicate clauses
-to spy given their source file line numbers, or by specifying the execution
-context for activating a spy point. In the case of line number spy points
-(also known as breakpoints), the line number must correspond to the first
-line of an entity clause. To simplify the definition of line number spy
-points, these are specified using the entity identifier instead of the
-file name (as all entities share a single namespace, an entity can only
-be defined in a single file).</p>
-<section id="defining-line-number-and-predicate-spy-points">
-<h3>Defining line number and predicate spy points<a class="headerlink" href="#defining-line-number-and-predicate-spy-points" title="Link to this heading"></a></h3>
-<p>Line number and predicate spy points are specified using the debugger
+<section id="defining-spy-points-and-breakpoints">
+<h2>Defining spy points and breakpoints<a class="headerlink" href="#defining-spy-points-and-breakpoints" title="Link to this heading"></a></h2>
+<p>Traditional spy points can be defined by simply stating which predicates
+should be spied (as common in Prolog debuggers), by specifying the execution
+context for activating a spy point, or by specifying as <em>breakpoints</em> the
+heads of predicate clauses. To simplify the definition of breakpoints, these
+are specified using the entity identifier instead of the file name (as all
+entities share a single namespace, an entity can only be defined in a single
+file) and the first line number of clause head.</p>
+<section id="defining-breakpoints-and-predicate-spy-points">
+<h3>Defining breakpoints and predicate spy points<a class="headerlink" href="#defining-breakpoints-and-predicate-spy-points" title="Link to this heading"></a></h3>
+<p>Breakpoints and predicate spy points are specified using the debugger
 <code class="docutils literal notranslate"><span class="pre">spy/1</span></code> predicate. The argument can be a breakpoint (expressed as a
 <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a
 non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), or a list of spy points. For
@@ -357,12 +354,12 @@ Spy points set.
 yes
 </pre></div>
 </div>
-<p>Note that setting a line number spy point will remove any existing log
-point for the same location.</p>
-<p>Line numbers and predicate spy points can be removed by using the
-debugger <code class="docutils literal notranslate"><span class="pre">nospy/1</span></code> predicate. The argument can be a spy point, a
-list of spy points, or a non-instantiated variable in which case all
-spy points will be removed. For example:</p>
+<p>Note that setting a breakpoint implicitly removes any existing conditional
+breakpoint, triggered breakpoint, or log point for the same location.</p>
+<p>Unconditional breakpoints and predicate spy points can be removed by using
+the debugger <code class="docutils literal notranslate"><span class="pre">nospy/1</span></code> predicate. The argument can also be a list or a
+non-instantiated variable in which case all breakpoints and predicate spy
+points will be removed. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(_).
 
 All matching predicate spy points removed.
@@ -374,12 +371,11 @@ we want to spy. But note that only some Prolog backends provide accurate
 source file term line numbers. Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool
 documentation for details.</p>
 </section>
-<section id="defining-conditional-line-number-spy-points">
-<h3>Defining conditional line number spy points<a class="headerlink" href="#defining-conditional-line-number-spy-points" title="Link to this heading"></a></h3>
-<p>Conditional line number spy points are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code>
-predicate. The condition can be a clause head successful unification count
-expression, a lambda expression, or another line number spy point (see next
-section).</p>
+<section id="defining-conditional-breakpoints">
+<h3>Defining conditional breakpoints<a class="headerlink" href="#defining-conditional-breakpoints" title="Link to this heading"></a></h3>
+<p>Conditional breakpoints are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code> predicate.
+The condition can be a clause head successful unification count expression, a
+lambda expression, or another breakpoint (see next section).</p>
 <p>The supported lambda expressions are <code class="docutils literal notranslate"><span class="pre">[Count,</span> <span class="pre">N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> and
 <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code> where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
 goal invocation number, and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause
@@ -388,12 +384,12 @@ must not have any side effects.</p>
 <p>Some examples:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 76, [weight(m1,_)]&gt;&gt;true).
 
-Conditional line number spy point added.
+Conditional breakpoint added.
 yes
 
 | ?- debugger::spy(planet, 41, =&lt;(2)).
 
-Conditional line number spy point added.
+Conditional breakpoint added.
 yes
 </pre></div>
 </div>
@@ -413,7 +409,7 @@ log point for the same location.</p>
 <code class="docutils literal notranslate"><span class="pre">nospy/3</span></code> predicate. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(planet, _, _).
 
-All matching conditional line number spy points removed.
+All matching conditional breakpoints removed.
 yes
 </pre></div>
 </div>
@@ -422,18 +418,20 @@ conditionally spy. But note that only some Prolog backends provide
 accurate source file term line numbers.
 Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool documentation for details.</p>
 </section>
-<section id="defining-triggered-line-number-spy-points">
-<h3>Defining triggered line number spy points<a class="headerlink" href="#defining-triggered-line-number-spy-points" title="Link to this heading"></a></h3>
-<p>Conditional line number spy points that depend on other log point or line
-number spy points are known as <em>triggered</em> line number spy points. The
-debugger only breaks at a triggered line number spy point if the log point
-or line number spy point it depends on is hit first. For example:</p>
+<section id="defining-triggered-breakpoints">
+<h3>Defining triggered breakpoints<a class="headerlink" href="#defining-triggered-breakpoints" title="Link to this heading"></a></h3>
+<p>Conditional breakpoints that depend on other breakpoints are known as
+<em>triggered</em> breakpoints. The debugger only breaks at a triggered line
+number spy point if the log point or line number spy point it depends
+on is hit first. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(mars, 98, planet-76).
 
-Conditional line number spy point added.
+Triggered breakpoint added.
 yes
 </pre></div>
 </div>
+<p>The debugger prints a <cite>^</cite> character at the beginning of the line for easy
+recognition of triggered breakpoints.</p>
 </section>
 <section id="defining-context-spy-points">
 <h3>Defining context spy points<a class="headerlink" href="#defining-context-spy-points" title="Link to this heading"></a></h3>
@@ -472,14 +470,13 @@ yes
 </div>
 <p>will remove all context spy points where the value of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> matches the
 atom <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
-</section>
-<section id="removing-all-spy-points">
-<h3>Removing all spy points<a class="headerlink" href="#removing-all-spy-points" title="Link to this heading"></a></h3>
-<p>We may remove all line number, predicate, and context spy points by
-using the debugger <code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code> predicate:</p>
+<p>Removing all breakpoints and spy points
+~~~~~~~~~~~~~~~~~~~~~~~—————-</p>
+<p>We can remove all breakpoints and spy points by using the debugger
+<code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code> predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospyall.
 
-All line number spy points removed.
+All breakpoints removed.
 All predicate spy points removed.
 All context spy points removed.
 yes
@@ -491,7 +488,7 @@ to its default settings.</p>
 </section>
 <section id="defining-log-points">
 <h2>Defining log points<a class="headerlink" href="#defining-log-points" title="Link to this heading"></a></h2>
-<p>Logtalk log points are similar to line number spy points and thus the line
+<p>Logtalk log points are similar to breakpoints and thus the line
 number must correspond to the first line of an entity clause. When the
 debugger reaches a log point, it prints a log message and continues without
 halting execution for taking a port command. When the log message is an
@@ -570,8 +567,8 @@ when a call succeeds with choice-points pending, thus indicating that there
 might be alternative solutions for the goal.</p>
 <p>Note that, when tracing, spy points will be ignored. Before the port number,
 when a spy point is set for the current clause or goal, the debugger will
-print a <code class="docutils literal notranslate"><span class="pre">#</span></code> character for line number spy points, a <code class="docutils literal notranslate"><span class="pre">?</span></code> character for
-conditional line number spy points, a <code class="docutils literal notranslate"><span class="pre">+</span></code> character for predicate spy
+print a <code class="docutils literal notranslate"><span class="pre">#</span></code> character for unconditional breakpoints, a <code class="docutils literal notranslate"><span class="pre">?</span></code> character for
+conditional breakpoints, a <code class="docutils literal notranslate"><span class="pre">+</span></code> character for predicate spy
 points, and a <code class="docutils literal notranslate"><span class="pre">*</span></code> character for context spy points. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(female/2).
 

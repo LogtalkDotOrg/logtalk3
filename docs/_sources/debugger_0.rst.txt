@@ -158,22 +158,22 @@ True iff leaping in tracing or debugging mode.
 
 ------------
 
-.. index:: spying_line_number_/2
-.. _debugger/0::spying_line_number_/2:
+.. index:: breakpoint_/2
+.. _debugger/0::breakpoint_/2:
 
-``spying_line_number_/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^
+``breakpoint_/2``
+^^^^^^^^^^^^^^^^^
 
-Table of line number breakpoints.
+Table of unconditional breakpoints.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``spying_line_number_(Entity,Line)``
+|    ``breakpoint_(Entity,Line)``
 | **Mode and number of proofs:**
-|    ``spying_line_number_(?object_identifier,?integer)`` - ``zero_or_more``
-|    ``spying_line_number_(?category_identifier,?integer)`` - ``zero_or_more``
+|    ``breakpoint_(?object_identifier,?integer)`` - ``zero_or_more``
+|    ``breakpoint_(?category_identifier,?integer)`` - ``zero_or_more``
 
 
 ------------
@@ -312,11 +312,11 @@ Current term maximum depth.
 
 ------------
 
-.. index:: logging_line_number_/3
-.. _debugger/0::logging_line_number_/3:
+.. index:: log_point_/3
+.. _debugger/0::log_point_/3:
 
-``logging_line_number_/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+``log_point_/3``
+^^^^^^^^^^^^^^^^
 
 Table of log points.
 
@@ -324,19 +324,19 @@ Table of log points.
 |    ``dynamic``
 
 | **Template:**
-|    ``logging_line_number_(Entity,Line,Message)``
+|    ``log_point_(Entity,Line,Message)``
 | **Mode and number of proofs:**
-|    ``logging_line_number_(?object_identifier,?integer,?atom)`` - ``zero_or_more``
-|    ``logging_line_number_(?category_identifier,?integer,?atom)`` - ``zero_or_more``
+|    ``log_point_(?object_identifier,?integer,?atom)`` - ``zero_or_more``
+|    ``log_point_(?category_identifier,?integer,?atom)`` - ``zero_or_more``
 
 
 ------------
 
-.. index:: conditional_line_number_/3
-.. _debugger/0::conditional_line_number_/3:
+.. index:: conditional_breakpoint_/3
+.. _debugger/0::conditional_breakpoint_/3:
 
-``conditional_line_number_/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``conditional_breakpoint_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Table of conditional breakpoints.
 
@@ -344,19 +344,19 @@ Table of conditional breakpoints.
 |    ``dynamic``
 
 | **Template:**
-|    ``conditional_line_number_(Entity,Line,Condition)``
+|    ``conditional_breakpoint_(Entity,Line,Condition)``
 | **Mode and number of proofs:**
-|    ``conditional_line_number_(?object_identifier,?integer,?callable)`` - ``zero_or_more``
-|    ``conditional_line_number_(?category_identifier,?integer,?callable)`` - ``zero_or_more``
+|    ``conditional_breakpoint_(?object_identifier,?integer,?callable)`` - ``zero_or_more``
+|    ``conditional_breakpoint_(?category_identifier,?integer,?callable)`` - ``zero_or_more``
 
 
 ------------
 
-.. index:: triggered_line_number_/4
-.. _debugger/0::triggered_line_number_/4:
+.. index:: triggered_breakpoint_/4
+.. _debugger/0::triggered_breakpoint_/4:
 
-``triggered_line_number_/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``triggered_breakpoint_/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Table of defined triggered breakpoints.
 
@@ -364,21 +364,21 @@ Table of defined triggered breakpoints.
 |    ``dynamic``
 
 | **Template:**
-|    ``triggered_line_number_(Entity,Line,TriggerEntity,TriggerLine)``
+|    ``triggered_breakpoint_(Entity,Line,TriggerEntity,TriggerLine)``
 | **Mode and number of proofs:**
-|    ``triggered_line_number_(?object_identifier,?integer,?object_identifier,?integer)`` - ``zero_or_more``
-|    ``triggered_line_number_(?object_identifier,?integer,?category_identifier,?integer)`` - ``zero_or_more``
-|    ``triggered_line_number_(?category_identifier,?integer,?object_identifier,?integer)`` - ``zero_or_more``
-|    ``triggered_line_number_(?category_identifier,?integer,?category_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_breakpoint_(?object_identifier,?integer,?object_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_breakpoint_(?object_identifier,?integer,?category_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_breakpoint_(?category_identifier,?integer,?object_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_breakpoint_(?category_identifier,?integer,?category_identifier,?integer)`` - ``zero_or_more``
 
 
 ------------
 
-.. index:: triggered_line_number_enabled_/2
-.. _debugger/0::triggered_line_number_enabled_/2:
+.. index:: triggered_breakpoint_enabled_/2
+.. _debugger/0::triggered_breakpoint_enabled_/2:
 
-``triggered_line_number_enabled_/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``triggered_breakpoint_enabled_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Table of enabled triggered breakpoints.
 
@@ -386,10 +386,10 @@ Table of enabled triggered breakpoints.
 |    ``dynamic``
 
 | **Template:**
-|    ``triggered_line_number_enabled_(Entity,Line)``
+|    ``triggered_breakpoint_enabled_(Entity,Line)``
 | **Mode and number of proofs:**
-|    ``triggered_line_number_enabled_(?object_identifier,?integer)`` - ``zero_or_more``
-|    ``triggered_line_number_enabled_(?category_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_breakpoint_enabled_(?object_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_breakpoint_enabled_(?category_identifier,?integer)`` - ``zero_or_more``
 
 
 ------------

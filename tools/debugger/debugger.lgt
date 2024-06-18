@@ -76,12 +76,12 @@
 		argnames is ['Mode']
 	]).
 
-	:- private(spying_line_number_/2).
-	:- dynamic(spying_line_number_/2).
-	:- mode(spying_line_number_(?object_identifier, ?integer), zero_or_more).
-	:- mode(spying_line_number_(?category_identifier, ?integer), zero_or_more).
-	:- info(spying_line_number_/2, [
-		comment is 'Table of line number breakpoints.',
+	:- private(breakpoint_/2).
+	:- dynamic(breakpoint_/2).
+	:- mode(breakpoint_(?object_identifier, ?integer), zero_or_more).
+	:- mode(breakpoint_(?category_identifier, ?integer), zero_or_more).
+	:- info(breakpoint_/2, [
+		comment is 'Table of unconditional breakpoints.',
 		argnames is ['Entity', 'Line']
 	]).
 
@@ -142,40 +142,40 @@
 		argnames is ['MaxDepth']
 	]).
 
-	:- private(logging_line_number_/3).
-	:- dynamic(logging_line_number_/3).
-	:- mode(logging_line_number_(?object_identifier, ?integer, ?atom), zero_or_more).
-	:- mode(logging_line_number_(?category_identifier, ?integer, ?atom), zero_or_more).
-	:- info(logging_line_number_/3, [
+	:- private(log_point_/3).
+	:- dynamic(log_point_/3).
+	:- mode(log_point_(?object_identifier, ?integer, ?atom), zero_or_more).
+	:- mode(log_point_(?category_identifier, ?integer, ?atom), zero_or_more).
+	:- info(log_point_/3, [
 		comment is 'Table of log points.',
 		argnames is ['Entity', 'Line', 'Message']
 	]).
 
-	:- private(conditional_line_number_/3).
-	:- dynamic(conditional_line_number_/3).
-	:- mode(conditional_line_number_(?object_identifier, ?integer, ?callable), zero_or_more).
-	:- mode(conditional_line_number_(?category_identifier, ?integer, ?callable), zero_or_more).
-	:- info(conditional_line_number_/3, [
+	:- private(conditional_breakpoint_/3).
+	:- dynamic(conditional_breakpoint_/3).
+	:- mode(conditional_breakpoint_(?object_identifier, ?integer, ?callable), zero_or_more).
+	:- mode(conditional_breakpoint_(?category_identifier, ?integer, ?callable), zero_or_more).
+	:- info(conditional_breakpoint_/3, [
 		comment is 'Table of conditional breakpoints.',
 		argnames is ['Entity', 'Line', 'Condition']
 	]).
 
-	:- private(triggered_line_number_/4).
-	:- dynamic(triggered_line_number_/4).
-	:- mode(triggered_line_number_(?object_identifier, ?integer, ?object_identifier, ?integer), zero_or_more).
-	:- mode(triggered_line_number_(?object_identifier, ?integer, ?category_identifier, ?integer), zero_or_more).
-	:- mode(triggered_line_number_(?category_identifier, ?integer, ?object_identifier, ?integer), zero_or_more).
-	:- mode(triggered_line_number_(?category_identifier, ?integer, ?category_identifier, ?integer), zero_or_more).
-	:- info(triggered_line_number_/4, [
+	:- private(triggered_breakpoint_/4).
+	:- dynamic(triggered_breakpoint_/4).
+	:- mode(triggered_breakpoint_(?object_identifier, ?integer, ?object_identifier, ?integer), zero_or_more).
+	:- mode(triggered_breakpoint_(?object_identifier, ?integer, ?category_identifier, ?integer), zero_or_more).
+	:- mode(triggered_breakpoint_(?category_identifier, ?integer, ?object_identifier, ?integer), zero_or_more).
+	:- mode(triggered_breakpoint_(?category_identifier, ?integer, ?category_identifier, ?integer), zero_or_more).
+	:- info(triggered_breakpoint_/4, [
 		comment is 'Table of defined triggered breakpoints.',
 		argnames is ['Entity', 'Line', 'TriggerEntity', 'TriggerLine']
 	]).
 
-	:- private(triggered_line_number_enabled_/2).
-	:- dynamic(triggered_line_number_enabled_/2).
-	:- mode(triggered_line_number_enabled_(?object_identifier, ?integer), zero_or_more).
-	:- mode(triggered_line_number_enabled_(?category_identifier, ?integer), zero_or_more).
-	:- info(triggered_line_number_enabled_/2, [
+	:- private(triggered_breakpoint_enabled_/2).
+	:- dynamic(triggered_breakpoint_enabled_/2).
+	:- mode(triggered_breakpoint_enabled_(?object_identifier, ?integer), zero_or_more).
+	:- mode(triggered_breakpoint_enabled_(?category_identifier, ?integer), zero_or_more).
+	:- info(triggered_breakpoint_enabled_/2, [
 		comment is 'Table of enabled triggered breakpoints.',
 		argnames is ['Entity', 'Line']
 	]).
@@ -204,8 +204,8 @@
 		nodebug,
 		reset_invocation_number(_),
 		retractall(file_line_hit_count_(_, _, _)),
-		retractall(triggered_line_number_(_, _, _, _)),
-		retractall(triggered_line_number_enabled_(_, _)).
+		retractall(triggered_breakpoint_(_, _, _, _)),
+		retractall(triggered_breakpoint_enabled_(_, _)).
 
 	debug :-
 		logtalk::activate_debug_handler(debugger),
@@ -260,20 +260,25 @@
 		debugging_details.
 
 	debugging_details :-
-		(	logging_line_number_(_, _, _) ->
-			findall(Entity-Line, logging_line_number_(Entity,Line,_), LogPoints),
+		(	log_point_(_, _, _) ->
+			findall(Entity-Line, log_point_(Entity,Line,_), LogPoints),
 			print_message(information, debugger, log_points(LogPoints))
 		;	print_message(information, debugger, no_log_points_defined)
 		),
-		(	conditional_line_number_(_, _, _) ->
-			findall(cln(Entity,Line,Condition), conditional_line_number_(Entity,Line,Condition), ConditionalPoints),
-			print_message(information, debugger, conditional_line_number_spy_points(ConditionalPoints))
-		;	print_message(information, debugger, no_conditional_line_number_spy_points_defined)
+		(	conditional_breakpoint_(_, _, _) ->
+			findall(bp(Entity,Line,Condition), conditional_breakpoint_(Entity,Line,Condition), ConditionalPoints),
+			print_message(information, debugger, conditional_breakpoints(ConditionalPoints))
+		;	print_message(information, debugger, no_conditional_breakpoints_defined)
 		),
-		(	spying_line_number_(_, _) ->
-			findall(Entity-Line, spying_line_number_(Entity,Line), LineNumberSpyPoints),
-			print_message(information, debugger, line_number_spy_points(LineNumberSpyPoints))
-		;	print_message(information, debugger, no_line_number_spy_points_defined)
+		(	triggered_breakpoint_(_, _, _, _) ->
+			findall(bp(Entity,Line,TriggerEntity-TriggerLine), triggered_breakpoint_(Entity,Line,TriggerEntity,TriggerLine), TriggeredPoints),
+			print_message(information, debugger, triggered_breakpoints(TriggeredPoints))
+		;	print_message(information, debugger, no_triggered_breakpoints_defined)
+		),
+		(	breakpoint_(_, _) ->
+			findall(Entity-Line, breakpoint_(Entity,Line), LineNumberSpyPoints),
+			print_message(information, debugger, unconditional_breakpoints(LineNumberSpyPoints))
+		;	print_message(information, debugger, no_unconditional_breakpoints_defined)
 		),
 		(	spying_predicate_(_, _, _) ->
 			findall(Predicate, spying_predicate_(_,_,Predicate), PredicateSpyPoints),
@@ -344,14 +349,14 @@
 		integer(Line),
 		functor(Entity, Functor, Arity),
 		functor(Template, Functor, Arity),
-		(	spying_line_number_(Template, Line) ->
+		(	breakpoint_(Template, Line) ->
 			true
-		;	assertz(spying_line_number_(Template, Line))
+		;	assertz(breakpoint_(Template, Line))
 		),
-		retractall(logging_line_number_(Template, Line, _)),
-		retractall(conditional_line_number_(Template, Line, _)),
-		retractall(triggered_line_number_(Template, Line, _, _)),
-		retractall(triggered_line_number_enabled_(Template, Line)).
+		retractall(log_point_(Template, Line, _)),
+		retractall(conditional_breakpoint_(Template, Line, _)),
+		retractall(triggered_breakpoint_(Template, Line, _, _)),
+		retractall(triggered_breakpoint_enabled_(Template, Line)).
 
 	spy_predicate(Functor, Arity, Original) :-
 		atom(Functor),
@@ -362,7 +367,7 @@
 		).
 
 	spying(Entity-Line) :-
-		spying_line_number_(Entity, Line).
+		breakpoint_(Entity, Line).
 	spying(Functor/Arity) :-
 		spying_predicate_(Functor, Arity, Functor/Arity).
 	spying(Functor//Arity) :-
@@ -394,7 +399,7 @@
 		nospy_list(SpyPoints).
 
 	nospy_line_number(Entity-Line) :-
-		retractall(spying_line_number_(Entity, Line)).
+		retractall(breakpoint_(Entity, Line)).
 
 	nospy_predicate(Functor/Arity) :-
 		retractall(spying_predicate_(Functor, Arity, _)).
@@ -414,23 +419,23 @@
 		valid_conditional_spy_point_condition(Condition),
 		functor(Entity, Functor, Arity),
 		functor(Template, Functor, Arity),
-		retractall(conditional_line_number_(Template, Line, _)),
+		retractall(conditional_breakpoint_(Template, Line, _)),
+		retractall(triggered_breakpoint_(Template, Line, _, _)),
+		retractall(triggered_breakpoint_enabled_(Template, Line)),
+		retractall(breakpoint_(Template, Line)),
+		retractall(log_point_(Template, Line, _)),
 		(	Condition = TriggerEntity-TriggerLine ->
 			functor(TriggerEntity, TriggerFunctor, TriggerArity),
 			functor(TriggerTemplate, TriggerFunctor, TriggerArity),
-			assertz(triggered_line_number_(Template, Line, TriggerTemplate, TriggerLine)),
-			retractall(conditional_line_number_(Template, Line, _))
-		;	assertz(conditional_line_number_(Template, Line, Condition)),
-			retractall(triggered_line_number_(Template, Line, _, _)),
-			retractall(triggered_line_number_enabled_(Template, Line))
+			assertz(triggered_breakpoint_(Template, Line, TriggerTemplate, TriggerLine)),
+			print_message(information, debugger, triggered_breakpoint_added)
+		;	assertz(conditional_breakpoint_(Template, Line, Condition)),
+			print_message(information, debugger, conditional_breakpoint_added)
 		),
-		print_message(information, debugger, conditional_spy_point_added),
 		(	debugging_ ->
 			true
 		;	debug
 		),
-		retractall(spying_line_number_(Template, Line)),
-		retractall(logging_line_number_(Template, Line, _)),
 		(	object_property(Entity, file(File)) ->
 			retractall(file_line_hit_count_(File, Line, _))
 		;	category_property(Entity, file(File)) ->
@@ -450,8 +455,8 @@
 		atom(Entity),
 		integer(Line),
 		once((
-			conditional_line_number_(Entity, Line, _)
-		;	spying_line_number_(Entity, Line)
+			conditional_breakpoint_(Entity, Line, _)
+		;	breakpoint_(Entity, Line)
 		)).
 	valid_conditional_spy_point_condition(>(Count)) :-
 		!,
@@ -482,10 +487,10 @@
 		Count >= 1.
 
 	spying(Entity, Line, Lambda) :-
-		conditional_line_number_(Entity, Line, Lambda).
+		conditional_breakpoint_(Entity, Line, Lambda).
 
 	nospy(Entity, Line, Lambda) :-
-		retractall(conditional_line_number_(Entity, Line, Lambda)),
+		retractall(conditional_breakpoint_(Entity, Line, Lambda)),
 		print_message(comment, debugger, matching_conditional_spy_points_removed).
 
 	spy(Sender, This, Self, Goal) :-
@@ -504,8 +509,11 @@
 		print_message(comment, debugger, matching_context_spy_points_removed).
 
 	nospyall :-
-		retractall(spying_line_number_(_, _)),
-		print_message(comment, debugger, all_line_number_spy_points_removed),
+		retractall(breakpoint_(_, _)),
+		retractall(conditional_breakpoint_(_, _, _)),
+		retractall(triggered_breakpoint_(_, _, _, _)),
+		retractall(triggered_breakpoint_enabled_(_, _)),
+		print_message(comment, debugger, all_breakpoints_removed),
 		retractall(spying_predicate_(_, _, _)),
 		print_message(comment, debugger, all_predicate_spy_points_removed),
 		retractall(spying_context_(_, _, _, _)),
@@ -622,16 +630,16 @@
 		).
 
 	spying_port_code(fact(Entity,_,_,Line), _, _, '#') :-
-		spying_line_number_(Entity, Line),
-		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
-			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		breakpoint_(Entity, Line),
+		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		),
 		!.
 	spying_port_code(rule(Entity,_,_,Line), _, _, '#') :-
-		spying_line_number_(Entity, Line),
-		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
-			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		breakpoint_(Entity, Line),
+		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		),
 		!.
@@ -652,20 +660,20 @@
 		integer(Line),
 		functor(Entity, Functor, Arity),
 		functor(Template, Functor, Arity),
-		(	logging_line_number_(Template, Line, Message) ->
+		(	log_point_(Template, Line, Message) ->
 			% log point already defined
 			true
-		;	logging_line_number_(Template, Line, _) ->
+		;	log_point_(Template, Line, _) ->
 			% assume updating log point message
-			retractall(logging_line_number_(Template, Line, _)),
-			assertz(logging_line_number_(Template, Line, Message))
+			retractall(log_point_(Template, Line, _)),
+			assertz(log_point_(Template, Line, Message))
 		;	% new log point
-			assertz(logging_line_number_(Template, Line, Message))
+			assertz(log_point_(Template, Line, Message))
 		),
-		retractall(spying_line_number_(Template, Line)),
-		retractall(conditional_line_number_(Template, Line, _)),
-		retractall(triggered_line_number_(Template, Line, _, _)),
-		retractall(triggered_line_number_enabled_(Template, Line)),
+		retractall(breakpoint_(Template, Line)),
+		retractall(conditional_breakpoint_(Template, Line, _)),
+		retractall(triggered_breakpoint_(Template, Line, _, _)),
+		retractall(triggered_breakpoint_enabled_(Template, Line)),
 		print_message(information, debugger, log_point_added),
 		(	debugging_ ->
 			true
@@ -673,28 +681,28 @@
 		).
 
 	logging(Entity, Line, Message) :-
-		logging_line_number_(Entity, Line, Message).
+		log_point_(Entity, Line, Message).
 
 	nolog(Entity, Line, Message) :-
-		retractall(logging_line_number_(Entity, Line, Message)),
+		retractall(log_point_(Entity, Line, Message)),
 		print_message(information, debugger, matching_log_points_removed).
 
 	nologall :-
-		retractall(logging_line_number_(_, _, _)),
+		retractall(log_point_(_, _, _)),
 		print_message(comment, debugger, all_log_points_removed).
 
 	logging_port(fact(Entity, Clause, File, Line), N, Goal, ExCtx) :-
-		logging_line_number_(Entity, Line, Message),
+		log_point_(Entity, Line, Message),
 		logging_message(Message, 'Fact', Entity, Clause, File, Line, N, Goal, ExCtx),
-		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
-			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		).
 	logging_port(rule(Entity, Clause, File, Line), N, Goal, ExCtx) :-
-		logging_line_number_(Entity, Line, Message),
+		log_point_(Entity, Line, Message),
 		logging_message(Message, 'Rule', Entity, Clause, File, Line, N, Goal, ExCtx),
-		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
-			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		).
 
@@ -777,24 +785,24 @@
 	% conditional breakpoint predicates
 
 	conditional_port(fact(Entity, _, File, Line), N, Goal) :-
-		conditional_line_number_(Entity, Line, Condition),
+		conditional_breakpoint_(Entity, Line, Condition),
 		conditional_port_check(Condition, File, Line, N, Goal).
 	conditional_port(rule(Entity, _, File, Line), N, Goal) :-
-		conditional_line_number_(Entity, Line, Condition),
+		conditional_breakpoint_(Entity, Line, Condition),
 		conditional_port_check(Condition, File, Line, N, Goal).
 
 	conditional_port(fact(Entity, _, File, Line), N, Goal, '?') :-
-		conditional_line_number_(Entity, Line, Condition),
+		conditional_breakpoint_(Entity, Line, Condition),
 		conditional_port_check(Condition, File, Line, N, Goal),
-		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
-			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		).
 	conditional_port(rule(Entity, _, File, Line), N, Goal, '?') :-
-		conditional_line_number_(Entity, Line, Condition),
+		conditional_breakpoint_(Entity, Line, Condition),
 		conditional_port_check(Condition, File, Line, N, Goal),
-		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
-			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		(	triggered_breakpoint_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_breakpoint_enabled_(DependentEntity, DependentLine))
 		;	true
 		).
 
@@ -840,14 +848,14 @@
 	% triggered breakpoint predicates
 
 	triggered_port(fact(Entity, _, _, Line)) :-
-		triggered_line_number_enabled_(Entity, Line), !.
+		triggered_breakpoint_enabled_(Entity, Line), !.
 	triggered_port(rule(Entity, _, _, Line)) :-
-		triggered_line_number_enabled_(Entity, Line), !.
+		triggered_breakpoint_enabled_(Entity, Line), !.
 
 	triggered_port(fact(Entity, _, _, Line), '^') :-
-		retractall(triggered_line_number_enabled_(Entity, Line)).
+		retractall(triggered_breakpoint_enabled_(Entity, Line)).
 	triggered_port(rule(Entity, _, _, Line), '^') :-
-		retractall(triggered_line_number_enabled_(Entity, Line)).
+		retractall(triggered_breakpoint_enabled_(Entity, Line)).
 
 	% debug handler
 
@@ -866,7 +874,7 @@
 			(	\+ skipping_,
 				\+ quasi_skipping_
 			;	quasi_skipping_,
-				spying_line_number_(Entity, Line)
+				breakpoint_(Entity, Line)
 			) ->
 			invocation_number_(N),
 			port(fact(Entity,Clause,File,Line), N, Fact, _, _, ExCtx, Action),
@@ -879,7 +887,7 @@
 			(	\+ skipping_,
 				\+ quasi_skipping_
 			;	quasi_skipping_,
-				spying_line_number_(Entity, Line)
+				breakpoint_(Entity, Line)
 			) ->
 			invocation_number_(N),
 			port(rule(Entity,Clause,File,Line), N, Head, _, _, ExCtx, Action),
@@ -1199,7 +1207,7 @@
 		;	Port = rule(Entity, _, _, Line)
 		),
 		spy_line_number(Entity-Line),
-		print_message(information, debugger, line_number_spy_point_added),
+		print_message(information, debugger, unconditional_breakpoint_added),
 		fail.
 
 	do_port_option(('|'), Port, _, _, _, _, _, _) :-
@@ -1208,7 +1216,7 @@
 		;	Port = rule(Entity, _, _, Line)
 		),
 		nospy_line_number(Entity-Line),
-		print_message(information, debugger, line_number_spy_point_removed),
+		print_message(information, debugger, unconditional_breakpoint_removed),
 		fail.
 
 	do_port_option((*), _, _, Goal, _, _, _, _) :-

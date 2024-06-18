@@ -181,23 +181,21 @@ be active (there can be only one active debug handler at any given time). The
 deselects the `debugger` tool as the active debug handler.
 
 
-Defining spy points
--------------------
+Defining spy points and breakpoints
+-----------------------------------
 
-Logtalk spy points can be defined by simply stating which predicates should
-be spied (as in most Prolog debuggers), by stating which predicate clauses
-to spy given their source file line numbers, or by specifying the execution
-context for activating a spy point. In the case of line number spy points
-(also known as breakpoints), the line number must correspond to the first
-line of an entity clause. To simplify the definition of line number spy
-points, these are specified using the entity identifier instead of the
-file name (as all entities share a single namespace, an entity can only
-be defined in a single file).
+Traditional spy points can be defined by simply stating which predicates
+should be spied (as common in Prolog debuggers), by specifying the execution
+context for activating a spy point, or by specifying as *breakpoints* the
+heads of predicate clauses. To simplify the definition of breakpoints, these
+are specified using the entity identifier instead of the file name (as all
+entities share a single namespace, an entity can only be defined in a single
+file) and the first line number of clause head.
 
-Defining line number and predicate spy points
+Defining breakpoints and predicate spy points
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Line number and predicate spy points are specified using the debugger
+Breakpoints and predicate spy points are specified using the debugger
 ``spy/1`` predicate. The argument can be a breakpoint (expressed as a
 ``Entity-Line`` pair), a predicate indicator (``Name/Arity``), a
 non-terminal indicator (``Name//Arity``), or a list of spy points. For
@@ -220,13 +218,13 @@ example:
    Spy points set.
    yes
 
-Note that setting a line number spy point will remove any existing log
-point for the same location.
+Note that setting a breakpoint implicitly removes any existing conditional
+breakpoint, triggered breakpoint, or log point for the same location.
 
-Line numbers and predicate spy points can be removed by using the
-debugger ``nospy/1`` predicate. The argument can be a spy point, a
-list of spy points, or a non-instantiated variable in which case all
-spy points will be removed. For example:
+Unconditional breakpoints and predicate spy points can be removed by using
+the debugger ``nospy/1`` predicate. The argument can also be a list or a
+non-instantiated variable in which case all breakpoints and predicate spy
+points will be removed. For example:
 
 .. code-block:: text
 
@@ -240,13 +238,12 @@ we want to spy. But note that only some Prolog backends provide accurate
 source file term line numbers. Check the :doc:`../devtools/debugger` tool
 documentation for details.
 
-Defining conditional line number spy points
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Defining conditional breakpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Conditional line number spy points are specified using the debugger ``spy/3``
-predicate. The condition can be a clause head successful unification count
-expression, a lambda expression, or another line number spy point (see next
-section).
+Conditional breakpoints are specified using the debugger ``spy/3`` predicate.
+The condition can be a clause head successful unification count expression, a
+lambda expression, or another breakpoint (see next section).
 
 The supported lambda expressions are ``[Count, N, Goal]>>Condition`` and
 ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the
@@ -260,12 +257,12 @@ Some examples:
 
    | ?- debugger::spy(planet, 76, [weight(m1,_)]>>true).
 
-   Conditional line number spy point added.
+   Conditional breakpoint added.
    yes
 
    | ?- debugger::spy(planet, 41, =<(2)).
 
-   Conditional line number spy point added.
+   Conditional breakpoint added.
    yes
 
 The valid unification count expressions are:
@@ -288,7 +285,7 @@ Conditional line numbers spy points can be removed by using the debugger
 
    | ?- debugger::nospy(planet, _, _).
 
-   All matching conditional line number spy points removed.
+   All matching conditional breakpoints removed.
    yes
 
 The line number must for the first line of a clause that we want to
@@ -297,20 +294,23 @@ accurate source file term line numbers.
 Check the :doc:`../devtools/debugger` tool documentation for details.
 
 
-Defining triggered line number spy points
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Defining triggered breakpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Conditional line number spy points that depend on other log point or line
-number spy points are known as *triggered* line number spy points. The
-debugger only breaks at a triggered line number spy point if the log point
-or line number spy point it depends on is hit first. For example:
+Conditional breakpoints that depend on other breakpoints are known as
+*triggered* breakpoints. The debugger only breaks at a triggered line
+number spy point if the log point or line number spy point it depends
+on is hit first. For example:
 
 .. code-block:: text
 
    | ?- debugger::spy(mars, 98, planet-76).
 
-   Conditional line number spy point added.
+   Triggered breakpoint added.
    yes
+
+The debugger prints a `^` character at the beginning of the line for easy
+recognition of triggered breakpoints.
 
 
 Defining context spy points
@@ -360,17 +360,17 @@ spy points. For example, the call:
 will remove all context spy points where the value of :term:`self` matches the
 atom ``foo``.
 
-Removing all spy points
-~~~~~~~~~~~~~~~~~~~~~~~
+Removing all breakpoints and spy points
+~~~~~~~~~~~~~~~~~~~~~~~----------------
 
-We may remove all line number, predicate, and context spy points by
-using the debugger ``nospyall/0`` predicate:
+We can remove all breakpoints and spy points by using the debugger
+``nospyall/0`` predicate:
 
 .. code-block:: text
 
    | ?- debugger::nospyall.
 
-   All line number spy points removed.
+   All breakpoints removed.
    All predicate spy points removed.
    All context spy points removed.
    yes
@@ -381,7 +381,7 @@ to its default settings.
 Defining log points
 -------------------
 
-Logtalk log points are similar to line number spy points and thus the line
+Logtalk log points are similar to breakpoints and thus the line
 number must correspond to the first line of an entity clause. When the
 debugger reaches a log point, it prints a log message and continues without
 halting execution for taking a port command. When the log message is an
@@ -471,8 +471,8 @@ might be alternative solutions for the goal.
 
 Note that, when tracing, spy points will be ignored. Before the port number,
 when a spy point is set for the current clause or goal, the debugger will
-print a ``#`` character for line number spy points, a ``?`` character for
-conditional line number spy points, a ``+`` character for predicate spy
+print a ``#`` character for unconditional breakpoints, a ``?`` character for
+conditional breakpoints, a ``+`` character for predicate spy
 points, and a ``*`` character for context spy points. For example:
 
 .. code-block:: text

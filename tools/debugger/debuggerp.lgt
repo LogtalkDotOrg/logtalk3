@@ -90,33 +90,33 @@
 	:- mode(spy(@spy_point), zero_or_one).
 	:- mode(spy(@list(spy_point)), zero_or_one).
 	:- info((spy)/1, [
-		comment is 'Sets a line number spy point (removing any existing log point or conditional breakpoint defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
+		comment is 'Sets a unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
 		argnames is ['SpyPoint']
 	]).
 
 	:- public(spying/1).
 	:- mode(spying(?spy_point), zero_or_more).
 	:- info(spying/1, [
-		comment is 'Enumerates, by backtracking, all defined line number, predicate, and non-terminal spy points.',
+		comment is 'Enumerates, by backtracking, all defined unconditional breakpoints, predicate spy points, and non-terminal spy points.',
 		argnames is ['SpyPoint']
 	]).
 
 	:- public((spy)/3).
 	:- mode(spy(+atom, +integer, @callable), zero_or_one).
 	:- info((spy)/3, [
-		comment is 'Sets a conditional or a triggered line number spy point (removing any existing log point or spy point defined for the same location). The condition can be a unification count expression, a lambda expression, or another line number spy point. Fails if the spy point is invalid.',
+		comment is 'Sets a conditional or triggered breakpoint (removing any existing log point or breakpoints defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.',
 		argnames is ['Entity', 'Line', 'Condition'],
 		remarks is [
 			'Unification count expression conditions' - '``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.',
 			'Lambda expression conditions' - '``[Count,N,Goal]>>Condition`` and ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``.',
-			'Line number spy point conditions' - '``Entity-Line``.'
+			'Triggered breakpoint conditions' - '``Entity-Line``.'
 		]
 	]).
 
 	:- public(spying/3).
 	:- mode(spying(?atom, ?integer, ?callable), zero_or_more).
 	:- info(spying/3, [
-		comment is 'Enumerates, by backtracking, all conditional line number spy points.',
+		comment is 'Enumerates, by backtracking, all conditional and triggered breakpoints.',
 		argnames is ['Entity', 'Line', 'Condition']
 	]).
 
@@ -139,14 +139,14 @@
 	:- mode(nospy(@spy_point), one).
 	:- mode(nospy(@list(spy_point)), one).
 	:- info((nospy)/1, [
-		comment is 'Removes all matching line number, predicate, and non-terminal spy points.',
+		comment is 'Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.',
 		argnames is ['SpyPoint']
 	]).
 
 	:- public((nospy)/3).
 	:- mode(nospy(@term, @term, @term), one).
 	:- info((nospy)/3, [
-		comment is 'Removes all matching conditional line number spy points.',
+		comment is 'Removes all matching conditional and triggered breakpoints.',
 		argnames is ['Entity', 'Line', 'Condition']
 	]).
 
@@ -160,7 +160,7 @@
 	:- public(nospyall/0).
 	:- mode(nospyall, one).
 	:- info(nospyall/0, [
-		comment is 'Removes all line number, predicate, non-terminal, and context spy points.',
+		comment is 'Removes all breakpoints, predicate spy points, non-terminal spy points, and context spy points.',
 		see_also is [reset/0]
 	]).
 
@@ -183,7 +183,7 @@
 	:- mode(log(@object_identifier, +integer, +atom), zero_or_one).
 	:- mode(log(@category_identifier, +integer, +atom), zero_or_one).
 	:- info(log/3, [
-		comment is 'Sets a log point (removing any existing line number spy point defined for the same location). Fails if the log point is invalid.',
+		comment is 'Sets a log point (removing any existing breakpoint defined for the same location). Fails if the log point is invalid.',
 		argnames is ['Entity', 'Line', 'Message']
 	]).
 
