@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:7:0,
+		version is 0:8:0,
 		author is 'Paulo Moura',
-		date is 2024-06-03,
+		date is 2024-06-18,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -36,6 +36,7 @@
 		trace/0, notrace/0,
 		log/3, logging/3, nolog/3, nologall/0,
 		(spy)/1, spying/1, (nospy)/1,
+		(spy)/3, spying/3, (nospy)/3,
 		(spy)/4, spying/4, (nospy)/4,
 		nospyall/0,
 		leash/1, leashing/1
@@ -51,6 +52,7 @@
 		spy(_, _, _, _),
 		reset,
 		\+ spying(_),
+		\+ spying(_, _, _),
 		\+ spying(_, _, _, _).
 
 	test(debugger_debug_0_01, deterministic) :-
@@ -61,10 +63,12 @@
 		reset,
 		spy(foo/1),
 		spy(logtalk-13),
+		spy(logtalk, 27, 42),
 		spy(user, logtalk, _, _),
 		debug,
 		spying(Name/Arity), Name == foo, Arity == 1,
-		spying(Entity-Line), Entity == logtalk, Line == 13,
+		spying(Entity1-Line1), Entity1 == logtalk, Line1 == 13,
+		spying(Entity2, Line2, Condition2), Entity2 == logtalk, Line2 == 27, Condition2 == 42,
 		spying(Sender, This, _, _), Sender == user, This == logtalk.
 
 	test(debugger_nodebug_0_01, deterministic) :-
@@ -75,10 +79,12 @@
 		reset,
 		spy(foo/1),
 		spy(logtalk-13),
+		spy(logtalk, 27, 42),
 		spy(user, logtalk, _, _),
 		nodebug,
 		spying(Name/Arity), Name == foo, Arity == 1,
-		spying(Entity-Line), Entity == logtalk, Line == 13,
+		spying(Entity1-Line1), Entity1 == logtalk, Line1 == 13,
+		spying(Entity2, Line2, Condition2), Entity2 == logtalk, Line2 == 27, Condition2 == 42,
 		spying(Sender, This, _, _), Sender == user, This == logtalk.
 
 	% debugging/0 must be deterministic when there are no spy points to report
@@ -91,6 +97,7 @@
 		reset,
 		spy(foo/1),
 		spy(logtalk-13),
+		spy(logtalk, 27, 42),
 		spy(user, logtalk, _, _),
 		debugging.
 
@@ -110,10 +117,12 @@
 		reset,
 		spy(foo/1),
 		spy(logtalk-13),
+		spy(logtalk, 27, 42),
 		spy(user, logtalk, _, _),
 		trace,
 		spying(Name/Arity), Name == foo, Arity == 1,
-		spying(Entity-Line), Entity == logtalk, Line == 13,
+		spying(Entity1-Line1), Entity1 == logtalk, Line1 == 13,
+		spying(Entity2, Line2, Condition2), Entity2 == logtalk, Line2 == 27, Condition2 == 42,
 		spying(Sender, This, _, _), Sender == user, This == logtalk.
 
 	test(debugger_trace_0_03, deterministic(L == [1,2,3])) :-
@@ -130,10 +139,12 @@
 		reset,
 		spy(foo/1),
 		spy(logtalk-13),
+		spy(logtalk, 27, 42),
 		spy(user, logtalk, _, _),
 		notrace,
 		spying(Name/Arity), Name == foo, Arity == 1,
-		spying(Entity-Line), Entity == logtalk, Line == 13,
+		spying(Entity1-Line1), Entity1 == logtalk, Line1 == 13,
+		spying(Entity2, Line2, Condition2), Entity2 == logtalk, Line2 == 27, Condition2 == 42,
 		spying(Sender, This, _, _), Sender == user, This == logtalk.
 
 	test(debugger_nospyall_0_01, deterministic) :-
@@ -144,9 +155,11 @@
 		reset,
 		spy(foo/1),
 		spy(logtalk-13),
+		spy(logtalk, 27, 42),
 		spy(user, logtalk, _, _),
 		nospyall,
 		\+ spying(_),
+		\+ spying(_, _, _),
 		\+ spying(_, _, _, _).
 
 	test(debugger_leash_1_01, deterministic) :-
@@ -182,6 +195,61 @@
 			)
 		).
 
+	% conditional breakpoint tests
+
+	test(debugger_spy_3_01, deterministic) :-
+		reset,
+		spy(logtalk, 13, 42).
+
+	% setting a conditional breakpoint already set must still succeed deterministically
+	test(debugger_spy_3_02, deterministic) :-
+		reset,
+		log(logtalk, 13, none),
+		log(logtalk, 13, none).
+
+	% setting a conditional breakpoint removes any breakpoint defined for the same location
+	test(debugger_spy_3_03, deterministic) :-
+		reset,
+		spy(logtalk-13),
+		spy(logtalk, 13, 42),
+		\+ spying(logtalk-13).
+
+	% setting a conditional breakpoint removes any log point defined for the same location
+	test(debugger_spy_3_04, deterministic) :-
+		reset,
+		log(logtalk, 13, none),
+		spy(logtalk, 13, 42),
+		\+ logging(logtalk, 13, _).
+
+	% updating a conditional breakpoint must succeed deterministically
+	test(debugger_spy_3_05, deterministic) :-
+		reset,
+		spy(logtalk, 13, 27),
+		spy(logtalk, 13, 42).
+
+	test(debugger_spy_3_06, deterministic(LogPoints == [cb(logtalk,13,27), cb(logtalk,33,42)])) :-
+		reset,
+		spy(logtalk, 13, 27),
+		spy(logtalk, 33, 42),
+		setof(cb(Entity,Line,Condition), spying(Entity, Line, Condition), LogPoints).
+
+	test(debugger_spy_3_07, deterministic(LogPoints == [cb(logtalk,13,27)])) :-
+		reset,
+		spy(logtalk, 13, 27),
+		findall(cb(Entity,Line,Message), spying(Entity, Line, Message), LogPoints).
+
+	test(debugger_nospy_3_01, deterministic) :-
+		reset,
+		nospy(_, _, _).
+
+	test(debugger_nospy_3_02, deterministic) :-
+		reset,
+		spy(logtalk, 13, 27),
+		nospy(logtalk, _, _),
+		\+ spying(_, _, _).
+
+	% log point tests
+
 	test(debugger_log_3_01, deterministic) :-
 		log(logtalk, 13, none).
 
@@ -191,23 +259,37 @@
 		log(logtalk, 13, none),
 		log(logtalk, 13, none).
 
-	% updating a log point message
+	% setting a log point removes any breakpoint defined for the same location
 	test(debugger_log_3_03, deterministic) :-
+		reset,
+		spy(logtalk-13),
+		log(logtalk, 13, none),
+		\+ spying(logtalk-13).
+
+	% setting a log point removes any breakpoint defined for the same location
+	test(debugger_log_3_04, deterministic) :-
+		reset,
+		spy(logtalk, 13, 42),
+		log(logtalk, 13, none),
+		\+ spying(logtalk, 13, _).
+
+	% updating a log point message must succeed deterministically
+	test(debugger_log_3_05, deterministic) :-
 		reset,
 		log(logtalk, 13, none),
 		log(logtalk, 13, new).
 
-	test(debugger_log_3_04, deterministic(LogPoints == [lp(logtalk,13,foo), lp(logtalk,33,bar)])) :-
+	test(debugger_log_3_06, deterministic(LogPoints == [lp(logtalk,13,foo), lp(logtalk,33,bar)])) :-
 		reset,
 		log(logtalk, 13, foo),
 		log(logtalk, 33, bar),
 		setof(lp(Entity,Line,Message), logging(Entity, Line, Message), LogPoints).
 
-	test(debugger_log_3_05, deterministic(LogPoints == [lp(logtalk,13,bar)])) :-
+	test(debugger_log_3_07, deterministic(LogPoints == [lp(logtalk,13,bar)])) :-
 		reset,
 		log(logtalk, 13, foo),
 		log(logtalk, 13, bar),
-		setof(lp(Entity,Line,Message), logging(Entity, Line, Message), LogPoints).
+		findall(lp(Entity,Line,Message), logging(Entity, Line, Message), LogPoints).
 
 	test(debugger_nolog_3_01, deterministic) :-
 		reset,
