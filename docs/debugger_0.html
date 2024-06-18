@@ -207,8 +207,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 7:8:1</div>
-<div class="line"><strong>Date:</strong> 2024-06-17</div>
+<div class="line"><strong>Version:</strong> 7:9:0</div>
+<div class="line"><strong>Date:</strong> 2024-06-18</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -265,10 +265,12 @@
 <li><p><a class="reference internal" href="#write-max-depth-1" id="id17"><code class="docutils literal notranslate"><span class="pre">write_max_depth_/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#logging-line-number-3" id="id18"><code class="docutils literal notranslate"><span class="pre">logging_line_number_/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#conditional-line-number-3" id="id19"><code class="docutils literal notranslate"><span class="pre">conditional_line_number_/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#file-line-hit-count-3" id="id20"><code class="docutils literal notranslate"><span class="pre">file_line_hit_count_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#triggered-line-number-4" id="id20"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#triggered-line-number-enabled-2" id="id21"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_enabled_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#file-line-hit-count-3" id="id22"><code class="docutils literal notranslate"><span class="pre">file_line_hit_count_/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id21">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id23">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -585,7 +587,7 @@
 </section>
 <section id="conditional-line-number-3">
 <span id="debugger-0-conditional-line-number-3"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">conditional_line_number_/3</span></code></a><a class="headerlink" href="#conditional-line-number-3" title="Link to this heading"></a></h3>
-<p>Table of log points.</p>
+<p>Table of conditional breakpoints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -605,9 +607,55 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="triggered-line-number-4">
+<span id="debugger-0-triggered-line-number-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_/4</span></code></a><a class="headerlink" href="#triggered-line-number-4" title="Link to this heading"></a></h3>
+<p>Table of defined triggered breakpoints.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_(Entity,Line,TriggerEntity,TriggerLine)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_(?object_identifier,?integer,?object_identifier,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_(?object_identifier,?integer,?category_identifier,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_(?category_identifier,?integer,?object_identifier,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_(?category_identifier,?integer,?category_identifier,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="triggered-line-number-enabled-2">
+<span id="debugger-0-triggered-line-number-enabled-2"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_enabled_/2</span></code></a><a class="headerlink" href="#triggered-line-number-enabled-2" title="Link to this heading"></a></h3>
+<p>Table of enabled triggered breakpoints.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_enabled_(Entity,Line)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_enabled_(?object_identifier,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">triggered_line_number_enabled_(?category_identifier,?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="file-line-hit-count-3">
-<span id="debugger-0-file-line-hit-count-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_line_hit_count_/3</span></code></a><a class="headerlink" href="#file-line-hit-count-3" title="Link to this heading"></a></h3>
-<p>Current call stack invocation number.</p>
+<span id="debugger-0-file-line-hit-count-3"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">file_line_hit_count_/3</span></code></a><a class="headerlink" href="#file-line-hit-count-3" title="Link to this heading"></a></h3>
+<p>Table of file and line hit counts (successful unifications with clause heads).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

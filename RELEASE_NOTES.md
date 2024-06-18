@@ -47,7 +47,8 @@ Library
 Tools
 -----
 
-* ADDED: Support for conditional breakpoints to the `debugger` tool.
+* ADDED: Support for conditional and triggered breakpoints to the `debugger`
+tool.
 
 * IMPROVED: The `debugger` tool implementation of log points to support
 printing the default port message, the default port message followed by

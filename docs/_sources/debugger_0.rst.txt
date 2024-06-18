@@ -14,8 +14,8 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 7:8:1
-| **Date:** 2024-06-17
+| **Version:** 7:9:0
+| **Date:** 2024-06-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -338,7 +338,7 @@ Table of log points.
 ``conditional_line_number_/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Table of log points.
+Table of conditional breakpoints.
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -352,13 +352,55 @@ Table of log points.
 
 ------------
 
+.. index:: triggered_line_number_/4
+.. _debugger/0::triggered_line_number_/4:
+
+``triggered_line_number_/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of defined triggered breakpoints.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``triggered_line_number_(Entity,Line,TriggerEntity,TriggerLine)``
+| **Mode and number of proofs:**
+|    ``triggered_line_number_(?object_identifier,?integer,?object_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_line_number_(?object_identifier,?integer,?category_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_line_number_(?category_identifier,?integer,?object_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_line_number_(?category_identifier,?integer,?category_identifier,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: triggered_line_number_enabled_/2
+.. _debugger/0::triggered_line_number_enabled_/2:
+
+``triggered_line_number_enabled_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of enabled triggered breakpoints.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``triggered_line_number_enabled_(Entity,Line)``
+| **Mode and number of proofs:**
+|    ``triggered_line_number_enabled_(?object_identifier,?integer)`` - ``zero_or_more``
+|    ``triggered_line_number_enabled_(?category_identifier,?integer)`` - ``zero_or_more``
+
+
+------------
+
 .. index:: file_line_hit_count_/3
 .. _debugger/0::file_line_hit_count_/3:
 
 ``file_line_hit_count_/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Current call stack invocation number.
+Table of file and line hit counts (successful unifications with clause heads).
 
 | **Compilation flags:**
 |    ``dynamic``

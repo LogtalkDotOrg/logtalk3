@@ -245,11 +245,16 @@ Defining conditional line number spy points
 
 Conditional line number spy points are specified using the debugger ``spy/3``
 predicate. The condition can be a clause head successful unification count
-expression or a lambda expression (``[Count, N, Goal]>>Condition`` or
-``[Goal]>>Condition``  where ``Count`` is the unification count, ``N`` is the
+expression, a lambda expression, or another line number spy point (see next
+section).
+
+The supported lambda expressions are ``[Count, N, Goal]>>Condition`` and
+``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the
 goal invocation number, and ``Goal`` is the goal that unified with the clause
 head; ``Condition`` is called in the context of the ``user`` pseudo-object and
-must not have any side effects). For example:
+must not have any side effects.
+
+Some examples:
 
 .. code-block:: text
 
@@ -286,10 +291,27 @@ Conditional line numbers spy points can be removed by using the debugger
    All matching conditional line number spy points removed.
    yes
 
-The line number must for the first line of a clause that we want to conditionally
-spy. But note that only some Prolog backends provide accurate source
-file term line numbers. Check the :doc:`../devtools/debugger` tool documentation
-for details.
+The line number must for the first line of a clause that we want to
+conditionally spy. But note that only some Prolog backends provide
+accurate source file term line numbers.
+Check the :doc:`../devtools/debugger` tool documentation for details.
+
+
+Defining triggered line number spy points
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Conditional line number spy points that depend on other log point or line
+number spy points are known as *triggered* line number spy points. The
+debugger only breaks at a triggered line number spy point if the log point
+or line number spy point it depends on is hit first. For example:
+
+.. code-block:: text
+
+   | ?- debugger::spy(mars, 98, planet-76).
+
+   Conditional line number spy point added.
+   yes
+
 
 Defining context spy points
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

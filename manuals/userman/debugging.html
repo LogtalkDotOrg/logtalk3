@@ -88,6 +88,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#defining-spy-points">Defining spy points</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#defining-line-number-and-predicate-spy-points">Defining line number and predicate spy points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-conditional-line-number-spy-points">Defining conditional line number spy points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-triggered-line-number-spy-points">Defining triggered line number spy points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-context-spy-points">Defining context spy points</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#removing-all-spy-points">Removing all spy points</a></li>
 </ul>
@@ -377,11 +378,14 @@ documentation for details.</p>
 <h3>Defining conditional line number spy points<a class="headerlink" href="#defining-conditional-line-number-spy-points" title="Link to this heading"></a></h3>
 <p>Conditional line number spy points are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code>
 predicate. The condition can be a clause head successful unification count
-expression or a lambda expression (<code class="docutils literal notranslate"><span class="pre">[Count,</span> <span class="pre">N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> or
-<code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code>  where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
+expression, a lambda expression, or another line number spy point (see next
+section).</p>
+<p>The supported lambda expressions are <code class="docutils literal notranslate"><span class="pre">[Count,</span> <span class="pre">N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> and
+<code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code> where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
 goal invocation number, and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause
 head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object and
-must not have any side effects). For example:</p>
+must not have any side effects.</p>
+<p>Some examples:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 76, [weight(m1,_)]&gt;&gt;true).
 
 Conditional line number spy point added.
@@ -413,10 +417,23 @@ All matching conditional line number spy points removed.
 yes
 </pre></div>
 </div>
-<p>The line number must for the first line of a clause that we want to conditionally
-spy. But note that only some Prolog backends provide accurate source
-file term line numbers. Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool documentation
-for details.</p>
+<p>The line number must for the first line of a clause that we want to
+conditionally spy. But note that only some Prolog backends provide
+accurate source file term line numbers.
+Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool documentation for details.</p>
+</section>
+<section id="defining-triggered-line-number-spy-points">
+<h3>Defining triggered line number spy points<a class="headerlink" href="#defining-triggered-line-number-spy-points" title="Link to this heading"></a></h3>
+<p>Conditional line number spy points that depend on other log point or line
+number spy points are known as <em>triggered</em> line number spy points. The
+debugger only breaks at a triggered line number spy point if the log point
+or line number spy point it depends on is hit first. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(mars, 98, planet-76).
+
+Conditional line number spy point added.
+yes
+</pre></div>
+</div>
 </section>
 <section id="defining-context-spy-points">
 <h3>Defining context spy points<a class="headerlink" href="#defining-context-spy-points" title="Link to this heading"></a></h3>

@@ -14,7 +14,7 @@ Debugger protocol.
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:2:0
+| **Version:** 3:3:0
 | **Date:** 2024-06-18
 
 | **Compilation flags:**
@@ -217,7 +217,7 @@ Enumerates, by backtracking, all defined line number, predicate, and non-termina
 ``spy/3``
 ^^^^^^^^^
 
-Sets a conditional line number spy point (removing any existing log point or line number spy point defined for the same location). The condition can be a unification count expression or a lambda expression.
+Sets a conditional or a triggered line number spy point (removing any existing log point or spy point defined for the same location). The condition can be a unification count expression, a lambda expression, or another line number spy point. Fails if the spy point is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -225,12 +225,13 @@ Sets a conditional line number spy point (removing any existing log point or lin
 | **Template:**
 |    ``spy(Entity,Line,Condition)``
 | **Mode and number of proofs:**
-|    ``spy(+atom,+integer,@callable)`` - ``one``
+|    ``spy(+atom,+integer,@callable)`` - ``zero_or_one``
 
 | **Remarks:**
 
-    - Valid unification count expressions: ``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.
-    - Valid lambda expressions: ``[Count,N,Goal]>>Condition`` and ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``.
+    - Unification count expression conditions: ``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.
+    - Lambda expression conditions: ``[Count,N,Goal]>>Condition`` and ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``.
+    - Line number spy point conditions: ``Entity-Line``.
 
 
 ------------

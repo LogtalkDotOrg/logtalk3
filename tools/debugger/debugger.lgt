@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:8:1,
+		version is 7:9:0,
 		author is 'Paulo Moura',
-		date is 2024-06-17,
+		date is 2024-06-18,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -156,15 +156,35 @@
 	:- mode(conditional_line_number_(?object_identifier, ?integer, ?callable), zero_or_more).
 	:- mode(conditional_line_number_(?category_identifier, ?integer, ?callable), zero_or_more).
 	:- info(conditional_line_number_/3, [
-		comment is 'Table of log points.',
+		comment is 'Table of conditional breakpoints.',
 		argnames is ['Entity', 'Line', 'Condition']
+	]).
+
+	:- private(triggered_line_number_/4).
+	:- dynamic(triggered_line_number_/4).
+	:- mode(triggered_line_number_(?object_identifier, ?integer, ?object_identifier, ?integer), zero_or_more).
+	:- mode(triggered_line_number_(?object_identifier, ?integer, ?category_identifier, ?integer), zero_or_more).
+	:- mode(triggered_line_number_(?category_identifier, ?integer, ?object_identifier, ?integer), zero_or_more).
+	:- mode(triggered_line_number_(?category_identifier, ?integer, ?category_identifier, ?integer), zero_or_more).
+	:- info(triggered_line_number_/4, [
+		comment is 'Table of defined triggered breakpoints.',
+		argnames is ['Entity', 'Line', 'TriggerEntity', 'TriggerLine']
+	]).
+
+	:- private(triggered_line_number_enabled_/2).
+	:- dynamic(triggered_line_number_enabled_/2).
+	:- mode(triggered_line_number_enabled_(?object_identifier, ?integer), zero_or_more).
+	:- mode(triggered_line_number_enabled_(?category_identifier, ?integer), zero_or_more).
+	:- info(triggered_line_number_enabled_/2, [
+		comment is 'Table of enabled triggered breakpoints.',
+		argnames is ['Entity', 'Line']
 	]).
 
 	:- private(file_line_hit_count_/3).
 	:- dynamic(file_line_hit_count_/3).
 	:- mode(file_line_hit_count_(?atom, ?integer, ?integer), zero_or_one).
 	:- info(file_line_hit_count_/3, [
-		comment is 'Current call stack invocation number.',
+		comment is 'Table of file and line hit counts (successful unifications with clause heads).',
 		argnames is ['File', 'Line', 'Count']
 	]).
 
@@ -183,7 +203,9 @@
 		leash(full),
 		nodebug,
 		reset_invocation_number(_),
-		retractall(file_line_hit_count_(_, _, _)).
+		retractall(file_line_hit_count_(_, _, _)),
+		retractall(triggered_line_number_(_, _, _, _)),
+		retractall(triggered_line_number_enabled_(_, _)).
 
 	debug :-
 		logtalk::activate_debug_handler(debugger),
@@ -327,7 +349,9 @@
 		;	assertz(spying_line_number_(Template, Line))
 		),
 		retractall(logging_line_number_(Template, Line, _)),
-		retractall(conditional_line_number_(Template, Line, _)).
+		retractall(conditional_line_number_(Template, Line, _)),
+		retractall(triggered_line_number_(Template, Line, _, _)),
+		retractall(triggered_line_number_enabled_(Template, Line)).
 
 	spy_predicate(Functor, Arity, Original) :-
 		atom(Functor),
@@ -386,10 +410,20 @@
 	spy(Entity, Line, Condition) :-
 		callable(Entity),
 		integer(Line),
+		nonvar(Condition),
+		valid_conditional_spy_point_condition(Condition),
 		functor(Entity, Functor, Arity),
 		functor(Template, Functor, Arity),
 		retractall(conditional_line_number_(Template, Line, _)),
-		assertz(conditional_line_number_(Template, Line, Condition)),
+		(	Condition = TriggerEntity-TriggerLine ->
+			functor(TriggerEntity, TriggerFunctor, TriggerArity),
+			functor(TriggerTemplate, TriggerFunctor, TriggerArity),
+			assertz(triggered_line_number_(Template, Line, TriggerTemplate, TriggerLine)),
+			retractall(conditional_line_number_(Template, Line, _))
+		;	assertz(conditional_line_number_(Template, Line, Condition)),
+			retractall(triggered_line_number_(Template, Line, _, _)),
+			retractall(triggered_line_number_enabled_(Template, Line))
+		),
 		print_message(information, debugger, conditional_spy_point_added),
 		(	debugging_ ->
 			true
@@ -404,6 +438,48 @@
 		;	% assume entity not yet loaded
 			true
 		).
+
+	valid_conditional_spy_point_condition([_, _, _]>>Condition) :-
+		!,
+		callable(Condition).
+	valid_conditional_spy_point_condition([_]>>Condition) :-
+		!,
+		callable(Condition).
+	valid_conditional_spy_point_condition(Entity-Line) :-
+		!,
+		atom(Entity),
+		integer(Line),
+		once((
+			conditional_line_number_(Entity, Line, _)
+		;	spying_line_number_(Entity, Line)
+		)).
+	valid_conditional_spy_point_condition(>(Count)) :-
+		!,
+		integer(Count),
+		Count >= 1.
+	valid_conditional_spy_point_condition(>=(Count)) :-
+		!,
+		integer(Count),
+		Count >= 1.
+	valid_conditional_spy_point_condition(=:=(Count)) :-
+		!,
+		integer(Count),
+		Count >= 1.
+	valid_conditional_spy_point_condition(=<(Count)) :-
+		!,
+		integer(Count),
+		Count >= 1.
+	valid_conditional_spy_point_condition(<(Count)) :-
+		!,
+		integer(Count),
+		Count >= 1.
+	valid_conditional_spy_point_condition(mod(M)) :-
+		!,
+		integer(M),
+		M >= 1.
+	valid_conditional_spy_point_condition(Count) :-
+		integer(Count),
+		Count >= 1.
 
 	spying(Entity, Line, Lambda) :-
 		conditional_line_number_(Entity, Line, Lambda).
@@ -498,10 +574,13 @@
 		leashing_(Port).
 
 	% simplified version of the leashing_port/6 predicate just for checking
-	% for a leashed port before entering the port interaction loop
+	% for a leashed port before entering the port interaction loop where the
+	% check must be repeated due to some possible port commands
 	leashing_port(Port, PortUserName, N, Goal, ExCtx) :-
 		leashing_(PortUserName),
-		(	conditional_port(Port, N, Goal, _) ->
+		(	conditional_port(Port, N, Goal) ->
+			true
+		;	triggered_port(Port) ->
 			true
 		;	spying_port_code(Port, Goal, ExCtx, _) ->
 			true
@@ -517,6 +596,10 @@
 	leashing_port(Port, PortUserName, N, Goal, ExCtx, Code) :-
 		leashing_(PortUserName),
 		(	conditional_port(Port, N, Goal, Code) ->
+			retractall(leaping_(_)),
+			retractall(tracing_),
+			assertz(tracing_)
+		;	triggered_port(Port, Code) ->
 			retractall(leaping_(_)),
 			retractall(tracing_),
 			assertz(tracing_)
@@ -540,9 +623,17 @@
 
 	spying_port_code(fact(Entity,_,_,Line), _, _, '#') :-
 		spying_line_number_(Entity, Line),
+		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		;	true
+		),
 		!.
 	spying_port_code(rule(Entity,_,_,Line), _, _, '#') :-
 		spying_line_number_(Entity, Line),
+		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		;	true
+		),
 		!.
 	spying_port_code(_, Goal, _, '+') :-
 		functor(Goal, Functor, Arity),
@@ -573,6 +664,8 @@
 		),
 		retractall(spying_line_number_(Template, Line)),
 		retractall(conditional_line_number_(Template, Line, _)),
+		retractall(triggered_line_number_(Template, Line, _, _)),
+		retractall(triggered_line_number_enabled_(Template, Line)),
 		print_message(information, debugger, log_point_added),
 		(	debugging_ ->
 			true
@@ -592,10 +685,18 @@
 
 	logging_port(fact(Entity, Clause, File, Line), N, Goal, ExCtx) :-
 		logging_line_number_(Entity, Line, Message),
-		logging_message(Message, 'Fact', Entity, Clause, File, Line, N, Goal, ExCtx).
+		logging_message(Message, 'Fact', Entity, Clause, File, Line, N, Goal, ExCtx),
+		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		;	true
+		).
 	logging_port(rule(Entity, Clause, File, Line), N, Goal, ExCtx) :-
 		logging_line_number_(Entity, Line, Message),
-		logging_message(Message, 'Rule', Entity, Clause, File, Line, N, Goal, ExCtx).
+		logging_message(Message, 'Rule', Entity, Clause, File, Line, N, Goal, ExCtx),
+		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		;	true
+		).
 
 	logging_message(Message, _Port, _Entity, _Clause, _File, _Line, N, Goal, _ExCtx) :-
 		(	Message == ''
@@ -675,12 +776,27 @@
 
 	% conditional breakpoint predicates
 
+	conditional_port(fact(Entity, _, File, Line), N, Goal) :-
+		conditional_line_number_(Entity, Line, Condition),
+		conditional_port_check(Condition, File, Line, N, Goal).
+	conditional_port(rule(Entity, _, File, Line), N, Goal) :-
+		conditional_line_number_(Entity, Line, Condition),
+		conditional_port_check(Condition, File, Line, N, Goal).
+
 	conditional_port(fact(Entity, _, File, Line), N, Goal, '?') :-
 		conditional_line_number_(Entity, Line, Condition),
-		conditional_port_check(Condition, File, Line, N, Goal).
+		conditional_port_check(Condition, File, Line, N, Goal),
+		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		;	true
+		).
 	conditional_port(rule(Entity, _, File, Line), N, Goal, '?') :-
 		conditional_line_number_(Entity, Line, Condition),
-		conditional_port_check(Condition, File, Line, N, Goal).
+		conditional_port_check(Condition, File, Line, N, Goal),
+		(	triggered_line_number_(DependentEntity, DependentLine, Entity, Line) ->
+			assertz(triggered_line_number_enabled_(DependentEntity, DependentLine))
+		;	true
+		).
 
 	:- meta_predicate(conditional_port_check(*, *, *, *, *)).
 	conditional_port_check([Count,N0,Goal0]>>Condition, File, Line, N, Goal) :-
@@ -720,6 +836,18 @@
 	conditional_port_check(HitCount, File, Line, _, _) :-
 		file_line_hit_count_(File, Line, Count),
 		Count >= HitCount.
+
+	% triggered breakpoint predicates
+
+	triggered_port(fact(Entity, _, _, Line)) :-
+		triggered_line_number_enabled_(Entity, Line), !.
+	triggered_port(rule(Entity, _, _, Line)) :-
+		triggered_line_number_enabled_(Entity, Line), !.
+
+	triggered_port(fact(Entity, _, _, Line), '^') :-
+		retractall(triggered_line_number_enabled_(Entity, Line)).
+	triggered_port(rule(Entity, _, _, Line), '^') :-
+		retractall(triggered_line_number_enabled_(Entity, Line)).
 
 	% debug handler
 

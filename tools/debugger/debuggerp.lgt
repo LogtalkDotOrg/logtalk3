@@ -22,7 +22,7 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 3:2:0,
+		version is 3:3:0,
 		author is 'Paulo Moura',
 		date is 2024-06-18,
 		comment is 'Debugger protocol.',
@@ -102,13 +102,14 @@
 	]).
 
 	:- public((spy)/3).
-	:- mode(spy(+atom, +integer, @callable), one).
+	:- mode(spy(+atom, +integer, @callable), zero_or_one).
 	:- info((spy)/3, [
-		comment is 'Sets a conditional line number spy point (removing any existing log point or line number spy point defined for the same location). The condition can be a unification count expression or a lambda expression.',
+		comment is 'Sets a conditional or a triggered line number spy point (removing any existing log point or spy point defined for the same location). The condition can be a unification count expression, a lambda expression, or another line number spy point. Fails if the spy point is invalid.',
 		argnames is ['Entity', 'Line', 'Condition'],
 		remarks is [
-			'Valid unification count expressions' - '``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.',
-			'Valid lambda expressions' - '``[Count,N,Goal]>>Condition`` and ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``.'
+			'Unification count expression conditions' - '``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.',
+			'Lambda expression conditions' - '``[Count,N,Goal]>>Condition`` and ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``.',
+			'Line number spy point conditions' - '``Entity-Line``.'
 		]
 	]).
 
