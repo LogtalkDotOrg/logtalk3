@@ -15,7 +15,7 @@ Debugger protocol.
 
 | **Author:** Paulo Moura
 | **Version:** 3:2:0
-| **Date:** 2024-06-17
+| **Date:** 2024-06-18
 
 | **Compilation flags:**
 |    ``static``
@@ -178,7 +178,7 @@ Stops tracing of calls compiled in debug mode. Debugger will still stop at defin
 ``spy/1``
 ^^^^^^^^^
 
-Sets a line number spy point (removing any existing log point defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
+Sets a line number spy point (removing any existing log point or conditional breakpoint defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -217,7 +217,7 @@ Enumerates, by backtracking, all defined line number, predicate, and non-termina
 ``spy/3``
 ^^^^^^^^^
 
-Sets a conditional line number spy point. The condition can be a unification count expression or a lambda expression (``[Count,N,Goal]>>Condition`` or ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``).
+Sets a conditional line number spy point (removing any existing log point or line number spy point defined for the same location). The condition can be a unification count expression or a lambda expression.
 
 | **Compilation flags:**
 |    ``static``
@@ -226,6 +226,11 @@ Sets a conditional line number spy point. The condition can be a unification cou
 |    ``spy(Entity,Line,Condition)``
 | **Mode and number of proofs:**
 |    ``spy(+atom,+integer,@callable)`` - ``one``
+
+| **Remarks:**
+
+    - Valid unification count expressions: ``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.
+    - Valid lambda expressions: ``[Count,N,Goal]>>Condition`` and ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``.
 
 
 ------------

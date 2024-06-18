@@ -24,7 +24,7 @@
 	:- info([
 		version is 3:2:0,
 		author is 'Paulo Moura',
-		date is 2024-06-17,
+		date is 2024-06-18,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
@@ -90,7 +90,7 @@
 	:- mode(spy(@spy_point), zero_or_one).
 	:- mode(spy(@list(spy_point)), zero_or_one).
 	:- info((spy)/1, [
-		comment is 'Sets a line number spy point (removing any existing log point defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
+		comment is 'Sets a line number spy point (removing any existing log point or conditional breakpoint defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
 		argnames is ['SpyPoint']
 	]).
 
@@ -104,8 +104,12 @@
 	:- public((spy)/3).
 	:- mode(spy(+atom, +integer, @callable), one).
 	:- info((spy)/3, [
-		comment is 'Sets a conditional line number spy point. The condition can be a unification count expression or a lambda expression (``[Count,N,Goal]>>Condition`` or ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``).',
-		argnames is ['Entity', 'Line', 'Condition']
+		comment is 'Sets a conditional line number spy point (removing any existing log point or line number spy point defined for the same location). The condition can be a unification count expression or a lambda expression.',
+		argnames is ['Entity', 'Line', 'Condition'],
+		remarks is [
+			'Valid unification count expressions' - '``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.',
+			'Valid lambda expressions' - '``[Count,N,Goal]>>Condition`` and ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the invocation number, and ``Goal`` is the goal that unified with the clause head; ``Condition`` is called in the context of ``user``.'
+		]
 	]).
 
 	:- public(spying/3).
