@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Set CLASSPATH environment variable for LVM
-##   Last updated on July 21, 2023
+##   Last updated on June 19, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -23,7 +23,7 @@
 #############################################################################
 
 
-NEO4J="$(neo4j --verbose status | grep 'app.home' | sed 's/.*-Dapp.home=\(.*\),.*/\1/')"
+NEO4J="$(neo4j status --verbose | grep 'app.home' | sed 's/.*-Dapp.home=\(.*\),.*/\1/')"
 
 for jar in "$NEO4J"/lib/*.jar; do
 	CLASSPATH="$jar":$CLASSPATH

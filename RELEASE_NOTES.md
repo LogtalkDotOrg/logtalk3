@@ -65,9 +65,11 @@ test to simplify parsing by other tools.
 Examples
 --------
 
-ADDED: New `self_vs_super` example illustrating the semantics of calling an
+* ADDED: New `self_vs_super` example illustrating the semantics of calling an
 inherited meta-predicate using a message to "self" versus using a "super"
 call.
+
+* FIXED: The `neo4j` example finding of the Neo4j installation directory.
 
 Installers and installation scripts
 -----------------------------------

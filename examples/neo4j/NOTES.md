@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,8 +31,8 @@ The second example is more elaborated and based on Neo4j example found at:
 
 https://console.neo4j.org
 
-After instaling Neo4j, you must edit the `neo4j.conf` file to run this
-example:
+After instaling Neo4j (5.x or later version), you must edit the `neo4j.conf`
+file to run this example:
 
 1. Disable authentication:
 
@@ -54,7 +54,7 @@ or (depending on the Neo4j version):
 
 	#server.jvm.additional=-Djava.awt.headless=true-Dunsupported.dbms.udc.source=homebrew
 
-Save the edit file and start Neo4j:
+Save the edit file and start (or restart) Neo4j:
 
 	$ neo4j start
 
