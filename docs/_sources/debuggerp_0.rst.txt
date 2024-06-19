@@ -15,7 +15,7 @@ Debugger protocol.
 
 | **Author:** Paulo Moura
 | **Version:** 3:3:0
-| **Date:** 2024-06-18
+| **Date:** 2024-06-19
 
 | **Compilation flags:**
 |    ``static``
@@ -28,10 +28,13 @@ Debugger protocol.
 | **Remarks:**
 
    - Debugger help: Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.
-   - Predicate spy point: Specified as a ground term ``Functor/Arity``.
-   - Non-terminal spy point: Specified as a ground term ``Functor//Arity``.
-   - Breakpoint: Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.
-   - Context spy point: Specified as a ``(Sender, This, Self, Goal)`` tuple.
+   - Predicate breakpoint: Specified as a ground term ``Functor/Arity``.
+   - Non-terminal breakpoint: Specified as a ground term ``Functor//Arity``.
+   - Clause breakpoint: Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.
+   - Conditional breakpoint: Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and a condition. ``Line`` must be the first source file line of an entity clause.
+   - Hit count breakpoint: Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and an unification count expression as a condition. ``Line`` must be the first source file line of an entity clause.
+   - Triggered breakpoint: Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and another breakpoint as a condition. ``Line`` must be the first source file line of an entity clause.
+   - Context breakpoint: Specified as a ``(Sender, This, Self, Goal)`` tuple.
    - Log point: Specified as an ``(Entity, Line, Message)`` tuple.
    - Leash port shorthands: ``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.
 
@@ -51,7 +54,7 @@ Public predicates
 ``reset/0``
 ^^^^^^^^^^^
 
-Resets all debugging settings (including breakpoints, log points, spy points, and leashed ports) and turns off debugging.
+Resets all debugging settings (including breakpoints, log points, and leashed ports) and turns off debugging.
 
 | **Compilation flags:**
 |    ``static``
@@ -71,7 +74,7 @@ Resets all debugging settings (including breakpoints, log points, spy points, an
 ``debug/0``
 ^^^^^^^^^^^
 
-Starts debugging for all defined spy points.
+Starts debugging for all defined breakpoints.
 
 | **Compilation flags:**
 |    ``static``
@@ -88,7 +91,7 @@ Starts debugging for all defined spy points.
 ``nodebug/0``
 ^^^^^^^^^^^^^
 
-Stops debugging for all defined spy points. Also turns off tracing. Does not remove defined spy points.
+Stops debugging for all defined breakpoints. Also turns off tracing. Does not remove defined breakpoints.
 
 | **Compilation flags:**
 |    ``static``
@@ -108,7 +111,7 @@ Stops debugging for all defined spy points. Also turns off tracing. Does not rem
 ``debugging/0``
 ^^^^^^^^^^^^^^^
 
-Reports current debugging settings, including spy points and log points.
+Reports current debugging settings, including breakpoints and log points.
 
 | **Compilation flags:**
 |    ``static``
@@ -161,7 +164,7 @@ Starts tracing all calls compiled in debug mode.
 ``notrace/0``
 ^^^^^^^^^^^^^
 
-Stops tracing of calls compiled in debug mode. Debugger will still stop at defined spy points.
+Stops tracing of calls compiled in debug mode. Debugger will still stop at defined breakpoints.
 
 | **Compilation flags:**
 |    ``static``
@@ -217,13 +220,13 @@ Enumerates, by backtracking, all leashed ports (valid ports are ``fact``, ``rule
 ``spy/1``
 ^^^^^^^^^
 
-Sets an unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.
+Sets a predicate or clause breakpoint (removing any existing log point or breakpoint defined for the same location, or a list of breakpoints. Fails if a breakpoint is invalid.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``spy(SpyPoint)``
+|    ``spy(Breakpoint)``
 | **Mode and number of proofs:**
 |    ``spy(@spy_point)`` - ``zero_or_one``
 |    ``spy(@list(spy_point))`` - ``zero_or_one``
@@ -237,13 +240,13 @@ Sets an unconditional breakpoint (removing any existing log point or breakpoints
 ``spying/1``
 ^^^^^^^^^^^^
 
-Enumerates, by backtracking, all defined unconditional breakpoints, predicate spy points, and non-terminal spy points.
+Enumerates, by backtracking, all defined predicate and clause breakpoints.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``spying(SpyPoint)``
+|    ``spying(Breakpoint)``
 | **Mode and number of proofs:**
 |    ``spying(?spy_point)`` - ``zero_or_more``
 
@@ -256,13 +259,13 @@ Enumerates, by backtracking, all defined unconditional breakpoints, predicate sp
 ``nospy/1``
 ^^^^^^^^^^^
 
-Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.
+Removes all matching predicate and clause breakpoints.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``nospy(SpyPoint)``
+|    ``nospy(Breakpoint)``
 | **Mode and number of proofs:**
 |    ``nospy(@var)`` - ``one``
 |    ``nospy(@spy_point)`` - ``one``
@@ -277,7 +280,7 @@ Removes all matching unconditional breakpoints, predicate spy points, and non-te
 ``spy/3``
 ^^^^^^^^^
 
-Sets a conditional or triggered breakpoint (removing any existing log point or breakpoints defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.
+Sets a conditional or triggered breakpoint (removing any existing log point or breakpoint defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -340,7 +343,7 @@ Removes all matching conditional and triggered breakpoints.
 ``spy/4``
 ^^^^^^^^^
 
-Sets a context spy point.
+Sets a context breakpoint.
 
 | **Compilation flags:**
 |    ``static``
@@ -359,7 +362,7 @@ Sets a context spy point.
 ``spying/4``
 ^^^^^^^^^^^^
 
-Enumerates, by backtracking, all defined context spy points.
+Enumerates, by backtracking, all defined context breakpoints.
 
 | **Compilation flags:**
 |    ``static``
@@ -378,7 +381,7 @@ Enumerates, by backtracking, all defined context spy points.
 ``nospy/4``
 ^^^^^^^^^^^
 
-Removes all matching context spy points.
+Removes all matching context breakpoints.
 
 | **Compilation flags:**
 |    ``static``
@@ -397,7 +400,7 @@ Removes all matching context spy points.
 ``nospyall/0``
 ^^^^^^^^^^^^^^
 
-Removes all breakpoints, log points, and spy points.
+Removes all breakpoints and log points.
 
 | **Compilation flags:**
 |    ``static``

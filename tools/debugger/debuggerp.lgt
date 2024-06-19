@@ -24,14 +24,17 @@
 	:- info([
 		version is 3:3:0,
 		author is 'Paulo Moura',
-		date is 2024-06-18,
+		date is 2024-06-19,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
-			'Predicate spy point' - 'Specified as a ground term ``Functor/Arity``.',
-			'Non-terminal spy point' - 'Specified as a ground term ``Functor//Arity``.',
-			'Breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
-			'Context spy point' - 'Specified as a ``(Sender, This, Self, Goal)`` tuple.',
+			'Predicate breakpoint' - 'Specified as a ground term ``Functor/Arity``.',
+			'Non-terminal breakpoint' - 'Specified as a ground term ``Functor//Arity``.',
+			'Clause breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound. ``Line`` must be the first source file line of an entity clause.',
+			'Conditional breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and a condition. ``Line`` must be the first source file line of an entity clause.',
+			'Hit count breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and an unification count expression as a condition. ``Line`` must be the first source file line of an entity clause.',
+			'Triggered breakpoint' - 'Specified as an ``Entity-Line`` term with both ``Entity`` and ``Line`` bound and another breakpoint as a condition. ``Line`` must be the first source file line of an entity clause.',
+			'Context breakpoint' - 'Specified as a ``(Sender, This, Self, Goal)`` tuple.',
 			'Log point' - 'Specified as an ``(Entity, Line, Message)`` tuple.',
 			'Leash port shorthands' - '``none`` - ``[]``, ``loose`` - ``[fact,rule,call]``, ``half`` - ``[fact,rule,call,redo]``, ``tight`` - ``[fact,rule,call,redo,fail,exception]``, and ``full`` - ``[fact,rule,call,exit,redo,fail,exception]``.'
 		],
@@ -44,27 +47,27 @@
 	:- public(reset/0).
 	:- mode(reset, one).
 	:- info(reset/0, [
-		comment is 'Resets all debugging settings (including breakpoints, log points, spy points, and leashed ports) and turns off debugging.',
+		comment is 'Resets all debugging settings (including breakpoints, log points, and leashed ports) and turns off debugging.',
 		see_also is [nospyall/0]
 	]).
 
 	:- public(debug/0).
 	:- mode(debug, one).
 	:- info(debug/0, [
-		comment is 'Starts debugging for all defined spy points.'
+		comment is 'Starts debugging for all defined breakpoints.'
 	]).
 
 	:- public(nodebug/0).
 	:- mode(nodebug, one).
 	:- info(nodebug/0, [
-		comment is 'Stops debugging for all defined spy points. Also turns off tracing. Does not remove defined spy points.',
+		comment is 'Stops debugging for all defined breakpoints. Also turns off tracing. Does not remove defined breakpoints.',
 		see_also is [reset/0]
 	]).
 
 	:- public(debugging/0).
 	:- mode(debugging, one).
 	:- info(debugging/0, [
-		comment is 'Reports current debugging settings, including spy points and log points.'
+		comment is 'Reports current debugging settings, including breakpoints and log points.'
 	]).
 
 	:- public(debugging/1).
@@ -83,7 +86,7 @@
 	:- public(notrace/0).
 	:- mode(notrace, one).
 	:- info(notrace/0, [
-		comment is 'Stops tracing of calls compiled in debug mode. Debugger will still stop at defined spy points.'
+		comment is 'Stops tracing of calls compiled in debug mode. Debugger will still stop at defined breakpoints.'
 	]).
 
 	:- public(leash/1).
@@ -105,15 +108,15 @@
 	:- mode(spy(@spy_point), zero_or_one).
 	:- mode(spy(@list(spy_point)), zero_or_one).
 	:- info((spy)/1, [
-		comment is 'Sets an unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.',
-		argnames is ['SpyPoint']
+		comment is 'Sets a predicate or clause breakpoint (removing any existing log point or breakpoint defined for the same location, or a list of breakpoints. Fails if a breakpoint is invalid.',
+		argnames is ['Breakpoint']
 	]).
 
 	:- public(spying/1).
 	:- mode(spying(?spy_point), zero_or_more).
 	:- info(spying/1, [
-		comment is 'Enumerates, by backtracking, all defined unconditional breakpoints, predicate spy points, and non-terminal spy points.',
-		argnames is ['SpyPoint']
+		comment is 'Enumerates, by backtracking, all defined predicate and clause breakpoints.',
+		argnames is ['Breakpoint']
 	]).
 
 	:- public((nospy)/1).
@@ -121,14 +124,14 @@
 	:- mode(nospy(@spy_point), one).
 	:- mode(nospy(@list(spy_point)), one).
 	:- info((nospy)/1, [
-		comment is 'Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.',
-		argnames is ['SpyPoint']
+		comment is 'Removes all matching predicate and clause breakpoints.',
+		argnames is ['Breakpoint']
 	]).
 
 	:- public((spy)/3).
 	:- mode(spy(+atom, +integer, @callable), zero_or_one).
 	:- info((spy)/3, [
-		comment is 'Sets a conditional or triggered breakpoint (removing any existing log point or breakpoints defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.',
+		comment is 'Sets a conditional or triggered breakpoint (removing any existing log point or breakpoint defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.',
 		argnames is ['Entity', 'Line', 'Condition'],
 		remarks is [
 			'Unification count expression conditions' - '``>(Count)``, ``>=(Count)``, ``=:=(Count)``, ``=<(Count)``, ``<(Count)``, ``mod(M)``, and ``Count``.',
@@ -154,28 +157,28 @@
 	:- public((spy)/4).
 	:- mode(spy(@term, @term, @term, @term), one).
 	:- info((spy)/4, [
-		comment is 'Sets a context spy point.',
+		comment is 'Sets a context breakpoint.',
 		argnames is ['Sender', 'This', 'Self', 'Goal']
 	]).
 
 	:- public(spying/4).
 	:- mode(spying(?term, ?term, ?term, ?term), zero_or_more).
 	:- info(spying/4, [
-		comment is 'Enumerates, by backtracking, all defined context spy points.',
+		comment is 'Enumerates, by backtracking, all defined context breakpoints.',
 		argnames is ['Sender', 'This', 'Self', 'Goal']
 	]).
 
 	:- public((nospy)/4).
 	:- mode(nospy(@term, @term, @term, @term), one).
 	:- info((nospy)/4, [
-		comment is 'Removes all matching context spy points.',
+		comment is 'Removes all matching context breakpoints.',
 		argnames is ['Sender', 'This', 'Self', 'Goal']
 	]).
 
 	:- public(nospyall/0).
 	:- mode(nospyall, one).
 	:- info(nospyall/0, [
-		comment is 'Removes all breakpoints, log points, and spy points.',
+		comment is 'Removes all breakpoints and log points.',
 		see_also is [reset/0]
 	]).
 

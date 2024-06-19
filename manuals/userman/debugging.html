@@ -85,17 +85,18 @@
 <li class="toctree-l3"><a class="reference internal" href="#compiling-source-files-in-debug-mode">Compiling source files in debug mode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#procedure-box-model">Procedure box model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#activating-the-debugger">Activating the debugger</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#defining-spy-points-and-breakpoints">Defining spy points and breakpoints</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#defining-breakpoints-and-predicate-spy-points">Defining breakpoints and predicate spy points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-breakpoints">Defining breakpoints</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#defining-predicate-and-clause-breakpoints">Defining predicate and clause breakpoints</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-conditional-breakpoints">Defining conditional breakpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-hit-count-breakpoints">Defining hit count breakpoints</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-triggered-breakpoints">Defining triggered breakpoints</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#defining-context-spy-points">Defining context spy points</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#removing-all-breakpoints-and-spy-points">Removing all breakpoints and spy points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-context-breakpoints">Defining context breakpoints</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#removing-all-breakpoints">Removing all breakpoints</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-log-points">Defining log points</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tracing-program-execution">Tracing program execution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#debugging-using-spy-points">Debugging using spy points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#debugging-using-breakpoints">Debugging using breakpoints</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debugging-commands">Debugging commands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#customizing-term-writing">Customizing term writing</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#term-write-depth">Term write depth</a></li>
@@ -165,26 +166,27 @@
   <section id="debugging">
 <span id="debugging-debugging"></span><h1>Debugging<a class="headerlink" href="#debugging" title="Link to this heading"></a></h1>
 <p>The Logtalk distribution includes a command-line <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a>
-tool implemented as a Logtalk application. It can be loaded by typing:</p>
+tool implemented as a Logtalk application using the debugging API. It can be
+loaded by typing:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_load(debugger(loader)).
 </pre></div>
 </div>
 <p>It can also be loaded automatically at startup time by using a
-<a class="reference internal" href="../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a>. This tool implements debugging features similar to
-those found on most Prolog systems. There are some differences, however,
-between the usual implementation of Prolog debuggers and the current
-implementation of the Logtalk debugger that you should be aware. First,
-unlike most Prolog debuggers, the Logtalk debugger is not a built-in feature
-but a regular Logtalk application using documented debugging hook predicates.
-This translates to a different, although similar, set of debugging features
+<a class="reference internal" href="../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool includes the debugging features found in traditional
+Prolog debuggers. There are some differences, however, between the usual
+implementation of Prolog debuggers and the current implementation of the
+Logtalk debugger that you should be aware. First, unlike most Prolog
+debuggers, the Logtalk debugger is not a built-in feature but a regular
+Logtalk application using documented debugging hook predicates. This
+translates to a different, although similar, set of debugging features
 when compared with some of the more sophisticated Prolog debuggers. Second,
 debugging is only possible for entities compiled in debug mode. When
 compiling an entity in debug mode, Logtalk decorates clauses with source
-information to allow tracing of the goal execution. Third, the implementation
-of spy points allows the user to specify the
-<a class="reference internal" href="../glossary.html#term-predicate-execution-context"><span class="xref std std-term">execution context</span></a> for entering
-the debugger. This feature is a consequence of the encapsulation of
-predicates inside objects.</p>
+information to allow tracing of the goal execution. Third, the tool
+provides several types of breakpoints (for pausing and interacting with
+the debugger) and also log points while most Prolog systems are limited
+to traditional predicate spy points.</p>
 <section id="compiling-source-files-in-debug-mode">
 <span id="debugging-debug-mode"></span><h2>Compiling source files in debug mode<a class="headerlink" href="#compiling-source-files-in-debug-mode" title="Link to this heading"></a></h2>
 <p>Compilation of source files in debug mode is controlled by the
@@ -254,8 +256,8 @@ flow when calling a predicate:</p>
 <div class="line">failure of a predicate call</div>
 </div>
 </div>
-<p>Logtalk, as found on some recent Prolog systems, adds a port for
-dealing with exceptions thrown when calling a predicate:</p>
+<p>Logtalk, as found on some recent Prolog systems, adds a port for dealing
+with exceptions thrown when calling a predicate:</p>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exception</span></code></div>
 <div class="line-block">
@@ -278,7 +280,7 @@ goal with, respectively, a fact and a rule head:</p>
 <p>Following Prolog tradition, the user may define for which ports the
 debugger should pause for user interaction by specifying a list of
 <em>leashed</em> ports. Unleashed ports are just printed with no pause for
-user interaction. For example:</p>
+user interaction when tracing. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::leash([call, exit, fail]).
 </pre></div>
 </div>
@@ -317,83 +319,127 @@ some Prolog compilers:</p>
 <h2>Activating the debugger<a class="headerlink" href="#activating-the-debugger" title="Link to this heading"></a></h2>
 <p>The <a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-trace-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">debuggerp::trace/0</span></a> and
 <a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-debug-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">debuggerp::debug/0</span></a> predicates implicitly
-select the <cite>debugger</cite> tool as the active debug handler. If you have additional
-debug handlers loaded (e.g. the <cite>ports_profiler</cite> tool), those would no longer
+select the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as the active debug handler. If you have additional
+debug handlers loaded (e.g. the <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tool), those would no longer
 be active (there can be only one active debug handler at any given time). The
 <a class="reference external" href="../../docs/debuggerp_0.html#debuggerp-0-nodebug-0" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">debuggerp::nodebug/0</span></a> predicate implicitly
-deselects the <cite>debugger</cite> tool as the active debug handler.</p>
+deselects the <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool as the active debug handler.</p>
 </section>
-<section id="defining-spy-points-and-breakpoints">
-<h2>Defining spy points and breakpoints<a class="headerlink" href="#defining-spy-points-and-breakpoints" title="Link to this heading"></a></h2>
-<p>Traditional spy points can be defined by simply stating which predicates
-should be spied (as common in Prolog debuggers), by specifying the execution
-context for activating a spy point, or by specifying as <em>breakpoints</em> the
-heads of predicate clauses. To simplify the definition of breakpoints, these
-are specified using the entity identifier instead of the file name (as all
-entities share a single namespace, an entity can only be defined in a single
-file) and the first line number of clause head. But note that only some
-Prolog backends provide accurate source file term line numbers. Check the
-<a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool documentation for details.</p>
-<section id="defining-breakpoints-and-predicate-spy-points">
-<h3>Defining breakpoints and predicate spy points<a class="headerlink" href="#defining-breakpoints-and-predicate-spy-points" title="Link to this heading"></a></h3>
-<p>Unconditional breakpoints and predicate spy points are specified using the
-debugger <code class="docutils literal notranslate"><span class="pre">spy/1</span></code> predicate. The argument can be a breakpoint (expressed
-as a <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a
-non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), or a list of breakpoints and spy
-points. For example:</p>
+<section id="defining-breakpoints">
+<h2>Defining breakpoints<a class="headerlink" href="#defining-breakpoints" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">debugger</span></code> tool provides the following breakpoint types where the debugger
+pauses at a leashed port for user interaction:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Predicate breakpoints</dt><dd><p>Traditional Prolog spy points defined using a predicate (or a non-terminal)
+indicator.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Clause breakpoints</dt><dd><p>Defined using the location of a clause.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Conditional breakpoints</dt><dd><p>Defined using the location of a clause and a condition for pausing.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Hit count breakpoints</dt><dd><p>Defined using the location of a clause and an unification count expression
+as a condition for pausing.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Triggered breakpoints</dt><dd><p>Defined using the location of a clause and another breakpoint that must be
+hit first as a condition for pausing.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Context breakpoints</dt><dd><p>Defined using execution context and goal templates as a condition for
+pausing.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Clause breakpoints are checked when the current goal successfully unifies
+with a clause head. To simplify their definition, these are specified using
+the entity identifier instead of the file name (as all entities share a single
+namespace, an entity can only be defined in a single file) and the first line
+number of the clause head. But note that only some Prolog backends provide
+accurate source file term line numbers. Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a>
+tool documentation for details.</p>
+<section id="defining-predicate-and-clause-breakpoints">
+<h3>Defining predicate and clause breakpoints<a class="headerlink" href="#defining-predicate-and-clause-breakpoints" title="Link to this heading"></a></h3>
+<p>Predicate and clause breakpoints can be defined using the debugger <code class="docutils literal notranslate"><span class="pre">spy/1</span></code>
+predicate. The argument can be a predicate indicator (<code class="docutils literal notranslate"><span class="pre">Name/Arity</span></code>), a
+non-terminal indicator (<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>), a clause location (expressed as
+an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> pair), or a list of breakpoints. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(person-42).
 
-Spy points set.
+All specified breakpoints added.
 yes
 
 | ?- debugger::spy(foo/2).
 
-Spy points set.
+All specified breakpoints added.
 yes
 
 | ?- debugger::spy([foo/4, bar//1, agent-99]).
 
-Spy points set.
+All specified breakpoints added.
 yes
 </pre></div>
 </div>
-<p>Note that setting an unconditional breakpoint implicitly removes any existing
+<p>Note that setting a clause breakpoint implicitly removes any existing
 conditional breakpoint, triggered breakpoint, or log point for the same
-location.</p>
-<p>Unconditional breakpoints and predicate spy points can be removed by using
-the debugger <code class="docutils literal notranslate"><span class="pre">nospy/1</span></code> predicate. The argument can also be a list or a
-non-instantiated variable in which case all breakpoints and predicate spy
-points will be removed. For example:</p>
+clause.</p>
+<p>Unconditional clause and predicate breakpoints can be removed by
+using the debugger <code class="docutils literal notranslate"><span class="pre">nospy/1</span></code> predicate. The argument can also be a list
+of breakpoints or a non-instantiated variable in which case all breakpoints
+will be removed. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(_).
 
-All matching predicate spy points removed.
+All matching predicate and clause breakpoints removed.
 yes
 </pre></div>
 </div>
 </section>
 <section id="defining-conditional-breakpoints">
 <h3>Defining conditional breakpoints<a class="headerlink" href="#defining-conditional-breakpoints" title="Link to this heading"></a></h3>
-<p>Conditional breakpoints are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code> predicate.
-The condition can be a clause head successful unification count expression, a
-lambda expression, or another breakpoint (see next section).</p>
+<p>Conditional clause breakpoints are specified using the debugger <code class="docutils literal notranslate"><span class="pre">spy/3</span></code>
+predicate. The condition can be a lambda expression, an unification count
+expression (see next section), or another breakpoint (see next section).</p>
 <p>The supported lambda expressions are <code class="docutils literal notranslate"><span class="pre">[Count,</span> <span class="pre">N,</span> <span class="pre">Goal]&gt;&gt;Condition</span></code> and
 <code class="docutils literal notranslate"><span class="pre">[Goal]&gt;&gt;Condition</span></code> where <code class="docutils literal notranslate"><span class="pre">Count</span></code> is the unification count, <code class="docutils literal notranslate"><span class="pre">N</span></code> is the
 goal invocation number, and <code class="docutils literal notranslate"><span class="pre">Goal</span></code> is the goal that unified with the clause
 head; <code class="docutils literal notranslate"><span class="pre">Condition</span></code> is called in the context of the <code class="docutils literal notranslate"><span class="pre">user</span></code> pseudo-object and
-must not have any side effects.</p>
-<p>Some examples:</p>
+must not have any side effects. Some examples:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 76, [weight(m1,_)]&gt;&gt;true).
-
-Conditional breakpoint added.
-yes
-
-| ?- debugger::spy(planet, 41, =&lt;(2)).
 
 Conditional breakpoint added.
 yes
 </pre></div>
 </div>
-<p>The valid unification count expressions are:</p>
+<p>Note that setting a conditional breakpoint will remove any existing clause
+breakpoint or log point for the same location.</p>
+<p>Conditional breakpoints can be removed by using the debugger <code class="docutils literal notranslate"><span class="pre">nospy/3</span></code>
+predicate. For example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(planet, _, _).
+
+All matching conditional breakpoints removed.
+yes
+</pre></div>
+</div>
+</section>
+<section id="defining-hit-count-breakpoints">
+<h3>Defining hit count breakpoints<a class="headerlink" href="#defining-hit-count-breakpoints" title="Link to this heading"></a></h3>
+<p>Conditional clause breakpoints that depend on the unification count are
+known as <em>hit count</em> clause breakpoints. The debugger pauses at a hit
+count breakpoint depending an unification count expression:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&gt;(Count)</span></code> - break when the unification count is greater than <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&gt;=(Count)</span></code> - break when the unification count is greater than or equal to <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
@@ -403,27 +449,21 @@ yes
 <li><p><code class="docutils literal notranslate"><span class="pre">mod(M)</span></code> - break when the unification count modulo <code class="docutils literal notranslate"><span class="pre">M</span></code> is zero</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Count</span></code> - break when the unification count is greater than or equal to <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
 </ul>
-<p>Note that setting a conditional line number spy point will remove any existing
-log point for the same location.</p>
-<p>Conditional line numbers spy points can be removed by using the debugger
-<code class="docutils literal notranslate"><span class="pre">nospy/3</span></code> predicate. For example:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(planet, _, _).
-
-All matching conditional breakpoints removed.
-yes
-</pre></div>
+<p>For example:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">?- debugger::spy(planet, 41, =&lt;(2)).</div>
 </div>
-<p>The line number must for the first line of a clause that we want to
-conditionally spy. But note that only some Prolog backends provide
-accurate source file term line numbers.
-Check the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool documentation for details.</p>
+<p>Conditional breakpoint added.
+yes</p>
+</div></blockquote>
 </section>
 <section id="defining-triggered-breakpoints">
 <h3>Defining triggered breakpoints<a class="headerlink" href="#defining-triggered-breakpoints" title="Link to this heading"></a></h3>
-<p>Conditional breakpoints that depend on other breakpoints are known as
-<em>triggered</em> breakpoints. The debugger only breaks at a triggered breakpoint
-if the log point or line number spy point it depends on is hit first. For
-example:</p>
+<p>Conditional clause breakpoints that depend on other clause breakpoint or
+on a log point are known as <em>triggered</em> clause breakpoints. The debugger
+only pauses at a triggered breakpoint if the clause breakpoint or log point
+it depends on is hit first. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(mars, 98, planet-76).
 
 Triggered breakpoint added.
@@ -437,19 +477,19 @@ clause in the source file defining the <code class="docutils literal notranslate
 <p>The debugger prints a <code class="docutils literal notranslate"><span class="pre">^</span></code> character at the beginning of the line for easy
 recognition of triggered breakpoints.</p>
 </section>
-<section id="defining-context-spy-points">
-<h3>Defining context spy points<a class="headerlink" href="#defining-context-spy-points" title="Link to this heading"></a></h3>
-<p>A context spy point is a tuple describing a message execution context and
+<section id="defining-context-breakpoints">
+<h3>Defining context breakpoints<a class="headerlink" href="#defining-context-breakpoints" title="Link to this heading"></a></h3>
+<p>A context breakpoint is a tuple describing a message execution context and
 a goal:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>(<span class="nv">Sender</span>, <span class="nv">This</span>, <span class="nv">Self</span>, <span class="nv">Goal</span>)
 </pre></div>
 </div>
-<p>The debugger is evoked whenever the spy point goal and the specified
+<p>The debugger pauses for user interaction whenever the breakpoint goal and
 execution context subsumes the goal currently being executed and its
-execution context. The user may establish any number of context spy points
+execution context. The user may establish any number of context breakpoints
 as necessary. For example, in order to call the debugger whenever a
 predicate defined on an object named <code class="docutils literal notranslate"><span class="pre">foo</span></code> is called we may define
-the following spy point:</p>
+the following context breakpoint:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, foo, _, _).
 
 Spy point set.
@@ -465,30 +505,27 @@ yes
 </pre></div>
 </div>
 <p>The debugger <code class="docutils literal notranslate"><span class="pre">nospy/4</span></code> predicate may be used to remove all matching
-spy points. For example, the call:</p>
+breakpoints. For example, the call:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(_, _, foo, _).
 
-All matching context spy points removed.
+All matching context breakpoints removed.
 yes
 </pre></div>
 </div>
-<p>will remove all context spy points where the value of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> is the
+<p>will remove all context breakpoints where the value of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a> is the
 atom <code class="docutils literal notranslate"><span class="pre">foo</span></code>.</p>
 </section>
-<section id="removing-all-breakpoints-and-spy-points">
-<h3>Removing all breakpoints and spy points<a class="headerlink" href="#removing-all-breakpoints-and-spy-points" title="Link to this heading"></a></h3>
-<p>We can remove all breakpoints and spy points by using the debugger
-<code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code> predicate:</p>
+<section id="removing-all-breakpoints">
+<h3>Removing all breakpoints<a class="headerlink" href="#removing-all-breakpoints" title="Link to this heading"></a></h3>
+<p>We can remove all breakpoints by using the debugger <code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code> predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospyall.
 
 All breakpoints removed.
-All predicate spy points removed.
-All context spy points removed.
 yes
 </pre></div>
 </div>
 <p>There’s also a <code class="docutils literal notranslate"><span class="pre">reset/0</span></code> predicate that can be used to reset the debugger
-to its default settings.</p>
+to its default settings and delete all defined breakpoints and log points.</p>
 </section>
 </section>
 <section id="defining-log-points">
@@ -536,8 +573,8 @@ yes
 <p>Predicates <code class="docutils literal notranslate"><span class="pre">logging/3</span></code> and <code class="docutils literal notranslate"><span class="pre">nolog/3</span></code> can be used to, respectively, query
 and remove log points. There’s also a <code class="docutils literal notranslate"><span class="pre">nologall/0</span></code> predicate that removes
 all log points.</p>
-<p>Note that setting a log point will remove any existing line number spy point
-for the same location.</p>
+<p>Note that setting a log point will remove any existing clause breakpoint for
+the same location.</p>
 </section>
 <section id="tracing-program-execution">
 <span id="programming-trace"></span><h2>Tracing program execution<a class="headerlink" href="#tracing-program-execution" title="Link to this heading"></a></h2>
@@ -570,11 +607,12 @@ succeeds with the answer <code class="docutils literal notranslate"><span class=
 determinism information by prefixing the <code class="docutils literal notranslate"><span class="pre">exit</span></code> port with a <code class="docutils literal notranslate"><span class="pre">*</span></code> character
 when a call succeeds with choice-points pending, thus indicating that there
 might be alternative solutions for the goal.</p>
-<p>Note that, when tracing, spy points will be ignored. Before the port number,
-when a spy point is set for the current clause or goal, the debugger will
-print a <code class="docutils literal notranslate"><span class="pre">#</span></code> character for unconditional breakpoints, a <code class="docutils literal notranslate"><span class="pre">?</span></code> character for
-conditional breakpoints, a <code class="docutils literal notranslate"><span class="pre">+</span></code> character for predicate spy
-points, and a <code class="docutils literal notranslate"><span class="pre">*</span></code> character for context spy points. For example:</p>
+<p>Note that breakpoints are ignored when tracing. But when a breakpoint is set
+for the current predicate or clause, the debugger prints, before the port name
+and number, a <code class="docutils literal notranslate"><span class="pre">+</span></code> character for predicate breakpoints, a <code class="docutils literal notranslate"><span class="pre">#</span></code> character
+for clause breakpoints, a <code class="docutils literal notranslate"><span class="pre">?</span></code> character for conditional clause breakpoints,
+a <code class="docutils literal notranslate"><span class="pre">^</span></code> for triggered breakpoints, and a <code class="docutils literal notranslate"><span class="pre">*</span></code> character for context
+breakpoints. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(female/2).
 
 yes
@@ -586,27 +624,27 @@ yes
   +  Call: (3) female(_1078) ?
 </pre></div>
 </div>
-<p>To stop tracing (but still allowing the debugger to stop at defined spy points),
-write:</p>
+<p>To stop tracing (but still allowing the debugger to pause at the defined
+breakpoints), write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::notrace.
 
 yes
 </pre></div>
 </div>
 </section>
-<section id="debugging-using-spy-points">
-<span id="debugging-debug"></span><h2>Debugging using spy points<a class="headerlink" href="#debugging-using-spy-points" title="Link to this heading"></a></h2>
-<p>Tracing a program execution may generate large amounts of debugging
-data. Debugging using spy points allows the user to concentrate in
-specific points of the code. To start a debugging session using spy
-points, write:</p>
+<section id="debugging-using-breakpoints">
+<span id="debugging-debug"></span><h2>Debugging using breakpoints<a class="headerlink" href="#debugging-using-breakpoints" title="Link to this heading"></a></h2>
+<p>Tracing a program execution may generate large amounts of debugging data.
+Debugging using breakpoints allows the user to concentrate in specific
+points of the code. To start a debugging session using breakpoints points,
+write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::debug.
 
 yes
 </pre></div>
 </div>
-<p>For example, assuming the spy point we set in the previous section on
-the <code class="docutils literal notranslate"><span class="pre">female/1</span></code> predicate:</p>
+<p>For example, assuming the predicate breakpoint we set in the previous section
+on the <code class="docutils literal notranslate"><span class="pre">female/1</span></code> predicate:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- addams::sister(Sister, Sibling).
   +  Call: (3) female(_1078) ?
 </pre></div>
@@ -617,24 +655,25 @@ the <code class="docutils literal notranslate"><span class="pre">female/1</span>
 yes
 </pre></div>
 </div>
-<p>Note that stopping the debugger does not remove any defined spy points.</p>
+<p>Note that stopping the debugger does not remove any defined breakpoints or
+and log points.</p>
 </section>
 <section id="debugging-commands">
 <span id="id1"></span><h2>Debugging commands<a class="headerlink" href="#debugging-commands" title="Link to this heading"></a></h2>
-<p>The debugger pauses at leashed ports when tracing or when finding a spy
-point for user interaction. The commands available are as follows:</p>
+<p>The debugger pauses for user interaction at leashed ports when tracing
+and when hitting a breakpoint. The following commands are available:</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">c</span></code> — creep</dt><dd><p>go on; you may use the spacebar, return, or enter keys in alternative</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">l</span></code> — leap</dt><dd><p>continues execution until the next spy point is found</p>
+<dt><code class="docutils literal notranslate"><span class="pre">l</span></code> — leap</dt><dd><p>continues execution until the next breakpoint is found</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">s</span></code> — skip</dt><dd><p>skips debugging for the current goal; valid at call, redo, and
+<dt><code class="docutils literal notranslate"><span class="pre">s</span></code> — skip</dt><dd><p>skips tracing for the current goal; valid at call, redo, and
 unification ports</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">S</span></code> - Skip</dt><dd><p>similar to skip but displaying all intermediate ports unleashed</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">q</span></code> — quasi-skip</dt><dd><p>skips debugging until returning to the current goal or reaching a spy
-point; valid at call and redo ports</p>
+<dt><code class="docutils literal notranslate"><span class="pre">q</span></code> — quasi-skip</dt><dd><p>skips tracing until returning to the current goal or reaching
+a breakpoint; valid at call and redo ports</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">r</span></code> — retry</dt><dd><p>retries the current goal but side-effects are not undone; valid at
 the fail port</p>
@@ -685,17 +724,17 @@ unification port</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">&lt;</span></code> — write depth</dt><dd><p>sets the write term depth (set to <code class="docutils literal notranslate"><span class="pre">0</span></code> to reset)</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">*</span></code> — add</dt><dd><p>adds a context spy point for the current goal</p>
+<dt><code class="docutils literal notranslate"><span class="pre">*</span></code> — add</dt><dd><p>adds a context breakpoint for the current goal</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">/</span></code> — remove</dt><dd><p>removes a context spy point for the current goal</p>
+<dt><code class="docutils literal notranslate"><span class="pre">/</span></code> — remove</dt><dd><p>removes a context breakpoint for the current goal</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">+</span></code> — add</dt><dd><p>adds a predicate spy point for the current goal</p>
+<dt><code class="docutils literal notranslate"><span class="pre">+</span></code> — add</dt><dd><p>adds a predicate breakpoint for the current goal</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-</span></code> — remove</dt><dd><p>removes a predicate spy point for the current goal</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-</span></code> — remove</dt><dd><p>removes a predicate breakpoint for the current goal</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">#</span></code> — add</dt><dd><p>adds an unconditional breakpoint for the current clause</p>
+<dt><code class="docutils literal notranslate"><span class="pre">#</span></code> — add</dt><dd><p>adds a breakpoint for the current clause</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">|</span></code> — remove</dt><dd><p>removes an unconditional breakpoint for the current clause</p>
+<dt><code class="docutils literal notranslate"><span class="pre">|</span></code> — remove</dt><dd><p>removes a breakpoint for the current clause</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">h</span></code> — condensed help</dt><dd><p>prints list of command options</p>
 </dd>

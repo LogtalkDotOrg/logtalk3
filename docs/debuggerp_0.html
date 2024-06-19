@@ -208,7 +208,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 3:3:0</div>
-<div class="line"><strong>Date:</strong> 2024-06-18</div>
+<div class="line"><strong>Date:</strong> 2024-06-19</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -228,10 +228,13 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Debugger help: Type the character <code class="docutils literal notranslate"><span class="pre">h</span></code> (condensed help) or the character <code class="docutils literal notranslate"><span class="pre">?</span></code> (extended help) at a leashed port.</p></li>
-<li><p>Predicate spy point: Specified as a ground term <code class="docutils literal notranslate"><span class="pre">Functor/Arity</span></code>.</p></li>
-<li><p>Non-terminal spy point: Specified as a ground term <code class="docutils literal notranslate"><span class="pre">Functor//Arity</span></code>.</p></li>
-<li><p>Breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
-<li><p>Context spy point: Specified as a <code class="docutils literal notranslate"><span class="pre">(Sender,</span> <span class="pre">This,</span> <span class="pre">Self,</span> <span class="pre">Goal)</span></code> tuple.</p></li>
+<li><p>Predicate breakpoint: Specified as a ground term <code class="docutils literal notranslate"><span class="pre">Functor/Arity</span></code>.</p></li>
+<li><p>Non-terminal breakpoint: Specified as a ground term <code class="docutils literal notranslate"><span class="pre">Functor//Arity</span></code>.</p></li>
+<li><p>Clause breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
+<li><p>Conditional breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound and a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
+<li><p>Hit count breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound and an unification count expression as a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
+<li><p>Triggered breakpoint: Specified as an <code class="docutils literal notranslate"><span class="pre">Entity-Line</span></code> term with both <code class="docutils literal notranslate"><span class="pre">Entity</span></code> and <code class="docutils literal notranslate"><span class="pre">Line</span></code> bound and another breakpoint as a condition. <code class="docutils literal notranslate"><span class="pre">Line</span></code> must be the first source file line of an entity clause.</p></li>
+<li><p>Context breakpoint: Specified as a <code class="docutils literal notranslate"><span class="pre">(Sender,</span> <span class="pre">This,</span> <span class="pre">Self,</span> <span class="pre">Goal)</span></code> tuple.</p></li>
 <li><p>Log point: Specified as an <code class="docutils literal notranslate"><span class="pre">(Entity,</span> <span class="pre">Line,</span> <span class="pre">Message)</span></code> tuple.</p></li>
 <li><p>Leash port shorthands: <code class="docutils literal notranslate"><span class="pre">none</span></code> - <code class="docutils literal notranslate"><span class="pre">[]</span></code>, <code class="docutils literal notranslate"><span class="pre">loose</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call]</span></code>, <code class="docutils literal notranslate"><span class="pre">half</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,redo]</span></code>, <code class="docutils literal notranslate"><span class="pre">tight</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,redo,fail,exception]</span></code>, and <code class="docutils literal notranslate"><span class="pre">full</span></code> - <code class="docutils literal notranslate"><span class="pre">[fact,rule,call,exit,redo,fail,exception]</span></code>.</p></li>
 </ul>
@@ -280,7 +283,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="reset-0">
 <span id="debuggerp-0-reset-0"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">reset/0</span></code></a><a class="headerlink" href="#reset-0" title="Link to this heading"></a></h3>
-<p>Resets all debugging settings (including breakpoints, log points, spy points, and leashed ports) and turns off debugging.</p>
+<p>Resets all debugging settings (including breakpoints, log points, and leashed ports) and turns off debugging.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -303,7 +306,7 @@
 </section>
 <section id="debug-0">
 <span id="debuggerp-0-debug-0"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">debug/0</span></code></a><a class="headerlink" href="#debug-0" title="Link to this heading"></a></h3>
-<p>Starts debugging for all defined spy points.</p>
+<p>Starts debugging for all defined breakpoints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -320,7 +323,7 @@
 </section>
 <section id="nodebug-0">
 <span id="debuggerp-0-nodebug-0"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nodebug/0</span></code></a><a class="headerlink" href="#nodebug-0" title="Link to this heading"></a></h3>
-<p>Stops debugging for all defined spy points. Also turns off tracing. Does not remove defined spy points.</p>
+<p>Stops debugging for all defined breakpoints. Also turns off tracing. Does not remove defined breakpoints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -343,7 +346,7 @@
 </section>
 <section id="debugging-0">
 <span id="debuggerp-0-debugging-0"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">debugging/0</span></code></a><a class="headerlink" href="#debugging-0" title="Link to this heading"></a></h3>
-<p>Reports current debugging settings, including spy points and log points.</p>
+<p>Reports current debugging settings, including breakpoints and log points.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -398,7 +401,7 @@
 </section>
 <section id="notrace-0">
 <span id="debuggerp-0-notrace-0"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">notrace/0</span></code></a><a class="headerlink" href="#notrace-0" title="Link to this heading"></a></h3>
-<p>Stops tracing of calls compiled in debug mode. Debugger will still stop at defined spy points.</p>
+<p>Stops tracing of calls compiled in debug mode. Debugger will still stop at defined breakpoints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -458,7 +461,7 @@
 </section>
 <section id="spy-1">
 <span id="debuggerp-0-spy-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spy/1</span></code></a><a class="headerlink" href="#spy-1" title="Link to this heading"></a></h3>
-<p>Sets an unconditional breakpoint (removing any existing log point or breakpoints defined for the same location), a predicate spy point, a non-terminal spy point, or a list of spy points. Fails if a spy point is invalid.</p>
+<p>Sets a predicate or clause breakpoint (removing any existing log point or breakpoint defined for the same location, or a list of breakpoints. Fails if a breakpoint is invalid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -468,7 +471,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">spy(SpyPoint)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spy(Breakpoint)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -480,7 +483,7 @@
 </section>
 <section id="spying-1">
 <span id="debuggerp-0-spying-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spying/1</span></code></a><a class="headerlink" href="#spying-1" title="Link to this heading"></a></h3>
-<p>Enumerates, by backtracking, all defined unconditional breakpoints, predicate spy points, and non-terminal spy points.</p>
+<p>Enumerates, by backtracking, all defined predicate and clause breakpoints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -490,7 +493,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">spying(SpyPoint)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spying(Breakpoint)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -501,7 +504,7 @@
 </section>
 <section id="nospy-1">
 <span id="debuggerp-0-nospy-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nospy/1</span></code></a><a class="headerlink" href="#nospy-1" title="Link to this heading"></a></h3>
-<p>Removes all matching unconditional breakpoints, predicate spy points, and non-terminal spy points.</p>
+<p>Removes all matching predicate and clause breakpoints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -511,7 +514,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">nospy(SpyPoint)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nospy(Breakpoint)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
@@ -524,7 +527,7 @@
 </section>
 <section id="spy-3">
 <span id="debuggerp-0-spy-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spy/3</span></code></a><a class="headerlink" href="#spy-3" title="Link to this heading"></a></h3>
-<p>Sets a conditional or triggered breakpoint (removing any existing log point or breakpoints defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.</p>
+<p>Sets a conditional or triggered breakpoint (removing any existing log point or breakpoint defined for the same location). The condition can be a unification count expression, a lambda expression, or another breakpoint. Fails if the breakpoint is invalid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -597,7 +600,7 @@
 </section>
 <section id="spy-4">
 <span id="debuggerp-0-spy-4"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spy/4</span></code></a><a class="headerlink" href="#spy-4" title="Link to this heading"></a></h3>
-<p>Sets a context spy point.</p>
+<p>Sets a context breakpoint.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -618,7 +621,7 @@
 </section>
 <section id="spying-4">
 <span id="debuggerp-0-spying-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spying/4</span></code></a><a class="headerlink" href="#spying-4" title="Link to this heading"></a></h3>
-<p>Enumerates, by backtracking, all defined context spy points.</p>
+<p>Enumerates, by backtracking, all defined context breakpoints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -639,7 +642,7 @@
 </section>
 <section id="nospy-4">
 <span id="debuggerp-0-nospy-4"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nospy/4</span></code></a><a class="headerlink" href="#nospy-4" title="Link to this heading"></a></h3>
-<p>Removes all matching context spy points.</p>
+<p>Removes all matching context breakpoints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -660,7 +663,7 @@
 </section>
 <section id="nospyall-0">
 <span id="debuggerp-0-nospyall-0"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">nospyall/0</span></code></a><a class="headerlink" href="#nospyall-0" title="Link to this heading"></a></h3>
-<p>Removes all breakpoints, log points, and spy points.</p>
+<p>Removes all breakpoints and log points.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

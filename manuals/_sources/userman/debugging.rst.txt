@@ -22,28 +22,30 @@ Debugging
 =========
 
 The Logtalk distribution includes a command-line :doc:`../devtools/debugger`
-tool implemented as a Logtalk application. It can be loaded by typing:
+tool implemented as a Logtalk application using the debugging API. It can be
+loaded by typing:
 
 .. code-block:: text
 
    | ?- logtalk_load(debugger(loader)).
 
 It can also be loaded automatically at startup time by using a
-:term:`settings file`. This tool implements debugging features similar to
-those found on most Prolog systems. There are some differences, however,
-between the usual implementation of Prolog debuggers and the current
-implementation of the Logtalk debugger that you should be aware. First,
-unlike most Prolog debuggers, the Logtalk debugger is not a built-in feature
-but a regular Logtalk application using documented debugging hook predicates.
-This translates to a different, although similar, set of debugging features
+:term:`settings file`.
+
+The ``debugger`` tool includes the debugging features found in traditional
+Prolog debuggers. There are some differences, however, between the usual
+implementation of Prolog debuggers and the current implementation of the
+Logtalk debugger that you should be aware. First, unlike most Prolog
+debuggers, the Logtalk debugger is not a built-in feature but a regular
+Logtalk application using documented debugging hook predicates. This
+translates to a different, although similar, set of debugging features
 when compared with some of the more sophisticated Prolog debuggers. Second,
 debugging is only possible for entities compiled in debug mode. When
 compiling an entity in debug mode, Logtalk decorates clauses with source
-information to allow tracing of the goal execution. Third, the implementation
-of spy points allows the user to specify the
-:term:`execution context <predicate execution context>` for entering
-the debugger. This feature is a consequence of the encapsulation of
-predicates inside objects.
+information to allow tracing of the goal execution. Third, the tool
+provides several types of breakpoints (for pausing and interacting with
+the debugger) and also log points while most Prolog systems are limited
+to traditional predicate spy points.
 
 .. _debugging_debug_mode:
 
@@ -121,8 +123,8 @@ flow when calling a predicate:
 | ``fail``
 |    failure of a predicate call
 
-Logtalk, as found on some recent Prolog systems, adds a port for
-dealing with exceptions thrown when calling a predicate:
+Logtalk, as found on some recent Prolog systems, adds a port for dealing
+with exceptions thrown when calling a predicate:
 
 | ``exception``
 |    predicate call throws an exception
@@ -139,7 +141,7 @@ goal with, respectively, a fact and a rule head:
 Following Prolog tradition, the user may define for which ports the
 debugger should pause for user interaction by specifying a list of
 *leashed* ports. Unleashed ports are just printed with no pause for
-user interaction. For example:
+user interaction when tracing. For example:
 
 .. code-block:: text
 
@@ -174,82 +176,97 @@ Activating the debugger
 
 The :ref:`debuggerp::trace/0 <apis:debuggerp/0::trace/0>` and
 :ref:`debuggerp::debug/0 <apis:debuggerp/0::debug/0>` predicates implicitly
-select the `debugger` tool as the active debug handler. If you have additional
-debug handlers loaded (e.g. the `ports_profiler` tool), those would no longer
+select the ``debugger`` tool as the active debug handler. If you have additional
+debug handlers loaded (e.g. the ``ports_profiler`` tool), those would no longer
 be active (there can be only one active debug handler at any given time). The
 :ref:`debuggerp::nodebug/0 <apis:debuggerp/0::nodebug/0>` predicate implicitly
-deselects the `debugger` tool as the active debug handler.
+deselects the ``debugger`` tool as the active debug handler.
 
 
-Defining spy points and breakpoints
------------------------------------
+Defining breakpoints
+--------------------
 
-Traditional spy points can be defined by simply stating which predicates
-should be spied (as common in Prolog debuggers), by specifying the execution
-context for activating a spy point, or by specifying as *breakpoints* the
-heads of predicate clauses. To simplify the definition of breakpoints, these
-are specified using the entity identifier instead of the file name (as all
-entities share a single namespace, an entity can only be defined in a single
-file) and the first line number of clause head. But note that only some
-Prolog backends provide accurate source file term line numbers. Check the
-:doc:`../devtools/debugger` tool documentation for details.
+The ``debugger`` tool provides the following breakpoint types where the debugger
+pauses at a leashed port for user interaction:
 
-Defining breakpoints and predicate spy points
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Predicate breakpoints
+   Traditional Prolog spy points defined using a predicate (or a non-terminal)
+   indicator.
+- Clause breakpoints
+   Defined using the location of a clause.
+- Conditional breakpoints
+   Defined using the location of a clause and a condition for pausing.
+- Hit count breakpoints
+   Defined using the location of a clause and an unification count expression
+   as a condition for pausing.
+- Triggered breakpoints
+   Defined using the location of a clause and another breakpoint that must be
+   hit first as a condition for pausing.
+- Context breakpoints
+   Defined using execution context and goal templates as a condition for
+   pausing.
 
-Unconditional breakpoints and predicate spy points are specified using the
-debugger ``spy/1`` predicate. The argument can be a breakpoint (expressed
-as a ``Entity-Line`` pair), a predicate indicator (``Name/Arity``), a
-non-terminal indicator (``Name//Arity``), or a list of breakpoints and spy
-points. For example:
+Clause breakpoints are checked when the current goal successfully unifies
+with a clause head. To simplify their definition, these are specified using
+the entity identifier instead of the file name (as all entities share a single
+namespace, an entity can only be defined in a single file) and the first line
+number of the clause head. But note that only some Prolog backends provide
+accurate source file term line numbers. Check the :doc:`../devtools/debugger`
+tool documentation for details.
+
+Defining predicate and clause breakpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Predicate and clause breakpoints can be defined using the debugger ``spy/1``
+predicate. The argument can be a predicate indicator (``Name/Arity``), a
+non-terminal indicator (``Name//Arity``), a clause location (expressed as
+an ``Entity-Line`` pair), or a list of breakpoints. For example:
 
 .. code-block:: text
 
    | ?- debugger::spy(person-42).
 
-   Spy points set.
+   All specified breakpoints added.
    yes
 
    | ?- debugger::spy(foo/2).
 
-   Spy points set.
+   All specified breakpoints added.
    yes
 
    | ?- debugger::spy([foo/4, bar//1, agent-99]).
 
-   Spy points set.
+   All specified breakpoints added.
    yes
 
-Note that setting an unconditional breakpoint implicitly removes any existing
+Note that setting a clause breakpoint implicitly removes any existing
 conditional breakpoint, triggered breakpoint, or log point for the same
-location.
+clause.
 
-Unconditional breakpoints and predicate spy points can be removed by using
-the debugger ``nospy/1`` predicate. The argument can also be a list or a
-non-instantiated variable in which case all breakpoints and predicate spy
-points will be removed. For example:
+Unconditional clause and predicate breakpoints can be removed by
+using the debugger ``nospy/1`` predicate. The argument can also be a list
+of breakpoints or a non-instantiated variable in which case all breakpoints
+will be removed. For example:
 
 .. code-block:: text
 
    | ?- debugger::nospy(_).
 
-   All matching predicate spy points removed.
+   All matching predicate and clause breakpoints removed.
    yes
 
 Defining conditional breakpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Conditional breakpoints are specified using the debugger ``spy/3`` predicate.
-The condition can be a clause head successful unification count expression, a
-lambda expression, or another breakpoint (see next section).
+Conditional clause breakpoints are specified using the debugger ``spy/3``
+predicate. The condition can be a lambda expression, an unification count
+expression (see next section), or another breakpoint (see next section).
 
 The supported lambda expressions are ``[Count, N, Goal]>>Condition`` and
 ``[Goal]>>Condition`` where ``Count`` is the unification count, ``N`` is the
 goal invocation number, and ``Goal`` is the goal that unified with the clause
 head; ``Condition`` is called in the context of the ``user`` pseudo-object and
-must not have any side effects.
-
-Some examples:
+must not have any side effects. Some examples:
 
 .. code-block:: text
 
@@ -258,12 +275,25 @@ Some examples:
    Conditional breakpoint added.
    yes
 
-   | ?- debugger::spy(planet, 41, =<(2)).
+Note that setting a conditional breakpoint will remove any existing clause
+breakpoint or log point for the same location.
 
-   Conditional breakpoint added.
+Conditional breakpoints can be removed by using the debugger ``nospy/3``
+predicate. For example:
+
+.. code-block:: text
+
+   | ?- debugger::nospy(planet, _, _).
+
+   All matching conditional breakpoints removed.
    yes
 
-The valid unification count expressions are:
+Defining hit count breakpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Conditional clause breakpoints that depend on the unification count are
+known as *hit count* clause breakpoints. The debugger pauses at a hit
+count breakpoint depending an unification count expression:
 
 - ``>(Count)`` - break when the unification count is greater than ``Count``
 - ``>=(Count)`` - break when the unification count is greater than or equal to ``Count``
@@ -273,31 +303,20 @@ The valid unification count expressions are:
 - ``mod(M)`` - break when the unification count modulo ``M`` is zero
 - ``Count`` - break when the unification count is greater than or equal to ``Count``
 
-Note that setting a conditional line number spy point will remove any existing
-log point for the same location.
+For example:
 
-Conditional line numbers spy points can be removed by using the debugger
-``nospy/3`` predicate. For example:
+   | ?- debugger::spy(planet, 41, =<(2)).
 
-.. code-block:: text
-
-   | ?- debugger::nospy(planet, _, _).
-
-   All matching conditional breakpoints removed.
+   Conditional breakpoint added.
    yes
-
-The line number must for the first line of a clause that we want to
-conditionally spy. But note that only some Prolog backends provide
-accurate source file term line numbers.
-Check the :doc:`../devtools/debugger` tool documentation for details.
 
 Defining triggered breakpoints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Conditional breakpoints that depend on other breakpoints are known as
-*triggered* breakpoints. The debugger only breaks at a triggered breakpoint
-if the log point or line number spy point it depends on is hit first. For
-example:
+Conditional clause breakpoints that depend on other clause breakpoint or
+on a log point are known as *triggered* clause breakpoints. The debugger
+only pauses at a triggered breakpoint if the clause breakpoint or log point
+it depends on is hit first. For example:
 
 .. code-block:: text
 
@@ -314,22 +333,22 @@ clause in the source file defining the ``planet`` category at line 76.
 The debugger prints a ``^`` character at the beginning of the line for easy
 recognition of triggered breakpoints.
 
-Defining context spy points
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Defining context breakpoints
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A context spy point is a tuple describing a message execution context and
+A context breakpoint is a tuple describing a message execution context and
 a goal:
 
 ::
 
    (Sender, This, Self, Goal)
 
-The debugger is evoked whenever the spy point goal and the specified
+The debugger pauses for user interaction whenever the breakpoint goal and
 execution context subsumes the goal currently being executed and its
-execution context. The user may establish any number of context spy points
+execution context. The user may establish any number of context breakpoints
 as necessary. For example, in order to call the debugger whenever a
 predicate defined on an object named ``foo`` is called we may define
-the following spy point:
+the following context breakpoint:
 
 .. code-block:: text
 
@@ -349,35 +368,32 @@ atom in the second argument by setting the condition:
    yes
 
 The debugger ``nospy/4`` predicate may be used to remove all matching
-spy points. For example, the call:
+breakpoints. For example, the call:
 
 .. code-block:: text
 
    | ?- debugger::nospy(_, _, foo, _).
 
-   All matching context spy points removed.
+   All matching context breakpoints removed.
    yes
 
-will remove all context spy points where the value of :term:`self` is the
+will remove all context breakpoints where the value of :term:`self` is the
 atom ``foo``.
 
-Removing all breakpoints and spy points
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removing all breakpoints
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-We can remove all breakpoints and spy points by using the debugger
-``nospyall/0`` predicate:
+We can remove all breakpoints by using the debugger ``nospyall/0`` predicate:
 
 .. code-block:: text
 
    | ?- debugger::nospyall.
 
    All breakpoints removed.
-   All predicate spy points removed.
-   All context spy points removed.
    yes
 
 There's also a ``reset/0`` predicate that can be used to reset the debugger
-to its default settings.
+to its default settings and delete all defined breakpoints and log points.
 
 
 Defining log points
@@ -429,8 +445,8 @@ Predicates ``logging/3`` and ``nolog/3`` can be used to, respectively, query
 and remove log points. There's also a ``nologall/0`` predicate that removes
 all log points.
 
-Note that setting a log point will remove any existing line number spy point
-for the same location.
+Note that setting a log point will remove any existing clause breakpoint for
+the same location.
 
 
 .. _programming_trace:
@@ -472,11 +488,12 @@ determinism information by prefixing the ``exit`` port with a ``*`` character
 when a call succeeds with choice-points pending, thus indicating that there
 might be alternative solutions for the goal.
 
-Note that, when tracing, spy points will be ignored. Before the port number,
-when a spy point is set for the current clause or goal, the debugger will
-print a ``#`` character for unconditional breakpoints, a ``?`` character for
-conditional breakpoints, a ``+`` character for predicate spy
-points, and a ``*`` character for context spy points. For example:
+Note that breakpoints are ignored when tracing. But when a breakpoint is set
+for the current predicate or clause, the debugger prints, before the port name
+and number, a ``+`` character for predicate breakpoints, a ``#`` character
+for clause breakpoints, a ``?`` character for conditional clause breakpoints,
+a ``^`` for triggered breakpoints, and a ``*`` character for context
+breakpoints. For example:
 
 .. code-block:: text
 
@@ -490,8 +507,8 @@ points, and a ``*`` character for context spy points. For example:
         Call: (2) ::female(_1078) ? 
      +  Call: (3) female(_1078) ? 
 
-To stop tracing (but still allowing the debugger to stop at defined spy points),
-write:
+To stop tracing (but still allowing the debugger to pause at the defined
+breakpoints), write:
 
 .. code-block:: text
 
@@ -501,13 +518,13 @@ write:
 
 .. _debugging_debug:
 
-Debugging using spy points
---------------------------
+Debugging using breakpoints
+---------------------------
 
-Tracing a program execution may generate large amounts of debugging
-data. Debugging using spy points allows the user to concentrate in
-specific points of the code. To start a debugging session using spy
-points, write:
+Tracing a program execution may generate large amounts of debugging data.
+Debugging using breakpoints allows the user to concentrate in specific
+points of the code. To start a debugging session using breakpoints points,
+write:
 
 .. code-block:: text
 
@@ -515,8 +532,8 @@ points, write:
 
    yes
 
-For example, assuming the spy point we set in the previous section on
-the ``female/1`` predicate:
+For example, assuming the predicate breakpoint we set in the previous section
+on the ``female/1`` predicate:
 
 .. code-block:: text
 
@@ -531,28 +548,29 @@ To stop the debugger, write:
 
    yes
 
-Note that stopping the debugger does not remove any defined spy points.
+Note that stopping the debugger does not remove any defined breakpoints or
+and log points.
 
 .. _debugging_commands:
 
 Debugging commands
 ------------------
 
-The debugger pauses at leashed ports when tracing or when finding a spy
-point for user interaction. The commands available are as follows:
+The debugger pauses for user interaction at leashed ports when tracing
+and when hitting a breakpoint. The following commands are available:
 
 ``c`` — creep
    go on; you may use the spacebar, return, or enter keys in alternative
 ``l`` — leap
-   continues execution until the next spy point is found
+   continues execution until the next breakpoint is found
 ``s`` — skip
-   skips debugging for the current goal; valid at call, redo, and
+   skips tracing for the current goal; valid at call, redo, and
    unification ports
 ``S`` - Skip
    similar to skip but displaying all intermediate ports unleashed
 ``q`` — quasi-skip
-   skips debugging until returning to the current goal or reaching a spy
-   point; valid at call and redo ports
+   skips tracing until returning to the current goal or reaching
+   a breakpoint; valid at call and redo ports
 ``r`` — retry
    retries the current goal but side-effects are not undone; valid at
    the fail port
@@ -603,17 +621,17 @@ point for user interaction. The commands available are as follows:
 ``<`` — write depth
    sets the write term depth (set to ``0`` to reset)
 ``*`` — add
-   adds a context spy point for the current goal
+   adds a context breakpoint for the current goal
 ``/`` — remove
-   removes a context spy point for the current goal
+   removes a context breakpoint for the current goal
 ``+`` — add
-   adds a predicate spy point for the current goal
+   adds a predicate breakpoint for the current goal
 ``-`` — remove
-   removes a predicate spy point for the current goal
+   removes a predicate breakpoint for the current goal
 ``#`` — add
-   adds an unconditional breakpoint for the current clause
+   adds a breakpoint for the current clause
 ``|`` — remove
-   removes an unconditional breakpoint for the current clause
+   removes a breakpoint for the current clause
 ``h`` — condensed help
    prints list of command options
 ``?`` — extended help

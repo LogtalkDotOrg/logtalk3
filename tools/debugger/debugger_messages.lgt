@@ -24,7 +24,7 @@
 	:- info([
 		version is 3:7:0,
 		author is 'Paulo Moura',
-		date is 2024-06-18,
+		date is 2024-06-19,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -71,9 +71,9 @@
 	message_tokens(enter_goal) -->
 		['     Enter a goal to unify with the current goal'-[], nl].
 
-	message_tokens(enter_context_spy_point(GoalTemplate)) -->
+	message_tokens(enter_context_breakpoint(GoalTemplate)) -->
 		{ground_term_copy(GoalTemplate, GroundGoalTemplate)},
-		['     Enter a context spy point term formatted as (Sender, This, Self, ~q)'-[GroundGoalTemplate], nl].
+		['     Enter a context breakpoint term formatted as (Sender, This, Self, ~q)'-[GroundGoalTemplate], nl].
 
 	message_tokens(enter_invocation_number) -->
 		['     Enter an invocation number to jump to'-[], nl].
@@ -90,10 +90,10 @@
 	% debugger status and switching
 
 	message_tokens(debugger_spying_on) -->
-		['   Debugger is on: showing spy points for all objects compiled in debug mode.'-[], nl].
+		['   Debugger is on: pausing on breakpoints for all objects compiled in debug mode.'-[], nl].
 
 	message_tokens(debugger_spying_switched_on) -->
-		['   Debugger switched on: showing spy points for all objects compiled in debug mode.'-[], nl].
+		['   Debugger switched on: pausing on breakpoints for all objects compiled in debug mode.'-[], nl].
 
 	message_tokens(debugger_tracing_on) -->
 		['   Debugger is on: tracing everything for all objects compiled in debug mode.'-[], nl].
@@ -182,9 +182,6 @@
 	message_tokens(conditional_breakpoint_added) -->
 		['     Conditional breakpoint added.'-[], nl].
 
-	message_tokens(matching_conditional_breakpoints_removed) -->
-		['     All matching conditional breakpoints removed.'-[], nl].
-
 	message_tokens(conditional_breakpoints(Breakpoints)) -->
 		['     Defined conditional breakpoints: Entity-Line (Condition):'-[], nl],
 		conditional_points(Breakpoints).
@@ -207,31 +204,28 @@
 	message_tokens(no_triggered_breakpoints_defined) -->
 		['     No triggered breakpoints are defined.'-[], nl].
 
-	% spy points
+	% ading and removing breakpoints
 
-	message_tokens(all_spy_points_added) -->
-		['     All specified spy points added.'-[], nl].
+	message_tokens(breakpoints_added) -->
+		['     All specified breakpoints added.'-[], nl].
 
-	message_tokens(matching_spy_points_removed) -->
-		['     All matching unconditional breakpoints, predicate spy points, and non-terminal spy points removed.'-[], nl].
+	message_tokens(matching_breakpoints_removed) -->
+		['     All matching predicate and clause breakpoints removed.'-[], nl].
 
-	% predicate spy points
+	% predicate breakpoints
 
-	message_tokens(predicate_spy_points(SpyPoints)) -->
-		['     Defined predicate and non-terminal spy points:'-[], nl],
-		spy_points(SpyPoints).
+	message_tokens(predicate_breakpoints(Breakpoints)) -->
+		['     Defined predicate breakpoints:'-[], nl],
+		breakpoints(Breakpoints).
 
-	message_tokens(all_predicate_spy_points_removed) -->
-		['     All predicate spy points removed.'-[], nl].
+	message_tokens(no_predicate_breakpoints_defined) -->
+		['     No predicate breakpoints are defined.'-[], nl].
 
-	message_tokens(no_predicate_spy_points_defined) -->
-		['     No predicate and non-terminal spy points are defined.'-[], nl].
+	message_tokens(predicate_breakpoint_added) -->
+		['     Predicate breakpoint added.'-[], nl].
 
-	message_tokens(predicate_spy_point_added) -->
-		['     Predicate spy point added.'-[], nl].
-
-	message_tokens(predicate_spy_point_removed) -->
-		['     Predicate spy point removed.'-[], nl].
+	message_tokens(predicate_breakpoint_removed) -->
+		['     Predicate breakpoint removed.'-[], nl].
 
 	% breakpoints
 
@@ -242,7 +236,7 @@
 
 	message_tokens(unconditional_breakpoints(Breakpoints)) -->
 		['     Defined unconditional breakpoints: Entity-Line:'-[], nl],
-		spy_points(Breakpoints).
+		breakpoints(Breakpoints).
 
 	message_tokens(no_unconditional_breakpoints_defined) -->
 		['     No unconditional breakpoints are defined.'-[], nl].
@@ -253,23 +247,20 @@
 	message_tokens(unconditional_breakpoint_removed) -->
 		['     Unconditional breakpoint removed.'-[], nl].
 
-	% context spy points
+	% context breakpoints
 
-	message_tokens(context_spy_points(SpyPoints)) -->
-		['     Defined context spy points (Sender, This, Self, Goal):'-[], nl],
-		context_spy_points(SpyPoints).
+	message_tokens(context_breakpoints(Breakpoints)) -->
+		['     Defined context breakpoints (Sender, This, Self, Goal):'-[], nl],
+		context_breakpoints(Breakpoints).
 
-	message_tokens(matching_context_spy_points_removed) -->
-		['     All matching context spy points removed.'-[], nl].
+	message_tokens(matching_context_breakpoints_removed) -->
+		['     All matching context breakpoints removed.'-[], nl].
 
-	message_tokens(all_context_spy_points_removed) -->
-		['     All context spy points removed.'-[], nl].
+	message_tokens(context_breakpoint_set) -->
+		['     Context breakpoint set.'-[], nl].
 
-	message_tokens(context_spy_point_set) -->
-		['     Context spy point set.'-[], nl].
-
-	message_tokens(no_context_spy_points_defined) -->
-		['     No context spy points are defined.'-[], nl].
+	message_tokens(no_context_breakpoints_defined) -->
+		['     No context breakpoints are defined.'-[], nl].
 
 	% execution context
 
@@ -356,10 +347,10 @@
 		[
 			'     Available options are:'-[], nl,
 			'       c - creep (go on; you may use also the space, return, or enter keys)'-[], nl,
-			'       l - leap (continues execution until the next spy point is found)'-[], nl,
-			'       s - skip (skips debugging for the current goal; valid at call, redo, and unification ports)'-[], nl,
+			'       l - leap (continues execution until the next breakpoint is found)'-[], nl,
+			'       s - skip (skips tracing for the current goal; valid at call, redo, and unification ports)'-[], nl,
 			'       S - Skip (similar to skip but displaying all intermediate ports unleashed)'-[], nl,
-			'       q - quasi-skip (skips debugging until returning to the current goal or reaching a spy point)'-[], nl,
+			'       q - quasi-skip (skips tracing until returning to the current goal or reaching a breakpoint)'-[], nl,
 			'       r - retry (retries the current goal but side-effects are not undone; valid at the fail port)'-[], nl,
 			'       j - jump (reads invocation number and jumps to the next port with that number)'-[], nl,
 			'       z - zap (reads port name and zaps to that port)'-[], nl,
@@ -384,12 +375,12 @@
 			'       E - raise exception (reads and throws an exception term)'-[], nl,
 			'       < - depth (sets the maximum write term depth; type 0 to reset)'-[], nl,
 			'       = - debugging (prints debugging information)'-[], nl,
-			'       * - add (adds a context spy point for the current goal)'-[], nl,
-			'       / - remove (removes a context spy point for the current goal)'-[], nl,
-			'       + - add (adds a predicate spy point for the current goal)'-[], nl,
-			'       - - remove (removes a predicate spy point for the current goal)'-[], nl,
-			'       # - add (adds a line number spy point for the current clause)'-[], nl,
-			'       | - remove (removes a line number spy point for the current clause)'-[], nl,
+			'       * - add (adds a context breakpoint for the current goal)'-[], nl,
+			'       / - remove (removes a context breakpoint for the current goal)'-[], nl,
+			'       + - add (adds a predicate breakpoint for the current goal)'-[], nl,
+			'       - - remove (removes a predicate breakpoint for the current goal)'-[], nl,
+			'       # - add (adds a clause breakpoint for the current clause)'-[], nl,
+			'       | - remove (removes a clause breakpoint for the current clause)'-[], nl,
 			'       h - condensed help (prints this list of options)'-[], nl,
 			'       ? - extended help'-[], nl
 		].
@@ -397,12 +388,12 @@
 	message_tokens(condensed_help) -->
 		[
 			'     Available options are:'-[], nl,
-			'       c - creep            i - ignore     * - add context spy point'-[], nl,
-			'       l - leap             f - fail       / - remove context spy point'-[], nl,
-			'       s - skip             u - unify      + - add predicate spy point'-[], nl,
-			'       S - Skip             n - nodebug    - - remove predicate spy point'-[], nl,
-			'       q - quasi-skip       N - notrace    # - add unconditional breakpoint'-[], nl,
-			'       r - retry            ! - command    | - remove unconditional breakpoint'-[], nl,
+			'       c - creep            i - ignore     * - add context breakpoint'-[], nl,
+			'       l - leap             f - fail       / - remove context breakpoint'-[], nl,
+			'       s - skip             u - unify      + - add predicate breakpoint'-[], nl,
+			'       S - Skip             n - nodebug    - - remove predicate breakpoint'-[], nl,
+			'       q - quasi-skip       N - notrace    # - add clause breakpoint'-[], nl,
+			'       r - retry            ! - command    | - remove clause breakpoint'-[], nl,
 			'       j - jump             @ - command'-[], nl,
 			'       z - zap              b - break'-[], nl,
 			'       p - print            a - abort'-[], nl,
@@ -460,10 +451,10 @@
 
 	% auxiliary grammar rules
 
-	log_points([Entity-Line| SpyPoints]) -->
+	log_points([Entity-Line| LogPoints]) -->
 		{ground_term_copy(Entity, GroundEntity)},
 		['        ~q'-[GroundEntity-Line], nl],
-		log_points(SpyPoints).
+		log_points(LogPoints).
 	log_points([]) -->
 		[].
 
@@ -474,27 +465,27 @@
 	conditional_points([]) -->
 		[].
 
-	spy_points([SpyPoint| SpyPoints]) -->
-		spy_point(SpyPoint),
-		spy_points(SpyPoints).
-	spy_points([]) -->
+	breakpoints([Breakpoint| Breakpoints]) -->
+		breakpoint(Breakpoint),
+		breakpoints(Breakpoints).
+	breakpoints([]) -->
 		[].
 
-	spy_point(Entity-Line) -->
+	breakpoint(Entity-Line) -->
 		{ground_term_copy(Entity, GroundEntity)},
 		['        ~q'-[GroundEntity-Line], nl].
-	spy_point(Functor/Arity) -->
+	breakpoint(Functor/Arity) -->
 		['        ~q'-[Functor/Arity], nl].
-	spy_point(Functor//Arity) -->
+	breakpoint(Functor//Arity) -->
 		['        ~q'-[Functor//Arity], nl].
 
-	context_spy_points([SpyPoint| SpyPoints]) -->
-		context_spy_point(SpyPoint),
-		context_spy_points(SpyPoints).
-	context_spy_points([]) -->
+	context_breakpoints([Breakpoint| Breakpoints]) -->
+		context_breakpoint(Breakpoint),
+		context_breakpoints(Breakpoints).
+	context_breakpoints([]) -->
 		[].
 
-	context_spy_point((Sender,This,Self,Goal)) -->
+	context_breakpoint((Sender,This,Self,Goal)) -->
 		['        '-[]],
 		(	{var(Sender)} ->
 			['(_, '-[]]

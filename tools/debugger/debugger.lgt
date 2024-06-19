@@ -25,7 +25,7 @@
 	:- info([
 		version is 7:9:0,
 		author is 'Paulo Moura',
-		date is 2024-06-18,
+		date is 2024-06-19,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -282,13 +282,13 @@
 		),
 		(	spying_predicate_(_, _, _) ->
 			findall(Predicate, spying_predicate_(_,_,Predicate), PredicateSpyPoints),
-			print_message(information, debugger, predicate_spy_points(PredicateSpyPoints))
-		;	print_message(information, debugger, no_predicate_spy_points_defined)
+			print_message(information, debugger, predicate_breakpoints(PredicateSpyPoints))
+		;	print_message(information, debugger, no_predicate_breakpoints_defined)
 		),
 		(	spying_context_(_, _, _, _) ->
 			findall((Sender,This,Self,Goal), spying_context_(Sender,This,Self,Goal), ContextSpyPoints),
-			print_message(information, debugger, context_spy_points(ContextSpyPoints))
-		;	print_message(information, debugger, no_context_spy_points_defined)
+			print_message(information, debugger, context_breakpoints(ContextSpyPoints))
+		;	print_message(information, debugger, no_context_breakpoints_defined)
 		),
 		findall(Port, leashing_(Port), Ports),
 		print_message(information, debugger, leashed_ports(Ports)),
@@ -322,7 +322,7 @@
 
 	spy(SpyPoints) :-
 		spy_aux(SpyPoints),
-		print_message(information, debugger, all_spy_points_added),
+		print_message(information, debugger, breakpoints_added),
 		(	debugging_ ->
 			true
 		;	debug
@@ -375,7 +375,7 @@
 
 	nospy(SpyPoints) :-
 		nospy_aux(SpyPoints),
-		print_message(information, debugger, matching_spy_points_removed).
+		print_message(information, debugger, matching_breakpoints_removed).
 
 	nospy_aux(SpyPoints) :-
 		var(SpyPoints),
@@ -495,7 +495,7 @@
 
 	spy(Sender, This, Self, Goal) :-
 		asserta(spying_context_(Sender, This, Self, Goal)),
-		print_message(information, debugger, context_spy_point_set),
+		print_message(information, debugger, context_breakpoint_set),
 		(	debugging_ ->
 			true
 		;	debug
@@ -506,18 +506,16 @@
 
 	nospy(Sender, This, Self, Goal) :-
 		retractall(spying_context_(Sender, This, Self, Goal)),
-		print_message(comment, debugger, matching_context_spy_points_removed).
+		print_message(comment, debugger, matching_context_breakpoints_removed).
 
 	nospyall :-
 		retractall(breakpoint_(_, _)),
 		retractall(conditional_breakpoint_(_, _, _)),
 		retractall(triggered_breakpoint_(_, _, _, _)),
 		retractall(triggered_breakpoint_enabled_(_, _)),
-		print_message(comment, debugger, all_breakpoints_removed),
 		retractall(spying_predicate_(_, _, _)),
-		print_message(comment, debugger, all_predicate_spy_points_removed),
 		retractall(spying_context_(_, _, _, _)),
-		print_message(comment, debugger, all_context_spy_points_removed).
+		print_message(comment, debugger, all_breakpoints_removed).
 
 	leash(Value) :-
 		valid_leash_value(Value, Ports),
@@ -1189,7 +1187,7 @@
 		;	functor(Goal, Functor, Arity)
 		),
 		spy_predicate(Functor, Arity, Functor/Arity),
-		print_message(information, debugger, predicate_spy_point_added),
+		print_message(information, debugger, predicate_breakpoint_added),
 		fail.
 
 	do_port_option((-), _, _, Goal, _, _, _, _) :-
@@ -1198,7 +1196,7 @@
 		;	functor(Goal, Functor, Arity)
 		),
 		nospy_predicate(Functor/Arity),
-		print_message(information, debugger, predicate_spy_point_removed),
+		print_message(information, debugger, predicate_breakpoint_removed),
 		fail.
 
 	do_port_option((#), Port, _, _, _, _, _, _) :-
@@ -1222,7 +1220,7 @@
 	do_port_option((*), _, _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),
 		functor(Template, Functor, Arity),
-		ask_question(question, debugger, enter_context_spy_point(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
+		ask_question(question, debugger, enter_context_breakpoint(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
 		discard_new_line,
 		spy(Sender, This, Self, Template),
 		fail.
@@ -1230,7 +1228,7 @@
 	do_port_option((/), _, _, Goal, _, _, _, _) :-
 		functor(Goal, Functor, Arity),
 		functor(Template, Functor, Arity),
-		ask_question(question, debugger, enter_context_spy_point(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
+		ask_question(question, debugger, enter_context_breakpoint(Template), '='((Sender,This,Self,Template)), (Sender,This,Self,Template)),
 		discard_new_line,
 		nospy(Sender, This, Self, Template),
 		fail.
