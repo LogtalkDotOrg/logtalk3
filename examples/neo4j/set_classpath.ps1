@@ -1,10 +1,10 @@
 #############################################################################
 ## 
-##   Set CLASSPATH environment variable for SWI-Prolog
-##   Last updated on July 21, 2023
+##   Set CLASSPATH environment variable
+##   Last updated on June 19, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 
 #Requires -Version 7.3
 
-Get-ChildItem -Path C:\neo4j-community-5.5.0\lib\* -Filter *.jar |
+Get-ChildItem -Path C:\neo4j-community-*\lib\* -Filter *.jar |
 Foreach-Object {
 	$classpath += ";" + $_.FullName
 }
