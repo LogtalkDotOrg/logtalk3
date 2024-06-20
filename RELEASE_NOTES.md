@@ -42,6 +42,10 @@ and log points.
 Library
 -------
 
+* FIXED: Error in the `meta_compiler` library when expanding a meta-argument
+that is a call to a Prolog module predicate. Thanks to Alex Kouznetsov for the
+bug report.
+
 * FIXED: Harmless linter warning when loading the `types` library using XSB.
 
 Tools

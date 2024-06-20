@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,8 +23,8 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:13:1,
-		date is 2022-05-06,
+		version is 0:13:2,
+		date is 2024-06-20,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
 		remarks is [
@@ -667,6 +667,20 @@
 		atom_codes(ClosureArityAtom, ClosureArityCodes),
 		atom_concat(AuxFunctor4, ClosureArityAtom, AuxFunctor5),
 		atom_concat(AuxFunctor5, '}', AuxFunctor).
+	aux_predicate_functor(MetaFunctor, MetaArity, ':'(Module,ClosureFunctor), ClosureArity, AuxFunctor) :-
+		!,
+		atom_concat(MetaFunctor, '/', AuxFunctor0),
+		number_codes(MetaArity, MetaArityCodes),
+		atom_codes(MetaArityAtom, MetaArityCodes),
+		atom_concat(AuxFunctor0, MetaArityAtom, AuxFunctor1),
+		atom_concat(AuxFunctor1, '+', AuxFunctor2),
+		atom_concat(AuxFunctor2, Module, AuxFunctor3),
+		atom_concat(AuxFunctor3, '.', AuxFunctor6),
+		atom_concat(AuxFunctor6, ClosureFunctor, AuxFunctor7),
+		atom_concat(AuxFunctor7, '#', AuxFunctor8),
+		number_codes(ClosureArity, ClosureArityCodes),
+		atom_codes(ClosureArityAtom, ClosureArityCodes),
+		atom_concat(AuxFunctor8, ClosureArityAtom, AuxFunctor).
 	aux_predicate_functor(MetaFunctor, MetaArity, ClosureFunctor, ClosureArity, AuxFunctor) :-
 		atom_concat(MetaFunctor, '/', AuxFunctor0),
 		number_codes(MetaArity, MetaArityCodes),
