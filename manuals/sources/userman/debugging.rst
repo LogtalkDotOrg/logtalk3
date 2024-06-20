@@ -644,8 +644,10 @@ Customizing term writing
 
 Debugging complex applications often requires customizing term writing.
 The available options are limiting the writing depth of large compound
-terms and defining the traditional ``portray/1`` to define how a term
-should be printed when using the ``p`` command at a leashed port.
+terms and using the ``p`` command at a leashed port. This command uses
+the ``format/3`` de facto standard predicate with the ``~p`` formatting
+option to delegate writing the term to the ``print/1`` predicate. But
+note that some backends don't support this formatting option.
 
 .. _debugging_term_write_depth:
 

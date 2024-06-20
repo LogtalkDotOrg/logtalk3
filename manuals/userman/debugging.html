@@ -746,8 +746,10 @@ unification port</p>
 <span id="debugging-term-write"></span><h2>Customizing term writing<a class="headerlink" href="#customizing-term-writing" title="Link to this heading"></a></h2>
 <p>Debugging complex applications often requires customizing term writing.
 The available options are limiting the writing depth of large compound
-terms and defining the traditional <code class="docutils literal notranslate"><span class="pre">portray/1</span></code> to define how a term
-should be printed when using the <code class="docutils literal notranslate"><span class="pre">p</span></code> command at a leashed port.</p>
+terms and using the <code class="docutils literal notranslate"><span class="pre">p</span></code> command at a leashed port. This command uses
+the <code class="docutils literal notranslate"><span class="pre">format/3</span></code> de facto standard predicate with the <code class="docutils literal notranslate"><span class="pre">~p</span></code> formatting
+option to delegate writing the term to the <code class="docutils literal notranslate"><span class="pre">print/1</span></code> predicate. But
+note that some backends don’t support this formatting option.</p>
 <section id="term-write-depth">
 <span id="debugging-term-write-depth"></span><h3>Term write depth<a class="headerlink" href="#term-write-depth" title="Link to this heading"></a></h3>
 <p>The terms written by the debugger can be quite large depending on the
