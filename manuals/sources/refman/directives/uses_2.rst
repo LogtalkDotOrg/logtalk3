@@ -58,14 +58,15 @@ into these methods predicate arguments if bound at compile time.
 
 It is possible to specify a predicate alias using the notation
 ``Name/Arity as Alias/Arity`` or, in alternative, the notation
-``Name/Arity::Alias/Arity``. Aliases may be used either for avoiding
-conflicts between predicates specified in ``use_module/2`` and
-``uses/2`` directives or for giving more meaningful names considering
-the calling context of the predicates. For predicates, is also
-possible to define alias shorthands using the notation
-``Predicate as Alias`` or, in alternative, the notation
-``Predicate::Alias``, where ``Predicate`` and ``Alias`` are callable
-terms where some or all arguments may be instantiated.
+``Name/Arity::Alias/Arity``. Aliases may be used for avoiding
+conflicts between predicates specified in ``use_module/2`` and ``uses/2``
+directives, for giving more meaningful names considering the calling
+context of the predicates, and for changing the order of the predicate
+arguments when calling the predicate. For predicates, is also possible
+to define alias shorthands using the notation ``Predicate as Alias`` or,
+in alternative, the notation ``Predicate::Alias``, where ``Predicate``
+and ``Alias`` are callable terms where some or all arguments may be
+instantiated.
 
 To enable the use of :term:`static binding`, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities

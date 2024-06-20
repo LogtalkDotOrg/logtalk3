@@ -556,13 +556,24 @@ notation <code class="docutils literal notranslate"><span class="pre">Predicate<
 <span class="p">:- </span><span class="k">uses</span>(queues, [new<span class="o">/</span><span class="m">1</span> <span class="o">as</span> new_queue<span class="o">/</span><span class="m">1</span>]).
 </pre></div>
 </div>
-<p>You may use this extended version for solving conflicts between
-predicates declared on several <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directives or just for giving
-new names to the predicates that will be more meaningful on their using
-context. It’s also possible to define predicate aliases that are also
-<a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a>. For example:</p>
+<p>You may use this extended version for solving conflicts between predicates
+declared on several <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directives or just for giving new names to
+the predicates that will be more meaningful on their using context.</p>
+<p>Predicate aliases can also be used to define
+<a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a>, simplifying code
+maintenance. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(pretty_printer, [
     indent(<span class="m">4</span>, <span class="nv">Term</span>) <span class="o">as</span> indent(<span class="nv">Term</span>)
+]).
+</pre></div>
+</div>
+<p>Assuming multiple calls to the shorthand, a change to the indent value
+will require a change to a single line instead of changing every call.</p>
+<p>Another common use of predicate aliases is changing the order of the
+predicate arguments without using <a class="reference internal" href="#predicates-lambdas"><span class="std std-ref">lambda expressions</span></a>.
+For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(meta, [
+    fold_left(<span class="nv">Closure</span>, <span class="nv">Result0</span>, <span class="nv">List</span>, <span class="nv">Result</span>) <span class="o">as</span> foldl(<span class="nv">Closure</span>, <span class="nv">List</span>, <span class="nv">Result0</span>, <span class="nv">Result</span>)
 ]).
 </pre></div>
 </div>

@@ -34,10 +34,13 @@ grammar rule body.
 Documentation
 -------------
 
-* UPDATED: Handbook documentation on debugging using conditional breakpoints
-and log points.
+* ADDED: Handbook documentation on using predicate aliases in `uses/2`
+directives to use a different order of the predicate arguments.
 
 * IMPROVED: Handbook documentation on the `meta_predicate/1` directive.
+
+* UPDATED: Handbook documentation on debugging using conditional breakpoints
+and log points.
 
 Library
 -------

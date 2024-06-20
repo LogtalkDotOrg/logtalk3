@@ -172,14 +172,15 @@ to include operator declarations in the second argument.</p>
 into these methods predicate arguments if bound at compile time.</p>
 <p>It is possible to specify a predicate alias using the notation
 <code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or, in alternative, the notation
-<code class="docutils literal notranslate"><span class="pre">Name/Arity::Alias/Arity</span></code>. Aliases may be used either for avoiding
-conflicts between predicates specified in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directives or for giving more meaningful names considering
-the calling context of the predicates. For predicates, is also
-possible to define alias shorthands using the notation
-<code class="docutils literal notranslate"><span class="pre">Predicate</span> <span class="pre">as</span> <span class="pre">Alias</span></code> or, in alternative, the notation
-<code class="docutils literal notranslate"><span class="pre">Predicate::Alias</span></code>, where <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> are callable
-terms where some or all arguments may be instantiated.</p>
+<code class="docutils literal notranslate"><span class="pre">Name/Arity::Alias/Arity</span></code>. Aliases may be used for avoiding
+conflicts between predicates specified in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> and <code class="docutils literal notranslate"><span class="pre">uses/2</span></code>
+directives, for giving more meaningful names considering the calling
+context of the predicates, and for changing the order of the predicate
+arguments when calling the predicate. For predicates, is also possible
+to define alias shorthands using the notation <code class="docutils literal notranslate"><span class="pre">Predicate</span> <span class="pre">as</span> <span class="pre">Alias</span></code> or,
+in alternative, the notation <code class="docutils literal notranslate"><span class="pre">Predicate::Alias</span></code>, where <code class="docutils literal notranslate"><span class="pre">Predicate</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> are callable terms where some or all arguments may be
+instantiated.</p>
 <p>To enable the use of <a class="reference internal" href="../../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a>, and thus optimal message sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.</p>

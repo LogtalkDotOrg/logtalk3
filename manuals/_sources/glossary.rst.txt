@@ -354,9 +354,10 @@ Glossary
       aliases can be defined for any inherited predicate using the
       :ref:`directives_alias_2` directive and for predicates listed in
       :ref:`directives_uses_2` and :ref:`directives_use_module_2` directives.
-      Predicate aliases can be used to solve inheritance conflicts and
-      to improve code clarity by using alternative names that are more
-      meaningful in the calling context.
+      Predicate aliases can be used to solve inheritance conflicts, to
+      improve code clarity by using alternative names that are more
+      meaningful in the calling context, and to use a different order of the
+      predicate arguments.
 
    predicate shorthand
       A :term:`predicate alias` that defines a call template, possibly using

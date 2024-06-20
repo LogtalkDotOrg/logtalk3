@@ -465,16 +465,31 @@ notation ``Predicate as Alias`` (or the alternative notation
    :- uses(btrees, [new/1 as new_btree/1]).
    :- uses(queues, [new/1 as new_queue/1]).
 
-You may use this extended version for solving conflicts between
-predicates declared on several ``uses/2`` directives or just for giving
-new names to the predicates that will be more meaningful on their using
-context. It's also possible to define predicate aliases that are also
-:term:`predicate shorthands <predicate shorthand>`. For example:
+You may use this extended version for solving conflicts between predicates
+declared on several ``uses/2`` directives or just for giving new names to
+the predicates that will be more meaningful on their using context.
+
+Predicate aliases can also be used to define
+:term:`predicate shorthands <predicate shorthand>`, simplifying code
+maintenance. For example:
 
 ::
 
    :- uses(pretty_printer, [
        indent(4, Term) as indent(Term)
+   ]).
+
+Assuming multiple calls to the shorthand, a change to the indent value
+will require a change to a single line instead of changing every call.
+
+Another common use of predicate aliases is changing the order of the
+predicate arguments without using :ref:`lambda expressions <predicates_lambdas>`.
+For example:
+
+::
+
+   :- uses(meta, [
+       fold_left(Closure, Result0, List, Result) as foldl(Closure, List, Result0, Result)
    ]).
 
 See the directive documentation for details and other examples.
