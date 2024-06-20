@@ -23,7 +23,7 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:13:2,
+		version is 0:14:0,
 		date is 2024-06-20,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
@@ -35,6 +35,7 @@
 
 	:- uses(list, [append/3, length/2]).
 	:- uses(gensym, [gensym/2]).
+	:- uses(user, [atomic_list_concat/2]).
 
 	:- private(generated_predicate_/1).
 	:- dynamic(generated_predicate_/1).
@@ -633,64 +634,18 @@
 
 	aux_predicate_functor(MetaFunctor, MetaArity, Object::ClosureFunctor, ClosureArity, AuxFunctor) :-
 		!,
-		atom_concat(MetaFunctor, '/', AuxFunctor0),
-		number_codes(MetaArity, MetaArityCodes),
-		atom_codes(MetaArityAtom, MetaArityCodes),
-		atom_concat(AuxFunctor0, MetaArityAtom, AuxFunctor1),
-		atom_concat(AuxFunctor1, '+', AuxFunctor2),
 		(	atom(Object) ->
-			atom_concat(AuxFunctor2, Object, AuxFunctor3),
-			atom_concat(AuxFunctor3, '.', AuxFunctor6)
+			atomic_list_concat([MetaFunctor, '/', MetaArity, '+', Object, '.', ClosureFunctor, '#', ClosureArity], AuxFunctor)
 		;	functor(Object, ObjectFunctor, ObjectArity),
-			atom_concat(AuxFunctor2, ObjectFunctor, AuxFunctor3),
-			atom_concat(AuxFunctor3, '.', AuxFunctor4),
-			number_codes(ObjectArity, ObjectArityCodes),
-			atom_codes(ObjectArityAtom, ObjectArityCodes),
-			atom_concat(AuxFunctor4, ObjectArityAtom, AuxFunctor5),
-			atom_concat(AuxFunctor5, '.', AuxFunctor6)
-		),
-		atom_concat(AuxFunctor6, ClosureFunctor, AuxFunctor7),
-		atom_concat(AuxFunctor7, '#', AuxFunctor8),
-		number_codes(ClosureArity, ClosureArityCodes),
-		atom_codes(ClosureArityAtom, ClosureArityCodes),
-		atom_concat(AuxFunctor8, ClosureArityAtom, AuxFunctor).
+			atomic_list_concat([MetaFunctor, '/', MetaArity, '+', ObjectFunctor, '.', ObjectArity, '.', ClosureFunctor, '#', ClosureArity], AuxFunctor)
+		).
 	aux_predicate_functor(MetaFunctor, MetaArity, {ClosureFunctor}, ClosureArity, AuxFunctor) :-
 		!,
-		atom_concat(MetaFunctor, '/', AuxFunctor0),
-		number_codes(MetaArity, MetaArityCodes),
-		atom_codes(MetaArityAtom, MetaArityCodes),
-		atom_concat(AuxFunctor0, MetaArityAtom, AuxFunctor1),
-		atom_concat(AuxFunctor1, '+{', AuxFunctor2),
-		atom_concat(AuxFunctor2, ClosureFunctor, AuxFunctor3),
-		atom_concat(AuxFunctor3, '#', AuxFunctor4),
-		number_codes(ClosureArity, ClosureArityCodes),
-		atom_codes(ClosureArityAtom, ClosureArityCodes),
-		atom_concat(AuxFunctor4, ClosureArityAtom, AuxFunctor5),
-		atom_concat(AuxFunctor5, '}', AuxFunctor).
+		atomic_list_concat([MetaFunctor, '/', MetaArity, '+{', ClosureFunctor, '#', ClosureArity, '}'], AuxFunctor).
 	aux_predicate_functor(MetaFunctor, MetaArity, ':'(Module,ClosureFunctor), ClosureArity, AuxFunctor) :-
 		!,
-		atom_concat(MetaFunctor, '/', AuxFunctor0),
-		number_codes(MetaArity, MetaArityCodes),
-		atom_codes(MetaArityAtom, MetaArityCodes),
-		atom_concat(AuxFunctor0, MetaArityAtom, AuxFunctor1),
-		atom_concat(AuxFunctor1, '+', AuxFunctor2),
-		atom_concat(AuxFunctor2, Module, AuxFunctor3),
-		atom_concat(AuxFunctor3, '.', AuxFunctor6),
-		atom_concat(AuxFunctor6, ClosureFunctor, AuxFunctor7),
-		atom_concat(AuxFunctor7, '#', AuxFunctor8),
-		number_codes(ClosureArity, ClosureArityCodes),
-		atom_codes(ClosureArityAtom, ClosureArityCodes),
-		atom_concat(AuxFunctor8, ClosureArityAtom, AuxFunctor).
+		atomic_list_concat([MetaFunctor, '/', MetaArity, '+', Module, '.', ClosureFunctor, '#', ClosureArity], AuxFunctor).
 	aux_predicate_functor(MetaFunctor, MetaArity, ClosureFunctor, ClosureArity, AuxFunctor) :-
-		atom_concat(MetaFunctor, '/', AuxFunctor0),
-		number_codes(MetaArity, MetaArityCodes),
-		atom_codes(MetaArityAtom, MetaArityCodes),
-		atom_concat(AuxFunctor0, MetaArityAtom, AuxFunctor1),
-		atom_concat(AuxFunctor1, '+', AuxFunctor2),
-		atom_concat(AuxFunctor2, ClosureFunctor, AuxFunctor3),
-		atom_concat(AuxFunctor3, '#', AuxFunctor4),
-		number_codes(ClosureArity, ClosureArityCodes),
-		atom_codes(ClosureArityAtom, ClosureArityCodes),
-		atom_concat(AuxFunctor4, ClosureArityAtom, AuxFunctor).
+		atomic_list_concat([MetaFunctor, '/', MetaArity, '+', ClosureFunctor, '#', ClosureArity], AuxFunctor).
 
 :- end_object.

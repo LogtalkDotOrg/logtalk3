@@ -42,6 +42,10 @@ and log points.
 Library
 -------
 
+* IMPROVED: Performance of the `meta_compiler` library when generating
+auxiliary functors with backends that provide the `atomic_list_concat/2`
+predicate.
+
 * FIXED: Error in the `meta_compiler` library when expanding a meta-argument
 that is a call to a Prolog module predicate. Thanks to Alex Kouznetsov for the
 bug report.
