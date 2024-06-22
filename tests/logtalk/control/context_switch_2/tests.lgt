@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,77 +47,83 @@ context_switch_test_object(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2018-03-26,
+		date is 2024-06-22,
 		comment is 'Unit tests for the (<<)/2 built-in control construct.'
 	]).
 
-	throws(context_switch_2_01, error(instantiation_error, logtalk(_<<goal,_))) :-
+	test(context_switch_2_01, error(instantiation_error)) :-
 		% delay the error to runtime
 		{_ << goal}.
 
-	throws(context_switch_2_02, error(instantiation_error, logtalk(logtalk<<_,_))) :-
+	test(context_switch_2_02, error(instantiation_error)) :-
 		% delay the error to runtime
 		{logtalk << _}.
 
-	throws(context_switch_2_03, error(type_error(object_identifier, 3), logtalk(3<<goal,_))) :-
+	test(context_switch_2_03, error(type_error(object_identifier, 3))) :-
 		% delay the error to runtime
 		{3 << goal}.
 
-	throws(context_switch_2_04, error(type_error(callable, 3), logtalk(object<<3,_))) :-
+	test(context_switch_2_04, error(type_error(callable, 3))) :-
 		% delay the error to runtime
 		{object << 3}.
 
-	throws(context_switch_2_05, error(existence_error(procedure, goal/0), logtalk(This<<goal,_))) :-
+	test(context_switch_2_05, error(existence_error(procedure, goal/0))) :-
 		this(This),
 		% delay the error to runtime
 		{This << goal}.
 
-	throws(context_switch_2_06, error(existence_error(object, foo), logtalk(foo<<goal,_))) :-
+	test(context_switch_2_06, error(existence_error(object, foo))) :-
 		% delay the error to runtime
 		{foo << goal}.
 
-	throws(context_switch_2_07, error(permission_error(access, database, p), logtalk(context_switch_test_object<<p,_))) :-
+	test(context_switch_2_07, error(permission_error(access, database, p))) :-
 		% delay the error to runtime
 		{context_switch_test_object << p}.
 
-	succeeds(context_switch_2_08) :-
+	test(context_switch_2_08, deterministic) :-
 		% delay the error to runtime
 		{user << true}.
 
-	succeeds(context_switch_2_09) :-
+	test(context_switch_2_09, deterministic) :-
 		% delay the error to runtime
 		{logtalk << true}.
 
-	succeeds(context_switch_2_10) :-
+	test(context_switch_2_10, true(Xs == [1,2,3])) :-
 		this(This),
-		findall(X, {This << a(X)}, Xs),
-		Xs == [1,2,3].
+		findall(X, {This << a(X)}, Xs).
 
-	succeeds(context_switch_2_11) :-
+	test(context_switch_2_11, true(Xs == [1,2,3])) :-
 		create_object(Object, [], [], [a(1),a(2),a(3)]),
 		findall(X, {Object << a(X)}, Xs),
-		Xs == [1,2,3],
 		abolish_object(Object).
 
-	succeeds(context_switch_2_12) :-
-		findall(X, {context_switch_test_object(_)}<<p(X), Xs),
-		Xs == [1,2,3].
+	test(context_switch_2_12, true(Xs == [1,2,3])) :-
+		findall(X, {context_switch_test_object(_)}<<p(X), Xs).
 
-	fails(context_switch_2_13) :-
+	test(context_switch_2_13, false) :-
 		{user << fail}.
 
-	fails(context_switch_2_14) :-
+	test(context_switch_2_14, false) :-
 		{logtalk << fail}.
 
-	fails(context_switch_2_15) :-
+	test(context_switch_2_15, false) :-
 		this(This),
 		{This << a(4)}.
 
-	fails(context_switch_2_16) :-
+	test(context_switch_2_16, false) :-
 		{context_switch_test_object(_)}<<p(4).
 
+	test(context_switch_2_17, deterministic(Rest == [3])) :-
+		phrase(gr, [1,2,3], Rest).
+
 	a(1). a(2). a(3).
+
+	gr -->
+		{this(This)},
+		This << a.
+
+	a --> [1, 2].
 
 :- end_object.
