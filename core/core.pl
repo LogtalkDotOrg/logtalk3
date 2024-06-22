@@ -15958,8 +15958,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	var(GRBody),
 	!,
 	'$lgt_check'(list_or_partial_list, Input),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	TPred = '$lgt_phrase'(GRBody, Input, ExCtx).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, MetaVars, MetaCallCtx, ExCtx, _, _, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, _, _, MetaCallCtx, _),
+	(	'$lgt_member_var'(GRBody, MetaVars) ->
+		TPred = '$lgt_phrase'(GRBody, Input, MetaCallCtx)
+	;	TPred = '$lgt_phrase'(GRBody, Input, ExCtx)
+	).
 
 '$lgt_compile_body'(phrase(::GRBody, Input), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input), TPred), ExCtx), Ctx) :-
 	var(GRBody),
@@ -15997,8 +16001,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(list_or_partial_list, Input),
 	'$lgt_check'(list_or_partial_list, Rest),
-	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
-	TPred = '$lgt_phrase'(GRBody, Input, Rest, ExCtx).
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, MetaVars, MetaCallCtx, ExCtx, _, _, _, _),
+	'$lgt_execution_context'(ExCtx, _, _, _, _, MetaCallCtx, _),
+	(	'$lgt_member_var'(GRBody, MetaVars) ->
+		TPred = '$lgt_phrase'(GRBody, Input, Rest, MetaCallCtx)
+	;	TPred = '$lgt_phrase'(GRBody, Input, Rest, ExCtx)
+	).
 
 '$lgt_compile_body'(phrase(::GRBody, Input, Rest), _, TPred, '$lgt_debug'(goal(phrase(GRBody, Input, Rest), TPred), ExCtx), Ctx) :-
 	var(GRBody),
