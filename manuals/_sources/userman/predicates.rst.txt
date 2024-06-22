@@ -1298,9 +1298,10 @@ grammar rules for parsing determiners, nouns, and verbs. For example:
    :- end_category.
 
 Along with the message sending operators (``(::)/1``, ``(::)/2``, and ``(^^)/1``),
-we may also use other control constructs such as ``(\+)/1``, ``!/0``, ``(;)/2``,
-``(->)/2``, and ``{}/1`` in the body of a grammar. When using a backend Prolog
-compiler that supports modules, we may also use the ``(:)/2`` control construct.
+we may also use other control constructs such as ``(<<)/2``, ``(\+)/1``, ``!/0``,
+``(;)/2``, ``(->)/2``, ``{}/1``, ``call//1-N``, and ``catch/3`` in the body of a
+grammar rule. When using a backend Prolog compiler that supports modules, we may
+also use the ``(:)/2`` control construct.
 
 .. warning::
 
@@ -1315,7 +1316,7 @@ compiler that supports modules, we may also use the ``(:)/2`` control construct.
 
 In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
-``phrase/3``. The :ref:`directives_meta_non_terminal_1` directive allows the
+``phrase//1``. The :ref:`directives_meta_non_terminal_1` directive allows the
 declaration of non-terminals that have arguments that are meta-called from
 grammar rules. For example:
 

@@ -1260,9 +1260,10 @@ grammar rules for parsing determiners, nouns, and verbs. For example:</p>
 </pre></div>
 </div>
 <p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">(::)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code>),
-we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">!/0</span></code>, <code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> in the body of a grammar. When using a backend Prolog
-compiler that supports modules, we may also use the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> control construct.</p>
+we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">!/0</span></code>,
+<code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">{}/1</span></code>, <code class="docutils literal notranslate"><span class="pre">call//1-N</span></code>, and <code class="docutils literal notranslate"><span class="pre">catch/3</span></code> in the body of a
+grammar rule. When using a backend Prolog compiler that supports modules, we may
+also use the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> control construct.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The semantics of <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code> and <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control constructs in grammar rules
@@ -1276,7 +1277,7 @@ arguments.</p>
 </div>
 <p>In addition, grammar rules may contain meta-calls (a variable taking the place
 of a non-terminal), which are translated to calls of the built-in method
-<code class="docutils literal notranslate"><span class="pre">phrase/3</span></code>. The <a class="reference internal" href="../refman/directives/meta_non_terminal_1.html#directives-meta-non-terminal-1"><span class="std std-ref">meta_non_terminal/1</span></a> directive allows the
+<code class="docutils literal notranslate"><span class="pre">phrase//1</span></code>. The <a class="reference internal" href="../refman/directives/meta_non_terminal_1.html#directives-meta-non-terminal-1"><span class="std std-ref">meta_non_terminal/1</span></a> directive allows the
 declaration of non-terminals that have arguments that are meta-called from
 grammar rules. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_non_terminal</span>(zero_or_more(<span class="m">1</span>, <span class="o">*</span>)).

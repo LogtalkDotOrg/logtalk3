@@ -37,6 +37,9 @@ Catches exceptions thrown by a goal. See also the ISO Prolog standard
 definition. This built-in meta-predicate is declared as a private method
 and thus cannot be used as a message to an object.
 
+This method can also be used in grammar rules. In this case, the
+meta-arguments are interpreted as grammar rule bodies.
+
 Modes and number of proofs
 --------------------------
 

@@ -43,12 +43,13 @@ two implicit grammar rule arguments to the arguments of the closure. This
 built-in non-terminal is interpreted as a private non-terminal and thus
 cannot be used as a message to an object.
 
-Using this non-terminal is recommended when calling a predicate whose
-last two arguments are the two implicit grammar rule arguments to avoid
-hard-coding assumptions about how grammar rules are compiled into clauses.
-Note that the compiler ensures zero overhead when using this non-terminal
-with a bound argument at compile time. To call a predicate with a different
-argument order, use a :term:`lambda expression`. For example:
+Using this non-terminal is recommended when calling a predicate whose last
+two arguments are the two implicit grammar rule arguments to avoid hard-coding
+assumptions about how grammar rules are compiled into clauses. Note that the
+compiler ensures zero overhead when using this non-terminal with a bound
+argument at compile time. To call a predicate with a different argument order,
+use a :term:`lambda expression` or define a :term:`predicate alias`. For
+example:
 
 ::
 

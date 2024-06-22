@@ -25881,6 +25881,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_dcg_body'(GRBody, S0, _, Goal, Ctx).
 
+'$lgt_dcg_body'(catch(GRGoal, Catcher, GRRecovery), S0, S, catch(Goal, Catcher, Recovery), Ctx) :-
+	!,
+	'$lgt_dcg_body'(GRGoal, S0, S, Goal, Ctx),
+	'$lgt_dcg_body'(GRRecovery, S0, S, Recovery, Ctx).
+
 '$lgt_dcg_body'(phrase(GRBody), S0, S, phrase(GRBody, S0, S), _) :-
 	!.
 

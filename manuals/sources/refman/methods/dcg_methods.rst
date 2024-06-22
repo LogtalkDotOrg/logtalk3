@@ -25,6 +25,7 @@ Definite clause grammar rules
    :maxdepth: 1
 
    call_1
+   catch_3
    eos_0
    phrase_1
    phrase_2

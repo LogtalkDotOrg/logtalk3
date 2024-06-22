@@ -28,8 +28,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* ADDED: Support for using the `(<<)/2` debugging control construct in a
-grammar rule body.
+* ADDED: Support for using the `(<<)/2` and `catch/3` control constructs
+in a grammar rule body.
 
 Documentation
 -------------
