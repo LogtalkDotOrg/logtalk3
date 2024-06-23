@@ -34,7 +34,11 @@ in a grammar rule body.
 * IMPROVED: Linter warning for calls to the `{}/1` control construct.
 
 * FIXED: Cases where the meta-argument of `phrase//1` and `phrase/2-3` goals
-would not be called in the meta-call context.
+would not be called in the meta-call context. Thanks to Alex Kouznetsov for
+the bug report.
+
+* FIXED: Clean the dynamic lookup caches when changing the values of the
+`debug` and `optimize` flags. Thanks to Alex Kouznetsov for the bug report.
 
 Documentation
 -------------

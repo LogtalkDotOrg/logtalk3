@@ -3425,23 +3425,40 @@ set_logtalk_flag(Flag, Value) :-
 	'$lgt_set_compiler_flag'(Flag, Value).
 
 
-'$lgt_set_compiler_flag'(Flag, Value) :-
-	retractall('$lgt_current_flag_'(Flag, _)),
-	assertz('$lgt_current_flag_'(Flag, Value)),
+'$lgt_set_compiler_flag'(optimize, Value) :-
+	!,
+	retractall('$lgt_current_flag_'(optimize, _)),
+	assertz('$lgt_current_flag_'(optimize, Value)),
+	'$lgt_clean_lookup_caches',
 	% only one of the optimize and debug flags can be turned on at the same time
-	(	Flag == optimize, Value == on ->
+	(	Value == on ->
 		retractall('$lgt_current_flag_'(debug, _)),
 		assertz('$lgt_current_flag_'(debug, off))
-	;	Flag == debug, Value == on ->
+	;	true
+	).
+
+'$lgt_set_compiler_flag'(debug, Value) :-
+	!,
+	retractall('$lgt_current_flag_'(debug, _)),
+	assertz('$lgt_current_flag_'(debug, Value)),
+	'$lgt_clean_lookup_caches',
+	% only one of the optimize and debug flags can be turned on at the same time
+	(	Value == on ->
 		retractall('$lgt_current_flag_'(optimize, _)),
 		assertz('$lgt_current_flag_'(optimize, off))
 	;	true
-	),
-	(	Flag == hook ->
-		% pre-compile hook calls for better performance when compiling files
-		'$lgt_compile_hooks'(Value)
-	;	true
 	).
+
+'$lgt_set_compiler_flag'(hook, Value) :-
+	!,
+	retractall('$lgt_current_flag_'(hook, _)),
+	assertz('$lgt_current_flag_'(hook, Value)),
+	% pre-compile hook calls for better performance when compiling files
+	'$lgt_compile_hooks'(Value).
+
+'$lgt_set_compiler_flag'(Flag, Value) :-
+	retractall('$lgt_current_flag_'(Flag, _)),
+	assertz('$lgt_current_flag_'(Flag, Value)).
 
 
 
