@@ -872,6 +872,28 @@ a linter check for the use of unification goals in test outcome assertions.
 In the rare cases that a unification goal is intended, wrapping the `(=)/2`
 goal using the `{}/1` control construct avoids the linter warning.
 
+When the meta-argument of the `assertion/1-2` predicates is call to a local
+predicate (in the tests object), you need to call them using the `(::)/2`
+message-sending control construct instead of the `(^^)/2` _super_ call
+control construct. This is necessary as _super_ calls preserve the _sender_
+and the tests are implicitly run by the `lgtunit` object sending a message
+to the tests object. For example:
+
+	:- uses(lgtunit, [
+		assertion/1
+	]).
+	
+	test(my_test_id, true) :-
+		foo(X, Y),
+		assertion(consistent(X, Y)).
+
+	consistent(X, Y) :-
+		...
+
+In this case, the _sender_ is the tests object and the `assertion/1`
+meta-predicate will call the local `consistent/2` predicate in the
+expected context.
+
 
 Testing local predicates
 ------------------------

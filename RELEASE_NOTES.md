@@ -48,6 +48,9 @@ directives to use a different order of the predicate arguments.
 
 * IMPROVED: Handbook documentation on the `meta_predicate/1` directive.
 
+* IMPROVED: Documentation of the `lgtunit` tool on how to use the
+`assertion/1-2` utility predicates.
+
 * UPDATED: Handbook documentation on debugging using conditional breakpoints
 and log points.
 
