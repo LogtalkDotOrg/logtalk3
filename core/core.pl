@@ -13003,17 +13003,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	callable(Pred),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
-	'$lgt_iso_spec_predicate'(Pred),
-	\+ '$lgt_built_in_method'(Pred, _, _, _),
-	% not a Logtalk built-in method that have a Prolog counterpart
-	\+ '$lgt_control_construct'(Pred),
-	\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
-	% call to a standard Prolog predicate that is not being locally redefined
+	(	Pred = call(Goal) ->
+		% redundant call/1 wrapper
+		Alternatives = [{Goal}]
+	;	'$lgt_iso_spec_predicate'(Pred),
+		\+ '$lgt_built_in_method'(Pred, _, _, _),
+		% not a Logtalk built-in method that have a Prolog counterpart
+		\+ '$lgt_control_construct'(Pred),
+		\+ '$lgt_pp_defines_predicate_'(Pred, _, _, _, _, _),
+		% call to a standard Prolog predicate that is not being locally redefined,
+		Alternatives = [Pred]
+	),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(suspicious_calls),
-		suspicious_call(File, Lines, Type, Entity, {Pred}, [Pred])
+		suspicious_call(File, Lines, Type, Entity, {Pred}, Alternatives)
 	),
 	fail.
 

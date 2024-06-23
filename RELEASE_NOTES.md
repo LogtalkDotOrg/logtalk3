@@ -31,6 +31,8 @@ Logtalk compiler and runtime
 * ADDED: Support for using the `(<<)/2` and `catch/3` control constructs
 in a grammar rule body.
 
+* IMPROVED: Linter warning for calls to the `{}/1` control construct.
+
 * FIXED: Cases where the meta-argument of `phrase//1` and `phrase/2-3` goals
 would not be called in the meta-call context.
 
