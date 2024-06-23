@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2020-12-24,
+		date is 2024-06-23,
 		comment is 'Unit tests for the "proxies" example.'
 	]).
 
@@ -51,7 +51,7 @@
 		assertion(Radius =~= 3.71),
 		assertion(Color == yellow).
 
-	test(proxies_05) :-
+	test(proxies_05, true) :-
 		findall(Area, {circle(_, _, _)}::area(Area), Areas),
 		Areas = [Area1, Area2, Area3, Area4, Area5],
 		assertion(Area1 =~= 4.75291552561599),
