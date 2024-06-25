@@ -14,7 +14,7 @@ Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates
 |    ``logtalk_load(meta_compiler(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:13:2
+| **Version:** 0:14:0
 | **Date:** 2024-06-20
 
 | **Compilation flags:**
@@ -27,6 +27,7 @@ Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates
 |    :ref:`gensym <gensym/0>`
 |    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 

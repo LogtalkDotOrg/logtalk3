@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:0:1,
+		version is 11:0:2,
 		author is 'Paulo Moura',
-		date is 2024-05-08,
+		date is 2024-06-25,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -390,7 +390,10 @@
 		),
 		(	member(Prefix, Prefixes),
 			atom_concat(Prefix, Relative, Path) ->
-			assertz(directory_entity_(Relative, Relative, Functor, Entity))
+			(	Relative == '' ->
+				assertz(directory_entity_('./', './', Functor, Entity))
+			;	assertz(directory_entity_(Relative, Relative, Functor, Entity))
+			)
 		;	assertz(directory_entity_(Path, Path, Functor, Entity))
 		),
 		entity_type(Entity, Type),

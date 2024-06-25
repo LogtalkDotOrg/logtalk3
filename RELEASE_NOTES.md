@@ -85,6 +85,10 @@ placeholders that are expanded at runtime.
 * UPDATED: The `lgtunit` tool to print a new line after reporting a failed
 test to simplify parsing by other tools.
 
+* FIXED: Bug in the `lgtdoc` tool where invalid reStructuredText files could
+be generated when entities are defined in source file at the root level of the
+documented project.
+
 Examples
 --------
 
@@ -108,8 +112,7 @@ IDEs, text editors, and syntax highlighters support
 
 * REMOVED: Outdated VSCode support file `vscode_message_streamer.lgt`.
 
-* UPDATED: VSCode support to support setting conditional line number spy
-points.
+* UPDATED: VSCode support to support setting conditional breakpoints.
 
 * UPDATED: VSCode support to add failed tests to the "Problems" pane.
 
