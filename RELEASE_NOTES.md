@@ -90,6 +90,9 @@ placeholders that are expanded at runtime.
 * UPDATED: The `lgtunit` tool to print a new line after reporting a failed
 test to simplify parsing by other tools.
 
+* FIXED: The `meta_predicate/1` directive for the `lgtunit` object `test/3`
+private predicate.
+
 * FIXED: Removed non-required `meta_predicate/1` directives for some auxiliary
 `lgtunit` object predicates.
 

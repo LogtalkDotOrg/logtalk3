@@ -27,7 +27,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 17:0:2,
+		version is 17:0:3,
 		author is 'Paulo Moura',
 		date is 2024-06-26,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -767,7 +767,7 @@
 	]).
 
 	:- private(test/3).
-	:- meta_predicate(test(*, *, *)).  % just to silence warnings
+	:- meta_predicate(test(*, *, ::)).
 	:- mode(test(?callable, ?list(variable), ?nonvar), zero_or_more).
 	:- info(test/3, [
 		comment is 'Compiled unit tests. The list of variables is used to ensure variable sharing between a test with its test options.',
@@ -1520,23 +1520,23 @@
 	% debugging failed unit tests
 	directive_expansion(
 			object(Test, Relation),
-			[(:- object(Test, Relation)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
+			[(:- object(Test, Relation)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, ::)))]) :-
 		reset_compilation_counters.
 	directive_expansion(
 			object(Test, Relation1, Relation2),
-			[(:- object(Test, Relation1, Relation2)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
+			[(:- object(Test, Relation1, Relation2)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, ::)))]) :-
 		reset_compilation_counters.
 	directive_expansion(
 			object(Test, Relation1, Relation2, Relation3),
-			[(:- object(Test, Relation1, Relation2, Relation3)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
+			[(:- object(Test, Relation1, Relation2, Relation3)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, ::)))]) :-
 		reset_compilation_counters.
 	directive_expansion(
 			object(Test, Relation1, Relation2, Relation3, Relation4),
-			[(:- object(Test, Relation1, Relation2, Relation3, Relation4)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
+			[(:- object(Test, Relation1, Relation2, Relation3, Relation4)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, ::)))]) :-
 		reset_compilation_counters.
 	directive_expansion(
 			object(Test, Relation1, Relation2, Relation3, Relation4, Relation5),
-			[(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, *)))]) :-
+			[(:- object(Test, Relation1, Relation2, Relation3, Relation4, Relation5)), (:- set_logtalk_flag(context_switching_calls,allow)), (:- meta_predicate(test(*, *, ::)))]) :-
 		reset_compilation_counters.
 
 	% the discontiguous/1 directives usually required when using some of the

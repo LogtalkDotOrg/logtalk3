@@ -14,7 +14,7 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 17:0:2
+| **Version:** 17:0:3
 | **Date:** 2024-06-26
 
 | **Compilation flags:**
@@ -2067,7 +2067,7 @@ Compiled unit tests. The list of variables is used to ensure variable sharing be
 | **Template:**
 |    ``test(Identifier,Variables,Outcome)``
 | **Meta-predicate template:**
-|    ``test(*,*,*)``
+|    ``test(*,*,::)``
 | **Mode and number of proofs:**
 |    ``test(?callable,?list(variable),?nonvar)`` - ``zero_or_more``
 
