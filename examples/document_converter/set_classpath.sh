@@ -2,7 +2,7 @@
 
 #############################################################################
 ## 
-##   Set CLASSPATH environment variable for LVM
+##   Set CLASSPATH environment variable for XVM
 ##   Last updated on February 14, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  

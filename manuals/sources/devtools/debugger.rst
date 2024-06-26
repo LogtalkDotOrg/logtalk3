@@ -108,7 +108,7 @@ Known issues
 
 Clause breakpoints require a Prolog backend compiler that supports
 accessing read term starting line but only some backends (B-Prolog, GNU
-Prolog, JIProlog, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and
+Prolog, JIProlog, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and
 YAP) provide accurate line numbers.
 
 As a workaround, you can check the start line number for an entity

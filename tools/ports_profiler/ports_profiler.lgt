@@ -605,7 +605,7 @@
 
 	:- elif((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == ciao; Dialect == gnu; Dialect == lvm)
+		(Dialect == ciao; Dialect == gnu; Dialect == xvm)
 	)).
 
 		call_goal(TGoal, Deterministic) :-

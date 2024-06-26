@@ -75,7 +75,7 @@
 )).
 
 :- if((
-	\+ current_logtalk_flag(prolog_dialect, lvm),
+	\+ current_logtalk_flag(prolog_dialect, xvm),
 	\+ current_logtalk_flag(prolog_dialect, sicstus)
 )).
 	:- initialization((

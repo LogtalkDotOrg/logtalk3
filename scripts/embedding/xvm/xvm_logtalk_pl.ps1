@@ -1,7 +1,7 @@
 
 #############################################################################
 ## 
-##   This script creates a LVM logtalk.pl file with the Logtalk compiler and
+##   This script creates a XVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
 ##   Last updated on September 6, 2023
@@ -91,7 +91,7 @@ function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
-	Write-Output "This script creates a LVM logtalk.pl file with the Logtalk compiler/runtime"
+	Write-Output "This script creates a XVM logtalk.pl file with the Logtalk compiler/runtime"
 	Write-Output "and an optional application.pl file from an application source code given"
 	Write-Output "its loader file. When embedding an application, this script also creates a"
 	Write-Output "loader.pl file for loading all generated Prolog and foreign library files."
@@ -215,22 +215,22 @@ if (Test-Path $env:LOGTALKUSER) {
 Push-Location
 Set-Location $t
 
-Copy-Item -Path ($env:LOGTALKHOME + '\adapters\lvm.pl') -Destination .
+Copy-Item -Path ($env:LOGTALKHOME + '\adapters\xvm.pl') -Destination .
 Copy-Item -Path ($env:LOGTALKHOME + '\core\core.pl') -Destination .
 $ScratchDirOption = ", scratch_directory('" + $t.Replace('\','/') + "')"
 
 $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt."
-lvmlgt --goal $GoalParam 
+xvmlgt --goal $GoalParam 
 
 if ($c -eq $true) {
 	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt."
-	lvmlgt --goal $GoalParam
+	xvmlgt --goal $GoalParam
 } else {
 	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
 }
 
 if (($s -eq "") -or ($s -eq "none")) {
-	Get-Content -Path lvm.pl,
+	Get-Content -Path xvm.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
 		monitoring*_lgt.pl,
@@ -245,9 +245,9 @@ if (($s -eq "") -or ($s -eq "none")) {
 	} else {
 		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt." 
 	}
-	lvmlgt --goal $GoalParam
-	lvm.pl -replace 'settings_file, allow' 'settings_file, deny'
-	Get-Content -Path lvm.pl,
+	xvmlgt --goal $GoalParam
+	xvm.pl -replace 'settings_file, allow' 'settings_file, deny'
+	Get-Content -Path xvm.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
 		monitoring*_lgt.pl,
@@ -275,7 +275,7 @@ if ($l -ne "") {
 		$GoalParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/') + "'), halt." 
 	}
 
-	lvmpl --goal $GoalParam
+	xvmpl --goal $GoalParam
 	Get-Item *.pl | 
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
@@ -286,8 +286,8 @@ if ($l -ne "") {
 	if ($x -eq $true) {
 		$GoalEncryptLogtalk = "encrypt_program('" + $d.Replace('\', '/') + "/logtalk.pl'),halt."
 		$GoalEncryptApplication = "encrypt_program('" + $d.Replace('\', '/') + "/application.pl'),halt."
-		lvmpl --goal $GoalEncryptLogtalk
-		lvmpl --goal $GoalEncryptApplication
+		xvmpl --goal $GoalEncryptLogtalk
+		xvmpl --goal $GoalEncryptApplication
 		Remove-Item $d/logtalk.pl -Confirm
 		Remove-Item $d/application.pl -Confirm
 	}
@@ -295,7 +295,7 @@ if ($l -ne "") {
 	if ($f -eq $true) {
 		$LoaderParam = "consult('" + $d.Replace('\', '/') + "/logtalk.pl'), set_logtalk_flag(report,off), logtalk_load('$loader'), open('" + $d.Replace('\', '/') + "/loader.pl',append,Stream), forall((current_plugin(PlugIn), plugin_property(PlugIn,file(File))), (decompose_file_name(File,_,Basename,_), format(Stream,'\tload_foreign_library(~q),~n',[Basename]))), close(Stream), halt."
 
-		lvmpl --goal $LoaderParam
+		xvmpl --goal $LoaderParam
 	}
 
 	Add-Content -Path $d/loader.pl -Value  "	consult(logtalk),"

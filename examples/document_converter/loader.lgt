@@ -39,7 +39,7 @@
 		logtalk_load(document_converter, [optimize(on), hook(java_hook)])
 	)).
 
-:- elif((current_logtalk_flag(prolog_dialect, lvm), logtalk_library_path(jni, _))).
+:- elif((current_logtalk_flag(prolog_dialect, xvm), logtalk_library_path(jni, _))).
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),

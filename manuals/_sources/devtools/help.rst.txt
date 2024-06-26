@@ -54,7 +54,7 @@ Experimental features
 ---------------------
 
 On POSIX systems, when using Ciao Prolog, ECLiPSe, GNU Prolog (1.5.1 or
-later version), LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB
+later version), XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, or XSB
 as the backend, ``apis/1`` and ``handbook/0-1`` predicates are made
 available. These predicates open inline at the top-level interpreter the
 Texinfo versions of the Handbook and the APIs documentation. The

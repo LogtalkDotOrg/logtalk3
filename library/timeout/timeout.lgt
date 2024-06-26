@@ -27,7 +27,7 @@
 		date is 2022-06-15,
 		comment is 'Predicates for calling goal with a time limit.',
 		remarks is [
-			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.'
+			'Supported backend Prolog systems' - 'B-Prolog, ECLiPSe, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.'
 		]
 	]).
 
@@ -201,7 +201,7 @@
 			;	Result = fail
 			).
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 		call_with_timeout(Goal, Time) :-
 			call_with_timeout_aux(Goal, Goal, Time).

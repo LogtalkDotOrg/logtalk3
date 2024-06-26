@@ -55,7 +55,7 @@
 		dif(Term1, Term2) :-
 			sicstus:dif(Term1, Term2).
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 		dif(Term1, Term2) :-
 			user::dif(Term1, Term2).

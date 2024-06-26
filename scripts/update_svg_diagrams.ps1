@@ -56,7 +56,7 @@ function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -p backend Prolog compiler (default is " + $p + ")")
-	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output "  -i include all installed packs"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
@@ -100,9 +100,9 @@ if ("$p" -eq "b") {
 } elseif ("$p" -eq "ji") {
 	$prolog='JIProlog'
 	$logtalk="jiplgt -n -g"
-} elseif ("$p" -eq "lvm") {
-	$prolog='LVM'
-	$logtalk="lvmlgt -g"
+} elseif ("$p" -eq "xvm") {
+	$prolog='XVM'
+	$logtalk="xvmlgt -g"
 } elseif ("$p" -eq "sicstus") {
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt --goal"

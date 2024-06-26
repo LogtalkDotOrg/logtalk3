@@ -37,7 +37,7 @@
 		:- use_module(prolog_statistics, [time/1]).
 	:- endif.
 
-	:- if(current_logtalk_flag(prolog_dialect, lvm)).
+	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 		:- uses(user, [
 			jpl_new/3,

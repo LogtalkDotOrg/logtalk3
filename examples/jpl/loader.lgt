@@ -47,7 +47,7 @@
 
 	:- endif.
 
-:- elif((current_logtalk_flag(prolog_dialect, lvm), logtalk_library_path(jni, _))).
+:- elif((current_logtalk_flag(prolog_dialect, xvm), logtalk_library_path(jni, _))).
 
 	:- initialization((
 		logtalk_load(java(loader)),

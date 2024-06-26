@@ -996,7 +996,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	% read_single_char/1 definition copied from the Logtalk debugger
 
-	:- if(predicate_property(get_unbuffered_char(_), built_in)). % e.g. LVM or Trealla Prolog
+	:- if(predicate_property(get_unbuffered_char(_), built_in)). % e.g. XVM or Trealla Prolog
 
 		read_single_char(Char) :-
 			{get_unbuffered_char(Char)}, put_char(Char),

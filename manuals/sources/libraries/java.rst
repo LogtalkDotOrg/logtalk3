@@ -9,7 +9,7 @@ and allows creating Java object, accessing Java class fields, and
 calling Java class and object methods using syntax closer to Logtalk. It
 also gives access to some Java utility predicates.
 
-This abstraction was developed primarily to work with LVM (with its
+This abstraction was developed primarily to work with XVM (with its
 ``jni`` plug-in installed) or the JPL library bundled with SWI-Prolog
 and YAP. However, it's expected to be implementable with alternative
 Java interfaces found in other backend Prolog compilers. Currently, a
@@ -56,7 +56,7 @@ if you want to ignore the return value or when calling a void Java
 method.
 
 The ``java`` object implements utility predicates. For some backend Java
-interfaces such as JPL (available in LVM, SWI-Prolog, and YAP) there is
+interfaces such as JPL (available in XVM, SWI-Prolog, and YAP) there is
 also a ``java_hook`` hook object for removing any overhead when using
 this library abstraction.
 

@@ -21,4 +21,4 @@
 ## 
 #############################################################################
 
-exec $LOGTALKHOME/integration/lvmlgt.sh
+exec $LOGTALKHOME/integration/xvmlgt.sh

@@ -27,7 +27,7 @@
 		date is 2021-12-17,
 		comment is 'Coroutining predicates.',
 		remarks is [
-			'Supported backend Prolog systems' - 'ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.'
+			'Supported backend Prolog systems' - 'ECLiPSe, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and YAP.'
 		]
 	]).
 
@@ -85,7 +85,7 @@
 		when(Condition, Goal) :-
 			sicstus:when(Condition, Goal).
 
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 
 		dif(Term1, Term2) :-
 			user::dif(Term1, Term2).

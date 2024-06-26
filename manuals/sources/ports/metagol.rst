@@ -21,7 +21,7 @@ the ported examples.
 
 Both the original code and the port requires the coroutining ``when/2``
 predicate, which is only available in some backend Prolog systems. The
-port currently supports ECLiPSe, LVM, SICStus Prolog, SWI-Prolog, and
+port currently supports ECLiPSe, XVM, SICStus Prolog, SWI-Prolog, and
 YAP. It can be used on both POSIX and Windows operating-systems.
 
 The examples are ported from the original Metagol distribution. Some of

@@ -957,7 +957,7 @@
 		call_goal(TGoal, Deterministic) :-
 			{call_cleanup(TGoal, Deterministic = true)}.
 
-	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ciao; Dialect == gnu; Dialect == lvm))).
+	:- elif((current_logtalk_flag(prolog_dialect, Dialect), (Dialect == ciao; Dialect == gnu; Dialect == xvm))).
 
 		call_goal(TGoal, Deterministic) :-
 			{call_det(TGoal, Deterministic)}.
@@ -1424,7 +1424,7 @@
 			asserta(file_line_hit_count_(File, Line, 1))
 		).
 
-	:- if(predicate_property(get_unbuffered_char(_), built_in)). % e.g. LVM or Trealla Prolog
+	:- if(predicate_property(get_unbuffered_char(_), built_in)). % e.g. XVM or Trealla Prolog
 
 		read_single_char(Char) :-
 			{get_unbuffered_char(Char)}, put_char(Char),

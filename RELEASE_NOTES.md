@@ -40,6 +40,11 @@ the bug report.
 * FIXED: Clean the dynamic lookup caches when changing the values of the
 `debug` and `optimize` flags. Thanks to Alex Kouznetsov for the bug report.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: Account for the renaming of the LVM backend to XVM.
+
 Documentation
 -------------
 

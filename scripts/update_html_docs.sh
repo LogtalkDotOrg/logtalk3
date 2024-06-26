@@ -87,7 +87,7 @@ usage_help()
 	echo
 	echo "Optional arguments:"
 	echo "  -p backend Prolog compiler (default is $backend)"
-	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	echo "     (valid values are b, ciao, cx, eclipse, gnu, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	echo "  -i include all installed packs"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
@@ -125,9 +125,9 @@ elif [ "$p_arg" == "gnu" ] ; then
 elif [ "$p_arg" == "ji" ] ; then
 	prolog='JIProlog'
 	logtalk="jiplgt$extension -n -g"
-elif [ "$p_arg" == "lvm" ] ; then
-	prolog='LVM'
-	logtalk="lvmlgt$extension -g"
+elif [ "$p_arg" == "xvm" ] ; then
+	prolog='XVM'
+	logtalk="xvmlgt$extension -g"
 elif [ "$p_arg" == "sicstus" ] ; then
 	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"

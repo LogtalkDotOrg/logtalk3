@@ -276,7 +276,7 @@
 		get_seed(_).
 		set_seed(_).
 		random(Random) :- Random is rand.
-	:- elif(current_logtalk_flag(prolog_dialect, lvm)).
+	:- elif(current_logtalk_flag(prolog_dialect, xvm)).
 		get_seed(Seed) :- {get_seed(Seed)}.
 		set_seed(Seed) :- {set_seed(Seed)}.
 		random(Random) :- {random(Random)}.

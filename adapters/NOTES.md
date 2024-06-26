@@ -89,13 +89,13 @@ following table summarizes the availability of these features:
 |  ECLiPSe         |       no      |     partial   |       no      |      yes      |     partial   |      yes      |  
 |  GNU Prolog      |       no      |       no      |       no      |       no      |       no      |       no      |  
 |  JIProlog        |       no      |       no      |      yes      |       no      |       no      |       no      |  
-|  LVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  Quintus Prolog  |       no      |       no      |       no      |       no      |       no      |       no      |  
 |  SICStus Prolog  |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  SWI-Prolog      |      yes      |      yes      |      yes      |      yes      |      yes      |      yes      |  
 |  Tau Prolog      |       no      |       no      |      yes      |       no      |       no      |       no      |  
 |  Trealla Prolog  |       no      |       no      |      yes      |      yes      |      yes      |      yes      |  
 |  XSB             |      yes      |       no      |       no      |       no      |       no      |       no      |  
+|  XVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |  
 |  YAP             |      yes      |      yes      |      yes      |       no      |       no      |      yes      |  
 
 A value of "yes" means at least partial support (but some limitations may be
@@ -249,18 +249,6 @@ See the `scripts/embedding/jiprolog` directory for a sample shell script
 for embedding Logtalk and optionally a Logtalk application. The script
 documentation also explains how to generate JAR files with pre-compiled
 Logtalk applications.
-
-
-LVM 6.3.0 and later versions
-----------------------------
-
-	lvm.pl
-
-Coinduction support requires setting the `unify_applies_occurs_check` to
-`true`. This can be accomplished e.g. by using the `--enable-occurs-check`
-command-line option:
-
-	$ lvmlgt --enable-occurs-check
 
 
 Quintus Prolog 3.3~3.5
@@ -474,6 +462,18 @@ that can help in pre-compiling Logtalk.
 The first run of the `xsblgt` integration script on POSIX systems may require
 the use of `sudo`. The first run of the `Logtalk - XSB` integration shortcut
 on Windows may need to be run as administrator.
+
+
+XVM 10.0.0 and later versions
+-----------------------------
+
+	xvm.pl
+
+Coinduction support requires setting the `unify_applies_occurs_check` to
+`true`. This can be accomplished e.g. by using the `--enable-occurs-check`
+command-line option:
+
+	$ xvmlgt --enable-occurs-check
 
 
 YAP 6.3.4 and later versions

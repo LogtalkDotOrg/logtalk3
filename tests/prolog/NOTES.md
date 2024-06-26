@@ -65,7 +65,7 @@ The test identifier prefixes indicate their origin:
 - `commons_` - tests for de facto standard Prolog features
 - `wg17_` - tests from WG17 test suite
 - `tpl_` - tests contributed by Trealla Prolog developers
-- `lvm_` - tests contributed by LVM developers
+- `xvm_` - tests contributed by XVM developers
 
 To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
 

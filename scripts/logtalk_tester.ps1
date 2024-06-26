@@ -285,7 +285,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
-	Write-Output "     (valid values are b, cx, eclipse, gnu, gnunc, ji, lvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
+	Write-Output "     (valid values are b, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output ("  -o output (valid values are verbose and minimal; default is " + $o + ")")
@@ -361,10 +361,10 @@ Function Check-Parameters() {
 		$script:prolog = 'JIProlog'
 		$script:logtalk = "jiplgt"
 		$script:logtalk_option = "-n -g"
-	} elseif ($p -eq "lvm") {
-		$script:backend = 'lvm'
-		$script:prolog = 'LVM'
-		$script:logtalk = "lvmlgt"
+	} elseif ($p -eq "xvm") {
+		$script:backend = 'xvm'
+		$script:prolog = 'XVM'
+		$script:logtalk = "xvmlgt"
 		$script:logtalk_option = "-g"
 		$script:dot = "."
 	} elseif ($p -eq "sicstus") {

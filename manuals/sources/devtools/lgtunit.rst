@@ -1253,7 +1253,7 @@ some backend Prolog compilers provide this functionality:
 
 -  B-Prolog: ``time_out/3`` built-in predicate
 -  ECLiPSe: ``timeout/3`` and ``timeout/7`` library predicates
--  LVM: ``call_with_timeout/2-3`` built-in predicates
+-  XVM: ``call_with_timeout/2-3`` built-in predicates
 -  SICStus Prolog: ``time_out/3`` library predicate
 -  SWI-Prolog: ``call_with_time_limit/2`` library predicate
 -  Trealla Prolog: ``call_with_time_limit/2`` and ``time_out/3`` library
@@ -1641,7 +1641,7 @@ the depth of printed terms that can be useful:
 
 -  CxProlog: ``write_depth/2`` predicate
 -  ECLiPSe: ``print_depth`` flag
--  LVM 3.2.0 or later: ``answer_write_options`` flag
+-  XVM 3.2.0 or later: ``answer_write_options`` flag
 -  SICStus Prolog: ``toplevel_print_options`` flag
 -  SWI-Prolog 7.1.10 or earlier: ``toplevel_print_options`` flag
 -  SWI-Prolog 7.1.11 or later: ``answer_write_options`` flag
