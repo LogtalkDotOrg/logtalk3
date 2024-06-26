@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 17:0:1,
+		version is 17:0:2,
 		author is 'Paulo Moura',
-		date is 2024-06-10,
+		date is 2024-06-26,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1295,8 +1295,6 @@
 		::note(Note),
 		print_message(information, lgtunit, tests_skipped(Object, File, Note)).
 
-	:- meta_predicate(run_test_condition(*, *, *, *, *, *)).
-
 	run_test_condition(Condition) :-
 		option_goal(Condition, Goal),
 		% expected either success or failure; error means user error
@@ -1304,8 +1302,6 @@
 			true
 		;	catch(Goal, _, fail)
 		).
-
-	:- meta_predicate(run_test_setup(*, *, *, *, *, *)).
 
 	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) :-
 		option_goal(Setup, Goal),
@@ -1320,8 +1316,6 @@
 		;	failed_test(Test, File, Position, step_failure(setup), Flaky, Note, 0.0, 0.0, Output),
 			fail
 		).
-
-	:- meta_predicate(run_test_cleanup(*, *, *, *, *)).
 
 	run_test_cleanup(Test, Cleanup, File, Position, Output) :-
 		option_goal(Cleanup, Goal),

@@ -90,6 +90,9 @@ placeholders that are expanded at runtime.
 * UPDATED: The `lgtunit` tool to print a new line after reporting a failed
 test to simplify parsing by other tools.
 
+* FIXED: Removed non-required `meta_predicate/1` directives for some auxiliary
+`lgtunit` object predicates.
+
 * FIXED: Bug in the `lgtdoc` tool where invalid reStructuredText files could
 be generated when entities are defined in source file at the root level of the
 documented project.
