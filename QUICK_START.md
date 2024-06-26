@@ -38,13 +38,13 @@ by default for running Logtalk with the supported backend Prolog compilers
 * ECLiPSe:        `eclipselgt`
 * GNU Prolog:     `gplgt`
 * JIProlog:       `jiplgt`     (first run may require `sudo`)
-* XVM:            `xvmlgt`
 * Quintus Prolog: `quintuslgt` (experimental)
 * SICStus Prolog: `sicstuslgt`
 * SWI-Prolog:     `swilgt`
 * Tau Prolog:     `taulgt`
 * Trealla Prolog: `tplgt`
 * XSB:            `xsblgt`     (first run may require `sudo`)
+* XVM:            `xvmlgt`
 * YAP:            `yaplgt`
 
 Man pages for all scripts are also provided on POSIX systems. HTML versions

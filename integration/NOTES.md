@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,13 +32,13 @@ system path):
 * ECLiPSe (6.1#143 or later):        `eclipselgt`
 * GNU Prolog (1.4.5 or later):       `gplgt`
 * JIProlog (4.1.7.1 or later):       `jiplgt`     (first run may require `sudo`)
-* XVM (9.0.0 or later):              `xvmlgt`
 * Quintus Prolog (3.3 or later):     `quintuslgt`
 * SICStus Prolog (4.1.0 or later):   `sicstuslgt`
 * SWI-Prolog (6.6.0 or later):       `swilgt`
 * Tau Prolog (0.3.2 or later):       `taulgt`
 * Trealla Prolog (2.18.7 or later):  `tplgt`
 * XSB (3.8.0 or later):              `xsblgt`     (first run may require `sudo`)
+* XVM (10.0.0 or later):             `xvmlgt`
 * YAP (6.3.4 or later):              `yaplgt`
 
 For more information about these scripts and their dependencies, consult
