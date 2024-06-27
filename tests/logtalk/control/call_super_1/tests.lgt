@@ -72,11 +72,20 @@
 :- end_object.
 
 
+:- category(cat).
+
+    :- protected(p/0).
+    p :-
+		write('p called').
+
+:- end_category.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2024-06-27,
 		comment is 'Unit tests for the (^^)/1 built-in control construct.'
@@ -111,5 +120,11 @@
 
 	test(call_super_1_10, deterministic(X == 42)) :-
 		call_super_test_object_2::v(X).
+
+	test(call_super_1_11, deterministic(Assertion)) :-
+		^^set_text_output(''),
+		create_object(_, [imports(cat)], [initialization(^^p)], []),
+		^^text_output_assertion('p called', Assertion),
+		^^clean_text_output.
 
 :- end_object.
