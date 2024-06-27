@@ -22,9 +22,9 @@
 :- object(emetas).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paul Tarau and Paulo Moura',
-		date is 2024-01-25,
+		date is 2024-06-27,
 		comment is 'Examples of implementing meta-predicates using threaded engines.'
 	]).
 
@@ -64,17 +64,17 @@
 
 	best_of(Answer, Comparator, Generator) :-
 		threaded_engine_create(Answer, Generator, Engine),
-		efoldl(Engine, compare_answers(Comparator), no, Best),
+		efoldl(Engine, Comparator, no, Best),
 		threaded_engine_destroy(Engine),
 		Answer = Best.
 
-	:- meta_predicate(efoldl(*, 3, *, *)).
-	efoldl(Engine, F, R1, R2):-
+	:- meta_predicate(efoldl(*, 2, *, *)).
+	efoldl(Engine, C, R1, R2):-
 		threaded_engine_next(Engine, X),
 		!,
-		call(F, R1, X, R),
-		efoldl(Engine, F, R, R2).
-	efoldl(_Engine, _F, R, R).
+		compare_answers(C, R1, X, R),
+		efoldl(Engine, C, R, R2).
+	efoldl(_Engine, _C, R, R).
 
 	:- meta_predicate(compare_answers(2, *, *, *)).
 	compare_answers(Comparator, A1, A2, Best):-

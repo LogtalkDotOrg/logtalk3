@@ -109,6 +109,8 @@ call.
 
 * FIXED: The `neo4j` example finding of the Neo4j installation directory.
 
+* FIXED: The `emetas` example definition of the `best_of/3` meta-predicate.
+
 Installers and installation scripts
 -----------------------------------
 
