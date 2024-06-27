@@ -19180,6 +19180,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles calling of redefined predicates ("super" calls)
 
 '$lgt_compile_super_call'(Pred, TPred, Ctx) :-
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, This, _, _, _, _, ExCtx, runtime, _, _, _),
+	!,
+	'$lgt_current_object_'(This, _, _, _, Super, _, _, _, _, _, _),
+	TPred = '$lgt_obj_super_call'(Super, Pred, ExCtx).
+
+'$lgt_compile_super_call'(Pred, TPred, Ctx) :-
 	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),

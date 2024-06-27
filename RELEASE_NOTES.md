@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Support for runtime constructed `(^^)/2` goals. Thanks to Alex
+Kouznetsov for the bug report.
+
 * ADDED: Support for using the `(<<)/2` and `catch/3` control constructs
 in a grammar rule body.
 
@@ -110,6 +113,11 @@ call.
 * FIXED: The `neo4j` example finding of the Neo4j installation directory.
 
 * FIXED: The `emetas` example definition of the `best_of/3` meta-predicate.
+
+Tests
+-----
+
+* ADDED: Additional tests for the `(^^)/2` control construct.
 
 Installers and installation scripts
 -----------------------------------
