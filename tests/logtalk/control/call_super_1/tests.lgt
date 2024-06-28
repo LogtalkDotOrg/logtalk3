@@ -91,28 +91,28 @@
 		comment is 'Unit tests for the (^^)/1 built-in control construct.'
 	]).
 
-	test(call_super_1_1, error(instantiation_error)) :-
+	test(call_super_1_01, error(instantiation_error)) :-
 		call_super_test_object_2::p(_).
 
-	test(call_super_1_2, error(type_error(callable,1))) :-
+	test(call_super_1_02, error(type_error(callable,1))) :-
 		call_super_test_object_2::p(1).
 
-	test(call_super_1_3, error(permission_error(access,private_predicate,s/1))) :-
+	test(call_super_1_03, error(permission_error(access,private_predicate,s/1))) :-
 		call_super_test_object_2::p(s(_)).
 
-	test(call_super_1_4, error(existence_error(predicate_declaration,t/1))) :-
+	test(call_super_1_04, error(existence_error(predicate_declaration,t/1))) :-
 		call_super_test_object_2::p(t(_)).
 
-	test(call_super_1_5, deterministic(X == 1)) :-
+	test(call_super_1_05, deterministic(X == 1)) :-
 		call_super_test_object_2::p(q(X)).
 
-	test(call_super_1_6, deterministic(X == 1)) :-
+	test(call_super_1_06, deterministic(X == 1)) :-
 		call_super_test_object_2::t1(X).
 
-	test(call_super_1_7, deterministic(X == 1)) :-
+	test(call_super_1_07, deterministic(X == 1)) :-
 		call_super_test_object_2::t2(X).
 
-	test(call_super_1_8, deterministic(X == 1)) :-
+	test(call_super_1_08, deterministic(X == 1)) :-
 		call_super_test_object_2::t3(X).
 
 	test(call_super_1_09, false) :-
