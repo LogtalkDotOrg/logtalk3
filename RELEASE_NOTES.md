@@ -128,6 +128,9 @@ supported Prolog backends, Jupyter, JupyterLab, and the Logtalk kernel.
 * FIXED: The SWI-Prolog based Docker image to also define the `INFOPATH`
 environment variable.
 
+* FIXED: The `install.sh` manual installation script to avoid `install-info`
+warnings and delete any old Logtalk info files.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

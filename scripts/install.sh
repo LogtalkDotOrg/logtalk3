@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on June 26, 2024
+##   Last updated on June 28, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -171,17 +171,25 @@ if [ "$(command -v install-info)" != "" ]; then
 	mkdir -p ../../info
 	cd ../../info || exit 1
 	if [ -f ../logtalk/docs/LogtalkAPIs-$version_base.info ] ; then
-		cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
 		if [ -f dir ] ; then
-			install-info --silent --delete LogtalkAPIs-*.info
+			for file in ./LogtalkAPIs-*.info ; do
+				[ -e "$file" ] || continue
+				rm "$file"
+				install-info --silent --delete "$file" dir > /dev/null 2>&1
+			done
 		fi
+		cp ../logtalk/docs/LogtalkAPIs-$version_base.info .
 		install-info LogtalkAPIs-$version_base.info dir
 	fi
 	if [ -f ../logtalk/manuals/TheLogtalkHandbook-$version_base.info ] ; then
-		cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
 		if [ -f dir ] ; then
-			install-info --silent --delete TheLogtalkHandbook-*.info
+			for file in ./TheLogtalkHandbook-*.info ; do
+				[ -e "$file" ] || continue
+				rm "$file"
+				install-info --silent --delete "$file" dir > /dev/null 2>&1
+			done
 		fi
+		cp ../logtalk/manuals/TheLogtalkHandbook-$version_base.info .
 		install-info TheLogtalkHandbook-$version_base.info dir
 	fi
 	echo "Ensure that the \"$prefix/share/info\" directory is in your INFOPATH."
@@ -212,8 +220,9 @@ echo "on your execution path."
 echo
 echo "Users should ensure that the environment variable LOGTALKHOME is set to"
 echo "\"$prefix/share/logtalk\" and then run the \"logtalk_user_setup\" shell script"
-echo "once before running the integration scripts. For more details on manual"
-echo "installation setup, see the \"INSTALL.md\" file."
+echo "once before running the integration scripts to ensure their LOGTALKUSER"
+echo "directory is up-to-date. For more details on manual installation setups,"
+echo "see the \"INSTALL.md\" file."
 echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
 echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"
