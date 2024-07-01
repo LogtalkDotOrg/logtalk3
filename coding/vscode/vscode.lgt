@@ -1596,6 +1596,7 @@
 	logtalk::message_hook(failed_test(_Object, _Test, File, Line-_, _Reason, _Flaky, _Note, CPUTime, WallTime), Kind, lgtunit, Tokens) :-
 		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
+		% also write to the scratch/.messages file to be able to add failed tests to the "PROBLEMS" pane
 		message_hook(Tokens, lgtunit, Kind),
 		fail.
 	logtalk::message_hook(skipped_test(_Object, _Test, File, Line-_, _Note), _, lgtunit, _) :-
