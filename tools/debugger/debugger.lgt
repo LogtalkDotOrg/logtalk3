@@ -25,7 +25,7 @@
 	:- info([
 		version is 7:9:0,
 		author is 'Paulo Moura',
-		date is 2024-06-19,
+		date is 2024-07-01,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -851,9 +851,9 @@
 		triggered_breakpoint_enabled_(Entity, Line), !.
 
 	triggered_port(fact(Entity, _, _, Line), '^') :-
-		retractall(triggered_breakpoint_enabled_(Entity, Line)).
+		retract(triggered_breakpoint_enabled_(Entity, Line)), !.
 	triggered_port(rule(Entity, _, _, Line), '^') :-
-		retractall(triggered_breakpoint_enabled_(Entity, Line)).
+		retract(triggered_breakpoint_enabled_(Entity, Line)), !.
 
 	% debug handler
 
