@@ -5333,8 +5333,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % phrase/2 built-in method implementation for calls where the first argument is only known at runtime
 
+'$lgt_phrase'(GRBody, Input, ExCtx, _) :-
+	var(GRBody),
+	throw(error(instantiation_error, logtalk(phrase(GRBody, Input), ExCtx))).
+
+'$lgt_phrase'('$lgt_local'(GRBody), Input, ExCtx, _) :-
+	!,
+	'$lgt_phrase'(GRBody, Input, ExCtx, local).
+
 '$lgt_phrase'(GRBody, Input, ExCtx, Where) :-
-	'$lgt_check'(callable, GRBody, logtalk(phrase(GRBody, Input), ExCtx)),
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	catch(
 		'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
@@ -5350,8 +5357,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % phrase/3 built-in method implementation for calls where the first argument is only known at runtime
 
+'$lgt_phrase'(GRBody, Input, Rest, ExCtx, _) :-
+	var(GRBody),
+	throw(error(instantiation_error, logtalk(phrase(GRBody, Input, Rest), ExCtx))).
+
+'$lgt_phrase'('$lgt_local'(GRBody), Input, Rest, ExCtx, _) :-
+	!,
+	'$lgt_phrase'(GRBody, Input, Rest, ExCtx, local).
+
 '$lgt_phrase'(GRBody, Input, Rest, ExCtx, Where) :-
-	'$lgt_check'(callable, GRBody, logtalk(phrase(GRBody, Input, Rest), ExCtx)),
 	'$lgt_comp_ctx_mode'(Ctx, runtime),
 	catch(
 		'$lgt_dcg_body'(GRBody, S0, S, Pred, Ctx),
@@ -6197,6 +6211,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TGoal =.. [TFunctor| FullArgs],
 	call(TGoal, ExCtx).
 
+'$lgt_metacall'('$lgt_local'(Closure), ExtraArgs, ExCtx, _) :-
+	!,
+	'$lgt_metacall'(Closure, ExtraArgs, ExCtx, local).
+
 '$lgt_metacall'({Closure}, ExtraArgs, ExCtx, _) :-
 	!,
 	% compiler bypass (call of external code)
@@ -6463,6 +6481,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	var(Goal),
 	throw(error(instantiation_error, logtalk(call(Goal), ExCtx))).
 
+'$lgt_metacall'('$lgt_local'(Goal), ExCtx, _) :-
+	!,
+	'$lgt_metacall'(Goal, ExCtx, local).
+
 '$lgt_metacall'({Goal}, ExCtx, _) :-
 	% pre-compiled meta-calls or calls in "user" (compiler bypass)
 	!,
@@ -6496,6 +6518,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_quantified_metacall'(Goal, ExCtx, _) :-
 	var(Goal),
 	throw(error(instantiation_error, logtalk(call(Goal), ExCtx))).
+
+'$lgt_quantified_metacall'('$lgt_local'(Goal), ExCtx, _) :-
+	!,
+	'$lgt_quantified_metacall'(Goal, ExCtx, local).
 
 '$lgt_quantified_metacall'({Goal}, ExCtx, _) :-
 	% pre-compiled meta-calls or calls in "user" (compiler bypass)
@@ -16781,11 +16807,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	'$lgt_check_for_trivial_fails'(Mode, Pred, TPred0, Head),
 	functor(TPred0, TFunctor, TArity),
-	(	'$lgt_pp_meta_predicate_'(Pred, Meta, _, _),
+	(	'$lgt_pp_meta_predicate_'(Head, _, _, _),
+		'$lgt_pp_meta_predicate_'(Pred, Meta, _, _),
 		% local user-defined meta-predicate
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
-		'$lgt_compile_static_binding_meta_arguments'(Args, MArgs, Caller, Ctx, TArgs0) ->
+		'$lgt_wrap_local_meta_arguments'(MArgs, Args, Caller, Ctx, TArgs0) ->
 		'$lgt_append'(TArgs0, [ExCtx], TArgs),
 		TPred =.. [TFunctor| TArgs]
 	;	% non meta-predicate or runtime compilation of meta-arguments
@@ -16983,6 +17010,29 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Pred, _, _, _, _) :-
 	throw(domain_error(goal, Pred)).
+
+
+
+% wrap meta-arguments when a meta-predicate calls another local meta-predicate
+% with meta-arguments that are not meta-arguments of the caller
+
+'$lgt_wrap_local_meta_arguments'([], [], _, _, []).
+
+'$lgt_wrap_local_meta_arguments'([MArg| MArgs], [Arg| Args], Caller, Ctx, [TArg0| TArgs0]) :-
+	(	var(Arg) ->
+		TArg0 = Arg
+	;	'$lgt_wrap_local_meta_argument'(MArg, Arg, Caller, Ctx, TArg0)
+	),
+	'$lgt_wrap_local_meta_arguments'(MArgs, Args, Caller, Ctx, TArgs0).
+
+
+'$lgt_wrap_local_meta_argument'((*), Arg, _, _, Arg) :-
+	!.
+
+'$lgt_wrap_local_meta_argument'((::), Arg, _, _, Arg) :-
+	!.
+
+'$lgt_wrap_local_meta_argument'(_, Arg, _, _, '$lgt_local'(Arg)).
 
 
 

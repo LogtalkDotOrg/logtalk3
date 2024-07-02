@@ -36,6 +36,10 @@ in a grammar rule body.
 
 * IMPROVED: Linter warning for calls to the `{}/1` control construct.
 
+* FIXED: Consistent handling of meta-arguments when a meta-predicate calls
+another local meta-predicate with meta-arguments that are not meta-arguments
+of the caller.
+
 * FIXED: Cases where the meta-argument of `phrase//1` and `phrase/2-3` goals
 would not be called in the meta-call context. Thanks to Alex Kouznetsov for
 the bug report.
