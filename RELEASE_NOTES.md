@@ -47,6 +47,9 @@ the bug report.
 * FIXED: Clean the dynamic lookup caches when changing the values of the
 `debug` and `optimize` flags. Thanks to Alex Kouznetsov for the bug report.
 
+* FIXED: Detect and report as a compiler error calls to the `context(Context)`
+built-in method from clauses with heads containing the `Context` variable.
+
 Prolog adapter and integration files
 ------------------------------------
 

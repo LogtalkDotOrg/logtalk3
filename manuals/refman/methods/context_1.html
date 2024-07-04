@@ -156,6 +156,14 @@ providing an error context when type-checking predicate arguments. The
 can be decoded using the
 <a class="reference external" href="../../../docs/logtalk_0.html#logtalk-0-execution-context-7" title="(in Logtalk APIs v3.81.0)"><span class="xref std std-ref">logtalk::execution_context/7</span></a>
 predicate. Calls to this predicate are inlined at compilation time.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As the execution context term includes the clause head, the head
+of the clause calling the <code class="docutils literal notranslate"><span class="pre">context(Context)</span></code> method cannot contain
+the <code class="docutils literal notranslate"><span class="pre">Context</span></code> variable as that would result in the creation of
+a cyclic term. The compiler detects and reports any offending
+clauses by throwing a <code class="docutils literal notranslate"><span class="pre">representation_error(cyclic_term)</span></code> error.</p>
+</div>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Link to this heading"></a></h2>

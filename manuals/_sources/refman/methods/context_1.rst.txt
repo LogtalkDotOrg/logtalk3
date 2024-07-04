@@ -42,6 +42,14 @@ can be decoded using the
 :ref:`logtalk::execution_context/7 <apis:logtalk/0::execution_context/7>`
 predicate. Calls to this predicate are inlined at compilation time.
 
+.. warning::
+
+   As the execution context term includes the clause head, the head
+   of the clause calling the ``context(Context)`` method cannot contain
+   the ``Context`` variable as that would result in the creation of
+   a cyclic term. The compiler detects and reports any offending
+   clauses by throwing a ``representation_error(cyclic_term)`` error.
+
 Modes and number of proofs
 --------------------------
 
