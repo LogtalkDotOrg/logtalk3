@@ -303,8 +303,35 @@ built-in meta-predicates and meta-directives:
    List of non-terminal indicators.
 
 To the best of my knowledge, the use of non-negative integers to specify
-closures has first introduced on Quintus Prolog for providing
-information for predicate cross-reference tools.
+closures has first introduced on Quintus Prolog for providing information
+for predicate cross-reference tools.
+
+Note that Logtalk meta-predicate semantics are different from Prolog
+meta-predicate semantics (assuming a predicate-based module system as
+common):
+
+-  Meta-arguments are always called in the meta-predicate calling context,
+   independently of using explicit or implicit message-sending (to the object
+   defining the meta-predicate when not local). Most Prolog systems have
+   different semantics for explicit versus implicit module qualification.
+
+-  Logtalk is not based on a predicate prefixing mechanism and thus the
+   meta-predicate directive is required for any predicate with meta-arguments
+   (including when simply passing the meta-arguments to a call to another
+   meta-predicate). This is usually not required in Prolog systems due to the
+   module-prefixing of meta-arguments.
+
+-  Sending a message from a meta-predicate definition to call a meta-predicate
+   defined in another object resets the calling context for any passed
+   meta-argument to the object sending the message (including for messages to
+   *self*). Meta-arguments behave differently in Prolog systems due to their
+   module-prefixing.
+
+-  Logtalk protects from common scenarios where specially crafted meta-predicate
+   definitions are used to break object (and category) encapsulation by changing
+   the meta-arguments passed by client code or trying to subvert the implicit
+   calling context to call client predicates other than the predicates passed as
+   meta-arguments.
 
 .. warning::
 

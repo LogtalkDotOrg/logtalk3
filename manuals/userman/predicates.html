@@ -425,8 +425,32 @@ indicators, or conjunction of predicate indicators.</p>
 </dd>
 </dl>
 <p>To the best of my knowledge, the use of non-negative integers to specify
-closures has first introduced on Quintus Prolog for providing
-information for predicate cross-reference tools.</p>
+closures has first introduced on Quintus Prolog for providing information
+for predicate cross-reference tools.</p>
+<p>Note that Logtalk meta-predicate semantics are different from Prolog
+meta-predicate semantics (assuming a predicate-based module system as
+common):</p>
+<ul class="simple">
+<li><p>Meta-arguments are always called in the meta-predicate calling context,
+independently of using explicit or implicit message-sending (to the object
+defining the meta-predicate when not local). Most Prolog systems have
+different semantics for explicit versus implicit module qualification.</p></li>
+<li><p>Logtalk is not based on a predicate prefixing mechanism and thus the
+meta-predicate directive is required for any predicate with meta-arguments
+(including when simply passing the meta-arguments to a call to another
+meta-predicate). This is usually not required in Prolog systems due to the
+module-prefixing of meta-arguments.</p></li>
+<li><p>Sending a message from a meta-predicate definition to call a meta-predicate
+defined in another object resets the calling context for any passed
+meta-argument to the object sending the message (including for messages to
+<em>self</em>). Meta-arguments behave differently in Prolog systems due to their
+module-prefixing.</p></li>
+<li><p>Logtalk protects from common scenarios where specially crafted meta-predicate
+definitions are used to break object (and category) encapsulation by changing
+the meta-arguments passed by client code or trying to subvert the implicit
+calling context to call client predicates other than the predicates passed as
+meta-arguments.</p></li>
+</ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>As each Logtalk entity is independently compiled, this directive must

@@ -61,6 +61,8 @@ Documentation
 * ADDED: Handbook documentation on using predicate aliases in `uses/2`
 directives to use a different order of the predicate arguments.
 
+* IMPROVED: Handbook documentation on meta-predicate semantics.
+
 * IMPROVED: Handbook documentation on the `meta_predicate/1` directive.
 
 * IMPROVED: Documentation of the `lgtunit` tool on how to use the
