@@ -1656,6 +1656,10 @@ built-in method :ref:`methods_expand_term_2` convert a
 grammar rule into a clause that can then be used with the database
 methods.
 
+Logtalk also supports ``asserta/2``, ``assertz/2``, ``clause/3``, and
+``erase/1`` built-in methods when run with a backend that supports the
+corresponding legacy built-in predicates.
+
 .. _predicates_metacalls:
 
 Meta-call methods
