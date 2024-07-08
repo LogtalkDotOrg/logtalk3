@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The message delegation control construct, `[]/1`, to preserve
+also the original meta-call context.
+
 * ADDED: Support for runtime constructed `(^^)/2` goals. Thanks to Alex
 Kouznetsov for the bug report.
 

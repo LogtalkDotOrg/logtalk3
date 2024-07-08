@@ -13120,10 +13120,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% as delegation keeps the original sender, we cannot use a recursive call
 	% to the '$lgt_compile_body'/4 predicate to compile the ::/2 goal as that
 	% would reset the sender to "this"
-	'$lgt_comp_ctx'(Ctx, Head, _, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines, Term),
-	'$lgt_execution_context'(ExCtx, _, Sender, This, _, _, _),
-	'$lgt_comp_ctx'(NewCtx, Head, _, _, Sender, Sender, Self, Prefix, MetaVars, MetaCallCtx, NewExCtx, Mode, Stack, Lines, Term),
-	'$lgt_execution_context_this_entity'(NewExCtx, Sender, _),
+	'$lgt_comp_ctx'(Ctx, Head, _, _, Sender, _, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines, Term),
+	(	'$lgt_pp_meta_predicate_'(Head, _, _, _) ->
+		'$lgt_execution_context'(ExCtx, _, Sender, _, _, MetaCallCtx, _),
+		'$lgt_comp_ctx'(NewCtx, Head, _, _, Sender, Sender, Self, Prefix, MetaVars, _, MetaCallCtx, Mode, Stack, Lines, Term)
+	;	'$lgt_comp_ctx'(Ctx, Head, _, _, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, Mode, Stack, Lines, Term),
+		'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack),
+		'$lgt_comp_ctx'(NewCtx, Head, _, _, Sender, Sender, Self, Prefix, MetaVars, MetaCallCtx, NewExCtx, Mode, Stack, Lines, Term),
+		'$lgt_execution_context'(NewExCtx, Entity, Sender, Sender, Self, MetaCallCtx, Stack)
+	),
 	'$lgt_compiler_flag'(events, Events),
 	'$lgt_compile_message_to_object'(Pred, Obj, TPred0, Events, NewCtx),
 	% ensure that this control construct cannot be used to break object encapsulation
