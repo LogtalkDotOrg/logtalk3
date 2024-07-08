@@ -16811,12 +16811,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	'$lgt_check_for_trivial_fails'(Mode, Pred, TPred0, Head),
 	functor(TPred0, TFunctor, TArity),
-	(	'$lgt_pp_meta_predicate_'(Head, _, _, _),
+	(	(	'$lgt_pp_meta_predicate_'(Head, _, _, _) ->
+			HeadIsMeta = true
+		;	HeadIsMeta = false
+		),
 		'$lgt_pp_meta_predicate_'(Pred, Meta, _, _),
 		% local user-defined meta-predicate
 		Pred =.. [Functor| Args],
 		Meta =.. [Functor| MArgs],
-		'$lgt_wrap_local_meta_arguments'(MArgs, Args, Caller, Ctx, TArgs0) ->
+		'$lgt_wrap_local_meta_arguments'(MArgs, Args, HeadIsMeta, Caller, Ctx, TArgs0) ->
 		'$lgt_append'(TArgs0, [ExCtx], TArgs),
 		TPred =.. [TFunctor| TArgs]
 	;	% non meta-predicate or runtime compilation of meta-arguments
@@ -17019,24 +17022,37 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % wrap meta-arguments when a meta-predicate calls another local meta-predicate
 % with meta-arguments that are not meta-arguments of the caller
+%
+% when the caller is not a meta-predicate, no wrapping is required as the
+% meta-call context is empty
+%
+% also optimize bound meta-arguments, which are calls to local predicates,
+% when not compiling in debug mode
 
-'$lgt_wrap_local_meta_arguments'([], [], _, _, []).
+'$lgt_wrap_local_meta_arguments'([], [], _, _, _, []).
 
-'$lgt_wrap_local_meta_arguments'([MArg| MArgs], [Arg| Args], Caller, Ctx, [TArg0| TArgs0]) :-
+'$lgt_wrap_local_meta_arguments'([MArg| MArgs], [Arg| Args], HeadIsMeta, Caller, Ctx, [WArg| WArgs]) :-
 	(	var(Arg) ->
-		TArg0 = Arg
-	;	'$lgt_wrap_local_meta_argument'(MArg, Arg, Caller, Ctx, TArg0)
+		WArg = Arg
+	;	'$lgt_wrap_local_meta_argument'(MArg, Arg, HeadIsMeta, Caller, Ctx, WArg)
 	),
-	'$lgt_wrap_local_meta_arguments'(MArgs, Args, Caller, Ctx, TArgs0).
+	'$lgt_wrap_local_meta_arguments'(MArgs, Args, HeadIsMeta, Caller, Ctx, WArgs).
 
 
-'$lgt_wrap_local_meta_argument'((*), Arg, _, _, Arg) :-
+'$lgt_wrap_local_meta_argument'((*), Arg, _, _, _, Arg) :-
 	!.
 
-'$lgt_wrap_local_meta_argument'((::), Arg, _, _, Arg) :-
+'$lgt_wrap_local_meta_argument'((::), Arg, _, _, _, Arg) :-
 	!.
 
-'$lgt_wrap_local_meta_argument'(_, Arg, _, _, '$lgt_local'(Arg)).
+'$lgt_wrap_local_meta_argument'(MArg, Arg, HeadIsMeta, Caller, Ctx, WArg) :-
+	(	'$lgt_compiler_flag'(debug, off),
+		'$lgt_compile_static_binding_meta_argument'(MArg, Arg, Caller, Ctx, WArg) ->
+		true
+	;	HeadIsMeta == true ->
+		WArg = '$lgt_local'(Arg)
+	;	WArg = Arg
+	).
 
 
 
