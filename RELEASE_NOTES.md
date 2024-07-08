@@ -50,6 +50,9 @@ the bug report.
 * FIXED: Detect and report as a compiler error calls to the `context(Context)`
 built-in method from clauses with heads containing the `Context` variable.
 
+* FIXED: Calls to the `clause/3` built-in method when the clause reference is
+bound and the clause is compiled in debug mode.
+
 Prolog adapter and integration files
 ------------------------------------
 

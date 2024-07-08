@@ -5185,10 +5185,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	clause(':'(Module,Original), Body, Ref).
 
-'$lgt_clause_checked'(Obj, Head, Body, Ref, _, _, _) :-
+'$lgt_clause_checked'(Obj, Head, Body, Ref, _, _, ExCtx) :-
 	nonvar(Ref),
 	!,
-	clause(THead, TBody, Ref),
+	clause(THead0, TBody, Ref),
+	'$lgt_wrap_compiled_head'(Head, THead0, ExCtx, THead),
 	'$lgt_current_object_'(Obj, _, _, Def, _, _, _, _, DDef, _, _),
 	once((call(DDef, Head, _, THead); call(Def, Head, _, THead))),
 	(	TBody = ('$lgt_nop'(Body), _) ->
