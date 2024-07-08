@@ -646,3 +646,7 @@ Glossary
       programming languages. A Logtalk program is a set of terms (clauses
       and directives) that can be handled as *data* by e.g. the term-expansion
       mechanism.
+
+   clause reference
+      An opaque term that uniquely identifies a clause. Provided by
+      some backends via alternative database built-in predicates.

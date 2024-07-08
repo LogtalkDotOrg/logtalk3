@@ -67,6 +67,8 @@ directives to use a different order of the predicate arguments.
 * ADDED: Handbook mention on the backend dependent support for clause
 reference built-in methods.
 
+* ADDED: Handbook glossary entry for "clause reference".
+
 * IMPROVED: Handbook documentation on meta-predicate semantics.
 
 * IMPROVED: Handbook documentation on the `meta_predicate/1` directive.

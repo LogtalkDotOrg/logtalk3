@@ -1658,7 +1658,8 @@ methods.
 
 Logtalk also supports ``asserta/2``, ``assertz/2``, ``clause/3``, and
 ``erase/1`` built-in methods when run with a backend that supports the
-corresponding legacy built-in predicates.
+corresponding legacy built-in predicates that work with
+:term:`clause references <clause reference>`.
 
 .. _predicates_metacalls:
 
