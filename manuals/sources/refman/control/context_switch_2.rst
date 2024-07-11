@@ -35,15 +35,20 @@ Description
    {Proxy}<<Goal
 
 Debugging control construct. Calls a goal within the context of the
-specified object. The goal is called with the execution context
-(:term:`sender`, :term:`this`, and :term:`self`) set to the object.
-The goal may need to be written between parenthesis to avoid parsing
-errors due to operator conflicts. This control construct should only be
-used for debugging or for writing unit tests. This control construct can
-only be used for objects compiled with the
+specified object. The goal is called with the following execution context:
+
+-  :term:`sender`, :term:`this`, and :term:`self` values set to the object
+-  empty meta-call context
+-  empty coinduction stack
+
+The goal may need to be written between parenthesis to avoid parsing errors
+due to operator conflicts. This control construct should only be used for
+debugging or for writing unit tests. This control construct can only be used
+for objects compiled with the
 :ref:`context_switching_calls <flag_context_switching_calls>` compiler
 flag set to ``allow``. Set this compiler flag to ``deny`` to disable
-this control construct and thus preventing using it to break encapsulation.
+this control construct and thus preventing using it to break encapsulation
+when deploying applications.
 
 The ``{Proxy}<<Goal`` syntax allows simplified access to
 :term:`parametric object proxies <parametric object proxy>`.
