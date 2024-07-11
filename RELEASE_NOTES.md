@@ -64,6 +64,9 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* ADDED: Notes on backend support for clause references to the
+`adapters/NOTES.md` file.
+
 * ADDED: Handbook documentation on using predicate aliases in `uses/2`
 directives to use a different order of the predicate arguments.
 
