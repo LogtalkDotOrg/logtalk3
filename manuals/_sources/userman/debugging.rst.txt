@@ -23,7 +23,7 @@ Debugging
 
 The Logtalk distribution includes a command-line :doc:`../devtools/debugger`
 tool implemented as a Logtalk application using the debugging API. It can be
-loaded by typing:
+loaded at the top-level interpreter by typing:
 
 .. code-block:: text
 

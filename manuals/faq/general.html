@@ -148,13 +148,13 @@ stable version of Logtalk 3 was released on January 7, 2015.</p>
 </section>
 <section id="why-do-i-need-a-prolog-compiler-to-use-logtalk">
 <span id="faq-general-prolog"></span><h2>Why do I need a Prolog compiler to use Logtalk?<a class="headerlink" href="#why-do-i-need-a-prolog-compiler-to-use-logtalk" title="Link to this heading"></a></h2>
-<p>Currently, the Logtalk language is implemented as a Prolog extension
-instead of as a standalone compiler. Compilation of Logtalk source
-files is performed in two steps. First, the Logtalk compiler converts
-a source file to a Prolog file. Second, the chosen Prolog compiler is
-called by Logtalk to compile the intermediate Prolog file generated
-on the first step. The implementation of Logtalk as a Prolog
-extension allows users to use Logtalk together with features only
+<p>Currently, the Logtalk language is implemented as a <em>trans-compiler</em>
+to Prolog instead of as a standalone compiler. Compilation of Logtalk
+source files is performed in two steps. First, the Logtalk compiler
+converts a source file to a Prolog file. Second, the chosen Prolog
+compiler is called by Logtalk to compile the intermediate Prolog file
+generated on the first step. The implementation of Logtalk as a
+trans-compiler allows users to use Logtalk together with features only
 available on specific Prolog compilers.</p>
 </section>
 <section id="is-the-logtalk-implementation-based-on-prolog-modules">

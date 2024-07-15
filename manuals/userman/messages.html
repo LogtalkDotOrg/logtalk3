@@ -195,13 +195,13 @@ the <a class="reference internal" href="../glossary.html#term-closed-world-assum
 <section id="delegating-a-message-to-an-object">
 <span id="messages-delegating"></span><h2>Delegating a message to an object<a class="headerlink" href="#delegating-a-message-to-an-object" title="Link to this heading"></a></h2>
 <p>It is also possible to send a message to an object while preserving the
-original <em>sender</em> by using the <a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> delegation
-control construct:</p>
+original <em>sender</em> and <em>meta-call context</em> by using the
+<a class="reference internal" href="../refman/control/delegate_message_1.html#control-delegate-message-1"><span class="std std-ref">[]/1</span></a> delegation control construct:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., [<span class="nv">Object</span><span class="o">::</span><span class="nv">Message</span>], ....
 </pre></div>
 </div>
 <p>This control construct can only be used within objects and categories
-(in the top-level interpreter, the <em>sender</em> is always the pseudo-object
+(at the top-level interpreter, the <em>sender</em> is always the pseudo-object
 <code class="docutils literal notranslate"><span class="pre">user</span></code> so using this control construct would be equivalent to use the
 <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message sending control construct).</p>
 </section>

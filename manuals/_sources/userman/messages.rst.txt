@@ -88,15 +88,15 @@ Delegating a message to an object
 ---------------------------------
 
 It is also possible to send a message to an object while preserving the
-original *sender* by using the :ref:`control_delegate_message_1` delegation
-control construct:
+original *sender* and *meta-call context* by using the
+:ref:`control_delegate_message_1` delegation control construct:
 
 ::
 
    ..., [Object::Message], ....
 
 This control construct can only be used within objects and categories
-(in the top-level interpreter, the *sender* is always the pseudo-object
+(at the top-level interpreter, the *sender* is always the pseudo-object
 ``user`` so using this control construct would be equivalent to use the
 ``(::)/2`` message sending control construct).
 
