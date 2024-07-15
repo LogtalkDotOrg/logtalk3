@@ -557,8 +557,8 @@ Glossary
    this
       The object that contains the predicate clause under execution. When
       the predicate clause is contained in a :term:`category`, *this* is a
-      reference to the object importing the category for which the
-      predicate clause is being executed.
+      reference to the object importing the category for which the predicate
+      clause is being used to prove the current goal.
 
    dynamic binding
       Runtime lookup of a :term:`predicate declaration` and

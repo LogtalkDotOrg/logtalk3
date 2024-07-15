@@ -145,6 +145,9 @@ the message corresponds to a <a class="reference internal" href="../directives/p
 the <a class="reference internal" href="../../glossary.html#term-sender"><span class="xref std std-term">sender</span></a> matches the <a class="reference internal" href="../../glossary.html#term-predicate-scope-container"><span class="xref std std-term">predicate scope container</span></a>. When the
 predicate is declared but not defined, the message simply fails (as per
 the <a class="reference internal" href="../../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
+<p>When the predicate used to answer the message is a <a class="reference internal" href="../../glossary.html#term-meta-predicate"><span class="xref std std-term">meta-predicate</span></a>,
+the <a class="reference internal" href="../../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a> is the object sending
+the message.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">{Proxy}::Message</span></code> syntax allows simplified access to
 <a class="reference internal" href="../../glossary.html#term-parametric-object-proxy"><span class="xref std std-term">parametric object proxies</span></a>.
 Its operational semantics is equivalent to the conjunction

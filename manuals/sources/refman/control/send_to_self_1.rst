@@ -43,6 +43,10 @@ within a category, or when using private inheritance. When the predicate
 is declared but not defined, the message simply fails (as per the
 :term:`closed-world assumption`).
 
+When the predicate used to answer the message is a :term:`meta-predicate`,
+the :term:`calling context <predicate calling context>` is the object sending
+the message.
+
 The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. A message to *self* necessarily
 implies the use of :term:`dynamic binding` but a caching mechanism is used

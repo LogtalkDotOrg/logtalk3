@@ -79,7 +79,8 @@ reference built-in methods.
 
 * IMPROVED: Handbook documentation on the `meta_predicate/1` directive.
 
-* IMPROVED: Handbook documentation of the `(<<)/2` control construct.
+* IMPROVED: Handbook documentation of the `(::)/2`, `(::)/1`, `(<<)/2` control
+constructs.
 
 * IMPROVED: Documentation of the `lgtunit` tool on how to use the
 `assertion/1-2` utility predicates.

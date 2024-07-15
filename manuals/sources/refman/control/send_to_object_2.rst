@@ -42,6 +42,10 @@ the :term:`sender` matches the :term:`predicate scope container`. When the
 predicate is declared but not defined, the message simply fails (as per
 the :term:`closed-world assumption`).
 
+When the predicate used to answer the message is a :term:`meta-predicate`,
+the :term:`calling context <predicate calling context>` is the object sending
+the message.
+
 The ``{Proxy}::Message`` syntax allows simplified access to
 :term:`parametric object proxies <parametric object proxy>`.
 Its operational semantics is equivalent to the conjunction

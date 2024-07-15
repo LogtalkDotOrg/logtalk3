@@ -146,6 +146,9 @@ making the call is defined, if imported from a category, if used from
 within a category, or when using private inheritance. When the predicate
 is declared but not defined, the message simply fails (as per the
 <a class="reference internal" href="../../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
+<p>When the predicate used to answer the message is a <a class="reference internal" href="../../glossary.html#term-meta-predicate"><span class="xref std std-term">meta-predicate</span></a>,
+the <a class="reference internal" href="../../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a> is the object sending
+the message.</p>
 <p>The lookups for the message declaration and the corresponding method are
 performed using a depth-first strategy. A message to <em>self</em> necessarily
 implies the use of <a class="reference internal" href="../../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> but a caching mechanism is used
