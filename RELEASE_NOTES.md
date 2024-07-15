@@ -82,6 +82,8 @@ reference built-in methods.
 * IMPROVED: Handbook documentation of the `(::)/2`, `(::)/1`, `(<<)/2` control
 constructs.
 
+* IMPROVED: Handbook documentation on the `this/1` built-in method.
+
 * IMPROVED: Documentation of the `lgtunit` tool on how to use the
 `assertion/1-2` utility predicates.
 
