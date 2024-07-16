@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org> and
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org> and
 %  Jacinto Dávila <jdavila@optimusprime.ai>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -24,9 +24,9 @@
 	implements(json_protocol)).
 
 	:- info([
-		version is 0:12:2,
+		version is 0:13:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2024-01-14,
+		date is 2024-07-16,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -92,57 +92,86 @@
 		domain_error(json_sink, Term).
 
 	json(JSON) -->
-		json_white_space, json_value(JSON), json_white_space.
+		json_white_space, [Code], json_value(Code, JSON), json_white_space.
 
-	json_value(String) -->
-		json_string(String), !.
-	json_value(Number) -->
-		json_number(Number), !.
-	json_value(@true) -->
-		[0't, 0'r, 0'u, 0'e], !.
-	json_value(@false) -->
-		[0'f, 0'a, 0'l, 0's, 0'e], !.
-	json_value(@null) -->
-		[0'n, 0'u, 0'l, 0'l], !.
-	json_value(Object) -->
-		json_object(_ObjectRepresentation_, Object), !.
-	json_value(Array) -->
-		json_array(Array).
+	json_value(0'", String) -->
+		json_string(String).
+	json_value(0'0, Number) -->
+		json_number(0'0, Number).
+	json_value(0'1, Number) -->
+		json_number(0'1, Number).
+	json_value(0'2, Number) -->
+		json_number(0'2, Number).
+	json_value(0'3, Number) -->
+		json_number(0'3, Number).
+	json_value(0'4, Number) -->
+		json_number(0'4, Number).
+	json_value(0'5, Number) -->
+		json_number(0'5, Number).
+	json_value(0'6, Number) -->
+		json_number(0'6, Number).
+	json_value(0'7, Number) -->
+		json_number(0'7, Number).
+	json_value(0'8, Number) -->
+		json_number(0'8, Number).
+	json_value(0'9, Number) -->
+		json_number(0'9, Number).
+	json_value(0'-, Number) -->
+		json_number(0'-, Number).
+	json_value(0't, @true) -->
+		[0'r, 0'u, 0'e].
+	json_value(0'f, @false) -->
+		[0'a, 0'l, 0's, 0'e].
+	json_value(0'n, @null) -->
+		[0'u, 0'l, 0'l].
+	json_value(0'{, Object) -->
+		json_white_space, json_object(_ObjectRepresentation_, Object).
+	json_value(0'[, Array) -->
+		json_white_space, json_array(Array).
 
 	json_object(curly, {}) -->
-		[0'{], json_white_space, [0'}], !.
+		[0'}], !.
 	json_object(curly, {Pairs}) -->
-		[0'{], json_object_pairs(curly, Pairs), [0'}].
+		json_object_pairs(curly, Pairs), [0'}].
 	json_object(list, json([])) -->
-		[0'{], json_white_space, [0'}], !.
+		[0'}], !.
 	json_object(list, json(Pairs)) -->
-		[0'{], json_object_pairs(list, Pairs), [0'}].
+		json_object_pairs(list, Pairs), [0'}].
 
-	json_object_pairs(curly, (Pair, Pairs)) -->
-		json_object_pair(_PairRepresentation_, Pair), [0',], !, json_object_pairs(curly, Pairs).
-	json_object_pairs(curly, Pair) -->
-		json_object_pair(_PairRepresentation_, Pair).
+	% avoid parsing the last element twice
+	json_object_pairs(curly, Pairs) -->
+		json_object_pair(_PairRepresentation_, Pair),
+		(	[0',] ->
+			{Pairs = (Pair, Rest)},
+			json_object_pairs(curly, Rest)
+		;	{Pairs = Pair}
+		).
 	json_object_pairs(list, [Pair| Pairs]) -->
-		json_object_pair(_PairRepresentation_, Pair), [0',], !, json_object_pairs(list, Pairs).
-	json_object_pairs(list, [Pair]) -->
-		json_object_pair(_PairRepresentation_, Pair).
+		json_object_pair(_PairRepresentation_, Pair),
+		(	[0',] ->
+			json_object_pairs(list, Pairs)
+		;	{Pairs = []}
+		).
 
 	json_object_pair(dash, Key-Value) -->
-		json_white_space, json_string(Key), json_white_space, [0':], json(Value).
+		json_white_space, [0'"], json_string(Key), json_white_space, [0':], json(Value).
 	json_object_pair(equal, Key=Value) -->
-		json_white_space, json_string(Key), json_white_space, [0':], json(Value).
+		json_white_space, [0'"], json_string(Key), json_white_space, [0':], json(Value).
 	json_object_pair(colon, ':'(Key,Value)) -->
-		json_white_space, json_string(Key), json_white_space, [0':], json(Value).
+		json_white_space, [0'"], json_string(Key), json_white_space, [0':], json(Value).
 
 	json_array([]) -->
-		[0'[], json_white_space, [0']], !.
+		[0']], !.
 	json_array(Elements) -->
-		[0'[], json_array_elements(Elements), [0']].
+		json_array_elements(Elements), [0']].
 
+	% avoid parsing the last element twice
 	json_array_elements([Element| Elements]) -->
-		json(Element), [0',], !, json_array_elements(Elements).
-	json_array_elements([Element]) -->
-		json(Element).
+		json(Element),
+		(	[0',] ->
+			json_array_elements(Elements)
+		;	{Elements = []}
+		).
 
 	json_white_space -->
 		[Code], {white_space_code(Code)}, !, json_white_space.
@@ -155,29 +184,22 @@
 	white_space_code(0'\r).
 
 	json_string(String) -->
-		[0'"], json_string_contents(Codes), [0'"],
+		[Code], json_string(Code, Codes),
 		{json_string_to_string_term(_StringRepresentation_, Codes, String)}.
-
-	json_string_contents([Code2| Codes]) -->
-		[0'\\, 0'u, H1, H2, H3, H4], !, {is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4), number_codes(Code2, [0'0, 0'x, H1, H2, H3, H4])},
-		json_string_contents(Codes).
-	json_string_contents([Code2| Codes]) -->
-		[0'\\, Code], !, {valid_escape_code(Code, Code2)},
-		json_string_contents(Codes).
-	json_string_contents([Code| Codes]) -->
-		[Code],
-		{\+ invalid_string_code(Code)}, !,
-		json_string_contents(Codes).
-	json_string_contents([]) -->
-		[].
 
 	% neither " nor \ alone nor the whitespace characters are
 	% allowed inside a string according to the standard
-	invalid_string_code(0'").
-	invalid_string_code(0'\\).
-	invalid_string_code(0'\n).
-	invalid_string_code(0'\t).
-	invalid_string_code(0'\r).
+	json_string(0'\\, [Code| Codes]) -->
+		!, java_string_escape(Code), [Next], json_string(Next, Codes).
+	json_string(0'", []) -->
+		!.
+	json_string(Code, [Code| Codes]) -->
+		[Next], json_string(Next, Codes).
+
+	java_string_escape(Code) -->
+		[0'u, H1, H2, H3, H4], !, {is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4), number_codes(Code, [0'0, 0'x, H1, H2, H3, H4])}.
+	java_string_escape(Code) -->
+		[Code0], {valid_escape_code(Code0, Code)}.
 
 	% see https://www.json.org/json-en.html
 	valid_escape_code(0'",  34).
@@ -189,18 +211,16 @@
 	valid_escape_code(0'r,  13).
 	valid_escape_code(0't,   9).
 
-	json_number(Number) -->
-		json_integer(Codes, Tail0),
+	json_number(Code, Number) -->
+		json_integer(Code, Codes, Tail0),
 		json_fractional(Tail0, Tail),
 		json_exponent(Tail),
 		{number_codes(Number, Codes)}.
 
-	json_integer([Digit| Digits], Tail) -->
-		json_digit(Digit), !, json_digits(Digits, Tail),
+	json_integer(Digit, [Digit| Digits], Tail) -->
+		json_digits(Digits, Tail),
 		% JSON forbids leading zeros
 		{Digit =:= 0'0 -> Digits == Tail; true}.
-	json_integer([0'-, Digit| Digits], Tail) -->
-		[0'-], json_digit(Digit), json_digits(Digits, Tail).
 
 	json_fractional([0'.| Digits], Tail) -->
 		[0'.], !, json_digits(Digits, Tail).
