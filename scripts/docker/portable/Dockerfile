@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on June 13, 2024
+##   Last updated on July 17, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -44,8 +44,8 @@ ARG YAP_VERSION=master
 # Logtalk environment
 ENV LOGTALKHOME=/usr/local/share/logtalk
 ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
-ENV MANPATH=$MANPATH:$LOGTALKHOME/man
-ENV INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
+ENV MANPATH=$LOGTALKHOME/man:
+ENV INFOPATH=$LOGTALKHOME/docs:$LOGTALKHOME/manuals:
 
 WORKDIR /downloads
 
@@ -201,9 +201,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     locales \
     locales-all \
 && rm -rf /var/lib/apt/lists/*
-ENV LC_ALL en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
 
 # Create the LOGTALKUSER directory for the root user
 RUN logtalk_user_setup

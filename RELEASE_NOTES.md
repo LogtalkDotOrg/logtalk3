@@ -25,7 +25,11 @@ RELEASE NOTES
 3.82.0 - August ??, 2024
 ========================
 
+Installers and installation scripts
+-----------------------------------
 
+* FIXED: The Docker file for building the portable image to properly define
+the `INFOPATH` and `MANPATH` environment variables.
 
 
 3.81.0 - July 16, 2024
