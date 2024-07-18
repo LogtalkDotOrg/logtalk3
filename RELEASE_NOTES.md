@@ -25,6 +25,11 @@ RELEASE NOTES
 3.82.0 - August ??, 2024
 ========================
 
+Tools
+-----
+
+* IMPROVED: The `packs` tool handling of alternative pack dependencies.
+
 Installers and installation scripts
 -----------------------------------
 

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:74:0,
+		version is 0:75:0,
 		author is 'Paulo Moura',
-		date is 2024-05-24,
+		date is 2024-07-18,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -820,7 +820,7 @@
 		;	registry_pack(Registry, Pack, PackObject) ->
 			(	PackObject::version(Version, _, URL, CheckSum, Dependencies, Portability) ->
 				print_message(comment, packs, installing_pack(Registry, Pack, Version)),
-				check_dependencies(Dependencies, Installs, Options),
+				check_dependencies(Dependencies, Registry, Pack, Installs, Options),
 				check_portability(Portability, Options),
 				install_dependencies(Installs),
 				install_pack(Registry, Pack, Version, URL, CheckSum, Options),
@@ -845,7 +845,7 @@
 		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability) ->
 			print_message(comment, packs, installing_pack(Registry, Pack, LatestVersion)),
 			^^merge_options([], Options),
-			check_dependencies(Dependencies, Installs, Options),
+			check_dependencies(Dependencies, Registry, Pack, Installs, Options),
 			check_portability(Portability, Options),
 			install_dependencies(Installs),
 			install_pack(Registry, Pack, LatestVersion, URL, CheckSum, Options),
@@ -1182,7 +1182,7 @@
 			PackObject::version(NewVersion, _, URL, CheckSum, Dependencies, Portability) ->
 			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, NewVersion)),
 				check_availability(Registry, Pack, URL, CheckSum, Options),
-				check_dependencies(Dependencies, Installs, Options),
+				check_dependencies(Dependencies, Registry, Pack, Installs, Options),
 				check_portability(Portability, Options),
 				check_dependents(Registry, Pack, NewVersion, Options),
 				uninstall_pack(Registry, Pack, Options),
@@ -1207,7 +1207,7 @@
 		;	latest_version(Registry, Pack, LatestVersion, URL, CheckSum, Dependencies, Portability),
 			Version @< LatestVersion ->
 			(	print_message(comment, packs, updating_pack(Registry, Pack, Version, LatestVersion)),
-				check_dependencies(Dependencies, Installs, Options),
+				check_dependencies(Dependencies, Registry, Pack, Installs, Options),
 				check_portability(Portability, Options),
 				check_dependents(Registry, Pack, LatestVersion, Options),
 				uninstall_pack(Registry, Pack, Options),
@@ -1753,15 +1753,15 @@
 
 	% dependency checking predicates
 
-	check_dependencies([], [], _).
-	check_dependencies([Dependency1, Dependency2| Dependencies], [Action| Actions], Options) :-
+	check_dependencies([], _, _, [], _).
+	check_dependencies([Dependency1, Dependency2| Dependencies], Registry, Pack, [Action| Actions], Options) :-
 		range_dependency(Dependency1, Dependency2, Dependency, Lower, Operator1, Upper, Operator2),
 		!,
 		check_range_dependency(Dependency, Lower, Operator1, Upper, Operator2, Action, Options),
-		check_dependencies(Dependencies, Actions, Options).
-	check_dependencies([Dependency| Dependencies], [Action| Actions], Options) :-
-		check_dependency(Dependency, Action, Options),
-		check_dependencies(Dependencies, Actions, Options).
+		check_dependencies(Dependencies, Registry, Pack, Actions, Options).
+	check_dependencies([Dependency| Dependencies], Registry, Pack, [Action| Actions], Options) :-
+		check_dependency(Dependency, Registry, Pack, Action, Options),
+		check_dependencies(Dependencies, Registry, Pack, Actions, Options).
 
 	range_dependency(Dependency1, Dependency2, Registry::Pack, Lower, Operator1, Upper, Operator2) :-
 		Dependency1 =.. [Operator1, Registry::Pack, Lower],
@@ -1778,7 +1778,7 @@
 
 	check_range_dependency(Registry::Pack, Lower, Operator1, Upper, Operator2, Action, Options) :-
 		!,
-		check_availability(Registry::Pack),
+		check_availability(Registry::Pack, Options),
 		(	installed_pack(Registry, Pack, InstalledVersion, _) ->
 			fix_version_for_comparison(Lower, InstalledVersion, LowerFixedVersion),
 			fix_version_for_comparison(Upper, InstalledVersion, UpperFixedVersion),
@@ -1787,12 +1787,14 @@
 				Action = none
 			;	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) ->
 				Action = update(Registry, Pack, Version, Options)
-			;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
+			;	\+ member('$or'(true), Options),
+				print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
 				fail
 			)
 		;	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) ->
 			Action = install(Registry, Pack, Version, Options)
-		;	print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
+		;	\+ member('$or'(true), Options),
+			print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
 			fail
 		).
 	check_range_dependency(os(Name,Machine), Lower, Operator1, Upper, Operator2, Action, Options) :-
@@ -1857,25 +1859,32 @@
 		).
 	check_range_dependency(_, _, _, _, _, none, _).
 
-	check_dependency((Dependency; Dependencies), Action, Options) :-
+	check_dependency((Dependency; Dependencies), Registry, Pack, Action, Options) :-
 		!,
-		(	check_dependency(Dependency, Action, Options) ->
+		(	check_dependency(Dependency, Registry, Pack, Action, ['$or'(true)| Options]) ->
 			true
-		;	check_dependency(Dependencies, Action, Options)
-		).
-	check_dependency(Dependency, Action, Options) :-
-		Dependency =.. [Operator, Resource, Version],
-		check_availability(Resource),
-		check_version(Operator, Resource, Version, Dependency, Action, Options).
-
-	check_availability(Registry::Pack) :-
-		!,
-		(	registry_pack(Registry, Pack, _) ->
+		;	check_dependency(Dependencies, Registry, Pack, Action, ['$or'(true)| Options]) ->
 			true
 		;	print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
 			fail
 		).
-	check_availability(_).
+	check_dependency((Dependency, Dependencies), Registry, Pack, Action, Options) :-
+		!,
+		check_dependencies([Dependency| Dependencies], Registry, Pack, Action, Options).
+	check_dependency(Dependency, _, _, Action, Options) :-
+		Dependency =.. [Operator, Resource, Version],
+		check_availability(Resource, Options),
+		check_version(Operator, Resource, Version, Dependency, Action, Options).
+
+	check_availability(Registry::Pack, Options) :-
+		!,
+		(	registry_pack(Registry, Pack, _) ->
+			true
+		;	\+ member('$or'(true), Options),
+			print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
+			fail
+		).
+	check_availability(_, _).
 
 	check_version(Operator, Registry::Pack, RequiredVersion, Dependency, Action, Options) :-
 		!,
@@ -1885,12 +1894,14 @@
 				Action = none
 			;	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) ->
 				Action = update(Registry, Pack, Version, Options)
-			;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
+			;	\+ member('$or'(true), Options),
+				print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 				fail
 			)
 		;	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) ->
 			Action = install(Registry, Pack, Version, Options)
-		;	print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
+		;	\+ member('$or'(true), Options),
+			print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
 			fail
 		).
 	check_version(Operator, os(Name,Machine), RequiredVersion, Dependency, Action, Options) :-
@@ -1902,7 +1913,8 @@
 			Action = none
 		;	^^option(compatible(false), Options) ->
 			Action = os(Name, Machine, RequiredVersion)
-		;	print_message(error, packs, 'Operating-system dependency not available: ~q'+[Dependency]),
+		;	\+ member('$or'(true), Options),
+			print_message(error, packs, 'Operating-system dependency not available: ~q'+[Dependency]),
 			fail
 		).
 	check_version(Operator, logtalk, Version, Dependency, Action, Options) :-
@@ -1913,7 +1925,8 @@
 			Action = none
 		;	^^option(compatible(false), Options) ->
 			Action = logtalk(Operator, Version)
-		;	print_message(error, packs, 'Logtalk dependency not available: ~q'+[Dependency]),
+		;	\+ member('$or'(true), Options),
+			print_message(error, packs, 'Logtalk dependency not available: ~q'+[Dependency]),
 			fail
 		).
 	check_version(Operator, Backend, Version, Dependency, Action, Options) :-
@@ -1925,13 +1938,15 @@
 			;	^^option(compatible(false), Options) ->
 				backend(Backend, Name),
 				Action = backend(Name, Operator, Version)
-			;	print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
+			;	\+ member('$or'(true), Options),
+				print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
 				fail
 			)
 		;	^^option(compatible(false), Options) ->
 			backend(Backend, Name),
 			Action = backend(Name, Operator, Version)
-		;	print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
+		;	\+ member('$or'(true), Options),
+			print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
 			fail
 		).
 
@@ -1952,7 +1967,7 @@
 			PackObject::version(Version, _, _, _, Dependencies, _),
 			{call(Operator1, Version, LowerFixed)},
 			{call(Operator2, Version, UpperFixed)},
-			check_dependencies(Dependencies, Actions, Options),
+			check_dependencies(Dependencies, Registry, Pack, Actions, Options),
 			\+ member(logtalk(_, _, _, _), Actions),
 			\+ member(logtalk(_, _), Actions),
 			\+ member(backend(_, _, _, _, _), Actions),
@@ -1973,7 +1988,7 @@
 			% Prolog backend, and operating-system dependencies
 			PackObject::version(Version, _, _, _, Dependencies, _),
 			{call(Operator, Version, RequiredVersionFixed)},
-			check_dependencies(Dependencies, Actions, Options),
+			check_dependencies(Dependencies, Registry, Pack, Actions, Options),
 			\+ member(logtalk(_, _, _, _), Actions),
 			\+ member(logtalk(_, _), Actions),
 			\+ member(backend(_, _, _, _, _), Actions),
@@ -2350,6 +2365,9 @@
 		atom(Atom).
 	valid_option(tar(Atom)) :-
 		atom(Atom).
+	% internal option
+	valid_option('$or'(Boolean)) :-
+		valid(boolean, Boolean).
 
 	% notes
 
