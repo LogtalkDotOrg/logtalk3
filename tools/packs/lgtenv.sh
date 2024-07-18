@@ -3,10 +3,10 @@
 #############################################################################
 ## 
 ##   Packs virtual environment script
-##   Last updated on January 10, 2023
+##   Last updated on July 18, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.1"
+	echo "$(basename "$0") 0.2"
 	exit 0
 }
 
@@ -39,13 +39,14 @@ usage_help()
 	echo "to be installed."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-d directory] [-c]"
+	echo "  $(basename "$0") [-d directory] [-c] [-p packs]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
 	echo "  -d directory where to create the virtual environment (default is .)"
 	echo "  -c create directory if it does not exist"
+	echo "  -p packs sub-directory (default is .)"
 	echo "  -v print version"
 	echo "  -h help"
 	echo
@@ -56,12 +57,13 @@ usage_help()
 base="$PWD"
 create='false'
 
-while getopts "vd:ch" option
+while getopts "vd:cp:h" option
 do
 	case $option in
 		v) print_version;;
 		d) d_arg="$OPTARG";;
 		c) create='true';;
+		p) p_arg="$OPTARG";;
 		h) usage_help; exit;;
 		*) usage_help; exit 1;;
 	esac
@@ -86,11 +88,23 @@ else
 	directory="$d_arg"
 fi
 
+if [ "$p_arg" == "" ] ; then
+	packs="$directory"
+elif [ ! -d "$directory/$p_arg" ] ; then
+	packs="$directory/$p_arg"
+	mkdir -p "$directory/$packs"
+elif [ ! -w "$directory/$p_arg" ] ; then
+	echo "Error: directory $directory/$p_arg is not writable."
+	exit 1
+else
+	packs="$directory/$p_arg"
+fi
+
 if ! [ -x "$(command -v direnv)" ]; then
   echo "Error: direnv is not installed."
   exit 1
 fi
 
-echo export LOGTALKPACKS="$directory" >> "$directory"/.envrc
+echo export LOGTALKPACKS="$packs" >> "$directory"/.envrc
 direnv allow "$directory"
 exit 0

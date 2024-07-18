@@ -1,10 +1,10 @@
 #############################################################################
 ## 
 ##   Packs virtual environment script
-##   Last updated on March 15, 2023
+##   Last updated on July 18, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,6 +29,7 @@ param(
 	[Parameter()]
 	[String]$d,
 	[Switch]$c,
+	[String]$p,
 	[Switch]$v,
 	[Switch]$h
 )
@@ -36,7 +37,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.1")
+	Write-Output ($myName + " 0.2")
 }
 
 Function Write-Usage-Help() {
@@ -49,13 +50,14 @@ Function Write-Usage-Help() {
 	Write-Output "to be installed."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-d results] [-c]")
+	Write-Output ("  " + $myName + " [-d results] [-c] [-p packs]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d directory where to create the virtual environment (default is .)"
 	Write-Output "  -c create directory if it does not exist"
+	Write-Output "  -p packs sub-directory (default is .)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
@@ -95,11 +97,20 @@ if ($d -eq "") {
 	$directory = $d
 }
 
+if ($p -eq "") {
+	$packs = $directory
+} elseif (!(Test-Path $directory\$p -PathType Container)) {
+	$packs = $directory\$p
+	New-Item -Path $directory\$p -ItemType directory > $null
+} else {
+	$packs = $directory\$p
+}
+
 if (!(Get-Command "Set-PsEnv" -ErrorAction SilentlyContinue)) {
   Write-Output "Error: Set-PsEnv is not installed."
   Exit 1
 }
 
-Add-Content -Path $directory\.env -Value "LOGTALKPACKS=$directory"
+Add-Content -Path $directory\.env -Value "LOGTALKPACKS=$packs"
 Set-PsEnv
 Exit

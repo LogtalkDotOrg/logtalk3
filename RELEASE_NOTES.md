@@ -30,6 +30,9 @@ Tools
 
 * IMPROVED: The `packs` tool handling of alternative pack dependencies.
 
+* UPDATED: The `lgtenv` scripts to support specifying the name of the packs
+sub-directory.
+
 Installers and installation scripts
 -----------------------------------
 
