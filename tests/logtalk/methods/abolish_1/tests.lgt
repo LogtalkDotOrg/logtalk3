@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,56 +38,56 @@ foobaz(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2018-07-25,
+		date is 2024-07-20,
 		comment is 'Unit tests for the abolish/1 built-in method.'
 	]).
 
-	throws(abolish_1_01, error(instantiation_error, logtalk(abolish(_),_))) :-
+	test(abolish_1_01, error(instantiation_error)) :-
 		{test_object::abolish(_)}.
 
-	throws(abolish_1_02, error(instantiation_error, logtalk(abolish(_/1),_))) :-
+	test(abolish_1_02, error(instantiation_error)) :-
 		{test_object::abolish(_/1)}.
 
-	throws(abolish_1_03, error(instantiation_error, logtalk(abolish(foo/_),_))) :-
+	test(abolish_1_03, error(instantiation_error)) :-
 		{test_object::abolish(foo/_)}.
 
-	throws(abolish_1_04, error(instantiation_error, logtalk(abolish(foo/_),_))) :-
+	test(abolish_1_04, error(instantiation_error)) :-
 		{test_object::abolish(foo/_)}.
 
-	throws(abolish_1_05, error(type_error(predicate_indicator, foo), logtalk(test_object::abolish(foo),_))) :-
+	test(abolish_1_05, error(type_error(predicate_indicator, foo))) :-
 		{test_object::abolish(foo)}.
 
-	throws(abolish_1_06, error(type_error(atom, 1), logtalk(test_object::abolish(1/2),_))) :-
+	test(abolish_1_06, error(type_error(atom, 1))) :-
 		{test_object::abolish(1/2)}.
 
-	throws(abolish_1_07, error(type_error(integer, bar), logtalk(test_object::abolish(foo/bar),_))) :-
+	test(abolish_1_07, error(type_error(integer, bar))) :-
 		{test_object::abolish(foo/bar)}.
 
-	throws(abolish_1_08, error(permission_error(modify, predicate_declaration, p/1), logtalk(abolish(p/1),_))) :-
+	test(abolish_1_08, error(permission_error(modify, predicate_declaration, p/1))) :-
 		{test_object::abolish(p/1)}.
 
-	throws(abolish_1_09, error(permission_error(modify, protected_predicate, q/2), logtalk(abolish(q/2),_))) :-
+	test(abolish_1_09, error(permission_error(modify, protected_predicate, q/2))) :-
 		{test_object::abolish(q/2)}.
 
-	throws(abolish_1_10, error(permission_error(modify, private_predicate, r/3), logtalk(abolish(r/3),_))) :-
+	test(abolish_1_10, error(permission_error(modify, private_predicate, r/3))) :-
 		{test_object::abolish(r/3)}.
 
-	throws(abolish_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(abolish(s/4),_))) :-
+	test(abolish_1_11, error(permission_error(modify, static_predicate, s/4))) :-
 		{test_object::abolish(s/4)}.
 
-	throws(abolish_1_12, error(existence_error(predicate_declaration, foo/0), logtalk(abolish(foo/0),_))) :-
+	test(abolish_1_12, error(existence_error(predicate_declaration, foo/0))) :-
 		{test_object::abolish(foo/0)}.
 
-	throws(abolish_1_13, error(existence_error(predicate_declaration, p/1), logtalk(_::p(_),_))) :-
+	test(abolish_1_13, error(existence_error(predicate_declaration, p/1))) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations,allow)], []),
 		Object::assertz(p(1)),
 		% clauses exist before abolishing
 		Object::abolish(p/1),
 		Object::p(_).
 
-	throws(abolish_1_14, error(existence_error(predicate_declaration, p/1), logtalk(_::p(_),_))) :-
+	test(abolish_1_14, error(existence_error(predicate_declaration, p/1))) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations,allow)], []),
 		Object::assertz(p(1)),
 		Object::retract(p(_)),
@@ -95,14 +95,14 @@ foobaz(1).
 		Object::abolish(p/1),
 		Object::p(_).
 
-	throws(abolish_1_15, error(existence_error(procedure, p/1), logtalk(_<<p(_),_))) :-
+	test(abolish_1_15, error(existence_error(procedure, p/1))) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations,allow)], []),
 		Object::assertz(p(1)),
 		% clauses exist before abolishing
 		Object::abolish(p/1),
 		Object<<p(_).
 
-	throws(abolish_1_16, error(existence_error(procedure, p/1), logtalk(_<<p(_),_))) :-
+	test(abolish_1_16, error(existence_error(procedure, p/1))) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations,allow)], []),
 		Object::assertz(p(1)),
 		Object::retract(p(_)),
@@ -110,13 +110,13 @@ foobaz(1).
 		Object::abolish(p/1),
 		Object<<p(_).
 
-	throws(abolish_1_17, error(instantiation_error, logtalk(_::abolish(foo/1),_))) :-
+	test(abolish_1_17, error(instantiation_error)) :-
 		{test_object::ie(_)}.
 
-	throws(abolish_1_18, error(type_error(object_identifier, 1), logtalk(1::abolish(foo/1),_))) :-
+	test(abolish_1_18, error(type_error(object_identifier, 1))) :-
 		{test_object::te}.
 
-	succeeds(abolish_1_19) :-
+	test(abolish_1_19, true((\+ Object::current_predicate(a/1), \+ Object::current_predicate(p/1))), [cleanup(abolish_object(Object))]) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
 		Object::assertz(a(1)),
 		Object::current_predicate(a/1),
@@ -124,34 +124,33 @@ foobaz(1).
 		Object::current_predicate(p/1),
 		a_predicate_indicator(A),
 		Object::abolish(A),
-		\+ Object::current_predicate(a/1),
-		Object::abolish(p/1),
-		\+ Object::current_predicate(p/1),
-		abolish_object(Object).
+		Object::abolish(p/1).
 
 	% tests for the "user" pseudo-object
 
-	succeeds(abolish_1_20) :-
-		user::abolish(bar/1),
-		\+ {current_predicate(bar/1)}.
+	test(abolish_1_20, true(\+ {current_predicate(bar/1)})) :-
+		user::abolish(bar/1).
 
-	succeeds(abolish_1_21) :-
+	test(abolish_1_21, true(\+ {current_predicate(baz/1)})) :-
 		baz_predicate_indicator(Baz),
-		user::abolish(Baz),
-		\+ {current_predicate(baz/1)}.
+		user::abolish(Baz).
 
-	succeeds(abolish_1_22) :-
+	test(abolish_1_22, true(\+ {current_predicate(foobar/1)})) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
-		Object::abolish(foobar/1),
-		\+ {current_predicate(foobar/1)}.
+		Object::abolish(foobar/1).
 
-	succeeds(abolish_1_23) :-
+	test(abolish_1_23, true(\+ {current_predicate(foobaz/1)})) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		foobaz_predicate_indicator(FooBaz),
-		Object::abolish(FooBaz),
-		\+ {current_predicate(foobaz/1)}.
+		Object::abolish(FooBaz).
+
+	test(abolish_1_24, true(\+ Object::current_predicate(p/1)), [cleanup(abolish_object(Object))]) :-
+		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
+		closure(Closure),
+		Object::assertz(p(1)),
+		call(Object::Closure, p/1).
 
 	% auxiliary predicates
 
@@ -162,5 +161,7 @@ foobaz(1).
 	foobaz_predicate_indicator(foobaz/1).
 
 	user_object(user).
+
+	closure(abolish).
 
 :- end_object.

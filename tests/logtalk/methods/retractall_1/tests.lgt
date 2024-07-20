@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,82 +32,79 @@ baz(1). baz(2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2018-07-25,
+		date is 2024-07-20,
 		comment is 'Unit tests for the retractall/1 built-in method.'
 	]).
 
-	throws(retractall_1_01, error(instantiation_error, logtalk(retractall(_),_))) :-
+	test(retractall_1_01, error(instantiation_error)) :-
 		{test_object::retractall(_)}.
 
-	throws(retractall_1_02, error(type_error(callable, 1), logtalk(test_object::retractall(1),_))) :-
+	test(retractall_1_02, error(type_error(callable, 1))) :-
 		{test_object::retractall(1)}.
 
-	throws(retractall_1_03, error(permission_error(modify, protected_predicate, q/2), logtalk(retractall(q(_,_)),_))) :-
+	test(retractall_1_03, error(permission_error(modify, protected_predicate, q/2))) :-
 		{test_object::retractall(q(_,_))}.
 
-	throws(retractall_1_04, error(permission_error(modify, private_predicate, r/3), logtalk(retractall(r(_,_,_)),_))) :-
+	test(retractall_1_04, error(permission_error(modify, private_predicate, r/3))) :-
 		{test_object::retractall(r(_,_,_))}.
 
-	throws(retractall_1_05, error(permission_error(modify, static_predicate, s/4), logtalk(retractall(s(_,_,_,_)),_))) :-
+	test(retractall_1_05, error(permission_error(modify, static_predicate, s/4))) :-
 		{test_object::retractall(s(_,_,_,_))}.
 
-	throws(retractall_1_06, error(existence_error(predicate_declaration, unknown/1), logtalk(retractall(unknown(_)),_))) :-
+	test(retractall_1_06, error(existence_error(predicate_declaration, unknown/1))) :-
 		{test_object::retractall(unknown(_))}.
 
-	throws(retractall_1_07, error(existence_error(predicate_declaration, (local)/1), logtalk(retractall(local(_)),_))) :-
+	test(retractall_1_07, error(existence_error(predicate_declaration, (local)/1))) :-
 		{test_object::retractall(local(_))}.
 
-	throws(retractall_1_08, error(instantiation_error, logtalk(_::retractall(foo),_))) :-
+	test(retractall_1_08, error(instantiation_error)) :-
 		{test_object::ie(_)}.
 
-	throws(retractall_1_09, error(type_error(object_identifier, 1), logtalk(1::retractall(foo),_))) :-
+	test(retractall_1_09, error(type_error(object_identifier, 1))) :-
 		{test_object::te}.
 
-	succeeds(retractall_1_10) :-
+	test(retractall_1_10, true((\+ test_object::t(3), \+ test_object::t(_)))) :-
 		test_object::retractall(t(3)),
 		test_object::t(1),
 		t2_head(T2),
 		test_object::T2,
-		\+ test_object::t(3),
-		test_object::retractall(t(_)),
-		\+ test_object::t(_).
+		test_object::retractall(t(_)).
 
-	succeeds(retractall_1_11) :-
+	test(retractall_1_11, true((\+ Object::t(3), \+ Object::t(_))), [cleanup(abolish_object(Object))]) :-
 		create_object(Object, [], [public(t/1), dynamic(t/1)], [t(1), (t(2) :-t(1)), (t(3) :-t(1),t(2))]),
 		Object::retractall(t(3)),
 		Object::t(1),
 		t2_head(T2),
 		Object::T2,
-		\+ Object::t(3),
-		Object::retractall(t(_)),
-		\+ Object::t(_),
-		abolish_object(Object).
+		Object::retractall(t(_)).
 
 	% tests for the "user" pseudo-object
 
-	succeeds(retractall_1_12) :-
-		user::retractall(bar(1)),
-		{bar(2)}.
+	test(retractall_1_12, true({bar(2)})) :-
+		user::retractall(bar(1)).
 
-	succeeds(retractall_1_13) :-
+	test(retractall_1_13, true(\+ {bar(_)})) :-
 		bar_clause(Baz),
-		user::retractall(Baz),
-		\+ {bar(_)}.
+		user::retractall(Baz).
 
-	succeeds(retractall_1_14) :-
+	test(retractall_1_14, true({baz(2)})) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
-		Object::retractall(baz(1)),
-		{baz(2)}.
+		Object::retractall(baz(1)).
 
-	succeeds(retractall_1_15) :-
+	test(retractall_1_15, true(\+ {baz(_)})) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		baz_clause(Baz),
-		Object::retractall(Baz),
-		\+ {baz(_)}.
+		Object::retractall(Baz).
+
+	test(retractall_1_16, true(L == [2]), [cleanup(abolish_object(Object))]) :-
+		create_object(Object, [], [public(p/1), dynamic(p/1)], [p(1),p(2),p(1)]),
+		closure(Closure),
+		call(Object::Closure, p(1)),
+		findall(X, Object::p(X), L).
 
 	% auxiliary predicates
 
@@ -118,5 +115,7 @@ baz(1). baz(2).
 	baz_clause(baz(2)).
 
 	user_object(user).
+
+	closure(retractall).
 
 :- end_object.

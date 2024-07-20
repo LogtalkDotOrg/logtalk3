@@ -29,49 +29,49 @@
 		comment is 'Unit tests for the asserta/1 built-in method.'
 	]).
 
-	throws(asserta_1_01, error(instantiation_error, logtalk(asserta(_),_))) :-
+	test(asserta_1_01, error(instantiation_error)) :-
 		{test_object::asserta(_)}.
 
-	throws(asserta_1_02, error(instantiation_error, logtalk(asserta((_:-_)),_))) :-
+	test(asserta_1_02, error(instantiation_error)) :-
 		{test_object::asserta((_ :- _))}.
 
-	throws(asserta_1_03, error(type_error(callable, 1), logtalk(test_object::asserta(1),_))) :-
+	test(asserta_1_03, error(type_error(callable, 1))) :-
 		{test_object::asserta(1)}.
 
-	throws(asserta_1_04, error(type_error(callable, 1), logtalk(test_object::asserta((1:-_)),_))) :-
+	test(asserta_1_04, error(type_error(callable, 1))) :-
 		{test_object::asserta((1 :- _))}.
 
-	throws(asserta_1_05, error(type_error(callable, 1), logtalk(test_object::asserta((p:-1)),_))) :-
+	test(asserta_1_05, error(type_error(callable, 1))) :-
 		{test_object::asserta((p :- 1))}.
 
-	throws(asserta_1_06, error(permission_error(modify, protected_predicate, q/2), logtalk(asserta(q(_,_)),_))) :-
+	test(asserta_1_06, error(permission_error(modify, protected_predicate, q/2))) :-
 		{test_object::asserta(q(_,_))}.
 
-	throws(asserta_1_07, error(permission_error(modify, protected_predicate, q/2), logtalk(asserta((q(_,_) :-nl)),_))) :-
+	test(asserta_1_07, error(permission_error(modify, protected_predicate, q/2))) :-
 		{test_object::asserta((q(_,_) :- nl))}.
 
-	throws(asserta_1_08, error(permission_error(modify, private_predicate, r/3), logtalk(asserta(r(_,_,_)),_))) :-
+	test(asserta_1_08, error(permission_error(modify, private_predicate, r/3))) :-
 		{test_object::asserta(r(_,_,_))}.
 
-	throws(asserta_1_09, error(permission_error(modify, private_predicate, r/3), logtalk(asserta((r(_,_,_) :-nl)),_))) :-
+	test(asserta_1_09, error(permission_error(modify, private_predicate, r/3))) :-
 		{test_object::asserta((r(_,_,_) :- nl))}.
 
-	throws(asserta_1_10, error(permission_error(modify, static_predicate, s/4), logtalk(asserta(s(_,_,_,_)),_))) :-
+	test(asserta_1_10, error(permission_error(modify, static_predicate, s/4))) :-
 		{test_object::asserta(s(_,_,_,_))}.
 
-	throws(asserta_1_11, error(permission_error(modify, static_predicate, s/4), logtalk(asserta((s(_,_,_,_) :-nl)),_))) :-
+	test(asserta_1_11, error(permission_error(modify, static_predicate, s/4))) :-
 		{test_object::asserta((s(_,_,_,_) :- nl))}.
 
-	throws(asserta_1_12, error(permission_error(create, predicate_declaration, new/0), logtalk(asserta(new),_))) :-
+	test(asserta_1_12, error(permission_error(create, predicate_declaration, new/0))) :-
 		{test_object::asserta(new)}.
 
-	throws(asserta_1_13, error(instantiation_error, logtalk(_::asserta(foo),_))) :-
+	test(asserta_1_13, error(instantiation_error)) :-
 		{test_object::ie(_)}.
 
-	throws(asserta_1_14, error(type_error(object_identifier, 1), logtalk(1::asserta(foo),_))) :-
+	test(asserta_1_14, error(type_error(object_identifier, 1))) :-
 		{test_object::te}.
 
-	succeeds(asserta_1_15) :-
+	test(asserta_1_15, true(Xs-Ys == [3,2,1]-[3,2,1])) :-
 		create_object(Object, [], [public(a/1), public(p/1)], []),
 		Object::asserta(a(1)),
 		a2_clause(A2),
@@ -79,12 +79,10 @@
 		Object::asserta(a(3)),
 		Object::asserta((p(X) :- a(X))),
 		findall(X, Object::a(X), Xs),
-		Xs == [3,2,1],
 		findall(Y, Object::p(Y), Ys),
-		Ys == [3,2,1],
 		abolish_object(Object).
 
-	succeeds(asserta_1_16) :-
+	test(asserta_1_16, true(Xs-Ys == [3,2,1]-[3,2,1])) :-
 		create_object(Object, [], [set_logtalk_flag(dynamic_declarations, allow)], []),
 		Object::asserta(a(1)),
 		a2_clause(A2),
@@ -92,40 +90,34 @@
 		Object::asserta(a(3)),
 		Object::asserta((p(X) :- a(X))),
 		findall(X, Object::a(X), Xs),
-		Xs == [3,2,1],
 		findall(Y, Object::p(Y), Ys),
-		Ys == [3,2,1],
 		abolish_object(Object).
 
 	% tests for the "user" pseudo-object
 
-	succeeds(asserta_1_17) :-
-		user::asserta(bar),
-		{bar}.
+	test(asserta_1_17, true({bar})) :-
+		user::asserta(bar).
 
-	succeeds(asserta_1_18) :-
+	test(asserta_1_18, true({Baz})) :-
 		baz_clause(Baz),
-		user::asserta(Baz),
-		{Baz}.
+		user::asserta(Baz).
 
-	succeeds(asserta_1_19) :-
+	test(asserta_1_19, true({foobar})) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
-		Object::asserta(foobar),
-		{foobar}.
+		Object::asserta(foobar).
 
-	succeeds(asserta_1_20) :-
+	test(asserta_1_20, true({FooBaz})) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		foobaz_clause(FooBaz),
-		Object::asserta(FooBaz),
-		{FooBaz}.
+		Object::asserta(FooBaz).
 
-	test(asserta_1_21, true(X == 1)) :-
-		create_object(Obj, [], [public(p/1)], []),
+	test(asserta_1_21, true(X == 1), [cleanup(abolish_object(Object))]) :-
+		create_object(Object, [], [public(p/1)], []),
 		closure(Closure),
-		call(Obj::Closure, p(1)),
-		Obj::p(X).
+		call(Object::Closure, p(1)),
+		Object::p(X).
 
 	cleanup :-
 		{abolish(bar/0), abolish(baz/0), abolish(foobar/0), abolish(foobaz/0)}.

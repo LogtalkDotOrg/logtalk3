@@ -39,6 +39,11 @@ Tools
 * UPDATED: The `lgtenv` scripts to support specifying the name of the packs
 sub-directory.
 
+Tests
+-----
+
+* ADDED: Additional tests for the built-in database methods.
+
 Installers and installation scripts
 -----------------------------------
 
