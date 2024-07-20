@@ -5740,10 +5740,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 			functor(Pred, Functor, Arity),
 			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, SenderExCtx)))
 		)
-	;	% no predicate declaration, check if it's a private built-in method
-		'$lgt_built_in_method'(Pred, p, _, _) ->
-		functor(Pred, Functor, Arity),
-		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, SenderExCtx)))
+	;	% no predicate declaration, check if it's a built-in method
+		'$lgt_built_in_method'(Pred, Scope, _, _) ->
+		(	Scope == p ->
+			functor(Pred, Functor, Arity),
+			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(::Pred, SenderExCtx)))
+		;	% Scope == p(p(p)),
+			'$lgt_comp_ctx'(Ctx, _, _, _, Sender, Obj, Obj, _, [], _, _, runtime, _, _, _),
+			'$lgt_compile_message_to_self'(Pred, Call, Ctx),
+			call(Call)
+		)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_execution_context'(ExCtx, _, Sender, Obj, Obj, [], []),
@@ -5857,10 +5863,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
 			)
 		)
-	;	% no predicate declaration, check if it's a private built-in method
-		'$lgt_built_in_method'(Pred, p, _, _) ->
-		functor(Pred, Functor, Arity),
-		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
+	;	% no predicate declaration, check if it's a built-in method
+		'$lgt_built_in_method'(Pred, Scope, _, _) ->
+		(	Scope == p ->
+			functor(Pred, Functor, Arity),
+			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
+		;	% Scope == p(p(p)),
+			'$lgt_comp_ctx'(Ctx, _, _, _, Sender, Obj, Obj, _, _, _, _, runtime, _, _, _),
+			'$lgt_compile_message_to_object'(Pred, Obj, Call, allow, Ctx),
+			call(Call)
+		)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_execution_context'(ExCtx, _, Sender, Obj, Obj, [], []),
@@ -5981,10 +5993,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 			;	throw(error(permission_error(access, protected_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
 			)
 		)
-	;	% no predicate declaration, check if it's a private built-in method
-		'$lgt_built_in_method'(Pred, p, _, _) ->
-		functor(Pred, Functor, Arity),
-		throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
+	;	% no predicate declaration, check if it's a built-in method
+		'$lgt_built_in_method'(Pred, Scope, _, _) ->
+		(	Scope == p ->
+			functor(Pred, Functor, Arity),
+			throw(error(permission_error(access, private_predicate, Functor/Arity), logtalk(Obj::Pred, SenderExCtx)))
+		;	% Scope == p(p(p)),
+			'$lgt_comp_ctx'(Ctx, _, _, _, Sender, Obj, Obj, _, _, _, _, runtime, _, _, _),
+			'$lgt_compile_message_to_object'(Pred, Obj, Call, deny, Ctx),
+			call(Call)
+		)
 	;	% message not understood; check for a message forwarding handler
 		call(Def, forward(Pred), ExCtx, Call, _, _) ->
 		'$lgt_execution_context'(ExCtx, _, Sender, Obj, Obj, [], []),

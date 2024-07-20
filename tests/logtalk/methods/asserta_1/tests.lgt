@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2018-03-28,
+		date is 2024-07-20,
 		comment is 'Unit tests for the asserta/1 built-in method.'
 	]).
 
@@ -121,6 +121,12 @@
 		Object::asserta(FooBaz),
 		{FooBaz}.
 
+	test(asserta_1_21, true(X == 1)) :-
+		create_object(Obj, [], [public(p/1)], []),
+		closure(Closure),
+		call(Obj::Closure, p(1)),
+		Obj::p(X).
+
 	cleanup :-
 		{abolish(bar/0), abolish(baz/0), abolish(foobar/0), abolish(foobaz/0)}.
 
@@ -133,5 +139,7 @@
 	foobaz_clause(foobaz).
 
 	user_object(user).
+
+	closure(asserta).
 
 :- end_object.

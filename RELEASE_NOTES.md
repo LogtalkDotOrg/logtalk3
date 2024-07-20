@@ -25,6 +25,12 @@ RELEASE NOTES
 3.82.0 - August ??, 2024
 ========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Support runtime constructed messages for the built-in methods. Thanks
+to Alex Kouznetsov for the bug report.
+
 Tools
 -----
 
