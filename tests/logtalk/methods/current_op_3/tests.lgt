@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,102 +29,102 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2018-03-28,
+		date is 2024-07-22,
 		comment is 'Unit tests for the current_op/3 built-in directive.'
 	]).
 
-	throws(current_op_3_01, error(type_error(integer,a), logtalk(This::current_op(a,_,_),_))) :-
+	test(current_op_3_01, error(type_error(integer,a))) :-
 		this(This),
 		{This::current_op(a, _, _)}.
 
-	throws(current_op_3_02, error(domain_error(operator_priority,3000), logtalk(This::current_op(3000,_,_),_))) :-
+	test(current_op_3_02, error(domain_error(operator_priority,3000))) :-
 		this(This),
 		{This::current_op(3000, _, _)}.
 
-	throws(current_op_3_03, error(type_error(atom,1), logtalk(This::current_op(_,1,_),_))) :-
+	test(current_op_3_03, error(type_error(atom,1))) :-
 		this(This),
 		{This::current_op(_, 1, _)}.
 
-	throws(current_op_3_04, error(domain_error(operator_specifier,a), logtalk(This::current_op(_,a,_),_))) :-
+	test(current_op_3_04, error(domain_error(operator_specifier,a))) :-
 		this(This),
 		{This::current_op(_, a, _)}.
 
-	throws(current_op_3_05, error(type_error(atom,1), logtalk(This::current_op(_,_,1),_))) :-
+	test(current_op_3_05, error(type_error(atom,1))) :-
 		this(This),
 		{This::current_op(_, _, 1)}.
 
-	throws(current_op_3_06, error(instantiation_error, logtalk(_::current_op(_,_,_),_))) :-
+	test(current_op_3_06, error(instantiation_error)) :-
 		{test_object_1::ie(_)}.
 
-	throws(current_op_3_07, error(type_error(object_identifier, 1), logtalk(1::current_op(_,_,_),_))) :-
+	test(current_op_3_07, error(type_error(object_identifier, 1))) :-
 		{test_object_1::te}.
 
-	succeeds(current_op_3_08) :-
-		setof(Operator, test_object_1<<current_op(501, xfx, Operator), Operators),
-		Operators == [abc, def, ghi].
+	test(current_op_3_08, true(Operators == [abc, def, ghi])) :-
+		setof(Operator, test_object_1<<current_op(501, xfx, Operator), Operators).
 
-	succeeds(current_op_3_09) :-
-		setof(Operator, test_object_1::current_op(501, xfx, Operator), Operators),
-		Operators == [abc].
+	test(current_op_3_09, true(Operators == [abc])) :-
+		setof(Operator, test_object_1::current_op(501, xfx, Operator), Operators).
 
-	succeeds(current_op_3_10) :-
+	test(current_op_3_10, true) :-
 		test_object_1::current_op(600, xfx, override),
 		\+ test_object_1::current_op(600, xfy, override).
 
-	succeeds(current_op_3_11) :-
+	test(current_op_3_11, true) :-
 		\+ test_object_2::current_op(600, xfx, override).
 
-	succeeds(current_op_3_12) :-
-		test_object_1::operators(Operators),
-		Operators == [abc, def, ghi].
+	test(current_op_3_12, true(Operators == [abc, def, ghi])) :-
+		test_object_1::operators(Operators).
 
-	succeeds(current_op_3_13) :-
-		test_object_2::operators(Operators),
-		Operators == [opq, rst].
+	test(current_op_3_13, true(Operators == [opq, rst])) :-
+		test_object_2::operators(Operators).
 
 	% tests for the "user" pseudo-object
 
-	succeeds(current_op_3_14) :-
-		user::current_op(Priority, Associativity, my_test_op),
-		Priority == 777, Associativity == yfx.
+	test(current_op_3_14, true(Priority-Associativity == 777-yfx)) :-
+		user::current_op(Priority, Associativity, (my_test_op)).
 
-	succeeds(current_op_3_15) :-
-		user::current_op(Priority, Associativity, Operator),
-		Priority == 777, Associativity == yfx, Operator == (my_test_op).
+	test(current_op_3_15, exists(op(Priority,Associativity,Operator) == op(777,yfx,(my_test_op)))) :-
+		user::current_op(Priority, Associativity, Operator).
 
-	succeeds(current_op_3_16) :-
+	test(current_op_3_16, true(Priority-Associativity == 777-yfx)) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
-		Object::current_op(Priority, Associativity, my_test_op),
-		Priority == 777, Associativity == yfx.
+		Object::current_op(Priority, Associativity, (my_test_op)).
 
-	succeeds(current_op_3_17) :-
+	test(current_op_3_17, exists(op(Priority,Associativity,Operator) == op(777,yfx,(my_test_op)))) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
-		Object::current_op(Priority, Associativity, Operator),
-		Priority == 777, Associativity == yfx, Operator == (my_test_op).
+		Object::current_op(Priority, Associativity, Operator).
 
 	% test semantics for local calls from multifile predicate clauses
 
-	succeeds(current_op_3_18) :-
+	test(current_op_3_18, true(Priority-Associativity == 601-xfx)) :-
 		primary::p(Priority, Associativity, op_public),
 		Priority == 601, Associativity == xfx.
 
-	succeeds(current_op_3_19) :-
+	test(current_op_3_19, true(Priority-Associativity == 601-xfx)) :-
 		primary::p(Priority, Associativity, op_protected),
 		Priority == 601, Associativity == xfx.
 
-	succeeds(current_op_3_20) :-
-		primary::p(Priority, Associativity, op_private),
-		Priority == 601, Associativity == xfx.
+	test(current_op_3_20, true(Priority-Associativity == 601-xfx)) :-
+		primary::p(Priority, Associativity, op_private).
 
-	succeeds(current_op_3_21) :-
+	test(current_op_3_21, true) :-
 		\+ primary::p(_, _, op_local).
+
+	% tests for runtime constructed calls
+
+	test(current_op_3_22, true(Priority-Associativity == 678-xfx), [cleanup(abolish_object(Object))]) :-
+		create_object(Object, [], [public(op(678, xfx, oops))], []),
+		closure(Closure),
+		call(Object::Closure, Priority, Associativity,  oops).
 
 	% auxiliary predicates
 
 	user_object(user).
+
+	closure(current_op).
 
 :- end_object.
