@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,9 +28,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2021-11-01,
+		date is 2024-07-21,
 		comment is 'Unit tests for the predicate_property/2 built-in method.'
 	]).
 
@@ -163,8 +163,17 @@ a(1).
 	test(predicate_property_2_34, true(Object-Line == test_object_2-51)) :-
 		test_object_2::predicate_property(bar, defined_in(Object, Line)).
 
+	% tests for runtime constructed calls
+
+	test(predicate_property_2_35, true, [cleanup(abolish_object(Object))]) :-
+		create_object(Object, [], [public(p/1), dynamic(p/1)], [p(1)]),
+		closure(Closure),
+		call(Object::Closure, p(_), (dynamic)).
+
 	% auxiliary predicates
 
 	user_object(user).
+
+	closure(predicate_property).
 
 :- end_object.

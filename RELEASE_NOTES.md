@@ -44,6 +44,8 @@ Tests
 
 * ADDED: Additional tests for the built-in database methods.
 
+* ADDED: Additional tests for the built-in reflection methods.
+
 Installers and installation scripts
 -----------------------------------
 

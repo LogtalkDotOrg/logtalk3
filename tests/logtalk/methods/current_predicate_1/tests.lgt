@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,106 +30,104 @@ b(1, 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2018-03-28,
+		date is 2024-07-21,
 		comment is 'Unit tests for the current_predicate/1 built-in method.'
 	]).
 
-	:- discontiguous([
-		succeeds/1, fails/1, throws/2
-	]).
-
-	throws(current_predicate_1_01, error(type_error(predicate_indicator, 1), logtalk(This::current_predicate(1),_))) :-
+	test(current_predicate_1_01, error(type_error(predicate_indicator, 1))) :-
 		this(This),
 		{This::current_predicate(1)}.
 
-	throws(current_predicate_1_02, error(type_error(atom,1), logtalk(This::current_predicate(1/b),_))) :-
+	test(current_predicate_1_02, error(type_error(atom,1))) :-
 		this(This),
 		{This::current_predicate(1/b)}.
 
-	throws(current_predicate_1_03, error(type_error(integer,b), logtalk(This::current_predicate(a/b),_))) :-
+	test(current_predicate_1_03, error(type_error(integer,b))) :-
 		this(This),
 		{This::current_predicate(a/b)}.
 
-	throws(current_predicate_1_04, error(domain_error(not_less_than_zero, -1), logtalk(This::current_predicate(a/(-1)),_))) :-
+	test(current_predicate_1_04, error(domain_error(not_less_than_zero, -1))) :-
 		this(This),
 		{This::current_predicate(a/(-1))}.
 
-	throws(current_predicate_1_05, error(instantiation_error, logtalk(_::current_predicate(foo/1),_))) :-
+	test(current_predicate_1_05, error(instantiation_error)) :-
 		{test_object::ie(_)}.
 
-	throws(current_predicate_1_06, error(type_error(object_identifier, 1), logtalk(1::current_predicate(foo/1),_))) :-
+	test(current_predicate_1_06, error(type_error(object_identifier, 1))) :-
 		{test_object::te}.
 
-	succeeds(current_predicate_1_07) :-
+	test(current_predicate_1_07, true) :-
 		test_object::current_predicate(ie/1).
 
-	succeeds(current_predicate_1_08) :-
+	test(current_predicate_1_08, true) :-
 		test_object::current_predicate(te/0).
 
-	succeeds(current_predicate_1_09) :-
-		setof(Predicate, test_object::current_predicate(Predicate), Predicates),
-		Predicates == [ie/1, te/0].
+	test(current_predicate_1_09, true(Predicates == [ie/1, te/0])) :-
+		setof(Predicate, test_object::current_predicate(Predicate), Predicates).
 
-	fails(current_predicate_1_10) :-
+	test(current_predicate_1_10, false) :-
 		test_object::current_predicate(foo/2).
 
 	% tests for the "user" pseudo-object
 
-	succeeds(current_predicate_1_11) :-
+	test(current_predicate_1_11, true) :-
 		user::current_predicate(a/1).
 
-	succeeds(current_predicate_1_12) :-
-		user::current_predicate(b/Arity),
-		Arity == 2.
+	test(current_predicate_1_12, true(Arity == 2)) :-
+		user::current_predicate(b/Arity).
 
-	succeeds(current_predicate_1_13) :-
+	test(current_predicate_1_13, true) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
 		Object::current_predicate(a/1).
 
-	succeeds(current_predicate_1_14) :-
+	test(current_predicate_1_14, true(Arity == 2)) :-
 		% ensure that the unification is not optimized away
 		user_object(Object),
-		Object::current_predicate(b/Arity),
-		Arity == 2.
+		Object::current_predicate(b/Arity).
 
 	% test semantics for local calls from multifile predicate clauses
 
-	succeeds(current_predicate_1_15) :-
-		setof(Predicate, primary::p(Predicate), Predicates),
-		Predicates == [a/1, b/2, c/3].
+	test(current_predicate_1_15, true(Predicates == [a/1, b/2, c/3])) :-
+		setof(Predicate, primary::p(Predicate), Predicates).
 
 	% test semantics for re-declared predicates
 
-	succeeds(current_predicate_1_16) :-
-		findall(Predicate, proto::current_predicate(Predicate), Predicates),
-		Predicates == [foobar/0].
+	test(current_predicate_1_16, true(Predicates == [foobar/0])) :-
+		findall(Predicate, proto::current_predicate(Predicate), Predicates).
 
-	fails(current_predicate_1_17) :-
+	test(current_predicate_1_17, false) :-
 		proto::current_predicate(foo/_).
 
-	fails(current_predicate_1_18) :-
+	test(current_predicate_1_18, false) :-
 		proto::current_predicate(_/1).
 
-	fails(current_predicate_1_19) :-
+	test(current_predicate_1_19, false) :-
 		proto::current_predicate(foo/1).
 
-	fails(current_predicate_1_20) :-
+	test(current_predicate_1_20, false) :-
 		proto::current_predicate(bar/_).
 
-	fails(current_predicate_1_21) :-
+	test(current_predicate_1_21, false) :-
 		proto::current_predicate(_/2).
 
-	fails(current_predicate_1_22) :-
+	test(current_predicate_1_22, false) :-
 		proto::current_predicate(bar/2).
 
-	deterministic(current_predicate_1_23) :-
+	test(current_predicate_1_23, deterministic) :-
 		proto::current_predicate(foobar/0).
+
+	test(current_predicate_1_24, true, [cleanup(abolish_object(Object))]) :-
+		create_object(Object, [], [public(p/1)], []),
+		closure(Closure),
+		call(Object::Closure, p/1).
 
 	% auxiliary predicates
 
 	user_object(user).
+
+	closure(current_predicate).
 
 :- end_object.
