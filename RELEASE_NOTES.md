@@ -49,6 +49,8 @@ Tests
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: Portable Docker image support for displaying man pages.
+
 * FIXED: The Docker file for building the portable image to properly define
 the `INFOPATH` and `MANPATH` environment variables.
 

@@ -208,5 +208,18 @@ ENV LANGUAGE=en_US.UTF-8
 # Create the LOGTALKUSER directory for the root user
 RUN logtalk_user_setup
 
+# Install support for man pages
+RUN sed -i 's:^path-exclude=/usr/share/man:#path-exclude=/usr/share/man:' /etc/dpkg/dpkg.cfg.d/excludes
+RUN apt-get update && apt --yes upgrade && apt-get install -y \
+        apt-utils \
+        dialog \
+        manpages \
+        manpages-posix \
+        man-db
+RUN rm -f /usr/bin/man
+RUN dpkg-divert --quiet --remove --rename /usr/bin/man
+RUN rm -f /usr/share/man/man1/sh.1.gz
+RUN dpkg-divert --quiet --remove --rename /usr/share/man/man1/sh.1.gz
+
 WORKDIR /source
 ENTRYPOINT ["bash"]
