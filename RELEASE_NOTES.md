@@ -51,6 +51,9 @@ Installers and installation scripts
 
 * ADDED: Portable Docker image support for displaying man pages.
 
+* ADDED: Portable Docker image support for displaying the Handbook and the
+APIs Texinfo files using the `help` tool.
+
 * FIXED: The Docker file for building the portable image to properly define
 the `INFOPATH` and `MANPATH` environment variables.
 

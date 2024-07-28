@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on July 17, 2024
+##   Last updated on July 28, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -30,6 +30,7 @@ VOLUME ["/source"]
 
 # Logtalk
 ARG LOGTALK_VERSION=master
+ARG LOGTALK_TEXINFO_VERSION=3.82.0
 # Backends
 ARG B_VERSION=81
 ARG CIAO_VERSION=v1.23.0-m1
@@ -122,6 +123,11 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
 RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local
 RUN rm -rf logtalk3-${LOGTALK_VERSION}
+# Create the LOGTALKUSER directory for the root user
+RUN logtalk_user_setup
+# Download and install the Texinfo files for the latest stable version
+RUN cd /root/logtalk/manuals && curl -O https://logtalk.org/manuals/TheLogtalkHandbook-${LOGTALK_TEXINFO_VERSION}.info
+RUN cd /root/logtalk/docs && curl -O https://logtalk.org/docs/LogtalkAPIs-${LOGTALK_TEXINFO_VERSION}.info
 
 # Install B-Prolog
 WORKDIR /downloads
@@ -204,9 +210,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
-
-# Create the LOGTALKUSER directory for the root user
-RUN logtalk_user_setup
 
 # Install support for man pages
 RUN sed -i 's:^path-exclude=/usr/share/man:#path-exclude=/usr/share/man:' /etc/dpkg/dpkg.cfg.d/excludes
