@@ -28,8 +28,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: Support runtime constructed messages for the built-in methods. Thanks
-to Alex Kouznetsov for the bug report.
+* ADDED: Support for runtime constructed messages for the built-in methods.
+Thanks to Alex Kouznetsov for the bug report.
 
 Tools
 -----
@@ -42,9 +42,7 @@ sub-directory.
 Tests
 -----
 
-* ADDED: Additional tests for the built-in database methods.
-
-* ADDED: Additional tests for the built-in reflection methods.
+* ADDED: Additional tests for the built-in database and reflection methods.
 
 Installers and installation scripts
 -----------------------------------

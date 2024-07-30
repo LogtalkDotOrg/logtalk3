@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Packs virtual environment script
-##   Last updated on July 18, 2024
+##   Last updated on July 30, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.2"
+	echo "$(basename "$0") 0.3"
 	exit 0
 }
 
@@ -92,7 +92,7 @@ if [ "$p_arg" == "" ] ; then
 	packs="$directory"
 elif [ ! -d "$directory/$p_arg" ] ; then
 	packs="$directory/$p_arg"
-	mkdir -p "$directory/$packs"
+	mkdir -p "$directory/$p_arg"
 elif [ ! -w "$directory/$p_arg" ] ; then
 	echo "Error: directory $directory/$p_arg is not writable."
 	exit 1
