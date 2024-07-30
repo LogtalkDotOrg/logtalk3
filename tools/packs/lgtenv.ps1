@@ -37,7 +37,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.2")
+	Write-Output ($myName + " 0.3")
 }
 
 Function Write-Usage-Help() {
@@ -55,9 +55,11 @@ Function Write-Usage-Help() {
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output "  -d directory where to create the virtual environment (default is .)"
+	Write-Output "  -d directory where to create the virtual environment"
+	Write-Output "     (absolute path; default is the current directory)"
 	Write-Output "  -c create directory if it does not exist"
-	Write-Output "  -p packs sub-directory (default is .)"
+	Write-Output "  -p packs sub-directory"
+	Write-Output "     (relative path; default is is the current directory)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""

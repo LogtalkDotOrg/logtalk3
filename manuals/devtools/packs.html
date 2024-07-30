@@ -316,12 +316,13 @@ variables to point to its pack directory (which can be queried by using
 the <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> message).</p>
 <p>Experimental <code class="docutils literal notranslate"><span class="pre">lgtenv.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtenv.ps1</span></code> scripts are included to
 simplify creating virtual environments. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> lgtenv <span class="o">-</span>d <span class="err">~</span><span class="o">/</span>my_venv <span class="o">-</span>c
-<span class="err">$</span> cd <span class="err">~</span><span class="o">/</span>my_venv<span class="o">/</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> lgtenv <span class="o">-</span>d <span class="err">~</span><span class="o">/</span>my_venv <span class="o">-</span>c <span class="o">-</span>p logtalk_packs
+<span class="err">$</span> cd <span class="err">~</span><span class="o">/</span>my_venv
 direnv<span class="o">:</span> loading <span class="err">~</span><span class="o">/</span>my_venv<span class="o">/</span>.envrc
 direnv<span class="o">:</span> export <span class="o">+</span><span class="nv">LOGTALKPACKS</span>
 </pre></div>
 </div>
+<p>Type <code class="docutils literal notranslate"><span class="pre">lgtenv</span> <span class="pre">-h</span></code> for details on the script options.</p>
 <p>These scripts require, respectively,
 <a class="reference external" href="https://github.com/direnv/direnv">direnv</a> and
 <a class="reference external" href="https://github.com/rajivharris/Set-PsEnv">Set-PsEnv</a> to be

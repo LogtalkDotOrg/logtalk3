@@ -27,16 +27,16 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.3"
+	echo "$(basename "$0") 0.4"
 	exit 0
 }
 
 usage_help()
 {
 	echo 
-	echo "This script creates a packs virtual environment in the current directory or in a"
-	echo "specified directory by writing or appending to a .envrc file. It requires direnv"
-	echo "to be installed."
+	echo "This script creates a packs virtual environment in the current directory or"
+	echo "in a specified directory by writing or appending to a .envrc file. Requires"
+	echo "direnv to be installed."
 	echo
 	echo "Usage:"
 	echo "  $(basename "$0") [-d directory] [-c] [-p packs]"
@@ -44,9 +44,11 @@ usage_help()
 	echo "  $(basename "$0") -h"
 	echo
 	echo "Optional arguments:"
-	echo "  -d directory where to create the virtual environment (default is .)"
+	echo "  -d directory where to create the virtual environment"
+	echo "     (absolute path; default is the current directory)"
 	echo "  -c create directory if it does not exist"
-	echo "  -p packs sub-directory (default is .)"
+	echo "  -p packs sub-directory"
+	echo "     (relative path; default is is the current directory)"
 	echo "  -v print version"
 	echo "  -h help"
 	echo

@@ -199,10 +199,12 @@ variables to point to its pack directory (which can be queried by using the
 Experimental `lgtenv.sh` and `lgtenv.ps1` scripts are included to simplify
 creating virtual environments. For example:
 
-	$ lgtenv -d ~/my_venv -c
-	$ cd ~/my_venv/
+	$ lgtenv -d ~/my_venv -c -p logtalk_packs
+	$ cd ~/my_venv
 	direnv: loading ~/my_venv/.envrc
 	direnv: export +LOGTALKPACKS
+
+Type `lgtenv -h` for details on the script options.
 
 These scripts require, respectively, [direnv](https://github.com/direnv/direnv)
 and [Set-PsEnv](https://github.com/rajivharris/Set-PsEnv) to be installed.
