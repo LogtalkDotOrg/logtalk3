@@ -3,10 +3,10 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on August 27, 2023
+##   Last updated on August 2, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,12 +24,12 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.12"
+	echo "$(basename "$0") 0.13"
 	exit 0
 }
 
 # default argument values
-minimal_version="2.24.0"
+minimal_version="2.26.0"
 tests=$(pwd)
 results="./allure-results"
 report="./allure-report"
@@ -202,12 +202,15 @@ echo "$categories" > "$results"/categories.json
 
 cd "$results/.." || exit 1
 if [ "$single_file" == "true" ] ; then
-	allure generate --single-file --clean --report-dir "$report" "$results"
+	if [ "$title" != "" ] ; then
+		allure generate --single-file --clean --name "$title" --report-dir "$report" "$results"
+	else
+		allure generate --single-file --clean --report-dir "$report" "$results"
+	fi
+else if [ "$title" != "" ] ; then
+	allure generate --clean --name "$title" --report-dir "$report" "$results"
 else
 	allure generate --clean --report-dir "$report" "$results"
-fi
-if [ "$title" != "" ] ; then
-	$sed -i "s/Allure Report/$title/" "$report"/widgets/summary.json
 fi
 
 exit 0

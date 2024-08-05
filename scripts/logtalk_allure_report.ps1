@@ -1,10 +1,10 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on August 27, 2023
+##   Last updated on August 2, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +41,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.12")
+	Write-Output ($myName + " 0.13")
 }
 
 Function Write-Usage-Help() {
@@ -82,7 +82,7 @@ Function Check-Parameters() {
 
 ###################### here it starts ############################ 
 
-$minimal_version="2.24.0" 
+$minimal_version="2.26.0" 
 
 if ((Get-Command "allure" -ErrorAction SilentlyContinue) -eq $null)  { 
 	Write-Output "Error: allure is not installed!"
@@ -177,12 +177,15 @@ Add-Content -Path $o\categories.json -Value ']'
 Push-Location (Join-Path $i ..)
 
 if ($s -eq $true) {
-	allure generate --single-file --clean --report-dir $o $i
+	if ($t -ne "") {
+		allure generate --single-file --clean --name $t --report-dir $o $i
+	} else {
+		allure generate --single-file --clean --report-dir $o $i
+	}
+} else if ($t -ne "") {
+	allure generate --clean --name $t --report-dir $o $i
 } else {
 	allure generate --clean --report-dir $o $i
-}
-if ($t -ne "") {
-	(Get-Content ($o + "\widgets\summary.json")) -Replace 'Allure Report', $t | Set-content ($o + "\widgets\summary.json")
 }
 
 Pop-Location

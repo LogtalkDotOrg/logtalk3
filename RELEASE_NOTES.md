@@ -39,6 +39,9 @@ Tools
 * UPDATED: The `lgtenv` scripts to support specifying the name of the packs
 sub-directory.
 
+* FIXED: The `logtalk_allure_report` scripts when using both the single page
+and title options. Allure 2.26.0 or a later version is now required.
+
 Tests
 -----
 
