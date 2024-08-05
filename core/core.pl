@@ -28485,23 +28485,27 @@ create_logtalk_flag(Flag, Value, Options) :-
 	catch(
 		'$lgt_read_term'(Stream, Term, [variable_names(VariableNames), singletons(Singletons)], Lines),
 		error(TermError, _),
-		'$lgt_read_file_to_terms_error_handler'(SourceFile, Stream, TermError)
+		'$lgt_read_file_to_terms_error_handler'(Mode, SourceFile, Stream, TermError)
 	),
 	catch(
 		'$lgt_check_for_encoding_directive'(Term, SourceFile, Lines, Stream, NewStream, [], _),
 		FirstTermError,
-		'$lgt_read_file_to_terms_error_handler'(SourceFile, Stream, FirstTermError)
+		'$lgt_read_file_to_terms_error_handler'(Mode, SourceFile, Stream, FirstTermError)
 	),
 	% read the reamining terms
 	catch(
 		'$lgt_read_stream_to_terms'(Term, VariableNames, Singletons, Lines, SourceFile, NewStream, Terms, Mode),
 		error(TermError, _),
-		'$lgt_read_file_to_terms_error_handler'(SourceFile, NewStream, TermError)
+		'$lgt_read_file_to_terms_error_handler'(Mode, SourceFile, NewStream, TermError)
 	),
 	'$lgt_close'(NewStream).
 
 
-'$lgt_read_file_to_terms_error_handler'(SourceFile, Stream, Error) :-
+'$lgt_read_file_to_terms_error_handler'(runtime, _, Stream, Error) :-
+	'$lgt_close'(Stream),
+	throw(Error).
+
+'$lgt_read_file_to_terms_error_handler'(compile(_,_,_), SourceFile, Stream, Error) :-
 	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _),
 	(	'$lgt_stream_current_line_number'(Stream, Line) ->
 		true

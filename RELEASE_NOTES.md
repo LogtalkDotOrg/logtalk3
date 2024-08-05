@@ -31,6 +31,11 @@ Logtalk compiler and runtime
 * ADDED: Support for runtime constructed messages for the built-in methods.
 Thanks to Alex Kouznetsov for the bug report.
 
+* FIXED: The handling of `include/1` directives by the `create_protocol/3`,
+`create_object/4`, and `create_category/4` built-in predicates to throw an
+error instead of failing when the included file is not valid. Thanks to Alex
+Kouznetsov for the bug report.
+
 Tools
 -----
 
