@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,9 +26,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2023-03-22,
+		date is 2024-08-05,
 		comment is 'Unit tests for the include/1 built-in directive.'
 	]).
 
@@ -164,5 +164,14 @@
 	test(include_1_29, false) :-
 		create_object(Object, [], [set_logtalk_flag(context_switching_calls,allow), include('include_3.pl')], []),
 		Object << bar(_).
+
+	test(include_1_30, error(_)) :-
+		create_object(_, [], [include('broken.pl')], []).
+
+	test(include_1_31, error(_)) :-
+		create_category(_, [], [include('broken.pl')], []).
+
+	test(include_1_32, error(_)) :-
+		create_protocol(_, [], [include('broken.pl')]).
 
 :- end_object.

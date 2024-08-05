@@ -50,6 +50,8 @@ and title options. Allure 2.26.0 or a later version is now required.
 Tests
 -----
 
+* ADDED: Additional tests for the `include/1` directive.
+
 * ADDED: Additional tests for the built-in database and reflection methods.
 
 Installers and installation scripts
