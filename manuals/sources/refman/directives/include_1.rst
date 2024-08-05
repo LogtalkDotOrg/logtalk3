@@ -60,9 +60,10 @@ may specify the same encoding of the main file or a different encoding.
 .. warning::
 
    When using this directive as an argument in calls to the
-   :ref:`predicates_create_object_4` and :ref:`predicates_create_category_4`
-   predicates, the objects and categories will not be recreated or redefined
-   when the included file(s) are modified and the :ref:`predicates_logtalk_make_0`
+   :ref:`predicates_create_object_4`, :ref:`predicates_create_category_4`,
+   and :ref:`predicates_create_protocol_3` built-in predicates, the objects,
+   categories, and protocols will not be recreated or redefined when the
+   included file(s) are modified and the :ref:`predicates_logtalk_make_0`
    predicate or the :ref:`predicates_logtalk_make_1` (with target ``all``)
    predicates are called.
 
