@@ -1866,9 +1866,10 @@ Generating Allure reports
 
 A ``logtalk_allure_report.pl`` Bash shell script and a
 ``logtalk_allure_report.ps1`` PowerShell script are provided for
-generating `Allure reports <https://docs.qameta.io/allure-report/>`__.
-This requires exporting test results in xUnit XML format. A simple usage
-example (assuming a current directory containing tests):
+generating `Allure reports <https://docs.qameta.io/allure-report/>`__
+(version 2.26.0 or later required). This requires exporting test results
+in xUnit XML format. A simple usage example (assuming a current
+directory containing tests):
 
 ::
 
@@ -1944,14 +1945,14 @@ Note that Allure cleans the report directory when generating a new
 report. Be careful to always specify a dedicated directory to prevent
 accidental data loss.
 
-When using the Allure 2.21.0 or a later version, it's possible to
-generate reports with links to the tests source code. This requires
-using the ``logtalk_tester`` shell script option that allows passing the
-base URL for those links. This option needs to be used together with the
-option to suppress the tests directory prefix so that the links can be
-constructed by appending the tests file relative path to the base URL.
-For example, assuming that you want to generate a report for the tests
-included in the Logtalk distribution when using the GNU Prolog backend:
+The generated reports can include with links to the tests source code.
+This requires using the ``logtalk_tester`` shell script option that
+allows passing the base URL for those links. This option needs to be
+used together with the option to suppress the tests directory prefix so
+that the links can be constructed by appending the tests file relative
+path to the base URL. For example, assuming that you want to generate a
+report for the tests included in the Logtalk distribution when using the
+GNU Prolog backend:
 
 ::
 
@@ -1968,8 +1969,7 @@ links include the line number for the tests in the tests files (assuming
 that the git repo is stored in a BitBucket, GitHub, or GitLab server).
 But note that not all supported backends provide accurate line numbers.
 
-When using the Allure 2.24.0 or a later version, it's possible to
-generate single file reports. For example:
+It's also possible to generate single file reports. For example:
 
 ::
 

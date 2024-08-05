@@ -1839,9 +1839,10 @@ HTML files for easy browsing. For example:</p>
 <h2>Generating Allure reports<a class="headerlink" href="#generating-allure-reports" title="Link to this heading"></a></h2>
 <p>A <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report.pl</span></code> Bash shell script and a
 <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report.ps1</span></code> PowerShell script are provided for
-generating <a class="reference external" href="https://docs.qameta.io/allure-report/">Allure reports</a>.
-This requires exporting test results in xUnit XML format. A simple usage
-example (assuming a current directory containing tests):</p>
+generating <a class="reference external" href="https://docs.qameta.io/allure-report/">Allure reports</a>
+(version 2.26.0 or later required). This requires exporting test results
+in xUnit XML format. A simple usage example (assuming a current
+directory containing tests):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>p gnu <span class="o">-</span>f xunit
 <span class="err">$</span> logtalk_allure_report
 <span class="err">$</span> allure open
@@ -1901,14 +1902,14 @@ and the report data to permanent directories. For example:</p>
 <p>Note that Allure cleans the report directory when generating a new
 report. Be careful to always specify a dedicated directory to prevent
 accidental data loss.</p>
-<p>When using the Allure 2.21.0 or a later version, it’s possible to
-generate reports with links to the tests source code. This requires
-using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> shell script option that allows passing the
-base URL for those links. This option needs to be used together with the
-option to suppress the tests directory prefix so that the links can be
-constructed by appending the tests file relative path to the base URL.
-For example, assuming that you want to generate a report for the tests
-included in the Logtalk distribution when using the GNU Prolog backend:</p>
+<p>The generated reports can include with links to the tests source code.
+This requires using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> shell script option that
+allows passing the base URL for those links. This option needs to be
+used together with the option to suppress the tests directory prefix so
+that the links can be constructed by appending the tests file relative
+path to the base URL. For example, assuming that you want to generate a
+report for the tests included in the Logtalk distribution when using the
+GNU Prolog backend:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cd <span class="err">$</span><span class="nv">LOGTALKUSER</span>
 <span class="err">$</span> logtalk_tester <span class="o">\</span>
   <span class="o">-</span>p gnu <span class="o">\</span>
@@ -1922,8 +1923,7 @@ will always show the exact versions of the tests that were run. The
 links include the line number for the tests in the tests files (assuming
 that the git repo is stored in a BitBucket, GitHub, or GitLab server).
 But note that not all supported backends provide accurate line numbers.</p>
-<p>When using the Allure 2.24.0 or a later version, it’s possible to
-generate single file reports. For example:</p>
+<p>It’s also possible to generate single file reports. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_allure_report <span class="o">-</span>s <span class="o">-</span>t <span class="s">&quot;My Amazing Tests Report&quot;</span>
 </pre></div>
 </div>
