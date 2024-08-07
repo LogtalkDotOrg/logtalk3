@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on August 2, 2024
+##   Last updated on August 7, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -43,13 +43,6 @@ if ! [ -x "$(command -v allure)" ] ; then
 	exit 1
 elif ! [ "$(printf '%s\n' "$minimal_version" "$(allure --version)" | sort -V | head -n1)" = "$minimal_version" ] ; then
 	echo "Warning: allure $minimal_version or later version is recommended!"
-fi
-
-# use GNU sed if available instead of BSD sed
-if gsed --version >/dev/null 2>&1 ; then
-	sed="gsed"
-else
-	sed="sed"
 fi
 
 usage_help()
@@ -207,7 +200,7 @@ if [ "$single_file" == "true" ] ; then
 	else
 		allure generate --single-file --clean --report-dir "$report" "$results"
 	fi
-else if [ "$title" != "" ] ; then
+elif [ "$title" != "" ] ; then
 	allure generate --clean --name "$title" --report-dir "$report" "$results"
 else
 	allure generate --clean --report-dir "$report" "$results"
