@@ -39,6 +39,8 @@ Kouznetsov for the bug report.
 Tools
 -----
 
+* ADDED: Tests for the `linter` tool.
+
 * IMPROVED: The `packs` tool handling of alternative pack dependencies.
 
 * UPDATED: The `lgtenv` scripts to support specifying the name of the packs
