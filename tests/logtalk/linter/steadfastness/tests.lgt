@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-09,
+		date is 2024-08-12,
 		comment is 'Unit tests for the ``steadfastness`` linter flag.'
 	]).
 
@@ -33,7 +33,7 @@
 	:- dynamic(steadfastness/5).
 
 	setup :-
-		retractall(steadfastness(_, _, _, _, _)),
+		cleanup,
 		logtalk_compile(test_entities, [steadfastness(warning)]).
 
 	cleanup :-

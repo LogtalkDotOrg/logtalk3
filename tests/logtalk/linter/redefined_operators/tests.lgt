@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-09,
+		date is 2024-08-12,
 		comment is 'Unit tests for the ``redefined_operators`` linter flag.'
 	]).
 
@@ -36,8 +36,7 @@
 	:- dynamic(redefined_operator/6).
 
 	setup :-
-		retractall(redefined_operator(_, _, _, _)),
-		retractall(redefined_operator(_, _, _, _, _, _)),
+		cleanup,
 		logtalk_compile(test_entities, [redefined_built_ins(warning)]).
 
 	cleanup :-

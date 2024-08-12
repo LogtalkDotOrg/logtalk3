@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-09,
+		date is 2024-08-12,
 		comment is 'Unit tests for the ``singleton_variables`` linter flag.'
 	]).
 
@@ -40,8 +40,7 @@
 	:- dynamic(singleton_variables/6).
 
 	setup :-
-		retractall(singleton_variables(_, _, _, _)),
-		retractall(singleton_variables(_, _, _, _, _, _)),
+		cleanup,
 		logtalk_compile(test_entities, [singleton_variables(warning)]).
 
 	cleanup :-

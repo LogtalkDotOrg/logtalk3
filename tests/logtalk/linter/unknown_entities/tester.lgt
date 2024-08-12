@@ -19,32 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2024-08-12,
-		comment is 'Unit tests for the ``catchall_catch`` linter flag.'
-	]).
-
-	:- private(catchall_catch/5).
-	:- dynamic(catchall_catch/5).
-
-	setup :-
-		cleanup,
-		logtalk_compile(test_entities, [catchall_catch(warning)]).
-
-	cleanup :-
-		retractall(catchall_catch(_, _, _, _, _)).
-
-	test(catchall_catch_linter_flag_01, variant(Term, catch(bar, _, baz))) :-
-		catchall_catch(_, _, object, catchall_catch, Term).
-
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-	logtalk::message_hook(catchall_catch(File, Lines, Type, Entity, Term), warning(catchall_catch), core, _) :-
-		assertz(catchall_catch(File, Lines, Type, Entity, Term)).
-
-:- end_object.
+:- initialization((
+	set_logtalk_flag(report, warnings),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
+)).

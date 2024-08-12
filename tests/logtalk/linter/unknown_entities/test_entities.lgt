@@ -19,32 +19,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
-	extends(lgtunit)).
+% references to unknown entities in object opening directive
 
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2024-08-12,
-		comment is 'Unit tests for the ``catchall_catch`` linter flag.'
+:- object(unknown_entities,
+	implements(some_protocol),
+	imports(some_category),
+	extends(some_object)).
+
+	:- uses([
+		unknown_object as known_object
 	]).
 
-	:- private(catchall_catch/5).
-	:- dynamic(catchall_catch/5).
+	:- uses(other_object, [
+		predicate/0
+	]).
 
-	setup :-
-		cleanup,
-		logtalk_compile(test_entities, [catchall_catch(warning)]).
+	:- if(current_logtalk_flag(modules, supported)).
 
-	cleanup :-
-		retractall(catchall_catch(_, _, _, _, _)).
+		:- use_module([
+			unknown_module as known_module
+		]).
 
-	test(catchall_catch_linter_flag_01, variant(Term, catch(bar, _, baz))) :-
-		catchall_catch(_, _, object, catchall_catch, Term).
+		:- use_module(some_module, [
+			other_predicate/0
+		]).
 
-	:- multifile(logtalk::message_hook/4).
-	:- dynamic(logtalk::message_hook/4).
-	logtalk::message_hook(catchall_catch(File, Lines, Type, Entity, Term), warning(catchall_catch), core, _) :-
-		assertz(catchall_catch(File, Lines, Type, Entity, Term)).
+	:- endif.
 
 :- end_object.

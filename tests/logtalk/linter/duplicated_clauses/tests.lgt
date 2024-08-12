@@ -40,8 +40,7 @@
 	:- dynamic(duplicated_grammar_rule/7).
 
 	setup :-
-		retractall(duplicated_clause(_, _, _, _, _, _, _)),
-		retractall(duplicated_grammar_rule(_, _, _, _, _, _, _)),
+		cleanup,
 		logtalk_compile(test_entities, [duplicated_clauses(warning)]).
 
 	cleanup :-

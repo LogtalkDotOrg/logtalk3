@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-09,
+		date is 2024-08-12,
 		comment is 'Unit tests for the ``left_recursion`` linter flag.'
 	]).
 
@@ -33,7 +33,7 @@
 	:- dynamic(left_recursion/5).
 
 	setup :-
-		retractall(left_recursion(_, _, _, _, _)),
+		cleanup,
 		logtalk_compile(test_entities, [left_recursion(warning)]).
 
 	cleanup :-

@@ -36,8 +36,7 @@
 	:- dynamic(duplicated_directive/7).
 
 	setup :-
-		retractall(duplicated_directive(_, _, _, _, _)),
-		retractall(duplicated_directive(_, _, _, _, _, _, _)),
+		cleanup,
 		logtalk_compile(test_entities, [duplicated_directives(warning)]).
 
 	cleanup :-

@@ -33,7 +33,7 @@
 	:- dynamic(unknown_predicate/5).
 
 	setup :-
-		retractall(unknown_predicate(_, _, _, _, _)),
+		cleanup,
 		logtalk_compile(test_entities, [unknown_predicates(warning)]).
 
 	cleanup :-

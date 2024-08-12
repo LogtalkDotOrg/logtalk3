@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-09,
+		date is 2024-08-12,
 		comment is 'Unit tests for the ``tail_recursive`` linter flag.'
 	]).
 
@@ -33,7 +33,7 @@
 	:- dynamic(tail_recursive/5).
 
 	setup :-
-		retractall(tail_recursive(_, _, _, _, _)),
+		cleanup,
 		logtalk_compile(test_entities, [tail_recursive(warning)]).
 
 	cleanup :-
