@@ -39,6 +39,9 @@ Kouznetsov for the bug report.
 Documentation
 -------------
 
+* IMPROVED: Handbook documentation of the `logtalk::message_prefix_stream/4`
+predicate.
+
 * FIXED: Handbook documentation of the `logtalk::ask_question/5` predicate.
 Thanks to Paul Brown for the bug report.
 
