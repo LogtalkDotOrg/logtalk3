@@ -31,7 +31,7 @@ Description
 
 ::
 
-   ask_question(Question, Kind, Component, Check, Answer)
+   ask_question(Kind, Component, Question, Check, Answer)
 
 Built-in method for asking a question represented by a term,
 ``Question``, which is converted to the question text using the
@@ -46,7 +46,7 @@ predicate implements a read-loop that terminates when the checking
 predicate succeeds.
 
 This predicate starts by calling the
-:ref:`logtalk::question_hook(Question, Kind, Component, Check, Answer) <methods_question_hook_6>`
+:ref:`logtalk::question_hook(Question, Kind, Component, Tokens, Check, Answer) <methods_question_hook_6>`
 hook predicate. If this predicate succeeds, the ``ask_question/5``
 predicate assumes that the question have been successfully asked and
 replied.

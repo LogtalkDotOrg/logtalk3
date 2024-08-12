@@ -36,6 +36,12 @@ Thanks to Alex Kouznetsov for the bug report.
 error instead of failing when the included file is not valid. Thanks to Alex
 Kouznetsov for the bug report.
 
+Documentation
+-------------
+
+* FIXED: Handbook documentation of the `logtalk::ask_question/5` predicate.
+Thanks to Paul Brown for the bug report.
+
 Tools
 -----
 
