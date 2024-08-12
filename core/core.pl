@@ -22993,9 +22993,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_report_missing_directives'(Type, Entity) :-
 	(	'$lgt_pp_mode_'(Mode, _, File, Lines),
 		functor(Mode, Functor, Arity),
-		Directive = mode
+		Directive = (mode)/2
 	;	'$lgt_pp_predicate_info_'(Functor/Arity, _, File, Lines),
-		Directive = info
+		Directive = info/2
 	),
 	% documented predicate or non-terminal
 	\+ '$lgt_pp_non_terminal_'(Functor, Arity, _),

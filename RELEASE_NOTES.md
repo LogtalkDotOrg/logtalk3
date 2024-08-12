@@ -36,6 +36,10 @@ Thanks to Alex Kouznetsov for the bug report.
 error instead of failing when the included file is not valid. Thanks to Alex
 Kouznetsov for the bug report.
 
+* FIXED: The message term of the linter warning for a missing predicate scope
+directive when an `info/2` or `mode/2` directive exists would misreport the
+existing directive.
+
 Documentation
 -------------
 
