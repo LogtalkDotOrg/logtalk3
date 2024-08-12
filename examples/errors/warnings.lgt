@@ -37,7 +37,7 @@
 	output :-
 		foo.
 
-	% call to an undefined local predicate
+	% call to an unknown local predicate
 	output(A) :-
 		bar(A).
 

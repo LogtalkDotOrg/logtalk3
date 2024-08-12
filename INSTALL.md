@@ -219,7 +219,7 @@ the basic installation:
 
 If you used the `install.sh` script for the basic installation, run it again
 (using the same options) to install the generated Texinfo versions of the
-Handbook and APIs.
+Handbook and APIs documentation.
 
 
 End-user setup
