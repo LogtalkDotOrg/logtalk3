@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Linter warnings on calling Logtalk/Prolog top-level shortcuts
+or Logtalk built-in predicates as directives are now controlled by the
+`portability` flag.
+
 * ADDED: Support for runtime constructed messages for the built-in methods.
 Thanks to Alex Kouznetsov for the bug report.
 

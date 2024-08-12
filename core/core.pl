@@ -9807,7 +9807,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_pp_prolog_term_'((:- Directive), Lines)),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(general), logtalk_built_in_predicate_as_directive(File, Lines, Directive))
+		'$lgt_print_message'(warning(portability), logtalk_built_in_predicate_as_directive(File, Lines, Directive))
 	;	true
 	).
 
@@ -9822,7 +9822,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	assertz('$lgt_pp_prolog_term_'((:- Directive), Lines)),
 	(	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)) ->
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(general), top_level_shortcut_as_directive(File, Lines, Directive))
+		'$lgt_print_message'(warning(portability), top_level_shortcut_as_directive(File, Lines, Directive))
 	;	true
 	).
 
