@@ -43,10 +43,10 @@
 	cleanup :-
 		retractall(suspicious_call(_, _, _, _, _)).
 
-	test(arithmetic_expressions_linter_flag_01, exists(variant(Term, A == 2.0))) :-
+	test(arithmetic_expressions_linter_flag_01, exists(variant(Term, _ == 2.0))) :-
 		suspicious_call(_, _, object, arithmetic_expressions, Term).
 
-	test(arithmetic_expressions_linter_flag_02, exists(variant(Term, 2.0 =:= A))) :-
+	test(arithmetic_expressions_linter_flag_02, exists(variant(Term, 2.0 =:= _))) :-
 		suspicious_call(_, _, object, arithmetic_expressions, Term).
 
 	test(arithmetic_expressions_linter_flag_03, exists(variant(Term, sqrt(_) =:= sin(_)))) :-
