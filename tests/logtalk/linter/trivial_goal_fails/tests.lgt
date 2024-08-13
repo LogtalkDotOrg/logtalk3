@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``trivial_goal_fails`` linter flag.'
 	]).
 
@@ -41,6 +41,9 @@
 
 	test(trivial_goal_fails_linter_flag_01, exists(Term == bar(1))) :-
 		trivial_goal_fails(_, _, object, trivial_fails, Term).
+
+	test(trivial_goal_fails_linter_flag_02, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(no_matching_clause_for_goal(file, 1-2, object, unknown_entities, foo), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

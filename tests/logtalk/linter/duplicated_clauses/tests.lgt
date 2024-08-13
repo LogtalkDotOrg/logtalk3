@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``duplicated_clauses`` linter flag.'
 	]).
 
@@ -55,6 +55,12 @@
 
 	test(duplicated_clauses_linter_flag_03, exists(Term == (c --> [1], d))) :-
 		duplicated_grammar_rule(_, _, object, duplicated_clauses, Term, _, _).
+
+	test(duplicated_clauses_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(duplicated_clause(file, 1-2, object, duplicated_clauses, a, original, 3-4), core), Tokens).
+
+	test(duplicated_clauses_linter_flag_05, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(duplicated_grammar_rule(file, 1-2, object, duplicated_clauses, a, original, 3-4), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``singleton_variables`` linter flag.'
 	]).
 
@@ -58,6 +58,12 @@
 
 	test(singleton_variables_linter_flag_04, exists(variant(Names-Term, ['A','C']-(predicate(_):-write(_))))) :-
 		singleton_variables(_, _, object, singletons(_), Names, Term).
+
+	test(singleton_variables_linter_flag_05, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(singleton_variables(file, 1-2, [foo], foo), core), Tokens).
+
+	test(singleton_variables_linter_flag_06, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(singleton_variables(file, 1-2, object, singleton_variables, [foo], foo), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

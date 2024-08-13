@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``duplicated_directives`` linter flag.'
 	]).
 
@@ -60,6 +60,18 @@
 
 	test(duplicated_directives_linter_flag_06, exists(Term == meta_non_terminal(foo(0)))) :-
 		duplicated_directive(_, _, object, duplicated_meta_non_terminal_directive, Term, _, _).
+
+	test(duplicated_directives_linter_flag_07, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(duplicated_directive(file, 1-2, object, duplicated_directives, (:- dynamic(a/1))), core), Tokens).
+
+	test(duplicated_directives_linter_flag_08, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(duplicated_directive(file, 1-2, object, duplicated_directives, (:- dynamic(a/1)), original, 3-4), core), Tokens).
+
+	test(duplicated_directives_linter_flag_09, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(duplicated_predicate_reference(file, 1-2, object, duplicated_directives, a/1, original, 3-4), core), Tokens).
+
+	test(duplicated_directives_linter_flag_10, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(duplicated_non_terminal_reference(file, 1-2, object, duplicated_directives, a//1, original, 3-4), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

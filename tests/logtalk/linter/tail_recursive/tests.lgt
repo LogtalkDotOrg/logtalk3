@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``tail_recursive`` linter flag.'
 	]).
 
@@ -44,6 +44,12 @@
 
 	test(tail_recursive_linter_flag_02, exists(Term == foo//1)) :-
 		tail_recursive(_, _, object, tail_recursive, Term).
+
+	test(tail_recursive_linter_flag_03, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_tail_recursive_non_terminal(file, 1-2, object, tail_recursive, foo//1), core), Tokens).
+
+	test(tail_recursive_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_tail_recursive_predicate(file, 1-2, object, tail_recursive, foo/1), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

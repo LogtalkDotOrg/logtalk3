@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``catchall_catch`` linter flag.'
 	]).
 
@@ -41,6 +41,9 @@
 
 	test(catchall_catch_linter_flag_01, variant(Term, catch(bar, _, baz))) :-
 		catchall_catch(_, _, object, catchall_catch, Term).
+
+	test(catchall_catch_linter_flag_02, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(catchall_catch(file, 1-2, object, catchall_catch, foo), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

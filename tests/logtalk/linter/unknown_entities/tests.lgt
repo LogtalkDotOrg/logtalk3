@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``unknown_entities`` linter flag.'
 	]).
 
@@ -66,13 +66,25 @@
 	test(unknown_entities_linter_flag_05, exists(Entity == some_category)) :-
 		unknown_category(_, _, object, unknown_entities, Entity).
 
+	test(unknown_entities_linter_flag_06, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(reference_to_unknown_object(file, 1-2, object, unknown_entities, foo), core), Tokens).
+
+	test(unknown_entities_linter_flag_07, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(reference_to_unknown_protocol(file, 1-2, object, unknown_entities, foo), core), Tokens).
+
+	test(unknown_entities_linter_flag_08, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(reference_to_unknown_category(file, 1-2, object, unknown_entities, foo), core), Tokens).
+
 	:- if(current_logtalk_flag(modules, supported)).
 
-		test(unknown_entities_linter_flag_06, exists(Entity == unknown_module)) :-
+		test(unknown_entities_linter_flag_09, exists(Entity == unknown_module)) :-
 			unknown_module(_, _, object, unknown_entities, Entity).
 
-		test(unknown_entities_linter_flag_07, exists(Entity == some_module)) :-
+		test(unknown_entities_linter_flag_10, exists(Entity == some_module)) :-
 			unknown_module(_, _, object, unknown_entities, Entity).
+
+		test(unknown_entities_linter_flag_11, true(type::valid(ground(list), Tokens))) :-
+			phrase(logtalk::message_tokens(reference_to_unknown_module(file, 1-2, object, unknown_entities, foo), core), Tokens).
 
 	:- endif.
 

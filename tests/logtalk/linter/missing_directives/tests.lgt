@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``missing_directives`` linter flag.'
 	]).
 
@@ -47,6 +47,12 @@
 
 	test(missing_directives_linter_flag_03, exists(Directive-Term == meta_non_terminal/1-foo//1)) :-
 		missing_directive(_, _, object, missing_directives, Directive, Term).
+
+	test(missing_directives_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(missing_scope_directive(file, 1-2, object, missing_directives, (dynamic)/1), a), core), Tokens).
+
+	test(missing_directives_linter_flag_05, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(missing_predicate_directive(file, 1-2, object, missing_directives, (dynamic)/1), a), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

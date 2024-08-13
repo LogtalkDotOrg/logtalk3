@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``redefined_built_ins`` linter flag.'
 	]).
 
@@ -48,6 +48,12 @@
 
 	test(redefined_built_ins_linter_flag_02, exists(Term == write/1)) :-
 		redefined_prolog_built_in(_, _, object, redefined_built_ins, Term).
+
+	test(redefined_built_ins_linter_flag_03, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(redefined_logtalk_built_in_predicate(file, 1-2, object, redefined_built_ins, a/1), core), Tokens).
+
+	test(redefined_built_ins_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(redefined_prolog_built_in_predicate(file, 1-2, object, redefined_built_ins, a/1), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

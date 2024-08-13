@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``undefined_predicates`` linter flag.'
 	]).
 
@@ -44,6 +44,12 @@
 
 	test(undefined_predicates_linter_flag_02, exists(Term == quux//0)) :-
 		undefined_predicate(_, _, object, undefined_predicates, Term).
+
+	test(undefined_predicates_linter_flag_03, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(declared_static_predicate_called_but_not_defined(file, 1-2, object, undefined_predicates, foo/1), core), Tokens).
+
+	test(undefined_predicates_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(declared_static_non_terminal_called_but_not_defined(file, 1-2, object, undefined_predicates, foo//1), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-12,
+		date is 2024-08-13,
 		comment is 'Unit tests for the ``redefined_operators`` linter flag.'
 	]).
 
@@ -51,6 +51,12 @@
 
 	test(redefined_operators_linter_flag_03, exists(Term == op(123, xfx, @>))) :-
 		redefined_operator(_, _, object, redefined_operators, _, Term).
+
+	test(redefined_operators_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(redefined_operator(file, 1-2, op(600, xfy, ::), op(777, xfy, ::)), core), Tokens).
+
+	test(redefined_operators_linter_flag_05, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(redefined_operator(file, 1-2, object, redefined_operators, op(600, xfy, ::), op(777, xfy, ::)), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
