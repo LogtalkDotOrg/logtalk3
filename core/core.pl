@@ -17358,6 +17358,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_check_for_tautology_or_falsehood_goal'(compile(user,_,_), Goal) :-
 	(	ground(Goal),
+		% exclude already handled linter check for (\=)/2 goals
+		\+ functor(Goal, (\=), 2),
 		'$lgt_compiler_flag'(always_true_or_false_goals, warning),
 		(	'$lgt_candidate_tautology_or_falsehood_goal'(Goal)
 		;	'$lgt_candidate_tautology_or_falsehood_goal_hook'(Goal)

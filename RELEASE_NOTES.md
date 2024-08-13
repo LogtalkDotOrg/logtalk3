@@ -44,6 +44,9 @@ Kouznetsov for the bug report.
 directive when an `info/2` or `mode/2` directive exists would misreport the
 existing directive.
 
+* FIXED: Duplicated linter warnings when checking if `(\=)/2` goals are always
+true or false.
+
 Documentation
 -------------
 
