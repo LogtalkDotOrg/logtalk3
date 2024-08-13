@@ -49,10 +49,10 @@
 		missing_directive(_, _, object, missing_directives, Directive, Term).
 
 	test(missing_directives_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(missing_scope_directive(file, 1-2, object, missing_directives, (dynamic)/1), a), core), Tokens).
+		phrase(logtalk::message_tokens(missing_scope_directive(file, 1-2, object, missing_directives, (dynamic)/1, a), core), Tokens).
 
 	test(missing_directives_linter_flag_05, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(missing_predicate_directive(file, 1-2, object, missing_directives, (dynamic)/1), a), core), Tokens).
+		phrase(logtalk::message_tokens(missing_predicate_directive(file, 1-2, object, missing_directives, (dynamic)/1, a), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
