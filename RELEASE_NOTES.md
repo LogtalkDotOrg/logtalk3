@@ -53,6 +53,13 @@ predicate.
 * FIXED: Handbook documentation of the `logtalk::ask_question/5` predicate.
 Thanks to Paul Brown for the bug report.
 
+Library
+-------
+
+* CHANGED: The `arbitrary` library check if null is a valid character for
+the current backend to not rely on exceptions but instead use the backend
+identifier.
+
 Tools
 -----
 

@@ -23,9 +23,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:35:0,
+		version is 2:35:1,
 		author is 'Paulo Moura',
-		date is 2024-03-07,
+		date is 2024-08-13,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -1381,9 +1381,12 @@
 		arbitrary(list(character_code(CharSet),Length), Codes),
 		atom_codes(Arbitrary, Codes).
 
-	% some Prolog systems either don't support the null character or
+	% some Prolog backends either don't support the null character or
 	% provide buggy results when calling char_code/2 with a code of zero
-	:- if((catch(char_code(Char,0), _, fail), atom_length(Char,1))).
+	:- if((
+		current_logtalk_flag(prolog_dialect, Dialect),
+		(Dialect == eclipse; Dialect == ji; Dialect == sicstus; Dialect == swi; Dialect == tau; Dialect == trealla)
+	)).
 		first_valid_character_code(0).
 	:- else.
 		first_valid_character_code(1).
