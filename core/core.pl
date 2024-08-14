@@ -13310,7 +13310,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'((Pred1; Pred2), _, _, _, Ctx) :-
 	nonvar(Pred1),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(disjunctions, warning),
 	(	Pred1 == ! ->
 		Message = suspicious_cut_in_disjunction(File, Lines, Type, Entity, Head)
 	;	Pred1 = (Goal, _), Goal == !,
@@ -13319,7 +13319,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_comp_ctx_head'(Ctx, Head),
 	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(warning(suspicious_calls), Message),
+	'$lgt_print_message'(warning(disjunctions), Message),
 	fail.
 
 '$lgt_compile_body'((Pred1; Pred2), _, _, _, Ctx) :-
