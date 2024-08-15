@@ -39,13 +39,13 @@
 	:- dynamic(suspicious_cut_in_disjunction/6).
 
 	setup :-
-%		cleanup,
+		cleanup,
 		logtalk_compile(test_entities, [disjunctions(warning)]).
 
-%	cleanup :-
-%		retractall(disjunction_as_body(_, _, _, _, _, _)),
-%		retractall(suspicious_cut_in_disjunction(_, _, _, _, _)),
-%		retractall(suspicious_cut_in_disjunction(_, _, _, _, _, _)).
+	cleanup :-
+		retractall(disjunction_as_body(_, _, _, _, _, _)),
+		retractall(suspicious_cut_in_disjunction(_, _, _, _, _)),
+		retractall(suspicious_cut_in_disjunction(_, _, _, _, _, _)).
 
 	test(disjunctions_linter_flag_01, exists(Head == foo)) :-
 		disjunction_as_body(_, _, object, disjunctions, Head, _).
