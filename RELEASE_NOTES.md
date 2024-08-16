@@ -50,6 +50,12 @@ existing directive.
 * FIXED: Duplicated linter warnings when checking if `(\=)/2` goals are always
 true or false.
 
+Prolog adapter and integration files
+------------------------------------
+
+* CHANGED: The default value of the `underscore_variables` linter flag to
+`dont_care` for all supported backends.
+
 Documentation
 -------------
 

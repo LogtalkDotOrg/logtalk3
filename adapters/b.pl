@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for B-Prolog 8.1 and later versions
-%  Last updated on May 5, 2024
+%  Last updated on August 16, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -328,7 +328,7 @@ findall(Term, Goal, List, Tail) :-
 '$lgt_default_flag'(grammar_rules, warning).
 '$lgt_default_flag'(arithmetic_expressions, warning).
 '$lgt_default_flag'(suspicious_calls, warning).
-'$lgt_default_flag'(underscore_variables, singletons).
+'$lgt_default_flag'(underscore_variables, dont_care).
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
 '$lgt_default_flag'(dynamic_declarations, deny).

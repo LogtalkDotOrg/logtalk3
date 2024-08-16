@@ -923,14 +923,10 @@ Lint flags
 .. index:: pair: underscore_variables; Flag
 
 ``underscore_variables(Option)``
-   Controls the interpretation of variables that start with an
-   underscore (excluding the anonymous variable) that occur once in a
-   term as either don't care variables or singleton variables. Possible
-   option values are ``dont_care`` and ``singletons`` (the usual
-   default). Note that, depending on your Prolog compiler, the
-   ``read_term/3`` built-in predicate may report variables that start
-   with an underscore as singleton variables. There is no standard
-   behavior, hence this option.
+   Controls the interpretation of variables that start with an underscore
+   (excluding the anonymous variable) that occur once in a term as either
+   don't care variables or singleton variables. Possible option values are
+   ``dont_care`` (the usual default) and ``singletons``.
 
 .. _flag_naming:
 .. index:: pair: naming; Flag

@@ -410,7 +410,7 @@
 '$lgt_default_flag'(grammar_rules, warning).
 '$lgt_default_flag'(arithmetic_expressions, warning).
 '$lgt_default_flag'(suspicious_calls, warning).
-'$lgt_default_flag'(underscore_variables, singletons).
+'$lgt_default_flag'(underscore_variables, dont_care).
 % optional features compilation flags:
 '$lgt_default_flag'(complements, deny).
 '$lgt_default_flag'(dynamic_declarations, deny).
