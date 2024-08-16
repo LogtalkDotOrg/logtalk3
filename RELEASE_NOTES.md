@@ -59,6 +59,8 @@ Prolog adapter and integration files
 Documentation
 -------------
 
+* IMPROVED: Handbook documentation of the `underscore_variables` linter flag.
+
 * IMPROVED: Handbook documentation of the `logtalk::message_prefix_stream/4`
 predicate.
 
