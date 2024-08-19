@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-16,
+		date is 2024-08-19,
 		comment is 'Unit tests for the ``portability`` linter flag.'
 	]).
 
@@ -81,7 +81,8 @@
 	:- dynamic(missing_function/5).
 
 	setup :-
-		cleanup.
+		cleanup,
+		logtalk_compile(test_entities, [portability(warning), deprecated(silent)]).
 
 	cleanup :-
 		retractall(prolog_dialect_goal_expansion(_, _, _, _, _, _)),
@@ -102,55 +103,82 @@
 		retractall(non_standard_arithmetic_function_call(_, _, _, _, _)),
 		retractall(missing_function(_, _, _, _, _)).
 
-	test(portability_linter_flag_01, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(prolog_dialect_goal_expansion(file, 1-2, object, portability, foo, bar), core), Tokens).
+	test(portability_linter_flag_01, exists(Directive == [file])) :-
+		top_level_shortcut_as_directive(_, _, Directive).
 
-	test(portability_linter_flag_02, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(prolog_dialect_goal_expansion(file, 1-2, foo, bar), core), Tokens).
+	test(portability_linter_flag_02, exists(Directive == logtalk_load(library))) :-
+		logtalk_built_in_predicate_as_directive(_, _, Directive).
 
-	test(portability_linter_flag_03, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(prolog_dialect_term_expansion(file, 1-2, object, portability, foo, bar), core), Tokens).
+	test(portability_linter_flag_03, exists(Directive == write(hello))) :-
+		non_standard_file_directive(_, _, Directive).
 
-	test(portability_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(prolog_dialect_term_expansion(file, 1-2, foo, bar), core), Tokens).
+	test(portability_linter_flag_04, exists(Predicate-Option == (open/4)-encoding('UTF-16'))) :-
+		non_standard_predicate_option(_, _, object, portability, Predicate, Option).
 
-	test(portability_linter_flag_05, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(compiling_proprietary_prolog_directive(file, 1-2, object, portability, foo), core), Tokens).
+	test(portability_linter_flag_05, exists(variant(Predicate-Option, (read_term/2)-lines(_, _)))) :-
+		non_standard_predicate_option(_, _, object, portability, Predicate, Option).
 
-	test(portability_linter_flag_06, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(compiling_query_as_initialization_goal(file, 1-2, object, portability, foo), core), Tokens).
+	test(portability_linter_flag_06, exists(Flag == encoding)) :-
+		non_standard_prolog_flag(_, _, object, portability, Flag).
 
-	test(portability_linter_flag_07, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(logtalk_built_in_predicate_as_directive(file, 1-2, logtalk_load(foo)), core), Tokens).
+	test(portability_linter_flag_07, exists(Flag-Value == double_quotes-string)) :-
+		non_standard_prolog_flag_value(_, _, object, portability, Flag, Value).
 
-	test(portability_linter_flag_08, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(top_level_shortcut_as_directive(file, 1-2, [foo]), core), Tokens).
+	test(portability_linter_flag_08, exists(Predicate == tell/1), [condition(predicate_property(tell(_), built_in))]) :-
+		non_standard_predicate_call(_, _, object, portability, Predicate).
 
-	test(portability_linter_flag_09, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(non_standard_file_directive(file, 1-2, foo), core), Tokens).
+	test(portability_linter_flag_09, exists(Function == popcount/1), [condition(catch(_ is popcount(42), _, fail))]) :-
+		non_standard_arithmetic_function_call(_, _, object, portability, Function).
 
 	test(portability_linter_flag_10, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(non_standard_prolog_flag(file, 1-2, object, portability, foo), core), Tokens).
+		phrase(logtalk::message_tokens(prolog_dialect_goal_expansion(file, 1-2, object, portability, foo, bar), core), Tokens).
 
 	test(portability_linter_flag_11, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(non_standard_prolog_flag(file, 1-2, foo), core), Tokens).
+		phrase(logtalk::message_tokens(prolog_dialect_goal_expansion(file, 1-2, foo, bar), core), Tokens).
 
 	test(portability_linter_flag_12, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(non_standard_prolog_flag_value(file, 1-2, object, portability, foo, bar), core), Tokens).
+		phrase(logtalk::message_tokens(prolog_dialect_term_expansion(file, 1-2, object, portability, foo, bar), core), Tokens).
 
 	test(portability_linter_flag_13, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(non_standard_prolog_flag_value(file, 1-2, foo, bar), core), Tokens).
+		phrase(logtalk::message_tokens(prolog_dialect_term_expansion(file, 1-2, foo, bar), core), Tokens).
 
 	test(portability_linter_flag_14, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(non_standard_predicate_option(file, 1-2, object, portability, read_term/3, foo(bar)), core), Tokens).
+		phrase(logtalk::message_tokens(compiling_proprietary_prolog_directive(file, 1-2, object, portability, foo), core), Tokens).
 
 	test(portability_linter_flag_15, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(non_standard_predicate_call(file, 1-2, object, portability, foo/1), core), Tokens).
+		phrase(logtalk::message_tokens(compiling_query_as_initialization_goal(file, 1-2, object, portability, foo), core), Tokens).
 
 	test(portability_linter_flag_16, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(non_standard_arithmetic_function_call(file, 1-2, object, portability, foo/1), core), Tokens).
+		phrase(logtalk::message_tokens(logtalk_built_in_predicate_as_directive(file, 1-2, logtalk_load(foo)), core), Tokens).
 
 	test(portability_linter_flag_17, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(top_level_shortcut_as_directive(file, 1-2, [foo]), core), Tokens).
+
+	test(portability_linter_flag_18, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_standard_file_directive(file, 1-2, foo), core), Tokens).
+
+	test(portability_linter_flag_19, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_standard_prolog_flag(file, 1-2, object, portability, foo), core), Tokens).
+
+	test(portability_linter_flag_20, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_standard_prolog_flag(file, 1-2, foo), core), Tokens).
+
+	test(portability_linter_flag_21, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_standard_prolog_flag_value(file, 1-2, object, portability, foo, bar), core), Tokens).
+
+	test(portability_linter_flag_22, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_standard_prolog_flag_value(file, 1-2, foo, bar), core), Tokens).
+
+	test(portability_linter_flag_23, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_standard_predicate_option(file, 1-2, object, portability, read_term/3, foo(bar)), core), Tokens).
+
+	test(portability_linter_flag_24, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_standard_predicate_call(file, 1-2, object, portability, foo/1), core), Tokens).
+
+	test(portability_linter_flag_25, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(non_standard_arithmetic_function_call(file, 1-2, object, portability, foo/1), core), Tokens).
+
+	test(portability_linter_flag_26, true(type::valid(ground(list), Tokens))) :-
 		phrase(logtalk::message_tokens(missing_function(file, 1-2, object, portability, foo/1), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).

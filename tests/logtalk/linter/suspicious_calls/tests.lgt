@@ -37,11 +37,11 @@
 	:- dynamic(suspicious_call/6).
 
 	setup :-
-%		cleanup,
+		cleanup,
 		logtalk_compile(test_entities, [suspicious_calls(warning)]).
 
-%	cleanup :-
-%		retractall(suspicious_call(_, _, _, _, _, _)).
+	cleanup :-
+		retractall(suspicious_call(_, _, _, _, _, _)).
 
 	test(suspicious_calls_linter_flag_01, exists(variant(Call-Alternatives, (::recursive(A))-[recursive(A), ^^recursive(A)]))) :-
 		suspicious_call(_, _, object, suspicious_calls, Call, Alternatives).
