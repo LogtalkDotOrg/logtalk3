@@ -25,8 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-19,
+		date is 2024-08-20,
 		comment is 'Unit tests for the ``portability`` linter flag.'
+	]).
+
+	:- uses(lgtunit, [
+		variant/2
 	]).
 
 	:- private(prolog_dialect_goal_expansion/6).

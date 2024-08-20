@@ -21,13 +21,16 @@
 
 :- object(deprecated).
 
-	:- dynamic(bar/0).
+	:- if(predicate_property(assert(_), built_in)).
+		:- dynamic(bar/0).
+		foo :-
+			assert(bar).
+	:- endif.
 
-	foo :-
-		assert(bar).
-
-	bar :-
-		not(baz(_)).
+	:- if(predicate_property(not(_), built_in)).
+		bar :-
+			not(baz(_)).
+	:- endif.
 
 	baz(_).
 

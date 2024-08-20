@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-13,
+		date is 2024-08-20,
 		comment is 'Unit tests for the ``deprecated`` linter flag.'
 	]).
 
@@ -53,10 +53,10 @@
 		retractall(deprecated_predicate(_, _, _, _, _, _)),
 		retractall(deprecated_predicate(_, _, _, _, _)).
 
-	test(deprecated_linter_flag_01, exists(Term == assert/1)) :-
+	test(deprecated_linter_flag_01, exists(Term == assert/1), [condition(predicate_property(assert(_), built_in))]) :-
 		deprecated_predicate(_, _, object, deprecated, Term, _).
 
-	test(deprecated_linter_flag_02, exists(Term == not/1)) :-
+	test(deprecated_linter_flag_02, exists(Term == not/1), [condition(predicate_property(not(_), built_in))]) :-
 		deprecated_predicate(_, _, object, deprecated, Term, _).
 
 	test(deprecated_linter_flag_03, true(type::valid(ground(list), Tokens))) :-
