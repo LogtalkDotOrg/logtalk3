@@ -113,6 +113,8 @@ APIs Texinfo files using the `help` tool.
 * FIXED: The Docker file for building the portable image to properly define
 the `INFOPATH` and `MANPATH` environment variables.
 
+* FIXED: The macOS portfile for the changes in the MacPorts 2.10 version.
+
 
 3.81.0 - July 16, 2024
 ======================

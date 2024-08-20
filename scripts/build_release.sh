@@ -3,10 +3,10 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on September 19, 2022
+##   Last updated on August 20, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -91,7 +91,7 @@ sha256="$(openssl dgst -sha256 "logtalk-$version.tar.bz2" | sed 's/^.* //')"
 rmd160="$(openssl dgst -rmd160 "logtalk-$version.tar.bz2" | sed 's/^.* //')"
 sudo mkdir -p /opt/local/var/macports/distfiles/logtalk
 sudo cp -f "logtalk-$version.tar.bz2" "/opt/local/var/macports/distfiles/logtalk/logtalk-$version.tar.bz2"
-cd /opt/local/var/macports/sources/rsync.macports.org/release/tarballs/ports/lang/logtalk/ || exit 1
+cd /opt/local/var/macports/sources/rsync.macports.org/macports/release/tarballs/ports/lang/logtalk/ || exit 1
 sudo mv -f Portfile Portfile.old
 sudo cp "$directory/logtalk-$version/scripts/macos/Portfile" .
 sudo sed -e "s/^version.*/version $version/" -i '' Portfile
