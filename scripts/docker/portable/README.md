@@ -46,7 +46,7 @@ Build arguments and their defaults
 ----------------------------------
 
 * `LOGTALK_VERSION` (`master`)
-* `LOGTALK_TEXINFO_VERSION` (3.81.0)
+* `LOGTALK_TEXINFO_VERSION` (3.82.0)
 
 Valid identifiers are as shown in the Logtalk GitHub repository at
 [release names](https://github.com/LogtalkDotOrg/logtalk3/releases).
