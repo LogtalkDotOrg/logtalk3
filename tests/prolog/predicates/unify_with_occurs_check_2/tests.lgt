@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2023-04-09,
+		date is 2024-08-20,
 		comment is 'Unit tests for the ISO Prolog standard unify_with_occurs_check/2 built-in predicate.'
 	]).
 
@@ -103,5 +103,8 @@
 
 	test(lgt_unify_with_occurs_check_2_19, true(X == Y)) :-
 		{unify_with_occurs_check(f(X,X), f(Y,Y))}.
+
+	test(lgt_unify_with_occurs_check_2_20, true) :-
+		{unify_with_occurs_check(f(1,X), f(1,X))}.
 
 :- end_object.

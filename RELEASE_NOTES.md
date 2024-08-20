@@ -99,6 +99,9 @@ Tests
 
 * ADDED: Additional tests for the built-in database and reflection methods.
 
+* ADDED: Additional test for the Prolog standard `unify_with_occurs_check/2`
+built-in predicate.
+
 Installers and installation scripts
 -----------------------------------
 
