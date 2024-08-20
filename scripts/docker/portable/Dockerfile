@@ -24,6 +24,8 @@
 
 FROM ubuntu:jammy
 
+LABEL org.opencontainers.image.authors="pmoura@logtalk.org"
+
 VOLUME ["/source"]
 
 # Arguments

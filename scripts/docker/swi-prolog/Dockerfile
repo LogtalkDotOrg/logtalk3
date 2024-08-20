@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on June 5, 2024
+##   Last updated on August 20, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 FROM swipl:stable
 
-MAINTAINER Paulo Moura <pmoura@logtalk.org>
+LABEL org.opencontainers.image.authors="pmoura@logtalk.org"
 
 VOLUME ["/source", "/logtalkuser_prefix"]
 
@@ -34,8 +34,8 @@ ENV LOGTALK_INSTALL_PREFIX=/usr/local
 ENV LOGTALKHOME=$LOGTALK_INSTALL_PREFIX/share/logtalk
 ENV LOGTALKUSER=/logtalkuser_prefix/logtalk
 ENV PATH=$PATH:$LOGTALKHOME/tools/diagrams:$LOGTALKHOME/tools/lgtdoc/xml:$LOGTALKHOME/scripts:$LOGTALKHOME/integration
-ENV MANPATH=$MANPATH:$LOGTALKHOME/man
-ENV INFOPATH=$INFOPATH:$LOGTALKHOME/docs:$LOGTALKHOME/manuals
+ENV MANPATH=$LOGTALKHOME/man:
+ENV INFOPATH=$LOGTALKHOME/docs:$LOGTALKHOME/manuals:
 
 # Preparation for downloading
 ENV LOGTALK_DOWNLOAD=/download

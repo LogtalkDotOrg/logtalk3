@@ -25,7 +25,11 @@ RELEASE NOTES
 3.83.0 - September ??, 2024
 ===========================
 
+Installers and installation scripts
+-----------------------------------
 
+* FIXED: The Docker file for building the SWI-Prolog based image to properly
+define the `INFOPATH` and `MANPATH` environment variables.
 
 
 3.82.0 - August 20, 2024
