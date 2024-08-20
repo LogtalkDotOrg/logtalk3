@@ -35,6 +35,9 @@ controlled by the `disjunctions` flag.
 or Logtalk built-in predicates as directives are now controlled by the
 `portability` flag.
 
+* CHANGED: The deprecated `assert/1` predicate is no longer declared as a
+built-in method.
+
 * ADDED: Support for runtime constructed messages for the built-in methods.
 Thanks to Alex Kouznetsov for the bug report.
 

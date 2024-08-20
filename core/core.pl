@@ -24269,7 +24269,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_method_spec'(predicate_property(_,_), p(p(p)), predicate_property((::), *), 1).
 % database methods
 '$lgt_built_in_method_spec'(abolish(_), p(p(p)), abolish((::)), 1).
-'$lgt_built_in_method_spec'(assert(_), p(p(p)), assert((::)), 1).	% just for compatibility with old code!
 '$lgt_built_in_method_spec'(asserta(_), p(p(p)), asserta((::)), 1).
 '$lgt_built_in_method_spec'(assertz(_), p(p(p)), assertz((::)), 1).
 '$lgt_built_in_method_spec'(clause(_,_), p(p(p)), clause((::), *), 1).
