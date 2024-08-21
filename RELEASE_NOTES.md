@@ -25,6 +25,12 @@ RELEASE NOTES
 3.83.0 - September ??, 2024
 ===========================
 
+Tests
+-----
+
+* IMPROVED: Tests for the Prolog `call/1` control construct to delay expected
+errors to runtime.
+
 Installers and installation scripts
 -----------------------------------
 

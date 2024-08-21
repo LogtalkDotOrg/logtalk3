@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,9 +44,9 @@ one(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2023-06-02,
+		date is 2024-08-21,
 		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
 	]).
 
@@ -62,8 +62,9 @@ one(1).
 		{call((fail, _X))}.
 
 	test(iso_call_1_04, false) :-
-		X = 1,
-		{call((fail, call(X)))}.
+		% try to delay to runtime the binding of the call/1 argument
+		one(One),
+		{call((fail, call(One)))}.
 
 	test(iso_call_1_05, error(instantiation_error)) :-
 		^^suppress_text_output,
@@ -86,31 +87,36 @@ one(1).
 
 	test(iso_call_1_10, errors([type_error(callable,1), type_error(callable,':'(user,1))])) :-
 		^^suppress_text_output,
-		X = 1,
-		{call((write(3), call(X)))}.
+		% try to delay to runtime the binding of the call/1 argument
+		one(One),
+		{call((write(3), call(One)))}.
 
 	test(iso_call_1_11, error(instantiation_error)) :-
 		{call(_X)}.
 
 	test(iso_call_1_12, errors([type_error(callable,1), type_error(callable,':'(user,1))])) :-
-		X = 1,
-		{call(X)}.
+		% try to delay to runtime the binding of the call/1 argument
+		one(One),
+		{call(One)}.
 
 	test(iso_call_1_13, errors([type_error(callable,(fail,1)), type_error(callable,1)])) :-
 		% the second exception term is a common but not strictly conforming alternative
-		X = 1,
-		{call((fail, X))}.
+		% try to delay to runtime the binding of the call/1 argument
+		one(One),
+		{call((fail, One))}.
 
 	test(iso_call_1_14, errors([type_error(callable,(write(3),1)), type_error(callable,1)])) :-
 		% the second exception term is a common but not strictly conforming alternative
 		^^suppress_text_output,
-		X = 1,
-		{call((write(3), X))}.
+		% try to delay to runtime the binding of the call/1 argument
+		one(One),
+		{call((write(3), One))}.
 
 	test(iso_call_1_15, errors([type_error(callable,(1;true)), type_error(callable,1)])) :-
 		% the second exception term is a common but not strictly conforming alternative
-		X = 1,
-		{call((X; true))}.
+		% try to delay to runtime the binding of the call/1 argument
+		one(One),
+		{call((One; true))}.
 
 	% tests from the Logtalk portability work
 
@@ -133,5 +139,7 @@ one(1).
 	% auxiliary predicates
 
 	goal(one(_)).
+
+	one(1).
 
 :- end_object.
