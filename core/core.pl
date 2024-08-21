@@ -17150,14 +17150,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_fix_disjunction_left_side'(@callable, -callable)
+% '$lgt_fix_disjunction_left_side'(@var_or_callable, -callable)
 %
 % check if the compilation of the disjunction left-side produced an if-then or
 % a soft-cut (e.g. due to goal-expansion) and fix it if necessary to avoid
 % converting the disjunction into an if-then-else or a soft-cut with an else part
 
 '$lgt_fix_disjunction_left_side'(Goal0, Goal) :-
-	(	Goal0 = (_ -> _) ->
+	(	var(Goal0) ->
+		Goal = Goal0
+	;	Goal0 = (_ -> _) ->
 		Goal = (Goal0, true)
 	;	Goal0 = '*->'(_, _),
 		'$lgt_predicate_property'('*->'(_, _), built_in) ->

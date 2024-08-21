@@ -25,6 +25,12 @@ RELEASE NOTES
 3.83.0 - September ??, 2024
 ===========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: Disjunction optimization bug when the left-side is a variable and the
+disjunction is an argument of the `call/1` control construct.
+
 Tests
 -----
 
