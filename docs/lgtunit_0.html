@@ -214,8 +214,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 18:0:0</div>
-<div class="line"><strong>Date:</strong> 2024-06-28</div>
+<div class="line"><strong>Version:</strong> 19:0:0</div>
+<div class="line"><strong>Date:</strong> 2024-08-24</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -465,7 +465,7 @@
 </section>
 <section id="run-test-sets-1">
 <span id="lgtunit-0-run-test-sets-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code></a><a class="headerlink" href="#run-test-sets-1" title="Link to this heading"></a></h3>
-<p>Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.</p>
+<p>Runs two or more test sets as a unified set generating a single code coverage report if one is requested. When there is a single test set, it is equivalent to sending the message <code class="docutils literal notranslate"><span class="pre">run/0</span></code> to the test set. Trivially succeeds when the argument is an empty list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -479,7 +479,24 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run_test_sets(+list(object_identifier))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">run_test_sets(+list(object))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">TestObjects</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">TestObjects</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(object),TestObjects)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">TestObject</span></code> of the <code class="docutils literal notranslate"><span class="pre">TestObjects</span></code> list is not an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,TestObject)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

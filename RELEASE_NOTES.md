@@ -31,6 +31,12 @@ Logtalk compiler and runtime
 * FIXED: Disjunction optimization bug when the left-side is a variable and the
 disjunction is an argument of the `call/1` control construct.
 
+Tools
+-----
+
+* CHANGED: The `lgtunit` tool `run_test_sets/1` predicate to also accept a list
+with a single test set or an empty list as argument.
+
 Tests
 -----
 

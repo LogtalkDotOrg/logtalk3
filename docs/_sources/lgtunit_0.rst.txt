@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 18:0:0
-| **Date:** 2024-06-28
+| **Version:** 19:0:0
+| **Date:** 2024-08-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -130,7 +130,7 @@ Runs the unit tests, writing the results to the specified file. Mode can be eith
 ``run_test_sets/1``
 ^^^^^^^^^^^^^^^^^^^
 
-Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.
+Runs two or more test sets as a unified set generating a single code coverage report if one is requested. When there is a single test set, it is equivalent to sending the message ``run/0`` to the test set. Trivially succeeds when the argument is an empty list.
 
 | **Compilation flags:**
 |    ``static``
@@ -138,7 +138,15 @@ Runs two or more test sets as a unified set generating a single code coverage re
 | **Template:**
 |    ``run_test_sets(TestObjects)``
 | **Mode and number of proofs:**
-|    ``run_test_sets(+list(object_identifier))`` - ``zero_or_one``
+|    ``run_test_sets(+list(object))`` - ``one``
+
+| **Exceptions:**
+|    ``TestObjects`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``TestObjects`` is neither a partial list nor a list:
+|        ``type_error(list(object),TestObjects)``
+|    An element ``TestObject`` of the ``TestObjects`` list is not an existing object:
+|        ``existence_error(object,TestObject)``
 
 
 ------------

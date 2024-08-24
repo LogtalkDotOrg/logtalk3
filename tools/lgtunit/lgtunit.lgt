@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 18:0:0,
+		version is 19:0:0,
 		author is 'Paulo Moura',
-		date is 2024-06-28,
+		date is 2024-08-24,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -67,10 +67,15 @@
 	]).
 
 	:- public(run_test_sets/1).
-	:- mode(run_test_sets(+list(object_identifier)), zero_or_one).
+	:- mode(run_test_sets(+list(object)), one).
 	:- info(run_test_sets/1, [
-		comment is 'Runs two or more test sets as a unified set generating a single code coverage report if one is requested. Fails if the list does not contains at least two test objects.',
-		argnames is ['TestObjects']
+		comment is 'Runs two or more test sets as a unified set generating a single code coverage report if one is requested. When there is a single test set, it is equivalent to sending the message ``run/0`` to the test set. Trivially succeeds when the argument is an empty list.',
+		argnames is ['TestObjects'],
+		exceptions is [
+			'``TestObjects`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``TestObjects`` is neither a partial list nor a list' - type_error(list(object), 'TestObjects'),
+			'An element ``TestObject`` of the ``TestObjects`` list is not an existing object' - existence_error(object, 'TestObject')
+		]
 	]).
 
 	:- public(test/1).
@@ -905,15 +910,24 @@
 		change_directory(Directory),
 		set_output(Output).
 
-	run_test_sets([First, Next| Others]) :-
+	run_test_sets(TestSets) :-
+		context(Context),
+		check(list(object), TestSets, Context),
+		run_test_sets_checked(TestSets).
+
+	run_test_sets_checked([TestSet1, TestSet2| TestSets]) :-
+		!,
 		retractall(running_test_sets_),
 		assertz(running_test_sets_),
 		reset_coverage_results,
 		write_tests_header,
-		run_test_sets_([First, Next| Others]),
-		write_coverage_results([First, Next| Others]),
+		run_test_sets_([TestSet1, TestSet2| TestSets]),
+		write_coverage_results([TestSet1, TestSet2| TestSets]),
 		write_tests_footer,
 		retractall(running_test_sets_).
+	run_test_sets_checked([TestSet]) :-
+		[TestSet::run].
+	run_test_sets_checked([]).
 
 	run_test_sets_([]).
 	run_test_sets_([TestSet| TestSets]) :-
