@@ -209,6 +209,36 @@ using the :ref:`reflection API <reflection_reflection>` and are visible
 to the :doc:`../devtools/lgtdoc` tool (which includes them in the generated
 documentation).
 
+
+.. _documenting_descriptions
+
+Describing predicates
+~~~~~~~~~~~~~~~~~~~~~
+
+The value of the ``comment`` key, possibly extended with the ``remarks`` key,
+should describe a predicate purpose and, when applicable, the circumstances
+under which a call may fail. Descriptions should be consistent across library
+and application APIs. Some guidelines:
+
+1. When starting the description with a verb, use the *third-person singular
+simple present form*. For example, write ``'Runs ...'``, ``'Calls ...'``,
+``'Compares ...'``, ``'Parses ...'``, ``'Generates ...'``, ``'Converts ...'``,
+``'Creates ...'``, ``'Maps ...'``, ``'Merges ...'``, ``'Finds ...'``, etc.
+
+2. Predicates that are pure logical relations often have descriptions starting
+with ``'True iff ...'`` or ``'True if ...'``.
+
+3. Predicates with multiple solutions often have descriptions starting with
+``'Enumerates, by backtracing, all ...'`` or ``'Enumerates, by backtracing,
+the ...'``.
+
+4. Predicate call failure conditions often have descriptions with one or more
+sentences starting with ``'Fails when ...'`` or ``'Fails if ...'``.
+
+If you're not sure how best to describe a predicate, look for examples in the
+Logtalk libraries and developer tools APIs documentation.
+
+
 .. _documenting_exceptions:
 
 Documenting predicate exceptions

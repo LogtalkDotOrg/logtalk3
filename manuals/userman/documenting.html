@@ -84,6 +84,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#documenting-directives">Documenting directives</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#entity-directives">Entity directives</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#predicate-directives">Predicate directives</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#describing-predicates">Describing predicates</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#documenting-predicate-exceptions">Documenting predicate exceptions</a></li>
 </ul>
 </li>
@@ -312,6 +313,26 @@ keywords. All key-value pairs can also be retrieved programmatically
 using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and are visible
 to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool (which includes them in the generated
 documentation).</p>
+</section>
+<section id="describing-predicates">
+<h3>Describing predicates<a class="headerlink" href="#describing-predicates" title="Link to this heading"></a></h3>
+<p>The value of the <code class="docutils literal notranslate"><span class="pre">comment</span></code> key, possibly extended with the <code class="docutils literal notranslate"><span class="pre">remarks</span></code> key,
+should describe a predicate purpose and, when applicable, the circumstances
+under which a call may fail. Descriptions should be consistent across library
+and application APIs. Some guidelines:</p>
+<p>1. When starting the description with a verb, use the <em>third-person singular
+simple present form</em>. For example, write <code class="docutils literal notranslate"><span class="pre">'Runs</span> <span class="pre">...'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Calls</span> <span class="pre">...'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'Compares</span> <span class="pre">...'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Parses</span> <span class="pre">...'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Generates</span> <span class="pre">...'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Converts</span> <span class="pre">...'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'Creates</span> <span class="pre">...'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Maps</span> <span class="pre">...'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Merges</span> <span class="pre">...'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Finds</span> <span class="pre">...'</span></code>, etc.</p>
+<p>2. Predicates that are pure logical relations often have descriptions starting
+with <code class="docutils literal notranslate"><span class="pre">'True</span> <span class="pre">iff</span> <span class="pre">...'</span></code> or <code class="docutils literal notranslate"><span class="pre">'True</span> <span class="pre">if</span> <span class="pre">...'</span></code>.</p>
+<p>3. Predicates with multiple solutions often have descriptions starting with
+<code class="docutils literal notranslate"><span class="pre">'Enumerates,</span> <span class="pre">by</span> <span class="pre">backtracing,</span> <span class="pre">all</span> <span class="pre">...'</span></code> or <code class="docutils literal notranslate"><span class="pre">'Enumerates,</span> <span class="pre">by</span> <span class="pre">backtracing,</span>
+<span class="pre">the</span> <span class="pre">...'</span></code>.</p>
+<p>4. Predicate call failure conditions often have descriptions with one or more
+sentences starting with <code class="docutils literal notranslate"><span class="pre">'Fails</span> <span class="pre">when</span> <span class="pre">...'</span></code> or <code class="docutils literal notranslate"><span class="pre">'Fails</span> <span class="pre">if</span> <span class="pre">...'</span></code>.</p>
+<p>If you’re not sure how best to describe a predicate, look for examples in the
+Logtalk libraries and developer tools APIs documentation.</p>
 </section>
 <section id="documenting-predicate-exceptions">
 <span id="documenting-exceptions"></span><h3>Documenting predicate exceptions<a class="headerlink" href="#documenting-predicate-exceptions" title="Link to this heading"></a></h3>

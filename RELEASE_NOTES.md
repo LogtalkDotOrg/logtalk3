@@ -31,6 +31,12 @@ Logtalk compiler and runtime
 * FIXED: Disjunction optimization bug when the left-side is a variable and the
 disjunction is an argument of the `call/1` control construct.
 
+Documentation
+-------------
+
+* ADDED: Handbook section with guidelines for describing predicates in `info/2`
+directives.
+
 Tools
 -----
 
