@@ -146,8 +146,7 @@ Mode directive
 
 Often predicates can only be called using specific argument patterns.
 The valid arguments and instantiation modes of those arguments can be
-documented by using the :ref:`directives_mode_2` directive. For
-example:
+documented using the :ref:`directives_mode_2` directive. For example:
 
 ::
 
@@ -155,16 +154,16 @@ example:
 
 .. _predicates_mode_instantiation:
 
-The first directive argument describes a valid calling mode. The minimum
+The first directive argument describes a valid *calling mode*. The minimum
 information will be the instantiation mode of each argument. The first
-four possible values are described in [ISO95]_). The remaining two can
-also be found in use in some Prolog systems.
+four possible values are described e.g. in the ISO Prolog Core standard
+[ISO95]_). The remaining two can also be found in use in some Prolog systems.
 
 ``+``
    Argument must be instantiated (but not necessarily ground).
 ``-``
-   Argument should be a free (non-instantiated) variable (when bound,
-   the call will unify the returned term with the given term).
+   Argument should be a free (non-instantiated) variable. When bound,
+   the call will unify the computed term with the given argument.
 ``?``
    Argument can either be instantiated or free.
 ``@``
@@ -172,21 +171,28 @@ also be found in use in some Prolog systems.
 ``++``
    Argument must be ground.
 ``--``
-   Argument must be unbound. Used mainly when returning an opaque term.
+   Argument must be unbound. Used mainly when returning an opaque term
+   (e.g. a stream handle).
+
+Note that the ``+`` and ``@`` instantiation modes have the same meaning
+for atomic arguments. E.g. you can write either ``+atom`` or ``@atom``
+but the first alternative is preferred.
 
 These six mode atoms are also declared as prefix operators by the
 Logtalk compiler. This makes it possible to include type information
-for each argument like in the example above. Some possible type
+for each argument as in the example above. Some possible type
 values are: ``event``, ``object``, ``category``, ``protocol``,
 ``callable``, ``term``, ``nonvar``, ``var``, ``atomic``, ``atom``,
 ``number``, ``integer``, ``float``, ``compound``, and ``list``. The
 first four are Logtalk specific. The remaining are common Prolog types.
 We can also use our own types that can be either atoms or ground
-compound terms. See the ``types`` library documentation for details.
+compound terms. See the :ref:`library_types` library documentation
+for an extensive list of pre-defined types that cover most common use
+cases.
 
 .. _predicates_mode_number_of_proofs:
 
-The second directive argument documents the number of proofs, but not
+The second directive argument documents the *number of proofs*, but not
 necessarily distinct solutions, for the specified mode. As an example,
 the ``member(X, [1,1,1,1])`` goal have only one distinct solution but four
 proofs for that solution. Note that different modes for the same predicate
@@ -235,7 +241,21 @@ ISO Prolog ``atom_concat/3`` built-in predicate we would write:
 ::
 
    :- mode(atom_concat(?atom, ?atom, +atom), one_or_more).
-   :- mode(atom_concat(+atom, +atom, -atom), zero_or_one).
+   :- mode(atom_concat(+atom, +atom, -atom), one).
+
+The first ``mode/2`` directive specifies that the ``atom_concat/3`` predicate
+can be used to split an atom into a prefix and a suffix. The second ``mode/2``
+directive specifies that concatenating two atoms results in a new atom. There
+are often several alternatives ``mode/2`` directives that can be used to
+specify a predicate. For example, an alternative to the second ``mode/2``
+directive above would be:
+
+::
+
+   :- mode(atom_concat(+atom, +atom, ?atom), zero_or_one).
+
+In this case, the same information is provided by both alternatives. But the
+first alternative is simpler and thus preferred.
 
 Some old Prolog compilers supported some sort of mode directives to improve
 performance. To the best of my knowledge, there is no modern Prolog compiler
@@ -1616,7 +1636,9 @@ standard ``error/2`` exception terms:
 :ref:`methods_evaluation_error_1`,
 :ref:`methods_resource_error_1`,
 :ref:`methods_syntax_error_1`, and
-:ref:`methods_system_error_0`.
+:ref:`methods_system_error_0`. When using these methods, the second argument
+of the ``error/2`` exception term is bound to the execution context (as it
+would be provided by the :ref:`methods_context_1` method).
 
 .. _predicates_database:
 

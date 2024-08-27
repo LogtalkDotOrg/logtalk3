@@ -285,20 +285,19 @@ message sending.</p>
 <span id="predicates-mode"></span><h3>Mode directive<a class="headerlink" href="#mode-directive" title="Link to this heading"></a></h3>
 <p>Often predicates can only be called using specific argument patterns.
 The valid arguments and instantiation modes of those arguments can be
-documented by using the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> directive. For
-example:</p>
+documented using the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(member(<span class="o">?</span>term, <span class="o">?</span>list), zero_or_more).
 </pre></div>
 </div>
-<p id="predicates-mode-instantiation">The first directive argument describes a valid calling mode. The minimum
+<p id="predicates-mode-instantiation">The first directive argument describes a valid <em>calling mode</em>. The minimum
 information will be the instantiation mode of each argument. The first
-four possible values are described in <a class="reference internal" href="../bibliography.html#iso95" id="id1"><span>[ISO95]</span></a>). The remaining two can
-also be found in use in some Prolog systems.</p>
+four possible values are described e.g. in the ISO Prolog Core standard
+<a class="reference internal" href="../bibliography.html#iso95" id="id1"><span>[ISO95]</span></a>). The remaining two can also be found in use in some Prolog systems.</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">+</span></code></dt><dd><p>Argument must be instantiated (but not necessarily ground).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">-</span></code></dt><dd><p>Argument should be a free (non-instantiated) variable (when bound,
-the call will unify the returned term with the given term).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">-</span></code></dt><dd><p>Argument should be a free (non-instantiated) variable. When bound,
+the call will unify the computed term with the given argument.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">?</span></code></dt><dd><p>Argument can either be instantiated or free.</p>
 </dd>
@@ -306,19 +305,25 @@ the call will unify the returned term with the given term).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">++</span></code></dt><dd><p>Argument must be ground.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">--</span></code></dt><dd><p>Argument must be unbound. Used mainly when returning an opaque term.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">--</span></code></dt><dd><p>Argument must be unbound. Used mainly when returning an opaque term
+(e.g. a stream handle).</p>
 </dd>
 </dl>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> instantiation modes have the same meaning
+for atomic arguments. E.g. you can write either <code class="docutils literal notranslate"><span class="pre">+atom</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;atom</span></code>
+but the first alternative is preferred.</p>
 <p>These six mode atoms are also declared as prefix operators by the
 Logtalk compiler. This makes it possible to include type information
-for each argument like in the example above. Some possible type
+for each argument as in the example above. Some possible type
 values are: <code class="docutils literal notranslate"><span class="pre">event</span></code>, <code class="docutils literal notranslate"><span class="pre">object</span></code>, <code class="docutils literal notranslate"><span class="pre">category</span></code>, <code class="docutils literal notranslate"><span class="pre">protocol</span></code>,
 <code class="docutils literal notranslate"><span class="pre">callable</span></code>, <code class="docutils literal notranslate"><span class="pre">term</span></code>, <code class="docutils literal notranslate"><span class="pre">nonvar</span></code>, <code class="docutils literal notranslate"><span class="pre">var</span></code>, <code class="docutils literal notranslate"><span class="pre">atomic</span></code>, <code class="docutils literal notranslate"><span class="pre">atom</span></code>,
 <code class="docutils literal notranslate"><span class="pre">number</span></code>, <code class="docutils literal notranslate"><span class="pre">integer</span></code>, <code class="docutils literal notranslate"><span class="pre">float</span></code>, <code class="docutils literal notranslate"><span class="pre">compound</span></code>, and <code class="docutils literal notranslate"><span class="pre">list</span></code>. The
 first four are Logtalk specific. The remaining are common Prolog types.
 We can also use our own types that can be either atoms or ground
-compound terms. See the <code class="docutils literal notranslate"><span class="pre">types</span></code> library documentation for details.</p>
-<p id="predicates-mode-number-of-proofs">The second directive argument documents the number of proofs, but not
+compound terms. See the <a class="reference internal" href="../libraries/types.html#library-types"><span class="std std-ref">types</span></a> library documentation
+for an extensive list of pre-defined types that cover most common use
+cases.</p>
+<p id="predicates-mode-number-of-proofs">The second directive argument documents the <em>number of proofs</em>, but not
 necessarily distinct solutions, for the specified mode. As an example,
 the <code class="docutils literal notranslate"><span class="pre">member(X,</span> <span class="pre">[1,1,1,1])</span></code> goal have only one distinct solution but four
 proofs for that solution. Note that different modes for the same predicate
@@ -361,9 +366,20 @@ source or sink).</p>
 mode directives. For example, to document the possible use modes of the
 ISO Prolog <code class="docutils literal notranslate"><span class="pre">atom_concat/3</span></code> built-in predicate we would write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(<span class="k">atom_concat</span>(<span class="o">?</span>atom, <span class="o">?</span>atom, <span class="o">+</span>atom), one_or_more).
-<span class="p">:- </span><span class="k">mode</span>(<span class="k">atom_concat</span>(<span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">-</span>atom), zero_or_one).
+<span class="p">:- </span><span class="k">mode</span>(<span class="k">atom_concat</span>(<span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">-</span>atom), one).
 </pre></div>
 </div>
+<p>The first <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directive specifies that the <code class="docutils literal notranslate"><span class="pre">atom_concat/3</span></code> predicate
+can be used to split an atom into a prefix and a suffix. The second <code class="docutils literal notranslate"><span class="pre">mode/2</span></code>
+directive specifies that concatenating two atoms results in a new atom. There
+are often several alternatives <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives that can be used to
+specify a predicate. For example, an alternative to the second <code class="docutils literal notranslate"><span class="pre">mode/2</span></code>
+directive above would be:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(<span class="k">atom_concat</span>(<span class="o">+</span>atom, <span class="o">+</span>atom, <span class="o">?</span>atom), zero_or_one).
+</pre></div>
+</div>
+<p>In this case, the same information is provided by both alternatives. But the
+first alternative is simpler and thus preferred.</p>
 <p>Some old Prolog compilers supported some sort of mode directives to improve
 performance. To the best of my knowledge, there is no modern Prolog compiler
 supporting this kind of directive for that purpose. The current Logtalk version
@@ -1534,7 +1550,9 @@ standard <code class="docutils literal notranslate"><span class="pre">error/2</s
 <a class="reference internal" href="../refman/methods/evaluation_error_1.html#methods-evaluation-error-1"><span class="std std-ref">evaluation_error/1</span></a>,
 <a class="reference internal" href="../refman/methods/resource_error_1.html#methods-resource-error-1"><span class="std std-ref">resource_error/1</span></a>,
 <a class="reference internal" href="../refman/methods/syntax_error_1.html#methods-syntax-error-1"><span class="std std-ref">syntax_error/1</span></a>, and
-<a class="reference internal" href="../refman/methods/system_error_0.html#methods-system-error-0"><span class="std std-ref">system_error/0</span></a>.</p>
+<a class="reference internal" href="../refman/methods/system_error_0.html#methods-system-error-0"><span class="std std-ref">system_error/0</span></a>. When using these methods, the second argument
+of the <code class="docutils literal notranslate"><span class="pre">error/2</span></code> exception term is bound to the execution context (as it
+would be provided by the <a class="reference internal" href="../refman/methods/context_1.html#methods-context-1"><span class="std std-ref">context/1</span></a> method).</p>
 </section>
 <section id="database-methods">
 <span id="predicates-database"></span><h3>Database methods<a class="headerlink" href="#database-methods" title="Link to this heading"></a></h3>

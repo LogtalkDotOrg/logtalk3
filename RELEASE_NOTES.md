@@ -37,6 +37,8 @@ Documentation
 * ADDED: Handbook section with guidelines for describing predicates in `info/2`
 directives.
 
+* IMPROVED: Handbook section on the `mode/2` predicate directive.
+
 Tools
 -----
 
