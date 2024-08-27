@@ -81,13 +81,10 @@
 <li class="toctree-l2"><a class="reference internal" href="printing.html">Printing messages and asking questions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="expansion.html">Term and goal expansion</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Documenting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#documenting-directives">Documenting directives</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#entity-directives">Entity directives</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#predicate-directives">Predicate directives</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#describing-predicates">Describing predicates</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#documenting-predicate-exceptions">Documenting predicate exceptions</a></li>
-</ul>
-</li>
+<li class="toctree-l3"><a class="reference internal" href="#entity-documenting-directives">Entity documenting directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#predicate-documenting-directives">Predicate documenting directives</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#describing-predicates">Describing predicates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documenting-predicate-exceptions">Documenting predicate exceptions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#processing-and-viewing-documenting-files">Processing and viewing documenting files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inline-formatting-in-comments-text">Inline formatting in comments text</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagrams">Diagrams</a></li>
@@ -155,18 +152,16 @@ type, and compilation mode (static or dynamic), the entity relations with
 other entities, and a description of any declared predicates (name,
 compilation mode, scope, …). The XML documentation files can be enriched
 with arbitrary user-defined information, either about an entity or about its
-predicates, by using the two directives described in the next section. The
-<code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool includes POSIX and Windows scripts for converting the XML
-documentation files to several final formats (such as HTML and PDF).</p>
-<section id="documenting-directives">
-<span id="id1"></span><h2>Documenting directives<a class="headerlink" href="#documenting-directives" title="Link to this heading"></a></h2>
+predicates, by using documentation directives. The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool includes
+POSIX and Windows scripts for converting the XML documentation files to
+several final formats (such as HTML and PDF).</p>
 <p>Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
 directives complement other directives that also provide important
 documentation information such as the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> and
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directives.</p>
-<section id="entity-directives">
-<span id="documenting-entity"></span><h3>Entity directives<a class="headerlink" href="#entity-directives" title="Link to this heading"></a></h3>
+<section id="entity-documenting-directives">
+<span id="documenting-entity"></span><h2>Entity documenting directives<a class="headerlink" href="#entity-documenting-directives" title="Link to this heading"></a></h2>
 <p>Arbitrary user-defined entity information can be represented using the
 <a class="reference internal" href="../refman/directives/info_1.html#directives-info-1"><span class="std std-ref">info/1</span></a> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>([
@@ -236,8 +231,8 @@ programmatically using the <a class="reference internal" href="reflection.html#r
 are visible to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool (which includes them in the
 generated documentation).</p>
 </section>
-<section id="predicate-directives">
-<span id="documenting-predicate"></span><h3>Predicate directives<a class="headerlink" href="#predicate-directives" title="Link to this heading"></a></h3>
+<section id="predicate-documenting-directives">
+<span id="documenting-predicate"></span><h2>Predicate documenting directives<a class="headerlink" href="#predicate-documenting-directives" title="Link to this heading"></a></h2>
 <p>Arbitrary user-defined predicate information can be represented using
 the <a class="reference internal" href="../refman/directives/info_2.html#directives-info-2"><span class="std std-ref">info/2</span></a> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">info</span>(<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>, [
@@ -315,7 +310,7 @@ to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class=
 documentation).</p>
 </section>
 <section id="describing-predicates">
-<h3>Describing predicates<a class="headerlink" href="#describing-predicates" title="Link to this heading"></a></h3>
+<span id="documenting-descriptions"></span><h2>Describing predicates<a class="headerlink" href="#describing-predicates" title="Link to this heading"></a></h2>
 <p>The value of the <code class="docutils literal notranslate"><span class="pre">comment</span></code> key, possibly extended with the <code class="docutils literal notranslate"><span class="pre">remarks</span></code> key,
 should describe a predicate purpose and, when applicable, the circumstances
 under which a call may fail. Descriptions should be consistent across library
@@ -335,7 +330,7 @@ sentences starting with <code class="docutils literal notranslate"><span class="
 Logtalk libraries and developer tools APIs documentation.</p>
 </section>
 <section id="documenting-predicate-exceptions">
-<span id="documenting-exceptions"></span><h3>Documenting predicate exceptions<a class="headerlink" href="#documenting-predicate-exceptions" title="Link to this heading"></a></h3>
+<span id="documenting-exceptions"></span><h2>Documenting predicate exceptions<a class="headerlink" href="#documenting-predicate-exceptions" title="Link to this heading"></a></h2>
 <p>As described above, the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> predicate directive supports an
 <code class="docutils literal notranslate"><span class="pre">exceptions</span></code> key that allows us to list all exceptions that may occur
 when calling a predicate. For example:</p>
@@ -384,7 +379,6 @@ Prolog Core standard and this Handbook is advised. Some examples:</p>
 <p>Other classes of errors have a less rigid style. In case of doubt,
 look for examples in this Handbook, in the APIs documentation, and
 in standard documents.</p>
-</section>
 </section>
 <section id="processing-and-viewing-documenting-files">
 <span id="documenting-processing"></span><h2>Processing and viewing documenting files<a class="headerlink" href="#processing-and-viewing-documenting-files" title="Link to this heading"></a></h2>

@@ -31,14 +31,9 @@ type, and compilation mode (static or dynamic), the entity relations with
 other entities, and a description of any declared predicates (name,
 compilation mode, scope, ...). The XML documentation files can be enriched
 with arbitrary user-defined information, either about an entity or about its
-predicates, by using the two directives described in the next section. The
-``lgtdoc`` tool includes POSIX and Windows scripts for converting the XML
-documentation files to several final formats (such as HTML and PDF).
-
-.. _documenting_directives:
-
-Documenting directives
-----------------------
+predicates, by using documentation directives. The ``lgtdoc`` tool includes
+POSIX and Windows scripts for converting the XML documentation files to
+several final formats (such as HTML and PDF).
 
 Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
@@ -48,8 +43,8 @@ documentation information such as the :ref:`directives_mode_2` and
 
 .. _documenting_entity:
 
-Entity directives
-~~~~~~~~~~~~~~~~~
+Entity documenting directives
+-----------------------------
 
 Arbitrary user-defined entity information can be represented using the
 :ref:`directives_info_1` directive:
@@ -126,8 +121,8 @@ generated documentation).
 
 .. _documenting_predicate:
 
-Predicate directives
-~~~~~~~~~~~~~~~~~~~~
+Predicate documenting directives
+--------------------------------
 
 Arbitrary user-defined predicate information can be represented using
 the :ref:`directives_info_2` directive:
@@ -210,10 +205,10 @@ to the :doc:`../devtools/lgtdoc` tool (which includes them in the generated
 documentation).
 
 
-.. _documenting_descriptions
+.. _documenting_descriptions:
 
 Describing predicates
-~~~~~~~~~~~~~~~~~~~~~
+---------------------
 
 The value of the ``comment`` key, possibly extended with the ``remarks`` key,
 should describe a predicate purpose and, when applicable, the circumstances
@@ -242,7 +237,7 @@ Logtalk libraries and developer tools APIs documentation.
 .. _documenting_exceptions:
 
 Documenting predicate exceptions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------
 
 As described above, the ``info/2`` predicate directive supports an
 ``exceptions`` key that allows us to list all exceptions that may occur
