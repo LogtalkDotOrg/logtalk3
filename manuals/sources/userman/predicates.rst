@@ -1087,8 +1087,8 @@ rewritten as:
    yes
 
 Lambda expressions may also contain *lambda free variables*. I.e. variables
-that are global to the lambda expression. Consider the following variant
-of the previous example:
+that are global to the lambda expression and shared with the surrounding
+meta-call context. Consider the following variant of the previous example:
 
 .. code-block:: text
 
@@ -1185,9 +1185,38 @@ evaluated for possible optimizations.
    Variables listed in lambda parameters must not be shared with
    other goals in a clause.
 
-An optimizing meta-predicate and lambda expression compiler, based on
-the :ref:`term-expansion mechanism <expansion_expansion>`, is provided
-as a standard library for practical performance.
+An optimizing meta-predicate and lambda expression compiler, based on the
+:ref:`term-expansion mechanism <expansion_expansion>`, is provided as a
+standard library for practical performance.
+
+A common use of lambda expressions as closure meta-arguments is to workaround
+closures always being extended by *appending* additional argument to construct
+a goal. For example, assume that we want to filer a list of atoms by a given
+length. We can use the standard ``atom_length/2`` predicate despite the
+argument order by writing:
+
+::
+
+   filter(Length, Atoms, Filtered) :-
+       meta::include({Length}/[Atom]>>atom_length(Atom,Length), Atoms, Filtered).
+
+But Logtalk supports a faster alternative by using predicate aliases to change
+the argument order when calling library or built-in predicates:
+
+::
+
+   :- uses(user, [
+      atom_length(Atom, Length) as length_atom(Length, Atom)
+   ]).
+
+   filter(Length, Atoms, Filtered) :-
+       meta::include(length_atom(Length), Atoms, Filtered).
+
+In this case, the performance is no longer dependent on compiling away lambda
+expressions. The resulting code is also easier to read (and thus debug and
+maintain). But the ``uses/2`` directive is implicitly defining an auxiliary
+predicate, which is exactly what we wanted to avoid in the first place by
+using a lambda expression.
 
 .. _predicates_redefining:
 

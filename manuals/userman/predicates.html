@@ -1074,8 +1074,8 @@ yes
 </pre></div>
 </div>
 <p>Lambda expressions may also contain <em>lambda free variables</em>. I.e. variables
-that are global to the lambda expression. Consider the following variant
-of the previous example:</p>
+that are global to the lambda expression and shared with the surrounding
+meta-call context. Consider the following variant of the previous example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- between(1, 3, N), meta::map({N}/[X,Y]&gt;&gt;(Y is N*X), [1,2,3], L).
 N = 1, L = [1,2,3] ;
 N = 2, L = [2,4,6] ;
@@ -1160,9 +1160,33 @@ evaluated for possible optimizations.</p>
 <p>Variables listed in lambda parameters must not be shared with
 other goals in a clause.</p>
 </div>
-<p>An optimizing meta-predicate and lambda expression compiler, based on
-the <a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>, is provided
-as a standard library for practical performance.</p>
+<p>An optimizing meta-predicate and lambda expression compiler, based on the
+<a class="reference internal" href="expansion.html#expansion-expansion"><span class="std std-ref">term-expansion mechanism</span></a>, is provided as a
+standard library for practical performance.</p>
+<p>A common use of lambda expressions as closure meta-arguments is to workaround
+closures always being extended by <em>appending</em> additional argument to construct
+a goal. For example, assume that we want to filer a list of atoms by a given
+length. We can use the standard <code class="docutils literal notranslate"><span class="pre">atom_length/2</span></code> predicate despite the
+argument order by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>filter(<span class="nv">Length</span>, <span class="nv">Atoms</span>, <span class="nv">Filtered</span>) <span class="o">:-</span>
+    meta<span class="o">::</span>include(<span class="k">{</span><span class="nv">Length</span><span class="k">}</span><span class="o">/</span>[<span class="nv">Atom</span>]<span class="o">&gt;&gt;</span><span class="k">atom_length</span>(<span class="nv">Atom</span>,<span class="nv">Length</span>), <span class="nv">Atoms</span>, <span class="nv">Filtered</span>).
+</pre></div>
+</div>
+<p>But Logtalk supports a faster alternative by using predicate aliases to change
+the argument order when calling library or built-in predicates:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(user, [
+   <span class="k">atom_length</span>(<span class="nv">Atom</span>, <span class="nv">Length</span>) <span class="o">as</span> length_atom(<span class="nv">Length</span>, <span class="nv">Atom</span>)
+]).
+
+filter(<span class="nv">Length</span>, <span class="nv">Atoms</span>, <span class="nv">Filtered</span>) <span class="o">:-</span>
+    meta<span class="o">::</span>include(length_atom(<span class="nv">Length</span>), <span class="nv">Atoms</span>, <span class="nv">Filtered</span>).
+</pre></div>
+</div>
+<p>In this case, the performance is no longer dependent on compiling away lambda
+expressions. The resulting code is also easier to read (and thus debug and
+maintain). But the <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive is implicitly defining an auxiliary
+predicate, which is exactly what we wanted to avoid in the first place by
+using a lambda expression.</p>
 </section>
 <section id="redefining-built-in-predicates">
 <span id="predicates-redefining"></span><h3>Redefining built-in predicates<a class="headerlink" href="#redefining-built-in-predicates" title="Link to this heading"></a></h3>
