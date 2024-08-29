@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2023-06-21,
+		date is 2024-08-29,
 		comment is 'Unit tests for the uses/2 built-in directive.'
 	]).
 
@@ -94,5 +94,8 @@
 
 	test(uses_2_16, true(L == [0,1])) :-
 		findall(X, uses_2_test_object_3(dyn)::r(d2(X)), L).
+
+	test(uses_2_17, true(L == [de,kl])) :-
+		uses_2_test_object_4::filter(2, [abc,de,f,ghij,kl], L).
 
 :- end_object.

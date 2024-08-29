@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* FIXED: Compiler bug when using a `uses/2` directive to change the order of
+the arguments of a predicate and using the predicate alias as a closure.
+
 * FIXED: Disjunction optimization bug when the left-side is a variable and the
 disjunction is an argument of the `call/1` control construct.
 

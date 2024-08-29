@@ -119,6 +119,35 @@
 :- end_object.
 
 
+% test object for handling of uses/2 directives that are used
+% to change the order of arguments of a predicate
+
+:- object(uses_2_test_object_4).
+
+	:- uses(user, [
+		atom_length(Atom, Length) as length_atom(Length, Atom)
+	]).
+
+	:- public(filter/3).
+	filter(Length, Atoms, Filtered) :-
+		include(length_atom(Length), Atoms, Filtered).
+
+	:- meta_predicate(include_(*, 1, *)).
+	include_([], _, []).
+	include_([Arg| Args], Closure, Included) :-
+		(	call(Closure, Arg) ->
+			Included = [Arg| Rest]
+		;	Included = Rest
+		),
+		include_(Args, Closure, Rest).
+
+	:- meta_predicate(include(1, *, *)).
+	include(Closure, List, Included) :-
+		include_(List, Closure, Included).
+
+:- end_object.
+
+
 % test entities for using a parametric variable in the directive
 
 :- protocol(foo).

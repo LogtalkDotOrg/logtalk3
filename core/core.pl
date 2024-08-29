@@ -11679,17 +11679,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	'$lgt_check_predicate_name_conflict'(uses, Alias, AliasFunctor/Arity),
 		% allow for runtime use by adding a local definition that calls the remote definition
-		% except when the remote is a built-in predicate in "user" with no alias being defined
-		% or a built-in method that would clash with the local definition
-		(	Obj == user,
-			'$lgt_predicate_property'(Original, built_in) ->
-			% no need for a local definition
-			true
-		;	% add local definition
-			'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-			'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-			'$lgt_compile_clause'((Alias :- Obj::Original), AuxCtx)
-
+		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+		(	Obj == user ->
+			'$lgt_compile_clause'((Alias :- {Original}), AuxCtx)
+		;	'$lgt_compile_clause'((Alias :- Obj::Original), AuxCtx)
 		),
 		% ensure that this uses/2 directive is found when looking for senders of this message
 		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
@@ -11947,16 +11941,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		)
 	;	'$lgt_check_predicate_name_conflict'(use_module, Alias, AliasFunctor/Arity),
 		% allow for runtime use by adding a local definition that calls the remote definition
-		% except when the remote is a built-in predicate in "user" with no alias being defined
-		% or a built-in method that would clash with the local definition
-		(	Module == user,
-			'$lgt_predicate_property'(Original, built_in) ->
-			% no need for a local definition
-			true
-		;	% add local definition
-			'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
-			'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
-			'$lgt_compile_clause'((Alias :- ':'(Module,Original)), AuxCtx)
+		'$lgt_comp_ctx'(Ctx,    _, _, _, _, _, _, Prefix, _, _, ExCtx, _,                _, Lines, _),
+		'$lgt_comp_ctx'(AuxCtx, _, _, _, _, _, _, Prefix, _, _, ExCtx, compile(aux,_,_), _, Lines, _),
+		(	Module == user ->
+			'$lgt_compile_clause'((Alias :- {Original}), AuxCtx)
+		;	'$lgt_compile_clause'((Alias :- ':'(Module,Original)), AuxCtx)
 		),
 		'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 		% ensure that this use_module/2 directive is found when looking for callers of this module predicate
@@ -16658,6 +16647,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Alias, Caller, TPred, '$lgt_debug'(goal(Alias, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_use_module_predicate_'(Module, Pred, Alias, Ctx, _, _),
+	(	Pred == Alias ->
+		% no alias is defined
+		true
+	;	% check that we're renaming a predicate but not (also) changing its argument order
+		Pred =.. [_| PredArguments],
+		Alias =.. [_| AliasArguments],
+		PredArguments == AliasArguments
+	),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	'$lgt_add_referenced_module_predicate'(Mode, Module, Pred, Alias, Head),
@@ -16671,6 +16668,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Alias, Caller, TPred, DPred, Ctx) :-
 	'$lgt_pp_uses_predicate_'(Obj, Pred, Alias, Ctx, _, _),
+	(	Pred == Alias ->
+		% no alias is defined
+		true
+	;	% check that we're renaming a predicate but not (also) changing its argument order
+		Pred =.. [_| PredArguments],
+		Alias =.. [_| AliasArguments],
+		PredArguments == AliasArguments
+	),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
 	(	Obj == user ->
@@ -18009,9 +18014,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_extend_closure'(Closure, ExtArgs, Goal, Ctx) :-
 	'$lgt_extend_closure_basic'(Closure, ExtArgs, Alias),
-	(	'$lgt_pp_uses_predicate_'(Object, Original, Alias, Ctx, _, _) ->
+	(	'$lgt_pp_uses_predicate_'(Object, Original, Alias, Ctx, _, _),
+		(	Original == Alias ->
+			% no alias is defined
+			true
+		;	% check that we're renaming a predicate but not (also) changing its argument order
+			Original =.. [_| OriginalArguments],
+			Alias =.. [_| AliasArguments],
+			OriginalArguments == AliasArguments
+		) ->
 		Goal = Object::Original
-	;	'$lgt_pp_use_module_predicate_'(Module, Original, Alias, Ctx, _, _) ->
+	;	'$lgt_pp_use_module_predicate_'(Module, Original, Alias, Ctx, _, _),
+		(	Original == Alias ->
+			% no alias is defined
+			true
+		;	% check that we're renaming a predicate but not (also) changing its argument order
+			Original =.. [_| OriginalArguments],
+			Alias =.. [_| AliasArguments],
+			OriginalArguments == AliasArguments
+		) ->
 		Goal = ':'(Module, Original)
 	;	Goal = Alias
 	).
