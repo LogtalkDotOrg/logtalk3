@@ -16620,7 +16620,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, [_| _], _, _, compile(_,_,_), _, _, _),
 	% we're compiling a clause for a meta-predicate as the list of meta-variables is not empty
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta, _, _) ->
-		% user-defined meta-predicate
+		% local user-defined meta-predicate
 		true
 	;	'$lgt_prolog_meta_predicate'(Pred, Meta, predicate) ->
 		% proprietary built-in meta-predicate declared in the adapter files
@@ -18849,6 +18849,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_message_to_object'(Pred, Obj, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	% check for a user-defined linter warning
 	once(logtalk_linter_hook(Obj::Pred, Flag, File, Lines, Type, Entity, Warning)),
 	nonvar(Flag),
 	'$lgt_valid_flag'(Flag),

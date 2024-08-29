@@ -1172,10 +1172,13 @@ lambda parameter variable is used elsewhere in a clause. Such cases
 are either programming errors, when the variable appears before the
 lambda expression, or bad programming style, when the variable is used
 after the lambda expression. These linter warnings are controlled by
-the :ref:`lambda_variables <flag_lambda_variables>` flag. Note, however,
-that the dynamic features of the language and lack of sufficient
-information at compile time may prevent the compiler of checking all
-uses of lambda expressions. 
+the :ref:`lambda_variables <flag_lambda_variables>` flag. Note that the
+dynamic features of the language and lack of sufficient information at
+compile time may prevent the compiler of checking all uses of lambda
+expressions. To improve linter coverage, compile code using lambda
+expressions with the :ref:`optimize flag <flag_optimize>` turned on
+as that will result in additional cases of meta-arguments being
+evaluated for possible optimizations.
 
 .. warning::
 
