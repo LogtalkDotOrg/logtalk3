@@ -39,6 +39,8 @@ directives.
 
 * IMPROVED: Handbook section on the `mode/2` predicate directive.
 
+* IMPROVED: Handbook section on lambda expressions.
+
 Tools
 -----
 

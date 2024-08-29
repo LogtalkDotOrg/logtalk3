@@ -1054,9 +1054,8 @@ is not part of the meta-argument itself.
 Lambda expressions
 ~~~~~~~~~~~~~~~~~~
 
-The use of `lambda
-expressions <https://en.wikipedia.org/wiki/Lambda_calculus>`_ as
-meta-predicate goal and :term:`closure` arguments often saves writing
+The use of `lambda expressions <https://en.wikipedia.org/wiki/Lambda_calculus>`_
+as meta-predicate goal and :term:`closure` arguments often saves writing
 auxiliary predicates for the sole purpose of calling the meta-predicates.
 A simple example of a lambda expression is:
 
@@ -1070,9 +1069,12 @@ In this example, a lambda expression, ``[X,Y]>>(Y is 2*X)``, is used as
 an argument to the ``map/3`` list mapping predicate, defined in the
 library object ``meta``, in order to double the elements of a list of
 integers. Using a lambda expression avoids writing an auxiliary
-predicate for the sole purpose of doubling the list elements. The lambda
-parameters are represented by the list ``[X,Y]``, which is connected to
-the lambda goal, ``(Y is 2*X)``, by the ``(>>)/2`` operator.
+predicate for the sole purpose of doubling the list elements. The *lambda
+parameters* are represented by the list ``[X,Y]``, which is connected to
+the *lambda goal*, ``(Y is 2*X)``, by the ``(>>)/2`` operator. The ``map/3``
+predicate calls the lambda goal with fresh/unique variables, represented
+by the ``X`` and ``Y`` parameters, for each pair of elements of the second
+and third list arguments.
 
 Currying is supported. I.e. it is possible to write a lambda expression
 whose goal is another lambda expression. The above example can be
@@ -1084,9 +1086,23 @@ rewritten as:
    Ys = [2,4,6]
    yes
 
-Lambda expressions may also contain lambda free variables. I.e.
-variables that are global to the lambda expression. For example, using
-GNU Prolog as the backend compiler, we can write:
+Lambda expressions may also contain *lambda free variables*. I.e. variables
+that are global to the lambda expression. Consider the following variant
+of the previous example:
+
+.. code-block:: text
+
+   | ?- between(1, 3, N), meta::map({N}/[X,Y]>>(Y is N*X), [1,2,3], L).
+   N = 1, L = [1,2,3] ;
+   N = 2, L = [2,4,6] ;
+   N = 3, L = [3,6,9]
+   yes
+
+In this case, the lambda free variable, ``N``, bound by the ``between/3``
+goal, is fixed across all implicit calls made by the ``map/3`` goal.
+
+A second example of free variables in a lambda expression using GNU Prolog
+as the backend compiler:
 
 .. code-block:: text
 
