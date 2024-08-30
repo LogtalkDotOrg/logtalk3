@@ -16650,10 +16650,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Pred == Alias ->
 		% no alias is defined
 		true
-	;	% check that we're renaming a predicate but not (also) changing its argument order
+	;	% check that we're renaming a predicate but not (also) changing its argument order as that
+		% would break using the closure as a meta-argument when appending the additional arguments
 		Pred =.. [_| PredArguments],
 		Alias =.. [_| AliasArguments],
-		PredArguments == AliasArguments
+		PredArguments == AliasArguments ->
+		true
+	;	% we're renaming a predicate; use instead the generated auxiliary predicate
+		fail
 	),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
@@ -16671,10 +16675,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Pred == Alias ->
 		% no alias is defined
 		true
-	;	% check that we're renaming a predicate but not (also) changing its argument order
+	;	% check that we're renaming a predicate but not (also) changing its argument order as that
+		% would break using the closure as a meta-argument when appending the additional arguments
 		Pred =.. [_| PredArguments],
 		Alias =.. [_| AliasArguments],
-		PredArguments == AliasArguments
+		PredArguments == AliasArguments ->
+		true
+	;	% we're renaming a predicate; use instead the generated auxiliary predicate
+		fail
 	),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, Mode, _, _, _),
@@ -18018,7 +18026,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	Original == Alias ->
 			% no alias is defined
 			true
-		;	% check that we're renaming a predicate but not (also) changing its argument order
+		;	% check that we're renaming a predicate but not (also) changing its argument order as that
+			% would break using the closure as a meta-argument when appending the additional arguments
 			Original =.. [_| OriginalArguments],
 			Alias =.. [_| AliasArguments],
 			OriginalArguments == AliasArguments
@@ -18028,7 +18037,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	Original == Alias ->
 			% no alias is defined
 			true
-		;	% check that we're renaming a predicate but not (also) changing its argument order
+		;	% check that we're renaming a predicate but not (also) changing its argument order as that
+			% would break using the closure as a meta-argument when appending the additional arguments
 			Original =.. [_| OriginalArguments],
 			Alias =.. [_| AliasArguments],
 			OriginalArguments == AliasArguments
