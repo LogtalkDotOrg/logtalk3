@@ -764,8 +764,8 @@ using the <a class="reference internal" href="../refman/directives/info_2.html#d
 </section>
 <section id="multifile-directive">
 <span id="predicates-multifile"></span><h3>Multifile directive<a class="headerlink" href="#multifile-directive" title="Link to this heading"></a></h3>
-<p>A predicate can be declared <em>multifile</em> by using the
-<a class="reference internal" href="../refman/directives/multifile_1.html#directives-multifile-1"><span class="std std-ref">multifile/1</span></a> directive:</p>
+<p>A predicate can be declared <a class="reference internal" href="../glossary.html#term-multifile-predicate"><span class="xref std std-term">multifile</span></a> by using
+the <a class="reference internal" href="../refman/directives/multifile_1.html#directives-multifile-1"><span class="std std-ref">multifile/1</span></a> directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(<span class="nv">Name</span><span class="o">/</span><span class="nv">Arity</span>).
 </pre></div>
 </div>
@@ -857,8 +857,8 @@ predicate primary declaration.</p>
 </section>
 <section id="coinductive-directive">
 <span id="predicates-coinductive"></span><h3>Coinductive directive<a class="headerlink" href="#coinductive-directive" title="Link to this heading"></a></h3>
-<p>A predicate can be declared <em>coinductive</em> by using the
-<a class="reference internal" href="../refman/directives/coinductive_1.html#directives-coinductive-1"><span class="std std-ref">coinductive/1</span></a> directive. For example:</p>
+<p>A predicate can be declared <a class="reference internal" href="../glossary.html#term-coinductive-predicate"><span class="xref std std-term">coinductive</span></a> by
+using the <a class="reference internal" href="../refman/directives/coinductive_1.html#directives-coinductive-1"><span class="std std-ref">coinductive/1</span></a> directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">coinductive</span>(comember<span class="o">/</span><span class="m">2</span>).
 </pre></div>
 </div>
@@ -869,8 +869,8 @@ value of the read-only <a class="reference internal" href="programming.html#flag
 </section>
 <section id="synchronized-directive">
 <span id="predicates-synchronized"></span><h3>Synchronized directive<a class="headerlink" href="#synchronized-directive" title="Link to this heading"></a></h3>
-<p>A predicate can be declared <em>synchronized</em> by using the
-<a class="reference internal" href="../refman/directives/synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a> directive. For example:</p>
+<p>A predicate can be declared <a class="reference internal" href="../glossary.html#term-synchronized-predicate"><span class="xref std std-term">synchronized</span></a> by
+using the <a class="reference internal" href="../refman/directives/synchronized_1.html#directives-synchronized-1"><span class="std std-ref">synchronized/1</span></a> directive. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(write_log_entry<span class="o">/</span><span class="m">2</span>).
 <span class="p">:- </span><span class="k">synchronized</span>([produce<span class="o">/</span><span class="m">1</span>, consume<span class="o">/</span><span class="m">1</span>]).
 </pre></div>
@@ -893,12 +893,11 @@ something like:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(list).
 
 <span class="p">    :- </span><span class="k">public</span>(append<span class="o">/</span><span class="m">3</span>).
-<span class="p">    :- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
-
     append([], <span class="nv">L</span>, <span class="nv">L</span>).
     append([<span class="nv">H</span>| <span class="nv">T</span>], <span class="nv">L</span>, [<span class="nv">H</span>| <span class="nv">T2</span>]) <span class="o">:-</span>
         append(<span class="nv">T</span>, <span class="nv">L</span>, <span class="nv">T2</span>).
 
+<span class="p">    :- </span><span class="k">public</span>(member<span class="o">/</span><span class="m">2</span>).
     member(<span class="nv">H</span>, [<span class="nv">H</span>| <span class="nv">_</span>]).
     member(<span class="nv">H</span>, [<span class="nv">_</span>| <span class="nv">T</span>]) <span class="o">:-</span>
         member(<span class="nv">H</span>, <span class="nv">T</span>).
@@ -910,9 +909,9 @@ something like:</p>
 and the scope directives, what we have written is also valid Prolog code.
 Calls in a predicate definition body default to the local predicates,
 unless we use the message sending operators or the external call operator.
-This enables easy conversion from Prolog code to Logtalk objects: we just
-need to add the necessary encapsulation and scope directives to the old
-code.</p>
+This simplifies conversion from plain Prolog code to Logtalk objects:
+often we just need to add the necessary encapsulation and scope directives
+to the old code.</p>
 </section>
 <section id="category-predicates">
 <span id="predicates-categories"></span><h3>Category predicates<a class="headerlink" href="#category-predicates" title="Link to this heading"></a></h3>
@@ -1457,9 +1456,8 @@ category, these methods refer to the execution context of the object
 importing the category. These methods are private and cannot be used as
 messages to objects.</p>
 <p>To find the object that received the message under execution we may use
-the <a class="reference internal" href="../refman/methods/self_1.html#methods-self-1"><span class="std std-ref">self/1</span></a> method. We may also
-retrieve the object that has sent the message under execution using the
-<a class="reference internal" href="../refman/methods/sender_1.html#methods-sender-1"><span class="std std-ref">sender/1</span></a> method.</p>
+the <a class="reference internal" href="../refman/methods/self_1.html#methods-self-1"><span class="std std-ref">self/1</span></a> method. We may also retrieve the object that has
+sent the message under execution using the <a class="reference internal" href="../refman/methods/sender_1.html#methods-sender-1"><span class="std std-ref">sender/1</span></a> method.</p>
 <p>The method <a class="reference internal" href="../refman/methods/this_1.html#methods-this-1"><span class="std std-ref">this/1</span></a> enables us to
 retrieve the name of the object for which the predicate clause whose
 body is being executed is defined instead of using the name directly.
@@ -1562,10 +1560,10 @@ argument is bound, the calls are translated to a call to the built-in
 predicate <code class="docutils literal notranslate"><span class="pre">arg/3</span></code>.</p>
 <p>When type-checking predicate arguments, it is often useful to include
 the predicate execution context when reporting an argument error. The
-<a class="reference internal" href="../refman/methods/context_1.html#methods-context-1"><span class="std std-ref">context/1</span></a> method provides
-access to that context. For example, assume a predicate <code class="docutils literal notranslate"><span class="pre">foo/2</span></code> that
-takes an atom and an integer as arguments. We could type-check the
-arguments by writing (using the library <code class="docutils literal notranslate"><span class="pre">type</span></code> object):</p>
+<a class="reference internal" href="../refman/methods/context_1.html#methods-context-1"><span class="std std-ref">context/1</span></a> method provides access to that context. For
+example, assume a predicate <code class="docutils literal notranslate"><span class="pre">foo/2</span></code> that takes an atom and an integer
+as arguments. We could type-check the arguments by writing (using the
+library <code class="docutils literal notranslate"><span class="pre">type</span></code> object):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo(<span class="nv">A</span>, <span class="nv">N</span>) <span class="o">:-</span>
     <span class="c">% type-check arguments</span>
     <span class="k">context</span>(<span class="nv">Context</span>),
@@ -1623,10 +1621,9 @@ the <code class="docutils literal notranslate"><span class="pre">uses/2</span></
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>When working with dynamic grammar rule non-terminals, you may use the
-built-in method <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> convert a
-grammar rule into a clause that can then be used with the database
-methods.</p>
+<p>When working with dynamic grammar rule non-terminals, you may use the built-in
+method <a class="reference internal" href="../refman/methods/expand_term_2.html#methods-expand-term-2"><span class="std std-ref">expand_term/2</span></a> convert a grammar rule into a clause that
+can then be used with the database methods.</p>
 <p>Logtalk also supports <code class="docutils literal notranslate"><span class="pre">asserta/2</span></code>, <code class="docutils literal notranslate"><span class="pre">assertz/2</span></code>, <code class="docutils literal notranslate"><span class="pre">clause/3</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">erase/1</span></code> built-in methods when run with a backend that supports the
 corresponding legacy built-in predicates that work with

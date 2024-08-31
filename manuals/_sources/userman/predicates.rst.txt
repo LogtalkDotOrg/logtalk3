@@ -716,8 +716,8 @@ The second argument is a list of ``Key is Value`` terms. See the
 Multifile directive
 ~~~~~~~~~~~~~~~~~~~
 
-A predicate can be declared *multifile* by using the
-:ref:`directives_multifile_1` directive:
+A predicate can be declared :term:`multifile <multifile predicate>` by using
+the :ref:`directives_multifile_1` directive:
 
 ::
 
@@ -825,8 +825,8 @@ predicate primary declaration.
 Coinductive directive
 ~~~~~~~~~~~~~~~~~~~~~
 
-A predicate can be declared *coinductive* by using the
-:ref:`directives_coinductive_1` directive. For example:
+A predicate can be declared :term:`coinductive <coinductive predicate>` by
+using the :ref:`directives_coinductive_1` directive. For example:
 
 ::
 
@@ -842,8 +842,8 @@ value of the read-only :ref:`coinduction flag <flag_coinduction>` is set to
 Synchronized directive
 ~~~~~~~~~~~~~~~~~~~~~~
 
-A predicate can be declared *synchronized* by using the
-:ref:`directives_synchronized_1` directive. For example:
+A predicate can be declared :term:`synchronized <synchronized predicate>` by
+using the :ref:`directives_synchronized_1` directive. For example:
 
 ::
 
@@ -876,12 +876,11 @@ something like:
    :- object(list).
 
        :- public(append/3).
-       :- public(member/2).
-
        append([], L, L).
        append([H| T], L, [H| T2]) :-
            append(T, L, T2).
 
+       :- public(member/2).
        member(H, [H| _]).
        member(H, [_| T]) :-
            member(H, T).
@@ -892,9 +891,9 @@ Note that, abstracting from the opening and closing object directives
 and the scope directives, what we have written is also valid Prolog code.
 Calls in a predicate definition body default to the local predicates,
 unless we use the message sending operators or the external call operator.
-This enables easy conversion from Prolog code to Logtalk objects: we just
-need to add the necessary encapsulation and scope directives to the old
-code.
+This simplifies conversion from plain Prolog code to Logtalk objects:
+often we just need to add the necessary encapsulation and scope directives
+to the old code.
 
 .. _predicates_categories:
 
@@ -1531,9 +1530,8 @@ importing the category. These methods are private and cannot be used as
 messages to objects.
 
 To find the object that received the message under execution we may use
-the :ref:`methods_self_1` method. We may also
-retrieve the object that has sent the message under execution using the
-:ref:`methods_sender_1` method.
+the :ref:`methods_self_1` method. We may also retrieve the object that has
+sent the message under execution using the :ref:`methods_sender_1` method.
 
 The method :ref:`methods_this_1` enables us to
 retrieve the name of the object for which the predicate clause whose
@@ -1652,10 +1650,10 @@ predicate ``arg/3``.
 
 When type-checking predicate arguments, it is often useful to include
 the predicate execution context when reporting an argument error. The
-:ref:`methods_context_1` method provides
-access to that context. For example, assume a predicate ``foo/2`` that
-takes an atom and an integer as arguments. We could type-check the
-arguments by writing (using the library ``type`` object):
+:ref:`methods_context_1` method provides access to that context. For
+example, assume a predicate ``foo/2`` that takes an atom and an integer
+as arguments. We could type-check the arguments by writing (using the
+library ``type`` object):
 
 ::
 
@@ -1722,10 +1720,9 @@ the ``uses/2`` directive:
        
    :- end_object.
 
-When working with dynamic grammar rule non-terminals, you may use the
-built-in method :ref:`methods_expand_term_2` convert a
-grammar rule into a clause that can then be used with the database
-methods.
+When working with dynamic grammar rule non-terminals, you may use the built-in
+method :ref:`methods_expand_term_2` convert a grammar rule into a clause that
+can then be used with the database methods.
 
 Logtalk also supports ``asserta/2``, ``assertz/2``, ``clause/3``, and
 ``erase/1`` built-in methods when run with a backend that supports the
