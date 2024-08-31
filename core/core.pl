@@ -17901,10 +17901,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DArg = THelper
 	).
 
+% normal (non-meta) argument
 '$lgt_compile_prolog_meta_argument'((*), Arg, _, _, Arg, Arg).
 
+% goal
 '$lgt_compile_prolog_meta_argument'((0), Arg, Caller, Ctx, TArg, DArg) :-
-	% goal
 	'$lgt_compile_body'(Arg, Caller, TArg0, DArg0, Ctx),
 	(	TArg0 = ':'(_, _) ->
 		% the compiled call is already explicitly-qualified
@@ -17918,8 +17919,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DArg = DArg0
 	).
 
+% existentially-quantified goal
 '$lgt_compile_prolog_meta_argument'((^), Arg, Caller, Ctx, TArg, DArg) :-
-	% existentially-quantified goal
 	(	Arg = Vars^Arg0 ->
 		'$lgt_compile_body'(Arg0, Caller, TArg0, DArg0, Ctx),
 		TArg = Vars^TArg0,
@@ -17927,6 +17928,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_compile_body'(Arg, Caller, TArg, DArg, Ctx)
 	).
 
+% list of goals
 '$lgt_compile_prolog_meta_argument'([0], [], _, _, [], []) :-
 	!.
 '$lgt_compile_prolog_meta_argument'([0], [Arg| Args], Caller, Ctx, [TArg| TArgs], [DArg| DArgs]) :-
@@ -17934,6 +17936,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_prolog_meta_argument'((0), Arg, Caller, Ctx, TArg, DArg),
 	'$lgt_compile_prolog_meta_argument'([0], Args, Caller, Ctx, TArgs, DArgs).
 
+% predicate indicator
 '$lgt_compile_prolog_meta_argument'((/), [Arg| Args], Caller, Ctx, [TArg| TArgs], [DArg| DArgs]) :-
 	!,
 	nonvar(Arg),
@@ -17952,9 +17955,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	TArg = TArg0
 	).
 
+% non-terminal indicator
 '$lgt_compile_prolog_meta_argument'((//), Args, Caller, Ctx, TArgs, DArgs) :-
 	'$lgt_compile_prolog_meta_argument'((/), Args, Caller, Ctx, TArgs, DArgs).
 
+% list of predicate indicators
 '$lgt_compile_prolog_meta_argument'([/], [], _, _, [], []) :-
 	!.
 '$lgt_compile_prolog_meta_argument'([/], [Arg| Args], Caller, Ctx, [TArg| TArgs], [DArg| DArgs]) :-
@@ -17963,6 +17968,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compile_prolog_meta_argument'((/), Arg, Caller, Ctx, TArg, DArg),
 	'$lgt_compile_prolog_meta_argument'([/], Args, Caller, Ctx, TArgs, DArgs).
 
+% list of non-terminal indicators
 '$lgt_compile_prolog_meta_argument'([//], Args, Caller, Ctx, TArgs, DArgs) :-
 	'$lgt_compile_prolog_meta_argument'([/], Args, Caller, Ctx, TArgs, DArgs).
 
@@ -26295,7 +26301,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 %  table of ISO Prolog specified arithmetic functions
 %
-%  (used for portability checking)
+%  (used by the linter for portability checking)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -26500,7 +26506,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 %  table of ISO Prolog operators
 %
-%  (used for portability checking)
+%  (used by the linter for portability checking)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -26638,6 +26644,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  tables of ISO Prolog specified read and write term options
+%
+%  (used for portability checking)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -28300,8 +28308,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 %  utility predicates
 %
+% although usually provided as either built-in or library predicates by the
+% backends, it's simpler and more portable to define our own versions
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 
 % '$lgt_length'(+list, +integer, -integer)
@@ -29203,6 +29213,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_load_built_in_entity'(user, object, 'user', ScratchDirectory),
 	'$lgt_load_built_in_entity'(logtalk, object, 'logtalk', ScratchDirectory),
 	'$lgt_load_built_in_entity'(core_messages, category, 'core_messages', ScratchDirectory),
+	% remember that all built-in entities are loaded and thus tokenization for
+	% compiler and runtime error and warning messages is available
 	assertz('$lgt_built_in_entities_loaded_').
 
 
@@ -29239,12 +29251,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_load_settings_file'(+atom, -nonvar)
+% '$lgt_load_settings_file'(+atom, -callable)
 %
 % loads any settings file defined by the user; settings files are compiled
 % and loaded silently, ignoring any errors;  the intermediate Prolog files
 % are deleted using the clean/1 compiler flag in order to prevent problems
-% when switching between backend Prolog compilers
+% when switching between backend Prolog compilers; returns the result from
+% the loading attempt for printing after banner and default flags
 
 '$lgt_load_settings_file'(ScratchDirectory, Result) :-
 	'$lgt_default_flag'(settings_file, Value),
@@ -29376,8 +29389,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_compile_default_hooks'
 %
-% compiles the default hooks specified on the backend Prolog compiler adapter
-% file or settings file for better performance when compiling source files
+% compiles the default hooks specified on the backend adapter file or
+% settings file for better performance when compiling source files
 
 '$lgt_compile_default_hooks' :-
 	(	'$lgt_compiler_flag'(hook, Hook) ->
@@ -29390,9 +29403,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_start_runtime_threading'
 %
 % initializes the engines mutex plus the asynchronous threaded calls mutex
-% and tag counter support for compilers supporting multi-threading programming
+% and tag counter support for backends supporting multi-threading programming
 % (currently we use integers for the tag counter, which impose a limitation on
-% the maximum number of tags on backend Prolog compilers with bounded integers)
+% the maximum number of tags on backends with bounded integers)
 
 '$lgt_start_runtime_threading' :-
 	(	'$lgt_prolog_feature'(engines, supported) ->
