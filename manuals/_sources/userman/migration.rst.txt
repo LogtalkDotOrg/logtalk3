@@ -22,13 +22,13 @@ Prolog integration and migration
 ================================
 
 This section provides suggestions for integrating and migrating plain Prolog
-code and Prolog module code to Logtalk. Detailed instructions are provided
-for encapsulating plain Prolog code in objects, converting Prolog modules
-into objects, and compiling and reusing Prolog modules as objects from
-inside Logtalk. An interesting application of the techniques described
-in this section is a solution for running a Prolog application which uses
-modules on a Prolog compiler with no module system. The ``wrapper`` tool
-can be used to help in migrating Prolog code.
+code and Prolog module code to Logtalk. Detailed instructions are provided for
+encapsulating plain Prolog code in objects, converting Prolog modules into
+objects, and compiling and reusing Prolog modules as objects from inside
+Logtalk. An interesting application of the techniques described in this
+section is a solution for running a Prolog application which uses modules
+on a Prolog compiler with no module system. The :doc:`../devtools/wrapper`
+tool can be used to help in migrating Prolog code.
 
 .. _migration_hybrid:
 

@@ -87,7 +87,8 @@ processes. When the flag is turned off, the generated intermediate Prolog
 file names don't include the process identifier and are kept between runs.
 This is usually done to avoid repeated recompilation of stable code when
 developing large applications or when running multiple test sets for
-performance (by avoiding repeated recompilation of the ``lgtunit`` tool).
+performance (by avoiding repeated recompilation of the
+:doc:`../devtools/lgtunit` tool).
 
 To run parallel Logtalk processes with the ``clean`` flag turned off, each
 process must use its own :term:`scratch directory`. This is accomplished

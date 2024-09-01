@@ -235,13 +235,15 @@ details).
 Sending a message from a module
 -------------------------------
 
-Messages can be sent to object from within a Prolog module. Depending on
-the backend Prolog system and on the :ref:`optimize <flag_optimize>` flag
-being turned on, the messages will use static binding when possible. This
+Messages can be sent to objects from within Prolog modules. Depending on the
+backend support for goal-expansion and on the :ref:`optimize <flag_optimize>`
+flag being turned on, the messages will use static binding when possible. This
 optimization requires the object to be compiled and loaded before the module.
 Note that the module can be ``user``. This is usually the case when sending
 the message from the top-level interpreter. Thus, the same conditions apply
-in this case.
+in this case. Note that loading Prolog modules using Prolog directives or
+built-in predicates necessarily limits the range of possible optimizations
+for message sent from the modules.
 
 .. warning::
 

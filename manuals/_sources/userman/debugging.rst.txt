@@ -32,10 +32,10 @@ loaded at the top-level interpreter by typing:
 It can also be loaded automatically at startup time by using a
 :term:`settings file`.
 
-The ``debugger`` tool includes the debugging features found in traditional
-Prolog debuggers. There are some differences, however, between the usual
-implementation of Prolog debuggers and the current implementation of the
-Logtalk debugger that you should be aware. First, unlike most Prolog
+The :doc:`../devtools/debugger` tool includes the debugging features found
+in traditional Prolog debuggers. There are some differences, however, between
+the usual implementation of Prolog debuggers and the current implementation
+of the Logtalk debugger that you should be aware. First, unlike most Prolog
 debuggers, the Logtalk debugger is not a built-in feature but a regular
 Logtalk application using documented debugging hook predicates. This
 translates to a different, although similar, set of debugging features

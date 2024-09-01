@@ -126,8 +126,9 @@ This prevents an application breaking when e.g. an updated third-party
 library adds new operators. It also allows loading entities that provide
 conflicting operator definitions. Here the usual programming idiom is to
 copy the operator definitions to a ``uses/2`` directive. For example, the
-``lgtunit`` tool makes available a ``(=~=)/2`` predicate (for approximate
-float equality) that is intended to be used as an infix operator:
+:doc:`../devtools/lgtunit` tool makes available a ``(=~=)/2`` predicate
+(for approximate float equality) that is intended to be used as an infix
+operator:
 
 ::
 

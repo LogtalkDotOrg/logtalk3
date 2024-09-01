@@ -312,13 +312,15 @@ details).</p>
 </section>
 <section id="sending-a-message-from-a-module">
 <span id="messages-from-module"></span><h2>Sending a message from a module<a class="headerlink" href="#sending-a-message-from-a-module" title="Link to this heading"></a></h2>
-<p>Messages can be sent to object from within a Prolog module. Depending on
-the backend Prolog system and on the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flag
-being turned on, the messages will use static binding when possible. This
+<p>Messages can be sent to objects from within Prolog modules. Depending on the
+backend support for goal-expansion and on the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a>
+flag being turned on, the messages will use static binding when possible. This
 optimization requires the object to be compiled and loaded before the module.
 Note that the module can be <code class="docutils literal notranslate"><span class="pre">user</span></code>. This is usually the case when sending
 the message from the top-level interpreter. Thus, the same conditions apply
-in this case.</p>
+in this case. Note that loading Prolog modules using Prolog directives or
+built-in predicates necessarily limits the range of possible optimizations
+for message sent from the modules.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If you want to benchmark the performance of a message sending goal
