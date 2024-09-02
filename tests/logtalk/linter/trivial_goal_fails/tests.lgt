@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-08-13,
+		date is 2024-09-02,
 		comment is 'Unit tests for the ``trivial_goal_fails`` linter flag.'
 	]).
 
@@ -42,12 +42,20 @@
 	test(trivial_goal_fails_linter_flag_01, exists(Term == bar(1))) :-
 		trivial_goal_fails(_, _, object, trivial_fails, Term).
 
-	test(trivial_goal_fails_linter_flag_02, true(type::valid(ground(list), Tokens))) :-
-		phrase(logtalk::message_tokens(no_matching_clause_for_goal(file, 1-2, object, unknown_entities, foo), core), Tokens).
+	test(trivial_goal_fails_linter_flag_02, exists(Term == bar(a, 1))) :-
+		trivial_goal_fails(_, _, object, trivial_fails, Term).
+
+	test(trivial_goal_fails_linter_flag_03, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(no_matching_clause_for_predicate_goal(file, 1-2, object, unknown_entities, foo), core), Tokens).
+
+	test(trivial_goal_fails_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
+		phrase(logtalk::message_tokens(no_matching_clause_for_non_terminal_goal(file, 1-2, object, unknown_entities, foo), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
-	logtalk::message_hook(no_matching_clause_for_goal(File, Lines, Type, Entity, Term), warning(trivial_goal_fails), core, _) :-
+	logtalk::message_hook(no_matching_clause_for_predicate_goal(File, Lines, Type, Entity, Term), warning(trivial_goal_fails), core, _) :-
+		assertz(trivial_goal_fails(File, Lines, Type, Entity, Term)).
+	logtalk::message_hook(no_matching_clause_for_non_terminal_goal(File, Lines, Type, Entity, Term), warning(trivial_goal_fails), core, _) :-
 		assertz(trivial_goal_fails(File, Lines, Type, Entity, Term)).
 
 :- end_object.

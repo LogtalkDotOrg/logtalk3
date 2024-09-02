@@ -28,6 +28,12 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Message terms for the trivial fails linter warnings to distinguish
+between predicate and non-terminal goals.
+
+* IMPROVED: Linter warnings for trivial fails to distinguish between predicate
+and non-terminal goals.
+
 * IMPROVED: Compiler warnings on missing scope directives for non-terminals.
 
 * FIXED: Compiler bug when using a `uses/2` directive to change the order of

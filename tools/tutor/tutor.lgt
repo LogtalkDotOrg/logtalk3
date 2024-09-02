@@ -22,7 +22,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:66:0,
+		version is 0:67:0,
 		author is 'Paulo Moura',
 		date is 2024-09-02,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
@@ -554,9 +554,14 @@
 	explain(goal_is_always_false(_, _, _, _, _)) -->
 		['Misspelt variable in goal? Wrong operator or built-in predicate?'-[], nl, nl].
 
-	explain(no_matching_clause_for_goal(_, _, _, _, _)) -->
+	explain(no_matching_clause_for_predicate_goal(_, _, _, _, _)) -->
 		[	'Calls to locally defined predicates without a clause with a matching head'-[], nl,
 			'fail. Typo in a predicate argument? Predicate definition incomplete?'-[], nl, nl
+		].
+	explain(no_matching_clause_for_non_terminal_goal(_, _, _, _, _)) -->
+		[	'Calls to locally defined non-terminals without a gramamr rule with'-[], nl,
+			'a matching head fail. Typo in a non-terminal argument? Non-terminal'-[], nl,
+			'definition incomplete?'-[], nl, nl
 		].
 
 	explain(missing_reference_to_built_in_protocol(_, _, Type, _, Protocol)) -->

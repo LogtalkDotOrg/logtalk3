@@ -22,7 +22,7 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:134:0,
+		version is 1:135:0,
 		author is 'Paulo Moura',
 		date is 2024-09-02,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
@@ -354,8 +354,11 @@
 		['Goal is always false: ~q'-[Goal], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(no_matching_clause_for_goal(File, Lines, Type, Entity, Goal)) -->
-		['No matching clause for goal: ~q'-[Goal], nl],
+	message_tokens(no_matching_clause_for_predicate_goal(File, Lines, Type, Entity, Goal)) -->
+		['No matching clause for predicate goal: ~q'-[Goal], nl],
+		message_context(File, Lines, Type, Entity).
+	message_tokens(no_matching_clause_for_non_terminal_goal(File, Lines, Type, Entity, Goal)) -->
+		['No matching clause for non-terminal goal: ~q'-[Goal], nl],
 		message_context(File, Lines, Type, Entity).
 
 	% unknown entity messages

@@ -29,4 +29,9 @@
 	bar([]).
 	bar([_| _]).
 
+	foo(1) -->
+		bar(a, 1).
+
+	bar(b, 2) --> [].
+
 :- end_object.

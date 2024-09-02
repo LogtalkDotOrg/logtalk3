@@ -17420,38 +17420,43 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_check_for_trivial_fails'(compile(aux,_,_), _, _, _) :-
 	!.
 
-'$lgt_check_for_trivial_fails'(compile(user,_,_), Call, TCall, Head) :-
+'$lgt_check_for_trivial_fails'(compile(user,_,_), Goal, TGoal, Head) :-
 	(	'$lgt_compiler_flag'(trivial_goal_fails, warning),
 		% workaround possible creation of a cyclic term with some backend
 		% Prolog compilers implementation of the \=2 predicate
 		copy_term(Head, HeadCopy),
-		Call \= HeadCopy,
+		Goal \= HeadCopy,
 		% not a recursive call which can originate from a predicate with a single clause
-		\+ '$lgt_pp_dynamic_'(Call, _, _, _),
-		\+ '$lgt_pp_multifile_'(Call, _, _, _),
+		\+ '$lgt_pp_dynamic_'(Goal, _, _, _),
+		\+ '$lgt_pp_multifile_'(Goal, _, _, _),
 		% not a dynamic or multifile predicate
-		\+ '$lgt_pp_entity_term_'(fact(TCall, _), _, _),
-		\+ '$lgt_pp_entity_term_'(srule(TCall, _, _), _, _),
-		\+ '$lgt_pp_entity_term_'(dfact(TCall, _, _), _, _),
-		\+ '$lgt_pp_entity_term_'(dsrule(TCall, _, _, _), _, _),
+		\+ '$lgt_pp_entity_term_'(fact(TGoal, _), _, _),
+		\+ '$lgt_pp_entity_term_'(srule(TGoal, _, _), _, _),
+		\+ '$lgt_pp_entity_term_'(dfact(TGoal, _, _), _, _),
+		\+ '$lgt_pp_entity_term_'(dsrule(TGoal, _, _, _), _, _),
 		% not a yet to be compiled user-defined fact or rule
-		\+ '$lgt_pp_final_entity_term_'(TCall, _),
-		\+ '$lgt_pp_final_entity_term_'((TCall :- _), _),
+		\+ '$lgt_pp_final_entity_term_'(TGoal, _),
+		\+ '$lgt_pp_final_entity_term_'((TGoal :- _), _),
 		% not an already compiled user-defined fact or rule
-		\+ '$lgt_pp_entity_aux_clause_'(fact(TCall, _)),
-		\+ '$lgt_pp_entity_aux_clause_'(srule(TCall, _, _)),
-		\+ '$lgt_pp_entity_aux_clause_'(dfact(TCall, _, _)),
-		\+ '$lgt_pp_entity_aux_clause_'(dsrule(TCall, _, _, _)),
+		\+ '$lgt_pp_entity_aux_clause_'(fact(TGoal, _)),
+		\+ '$lgt_pp_entity_aux_clause_'(srule(TGoal, _, _)),
+		\+ '$lgt_pp_entity_aux_clause_'(dfact(TGoal, _, _)),
+		\+ '$lgt_pp_entity_aux_clause_'(dsrule(TGoal, _, _, _)),
 		% not a yet to be compiled auxiliary fact or rule
-		\+ '$lgt_pp_final_entity_aux_clause_'(TCall),
-		\+ '$lgt_pp_final_entity_aux_clause_'((TCall :- _)) ->
+		\+ '$lgt_pp_final_entity_aux_clause_'(TGoal),
+		\+ '$lgt_pp_final_entity_aux_clause_'((TGoal :- _)) ->
 		% not an already compiled auxiliary fact or rule
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(
-			warning(trivial_goal_fails),
-			no_matching_clause_for_goal(File, Lines, Type, Entity, Call)
-		)
+		(	functor(Goal, Functor, Arity),
+			'$lgt_pp_calls_non_terminal_'(Functor, _, Arity, _) ->
+			Goal =.. [Functor| GoalArgs],
+			'$lgt_append'(NonTerminalArgs, [_, _], GoalArgs), !,
+			NonTerminal =.. [Functor| NonTerminalArgs],
+			Message = no_matching_clause_for_non_terminal_goal(File, Lines, Type, Entity, NonTerminal)
+		;	Message = no_matching_clause_for_predicate_goal(File, Lines, Type, Entity, Goal)
+		),
+		'$lgt_print_message'(warning(trivial_goal_fails), Message)
 	;	true
 	).
 
