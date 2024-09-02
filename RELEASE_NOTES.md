@@ -46,6 +46,12 @@ the disjunction is an argument of the `call/1` control construct.
 file defined category declares a predicate or a non-terminal dynamic textually
 after its definition.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The XVM adapter file with additional candidate built-in predicates
+for checking tautology and falsehood goals.
+
 Documentation
 -------------
 

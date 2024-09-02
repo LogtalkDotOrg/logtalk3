@@ -161,7 +161,9 @@
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(?=(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_number(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(atomic_concat(_, _, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(attvar(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(cyclic_term(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(dif(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list_or_partial_list(_)).
