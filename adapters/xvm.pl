@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XVM 10.0.0 and later versions
-%  Last updated on June 26, 2024
+%  Last updated on September 2, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -780,14 +780,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% term_hash(@callable, +integer, +integer, -integer)
-
-:- if(\+ predicate_property(term_hash(_,_,_,_), built_in)).
-
-	term_hash(_, _, _, _) :-
-		fail.
-
-:- endif.
+% term_hash(@callable, +integer, +integer, -integer) -- built-in
 
 
 
