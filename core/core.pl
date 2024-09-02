@@ -728,6 +728,9 @@ Obj<<Goal :-
 %
 %  built-in predicates
 %
+%  in general, two main clauses are provided: one for calls in "user", e.g.
+%  calls at the top-level, and one for compiled calls
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
@@ -3598,6 +3601,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  built-in methods
+%
+%  calls to these methods are always compiled
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -10854,9 +10859,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_check_predicate_name_conflict'((dynamic), Head, Functor/Arity),
 	(	'$lgt_pp_entity_'(category, _, _),
-		'$lgt_pp_multifile_'(Head, _, _) ->
-		% categories cannot contain predicates that are both multifile and dynamic
-		throw(permission_error(declare, dynamic, Functor/Arity))
+		(	'$lgt_pp_multifile_'(Head, _, _) ->
+			% categories cannot contain predicates that are both multifile and dynamic
+			throw(permission_error(declare, dynamic, Functor/Arity))
+		;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
+			% predicate definition occurs before the directive
+			throw(permission_error(declare, dynamic, Functor/Arity))
+		)
 	;	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized predicates must be static
 		throw(permission_error(modify, synchronized_predicate, Functor/Arity))
@@ -12642,7 +12651,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		SourceData = sd(Term, VariableNames, Singletons, File, Lines)
 	;	SourceData = nil
 	),
-	% check which compile clause to save (normal/optimal and debug) and
+	% check which compile clause to save (normal/optimal or debug) and
 	% if we have a clause defined by the user or an auxiliary clause
 	(	'$lgt_compiler_flag'(debug, on) ->
 		(	Mode = compile(aux,_,_) ->
@@ -12690,11 +12699,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % is defined can be accessed through simple unification at the clause head
 
 '$lgt_compile_clause'((Head :- Body), _, _, _, Ctx) :-
-	once((
-		'$lgt_variant'(Body, Head)
+	(	'$lgt_variant'(Body, Head) ->
+		true
 	;	Body = (Goal, _),
 		'$lgt_variant'(Goal, Head)
-	)),
+	),
 	'$lgt_comp_ctx_term'(Ctx, Term),
 	callable(Term),
 	\+ functor(Term, (-->), 2),

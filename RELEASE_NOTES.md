@@ -34,6 +34,9 @@ the arguments of a predicate and using the predicate alias as a closure.
 * FIXED: Disjunction optimization bug when the left-side is a variable and the
 disjunction is an argument of the `call/1` control construct.
 
+* FIXED: Case where the compiler would report the wrong error when a source file
+defined category declares a predicate dynamic textually after its definition.
+
 Documentation
 -------------
 

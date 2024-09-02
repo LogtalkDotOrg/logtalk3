@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:65:0,
+		version is 0:66:0,
 		author is 'Paulo Moura',
-		date is 2024-05-28,
+		date is 2024-09-02,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -259,8 +259,8 @@
 		].
 
 	error(permission_error(declare, (dynamic), _/_)) -->
-		[	'Category predicates cannot be declared as both multifile and dynamic'-[], nl,
-			'as categories cannot contain clauses for dynamic predicates.'-[], nl, nl
+		[	'Category predicates cannot be declared as dynamic or as both multifile and'-[], nl,
+			'dynamic as categories cannot contain clauses for dynamic predicates.'-[], nl, nl
 		].
 	error(permission_error(declare, (dynamic), _//_)) -->
 		[	'Category non-terminals cannot be declared as both multifile and dynamic'-[], nl,
