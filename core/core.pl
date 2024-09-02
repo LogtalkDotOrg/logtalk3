@@ -281,8 +281,8 @@
 :- dynamic('$lgt_pp_synchronized_'/4).
 % '$lgt_pp_predicate_mutex_counter_'(Count)
 :- dynamic('$lgt_pp_predicate_mutex_counter_'/1).
-% '$lgt_pp_dynamic_'(Head, File, Lines)
-:- dynamic('$lgt_pp_dynamic_'/3).
+% '$lgt_pp_dynamic_'(Head, Original, File, Lines)
+:- dynamic('$lgt_pp_dynamic_'/4).
 % '$lgt_pp_discontiguous_'(Head, File, Lines)
 :- dynamic('$lgt_pp_discontiguous_'/3).
 % '$lgt_pp_mode_'(Mode, Determinism, File, Lines)
@@ -299,8 +299,8 @@
 :- dynamic('$lgt_pp_predicate_alias_'/6).
 % '$lgt_pp_non_terminal_'(Functor, Arity, ExtArity)
 :- dynamic('$lgt_pp_non_terminal_'/3).
-% '$lgt_pp_multifile_'(Head, File, Lines)
-:- dynamic('$lgt_pp_multifile_'/3).
+% '$lgt_pp_multifile_'(Head, Original, File, Lines)
+:- dynamic('$lgt_pp_multifile_'/4).
 % '$lgt_pp_coinductive_'(Head, TestHead, HeadExCtx, TCHead, BodyExCtx, THead, DHead, File, Lines)
 :- dynamic('$lgt_pp_coinductive_'/9).
 % '$lgt_pp_coinductive_head_'(Head, HeadExCtx, TCHead)
@@ -8589,9 +8589,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	retractall('$lgt_pp_public_'(_, _, _, _)),
 	retractall('$lgt_pp_protected_'(_, _, _, _)),
 	retractall('$lgt_pp_private_'(_, _, _, _)),
-	retractall('$lgt_pp_dynamic_'(_, _, _)),
+	retractall('$lgt_pp_dynamic_'(_, _, _, _)),
 	retractall('$lgt_pp_discontiguous_'(_, _, _)),
-	retractall('$lgt_pp_multifile_'(_, _, _)),
+	retractall('$lgt_pp_multifile_'(_, _, _, _)),
 	retractall('$lgt_pp_coinductive_'(_, _, _, _, _, _, _, _, _)),
 	retractall('$lgt_pp_coinductive_head_'(_, _, _)),
 	retractall('$lgt_pp_mode_'(_, _, _, _)),
@@ -10588,7 +10588,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	functor(Head, Functor, Arity),
-	(	'$lgt_pp_dynamic_'(Head, _, _) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _, _) ->
 		% synchronized predicates must be static
 		throw(permission_error(modify, dynamic_predicate, Functor/Arity))
 	;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
@@ -10602,7 +10602,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
 	functor(Head, Functor, ExtArity),
-	(	'$lgt_pp_dynamic_'(Head, _, _) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _, _) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, dynamic_non_terminal, Functor//Arity))
 	;	'$lgt_pp_defines_non_terminal_'(Functor, Arity, _) ->
@@ -10859,7 +10859,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, Arity),
 	'$lgt_check_predicate_name_conflict'((dynamic), Head, Functor/Arity),
 	(	'$lgt_pp_entity_'(category, _, _),
-		(	'$lgt_pp_multifile_'(Head, _, _) ->
+		(	'$lgt_pp_multifile_'(Head, _, _, _) ->
 			% categories cannot contain predicates that are both multifile and dynamic
 			throw(permission_error(declare, dynamic, Functor/Arity))
 		;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
@@ -10871,7 +10871,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(permission_error(modify, synchronized_predicate, Functor/Arity))
 	;	'$lgt_check_for_duplicated_dynamic_directive'(Head, Pred),
 		'$lgt_source_file_context'(Ctx, File, Lines),
-		assertz('$lgt_pp_dynamic_'(Head, File, Lines))
+		assertz('$lgt_pp_dynamic_'(Head, Functor/Arity, File, Lines))
 	).
 
 '$lgt_compile_dynamic_directive_resource'(NonTerminal, Ctx) :-
@@ -10880,7 +10880,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, ExtArity),
 	'$lgt_check_predicate_name_conflict'((dynamic), Head, Functor//Arity),
 	(	'$lgt_pp_entity_'(category, _, _),
-		(	'$lgt_pp_multifile_'(Head, _, _) ->
+		(	'$lgt_pp_multifile_'(Head, _, _, _) ->
 			% categories cannot contain non-terminals that are both multifile and dynamic
 			throw(permission_error(declare, dynamic, Functor//Arity))
 		;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
@@ -10892,7 +10892,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
 	;	'$lgt_check_for_duplicated_dynamic_directive'(Head, NonTerminal),
 		'$lgt_source_file_context'(Ctx, File, Lines),
-		assertz('$lgt_pp_dynamic_'(Head, File, Lines))
+		assertz('$lgt_pp_dynamic_'(Head, Functor//Arity, File, Lines))
 	).
 
 '$lgt_compile_dynamic_directive_resource'(Resource, _) :-
@@ -10904,7 +10904,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_check_for_duplicated_dynamic_directive'(Head, PI) :-
-	(	'$lgt_pp_dynamic_'(Head, OriginalFile, OriginalLines),
+	(	'$lgt_pp_dynamic_'(Head, _, OriginalFile, OriginalLines),
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_increment_compiling_warnings_counter',
@@ -11263,12 +11263,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% protocols cannot contain predicate definitions
 		throw(permission_error(declare, multifile, Functor/Arity))
 	;	Type == category,
-	 	'$lgt_pp_dynamic_'(Head, _, _) ->
+	 	'$lgt_pp_dynamic_'(Head, _, _, _) ->
 		% categories cannot contain predicates that are both multifile and dynamic
 	 	throw(permission_error(declare, multifile, Functor/Arity))
 	;	'$lgt_check_for_duplicated_multifile_directive'(Head, Pred),
 		'$lgt_source_file_context'(Ctx, File, Lines),
-		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
+		assertz('$lgt_pp_multifile_'(Head, Functor/Arity, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	).
@@ -11282,12 +11282,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% protocols cannot contain non-terminal definitions
 		throw(permission_error(declare, multifile, Functor//Arity))
 	;	Type == category,
-	 	'$lgt_pp_dynamic_'(Head, _, _) ->
+	 	'$lgt_pp_dynamic_'(Head, _, _, _) ->
 		% categories cannot contain non-terminals that are both multifile and dynamic
 	 	throw(permission_error(declare, multifile, Functor//Arity))
 	;	'$lgt_check_for_duplicated_multifile_directive'(Head, NonTerminal),
 		'$lgt_source_file_context'(Ctx, File, Lines),
-		assertz('$lgt_pp_multifile_'(Head, File, Lines)),
+		assertz('$lgt_pp_multifile_'(Head, Functor//Arity, File, Lines)),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(multifile(TFunctor/TArity)))
 	).
@@ -11314,7 +11314,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 '$lgt_check_for_duplicated_multifile_directive'(Head, PI) :-
-	(	'$lgt_pp_multifile_'(Head, OriginalFile, OriginalLines),
+	(	'$lgt_pp_multifile_'(Head, _, OriginalFile, OriginalLines),
 		'$lgt_compiler_flag'(duplicated_directives, warning) ->
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_increment_compiling_warnings_counter',
@@ -12009,7 +12009,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_use_module_non_terminal_'(Module, _, _, _, Alias, _, _, _) ->
 		% clash with an earlier use_module/2 directive non-terminal
 		throw(permission_error(modify, uses_module_non_terminal, ':'(Module,Culprit)))
-	;	Directive \== (dynamic), '$lgt_pp_dynamic_'(Alias, _, _) ->
+	;	Directive \== (dynamic), '$lgt_pp_dynamic_'(Alias, _, _, _) ->
 		% clash with an earlier dynamic/1 directive (but allow duplicated dynamic/1 directives)
 		throw(permission_error(modify, dynamic_predicate, Culprit))
 	;	true
@@ -12772,7 +12772,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		DHead = '$lgt_debug'(rule(Entity, Head, N, File, BeginLine), ExCtx),
 		BodyCtx = Ctx
 	),
-	(	'$lgt_pp_dynamic_'(Head, _, _) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _, _) ->
 		TClause = drule(THead, '$lgt_nop'(Body), Body, BodyCtx),
 		DClause = ddrule(THead, '$lgt_nop'(Body), DHead, Body, BodyCtx)
 	;	TClause = srule(THead, Body, BodyCtx),
@@ -12914,7 +12914,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_head'(Head, _, _, _) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
-	'$lgt_pp_dynamic_'(Head, _, _),
+	'$lgt_pp_dynamic_'(Head, _, _, _),
 	functor(Head, Functor, Arity),
 	throw(permission_error(define, dynamic_predicate, Functor/Arity)).
 
@@ -13016,7 +13016,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_head'(Head, Functor/Arity, THead, Ctx) :-
 	% first clause for this predicate
 	functor(Head, Functor, Arity),
-	(	'$lgt_pp_dynamic_'(Head, _, _),
+	(	'$lgt_pp_dynamic_'(Head, _, _, _),
 		\+ '$lgt_pp_public_'(Functor, Arity, _, _),
 		\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
 		\+ '$lgt_pp_private_'(Functor, Arity, _, _) ->
@@ -13543,7 +13543,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	Head = ':'(_, _) ->
 		true
-	;	'$lgt_pp_multifile_'(Head, _, _)
+	;	'$lgt_pp_multifile_'(Head, _, _, _)
 	),
 	% clause for a multifile predicate
 	'$lgt_compiler_flag'(suspicious_calls, warning),
@@ -16740,7 +16740,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'(Pred, _, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
 	'$lgt_pp_category_'(_, _, _, _, _, _),
-	'$lgt_pp_dynamic_'(Pred, _, _),
+	'$lgt_pp_dynamic_'(Pred, _, _, _),
 	!,
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	(	functor(Pred, Functor, Arity),
@@ -16904,8 +16904,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % call to a declared but undefined predicate
 
 '$lgt_compile_body'(Pred, _, TPred, '$lgt_debug'(goal(Pred, TPred), ExCtx), Ctx) :-
-	(	'$lgt_pp_dynamic_'(Pred, _, _)
-	;	'$lgt_pp_multifile_'(Pred, _, _)
+	(	'$lgt_pp_dynamic_'(Pred, _, _, _)
+	;	'$lgt_pp_multifile_'(Pred, _, _, _)
 	),
 	!,
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, Prefix, _, _, ExCtx, Mode, _, _, _),
@@ -17427,8 +17427,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		copy_term(Head, HeadCopy),
 		Call \= HeadCopy,
 		% not a recursive call which can originate from a predicate with a single clause
-		\+ '$lgt_pp_dynamic_'(Call, _, _),
-		\+ '$lgt_pp_multifile_'(Call, _, _),
+		\+ '$lgt_pp_dynamic_'(Call, _, _, _),
+		\+ '$lgt_pp_multifile_'(Call, _, _, _),
 		% not a dynamic or multifile predicate
 		\+ '$lgt_pp_entity_term_'(fact(TCall, _), _, _),
 		\+ '$lgt_pp_entity_term_'(srule(TCall, _, _), _, _),
@@ -18167,7 +18167,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 '$lgt_check_dynamic_directive'(Head) :-
-	(	'$lgt_pp_dynamic_'(Head, _, _) ->
+	(	'$lgt_pp_dynamic_'(Head, _, _, _) ->
 		% dynamic/1 directive is present
 		true
 	;	'$lgt_pp_missing_dynamic_directive_'(Head, _, _) ->
@@ -18232,7 +18232,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	callable(Head),
 	% a dynamic directive must be present
-	'$lgt_pp_dynamic_'(Head, _, _),
+	'$lgt_pp_dynamic_'(Head, _, _, _),
 	% a scope directive must be present
 	functor(Head, Functor, Arity),
 	(	'$lgt_pp_public_'(Functor, Arity, _, _)
@@ -20553,8 +20553,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_number_of_clauses_rules_'(Functor, Arity, 1, _),
 	% predicate with a single clause
 	functor(Head, Functor, Arity),
-	\+ '$lgt_pp_dynamic_'(Head, _, _),
-	\+ '$lgt_pp_multifile_'(Head, _, _),
+	\+ '$lgt_pp_dynamic_'(Head, _, _, _),
+	\+ '$lgt_pp_multifile_'(Head, _, _, _),
 	\+ '$lgt_pp_synchronized_'(Head, _, _, _),
 	% static, non-multifile, and no synchronization wrapper
 	'$lgt_pp_defines_predicate_'(Head, _, ExCtx, THead, _, user),
@@ -21522,7 +21522,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	),
 	assertz('$lgt_pp_directive_'(dynamic(DDef/3))),
-	'$lgt_pp_dynamic_'(Head, _, _),
+	'$lgt_pp_dynamic_'(Head, _, _, _),
 		functor(Head, Functor, Arity),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
 		assertz('$lgt_pp_directive_'(dynamic(TFunctor/TArity))),
@@ -21609,7 +21609,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Coinductive = 32				% 0b00100000
 	;	Coinductive = 0
 	),
-	(	'$lgt_pp_multifile_'(Pred, _, _) ->
+	(	'$lgt_pp_multifile_'(Pred, _, _, _) ->
 		Multifile = 16					% 0b00010000
 	;	Multifile = 0
 	),
@@ -21623,7 +21623,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	),
 	(	'$lgt_pp_dynamic_' ->
 		Dynamic = 2						% 0b00000010
-	;	'$lgt_pp_dynamic_'(Pred, _, _) ->
+	;	'$lgt_pp_dynamic_'(Pred, _, _, _) ->
 		Dynamic = 2						% 0b00000010
 	;	Dynamic = 0
 	),
@@ -21665,8 +21665,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_pp_discontiguous_'(Head, _, _)
 	),
 	functor(Head, Functor, Arity),
-	\+ '$lgt_pp_multifile_'(Head, _, _),
-	\+ '$lgt_pp_dynamic_'(Head, _, _),
+	\+ '$lgt_pp_multifile_'(Head, _, _, _),
+	\+ '$lgt_pp_dynamic_'(Head, _, _, _),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 	% declared, static, but undefined predicate;
 	% local calls must fail (as per closed-world assumption)
@@ -21677,9 +21677,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_entity_'(Type, _, Prefix),
 	(	Type == object,
 		% categories cannot contain clauses for dynamic predicates
-		'$lgt_pp_dynamic_'(Head, _, _)
-	;	'$lgt_pp_multifile_'(Head, _, _),
-		\+ '$lgt_pp_dynamic_'(Head, _, _)
+		'$lgt_pp_dynamic_'(Head, _, _, _)
+	;	'$lgt_pp_multifile_'(Head, _, _, _),
+		\+ '$lgt_pp_dynamic_'(Head, _, _, _)
 	),
 	\+ '$lgt_pp_defines_predicate_'(Head, _, _, _, _, _),
 	% dynamic and/or multifile predicate with no initial set of clauses
@@ -21690,7 +21690,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_private_'(Functor, Arity, _, _),
 		\+ '$lgt_pp_synchronized_'(Head, _, _, _),
 		\+ '$lgt_pp_coinductive_head_'(Head, _, _),
-		\+ '$lgt_pp_multifile_'(Head, _, _) ->
+		\+ '$lgt_pp_multifile_'(Head, _, _, _) ->
 		'$lgt_add_ddef_clause'(Head, Functor, Arity, _, Ctx)
 	;	'$lgt_add_def_clause'(Head, Functor, Arity, _, Ctx)
 	),
@@ -22956,8 +22956,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % reports missing scope directives for dynamic predicates
 
 '$lgt_report_missing_directives'(category, Entity) :-
-	'$lgt_pp_dynamic_'(Head, File, Lines),
-	% declared dynamic predicate in a category are for objects
+	'$lgt_pp_dynamic_'(Head, Original, File, Lines),
+	% declared dynamic predicate or non-terminal in a category are for objects
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
 	\+ '$lgt_pp_protected_'(Functor, Arity, _, _),
@@ -22969,14 +22969,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
-		missing_scope_directive(File, Lines, category, Entity, (dynamic)/1, Functor/Arity)
+		missing_scope_directive(File, Lines, category, Entity, (dynamic)/1, Original)
 	),
 	fail.
 
 % reports missing scope directives for multifile predicates
 
 '$lgt_report_missing_directives'(Type, Entity) :-
-	'$lgt_pp_multifile_'(Head, File, Lines),
+	'$lgt_pp_multifile_'(Head, Original, File, Lines),
 	% declared multifile predicate
 	functor(Head, Functor, Arity),
 	\+ '$lgt_pp_public_'(Functor, Arity, _, _),
@@ -22986,7 +22986,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
 		warning(missing_directives),
-		missing_scope_directive(File, Lines, Type, Entity, (multifile)/1, Functor/Arity)
+		missing_scope_directive(File, Lines, Type, Entity, (multifile)/1, Original)
 	),
 	fail.
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:134:0,
 		author is 'Paulo Moura',
-		date is 2024-05-18,
+		date is 2024-09-02,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -397,8 +397,11 @@
 		['Missing predicate directive: ~q.'-[Directive], nl],
 		message_context(File, Lines, Type, Entity).
 
-	message_tokens(missing_scope_directive(File, Lines, Type, Entity, _Directive, Predicate)) -->
-		['Missing scope directive for predicate: ~q'-[Predicate], nl],
+	message_tokens(missing_scope_directive(File, Lines, Type, Entity, _Directive, Functor/Arity)) -->
+		['Missing scope directive for predicate: ~q'-[Functor/Arity], nl],
+		message_context(File, Lines, Type, Entity).
+	message_tokens(missing_scope_directive(File, Lines, Type, Entity, _Directive, Functor//Arity)) -->
+		['Missing scope directive for non-terminal: ~q'-[Functor//Arity], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(duplicated_predicate_reference(File, Lines, Type, Entity, Predicate, OriginalFile, OriginalLines)) -->

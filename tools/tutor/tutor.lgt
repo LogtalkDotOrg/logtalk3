@@ -780,13 +780,15 @@
 		].
 	explain(missing_predicate_directive(_, _, Type, _, (meta_predicate)/1, Predicate)) -->
 		[	'The ~w ~q predicate has one or more meta-arguments.'-[Type, Predicate], nl,
-			'Add a local meta_predicate/1 directive declaring those meta-arguments to'-[], nl,
-			'suppress this warning and ensure that meta-calls occur in the correct context.'-[], nl, nl
+			'Add a local meta_predicate/1 directive declaring those meta-arguments'-[], nl,
+			'to suppress this warning and ensure that meta-calls occur in the correct'-[], nl,
+			'context.'-[], nl, nl
 		].
 	explain(missing_predicate_directive(_, _, Type, _, (meta_non_terminal)/1, NonTerminal)) -->
 		[	'The ~w ~q non-terminal has one or more meta-arguments.'-[Type, NonTerminal], nl,
-			'Add a local meta_non_terminal/1 directive declaring those meta-arguments to'-[], nl,
-			'suppress this warning and ensure that meta-calls occur in the correct context.'-[], nl, nl
+			'Add a local meta_non_terminal/1 directive declaring those meta-arguments'-[], nl,
+			'to suppress this warning and ensure that meta-calls occur in the correct'-[], nl,
+			'context.'-[], nl, nl
 		].
 	explain(missing_predicate_directive(_, _, _, _, Directive, Predicate)) -->
 		['Add a ":- ~q(~q)." directive to suppress this warning.'-[Directive, Predicate], nl, nl].
@@ -794,9 +796,15 @@
 		['Add a  "~q." directive to suppress this warning.'-[Directive], nl, nl
 		].
 
-	explain(missing_scope_directive(_, _, _, _, Directive, _)) -->
-		[	'But there is a ~w directive for the predicate. If there is a scope'-[Directive], nl,
-			'directive, check for a typo in the predicate name or number of arguments.'-[], nl, nl
+	explain(missing_scope_directive(_, _, _, _, Directive, _/_)) -->
+		[	'But there is a ~w directive for the predicate. If there is a'-[Directive], nl,
+			'scope directive, check for a typo in the predicate name or number of'-[], nl,
+			'arguments.'-[], nl, nl
+		].
+	explain(missing_scope_directive(_, _, _, _, Directive, _//_)) -->
+		[	'But there is a ~w directive for the non-terminal. If there is a'-[Directive], nl,
+			'scope directive, check for a typo in the non-terminal name or number of'-[], nl,
+			'arguments.'-[], nl, nl
 		].
 
 	explain(missing_function(_, _, _, _, _)) -->

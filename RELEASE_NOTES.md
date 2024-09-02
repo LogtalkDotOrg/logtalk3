@@ -28,6 +28,8 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* IMPROVED: Compiler warnings on missing scope directives for non-terminals.
+
 * FIXED: Compiler bug when using a `uses/2` directive to change the order of
 the arguments of a predicate and using the predicate alias as a closure.
 
