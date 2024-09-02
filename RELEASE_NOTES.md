@@ -68,6 +68,9 @@ Tests
 * IMPROVED: Tests for the Prolog `call/1` control construct to delay expected
 errors to runtime.
 
+* UPDATED: Tests for the `missing_directives` and `trivial_goal_fails` linter
+flags.
+
 Installers and installation scripts
 -----------------------------------
 
