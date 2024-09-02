@@ -10880,9 +10880,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(Head, Functor, ExtArity),
 	'$lgt_check_predicate_name_conflict'((dynamic), Head, Functor//Arity),
 	(	'$lgt_pp_entity_'(category, _, _),
-		'$lgt_pp_multifile_'(Head, _, _) ->
-		% categories cannot contain non-terminals that are both multifile and dynamic
-		throw(permission_error(declare, dynamic, Functor//Arity))
+		(	'$lgt_pp_multifile_'(Head, _, _) ->
+			% categories cannot contain non-terminals that are both multifile and dynamic
+			throw(permission_error(declare, dynamic, Functor//Arity))
+		;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
+			% predicate definition occurs before the directive
+			throw(permission_error(declare, dynamic, Functor//Arity))
+		)
 	;	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized non-terminals must be static
 		throw(permission_error(modify, synchronized_non_terminal, Functor//Arity))
