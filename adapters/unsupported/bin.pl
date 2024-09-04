@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on May 5, 2024
+%  Last updated on September 4, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -223,8 +223,8 @@ write_term(Stream, Term, _) :-
 
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
 %
-% valid candidates are proprietary built-in predicates with
-% no side-effects when called with ground arguments
+% valid candidates are proprietary built-in predicates with no
+% side-effects or exceptions when called with ground arguments
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
 	fail.

@@ -51,6 +51,9 @@ after its definition.
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The description of the internal predicate
+`'$lgt_candidate_tautology_or_falsehood_goal_hook'/1` in all adapter files.
+
 * UPDATED: The XVM adapter file with additional candidate built-in predicates
 for checking tautology and falsehood goals.
 
