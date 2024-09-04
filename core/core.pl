@@ -8302,7 +8302,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_second_stage'(+atom, @entity_identifier, +compilation_context)
 %
-% compiler second stage (initialization/1 goals and clause body goals)
+% compiler second stage
+%
+% the first stage collected data on all directives, clause heads, and
+% grammar rules heads thus enabling the compilation of initialization/1
+% goals and clause body goals
 
 '$lgt_second_stage'(Type, Entity, Ctx) :-
 	catch(
@@ -20433,7 +20437,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_specializes_class_'(Obj, _, _),
 		\+ '$lgt_specializes_class_'(_, Obj, _)
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
-		% object defined in the same file we're compiling; check that it's a prototype
+		% object defined earlier in the same file we're compiling; check that it's a prototype
 		\+ '$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _)),
 		\+ '$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _)),
 		\+ '$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _)),
@@ -20459,7 +20463,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_specializes_class_'(_, Obj, _)
 		), !
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
-		% object defined in the same file we're compiling; check that it's an instance or a class
+		% object defined earlier in the same file we're compiling; check that it's an instance or a class
 		(	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(Obj, _, _))
 		;	'$lgt_pp_runtime_clause_'('$lgt_instantiates_class_'(_, Obj, _))
 		;	'$lgt_pp_runtime_clause_'('$lgt_specializes_class_'(Obj, _, _))
@@ -20483,7 +20487,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% object being compiled
 		true
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, _)) ->
-		% object defined in the same file we're compiling
+		% object defined earlier in the same file we're compiling
 		true
 	;	fail
 	).
@@ -20503,7 +20507,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% protocol being compiled
 		true
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Ptc, _, _, _, _)) ->
-		% protocol defined in the same file we're compiling
+		% protocol defined earlier in the same file we're compiling
 		true
 	;	fail
 	).
@@ -20523,7 +20527,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% category being compiled
 		true
 	;	'$lgt_pp_runtime_clause_'('$lgt_current_category_'(Ctg, _, _, _, _, _)) ->
-		% category defined in the same file we're compiling
+		% category defined earlier in the same file we're compiling
 		true
 	;	fail
 	).
@@ -20775,6 +20779,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!.
 
 '$lgt_report_unknown_entities'(protocol, Entity) :-
+	% protocols can only reference other protocols
 	!,
 	'$lgt_report_unknown_protocols'(protocol, Entity).
 
@@ -20796,7 +20801,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 		% not the object being compiled (self reference)
 		\+ '$lgt_pp_object_'(Object, _, _, _, _, _, _, _, _, _, _),
-		% not an object defined in the source file being compiled
+		% not an object defined earlier in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _)),
 		'$lgt_increment_compiling_warnings_counter',
 		(	atom(Object),
@@ -20821,7 +20826,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_current_protocol_'(Protocol, _, _, _, _),
 		% not the protocol being compiled (self reference)
 		\+ '$lgt_pp_protocol_'(Protocol, _, _, _, _),
-		% not a protocol defined in the source file being compiled
+		% not a protocol defined earlier in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_protocol_'(Protocol, _, _, _, _)),
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(
@@ -20844,7 +20849,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_current_category_'(Category, _, _, _, _, _),
 		% not the category being compiled (self reference)
 		\+ '$lgt_pp_category_'(Category, _, _, _, _, _),
-		% not a category defined in the source file being compiled
+		% not a category defined earlier in the source file being compiled
 		\+ '$lgt_pp_runtime_clause_'('$lgt_current_category_'(Category, _, _, _, _, _)),
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(
@@ -20866,7 +20871,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_referenced_module_'(Module, File, Lines),
 		% not a currently loaded module
 		\+ current_module(Module),
-		% not the module being compiled (self reference)
+		% not the module being compiled as an object (self reference)
 		\+ '$lgt_pp_module_'(Module),
 		'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(
@@ -20881,8 +20886,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_report_unknown_messages'(+atom, @entity_identifier)
 %
-% reports any unknown messages for loaded objects and calls to unknown
-% predicates for loaded modules found while compiling an entity
+% reports any unknown messages for loaded objects (including built-in objects) and
+% calls to unknown predicates for loaded modules found while compiling an entity
 
 '$lgt_report_unknown_messages'(_, _) :-
 	'$lgt_compiler_flag'(unknown_predicates, silent),
@@ -21766,8 +21771,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% dynamic protocol; calls to the dynamic predicate implementing the
 		% predicate declaration table fail when there are no clauses
 		true
-	;	% generate a catchall clause for static protocols as the predicate
-		% implementing the predicate declaration table is static
+	;	% static protocol; generate a catchall clause as the predicate
+		% implementing the predicate declaration table is also static
 		functor(Head, Dcl, 5),
 		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
@@ -21865,8 +21870,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% dynamic category; calls to the dynamic predicate implementing the
 		% predicate declaration table fail when there are no clauses
 		true
-	;	% generate a catchall clause for static categories as the predicate
-		% implementing the predicate declaration table is static
+	;	% static category; generate a catchall clause as the predicate
+		% implementing the predicate declaration table is also static
 		functor(Head, Dcl, 5),
 		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
@@ -21919,8 +21924,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% dynamic object; calls to the dynamic predicate implementing the
 		% predicate declaration table fail when there are no clauses
 		true
-	;	% generate a catchall clause for static objects as the predicate
-		% implementing the predicate declaration table is static
+	;	% static object; generate a catchall clause as the predicate
+		% implementing the predicate declaration table is also static
 		functor(Head, Dcl, 4),
 		assertz('$lgt_pp_dcl_'((Head:-fail)))
 	).
@@ -21934,8 +21939,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% dynamic object; calls to the dynamic predicate implementing the
 		% predicate definition table fail when there are no clauses
 		true
-	;	% generate a catchall clause for static objects as the predicate
-		% implementing the predicate definition table is static
+	;	% static object; generate a catchall clause as the predicate
+		% implementing the predicate definition table is also static
 		functor(Head, Def, 3),
 		assertz('$lgt_pp_def_'((Head:-fail)))
 	).

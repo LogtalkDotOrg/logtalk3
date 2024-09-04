@@ -36,6 +36,8 @@ and non-terminal goals.
 
 * IMPROVED: Compiler warnings on missing scope directives for non-terminals.
 
+* IMPROVED: Internal documentation of the compiler and runtime.
+
 * FIXED: Compiler bug when using a `uses/2` directive to change the order of
 the arguments of a predicate and using the predicate alias as a closure.
 
