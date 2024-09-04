@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XVM 10.0.0 and later versions
-%  Last updated on September 2, 2024
+%  Last updated on September 4, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -161,7 +161,6 @@
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(?=(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_number(_, _)).
-'$lgt_candidate_tautology_or_falsehood_goal_hook'(atomic_concat(_, _, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(attvar(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(cyclic_term(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(dif(_, _)).
