@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for LPA MacProlog32 1.25
-%  Last updated on September 4, 2024
+%  Last updated on September 9, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -249,7 +249,7 @@ call(F, A1, A2, A3, A4, A5, A6) :-
 % '$lgt_candidate_tautology_or_falsehood_goal_hook'(@callable)
 %
 % valid candidates are proprietary built-in predicates with no
-% side-effects or exceptions when called with ground arguments
+% side-effects when called with ground arguments
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(_) :-
 	fail.

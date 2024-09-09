@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:135:0,
+		version is 1:136:0,
 		author is 'Paulo Moura',
-		date is 2024-09-02,
+		date is 2024-09-09,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -352,6 +352,10 @@
 
 	message_tokens(goal_is_always_false(File, Lines, Type, Entity, Goal)) -->
 		['Goal is always false: ~q'-[Goal], nl],
+		message_context(File, Lines, Type, Entity).
+
+	message_tokens(goal_is_always_error(File, Lines, Type, Entity, Goal, Error)) -->
+		['Goal is always an error: ~q (~q)'-[Goal, Error], nl],
 		message_context(File, Lines, Type, Entity).
 
 	message_tokens(no_matching_clause_for_predicate_goal(File, Lines, Type, Entity, Goal)) -->

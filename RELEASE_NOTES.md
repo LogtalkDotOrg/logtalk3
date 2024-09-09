@@ -48,11 +48,12 @@ the disjunction is an argument of the `call/1` control construct.
 file defined category declares a predicate or a non-terminal dynamic textually
 after its definition.
 
+* FIXED: Protect the linter check for goals that are always true or false from
+unexpected exceptions and report them instead of aborting compilation with an
+error.
+
 Prolog adapter and integration files
 ------------------------------------
-
-* UPDATED: The description of the internal predicate
-`'$lgt_candidate_tautology_or_falsehood_goal_hook'/1` in all adapter files.
 
 * UPDATED: The XVM adapter file with additional candidate built-in predicates
 for checking tautology and falsehood goals.

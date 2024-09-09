@@ -17398,10 +17398,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 		) ->
 		'$lgt_source_file_context'(File, Lines, Type, Entity),
 		'$lgt_increment_compiling_warnings_counter',
-		(	call(Goal) ->
-			'$lgt_print_message'(
-				warning(always_true_or_false_goals),
-				goal_is_always_true(File, Lines, Type, Entity, Goal)
+		(	catch(Goal, Error, true) ->
+			(	var(Error) ->
+				'$lgt_print_message'(
+					warning(always_true_or_false_goals),
+					goal_is_always_true(File, Lines, Type, Entity, Goal)
+				)
+			;	'$lgt_print_message'(
+					warning(always_true_or_false_goals),
+					goal_is_always_error(File, Lines, Type, Entity, Goal, Error)
+				)
 			)
 		;	'$lgt_print_message'(
 				warning(always_true_or_false_goals),

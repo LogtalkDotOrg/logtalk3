@@ -859,7 +859,8 @@ Lint flags
 ``always_true_or_false_goals(Option)``
    Controls the printing of warnings for goals that are always true or
    false. Possible option values are ``warning`` (the usual default) and
-   ``silent`` (not recommended).
+   ``silent`` (not recommended). A unexpected exception in the goal being
+   checked is also reported.
 
 .. _flag_grammar_rules:
 .. index:: pair: grammar_rules; Flag
