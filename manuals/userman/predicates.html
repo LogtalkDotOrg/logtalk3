@@ -330,32 +330,32 @@ the <code class="docutils literal notranslate"><span class="pre">member(X,</span
 proofs for that solution. Note that different modes for the same predicate
 often have different determinism. The possible values are:</p>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">zero</span></code></dt><dd><p>Predicate always fails.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero</span></code></dt><dd><p>Predicate always fails (e.g. the <code class="docutils literal notranslate"><span class="pre">false/0</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one</span></code></dt><dd><p>Predicate always succeeds once.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">one</span></code></dt><dd><p>Predicate always succeeds once (e.g. the <code class="docutils literal notranslate"><span class="pre">flush_output/0</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></dt><dd><p>Predicate either fails or succeeds.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></dt><dd><p>Predicate either fails or succeeds (e.g. the <code class="docutils literal notranslate"><span class="pre">atom/1</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></dt><dd><p>Predicate has zero or more proofs.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></dt><dd><p>Predicate has zero or more proofs (e.g. the <code class="docutils literal notranslate"><span class="pre">clause/2</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></dt><dd><p>Predicate has one or more proofs.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></dt><dd><p>Predicate has one or more proofs (e.g. the <code class="docutils literal notranslate"><span class="pre">repeat/0</span></code> standard predicate).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">zero_or_error</span></code></dt><dd><p>Predicate either fails or throws an error.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></dt><dd><p>Predicate either succeeds once or throws an error.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></dt><dd><p>Predicate either succeeds once or throws an error (e.g. the <code class="docutils literal notranslate"><span class="pre">(is)/2</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></dt><dd><p>Predicate succeeds once or fails or throws an error.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></dt><dd><p>Predicate succeeds once or fails or throws an error (e.g. the <code class="docutils literal notranslate"><span class="pre">get_char/1</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more_or_error</span></code></dt><dd><p>Predicate may fail or succeed multiple times or throw an error.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more_or_error</span></code></dt><dd><p>Predicate may fail or succeed multiple times or throw an error (e.g. the <code class="docutils literal notranslate"><span class="pre">retract/1</span></code> standard predicate).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">one_or_more_or_error</span></code></dt><dd><p>Predicate may succeed one or more times or throw an error.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">error</span></code></dt><dd><p>Predicate will throw an error.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">error</span></code></dt><dd><p>Predicate will throw an error (e.g. the <code class="docutils literal notranslate"><span class="pre">type_error/2</span></code> built-in method).</p>
 </dd>
 </dl>
 <p>The last six values support documenting that some call modes may throw an
-error or will throw an error despite the calls complying with the argument
-types and instantiation modes. As an example, consider the <code class="docutils literal notranslate"><span class="pre">open/3</span></code> ISO
+error or will throw an error <strong>despite the calls complying with the argument
+types and instantiation modes</strong>. As an example, consider the <code class="docutils literal notranslate"><span class="pre">open/3</span></code> ISO
 Prolog built-in predicate. We may write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">mode</span>(<span class="k">open</span>(<span class="o">@</span>source_sink, <span class="o">@</span>io_mode, <span class="o">--</span>stream), one_or_error).
 </pre></div>

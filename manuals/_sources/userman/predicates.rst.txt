@@ -200,31 +200,31 @@ proofs for that solution. Note that different modes for the same predicate
 often have different determinism. The possible values are:
 
 ``zero``
-   Predicate always fails.
+   Predicate always fails (e.g. the ``false/0`` standard predicate).
 ``one``
-   Predicate always succeeds once.
+   Predicate always succeeds once (e.g. the ``flush_output/0`` standard predicate).
 ``zero_or_one``
-   Predicate either fails or succeeds.
+   Predicate either fails or succeeds (e.g. the ``atom/1`` standard predicate).
 ``zero_or_more``
-   Predicate has zero or more proofs.
+   Predicate has zero or more proofs (e.g. the ``clause/2`` standard predicate).
 ``one_or_more``
-   Predicate has one or more proofs.
+   Predicate has one or more proofs (e.g. the ``repeat/0`` standard predicate).
 ``zero_or_error``
    Predicate either fails or throws an error.
 ``one_or_error``
-   Predicate either succeeds once or throws an error.
+   Predicate either succeeds once or throws an error (e.g. the ``(is)/2`` standard predicate).
 ``zero_or_one_or_error``
-   Predicate succeeds once or fails or throws an error.
+   Predicate succeeds once or fails or throws an error (e.g. the ``get_char/1`` standard predicate).
 ``zero_or_more_or_error``
-   Predicate may fail or succeed multiple times or throw an error.
+   Predicate may fail or succeed multiple times or throw an error (e.g. the ``retract/1`` standard predicate).
 ``one_or_more_or_error``
    Predicate may succeed one or more times or throw an error.
 ``error``
-   Predicate will throw an error.
+   Predicate will throw an error (e.g. the ``type_error/2`` built-in method).
 
 The last six values support documenting that some call modes may throw an
-error or will throw an error despite the calls complying with the argument
-types and instantiation modes. As an example, consider the ``open/3`` ISO
+error or will throw an error **despite the calls complying with the argument
+types and instantiation modes**. As an example, consider the ``open/3`` ISO
 Prolog built-in predicate. We may write:
 
 ::
