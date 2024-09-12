@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,8 +32,8 @@
 
 :- object(soduku).
 
-	:- use_module(library(clpfd), [all_different/1, ins/2, labeling/2]).
-	:- use_module(library(system), [popen/3]).
+	:- use_module(clpfd, [all_different/1, ins/2, labeling/2]).
+	:- use_module(system, [popen/3]).
 
 	:- uses(list, [append/2, length/2]).
 	:- uses(meta, [succeeds/2::maplist/2]).

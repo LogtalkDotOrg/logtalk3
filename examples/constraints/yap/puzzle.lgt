@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@
 
 	:- public(solve/1).
 
-	:- use_module(library(clpfd), [
+	:- use_module(clpfd, [
 		op(450, xfx, ..), op(700, xfx, #=), op(700, xfx, #\=), op(700, xfx, ins),
 		(#=)/2, (#\=)/2, all_different/1, (ins)/2, label/1
 	]).
