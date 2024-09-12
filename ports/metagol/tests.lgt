@@ -101,9 +101,9 @@
 			Clauses,
 			[
 				(f(A, B) :- f_1(A, C), f_2(C, B)),
-				(f_1(D, E):-map(D, E, f_2)),
-				(f_2(F, G):-my_reverse(F, H),f_3(H, G)),
-				(f_3(I, J):-my_tail(I, K),my_reverse(K, J))
+				(f_1(D, E) :-map(D, E, f_2)),
+				(f_2(F, G) :-my_reverse(F, H),f_3(H, G)),
+				(f_3(I, J) :-my_tail(I, K),my_reverse(K, J))
 			]
 		).
 
@@ -260,10 +260,10 @@
 		^^variant(
 			Clauses,
 			[
-				(f(A, C):-grab_ball(A, B), f_1(B, C)),
-				(f_1(D, F):-f_2(D, E), drop_ball(E, F)),
-				(f_2(G, I):-f_3(G, H), f_3(H, I)),
-				(f_3(J, K):-move_right(J, L), move_forwards(L, K))
+				(f(A, C) :-grab_ball(A, B), f_1(B, C)),
+				(f_1(D, F) :-f_2(D, E), drop_ball(E, F)),
+				(f_2(G, I) :-f_3(G, H), f_3(H, I)),
+				(f_3(J, K) :-move_right(J, L), move_forwards(L, K))
 %				(f(A,E) :- grab_ball(A,B), f_3(B,C), f_3(C,D), drop_ball(D,E)),
 %				(f_3(F,H) :- move_right(F,G), move_forwards(G,H))
 			]
@@ -275,11 +275,11 @@
 		^^variant(
 			Clauses,
 			[
-				(f(A, C):-grab_ball(A, B), f_1(B, C)),
-				(f_1(D, F):-f_2(D, E), drop_ball(E, F)),
-				(f_2(G, I):-f_3(G, H), f_3(H, I)),
-				(f_3(J, K):-f_4(J, L), f_4(L, K)),
-				(f_4(M, O):-move_right(M, N), move_forwards(N, O))
+				(f(A, C) :-grab_ball(A, B), f_1(B, C)),
+				(f_1(D, F) :-f_2(D, E), drop_ball(E, F)),
+				(f_2(G, I) :-f_3(G, H), f_3(H, I)),
+				(f_3(J, K) :-f_4(J, L), f_4(L, K)),
+				(f_4(M, O) :-move_right(M, N), move_forwards(N, O))
 %				(f(A,E) :- grab_ball(A,B), f_3(B,C), f_3(C,D), drop_ball(D,E)),
 %				(f_3(F,H) :- f_4(F,G), f_4(G,H)),
 %				(f_4(I,K) :- move_right(I,J), move_forwards(J,K))
