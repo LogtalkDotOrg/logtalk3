@@ -501,21 +501,6 @@ modules are sometimes defined in files with names different from the
 module names requiring finding, opening, and reading the file in order
 to find the actual module name.
 
-Logtalk supports the declaration of :term:`predicate aliases <predicate alias>`
-and :term:`predicate shorthands <predicate shorthand>` in ``use_module/2``
-directives used within object and categories. For example, the ECLiPSe IC
-Constraint Solvers define a ``(::)/2`` variable domain operator that clashes
-with the Logtalk ``(::)/2`` message sending operator. We can solve the conflict
-by writing:
-
-::
-
-   :- use_module(ic, [(::)/2 as ins/2]).
-
-With this directive, calls to the ``ins/2`` predicate alias will be
-automatically compiled by Logtalk to calls to the ``(::)/2`` predicate in
-the ``ic`` module.
-
 Logtalk allows you to send a message to a module in order to call one of
 its predicates. This is usually not advised as it implies a performance
 penalty when compared to just using the ``Module:Call`` notation.

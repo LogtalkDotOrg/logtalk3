@@ -2206,6 +2206,23 @@ In this case, dynamic binding will necessarily be used for all listed
 predicates (and non-terminals). The parameter variable must be instantiated
 at runtime when the calls are made.
 
+Logtalk supports the declaration of :term:`predicate aliases <predicate alias>`
+and :term:`predicate shorthands <predicate shorthand>` in ``use_module/2``
+directives used within object and categories. For example, the ECLiPSe IC
+Constraint Solvers define a ``(::)/2`` variable domain operator that clashes
+with the Logtalk ``(::)/2`` message sending operator. We can solve the conflict
+by writing:
+
+::
+
+   :- use_module(ic, [(::)/2 as ins/2]).
+
+With this directive, calls to the ``ins/2`` predicate alias will be
+automatically compiled by Logtalk to calls to the ``(::)/2`` predicate in
+the ``ic`` module.
+
+.. _predicates_prolog_module_meta_predicates:
+
 Calling Prolog module meta-predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

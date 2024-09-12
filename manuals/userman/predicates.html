@@ -2032,9 +2032,21 @@ when using the directive in a parametric object or a parametric category.
 In this case, dynamic binding will necessarily be used for all listed
 predicates (and non-terminals). The parameter variable must be instantiated
 at runtime when the calls are made.</p>
+<p>Logtalk supports the declaration of <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">predicate aliases</span></a>
+and <a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a> in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
+directives used within object and categories. For example, the ECLiPSe IC
+Constraint Solvers define a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> variable domain operator that clashes
+with the Logtalk <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message sending operator. We can solve the conflict
+by writing:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(ic, [(<span class="o">::</span>)<span class="o">/</span><span class="m">2</span> <span class="o">as</span> ins<span class="o">/</span><span class="m">2</span>]).
+</pre></div>
+</div>
+<p>With this directive, calls to the <code class="docutils literal notranslate"><span class="pre">ins/2</span></code> predicate alias will be
+automatically compiled by Logtalk to calls to the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> predicate in
+the <code class="docutils literal notranslate"><span class="pre">ic</span></code> module.</p>
 </section>
 <section id="calling-prolog-module-meta-predicates">
-<h3>Calling Prolog module meta-predicates<a class="headerlink" href="#calling-prolog-module-meta-predicates" title="Link to this heading"></a></h3>
+<span id="predicates-prolog-module-meta-predicates"></span><h3>Calling Prolog module meta-predicates<a class="headerlink" href="#calling-prolog-module-meta-predicates" title="Link to this heading"></a></h3>
 <p>The Logtalk library provides implementations of common meta-predicates,
 which can be used in place of module meta-predicates (e.g. list mapping
 meta-predicates). If that is not the case, the Logtalk compiler may need
