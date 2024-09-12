@@ -206,13 +206,13 @@ often have different determinism. The possible values are:
 ``zero_or_one``
    Predicate either fails or succeeds (e.g. the ``atom/1`` standard predicate).
 ``zero_or_more``
-   Predicate has zero or more proofs (e.g. the ``clause/2`` standard predicate).
+   Predicate has zero or more proofs (e.g. the ``current_predicate/1`` standard predicate).
 ``one_or_more``
    Predicate has one or more proofs (e.g. the ``repeat/0`` standard predicate).
 ``zero_or_error``
    Predicate either fails or throws an error.
 ``one_or_error``
-   Predicate either succeeds once or throws an error (e.g. the ``(is)/2`` standard predicate).
+   Predicate either succeeds once or throws an error (e.g. the ``open/3`` standard predicate).
 ``zero_or_one_or_error``
    Predicate succeeds once or fails or throws an error (e.g. the ``get_char/1`` standard predicate).
 ``zero_or_more_or_error``
@@ -223,9 +223,9 @@ often have different determinism. The possible values are:
    Predicate will throw an error (e.g. the ``type_error/2`` built-in method).
 
 The last six values support documenting that some call modes may throw an
-error or will throw an error **despite the calls complying with the argument
-types and instantiation modes**. As an example, consider the ``open/3`` ISO
-Prolog built-in predicate. We may write:
+error or will throw an error **despite the call arguments complying with the
+expected types and instantiation modes**. As an example, consider the ``open/3``
+standard predicate:
 
 ::
 
@@ -235,9 +235,21 @@ In this case, the mode directive tells the user that a valid call can still
 throw an error (there may be e.g. a permission error opening the specified
 source or sink).
 
-Note that some predicates have more than one valid mode implying several
-mode directives. For example, to document the possible use modes of the
-ISO Prolog ``atom_concat/3`` built-in predicate we would write:
+Notice that using the ``zero``, ``one``, ``zero_or_one``, ``zero_or_more``, or
+``one_or_more`` modes is not only for predicates that never throw an exception;
+they can also be used for any predicate that doesn't throw an exception when
+the arguments are valid. For example, the ``current_predicate/1`` standard
+predicate throws an exception if the argument is neither a variable nor a
+predicate indicator; but it succeeds zero or more times when its argument is
+valid:
+
+::
+
+   :- mode(current_predicate(?predicate_indicator), zero_or_more).
+
+Some predicates have more than one valid mode, thus implying several mode
+directives. For example, to document the possible use modes of the standard
+``atom_concat/3`` predicate we would write:
 
 ::
 
