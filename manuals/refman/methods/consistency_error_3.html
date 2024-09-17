@@ -169,7 +169,7 @@ Calling this predicate is equivalent to the following sequence of goals:</p>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
-<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Consistency</span></code> include:</p>
+<p>Possible values representing <code class="docutils literal notranslate"><span class="pre">Consistency</span></code> checks include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">same_arity</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">same_number_of_parameters</span></code></p></li>
@@ -194,9 +194,21 @@ runtime.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(list, [
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% code that will trigger consistency errors when compiled:</span>
+
+<span class="c">% predicates (and non-terminals) aliases must have the same</span>
+<span class="c">% arity as the original predicates (and non-terminals)</span>
+<span class="p">:- </span><span class="k">uses</span>(list, [
     member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> in<span class="o">/</span><span class="m">1</span>
 ]).
+
+<span class="c">% meta-predicate templates should be consistent with how closures</span>
+<span class="c">% are used regarding the number of addtional arguments</span>
+<span class="p">:- </span><span class="k">public</span>(p<span class="o">/</span><span class="m">2</span>).
+<span class="p">:- </span><span class="k">meta_predicate</span>(p(<span class="m">1</span>, <span class="o">*</span>)).
+
+p(<span class="nv">G</span>, <span class="nv">A</span>) <span class="o">:-</span>
+    <span class="k">call</span>(<span class="nv">G</span>, <span class="nv">A</span>, <span class="m">2</span>).
 </pre></div>
 </div>
 <div class="admonition seealso">

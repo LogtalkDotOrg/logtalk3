@@ -48,7 +48,7 @@ Calling this predicate is equivalent to the following sequence of goals:
 This allows the user to generate errors in the same format used by the
 runtime.
 
-Possible values for ``Consistency`` include:
+Possible values representing ``Consistency`` checks include:
 
 - ``same_arity``
 - ``same_number_of_parameters``
@@ -73,9 +73,21 @@ Examples
 
 ::
 
+   % code that will trigger consistency errors when compiled:
+
+   % predicates (and non-terminals) aliases must have the same
+   % arity as the original predicates (and non-terminals)
    :- uses(list, [
        member/2 as in/1
    ]).
+
+   % meta-predicate templates should be consistent with how closures
+   % are used regarding the number of addtional arguments
+   :- public(p/2).
+   :- meta_predicate(p(1, *)).
+
+   p(G, A) :-
+       call(G, A, 2).
 
 .. seealso::
 
