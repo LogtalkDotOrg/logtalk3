@@ -164,7 +164,7 @@
 		['The parameter position is outside the valid range. Typo?'-[], nl, nl].
 
 	error(consistency_error(same_arity, _/_, _/_)) -->
-		[	'The arity of these two predicate indicators is expected to be equal'-[], nl,
+		[	'The arity of these two predicate indicators is expected to be equal.'-[], nl,
 			'Typo?'-[], nl, nl
 		].
 	error(consistency_error(same_arity, _//_, _//_)) -->
