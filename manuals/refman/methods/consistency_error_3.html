@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>existence_error/2 &mdash; The Logtalk Handbook v3.83.0-b01 documentation</title>
+  <title>consistency_error/3 &mdash; The Logtalk Handbook v3.83.0-b01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=396eccfe" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="permission_error/3" href="permission_error_3.html" />
-    <link rel="prev" title="consistency_error/3" href="consistency_error_3.html" />
+    <link rel="next" title="existence_error/2" href="existence_error_2.html" />
+    <link rel="prev" title="domain_error/2" href="domain_error_2.html" />
    
 </head>
 
@@ -82,8 +82,8 @@
 <li class="toctree-l4"><a class="reference internal" href="uninstantiation_error_1.html"><code class="docutils literal notranslate"><span class="pre">uninstantiation_error/1</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="type_error_2.html"><code class="docutils literal notranslate"><span class="pre">type_error/2</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="domain_error_2.html"><code class="docutils literal notranslate"><span class="pre">domain_error/2</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="consistency_error_3.html"><code class="docutils literal notranslate"><span class="pre">consistency_error/3</span></code></a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">existence_error/2</span></code></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">consistency_error/3</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="existence_error_2.html"><code class="docutils literal notranslate"><span class="pre">existence_error/2</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="permission_error_3.html"><code class="docutils literal notranslate"><span class="pre">permission_error/3</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="representation_error_1.html"><code class="docutils literal notranslate"><span class="pre">representation_error/1</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="evaluation_error_1.html"><code class="docutils literal notranslate"><span class="pre">evaluation_error/1</span></code></a></li>
@@ -139,9 +139,9 @@
           <li class="breadcrumb-item"><a href="../index.html">Reference Manual</a></li>
           <li class="breadcrumb-item"><a href="index.html">Built-in methods</a></li>
           <li class="breadcrumb-item"><a href="error_handling_methods.html">Error handling</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">existence_error/2</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">consistency_error/3</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/methods/existence_error_2.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/methods/consistency_error_3.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -150,44 +150,36 @@
            <div itemprop="articleBody">
              
   <p class="align-right"><strong>built-in method</strong></p>
-<section id="existence-error-2">
-<span id="methods-existence-error-2"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">existence_error/2</span></code><a class="headerlink" href="#existence-error-2" title="Link to this heading"></a></h1>
+<section id="consistency-error-3">
+<span id="methods-consistency-error-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">consistency_error/3</span></code><a class="headerlink" href="#consistency-error-3" title="Link to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">existence_error</span>(<span class="nv">Thing</span>, <span class="nv">Culprit</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>consistency_error(<span class="nv">Consistency</span>, <span class="nv">Argument1</span>, <span class="nv">Argument2</span>)
 </pre></div>
 </div>
-<p>Throws an existence error. Used when the subject of an operation does not
-exist. This built-in method is declared private and thus cannot be used as a
-message to an object. Calling this predicate is equivalent to the following
-sequence of goals:</p>
+<p>Throws a consistency error. Used when two directive or predicate arguments are
+individually correct but together are not consistent. For example, a predicate
+and its alias having different arity in a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive. This built-in
+method is declared private and thus cannot be used as a message to an object.
+Calling this predicate is equivalent to the following sequence of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(<span class="k">existence_error</span>(<span class="nv">Thing</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
+<span class="k">throw</span>(error(consistency_error(<span class="nv">Consistency</span>,<span class="nv">Argument1</span>,<span class="nv">Argument2</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
 runtime.</p>
-<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Thing</span></code> include:</p>
+<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Consistency</span></code> include:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">predicate_declaration</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">procedure</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">source_sink</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stream</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">object</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">protocol</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">category</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">module</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">library</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">file</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">goal_thread</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">same_arity</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">same_number_of_parameters</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">same_number_of_arguments</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">same_number_of_closure_expected_arguments</span></code></p></li>
 </ul>
-<p>The value of <code class="docutils literal notranslate"><span class="pre">Culprit</span></code> is the argument or one of its sub-terms that caused
-the error.</p>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">existence_error</span>(<span class="o">@</span>nonvar, <span class="o">@</span>nonvar) <span class="o">-</span> error
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>consistency_error(<span class="o">+</span>atom, <span class="o">@</span>nonvar, <span class="o">@</span>nonvar) <span class="o">-</span> error
 </pre></div>
 </div>
 </section>
@@ -196,15 +188,15 @@ the error.</p>
 <div class="line-block">
 <div class="line">When called:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(Thing,</span> <span class="pre">Culprit)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(Consistency,</span> <span class="pre">Argument1,</span> <span class="pre">Argument2)</span></code></div>
 </div>
 </div>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
-<span class="o">\+</span> <span class="k">current_object</span>(payroll),
-<span class="k">existence_error</span>(object, payroll).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(list, [
+    member<span class="o">/</span><span class="m">2</span> <span class="o">as</span> in<span class="o">/</span><span class="m">1</span>
+]).
 </pre></div>
 </div>
 <div class="admonition seealso">
@@ -216,10 +208,10 @@ the error.</p>
 <a class="reference internal" href="uninstantiation_error_1.html#methods-uninstantiation-error-1"><span class="std std-ref">uninstantiation_error/1</span></a>,
 <a class="reference internal" href="type_error_2.html#methods-type-error-2"><span class="std std-ref">type_error/2</span></a>,
 <a class="reference internal" href="domain_error_2.html#methods-domain-error-2"><span class="std std-ref">domain_error/2</span></a>,
-<a class="reference internal" href="consistency_error_3.html#methods-consistency-error-3"><span class="std std-ref">consistency_error/3</span></a>,
-<a class="reference internal" href="evaluation_error_1.html#methods-evaluation-error-1"><span class="std std-ref">evaluation_error/1</span></a>,
+<a class="reference internal" href="existence_error_2.html#methods-existence-error-2"><span class="std std-ref">existence_error/2</span></a>,
 <a class="reference internal" href="permission_error_3.html#methods-permission-error-3"><span class="std std-ref">permission_error/3</span></a>,
 <a class="reference internal" href="representation_error_1.html#methods-representation-error-1"><span class="std std-ref">representation_error/1</span></a>,
+<a class="reference internal" href="evaluation_error_1.html#methods-evaluation-error-1"><span class="std std-ref">evaluation_error/1</span></a>,
 <a class="reference internal" href="resource_error_1.html#methods-resource-error-1"><span class="std std-ref">resource_error/1</span></a>,
 <a class="reference internal" href="syntax_error_1.html#methods-syntax-error-1"><span class="std std-ref">syntax_error/1</span></a>,
 <a class="reference internal" href="system_error_0.html#methods-system-error-0"><span class="std std-ref">system_error/0</span></a></p>
@@ -231,8 +223,8 @@ the error.</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="consistency_error_3.html" class="btn btn-neutral float-left" title="consistency_error/3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="permission_error_3.html" class="btn btn-neutral float-right" title="permission_error/3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="domain_error_2.html" class="btn btn-neutral float-left" title="domain_error/2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="existence_error_2.html" class="btn btn-neutral float-right" title="existence_error/2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

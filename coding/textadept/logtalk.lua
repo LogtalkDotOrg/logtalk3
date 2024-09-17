@@ -1,4 +1,4 @@
--- Copyright © 2017-2019 Michael T. Richter <ttmrichter@gmail.com>. MIT License.
+-- Copyright © 2017-2024 Michael T. Richter <ttmrichter@gmail.com>. MIT License.
 -- Logtalk LPeg lexer.
 
 local lexer = require('lexer')
@@ -48,11 +48,11 @@ local one_plus_arity_keywords = [[
   threaded_engine_post threaded_engine_fetch logtalk_compile logtalk_load
   logtalk_library_path logtalk_load_context  logtalk_make_target_action
   current_logtalk_flag set_logtalk_flag create_logtalk_flag context parameter
-  self sender this uninstantiation_error type_error domain_error existence_error
-  permission_error representation_error evaluation_error resource_error syntax_error
-  bagof findall forall setof before after forward phrase expand_term expand_goal
-  term_expansion goal_expansion numbervars put_code put_byte current_op op
-  ignore repeat number_codes current_prolog_flag set_prolog_flag keysort sort
+  self sender this uninstantiation_error type_error domain_error consistency_error
+  existence_error permission_error representation_error evaluation_error resource_error
+  syntax_error bagof findall forall setof before after forward phrase expand_term
+  expand_goal term_expansion goal_expansion numbervars put_code put_byte current_op
+  op ignore repeat number_codes current_prolog_flag set_prolog_flag keysort sort
 ]]
 lex:modify_rule('keyword', token(lexer.KEYWORD,
   word_match(zero_arity_keywords) +

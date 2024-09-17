@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2019-01-09,
+		date is 2024-09-16,
 		comment is 'Unit tests for the create_object/4 built-in predicate.'
 	]).
 
@@ -89,7 +89,7 @@
 		% delay the error to runtime
 		{create_object(_, [], [synchronized(foo/1), dynamic(foo/1)], [foo(1)])}.
 
-	throws(create_object_4_15, error(domain_error({1}, 2), logtalk(create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))]), _))) :-
+	throws(create_object_4_15, error(consistency_error(same_number_of_closure_expected_arguments,call/3,map(1,*)), logtalk(create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))]), _))) :-
 		% delay the error to runtime
 		{create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))])}.
 

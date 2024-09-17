@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:136:0,
+		version is 1:137:0,
 		author is 'Paulo Moura',
-		date is 2024-09-09,
+		date is 2024-09-17,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -862,6 +862,8 @@
 		['Type error: expected ~q but got ~q'-[ValidType, Culprit], nl].
 	error_tokens(domain_error(ValidDomain, Culprit)) -->
 		['Domain error: value ~q is not in domain ~q'-[Culprit, ValidDomain], nl].
+	error_tokens(consistency_error(Consistency, Argument1, Argument2)) -->
+		['Consistency error: ~q expected for arguments ~q and ~q'-[Consistency, Argument1, Argument2], nl].
 	error_tokens(permission_error(Operation, PermissionType, Culprit)) -->
 		['Permission error: ~q ~q ~q'-[Operation, PermissionType, Culprit], nl].
 	error_tokens(existence_error(ObjectType, Culprit)) -->

@@ -30,6 +30,7 @@ Error handling
    uninstantiation_error_1
    type_error_2
    domain_error_2
+   consistency_error_3
    existence_error_2
    permission_error_3
    representation_error_1

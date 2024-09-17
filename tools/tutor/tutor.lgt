@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:67:0,
+		version is 0:68:0,
 		author is 'Paulo Moura',
-		date is 2024-09-02,
+		date is 2024-09-14,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -161,9 +161,28 @@
 		].
 
 	error(domain_error([1,_], _)) -->
-		['The parameter is outside the valid range. Typo?'-[], nl, nl].
-	error(domain_error({_}, _)) -->
-		['Inconsistent number of arguments. The numbers are expected to be equal. Typo?'-[], nl, nl].
+		['The parameter position is outside the valid range. Typo?'-[], nl, nl].
+
+	error(consistency_error(same_arity, _/_, _/_)) -->
+		[	'The arity of these two predicate indicators is expected to be equal'-[], nl,
+			'Typo?'-[], nl, nl
+		].
+	error(consistency_error(same_arity, _//_, _//_)) -->
+		[	'The arity of these two non-terminal indicators is expected to be'-[], nl,
+			'equal. Typo?'-[], nl, nl
+		].
+	error(consistency_error(same_number_of_parameters, _, _)) -->
+		[	'Inconsistent number of parameters between the entity name and'-[], nl,
+			'its documentation. The numbers are expected to be equal. Typo?'-[], nl, nl
+		].
+	error(consistency_error(same_number_of_arguments, _, _)) -->
+		[	'Inconsistent number of arguments between the predicate and its'-[], nl,
+			'documentation. The numbers are expected to be equal. Typo?'-[], nl, nl
+		].
+	error(consistency_error(same_number_of_closure_expected_arguments, _, _)) -->
+		[	'Inconsistent number of closure additional arguments and the predicate'-[], nl,
+			'meta directive. The numbers are expected to be equal. Typo?'-[], nl, nl
+		].
 
 	error(permission_error(modify, object, _)) -->
 		['An object already exists with this identifier.'-[], nl, nl].

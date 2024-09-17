@@ -74,7 +74,7 @@ var LogtalkHighlightRules = function() {
          { token: 'support.function.control.logtalk',
            regex: '\\b(?:true|fa(?:il|lse)|repeat|(?:instantiation|system)_error)\\b(?![-!(^~])' },
          { token: 'support.function.control.logtalk',
-           regex: '\\b((?:uninstantiation|type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])' },
+           regex: '\\b((?:uninstantiation|type|domain|consistency|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])' },
          { token: 'support.function.control.logtalk',
            regex: '\\b(?:ca(?:ll|tch)|ignore|throw|once)(?=[(])' },
          { token: 'support.function.chars-and-bytes-io.logtalk',

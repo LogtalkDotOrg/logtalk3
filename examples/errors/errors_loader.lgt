@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,5 +41,10 @@
 	(logtalk_load(modify_object_alias) -> true; true),
 	(logtalk_load(main_include_syntax_error) -> true; true),
 	(logtalk_load(main_include_compiler_error_1) -> true; true),
-	(logtalk_load(main_include_compiler_error_2) -> true; true)
+	(logtalk_load(main_include_compiler_error_2) -> true; true),
+	(logtalk_load(uses_predicate_different_arity) -> true; true),
+	(logtalk_load(object_different_number_of_parameters) -> true; true),
+	(logtalk_load(predicate_different_number_of_arguments) -> true; true),
+	(logtalk_load(closure_different_number_of_arguments_1) -> true; true),
+	(logtalk_load(closure_different_number_of_arguments_2) -> true; true)
 )).

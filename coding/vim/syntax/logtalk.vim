@@ -2,7 +2,7 @@
 "
 " Language:	Logtalk
 " Maintainer:   Paulo Moura <pmoura@logtalk.org>
-" Last Change:  December 16, 2023
+" Last Change:  September 14, 2024
 
 
 
@@ -189,7 +189,7 @@ syn match	logtalkOperator		"-->"
 syn match	logtalkOperator		"->"
 syn match	logtalkKeyword		"\<throw\ze("
 syn match	logtalkKeyword		"\<\(instantiation\|system\)_error\>"
-syn match	logtalkKeyword		"\<\(uninstantiation\|type\|domain\|existence\|permission\|representation\|evaluation\|resource\|syntax\)_error\ze("
+syn match	logtalkKeyword		"\<\(uninstantiation\|type\|domain\|consistency\|existence\|permission\|representation\|evaluation\|resource\|syntax\)_error\ze("
 
 
 " Term unification

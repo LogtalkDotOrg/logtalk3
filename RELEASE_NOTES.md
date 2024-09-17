@@ -28,8 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* CHANGED: Message terms for the trivial fails linter warnings to distinguish
-between predicate and non-terminal goals.
+* CHANGED: All compiler domain errors for consistency errors to use the new
+`consistency_error/3` built-in method.
+
+* ADDED: New `consistency_error/3` built-in method.
 
 * IMPROVED: Linter warnings for trivial fails to distinguish between predicate
 and non-terminal goals.
@@ -76,6 +78,15 @@ Tools
 
 * CHANGED: The `lgtunit` tool `run_test_sets/1` predicate to also accept a list
 with a single test set or an empty list as argument.
+
+* UPDATED: The `help` tool to be aware of the new `consistency_error/3`
+built-in method.
+
+* UPDATED: The `tutor` tool to explain consistency errors.
+Examples
+--------
+
+* UPDATED: The `errors` example to illustrate consistency errors. 
 
 Tests
 -----

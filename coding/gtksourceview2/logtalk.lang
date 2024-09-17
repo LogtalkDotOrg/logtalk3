@@ -2,7 +2,7 @@
 <!--
 
  Author: Paulo Moura <pmoura@logtalk.org>
- Copyright (c) 2007-2023 Paulo Moura <pmoura@logtalk.org>
+ Copyright (c) 2007-2024 Paulo Moura <pmoura@logtalk.org>
 
  This library is free software; you can redistribute it and/or
  modify it under the terms of the GNU Library General Public
@@ -260,7 +260,7 @@
       <!-- Logic and control -->
       <keyword>(ca(ll|tch)|ignore|once|throw)(?=[(])</keyword>
       <keyword>(true|fa(il|lse)|repeat|(instantiation|system)_error)(?![-!(^~])</keyword>
-      <keyword>((uninstantiation|type|domain|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])</keyword>
+      <keyword>((uninstantiation|type|domain|consistency|existence|permission|representation|evaluation|resource|syntax)_error)(?=[(])</keyword>
       <!-- Atomic term processing -->
       <keyword>(atom_(length|c(hars|o(ncat|des))))(?=[(])</keyword>
       <keyword>(sub_atom)(?=[(])</keyword>

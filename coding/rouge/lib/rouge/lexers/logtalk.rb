@@ -62,7 +62,7 @@ module Rouge
         # Control constructs
         rule %r/(call|catch|throw)(?=[(])/, Keyword
         rule %r/(fail|false|true|instantiation_error|system_error)\b/, Keyword
-        rule %r/(uninstantiation_error|type_error|domain_error|existence_error|permission_error|representation_error|evaluation_error|resource_error|syntax_error)(?=[(])/, Keyword
+        rule %r/(uninstantiation_error|type_error|domain_error|consistency_error|existence_error|permission_error|representation_error|evaluation_error|resource_error|syntax_error)(?=[(])/, Keyword
         # All solutions
         rule %r/(bagof|setof|findall|forall)(?=[(])/, Keyword
         # Multi-threading meta-predicates

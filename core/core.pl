@@ -10544,11 +10544,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_source_file_context'(Ctx, File, Lines),
 	assertz('$lgt_pp_predicate_alias_'(Entity, Pred, Alias, 1, File, Lines)).
 
-'$lgt_compile_alias_directive_resource'(_//Arity1, _//Arity2, _, _) :-
-	throw(domain_error({Arity1}, Arity2)).
+'$lgt_compile_alias_directive_resource'(Functor1//Arity1, Functor2//Arity2, _, _) :-
+	throw(consistency_error(same_arity, Functor1//Arity1, Functor2//Arity2)).
 
-'$lgt_compile_alias_directive_resource'(_/Arity1, _/Arity2, _, _) :-
-	throw(domain_error({Arity1}, Arity2)).
+'$lgt_compile_alias_directive_resource'(Functor1/Arity1, Functor2/Arity2, _, _) :-
+	throw(consistency_error(same_arity, Functor1/Arity1, Functor2/Arity2)).
 
 '$lgt_compile_alias_directive_resource'(_/_, Functor2//Arity2, _, _) :-
 	throw(type_error(predicate_indicator, Functor2//Arity2)).
@@ -11551,7 +11551,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	OriginalArity =:= AliasArity ->
 		'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx),
 		'$lgt_compile_uses_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, OriginalArity, Obj, Flag, Ctx)
-	;	throw(domain_error({OriginalArity}, AliasArity))
+	;	throw(consistency_error(same_arity, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))
 	).
 
 '$lgt_compile_uses_directive_resource'(Original::Alias, Obj, Flag, Ctx) :-
@@ -11561,7 +11561,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	OriginalArity =:= AliasArity ->
 		'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx),
 		'$lgt_compile_uses_directive_non_terminal_indicator'(OriginalFunctor, AliasFunctor, OriginalArity, ExtendedArity, Obj, Flag, Ctx)
-	;	throw(domain_error({OriginalArity}, AliasArity))
+	;	throw(consistency_error(same_arity, OriginalFunctor//OriginalArity, AliasFunctor//AliasArity))
 	).
 
 '$lgt_compile_uses_directive_resource'(Original::Alias, Obj, Flag, Ctx) :-
@@ -11813,7 +11813,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	OriginalArity =:= AliasArity ->
 		'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx),
 		'$lgt_compile_use_module_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, OriginalArity, Module, Flag, Ctx)
-	;	throw(domain_error({OriginalArity}, AliasArity))
+	;	throw(consistency_error(same_arity, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))
 	).
 
 '$lgt_compile_use_module_directive_resource'(':'(Original, Alias), Module, Flag, Ctx) :-
@@ -11823,7 +11823,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	OriginalArity =:= AliasArity ->
 		'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx),
 		'$lgt_compile_use_module_directive_non_terminal_indicator'(OriginalFunctor, AliasFunctor, OriginalArity, ExtendedArity, Module, Flag, Ctx)
-	;	throw(domain_error({OriginalArity}, AliasArity))
+	;	throw(consistency_error(same_arity, OriginalFunctor//OriginalArity, AliasFunctor//AliasArity))
 	).
 
 '$lgt_compile_use_module_directive_resource'(':'(Original, Alias), Module, Flag, Ctx) :-
@@ -12404,13 +12404,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_pp_entity_'(_, Entity, _),
 	functor(Entity, _, Arity),
-	'$lgt_check_entity_info_parameters'(Parameters, Parameters, 0, Arity).
+	'$lgt_check_entity_info_parameters'(Parameters, Entity, Parameters, 0, Arity).
 
 '$lgt_compile_entity_info_directive_pair'(parnames, Parnames, parnames(Parnames)) :-
 	!,
 	'$lgt_pp_entity_'(_, Entity, _),
 	functor(Entity, _, Arity),
-	'$lgt_check_entity_info_parnames'(Parnames, Parnames, 0, Arity).
+	'$lgt_check_entity_info_parnames'(Parnames, Entity, Parnames, 0, Arity).
 
 '$lgt_compile_entity_info_directive_pair'(remarks, Remarks, remarks(Remarks)) :-
 	!,
@@ -12453,41 +12453,41 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TPair =.. [Key, Value].
 
 
-'$lgt_check_entity_info_parameters'([Pair| Pairs], Parameters, Counter0, Arity) :-
+'$lgt_check_entity_info_parameters'([Pair| Pairs], Entity, Parameters, Counter0, Arity) :-
 	!,
 	(	Pair = Name - Description ->
 		'$lgt_check'(atom_or_string, Name),
 		'$lgt_check'(atom_or_string, Description),
 		Counter1 is Counter0 + 1,
-		'$lgt_check_entity_info_parameters'(Pairs, Parameters, Counter1, Arity)
+		'$lgt_check_entity_info_parameters'(Pairs, Entity, Parameters, Counter1, Arity)
 	;	throw(type_error(pair, Pair))
 	).
 
-'$lgt_check_entity_info_parameters'([], _, Counter, Arity) :-
+'$lgt_check_entity_info_parameters'([], Entity, Parameters, Counter, Arity) :-
 	!,
 	(	Counter =:= Arity ->
 		true
-	;	throw(domain_error({Arity}, Counter))
+	;	throw(consistency_error(same_number_of_parameters, Entity, Parameters))
 	).
 
-'$lgt_check_entity_info_parameters'(_, Parameters, _, _) :-
+'$lgt_check_entity_info_parameters'(_, _, Parameters, _, _) :-
 	throw(type_error(list, Parameters)).
 
 
-'$lgt_check_entity_info_parnames'([Name| Names], Parnames, Counter0, Arity) :-
+'$lgt_check_entity_info_parnames'([Name| Names], Entity, Parnames, Counter0, Arity) :-
 	!,
 	'$lgt_check'(atom_or_string, Name),
 	Counter1 is Counter0 + 1,
-	'$lgt_check_entity_info_parnames'(Names, Parnames, Counter1, Arity).
+	'$lgt_check_entity_info_parnames'(Names, Entity, Parnames, Counter1, Arity).
 
-'$lgt_check_entity_info_parnames'([], _, Counter, Arity) :-
+'$lgt_check_entity_info_parnames'([], Entity, Parnames, Counter, Arity) :-
 	!,
 	(	Counter =:= Arity ->
 		true
-	;	throw(domain_error({Arity}, Counter))
+	;	throw(consistency_error(same_number_of_parameters, Entity, Parnames))
 	).
 
-'$lgt_check_entity_info_parnames'(_, Parnames, _, _) :-
+'$lgt_check_entity_info_parnames'(_, _, Parnames, _, _) :-
 	throw(type_error(list, Parnames)).
 
 
@@ -12520,13 +12520,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	throw(domain_error(allocation, Allocation))
 	).
 
-'$lgt_compile_predicate_info_directive_pair'(arguments, Arguments, _, Arity, arguments(Arguments)) :-
+'$lgt_compile_predicate_info_directive_pair'(arguments, Arguments, Functor, Arity, arguments(Arguments)) :-
 	!,
-	'$lgt_check_predicate_info_arguments'(Arguments, Arguments, 0, Arity).
+	'$lgt_check_predicate_info_arguments'(Arguments, Arguments, 0, Functor, Arity).
 
-'$lgt_compile_predicate_info_directive_pair'(argnames, Argnames, _, Arity, argnames(Argnames)) :-
+'$lgt_compile_predicate_info_directive_pair'(argnames, Argnames, Functor, Arity, argnames(Argnames)) :-
 	!,
-	'$lgt_check_predicate_info_argnames'(Argnames, Argnames, 0, Arity).
+	'$lgt_check_predicate_info_argnames'(Argnames, Argnames, 0, Functor, Arity).
 
 '$lgt_compile_predicate_info_directive_pair'(comment, Comment, _, _, comment(Comment)) :-
 	!,
@@ -12582,42 +12582,42 @@ create_logtalk_flag(Flag, Value, Options) :-
 	TPair =.. [Key, Value].
 
 
-'$lgt_check_predicate_info_arguments'([Pair| Pairs], Arguments, Counter0, Arity) :-
+'$lgt_check_predicate_info_arguments'([Pair| Pairs], Arguments, Counter0, Functor, Arity) :-
 	!,
 	(	Pair = Name - Description ->
 		'$lgt_check'(atom_or_string, Name),
 		'$lgt_check'(atom_or_string, Description),
 		Counter1 is Counter0 + 1,
-		'$lgt_check_predicate_info_arguments'(Pairs, Arguments, Counter1, Arity)
+		'$lgt_check_predicate_info_arguments'(Pairs, Arguments, Counter1, Functor, Arity)
 	;	throw(type_error(pair, Pair))
 	).
 
-'$lgt_check_predicate_info_arguments'([], _, Counter, Arity) :-
+'$lgt_check_predicate_info_arguments'([], Arguments, Counter, Functor, Arity) :-
 	!,
 	(	Counter =:= Arity ->
 		true
-	;	throw(domain_error({Arity}, Counter))
+	;	throw(consistency_error(same_number_of_arguments, Functor/Arity, Arguments))
 	).
 
-'$lgt_check_predicate_info_arguments'(_, Arguments, _, _) :-
+'$lgt_check_predicate_info_arguments'(_, Arguments, _, _, _) :-
 	throw(type_error(list, Arguments)).
 
 
-'$lgt_check_predicate_info_argnames'([Name| Names], Arguments, Counter0, Arity) :-
+'$lgt_check_predicate_info_argnames'([Name| Names], Argnames, Counter0, Functor, Arity) :-
 	!,
 	'$lgt_check'(atom_or_string, Name),
 	Counter1 is Counter0 + 1,
-	'$lgt_check_predicate_info_argnames'(Names, Arguments, Counter1, Arity).
+	'$lgt_check_predicate_info_argnames'(Names, Argnames, Counter1, Functor, Arity).
 
-'$lgt_check_predicate_info_argnames'([], _, Counter, Arity) :-
+'$lgt_check_predicate_info_argnames'([], Argnames, Counter, Functor, Arity) :-
 	!,
 	(	Counter =:= Arity ->
 		true
-	;	throw(domain_error({Arity}, Counter))
+	;	throw(consistency_error(same_number_of_arguments, Functor/Arity, Argnames))
 	).
 
-'$lgt_check_predicate_info_argnames'(_, Arguments, _, _) :-
-	throw(type_error(list, Arguments)).
+'$lgt_check_predicate_info_argnames'(_, Argnames, _, _, _) :-
+	throw(type_error(list, Argnames)).
 
 
 
@@ -13650,8 +13650,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_length'(ExtraArgs, 0, NExtraArgs),
 	Meta =.. [_| MetaArgs],
 	% check that the call/N call complies with the meta-predicate declaration
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, NExtraArgs, Domain),
-	throw(domain_error(Domain, NExtraArgs)).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, NExtraArgs),
+	N is NExtraArgs + 1,
+	throw(consistency_error(same_number_of_closure_expected_arguments, call/N, Meta)).
 
 '$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), _, TPred, DPred, Ctx) :-
 	!,
@@ -16660,7 +16661,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_meta_predicate_'(Head, HeadMeta, _, _),
 	Head =.. [_| HeadArgs],
 	HeadMeta =.. [_| HeadMetaArgs],
-	'$lgt_same_number_of_closure_extra_args'(PredArgs, CMetaArgs, HeadArgs, HeadMetaArgs),
+	'$lgt_same_number_of_closure_extra_args'(PredArgs, CMetaArgs, HeadArgs, HeadMetaArgs, HeadMeta, Meta),
 	fail.
 
 % predicates specified in use_module/2 directives
@@ -18094,45 +18095,44 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_not_same_meta_arg_extra_args'(@list(nonvar), @list(var), @var, +integer, -compound)
+% '$lgt_not_same_meta_arg_extra_args'(@list(nonvar), @list(var), @var, +integer)
 %
 % checks that the number of additional arguments being appended to a closure
 % in a call/N call matches the corresponding meta-predicate declaration
 % (the relative ordering of the meta-vars is the same of the corresponding
 % meta-arguments; assumes Logtalk meta-predicate notation)
 
-'$lgt_not_same_meta_arg_extra_args'([(*)| MetaArgs], MetaVars, Closure, ExtraArgs, Domain) :-
+'$lgt_not_same_meta_arg_extra_args'([(*)| MetaArgs], MetaVars, Closure, ExtraArgs) :-
 	!,
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, Domain).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs).
 
-'$lgt_not_same_meta_arg_extra_args'([(::)| MetaArgs], MetaVars, Closure, ExtraArgs, Domain) :-
+'$lgt_not_same_meta_arg_extra_args'([(::)| MetaArgs], MetaVars, Closure, ExtraArgs) :-
 	!,
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, Domain).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs).
 
-'$lgt_not_same_meta_arg_extra_args'([0| MetaArgs], MetaVars, Closure, ExtraArgs, Domain) :-
+'$lgt_not_same_meta_arg_extra_args'([0| MetaArgs], MetaVars, Closure, ExtraArgs) :-
 	!,
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, Domain).
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs).
 
-'$lgt_not_same_meta_arg_extra_args'([MetaArg| _], [MetaVar| _], Closure, ExtraArgs, Domain) :-
+'$lgt_not_same_meta_arg_extra_args'([MetaArg| _], [MetaVar| _], Closure, ExtraArgs) :-
 	MetaVar == Closure,
 	!,
 	integer(MetaArg),
-	MetaArg =\= ExtraArgs,
-	Domain = {MetaArg}.
+	MetaArg =\= ExtraArgs.
 
-'$lgt_not_same_meta_arg_extra_args'([_| MetaArgs], [_| MetaVars], Closure, ExtraArgs, Domain) :-
-	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs, Domain).
-
+'$lgt_not_same_meta_arg_extra_args'([_| MetaArgs], [_| MetaVars], Closure, ExtraArgs) :-
+	'$lgt_not_same_meta_arg_extra_args'(MetaArgs, MetaVars, Closure, ExtraArgs).
 
 
-% '$lgt_same_number_of_closure_extra_args'(@list, @list, @list, @list)
+
+% '$lgt_same_number_of_closure_extra_args'(@list, @list, @list, @list, @callable, @callable)
 %
 % checks that the number of additional arguments being appended to a closure is kept
 % when passing a closure from the clause head to a meta-predicate call in the body
 
-'$lgt_same_number_of_closure_extra_args'([], _, _, _).
+'$lgt_same_number_of_closure_extra_args'([], _, _, _, _, _).
 
-'$lgt_same_number_of_closure_extra_args'([PredArg| PredArgs], [PredMetaArg| PredMetaArgs], HeadArgs, HeadMetaArgs) :-
+'$lgt_same_number_of_closure_extra_args'([PredArg| PredArgs], [PredMetaArg| PredMetaArgs], HeadArgs, HeadMetaArgs, HeadMeta, PredMeta) :-
 	(	var(PredArg),
 		integer(PredMetaArg), PredMetaArg > 0,
 		% argument is a closure
@@ -18140,10 +18140,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% shared closure argument
 		(	PredMetaArg = HeadMetaArg ->
 			% same number of closure extra args
-			'$lgt_same_number_of_closure_extra_args'(PredArgs, PredMetaArgs, HeadArgs, HeadMetaArgs)
-		;	throw(domain_error({HeadMetaArg}, PredMetaArg))
+			'$lgt_same_number_of_closure_extra_args'(PredArgs, PredMetaArgs, HeadArgs, HeadMetaArgs, HeadMeta, PredMeta)
+		;	throw(consistency_error(same_number_of_closure_expected_arguments, HeadMeta, PredMeta))
 		)
-	;	'$lgt_same_number_of_closure_extra_args'(PredArgs, PredMetaArgs, HeadArgs, HeadMetaArgs)
+	;	'$lgt_same_number_of_closure_extra_args'(PredArgs, PredMetaArgs, HeadArgs, HeadMetaArgs, HeadMeta, PredMeta)
 	).
 
 
@@ -24370,6 +24370,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_method_spec'(uninstantiation_error(_), p, no, 1).
 '$lgt_built_in_method_spec'(type_error(_,_), p, no, 1).
 '$lgt_built_in_method_spec'(domain_error(_,_), p, no, 1).
+'$lgt_built_in_method_spec'(consistency_error(_,_,_), p, no, 1).
 '$lgt_built_in_method_spec'(existence_error(_,_), p, no, 1).
 '$lgt_built_in_method_spec'(permission_error(_,_,_), p, no, 1).
 '$lgt_built_in_method_spec'(representation_error(_), p, no, 1).
@@ -24400,6 +24401,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_built_in_error_method'(uninstantiation_error(_)).
 '$lgt_built_in_error_method'(type_error(_, _)).
 '$lgt_built_in_error_method'(domain_error(_, _)).
+'$lgt_built_in_error_method'(consistency_error(_, _, _)).
 '$lgt_built_in_error_method'(existence_error(_, _)).
 '$lgt_built_in_error_method'(permission_error(_, _, _)).
 '$lgt_built_in_error_method'(representation_error(_)).

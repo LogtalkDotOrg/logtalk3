@@ -38,7 +38,7 @@ called. For example:
 ::
 
    error(
-       permission_error(modify,private_predicate,p),
+       permission_error(modify,private_predicate,p/0),
        logtalk(foo::abolish(p/0), _)
    )
 

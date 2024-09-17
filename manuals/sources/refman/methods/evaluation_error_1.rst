@@ -86,6 +86,7 @@ Examples
    :ref:`methods_uninstantiation_error_1`,
    :ref:`methods_type_error_2`,
    :ref:`methods_domain_error_2`,
+   :ref:`methods_consistency_error_3`,
    :ref:`methods_existence_error_2`,
    :ref:`methods_permission_error_3`,
    :ref:`methods_representation_error_1`,

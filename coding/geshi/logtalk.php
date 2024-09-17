@@ -4,7 +4,7 @@
  * -----------
  *
  * Author: Paulo Moura (pmoura@logtalk.org)
- * Copyright: (c) 2009-2020 Paulo Moura (https://logtalk.org/)
+ * Copyright: (c) 2009-2024 Paulo Moura (https://logtalk.org/)
  * Release Version: 1.0.8.6
  * Date Started: 2009/10/24
  *
@@ -12,6 +12,8 @@
  *
  * CHANGES
  * -------
+ * 2020/07/31 (1.1.27)
+ *  -  Added syntax coloring of the consistency_error/3 error throwing built-in method
  * 2020/07/31 (1.1.26)
  *  -  Added syntax coloring of the uninstantiation_error/1 error throwing built-in method
  * 2019/07/08 (1.1.25)
@@ -183,8 +185,8 @@ $language_data = array(
             'abolish', 'asserta', 'assertz', 'clause', 'retract', 'retractall',
             // control
             'call', 'catch', 'ignore', 'once', 'throw',
-            'uninstantiation_error', 'type_error', 'domain_error', 'existence_error',
-            'permission_error', 'representation_error', 'evaluation_error',
+            'uninstantiation_error', 'type_error', 'domain_error', 'consistency_error',
+            'existence_error', 'permission_error', 'representation_error', 'evaluation_error',
             'resource_error', 'syntax_error',
             // all solutions predicates
             'bagof', 'findall', 'forall', 'setof',

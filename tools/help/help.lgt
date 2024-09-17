@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:33:0,
+		version is 0:34:0,
 		author is 'Paulo Moura',
-		date is 2023-06-01,
+		date is 2024-09-16,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -357,6 +357,7 @@
 	built_in_method(uninstantiation_error, 1, '/manuals/refman/methods/', 'uninstantiation_error_1.html').
 	built_in_method(type_error, 2, '/manuals/refman/methods/', 'type_error_2.html').
 	built_in_method(domain_error, 2, '/manuals/refman/methods/', 'domain_error_2.html').
+	built_in_method(consistency_error, 3, '/manuals/refman/methods/', 'consistency_error_3.html').
 	built_in_method(existence_error, 2, '/manuals/refman/methods/', 'existence_error_2.html').
 	built_in_method(permission_error, 3, '/manuals/refman/methods/', 'permission_error_3.html').
 	built_in_method(representation_error, 1, '/manuals/refman/methods/', 'representation_error_1.html').

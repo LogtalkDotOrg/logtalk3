@@ -20,62 +20,62 @@
 
 **built-in method**
 
-.. index:: pair: evaluation_error/1; Built-in method
-.. _methods_evaluation_error_1:
+.. index:: pair: consistency_error/3; Built-in method
+.. _methods_consistency_error_3:
 
-``evaluation_error/1``
-======================
+``consistency_error/3``
+=======================
 
 Description
 -----------
 
 ::
 
-   evaluation_error(Error)
+   consistency_error(Consistency, Argument1, Argument2)
 
-Throws an evaluation error. Used when evaluating an arithmetic expression
-generates an exception. This built-in method is declared private and thus
-cannot be used as a message to an object. Calling this predicate is
-equivalent to the following sequence of goals:
+Throws a consistency error. Used when two directive or predicate arguments are
+individually correct but together are not consistent. For example, a predicate
+and its alias having different arity in a ``uses/2`` directive. This built-in
+method is declared private and thus cannot be used as a message to an object.
+Calling this predicate is equivalent to the following sequence of goals:
 
 ::
 
    ...,
    context(Context),
-   throw(error(evaluation_error(Error), Context)).
+   throw(error(consistency_error(Consistency,Argument1,Argument2), Context)).
 
 This allows the user to generate errors in the same format used by the
 runtime.
 
-Possible values for ``Error`` include:
+Possible values for ``Consistency`` include:
 
-- ``float_overflow``
-- ``int_overflow``
-- ``undefined``
-- ``underflow``
-- ``zero_divisor``
+- ``same_arity``
+- ``same_number_of_parameters``
+- ``same_number_of_arguments``
+- ``same_number_of_closure_expected_arguments``
 
 Modes and number of proofs
 --------------------------
 
 ::
 
-   evaluation_error(@nonvar) - error
+   consistency_error(+atom, @nonvar, @nonvar) - error
 
 Errors
 ------
 
 | When called:
-|     ``evaluation_error(Exception)``
+|     ``consistency_error(Consistency, Argument1, Argument2)``
 
 Examples
 --------
 
 ::
 
-   ...,
-   Divisor =:= 0,
-   evaluation_error(zero_divisor).
+   :- uses(list, [
+       member/2 as in/1
+   ]).
 
 .. seealso::
 
@@ -86,10 +86,10 @@ Examples
    :ref:`methods_uninstantiation_error_1`,
    :ref:`methods_type_error_2`,
    :ref:`methods_domain_error_2`,
-   :ref:`methods_consistency_error_3`,
    :ref:`methods_existence_error_2`,
    :ref:`methods_permission_error_3`,
    :ref:`methods_representation_error_1`,
+   :ref:`methods_evaluation_error_1`,
    :ref:`methods_resource_error_1`,
    :ref:`methods_syntax_error_1`,
    :ref:`methods_system_error_0`
