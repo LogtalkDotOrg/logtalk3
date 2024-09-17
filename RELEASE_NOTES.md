@@ -38,6 +38,9 @@ and non-terminal goals.
 
 * IMPROVED: Internal documentation of the compiler and runtime.
 
+* FIXED: Compiler redundant check if a recursive call to a meta-predicate
+complies with the expected number of additional arguments for closures.
+
 * FIXED: Compiler bug when using a `uses/2` directive to change the order of
 the arguments of a predicate and using the predicate alias as a closure.
 

@@ -16625,6 +16625,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Pred, _, _, _, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, [_| _], _, _, compile(_,_,_), _, _, _),
 	% we're compiling a clause for a meta-predicate as the list of meta-variables is not empty
+	functor(Pred, Name, Arity),
+	\+ functor(Head, Name, Arity),
+	% not a recursive call
 	(	'$lgt_pp_meta_predicate_'(Pred, Meta, _, _) ->
 		% local user-defined meta-predicate
 		true
