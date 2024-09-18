@@ -154,7 +154,7 @@
 <span id="methods-consistency-error-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">consistency_error/3</span></code><a class="headerlink" href="#consistency-error-3" title="Link to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>consistency_error(<span class="nv">Consistency</span>, <span class="nv">Argument1</span>, <span class="nv">Argument2</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">consistency_error</span>(<span class="nv">Consistency</span>, <span class="nv">Argument1</span>, <span class="nv">Argument2</span>)
 </pre></div>
 </div>
 <p>Throws a consistency error. Used when two directive or predicate arguments are
@@ -164,7 +164,7 @@ method is declared private and thus cannot be used as a message to an object.
 Calling this predicate is equivalent to the following sequence of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(consistency_error(<span class="nv">Consistency</span>,<span class="nv">Argument1</span>,<span class="nv">Argument2</span>), <span class="nv">Context</span>)).
+<span class="k">throw</span>(error(<span class="k">consistency_error</span>(<span class="nv">Consistency</span>,<span class="nv">Argument1</span>,<span class="nv">Argument2</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
@@ -174,12 +174,12 @@ runtime.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">same_arity</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">same_number_of_parameters</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">same_number_of_arguments</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">same_number_of_closure_expected_arguments</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">same_closure_specification</span></code></p></li>
 </ul>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>consistency_error(<span class="o">+</span>atom, <span class="o">@</span>nonvar, <span class="o">@</span>nonvar) <span class="o">-</span> error
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">consistency_error</span>(<span class="o">+</span>atom, <span class="o">@</span>nonvar, <span class="o">@</span>nonvar) <span class="o">-</span> error
 </pre></div>
 </div>
 </section>
@@ -203,7 +203,7 @@ runtime.</p>
 ]).
 
 <span class="c">% meta-predicate templates should be consistent with how closures</span>
-<span class="c">% are used regarding the number of addtional arguments</span>
+<span class="c">% are used regarding the number of additional arguments</span>
 <span class="p">:- </span><span class="k">public</span>(p<span class="o">/</span><span class="m">2</span>).
 <span class="p">:- </span><span class="k">meta_predicate</span>(p(<span class="m">1</span>, <span class="o">*</span>)).
 

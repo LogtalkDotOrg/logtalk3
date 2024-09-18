@@ -24,7 +24,7 @@
 	:- info([
 		version is 0:68:0,
 		author is 'Paulo Moura',
-		date is 2024-09-14,
+		date is 2024-09-18,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -179,7 +179,7 @@
 		[	'Inconsistent number of arguments between the predicate and its'-[], nl,
 			'documentation. The numbers are expected to be equal. Typo?'-[], nl, nl
 		].
-	error(consistency_error(same_number_of_closure_expected_arguments, _, _)) -->
+	error(consistency_error(same_closure_specification, _, _)) -->
 		[	'Inconsistent number of closure additional arguments and the predicate'-[], nl,
 			'meta directive. The numbers are expected to be equal. Typo?'-[], nl, nl
 		].

@@ -13654,7 +13654,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% generate the call/N meta template
 	findall('*', '$lgt_between'(1, NExtraArgs, _), Stars),
 	CallN =.. [call, NExtraArgs| Stars],
-	throw(consistency_error(same_number_of_closure_expected_arguments, CallN, Meta)).
+	throw(consistency_error(same_closure_specification, CallN, Meta)).
 
 '$lgt_compile_body'('$lgt_callN'(Closure, ExtraArgs), _, TPred, DPred, Ctx) :-
 	!,
@@ -18143,7 +18143,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	PredMetaArg = HeadMetaArg ->
 			% same number of closure extra args
 			'$lgt_same_number_of_closure_extra_args'(PredArgs, PredMetaArgs, HeadArgs, HeadMetaArgs, HeadMeta, PredMeta)
-		;	throw(consistency_error(same_number_of_closure_expected_arguments, HeadMeta, PredMeta))
+		;	throw(consistency_error(same_closure_specification, HeadMeta, PredMeta))
 		)
 	;	'$lgt_same_number_of_closure_extra_args'(PredArgs, PredMetaArgs, HeadArgs, HeadMetaArgs, HeadMeta, PredMeta)
 	).

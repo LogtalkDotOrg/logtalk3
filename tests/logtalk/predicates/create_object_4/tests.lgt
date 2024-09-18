@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2024-09-16,
+		date is 2024-09-18,
 		comment is 'Unit tests for the create_object/4 built-in predicate.'
 	]).
 
@@ -89,7 +89,7 @@
 		% delay the error to runtime
 		{create_object(_, [], [synchronized(foo/1), dynamic(foo/1)], [foo(1)])}.
 
-	throws(create_object_4_15, error(consistency_error(same_number_of_closure_expected_arguments,call/3,map(1,*)), logtalk(create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))]), _))) :-
+	throws(create_object_4_15, error(consistency_error(same_closure_specification,call(2,*,*),map(1,*)), logtalk(create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))]), _))) :-
 		% delay the error to runtime
 		{create_object(_, [], [public(map/2), meta_predicate(map(1,*))], [(map(Cl,El) :- call(Cl,El,_))])}.
 

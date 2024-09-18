@@ -53,7 +53,7 @@ Possible values representing ``Consistency`` checks include:
 - ``same_arity``
 - ``same_number_of_parameters``
 - ``same_number_of_arguments``
-- ``same_number_of_closure_expected_arguments``
+- ``same_closure_specification``
 
 Modes and number of proofs
 --------------------------
@@ -82,7 +82,7 @@ Examples
    ]).
 
    % meta-predicate templates should be consistent with how closures
-   % are used regarding the number of addtional arguments
+   % are used regarding the number of additional arguments
    :- public(p/2).
    :- meta_predicate(p(1, *)).
 
