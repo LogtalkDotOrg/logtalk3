@@ -22,7 +22,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:68:0,
+		version is 0:69:0,
 		author is 'Paulo Moura',
 		date is 2024-09-18,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
@@ -298,7 +298,7 @@
 		[	'Categories cannot define clauses for dynamic predicates'-[], nl,
 			'as they can be imported by any number of objects.'-[], nl, nl
 		].
-	error(permission_error(define, clause, _)) -->
+	error(permission_error(define, predicate, _)) -->
 		[	'Protocols cannot contain predicate clauses or grammar rules,'-[], nl,
 			'only entity, predicate, and grammar rule directives.'-[], nl, nl
 		].

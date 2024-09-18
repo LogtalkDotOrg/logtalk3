@@ -12642,7 +12642,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% compiling an entity clause
 	(	Type == protocol ->
 		% protocols cannot contain predicate definitions
-		throw(error(permission_error(define, clause, Entity), clause(Clause)))
+		throw(error(permission_error(define, predicate, Entity), clause(Clause)))
 	;	true
 	),
 	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, Prefix, _, _, _, Mode, _, Lines, _),

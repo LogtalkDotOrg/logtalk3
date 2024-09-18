@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The exception term when trying to define a predicate inside
+a protocol to use a permission type of `predicate` instead of `clause`.
+
 * CHANGED: All compiler domain errors for consistency errors to use the new
 `consistency_error/3` built-in method.
 
