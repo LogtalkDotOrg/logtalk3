@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:4:0,
+		version is 2:4:1,
 		author is 'Paulo Moura',
-		date is 2021-08-03,
+		date is 2024-09-18,
 		comment is 'Unit tests for the "securemp" example.'
 	]).
 
@@ -96,6 +96,6 @@
 	% for "rule_a" test
 	logtalk::message_hook(compiler_error(_,_,error(type_error(variable,scale(_)),clause(_))), error, core, _Tokens).
 	% for "rule_c" test
-	logtalk::message_hook(compiler_error(_,_,error(domain_error({1},2),clause(_))), error, core, _Tokens).
+	logtalk::message_hook(compiler_error(_,_,error(consistency_error(same_closure_specification,call(2,*,*),map(1,*)),clause(_))), error, core, _Tokens).
 
 :- end_object.
