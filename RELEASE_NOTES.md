@@ -72,6 +72,8 @@ Documentation
 * ADDED: Handbook section with guidelines for describing predicates in `info/2`
 directives.
 
+* IMPROVED: Handbook documentation of the `permission_error/3` built-in method.
+
 * IMPROVED: Handbook section on the `mode/2` predicate directive.
 
 * IMPROVED: Handbook section on lambda expressions.

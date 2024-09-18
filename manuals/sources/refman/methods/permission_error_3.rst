@@ -52,6 +52,8 @@ Possible values for ``Operation`` include:
 
 - ``access``
 - ``create``
+- ``declare``
+- ``define``
 - ``modify``
 - ``open``
 - ``input``
@@ -65,6 +67,9 @@ Possible values for ``Permission`` include:
 - ``protected_predicate``
 - ``private_predicate``
 - ``static_predicate``
+- ``dynamic_predicate``
+- ``predicate``
+- ``non_terminal``
 - ``database``
 - ``object``
 - ``static_object``
