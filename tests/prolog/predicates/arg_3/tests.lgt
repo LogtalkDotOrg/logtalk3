@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2024-09-18,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -123,5 +123,8 @@
 	test(lgt_arg_3_22, error(instantiation_error)) :-
 		% try to delay the expected error to runtime
 		{G = arg(_, foo(a,b), c), call(G)}.
+
+	test(lgt_arg_3_23, false, [condition(\+ current_prolog_flag(max_arity,unbounded))]) :-
+		{current_prolog_flag(max_arity, A), X is A+1, arg(X, foo(1), _)}.
 
 :- end_object.
