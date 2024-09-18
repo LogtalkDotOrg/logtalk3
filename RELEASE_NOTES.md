@@ -93,6 +93,9 @@ Tests
 
 * ADDED: Additional test for the Prolog standard `arg/3` built-in predicate.
 
+* IMPROVED: Tests for the `(=..)/2`, `abolish/1`, and `functor/3` Prolog
+standard predicates.
+
 * IMPROVED: Tests for the Prolog `call/1` control construct to delay expected
 errors to runtime.
 

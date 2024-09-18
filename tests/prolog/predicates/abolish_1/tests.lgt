@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,9 +36,9 @@ bar(_X) :- true.
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2022-05-25,
+		date is 2024-09-18,
 		comment is 'Unit tests for the ISO Prolog standard abolish/1 built-in predicate.'
 	]).
 
@@ -80,14 +80,10 @@ bar(_X) :- true.
 	test(eddbali_abolish_1_10, error(domain_error(not_less_than_zero,-1))) :-
 		{abolish(foo/(-1))}.
 
-	:- if(current_prolog_flag(max_arity, unbounded)).
-		test(eddbali_abolish_1_11).
-	:- else.
-		test(eddbali_abolish_1_11, error(representation_error(max_arity))) :-
-			current_prolog_flag(max_arity, MaxArity),
-			X is MaxArity + 1,
-			{abolish(foo/X)}.
-	:- endif.
+	test(eddbali_abolish_1_11, error(representation_error(max_arity)), [condition(\+ current_prolog_flag(max_arity,unbounded))]) :-
+		current_prolog_flag(max_arity, MaxArity),
+		X is MaxArity + 1,
+		{abolish(foo/X)}.
 
 	test(eddbali_abolish_1_12, error(type_error(atom,5))) :-
 		{abolish(5/2)}.

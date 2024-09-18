@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2024-05-06,
+		date is 2024-09-18,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -98,18 +98,10 @@
 	test(sics_univ_2_17, error(domain_error(non_empty_list,[]))) :-
 		{_ =.. []}.
 
-	:- if(current_prolog_flag(max_arity, unbounded)).
-
-		- test(sics_univ_2_18, true, [note('The max_arity flag is unbounded')]).
-
-	:- else.
-
-		test(sics_univ_2_18, error(representation_error(max_arity))) :-
-			{current_prolog_flag(max_arity, Max)},
-			N is Max+1, list_of(N, 1, L),
-			{_ =.. [f|L]}.
-
-	:- endif.
+	test(sics_univ_2_18, error(representation_error(max_arity)), [condition(\+ current_prolog_flag(max_arity,unbounded))]) :-
+		{current_prolog_flag(max_arity, Max)},
+		N is Max+1, list_of(N, 1, L),
+		{_ =.. [f|L]}.
 
 	% tests from the Logtalk portability work
 
@@ -168,13 +160,9 @@
 
 	% auxiliary predicates
 
-	:- if(\+ current_prolog_flag(max_arity, unbounded)).
-
-		list_of(0, _, []).
-		list_of(N, A, [A|L]) :-
-			N > 0, N1 is N-1,
-			list_of(N1, A, L).
-
-	:- endif.
+	list_of(0, _, []).
+	list_of(N, A, [A|L]) :-
+		N > 0, N1 is N-1,
+		list_of(N1, A, L).
 
 :- end_object.

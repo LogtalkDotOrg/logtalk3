@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2021-08-24,
+		date is 2024-09-18,
 		comment is 'Unit tests for the ISO Prolog standard functor/3 built-in predicate.'
 	]).
 
@@ -82,13 +82,8 @@
 	test(iso_functor_3_16, error(type_error(atomic,foo(a)))) :-
 		{G = functor(_F, foo(a), 1), call(G)}.
 
-	:- if(current_prolog_flag(max_arity, unbounded)).
-		test(iso_functor_3_17, error(type_error(evaluable,unbounded/0))) :-
-			{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
-	:- else.
-		test(iso_functor_3_17, error(representation_error(max_arity))) :-
-			{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
-	:- endif.
+	test(iso_functor_3_17, error(representation_error(max_arity)), [condition(\+ current_prolog_flag(max_arity,unbounded))]) :-
+		{current_prolog_flag(max_arity, A), X is A+1, functor(_T, foo, X)}.
 
 	test(iso_functor_3_18, error(domain_error(not_less_than_zero,-1))) :-
 		{G = functor(_T, foo, -1), call(G)}.
