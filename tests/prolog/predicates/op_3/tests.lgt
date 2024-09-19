@@ -30,9 +30,9 @@ o(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2024-02-11,
+		date is 2024-09-19,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -70,7 +70,7 @@ o(3).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == yap; Dialect == xvm)
+		(Dialect == eclipse; Dialect == sicstus; Dialect == swi; Dialect == trealla; Dialect == yap; Dialect == xvm)
 	)).
 		% these Prolog systems support the definition of an atom as both an infix and a postfix operator
 		test(iso_op_3_10, true) :-

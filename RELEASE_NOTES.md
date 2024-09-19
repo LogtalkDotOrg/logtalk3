@@ -107,6 +107,9 @@ errors to runtime.
 * UPDATED: Tests for the `missing_directives` and `trivial_goal_fails` linter
 flags.
 
+* UPDATED: The tests for the Prolog standard `op/3` for Trealla Prolog which
+now allows defining an atom as both an infix and a postfix operator.
+
 Installers and installation scripts
 -----------------------------------
 
