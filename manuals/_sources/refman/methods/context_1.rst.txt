@@ -48,7 +48,7 @@ predicate. Calls to this predicate are inlined at compilation time.
    of the clause calling the ``context(Context)`` method cannot contain
    the ``Context`` variable as that would result in the creation of
    a cyclic term. The compiler detects and reports any offending
-   clauses by throwing a ``representation_error(cyclic_term)`` error.
+   clauses by throwing a ``representation_error(acyclic_term)`` error.
 
 Modes and number of proofs
 --------------------------

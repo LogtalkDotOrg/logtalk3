@@ -162,7 +162,7 @@ predicate. Calls to this predicate are inlined at compilation time.</p>
 of the clause calling the <code class="docutils literal notranslate"><span class="pre">context(Context)</span></code> method cannot contain
 the <code class="docutils literal notranslate"><span class="pre">Context</span></code> variable as that would result in the creation of
 a cyclic term. The compiler detects and reports any offending
-clauses by throwing a <code class="docutils literal notranslate"><span class="pre">representation_error(cyclic_term)</span></code> error.</p>
+clauses by throwing a <code class="docutils literal notranslate"><span class="pre">representation_error(acyclic_term)</span></code> error.</p>
 </div>
 </section>
 <section id="modes-and-number-of-proofs">

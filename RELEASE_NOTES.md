@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The representation error argument when calling `context/1`
+built-in method would create a cyclic term from `cyclic_term` to
+`acyclic_term`.
+
 * CHANGED: The exception term when trying to define a predicate inside
 a protocol to use a permission type of `predicate` instead of `clause`.
 
@@ -72,7 +76,8 @@ Documentation
 * ADDED: Handbook section with guidelines for describing predicates in `info/2`
 directives.
 
-* IMPROVED: Handbook documentation of the `permission_error/3` built-in method.
+* IMPROVED: Handbook documentation of the `permission_error/3` and
+`representation_error/1` built-in methods.
 
 * IMPROVED: Handbook section on the `mode/2` predicate directive.
 

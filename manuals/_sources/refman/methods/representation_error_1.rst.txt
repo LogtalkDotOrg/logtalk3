@@ -56,6 +56,7 @@ Possible values for ``Flag`` include:
 - ``max_arity``
 - ``max_integer``
 - ``min_integer``
+- ``acyclic_term``
 - ``lambda_parameters``
 - ``entity_prefix``
 

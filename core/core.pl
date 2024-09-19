@@ -16147,7 +16147,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_head'(Ctx, Head0),
 	(	term_variables(Head0, Variables),
 		'$lgt_member_var'(Context, Variables) ->
-		throw(representation_error(cyclic_term))
+		throw(representation_error(acyclic_term))
 	;	Head0 = _::Head ->
 		% multifile predicate
 		true
