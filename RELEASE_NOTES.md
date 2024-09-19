@@ -47,6 +47,10 @@ and non-terminal goals.
 
 * IMPROVED: Internal documentation of the compiler and runtime.
 
+* FIXED: When calling threaded engines built-in predicates using a backend
+that doesn't support engines, throw a `resource_error(engines)` instead of
+a `resource_error(threads)` error.
+
 * FIXED: Compiler redundant check if a recursive call to a meta-predicate
 complies with the expected number of additional arguments for closures.
 

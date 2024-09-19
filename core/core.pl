@@ -2266,7 +2266,7 @@ threaded_cancel(Tag) :-
 threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine_create(AnswerTemplate, Goal, Engine), ExCtx))).
 
 threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
@@ -2278,7 +2278,7 @@ threaded_engine_create(AnswerTemplate, Goal, Engine) :-
 threaded_engine_self(Engine) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine_self(Engine), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine_self(Engine), ExCtx))).
 
 threaded_engine_self(Engine) :-
 	'$lgt_threaded_engine_self'(user, Engine).
@@ -2289,7 +2289,7 @@ threaded_engine_self(Engine) :-
 threaded_engine(Engine) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine(Engine), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine(Engine), ExCtx))).
 
 threaded_engine(Engine) :-
 	'$lgt_current_engine'(user, Engine).
@@ -2300,7 +2300,7 @@ threaded_engine(Engine) :-
 threaded_engine_next(Engine, Answer) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine_next(Engine, Answer), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine_next(Engine, Answer), ExCtx))).
 
 threaded_engine_next(Engine, Answer) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
@@ -2312,7 +2312,7 @@ threaded_engine_next(Engine, Answer) :-
 threaded_engine_next_reified(Engine, Answer) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine_next_reified(Engine, Answer), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine_next_reified(Engine, Answer), ExCtx))).
 
 threaded_engine_next_reified(Engine, Answer) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
@@ -2324,7 +2324,7 @@ threaded_engine_next_reified(Engine, Answer) :-
 threaded_engine_yield(Answer) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine_yield(Answer), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine_yield(Answer), ExCtx))).
 
 threaded_engine_yield(Answer) :-
 	catch('$lgt_threaded_engine_yield'(Answer, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2335,7 +2335,7 @@ threaded_engine_yield(Answer) :-
 threaded_engine_post(Engine, Term) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine_post(Engine, Term), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine_post(Engine, Term), ExCtx))).
 
 threaded_engine_post(Engine, Term) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
@@ -2347,7 +2347,7 @@ threaded_engine_post(Engine, Term) :-
 threaded_engine_fetch(Term) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine_fetch(Term), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine_fetch(Term), ExCtx))).
 
 threaded_engine_fetch(Term) :-
 	catch('$lgt_threaded_engine_fetch'(Term, user), Error, '$lgt_runtime_error_handler'(Error)).
@@ -2358,7 +2358,7 @@ threaded_engine_fetch(Term) :-
 threaded_engine_destroy(Engine) :-
 	\+ '$lgt_prolog_feature'(engines, supported),
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
-	throw(error(resource_error(threads), logtalk(threaded_engine_destroy(Engine), ExCtx))).
+	throw(error(resource_error(engines), logtalk(threaded_engine_destroy(Engine), ExCtx))).
 
 threaded_engine_destroy(Engine) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
