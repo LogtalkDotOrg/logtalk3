@@ -49,6 +49,8 @@ runtime.
 
 Possible values for ``Thing`` include:
 
+- ``predicate``
+- ``non_terminal``
 - ``predicate_declaration``
 - ``procedure``
 - ``source_sink``
@@ -57,8 +59,12 @@ Possible values for ``Thing`` include:
 - ``protocol``
 - ``category``
 - ``module``
+- ``ancestor``
 - ``library``
 - ``file``
+- ``directive``
+- ``engine``
+- ``thread``
 - ``goal_thread``
 
 The value of ``Culprit`` is the argument or one of its sub-terms that caused

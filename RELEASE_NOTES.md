@@ -76,8 +76,8 @@ Documentation
 * ADDED: Handbook section with guidelines for describing predicates in `info/2`
 directives.
 
-* IMPROVED: Handbook documentation of the `permission_error/3` and
-`representation_error/1` built-in methods.
+* IMPROVED: Handbook documentation of the `representation_error/1`,
+`existence_error/2`, and `permission_error/3` built-in methods.
 
 * IMPROVED: Handbook section on the `mode/2` predicate directive.
 
@@ -93,6 +93,7 @@ with a single test set or an empty list as argument.
 built-in method.
 
 * UPDATED: The `tutor` tool to explain consistency errors.
+
 Examples
 --------
 
