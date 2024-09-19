@@ -77,7 +77,8 @@ Documentation
 directives.
 
 * IMPROVED: Handbook documentation of the `representation_error/1`,
-`existence_error/2`, and `permission_error/3` built-in methods.
+`resource_error/1`, `existence_error/2`, and `permission_error/3` built-in
+methods.
 
 * IMPROVED: Handbook section on the `mode/2` predicate directive.
 

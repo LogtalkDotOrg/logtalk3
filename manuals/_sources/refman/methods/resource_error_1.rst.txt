@@ -49,9 +49,11 @@ runtime.
 
 Possible values for ``Resource`` include:
 
+- ``engines``
 - ``threads``
 - ``coinduction``
 - ``soft_cut_support``
+- ``text_encoding_support``
 
 
 Modes and number of proofs
