@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,9 +46,9 @@ insect(bee).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2022-10-16,
+		date is 2024-09-20,
 		comment is 'Unit tests for the ISO Prolog standard current_predicate/1 built-in predicate.'
 	]).
 
@@ -138,6 +138,20 @@ insect(bee).
 	fails(lgt_current_predicate_1_21) :-
 		{current_predicate(Name/1)},
 		Name == assertz.
+
+	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.8.2.1 NOTE
+
+	succeeds(lgt_current_predicate_1_22) :-
+		{	assertz(foo(bar)),
+			retractall(foo(_)),
+			current_predicate(foo/1)
+		}.
+
+	fails(lgt_current_predicate_1_23) :-
+		{	assertz(foo42),
+			abolish(foo42/0),
+			current_predicate(foo42/0)
+		}.
 
 	% avoid library dependencies
 	memberchk(Element, [Head| _]) :-
