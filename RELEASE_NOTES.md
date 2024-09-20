@@ -107,8 +107,8 @@ Examples
 Tests
 -----
 
-* ADDED: Additional tests for the Prolog standard `arg/3`, `atom_chars/2`, and
-`atom_codes/2` built-in predicates.
+* ADDED: Additional tests for the Prolog standard `arg/3`, `atom_chars/2`,
+`atom_codes/2`, `number_chars/2`, and `number_codes/2` built-in predicates.
 
 * IMPROVED: Tests for the `(=..)/2`, `abolish/1`, and `functor/3` Prolog
 standard predicates.

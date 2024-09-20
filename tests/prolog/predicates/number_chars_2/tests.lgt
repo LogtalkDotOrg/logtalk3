@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2023-04-29,
+		date is 2024-09-20,
 		comment is 'Unit tests for the ISO Prolog standard number_chars/2 built-in predicate.'
 	]).
 
@@ -175,6 +175,15 @@
 
 	test(lgt_number_chars_2_44, error(syntax_error(_))) :-
 		{number_chars(_, ['3','/','*',' ','*','/'])}.
+
+	test(lgt_number_chars_2_45, error(type_error(list,['1','2','3'| '4']))) :-
+		{number_chars(123, ['1','2','3'| '4'])}.
+
+	test(lgt_number_chars_2_46, error(type_error(character, 4))) :-
+		{number_chars(123, ['1','2','3',4])}.
+
+	test(lgt_number_chars_2_47, true(Tail == [])) :-
+		{number_chars(123, ['1','2','3'| Tail])}.
 
 	% auxiliary predicates
 
