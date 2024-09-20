@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,14 +37,20 @@ legs(A, 7) :- A, call(A).
 insect(ant).
 insect(bee).
 
+:- dynamic(r/3).
+r(A, B, C) :- a(A), b(B), c(C).
+a(_).
+b(_).
+c(_).
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2024-09-20,
 		comment is 'Unit tests for the ISO Prolog standard clause/2 built-in predicate.'
 	]).
 
@@ -110,5 +116,13 @@ insect(bee).
 
 	test(eddbali_clause_2_12, error(type_error(callable,5))) :-
 		{clause(f(_), 5)}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_clause_2_13, true(Vars == [A,B,C,D,E,F])) :-
+		% section 8.8.1.1 - converting a clause to a term must produce renamed copies
+		{clause(r(A,B,C), (a(A), b(B), c(C)))},
+		{clause(r(D,E,F), (a(D), b(E), c(F)))},
+		term_variables(vs(A,B,C,D,E,F), Vars).
 
 :- end_object.

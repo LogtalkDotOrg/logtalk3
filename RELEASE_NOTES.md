@@ -110,7 +110,8 @@ Tests
 * ADDED: Additional test for the Prolog standard logical update semantics.
 
 * ADDED: Additional tests for the Prolog standard `arg/3`, `atom_chars/2`,
-`atom_codes/2`, `number_chars/2`, and `number_codes/2` built-in predicates.
+`atom_codes/2`, `number_chars/2`, `number_codes/2`, and `clause/2` built-in
+predicates.
 
 * IMPROVED: Tests for the `(=..)/2`, `abolish/1`, and `functor/3` Prolog
 standard predicates.
