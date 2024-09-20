@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2024-09-20,
 		comment is 'Unit tests for the ISO Prolog standard atom_chars/2 built-in predicate.'
 	]).
 
@@ -107,5 +107,14 @@
 
 	test(lgt_atom_chars_2_23, error(type_error(list,['B'| 'C']))) :-
 		{atom_chars('ABC', ['B'| 'C'])}.
+
+	test(lgt_atom_chars_2_24, error(type_error(list,['A','B','C'| 'D']))) :-
+		{atom_chars('ABC', ['A','B','C'| 'D'])}.
+
+	test(lgt_atom_chars_2_25, error(type_error(character, 68))) :-
+		{atom_chars('ABC', ['A','B','C',68])}.
+
+	test(lgt_atom_chars_2_26, true(Tail == [])) :-
+		{atom_chars('ABC', ['A','B','C'| Tail])}.
 
 :- end_object.

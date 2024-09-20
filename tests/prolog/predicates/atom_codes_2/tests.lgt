@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2022-10-25,
+		date is 2024-09-20,
 		comment is 'Unit tests for the ISO Prolog standard atom_codes/2 built-in predicate.'
 	]).
 
@@ -66,42 +66,49 @@
 	test(eddbali_atom_codes_2_11, error(representation_error(character_code))) :-
 		{atom_codes(_A, [0'i,0's,-1])}.
 
-	% tests from the Logtalk portability work
-
-	test(lgt_atom_codes_2_12, error(type_error(integer,a))) :-
-		{atom_codes(abc, [a,b,c])}.
-
-	test(lgt_atom_codes_2_13, true(Codes == [])) :-
-		{atom_codes('', Codes)}.
-
-	test(lgt_atom_codes_2_14, true(Atom == '')) :-
-		{atom_codes(Atom, [])}.
-
-	test(lgt_atom_codes_2_15, true) :-
-		{atom_codes('', [])}.
-
-	test(lgt_atom_codes_2_16, true(v(A,B,C) == v(65,66,67))) :-
-		{atom_codes('ABC', [A,B,C])}.
-
-	test(lgt_atom_codes_2_17, true) :-
-		{atom_codes('ABC', [65,66,67])}.
-
-	test(lgt_atom_codes_2_18, false) :-
-		{atom_codes('ABC', [66| _])}.
-
-	test(lgt_atom_codes_2_19, error(type_error(list,[66| 67]))) :-
-		{atom_codes('ABC', [66| 67])}.
-
 	% the following two tests are disabled as there is no portable
 	% way to specify a supporting text encoding such as UTF-8 for
 	% all Logtalk supported backend Prolog compilers
-	%
-	% they also result in a syntax error with several Prolog compilers
 
-%	test(sics_atom_codes_2_12, true(C == [0'P,0'é,0'c,0's])) :-
-%		{atom_codes('Pécs', C)}.
-%
-%	test(sics_atom_codes_2_13, true(A == 'Pécs')) :-
-%		{atom_codes(A, [0'P,0'é,0'c,0's])}.
+	- test(sics_atom_codes_2_12, true(C == [80,233,99,115]), [note('Requires Prolog portable solution to specify text encoding')]) :-
+		{atom_codes('Pécs', C)}.
+
+	- test(sics_atom_codes_2_13, true(A == 'Pécs'), [note('Requires Prolog portable solution to specify text encoding')]) :-
+		{atom_codes(A, [80,233,99,115])}.
+
+	% tests from the Logtalk portability work
+
+	test(lgt_atom_codes_2_14, error(type_error(integer,a))) :-
+		{atom_codes(abc, [a,b,c])}.
+
+	test(lgt_atom_codes_2_15, true(Codes == [])) :-
+		{atom_codes('', Codes)}.
+
+	test(lgt_atom_codes_2_16, true(Atom == '')) :-
+		{atom_codes(Atom, [])}.
+
+	test(lgt_atom_codes_2_17, true) :-
+		{atom_codes('', [])}.
+
+	test(lgt_atom_codes_2_18, true(v(A,B,C) == v(65,66,67))) :-
+		{atom_codes('ABC', [A,B,C])}.
+
+	test(lgt_atom_codes_2_19, true) :-
+		{atom_codes('ABC', [65,66,67])}.
+
+	test(lgt_atom_codes_2_20, false) :-
+		{atom_codes('ABC', [66| _])}.
+
+	test(lgt_atom_codes_2_21, error(type_error(list,[66| 67]))) :-
+		{atom_codes('ABC', [66| 67])}.
+
+	test(lgt_atom_codes_2_22, error(type_error(list,[65,66,67| 'D']))) :-
+		{atom_codes('ABC', [65,66,67| 'D'])}.
+
+	test(lgt_atom_codes_2_23, error(type_error(integer, 'D'))) :-
+		{atom_codes('ABC', [65,66,67,'D'])}.
+
+	test(lgt_atom_codes_2_24, true(Tail == [])) :-
+		{atom_codes('ABC', [65,66,67| Tail])}.
 
 :- end_object.
