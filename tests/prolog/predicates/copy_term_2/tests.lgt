@@ -119,10 +119,10 @@
 	test(lgt_copy_term_2_15, true((A \== D, B \== E, C \== F))) :-
 		{copy_term([A,B|C], [D,E|F])}.
 
+	% tests from the WG17 standardization work
+
 	test(wg17_copy_term_2_16, true((A \== C, B \== D))) :-
 		{copy_term(A + B, C + D)}.
-
-	% tests from the WG17 standardization work
 
 	test(wg17_copy_term_2_17, variant(T, _ + _)) :-
 		{copy_term(_ + _, T)}.
