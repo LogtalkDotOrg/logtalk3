@@ -50,7 +50,7 @@ by default for running Logtalk with the supported backend Prolog compilers
 * YAP:            `yaplgt`
 
 Man pages for all scripts are also provided on POSIX systems. HTML versions
-of the man pages are available in the Logtalk website.
+of the man pages are available in the [Logtalk website](https://logtalk.org/documentation.html#man-pages).
 
 On macOS systems, `/opt/local/bin` must be in your `PATH` to run the scripts
 when using the provided installer. Terminal command files for running Logtalk
@@ -76,7 +76,8 @@ integration scripts, see also the integration script `man` page.
 For a quick overview of some of the main Logtalk concepts, see the
 at [Learn X in Y minutes Where X=Logtalk](https://learnxinyminutes.com/docs/logtalk/)
 tutorial. See also the bundled [Handbook](https://logtalk.org/manuals/index.html)
-by opening the `manuals/index.html` file with a web browser. The
+by opening the `~/logtalk/manuals/index.html` file with a web browser (the
+`~/logtalk` directory is created when you run Logtalk for the first time). The
 [Installing Logtalk](https://logtalk.org/manuals/userman/installing.html) and
 [Writing and running applications](https://logtalk.org/manuals/userman/programming.html)
 sections in the User Manual will provide you with a basic understanding of how
