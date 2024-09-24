@@ -111,7 +111,7 @@ Tests
 
 * ADDED: Additional tests for the Prolog standard `arg/3`, `atom_chars/2`,
 `atom_codes/2`, `number_chars/2`, `number_codes/2`, `current_predicate/1`,
-`clause/2`, `nl/0-1`, and `op/3` built-in predicates.
+`clause/2`, `nl/0-1`, `op/3`, and `term_variables/2` built-in predicates.
 
 * IMPROVED: Tests for the `(=..)/2`, `abolish/1`, and `functor/3` Prolog
 standard predicates.
