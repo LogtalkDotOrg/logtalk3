@@ -30,9 +30,9 @@ o(3).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2024-09-19,
+		date is 2024-09-24,
 		comment is 'Unit tests for the ISO Prolog standard op/3 built-in predicate.'
 	]).
 
@@ -223,6 +223,12 @@ o(3).
 		^^set_text_input('3 xyz 4. '),
 		catch(read(T), Error, true),
 		^^assertion(subsumes_term(error(syntax_error(_),_), Error)).
+
+	test(lgt_op_3_35, true) :-
+		{op(0, xfx, not_an_operator)}.
+
+	test(lgt_op_3_36, error(domain_error(operator_specifier,yfy))) :-
+		{op(0, yfy, ++)}.
 
 	cleanup :-
 		^^clean_text_input.
