@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024s Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,9 +21,9 @@ ________________________________________________________________________
 `tutor`
 =======
 
-This tool adds explanations and suggestions to selected compiler warning
-and error messages. It's specially useful for new users not yet familiar
-with the compiler and runtime warning and error messages.
+This tool adds explanations and suggestions to selected warning and error
+messages from the compiler/runtime and the developer tools. It's specially
+useful for new users not yet familiar with the warning and error messages.
 
 
 API documentation

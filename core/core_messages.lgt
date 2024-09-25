@@ -251,9 +251,9 @@
 	% help
 
 	message_tokens(help) -->
-		[	'For Logtalk help on libraries, entities, and built-in features, use:'-[], nl,
+		[	'For Logtalk help on libraries, entities, and built-in features:'-[], nl,
 			'?- {help(loader)}. or ?- logtalk_load(help(loader)).'-[], nl, nl,
-			'For Logtalk compiler warnings/errors explanations and fix suggestions, use:'-[], nl,
+			'For Logtalk compiler and developer tools warnings and errors explanations:'-[], nl,
 			'?- {tutor(loader)}. or ?- logtalk_load(tutor(loader)).'-[], nl, nl
 		].
 

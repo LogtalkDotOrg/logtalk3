@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:69:0,
+		version is 0:70:0,
 		author is 'Paulo Moura',
-		date is 2024-09-18,
+		date is 2024-09-25,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -44,13 +44,20 @@
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(Message, Kind, core, Tokens) :-
-		logtalk::message_prefix_stream(Kind, core, Prefix, Stream),
+		message_hook(Message, Kind, core, Tokens).
+	logtalk::message_hook(Message, Kind, packs, Tokens) :-
+		message_hook(Message, Kind, packs, Tokens).
+
+	message_hook(Message, Kind, Component, Tokens) :-
+		logtalk::message_prefix_stream(Kind, Component, Prefix, Stream),
 		phrase(explain(Message), ExplanationTokens),
 		% avoid empty line between the compiler message and its explanation
-		list::append(Tokens0, [nl], Tokens),
+		(	list::append(Tokens0, [nl, nl], Tokens) ->
+			list::append([begin(Kind,Ctx)| Tokens0], [nl| ExplanationTokens], ExtendedTokens0)
+		;	list::append([begin(Kind,Ctx)| Tokens], ExplanationTokens, ExtendedTokens0)
+		),
 		% add begin/2 and end/1 tokens to enable message coloring
 		% if supported by the backend Prolog compiler
-		list::append([begin(Kind,Ctx)| Tokens0], ExplanationTokens, ExtendedTokens0),
 		list::append(ExtendedTokens0, [end(Ctx)], ExtendedTokens),
 		logtalk::print_message_tokens(Stream, Prefix, ExtendedTokens).
 
@@ -1155,6 +1162,53 @@
 			'output arguments bound, a premature cut may result in the wrong grammar'-[], nl,
 			'rule being used. If that''s the case, change the grammar rule to perform'-[], nl,
 			'output unifications after the cut.'-[], nl, nl
+		].
+
+	% packs tool messages
+
+	explain(cannot_uninstall_pinned_pack(_)) -->
+		[	'Pinning packs is a common practice for ensuring that dependent applications'-[], nl,
+			'use explicit and verified pack versions. This practice protects applications'-[], nl,
+			'from breaking when pack dependencies are inadvertently uninstalled. To force'-[], nl,
+			'uninstallation, either unpin the pack using the packs::unpin(Pack) message or'-[], nl,
+			'use the packs::uninstall(Pack, Options) message with the force(true) option.', nl, nl
+		].
+
+	explain(cannot_update_pinned_pack(_)) -->
+		[	'Pinning packs is a common practice for ensuring that dependent applications'-[], nl,
+			'use explicit and verified pack versions. This practice protects applications'-[], nl,
+			'from breaking when unverified pack updates are installed. To force the pack'-[], nl,
+			'update, either unpin the pack using the packs::unpin(Pack) message or use the'-[], nl,
+			'the packs::update(Pack, Options) message with the force(true) option.', nl, nl
+		].
+
+	explain(pack_archive_download_failed(_, _)) -->
+		[	'Pack archive download failures usually result network connectivity issues.'-[], nl,
+			'Check if you can reach the pack provider server. In rare cases, there may'-[], nl,
+			'be a pack manifest error with a wrong URL for the archive. you can use the'-[], nl,
+			'packs::describe(Pack) message to list the pack home and archive URLs.', nl, nl
+		].
+
+	explain(pack_archive_checksum_failed(_, _)) -->
+		[	'Pack archive checksum failures usually result from incomplete or failed'-[], nl,
+			'downloads. In rare cases, there may be a pack manifest error with a'-[], nl,
+			'wrong checksum for the archive. Failures may be caused by authentication'-[], nl,
+			'errors. Inspecting the contents of the archive may allow you to diagnose'-[], nl,
+			'the problem. You can use the packs::clean(Pack) message to delete the'-[], nl,
+			'archive file and try again to install the pack.'-[], nl, nl
+		].
+
+	explain(pack_archive_checksig_failed(_, _)) -->
+		[	'Pack archive signature failures may be evidence of malicious tampering with'-[], nl,
+			'the archive. In rare cases, there may be a pack manifest error with a wrong'-[], nl,
+			'signature for the archive. It is advisable to contact the pack provider for'-[], nl,
+			'diagnosing the problem.', nl, nl
+		].
+
+	explain(pack_archive_uncompress_failed(_, _)) -->
+		[	'Pack archive uncompressing failures may be caused by a mismatch between the'-[], nl,
+			'archive format and its file name extension. It is advisable to contact the'-[], nl,
+			'pack provider for diagnosing the problem.', nl, nl
 		].
 
 :- end_object.
