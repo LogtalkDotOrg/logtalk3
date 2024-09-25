@@ -1224,6 +1224,24 @@
 			'is created.'-[], nl, nl
 		].
 
+	explain(cannot_update_pinned_registry(_)) -->
+		[	'Pinning a registry is good practice for ensuring that applications dependent'-[], nl,
+			'on the registry packs will not be broken by updating the registry and, by '-[], nl,
+			'doing that, updating pack manifest files for packs used by the applications.'-[], nl,
+			'To force updating, unpin the registry using the registries::unpin(Registry)'-[], nl,
+			'message or use the registries::update(Registry, Options) message with the'-[], nl,
+			'force(true) option.'-[], nl, nl
+		].
+
+	explain(cannot_delete_pinned_registry(_)) -->
+		[	'Pinning a registry is good practice for ensuring that applications dependent'-[], nl,
+			'on the registry packs will not become dependent on packs that can no longer'-[], nl,
+			'be reinstalled/updated/reverted due to the deletion of their manifest files.'-[], nl,
+			'To force deletion, unpin the registry using the registries::unpin(Registry)'-[], nl,
+			'message or use the registries::delete(Registry, Options) message with the'-[], nl,
+			'force(true) option.'-[], nl, nl
+		].
+
 	explain(unsupported_archive_format(_)) -->
 		[	'The supported archive formats is limited to ensure portability. Consult the'-[], nl,
 			'packs tool documentation for a list of all the supported formats.'-[], nl, nl
