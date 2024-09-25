@@ -585,6 +585,11 @@ of the git hosting service in order to compute the checksum. Different
 implementations of the archiving and compressing algorithms may be used
 resulting in mismatched checksums.
 
+Users installing packs available using ``git archive`` URLs are advised
+to run a SSH agent to avoiding being prompted for passwords when
+installing or updating packs. They must also upload their SSH public
+keys to the pack provider hosts.
+
 Multiple pack versions
 ----------------------
 

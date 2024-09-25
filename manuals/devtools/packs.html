@@ -650,6 +650,10 @@ the <code class="docutils literal notranslate"><span class="pre">git</span> <spa
 of the git hosting service in order to compute the checksum. Different
 implementations of the archiving and compressing algorithms may be used
 resulting in mismatched checksums.</p>
+<p>Users installing packs available using <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">archive</span></code> URLs are advised
+to run a SSH agent to avoiding being prompted for passwords when
+installing or updating packs. They must also upload their SSH public
+keys to the pack provider hosts.</p>
 </section>
 <section id="multiple-pack-versions">
 <h2>Multiple pack versions<a class="headerlink" href="#multiple-pack-versions" title="Link to this heading"></a></h2>

@@ -25,6 +25,12 @@ RELEASE NOTES
 3.84.0 - October ??, 2024
 =========================
 
+Documentation
+-------------
+
+* IMPROVED: Documentation of the `packs` tool on working with packs using
+`git archive` URLs.
+
 Tools
 -----
 

@@ -3,9 +3,10 @@
 ``tutor``
 =========
 
-This tool adds explanations and suggestions to selected compiler warning
-and error messages. It's specially useful for new users not yet familiar
-with the compiler and runtime warning and error messages.
+This tool adds explanations and suggestions to selected warning and
+error messages from the compiler/runtime and the developer tools. It's
+specially useful for new users not yet familiar with the warning and
+error messages.
 
 API documentation
 -----------------
