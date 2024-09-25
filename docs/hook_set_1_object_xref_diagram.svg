@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-270.25 381,-270.25 381,4 -4,4"/>
 <text text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object hook_set/1</text>
-<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;09&#45;24, 09:52</text>
+<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;09&#45;25, 09:59</text>
 <g id="clust1" class="cluster">
 <title>cluster_hook_set_1_object</title>
 <g id="a_clust1"><a xlink:title="hook_set(Set)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 357,-54.25 357,-54.25 363,-54.25 369,-60.25 369,-66.25 369,-66.25 369,-246.25 369,-246.25 369,-252.25 363,-258.25 357,-258.25 357,-258.25 20,-258.25 20,-258.25 14,-258.25 8,-252.25 8,-246.25 8,-246.25 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt">
 <text text-anchor="start" x="20" y="-240.75" font-family="Monospace" font-size="10.00" fill="dimgray">hook_set(Set)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- goal_expansion/2 -->
 <g id="node1" class="node">
 <title>goal_expansion/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L51">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L51">
 <polygon fill="cornsilk" stroke="black" points="166,-219.5 32,-219.5 32,-183.5 166,-183.5 166,-219.5"/>
 <text text-anchor="start" x="39.88" y="-204.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="45" y="-203.05" font-family="Monospace" font-size="11.00">goal_expansion/2</text>
@@ -41,7 +41,7 @@
 <!-- goal_expansion_set/3 -->
 <g id="node4" class="node">
 <title>goal_expansion_set/3</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L55">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L55">
 <polygon fill="cornsilk" stroke="black" points="179.5,-100.25 18.5,-100.25 18.5,-64.25 179.5,-64.25 179.5,-100.25"/>
 <text text-anchor="start" x="26.38" y="-84.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.5" y="-83.8" font-family="Monospace" font-size="11.00">goal_expansion_set/3</text>
@@ -55,12 +55,12 @@
 <!-- goal_expansion/2&#45;&gt;goal_expansion_set/3 -->
 <g id="edge2" class="edge">
 <title>goal_expansion/2&#45;&gt;goal_expansion_set/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L51" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M99,-183.2C99,-164.5 99,-134.37 99,-112.08"/>
 <polygon fill="black" stroke="black" points="102.5,-112.14 99,-102.14 95.5,-112.14 102.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L51">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L51">
 <text text-anchor="start" x="99" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- term_expansion/2 -->
 <g id="node2" class="node">
 <title>term_expansion/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L40">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L40">
 <polygon fill="cornsilk" stroke="black" points="345,-219.5 211,-219.5 211,-183.5 345,-183.5 345,-219.5"/>
 <text text-anchor="start" x="218.88" y="-204.07" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="224" y="-203.05" font-family="Monospace" font-size="11.00">term_expansion/2</text>
@@ -82,7 +82,7 @@
 <!-- term_expansion_set/3 -->
 <g id="node3" class="node">
 <title>term_expansion_set/3</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L44">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L44">
 <polygon fill="cornsilk" stroke="black" points="358.5,-100.25 197.5,-100.25 197.5,-64.25 358.5,-64.25 358.5,-100.25"/>
 <text text-anchor="start" x="205.38" y="-84.83" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="210.5" y="-83.8" font-family="Monospace" font-size="11.00">term_expansion_set/3</text>
@@ -96,12 +96,12 @@
 <!-- term_expansion/2&#45;&gt;term_expansion_set/3 -->
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;term_expansion_set/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L40" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M278,-183.2C278,-164.5 278,-134.37 278,-112.08"/>
 <polygon fill="black" stroke="black" points="281.5,-112.14 278,-102.14 274.5,-112.14 281.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/39c486c5dfe5363d2075a8c82a42763b5cfa6886/library/hook_flows/hook_set.lgt#L40">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ec8629c246e3e1ff1d38a8be967600fb99126dd6/library/hook_flows/hook_set.lgt#L40">
 <text text-anchor="start" x="278" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
