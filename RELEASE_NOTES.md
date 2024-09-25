@@ -34,8 +34,8 @@ Documentation
 Tools
 -----
 
-* ADDED: Support to the `tutor` tool to explain selected `packs` tool error
-messages.
+* ADDED: Support to the `tutor` tool to explain selected `make` and `packs`
+tool error messages.
 
 
 3.83.0 - September 24, 2024

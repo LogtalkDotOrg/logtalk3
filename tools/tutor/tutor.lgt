@@ -1164,7 +1164,41 @@
 			'output unifications after the cut.'-[], nl, nl
 		].
 
+	% make tool messages
+
+	explain(duplicated_library_aliases(_)) -->
+		[	'Duplicated library aliases are a potential source of issues as an application'-[], nl,
+			'loading a library may load a wrong version. Even when the duplicated aliases'-[], nl,
+			'point to the same version of a library in different locations, the duplication'-[], nl,
+			'may result in mishandling library deletions and updates. You should find and'-[], nl,
+			'delete the duplicated aliases.'-[], nl, nl
+		].
+
+	explain(library_paths_dont_end_with_slash(_)) -->
+		[	'Library paths are expected to always end with a slash for uniform handling.'-[], nl,
+			'You should fix all library aliases to ensure that all paths end with a slash.'-[], nl, nl
+		].
+
+	explain(circular_references(_)) -->
+		[	'Circular references prevent some code optimizations to be applied by the'-[], nl,
+			'compiler (e.g. static binding). Try to avoid them whenever possible, e.g.'-[], nl,
+			'by refactoring your code.'-[], nl, nl
+		].
+
 	% packs tool messages
+
+	explain(reset_failed(_)) -->
+		[	'The common cause of failure when resetting the registries and packs directory'-[], nl,
+			'structure are file and directory permissions errors. You may need to use a'-[], nl,
+			'terminal application to diagnose those errors and delete the directory. After,'-[], nl,
+			're-run the packs::reset message to ensure that the default directory structure'-[], nl,
+			'is created.'-[], nl, nl
+		].
+
+	explain(unsupported_archive_format(_)) -->
+		[	'The supported archive formats is limited to ensure portability. Consult the'-[], nl,
+			'packs tool documentation for a list of all the supported formats.'-[], nl, nl
+		].
 
 	explain(cannot_uninstall_pinned_pack(_)) -->
 		[	'Pinning packs is a common practice for ensuring that dependent applications'-[], nl,
