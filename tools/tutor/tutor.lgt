@@ -1242,6 +1242,20 @@
 			'force(true) option.'-[], nl, nl
 		].
 
+	explain(cannot_delete_registry_with_installed_packs(_)) -->
+		[	'Deleting a registry with installed packs will orphan the packs, preventing'-[], nl,
+			'reinstalling/updating/reverting them, potentially breaking installing any'-[], nl,
+			'applications depending on those packs. To force deletion, use the message'-[], nl,
+			'registries::delete(Registry, Options) with the force(true) option.'-[], nl, nl
+		].
+
+	explain(pack_already_installed_from_different_registry(_, _, _)) -->
+		[	'Although different registries can define packs with the same name, only one'-[], nl,
+			'of the packs with a conflicting name can be installed at the same time'-[], nl,
+			'Consider using application specific pack virtual environments to avoid'-[], nl,
+			'these conflicts.'-[], nl, nl
+		].
+
 	explain(unsupported_archive_format(_)) -->
 		[	'The supported archive formats is limited to ensure portability. Consult the'-[], nl,
 			'packs tool documentation for a list of all the supported formats.'-[], nl, nl
