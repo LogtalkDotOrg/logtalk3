@@ -852,7 +852,7 @@ The following object properties are supported:
    The object resulted from the compilation of a Prolog module
 
 When a predicate is called from an ``initialization/1`` directive, the
-argument of the ``caller/1`` property is ``:-/1``.
+argument of the ``caller/1`` property is ``(:-)/1``.
 
 Some properties such as line numbers are only available when the object is
 defined in a source file compiled with the :ref:`source_data <flag_source_data>`

@@ -1080,6 +1080,12 @@ For example, assuming a ``pl_pack`` Prolog pack:
 If the Prolog system also supports reading an initialization file at
 startup, the above definition could be added there.
 
+Help with warnings
+------------------
+
+Load the ``tutor`` tool to get help with selected warnings printed by
+the ``packs`` tool.
+
 Known issues
 ------------
 

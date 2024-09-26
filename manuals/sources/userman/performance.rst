@@ -122,8 +122,8 @@ the Prolog compiler documentation and adapter file notes for details.
    when the predicate is called from the top-level. Besides common top-level
    bookkeeping operations (e.g. keeping track of goal history or applying
    goal-expansion) that may influence the inference counting, the Logtalk
-   runtime code for a ``::/2`` top-level goal is necessarily different
-   from the code generated for a ``::/2`` goal from a compiled object as
+   runtime code for a ``(::)/2`` top-level goal is necessarily different
+   from the code generated for a ``(::)/2`` goal from a compiled object as
    it requires *runtime* compilation of the goal into the same low-level
    message-sending primitive (assuming dynamic-binding is also required
    for the compiled object goal).

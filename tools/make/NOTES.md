@@ -41,3 +41,10 @@ actions for the make targets (e.g. running tests automatically on make check
 or regenerating API documentation on make documentation):
 
 - [../refman/predicates/logtalk_make_target_action_1.html](../refman/predicates/logtalk_make_target_action_1.html)
+
+
+Help with warnings
+------------------
+
+Load the `tutor` tool to get help with selected warnings printed
+by the `make` tool.

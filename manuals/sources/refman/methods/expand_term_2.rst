@@ -43,7 +43,7 @@ not a variable and there are local or inherited clauses for the
 ``term_expansion/2`` hook predicate within scope, then this predicate is
 called to provide an expansion that is then unified with the second
 argument; if the ``term_expansion/2`` predicate is not used and the
-first argument is a compound term with functor ``-->/2`` then the
+first argument is a compound term with functor ``(-->)/2`` then the
 default Logtalk grammar rule translator is used, with the resulting
 clause being unified with the second argument; when the translator is
 not used, the two arguments are unified. The ``expand_term/2`` predicate

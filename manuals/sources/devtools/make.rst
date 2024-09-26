@@ -22,3 +22,9 @@ automatically on make check or regenerating API documentation on make
 documentation):
 
 -  `../refman/predicates/logtalk_make_target_action_1.html <../refman/predicates/logtalk_make_target_action_1.html>`__
+
+Help with warnings
+------------------
+
+Load the ``tutor`` tool to get help with selected warnings printed by
+the ``make`` tool.

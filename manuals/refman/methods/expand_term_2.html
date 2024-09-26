@@ -156,7 +156,7 @@ not a variable and there are local or inherited clauses for the
 <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> hook predicate within scope, then this predicate is
 called to provide an expansion that is then unified with the second
 argument; if the <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> predicate is not used and the
-first argument is a compound term with functor <code class="docutils literal notranslate"><span class="pre">--&gt;/2</span></code> then the
+first argument is a compound term with functor <code class="docutils literal notranslate"><span class="pre">(--&gt;)/2</span></code> then the
 default Logtalk grammar rule translator is used, with the resulting
 clause being unified with the second argument; when the translator is
 not used, the two arguments are unified. The <code class="docutils literal notranslate"><span class="pre">expand_term/2</span></code> predicate

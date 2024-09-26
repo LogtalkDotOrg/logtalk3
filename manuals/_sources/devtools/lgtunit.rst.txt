@@ -2060,6 +2060,12 @@ To minimize the test results output, simply load the
 an object, ``minimal_output``, that intercepts and summarizes the unit
 test execution messages.
 
+Help with warnings
+------------------
+
+Load the ``tutor`` tool to get help with selected warnings printed by
+the ``lgtunit`` tool.
+
 Known issues
 ------------
 

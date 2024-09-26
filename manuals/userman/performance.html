@@ -236,8 +236,8 @@ the number of inferences. But the reported numbers are often misleading
 when the predicate is called from the top-level. Besides common top-level
 bookkeeping operations (e.g. keeping track of goal history or applying
 goal-expansion) that may influence the inference counting, the Logtalk
-runtime code for a <code class="docutils literal notranslate"><span class="pre">::/2</span></code> top-level goal is necessarily different
-from the code generated for a <code class="docutils literal notranslate"><span class="pre">::/2</span></code> goal from a compiled object as
+runtime code for a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> top-level goal is necessarily different
+from the code generated for a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> goal from a compiled object as
 it requires <em>runtime</em> compilation of the goal into the same low-level
 message-sending primitive (assuming dynamic-binding is also required
 for the compiled object goal).</p>

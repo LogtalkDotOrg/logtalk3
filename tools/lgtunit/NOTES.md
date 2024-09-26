@@ -1809,6 +1809,13 @@ before running the tests. This file defines an object, `minimal_output`, that
 intercepts and summarizes the unit test execution messages.
 
 
+Help with warnings
+------------------
+
+Load the `tutor` tool to get help with selected warnings printed by the
+`lgtunit` tool.
+
+
 Known issues
 ------------
 

@@ -1474,7 +1474,7 @@ into the goal ``bar`` when the clause is compiled. Note that we tested
 the ``bypass::foo//0`` non-terminal by calling the ``phrase/3`` built-in
 method in the context of the ``logtalk`` built-in object. This workaround
 is necessary due to the Prolog backend implementation of the ``phrase/3``
-predicate no being aware of the Logtalk ``::/2`` message-sending control
+predicate no being aware of the Logtalk ``(::)/2`` message-sending control
 construct semantics.
 
 A grammar rule non-terminal may be declared as dynamic or discontiguous,
