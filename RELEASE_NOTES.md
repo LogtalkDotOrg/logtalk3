@@ -31,6 +31,13 @@ Documentation
 * IMPROVED: Documentation of the `packs` tool on working with packs using
 `git archive` URLs.
 
+Library
+-------
+
+* FIXED: The library object `type` to properly load the SWI-Prolog `unicode`
+module library when running with this backend. Thanks to Alex Kouznetsov for
+the bug report.
+
 Tools
 -----
 
