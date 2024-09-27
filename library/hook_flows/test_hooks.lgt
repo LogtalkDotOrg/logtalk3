@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,12 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% hook objects for testing hook pipelines
+
 :- object(p1,
 	implements(expanding)).
 
 	term_expansion(t(a), t(b)).
 
 	goal_expansion(a(X), b(X)).
+	goal_expansion(x, (x,y)).
 
 :- end_object.
 
@@ -35,6 +38,7 @@
 	term_expansion(t(b), t(c)).
 
 	goal_expansion(b(X), c(X)).
+	goal_expansion(y, (y,z)).
 
 :- end_object.
 
@@ -43,11 +47,14 @@
 	implements(expanding)).
 
 	term_expansion(t(c), t(d)).
+	term_expansion((g(a,X) --> r(b,X)), (g(a,X) --> r(c,X))).
 
 	goal_expansion(c(X), d(X)).
 
 :- end_object.
 
+
+% hook objects for testing hook sets
 
 :- object(s1,
 	implements(expanding)).
@@ -64,6 +71,7 @@
 	implements(expanding)).
 
 	term_expansion(b(X), [(:- public(bb/1)), bb(X)]).
+	term_expansion((g(a,X) --> r(b,X)), (g(a,X) --> r(c,X))).
 
 	goal_expansion(h(F1, Y), g(F2, Y)) :-
 		F2 is F1 * 3.

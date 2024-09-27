@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,9 +26,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1:0:3,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2019-09-23,
+		date is 2024-09-27,
 		comment is 'Use a pipeline (represented using a list) of hook objects to expand terms and goals. The expansion results from a hook object are passed to the next hook object in the pipeline.',
 		parameters is ['Pipeline'-'List of hook objects.'],
 		remarks is [
@@ -51,10 +51,20 @@
 		!.
 	term_expansion_pipeline_all([Term| Terms], Hook, [Expansion| Expansions]) :-
 		!,
-		Hook::expand_term(Term, Expansion),
+		hook_term_expansion(Hook, Term, Expansion),
 		term_expansion_pipeline_all(Terms, Hook, Expansions).
 	term_expansion_pipeline_all(Term, Hook, Expansion) :-
-		Hook::expand_term(Term, Expansion).
+		hook_term_expansion(Hook, Term, Expansion).
+
+	% terms that are not expanded by a hook object must also
+	% be passed to the next hook object in the pipeline
+	hook_term_expansion(Hook, Term, Expansion) :-
+		(	var(Term) ->
+			Expansion = Term
+		;	Hook::term_expansion(Term, Expansion) ->
+			true
+		;	Expansion = Term
+		).
 
 	goal_expansion(Goal, ExpandedGoal) :-
 		parameter(1, Pipeline),
@@ -62,8 +72,34 @@
 
 	goal_expansion_pipeline([], ExpandedGoal, ExpandedGoal).
 	goal_expansion_pipeline([Hook| Hooks], ExpandedGoal0, ExpandedGoal) :-
-		Hook::expand_goal(ExpandedGoal0, ExpandedGoal1),
+		hook_goal_expansion(Hook, ExpandedGoal0, ExpandedGoal1, []),
 		goal_expansion_pipeline(Hooks, ExpandedGoal1, ExpandedGoal).
+
+	% goals that are not expanded by a hook object must also
+	% be passed to the next hook object in the pipeline
+	hook_goal_expansion(Hook, Goal, ExpandedGoal, ExpandedGoals) :-
+		(	var(Goal) ->
+			ExpandedGoal = Goal
+		;	push_if_new(ExpandedGoals, Goal, NewExpandedGoals),
+			Hook::goal_expansion(Goal, ExpandedGoal0),
+			Goal \== ExpandedGoal0 ->
+			% compute fixed-point
+			hook_goal_expansion(Hook, ExpandedGoal0, ExpandedGoal, NewExpandedGoals)
+		;	ExpandedGoal = Goal
+		).
+
+	% auxiliary predicate to prevent going into an infinite loop when
+	% goal-expansion results in a goal that contains the expanded goal
+	%
+	% calls to this predicate fail if the goal about to be expanded was
+	% the result of a previous goal expansion (tested using term equality)
+	push_if_new(ExpandedGoals, Goal, [Goal| ExpandedGoals]) :-
+		\+ member_equal(Goal, ExpandedGoals).
+
+	member_equal(Term, [Head| _]) :-
+		Term == Head.
+	member_equal(Term, [_| Tail]) :-
+		member_equal(Term, Tail).
 
 	flatten(Var, Tail, Flatted) :-
 		var(Var),

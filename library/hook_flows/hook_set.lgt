@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,9 +26,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 1:0:1,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2019-06-13,
+		date is 2024-09-27,
 		comment is 'Use a set (represented using a list) of hook objects to expand terms and goals. The hook objects are tried in sequence until one of them succeeds in expanding the current term (goal) into a different term (goal).',
 		parameters is ['Set'-'Set (list) of hook objects.'],
 		remarks is [
@@ -42,7 +42,8 @@
 		term_expansion_set(Set, Term, Expansion).
 
 	term_expansion_set([Hook| Hooks], Term, Expansion) :-
-		(	Hook::expand_term(Term, Expansion),
+		(	nonvar(Term),
+			Hook::term_expansion(Term, Expansion),
 			Term \== Expansion ->
 			true
 		;	term_expansion_set(Hooks, Term, Expansion)
@@ -53,10 +54,33 @@
 		goal_expansion_set(Set, Goal, ExpandedGoal).
 
 	goal_expansion_set([Hook| Hooks], Goal, ExpandedGoal) :-
-		(	Hook::expand_goal(Goal, ExpandedGoal),
+		(	hook_goal_expansion(Hook, Goal, ExpandedGoal, []),
 			Goal \== ExpandedGoal ->
 			true
 		;	goal_expansion_set(Hooks, Goal, ExpandedGoal)
 		).
+
+	hook_goal_expansion(Hook, Goal, ExpandedGoal, ExpandedGoals) :-
+		(	var(Goal) ->
+			ExpandedGoal = Goal
+		;	push_if_new(ExpandedGoals, Goal, NewExpandedGoals),
+			Hook::goal_expansion(Goal, ExpandedGoal0),
+			Goal \== ExpandedGoal0 ->
+			hook_goal_expansion(Hook, ExpandedGoal0, ExpandedGoal, NewExpandedGoals)
+		;	ExpandedGoal = Goal
+		).
+
+	% auxiliary predicate to prevent going into an infinite loop when
+	% goal-expansion results in a goal that contains the expanded goal
+	%
+	% calls to this predicate fail if the goal about to be expanded was
+	% the result of a previous goal expansion (tested using term equality)
+	push_if_new(ExpandedGoals, Goal, [Goal| ExpandedGoals]) :-
+		\+ member_equal(Goal, ExpandedGoals).
+
+	member_equal(Term, [Head| _]) :-
+		Term == Head.
+	member_equal(Term, [_| Tail]) :-
+		member_equal(Term, Tail).
 
 :- end_object.

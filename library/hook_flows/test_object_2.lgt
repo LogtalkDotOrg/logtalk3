@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,11 +21,29 @@
 
 :- object(test_object_2).
 
+	% code that should be expanded
+
 	b(42).
 
 	:- public(p/1).
 	p(X) :- h(1, X).
 
 	k(X, Y) :- Y is X * 2.
+
+	:- public(g//2).
+	g(a, X) --> r(b, X).
+	r(X, X) --> [].
+
+	% code that shouldn't be expanded
+
+	:- public(foo/0).
+	foo.
+
+	:- public(bar/0).
+	bar :- baz.
+	baz.
+
+	:- public(qux//0).
+	qux --> [quux].
 
 :- end_object.

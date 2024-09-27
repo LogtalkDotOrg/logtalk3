@@ -34,6 +34,16 @@ Documentation
 Library
 -------
 
+* CHANGED: The library object `hook_pipeline/1` to not use default expansions
+and pass as-is any terms and goals not expanded by a hook object to the next
+hook object. This library object now calls the `expanding` protocol predicates
+directly instead of using the `expand_term/2` and `expand_goal/2` built-in
+methods.
+
+* CHANGED: The library object `hook_set/1` to call the `expanding` protocol
+predicates directly instead of using the `expand_term/2` and `expand_goal/2`
+built-in methods.
+
 * FIXED: The library object `type` to properly load the SWI-Prolog `unicode`
 module library when running with this backend. Thanks to Alex Kouznetsov for
 the bug report.
