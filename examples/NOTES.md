@@ -502,6 +502,10 @@ Follows a short description of each included example (in alphabetical order):
 - `testing`  
 	some examples of writing unit tests
 
+- `tests_dsl`  
+	example illustrating how to define a Domain Specific Language (DSL)
+	for writing tests
+
 - `threads`  
 	several simple examples of multi-threading programming, some of
 	them intended only for benchmarking multi-threading Prolog compilers

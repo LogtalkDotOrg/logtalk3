@@ -54,6 +54,13 @@ Tools
 * ADDED: Support to the `tutor` tool to explain selected `lgtunit`, `make`,
 and `packs` tool error messages.
 
+Examples
+--------
+
+* ADDED: New `tests_dsl` example illustrating how to define a Domain Specific
+Language (DSL) for writing tests using a pipeline of hook objects to translate
+the tests to a test dialect natively supported by the `lgtunit` tool.
+
 
 3.83.0 - September 24, 2024
 ===========================

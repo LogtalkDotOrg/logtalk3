@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on June 12, 2024
+%  Last updated on September 27, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -322,6 +322,7 @@ logtalk_library_path(tak, threads('tak/')).
 logtalk_library_path(tbbt, engines('tbbt/')).
 logtalk_library_path(team, threads('team/')).
 logtalk_library_path(testing, examples('testing/')).
+logtalk_library_path(tests_dsl, examples('tests_dsl/')).
 logtalk_library_path(threads, examples('threads/')).
 logtalk_library_path(trebuchet, examples('trebuchet/')).
 logtalk_library_path(units, examples('units/')).
