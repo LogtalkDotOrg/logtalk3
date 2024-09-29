@@ -8099,7 +8099,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
-% '$lgt_filter_singleton_variable_names'(@list, -list(atom))
+% '$lgt_filter_singleton_variable_names'(@list, @term, -list(atom))
 %
 % filters variables whose name start with an underscore from a singletons list if
 % the corresponding compiler flag sets their interpretation to don't care variables
