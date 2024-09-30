@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
-%  Last updated on October 10, 2023
+%  Last updated on September 30, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -360,6 +360,10 @@
 	<xsl:value-of select="$nl2" />
 	<xsl:if test="comment">
 		<xsl:value-of select="comment" />
+		<xsl:value-of select="$nl2" />
+	</xsl:if>
+	<xsl:if test="fail_if">
+		<xsl:value-of select="fail_if" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:text>| **Compilation flags:**</xsl:text>

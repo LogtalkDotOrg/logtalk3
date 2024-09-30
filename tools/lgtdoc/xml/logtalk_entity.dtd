@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -113,11 +113,13 @@
 
 <!ELEMENT inherited_predicate (name, entity, functor, file)>
 
-<!ELEMENT predicate (name, scope, compilation, meta?, coinductive?, mode*, comment?, template?, (argnames|arguments)?, exceptions?, remarks?, since?, see_also?, info*, examples?)>
+<!ELEMENT predicate (name, scope, compilation, meta?, coinductive?, mode*, comment?, fail_if?, template?, (argnames|arguments)?, exceptions?, remarks?, since?, see_also?, info*, examples?)>
 
 <!ELEMENT meta (#PCDATA)>
 
 <!ELEMENT mode (template, proofs)>
+
+<!ELEMENT fail_if (#PCDATA)>
 
 <!ELEMENT template (#PCDATA)>
 

@@ -17,7 +17,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for viewing XML documenting files in a browser
-%  Last updated on October 10, 2023
+%  Last updated on September 30, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -288,11 +288,16 @@
 <xsl:template match="*/predicate">
 	<div class="section">
 	<h3 class="code"><xsl:value-of select="name" /></h3>
-	<blockquote>
 	<xsl:if test="comment">
+	<blockquote>
 		<p class="comment"><xsl:value-of select="comment" /></p>
-	</xsl:if>
 	</blockquote>
+	</xsl:if>
+	<xsl:if test="fail_if">
+	<blockquote>
+		<p class="comment"><xsl:value-of select="fail_if" /></p>
+	</blockquote>
+	</xsl:if>
 	<dl class="properties">
 		<dt class="key">compilation flags:</dt>
 			<dd class="value"><code><xsl:value-of select="compilation" /></code></dd>

@@ -25,6 +25,12 @@ RELEASE NOTES
 3.84.0 - October ??, 2024
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: New `fail_if` key to the `info/2` predicate directive for documenting
+predicate fail conditions. Adopted from ECLiPSe.
+
 Documentation
 -------------
 
@@ -53,6 +59,9 @@ Tools
 
 * ADDED: Support to the `tutor` tool to explain selected `lgtunit`, `make`,
 and `packs` tool error messages.
+
+* UPDATED: The `lgtdoc` tool to process the new `fail_if` key of the `info/2`
+predicate directive.
 
 Examples
 --------

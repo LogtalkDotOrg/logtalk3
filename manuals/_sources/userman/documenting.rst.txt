@@ -64,7 +64,8 @@ Logtalk tools:
 ``comment``
    Comment describing the entity purpose (an atom). End the comment with a
    period (full stop). As a style guideline, don't use overly long comments.
-   If you need to provide additional details, use the ``remarks`` key.
+   If you need to provide additional details, use the ``fail_if`` and
+   ``remarks`` keys.
 ``author``
    Entity author(s) (an atom or a compound term ``{entity}`` where
    ``entity`` is the name of an XML entity in a user defined
@@ -145,6 +146,10 @@ Logtalk tools:
    End the comment with a period (full stop). As a style guideline, don't
    use overly long comments. If you need to provide additional details,
    use the ``remarks`` key.
+``fail_if``
+   Comment describing failing conditions for the predicate. As a style
+   guideline, don't use overly long comments. If you need to provide
+   additional details, use the ``remarks`` key.
 ``arguments``
    Names and descriptions of predicate arguments for pretty print output
    (a list of ``Name-Description`` pairs where both names and descriptions

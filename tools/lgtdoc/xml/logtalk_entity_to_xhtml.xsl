@@ -8,7 +8,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into XHTML files
-%  Last updated on October 10, 2023
+%  Last updated on September 30, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -297,6 +297,11 @@
 	<xsl:if test="comment">
 	<blockquote>
 		<p class="comment"><xsl:value-of select="comment" /></p>
+	</blockquote>
+	</xsl:if>
+	<xsl:if test="fail_if">
+	<blockquote>
+		<p class="comment"><xsl:value-of select="fail_if" /></p>
 	</blockquote>
 	</xsl:if>
 	<dl class="properties">

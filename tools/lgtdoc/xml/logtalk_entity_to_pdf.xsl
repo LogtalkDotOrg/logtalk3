@@ -9,7 +9,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 
 %  XSLT stylesheet for converting XML documenting files into PDF files
-%  Last updated on October 10, 2023
+%  Last updated on September 30, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
@@ -592,6 +592,17 @@
 				space-before="4pt" 
 				space-after="8pt">
 			<xsl:value-of select="comment"/>
+		</fo:block>
+	</xsl:if>
+
+	<xsl:if test="fail_if">
+		<fo:block
+				margin-left="10mm"
+				font-size="10pt" 
+				font-family="serif" 
+				space-before="4pt" 
+				space-after="8pt">
+			<xsl:value-of select="fail_if"/>
 		</fo:block>
 	</xsl:if>
 

@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:0:2,
+		version is 11:1:0,
 		author is 'Paulo Moura',
-		date is 2024-06-25,
+		date is 2024-09-30,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1054,6 +1054,11 @@
 			warn_on_missing_punctuation(Indicator, Comment, Type, Entity)
 		;	warn_on_missing_predicate_info_key(Indicator, comment, Type, Entity)
 		),
+		(	member(fail_if(FailIf), Info) ->
+			write_xml_cdata_element(Stream, fail_if, [], FailIf),
+			warn_on_missing_punctuation(Indicator, FailIf, Type, Entity)
+		;	true
+		),
 		(	member(arguments(Arguments), Info) ->
 			findall(Name, member(Name - _, Arguments), Names),
 			Template =.. [Functor| Names],
@@ -1127,7 +1132,7 @@
 		forall(
 			(	member(KeyValue, Info),
 				KeyValue =.. [Key, Value],
-				\+ member(Key, [comment, arguments, argnames, exceptions, examples, remarks, since, see_also])
+				\+ member(Key, [comment, fail_if, arguments, argnames, exceptions, examples, remarks, since, see_also])
 			),
 			(	write_xml_open_tag(Stream, info, []),
 				write_xml_element(Stream, key, [], Key),
@@ -1576,11 +1581,11 @@
 		close(Stream).
 
 	kind_ref_doctype_xsd(entity, local, logtalk_entity-'logtalk_entity.dtd', 'logtalk_entity.xsd').
-	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/6.0/logtalk_entity.dtd', 'https://logtalk.org/xml/6.0/logtalk_entity.xsd').
+	kind_ref_doctype_xsd(entity, web, logtalk_entity-'https://logtalk.org/xml/7.0/logtalk_entity.dtd', 'https://logtalk.org/xml/7.0/logtalk_entity.xsd').
 	kind_ref_doctype_xsd(entity, standalone, logtalk_entity-none, none).
 
 	kind_ref_doctype_xsd(index, local, logtalk_index-'logtalk_index.dtd', 'logtalk_index.xsd').
-	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/6.0/logtalk_index.dtd', 'https://logtalk.org/xml/6.0/logtalk_index.xsd').
+	kind_ref_doctype_xsd(index, web, logtalk_index-'https://logtalk.org/xml/7.0/logtalk_index.dtd', 'https://logtalk.org/xml/7.0/logtalk_index.xsd').
 	kind_ref_doctype_xsd(index, standalone, logtalk_index-none, none).
 
 	sorted_keys_to_keys([], []).
