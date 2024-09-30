@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -34,9 +34,9 @@ elk(X) :- moose(X).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2022-05-30,
+		date is 2024-09-30,
 		comment is 'Unit tests for the de facto standard predicate_property/2 built-in predicate.'
 	]).
 
@@ -56,71 +56,89 @@ elk(X) :- moose(X).
 	test(commons_predicate_property_2_02, true) :-
 		{predicate_property(once(_), built_in)}.
 
-	test(commons_predicate_property_2_03, true) :-
+	test(commons_predicate_property_2_03, false) :-
+		{predicate_property(once(_), (dynamic))}.
+
+	test(commons_predicate_property_2_04, true) :-
 		{predicate_property(atom_codes(_,_), built_in)}.
 
-	test(commons_predicate_property_2_04, subsumes(findall(_,0,_),Template)) :-
+	test(commons_predicate_property_2_05, false) :-
+		{predicate_property(atom_codes(_,_), (dynamic))}.
+
+	test(commons_predicate_property_2_06, subsumes(findall(_,0,_),Template)) :-
 		{predicate_property(findall(_,_,_), meta_predicate(Template))}.
 
-	test(commons_predicate_property_2_05, subsumes(call(2,_,_),Template)) :-
+	test(commons_predicate_property_2_07, subsumes(call(2,_,_),Template)) :-
 		{predicate_property(call(_,_,_), meta_predicate(Template))}.
 
-	test(commons_predicate_property_2_06, true) :-
+	test(commons_predicate_property_2_08, true) :-
 		{predicate_property(cat(_), (dynamic))}.
 
-	test(commons_predicate_property_2_07, true) :-
+	test(commons_predicate_property_2_09, false) :-
+		{predicate_property(cat(_), static)}.
+
+	test(commons_predicate_property_2_10, false) :-
+		{predicate_property(cat(_), built_in)}.
+
+	test(commons_predicate_property_2_11, true) :-
 		{predicate_property(elk(_), static)}.
 
-	test(commons_predicate_property_2_08, true) :-
+	test(commons_predicate_property_2_12, false) :-
+		{predicate_property(elk(_), built_in)}.
+
+	test(commons_predicate_property_2_13, false) :-
+		{predicate_property(elk(_), (dynamic))}.
+
+	test(commons_predicate_property_2_14, true) :-
 		{predicate_property(scattered(_), (multifile))}.
 
-	test(commons_predicate_property_2_09, true) :-
+	test(commons_predicate_property_2_15, true) :-
 		{predicate_property(scattered(_), (dynamic))}.
 
-	test(commons_predicate_property_2_10, error(instantiation_error)) :-
+	test(commons_predicate_property_2_16, error(instantiation_error)) :-
 		{predicate_property(_, _)}.
 
-	test(commons_predicate_property_2_11, error(type_error(callable,1))) :-
+	test(commons_predicate_property_2_17, error(type_error(callable,1))) :-
 		{predicate_property(1, _)}.
 
-	test(commons_predicate_property_2_12, error(domain_error(predicate_property,foobar))) :-
+	test(commons_predicate_property_2_18, error(domain_error(predicate_property,foobar))) :-
 		{predicate_property(atom_chars(_,_), foobar)}.
 
 	% tests from the Logtalk portability work
 
-	test(lgt_predicate_property_2_13, true(Template == (0,0))) :-
+	test(lgt_predicate_property_2_19, true(Template == (0,0))) :-
 		{predicate_property((_,_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_14, true(Template == (0;0))) :-
+	test(lgt_predicate_property_2_20, true(Template == (0;0))) :-
 		{predicate_property((_;_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_15, true(Template == (0->0))) :-
+	test(lgt_predicate_property_2_21, true(Template == (0->0))) :-
 		{predicate_property((_->_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_16, true(Template == '*->'(0,0)), [condition({predicate_property('*->'(_,_), built_in)})]) :-
+	test(lgt_predicate_property_2_22, true(Template == '*->'(0,0)), [condition({predicate_property('*->'(_,_), built_in)})]) :-
 		{predicate_property('*->'(_,_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_17, true(Template == if(0,0,0)), [condition({predicate_property(if(_,_,_), built_in)})]) :-
+	test(lgt_predicate_property_2_23, true(Template == if(0,0,0)), [condition({predicate_property(if(_,_,_), built_in)})]) :-
 		{predicate_property(if(_,_,_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_18, true(Template == call(0))) :-
+	test(lgt_predicate_property_2_24, true(Template == call(0))) :-
 		{predicate_property(call(_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_19, subsumes(catch(0,_,0),Template)) :-
+	test(lgt_predicate_property_2_25, subsumes(catch(0,_,0),Template)) :-
 		{predicate_property(catch(_,_,_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_20, true(Template == once(0))) :-
+	test(lgt_predicate_property_2_26, true(Template == once(0))) :-
 		{predicate_property(once(_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_21, true((subsumes_term(bagof(_,0,_),Template); subsumes_term(bagof(_,^,_),Template)))) :-
+	test(lgt_predicate_property_2_27, true((subsumes_term(bagof(_,0,_),Template); subsumes_term(bagof(_,^,_),Template)))) :-
 		% in some Prolog systems, "^" is used instead of "0" to indicate that an existentially-qualified goal may be used
 		{predicate_property(bagof(_,_,_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_22, true((subsumes_term(setof(_,0,_),Template); subsumes_term(setof(_,^,_),Template)))) :-
+	test(lgt_predicate_property_2_28, true((subsumes_term(setof(_,0,_),Template); subsumes_term(setof(_,^,_),Template)))) :-
 		% in some Prolog systems, "^" is used instead of "0" to indicate that an existentially-qualified goal may be used
 		{predicate_property(setof(_,_,_), meta_predicate(Template))}.
 
-	test(lgt_predicate_property_2_23, subsumes(findall(_,0,_,_),Template), [condition({predicate_property(findall(_,_,_,_), built_in)})]) :-
+	test(lgt_predicate_property_2_29, subsumes(findall(_,0,_,_),Template), [condition({predicate_property(findall(_,_,_,_), built_in)})]) :-
 		{predicate_property(findall(_,_,_,_), meta_predicate(Template))}.
 
 :- end_object.

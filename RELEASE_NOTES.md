@@ -61,6 +61,12 @@ Examples
 Language (DSL) for writing tests using a pipeline of hook objects to translate
 the tests to a test dialect natively supported by the `lgtunit` tool.
 
+Tests
+-----
+
+* ADDED: Additional tests for the Prolog standard `predicate_property/2`
+built-in predicate.
+
 
 3.83.0 - September 24, 2024
 ===========================
