@@ -1054,9 +1054,9 @@
 			warn_on_missing_punctuation(Indicator, Comment, Type, Entity)
 		;	warn_on_missing_predicate_info_key(Indicator, comment, Type, Entity)
 		),
-		(	member(fail_if(FailIf), Info) ->
-			write_xml_cdata_element(Stream, fail_if, [], FailIf),
-			warn_on_missing_punctuation(Indicator, FailIf, Type, Entity)
+		(	member(fails_if(FailsIf), Info) ->
+			write_xml_cdata_element(Stream, fails_if, [], FailsIf),
+			warn_on_missing_punctuation(Indicator, FailsIf, Type, Entity)
 		;	true
 		),
 		(	member(arguments(Arguments), Info) ->
@@ -1132,7 +1132,7 @@
 		forall(
 			(	member(KeyValue, Info),
 				KeyValue =.. [Key, Value],
-				\+ member(Key, [comment, fail_if, arguments, argnames, exceptions, examples, remarks, since, see_also])
+				\+ member(Key, [comment, fails_if, arguments, argnames, exceptions, examples, remarks, since, see_also])
 			),
 			(	write_xml_open_tag(Stream, info, []),
 				write_xml_element(Stream, key, [], Key),

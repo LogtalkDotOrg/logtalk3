@@ -426,7 +426,7 @@
 				<ref name="comment"/>
 			</optional>
 			<optional>
-				<ref name="fail_if"/>
+				<ref name="fails_if"/>
 			</optional>
 			<optional>
 				<ref name="template"/>
@@ -477,8 +477,8 @@
 		</element>
 	</define>
 
-	<define name="fail_if">
-		<element name="fail_if">
+	<define name="fails_if">
+		<element name="fails_if">
 			<text/>
 		</element>
 	</define>

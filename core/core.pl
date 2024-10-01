@@ -12532,9 +12532,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	!,
 	'$lgt_check'(atom_or_string, Comment).
 
-'$lgt_compile_predicate_info_directive_pair'(fail_if, FailIf, _, _, fail_if(FailIf)) :-
+'$lgt_compile_predicate_info_directive_pair'(fails_if, FailsIf, _, _, fails_if(FailsIf)) :-
 	!,
-	'$lgt_check'(atom_or_string, FailIf).
+	'$lgt_check'(atom_or_string, FailsIf).
 
 '$lgt_compile_predicate_info_directive_pair'(exceptions, Exceptions, _, _, exceptions(Exceptions)) :-
 	!,

@@ -249,7 +249,7 @@
 		<xsd:element name="coinductive"	type="xsd:string"		minOccurs="0"/>
 		<xsd:element name="mode"		type="mode"				minOccurs="0" maxOccurs="unbounded"/>
 		<xsd:element name="comment"		type="xsd:string"		minOccurs="0"/>
-		<xsd:element name="fail_if"		type="xsd:string"		minOccurs="0"/>
+		<xsd:element name="fails_if"		type="xsd:string"		minOccurs="0"/>
 		<xsd:element name="template"	type="xsd:string"		minOccurs="0"/>
 		<xsd:choice	minOccurs="0">
 			<xsd:element name="argnames"	type="xsd:string"/>

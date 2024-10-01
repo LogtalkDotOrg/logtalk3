@@ -595,14 +595,14 @@
 		</fo:block>
 	</xsl:if>
 
-	<xsl:if test="fail_if">
+	<xsl:if test="fails_if">
 		<fo:block
 				margin-left="10mm"
 				font-size="10pt" 
 				font-family="serif" 
 				space-before="4pt" 
 				space-after="8pt">
-			<xsl:value-of select="fail_if"/>
+			<xsl:value-of select="fails_if"/>
 		</fo:block>
 	</xsl:if>
 

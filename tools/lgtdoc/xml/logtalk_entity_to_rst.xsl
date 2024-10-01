@@ -362,8 +362,8 @@
 		<xsl:value-of select="comment" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
-	<xsl:if test="fail_if">
-		<xsl:value-of select="fail_if" />
+	<xsl:if test="fails_if">
+		<xsl:value-of select="fails_if" />
 		<xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:text>| **Compilation flags:**</xsl:text>

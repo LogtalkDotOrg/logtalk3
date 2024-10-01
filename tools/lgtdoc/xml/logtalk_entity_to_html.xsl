@@ -291,9 +291,9 @@
 		<p class="comment"><xsl:value-of select="comment" /></p>
 	</blockquote>
 	</xsl:if>
-	<xsl:if test="fail_if">
+	<xsl:if test="fails_if">
 	<blockquote>
-		<p class="comment"><xsl:value-of select="fail_if" /></p>
+		<p class="comment"><xsl:value-of select="fails_if" /></p>
 	</blockquote>
 	</xsl:if>
 	<dl class="properties">

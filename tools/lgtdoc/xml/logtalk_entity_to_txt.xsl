@@ -257,8 +257,8 @@
 	<xsl:if test="comment">
 		<xsl:value-of select="$tab" /><xsl:value-of select="comment" /><xsl:value-of select="$nl2" />
 	</xsl:if>
-	<xsl:if test="fail_if">
-		<xsl:value-of select="$tab" /><xsl:value-of select="fail_if" /><xsl:value-of select="$nl2" />
+	<xsl:if test="fails_if">
+		<xsl:value-of select="$tab" /><xsl:value-of select="fails_if" /><xsl:value-of select="$nl2" />
 	</xsl:if>
 	<xsl:text>compilation flags: </xsl:text><xsl:value-of select="$nl" />
 	<xsl:value-of select="$tab" /><xsl:value-of select="compilation" /><xsl:value-of select="$nl" />
