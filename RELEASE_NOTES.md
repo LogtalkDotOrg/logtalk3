@@ -63,6 +63,9 @@ and `packs` tool error messages.
 * UPDATED: The `lgtdoc` tool to process the new `fails_if` key of the `info/2`
 predicate directive.
 
+* FIXED: The `lgtdoc` tool to recognize consistency errors as standard
+exceptions.
+
 Examples
 --------
 

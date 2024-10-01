@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:1:0,
+		version is 11:1:1,
 		author is 'Paulo Moura',
-		date is 2024-09-30,
+		date is 2024-10-01,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1809,6 +1809,7 @@
 	standard_exception(uninstantiation_error(_)).
 	standard_exception(type_error(_, _)).
 	standard_exception(domain_error(_, _)).
+	standard_exception(consistency_error(_, _, _)).
 	standard_exception(existence_error(_, _)).
 	standard_exception(permission_error(_, _, _)).
 	standard_exception(representation_error(_)).
