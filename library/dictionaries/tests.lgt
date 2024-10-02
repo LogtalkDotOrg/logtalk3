@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2023-07-04,
+		date is 2024-10-02,
 		comment is 'Unit tests for the "dictionaries" library.',
 		parnames is ['DictionaryObject']
 	]).
@@ -161,8 +161,18 @@
 		as_dictionary([], Dictionary),
 		\+ delete(Dictionary, b, _, _).
 
+	% delete non-existing key
+	test(dictionary_delete_4_02) :-
+		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		\+ delete(Dictionary, x, _, _).
+
+	% delete key with non-unifying value
+	test(dictionary_delete_4_03) :-
+		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		\+ delete(Dictionary, h, 9, _).
+
 	% delete smallest key
-	deterministic(dictionary_delete_4_02) :-
+	deterministic(dictionary_delete_4_04) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, a, Value, NewDictionary),
 		^^assertion(value, Value == 1),
@@ -170,7 +180,7 @@
 		^^assertion(pairs, Pairs == [b-2,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% delete second smallest key
-	deterministic(dictionary_delete_4_03) :-
+	deterministic(dictionary_delete_4_05) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, b, Value, NewDictionary),
 		^^assertion(value, Value == 2),
@@ -178,7 +188,7 @@
 		^^assertion(pairs, Pairs == [a-1,c-3,d-4,e-5,f-6,g-7,h-8,i-9,j-0]).
 
 	% delete middle key
-	deterministic(dictionary_delete_4_04) :-
+	deterministic(dictionary_delete_4_06) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, e, Value, NewDictionary),
 		^^assertion(value, Value == 5),
@@ -186,7 +196,7 @@
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,f-6,g-7,h-8,i-9,j-0]).
 
 	% delete key before largest key
-	deterministic(dictionary_delete_4_05) :-
+	deterministic(dictionary_delete_4_07) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, i, Value, NewDictionary),
 		^^assertion(value, Value == 9),
@@ -194,7 +204,7 @@
 		^^assertion(pairs, Pairs == [a-1,b-2,c-3,d-4,e-5,f-6,g-7,h-8,j-0]).
 
 	% delete largest key
-	deterministic(dictionary_delete_4_06) :-
+	deterministic(dictionary_delete_4_08) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		delete(Dictionary, j, Value, NewDictionary),
 		^^assertion(value, Value == 0),
@@ -203,11 +213,18 @@
 
 	% update/4 tests
 
+	% update empty dictionary
 	test(dictionary_update_4_01) :-
 		as_dictionary([], Dictionary),
-		\+ update(Dictionary, b, _, _).
+		\+ update(Dictionary, b, 42, _).
 
-	deterministic(dictionary_update_4_02) :-
+	% update non-existing key
+	test(dictionary_update_4_02) :-
+		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		\+ update(Dictionary, x, 42, _).
+
+	% update existing key
+	deterministic(dictionary_update_4_03) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		update(Dictionary, b, 22, NewDictionary),
 		lookup(b, Value, NewDictionary),
@@ -215,11 +232,23 @@
 
 	% update/5 tests
 
+	% update empty dictionary
 	test(dictionary_update_5_01) :-
 		as_dictionary([], Dictionary),
 		\+ update(Dictionary, b, _, _, _).
 
-	deterministic(dictionary_update_5_02) :-
+	% update non-existing key
+	test(dictionary_update_5_02) :-
+		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		\+ update(Dictionary, x, 42, 24, _).
+
+	% delete key with non-unifying value
+	test(dictionary_update_5_03) :-
+		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		\+ update(Dictionary, h, 9, 10, _).
+
+	% update existing key
+	deterministic(dictionary_update_5_04) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		update(Dictionary, b, OldValue, 22, NewDictionary),
 		^^assertion(old, OldValue == 2),
@@ -375,20 +404,30 @@
 	% map/2 tests
 
 	test(dictionary_map_2_01) :-
-		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		as_dictionary([], Dictionary),
 		map([_-Value]>>integer(Value), Dictionary).
 
 	test(dictionary_map_2_02) :-
+		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
+		map([_-Value]>>integer(Value), Dictionary).
+
+	test(dictionary_map_2_03) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		\+ map([_-Value]>>atom(Value), Dictionary).
 
 	% map/3 tests
 
 	test(dictionary_map_3_01) :-
+		as_dictionary([], Dictionary),
+		map([Key-Value, Key-NewValue]>>(integer::succ(Value,NewValue)), Dictionary, NewDictionary),
+		as_list(NewDictionary, Pairs),
+		^^assertion(Pairs == []).
+
+	test(dictionary_map_3_02) :-
 		as_dictionary([j-0,b-2,e-5,c-3,g-7,i-9,h-8,f-6,a-1,d-4], Dictionary),
 		map([Key-Value, Key-NewValue]>>(integer::succ(Value,NewValue)), Dictionary, NewDictionary),
-		as_list(NewDictionary, OtherPairs),
-		^^assertion(OtherPairs == [a-2,b-3,c-4,d-5,e-6,f-7,g-8,h-9,i-10,j-1]).
+		as_list(NewDictionary, Pairs),
+		^^assertion(Pairs == [a-2,b-3,c-4,d-5,e-6,f-7,g-8,h-9,i-10,j-1]).
 
 	% apply/4 tests
 

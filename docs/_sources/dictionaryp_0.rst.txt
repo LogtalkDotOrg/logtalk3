@@ -14,8 +14,8 @@ Dictionary protocol.
 |    ``logtalk_load(dictionaries(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:3:0
-| **Date:** 2021-04-12
+| **Version:** 2:4:0
+| **Date:** 2024-10-02
 
 | **Compilation flags:**
 |    ``static``
@@ -158,7 +158,7 @@ Inserts a key-value pair into a dictionary, returning the updated dictionary. Wh
 ``delete/4``
 ^^^^^^^^^^^^
 
-Deletes a matching key-value pair from a dictionary, returning the updated dictionary.
+Deletes a matching key-value pair from a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the key exists but the value does not unify.
 
 | **Compilation flags:**
 |    ``static``
@@ -196,7 +196,7 @@ Updates the value associated with Key in a dictionary, returning the updated dic
 ``update/5``
 ^^^^^^^^^^^^
 
-Updates the value associated with a key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match the old value.
+Updates the value associated with a key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not unify.
 
 | **Compilation flags:**
 |    ``static``
@@ -253,7 +253,7 @@ True iff the dictionary is empty.
 ``lookup/3``
 ^^^^^^^^^^^^
 
-Lookups a matching key-value pair from a dictionary.
+Lookups a matching key-value pair from a dictionary. Fails if no match is found.
 
 | **Compilation flags:**
 |    ``static``
@@ -330,7 +330,7 @@ Returns the (possibly empty) intersection between two dictionaries when the valu
 ``previous/4``
 ^^^^^^^^^^^^^^
 
-Returns the previous pair in a dictionary given a key.
+Returns the previous pair in a dictionary given a key. Fails if there is no previous pair.
 
 | **Compilation flags:**
 |    ``static``
@@ -349,7 +349,7 @@ Returns the previous pair in a dictionary given a key.
 ``next/4``
 ^^^^^^^^^^
 
-Returns the next pair in a dictionary given a key.
+Returns the next pair in a dictionary given a key. Fails if there is no next pair.
 
 | **Compilation flags:**
 |    ``static``
@@ -406,7 +406,7 @@ Returns the pair with the maximum key (as per standard order) in a dictionary. F
 ``delete_min/4``
 ^^^^^^^^^^^^^^^^
 
-Deletes the pair with the minimum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary.
+Deletes the pair with the minimum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary. Fails if the dictionary is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -425,7 +425,7 @@ Deletes the pair with the minimum key (as per standard order) from a dictionary,
 ``delete_max/4``
 ^^^^^^^^^^^^^^^^
 
-Deletes the pair with the maximum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary.
+Deletes the pair with the maximum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary. Fails if the dictionary is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -553,7 +553,7 @@ Number of dictionary entries.
 | **Template:**
 |    ``size(Dictionary,Size)``
 | **Mode and number of proofs:**
-|    ``size(@dictionary,?integer)`` - ``zero_or_one``
+|    ``size(@dictionary,?integer)`` - ``one``
 
 
 ------------

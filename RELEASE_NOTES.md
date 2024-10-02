@@ -50,6 +50,10 @@ methods.
 predicates directly instead of using the `expand_term/2` and `expand_goal/2`
 built-in methods.
 
+* ADDED: Additional tests for the `dictionaries` library.
+
+* IMPROVED: Documentation of the `dictionaries` library predicates.
+
 * FIXED: The library object `type` to properly load the SWI-Prolog `unicode`
 module library when running with this backend. Thanks to Alex Kouznetsov for
 the bug report.

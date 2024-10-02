@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- protocol(dictionaryp).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2021-04-12,
+		date is 2024-10-02,
 		comment is 'Dictionary protocol.',
 		see_also is [avltree, bintree, rbtree]
 	]).
@@ -74,7 +74,7 @@
 	:- public(delete/4).
 	:- mode(delete(+dictionary, @ground, ?term, -dictionary), zero_or_one).
 	:- info(delete/4, [
-		comment is 'Deletes a matching key-value pair from a dictionary, returning the updated dictionary.',
+		comment is 'Deletes a matching key-value pair from a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the key exists but the value does not unify.',
 		argnames is ['OldDictionary', 'Key', 'Value', 'NewDictionary']
 	]).
 
@@ -88,7 +88,7 @@
 	:- public(update/5).
 	:- mode(update(+dictionary, @ground, ?term, +term, -dictionary), zero_or_one).
 	:- info(update/5, [
-		comment is 'Updates the value associated with a key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not match the old value.',
+		comment is 'Updates the value associated with a key in a dictionary, returning the updated dictionary. Fails if it cannot find the key or if the existing value does not unify.',
 		argnames is ['OldDictionary', 'Key', 'OldValue', 'NewValue', 'NewDictionary']
 	]).
 
@@ -110,7 +110,7 @@
 	:- mode(lookup(+ground, ?term, @dictionary), zero_or_one).
 	:- mode(lookup(-ground, ?term, @dictionary), zero_or_more).
 	:- info(lookup/3, [
-		comment is 'Lookups a matching key-value pair from a dictionary.',
+		comment is 'Lookups a matching key-value pair from a dictionary. Fails if no match is found.',
 		argnames is ['Key', 'Value', 'Dictionary']
 	]).
 
@@ -138,14 +138,14 @@
 	:- public(previous/4).
 	:- mode(previous(+dictionary, +key, -key, -value), zero_or_one).
 	:- info(previous/4, [
-		comment is 'Returns the previous pair in a dictionary given a key.',
+		comment is 'Returns the previous pair in a dictionary given a key. Fails if there is no previous pair.',
 		argnames is ['Dictionary', 'Key', 'Previous', 'Value']
 	]).
 
 	:- public(next/4).
 	:- mode(next(+dictionary, +key, -key, -value), zero_or_one).
 	:- info(next/4, [
-		comment is 'Returns the next pair in a dictionary given a key.',
+		comment is 'Returns the next pair in a dictionary given a key. Fails if there is no next pair.',
 		argnames is ['Dictionary', 'Key', 'Next', 'Value']
 	]).
 
@@ -166,14 +166,14 @@
 	:- public(delete_min/4).
 	:- mode(delete_min(+dictionary, -key, -value, -dictionary), zero_or_one).
 	:- info(delete_min/4, [
-		comment is 'Deletes the pair with the minimum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary.',
+		comment is 'Deletes the pair with the minimum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary. Fails if the dictionary is empty.',
 		argnames is ['OldDictionary', 'Key', 'Value', 'NewDictionary']
 	]).
 
 	:- public(delete_max/4).
 	:- mode(delete_max(+dictionary, -key, -value, -dictionary), zero_or_one).
 	:- info(delete_max/4, [
-		comment is 'Deletes the pair with the maximum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary.',
+		comment is 'Deletes the pair with the maximum key (as per standard order) from a dictionary, returning the deleted pair and the updated dictionary. Fails if the dictionary is empty.',
 		argnames is ['OldDictionary', 'Key', 'Value', 'NewDictionary']
 	]).
 
@@ -216,7 +216,7 @@
 	]).
 
 	:- public(size/2).
-	:- mode(size(@dictionary, ?integer), zero_or_one).
+	:- mode(size(@dictionary, ?integer), one).
 	:- info(size/2, [
 		comment is 'Number of dictionary entries.',
 		argnames is ['Dictionary', 'Size']
