@@ -34,6 +34,8 @@ predicate fail conditions. Adopted from ECLiPSe similar `fail_if` key.
 Documentation
 -------------
 
+* IMPROVED: Handbook glossary entries for "predicate" and "method".
+
 * IMPROVED: Documentation of the `packs` tool on working with packs using
 `git archive` URLs.
 

@@ -253,6 +253,7 @@ Glossary
       The :term:`predicate definition` used to answer a :term:`message` sent
       to an object. Logtalk supports both :term:`static binding` and
       :term:`dynamic binding` to find which method to run to answer a message.
+      See also :term:`built-in method`.
 
    abstract method
       A :term:`method` implementing an algorithm whose step corresponds
@@ -335,9 +336,7 @@ Glossary
       Predicates describe what is true about the application domain. A
       predicate is identified by its *predicate indicator*, i.e. by its
       name and number of arguments using the notation ``Name/Arity``.
-      When predicates defined in :term:`objects <object>` or
-      :term:`categories <category>` they are also referred to as
-      :term:`methods <method>`.
+      See also :term:`built-in predicate` and :term:`method`.
 
    predicate declaration
       A predicate declaration is composed by a set of
