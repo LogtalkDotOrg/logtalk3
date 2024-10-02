@@ -25831,6 +25831,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(NonTerminal, Functor, Arity),
 	throw(permission_error(define, non_terminal, Functor//Arity)).
 
+'$lgt_dcg_non_terminal'((_ ; _), _, _, _) :-
+	throw(permission_error(modify, control_construct, (;)/2)).
+
+'$lgt_dcg_non_terminal'((_ -> _), _, _, _) :-
+	throw(permission_error(modify, control_construct, (->)/2)).
+
+'$lgt_dcg_non_terminal'('*->'(_, _), _, _, _) :-
+	'$lgt_predicate_property'('*->'(_, _), built_in),
+	throw(permission_error(modify, control_construct, (*->)/2)).
+
 '$lgt_dcg_non_terminal'(NonTerminal, S0, S, Goal) :-
 	NonTerminal =.. NonTerminalUniv,
 	'$lgt_append'(NonTerminalUniv, [S0, S], GoalUniv),

@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * ADDED: New `fails_if` key to the `info/2` predicate directive for documenting
 predicate fail conditions. Adopted from ECLiPSe similar `fail_if` key.
 
+* FIXED: Prevent using grammar rules to try to redefine the `(;)/2`, `(->)/2`,
+and `(*->)/2` control constructs.
+
 Documentation
 -------------
 
