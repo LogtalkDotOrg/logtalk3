@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2023-07-05,
+		date is 2024-10-03,
 		comment is 'Unit tests for the ISO Prolog standard copy_term/2 built-in predicate.'
 	]).
 
@@ -93,38 +93,46 @@
 		\+ current_logtalk_flag(prolog_dialect, eclipse)
 	)).
 
-		test(lgt_copy_term_2_12, true(Z == X)) :-
+		test(lgt_copy_term_2_12, true(\+ acyclic_term(Y))) :-
+			X = f(X),
+			{copy_term(X, Y)}.
+
+		test(lgt_copy_term_2_13, true(Z == X)) :-
 			X = f(X),
 			{copy_term(foo(X,Y), foo(Z,Y))}.
 
-		test(lgt_copy_term_2_13, true((V = [_, _, _| T], V == T))) :-
+		test(lgt_copy_term_2_14, true((V = [_, _, _| T], V == T))) :-
 			{L = [_, _, _| L], copy_term(L, V)}.
 
 	:- else.
 
-		- test(lgt_copy_term_2_12, true(Z == X), [note('STO')]) :-
+		- test(lgt_copy_term_2_12, true(\+ acyclic_term(Y)), [note('STO')]) :-
+			X = f(X),
+			{copy_term(X, Y)}.
+
+		- test(lgt_copy_term_2_13, true(Z == X), [note('STO')]) :-
 			% STO; Undefined
 			X = f(X),
 			{copy_term(foo(X,Y), foo(Z,Y))}.
 
-		- test(lgt_copy_term_2_13, true((V = [_, _, _| T], V == T)), [note('STO')]) :-
+		- test(lgt_copy_term_2_14, true((V = [_, _, _| T], V == T)), [note('STO')]) :-
 			% STO; Undefined
 			{L = [_, _, _| L], copy_term(L, V)}.
 
 	:- endif.
 
-	test(lgt_copy_term_2_14, true(X \== Y)) :-
+	test(lgt_copy_term_2_15, true(X \== Y)) :-
 		{copy_term(X, Y)}.
 
-	test(lgt_copy_term_2_15, true((A \== D, B \== E, C \== F))) :-
+	test(lgt_copy_term_2_16, true((A \== D, B \== E, C \== F))) :-
 		{copy_term([A,B|C], [D,E|F])}.
 
 	% tests from the WG17 standardization work
 
-	test(wg17_copy_term_2_16, true((A \== C, B \== D))) :-
+	test(wg17_copy_term_2_17, true((A \== C, B \== D))) :-
 		{copy_term(A + B, C + D)}.
 
-	test(wg17_copy_term_2_17, variant(T, _ + _)) :-
+	test(wg17_copy_term_2_18, variant(T, _ + _)) :-
 		{copy_term(_ + _, T)}.
 
 :- end_object.

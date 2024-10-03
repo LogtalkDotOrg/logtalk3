@@ -85,8 +85,8 @@ the tests to a test dialect natively supported by the `lgtunit` tool.
 Tests
 -----
 
-* ADDED: Additional tests for the Prolog standard `predicate_property/2`
-built-in predicate.
+* ADDED: Additional tests for the Prolog standard `predicate_property/2` and
+`copy_term/2` built-in predicates.
 
 
 3.83.0 - September 24, 2024
