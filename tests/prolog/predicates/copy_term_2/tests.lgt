@@ -107,6 +107,7 @@
 	:- else.
 
 		- test(lgt_copy_term_2_12, true(\+ acyclic_term(Y)), [note('STO')]) :-
+			% STO; Undefined
 			X = f(X),
 			{copy_term(X, Y)}.
 
