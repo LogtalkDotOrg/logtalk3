@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2023-04-09,
+		date is 2024-10-04,
 		comment is 'Unit tests for the ISO Prolog standard term comparison built-in predicates.'
 	]).
 
@@ -173,6 +173,12 @@
 		test(lgt_term_comparison_40, true) :-
 			{X = f(X), Y = f(Y), X == Y}.
 
+		test(lgt_term_comparison_41, true) :-
+			{X = s(X,_), Y = s(Y,_), X @< Y}.
+
+		test(lgt_term_comparison_42, true) :-
+			{X = s(_,X), Y = s(_,Y), X @< Y}.
+
 	:- else.
 
 		- test(lgt_term_comparison_38, true, [note('STO')]) :-
@@ -186,6 +192,12 @@
 		- test(lgt_term_comparison_40, true, [note('STO')]) :-
 			% STO; Undefined.
 			{X = f(X), Y = f(Y), X == Y}.
+
+		- test(lgt_term_comparison_41, true, [note('STO')]) :-
+			{X = s(X,_), Y = s(Y,_), X @< Y}.
+
+		- test(lgt_term_comparison_42, true, [note('STO')]) :-
+			{X = s(_,X), Y = s(_,Y), X @< Y}.
 
 	:- endif.
 
