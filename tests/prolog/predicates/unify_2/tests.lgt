@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2023-04-10,
+		date is 2024-10-04,
 		comment is 'Unit tests for the ISO Prolog standard (=)/2 built-in predicate.'
 	]).
 
@@ -85,6 +85,9 @@
 		test(iso_unify_2_16, false) :-
 			{'='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
 
+		test(iso_unify_2_17, true) :-
+			{L1 = [1,2,3| L1], L2 = [1,2,3,1,2,3| L2], L1 == L2}.
+
 	:- else.
 
 		- test(iso_unify_2_12, true, [note('STO')]) :-
@@ -106,6 +109,9 @@
 		- test(iso_unify_2_16, false, [note('STO')]) :-
 			% STO; Undefined
 			{'='(f(X,Y,X,1), f(a(X),a(Y),Y,2))}.
+
+		- test(iso_unify_2_17, true, [note('STO')]) :-
+			{L1 = [1,2,3| L1], L2 = [1,2,3,1,2,3| L2], L1 = L2}.
 
 	:- endif.
 

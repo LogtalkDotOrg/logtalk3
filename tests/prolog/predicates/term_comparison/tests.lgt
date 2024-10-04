@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
 		date is 2024-10-04,
 		comment is 'Unit tests for the ISO Prolog standard term comparison built-in predicates.'
@@ -191,6 +191,9 @@
 		test(lgt_term_comparison_46, false) :-
 			{X = s(_,X), Y = s(_,Y), X @> Y}.
 
+		test(lgt_term_comparison_47, true) :-
+			{L1 = [1,2,3| L1], L2 = [1,2,3,1,2,3| L2], L1 == L2}.
+
 	:- else.
 
 		- test(lgt_term_comparison_38, true, [note('STO')]) :-
@@ -222,6 +225,9 @@
 
 		- test(lgt_term_comparison_46, false, [note('STO')]) :-
 			{X = s(_,X), Y = s(_,Y), X @> Y}.
+
+		- test(lgt_term_comparison_47, true, [note('STO')]) :-
+			{L1 = [1,2,3| L1], L2 = [1,2,3,1,2,3| L2], L1 == L2}.
 
 	:- endif.
 
