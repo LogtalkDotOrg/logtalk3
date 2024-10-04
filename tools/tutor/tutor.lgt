@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:70:0,
+		version is 0:71:0,
 		author is 'Paulo Moura',
-		date is 2024-09-25,
+		date is 2024-10-04,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -354,6 +354,9 @@
 		['Write instead extends((O1, O2, ...)) or extends([O1, O2, ...])'-[], nl, nl].
 	error(permission_error(repeat, entity_relation, complements/1)) -->
 		['Write instead complements((O1, O2, ...)) or complements([O1, O2, ...])'-[], nl, nl].
+
+	error(permission_error(include, file, _)) -->
+		['A source file cannot include itself. Typo in the file name?'-[], nl, nl].
 
 	error(existence_error(directive, object/1)) -->
 		[	'Unmatched closing object directive found.'-[], nl,

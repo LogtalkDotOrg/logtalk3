@@ -28565,6 +28565,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),
 		'$lgt_file_exists'(SourceFile) ->
 		true
+	;	'$lgt_source_file_name'(ExpandedFile, [], Directory, _, _, SourceFile),
+		'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _) ->
+		throw(permission_error(include, file, File))
 	;	throw(existence_error(file, File))
 	),
 	(	Mode = compile(_,_,_) ->
