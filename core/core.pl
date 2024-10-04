@@ -6909,6 +6909,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_load_file'(File, [RelativeTo| Flags]) :-
 	(	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
+		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),
 		atom_concat(Name, Extension, Basename),
 		(	'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)
 			% file already loaded; possibly an embedded application in which case we
@@ -6917,6 +6918,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	'$lgt_file_exists'(SourceFile)
 		) ->
 		true
+	;	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
+		'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _) ->
+		throw(error(permission_error(load, file, File), _))
 	;	throw(error(existence_error(file, File), _))
 	),
 	(	'$lgt_loaded_file_'(Basename, Directory, PreviousMode, PreviousFlags, _, _, LoadingTimeStamp),
@@ -7030,6 +7034,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	% loading of the intermediate Prolog file failed
 		retractall('$lgt_file_loading_stack_'(SourceFile, _)),
+		retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)),
 		'$lgt_propagate_failure_to_parent_files'(SourceFile),
 		'$lgt_delete_intermediate_files'(ObjectFile),
 		fail
@@ -7168,7 +7173,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 % clean the compilation auxiliary predicates *before* compiling a file
 
 '$lgt_compile_files'([], _) :-
-	!.
+	!,
+	retractall('$lgt_pp_file_paths_flags_'(_, _, _, _, _)).
 
 '$lgt_compile_files'([File| Files], [RelativeTo| Flags]) :-
 	!,

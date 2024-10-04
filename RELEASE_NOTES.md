@@ -31,6 +31,8 @@ Logtalk compiler and runtime
 * ADDED: New `fails_if` key to the `info/2` predicate directive for documenting
 predicate fail conditions. Adopted from ECLiPSe similar `fail_if` key.
 
+* IMPROVED: Detect and report when a source file attempts to load itself.
+
 * IMPROVED: Error reporting when a source file attempts to include itself.
 
 * FIXED: Prevent using grammar rules to try to redefine the `(;)/2`, `(->)/2`,

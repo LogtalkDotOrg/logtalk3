@@ -357,6 +357,8 @@
 
 	error(permission_error(include, file, _)) -->
 		['A source file cannot include itself. Typo in the file name?'-[], nl, nl].
+	error(permission_error(load, file, _)) -->
+		['A source file cannot load itself. Typo in the file name?'-[], nl, nl].
 
 	error(existence_error(directive, object/1)) -->
 		[	'Unmatched closing object directive found.'-[], nl,
