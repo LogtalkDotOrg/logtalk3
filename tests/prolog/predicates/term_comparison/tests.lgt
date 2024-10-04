@@ -176,8 +176,20 @@
 		test(lgt_term_comparison_41, true) :-
 			{X = s(X,_), Y = s(Y,_), X @< Y}.
 
-		test(lgt_term_comparison_42, true) :-
+		test(lgt_term_comparison_42, false) :-
+			{X = s(X,_), Y = s(Y,_), X == Y}.
+
+		test(lgt_term_comparison_43, false) :-
+			{X = s(X,_), Y = s(Y,_), X @> Y}.
+
+		test(lgt_term_comparison_44, true) :-
 			{X = s(_,X), Y = s(_,Y), X @< Y}.
+
+		test(lgt_term_comparison_45, false) :-
+			{X = s(_,X), Y = s(_,Y), X == Y}.
+
+		test(lgt_term_comparison_46, false) :-
+			{X = s(_,X), Y = s(_,Y), X @> Y}.
 
 	:- else.
 
@@ -196,8 +208,20 @@
 		- test(lgt_term_comparison_41, true, [note('STO')]) :-
 			{X = s(X,_), Y = s(Y,_), X @< Y}.
 
-		- test(lgt_term_comparison_42, true, [note('STO')]) :-
+		- test(lgt_term_comparison_42, false, [note('STO')]) :-
+			{X = s(X,_), Y = s(Y,_), X == Y}.
+
+		- test(lgt_term_comparison_43, false, [note('STO')]) :-
+			{X = s(X,_), Y = s(Y,_), X @> Y}.
+
+		- test(lgt_term_comparison_44, true, [note('STO')]) :-
 			{X = s(_,X), Y = s(_,Y), X @< Y}.
+
+		- test(lgt_term_comparison_45, false, [note('STO')]) :-
+			{X = s(_,X), Y = s(_,Y), X == Y}.
+
+		- test(lgt_term_comparison_46, false, [note('STO')]) :-
+			{X = s(_,X), Y = s(_,Y), X @> Y}.
 
 	:- endif.
 
