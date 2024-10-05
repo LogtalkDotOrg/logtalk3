@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:71:0,
+		version is 0:72:0,
 		author is 'Paulo Moura',
-		date is 2024-10-04,
+		date is 2024-10-05,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -326,7 +326,7 @@
 		].
 
 	error(permission_error(implement, self, _)) -->
-		['A protocols cannot implement itself. Typo in the object or category identifier?'-[], nl, nl].
+		['A protocol cannot implement itself. Typo in the object or category identifier?'-[], nl, nl].
 	error(permission_error(import, self, _)) -->
 		['A category cannot import itself. Typo in the object identifier?'-[], nl, nl].
 	error(permission_error(instantiate, class, _)) -->
@@ -359,6 +359,15 @@
 		['A source file cannot include itself. Typo in the file name?'-[], nl, nl].
 	error(permission_error(load, file, _)) -->
 		['A source file cannot load itself. Typo in the file name?'-[], nl, nl].
+
+	error(permission_error(uses, self, _)) -->
+		[	'An object cannot reference itself in a uses/2 directive.'-[], nl,
+			'Typo in the object name?'-[], nl, nl
+		].
+	error(permission_error(use_module, self, _)) -->
+		[	'A module (being compiled as an object) cannot reference itself'-[], nl,
+			'in a use_module/2 directive. Typo in the object name?'-[], nl, nl
+		].
 
 	error(existence_error(directive, object/1)) -->
 		[	'Unmatched closing object directive found.'-[], nl,

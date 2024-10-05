@@ -10225,6 +10225,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % uses/2 predicate directive
 
+'$lgt_compile_logtalk_directive'(uses(Obj, _), _) :-
+	callable(Obj),
+	'$lgt_pp_entity_'(object, Obj, _),
+	% recursive reference to the object being compiled
+	throw(permission_error(uses, self, Obj)).
+
 '$lgt_compile_logtalk_directive'(uses(Obj, Resources), Ctx) :-
 	term_variables(Obj, [ObjVariable| ObjVariables]),
 	'$lgt_pp_term_source_data_'((:- uses(Obj,Resources)), VariableNames, _, _, _),
@@ -10289,6 +10295,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 		unsupported_directive(File, Lines, Type, Entity, use_module(Module, Imports))
 	),
 	fail.
+
+'$lgt_compile_logtalk_directive'(use_module(Module, _), _) :-
+	atom(Module),
+	'$lgt_pp_module_'(Module),
+	% recursive reference to the module being compiled as an object
+	throw(permission_error(use_module, self, Module)).
 
 '$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
 	var(Module),
