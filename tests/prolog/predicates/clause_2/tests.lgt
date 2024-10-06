@@ -43,14 +43,17 @@ a(_).
 b(_).
 c(_).
 
+:- dynamic(p/2).
+p(a(C), b(C)).
+
 
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2024-09-20,
+		date is 2024-10-06,
 		comment is 'Unit tests for the ISO Prolog standard clause/2 built-in predicate.'
 	]).
 
@@ -124,5 +127,34 @@ c(_).
 		{clause(r(A,B,C), (a(A), b(B), c(C)))},
 		{clause(r(D,E,F), (a(D), b(E), c(F)))},
 		term_variables(vs(A,B,C,D,E,F), Vars).
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse),
+		catch({current_prolog_flag(occurs_check, _)}, _, fail)
+	)).
+
+		test(lgt_clause_2_14, false, [setup({set_prolog_flag(occurs_check,true)})]) :-
+			{clause(p(A, b(A)), true)}.
+
+		test(lgt_clause_2_15, error(_), [setup({set_prolog_flag(occurs_check,error)})]) :-
+			{clause(p(A, b(A)), true)}.
+
+		test(lgt_clause_2_16, true, [setup({set_prolog_flag(occurs_check,false)})]) :-
+			{clause(p(A, b(A)), true)}.
+
+	:- else.
+
+		- test(lgt_clause_2_14, false, [setup({set_prolog_flag(occurs_check,true)}), note('STO')]) :-
+			{clause(p(A, b(A)), true)}.
+
+		- test(lgt_clause_2_15, error(_), [setup({set_prolog_flag(occurs_check,error)}), note('STO')]) :-
+			{clause(p(A, b(A)), true)}.
+
+		- test(lgt_clause_2_16, true, [setup({set_prolog_flag(occurs_check,false)}), note('STO')]) :-
+			{clause(p(A, b(A)), true)}.
+
+	:- endif.
 
 :- end_object.
