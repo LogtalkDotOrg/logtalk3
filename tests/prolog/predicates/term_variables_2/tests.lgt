@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2023-07-05,
+		date is 2024-10-06,
 		comment is 'Unit tests for the ISO Prolog standard term_variables/2 built-in predicate.'
 	]).
 
@@ -105,17 +105,23 @@
 		test(lgt_term_variables_2_14, true(Vars == [])) :-
 			{X = f(X,X), term_variables(X, Vars)}.
 
+		test(lgt_term_variables_2_15, true(Vars == [Y])) :-
+			{X = f(X,Y), term_variables(X, Vars)}.
+
 	:- else.
 
 		- test(lgt_term_variables_2_14, true(Vars == []), [note('STO')]) :-
 			% STO; Undefined.
 			{X = f(X,X), term_variables(X, Vars)}.
 
+		- test(lgt_term_variables_2_15, true(Vars == [Y]), [note('STO')]) :-
+			{X = f(X,Y), term_variables(X, Vars)}.
+
 	:- endif.
 
 	% tests from the WG17 test suite
 
-	test(wg17_term_variables_2_15, variant(Vs, [_, _])) :-
+	test(wg17_term_variables_2_16, variant(Vs, [_, _])) :-
 		term_variables(_ + _, Vs).
 
 	% auxiliary predicates
