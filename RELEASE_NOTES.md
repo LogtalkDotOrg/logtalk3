@@ -102,6 +102,9 @@ Tests
 `copy_term/2`, `predicate_property/2`, and term comparison built-in
 predicates.
 
+* ADDED: Additional tests for the Prolog de facto standard `clause/3` built-in
+predicate.
+
 
 3.83.0 - September 24, 2024
 ===========================

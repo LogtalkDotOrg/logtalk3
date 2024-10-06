@@ -19,19 +19,24 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- dynamic(p/2).
+p(a(C), b(C)).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2024-07-10,
+		date is 2024-10-06,
 		comment is 'Unit tests for the de facto standard Prolog built-in predicates that take a clause reference argument.'
 	]).
 
 	:- uses(user, [
-		a/1, b/1, y/1, z/1
+		a/1, b/1, y/1, z/1, p/2
 	]).
+	:- dynamic(user::p/2).
 
 	test(asserta_2_01, true(X == 0)) :-
 		asserta(a(0), _),
@@ -94,6 +99,35 @@
 	test(clause_3_06, error(type_error(_, 3.14))) :-
 		assertz(y(7), _),
 		clause(y(_), _, 3.14).
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse),
+		catch({current_prolog_flag(occurs_check, _)}, _, fail)
+	)).
+
+		test(clause_3_07, false, [setup({set_prolog_flag(occurs_check,true)})]) :-
+			clause(p(A, b(A)), true, _).
+
+		test(clause_3_08, error(_), [setup({set_prolog_flag(occurs_check,error)})]) :-
+			clause(p(A, b(A)), true, _).
+
+		test(clause_3_09, true, [setup({set_prolog_flag(occurs_check,false)})]) :-
+			clause(p(A, b(A)), true, _).
+
+	:- else.
+
+		- test(clause_3_07, false, [setup({set_prolog_flag(occurs_check,true)}), note('STO')]) :-
+			clause(p(A, b(A)), true, _).
+
+		- test(clause_3_08, error(_), [setup({set_prolog_flag(occurs_check,error)}), note('STO')]) :-
+			clause(p(A, b(A)), true, _).
+
+		- test(clause_3_09, true, [setup({set_prolog_flag(occurs_check,false)}), note('STO')]) :-
+			clause(p(A, b(A)), true, _).
+
+	:- endif.
 
 	test(erase_1_01, true(L == [])) :-
 		assertz(b(1), Ref),
