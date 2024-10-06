@@ -19,7 +19,8 @@ ________________________________________________________________________
 
 
 This folder contains an example of defining and running unit tests using
-the test dialects supported by default by the Logtalk `lgtunit` tool.
+the test dialects supported by default by the Logtalk `lgtunit` tool. See
+also the `quick_check` and `tests_dsl` examples.
 
 To define tests for your own project, see the `lgtunit` tool documentation
 and the `tests-sample.lgt` and `tester-sample.lgt` sample files in the root

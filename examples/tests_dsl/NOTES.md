@@ -23,8 +23,10 @@ file.
 
 This example illustrates how to define a Domain Specific Language (DSL)
 for writing tests using a pipeline of hook objects to translate the tests
-to a test dialect natively supported by the `lgtunit` tool.
+to a test dialect natively supported by the `lgtunit` tool. See also the
+`testing` and `quick_check` examples.
 
-See also the following blog post:
+An extended discussion of this example can be found in the following blog
+post:
 
 https://logtalk.org/2019/11/05/user-defined-test-dialects.html

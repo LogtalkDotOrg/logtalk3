@@ -26,3 +26,5 @@ For a description of this example, please see the comments in the
 
 For more information on QuickCheck-based testing see the documentation of
 the `lgtunit` tool.
+
+See also the `testing` and ``tests_dsl` examples.
