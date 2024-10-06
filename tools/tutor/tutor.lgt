@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:72:0,
+		version is 0:73:0,
 		author is 'Paulo Moura',
-		date is 2024-10-05,
+		date is 2024-10-06,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -108,6 +108,11 @@
 	error(domain_error(category_relation, Relation)) -->
 		[	'The ~w relation is not a valid relation between a category'-[Relation], nl,
 			'and other entities.'-[], nl, nl
+		].
+
+	error(domain_error(ancestor, _)) -->
+		[	'The alias/2 directive must reference an entity ancestor (listed'-[], nl,
+			'in the entity opening directive). Typo in the ancestor name?'-[], nl, nl
 		].
 
 	error(domain_error(class, _)) -->
@@ -367,6 +372,10 @@
 	error(permission_error(use_module, self, _)) -->
 		[	'A module (being compiled as an object) cannot reference itself'-[], nl,
 			'in a use_module/2 directive. Typo in the object name?'-[], nl, nl
+		].
+	error(permission_error(reference, self, _)) -->
+		[	'An entity cannot reference itself in an alias/2 directive.'-[], nl,
+			'Typo in the entity name?'-[], nl, nl
 		].
 
 	error(existence_error(directive, object/1)) -->

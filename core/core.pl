@@ -10508,6 +10508,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % auxiliary predicate for compiling alias/2 directives
 
 '$lgt_compile_alias_directive'(_, _, Entity, _) :-
+	'$lgt_pp_entity_'(_, Entity, _),
+	throw(permission_error(reference, self, Entity)).
+
+'$lgt_compile_alias_directive'(_, _, Entity, _) :-
 	\+ '$lgt_pp_extended_protocol_'(Entity, _, _, _, _),
 	\+ '$lgt_pp_implemented_protocol_'(Entity, _, _, _, _),
 	\+ '$lgt_pp_extended_category_'(Entity, _, _, _, _, _),
@@ -10516,7 +10520,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_pp_instantiated_class_'(Entity, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_specialized_class_'(Entity, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_pp_complemented_object_'(Entity, _, _, _, _),
-	throw(reference_error(entity_identifier, Entity)).
+	throw(domain_error(ancestor, Entity)).
 
 '$lgt_compile_alias_directive'([Resource| Resources], Argument, Entity, Ctx) :-
 	!,

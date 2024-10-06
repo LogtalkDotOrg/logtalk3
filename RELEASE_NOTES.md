@@ -37,6 +37,9 @@ that contains it.
 * IMPROVED: Detect and report when a `use_module/2` directive references the
 module (being compiled as an object) that contains it.
 
+* IMPROVED: Detect and report when an `alias/2` directive references the
+entity that contains it.
+
 * IMPROVED: Detect and report when a source file attempts to load itself.
 
 * IMPROVED: Error reporting when a source file attempts to include itself.
