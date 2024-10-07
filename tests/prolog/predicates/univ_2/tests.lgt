@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2024-10-03,
+		date is 2024-10-07,
 		comment is 'Unit tests for the ISO Prolog standard (=..)/2 built-in predicate.'
 	]).
 
@@ -153,6 +153,9 @@
 		test(lgt_univ_2_32, true(X == x([1|X]))) :-
 			{X =.. [x, [1| X]]}.
 
+		test(lgt_univ_2_33, true(L == [f,f(X,Y),Y])) :-
+			{X = f(X,Y), X =.. L}.
+
 	:- else.
 
 		- test(lgt_univ_2_31, true(L == [f,f(X)]), [note('STO')]) :-
@@ -162,6 +165,9 @@
 		- test(lgt_univ_2_32, true(X == x([1|X])), [note('STO')]) :-
 			% STO; Undefined
 			{X =.. [x, [1| X]]}.
+
+		- test(lgt_univ_2_33, true(L == [f,f(X,Y),Y]), [note('STO')]) :-
+			{X = f(X,Y), X =.. L}.
 
 	:- endif.
 

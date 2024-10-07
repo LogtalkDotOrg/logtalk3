@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2024-09-18,
+		date is 2024-10-07,
 		comment is 'Unit tests for the ISO Prolog standard functor/3 built-in predicate.'
 	]).
 
@@ -92,5 +92,27 @@
 
 	test(lgt_functor_3_19, true(T == [])) :-
 		{functor(T, [], 0)}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_functor_3_20, true(N-A == f-1)) :-
+			{X = f(X), functor(X, N, A)}.
+
+		test(lgt_functor_3_21, true(N-A == f-2)) :-
+			{X = f(X, _), functor(X, N, A)}.
+
+	:- else.
+
+		- test(lgt_functor_3_20, true(N-A == f-1), [note('STO')]) :-
+			{X = f(X), functor(X, N, A)}.
+
+		- test(lgt_functor_3_21, true(N-A == f-2), [note('STO')]) :-
+			{X = f(X, _), functor(X, N, A)}.
+
+	:- endif.
 
 :- end_object.

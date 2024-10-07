@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2024-09-18,
+		date is 2024-10-07,
 		comment is 'Unit tests for the ISO Prolog standard arg/3 built-in predicate.'
 	]).
 
@@ -126,5 +126,21 @@
 
 	test(lgt_arg_3_23, false, [condition(\+ current_prolog_flag(max_arity,unbounded))]) :-
 		{current_prolog_flag(max_arity, A), X is A+1, arg(X, foo(1), _)}.
+
+	:- if((
+		current_logtalk_flag(coinduction, supported),
+		\+ current_logtalk_flag(prolog_dialect, cx),
+		\+ current_logtalk_flag(prolog_dialect, eclipse)
+	)).
+
+		test(lgt_arg_3_24, true(Arg == Y)) :-
+			{X = f(X,Y), arg(2, X, Arg)}.
+
+	:- else.
+
+		- test(lgt_arg_3_24, true(Arg == Y), [note('STO')]) :-
+			{X = f(X,Y), arg(2, X, Arg)}.
+
+	:- endif.
 
 :- end_object.

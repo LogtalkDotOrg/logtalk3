@@ -99,8 +99,8 @@ Tests
 -----
 
 * ADDED: Additional tests for the Prolog standard `(=)/2`, `(=..)/2`,
-`clause/2`, `copy_term/2`, `predicate_property/2`, `term_variables/2`,
-and term comparison built-in predicates.
+`arg/3`, `clause/2`, `copy_term/2`, `functor/3`, `predicate_property/2`,
+`term_variables/2`, and term comparison built-in predicates.
 
 * ADDED: Additional tests for the Prolog de facto standard `clause/3` built-in
 predicate.
