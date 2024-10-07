@@ -9,7 +9,7 @@ xvmlgt \- Logtalk integration script for XVM
 [\fB-g \fIgoal\fR]
 
 .SH DESCRIPTION
-\fBxvmlgt\fR is a Logtalk integration script for XVM. It automatically loads the XVM adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBxvm\fR executable \fB-f\fR option to load the Logtalk files. It passes any options to the \fBxvm\fR executable; see the XVM documentation for the available options. By default, this script runs XVM using \fBrlwrap\fR if available.
+\fBxvmlgt\fR is a Logtalk integration script for XVM. It automatically loads the XVM adapter file, the Logtalk compiler and runtime, the Logtalk default table of library names and paths, and any existing settings file found on the lookup directories. It uses the \fBxvmpl\fR executable \fB-f\fR option to load the Logtalk files. It passes any other options to the \fBxvmpl\fR executable; see the XVM documentation for the available options. By default, this script runs XVM using \fBrlwrap\fR if available.
 
 .SH OPTIONS
 The two most common options are:
@@ -22,7 +22,7 @@ Silence Logtalk default startup messages and compilation messages by setting the
 Initialization goal, written between double quotes, to be executed after Logtalk startup.
 
 .SH REQUIREMENTS
-XVM 9.0.0 or a later version is required. This integration script looks for a \fBxvmpl\fR executable in the system path.
+XVM 10.0.0 or a later version is required. This integration script looks for a \fBxvmpl\fR executable in the system path.
 
 .SH ENVIRONMENT
 .TP
@@ -72,4 +72,4 @@ logtalk_user_setup(1),\ logtalk_version_select(1),\ logtalk_backend_select(1)
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2023 Paulo Moura.
+Copyright (c) 1998-2024 Paulo Moura.
