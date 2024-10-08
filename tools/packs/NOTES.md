@@ -49,7 +49,8 @@ On POSIX systems (Linux, macOS, ...), the following shell commands are
 required:
 
 - `sha256sum` (provided by GNU `coreutils`)
-- `curl`
+- `curl` (default file downloader)
+- `wget` (alternative file downloader)
 - `bsdtar` (provided by `libarchive` or `libarchive-tools`)
 - `gpg` (provided by `gnupg2`)
 - `git`
@@ -63,20 +64,29 @@ the wrapper directory).
 On Windows systems, the following shell commands are required:
 
 - `certutil.exe`
-- `curl.exe`
+- `curl.exe` (default file downloader)
+- `wget.exe` (alternative file downloader)
 - `tar.exe`
 - `gpg.exe`
 - `git.exe`
 - `Set-PsEnv` (when using virtual environments)
 
-In recent Windows 10 builds, only `gpg`, `git`, and `Set-PsEnv` should require
-installation. You can download the GnuPG software from:
+In recent Windows 10 builds, only `wget`, `gpg`, `git`, and `Set-PsEnv`
+should require installation. You can download the GnuPG software from:
 
 https://www.gnupg.org/
 
 You can download Git from:
 
 https://gitforwindows.org
+
+You can download Wget from:
+
+https://eternallybored.org/misc/wget/
+
+You can also use Chocolatey to install the commands above:
+
+	> choco install gnupg git wget
 
 To install [Set-PsEnv](https://github.com/rajivharris/Set-PsEnv) from
 the PowerShell Gallery:
@@ -87,17 +97,17 @@ On macOS systems, Apple bundles both `curl` and BSD `tar` (under the name
 `tar`; you can simply create a `bsdtar` alias or install a more recent
 version). The required commands can be easily installed using MacPorts:
 
-	$ sudo port install coreutils libarchive gnupg2 git direnv
+	$ sudo port install coreutils wget libarchive gnupg2 git direnv
 
 Or using Homebrew:
 
-	$ brew install coreutils libarchive gnupg2 git direnv
+	$ brew install coreutils wget libarchive gnupg2 git direnv
 
 On Linux systems, use the distribution own package manager to install any
 missing command. For example, in recent Ubuntu versions:
 
 	$ sudo apt update
-	$ sudo apt install coreutils curl libarchive-tools gnupg2 git direnv
+	$ sudo apt install coreutils curl wget libarchive-tools gnupg2 git direnv
 
 
 API documentation

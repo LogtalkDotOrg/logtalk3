@@ -182,7 +182,8 @@ resources between multiple systems.</p>
 required:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">sha256sum</span></code> (provided by GNU <code class="docutils literal notranslate"><span class="pre">coreutils</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">curl</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">curl</span></code> (default file downloader)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wget</span></code> (alternative file downloader)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">libarchive</span></code> or <code class="docutils literal notranslate"><span class="pre">libarchive-tools</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg</span></code> (provided by <code class="docutils literal notranslate"><span class="pre">gnupg2</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
@@ -195,17 +196,25 @@ non-predictable name of the wrapper directory).</p>
 <p>On Windows systems, the following shell commands are required:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">certutil.exe</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">curl.exe</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">curl.exe</span></code> (default file downloader)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wget.exe</span></code> (alternative file downloader)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git.exe</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Set-PsEnv</span></code> (when using virtual environments)</p></li>
 </ul>
-<p>In recent Windows 10 builds, only <code class="docutils literal notranslate"><span class="pre">gpg</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code>, and <code class="docutils literal notranslate"><span class="pre">Set-PsEnv</span></code>
-should require installation. You can download the GnuPG software from:</p>
+<p>In recent Windows 10 builds, only <code class="docutils literal notranslate"><span class="pre">wget</span></code>, <code class="docutils literal notranslate"><span class="pre">gpg</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">Set-PsEnv</span></code> should require installation. You can download the GnuPG
+software from:</p>
 <p><a class="reference external" href="https://www.gnupg.org/">https://www.gnupg.org/</a></p>
 <p>You can download Git from:</p>
 <p><a class="reference external" href="https://gitforwindows.org">https://gitforwindows.org</a></p>
+<p>You can download Wget from:</p>
+<p><a class="reference external" href="https://eternallybored.org/misc/wget/">https://eternallybored.org/misc/wget/</a></p>
+<p>You can also use Chocolatey to install the commands above:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install gnupg git wget
+</pre></div>
+</div>
 <p>To install <a class="reference external" href="https://github.com/rajivharris/Set-PsEnv">Set-PsEnv</a> from
 the PowerShell Gallery:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PS</span><span class="o">&gt;</span> <span class="nv">Install</span><span class="o">-</span><span class="nv">Module</span> <span class="o">-</span><span class="nv">Name</span> <span class="nv">Set</span><span class="o">-</span><span class="nv">PsEnv</span>
@@ -215,17 +224,17 @@ the PowerShell Gallery:</p>
 name <code class="docutils literal notranslate"><span class="pre">tar</span></code>; you can simply create a <code class="docutils literal notranslate"><span class="pre">bsdtar</span></code> alias or install a more
 recent version). The required commands can be easily installed using
 MacPorts:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install coreutils libarchive gnupg2 git direnv
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install coreutils wget libarchive gnupg2 git direnv
 </pre></div>
 </div>
 <p>Or using Homebrew:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install coreutils libarchive gnupg2 git direnv
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install coreutils wget libarchive gnupg2 git direnv
 </pre></div>
 </div>
 <p>On Linux systems, use the distribution own package manager to install
 any missing command. For example, in recent Ubuntu versions:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt update
-<span class="err">$</span> sudo apt install coreutils curl libarchive<span class="o">-</span>tools gnupg2 git direnv
+<span class="err">$</span> sudo apt install coreutils curl wget libarchive<span class="o">-</span>tools gnupg2 git direnv
 </pre></div>
 </div>
 </section>
@@ -677,11 +686,10 @@ version equal or above the specified one. For example,
 <code class="docutils literal notranslate"><span class="pre">logtalk</span> <span class="pre">&#64;&gt;=</span> <span class="pre">3:36:0</span></code> means that the pack requires Logtalk 3.36.0 or
 later version.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;=&lt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
-version up to the specified one. For example,
-<code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;=&lt;</span> <span class="pre">2:1</span></code> means that the pack requires a
-<code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack up to 2.1. This includes all previous versions
-and also all patches for version 2.1 (e.g. 2.1.7, 2.1.8, …) but not
-version 2.2 or newer.</p></li>
+version up to the specified one. For example, <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;=&lt;</span> <span class="pre">2:1</span></code>
+means that the pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack up to 2.1. This
+includes all previous versions and also all patches for version 2.1
+(e.g. 2.1.7, 2.1.8, …) but not version 2.2 or newer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&lt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
 version older than the specified one. For example,
 <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3</span></code> means that the pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code>
@@ -1020,19 +1028,19 @@ audit.</p>
 <li><p>Make available a new pack registry as a git repo. This simplifies
 updating the registry and rolling back to a previous version.</p></li>
 <li><p>Use registry and pack names that are valid unquoted atoms, thus
-simplifying usage. Use descriptive names with underscores if
-necessary to link words.</p></li>
+simplifying usage. Use descriptive names with underscores if necessary
+to link words.</p></li>
 <li><p>Name the registry and pack specification objects after their names
 with a <code class="docutils literal notranslate"><span class="pre">_registry</span></code> or <code class="docutils literal notranslate"><span class="pre">_pack</span></code> suffix. Save the objects in files
 named after the objects.</p></li>
 <li><p>Create new pack versions from git tags.</p></li>
-<li><p>If the sources of a pack are available from a git repo, consider
-using signed commits and signed tags for increased security.</p></li>
+<li><p>If the sources of a pack are available from a git repo, consider using
+signed commits and signed tags for increased security.</p></li>
 <li><p>When a new pack version breaks backwards compatibility, list both the
 old and the new versions on the pack specification file.</p></li>
 <li><p>Pin registries and packs when specific versions are critical for your
-work so that you can still easily batch update the remaining packs
-and registries.</p></li>
+work so that you can still easily batch update the remaining packs and
+registries.</p></li>
 <li><p>Include the <code class="docutils literal notranslate"><span class="pre">$LOGTALKPACKS</span></code> directory (or the default
 <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory) on your regular backups.</p></li>
 </ul>

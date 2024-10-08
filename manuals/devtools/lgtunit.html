@@ -508,8 +508,7 @@ is:</p>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">deterministic</span></code></div>
-<div class="line">The test is expected to succeed once without leaving a
-choice-point.</div>
+<div class="line">The test is expected to succeed once without leaving a choice-point.</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -520,8 +519,8 @@ and satisfy the <code class="docutils literal notranslate"><span class="pre">Ass
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code></div>
-<div class="line">The test is expected to succeed binding <code class="docutils literal notranslate"><span class="pre">Result</span></code> to a term that
-is subsumed by the <code class="docutils literal notranslate"><span class="pre">Expected</span></code> term.</div>
+<div class="line">The test is expected to succeed binding <code class="docutils literal notranslate"><span class="pre">Result</span></code> to a term that is
+subsumed by the <code class="docutils literal notranslate"><span class="pre">Expected</span></code> term.</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -532,8 +531,8 @@ a variant of the <code class="docutils literal notranslate"><span class="pre">Te
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exists(Assertion)</span></code></div>
-<div class="line">A solution exists for the test goal that satisfies the
-<code class="docutils literal notranslate"><span class="pre">Assertion</span></code> goal.</div>
+<div class="line">A solution exists for the test goal that satisfies the <code class="docutils literal notranslate"><span class="pre">Assertion</span></code>
+goal.</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -573,9 +572,8 @@ where <code class="docutils literal notranslate"><span class="pre">ActualBall</s
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">balls(Balls)</span></code></div>
-<div class="line">The test is expected to throw an exception term <code class="docutils literal notranslate"><span class="pre">ActualBall</span></code>
-where <code class="docutils literal notranslate"><span class="pre">ActualBall</span></code> is subsumed by an element of the list
-<code class="docutils literal notranslate"><span class="pre">Balls</span></code>.</div>
+<div class="line">The test is expected to throw an exception term <code class="docutils literal notranslate"><span class="pre">ActualBall</span></code> where
+<code class="docutils literal notranslate"><span class="pre">ActualBall</span></code> is subsumed by an element of the list <code class="docutils literal notranslate"><span class="pre">Balls</span></code>.</div>
 </div>
 </li>
 </ul>
@@ -603,8 +601,8 @@ ignored):</p>
 <ul>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">condition(Goal)</span></code></div>
-<div class="line">Condition for deciding if the test should be run or skipped
-(default goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</div>
+<div class="line">Condition for deciding if the test should be run or skipped (default
+goal is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -626,8 +624,8 @@ ignored):</p>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">note(Term)</span></code></div>
 <div class="line">Annotation to print (between parenthesis by default) after the test
 result (default is <code class="docutils literal notranslate"><span class="pre">''</span></code>); the annotation term can share variables
-with the test goal, which can be used to pass additional
-information about the test result.</div>
+with the test goal, which can be used to pass additional information
+about the test result.</div>
 </div>
 </li>
 </ul>
@@ -704,14 +702,14 @@ quick_check(<span class="nv">Template</span>).
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">n/1</span></code>: number of random tests that will be generated and run
 (default is 100).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">s/1</span></code>: maximum number of shrink operations when a counter-example
-is found (default is 64).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ec/1</span></code>: boolean option deciding if type edge cases are tested
-before generating random tests (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">s/1</span></code>: maximum number of shrink operations when a counter-example is
+found (default is 64).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ec/1</span></code>: boolean option deciding if type edge cases are tested before
+generating random tests (default is <code class="docutils literal notranslate"><span class="pre">true</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">rs/1</span></code>: starting seed to be used when generating the random tests
 (no default).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pc/1</span></code>: pre-condition closure for generated tests (extended with
-the test arguments; no default).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pc/1</span></code>: pre-condition closure for generated tests (extended with the
+test arguments; no default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">l/1</span></code>: label closure for classifying the generated tests (extended
 with the test arguments plus the label argument; no default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">v/1</span></code>: boolean option for verbose reporting of generated random

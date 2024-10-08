@@ -79,6 +79,8 @@ the bug report.
 Tools
 -----
 
+* ADDED: Support to the `packs` tool to use `wget` in alternative to `curl`.
+
 * ADDED: Support to the `tutor` tool to explain selected `lgtunit`, `make`,
 and `packs` tool error messages.
 

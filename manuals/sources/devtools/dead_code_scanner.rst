@@ -7,11 +7,11 @@ This tool detects *likely* dead code in Logtalk entities and in Prolog
 modules compiled as objects. Predicates (and non-terminals) are
 classified as dead code when:
 
--  There is no scope directive for them and they are not called,
-   directly or indirectly, by any predicate with a (local or inherited)
-   scope directive.
--  They are listed in ``uses/2`` and ``use_module/2`` directives but not
-   called.
+- There is no scope directive for them and they are not called, directly
+  or indirectly, by any predicate with a (local or inherited) scope
+  directive.
+- They are listed in ``uses/2`` and ``use_module/2`` directives but not
+  called.
 
 Besides dead code, this tool can also help detect other problems in the
 code that often result in reporting false positives. For example, typos
@@ -105,21 +105,21 @@ Excluding code from analysis
 A set of options are available to specify code that should be excluded
 when looking for unused predicates (and non-terminals):
 
--  | ``exclude_directories(Directories)``
-   | list of directories to exclude (default is ``[]``); all
-     sub-directories of the excluded directories are also excluded;
-     directories may be listed by full or relative path
+- | ``exclude_directories(Directories)``
+  | list of directories to exclude (default is ``[]``); all
+    sub-directories of the excluded directories are also excluded;
+    directories may be listed by full or relative path
 
--  | ``exclude_files(Files)``
-   | list of source files to exclude (default is ``[]``); files may be
-     listed by full path or basename, with or without extension
+- | ``exclude_files(Files)``
+  | list of source files to exclude (default is ``[]``); files may be
+    listed by full path or basename, with or without extension
 
--  | ``exclude_libraries(Libraries)``
-   | list of libraries to exclude (default is
-     ``[startup, scratch_directory]``)
+- | ``exclude_libraries(Libraries)``
+  | list of libraries to exclude (default is
+    ``[startup, scratch_directory]``)
 
--  | ``exclude_entities(Entities)``
-   | list of entities to exclude (default is ``[]``)
+- | ``exclude_entities(Entities)``
+  | list of entities to exclude (default is ``[]``)
 
 Integration with the ``make`` tool
 ----------------------------------

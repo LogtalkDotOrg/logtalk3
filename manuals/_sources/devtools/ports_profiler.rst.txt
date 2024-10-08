@@ -184,16 +184,16 @@ Interpreting profiling data
 Some useful information that can be inferred from the profiling data
 include:
 
--  which predicates are called more often (from the ``call`` port)
--  unexpected failures (from the ``fail`` port)
--  unwanted non-determinism (from the ``*exit`` port)
--  performance issues due to backtracking (from the ``*exit`` and
-   ``redo`` ports)
--  predicates acting like a generator of possible solutions (from the
-   ``*exit`` and ``redo`` ports)
--  inefficient indexing of predicate clauses (from the ``fact``,
-   ``rule``, and ``call`` ports)
--  clauses that are never used or seldom used
+- which predicates are called more often (from the ``call`` port)
+- unexpected failures (from the ``fail`` port)
+- unwanted non-determinism (from the ``*exit`` port)
+- performance issues due to backtracking (from the ``*exit`` and
+  ``redo`` ports)
+- predicates acting like a generator of possible solutions (from the
+  ``*exit`` and ``redo`` ports)
+- inefficient indexing of predicate clauses (from the ``fact``,
+  ``rule``, and ``call`` ports)
+- clauses that are never used or seldom used
 
 The profiling data should be analyzed taking into account the expected
 behavior for the profiled predicates.

@@ -6,8 +6,8 @@
 The ``json`` library provides predicates for parsing and generating data
 in the JSON format based on the specification and standard found at:
 
--  https://www.rfc-editor.org/rfc/rfc8259
--  https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
+- https://www.rfc-editor.org/rfc/rfc8259
+- https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
 
 It includes parametric objects whose parameters allow selecting the
 representation for parsed JSON objects (``curly`` or ``list``), JSON
@@ -49,38 +49,38 @@ Representation
 The following choices of syntax has been made to represent JSON elements
 as terms:
 
--  By default, JSON objects are represented using curly-bracketed terms,
-   ``{Pairs}``, where each pair uses the representation ``Key-Value``
-   (see below for alternative representations).
+- By default, JSON objects are represented using curly-bracketed terms,
+  ``{Pairs}``, where each pair uses the representation ``Key-Value``
+  (see below for alternative representations).
 
--  Arrays are represented using lists.
+- Arrays are represented using lists.
 
--  Text strings can be represented as atoms, ``chars(List)``, or
-   ``codes(List)``. The default when decoding is to use atoms when using
-   the ``json`` object. To decode text strings into lists of chars or
-   codes, use the ``json/1`` with the parameter bound to ``chars`` or
-   ``codes``. For example:
+- Text strings can be represented as atoms, ``chars(List)``, or
+  ``codes(List)``. The default when decoding is to use atoms when using
+  the ``json`` object. To decode text strings into lists of chars or
+  codes, use the ``json/1`` with the parameter bound to ``chars`` or
+  ``codes``. For example:
 
-   ::
+  ::
 
-        | ?- json::parse(codes([34,104,101,108,108,111,34]), Term).
-        Term = hello
-        yes
+       | ?- json::parse(codes([34,104,101,108,108,111,34]), Term).
+       Term = hello
+       yes
 
-        | ?- json(atom)::parse(codes([34,104,101,108,108,111,34]), Term).
-        Term = hello
-        yes
+       | ?- json(atom)::parse(codes([34,104,101,108,108,111,34]), Term).
+       Term = hello
+       yes
 
-        | ?- json(chars)::parse(codes([34,104,101,108,108,111,34]), Term).
-        Term = chars([h,e,l,l,o])
-        yes
+       | ?- json(chars)::parse(codes([34,104,101,108,108,111,34]), Term).
+       Term = chars([h,e,l,l,o])
+       yes
 
-        | ?- json(codes)::parse(codes([34,104,101,108,108,111,34]), Term).
-        Term = codes([104,101,108,108,111])
-        yes
+       | ?- json(codes)::parse(codes([34,104,101,108,108,111,34]), Term).
+       Term = codes([104,101,108,108,111])
+       yes
 
--  The JSON values ``false``, ``true`` and ``null`` are represented by,
-   respectively, the ``@false``, ``@true`` and ``@null`` compound terms.
+- The JSON values ``false``, ``true`` and ``null`` are represented by,
+  respectively, the ``@false``, ``@true`` and ``@null`` compound terms.
 
 The following table exemplifies the term equivalents of JSON elements
 using default representations for objects, pairs, and strings:

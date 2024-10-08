@@ -10,11 +10,11 @@ The ``mutations`` library provides support for generating random
 mutations of selected types. The library defines default mutation
 algorithms for the following basic types:
 
--  ``atom``
--  ``integer``
--  ``float``
--  ``compound``
--  ``list``
+- ``atom``
+- ``integer``
+- ``float``
+- ``compound``
+- ``list``
 
 The user can add additional mutation algorithms for these or other types
 by defining objects or categories providing clauses for the

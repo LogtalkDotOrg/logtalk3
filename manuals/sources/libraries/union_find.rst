@@ -10,14 +10,14 @@ to merge existing sets, and to determine whether elements are in the
 same set. This implementation of the union-find algorithm provides the
 following features:
 
--  Path compression: Path compression flattens the structure of the tree
-   by making every node point to the root whenever a find predicate is
-   used on it.
+- Path compression: Path compression flattens the structure of the tree
+  by making every node point to the root whenever a find predicate is
+  used on it.
 
--  Union by rank: Union predicates always attach the shorter tree to the
-   root of the taller tree. Thus, the resulting tree is no taller than
-   the originals unless they were of equal height, in which case the
-   resulting tree is taller by one node.
+- Union by rank: Union predicates always attach the shorter tree to the
+  root of the taller tree. Thus, the resulting tree is no taller than
+  the originals unless they were of equal height, in which case the
+  resulting tree is taller by one node.
 
 For a general and extended discussion on this data structure, see e.g.
 

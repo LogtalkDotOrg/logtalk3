@@ -12,8 +12,8 @@ Requirements
 This tool requires that the GitHub and GitLab CLIs be installed. For the
 installation instructions see:
 
--  GitHub: https://cli.github.com
--  GitLab: https://glab.readthedocs.io
+- GitHub: https://cli.github.com
+- GitLab: https://glab.readthedocs.io
 
 Loading
 -------
@@ -49,9 +49,8 @@ CI/CD pipelines. Moreover, prior to running the tests, the CLI must be
 used, if required, to authenticate and login to the server where the bug
 report issues will be created:
 
--  GitHub:
-   ``gh auth login --hostname <string> --with-token < token.txt``
--  GitLab: ``glab auth login --hostname <string> --token <string>``
+- GitHub: ``gh auth login --hostname <string> --with-token < token.txt``
+- GitLab: ``glab auth login --hostname <string> --token <string>``
 
 The access token must ensure the necessary scopes that allow bug reports
 to be created. See the CLIs documentation for details. Typically, the

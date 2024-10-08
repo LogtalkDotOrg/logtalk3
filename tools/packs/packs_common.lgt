@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:31:0,
+		version is 0:32:0,
 		author is 'Paulo Moura',
-		date is 2023-11-23,
+		date is 2024-10-08,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -319,12 +319,14 @@
 	verify_commands_availability(unix) :-
 		command('type git >/dev/null 2>&1', missing_command(git)),
 		command('type curl >/dev/null 2>&1', missing_command(curl)),
+		command('type wget >/dev/null 2>&1', missing_command(curl)),
 		command('type bsdtar >/dev/null 2>&1', missing_command(bsdtar)),
 		command('type sha256sum >/dev/null 2>&1', missing_command(sha256sum)),
 		command('type gpg >/dev/null 2>&1', missing_command(gpg)).
 	verify_commands_availability(windows) :-
 		command('where /q git.exe', missing_command(git)),
 		command('where /q curl.exe', missing_command(curl)),
+		command('where /q wget.exe', missing_command(curl)),
 		command('where /q tar.exe', missing_command(tar)),
 		command('where /q certutil.exe', missing_command(sha256sum)),
 		command('where /q gpg.exe', missing_command(gpg)).

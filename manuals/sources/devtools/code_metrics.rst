@@ -45,17 +45,17 @@ Available metrics
 
 Currently, the following metrics are provided:
 
--  Number of Clauses (``noc_metric``)
--  Number of Rules (``nor_metric``)
--  Unique Predicate Nodes (``upn_metric``)
--  Cyclomatic Complexity (``cc_metric``)
--  Depth of Inheritance (``dit_metric``)
--  Efferent coupling, afferent coupling, instability, and abstractness
-   (``coupling_metric``)
--  Documentation (``doc_metric``)
--  Source code size (``size_metric``)
--  Halstead complexity (``halstead_metric`` and
-   ``halstead_metric(Stroud)``)
+- Number of Clauses (``noc_metric``)
+- Number of Rules (``nor_metric``)
+- Unique Predicate Nodes (``upn_metric``)
+- Cyclomatic Complexity (``cc_metric``)
+- Depth of Inheritance (``dit_metric``)
+- Efferent coupling, afferent coupling, instability, and abstractness
+  (``coupling_metric``)
+- Documentation (``doc_metric``)
+- Source code size (``size_metric``)
+- Halstead complexity (``halstead_metric`` and
+  ``halstead_metric(Stroud)``)
 
 A helper object, ``code_metrics``, is also provided allowing running all
 loaded individual metrics. For code coverage metrics, see the
@@ -64,29 +64,29 @@ loaded individual metrics. For code coverage metrics, see the
 Coupling metrics
 ----------------
 
--  Efferent coupling (``Ce``): Number of entities that an entity depends
-   on. These include objects receiving messages from the entity plus the
-   implemented protocols, imported categories, and
-   extended/instantiated/specialized objects.
+- Efferent coupling (``Ce``): Number of entities that an entity depends
+  on. These include objects receiving messages from the entity plus the
+  implemented protocols, imported categories, and
+  extended/instantiated/specialized objects.
 
--  Afferent coupling (``Ca``): Number of entities that depend on an
-   entity. For a protocol, the number of protocols that extend it plus
-   the number of objects and categories that implement it. For a
-   category, the number of objects that import it. For an object, the
-   number of categories and objects that send messages to it plus the
-   number of objects that extend/instantiate/specialize it.
+- Afferent coupling (``Ca``): Number of entities that depend on an
+  entity. For a protocol, the number of protocols that extend it plus
+  the number of objects and categories that implement it. For a
+  category, the number of objects that import it. For an object, the
+  number of categories and objects that send messages to it plus the
+  number of objects that extend/instantiate/specialize it.
 
--  Instability: Computed as ``Ce / (Ce + Ca)``. Measures the entity
-   resilience to change. Ranging from 0.0 to 1.0, with 0.0 indicating a
-   maximally stable entity and 1.0 indicating a maximally unstable
-   entity. Ideally, an entity is either maximally stable or maximally
-   unstable.
+- Instability: Computed as ``Ce / (Ce + Ca)``. Measures the entity
+  resilience to change. Ranging from 0.0 to 1.0, with 0.0 indicating a
+  maximally stable entity and 1.0 indicating a maximally unstable
+  entity. Ideally, an entity is either maximally stable or maximally
+  unstable.
 
--  Abstractness: Computed as the ratio between the number of static
-   predicates with scope directives without a local definition and the
-   number of static predicates with scope directives. Measures the
-   rigidity of an entity. Ranging from 0.0 to 1.0, with 0.0 indicating a
-   fully concrete entity and 1.0 indicating a fully abstract entity.
+- Abstractness: Computed as the ratio between the number of static
+  predicates with scope directives without a local definition and the
+  number of static predicates with scope directives. Measures the
+  rigidity of an entity. Ranging from 0.0 to 1.0, with 0.0 indicating a
+  fully concrete entity and 1.0 indicating a fully abstract entity.
 
 The dependencies count include direct entity relations plus predicate
 calls or dynamic updates to predicates in external objects or
@@ -131,20 +131,20 @@ The computation of this metric is parameterized by the *Stroud*
 coefficient for computing the time required to program (default is 18).
 The following individual measures are computed:
 
--  Number of distinct predicates (declared, defined, called, or updated;
-   ``Pn``).
--  Number of predicate arguments (assumed distinct; ``PAn``).
--  Number of predicate calls/updates + number of clauses (``Cn``).
--  Number of predicate call/update arguments + number of clause head
-   arguments (``CAn``).
--  Entity vocabulary (``EV``). Computed as ``EV = Pn + PAn``.
--  Entity length (``EL``). Computed as ``EL = Cn + CAn``.
--  Volume (``V``). Computed as ``V = EL * log2(EV)``.
--  Difficulty (``D``). Computed as ``D = (Pn/2) * (CAn/An)``.
--  Effort (``E``). Computed as ``E = D * V``.
--  Time required to program (``T``). Computed as ``T = E/k`` seconds
-   (where ``k`` is the Stroud number; defaults to 18).
--  Number of delivered bugs (``B``). Computed as ``B = V/3000``.
+- Number of distinct predicates (declared, defined, called, or updated;
+  ``Pn``).
+- Number of predicate arguments (assumed distinct; ``PAn``).
+- Number of predicate calls/updates + number of clauses (``Cn``).
+- Number of predicate call/update arguments + number of clause head
+  arguments (``CAn``).
+- Entity vocabulary (``EV``). Computed as ``EV = Pn + PAn``.
+- Entity length (``EL``). Computed as ``EL = Cn + CAn``.
+- Volume (``V``). Computed as ``V = EL * log2(EV)``.
+- Difficulty (``D``). Computed as ``D = (Pn/2) * (CAn/An)``.
+- Effort (``E``). Computed as ``E = D * V``.
+- Time required to program (``T``). Computed as ``T = E/k`` seconds
+  (where ``k`` is the Stroud number; defaults to 18).
+- Number of delivered bugs (``B``). Computed as ``B = V/3000``.
 
 UPN metric
 ----------
@@ -220,21 +220,21 @@ Excluding code from analysis
 A set of options are available to specify code that should be excluded
 when applying code metrics:
 
--  | ``exclude_directories(Directories)``
-   | list of directories to exclude (default is ``[]``); all
-     sub-directories of the excluded directories are also excluded;
-     directories may be listed by full or relative path
+- | ``exclude_directories(Directories)``
+  | list of directories to exclude (default is ``[]``); all
+    sub-directories of the excluded directories are also excluded;
+    directories may be listed by full or relative path
 
--  | ``exclude_files(Files)``
-   | list of source files to exclude (default is ``[]``); files may be
-     listed by full path or basename, with or without extension
+- | ``exclude_files(Files)``
+  | list of source files to exclude (default is ``[]``); files may be
+    listed by full path or basename, with or without extension
 
--  | ``exclude_libraries(Libraries)``
-   | list of libraries to exclude (default is
-     ``[startup, scratch_directory]``)
+- | ``exclude_libraries(Libraries)``
+  | list of libraries to exclude (default is
+    ``[startup, scratch_directory]``)
 
--  | ``exclude_entities(Entities)``
-   | list of entities to exclude (default is ``[]``)
+- | ``exclude_entities(Entities)``
+  | list of entities to exclude (default is ``[]``)
 
 Defining new metrics
 --------------------

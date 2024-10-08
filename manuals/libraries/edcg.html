@@ -285,8 +285,7 @@ is supported inside an EDCG clause:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">{Goal}</span></code> - don’t expand any hidden arguments of <code class="docutils literal notranslate"><span class="pre">Goal</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Goal</span></code> - expand all hidden arguments of Goal that are also in the
-head. Those hidden arguments not in the head are given default
-values.</p></li>
+head. Those hidden arguments not in the head are given default values.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Goal:L</span></code> - If <code class="docutils literal notranslate"><span class="pre">Goal</span></code> has no hidden arguments then force the
 expansion of all arguments in <code class="docutils literal notranslate"><span class="pre">L</span></code> in the order given. If <code class="docutils literal notranslate"><span class="pre">Goal</span></code>
 has hidden arguments then expand all of them, using the contents of
@@ -296,19 +295,18 @@ such terms. When present, the arguments <code class="docutils literal notranslat
 <code class="docutils literal notranslate"><span class="pre">Value</span></code> override the default values of arguments not in the head.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">List:Acc</span></code> - Accumulate a list of terms in the accumulator <code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">List</span></code> - Accumulate a list of terms in the accumulator <code class="docutils literal notranslate"><span class="pre">dcg</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">X/Acc</span></code> - Unify <code class="docutils literal notranslate"><span class="pre">X</span></code> with the left term for the accumulator
-<code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X/Acc</span></code> - Unify <code class="docutils literal notranslate"><span class="pre">X</span></code> with the left term for the accumulator <code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Acc/X</span></code> - Unify <code class="docutils literal notranslate"><span class="pre">X</span></code> with the right term for the accumulator
 <code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">X/Acc/Y</span></code> - Unify <code class="docutils literal notranslate"><span class="pre">X</span></code> with the left and <code class="docutils literal notranslate"><span class="pre">Y</span></code> with the right term
 for the accumulator <code class="docutils literal notranslate"><span class="pre">Acc</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">insert(X,Y):Acc</span></code> - Insert the arguments <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> into the
 chain implementing the accumulator <code class="docutils literal notranslate"><span class="pre">Acc</span></code>. This is useful when the
-value of the accumulator changes radically because <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code>
-may be the arguments of an arbitrary relation</p></li>
+value of the accumulator changes radically because <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> may
+be the arguments of an arbitrary relation</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">insert(X,Y)</span></code> - Insert the arguments <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> into the chain
-implementing the accumulator <code class="docutils literal notranslate"><span class="pre">dcg</span></code>. This inserts the difference
-list X-Y into the accumulated list</p></li>
+implementing the accumulator <code class="docutils literal notranslate"><span class="pre">dcg</span></code>. This inserts the difference list
+X-Y into the accumulated list</p></li>
 </ul>
 </section>
 <section id="declaration-of-predicates">

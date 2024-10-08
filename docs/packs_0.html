@@ -211,8 +211,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:75:0</div>
-<div class="line"><strong>Date:</strong> 2024-07-18</div>
+<div class="line"><strong>Version:</strong> 0:76:0</div>
+<div class="line"><strong>Date:</strong> 2024-10-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -889,7 +889,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose installing steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> option: Verify pack archive checksum. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> option: Verify pack archive signature. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">downloader(Atom)</span></code> option: Downloader utility. Either <code class="docutils literal notranslate"><span class="pre">curl</span></code> or <code class="docutils literal notranslate"><span class="pre">wget</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wget(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 </ul>
@@ -1094,7 +1096,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose updating steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> option: Verify pack archive checksum. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> option: Verify pack archive signature. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">downloader(Atom)</span></code> option: Downloader utility. Either <code class="docutils literal notranslate"><span class="pre">curl</span></code> or <code class="docutils literal notranslate"><span class="pre">wget</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wget(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 </ul>
@@ -1165,7 +1169,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose updating steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> option: Verify pack archive checksum. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> option: Verify pack archive signature. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">downloader(Atom)</span></code> option: Downloader utility. Either <code class="docutils literal notranslate"><span class="pre">curl</span></code> or <code class="docutils literal notranslate"><span class="pre">wget</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wget(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 </ul>
@@ -1598,7 +1604,9 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code> option: Verbose restoring steps. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksum(Boolean)</span></code> option: Verify pack archive checksums. Default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">checksig(Boolean)</span></code> option: Verify pack archive signatures. Default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">downloader(Atom)</span></code> option: Downloader utility. Either <code class="docutils literal notranslate"><span class="pre">curl</span></code> or <code class="docutils literal notranslate"><span class="pre">wget</span></code>. Default is <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">curl(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wget(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gpg(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tar(Atom)</span></code> option: Extra command-line options. Default is <code class="docutils literal notranslate"><span class="pre">''</span></code>.</p></li>
 </ul>

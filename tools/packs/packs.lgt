@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:75:0,
+		version is 0:76:0,
 		author is 'Paulo Moura',
-		date is 2024-07-18,
+		date is 2024-10-08,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -206,7 +206,9 @@
 			'``verbose(Boolean)`` option' - 'Verbose installing steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
+			'``downloader(Atom)`` option' - 'Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``wget(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		],
@@ -277,7 +279,9 @@
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
+			'``downloader(Atom)`` option' - 'Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``wget(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		],
@@ -307,7 +311,9 @@
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksum. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signature. Default is ``false``.',
+			'``downloader(Atom)`` option' - 'Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``wget(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		],
@@ -448,7 +454,9 @@
 			'``verbose(Boolean)`` option' - 'Verbose restoring steps. Default is ``false``.',
 			'``checksum(Boolean)`` option' - 'Verify pack archive checksums. Default is ``true``.',
 			'``checksig(Boolean)`` option' - 'Verify pack archive signatures. Default is ``false``.',
+			'``downloader(Atom)`` option' - 'Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``wget(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		],
@@ -922,14 +930,14 @@
 		^^print_readme_file_path(Path).
 
 	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options) :-
-		download(Registry, Pack, URL, Archive, Options, Downloader),
+		download(Registry, Pack, URL, Options, Archive, Downloader),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
 		),
 		(	^^option(checksig(true), Options) ->
 			atom_concat(URL, '.asc', URLSig),
-			download(Registry, Pack, URLSig, ArchiveSig, Options, _),
+			download(Registry, Pack, URLSig, Options, ArchiveSig, _),
 			verify_checksig(Pack, Archive, ArchiveSig, Options)
 		;	true
 		),
@@ -1739,14 +1747,14 @@
 		).
 
 	check_availability_archive(Registry, Pack, URL, CheckSum, Options) :-
-		download(Registry, Pack, URL, Archive, Options, _),
+		download(Registry, Pack, URL, Options, Archive, _),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
 		),
 		(	^^option(checksig(true), Options) ->
 			atom_concat(URL, '.asc', URLSig),
-			download(Registry, Pack, URLSig, ArchiveSig, Options, _),
+			download(Registry, Pack, URLSig, Options, ArchiveSig, _),
 			verify_checksig(Pack, Archive, ArchiveSig, Options)
 		;	true
 		).
@@ -2178,7 +2186,7 @@
 		internal_os_path(Path, OSPath),
 		make_directory_path(Path).
 
-	download(Registry, Pack, URL, Archive, Options, Downloader) :-
+	download(Registry, Pack, URL, Options, Archive, Downloader) :-
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, packs, ArchivesPacks),
@@ -2207,13 +2215,22 @@
 				delete_file(Archive),
 				fail
 			)
-		;	^^option(curl(CurlExtraOptions), Options),
+		;	^^option(downloader(curl), Options) ->
+			^^option(curl(CurlExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
 				atomic_list_concat(['curl ', CurlExtraOptions, ' -f -v -L -o "',    Archive, '" "', URL, '"'], Command)
 			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
 			^^command(Command, pack_archive_download_failed(Pack, Command)),
 			Downloader = curl
+		;	% ^^option(downloader(wget), Options),
+			^^option(wget(WgetExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['wget ', WgetExtraOptions, ' -v -O "', Archive, '" "', URL, '"'], Command)
+			;	atomic_list_concat(['wget ', WgetExtraOptions, ' -q -O "', Archive, '" "', URL, '"'], Command)
+			),
+			^^command(Command, pack_archive_download_failed(Pack, Command)),
+			Downloader = wget
 		).
 
 	git_archive_url(URL, Remote, Tag) :-
@@ -2335,7 +2352,9 @@
 	default_option(checksig(false)).
 	default_option(save(installed)).
 	default_option(git('')).
+	default_option(downloader(curl)).
 	default_option(curl('')).
+	default_option(wget('')).
 	default_option(gpg('')).
 	default_option(tar('')).
 
@@ -2359,7 +2378,11 @@
 		once((What == all; What == installed)).
 	valid_option(git(Atom)) :-
 		atom(Atom).
+	valid_option(downloader(Downloader)) :-
+		once((Downloader == curl; Downloader == wget)).
 	valid_option(curl(Atom)) :-
+		atom(Atom).
+	valid_option(wget(Atom)) :-
 		atom(Atom).
 	valid_option(gpg(Atom)) :-
 		atom(Atom).

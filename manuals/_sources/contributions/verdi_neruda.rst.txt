@@ -103,18 +103,18 @@ Verdi Neruda requires Logtalk 2.40.0 or a later version.
 
 To use the snapshot of Verdi Neruda bundled with Logtalk:
 
--  Start Logtalk.
--  Type ``{verdi_neruda(loader)}.`` (Including ``.``).
+- Start Logtalk.
+- Type ``{verdi_neruda(loader)}.`` (Including ``.``).
 
 To use the latest version of Verdi Neruda, fetch the latest source code,
 either as an archive or from the git repository, extract it to a
 directory of your choice, and:
 
--  Start Logtalk from that directory.
--  Type ``{loader}.`` (Including ``.``). If everything went according to
-   the plan you should be greeted by the welcoming message. If you
-   replace the bundled version with the new one, you can use in
-   alternative the steps above.
+- Start Logtalk from that directory.
+- Type ``{loader}.`` (Including ``.``). If everything went according to
+  the plan you should be greeted by the welcoming message. If you
+  replace the bundled version with the new one, you can use in
+  alternative the steps above.
 
 5. EXAMPLES
 

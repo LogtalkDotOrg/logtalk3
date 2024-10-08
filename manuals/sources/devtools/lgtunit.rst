@@ -400,59 +400,57 @@ is:
 
 The possible values of the outcome argument are:
 
--  | ``true``
-   | The test is expected to succeed.
+- | ``true``
+  | The test is expected to succeed.
 
--  | ``true(Assertion)``
-   | The test is expected to succeed and satisfy the ``Assertion`` goal.
+- | ``true(Assertion)``
+  | The test is expected to succeed and satisfy the ``Assertion`` goal.
 
--  | ``deterministic``
-   | The test is expected to succeed once without leaving a
-     choice-point.
+- | ``deterministic``
+  | The test is expected to succeed once without leaving a choice-point.
 
--  | ``deterministic(Assertion)``
-   | The test is expected to succeed once without leaving a choice-point
-     and satisfy the ``Assertion`` goal.
+- | ``deterministic(Assertion)``
+  | The test is expected to succeed once without leaving a choice-point
+    and satisfy the ``Assertion`` goal.
 
--  | ``subsumes(Expected, Result)``
-   | The test is expected to succeed binding ``Result`` to a term that
-     is subsumed by the ``Expected`` term.
+- | ``subsumes(Expected, Result)``
+  | The test is expected to succeed binding ``Result`` to a term that is
+    subsumed by the ``Expected`` term.
 
--  | ``variant(Term1, Term2)``
-   | The test is expected to succeed binding ``Term1`` to a term that is
-     a variant of the ``Term2`` term.
+- | ``variant(Term1, Term2)``
+  | The test is expected to succeed binding ``Term1`` to a term that is
+    a variant of the ``Term2`` term.
 
--  | ``exists(Assertion)``
-   | A solution exists for the test goal that satisfies the
-     ``Assertion`` goal.
+- | ``exists(Assertion)``
+  | A solution exists for the test goal that satisfies the ``Assertion``
+    goal.
 
--  | ``all(Assertion)``
-   | All test goal solutions satisfy the ``Assertion`` goal.
+- | ``all(Assertion)``
+  | All test goal solutions satisfy the ``Assertion`` goal.
 
--  | ``fail``
-   | The test is expected to fail.
+- | ``fail``
+  | The test is expected to fail.
 
--  | ``false``
-   | The test is expected to fail.
+- | ``false``
+  | The test is expected to fail.
 
--  | ``error(Error)``
-   | The test is expected to throw the exception term
-     ``error(ActualError, _)`` where ``ActualError`` is subsumed
-     ``Error``.
+- | ``error(Error)``
+  | The test is expected to throw the exception term
+    ``error(ActualError, _)`` where ``ActualError`` is subsumed
+    ``Error``.
 
--  | ``errors(Errors)``
-   | The test is expected to throw an exception term
-     ``error(ActualError, _)`` where ``ActualError`` is subsumed by an
-     element of the list ``Errors``.
+- | ``errors(Errors)``
+  | The test is expected to throw an exception term
+    ``error(ActualError, _)`` where ``ActualError`` is subsumed by an
+    element of the list ``Errors``.
 
--  | ``ball(Ball)``
-   | The test is expected to throw the exception term ``ActualBall``
-     where ``ActualBall`` is subsumed ``Ball``.
+- | ``ball(Ball)``
+  | The test is expected to throw the exception term ``ActualBall``
+    where ``ActualBall`` is subsumed ``Ball``.
 
--  | ``balls(Balls)``
-   | The test is expected to throw an exception term ``ActualBall``
-     where ``ActualBall`` is subsumed by an element of the list
-     ``Balls``.
+- | ``balls(Balls)``
+  | The test is expected to throw an exception term ``ActualBall`` where
+    ``ActualBall`` is subsumed by an element of the list ``Balls``.
 
 In the case of the ``true(Assertion)``, ``deterministic(Assertion)``,
 and ``all(Assertion)`` outcomes, a message that includes the assertion
@@ -481,24 +479,24 @@ this case, the following alternative test dialect can be used:
 The currently supported options are (non-recognized options are
 ignored):
 
--  | ``condition(Goal)``
-   | Condition for deciding if the test should be run or skipped
-     (default goal is ``true``).
+- | ``condition(Goal)``
+  | Condition for deciding if the test should be run or skipped (default
+    goal is ``true``).
 
--  | ``setup(Goal)``
-   | Setup goal for the test (default goal is ``true``).
+- | ``setup(Goal)``
+  | Setup goal for the test (default goal is ``true``).
 
--  | ``cleanup(Goal)``
-   | Cleanup goal for the test (default goal is ``true``).
+- | ``cleanup(Goal)``
+  | Cleanup goal for the test (default goal is ``true``).
 
--  | ``flaky``
-   | Declare the test as a flaky test.
+- | ``flaky``
+  | Declare the test as a flaky test.
 
--  | ``note(Term)``
-   | Annotation to print (between parenthesis by default) after the test
-     result (default is ``''``); the annotation term can share variables
-     with the test goal, which can be used to pass additional
-     information about the test result.
+- | ``note(Term)``
+  | Annotation to print (between parenthesis by default) after the test
+    result (default is ``''``); the annotation term can share variables
+    with the test goal, which can be used to pass additional information
+    about the test result.
 
 Also supported is QuickCheck testing where random tests are
 automatically generated and run given a predicate mode template with
@@ -584,33 +582,33 @@ predicates for interactive use:
 
 The following options are supported:
 
--  ``n/1``: number of random tests that will be generated and run
-   (default is 100).
--  ``s/1``: maximum number of shrink operations when a counter-example
-   is found (default is 64).
--  ``ec/1``: boolean option deciding if type edge cases are tested
-   before generating random tests (default is ``true``).
--  ``rs/1``: starting seed to be used when generating the random tests
-   (no default).
--  ``pc/1``: pre-condition closure for generated tests (extended with
-   the test arguments; no default).
--  ``l/1``: label closure for classifying the generated tests (extended
-   with the test arguments plus the label argument; no default).
--  ``v/1``: boolean option for verbose reporting of generated random
-   tests (default is ``false``).
--  ``pb/2``: progress bar option for executed random tests when the
-   verbose option is false (first argument is a boolean, default is
-   ``false``; second argument is the tick number, a positive integer).
+- ``n/1``: number of random tests that will be generated and run
+  (default is 100).
+- ``s/1``: maximum number of shrink operations when a counter-example is
+  found (default is 64).
+- ``ec/1``: boolean option deciding if type edge cases are tested before
+  generating random tests (default is ``true``).
+- ``rs/1``: starting seed to be used when generating the random tests
+  (no default).
+- ``pc/1``: pre-condition closure for generated tests (extended with the
+  test arguments; no default).
+- ``l/1``: label closure for classifying the generated tests (extended
+  with the test arguments plus the label argument; no default).
+- ``v/1``: boolean option for verbose reporting of generated random
+  tests (default is ``false``).
+- ``pb/2``: progress bar option for executed random tests when the
+  verbose option is false (first argument is a boolean, default is
+  ``false``; second argument is the tick number, a positive integer).
 
 The ``quick_check/1`` predicate uses the default option values. The
 ``quick_check/1-2`` predicates print the test results and are thus
 better reserved for testing at the top-level interpreter. The
 ``quick_check/3`` predicate returns results in reified form:
 
--  ``passed(SequenceSeed, Discarded, Labels)``
--  ``failed(Goal, SequenceSeed, TestSeed)``
--  ``error(Error, Goal, SequenceSeed, TestSeed)``
--  ``broken(Why, Culprit)``
+- ``passed(SequenceSeed, Discarded, Labels)``
+- ``failed(Goal, SequenceSeed, TestSeed)``
+- ``error(Error, Goal, SequenceSeed, TestSeed)``
+- ``broken(Why, Culprit)``
 
 The ``broken(Why, Culprit)`` result only occurs when the user-defined
 testing setup is broken. For example, a non-callable template (e.g. a
@@ -1251,15 +1249,15 @@ Tests with timeout limits
 There's no portable way to call a goal with a timeout limit. However,
 some backend Prolog compilers provide this functionality:
 
--  B-Prolog: ``time_out/3`` built-in predicate
--  ECLiPSe: ``timeout/3`` and ``timeout/7`` library predicates
--  XVM: ``call_with_timeout/2-3`` built-in predicates
--  SICStus Prolog: ``time_out/3`` library predicate
--  SWI-Prolog: ``call_with_time_limit/2`` library predicate
--  Trealla Prolog: ``call_with_time_limit/2`` and ``time_out/3`` library
-   predicates
--  XSB: ``timed_call/2`` built-in predicate
--  YAP: ``time_out/3`` library predicate
+- B-Prolog: ``time_out/3`` built-in predicate
+- ECLiPSe: ``timeout/3`` and ``timeout/7`` library predicates
+- XVM: ``call_with_timeout/2-3`` built-in predicates
+- SICStus Prolog: ``time_out/3`` library predicate
+- SWI-Prolog: ``call_with_time_limit/2`` library predicate
+- Trealla Prolog: ``call_with_time_limit/2`` and ``time_out/3`` library
+  predicates
+- XSB: ``timed_call/2`` built-in predicate
+- YAP: ``time_out/3`` library predicate
 
 Logtalk provides a ``timeout`` portability library implementing a simple
 abstraction for those backend Prolog compilers.
@@ -1639,15 +1637,15 @@ The list of indexes of the covered predicate clauses can be quite long.
 Some backend Prolog compilers provide a flag or a predicate to control
 the depth of printed terms that can be useful:
 
--  CxProlog: ``write_depth/2`` predicate
--  ECLiPSe: ``print_depth`` flag
--  XVM 3.2.0 or later: ``answer_write_options`` flag
--  SICStus Prolog: ``toplevel_print_options`` flag
--  SWI-Prolog 7.1.10 or earlier: ``toplevel_print_options`` flag
--  SWI-Prolog 7.1.11 or later: ``answer_write_options`` flag
--  Trealla Prolog: ``answer_write_options`` flag
--  XSB: ``set_file_write_depth/1`` predicate
--  YAP: ``write_depth/2-3`` predicates
+- CxProlog: ``write_depth/2`` predicate
+- ECLiPSe: ``print_depth`` flag
+- XVM 3.2.0 or later: ``answer_write_options`` flag
+- SICStus Prolog: ``toplevel_print_options`` flag
+- SWI-Prolog 7.1.10 or earlier: ``toplevel_print_options`` flag
+- SWI-Prolog 7.1.11 or later: ``answer_write_options`` flag
+- Trealla Prolog: ``answer_write_options`` flag
+- XSB: ``set_file_write_depth/1`` predicate
+- YAP: ``write_depth/2-3`` predicates
 
 Code coverage is only available when testing Logtalk code. But Prolog
 modules can often be compiled as Logtalk objects and plain Prolog code
@@ -1697,58 +1695,58 @@ Utility predicates
 The ``lgtunit`` tool provides several public utility predicates to
 simplify writing unit tests and for general use:
 
--  | ``variant(Term1, Term2)``
-   | To check when two terms are a variant of each other (e.g. to check
-     expected test results against actual results when they contain
-     variables).
+- | ``variant(Term1, Term2)``
+  | To check when two terms are a variant of each other (e.g. to check
+    expected test results against actual results when they contain
+    variables).
 
--  | ``assertion(Goal)``
-   | To generate an exception in case the goal argument fails or throws
-     an error.
+- | ``assertion(Goal)``
+  | To generate an exception in case the goal argument fails or throws
+    an error.
 
--  | ``assertion(Description, Goal)``
-   | To generate an exception in case the goal argument fails or throws
-     an error (the first argument allows assertion failures to be
-     distinguished when using multiple assertions).
+- | ``assertion(Description, Goal)``
+  | To generate an exception in case the goal argument fails or throws
+    an error (the first argument allows assertion failures to be
+    distinguished when using multiple assertions).
 
--  | ``approximately_equal(Number1, Number2)``
-   | For number approximate equality using the ``epsilon`` arithmetic
-     constant value.
+- | ``approximately_equal(Number1, Number2)``
+  | For number approximate equality using the ``epsilon`` arithmetic
+    constant value.
 
--  | ``approximately_equal(Number1, Number2, Epsilon)``
-   | For number approximate equality. Weaker equality than essential
-     equality.
+- | ``approximately_equal(Number1, Number2, Epsilon)``
+  | For number approximate equality. Weaker equality than essential
+    equality.
 
--  | ``essentially_equal(Number1, Number2, Epsilon)``
-   | For number essential equality. Stronger equality than approximate
-     equality.
+- | ``essentially_equal(Number1, Number2, Epsilon)``
+  | For number essential equality. Stronger equality than approximate
+    equality.
 
--  | ``tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)``
-   | For number equality within tolerances.
+- | ``tolerance_equal(Number1, Number2, RelativeTolerance, AbsoluteTolerance)``
+  | For number equality within tolerances.
 
--  | ``Number1 =~= Number2``
-   | For number (or list of numbers) close equality (usually
-     floating-point numbers).
+- | ``Number1 =~= Number2``
+  | For number (or list of numbers) close equality (usually
+    floating-point numbers).
 
--  | ``benchmark(Goal, Time)``
-   | For timing a goal.
+- | ``benchmark(Goal, Time)``
+  | For timing a goal.
 
--  | ``benchmark_reified(Goal, Time, Result)``
-   | Reified version of ``benchmark/2``.
+- | ``benchmark_reified(Goal, Time, Result)``
+  | Reified version of ``benchmark/2``.
 
--  | ``benchmark(Goal, Repetitions, Time)``
-   | For finding the average time to prove a goal.
+- | ``benchmark(Goal, Repetitions, Time)``
+  | For finding the average time to prove a goal.
 
--  | ``benchmark(Goal, Repetitions, Clock, Time)``
-   | For finding the average time to prove a goal using a ``cpu`` or a
-     ``wall`` clock.
+- | ``benchmark(Goal, Repetitions, Clock, Time)``
+  | For finding the average time to prove a goal using a ``cpu`` or a
+    ``wall`` clock.
 
--  | ``deterministic(Goal)``
-   | For checking that a predicate succeeds without leaving a
-     choice-point.
+- | ``deterministic(Goal)``
+  | For checking that a predicate succeeds without leaving a
+    choice-point.
 
--  | ``deterministic(Goal, Deterministic)``
-   | Reified version of the ``deterministic/1`` predicate.
+- | ``deterministic(Goal, Deterministic)``
+  | Reified version of the ``deterministic/1`` predicate.
 
 The ``assertion/1-2`` predicates can be used in the body of tests where
 using two or more assertions is convenient or in the body of tests
@@ -1823,12 +1821,12 @@ When using the ``logtalk_tester`` automation script, use either the
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
 
--  https://docs.qameta.io/allure-report/ (supports multiple reports)
--  https://github.com/Zir0-93/xunit-to-html (supports multiple test sets
-   in a single report)
--  https://www.npmjs.com/package/xunit-viewer
--  https://github.com/JatechUK/NUnit-HTML-Report-Generator
--  https://plugins.jenkins.io/xunit
+- https://docs.qameta.io/allure-report/ (supports multiple reports)
+- https://github.com/Zir0-93/xunit-to-html (supports multiple test sets
+  in a single report)
+- https://www.npmjs.com/package/xunit-viewer
+- https://github.com/JatechUK/NUnit-HTML-Report-Generator
+- https://plugins.jenkins.io/xunit
 
 Exporting test results in the TAP output format
 -----------------------------------------------
@@ -1858,8 +1856,8 @@ the set.
 There are several third-party TAP report converters that can generate
 HTML files for easy browsing. For example:
 
--  https://github.com/Quobject/tap-to-html
--  https://plugins.jenkins.io/tap/
+- https://github.com/Quobject/tap-to-html
+- https://plugins.jenkins.io/tap/
 
 Generating Allure reports
 -------------------------
@@ -1891,8 +1889,8 @@ files generated by ``lgtunit`` and delegate the actual generation of the
 report to e.g. an Allure Docker container or to a Jenkins plug-in. Two
 examples are:
 
--  https://github.com/fescobar/allure-docker-service
--  https://plugins.jenkins.io/allure-jenkins-plugin/
+- https://github.com/fescobar/allure-docker-service
+- https://plugins.jenkins.io/allure-jenkins-plugin/
 
 In this case, we would use the ``logtalk_allure_report`` script option
 to only perform the preprocessing step:

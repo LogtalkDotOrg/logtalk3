@@ -10,11 +10,10 @@ lists of character codes (aka codes).
 Currently, four groups of DCGs are available, each defined in its own
 file:
 
--  blanks (``blank_grammars.lgt``)
--  numbers (``number_grammars.lgt``)
--  sequences (``sequence_grammars.lgt``)
--  IP addresses (``ip_grammars.lgt``; depends on
-   ``number_grammars.lgt``)
+- blanks (``blank_grammars.lgt``)
+- numbers (``number_grammars.lgt``)
+- sequences (``sequence_grammars.lgt``)
+- IP addresses (``ip_grammars.lgt``; depends on ``number_grammars.lgt``)
 
 API documentation
 -----------------

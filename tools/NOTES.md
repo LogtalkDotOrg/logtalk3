@@ -114,7 +114,7 @@ not listed, see the dependency websites for installation instructions.
 - `issue_creator`: `gh`, `glab`
 - `lgtdoc`: Sphinx, `libxslt`, `fop`, `texlive`, `texinfo`
 - `lgtunit`: Allure
-- `packs`: `coreutils`, `libarchive`, `gnupg2`, `git`, `curl`, `direnv`
+- `packs`: `coreutils`, `libarchive`, `gnupg2`, `git`, `curl`, `wget`, `direnv`
 
 ### Python dependencies (all operating-systems)
 
@@ -128,7 +128,7 @@ not listed, see the dependency websites for installation instructions.
 	$ sudo port install texinfo
 	$ sudo port install gh glab
 	$ sudo port install libxslt fop texlive
-	$ sudo port install coreutils libarchive gnupg2 git curl direnv
+	$ sudo port install coreutils libarchive gnupg2 git curl wget direnv
 
 ### macOS - Homebrew
 
@@ -136,7 +136,7 @@ not listed, see the dependency websites for installation instructions.
 	$ brew install texinfo
 	$ brew install libxslt fop texlive
 	$ brew install allure
-	$ brew install coreutils libarchive gnupg2 git curl direnv
+	$ brew install coreutils libarchive gnupg2 git curl wget direnv
 	$ brew install gh glab
 
 ### Ubuntu
@@ -145,13 +145,13 @@ not listed, see the dependency websites for installation instructions.
 	$ sudo apt install info
 	$ sudo apt install xsltproc fop texlive
 	$ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
-	$ sudo apt install libarchive-tools gnupg2 git curl direnv
+	$ sudo apt install libarchive-tools gnupg2 git curl wget direnv
 
 ### RedHat
 
 	$ sudo dnf install graphviz
 	$ sudo dnf install libxslt fop
-	$ sudo dnf install bsdtar gnupg2 git curl direnv
+	$ sudo dnf install bsdtar gnupg2 git curl wget direnv
 
 ### Windows - Chocolatey
 
@@ -159,6 +159,7 @@ not listed, see the dependency websites for installation instructions.
 	> choco install xsltproc apache-fop texlive
 	> choco install gnupg git
 	> choco install gh glab
+	> choco install wget
 
 ### Windows - installers
 
@@ -168,6 +169,7 @@ https://www.gnupg.org/
 https://gitforwindows.org  
 https://cli.github.com  
 https://glab.readthedocs.io
+https://eternallybored.org/misc/wget/
 
 ### Windows - PowerShell add-ons
 

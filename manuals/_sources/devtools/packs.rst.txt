@@ -30,12 +30,13 @@ Requirements
 On POSIX systems (Linux, macOS, ...), the following shell commands are
 required:
 
--  ``sha256sum`` (provided by GNU ``coreutils``)
--  ``curl``
--  ``bsdtar`` (provided by ``libarchive`` or ``libarchive-tools``)
--  ``gpg`` (provided by ``gnupg2``)
--  ``git``
--  ``direnv`` (when using virtual environments)
+- ``sha256sum`` (provided by GNU ``coreutils``)
+- ``curl`` (default file downloader)
+- ``wget`` (alternative file downloader)
+- ``bsdtar`` (provided by ``libarchive`` or ``libarchive-tools``)
+- ``gpg`` (provided by ``gnupg2``)
+- ``git``
+- ``direnv`` (when using virtual environments)
 
 The tool uses ``bsdtar`` instead of GNU ``tar`` so that it can
 uncompress ``.zip`` archives (``unzip`` doesn't provide the desired
@@ -44,21 +45,33 @@ non-predictable name of the wrapper directory).
 
 On Windows systems, the following shell commands are required:
 
--  ``certutil.exe``
--  ``curl.exe``
--  ``tar.exe``
--  ``gpg.exe``
--  ``git.exe``
--  ``Set-PsEnv`` (when using virtual environments)
+- ``certutil.exe``
+- ``curl.exe`` (default file downloader)
+- ``wget.exe`` (alternative file downloader)
+- ``tar.exe``
+- ``gpg.exe``
+- ``git.exe``
+- ``Set-PsEnv`` (when using virtual environments)
 
-In recent Windows 10 builds, only ``gpg``, ``git``, and ``Set-PsEnv``
-should require installation. You can download the GnuPG software from:
+In recent Windows 10 builds, only ``wget``, ``gpg``, ``git``, and
+``Set-PsEnv`` should require installation. You can download the GnuPG
+software from:
 
 https://www.gnupg.org/
 
 You can download Git from:
 
 https://gitforwindows.org
+
+You can download Wget from:
+
+https://eternallybored.org/misc/wget/
+
+You can also use Chocolatey to install the commands above:
+
+::
+
+   > choco install gnupg git wget
 
 To install `Set-PsEnv <https://github.com/rajivharris/Set-PsEnv>`__ from
 the PowerShell Gallery:
@@ -74,13 +87,13 @@ MacPorts:
 
 ::
 
-   $ sudo port install coreutils libarchive gnupg2 git direnv
+   $ sudo port install coreutils wget libarchive gnupg2 git direnv
 
 Or using Homebrew:
 
 ::
 
-   $ brew install coreutils libarchive gnupg2 git direnv
+   $ brew install coreutils wget libarchive gnupg2 git direnv
 
 On Linux systems, use the distribution own package manager to install
 any missing command. For example, in recent Ubuntu versions:
@@ -88,7 +101,7 @@ any missing command. For example, in recent Ubuntu versions:
 ::
 
    $ sudo apt update
-   $ sudo apt install coreutils curl libarchive-tools gnupg2 git direnv
+   $ sudo apt install coreutils curl wget libarchive-tools gnupg2 git direnv
 
 API documentation
 -----------------
@@ -276,12 +289,12 @@ loads source files defining the registry itself and the packs it
 provides. The registry name is ideally a valid unquoted atom. The
 registry directory must contain at least two Logtalk source files:
 
--  A file defining an object named after the registry with a
-   ``_registry`` suffix, implementing the ``registry_protocol``. This
-   naming convention helps preventing name conflicts.
+- A file defining an object named after the registry with a
+  ``_registry`` suffix, implementing the ``registry_protocol``. This
+  naming convention helps preventing name conflicts.
 
--  A loader file (named ``loader.lgt`` or ``loader.logtalk``) that loads
-   the registry object file and all pack object files.
+- A loader file (named ``loader.lgt`` or ``loader.logtalk``) that loads
+  the registry object file and all pack object files.
 
 An example of a registry specification object would be:
 
@@ -524,9 +537,9 @@ checksum for the archive must use the SHA-256 hash algorithm
 (``sha256``). The pack may optionally be signed. Supported archive
 formats and extensions are:
 
--  ``.zip``
--  ``.tgz``, ``.tar.gz``
--  ``.tbz2``, ``.tar.bz2``
+- ``.zip``
+- ``.tgz``, ``.tar.gz``
+- ``.tbz2``, ``.tar.bz2``
 
 The pack sources should contain ``LICENSE``, ``README.md`` (or
 ``NOTES.md``), and ``loader.lgt`` (or ``loader.logtalk``) files.
@@ -609,37 +622,36 @@ Pack dependencies on other packs can be specified using a list of
 ``Registry::Pack Operator Version`` terms where ``Operator`` is a
 standard term comparison operator:
 
--  ``Registry::Pack @>= Version`` - the pack requires a dependency with
-   version equal or above the specified one. For example,
-   ``logtalk @>= 3:36:0`` means that the pack requires Logtalk 3.36.0 or
-   later version.
+- ``Registry::Pack @>= Version`` - the pack requires a dependency with
+  version equal or above the specified one. For example,
+  ``logtalk @>= 3:36:0`` means that the pack requires Logtalk 3.36.0 or
+  later version.
 
--  ``Registry::Pack @=< Version`` - the pack requires a dependency with
-   version up to the specified one. For example,
-   ``common::bits @=< 2:1`` means that the pack requires a
-   ``common::bits`` pack up to 2.1. This includes all previous versions
-   and also all patches for version 2.1 (e.g. 2.1.7, 2.1.8, ...) but not
-   version 2.2 or newer.
+- ``Registry::Pack @=< Version`` - the pack requires a dependency with
+  version up to the specified one. For example, ``common::bits @=< 2:1``
+  means that the pack requires a ``common::bits`` pack up to 2.1. This
+  includes all previous versions and also all patches for version 2.1
+  (e.g. 2.1.7, 2.1.8, ...) but not version 2.2 or newer.
 
--  ``Registry::Pack @< Version`` - the pack requires a dependency with
-   version older than the specified one. For example,
-   ``common::bits @< 3`` means that the pack requires a ``common::bits``
-   2.x or older version.
+- ``Registry::Pack @< Version`` - the pack requires a dependency with
+  version older than the specified one. For example,
+  ``common::bits @< 3`` means that the pack requires a ``common::bits``
+  2.x or older version.
 
--  ``Registry::Pack @> Version`` - the pack requires a dependency with
-   version newer than the specified one. For example,
-   ``common::bits @> 2:4`` means that the pack requires a
-   ``common::bits`` 2.5 or newer version.
+- ``Registry::Pack @> Version`` - the pack requires a dependency with
+  version newer than the specified one. For example,
+  ``common::bits @> 2:4`` means that the pack requires a
+  ``common::bits`` 2.5 or newer version.
 
--  ``Registry::Pack == Version`` - the pack requires a dependency with a
-   specific version. For example, ``common::bits == 2:1`` means that the
-   pack requires a ``common::bits`` pack version 2.1.x (thus, from
-   version 2.1.0 to the latest patch for version 2.1).
+- ``Registry::Pack == Version`` - the pack requires a dependency with a
+  specific version. For example, ``common::bits == 2:1`` means that the
+  pack requires a ``common::bits`` pack version 2.1.x (thus, from
+  version 2.1.0 to the latest patch for version 2.1).
 
--  ``Registry::Pack \== Version`` - the pack requires a dependency with
-   any version other than then the one specified. For example,
-   ``common::bits \== 2.1`` means that the pack requires a
-   ``common::bits`` pack version other than any 2.1.x version.
+- ``Registry::Pack \== Version`` - the pack requires a dependency with
+  any version other than then the one specified. For example,
+  ``common::bits \== 2.1`` means that the pack requires a
+  ``common::bits`` pack version other than any 2.1.x version.
 
 To specify *range* dependencies by using two consecutive elements with
 the lower bound followed by the upper bound. For example,
@@ -677,20 +689,20 @@ When a pack can only be used with a subset of the Prolog backends, the
 last argument of the ``version/6`` predicate is a list of backend
 identifiers (atoms):
 
--  B-Prolog: ``b``
--  Ciao Prolog: ``ciao``
--  CxProlog: ``cx``
--  ECLiPSe: ``eclipse``
--  GNU Prolog: ``gnu``
--  JIProlog: ``ji``
--  XVM: ``xvm``
--  Quintus Prolog: ``quintus``
--  SICStus Prolog: ``sicstus``
--  SWI-Prolog: ``swi``
--  Tau Prolog: ``tau``
--  Trealla Prolog: ``trealla``
--  XSB: ``xsb``
--  YAP: ``yap``
+- B-Prolog: ``b``
+- Ciao Prolog: ``ciao``
+- CxProlog: ``cx``
+- ECLiPSe: ``eclipse``
+- GNU Prolog: ``gnu``
+- JIProlog: ``ji``
+- XVM: ``xvm``
+- Quintus Prolog: ``quintus``
+- SICStus Prolog: ``sicstus``
+- SWI-Prolog: ``swi``
+- Tau Prolog: ``tau``
+- Trealla Prolog: ``trealla``
+- XSB: ``xsb``
+- YAP: ``yap``
 
 Pack development
 ----------------
@@ -800,17 +812,17 @@ updating in this case).
 The tool provides versions of the pack install, update, and uninstall
 predicates that accept a list of options:
 
--  ``verbose(Boolean)`` (default is ``false``)
--  ``clean(Boolean)`` (default is ``false``)
--  ``update(Boolean)`` (default is ``false``)
--  ``force(Boolean)`` (default is ``false``)
--  ``compatible(Boolean)`` (default is ``true``)
--  ``checksum(Boolean)`` (default is ``true``)
--  ``checksig(Boolean)`` (default is ``false``)
--  ``git(Atom)`` (extra command-line options; default is ``''``)
--  ``curl(Atom)`` (extra command-line options; default is ``''``)
--  ``gpg(Atom)`` (extra command-line options; default is ``''``)
--  ``tar(Atom)`` (extra command-line options; default is ``''``)
+- ``verbose(Boolean)`` (default is ``false``)
+- ``clean(Boolean)`` (default is ``false``)
+- ``update(Boolean)`` (default is ``false``)
+- ``force(Boolean)`` (default is ``false``)
+- ``compatible(Boolean)`` (default is ``true``)
+- ``checksum(Boolean)`` (default is ``true``)
+- ``checksig(Boolean)`` (default is ``false``)
+- ``git(Atom)`` (extra command-line options; default is ``''``)
+- ``curl(Atom)`` (extra command-line options; default is ``''``)
+- ``gpg(Atom)`` (extra command-line options; default is ``''``)
+- ``tar(Atom)`` (extra command-line options; default is ``''``)
 
 Note that, by default, only compatible packs can be installed. To
 install a pack that is incompatible with the current Logtalk version,
@@ -1028,31 +1040,31 @@ audit.
 Best practices
 --------------
 
--  Make available a new pack registry as a git repo. This simplifies
-   updating the registry and rolling back to a previous version.
+- Make available a new pack registry as a git repo. This simplifies
+  updating the registry and rolling back to a previous version.
 
--  Use registry and pack names that are valid unquoted atoms, thus
-   simplifying usage. Use descriptive names with underscores if
-   necessary to link words.
+- Use registry and pack names that are valid unquoted atoms, thus
+  simplifying usage. Use descriptive names with underscores if necessary
+  to link words.
 
--  Name the registry and pack specification objects after their names
-   with a ``_registry`` or ``_pack`` suffix. Save the objects in files
-   named after the objects.
+- Name the registry and pack specification objects after their names
+  with a ``_registry`` or ``_pack`` suffix. Save the objects in files
+  named after the objects.
 
--  Create new pack versions from git tags.
+- Create new pack versions from git tags.
 
--  If the sources of a pack are available from a git repo, consider
-   using signed commits and signed tags for increased security.
+- If the sources of a pack are available from a git repo, consider using
+  signed commits and signed tags for increased security.
 
--  When a new pack version breaks backwards compatibility, list both the
-   old and the new versions on the pack specification file.
+- When a new pack version breaks backwards compatibility, list both the
+  old and the new versions on the pack specification file.
 
--  Pin registries and packs when specific versions are critical for your
-   work so that you can still easily batch update the remaining packs
-   and registries.
+- Pin registries and packs when specific versions are critical for your
+  work so that you can still easily batch update the remaining packs and
+  registries.
 
--  Include the ``$LOGTALKPACKS`` directory (or the default
-   ``~/logtalk_packs`` directory) on your regular backups.
+- Include the ``$LOGTALKPACKS`` directory (or the default
+  ``~/logtalk_packs`` directory) on your regular backups.
 
 Installing Prolog packs
 -----------------------

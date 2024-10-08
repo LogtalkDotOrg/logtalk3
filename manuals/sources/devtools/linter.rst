@@ -31,64 +31,64 @@ Main linter checks
 
 Lint checks include:
 
--  Missing directives (including scope, meta-predicate, dynamic,
-   discontiguous, and multifile directives)
--  Duplicated directives, clauses, and grammar rules
--  Missing predicates (unknown messages plus calls to non-declared and
-   non-defined predicates)
--  Calls to declared but not defined static predicates
--  Non-terminals called as predicates (instead of via the ``phrase/2-3``
-   built-in methods)
--  Predicates called as non-terminals (instead of via the ``call//1``
-   built-in method)
--  Non-portable predicate calls, predicate options, arithmetic function
-   calls, directives, flags, and flag values
--  Missing arithmetic functions (with selected backends)
--  Suspicious calls (syntactically valid calls that are likely semantic
-   errors; e.g. float comparisons using the standard arithmetic
-   comparison operators or comparing numbers using unification)
--  Deprecated directives, predicates, arithmetic functions, control
-   constructs, and flags
--  References to unknown entities (objects, protocols, categories, or
-   modules)
--  Top-level shortcuts used as directives
--  Unification goals that will succeed without binding any variables
--  Unification goals that will succeed creating a cyclic term
--  Goals that are always true or always false
--  Trivial goal fails (due to no matching predicate clause)
--  Redefined built-in predicates
--  Redefined standard operators
--  Lambda expression unclassified variables and mixed up variables
--  Lambda expression with parameter variables used elsewhere in a clause
--  Singleton variables
--  If-then-else and soft cut control constructs without an else part
--  If-then-else and soft cut control constructs where the test is a
-   unification between a variable and a ground term
--  Missing parenthesis around if-then-else and disjunction control
-   constructs in the presence of cuts in the first argument
--  Cuts in clauses for multifile predicates
--  Missing cut in repeat loops
--  Possible non-steadfast predicate definitions
--  Non-tail recursive predicate definitions
--  Redundant calls to control constructs and built-in predicates
--  Calls to all-solutions predicates with existentially qualified
-   variables not occurring in the qualified goal
--  Calls to all-solutions predicates with no shared variables between
-   template and goal
--  Calls to ``bagof/3`` and ``setof/3`` where the goal argument contains
-   singleton variables
--  Calls to ``findall/3`` used to backtrack over all solutions of a goal
-   without collecting them
--  Calls to ``catch/3`` that catch all exceptions
--  Calls to standard predicates that have more efficient alternatives
--  Unsound calls in grammar rules
--  File, entity, predicate, and variable names not following official
-   coding guidelines
--  Variable names that differ only on case
--  Clauses whose body is a disjunction (and that can be rewritten as
-   multiple clauses per coding guidelines)
--  Naked meta-variables in cut-transparent control constructs
--  Left-recursion in clauses and grammar rules
+- Missing directives (including scope, meta-predicate, dynamic,
+  discontiguous, and multifile directives)
+- Duplicated directives, clauses, and grammar rules
+- Missing predicates (unknown messages plus calls to non-declared and
+  non-defined predicates)
+- Calls to declared but not defined static predicates
+- Non-terminals called as predicates (instead of via the ``phrase/2-3``
+  built-in methods)
+- Predicates called as non-terminals (instead of via the ``call//1``
+  built-in method)
+- Non-portable predicate calls, predicate options, arithmetic function
+  calls, directives, flags, and flag values
+- Missing arithmetic functions (with selected backends)
+- Suspicious calls (syntactically valid calls that are likely semantic
+  errors; e.g. float comparisons using the standard arithmetic
+  comparison operators or comparing numbers using unification)
+- Deprecated directives, predicates, arithmetic functions, control
+  constructs, and flags
+- References to unknown entities (objects, protocols, categories, or
+  modules)
+- Top-level shortcuts used as directives
+- Unification goals that will succeed without binding any variables
+- Unification goals that will succeed creating a cyclic term
+- Goals that are always true or always false
+- Trivial goal fails (due to no matching predicate clause)
+- Redefined built-in predicates
+- Redefined standard operators
+- Lambda expression unclassified variables and mixed up variables
+- Lambda expression with parameter variables used elsewhere in a clause
+- Singleton variables
+- If-then-else and soft cut control constructs without an else part
+- If-then-else and soft cut control constructs where the test is a
+  unification between a variable and a ground term
+- Missing parenthesis around if-then-else and disjunction control
+  constructs in the presence of cuts in the first argument
+- Cuts in clauses for multifile predicates
+- Missing cut in repeat loops
+- Possible non-steadfast predicate definitions
+- Non-tail recursive predicate definitions
+- Redundant calls to control constructs and built-in predicates
+- Calls to all-solutions predicates with existentially qualified
+  variables not occurring in the qualified goal
+- Calls to all-solutions predicates with no shared variables between
+  template and goal
+- Calls to ``bagof/3`` and ``setof/3`` where the goal argument contains
+  singleton variables
+- Calls to ``findall/3`` used to backtrack over all solutions of a goal
+  without collecting them
+- Calls to ``catch/3`` that catch all exceptions
+- Calls to standard predicates that have more efficient alternatives
+- Unsound calls in grammar rules
+- File, entity, predicate, and variable names not following official
+  coding guidelines
+- Variable names that differ only on case
+- Clauses whose body is a disjunction (and that can be rewritten as
+  multiple clauses per coding guidelines)
+- Naked meta-variables in cut-transparent control constructs
+- Left-recursion in clauses and grammar rules
 
 Additional lint checks are provided by the ``lgtunit``, ``lgtdoc``,
 ``make``, and ``dead_code_scanner`` tools. For large projects, the data

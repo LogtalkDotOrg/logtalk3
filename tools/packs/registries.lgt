@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:58:0,
+		version is 0:59:0,
 		author is 'Paulo Moura',
-		date is 2024-03-25,
+		date is 2024-10-08,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -71,7 +71,9 @@
 			'``force(Boolean)`` option' - 'Force registry re-installation if already defined by first deleting the previous installation. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose adding steps. Default is ``false``.',
+			'``downloader(Atom)`` option' - 'Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``wget(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		],
@@ -128,7 +130,9 @@
 			'``force(Boolean)`` option' - 'Force update if the registry is pinned. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after updating. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose updating steps. Default is ``false``.',
+			'``downloader(Atom)`` option' - 'Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``wget(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		],
@@ -169,7 +173,9 @@
 			'``force(Boolean)`` option' - 'Force deletion if the registry is pinned or there are installed registry packs. Default is ``false``.',
 			'``clean(Boolean)`` option' - 'Clean registry archive after deleting. Default is ``false``.',
 			'``verbose(Boolean)`` option' - 'Verbose deleting steps. Default is ``false``.',
+			'``downloader(Atom)`` option' - 'Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.',
 			'``curl(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
+			'``wget(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``gpg(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.',
 			'``tar(Atom)`` option' - 'Extra command-line options. Default is ``\'\'``.'
 		],
@@ -700,7 +706,9 @@
 	default_option(checksig(false)).
 	default_option(save(installed)).
 	default_option(git('')).
+	default_option(downloader(curl)).
 	default_option(curl('')).
+	default_option(wget('')).
 	default_option(gpg('')).
 	default_option(tar('')).
 
@@ -724,7 +732,11 @@
 		once((What == all; What == installed)).
 	valid_option(git(Atom)) :-
 		atom(Atom).
+	valid_option(downloader(Downloader)) :-
+		once((Downloader == curl; Downloader == wget)).
 	valid_option(curl(Atom)) :-
+		atom(Atom).
+	valid_option(wget(Atom)) :-
 		atom(Atom).
 	valid_option(gpg(Atom)) :-
 		atom(Atom).
@@ -937,10 +949,19 @@
 		path_concat(ArchivesRegistriesRegistry, Basename, Archive0),
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesRegistriesRegistry),
-		^^option(curl(CurlExtraOptions), Options),
-		(	^^option(verbose(true), Options) ->
-			atomic_list_concat(['curl ', CurlExtraOptions, ' -f -v -L -o "',    Archive, '" "', URL, '"'], Command)
-		;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
+		^^option(downloader(Downloader), Options),
+		(	Downloader == curl ->
+			^^option(curl(CurlExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['curl ', CurlExtraOptions, ' -f -v -L -o "',    Archive, '" "', URL, '"'], Command)
+			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
+			)
+		;	% Downloader == wget,
+			^^option(wget(WgetExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['wget ', WgetExtraOptions, ' -v -O "', Archive, '" "', URL, '"'], Command)
+			;	atomic_list_concat(['wget ', WgetExtraOptions, ' -q -O "', Archive, '" "', URL, '"'], Command)
+			)
 		),
 		^^command(Command, registry_download_failed(Registry, Command)).
 

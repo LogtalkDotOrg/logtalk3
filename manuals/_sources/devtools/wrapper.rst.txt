@@ -64,23 +64,23 @@ described below.
 
 The API predicates also accept a set of options for customization:
 
--  | ``prolog_extensions(Extensions)``
-   | list of file name extensions used to recognize Prolog source files
-     (default is ``['.pl', '.pro', '.prolog']``)
+- | ``prolog_extensions(Extensions)``
+  | list of file name extensions used to recognize Prolog source files
+    (default is ``['.pl', '.pro', '.prolog']``)
 
--  | ``logtalk_extension(Extension)``
-   | Logtalk file name extension to be used for the generated wrapper
-     files (default is ``'.lgt'``)
+- | ``logtalk_extension(Extension)``
+  | Logtalk file name extension to be used for the generated wrapper
+    files (default is ``'.lgt'``)
 
--  | ``exclude_files(Files)``
-   | list of Prolog source files to exclude (default is ``[]``)
+- | ``exclude_files(Files)``
+  | list of Prolog source files to exclude (default is ``[]``)
 
--  | ``exclude_directories(Files)``
-   | list of sub-directories to exclude (default is ``[]``)
+- | ``exclude_directories(Files)``
+  | list of sub-directories to exclude (default is ``[]``)
 
--  | ``include_wrapped_files(Boolean)``
-   | generate ``include/1`` directives for the wrapped Prolog source
-     files (default is ``true``)
+- | ``include_wrapped_files(Boolean)``
+  | generate ``include/1`` directives for the wrapped Prolog source
+    files (default is ``true``)
 
 The use, by default, of ``include/1`` directives to wrap the code in
 Prolog source files facilitates running in parallel the Logtalk port and
@@ -95,19 +95,19 @@ provide the same semantics as the original calls.
 Current limitations
 -------------------
 
--  The tool cannot deal with syntax errors in the Prolog files. These
-   errors usually occur when using a backend Prolog system different
-   from the one used to compile the original plain Prolog code. A common
-   cause of syntax errors are operator definitions. These can often be
-   solved by defining those operators for the Prolog backend used to run
-   Logtalk and this tool. An alternative is to preload the Prolog files
-   where those operators are declared. Preloading the plain Prolog
-   application can also help in wrapping it by ensuring that its
-   dependencies are also loaded.
+- The tool cannot deal with syntax errors in the Prolog files. These
+  errors usually occur when using a backend Prolog system different from
+  the one used to compile the original plain Prolog code. A common cause
+  of syntax errors are operator definitions. These can often be solved
+  by defining those operators for the Prolog backend used to run Logtalk
+  and this tool. An alternative is to preload the Prolog files where
+  those operators are declared. Preloading the plain Prolog application
+  can also help in wrapping it by ensuring that its dependencies are
+  also loaded.
 
--  The tool assumes that all files to be wrapped have different names
-   (even if found in different directories). If that is not the case,
-   the name conflicts must be manually solved before using the tool.
+- The tool assumes that all files to be wrapped have different names
+  (even if found in different directories). If that is not the case, the
+  name conflicts must be manually solved before using the tool.
 
--  There's only preliminary support for dealing with meta-predicates and
-   advise on missing meta-predicate directives.
+- There's only preliminary support for dealing with meta-predicates and
+  advise on missing meta-predicate directives.

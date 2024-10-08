@@ -111,27 +111,27 @@ Supported diagrams
 
 The following entity diagrams are supported:
 
--  *entity diagrams* showing entity public interfaces, entity
-   inheritance relations, and entity predicate cross-reference relations
--  *predicate cross-reference diagrams* (between entities or within an
-   entity)
--  *inheritance diagrams* showing entity inheritance relations
--  *uses diagrams* showing which entities use resources from other
-   entities
+- *entity diagrams* showing entity public interfaces, entity inheritance
+  relations, and entity predicate cross-reference relations
+- *predicate cross-reference diagrams* (between entities or within an
+  entity)
+- *inheritance diagrams* showing entity inheritance relations
+- *uses diagrams* showing which entities use resources from other
+  entities
 
 The following library diagrams are supported:
 
--  *library loading diagrams* showing which libraries load other
-   libraries
--  *library dependency diagrams* showing which libraries contain
-   entities with references to entities defined in other libraries
+- *library loading diagrams* showing which libraries load other
+  libraries
+- *library dependency diagrams* showing which libraries contain entities
+  with references to entities defined in other libraries
 
 The following file diagrams are supported:
 
--  *file loading diagrams* showing which files load or include other
-   files
--  *file dependency diagrams* showing which files contain entities with
-   references to entities defined in other files
+- *file loading diagrams* showing which files load or include other
+  files
+- *file dependency diagrams* showing which files contain entities with
+  references to entities defined in other files
 
 File dependency diagrams are specially useful in revealing dependencies
 that are not represented in file loading diagrams due to files being
@@ -139,10 +139,10 @@ loaded indirectly by files external to the libraries being documented.
 
 The following directory diagrams are supported:
 
--  *directory loading diagrams* showing which directories contain files
-   that load files in other directories
--  *directory dependency diagrams* showing which directories contain
-   entities with references to entities defined in other directories
+- *directory loading diagrams* showing which directories contain files
+  that load files in other directories
+- *directory dependency diagrams* showing which directories contain
+  entities with references to entities defined in other directories
 
 Comparing directory (or file) loading diagrams with directory (or file)
 dependency diagrams allows comparing what is explicitly loaded with the
@@ -170,82 +170,82 @@ entity relations. Currently we use the following Graphviz DOT shapes
 (libraries, entities, predicates, and files) and arrows (entity,
 predicate, and file relations):
 
--  | libraries
-   | ``tab`` (lightsalmon)
+- | libraries
+  | ``tab`` (lightsalmon)
 
--  | library loading and dependency relations
-   | ``normal`` (arrow ending with a black triangle)
+- | library loading and dependency relations
+  | ``normal`` (arrow ending with a black triangle)
 
--  | objects (classes, instances, and prototypes)
-   | ``box`` (rectangle, yellow for instances/classes and beige for
-     prototypes)
+- | objects (classes, instances, and prototypes)
+  | ``box`` (rectangle, yellow for instances/classes and beige for
+    prototypes)
 
--  | protocols
-   | ``note`` (aqua marine rectangle with folded right-upper corners)
+- | protocols
+  | ``note`` (aqua marine rectangle with folded right-upper corners)
 
--  | categories
-   | ``component`` (light cyan rectangle with two small rectangles
-     intercepting the left side)
+- | categories
+  | ``component`` (light cyan rectangle with two small rectangles
+    intercepting the left side)
 
--  | modules
-   | ``tab`` (plum rectangle with small tab at top)
+- | modules
+  | ``tab`` (plum rectangle with small tab at top)
 
--  | public predicates
-   | ``box`` (springgreen)
+- | public predicates
+  | ``box`` (springgreen)
 
--  | public, multifile, predicates
-   | ``box`` (skyblue)
+- | public, multifile, predicates
+  | ``box`` (skyblue)
 
--  | protected predicates
-   | ``box`` (yellow)
+- | protected predicates
+  | ``box`` (yellow)
 
--  | private predicates
-   | ``box`` (indianred)
+- | private predicates
+  | ``box`` (indianred)
 
--  | external predicates
-   | ``box`` (beige)
+- | external predicates
+  | ``box`` (beige)
 
--  | exported module predicates
-   | ``box`` (springgreen)
+- | exported module predicates
+  | ``box`` (springgreen)
 
--  | directories
-   | ``tab`` (lightsalmon)
+- | directories
+  | ``tab`` (lightsalmon)
 
--  | directory loading and dependency relations
-   | ``normal`` (arrow ending with a black triangle)
+- | directory loading and dependency relations
+  | ``normal`` (arrow ending with a black triangle)
 
--  | files
-   | ``box`` (pale turquoise rectangle)
+- | files
+  | ``box`` (pale turquoise rectangle)
 
--  | file loading and dependency relations
-   | ``normal`` (arrow ending with a black triangle)
+- | file loading and dependency relations
+  | ``normal`` (arrow ending with a black triangle)
 
--  | specialization relation
-   | ``onormal`` (arrow ending with a white triangle)
+- | specialization relation
+  | ``onormal`` (arrow ending with a white triangle)
 
--  | instantiation relation
-   | ``normal`` (arrow ending with a black triangle)
+- | instantiation relation
+  | ``normal`` (arrow ending with a black triangle)
 
--  | extends relation
-   | ``vee`` (arrow ending with a "v")
+- | extends relation
+  | ``vee`` (arrow ending with a "v")
 
--  | implements relation
-   | ``dot`` (arrow ending with a black circle)
+- | implements relation
+  | ``dot`` (arrow ending with a black circle)
 
--  | imports relation
-   | ``box`` (arrow ending with a black square)
+- | imports relation
+  | ``box`` (arrow ending with a black square)
 
--  | complements relation
-   | ``obox`` (arrow ending with a white square)
+- | complements relation
+  | ``obox`` (arrow ending with a white square)
 
--  | uses and use module relations
-   | ``rdiamond`` (arrow ending with a black half diamond)
+- | uses and use module relations
+  | ``rdiamond`` (arrow ending with a black half diamond)
 
--  | predicate calls
-   | ``normal`` (arrow ending with a black triangle)
+- | predicate calls
+  | ``normal`` (arrow ending with a black triangle)
 
--  | dynamic predicate updates
-   | ``diamond`` (arrow ending with a black diamond)
+- | dynamic predicate updates
+  | ``diamond`` (arrow ending with a black diamond)
 
 The library, directory, file, entity, and predicate nodes that are not
 part of the predicates, entities, files, or libraries for which we are
@@ -297,9 +297,9 @@ diagrams").
 Sample helper scripts are provided for batch converting a directory of
 ``.dot`` files to ``.svg`` files:
 
--  ``lgt2svg.sh`` for POSIX systems
--  ``lgt2svg.ps1`` for Windows systems
--  ``lgt2svg.js`` and ``lgt2svg.bat`` for Windows systems (deprecated)
+- ``lgt2svg.sh`` for POSIX systems
+- ``lgt2svg.ps1`` for Windows systems
+- ``lgt2svg.js`` and ``lgt2svg.bat`` for Windows systems (deprecated)
 
 The scripts assume that the Graphviz command-line executables are
 available from the system path (the default is the ``dot`` executable
@@ -338,256 +338,255 @@ Customization
 A set of options are available to specify the details to include in the
 generated diagrams. For entity diagrams the options are:
 
--  | ``layout(Layout)``
-   | diagram layout (one of the atoms
-     ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
-     default is ``bottom_to_top``)
+- | ``layout(Layout)``
+  | diagram layout (one of the atoms
+    ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
+    default is ``bottom_to_top``)
 
--  | ``title(Title)``
-   | diagram title (an atom; default is ``''``)
+- | ``title(Title)``
+  | diagram title (an atom; default is ``''``)
 
--  | ``date(Boolean)``
-   | print current date and time (``true`` or ``false``; default is
-     ``true``)
+- | ``date(Boolean)``
+  | print current date and time (``true`` or ``false``; default is
+    ``true``)
 
--  | ``versions(Boolean)``
-   | print Logtalk and backend version data (``true`` or ``false``;
-     default is ``false``)
+- | ``versions(Boolean)``
+  | print Logtalk and backend version data (``true`` or ``false``;
+    default is ``false``)
 
--  | ``interface(Boolean)``
-   | print public predicates (``true`` or ``false``; default is
-     ``true``)
+- | ``interface(Boolean)``
+  | print public predicates (``true`` or ``false``; default is ``true``)
 
--  | ``file_labels(Boolean)``
-   | print file labels (``true`` or ``false``; default is ``true``)
+- | ``file_labels(Boolean)``
+  | print file labels (``true`` or ``false``; default is ``true``)
 
--  | ``file_extensions(Boolean)``
-   | print file name extensions (``true`` or ``false``; default is
-     ``true``)
+- | ``file_extensions(Boolean)``
+  | print file name extensions (``true`` or ``false``; default is
+    ``true``)
 
--  | ``relation_labels(Boolean)``
-   | print entity relation labels (``true`` or ``false``; default is
-     ``true``)
+- | ``relation_labels(Boolean)``
+  | print entity relation labels (``true`` or ``false``; default is
+    ``true``)
 
--  | ``externals(Boolean)``
-   | print external nodes (``true`` or ``false``; default is ``true``)
+- | ``externals(Boolean)``
+  | print external nodes (``true`` or ``false``; default is ``true``)
 
--  | ``node_type_captions(Boolean)``
-   | print node type captions (``true`` or ``false``; default is
-     ``true``)
+- | ``node_type_captions(Boolean)``
+  | print node type captions (``true`` or ``false``; default is
+    ``true``)
 
--  | ``inheritance_relations(Boolean)``
-   | print inheritance relations (``true`` or ``false``; default is
-     ``true`` for entity inheritance diagrams and ``false`` for other
-     entity diagrams)
+- | ``inheritance_relations(Boolean)``
+  | print inheritance relations (``true`` or ``false``; default is
+    ``true`` for entity inheritance diagrams and ``false`` for other
+    entity diagrams)
 
--  | ``provide_relations(Boolean)``
-   | print provide relations (``true`` or ``false``; default is
-     ``false``)
+- | ``provide_relations(Boolean)``
+  | print provide relations (``true`` or ``false``; default is
+    ``false``)
 
--  | ``xref_relations(Boolean)``
-   | print predicate call cross-reference relations (``true`` or
-     ``false``; default depends on the specific diagram)
+- | ``xref_relations(Boolean)``
+  | print predicate call cross-reference relations (``true`` or
+    ``false``; default depends on the specific diagram)
 
--  | ``xref_calls(Boolean)``
-   | print predicate cross-reference calls (``true`` or ``false``;
-     default depends on the specific diagram)
+- | ``xref_calls(Boolean)``
+  | print predicate cross-reference calls (``true`` or ``false``;
+    default depends on the specific diagram)
 
--  | ``output_directory(Directory)``
-   | directory for the .dot files (an atom; default is ``'./dot_dias'``)
+- | ``output_directory(Directory)``
+  | directory for the .dot files (an atom; default is ``'./dot_dias'``)
 
--  | ``exclude_directories(Directories)``
-   | list of directories to exclude (default is ``[]``); all
-     sub-directories of the excluded directories are also excluded;
-     directories may be listed by full or relative path
+- | ``exclude_directories(Directories)``
+  | list of directories to exclude (default is ``[]``); all
+    sub-directories of the excluded directories are also excluded;
+    directories may be listed by full or relative path
 
--  | ``exclude_files(Files)``
-   | list of source files to exclude (default is ``[]``); files may be
-     listed by full path or basename, with or without extension
+- | ``exclude_files(Files)``
+  | list of source files to exclude (default is ``[]``); files may be
+    listed by full path or basename, with or without extension
 
--  | ``exclude_libraries(Libraries)``
-   | list of libraries to exclude (default is
-     ``[startup, scratch_directory]``)
+- | ``exclude_libraries(Libraries)``
+  | list of libraries to exclude (default is
+    ``[startup, scratch_directory]``)
 
--  | ``exclude_entities(Entities)``
-   | list of entities to exclude (default is ``[]``)
+- | ``exclude_entities(Entities)``
+  | list of entities to exclude (default is ``[]``)
 
--  | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
-   | code and documenting URL prefixes for a path prefix used when
-     generating cluster, library, directory, file, and entity links
-     (atoms; no default; can be specified multiple times)
+- | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
+  | code and documenting URL prefixes for a path prefix used when
+    generating cluster, library, directory, file, and entity links
+    (atoms; no default; can be specified multiple times)
 
--  | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
-   | default URL code and documenting URL prefixes used when generating
-     cluster, library, file, and entity links (atoms; no default)
+- | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
+  | default URL code and documenting URL prefixes used when generating
+    cluster, library, file, and entity links (atoms; no default)
 
--  | ``entity_url_suffix_target(Suffix, Target)``
-   | extension for entity documenting URLs (an atom; default is
-     ``'.html'``) and target separating symbols (an atom; default is
-     ``'#'``)
+- | ``entity_url_suffix_target(Suffix, Target)``
+  | extension for entity documenting URLs (an atom; default is
+    ``'.html'``) and target separating symbols (an atom; default is
+    ``'#'``)
 
--  | ``omit_path_prefixes(Prefixes)``
-   | omit common path prefixes when printing directory paths and when
-     constructing URLs (a list of atoms; default is a list with the user
-     home directory)
+- | ``omit_path_prefixes(Prefixes)``
+  | omit common path prefixes when printing directory paths and when
+    constructing URLs (a list of atoms; default is a list with the user
+    home directory)
 
--  | ``zoom(Boolean)``
-   | generate sub-diagrams and add links and zoom icons to library and
-     entity nodes (``true`` or ``false``; default is ``false``)
+- | ``zoom(Boolean)``
+  | generate sub-diagrams and add links and zoom icons to library and
+    entity nodes (``true`` or ``false``; default is ``false``)
 
--  | ``zoom_url_suffix(Suffix)``
-   | extension for linked diagrams (an atom; default is ``'.svg'``)
+- | ``zoom_url_suffix(Suffix)``
+  | extension for linked diagrams (an atom; default is ``'.svg'``)
 
 In the particular case of cross-referencing diagrams, there are also the
 options:
 
--  | ``recursive_relations(Boolean)``
-   | print recursive predicate relations (``true`` or ``false``; default
-     is ``false``)
+- | ``recursive_relations(Boolean)``
+  | print recursive predicate relations (``true`` or ``false``; default
+    is ``false``)
 
--  | ``url_line_references(Host)``
-   | syntax for the URL source file line part (an atom; possible values
-     are ``{github,gitlab,bitbucket}``; default is ``github``); when
-     using this option, the ``CodeURLPrefix`` should be a permanent link
-     (i.e. it should include the commit SHA1)
+- | ``url_line_references(Host)``
+  | syntax for the URL source file line part (an atom; possible values
+    are ``{github,gitlab,bitbucket}``; default is ``github``); when
+    using this option, the ``CodeURLPrefix`` should be a permanent link
+    (i.e. it should include the commit SHA1)
 
--  | ``predicate_url_target_format(Generator)``
-   | documentation final format generator (an atom; default is
-     ``sphinx``)
+- | ``predicate_url_target_format(Generator)``
+  | documentation final format generator (an atom; default is
+    ``sphinx``)
 
 For directory and file diagrams the options are:
 
--  | ``layout(Layout)``
-   | diagram layout (one of the atoms
-     ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
-     default is ``top_to_bottom``)
+- | ``layout(Layout)``
+  | diagram layout (one of the atoms
+    ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
+    default is ``top_to_bottom``)
 
--  | ``title(Title)``
-   | diagram title (an atom; default is ``''``)
+- | ``title(Title)``
+  | diagram title (an atom; default is ``''``)
 
--  | ``date(Boolean)``
-   | print current date and time (``true`` or ``false``; default is
-     ``true``)
+- | ``date(Boolean)``
+  | print current date and time (``true`` or ``false``; default is
+    ``true``)
 
--  | ``versions(Boolean)``
-   | print Logtalk and backend version data (``true`` or ``false``;
-     default is ``false``)
+- | ``versions(Boolean)``
+  | print Logtalk and backend version data (``true`` or ``false``;
+    default is ``false``)
 
--  | ``directory_paths(Boolean)``
-   | print file directory paths (``true`` or ``false``; default is
-     ``false``)
+- | ``directory_paths(Boolean)``
+  | print file directory paths (``true`` or ``false``; default is
+    ``false``)
 
--  | ``file_extensions(Boolean)``
-   | print file name extensions (``true`` or ``false``; default is
-     ``true``)
+- | ``file_extensions(Boolean)``
+  | print file name extensions (``true`` or ``false``; default is
+    ``true``)
 
--  | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
-   | code and documenting URL prefixes for a path prefix used when
-     generating cluster, directory, file, and entity links (atoms; no
-     default; can be specified multiple times)
+- | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
+  | code and documenting URL prefixes for a path prefix used when
+    generating cluster, directory, file, and entity links (atoms; no
+    default; can be specified multiple times)
 
--  | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
-   | default URL code and documenting URL prefixes used when generating
-     cluster, library, file, and entity links (atoms; no default)
+- | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
+  | default URL code and documenting URL prefixes used when generating
+    cluster, library, file, and entity links (atoms; no default)
 
--  | ``omit_path_prefixes(Prefixes)``
-   | omit common path prefixes when printing directory paths and when
-     constructing URLs (a list of atoms; default is a list with the user
-     home directory)
+- | ``omit_path_prefixes(Prefixes)``
+  | omit common path prefixes when printing directory paths and when
+    constructing URLs (a list of atoms; default is a list with the user
+    home directory)
 
--  | ``relation_labels(Boolean)``
-   | print entity relation labels (``true`` or ``false``; default is
-     ``false``)
+- | ``relation_labels(Boolean)``
+  | print entity relation labels (``true`` or ``false``; default is
+    ``false``)
 
--  | ``externals(Boolean)``
-   | print external nodes (``true`` or ``false``; default is ``true``)
+- | ``externals(Boolean)``
+  | print external nodes (``true`` or ``false``; default is ``true``)
 
--  | ``node_type_captions(Boolean)``
-   | print node type captions (``true`` or ``false``; default is
-     ``false``)
+- | ``node_type_captions(Boolean)``
+  | print node type captions (``true`` or ``false``; default is
+    ``false``)
 
--  | ``output_directory(Directory)``
-   | directory for the .dot files (an atom; default is ``'./dot_dias'``)
+- | ``output_directory(Directory)``
+  | directory for the .dot files (an atom; default is ``'./dot_dias'``)
 
--  | ``exclude_directories(Directories)``
-   | list of directories to exclude (default is ``[]``)
+- | ``exclude_directories(Directories)``
+  | list of directories to exclude (default is ``[]``)
 
--  | ``exclude_files(Files)``
-   | list of source files to exclude (default is ``[]``)
+- | ``exclude_files(Files)``
+  | list of source files to exclude (default is ``[]``)
 
--  | ``zoom(Boolean)``
-   | generate sub-diagrams and add links and zoom icons to library and
-     entity nodes (``true`` or ``false``; default is ``false``)
+- | ``zoom(Boolean)``
+  | generate sub-diagrams and add links and zoom icons to library and
+    entity nodes (``true`` or ``false``; default is ``false``)
 
--  | ``zoom_url_suffix(Suffix)``
-   | extension for linked diagrams (an atom; default is ``'.svg'``)
+- | ``zoom_url_suffix(Suffix)``
+  | extension for linked diagrams (an atom; default is ``'.svg'``)
 
 For library diagrams the options are:
 
--  | ``layout(Layout)``
-   | diagram layout (one of the atoms
-     ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
-     default is ``top_to_bottom``)
+- | ``layout(Layout)``
+  | diagram layout (one of the atoms
+    ``{top_to_bottom,bottom_to_top,left_to_right,right_to_left}``;
+    default is ``top_to_bottom``)
 
--  | ``title(Title)``
-   | diagram title (an atom; default is ``''``)
+- | ``title(Title)``
+  | diagram title (an atom; default is ``''``)
 
--  | ``date(Boolean)``
-   | print current date and time (``true`` or ``false``; default is
-     ``true``)
+- | ``date(Boolean)``
+  | print current date and time (``true`` or ``false``; default is
+    ``true``)
 
--  | ``versions(Boolean)``
-   | print Logtalk and backend version data (``true`` or ``false``;
-     default is ``false``)
+- | ``versions(Boolean)``
+  | print Logtalk and backend version data (``true`` or ``false``;
+    default is ``false``)
 
--  | ``directory_paths(Boolean)``
-   | print file directory paths (``true`` or ``false``; default is
-     ``false``)
+- | ``directory_paths(Boolean)``
+  | print file directory paths (``true`` or ``false``; default is
+    ``false``)
 
--  | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
-   | code and documenting URL prefixes for a path prefix used when
-     generating cluster, library, file, and entity links (atoms; no
-     default; can be specified multiple times)
+- | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
+  | code and documenting URL prefixes for a path prefix used when
+    generating cluster, library, file, and entity links (atoms; no
+    default; can be specified multiple times)
 
--  | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
-   | default URL code and documenting URL prefixes used when generating
-     cluster, library, file, and entity links (atoms; no default)
+- | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
+  | default URL code and documenting URL prefixes used when generating
+    cluster, library, file, and entity links (atoms; no default)
 
--  | ``omit_path_prefixes(Prefixes)``
-   | omit common path prefixes when printing directory paths and when
-     constructing URLs (a list of atoms; default is a list with the user
-     home directory)
+- | ``omit_path_prefixes(Prefixes)``
+  | omit common path prefixes when printing directory paths and when
+    constructing URLs (a list of atoms; default is a list with the user
+    home directory)
 
--  | ``relation_labels(Boolean)``
-   | print entity relation labels (``true`` or ``false``; default is
-     ``false``)
+- | ``relation_labels(Boolean)``
+  | print entity relation labels (``true`` or ``false``; default is
+    ``false``)
 
--  | ``externals(Boolean)``
-   | print external nodes (``true`` or ``false``; default is ``true``)
+- | ``externals(Boolean)``
+  | print external nodes (``true`` or ``false``; default is ``true``)
 
--  | ``node_type_captions(Boolean)``
-   | print node type captions (``true`` or ``false``; default is
-     ``false``)
+- | ``node_type_captions(Boolean)``
+  | print node type captions (``true`` or ``false``; default is
+    ``false``)
 
--  | ``output_directory(Directory)``
-   | directory for the .dot files (an atom; default is ``'./dot_dias'``)
+- | ``output_directory(Directory)``
+  | directory for the .dot files (an atom; default is ``'./dot_dias'``)
 
--  | ``exclude_directories(Directories)``
-   | list of directories to exclude (default is ``[]``)
+- | ``exclude_directories(Directories)``
+  | list of directories to exclude (default is ``[]``)
 
--  | ``exclude_files(Files)``
-   | list of source files to exclude (default is ``[]``)
+- | ``exclude_files(Files)``
+  | list of source files to exclude (default is ``[]``)
 
--  | ``exclude_libraries(Libraries)``
-   | list of libraries to exclude (default is
-     ``[startup, scratch_directory]``)
+- | ``exclude_libraries(Libraries)``
+  | list of libraries to exclude (default is
+    ``[startup, scratch_directory]``)
 
--  | ``zoom(Boolean)``
-   | generate sub-diagrams and add links and zoom icons to library and
-     entity nodes (``true`` or ``false``; default is ``false``)
+- | ``zoom(Boolean)``
+  | generate sub-diagrams and add links and zoom icons to library and
+    entity nodes (``true`` or ``false``; default is ``false``)
 
--  | ``zoom_url_suffix(Suffix)``
-   | extension for linked diagrams (an atom; default is ``'.svg'``)
+- | ``zoom_url_suffix(Suffix)``
+  | extension for linked diagrams (an atom; default is ``'.svg'``)
 
 When using the ``zoom(true)`` option, the ``layout(Layout)`` option
 applies only to the top diagram; sub-diagrams will use their own layout
@@ -606,17 +605,17 @@ libraries or files for which you want to generated diagrams.
 Support for displaying Prolog modules and Prolog module files in
 diagrams of Logtalk applications:
 
--  | ECLiPSe
-   | file diagrams don't display module files
+- | ECLiPSe
+  | file diagrams don't display module files
 
--  | SICStus Prolog
-   | file diagrams don't display module files
+- | SICStus Prolog
+  | file diagrams don't display module files
 
--  | SWI-Prolog
-   | full support (uses the SWI-Prolog ``prolog_xref`` library)
+- | SWI-Prolog
+  | full support (uses the SWI-Prolog ``prolog_xref`` library)
 
--  | YAP
-   | full support (uses the YAP ``prolog_xref`` library)
+- | YAP
+  | full support (uses the YAP ``prolog_xref`` library)
 
 Linking diagrams
 ----------------
@@ -644,8 +643,8 @@ example, consider the Logtalk library. Its source code is available from
 a GitHub repository and its documentation is published in the Logtalk
 website. The relevant URLs in this case are:
 
--  https://github.com/LogtalkDotOrg/logtalk3/ (source code)
--  https://logtalk.org/library/ (API documentation)
+- https://github.com/LogtalkDotOrg/logtalk3/ (source code)
+- https://logtalk.org/library/ (API documentation)
 
 Git source code URLs should include the commit SHA1 to ensure that
 entity and predicate file line information in the URLs remain valid if

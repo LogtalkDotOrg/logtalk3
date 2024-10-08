@@ -112,11 +112,11 @@ accumulators can be implemented with arbitrary goals (like
 
 Benefits of this library:
 
--  avoid tedium and errors from manually threading accumulators through
-   your predicates
--  add or remove accumulators with a single declaration
--  change accumulator implementation with a single declaration (ex,
-   switching from ordsets to rbtrees)
+- avoid tedium and errors from manually threading accumulators through
+  your predicates
+- add or remove accumulators with a single declaration
+- change accumulator implementation with a single declaration (ex,
+  switching from ordsets to rbtrees)
 
 Syntax
 ------
@@ -125,32 +125,30 @@ Extended DCG syntax is very similar to DCG notation. An EDCG is created
 with clauses whose neck is the ``-->>`` operator. The following syntax
 is supported inside an EDCG clause:
 
--  ``{Goal}`` - don't expand any hidden arguments of ``Goal``
--  ``Goal`` - expand all hidden arguments of Goal that are also in the
-   head. Those hidden arguments not in the head are given default
-   values.
--  ``Goal:L`` - If ``Goal`` has no hidden arguments then force the
-   expansion of all arguments in ``L`` in the order given. If ``Goal``
-   has hidden arguments then expand all of them, using the contents of
-   ``L`` to override the expansion. ``L`` is either a term of the form
-   ``Acc``, ``Acc(Left,Right)``, ``Pass``, ``Pass(Value)``, or a list of
-   such terms. When present, the arguments ``Left``, ``Right``, and
-   ``Value`` override the default values of arguments not in the head.
--  ``List:Acc`` - Accumulate a list of terms in the accumulator ``Acc``
--  ``List`` - Accumulate a list of terms in the accumulator ``dcg``
--  ``X/Acc`` - Unify ``X`` with the left term for the accumulator
-   ``Acc``
--  ``Acc/X`` - Unify ``X`` with the right term for the accumulator
-   ``Acc``
--  ``X/Acc/Y`` - Unify ``X`` with the left and ``Y`` with the right term
-   for the accumulator ``Acc``
--  ``insert(X,Y):Acc`` - Insert the arguments ``X`` and ``Y`` into the
-   chain implementing the accumulator ``Acc``. This is useful when the
-   value of the accumulator changes radically because ``X`` and ``Y``
-   may be the arguments of an arbitrary relation
--  ``insert(X,Y)`` - Insert the arguments ``X`` and ``Y`` into the chain
-   implementing the accumulator ``dcg``. This inserts the difference
-   list X-Y into the accumulated list
+- ``{Goal}`` - don't expand any hidden arguments of ``Goal``
+- ``Goal`` - expand all hidden arguments of Goal that are also in the
+  head. Those hidden arguments not in the head are given default values.
+- ``Goal:L`` - If ``Goal`` has no hidden arguments then force the
+  expansion of all arguments in ``L`` in the order given. If ``Goal``
+  has hidden arguments then expand all of them, using the contents of
+  ``L`` to override the expansion. ``L`` is either a term of the form
+  ``Acc``, ``Acc(Left,Right)``, ``Pass``, ``Pass(Value)``, or a list of
+  such terms. When present, the arguments ``Left``, ``Right``, and
+  ``Value`` override the default values of arguments not in the head.
+- ``List:Acc`` - Accumulate a list of terms in the accumulator ``Acc``
+- ``List`` - Accumulate a list of terms in the accumulator ``dcg``
+- ``X/Acc`` - Unify ``X`` with the left term for the accumulator ``Acc``
+- ``Acc/X`` - Unify ``X`` with the right term for the accumulator
+  ``Acc``
+- ``X/Acc/Y`` - Unify ``X`` with the left and ``Y`` with the right term
+  for the accumulator ``Acc``
+- ``insert(X,Y):Acc`` - Insert the arguments ``X`` and ``Y`` into the
+  chain implementing the accumulator ``Acc``. This is useful when the
+  value of the accumulator changes radically because ``X`` and ``Y`` may
+  be the arguments of an arbitrary relation
+- ``insert(X,Y)`` - Insert the arguments ``X`` and ``Y`` into the chain
+  implementing the accumulator ``dcg``. This inserts the difference list
+  X-Y into the accumulated list
 
 Declaration of Predicates
 -------------------------
@@ -235,8 +233,8 @@ Applicative Programming in
 Prolog <https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/5471.html>`__
 by Peter Van Roy
 
--  The Tech Report's PDF is
-   `here <https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/CSD-90-583.pdf>`__
+- The Tech Report's PDF is
+  `here <https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/CSD-90-583.pdf>`__
 
 A short `Wikipedia
 article <https://en.wikipedia.org/wiki/Definite_clause_grammar#Extensions>`__
