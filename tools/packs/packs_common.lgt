@@ -326,7 +326,7 @@
 	verify_commands_availability(windows) :-
 		command('where /q git.exe', missing_command(git)),
 		command('where /q curl.exe', missing_command(curl)),
-		command('where /q wget.exe', missing_command(curl)),
+		command('where /q wget.exe', missing_command(wget)),
 		command('where /q tar.exe', missing_command(tar)),
 		command('where /q certutil.exe', missing_command(sha256sum)),
 		command('where /q gpg.exe', missing_command(gpg)).
