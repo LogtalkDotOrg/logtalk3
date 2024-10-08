@@ -319,7 +319,7 @@
 	verify_commands_availability(unix) :-
 		command('type git >/dev/null 2>&1', missing_command(git)),
 		command('type curl >/dev/null 2>&1', missing_command(curl)),
-		command('type wget >/dev/null 2>&1', missing_command(curl)),
+		command('type wget >/dev/null 2>&1', missing_command(wget)),
 		command('type bsdtar >/dev/null 2>&1', missing_command(bsdtar)),
 		command('type sha256sum >/dev/null 2>&1', missing_command(sha256sum)),
 		command('type gpg >/dev/null 2>&1', missing_command(gpg)).
