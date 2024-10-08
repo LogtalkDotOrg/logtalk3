@@ -820,7 +820,9 @@ predicates that accept a list of options:
 - ``checksum(Boolean)`` (default is ``true``)
 - ``checksig(Boolean)`` (default is ``false``)
 - ``git(Atom)`` (extra command-line options; default is ``''``)
+- ``downloader(Atom)`` (downloader utility; default is ``curl``)
 - ``curl(Atom)`` (extra command-line options; default is ``''``)
+- ``wget(Atom)`` (extra command-line options; default is ``''``)
 - ``gpg(Atom)`` (extra command-line options; default is ``''``)
 - ``tar(Atom)`` (extra command-line options; default is ``''``)
 
@@ -828,6 +830,9 @@ Note that, by default, only compatible packs can be installed. To
 install a pack that is incompatible with the current Logtalk version,
 backend version, or operating-system version, use the ``install/4`` or
 ``update/3`` predicates with the option ``compatible(false)``.
+
+When installing large packs over unreliable network conditions, you may
+try switching the default downloader utility from ``curl`` to ``wget``.
 
 When a pack may be already installed, you can use the ``update(true)``
 option to ensure that the installation will by updated to the specified

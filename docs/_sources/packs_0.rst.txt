@@ -478,6 +478,7 @@ Installs a new pack using the specified options. Fails if the pack is unknown or
     - ``verbose(Boolean)`` option: Verbose installing steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
+    - ``git(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``downloader(Atom)`` option: Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.
     - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``wget(Atom)`` option: Extra command-line options. Default is ``''``.
@@ -619,6 +620,7 @@ Updates an outdated pack to the specified version using the specified options. F
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
+    - ``git(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``downloader(Atom)`` option: Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.
     - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``wget(Atom)`` option: Extra command-line options. Default is ``''``.
@@ -669,6 +671,7 @@ Updates an outdated pack to its latest version using the specified options. Fail
     - ``verbose(Boolean)`` option: Verbose updating steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksum. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signature. Default is ``false``.
+    - ``git(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``downloader(Atom)`` option: Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.
     - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``wget(Atom)`` option: Extra command-line options. Default is ``''``.
@@ -982,6 +985,7 @@ Restores a list of registries and packs plus their pinning status from a file us
     - ``verbose(Boolean)`` option: Verbose restoring steps. Default is ``false``.
     - ``checksum(Boolean)`` option: Verify pack archive checksums. Default is ``true``.
     - ``checksig(Boolean)`` option: Verify pack archive signatures. Default is ``false``.
+    - ``git(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``downloader(Atom)`` option: Downloader utility. Either ``curl`` or ``wget``. Default is ``curl``.
     - ``curl(Atom)`` option: Extra command-line options. Default is ``''``.
     - ``wget(Atom)`` option: Extra command-line options. Default is ``''``.
