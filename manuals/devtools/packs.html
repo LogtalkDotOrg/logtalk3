@@ -95,6 +95,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#registry-handling">Registry handling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#registry-development">Registry development</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-specification">Pack specification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#encrypted-packs">Encrypted packs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-urls-and-single-sign-on">Pack URLs and Single Sign-On</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#multiple-pack-versions">Multiple pack versions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pack-dependencies">Pack dependencies</a></li>
@@ -472,9 +473,11 @@ which take a registry URL. Using the example above:</p>
 </pre></div>
 </div>
 <p>HTTPS URLs must end with either a <code class="docutils literal notranslate"><span class="pre">.git</span></code> extension or a an archive
-extension. Git cloning URLs are preferred but a registry can also be
-made available via a local directory (using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or a
-downloadable archive (using a <code class="docutils literal notranslate"><span class="pre">https://</span></code> URL).</p>
+extension (same valid extensions as for pack archives, including <code class="docutils literal notranslate"><span class="pre">gpg</span></code>
+encrypted). Git cloning URLs are preferred as they simplify updating
+registries. But a registry can also be made available via a local
+directory (using a <code class="docutils literal notranslate"><span class="pre">file://</span></code> URL) or a downloadable archive (using a
+<code class="docutils literal notranslate"><span class="pre">https://</span></code> URL).</p>
 <p>For registries made available using an archive, the
 <code class="docutils literal notranslate"><span class="pre">registries::add/2-3</span></code> predicates <strong>must</strong> be used as the registry name
 cannot in general be inferred from the URL basename or from the archived
@@ -611,12 +614,28 @@ formats and extensions are:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">.tgz</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.tbz2</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code></p></li>
 </ul>
+<p>Also, for encrypted packs, all the extensions above with a <code class="docutils literal notranslate"><span class="pre">.gpg</span></code>
+suffix (e.g. <code class="docutils literal notranslate"><span class="pre">.zip.gpg</span></code>).</p>
 <p>The pack sources should contain <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code> (or
 <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code>), and <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> (or <code class="docutils literal notranslate"><span class="pre">loader.logtalk</span></code>) files.
 Ideally, it should also contain a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> (<code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code>)
 file. The path to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> file is printed when the pack is
 installed or updated. It can also be queried using the
 <code class="docutils literal notranslate"><span class="pre">packs::directory/2</span></code> predicate.</p>
+</section>
+<section id="encrypted-packs">
+<h2>Encrypted packs<a class="headerlink" href="#encrypted-packs" title="Link to this heading"></a></h2>
+<p>Packs can be <code class="docutils literal notranslate"><span class="pre">gpg</span></code> encrypted, with a choice of passphrase-based
+encryption, key-based encryption, or both. Encrypted pack archives must
+always have a <code class="docutils literal notranslate"><span class="pre">.gpg</span></code> extension. For example, to encrypt a pack archive
+with a symmetric cipher using a passphrase:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> tar <span class="o">-</span>cvzf <span class="o">-</span> my_pack | gpg <span class="o">-</span>c <span class="o">--</span>cipher<span class="o">-</span>algo <span class="nv">AES256</span> <span class="o">&gt;</span> v1.<span class="m">2.1</span>.tar.gz.gpg
+</pre></div>
+</div>
+<p>In this case, the passphrase would need to be securely communicated to
+any users installing or updating the pack.</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">gpg</span></code> documentation for full details on encrypting and
+decrypting archives.</p>
 </section>
 <section id="pack-urls-and-single-sign-on">
 <h2>Pack URLs and Single Sign-On<a class="headerlink" href="#pack-urls-and-single-sign-on" title="Link to this heading"></a></h2>
@@ -882,13 +901,17 @@ using GitHub:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(reg, bar, <span class="m">1</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">2</span>, [curl(<span class="s">&#39;--header &quot;PRIVATE-TOKEN: foo42&quot;&#39;</span>)]).
 </pre></div>
 </div>
-<p>Pack archives may be encrypted, requiring passing the decryption
-passphrase when installing or updating a pack. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(reg, bar, <span class="m">1</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">2</span>, [tar(<span class="s">&#39;--passphrase test123&#39;</span>)]).
+<p>Pack archives may be <code class="docutils literal notranslate"><span class="pre">gpg</span></code> encrypted. Encryption can be
+passphrase-based, key-based, or both. When using only passphrase-based
+encryption, the archive passphrase must be entered (if not cached) when
+installing or updating a pack. In this case, the passphrase can be
+entered interactively or using the <code class="docutils literal notranslate"><span class="pre">gpg/1</span></code> option. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>install(reg, bar, <span class="m">1</span><span class="o">:</span><span class="m">1</span><span class="o">:</span><span class="m">2</span>, [gpg(<span class="s">&#39;--batch --passphrase test123&#39;</span>)]).
 </pre></div>
 </div>
-<p>In this case, you should be careful to not leak your passphrase in e.g.
-the query history.</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">gpg</span></code> documentation for details. When using the <code class="docutils literal notranslate"><span class="pre">gpg/1</span></code>
+option, you should be careful to not leak passphrases in e.g. the query
+history.</p>
 <p>To uninstall a pack that you no longer need, use the
 <code class="docutils literal notranslate"><span class="pre">packs::uninstall/1-2</span></code> predicates. By default, only packs with no
 dependent packs can be uninstalled. You can print or get a list of the

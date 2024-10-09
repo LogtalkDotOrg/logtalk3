@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:76:0,
+		version is 0:77:0,
 		author is 'Paulo Moura',
-		date is 2024-10-08,
+		date is 2024-10-09,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -2284,9 +2284,17 @@
 			Strip = 0
 		;	Strip = 1
 		),
-		(	^^option(verbose(true), Options) ->
-			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
-		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
+		(	decompose_file_name(Archive, _, _, '.gpg') ->
+			^^option(gpg(GpgExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['gpg ', GpgExtraOptions, ' -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip-components ', Strip, ' --directory "', OSPath, '" -xvf -'], Command)
+			;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip-components ', Strip, ' --directory "', OSPath, '" -xf -'],  Command)
+			)
+		;	% assume non-encrypted archive
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat([Tar, ' ', TarExtraOptions, ' -xvf "', Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
+			;	atomic_list_concat([Tar, ' ', TarExtraOptions, ' -xf "',  Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
+			)
 		),
 		^^command(Command, pack_archive_uncompress_failed(Pack, Archive)).
 

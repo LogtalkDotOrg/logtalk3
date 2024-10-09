@@ -382,9 +382,11 @@ which take a registry URL. Using the example above:
    | ?- registries::add('https://github.com/jdoe/jdoe_awesome_packs.git').
 
 HTTPS URLs must end with either a ``.git`` extension or a an archive
-extension. Git cloning URLs are preferred but a registry can also be
-made available via a local directory (using a ``file://`` URL) or a
-downloadable archive (using a ``https://`` URL).
+extension (same valid extensions as for pack archives, including ``gpg``
+encrypted). Git cloning URLs are preferred as they simplify updating
+registries. But a registry can also be made available via a local
+directory (using a ``file://`` URL) or a downloadable archive (using a
+``https://`` URL).
 
 For registries made available using an archive, the
 ``registries::add/2-3`` predicates **must** be used as the registry name
@@ -541,12 +543,33 @@ formats and extensions are:
 - ``.tgz``, ``.tar.gz``
 - ``.tbz2``, ``.tar.bz2``
 
+Also, for encrypted packs, all the extensions above with a ``.gpg``
+suffix (e.g. ``.zip.gpg``).
+
 The pack sources should contain ``LICENSE``, ``README.md`` (or
 ``NOTES.md``), and ``loader.lgt`` (or ``loader.logtalk``) files.
 Ideally, it should also contain a ``tester.lgt`` (``tester.logtalk``)
 file. The path to the ``README.md`` file is printed when the pack is
 installed or updated. It can also be queried using the
 ``packs::directory/2`` predicate.
+
+Encrypted packs
+---------------
+
+Packs can be ``gpg`` encrypted, with a choice of passphrase-based
+encryption, key-based encryption, or both. Encrypted pack archives must
+always have a ``.gpg`` extension. For example, to encrypt a pack archive
+with a symmetric cipher using a passphrase:
+
+::
+
+   $ tar -cvzf - my_pack | gpg -c --cipher-algo AES256 > v1.2.1.tar.gz.gpg
+
+In this case, the passphrase would need to be securely communicated to
+any users installing or updating the pack.
+
+See the ``gpg`` documentation for full details on encrypting and
+decrypting archives.
 
 Pack URLs and Single Sign-On
 ----------------------------
@@ -868,15 +891,19 @@ Another example when using GitLab:
 
    | ?- packs::install(reg, bar, 1:1:2, [curl('--header "PRIVATE-TOKEN: foo42"')]).
 
-Pack archives may be encrypted, requiring passing the decryption
-passphrase when installing or updating a pack. For example:
+Pack archives may be ``gpg`` encrypted. Encryption can be
+passphrase-based, key-based, or both. When using only passphrase-based
+encryption, the archive passphrase must be entered (if not cached) when
+installing or updating a pack. In this case, the passphrase can be
+entered interactively or using the ``gpg/1`` option. For example:
 
 ::
 
-   | ?- packs::install(reg, bar, 1:1:2, [tar('--passphrase test123')]).
+   | ?- packs::install(reg, bar, 1:1:2, [gpg('--batch --passphrase test123')]).
 
-In this case, you should be careful to not leak your passphrase in e.g.
-the query history.
+See the ``gpg`` documentation for details. When using the ``gpg/1``
+option, you should be careful to not leak passphrases in e.g. the query
+history.
 
 To uninstall a pack that you no longer need, use the
 ``packs::uninstall/1-2`` predicates. By default, only packs with no

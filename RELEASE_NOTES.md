@@ -79,6 +79,9 @@ the bug report.
 Tools
 -----
 
+* ADDED: Support to the `packs` tool for `gpg` encrypted pack and registry
+archives.
+
 * ADDED: Support to the `packs` tool to use `wget` in alternative to `curl`.
 
 * ADDED: Support to the `tutor` tool to explain selected `lgtunit`, `make`,
@@ -89,6 +92,9 @@ predicate directive.
 
 * FIXED: The `lgtdoc` tool to recognize consistency errors as standard
 exceptions.
+
+* FIXED: Missing space between the `tar` command and non-empty extra `tar`
+options in the `packs` tool.
 
 Examples
 --------

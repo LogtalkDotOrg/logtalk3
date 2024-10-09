@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:59:0,
+		version is 0:60:0,
 		author is 'Paulo Moura',
-		date is 2024-10-08,
+		date is 2024-10-09,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -969,9 +969,17 @@
 		make_registry_installation_directory(Registry, Path, OSPath),
 		^^tar_command(Tar),
 		^^option(tar(TarExtraOptions), Options),
-		(	^^option(verbose(true), Options) ->
-			atomic_list_concat([Tar, TarExtraOptions, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
-		;	atomic_list_concat([Tar, TarExtraOptions, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+		(	decompose_file_name(Archive, _, _, '.gpg') ->
+			^^option(gpg(GpgExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['gpg ', GpgExtraOptions, ' -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip 1 --directory "', OSPath, '" -xvf -'], Command)
+			;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip 1 --directory "', OSPath, '" -xf -'],  Command)
+			)
+		;	% assume non-encrypted archive
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat([Tar, ' ', TarExtraOptions, ' -xvf "', Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+			;	atomic_list_concat([Tar, ' ', TarExtraOptions, ' -xf "',  Archive, '" --strip 1 --directory "', OSPath, '"'], Command)
+			)
 		),
 		^^command(Command, registry_archive_uncompress_failed(Registry, OSPath)).
 
