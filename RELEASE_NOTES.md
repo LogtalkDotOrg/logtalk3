@@ -79,6 +79,8 @@ the bug report.
 Tools
 -----
 
+* ADDED: Requirements section to the documentation of the `lgtdoc` tool.
+
 * ADDED: Support to the `packs` tool for `gpg` encrypted pack and registry
 archives.
 

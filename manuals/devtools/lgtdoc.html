@@ -80,6 +80,7 @@
 <li class="toctree-l2"><a class="reference internal" href="help.html"><code class="docutils literal notranslate"><span class="pre">help</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="issue_creator.html"><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -153,6 +154,44 @@ with Sphinx), or plain text files. The scripts are described in their
 <code class="docutils literal notranslate"><span class="pre">man</span></code> pages and made available in the system path by default. See also
 the <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml/NOTES.md</span></code> for details, including the <strong>required
 third-party software</strong>.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>This tool requirements for converting the XML files it generated to a
+final format are as follows:</p>
+<ol class="arabic simple">
+<li><p>Converting XML files to (X)HTML, reStructuredText, Markdown, or plain
+text files requires a XSLT processor. The supported XSLT processors
+for Bash conversion scripts are:</p></li>
+</ol>
+<ul class="simple">
+<li><p><a class="reference external" href="http://xmlsoft.org/XSLT/">xsltproc</a></p></li>
+<li><p><a class="reference external" href="http://xml.apache.org/xalan-c/index.html">Xalan</a></p></li>
+<li><p><a class="reference external" href="http://saxon.sourceforge.net/">Saxon</a></p></li>
+</ul>
+<p>On Windows, the PowerShell scripts use the .Net XSLT classes.</p>
+<p>The reStructuredText files output is usually used as an intermediate
+step to generate Sphinx HTML, PDF, ePub, and Texinfo files. The
+additional requirements are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.sphinx-doc.org/">Sphinx</a></p></li>
+<li><p><a class="reference external" href="https://pygments.org/">Pygments</a></p></li>
+<li><p><a class="reference external" href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs
+theme</a></p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Converting XML files to PDF files XSL-FO processor. The supported
+XSL-FO processors for Bash and PowerShell conversion scripts are:</p></li>
+</ol>
+<ul class="simple">
+<li><p><a class="reference external" href="http://xmlgraphics.apache.org/fop/">Apache FOP processor</a></p></li>
+<li><p><a class="reference external" href="http://www.lunasil.com/index.html">Lunasil Xinc processor</a></p></li>
+<li><p><a class="reference external" href="http://www.renderx.com/">RenderX XEP processor</a></p></li>
+</ul>
+<p>For additional details, including compatible dependency versions and
+available conversion scripts, see the <code class="docutils literal notranslate"><span class="pre">xml/NOTES.md</span></code> file. See the
+<code class="docutils literal notranslate"><span class="pre">tools/NOTES.md</span></code> file for per operating-system installation
+instructions for the above dependencies.</p>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
