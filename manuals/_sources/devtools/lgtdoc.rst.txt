@@ -28,9 +28,9 @@ final format are as follows:
    text files requires a XSLT processor. The supported XSLT processors
    for Bash conversion scripts are:
 
-- `xsltproc <http://xmlsoft.org/XSLT/>`__
-- `Xalan <http://xml.apache.org/xalan-c/index.html>`__
-- `Saxon <http://saxon.sourceforge.net/>`__
+- xsltproc: https://gitlab.gnome.org/GNOME/libxslt/-/wikis/home
+- Xalan: https://xml.apache.org/xalan-c/index.html
+- Saxon: https://www.saxonica.com
 
 On Windows, the PowerShell scripts use the .Net XSLT classes.
 
@@ -38,17 +38,15 @@ The reStructuredText files output is usually used as an intermediate
 step to generate Sphinx HTML, PDF, ePub, and Texinfo files. The
 additional requirements are:
 
-- `Sphinx <https://www.sphinx-doc.org/>`__
-- `Pygments <https://pygments.org/>`__
-- `Read the Docs
-  theme <https://github.com/readthedocs/sphinx_rtd_theme>`__
+- Sphinx: https://www.sphinx-doc.org/
+- Pygments: https://pygments.org/
+- Read the Docs theme: https://github.com/readthedocs/sphinx_rtd_theme
 
 2. Converting XML files to PDF files XSL-FO processor. The supported
    XSL-FO processors for Bash and PowerShell conversion scripts are:
 
-- `Apache FOP processor <http://xmlgraphics.apache.org/fop/>`__
-- `Lunasil Xinc processor <http://www.lunasil.com/index.html>`__
-- `RenderX XEP processor <http://www.renderx.com/>`__
+- Apache FOP processor: http://xmlgraphics.apache.org/fop/
+- RenderX XEP processor: http://www.renderx.com/
 
 For additional details, including compatible dependency versions and
 available conversion scripts, see the ``xml/NOTES.md`` file. See the

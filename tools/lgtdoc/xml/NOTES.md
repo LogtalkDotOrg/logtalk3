@@ -157,7 +157,6 @@ Brief description of each directory and file in this folder:
 
 	Supported XSL-FO processors:  
 		* [Apache FOP processor](http://xmlgraphics.apache.org/fop/) (tested with version 0.94)  
-		* [Lunasil Xinc processor](http://www.lunasil.com/index.html) (tested with version 2.02)  
 		* [RenderX XEP processor](http://www.renderx.com/) (tested with version 3.8.1)  
 
 	FOP 2.x is also supported but requires generating the XML documentation
@@ -176,10 +175,10 @@ Brief description of each directory and file in this folder:
 	to all the converted files.
 
 	Supported XSLT processors for Bash and JScript scripts:  
-		* [xsltproc](http://xmlsoft.org/XSLT/) (tested with version 1.1.8)  
-		* [Xalan](http://xml.apache.org/xalan-c/index.html) (tested with version 1.7.0)  
+		* [xsltproc](https://gitlab.gnome.org/GNOME/libxslt/-/wikis/home) (tested with version 1.1.8)  
+		* [Xalan](https://xml.apache.org/xalan-c/index.html) (tested with version 1.7.0)  
 		* [Microsoft MSXSL](http://msdn.microsoft.com/XML/XMLDownloads/default.aspx) (only for the Windows JScript script)
-		* [Saxon](http://saxon.sourceforge.net/) (tested with version 9.5.1.1; JAR version)  
+		* [Saxon](https://www.saxonica.com/) (tested with version 9.5.1.1; JAR version)  
 
 	The PowerShell scripts use the .Net XSLT classes.
 
