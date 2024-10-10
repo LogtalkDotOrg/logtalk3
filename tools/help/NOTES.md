@@ -26,6 +26,17 @@ when running in most operating-systems. For help on the Logtalk compiler
 error and warning messages, see the `tutor` tool.
 
 
+Requirements
+------------
+
+On Windows, the `start` command must be available. On Linux, the `xdg-open`
+command must be available. On macOS, the command `open` is used.
+
+Experimental features for browsing the Handbook and APIs documentation at
+the top-level require Texinfo to be installed. See the `tools/NOTES.md` file
+for per operating-system installation instructions.
+
+
 API documentation
 -----------------
 
@@ -55,15 +66,14 @@ Supported operating-systems
 
 Currently, support is limited to Linux, macOS, and Windows.
 
-On Windows, the `start` command must be available. On Linux, the `xdg-open`
-command must be available. On macOS, the command `open` is used.
-
 This tool relies on the library portable operating-system access abstraction.
+
 
 Usage
 -----
 
 After loading the tool, use the query `help::help` to get started.
+
 
 Experimental features
 ---------------------
@@ -122,6 +132,7 @@ On Linux systems, use the distribution own package manager to install the
 `texinfo` package. For example, in Ubuntu systems:
 
 	$ sudo apt install info
+
 
 Known issues
 ------------

@@ -78,6 +78,7 @@
 <li class="toctree-l2"><a class="reference internal" href="diagrams.html"><code class="docutils literal notranslate"><span class="pre">diagrams</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="doclet.html"><code class="docutils literal notranslate"><span class="pre">doclet</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">help</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -144,6 +145,16 @@
 <p>This tool provides basic on-line help for Logtalk features and libraries
 when running in most operating-systems. For help on the Logtalk compiler
 error and warning messages, see the <code class="docutils literal notranslate"><span class="pre">tutor</span></code> tool.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>On Windows, the <code class="docutils literal notranslate"><span class="pre">start</span></code> command must be available. On Linux, the
+<code class="docutils literal notranslate"><span class="pre">xdg-open</span></code> command must be available. On macOS, the command <code class="docutils literal notranslate"><span class="pre">open</span></code>
+is used.</p>
+<p>Experimental features for browsing the Handbook and APIs documentation
+at the top-level require Texinfo to be installed. See the
+<code class="docutils literal notranslate"><span class="pre">tools/NOTES.md</span></code> file for per operating-system installation
+instructions.</p>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
@@ -167,9 +178,6 @@ directory.</p>
 <section id="supported-operating-systems">
 <h2>Supported operating-systems<a class="headerlink" href="#supported-operating-systems" title="Link to this heading"></a></h2>
 <p>Currently, support is limited to Linux, macOS, and Windows.</p>
-<p>On Windows, the <code class="docutils literal notranslate"><span class="pre">start</span></code> command must be available. On Linux, the
-<code class="docutils literal notranslate"><span class="pre">xdg-open</span></code> command must be available. On macOS, the command <code class="docutils literal notranslate"><span class="pre">open</span></code>
-is used.</p>
 <p>This tool relies on the library portable operating-system access
 abstraction.</p>
 </section>

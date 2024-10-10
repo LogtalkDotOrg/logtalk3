@@ -72,13 +72,16 @@ the shell scripts ``../scripts/update_html_docs.sh`` and
 Tools common flags
 ------------------
 
-The ``lgtdoc`` and ``lgtunit`` tools share a ``suppress_path_prefix``
-flag that can be used to suppress a prefix when printing file paths. For
-example (after loading the tools):
+The ``lgtdoc``, ``lgtunit``, and ``issue_creator`` tools share a
+``suppress_path_prefix`` flag that can be used to suppress a prefix when
+printing file paths. For example (after loading the tools):
 
 ::
 
    | ?- set_logtalk_flag(suppress_path_prefix, '/home/jdoe/').
+
+This flag is mainly used to avoid user specific path prefixes appearing
+in documentation, test logs, and bug reports.
 
 Tools requirements
 ------------------

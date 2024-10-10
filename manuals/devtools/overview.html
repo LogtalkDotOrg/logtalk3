@@ -210,12 +210,14 @@ the shell scripts <code class="docutils literal notranslate"><span class="pre">.
 </section>
 <section id="tools-common-flags">
 <h2>Tools common flags<a class="headerlink" href="#tools-common-flags" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> and <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tools share a <code class="docutils literal notranslate"><span class="pre">suppress_path_prefix</span></code>
-flag that can be used to suppress a prefix when printing file paths. For
-example (after loading the tools):</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>, <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code>, and <code class="docutils literal notranslate"><span class="pre">issue_creator</span></code> tools share a
+<code class="docutils literal notranslate"><span class="pre">suppress_path_prefix</span></code> flag that can be used to suppress a prefix when
+printing file paths. For example (after loading the tools):</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">set_logtalk_flag</span>(suppress_path_prefix, <span class="s">&#39;/home/jdoe/&#39;</span>).
 </pre></div>
 </div>
+<p>This flag is mainly used to avoid user specific path prefixes appearing
+in documentation, test logs, and bug reports.</p>
 </section>
 <section id="tools-requirements">
 <h2>Tools requirements<a class="headerlink" href="#tools-requirements" title="Link to this heading"></a></h2>

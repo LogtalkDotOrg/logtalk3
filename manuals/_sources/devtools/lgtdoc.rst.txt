@@ -13,15 +13,13 @@ options for generating the XML files, including the output directory.
 The ``lgtdoc/xml`` directory contains several ready to use Bash and
 PowerShell scripts for converting the XML documenting files into final
 formats including (X)HTML, PDF, Markdown, and reStructuredText (for use
-with Sphinx), or plain text files. The scripts are described in their
-``man`` pages and made available in the system path by default. See also
-the ``lgtdoc/xml/NOTES.md`` for details, including the **required
-third-party software**.
+with Sphinx), and plain text files. The scripts are described in their
+``man`` pages and made available in the system path by default.
 
 Requirements
 ------------
 
-This tool requirements for converting the XML files it generated to a
+This tool requirements for converting the XML files it generates to a
 final format are as follows:
 
 1. Converting XML files to (X)HTML, reStructuredText, Markdown, or plain
