@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 1, 2024
+##   Last updated on October 11, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 19.0"
+	echo "$(basename "$0") 20.0"
 	exit 0
 }
 
@@ -593,16 +593,16 @@ fi
 declare drivers
 declare testsets
 if [ "$exclude" == "" ] ; then
-	drivers="$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
-	testsets=$(find "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	drivers="$(find -L "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
+	testsets=$(find -L "$base" $level -type f -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
 	find_exit=$?
 elif [ "$(uname)" == "Darwin" ] ; then
-	drivers="$(find -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
-	testsets=$(find -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	drivers="$(find -L -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
+	testsets=$(find -L -E "$base" $level -type f -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
 	find_exit=$?
 else
-	drivers="$(find "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
-	testsets=$(find "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
+	drivers="$(find -L "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | LC_ALL=C sort)"
+	testsets=$(find -L "$base" $level -type f -regextype posix-extended -not -regex "$exclude" -name "$driver.lgt" -or -name "$driver.logtalk" | wc -l | tr -d ' ')
 	find_exit=$?
 fi
 

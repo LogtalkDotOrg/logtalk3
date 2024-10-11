@@ -100,6 +100,9 @@ exceptions.
 * FIXED: Missing space between the `tar` command and non-empty extra `tar`
 options in the `packs` tool.
 
+* FIXED: The `logtalk_tester.sh` script to follow symbolic links when looking
+for test driver files. Thanks to Lindsey Spratt for the bug report.
+
 Examples
 --------
 
