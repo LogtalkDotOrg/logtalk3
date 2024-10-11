@@ -78,7 +78,7 @@ Regular expression for excluding directories (using the \fIfind\fR command suppo
 Integration script command-line options (no default).
 .TP
 .BI \-g
-Initialization goal. Default is \fItrue\fR (no period). Called after loading the Logtalk compiler and runtime.
+Initialization goal. Default is \fItrue\fR (no period). Called after loading the Logtalk compiler/runtime and before running the tests.
 .TP
 .BI \-r
 Random generator starting seed (no default).
@@ -135,6 +135,14 @@ Run all tests on the current directory and sub-directories using the SWI-Prolog 
 .TP
 Run all tests on the current directory and sub-directories using the Tau Prolog backend, caching the compilation of the testing tool for better performance, but wiping the test set default scratch directories before running it:
 \fBlogtalk_tester -p tau -g "set_logtalk_flag(clean,off)" -w\fR
+.PP
+.TP
+Change the default Logtalk compiler scratch directory for compiling the tests:
+\fBlogtalk_tester -p sicstus -g "set_logtalk_flag(scratch_directory,'$LOGTALKUSER/scratch')"\fR
+.PP
+.TP
+Allow parallel Logtalk processes to run the same tests concurrently:
+\fBlogtalk_tester -p xvm "-i $LOGTALKUSER/library/parallel_logtalk_processes_setup.pl"\fR
 .PP
 .TP
 Run the Logtalk distribution tests using the Trealla Prolog backend, passing a base URL that can be used for creating links to the test files:

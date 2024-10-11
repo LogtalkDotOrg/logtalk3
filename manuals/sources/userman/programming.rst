@@ -93,8 +93,8 @@ performance (by avoiding repeated recompilation of the
 To run parallel Logtalk processes with the ``clean`` flag turned off, each
 process must use its own :term:`scratch directory`. This is accomplished
 by defining the ``scratch_directory`` library alias to a per process
-location. For example, assuming we're using GNU Prolog as the backend, a
-possible definition could be:
+location **before** loading the compiler/runtime. For example, assuming
+we're using GNU Prolog as the backend, a possible definition could be:
 
 ::
 
@@ -120,8 +120,9 @@ file, we would then start Logtalk using:
 The details on how to define and load the definition of the ``scratch_directory``
 library alias are, however, backend specific (due to the lack of Prolog
 standardization) and possibly also operating-system specific (different
-locations for the temporary directory). The Logtalk library contains support
-for selected backends.
+locations for the temporary directory). The Logtalk library includes a
+``parallel_logtalk_processes_setup.pl`` file with support for selected
+backends and usage instructions.
 
 .. _programming_source_files:
 

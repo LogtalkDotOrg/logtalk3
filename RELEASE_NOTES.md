@@ -53,6 +53,8 @@ Documentation
 * IMPROVED: Handbook glossary entries for "predicate", "method", "sender",
 and "this".
 
+* IMPROVED: Handbook section on running parallel Logtalk processes.
+
 * IMPROVED: Documentation of the `packs` tool on working with packs using
 `git archive` URLs.
 
@@ -90,6 +92,8 @@ archives.
 
 * ADDED: Support to the `tutor` tool to explain selected `lgtunit`, `make`,
 and `packs` tool error messages.
+
+* IMPROVED: Man page of the `logtalk_tester.sh` script.
 
 * UPDATED: The `lgtdoc` tool to process the new `fails_if` key of the `info/2`
 predicate directive.
