@@ -50,7 +50,8 @@ and `(*->)/2` control constructs.
 Documentation
 -------------
 
-* IMPROVED: Handbook glossary entries for "predicate" and "method".
+* IMPROVED: Handbook glossary entries for "predicate", "method", "sender",
+and "this".
 
 * IMPROVED: Documentation of the `packs` tool on working with packs using
 `git archive` URLs.

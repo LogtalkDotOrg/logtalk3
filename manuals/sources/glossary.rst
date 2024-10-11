@@ -499,7 +499,7 @@ Glossary
    sender
       An object that sends a :term:`message` to other object. When a message
       is sent from within a :term:`category`, the *sender* is the object
-      importing the category.
+      importing the category on which behalf the message was sent.
 
    super call
       Call of an inherited (or imported) :term:`predicate definition`. Mainly
@@ -556,8 +556,8 @@ Glossary
    this
       The object that contains the predicate clause under execution. When
       the predicate clause is contained in a :term:`category`, *this* is a
-      reference to the object importing the category for which the predicate
-      clause is being used to prove the current goal.
+      reference to the object importing the category on which behalf the
+      predicate clause is being used to prove the current goal.
 
    dynamic binding
       Runtime lookup of a :term:`predicate declaration` and
