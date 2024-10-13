@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:32:0,
+		version is 0:32:1,
 		author is 'Paulo Moura',
-		date is 2024-10-08,
+		date is 2024-10-13,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -370,6 +370,12 @@
 	supported_archive('.tar.gz').
 	supported_archive('.tbz2').
 	supported_archive('.tar.bz2').
+	% gpg encrypted packs
+	supported_archive('.zip.gpg').
+	supported_archive('.tgz.gpg').
+	supported_archive('.tar.gz.gpg').
+	supported_archive('.tbz2.gpg').
+	supported_archive('.tar.bz2.gpg').
 
 	supported_url_archive(URL) :-
 		supported_archive(Extension),

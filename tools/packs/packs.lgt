@@ -1567,9 +1567,9 @@
 			fail
 		;	lint_check_versions(Pack, PackObject)
 		).
-	lint_check(notes, _Registry, RegistryObject) :-
+	lint_check(notes, _Pack, PackObject) :-
 		forall(
-			RegistryObject::note(Action, Version, Note),
+			PackObject::note(Action, Version, Note),
 			lint_check_note(Action, Version, Note)
 		).
 
