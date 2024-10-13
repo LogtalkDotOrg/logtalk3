@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2021-11-03,
+		date is 2024-10-13,
 		comment is 'A local registry for testing.'
 	]).
 
@@ -37,5 +37,7 @@
 	clone('file:///home/johndoe/local_1_d.git').
 
 	archive('file:///home/johndoe/local_1_d/master.zip').
+
+	note(update, 'Check for deprecated packs.').
 
 :- end_object.

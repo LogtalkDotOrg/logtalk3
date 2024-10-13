@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:27:0,
+		version is 0:28:0,
 		author is 'Paulo Moura',
-		date is 2024-03-26,
+		date is 2024-10-13,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -139,6 +139,9 @@
 
 	test(packs_packs_help_0_01, true) :-
 		packs::help.
+
+	test(packs_packs_verify_commands_availability_0_01, true) :-
+		packs::verify_commands_availability.
 
 	% now we add a local registry
 

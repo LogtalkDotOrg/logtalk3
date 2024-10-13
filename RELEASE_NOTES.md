@@ -93,6 +93,8 @@ archives.
 * ADDED: Support to the `tutor` tool to explain selected `lgtunit`, `make`,
 and `packs` tool error messages.
 
+* IMPROVED: Tests code coverage for the `packs` tool.
+
 * IMPROVED: Man page of the `logtalk_tester.sh` script.
 
 * UPDATED: The `lgtdoc` tool to process the new `fails_if` key of the `info/2`
