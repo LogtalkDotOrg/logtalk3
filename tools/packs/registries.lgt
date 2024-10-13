@@ -972,8 +972,8 @@
 		(	decompose_file_name(Archive, _, _, '.gpg') ->
 			^^option(gpg(GpgExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
-				atomic_list_concat(['gpg ', GpgExtraOptions, ' -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip 1 --directory "', OSPath, '" -xvf -'], Command)
-			;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip 1 --directory "', OSPath, '" -xf -'],  Command)
+				atomic_list_concat(['gpg ', GpgExtraOptions, ' -v -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip 1 --directory "', OSPath, '" -xvf -'], Command)
+			;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -q -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip 1 --directory "', OSPath, '" -xf -'],  Command)
 			)
 		;	% assume non-encrypted archive
 			(	^^option(verbose(true), Options) ->

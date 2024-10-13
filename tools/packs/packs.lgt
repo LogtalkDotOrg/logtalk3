@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:77:0,
+		version is 0:78:0,
 		author is 'Paulo Moura',
-		date is 2024-10-09,
+		date is 2024-10-13,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -934,7 +934,7 @@
 		^^print_readme_file_path(Path).
 
 	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options) :-
-		download(Registry, Pack, URL, Options, Archive, Downloader),
+		download(Registry, Pack, URL, Options, Archive, IsGitArchive),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
@@ -945,7 +945,7 @@
 			verify_checksig(Pack, Archive, ArchiveSig, Options)
 		;	true
 		),
-		uncompress(Pack, Archive, Path, Options, Downloader),
+		uncompress(Pack, Archive, Path, Options, IsGitArchive),
 		save_version(Path, Version),
 		save_registry(Path, Registry),
 		^^print_readme_file_path(Path),
@@ -2190,7 +2190,7 @@
 		internal_os_path(Path, OSPath),
 		make_directory_path(Path).
 
-	download(Registry, Pack, URL, Options, Archive, Downloader) :-
+	download(Registry, Pack, URL, Options, Archive, IsGitArchive) :-
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, packs, ArchivesPacks),
@@ -2202,9 +2202,23 @@
 		make_directory_path(ArchivesPacksRegistryPack),
 		(	file_exists(Archive) ->
 			(	git_archive_url(URL, _, _) ->
-				Downloader = git
-			;	Downloader = curl
+				IsGitArchive = true
+			;	IsGitArchive = false
 			)
+		;	atom_concat('file://', File, URL) ->
+			internal_os_path(File, OSFile),
+			(	operating_system_type(windows) ->
+				(	^^option(verbose(true), Options) ->
+					atomic_list_concat(['xcopy /y "', OSFile, '" "', Archive, '"'], Command)
+				;	atomic_list_concat(['xcopy /y /q "', OSFile, '" "', Archive, '"'], Command)
+				)
+			;	% assume POSIX
+				(	^^option(verbose(true), Options) ->
+					atomic_list_concat(['cp -v "', OSFile, '" "', Archive, '"'], Command)
+				;	atomic_list_concat(['cp "', OSFile, '" "', Archive, '"'], Command)
+				)
+			),
+			^^command(Command, pack_file_copy_failed(Pack, URL))
 		;	git_archive_url(URL, Remote, Tag) ->
 			^^option(git(GitExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
@@ -2212,7 +2226,7 @@
 			;	atomic_list_concat(['git archive ', GitExtraOptions, ' -o "',    Archive, '" --remote="', Remote, '" ', Tag], Command)
 			),
 			(	^^command(Command, pack_archive_download_failed(Pack, Command)) ->
-				Downloader = git
+				IsGitArchive = true
 			;	% when the remote connection fails, git archive still creates an empty file
 				file_exists(Archive),
 				file_size(Archive, 0),
@@ -2226,7 +2240,7 @@
 			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Archive, '" "', URL, '"'], Command)
 			),
 			^^command(Command, pack_archive_download_failed(Pack, Command)),
-			Downloader = curl
+			IsGitArchive = false
 		;	% ^^option(downloader(wget), Options),
 			^^option(wget(WgetExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
@@ -2234,7 +2248,7 @@
 			;	atomic_list_concat(['wget ', WgetExtraOptions, ' -q -O "', Archive, '" "', URL, '"'], Command)
 			),
 			^^command(Command, pack_archive_download_failed(Pack, Command)),
-			Downloader = wget
+			IsGitArchive = false
 		).
 
 	git_archive_url(URL, Remote, Tag) :-
@@ -2270,25 +2284,25 @@
 		(	^^option(verbose(true), Options) ->
 			atomic_list_concat(['gpg ', GpgExtraOptions, ' -v --verify "', ArchiveSig, '" "', Archive, '"'],                  Command)
 		;	operating_system_type(windows) ->
-			atomic_list_concat(['gpg ', GpgExtraOptions, ' --verify "',    ArchiveSig, '" "', Archive, '" > nul 2>&1'],       Command)
-		;	atomic_list_concat(['gpg ', GpgExtraOptions, ' --verify "',    ArchiveSig, '" "', Archive, '" > /dev/null 2>&1'], Command)
+			atomic_list_concat(['gpg ', GpgExtraOptions, ' -q --verify "',    ArchiveSig, '" "', Archive, '" > nul 2>&1'],       Command)
+		;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -q --verify "',    ArchiveSig, '" "', Archive, '" > /dev/null 2>&1'], Command)
 		),
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).
 
-	uncompress(Pack, Archive, Path, Options, Downloader) :-
+	uncompress(Pack, Archive, Path, Options, IsGitArchive) :-
 		clean_pack_installation_directory(Pack, Path, Options, OSPath),
 		make_directory_path(Path),
 		^^tar_command(Tar),
 		^^option(tar(TarExtraOptions), Options),
-		(	Downloader == git ->
+		(	IsGitArchive == true ->
 			Strip = 0
 		;	Strip = 1
 		),
 		(	decompose_file_name(Archive, _, _, '.gpg') ->
 			^^option(gpg(GpgExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
-				atomic_list_concat(['gpg ', GpgExtraOptions, ' -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip-components ', Strip, ' --directory "', OSPath, '" -xvf -'], Command)
-			;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip-components ', Strip, ' --directory "', OSPath, '" -xf -'],  Command)
+				atomic_list_concat(['gpg ', GpgExtraOptions, ' -v -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip-components ', Strip, ' --directory "', OSPath, '" -xvf -'], Command)
+			;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -q -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip-components ', Strip, ' --directory "', OSPath, '" -xf -'],  Command)
 			)
 		;	% assume non-encrypted archive
 			(	^^option(verbose(true), Options) ->

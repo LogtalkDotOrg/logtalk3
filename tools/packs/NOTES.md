@@ -689,6 +689,17 @@ the pack. Otherwise, the files in the directory are copied to the pack
 installation directory. This allows the pack to be installed, updated,
 and uninstalled without consequences for the pack source files.
 
+You can also use a local archive instad of a directory. For example:
+
+	version(
+		1:0:0,
+		stable,
+		'file:///home/jdoe/work/my_awesome_library/v1.0.0.tar.gz',
+		sha256 - '1944773afba1908cc6194297ff6b5ac649a844ef69a69b2bcdf267cfa8bfce1e',
+		[],
+		all
+	).
+
 Packs that are expected to be fully portable should always be checked by
 loading them with the `portability` flag set to `warning`.
 

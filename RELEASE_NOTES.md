@@ -85,6 +85,9 @@ Tools
 * ADDED: Requirements section to the documentation of the `help` and `lgtdoc`
 tools.
 
+* ADDED: Support to the `packs` tool for installing and updating packs from
+local archives.
+
 * ADDED: Support to the `packs` tool for `gpg` encrypted pack and registry
 archives.
 

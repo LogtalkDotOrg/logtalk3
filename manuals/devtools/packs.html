@@ -792,6 +792,17 @@ from a local directory. For example:</p>
 the pack. Otherwise, the files in the directory are copied to the pack
 installation directory. This allows the pack to be installed, updated,
 and uninstalled without consequences for the pack source files.</p>
+<p>You can also use a local archive instad of a directory. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>version(
+    <span class="m">1</span><span class="o">:</span><span class="m">0</span><span class="o">:</span><span class="m">0</span>,
+    stable,
+    <span class="s">&#39;file:///home/jdoe/work/my_awesome_library/v1.0.0.tar.gz&#39;</span>,
+    sha256 <span class="o">-</span> <span class="s">&#39;1944773afba1908cc6194297ff6b5ac649a844ef69a69b2bcdf267cfa8bfce1e&#39;</span>,
+    [],
+    all
+).
+</pre></div>
+</div>
 <p>Packs that are expected to be fully portable should always be checked by
 loading them with the <code class="docutils literal notranslate"><span class="pre">portability</span></code> flag set to <code class="docutils literal notranslate"><span class="pre">warning</span></code>.</p>
 <p>To check your packs specifications, use the <code class="docutils literal notranslate"><span class="pre">packs::lint/0-2</span></code>

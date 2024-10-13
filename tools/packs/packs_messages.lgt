@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:34:0,
+		version is 0:35:0,
 		author is 'Paulo Moura',
-		date is 2024-05-24,
+		date is 2024-10-13,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -305,6 +305,9 @@
 
 	message_tokens(pack_directory_not_found(Pack, Directory)) -->
 		['Pack directory not found: ~q (~q)'-[Pack, Directory], nl].
+
+	message_tokens(pack_file_copy_failed(Pack, Command)) -->
+		['Pack archive copy failed: ~q (~q)'-[Pack, Command], nl].
 
 	message_tokens(pack_archive_download_failed(Pack, Command)) -->
 		['Pack archive download failed: ~q (~q)'-[Pack, Command], nl].

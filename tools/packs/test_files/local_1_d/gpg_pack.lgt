@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -19,10 +18,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(local_1_d_registry),
-	logtalk_load(alt_pack),
-	logtalk_load(bar_pack),
-	logtalk_load(foo_pack),
-	logtalk_load(gpg_pack)
-)).
+:- object(gpg_pack,
+	implements(pack_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2024-10-13,
+		comment is 'A local pack for testing.'
+	]).
+
+	name(gpg).
+
+	description('A local encrypted pack for testing').
+
+	license('Apache-2.0').
+
+	home('file://test_files/gpg').
+
+	version(
+		1:0:0,
+		stable,
+		'file://test_files/gpg/v1.0.0.tar.gz.gpg',
+		sha256 - '1944773afba1908cc6194297ff6b5ac649a844ef69a69b2bcdf267cfa8bfce1e',
+		[logtalk @>= 3:42:0],
+		all
+	).
+
+:- end_object.
