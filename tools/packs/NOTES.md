@@ -264,6 +264,12 @@ using their loader files:
 		...
 	)).
 
+Note that restoring encrypted registries or encrypted packs requires entering
+the required passphrases. Although the `restore/2` predicate accepts a list of
+options that include the `gpg/1` option, this only allows specifying a single
+and common passphrase when interactive entering of passphrases is not
+convenient or possible.
+
 
 Registry specification
 ----------------------

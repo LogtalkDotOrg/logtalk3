@@ -384,6 +384,11 @@ packs using their loader files:</p>
 )).
 </pre></div>
 </div>
+<p>Note that restoring encrypted registries or encrypted packs requires
+entering the required passphrases. Although the <code class="docutils literal notranslate"><span class="pre">restore/2</span></code> predicate
+accepts a list of options that include the <code class="docutils literal notranslate"><span class="pre">gpg/1</span></code> option, this only
+allows specifying a single and common passphrase when interactive
+entering of passphrases is not convenient or possible.</p>
 </section>
 <section id="registry-specification">
 <h2>Registry specification<a class="headerlink" href="#registry-specification" title="Link to this heading"></a></h2>
