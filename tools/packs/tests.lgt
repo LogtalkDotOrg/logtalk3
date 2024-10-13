@@ -102,7 +102,7 @@
 		packs::installed(_, _, _, _).
 
 	test(packs_packs_installed_3_01, false) :-
-		packs::installed(_, _, _, _).
+		packs::installed(_, _, _).
 
 	test(packs_packs_outdated_0_01, true) :-
 		packs::outdated.
@@ -311,6 +311,11 @@
 
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
 		packs::dependents(local_2_d, baz, Dependents).
+
+	% print installed packs
+
+	test(packs_packs_installed_1_01, true) :-
+		packs::installed(local_1_d).
 
 	% update all installed packs
 

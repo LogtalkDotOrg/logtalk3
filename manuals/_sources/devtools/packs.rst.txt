@@ -569,7 +569,13 @@ In this case, the passphrase would need to be securely communicated to
 any users installing or updating the pack.
 
 See the ``gpg`` documentation for full details on encrypting and
-decrypting archives.
+decrypting archives. If you get a "gpg: problem with the agent:
+Inappropriate ioctl for device" error message with the command above,
+try:
+
+::
+
+   $ export GPG_TTY=$(tty)
 
 Pack URLs and Single Sign-On
 ----------------------------

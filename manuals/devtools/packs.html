@@ -635,7 +635,12 @@ with a symmetric cipher using a passphrase:</p>
 <p>In this case, the passphrase would need to be securely communicated to
 any users installing or updating the pack.</p>
 <p>See the <code class="docutils literal notranslate"><span class="pre">gpg</span></code> documentation for full details on encrypting and
-decrypting archives.</p>
+decrypting archives. If you get a “gpg: problem with the agent:
+Inappropriate ioctl for device” error message with the command above,
+try:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> export <span class="nv">GPG_TTY</span><span class="o">=</span><span class="err">$</span>(tty)
+</pre></div>
+</div>
 </section>
 <section id="pack-urls-and-single-sign-on">
 <h2>Pack URLs and Single Sign-On<a class="headerlink" href="#pack-urls-and-single-sign-on" title="Link to this heading"></a></h2>
