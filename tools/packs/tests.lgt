@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:29:0,
+		version is 0:30:0,
 		author is 'Paulo Moura',
-		date is 2024-10-13,
+		date is 2024-10-14,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -48,11 +48,21 @@
 		% setting the working directory; but this hack to allow testing
 		% pack installation may not work with all backend Prolog systems
 		object_property(packs, file(_, Directory)),
-		os::change_directory(Directory).
+		os::change_directory(Directory),
+		% create a temporary key to test checking of pack signatures
+		os::make_directory_path('.ring'),
+		atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --quick-gen-key --batch --passphrase "" test_packs@logtalk.org'], Command1),
+		os::shell(Command1),
+		atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz"'], Command2),
+		os::shell(Command2).
 
 	cleanup :-
 		packs::reset,
-		^^clean_file('test_files/setup.txt').
+		^^clean_file('test_files/setup.txt'),
+		^^clean_file('test_files/sig/v1.0.0.tar.gz.asc'),
+		object_property(packs, file(_, Directory)),
+		atomic_list_concat([Directory, '.ring'], Ring),
+		os::delete_directory_and_contents(Ring).
 
 	% we start with no defined registries or installed packs
 
@@ -189,7 +199,7 @@
 	test(packs_registries_readme_1_01, true) :-
 		registries::readme(local_1_d).
 
-	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-bar, local_1_d-foo, local_1_d-gpg])) :-
+	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
 	test(packs_registries_update_1_01, true) :-
@@ -229,7 +239,7 @@
 	test(packs_packs_versions_3_01, true(Versions == [2:0:0,1:0:0])) :-
 		packs::versions(local_1_d, foo, Versions).
 
-	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-bar, local_1_d-foo, local_1_d-gpg])) :-
+	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
@@ -308,6 +318,11 @@
 
 	test(packs_packs_install_4_07, true) :-
 		packs::install(local_1_d, gpg, 1:0:0, [gpg('--no-sig-cache --batch --passphrase test123')]).
+
+	test(packs_packs_install_4_08, true) :-
+		os::working_directory(Directory),
+		atomic_list_concat(['--homedir "', Directory, '.ring"'], Homedir),
+		packs::install(local_1_d, sig, 1:0:0, [checksig(true), gpg(Homedir)]).
 
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
 		packs::dependents(local_2_d, baz, Dependents).
