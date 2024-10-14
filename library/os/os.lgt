@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:100:2,
+		version is 1:101:0,
 		author is 'Paulo Moura',
-		date is 2024-03-25,
+		date is 2024-10-14,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -2318,6 +2318,30 @@
 			).
 
 	:- endif.
+
+	delete_directory_contents(Directory) :-
+		absolute_file_name(Directory, Path),
+		(	directory_exists(Path) ->
+			internal_os_path(Path, OSPath),
+			(	environment_variable('COMSPEC', _) ->
+				{atomic_list_concat(['cd "', OSPath, '" && rmdir /S /Q .'], Command)}
+			;	{atomic_list_concat(['cd "', OSPath, '" && rm -rf *'], Command)}
+			),
+			shell(Command)
+		;	existence_error(directory, Directory)
+		).
+
+	delete_directory_and_contents(Directory) :-
+		absolute_file_name(Directory, Path),
+		(	directory_exists(Path) ->
+			internal_os_path(Path, OSPath),
+			(	environment_variable('COMSPEC', _) ->
+				{atomic_list_concat(['rmdir "', OSPath, '" /S /Q'], Command)}
+			;	{atomic_list_concat(['rm -rf "', OSPath, '"'], Command)}
+			),
+			shell(Command)
+		;	existence_error(directory, Directory)
+		).
 
 	operating_system_name(Name) :-
 		(	environment_variable('COMSPEC', _) ->

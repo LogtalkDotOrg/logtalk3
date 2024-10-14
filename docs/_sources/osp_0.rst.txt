@@ -14,8 +14,8 @@ Portable operating-system access protocol.
 |    ``logtalk_load(os(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:38:1
-| **Date:** 2024-03-25
+| **Version:** 1:39:0
+| **Date:** 2024-10-14
 
 | **Compilation flags:**
 |    ``static``
@@ -264,6 +264,44 @@ Deletes an empty directory. Throws an error if the directory does not exist.
 |    ``delete_directory(Directory)``
 | **Mode and number of proofs:**
 |    ``delete_directory(+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: delete_directory_contents/1
+.. _osp/0::delete_directory_contents/1:
+
+``delete_directory_contents/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes directory contents. Throws an error if the directory does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_directory_contents(Directory)``
+| **Mode and number of proofs:**
+|    ``delete_directory_contents(+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: delete_directory_and_contents/1
+.. _osp/0::delete_directory_and_contents/1:
+
+``delete_directory_and_contents/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deletes directory and its contents. Throws an error if the directory does not exist.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_directory_and_contents(Directory)``
+| **Mode and number of proofs:**
+|    ``delete_directory_and_contents(+atom)`` - ``one_or_error``
 
 
 ------------

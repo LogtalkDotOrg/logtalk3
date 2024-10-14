@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:38:0,
 		author is 'Paulo Moura',
-		date is 2024-03-25,
+		date is 2024-10-14,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -311,6 +311,40 @@
 
 	test(os_delete_directory_1_02, error(_)) :-
 		os::delete_directory(non_existing_directory).
+
+	test(os_delete_directory_contents_1_01, true) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::path_concat(Directory, test_directory, TestDirectory),
+		os::ensure_directory(TestDirectory),
+		os::path_concat(TestDirectory, sub_directory, SubDirectory),
+		os::ensure_directory(SubDirectory),
+		os::path_concat(TestDirectory, file, File),
+		os::ensure_file(File),
+		os::delete_directory_contents(TestDirectory),
+		os::directory_exists(TestDirectory),
+		\+ os::directory_exists(SubDirectory),
+		\+ os::file_exists(File).
+
+	test(os_delete_directory_contents_1_02, error(_)) :-
+		os::delete_directory_contents(non_existing_directory).
+
+	test(os_delete_directory_and_contents_1_01, true) :-
+		this(This),
+		object_property(This, file(_,Directory)),
+		os::path_concat(Directory, test_directory, TestDirectory),
+		os::ensure_directory(TestDirectory),
+		os::path_concat(TestDirectory, sub_directory, SubDirectory),
+		os::ensure_directory(SubDirectory),
+		os::path_concat(TestDirectory, file, File),
+		os::ensure_file(File),
+		os::delete_directory_and_contents(TestDirectory),
+		\+ os::directory_exists(TestDirectory),
+		\+ os::directory_exists(SubDirectory),
+		\+ os::file_exists(File).
+
+	test(os_delete_directory_and_contents_1_02, error(_)) :-
+		os::delete_directory_and_contents(non_existing_directory).
 
 	test(os_working_directory_01, true(atom(WorkingDirectory))) :-
 		os::working_directory(WorkingDirectory).

@@ -71,6 +71,9 @@ methods.
 predicates directly instead of using the `expand_term/2` and `expand_goal/2`
 built-in methods.
 
+* ADDED: Predicates `delete_directory_and_contents/1` and
+`delete_directory_contents/1` to the `os` library.
+
 * ADDED: Additional tests for the `dictionaries` library.
 
 * IMPROVED: Documentation of the `dictionaries` library predicates.

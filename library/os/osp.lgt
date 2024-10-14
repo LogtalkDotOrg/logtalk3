@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:38:1,
+		version is 1:39:0,
 		author is 'Paulo Moura',
-		date is 2024-03-25,
+		date is 2024-10-14,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -114,6 +114,20 @@
 	:- mode(delete_directory(+atom), one_or_error).
 	:- info(delete_directory/1, [
 		comment is 'Deletes an empty directory. Throws an error if the directory does not exist.',
+		argnames is ['Directory']
+	]).
+
+	:- public(delete_directory_contents/1).
+	:- mode(delete_directory_contents(+atom), one_or_error).
+	:- info(delete_directory_contents/1, [
+		comment is 'Deletes directory contents. Throws an error if the directory does not exist.',
+		argnames is ['Directory']
+	]).
+
+	:- public(delete_directory_and_contents/1).
+	:- mode(delete_directory_and_contents(+atom), one_or_error).
+	:- info(delete_directory_and_contents/1, [
+		comment is 'Deletes directory and its contents. Throws an error if the directory does not exist.',
 		argnames is ['Directory']
 	]).
 
