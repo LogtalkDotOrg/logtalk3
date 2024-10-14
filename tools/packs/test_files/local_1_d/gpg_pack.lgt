@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-10-13,
+		date is 2024-10-14,
 		comment is 'A local pack for testing.'
 	]).
 
@@ -40,7 +40,7 @@
 		1:0:0,
 		stable,
 		'file://test_files/gpg/v1.0.0.tar.gz.gpg',
-		sha256 - '1944773afba1908cc6194297ff6b5ac649a844ef69a69b2bcdf267cfa8bfce1e',
+		sha256 - '3389a340a47744a662f74970ac95f2cc457a248adf149d50ed1c10caac6203e3',
 		[logtalk @>= 3:42:0],
 		all
 	).

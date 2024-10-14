@@ -40,7 +40,7 @@
 		1:0:0,
 		stable,
 		'file://test_files/sig/v1.0.0.tar.gz',
-		sha256 - 'e0b64ed92c4d3a0f0345afc73b5e12103200381dcffdcee85ad746e1f9fbd4b7',
+		sha256 - '27ddfdb1bfd6efd86f4c1627bd7409ff0f9092551193007ca0d576c1f49fa959',
 		[logtalk @>= 3:42:0],
 		all
 	).
