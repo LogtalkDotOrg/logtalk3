@@ -320,7 +320,7 @@
 		packs::install(local_1_d, gpg, 1:0:0, [gpg('--no-sig-cache --batch --passphrase test123')]).
 
 	test(packs_packs_install_4_08, true) :-
-		os::working_directory(Directory),
+		object_property(packs, file(_, Directory)),
 		atomic_list_concat(['--homedir "', Directory, '.ring"'], Homedir),
 		packs::install(local_1_d, sig, 1:0:0, [checksig(true), gpg(Homedir)]).
 
