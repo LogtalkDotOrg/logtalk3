@@ -2209,8 +2209,8 @@
 			internal_os_path(File, OSFile),
 			(	operating_system_type(windows) ->
 				(	^^option(verbose(true), Options) ->
-					atomic_list_concat(['xcopy /y "', OSFile, '" "', Archive, '"'], Command)
-				;	atomic_list_concat(['xcopy /y /q "', OSFile, '" "', Archive, '"'], Command)
+					atomic_list_concat(['echo f | xcopy /y "', OSFile, '" "', Archive, '"'], Command)
+				;	atomic_list_concat(['echo f | xcopy /y /q "', OSFile, '" "', Archive, '"'], Command)
 				)
 			;	% assume POSIX
 				(	^^option(verbose(true), Options) ->
