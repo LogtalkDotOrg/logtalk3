@@ -56,7 +56,7 @@ and "this".
 * IMPROVED: Handbook section on running parallel Logtalk processes.
 
 * IMPROVED: Documentation of the `packs` tool on working with packs using
-`git archive` URLs.
+`git archive` URLs, signing packs, and encrypting packs.
 
 Library
 -------

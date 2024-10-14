@@ -534,6 +534,23 @@ for device" error message with the command above, try:
 	$ export GPG_TTY=$(tty)
 
 
+Signed packs
+------------
+
+Packs can be `gpg` signed. Detached signature files are assumed and expected
+to share the name of the archive and use a `.asc` extension. For example, if
+the pack archive name is `v1.0.0.tar.gz`, the signature file must be named
+`v1.0.0.tar.gz.asc`. When the `checksig(true)` option is used, the signature
+file is automatically downloaded using a URL constructed from the pack archive
+URL. An example of signing a pack (and creating the `.asc` file) assuming the
+default key is:
+
+	$ gpg --armor --detach-sign v1.0.0.tar.gz
+
+See the `gpg` documentation for full details on signing archives and sharing
+the public keys required to verify the signatures.
+
+
 Pack URLs and Single Sign-On
 ----------------------------
 
@@ -952,10 +969,7 @@ index third-party packs.
 
 Pack checksums are checked by default. But pack signatures are only checked
 if requested as packs are often unsigned. Care should be taken when adding
-public keys for pack signers to your local system. Detached signature files
-are assumed and expected to share the name of the archive and use a `.asc`
-extension. When the `checksig(true)` option is used, the signature file is
-automatically downloaded using a URL constructed from the pack archive URL.
+public keys for pack signers to your local system.
 
 Registry and pack spec files plus the registry loader file are compiled
 by term-expanding them so that only expected terms are actually loaded and
