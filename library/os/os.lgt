@@ -51,7 +51,7 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:101:0,
+		version is 1:101:1,
 		author is 'Paulo Moura',
 		date is 2024-10-14,
 		comment is 'Portable operating-system access predicates.',
@@ -299,7 +299,10 @@
 
 		delete_file(File) :-
 			absolute_file_name(File, ExpandedPath),
-			{delete_file(ExpandedPath)}.
+			(	{file_exists(ExpandedPath)} ->
+				{delete_file(ExpandedPath)}
+			;	existence_error(file, File)
+			).
 
 		copy_file(File, Copy) :-
 			absolute_file_name(File, FilePath),

@@ -82,6 +82,8 @@ built-in methods.
 module library when running with this backend. Thanks to Alex Kouznetsov for
 the bug report.
 
+* FIXED: The definition of the `os::delete_file/1` library predicate for YAP.
+
 Tools
 -----
 
