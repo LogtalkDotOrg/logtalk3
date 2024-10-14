@@ -2324,7 +2324,7 @@
 		(	directory_exists(Path) ->
 			internal_os_path(Path, OSPath),
 			(	environment_variable('COMSPEC', _) ->
-				{atomic_list_concat(['cd "', OSPath, '" && rmdir /S /Q .'], Command)}
+				{atomic_list_concat(['cd "', OSPath, '" && rmdir . /s /q 2> nul & cd .'], Command)}
 			;	{atomic_list_concat(['cd "', OSPath, '" && rm -rf *'], Command)}
 			),
 			shell(Command)

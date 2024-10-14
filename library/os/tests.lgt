@@ -315,7 +315,7 @@
 	test(os_delete_directory_contents_1_01, true) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		os::path_concat(Directory, test_directory, TestDirectory),
+		os::path_concat(Directory, test_sub_directory, TestDirectory),
 		os::ensure_directory(TestDirectory),
 		os::path_concat(TestDirectory, sub_directory, SubDirectory),
 		os::ensure_directory(SubDirectory),
@@ -332,7 +332,7 @@
 	test(os_delete_directory_and_contents_1_01, true) :-
 		this(This),
 		object_property(This, file(_,Directory)),
-		os::path_concat(Directory, test_directory, TestDirectory),
+		os::path_concat(Directory, test_sub_directory, TestDirectory),
 		os::ensure_directory(TestDirectory),
 		os::path_concat(TestDirectory, sub_directory, SubDirectory),
 		os::ensure_directory(SubDirectory),
