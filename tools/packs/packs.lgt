@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:78:0,
+		version is 0:79:0,
 		author is 'Paulo Moura',
-		date is 2024-10-13,
+		date is 2024-10-15,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -2289,7 +2289,7 @@
 		),
 		^^command(Command, pack_archive_checksig_failed(Pack, Archive)).
 
-	uncompress(Pack, Archive, Path, Options, IsGitArchive) :-
+	uncompress(Pack, Archive0, Path, Options, IsGitArchive) :-
 		clean_pack_installation_directory(Pack, Path, Options, OSPath),
 		make_directory_path(Path),
 		^^tar_command(Tar),
@@ -2298,19 +2298,25 @@
 			Strip = 0
 		;	Strip = 1
 		),
-		(	decompose_file_name(Archive, _, _, '.gpg') ->
+		(	decompose_file_name(Archive0, _, _, '.gpg') ->
+			% gpg encrypted archive
+			sub_atom(Archive0, 0, _, 4, Archive),
 			^^option(gpg(GpgExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->
-				atomic_list_concat(['gpg ', GpgExtraOptions, ' -v -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip-components ', Strip, ' --directory "', OSPath, '" -xvf -'], Command)
-			;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -q -d ', Archive, ' | ', Tar, ' ', TarExtraOptions, ' --strip-components ', Strip, ' --directory "', OSPath, '" -xf -'],  Command)
-			)
+				atomic_list_concat(['gpg ', GpgExtraOptions, ' --output "', Archive, '" -v -d "', Archive0, '"'], DecryptCommand)
+			;	operating_system_type(windows) ->
+				atomic_list_concat(['gpg ', GpgExtraOptions, ' --output "', Archive, '" -q -d "', Archive0, '" > nul 2>&1'], DecryptCommand)
+			;	atomic_list_concat(['gpg ', GpgExtraOptions, ' --output "', Archive, '" -q -d "', Archive0, '" > /dev/null 2>&1'], DecryptCommand)
+			),
+			^^command(DecryptCommand, pack_archive_decrypt_failed(Pack, Archive0))
 		;	% assume non-encrypted archive
-			(	^^option(verbose(true), Options) ->
-				atomic_list_concat([Tar, ' ', TarExtraOptions, ' -xvf "', Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
-			;	atomic_list_concat([Tar, ' ', TarExtraOptions, ' -xf "',  Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], Command)
-			)
+			Archive = Archive0
 		),
-		^^command(Command, pack_archive_uncompress_failed(Pack, Archive)).
+		(	^^option(verbose(true), Options) ->
+			atomic_list_concat([Tar, ' ', TarExtraOptions, ' -xvf "', Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], UncompressCommand)
+		;	atomic_list_concat([Tar, ' ', TarExtraOptions, ' -xf "',  Archive, '" --strip-components ', Strip, ' --directory "', OSPath, '"'], UncompressCommand)
+		),
+		^^command(UncompressCommand, pack_archive_uncompress_failed(Pack, Archive)).
 
 	% installed pack version data handling
 

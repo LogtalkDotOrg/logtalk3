@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:30:0,
+		version is 0:31:0,
 		author is 'Paulo Moura',
-		date is 2024-10-14,
+		date is 2024-10-15,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -51,13 +51,20 @@
 		os::change_directory(Directory),
 		% create a temporary key to test checking of pack signatures
 		os::make_directory_path('.ring'),
-		atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --quick-gen-key --batch --passphrase "" test_packs@logtalk.org'], Command1),
+		(	os::operating_system_type(windows) ->
+			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --quick-gen-key --batch --passphrase "" test_packs@logtalk.org > nul 2>&1'], Command1)
+		;	atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --quick-gen-key --batch --passphrase "" test_packs@logtalk.org > /dev/null 2>&1'], Command1)
+		),
 		os::shell(Command1),
-		atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz"'], Command2),
+		(	os::operating_system_type(windows) ->
+			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz" > nul 2>&1'], Command2)
+		;	atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz" > /dev/null 2>&1'], Command2)
+		),
 		os::shell(Command2).
 
 	cleanup :-
 		packs::reset,
+		^^clean_file('.gpg'),
 		^^clean_file('test_files/setup.txt'),
 		^^clean_file('test_files/sig/v1.0.0.tar.gz.asc'),
 		object_property(packs, file(_, Directory)),
@@ -316,10 +323,13 @@
 	test(packs_packs_install_4_06, true(Version-Pinned == (1:0:0)-false)) :-
 		packs::installed(local_1_d, alt, Version, Pinned).
 
-	test(packs_packs_install_4_07, true) :-
-		packs::install(local_1_d, gpg, 1:0:0, [gpg('--no-sig-cache --batch --passphrase test123')]).
+	test(packs_packs_install_4_07, false) :-
+		packs::install(local_1_d, gpg, 1:0:0, [gpg('--no-sig-cache --batch --passphrase wrong456')]).
 
 	test(packs_packs_install_4_08, true) :-
+		packs::install(local_1_d, gpg, 1:0:0, [gpg('--no-sig-cache --batch --passphrase test123')]).
+
+	test(packs_packs_install_4_09, true) :-
 		object_property(packs, file(_, Directory)),
 		atomic_list_concat(['--homedir "', Directory, '.ring"'], Homedir),
 		packs::install(local_1_d, sig, 1:0:0, [checksig(true), gpg(Homedir)]).
