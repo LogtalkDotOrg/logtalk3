@@ -2282,7 +2282,7 @@
 	verify_checksig(Pack, Archive, ArchiveSig, Options) :-
 		^^option(gpg(GpgExtraOptions), Options),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat(['gpg ', GpgExtraOptions, ' -v --verify "', ArchiveSig, '" "', Archive, '"'],                  Command)
+			atomic_list_concat(['gpg ', GpgExtraOptions, ' -v --verify "', ArchiveSig, '" "', Archive, '"'], Command)
 		;	operating_system_type(windows) ->
 			atomic_list_concat(['gpg ', GpgExtraOptions, ' -q --verify "',    ArchiveSig, '" "', Archive, '" > nul 2>&1'],       Command)
 		;	atomic_list_concat(['gpg ', GpgExtraOptions, ' -q --verify "',    ArchiveSig, '" "', Archive, '" > /dev/null 2>&1'], Command)
