@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -19,13 +18,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(local_1_d_registry),
-	logtalk_load(alt_pack),
-	logtalk_load(bar_pack),
-	logtalk_load(foo_pack),
-	logtalk_load(gpg_pack),
-	logtalk_load(badsig_pack),
-	logtalk_load(sig_pack),
-	logtalk_load(badcheck_pack)
-)).
+:- object(badcheck_pack,
+	implements(pack_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2024-10-15,
+		comment is 'A local pack for testing.'
+	]).
+
+	name(badcheck).
+
+	description('A local pack with a bad checksum for testing').
+
+	license('Apache-2.0').
+
+	home('file://test_files/badcheck').
+
+	version(
+		1:0:0,
+		stable,
+		'file://test_files/badcheck/v1.0.0.tar.gz',
+		sha256 - 'c7ddfdb1bfd6afd81f4c1627bd7409ff0f90928511930079a0d576c1f49fa159',
+		[logtalk @>= 3:42:0],
+		all
+	).
+
+:- end_object.
