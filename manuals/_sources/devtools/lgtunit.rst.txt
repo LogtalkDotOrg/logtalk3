@@ -946,9 +946,9 @@ Selecting tests
 
 While debugging an application, we often want to temporarily run just a
 selection of relevant tests. This is specially useful when running all
-the tests slows down and distracts testing fixes for a specific issue.
-This can be accomplished by prefixed the clause heads of the selected
-tests with the ``(+)/1`` operator. For example:
+the tests slows down and distracts from testing fixes for a specific
+issue. This can be accomplished by prefixed the clause heads of the
+selected tests with the ``(+)/1`` operator. For example:
 
 ::
 
