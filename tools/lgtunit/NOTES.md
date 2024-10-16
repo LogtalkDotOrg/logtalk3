@@ -821,6 +821,37 @@ conditional compilation directives can also be used in alternative but note
 that in this case there will be no report on the number of skipped tests.
 
 
+Selecting tests
+---------------
+
+While debugging an application, we often want to temporarily run just a
+selection of relevant tests. This is specially useful when running all the
+tests slows down and distracts testing fixes for a specific issue. This can
+be accomplished by prefixed the clause heads of the selected tests with the
+`(+)/1` operator. For example:
+
+	:- object(tests,
+		extends(lgtunit)).
+	
+		cover(ack).
+	
+		test(ack_1, true(Result == 11)) :-
+			ack::ack(2, 4, Result).
+	
+		+ test(ack_2, true(Result == 61)) :-
+			ack::ack(3, 3, Result).
+	
+		test(ack_3, true(Result == 125)) :-
+			ack::ack(3, 4, Result).
+	
+	:- end_object.
+
+In this case, only the `ack_2` would run. Just be careful to remove all
+`(+)/1` test prefixes when done debugging the issue that prompted you to
+run just the selected tests. After, be sure to run all the tests to ensure
+there are no regressions introduced by your fixes.
+
+
 Checking test goal results
 --------------------------
 

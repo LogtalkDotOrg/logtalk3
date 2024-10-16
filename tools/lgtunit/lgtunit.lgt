@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 19:0:0,
+		version is 19:1:0,
 		author is 'Paulo Moura',
-		date is 2024-08-24,
+		date is 2024-10-16,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -794,6 +794,14 @@
 		argnames is ['Identifier', 'Test']
 	]).
 
+	:- private(selected_test_/1).
+	:- dynamic(selected_test_/1).
+	:- mode(selected_test_(?callable), zero_or_more).
+	:- info(selected_test_/1, [
+		comment is 'Table of selected tests for execution.',
+		argnames is ['Identifier']
+	]).
+
 	:- private(skipped_/1).
 	:- dynamic(skipped_/1).
 	:- mode(skipped_(?integer), zero_or_one).
@@ -1370,7 +1378,8 @@
 	reset_compilation_counters :-
 		retractall(auxiliary_predicate_counter_(_)),
 		assertz(auxiliary_predicate_counter_(0)),
-		retractall(test_(_, _)).
+		retractall(test_(_, _)),
+		retractall(selected_test_(_)).
 
 	increment_skipped_tests_counter :-
 		::retract(skipped_(Old)),
@@ -1427,6 +1436,18 @@
 			assertz(test_(Test, skipped(Test, Position, Note)))
 		;	assertz(test_(Test, skipped(Test, Position)))
 		).
+
+	% selected tests
+	term_expansion((+ Head), Expansion) :-
+		nonvar(Head),
+		test_idiom_head(Head, Test),
+		term_expansion((Head), Expansion),
+		assertz(selected_test_(Test)).
+	term_expansion((+ Head :- Body), Expansion) :-
+		nonvar(Head),
+		test_idiom_head(Head, Test),
+		term_expansion((Head :- Body), Expansion),
+		assertz(selected_test_(Test)).
 
 	% unit test idiom test/3
 	term_expansion((test(Test, Outcome0, Options) :- Goal0), [(test(Test, Variables, Outcome) :- Goal)]) :-
@@ -1563,10 +1584,17 @@
 
 	% collect all unit test identifiers when reaching the end_object/0 directive
 	directive_expansion(end_object, Terms) :-
-		findall(1, test_(_, _), Ones),
-		length(Ones, Total),
 		logtalk_load_context(source, File),
-		findall(test(Test, Spec), test_(Test, Spec), Terms, [number_of_tests(Total), (run_tests :- ::run_tests(File)), (:- end_object)]).
+		(	selected_test_(_) ->
+			% run just the selected tests
+			findall(1, selected_test_(_), Ones),
+			length(Ones, Total),
+			findall(test(Test, Spec), (selected_test_(Test), test_(Test, Spec)), Terms, [number_of_tests(Total), (run_tests :- ::run_tests(File)), (:- end_object)])
+		;	% run all tests
+			findall(1, test_(_, _), Ones),
+			length(Ones, Total),
+			findall(test(Test, Spec), test_(Test, Spec), Terms, [number_of_tests(Total), (run_tests :- ::run_tests(File)), (:- end_object)])
+		).
 
 	filter_discontiguous_directive(PIs, Filtered) :-
 		flatten_to_list(PIs, List),

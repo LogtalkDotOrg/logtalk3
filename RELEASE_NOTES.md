@@ -87,6 +87,8 @@ the bug report.
 Tools
 -----
 
+* ADDED: Support for running just a selection of tests to the `lgtunit` tool.
+
 * ADDED: Requirements section to the documentation of the `help` and `lgtdoc`
 tools.
 

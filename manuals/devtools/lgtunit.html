@@ -92,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#user-defined-test-dialects">User-defined test dialects</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#quickcheck">QuickCheck</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#skipping-tests">Skipping tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#selecting-tests">Selecting tests</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#checking-test-goal-results">Checking test goal results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-local-predicates">Testing local predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-non-deterministic-predicates">Testing non-deterministic predicates</a></li>
@@ -1009,6 +1010,35 @@ the <code class="docutils literal notranslate"><span class="pre">test/3</span></
 The conditional compilation directives can also be used in alternative
 but note that in this case there will be no report on the number of
 skipped tests.</p>
+</section>
+<section id="selecting-tests">
+<h2>Selecting tests<a class="headerlink" href="#selecting-tests" title="Link to this heading"></a></h2>
+<p>While debugging an application, we often want to temporarily run just a
+selection of relevant tests. This is specially useful when running all
+the tests slows down and distracts testing fixes for a specific issue.
+This can be accomplished by prefixed the clause heads of the selected
+tests with the <code class="docutils literal notranslate"><span class="pre">(+)/1</span></code> operator. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(tests,
+    <span class="k">extends</span>(lgtunit)).
+
+    cover(ack).
+
+    test(ack_1, <span class="k">true</span>(<span class="nv">Result</span> <span class="o">==</span> <span class="m">11</span>)) <span class="o">:-</span>
+        ack<span class="o">::</span>ack(<span class="m">2</span>, <span class="m">4</span>, <span class="nv">Result</span>).
+
+    <span class="o">+</span> test(ack_2, <span class="k">true</span>(<span class="nv">Result</span> <span class="o">==</span> <span class="m">61</span>)) <span class="o">:-</span>
+        ack<span class="o">::</span>ack(<span class="m">3</span>, <span class="m">3</span>, <span class="nv">Result</span>).
+
+    test(ack_3, <span class="k">true</span>(<span class="nv">Result</span> <span class="o">==</span> <span class="m">125</span>)) <span class="o">:-</span>
+        ack<span class="o">::</span>ack(<span class="m">3</span>, <span class="m">4</span>, <span class="nv">Result</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>In this case, only the <code class="docutils literal notranslate"><span class="pre">ack_2</span></code> would run. Just be careful to remove
+all <code class="docutils literal notranslate"><span class="pre">(+)/1</span></code> test prefixes when done debugging the issue that prompted
+you to run just the selected tests. After, be sure to run all the tests
+to ensure there are no regressions introduced by your fixes.</p>
 </section>
 <section id="checking-test-goal-results">
 <h2>Checking test goal results<a class="headerlink" href="#checking-test-goal-results" title="Link to this heading"></a></h2>

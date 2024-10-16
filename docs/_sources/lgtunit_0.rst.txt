@@ -14,8 +14,8 @@ A unit test framework supporting predicate clause coverage, determinism testing,
 |    ``logtalk_load(lgtunit(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 19:0:0
-| **Date:** 2024-08-24
+| **Version:** 19:1:0
+| **Date:** 2024-10-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -2114,6 +2114,25 @@ Table of compiled tests.
 |    ``test_(Identifier,Test)``
 | **Mode and number of proofs:**
 |    ``test_(?callable,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: selected_test_/1
+.. _lgtunit/0::selected_test_/1:
+
+``selected_test_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Table of selected tests for execution.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``selected_test_(Identifier)``
+| **Mode and number of proofs:**
+|    ``selected_test_(?callable)`` - ``zero_or_more``
 
 
 ------------
