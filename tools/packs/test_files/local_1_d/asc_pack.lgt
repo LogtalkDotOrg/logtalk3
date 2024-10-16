@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -19,14 +18,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(local_1_d_registry),
-	logtalk_load(alt_pack),
-	logtalk_load(bar_pack),
-	logtalk_load(foo_pack),
-	logtalk_load(gpg_pack),
-	logtalk_load(badsig_pack),
-	logtalk_load(asc_pack),
-	logtalk_load(sig_pack),
-	logtalk_load(badcheck_pack)
-)).
+:- object(asc_pack,
+	implements(pack_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2024-10-14,
+		comment is 'A local pack for testing.'
+	]).
+
+	name(asc).
+
+	description('A local signed pack for testing').
+
+	license('Apache-2.0').
+
+	home('file://test_files/asc').
+
+	version(
+		1:0:0,
+		stable,
+		'file://test_files/asc/v1.0.0.tar.gz',
+		sha256 - '27ddfdb1bfd6efd86f4c1627bd7409ff0f9092551193007ca0d576c1f49fa959',
+		[logtalk @>= 3:42:0],
+		all
+	).
+
+:- end_object.

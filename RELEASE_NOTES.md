@@ -98,6 +98,9 @@ archives.
 
 * ADDED: Support to the `packs` tool to use `wget` in alternative to `curl`.
 
+* ADDED: Support to the `packs` tool to use `.sig` signature files in
+alternative to `.asc` signature files.
+
 * ADDED: Support to the `tutor` tool to explain selected `lgtunit`, `make`,
 and `packs` tool error messages.
 

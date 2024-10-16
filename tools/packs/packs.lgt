@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:79:0,
+		version is 0:80:0,
 		author is 'Paulo Moura',
-		date is 2024-10-15,
+		date is 2024-10-16,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -571,7 +571,8 @@
 		ensure_file/1, file_exists/1, file_size/2,
 		internal_os_path/2, make_directory_path/1, operating_system_type/1,
 		path_concat/3,
-		operating_system_name/1, operating_system_machine/1, operating_system_release/1
+		operating_system_name/1, operating_system_machine/1, operating_system_release/1,
+		shell/1
 	]).
 
 	:- if(current_logtalk_flag(prolog_dialect, ciao)).
@@ -934,15 +935,14 @@
 		^^print_readme_file_path(Path).
 
 	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options) :-
-		download(Registry, Pack, URL, Options, Archive, IsGitArchive),
+		download_archive(Registry, Pack, URL, Options, Archive, IsGitArchive),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
 		),
 		(	^^option(checksig(true), Options) ->
-			atom_concat(URL, '.asc', URLSig),
-			download(Registry, Pack, URLSig, Options, ArchiveSig, _),
-			verify_checksig(Pack, Archive, ArchiveSig, Options)
+			download_signature(Registry, Pack, URL, Archive, Options, Signature),
+			verify_checksig(Pack, Archive, Signature, Options)
 		;	true
 		),
 		uncompress(Pack, Archive, Path, Options, IsGitArchive),
@@ -1751,15 +1751,14 @@
 		).
 
 	check_availability_archive(Registry, Pack, URL, CheckSum, Options) :-
-		download(Registry, Pack, URL, Options, Archive, _),
+		download_archive(Registry, Pack, URL, Options, Archive, _),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
 		),
 		(	^^option(checksig(true), Options) ->
-			atom_concat(URL, '.asc', URLSig),
-			download(Registry, Pack, URLSig, Options, ArchiveSig, _),
-			verify_checksig(Pack, Archive, ArchiveSig, Options)
+			download_signature(Registry, Pack, URL, Archive, Options, Signature),
+			verify_checksig(Pack, Archive, Signature, Options)
 		;	true
 		).
 
@@ -2190,7 +2189,7 @@
 		internal_os_path(Path, OSPath),
 		make_directory_path(Path).
 
-	download(Registry, Pack, URL, Options, Archive, IsGitArchive) :-
+	download_archive(Registry, Pack, URL, Options, Archive, IsGitArchive) :-
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, packs, ArchivesPacks),
@@ -2259,6 +2258,55 @@
 		^^supported_archive(Extension),
 		atom_concat(Tag, Extension, Archive),
 		!.
+
+	download_signature(Registry, Pack, URL, _, Options, Signature) :-
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, archives, Archives),
+		path_concat(Archives, packs, ArchivesPacks),
+		path_concat(ArchivesPacks, Registry, ArchivesPacksRegistry),
+		path_concat(ArchivesPacksRegistry, Pack, ArchivesPacksRegistryPack),
+		% prefer .asc signature files
+		(	atom_concat(URL, '.asc', URLSig)
+		;	atom_concat(URL, '.sig', URLSig)
+		),
+		decompose_file_name(URLSig, _, Basename),
+		path_concat(ArchivesPacksRegistryPack, Basename, Signature0),
+		internal_os_path(Signature0, Signature),
+		(	file_exists(Signature) ->
+			true
+		;	atom_concat('file://', File, URLSig) ->
+			file_exists(File),
+			internal_os_path(File, OSFile),
+			(	operating_system_type(windows) ->
+				(	^^option(verbose(true), Options) ->
+					atomic_list_concat(['echo f | xcopy /y "', OSFile, '" "', Signature, '"'], Command)
+				;	atomic_list_concat(['echo f | xcopy /y /q "', OSFile, '" "', Signature, '"'], Command)
+				)
+			;	% assume POSIX
+				(	^^option(verbose(true), Options) ->
+					atomic_list_concat(['cp -v "', OSFile, '" "', Signature, '"'], Command)
+				;	atomic_list_concat(['cp "', OSFile, '" "', Signature, '"'], Command)
+				)
+			),
+			shell(Command)
+		;	^^option(downloader(curl), Options) ->
+			^^option(curl(CurlExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['curl ', CurlExtraOptions, ' -f -v -L -o "',    Signature, '" "', URLSig, '"'], Command)
+			;	atomic_list_concat(['curl ', CurlExtraOptions, ' -f -s -S -L -o "', Signature, '" "', URLSig, '"'], Command)
+			),
+			shell(Command)
+		;	% ^^option(downloader(wget), Options),
+			^^option(wget(WgetExtraOptions), Options),
+			(	^^option(verbose(true), Options) ->
+				atomic_list_concat(['wget ', WgetExtraOptions, ' -v -O "', Signature, '" "', URLSig, '"'], Command)
+			;	atomic_list_concat(['wget ', WgetExtraOptions, ' -q -O "', Signature, '" "', URLSig, '"'], Command)
+			),
+			shell(Command)
+		),
+		!.
+	download_signature(_, Pack, _, Archive, _, _) :-
+		print_message(error, packs, pack_signature_download_failed(Pack, Archive)).
 
 	verify_checksum(Pack, Archive, CheckSum, Options) :-
 		operating_system_type(OS),

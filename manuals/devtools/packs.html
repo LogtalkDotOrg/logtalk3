@@ -651,14 +651,19 @@ try:</p>
 <section id="signed-packs">
 <h2>Signed packs<a class="headerlink" href="#signed-packs" title="Link to this heading"></a></h2>
 <p>Packs can be <code class="docutils literal notranslate"><span class="pre">gpg</span></code> signed. Detached signature files are assumed and
-expected to share the name of the archive and use a <code class="docutils literal notranslate"><span class="pre">.asc</span></code> extension.
-For example, if the pack archive name is <code class="docutils literal notranslate"><span class="pre">v1.0.0.tar.gz</span></code>, the
-signature file must be named <code class="docutils literal notranslate"><span class="pre">v1.0.0.tar.gz.asc</span></code>. When the
-<code class="docutils literal notranslate"><span class="pre">checksig(true)</span></code> option is used, the signature file is automatically
-downloaded using a URL constructed from the pack archive URL. An example
-of signing a pack (and creating the <code class="docutils literal notranslate"><span class="pre">.asc</span></code> file) assuming the default
-key is:</p>
+expected to share the name of the archive and use <code class="docutils literal notranslate"><span class="pre">.asc</span></code> or <code class="docutils literal notranslate"><span class="pre">.sig</span></code>
+extensions. For example, if the pack archive name is <code class="docutils literal notranslate"><span class="pre">v1.0.0.tar.gz</span></code>,
+the signature file must be named <code class="docutils literal notranslate"><span class="pre">v1.0.0.tar.gz.asc</span></code> or
+<code class="docutils literal notranslate"><span class="pre">v1.0.0.tar.gz.sig</span></code>. When the <code class="docutils literal notranslate"><span class="pre">checksig(true)</span></code> option is used, the
+signature file is automatically downloaded using a URL constructed from
+the pack archive URL. When both <code class="docutils literal notranslate"><span class="pre">.asc</span></code> and <code class="docutils literal notranslate"><span class="pre">.sig</span></code> files exist, the
+<code class="docutils literal notranslate"><span class="pre">.asc</span></code> file is used. An example of signing a pack and creating the
+<code class="docutils literal notranslate"><span class="pre">.asc</span></code> file (assuming the default signing key) is:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> gpg <span class="o">--</span>armor <span class="o">--</span>detach<span class="o">-</span>sign v1.<span class="m">0.0</span>.tar.gz
+</pre></div>
+</div>
+<p>To create instead a <code class="docutils literal notranslate"><span class="pre">.sig</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> gpg <span class="o">--</span>detach<span class="o">-</span>sign v1.<span class="m">0.0</span>.tar.gz
 </pre></div>
 </div>
 <p>See the <code class="docutils literal notranslate"><span class="pre">gpg</span></code> documentation for full details on signing archives and

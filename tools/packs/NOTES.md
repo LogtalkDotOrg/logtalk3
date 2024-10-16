@@ -538,14 +538,19 @@ Signed packs
 ------------
 
 Packs can be `gpg` signed. Detached signature files are assumed and expected
-to share the name of the archive and use a `.asc` extension. For example, if
-the pack archive name is `v1.0.0.tar.gz`, the signature file must be named
-`v1.0.0.tar.gz.asc`. When the `checksig(true)` option is used, the signature
-file is automatically downloaded using a URL constructed from the pack archive
-URL. An example of signing a pack (and creating the `.asc` file) assuming the
-default key is:
+to share the name of the archive and use `.asc` or `.sig` extensions. For
+example, if the pack archive name is `v1.0.0.tar.gz`, the signature file must
+be named `v1.0.0.tar.gz.asc` or `v1.0.0.tar.gz.sig`. When the `checksig(true)`
+option is used, the signature file is automatically downloaded using a URL
+constructed from the pack archive URL. When both `.asc` and `.sig` files
+exist, the `.asc` file is used. An example of signing a pack and creating the
+`.asc` file (assuming the default signing key) is:
 
 	$ gpg --armor --detach-sign v1.0.0.tar.gz
+
+To create instead a `.sig` file:
+
+	$ gpg --detach-sign v1.0.0.tar.gz
 
 See the `gpg` documentation for full details on signing archives and sharing
 the public keys required to verify the signatures.

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:33:0,
+		version is 0:34:0,
 		author is 'Paulo Moura',
-		date is 2024-10-15,
+		date is 2024-10-16,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -57,16 +57,20 @@
 		),
 		os::shell(Command1),
 		(	os::operating_system_type(windows) ->
-			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz" > nul 2>&1'], Command2)
-		;	atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz" > /dev/null 2>&1'], Command2)
+			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/asc/v1.0.0.tar.gz" > nul 2>&1'], Command2),
+			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz" > nul 2>&1'], Command3)
+		;	atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --armor --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/asc/v1.0.0.tar.gz" > /dev/null 2>&1'], Command2),
+			atomic_list_concat(['gpg -q --homedir "', Directory, '.ring" --detach-sign --local-user test_packs@logtalk.org "', Directory, '/test_files/sig/v1.0.0.tar.gz" > /dev/null 2>&1'], Command3)
 		),
-		os::shell(Command2).
+		os::shell(Command2),
+		os::shell(Command3).
 
 	cleanup :-
 		packs::reset,
 		^^clean_file('.gpg'),
 		^^clean_file('test_files/setup.txt'),
-		^^clean_file('test_files/sig/v1.0.0.tar.gz.asc'),
+		^^clean_file('test_files/asc/v1.0.0.tar.gz.asc'),
+		^^clean_file('test_files/sig/v1.0.0.tar.gz.sig'),
 		object_property(packs, file(_, Directory)),
 		atomic_list_concat([Directory, '.ring'], Ring),
 		os::delete_directory_and_contents(Ring).
@@ -206,7 +210,7 @@
 	test(packs_registries_readme_1_01, true) :-
 		registries::readme(local_1_d).
 
-	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
+	test(packs_registries_provides_2_01, true(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
 	test(packs_registries_update_1_01, true) :-
@@ -246,7 +250,7 @@
 	test(packs_packs_versions_3_01, true(Versions == [2:0:0,1:0:0])) :-
 		packs::versions(local_1_d, foo, Versions).
 
-	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
+	test(packs_packs_available_2_01, true(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
@@ -302,10 +306,10 @@
 		findall(Registry, registries::defined(Registry, _, _, true), Registries0),
 		list::msort(Registries0, Registries).
 
-	test(packs_registries_provides_2_02, true(Pairs == [local_1_d-alt, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
+	test(packs_registries_provides_2_02, true(Pairs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
 		setof(Registry-Pack, registries::provides(Registry, Pack), Pairs).
 
-	test(packs_packs_available_2_02, true(Packs == [local_1_d-alt, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
+	test(packs_packs_available_2_02, true(Packs == [local_1_d-alt, local_1_d-asc, local_1_d-badcheck, local_1_d-badsig, local_1_d-bar, local_1_d-foo, local_1_d-gpg, local_1_d-sig, local_2_d-baz])) :-
 		findall(Registry-Pack, packs::available(Registry, Pack), Packs0),
 		msort(Packs0, Packs).
 
@@ -344,9 +348,14 @@
 	test(packs_packs_install_4_10, true) :-
 		object_property(packs, file(_, Directory)),
 		atomic_list_concat(['--homedir "', Directory, '.ring"'], Homedir),
+		packs::install(local_1_d, asc, 1:0:0, [checksig(true), gpg(Homedir)]).
+
+	test(packs_packs_install_4_11, true) :-
+		object_property(packs, file(_, Directory)),
+		atomic_list_concat(['--homedir "', Directory, '.ring"'], Homedir),
 		packs::install(local_1_d, sig, 1:0:0, [checksig(true), gpg(Homedir)]).
 
-	test(packs_packs_install_4_11, false) :-
+	test(packs_packs_install_4_12, false) :-
 		packs::install(badcheck).
 
 	test(packs_packs_dependents_3_02, true(Dependents == [foo])) :-
