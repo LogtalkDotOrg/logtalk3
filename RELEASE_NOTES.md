@@ -89,6 +89,8 @@ Tools
 
 * ADDED: Support for running just a selection of tests to the `lgtunit` tool.
 
+* ADDED: Support to the `lgtunit` tool for `test/2-3` test dialects as facts.
+
 * ADDED: Requirements section to the documentation of the `help` and `lgtdoc`
 tools.
 

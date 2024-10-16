@@ -27,7 +27,7 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 19:1:0,
+		version is 19:2:0,
 		author is 'Paulo Moura',
 		date is 2024-10-16,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
@@ -1441,7 +1441,7 @@
 	term_expansion((+ Head), Expansion) :-
 		nonvar(Head),
 		test_idiom_head(Head, Test),
-		term_expansion((Head), Expansion),
+		term_expansion(Head, Expansion),
 		assertz(selected_test_(Test)).
 	term_expansion((+ Head :- Body), Expansion) :-
 		nonvar(Head),
@@ -1450,6 +1450,8 @@
 		assertz(selected_test_(Test)).
 
 	% unit test idiom test/3
+	term_expansion(test(Test, Outcome, Options), Expansion) :-
+		term_expansion((test(Test, Outcome, Options) :- true), Expansion).
 	term_expansion((test(Test, Outcome0, Options) :- Goal0), [(test(Test, Variables, Outcome) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		check_for_valid_test_outcome(Test, Outcome0),
@@ -1468,6 +1470,8 @@
 		).
 
 	% unit test idiom test/2
+	term_expansion(test(Test, Outcome), Expansion) :-
+		term_expansion((test(Test, Outcome) :- true), Expansion).
 	term_expansion((test(Test, Outcome0) :- Goal0), [(test(Test, Variables, Outcome) :- Goal)]) :-
 		check_for_valid_test_identifier(Test),
 		check_for_valid_test_outcome(Test, Outcome0),
@@ -1485,7 +1489,7 @@
 		).
 
 	% unit test idiom test/1
-	term_expansion((test(Test)), [test(Test, [], true)]) :-
+	term_expansion(test(Test), [test(Test, [], true)]) :-
 		check_for_valid_test_identifier(Test),
 		logtalk_load_context(term_position, Position),
 		assertz(test_(Test, succeeds(Test, [], Position))).
