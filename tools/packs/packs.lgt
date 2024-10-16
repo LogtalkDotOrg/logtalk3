@@ -2217,7 +2217,7 @@
 				;	atomic_list_concat(['cp "', OSFile, '" "', Archive, '"'], Command)
 				)
 			),
-			^^command(Command, pack_file_copy_failed(Pack, URL))
+			^^command(Command, pack_archive_copy_failed(Pack, URL))
 		;	git_archive_url(URL, Remote, Tag) ->
 			^^option(git(GitExtraOptions), Options),
 			(	^^option(verbose(true), Options) ->

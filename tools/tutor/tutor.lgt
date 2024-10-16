@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:73:0,
+		version is 0:74:0,
 		author is 'Paulo Moura',
-		date is 2024-10-06,
+		date is 2024-10-16,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -1300,11 +1300,19 @@
 			'the packs::update(Pack, Options) message with the force(true) option.', nl, nl
 		].
 
+	explain(pack_archive_copy_failed(_, _)) -->
+		[	'Pack archive copy failures usually result directory or file permissions.'-[], nl,
+			'Check those permissions. In rare cases, there may be a pack manifest error'-[], nl,
+			'with a wrong path for the archive. you can use the packs::describe(Pack)'-[], nl,
+			'message to list the pack home and archive paths.', nl, nl
+		].
+
 	explain(pack_archive_download_failed(_, _)) -->
-		[	'Pack archive download failures usually result network connectivity issues.'-[], nl,
-			'Check if you can reach the pack provider server. In rare cases, there may'-[], nl,
-			'be a pack manifest error with a wrong URL for the archive. you can use the'-[], nl,
-			'packs::describe(Pack) message to list the pack home and archive URLs.', nl, nl
+		[	'Pack archive download failures usually result from network connectivity'-[], nl,
+			'issues. Check if you can reach the pack provider server. In rare cases,'-[], nl,
+			'there may be a pack manifest error with a wrong URL for the archive.'-[], nl,
+			'You can use the packs::describe(Pack) message to list the pack home and'-[], nl,
+			'archive URLs.'-[], nl, nl
 		].
 
 	explain(pack_archive_checksum_failed(_, _)) -->
@@ -1316,11 +1324,25 @@
 			'archive file and try again to install the pack.'-[], nl, nl
 		].
 
+	explain(pack_signature_download_failed(_, _)) -->
+		[	'Pack archive signature download failures usually result from network.'-[], nl,
+			'connectivity issues. Check if you can reach the pack provider server.'-[], nl,
+			'In rare cases, the signature file may be missing upstream. You can use the'-[], nl,
+			'packs::describe(Pack) message to list the pack home and archive URLs.', nl, nl
+		].
+
 	explain(pack_archive_checksig_failed(_, _)) -->
 		[	'Pack archive signature failures may be evidence of malicious tampering with'-[], nl,
 			'the archive. In rare cases, there may be a pack manifest error with a wrong'-[], nl,
 			'signature for the archive. It is advisable to contact the pack provider for'-[], nl,
 			'diagnosing the problem.', nl, nl
+		].
+
+	explain(pack_archive_decrypt_failed(_, _)) -->
+		[	'Pack archive decrypt failures may be caused by passphrase typos or missing'-[], nl,
+			'missing decryption keys, assuming no tampering of the archive. Using the'-[], nl,
+			'verbose(true) option may provide details on the failure. It is advisable to'-[], nl,
+			'contact the pack provider for diagnosing the problem.'-[], nl, nl
 		].
 
 	explain(pack_archive_uncompress_failed(_, _)) -->

@@ -306,7 +306,7 @@
 	message_tokens(pack_directory_not_found(Pack, Directory)) -->
 		['Pack directory not found: ~q (~q)'-[Pack, Directory], nl].
 
-	message_tokens(pack_file_copy_failed(Pack, Command)) -->
+	message_tokens(pack_archive_copy_failed(Pack, Command)) -->
 		['Pack archive copy failed: ~q (~q)'-[Pack, Command], nl].
 
 	message_tokens(pack_archive_download_failed(Pack, Command)) -->
