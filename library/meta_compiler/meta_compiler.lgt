@@ -23,8 +23,8 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:14:0,
-		date is 2024-06-20,
+		version is 0:14:1,
+		date is 2024-10-17,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
 		remarks is [
@@ -636,7 +636,8 @@
 		!,
 		(	atom(Object) ->
 			atomic_list_concat([MetaFunctor, '/', MetaArity, '+', Object, '.', ClosureFunctor, '#', ClosureArity], AuxFunctor)
-		;	functor(Object, ObjectFunctor, ObjectArity),
+		;	compound(Object),
+			functor(Object, ObjectFunctor, ObjectArity),
 			atomic_list_concat([MetaFunctor, '/', MetaArity, '+', ObjectFunctor, '.', ObjectArity, '.', ClosureFunctor, '#', ClosureArity], AuxFunctor)
 		).
 	aux_predicate_functor(MetaFunctor, MetaArity, {ClosureFunctor}, ClosureArity, AuxFunctor) :-
@@ -644,6 +645,7 @@
 		atomic_list_concat([MetaFunctor, '/', MetaArity, '+{', ClosureFunctor, '#', ClosureArity, '}'], AuxFunctor).
 	aux_predicate_functor(MetaFunctor, MetaArity, ':'(Module,ClosureFunctor), ClosureArity, AuxFunctor) :-
 		!,
+		atom(Module),
 		atomic_list_concat([MetaFunctor, '/', MetaArity, '+', Module, '.', ClosureFunctor, '#', ClosureArity], AuxFunctor).
 	aux_predicate_functor(MetaFunctor, MetaArity, ClosureFunctor, ClosureArity, AuxFunctor) :-
 		atomic_list_concat([MetaFunctor, '/', MetaArity, '+', ClosureFunctor, '#', ClosureArity], AuxFunctor).

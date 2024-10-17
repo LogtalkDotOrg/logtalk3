@@ -84,6 +84,10 @@ the bug report.
 
 * FIXED: The definition of the `os::delete_file/1` library predicate for YAP.
 
+* FIXED: Bug in the `meta_compiler` library when attempting to compile a
+closure for a `(::)/2` (or `(:)/2`) goal when the object (or module) argument
+is not bound at compile time. Thanks to Alex Kouznetsov for the bug report.
+
 Tools
 -----
 

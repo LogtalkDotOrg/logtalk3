@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-05-29,
+		date is 2024-10-17,
 		comment is 'Unit tests for the "meta_compiler" library.'
 	]).
 
@@ -199,6 +199,13 @@
 	test(meta_compiler_map_reduce_5_01, true(Result == cab)) :-
 		meta::map_reduce([Code,Char]>>char_code(Char,Code), atom_concat, '', [99,97,98], Result).
 
+	% test for meta-calls that cannot be optimized due to unbound arguments at compile time
+
+	test(meta_compiler_skipped_01, true(type::valid(list(atom),Files))) :-
+		% make Object only bound at runtime
+		object(Object),
+		meta::map(Object::loaded_file, Files).
+
 	% auxiliary predicates
 
 	sum(A1, A2, A3, A4, A5, Sum) :-
@@ -206,5 +213,7 @@
 
 	sum(A1, A2, A3, A4, A5, A6, Sum) :-
 		Sum is A1 + A2 + A3 + A4 + A5 + A6.
+
+	object(logtalk).
 
 :- end_object.
