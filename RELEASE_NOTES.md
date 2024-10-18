@@ -88,6 +88,9 @@ the bug report.
 closure for a `(::)/2` (or `(:)/2`) goal when the object (or module) argument
 is not bound at compile time. Thanks to Alex Kouznetsov for the bug report.
 
+* FIXED: The `meta_compiler` library to not try to expand goals in clauses
+containing parameter variables. Thanks to Alex Kouznetsov for the bug report.
+
 Tools
 -----
 

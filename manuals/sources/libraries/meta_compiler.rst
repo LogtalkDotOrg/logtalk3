@@ -53,3 +53,9 @@ For example:
    ...
 
 See also the ``metapredicates_compiled`` example and unit tests.
+
+Known issues
+------------
+
+Goals in clauses containing parameter variables are currently not
+expanded by this library and thus not optimized.

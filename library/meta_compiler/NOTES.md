@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -66,3 +66,10 @@ when compiling and loading the code that you want to optimize. For example:
 
 
 See also the `metapredicates_compiled` example and unit tests.
+
+
+Known issues
+------------
+
+Goals in clauses containing parameter variables are currently not expanded
+by this library and thus not optimized.

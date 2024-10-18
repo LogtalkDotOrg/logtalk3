@@ -23,8 +23,8 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:14:1,
-		date is 2024-10-17,
+		version is 0:14:2,
+		date is 2024-10-18,
 		author is 'Paulo Moura',
 		comment is 'Compiler for the ``meta`` object meta-predicates. Generates auxiliary predicates in order to avoid meta-call overheads.',
 		remarks is [
@@ -33,7 +33,7 @@
 		see_also is [meta]
 	]).
 
-	:- uses(list, [append/3, length/2]).
+	:- uses(list, [append/3, length/2, member/2]).
 	:- uses(gensym, [gensym/2]).
 	:- uses(user, [atomic_list_concat/2]).
 
@@ -58,6 +58,16 @@
 		retractall(generated_predicate_(_)).
 	term_expansion(end_of_file, end_of_file) :-
 		retractall(generated_predicate_(_)).
+
+	goal_expansion(_, _) :-
+		logtalk_load_context(parameter_variables, ParameterVariablePairs),
+		ParameterVariablePairs \== [],
+		logtalk_load_context(variable_names, VariableNames),
+		member(Name-_, ParameterVariablePairs),
+		member(Name = _, VariableNames),
+		% expansion of goals in clauses containing parameter variables is not supported
+		!,
+		fail.
 
 	goal_expansion(meta::include(Closure, List, Included), ExpandedGoal) :-
 		decompose_closure(Closure, 1, Functor, Arity, Args, GArgs),
