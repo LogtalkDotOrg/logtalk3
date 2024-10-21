@@ -95,6 +95,7 @@ Tools
 -----
 
 * ADDED: Support for running just a selection of tests to the `lgtunit` tool.
+Thanks to Michael McNally for the suggestion.
 
 * ADDED: Support to the `lgtunit` tool for `test/2-3` test dialects as facts.
 
@@ -121,6 +122,9 @@ and `packs` tool error messages.
 
 * UPDATED: The `lgtdoc` tool to process the new `fails_if` key of the `info/2`
 predicate directive.
+
+* FIXED: The `dead_code_scanner` tool to avoid false positives when checking
+predicate aliases declared in `uses/2` or `use_module/2` directives.
 
 * FIXED: The `lgtdoc` tool to recognize consistency errors as standard
 exceptions.

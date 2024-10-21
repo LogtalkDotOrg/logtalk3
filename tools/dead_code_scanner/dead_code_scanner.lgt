@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:15:0,
+		version is 0:15:1,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2024-05-07,
+		date is 2024-10-21,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -193,13 +193,15 @@
 		),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
-		% Predicate :- Object::Predicate linking clause that is generated when
-		% processing uses/2 directives for allowing runtime use of listed resources
+		% Alias :- Object::Original linking clause that is generated when processing
+		% uses/2 directives for allowing runtime use of listed resources
 		\+ (
 			entity_property(Entity, calls(Object::Original, OtherCallsProperties)),
 			OtherCallsProperties \== CallsProperties
 		),
-		% no other callers for Object::Predicate
+		% no other callers for Object::Original
+		\+ entity_property(Entity, calls(Predicate, _)),
+		% no other callers for Original or Alias
 		\+ entity_property(Entity, updates(Object::Original, _)),
 		% not a predicate used as argument in calls to the database built-in methods
 		\+ local_scope_directive(Entity, Predicate),
@@ -229,13 +231,15 @@
 		),
 		memberchk(auxiliary, DefinesProperties),
 		memberchk(number_of_clauses(1), DefinesProperties),
-		% Predicate :- Module:Predicate linking clause that is generated when
-		% processing uses/2 directives for allowing runtime use of listed resources
+		% Alias :- Module:Original linking clause that is generated when processing
+		% use_module/2 directives for allowing runtime use of listed resources
 		\+ (
 			entity_property(Entity, calls(':'(Module,Original), OtherCallsProperties)),
 			OtherCallsProperties \== CallsProperties
 		),
-		% no other callers for Module:Predicate
+		% no other callers for Module:Original
+		\+ entity_property(Entity, calls(Predicate, _)),
+		% no other callers for Original or Alias
 		\+ entity_property(Entity, updates(':'(Module,Original), _)),
 		% not a predicate used as argument in calls to the database built-in methods
 		\+ local_scope_directive(Entity, Predicate),
