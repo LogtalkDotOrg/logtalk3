@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:6:0,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2021-05-08,
+		date is 2024-10-21,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
@@ -36,7 +36,7 @@
 		predicates/2, predicate/2,
 		all/0,
 		rlibrary/1, library/1,
-		rdirectory/1, directory/1,
+		rdirectory/2, rdirectory/1, directory/1,
 		file/1,
 		entity/1
 	]).
@@ -223,6 +223,30 @@
 	test(dcs_rdirectory_1_01, deterministic) :-
 		logtalk::expand_library_path(lgtunit, Directory),
 		rdirectory(Directory).
+
+	% tests for non-called predicates listed in uses/2 directives
+
+	test(dcs_uses_directive_01, deterministic) :-
+		setof(Predicate, predicate(predicate_directives, Predicate), Predicates),
+		^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]).
+
+	% tests for option validation
+
+	test(dcs_exclude_directories_option_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		rdirectory(Directory, [exclude_directories([foo, bar])]).
+
+	test(dcs_exclude_files_option_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		rdirectory(Directory, [exclude_files([foo, bar])]).
+
+	test(dcs_exclude_libraries_option_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		rdirectory(Directory, [exclude_libraries([foo, bar])]).
+
+	test(dcs_exclude_entities_option_01, deterministic) :-
+		logtalk::expand_library_path(lgtunit, Directory),
+		rdirectory(Directory, [exclude_entities([foo, bar])]).
 
 	% suppress all messages from the "dead_code_scanner"
 	% component to not pollute the unit tests output

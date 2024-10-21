@@ -536,3 +536,21 @@
 	dead_predicate_3.
 
 :- end_object.
+
+
+:- object(predicate_directives).
+
+	:- public(foo/2).
+
+	:- uses(list, [
+		append/3 as app/3, last/2, member/2
+	]).
+
+	:- uses(logtalk, [
+		print_message(debug, dcs, Message) as dbg(Message)
+	]).
+
+	foo(L, X) :-
+		last(L, X).
+
+:- end_object.

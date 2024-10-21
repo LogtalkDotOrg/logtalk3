@@ -116,6 +116,8 @@ alternative to `.asc` signature files.
 * ADDED: Support to the `tutor` tool to explain selected `lgtunit`, `make`,
 and `packs` tool error messages.
 
+* ADDED: Additional tests for the `dead_code_scanner` tool.
+
 * IMPROVED: Tests code coverage for the `packs` tool.
 
 * IMPROVED: Man page of the `logtalk_tester.sh` script.
