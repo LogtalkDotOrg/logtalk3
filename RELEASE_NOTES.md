@@ -128,6 +128,9 @@ predicate directive.
 * FIXED: The `dead_code_scanner` tool to avoid false positives when checking
 predicate aliases declared in `uses/2` or `use_module/2` directives.
 
+* FIXED: The `dead_code_scanner` tool to not report the user-defined
+`coinductive_success_hook/1-2` hook predicates.
+
 * FIXED: The `lgtdoc` tool to recognize consistency errors as standard
 exceptions.
 

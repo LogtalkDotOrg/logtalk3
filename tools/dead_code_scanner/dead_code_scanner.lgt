@@ -24,7 +24,7 @@
 	imports(options)).
 
 	:- info([
-		version is 0:15:1,
+		version is 0:15:2,
 		author is 'Barry Evans and Paulo Moura',
 		date is 2024-10-21,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
@@ -172,6 +172,9 @@
 	% local predicates not called, directly or indirectly, by scoped predicates
 	predicate(Entity, Predicate, File, Lines) :-
 		non_scoped_predicate(Entity, Predicate0, File, Lines),
+		% exclude coinduction user-defined hook predicates
+		Predicate0 \== coinductive_success_hook/1,
+		Predicate0 \== coinductive_success_hook/2,
 		\+ used_by_scoped_predicate(Entity, Predicate0),
 		% likely dead predicate found; check if it resulted
 		% from the compilation of a non-terminal
