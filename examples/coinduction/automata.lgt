@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,9 +22,9 @@
 :- object(automaton).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:2:1,
 		author is 'Gopal Gupta et al. Adapted to Logtalk by Paulo Moura.',
-		date is 2012-08-17,
+		date is 2024-10-21,
 		comment is 'Coinduction omega-automaton example.'
 	]).
 
@@ -44,6 +44,6 @@
 	trans(s2, e, s0).
 	trans(s3, d, s0).
 
-	final(s2).
+%	final(s2).
 
 :- end_object.
