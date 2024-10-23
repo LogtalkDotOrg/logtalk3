@@ -30,6 +30,13 @@ Documentation
 
 * IMPROVED: Documentation of the `issue_creator` tool.
 
+Tools
+-----
+
+* FIXED: Case where the `packs` tool would print repeated "Pack dependency
+not available" error messages when trying to install or update a pack with
+alternative dependencies where none is available.
+
 
 3.84.0 - October 22, 2024
 =========================
