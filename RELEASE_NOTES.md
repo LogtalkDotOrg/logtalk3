@@ -25,7 +25,10 @@ RELEASE NOTES
 3.85.0 - November ??, 2024
 ==========================
 
+Documentation
+-------------
 
+* IMPROVED: Documentation of the `issue_creator` tool.
 
 
 3.84.0 - October 22, 2024

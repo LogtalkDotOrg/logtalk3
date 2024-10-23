@@ -142,8 +142,8 @@
 creating bug report issues for failed tests in GitHub or GitLab servers.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>This tool requires that the GitHub and GitLab CLIs be installed. For the
-installation instructions see:</p>
+<p>This tool requires that the GitHub <code class="docutils literal notranslate"><span class="pre">gh</span></code> and GitLab <code class="docutils literal notranslate"><span class="pre">glab</span></code> CLIs be
+installed. For the installation instructions see:</p>
 <ul class="simple">
 <li><p>GitHub: <a class="reference external" href="https://cli.github.com">https://cli.github.com</a></p></li>
 <li><p>GitLab: <a class="reference external" href="https://glab.readthedocs.io">https://glab.readthedocs.io</a></p></li>
@@ -155,8 +155,8 @@ installation instructions see:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(issue_creator(loader)).
 </pre></div>
 </div>
-<p>But in the most common usage scenario, this tool is automatically loaded
-by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script.</p>
+<p>But, in the most common usage scenario, this tool is automatically
+loaded by the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> automation script.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
@@ -197,13 +197,16 @@ of labels. For example, to use both <code class="docutils literal notranslate"><
 </pre></div>
 </div>
 <p>Note that the labels <strong>must</strong> be predefined in the issue tracker server
-for the bug report to be successfully created.</p>
+for the bug report to be successfully created. The <code class="docutils literal notranslate"><span class="pre">auto</span></code> label can be
+used to simplifying filtering of auto-generated bug reports when
+browsing the issue tracker.</p>
 <p>The bug reports use Markdown formatting, which is the default in GitHub
 and GitLab issue trackers.</p>
 <p>But reports are only created for non-flaky tests. The bug report title
 and labels are used to prevent creating duplicated bug reports.
-Therefore, the same labels should be used for multiple runs of the same
-tests and preserved when editing the bug reports.</p>
+Therefore, the title should not be manually edited and the same labels
+should be used for multiple runs of the same tests and preserved when
+editing the bug reports.</p>
 <p>There are cases where we may want to postpone or temporarily disable the
 automatic creation of bug reports. E.g. a WIP branch that’s known to
 break multiple tests. A solution is to define a pull/merge request

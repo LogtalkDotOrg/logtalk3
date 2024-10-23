@@ -9,8 +9,8 @@ creating bug report issues for failed tests in GitHub or GitLab servers.
 Requirements
 ------------
 
-This tool requires that the GitHub and GitLab CLIs be installed. For the
-installation instructions see:
+This tool requires that the GitHub ``gh`` and GitLab ``glab`` CLIs be
+installed. For the installation instructions see:
 
 - GitHub: https://cli.github.com
 - GitLab: https://glab.readthedocs.io
@@ -24,8 +24,8 @@ This tool can be loaded using the query:
 
    | ?- logtalk_load(issue_creator(loader)).
 
-But in the most common usage scenario, this tool is automatically loaded
-by the ``logtalk_tester`` automation script.
+But, in the most common usage scenario, this tool is automatically
+loaded by the ``logtalk_tester`` automation script.
 
 Usage
 -----
@@ -72,15 +72,18 @@ of labels. For example, to use both ``bug`` and ``auto`` labels:
        -u https://github.com/jdoe/foo/tree/55aa900775befa135e0d5b48ea63098df8b97f5c/
 
 Note that the labels **must** be predefined in the issue tracker server
-for the bug report to be successfully created.
+for the bug report to be successfully created. The ``auto`` label can be
+used to simplifying filtering of auto-generated bug reports when
+browsing the issue tracker.
 
 The bug reports use Markdown formatting, which is the default in GitHub
 and GitLab issue trackers.
 
 But reports are only created for non-flaky tests. The bug report title
 and labels are used to prevent creating duplicated bug reports.
-Therefore, the same labels should be used for multiple runs of the same
-tests and preserved when editing the bug reports.
+Therefore, the title should not be manually edited and the same labels
+should be used for multiple runs of the same tests and preserved when
+editing the bug reports.
 
 There are cases where we may want to postpone or temporarily disable the
 automatic creation of bug reports. E.g. a WIP branch that's known to
