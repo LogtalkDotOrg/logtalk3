@@ -30,6 +30,12 @@ Documentation
 
 * IMPROVED: Documentation of the `issue_creator` tool.
 
+Library
+-------
+
+* UPDATED: The `meta_compiler` library to support optimization of meta-calls
+with closure meta-arguments that are messages to parametric objects.
+
 Tools
 -----
 

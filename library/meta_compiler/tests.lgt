@@ -19,13 +19,30 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+
+:- object(test_object(_Parameter_)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2024-10-23,
+		comment is 'Description'
+	]).
+
+	:- public(my_sub_atom/4).
+	my_sub_atom(Before, Length, After, SubAtom) :-
+		sub_atom(_Parameter_, Before, Length, After, SubAtom).
+
+:- end_object.
+
+
+:- object(tests(_List_),
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2024-10-17,
+		date is 2024-10-23,
 		comment is 'Unit tests for the "meta_compiler" library.'
 	]).
 
@@ -172,12 +189,20 @@
 	% map/4 tests
 
 	test(meta_compiler_map_4_01, true(Atoms == [a,ab,abc])) :-
-		meta::map(sub_atom(abcde,_), [1,2,3], [_,_,_], Atoms).
+		meta::map(sub_atom(abcde,_), [1,2,3], _, Atoms).
+
+	test(meta_compiler_map_4_02, true(Atoms == [a,ab,abc])) :-
+		sub_atom(Atom),
+		meta::map(test_object(Atom)::my_sub_atom(_), [1,2,3], _, Atoms).
 
 	% map/5 tests
 
 	test(meta_compiler_map_5_01, true(Atoms == [a,bc,cde])) :-
 		meta::map(sub_atom(abcde), [0,1,2], [1,2,3], [_,_,_], Atoms).
+
+	test(meta_compiler_map_5_02, true(Atoms == [a,bc,cde])) :-
+		sub_atom(Atom),
+		meta::map(test_object(Atom)::my_sub_atom, [0,1,2], [1,2,3], [_,_,_], Atoms).
 
 	% map/6 tests
 
@@ -187,12 +212,12 @@
 	% map/7 tests
 
 	test(meta_compiler_map_7_01, true(Sums == [20,25])) :-
-		meta::map(sum, [0,1], [2,3], [4,5], [6,7], [8,9], Sums).
+		meta::map(sum, _List_, [2,3], [4,5], [6,7], [8,9], Sums).
 
 	% map/8 tests
 
 	test(meta_compiler_map_8_01, true(Sums == [30,36])) :-
-		meta::map(sum, [0,1], [2,3], [4,5], [6,7], [8,9], [10,11], Sums).
+		meta::map(sum, _List_, [2,3], [4,5], [6,7], [8,9], [10,11], Sums).
 
 	% map_reduce/5 tests
 
@@ -215,5 +240,7 @@
 		Sum is A1 + A2 + A3 + A4 + A5 + A6.
 
 	object(logtalk).
+
+	sub_atom(abcde).
 
 :- end_object.

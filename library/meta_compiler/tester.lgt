@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,5 +25,5 @@
 	logtalk_load(meta_compiler, [optimize(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(hook_pipeline([meta_compiler,lgtunit]))]),
-	tests::run
+	tests([0,1])::run
 )).
