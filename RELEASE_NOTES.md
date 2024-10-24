@@ -33,6 +33,9 @@ Documentation
 Library
 -------
 
+* ADDED: Additional test for the `java` library checking setting an array
+element to the empty list atom.
+
 * UPDATED: The `meta_compiler` library to support optimization of meta-calls
 with closure meta-arguments that are messages to parametric objects.
 

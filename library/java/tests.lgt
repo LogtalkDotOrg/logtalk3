@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2023-08-26,
+		date is 2024-10-24,
 		comment is 'Unit tests for the "java" library.'
 	]).
 
@@ -193,6 +193,13 @@
 		java('java.lang.String')::new([a], A),
 		java('java.lang.String')::new([b], B),
 		java('java.lang.String')::new([c], C),
+		java::list_to_array([A, B, C], Array),
+		java::array_to_list(Array, List).
+
+	test(java_array_list_2_02, true(List == [[],[],[]]), [condition(\+ current_logtalk_flag(prolog_dialect, swi))]) :-
+		java('java.lang.String')::new([[]], A),
+		java('java.lang.String')::new([[]], B),
+		java('java.lang.String')::new([[]], C),
 		java::list_to_array([A, B, C], Array),
 		java::array_to_list(Array, List).
 
