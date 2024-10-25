@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:72:1,
+		version is 2:73:0,
 		author is 'Paulo Moura',
-		date is 2024-04-02,
+		date is 2024-10-25,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -406,6 +406,8 @@
 			(	member(PathPrefix, PathPrefixes),
 				atom_concat(PathPrefix, RelativePath, Path) ->
 				atom_concat(CodePrefix, RelativePath, CodeURL0)
+			;	sub_atom(CodePrefix, 0, 9, _, 'vscode://') ->
+				atom_concat(CodePrefix, Path, CodeURL0)
 			;	% prefix to be cut not specified; use the file
 				% absolute path as a local URL
 				CodeURL0 = Path
@@ -417,7 +419,8 @@
 				% absolute path; link to local file and don't append line number
 				CodeURL = CodeURL0
 			;	\+ sub_atom(CodeURL0, 0, 7, _, 'http://'),
-				\+ sub_atom(CodeURL0, 0, 8, _, 'https://') ->
+				\+ sub_atom(CodeURL0, 0, 8, _, 'https://'),
+				\+ sub_atom(CodeURL0, 0, 9, _, 'vscode://') ->
 				% assume local file and don't append line number
 				CodeURL = CodeURL0
 			;	% append line number; check first for BitBucket code hosting
@@ -425,6 +428,8 @@
 				^^option(url_line_references(bitbucket), Options) ->
 				decompose_file_name(RelativePath, _, File),
 				atomic_list_concat([CodeURL0, '?fileviewer=file-view-default#', File, '-', Line], CodeURL)
+			;	sub_atom(CodePrefix, 0, 9, _, 'vscode://') ->
+				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
 			;	% assume github or gitlab line reference syntax
 				atomic_list_concat([CodeURL0, '#L', Line], CodeURL)
 			) ->

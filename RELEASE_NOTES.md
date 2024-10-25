@@ -42,6 +42,8 @@ with closure meta-arguments that are messages to parametric objects.
 Tools
 -----
 
+* ADDED: Support to the `diagrams` tool for VSCode local file links.
+
 * FIXED: Case where the `packs` tool would print repeated "Pack dependency
 not available" error messages when trying to install or update a pack with
 alternative dependencies where none is available.
