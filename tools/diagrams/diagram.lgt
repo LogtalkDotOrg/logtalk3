@@ -23,7 +23,7 @@
 	extends(options)).
 
 	:- info([
-		version is 3:7:0,
+		version is 3:8:0,
 		author is 'Paulo Moura',
 		date is 2024-10-26,
 		comment is 'Common predicates for generating diagrams.',
@@ -336,6 +336,10 @@
 	normalize_url_prefixes([], []).
 	normalize_url_prefixes([URL0| URLs0], [URL| URLs]) :-
 		(	URL0 == 'vscode://file' ->
+			URL = URL0
+		;	URL0 == 'vscodium://file' ->
+			URL = URL0
+		;	URL0 == 'cursor://file' ->
 			URL = URL0
 		;	sub_atom(URL0, _, _, 0, '/') ->
 			URL = URL0
@@ -710,7 +714,7 @@
 	valid_option(zoom_url_suffix(Suffix)) :-
 		atom(Suffix).
 	valid_option(url_line_references(Provider)) :-
-		valid(one_of(atom, [bitbucket,github,gitlab,vscode,mvim,txmt]), Provider).
+		valid(one_of(atom, [bitbucket,github,gitlab,vscode,vscodium,cursor,mvim,txmt]), Provider).
 
 	fix_option(url_prefixes(CodePrefix0, DocPrefix0), url_prefixes(CodePrefix, DocPrefix)) :-
 		normalize_url_prefixes([CodePrefix0, DocPrefix0], [CodePrefix, DocPrefix]).
@@ -1250,13 +1254,19 @@
 		;	member(Prefix, Prefixes),
 			atom_concat(Prefix, Suffix, Path) ->
 			atom_concat(CodePrefix, Suffix, CodeURL)
-		;	sub_atom(CodePrefix, 0, 9, _, 'vscode://') ->
+		;	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, 7, _, 'mvim://') ->
+		;	sub_atom(CodePrefix, 0, _, _, 'vscodium://') ->
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, 7, _, 'txmt://') ->
+		;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
+			atom_concat(CodePrefix, Path, CodeURL),
+			Suffix = CodeURL
+		;	sub_atom(CodePrefix, 0, _, _, 'mvim://') ->
+			atom_concat(CodePrefix, Path, CodeURL),
+			Suffix = CodeURL
+		;	sub_atom(CodePrefix, 0, _, _, 'txmt://') ->
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
 		;	CodeURL = Path,

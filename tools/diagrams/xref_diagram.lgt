@@ -23,7 +23,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:77:0,
+		version is 2:78:0,
 		author is 'Paulo Moura',
 		date is 2024-10-26,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -406,11 +406,15 @@
 			(	member(PathPrefix, PathPrefixes),
 				atom_concat(PathPrefix, RelativePath, Path) ->
 				atom_concat(CodePrefix, RelativePath, CodeURL0)
-			;	sub_atom(CodePrefix, 0, 9, _, 'vscode://') ->
+			;	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, 7, _, 'mvim://') ->
+			;	sub_atom(CodePrefix, 0, _, _, 'vscodium://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, 7, _, 'txmt://') ->
+			;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
+				atom_concat(CodePrefix, Path, CodeURL0)
+			;	sub_atom(CodePrefix, 0, _, _, 'mvim://') ->
+				atom_concat(CodePrefix, Path, CodeURL0)
+			;	sub_atom(CodePrefix, 0, _, _, 'txmt://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
 			;	% prefix to be cut not specified; use the file
 				% absolute path as a local URL
@@ -422,22 +426,28 @@
 			;	sub_atom(CodeURL0, 0, 1, _, '/') ->
 				% absolute path; link to local file and don't append line number
 				CodeURL = CodeURL0
-			;	\+ sub_atom(CodeURL0, 0, 7, _, 'http://'),
-				\+ sub_atom(CodeURL0, 0, 8, _, 'https://'),
-				\+ sub_atom(CodeURL0, 0, 9, _, 'vscode://'),
-				\+ sub_atom(CodeURL0, 0, 7, _, 'mvim://'),
-				\+ sub_atom(CodeURL0, 0, 7, _, 'txmt://') ->
+			;	\+ sub_atom(CodeURL0, 0, _, _, 'http://'),
+				\+ sub_atom(CodeURL0, 0, _, _, 'https://'),
+				\+ sub_atom(CodeURL0, 0, _, _, 'vscode://'),
+				\+ sub_atom(CodeURL0, 0, _, _, 'vscodium://'),
+				\+ sub_atom(CodeURL0, 0, _, _, 'cursor://'),
+				\+ sub_atom(CodeURL0, 0, _, _, 'mvim://'),
+				\+ sub_atom(CodeURL0, 0, _, _, 'txmt://') ->
 				% assume local file and don't append line number
 				CodeURL = CodeURL0
 			;	% append line number
 				^^option(url_line_references(bitbucket), Options) ->
 				decompose_file_name(RelativePath, _, File),
 				atomic_list_concat([CodeURL0, '?fileviewer=file-view-default#', File, '-', Line], CodeURL)
-			;	sub_atom(CodePrefix, 0, 9, _, 'vscode://') ->
+			;	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
 				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
-			;	sub_atom(CodePrefix, 0, 7, _, 'mvim://') ->
+			;	sub_atom(CodePrefix, 0, _, _, 'vscodium://') ->
+				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
+			;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
+				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
+			;	sub_atom(CodePrefix, 0, _, _, 'mvim://') ->
 				atomic_list_concat([CodeURL0, '&line=', Line], CodeURL)
-			;	sub_atom(CodePrefix, 0, 7, _, 'txmt://') ->
+			;	sub_atom(CodePrefix, 0, _, _, 'txmt://') ->
 				atomic_list_concat([CodeURL0, '&line=', Line], CodeURL)
 			;	% assume github or gitlab line reference syntax
 				atomic_list_concat([CodeURL0, '#L', Line], CodeURL)

@@ -661,10 +661,10 @@ is <code class="docutils literal notranslate"><span class="pre">false</span></co
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">url_line_references(Host)</span></code></div>
 <div class="line">syntax for the URL source file line part (an atom; possible values
-are <code class="docutils literal notranslate"><span class="pre">{github,gitlab,bitbucket,vscode,mvim,txmt}</span></code>; default is
-<code class="docutils literal notranslate"><span class="pre">github</span></code>); when using this option, the <code class="docutils literal notranslate"><span class="pre">CodeURLPrefix</span></code> should be
-a permanent link (i.e. it should include the commit SHA1) for all
-values except <code class="docutils literal notranslate"><span class="pre">vscode</span></code>, <code class="docutils literal notranslate"><span class="pre">mvim</span></code>, and <code class="docutils literal notranslate"><span class="pre">txmt</span></code></div>
+are <code class="docutils literal notranslate"><span class="pre">{github,gitlab,bitbucket,vscode,vscodium,cursor,mvim,txmt}</span></code>;
+default is <code class="docutils literal notranslate"><span class="pre">github</span></code>); when using this option, the
+<code class="docutils literal notranslate"><span class="pre">CodeURLPrefix</span></code> should be a permanent link (i.e. it should include
+the commit SHA1) for all values except the text editors schemes</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -926,15 +926,17 @@ to file diagrams. The sub-diagrams are automatically generated. For
 example, using the predicates that generate library diagrams will
 automatically also generate the entity and predicate cross-referencing
 diagrams.</p>
-<p>To generate VSCode local file links use the options
-<code class="docutils literal notranslate"><span class="pre">omit_path_prefixes([])</span></code> and
-<code class="docutils literal notranslate"><span class="pre">url_prefixes('vscode://file',DocPrefix)</span></code>.</p>
-<p>To generate MacVim local file links use the options
-<code class="docutils literal notranslate"><span class="pre">omit_path_prefixes([])</span></code> and
-<code class="docutils literal notranslate"><span class="pre">url_prefixes('mvim://open?url=file://',DocPrefix)</span></code>.</p>
-<p>To generate TextMate local file links use the options
-<code class="docutils literal notranslate"><span class="pre">omit_path_prefixes([])</span></code> and
-<code class="docutils literal notranslate"><span class="pre">url_prefixes('txmt://open?url=file://',DocPrefix)</span></code>.</p>
+<p>To generate local file links for opening files and file locations in
+selected text editors, use the <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes([])</span></code> option and set
+the URL prefix:</p>
+<ul class="simple">
+<li><p>VSCode: <code class="docutils literal notranslate"><span class="pre">url_prefixes('vscode://file',</span> <span class="pre">DocPrefix)</span></code></p></li>
+<li><p>VSCodium: <code class="docutils literal notranslate"><span class="pre">url_prefixes('vscodium://file',</span> <span class="pre">DocPrefix)</span></code></p></li>
+<li><p>Cursor: <code class="docutils literal notranslate"><span class="pre">url_prefixes('cursor://file',</span> <span class="pre">DocPrefix)</span></code></p></li>
+<li><p>MacVim: <code class="docutils literal notranslate"><span class="pre">url_prefixes('mvim://open?url=file://',</span> <span class="pre">DocPrefix)</span></code></p></li>
+<li><p>TextMate: <code class="docutils literal notranslate"><span class="pre">url_prefixes('txmt://open?url=file://',</span> <span class="pre">DocPrefix)</span></code></p></li>
+</ul>
+<p>Note that local file links require text editor support for URL schemes.</p>
 <p>To generate links to API documentation and source code repositories, use
 the options <code class="docutils literal notranslate"><span class="pre">path_url_prefixes/3</span></code> (or <code class="docutils literal notranslate"><span class="pre">url_prefixes/2</span></code> for simpler
 cases) and <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code>. The idea is that the

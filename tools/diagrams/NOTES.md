@@ -387,8 +387,8 @@ In the particular case of cross-referencing diagrams, there are also the options
 	print recursive predicate relations (`true` or `false`; default is `false`)
 
 - `url_line_references(Host)`  
-	syntax for the URL source file line part (an atom; possible values are `{github,gitlab,bitbucket,vscode,mvim,txmt}`; default is `github`);
-	when using this option, the `CodeURLPrefix` should be a permanent link (i.e. it should include the commit SHA1) for all values except `vscode`, `mvim`, and `txmt`
+	syntax for the URL source file line part (an atom; possible values are `{github,gitlab,bitbucket,vscode,vscodium,cursor,mvim,txmt}`; default is `github`);
+	when using this option, the `CodeURLPrefix` should be a permanent link (i.e. it should include the commit SHA1) for all values except the text editors schemes
 
 - `predicate_url_target_format(Generator)`  
 	documentation final format generator (an atom; default is `sphinx`)
@@ -541,14 +541,16 @@ diagrams. The sub-diagrams are automatically generated. For example, using
 the predicates that generate library diagrams will automatically also generate
 the entity and predicate cross-referencing diagrams.
 
-To generate VSCode local file links use the options `omit_path_prefixes([])`
-and `url_prefixes('vscode://file',DocPrefix)`.
+To generate local file links for opening files and file locations in selected
+text editors, use the `omit_path_prefixes([])` option and set the URL prefix:
 
-To generate MacVim local file links use the options `omit_path_prefixes([])`
-and `url_prefixes('mvim://open?url=file://',DocPrefix)`.
+- VSCode: `url_prefixes('vscode://file', DocPrefix)`
+- VSCodium: `url_prefixes('vscodium://file', DocPrefix)`
+- Cursor: `url_prefixes('cursor://file', DocPrefix)`
+- MacVim: `url_prefixes('mvim://open?url=file://', DocPrefix)`
+- TextMate: `url_prefixes('txmt://open?url=file://', DocPrefix)`
 
-To generate TextMate local file links use the options `omit_path_prefixes([])`
-and `url_prefixes('txmt://open?url=file://',DocPrefix)`.
+Note that local file links require text editor support for URL schemes.
 
 To generate links to API documentation and source code repositories, use
 the options `path_url_prefixes/3` (or `url_prefixes/2` for simpler cases)
