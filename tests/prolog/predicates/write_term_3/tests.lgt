@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:33:0,
+		version is 1:34:0,
 		author is 'Paulo Moura',
-		date is 2023-07-12,
+		date is 2024-10-26,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -730,8 +730,51 @@
 		{write_term([1,2,3,4,5,6,7,8,9,10,11,12,13], [max_depth(0)])},
 		^^text_output_assertion('[1,2,3,4,5,6,7,8,9,10,11,12,13]', Assertion).
 
+	% check the portrayed/1 option provided by some backends
+
+	test(lgt_write_term_3_137, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(''),
+		{write_term(42, [portrayed(true)])},
+		^^text_output_assertion('42', Assertion).
+
+	test(lgt_write_term_3_138, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(''),
+		{write_term(foo, [portrayed(true)])},
+		^^text_output_assertion(foofoo, Assertion).
+
+	test(lgt_write_term_3_139, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(''),
+		{write_term(a(foo), [portrayed(true)])},
+		^^text_output_assertion('a(foofoo)', Assertion).
+
+	test(lgt_write_term_3_140, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(''),
+		{write_term(a(foo,b(c(foo))), [portrayed(true)])},
+		^^text_output_assertion('a(foofoo,b(c(foofoo)))', Assertion).
+
+	test(lgt_write_term_3_141, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(out, ''),
+		{write_term(out, 42, [portrayed(true)])},
+		^^text_output_assertion(out, '42', Assertion).
+
+	test(lgt_write_term_3_142, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(out, ''),
+		{write_term(out, foo, [portrayed(true)])},
+		^^text_output_assertion(out, foofoo, Assertion).
+
+	test(lgt_write_term_3_143, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(out, ''),
+		{write_term(out, a(foo), [portrayed(true)])},
+		^^text_output_assertion(out, 'a(foofoo)', Assertion).
+
+	test(lgt_write_term_3_144, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(out, ''),
+		{write_term(out, a(foo,b(c(foo))), [portrayed(true)])},
+		^^text_output_assertion(out, 'a(foofoo,b(c(foofoo)))', Assertion).
+
 	cleanup :-
 		^^clean_binary_output,
+		^^clean_text_output,
 		^^clean_text_input.
 
 	% auxiliary predicates
@@ -739,5 +782,9 @@
 	max_depth_option_supported :-
 		current_logtalk_flag(prolog_dialect, Dialect),
 		Dialect \== b, Dialect \== cx, Dialect \== ji.
+
+	portrayed_option_supported :-
+		current_logtalk_flag(prolog_dialect, Dialect),
+		Dialect \== b, Dialect \== cx, Dialect \== ji, Dialect \== tau, Dialect \== trealla, Dialect \== yap.
 
 :- end_object.

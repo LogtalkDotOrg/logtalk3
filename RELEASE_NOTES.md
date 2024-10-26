@@ -49,6 +49,12 @@ BBEdit, MacVim, and TextMate local file links.
 not available" error messages when trying to install or update a pack with
 alternative dependencies where none is available.
 
+Tests
+-----
+
+* ADDED: Tests for the Prolog standard `write_term/2-3` built-in predicates
+support for the `portrayed/1` option implemented by some systems.
+
 
 3.84.0 - October 22, 2024
 =========================
