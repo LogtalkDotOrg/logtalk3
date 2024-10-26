@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:73:0,
+		version is 2:77:0,
 		author is 'Paulo Moura',
-		date is 2024-10-25,
+		date is 2024-10-26,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -408,6 +408,10 @@
 				atom_concat(CodePrefix, RelativePath, CodeURL0)
 			;	sub_atom(CodePrefix, 0, 9, _, 'vscode://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
+			;	sub_atom(CodePrefix, 0, 7, _, 'mvim://') ->
+				atom_concat(CodePrefix, Path, CodeURL0)
+			;	sub_atom(CodePrefix, 0, 7, _, 'txmt://') ->
+				atom_concat(CodePrefix, Path, CodeURL0)
 			;	% prefix to be cut not specified; use the file
 				% absolute path as a local URL
 				CodeURL0 = Path
@@ -420,16 +424,21 @@
 				CodeURL = CodeURL0
 			;	\+ sub_atom(CodeURL0, 0, 7, _, 'http://'),
 				\+ sub_atom(CodeURL0, 0, 8, _, 'https://'),
-				\+ sub_atom(CodeURL0, 0, 9, _, 'vscode://') ->
+				\+ sub_atom(CodeURL0, 0, 9, _, 'vscode://'),
+				\+ sub_atom(CodeURL0, 0, 7, _, 'mvim://'),
+				\+ sub_atom(CodeURL0, 0, 7, _, 'txmt://') ->
 				% assume local file and don't append line number
 				CodeURL = CodeURL0
-			;	% append line number; check first for BitBucket code hosting
-				% style URL line reference
+			;	% append line number
 				^^option(url_line_references(bitbucket), Options) ->
 				decompose_file_name(RelativePath, _, File),
 				atomic_list_concat([CodeURL0, '?fileviewer=file-view-default#', File, '-', Line], CodeURL)
 			;	sub_atom(CodePrefix, 0, 9, _, 'vscode://') ->
 				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
+			;	sub_atom(CodePrefix, 0, 7, _, 'mvim://') ->
+				atomic_list_concat([CodeURL0, '&line=', Line], CodeURL)
+			;	sub_atom(CodePrefix, 0, 7, _, 'txmt://') ->
+				atomic_list_concat([CodeURL0, '&line=', Line], CodeURL)
 			;	% assume github or gitlab line reference syntax
 				atomic_list_concat([CodeURL0, '#L', Line], CodeURL)
 			) ->

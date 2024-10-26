@@ -418,8 +418,7 @@ generated diagrams. For entity diagrams the options are:
 
 - | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
   | default URL code and documenting URL prefixes used when generating
-    cluster, library, file, and entity links (atoms; no default; for
-    VSCode local URLs use ``'vscode://file'``)
+    cluster, library, file, and entity links (atoms; no default)
 
 - | ``entity_url_suffix_target(Suffix, Target)``
   | extension for entity documenting URLs (an atom; default is
@@ -447,10 +446,10 @@ options:
 
 - | ``url_line_references(Host)``
   | syntax for the URL source file line part (an atom; possible values
-    are ``{github,gitlab,bitbucket,vscode}``; default is ``github``);
-    when using this option, the ``CodeURLPrefix`` should be a permanent
-    link (i.e. it should include the commit SHA1) for all values except
-    ``vscode``
+    are ``{github,gitlab,bitbucket,vscode,mvim,txmt}``; default is
+    ``github``); when using this option, the ``CodeURLPrefix`` should be
+    a permanent link (i.e. it should include the commit SHA1) for all
+    values except ``vscode``, ``mvim``, and ``txmt``
 
 - | ``predicate_url_target_format(Generator)``
   | documentation final format generator (an atom; default is
@@ -489,8 +488,7 @@ For directory and file diagrams the options are:
 
 - | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
   | default URL code and documenting URL prefixes used when generating
-    cluster, library, file, and entity links (atoms; no default; for
-    VSCode local URLs use ``'vscode://file'``)
+    cluster, library, file, and entity links (atoms; no default)
 
 - | ``omit_path_prefixes(Prefixes)``
   | omit common path prefixes when printing directory paths and when
@@ -553,8 +551,7 @@ For library diagrams the options are:
 
 - | ``url_prefixes(CodeURLPrefix, DocURLPrefix)``
   | default URL code and documenting URL prefixes used when generating
-    cluster, library, file, and entity links (atoms; no default; for
-    VSCode local URLs use ``'vscode://file'``)
+    cluster, library, file, and entity links (atoms; no default)
 
 - | ``omit_path_prefixes(Prefixes)``
   | omit common path prefixes when printing directory paths and when
@@ -639,6 +636,14 @@ diagrams.
 To generate VSCode local file links use the options
 ``omit_path_prefixes([])`` and
 ``url_prefixes('vscode://file',DocPrefix)``.
+
+To generate MacVim local file links use the options
+``omit_path_prefixes([])`` and
+``url_prefixes('mvim://open?url=file://',DocPrefix)``.
+
+To generate TextMate local file links use the options
+``omit_path_prefixes([])`` and
+``url_prefixes('txmt://open?url=file://',DocPrefix)``.
 
 To generate links to API documentation and source code repositories, use
 the options ``path_url_prefixes/3`` (or ``url_prefixes/2`` for simpler

@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:6:0,
+		version is 3:7:0,
 		author is 'Paulo Moura',
-		date is 2024-10-25,
+		date is 2024-10-26,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -710,7 +710,7 @@
 	valid_option(zoom_url_suffix(Suffix)) :-
 		atom(Suffix).
 	valid_option(url_line_references(Provider)) :-
-		valid(one_of(atom, [bitbucket,github,gitlab,vscode]), Provider).
+		valid(one_of(atom, [bitbucket,github,gitlab,vscode,mvim,txmt]), Provider).
 
 	fix_option(url_prefixes(CodePrefix0, DocPrefix0), url_prefixes(CodePrefix, DocPrefix)) :-
 		normalize_url_prefixes([CodePrefix0, DocPrefix0], [CodePrefix, DocPrefix]).
@@ -1251,6 +1251,12 @@
 			atom_concat(Prefix, Suffix, Path) ->
 			atom_concat(CodePrefix, Suffix, CodeURL)
 		;	sub_atom(CodePrefix, 0, 9, _, 'vscode://') ->
+			atom_concat(CodePrefix, Path, CodeURL),
+			Suffix = CodeURL
+		;	sub_atom(CodePrefix, 0, 7, _, 'mvim://') ->
+			atom_concat(CodePrefix, Path, CodeURL),
+			Suffix = CodeURL
+		;	sub_atom(CodePrefix, 0, 7, _, 'txmt://') ->
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
 		;	CodeURL = Path,
