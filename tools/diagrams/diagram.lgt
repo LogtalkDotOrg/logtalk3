@@ -23,7 +23,7 @@
 	extends(options)).
 
 	:- info([
-		version is 3:10:0,
+		version is 3:11:0,
 		author is 'Paulo Moura',
 		date is 2024-10-27,
 		comment is 'Common predicates for generating diagrams.',
@@ -1248,6 +1248,9 @@
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
 		;	sub_atom(CodePrefix, 0, _, _, 'zed://') ->
+			atom_concat(CodePrefix, Path, CodeURL),
+			Suffix = CodeURL
+		;	sub_atom(CodePrefix, 0, _, _, 'x-bbedit://') ->
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
 		;	sub_atom(CodePrefix, 0, _, _, 'mvim://') ->
