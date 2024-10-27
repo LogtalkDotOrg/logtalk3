@@ -541,16 +541,18 @@ diagrams. The sub-diagrams are automatically generated. For example, using
 the predicates that generate library diagrams will automatically also generate
 the entity and predicate cross-referencing diagrams.
 
-To generate local file links for opening files and file locations in selected
-text editors, use the `omit_path_prefixes([])` option and set the URL prefix:
+To generate local links for opening directories, files, and file locations in
+selected text editors, set the URL code prefix:
 
-- VSCode: `url_prefixes('vscode://file', DocPrefix)`
-- VSCodium: `url_prefixes('vscodium://file', DocPrefix)`
-- Cursor: `url_prefixes('cursor://file', DocPrefix)`
+- VSCode: `url_prefixes('vscode://file/', DocPrefix)`
+- VSCodium: `url_prefixes('vscodium://file/', DocPrefix)`
+- Cursor: `url_prefixes('cursor://file/', DocPrefix)`
 - MacVim: `url_prefixes('mvim://open?url=file://', DocPrefix)`
 - TextMate: `url_prefixes('txmt://open?url=file://', DocPrefix)`
 
-Note that local file links require text editor support for URL schemes.
+As local links use absolute paths, the `omit_path_prefixes/1` option is
+ignored. Note that local links require text editor support for URL schemes
+that can handle both file and directory links.
 
 To generate links to API documentation and source code repositories, use
 the options `path_url_prefixes/3` (or `url_prefixes/2` for simpler cases)

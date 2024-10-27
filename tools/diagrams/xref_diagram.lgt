@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:78:0,
+		version is 2:79:0,
 		author is 'Paulo Moura',
-		date is 2024-10-26,
+		date is 2024-10-27,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -400,13 +400,7 @@
 				true
 			;	^^option(url_prefixes(CodePrefix, _), Options)
 			),
-			% third, cut down any specified local path prefix
-			% before constructing the final code URL
-			^^option(omit_path_prefixes(PathPrefixes), Options),
-			(	member(PathPrefix, PathPrefixes),
-				atom_concat(PathPrefix, RelativePath, Path) ->
-				atom_concat(CodePrefix, RelativePath, CodeURL0)
-			;	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
+			(	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
 			;	sub_atom(CodePrefix, 0, _, _, 'vscodium://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
@@ -416,6 +410,12 @@
 				atom_concat(CodePrefix, Path, CodeURL0)
 			;	sub_atom(CodePrefix, 0, _, _, 'txmt://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
+			;	^^option(omit_path_prefixes(PathPrefixes), Options),
+				% cut down any specified local path prefix
+				% before constructing the final code URL
+				member(PathPrefix, PathPrefixes),
+				atom_concat(PathPrefix, RelativePath, Path) ->
+				atom_concat(CodePrefix, RelativePath, CodeURL0)
 			;	% prefix to be cut not specified; use the file
 				% absolute path as a local URL
 				CodeURL0 = Path

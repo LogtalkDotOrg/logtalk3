@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:8:0,
+		version is 3:9:0,
 		author is 'Paulo Moura',
-		date is 2024-10-26,
+		date is 2024-10-27,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -335,13 +335,7 @@
 
 	normalize_url_prefixes([], []).
 	normalize_url_prefixes([URL0| URLs0], [URL| URLs]) :-
-		(	URL0 == 'vscode://file' ->
-			URL = URL0
-		;	URL0 == 'vscodium://file' ->
-			URL = URL0
-		;	URL0 == 'cursor://file' ->
-			URL = URL0
-		;	sub_atom(URL0, _, _, 0, '/') ->
+		(	sub_atom(URL0, _, _, 0, '/') ->
 			URL = URL0
 		;	atom_concat(URL0, '/', URL)
 		),
@@ -1244,17 +1238,7 @@
 		),
 		!,
 		^^option(omit_path_prefixes(Prefixes), Options),
-		(	member(Path, Prefixes) ->
-			(	CodePrefix == '' ->
-				CodeURL = './',
-				Suffix = './'
-			;	CodeURL = CodePrefix,
-				Suffix = CodePrefix
-			)
-		;	member(Prefix, Prefixes),
-			atom_concat(Prefix, Suffix, Path) ->
-			atom_concat(CodePrefix, Suffix, CodeURL)
-		;	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
+		(	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
 		;	sub_atom(CodePrefix, 0, _, _, 'vscodium://') ->
@@ -1269,6 +1253,16 @@
 		;	sub_atom(CodePrefix, 0, _, _, 'txmt://') ->
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
+		;	member(Path, Prefixes) ->
+			(	CodePrefix == '' ->
+				CodeURL = './',
+				Suffix = './'
+			;	CodeURL = CodePrefix,
+				Suffix = CodePrefix
+			)
+		;	member(Prefix, Prefixes),
+			atom_concat(Prefix, Suffix, Path) ->
+			atom_concat(CodePrefix, Suffix, CodeURL)
 		;	CodeURL = Path,
 			Suffix = Path
 		),

@@ -926,17 +926,18 @@ to file diagrams. The sub-diagrams are automatically generated. For
 example, using the predicates that generate library diagrams will
 automatically also generate the entity and predicate cross-referencing
 diagrams.</p>
-<p>To generate local file links for opening files and file locations in
-selected text editors, use the <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes([])</span></code> option and set
-the URL prefix:</p>
+<p>To generate local links for opening directories, files, and file
+locations in selected text editors, set the URL code prefix:</p>
 <ul class="simple">
-<li><p>VSCode: <code class="docutils literal notranslate"><span class="pre">url_prefixes('vscode://file',</span> <span class="pre">DocPrefix)</span></code></p></li>
-<li><p>VSCodium: <code class="docutils literal notranslate"><span class="pre">url_prefixes('vscodium://file',</span> <span class="pre">DocPrefix)</span></code></p></li>
-<li><p>Cursor: <code class="docutils literal notranslate"><span class="pre">url_prefixes('cursor://file',</span> <span class="pre">DocPrefix)</span></code></p></li>
+<li><p>VSCode: <code class="docutils literal notranslate"><span class="pre">url_prefixes('vscode://file/',</span> <span class="pre">DocPrefix)</span></code></p></li>
+<li><p>VSCodium: <code class="docutils literal notranslate"><span class="pre">url_prefixes('vscodium://file/',</span> <span class="pre">DocPrefix)</span></code></p></li>
+<li><p>Cursor: <code class="docutils literal notranslate"><span class="pre">url_prefixes('cursor://file/',</span> <span class="pre">DocPrefix)</span></code></p></li>
 <li><p>MacVim: <code class="docutils literal notranslate"><span class="pre">url_prefixes('mvim://open?url=file://',</span> <span class="pre">DocPrefix)</span></code></p></li>
 <li><p>TextMate: <code class="docutils literal notranslate"><span class="pre">url_prefixes('txmt://open?url=file://',</span> <span class="pre">DocPrefix)</span></code></p></li>
 </ul>
-<p>Note that local file links require text editor support for URL schemes.</p>
+<p>As local links use absolute paths, the <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code> option
+is ignored. Note that local links require text editor support for URL
+schemes that can handle both file and directory links.</p>
 <p>To generate links to API documentation and source code repositories, use
 the options <code class="docutils literal notranslate"><span class="pre">path_url_prefixes/3</span></code> (or <code class="docutils literal notranslate"><span class="pre">url_prefixes/2</span></code> for simpler
 cases) and <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code>. The idea is that the
