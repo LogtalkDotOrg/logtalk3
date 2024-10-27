@@ -446,10 +446,9 @@ options:
 
 - | ``url_line_references(Host)``
   | syntax for the URL source file line part (an atom; possible values
-    are ``{github,gitlab,bitbucket,vscode,vscodium,cursor,mvim,txmt}``;
-    default is ``github``); when using this option, the
-    ``CodeURLPrefix`` should be a permanent link (i.e. it should include
-    the commit SHA1) for all values except the text editors schemes
+    are ``{github,gitlab,bitbucket}``; default is ``github``); when
+    using this option, the ``CodeURLPrefix`` should be a permanent link
+    (i.e. it should include the commit SHA1)
 
 - | ``predicate_url_target_format(Generator)``
   | documentation final format generator (an atom; default is
@@ -639,6 +638,7 @@ locations in selected text editors, set the URL code prefix:
 - VSCode: ``url_prefixes('vscode://file/', DocPrefix)``
 - VSCodium: ``url_prefixes('vscodium://file/', DocPrefix)``
 - Cursor: ``url_prefixes('cursor://file/', DocPrefix)``
+- Zed: ``url_prefixes('zed://file/', DocPrefix)``
 - MacVim: ``url_prefixes('mvim://open?url=file://', DocPrefix)``
 - TextMate: ``url_prefixes('txmt://open?url=file://', DocPrefix)``
 
