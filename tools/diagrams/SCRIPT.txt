@@ -140,6 +140,14 @@ yes
      directory_load_diagram::rdirectory(tools, '$LOGTALKUSER/tools', [title('Logtalk development tools'), zoom(true), path_url_prefixes('$LOGTALKUSER/',GitHub,'https://logtalk.org/library/'), path_url_prefixes('$LOGTALKHOME/',GitHub,'https://logtalk.org/library/'), omit_path_prefixes(['$LOGTALKUSER/','$LOGTALKHOME/','$HOME/']), exclude_directories(['$HOME/logtalk_packs/', '$HOME/lib'])]).
 yes
 
+
+% we can also generate diagrams with links to local directories and files
+% which open in selected text editors. For example:
+
+| ?- library_load_diagram::rlibrary(tools, [title('Logtalk development tools'), zoom(true), url_prefixes('vscode://file/','')]).
+yes
+
+
 % the utility objects diagrams/0-1 allows generating all supported diagrams
 % at once:
 
