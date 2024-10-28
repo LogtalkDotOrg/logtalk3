@@ -659,6 +659,11 @@ Generating complete diagrams requires that all referenced entities are loaded.
 When that is not the case, notably when generating cross-referencing diagrams,
 missing entities can result in incomplete diagrams.
 
+For complex applications, diagrams can often be made simpler and more readable
+by omitting external nodes (see the `externals/1` option) and/or using one of
+the alternatives to `dot` provided by Graphviz depending on the type of the
+diagram (see the section above on supported graph languages for more details).
+
 When generating entity predicate call cross-reference diagrams, caller nodes
 are not created for auxiliary predicates. For example, if the `meta_compiler`
 library is used to optimize meta-predicates calls, the diagrams may show

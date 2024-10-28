@@ -1035,6 +1035,11 @@ the Prolog file and then load it and create the diagram:</p>
 loaded. When that is not the case, notably when generating
 cross-referencing diagrams, missing entities can result in incomplete
 diagrams.</p>
+<p>For complex applications, diagrams can often be made simpler and more
+readable by omitting external nodes (see the <code class="docutils literal notranslate"><span class="pre">externals/1</span></code> option)
+and/or using one of the alternatives to <code class="docutils literal notranslate"><span class="pre">dot</span></code> provided by Graphviz
+depending on the type of the diagram (see the section above on supported
+graph languages for more details).</p>
 <p>When generating entity predicate call cross-reference diagrams, caller
 nodes are not created for auxiliary predicates. For example, if the
 <code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code> library is used to optimize meta-predicates calls, the
