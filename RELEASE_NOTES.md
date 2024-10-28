@@ -55,6 +55,9 @@ Tests
 * ADDED: Tests for the Prolog standard `write_term/2-3` built-in predicates
 support for the `portrayed/1` option implemented by some systems.
 
+* ADDED: Tests for the Prolog de facto standard `print/1-2` built-in
+predicates.
+
 
 3.84.0 - October 22, 2024
 =========================
