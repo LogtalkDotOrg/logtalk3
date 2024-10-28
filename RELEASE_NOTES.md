@@ -58,6 +58,9 @@ support for the `portrayed/1` option implemented by some systems.
 * ADDED: Tests for the Prolog de facto standard `print/1-2` built-in
 predicates.
 
+* ADDED: Additional tests for the de facto Prolog standard `format/2-3`
+predicates (`~p` control sequence).
+
 
 3.84.0 - October 22, 2024
 =========================

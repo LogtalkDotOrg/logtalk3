@@ -73,10 +73,20 @@
 		{format(out, "~p", [42])},
 		^^text_output_assertion(out, '42', Assertion).
 
-	test(lgt_format_3_print_portray, true(Assertion)) :-
+	test(lgt_format_3_print_portray_01, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~p", [foo])},
 		^^text_output_assertion(out, foofoo, Assertion).
+
+	test(lgt_format_3_print_portray_02, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~p", [a(foo)])},
+		^^text_output_assertion(out, 'a(foofoo)', Assertion).
+
+	test(lgt_format_3_print_portray_03, true(Assertion)) :-
+		^^set_text_output(out, ''),
+		{format(out, "~p", [a(foo,b(c(foo)))])},
+		^^text_output_assertion(out, 'a(foofoo,b(c(foofoo)))', Assertion).
 
 	test(lgt_format_3_atom, true(Assertion)) :-
 		^^set_text_output(out, ''),
