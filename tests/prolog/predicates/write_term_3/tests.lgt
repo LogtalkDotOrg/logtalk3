@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:34:0,
+		version is 1:35:0,
 		author is 'Paulo Moura',
-		date is 2024-10-26,
+		date is 2024-10-28,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -739,35 +739,40 @@
 
 	test(lgt_write_term_3_138, true(Assertion), [condition(portrayed_option_supported)]) :-
 		^^set_text_output(''),
+		{write_term(3.14, [portrayed(true)])},
+		^^text_output_assertion('3', Assertion).
+
+	test(lgt_write_term_3_139, true(Assertion), [condition(portrayed_option_supported)]) :-
+		^^set_text_output(''),
 		{write_term(foo, [portrayed(true)])},
 		^^text_output_assertion(foofoo, Assertion).
 
-	test(lgt_write_term_3_139, true(Assertion), [condition(portrayed_option_supported)]) :-
+	test(lgt_write_term_3_140, true(Assertion), [condition(portrayed_option_supported)]) :-
 		^^set_text_output(''),
 		{write_term(a(foo), [portrayed(true)])},
 		^^text_output_assertion('a(foofoo)', Assertion).
 
-	test(lgt_write_term_3_140, true(Assertion), [condition(portrayed_option_supported)]) :-
+	test(lgt_write_term_3_141, true(Assertion), [condition(portrayed_option_supported)]) :-
 		^^set_text_output(''),
 		{write_term(a(foo,b(c(foo))), [portrayed(true)])},
 		^^text_output_assertion('a(foofoo,b(c(foofoo)))', Assertion).
 
-	test(lgt_write_term_3_141, true(Assertion), [condition(portrayed_option_supported)]) :-
+	test(lgt_write_term_3_142, true(Assertion), [condition(portrayed_option_supported)]) :-
 		^^set_text_output(out, ''),
 		{write_term(out, 42, [portrayed(true)])},
 		^^text_output_assertion(out, '42', Assertion).
 
-	test(lgt_write_term_3_142, true(Assertion), [condition(portrayed_option_supported)]) :-
+	test(lgt_write_term_3_143, true(Assertion), [condition(portrayed_option_supported)]) :-
 		^^set_text_output(out, ''),
 		{write_term(out, foo, [portrayed(true)])},
 		^^text_output_assertion(out, foofoo, Assertion).
 
-	test(lgt_write_term_3_143, true(Assertion), [condition(portrayed_option_supported)]) :-
+	test(lgt_write_term_3_144, true(Assertion), [condition(portrayed_option_supported)]) :-
 		^^set_text_output(out, ''),
 		{write_term(out, a(foo), [portrayed(true)])},
 		^^text_output_assertion(out, 'a(foofoo)', Assertion).
 
-	test(lgt_write_term_3_144, true(Assertion), [condition(portrayed_option_supported)]) :-
+	test(lgt_write_term_3_145, true(Assertion), [condition(portrayed_option_supported)]) :-
 		^^set_text_output(out, ''),
 		{write_term(out, a(foo,b(c(foo))), [portrayed(true)])},
 		^^text_output_assertion(out, 'a(foofoo,b(c(foofoo)))', Assertion).

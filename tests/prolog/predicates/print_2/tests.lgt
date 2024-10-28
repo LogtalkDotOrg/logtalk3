@@ -39,48 +39,57 @@
 
 	test(lgt_print_2_02, true(Assertion)) :-
 		^^set_text_output(out, ''),
+		{print(out, 3.14)},
+		^^text_output_assertion(out, '3', Assertion).
+
+	test(lgt_print_2_03, true(Assertion)) :-
+		^^set_text_output(out, ''),
 		{print(out, foo)},
 		^^text_output_assertion(out, foofoo, Assertion).
 
-	test(lgt_print_2_03, true(Assertion)) :-
+	test(lgt_print_2_04, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{print(out, a(foo))},
 		^^text_output_assertion(out, 'a(foofoo)', Assertion).
 
-	test(lgt_print_2_04, true(Assertion)) :-
+	test(lgt_print_2_05, true(Assertion)) :-
 		^^set_text_output(out, ''),
-		{print(out, a(foo,b(c(foo))))},
-		^^text_output_assertion(out, 'a(foofoo,b(c(foofoo)))', Assertion).
+		{print(out, a(foo,b(c(foo,3.14))))},
+		^^text_output_assertion(out, 'a(foofoo,b(c(foofoo,3)))', Assertion).
 
-	test(lgt_print_2_05, error(instantiation_error)) :-
+	test(lgt_print_2_06, error(instantiation_error)) :-
 		{print(_, foo)}.
 
-	test(lgt_print_2_06, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
+	test(lgt_print_2_07, errors([domain_error(stream_or_alias,foo), existence_error(stream,foo)])) :-
 		{print(foo, 42)}.
 
-	test(lgt_print_2_07, error(existence_error(stream,S))) :-
+	test(lgt_print_2_08, error(existence_error(stream,S))) :-
 		^^closed_input_stream(S, []),
 		{print(S, 42)}.
 
-	test(lgt_print_2_08, error(existence_error(stream,S))) :-
+	test(lgt_print_2_09, error(existence_error(stream,S))) :-
 		^^closed_output_stream(S, []),
 		{print(S, 42)}.
 
-	test(lgt_print_2_09, error(permission_error(output,stream,S))) :-
+	test(lgt_print_2_10, error(permission_error(output,stream,S))) :-
 		current_input(S),
 		{print(S, 42)}.
 
-	test(lgt_print_2_10, error(permission_error(output,binary_stream,S))) :-
+	test(lgt_print_2_11, error(permission_error(output,binary_stream,S))) :-
 		^^set_binary_output([]),
 		current_output(S),
 		{print(S, 42)}.
 
-	test(lgt_print_2_11, error(permission_error(output,stream,s))) :-
+	test(lgt_print_2_12, error(permission_error(output,stream,s))) :-
 		^^set_text_input(s, ''),
 		{print(s, a)}.
 
-	test(lgt_print_2_12, error(permission_error(output,binary_stream,_))) :-
+	test(lgt_print_2_13, error(permission_error(output,binary_stream,_))) :-
 		^^set_binary_output(s, []),
 		{print(s, a)}.
+
+	cleanup :-
+		^^clean_binary_output,
+		^^clean_text_input.
 
 :- end_object.

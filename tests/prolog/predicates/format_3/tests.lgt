@@ -75,18 +75,23 @@
 
 	test(lgt_format_3_print_portray_01, true(Assertion)) :-
 		^^set_text_output(out, ''),
+		{format(out, "~p", [3.14])},
+		^^text_output_assertion(out, '3', Assertion).
+
+	test(lgt_format_3_print_portray_02, true(Assertion)) :-
+		^^set_text_output(out, ''),
 		{format(out, "~p", [foo])},
 		^^text_output_assertion(out, foofoo, Assertion).
 
-	test(lgt_format_3_print_portray_02, true(Assertion)) :-
+	test(lgt_format_3_print_portray_03, true(Assertion)) :-
 		^^set_text_output(out, ''),
 		{format(out, "~p", [a(foo)])},
 		^^text_output_assertion(out, 'a(foofoo)', Assertion).
 
-	test(lgt_format_3_print_portray_03, true(Assertion)) :-
+	test(lgt_format_3_print_portray_04, true(Assertion)) :-
 		^^set_text_output(out, ''),
-		{format(out, "~p", [a(foo,b(c(foo)))])},
-		^^text_output_assertion(out, 'a(foofoo,b(c(foofoo)))', Assertion).
+		{format(out, "~p", [a(foo,b(c(foo,3.14)))])},
+		^^text_output_assertion(out, 'a(foofoo,b(c(foofoo,3)))', Assertion).
 
 	test(lgt_format_3_atom, true(Assertion)) :-
 		^^set_text_output(out, ''),

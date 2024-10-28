@@ -27,6 +27,10 @@ portray(Atom) :-
 	atom(Atom),
 	write(Atom),
 	write(Atom).
+portray(Float) :-
+	float(Float),
+	Integer is truncate(Float),
+	write(Integer).
 
 
 :- initialization((

@@ -39,17 +39,22 @@
 
 	test(lgt_print_1_02, true(Assertion)) :-
 		^^set_text_output(''),
+		{print(3.14)},
+		^^text_output_assertion('3', Assertion).
+
+	test(lgt_print_1_03, true(Assertion)) :-
+		^^set_text_output(''),
 		{print(foo)},
 		^^text_output_assertion(foofoo, Assertion).
 
-	test(lgt_print_1_03, true(Assertion)) :-
+	test(lgt_print_1_04, true(Assertion)) :-
 		^^set_text_output(''),
 		{print(a(foo))},
 		^^text_output_assertion('a(foofoo)', Assertion).
 
-	test(lgt_print_1_04, true(Assertion)) :-
+	test(lgt_print_1_05, true(Assertion)) :-
 		^^set_text_output(''),
-		{print(a(foo,b(c(foo))))},
-		^^text_output_assertion('a(foofoo,b(c(foofoo)))', Assertion).
+		{print(a(foo,b(c(foo,3.14))))},
+		^^text_output_assertion('a(foofoo,b(c(foofoo,3)))', Assertion).
 
 :- end_object.
