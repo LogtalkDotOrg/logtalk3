@@ -19,6 +19,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+% for testing the ~p control sequence
+:- multifile(portray/1).
+:- dynamic(portray/1).
+
+portray(Atom) :-
+	atom(Atom),
+	write(Atom),
+	write(Atom).
+portray(Float) :-
+	float(Float),
+	Integer is truncate(Float),
+	write(Integer).
+
+
 :- object(tests,
 	extends(lgtunit)).
 
