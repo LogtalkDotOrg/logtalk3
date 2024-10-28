@@ -916,15 +916,15 @@ diagrams of Logtalk applications:</p>
 <section id="linking-diagrams">
 <h2>Linking diagrams<a class="headerlink" href="#linking-diagrams" title="Link to this heading"></a></h2>
 <p>When using SVG output, it’s possible to generate diagrams that link to
-other diagrams, to API documentation, and to source code repositories
-(to both files and directories).</p>
+other diagrams, to API documentation, to local files and directories,
+and to source code repositories.</p>
 <p>For generating links between diagrams, use the <code class="docutils literal notranslate"><span class="pre">zoom(true)</span></code> option.
 This option allows (1) linking library diagrams to entity diagrams to
 predicate cross-referencing diagrams and (2) linking directory diagrams
-to file diagrams. The sub-diagrams are automatically generated. For
-example, using the predicates that generate library diagrams will
-automatically also generate the entity and predicate cross-referencing
-diagrams.</p>
+to file diagrams to entity diagrams to predicate cross-referencing
+diagrams. The sub-diagrams are automatically generated. For example,
+using the predicates that generate library diagrams will automatically
+also generate the entity and predicate cross-referencing diagrams.</p>
 <p>To generate local links for opening directories, files, and file
 locations in selected text editors, set the URL code prefix:</p>
 <ul class="simple">
@@ -936,9 +936,10 @@ locations in selected text editors, set the URL code prefix:</p>
 <li><p>MacVim: <code class="docutils literal notranslate"><span class="pre">url_prefixes('mvim://open?url=file://',</span> <span class="pre">DocPrefix)</span></code></p></li>
 <li><p>TextMate: <code class="docutils literal notranslate"><span class="pre">url_prefixes('txmt://open?url=file://',</span> <span class="pre">DocPrefix)</span></code></p></li>
 </ul>
-<p>As local links use absolute paths, the <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code> option
-is ignored. Note that local links require text editor support for URL
-schemes that can handle both file and directory links.</p>
+<p>As most of the text editor URL scheme handlers require local links to
+use absolute paths, the <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code> option is ignored. Note
+that local links require text editor support for URL schemes that can
+handle both file and directory links.</p>
 <p>To generate links to API documentation and source code repositories, use
 the options <code class="docutils literal notranslate"><span class="pre">path_url_prefixes/3</span></code> (or <code class="docutils literal notranslate"><span class="pre">url_prefixes/2</span></code> for simpler
 cases) and <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code>. The idea is that the
