@@ -144,7 +144,7 @@ yes
 % we can also generate diagrams with links to local directories and files
 % which open in selected text editors. For example:
 
-| ?- library_load_diagram::rlibrary(tools, [title('Logtalk development tools'), zoom(true), url_prefixes('vscode://file/','')]).
+| ?- library_load_diagram::rlibrary(tools, [title('Logtalk development tools'), zoom(true), url_prefixes('vscode://file/','$LOGTALKUSER/docs/')]).
 yes
 
 
