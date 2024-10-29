@@ -553,6 +553,9 @@ in selected text editors, set the URL code prefix:
 - MacVim: `url_prefixes('mvim://open?url=file://', DocPrefix)`
 - TextMate: `url_prefixes('txmt://open?url=file://', DocPrefix)`
 
+In this case, the ``DocPrefix`` argument should be the path to directory
+containing the HTML version of the application APIs.
+
 As most of the text editor URL scheme handlers require local links to use
 absolute paths, the `omit_path_prefixes/1` option is ignored. Note that
 local links require text editor support for URL schemes that can handle
