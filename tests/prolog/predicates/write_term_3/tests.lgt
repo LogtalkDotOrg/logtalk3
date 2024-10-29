@@ -37,9 +37,9 @@ portray(Float) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:35:0,
+		version is 1:36:0,
 		author is 'Paulo Moura',
-		date is 2024-10-28,
+		date is 2024-10-29,
 		comment is 'Unit tests for the ISO Prolog standard write_term/3, write_term/2, write/2, write/1, writeq/2, writeq/1, write_canonical/2, and write_canonical/1 built-in predicates.'
 	]).
 
@@ -804,6 +804,6 @@ portray(Float) :-
 
 	portrayed_option_supported :-
 		current_logtalk_flag(prolog_dialect, Dialect),
-		Dialect \== b, Dialect \== cx, Dialect \== ji, Dialect \== tau, Dialect \== trealla, Dialect \== yap.
+		Dialect \== b, Dialect \== cx, Dialect \== ji, Dialect \== tau, Dialect \== yap.
 
 :- end_object.
