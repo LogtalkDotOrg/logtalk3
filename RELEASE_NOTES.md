@@ -45,6 +45,9 @@ Tools
 * ADDED: Support to the `diagrams` tool for VSCode, VSCodium, Cursor, Zed,
 BBEdit, MacVim, and TextMate local file links.
 
+* UPDATED: Rewrite error and warning messages from the `packs` tool so that
+they can be explained by the `tutor` tool.
+
 * FIXED: Case where the `packs` tool would print repeated "Pack dependency
 not available" error messages when trying to install or update a pack with
 alternative dependencies where none is available.

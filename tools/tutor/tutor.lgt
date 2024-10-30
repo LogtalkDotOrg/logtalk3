@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:74:0,
+		version is 0:75:0,
 		author is 'Paulo Moura',
-		date is 2024-10-16,
+		date is 2024-10-30,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -1289,7 +1289,7 @@
 			'use explicit and verified pack versions. This practice protects applications'-[], nl,
 			'from breaking when pack dependencies are inadvertently uninstalled. To force'-[], nl,
 			'uninstallation, either unpin the pack using the packs::unpin(Pack) message or'-[], nl,
-			'use the packs::uninstall(Pack, Options) message with the force(true) option.', nl, nl
+			'use the packs::uninstall(Pack, Options) message with the force(true) option.'-[], nl, nl
 		].
 
 	explain(cannot_update_pinned_pack(_)) -->
@@ -1297,14 +1297,14 @@
 			'use explicit and verified pack versions. This practice protects applications'-[], nl,
 			'from breaking when unverified pack updates are installed. To force the pack'-[], nl,
 			'update, either unpin the pack using the packs::unpin(Pack) message or use the'-[], nl,
-			'the packs::update(Pack, Options) message with the force(true) option.', nl, nl
+			'the packs::update(Pack, Options) message with the force(true) option.'-[], nl, nl
 		].
 
 	explain(pack_archive_copy_failed(_, _)) -->
 		[	'Pack archive copy failures usually result directory or file permissions.'-[], nl,
 			'Check those permissions. In rare cases, there may be a pack manifest error'-[], nl,
 			'with a wrong path for the archive. you can use the packs::describe(Pack)'-[], nl,
-			'message to list the pack home and archive paths.', nl, nl
+			'message to list the pack home and archive paths.'-[], nl, nl
 		].
 
 	explain(pack_archive_download_failed(_, _)) -->
@@ -1328,14 +1328,14 @@
 		[	'Pack archive signature download failures usually result from network.'-[], nl,
 			'connectivity issues. Check if you can reach the pack provider server.'-[], nl,
 			'In rare cases, the signature file may be missing upstream. You can use the'-[], nl,
-			'packs::describe(Pack) message to list the pack home and archive URLs.', nl, nl
+			'packs::describe(Pack) message to list the pack home and archive URLs.'-[], nl, nl
 		].
 
 	explain(pack_archive_checksig_failed(_, _)) -->
 		[	'Pack archive signature failures may be evidence of malicious tampering with'-[], nl,
 			'the archive. In rare cases, there may be a pack manifest error with a wrong'-[], nl,
 			'signature for the archive. It is advisable to contact the pack provider for'-[], nl,
-			'diagnosing the problem.', nl, nl
+			'diagnosing the problem.'-[], nl, nl
 		].
 
 	explain(pack_archive_decrypt_failed(_, _)) -->
@@ -1348,7 +1348,67 @@
 	explain(pack_archive_uncompress_failed(_, _)) -->
 		[	'Pack archive uncompressing failures may be caused by a mismatch between the'-[], nl,
 			'archive format and its file name extension. It is advisable to contact the'-[], nl,
-			'pack provider for diagnosing the problem.', nl, nl
+			'pack provider for diagnosing the problem.'-[], nl, nl
+		].
+
+	explain(os_dependency_not_available(_)) -->
+		[	'The pack will most likely be broken if installed due to the current'-[], nl,
+			'operating-system version not being the version required.'-[], nl, nl
+		].
+
+	explain(logtalk_dependency_not_available(_)) -->
+		[	'The pack will most likely be broken if installed due to the current'-[], nl,
+			'Logtalk version not being the version required. Either update to the'-[], nl,
+			'required Logtalk version or use a virtual environment with Logtalk'-[], nl,
+			'instaled as a pack at the required version.'-[], nl, nl
+		].
+
+	explain(backend_dependency_not_available(_)) -->
+		[	'The pack is not compatible wuth the current backend. You will need'-[], nl,
+			'to run Logtalk with the required backend to use this pack.'-[], nl, nl
+		].
+
+	explain(pack_dependency_not_available(_, _, _, _, _)) -->
+		[	'The pack will most likely be broken if installed due to the required'-[], nl,
+			'dependency not being available.'-[], nl, nl
+		].
+
+	explain(pack_dependency_not_available(_, _)) -->
+		[	'The pack will most likely be broken if installed due to the required'-[], nl,
+			'dependency not being available.'-[], nl, nl
+		].
+
+	explain(pack_dependency_not_available(_)) -->
+		[	'The pack will most likely be broken if installed due to the required'-[], nl,
+			'dependency not being available.'-[], nl, nl
+		].
+
+	explain(no_pack_version_compatible_with_os_version(_, _, _)) -->
+		[	'You will need to either install a different pack version or use a'-[], nl,
+			'different operating-system version. The pack dependencies can be'-[], nl,
+			'listed using the packs::describe/1 predicate.'-[], nl, nl
+		].
+
+	explain(no_pack_version_compatible_with_logtalk_version(_)) -->
+		[	'You will need to either install a different pack version or install a'-[], nl,
+			'different Logtalk version. The pack dependencies can be listed using'-[], nl,
+			'the packs::describe/1 predicate.'-[], nl, nl
+		].
+
+	explain(no_pack_version_compatible_with_backend_version(_, _)) -->
+		[	'You will need to either install a different pack version or install a'-[], nl,
+			'different backend version. The pack dependencies can be listed using'-[], nl,
+			'the packs::describe/1 predicate.'-[], nl, nl
+		].
+
+	explain(updating_pack_would_break_installed_pack(_, _, _)) -->
+		[	'Consider using application specific pack virtual environments to avoid'-[], nl,
+			'these conflicts.'-[], nl, nl
+		].
+
+	explain(updating_pack_breaks_installed_pack(_, _, _)) -->
+		[	'Consider using application specific pack virtual environments to avoid'-[], nl,
+			'these conflicts.'-[], nl, nl
 		].
 
 :- end_object.

@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:37:0,
+		version is 0:38:0,
 		author is 'Paulo Moura',
-		date is 2024-10-16,
+		date is 2024-10-30,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -210,6 +210,39 @@
 
 	message_tokens(pack_directory_copy_failed(Pack, URL)) -->
 		['Pack directory copy failed: ~q (~q)'-[Pack, URL], nl].
+
+	message_tokens(os_dependency_not_available(Dependency)) -->
+		['Operating-system dependency not available: ~q'-[Dependency], nl].
+
+	message_tokens(logtalk_dependency_not_available(Dependency)) -->
+		['Logtalk dependency not available: ~q'-[Dependency], nl].
+
+	message_tokens(backend_dependency_not_available(Dependency)) -->
+		['Backend dependency not available: ~q'-[Dependency], nl].
+
+	message_tokens(pack_dependency_not_available(Dependency, Operator1, Lower, Operator2, Upper)) -->
+		['Pack dependency not available: ~q ~q ~q and ~q ~q'-[Dependency, Operator1, Lower, Operator2, Upper], nl].
+
+	message_tokens(pack_dependency_not_available(Registry, Pack)) -->
+		['Pack dependency not available: ~q::~q'-[Registry, Pack], nl].
+
+	message_tokens(pack_dependency_not_available(Dependency)) -->
+		['Pack dependency not available: ~q'-[Dependency], nl].
+
+	message_tokens(no_pack_version_compatible_with_os_version(Name, Machine, Version)) -->
+		['No pack version compatible with the current operating-system version is available: ~w ~w ~w'-[Name, Machine, Version], nl].
+
+	message_tokens(no_pack_version_compatible_with_logtalk_version(Version)) -->
+		['No pack version compatible with the current Logtalk version is available: ~w'-[Version], nl].
+
+	message_tokens(no_pack_version_compatible_with_backend_version(Name, Version)) -->
+		['No pack version compatible with the current backend version is available: ~w ~w'-[Name, Version], nl].
+
+	message_tokens(updating_pack_would_break_installed_pack(Pack, Version, Dependent)) -->
+		['Updating ~q to ~q would break installed pack ~q'-[Pack, Version, Dependent], nl].
+
+	message_tokens(updating_pack_breaks_installed_pack(Pack, Version, Dependent)) -->
+		['Updating ~q to ~q breaks installed pack ~q'-[Pack, Version, Dependent], nl].
 
 	% pack uninstall messages
 

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:80:1,
+		version is 0:81:0,
 		author is 'Paulo Moura',
-		date is 2024-10-23,
+		date is 2024-10-30,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -1799,13 +1799,13 @@
 			;	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) ->
 				Action = update(Registry, Pack, Version, Options)
 			;	\+ member('$or'(true), Options),
-				print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
+				print_message(error, packs, pack_dependency_not_available(Registry::Pack, Operator1, Lower, Operator2, Upper)),
 				fail
 			)
 		;	find_dependency_version(Operator1, Lower, Operator2, Upper, Registry, Pack, Version, Options) ->
 			Action = install(Registry, Pack, Version, Options)
 		;	\+ member('$or'(true), Options),
-			print_message(error, packs, 'Pack dependency not available: ~q ~q ~q and ~q ~q'+[Registry::Pack, Operator1, Lower, Operator2, Upper]),
+			print_message(error, packs, pack_dependency_not_available(Registry::Pack, Operator1, Lower, Operator2, Upper)),
 			fail
 		).
 	check_range_dependency(os(Name,Machine), Lower, Operator1, Upper, Operator2, Action, Options) :-
@@ -1818,7 +1818,7 @@
 			Action = none
 		;	^^option(compatible(false), Options) ->
 			Action = os(Name, Machine, Operator1, Lower, Operator2, Upper)
-		;	print_message(warning, packs, 'No pack version compatible with the current operating-system is available: ~w ~w ~w'+[Name, Machine, Version]),
+		;	print_message(warning, packs, no_pack_version_compatible_with_os_version(Name, Machine, Version)),
 			fail
 		).
 	check_range_dependency(logtalk, Lower, Operator1, Upper, Operator2, Action, Options) :-
@@ -1831,7 +1831,7 @@
 			Action = none
 		;	^^option(compatible(false), Options) ->
 			Action = logtalk(Operator1, Lower, Operator2, Upper)
-		;	print_message(warning, packs, 'No pack version compatible with the current Logtalk version is available: ~w'+[Major:Minor:Patch]),
+		;	print_message(warning, packs, no_pack_version_compatible_with_logtalk_version(Major:Minor:Patch)),
 			fail
 		).
 	% workaround the interim solution for allowing specifying two distinct compatible backend versions for a pack version
@@ -1849,7 +1849,7 @@
 			backend(Backend, Name),
 			Action = backend(Name, (==), Lower, (==), Upper)
 		;	backend(Backend, Name),
-			print_message(warning, packs, 'No pack version compatible with the current backend version is available: ~w ~w'+[Name, Major:Minor:Patch]),
+			print_message(warning, packs, no_pack_version_compatible_with_backend_version(Name, Major:Minor:Patch)),
 			fail
 		).
 	check_range_dependency(Backend, Lower, Operator1, Upper, Operator2, Action, Options) :-
@@ -1865,7 +1865,7 @@
 			backend(Backend, Name),
 			Action = backend(Name, Operator1, Lower, Operator2, Upper)
 		;	backend(Backend, Name),
-			print_message(warning, packs, 'No pack version compatible with the current backend version is available: ~w ~w'+[Name, Major:Minor:Patch]),
+			print_message(warning, packs, no_pack_version_compatible_with_backend_version(Name, Major:Minor:Patch)),
 			fail
 		).
 	check_range_dependency(_, _, _, _, _, none, _).
@@ -1877,7 +1877,7 @@
 		;	check_dependency(Dependencies, Registry, Pack, Action, ['$or'(true)| Options]) ->
 			true
 		;	\+ member('$or'(true), Options),
-			print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
+			print_message(error, packs, pack_dependency_not_available(Registry, Pack)),
 			fail
 		).
 	check_dependency((Dependency, Dependencies), Registry, Pack, Action, Options) :-
@@ -1893,7 +1893,7 @@
 		(	registry_pack(Registry, Pack, _) ->
 			true
 		;	\+ member('$or'(true), Options),
-			print_message(error, packs, 'Pack dependency not available: ~q::~q'+[Registry, Pack]),
+			print_message(error, packs, pack_dependency_not_available(Registry, Pack)),
 			fail
 		).
 	check_availability(_, _).
@@ -1907,13 +1907,13 @@
 			;	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) ->
 				Action = update(Registry, Pack, Version, Options)
 			;	\+ member('$or'(true), Options),
-				print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
+				print_message(error, packs, pack_dependency_not_available(Dependency)),
 				fail
 			)
 		;	find_dependency_version(Operator, RequiredVersion, Registry, Pack, Version, Options) ->
 			Action = install(Registry, Pack, Version, Options)
 		;	\+ member('$or'(true), Options),
-			print_message(error, packs, 'Pack dependency not available: ~q'+[Dependency]),
+			print_message(error, packs, pack_dependency_not_available(Dependency)),
 			fail
 		).
 	check_version(Operator, os(Name,Machine), RequiredVersion, Dependency, Action, Options) :-
@@ -1926,7 +1926,7 @@
 		;	^^option(compatible(false), Options) ->
 			Action = os(Name, Machine, RequiredVersion)
 		;	\+ member('$or'(true), Options),
-			print_message(error, packs, 'Operating-system dependency not available: ~q'+[Dependency]),
+			print_message(error, packs, os_dependency_not_available(Dependency)),
 			fail
 		).
 	check_version(Operator, logtalk, Version, Dependency, Action, Options) :-
@@ -1938,7 +1938,7 @@
 		;	^^option(compatible(false), Options) ->
 			Action = logtalk(Operator, Version)
 		;	\+ member('$or'(true), Options),
-			print_message(error, packs, 'Logtalk dependency not available: ~q'+[Dependency]),
+			print_message(error, packs, logtalk_dependency_not_available(Dependency)),
 			fail
 		).
 	check_version(Operator, Backend, Version, Dependency, Action, Options) :-
@@ -1951,14 +1951,14 @@
 				backend(Backend, Name),
 				Action = backend(Name, Operator, Version)
 			;	\+ member('$or'(true), Options),
-				print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
+				print_message(error, packs, backend_dependency_not_available(Dependency)),
 				fail
 			)
 		;	^^option(compatible(false), Options) ->
 			backend(Backend, Name),
 			Action = backend(Name, Operator, Version)
 		;	\+ member('$or'(true), Options),
-			print_message(error, packs, 'Backend dependency not available: ~q'+[Dependency]),
+			print_message(error, packs, backend_dependency_not_available(Dependency)),
 			fail
 		).
 
@@ -2072,9 +2072,9 @@
 		(	check_dependent_dependency(Dependency, Registry, Pack, NewVersion) ->
 			check_dependent_dependencies(Dependencies, Dependent, Registry, Pack, NewVersion, Options)
 		;	^^option(force(false), Options) ->
-			print_message(error, packs, 'Updating ~q to ~q would break installed pack ~q'+[Registry::Pack, NewVersion, Dependent]),
+			print_message(error, packs, updating_pack_would_break_installed_pack(Registry::Pack, NewVersion, Dependent)),
 			fail
-		;	print_message(warning, packs, 'Updating ~q to ~q breaks installed pack ~q'+[Registry::Pack, NewVersion, Dependent])
+		;	print_message(warning, packs, updating_pack_breaks_installed_pack(Registry::Pack, NewVersion, Dependent))
 		).
 
 	check_dependent_dependency((Dependency; Dependencies), Registry, Pack, NewVersion) :-
