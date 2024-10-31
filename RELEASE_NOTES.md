@@ -55,7 +55,8 @@ alternative dependencies where none is available.
 Tests
 -----
 
-* ADDED: Additional tests for the Prolog standard `bagof/3` predicate.
+* ADDED: Additional tests for the Prolog standard `bagof/3` and `setof/3`
+built-in predicates.
 
 * ADDED: Tests for the Prolog standard `write_term/2-3` built-in predicates
 support for the `portrayed/1` option implemented by most systems.

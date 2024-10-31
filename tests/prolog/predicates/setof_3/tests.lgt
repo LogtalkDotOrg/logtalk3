@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -75,6 +75,32 @@ a(baz(_), z/2, 3).
 f(_, 1, a).
 f(_, 2, b).
 
+v1(_).
+v1(_).
+v1(_).
+
+v2(_, _).
+v2(_, _).
+v2(_, _).
+
+v3(A, A).
+v3(A, A).
+v3(_, _).
+
+v4(A, _, A).
+v4(A, A, _).
+v4(_, A, A).
+
+v5(A, _, A).
+v5(A, A, _).
+v5(_, A, A).
+v5(A, _, A).
+
+v6(A, B, B, A).
+v6(A, _, _, A).
+v6(_, B, B, _).
+v6(A, B, B, A).
+
 % avoid conflicts with a possible member/2 built-in predicate
 setof_3_member(X, [X| _]).
 setof_3_member(X, [_| L]) :-
@@ -85,9 +111,9 @@ setof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:10:0,
+		version is 1:11:0,
 		author is 'Paulo Moura',
-		date is 2023-07-05,
+		date is 2024-10-31,
 		comment is 'Unit tests for the ISO Prolog standard setof/3 built-in predicate.'
 	]).
 
@@ -298,15 +324,67 @@ setof_3_member(X, [_| L]) :-
 			setof(X, foobar(X), _)
 		}.
 
+	% tests for variable handling
+
+	test(lgt_setof_3_38, variant(LL, [s(_,[1])])) :-
+		findall(s(X,L), {setof(1, v1(X), L)}, LL).
+
+	test(lgt_setof_3_39, variant(LL, [s(_,_,[1])])) :-
+		findall(s(X,Y,L), {setof(1, v2(X,Y), L)}, LL).
+
+	test(lgt_setof_3_40, true) :-
+		findall(s(X,Y,L), {setof(1, v3(X,Y), L)}, LL),
+		% per ISO standard, the order in which list is found is undefined
+		assertion((
+			variant(LL, [s(A,A,[1]), s(_,_,[1])])
+		;	variant(LL, [s(_,_,[1]),   s(A,A,[1])])
+		)).
+
+	test(lgt_setof_3_41, true) :-
+		findall(s(X,Y,Z,L), {setof(1, v4(X,Y,Z), L)}, LL),
+		% per ISO standard, the order in which list is found is undefined
+		assertion((
+			variant(LL, [s(A,A,_,[1]), s(C,_,C,[1]), s(_,F,F,[1])])
+		;	variant(LL, [s(A,A,_,[1]), s(_,F,F,[1]), s(C,_,C,[1])])
+		;	variant(LL, [s(C,_,C,[1]), s(A,A,_,[1]), s(_,F,F,[1])])
+		;	variant(LL, [s(C,_,C,[1]), s(_,F,F,[1]), s(A,A,_,[1])])
+		;	variant(LL, [s(_,F,F,[1]), s(A,A,_,[1]), s(C,_,C,[1])])
+		;	variant(LL, [s(_,F,F,[1]), s(C,_,C,[1]), s(A,A,_,[1])])
+		)).
+
+	test(lgt_setof_3_42, true) :-
+		findall(s(X,Y,Z,L), {setof(1, v5(X,Y,Z), L)}, LL),
+		% per ISO standard, the order in which list is found is undefined
+		assertion((
+			variant(LL, [s(A,A,_,[1]), s(C,_,C,[1]), s(_,F,F,[1])])
+		;	variant(LL, [s(A,A,_,[1]), s(_,F,F,[1]), s(C,_,C,[1])])
+		;	variant(LL, [s(C,_,C,[1]), s(A,A,_,[1]), s(_,F,F,[1])])
+		;	variant(LL, [s(C,_,C,[1]), s(_,F,F,[1]), s(A,A,_,[1])])
+		;	variant(LL, [s(_,F,F,[1]), s(A,A,_,[1]), s(C,_,C,[1])])
+		;	variant(LL, [s(_,F,F,[1]), s(C,_,C,[1]), s(A,A,_,[1])])
+		)).
+
+	test(lgt_setof_3_43, true) :-
+		findall(s(X,Y,Z,T,L), {setof(1, v6(X,Y,Z,T), L)}, LL),
+		% per ISO standard, the order in which list is found is undefined
+		assertion((
+			variant(LL, [s(A,B,B,A,[1]), s(C,_,_,C,[1]), s(_,F,F,_,[1])])
+		;	variant(LL, [s(A,B,B,A,[1]), s(_,F,F,_,[1]), s(C,_,_,C,[1])])
+		;	variant(LL, [s(C,_,_,C,[1]), s(A,B,B,A,[1]), s(_,F,F,_,[1])])
+		;	variant(LL, [s(C,_,_,C,[1]), s(_,F,F,_,[1]), s(A,B,B,A,[1])])
+		;	variant(LL, [s(_,F,F,_,[1]), s(A,B,B,A,[1]), s(C,_,_,C,[1])])
+		;	variant(LL, [s(_,F,F,_,[1]), s(C,_,_,C,[1]), s(A,B,B,A,[1])])
+		)).
+
 	% tests from the WG17 standardization work
 
-	test(wg17_setof_3_38, false) :-
+	test(wg17_setof_3_44, false) :-
 		{setof(t, (L=2; L=1), L)}.
 
-	test(wg17_setof_3_39, true((variant(Ls, [[E,_,_],[_,E,_],[_,_,E]]); variant(Ls, [[_,_,E],[_,E,_],[E,_,_]])))) :-
+	test(wg17_setof_3_45, true((variant(Ls, [[E,_,_],[_,E,_],[_,_,E]]); variant(Ls, [[_,_,E],[_,E,_],[E,_,_]])))) :-
 		bagof(L, A^B^C^{L = [A,B,C], setof(t, setof_3_member(E,L), _)}, Ls).
 
-	test(wg17_setof_3_40, true((L == [A,B,C]; L == [C,B,A]))) :-
+	test(wg17_setof_3_46, true((L == [A,B,C]; L == [C,B,A]))) :-
 		bagof(E, {setof(t, (A=E;B=E;C=E), _)}, L).
 
 :- end_object.

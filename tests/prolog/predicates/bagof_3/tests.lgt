@@ -207,6 +207,8 @@ bagof_3_member(X, [_| L]) :-
 			bagof(X, foobar(X), _)
 		}.
 
+	% tests for variable handling
+
 	test(lgt_bagof_3_24, variant(LL, [s(_,[1,1,1])])) :-
 		findall(s(X,L), {bagof(1, v1(X), L)}, LL).
 
