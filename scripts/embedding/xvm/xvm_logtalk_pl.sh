@@ -5,7 +5,7 @@
 ##   This script creates a XVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on January 9, 2024
+##   Last updated on October 31, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.11"
+	echo "$(basename "$0") 0.12"
 	exit 0
 }
 
@@ -104,6 +104,7 @@ paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 compile="false"
 foreign="false"
+goal="true"
 encrypt="false"
 
 usage_help()
@@ -112,10 +113,11 @@ usage_help()
 	echo "This script creates a XVM logtalk.pl file with the Logtalk compiler/runtime"
 	echo "and an optional application.pl file from an application source code given"
 	echo "its loader file. When embedding an application, this script also creates a"
-	echo "loader.pl file for loading all generated Prolog and foreign library files."
+	echo "loader.pl file for loading all generated Prolog and foreign library files,"
+	echo "optionally calling a startup goal."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-f] [-x]"
+	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-g goal] [-f] [-x]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -126,6 +128,7 @@ usage_help()
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
+	echo "  -g startup goal for the application in canonical syntax (default is $goal)"
 	echo "  -f copy foreign library files loaded by the application"
 	echo "  -x encrypt the generated logtalk.pl and application.pl files"
 	echo "  -v print version of $(basename "$0")"
@@ -133,7 +136,7 @@ usage_help()
 	echo
 }
 
-while getopts "cd:t:p:l:s:fxvh" option
+while getopts "cd:t:p:s:l:g:fxvh" option
 do
 	case $option in
 		c) compile="true";;
@@ -142,6 +145,7 @@ do
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		g) g_arg="$OPTARG";;
 		f) foreign="true";;
 		x) encrypt="true";;
 		v) print_version;;
@@ -187,6 +191,10 @@ if [ "$l_arg" != "" ] ; then
 	fi
 else
 	loader=""
+fi
+
+if [ "$g_arg" != "" ] ; then
+	goal="$g_arg"
 fi
 
 mkdir -p "$directory"
@@ -275,9 +283,8 @@ if [ "$loader" != "" ] ; then
 	else
 		xvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
 	fi
-	cat $(ls -rt *.pl) > "$directory"/application.pl
+	cat "$(ls -rt ./*.pl)" > "$directory"/application.pl
 
-	echo ":- initialization((" > "$directory"/loader.pl
 	if [ "$encrypt" = "true" ] ; then
 		xvmpl --goal "encrypt_program('$directory/logtalk.pl'),halt."
 		xvmpl --goal "encrypt_program('$directory/application.pl'),halt."
@@ -287,8 +294,14 @@ if [ "$loader" != "" ] ; then
 	if [ "$foreign" = "true" ] ; then
 		xvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(report,off),logtalk_load('$loader'),open('$directory/loader.pl',append,Stream),forall((current_plugin(PlugIn),plugin_property(PlugIn,file(File))),(decompose_file_name(File,_,Basename,_),format(Stream,'\tload_foreign_library(~q),~n',[Basename]))),close(Stream),halt."
 	fi
+	echo ":- initialization((" > "$directory"/loader.pl
 	echo "	consult(logtalk)," >> "$directory"/loader.pl
-	echo "	consult(application)" >> "$directory"/loader.pl
+	if [ "$goal" = "true" ] ; then
+		echo "	consult(application)" >> "$directory"/loader.pl
+	else
+		echo "	consult(application)," >> "$directory"/loader.pl
+		echo "	$goal" >> "$directory"/loader.pl
+	fi
 	echo "))." >> "$directory"/loader.pl
 	if [ "$encrypt" = "true" ] ; then
 		xvmpl --goal "encrypt_program('$directory/loader.pl'),halt."

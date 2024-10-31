@@ -5,11 +5,11 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on September 6, 2023
+##   Last updated on October 31, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2022 Hans N. Beck
-##   SPDX-FileCopyrightText: 2022 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2022-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +48,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.7")
+	Write-Output ($myName + " 0.8")
 }
 
 function Get-Logtalkhome {
@@ -92,10 +92,12 @@ function Write-Usage-Help() {
 
 	Write-Output "This script creates a Trealla Prolog logtalk.pl file with the Logtalk compiler"
 	Write-Output "and runtime and an optional application.pl file from an application source code"
-	Write-Output "given its loader file."
+	Write-Output "given its loader file. When embedding an application, this script also creates"
+	Write-Output "a loader.pl file for loading all generated Prolog and foreign library files,"
+	Write-Output "optionally calling a startup goal."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader]")
+	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
@@ -107,6 +109,7 @@ function Write-Usage-Help() {
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
 	Write-Output ("  -s settings file (absolute path or 'none'; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
+	Write-Output "  -g startup goal for the application in canonical syntax (default is $g)"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
 	Write-Output ""
@@ -272,6 +275,16 @@ if ($l -ne "") {
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
 		Set-Content $d/application.pl
+
+	Set-Content -Path $d/loader.pl -Value ":- initialization(("
+	Add-Content -Path $d/loader.pl -Value  "	consult(logtalk),"
+	if ($g -eq $true) {
+		Add-Content -Path $d/loader.pl -Value  "	consult(application)"
+	} else {
+		Add-Content -Path $d/loader.pl -Value  "	consult(application),"
+		Add-Content -Path $d/loader.pl -Value  "	$g"
+	}
+	Add-Content -Path $d/loader.pl -Value  "))."
 
 	Pop-Location
 }
