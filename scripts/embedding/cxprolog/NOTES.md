@@ -29,7 +29,9 @@ The following scripts are provided:
 	PowerShell script for Windows systems
 
 Both scripts create a `logtalk.pl` file with the Logtalk compiler and
-runtime and an optional `application.pl` file for an application.
+runtime and an optional `application.pl` file for an application plus
+an optional application startup goal. When a loader option is used, a
+`loader.pl` file is also created.
 
 Usage
 -----

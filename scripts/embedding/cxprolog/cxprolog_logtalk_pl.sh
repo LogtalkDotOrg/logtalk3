@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on January 9, 2024
+##   Last updated on November 1, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.20"
+	echo "$(basename "$0") 0.21"
 	exit 0
 }
 
@@ -104,6 +104,7 @@ temporary=""
 paths="$LOGTALKHOME/paths/paths.pl"
 settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 compile="false"
+goal="true"
 
 usage_help()
 {
@@ -113,7 +114,7 @@ usage_help()
 	echo "given its loader file."
 	echo
 	echo "Usage:"
-	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader]"
+	echo "  $(basename "$0") [-c] [-d directory] [-t tmpdir] [-p paths] [-s settings] [-l loader] [-g goal]"
 	echo "  $(basename "$0") -v"
 	echo "  $(basename "$0") -h"
 	echo
@@ -124,12 +125,13 @@ usage_help()
 	echo "  -p library paths file (absolute path; default is $paths)"
 	echo "  -s settings file (absolute path or 'none'; default is $settings)"
 	echo "  -l loader file for the application (absolute path)"
+	echo "  -g startup goal for the application in canonical syntax (default is $goal)"
 	echo "  -v print version of $(basename "$0")"
 	echo "  -h help"
 	echo
 }
 
-while getopts "cd:t:p:l:s:vh" option
+while getopts "cd:t:p:s:l:g:vh" option
 do
 	case $option in
 		c) compile="true";;
@@ -138,6 +140,7 @@ do
 		p) p_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
+		g) g_arg="$OPTARG";;
 		v) print_version;;
 		h) usage_help; exit;;
 		*) usage_help; exit;;
@@ -181,6 +184,10 @@ if [ "$l_arg" != "" ] ; then
 	fi
 else
 	loader=""
+fi
+
+if [ "$g_arg" != "" ] ; then
+	goal="$g_arg"
 fi
 
 mkdir -p "$directory"
@@ -265,7 +272,16 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
 	cxlgt$extension --goal "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
-	cat $(ls -rt *.pl) > "$directory"/application.pl
+	cat "$(ls -rt ./*.pl)" > "$directory"/application.pl
+	echo ":- initialization((" > "$directory"/loader.pl
+	echo "	consult(logtalk)," >> "$directory"/loader.pl
+	if [ "$goal" = "true" ] ; then
+		echo "	consult(application)" >> "$directory"/loader.pl
+	else
+		echo "	consult(application)," >> "$directory"/loader.pl
+		echo "	$goal" >> "$directory"/loader.pl
+	fi
+	echo "))." >> "$directory"/loader.pl
 fi
 
 function cleanup {

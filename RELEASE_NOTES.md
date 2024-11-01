@@ -73,8 +73,8 @@ Installers and installation scripts
 * UPDATED: The Trealla Prolog embedding scripts to create a `loader.pl` file
 when the application loader option is provided.
 
-* UPDATED: The ECLiPSe, Trealla Prolog, and XVM embedding scripts to accept
-an optional startup application goal argument.
+* UPDATED: The CxProlog, ECLiPSe, Trealla Prolog, and XVM embedding scripts
+to accept an optional startup application goal argument.
 
 
 3.84.0 - October 22, 2024
