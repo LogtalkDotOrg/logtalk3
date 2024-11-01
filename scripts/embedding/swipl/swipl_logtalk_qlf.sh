@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.qlf file with a
 ##   Logtalk application
 ## 
-##   Last updated on January 9, 2024
+##   Last updated on November §, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.20"
+	echo "$(basename "$0") 0.21"
 	exit 0
 }
 
@@ -306,7 +306,7 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
 	swipl -g "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader')" -t "halt"
-	cat $(ls -rt *.pl) > application.pl
+	cat "$(ls -rt ./*.pl)" > application.pl
 	swipl -g "consult('$directory/logtalk'),qcompile(application)" -t "halt"
 	mv application.qlf "$directory"
 fi

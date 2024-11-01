@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on January 9, 2024
+##   Last updated on November 1, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.5"
+	echo "$(basename "$0") 0.6"
 	exit 0
 }
 
@@ -297,7 +297,7 @@ if [ "$loader" != "" ] ; then
 	echo ":- discontiguous('\$lgt_extends_protocol_'/3)." >> "$directory"/header.pl
 	echo ":- discontiguous('\$lgt_loaded_file_'/7)." >> "$directory"/header.pl
 	echo ":- discontiguous('\$lgt_included_file_'/4)." >> "$directory"/header.pl
-	cat $(ls -rt *.pl) > "$directory"/application0.pl
+	cat "$(ls -rt ./*.pl)" > "$directory"/application0.pl
 	cat "$directory"/header.pl "$directory"/application0.pl > "$directory"/application.pl
 	rm "$directory"/header.pl "$directory"/application0.pl
 fi
