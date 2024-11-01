@@ -5,11 +5,11 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on September 6, 2023
+##   Last updated on November 1 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2022 Hans N. Beck
-##   SPDX-FileCopyrightText: 2022 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 2022-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +48,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.19")
+	Write-Output ($myName + " 0.20")
 }
 
 function Get-Logtalkhome {
@@ -95,7 +95,7 @@ function Write-Usage-Help() {
 	Write-Output "given its loader file."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader]")
+	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
@@ -107,6 +107,7 @@ function Write-Usage-Help() {
 	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
 	Write-Output ("  -s settings file (absolute path or 'none'; default is " + $s + ")")
 	Write-Output "  -l loader file for the application (absolute path)"
+	Write-Output "  -g startup goal for the application in canonical syntax (default is $goal)"
 	Write-Output ("  -v print version of " +  $myName)
 	Write-Output "  -h help"
 	Write-Output ""
@@ -257,8 +258,8 @@ if (($s -eq "") -or ($s -eq "none")) {
 }
 
 eclipse -L iso -t user -e "compile(logtalk,[debug:off,opt_level:1,output:eco]),halt"
-
 Move-item -Path logtalk.eco -Destination $d
+Remove-Item logtalk.pl -Confirm
 
 if ($l -ne "") {
 	try {
@@ -280,6 +281,17 @@ if ($l -ne "") {
 
 	eclipse -L iso -t user -f logtalk.eco -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
 	Move-Item -Path application.eco -Destination $d
+	Remove-Item application.pl -Confirm
+	
+	Set-Content -Path $d/loader.pl -Value ":- ensure_loaded(logtalk)."
+	Add-Content -Path $d/loader.pl -Value  ":- ensure_loaded(application)."
+	if ($g -ne $true) {
+		Add-Content -Path $d/loader.pl -Value  ":- initialization(($g))."
+	}
+
+	Set-Location $d
+	eclipse -L iso -t user -f logtalk.eco -e "compile(loader,[debug:off,opt_level:1,output:eco,load:none]),halt"
+	Remove-Item loader.pl -Confirm
 
 	Pop-Location
 }

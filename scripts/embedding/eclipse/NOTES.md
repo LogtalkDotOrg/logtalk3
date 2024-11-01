@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,12 +31,14 @@ The following scripts are provided:
 	PowerShell script for Windows systems
 
 Both scripts create a `logtalk.eco` file with the Logtalk compiler and
-runtime and an optional `application.eco` file for an application.
+runtime and an optional `application.eco` file for an application plus
+an optional application startup goal. When a loader option is used, a
+`loader.eco` file is also created.
 
-The `.eco` files can be loaded using the `-f` command-line option. For
-example, `eclipse -L iso -t user -f logtalk.eco -f application.eco`.
-Note that the `-L iso -t user` must be used to successfully load the
-generated `*.eco` files.
+The `.eco` files can be loaded using the `-f` command-line option.
+For example, `eclipse -L iso -t user -f loader.eco`. Note that the
+`-L iso -t user` must be used to successfully load the generated
+`*.eco` files.
 
 Usage
 -----

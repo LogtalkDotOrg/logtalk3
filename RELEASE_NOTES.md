@@ -70,11 +70,11 @@ predicates (`~p` control sequence).
 Installers and installation scripts
 -----------------------------------
 
-* UPDATED: The `trealla_logtalk_pl` embedding scripts to create a `loader.pl`
-file when the application loader option is provided.
+* UPDATED: The Trealla Prolog embedding scripts to create a `loader.pl` file
+when the application loader option is provided.
 
-* UPDATED: The `trealla_logtalk_pl` and `xvm_logtalk_pl` embedding scripts
-to accept an optional startup application goal argument.
+* UPDATED: The ECLiPSe, Trealla Prolog, and XVM embedding scripts to accept
+an optional startup application goal argument.
 
 
 3.84.0 - October 22, 2024
