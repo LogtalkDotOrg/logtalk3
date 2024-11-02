@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2024-08-20,
+		date is 2024-11-02,
 		comment is 'Unit tests for the ``deprecated`` linter flag.'
 	]).
 
@@ -56,7 +56,7 @@
 	test(deprecated_linter_flag_01, exists(Term == assert/1), [condition(predicate_property(assert(_), built_in))]) :-
 		deprecated_predicate(_, _, object, deprecated, Term, _).
 
-	test(deprecated_linter_flag_02, exists(Term == not/1), [condition(predicate_property(not(_), built_in))]) :-
+	test(deprecated_linter_flag_02, exists(Term == (not)/1), [condition(predicate_property(not(_), built_in))]) :-
 		deprecated_predicate(_, _, object, deprecated, Term, _).
 
 	test(deprecated_linter_flag_03, true(type::valid(ground(list), Tokens))) :-
