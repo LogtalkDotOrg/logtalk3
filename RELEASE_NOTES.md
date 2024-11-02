@@ -61,6 +61,8 @@ alternative dependencies where none is available.
 Examples
 --------
 
+* FIXED: Portability issue in the `errors` example tests.
+
 * FIXED: Cannot run the `module_aliases` example with XSB.
 
 Tests
