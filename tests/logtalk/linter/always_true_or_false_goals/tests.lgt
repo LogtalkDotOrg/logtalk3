@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2024-08-14,
+		date is 2024-11-02,
 		comment is 'Unit tests for the ``always_true_or_false_goals`` linter flag.'
 	]).
 
@@ -60,7 +60,7 @@
 	test(always_true_or_false_goals_linter_flag_04, exists(Term == (x \== y))) :-
 		goal_is_always_true(_, _, object, falsehood, Term).
 
-	test(always_true_or_false_goals_linter_flag_05, exists(variant(Term, a is _ * 2))) :-
+	test(always_true_or_false_goals_linter_flag_05, exists(variant(Term, a is _ * 2)), [condition(\+ current_logtalk_flag(prolog_dialect,xsb))]) :-
 		goal_is_always_false(_, _, object, falsehood, Term).
 
 	test(always_true_or_false_goals_linter_flag_06, exists(variant(Term, 1 is sqrt(_)))) :-

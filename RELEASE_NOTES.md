@@ -69,6 +69,9 @@ predicates.
 * ADDED: Additional tests for the de facto Prolog standard `format/2-3`
 predicates (`~p` control sequence).
 
+* FIXED: Compilation errors when running the `always_true_or_false_goals` and
+`deprecated` linter flag tests with XSB.
+
 Installers and installation scripts
 -----------------------------------
 

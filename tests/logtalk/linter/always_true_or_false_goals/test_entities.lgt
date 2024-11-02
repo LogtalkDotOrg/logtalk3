@@ -39,7 +39,10 @@
 
 	rats :- \+ x \== y.
 
-	jinx(X) :- a is X*2.
+	:- if(\+ current_logtalk_flag(prolog_dialect,xsb)).
+		% avoid compilation error with XSB
+		jinx(X) :- a is X*2.
+	:- endif.
 
 	hum(X) :- 1 is sqrt(X).
 
