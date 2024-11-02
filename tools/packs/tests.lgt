@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:34:0,
+		version is 0:34:1,
 		author is 'Paulo Moura',
-		date is 2024-10-16,
+		date is 2024-11-02,
 		comment is 'Unit tests for the "packs" tool.'
 	]).
 
@@ -73,7 +73,9 @@
 		^^clean_file('test_files/sig/v1.0.0.tar.gz.sig'),
 		object_property(packs, file(_, Directory)),
 		atomic_list_concat([Directory, '.ring'], Ring),
-		os::delete_directory_and_contents(Ring).
+		os::delete_directory_and_contents(Ring),
+		atomic_list_concat([Directory, 'test_files/logtalk_packs'], LogtalkPacks),
+		os::delete_directory_and_contents(LogtalkPacks).
 
 	% we start with no defined registries or installed packs
 
