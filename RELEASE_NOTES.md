@@ -61,6 +61,9 @@ alternative dependencies where none is available.
 * FIXED: Typos in the `mode/2` directives for the `debuggerp` protocol
 `logging/3` and `nolog/3` public predicates.
 
+* FIXED: Typo in the `info/2` directive for the `tutor` object `explain//1`
+public non-terminal.
+
 Examples
 --------
 

@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:75:0,
+		version is 0:75:1,
 		author is 'Paulo Moura',
-		date is 2024-10-30,
+		date is 2024-11-02,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -35,7 +35,7 @@
 	:- mode(explain(@callable), zero_or_one).
 	:- info(explain//1, [
 		comment is 'Generates an explanation for a message.',
-		aergnames is ['Message']
+		argnames is ['Message']
 	]).
 
 	% intercept all compiler warning and error messages
