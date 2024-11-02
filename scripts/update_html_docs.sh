@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on March 20, 2024
+##   Last updated on November 2, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -46,7 +46,6 @@ fi
 # default to SWI-Prolog as some of the documentation should be
 # generated using a multi-threaded backend Prolog compiler
 backend=swi
-prolog='SWI-Prolog'
 logtalk="swilgt$extension -g"
 include_packs='false'
 if [ "$LOGTALKPACKS" != "" ] ; then
@@ -69,7 +68,7 @@ set_goal() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.25"
+	echo "$(basename "$0") 0.26"
 	exit 0
 }
 
@@ -111,43 +110,30 @@ if [ "$p_arg" == "b" ] ; then
 	prolog='B-Prolog'
 	logtalk="bplgt$extension -g"
 elif [ "$p_arg" == "ciao" ] ; then
-	prolog='Ciao Prolog'
 	logtalk="ciaolgt$extension -e"
 elif [ "$p_arg" == "cx" ] ; then
-	prolog='CxProlog'
 	logtalk="cxlgt$extension --goal"
 elif [ "$p_arg" == "eclipse" ] ; then
-	prolog='ECLiPSe'
 	logtalk="eclipselgt$extension -e"
 elif [ "$p_arg" == "gnu" ] ; then
-	prolog='GNU Prolog'
 	logtalk="gplgt$extension --query-goal"
 elif [ "$p_arg" == "ji" ] ; then
-	prolog='JIProlog'
 	logtalk="jiplgt$extension -n -g"
 elif [ "$p_arg" == "xvm" ] ; then
-	prolog='XVM'
 	logtalk="xvmlgt$extension -g"
 elif [ "$p_arg" == "sicstus" ] ; then
-	prolog='SICStus Prolog'
 	logtalk="sicstuslgt$extension --goal"
 elif [ "$p_arg" == "swi" ] ; then
-	prolog='SWI-Prolog'
 	logtalk="swilgt$extension -g"
 elif [ "$p_arg" == "swipack" ] ; then
-	prolog='SWI-Prolog'
 	logtalk="swipl -g"
 elif [ "$p_arg" == "tau" ] ; then
-	prolog='Tau Prolog'
 	logtalk="taulgt$extension -g"
 elif [ "$p_arg" == "trealla" ] ; then
-	prolog='Trealla Prolog'
 	logtalk="tplgt$extension -g"
 elif [ "$p_arg" == "xsb" ] ; then
-	prolog='XSB'
 	logtalk="xsblgt$extension -e"
 elif [ "$p_arg" == "yap" ] ; then
-	prolog='YAP'
 	logtalk="yaplgt$extension -g"
 elif [ "$p_arg" != "" ] ; then
 	echo "Error! Unsupported backend Prolog compiler: $p_arg" >&2
@@ -179,8 +165,8 @@ make clean
 rm _templates/layout.html
 mv conf.py _conf.py
 mv browserconfig.xml browserconfig.xml.saved
-rm *.xml
+rm ./*.xml
 mv browserconfig.xml.saved browserconfig.xml
-rm *.rst
+rm ./*.rst
 
 exit 0
