@@ -55,6 +55,8 @@ alternative dependencies where none is available.
 Tests
 -----
 
+* ADDED: Tests for the Logtalk `consistency_error/3` built-in method.
+
 * ADDED: Additional tests for the Prolog standard `bagof/3` and `setof/3`
 built-in predicates.
 
