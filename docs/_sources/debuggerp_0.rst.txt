@@ -14,8 +14,8 @@ Debugger protocol.
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:0
-| **Date:** 2024-06-19
+| **Version:** 3:3:1
+| **Date:** 2024-11-02
 
 | **Compilation flags:**
 |    ``static``
@@ -430,10 +430,6 @@ Sets a log point (removing any existing breakpoint defined for the same location
 | **Mode and number of proofs:**
 |    ``log(@object_identifier,+integer,+atom)`` - ``zero_or_one``
 |    ``log(@category_identifier,+integer,+atom)`` - ``zero_or_one``
-|    ``log(?object_identifier,?integer,?atom)`` - ``zero_or_more``
-|    ``log(?category_identifier,?integer,?atom)`` - ``zero_or_more``
-|    ``log(@var_or(object_identifier),@var_or(integer),@var_or(atom))`` - ``one``
-|    ``log(@var_or(category_identifier),@var_or(integer),@var_or(atom))`` - ``one``
 
 
 ------------
@@ -451,6 +447,10 @@ Enumerates, by backtracking, all defined log points.
 
 | **Template:**
 |    ``logging(Entity,Line,Message)``
+| **Mode and number of proofs:**
+|    ``logging(?object_identifier,?integer,?atom)`` - ``zero_or_more``
+|    ``logging(?category_identifier,?integer,?atom)`` - ``zero_or_more``
+
 
 ------------
 
@@ -467,6 +467,10 @@ Removes all matching log points.
 
 | **Template:**
 |    ``nolog(Entity,Line,Message)``
+| **Mode and number of proofs:**
+|    ``nolog(@var_or(object_identifier),@var_or(integer),@var_or(atom))`` - ``one``
+|    ``nolog(@var_or(category_identifier),@var_or(integer),@var_or(atom))`` - ``one``
+
 
 ------------
 

@@ -58,6 +58,9 @@ they can be explained by the `tutor` tool.
 not available" error messages when trying to install or update a pack with
 alternative dependencies where none is available.
 
+* FIXED: Typos in the `mode/2` directives for the `debuggerp` protocol
+`logging/3` and `nolog/3` public predicates.
+
 Examples
 --------
 

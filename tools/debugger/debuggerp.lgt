@@ -22,9 +22,9 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:3:1,
 		author is 'Paulo Moura',
-		date is 2024-06-19,
+		date is 2024-11-02,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
@@ -191,16 +191,16 @@
 	]).
 
 	:- public(logging/3).
-	:- mode(log(?object_identifier, ?integer, ?atom), zero_or_more).
-	:- mode(log(?category_identifier, ?integer, ?atom), zero_or_more).
+	:- mode(logging(?object_identifier, ?integer, ?atom), zero_or_more).
+	:- mode(logging(?category_identifier, ?integer, ?atom), zero_or_more).
 	:- info(logging/3, [
 		comment is 'Enumerates, by backtracking, all defined log points.',
 		argnames is ['Entity', 'Line', 'Message']
 	]).
 
 	:- public(nolog/3).
-	:- mode(log(@var_or(object_identifier), @var_or(integer), @var_or(atom)), one).
-	:- mode(log(@var_or(category_identifier), @var_or(integer), @var_or(atom)), one).
+	:- mode(nolog(@var_or(object_identifier), @var_or(integer), @var_or(atom)), one).
+	:- mode(nolog(@var_or(category_identifier), @var_or(integer), @var_or(atom)), one).
 	:- info(nolog/3, [
 		comment is 'Removes all matching log points.',
 		argnames is ['Entity', 'Line', 'Message']

@@ -52,11 +52,11 @@ Generates an explanation for a message.
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``explain(Message)``
 | **Mode and number of proofs:**
 |    ``explain(@callable)`` - ``zero_or_one``
 
-| **aergnames:**
-|    [Message]
 
 ------------
 

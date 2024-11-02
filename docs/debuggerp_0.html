@@ -207,8 +207,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 3:3:0</div>
-<div class="line"><strong>Date:</strong> 2024-06-19</div>
+<div class="line"><strong>Version:</strong> 3:3:1</div>
+<div class="line"><strong>Date:</strong> 2024-11-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -702,10 +702,6 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">log(&#64;object_identifier,+integer,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">log(&#64;category_identifier,+integer,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">log(?object_identifier,?integer,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">log(?category_identifier,?integer,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">log(&#64;var_or(object_identifier),&#64;var_or(integer),&#64;var_or(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">log(&#64;var_or(category_identifier),&#64;var_or(integer),&#64;var_or(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -724,6 +720,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">logging(Entity,Line,Message)</span></code></div>
 </div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logging(?object_identifier,?integer,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logging(?category_identifier,?integer,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
 </div>
 <hr class="docutils" />
 </section>
@@ -740,6 +741,11 @@
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">nolog(Entity,Line,Message)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nolog(&#64;var_or(object_identifier),&#64;var_or(integer),&#64;var_or(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">nolog(&#64;var_or(category_identifier),&#64;var_or(integer),&#64;var_or(atom))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
