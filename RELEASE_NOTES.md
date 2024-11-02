@@ -25,6 +25,12 @@ RELEASE NOTES
 3.85.0 - November ??, 2024
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The compiler to prevent trying to compile a Prolog `use_module/1`
+directive as a Logtalk directive when compiling a module as an object.
+
 Documentation
 -------------
 
