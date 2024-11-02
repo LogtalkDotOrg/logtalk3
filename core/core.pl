@@ -10261,7 +10261,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % use_module/1 entity directive
 
-'$lgt_compile_logtalk_directive'(use_module(Module), Ctx) :-
+'$lgt_compile_logtalk_directive'(use_module(Module), _) :-
 	'$lgt_pp_module_'(_),
 	% compiling a module as an object
 	throw(error(domain_error(directive, use_module/1), directive(use_module(Module)))).
