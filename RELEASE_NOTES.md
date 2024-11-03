@@ -96,6 +96,9 @@ predicates (`~p` control sequence).
 
 * FIXED: Missing condition in test for Unicode UTB-8 (no BOM) encoding.
 
+* FIXED: Portability issue when running the tests for the Prolog standard
+`call/N` built-in predicates with JIProlog.
+
 Installers and installation scripts
 -----------------------------------
 

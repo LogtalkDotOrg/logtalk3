@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-one(1).
+two(2).
 
 % database for tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 8.15.4.4
 
@@ -33,9 +33,9 @@ call_n_maplist(Cont, [E|Es]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:8:1,
 		author is 'Paulo Moura',
-		date is 2023-06-02,
+		date is 2024-11-03,
 		comment is 'Unit tests for the ISO Prolog standard call/N built-in predicates.'
 	]).
 
@@ -142,7 +142,7 @@ call_n_maplist(Cont, [E|Es]) :-
 			call(foobar, _)
 		}.
 
-	test(lgt_call_N_24, deterministic) :-
+	test(lgt_call_N_24, deterministic(Argument == 2)) :-
 		goal(Closure, Argument),
 		{call(Closure, Argument)}.
 
@@ -214,6 +214,6 @@ call_n_maplist(Cont, [E|Es]) :-
 
 	variable(_).
 
-	goal(one, _).
+	goal(two, _).
 
 :- end_object.
