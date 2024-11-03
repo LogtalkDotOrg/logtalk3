@@ -83,7 +83,7 @@ built-in predicates.
 support for the `portrayed/1` option implemented by most systems.
 
 * ADDED: Tests for the Prolog de facto standard `print/1-2` built-in
-predicates.
+predicates and the `portray/1` user-defined hook predicate.
 
 * ADDED: Additional tests for the de facto Prolog standard `format/2-3`
 predicates (`~p` control sequence).
