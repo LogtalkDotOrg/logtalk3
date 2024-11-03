@@ -2,7 +2,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 0:5:1,
 		author is 'Paulo Moura',
-		date is 2021-05-11,
+		date is 2024-11-03,
 		comment is 'Unit tests for Prolog Unicode support.'
 	]).
 
@@ -59,7 +59,7 @@
 	test(lgt_unicode_utf_8_no_bom_03, true(Lengths == [15,12,12,8,8,13,10,18,5,8,10]), [condition(set_encoding('UTF-8'))]) :-
 		findall(Length, ({utf_8_no_bom(Atom)}, atom_length(Atom, Length)), Lengths).
 
-	test(lgt_unicode_utf_8_no_bom_04, true(expected_atoms(Atoms))) :-
+	test(lgt_unicode_utf_8_no_bom_04, true(expected_atoms(Atoms)), [condition(set_encoding('UTF-8'))]) :-
 		findall(Atom, {utf_8_no_bom(Atom)}, Atoms).
 
 	% UTF-16BE with BOM tests

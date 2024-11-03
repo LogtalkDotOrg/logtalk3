@@ -91,6 +91,8 @@ predicates (`~p` control sequence).
 * FIXED: Compilation errors when running the `always_true_or_false_goals` and
 `deprecated` linter flag tests with XSB.
 
+* FIXED: Missing condition in test for Unicode UTB-8 (no BOM) encoding.
+
 Installers and installation scripts
 -----------------------------------
 
