@@ -28,7 +28,7 @@ b(X) :-
 a(1).
 a(2).
 
-one(1).
+two(2).
 
 
 % calls to declared predicates with no clauses must fail
@@ -44,9 +44,9 @@ one(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:7:1,
 		author is 'Paulo Moura',
-		date is 2024-08-21,
+		date is 2024-11-03,
 		comment is 'Unit tests for the ISO Prolog standard call/1 control construct.'
 	]).
 
@@ -138,7 +138,7 @@ one(1).
 
 	% auxiliary predicates
 
-	goal(one(_)).
+	goal(two(_)).
 
 	one(1).
 
