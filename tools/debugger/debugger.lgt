@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:9:0,
+		version is 7:9:1,
 		author is 'Paulo Moura',
-		date is 2024-07-01,
+		date is 2024-11-03,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -943,6 +943,8 @@
 		retractall(skipping_),
 		retractall(quasi_skipping_),
 		retractall(skipping_unleashed_(N)).
+
+	:- meta_predicate(call_goal(*, *)).
 
 	:- if((
 		current_logtalk_flag(prolog_dialect, Dialect),

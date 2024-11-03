@@ -64,6 +64,9 @@ alternative dependencies where none is available.
 * FIXED: Typo in the `info/2` directive for the `tutor` object `explain//1`
 public non-terminal.
 
+* FIXED: Harmless linter warning when loading the `debugger` tool with some
+backends.
+
 Examples
 --------
 
