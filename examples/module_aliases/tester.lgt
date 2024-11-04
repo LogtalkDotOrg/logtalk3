@@ -22,19 +22,13 @@
 :- if((
 	current_logtalk_flag(modules, supported),
 	\+ current_logtalk_flag(prolog_dialect, eclipse),
-	\+ current_logtalk_flag(prolog_dialect, xsb)
+	\+ current_logtalk_flag(prolog_dialect, xsb),
+	\+ current_logtalk_flag(prolog_dialect, tau),
+	\+ current_logtalk_flag(prolog_dialect, trealla)
 )).
 
-	:- if((
-		current_logtalk_flag(prolog_dialect, Dialect),
-		(Dialect == tau; Dialect == trealla)
-	)).
-		:- use_module(data1).
-		:- use_module(data2).
-	:- else.
-		:- use_module(data1, []).
-		:- use_module(data2, []).
-	:- endif.
+	:- use_module(data1, []).
+	:- use_module(data2, []).
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),

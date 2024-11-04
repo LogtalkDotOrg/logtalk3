@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,4 +23,5 @@ file.
 
 This is a minimal example illustrating the use of the Logtalk `use_module/1`
 directive to module aliases (not to be confused by the Prolog directive with
-the same name).
+the same name). It requires backend support for modules and the `use_module/2`
+directive.

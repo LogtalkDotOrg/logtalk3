@@ -85,7 +85,8 @@ Examples
 
 * FIXED: Portability issue in the `errors` example tests.
 
-* FIXED: Cannot run the `module_aliases` example with XSB.
+* FIXED: Cannot run the `module_aliases` example with XSB, Tau Prolog, and
+Trealla Prolog.
 
 Tests
 -----
