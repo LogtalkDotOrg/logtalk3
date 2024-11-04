@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Reclassified the `underscore_variables` flag as a backend flag
+instead of a linter flag.
+
 * FIXED: The compiler to prevent trying to compile a Prolog `use_module/1`
 directive as a Logtalk directive when compiling a module as an object.
 
@@ -40,6 +43,8 @@ Documentation
 -------------
 
 * IMPROVED: Documentation of the `issue_creator` tool.
+
+* UPDATED: The Handbook documentation on the `underscore_variables` flag.
 
 Library
 -------

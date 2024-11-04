@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:137:0,
+		version is 1:138:0,
 		author is 'Paulo Moura',
-		date is 2024-09-17,
+		date is 2024-11-04,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -1077,32 +1077,30 @@
 		).
 
 	default_lint_flags -->
-		{	current_logtalk_flag(unknown_entities, UnknownEntities0), align(UnknownEntities0, UnknownEntities),
-			current_logtalk_flag(unknown_predicates, UnknownPredicates0), align(UnknownPredicates0, UnknownPredicates),
-			current_logtalk_flag(undefined_predicates, UndefinedPredicates0), align(UndefinedPredicates0, UndefinedPredicates),
-			current_logtalk_flag(steadfastness, Steadfastness0), align(Steadfastness0, Steadfastness),
-			current_logtalk_flag(naming, Naming0), align(Naming0, Naming),
-			current_logtalk_flag(duplicated_clauses, DuplicatedClauses0), align(DuplicatedClauses0, DuplicatedClauses),
-			current_logtalk_flag(disjunctions, Disjunctions0), align(Disjunctions0, Disjunctions),
-			current_logtalk_flag(conditionals, Conditionals0), align(Conditionals0, Conditionals),
-			current_logtalk_flag(catchall_catch, CatchallCatch0), align(CatchallCatch0, CatchallCatch),
-			current_logtalk_flag(left_recursion, LeftRecursion0), align(LeftRecursion0, LeftRecursion),
-			current_logtalk_flag(tail_recursive, TailRecursive0), align(TailRecursive0, TailRecursive),
-			current_logtalk_flag(portability, Portability0), align(Portability0, Portability),
-			current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns0), align(RedefinedBuiltIns0, RedefinedBuiltIns),
-			current_logtalk_flag(redefined_operators, RedefinedOperators0), align(RedefinedOperators0, RedefinedOperators),
-			current_logtalk_flag(deprecated, Deprecated0), align(Deprecated0, Deprecated),
+		{	current_logtalk_flag(unknown_predicates, UnknownPredicates0), align(UnknownPredicates0, UnknownPredicates),
+			current_logtalk_flag(undefined_predicates, UndefinedPredicates),
+			current_logtalk_flag(unknown_entities, UnknownEntities0), align(UnknownEntities0, UnknownEntities),
+			current_logtalk_flag(steadfastness, Steadfastness),
 			current_logtalk_flag(missing_directives, Missing0), align(Missing0, Missing),
-			current_logtalk_flag(duplicated_directives, Duplicated0), align(Duplicated0, Duplicated),
+			current_logtalk_flag(duplicated_directives, Duplicated),
+			current_logtalk_flag(duplicated_clauses, DuplicatedClauses0), align(DuplicatedClauses0, DuplicatedClauses),
+			current_logtalk_flag(portability, Portability),
+			current_logtalk_flag(redefined_built_ins, RedefinedBuiltIns0), align(RedefinedBuiltIns0, RedefinedBuiltIns),
+			current_logtalk_flag(redefined_operators, RedefinedOperators),
 			current_logtalk_flag(trivial_goal_fails, Trivial0), align(Trivial0, Trivial),
+			current_logtalk_flag(always_true_or_false_goals, Always),
 			current_logtalk_flag(grammar_rules, GrammarRules0), align(GrammarRules0, GrammarRules),
-			current_logtalk_flag(arithmetic_expressions, ArithmeticExpressions0), align(ArithmeticExpressions0, ArithmeticExpressions),
-			current_logtalk_flag(trivial_goal_fails, Trivial0), align(Trivial0, Trivial),
-			current_logtalk_flag(always_true_or_false_goals, Always0), align(Always0, Always),
+			current_logtalk_flag(arithmetic_expressions, ArithmeticExpressions),
 			current_logtalk_flag(lambda_variables, Lambda0), align(Lambda0, Lambda),
-			current_logtalk_flag(suspicious_calls, SuspiciousCalls0), align(SuspiciousCalls0, SuspiciousCalls),
+			current_logtalk_flag(suspicious_calls, SuspiciousCalls),
+			current_logtalk_flag(disjunctions, Disjunctions0), align(Disjunctions0, Disjunctions),
+			current_logtalk_flag(conditionals, Conditionals),
 			current_logtalk_flag(singleton_variables, Singletons0), align(Singletons0, Singletons),
-			current_logtalk_flag(underscore_variables, Underscore)
+			current_logtalk_flag(catchall_catch, CatchallCatch),
+			current_logtalk_flag(deprecated, Deprecated0), align(Deprecated0, Deprecated),
+			current_logtalk_flag(naming, Naming),
+			current_logtalk_flag(left_recursion, LeftRecursion0), align(LeftRecursion0, LeftRecursion),
+			current_logtalk_flag(tail_recursive, TailRecursive)
 		},
 		[
 			'Default lint compilation flags: '-[], nl,
@@ -1115,18 +1113,17 @@
 			'  grammar_rules:        ~w    arithmetic_expressions:     ~w'-[GrammarRules, ArithmeticExpressions], nl,
 			'  lambda_variables:     ~w    suspicious_calls:           ~w'-[Lambda, SuspiciousCalls], nl,
 			'  disjunctions:         ~w    conditionals:               ~w'-[Disjunctions, Conditionals], nl,
-			'  singleton_variables:  ~w    underscore_variables:       ~w'-[Singletons, Underscore], nl,
+			'  singleton_variables:  ~w    catchall_catch:             ~w'-[Singletons, CatchallCatch], nl,
 			'  deprecated:           ~w    naming:                     ~w'-[Deprecated, Naming], nl,
-			'  left_recursion:       ~w    tail_recursive:             ~w'-[LeftRecursion, TailRecursive], nl,
-			'  catchall_catch:       ~w'-[CatchallCatch], nl
+			'  left_recursion:       ~w    tail_recursive:             ~w'-[LeftRecursion, TailRecursive], nl
 		].
 
 	default_optional_features_flags -->
 		{
-			current_logtalk_flag(complements, Complements),
 			current_logtalk_flag(dynamic_declarations, DynamicDeclarations0), align(DynamicDeclarations0, DynamicDeclarations),
+			current_logtalk_flag(complements, Complements),
 			current_logtalk_flag(context_switching_calls, ContextCalls0), align(ContextCalls0, ContextCalls),
-			current_logtalk_flag(events, Events0), align(Events0, Events)
+			current_logtalk_flag(events, Events)
 		},
 		[
 			'Default optional features compiler flags:'-[], nl,
@@ -1141,7 +1138,7 @@
 			current_logtalk_flag(source_data, SourceData0), align(SourceData0, SourceData),
 			current_logtalk_flag(code_prefix, Code),
 			current_logtalk_flag(optimize, Optimize0), align(Optimize0, Optimize),
-			current_logtalk_flag(debug, Debug0), align(Debug0, Debug),
+			current_logtalk_flag(debug, Debug),
 			current_logtalk_flag(clean, Clean0), align(Clean0, Clean),
 			current_logtalk_flag(reload, Reload),
 			(current_logtalk_flag(hook, Hook) -> true; Hook = n/d),
@@ -1159,12 +1156,14 @@
 	default_backend_flags -->
 		{
 			current_logtalk_flag(prolog_dialect, PrologDialect),
+			current_logtalk_flag(underscore_variables, Underscore),
 			current_logtalk_flag(prolog_compiler, PrologCompiler),
 			current_logtalk_flag(prolog_loader, PrologLoader)
 		},
 		[
 			'Backend Prolog compiler file compilation and loading flags:'-[], nl,
 			'  prolog_dialect:  ~w'-[PrologDialect], nl,
+			'  underscore_variables: ~w'-[Underscore], nl,
 			'  prolog_compiler: ~w'-[PrologCompiler], nl,
 			'  prolog_loader:   ~w'-[PrologLoader], nl
 		].
@@ -1172,12 +1171,12 @@
 	default_read_only_flags -->
 		{
 			current_logtalk_flag(unicode, Unicode0), align(Unicode0, Unicode),
-			current_logtalk_flag(encoding_directive, Encodings0), align(Encodings0, Encodings),
+			current_logtalk_flag(encoding_directive, Encodings),
 			current_logtalk_flag(engines, Engines0), align(Engines0, Engines),
-			current_logtalk_flag(threads, Threads0), align(Threads0, Threads),
+			current_logtalk_flag(threads, Threads),
 			current_logtalk_flag(modules, Modules0), align(Modules0, Modules),
-			current_logtalk_flag(coinduction, Coinduction0), align(Coinduction0, Coinduction),
-			current_logtalk_flag(tabling, Tabling0), align(Tabling0, Tabling)
+			current_logtalk_flag(coinduction, Coinduction),
+			current_logtalk_flag(tabling, Tabling)
 		},
 		[
 			'Read-only compilation flags (backend Prolog compiler features):'-[], nl,
@@ -1193,8 +1192,8 @@
 
 	align(warning, warning).
 	align(silent, 'silent ').
-	align(allow, allow).
-	align(deny, 'deny ').
+	align(allow, 'allow ').
+	align(deny, 'deny  ').
 	align(on, 'on ').
 	align(off, off).
 	align(unsupported, unsupported).

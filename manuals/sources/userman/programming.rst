@@ -362,7 +362,6 @@ compiler flags). For example:
 
    :- initialization((
        % set project-specific global flags
-       set_logtalk_flag(underscore_variables, dont_care),
        set_logtalk_flag(source_data, off),
        % load the project source files
        logtalk_load(
@@ -922,15 +921,6 @@ Lint flags
    Controls the singleton variable warnings. Possible option values are
    ``warning`` (the usual default) and ``silent`` (not recommended).
 
-.. _flag_underscore_variables:
-.. index:: pair: underscore_variables; Flag
-
-``underscore_variables(Option)``
-   Controls the interpretation of variables that start with an underscore
-   (excluding the anonymous variable) that occur once in a term as either
-   don't care variables or singleton variables. Possible option values are
-   ``dont_care`` (the usual default) and ``singletons``.
-
 .. _flag_naming:
 .. index:: pair: naming; Flag
 
@@ -1055,6 +1045,17 @@ Optional features compilation flags
 
 Backend Prolog compiler and loader flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. _flag_underscore_variables:
+.. index:: pair: underscore_variables; Flag
+
+``underscore_variables(Option)``
+   Controls the interpretation of variables that start with an underscore
+   (excluding the anonymous variable) that occur once in a term as either
+   don't care variables or singleton variables. Possible option values are
+   ``dont_care`` (the default for all supported backends) and ``singletons``.
+   Although a changeable flag, its value is backend dependent and thus set
+   only in the backend adapter files.
 
 .. _flag_prolog_compiler:
 .. index:: pair: prolog_compiler; Flag
