@@ -31,6 +31,11 @@ Logtalk compiler and runtime
 * FIXED: The compiler to prevent trying to compile a Prolog `use_module/1`
 directive as a Logtalk directive when compiling a module as an object.
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Trealla Prolog adapter file to require version 2.59.8 or later.
+
 Documentation
 -------------
 
