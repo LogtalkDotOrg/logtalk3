@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,28 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	predicate_property(asserta(_,_), built_in),
-	% the GNU Prolog adapter file provides dummy definitions of this (and
-	% other) predicates as built-in predicates to avoid embedding errors
-	\+ current_logtalk_flag(prolog_dialect, gnu)
+:- initialization((
+	set_logtalk_flag(report, warnings),
+	logtalk_load(lgtunit(loader)),
+	logtalk_load(tests, [hook(lgtunit)]),
+	tests::run
 )).
-
-	:- dynamic([
-		a/1, b/1, y/1, z/1
-	]).
-
-	:- initialization((
-		set_logtalk_flag(report, warnings),
-		logtalk_load(lgtunit(loader)),
-		logtalk_load(tests, [hook(lgtunit)]),
-		tests::run
-	)).
-
-:- else.
-
-	:- initialization((
-		write('(not applicable)'), nl
-	)).
-
-:- endif.

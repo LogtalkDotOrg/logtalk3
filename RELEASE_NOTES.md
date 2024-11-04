@@ -99,6 +99,9 @@ predicates and the `portray/1` user-defined hook predicate.
 * ADDED: Additional tests for the de facto Prolog standard `format/2-3`
 predicates (`~p` control sequence).
 
+* IMPROVED: Tests for the de facto standard Prolog built-in predicates that
+take a clause reference argument.
+
 * FIXED: Compilation errors when running the `always_true_or_false_goals` and
 `deprecated` linter flag tests with XSB.
 
