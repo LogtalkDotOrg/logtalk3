@@ -16,6 +16,9 @@ the
 `set_logtalk_flag/2 <../refman/directives/set_logtalk_flag_2.html>`__
 directive.
 
+The linter flags can be managed as a group using the ``linter``
+meta-flag. See the documentation for details.
+
 Some lint checks are turned off by default, specially when
 computationally expensive. Still, it's a good idea to turn them on to
 check your code on a regular basis (e.g. in CI/CD pipelines).

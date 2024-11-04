@@ -772,6 +772,17 @@ Version flags
 Lint flags
 ^^^^^^^^^^
 
+.. _flag_linter:
+.. index:: pair: linter; Flag
+
+``linter(Option)``
+   Meta-flag for managing the values of all the linter flags as a group.
+   Possible option values are ``on`` to set all the individual linter flags
+   to ``warning``, ``off`` to set all the individual linter flags to
+   ``silent``, and ``default`` to set all the individual linter flag values
+   to their defaults as defined in the backend adapter files (the usual
+   default).
+
 .. _flag_unknown_entities:
 .. index:: pair: unknown_entities; Flag
 

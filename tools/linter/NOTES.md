@@ -2,7 +2,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,6 +32,9 @@ be set globally using the [set_logtalk_flag/2](../refman/predicates/set_logtalk_
 built-in predicate. For (source file or entity) local scope, use instead
 the [set_logtalk_flag/2](../refman/directives/set_logtalk_flag_2.html)
 directive.
+
+The linter flags can be managed as a group using the `linter` meta-flag.
+See the documentation for details.
 
 Some lint checks are turned off by default, specially when computationally
 expensive. Still, it's a good idea to turn them on to check your code on a

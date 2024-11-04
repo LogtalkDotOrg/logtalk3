@@ -2681,6 +2681,8 @@ logtalk_compile(Files, Flags) :-
 	;	'$lgt_member'(debug(on), Flags) ->
 		retractall('$lgt_pp_file_compiler_flag_'(optimize, _)),
 		assertz('$lgt_pp_file_compiler_flag_'(optimize, off))
+	;	'$lgt_member'(linter(Linter), Flags) ->
+		'$lgt_set_compiler_linter_flag'(Linter)
 	;	true
 	),
 	(	'$lgt_pp_file_compiler_flag_'(hook, HookEntity) ->
@@ -3459,9 +3461,34 @@ set_logtalk_flag(Flag, Value) :-
 	% pre-compile hook calls for better performance when compiling files
 	'$lgt_compile_hooks'(Value).
 
+'$lgt_set_compiler_flag'(linter, Value) :-
+	!,
+	'$lgt_set_compiler_linter_flag'(Value).
+
 '$lgt_set_compiler_flag'(Flag, Value) :-
 	retractall('$lgt_current_flag_'(Flag, _)),
 	assertz('$lgt_current_flag_'(Flag, Value)).
+
+
+'$lgt_set_compiler_linter_flag'(on) :-
+	forall(
+		'$lgt_linter_flag'(Flag),
+		'$lgt_set_compiler_flag'(Flag, warning)
+	).
+
+'$lgt_set_compiler_linter_flag'(default) :-
+	forall(
+		'$lgt_linter_flag'(Flag),
+		(	'$lgt_default_flag'(Flag, Default),
+			'$lgt_set_compiler_flag'(Flag, Default)
+		)
+	).
+
+'$lgt_set_compiler_linter_flag'(off) :-
+	forall(
+		'$lgt_linter_flag'(Flag),
+		'$lgt_set_compiler_flag'(Flag, silent)
+	).
 
 
 
@@ -25282,11 +25309,11 @@ create_logtalk_flag(Flag, Value, Options) :-
 % true if the argument is a valid Logtalk flag name
 
 % lint compilation flags
+'$lgt_valid_flag'(linter).
 '$lgt_valid_flag'(unknown_entities).
 '$lgt_valid_flag'(singleton_variables).
 '$lgt_valid_flag'(unknown_predicates).
 '$lgt_valid_flag'(undefined_predicates).
-'$lgt_valid_flag'(underscore_variables).
 '$lgt_valid_flag'(steadfastness).
 '$lgt_valid_flag'(portability).
 '$lgt_valid_flag'(redefined_built_ins).
@@ -25330,6 +25357,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(settings_file).
 % backend Prolog compiler information
 '$lgt_valid_flag'(prolog_dialect).
+'$lgt_valid_flag'(underscore_variables).
 '$lgt_valid_flag'(prolog_version).
 '$lgt_valid_flag'(prolog_compatible_version).
 % features requiring specific backend Prolog compiler support
@@ -25369,6 +25397,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 % '$lgt_valid_flag_value'(@atom, @nonvar)
+
+'$lgt_valid_flag_value'(linter, on) :- !.
+'$lgt_valid_flag_value'(linter, default) :- !.
+'$lgt_valid_flag_value'(linter, off) :- !.
 
 '$lgt_valid_flag_value'(unknown_entities, silent) :- !.
 '$lgt_valid_flag_value'(unknown_entities, warning) :- !.
@@ -25540,6 +25572,35 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(coinduction, supported) :- !.
 '$lgt_valid_flag_value'(coinduction, unsupported) :- !.
+
+
+
+% '$lgt_linter_flag'(?atom)
+
+'$lgt_linter_flag'(unknown_entities).
+'$lgt_linter_flag'(singleton_variables).
+'$lgt_linter_flag'(unknown_predicates).
+'$lgt_linter_flag'(undefined_predicates).
+'$lgt_linter_flag'(steadfastness).
+'$lgt_linter_flag'(portability).
+'$lgt_linter_flag'(redefined_built_ins).
+'$lgt_linter_flag'(redefined_operators).
+'$lgt_linter_flag'(missing_directives).
+'$lgt_linter_flag'(duplicated_directives).
+'$lgt_linter_flag'(lambda_variables).
+'$lgt_linter_flag'(suspicious_calls).
+'$lgt_linter_flag'(trivial_goal_fails).
+'$lgt_linter_flag'(always_true_or_false_goals).
+'$lgt_linter_flag'(deprecated).
+'$lgt_linter_flag'(naming).
+'$lgt_linter_flag'(duplicated_clauses).
+'$lgt_linter_flag'(tail_recursive).
+'$lgt_linter_flag'(disjunctions).
+'$lgt_linter_flag'(conditionals).
+'$lgt_linter_flag'(catchall_catch).
+'$lgt_linter_flag'(grammar_rules).
+'$lgt_linter_flag'(arithmetic_expressions).
+'$lgt_linter_flag'(left_recursion).
 
 
 

@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * CHANGED: Reclassified the `underscore_variables` flag as a backend flag
 instead of a linter flag.
 
+* ADDED: New meta-flag, `linter`, to manage the values of all the linter
+flags as a group.
+
 * FIXED: The compiler to prevent trying to compile a Prolog `use_module/1`
 directive as a Logtalk directive when compiling a module as an object.
 

@@ -265,6 +265,7 @@ numbervars(Term, From, Next) :-
 % startup flags:
 '$lgt_default_flag'(settings_file, allow).
 % lint compilation flags:
+'$lgt_default_flag'(linter, default).
 '$lgt_default_flag'(unknown_entities, warning).
 '$lgt_default_flag'(unknown_predicates, warning).
 '$lgt_default_flag'(undefined_predicates, warning).

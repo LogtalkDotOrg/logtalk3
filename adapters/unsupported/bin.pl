@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for BinProlog 8.x~10.x
-%  Last updated on September 9, 2024
+%  Last updated on November 4, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -335,6 +335,7 @@ write_term(Stream, Term, _) :-
 % startup flags:
 '$lgt_default_flag'(settings_file, allow).
 % lint compilation flags:
+'$lgt_default_flag'(linter, default).
 '$lgt_default_flag'(unknown_entities, warning).
 '$lgt_default_flag'(unknown_predicates, warning).
 '$lgt_default_flag'(undefined_predicates, warning).
