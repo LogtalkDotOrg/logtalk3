@@ -781,7 +781,8 @@ Lint flags
    to ``warning``, ``off`` to set all the individual linter flags to
    ``silent``, and ``default`` to set all the individual linter flag values
    to their defaults as defined in the backend adapter files (the usual
-   default).
+   default). This flag **must** always be defined in the backend adapter
+   files with the value of ``default``.
 
 .. _flag_unknown_entities:
 .. index:: pair: unknown_entities; Flag
@@ -1065,8 +1066,8 @@ Backend Prolog compiler and loader flags
    (excluding the anonymous variable) that occur once in a term as either
    don't care variables or singleton variables. Possible option values are
    ``dont_care`` (the default for all supported backends) and ``singletons``.
-   Although a changeable flag, its value is backend dependent and thus set
-   only in the backend adapter files.
+   Although a changeable flag, its value is backend dependent and thus
+   expected to be set only in the backend adapter files.
 
 .. _flag_prolog_compiler:
 .. index:: pair: prolog_compiler; Flag

@@ -797,7 +797,8 @@ Possible option values are <code class="docutils literal notranslate"><span clas
 to <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">off</span></code> to set all the individual linter flags to
 <code class="docutils literal notranslate"><span class="pre">silent</span></code>, and <code class="docutils literal notranslate"><span class="pre">default</span></code> to set all the individual linter flag values
 to their defaults as defined in the backend adapter files (the usual
-default).</p>
+default). This flag <strong>must</strong> always be defined in the backend adapter
+files with the value of <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
 </dd>
 </dl>
 <span id="flag-unknown-entities"></span><dl class="simple" id="index-13">
@@ -1023,8 +1024,8 @@ no consequence for objects already compiled and loaded.</p>
 (excluding the anonymous variable) that occur once in a term as either
 don’t care variables or singleton variables. Possible option values are
 <code class="docutils literal notranslate"><span class="pre">dont_care</span></code> (the default for all supported backends) and <code class="docutils literal notranslate"><span class="pre">singletons</span></code>.
-Although a changeable flag, its value is backend dependent and thus set
-only in the backend adapter files.</p>
+Although a changeable flag, its value is backend dependent and thus
+expected to be set only in the backend adapter files.</p>
 </dd>
 </dl>
 <span id="flag-prolog-compiler"></span><dl class="simple" id="index-42">
