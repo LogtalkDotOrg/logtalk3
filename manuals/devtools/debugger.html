@@ -222,9 +222,9 @@ being traced.</p>
 <p>Clause breakpoints require a Prolog backend compiler that supports
 accessing read term starting line but only some backends (B-Prolog, GNU
 Prolog, JIProlog, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and
-YAP) provide accurate line numbers.</p>
-<p>As a workaround, you can check the start line number for an entity
-predicate definition using a query such as:</p>
+YAP) provide accurate line numbers. As a workaround, you can check the
+start line number for an entity predicate definition using a query such
+as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">object_property</span>(<span class="nv">Entity</span>, defines(<span class="nv">Functor</span><span class="o">/</span><span class="nv">Arity</span>, <span class="nv">Properties</span>)).
 </pre></div>
 </div>
@@ -232,8 +232,11 @@ predicate definition using a query such as:</p>
 any offset to the source file number of the predicate clause that you
 want to trace. This issue, if present, usually only affects the first
 predicate clause.</p>
-<p>Clause breakpoints are currently not available when using XSB as the
-Prolog backend compiler.</p>
+<p>Clause breakpoints are currently not available when using XSB as this
+backend doesn’t provide line information.</p>
+<p>Using the port command <code class="docutils literal notranslate"><span class="pre">p</span></code> (print) requires a backend supporting the
+user-defined <code class="docutils literal notranslate"><span class="pre">portray/1</span></code> hook predicate called via the <code class="docutils literal notranslate"><span class="pre">format/2-3</span></code>
+predicates <code class="docutils literal notranslate"><span class="pre">~p</span></code> control sequence.</p>
 </section>
 </section>
 

@@ -22,9 +22,9 @@
 :- category(debugger_messages).
 
 	:- info([
-		version is 3:7:0,
+		version is 3:7:1,
 		author is 'Paulo Moura',
-		date is 2024-06-19,
+		date is 2024-11-05,
 		comment is 'Logtalk ``debugger`` tool default message translations.'
 	]).
 
@@ -365,7 +365,7 @@
 			'       b - break (suspends execution and starts new interpreter; type end_of_file to terminate)'-[], nl,
 			'       a - abort (returns to top level interpreter)'-[], nl,
 			'       Q - quit (quits Logtalk)'-[], nl,
-			'       p - print (writes current goal using print/1 if available)'-[], nl,
+			'       p - print (writes current goal calling the portray/1 hook predicate if available)'-[], nl,
 			'       d - display (writes current goal without using operator notation)'-[], nl,
 			'       w - write (writes current goal quoting atoms if necessary)'-[], nl,
 			'       $ - outputs the compiled form of the current goal (for low-level debugging)'-[], nl,

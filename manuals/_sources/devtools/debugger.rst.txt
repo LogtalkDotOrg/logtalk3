@@ -109,10 +109,9 @@ Known issues
 Clause breakpoints require a Prolog backend compiler that supports
 accessing read term starting line but only some backends (B-Prolog, GNU
 Prolog, JIProlog, XVM, SICStus Prolog, SWI-Prolog, Trealla Prolog, and
-YAP) provide accurate line numbers.
-
-As a workaround, you can check the start line number for an entity
-predicate definition using a query such as:
+YAP) provide accurate line numbers. As a workaround, you can check the
+start line number for an entity predicate definition using a query such
+as:
 
 ::
 
@@ -123,5 +122,9 @@ any offset to the source file number of the predicate clause that you
 want to trace. This issue, if present, usually only affects the first
 predicate clause.
 
-Clause breakpoints are currently not available when using XSB as the
-Prolog backend compiler.
+Clause breakpoints are currently not available when using XSB as this
+backend doesn't provide line information.
+
+Using the port command ``p`` (print) requires a backend supporting the
+user-defined ``portray/1`` hook predicate called via the ``format/2-3``
+predicates ``~p`` control sequence.
