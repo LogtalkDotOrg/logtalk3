@@ -51,6 +51,9 @@ Documentation
 
 * IMPROVED: Documentation of the `issue_creator` tool.
 
+* IMPROVED: The Handbook documentation on the `logtalk_make/0-1` built-in
+predicates.
+
 * UPDATED: The Handbook documentation on the `underscore_variables` flag.
 
 Library

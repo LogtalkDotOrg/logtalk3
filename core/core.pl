@@ -2902,6 +2902,7 @@ logtalk_make(Target) :-
 '$lgt_logtalk_make_target_actions'(_).
 
 
+% recompilation of source files that failed to load
 '$lgt_logtalk_make'(all) :-
 	'$lgt_failed_file_'(Path),
 	% the following predicate may no longer be defined depending on what caused the failure
