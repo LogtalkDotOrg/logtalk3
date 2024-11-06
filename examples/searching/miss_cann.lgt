@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,19 +23,19 @@
 	instantiates(heuristic_state_space)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2024-11-06,
 		comment is 'Missionaries and cannibals heuristic state space search problem.'
 	]).
 
 	:- uses(loop, [forto/3]).
 
-	initial_state(start, ((3,3), left, (0,0))).
+	initial_state(start, s((3,3), left, (0,0))).
 
-	goal_state(end, ((0,0), right, (3,3))).
+	goal_state(end, s((0,0), right, (3,3))).
 
-	print_state(((Ml,Cl), B, (Mr,Cr))) :-
+	print_state(s((Ml,Cl), B, (Mr,Cr))) :-
 		forto(1, Ml, write('M')),
 		forto(1, Cl, write('C')),
 		(	B == left ->
@@ -46,7 +46,7 @@
 		forto(1, Cr, write('C')),
 		nl.
 
-	next_state(((Ml,Cl),left,(Mr,Cr)), ((Ml2,Cl2),right,(Mr2,Cr2)), 1) :-  %mm
+	next_state(s((Ml,Cl),left,(Mr,Cr)), s((Ml2,Cl2),right,(Mr2,Cr2)), 1) :-  %mm
 		Ml >= 2,
 		once((Ml - 2 =:= 0; Ml - 2 >= Cl)),
 		Cr =< 2,
@@ -54,7 +54,7 @@
 		Cl2 is Cl,
 		Mr2 is Mr + 2,
 		Cr2 is Cr.
-	next_state(((Ml,Cl),left,(Mr,Cr)), ((Ml2,Cl2),right,(Mr2,Cr2)), 2) :-  %m
+	next_state(s((Ml,Cl),left,(Mr,Cr)), s((Ml2,Cl2),right,(Mr2,Cr2)), 2) :-  %m
 		Ml >= 1,
 		once((Ml - 1 =:= 0; Ml - 1 >= Cl)),
 		Cr =< 1,
@@ -62,21 +62,21 @@
 		Cl2 is Cl,
 		Mr2 is Mr + 1,
 		Cr2 is Cr.
-	next_state(((Ml,Cl),left,(Mr,Cr)), ((Ml2,Cl2),right,(Mr2,Cr2)), 1) :-  %cc
+	next_state(s((Ml,Cl),left,(Mr,Cr)), s((Ml2,Cl2),right,(Mr2,Cr2)), 1) :-  %cc
 		Cl >= 2,
 		once((Mr >= Cr + 2;  Mr =:= 0)),
 		Ml2 is Ml,
 		Cl2 is Cl - 2,
 		Mr2 is Mr,
 		Cr2 is Cr + 2.
-	next_state(((Ml,Cl),left,(Mr,Cr)), ((Ml2,Cl2),right,(Mr2,Cr2)), 2) :-  %c
+	next_state(s((Ml,Cl),left,(Mr,Cr)), s((Ml2,Cl2),right,(Mr2,Cr2)), 2) :-  %c
 		Cl >= 1,
 		once((Mr >= Cr + 1; Mr =:= 0)),
 		Ml2 is Ml,
 		Cl2 is Cl - 1,
 		Mr2 is Mr,
 		Cr2 is Cr + 1.
-	next_state(((Ml,Cl),left,(Mr,Cr)), ((Ml2,Cl2),right,(Mr2,Cr2)), 1) :-  %mc
+	next_state(s((Ml,Cl),left,(Mr,Cr)), s((Ml2,Cl2),right,(Mr2,Cr2)), 1) :-  %mc
 		Ml >= 1,
 		Cl >= 1,
 		Mr >= Cr,
@@ -84,10 +84,10 @@
 		Cl2 is Cl - 1,
 		Mr2 is Mr + 1,
 		Cr2 is Cr + 1.
-	next_state(((Ml,Cl),right,(Mr,Cr)), ((Ml2,Cl2),left,(Mr2,Cr2)), Cost) :-
-		next_state(((Mr,Cr),left,(Ml,Cl)), ((Mr2,Cr2),right,(Ml2,Cl2)), Cost).
+	next_state(s((Ml,Cl),right,(Mr,Cr)), s((Ml2,Cl2),left,(Mr2,Cr2)), Cost) :-
+		next_state(s((Mr,Cr),left,(Ml,Cl)), s((Mr2,Cr2),right,(Ml2,Cl2)), Cost).
 
-	heuristic(((_, _), _, (Mr, Cr)), Cost) :-
+	heuristic(s((_, _), _, (Mr, Cr)), Cost) :-
 		Cost is 6 - (Mr + Cr).
 
 :- end_object.

@@ -95,6 +95,8 @@ backends.
 Examples
 --------
 
+* IMPROVED: The `searching` example representation of some of the problems.
+
 * FIXED: Portability issue in the `errors` example tests.
 
 * FIXED: Cannot run the `module_aliases` example with XSB, Tau Prolog, and
