@@ -6937,7 +6937,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_load_file'(File, [RelativeTo| Flags]) :-
 	(	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
-		\+ '$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _),
+		\+ '$lgt_file_loading_stack_'(SourceFile, Directory),
 		atom_concat(Name, Extension, Basename),
 		(	'$lgt_loaded_file_'(Basename, Directory, _, _, _, _, _)
 			% file already loaded; possibly an embedded application in which case we
@@ -6947,7 +6947,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		) ->
 		true
 	;	'$lgt_source_file_name'(File, [RelativeTo| Flags], Directory, Name, Extension, SourceFile),
-		'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _) ->
+		'$lgt_file_loading_stack_'(SourceFile, Directory) ->
+		% file trying to recursively load itself
 		throw(error(permission_error(load, file, File), _))
 	;	throw(error(existence_error(file, File), _))
 	),

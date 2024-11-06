@@ -41,6 +41,9 @@ flags as a group.
 * FIXED: The compiler to prevent trying to compile a Prolog `use_module/1`
 directive as a Logtalk directive when compiling a module as an object.
 
+* FIXED: Detection of a file trying to recursively load itself to not throw
+a permission error when reloading a file that previously failed to load.
+
 Prolog adapter and integration files
 ------------------------------------
 
