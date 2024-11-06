@@ -23,8 +23,6 @@
 
 	:- set_logtalk_flag(complements, deny).
 
-	:- uses([logtalk as logtalk]).
-
 	term_expansion(A, B) :-
 		foo(A, B).
 

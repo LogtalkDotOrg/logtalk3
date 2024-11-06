@@ -28,6 +28,10 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: Attempting to define an entity/predicate alias equal to the
+original entity/predicate is now a compilation error instead of simply
+a warning.
+
 * CHANGED: Reclassified the `underscore_variables` flag as a backend flag
 instead of a linter flag.
 

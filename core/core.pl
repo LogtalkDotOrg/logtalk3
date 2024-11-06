@@ -11545,8 +11545,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(permission_error(modify, object_alias, Alias))
 	;	\+ \+ '$lgt_pp_object_alias_'(_, Obj, _, _, _) ->
 		throw(permission_error(create, alias_alias, Alias))
+	;	'$lgt_variant'(Obj, Alias) ->
+		throw(consistency_error(alias_different_from_original, Obj, Alias))
 	;	'$lgt_add_referenced_object'(Obj, Ctx),
-		'$lgt_warn_on_alias_same_as_original'(Obj, Alias, Ctx),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		(	term_variables(Obj, Variables),
 			'$lgt_pp_term_source_data_'((:- uses(Argument)), VariableNames, _, _, _),
@@ -11602,8 +11603,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Original, OriginalFunctor, OriginalArity),
 	'$lgt_valid_predicate_indicator'(Alias, AliasFunctor, AliasArity),
 	!,
-	(	OriginalArity =:= AliasArity ->
-		'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx),
+	(	Original == Alias ->
+		throw(consistency_error(alias_different_from_original, Original, Alias))
+	;	OriginalArity =:= AliasArity ->
 		'$lgt_compile_uses_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, OriginalArity, Obj, Flag, Ctx)
 	;	throw(consistency_error(same_arity, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))
 	).
@@ -11612,8 +11614,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(Original, OriginalFunctor, OriginalArity, ExtendedArity),
 	'$lgt_valid_non_terminal_indicator'(Alias, AliasFunctor, AliasArity, _),
 	!,
-	(	OriginalArity =:= AliasArity ->
-		'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx),
+	(	Original == Alias ->
+		throw(consistency_error(alias_different_from_original, Original, Alias))
+	;	OriginalArity =:= AliasArity ->
 		'$lgt_compile_uses_directive_non_terminal_indicator'(OriginalFunctor, AliasFunctor, OriginalArity, ExtendedArity, Obj, Flag, Ctx)
 	;	throw(consistency_error(same_arity, OriginalFunctor//OriginalArity, AliasFunctor//AliasArity))
 	).
@@ -11820,8 +11823,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		throw(permission_error(modify, module_alias, Alias))
 	;	\+ \+ '$lgt_pp_module_alias_'(_, Module, _, _, _) ->
 		throw(permission_error(create, module_alias, Alias))
-	;	'$lgt_warn_on_alias_same_as_original'(Module, Alias, Ctx),
-		'$lgt_add_referenced_module'(Module, Ctx),
+	;	Module == Alias ->
+		throw(consistency_error(alias_different_from_original, Module, Alias))
+	;	'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_module_alias_'(Module, Alias, _, File, Lines))
 	).
@@ -11864,8 +11868,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Original, OriginalFunctor, OriginalArity),
 	'$lgt_valid_predicate_indicator'(Alias, AliasFunctor, AliasArity),
 	!,
-	(	OriginalArity =:= AliasArity ->
-		'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx),
+	(	Original == Alias ->
+		throw(consistency_error(alias_different_from_original, Original, Alias))
+	;	OriginalArity =:= AliasArity ->
 		'$lgt_compile_use_module_directive_predicate_indicator'(OriginalFunctor, AliasFunctor, OriginalArity, Module, Flag, Ctx)
 	;	throw(consistency_error(same_arity, OriginalFunctor/OriginalArity, AliasFunctor/AliasArity))
 	).
@@ -11874,8 +11879,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(Original, OriginalFunctor, OriginalArity, ExtendedArity),
 	'$lgt_valid_non_terminal_indicator'(Alias, AliasFunctor, AliasArity, _),
 	!,
-	(	OriginalArity =:= AliasArity ->
-		'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx),
+	(	Original == Alias ->
+		throw(consistency_error(alias_different_from_original, Original, Alias))
+	;	OriginalArity =:= AliasArity ->
 		'$lgt_compile_use_module_directive_non_terminal_indicator'(OriginalFunctor, AliasFunctor, OriginalArity, ExtendedArity, Module, Flag, Ctx)
 	;	throw(consistency_error(same_arity, OriginalFunctor//OriginalArity, AliasFunctor//AliasArity))
 	).
@@ -12030,21 +12036,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	assertz('$lgt_pp_use_module_predicate_'(Module, Original, Alias, _, File, Lines)),
 			assertz('$lgt_pp_runtime_clause_'('$lgt_use_module_predicate_'(Entity, Module, Original, Alias, _)))
 		)
-	).
-
-
-% auxiliary predicate for checking that original and alias are distinct
-
-'$lgt_warn_on_alias_same_as_original'(Original, Alias, Ctx) :-
-	(	'$lgt_variant'(Original, Alias),
-		'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)) ->
-		'$lgt_source_file_context'(File, Lines, Type, Entity),
-		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(
-			warning(general),
-			alias_same_as_original(File, Lines, Type, Entity, Original)
-		)
-	;	true
 	).
 
 

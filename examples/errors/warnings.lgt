@@ -402,18 +402,6 @@
 
 
 
-:- object(alias_same_as_original).
-
-	:- uses([foo as foo]).
-
-	:- uses(list, [member/2 as member/2]).
-
-	:- uses(logtalk, [message_tokens//2 as message_tokens//2]).
-
-:- end_object.
-
-
-
 :- object(duplicated_clauses).
 
 	a(1).

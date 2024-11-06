@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:138:0,
+		version is 1:139:0,
 		author is 'Paulo Moura',
-		date is 2024-11-04,
+		date is 2024-11-06,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -590,10 +590,6 @@
 	message_tokens(invalid_logtalk_load_context_key(File, Lines, Key)) -->
 		['Invalid logtalk_load_context/2 predicate key: ~q'-[Key], nl],
 		message_context(File, Lines).
-
-	message_tokens(alias_same_as_original(File, Lines, Type, Entity, Original)) -->
-		['Original and alias are not distinct: ~q'-[Original], nl],
-		message_context(File, Lines, Type, Entity).
 
 	message_tokens(unsupported_directive(File, Lines, Type, Entity, Directive)) -->
 		['Unsupported directive (with current backend): ~q'-[Directive], nl],

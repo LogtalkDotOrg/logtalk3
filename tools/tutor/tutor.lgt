@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:75:1,
+		version is 0:76:0,
 		author is 'Paulo Moura',
-		date is 2024-11-02,
+		date is 2024-11-06,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -653,11 +653,6 @@
 			'rule body. This warning can be fixed by redefining the non-terminal,'-[], nl,
 			'often by using an accumulator. This warning should be fixed when the'-[], nl,
 			'non-terminal is deterministic.'-[], nl, nl
-		].
-
-	explain(alias_same_as_original(_, _, _, _, _)) -->
-		[	'There is not point in declaring an alias that is the same as the original.'-[], nl,
-			'Typo in either alias or original?'
 		].
 
 	% lambda expression messages
