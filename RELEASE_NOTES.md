@@ -38,6 +38,9 @@ instead of a linter flag.
 * ADDED: New meta-flag, `linter`, to manage the values of all the linter
 flags as a group.
 
+* IMPROVED: Report as compilation errors `export/1` and `reexport/2`
+directives when not compiling a module as an object.
+
 * FIXED: The compiler to prevent trying to compile a Prolog `use_module/1`
 directive as a Logtalk directive when compiling a module as an object.
 

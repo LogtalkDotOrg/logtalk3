@@ -10387,11 +10387,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_logtalk_directive'(reexport(Module, Exports), Ctx) :-
 	% we must be compiling a module as an object
-	'$lgt_pp_module_'(_),
-	% we're compiling a module as an object; assume referenced modules are also compiled as objects
-	'$lgt_check'(module_identifier, Module),
-	'$lgt_check'(list, Exports),
-	'$lgt_compile_reexport_directive'(Exports, Module, Ctx).
+	(	'$lgt_pp_module_'(_) ->
+		% assume referenced modules are also compiled as objects
+		'$lgt_check'(module_identifier, Module),
+		'$lgt_check'(list, Exports),
+		'$lgt_compile_reexport_directive'(Exports, Module, Ctx)
+	;	throw(error(domain_error(directive, (reexport)/2), directive(reexport(Module, Exports))))
+	).
 
 % info/1 entity directive
 
@@ -10466,9 +10468,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_logtalk_directive'(export(Exports), Ctx) :-
 	% we must be compiling a module as an object
-	'$lgt_pp_module_'(_),
-	% make the export list public resources
-	'$lgt_compile_logtalk_directive'(public(Exports), Ctx).
+	(	'$lgt_pp_module_'(_) ->
+		'$lgt_compile_logtalk_directive'(public(Exports), Ctx)
+	;	throw(error(domain_error(directive, (export)/1), directive(export(Exports))))
+	).
 
 % dynamic/1 and discontiguous/1 predicate directives
 
