@@ -28,4 +28,4 @@ a helper predicate per call to workaround a clash between the way Logtalk
 compiles predicates and the way a closure is extended to form a goal.
 
 This example supports using ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
-and YAP as the backend compilers.
+Trella Prolog, and YAP as the backend compilers.

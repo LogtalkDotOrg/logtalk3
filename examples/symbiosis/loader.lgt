@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -35,7 +35,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, tau)).
 		:- use_module(library(lists)).
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
-		:- use_module(library(apply)).
+		:- use_module(library(lists)).
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 		:- use_module(library(maplist), []).
 	:- endif.

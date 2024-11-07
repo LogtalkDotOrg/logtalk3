@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@
 	:- info([
 		author is 'Paulo Moura',
 		version is 1:4:0,
-		date is 2023-10-02,
+		date is 2024-11-07,
 		comment is 'Examples of using Prolog built-in meta-predicates and module meta-predicates that take closures as arguments.'
 	]).
 
@@ -42,7 +42,7 @@
 	:- elif(current_logtalk_flag(prolog_dialect, tau)).
 		:- use_module(lists, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, trella)).
-		:- use_module(apply, [maplist/2, maplist/3]).
+		:- use_module(lists, [maplist/2, maplist/3]).
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 		:- use_module(maplist, [maplist/2, maplist/3]).
 	:- endif.

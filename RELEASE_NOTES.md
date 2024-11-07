@@ -112,6 +112,9 @@ Examples
 * FIXED: Cannot run the `module_aliases` example with XSB, Tau Prolog, and
 Trealla Prolog.
 
+* FIXED: The `symbiosis` example for Trealla Prolog removing its `apply`
+module.
+
 Tests
 -----
 
