@@ -9709,16 +9709,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_term_source_data_'(_, _, _, _, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- ensure_loaded(ExpandedFile)), Lines)).
 
-'$lgt_compile_file_directive'(use_module(FileSpec), Ctx) :-
+'$lgt_compile_file_directive'(use_module(FileSpec), _) :-
 	'$lgt_prolog_feature'(modules, unsupported),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_pp_term_source_data_'(_, _, _, File, Lines),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(
-		warning(general),
-		unsupported_directive(File, Lines, use_module(FileSpec))
-	),
-	fail.
+	throw(error(domain_error(directive, use_module/1), directive(use_module(FileSpec)))).
 
 '$lgt_compile_file_directive'(use_module(FileSpec), _) :-
 	!,
@@ -9731,16 +9724,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_term_source_data_'(_, _, _, _, Lines),
 	assertz('$lgt_pp_prolog_term_'((:- use_module(ExpandedFile)), Lines)).
 
-'$lgt_compile_file_directive'(use_module(FileSpec, Imports), Ctx) :-
+'$lgt_compile_file_directive'(use_module(FileSpec, Imports), _) :-
 	'$lgt_prolog_feature'(modules, unsupported),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_pp_term_source_data_'(_, _, _, File, Lines),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(
-		warning(general),
-		unsupported_directive(File, Lines, use_module(FileSpec, Imports))
-	),
-	fail.
+	throw(error(domain_error(directive, use_module/2), directive(use_module(FileSpec, Imports)))).
 
 '$lgt_compile_file_directive'(use_module(FileSpec, Imports), _) :-
 	!,
@@ -10290,23 +10276,14 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % use_module/1 entity directive
 
-'$lgt_compile_logtalk_directive'(use_module(Module), _) :-
+'$lgt_compile_logtalk_directive'(use_module(FileSpec), _) :-
 	'$lgt_pp_module_'(_),
-	% compiling a module as an object
-	throw(error(domain_error(directive, use_module/1), directive(use_module(Module)))).
+	% compiling a module as an object but Logtalk only supports use_module/2 directives
+	throw(error(domain_error(directive, use_module/1), directive(use_module(FileSpec)))).
 
-'$lgt_compile_logtalk_directive'(use_module(Aliases), Ctx) :-
+'$lgt_compile_logtalk_directive'(use_module(Aliases), _) :-
 	'$lgt_prolog_feature'(modules, unsupported),
-	\+ '$lgt_pp_module_'(_),
-	% not compiling a module as an object
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(
-		warning(general),
-		unsupported_directive(File, Lines, Type, Entity, use_module(Aliases))
-	),
-	fail.
+	throw(error(domain_error(directive, use_module/1), directive(use_module(Aliases)))).
 
 '$lgt_compile_logtalk_directive'(use_module(Aliases), Ctx) :-
 	'$lgt_compile_use_module_directive'(Aliases, Aliases, Ctx).
@@ -10317,18 +10294,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 % is used, as it's usual in Prolog, it must be expanded at the adapter file
 % level into a module identifier
 
-'$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
-	'$lgt_prolog_feature'(modules, unsupported),
-	\+ '$lgt_pp_module_'(_),
-	% not compiling a module as an object
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(
-		warning(general),
-		unsupported_directive(File, Lines, Type, Entity, use_module(Module, Imports))
-	),
-	fail.
 
 '$lgt_compile_logtalk_directive'(use_module(Module, _), _) :-
 	atom(Module),
@@ -10348,11 +10313,15 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_uses_directive'(Imports, Imports, Module, true, Ctx)
-	;	% we're calling module predicates within an object or a category
+	;	'$lgt_prolog_feature'(modules, unsupported) ->
+		% use_module/2 directives in objects or categories require a backend supporting modules
+		throw(error(domain_error(directive, use_module/2), directive(use_module(Module, Imports))))
+	;	% we're calling module predicates from within an object or a category
 		'$lgt_compile_use_module_directive'(Imports, Imports, Module, true, Ctx)
 	).
 
 '$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
+	'$lgt_check'(module_identifier, Module),
 	'$lgt_comp_ctx_entity'(Ctx, Entity),
 	term_variables(Entity, [EntityVariable| EntityVariables]),
 	'$lgt_pp_term_source_data_'((:- use_module(Module,Imports)), VariableNames, _, _, _),
@@ -10365,16 +10334,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_uses_directive'(Imports, Imports, Module, true, Ctx)
-	;	% we're calling module predicates within an object or a category
+	;	'$lgt_prolog_feature'(modules, unsupported) ->
+		% use_module/2 directives in objects or categories require a backend supporting modules
+		throw(error(domain_error(directive, use_module/2), directive(use_module(Module, Imports))))
+	;	% we're calling module predicates from within an object or a category
 		'$lgt_compile_use_module_directive'(Imports, Imports, Module, true, Ctx)
 	).
 
 '$lgt_compile_logtalk_directive'(use_module(Module, Imports), Ctx) :-
-	'$lgt_check'(module_identifier, Module),
 	(	'$lgt_pp_module_'(_) ->
 		% we're compiling a module as an object; assume referenced modules are also compiled as objects
 		'$lgt_compile_uses_directive'(Imports, Imports, Module, false, Ctx)
-	;	% we're calling module predicates within an object or a category
+	;	'$lgt_prolog_feature'(modules, unsupported) ->
+		% use_module/2 directives in objects or categories require a backend supporting modules
+		throw(error(domain_error(directive, use_module/2), directive(use_module(Module, Imports))))
+	;	% we're calling module predicates from within an object or a category
 		'$lgt_add_referenced_module'(Module, Ctx),
 		'$lgt_compile_use_module_directive'(Imports, Imports, Module, false, Ctx)
 	).
