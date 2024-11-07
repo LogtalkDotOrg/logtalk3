@@ -38,6 +38,9 @@ instead of a linter flag.
 * ADDED: New meta-flag, `linter`, to manage the values of all the linter
 flags as a group.
 
+* IMPROVED: Detect and report as compilation errors `use_module/1-2` and
+`uses/1-2` directives when compiling a protocol.
+
 * IMPROVED: Report as compilation errors instead of compilation warnings
 `use_module/1-2` directives when not compiling a module as an object while
 using a backend that doesn't support modules.

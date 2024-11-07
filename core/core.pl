@@ -10235,10 +10235,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % uses/1 entity directive
 
+'$lgt_compile_logtalk_directive'(uses(Aliases), _) :-
+	'$lgt_pp_entity_'(protocol, _, _),
+	throw(error(domain_error(directive, uses/1), directive(uses(Aliases)))).
+
 '$lgt_compile_logtalk_directive'(uses(Aliases), Ctx) :-
 	'$lgt_compile_uses_directive'(Aliases, Aliases, Ctx).
 
 % uses/2 predicate directive
+
+'$lgt_compile_logtalk_directive'(uses(Obj, Resources), _) :-
+	'$lgt_pp_entity_'(protocol, _, _),
+	throw(error(domain_error(directive, uses/2), directive(uses(Obj, Resources)))).
 
 '$lgt_compile_logtalk_directive'(uses(Obj, _), _) :-
 	callable(Obj),
@@ -10285,6 +10293,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_prolog_feature'(modules, unsupported),
 	throw(error(domain_error(directive, use_module/1), directive(use_module(Aliases)))).
 
+'$lgt_compile_logtalk_directive'(use_module(Aliases), _) :-
+	'$lgt_pp_entity_'(protocol, _, _),
+	throw(error(domain_error(directive, use_module/1), directive(use_module(Aliases)))).
+
 '$lgt_compile_logtalk_directive'(use_module(Aliases), Ctx) :-
 	'$lgt_compile_use_module_directive'(Aliases, Aliases, Ctx).
 
@@ -10294,6 +10306,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 % is used, as it's usual in Prolog, it must be expanded at the adapter file
 % level into a module identifier
 
+'$lgt_compile_logtalk_directive'(use_module(Module, Imports), _) :-
+	'$lgt_pp_entity_'(protocol, _, _),
+	throw(error(domain_error(directive, use_module/2), directive(use_module(Module, Imports)))).
 
 '$lgt_compile_logtalk_directive'(use_module(Module, _), _) :-
 	atom(Module),
