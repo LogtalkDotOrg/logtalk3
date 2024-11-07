@@ -28,9 +28,6 @@
 
 	foo(t, w).
 
-	bar(X) :-
-		logtalk_load_context(foo, X).
-
 :- end_object.
 
 

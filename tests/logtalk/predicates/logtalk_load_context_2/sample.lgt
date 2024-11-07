@@ -23,6 +23,12 @@
 :- set_logtalk_flag(unknown_entities, silent).
 
 
+:- initialization((
+	logtalk_load_context(directory, Directory),
+	assertz(logtalk_load_context_directory(Directory))
+)).
+
+
 :- object(sample(_PV1_, _PV2_)).
 
 	a(A,B,C,B,A).
@@ -52,6 +58,11 @@
 	implements((ptc1, ptc2)),
 	imports(ctg1),
 	extends(private::obj2)).
+
+	:- initialization((
+		logtalk_load_context(entity_identifier, Object),
+		{assertz(logtalk_load_context_entity_identifier(Object))}
+	)).
 
 :- end_object.
 

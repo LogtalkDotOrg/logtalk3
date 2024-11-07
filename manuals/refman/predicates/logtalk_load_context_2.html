@@ -205,13 +205,22 @@ Use instead the <code class="docutils literal notranslate"><span class="pre">var
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_load_context</span>(<span class="o">?</span>atom, <span class="o">-</span>nonvar) <span class="o">-</span> zero_or_more
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">logtalk_load_context</span>(<span class="o">?</span>callable, <span class="o">-</span>nonvar) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
 </section>
 <section id="errors">
 <h2>Errors<a class="headerlink" href="#errors" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is neither a variable nor a callable term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(callable,</span> <span class="pre">Key)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is a callable term but not a valid key:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(logtalk_load_context_key,</span> <span class="pre">Key)</span></code></div>
+</div>
+</div>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>

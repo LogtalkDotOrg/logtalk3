@@ -3304,83 +3304,99 @@ logtalk_make(Target) :-
 % when called from initialization/1 directives, calls to this predicate
 % are resolved at compile time when the key is instantiated
 
-logtalk_load_context(source, SourceFile) :-
+logtalk_load_context(Key, Value) :-
+	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
+	'$lgt_logtalk_load_context'(Key, Value, ExCtx).
+
+
+'$lgt_logtalk_load_context'(Key, Value, ExCtx) :-
+	(	var(Key) ->
+		'$lgt_logtalk_load_context_checked'(Key, Value)
+	;	'$lgt_valid_logtalk_load_context_key'(Key) ->
+		'$lgt_logtalk_load_context_checked'(Key, Value)
+	;	callable(Key) ->
+		throw(error(domain_error(logtalk_load_context_key, Key), logtalk(logtalk_load_context(Key, Value), ExCtx)))
+	;	throw(error(type_error(callable, Key), logtalk(logtalk_load_context(Key, Value), ExCtx)))
+	).
+
+
+'$lgt_logtalk_load_context_checked'(source, SourceFile) :-
 	'$lgt_pp_file_paths_flags_'(_, _, SourceFile, _, _).
 
-logtalk_load_context(directory, Directory) :-
+'$lgt_logtalk_load_context_checked'(directory, Directory) :-
 	'$lgt_pp_file_paths_flags_'(_, Directory, _, _, _).
 
-logtalk_load_context(basename, Basename) :-
+'$lgt_logtalk_load_context_checked'(basename, Basename) :-
 	'$lgt_pp_file_paths_flags_'(Basename, _, _, _, _).
 
-logtalk_load_context(target, ObjectFile) :-
+'$lgt_logtalk_load_context_checked'(target, ObjectFile) :-
 	% full path of the generated intermediate Prolog file
 	'$lgt_pp_file_paths_flags_'(_, _, _, ObjectFile, _).
 
-logtalk_load_context(flags, Flags) :-
+'$lgt_logtalk_load_context_checked'(flags, Flags) :-
 	% only returns the explicit flags passed in the second argument
 	% of the logtalk_compile/2 and logtalk_load/2 predicates
 	'$lgt_pp_file_paths_flags_'(_, _, _, _, Flags).
 
-logtalk_load_context(entity_name, Entity) :-
+'$lgt_logtalk_load_context_checked'(entity_name, Entity) :-
 	% deprecated key; use entity_identifier key instead
 	'$lgt_pp_entity_'(_, Entity, _).
 
-logtalk_load_context(entity_identifier, Entity) :-
+'$lgt_logtalk_load_context_checked'(entity_identifier, Entity) :-
 	'$lgt_pp_entity_'(_, Entity, _).
 
-logtalk_load_context(entity_prefix, Prefix) :-
+'$lgt_logtalk_load_context_checked'(entity_prefix, Prefix) :-
 	'$lgt_pp_entity_'(_, _, Prefix).
 
-logtalk_load_context(entity_type, Type) :-
+'$lgt_logtalk_load_context_checked'(entity_type, Type) :-
 	(	'$lgt_pp_module_'(_) ->
 		Type = module
 	;	'$lgt_pp_entity_'(Type, _, _)
 	).
 
-logtalk_load_context(entity_relation, Relation) :-
+'$lgt_logtalk_load_context_checked'(entity_relation, Relation) :-
 	'$lgt_logtalk_load_context_entity_relation'(Relation).
 
-logtalk_load_context(term, Term) :-
+'$lgt_logtalk_load_context_checked'(term, Term) :-
 	% full file term being compiled
 	'$lgt_pp_term_source_data_'(Term, _, _, _, _).
 
-logtalk_load_context(variables, Variables) :-
+'$lgt_logtalk_load_context_checked'(variables, Variables) :-
 	% variables of the full file term being compiled
 	'$lgt_pp_term_source_data_'(Term, _, _, _, _),
 	term_variables(Term, Variables).
 
-logtalk_load_context(variable_names, VariableNames) :-
+'$lgt_logtalk_load_context_checked'(variable_names, VariableNames) :-
 	% variable names for the full file term being compiled
 	'$lgt_pp_term_source_data_'(_, VariableNames, _, _, _).
 
-logtalk_load_context(variable_names(Term), VariableNames) :-
+'$lgt_logtalk_load_context_checked'(variable_names(Term), VariableNames) :-
 	% variable names for the full file term being compiled
 	'$lgt_pp_term_source_data_'(Term, VariableNames, _, _, _).
 
-logtalk_load_context(singletons, Singletons) :-
+'$lgt_logtalk_load_context_checked'(singletons, Singletons) :-
 	% singleton variables in the full file term being compiled
 	'$lgt_pp_term_source_data_'(_, _, Singletons, _, _).
 
-logtalk_load_context(singletons(Term), Singletons) :-
+'$lgt_logtalk_load_context_checked'(singletons(Term), Singletons) :-
 	% singleton variables in the full file term being compiled
 	'$lgt_pp_term_source_data_'(Term, _, Singletons, _, _).
 
-logtalk_load_context(parameter_variables, ParameterVariablePairs) :-
+'$lgt_logtalk_load_context_checked'(parameter_variables, ParameterVariablePairs) :-
 	% only succeeds when compiling a parametric entity containing parameter variables
 	'$lgt_pp_parameter_variables_'(ParameterVariablePairs).
 
-logtalk_load_context(file, File) :-
+'$lgt_logtalk_load_context_checked'(file, File) :-
 	% when compiling terms from an included file, this key returns the full
 	% path of the included file unlike the "source" key which always returns
 	% the full path of the main file
 	'$lgt_pp_term_source_data_'(_, _, _, File, _).
 
-logtalk_load_context(term_position, Lines) :-
+'$lgt_logtalk_load_context_checked'(term_position, Lines) :-
 	% term position of the full file term being compiled
 	'$lgt_pp_term_source_data_'(_, _, _, _, Lines).
 
-logtalk_load_context(stream, Stream) :-
+'$lgt_logtalk_load_context_checked'(stream, Stream) :-
 	% avoid a spurious choice-point with some backend Prolog compilers
 	stream_property(Stream, alias(logtalk_compiler_input)), !.
 
@@ -3408,6 +3424,29 @@ logtalk_load_context(stream, Stream) :-
 
 '$lgt_logtalk_load_context_entity_relation'(complements_object(Ctg, Obj)) :-
    '$lgt_pp_complemented_object_'(Obj, Ctg, _, _, _).
+
+
+% lgt_valid_logtalk_load_context_key(@nonvar)
+
+'$lgt_valid_logtalk_load_context_key'(entity_identifier).
+'$lgt_valid_logtalk_load_context_key'(entity_prefix).
+'$lgt_valid_logtalk_load_context_key'(entity_type).
+'$lgt_valid_logtalk_load_context_key'(entity_relation).
+'$lgt_valid_logtalk_load_context_key'(source).
+'$lgt_valid_logtalk_load_context_key'(file).
+'$lgt_valid_logtalk_load_context_key'(basename).
+'$lgt_valid_logtalk_load_context_key'(directory).
+'$lgt_valid_logtalk_load_context_key'(stream).
+'$lgt_valid_logtalk_load_context_key'(target).
+'$lgt_valid_logtalk_load_context_key'(flags).
+'$lgt_valid_logtalk_load_context_key'(term).
+'$lgt_valid_logtalk_load_context_key'(term_position).
+'$lgt_valid_logtalk_load_context_key'(variables).
+'$lgt_valid_logtalk_load_context_key'(parameter_variables).
+'$lgt_valid_logtalk_load_context_key'(variable_names).
+'$lgt_valid_logtalk_load_context_key'(variable_names(_)).
+'$lgt_valid_logtalk_load_context_key'(singletons).
+'$lgt_valid_logtalk_load_context_key'(singletons(_)).
 
 
 
@@ -14385,35 +14424,25 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % file compilation/loading context
 
-'$lgt_compile_body'(logtalk_load_context(Key, _), _, _, _, Ctx) :-
-	nonvar(Key),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	\+ '$lgt_member'(Key, [
-		entity_identifier, entity_prefix, entity_type, entity_relation,
-		source, file, basename, directory,
-		stream, target, flags,
-		term, term_position, variables, parameter_variables,
-		variable_names, variable_names(_), singletons, singletons(_)
-	]),
-	'$lgt_source_file_context'(File, Lines),
-	'$lgt_increment_compiling_warnings_counter',
-	(	'$lgt_pp_entity_'(Type, Entity, _) ->
-		'$lgt_print_message'(warning(general), invalid_logtalk_load_context_key(File, Lines, Type, Entity, Key))
-	;	'$lgt_print_message'(warning(general), invalid_logtalk_load_context_key(File, Lines, Key))
-	),
-	fail.
-
 '$lgt_compile_body'(logtalk_load_context(Key, Value), _, TPred, DPred, Ctx) :-
-	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, _, _, _, _),
-	nonvar(Key),
-	nonvar(Head),
-	functor(Head, (:-), 1),
-	% compiling a directive (usually an initialization/1 directive)
-	logtalk_load_context(Key, Value),
-	% expand goal to support embedded applications where the compiled
-	% code may no longer be loaded using the Logtalk runtime
 	!,
-	TPred = true,
+	'$lgt_comp_ctx'(Ctx, Head, _, _, _, _, _, _, _, _, ExCtx, _, _, _, _),
+	(	var(Key) ->
+		TPred = '$lgt_logtalk_load_context'(Key, Value, ExCtx)
+	;	'$lgt_valid_logtalk_load_context_key'(Key) ->
+		(	nonvar(Head),
+			functor(Head, (:-), 1),
+			% compiling a directive an initialization/1 directive
+			'$lgt_logtalk_load_context_checked'(Key, Value) ->
+			% expand goal to support embedded applications where the compiled
+			% code may no longer be loaded using the Logtalk runtime
+			TPred = true
+		;	TPred = '$lgt_logtalk_load_context_checked'(Key, Value)
+		)
+	;	callable(Key) ->
+		throw(domain_error(logtalk_load_context_key, Key))
+	;	throw(type_error(callable, Key))
+	),
 	DPred = '$lgt_debug'(goal(logtalk_load_context(Key, Value), TPred), ExCtx).
 
 % entity enumeration predicates

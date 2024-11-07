@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -135,9 +135,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2023-07-14,
+		date is 2024-11-07,
 		comment is 'Unit tests for the logtalk_load_context/2 built-in predicate.'
 	]).
 
@@ -294,5 +294,31 @@
 			result(entity_relation, complements_object(Category, Object)),
 			Relations
 		).
+
+	% calls from initialization/1 directives
+
+	test(logtalk_load_context_2_31, true(Directory == AssertedDirectory)) :-
+		this(This),
+		object_property(This, file(_, Directory)),
+		{logtalk_load_context_directory(AssertedDirectory)}.
+
+	test(logtalk_load_context_2_32, true(Object == obj1)) :-
+		{logtalk_load_context_entity_identifier(Object)}.
+
+	% errors
+
+	test(logtalk_load_context_2_33, error(type_error(callable,1))) :-
+		wrong_key_type(Key),
+		logtalk_load_context(Key, _).
+
+	test(logtalk_load_context_2_34, error(domain_error(logtalk_load_context_key,foo))) :-
+		wrong_key_name(Key),
+		logtalk_load_context(Key, _).
+
+	% auxiliary predicates
+
+	wrong_key_type(1).
+
+	wrong_key_name(foo).
 
 :- end_object.

@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* CHANGED: The `logtalk_load_context/2` built-in predicate to type-check
+the key argument.
+
 * CHANGED: Attempting to define an entity/predicate alias equal to the
 original entity/predicate is now a compilation error instead of simply
 a warning.

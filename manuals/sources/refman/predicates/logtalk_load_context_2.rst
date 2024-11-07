@@ -94,12 +94,15 @@ Modes and number of proofs
 
 ::
 
-   logtalk_load_context(?atom, -nonvar) - zero_or_more
+   logtalk_load_context(?callable, -nonvar) - zero_or_more
 
 Errors
 ------
 
-(none)
+| ``Key`` is neither a variable nor a callable term:
+|     ``type_error(callable, Key)``
+| ``Key`` is a callable term but not a valid key:
+|     ``domain_error(logtalk_load_context_key, Key)``
 
 Examples
 --------
