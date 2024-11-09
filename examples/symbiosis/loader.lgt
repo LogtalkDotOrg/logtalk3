@@ -29,13 +29,13 @@
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 		:- use_module(library(lists)).
 	:- elif(current_logtalk_flag(prolog_dialect, sicstus)).
-		:- use_module(library(lists)).
+		:- use_module(library(lists), []).
 	:- elif(current_logtalk_flag(prolog_dialect, swi)).
 		:- use_module(library(apply), []).
 	:- elif(current_logtalk_flag(prolog_dialect, tau)).
 		:- use_module(library(lists)).
 	:- elif(current_logtalk_flag(prolog_dialect, trealla)).
-		:- use_module(library(lists)).
+		:- use_module(library(lists), []).
 	:- elif(current_logtalk_flag(prolog_dialect, yap)).
 		:- use_module(library(maplist), []).
 	:- endif.
