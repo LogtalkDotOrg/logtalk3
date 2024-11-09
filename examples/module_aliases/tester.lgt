@@ -23,8 +23,7 @@
 	current_logtalk_flag(modules, supported),
 	\+ current_logtalk_flag(prolog_dialect, eclipse),
 	\+ current_logtalk_flag(prolog_dialect, xsb),
-	\+ current_logtalk_flag(prolog_dialect, tau),
-	\+ current_logtalk_flag(prolog_dialect, trealla)
+	\+ current_logtalk_flag(prolog_dialect, tau)
 )).
 
 	:- use_module(data1, []).
