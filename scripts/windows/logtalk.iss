@@ -79,7 +79,7 @@ Name: "prolog\sicstus"; Description: "SICStus Prolog integration (4.1.0 or later
 Name: "prolog\swicon"; Description: "SWI-Prolog (console) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\swiwin"; Description: "SWI-Prolog (window) integration (6.6.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\tau"; Description: "Tau Prolog integration (0.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
-Name: "prolog\trealla"; Description: "Trealla Prolog integration (2.59.8 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
+Name: "prolog\trealla"; Description: "Trealla Prolog integration (2.59.17 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\xsb"; Description: "XSB integration (3.8.0 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (console) integration (6.3.4 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning
 Name: "prolog\yap"; Description: "YAP (window) integration (6.3.2 or later)"; Types: full prolog custom; Flags: disablenouninstallwarning

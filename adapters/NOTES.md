@@ -415,7 +415,7 @@ and examples. These issues are expected to be solved soon. For the best
 experience, use the latest Tau Prolog git version.
 
 
-Trealla Prolog 2.59.8 and later versions
+Trealla Prolog 2.59.17 and later versions
 ---------------------------------------
 
 	trealla.pl
