@@ -60,7 +60,7 @@ a permission error when reloading a file that previously failed to load.
 Prolog adapter and integration files
 ------------------------------------
 
-* UPDATED: Trealla Prolog adapter file to require version 2.59.17 or later.
+* UPDATED: Trealla Prolog adapter file to require version 2.59.21 or later.
 
 Documentation
 -------------
