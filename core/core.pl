@@ -10894,6 +10894,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_dynamic_directive'([], _).
 
 
+'$lgt_compile_dynamic_directive_resource'(Entity::Resource, Ctx) :-
+	'$lgt_check'(entity_identifier, Entity),
+	nonvar(Resource),
+	'$lgt_pp_entity_'(_, Entity0, _),
+	'$lgt_variant'(Entity, Entity0),
+	'$lgt_compile_dynamic_directive_resource'(Resource, Ctx).
+
 '$lgt_compile_dynamic_directive_resource'(Entity::Pred, _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
@@ -10956,10 +10963,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_entity_'(category, _, _),
 		(	'$lgt_pp_multifile_'(Head, _, _, _) ->
 			% categories cannot contain predicates that are both multifile and dynamic
-			throw(permission_error(declare, dynamic, Functor/Arity))
+			throw(permission_error(declare, (dynamic), Functor/Arity))
 		;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
 			% predicate definition occurs before the directive
-			throw(permission_error(declare, dynamic, Functor/Arity))
+			throw(permission_error(declare, (dynamic), Functor/Arity))
 		)
 	;	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized predicates must be static
@@ -10977,10 +10984,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_pp_entity_'(category, _, _),
 		(	'$lgt_pp_multifile_'(Head, _, _, _) ->
 			% categories cannot contain non-terminals that are both multifile and dynamic
-			throw(permission_error(declare, dynamic, Functor//Arity))
+			throw(permission_error(declare, (dynamic), Functor//Arity))
 		;	'$lgt_pp_defines_predicate_'(Head, _, _, _, _, _) ->
 			% predicate definition occurs before the directive
-			throw(permission_error(declare, dynamic, Functor//Arity))
+			throw(permission_error(declare, (dynamic), Functor//Arity))
 		)
 	;	'$lgt_pp_synchronized_'(Head, _, _, _) ->
 		% synchronized non-terminals must be static
@@ -11039,6 +11046,13 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_discontiguous_directive'([], _).
 
+
+'$lgt_compile_discontiguous_directive_resource'(Entity::Resource, Ctx) :-
+	'$lgt_check'(entity_identifier, Entity),
+	nonvar(Resource),
+	'$lgt_pp_entity_'(_, Entity0, _),
+	'$lgt_variant'(Entity, Entity0),
+	'$lgt_compile_discontiguous_directive_resource'(Resource, Ctx).
 
 '$lgt_compile_discontiguous_directive_resource'(Entity::Pred, _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
@@ -11295,14 +11309,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_multifile_directive'([], _).
 
 
+'$lgt_compile_multifile_directive_resource'(Entity::Resource, Ctx) :-
+	'$lgt_check'(entity_identifier, Entity),
+	nonvar(Resource),
+	'$lgt_pp_entity_'(_, Entity0, _),
+	'$lgt_variant'(Entity, Entity0),
+	'$lgt_compile_multifile_directive_resource'(Resource, Ctx).
+
 '$lgt_compile_multifile_directive_resource'(Entity::Pred, _) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	(	Entity == user ->
 		'$lgt_check_for_duplicated_directive'(multifile(Functor/Arity), multifile(Entity::Pred)),
 		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
-	;	'$lgt_check'(entity_identifier, Entity),
-		functor(Template, Functor, Arity),
+	;	functor(Template, Functor, Arity),
 		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/Arity, TFunctor/TArity),
@@ -11317,8 +11337,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Entity == user ->
 		'$lgt_check_for_duplicated_directive'(multifile(Functor/ExtArity), multifile(Entity::NonTerminal)),
 		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
-	;	'$lgt_check'(entity_identifier, Entity),
-		functor(Template, Functor, ExtArity),
+	;	functor(Template, Functor, ExtArity),
 		'$lgt_check_primary_multifile_declaration'(Entity, Template) ->
 		'$lgt_entity_to_prefix'(Entity, Prefix),
 		'$lgt_compile_predicate_indicator'(Prefix, Functor/ExtArity, TFunctor/TArity),
@@ -11353,14 +11372,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_predicate_indicator'(Pred, Functor, Arity),
 	!,
 	functor(Head, Functor, Arity),
-	'$lgt_pp_entity_'(Type, _, Prefix),
-	(	Type == protocol ->
+	'$lgt_pp_entity_'(Type, Entity, Prefix),
+	(	Entity == user ->
+		'$lgt_check_for_duplicated_directive'(multifile(Functor/Arity), multifile(Pred)),
+		assertz('$lgt_pp_directive_'(multifile(Functor/Arity)))
+	;	Type == protocol ->
 		% protocols cannot contain predicate definitions
-		throw(permission_error(declare, multifile, Functor/Arity))
+		throw(permission_error(declare, (multifile), Functor/Arity))
 	;	Type == category,
 	 	'$lgt_pp_dynamic_'(Head, _, _, _) ->
 		% categories cannot contain predicates that are both multifile and dynamic
-	 	throw(permission_error(declare, multifile, Functor/Arity))
+	 	throw(permission_error(declare, (multifile), Functor/Arity))
 	;	'$lgt_check_for_duplicated_multifile_directive'(Head, Pred),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, Functor/Arity, File, Lines)),
@@ -11372,14 +11394,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_valid_non_terminal_indicator'(NonTerminal, Functor, Arity, ExtArity),
 	!,
 	functor(Head, Functor, ExtArity),
-	'$lgt_pp_entity_'(Type, _, Prefix),
-	(	Type == protocol ->
+	'$lgt_pp_entity_'(Type, Entity, Prefix),
+	(	Entity == user ->
+		'$lgt_check_for_duplicated_directive'(multifile(Functor/ExtArity), multifile(NonTerminal)),
+		assertz('$lgt_pp_directive_'(multifile(Functor/ExtArity)))
+	;	Type == protocol ->
 		% protocols cannot contain non-terminal definitions
-		throw(permission_error(declare, multifile, Functor//Arity))
+		throw(permission_error(declare, (multifile), Functor//Arity))
 	;	Type == category,
 	 	'$lgt_pp_dynamic_'(Head, _, _, _) ->
 		% categories cannot contain non-terminals that are both multifile and dynamic
-	 	throw(permission_error(declare, multifile, Functor//Arity))
+	 	throw(permission_error(declare, (multifile), Functor//Arity))
 	;	'$lgt_check_for_duplicated_multifile_directive'(Head, NonTerminal),
 		'$lgt_source_file_context'(Ctx, File, Lines),
 		assertz('$lgt_pp_multifile_'(Head, Functor//Arity, File, Lines)),

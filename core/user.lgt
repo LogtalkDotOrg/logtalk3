@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	implements((expanding, forwarding, monitoring))).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2022-10-12,
+		date is 2024-11-11,
 		comment is 'Pseudo-object representing the plain Prolog database. Can be used as a monitor by defining ``before/3`` and ``after/3`` predicates. Can be used as a hook object by defining ``term_expansion/2`` and ``goal_expansion/2`` multifile and dynamic predicates.'
 	]).
 
@@ -61,19 +61,19 @@
 	% for the before/3 and after/3 predicates in "user" will not result
 	% in predicate existence errors
 
-	:- multifile(user::before/3).
-	:- multifile(user::after/3).
+	:- multifile(before/3).
+	:- multifile(after/3).
 
 	% ensure that setting the "hook" flag to "user" will not result in
 	% predicate existence errors during compilation of source files as
 	% the expansion predicates are only declared in some of the supported
 	% backend Prolog compilers
 
-	:- multifile(user::term_expansion/2).
-	:- dynamic(user::term_expansion/2).
+	:- multifile(term_expansion/2).
+	:- dynamic(term_expansion/2).
 
-	:- multifile(user::goal_expansion/2).
-	:- dynamic(user::goal_expansion/2).
+	:- multifile(goal_expansion/2).
+	:- dynamic(goal_expansion/2).
 
 :- end_object.
 

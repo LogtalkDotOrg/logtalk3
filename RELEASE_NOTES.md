@@ -63,6 +63,9 @@ directive as a Logtalk directive when compiling a module as an object.
 * FIXED: Detection of a file trying to recursively load itself to not throw
 a permission error when reloading a file that previously failed to load.
 
+* FIXED: Misleading error when compiling `dynamic/1`, `discontiguous/1`, and
+`multifile/1` directives with arguments with redundant entity qualification.
+
 Prolog adapter and integration files
 ------------------------------------
 
