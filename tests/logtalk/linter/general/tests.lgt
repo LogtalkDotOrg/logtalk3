@@ -26,7 +26,7 @@
 		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2024-11-11,
-		comment is 'Unit tests for general linter warnings.'
+		comment is 'Unit tests for the ``general`` linter flag.'
 	]).
 
 	:- private(missing_reference_to_built_in_protocol/5).
