@@ -33,7 +33,8 @@ built-in predicate. For (source file or entity) local scope, use instead
 the [set_logtalk_flag/2](../refman/directives/set_logtalk_flag_2.html)
 directive.
 
-The linter flags can be managed as a group using the `linter` meta-flag.
+The linter flags can be managed as a group using the
+[linter](../userman/programming.html#flag-linter) meta-flag.
 See the documentation for details.
 
 Some lint checks are turned off by default, specially when computationally
