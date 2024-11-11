@@ -288,6 +288,7 @@ setup_call_cleanup(_, _, _) :-
 '$lgt_default_flag'(settings_file, allow).
 % lint compilation flags:
 '$lgt_default_flag'(linter, default).
+'$lgt_default_flag'(general, warning).
 '$lgt_default_flag'(encodings, warning).
 '$lgt_default_flag'(unknown_entities, warning).
 '$lgt_default_flag'(unknown_predicates, warning).

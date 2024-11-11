@@ -1009,6 +1009,13 @@ Lint flags
    Controls the source file text encoding warnings. Possible option
    values are ``warning`` (the usual default) and ``silent``.
 
+.. _flag_general:
+.. index:: pair: general; Flag
+
+``general(Option)``
+   Controls warnings that are not controlled by a specific flag. Possible
+   option values are ``warning`` (the usual default) and ``silent``.
+
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

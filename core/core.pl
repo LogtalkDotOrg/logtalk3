@@ -13039,6 +13039,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_head'(Head, _, _, Ctx) :-
 	'$lgt_reserved_predicate_protocol'(Head, Protocol),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(general, warning),
 	\+ '$lgt_pp_module_'(_),
 	\+ '$lgt_pp_implemented_protocol_'(Protocol, _, _, _, _),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -20481,6 +20482,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_complements_object_relation'([Obj| _], Ctg, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(general, warning),
 	(	'$lgt_current_object_'(Obj, _, _, _, _, _, _, _, _, _, Flags) ->
 		% loaded object
 		true
@@ -25338,6 +25340,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag'(duplicated_clauses).
 '$lgt_valid_flag'(duplicated_directives).
 '$lgt_valid_flag'(encodings).
+'$lgt_valid_flag'(general).
 '$lgt_valid_flag'(grammar_rules).
 '$lgt_valid_flag'(lambda_variables).
 '$lgt_valid_flag'(left_recursion).
@@ -25453,6 +25456,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_valid_flag_value'(encodings, silent) :- !.
 '$lgt_valid_flag_value'(encodings, warning) :- !.
+
+'$lgt_valid_flag_value'(general, silent) :- !.
+'$lgt_valid_flag_value'(general, warning) :- !.
 
 '$lgt_valid_flag_value'(grammar_rules, silent) :- !.
 '$lgt_valid_flag_value'(grammar_rules, warning) :- !.
@@ -25629,6 +25635,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_linter_flag'(duplicated_clauses).
 '$lgt_linter_flag'(duplicated_directives).
 '$lgt_linter_flag'(encodings).
+'$lgt_linter_flag'(general).
 '$lgt_linter_flag'(grammar_rules).
 '$lgt_linter_flag'(lambda_variables).
 '$lgt_linter_flag'(left_recursion).

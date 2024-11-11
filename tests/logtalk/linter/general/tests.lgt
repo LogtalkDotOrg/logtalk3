@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2024-11-07,
+		date is 2024-11-11,
 		comment is 'Unit tests for general linter warnings.'
 	]).
 
@@ -37,7 +37,7 @@
 
 	setup :-
 		cleanup,
-		logtalk_compile(test_entities, []).
+		logtalk_compile(test_entities, [general(warning)]).
 
 	cleanup :-
 		retractall(missing_reference_to_built_in_protocol(_, _, _, _, _)),

@@ -41,8 +41,11 @@ instead of a linter flag.
 * ADDED: New meta-flag, `linter`, to manage the values of all the linter
 flags as a group.
 
-* ADDED: New  linter flag, `encodings`, to control source file text encoding
+* ADDED: New linter flag, `encodings`, to control source file text encoding
 warnings.
+
+* ADDED: New linter flag, `general`, for warnings that are not controlled
+by a specific flag.
 
 * IMPROVED: Detect and report as compilation errors `use_module/1-2` and
 `uses/1-2` directives when compiling a protocol.
