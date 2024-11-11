@@ -25616,30 +25616,31 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_linter_flag'(?atom)
 
-'$lgt_linter_flag'(unknown_entities).
-'$lgt_linter_flag'(singleton_variables).
-'$lgt_linter_flag'(unknown_predicates).
-'$lgt_linter_flag'(undefined_predicates).
-'$lgt_linter_flag'(steadfastness).
+'$lgt_linter_flag'(always_true_or_false_goals).
+'$lgt_linter_flag'(arithmetic_expressions).
+'$lgt_linter_flag'(catchall_catch).
+'$lgt_linter_flag'(conditionals).
+'$lgt_linter_flag'(deprecated).
+'$lgt_linter_flag'(disjunctions).
+'$lgt_linter_flag'(duplicated_clauses).
+'$lgt_linter_flag'(duplicated_directives).
+'$lgt_linter_flag'(encodings).
+'$lgt_linter_flag'(grammar_rules).
+'$lgt_linter_flag'(lambda_variables).
+'$lgt_linter_flag'(left_recursion).
+'$lgt_linter_flag'(missing_directives).
+'$lgt_linter_flag'(naming).
 '$lgt_linter_flag'(portability).
 '$lgt_linter_flag'(redefined_built_ins).
 '$lgt_linter_flag'(redefined_operators).
-'$lgt_linter_flag'(missing_directives).
-'$lgt_linter_flag'(duplicated_directives).
-'$lgt_linter_flag'(lambda_variables).
+'$lgt_linter_flag'(singleton_variables).
+'$lgt_linter_flag'(steadfastness).
 '$lgt_linter_flag'(suspicious_calls).
-'$lgt_linter_flag'(trivial_goal_fails).
-'$lgt_linter_flag'(always_true_or_false_goals).
-'$lgt_linter_flag'(deprecated).
-'$lgt_linter_flag'(naming).
-'$lgt_linter_flag'(duplicated_clauses).
 '$lgt_linter_flag'(tail_recursive).
-'$lgt_linter_flag'(disjunctions).
-'$lgt_linter_flag'(conditionals).
-'$lgt_linter_flag'(catchall_catch).
-'$lgt_linter_flag'(grammar_rules).
-'$lgt_linter_flag'(arithmetic_expressions).
-'$lgt_linter_flag'(left_recursion).
+'$lgt_linter_flag'(trivial_goal_fails).
+'$lgt_linter_flag'(undefined_predicates).
+'$lgt_linter_flag'(unknown_entities).
+'$lgt_linter_flag'(unknown_predicates).
 
 
 
