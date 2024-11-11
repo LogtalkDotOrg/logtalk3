@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,9 +27,9 @@ a(1).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2020-11-16,
+		date is 2024-11-11,
 		comment is 'Unit tests for the "user" built-in object.'
 	]).
 
@@ -93,5 +93,13 @@ a(1).
 
 	test(user_14) :-
 		{current_predicate(goal_expansion/2)}.
+
+	% event handler predicates must be current predicates
+
+	test(user_15) :-
+		{current_predicate(before/3)}.
+
+	test(user_16) :-
+		{current_predicate(after/3)}.
 
 :- end_object.

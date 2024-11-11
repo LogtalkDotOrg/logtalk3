@@ -129,6 +129,8 @@ Tests
 * CHANGED: Tests for the Prolog standard `initialization/1` directive to not
 depend on support for the `ensure_loaded/1` directive.
 
+* ADDED: Additional tests for the `user` built-in entity.
+
 * ADDED: Tests for the Logtalk `consistency_error/3` built-in method.
 
 * ADDED: Additional tests for the Prolog standard `bagof/3` and `setof/3`
