@@ -7620,6 +7620,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% check that the encoding/1 directive is found in the first line
 		(	BeginLine =:= 1 ->
 			true
+		;	'$lgt_compiler_flag'(encodings, silent) ->
+			true
 		;	'$lgt_increment_compiling_warnings_counter',
 			'$lgt_print_message'(warning(encodings), misplaced_encoding_directive(SourceFile, BeginLine-EndLine))
 		),
@@ -9733,7 +9735,9 @@ create_logtalk_flag(Flag, Value, Options) :-
 		% ... same encoding/1 directive that was found and processed
 		true
 	;	% out-of-place encoding/1 directive, which must be the first term in a source file
-		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_compiler_flag'(encodings, silent) ->
+		true
+	;	'$lgt_increment_compiling_warnings_counter',
 		'$lgt_print_message'(warning(encodings), ignored_encoding_directive(File, Lines))
 	).
 

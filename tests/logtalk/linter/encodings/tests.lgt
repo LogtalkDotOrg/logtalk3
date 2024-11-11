@@ -35,6 +35,9 @@
 	:- private(ignored_encoding_directive/2).
 	:- dynamic(ignored_encoding_directive/2).
 
+	condition :-
+		\+ current_logtalk_flag(encoding_directive, unsupported).
+
 	setup :-
 		cleanup,
 		logtalk_compile(file, [encodings(warning)]).
