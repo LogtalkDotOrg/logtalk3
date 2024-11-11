@@ -1002,6 +1002,13 @@ Lint flags
    cannot be changed to be tail recursive. Possible option values are
    ``warning`` and ``silent`` (the usual default).
 
+.. _flag_encodings:
+.. index:: pair: encodings; Flag
+
+``encodings(Option)``
+   Controls the source file text encoding warnings. Possible option
+   values are ``warning`` (the usual default) and ``silent``.
+
 Optional features compilation flags
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

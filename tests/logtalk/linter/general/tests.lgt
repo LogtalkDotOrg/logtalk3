@@ -32,12 +32,6 @@
 	:- private(missing_reference_to_built_in_protocol/5).
 	:- dynamic(missing_reference_to_built_in_protocol/5).
 
-	:- private(invalid_logtalk_load_context_key/5).
-	:- dynamic(invalid_logtalk_load_context_key/5).
-
-	:- private(invalid_logtalk_load_context_key/3).
-	:- dynamic(invalid_logtalk_load_context_key/3).
-
 	:- private(complementing_category_ignored/4).
 	:- dynamic(complementing_category_ignored/4).
 

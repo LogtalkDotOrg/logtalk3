@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:139:0,
+		version is 1:140:0,
 		author is 'Paulo Moura',
-		date is 2024-11-06,
+		date is 2024-11-11,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -1096,7 +1096,8 @@
 			current_logtalk_flag(deprecated, Deprecated0), align(Deprecated0, Deprecated),
 			current_logtalk_flag(naming, Naming),
 			current_logtalk_flag(left_recursion, LeftRecursion0), align(LeftRecursion0, LeftRecursion),
-			current_logtalk_flag(tail_recursive, TailRecursive)
+			current_logtalk_flag(tail_recursive, TailRecursive),
+			current_logtalk_flag(encodings, Encodings)
 		},
 		[
 			'Default lint compilation flags: '-[], nl,
@@ -1111,7 +1112,8 @@
 			'  disjunctions:         ~w    conditionals:               ~w'-[Disjunctions, Conditionals], nl,
 			'  singleton_variables:  ~w    catchall_catch:             ~w'-[Singletons, CatchallCatch], nl,
 			'  deprecated:           ~w    naming:                     ~w'-[Deprecated, Naming], nl,
-			'  left_recursion:       ~w    tail_recursive:             ~w'-[LeftRecursion, TailRecursive], nl
+			'  left_recursion:       ~w    tail_recursive:             ~w'-[LeftRecursion, TailRecursive], nl,
+			'  encodings:            ~w'-[Encodings], nl
 		].
 
 	default_optional_features_flags -->

@@ -7621,7 +7621,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		(	BeginLine =:= 1 ->
 			true
 		;	'$lgt_increment_compiling_warnings_counter',
-			'$lgt_print_message'(warning(general), misplaced_encoding_directive(SourceFile, BeginLine-EndLine))
+			'$lgt_print_message'(warning(encodings), misplaced_encoding_directive(SourceFile, BeginLine-EndLine))
 		),
 		% close and reopen the source file using the specified encoding
 		'$lgt_close'(Input),
@@ -9734,7 +9734,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	% out-of-place encoding/1 directive, which must be the first term in a source file
 		'$lgt_increment_compiling_warnings_counter',
-		'$lgt_print_message'(warning(general), ignored_encoding_directive(File, Lines))
+		'$lgt_print_message'(warning(encodings), ignored_encoding_directive(File, Lines))
 	).
 
 '$lgt_compile_file_directive'(ensure_loaded(FileSpec), _) :-
@@ -25322,69 +25322,72 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % true if the argument is a valid Logtalk flag name
 
-% lint compilation flags
+% meta-lint compilation flag
 '$lgt_valid_flag'(linter).
-'$lgt_valid_flag'(unknown_entities).
-'$lgt_valid_flag'(singleton_variables).
-'$lgt_valid_flag'(unknown_predicates).
-'$lgt_valid_flag'(undefined_predicates).
-'$lgt_valid_flag'(steadfastness).
+% lint compilation flags
+'$lgt_valid_flag'(always_true_or_false_goals).
+'$lgt_valid_flag'(arithmetic_expressions).
+'$lgt_valid_flag'(catchall_catch).
+'$lgt_valid_flag'(conditionals).
+'$lgt_valid_flag'(deprecated).
+'$lgt_valid_flag'(disjunctions).
+'$lgt_valid_flag'(duplicated_clauses).
+'$lgt_valid_flag'(duplicated_directives).
+'$lgt_valid_flag'(encodings).
+'$lgt_valid_flag'(grammar_rules).
+'$lgt_valid_flag'(lambda_variables).
+'$lgt_valid_flag'(left_recursion).
+'$lgt_valid_flag'(missing_directives).
+'$lgt_valid_flag'(naming).
 '$lgt_valid_flag'(portability).
 '$lgt_valid_flag'(redefined_built_ins).
 '$lgt_valid_flag'(redefined_operators).
-'$lgt_valid_flag'(missing_directives).
-'$lgt_valid_flag'(duplicated_directives).
-'$lgt_valid_flag'(lambda_variables).
+'$lgt_valid_flag'(singleton_variables).
+'$lgt_valid_flag'(steadfastness).
 '$lgt_valid_flag'(suspicious_calls).
-'$lgt_valid_flag'(trivial_goal_fails).
-'$lgt_valid_flag'(always_true_or_false_goals).
-'$lgt_valid_flag'(deprecated).
-'$lgt_valid_flag'(naming).
-'$lgt_valid_flag'(duplicated_clauses).
 '$lgt_valid_flag'(tail_recursive).
-'$lgt_valid_flag'(disjunctions).
-'$lgt_valid_flag'(conditionals).
-'$lgt_valid_flag'(catchall_catch).
-'$lgt_valid_flag'(grammar_rules).
-'$lgt_valid_flag'(arithmetic_expressions).
-'$lgt_valid_flag'(left_recursion).
+'$lgt_valid_flag'(trivial_goal_fails).
+'$lgt_valid_flag'(undefined_predicates).
+'$lgt_valid_flag'(unknown_entities).
+'$lgt_valid_flag'(unknown_predicates).
 % optional features compilation flags
 '$lgt_valid_flag'(complements).
+'$lgt_valid_flag'(context_switching_calls).
 '$lgt_valid_flag'(dynamic_declarations).
 '$lgt_valid_flag'(events).
-'$lgt_valid_flag'(context_switching_calls).
 % other compilation flags
-'$lgt_valid_flag'(scratch_directory).
-'$lgt_valid_flag'(report).
-'$lgt_valid_flag'(hook).
-'$lgt_valid_flag'(code_prefix).
-'$lgt_valid_flag'(optimize).
-'$lgt_valid_flag'(debug).
 '$lgt_valid_flag'(clean).
-'$lgt_valid_flag'(source_data).
-'$lgt_valid_flag'(reload).
+'$lgt_valid_flag'(code_prefix).
+'$lgt_valid_flag'(debug).
+'$lgt_valid_flag'(hook).
+'$lgt_valid_flag'(optimize).
 '$lgt_valid_flag'(relative_to).
-'$lgt_valid_flag'('$relative_to').
+'$lgt_valid_flag'(reload).
+'$lgt_valid_flag'(report).
+'$lgt_valid_flag'(scratch_directory).
+'$lgt_valid_flag'(source_data).
 % read-only compilation flags
 '$lgt_valid_flag'(version_data).
 % startup flags
 '$lgt_valid_flag'(settings_file).
 % backend Prolog compiler information
-'$lgt_valid_flag'(prolog_dialect).
-'$lgt_valid_flag'(underscore_variables).
-'$lgt_valid_flag'(prolog_version).
 '$lgt_valid_flag'(prolog_compatible_version).
+'$lgt_valid_flag'(prolog_dialect).
+'$lgt_valid_flag'(prolog_version).
+'$lgt_valid_flag'(underscore_variables).
 % features requiring specific backend Prolog compiler support
-'$lgt_valid_flag'(unicode).
+'$lgt_valid_flag'(coinduction).
 '$lgt_valid_flag'(encoding_directive).
 '$lgt_valid_flag'(engines).
-'$lgt_valid_flag'(threads).
 '$lgt_valid_flag'(modules).
 '$lgt_valid_flag'(tabling).
-'$lgt_valid_flag'(coinduction).
+'$lgt_valid_flag'(threads).
+'$lgt_valid_flag'(unicode).
 % backend Prolog compiler and loader options
 '$lgt_valid_flag'(prolog_compiler).
 '$lgt_valid_flag'(prolog_loader).
+% internal flags
+'$lgt_valid_flag'('$relative_to').
 
 
 
@@ -25392,46 +25395,75 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % true if the argument is a read only Logtalk flag name
 
-% Logtalk version flags
+% Logtalk version flag
 '$lgt_read_only_flag'(version_data).
 % startup flags
 '$lgt_read_only_flag'(settings_file).
 % backend Prolog compiler features
-'$lgt_read_only_flag'(prolog_dialect).
-'$lgt_read_only_flag'(prolog_version).
-'$lgt_read_only_flag'(prolog_compatible_version).
-'$lgt_read_only_flag'(unicode).
+'$lgt_read_only_flag'(coinduction).
 '$lgt_read_only_flag'(encoding_directive).
 '$lgt_read_only_flag'(engines).
-'$lgt_read_only_flag'(threads).
 '$lgt_read_only_flag'(modules).
+'$lgt_read_only_flag'(prolog_compatible_version).
+'$lgt_read_only_flag'(prolog_dialect).
+'$lgt_read_only_flag'(prolog_version).
 '$lgt_read_only_flag'(tabling).
-'$lgt_read_only_flag'(coinduction).
+'$lgt_read_only_flag'(threads).
+'$lgt_read_only_flag'(unicode).
 
 
 
 % '$lgt_valid_flag_value'(@atom, @nonvar)
 
+% meta-lint compilation flag
+
 '$lgt_valid_flag_value'(linter, on) :- !.
 '$lgt_valid_flag_value'(linter, default) :- !.
 '$lgt_valid_flag_value'(linter, off) :- !.
 
-'$lgt_valid_flag_value'(unknown_entities, silent) :- !.
-'$lgt_valid_flag_value'(unknown_entities, warning) :- !.
+% lint compilation flags
 
-'$lgt_valid_flag_value'(singleton_variables, silent) :- !.
-'$lgt_valid_flag_value'(singleton_variables, warning) :- !.
+'$lgt_valid_flag_value'(always_true_or_false_goals, silent) :- !.
+'$lgt_valid_flag_value'(always_true_or_false_goals, warning) :- !.
 
-'$lgt_valid_flag_value'(unknown_predicates, silent) :- !.
-'$lgt_valid_flag_value'(unknown_predicates, warning) :- !.
-'$lgt_valid_flag_value'(unknown_predicates, error) :- !.
+'$lgt_valid_flag_value'(arithmetic_expressions, silent) :- !.
+'$lgt_valid_flag_value'(arithmetic_expressions, warning) :- !.
 
-'$lgt_valid_flag_value'(undefined_predicates, silent) :- !.
-'$lgt_valid_flag_value'(undefined_predicates, warning) :- !.
-'$lgt_valid_flag_value'(undefined_predicates, error) :- !.
+'$lgt_valid_flag_value'(catchall_catch, silent) :- !.
+'$lgt_valid_flag_value'(catchall_catch, warning) :- !.
 
-'$lgt_valid_flag_value'(steadfastness, silent) :- !.
-'$lgt_valid_flag_value'(steadfastness, warning) :- !.
+'$lgt_valid_flag_value'(conditionals, silent) :- !.
+'$lgt_valid_flag_value'(conditionals, warning) :- !.
+
+'$lgt_valid_flag_value'(deprecated, silent) :- !.
+'$lgt_valid_flag_value'(deprecated, warning) :- !.
+
+'$lgt_valid_flag_value'(disjunctions, silent) :- !.
+'$lgt_valid_flag_value'(disjunctions, warning) :- !.
+
+'$lgt_valid_flag_value'(duplicated_clauses, silent) :- !.
+'$lgt_valid_flag_value'(duplicated_clauses, warning) :- !.
+
+'$lgt_valid_flag_value'(duplicated_directives, silent) :- !.
+'$lgt_valid_flag_value'(duplicated_directives, warning) :- !.
+
+'$lgt_valid_flag_value'(encodings, silent) :- !.
+'$lgt_valid_flag_value'(encodings, warning) :- !.
+
+'$lgt_valid_flag_value'(grammar_rules, silent) :- !.
+'$lgt_valid_flag_value'(grammar_rules, warning) :- !.
+
+'$lgt_valid_flag_value'(lambda_variables, silent) :- !.
+'$lgt_valid_flag_value'(lambda_variables, warning) :- !.
+
+'$lgt_valid_flag_value'(left_recursion, silent) :- !.
+'$lgt_valid_flag_value'(left_recursion, warning) :- !.
+
+'$lgt_valid_flag_value'(missing_directives, silent) :- !.
+'$lgt_valid_flag_value'(missing_directives, warning) :- !.
+
+'$lgt_valid_flag_value'(naming, silent) :- !.
+'$lgt_valid_flag_value'(naming, warning) :- !.
 
 '$lgt_valid_flag_value'(portability, silent) :- !.
 '$lgt_valid_flag_value'(portability, warning) :- !.
@@ -25442,114 +25474,105 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(redefined_operators, silent) :- !.
 '$lgt_valid_flag_value'(redefined_operators, warning) :- !.
 
-'$lgt_valid_flag_value'(missing_directives, silent) :- !.
-'$lgt_valid_flag_value'(missing_directives, warning) :- !.
+'$lgt_valid_flag_value'(singleton_variables, silent) :- !.
+'$lgt_valid_flag_value'(singleton_variables, warning) :- !.
 
-'$lgt_valid_flag_value'(duplicated_directives, silent) :- !.
-'$lgt_valid_flag_value'(duplicated_directives, warning) :- !.
-
-'$lgt_valid_flag_value'(lambda_variables, silent) :- !.
-'$lgt_valid_flag_value'(lambda_variables, warning) :- !.
+'$lgt_valid_flag_value'(steadfastness, silent) :- !.
+'$lgt_valid_flag_value'(steadfastness, warning) :- !.
 
 '$lgt_valid_flag_value'(suspicious_calls, silent) :- !.
 '$lgt_valid_flag_value'(suspicious_calls, warning) :- !.
 
-'$lgt_valid_flag_value'(trivial_goal_fails, silent) :- !.
-'$lgt_valid_flag_value'(trivial_goal_fails, warning) :- !.
-
-'$lgt_valid_flag_value'(always_true_or_false_goals, silent) :- !.
-'$lgt_valid_flag_value'(always_true_or_false_goals, warning) :- !.
-
-'$lgt_valid_flag_value'(deprecated, silent) :- !.
-'$lgt_valid_flag_value'(deprecated, warning) :- !.
-
-'$lgt_valid_flag_value'(naming, silent) :- !.
-'$lgt_valid_flag_value'(naming, warning) :- !.
-
-'$lgt_valid_flag_value'(duplicated_clauses, silent) :- !.
-'$lgt_valid_flag_value'(duplicated_clauses, warning) :- !.
-
 '$lgt_valid_flag_value'(tail_recursive, silent) :- !.
 '$lgt_valid_flag_value'(tail_recursive, warning) :- !.
 
-'$lgt_valid_flag_value'(disjunctions, silent) :- !.
-'$lgt_valid_flag_value'(disjunctions, warning) :- !.
-
-'$lgt_valid_flag_value'(conditionals, silent) :- !.
-'$lgt_valid_flag_value'(conditionals, warning) :- !.
-
-'$lgt_valid_flag_value'(catchall_catch, silent) :- !.
-'$lgt_valid_flag_value'(catchall_catch, warning) :- !.
-
-'$lgt_valid_flag_value'(grammar_rules, silent) :- !.
-'$lgt_valid_flag_value'(grammar_rules, warning) :- !.
-
-'$lgt_valid_flag_value'(arithmetic_expressions, silent) :- !.
-'$lgt_valid_flag_value'(arithmetic_expressions, warning) :- !.
-
-'$lgt_valid_flag_value'(left_recursion, silent) :- !.
-'$lgt_valid_flag_value'(left_recursion, warning) :- !.
-
-'$lgt_valid_flag_value'(report, on) :- !.
-'$lgt_valid_flag_value'(report, warnings) :- !.
-'$lgt_valid_flag_value'(report, off) :- !.
-
-'$lgt_valid_flag_value'(clean, on) :- !.
-'$lgt_valid_flag_value'(clean, off) :- !.
+'$lgt_valid_flag_value'(trivial_goal_fails, silent) :- !.
+'$lgt_valid_flag_value'(trivial_goal_fails, warning) :- !.
 
 '$lgt_valid_flag_value'(underscore_variables, dont_care) :- !.
 '$lgt_valid_flag_value'(underscore_variables, singletons) :- !.
 
-'$lgt_valid_flag_value'(code_prefix, Prefix) :-
-	atom(Prefix),
-	atom_length(Prefix, 1).
+'$lgt_valid_flag_value'(undefined_predicates, silent) :- !.
+'$lgt_valid_flag_value'(undefined_predicates, warning) :- !.
+'$lgt_valid_flag_value'(undefined_predicates, error) :- !.
 
-'$lgt_valid_flag_value'(optimize, on) :- !.
-'$lgt_valid_flag_value'(optimize, off) :- !.
+'$lgt_valid_flag_value'(unknown_entities, silent) :- !.
+'$lgt_valid_flag_value'(unknown_entities, warning) :- !.
 
-'$lgt_valid_flag_value'(source_data, on) :- !.
-'$lgt_valid_flag_value'(source_data, off) :- !.
+'$lgt_valid_flag_value'(unknown_predicates, silent) :- !.
+'$lgt_valid_flag_value'(unknown_predicates, warning) :- !.
+'$lgt_valid_flag_value'(unknown_predicates, error) :- !.
 
-'$lgt_valid_flag_value'(reload, always) :- !.
-'$lgt_valid_flag_value'(reload, changed) :- !.
-'$lgt_valid_flag_value'(reload, skip) :- !.
-
-'$lgt_valid_flag_value'(relative_to, Directory) :-
-	atom(Directory).
-'$lgt_valid_flag_value'('$relative_to', Directory) :-
-	% internal flag; just for documenting value type
-	atom(Directory).
-
-'$lgt_valid_flag_value'(debug, on) :- !.
-'$lgt_valid_flag_value'(debug, off) :- !.
+% optional features compilation flags
 
 '$lgt_valid_flag_value'(complements, allow) :- !.
 '$lgt_valid_flag_value'(complements, restrict) :- !.
 '$lgt_valid_flag_value'(complements, deny) :- !.
 
-'$lgt_valid_flag_value'(dynamic_declarations, allow) :- !.
-'$lgt_valid_flag_value'(dynamic_declarations, deny) :- !.
-
 '$lgt_valid_flag_value'(context_switching_calls, allow) :- !.
 '$lgt_valid_flag_value'(context_switching_calls, deny) :- !.
+
+'$lgt_valid_flag_value'(dynamic_declarations, allow) :- !.
+'$lgt_valid_flag_value'(dynamic_declarations, deny) :- !.
 
 '$lgt_valid_flag_value'(events, allow) :- !.
 '$lgt_valid_flag_value'(events, deny) :- !.
 
+% other compilation flags
+
+'$lgt_valid_flag_value'(clean, on) :- !.
+'$lgt_valid_flag_value'(clean, off) :- !.
+
+'$lgt_valid_flag_value'(code_prefix, Prefix) :-
+	atom(Prefix),
+	atom_length(Prefix, 1).
+
+'$lgt_valid_flag_value'(debug, on) :- !.
+'$lgt_valid_flag_value'(debug, off) :- !.
+
 '$lgt_valid_flag_value'(hook, Obj) :-
 	callable(Obj).
 
+'$lgt_valid_flag_value'(optimize, on) :- !.
+'$lgt_valid_flag_value'(optimize, off) :- !.
+
+'$lgt_valid_flag_value'(relative_to, Directory) :-
+	atom(Directory).
+
+'$lgt_valid_flag_value'(reload, always) :- !.
+'$lgt_valid_flag_value'(reload, changed) :- !.
+'$lgt_valid_flag_value'(reload, skip) :- !.
+
+'$lgt_valid_flag_value'(report, on) :- !.
+'$lgt_valid_flag_value'(report, warnings) :- !.
+'$lgt_valid_flag_value'(report, off) :- !.
+
 '$lgt_valid_flag_value'(scratch_directory, Directory) :-
 	callable(Directory).
+
+'$lgt_valid_flag_value'(source_data, on) :- !.
+'$lgt_valid_flag_value'(source_data, off) :- !.
+
+% internal flags
+
+'$lgt_valid_flag_value'('$relative_to', Directory) :-
+	% internal flag; just for documenting value type
+	atom(Directory).
+
+% backend Prolog compiler and loader options
 
 '$lgt_valid_flag_value'(prolog_compiler, Options) :-
 	'$lgt_is_list'(Options).
 '$lgt_valid_flag_value'(prolog_loader, Options) :-
 	'$lgt_is_list'(Options).
 
+% Logtalk version flag
+
 '$lgt_valid_flag_value'(version_data, Version) :-
 	compound(Version),
 	functor(Version, logtalk, 4).
+
+% startup flags
 
 '$lgt_valid_flag_value'(settings_file, allow) :- !.
 '$lgt_valid_flag_value'(settings_file, restrict) :- !.
@@ -25564,9 +25587,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	compound(Version),
 	functor(Version, v, 3).
 
-'$lgt_valid_flag_value'(unicode, full) :- !.
-'$lgt_valid_flag_value'(unicode, bmp) :- !.
-'$lgt_valid_flag_value'(unicode, unsupported) :- !.
+% backend Prolog compiler features
+
+'$lgt_valid_flag_value'(coinduction, supported) :- !.
+'$lgt_valid_flag_value'(coinduction, unsupported) :- !.
 
 '$lgt_valid_flag_value'(encoding_directive, full) :- !.
 '$lgt_valid_flag_value'(encoding_directive, source) :- !.
@@ -25575,17 +25599,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_flag_value'(engines, supported) :- !.
 '$lgt_valid_flag_value'(engines, unsupported) :- !.
 
-'$lgt_valid_flag_value'(threads, supported) :- !.
-'$lgt_valid_flag_value'(threads, unsupported) :- !.
-
 '$lgt_valid_flag_value'(modules, supported) :- !.
 '$lgt_valid_flag_value'(modules, unsupported) :- !.
 
 '$lgt_valid_flag_value'(tabling, supported) :- !.
 '$lgt_valid_flag_value'(tabling, unsupported) :- !.
 
-'$lgt_valid_flag_value'(coinduction, supported) :- !.
-'$lgt_valid_flag_value'(coinduction, unsupported) :- !.
+'$lgt_valid_flag_value'(threads, supported) :- !.
+'$lgt_valid_flag_value'(threads, unsupported) :- !.
+
+'$lgt_valid_flag_value'(unicode, full) :- !.
+'$lgt_valid_flag_value'(unicode, bmp) :- !.
+'$lgt_valid_flag_value'(unicode, unsupported) :- !.
 
 
 
