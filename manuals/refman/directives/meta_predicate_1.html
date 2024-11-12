@@ -180,7 +180,9 @@ are represented by the atom <code class="docutils literal notranslate"><span cla
 meta-predicate directive. This is sometimes necessary when calling
 Prolog built-in meta-predicates or Prolog module meta-predicates due
 to the lack of standardization of the syntax of the meta-predicate
-templates.</p>
+templates. Another case is when a meta-predicate directive is missing.
+The compiler requires access to correct and non-ambiguous meta-predicate
+templates to correctly compile calls to Prolog meta-predicates.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Some backend Prolog compilers declare the atom <code class="docutils literal notranslate"><span class="pre">meta_predicate</span></code> as

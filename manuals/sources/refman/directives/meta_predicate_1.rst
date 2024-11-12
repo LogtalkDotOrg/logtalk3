@@ -66,7 +66,9 @@ Logtalk allows the use of this directive to override the original
 meta-predicate directive. This is sometimes necessary when calling
 Prolog built-in meta-predicates or Prolog module meta-predicates due
 to the lack of standardization of the syntax of the meta-predicate
-templates.
+templates. Another case is when a meta-predicate directive is missing.
+The compiler requires access to correct and non-ambiguous meta-predicate
+templates to correctly compile calls to Prolog meta-predicates.
 
 .. warning::
 

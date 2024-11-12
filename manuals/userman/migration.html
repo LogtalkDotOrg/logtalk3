@@ -394,14 +394,13 @@ operator declarations. Predicate aliases can be declared using the
 notation <code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or, in alternative, the notation
 <code class="docutils literal notranslate"><span class="pre">Name/Arity:Alias/Arity</span></code>. Similar for non-terminal aliases.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code></dt><dd><p>Module meta-predicates become object meta-predicates. Only predicate
-arguments marked as goals or <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> (using an integer)
-are interpreted as meta-arguments. In addition, Prolog module
-meta-predicates and Logtalk meta-predicates don’t share the same
-explicit-qualification calling semantics: in Logtalk, meta-arguments
-are always called in the context of the <em>sender</em>. Logtalk expects
-<code class="docutils literal notranslate"><span class="pre">meta-predicate/1</span></code> directives for all meta-predicates as it is not
-based on the predicate-prefixing mechanism common to most Prolog
+<dt><code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code></dt><dd><p>Module meta-predicates become object meta-predicates. All meta-predicates
+must be declared using the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive
+using Logtalk syntax for normal arguments and meta-arguments. Note that
+Prolog module meta-predicates and Logtalk meta-predicates don’t share the
+same explicit-qualification calling semantics: in Logtalk, meta-arguments
+are always called in the context of the <a class="reference internal" href="../glossary.html#term-sender"><span class="xref std std-term">sender</span></a>. Moreover, Logtalk
+is not based on the predicate-prefixing mechanism common to most Prolog
 module systems.</p>
 </dd>
 </dl>

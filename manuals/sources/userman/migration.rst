@@ -293,14 +293,13 @@ Currently, Logtalk supports the following module directives:
    notation ``Name/Arity as Alias/Arity`` or, in alternative, the notation
    ``Name/Arity:Alias/Arity``. Similar for non-terminal aliases.
 ``meta_predicate/1``
-   Module meta-predicates become object meta-predicates. Only predicate
-   arguments marked as goals or :term:`closures <closure>` (using an integer)
-   are interpreted as meta-arguments. In addition, Prolog module
-   meta-predicates and Logtalk meta-predicates don't share the same
-   explicit-qualification calling semantics: in Logtalk, meta-arguments
-   are always called in the context of the *sender*. Logtalk expects
-   ``meta-predicate/1`` directives for all meta-predicates as it is not
-   based on the predicate-prefixing mechanism common to most Prolog
+   Module meta-predicates become object meta-predicates. All meta-predicates
+   must be declared using the :ref:`directives_meta_predicate_1` directive
+   using Logtalk syntax for normal arguments and meta-arguments. Note that
+   Prolog module meta-predicates and Logtalk meta-predicates don't share the
+   same explicit-qualification calling semantics: in Logtalk, meta-arguments
+   are always called in the context of the :term:`sender`. Moreover, Logtalk
+   is not based on the predicate-prefixing mechanism common to most Prolog
    module systems.
 
 A common issue when compiling modules as objects is the use of the atoms
