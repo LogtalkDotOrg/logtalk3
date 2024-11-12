@@ -10899,6 +10899,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Resource),
 	'$lgt_pp_entity_'(_, Entity0, _),
 	'$lgt_variant'(Entity, Entity0),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+		'$lgt_compiler_flag'(general, warning) ->
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(general),
+			redundant_entity_qualifier_in_predicate_directive(File, Lines, Type, Entity, Entity::Resource)
+		)
+	;	true
+	),
 	'$lgt_compile_dynamic_directive_resource'(Resource, Ctx).
 
 '$lgt_compile_dynamic_directive_resource'(Entity::Pred, _) :-
@@ -11052,6 +11062,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Resource),
 	'$lgt_pp_entity_'(_, Entity0, _),
 	'$lgt_variant'(Entity, Entity0),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+		'$lgt_compiler_flag'(general, warning) ->
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(general),
+			redundant_entity_qualifier_in_predicate_directive(File, Lines, Type, Entity, Entity::Resource)
+		)
+	;	true
+	),
 	'$lgt_compile_discontiguous_directive_resource'(Resource, Ctx).
 
 '$lgt_compile_discontiguous_directive_resource'(Entity::Pred, _) :-
@@ -11314,6 +11334,16 @@ create_logtalk_flag(Flag, Value, Options) :-
 	nonvar(Resource),
 	'$lgt_pp_entity_'(_, Entity0, _),
 	'$lgt_variant'(Entity, Entity0),
+	(	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
+		'$lgt_compiler_flag'(general, warning) ->
+		'$lgt_source_file_context'(File, Lines, Type, Entity),
+		'$lgt_increment_compiling_warnings_counter',
+		'$lgt_print_message'(
+			warning(general),
+			redundant_entity_qualifier_in_predicate_directive(File, Lines, Type, Entity, Entity::Resource)
+		)
+	;	true
+	),
 	'$lgt_compile_multifile_directive_resource'(Resource, Ctx).
 
 '$lgt_compile_multifile_directive_resource'(Entity::Pred, _) :-

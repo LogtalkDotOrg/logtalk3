@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:141:0,
+		version is 1:142:0,
 		author is 'Paulo Moura',
-		date is 2024-11-11,
+		date is 2024-11-12,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -529,6 +529,10 @@
 		message_context(File, Lines).
 
 	% other warning messages
+
+	message_tokens(redundant_entity_qualifier_in_predicate_directive(File, Lines, Type, Entity, QualifiedResource)) -->
+		['Redundant entity qualification in predicate directive argument: ~q'-[QualifiedResource], nl],
+		message_context(File, Lines, Type, Entity).
 
 	message_tokens(complementing_category_ignored(File, Lines, Category, Object)) -->
 		[	'Complementing category will be ignored: ~q'-[Category], nl,

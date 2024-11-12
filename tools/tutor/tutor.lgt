@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:76:0,
+		version is 0:77:0,
 		author is 'Paulo Moura',
-		date is 2024-11-06,
+		date is 2024-11-12,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -553,6 +553,11 @@
 		].
 
 	% other warning messages
+
+	explain(redundant_entity_qualifier_in_predicate_directive(_, _, _, _, _)) -->
+		[	'Entity qualification in predicate directives should never be used'-[], nl,
+			'when the entity is the same entity that contains the directives.'-[], nl, nl
+		].
 
 	explain(complementing_category_ignored(_, _, _, _)) -->
 		[	'Set the object "complements" flag to "restrict" or "allow"'-[], nl,

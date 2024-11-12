@@ -47,6 +47,9 @@ warnings.
 * ADDED: New linter flag, `general`, for warnings that are not controlled
 by a specific flag.
 
+* IMPROVED: Print a linter warning on redundant entity qualification in
+predicate directives.
+
 * IMPROVED: Detect and report as compilation errors `use_module/1-2` and
 `uses/1-2` directives when compiling a protocol.
 
@@ -99,6 +102,9 @@ BBEdit, MacVim, and TextMate local file links.
 * UPDATED: Rewrite error and warning messages from the `packs` tool so that
 they can be explained by the `tutor` tool.
 
+* UPDATED: The `tutor` tool to explain the new redundant entity qualifier 
+linter warning.
+
 * FIXED: Case where the `packs` tool would print repeated "Pack dependency
 not available" error messages when trying to install or update a pack with
 alternative dependencies where none is available.
@@ -118,6 +124,9 @@ Examples
 --------
 
 * IMPROVED: The `searching` example representation of some of the problems.
+
+* UPDATED: The `errors` example for the new redundant entity qualifier linter
+warning.
 
 * FIXED: Portability issue in the `errors` example tests.
 
