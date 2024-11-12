@@ -180,6 +180,17 @@ tool functionality but it is usually not required when *deploying* an
 application. Thus, turning this flag off is a common setting for minimizing
 an application footprint.
 
+Circular references
+-------------------
+
+Circular references, i.e. two objects sending messages to each other, are
+relatively costly and should be avoided if possible as they prevent using
+static binding for the messages sent from the first loaded object to the
+second object. The :ref:`logtalk_make(circular) <predicates_logtalk_make_1>`
+goal (or its ``{@}`` top-level abbreviation) can be used to scan for circular
+entity dependencies. The linter also warns by default about non-ideal file
+loading order (controlled by the :ref:`unknown_entities <flag_unknown_entities>`
+flag).
 
 Debug mode overhead
 -------------------

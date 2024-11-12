@@ -79,6 +79,9 @@ Documentation
 
 * IMPROVED: Documentation of the `issue_creator` tool.
 
+* IMPROVED: The Handbook documentation on performance, adding a section on
+circular references.
+
 * IMPROVED: The Handbook documentation on the `logtalk_make/0-1` built-in
 predicates.
 

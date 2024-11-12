@@ -92,6 +92,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#inlining">Inlining</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generated-code-simplification-and-optimizations">Generated code simplification and optimizations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#size-of-the-generated-code">Size of the generated code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#circular-references">Circular references</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debug-mode-overhead">Debug mode overhead</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other-considerations">Other considerations</a></li>
 </ul>
@@ -290,6 +291,17 @@ predicates positions in a source file. This data enables advanced developer
 tool functionality but it is usually not required when <em>deploying</em> an
 application. Thus, turning this flag off is a common setting for minimizing
 an application footprint.</p>
+</section>
+<section id="circular-references">
+<h2>Circular references<a class="headerlink" href="#circular-references" title="Link to this heading"></a></h2>
+<p>Circular references, i.e. two objects sending messages to each other, are
+relatively costly and should be avoided if possible as they prevent using
+static binding for the messages sent from the first loaded object to the
+second object. The <a class="reference internal" href="../refman/predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make(circular)</span></a>
+goal (or its <code class="docutils literal notranslate"><span class="pre">{&#64;}</span></code> top-level abbreviation) can be used to scan for circular
+entity dependencies. The linter also warns by default about non-ideal file
+loading order (controlled by the <a class="reference internal" href="programming.html#flag-unknown-entities"><span class="std std-ref">unknown_entities</span></a>
+flag).</p>
 </section>
 <section id="debug-mode-overhead">
 <h2>Debug mode overhead<a class="headerlink" href="#debug-mode-overhead" title="Link to this heading"></a></h2>
