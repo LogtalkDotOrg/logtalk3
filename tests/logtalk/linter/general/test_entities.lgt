@@ -35,3 +35,10 @@
 	complements(general)).
 
 :- end_category.
+
+
+:- object(redundant).
+
+	:- multifile(redundant::m/2).
+
+:- end_object.
