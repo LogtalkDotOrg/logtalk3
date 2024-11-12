@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-508.75 4643,-508.75 4643,4 -4,4"/>
 <text text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk development tools</text>
 <text text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object file_dependency_diagram/1</text>
-<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;11&#45;12, 10:32</text>
+<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;11&#45;12, 11:17</text>
 <g id="clust1" class="cluster">
 <title>cluster_file_dependency_diagram_1_object</title>
 <g id="a_clust1"><a xlink:title="file_dependency_diagram(Format)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 4619,-54.25 4619,-54.25 4625,-54.25 4631,-60.25 4631,-66.25 4631,-66.25 4631,-484.75 4631,-484.75 4631,-490.75 4625,-496.75 4619,-496.75 4619,-496.75 20,-496.75 20,-496.75 14,-496.75 8,-490.75 8,-484.75 8,-484.75 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt">
 <text text-anchor="start" x="20" y="-479.25" font-family="Monospace" font-size="10.00" fill="dimgray">file_dependency_diagram(Format)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- sub_diagram_/1 -->
 <g id="node1" class="node">
 <title>sub_diagram_/1</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L34">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L34" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L34">
 <polygon fill="#ff6a6a" stroke="black" points="3953.5,-338.75 3832.5,-338.75 3832.5,-302.75 3953.5,-302.75 3953.5,-338.75"/>
 <text text-anchor="start" x="3840.5" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3845.75" y="-322.68" font-family="Monospace" font-size="11.00">sub_diagram_/1</text>
@@ -41,7 +41,7 @@
 <!-- output_file/4 -->
 <g id="node2" class="node">
 <title>output_file/4</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <polygon fill="cornsilk" stroke="black" points="1998.12,-458 1883.88,-458 1883.88,-422 1998.12,-422 1998.12,-458"/>
 <text text-anchor="start" x="1891.88" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="1897.12" y="-441.93" font-family="Monospace" font-size="11.00">output_file/4</text>
@@ -55,12 +55,12 @@
 <!-- output_file/4&#45;&gt;sub_diagram_/1 -->
 <g id="edge34" class="edge">
 <title>output_file/4&#45;&gt;sub_diagram_/1</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="updates">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="updates">
 <path fill="none" stroke="black" d="M1998.41,-438.93C2253.61,-438.36 3286.7,-433.11 3607,-386 3626.23,-383.17 3630.34,-379.21 3649.25,-374.75 3722.51,-357.47 3744.45,-356.32 3819.55,-339.7"/>
 <polygon fill="black" stroke="black" points="3819.49,-339.71 3824.47,-334.5 3831.2,-337.09 3826.22,-342.31 3819.49,-339.71"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="3649.25" y="-377.45" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- depends_file/4 -->
 <g id="node3" class="node">
 <title>depends_file/4</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88">
 <polygon fill="cornsilk" stroke="black" points="558.5,-338.75 437.5,-338.75 437.5,-302.75 558.5,-302.75 558.5,-338.75"/>
 <text text-anchor="start" x="445.5" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="450.75" y="-322.68" font-family="Monospace" font-size="11.00">depends_file/4</text>
@@ -82,12 +82,12 @@
 <!-- output_file/4&#45;&gt;depends_file/4 -->
 <g id="edge1" class="edge">
 <title>output_file/4&#45;&gt;depends_file/4</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.5,-438.06C1676.3,-434.4 968.43,-419.69 744.75,-386 681.88,-376.53 611.88,-357.46 562.54,-342.54"/>
 <polygon fill="black" stroke="black" points="563.75,-339.25 553.16,-339.68 561.7,-345.95 563.75,-339.25"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71">
 <text text-anchor="start" x="744.75" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- output_file/4&#45;&gt;logtalk::loaded_file_property/2 -->
 <g id="edge22" class="edge">
 <title>output_file/4&#45;&gt;logtalk::loaded_file_property/2</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.62,-438C1666.71,-433.99 903.74,-417.73 799.75,-386 772.2,-377.59 744.51,-360.37 724.37,-345.87"/>
 <polygon fill="black" stroke="black" points="726.46,-343.07 716.35,-339.93 722.3,-348.69 726.46,-343.07"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="799.75" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- output_file/4&#45;&gt;modules_diagram_support::module_property/2 -->
 <g id="edge23" class="edge">
 <title>output_file/4&#45;&gt;modules_diagram_support::module_property/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.51,-438.19C1667.33,-434.55 911.83,-416.33 841,-338.75 786.77,-279.35 985.18,-245.55 934,-183.5 889.97,-130.12 717.26,-104.81 583.43,-93.05"/>
 <polygon fill="black" stroke="black" points="584.01,-89.58 573.75,-92.22 583.41,-96.56 584.01,-89.58"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="896.4" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -160,12 +160,12 @@
 <!-- output_file/4&#45;&gt;entity_diagram(Format)::diagram_name_suffix/1 -->
 <g id="edge24" class="edge">
 <title>output_file/4&#45;&gt;entity_diagram(Format)::diagram_name_suffix/1</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.42,-431.71C1741.81,-413.78 1372.92,-367.07 1164.33,-340.66"/>
 <polygon fill="black" stroke="black" points="1164.85,-337.2 1154.49,-339.41 1163.97,-344.14 1164.85,-337.2"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="1505.77" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -187,12 +187,12 @@
 <!-- output_file/4&#45;&gt;os::decompose_file_name/4 -->
 <g id="edge25" class="edge">
 <title>output_file/4&#45;&gt;os::decompose_file_name/4</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.48,-428.54C1775.48,-408.91 1540.86,-366.26 1403.03,-341.21"/>
 <polygon fill="black" stroke="black" points="1404,-337.83 1393.54,-339.48 1402.75,-344.71 1404,-337.83"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="1637.84" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -214,12 +214,12 @@
 <!-- output_file/4&#45;&gt;list::member/2 -->
 <g id="edge26" class="edge">
 <title>output_file/4&#45;&gt;list::member/2</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.49,-424.62C1797.93,-403.23 1637.23,-363.06 1543.98,-339.75"/>
 <polygon fill="black" stroke="black" points="1544.97,-336.39 1534.42,-337.36 1543.27,-343.18 1544.97,-336.39"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="1720.56" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -241,12 +241,12 @@
 <!-- output_file/4&#45;&gt;os::decompose_file_name/3 -->
 <g id="edge27" class="edge">
 <title>output_file/4&#45;&gt;os::decompose_file_name/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M1897.45,-421.57C1845.33,-400.72 1758.07,-365.8 1701.79,-343.27"/>
 <polygon fill="black" stroke="black" points="1703.3,-340.11 1692.71,-339.64 1700.7,-346.61 1703.3,-340.11"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71">
 <text text-anchor="start" x="1803.29" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -265,12 +265,12 @@
 <!-- output_file/4&#45;&gt;^^filter_file_extension/3 -->
 <g id="edge8" class="edge">
 <title>output_file/4&#45;&gt;^^filter_file_extension/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1929.2,-421.7C1916.02,-402.39 1894.54,-370.91 1879.21,-348.44"/>
 <polygon fill="black" stroke="black" points="1882.23,-346.66 1873.71,-340.37 1876.45,-350.6 1882.23,-346.66"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="1903.4" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -289,12 +289,12 @@
 <!-- output_file/4&#45;&gt;^^add_link_options/3 -->
 <g id="edge9" class="edge">
 <title>output_file/4&#45;&gt;^^add_link_options/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1958.12,-421.7C1977.56,-402.04 2009.49,-369.77 2031.79,-347.24"/>
 <polygon fill="black" stroke="black" points="2034.2,-349.77 2038.75,-340.2 2029.23,-344.84 2034.2,-349.77"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="2002.48" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,12 +313,12 @@
 <!-- output_file/4&#45;&gt;^^omit_path_prefix/3 -->
 <g id="edge10" class="edge">
 <title>output_file/4&#45;&gt;^^omit_path_prefix/3</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1984.99,-421.57C2037.65,-400.72 2125.81,-365.8 2182.66,-343.27"/>
 <polygon fill="black" stroke="black" points="2183.83,-346.58 2191.84,-339.64 2181.25,-340.07 2183.83,-346.58"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="2097.88" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -337,12 +337,12 @@
 <!-- output_file/4&#45;&gt;^^add_node_zoom_option/4 -->
 <g id="edge11" class="edge">
 <title>output_file/4&#45;&gt;^^add_node_zoom_option/4</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1998.53,-425.21C2084.47,-404.6 2246.84,-365.67 2346.03,-341.88"/>
 <polygon fill="black" stroke="black" points="2346.83,-345.29 2355.74,-339.56 2345.2,-338.48 2346.83,-345.29"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="2200.16" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -361,12 +361,12 @@
 <!-- output_file/4&#45;&gt;^^output_node/6 -->
 <g id="edge12" class="edge">
 <title>output_file/4&#45;&gt;^^output_node/6</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1998.36,-430.48C2102.42,-414.76 2329.41,-379.28 2530.86,-339.12"/>
 <polygon fill="black" stroke="black" points="2531.35,-342.59 2540.47,-337.2 2529.98,-335.73 2531.35,-342.59"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="2338.27" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -385,12 +385,12 @@
 <!-- output_file/4&#45;&gt;^^remember_included_file/1 -->
 <g id="edge13" class="edge">
 <title>output_file/4&#45;&gt;^^remember_included_file/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="calls">
 <path fill="none" stroke="black" d="M1998.53,-432.4C2080.76,-422.84 2236.61,-404.28 2369,-386 2503.42,-367.44 2539.37,-360.27 2676.35,-339.16"/>
 <polygon fill="black" stroke="black" points="2676.86,-342.62 2686.21,-337.64 2675.79,-335.7 2676.86,-342.62"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L47">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L47">
 <text text-anchor="start" x="2447.25" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -409,12 +409,12 @@
 <!-- output_file/4&#45;&gt;^^option/2 -->
 <g id="edge14" class="edge">
 <title>output_file/4&#45;&gt;^^option/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M1998.45,-436.88C2154.05,-430.95 2596.62,-412.86 2964,-386 3182.92,-369.99 3243.01,-381.49 3461.31,-339.07"/>
 <polygon fill="black" stroke="black" points="3461.88,-342.53 3471.02,-337.17 3460.53,-335.66 3461.88,-342.53"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71">
 <text text-anchor="start" x="3173.1" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -433,12 +433,12 @@
 <!-- output_file/4&#45;&gt;^^not_excluded_file/4 -->
 <g id="edge15" class="edge">
 <title>output_file/4&#45;&gt;^^not_excluded_file/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M1998.44,-434.68C2145.94,-423.22 2550.2,-389.53 2896.15,-339.12"/>
 <polygon fill="black" stroke="black" points="2896.51,-342.6 2905.9,-337.69 2895.49,-335.68 2896.51,-342.6"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71">
 <text text-anchor="start" x="2610.23" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -457,12 +457,12 @@
 <!-- output_file/4&#45;&gt;^^edge/5 -->
 <g id="edge16" class="edge">
 <title>output_file/4&#45;&gt;^^edge/5</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M1998.59,-435.22C2118.18,-427.25 2402.14,-407.64 2640,-386 2834.4,-368.31 2888.89,-381.61 3082.18,-339.12"/>
 <polygon fill="black" stroke="black" points="3082.81,-342.57 3091.82,-336.98 3081.3,-335.73 3082.81,-342.57"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71">
 <text text-anchor="start" x="2810.81" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -481,12 +481,12 @@
 <!-- output_file/4&#45;&gt;^^remember_referenced_prolog_file/1 -->
 <g id="edge17" class="edge">
 <title>output_file/4&#45;&gt;^^remember_referenced_prolog_file/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M1998.5,-437.08C2141.3,-431.99 2523.54,-416.42 2841,-386 2963.11,-374.3 3101.85,-355.24 3199.21,-340.91"/>
 <polygon fill="black" stroke="black" points="3199.7,-344.38 3209.08,-339.45 3198.68,-337.45 3199.7,-344.38"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71">
 <text text-anchor="start" x="2933.71" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -505,12 +505,12 @@
 <!-- output_file/4&#45;&gt;^^save_edge/5 -->
 <g id="edge18" class="edge">
 <title>output_file/4&#45;&gt;^^save_edge/5</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.47,-438.42C1692.83,-436.15 1064.5,-425.93 546.75,-386 369.36,-372.32 321.39,-371.98 143.55,-339.11"/>
 <polygon fill="black" stroke="black" points="144.45,-335.71 133.98,-337.33 143.17,-342.59 144.45,-335.71"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71">
 <text text-anchor="start" x="546.75" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -529,12 +529,12 @@
 <!-- output_file/4&#45;&gt;^^remember_referenced_logtalk_file/1 -->
 <g id="edge19" class="edge">
 <title>output_file/4&#45;&gt;^^remember_referenced_logtalk_file/1</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="calls">
 <path fill="none" stroke="black" d="M1883.66,-439.25C1703.12,-439.46 1130.48,-435.88 659.75,-386 563.56,-375.81 454.69,-356.23 379.19,-341.35"/>
 <polygon fill="black" stroke="black" points="380.27,-338 369.78,-339.49 378.91,-344.87 380.27,-338"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L71">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L71">
 <text text-anchor="start" x="659.75" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -542,7 +542,7 @@
 <!-- depends_object/3 -->
 <g id="node4" class="node">
 <title>depends_object/3</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L105">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L105">
 <polygon fill="cornsilk" stroke="black" points="441.25,-219.5 306.75,-219.5 306.75,-183.5 441.25,-183.5 441.25,-219.5"/>
 <text text-anchor="start" x="314.75" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="320" y="-203.43" font-family="Monospace" font-size="11.00">depends_object/3</text>
@@ -556,12 +556,12 @@
 <!-- depends_file/4&#45;&gt;depends_object/3 -->
 <g id="edge2" class="edge">
 <title>depends_file/4&#45;&gt;depends_object/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M479.7,-302.45C458.82,-282.71 424.49,-250.24 400.64,-227.69"/>
 <polygon fill="black" stroke="black" points="403.14,-225.24 393.47,-220.91 398.33,-230.33 403.14,-225.24"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88">
 <text text-anchor="start" x="439.72" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -569,7 +569,7 @@
 <!-- depends_protocol/3 -->
 <g id="node5" class="node">
 <title>depends_protocol/3</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L122">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L122">
 <polygon fill="cornsilk" stroke="black" points="607,-219.5 459,-219.5 459,-183.5 607,-183.5 607,-219.5"/>
 <text text-anchor="start" x="467" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="472.25" y="-203.43" font-family="Monospace" font-size="11.00">depends_protocol/3</text>
@@ -583,12 +583,12 @@
 <!-- depends_file/4&#45;&gt;depends_protocol/3 -->
 <g id="edge3" class="edge">
 <title>depends_file/4&#45;&gt;depends_protocol/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M503.16,-302.45C508.8,-283.57 517.91,-253.06 524.58,-230.71"/>
 <polygon fill="black" stroke="black" points="527.87,-231.91 527.38,-221.32 521.17,-229.9 527.87,-231.91"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88">
 <text text-anchor="start" x="516.55" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -596,7 +596,7 @@
 <!-- depends_category/3 -->
 <g id="node6" class="node">
 <title>depends_category/3</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L125">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L125" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L125">
 <polygon fill="cornsilk" stroke="black" points="773,-219.5 625,-219.5 625,-183.5 773,-183.5 773,-219.5"/>
 <text text-anchor="start" x="633" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="638.25" y="-203.43" font-family="Monospace" font-size="11.00">depends_category/3</text>
@@ -610,12 +610,12 @@
 <!-- depends_file/4&#45;&gt;depends_category/3 -->
 <g id="edge4" class="edge">
 <title>depends_file/4&#45;&gt;depends_category/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M527.66,-302.45C562.54,-282.1 620.6,-248.23 659.33,-225.64"/>
 <polygon fill="black" stroke="black" points="661.04,-228.7 667.91,-220.63 657.51,-222.65 661.04,-228.7"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88">
 <text text-anchor="start" x="604.53" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -623,7 +623,7 @@
 <!-- depends_module/3 -->
 <g id="node7" class="node">
 <title>depends_module/3</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L134">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L134">
 <polygon fill="cornsilk" stroke="black" points="925.25,-219.5 790.75,-219.5 790.75,-183.5 925.25,-183.5 925.25,-219.5"/>
 <text text-anchor="start" x="798.75" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="804" y="-203.43" font-family="Monospace" font-size="11.00">depends_module/3</text>
@@ -637,12 +637,12 @@
 <!-- depends_file/4&#45;&gt;depends_module/3 -->
 <g id="edge5" class="edge">
 <title>depends_file/4&#45;&gt;depends_module/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M551.51,-302.32C616.11,-281.28 724.69,-245.92 793.76,-223.42"/>
 <polygon fill="black" stroke="black" points="794.63,-226.82 803.05,-220.4 792.46,-220.16 794.63,-226.82"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88">
 <text text-anchor="start" x="688.79" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -650,7 +650,7 @@
 <!-- entity_basename_directory/4 -->
 <g id="node8" class="node">
 <title>entity_basename_directory/4</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L139">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L139">
 <polygon fill="cornsilk" stroke="black" points="226.38,-219.5 17.62,-219.5 17.62,-183.5 226.38,-183.5 226.38,-219.5"/>
 <text text-anchor="start" x="25.62" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="30.88" y="-203.43" font-family="Monospace" font-size="11.00">entity_basename_directory/4</text>
@@ -664,12 +664,12 @@
 <!-- depends_file/4&#45;&gt;entity_basename_directory/4 -->
 <g id="edge6" class="edge">
 <title>depends_file/4&#45;&gt;entity_basename_directory/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M437.09,-304.53C434.36,-303.91 431.65,-303.32 429,-302.75 341.43,-284.03 314.67,-298.01 230.75,-266.75 203.79,-256.7 175.89,-240.08 155.11,-226.25"/>
 <polygon fill="black" stroke="black" points="157.29,-223.5 147.05,-220.78 153.36,-229.3 157.29,-223.5"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88">
 <text text-anchor="start" x="230.75" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -677,12 +677,12 @@
 <!-- depends_file/4&#45;&gt;modules_diagram_support::module_property/2 -->
 <g id="edge28" class="edge">
 <title>depends_file/4&#45;&gt;modules_diagram_support::module_property/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="calls">
 <path fill="none" stroke="black" d="M440.71,-302.28C380.29,-282.57 291.17,-249.34 271.75,-219.5 240.99,-172.23 308.41,-129.88 361.37,-105.37"/>
 <polygon fill="black" stroke="black" points="362.67,-108.62 370.36,-101.33 359.8,-102.24 362.67,-108.62"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L88">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L88">
 <text text-anchor="start" x="271.75" y="-198.57" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -690,12 +690,12 @@
 <!-- depends_module/3&#45;&gt;modules_diagram_support::module_property/2 -->
 <g id="edge29" class="edge">
 <title>depends_module/3&#45;&gt;modules_diagram_support::module_property/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L134" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L134" xlink:title="calls">
 <path fill="none" stroke="black" d="M792.45,-183.07C712.66,-161.86 578.12,-126.09 493.62,-103.62"/>
 <polygon fill="black" stroke="black" points="494.57,-100.25 484.01,-101.07 492.77,-107.02 494.57,-100.25"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L134">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L134" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L134">
 <text text-anchor="start" x="650.72" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -703,12 +703,12 @@
 <!-- entity_basename_directory/4&#45;&gt;modules_diagram_support::module_property/2 -->
 <g id="edge30" class="edge">
 <title>entity_basename_directory/4&#45;&gt;modules_diagram_support::module_property/2</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L145" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L145" xlink:title="calls">
 <path fill="none" stroke="black" d="M146.95,-183.25C168.38,-169.05 200.52,-149.22 230.75,-136.25 261.56,-123.02 296.64,-112.06 327.98,-103.6"/>
 <polygon fill="black" stroke="black" points="328.66,-107.04 337.43,-101.1 326.87,-100.27 328.66,-107.04"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L145">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L145" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L145">
 <text text-anchor="start" x="230.75" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -716,7 +716,7 @@
 <!-- output_sub_diagrams/1 -->
 <g id="node9" class="node">
 <title>output_sub_diagrams/1</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148">
 <polygon fill="cornsilk" stroke="black" points="3765.12,-458 3596.88,-458 3596.88,-422 3765.12,-422 3765.12,-458"/>
 <text text-anchor="start" x="3604.88" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3610.12" y="-441.93" font-family="Monospace" font-size="11.00">output_sub_diagrams/1</text>
@@ -730,12 +730,12 @@
 <!-- output_sub_diagrams/1&#45;&gt;sub_diagram_/1 -->
 <g id="edge7" class="edge">
 <title>output_sub_diagrams/1&#45;&gt;sub_diagram_/1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="calls">
 <path fill="none" stroke="black" d="M3706.15,-421.74C3726.21,-408.27 3755.26,-389.43 3781.75,-374.75 3801.33,-363.9 3823.48,-353.06 3842.84,-344.05"/>
 <polygon fill="black" stroke="black" points="3844.29,-347.23 3851.9,-339.87 3841.35,-340.88 3844.29,-347.23"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148">
 <text text-anchor="start" x="3781.75" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -757,12 +757,12 @@
 <!-- output_sub_diagrams/1&#45;&gt;entity_diagram(Format)::default_option/1 -->
 <g id="edge31" class="edge">
 <title>output_sub_diagrams/1&#45;&gt;entity_diagram(Format)::default_option/1</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="calls">
 <path fill="none" stroke="black" d="M3725.18,-421.6C3749.77,-411.66 3780.83,-398.67 3808,-386 3817.86,-381.4 3819.45,-378.27 3829.75,-374.75 3872.88,-360.03 3921.08,-349.14 3965.62,-341.19"/>
 <polygon fill="black" stroke="black" points="3966.12,-344.66 3975.37,-339.5 3964.92,-337.76 3966.12,-344.66"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148">
 <text text-anchor="start" x="3829.75" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -784,12 +784,12 @@
 <!-- output_sub_diagrams/1&#45;&gt;entity_diagram(Format)::file/2 -->
 <g id="edge32" class="edge">
 <title>output_sub_diagrams/1&#45;&gt;entity_diagram(Format)::file/2</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="calls">
 <path fill="none" stroke="black" d="M3683.8,-421.7C3686.85,-402.91 3691.76,-372.59 3695.38,-350.27"/>
 <polygon fill="black" stroke="black" points="3698.8,-351.05 3696.94,-340.62 3691.89,-349.93 3698.8,-351.05"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148">
 <text text-anchor="start" x="3691.07" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -797,12 +797,12 @@
 <!-- output_sub_diagrams/1&#45;&gt;^^option/2 -->
 <g id="edge20" class="edge">
 <title>output_sub_diagrams/1&#45;&gt;^^option/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="calls">
 <path fill="none" stroke="black" d="M3641.14,-421.65C3621.99,-412.42 3599.25,-400.06 3580.75,-386 3566.19,-374.94 3552.03,-360.26 3541.05,-347.73"/>
 <polygon fill="black" stroke="black" points="3543.79,-345.55 3534.64,-340.22 3538.47,-350.1 3543.79,-345.55"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L148">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L148">
 <text text-anchor="start" x="3580.75" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -810,7 +810,7 @@
 <!-- reset/0 -->
 <g id="node10" class="node">
 <title>reset/0</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L157">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L157">
 <polygon fill="cornsilk" stroke="black" points="3856.88,-458 3783.12,-458 3783.12,-422 3856.88,-422 3856.88,-458"/>
 <text text-anchor="start" x="3791.12" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3796.38" y="-441.93" font-family="Monospace" font-size="11.00">reset/0</text>
@@ -824,12 +824,12 @@
 <!-- reset/0&#45;&gt;sub_diagram_/1 -->
 <g id="edge35" class="edge">
 <title>reset/0&#45;&gt;sub_diagram_/1</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="updates">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="updates">
 <path fill="none" stroke="black" d="M3834.12,-421.87C3842.16,-411.75 3852.16,-398.5 3860,-386 3867.05,-374.77 3873.91,-361.85 3879.53,-350.56"/>
 <polygon fill="black" stroke="black" points="3879.45,-350.71 3878.48,-343.56 3884.7,-339.91 3885.67,-347.06 3879.45,-350.71"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L157">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L157">
 <text text-anchor="start" x="3866.07" y="-377.45" font-family="Monospace" font-size="9.00">updates</text>
 </a>
 </g>
@@ -848,12 +848,12 @@
 <!-- reset/0&#45;&gt;^^reset/0 -->
 <g id="edge21" class="edge">
 <title>reset/0&#45;&gt;^^reset/0</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="calls">
 <path fill="none" stroke="black" d="M3857.25,-424.69C3860.19,-423.72 3863.13,-422.81 3866,-422 4041.77,-372.04 4094.6,-385.23 4275.2,-339.06"/>
 <polygon fill="black" stroke="black" points="4275.88,-342.5 4284.68,-336.61 4274.13,-335.72 4275.88,-342.5"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L157">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L157" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L157">
 <text text-anchor="start" x="4098.98" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -861,7 +861,7 @@
 <!-- default_option/1 -->
 <g id="node11" class="node">
 <title>default_option/1</title>
-<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L162">
+<g id="a_node11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L162" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L162">
 <polygon fill="cornsilk" stroke="black" points="4009.25,-458 3874.75,-458 3874.75,-422 4009.25,-422 4009.25,-458"/>
 <text text-anchor="start" x="3882.75" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="3888" y="-441.93" font-family="Monospace" font-size="11.00">default_option/1</text>
@@ -889,12 +889,12 @@
 <!-- default_option/1&#45;&gt;logtalk::expand_library_path/2 -->
 <g id="edge33" class="edge">
 <title>default_option/1&#45;&gt;logtalk::expand_library_path/2</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L170" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L170" xlink:title="calls">
 <path fill="none" stroke="black" d="M4009.53,-423.83C4012.39,-423.21 4015.22,-422.6 4018,-422 4152.76,-393.09 4308.85,-361.32 4407.49,-341.46"/>
 <polygon fill="black" stroke="black" points="4408.04,-344.92 4417.15,-339.52 4406.65,-338.06 4408.04,-344.92"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L170">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L170">
 <text text-anchor="start" x="4232.03" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -902,7 +902,7 @@
 <!-- diagram_description/1 -->
 <g id="node12" class="node">
 <title>diagram_description/1</title>
-<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L196">
+<g id="a_node12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L196" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L196">
 <polygon fill="cornsilk" stroke="black" points="4195.12,-458 4026.88,-458 4026.88,-422 4195.12,-422 4195.12,-458"/>
 <text text-anchor="start" x="4034.88" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="4040.12" y="-441.93" font-family="Monospace" font-size="11.00">diagram_description/1</text>
@@ -916,7 +916,7 @@
 <!-- diagram_name_suffix/1 -->
 <g id="node13" class="node">
 <title>diagram_name_suffix/1</title>
-<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L198">
+<g id="a_node13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L198" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L198">
 <polygon fill="cornsilk" stroke="black" points="4381.12,-458 4212.88,-458 4212.88,-422 4381.12,-422 4381.12,-458"/>
 <text text-anchor="start" x="4220.88" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="4226.12" y="-441.93" font-family="Monospace" font-size="11.00">diagram_name_suffix/1</text>
@@ -930,7 +930,7 @@
 <!-- message_diagram_description/1 -->
 <g id="node14" class="node">
 <title>message_diagram_description/1</title>
-<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/09b3814e01a53045e1deeaa9ca6ba2d867e25a59/tools/diagrams/file_dependency_diagram.lgt#L200">
+<g id="a_node14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L200" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/b4a4b8fcac808a85276645f18a0296915ec75aba/tools/diagrams/file_dependency_diagram.lgt#L200">
 <polygon fill="cornsilk" stroke="black" points="4621.12,-458 4398.88,-458 4398.88,-422 4621.12,-422 4621.12,-458"/>
 <text text-anchor="start" x="4406.88" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="4412.12" y="-441.93" font-family="Monospace" font-size="11.00">message_diagram_description/1</text>
