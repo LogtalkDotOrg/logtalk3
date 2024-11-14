@@ -159,6 +159,10 @@ resulting from the compilation of grammar rules), by flattening conjunctions,
 folding left unifications (e.g. generated as a by-product of the compilation
 of grammar rules), and removing redundant calls to ``true/0``.
 
+When using :ref:`lambda expressions <predicates_lambdas>` and library
+meta-predicates, use the :ref:`library_meta_compiler` library to avoid
+most meta-call overheads.
+
 Size of the generated code
 --------------------------
 

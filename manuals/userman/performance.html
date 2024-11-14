@@ -271,6 +271,9 @@ compiler simplifies and optimizes generated clauses (including those
 resulting from the compilation of grammar rules), by flattening conjunctions,
 folding left unifications (e.g. generated as a by-product of the compilation
 of grammar rules), and removing redundant calls to <code class="docutils literal notranslate"><span class="pre">true/0</span></code>.</p>
+<p>When using <a class="reference internal" href="predicates.html#predicates-lambdas"><span class="std std-ref">lambda expressions</span></a> and library
+meta-predicates, use the <a class="reference internal" href="../libraries/meta_compiler.html#library-meta-compiler"><span class="std std-ref">meta_compiler</span></a> library to avoid
+most meta-call overheads.</p>
 </section>
 <section id="size-of-the-generated-code">
 <h2>Size of the generated code<a class="headerlink" href="#size-of-the-generated-code" title="Link to this heading"></a></h2>
