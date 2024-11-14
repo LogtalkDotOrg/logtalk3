@@ -25,6 +25,10 @@ RELEASE NOTES
 3.86.0 - December ??, 2024
 ==========================
 
+Documentation
+-------------
+
+* ADDED: Notes on encrypting applications using XVM.
 
 
 3.85.0 - November 12, 2024
