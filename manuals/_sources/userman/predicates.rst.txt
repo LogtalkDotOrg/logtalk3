@@ -2037,7 +2037,7 @@ directive:
 
    :- meta_predicate(user::det_call(0)).
 
-Another solution is to explicitly declare all non-standard built-in Prolog
+Another solution is to explicitly declare non-standard built-in Prolog
 meta-predicates in the corresponding adapter file using the internal
 predicate ``'$lgt_prolog_meta_predicate'/3``. For example:
 
@@ -2234,10 +2234,11 @@ progress in standardization of the syntax of ``meta_predicate/1`` directives
 and of the ``meta_predicate/1`` property returned by the ``predicate_property/2``
 reflection predicate, portability is still a major problem. Thus, Logtalk
 allows the original ``meta_predicate/1`` directive to be **overridden**
-with a local directive that Logtalk can make sense of. Note that Logtalk
-is not based on a predicate prefixing mechanism as found in module systems.
-This fundamental difference precludes an automated solution at the Logtalk
-compiler level.
+with a local directive that Logtalk can make sense of. It also allows
+providing a ``meta_predicate/1`` directive when it's missing from the module
+defining the meta-predicate. Note that Logtalk is not based on a predicate
+prefixing mechanism as found in module systems. This fundamental difference
+precludes an automated solution at the Logtalk compiler level.
 
 As an example, assume that you want to call from an object (or a category)
 a module meta-predicate with the following meta-predicate directive:

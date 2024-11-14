@@ -1892,7 +1892,7 @@ directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">meta_predicate</span>(user<span class="o">::</span>det_call(<span class="m">0</span>)).
 </pre></div>
 </div>
-<p>Another solution is to explicitly declare all non-standard built-in Prolog
+<p>Another solution is to explicitly declare non-standard built-in Prolog
 meta-predicates in the corresponding adapter file using the internal
 predicate <code class="docutils literal notranslate"><span class="pre">'$lgt_prolog_meta_predicate'/3</span></code>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="s">&#39;$lgt_prolog_meta_predicate&#39;</span>(det_call(<span class="nv">_</span>), det_call(<span class="m">0</span>), predicate).
@@ -2055,10 +2055,11 @@ progress in standardization of the syntax of <code class="docutils literal notra
 and of the <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> property returned by the <code class="docutils literal notranslate"><span class="pre">predicate_property/2</span></code>
 reflection predicate, portability is still a major problem. Thus, Logtalk
 allows the original <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directive to be <strong>overridden</strong>
-with a local directive that Logtalk can make sense of. Note that Logtalk
-is not based on a predicate prefixing mechanism as found in module systems.
-This fundamental difference precludes an automated solution at the Logtalk
-compiler level.</p>
+with a local directive that Logtalk can make sense of. It also allows
+providing a <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directive when it’s missing from the module
+defining the meta-predicate. Note that Logtalk is not based on a predicate
+prefixing mechanism as found in module systems. This fundamental difference
+precludes an automated solution at the Logtalk compiler level.</p>
 <p>As an example, assume that you want to call from an object (or a category)
 a module meta-predicate with the following meta-predicate directive:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">module</span>(foo, [bar<span class="o">/</span><span class="m">2</span>]).
