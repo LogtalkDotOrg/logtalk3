@@ -705,7 +705,7 @@ argument will output:
 Context-switching calls
 -----------------------
 
-Logtalk provides a control construct, :ref:`control_context_switch_2`,
+Logtalk provides a debugging control construct, :ref:`control_context_switch_2`,
 which allows the execution of a query within the context of an object.
 Common debugging uses include checking an object local predicates (e.g.
 predicates representing internal dynamic state) and sending a message
@@ -1007,3 +1007,14 @@ predicate:
        ...
    logtalk::trace_event(rule(Entity, Head, N, _, _), _) :-
        ...
+
+.. _debugging_source_level_debugger:
+
+Source-level debugger
+---------------------
+
+A minimal source-level debugger is provided by the Logtalk for VSCode
+extension: when debugging in the integrated terminal using the ``debugger``
+tool, the current clause (at leashed unification ports) is show in the
+active editor window. The extension can also be used with VSCodium. See
+its documentation for more details.

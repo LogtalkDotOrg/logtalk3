@@ -112,6 +112,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#using-the-term-expansion-mechanism-for-debugging">Using the term-expansion mechanism for debugging</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ports-profiling">Ports profiling</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#debug-and-trace-events">Debug and trace events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#source-level-debugger">Source-level debugger</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="performance.html">Performance</a></li>
@@ -793,7 +794,7 @@ yes
 </section>
 <section id="context-switching-calls">
 <span id="debugging-context"></span><h2>Context-switching calls<a class="headerlink" href="#context-switching-calls" title="Link to this heading"></a></h2>
-<p>Logtalk provides a control construct, <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">(&lt;&lt;)/2</span></a>,
+<p>Logtalk provides a debugging control construct, <a class="reference internal" href="../refman/control/context_switch_2.html#control-context-switch-2"><span class="std std-ref">(&lt;&lt;)/2</span></a>,
 which allows the execution of a query within the context of an object.
 Common debugging uses include checking an object local predicates (e.g.
 predicates representing internal dynamic state) and sending a message
@@ -1058,6 +1059,14 @@ logtalk<span class="o">::</span>trace_event(rule(<span class="nv">Entity</span>,
     ...
 </pre></div>
 </div>
+</section>
+<section id="source-level-debugger">
+<span id="debugging-source-level-debugger"></span><h2>Source-level debugger<a class="headerlink" href="#source-level-debugger" title="Link to this heading"></a></h2>
+<p>A minimal source-level debugger is provided by the Logtalk for VSCode
+extension: when debugging in the integrated terminal using the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
+tool, the current clause (at leashed unification ports) is show in the
+active editor window. The extension can also be used with VSCodium. See
+its documentation for more details.</p>
 </section>
 </section>
 
