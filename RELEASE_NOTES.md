@@ -25,6 +25,13 @@ RELEASE NOTES
 3.86.0 - December ??, 2024
 ==========================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: Ciao Prolog adapter file to pretend that modules are supported
+to allow loading libraries and examples that require file `use_module/1`
+directives.
+
 Documentation
 -------------
 
