@@ -19,7 +19,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(assumptions),
-	logtalk_load([paths, switch, grades])
-)).
+:- object(grades,
+	imports(assumptions)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Example posted on reddit on a topic about Harrop clauses.',
+		date is 2014-11-16,
+		comment is 'Compute grades using linear assumptions.'
+	]).
+
+	:- public(grade/1).
+	grade(Person) :-
+		take(Person, german),
+		take(Person, french).
+	grade(Person) :-
+		take(Person, german),
+		take(Person, italian).
+
+	:- private(take/2).
+	:- dynamic(take/2).
+	take(hans, french).
+
+:- end_object.

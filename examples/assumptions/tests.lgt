@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,17 +23,25 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2023-06-04,
+		date is 2024-11-16,
 		comment is 'Unit tests for the "assumptions" example.'
 	]).
 
 	cover(assumptions).
 	cover(paths).
-	cover(switch).
+	cover(grades).
 
 	test(assumptions_1, true(Paths == [[1,2,4,5], [1,3,5]])) :-
 		findall(Path, (paths::init, paths::path(1,5,Path)), Paths).
+
+	test(assumptions_2, true(Person == hans)) :-
+		grades::assumel(take(hans, german)),
+		grades::grade(Person).
+
+	test(assumptions_3, false) :-
+		grades::assumel(take(hans, italian)),
+		grades::grade(_).
 
 :- end_object.

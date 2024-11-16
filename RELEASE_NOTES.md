@@ -37,6 +37,11 @@ Documentation
 
 * ADDED: Notes on encrypting applications using XVM.
 
+Examples
+--------
+
+* UPDATED: The `assumptions` example with another individual example.
+
 
 3.85.0 - November 12, 2024
 ==========================
