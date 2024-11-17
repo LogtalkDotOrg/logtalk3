@@ -1,10 +1,11 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on March 15, 2023
+##   Last updated on November 17, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
+##   Copyright 2022-2024 Paulo Moura <pmoura@logtalk.org>
+##   Copyright 2022 Hans N. Beck
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +37,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.10")
+	Write-Output ($myName + " 0.11")
 }
 
 function Get-Logtalkhome {
@@ -159,7 +160,6 @@ $failed_flag=0
 $count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | %{$_.Count}
 
 if ($count -gt 0) {
-	Copy-Item -Path ($env:LOGTALKUSER + '\tools\diagrams\zoom.png') -Destination .
 	Copy-Item -Path ($env:LOGTALKUSER + '\tools\diagrams\diagrams.css') -Destination .
 	Get-ChildItem -Path . -Filter *.dot | 
 	Foreach-Object {

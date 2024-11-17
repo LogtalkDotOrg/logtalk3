@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:8:1,
+		version is 3:9:0,
 		author is 'Paulo Moura',
-		date is 2023-08-03,
+		date is 2024-11-17,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -206,7 +206,7 @@
 		(	member(zoom_url(Diagram), Options) ->
 			write(Stream, '<TR><TD width="11" height="11" fixedsize="true" align="left" tooltip="Zoom" href="'),
 			write(Stream, Diagram),
-			write(Stream, '"><IMG SRC="zoom.png"/></TD></TR>')
+			write(Stream, '">&#128269;</TD></TR>')
 		;	true
 		),
 		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11">'),

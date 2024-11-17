@@ -676,14 +676,6 @@ library generated auxiliary predicates). A workaround in this case would be
 creating a dedicated loader file that doesn't load (and apply) the
 `meta_compiler` library when generating the diagrams.
 
-The zoom icons, `zoom.png` and `zoom.svg` have been designed by Xinh Studio:
-
-https://www.iconfinder.com/xinhstudio
-
-Currently, only the `zoom.png` file is used. A copy of this file must exist
-in any directory used for publishing diagrams using it. The `lgt2svg` scripts
-take care of copying this file.
-
 When generating diagrams in SVG format, a copy of the `diagrams.css` file
 must exist in any directory used for publishing diagrams using it. The
 `lgt2svg` scripts also take care of copying this file.

@@ -37,6 +37,12 @@ Documentation
 
 * ADDED: Notes on encrypting applications using XVM.
 
+Tools
+-----
+
+* CHANGED: The `diagrams` tool now uses a Unicode glyph for the magnifying
+lens instead of a PNG image.
+
 Examples
 --------
 

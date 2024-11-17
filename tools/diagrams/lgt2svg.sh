@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on January 2, 2023
+##   Last updated on November 17, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -82,7 +82,7 @@ echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.10"
+	echo "$(basename "$0") 0.11"
 	exit 0
 }
 
@@ -145,7 +145,6 @@ failed_flag=0
 count=$(ls -1 ./*.dot 2>/dev/null | wc -l)
 
 if [ "$count" != 0 ] ; then
-	cp "$LOGTALKUSER/tools/diagrams/zoom.png" .
 	cp "$LOGTALKUSER/tools/diagrams/diagrams.css" .
 	for file in ./*.dot; do
 		echo -n "  converting $(basename "$file") "

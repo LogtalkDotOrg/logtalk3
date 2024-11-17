@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////////////////
 //
 //   DOT diagram files to SVG files conversion script  
-//   Last updated on November 25, 2021
+//   Last updated on November 17, 2024
 //
 //   This file is part of Logtalk <https://logtalk.org/>  
 //   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -78,7 +78,6 @@ if (c_arg != "" && c_arg != "dot" && c_arg != "circo" && c_arg != "fdp" && c_arg
 
 var FSObject = new ActiveXObject("Scripting.FileSystemObject");
 
-FSObject.CopyFile(logtalk_user + "\\tools\\diagrams\\zoom.png", WshShell.CurrentDirectory + "\\zoom.png");
 FSObject.CopyFile(logtalk_user + "\\tools\\diagrams\\diagrams.css", WshShell.CurrentDirectory + "\\diagrams.css");
 
 WScript.Echo("");
