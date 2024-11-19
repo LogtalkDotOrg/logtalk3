@@ -350,8 +350,9 @@ tested in optimized mode.</p>
 <h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Link to this heading"></a></h2>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script or the
 <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.ps1</span></code> PowerShell script for automating running
-unit tests (e.g. from a CI/CD pipeline). For example, assuming your
-current directory (or sub-directories) contain one or more
+unit tests (e.g. from a CI/CD pipeline). When using one of the Logtalk
+installers, the <code class="docutils literal notranslate"><span class="pre">.sh</span></code> extension can usually be omitted. For example,
+assuming your current directory (or sub-directories) contain one or more
 <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> files:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_tester <span class="o">-</span>p gnu
 </pre></div>
@@ -381,9 +382,11 @@ page for the script:</p>
 </div>
 <p>Alternatively, an HTML version of this man page can be found at:</p>
 <p><a class="reference external" href="https://logtalk.org/man/logtalk_tester.html">https://logtalk.org/man/logtalk_tester.html</a></p>
-<p>The <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script timeout option requires
-that Git for Windows is also installed as it requires the GNU timeout
-command bundled with it.</p>
+<p>On POSIX systems, the <code class="docutils literal notranslate"><span class="pre">logtalk_tester.sh</span></code> Bash script timeout option
+requires either a <code class="docutils literal notranslate"><span class="pre">timeout</span></code> or a <code class="docutils literal notranslate"><span class="pre">gtimeout</span></code> command (provided by the
+GNU coreutils package). The <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script
+timeout option requires that Git for Windows is also installed as it
+requires the GNU timeout command bundled with it.</p>
 <p>In alternative to using the <code class="docutils literal notranslate"><span class="pre">logtalk_tester.ps1</span></code> PowerShell script,
 the Bash shell version of the automation script can also be used in
 Windows operating-systems with selected backends by using the Bash shell

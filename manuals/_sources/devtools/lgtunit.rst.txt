@@ -220,8 +220,9 @@ Automating running tests
 
 You can use the ``scripts/logtalk_tester.sh`` Bash shell script or the
 ``scripts/logtalk_tester.ps1`` PowerShell script for automating running
-unit tests (e.g. from a CI/CD pipeline). For example, assuming your
-current directory (or sub-directories) contain one or more
+unit tests (e.g. from a CI/CD pipeline). When using one of the Logtalk
+installers, the ``.sh`` extension can usually be omitted. For example,
+assuming your current directory (or sub-directories) contain one or more
 ``tester.lgt`` files:
 
 ::
@@ -263,9 +264,11 @@ Alternatively, an HTML version of this man page can be found at:
 
 https://logtalk.org/man/logtalk_tester.html
 
-The ``logtalk_tester.ps1`` PowerShell script timeout option requires
-that Git for Windows is also installed as it requires the GNU timeout
-command bundled with it.
+On POSIX systems, the ``logtalk_tester.sh`` Bash script timeout option
+requires either a ``timeout`` or a ``gtimeout`` command (provided by the
+GNU coreutils package). The ``logtalk_tester.ps1`` PowerShell script
+timeout option requires that Git for Windows is also installed as it
+requires the GNU timeout command bundled with it.
 
 In alternative to using the ``logtalk_tester.ps1`` PowerShell script,
 the Bash shell version of the automation script can also be used in
