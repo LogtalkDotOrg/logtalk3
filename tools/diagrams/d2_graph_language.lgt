@@ -52,12 +52,12 @@
 		atom_concat(Name, '.d2', File).
 
 	file_header(Stream, Identifier, Options) :-
-		write(Stream, '"'),
-		write(Stream, Identifier),
-		write(Stream, '": {\n'),
 		^^option(layout(Layout), Options),
 		convert_layout(Layout, Direction),
 		write_key_value_nl(Stream, direction, Direction),
+		write(Stream, '"'),
+		write(Stream, Identifier),
+		write(Stream, '": {\n'),
 		diagram_label(Options, Label),
 		write_key_value_nl(Stream, label, Label),
 		write_key_value_nl(Stream, 'label.near', 'outside-bottom-left'),
