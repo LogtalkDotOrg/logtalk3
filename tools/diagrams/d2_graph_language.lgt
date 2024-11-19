@@ -237,7 +237,7 @@
 
 	edge(Stream, StartContainer-Start, EndContainer-End, Labels, Kind, Options) :-
 		!,
-		edge_arrow(Kind, ArrowHead),
+		edge_arrow_filled(Kind, ArrowHead, Filled),
 		write(Stream, '"'),
 		write(Stream, StartContainer),
 		write(Stream, '"."'),
@@ -250,7 +250,7 @@
 		write_edge_lines(Labels, Stream),
 		write(Stream, '" {\n'),
 		write_key_value_nl(Stream, 'target-arrowhead.shape', ArrowHead),
-		write_key_value_nl(Stream, 'target-arrowhead.style.filled', true),
+		write_key_value_nl(Stream, 'target-arrowhead.style.filled', Filled),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write_key_value_quoted_nl(Stream, link, URL)
@@ -260,7 +260,7 @@
 		),
 		write(Stream, '}\n').
 	edge(Stream, Start, End, Labels, Kind, Options) :-
-		edge_arrow(Kind, ArrowHead),
+		edge_arrow_filled(Kind, ArrowHead, Filled),
 		write(Stream, '"'),
 		write(Stream, Start),
 		write(Stream, '" -> "'),
@@ -269,7 +269,7 @@
 		write_edge_lines(Labels, Stream),
 		write(Stream, '" {\n'),
 		write_key_value_nl(Stream, 'target-arrowhead.shape', ArrowHead),
-		write_key_value_nl(Stream, 'target-arrowhead.style.filled', true),
+		write_key_value_nl(Stream, 'target-arrowhead.style.filled', Filled),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write_key_value_quoted_nl(Stream, link, URL)
@@ -280,34 +280,34 @@
 		write(Stream, '}\n').
 
 	% entity relations
-	edge_arrow(extends_object, triangle).
-	edge_arrow(extends_protocol, triangle).
-	edge_arrow(extends_category, triangle).
-	edge_arrow(instantiates_class, triangle).
-	edge_arrow(specializes_class, onormal).
-	edge_arrow(implements_protocol, circle).
-	edge_arrow(imports_category, arrow).
-	edge_arrow(complements_object, arrow).
+	edge_arrow_filled(extends_object,         triangle, true).
+	edge_arrow_filled(extends_protocol,       triangle, true).
+	edge_arrow_filled(extends_category,       triangle, true).
+	edge_arrow_filled(instantiates_class,     triangle, true).
+	edge_arrow_filled(specializes_class,      triangle, false).
+	edge_arrow_filled(implements_protocol,    circle,   true).
+	edge_arrow_filled(imports_category,       arrow,    true).
+	edge_arrow_filled(complements_object,     arrow,    true).
 	% multifile predicates
-	edge_arrow(provides_clauses, circle).
+	edge_arrow_filled(provides_clauses,       circle,   true).
 	% cross-referencing predicate calls
-	edge_arrow(calls_predicate, triangle).
-	edge_arrow(calls_super_predicate, triangle).
-	edge_arrow(calls_self_predicate, triangle).
+	edge_arrow_filled(calls_predicate,        triangle, true).
+	edge_arrow_filled(calls_super_predicate,  triangle, true).
+	edge_arrow_filled(calls_self_predicate,   triangle, true).
 	% dynamic predicate updates
-	edge_arrow(updates_predicate, diamond).
-	edge_arrow(updates_this_predicate, diamond).
-	edge_arrow(updates_self_predicate, diamond).
+	edge_arrow_filled(updates_predicate,      diamond,  true).
+	edge_arrow_filled(updates_this_predicate, diamond,  true).
+	edge_arrow_filled(updates_self_predicate, diamond,  true).
 	% file relations
-	edge_arrow(depends_on_file, triangle).
-	edge_arrow(loads_file, triangle).
-	edge_arrow(includes_file, triangle).
+	edge_arrow_filled(depends_on_file,        triangle, true).
+	edge_arrow_filled(loads_file,             triangle, true).
+	edge_arrow_filled(includes_file,          triangle, true).
 	% directory relations
-	edge_arrow(depends_on_directory, triangle).
-	edge_arrow(loads_directory, triangle).
+	edge_arrow_filled(depends_on_directory,   triangle, true).
+	edge_arrow_filled(loads_directory,        triangle, true).
 	% library relations
-	edge_arrow(depends_on_library, triangle).
-	edge_arrow(loads_library, triangle).
+	edge_arrow_filled(depends_on_library,     triangle, true).
+	edge_arrow_filled(loads_library,          triangle, true).
 
 	write_key_value_quoted_nl(Stream, Key, Value) :-
 		write_key_value_quoted(Stream, Key, Value),
