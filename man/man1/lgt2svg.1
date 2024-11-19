@@ -1,11 +1,15 @@
-.TH lgt2svg 1 "November 17, 2024" "Logtalk 3.86.0" "Logtalk Documentation"
+.TH lgt2svg 1 "November 19, 2024" "Logtalk 3.86.0" "Logtalk Documentation"
 
 .SH NAME
-lgt2svg \- Logtalk script for converting DOT diagram files into SVG files
+lgt2svg \- Logtalk script for converting .d2 and .dot diagram files into SVG files
 
 .SH SYNOPSIS
 .B lgt2svg
 [\fB-c \fIcommand\fR]
+[\fB-- \fIarguments\fR]
+.br
+.B lgt2svg
+[\fB-l \fIlayout\fR]
 [\fB-- \fIarguments\fR]
 .br
 .B lgt2svg
@@ -15,18 +19,21 @@ lgt2svg \- Logtalk script for converting DOT diagram files into SVG files
 .B \-h
 
 .SH DESCRIPTION
-\fBlgt2svg\fR is a Logtalk script for converting DOT diagram files into SVG files.
+\fBlgt2svg\fR is a Logtalk script for converting .d2 and .dot diagram files in the current directory into SVG files.
 
 .SH OPTIONS
 .TP
-.B \-c 
+.B \-c
 Graphviz command (valid values are \fIdot\fR, \fIcirco\fR, \fIfdp\fR and \fIneato\fR; default is \fIdot\fR).
 .TP
+.B \-l
+d2 layout (valid values are \fIdagre\fR, \fIelk\fR and \fItala\fR; default is \fIelk\fR).
+.TP
 .BI \--
-Arguments to be passed to Graphviz command (no default).
+Arguments to be passed to the converter command (no default).
 
 .SH REQUIREMENTS
-Requires a recent version of Graphviz installed with the command-line executables available from the system \fBPATH\fR.
+Requires recent versions of Graphviz and d2 installed with the command-line executables available from the system \fBPATH\fR.
 
 .SH ENVIRONMENT
 .TP

@@ -43,6 +43,10 @@ Tools
 * CHANGED: The `diagrams` tool now uses a Unicode glyph for the magnifying
 lens instead of a PNG image.
 
+* REMOVED: Deprecated `lgt2svg.js` script from the `diagrams` tool.
+
+* ADDED: Experimental `diagrams` tool support for the d2 graph language.
+
 Examples
 --------
 

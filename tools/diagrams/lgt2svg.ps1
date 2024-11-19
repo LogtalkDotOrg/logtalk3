@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on November 17, 2024
+##   Last updated on November 19, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022-2024 Paulo Moura <pmoura@logtalk.org>
@@ -29,6 +29,7 @@
 param(
 	[Parameter()]
 	[String]$c = "dot", 
+	[String]$l = "elk", 
 	[String]$a = "", 
 	[Switch]$v,
 	[Switch]$h
@@ -37,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.11")
+	Write-Output ($myName + " 0.12")
 }
 
 function Get-Logtalkhome {
@@ -79,17 +80,18 @@ function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve 
 
-	Write-Output "This script converts all Graphviz .dot files"
-	Write-Output "in the current directory to SVG files"
+	Write-Output "This script converts .d2 and .dot files in the current directory to SVG files"
 	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output ("  " + $myName + " [-c command] [-a arguments]")
+	Write-Output ("  " + $myName + " [-l layout] [-a arguments]")
 	Write-Output ("  " + $myName + " -v")
 	Write-Output ("  " + $myName + " -h")
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output ("  -c Graphviz command (valid values are dot, circo, fdp and neato; default is " + $c + ")")
-	Write-Output "  -a additional arguments wrapped as a string to be passed to the Graphviz command (no default)"
+	Write-Output ("  -c Graphviz command (dot, circo, fdp, or neato; default is " + $c + ")")
+	Write-Output ("  -l d2 layout (dagre, elk, or tala; default is " + $l + ")")
+	Write-Output "  -a additional arguments wrapped as a string to be passed to the converter command (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h print help"
 	Write-Output ""
@@ -109,6 +111,12 @@ function Check-Parameters() {
 
 	if ($c -ne "dot" -and $c -ne "circo" -and $c -ne "fdp" -and $c -ne "neato") {
 	Write-Output ("Error! Unknown Graphviz command: " + $c)
+		Start-Sleep -Seconds 2
+		Exit
+	}
+
+	if ($l -ne "dagre" -and $l -ne "elk" -and $l -ne "tala") {
+	Write-Output ("Error! Unknown d2 layout: " + $l)
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -155,11 +163,34 @@ if (Test-Path $env:LOGTALKUSER) {
 	logtalk_user_setup
 }
 
-Write-Output "Converting .dot files to .svg files ..."
-$failed_flag=0
-$count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | %{$_.Count}
+$d2_failed_flag=0
+$dot_failed_flag=0
 
-if ($count -gt 0) {
+$d2_count = Get-ChildItem -Path . -Filter *.d2 | Measure-Object | %{$_.Count}
+$dot_count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | %{$_.Count}
+
+if ($d2_count -gt 0) {
+	Write-Output "Converting .d2 files to .svg files ..."
+	Copy-Item -Path ($env:LOGTALKUSER + '\tools\diagrams\diagrams.css') -Destination .
+	Get-ChildItem -Path . -Filter *.d2 | 
+	Foreach-Object {
+		Write-Host -NoNewline ("  converting " + $_.Name)
+		if ($a -ne "") {
+			& d2 --layout $l (-Split $a) $_.Name ($_.BaseName + ".svg")
+		} else {
+			& d2 --layout $l $_.Name ($_.BaseName + ".svg")
+		}
+		if ($?) {
+			$d2_failed_flag = 1
+			Write-Output " failed"
+		} else {
+			Write-Output " done"
+		}
+	}
+}
+
+if ($dot_count -gt 0) {
+	Write-Output "Converting .dot files to .svg files ..."
 	Copy-Item -Path ($env:LOGTALKUSER + '\tools\diagrams\diagrams.css') -Destination .
 	Get-ChildItem -Path . -Filter *.dot | 
 	Foreach-Object {
@@ -179,21 +210,23 @@ if ($count -gt 0) {
 			Write-Host -NoNewline "."
 		}
 		if ($counter -eq 0) {
-			$failed_flag = 1
+			$dot_failed_flag = 1
 			Write-Output " failed"
 		} else {
 			Write-Output " done"
 		}
 	}
-} else {
-	Write-Output "No .dot files exist in the current directory!"
+}
+
+if ($d2_count -eq 0 -and $dot_count -eq 0) {
+	Write-Output "No .d2 or .dot files exist in the current directory!"
 	Write-Output ""
 }
 
-if ($failed_flag -eq 0) {
-	Write-Output "Conversion done"
+if ($d2_failed_flag -eq 0 -and $dot_failed_flag -eq 0) {
+	Write-Output "Conversion done."
 	Write-Output ""
 } else {
-	Write-Output "One or more files could not be converted"
+	Write-Output "One or more files could not be converted!"
 	Write-Output ""
 }

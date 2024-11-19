@@ -38,45 +38,41 @@ documentation for details. See also the ``diagrams`` tool own
 Requirements
 ------------
 
-A recent version of Graphviz is required for generating diagrams in the
-final formats. It can be installed using a Graphviz installer or e.g.
-the following per operating-system commands:
+Recent versions of d2 or Graphviz are required for generating diagrams
+in the final formats:
+
+- https://d2lang.com
+- https://www.graphviz.org/
+
+These can be installed using their own installers or using
+operating-system package managers:
 
 macOS - MacPorts
 ~~~~~~~~~~~~~~~~
 
 ::
 
-   $ sudo port install graphviz
+   $ sudo port install d2 graphviz
 
 macOS - Homebrew
 ~~~~~~~~~~~~~~~~
 
 ::
 
-   $ brew install graphviz
-
-Ubuntu
-~~~~~~
-
-::
-
-   $ sudo apt install graphviz
+   $ brew install d2 graphviz
 
 Windows - Chocolatey
 ~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-   > choco install graphviz
+   > choco install d2 graphviz
 
 Installers
 ~~~~~~~~~~
 
-https://www.graphviz.org/download/
-
-On Linux systems, use the distribution own package manager to install
-any missing command.
+- https://d2lang.com/tour/install
+- https://www.graphviz.org/download/
 
 API documentation
 -----------------
@@ -259,16 +255,40 @@ options.
 Supported graph languages
 -------------------------
 
-Currently only the DOT graph language is supported (tested with Graphviz
-version 10.0 on macOS; visit the http://www.graphviz.org/ website for
-more information). There's also preliminary support for Mermaid (which
-is not loaded by default as its current version lacks required features
-for parity with Graphviz).
+Currently only the DOT graph language provides support for all the
+features of the ``diagrams`` tool. The d2 graph language supports most
+but not all the features. Notably, hyperlinks in edges are not currently
+supported. There's also preliminary support for Mermaid (not loaded by
+default as its current version lacks several required features for
+parity with d2 and Graphviz).
 
-The diagrams ``.dot`` files are created on the current directory by
-default. These files can be easily converted into a printable format
-such as SVG, PDF, or Postscript. For example, using the ``dot``
-command-line executable we can simply type:
+The diagrams ``.d2`` and ``.dot`` files are created on the current
+directory by default. These files can be easily converted into a
+printable format such as SVG, PDF, or Postscript. Sample helper scripts
+are provided for converting a directory of ``.d2`` or ``.dot`` files to
+``.svg`` files:
+
+- ``lgt2svg.sh`` for POSIX systems
+- ``lgt2svg.ps1`` for Windows systems
+
+The scripts assume that the d2 and Graphviz command-line executables are
+available from the system path. For Graphviz, the default is the ``dot``
+executable but the scripts accept a command-line option to select in
+alternative the ``circo``, ``fdp``, or ``neato`` executables). For d2,
+the default layout engine is ``elk`` but the scripts accept a
+command-line option to select in alternative the ``dagre`` or ``tala``
+layout engines.
+
+The recommended output format is SVG as it supports tooltips and URL
+links, which can be used for showing e.g. entity types, relation types,
+file paths, and for navigating to files and directories of files
+(libraries) or to API documentation. See the relevant diagram options
+below in order to take advantage of these features (see the discussion
+below on "linking diagrams").
+
+To convert to formats other than SVG, you will need to use the d2 and
+Graphviz executables directly. For example, using the Graphviz ``dot``
+executable, we can generate a PDF with the command:
 
 ::
 
@@ -286,25 +306,6 @@ command-line executables may produce better results. For example:
 It's also worth to experiment with different layouts to find the one
 that produces the best results (see the ``layout/1`` option described
 below).
-
-Some output formats such as SVG support tooltips and URL links, which
-can be used for showing e.g. entity types, relation types, file paths,
-and for navigating to files and directories of files (libraries) or to
-API documentation. See the relevant diagram options below in order to
-take advantage of these features (see the discussion below on "linking
-diagrams").
-
-Sample helper scripts are provided for batch converting a directory of
-``.dot`` files to ``.svg`` files:
-
-- ``lgt2svg.sh`` for POSIX systems
-- ``lgt2svg.ps1`` for Windows systems
-- ``lgt2svg.js`` and ``lgt2svg.bat`` for Windows systems (deprecated)
-
-The scripts assume that the Graphviz command-line executables are
-available from the system path (the default is the ``dot`` executable
-but the scripts accept a command-line option to select in alternative
-the ``circo``, ``fdp``, or ``neato`` executables).
 
 When generating diagrams for multiple libraries or directories, it's
 possible to split a diagram with several disconnected library or
@@ -775,15 +776,6 @@ predicate when the callers are from the optimized meta-predicate goals
 workaround in this case would be creating a dedicated loader file that
 doesn't load (and apply) the ``meta_compiler`` library when generating
 the diagrams.
-
-The zoom icons, ``zoom.png`` and ``zoom.svg`` have been designed by Xinh
-Studio:
-
-https://www.iconfinder.com/xinhstudio
-
-Currently, only the ``zoom.png`` file is used. A copy of this file must
-exist in any directory used for publishing diagrams using it. The
-``lgt2svg`` scripts take care of copying this file.
 
 When generating diagrams in SVG format, a copy of the ``diagrams.css``
 file must exist in any directory used for publishing diagrams using it.

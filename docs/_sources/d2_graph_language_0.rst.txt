@@ -1,12 +1,12 @@
-.. index:: dot_graph_language
-.. _dot_graph_language/0:
+.. index:: d2_graph_language
+.. _d2_graph_language/0:
 
 .. rst-class:: right
 
 **object**
 
-``dot_graph_language``
-======================
+``d2_graph_language``
+=====================
 
 Predicates for generating graph files in the DOT language (version 2.36.0 or later).
 
@@ -14,7 +14,7 @@ Predicates for generating graph files in the DOT language (version 2.36.0 or lat
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:10:0
+| **Version:** 1:0:0
 | **Date:** 2024-11-19
 
 | **Compilation flags:**

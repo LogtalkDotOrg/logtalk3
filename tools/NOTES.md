@@ -112,7 +112,7 @@ not listed, see the dependency websites for installation instructions.
 
 ### Tool dependencies for full functionality
 
-- `diagrams`: Graphviz
+- `diagrams`: d2, Graphviz
 - `help`: `info`
 - `issue_creator`: `gh`, `glab`
 - `lgtdoc`: Sphinx, `libxslt`, `fop`, `texlive`, `texinfo`
@@ -127,7 +127,7 @@ not listed, see the dependency websites for installation instructions.
 
 ### macOS - MacPorts
 
-	$ sudo port install graphviz
+	$ sudo port install d2 graphviz
 	$ sudo port install texinfo
 	$ sudo port install gh glab
 	$ sudo port install libxslt fop texlive
@@ -135,7 +135,7 @@ not listed, see the dependency websites for installation instructions.
 
 ### macOS - Homebrew
 
-	$ brew install graphviz
+	$ brew install d2 graphviz
 	$ brew install texinfo
 	$ brew install libxslt fop texlive
 	$ brew install allure
@@ -158,21 +158,22 @@ not listed, see the dependency websites for installation instructions.
 
 ### Windows - Chocolatey
 
-	> choco install graphviz
+	> choco install d2 graphviz
 	> choco install xsltproc apache-fop texlive
 	> choco install gnupg git
 	> choco install gh glab
 	> choco install wget
 
-### Windows - installers
+### Installers
 
-https://www.graphviz.org/download/  
-https://docs.qameta.io/allure-report/  
-https://www.gnupg.org/  
-https://gitforwindows.org  
-https://cli.github.com  
-https://glab.readthedocs.io
-https://eternallybored.org/misc/wget/
+- https://d2lang.com/tour/install
+- https://www.graphviz.org/download/
+- https://docs.qameta.io/allure-report/
+- https://www.gnupg.org/
+- https://gitforwindows.org
+- https://cli.github.com
+- https://glab.readthedocs.io
+- https://eternallybored.org/misc/wget/
 
 ### Windows - PowerShell add-ons
 

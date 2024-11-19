@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:9:0,
+		version is 3:10:0,
 		author is 'Paulo Moura',
-		date is 2024-11-17,
+		date is 2024-11-19,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -260,6 +260,9 @@
 	% external predicates to the entities being documented
 	node_shape_style_color(external_predicate, box, 'filled,dashed', beige).
 
+	edge(Stream, _-Start, _-End, Labels, Kind, Options) :-
+		!,
+		edge(Stream, Start, End, Labels, Kind, Options).
 	edge(Stream, Start, End, Labels, Kind, Options) :-
 		edge_arrow(Kind, ArrowHead),
 		write(Stream, '"'),

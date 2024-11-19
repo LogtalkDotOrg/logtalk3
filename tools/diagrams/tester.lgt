@@ -31,6 +31,7 @@
 	logtalk_load([
 		graph_language_registry,
 		graph_language_protocol,
+		d2_graph_language,
 		dot_graph_language
 	], [
 		source_data(on),
@@ -57,5 +58,8 @@
 		debug(on)
 	]),
 	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	lgtunit::run_test_sets([
+		tests(d2),
+		tests(dot)
+	])
 )).

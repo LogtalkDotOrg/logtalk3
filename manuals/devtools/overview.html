@@ -80,7 +80,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#redhat">RedHat</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-chocolatey">Windows - Chocolatey</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#windows-installers">Windows - installers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installers">Installers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-powershell-add-ons">Windows - PowerShell add-ons</a></li>
 </ul>
 </li>
@@ -232,7 +232,7 @@ listed, see the dependency websites for installation instructions.</p>
 <section id="tool-dependencies-for-full-functionality">
 <h3>Tool dependencies for full functionality<a class="headerlink" href="#tool-dependencies-for-full-functionality" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">diagrams</span></code>: Graphviz</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diagrams</span></code>: d2, Graphviz</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">help</span></code>: <code class="docutils literal notranslate"><span class="pre">info</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">issue_creator</span></code>: <code class="docutils literal notranslate"><span class="pre">gh</span></code>, <code class="docutils literal notranslate"><span class="pre">glab</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>: Sphinx, <code class="docutils literal notranslate"><span class="pre">libxslt</span></code>, <code class="docutils literal notranslate"><span class="pre">fop</span></code>, <code class="docutils literal notranslate"><span class="pre">texlive</span></code>, <code class="docutils literal notranslate"><span class="pre">texinfo</span></code></p></li>
@@ -251,7 +251,7 @@ listed, see the dependency websites for installation instructions.</p>
 </section>
 <section id="macos-macports">
 <h3>macOS - MacPorts<a class="headerlink" href="#macos-macports" title="Link to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install graphviz
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install d2 graphviz
 <span class="err">$</span> sudo port install texinfo
 <span class="err">$</span> sudo port install gh glab
 <span class="err">$</span> sudo port install libxslt fop texlive
@@ -261,7 +261,7 @@ listed, see the dependency websites for installation instructions.</p>
 </section>
 <section id="macos-homebrew">
 <h3>macOS - Homebrew<a class="headerlink" href="#macos-homebrew" title="Link to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install graphviz
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install d2 graphviz
 <span class="err">$</span> brew install texinfo
 <span class="err">$</span> brew install libxslt fop texlive
 <span class="err">$</span> brew install allure
@@ -290,7 +290,7 @@ listed, see the dependency websites for installation instructions.</p>
 </section>
 <section id="windows-chocolatey">
 <h3>Windows - Chocolatey<a class="headerlink" href="#windows-chocolatey" title="Link to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install graphviz
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install d2 graphviz
 <span class="o">&gt;</span> choco install xsltproc apache<span class="o">-</span>fop texlive
 <span class="o">&gt;</span> choco install gnupg git
 <span class="o">&gt;</span> choco install gh glab
@@ -298,16 +298,18 @@ listed, see the dependency websites for installation instructions.</p>
 </pre></div>
 </div>
 </section>
-<section id="windows-installers">
-<h3>Windows - installers<a class="headerlink" href="#windows-installers" title="Link to this heading"></a></h3>
-<div class="line-block">
-<div class="line"><a class="reference external" href="https://www.graphviz.org/download/">https://www.graphviz.org/download/</a></div>
-<div class="line"><a class="reference external" href="https://docs.qameta.io/allure-report/">https://docs.qameta.io/allure-report/</a></div>
-<div class="line"><a class="reference external" href="https://www.gnupg.org/">https://www.gnupg.org/</a></div>
-<div class="line"><a class="reference external" href="https://gitforwindows.org">https://gitforwindows.org</a></div>
-<div class="line"><a class="reference external" href="https://cli.github.com">https://cli.github.com</a></div>
-<div class="line"><a class="reference external" href="https://glab.readthedocs.io">https://glab.readthedocs.io</a> <a class="reference external" href="https://eternallybored.org/misc/wget/">https://eternallybored.org/misc/wget/</a></div>
-</div>
+<section id="installers">
+<h3>Installers<a class="headerlink" href="#installers" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://d2lang.com/tour/install">https://d2lang.com/tour/install</a></p></li>
+<li><p><a class="reference external" href="https://www.graphviz.org/download/">https://www.graphviz.org/download/</a></p></li>
+<li><p><a class="reference external" href="https://docs.qameta.io/allure-report/">https://docs.qameta.io/allure-report/</a></p></li>
+<li><p><a class="reference external" href="https://www.gnupg.org/">https://www.gnupg.org/</a></p></li>
+<li><p><a class="reference external" href="https://gitforwindows.org">https://gitforwindows.org</a></p></li>
+<li><p><a class="reference external" href="https://cli.github.com">https://cli.github.com</a></p></li>
+<li><p><a class="reference external" href="https://glab.readthedocs.io">https://glab.readthedocs.io</a></p></li>
+<li><p><a class="reference external" href="https://eternallybored.org/misc/wget/">https://eternallybored.org/misc/wget/</a></p></li>
+</ul>
 </section>
 <section id="windows-powershell-add-ons">
 <h3>Windows - PowerShell add-ons<a class="headerlink" href="#windows-powershell-add-ons" title="Link to this heading"></a></h3>

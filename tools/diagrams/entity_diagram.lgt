@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:57:2,
+		version is 2:58:0,
 		author is 'Paulo Moura',
-		date is 2024-04-01,
+		date is 2024-11-19,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -104,7 +104,7 @@
 			Format::graph_header(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			process(Basename, Directory, GraphOptions),
 			output_externals(Options),
-			^^output_edges(Options),
+			^^output_edges([file_container(true)| Options]),
 			output_missing_externals(Options),
 			Format::graph_footer(diagram_output_file, Identifier, Basename, file, GraphOptions),
 			Format::file_footer(diagram_output_file, Basename, [description(Description)| Options]) ->
@@ -127,7 +127,7 @@
 			^^filter_file_extension(Basename, Options, Name),
 			^^add_link_options(File, Options, GraphOptions),
 			Format::graph_header(diagram_output_file, Identifier, Name, file, GraphOptions),
-			process(Basename, Directory, Options),
+			process(Basename, Directory, [file_container(true)| Options]),
 			Format::graph_footer(diagram_output_file, Identifier, Name, file, GraphOptions)
 		;	process(Basename, Directory, Options)
 		).
@@ -525,7 +525,12 @@
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		scope_relation_label(Scope, implements, Label),
-		^^save_edge(ObjectName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Object, ObjectContainer),
+			container(protocol, Protocol, ProtocolContainer),
+			^^save_edge(ObjectContainer-ObjectName, ProtocolContainer-ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options])
+		;	^^save_edge(ObjectName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options])
+		),
 		remember_referenced_entity(Object, Protocol),
 		fail.
 	output_object_inheritance_relations(Instance, Options) :-
@@ -535,7 +540,12 @@
 		^^ground_entity_identifier(object, Instance, InstanceName),
 		^^ground_entity_identifier(object, Class, ClassName),
 		scope_relation_label(Scope, instantiates, Label),
-		^^save_edge(InstanceName, ClassName, [Label], instantiates_class, [tooltip(Label)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Instance, InstanceContainer),
+			container(object, Class, ClassContainer),
+			^^save_edge(InstanceContainer-InstanceName, ClassContainer-ClassName, [Label], instantiates_class, [tooltip(Label)| Options])
+		;	^^save_edge(InstanceName, ClassName, [Label], instantiates_class, [tooltip(Label)| Options])
+		),
 		remember_referenced_entity(Instance, Class),
 		fail.
 	output_object_inheritance_relations(Class, Options) :-
@@ -545,7 +555,12 @@
 		^^ground_entity_identifier(object, Class, ClassName),
 		^^ground_entity_identifier(object, SuperClass, SuperClassName),
 		scope_relation_label(Scope, specializes, Label),
-		^^save_edge(ClassName, SuperClassName, [Label], specializes_class, [tooltip(Label)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Class, ClassContainer),
+			container(object, SuperClass, SuperClassContainer),
+			^^save_edge(ClassContainer-ClassName, SuperClassContainer-SuperClassName, [Label], specializes_class, [tooltip(Label)| Options])
+		;	^^save_edge(ClassName, SuperClassName, [Label], specializes_class, [tooltip(Label)| Options])
+		),
 		remember_referenced_entity(Class, SuperClass),
 		fail.
 	output_object_inheritance_relations(Prototype, Options) :-
@@ -555,7 +570,12 @@
 		^^ground_entity_identifier(object, Prototype, PrototypeName),
 		^^ground_entity_identifier(object, Parent, ParentName),
 		scope_relation_label(Scope, extends, Label),
-		^^save_edge(PrototypeName, ParentName, [Label], extends_object, [tooltip(Label)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Prototype, PrototypeContainer),
+			container(object, Parent, ParentContainer),
+			^^save_edge(PrototypeContainer-PrototypeName, ParentContainer-ParentName, [Label], extends_object, [tooltip(Label)| Options])
+		;	^^save_edge(PrototypeName, ParentName, [Label], extends_object, [tooltip(Label)| Options])
+		),
 		remember_referenced_entity(Prototype, Parent),
 		fail.
 	output_object_inheritance_relations(Object, Options) :-
@@ -565,7 +585,12 @@
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		scope_relation_label(Scope, imports, Label),
-		^^save_edge(ObjectName, CategoryName, [Label], imports_category, [tooltip(Label)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Object, ObjectContainer),
+			container(category, Category, CategoryContainer),
+			^^save_edge(ObjectContainer-ObjectName, CategoryContainer-CategoryName, [Label], imports_category, [tooltip(Label)| Options])
+		;	^^save_edge(ObjectName, CategoryName, [Label], imports_category, [tooltip(Label)| Options])
+		),
 		remember_referenced_entity(Object, Category),
 		fail.
 	output_object_inheritance_relations(_, _).
@@ -586,7 +611,17 @@
 		;	% unknown entity type (entity not loaded)
 			^^ground_entity_identifier(unknown, To, ToName)
 		),
-		^^save_edge(ObjectName, ToName, [provides], provides_clauses, [tooltip(provides)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Object, ObjectContainer),
+			(	current_object(To) ->
+				container(object, To, ToContainer)
+			;	current_category(To) ->
+				container(category, To, ToContainer)
+			;	ToContainer = unknown
+			),
+			^^save_edge(ObjectContainer-ObjectName, ToContainer-ToName, [provides], provides_clauses, [tooltip(provides)| Options])
+		;	^^save_edge(ObjectName, ToName, [provides], provides_clauses, [tooltip(provides)| Options])
+		),
 		remember_referenced_entity(Object, To),
 		fail.
 	output_object_provide_relations(_, _).
@@ -598,8 +633,14 @@
 		\+ member(Other, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(object, Other, OtherName),
-		\+ ^^edge(ObjectName, OtherName, [uses], calls_predicate, _),
-		^^save_edge(ObjectName, OtherName, [uses], calls_predicate, [tooltip(uses)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Object, ObjectContainer),
+			container(object, Other, OtherContainer),
+			\+ ^^edge(ObjectContainer-ObjectName, OtherContainer-OtherName, [uses], calls_predicate, _),
+			^^save_edge(ObjectContainer-ObjectName, OtherContainer-OtherName, [uses], calls_predicate, [tooltip(uses)| Options])
+		;	\+ ^^edge(ObjectName, OtherName, [uses], calls_predicate, _),
+			^^save_edge(ObjectName, OtherName, [uses], calls_predicate, [tooltip(uses)| Options])
+		),
 		remember_referenced_entity(Object, Other),
 		fail.
 	output_object_xref_relations(Object, Options) :-
@@ -609,8 +650,14 @@
 		\+ member(Module, ExcludedEntities),
 		\+ referenced_module_(Object, Module),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		\+ ^^edge(ObjectName, Module, [use_module], calls_predicate, _),
-		^^save_edge(ObjectName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Object, ObjectContainer),
+			container(module, Module, ModuleContainer),
+			\+ ^^edge(ObjectContainer-ObjectName, ModuleContainer-Module, [use_module], calls_predicate, _),
+			^^save_edge(ObjectContainer-ObjectName, ModuleContainer-Module, [use_module], calls_predicate, [tooltip(use_module)| Options])
+		;	\+ ^^edge(ObjectName, Module, [use_module], calls_predicate, _),
+			^^save_edge(ObjectName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options])
+		),
 		remember_referenced_module(Object, Module),
 		fail.
 	output_object_xref_relations(_, _).
@@ -632,7 +679,12 @@
 		\+ member(Other, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
 		^^ground_entity_identifier(object, Other, OtherName),
-		^^save_edge(ObjectName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Object, ObjectContainer),
+			container(object, Other, OtherContainer),
+			^^save_edge(ObjectContainer-ObjectName, OtherContainer-OtherName, Predicates, calls_predicate, [tooltip(calls)| Options])
+		;	^^save_edge(ObjectName, OtherName, Predicates, calls_predicate, [tooltip(calls)| Options])
+		),
 		remember_referenced_entity(Object, Other),
 		fail.
 	output_object_xref_calls(Object, Options) :-
@@ -644,7 +696,12 @@
 		),
 		\+ member(Module, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		^^save_edge(ObjectName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		(	member(file_container(true), Options) ->
+			container(object, Object, ObjectContainer),
+			container(module, Module, ModuleContainer),
+			^^save_edge(ObjectContainer-ObjectName, ModuleContainer-Module, Predicates, calls_predicate, [tooltip(calls)| Options])
+		;	^^save_edge(ObjectName, Module, Predicates, calls_predicate, [tooltip(calls)| Options])
+		),
 		remember_referenced_module(Object, Module),
 		fail.
 	output_object_xref_calls(_, _).
@@ -672,7 +729,12 @@
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(category, ExtendedCategory, ExtendedCategoryName),
 		scope_relation_label(Scope, extends, Label),
-		^^save_edge(CategoryName, ExtendedCategoryName, [Label], extends_category, [tooltip(Label)| Options]),
+		(	member(file_container(true), Options) ->
+			container(category, Category, CategoryContainer),
+			container(category, ExtendedCategory, ExtendedCategoryContainer),
+			^^save_edge(CategoryContainer-CategoryName, ExtendedCategoryContainer-ExtendedCategoryName, [Label], extends_category, [tooltip(Label)| Options])
+		;	^^save_edge(CategoryName, ExtendedCategoryName, [Label], extends_category, [tooltip(Label)| Options])
+		),
 		remember_referenced_entity(Category, ExtendedCategory),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
@@ -682,7 +744,12 @@
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(protocol, Protocol, ProtocolName),
 		scope_relation_label(Scope, implements, Label),
-		^^save_edge(CategoryName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options]),
+		(	member(file_container(true), Options) ->
+			container(category, Category, CategoryContainer),
+			container(protocol, Protocol, ProtocolContainer),
+			^^save_edge(CategoryContainer-CategoryName, ProtocolContainer-ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options])
+		;	^^save_edge(CategoryName, ProtocolName, [Label], implements_protocol, [tooltip(Label)| Options])
+		),
 		remember_referenced_entity(Category, Protocol),
 		fail.
 	output_category_inheritance_relations(Category, Options) :-
@@ -691,7 +758,12 @@
 		\+ member(Category, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		^^save_edge(ObjectName, CategoryName, [complements], complements_object, [tooltip(complements)| Options]),
+		(	member(file_container(true), Options) ->
+			container(category, Category, CategoryContainer),
+			container(object, Object, ObjectContainer),
+			^^save_edge(CategoryContainer-CategoryName, ObjectContainer-ObjectName, [complements], complements_object, [tooltip(complements)| Options])
+		;	^^save_edge(CategoryName, ObjectName, [complements], complements_object, [tooltip(complements)| Options])
+		),
 		remember_referenced_entity(Category, Object),
 		fail.
 	output_category_inheritance_relations(_, _).
@@ -712,7 +784,17 @@
 		;	% unknown entity type (entity not loaded)
 			^^ground_entity_identifier(unknown, To, ToName)
 		),
-		^^save_edge(CategoryName, ToName, [provides], provides_clauses, [tooltip(provides)| Options]),
+		(	member(file_container(true), Options) ->
+			container(category, Category, CategoryContainer),
+			(	current_object(To) ->
+				container(object, To, ToContainer)
+			;	current_category(To) ->
+				container(category, To, ToContainer)
+			;	ToContainer = unknown
+			),
+			^^save_edge(CategoryContainer-CategoryName, ToContainer-ToName, [provides], provides_clauses, [tooltip(provides)| Options])
+		;	^^save_edge(CategoryName, ToName, [provides], provides_clauses, [tooltip(provides)| Options])
+		),
 		remember_referenced_entity(Category, To),
 		fail.
 	output_category_provide_relations(_, _).
@@ -725,8 +807,14 @@
 		\+ referenced_entity_(Category, Object),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		\+ ^^edge(CategoryName, ObjectName, [uses], calls_predicate, _),
-		^^save_edge(CategoryName, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options]),
+		(	member(file_container(true), Options) ->
+			container(category, Category, CategoryContainer),
+			container(object, Object, ObjectContainer),
+			\+ ^^edge(CategoryContainer-CategoryName, ObjectContainer-ObjectName, [uses], calls_predicate, _),
+			^^save_edge(CategoryContainer-CategoryName, ObjectContainer-ObjectName, [uses], calls_predicate, [tooltip(uses)| Options])
+		;	\+ ^^edge(CategoryName, ObjectName, [uses], calls_predicate, _),
+			^^save_edge(CategoryName, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options])
+		),
 		remember_referenced_entity(Category, Object),
 		fail.
 	output_category_xref_relations(Category, Options) :-
@@ -736,8 +824,14 @@
 		\+ member(Module, ExcludedEntities),
 		\+ referenced_module_(Category, Module),
 		^^ground_entity_identifier(category, Category, CategoryName),
-		\+ ^^edge(CategoryName, Module, [use_module], calls_predicate, _),
-		^^save_edge(CategoryName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options]),
+		(	member(file_container(true), Options) ->
+			container(category, Category, CategoryContainer),
+			container(module, Module, ModuleContainer),
+			\+ ^^edge(CategoryContainer-CategoryName, ModuleContainer-Module, [use_module], calls_predicate, _),
+			^^save_edge(CategoryContainer-CategoryName, ModuleContainer-Module, [use_module], calls_predicate, [tooltip(use_module)| Options])
+		;	\+ ^^edge(CategoryName, Module, [use_module], calls_predicate, _),
+			^^save_edge(CategoryName, Module, [use_module], calls_predicate, [tooltip(use_module)| Options])
+		),
 		remember_referenced_module(Category, Module),
 		fail.
 	output_category_xref_relations(_, _).
@@ -759,7 +853,12 @@
 		\+ member(Object, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		^^save_edge(CategoryName, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		(	member(file_container(true), Options) ->
+			container(category, Category, CategoryContainer),
+			container(object, Object, ObjectContainer),
+			^^save_edge(CategoryContainer-CategoryName, ObjectContainer-ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options])
+		;	^^save_edge(CategoryName, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options])
+		),
 		remember_referenced_entity(Category, Object),
 		fail.
 	output_category_xref_calls(Category, Options) :-
@@ -771,7 +870,12 @@
 		),
 		\+ member(Module, ExcludedEntities),
 		^^ground_entity_identifier(category, Category, CategoryName),
-		^^save_edge(CategoryName, Module, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		(	member(file_container(true), Options) ->
+			container(category, Category, CategoryContainer),
+			container(module, Module, ModuleContainer),
+			^^save_edge(CategoryContainer-CategoryName, ModuleContainer-Module, Predicates, calls_predicate, [tooltip(calls)| Options])
+		;	^^save_edge(CategoryName, Module, Predicates, calls_predicate, [tooltip(calls)| Options])
+		),
 		remember_referenced_module(Category, Module),
 		fail.
 	output_category_xref_calls(_, _).
@@ -796,7 +900,12 @@
 			_
 		),
 		\+ member(To, ExcludedEntities),
-		^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options]),
+		(	member(file_container(true), Options) ->
+			container(module, Module, ModuleContainer),
+			container(module, To, ToContainer),
+			^^save_edge(ModuleContainer-Module, ToContainer-To, [provides], provides_clauses, [tooltip(provides)| Options])
+		;	^^save_edge(Module, To, [provides], provides_clauses, [tooltip(provides)| Options])
+		),
 		remember_referenced_module(Module, To),
 		fail.
 	output_module_provide_relations(_, _).
@@ -808,8 +917,14 @@
 		\+ member(Object, ExcludedEntities),
 		\+ referenced_entity_(Module, Object),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		\+ ^^edge(Module, ObjectName, [uses], calls_predicate, _),
-		^^save_edge(Module, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options]),
+		(	member(file_container(true), Options) ->
+			container(module, Module, ModuleContainer),
+			container(object, Object, ObjectContainer),
+			\+ ^^edge(ModuleContainer-Module, ObjectContainer-ObjectName, [uses], calls_predicate, _),
+			^^save_edge(ModuleContainer-Module, ObjectContainer-ObjectName, [uses], calls_predicate, [tooltip(uses)| Options])
+		;	\+ ^^edge(Module, ObjectName, [uses], calls_predicate, _),
+			^^save_edge(Module, ObjectName, [uses], calls_predicate, [tooltip(uses)| Options])
+		),
 		remember_referenced_entity(Module, Object),
 		fail.
 	output_module_xref_relations(Module, Options) :-
@@ -818,8 +933,14 @@
 		nonvar(FromModule),
 		\+ member(FromModule, ExcludedEntities),
 		\+ referenced_module_(Module, FromModule),
-		\+ ^^edge(Module, FromModule, [use_module], calls_predicate, _),
-		^^save_edge(Module, FromModule, [use_module], calls_predicate, [tooltip(use_module)| Options]),
+		(	member(file_container(true), Options) ->
+			container(module, Module, ModuleContainer),
+			container(module, FromModule, FromModuleContainer),
+			\+ ^^edge(ModuleContainer-Module, FromModuleContainer-FromModule, [use_module], calls_predicate, _),
+			^^save_edge(ModuleContainer-Module, FromModuleContainer-FromModule, [use_module], calls_predicate, [tooltip(use_module)| Options])
+		;	\+ ^^edge(Module, FromModule, [use_module], calls_predicate, _),
+			^^save_edge(Module, FromModule, [use_module], calls_predicate, [tooltip(use_module)| Options])
+		),
 		remember_referenced_module(Module, FromModule),
 		fail.
 	output_module_xref_relations(_, _).
@@ -833,7 +954,12 @@
 		),
 		\+ member(Object, ExcludedEntities),
 		^^ground_entity_identifier(object, Object, ObjectName),
-		^^save_edge(Module, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		(	member(file_container(true), Options) ->
+			container(module, Module, ModuleContainer),
+			container(object, Object, ObjectContainer),
+			^^save_edge(ModuleContainer-Module, ObjectContainer-ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options])
+		;	^^save_edge(Module, ObjectName, Predicates, calls_predicate, [tooltip(calls)| Options])
+		),
 		remember_referenced_entity(Module, Object),
 		fail.
 	output_module_xref_calls(Module, Options) :-
@@ -844,7 +970,12 @@
 			Predicates
 		),
 		\+ member(FromModule, ExcludedEntities),
-		^^save_edge(Module, FromModule, Predicates, calls_predicate, [tooltip(calls)| Options]),
+		(	member(file_container(true), Options) ->
+			container(module, Module, ModuleContainer),
+			container(module, FromModule, FromModuleContainer),
+			^^save_edge(ModuleContainer-Module, FromModuleContainer-FromModule, Predicates, calls_predicate, [tooltip(calls)| Options])
+		;	^^save_edge(Module, FromModule, Predicates, calls_predicate, [tooltip(calls)| Options])
+		),
 		remember_referenced_module(Module, FromModule),
 		fail.
 	output_module_xref_calls(_, _).
@@ -907,6 +1038,19 @@
 			Caption = 'dynamic protocol'
 		;	Caption = protocol
 		).
+
+	container(object, Object, Container) :-
+		object_property(Object, file(File)),
+		atom_concat(file_, File, Container).
+	container(protocol, Protocol, Container) :-
+		protocol_property(Protocol, file(File)),
+		atom_concat(file_, File, Container).
+	container(category, Category, Container) :-
+		category_property(Category, file(File)),
+		atom_concat(file_, File, Container).
+	container(module, Module, Container) :-
+		modules_diagram_support::module_property(Module, file(File)),
+		atom_concat(file_, File, Container).
 
 	% by default, diagram layout is bottom to top:
 	default_option(layout(bottom_to_top)).

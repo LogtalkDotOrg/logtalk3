@@ -79,7 +79,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#macos-macports">macOS - MacPorts</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#macos-homebrew">macOS - Homebrew</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#ubuntu">Ubuntu</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#windows-chocolatey">Windows - Chocolatey</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#installers">Installers</a></li>
 </ul>
@@ -182,38 +181,38 @@ documentation for details. See also the <code class="docutils literal notranslat
 <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> Bash and PowerShell scripts.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>A recent version of Graphviz is required for generating diagrams in the
-final formats. It can be installed using a Graphviz installer or e.g.
-the following per operating-system commands:</p>
+<p>Recent versions of d2 or Graphviz are required for generating diagrams
+in the final formats:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://d2lang.com">https://d2lang.com</a></p></li>
+<li><p><a class="reference external" href="https://www.graphviz.org/">https://www.graphviz.org/</a></p></li>
+</ul>
+<p>These can be installed using their own installers or using
+operating-system package managers:</p>
 <section id="macos-macports">
 <h3>macOS - MacPorts<a class="headerlink" href="#macos-macports" title="Link to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install graphviz
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install d2 graphviz
 </pre></div>
 </div>
 </section>
 <section id="macos-homebrew">
 <h3>macOS - Homebrew<a class="headerlink" href="#macos-homebrew" title="Link to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install graphviz
-</pre></div>
-</div>
-</section>
-<section id="ubuntu">
-<h3>Ubuntu<a class="headerlink" href="#ubuntu" title="Link to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install graphviz
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install d2 graphviz
 </pre></div>
 </div>
 </section>
 <section id="windows-chocolatey">
 <h3>Windows - Chocolatey<a class="headerlink" href="#windows-chocolatey" title="Link to this heading"></a></h3>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install graphviz
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install d2 graphviz
 </pre></div>
 </div>
 </section>
 <section id="installers">
 <h3>Installers<a class="headerlink" href="#installers" title="Link to this heading"></a></h3>
-<p><a class="reference external" href="https://www.graphviz.org/download/">https://www.graphviz.org/download/</a></p>
-<p>On Linux systems, use the distribution own package manager to install
-any missing command.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://d2lang.com/tour/install">https://d2lang.com/tour/install</a></p></li>
+<li><p><a class="reference external" href="https://www.graphviz.org/download/">https://www.graphviz.org/download/</a></p></li>
+</ul>
 </section>
 </section>
 <section id="api-documentation">
@@ -434,15 +433,37 @@ options.</p>
 </section>
 <section id="supported-graph-languages">
 <h2>Supported graph languages<a class="headerlink" href="#supported-graph-languages" title="Link to this heading"></a></h2>
-<p>Currently only the DOT graph language is supported (tested with Graphviz
-version 10.0 on macOS; visit the <a class="reference external" href="http://www.graphviz.org/">http://www.graphviz.org/</a> website for
-more information). There’s also preliminary support for Mermaid (which
-is not loaded by default as its current version lacks required features
-for parity with Graphviz).</p>
-<p>The diagrams <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files are created on the current directory by
-default. These files can be easily converted into a printable format
-such as SVG, PDF, or Postscript. For example, using the <code class="docutils literal notranslate"><span class="pre">dot</span></code>
-command-line executable we can simply type:</p>
+<p>Currently only the DOT graph language provides support for all the
+features of the <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool. The d2 graph language supports most
+but not all the features. Notably, hyperlinks in edges are not currently
+supported. There’s also preliminary support for Mermaid (not loaded by
+default as its current version lacks several required features for
+parity with d2 and Graphviz).</p>
+<p>The diagrams <code class="docutils literal notranslate"><span class="pre">.d2</span></code> and <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files are created on the current
+directory by default. These files can be easily converted into a
+printable format such as SVG, PDF, or Postscript. Sample helper scripts
+are provided for converting a directory of <code class="docutils literal notranslate"><span class="pre">.d2</span></code> or <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to
+<code class="docutils literal notranslate"><span class="pre">.svg</span></code> files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">lgt2svg.sh</span></code> for POSIX systems</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lgt2svg.ps1</span></code> for Windows systems</p></li>
+</ul>
+<p>The scripts assume that the d2 and Graphviz command-line executables are
+available from the system path. For Graphviz, the default is the <code class="docutils literal notranslate"><span class="pre">dot</span></code>
+executable but the scripts accept a command-line option to select in
+alternative the <code class="docutils literal notranslate"><span class="pre">circo</span></code>, <code class="docutils literal notranslate"><span class="pre">fdp</span></code>, or <code class="docutils literal notranslate"><span class="pre">neato</span></code> executables). For d2,
+the default layout engine is <code class="docutils literal notranslate"><span class="pre">elk</span></code> but the scripts accept a
+command-line option to select in alternative the <code class="docutils literal notranslate"><span class="pre">dagre</span></code> or <code class="docutils literal notranslate"><span class="pre">tala</span></code>
+layout engines.</p>
+<p>The recommended output format is SVG as it supports tooltips and URL
+links, which can be used for showing e.g. entity types, relation types,
+file paths, and for navigating to files and directories of files
+(libraries) or to API documentation. See the relevant diagram options
+below in order to take advantage of these features (see the discussion
+below on “linking diagrams”).</p>
+<p>To convert to formats other than SVG, you will need to use the d2 and
+Graphviz executables directly. For example, using the Graphviz <code class="docutils literal notranslate"><span class="pre">dot</span></code>
+executable, we can generate a PDF with the command:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>dot <span class="o">-</span><span class="nv">Tpdf</span> diagram.dot <span class="o">&gt;</span> diagram.pdf
 </pre></div>
 </div>
@@ -456,23 +477,6 @@ circo <span class="o">-</span><span class="nv">Tsvg</span> diagram.dot <span cla
 <p>It’s also worth to experiment with different layouts to find the one
 that produces the best results (see the <code class="docutils literal notranslate"><span class="pre">layout/1</span></code> option described
 below).</p>
-<p>Some output formats such as SVG support tooltips and URL links, which
-can be used for showing e.g. entity types, relation types, file paths,
-and for navigating to files and directories of files (libraries) or to
-API documentation. See the relevant diagram options below in order to
-take advantage of these features (see the discussion below on “linking
-diagrams”).</p>
-<p>Sample helper scripts are provided for batch converting a directory of
-<code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to <code class="docutils literal notranslate"><span class="pre">.svg</span></code> files:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">lgt2svg.sh</span></code> for POSIX systems</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lgt2svg.ps1</span></code> for Windows systems</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lgt2svg.js</span></code> and <code class="docutils literal notranslate"><span class="pre">lgt2svg.bat</span></code> for Windows systems (deprecated)</p></li>
-</ul>
-<p>The scripts assume that the Graphviz command-line executables are
-available from the system path (the default is the <code class="docutils literal notranslate"><span class="pre">dot</span></code> executable
-but the scripts accept a command-line option to select in alternative
-the <code class="docutils literal notranslate"><span class="pre">circo</span></code>, <code class="docutils literal notranslate"><span class="pre">fdp</span></code>, or <code class="docutils literal notranslate"><span class="pre">neato</span></code> executables).</p>
 <p>When generating diagrams for multiple libraries or directories, it’s
 possible to split a diagram with several disconnected library or
 directory graphs using the <code class="docutils literal notranslate"><span class="pre">ccomps</span></code> command-line executable. For
@@ -1051,12 +1055,6 @@ predicate when the callers are from the optimized meta-predicate goals
 workaround in this case would be creating a dedicated loader file that
 doesn’t load (and apply) the <code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code> library when generating
 the diagrams.</p>
-<p>The zoom icons, <code class="docutils literal notranslate"><span class="pre">zoom.png</span></code> and <code class="docutils literal notranslate"><span class="pre">zoom.svg</span></code> have been designed by Xinh
-Studio:</p>
-<p><a class="reference external" href="https://www.iconfinder.com/xinhstudio">https://www.iconfinder.com/xinhstudio</a></p>
-<p>Currently, only the <code class="docutils literal notranslate"><span class="pre">zoom.png</span></code> file is used. A copy of this file must
-exist in any directory used for publishing diagrams using it. The
-<code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts take care of copying this file.</p>
 <p>When generating diagrams in SVG format, a copy of the <code class="docutils literal notranslate"><span class="pre">diagrams.css</span></code>
 file must exist in any directory used for publishing diagrams using it.
 The <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts also take care of copying this file.</p>
