@@ -249,7 +249,8 @@
 		write(Stream, '": "'),
 		write_edge_lines(Labels, Stream),
 		write(Stream, '" {\n'),
-		write_key_value_nl(Stream, 'source-arrowhead.shape', ArrowHead),
+		write_key_value_nl(Stream, 'target-arrowhead.shape', ArrowHead),
+		write_key_value_nl(Stream, 'target-arrowhead.style.filled', true),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write_key_value_quoted_nl(Stream, link, URL)
@@ -267,7 +268,8 @@
 		write(Stream, '": "'),
 		write_edge_lines(Labels, Stream),
 		write(Stream, '" {\n'),
-		write_key_value_nl(Stream, 'source-arrowhead.shape', ArrowHead),
+		write_key_value_nl(Stream, 'target-arrowhead.shape', ArrowHead),
+		write_key_value_nl(Stream, 'target-arrowhead.style.filled', true),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
 			write_key_value_quoted_nl(Stream, link, URL)
