@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:58:0,
+		version is 2:58:1,
 		author is 'Paulo Moura',
-		date is 2024-11-19,
+		date is 2024-11-20,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -1002,7 +1002,10 @@
 
 	object_name_kind_caption(Entity, Name, Kind, Caption) :-
 		^^ground_entity_identifier(object, Entity, Name),
-		(	specializes_class(Entity, _), instantiates_class(Entity, _) ->
+		(	instantiates_class(Entity, Entity) ->
+			Kind = instance_and_class,
+			Caption0 = 'instance/class'
+		;	specializes_class(Entity, _), instantiates_class(Entity, _) ->
 			Kind = instance_and_class,
 			Caption0 = 'instance/class'
 		;	specializes_class(Entity, _) ->

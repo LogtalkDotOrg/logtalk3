@@ -47,6 +47,9 @@ lens instead of a PNG image.
 
 * ADDED: Experimental `diagrams` tool support for the d2 graph language.
 
+* FIXED: The `diagrams` tool to also generate an `instance/class` caption for
+metaclasses.
+
 Examples
 --------
 
