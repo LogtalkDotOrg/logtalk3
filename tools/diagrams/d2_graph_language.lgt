@@ -311,8 +311,42 @@
 
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
-		write(Stream, Line), write(Stream, '  \n'),
+		(	atom(Line) ->
+			atom_chars(Line, Chars)
+		;	write_to_chars(Line, Chars)
+		),
+		write_escaped_chars(Chars, Stream),
+		write(Stream, '  \n'),
 		write_node_lines(Lines, Stream).
+
+	write_escaped_chars([], _).
+	write_escaped_chars([Char| Chars], Stream) :-
+		(	escaped_char(Char) ->
+			put_char(Stream, '\\')
+		;	true
+		),
+		put_char(Stream, Char),
+		write_escaped_chars(Chars, Stream).
+
+	escaped_char('\\').
+	escaped_char('`').
+	escaped_char('*').
+	escaped_char('_').
+	escaped_char('{').
+	escaped_char('}').
+	escaped_char('[').
+	escaped_char(']').
+	escaped_char('<').
+	escaped_char('>').
+	escaped_char('(').
+	escaped_char(')').
+	escaped_char('#').
+	escaped_char('+').
+	escaped_char('-').
+	escaped_char('.').
+	escaped_char('!').
+	escaped_char('|').
+	escaped_char('~').
 
 	write_edge_lines([], _).
 	write_edge_lines([Line| Lines], Stream) :-
