@@ -161,11 +161,11 @@ be used with the intended set of options.
 Graph elements
 --------------
 
-Limitations in both the graph language and UML forces the invention of a
-modeling language that can represent all kinds of Logtalk entities and
-entity relations. Currently we use the following Graphviz DOT shapes
-(libraries, entities, predicates, and files) and arrows (entity, predicate,
-and file relations):
+Limitations in both the graph languages and UML forces the invention of
+a modeling language that can represent all kinds of Logtalk entities and
+entity relations. Currently we use the following Graphviz node shapes
+(libraries, entities, predicates, and files) and arrowheads (entity,
+predicate, and file relations):
 
 - libraries  
 	`tab` (lightsalmon)
@@ -224,6 +224,10 @@ and file relations):
 	`normal` (arrow ending with a black triangle)
 - dynamic predicate updates  
 	`diamond` (arrow ending with a black diamond)
+
+When using the d2 graph language, we use similar node shapes and arrowheads
+when available. As d2 evolves, we hope that these graph elements will converge
+further.
 
 The library, directory, file, entity, and predicate nodes that are not part
 of the predicates, entities, files, or libraries for which we are generating

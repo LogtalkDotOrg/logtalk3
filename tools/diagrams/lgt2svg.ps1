@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on November 19, 2024
+##   Last updated on November 20, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022-2024 Paulo Moura <pmoura@logtalk.org>
@@ -181,10 +181,10 @@ if ($d2_count -gt 0) {
 			& d2 --layout $l $_.Name ($_.BaseName + ".svg")
 		}
 		if ($?) {
+			Write-Output " done"
+		} else {
 			$d2_failed_flag = 1
 			Write-Output " failed"
-		} else {
-			Write-Output " done"
 		}
 	}
 }
