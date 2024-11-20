@@ -23,7 +23,7 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:58:1,
+		version is 2:58:2,
 		author is 'Paulo Moura',
 		date is 2024-11-20,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
@@ -118,6 +118,12 @@
 	file(Source) :-
 		file(Source, []).
 
+	output_file(File, Basename, Directory, _) :-
+		\+ object_property(_, file(Basename, Directory)),
+		\+ protocol_property(_, file(Basename, Directory)),
+		\+ category_property(_, file(Basename, Directory)),
+		\+ modules_diagram_support::module_property(_, file(File)),
+		!.
 	output_file(File, Basename, Directory, Options) :-
 		(	member(file_labels(true), Options) ->
 			^^format_object(Format),
