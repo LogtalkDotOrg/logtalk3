@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-11-19,
+		date is 2024-11-20,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -206,7 +206,7 @@
 	node_shape_dash_color(class, rectangle, 0, yellow).
 	node_shape_dash_color(instance, rectangle, 0, yellow).
 	node_shape_dash_color(instance_and_class, rectangle, 0, yellow).
-	node_shape_dash_color(protocol, rectangle, 0, aquamarine).
+	node_shape_dash_color(protocol, page, 0, aquamarine).
 	node_shape_dash_color(category, rectangle, 0, lightcyan).
 	node_shape_dash_color(module, package, 0, plum).
 	node_shape_dash_color(file, rectangle, 0, paleturquoise).
@@ -217,7 +217,7 @@
 	node_shape_dash_color(external_class, rectangle, 2, lightgoldenrodyellow).
 	node_shape_dash_color(external_instance, rectangle, 2, lightgoldenrodyellow).
 	node_shape_dash_color(external_instance_and_class, rectangle, 2, lightgoldenrodyellow).
-	node_shape_dash_color(external_protocol, rectangle, 2, mediumaquamarine).
+	node_shape_dash_color(external_protocol, page, 2, mediumaquamarine).
 	node_shape_dash_color(external_category, rectangle, 2, cyan).
 	node_shape_dash_color(external_module, package, 2, thistle).
 	node_shape_dash_color(external_file, rectangle, 2, powderblue).
