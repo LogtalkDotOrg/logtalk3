@@ -127,7 +127,7 @@
 		graph_style_color(Kind, Style, Color),
 		write(Stream, '"'),
 		write(Stream, Identifier),
-		write(Stream, '": {\n'),
+		write(Stream, '_": {\n'),
 		write_key_value(Stream, label, Label),
 		write_key_value(Stream, 'label.near', 'bottom-center'),
 		write_key_value(Stream, 'style.border-radius', Style),
@@ -165,7 +165,7 @@
 		node_shape_dash_color(Kind, Shape, Dash, Color),
 		write(Stream, '"'),
 		write(Stream, Identifier),
-		write(Stream, '" {\n'),
+		write(Stream, '_": {\n'),
 		write_key_value(Stream, shape, Shape),
 		write_key_value(Stream, 'style.fill', Color),
 		write_key_value(Stream, 'style.stroke-dash', Dash),
@@ -235,49 +235,36 @@
 	% external predicates to the entities being documented
 	node_shape_dash_color(external_predicate,          rectangle, 2, beige).
 
-	edge(Stream, StartContainer-Start, EndContainer-End, Labels, Kind, Options) :-
+	edge(Stream, Source, Destination, Labels, Kind, Options) :-
+		edge_arrow_filled(Kind, ArrowHead, Filled),
+		write_vertex(Source, Stream),
+		write(Stream, ' -> '),
+		write_vertex(Destination, Stream),
+		write(Stream, ': "'),
+		write_edge_lines(Labels, Stream),
+		write(Stream, '" {\n'),
+		write_key_value(Stream, 'target-arrowhead.shape', ArrowHead),
+		write_key_value(Stream, 'target-arrowhead.style.filled', Filled),
+		(	^^option(url(URL), Options),
+			URL \== '' ->
+			write_key_value_quoted(Stream, link, URL)
+		;	member(tooltip(Tooltip), Options) ->
+			write_key_value(Stream, tooltip, Tooltip)
+		;	true
+		),
+		write(Stream, '}\n').
+
+	write_vertex(Container-Node, Stream) :-
 		!,
-		edge_arrow_filled(Kind, ArrowHead, Filled),
 		write(Stream, '"'),
-		write(Stream, StartContainer),
-		write(Stream, '"."'),
-		write(Stream, Start),
-		write(Stream, '" -> "'),
-		write(Stream, EndContainer),
-		write(Stream, '"."'),
-		write(Stream, End),
-		write(Stream, '": "'),
-		write_edge_lines(Labels, Stream),
-		write(Stream, '" {\n'),
-		write_key_value(Stream, 'target-arrowhead.shape', ArrowHead),
-		write_key_value(Stream, 'target-arrowhead.style.filled', Filled),
-		(	^^option(url(URL), Options),
-			URL \== '' ->
-			write_key_value_quoted(Stream, link, URL)
-		;	member(tooltip(Tooltip), Options) ->
-			write_key_value(Stream, tooltip, Tooltip)
-		;	true
-		),
-		write(Stream, '}\n').
-	edge(Stream, Start, End, Labels, Kind, Options) :-
-		edge_arrow_filled(Kind, ArrowHead, Filled),
+		write(Stream, Container),
+		write(Stream, '_"."'),
+		write(Stream, Node),
+		write(Stream, '_"').
+	write_vertex(Node, Stream) :-
 		write(Stream, '"'),
-		write(Stream, Start),
-		write(Stream, '" -> "'),
-		write(Stream, End),
-		write(Stream, '": "'),
-		write_edge_lines(Labels, Stream),
-		write(Stream, '" {\n'),
-		write_key_value(Stream, 'target-arrowhead.shape', ArrowHead),
-		write_key_value(Stream, 'target-arrowhead.style.filled', Filled),
-		(	^^option(url(URL), Options),
-			URL \== '' ->
-			write_key_value_quoted(Stream, link, URL)
-		;	member(tooltip(Tooltip), Options) ->
-			write_key_value(Stream, tooltip, Tooltip)
-		;	true
-		),
-		write(Stream, '}\n').
+		write(Stream, Node),
+		write(Stream, '_"').
 
 	% entity relations
 	edge_arrow_filled(extends_object,         arrow,    true).
