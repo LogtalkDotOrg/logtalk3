@@ -54,13 +54,13 @@
 	file_header(Stream, Identifier, Options) :-
 		^^option(layout(Layout), Options),
 		convert_layout(Layout, Direction),
-		write_key_value_nl(Stream, direction, Direction),
+		write_key_value(Stream, direction, Direction),
 		write(Stream, '"'),
 		write(Stream, Identifier),
 		write(Stream, '": {\n'),
 		diagram_label(Options, Label),
-		write_key_value_nl(Stream, label, Label),
-		write_key_value_nl(Stream, 'label.near', 'outside-bottom-left'),
+		write_key_value(Stream, label, Label),
+		write_key_value(Stream, 'label.near', 'outside-bottom-left'),
 		nl(Stream).
 
 	convert_layout(top_to_bottom, down).
@@ -128,20 +128,20 @@
 		write(Stream, '"'),
 		write(Stream, Identifier),
 		write(Stream, '": {\n'),
-		write_key_value_nl(Stream, label, Label),
-		write_key_value_nl(Stream, 'label.near', 'bottom-center'),
-		write_key_value_nl(Stream, 'style.border-radius', Style),
-		write_key_value_nl(Stream, 'style.fill', Color),
+		write_key_value(Stream, label, Label),
+		write_key_value(Stream, 'label.near', 'bottom-center'),
+		write_key_value(Stream, 'style.border-radius', Style),
+		write_key_value(Stream, 'style.fill', Color),
 		(	member(url(URL), Options) ->
 			(	URL \== '' ->
-				write_key_value_quoted_nl(Stream, link, URL)
+				write_key_value_quoted(Stream, link, URL)
 			;	member(tooltip(Tooltip), Options) ->
-				write_key_value_nl(Stream, tooltip, Tooltip)
-			;	write_key_value_nl(Stream, tooltip, Label)
+				write_key_value(Stream, tooltip, Tooltip)
+			;	write_key_value(Stream, tooltip, Label)
 			)
 		;	member(tooltip(Tooltip), Options) ->
-			write_key_value_nl(Stream, tooltip, Tooltip)
-		;	write_key_value_nl(Stream, tooltip, Label)
+			write_key_value(Stream, tooltip, Tooltip)
+		;	write_key_value(Stream, tooltip, Label)
 		).
 
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
@@ -166,14 +166,14 @@
 		write(Stream, '"'),
 		write(Stream, Identifier),
 		write(Stream, '" {\n'),
-		write_key_value_nl(Stream, shape, Shape),
-		write_key_value_nl(Stream, 'style.fill', Color),
-		write_key_value_nl(Stream, 'style.stroke-dash', Dash),
+		write_key_value(Stream, shape, Shape),
+		write_key_value(Stream, 'style.fill', Color),
+		write_key_value(Stream, 'style.stroke-dash', Dash),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
-			write_key_value_quoted_nl(Stream, link, URL)
+			write_key_value_quoted(Stream, link, URL)
 		;	member(tooltip(Tooltip), Options) ->
-			write_key_value_nl(Stream, tooltip, Tooltip)
+			write_key_value(Stream, tooltip, Tooltip)
 		;	true
 		),
 		write(Stream, 'label: ""\n'),
@@ -202,38 +202,38 @@
 		write(Stream, '}\n').
 
 	% entities belonging to the file or library being documented
-	node_shape_dash_color(prototype, rectangle, 0, cornsilk).
-	node_shape_dash_color(class, rectangle, 0, yellow).
-	node_shape_dash_color(instance, rectangle, 0, yellow).
-	node_shape_dash_color(instance_and_class, rectangle, 0, yellow).
-	node_shape_dash_color(protocol, page, 0, aquamarine).
-	node_shape_dash_color(category, rectangle, 0, lightcyan).
-	node_shape_dash_color(module, package, 0, plum).
-	node_shape_dash_color(file, rectangle, 0, paleturquoise).
-	node_shape_dash_color(directory, package, 0, lightsalmon).
-	node_shape_dash_color(library, package, 0, lightsalmon).
+	node_shape_dash_color(prototype,                   rectangle, 0, cornsilk).
+	node_shape_dash_color(class,                       rectangle, 0, yellow).
+	node_shape_dash_color(instance,                    rectangle, 0, yellow).
+	node_shape_dash_color(instance_and_class,          rectangle, 0, yellow).
+	node_shape_dash_color(protocol,                    page,      0, aquamarine).
+	node_shape_dash_color(category,                    rectangle, 0, lightcyan).
+	node_shape_dash_color(module,                      package,   0, plum).
+	node_shape_dash_color(file,                        rectangle, 0, paleturquoise).
+	node_shape_dash_color(directory,                   package,   0, lightsalmon).
+	node_shape_dash_color(library,                     package,   0, lightsalmon).
 	% external entities to the file or library being documented
-	node_shape_dash_color(external_prototype, rectangle, 2, beige).
-	node_shape_dash_color(external_class, rectangle, 2, lightgoldenrodyellow).
-	node_shape_dash_color(external_instance, rectangle, 2, lightgoldenrodyellow).
+	node_shape_dash_color(external_prototype,          rectangle, 2, beige).
+	node_shape_dash_color(external_class,              rectangle, 2, lightgoldenrodyellow).
+	node_shape_dash_color(external_instance,           rectangle, 2, lightgoldenrodyellow).
 	node_shape_dash_color(external_instance_and_class, rectangle, 2, lightgoldenrodyellow).
-	node_shape_dash_color(external_protocol, page, 2, mediumaquamarine).
-	node_shape_dash_color(external_category, rectangle, 2, cyan).
-	node_shape_dash_color(external_module, package, 2, thistle).
-	node_shape_dash_color(external_file, rectangle, 2, powderblue).
-	node_shape_dash_color(external_directory, package, 2, salmon).
-	node_shape_dash_color(external_library, package, 2, salmon).
+	node_shape_dash_color(external_protocol,           page,      2, mediumaquamarine).
+	node_shape_dash_color(external_category,           rectangle, 2, cyan).
+	node_shape_dash_color(external_module,             package,   2, thistle).
+	node_shape_dash_color(external_file,               rectangle, 2, powderblue).
+	node_shape_dash_color(external_directory,          package,   2, salmon).
+	node_shape_dash_color(external_library,            package,   2, salmon).
 	% predicates of the entities being documented
-	node_shape_dash_color(directive, rectangle, 0, bisque).
-	node_shape_dash_color(predicate, rectangle, 0, cornsilk).
-	node_shape_dash_color(public_predicate, rectangle, 0, springgreen).
-	node_shape_dash_color(protected_predicate, rectangle, 0, yellow).
-	node_shape_dash_color(private_predicate, rectangle, 0, indianred).
-	node_shape_dash_color(local_predicate, rectangle, 0, cornsilk).
-	node_shape_dash_color(multifile_predicate, rectangle, 0, skyblue).
-	node_shape_dash_color(exported_predicate, rectangle, 0, springgreen).
+	node_shape_dash_color(directive,                   rectangle, 0, bisque).
+	node_shape_dash_color(predicate,                   rectangle, 0, cornsilk).
+	node_shape_dash_color(public_predicate,            rectangle, 0, springgreen).
+	node_shape_dash_color(protected_predicate,         rectangle, 0, yellow).
+	node_shape_dash_color(private_predicate,           rectangle, 0, indianred).
+	node_shape_dash_color(local_predicate,             rectangle, 0, cornsilk).
+	node_shape_dash_color(multifile_predicate,         rectangle, 0, skyblue).
+	node_shape_dash_color(exported_predicate,          rectangle, 0, springgreen).
 	% external predicates to the entities being documented
-	node_shape_dash_color(external_predicate, rectangle, 2, beige).
+	node_shape_dash_color(external_predicate,          rectangle, 2, beige).
 
 	edge(Stream, StartContainer-Start, EndContainer-End, Labels, Kind, Options) :-
 		!,
@@ -249,13 +249,13 @@
 		write(Stream, '": "'),
 		write_edge_lines(Labels, Stream),
 		write(Stream, '" {\n'),
-		write_key_value_nl(Stream, 'target-arrowhead.shape', ArrowHead),
-		write_key_value_nl(Stream, 'target-arrowhead.style.filled', Filled),
+		write_key_value(Stream, 'target-arrowhead.shape', ArrowHead),
+		write_key_value(Stream, 'target-arrowhead.style.filled', Filled),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
-			write_key_value_quoted_nl(Stream, link, URL)
+			write_key_value_quoted(Stream, link, URL)
 		;	member(tooltip(Tooltip), Options) ->
-			write_key_value_nl(Stream, tooltip, Tooltip)
+			write_key_value(Stream, tooltip, Tooltip)
 		;	true
 		),
 		write(Stream, '}\n').
@@ -268,21 +268,21 @@
 		write(Stream, '": "'),
 		write_edge_lines(Labels, Stream),
 		write(Stream, '" {\n'),
-		write_key_value_nl(Stream, 'target-arrowhead.shape', ArrowHead),
-		write_key_value_nl(Stream, 'target-arrowhead.style.filled', Filled),
+		write_key_value(Stream, 'target-arrowhead.shape', ArrowHead),
+		write_key_value(Stream, 'target-arrowhead.style.filled', Filled),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
-			write_key_value_quoted_nl(Stream, link, URL)
+			write_key_value_quoted(Stream, link, URL)
 		;	member(tooltip(Tooltip), Options) ->
-			write_key_value_nl(Stream, tooltip, Tooltip)
+			write_key_value(Stream, tooltip, Tooltip)
 		;	true
 		),
 		write(Stream, '}\n').
 
 	% entity relations
-	edge_arrow_filled(extends_object,         triangle, true).
-	edge_arrow_filled(extends_protocol,       triangle, true).
-	edge_arrow_filled(extends_category,       triangle, true).
+	edge_arrow_filled(extends_object,         arrow,    true).
+	edge_arrow_filled(extends_protocol,       arrow,    true).
+	edge_arrow_filled(extends_category,       arrow,    true).
 	edge_arrow_filled(instantiates_class,     triangle, true).
 	edge_arrow_filled(specializes_class,      triangle, false).
 	edge_arrow_filled(implements_protocol,    circle,   true).
@@ -309,28 +309,18 @@
 	edge_arrow_filled(depends_on_library,     triangle, true).
 	edge_arrow_filled(loads_library,          triangle, true).
 
-	write_key_value_quoted_nl(Stream, Key, Value) :-
-		write_key_value_quoted(Stream, Key, Value),
-		nl(Stream).
-
 	write_key_value_quoted(Stream, Key, Value) :-
 		write(Stream, Key),
 		write(Stream, ': "'),
 		write(Stream, Value),
-		write(Stream, '"').
-
-	write_key_value_nl(Stream, Key, Value) :-
-		write_key_value(Stream, Key, Value),
+		write(Stream, '"'),
 		nl(Stream).
-
-	write_key_value_comma(Stream, Key, Value) :-
-		write_key_value(Stream, Key, Value),
-		write(Stream, ',').
 
 	write_key_value(Stream, Key, Value) :-
 		write(Stream, Key),
 		write(Stream, ': '),
-		write(Stream, Value).
+		write(Stream, Value),
+		nl(Stream).
 
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
