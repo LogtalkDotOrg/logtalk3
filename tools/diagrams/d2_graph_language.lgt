@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2024-11-20,
+		date is 2024-11-21,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -158,9 +158,6 @@
 	graph_style_color(external,    8, white).
 	graph_style_color(entity,      8, snow).
 
-	node(Stream, _-Identifier, Label, Caption, Contents, Kind, Options) :-
-		!,
-		node(Stream, Identifier, Label, Caption, Contents, Kind, Options).
 	node(Stream, Identifier, Label, Caption, Contents, Kind, Options) :-
 		node_shape_dash_color(Kind, Shape, Dash, Color),
 		write(Stream, '"'),
@@ -254,11 +251,15 @@
 		),
 		write(Stream, '}\n').
 
-	write_vertex(Container-Node, Stream) :-
+	write_vertex([Container| Containers]-Node, Stream) :-
 		!,
 		write(Stream, '"'),
 		write(Stream, Container),
-		write(Stream, '_"."'),
+		write(Stream, '_".'),
+		write_vertex(Containers-Node, Stream).
+	write_vertex([]-Node, Stream) :-
+		!,
+		write(Stream, '"'),
 		write(Stream, Node),
 		write(Stream, '_"').
 	write_vertex(Node, Stream) :-

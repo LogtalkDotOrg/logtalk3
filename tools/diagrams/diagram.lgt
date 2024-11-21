@@ -23,15 +23,15 @@
 	extends(options)).
 
 	:- info([
-		version is 3:11:0,
+		version is 3:12:0,
 		author is 'Paulo Moura',
-		date is 2024-10-27,
+		date is 2024-11-21,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
 
 	:- uses(list, [
-		member/2
+		member/2, reverse/2
 	]).
 	:- uses(pairs, [
 		keys/2
@@ -94,7 +94,7 @@
 		add_link_options(Directory, Options, GraphOptions),
 		omit_path_prefix(Directory, Options, Relative),
 		Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
-		::output_library(Library, Directory, GraphOptions),
+		::output_library(Library, Directory, [container(Identifier)| GraphOptions]),
 		Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library)),
 		output_libraries(Libraries, Format, Options).
@@ -162,7 +162,7 @@
 		add_link_options(Directory, Options, GraphOptions),
 		omit_path_prefix(Directory, Options, Relative),
 		Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
-		::output_library(Library, Directory, GraphOptions),
+		::output_library(Library, Directory, [container(Identifier)| GraphOptions]),
 		Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, library, Library)),
 		fail.
@@ -751,14 +751,14 @@
 		add_link_options(TopPath, Options, TopGraphOptions),
 		omit_path_prefix(TopPath, Options, TopRelative),
 		Format::graph_header(diagram_output_file, TopIdentifier, TopRelative, library, TopGraphOptions),
-		::output_library(TopLibrary, TopPath, TopGraphOptions),
+		::output_library(TopLibrary, TopPath, [container(TopIdentifier)| TopGraphOptions]),
 		Format::graph_footer(diagram_output_file, TopIdentifier, TopRelative, library, TopGraphOptions),
 		sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
 			atom_concat(library_, Library, Identifier),
 			add_link_options(Path, Options, GraphOptions),
 			atom_concat(TopPath, Relative, Path),
 			Format::graph_header(diagram_output_file, Identifier, Relative, library, GraphOptions),
-			::output_library(Library, Path, GraphOptions),
+			::output_library(Library, Path, [container(Identifier)| GraphOptions]),
 			Format::graph_footer(diagram_output_file, Identifier, Relative, library, GraphOptions),
 		fail.
 	output_rlibrary(_, _, _).
@@ -854,7 +854,8 @@
 
 	reset :-
 		::retractall(node_(_, _, _, _, _, _)),
-		::retractall(edge_(_, _, _, _, _)).
+		::retractall(edge_(_, _, _, _, _)),
+		retractall(node_path_(_, _)).
 
 	:- protected(output_node/6).
 	:- mode(output_node(+nonvar, +nonvar, +nonvar, +list(nonvar), +atom, +list(compound)), one).
@@ -866,6 +867,7 @@
 	output_node(Identifier, Label, Caption, Contents, Kind, Options) :-
 		% cache the node so that we can later check for missing external nodes
 		::assertz(node_(Identifier, Label, Caption, Contents, Kind, Options)),
+		save_node_path(Identifier, Options),
 		format_object(Format),
 		Format::node(diagram_output_file, Identifier, Label, Caption, Contents, Kind, Options).
 
@@ -886,6 +888,25 @@
 		comment is 'Table of saved nodes.',
 		argnames is ['Identifier', 'Label', 'Caption', 'Contents', 'Kind', 'Options']
 	]).
+
+	:- private(node_path_/2).
+	:- dynamic(node_path_/2).
+	:- mode(node_path_(?ground, ?list(ground)), zero_or_more).
+	:- info(node_path_/2, [
+		comment is 'Table of node paths.',
+		argnames is ['Node', 'Path']
+	]).
+
+	save_node_path(Node, Options) :-
+		findall(Container, member(container(Container), Options), Containers),
+		reverse(Containers, Path),
+		assertz(node_path_(Node, Path)).
+
+	node_path(Node, Path) :-
+		(	node_path_(Node, Path) ->
+			true
+		;	Path = []
+		).
 
 	:- protected(edge/5).
 	:- mode(edge(?nonvar, ?nonvar, ?list(nonvar), ?atom, ?list(compound)), zero_or_more).
@@ -919,13 +940,17 @@
 
 	output_edges(true, Format) :-
 		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
-		Format::edge(diagram_output_file, From, To, Labels, Kind, EdgeOptions),
+		node_path(From, FromPath),
+		node_path(To, ToPath),
+		Format::edge(diagram_output_file, FromPath-From, ToPath-To, Labels, Kind, EdgeOptions),
 		fail.
 	output_edges(false, Format) :-
 		::retract(edge_(From, To, Labels, Kind, EdgeOptions)),
 		::node_(To, _, _, _, ToKind, _),
 		\+ external_node_kind(ToKind),
-		Format::edge(diagram_output_file, From, To, Labels, Kind, EdgeOptions),
+		node_path(From, FromPath),
+		node_path(To, ToPath),
+		Format::edge(diagram_output_file, FromPath-From, ToPath-To, Labels, Kind, EdgeOptions),
 		fail.
 	output_edges(_, _).
 

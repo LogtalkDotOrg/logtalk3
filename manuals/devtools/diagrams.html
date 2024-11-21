@@ -1069,6 +1069,11 @@ random crashes (segmentation faults usually), often requiring re-doing
 conversions from <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to other formats. A possible workaround
 is to repeat the command until it completes without error. See for
 example the <code class="docutils literal notranslate"><span class="pre">lgt2svg.sh</span></code> script.</p>
+<p>The conversion by the <code class="docutils literal notranslate"><span class="pre">d2</span></code> command-line executable of <code class="docutils literal notranslate"><span class="pre">.d2</span></code> files to
+<code class="docutils literal notranslate"><span class="pre">.svg</span></code> files can be quite slow (as of its 0.6.8 version).</p>
+<p>Using the default d2 layout engine (<code class="docutils literal notranslate"><span class="pre">elk</span></code>) works fine with graph with
+a relatively small number of nodes and edges. When that’s not the case,
+it’s a good idea to experiment with other layout engines.</p>
 </section>
 </section>
 

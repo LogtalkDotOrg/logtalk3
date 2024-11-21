@@ -691,3 +691,10 @@ crashes (segmentation faults usually), often requiring re-doing conversions
 from `.dot` files to other formats. A possible workaround is to repeat the
 command until it completes without error. See for example the `lgt2svg.sh`
 script.
+
+The conversion by the `d2` command-line executable of `.d2` files to `.svg`
+files can be quite slow (as of its 0.6.8 version).
+
+Using the default d2 layout engine (`elk`) works fine with graph with
+a relatively small number of nodes and edges. When that's not the case,
+it's a good idea to experiment with other layout engines.
