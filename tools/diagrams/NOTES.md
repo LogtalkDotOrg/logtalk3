@@ -355,7 +355,7 @@ generated diagrams. For entity diagrams the options are:
 	print predicate cross-reference calls (`true` or `false`; default depends on the specific diagram)
 
 - `output_directory(Directory)`  
-	directory for the .dot files (an atom; default is `'./dot_dias'`)
+	directory for the `.d2` and `.dot` files (an atom; default is `'./dot_dias'`)
 
 - `exclude_directories(Directories)`  
 	list of directories to exclude (default is `[]`); all sub-directories of the excluded directories are also excluded; directories may be listed by full or relative path
@@ -438,7 +438,7 @@ For directory and file diagrams the options are:
 	print node type captions (`true` or `false`; default is `false`)
 
 - `output_directory(Directory)`  
-	directory for the .dot files (an atom; default is `'./dot_dias'`)
+	directory for the `.d2` and `.dot` files (an atom; default is `'./dot_dias'`)
 
 - `exclude_directories(Directories)`  
 	list of directories to exclude (default is `[]`)
@@ -488,7 +488,7 @@ For library diagrams the options are:
 	print node type captions (`true` or `false`; default is `false`)
 
 - `output_directory(Directory)`  
-	directory for the .dot files (an atom; default is `'./dot_dias'`)
+	directory for the `.d2` and `.dot` files (an atom; default is `'./dot_dias'`)
 
 - `exclude_directories(Directories)`  
 	list of directories to exclude (default is `[]`)

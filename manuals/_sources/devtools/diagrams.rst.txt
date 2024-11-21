@@ -398,7 +398,8 @@ generated diagrams. For entity diagrams the options are:
     default depends on the specific diagram)
 
 - | ``output_directory(Directory)``
-  | directory for the .dot files (an atom; default is ``'./dot_dias'``)
+  | directory for the ``.d2`` and ``.dot`` files (an atom; default is
+    ``'./dot_dias'``)
 
 - | ``exclude_directories(Directories)``
   | list of directories to exclude (default is ``[]``); all
@@ -511,7 +512,8 @@ For directory and file diagrams the options are:
     ``false``)
 
 - | ``output_directory(Directory)``
-  | directory for the .dot files (an atom; default is ``'./dot_dias'``)
+  | directory for the ``.d2`` and ``.dot`` files (an atom; default is
+    ``'./dot_dias'``)
 
 - | ``exclude_directories(Directories)``
   | list of directories to exclude (default is ``[]``)
@@ -574,7 +576,8 @@ For library diagrams the options are:
     ``false``)
 
 - | ``output_directory(Directory)``
-  | directory for the .dot files (an atom; default is ``'./dot_dias'``)
+  | directory for the ``.d2`` and ``.dot`` files (an atom; default is
+    ``'./dot_dias'``)
 
 - | ``exclude_directories(Directories)``
   | list of directories to exclude (default is ``[]``)
