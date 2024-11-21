@@ -50,6 +50,9 @@ lens instead of a PNG image.
 * FIXED: The `diagrams` tool to also generate an `instance/class` caption for
 metaclasses.
 
+* FIXED: Bug in the `diagrams` tool where repeated nodes could be created for
+external entities.
+
 Examples
 --------
 

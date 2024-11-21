@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:58:2,
+		version is 2:58:3,
 		author is 'Paulo Moura',
-		date is 2024-11-20,
+		date is 2024-11-21,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -171,6 +171,7 @@
 		\+ member(Entity, ExcludedEntities),
 		add_external_entity_documentation_url(logtalk, Entity, Options, EntityOptions),
 		entity_name_kind_caption(external, Entity, Name, Kind, Caption),
+		\+ ::node_(Name, _, _, _, _, _),
 		^^output_node(Name, Name, Caption, [], Kind, [tooltip(Caption)| EntityOptions]),
 		fail.
 	output_externals(Options) :-
@@ -179,6 +180,7 @@
 		\+ included_module_(Module),
 		\+ member(Module, ExcludedEntities),
 		add_external_entity_code_url(module, Module, Options, EntityOptions),
+		\+ ::node_(Module, _, _, _, _, _),
 		^^output_node(Module, Module, module, [], external_module, [tooltip(module)| EntityOptions]),
 		fail.
 	output_externals(_).
