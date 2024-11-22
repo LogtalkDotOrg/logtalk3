@@ -693,7 +693,10 @@ command until it completes without error. See for example the `lgt2svg.sh`
 script.
 
 The conversion by the `d2` command-line executable of `.d2` files to `.svg`
-files can be quite slow (as of its 0.6.8 version).
+files can be quite slow (as of its 0.6.8 version) with the default `elk`
+layout engine. The `dagre` layout engine is much faster but doesn't support
+a node referencing itself (notably, a node representing a metaclass that
+instantiates itself).
 
 Using the default d2 layout engine (`elk`) works fine with graph with
 a relatively small number of nodes and edges. When that's not the case,
