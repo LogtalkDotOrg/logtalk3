@@ -167,25 +167,6 @@ Table of referenced Logtalk entities in the diagram.
 
 ------------
 
-.. index:: node_path_/2
-.. _entity_diagram/1::node_path_/2:
-
-``node_path_/2``
-^^^^^^^^^^^^^^^^
-
-Table of node paths.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``node_path_(Node,Path)``
-| **Mode and number of proofs:**
-|    ``node_path_(?ground,?list(ground))`` - ``zero_or_more``
-
-
-------------
-
 Operators
 ---------
 

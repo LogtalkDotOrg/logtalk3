@@ -17,8 +17,8 @@ Common predicates for generating diagrams.
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:12:0
-| **Date:** 2024-11-21
+| **Version:** 3:13:0
+| **Date:** 2024-11-25
 
 | **Compilation flags:**
 |    ``static``
@@ -771,25 +771,6 @@ Outputs all edges.
 
 ------------
 
-.. index:: node_path/2
-.. _diagram/1::node_path/2:
-
-``node_path/2``
-^^^^^^^^^^^^^^^
-
-Node path.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``node_path(Node,Path)``
-| **Mode and number of proofs:**
-|    ``node_path(@ground,-list(ground))`` - ``one``
-
-
-------------
-
 .. index:: save_edge/5
 .. _diagram/1::save_edge/5:
 
@@ -1074,6 +1055,25 @@ Table of saved nodes.
 |    ``node_(Identifier,Label,Caption,Contents,Kind,Options)``
 | **Mode and number of proofs:**
 |    ``node_(?nonvar,?nonvar,?nonvar,?list(compound),?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: node_path_/2
+.. _diagram/1::node_path_/2:
+
+``node_path_/2``
+^^^^^^^^^^^^^^^^
+
+Table of node paths.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``node_path_(Node,Path)``
+| **Mode and number of proofs:**
+|    ``node_path_(?ground,?list(ground))`` - ``zero_or_more``
 
 
 ------------

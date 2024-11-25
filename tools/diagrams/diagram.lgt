@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:12:0,
+		version is 3:13:0,
 		author is 'Paulo Moura',
-		date is 2024-11-21,
+		date is 2024-11-25,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -1270,6 +1270,9 @@
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
 		;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
+			atom_concat(CodePrefix, Path, CodeURL),
+			Suffix = CodeURL
+		;	sub_atom(CodePrefix, 0, _, _, 'pearai://') ->
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
 		;	sub_atom(CodePrefix, 0, _, _, 'zed://') ->

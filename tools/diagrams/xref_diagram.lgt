@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:81:0,
+		version is 2:82:0,
 		author is 'Paulo Moura',
-		date is 2024-10-27,
+		date is 2024-11-25,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -406,6 +406,8 @@
 				atom_concat(CodePrefix, Path, CodeURL0)
 			;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
+			;	sub_atom(CodePrefix, 0, _, _, 'pearai://') ->
+				atom_concat(CodePrefix, Path, CodeURL0)
 			;	sub_atom(CodePrefix, 0, _, _, 'zed://') ->
 				atom_concat(CodePrefix, Path, CodeURL0)
 			;	sub_atom(CodePrefix, 0, _, _, 'x-bbedit://') ->
@@ -435,6 +437,7 @@
 				\+ sub_atom(CodeURL0, 0, _, _, 'vscode://'),
 				\+ sub_atom(CodeURL0, 0, _, _, 'vscodium://'),
 				\+ sub_atom(CodeURL0, 0, _, _, 'cursor://'),
+				\+ sub_atom(CodeURL0, 0, _, _, 'pearai://'),
 				\+ sub_atom(CodeURL0, 0, _, _, 'zed://'),
 				\+ sub_atom(CodeURL0, 0, _, _, 'x-bbedit://'),
 				\+ sub_atom(CodeURL0, 0, _, _, 'mvim://'),
@@ -450,6 +453,8 @@
 			;	sub_atom(CodePrefix, 0, _, _, 'vscodium://') ->
 				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
 			;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
+				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
+			;	sub_atom(CodePrefix, 0, _, _, 'pearai://') ->
 				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
 			;	sub_atom(CodePrefix, 0, _, _, 'zed://') ->
 				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
