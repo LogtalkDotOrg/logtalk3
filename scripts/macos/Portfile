@@ -81,13 +81,17 @@ post-activate {
 	ui_msg "* XVM (10.0.0 or later):             xvmlgt"
 	ui_msg "* YAP (6.3.4 or later):              yaplgt"
 	ui_msg "*"
-	ui_msg "* Remember to set the environment variable LOGTALKHOME to the path to"
-	ui_msg "* the Logtalk distribution: ${prefix}/share/logtalk"
-	ui_msg "* and the environment variable LOGTALKUSER to your local configuration"
-	ui_msg "* directory (usually ~/logtalk), which you must create by running the"
-	ui_msg "* command logtalk_user_setup. See the file \$LOGTALKHOME/CUSTOMIZE.md"
-	ui_msg "* for details on how to customize your working environment."
+	ui_msg "* To complete the Logtalk installation, define the environment variables:"
 	ui_msg "*"
+	ui_msg "*     LOGTALKHOME=${prefix}/share/logtalk"
+	ui_msg "*     LOGTALKUSER=\$HOME/logtalk"
+	ui_msg "*"
+	ui_msg "* After, run the \"logtalk_user_setup\" shell script once before running the"
+	ui_msg "* integration scripts to ensure their LOGTALKUSER directory is up-to-date."
+	ui_msg "* See the file \$LOGTALKHOME/CUSTOMIZE.md for details on how to customize"
+	ui_msg "* your working environment."
+	ui_msg "*"
+
 	if {[file exists ${prefix}/share/mime/packages/logtalk.xml]} {
 		delete ${prefix}/share/mime/packages/logtalk.xml
 	}

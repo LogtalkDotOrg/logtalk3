@@ -66,8 +66,8 @@ Examples
 Installers and installation scripts
 -----------------------------------
 
-* IMPROVED: The manual installation script to guide the users in defining the
-`LOGTALKHOME` and `LOGTALKUSER` environment variables.
+* IMPROVED: The manual installation script and MacPorts Portfile instructions
+for defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables.
 
 
 3.85.0 - November 12, 2024
