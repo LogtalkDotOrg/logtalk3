@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on November 10, 2024
+##   Last updated on November 28, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -42,7 +42,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.12"
+	echo "  0.13"
 	exit 0
 }
 
@@ -151,13 +151,13 @@ ln -sf ../share/logtalk/integration/cxlgt.sh cxlgt
 ln -sf ../share/logtalk/integration/eclipselgt.sh eclipselgt
 ln -sf ../share/logtalk/integration/gplgt.sh gplgt
 ln -sf ../share/logtalk/integration/jiplgt.sh jiplgt
-ln -sf ../share/logtalk/integration/xvmlgt.sh xvmlgt
 ln -sf ../share/logtalk/integration/quintuslgt.sh quintuslgt
 ln -sf ../share/logtalk/integration/sicstuslgt.sh sicstuslgt
 ln -sf ../share/logtalk/integration/swilgt.sh swilgt
 ln -sf ../share/logtalk/integration/taulgt.sh taulgt
 ln -sf ../share/logtalk/integration/tplgt.sh tplgt
 ln -sf ../share/logtalk/integration/xsblgt.sh xsblgt
+ln -sf ../share/logtalk/integration/xvmlgt.sh xvmlgt
 ln -sf ../share/logtalk/integration/yaplgt.sh yaplgt
 
 mkdir -p ../share/man/man1
@@ -214,15 +214,18 @@ echo "* XSB (3.8.0 or later):              xsblgt      (first run may require su
 echo "* XVM (10.0.0 or later):             xvmlgt"
 echo "* YAP (6.3.4 or later):              yaplgt"
 echo
-echo "Links to the Prolog integration scripts can be found on \"$prefix/bin\"."
-echo "Make sure that the Prolog compilers are properly installed and available"
-echo "on your execution path."
+echo "Links to the Prolog integration scripts can be found on \"$prefix/bin\","
+echo "which must be on your system PATH. Make sure that the Prolog compilers are"
+echo "properly installed and available on your execution path."
 echo
-echo "Users should ensure that the environment variable LOGTALKHOME is set to"
-echo "\"$prefix/share/logtalk\" and then run the \"logtalk_user_setup\" shell script"
-echo "once before running the integration scripts to ensure their LOGTALKUSER"
-echo "directory is up-to-date. For more details on manual installation setups,"
-echo "see the \"INSTALL.md\" file."
+echo "To complete the Logtalk installation, define the environment variables:"
+echo
+echo "    LOGTALKHOME=$prefix/share/logtalk"
+echo "    LOGTALKUSER=\$HOME/logtalk"
+echo
+echo "After, run the \"logtalk_user_setup\" shell script once before running the"
+echo "integration scripts to ensure their LOGTALKUSER directory is up-to-date."
+echo "For more details on manual installation setups, see the \"INSTALL.md\" file."
 echo
 echo "If you get an unexpected failure when using one of the Prolog integration"
 echo "scripts, consult the \"$prefix/share/logtalk/adapters/NOTES.md\" file"

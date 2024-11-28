@@ -63,6 +63,12 @@ Examples
 
 * UPDATED: The `assumptions` example with another individual example.
 
+Installers and installation scripts
+-----------------------------------
+
+* IMPROVED: The manual installation script to guide the users in defining the
+`LOGTALKHOME` and `LOGTALKUSER` environment variables.
+
 
 3.85.0 - November 12, 2024
 ==========================
