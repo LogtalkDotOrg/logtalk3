@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:59:0,
+		version is 0:59:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-06-14,
+		date is 2024-12-01,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -210,16 +210,16 @@
 		argnames is ['File', 'Line', 'Condition']
 	]).
 
-	:- public(nospy/1).
+	:- public((nospy)/1).
 	:- mode(nospy(+predicate_indicator), one).
-	:- info(nospy/1, [
+	:- info((nospy)/1, [
 		comment is 'Removes a spy point for the given predicate.',
 		argnames is ['Predicate']
 	]).
 
-	:- public(nospy/2).
+	:- public((nospy)/2).
 	:- mode(nospy(+atom, +integer), one).
-	:- info(nospy/2, [
+	:- info((nospy)/2, [
 		comment is 'Removes a breakpoint for the given file and line.',
 		argnames is ['File', 'Line']
 	]).

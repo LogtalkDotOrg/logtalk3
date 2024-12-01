@@ -69,6 +69,12 @@ Installers and installation scripts
 * IMPROVED: The manual installation script and MacPorts Portfile instructions
 for defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Compilation errors when loading the VSCode support file using the XSB
+backend.
+
 
 3.85.0 - November 12, 2024
 ==========================
