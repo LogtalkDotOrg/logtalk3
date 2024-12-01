@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:39:0,
+		version is 0:40:0,
 		author is 'Paulo Moura',
-		date is 2024-11-10,
+		date is 2024-12-01,
 		comment is 'Unit tests for the "os" library.'
 	]).
 
@@ -575,6 +575,9 @@
 
 	test(os_sleep_1_01, true) :-
 		os::sleep(1).
+
+	test(os_sleep_1_02, true) :-
+		os::sleep(1.1).
 
 	test(os_shell_1_01, true) :-
 		os::shell(cd).

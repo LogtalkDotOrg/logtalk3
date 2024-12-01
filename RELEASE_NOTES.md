@@ -37,6 +37,11 @@ Documentation
 
 * ADDED: Notes on encrypting applications using XVM.
 
+Library
+-------
+
+* FIXED: The `os::sleep/1` predicate for XSB to also accept floats.
+
 Tools
 -----
 

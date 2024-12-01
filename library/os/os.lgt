@@ -51,9 +51,9 @@
 	implements(osp)).
 
 	:- info([
-		version is 1:101:1,
+		version is 1:101:2,
 		author is 'Paulo Moura',
-		date is 2024-10-14,
+		date is 2024-12-01,
 		comment is 'Portable operating-system access predicates.',
 		remarks is [
 			'File path expansion' - 'To ensure portability, all file paths are expanded before being handed to the backend Prolog system.',
@@ -497,7 +497,8 @@
 			throw(not_available(command_line_arguments/1)).
 
 		sleep(Seconds) :-
-			{sleep(Seconds)}.
+			Milliseconds is round(Seconds * 1000),
+			{sleep_ms(Milliseconds)}.
 
 	:- elif(current_logtalk_flag(prolog_dialect, gnu)).
 
