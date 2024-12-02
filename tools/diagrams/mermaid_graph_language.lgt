@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:1:0,
+		version is 0:1:1,
 		author is 'Paulo Moura',
-		date is 2024-08-22,
+		date is 2024-12-02,
 		comment is 'Predicates for generating graph files using Mermaid.'
 	]).
 
@@ -157,7 +157,7 @@
 		node_shape_style_color(Kind, _Shape, Style, Color),
 		write(Stream, Identifier),
 		write(Stream, '["`\n**'),
-		write(Stream, Label),
+		writeq(Stream, Label),
 		write(Stream, '**\n'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
@@ -269,7 +269,7 @@
 
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
-		write(Stream, Line),
+		writeq(Stream, Line),
 		nl(Stream),
 		write_node_lines(Lines, Stream).
 

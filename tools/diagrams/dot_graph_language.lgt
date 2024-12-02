@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:10:0,
+		version is 3:10:1,
 		author is 'Paulo Moura',
-		date is 2024-11-19,
+		date is 2024-12-02,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(term_io, [
-		write_to_chars/2
+		write_term_to_chars/3
 	]).
 
 	:- uses(user, [
@@ -210,7 +210,7 @@
 		;	true
 		),
 		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11">'),
-		write_escaped_term(Stream, Label),
+		write_escaped_term_quoted(Stream, Label),
 		write(Stream, '</FONT></TD><TD> </TD></TR>'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
@@ -330,7 +330,7 @@
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
 		write(Stream, '<TR><TD> </TD><TD>'),
-		write_escaped_term(Stream, Line),
+		write_escaped_term_quoted(Stream, Line),
 		write(Stream, '</TD><TD> </TD></TR>'),
 		write_node_lines(Lines, Stream).
 
@@ -352,12 +352,11 @@
 	% which uses a slow but portable implementation as this is a non-standard
 	% functionality that only some backend systems provide in a usable form
 	write_escaped_term(Stream, Term) :-
-		(	atom(Term) ->
-			atom_chars(Term, Chars)
-		;	number(Term) ->
-			number_chars(Term, Chars)
-		;	write_to_chars(Term, Chars)
-		),
+		write_term_to_chars(Term, Chars, [quoted(false)]),
+		write_escaped_chars(Chars, Stream).
+
+	write_escaped_term_quoted(Stream, Term) :-
+		write_term_to_chars(Term, Chars, [quoted(true)]),
 		write_escaped_chars(Chars, Stream).
 
 	write_escaped_chars([], _).
@@ -368,6 +367,8 @@
 			write(Stream, '&lt;')
 		;	Char == ('&') ->
 			write(Stream, '&amp;')
+		;	Char == ('"') ->
+			write(Stream, '&quot;')
 		;	put_char(Stream, Char)
 		),
 		write_escaped_chars(Chars, Stream).

@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2024-11-21,
+		date is 2024-12-02,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(term_io, [
-		write_to_chars/2
+		write_term_to_chars/3
 	]).
 
 	:- uses(user, [
@@ -182,7 +182,7 @@
 		;	true
 		),
 		write(Stream, '## '),
-		write(Stream, Label),
+		writeq(Stream, Label),
 		write(Stream, '\n'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
@@ -312,10 +312,7 @@
 
 	write_node_lines([], _).
 	write_node_lines([Line| Lines], Stream) :-
-		(	atom(Line) ->
-			atom_chars(Line, Chars)
-		;	write_to_chars(Line, Chars)
-		),
+		write_term_to_chars(Line, Chars, [quoted(true)]),
 		write_escaped_chars(Chars, Stream),
 		write(Stream, '  \n'),
 		write_node_lines(Lines, Stream).

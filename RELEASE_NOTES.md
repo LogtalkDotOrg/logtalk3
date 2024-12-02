@@ -63,6 +63,9 @@ metaclasses.
 * FIXED: Bug in the `diagrams` tool where repeated nodes could be created for
 external entities.
 
+* FIXED: The `diagrams` tool support for the graph languages to quote atoms
+in labels and node contents when required.
+
 * FIXED: Bug in the `lgtdoc` tool when printing a warning on missing entity
 directive `info/1` key.
 
