@@ -29,9 +29,9 @@
 :- category(lgtdoc_messages).
 
 	:- info([
-		version is 4:0:0,
+		version is 4:0:1,
 		author is 'Paulo Moura',
-		date is 2024-05-07,
+		date is 2024-12-02,
 		comment is 'Logtalk documentation tool default message translations.'
 	]).
 
@@ -67,7 +67,7 @@
 		),
 		message_context(File, Line, Type, Entity).
 
-	message_tokens(missing_entity_info_key(Key, File, Line, Type, Entity)) -->
+	message_tokens(missing_entity_info_key(Key, Type, Entity, File, Line)) -->
 		['Missing info/1 key: ~q'-[Key], nl],
 		message_context(File, Line, Type, Entity).
 

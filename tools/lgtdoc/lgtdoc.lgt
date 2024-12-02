@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:1:1,
+		version is 11:1:2,
 		author is 'Paulo Moura',
-		date is 2024-10-01,
+		date is 2024-12-02,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -615,7 +615,7 @@
 			write_xml_close_tag(Stream, parameters)
 		;	compound(Entity),
 			\+ member(parnames(_), Info) ->
-			warn_on_missing_entity_info_key(parameters, Type, EntityName)
+			warn_on_missing_entity_info_key(parameters, Type, Entity)
 		;	true
 		),
 		(	member(author(Author), Info) ->
