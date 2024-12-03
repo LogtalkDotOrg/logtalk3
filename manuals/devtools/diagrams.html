@@ -598,24 +598,28 @@ default depends on the specific diagram)</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_directories(Directories)</span></code></div>
 <div class="line">list of directories to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>); all
 sub-directories of the excluded directories are also excluded;
-directories may be listed by full or relative path</div>
+directories may be listed by full or relative path; no nodes are
+generated for excluded directories</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_files(Files)</span></code></div>
 <div class="line">list of source files to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>); files may be
-listed by full path or basename, with or without extension</div>
+listed by full path or basename, with or without extension; no nodes
+are generated for excluded files</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_libraries(Libraries)</span></code></div>
 <div class="line">list of libraries to exclude (default is
-<code class="docutils literal notranslate"><span class="pre">[startup,</span> <span class="pre">scratch_directory]</span></code>)</div>
+<code class="docutils literal notranslate"><span class="pre">[startup,</span> <span class="pre">scratch_directory]</span></code>); no nodes are generated for
+excluded libraries</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_entities(Entities)</span></code></div>
-<div class="line">list of entities to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</div>
+<div class="line">list of entities to exclude (default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>); no nodes are
+generated for excluded entities and their predicates</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -887,6 +891,8 @@ entity nodes (<code class="docutils literal notranslate"><span class="pre">true<
 </div>
 </li>
 </ul>
+<p>All exclude option are used when deciding if a library, directory, file,
+entity, or predicate is excluded.</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">zoom(true)</span></code> option, the <code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code> option
 applies only to the top diagram; sub-diagrams will use their own layout
 default.</p>

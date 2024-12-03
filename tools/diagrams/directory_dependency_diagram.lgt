@@ -23,9 +23,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 3:0:1,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2024-04-01,
+		date is 2024-12-03,
 		comment is 'Predicates for generating directory dependency diagrams. A dependency exists when an entity in one directory makes a reference to an entity in another directory.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [directory_load_diagram(_), file_load_diagram(_), library_load_diagram(_)]
@@ -47,13 +47,9 @@
 	output_library(Project, Directory, Options) :-
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
-		^^option(exclude_directories(ExcludedDirectories), Options),
 		once((
 			depends_directory(Directory, OtherDirectory, _),
-			\+ (
-				member(ExcludedDirectory, ExcludedDirectories),
-				sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)
-			)
+			^^not_excluded_directory(OtherDirectory, Options)
 		)),
 		parameter(1, Format),
 		file_dependency_diagram(Format)::diagram_name_suffix(Suffix),
@@ -64,12 +60,8 @@
 		fail.
 	% second, output edges for all directories that this directory refers to
 	output_library(_, Directory, Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
 		depends_directory(Directory, OtherDirectory, Kind),
-		\+ (
-			member(ExcludedDirectory, ExcludedDirectories),
-			sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)
-		),
+		^^not_excluded_directory(OtherDirectory, Options),
 		% ensure that this dependency is not already recorded
 		\+ ^^edge(Directory, OtherDirectory, _, _, _),
 		^^save_edge(Directory, OtherDirectory, [depends], depends_on_directory, [tooltip(depends)| Options]),

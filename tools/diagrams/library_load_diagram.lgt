@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:33:1,
+		version is 2:34:0,
 		author is 'Paulo Moura',
-		date is 2024-04-01,
+		date is 2024-12-03,
 		comment is 'Predicates for generating library loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_dependency_diagram(_), directory_dependency_diagram(_), file_dependency_diagram(_), entity_diagram(_)]
@@ -69,7 +69,6 @@
 		fail.
 	% second, output edges for all libraries loaded by files in this library
 	output_library(Library, Directory, Options) :-
-		^^option(exclude_libraries(ExcludedLibraries), Options),
 		% any Logtalk or Prolog library file may load other files
 		(	logtalk::loaded_file_property(File, directory(Directory))
 		;	modules_diagram_support::loaded_file_property(File, directory(Directory))
@@ -78,7 +77,7 @@
 		(	logtalk::loaded_file_property(Other, parent(File)),
 			logtalk::loaded_file_property(Other, library(OtherLibrary)),
 			Library \== OtherLibrary,
-			\+ member(OtherLibrary, ExcludedLibraries),
+			^^not_excluded_library(OtherLibrary, Options),
 			logtalk::loaded_file_property(Other, directory(OtherDirectory))
 		;	modules_diagram_support::loaded_file_property(Other, parent(File)),
 			modules_diagram_support::loaded_file_property(Other, directory(OtherDirectory)),
@@ -94,7 +93,7 @@
 			logtalk_library_path(OtherLibrary, _),
 			logtalk::expand_library_path(OtherLibrary, OtherDirectory) ->
 			% file found in a directory corresponding to a Logtalk library
-			\+ member(OtherLibrary, ExcludedLibraries),
+			^^not_excluded_library(OtherLibrary, Options),
 			^^remember_referenced_logtalk_library(OtherLibrary, OtherDirectory)
 		;	modules_diagram_support::module_property(OtherLibrary, file(Other)) ->
 			% Prolog library module

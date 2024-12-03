@@ -45,6 +45,9 @@ Library
 Tools
 -----
 
+* CHANGED: The `diagrams` tool to use all the exclude options when deciding
+if a library, directory, file, entity, or predicate is excluded.
+
 * CHANGED: The `diagrams` tool now uses a Unicode glyph for the magnifying
 lens instead of a PNG image.
 

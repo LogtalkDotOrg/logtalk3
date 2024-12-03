@@ -24,9 +24,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 2:16:1,
+		version is 2:17:0,
 		author is 'Paulo Moura',
-		date is 2024-03-30,
+		date is 2024-12-03,
 		comment is 'Common predicates for generating library diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), entity_diagram(_)]
@@ -138,9 +138,8 @@
 		::retractall(referenced_prolog_library_(Library, Path)),
 		fail.
 	output_externals(Options) :-
-		^^option(exclude_libraries(ExcludedLibraries), Options),
 		::retract(referenced_logtalk_library_(Library, Directory)),
-		\+ member(Library, ExcludedLibraries),
+		^^not_excluded_library(Library, Options),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(logtalk, LinkingOptions, Library, NodeOptions),
@@ -150,9 +149,8 @@
 		),
 		fail.
 	output_externals(Options) :-
-		^^option(exclude_libraries(ExcludedLibraries), Options),
 		::retract(referenced_prolog_library_(Library, Directory)),
-		\+ member(Library, ExcludedLibraries),
+		^^not_excluded_library(Library, Options),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		add_library_documentation_url(prolog, LinkingOptions, Library, NodeOptions),

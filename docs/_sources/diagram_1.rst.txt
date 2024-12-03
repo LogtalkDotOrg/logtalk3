@@ -17,7 +17,7 @@ Common predicates for generating diagrams.
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:14:0
+| **Version:** 3:15:0
 | **Date:** 2024-12-03
 
 | **Compilation flags:**
@@ -809,10 +809,48 @@ Outputs missing external nodes (usually due to unloaded resources) that are refe
 
 ------------
 
-.. index:: not_excluded_file/4
-.. _diagram/1::not_excluded_file/4:
+.. index:: not_excluded_library/2
+.. _diagram/1::not_excluded_library/2:
 
-``not_excluded_file/4``
+``not_excluded_library/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the given library is not excluded from the generated output.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``not_excluded_library(Library,Options)``
+| **Mode and number of proofs:**
+|    ``not_excluded_library(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: not_excluded_directory/2
+.. _diagram/1::not_excluded_directory/2:
+
+``not_excluded_directory/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the given directory is not excluded from the generated output.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``not_excluded_directory(Directory,Options)``
+| **Mode and number of proofs:**
+|    ``not_excluded_directory(+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: not_excluded_file/3
+.. _diagram/1::not_excluded_file/3:
+
+``not_excluded_file/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension. Excluded directories may be listed by full or relative path.
@@ -821,9 +859,47 @@ True when the given file is not excluded from the generated output. Excluded fil
 |    ``static``
 
 | **Template:**
-|    ``not_excluded_file(Path,Basename,ExcludedDirectories,ExcludedFiles)``
+|    ``not_excluded_file(Path,Basename,Options)``
 | **Mode and number of proofs:**
-|    ``not_excluded_file(+atom,+atom,+list(atom),+list(atom))`` - ``zero_or_one``
+|    ``not_excluded_file(+atom,+atom,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: not_excluded_entity/3
+.. _diagram/1::not_excluded_entity/3:
+
+``not_excluded_entity/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the given entity is not excluded from the generated output.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``not_excluded_entity(Kind,Entity,Options)``
+| **Mode and number of proofs:**
+|    ``not_excluded_entity(+atom,+entity_identifier,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: not_excluded_entity/2
+.. _diagram/1::not_excluded_entity/2:
+
+``not_excluded_entity/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when the given entity is not excluded from the generated output.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``not_excluded_entity(Entity,Options)``
+| **Mode and number of proofs:**
+|    ``not_excluded_entity(+atom,+list(compound))`` - ``zero_or_one``
 
 
 ------------
@@ -980,21 +1056,21 @@ Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph
 
 ------------
 
-.. index:: supported_text_editor_prefix/1
-.. _diagram/1::supported_text_editor_prefix/1:
+.. index:: supported_editor_url_scheme_prefix/1
+.. _diagram/1::supported_editor_url_scheme_prefix/1:
 
-``supported_text_editor_prefix/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``supported_editor_url_scheme_prefix/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Table of URL prefixes for text editors that supports a URL scheme to open diagram links.
+Table of prefixes for text editors that supports a URL scheme to open diagram links.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``supported_text_editor_prefix(Prefix)``
+|    ``supported_editor_url_scheme_prefix(Prefix)``
 | **Mode and number of proofs:**
-|    ``supported_text_editor_prefix(?atom)`` - ``zero_or_more``
+|    ``supported_editor_url_scheme_prefix(?atom)`` - ``zero_or_more``
 
 
 ------------

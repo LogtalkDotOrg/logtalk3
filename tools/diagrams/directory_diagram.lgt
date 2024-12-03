@@ -23,9 +23,9 @@
 	extends(diagram(Format))).
 
 	:- info([
-		version is 1:12:1,
+		version is 1:13:0,
 		author is 'Paulo Moura',
-		date is 2024-03-30,
+		date is 2024-12-03,
 		comment is 'Common predicates for generating directory diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -125,23 +125,15 @@
 		::retractall(referenced_prolog_directory_(Path)),
 		fail.
 	output_externals(Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
 		::retract(referenced_logtalk_directory_(Directory)),
-		\+ (
-			member(ExcludedDirectory, ExcludedDirectories),
-			sub_atom(Directory, 0, _, _, ExcludedDirectory)
-		),
+		^^not_excluded_directory(Directory, Options),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^output_node(Directory, Relative, directory, [], external_directory, LinkingOptions),
 		fail.
 	output_externals(Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
 		::retract(referenced_prolog_directory_(Directory)),
-		\+ (
-			member(ExcludedDirectory, ExcludedDirectories),
-			sub_atom(Directory, 0, _, _, ExcludedDirectory)
-		),
+		^^not_excluded_directory(Directory, Options),
 		^^add_link_options(Directory, Options, LinkingOptions),
 		^^omit_path_prefix(Directory, Options, Relative),
 		^^output_node(Directory, Relative, directory, [], external_directory, LinkingOptions),

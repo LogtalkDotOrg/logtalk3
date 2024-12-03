@@ -23,7 +23,7 @@
 	extends(options)).
 
 	:- info([
-		version is 3:14:0,
+		version is 3:15:0,
 		author is 'Paulo Moura',
 		date is 2024-12-03,
 		comment is 'Common predicates for generating diagrams.',
@@ -151,9 +151,8 @@
 	output_all_libraries(Options) :-
 		self(Self),
 		format_object(Format),
-		^^option(exclude_libraries(ExcludedLibraries), Options),
 		logtalk_library_path(Library, _),
-		\+ member(Library, ExcludedLibraries),
+		not_excluded_library(Library, Options),
 		logtalk::expand_library_path(Library, Directory),
 		\+ \+ logtalk::loaded_file_property(_, directory(Directory)),
 		% loaded library
@@ -260,22 +259,18 @@
 		::output_sub_diagrams(UserOptions).
 
 	output_library(_Library, Directory, Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
-		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, directory(Directory)),
 		logtalk::loaded_file_property(Path, basename(Basename)),
-		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
+		not_excluded_file(Path, Basename, Options),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library(_Library, Directory, Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
-		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, directory(Directory)),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
 		\+ logtalk::loaded_file(Path),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
+		not_excluded_file(Path, Basename, Options),
 		::output_file(Path, Basename, Directory, Options),
 		fail.
 	output_library(_, _, _).
@@ -575,22 +570,18 @@
 
 	output_all_files(Options) :-
 		self(Self),
-		^^option(exclude_directories(ExcludedDirectories), Options),
-		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file(Path),
 		logtalk::loaded_file_property(Path, basename(Basename)),
 		logtalk::loaded_file_property(Path, directory(Directory)),
-		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
+		not_excluded_file(Path, Basename, Options),
 		logtalk::print_message(comment, diagrams, generating_diagram(Self, file, Path)),
 		::output_file(Path, Basename, Directory, Options),
 		logtalk::print_message(comment, diagrams, generated_diagram(Self, file, Path)),
 		fail.
 	output_all_files(Options) :-
 		self(Self),
-		^^option(exclude_directories(ExcludedDirectories), Options),
-		^^option(exclude_files(ExcludedFiles), Options),
 		modules_diagram_support::loaded_file_property(Path, basename(Basename)),
-		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles),
+		not_excluded_file(Path, Basename, Options),
 		% Logtalk source files may also be loaded from Prolog source files but
 		% then the file was already enumerated by the previous clause
 		\+ logtalk::loaded_file(Path),
@@ -746,14 +737,13 @@
 
 	output_rlibrary(TopLibrary, TopPath, Options) :-
 		format_object(Format),
-		^^option(exclude_libraries(ExcludedLibraries), Options),
 		atom_concat(library_, TopLibrary, TopIdentifier),
 		add_link_options(TopPath, Options, TopGraphOptions),
 		omit_path_prefix(TopPath, Options, TopRelative),
 		Format::graph_header(diagram_output_file, TopIdentifier, TopRelative, library, TopGraphOptions),
 		::output_library(TopLibrary, TopPath, [container(TopIdentifier)| TopGraphOptions]),
 		Format::graph_footer(diagram_output_file, TopIdentifier, TopRelative, library, TopGraphOptions),
-		sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path),
+		sub_library(TopLibrary, TopPath, Library, Path, Options),
 			atom_concat(library_, Library, Identifier),
 			add_link_options(Path, Options, GraphOptions),
 			atom_concat(TopPath, Relative, Path),
@@ -763,10 +753,10 @@
 		fail.
 	output_rlibrary(_, _, _).
 
-	sub_library(TopLibrary, TopPath, ExcludedLibraries, Library, Path) :-
+	sub_library(TopLibrary, TopPath, Library, Path, Options) :-
 		logtalk_library_path(Library, _),
 		Library \== TopLibrary,
-		\+ member(Library, ExcludedLibraries),
+		not_excluded_library(Library, Options),
 		logtalk::expand_library_path(Library, Path),
 		atom_concat(TopPath, RelativePath, Path),
 		RelativePath \== ''.
@@ -786,22 +776,18 @@
 	]).
 
 	output_rdirectory(Project, TopPath, Options) :-
-		^^option(exclude_directories(ExcludedDirectories), Options),
 		add_link_options(TopPath, Options, TopGraphOptions),
 		::output_library(Project, TopPath, TopGraphOptions),
-		sub_directory(TopPath, ExcludedDirectories, Directory, Path),
+		sub_directory(TopPath, Directory, Path, Options),
 			add_link_options(Path, Options, GraphOptions),
 			::output_library(Directory, Path, GraphOptions),
 		fail.
 	output_rdirectory(_, _, _).
 
-	sub_directory(TopPath, ExcludedDirectories, SubDirectory, SubDirectoryPath) :-
+	sub_directory(TopPath, SubDirectory, SubDirectoryPath, Options) :-
 		os::directory_files(TopPath, SubDirectories, [type(directory), dot_files(false), paths(relative)]),
 		member(Directory, SubDirectories),
-		\+ (
-			member(ExcludedDirectory, ExcludedDirectories),
-			sub_atom(Directory, 0, _, _, ExcludedDirectory)
-		),
+		not_excluded_directory(Directory, Options),
 		atom_concat(TopPath, Directory, DirectoryPath0),
 		(	sub_atom(DirectoryPath0, _, 1, 0, '/') ->
 			DirectoryPath = DirectoryPath0
@@ -809,7 +795,7 @@
 		),
 		(	SubDirectory = Directory,
 			SubDirectoryPath = DirectoryPath
-		;	sub_directory(DirectoryPath, ExcludedDirectories, SubDirectory, SubDirectoryPath)
+		;	sub_directory(DirectoryPath, SubDirectory, SubDirectoryPath, Options)
 		).
 
 	:- protected(output_externals/1).
@@ -989,12 +975,69 @@
 	% do nothing by default
 	output_missing_externals(_).
 
-	:- protected(not_excluded_file/4).
-	:- mode(not_excluded_file(+atom, +atom, +list(atom), +list(atom)), zero_or_one).
-	:- info(not_excluded_file/4, [
-		comment is 'True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension. Excluded directories may be listed by full or relative path.',
-		argnames is ['Path', 'Basename', 'ExcludedDirectories', 'ExcludedFiles']
+	:- protected(not_excluded_library/2).
+	:- mode(not_excluded_library(+atom, +list(compound)), zero_or_one).
+	:- info(not_excluded_library/2, [
+		comment is 'True when the given library is not excluded from the generated output.',
+		argnames is ['Library', 'Options']
 	]).
+
+	not_excluded_library(Library, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_directories(ExcludedDirectories), Options),
+		not_excluded_library(Library, ExcludedLibraries, ExcludedDirectories).
+
+	not_excluded_library(_, [], []) :-
+		% most common case
+		!.
+	not_excluded_library(Library, ExcludedLibraries, ExcludedDirectories) :-
+		\+ member(Library, ExcludedLibraries),
+		logtalk::expand_library_path(Library, Directory),
+		\+ member(Directory, ExcludedDirectories).
+
+	:- protected(not_excluded_directory/2).
+	:- mode(not_excluded_directory(+atom, +list(compound)), zero_or_one).
+	:- info(not_excluded_directory/2, [
+		comment is 'True when the given directory is not excluded from the generated output.',
+		argnames is ['Directory', 'Options']
+	]).
+
+	not_excluded_directory(Directory, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_directories(ExcludedDirectories0), Options),
+		findall(
+			ExcludedDirectory,
+			(	member(ExcludedLibrary, ExcludedLibraries),
+				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
+			),
+			ExcludedDirectories,
+			ExcludedDirectories0
+		),
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(Directory, 0, _, _, ExcludedDirectory)
+		).
+
+	:- protected(not_excluded_file/3).
+	:- mode(not_excluded_file(+atom, +atom, +list(compound)), zero_or_one).
+	:- info(not_excluded_file/3, [
+		comment is 'True when the given file is not excluded from the generated output. Excluded files may be specified by full path or by basename and with or without extension. Excluded directories may be listed by full or relative path.',
+		argnames is ['Path', 'Basename', 'Options']
+	]).
+
+	not_excluded_file(Path, Basename, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_directories(ExcludedDirectories0), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
+		findall(
+			ExcludedDirectory,
+			(	member(ExcludedLibrary, ExcludedLibraries),
+				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
+			),
+			ExcludedDirectories,
+			ExcludedDirectories0
+		),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles).
 
 	not_excluded_file(_, _, [], []) :-
 		% most common case
@@ -1024,6 +1067,112 @@
 				atom_concat(Source, Extension, Basename),
 				member(Source, ExcludedFiles)
 		).
+
+	:- protected(not_excluded_entity/3).
+	:- mode(not_excluded_entity(+atom, +entity_identifier, +list(compound)), zero_or_one).
+	:- info(not_excluded_entity/3, [
+		comment is 'True when the given entity is not excluded from the generated output.',
+		argnames is ['Kind', 'Entity', 'Options']
+	]).
+
+	not_excluded_entity(Kind, Entity, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_directories(ExcludedDirectories0), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
+		^^option(exclude_entities(ExcludedEntities), Options),
+		findall(
+			ExcludedDirectory,
+			(	member(ExcludedLibrary, ExcludedLibraries),
+				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
+			),
+			ExcludedDirectories,
+			ExcludedDirectories0
+		),
+		not_excluded_entity(Kind, Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities).
+
+	not_excluded_entity(_, _, [], [], []) :-
+		% most common case
+		!.
+	not_excluded_entity(object, Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities) :-
+		\+ member(Entity, ExcludedEntities),
+		(	current_object(Entity) ->
+			object_property(Entity, file(Path)),
+			object_property(Entity, file(Basename, _))
+		;	% entity is not loaded
+			fail
+		),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles).
+	not_excluded_entity(protocol, Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities) :-
+		\+ member(Entity, ExcludedEntities),
+		(	current_protocol(Entity) ->
+			protocol_property(Entity, file(Path)),
+			protocol_property(Entity, file(Basename, _))
+		;	% entity is not loaded
+			fail
+		),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles).
+	not_excluded_entity(category, Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities) :-
+		\+ member(Entity, ExcludedEntities),
+		(	current_category(Entity) ->
+			category_property(Entity, file(Path)),
+			category_property(Entity, file(Basename, _))
+		;	% entity is not loaded
+			fail
+		),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles).
+	not_excluded_entity(module, Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities) :-
+		\+ member(Entity, ExcludedEntities),
+		(	{current_module(Entity)} ->
+			modules_diagram_support::module_property(Entity, file(Path)),
+			modules_diagram_support::module_property(Entity, file(Basename, _))
+		;	% entity is not loaded
+			fail
+		),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles).
+
+	:- protected(not_excluded_entity/2).
+	:- mode(not_excluded_entity(+atom, +list(compound)), zero_or_one).
+	:- info(not_excluded_entity/2, [
+		comment is 'True when the given entity is not excluded from the generated output.',
+		argnames is ['Entity', 'Options']
+	]).
+
+	not_excluded_entity(Entity, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_directories(ExcludedDirectories0), Options),
+		^^option(exclude_files(ExcludedFiles), Options),
+		^^option(exclude_entities(ExcludedEntities), Options),
+		findall(
+			ExcludedDirectory,
+			(	member(ExcludedLibrary, ExcludedLibraries),
+				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
+			),
+			ExcludedDirectories,
+			ExcludedDirectories0
+		),
+		not_excluded_entity(Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities).
+
+	not_excluded_entity(_, [], [], []) :-
+		% most common case
+		!.
+	not_excluded_entity(Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities) :-
+		\+ member(Entity, ExcludedEntities),
+		(	current_object(Entity) ->
+			object_property(Entity, file(Path)),
+			object_property(Entity, file(Basename, _))
+		;	atom(Entity), current_protocol(Entity) ->
+			protocol_property(Entity, file(Path)),
+			protocol_property(Entity, file(Basename, _))
+		;	current_category(Entity) ->
+			category_property(Entity, file(Path)),
+			category_property(Entity, file(Basename, _))
+		;	{atom(Entity), current_module(Entity)} ->
+			modules_diagram_support::module_property(Entity, file(Path)),
+			modules_diagram_support::module_property(Entity, file(Basename, _))
+		;	% entity is not loaded
+			fail
+		),
+		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles).
 
 	:- protected(output_file_path/4).
 	:- mode(output_file_path(+atom, +list(atom), +object_identifier, -atom), one).
