@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:10:1,
+		version is 3:10:2,
 		author is 'Paulo Moura',
-		date is 2024-12-02,
+		date is 2024-12-03,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -187,7 +187,7 @@
 	graph_style_margin_color(entity, rounded, 10, snow).
 
 	node(Stream, Identifier, Label, Caption, Contents, Kind, Options) :-
-		node_shape_style_color(Kind, Shape, Style, Color),
+		node_shape_style_color(Kind, Shape, Style, Color, Quoted),
 		write(Stream, '"'),
 		write(Stream, Identifier),
 		write(Stream, '" ['),
@@ -210,55 +210,55 @@
 		;	true
 		),
 		write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="11">'),
-		write_escaped_term_quoted(Stream, Label),
+		write_escaped_term(Stream, Label, [quoted(Quoted)]),
 		write(Stream, '</FONT></TD><TD> </TD></TR>'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
 			write(Stream, '<TR><TD> </TD><TD><FONT POINT-SIZE="7">'),
-			write_escaped_term(Stream, Caption),
+			write_escaped_term(Stream, Caption, []),
 			write(Stream, '</FONT></TD><TD> </TD></TR>')
 		;	true
 		),
 		(	Contents == [] ->
 			true
 		;	write(Stream, '<TR><TD> </TD></TR>'),
-			write_node_lines(Contents, Stream)
+			write_node_lines(Contents, Stream, [quoted(Quoted)])
 		),
 		write(Stream, '</TABLE>>]\n').
 
 	% entities belonging to the file or library being documented
-	node_shape_style_color(prototype, box, filled, cornsilk).
-	node_shape_style_color(class, box, filled, yellow).
-	node_shape_style_color(instance, box, filled, yellow).
-	node_shape_style_color(instance_and_class, box, filled, yellow).
-	node_shape_style_color(protocol, note, filled, aquamarine).
-	node_shape_style_color(category, component, filled, lightcyan).
-	node_shape_style_color(module, tab, filled, plum).
-	node_shape_style_color(file, box, filled, paleturquoise).
-	node_shape_style_color(directory, tab, filled, lightsalmon).
-	node_shape_style_color(library, tab, filled, lightsalmon).
+	node_shape_style_color(prototype,                   box,       filled,          cornsilk,             true).
+	node_shape_style_color(class,                       box,       filled,          yellow,               true).
+	node_shape_style_color(instance,                    box,       filled,          yellow,               true).
+	node_shape_style_color(instance_and_class,          box,       filled,          yellow,               true).
+	node_shape_style_color(protocol,                    note,      filled,          aquamarine,           true).
+	node_shape_style_color(category,                    component, filled,          lightcyan,            true).
+	node_shape_style_color(module,                      tab,       filled,          plum,                 true).
+	node_shape_style_color(file,                        box,       filled,          paleturquoise,        false).
+	node_shape_style_color(directory,                   tab,       filled,          lightsalmon,          false).
+	node_shape_style_color(library,                     tab,       filled,          lightsalmon,          false).
 	% external entities to the file or library being documented
-	node_shape_style_color(external_prototype, box, 'filled,dashed', beige).
-	node_shape_style_color(external_class, box, 'filled,dashed', lightgoldenrodyellow).
-	node_shape_style_color(external_instance, box, 'filled,dashed', lightgoldenrodyellow).
-	node_shape_style_color(external_instance_and_class, box, 'filled,dashed', lightgoldenrodyellow).
-	node_shape_style_color(external_protocol, note, 'filled,dashed', mediumaquamarine).
-	node_shape_style_color(external_category, component, 'filled,dashed', cyan).
-	node_shape_style_color(external_module, tab, 'filled,dashed', thistle).
-	node_shape_style_color(external_file, box, 'filled,dashed', powderblue).
-	node_shape_style_color(external_directory, tab, 'filled,dashed', salmon).
-	node_shape_style_color(external_library, tab, 'filled,dashed', salmon).
+	node_shape_style_color(external_prototype,          box,       'filled,dashed', beige,                true).
+	node_shape_style_color(external_class,              box,       'filled,dashed', lightgoldenrodyellow, true).
+	node_shape_style_color(external_instance,           box,       'filled,dashed', lightgoldenrodyellow, true).
+	node_shape_style_color(external_instance_and_class, box,       'filled,dashed', lightgoldenrodyellow, true).
+	node_shape_style_color(external_protocol,           note,      'filled,dashed', mediumaquamarine,     true).
+	node_shape_style_color(external_category,           component, 'filled,dashed', cyan,                 true).
+	node_shape_style_color(external_module,             tab,       'filled,dashed', thistle,              true).
+	node_shape_style_color(external_file,               box,       'filled,dashed', powderblue,           false).
+	node_shape_style_color(external_directory,          tab,       'filled,dashed', salmon,               false).
+	node_shape_style_color(external_library,            tab,       'filled,dashed', salmon,               false).
 	% predicates of the entities being documented
-	node_shape_style_color(directive, box, filled, bisque).
-	node_shape_style_color(predicate, box, filled, cornsilk).
-	node_shape_style_color(public_predicate, box, filled, springgreen).
-	node_shape_style_color(protected_predicate, box, filled, yellow).
-	node_shape_style_color(private_predicate, box, filled, indianred1).
-	node_shape_style_color(local_predicate, box, filled, cornsilk).
-	node_shape_style_color(multifile_predicate, box, filled, skyblue).
-	node_shape_style_color(exported_predicate, box, filled, springgreen).
+	node_shape_style_color(directive,                   box,       filled,          bisque,               true).
+	node_shape_style_color(predicate,                   box,       filled,          cornsilk,             true).
+	node_shape_style_color(public_predicate,            box,       filled,          springgreen,          true).
+	node_shape_style_color(protected_predicate,         box,       filled,          yellow,               true).
+	node_shape_style_color(private_predicate,           box,       filled,          indianred1,           true).
+	node_shape_style_color(local_predicate,             box,       filled,          cornsilk,             true).
+	node_shape_style_color(multifile_predicate,         box,       filled,          skyblue,              true).
+	node_shape_style_color(exported_predicate,          box,       filled,          springgreen,          true).
 	% external predicates to the entities being documented
-	node_shape_style_color(external_predicate, box, 'filled,dashed', beige).
+	node_shape_style_color(external_predicate,          box,       'filled,dashed', beige,                true).
 
 	edge(Stream, _-Start, _-End, Labels, Kind, Options) :-
 		!,
@@ -324,24 +324,24 @@
 	write_key_value(Stream, Key, Value) :-
 		write(Stream, Key),
 		write(Stream, '="'),
-		write_escaped_term(Stream, Value),
+		write_escaped_term(Stream, Value, []),
 		write(Stream, '"').
 
-	write_node_lines([], _).
-	write_node_lines([Line| Lines], Stream) :-
+	write_node_lines([], _, _).
+	write_node_lines([Line| Lines], Stream, Options) :-
 		write(Stream, '<TR><TD> </TD><TD>'),
-		write_escaped_term_quoted(Stream, Line),
+		write_escaped_term(Stream, Line, Options),
 		write(Stream, '</TD><TD> </TD></TR>'),
-		write_node_lines(Lines, Stream).
+		write_node_lines(Lines, Stream, Options).
 
 	write_edge_lines([], _).
 	write_edge_lines([Line| Lines], Stream) :-
 		write_edge_lines(Lines, Line, Stream).
 
 	write_edge_lines([], Line, Stream) :-
-		write_escaped_term(Stream, Line).
+		write_escaped_term(Stream, Line, []).
 	write_edge_lines([Next| Lines], Line, Stream) :-
-		write_escaped_term(Stream, Line),
+		write_escaped_term(Stream, Line, []),
 		write(Stream, '<BR/>'),
 		write_edge_lines(Lines, Next, Stream).
 
@@ -351,12 +351,8 @@
 	% solution requires writing a non-atomic term to a list of characters,
 	% which uses a slow but portable implementation as this is a non-standard
 	% functionality that only some backend systems provide in a usable form
-	write_escaped_term(Stream, Term) :-
-		write_term_to_chars(Term, Chars, [quoted(false)]),
-		write_escaped_chars(Chars, Stream).
-
-	write_escaped_term_quoted(Stream, Term) :-
-		write_term_to_chars(Term, Chars, [quoted(true)]),
+	write_escaped_term(Stream, Term, Options) :-
+		write_term_to_chars(Term, Chars, Options),
 		write_escaped_chars(Chars, Stream).
 
 	write_escaped_chars([], _).

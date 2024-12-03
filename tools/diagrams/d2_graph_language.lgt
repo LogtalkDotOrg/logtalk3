@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2024-12-02,
+		date is 2024-12-03,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -159,7 +159,7 @@
 	graph_style_color(entity,      8, snow).
 
 	node(Stream, Identifier, Label, Caption, Contents, Kind, Options) :-
-		node_shape_dash_color(Kind, Shape, Dash, Color),
+		node_shape_dash_color(Kind, Shape, Dash, Color, Quoted),
 		write(Stream, '"'),
 		write(Stream, Identifier),
 		write(Stream, '_": {\n'),
@@ -182,7 +182,7 @@
 		;	true
 		),
 		write(Stream, '## '),
-		writeq(Stream, Label),
+		write_term(Stream, Label, [quoted(Quoted)]),
 		write(Stream, '\n'),
 		(	^^option(node_type_captions(true), Options),
 			Caption \== '' ->
@@ -193,42 +193,42 @@
 		),
 		(	Contents == [] ->
 			true
-		;	write_node_lines(Contents, Stream)
+		;	write_node_lines(Contents, Stream, [quoted(Quoted)])
 		),
 		write(Stream, '|\n'),
 		write(Stream, '}\n').
 
 	% entities belonging to the file or library being documented
-	node_shape_dash_color(prototype,                   rectangle, 0, cornsilk).
-	node_shape_dash_color(class,                       rectangle, 0, yellow).
-	node_shape_dash_color(instance,                    rectangle, 0, yellow).
-	node_shape_dash_color(instance_and_class,          rectangle, 0, yellow).
-	node_shape_dash_color(protocol,                    page,      0, aquamarine).
-	node_shape_dash_color(category,                    rectangle, 0, lightcyan).
-	node_shape_dash_color(module,                      package,   0, plum).
-	node_shape_dash_color(file,                        rectangle, 0, paleturquoise).
-	node_shape_dash_color(directory,                   package,   0, lightsalmon).
-	node_shape_dash_color(library,                     package,   0, lightsalmon).
+	node_shape_dash_color(prototype,                   rectangle, 0, cornsilk,             true).
+	node_shape_dash_color(class,                       rectangle, 0, yellow,               true).
+	node_shape_dash_color(instance,                    rectangle, 0, yellow,               true).
+	node_shape_dash_color(instance_and_class,          rectangle, 0, yellow,               true).
+	node_shape_dash_color(protocol,                    page,      0, aquamarine,           true).
+	node_shape_dash_color(category,                    rectangle, 0, lightcyan,            true).
+	node_shape_dash_color(module,                      package,   0, plum,                 true).
+	node_shape_dash_color(file,                        rectangle, 0, paleturquoise,        false).
+	node_shape_dash_color(directory,                   package,   0, lightsalmon,          false).
+	node_shape_dash_color(library,                     package,   0, lightsalmon,          false).
 	% external entities to the file or library being documented
-	node_shape_dash_color(external_prototype,          rectangle, 2, beige).
-	node_shape_dash_color(external_class,              rectangle, 2, lightgoldenrodyellow).
-	node_shape_dash_color(external_instance,           rectangle, 2, lightgoldenrodyellow).
-	node_shape_dash_color(external_instance_and_class, rectangle, 2, lightgoldenrodyellow).
-	node_shape_dash_color(external_protocol,           page,      2, mediumaquamarine).
-	node_shape_dash_color(external_category,           rectangle, 2, cyan).
-	node_shape_dash_color(external_module,             package,   2, thistle).
-	node_shape_dash_color(external_file,               rectangle, 2, powderblue).
-	node_shape_dash_color(external_directory,          package,   2, salmon).
-	node_shape_dash_color(external_library,            package,   2, salmon).
+	node_shape_dash_color(external_prototype,          rectangle, 2, beige,                true).
+	node_shape_dash_color(external_class,              rectangle, 2, lightgoldenrodyellow, true).
+	node_shape_dash_color(external_instance,           rectangle, 2, lightgoldenrodyellow, true).
+	node_shape_dash_color(external_instance_and_class, rectangle, 2, lightgoldenrodyellow, true).
+	node_shape_dash_color(external_protocol,           page,      2, mediumaquamarine,     true).
+	node_shape_dash_color(external_category,           rectangle, 2, cyan,                 true).
+	node_shape_dash_color(external_module,             package,   2, thistle,              true).
+	node_shape_dash_color(external_file,               rectangle, 2, powderblue,           false).
+	node_shape_dash_color(external_directory,          package,   2, salmon,               false).
+	node_shape_dash_color(external_library,            package,   2, salmon,               false).
 	% predicates of the entities being documented
-	node_shape_dash_color(directive,                   rectangle, 0, bisque).
-	node_shape_dash_color(predicate,                   rectangle, 0, cornsilk).
-	node_shape_dash_color(public_predicate,            rectangle, 0, springgreen).
-	node_shape_dash_color(protected_predicate,         rectangle, 0, yellow).
-	node_shape_dash_color(private_predicate,           rectangle, 0, indianred).
-	node_shape_dash_color(local_predicate,             rectangle, 0, cornsilk).
-	node_shape_dash_color(multifile_predicate,         rectangle, 0, skyblue).
-	node_shape_dash_color(exported_predicate,          rectangle, 0, springgreen).
+	node_shape_dash_color(directive,                   rectangle, 0, bisque,               true).
+	node_shape_dash_color(predicate,                   rectangle, 0, cornsilk,             true).
+	node_shape_dash_color(public_predicate,            rectangle, 0, springgreen,          true).
+	node_shape_dash_color(protected_predicate,         rectangle, 0, yellow,               true).
+	node_shape_dash_color(private_predicate,           rectangle, 0, indianred,            true).
+	node_shape_dash_color(local_predicate,             rectangle, 0, cornsilk,             true).
+	node_shape_dash_color(multifile_predicate,         rectangle, 0, skyblue,              true).
+	node_shape_dash_color(exported_predicate,          rectangle, 0, springgreen,          true).
 	% external predicates to the entities being documented
 	node_shape_dash_color(external_predicate,          rectangle, 2, beige).
 
@@ -310,12 +310,12 @@
 		write(Stream, Value),
 		nl(Stream).
 
-	write_node_lines([], _).
-	write_node_lines([Line| Lines], Stream) :-
-		write_term_to_chars(Line, Chars, [quoted(true)]),
+	write_node_lines([], _, _).
+	write_node_lines([Line| Lines], Stream, Options) :-
+		write_term_to_chars(Line, Chars, Options),
 		write_escaped_chars(Chars, Stream),
 		write(Stream, '  \n'),
-		write_node_lines(Lines, Stream).
+		write_node_lines(Lines, Stream, Options).
 
 	write_escaped_chars([], _).
 	write_escaped_chars([Char| Chars], Stream) :-
