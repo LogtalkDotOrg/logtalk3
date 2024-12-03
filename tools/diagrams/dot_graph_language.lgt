@@ -175,19 +175,19 @@
 	graph_footer(Stream, _Identifier, _Label, _Kind, _Options) :-
 		write(Stream, '}\n\n').
 
-	graph_style_margin_color(rlibrary, rounded, 10, lightgray).
-	graph_style_margin_color(libraries, rounded, 10, lightgray).
-	graph_style_margin_color(library, rounded, 10, whitesmoke).
-	graph_style_margin_color(rdirectory, rounded, 10, lightgray).
+	graph_style_margin_color(rlibrary,    rounded, 10, lightgray).
+	graph_style_margin_color(libraries,   rounded, 10, lightgray).
+	graph_style_margin_color(library,     rounded, 10, whitesmoke).
+	graph_style_margin_color(rdirectory,  rounded, 10, lightgray).
 	graph_style_margin_color(directories, rounded, 10, lightgray).
-	graph_style_margin_color(directory, rounded, 10, whitesmoke).
-	graph_style_margin_color(files, rounded, 10, whitesmoke).
-	graph_style_margin_color(file, rounded, 10, snow).
-	graph_style_margin_color(external, rounded, 10, white).
-	graph_style_margin_color(entity, rounded, 10, snow).
+	graph_style_margin_color(directory,   rounded, 10, whitesmoke).
+	graph_style_margin_color(files,       rounded, 10, whitesmoke).
+	graph_style_margin_color(file,        rounded, 10, snow).
+	graph_style_margin_color(external,    rounded, 10, white).
+	graph_style_margin_color(entity,      rounded, 10, snow).
 
 	node(Stream, Identifier, Label, Caption, Contents, Kind, Options) :-
-		node_shape_style_color(Kind, Shape, Style, Color, Quoted),
+		node_shape_style_color_quoted(Kind, Shape, Style, Color, Quoted),
 		write(Stream, '"'),
 		write(Stream, Identifier),
 		write(Stream, '" ['),
@@ -227,38 +227,38 @@
 		write(Stream, '</TABLE>>]\n').
 
 	% entities belonging to the file or library being documented
-	node_shape_style_color(prototype,                   box,       filled,          cornsilk,             true).
-	node_shape_style_color(class,                       box,       filled,          yellow,               true).
-	node_shape_style_color(instance,                    box,       filled,          yellow,               true).
-	node_shape_style_color(instance_and_class,          box,       filled,          yellow,               true).
-	node_shape_style_color(protocol,                    note,      filled,          aquamarine,           true).
-	node_shape_style_color(category,                    component, filled,          lightcyan,            true).
-	node_shape_style_color(module,                      tab,       filled,          plum,                 true).
-	node_shape_style_color(file,                        box,       filled,          paleturquoise,        false).
-	node_shape_style_color(directory,                   tab,       filled,          lightsalmon,          false).
-	node_shape_style_color(library,                     tab,       filled,          lightsalmon,          false).
+	node_shape_style_color_quoted(prototype,                   box,       filled,          cornsilk,             true).
+	node_shape_style_color_quoted(class,                       box,       filled,          yellow,               true).
+	node_shape_style_color_quoted(instance,                    box,       filled,          yellow,               true).
+	node_shape_style_color_quoted(instance_and_class,          box,       filled,          yellow,               true).
+	node_shape_style_color_quoted(protocol,                    note,      filled,          aquamarine,           true).
+	node_shape_style_color_quoted(category,                    component, filled,          lightcyan,            true).
+	node_shape_style_color_quoted(module,                      tab,       filled,          plum,                 true).
+	node_shape_style_color_quoted(file,                        box,       filled,          paleturquoise,        false).
+	node_shape_style_color_quoted(directory,                   tab,       filled,          lightsalmon,          false).
+	node_shape_style_color_quoted(library,                     tab,       filled,          lightsalmon,          false).
 	% external entities to the file or library being documented
-	node_shape_style_color(external_prototype,          box,       'filled,dashed', beige,                true).
-	node_shape_style_color(external_class,              box,       'filled,dashed', lightgoldenrodyellow, true).
-	node_shape_style_color(external_instance,           box,       'filled,dashed', lightgoldenrodyellow, true).
-	node_shape_style_color(external_instance_and_class, box,       'filled,dashed', lightgoldenrodyellow, true).
-	node_shape_style_color(external_protocol,           note,      'filled,dashed', mediumaquamarine,     true).
-	node_shape_style_color(external_category,           component, 'filled,dashed', cyan,                 true).
-	node_shape_style_color(external_module,             tab,       'filled,dashed', thistle,              true).
-	node_shape_style_color(external_file,               box,       'filled,dashed', powderblue,           false).
-	node_shape_style_color(external_directory,          tab,       'filled,dashed', salmon,               false).
-	node_shape_style_color(external_library,            tab,       'filled,dashed', salmon,               false).
+	node_shape_style_color_quoted(external_prototype,          box,       'filled,dashed', beige,                true).
+	node_shape_style_color_quoted(external_class,              box,       'filled,dashed', lightgoldenrodyellow, true).
+	node_shape_style_color_quoted(external_instance,           box,       'filled,dashed', lightgoldenrodyellow, true).
+	node_shape_style_color_quoted(external_instance_and_class, box,       'filled,dashed', lightgoldenrodyellow, true).
+	node_shape_style_color_quoted(external_protocol,           note,      'filled,dashed', mediumaquamarine,     true).
+	node_shape_style_color_quoted(external_category,           component, 'filled,dashed', cyan,                 true).
+	node_shape_style_color_quoted(external_module,             tab,       'filled,dashed', thistle,              true).
+	node_shape_style_color_quoted(external_file,               box,       'filled,dashed', powderblue,           false).
+	node_shape_style_color_quoted(external_directory,          tab,       'filled,dashed', salmon,               false).
+	node_shape_style_color_quoted(external_library,            tab,       'filled,dashed', salmon,               false).
 	% predicates of the entities being documented
-	node_shape_style_color(directive,                   box,       filled,          bisque,               true).
-	node_shape_style_color(predicate,                   box,       filled,          cornsilk,             true).
-	node_shape_style_color(public_predicate,            box,       filled,          springgreen,          true).
-	node_shape_style_color(protected_predicate,         box,       filled,          yellow,               true).
-	node_shape_style_color(private_predicate,           box,       filled,          indianred1,           true).
-	node_shape_style_color(local_predicate,             box,       filled,          cornsilk,             true).
-	node_shape_style_color(multifile_predicate,         box,       filled,          skyblue,              true).
-	node_shape_style_color(exported_predicate,          box,       filled,          springgreen,          true).
+	node_shape_style_color_quoted(directive,                   box,       filled,          bisque,               true).
+	node_shape_style_color_quoted(predicate,                   box,       filled,          cornsilk,             true).
+	node_shape_style_color_quoted(public_predicate,            box,       filled,          springgreen,          true).
+	node_shape_style_color_quoted(protected_predicate,         box,       filled,          yellow,               true).
+	node_shape_style_color_quoted(private_predicate,           box,       filled,          indianred1,           true).
+	node_shape_style_color_quoted(local_predicate,             box,       filled,          cornsilk,             true).
+	node_shape_style_color_quoted(multifile_predicate,         box,       filled,          skyblue,              true).
+	node_shape_style_color_quoted(exported_predicate,          box,       filled,          springgreen,          true).
 	% external predicates to the entities being documented
-	node_shape_style_color(external_predicate,          box,       'filled,dashed', beige,                true).
+	node_shape_style_color_quoted(external_predicate,          box,       'filled,dashed', beige,                true).
 
 	edge(Stream, _-Start, _-End, Labels, Kind, Options) :-
 		!,
