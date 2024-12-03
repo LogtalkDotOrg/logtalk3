@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:82:0,
+		version is 2:83:0,
 		author is 'Paulo Moura',
-		date is 2024-11-25,
+		date is 2024-12-03,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -400,21 +400,9 @@
 				true
 			;	^^option(url_prefixes(CodePrefix, _), Options)
 			),
-			(	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
-				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, _, _, 'vscodium://') ->
-				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
-				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, _, _, 'pearai://') ->
-				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, _, _, 'zed://') ->
-				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, _, _, 'x-bbedit://') ->
-				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, _, _, 'mvim://') ->
-				atom_concat(CodePrefix, Path, CodeURL0)
-			;	sub_atom(CodePrefix, 0, _, _, 'txmt://') ->
+			(	^^supported_editor_url_scheme_prefix(Prefix),
+				sub_atom(CodePrefix, 0, _, _, Prefix) ->
+				% text editor that supports a URL scheme to open diagram local file links
 				atom_concat(CodePrefix, Path, CodeURL0)
 			;	^^option(omit_path_prefixes(PathPrefixes), Options),
 				% cut down any specified local path prefix
@@ -434,14 +422,10 @@
 				CodeURL = CodeURL0
 			;	\+ sub_atom(CodeURL0, 0, _, _, 'http://'),
 				\+ sub_atom(CodeURL0, 0, _, _, 'https://'),
-				\+ sub_atom(CodeURL0, 0, _, _, 'vscode://'),
-				\+ sub_atom(CodeURL0, 0, _, _, 'vscodium://'),
-				\+ sub_atom(CodeURL0, 0, _, _, 'cursor://'),
-				\+ sub_atom(CodeURL0, 0, _, _, 'pearai://'),
-				\+ sub_atom(CodeURL0, 0, _, _, 'zed://'),
-				\+ sub_atom(CodeURL0, 0, _, _, 'x-bbedit://'),
-				\+ sub_atom(CodeURL0, 0, _, _, 'mvim://'),
-				\+ sub_atom(CodeURL0, 0, _, _, 'txmt://') ->
+				\+ (
+					^^supported_editor_url_scheme_prefix(Prefix),
+					sub_atom(CodeURL0, 0, _, _, Prefix)
+				) ->
 				% assume local file and don't append line number
 				CodeURL = CodeURL0
 			;	% append line number
@@ -455,6 +439,8 @@
 			;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
 				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
 			;	sub_atom(CodePrefix, 0, _, _, 'pearai://') ->
+				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
+			;	sub_atom(CodePrefix, 0, _, _, 'windsurf://') ->
 				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)
 			;	sub_atom(CodePrefix, 0, _, _, 'zed://') ->
 				atomic_list_concat([CodeURL0, ':', Line, ':0'], CodeURL)

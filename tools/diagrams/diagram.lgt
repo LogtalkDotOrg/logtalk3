@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:13:0,
+		version is 3:14:0,
 		author is 'Paulo Moura',
-		date is 2024-11-25,
+		date is 2024-12-03,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -1263,28 +1263,9 @@
 		),
 		!,
 		^^option(omit_path_prefixes(Prefixes), Options),
-		(	sub_atom(CodePrefix, 0, _, _, 'vscode://') ->
-			atom_concat(CodePrefix, Path, CodeURL),
-			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, _, _, 'vscodium://') ->
-			atom_concat(CodePrefix, Path, CodeURL),
-			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, _, _, 'cursor://') ->
-			atom_concat(CodePrefix, Path, CodeURL),
-			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, _, _, 'pearai://') ->
-			atom_concat(CodePrefix, Path, CodeURL),
-			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, _, _, 'zed://') ->
-			atom_concat(CodePrefix, Path, CodeURL),
-			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, _, _, 'x-bbedit://') ->
-			atom_concat(CodePrefix, Path, CodeURL),
-			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, _, _, 'mvim://') ->
-			atom_concat(CodePrefix, Path, CodeURL),
-			Suffix = CodeURL
-		;	sub_atom(CodePrefix, 0, _, _, 'txmt://') ->
+		(	supported_editor_url_scheme_prefix(Prefix),
+			sub_atom(CodePrefix, 0, _, _, Prefix) ->
+			% text editor that supports a URL scheme to open diagram local file links
 			atom_concat(CodePrefix, Path, CodeURL),
 			Suffix = CodeURL
 		;	member(Path, Prefixes) ->
@@ -1309,6 +1290,23 @@
 		;	Suffix = Path
 		),
 		LinkingOptions = [url(''), urls('',''), tooltip(Suffix)| Options].
+
+	:- protected(supported_editor_url_scheme_prefix/1).
+	:- mode(supported_editor_url_scheme_prefix(?atom), zero_or_more).
+	:- info(supported_editor_url_scheme_prefix/1, [
+		comment is 'Table of prefixes for text editors that supports a URL scheme to open diagram links.',
+		argnames is ['Prefix']
+	]).
+
+	supported_editor_url_scheme_prefix('vscode://').
+	supported_editor_url_scheme_prefix('vscodium://').
+	supported_editor_url_scheme_prefix('cursor://').
+	supported_editor_url_scheme_prefix('pearai://').
+	supported_editor_url_scheme_prefix('windsurf://').
+	supported_editor_url_scheme_prefix('zed://').
+	supported_editor_url_scheme_prefix('x-bbedit://').
+	supported_editor_url_scheme_prefix('mvim://').
+	supported_editor_url_scheme_prefix('txmt://').
 
 	:- protected(omit_path_prefix/3).
 	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).

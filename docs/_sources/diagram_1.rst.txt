@@ -17,8 +17,8 @@ Common predicates for generating diagrams.
 |    ``logtalk_load(diagrams(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:13:0
-| **Date:** 2024-11-25
+| **Version:** 3:14:0
+| **Date:** 2024-12-03
 
 | **Compilation flags:**
 |    ``static``
@@ -976,6 +976,25 @@ Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph
 |    ``add_link_options(Path,Options,LinkingOptions)``
 | **Mode and number of proofs:**
 |    ``add_link_options(+atom,+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: supported_text_editor_prefix/1
+.. _diagram/1::supported_text_editor_prefix/1:
+
+``supported_text_editor_prefix/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of URL prefixes for text editors that supports a URL scheme to open diagram links.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_text_editor_prefix(Prefix)``
+| **Mode and number of proofs:**
+|    ``supported_text_editor_prefix(?atom)`` - ``zero_or_more``
 
 
 ------------
