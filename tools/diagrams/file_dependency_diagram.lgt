@@ -23,9 +23,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:30:0,
+		version is 2:29:0,
 		author is 'Paulo Moura',
-		date is 2024-12-04,
+		date is 2024-12-03,
 		comment is 'Predicates for generating file contents dependency diagrams. A dependency exists when an entity in one file makes a reference to an entity in another file.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [file_load_diagram(_), directory_load_diagram(_), library_load_diagram(_)]
@@ -186,10 +186,6 @@
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, exclude only the "scratch_directory" library:
-	default_option(exclude_libraries([scratch_directory])).
-	% by default, don't exclude any entities:
-	default_option(exclude_entities([])).
 	% by default, don't link to sub-diagrams:
 	default_option(zoom(false)).
 	% by default, use a '.svg' extension for linked diagrams

@@ -23,9 +23,9 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:85:0,
+		version is 2:84:0,
 		author is 'Paulo Moura',
-		date is 2024-12-04,
+		date is 2024-12-03,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [entity_diagram(_), inheritance_diagram(_), uses_diagram(_)]
@@ -820,8 +820,8 @@
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, exclude only the "scratch_directory" library:
-	default_option(exclude_libraries([scratch_directory])).
+	% by default, exclude only the "startup" and "scratch_directory" libraries:
+	default_option(exclude_libraries([startup, scratch_directory])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
 	% by default, don't omit any prefix when printing paths:
