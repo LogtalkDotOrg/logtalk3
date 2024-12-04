@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 3:10:2,
+		version is 3:10:3,
 		author is 'Paulo Moura',
-		date is 2024-12-03,
+		date is 2024-12-04,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -227,24 +227,24 @@
 		write(Stream, '</TABLE>>]\n').
 
 	% entities belonging to the file or library being documented
-	node_shape_style_color_quoted(prototype,                   box,       filled,          cornsilk,             true).
-	node_shape_style_color_quoted(class,                       box,       filled,          yellow,               true).
-	node_shape_style_color_quoted(instance,                    box,       filled,          yellow,               true).
-	node_shape_style_color_quoted(instance_and_class,          box,       filled,          yellow,               true).
-	node_shape_style_color_quoted(protocol,                    note,      filled,          aquamarine,           true).
-	node_shape_style_color_quoted(category,                    component, filled,          lightcyan,            true).
-	node_shape_style_color_quoted(module,                      tab,       filled,          plum,                 true).
+	node_shape_style_color_quoted(prototype,                   box,       filled,          cornsilk,             false).
+	node_shape_style_color_quoted(class,                       box,       filled,          yellow,               false).
+	node_shape_style_color_quoted(instance,                    box,       filled,          yellow,               false).
+	node_shape_style_color_quoted(instance_and_class,          box,       filled,          yellow,               false).
+	node_shape_style_color_quoted(protocol,                    note,      filled,          aquamarine,           false).
+	node_shape_style_color_quoted(category,                    component, filled,          lightcyan,            false).
+	node_shape_style_color_quoted(module,                      tab,       filled,          plum,                 false).
 	node_shape_style_color_quoted(file,                        box,       filled,          paleturquoise,        false).
 	node_shape_style_color_quoted(directory,                   tab,       filled,          lightsalmon,          false).
 	node_shape_style_color_quoted(library,                     tab,       filled,          lightsalmon,          false).
 	% external entities to the file or library being documented
-	node_shape_style_color_quoted(external_prototype,          box,       'filled,dashed', beige,                true).
-	node_shape_style_color_quoted(external_class,              box,       'filled,dashed', lightgoldenrodyellow, true).
-	node_shape_style_color_quoted(external_instance,           box,       'filled,dashed', lightgoldenrodyellow, true).
-	node_shape_style_color_quoted(external_instance_and_class, box,       'filled,dashed', lightgoldenrodyellow, true).
-	node_shape_style_color_quoted(external_protocol,           note,      'filled,dashed', mediumaquamarine,     true).
-	node_shape_style_color_quoted(external_category,           component, 'filled,dashed', cyan,                 true).
-	node_shape_style_color_quoted(external_module,             tab,       'filled,dashed', thistle,              true).
+	node_shape_style_color_quoted(external_prototype,          box,       'filled,dashed', beige,                false).
+	node_shape_style_color_quoted(external_class,              box,       'filled,dashed', lightgoldenrodyellow, false).
+	node_shape_style_color_quoted(external_instance,           box,       'filled,dashed', lightgoldenrodyellow, false).
+	node_shape_style_color_quoted(external_instance_and_class, box,       'filled,dashed', lightgoldenrodyellow, false).
+	node_shape_style_color_quoted(external_protocol,           note,      'filled,dashed', mediumaquamarine,     false).
+	node_shape_style_color_quoted(external_category,           component, 'filled,dashed', cyan,                 false).
+	node_shape_style_color_quoted(external_module,             tab,       'filled,dashed', thistle,              false).
 	node_shape_style_color_quoted(external_file,               box,       'filled,dashed', powderblue,           false).
 	node_shape_style_color_quoted(external_directory,          tab,       'filled,dashed', salmon,               false).
 	node_shape_style_color_quoted(external_library,            tab,       'filled,dashed', salmon,               false).

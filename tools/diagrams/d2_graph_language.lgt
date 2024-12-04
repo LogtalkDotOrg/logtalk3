@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:0:3,
 		author is 'Paulo Moura',
-		date is 2024-12-03,
+		date is 2024-12-04,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -199,24 +199,24 @@
 		write(Stream, '}\n').
 
 	% entities belonging to the file or library being documented
-	node_shape_dash_color_quoted(prototype,                   rectangle, 0, cornsilk,             true).
-	node_shape_dash_color_quoted(class,                       rectangle, 0, yellow,               true).
-	node_shape_dash_color_quoted(instance,                    rectangle, 0, yellow,               true).
-	node_shape_dash_color_quoted(instance_and_class,          rectangle, 0, yellow,               true).
-	node_shape_dash_color_quoted(protocol,                    page,      0, aquamarine,           true).
-	node_shape_dash_color_quoted(category,                    rectangle, 0, lightcyan,            true).
-	node_shape_dash_color_quoted(module,                      package,   0, plum,                 true).
+	node_shape_dash_color_quoted(prototype,                   rectangle, 0, cornsilk,             false).
+	node_shape_dash_color_quoted(class,                       rectangle, 0, yellow,               false).
+	node_shape_dash_color_quoted(instance,                    rectangle, 0, yellow,               false).
+	node_shape_dash_color_quoted(instance_and_class,          rectangle, 0, yellow,               false).
+	node_shape_dash_color_quoted(protocol,                    page,      0, aquamarine,           false).
+	node_shape_dash_color_quoted(category,                    rectangle, 0, lightcyan,            false).
+	node_shape_dash_color_quoted(module,                      package,   0, plum,                 false).
 	node_shape_dash_color_quoted(file,                        rectangle, 0, paleturquoise,        false).
 	node_shape_dash_color_quoted(directory,                   package,   0, lightsalmon,          false).
 	node_shape_dash_color_quoted(library,                     package,   0, lightsalmon,          false).
 	% external entities to the file or library being documented
-	node_shape_dash_color_quoted(external_prototype,          rectangle, 2, beige,                true).
-	node_shape_dash_color_quoted(external_class,              rectangle, 2, lightgoldenrodyellow, true).
-	node_shape_dash_color_quoted(external_instance,           rectangle, 2, lightgoldenrodyellow, true).
-	node_shape_dash_color_quoted(external_instance_and_class, rectangle, 2, lightgoldenrodyellow, true).
-	node_shape_dash_color_quoted(external_protocol,           page,      2, mediumaquamarine,     true).
-	node_shape_dash_color_quoted(external_category,           rectangle, 2, cyan,                 true).
-	node_shape_dash_color_quoted(external_module,             package,   2, thistle,              true).
+	node_shape_dash_color_quoted(external_prototype,          rectangle, 2, beige,                false).
+	node_shape_dash_color_quoted(external_class,              rectangle, 2, lightgoldenrodyellow, false).
+	node_shape_dash_color_quoted(external_instance,           rectangle, 2, lightgoldenrodyellow, false).
+	node_shape_dash_color_quoted(external_instance_and_class, rectangle, 2, lightgoldenrodyellow, false).
+	node_shape_dash_color_quoted(external_protocol,           page,      2, mediumaquamarine,     false).
+	node_shape_dash_color_quoted(external_category,           rectangle, 2, cyan,                 false).
+	node_shape_dash_color_quoted(external_module,             package,   2, thistle,              false).
 	node_shape_dash_color_quoted(external_file,               rectangle, 2, powderblue,           false).
 	node_shape_dash_color_quoted(external_directory,          package,   2, salmon,               false).
 	node_shape_dash_color_quoted(external_library,            package,   2, salmon,               false).
