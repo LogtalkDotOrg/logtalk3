@@ -23,9 +23,9 @@
 	imports(diagram(Format))).
 
 	:- info([
-		version is 2:60:0,
+		version is 2:61:0,
 		author is 'Paulo Moura',
-		date is 2024-12-03,
+		date is 2024-12-04,
 		comment is 'Predicates for generating entity diagrams in the specified format with both inheritance and cross-referencing relation edges.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [inheritance_diagram(_), uses_diagram(_), xref_diagram(_), library_diagram(_)]
@@ -921,8 +921,8 @@
 	default_option(exclude_directories([])).
 	% by default, don't exclude any source files:
 	default_option(exclude_files([])).
-	% by default, exclude only the "startup" and "scratch_directory" libraries:
-	default_option(exclude_libraries([startup, scratch_directory])).
+	% by default, exclude only the "scratch_directory" library:
+	default_option(exclude_libraries([scratch_directory])).
 	% by default, don't exclude any entities:
 	default_option(exclude_entities([])).
 	% by default, don't omit any prefix when printing paths:

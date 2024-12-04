@@ -364,7 +364,7 @@ generated diagrams. For entity diagrams the options are:
 	list of source files to exclude (default is `[]`); files may be listed by full path or basename, with or without extension; no nodes are generated for excluded files
 
 - `exclude_libraries(Libraries)`  
-	list of libraries to exclude (default is `[startup, scratch_directory]`); no nodes are generated for excluded libraries
+	list of libraries to exclude (default is `[scratch_directory]`); no nodes are generated for excluded libraries
 
 - `exclude_entities(Entities)`  
 	list of entities to exclude (default is `[]`); no nodes are generated for excluded entities and their predicates
@@ -497,7 +497,7 @@ For library diagrams the options are:
 	list of source files to exclude (default is `[]`)
 
 - `exclude_libraries(Libraries)`  
-	list of libraries to exclude (default is `[startup, scratch_directory]`)
+	list of libraries to exclude (default is `[scratch_directory]`)
 
 - `zoom(Boolean)`  
 	generate sub-diagrams and add links and zoom icons to library and entity nodes (`true` or `false`; default is `false`)

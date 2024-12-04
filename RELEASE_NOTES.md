@@ -45,9 +45,6 @@ Library
 Tools
 -----
 
-* CHANGED: The `diagrams` tool to use all the exclude options when deciding
-if a library, directory, file, entity, or predicate is excluded.
-
 * CHANGED: The `diagrams` tool now uses a Unicode glyph for the magnifying
 lens instead of a PNG image.
 
@@ -69,6 +66,12 @@ external entities.
 
 * FIXED: The `diagrams` tool support for the graph languages to quote atoms
 in labels and node contents when required.
+
+* FIXED: The `diagrams` tool to use all the exclude options when deciding
+if a library, directory, file, entity, or predicate is excluded.
+
+* FIXED: The `diagrams` tool `exclude_libraries/1` default option value to
+include only the `scratch_directory` library.
 
 * FIXED: Bug in the `lgtdoc` tool when printing a warning on missing entity
 directive `info/1` key.
