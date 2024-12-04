@@ -23,9 +23,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:30:1,
+		version is 2:30:2,
 		author is 'Paulo Moura',
-		date is 2024-04-01,
+		date is 2024-12-04,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
@@ -98,7 +98,7 @@
 		^^option(exclude_directories(ExcludedDirectories), Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		logtalk::loaded_file_property(Path, includes(IncludePath)),
-		logtalk::loaded_file_property(IncludePath, basename(IncludeBasename)),
+		os::decompose_file_name(IncludePath, _, IncludeBasename),
 			^^not_excluded_file(IncludePath, IncludeBasename, ExcludedDirectories, ExcludedFiles),
 			^^remember_referenced_logtalk_file(IncludePath),
 			^^save_edge(Path, IncludePath, [includes], includes_file, [tooltip(includes)| Options]),

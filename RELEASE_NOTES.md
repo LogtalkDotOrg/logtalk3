@@ -64,6 +64,9 @@ metaclasses.
 * FIXED: Bug in the `diagrams` tool where repeated nodes could be created for
 external entities.
 
+* FIXED: Bug in the `diagrams` tool where file loading diagrams would miss
+"includes" edges.
+
 * FIXED: The `diagrams` tool support for the graph languages to quote atoms
 in predicate labels and predicate node contents when required.
 
