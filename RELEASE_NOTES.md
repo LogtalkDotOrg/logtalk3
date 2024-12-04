@@ -55,8 +55,8 @@ lens instead of a PNG image.
 * UPDATED: The `diagrams` tool to support graph languages such as d2 where the
 node identifiers are not global.
 
-* UPDATED: The `diagrams` tool to also support the PearAI and Windsurf text
-editors when generating diagrams with local file links.
+* UPDATED: The `diagrams` tool to also support the PearAI, Windsurf, PyCharm,
+and IDEA text editors when generating diagrams with local file links.
 
 * FIXED: The `diagrams` tool to also generate an `instance/class` caption for
 metaclasses.

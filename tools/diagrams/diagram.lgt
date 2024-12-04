@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:14:0,
+		version is 3:15:0,
 		author is 'Paulo Moura',
-		date is 2024-12-03,
+		date is 2024-12-04,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -336,6 +336,9 @@
 	normalize_url_prefixes([], []).
 	normalize_url_prefixes([URL0| URLs0], [URL| URLs]) :-
 		(	sub_atom(URL0, _, _, 0, '/') ->
+			URL = URL0
+		;	supported_editor_url_scheme_prefix(Prefix),
+			sub_atom(URL0, 0, _, _, Prefix) ->
 			URL = URL0
 		;	atom_concat(URL0, '/', URL)
 		),
@@ -1307,6 +1310,8 @@
 	supported_editor_url_scheme_prefix('x-bbedit://').
 	supported_editor_url_scheme_prefix('mvim://').
 	supported_editor_url_scheme_prefix('txmt://').
+	supported_editor_url_scheme_prefix('idea://').
+	supported_editor_url_scheme_prefix('pycharm://').
 
 	:- protected(omit_path_prefix/3).
 	:- mode(omit_path_prefix(+atom, +list(compound), -atom), one).

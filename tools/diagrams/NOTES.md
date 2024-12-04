@@ -559,6 +559,8 @@ in selected text editors, set the URL code prefix:
 - BBEdit: `url_prefixes('x-bbedit://open?url=file://', DocPrefix)`
 - MacVim: `url_prefixes('mvim://open?url=file://', DocPrefix)`
 - TextMate: `url_prefixes('txmt://open?url=file://', DocPrefix)`
+- IDEA: `url_prefixes('idea://open?file=', DocPrefix)`
+- PyCharm: `url_prefixes('pycharm://open?file=', DocPrefix)`
 
 In this case, the ``DocPrefix`` argument should be the path to directory
 containing the HTML version of the application APIs.

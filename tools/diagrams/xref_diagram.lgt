@@ -23,7 +23,7 @@
 	extends(entity_diagram(Format))).
 
 	:- info([
-		version is 2:84:0,
+		version is 2:85:0,
 		author is 'Paulo Moura',
 		date is 2024-12-04,
 		comment is 'Predicates for generating predicate call cross-referencing diagrams.',
@@ -449,6 +449,10 @@
 			;	sub_atom(CodePrefix, 0, _, _, 'mvim://') ->
 				atomic_list_concat([CodeURL0, '&line=', Line], CodeURL)
 			;	sub_atom(CodePrefix, 0, _, _, 'txmt://') ->
+				atomic_list_concat([CodeURL0, '&line=', Line], CodeURL)
+			;	sub_atom(CodePrefix, 0, _, _, 'idea://') ->
+				atomic_list_concat([CodeURL0, '&line=', Line], CodeURL)
+			;	sub_atom(CodePrefix, 0, _, _, 'pycharm://') ->
 				atomic_list_concat([CodeURL0, '&line=', Line], CodeURL)
 			;	% assume github or gitlab line reference syntax
 				atomic_list_concat([CodeURL0, '#L', Line], CodeURL)
