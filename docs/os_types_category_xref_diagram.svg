@@ -12,20 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-389.5 367,-389.5 367,4 -4,4"/>
 <text text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category os_types</text>
-<<<<<<< HEAD
-<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;12&#45;04, 11:07</text>
-=======
-<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;12&#45;03, 23:05</text>
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2024&#45;12&#45;04, 14:22</text>
 <g id="clust1" class="cluster">
 <title>cluster_os_types_category</title>
 <g id="a_clust1"><a xlink:title="os_types">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 343,-54.25 343,-54.25 349,-54.25 355,-60.25 355,-66.25 355,-66.25 355,-365.5 355,-365.5 355,-371.5 349,-377.5 343,-377.5 343,-377.5 20,-377.5 20,-377.5 14,-377.5 8,-371.5 8,-365.5 8,-365.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<<<<<<< HEAD
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt">
-=======
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt">
 <text text-anchor="start" x="20" y="-360" font-family="Monospace" font-size="10.00" fill="dimgray">os_types</text>
 </a>
 </g>
@@ -35,11 +27,7 @@
 <!-- check_permissions/3 -->
 <g id="node1" class="node">
 <title>check_permissions/3</title>
-<<<<<<< HEAD
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L121">
-=======
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L121">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L121">
 <polygon fill="cornsilk" stroke="black" points="172.38,-219.5 17.62,-219.5 17.62,-183.5 172.38,-183.5 172.38,-219.5"/>
 <text text-anchor="start" x="25.62" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="30.88" y="-203.43" font-family="Monospace" font-size="11.00">check_permissions/3</text>
@@ -67,20 +55,12 @@
 <!-- check_permissions/3&#45;&gt;os::file_permission/2 -->
 <g id="edge3" class="edge">
 <title>check_permissions/3&#45;&gt;os::file_permission/2</title>
-<<<<<<< HEAD
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L122" xlink:title="calls">
-=======
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L122" xlink:title="calls">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L122" xlink:title="calls">
 <path fill="none" stroke="black" d="M108.28,-183.2C123.17,-163.8 147.48,-132.13 164.75,-109.64"/>
 <polygon fill="black" stroke="black" points="167.43,-111.89 170.74,-101.82 161.88,-107.62 167.43,-111.89"/>
 </a>
 </g>
-<<<<<<< HEAD
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L122">
-=======
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L122">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L122">
 <text text-anchor="start" x="142.7" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -88,11 +68,7 @@
 <!-- check_permissions/2 -->
 <g id="node2" class="node">
 <title>check_permissions/2</title>
-<<<<<<< HEAD
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L128">
-=======
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L128">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L128" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L128">
 <polygon fill="cornsilk" stroke="black" points="345.38,-219.5 190.62,-219.5 190.62,-183.5 345.38,-183.5 345.38,-219.5"/>
 <text text-anchor="start" x="198.62" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="203.88" y="-203.43" font-family="Monospace" font-size="11.00">check_permissions/2</text>
@@ -106,20 +82,12 @@
 <!-- check_permissions/2&#45;&gt;os::file_permission/2 -->
 <g id="edge4" class="edge">
 <title>check_permissions/2&#45;&gt;os::file_permission/2</title>
-<<<<<<< HEAD
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L129" xlink:title="calls">
-=======
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L129" xlink:title="calls">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M255.75,-183.2C242.08,-163.89 219.8,-132.41 203.89,-109.94"/>
 <polygon fill="black" stroke="black" points="206.81,-108 198.17,-101.86 201.09,-112.04 206.81,-108"/>
 </a>
 </g>
-<<<<<<< HEAD
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L129">
-=======
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L129">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L129">
 <text text-anchor="start" x="228.99" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -127,11 +95,7 @@
 <!-- type::type/1 -->
 <g id="node3" class="node">
 <title>type::type/1</title>
-<<<<<<< HEAD
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L45">
-=======
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L45">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L45">
 <polygon fill="skyblue" stroke="black" points="158.75,-338.75 51.25,-338.75 51.25,-302.75 158.75,-302.75 158.75,-338.75"/>
 <text text-anchor="start" x="59.25" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="64.5" y="-322.68" font-family="Monospace" font-size="11.00">type::type/1</text>
@@ -145,11 +109,7 @@
 <!-- type::check/2 -->
 <g id="node4" class="node">
 <title>type::check/2</title>
-<<<<<<< HEAD
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L56">
-=======
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L56">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L56" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L56">
 <polygon fill="skyblue" stroke="black" points="308.12,-338.75 193.88,-338.75 193.88,-302.75 308.12,-302.75 308.12,-338.75"/>
 <text text-anchor="start" x="201.88" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="207.12" y="-322.68" font-family="Monospace" font-size="11.00">type::check/2</text>
@@ -163,20 +123,12 @@
 <!-- type::check/2&#45;&gt;check_permissions/3 -->
 <g id="edge1" class="edge">
 <title>type::check/2&#45;&gt;check_permissions/3</title>
-<<<<<<< HEAD
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L79" xlink:title="calls">
-=======
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L79" xlink:title="calls">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M227.98,-302.45C201.25,-282.36 157,-249.1 126.95,-226.51"/>
 <polygon fill="black" stroke="black" points="129.42,-223.99 119.32,-220.78 125.21,-229.59 129.42,-223.99"/>
 </a>
 </g>
-<<<<<<< HEAD
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L79">
-=======
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L79">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L79">
 <text text-anchor="start" x="177.68" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -184,20 +136,12 @@
 <!-- type::check/2&#45;&gt;check_permissions/2 -->
 <g id="edge2" class="edge">
 <title>type::check/2&#45;&gt;check_permissions/2</title>
-<<<<<<< HEAD
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L102" xlink:title="calls">
-=======
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L102" xlink:title="calls">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M253.51,-302.45C256.23,-283.66 260.63,-253.34 263.86,-231.02"/>
 <polygon fill="black" stroke="black" points="267.29,-231.77 265.26,-221.37 260.37,-230.76 267.29,-231.77"/>
 </a>
 </g>
-<<<<<<< HEAD
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/871b25b3a58b1c622e6e0b58640fcc16d4521f15/library/os/os_types.lgt#L102">
-=======
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/ded67bc96b18a2f8dc0409644fe7417b05675a29/library/os/os_types.lgt#L102">
->>>>>>> parent of 871b25b3a5 (Fix the `diagrams` tool `exclude_libraries/1` default option value to include only the `scratch_directory` library)
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/988bd6706df383f0049ed9e7989110f628a53b10/library/os/os_types.lgt#L102">
 <text text-anchor="start" x="260.01" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

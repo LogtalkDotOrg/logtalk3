@@ -980,21 +980,21 @@ Adds ``url/1``, ``urls/2``, and ``tooltip/1`` link options (for use by the graph
 
 ------------
 
-.. index:: supported_text_editor_prefix/1
-.. _diagram/1::supported_text_editor_prefix/1:
+.. index:: supported_editor_url_scheme_prefix/1
+.. _diagram/1::supported_editor_url_scheme_prefix/1:
 
-``supported_text_editor_prefix/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``supported_editor_url_scheme_prefix/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Table of URL prefixes for text editors that supports a URL scheme to open diagram links.
+Table of prefixes for text editors that supports a URL scheme to open diagram links.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``supported_text_editor_prefix(Prefix)``
+|    ``supported_editor_url_scheme_prefix(Prefix)``
 | **Mode and number of proofs:**
-|    ``supported_text_editor_prefix(?atom)`` - ``zero_or_more``
+|    ``supported_editor_url_scheme_prefix(?atom)`` - ``zero_or_more``
 
 
 ------------
