@@ -555,6 +555,7 @@ in selected text editors, set the URL code prefix:
 - VSCodium: `url_prefixes('vscodium://file/', DocPrefix)`
 - Cursor: `url_prefixes('cursor://file/', DocPrefix)`
 - PearAI: `url_prefixes('pearai://file/', DocPrefix)`
+- Windsurf: `url_prefixes('windsurf://file/', DocPrefix)`
 - Zed: `url_prefixes('zed://file/', DocPrefix)`
 - BBEdit: `url_prefixes('x-bbedit://open?url=file://', DocPrefix)`
 - MacVim: `url_prefixes('mvim://open?url=file://', DocPrefix)`
