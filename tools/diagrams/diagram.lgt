@@ -23,9 +23,9 @@
 	extends(options)).
 
 	:- info([
-		version is 3:15:0,
+		version is 3:15:1,
 		author is 'Paulo Moura',
-		date is 2024-12-03,
+		date is 2024-12-04,
 		comment is 'Common predicates for generating diagrams.',
 		parameters is ['Format' - 'Graph language file format.']
 	]).
@@ -993,7 +993,10 @@
 	not_excluded_library(Library, ExcludedLibraries, ExcludedDirectories) :-
 		\+ member(Library, ExcludedLibraries),
 		logtalk::expand_library_path(Library, Directory),
-		\+ member(Directory, ExcludedDirectories).
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(Directory, 0, _, _, ExcludedDirectory)
+		).
 
 	:- protected(not_excluded_directory/2).
 	:- mode(not_excluded_directory(+atom, +list(compound)), zero_or_one).
@@ -1003,16 +1006,7 @@
 	]).
 
 	not_excluded_directory(Directory, Options) :-
-		^^option(exclude_libraries(ExcludedLibraries), Options),
-		^^option(exclude_directories(ExcludedDirectories0), Options),
-		findall(
-			ExcludedDirectory,
-			(	member(ExcludedLibrary, ExcludedLibraries),
-				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
-			),
-			ExcludedDirectories,
-			ExcludedDirectories0
-		),
+		excluded_directories(ExcludedDirectories, Options),
 		\+ (
 			member(ExcludedDirectory, ExcludedDirectories),
 			sub_atom(Directory, 0, _, _, ExcludedDirectory)
@@ -1026,17 +1020,8 @@
 	]).
 
 	not_excluded_file(Path, Basename, Options) :-
-		^^option(exclude_libraries(ExcludedLibraries), Options),
-		^^option(exclude_directories(ExcludedDirectories0), Options),
+		excluded_directories(ExcludedDirectories, Options),
 		^^option(exclude_files(ExcludedFiles), Options),
-		findall(
-			ExcludedDirectory,
-			(	member(ExcludedLibrary, ExcludedLibraries),
-				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
-			),
-			ExcludedDirectories,
-			ExcludedDirectories0
-		),
 		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles).
 
 	not_excluded_file(_, _, [], []) :-
@@ -1076,18 +1061,9 @@
 	]).
 
 	not_excluded_entity(Kind, Entity, Options) :-
-		^^option(exclude_libraries(ExcludedLibraries), Options),
-		^^option(exclude_directories(ExcludedDirectories0), Options),
+		excluded_directories(ExcludedDirectories, Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		^^option(exclude_entities(ExcludedEntities), Options),
-		findall(
-			ExcludedDirectory,
-			(	member(ExcludedLibrary, ExcludedLibraries),
-				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
-			),
-			ExcludedDirectories,
-			ExcludedDirectories0
-		),
 		not_excluded_entity(Kind, Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities).
 
 	not_excluded_entity(_, _, [], [], []) :-
@@ -1138,18 +1114,9 @@
 	]).
 
 	not_excluded_entity(Entity, Options) :-
-		^^option(exclude_libraries(ExcludedLibraries), Options),
-		^^option(exclude_directories(ExcludedDirectories0), Options),
+		excluded_directories(ExcludedDirectories, Options),
 		^^option(exclude_files(ExcludedFiles), Options),
 		^^option(exclude_entities(ExcludedEntities), Options),
-		findall(
-			ExcludedDirectory,
-			(	member(ExcludedLibrary, ExcludedLibraries),
-				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
-			),
-			ExcludedDirectories,
-			ExcludedDirectories0
-		),
 		not_excluded_entity(Entity, ExcludedDirectories, ExcludedFiles, ExcludedEntities).
 
 	not_excluded_entity(_, [], [], []) :-
@@ -1173,6 +1140,18 @@
 			fail
 		),
 		not_excluded_file(Path, Basename, ExcludedDirectories, ExcludedFiles).
+
+	excluded_directories(ExcludedDirectories, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
+		^^option(exclude_directories(ExcludedDirectories0), Options),
+		findall(
+			ExcludedDirectory,
+			(	member(ExcludedLibrary, ExcludedLibraries),
+				logtalk::expand_library_path(ExcludedLibrary, ExcludedDirectory)
+			),
+			ExcludedDirectories,
+			ExcludedDirectories0
+		).
 
 	:- protected(output_file_path/4).
 	:- mode(output_file_path(+atom, +list(atom), +object_identifier, -atom), one).
