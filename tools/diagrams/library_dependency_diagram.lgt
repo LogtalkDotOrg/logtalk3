@@ -23,9 +23,9 @@
 	imports(library_diagram(Format))).
 
 	:- info([
-		version is 2:34:0,
+		version is 2:33:1,
 		author is 'Paulo Moura',
-		date is 2024-12-03,
+		date is 2024-04-01,
 		comment is 'Predicates for generating library dependency diagrams. A dependency exists when an entity in one library makes a reference to an entity in another library.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [library_load_diagram(_), directory_load_diagram(_), file_load_diagram(_), entity_diagram(_)]
@@ -61,8 +61,9 @@
 		fail.
 	% second, output edges for all libraries that this library refers to
 	output_library(Library, Directory, Options) :-
+		^^option(exclude_libraries(ExcludedLibraries), Options),
 		depends_library(Library, Directory, OtherLibrary, OtherDirectory, Kind),
-		^^not_excluded_library(OtherLibrary, Options),
+		\+ member(OtherLibrary, ExcludedLibraries),
 		^^save_edge(Directory, OtherDirectory, [depends], depends_on_library, [tooltip(depends)| Options]),
 		(	Kind == module ->
 			^^remember_referenced_prolog_library(OtherLibrary, OtherDirectory)

@@ -23,9 +23,9 @@
 	imports(directory_diagram(Format))).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:0:1,
 		author is 'Paulo Moura',
-		date is 2024-12-03,
+		date is 2024-04-01,
 		comment is 'Predicates for generating directory loading dependency diagrams.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [directory_dependency_diagram(_), file_dependency_diagram(_), library_dependency_diagram(_)]
@@ -60,6 +60,7 @@
 		fail.
 	% second, output edges for all directories loaded by files in this directory
 	output_library(_, Directory, Options) :-
+		^^option(exclude_directories(ExcludedDirectories), Options),
 		% any Logtalk or Prolog directory file may load other files
 		(	logtalk::loaded_file_property(File, directory(Directory))
 		;	modules_diagram_support::loaded_file_property(File, directory(Directory))
@@ -74,7 +75,10 @@
 			% not a Logtalk generated intermediate Prolog file
 			\+ logtalk::loaded_file_property(_, target(Other))
 		),
-		^^not_excluded_directory(OtherDirectory, Options),
+		\+ (
+			member(ExcludedDirectory, ExcludedDirectories),
+			sub_atom(OtherDirectory, 0, _, _, ExcludedDirectory)
+		),
 		% edge not previously recorded
 		\+ ^^edge(Directory, OtherDirectory, _, _, _),
 		(	logtalk::loaded_file_property(Other, directory(OtherDirectory)) ->

@@ -404,22 +404,18 @@ generated diagrams. For entity diagrams the options are:
 - | ``exclude_directories(Directories)``
   | list of directories to exclude (default is ``[]``); all
     sub-directories of the excluded directories are also excluded;
-    directories may be listed by full or relative path; no nodes are
-    generated for excluded directories
+    directories may be listed by full or relative path
 
 - | ``exclude_files(Files)``
   | list of source files to exclude (default is ``[]``); files may be
-    listed by full path or basename, with or without extension; no nodes
-    are generated for excluded files
+    listed by full path or basename, with or without extension
 
 - | ``exclude_libraries(Libraries)``
   | list of libraries to exclude (default is
-    ``[startup, scratch_directory]``); no nodes are generated for
-    excluded libraries
+    ``[startup, scratch_directory]``)
 
 - | ``exclude_entities(Entities)``
-  | list of entities to exclude (default is ``[]``); no nodes are
-    generated for excluded entities and their predicates
+  | list of entities to exclude (default is ``[]``)
 
 - | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
   | code and documenting URL prefixes for a path prefix used when
@@ -599,9 +595,6 @@ For library diagrams the options are:
 
 - | ``zoom_url_suffix(Suffix)``
   | extension for linked diagrams (an atom; default is ``'.svg'``)
-
-All exclude option are used when deciding if a library, directory, file,
-entity, or predicate is excluded.
 
 When using the ``zoom(true)`` option, the ``layout(Layout)`` option
 applies only to the top diagram; sub-diagrams will use their own layout
