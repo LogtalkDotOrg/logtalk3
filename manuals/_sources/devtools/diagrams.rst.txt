@@ -402,20 +402,22 @@ generated diagrams. For entity diagrams the options are:
     ``'./dot_dias'``)
 
 - | ``exclude_directories(Directories)``
-  | list of directories to exclude (default is ``[]``); all
-    sub-directories of the excluded directories are also excluded;
-    directories may be listed by full or relative path
+  | list of directories to exclude except as external nodes (default is
+    ``[]``); all sub-directories of the excluded directories are also
+    excluded; directories may be listed by full or relative path
 
 - | ``exclude_files(Files)``
-  | list of source files to exclude (default is ``[]``); files may be
-    listed by full path or basename, with or without extension
+  | list of source files to exclude except as external nodes (default is
+    ``[]``); files may be listed by full path or basename, with or
+    without extension
 
 - | ``exclude_libraries(Libraries)``
-  | list of libraries to exclude (default is
+  | list of libraries to exclude except as external nodes (default is
     ``[startup, scratch_directory]``)
 
 - | ``exclude_entities(Entities)``
-  | list of entities to exclude (default is ``[]``)
+  | list of entities to exclude except as external nodes (default is
+    ``[]``)
 
 - | ``path_url_prefixes(PathPrefix, CodeURLPrefix, DocURLPrefix)``
   | code and documenting URL prefixes for a path prefix used when
@@ -516,10 +518,12 @@ For directory and file diagrams the options are:
     ``'./dot_dias'``)
 
 - | ``exclude_directories(Directories)``
-  | list of directories to exclude (default is ``[]``)
+  | list of directories to exclude except as external nodes (default is
+    ``[]``)
 
 - | ``exclude_files(Files)``
-  | list of source files to exclude (default is ``[]``)
+  | list of source files to exclude except as external nodes (default is
+    ``[]``)
 
 - | ``zoom(Boolean)``
   | generate sub-diagrams and add links and zoom icons to library and
@@ -580,13 +584,15 @@ For library diagrams the options are:
     ``'./dot_dias'``)
 
 - | ``exclude_directories(Directories)``
-  | list of directories to exclude (default is ``[]``)
+  | list of directories to exclude except as external nodes (default is
+    ``[]``)
 
 - | ``exclude_files(Files)``
-  | list of source files to exclude (default is ``[]``)
+  | list of source files to exclude except as external nodes (default is
+    ``[]``)
 
 - | ``exclude_libraries(Libraries)``
-  | list of libraries to exclude (default is
+  | list of libraries to exclude except as external nodes (default is
     ``[startup, scratch_directory]``)
 
 - | ``zoom(Boolean)``
