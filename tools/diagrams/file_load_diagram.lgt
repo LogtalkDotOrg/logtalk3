@@ -23,9 +23,9 @@
 	imports(file_diagram(Format))).
 
 	:- info([
-		version is 2:30:2,
+		version is 2:30:3,
 		author is 'Paulo Moura',
-		date is 2024-12-04,
+		date is 2024-12-05,
 		comment is 'Predicates for generating file loading dependency diagrams. A dependency exists when a file loads or includes another file.',
 		parameters is ['Format' - 'Graph language file format.'],
 		see_also is [file_dependency_diagram(_), directory_dependency_diagram(_), library_dependency_diagram(_)]
@@ -101,6 +101,9 @@
 		os::decompose_file_name(IncludePath, _, IncludeBasename),
 			^^not_excluded_file(IncludePath, IncludeBasename, ExcludedDirectories, ExcludedFiles),
 			^^remember_referenced_logtalk_file(IncludePath),
+			% a file may have multiple include/1 directives with the same file argument;
+			% e.g. the same file included in multiple entities defined in the same file
+			\+ ^^edge(Path, IncludePath, [includes], includes_file, _),
 			^^save_edge(Path, IncludePath, [includes], includes_file, [tooltip(includes)| Options]),
 		fail.
 	% output edges for loaded Prolog module files
