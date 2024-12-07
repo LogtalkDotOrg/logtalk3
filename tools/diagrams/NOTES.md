@@ -179,7 +179,7 @@ predicate, and file relations):
 - categories  
 	`component` (light cyan rectangle with two small rectangles intercepting the left side)
 - modules  
-	`tab` (plum rectangle with small tab at top)
+	`box` (plum rectangle with small tab at top)
 
 - public predicates  
 	`box` (springgreen)

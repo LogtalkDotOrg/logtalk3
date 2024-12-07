@@ -184,7 +184,7 @@ predicate, and file relations):
     intercepting the left side)
 
 - | modules
-  | ``tab`` (plum rectangle with small tab at top)
+  | ``box`` (plum rectangle with small tab at top)
 
 - | public predicates
   | ``box`` (springgreen)

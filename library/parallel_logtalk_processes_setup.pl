@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Parallel Logtalk processes setup for selected backend Prolog compilers
-%  Last updated on July 15, 2023
+%  Last updated on December 6, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
 %  you may not use this file except in compliance with the License.
@@ -92,7 +92,8 @@
 	% usage: xvmlgt -i parallel_logtalk_processes_setup.pl
 
 	logtalk_library_path(scratch_directory, Directory) :-
-		config_property(system/tempDir, TMP_DIR),
+		config_property(system/tempDir, TMP_DIR0),
+		absolute_file_name(TMP_DIR0, TMP_DIR),
 		pid(PID),
 		atomic_list_concat([TMP_DIR, logtalk, PID], Directory),
 		make_directory_path(Directory).
