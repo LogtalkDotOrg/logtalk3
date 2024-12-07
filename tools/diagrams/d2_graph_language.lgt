@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:4,
+		version is 1:0:5,
 		author is 'Paulo Moura',
-		date is 2024-12-04,
+		date is 2024-12-07,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -134,7 +134,7 @@
 		write_key_value(Stream, 'style.fill', Color),
 		(	member(url(URL), Options) ->
 			(	URL \== '' ->
-				write_key_value(Stream, link, URL)
+				write_key_value_quoted(Stream, link, URL)
 			;	member(tooltip(Tooltip), Options) ->
 				write_key_value(Stream, tooltip, Tooltip)
 			;	write_key_value(Stream, tooltip, Label)
@@ -168,7 +168,7 @@
 		write_key_value(Stream, 'style.stroke-dash', Dash),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
-			write_key_value(Stream, link, URL)
+			write_key_value_quoted(Stream, link, URL)
 		;	member(tooltip(Tooltip), Options) ->
 			write_key_value(Stream, tooltip, Tooltip)
 		;	true
@@ -244,7 +244,7 @@
 		write_key_value(Stream, 'target-arrowhead.style.filled', Filled),
 		(	^^option(url(URL), Options),
 			URL \== '' ->
-			write_key_value(Stream, link, URL)
+			write_key_value_quoted(Stream, link, URL)
 		;	member(tooltip(Tooltip), Options) ->
 			write_key_value(Stream, tooltip, Tooltip)
 		;	true
