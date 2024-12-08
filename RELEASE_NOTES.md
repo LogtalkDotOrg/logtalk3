@@ -91,6 +91,11 @@ Examples
 Installers and installation scripts
 -----------------------------------
 
+Tests
+-----
+
+* ADDED: Additional tests for the Prolog standard `round/1` evaluable.
+
 * IMPROVED: The manual installation script and MacPorts Portfile instructions
 for defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables.
 

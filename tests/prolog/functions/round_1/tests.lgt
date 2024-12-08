@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2020-07-14,
+		date is 2024-12-08,
 		comment is 'Unit tests for the ISO Prolog standard round/1 built-in function.'
 	]).
 
@@ -61,16 +61,32 @@
 
 	% tests from the Logtalk portability work
 
-	test(lgt_round_1_09, error(type_error(float,9))) :-
+	test(lgt_round_1_09, true(X == 9)) :-
+		% try to delay the error to runtime
+		{X is round(9.49)}.
+
+	test(lgt_round_1_10, true(X == 10)) :-
+		% try to delay the error to runtime
+		{X is round(9.51)}.
+
+	test(lgt_round_1_11, true(X == -9)) :-
+		% try to delay the error to runtime
+		{X is round(-9.49)}.
+
+	test(lgt_round_1_12, true(X == -10)) :-
+		% try to delay the error to runtime
+		{X is round(-9.51)}.
+
+	test(lgt_round_1_13, error(type_error(float,9))) :-
 		% try to delay the error to runtime
 		{_X is round(9)}.
 
-	test(lgt_round_1_10, error(type_error(evaluable,foo/0))) :-
+	test(lgt_round_1_14, error(type_error(evaluable,foo/0))) :-
 		% try to delay the error to runtime
 		foo(0, Foo),
 		{_X is round(Foo)}.
 
-	test(lgt_round_1_11, error(type_error(evaluable,foo/1))) :-
+	test(lgt_round_1_15, error(type_error(evaluable,foo/1))) :-
 		% try to delay the error to runtime
 		foo(1, Foo),
 		{_X is round(Foo)}.
