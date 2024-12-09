@@ -740,7 +740,7 @@
 
 	explain(compiling_query_as_initialization_goal(_, _, _, _, _)) -->
 		[	'Arbitrary queries used as directives are converted to initialization/1 directives.'-[], nl,
-			'Note that, as a consequence, the queries are only called after the file being loaded. '-[], nl, nl
+			'Note that, as a consequence, the queries are only called after the file being loaded.'-[], nl, nl
 		].
 
 	% Prolog dialect specific term- and goal-expansion messages
@@ -1038,7 +1038,7 @@
 		].
 	explain(suspicious_call(_, _, _, _, Var, [call(Var)])) -->
 		[	'Naked meta-variables in control constructs that are cut-transparent'-[], nl,
-			'may have different semantics across Prolog systems. Use instead the '-[], nl,
+			'may have different semantics across Prolog systems. Use instead the'-[], nl,
 			'suggested alternative to avoid portability issues.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _ =.. _, _)) -->
@@ -1145,7 +1145,7 @@
 		[	'Comparing floats is problematic as it can fail due to rounding errors and'-[], nl,
 			'loss of precision when converting from decimal to binary representation.'-[], nl,
 			'Check instead if the float values are within a given epsilon. The "float"'-[], nl,
-			'library object provides several predicates for comparing floats. '-[], nl, nl
+			'library object provides several predicates for comparing floats.'-[], nl, nl
 		].
 
 	% encoding/1 directive messages
@@ -1249,7 +1249,7 @@
 
 	explain(cannot_update_pinned_registry(_)) -->
 		[	'Pinning a registry is good practice for ensuring that applications dependent'-[], nl,
-			'on the registry packs will not be broken by updating the registry and, by '-[], nl,
+			'on the registry packs will not be broken by updating the registry and, by'-[], nl,
 			'doing that, updating pack manifest files for packs used by the applications.'-[], nl,
 			'To force updating, unpin the registry using the registries::unpin(Registry)'-[], nl,
 			'message or use the registries::update(Registry, Options) message with the'-[], nl,
