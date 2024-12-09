@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 9:1:0,
+		version is 10:0:0,
 		author is 'Paulo Moura',
-		date is 2024-06-09,
+		date is 2024-12-09,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -130,7 +130,7 @@
 			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~9f/~9f cpu/wall seconds)'-[CPUTime, WallTime], nl]
 			),
 			failed_test_reason(Reason),
-			file_position(File, Position),
+			message_context(File, Position),
 			[nl].
 
 	:- else.
@@ -150,7 +150,7 @@
 			;	['~q: failure (~w)'-[Test, Note]], flaky(Flaky), ['(in ~w/~w cpu/wall seconds)'-[CPUTime, WallTime], nl]
 			),
 			failed_test_reason(Reason),
-			file_position(File, Position),
+			message_context(File, Position),
 			[nl].
 
 	:- endif.
@@ -222,7 +222,7 @@
 
 	message_tokens(failed_cleanup(_Object, Test, File, Position, Reason)) -->
 		failed_cleanup_reason(Reason, _Object, Test),
-		file_position(File, Position).
+		message_context(File, Position).
 
 	message_tokens(broken_step(Step, Object, Error)) -->
 		['broken ~w goal for test object ~q: ~q'-[Step, Object, Error], nl].
@@ -280,17 +280,21 @@
 
 	% messages for test identifier errors (compile time)
 
-	message_tokens(non_instantiated_test_identifier(_Object)) -->
-		['non-instantiated test identifier found'-[], nl].
+	message_tokens(non_instantiated_test_identifier(_Object, File, Position, Type, Entity)) -->
+		['non-instantiated test identifier found'-[], nl],
+		message_context(File, Position, Type, Entity).
 
-	message_tokens(non_callable_test_identifier(_Object, Test)) -->
-		['non-callable test identifier found: ~q'-[Test], nl].
+	message_tokens(non_callable_test_identifier(_Object, Test, File, Position, Type, Entity)) -->
+		['non-callable test identifier found: ~q'-[Test], nl],
+		message_context(File, Position, Type, Entity).
 
-	message_tokens(non_ground_test_identifier(_Object, Test)) -->
-		['non-ground test identifier found: ~q'-[Test], nl].
+	message_tokens(non_ground_test_identifier(_Object, Test, File, Position, Type, Entity)) -->
+		['non-ground test identifier found: ~q'-[Test], nl],
+		message_context(File, Position, Type, Entity).
 
-	message_tokens(repeated_test_identifier(_Object, Test)) -->
-		['repeated test identifier found: ~q'-[Test], nl].
+	message_tokens(repeated_test_identifier(_Object, Test, File, Position, Type, Entity)) -->
+		['repeated test identifier found: ~q'-[Test], nl],
+		message_context(File, Position, Type, Entity).
 
 	% messages for test identifier errors (runtime)
 
@@ -311,24 +315,29 @@
 
 	% messages for test outcome errors
 
-	message_tokens(non_instantiated_test_outcome(Test)) -->
-		['non-instantiated test outcome found: ~q'-[Test], nl].
+	message_tokens(non_instantiated_test_outcome(Test, File, Position, Type, Entity)) -->
+		['non-instantiated test outcome found: ~q'-[Test], nl],
+		message_context(File, Position, Type, Entity).
 
-	message_tokens(invalid_test_outcome(Test, Outcome)) -->
-		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl].
+	message_tokens(invalid_test_outcome(Test, Outcome, File, Position, Type, Entity)) -->
+		['test ~q outcome is invalid: ~q'-[Test, Outcome], nl],
+		message_context(File, Position, Type, Entity).
 
 	% messages for invalid test specifications
 
-	message_tokens(non_instantiated_test_option(Test)) -->
-		['non-instantiated test option found: ~q'-[Test], nl].
+	message_tokens(non_instantiated_test_option(Test, File, Position, Type, Entity)) -->
+		['non-instantiated test option found: ~q'-[Test], nl],
+		message_context(File, Position, Type, Entity).
 
-	message_tokens(invalid_test_option(Test, Option)) -->
-		['test ~q option is invalid: ~q'-[Test, Option], nl].
+	message_tokens(invalid_test_option(Test, Option, File, Position, Type, Entity)) -->
+		['test ~q option is invalid: ~q'-[Test, Option], nl],
+		message_context(File, Position, Type, Entity).
 
 	% linter warnings
 
-	message_tokens(assertion_uses_unification(Test, Assertion)) -->
-		['test ~q assertion uses a unification goal: ~q'-[Test, Assertion], nl].
+	message_tokens(assertion_uses_unification(Test, Assertion, File, Position, Type, Entity)) -->
+		['test ~q assertion uses a unification goal: ~q'-[Test, Assertion], nl],
+		message_context(File, Position, Type, Entity).
 
 	% auxiliary grammar rules
 
@@ -390,11 +399,28 @@
 	flaky(false) -->
 		[' '-[]].
 
-	file_position(Path, Position) -->
+	message_context(Path, Lines, Type, Entity) -->
 		{suppress_path_prefix(Path, ShortPath)},
-		(	{Position = Line-Line} ->
-			['  in file ~w at or above line ~w'-[ShortPath, Line], nl]
-		;	['  in file ~w between lines ~w'-[ShortPath, Position], nl]
+		['  while compiling ~w ~q'-[Type, Entity], nl],
+		(	{Lines == 0-0} ->
+			['  in auxiliary clause generated for file ~w'-[ShortPath], nl, nl]
+		;	{Lines == 1-1} ->
+			['  in file ~w at line 1'-[ShortPath], nl, nl]
+		;	{Lines = Line-Line} ->
+			['  in file ~w at or above line ~d'-[ShortPath, Line], nl, nl]
+		;	['  in file ~w between lines ~w'-[ShortPath, Lines], nl, nl]
+		).
+
+	message_context(Path, Lines) -->
+		{suppress_path_prefix(Path, ShortPath)},
+		['  while compiling file'-[], nl],
+		(	{Lines == 0-0} ->
+			['  in auxiliary clause generated for file ~w'-[ShortPath], nl, nl]
+		;	{Lines == 1-1} ->
+			['  in file ~w at line 1'-[ShortPath], nl, nl]
+		;	{Lines = Line-Line} ->
+			['  in file ~w at or above line ~d'-[ShortPath, Line], nl, nl]
+		;	['  in file ~w between lines ~w'-[ShortPath, Lines], nl, nl]
 		).
 
 	suppress_path_prefix(Path, ShortPath) :-

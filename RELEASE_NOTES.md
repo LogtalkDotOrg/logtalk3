@@ -45,6 +45,9 @@ Library
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool test compilation warning and error messages to
+include the file context for better integration with other developer tools.
+
 * CHANGED: The `diagrams` tool now uses a Unicode glyph for the magnifying
 lens instead of a PNG image.
 

@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:77:0,
+		version is 0:78:0,
 		author is 'Paulo Moura',
-		date is 2024-11-12,
+		date is 2024-12-09,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -1229,7 +1229,7 @@
 			'constructs by the used backend system.'-[], nl, nl
 		].
 
-	explain(assertion_uses_unification(_, _)) -->
+	explain(assertion_uses_unification(_, _, _, _, _, _)) -->
 		[	'Using unification in an assertion will fail to catch cases where a test'-[], nl,
 			'query fails to bind (or further instantiate) an output argument as the'-[], nl,
 			'unification will trivially succeed. Consider using instead (==)/2,'-[], nl,
