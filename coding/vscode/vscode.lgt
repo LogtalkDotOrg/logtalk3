@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:59:1,
+		version is 0:60:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-01,
+		date is 2024-12-09,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1579,6 +1579,16 @@
 	logtalk::message_hook(_Message, warning, lgtdoc, Tokens) :-
 		message_hook(Tokens, lgtdoc, warning),
 		fail.
+	% lgtunit tool warning and errors
+	logtalk::message_hook(_Message, error, lgtunit, Tokens) :-
+		message_hook(Tokens, lgtunit, error).
+	logtalk::message_hook(_Message, error(Class), lgtunit, Tokens) :-
+		message_hook(Tokens, lgtunit, error(Class)).
+	logtalk::message_hook(_Message, warning, lgtunit, Tokens) :-
+		message_hook(Tokens, lgtunit, warning).
+	logtalk::message_hook(_Message, warning(Class), lgtunit, Tokens) :-
+		message_hook(Tokens, lgtunit, warning(Class)).
+
 	% lgtunit test results
 	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),

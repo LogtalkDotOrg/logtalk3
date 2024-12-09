@@ -105,6 +105,9 @@ for defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* UPDATED: VSCode support to also list the `lgtunit` tool warning and error
+messages in the "PROBLEMS" pane.
+
 * FIXED: Compilation errors when loading the VSCode support file using the XSB
 backend.
 
