@@ -1759,7 +1759,7 @@
 		% test clause body);  use a boolean flag to track the presence of a note/1 option
 		parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, _NoteFlag, File, Position, Type, Entity).
 
-	parse_test_options([], _, Condition, Setup, Cleanup, Flaky, Note, NoteFlag, _, _) :-
+	parse_test_options([], _, Condition, Setup, Cleanup, Flaky, Note, NoteFlag, _, _, _, _) :-
 		(	var(Condition) ->
 			% no condition/1 option found
 			Condition = true
