@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2024-08-13,
+		date is 2024-12-10,
 		comment is 'Unit tests for the ``left_recursion`` linter flag.'
 	]).
 
@@ -48,7 +48,10 @@
 	test(left_recursion_linter_flag_03, exists(Term == (p :- p, q))) :-
 		left_recursion(_, _, object, left_recursion, Term).
 
-	test(left_recursion_linter_flag_04, true(type::valid(ground(list), Tokens))) :-
+	test(left_recursion_linter_flag_04, false) :-
+		left_recursion(_, _, object, no_left_recursion, _).
+
+	test(left_recursion_linter_flag_05, true(type::valid(ground(list), Tokens))) :-
 		phrase(logtalk::message_tokens(left_recursion(file, 1-2, object, left_recursion, (a :- a, b)), core), Tokens).
 
 	:- multifile(logtalk::message_hook/4).

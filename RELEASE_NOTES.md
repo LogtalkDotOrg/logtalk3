@@ -25,6 +25,13 @@ RELEASE NOTES
 3.86.0 - December ??, 2024
 ==========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: False left-recursion warning when compiling a grammar rule for
+a multifile non-terminal that calls a local non-terminal with the same
+indicator.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -96,6 +103,8 @@ Installers and installation scripts
 
 Tests
 -----
+
+* ADDED: Additional tests for the left-recursion linter warning.
 
 * ADDED: Additional tests for the Prolog standard `round/1` evaluable.
 

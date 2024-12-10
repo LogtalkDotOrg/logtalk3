@@ -25912,16 +25912,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	var(RHead),
 	throw(instantiation_error).
 
-'$lgt_dcg_rule'((Entity::NonTerminal, Terminals --> GRBody), (Entity::Head :- Body), Ctx) :-
-	!,
-	'$lgt_check'(object_identifier, Entity),
-	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body), Ctx).
-
-'$lgt_dcg_rule'((':'(Module, NonTerminal), Terminals --> GRBody), (':'(Module, Head) :- Body), Ctx) :-
-	!,
-	'$lgt_check'(module_identifier, Module),
-	'$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), (Head :- Body), Ctx).
-
 '$lgt_dcg_rule'((phrase(_), _ --> _), _, _) :-
 	throw(permission_error(modify, built_in_non_terminal, phrase//1)).
 
@@ -25929,6 +25919,22 @@ create_logtalk_flag(Flag, Value, Options) :-
 	functor(NonTerminal, call, Arity),
 	Arity >= 1,
 	throw(permission_error(modify, built_in_non_terminal, call//Arity)).
+
+'$lgt_dcg_rule'((Entity::NonTerminal, Terminals --> GRBody), (Entity::Head :- Body), Ctx) :-
+	!,
+	'$lgt_check'(object_identifier, Entity),
+	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
+	'$lgt_dcg_body'(GRBody, S0, S1, Goal1, Ctx),
+	'$lgt_dcg_terminals'(Terminals, S, S1, Goal2),
+	Body = (Goal1, Goal2).
+
+'$lgt_dcg_rule'((':'(Module, NonTerminal), Terminals --> GRBody), (':'(Module, Head) :- Body), Ctx) :-
+	!,
+	'$lgt_check'(module_identifier, Module),
+	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
+	'$lgt_dcg_body'(GRBody, S0, S1, Goal1, Ctx),
+	'$lgt_dcg_terminals'(Terminals, S, S1, Goal2),
+	Body = (Goal1, Goal2).
 
 '$lgt_dcg_rule'((NonTerminal, Terminals --> GRBody), _, Ctx) :-
 	once((
@@ -25960,16 +25966,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	true
 	).
 
-'$lgt_dcg_rule'((Entity::NonTerminal --> GRBody), (Entity::Head :- Body), Ctx) :-
-	!,
-	'$lgt_check'(object_identifier, Entity),
-	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx).
-
-'$lgt_dcg_rule'((':'(Module, NonTerminal) --> GRBody), (':'(Module, Head) :- Body), Ctx) :-
-	!,
-	'$lgt_check'(module_identifier, Module),
-	'$lgt_dcg_rule'((NonTerminal --> GRBody), (Head :- Body), Ctx).
-
 '$lgt_dcg_rule'((phrase(_) --> _), _, _) :-
 	throw(permission_error(modify, built_in_non_terminal, phrase//1)).
 
@@ -25980,6 +25976,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_dcg_rule'((eos --> _), _, _) :-
 	throw(permission_error(modify, built_in_non_terminal, eos//0)).
+
+'$lgt_dcg_rule'((Entity::NonTerminal --> GRBody), (Entity::Head :- Body), Ctx) :-
+	!,
+	'$lgt_check'(object_identifier, Entity),
+	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
+	'$lgt_dcg_body'(GRBody, S0, S, Body, Ctx).
+
+'$lgt_dcg_rule'((':'(Module, NonTerminal) --> GRBody), (':'(Module, Head) :- Body), Ctx) :-
+	!,
+	'$lgt_check'(module_identifier, Module),
+	'$lgt_dcg_non_terminal'(NonTerminal, S0, S, Head),
+	'$lgt_dcg_body'(GRBody, S0, S, Body, Ctx).
 
 '$lgt_dcg_rule'((NonTerminal --> GRBody), _, Ctx) :-
 	once((

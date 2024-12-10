@@ -37,3 +37,25 @@
 	q.
 
 :- end_object.
+
+
+:- object(no_left_recursion).
+
+	:- multifile(logtalk::message_tokens//2).
+	:- dynamic(logtalk::message_tokens//2).
+
+	logtalk::message_tokens(Message, left_recursion) -->
+		message_tokens(Message, left_recursion).
+
+	message_tokens(_, _) -->
+		[].
+
+	:- multifile(user::logtalk_library_path/2).
+	:- dynamic(user::logtalk_library_path/2).
+
+	user::logtalk_library_path(Library, Path) :-
+		logtalk_library_path(Library, Path).
+
+	logtalk_library_path(lib, path).
+
+:- end_object.
