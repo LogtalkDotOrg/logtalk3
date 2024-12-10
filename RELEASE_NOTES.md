@@ -114,6 +114,9 @@ for defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* UPDATED: VSCode support to use the `tutor` tool to explain compiler warning
+and error messages when loaded.
+
 * UPDATED: VSCode support to also list the `lgtunit` tool warning and error
 messages in the "PROBLEMS" pane.
 

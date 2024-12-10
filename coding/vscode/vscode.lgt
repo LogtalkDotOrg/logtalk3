@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:60:0,
+		version is 0:61:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-09,
+		date is 2024-12-10,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1555,39 +1555,39 @@
 	% fail after processing to allow default processing of the messages
 
 	% compiling file message
-	logtalk::message_hook(compiling_file(File, _), _, core, _) :-
-		message_hook(['[ compiling ~w ... ]'-[File], nl], core, comment),
+	logtalk::message_hook(compiling_file(File, Flags), _, core, _) :-
+		message_hook(compiling_file(File, Flags), comment, core, ['[ compiling ~w ... ]'-[File], nl, nl]),
 		fail.
 	% compiler warnings and errors
-	logtalk::message_hook(_Message, error, core, Tokens) :-
-		message_hook(Tokens, core, error),
+	logtalk::message_hook(Message, error, core, Tokens) :-
+		message_hook(Message, error, core, Tokens),
 		fail.
-	logtalk::message_hook(_Message, error(Class), core, Tokens) :-
-		message_hook(Tokens, core, error(Class)),
+	logtalk::message_hook(Message, error(Class), core, Tokens) :-
+		message_hook(Message, error(Class), core, Tokens),
 		fail.
-	logtalk::message_hook(_Message, warning, core, Tokens) :-
-		message_hook(Tokens, core, warning),
+	logtalk::message_hook(Message, warning, core, Tokens) :-
+		message_hook(Message, warning, core, Tokens),
 		fail.
-	logtalk::message_hook(_Message, warning(Class), core, Tokens) :-
-		message_hook(Tokens, core, warning(Class)),
+	logtalk::message_hook(Message, warning(Class), core, Tokens) :-
+		message_hook(Message, warning(Class), core, Tokens),
 		fail.
 	% dead_code_scanner tool warnings
-	logtalk::message_hook(_Message, warning, dead_code_scanner, Tokens) :-
-		message_hook(Tokens, dead_code_scanner, warning),
+	logtalk::message_hook(Message, warning, dead_code_scanner, Tokens) :-
+		message_hook(Message, warning, dead_code_scanner, Tokens),
 		fail.
 	% lgtdoc tool warnings
-	logtalk::message_hook(_Message, warning, lgtdoc, Tokens) :-
-		message_hook(Tokens, lgtdoc, warning),
+	logtalk::message_hook(Message, warning, lgtdoc, Tokens) :-
+		message_hook(Message, warning, lgtdoc, Tokens),
 		fail.
 	% lgtunit tool warning and errors
-	logtalk::message_hook(_Message, error, lgtunit, Tokens) :-
-		message_hook(Tokens, lgtunit, error).
-	logtalk::message_hook(_Message, error(Class), lgtunit, Tokens) :-
-		message_hook(Tokens, lgtunit, error(Class)).
-	logtalk::message_hook(_Message, warning, lgtunit, Tokens) :-
-		message_hook(Tokens, lgtunit, warning).
-	logtalk::message_hook(_Message, warning(Class), lgtunit, Tokens) :-
-		message_hook(Tokens, lgtunit, warning(Class)).
+	logtalk::message_hook(Message, error, lgtunit, Tokens) :-
+		message_hook(Message, error, lgtunit, Tokens).
+	logtalk::message_hook(Message, error(Class), lgtunit, Tokens) :-
+		message_hook(Message, error(Class), lgtunit, Tokens).
+	logtalk::message_hook(Message, warning, lgtunit, Tokens) :-
+		message_hook(Message, warning, lgtunit, Tokens).
+	logtalk::message_hook(Message, warning(Class), lgtunit, Tokens) :-
+		message_hook(Message, warning(Class), lgtunit, Tokens).
 
 	% lgtunit test results
 	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
@@ -1599,19 +1599,19 @@
 		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Total, Skipped, Passed, Failed, Flaky, Note])}
 		),
 		fail.
-	logtalk::message_hook(passed_test(_Object, _Test, File, Line-_, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+	logtalk::message_hook(passed_test(_Object, _Test, File, Start-_, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		{format(vscode_test_results, 'File:~w;Line:~d;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
+		{format(vscode_test_results, 'File:~w;Line:~d;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
 		fail.
-	logtalk::message_hook(failed_test(_Object, _Test, File, Line-_, _Reason, _Flaky, _Note, CPUTime, WallTime), Kind, lgtunit, Tokens) :-
+	logtalk::message_hook(failed_test(Object, Test, File, Start-End, Reason, Flaky, Note, CPUTime, WallTime), Kind, lgtunit, Tokens) :-
 		stream_property(_, alias(vscode_test_results)),
-		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Line, CPUTime, WallTime])},
+		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
 		% also write to the scratch/.messages file to be able to add failed tests to the "PROBLEMS" pane
-		message_hook(Tokens, lgtunit, Kind),
+		message_hook(failed_test(Object, Test, File, Start-End, Reason, Flaky, Note, CPUTime, WallTime), Kind, lgtunit, Tokens),
 		fail.
-	logtalk::message_hook(skipped_test(_Object, _Test, File, Line-_, _Note), _, lgtunit, _) :-
+	logtalk::message_hook(skipped_test(_Object, _Test, File, Start-_, _Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		{format(vscode_test_results, 'File:~w;Line:~d;Status:skipped~n', [File, Line])},
+		{format(vscode_test_results, 'File:~w;Line:~d;Status:skipped~n', [File, Start])},
 		fail.
 	logtalk::message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
@@ -1654,11 +1654,18 @@
 		close(Stream),
 		fail.
 
-	message_hook(Tokens, Component, Kind) :-
+	message_hook(Message, Kind, Component, Tokens0) :-
+		{append(Tokens, [nl], Tokens0)},
 		logtalk::expand_library_path(logtalk_user('scratch/.messages'), File),
 		open(File, append, Stream),
 		logtalk::message_prefix_stream(Kind, Component, Prefix, _),
 		logtalk::print_message_tokens(Stream, Prefix, Tokens),
+		(	current_object(tutor),
+			phrase(tutor::explain(Message), ExplanationTokens) ->
+			logtalk::print_message_tokens(Stream, Prefix, ExplanationTokens)
+		;	true
+		),
+		logtalk::print_message_tokens(Stream, Prefix, [nl]),
 		close(Stream).
 
 :- end_object.
