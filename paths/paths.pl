@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on September 27, 2024
+%  Last updated on December 10, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -276,6 +276,7 @@ logtalk_library_path(pardicts, examples('pardicts/')).
 logtalk_library_path(parvars, examples('parvars/')).
 logtalk_library_path(pengines, examples('pengines/')).
 logtalk_library_path(people, examples('people/')).
+logtalk_library_path(permutations, examples('permutations/')).
 logtalk_library_path(persistency, examples('persistency/')).
 logtalk_library_path(philosophers, threads('philosophers/')).
 logtalk_library_path(ping_pong, threads('ping_pong/')).

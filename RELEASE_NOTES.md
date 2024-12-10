@@ -96,6 +96,10 @@ directive `info/1` key.
 Examples
 --------
 
+* ADDED: New `permutations` example providing benchmarks based on list
+permutations. Adapted from Prolog code written and contributed by Paul
+Tarau.
+
 * UPDATED: The `assumptions` example with another individual example.
 
 Installers and installation scripts
