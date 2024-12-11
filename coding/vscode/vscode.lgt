@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:61:0,
+		version is 0:61:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-10,
+		date is 2024-12-11,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1581,13 +1581,17 @@
 		fail.
 	% lgtunit tool warning and errors
 	logtalk::message_hook(Message, error, lgtunit, Tokens) :-
-		message_hook(Message, error, lgtunit, Tokens).
+		message_hook(Message, error, lgtunit, Tokens),
+		fail.
 	logtalk::message_hook(Message, error(Class), lgtunit, Tokens) :-
-		message_hook(Message, error(Class), lgtunit, Tokens).
+		message_hook(Message, error(Class), lgtunit, Tokens),
+		fail.
 	logtalk::message_hook(Message, warning, lgtunit, Tokens) :-
-		message_hook(Message, warning, lgtunit, Tokens).
+		message_hook(Message, warning, lgtunit, Tokens),
+		fail.
 	logtalk::message_hook(Message, warning(Class), lgtunit, Tokens) :-
-		message_hook(Message, warning(Class), lgtunit, Tokens).
+		message_hook(Message, warning(Class), lgtunit, Tokens),
+		fail.
 
 	% lgtunit test results
 	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
@@ -1606,8 +1610,6 @@
 	logtalk::message_hook(failed_test(Object, Test, File, Start-End, Reason, Flaky, Note, CPUTime, WallTime), Kind, lgtunit, Tokens) :-
 		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
-		% also write to the scratch/.messages file to be able to add failed tests to the "PROBLEMS" pane
-		message_hook(failed_test(Object, Test, File, Start-End, Reason, Flaky, Note, CPUTime, WallTime), Kind, lgtunit, Tokens),
 		fail.
 	logtalk::message_hook(skipped_test(_Object, _Test, File, Start-_, _Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
