@@ -1603,11 +1603,11 @@
 		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Total, Skipped, Passed, Failed, Flaky, Note])}
 		),
 		fail.
-	logtalk::message_hook(passed_test(_Object, _Test, File, Start-_, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+	logtalk::message_hook(passed_test(_Object, _Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
 		fail.
-	logtalk::message_hook(failed_test(Object, Test, File, Start-End, Reason, Flaky, Note, CPUTime, WallTime), Kind, lgtunit, Tokens) :-
+	logtalk::message_hook(failed_test(_Object, _Test, File, Start-_End, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
 		fail.
