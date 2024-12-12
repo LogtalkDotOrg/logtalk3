@@ -797,10 +797,10 @@
 		foo(X),
 		X.
 
-	baz(X, Y, Z) :-
+	baz(X, Y) :-
 		(	X ->
 			Y
-		;	Z
+		;	true
 		).
 
 :- end_object.
