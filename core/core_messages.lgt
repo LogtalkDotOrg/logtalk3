@@ -85,7 +85,7 @@
 		(	{current_logtalk_flag(hook, Hook)} ->
 			{ground_term_copy(Hook, GroundHook)},
 			['using the hook object ~q ... ]'-[GroundHook], nl]
-			;	['... ]'-[], nl]
+		;	['... ]'-[], nl]
 		).
 
 	message_tokens(compiled_file(File, _Flags)) -->
