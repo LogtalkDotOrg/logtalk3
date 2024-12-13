@@ -72,6 +72,9 @@ node identifiers are not global.
 * UPDATED: The `diagrams` tool to also support the PearAI, Windsurf, PyCharm,
 and IDEA text editors when generating diagrams with local file links.
 
+* UPDATED: The `tutor` tool to also explain duplicated predicate/non-terminal
+reference linter warnings.
+
 * FIXED: The `diagrams` tool to also generate an `instance/class` caption for
 metaclasses.
 

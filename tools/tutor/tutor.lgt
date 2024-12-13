@@ -22,9 +22,9 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:78:0,
+		version is 0:79:0,
 		author is 'Paulo Moura',
-		date is 2024-12-09,
+		date is 2024-12-13,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
 		remarks is [
 			'Usage' - 'Simply load this object at startup using the goal ``logtalk_load(tutor(loader))``.'
@@ -641,6 +641,11 @@
 			'can result in spurious choice-points, degrading performance. Delete'-[], nl,
 			'or correct the duplicated grammar rule to fix this warning.'-[], nl, nl
 		].
+
+	explain(duplicated_predicate_reference(_, _, _, _, _, _, _)) -->
+		['Easy to fix warning: simply delete the duplicated reference.'-[], nl, nl].
+	explain(duplicated_non_terminal_reference(_, _, _, _, _, _, _)) -->
+		['Easy to fix warning: simply delete the duplicated reference.'-[], nl, nl].
 
 	explain(non_tail_recursive_predicate(_, _, _, _, _)) -->
 		[	'Non-tail recursive predicate definitions consume space proportional'-[], nl,
