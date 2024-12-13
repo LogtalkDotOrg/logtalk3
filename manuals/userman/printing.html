@@ -82,6 +82,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#printing-messages">Printing messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#message-tokenization">Message tokenization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#meta-messages">Meta-messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-message-prefixes-and-output-streams">Defining message prefixes and output streams</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#defining-message-prefixes-and-output-files">Defining message prefixes and output files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#intercepting-messages">Intercepting messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#asking-questions">Asking questions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#intercepting-questions">Intercepting questions</a></li>
@@ -317,6 +319,67 @@ temporary messages only used to help developing, notably debugging messages.
 See the <a class="reference internal" href="debugging.html#debugging-messages"><span class="std std-ref">Debugging messages</span></a> section and the
 <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">logtalk built-in object</span></a> remarks section for details.</p>
 </section>
+<section id="defining-message-prefixes-and-output-streams">
+<h2>Defining message prefixes and output streams<a class="headerlink" href="#defining-message-prefixes-and-output-streams" title="Link to this heading"></a></h2>
+<p>The <a class="reference internal" href="../refman/methods/message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a>
+hook predicate can be used to define a message line prefix and an output stream
+for printing messages of a given kind and component. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_prefix_stream<span class="o">/</span><span class="m">4</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_prefix_stream<span class="o">/</span><span class="m">4</span>).
+
+logtalk<span class="o">::</span>message_prefix_stream(comment, my_app, <span class="s">&#39;% &#39;</span>, user_output).
+logtalk<span class="o">::</span>message_prefix_stream(warning, my_app, <span class="s">&#39;* &#39;</span>, user_error).
+</pre></div>
+</div>
+<p>A single clause at most is expected per message kind and component pair.
+When this predicate is not defined for a given kind and component pair,
+the following defaults are used:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>kind_prefix_stream(banner,         <span class="s">&#39;&#39;</span>,       user_output).
+kind_prefix_stream(help,           <span class="s">&#39;&#39;</span>,       user_output).
+kind_prefix_stream(question,       <span class="s">&#39;&#39;</span>,       user_output).
+kind_prefix_stream(question(<span class="nv">_</span>),    <span class="s">&#39;&#39;</span>,       user_output).
+kind_prefix_stream(information,    <span class="s">&#39;% &#39;</span>,     user_output).
+kind_prefix_stream(information(<span class="nv">_</span>), <span class="s">&#39;% &#39;</span>,     user_output).
+kind_prefix_stream(comment,        <span class="s">&#39;% &#39;</span>,     user_output).
+kind_prefix_stream(comment(<span class="nv">_</span>),     <span class="s">&#39;% &#39;</span>,     user_output).
+kind_prefix_stream(warning,        <span class="s">&#39;*     &#39;</span>, user_error).
+kind_prefix_stream(warning(<span class="nv">_</span>),     <span class="s">&#39;*     &#39;</span>, user_error).
+kind_prefix_stream(error,          <span class="s">&#39;!     &#39;</span>, user_error).
+kind_prefix_stream(error(<span class="nv">_</span>),       <span class="s">&#39;!     &#39;</span>, user_error).
+kind_prefix_stream(debug,          <span class="s">&#39;&gt;&gt;&gt; &#39;</span>,   user_error).
+kind_prefix_stream(debug(<span class="nv">_</span>),       <span class="s">&#39;&gt;&gt;&gt; &#39;</span>,   user_error).
+</pre></div>
+</div>
+<p>When the message kind is unknown, <code class="docutils literal notranslate"><span class="pre">information</span></code> is used instead.</p>
+</section>
+<section id="defining-message-prefixes-and-output-files">
+<h2>Defining message prefixes and output files<a class="headerlink" href="#defining-message-prefixes-and-output-files" title="Link to this heading"></a></h2>
+<p>Some applications require copying and saving messages without diverting them
+from their default stream. For simple cases, this can be accomplished by
+intercepting the messages using the <a class="reference internal" href="../refman/methods/message_hook_4.html#methods-message-hook-4"><span class="std std-ref">logtalk::message_hook/4</span></a>
+multifile hook predicate (see next section). In more complex cases, where
+messages are already intercepted for a different purpose, it can be tricky
+to use multiple definitions of the <code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code> predicate as the
+order of the clauses of a multiple predicate cannot be assumed in general
+(for all <code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code> predicate definitions to run, all but the last
+one to be called must fail). Using a single <em>master</em> definition is also not
+ideal as results in strong coupling instead of a clean separation of concerns.</p>
+<p>The experimental <a class="reference internal" href="../refman/methods/message_prefix_file_6.html#methods-message-prefix-file-6"><span class="std std-ref">logtalk::message_prefix_file/6</span></a>
+hook predicate can be used to define a message line prefix and an output file
+for copying messages of a given kind and component pair. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_prefix_file<span class="o">/</span><span class="m">6</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_prefix_file<span class="o">/</span><span class="m">6</span>).
+
+logtalk<span class="o">::</span>message_prefix_file(error,   app, <span class="s">&#39;! &#39;</span>, <span class="s">&#39;log.txt&#39;</span>, append, []).
+logtalk<span class="o">::</span>message_prefix_file(warning, app, <span class="s">&#39;! &#39;</span>, <span class="s">&#39;log.txt&#39;</span>, append, []).
+</pre></div>
+</div>
+<p>A single clause at most is expected per message kind and component pair.</p>
+<p>This predicate is called by default by the message printing mechanism.
+Definitions of the <code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code> hook predicate are free to decide
+if the <code class="docutils literal notranslate"><span class="pre">logtalk::message_prefix_file/6</span></code> predicate should be called and
+acted upon.</p>
+</section>
 <section id="intercepting-messages">
 <h2>Intercepting messages<a class="headerlink" href="#intercepting-messages" title="Link to this heading"></a></h2>
 <p>Calls to the <a class="reference internal" href="../refman/methods/print_message_3.html#methods-print-message-3"><span class="std std-ref">logtalk::print_message/3</span></a>
@@ -357,9 +420,6 @@ compiler messages:</p>
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
-<p>This example calls the <a class="reference internal" href="../refman/methods/message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">logtalk::message_prefix_stream/4</span></a>
-hook predicate, which can be used to define a message line prefix and an
-output stream for printing messages for a given component.</p>
 </section>
 <section id="asking-questions">
 <span id="printing-questions"></span><h2>Asking questions<a class="headerlink" href="#asking-questions" title="Link to this heading"></a></h2>

@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 2:0:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2024-05-18,
+		date is 2024-12-13,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -103,6 +103,15 @@
 	:- info(message_prefix_stream/4, [
 		comment is 'Message line prefix and output stream to be used when printing a message given its kind and component.',
 		argnames is ['Kind', 'Component', 'Prefix', 'Stream']
+	]).
+
+	:- public(message_prefix_file/6).
+	:- multifile(message_prefix_file/6).
+	:- dynamic(message_prefix_file/6).
+	:- mode(message_prefix_file(?nonvar, ?nonvar, ?atom, ?atom, ?atom, ?list(compound)), zero_or_more).
+	:- info(message_prefix_file/6, [
+		comment is 'Message line prefix and output file to be used when printing a message given its kind and component.',
+		argnames is ['Kind', 'Component', 'Prefix', 'File', 'Mode', 'Options']
 	]).
 
 	:- public(message_hook/4).
@@ -379,13 +388,22 @@
 		!.
 	default_print_message(Kind, Component, Tokens) :-
 		(	message_prefix_stream(Kind, Component, Prefix, Stream) ->
-			true
-		;	% no user-defined prefix and stream; use default definition
+			default_print_message_tokens(Kind, Tokens, Stream, Prefix)
+		;	% no defined prefix and stream for kind-component; use default definition
 			default_message_prefix_stream(Kind, Prefix, Stream) ->
-			true
+			default_print_message_tokens(Kind, Tokens, Stream, Prefix)
 		;	% no such kind of message; use "information" instead
-			default_message_prefix_stream(information, Prefix, Stream)
+			default_message_prefix_stream(information, Prefix, Stream),
+			default_print_message_tokens(Kind, Tokens, Stream, Prefix)
 		),
+		(	message_prefix_file(Kind, Component, Prefix, File, Mode, Options) ->
+			open(File, Mode, FileStream, Options),
+			default_print_message_tokens(Kind, Tokens, FileStream, Prefix),
+			close(FileStream)
+		;	true
+		).
+
+	default_print_message_tokens(Kind, Tokens, Stream, Prefix) :-
 		% add begin/2 and end/1 tokens to, respectively, the start and the end of the list of tokens
 		% but pass them using discrete arguments instead of doing an expensive list append operation;
 		% these two tokens can be intercepted by the user for supporting e.g. message coloring

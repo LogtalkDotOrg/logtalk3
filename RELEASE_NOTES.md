@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Experimental `logtalk::message_prefix_file/6` hook predicate to
+the message printing mechanism.
+
 * FIXED: False left-recursion warning when compiling a grammar rule for
 a multifile non-terminal that calls a local non-terminal with the same
 indicator.

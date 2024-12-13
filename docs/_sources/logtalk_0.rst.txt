@@ -14,8 +14,8 @@ Built-in object providing message printing, debugging, library, source file, and
 |    ``built_in``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2024-05-18
+| **Version:** 3:0:0
+| **Date:** 2024-12-13
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -145,6 +145,25 @@ Message line prefix and output stream to be used when printing a message given i
 |    ``message_prefix_stream(Kind,Component,Prefix,Stream)``
 | **Mode and number of proofs:**
 |    ``message_prefix_stream(?nonvar,?nonvar,?atom,?stream_or_alias)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: message_prefix_file/6
+.. _logtalk/0::message_prefix_file/6:
+
+``message_prefix_file/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Message line prefix and output file to be used when printing a message given its kind and component.
+
+| **Compilation flags:**
+|    ``dynamic, multifile``
+
+| **Template:**
+|    ``message_prefix_file(Kind,Component,Prefix,File,Mode,Options)``
+| **Mode and number of proofs:**
+|    ``message_prefix_file(?nonvar,?nonvar,?atom,?atom,?atom,?list(compound))`` - ``zero_or_more``
 
 
 ------------

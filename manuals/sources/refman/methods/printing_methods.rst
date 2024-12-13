@@ -28,5 +28,6 @@ Message printing
    message_tokens_2
    message_hook_4
    message_prefix_stream_4
+   message_prefix_file_6
    print_message_tokens_3
    print_message_token_4

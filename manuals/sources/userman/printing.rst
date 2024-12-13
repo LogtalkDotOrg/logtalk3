@@ -212,6 +212,77 @@ temporary messages only used to help developing, notably debugging messages.
 See the :ref:`debugging_messages` section and the
 :ref:`logtalk built-in object <apis:logtalk/0>` remarks section for details.
 
+Defining message prefixes and output streams
+--------------------------------------------
+
+The :ref:`logtalk::message_prefix_stream/4 <methods_message_prefix_stream_4>`
+hook predicate can be used to define a message line prefix and an output stream
+for printing messages of a given kind and component. For example:
+
+::
+
+	:- multifile(logtalk::message_prefix_stream/4).
+	:- dynamic(logtalk::message_prefix_stream/4).
+
+	logtalk::message_prefix_stream(comment, my_app, '% ', user_output).
+	logtalk::message_prefix_stream(warning, my_app, '* ', user_error).
+
+A single clause at most is expected per message kind and component pair.
+When this predicate is not defined for a given kind and component pair,
+the following defaults are used:
+
+::
+
+	kind_prefix_stream(banner,         '',       user_output).
+	kind_prefix_stream(help,           '',       user_output).
+	kind_prefix_stream(question,       '',       user_output).
+	kind_prefix_stream(question(_),    '',       user_output).
+	kind_prefix_stream(information,    '% ',     user_output).
+	kind_prefix_stream(information(_), '% ',     user_output).
+	kind_prefix_stream(comment,        '% ',     user_output).
+	kind_prefix_stream(comment(_),     '% ',     user_output).
+	kind_prefix_stream(warning,        '*     ', user_error).
+	kind_prefix_stream(warning(_),     '*     ', user_error).
+	kind_prefix_stream(error,          '!     ', user_error).
+	kind_prefix_stream(error(_),       '!     ', user_error).
+	kind_prefix_stream(debug,          '>>> ',   user_error).
+	kind_prefix_stream(debug(_),       '>>> ',   user_error).
+
+When the message kind is unknown, ``information`` is used instead.
+
+Defining message prefixes and output files
+------------------------------------------
+
+Some applications require copying and saving messages without diverting them
+from their default stream. For simple cases, this can be accomplished by
+intercepting the messages using the :ref:`logtalk::message_hook/4 <methods_message_hook_4>`
+multifile hook predicate (see next section). In more complex cases, where
+messages are already intercepted for a different purpose, it can be tricky
+to use multiple definitions of the ``message_hook/4`` predicate as the
+order of the clauses of a multiple predicate cannot be assumed in general
+(for all ``message_hook/4`` predicate definitions to run, all but the last
+one to be called must fail). Using a single *master* definition is also not
+ideal as results in strong coupling instead of a clean separation of concerns.
+
+The experimental :ref:`logtalk::message_prefix_file/6 <methods_message_prefix_file_6>`
+hook predicate can be used to define a message line prefix and an output file
+for copying messages of a given kind and component pair. For example:
+
+::
+
+   :- multifile(logtalk::message_prefix_file/6).
+   :- dynamic(logtalk::message_prefix_file/6).
+
+   logtalk::message_prefix_file(error,   app, '! ', 'log.txt', append, []).
+   logtalk::message_prefix_file(warning, app, '! ', 'log.txt', append, []).
+
+A single clause at most is expected per message kind and component pair.
+
+This predicate is called by default by the message printing mechanism.
+Definitions of the ``message_hook/4`` hook predicate are free to decide
+if the ``logtalk::message_prefix_file/6`` predicate should be called and
+acted upon.
+
 Intercepting messages
 ---------------------
 
@@ -258,10 +329,6 @@ compiler messages:
            logtalk::print_message_tokens(Stream, Prefix, Tokens).
    
    :- end_category.
-
-This example calls the :ref:`logtalk::message_prefix_stream/4 <methods_message_prefix_stream_4>`
-hook predicate, which can be used to define a message line prefix and an
-output stream for printing messages for a given component.
 
 .. _printing_questions:
 

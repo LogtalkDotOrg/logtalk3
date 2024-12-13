@@ -67,6 +67,7 @@ Examples
 
 .. seealso::
 
+   :ref:`methods_message_prefix_file_6`,
    :ref:`methods_message_hook_4`,
    :ref:`methods_message_tokens_2`,
    :ref:`methods_print_message_3`,

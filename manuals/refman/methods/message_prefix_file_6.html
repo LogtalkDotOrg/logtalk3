@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>print_message_token/4 &mdash; The Logtalk Handbook v3.86.0-b01 documentation</title>
+  <title>message_prefix_file/6 &mdash; The Logtalk Handbook v3.86.0-b01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=649a27d8" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=396eccfe" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Question asking" href="asking_methods.html" />
-    <link rel="prev" title="print_message_tokens/3" href="print_message_tokens_3.html" />
+    <link rel="next" title="print_message_tokens/3" href="print_message_tokens_3.html" />
+    <link rel="prev" title="message_prefix_stream/4" href="message_prefix_stream_4.html" />
    
 </head>
 
@@ -87,9 +87,9 @@
 <li class="toctree-l4"><a class="reference internal" href="message_tokens_2.html"><code class="docutils literal notranslate"><span class="pre">message_tokens//2</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="message_hook_4.html"><code class="docutils literal notranslate"><span class="pre">message_hook/4</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="message_prefix_stream_4.html"><code class="docutils literal notranslate"><span class="pre">message_prefix_stream/4</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="message_prefix_file_6.html"><code class="docutils literal notranslate"><span class="pre">message_prefix_file/6</span></code></a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">message_prefix_file/6</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="print_message_tokens_3.html"><code class="docutils literal notranslate"><span class="pre">print_message_tokens/3</span></code></a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="print_message_token_4.html"><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="asking_methods.html">Question asking</a></li>
@@ -132,9 +132,9 @@
           <li class="breadcrumb-item"><a href="../index.html">Reference Manual</a></li>
           <li class="breadcrumb-item"><a href="index.html">Built-in methods</a></li>
           <li class="breadcrumb-item"><a href="printing_methods.html">Message printing</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">message_prefix_file/6</span></code></li>
       <li class="wy-breadcrumbs-aside">
-              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/methods/print_message_token_4.rst" class="fa fa-github"> Edit on GitHub</a>
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/manuals/sources/refman/methods/message_prefix_file_6.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
   </ul>
   <hr/>
@@ -143,23 +143,27 @@
            <div itemprop="articleBody">
              
   <p class="align-right"><strong>built-in method</strong></p>
-<section id="print-message-token-4">
-<span id="methods-print-message-token-4"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">print_message_token/4</span></code><a class="headerlink" href="#print-message-token-4" title="Link to this heading"></a></h1>
+<section id="message-prefix-file-6">
+<span id="methods-message-prefix-file-6"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">message_prefix_file/6</span></code><a class="headerlink" href="#message-prefix-file-6" title="Link to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>print_message_token(<span class="nv">Stream</span>, <span class="nv">Prefix</span>, <span class="nv">Token</span>, <span class="nv">Tokens</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>message_prefix_file(<span class="nv">Kind</span>, <span class="nv">Component</span>, <span class="nv">Prefix</span>, <span class="nv">File</span>, <span class="nv">Mode</span>, <span class="nv">Options</span>)
 </pre></div>
 </div>
-<p>User-defined hook method for printing a message token, declared in the
-<a class="reference external" href="../../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">logtalk</span></a> built-in object as a public, multifile,
-and dynamic predicate. It allows the user to intercept the printing of
-a message token. This hook method is automatically called by the
-<a class="reference internal" href="print_message_tokens_3.html#methods-print-message-tokens-3"><span class="std std-ref">print_message_tokens/3</span></a> built-in
-method for each token.</p>
+<p>Experimental user-defined hook method for specifying the prefix and file
+for copying messages for a given kind and <a class="reference internal" href="../../glossary.html#term-component"><span class="xref std std-term">component</span></a>. This method
+is declared in the <a class="reference external" href="../../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">logtalk</span></a> built-in object as a
+public, multifile, and dynamic predicate. The valid values for <code class="docutils literal notranslate"><span class="pre">Mode</span></code>
+are <code class="docutils literal notranslate"><span class="pre">write</span></code> and <code class="docutils literal notranslate"><span class="pre">append</span></code>. The valid options are the same as the
+standard <code class="docutils literal notranslate"><span class="pre">open/4</span></code> predicate.</p>
+<p>The prefix is printed for each line in the list of tokens generated by the
+message tokenization (new lines are specified using the <code class="docutils literal notranslate"><span class="pre">nl</span></code> token; see
+the documentation of the <a class="reference external" href="../../../docs/logtalk_0.html#logtalk-0" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">logtalk</span></a> built-in object
+for details).</p>
 </section>
 <section id="modes-and-number-of-proofs">
 <h2>Modes and number of proofs<a class="headerlink" href="#modes-and-number-of-proofs" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>print_message_token(<span class="o">@</span>stream_or_alias, <span class="o">@</span>atom, <span class="o">@</span>nonvar, <span class="o">@</span>list(nonvar)) <span class="o">-</span> zero_or_one
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>message_prefix_file(<span class="o">?</span>nonvar, <span class="o">?</span>nonvar, <span class="o">?</span>atom, <span class="o">?</span>atom, <span class="o">?</span>atom, <span class="o">?</span>list(compound)) <span class="o">-</span> zero_or_more
 </pre></div>
 </div>
 </section>
@@ -169,20 +173,20 @@ method for each token.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>print_message_token<span class="o">/</span><span class="m">4</span>).
-<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>print_message_token<span class="o">/</span><span class="m">4</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(logtalk<span class="o">::</span>message_prefix_file<span class="o">/</span><span class="m">6</span>).
+<span class="p">:- </span><span class="k">dynamic</span>(logtalk<span class="o">::</span>message_prefix_file<span class="o">/</span><span class="m">6</span>).
 
-<span class="c">% ignore all flush tokens</span>
-logtalk<span class="o">::</span>print_message_token(<span class="nv">_Stream</span>, <span class="nv">_Prefix</span>, flush, <span class="nv">_Tokens</span>).
+logtalk<span class="o">::</span>message_prefix_file(comment, app, <span class="s">&#39;% &#39;</span>, <span class="s">&#39;comments.txt&#39;</span>, append, []).
 </pre></div>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="message_hook_4.html#methods-message-hook-4"><span class="std std-ref">message_hook/4</span></a>,
-<a class="reference internal" href="message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">message_prefix_stream/4</span></a>,
+<p><a class="reference internal" href="message_prefix_stream_4.html#methods-message-prefix-stream-4"><span class="std std-ref">message_prefix_stream/4</span></a>,
+<a class="reference internal" href="message_hook_4.html#methods-message-hook-4"><span class="std std-ref">message_hook/4</span></a>,
 <a class="reference internal" href="message_tokens_2.html#methods-message-tokens-2"><span class="std std-ref">message_tokens//2</span></a>,
 <a class="reference internal" href="print_message_3.html#methods-print-message-3"><span class="std std-ref">print_message/3</span></a>,
 <a class="reference internal" href="print_message_tokens_3.html#methods-print-message-tokens-3"><span class="std std-ref">print_message_tokens/3</span></a>,
+<a class="reference internal" href="print_message_token_4.html#methods-print-message-token-4"><span class="std std-ref">print_message_token/4</span></a>,
 <a class="reference internal" href="ask_question_5.html#methods-ask-question-5"><span class="std std-ref">ask_question/5</span></a>,
 <a class="reference internal" href="question_hook_6.html#methods-question-hook-6"><span class="std std-ref">question_hook/6</span></a>,
 <a class="reference internal" href="question_prompt_stream_4.html#methods-question-prompt-stream-4"><span class="std std-ref">question_prompt_stream/4</span></a></p>
@@ -194,8 +198,8 @@ logtalk<span class="o">::</span>print_message_token(<span class="nv">_Stream</sp
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="print_message_tokens_3.html" class="btn btn-neutral float-left" title="print_message_tokens/3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="asking_methods.html" class="btn btn-neutral float-right" title="Question asking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="message_prefix_stream_4.html" class="btn btn-neutral float-left" title="message_prefix_stream/4" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="print_message_tokens_3.html" class="btn btn-neutral float-right" title="print_message_tokens/3" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
