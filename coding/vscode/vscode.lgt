@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:61:1,
+		version is 0:62:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-11,
+		date is 2024-12-13,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1549,50 +1549,46 @@
 
 	% rewrite compiler error and warnings messages for parsing with Visual Studio Code
 
+	:- multifile(logtalk::message_prefix_file/6).
+	:- dynamic(logtalk::message_prefix_file/6).
+
+	logtalk::message_prefix_file(Kind, Component, Prefix, File, append, [alias(vscode_scratch_messages)]) :-
+		message_prefix_file(Kind, Component, Prefix),
+		logtalk::expand_library_path(logtalk_user('scratch/.messages'), File).
+
+	% compiler warnings and errors
+	message_prefix_file(error,      core,              '!     ').
+	message_prefix_file(error(_),   core,              '!     ').
+	message_prefix_file(warning,    core,              '*     ').
+	message_prefix_file(warning(_), core,              '*     ').
+	% dead_code_scanner tool warnings
+	message_prefix_file(warning,    dead_code_scanner, '*     ').
+	message_prefix_file(warning(_), dead_code_scanner, '*     ').
+	% lgtdoc tool warnings
+	message_prefix_file(warning,    lgtdoc,            '*     ').
+	message_prefix_file(warning(_), lgtdoc,            '*     ').
+	% lgtunit tool warning and errors
+	message_prefix_file(error,      lgtunit,           '!     ').
+	message_prefix_file(error(_),   lgtunit,           '!     ').
+	message_prefix_file(warning,    lgtunit,           '*     ').
+	message_prefix_file(warning(_), lgtunit,           '*     ').
+
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
 	% fail after processing to allow default processing of the messages
 
-	% compiling file message
-	logtalk::message_hook(compiling_file(File, Flags), _, core, _) :-
-		message_hook(compiling_file(File, Flags), comment, core, ['[ compiling ~w ... ]'-[File], nl, nl]),
+	% compiling file messages
+	logtalk::message_hook(compiling_file(File, _), _, core, _) :-
+		(	stream_property(Stream, alias(vscode_scratch_messages)) ->
+			true
+		;	logtalk::expand_library_path(logtalk_user('scratch/.messages'), Messages),
+			open(Messages, append, Stream, [alias(vscode_scratch_messages)])
+		),
+		logtalk::message_prefix_stream(comment, core, Prefix, _),
+		logtalk::print_message_tokens(Stream, Prefix, ['[ compiling ~w ... ]'-[File], nl, nl]),
+		close(Stream),
 		fail.
-	% compiler warnings and errors
-	logtalk::message_hook(Message, error, core, Tokens) :-
-		message_hook(Message, error, core, Tokens),
-		fail.
-	logtalk::message_hook(Message, error(Class), core, Tokens) :-
-		message_hook(Message, error(Class), core, Tokens),
-		fail.
-	logtalk::message_hook(Message, warning, core, Tokens) :-
-		message_hook(Message, warning, core, Tokens),
-		fail.
-	logtalk::message_hook(Message, warning(Class), core, Tokens) :-
-		message_hook(Message, warning(Class), core, Tokens),
-		fail.
-	% dead_code_scanner tool warnings
-	logtalk::message_hook(Message, warning, dead_code_scanner, Tokens) :-
-		message_hook(Message, warning, dead_code_scanner, Tokens),
-		fail.
-	% lgtdoc tool warnings
-	logtalk::message_hook(Message, warning, lgtdoc, Tokens) :-
-		message_hook(Message, warning, lgtdoc, Tokens),
-		fail.
-	% lgtunit tool warning and errors
-	logtalk::message_hook(Message, error, lgtunit, Tokens) :-
-		message_hook(Message, error, lgtunit, Tokens),
-		fail.
-	logtalk::message_hook(Message, error(Class), lgtunit, Tokens) :-
-		message_hook(Message, error(Class), lgtunit, Tokens),
-		fail.
-	logtalk::message_hook(Message, warning, lgtunit, Tokens) :-
-		message_hook(Message, warning, lgtunit, Tokens),
-		fail.
-	logtalk::message_hook(Message, warning(Class), lgtunit, Tokens) :-
-		message_hook(Message, warning(Class), lgtunit, Tokens),
-		fail.
-
 	% lgtunit test results
 	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
@@ -1655,19 +1651,5 @@
 		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
 		close(Stream),
 		fail.
-
-	message_hook(Message, Kind, Component, Tokens0) :-
-		{append(Tokens, [nl], Tokens0)},
-		logtalk::expand_library_path(logtalk_user('scratch/.messages'), File),
-		open(File, append, Stream),
-		logtalk::message_prefix_stream(Kind, Component, Prefix, _),
-		logtalk::print_message_tokens(Stream, Prefix, Tokens),
-		(	current_object(tutor),
-			phrase(tutor::explain(Message), ExplanationTokens) ->
-			logtalk::print_message_tokens(Stream, Prefix, ExplanationTokens)
-		;	true
-		),
-		logtalk::print_message_tokens(Stream, Prefix, [nl]),
-		close(Stream).
 
 :- end_object.

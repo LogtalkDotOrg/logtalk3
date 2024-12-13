@@ -22,7 +22,7 @@
 :- object(tutor).
 
 	:- info([
-		version is 0:79:0,
+		version is 0:80:0,
 		author is 'Paulo Moura',
 		date is 2024-12-13,
 		comment is 'This object adds explanations and suggestions to selected compiler warning and error messages.',
@@ -51,7 +51,6 @@
 		message_hook(Message, Kind, packs, Tokens).
 
 	message_hook(Message, Kind, Component, Tokens) :-
-		logtalk::message_prefix_stream(Kind, Component, Prefix, Stream),
 		phrase(explain(Message), ExplanationTokens),
 		% avoid empty line between the compiler message and its explanation
 		(	list::append(Tokens0, [nl, nl], Tokens) ->
@@ -61,7 +60,15 @@
 		% add begin/2 and end/1 tokens to enable message coloring
 		% if supported by the backend Prolog compiler
 		list::append(ExtendedTokens0, [end(Ctx)], ExtendedTokens),
-		logtalk::print_message_tokens(Stream, Prefix, ExtendedTokens).
+		logtalk::message_prefix_stream(Kind, Component, Prefix, Stream),
+		logtalk::print_message_tokens(Stream, Prefix, ExtendedTokens),
+		% take into account tools such as VSCode that require copying messages to a file for parsing
+		(	logtalk::message_prefix_file(Kind, Component, Prefix, File, Mode, Options) ->
+			open(File, Mode, FileStream, Options),
+			logtalk::print_message_tokens(FileStream, Prefix, ExtendedTokens),
+			close(FileStream)
+		;	true
+		).
 
 	% errors
 

@@ -78,6 +78,10 @@ and IDEA text editors when generating diagrams with local file links.
 * UPDATED: The `tutor` tool to also explain duplicated predicate/non-terminal
 reference linter warnings.
 
+* UPDATED: The `tutor` tool to call the new `logtalk::message_prefix_file/6`
+hook predicate to support VSCode displaying warnings and errors augmented with
+explanations.
+
 * FIXED: The `diagrams` tool to also generate an `instance/class` caption for
 metaclasses.
 
@@ -124,8 +128,9 @@ for defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
-* UPDATED: VSCode support to use the `tutor` tool to explain compiler warning
-and error messages when loaded.
+* UPDATED: VSCode support to use the new `logtalk::message_prefix_file/6`
+hook predicate to support displaying warnings and errors augmented with
+the `tutor` tool explanations.
 
 * UPDATED: VSCode support to also list the `lgtunit` tool warning and error
 messages in the "PROBLEMS" pane.
