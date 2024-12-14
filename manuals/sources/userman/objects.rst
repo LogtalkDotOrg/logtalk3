@@ -119,7 +119,7 @@ a category.
 
 Object code (directives and predicates) is textually encapsulated by
 using two Logtalk directives: :ref:`directives_object_1_5` and
-:ref:`directives_end_object_0`. The most simple object will be one
+:ref:`directives_end_object_0`. The simplest object will be one
 that is self-contained, not depending on any other Logtalk entity:
 
 ::
@@ -158,7 +158,7 @@ will write:
        ...
    :- end_object.
 
-In object-oriented programming objects are usually organized in
+In object-oriented programming, objects are usually organized in
 hierarchies that enable interface and code sharing by inheritance. In
 Logtalk, we can construct prototype-based hierarchies by writing:
 
@@ -640,8 +640,7 @@ Object relationships
 --------------------
 
 Logtalk provides six sets of built-in predicates that enable us to query
-the system about the possible relationships that an object may have with
-other entities.
+the system about the relationships that an object has with other entities.
 
 The :ref:`predicates_instantiates_class_2_3` built-in predicates can be
 used to query all instantiation relations:

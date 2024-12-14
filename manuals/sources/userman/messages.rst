@@ -27,17 +27,16 @@ a message is fundamentally different from calling a predicate. When calling a
 predicate, the caller decides implicitly which predicate definition will be
 executed. When sending a message, it is the receiving object, not the sender,
 that decides which predicate definition (if any) will be called to answer the
-message. The predicate definition that is actually used to answer a message
-depends on the relations between the object and its imported categories and
-ancestor objects (if any). See the :ref:`inheritance_inheritance` section
-for details on the predicate declaration and predicate definition lookup
-procedures.
+message. The predicate definition that is used to answer a message depends on
+the relations between the object and its imported categories and ancestor
+objects (if any). See the :ref:`inheritance_inheritance` section for details
+on the predicate declaration and predicate definition lookup procedures.
 
 When a message corresponds to a :term:`meta-predicate`, the meta-arguments
 are always called in the context of the object (or category) sending the
 message.
 
-Logtalk uses nomenclature similar to in other object-oriented programming
+Logtalk uses nomenclature similar to other object-oriented programming
 languages such as Smalltalk. Therefore, the terms *query* and *message* are
 used interchangeably when referring to a declared predicate that is part of
 an object interface. Likewise, the terms *predicate* and *method* are used
@@ -174,7 +173,7 @@ This control construct is generalized in Logtalk where it may be used to
 call any imported or inherited predicate definition. This control
 construct may be used within objects and categories. When combined with
 :term:`static binding`, this control construct allows imported and inherited
-predicates to be called with the same performance of local predicates.
+predicates to be called with the same performance as local predicates.
 As with the message sending control constructs, the ``(^^)/1`` call simply
 fails when the predicate is declared but not defined (as per the
 :term:`closed-world assumption`).

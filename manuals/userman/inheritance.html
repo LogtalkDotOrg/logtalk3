@@ -152,7 +152,7 @@
              
   <section id="inheritance">
 <span id="inheritance-inheritance"></span><h1>Inheritance<a class="headerlink" href="#inheritance" title="Link to this heading"></a></h1>
-<p>The inheritance mechanisms found on object-oriented programming languages
+<p>The inheritance mechanisms found in object-oriented programming languages
 allow the specialization of previously defined objects, avoiding the
 unnecessary repetition of code and allowing the definition of common
 functionality for sets of objects. In the context of logic programming,
@@ -348,12 +348,11 @@ no
 </section>
 <section id="selective-inheritance-of-predicate-definitions">
 <span id="inheritance-selective"></span><h3>Selective inheritance of predicate definitions<a class="headerlink" href="#selective-inheritance-of-predicate-definitions" title="Link to this heading"></a></h3>
-<p>The selective inheritance of predicate definitions (also known as
-differential inheritance) is normally used in the representation
-of exceptions to inherited default definitions. We can use the
-<a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> <em>super call</em> operator to test and possibly
-reject some of the inherited definitions. A common example is representing
-flightless birds:</p>
+<p>Selective inheritance of predicate definitions (also known as differential
+inheritance) is normally used in the representation of exceptions to
+inherited default definitions. We can use the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a>
+<em>super call</em> operator to test and possibly reject some of the inherited
+definitions. A common example is representing flightless birds:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bird).
 
 <span class="p">    :- </span><span class="k">public</span>(mode<span class="o">/</span><span class="m">1</span>).

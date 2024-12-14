@@ -187,7 +187,7 @@
 <p>Predicate directives and clauses can be encapsulated inside objects and
 categories. Protocols can only contain predicate directives. From the
 point-of-view of a traditional imperative object-oriented language,
-predicates allows both object state and object behavior to be represented.
+predicates allow both object state and object behavior to be represented.
 Mutable object state can be represented using dynamic object predicates
 but should only be used when strictly necessary as it breaks declarative
 semantics.</p>
@@ -210,7 +210,7 @@ the corresponding built-in protocol is missing.</p>
 <p>Logtalk provides a clear distinction between <em>declaring a predicate</em> and
 <em>defining a predicate</em> and thus clear <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a> semantics.
 Messages or calls for declared but undefined predicates fail. Messages or
-calls for unknown (i.e. non declared) predicates throw an error. Note that
+calls for unknown (i.e. non-declared) predicates throw an error. Note that
 this is a fundamental requirement for supporting <a class="reference internal" href="protocols.html#protocols-protocols"><span class="std std-ref">protocols</span></a>:
 we must be able to declare a predicate without necessarily defining it.</p>
 <p>All object (or category) predicates that we want to access from other
@@ -266,7 +266,7 @@ and operators. For example:</p>
 </div>
 <p>Note that, in the case of operators, the operator definitions don’t become
 global when the entity containing the directives is compiled and loaded.
-This prevents an application breaking when e.g. an updated third-party
+This prevents an application from breaking when e.g. an updated third-party
 library adds new operators. It also allows loading entities that provide
 conflicting operator definitions. Here the usual programming idiom is to
 copy the operator definitions to a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive. For example, the

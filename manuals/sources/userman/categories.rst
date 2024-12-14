@@ -25,7 +25,7 @@ Categories are *fine-grained units of code reuse* and can be regarded as a
 dual concept of protocols. Categories provide a way to encapsulate a set
 of related predicate declarations and definitions that do not represent
 a complete object and that only make sense when composed with other
-predicates. Categories may also be used to break a complex object in
+predicates. Categories may also be used to break a complex object into
 functional units. A category can be imported by several objects (without
 code duplication), including objects participating in prototype or
 class-based hierarchies. This concept of categories shares some ideas
@@ -143,7 +143,7 @@ For example:
    :- end_category.
 
 Each object importing this category will have its own ``attribute_/2``
-private, dynamic predicate. The predicates ``attribute/2``,
+private and dynamic predicate. The predicates ``attribute/2``,
 ``set_attribute/2``, and ``del_attribute/2`` always access and modify
 the dynamic predicate contained in the object receiving the
 corresponding messages (i.e. *self*). But it's also possible to define
@@ -429,8 +429,7 @@ Category relationships
 ----------------------
 
 Logtalk provides two sets of built-in predicates that enable us to query
-the system about the possible relationships that a category can have
-with other entities.
+the system about the relationships that a category has with other entities.
 
 The built-in predicates :ref:`predicates_implements_protocol_2_3`
 and :ref:`predicates_conforms_to_protocol_2_3`

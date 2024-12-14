@@ -82,9 +82,9 @@ Black-box view
 ~~~~~~~~~~~~~~
 
 The black-box view provides a view that takes into account entity encapsulation
-and thus only allow querying about predicates and operators that are within
+and thus only allows querying about predicates and operators that are within
 scope of the entity calling the reflection methods. This is the view we use
-and asking questions such as: *What messages can be sent to this object?*
+when asking questions such as: *What messages can be sent to this object?*
 
 Built-in methods are provided for querying the :ref:`predicates that are
 declared and can be called or used as messages <methods_current_predicate_1>`

@@ -195,7 +195,7 @@ message. An event can thus be represented by the ordered tuple
 <p>If we consider message processing an indivisible activity, we can
 interpret the sending of a message and the return of the control to the
 object that has sent the message as two distinct events. This
-distinction allows us to have a more precise control over a system
+distinction allows us to have a more precise control over a system’s
 dynamic behavior. In Logtalk, these two types of events have been named
 <code class="docutils literal notranslate"><span class="pre">before</span></code> and <code class="docutils literal notranslate"><span class="pre">after</span></code>, respectively for sending a message and for
 returning of control to the sender. Therefore, we refine our event
@@ -231,13 +231,13 @@ existence. The minimum protocol necessary is declared in the built-in
 <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">monitoring</span></a> protocol. Strictly speaking, the
 reference to this protocol is only needed when specializing event handlers.
 Nevertheless, it is considered good programming practice to always
-refer the protocol when defining event handlers.</p>
+refer to the protocol when defining event handlers.</p>
 </dd>
-<dt>Unlimited number of monitors for each event</dt><dd><p>Several monitors can observe the same event because of distinct
-reasons. Therefore, the number of monitors per event is bounded only
-by the available computing resources.</p>
+<dt>Unlimited number of monitors for each event</dt><dd><p>Several monitors can observe the same event for distinct reasons.
+Therefore, the number of monitors per event is bounded only by the
+available computing resources.</p>
 </dd>
-<dt>The monitor status of an object can be dynamically changed in runtime</dt><dd><p>This property does not imply that an object must be dynamic to act as
+<dt>The monitor status of an object can be dynamically changed at runtime</dt><dd><p>This property does not imply that an object must be dynamic to act as
 a monitor (the monitor status of an object is not stored in the
 object).</p>
 </dd>
@@ -257,7 +257,7 @@ The first — <em>before event</em> — is generated when the message is sent. T
 second — <em>after event</em> — is generated after the message has successfully
 been executed.</p>
 <p>Note that <em>self</em> messages (using the <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> control
-construct) or <em>super</em> calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> control
+construct) and <em>super</em> calls (using the <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a> control
 construct) don’t generate events.</p>
 </section>
 <section id="communicating-events-to-monitors">
@@ -265,7 +265,7 @@ construct) don’t generate events.</p>
 <p>Whenever a spied event occurs, the message sending mechanism calls the
 corresponding event handlers directly for all registered monitors. These
 calls are internally made bypassing the message sending primitives in order
-to avoid potential endless loops. The event handlers consist in user
+to avoid potential endless loops. The event handlers consist of user
 definitions for the public predicates declared in the built-in
 <a class="reference external" href="../../docs/monitoring_0.html#monitoring-0" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">monitoring</span></a> protocol (see below for more details).</p>
 </section>
@@ -279,7 +279,7 @@ performed in constant time and independently of the number of
 monitored events. The events representation takes advantage of the first
 argument indexing performed by most Prolog compilers, which ensure — in
 the general case — access in constant time.</p>
-<p>Event-support can be turned off on a per-object (or per-category) basis
+<p>Event support can be turned off on a per-object (or per-category) basis
 using the <a class="reference internal" href="programming.html#flag-events"><span class="std std-ref">events</span></a> compiler flag. With event-support
 turned off, Logtalk uses optimized code for processing message sending
 calls that skips the checking of monitored events, resulting in a small
@@ -290,11 +290,11 @@ but measurable performance improvement.</p>
 <p>The established semantics for monitors actions consists on considering
 its success as a necessary condition so that a message can succeed:</p>
 <ul class="simple">
-<li><p>All actions associated to events of type <code class="docutils literal notranslate"><span class="pre">before</span></code> must succeed, so
+<li><p>All actions associated with events of type <code class="docutils literal notranslate"><span class="pre">before</span></code> must succeed, so
 that the message processing can start.</p></li>
-<li><p>All actions associated to events of type <code class="docutils literal notranslate"><span class="pre">after</span></code> also have to
+<li><p>All actions associated with events of type <code class="docutils literal notranslate"><span class="pre">after</span></code> also have to
 succeed so that the message itself succeeds. The failure of any
-action associated to an event of type <code class="docutils literal notranslate"><span class="pre">after</span></code> forces backtracking
+action associated with an event of type <code class="docutils literal notranslate"><span class="pre">after</span></code> forces backtracking
 over the message execution (the failure of a monitor never causes
 backtracking over the preceding monitor actions).</p></li>
 </ul>

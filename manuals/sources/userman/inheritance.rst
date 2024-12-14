@@ -21,7 +21,7 @@
 Inheritance
 ===========
 
-The inheritance mechanisms found on object-oriented programming languages
+The inheritance mechanisms found in object-oriented programming languages
 allow the specialization of previously defined objects, avoiding the
 unnecessary repetition of code and allowing the definition of common
 functionality for sets of objects. In the context of logic programming,
@@ -261,12 +261,11 @@ example:
 Selective inheritance of predicate definitions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The selective inheritance of predicate definitions (also known as
-differential inheritance) is normally used in the representation
-of exceptions to inherited default definitions. We can use the
-:ref:`control_call_super_1` *super call* operator to test and possibly
-reject some of the inherited definitions. A common example is representing
-flightless birds:
+Selective inheritance of predicate definitions (also known as differential
+inheritance) is normally used in the representation of exceptions to
+inherited default definitions. We can use the :ref:`control_call_super_1`
+*super call* operator to test and possibly reject some of the inherited
+definitions. A common example is representing flightless birds:
 
 ::
 

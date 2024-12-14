@@ -25,7 +25,7 @@ Protocols enable the separation between interface and implementation:
 several objects can implement the same protocol and an object can
 implement several protocols. Protocols may contain only predicate
 declarations. In some languages the term *interface* is used with
-similar meaning. Logtalk allows predicate declarations of any scope
+a similar meaning. Logtalk allows predicate declarations of any scope
 within protocols, contrary to some languages that only allow public
 declarations.
 
@@ -211,8 +211,7 @@ Protocol relationships
 ----------------------
 
 Logtalk provides two sets of built-in predicates that enable us to query
-the system about the possible relationships that a protocol have with
-other entities.
+the system about the relationships that a protocol has with other entities.
 
 The :ref:`predicates_extends_protocol_2_3` built-in predicates return all
 pairs of protocols so that the first one extends the second:

@@ -245,7 +245,7 @@ name space: we cannot have an object with the same name as a protocol or
 a category.</p>
 <p>Object code (directives and predicates) is textually encapsulated by
 using two Logtalk directives: <a class="reference internal" href="../refman/directives/object_1_5.html#directives-object-1-5"><span class="std std-ref">object/1-5</span></a> and
-<a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>. The most simple object will be one
+<a class="reference internal" href="../refman/directives/end_object_0.html#directives-end-object-0"><span class="std std-ref">end_object/0</span></a>. The simplest object will be one
 that is self-contained, not depending on any other Logtalk entity:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>).
     ...
@@ -276,7 +276,7 @@ will write:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>In object-oriented programming objects are usually organized in
+<p>In object-oriented programming, objects are usually organized in
 hierarchies that enable interface and code sharing by inheritance. In
 Logtalk, we can construct prototype-based hierarchies by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Prototype</span>,
@@ -670,8 +670,7 @@ same protocol when using explicit message sending.</p>
 <section id="object-relationships">
 <span id="objects-relationships"></span><h2>Object relationships<a class="headerlink" href="#object-relationships" title="Link to this heading"></a></h2>
 <p>Logtalk provides six sets of built-in predicates that enable us to query
-the system about the possible relationships that an object may have with
-other entities.</p>
+the system about the relationships that an object has with other entities.</p>
 <p>The <a class="reference internal" href="../refman/predicates/instantiates_class_2_3.html#predicates-instantiates-class-2-3"><span class="std std-ref">instantiates_class/2-3</span></a> built-in predicates can be
 used to query all instantiation relations:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- instantiates_class(Instance, Class).

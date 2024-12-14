@@ -24,15 +24,15 @@ Main features
 Several years ago, I decided that the best way to learn object-oriented
 programming was to build my own object-oriented language. Prolog being
 always my favorite language, I chose to extend it with object-oriented
-capabilities. Strong motivation also come from my frustration with
+capabilities. Strong motivation also comes from my frustration with
 Prolog shortcomings for writing large applications. Eventually this work
-has led to the Logtalk programming language as its know today. The first
+led to the Logtalk programming language as we know it today. The first
 system to use the name Logtalk appeared in February 1995. At that
 time, Logtalk was mainly an experiment in computational reflection with
 a rudimentary runtime and no compiler. Based on feedback by users and on
-the author subsequent work, the name was retained and Logtalk as created
+the author's subsequent work, the name was retained and Logtalk was created
 as a full programming language focusing on using object-oriented concepts
-for code encapsulation and reuse. Development started on January 1998 with
+for code encapsulation and reuse. Development started in January 1998 with
 the first public alpha version released in July 1998. The first stable
 release (2.0) was published in February 1999. Development of the third
 generation of Logtalk started in 2012 with the first public alpha version
@@ -53,7 +53,7 @@ Integration of logic and object-oriented programming
    the other hand, logic programming allows us to represent, in a
    declarative way, the knowledge we have of each entity. Together,
    these two advantages allow us to minimize the distance between an
-   application and its problem domain, turning the writing and
+   application and its problem domain, making the writing and
    maintenance of programming easier and more productive.
 
    From a pragmatic perspective, Logtalk objects provide Prolog with
@@ -72,7 +72,7 @@ Integration of event-driven and object-oriented programming
    object-oriented programming, in which each computing is initiated by
    the explicit sending of a message to an object. The user dynamically
    defines what events are to be observed and establishes monitors for
-   these events. This is specially useful when representing
+   these events. This is especially useful when representing
    relationships between objects that imply constraints in the state of
    participating objects [Rumbaugh87]_, [Rumbaugh88]_, [Fornarino_et_al_89]_,
    [Razek92]_. Other common uses are
@@ -81,7 +81,7 @@ Integration of event-driven and object-oriented programming
    called when a spied event occurs, allowing programming solutions
    which minimize object coupling. In addition, events provide support
    for behavioral reflection and can be used to implement the concepts
-   of *pointcut* and *advice* found on Aspect-Oriented Programming.
+   of *pointcut* and *advice* found in Aspect-Oriented Programming.
 
 .. _features_categories:
 
@@ -96,7 +96,7 @@ Support for component-based programming
    defined through composition of categories, which act as fine-grained
    units of code reuse. Categories may also extend existing objects.
    Categories can be used to implement *mixins* and *aspects*.
-   Categories allows for code reuse between non-related objects,
+   Categories allow for code reuse between unrelated objects,
    independent of hierarchy relations, in the same vein as protocols
    allow for interface reuse.
 
@@ -111,7 +111,7 @@ Support for both prototype and class-based systems
    types. That is, we can have both prototype and class hierarchies in
    the same application. Prototypes solve a problem of class-based
    systems where we sometimes have to define a class that will have only
-   one instance in order to reuse a piece of code. Classes solves a dual
+   one instance in order to reuse a piece of code. Classes solve a dual
    problem in prototype based systems where it is not possible to
    encapsulate some code to be reused by other objects but not by the
    encapsulating object. Stand-alone objects, that is, objects that do

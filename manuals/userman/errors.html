@@ -239,7 +239,7 @@ check_temperature(kelvin, <span class="nv">Term</span>) <span class="o">:-</span
 </div>
 <p>With this definition, a term is first checked that it is a float value before
 checking that it is in the expected open interval. But how do we use this new
-type? If we want just to test if a temperature is valid, we can write:</p>
+type? If we just want to test if a temperature is valid, we can write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., type<span class="o">::</span>valid(temperature(celsius), <span class="m">42.0</span>), ...
 </pre></div>
 </div>
@@ -267,7 +267,7 @@ type-checking.</p>
 <section id="expected-terms">
 <h2>Expected terms<a class="headerlink" href="#expected-terms" title="Link to this heading"></a></h2>
 <p>Support for representing and handling <em>expected terms</em> is provided by the
-<a class="reference internal" href="../libraries/expecteds.html"><span class="doc">expecteds</span></a> library. Expected terms allows defering errors
+<a class="reference internal" href="../libraries/expecteds.html"><span class="doc">expecteds</span></a> library. Expected terms allows deferring errors
 to later stages of an application in alternative to raising an exception as
 soon as an error is detected.</p>
 </section>
@@ -287,15 +287,15 @@ to detect and report, depending on the used compiler flags (see the
 <section id="unknown-entities">
 <span id="errors-unknown"></span><h3>Unknown entities<a class="headerlink" href="#unknown-entities" title="Link to this heading"></a></h3>
 <p>The Logtalk compiler warns about any referenced entity that is not
-currently loaded. The warning may reveal a misspell entity name or just
-an entity that it will be loaded later. Out-of-oder loading should be
+currently loaded. The warning may reveal a misspelled entity name or just
+an entity that will be loaded later. Out-of-order loading should be
 avoided when possible as it prevents some code optimizations such as
 <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> of messages to methods.</p>
 </section>
 <section id="singleton-variables">
 <span id="errors-singletons"></span><h3>Singleton variables<a class="headerlink" href="#singleton-variables" title="Link to this heading"></a></h3>
-<p>Singleton variables in a clause are often misspell variables and, as
-such, one of the most common errors when programming in Prolog.
+<p>Singleton variables in a clause are often misspelled variables and, as
+such, are one of the most common errors when programming in Prolog.
 Assuming that the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> implementation of the
 <code class="docutils literal notranslate"><span class="pre">read_term/3</span></code> predicate supports the standard <code class="docutils literal notranslate"><span class="pre">singletons/1</span></code>
 option, the compiler warns about any singleton variable found while

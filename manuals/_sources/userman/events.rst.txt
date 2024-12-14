@@ -76,7 +76,7 @@ message. An event can thus be represented by the ordered tuple
 If we consider message processing an indivisible activity, we can
 interpret the sending of a message and the return of the control to the
 object that has sent the message as two distinct events. This
-distinction allows us to have a more precise control over a system
+distinction allows us to have a more precise control over a system's
 dynamic behavior. In Logtalk, these two types of events have been named
 ``before`` and ``after``, respectively for sending a message and for
 returning of control to the sender. Therefore, we refine our event
@@ -119,14 +119,14 @@ Any object can act as a monitor
    :ref:`monitoring <apis:monitoring/0>` protocol. Strictly speaking, the
    reference to this protocol is only needed when specializing event handlers.
    Nevertheless, it is considered good programming practice to always
-   refer the protocol when defining event handlers.
+   refer to the protocol when defining event handlers.
 
 Unlimited number of monitors for each event
-   Several monitors can observe the same event because of distinct
-   reasons. Therefore, the number of monitors per event is bounded only
-   by the available computing resources.
+   Several monitors can observe the same event for distinct reasons.
+   Therefore, the number of monitors per event is bounded only by the
+   available computing resources.
 
-The monitor status of an object can be dynamically changed in runtime
+The monitor status of an object can be dynamically changed at runtime
    This property does not imply that an object must be dynamic to act as
    a monitor (the monitor status of an object is not stored in the
    object).
@@ -149,7 +149,7 @@ second — *after event* — is generated after the message has successfully
 been executed.
 
 Note that *self* messages (using the :ref:`control_send_to_self_1` control
-construct) or *super* calls (using the :ref:`control_call_super_1` control
+construct) and *super* calls (using the :ref:`control_call_super_1` control
 construct) don't generate events.
 
 .. _events_communicating:
@@ -160,7 +160,7 @@ Communicating events to monitors
 Whenever a spied event occurs, the message sending mechanism calls the
 corresponding event handlers directly for all registered monitors. These
 calls are internally made bypassing the message sending primitives in order
-to avoid potential endless loops. The event handlers consist in user
+to avoid potential endless loops. The event handlers consist of user
 definitions for the public predicates declared in the built-in
 :ref:`monitoring <apis:monitoring/0>` protocol (see below for more details).
 
@@ -178,7 +178,7 @@ monitored events. The events representation takes advantage of the first
 argument indexing performed by most Prolog compilers, which ensure — in
 the general case — access in constant time.
 
-Event-support can be turned off on a per-object (or per-category) basis
+Event support can be turned off on a per-object (or per-category) basis
 using the :ref:`events <flag_events>` compiler flag. With event-support
 turned off, Logtalk uses optimized code for processing message sending
 calls that skips the checking of monitored events, resulting in a small
@@ -192,12 +192,12 @@ Monitor semantics
 The established semantics for monitors actions consists on considering
 its success as a necessary condition so that a message can succeed:
 
--  All actions associated to events of type ``before`` must succeed, so
+-  All actions associated with events of type ``before`` must succeed, so
    that the message processing can start.
 
--  All actions associated to events of type ``after`` also have to
+-  All actions associated with events of type ``after`` also have to
    succeed so that the message itself succeeds. The failure of any
-   action associated to an event of type ``after`` forces backtracking
+   action associated with an event of type ``after`` forces backtracking
    over the message execution (the failure of a monitor never causes
    backtracking over the preceding monitor actions).
 

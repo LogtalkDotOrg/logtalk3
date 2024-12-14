@@ -24,7 +24,7 @@ Predicates
 Predicate directives and clauses can be encapsulated inside objects and
 categories. Protocols can only contain predicate directives. From the
 point-of-view of a traditional imperative object-oriented language,
-predicates allows both object state and object behavior to be represented.
+predicates allow both object state and object behavior to be represented.
 Mutable object state can be represented using dynamic object predicates
 but should only be used when strictly necessary as it breaks declarative
 semantics.
@@ -54,7 +54,7 @@ Declaring predicates
 Logtalk provides a clear distinction between *declaring a predicate* and
 *defining a predicate* and thus clear :term:`closed-world assumption` semantics.
 Messages or calls for declared but undefined predicates fail. Messages or
-calls for unknown (i.e. non declared) predicates throw an error. Note that
+calls for unknown (i.e. non-declared) predicates throw an error. Note that
 this is a fundamental requirement for supporting :ref:`protocols <protocols_protocols>`:
 we must be able to declare a predicate without necessarily defining it.
 
@@ -122,7 +122,7 @@ and operators. For example:
 
 Note that, in the case of operators, the operator definitions don't become
 global when the entity containing the directives is compiled and loaded.
-This prevents an application breaking when e.g. an updated third-party
+This prevents an application from breaking when e.g. an updated third-party
 library adds new operators. It also allows loading entities that provide
 conflicting operator definitions. Here the usual programming idiom is to
 copy the operator definitions to a ``uses/2`` directive. For example, the

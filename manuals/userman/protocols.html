@@ -158,7 +158,7 @@
 several objects can implement the same protocol and an object can
 implement several protocols. Protocols may contain only predicate
 declarations. In some languages the term <em>interface</em> is used with
-similar meaning. Logtalk allows predicate declarations of any scope
+a similar meaning. Logtalk allows predicate declarations of any scope
 within protocols, contrary to some languages that only allow public
 declarations.</p>
 <p>Logtalk defines three built-in protocols,
@@ -298,8 +298,7 @@ directive.</p>
 <section id="protocol-relationships">
 <span id="protocols-relationships"></span><h2>Protocol relationships<a class="headerlink" href="#protocol-relationships" title="Link to this heading"></a></h2>
 <p>Logtalk provides two sets of built-in predicates that enable us to query
-the system about the possible relationships that a protocol have with
-other entities.</p>
+the system about the relationships that a protocol has with other entities.</p>
 <p>The <a class="reference internal" href="../refman/predicates/extends_protocol_2_3.html#predicates-extends-protocol-2-3"><span class="std std-ref">extends_protocol/2-3</span></a> built-in predicates return all
 pairs of protocols so that the first one extends the second:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- extends_protocol(Protocol1, Protocol2).

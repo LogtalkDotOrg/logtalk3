@@ -29,7 +29,7 @@ high-level predicates and directives that allows programmers to easily
 take advantage of modern multi-processor and multi-core computers without
 worrying about the tricky details of creating, synchronizing, or communicating
 with threads, mutexes, and message queues. Logtalk multi-threading
-programming integrates with object-oriented programming providing a
+programming integrates with object-oriented programming by providing a
 *threaded engines* API, enabling objects and categories to prove goals
 concurrently, and supporting synchronous and asynchronous messages.
 
@@ -108,8 +108,8 @@ When the ``threaded/1`` predicate argument is a *disjunction* of goals,
 the predicate call is akin to *or-parallelism*, here reinterpreted as a
 set of goals *competing* to find a solution. For example, consider the
 different methods that we can use to find the roots of real functions.
-Depending on the function, some methods will faster than others. Some
-methods will converge into the solution while others may diverge and
+Depending on the function, some methods will be faster than others. Some
+methods will converge to the solution while others may diverge and
 never find it. We can try all the methods simultaneously by writing:
 
 ::
@@ -176,7 +176,7 @@ predicate, we could write:
 In this case, the ``threaded_call/1`` and the ``threaded_exit/1`` calls
 are made within the pseudo-object ``user``. The implicit thread running
 the ``lists::member/2`` goal suspends itself after providing a solution,
-waiting for a request to an alternative solution; the thread is
+waiting for a request fo an alternative solution; the thread is
 automatically terminated when the runtime engine detects that
 backtracking to the ``threaded_exit/1`` call is no longer possible.
 
@@ -196,7 +196,7 @@ predicate will generate an exception. Note that failing instead of
 throwing an exception is not an acceptable solution as it could be
 misinterpreted as a failure of the ``threaded_call/1`` argument.
 
-The example on the previous section with prime numbers could be
+The example in the previous section with prime numbers could be
 rewritten using the ``threaded_call/1`` and ``threaded_exit/1``
 predicates:
 

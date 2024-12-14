@@ -63,7 +63,7 @@ found elsewhere in this Handbook.
    Although not ISO Prolog Core standard compliant, several Prolog systems
    accept using arbitrary goal as directives. This is not supported in
    Logtalk source files. Always use an :ref:`directives_initialization_1`
-   directive to wrap those goals. This ensure that any initialization goals,
+   directive to wrap those goals. This ensures that any initialization goals,
    which often have side-effects, are only called if the source file is
    successfully compiled and loaded.
 
@@ -80,7 +80,7 @@ found elsewhere in this Handbook.
    Logtalk provides clear closed world assumption semantics: messages or calls
    for declared but undefined predicates fail. Messages or calls for unknown
    (i.e. not declared) predicates throw an error. Crucially, this semantics
-   apply to both *static* and *dynamic* predicates. But in Prolog workarounds
+   applies to both *static* and *dynamic* predicates. But in Prolog workarounds
    are required to have a static predicate being known by the runtime without
    it being also defined (so that calling it would fail instead of throwing a
    predicate existence error).
@@ -147,7 +147,7 @@ found elsewhere in this Handbook.
 **operators scope**
    Operators declared inside an entity (object, protocol, or category) are
    local to the entity. But operators defined in a source file but outside
-   and entity are global for compatibility with existing Prolog code.
+   an entity are global for compatibility with existing Prolog code.
 
 **predicates scope**
    In plain Prolog, all predicates are visible. In a Prolog module, a
@@ -170,7 +170,7 @@ found elsewhere in this Handbook.
    never conflicts when loading entities (objects, protocols, or categories)
    that declare the same public predicates. But attempting to load two Prolog
    modules that export the same predicate results in a conflict, usually a
-   compilation error (this is specially problematic when the ``use_module/1``
+   compilation error (this is especially problematic when the ``use_module/1``
    directive is used; e.g. adding a new exported predicate can break
    applications that use the module but not the new predicate).
 

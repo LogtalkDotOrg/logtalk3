@@ -112,7 +112,7 @@ we can write:
 
 With this definition, a term is first checked that it is a float value before
 checking that it is in the expected open interval. But how do we use this new
-type? If we want just to test if a temperature is valid, we can write:
+type? If we just want to test if a temperature is valid, we can write:
 
 ::
 
@@ -147,7 +147,7 @@ Expected terms
 --------------
 
 Support for representing and handling *expected terms* is provided by the
-:doc:`../libraries/expecteds` library. Expected terms allows defering errors
+:doc:`../libraries/expecteds` library. Expected terms allows deferring errors
 to later stages of an application in alternative to raising an exception as
 soon as an error is detected.
 
@@ -173,8 +173,8 @@ Unknown entities
 ~~~~~~~~~~~~~~~~
 
 The Logtalk compiler warns about any referenced entity that is not
-currently loaded. The warning may reveal a misspell entity name or just
-an entity that it will be loaded later. Out-of-oder loading should be
+currently loaded. The warning may reveal a misspelled entity name or just
+an entity that will be loaded later. Out-of-order loading should be
 avoided when possible as it prevents some code optimizations such as
 :term:`static binding` of messages to methods.
 
@@ -183,8 +183,8 @@ avoided when possible as it prevents some code optimizations such as
 Singleton variables
 ~~~~~~~~~~~~~~~~~~~
 
-Singleton variables in a clause are often misspell variables and, as
-such, one of the most common errors when programming in Prolog.
+Singleton variables in a clause are often misspelled variables and, as
+such, are one of the most common errors when programming in Prolog.
 Assuming that the :term:`backend Prolog compiler` implementation of the
 ``read_term/3`` predicate supports the standard ``singletons/1``
 option, the compiler warns about any singleton variable found while

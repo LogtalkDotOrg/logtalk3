@@ -30,7 +30,7 @@ The key concepts in *declarative* object-oriented programming are *encapsulation
 and *reuse patterns*. Notably, the concept of *mutable state*, which is an *imperative*
 concept, is not a significant concept in *declarative* object-oriented programming.
 Declarative object-oriented programming concepts can be materialized in both
-logic and functional languages. In this section, we focus only in declarative
+logic and functional languages. In this section, we focus only on declarative
 object-oriented logic programming.
 
 The first key generalization of object-oriented programming concepts is the

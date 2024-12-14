@@ -175,7 +175,7 @@ found elsewhere in this Handbook.</p>
 <dt><strong>arbitrary goals as directives</strong></dt><dd><p>Although not ISO Prolog Core standard compliant, several Prolog systems
 accept using arbitrary goal as directives. This is not supported in
 Logtalk source files. Always use an <a class="reference internal" href="../refman/directives/initialization_1.html#directives-initialization-1"><span class="std std-ref">initialization/1</span></a>
-directive to wrap those goals. This ensure that any initialization goals,
+directive to wrap those goals. This ensures that any initialization goals,
 which often have side-effects, are only called if the source file is
 successfully compiled and loaded.</p>
 </dd>
@@ -190,7 +190,7 @@ requires the predicate to exist in (or be reexported by) the module.</p>
 <dt><strong>closed world assumption semantics</strong></dt><dd><p>Logtalk provides clear closed world assumption semantics: messages or calls
 for declared but undefined predicates fail. Messages or calls for unknown
 (i.e. not declared) predicates throw an error. Crucially, this semantics
-apply to both <em>static</em> and <em>dynamic</em> predicates. But in Prolog workarounds
+applies to both <em>static</em> and <em>dynamic</em> predicates. But in Prolog workarounds
 are required to have a static predicate being known by the runtime without
 it being also defined (so that calling it would fail instead of throwing a
 predicate existence error).</p>
@@ -249,7 +249,7 @@ explicitly qualified calls.</p>
 </dd>
 <dt><strong>operators scope</strong></dt><dd><p>Operators declared inside an entity (object, protocol, or category) are
 local to the entity. But operators defined in a source file but outside
-and entity are global for compatibility with existing Prolog code.</p>
+an entity are global for compatibility with existing Prolog code.</p>
 </dd>
 <dt><strong>predicates scope</strong></dt><dd><p>In plain Prolog, all predicates are visible. In a Prolog module, a
 predicate can be exported or local. In Logtalk, a predicate can be
@@ -269,7 +269,7 @@ predicate that it does not define.</p>
 never conflicts when loading entities (objects, protocols, or categories)
 that declare the same public predicates. But attempting to load two Prolog
 modules that export the same predicate results in a conflict, usually a
-compilation error (this is specially problematic when the <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code>
+compilation error (this is especially problematic when the <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code>
 directive is used; e.g. adding a new exported predicate can break
 applications that use the module but not the new predicate).</p>
 </dd>

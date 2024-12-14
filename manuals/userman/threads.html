@@ -155,7 +155,7 @@ high-level predicates and directives that allows programmers to easily
 take advantage of modern multi-processor and multi-core computers without
 worrying about the tricky details of creating, synchronizing, or communicating
 with threads, mutexes, and message queues. Logtalk multi-threading
-programming integrates with object-oriented programming providing a
+programming integrates with object-oriented programming by providing a
 <em>threaded engines</em> API, enabling objects and categories to prove goals
 concurrently, and supporting synchronous and asynchronous messages.</p>
 <section id="enabling-multi-threading-support">
@@ -215,8 +215,8 @@ for sufficiently large intervals.</p>
 the predicate call is akin to <em>or-parallelism</em>, here reinterpreted as a
 set of goals <em>competing</em> to find a solution. For example, consider the
 different methods that we can use to find the roots of real functions.
-Depending on the function, some methods will faster than others. Some
-methods will converge into the solution while others may diverge and
+Depending on the function, some methods will be faster than others. Some
+methods will converge to the solution while others may diverge and
 never find it. We can try all the methods simultaneously by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>find_root(<span class="nv">Function</span>, <span class="nv">A</span>, <span class="nv">B</span>, <span class="nv">Error</span>, <span class="nv">Zero</span>) <span class="o">:-</span>
     <span class="k">threaded</span>((
@@ -273,7 +273,7 @@ no
 <p>In this case, the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> and the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> calls
 are made within the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>. The implicit thread running
 the <code class="docutils literal notranslate"><span class="pre">lists::member/2</span></code> goal suspends itself after providing a solution,
-waiting for a request to an alternative solution; the thread is
+waiting for a request fo an alternative solution; the thread is
 automatically terminated when the runtime engine detects that
 backtracking to the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> call is no longer possible.</p>
 <p>Calls to the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate block the caller until the
@@ -290,7 +290,7 @@ thread generating them is therefore terminated), re-calling the
 predicate will generate an exception. Note that failing instead of
 throwing an exception is not an acceptable solution as it could be
 misinterpreted as a failure of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> argument.</p>
-<p>The example on the previous section with prime numbers could be
+<p>The example in the previous section with prime numbers could be
 rewritten using the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> and <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code>
 predicates:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>prime_numbers(<span class="nv">N</span>, <span class="nv">M</span>, <span class="nv">Primes</span>) <span class="o">:-</span>

@@ -41,7 +41,7 @@ third-party libraries. The libraries may want to print messages on its
 own, e.g. banners, debugging information, or logging information. As you
 assemble all your application components, you want to have the final
 word on which messages are printed, where, and when. Uncontrolled message
-printing by libraries could potentially disturb application flow, expose
+printing by libraries could potentially disrupt application flow, expose
 implementation details, spam the user with irrelevant details, or break
 user interfaces.
 
@@ -92,10 +92,10 @@ list of message kinds is supported by default:
    components; can be suppressed by setting the :ref:`report <flag_report>`
    flag to ``warnings`` or ``off``)
 ``help``
-   messages printed in reply for the user asking for help (mostly for
+   messages printed in reply to the user asking for help (mostly for
    helping port existing Prolog code)
 ``information`` and ``information(Group)``
-   messages usually printed in reply to a user request for information
+   messages usually printed in reply to a user's request for information
 ``silent`` and ``silent(Group)``
    not printed by default (but can be intercepted using the
    ``message_hook/4`` predicate)
@@ -137,7 +137,7 @@ The compiler and runtime are interpreted as a single component designated as
 The third argument of ``print_message/3`` is the message itself, represented
 by a term. In the above example, the message term is ``banner``. Using a
 term to represent a message instead of a string with the message text itself
-have significant advantages. Notably, it allows using a compound term for
+has significant advantages. Notably, it allows using a compound term for
 easy parameterization of the message text and simplifies machine-processing,
 localization of applications, and message interception. For example:
 
@@ -151,11 +151,11 @@ localization of applications, and message interception. For example:
 Message tokenization
 --------------------
 
-The advantages of using message terms require a solution for generating
-the actual messages text. This is supported by defining grammar rules for
-the :ref:`logtalk::message_tokens//2 <methods_message_tokens_2>`
-multifile non-terminal, which translates a message term, for a given
-component, to a list of tokens. For example:
+The use of message terms require a solution for generating the actual
+messages text. This is supported by defining grammar rules for the
+:ref:`logtalk::message_tokens//2 <methods_message_tokens_2>` multifile
+non-terminal, which translates a message term, for a given component,
+to a list of tokens. For example:
 
 ::
 
