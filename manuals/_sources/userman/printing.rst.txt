@@ -308,7 +308,7 @@ easily accomplished by defining the following category in a settings file:
 
 The printing message mechanism automatically calls the ``message_hook/4``
 hook predicate. When this call succeeds, the mechanism assumes that the
-message have been successfully handled.
+message has been successfully handled.
 
 As another example, assume that you want to print all otherwise silent
 compiler messages:
