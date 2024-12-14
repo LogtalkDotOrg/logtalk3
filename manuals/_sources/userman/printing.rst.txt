@@ -48,7 +48,7 @@ user interfaces.
 The solution is to decouple the calls to print a message from the actual
 printing of the output text. The same is true for calls to read user input.
 By decoupling the call to input some data from the actual read of the data,
-we can easily switched e.g. from a command-line interface to a GUI input
+we can easily switch e.g. from a command-line interface to a GUI input
 dialog or even automate providing the data (e.g. when automating testing
 of user interaction).
 
@@ -208,8 +208,8 @@ Meta-messages
 
 Defining tokenization rules for every message is not always necessary, however.
 Logtalk defines several *meta-messages* that are handy for simple cases and
-temporary messages only used to help developing, notably debugging messages.
-See the :ref:`debugging_messages` section and the
+temporary messages only used during application development, notably debugging
+messages. See the :ref:`debugging_messages` section and the
 :ref:`logtalk built-in object <apis:logtalk/0>` remarks section for details.
 
 Defining message prefixes and output streams

@@ -155,7 +155,7 @@ which expansions will be used when compiling a file using compile and loading
 predicate options. It also allows defining a default expansion for all source
 files. It defines a concept of <em>hook objects</em> that can be used as building
 blocks to create custom and reusable <em>expansion workflows</em> with explicit and
-well defined semantics. It prevents the simply act of loading expansion rules
+well defined semantics. It prevents the simple act of loading expansion rules
 affecting subsequent compilation of files. It prevents conflicts between groups
 of expansion rules of different origins. It avoids a set of buggy expansion
 rules from breaking other sets of expansions rules.</p>
@@ -243,7 +243,7 @@ yes
 </pre></div>
 </div>
 <p>The goal-expansion mechanism prevents an infinite loop when expanding a goal
-by checking that a goal to be expanded does not resulted from a previous
+by checking that a goal to be expanded was not the result from a previous
 expansion of the same goal. For example, consider the following object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(fixed_point,
     <span class="k">implements</span>(expanding)).
@@ -513,7 +513,7 @@ in a fully controlled way.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">user</span></code> object declares <code class="docutils literal notranslate"><span class="pre">term_expansion/2</span></code> and <code class="docutils literal notranslate"><span class="pre">goal_expansion/2</span></code>
 as multifile and dynamic predicates. This helps in avoiding predicate
 existence errors when compiling source files with the <code class="docutils literal notranslate"><span class="pre">hook</span></code> flag set
-to <code class="docutils literal notranslate"><span class="pre">user</span></code> as these predicates are only natively declared in some of the
+to <code class="docutils literal notranslate"><span class="pre">user</span></code> as these predicates are only natively declared by some of the
 supported backend Prolog compilers.</p>
 </div>
 </section>

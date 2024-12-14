@@ -293,7 +293,7 @@ Defining hit count breakpoints
 
 Conditional clause breakpoints that depend on the unification count are
 known as *hit count* clause breakpoints. The debugger pauses at a hit
-count breakpoint depending an unification count expression:
+count breakpoint depending on an unification count expression:
 
 - ``>(Count)`` - break when the unification count is greater than ``Count``
 - ``>=(Count)`` - break when the unification count is greater than or equal to ``Count``
@@ -304,6 +304,8 @@ count breakpoint depending an unification count expression:
 - ``Count`` - break when the unification count is greater than or equal to ``Count``
 
 For example:
+
+.. code-block:: text
 
    | ?- debugger::spy(planet, 41, =<(2)).
 
@@ -327,7 +329,7 @@ it depends on is hit first. For example:
 
 In this case, the debugger will break for user interaction at the unification
 port for the clause in the source file defining the ``mars`` object at line
-98 if and only if the debugger stoped earlier at the unification port for the
+98 if and only if the debugger paused earlier at the unification port for the
 clause in the source file defining the ``planet`` category at line 76.
 
 The debugger prints a ``^`` character at the beginning of the line for easy
@@ -399,18 +401,18 @@ to its default settings and delete all defined breakpoints and log points.
 Defining log points
 -------------------
 
-Logtalk log points are similar to breakpoints and thus the line
-number must correspond to the first line of an entity clause. When the
-debugger reaches a log point, it prints a log message and continues without
-halting execution for taking a port command. When the log message is an
-empty atom, the default port output message is printed. When the log message
-starts with a ``%`` character, the default port output message is printed
-followed by the log message. In these two cases, the debugger prints a ``@``
-character at the beginning of the line for easy recognition of log points
-output. When the log message is neither empty or starts with a ``%`` character,
-the log message is printed instead of the default port output message. In this
-case, the message can contain ``$KEYWORD`` placeholders that are expanded at
-runtime. The valid keywords are:
+Logtalk log points are similar to breakpoints and thus the line number must
+correspond to the first line of an entity clause. When the debugger reaches
+a log point, it prints a log message and continues without pausing execution
+for reading a port command. When the log message is an empty atom, the default
+port output message is printed. When the log message starts with a ``%``
+character, the default port output message is printed followed by the log
+message. In these two cases, the debugger prints a ``@`` character at the
+beginning of the line for easy recognition of log points output. When the log
+message is neither empty or starts with a ``%`` character, the log message is
+printed instead of the default port output message. In this case, the message
+can contain ``$KEYWORD`` placeholders that are expanded at runtime. The valid
+keywords are:
 
 - ``PORT``
 - ``ENTITY``
@@ -657,7 +659,7 @@ Term write depth
 The terms written by the debugger can be quite large depending on the
 application being debugged. As described in the previous section, the
 debugger accepts the ``<`` command to set the maximum write term depth
-for compound terms. This commmand requires that the used
+for compound terms. This command requires that the used
 :term:`backend Prolog compiler` supports the non-standard but common
 ``max_depth/1`` option for the ``write_term/3`` predicate. When the
 compound term being written is deeply nested, the sub-terms are only
@@ -734,7 +736,7 @@ Something is wrong when we try the object public predicate, ``a/1``:
 
    no
 
-For helping diagnosing the problem, instead of compiling the object in
+For helping in diagnosing the problem, instead of compiling the object in
 debug mode and doing a *trace* of the query to check the clauses for the
 non-public predicates, we can instead simply type:
 
@@ -942,12 +944,12 @@ Debug and trace events
 
 The debugging API defines two multifile predicates,
 :ref:`logtalk::trace_event/2 <apis:logtalk/0::trace_event/2>` and
-:ref:`logtalk::debug_handler/3 <apis:logtalk/0::debug_handler/3>` for handiling
+:ref:`logtalk::debug_handler/3 <apis:logtalk/0::debug_handler/3>` for handling
 trace and debug events. It also provides a
 :ref:`logtalk::debug_handler/1 <apis:logtalk/0::debug_handler/1>` multifile
 predicate that allows an object (or a category) to declare itself
 as a debug handler provider. The Logtalk ``debugger`` and  ``ports_profiler``
-tools are regular applications thar are implemented using this API, which
+tools are regular applications that are implemented using this API, which
 can also be used to implement alternative or new debugging related tools.
 See the API documentation for details and the source code of the ``debugger``
 and  ``ports_profiler`` tools for usage examples.

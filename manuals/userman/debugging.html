@@ -440,7 +440,7 @@ yes
 <h3>Defining hit count breakpoints<a class="headerlink" href="#defining-hit-count-breakpoints" title="Link to this heading"></a></h3>
 <p>Conditional clause breakpoints that depend on the unification count are
 known as <em>hit count</em> clause breakpoints. The debugger pauses at a hit
-count breakpoint depending an unification count expression:</p>
+count breakpoint depending on an unification count expression:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&gt;(Count)</span></code> - break when the unification count is greater than <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&gt;=(Count)</span></code> - break when the unification count is greater than or equal to <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
@@ -451,13 +451,12 @@ count breakpoint depending an unification count expression:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">Count</span></code> - break when the unification count is greater than or equal to <code class="docutils literal notranslate"><span class="pre">Count</span></code></p></li>
 </ul>
 <p>For example:</p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">?- debugger::spy(planet, 41, =&lt;(2)).</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(planet, 41, =&lt;(2)).
+
+Conditional breakpoint added.
+yes
+</pre></div>
 </div>
-<p>Conditional breakpoint added.
-yes</p>
-</div></blockquote>
 </section>
 <section id="defining-triggered-breakpoints">
 <h3>Defining triggered breakpoints<a class="headerlink" href="#defining-triggered-breakpoints" title="Link to this heading"></a></h3>
@@ -473,7 +472,7 @@ yes
 </div>
 <p>In this case, the debugger will break for user interaction at the unification
 port for the clause in the source file defining the <code class="docutils literal notranslate"><span class="pre">mars</span></code> object at line
-98 if and only if the debugger stoped earlier at the unification port for the
+98 if and only if the debugger paused earlier at the unification port for the
 clause in the source file defining the <code class="docutils literal notranslate"><span class="pre">planet</span></code> category at line 76.</p>
 <p>The debugger prints a <code class="docutils literal notranslate"><span class="pre">^</span></code> character at the beginning of the line for easy
 recognition of triggered breakpoints.</p>
@@ -531,18 +530,18 @@ to its default settings and delete all defined breakpoints and log points.</p>
 </section>
 <section id="defining-log-points">
 <h2>Defining log points<a class="headerlink" href="#defining-log-points" title="Link to this heading"></a></h2>
-<p>Logtalk log points are similar to breakpoints and thus the line
-number must correspond to the first line of an entity clause. When the
-debugger reaches a log point, it prints a log message and continues without
-halting execution for taking a port command. When the log message is an
-empty atom, the default port output message is printed. When the log message
-starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the default port output message is printed
-followed by the log message. In these two cases, the debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>
-character at the beginning of the line for easy recognition of log points
-output. When the log message is neither empty or starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character,
-the log message is printed instead of the default port output message. In this
-case, the message can contain <code class="docutils literal notranslate"><span class="pre">$KEYWORD</span></code> placeholders that are expanded at
-runtime. The valid keywords are:</p>
+<p>Logtalk log points are similar to breakpoints and thus the line number must
+correspond to the first line of an entity clause. When the debugger reaches
+a log point, it prints a log message and continues without pausing execution
+for reading a port command. When the log message is an empty atom, the default
+port output message is printed. When the log message starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code>
+character, the default port output message is printed followed by the log
+message. In these two cases, the debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> character at the
+beginning of the line for easy recognition of log points output. When the log
+message is neither empty or starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the log message is
+printed instead of the default port output message. In this case, the message
+can contain <code class="docutils literal notranslate"><span class="pre">$KEYWORD</span></code> placeholders that are expanded at runtime. The valid
+keywords are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">PORT</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ENTITY</span></code></p></li>
@@ -756,7 +755,7 @@ note that some backends don’t support this formatting option.</p>
 <p>The terms written by the debugger can be quite large depending on the
 application being debugged. As described in the previous section, the
 debugger accepts the <code class="docutils literal notranslate"><span class="pre">&lt;</span></code> command to set the maximum write term depth
-for compound terms. This commmand requires that the used
+for compound terms. This command requires that the used
 <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> supports the non-standard but common
 <code class="docutils literal notranslate"><span class="pre">max_depth/1</span></code> option for the <code class="docutils literal notranslate"><span class="pre">write_term/3</span></code> predicate. When the
 compound term being written is deeply nested, the sub-terms are only
@@ -818,7 +817,7 @@ unit tests.</p>
 no
 </pre></div>
 </div>
-<p>For helping diagnosing the problem, instead of compiling the object in
+<p>For helping in diagnosing the problem, instead of compiling the object in
 debug mode and doing a <em>trace</em> of the query to check the clauses for the
 non-public predicates, we can instead simply type:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- broken &lt;&lt; c(C).
@@ -1000,12 +999,12 @@ details.</p>
 <span id="debugging-events"></span><h2>Debug and trace events<a class="headerlink" href="#debug-and-trace-events" title="Link to this heading"></a></h2>
 <p>The debugging API defines two multifile predicates,
 <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-trace-event-2" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">logtalk::trace_event/2</span></a> and
-<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-3" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">logtalk::debug_handler/3</span></a> for handiling
+<a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-3" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">logtalk::debug_handler/3</span></a> for handling
 trace and debug events. It also provides a
 <a class="reference external" href="../../docs/logtalk_0.html#logtalk-0-debug-handler-1" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">logtalk::debug_handler/1</span></a> multifile
 predicate that allows an object (or a category) to declare itself
 as a debug handler provider. The Logtalk <code class="docutils literal notranslate"><span class="pre">debugger</span></code> and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code>
-tools are regular applications thar are implemented using this API, which
+tools are regular applications that are implemented using this API, which
 can also be used to implement alternative or new debugging related tools.
 See the API documentation for details and the source code of the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
 and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tools for usage examples.</p>

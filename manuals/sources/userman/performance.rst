@@ -180,7 +180,7 @@ declarations and definitions. When the :ref:`source_data <flag_source_data>`
 is turned on (the default when *developing* an application), the generated
 code also includes additional data about the source code such as entity and
 predicates positions in a source file. This data enables advanced developer
-tool functionality but it is usually not required when *deploying* an
+tool functionality. But it is usually not required when *deploying* an
 application. Thus, turning this flag off is a common setting for minimizing
 an application footprint.
 

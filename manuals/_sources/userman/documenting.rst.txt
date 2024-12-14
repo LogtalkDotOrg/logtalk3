@@ -229,7 +229,7 @@ simple present form*. For example, write ``'Runs ...'``, ``'Calls ...'``,
 with ``'True iff ...'`` or ``'True if ...'``.
 
 3. Predicates with multiple solutions often have descriptions starting with
-``'Enumerates, by backtracing, all ...'`` or ``'Enumerates, by backtracing,
+``'Enumerates, by backtracking, all ...'`` or ``'Enumerates, by backtracking,
 the ...'``.
 
 4. Predicate call failure conditions often have descriptions with one or more
@@ -260,7 +260,7 @@ when calling a predicate. For example:
        ]
    ]).
 
-When possible, only standard exceptions should be used. See e.g the
+When possible, only standard exceptions should be used. See e.g. the
 :ref:`error handling methods <error_handling_methods>` section for
 a full list. The argument names should be the same as those provided
 in the ``arguments`` or ``argnames`` keys. Exceptions are usually

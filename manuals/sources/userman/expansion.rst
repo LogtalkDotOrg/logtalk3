@@ -33,7 +33,7 @@ which expansions will be used when compiling a file using compile and loading
 predicate options. It also allows defining a default expansion for all source
 files. It defines a concept of *hook objects* that can be used as building
 blocks to create custom and reusable *expansion workflows* with explicit and
-well defined semantics. It prevents the simply act of loading expansion rules
+well defined semantics. It prevents the simple act of loading expansion rules
 affecting subsequent compilation of files. It prevents conflicts between groups
 of expansion rules of different origins. It avoids a set of buggy expansion
 rules from breaking other sets of expansions rules.
@@ -137,7 +137,7 @@ trying to expand is returned:
    yes
 
 The goal-expansion mechanism prevents an infinite loop when expanding a goal
-by checking that a goal to be expanded does not resulted from a previous
+by checking that a goal to be expanded was not the result from a previous
 expansion of the same goal. For example, consider the following object:
 
 ::
@@ -456,7 +456,7 @@ in a fully controlled way.
    The ``user`` object declares ``term_expansion/2`` and ``goal_expansion/2``
    as multifile and dynamic predicates. This helps in avoiding predicate
    existence errors when compiling source files with the ``hook`` flag set
-   to ``user`` as these predicates are only natively declared in some of the
+   to ``user`` as these predicates are only natively declared by some of the
    supported backend Prolog compilers.
 
 Debugging expansions
