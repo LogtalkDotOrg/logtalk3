@@ -143,9 +143,9 @@
 compiling and loading source files. The lint warnings are controlled by
 a <a class="reference external" href="../userman/programming.html#programming-flags-lint">set of flags</a>.
 The default values for these flags are defined in the backend Prolog
-compiler adapter files and can be overriden from a settings file, from a
-source file (e.g. a loader file), or from an entity. These flags can be
-set globally using the
+compiler adapter files and can be overridden from a settings file, from
+a source file (e.g. a loader file), or from an entity. These flags can
+be set globally using the
 <a class="reference external" href="../refman/predicates/set_logtalk_flag_2.html">set_logtalk_flag/2</a>
 built-in predicate. For (source file or entity) local scope, use instead
 the
@@ -190,7 +190,7 @@ modules)</p></li>
 <li><p>Unification goals that will succeed without binding any variables</p></li>
 <li><p>Unification goals that will succeed creating a cyclic term</p></li>
 <li><p>Goals that are always true or always false</p></li>
-<li><p>Trivial goal fails (due to no matching predicate clause)</p></li>
+<li><p>Trivial goal failures (due to no matching predicate clause)</p></li>
 <li><p>Redefined built-in predicates</p></li>
 <li><p>Redefined standard operators</p></li>
 <li><p>Lambda expression unclassified variables and mixed up variables</p></li>
@@ -199,7 +199,7 @@ modules)</p></li>
 <li><p>If-then-else and soft cut control constructs without an else part</p></li>
 <li><p>If-then-else and soft cut control constructs where the test is a
 unification between a variable and a ground term</p></li>
-<li><p>Missing parenthesis around if-then-else and disjunction control
+<li><p>Missing parentheses around if-then-else and disjunction control
 constructs in the presence of cuts in the first argument</p></li>
 <li><p>Cuts in clauses for multifile predicates</p></li>
 <li><p>Missing cut in repeat loops</p></li>

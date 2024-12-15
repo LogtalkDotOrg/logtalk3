@@ -166,18 +166,18 @@ and uninstalling third-party libraries and applications, generically
 known as <em>packs</em>. Collections of pack specifications are made available
 using <em>registries</em>. Registries can be local to a system, publicly
 shared, or private to a company (e.g. only available in a VPN). There is
-no concept of a central registry. Users decide which registries they
-trust and want to use and add them using their published URLs. The tool
+no concept of a central registry. Users can decide which registries they
+trust and want to use, and add them using their published URLs. The tool
 supports both pack checksums and signatures and takes several steps to
-sanitize registry and pack specifications. As other Logtalk developer
-tools, portability is a main goal. This tool can be used with any
-supported Prolog backend and run in both POSIX and Windows systems.
+sanitize registry and pack specifications. As with other Logtalk
+developer tools, portability is a main goal. This tool can be used with
+any supported Prolog backend and run on both POSIX and Windows systems.
 Moreover, this tool can be used not only for handling Logtalk packs but
 also Prolog only packs, thus providing a solution for sharing portable
 resources between multiple systems.</p>
 <p>A list of public Logtalk and Prolog pack registries is available at:</p>
 <p><a class="reference external" href="https://github.com/LogtalkDotOrg/pack-registries">https://github.com/LogtalkDotOrg/pack-registries</a></p>
-<p>This tool is the beta stage of development. Feedback is most welcome.</p>
+<p>This tool is in the beta stage of development. Feedback is most welcome.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <p>On POSIX systems (Linux, macOS, …), the following shell commands are
@@ -284,8 +284,8 @@ actual directory can be retrieved by the query:</p>
 </div>
 <p>This directory holds sub-directories for registries, packs, and
 archives. These sub-directories are automatically created when loading
-the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool if they don’t exist . Users shouldn’t manually modify
-the contents of these directories. Multiple and independent
+the <code class="docutils literal notranslate"><span class="pre">packs</span></code> tool if they don’t exist . Users should not manually
+modify the contents of these directories. Multiple and independent
 registry/pack setups are possible using <em>virtual environments</em> as
 explained next.</p>
 <p>Your registries and packs setup can be saved and restored (e.g. in a

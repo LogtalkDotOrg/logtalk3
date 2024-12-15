@@ -10,7 +10,7 @@ extensible via the addition of objects implementing new metrics.
 
 This tool provides predicates for computing metrics for source files,
 entities, libraries, files, and directories. The actual availability of
-a particular predicate depends on the specific metric. One set of
+a particular predicate depends on the specific metric. A set of
 predicates prints, by default, the computed metric values to the
 standard output. A second set of predicates computes and returns a score
 (usually a compound term with the computed metric values as arguments).
@@ -88,7 +88,7 @@ Coupling metrics
   rigidity of an entity. Ranging from 0.0 to 1.0, with 0.0 indicating a
   fully concrete entity and 1.0 indicating a fully abstract entity.
 
-The dependencies count include direct entity relations plus predicate
+The dependencies count includes direct entity relations plus predicate
 calls or dynamic updates to predicates in external objects or
 categories.
 
@@ -125,7 +125,7 @@ interpreted as *operands*. Note that this definition of operands is a
 significant deviation from the original definition, which used syntactic
 literals. A computation closer to the original definition of the metric
 would require switching to use the parser to collect information on
-syntactic literals, which would imply a much large computation cost.
+syntactic literals, which would imply a much larger computation cost.
 
 The computation of this metric is parameterized by the *Stroud*
 coefficient for computing the time required to program (default is 18).

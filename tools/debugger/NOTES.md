@@ -43,7 +43,7 @@ This tool can be loaded using the query:
 	| ?- logtalk_load(debugger(loader)).
 
 When the code to be debugged runs computationally expensive initializations,
-loading this tool after the code may have a noticeable impact in loading
+loading this tool after the code may have a noticeable impact on loading
 times.
 
 
@@ -85,7 +85,7 @@ to a file. For example:
 	     dump_trace::stop_redirect_to_file.
 
 A full trace can also be obtained at the top-level by using the `S` (Skip)
-command at the call port for the top-levle goal when tracing it.
+command at the call port for the top-level goal when tracing it.
 
 
 Alternative debugger tools

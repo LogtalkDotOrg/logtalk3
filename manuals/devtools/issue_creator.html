@@ -180,7 +180,7 @@ report issues will be created:</p>
 <li><p>GitHub: <code class="docutils literal notranslate"><span class="pre">gh</span> <span class="pre">auth</span> <span class="pre">login</span> <span class="pre">--hostname</span> <span class="pre">&lt;string&gt;</span> <span class="pre">--with-token</span> <span class="pre">&lt;</span> <span class="pre">token.txt</span></code></p></li>
 <li><p>GitLab: <code class="docutils literal notranslate"><span class="pre">glab</span> <span class="pre">auth</span> <span class="pre">login</span> <span class="pre">--hostname</span> <span class="pre">&lt;string&gt;</span> <span class="pre">--token</span> <span class="pre">&lt;string&gt;</span></code></p></li>
 </ul>
-<p>The access token must ensure the necessary scopes that allow bug reports
+<p>The access token must have the necessary scopes that allow bug reports
 to be created. See the CLIs documentation for details. Typically, the
 <code class="docutils literal notranslate"><span class="pre">auth</span></code> command is called from the CI/CD pipeline definition scripts.
 However, depending on the CI/CD workflow, the authentication may be done
@@ -198,8 +198,8 @@ of labels. For example, to use both <code class="docutils literal notranslate"><
 </div>
 <p>Note that the labels <strong>must</strong> be predefined in the issue tracker server
 for the bug report to be successfully created. The <code class="docutils literal notranslate"><span class="pre">auto</span></code> label can be
-used to simplifying filtering of auto-generated bug reports when
-browsing the issue tracker.</p>
+used to simplify filtering of auto-generated bug reports when browsing
+the issue tracker.</p>
 <p>The bug reports use Markdown formatting, which is the default in GitHub
 and GitLab issue trackers.</p>
 <p>But reports are only created for non-flaky tests. The bug report title

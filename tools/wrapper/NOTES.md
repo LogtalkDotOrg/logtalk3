@@ -55,7 +55,7 @@ This tool can be loaded using the query:
 Workflows
 ---------
 
-The typical porting workflow is simply:
+The typical porting workflow is:
 
 	| ?- wrapper::rdirectory(root_directory_of_prolog_code).
 	...

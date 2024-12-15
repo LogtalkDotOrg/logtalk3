@@ -189,8 +189,8 @@ implementation object as a parameter value.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">lgtunit.lgt</span></code> source file implements a framework for defining and
 running unit tests in Logtalk. The <code class="docutils literal notranslate"><span class="pre">lgtunit_messages.lgt</span></code> source file
 defines the default translations for the messages printed when running
-unit tests. These messages can be intercepted to customize output, e.g.
-to make it less verbose, or for integration with e.g. GUI IDEs and
+unit tests. These messages can be intercepted to customize the output,
+e.g. to make it less verbose, or for integration with e.g. GUI IDEs and
 continuous integration servers.</p>
 <p>Other files part of this tool provide support for alternative output
 formats of test results and are discussed below.</p>
@@ -254,8 +254,8 @@ debugging support. But these settings can always be overriden in the
 test objects.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">tester-sample.lgt</span></code> file (at the root of the Logtalk distribution)
 exemplifies how to compile and load <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool, the source code
-under testing, the unit tests, and for automatically run all the tests
-after loading:</p>
+under testing, the unit tests, and how to automatically run all the
+tests after loading:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
     <span class="c">% minimize compilation reports to the essential ones (errors and warnings)</span>
     <span class="k">set_logtalk_flag</span>(report, warnings),
@@ -305,7 +305,7 @@ by typing:</p>
 </pre></div>
 </div>
 <p>When testing complex <em>units</em>, it is often desirable to split the tests
-between several test objects or using parametric test objects to be able
+between several test objects or use parametric test objects to be able
 to run the same tests using different parameters (e.g. different data
 sets or alternative implementations of the same protocol). In this case,
 you can run all test subsets using the goal:</p>
@@ -313,7 +313,7 @@ you can run all test subsets using the goal:</p>
 </pre></div>
 </div>
 <p>where the <code class="docutils literal notranslate"><span class="pre">run_test_sets/1</span></code> predicate argument is a list of two or
-more test object identifiers. This predicate makes possible to get a
+more test object identifiers. This predicate makes it possible to get a
 single code coverage report that takes into account all the tests.</p>
 <p>It’s also possible to automatically run loaded tests when using the
 <code class="docutils literal notranslate"><span class="pre">make</span></code> tool by calling the goal that runs the tests from a definition

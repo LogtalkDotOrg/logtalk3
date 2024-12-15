@@ -77,7 +77,7 @@ would need to use instead (to avoid profiling the compiler itself):
 	?- logtalk << (prolog_statistics:profile(... :: ...)).
 	...
 
-In either case, Don't forget, however, to load the `prolog_statistics` module
+In either case, don't forget, however, to load the `prolog_statistics` module
 *before* using or compiling calls to the `profile/1` to allow the Logtalk
 compiler to access its meta-predicate template.
 
@@ -87,7 +87,7 @@ inheritance. Calls to internal compiler and runtime predicates have functors
 starting with `$lgt_`. Calls to predicates with functors such as `_def`,
 `_dcl`, or `_super`, used to implement inheritance, may still be listed in
 a few cases. Note that the time and the number of calls/redos of concealed
-predicates is added to the caller predicates.
+predicates are added to the caller predicates.
 
 
 Compiling source code for profiling

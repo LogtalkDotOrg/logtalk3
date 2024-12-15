@@ -137,7 +137,7 @@ loaded indirectly by files external to the libraries being documented.
 The following directory diagrams are supported:
 
 - *directory loading diagrams* showing which directories contain files that
-load files in other directories
+load files from other directories
 - *directory dependency diagrams* showing which directories contain entities
 with references to entities defined in other directories
 
@@ -148,7 +148,7 @@ source code.
 
 Library and directory dependency diagrams are specially useful for large
 applications where file diagrams would be too large and complex to be
-useful, specially when combined with the *zoom* option to link to,
+useful, notably when combined with the *zoom* option to link to,
 respectively, entity and file diagrams.
 
 A utility object, `diagrams`, is provided for generating all supported

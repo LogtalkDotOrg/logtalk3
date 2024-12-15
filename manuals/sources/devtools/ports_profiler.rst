@@ -12,10 +12,9 @@ The procedure box model is the same used in the debugger tool. This is
 an extended version of the original Byrd's four port model. Besides the
 standard ``call``, ``exit``, ``fail``, and ``redo`` ports, Logtalk also
 defines two post-unification ports, ``fact`` and ``rule``, and an
-``exception`` port. This tool can also distinguishes between
-deterministic exits (reported in the ``exit`` column in the profiling
-result tables) and exits that leave choice-points (reported in the
-``*exit`` column).
+``exception`` port. This tool can also distinguish between deterministic
+exits (reported in the ``exit`` column in the profiling result tables)
+and exits that leave choice-points (reported in the ``*exit`` column).
 
 API documentation
 -----------------
@@ -61,9 +60,9 @@ Alternatively, you can also simply turn on the ``debug`` and
    | ?- set_logtalk_flag(debug, on), set_logtalk_flag(source_data, on).
 
 Be aware, however, that loader files (e.g. library loader files) may
-override default flag values and thus loaded files may not be compiled
-in debug mode. In this case, you will need to modify the loader files
-themselves.
+override the default flag values and thus the loaded files may not be
+compiled in debug mode. In this case, you will need to modify the loader
+files themselves.
 
 Generating profiling data
 -------------------------
@@ -110,7 +109,7 @@ The profiling data can be reset using the query:
 
    | ?- ports_profiler::reset.
 
-To reset only the data about a specific entity, use the query:
+To reset only the data for a specific entity, use the query:
 
 ::
 

@@ -152,10 +152,9 @@ used. It is inspired by the ECLiPSe <code class="docutils literal notranslate"><
 an extended version of the original Byrd’s four port model. Besides the
 standard <code class="docutils literal notranslate"><span class="pre">call</span></code>, <code class="docutils literal notranslate"><span class="pre">exit</span></code>, <code class="docutils literal notranslate"><span class="pre">fail</span></code>, and <code class="docutils literal notranslate"><span class="pre">redo</span></code> ports, Logtalk also
 defines two post-unification ports, <code class="docutils literal notranslate"><span class="pre">fact</span></code> and <code class="docutils literal notranslate"><span class="pre">rule</span></code>, and an
-<code class="docutils literal notranslate"><span class="pre">exception</span></code> port. This tool can also distinguishes between
-deterministic exits (reported in the <code class="docutils literal notranslate"><span class="pre">exit</span></code> column in the profiling
-result tables) and exits that leave choice-points (reported in the
-<code class="docutils literal notranslate"><span class="pre">*exit</span></code> column).</p>
+<code class="docutils literal notranslate"><span class="pre">exception</span></code> port. This tool can also distinguish between deterministic
+exits (reported in the <code class="docutils literal notranslate"><span class="pre">exit</span></code> column in the profiling result tables)
+and exits that leave choice-points (reported in the <code class="docutils literal notranslate"><span class="pre">*exit</span></code> column).</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>This tool API documentation is available at:</p>
@@ -189,9 +188,9 @@ mode and with the <code class="docutils literal notranslate"><span class="pre">s
 </pre></div>
 </div>
 <p>Be aware, however, that loader files (e.g. library loader files) may
-override default flag values and thus loaded files may not be compiled
-in debug mode. In this case, you will need to modify the loader files
-themselves.</p>
+override the default flag values and thus the loaded files may not be
+compiled in debug mode. In this case, you will need to modify the loader
+files themselves.</p>
 </section>
 <section id="generating-profiling-data">
 <h2>Generating profiling data<a class="headerlink" href="#generating-profiling-data" title="Link to this heading"></a></h2>
@@ -226,7 +225,7 @@ with all profile data by typing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ports_profiler<span class="o">::</span>reset.
 </pre></div>
 </div>
-<p>To reset only the data about a specific entity, use the query:</p>
+<p>To reset only the data for a specific entity, use the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ports_profiler<span class="o">::</span>reset(<span class="nv">Entity</span>).
 </pre></div>
 </div>

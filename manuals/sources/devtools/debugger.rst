@@ -27,7 +27,7 @@ This tool can be loaded using the query:
 
 When the code to be debugged runs computationally expensive
 initializations, loading this tool after the code may have a noticeable
-impact in loading times.
+impact on loading times.
 
 Testing
 -------
@@ -75,7 +75,7 @@ trace to a file. For example:
         dump_trace::stop_redirect_to_file.
 
 A full trace can also be obtained at the top-level by using the ``S``
-(Skip) command at the call port for the top-levle goal when tracing it.
+(Skip) command at the call port for the top-level goal when tracing it.
 
 Alternative debugger tools
 --------------------------

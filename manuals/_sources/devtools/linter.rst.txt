@@ -7,9 +7,9 @@ Logtalk provides a built-in linter tool that runs automatically when
 compiling and loading source files. The lint warnings are controlled by
 a `set of flags <../userman/programming.html#programming-flags-lint>`__.
 The default values for these flags are defined in the backend Prolog
-compiler adapter files and can be overriden from a settings file, from a
-source file (e.g. a loader file), or from an entity. These flags can be
-set globally using the
+compiler adapter files and can be overridden from a settings file, from
+a source file (e.g. a loader file), or from an entity. These flags can
+be set globally using the
 `set_logtalk_flag/2 <../refman/predicates/set_logtalk_flag_2.html>`__
 built-in predicate. For (source file or entity) local scope, use instead
 the
@@ -59,7 +59,7 @@ Lint checks include:
 - Unification goals that will succeed without binding any variables
 - Unification goals that will succeed creating a cyclic term
 - Goals that are always true or always false
-- Trivial goal fails (due to no matching predicate clause)
+- Trivial goal failures (due to no matching predicate clause)
 - Redefined built-in predicates
 - Redefined standard operators
 - Lambda expression unclassified variables and mixed up variables
@@ -68,7 +68,7 @@ Lint checks include:
 - If-then-else and soft cut control constructs without an else part
 - If-then-else and soft cut control constructs where the test is a
   unification between a variable and a ground term
-- Missing parenthesis around if-then-else and disjunction control
+- Missing parentheses around if-then-else and disjunction control
   constructs in the presence of cuts in the first argument
 - Cuts in clauses for multifile predicates
 - Missing cut in repeat loops

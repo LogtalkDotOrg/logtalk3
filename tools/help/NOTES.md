@@ -21,7 +21,7 @@ ________________________________________________________________________
 `help`
 ======
 
-This tool provides basic on-line help for Logtalk features and libraries
+This tool provides basic online help for Logtalk features and libraries
 when running in most operating-systems. For help on the Logtalk compiler
 error and warning messages, see the `tutor` tool.
 
@@ -105,7 +105,7 @@ scripts. For example:
 
 	| ?- help::man(logtalk_tester).
 
-When you finish consult the documentation and quit the `info` process,
+When you finish consulting the documentation and quit the `info` process,
 you will be back to the top-level prompt (if you find that the top-level
 have scrolled from its last position, try to set your terminal terminfo
 to `xterm-256colour`).
@@ -137,7 +137,7 @@ On Linux systems, use the distribution own package manager to install the
 Known issues
 ------------
 
-The open commands used to open documentation URLs drop the fragment part, thus
+The open commands used to open documentation URLs drops the fragment part, thus
 preventing navigating to the specified position on the documentation page.
 
 When browsing the Texinfo versions of the Handbook and the APIs documentation

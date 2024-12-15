@@ -26,20 +26,20 @@ uninstalling third-party libraries and applications, generically known as
 _packs_. Collections of pack specifications are made available using
 _registries_. Registries can be local to a system, publicly shared, or
 private to a company (e.g. only available in a VPN). There is no concept
-of a central registry. Users decide which registries they trust and want
-to use and add them using their published URLs. The tool supports both pack
+of a central registry. Users can decide which registries they trust and want
+to use, and add them using their published URLs. The tool supports both pack
 checksums and signatures and takes several steps to sanitize registry and
-pack specifications. As other Logtalk developer tools, portability is a main
-goal. This tool can be used with any supported Prolog backend and run in both
-POSIX and Windows systems. Moreover, this tool can be used not only for
-handling Logtalk packs but also Prolog only packs, thus providing a solution
-for sharing portable resources between multiple systems.
+pack specifications. As with other Logtalk developer tools, portability is
+a main goal. This tool can be used with any supported Prolog backend and run
+on both POSIX and Windows systems. Moreover, this tool can be used not only
+for handling Logtalk packs but also Prolog only packs, thus providing a
+solution for sharing portable resources between multiple systems.
 
 A list of public Logtalk and Prolog pack registries is available at:
 
 https://github.com/LogtalkDotOrg/pack-registries
 
-This tool is the beta stage of development. Feedback is most welcome.
+This tool is in the beta stage of development. Feedback is most welcome.
 
 
 Requirements
@@ -163,7 +163,7 @@ the query:
 
 This directory holds sub-directories for registries, packs, and archives.
 These sub-directories are automatically created when loading the `packs`
-tool if they don't exist . Users shouldn't manually modify the contents
+tool if they don't exist . Users should not manually modify the contents
 of these directories. Multiple and independent registry/pack setups are
 possible using _virtual environments_ as explained next.
 

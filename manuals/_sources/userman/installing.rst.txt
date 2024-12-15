@@ -22,7 +22,7 @@ Installing Logtalk
 ==================
 
 This page provides an overview of Logtalk installation requirements and
-instructions and a description of the files contained on the Logtalk
+instructions and a description of the files contained in the Logtalk
 distribution. For detailed, up-to-date installation and configuration
 instructions, please see the ``README.md``, ``INSTALL.md``, and
 ``CUSTOMIZE.md`` files distributed with Logtalk. The broad compatibility
@@ -45,7 +45,7 @@ possible. The installers set two environment variables, ``LOGTALKHOME``
 and ``LOGTALKUSER``, pointing, respectively, to the Logtalk installation
 folder and to the Logtalk user folder.
 
-User applications should preferable be kept outside of the Logtalk user
+User applications should preferably be kept outside of the Logtalk user
 folder created by the installation process, however, as updating Logtalk
 often results in updating the contents of this folder. If your
 applications depend on customizations to the distribution files, backup

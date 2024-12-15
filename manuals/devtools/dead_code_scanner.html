@@ -167,7 +167,7 @@ operating-system.</p>
 predicates for finding dead code in entities, libraries, and
 directories. The source file <code class="docutils literal notranslate"><span class="pre">dead_code_scanner_messages.lgt</span></code> defines
 the default translations for the messages printed when scanning for dead
-code. These messages can be intercepted to customize output, e.g. to
+code. These messages can be intercepted to customize the output, e.g. to
 make it less verbose, or for integration with e.g. GUI IDEs and
 continuous integration servers.</p>
 <section id="api-documentation">
@@ -213,7 +213,7 @@ yes
 </pre></div>
 </div>
 <p>For complex applications that make use of sub-libraries, there are also
-<code class="docutils literal notranslate"><span class="pre">rlibrary/1-2</span></code> predicates that performs a recursive scan of a library
+<code class="docutils literal notranslate"><span class="pre">rlibrary/1-2</span></code> predicates that perform a recursive scan of a library
 and all its sub-libraries. Conversely, we may be interested in scanning
 a single entity:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> dead_code_scanner<span class="o">::</span>entity(some_object).

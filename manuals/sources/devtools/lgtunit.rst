@@ -25,8 +25,8 @@ Main files
 The ``lgtunit.lgt`` source file implements a framework for defining and
 running unit tests in Logtalk. The ``lgtunit_messages.lgt`` source file
 defines the default translations for the messages printed when running
-unit tests. These messages can be intercepted to customize output, e.g.
-to make it less verbose, or for integration with e.g. GUI IDEs and
+unit tests. These messages can be intercepted to customize the output,
+e.g. to make it less verbose, or for integration with e.g. GUI IDEs and
 continuous integration servers.
 
 Other files part of this tool provide support for alternative output
@@ -105,8 +105,8 @@ test objects.
 
 The ``tester-sample.lgt`` file (at the root of the Logtalk distribution)
 exemplifies how to compile and load ``lgtunit`` tool, the source code
-under testing, the unit tests, and for automatically run all the tests
-after loading:
+under testing, the unit tests, and how to automatically run all the
+tests after loading:
 
 ::
 
@@ -166,7 +166,7 @@ You can also re-run a single test (or a list of tests) using the
    | ?- tests::run(test_identifier).
 
 When testing complex *units*, it is often desirable to split the tests
-between several test objects or using parametric test objects to be able
+between several test objects or use parametric test objects to be able
 to run the same tests using different parameters (e.g. different data
 sets or alternative implementations of the same protocol). In this case,
 you can run all test subsets using the goal:
@@ -176,7 +176,7 @@ you can run all test subsets using the goal:
    | ?- lgtunit::run_test_sets([test_set_1, test_set_2, ...]).
 
 where the ``run_test_sets/1`` predicate argument is a list of two or
-more test object identifiers. This predicate makes possible to get a
+more test object identifiers. This predicate makes it possible to get a
 single code coverage report that takes into account all the tests.
 
 It's also possible to automatically run loaded tests when using the

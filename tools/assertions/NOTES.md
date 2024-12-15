@@ -22,7 +22,7 @@ ________________________________________________________________________
 ============
 
 The `assertions.lgt` file contains definitions for two meta-predicates,
-`assertion/1-2`, which allows using of assertions on your source code to
+`assertion/1-2`, which allows the use of assertions on your source code to
 print warning and error messages (using the message printing mechanism).
 The `assertions_messages.lgt` file defines the default message translations
 generated on assertions succeed, fail, or throw an exception.

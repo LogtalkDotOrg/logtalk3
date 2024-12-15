@@ -29,7 +29,7 @@ The ``dead_code_scanner.lgt`` source file implements the scanning
 predicates for finding dead code in entities, libraries, and
 directories. The source file ``dead_code_scanner_messages.lgt`` defines
 the default translations for the messages printed when scanning for dead
-code. These messages can be intercepted to customize output, e.g. to
+code. These messages can be intercepted to customize the output, e.g. to
 make it less verbose, or for integration with e.g. GUI IDEs and
 continuous integration servers.
 
@@ -87,7 +87,7 @@ alias ``my_app``. The following goals could be used:
    ...
 
 For complex applications that make use of sub-libraries, there are also
-``rlibrary/1-2`` predicates that performs a recursive scan of a library
+``rlibrary/1-2`` predicates that perform a recursive scan of a library
 and all its sub-libraries. Conversely, we may be interested in scanning
 a single entity:
 

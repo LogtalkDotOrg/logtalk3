@@ -196,7 +196,7 @@ profiling the compiler itself):</p>
 ...
 </pre></div>
 </div>
-<p>In either case, Don’t forget, however, to load the <code class="docutils literal notranslate"><span class="pre">prolog_statistics</span></code>
+<p>In either case, don’t forget, however, to load the <code class="docutils literal notranslate"><span class="pre">prolog_statistics</span></code>
 module <em>before</em> using or compiling calls to the <code class="docutils literal notranslate"><span class="pre">profile/1</span></code> to allow
 the Logtalk compiler to access its meta-predicate template.</p>
 <p>The profiler support attempts to conceal internal Logtalk
@@ -205,7 +205,7 @@ implement predicate inheritance. Calls to internal compiler and runtime
 predicates have functors starting with <code class="docutils literal notranslate"><span class="pre">$lgt_</span></code>. Calls to predicates
 with functors such as <code class="docutils literal notranslate"><span class="pre">_def</span></code>, <code class="docutils literal notranslate"><span class="pre">_dcl</span></code>, or <code class="docutils literal notranslate"><span class="pre">_super</span></code>, used to
 implement inheritance, may still be listed in a few cases. Note that the
-time and the number of calls/redos of concealed predicates is added to
+time and the number of calls/redos of concealed predicates are added to
 the caller predicates.</p>
 </section>
 <section id="compiling-source-code-for-profiling">

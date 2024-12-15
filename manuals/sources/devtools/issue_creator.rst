@@ -52,7 +52,7 @@ report issues will be created:
 - GitHub: ``gh auth login --hostname <string> --with-token < token.txt``
 - GitLab: ``glab auth login --hostname <string> --token <string>``
 
-The access token must ensure the necessary scopes that allow bug reports
+The access token must have the necessary scopes that allow bug reports
 to be created. See the CLIs documentation for details. Typically, the
 ``auth`` command is called from the CI/CD pipeline definition scripts.
 However, depending on the CI/CD workflow, the authentication may be done
@@ -73,8 +73,8 @@ of labels. For example, to use both ``bug`` and ``auto`` labels:
 
 Note that the labels **must** be predefined in the issue tracker server
 for the bug report to be successfully created. The ``auto`` label can be
-used to simplifying filtering of auto-generated bug reports when
-browsing the issue tracker.
+used to simplify filtering of auto-generated bug reports when browsing
+the issue tracker.
 
 The bug reports use Markdown formatting, which is the default in GitHub
 and GitLab issue trackers.

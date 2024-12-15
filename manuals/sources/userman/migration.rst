@@ -40,10 +40,10 @@ Logtalk code. The Logtalk compiler simply copies the plain Prolog code
 as-is to the generated Prolog file. With Prolog modules, it is assumed
 that the module code starts with a ``module/1-2`` directive and ends at
 the end of the file. There is no module ending directive which would
-allowed us to define more than one module per file. In fact, most if not
+allow us to define more than one module per file. In fact, most if not
 all Prolog module systems always define a single module per file. Some
-of them mandate that the ``module/1-2`` directive be the first term on a
-source file. As such, when the Logtalk compiler finds a ``module/1-2``
+of them mandate that the ``module/1-2`` directive be the first term in
+a source file. As such, when the Logtalk compiler finds a ``module/1-2``
 directive, it assumes that all code that follows until the end of the
 file belongs to the module.
 
@@ -65,7 +65,7 @@ Encapsulating Prolog code using Logtalk objects is simple. First, for each
 source file, add an opening object directive, :ref:`directives_object_1_5`,
 to the beginning of the file and an ending object directive,
 :ref:`directives_end_object_0`, to the end of
-the file. Choose an object name that reflects the purpose of source file
+the file. Choose an object name that reflects the purpose of the source file
 code (this is a good opportunity for code refactoring if necessary).
 Second, add :ref:`directives_public_1` predicate directives for the
 top-level predicates that are used directly by the user or called from
@@ -80,7 +80,7 @@ The Logtalk ``wrapper`` tool can also help in detecting cross predicate
 calls. Compiling the resulting objects with the Logtalk
 :ref:`unknown_predicates <flag_unknown_predicates>` and
 :ref:`portability <flag_portability>` flags set to ``warning`` will
-help you identify calls to predicates defined on other converted source
+help you identify calls to predicates defined in other converted source
 files and possible portability issues.
 
 .. _migration_multifile:
@@ -90,7 +90,7 @@ Prolog multifile predicates
 
 Prolog *multifile* predicates are used when clauses for the same
 predicate are spread among several source files. When encapsulating
-plain Prolog code that uses multifile predicates, is often the case that
+plain Prolog code that uses multifile predicates, it's often the case that
 the clauses of the multifile predicates get spread between different
 objects and categories but conversion is straight-forward. In the
 Logtalk object (or category) holding the multifile predicate
@@ -143,7 +143,7 @@ Converting Prolog modules into objects may allow an application to run
 on a wider range of Prolog compilers, overcoming portability problems.
 Some Prolog compilers don't support a module system. Among those Prolog
 compilers which support a module system, the lack of standardization
-leads to several issues, specially with semantics, operators, and
+leads to several issues, notably with semantics, operators, and
 meta-predicates. In addition, the conversion allows you to take
 advantage of Logtalk more powerful abstraction and reuse mechanisms such
 as separation between interface from implementation, inheritance,

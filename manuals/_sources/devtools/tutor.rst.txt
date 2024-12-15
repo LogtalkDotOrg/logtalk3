@@ -6,7 +6,7 @@
 This tool adds explanations and suggestions for selected warning and
 error messages from the compiler/runtime and the developer tools. It's
 specially useful for new users not yet familiar with the warning and
-error messages and looking for advise on how to solve the reported
+error messages and looking for advice on how to solve the reported
 issues.
 
 API documentation
