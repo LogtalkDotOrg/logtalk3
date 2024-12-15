@@ -93,8 +93,8 @@
 <li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
@@ -182,8 +182,8 @@ files and streams:</p>
 options for the handling of the header of the file, the fields
 separator, and the handling of double-quoted fields. The <code class="docutils literal notranslate"><span class="pre">cvs</span></code> object
 extends the <code class="docutils literal notranslate"><span class="pre">csv/3</span></code> parametric object using default option values.</p>
-<p>The library also include predicates to guess the separator and guess the
-number of columns in a given CSV file.</p>
+<p>The library also includes predicates to guess the separator and guess
+the number of columns in a given CSV file.</p>
 <p>Files and streams can be read into a list of rows (with each row being
 represented by a list of fields) or asserted using a user-defined
 dynamic predicate. Reading can be done by first loading the whole file
@@ -245,7 +245,7 @@ of rows:</p>
 <span class="nv">Rows</span> <span class="o">=</span> [[aaa,bbb,ccc],[zzz,yyy,xxx]] <span class="o">?</span>
 </pre></div>
 </div>
-<p>Alternatively, The CSV data can be saved using a public and dynamic
+<p>Alternatively, the CSV data can be saved using a public and dynamic
 object predicate (that must be previously declared). For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">assertz</span>(p(<span class="nv">_</span>,<span class="nv">_</span>,<span class="nv">_</span>)), <span class="k">retractall</span>(p(<span class="nv">_</span>,<span class="nv">_</span>,<span class="nv">_</span>)).
 yes

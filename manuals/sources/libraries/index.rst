@@ -45,8 +45,8 @@ directory in the ``NOTES.md`` file.
    expand_library_alias_paths
    expecteds
    format
-   gensym
    genint
+   gensym
    git
    grammars
    heaps

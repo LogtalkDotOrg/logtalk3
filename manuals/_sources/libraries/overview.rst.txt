@@ -10,9 +10,9 @@ the ``unicode_data`` folder. See its ``README.md`` file for details.
 
 A ``parallel_logtalk_processes_setup.pl`` Prolog file is also provided
 with sample code for selected backend Prolog compilers for initializing
-Logtalk processes such that each process uses a unique scratch directory
-therefore allowing parallel process execution (e.g. for usage at
-continuous integration servers). Starting with Logtalk 3.48.0, this
+Logtalk processes such that each process uses a unique scratch
+directory, therefore allowing parallel process execution (e.g. for usage
+at continuous integration servers). Starting with Logtalk 3.48.0, this
 setup is only required in general when running with the ``clean`` flag
 turned off. See the comments in the file itself for usage instructions.
 
@@ -62,7 +62,7 @@ tests for the ``random`` library, we can use the goal:
 
    | ?- logtalk_load(random(tester)).
 
-To run all libraries tests, we can use the ``logtalk_tester`` automation
+To run all library tests, we can use the ``logtalk_tester`` automation
 script from the ``library`` directory at the root of the Logtalk
 distribution. For example, assuming the Logtalk user directory is
 ``~/logtalk`` and that we want to run the tests using ECLiPSe as the
@@ -86,7 +86,7 @@ proposal available at:
 
 http://www.cs.otago.ac.nz/staffpriv/ok/pllib.htm
 
-Some libraries, or part of libraries, are either ports of Prolog system
+Some libraries, or parts of libraries, are either ports of Prolog system
 libraries or inspired by Prolog system libraries. See the individual
 library notes for details. See also the ``NOTICE.txt`` file at the root
 of the Logtalk distribution for copyright information on third-party

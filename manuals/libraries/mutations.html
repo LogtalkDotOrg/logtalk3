@@ -87,8 +87,8 @@
 <li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
@@ -194,8 +194,8 @@ by defining objects or categories providing clauses for the
 <p>This library is expected to eventually be used to support mutation-based
 <em>fuzz testing</em>.</p>
 <p>By default, loading this library loads a set of default mutation
-algorithms. These can be overriden by defining alternative mutations and
-a custom loader file.</p>
+algorithms. These can be overridden by defining alternative mutations
+and a custom loader file.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -238,8 +238,8 @@ yes
 </pre></div>
 </div>
 <p>When there are multiple mutation algorithms for a given type, the
-predicate <code class="docutils literal notranslate"><span class="pre">type::mutation/3</span></code> choses one of them randomly. We can query
-the number of mutation algorithms available per type using the
+predicate <code class="docutils literal notranslate"><span class="pre">type::mutation/3</span></code> chooses one of them randomly. We can
+query the number of mutation algorithms available per type using the
 <code class="docutils literal notranslate"><span class="pre">mutations_store::counter/2</span></code> predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mutations_store<span class="o">::</span>counter(<span class="nv">Type</span>, <span class="nv">Count</span>).
 <span class="nv">Type</span> <span class="o">=</span> atom,

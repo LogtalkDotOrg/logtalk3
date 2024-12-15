@@ -52,7 +52,7 @@ or `Key-Value` pairs. For example:
 	hr([class-separator])
 
 Atomic arguments of the compound terms are interpreted as element content.
-Non atomic element content can be represented as a quoted atom or by using
+Non-atomic element content can be represented as a quoted atom or by using
 the `pre` or `code` elements as explained above.
 
 This library is a work in progress.
@@ -106,7 +106,7 @@ Generating a HTML fragment
 --------------------------
 
 It's also possible to generate just a fragment of a (X)HTML document by using
-a list of compound terms or a compound term for an element other then `html`.
+a list of compound terms or a compound term for an element other than `html`.
 For example:
 
 	| ?- current_output(Stream),

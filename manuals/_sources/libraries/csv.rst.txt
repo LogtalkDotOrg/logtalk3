@@ -13,8 +13,8 @@ options for the handling of the header of the file, the fields
 separator, and the handling of double-quoted fields. The ``cvs`` object
 extends the ``csv/3`` parametric object using default option values.
 
-The library also include predicates to guess the separator and guess the
-number of columns in a given CSV file.
+The library also includes predicates to guess the separator and guess
+the number of columns in a given CSV file.
 
 Files and streams can be read into a list of rows (with each row being
 represented by a list of fields) or asserted using a user-defined
@@ -91,7 +91,7 @@ of rows:
 
    Rows = [[aaa,bbb,ccc],[zzz,yyy,xxx]] ?
 
-Alternatively, The CSV data can be saved using a public and dynamic
+Alternatively, the CSV data can be saved using a public and dynamic
 object predicate (that must be previously declared). For example:
 
 ::

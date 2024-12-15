@@ -99,8 +99,8 @@
 <li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
@@ -208,9 +208,9 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(arbitrary(tester)).
 </pre></div>
 </div>
-<p>Several of provided tests are generic and verify correct behavior of all
-pre-defined and loaded user-defined generators and shrinkers for all
-ground types.</p>
+<p>Several of the provided tests are generic and verify the correct
+behavior of all pre-defined and loaded user-defined generators and
+shrinkers for all ground types.</p>
 </section>
 <section id="pre-defined-types">
 <h2>Pre-defined types<a class="headerlink" href="#pre-defined-types" title="Link to this heading"></a></h2>
@@ -272,7 +272,7 @@ values that satisfy a closure:</p>
 </div>
 <p>Another example is using the <code class="docutils literal notranslate"><span class="pre">transform/2</span></code> meta-type to transform
 generated values for a base type using a closure. Assuming that we want
-to generate sorted list of random integers, we can write:</p>
+to generate a sorted list of random integers, we can write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>arbitrary<span class="o">::</span>arbitrary(sorted_integer_list, <span class="nv">Arbitrary</span>) <span class="o">:-</span>
     arbitrary(transform(list(integer), sort), <span class="nv">Arbitrary</span>).
 </pre></div>
@@ -295,8 +295,8 @@ arbitrary<span class="o">::</span>shrink(odd, <span class="nv">Large</span>, <sp
 </div>
 <p>Definitions for the <code class="docutils literal notranslate"><span class="pre">shrink/3</span></code> predicate should either succeed or fail
 but never throw an exception. The <code class="docutils literal notranslate"><span class="pre">shrink_sequence/3</span></code> predicate can be
-used to help testing that shrinking a value results in a finite sequence
-of values.</p>
+used to help test that shrinking a value results in a finite sequence of
+values.</p>
 <p>It is also possible to define edge cases for a given type for use with
 QuickCheck implementations. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(arbitrary<span class="o">::</span>edge_case<span class="o">/</span><span class="m">2</span>).

@@ -64,7 +64,7 @@ https://www.json.org/
 Representation
 --------------
 
-The following choices of syntax has been made to represent JSON elements
+The following choices of syntax have been made to represent JSON elements
 as terms:
 
 - By default, JSON objects are represented using curly-bracketed terms,

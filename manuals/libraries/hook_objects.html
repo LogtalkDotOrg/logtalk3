@@ -87,8 +87,8 @@
 <li class="toctree-l2"><a class="reference internal" href="expand_library_alias_paths.html"><code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="expecteds.html"><code class="docutils literal notranslate"><span class="pre">expecteds</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="format.html"><code class="docutils literal notranslate"><span class="pre">format</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="genint.html"><code class="docutils literal notranslate"><span class="pre">genint</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gensym.html"><code class="docutils literal notranslate"><span class="pre">gensym</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="git.html"><code class="docutils literal notranslate"><span class="pre">git</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="heaps.html"><code class="docutils literal notranslate"><span class="pre">heaps</span></code></a></li>
@@ -249,9 +249,9 @@ the first term in the file the <strong>directive</strong>:</p>
 </div>
 <p>Note that the compiler will always convert any grammar rules defined in
 the file into clauses. Although this conversion can also be performed as
-an expansion, grammar rules are part of the Logtalk language. If you to
-preserve the grammar rules, use the hook objects described below to
-write them to a stream.</p>
+an expansion, grammar rules are part of the Logtalk language. If you
+want to preserve the grammar rules, use the hook objects described below
+to write them to a stream.</p>
 </section>
 <section id="expanding-grammar-rules-into-clauses-independently-of-the-compiler">
 <h3>Expanding grammar rules into clauses independently of the compiler<a class="headerlink" href="#expanding-grammar-rules-into-clauses-independently-of-the-compiler" title="Link to this heading"></a></h3>
@@ -280,7 +280,7 @@ to instantiate the parameter to the name of the module. For example:</p>
 of a plain Prolog file as an object named after the file (optionally
 implementing a protocol) or an object with the given name and object
 relations. Can be used to apply Logtalk developer tools to plain Prolog
-code or when porting Prolog application to Logtalk. For example:</p>
+code or when porting a Prolog application to Logtalk. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(<span class="s">&#39;plain.pl&#39;</span>, [hook(object_wrapper_hook)]).
 ...
 

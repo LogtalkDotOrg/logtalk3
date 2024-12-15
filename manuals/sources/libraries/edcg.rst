@@ -3,7 +3,7 @@
 ``edcg``
 ========
 
-This library provides a Logtalk port of the Peter Van Roy's extended DCG
+This library provides a Logtalk port of Peter Van Roy's extended DCG
 implementation. For full documentation on EDCGs, see:
 
 https://www.info.ucl.ac.be/~pvr/edcg.html
@@ -115,7 +115,7 @@ Benefits of this library:
 - avoid tedium and errors from manually threading accumulators through
   your predicates
 - add or remove accumulators with a single declaration
-- change accumulator implementation with a single declaration (ex,
+- change the accumulator implementation with a single declaration (ex,
   switching from ordsets to rbtrees)
 
 Syntax

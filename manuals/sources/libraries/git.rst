@@ -60,8 +60,8 @@ details:
 
 https://git-scm.com/docs/pretty-formats
 
-Convenient predicates are also provided for common used formats such as
-the commit author and the commit hash. For example:
+Convenient predicates are also provided for commonly used formats such
+as the commit author and the commit hash. For example:
 
 ::
 

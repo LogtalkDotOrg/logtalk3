@@ -56,6 +56,6 @@ Usage
 The `genint_core` category implements the library predicates. This category
 is imported by the default `genint` object to provide application global
 named counters. To make the counters local and thus minimize the potential
-for counter name clashes, the category can be imported by one of more
+for counter name clashes, the category can be imported by one or more
 application objects. Use protected or private import to restrict the scope
 of the library predicates.

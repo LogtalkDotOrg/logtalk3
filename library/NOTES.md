@@ -30,7 +30,7 @@ A plain Prolog version of the Unicode 6.2 standard is also included in the
 
 A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
 sample code for selected backend Prolog compilers for initializing Logtalk
-processes such that each process uses a unique scratch directory therefore
+processes such that each process uses a unique scratch directory, therefore
 allowing parallel process execution (e.g. for usage at continuous integration
 servers). Starting with Logtalk 3.48.0, this setup is only required in general
 when running with the `clean` flag turned off. See the comments in the file
@@ -77,7 +77,7 @@ a `tester.lgt` file for running them. For example, to run the tests for the
 
 	| ?- logtalk_load(random(tester)).
 
-To run all libraries tests, we can use the `logtalk_tester` automation script
+To run all library tests, we can use the `logtalk_tester` automation script
 from the `library` directory at the root of the Logtalk distribution. For
 example, assuming the Logtalk user directory is `~/logtalk` and that we want
 to run the tests using ECLiPSe as the backend Prolog compiler:
@@ -99,7 +99,7 @@ available at:
 
 http://www.cs.otago.ac.nz/staffpriv/ok/pllib.htm
 
-Some libraries, or part of libraries, are either ports of Prolog system
+Some libraries, or parts of libraries, are either ports of Prolog system
 libraries or inspired by Prolog system libraries. See the individual library
 notes for details. See also the `NOTICE.txt` file at the root of the Logtalk
 distribution for copyright information on third-party source code.

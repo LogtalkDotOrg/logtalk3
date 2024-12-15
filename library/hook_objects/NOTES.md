@@ -84,9 +84,9 @@ hook object writing as the first term in the file the **directive**:
 
 	:- set_logtalk_flag(hook, identity_hook).
 
-Note that the compiler will always convert any grammar rules defined in
-the file into clauses. Although this conversion can also be performed as
-an expansion, grammar rules are part of the Logtalk language. If you to
+Note that the compiler will always convert any grammar rules defined in the
+file into clauses. Although this conversion can also be performed as an
+expansion, grammar rules are part of the Logtalk language. If you want to
 preserve the grammar rules, use the hook objects described below to write
 them to a stream.
 
@@ -114,7 +114,7 @@ Load the `object_wrapper_hook.lgt`, which defines the `object_wrapper_hook/0-2`
 hook objects. Use them to wrap the contents of a plain Prolog file as an
 object named after the file (optionally implementing a protocol) or an object
 with the given name and object relations. Can be used to apply Logtalk developer
-tools to plain Prolog code or when porting Prolog application to Logtalk. For
+tools to plain Prolog code or when porting a Prolog application to Logtalk. For
 example:
 
 	| ?- logtalk_load('plain.pl', [hook(object_wrapper_hook)]).

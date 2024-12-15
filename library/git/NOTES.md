@@ -73,7 +73,7 @@ See e.g. the official documentation on `git log` pretty formats for details:
 
 https://git-scm.com/docs/pretty-formats
 
-Convenient predicates are also provided for common used formats such as the
+Convenient predicates are also provided for commonly used formats such as the
 commit author and the commit hash. For example:
 
 	| ?- git::commit_author('/Users/pmoura/Documents/Logtalk/logtalk3', Author).

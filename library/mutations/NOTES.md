@@ -43,7 +43,7 @@ This library is expected to eventually be used to support mutation-based
 _fuzz testing_.
 
 By default, loading this library loads a set of default mutation algorithms.
-These can be overriden by defining alternative mutations and a custom loader
+These can be overridden by defining alternative mutations and a custom loader
 file.
 
 
@@ -93,7 +93,7 @@ are accessed via this object. For example:
 	yes
 
 When there are multiple mutation algorithms for a given type, the predicate
-`type::mutation/3` choses one of them randomly. We can query the number of
+`type::mutation/3` chooses one of them randomly. We can query the number of
 mutation algorithms available per type using the `mutations_store::counter/2`
 predicate:
 

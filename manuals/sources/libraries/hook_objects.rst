@@ -82,9 +82,9 @@ the first term in the file the **directive**:
 
 Note that the compiler will always convert any grammar rules defined in
 the file into clauses. Although this conversion can also be performed as
-an expansion, grammar rules are part of the Logtalk language. If you to
-preserve the grammar rules, use the hook objects described below to
-write them to a stream.
+an expansion, grammar rules are part of the Logtalk language. If you
+want to preserve the grammar rules, use the hook objects described below
+to write them to a stream.
 
 Expanding grammar rules into clauses independently of the compiler
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -118,7 +118,7 @@ Load the ``object_wrapper_hook.lgt``, which defines the
 of a plain Prolog file as an object named after the file (optionally
 implementing a protocol) or an object with the given name and object
 relations. Can be used to apply Logtalk developer tools to plain Prolog
-code or when porting Prolog application to Logtalk. For example:
+code or when porting a Prolog application to Logtalk. For example:
 
 ::
 

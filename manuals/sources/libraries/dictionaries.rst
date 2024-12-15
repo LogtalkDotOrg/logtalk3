@@ -3,10 +3,11 @@
 ``dictionaries``
 ================
 
-This library provides a dictionary (also know as associative array, map,
-or symbol table) protocol and binary tree, AVL tree, and Red–Black tree
-implementations. The different representations of a dictionary should be
-regarded as opaque terms and only accessed using the library predicates.
+This library provides a dictionary (also known as associative array,
+map, or symbol table) protocol and binary tree, AVL tree, and Red–Black
+tree implementations. The different representations of a dictionary
+should be regarded as opaque terms and only accessed using the library
+predicates.
 
 API documentation
 -----------------
@@ -47,7 +48,7 @@ argument of the directive. Note that you can switch between
 implementations at runtime without code changes by using a parameter
 variable in the first argument of a ``uses/2`` directive.
 
-Dictionary keys should preferable be ground terms. If the keys contain
+Dictionary keys should preferably be ground terms. If the keys contain
 variables, the user must ensure that any instantiation of those
 variables when calling this library predicates will not affect the key
 ordering.

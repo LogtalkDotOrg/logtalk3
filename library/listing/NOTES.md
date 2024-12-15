@@ -109,6 +109,6 @@ Another example:
 	| ?- data::debug(k42).
 	...
 
-Note that the semantic of complementing categories require that we use the
+Note that the semantics of complementing categories require that we use the
 `(::)/2` control construct instead of the `(^^)/2` control construct as a
 _super_ call would be interpreted as made from the complemented object.

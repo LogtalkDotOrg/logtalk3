@@ -52,9 +52,9 @@ To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(arbitrary(tester)).
 
-Several of provided tests are generic and verify correct behavior of all
-pre-defined and loaded user-defined generators and shrinkers for all ground
-types.
+Several of the provided tests are generic and verify the correct behavior
+of all pre-defined and loaded user-defined generators and shrinkers for all
+ground types.
 
 
 Pre-defined types
@@ -118,7 +118,7 @@ satisfy a closure:
 		arbitrary(constrain(integer, [Arbitrary]>>(Arbitrary mod 2 =:= 1)), Arbitrary).
 
 Another example is using the `transform/2` meta-type to transform generated
-values for a base type using a closure. Assuming that we want to generate
+values for a base type using a closure. Assuming that we want to generate a
 sorted list of random integers, we can write:
 
 	arbitrary::arbitrary(sorted_integer_list, Arbitrary) :-
@@ -142,7 +142,7 @@ shrinking arbitrary values for QuickCheck usage:
 
 Definitions for the `shrink/3` predicate should either succeed or fail but
 never throw an exception. The `shrink_sequence/3` predicate can be used to
-help testing that shrinking a value results in a finite sequence of values.
+help test that shrinking a value results in a finite sequence of values.
 
 It is also possible to define edge cases for a given type for use with
 QuickCheck implementations. For example:
