@@ -41,7 +41,7 @@ Is there an equivalent directive to the ``ensure_loaded/1`` Prolog directive?
 -----------------------------------------------------------------------------
 
 You can use the goal ``logtalk_load(File, [reload(skip)])`` to ensure
-that ``File`` is only loaded once. See the documentation
+that ``File`` it is only loaded once. See the documentation
 of the :ref:`predicates_logtalk_load_2` predicate for details.
 
 .. _faq_usability_make:

@@ -46,9 +46,9 @@ Are my Logtalk applications portable across operating systems?
 --------------------------------------------------------------
 
 Yes, as long you don't use built-in predicates or special features
-that your chosen backend Prolog compiler only supports in some
-operating-systems. You may need to change the end-of-lines characters
+that your chosen backend Prolog compiler only supports on some
+operating-systems. You may need to change the end-of-line characters
 of your source files to match the ones on the target operating system
 and the expectations of your Prolog compiler. Some Prolog compilers
-silently fail to compile source files with the wrong end-of-lines
+silently fail to compile source files with the wrong end-of-line
 characters.

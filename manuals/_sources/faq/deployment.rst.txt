@@ -34,5 +34,5 @@ your application must include the adapter file for your compiler and the
 Logtalk compiler and runtime. The distribution includes embedding scripts
 for selected backend Prolog compilers and embedding examples.
 
-For instructions on how to embed Logtalk and Logtalk applications see
+For instructions on how to embed Logtalk and Logtalk applications, see
 the `embedding guide <https://logtalk.org/embedding.html>`_.

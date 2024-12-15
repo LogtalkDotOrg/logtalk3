@@ -31,14 +31,14 @@ General
 Why are all versions of Logtalk numbered 2.x or 3.x?
 ----------------------------------------------------
 
-The numbers "2" and "3" in the Logtalk version string refers to,
+The numbers "2" and "3" in the Logtalk version string refer to,
 respectively, the second and the third generations of the Logtalk
-language. Development of Logtalk 2 started on January 1998, with the
-first alpha release for registered users on July and the first public
+language. Development of Logtalk 2 started in January 1998, with the
+first alpha release for registered users in July and the first public
 beta on October. The first stable version of Logtalk 2 was released
-on February 9, 1999. Development of Logtalk 3 started on April 2012,
-with the first public alpha released on August 21, 2012. The first
-stable version of Logtalk 3 was released on January 7, 2015.
+in February 9, 1999. Development of Logtalk 3 started in April 2012,
+with the first public alpha released in August 21, 2012. The first
+stable version of Logtalk 3 was released in January 7, 2015.
 
 .. _faq_general_prolog:
 
@@ -59,7 +59,7 @@ available on specific Prolog compilers.
 Is the Logtalk implementation based on Prolog modules?
 ------------------------------------------------------
 
-No. Logtalk is (currently) implemented is plain Prolog code. Only a
+No. Logtalk is (currently) implemented in plain Prolog code. Only a
 few Prolog compilers include a module system, with several
 compatibility problems between them. Moreover, the current ISO Prolog
 standard for modules is next to worthless and is ignored by most of

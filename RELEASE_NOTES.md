@@ -47,6 +47,8 @@ Documentation
 
 * ADDED: Notes on encrypting applications using XVM.
 
+* FIXED: Multiple Handbook grammar and spelling typos.
+
 Library
 -------
 

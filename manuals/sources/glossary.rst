@@ -47,8 +47,8 @@ Glossary
 
    class
       An :term:`object` that specializes another object, interpreted as its
-      superclass. A class define the common predicates of a set of objects
-      that instantiates it. An object can also be interpreted as a class
+      superclass. A class defines the common predicates of a set of objects
+      that instantiate it. An object can also be interpreted as a class
       when it instantiates itself.
 
    abstract class
@@ -132,12 +132,12 @@ Glossary
    event
       The sending of a :term:`message` to an object. An event can be
       expressed as an ordered tuple: ``(Event, Object, Message, Sender)``.
-      Logtalk distinguish between the sending of a message — ``before``
+      Logtalk distinguishes between the sending of a message — ``before``
       event — and the return of control to the sender — ``after`` event.
 
    grammar rule
       An alternative notation for predicates used to parse or generate
-      sentences on some language. This notation hides the arguments used to
+      sentences in some language. This notation hides the arguments used to
       pass the sequences of tokens being processed, thus simplifying the
       representation of grammars. Grammar rules are represented using as
       functor the infix operator ``(-->)/2`` instead of the ``(:-)/2``
@@ -345,7 +345,7 @@ Glossary
 
    predicate definition
       The set of clauses for a predicate, contained in an object or category.
-      Predicate definitions can be overriden or specialized in descendant
+      Predicate definitions can be overridden or specialized in descendant
       entities.
 
    predicate alias
@@ -526,7 +526,7 @@ Glossary
 
    doclet file
       A :term:`source file` whose main purpose is to generate documentation
-      for e.g. a :term:`library` or an application.
+      for a :term:`library` or an application.
 
    loader file
       A :term:`source file` whose main purpose is to load a set of
@@ -584,7 +584,7 @@ Glossary
       A compound term that can be used in place of a goal or :term:`closure`
       meta-argument and that abstracts a :term:`predicate definition` by
       listing its variables and a callable term that implements the
-      definition. Lambda expressions help avoiding the need of naming and
+      definition. Lambda expressions help avoid the need of naming and
       defining auxiliary predicates.
 
    lambda parameter

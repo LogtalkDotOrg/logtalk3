@@ -27,16 +27,16 @@ Troubleshooting
 
 .. _faq_troubleshooting_options:
 
-Using compiler options on calls to the Logtalk compiling and loading predicates do not work!
---------------------------------------------------------------------------------------------
+Using compiler options on calls to the Logtalk compiling and loading predicates does not work!
+----------------------------------------------------------------------------------------------
 
 Using compiler options on calls to the Logtalk :ref:`predicates_logtalk_compile_2`
-and :ref:`predicates_logtalk_load_2` built-in predicates only apply the file being
-compiled. If the first argument is a :term:`loader file`, the compiler
-options will only be used in the compilation of the loader file
-itself, not in the compilation of the files loaded by the loader
-file. The solution is to edit the loader file and add the compiler
-options to the calls that compile/load the individual files.
+and :ref:`predicates_logtalk_load_2` built-in predicates only apply to the
+file being compiled. If the first argument is a :term:`loader file`, the
+compiler options will only be used in the compilation of the loader file
+itself, not in the compilation of the files loaded by the loader file.
+The solution is to edit the loader file and add the compiler options to
+the calls that compile/load the individual files.
 
 .. _faq_troubleshooting_gecko:
 
@@ -48,7 +48,7 @@ entities (e.g. ``&ndash;``) when browsing XML documenting files after
 running the ``lgt2xml`` shell script in the directory containing the
 XML documenting files. This is a consequence of the lack of support
 for the ``disable-output-escaping`` attribute in the browser XSLT
-processor. The workaround is to use other browser (e.g. Safari or
+processor. The workaround is to use another browser (e.g. Safari or
 Opera) or to use instead the ``lgt2html`` shell script in the
 directory containing the XML documenting files to convert them to
 (X)HTML files for browsing.
