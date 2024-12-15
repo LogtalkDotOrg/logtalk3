@@ -32,7 +32,7 @@ of the union-find algorithm provides the following features:
 making every node point to the root whenever a find predicate is used on it.
 
 - Union by rank: Union predicates always attach the shorter tree to the root
-of the taller tree. Thus, the resulting tree is no taller than the originals
+of the taller tree. Thus, the resulting tree is no taller than the original
 unless they were of equal height, in which case the resulting tree is taller
 by one node.
 
@@ -70,7 +70,7 @@ Usage
 An usage example is Kruskal's algorithm, a minimum-spanning-tree algorithm
 which finds an edge of the least possible weight that connects any two trees
 in the forest. It is a greedy algorithm in graph theory as it finds a minimum
-spanning tree for a connected weighted graph adding increasing cost arcs at
+spanning tree for a connected weighted graph by adding increasing cost arcs at
 each step.
 
 	:- object(kruskal).

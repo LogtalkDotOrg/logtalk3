@@ -69,7 +69,7 @@ instead the ``uuid/1`` parametric object:
            a,'9','8','5',-,f,'2',d,'1','9','0','9','4',d,c,'4',b]
    yes
 
-Similar to get a UUID using a list of character codes representation:
+Similarly, to get a UUID using a list of character codes representation:
 
 ::
 

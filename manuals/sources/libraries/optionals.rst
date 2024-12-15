@@ -12,7 +12,7 @@ of a value by providing an API with predicates that depend on the
 presence or absence of a value. Optional terms also allow separating the
 code that constructs optional terms from the code that processes them,
 which is then free to deal if necessary and at its convenience with any
-case where the values hold by optional terms are not present.
+case where the values held by optional terms are not present.
 
 API documentation
 -----------------
@@ -66,7 +66,7 @@ The created optional terms can then be passed as parameters to the
    yes
 
 The ``maybe`` object provides types and predicates for type-checking of
-the term hold by optional terms. It also provides some predicates for
+the term held by optional terms. It also provides some predicates for
 handling lists of optional terms.
 
 See also

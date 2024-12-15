@@ -47,7 +47,7 @@ To load all entities in this library, load the `loader.lgt` file:
 
 	| ?- logtalk_load(types(loader)).
 
-In case your code only requires the most basic types, you can load in
+If your code only requires the most basic types, you can load in
 alternative the file:
 
 	| ?- logtalk_load(basic_types(loader)).
@@ -108,7 +108,7 @@ values). For example:
 	type::check(age, Term) :-
 		type::check(between(non_negative_integer, 0, 150), Term).
 
-Be careful to ensure that new type definitions don't introduce spurious
+Be careful to ensure that the new type definitions don't introduce spurious
 choice-points for these predicates. The unit tests of the `types` library
 perform this check for pre-defined and loaded user-defined ground types.
 

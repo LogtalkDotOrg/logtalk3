@@ -57,7 +57,7 @@ The `recorded_database_core` category implements the library predicates.
 This category is imported by the default `recorded_database` object to
 provide application global database. To make the database local and thus
 minimize potential record clashes, the category can be imported by one
-of more application objects. Use protected or private import to restrict
+or more application objects. Use protected or private import to restrict
 the scope of the library predicates. For example:
 
 	:- object(foo,

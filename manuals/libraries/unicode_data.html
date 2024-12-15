@@ -272,10 +272,10 @@ files.</p>
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>Most applications only require some of the tables present in these
 resources. Most of these tables define properties for ranges of code
-points and not for single code points but the provided auxiliary
+points and not for single code points, but the provided auxiliary
 predicates allow access for a single code point. When increased
 performance is required, consider using the existing tables and
-auxiliary predicates to generated derived tables more fit for your
+auxiliary predicates to generate derived tables more fit for your
 specific application.</p>
 </section>
 <section id="known-issues">
@@ -288,8 +288,8 @@ the ISO Prolog standard published in 1995. But some Prolog compilers
 either don’t implement one or both directives or have flawed
 implementations. Thus, you may need to change how some of the files are
 loaded depending on the chosen Prolog compiler. Using conditional
-compilation directives would help in some cases but it would also rise
-portability issues on their own.</p>
+compilation directives would help in some cases, but it would also raise
+portability issues on its own.</p>
 </section>
 <section id="acknowledgements">
 <h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading"></a></h2>
@@ -304,7 +304,7 @@ and replacing the camel case spelling with underscores. There are,
 however, two exceptions: the files and directories holding the code
 point categories and names.</p>
 <p>There’s also an utility file, <code class="docutils literal notranslate"><span class="pre">unicode_data.pl</span></code>, that can be used to
-load all the files in these resources. Is mostly used to test
+load all the files in these resources. It is mostly used to test
 portability of the code across Prolog compilers. Also included is a
 Logtalk version of this file, <code class="docutils literal notranslate"><span class="pre">unicode_data.lgt</span></code>, that uses Logtalk’s
 own implementation of the <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive and the

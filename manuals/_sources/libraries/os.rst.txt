@@ -40,6 +40,6 @@ Known issues
 Some predicates may only be supported by a subset of backend Prolog
 compilers on a subset of operating-systems. They should be used with
 care and fully tested in your application domain as some backend Prolog
-compilers have buggy and inconsistent interfaces, specially across
+compilers have buggy and inconsistent interfaces, notably across
 operating-systems. See the remarks section in the ``os`` object
 documentation for details.

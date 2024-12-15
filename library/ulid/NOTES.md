@@ -80,7 +80,7 @@ the `ulid/1` parametric object:
 	ULID = ['0','1','H','0','J','3','2','Y','V','5','V','S','P','K','5','P','4','5','G','G','0','9','8','8','M','2']
 	yes
 
-Similar to get a ULID using a list of character codes representation:
+Similarly, to get a ULID using a list of character codes representation:
 
 	| ?- ulid(codes)::generate(ULID).
 	ULID = [48,49,72,48,74,51,52,66,54,48,55,57,54,49,67,82,70,65,67,51,67,67,86,82,48,66]

@@ -199,7 +199,7 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(types(loader)).
 </pre></div>
 </div>
-<p>In case your code only requires the most basic types, you can load in
+<p>If your code only requires the most basic types, you can load in
 alternative the file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(basic_types(loader)).
 </pre></div>
@@ -256,10 +256,10 @@ type<span class="o">::</span>check(age, <span class="nv">Term</span>) <span clas
     type<span class="o">::</span>check(between(non_negative_integer, <span class="m">0</span>, <span class="m">150</span>), <span class="nv">Term</span>).
 </pre></div>
 </div>
-<p>Be careful to ensure that new type definitions don’t introduce spurious
-choice-points for these predicates. The unit tests of the <code class="docutils literal notranslate"><span class="pre">types</span></code>
-library perform this check for pre-defined and loaded user-defined
-ground types.</p>
+<p>Be careful to ensure that the new type definitions don’t introduce
+spurious choice-points for these predicates. The unit tests of the
+<code class="docutils literal notranslate"><span class="pre">types</span></code> library perform this check for pre-defined and loaded
+user-defined ground types.</p>
 <p>When defining a meta-type (i.e. a type with arguments that are also
 types), add also a clause for the <code class="docutils literal notranslate"><span class="pre">type::meta_type/3</span></code> multifile
 predicate. For example:</p>

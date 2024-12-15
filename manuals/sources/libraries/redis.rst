@@ -62,9 +62,9 @@ library.
 Known issues
 ------------
 
-Recent version of macOS seem to disable the mapping of ``localhost`` to
+Recent versions of macOS seem to disable the mapping of ``localhost`` to
 ``127.0.0.1``. This issue may prevent running this library unit tests
-and the ``redis::connect/1`` from working. This can be fixed either by
-editing the
+and the ``redis::connect/1`` predicate from working. This can be fixed
+either by editing the
 ``/etc/hosts file or by using in alternative the predicate``\ redis::connect/3\ ``with``'127.0.0.1'\`
 as first argument.

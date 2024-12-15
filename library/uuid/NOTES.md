@@ -82,7 +82,7 @@ To generate a UUID using a list of characters representation, use instead the
 	        a,'9','8','5',-,f,'2',d,'1','9','0','9','4',d,c,'4',b]
 	yes
 
-Similar to get a UUID using a list of character codes representation:
+Similarly, to get a UUID using a list of character codes representation:
 
 	| ?- uuid(codes)::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], UUID).
 	UUID = [48,48,52,99,99,54,99,48,45,56,50,99,102,45,49,49,101,98,45,

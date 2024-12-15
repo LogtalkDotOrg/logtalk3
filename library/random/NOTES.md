@@ -22,7 +22,7 @@ ________________________________________________________________________
 ========
 
 This library provides portable random number generators and an abstraction
-over native backend Prolog compiler random number generator if available.
+over the native backend Prolog compiler random number generator if available.
 
 
 API documentation
@@ -51,7 +51,7 @@ To test this library predicates, load the `tester.lgt` file:
 Usage
 -----
 
-The `random` object implements portable random number generator and supports
+The `random` object implements a portable random number generator and supports
 multiple random number generators, using different seeds, by defining derived
 objects. For example:
 
@@ -70,7 +70,7 @@ The `random` and `fast_random` objects manage the random number generator
 seed using internal dynamic state. The predicates that update the seed
 are declared as synchronized (when running on Prolog backends that support
 threads). Still, care must be taken when using these objects from
-multi-threaded applications as there is not portable solution to protect
+multi-threaded applications as there is no portable solution to protect
 seed updates from signals and prevent inconsistent state when threads are
 canceled.
 
@@ -83,7 +83,7 @@ using a small integer argument, discard the first dozen random values.
 The `backend_random` object abstracts the native backend Prolog compiler
 random number generator for the basic `random/1`, `get_seed/1`, and `set_seed/1`
 predicates providing a portable implementation for the remaining predicates.
-This makes the object stateless, which can allow reliable use from multiple
+This makes the object stateless, which allows reliable use from multiple
 threads. Consult the backend Prolog compiler documentation for details on
 its random number generator properties. Note that several of the supported
 backend Prolog systems, notably B-Prolog, CxProlog, ECLiPSe, JIProlog, and

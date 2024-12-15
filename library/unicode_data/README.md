@@ -53,9 +53,9 @@ Usage
 -----
 Most applications only require some of the tables present in these resources.
 Most of these tables define properties for ranges of code points and not for
-single code points but the provided auxiliary predicates allow access for a
+single code points, but the provided auxiliary predicates allow access for a
 single code point. When increased performance is required, consider using the
-existing tables and auxiliary predicates to generated derived tables more fit
+existing tables and auxiliary predicates to generate derived tables more fit
 for your specific application.
 
 Known issues
@@ -69,7 +69,7 @@ Prolog standard published in 1995. But some Prolog compilers either don't
 implement one or both directives or have flawed implementations. Thus, you
 may need to change how some of the files are loaded depending on the chosen
 Prolog compiler. Using conditional compilation directives would help in some
-cases but it would also rise portability issues on their own.
+cases, but it would also raise portability issues on its own.
 
 Acknowledgements
 ----------------
@@ -84,7 +84,7 @@ camel case spelling with underscores. There are, however, two exceptions:
 the files and directories holding the code point categories and names.
 
 There's also an utility file, `unicode_data.pl`, that can be used to load all
-the files in these resources. Is mostly used to test portability of the code
+the files in these resources. It is mostly used to test portability of the code
 across Prolog compilers. Also included is a Logtalk version of this file,
 `unicode_data.lgt`, that uses Logtalk's own implementation of the `include/1`
 directive and the `logtak_load/1` predicate to load all files. This file can

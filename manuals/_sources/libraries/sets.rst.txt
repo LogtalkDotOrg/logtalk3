@@ -6,8 +6,8 @@
 This library provides a set protocol and two implementations of this
 protocol using *ordered lists*, one of them a parametric object that
 takes the type of the set elements as a parameter. Although representing
-sets as ordered lists is a common representation, is best practice to
-regard sets as opaque terms and only access them using the library
+sets as ordered lists is a common representation, the best practice is
+to regard sets as opaque terms and only access them using the library
 predicates.
 
 API documentation

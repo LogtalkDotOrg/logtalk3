@@ -187,7 +187,7 @@ by making every node point to the root whenever a find predicate is
 used on it.</p></li>
 <li><p>Union by rank: Union predicates always attach the shorter tree to the
 root of the taller tree. Thus, the resulting tree is no taller than
-the originals unless they were of equal height, in which case the
+the original unless they were of equal height, in which case the
 resulting tree is taller by one node.</p></li>
 </ul>
 <p>For a general and extended discussion on this data structure, see e.g.</p>
@@ -217,8 +217,8 @@ link in a web browser.</p>
 <p>An usage example is Kruskal’s algorithm, a minimum-spanning-tree
 algorithm which finds an edge of the least possible weight that connects
 any two trees in the forest. It is a greedy algorithm in graph theory as
-it finds a minimum spanning tree for a connected weighted graph adding
-increasing cost arcs at each step.</p>
+it finds a minimum spanning tree for a connected weighted graph by
+adding increasing cost arcs at each step.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(kruskal).
 
 <span class="p">    :- </span><span class="k">public</span>(kruskal<span class="o">/</span><span class="m">2</span>).

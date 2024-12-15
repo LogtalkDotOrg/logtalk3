@@ -30,7 +30,7 @@ by providing an API with predicates that depend on the presence or absence
 of a value. Optional terms also allow separating the code that constructs
 optional terms from the code that processes them, which is then free to
 deal if necessary and at its convenience with any case where the values
-hold by optional terms are not present.
+held by optional terms are not present.
 
 
 API documentation
@@ -78,7 +78,7 @@ parametric object. For example:
 	yes
 
 The `maybe` object provides types and predicates for type-checking of the
-term hold by optional terms. It also provides some  predicates for handling
+term held by optional terms. It also provides some  predicates for handling
 lists of optional terms.
 
 
