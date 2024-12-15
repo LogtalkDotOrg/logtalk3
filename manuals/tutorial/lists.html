@@ -222,7 +222,7 @@ define a new object that implements the list predicates using difference
 lists. However, we do not want to repeat the predicate directives in the
 new object. Therefore, what we need is to split the object’s protocol
 from the object’s implementation by defining a new Logtalk entity known
-as a protocol. Logtalk protocols are compilations units, at the same
+as a protocol. Logtalk protocols are compilation units, at the same
 level as objects and categories. That said, let us define a <code class="docutils literal notranslate"><span class="pre">listp</span></code>
 protocol:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">protocol</span>(listp).
@@ -283,7 +283,7 @@ using difference lists by defining a new object, <code class="docutils literal n
 <section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>It is easy to define a simple object: just put your Prolog code
+<li><p>It is easy to define a simple object: just write your Prolog code
 inside starting and ending object directives and add the necessary
 scope directives. The object will be self-defining and ready to use.</p></li>
 <li><p>Define a protocol when you may want to provide or enable several

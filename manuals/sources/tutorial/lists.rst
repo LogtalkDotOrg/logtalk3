@@ -138,7 +138,7 @@ define a new object that implements the list predicates using difference
 lists. However, we do not want to repeat the predicate directives in the
 new object. Therefore, what we need is to split the object's protocol
 from the object's implementation by defining a new Logtalk entity known
-as a protocol. Logtalk protocols are compilations units, at the same
+as a protocol. Logtalk protocols are compilation units, at the same
 level as objects and categories. That said, let us define a ``listp``
 protocol:
 
@@ -206,7 +206,7 @@ using difference lists by defining a new object, ``difflist``:
 Summary
 -------
 
-*  It is easy to define a simple object: just put your Prolog code
+*  It is easy to define a simple object: just write your Prolog code
    inside starting and ending object directives and add the necessary
    scope directives. The object will be self-defining and ready to use.
 

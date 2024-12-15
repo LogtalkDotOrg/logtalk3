@@ -133,7 +133,7 @@ dynamic object attributes.</p>
 <span id="category"></span><h2>Defining a category<a class="headerlink" href="#defining-a-category" title="Link to this heading"></a></h2>
 <p>We want to define a set of predicates to handle dynamic object
 attributes. We need public predicates to set, get, and delete
-attributes, and a private dynamic predicate to store the attributes
+attributes, and a private dynamic predicate to store the attribute
 values. Let us name these predicates <code class="docutils literal notranslate"><span class="pre">set_attribute/2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">get_attribute/2</span></code>, for getting and setting an attribute value,
 <code class="docutils literal notranslate"><span class="pre">del_attribute/2</span></code> and <code class="docutils literal notranslate"><span class="pre">del_attributes/2</span></code>, for deleting attributes,
@@ -148,11 +148,11 @@ containing all kinds of possible useful predicates.</p>
 <p>For this kind of situation, Logtalk enables the programmer to
 encapsulate the predicates in a <em>category</em>, so that they can be used in
 any object. A category is a Logtalk entity, at the same level as objects
-and protocols. It can contain predicates directives and/or definitions.
-Category predicates can be imported by any object, without code
-duplication and without resorting to inheritance.</p>
+and protocols. It can contain predicate directives and predicate
+definitions. Category predicates can be imported by any object, without
+code duplication and without resorting to inheritance.</p>
 <p>When defining category predicates, we need to remember that a category
-can be imported by more than one object. Thus, the calls to the built-in
+can be imported by more than one object. Thus, calls to the built-in
 methods that handle the private dynamic predicate (such as
 <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> or <a class="reference internal" href="../refman/methods/retract_1.html#methods-retract-1"><span class="std std-ref">retract/1</span></a>) must be made
 either in the context of <em>self</em>, using the <em>message to self</em> control
@@ -160,8 +160,8 @@ structure, <a class="reference internal" href="../refman/control/send_to_self_1.
 the context of <em>this</em> (i.e. in the context of the object importing the
 category). This way, we ensure that when we call one of the attribute
 predicates on an object, the intended object own definition of
-<code class="docutils literal notranslate"><span class="pre">attribute_/2</span></code> will be used. The predicates definitions are
-straightforward. For example, if opting for storing the attributes in
+<code class="docutils literal notranslate"><span class="pre">attribute_/2</span></code> will be used. The predicate definitions are
+straightforward. For example, if opting to store the attributes in
 <em>self</em>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(attributes).
 
@@ -197,12 +197,11 @@ straightforward. For example, if opting for storing the attributes in
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
-<p>The alternative, opting for storing the attributes on <em>this</em>, is
-similar: just delete the uses of the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> control structure from the
-code above.</p>
+<p>The alternative, opting to store the attributes on <em>this</em>, is
+similar: just delete the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> operator from the code above.</p>
 <p>We have two new directives, <a class="reference internal" href="../refman/directives/category_1_4.html#directives-category-1-4"><span class="std std-ref">category/1-4</span></a> and
 <a class="reference internal" href="../refman/directives/end_category_0.html#directives-end-category-0"><span class="std std-ref">end_category/0</span></a>, that
-encapsulate the category code. If needed, we can put the predicates
+encapsulate the category code. If needed, we can put the predicate
 directives inside a protocol that will be implemented by the category:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(attributes,
     <span class="k">implements</span>(attributes_protocol)).

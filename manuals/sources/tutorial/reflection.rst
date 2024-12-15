@@ -19,7 +19,7 @@
 A reflective class-based system
 ===============================
 
-When compiling an object, Logtalk distinguishes prototypes from instance
+When compiling an object, Logtalk distinguishes prototypes from instances
 or classes by examining the object relations. If an object instantiates
 and/or specializes another object, then it is compiled as an instance or
 class, otherwise it is compiled as a prototype. A consequence of this is

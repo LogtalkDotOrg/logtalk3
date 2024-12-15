@@ -35,7 +35,7 @@ Defining a category
 
 We want to define a set of predicates to handle dynamic object
 attributes. We need public predicates to set, get, and delete
-attributes, and a private dynamic predicate to store the attributes
+attributes, and a private dynamic predicate to store the attribute
 values. Let us name these predicates ``set_attribute/2`` and
 ``get_attribute/2``, for getting and setting an attribute value,
 ``del_attribute/2`` and ``del_attributes/2``, for deleting attributes,
@@ -52,12 +52,12 @@ containing all kinds of possible useful predicates.
 For this kind of situation, Logtalk enables the programmer to
 encapsulate the predicates in a *category*, so that they can be used in
 any object. A category is a Logtalk entity, at the same level as objects
-and protocols. It can contain predicates directives and/or definitions.
-Category predicates can be imported by any object, without code
-duplication and without resorting to inheritance.
+and protocols. It can contain predicate directives and predicate
+definitions. Category predicates can be imported by any object, without
+code duplication and without resorting to inheritance.
 
 When defining category predicates, we need to remember that a category
-can be imported by more than one object. Thus, the calls to the built-in
+can be imported by more than one object. Thus, calls to the built-in
 methods that handle the private dynamic predicate (such as
 :ref:`methods_assertz_1` or :ref:`methods_retract_1`) must be made
 either in the context of *self*, using the *message to self* control
@@ -65,8 +65,8 @@ structure, :ref:`control_send_to_self_1`, or in
 the context of *this* (i.e. in the context of the object importing the
 category). This way, we ensure that when we call one of the attribute
 predicates on an object, the intended object own definition of
-``attribute_/2`` will be used. The predicates definitions are
-straightforward. For example, if opting for storing the attributes in
+``attribute_/2`` will be used. The predicate definitions are
+straightforward. For example, if opting to store the attributes in
 *self*:
 
 ::
@@ -104,13 +104,12 @@ straightforward. For example, if opting for storing the attributes in
 
    :- end_category.
 
-The alternative, opting for storing the attributes on *this*, is
-similar: just delete the uses of the ``(::)/1`` control structure from the
-code above.
+The alternative, opting to store the attributes on *this*, is
+similar: just delete the ``(::)/1`` operator from the code above.
 
 We have two new directives, :ref:`directives_category_1_4` and
 :ref:`directives_end_category_0`, that
-encapsulate the category code. If needed, we can put the predicates
+encapsulate the category code. If needed, we can put the predicate
 directives inside a protocol that will be implemented by the category:
 
 ::
