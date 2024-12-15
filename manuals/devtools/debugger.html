@@ -205,7 +205,7 @@ Logtalk queries can be traced using this tool by using the
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gtrace(foo<span class="o">::</span>bar).
 </pre></div>
 </div>
-<p>or:</p>
+<p>Or alternatively:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gtrace, foo<span class="o">::</span>bar.
 </pre></div>
 </div>
@@ -228,9 +228,9 @@ as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">object_property</span>(<span class="nv">Entity</span>, defines(<span class="nv">Functor</span><span class="o">/</span><span class="nv">Arity</span>, <span class="nv">Properties</span>)).
 </pre></div>
 </div>
-<p>and checking the returned <code class="docutils literal notranslate"><span class="pre">line_count/1</span></code> property to find if there’s
-any offset to the source file number of the predicate clause that you
-want to trace. This issue, if present, usually only affects the first
+<p>Check the returned <code class="docutils literal notranslate"><span class="pre">line_count/1</span></code> property to find if there’s any
+offset to the source file number of the predicate clause that you want
+to trace. This issue, if present, usually only affects the first
 predicate clause.</p>
 <p>Clause breakpoints are currently not available when using XSB as this
 backend doesn’t provide line information.</p>

@@ -34,7 +34,7 @@
 /* This problem comes from the news group rec.puzzle.                      */
 /* The numbers 1 - 26 have been randomly assigned to the letters of the    */
 /* alphabet. The numbers beside each word are the total of the values      */
-/* assigned to the letters in the word. e.g for LYRE L,Y,R,E might equal   */
+/* assigned to the letters in the word. e.g. for LYRE L,Y,R,E might equal  */
 /* 5,9,20 and 13 respectively or any other combination that add up to 47.  */
 /* Find the value of each letter under the equations:                      */
 /*                                                                         */

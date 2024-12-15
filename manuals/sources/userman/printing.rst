@@ -122,7 +122,7 @@ for their associated prefixes and output streams.
 
 The second argument of ``print_message/3`` represents the *component*
 defining the message being printed. Here *component* is a generic term that
-can designate e.g a tool, a library, or some sub-system in a large application.
+can designate e.g. a tool, a library, or some sub-system in a large application.
 In our example, the component name is ``core``, identifying the Logtalk
 compiler/runtime. This argument was introduced to provide multiple namespaces
 for message terms and thus simplify programming-in-the-large by allowing easy

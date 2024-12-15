@@ -89,7 +89,7 @@ Logtalk queries can be traced using this tool by using the
 
    | ?- gtrace(foo::bar).
 
-or:
+Or alternatively:
 
 ::
 
@@ -117,9 +117,9 @@ as:
 
    | ?- object_property(Entity, defines(Functor/Arity, Properties)).
 
-and checking the returned ``line_count/1`` property to find if there's
-any offset to the source file number of the predicate clause that you
-want to trace. This issue, if present, usually only affects the first
+Check the returned ``line_count/1`` property to find if there's any
+offset to the source file number of the predicate clause that you want
+to trace. This issue, if present, usually only affects the first
 predicate clause.
 
 Clause breakpoints are currently not available when using XSB as this

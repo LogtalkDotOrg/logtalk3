@@ -177,7 +177,7 @@ and missing predicate `info/2` and `mode/2` directives.
 
 When the `lgtdoc_missing_info_key` flag is set to `warning` (its usual default
 value), the `lgtdoc` tool prints warnings on entity `info/1` directive and
-predicate `info/2` directive missing de facto required keys (e.g `comment`,
+predicate `info/2` directive missing de facto required keys (e.g. `comment`,
 `parameters` or `parnames` for parametric entities, `arguments` or `argnames`
 for predicates/non-terminals with arguments).
 

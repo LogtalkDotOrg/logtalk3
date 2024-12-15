@@ -32,9 +32,9 @@ directory in the ``NOTES.md`` file.
    assignvars
    base64
    basic_types
-   coroutining
    cbor
    core
+   coroutining
    csv
    dates
    dependents
@@ -79,8 +79,8 @@ directory in the ``NOTES.md`` file.
    timeout
    tsv
    types
-   unicode_data
    ulid
+   unicode_data
    union_find
    uuid
    zippers

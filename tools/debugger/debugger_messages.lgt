@@ -265,7 +265,7 @@
 	% execution context
 
 	message_tokens(execution_context(Entity0, Sender0, This0, Self0, MetaCallCtx0, Stack0)) -->
-		% in some cases, e.g when dealing with multifile clauses for Prolog modules,
+		% in some cases, e.g. when dealing with multifile clauses for Prolog modules,
 		% some of the execution context elements may not available
 		{var(Entity0) -> Entity = n/a; Entity = Entity0},
 		{var(Sender0) -> Sender = n/a; Sender = Sender0},

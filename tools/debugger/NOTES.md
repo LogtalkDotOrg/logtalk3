@@ -98,7 +98,7 @@ For example:
 
 	| ?- gtrace(foo::bar).
 
-or:
+Or alternatively:
 
 	| ?- gtrace, foo::bar.
 
@@ -121,10 +121,9 @@ for an entity predicate definition using a query such as:
 
 	| ?- object_property(Entity, defines(Functor/Arity, Properties)).
 
-and checking the returned `line_count/1` property to find if there's any
-offset to the source file number of the predicate clause that you want to
-trace. This issue, if present, usually only affects the first predicate
-clause.
+Check the returned `line_count/1` property to find if there's any offset
+to the source file number of the predicate clause that you want to trace.
+This issue, if present, usually only affects the first predicate clause.
 
 Clause breakpoints are currently not available when using XSB as this
 backend doesn't provide line information.
