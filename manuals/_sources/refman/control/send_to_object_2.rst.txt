@@ -53,7 +53,7 @@ Its operational semantics is equivalent to the conjunction
 within the context of the pseudo-object :ref:`user <objects_user>` and,
 if successful, the ``Proxy`` term is used as an object identifier.
 Exceptions thrown when proving ``Proxy`` are handled by the ``(::)/2``
-control construct. This construct construct supports backtracking over
+control construct. This control construct supports backtracking over
 the ``{Proxy}`` goal.
 
 The lookups for the message declaration and the corresponding method are
@@ -61,7 +61,7 @@ performed using a depth-first strategy. Depending on the value of the
 :ref:`optimize <flag_optimize>` flag, these lookups are performed at
 compile time whenever sufficient information is available. When the
 lookups are performed at runtime, a caching mechanism is used to improve
-performance in subsequent messages. See the User Manual section on
+performance for subsequent messages. See the User Manual section on
 :ref:`performance <performance_performance>` for details.
 
 Modes and number of proofs

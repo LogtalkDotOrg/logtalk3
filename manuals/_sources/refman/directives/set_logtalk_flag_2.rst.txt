@@ -39,7 +39,7 @@ the source file containing it. For global scope, use the corresponding
 :ref:`directives_initialization_1` directive. For a description of the
 predefined compiler flags, consult the :ref:`programming_flags`
 section in the User Manual. The directive affects the compilation of
-all terms that follow it within scope of the directive.
+all terms that follow it within the scope of the directive.
 
 Template and modes
 ------------------

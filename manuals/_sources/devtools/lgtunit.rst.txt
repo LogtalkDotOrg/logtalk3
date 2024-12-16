@@ -100,7 +100,7 @@ execution.
 The term-expansion performed by the ``lgtunit`` object sets the test
 object ``source_data`` flag to ``on`` and the
 ``context_switching_calls`` flag to ``allow`` for code coverage and
-debugging support. But these settings can always be overriden in the
+debugging support. But these settings can always be overridden in the
 test objects.
 
 The ``tester-sample.lgt`` file (at the root of the Logtalk distribution)

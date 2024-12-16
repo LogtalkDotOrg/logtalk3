@@ -6921,7 +6921,7 @@ Logtalk compiler and runtime
 mechanism. See the `logtalk` built-in object API documentation for details.
 
 * ADDED: Compiler optimization for the special case where an object sends a
-message to itself. The practical case is a parametric object where one of more
+message to itself. The practical case is a parametric object where one or more
 parameters are updated by the object predicates.
 
 * ADDED: Support for using the `user` pseudo-object as an event monitor by
@@ -18298,7 +18298,7 @@ no longer compiled inline to prevent a bug when the calls are used e.g.
 as conditions in if-then-else control constructs.
 
 * ADDED: Support for compiling and loading of source file names without
-the defined Logtalk extension but containing one of more `.` in their
+the defined Logtalk extension but containing one or more `.` in their
 names. Requested by Günter Kniesel and Andreas Becker.
 
 Tools

@@ -40,7 +40,7 @@ the source file is successfully compiled and loaded into memory.
 
 The loading context can be accessed from this directive by calling the
 :ref:`predicates_logtalk_load_context_2` predicate. Note that the usable
-loading context keys depends on the directive scope (file or object).
+loading context keys depend on the directive scope (file or object).
 
 Multiple initialization directives can be used in a source file or in an
 object. Their goals will be called in the same order as the directives at

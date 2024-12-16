@@ -161,7 +161,7 @@ use_module(<span class="nv">Module</span>, [<span class="k">op</span>(<span clas
 the category or object containing the directive) to the specified
 predicates (or non-terminals) are to be interpreted as calls to
 explicitly-qualified module predicates (or non-terminals). Thus, this
-directive may be used to simplify writing of predicate definitions by
+directive may be used to simplify the writing of predicate definitions by
 allowing the programmer to omit the <code class="docutils literal notranslate"><span class="pre">Module:</span></code> prefix when using the
 predicates listed in the directive (as long as the predicate calls do
 not occur as arguments for non-standard Prolog meta-predicates not
@@ -177,7 +177,7 @@ into these methods predicate arguments if bound at compile time.</p>
 conflicts between predicates specified in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> and
 <a class="reference internal" href="uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a> directives or for giving more meaningful
 names considering the calling context of the predicates. For predicates,
-is also possible to define alias shorthands using the notation
+it is also possible to define alias shorthands using the notation
 <code class="docutils literal notranslate"><span class="pre">Predicate</span> <span class="pre">as</span> <span class="pre">Alias</span></code> or, in alternative, the notation
 <code class="docutils literal notranslate"><span class="pre">Predicate::Alias</span></code>, where <code class="docutils literal notranslate"><span class="pre">Predicate</span></code> and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> are callable
 terms where some or all arguments may be instantiated.</p>
@@ -186,7 +186,7 @@ found on some Prolog implementations by requiring the first argument to
 be a module name (an atom) instead of a file specification. In Logtalk,
 there’s no mixing between <em>loading</em> a resource and (declaring the)
 <em>using</em> (of) a resource. As a consequence, this directive doesn’t
-automatically load the module. Loading the module file is dependent of
+automatically load the module. Loading the module file is dependent on
 the used <a class="reference internal" href="../../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a> and must be done separately (usually,
 using a source file directive such as <code class="docutils literal notranslate"><span class="pre">use_module/1</span></code> or <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
 in the entity file or preferably in the application <a class="reference internal" href="../../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a>

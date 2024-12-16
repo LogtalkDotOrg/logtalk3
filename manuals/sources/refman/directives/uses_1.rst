@@ -40,7 +40,7 @@ the same protocol when using explicit message sending. Object aliases are
 local to the object (or category) where they are defined.
 
 The objects being aliased can be :term:`parameter variables <parameter variable>`
-or parametric objects where one of more parameters are parameter variables
+or parametric objects where one or more parameters are parameter variables
 when using the directive in a parametric object or a parametric category
 defined in a source file (the common case).
 

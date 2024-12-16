@@ -38,7 +38,7 @@ term at compile time. The predicate must be declared (by a scope directive).
 This control construct provides access to predicate definitions in *this* from
 categories. For example, it allows overriding a predicate definition from a
 complementing category with a new definition that calls goals before and
-after calling the overriden definition (the overriding definition is sometimes
+after calling the overridden definition (the overriding definition is sometimes
 described in other programming languages as an *around method*). When used
 within an object, it's the same as calling its argument.
 

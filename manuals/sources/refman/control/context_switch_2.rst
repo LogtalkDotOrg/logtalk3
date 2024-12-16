@@ -47,7 +47,7 @@ debugging or for writing unit tests. This control construct can only be used
 for objects compiled with the
 :ref:`context_switching_calls <flag_context_switching_calls>` compiler
 flag set to ``allow``. Set this compiler flag to ``deny`` to disable
-this control construct and thus preventing using it to break encapsulation
+this control construct and thus prevent using it to break encapsulation
 when deploying applications.
 
 The ``{Proxy}<<Goal`` syntax allows simplified access to

@@ -33,7 +33,7 @@ Description
 
    ::Message
 
-Sends a message to :term:`self`. Can only used in the body of a predicate
+Sends a message to :term:`self`. Can only be used in the body of a predicate
 definition. The argument should match a :ref:`public <directives_public_1>`
 or :ref:`protected <directives_protected_1>` predicate of *self*. It may
 also match a :ref:`private <directives_private_1>` predicate

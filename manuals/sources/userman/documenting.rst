@@ -272,7 +272,7 @@ resource errors.
 For each exception, use of *controlled language* as found e.g. in the ISO
 Prolog Core standard and this Handbook is advised. Some examples:
 
-Instantiation error when one of more arguments cannot be a variable
+Instantiation error when one or more arguments cannot be a variable
    ``Argument`` is a variable
    
    ``Argument1`` and ``Argument2`` are variables

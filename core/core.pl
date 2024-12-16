@@ -15163,7 +15163,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % access to predicate definitions in "this" from categories; in the case of
 % complementing categories, it's usually used to call a predicate definition
-% that is being overriden by the category; when used within an object, it's
+% that is being overridden by the category; when used within an object, it's
 % the same as calling its argument
 
 '$lgt_compile_body'(@Pred, _, TPred, '$lgt_debug'(goal(@Pred, TPred), ExCtx), Ctx) :-
@@ -19029,7 +19029,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	).
 
 % special case where an object sends a message to itself;  the practical
-% case is parametric objects where one of more parameters are updated by
+% case is parametric objects where one or more parameters are updated by
 % the object predicates
 
 '$lgt_compile_message_to_object'(Pred, Obj, TPred, Events, Ctx) :-

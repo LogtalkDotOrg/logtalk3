@@ -211,7 +211,7 @@ only adding new functionality). A complementing category takes preference
 over a previously loaded complementing category for the same object thus
 allowing patching a previous patch if necessary.
 
-When replacing a predicate definition, it is possible to call the overriden
+When replacing a predicate definition, it is possible to call the overridden
 definition in the object from the new definition in the category by using the
 :ref:`call_in_this_1` control construct. This construct is only meaningful
 when used within categories and requires a compile time bound goal argument,

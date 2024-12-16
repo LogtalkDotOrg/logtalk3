@@ -47,8 +47,8 @@ Template and modes
 Examples
 --------
 
-An example where a hypothetic application would have some limitations
-that the user should be made aware when running on a backend Prolog
+An example where a hypothetical application would have some limitations
+that the user should be made aware of when running on a backend Prolog
 compiler with bounded arithmetic:
 
 ::

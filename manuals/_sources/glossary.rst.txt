@@ -199,7 +199,7 @@ Glossary
       predicate functor, multiple predicate implementations for different types
       of arguments are possible, also known as *ad hoc polymorphism*.
       :term:`Parametric objects and categories <parametric entity>` enable
-      implementation of *parametric polymorphism* by using one of more
+      implementation of *parametric polymorphism* by using one or more
       parameters to pass object identifiers that can be used to parameterize
       generic predicate definitions.
 

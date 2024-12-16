@@ -48,7 +48,7 @@ specified object. Thus, this directive may be used to simplify writing
 of predicate definitions by allowing the programmer to omit the
 ``Object::`` prefix when using the predicates listed in the directive
 (as long as the calls do not occur as arguments for non-standard Prolog
-meta-predicates not declared on the adapter files). It is also possible
+meta-predicates not declared in the adapter files). It is also possible
 to include operator declarations in the second argument.
 
 This directive is also taken into account when compiling calls to the
@@ -58,11 +58,11 @@ into these methods predicate arguments if bound at compile time.
 
 It is possible to specify a predicate alias using the notation
 ``Name/Arity as Alias/Arity`` or, in alternative, the notation
-``Name/Arity::Alias/Arity``. Aliases may be used for avoiding
+``Name/Arity::Alias/Arity``. Aliases may be used to avoid
 conflicts between predicates specified in ``use_module/2`` and ``uses/2``
 directives, for giving more meaningful names considering the calling
-context of the predicates, and for changing the order of the predicate
-arguments when calling the predicate. For predicates, is also possible
+context of the predicates, and to change the order of the predicate
+arguments when calling the predicate. For predicates, it is also possible
 to define alias shorthands using the notation ``Predicate as Alias`` or,
 in alternative, the notation ``Predicate::Alias``, where ``Predicate``
 and ``Alias`` are callable terms where some or all arguments may be

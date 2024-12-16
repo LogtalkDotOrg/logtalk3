@@ -41,7 +41,7 @@ implemented protocol, an extended category, an imported category, an
 extended prototype, an instantiated class, or a specialized class.
 Predicate aliases may be used to solve conflicts between imported or
 inherited predicates. It may also be used to give a predicate
-(non-terminal) a name more appropriated in its usage context. This
+(non-terminal) a name more appropriate in its usage context. This
 directive may be used in objects, protocols, and categories.
 
 Predicate (and non-terminal) aliases are specified using (preferably)

@@ -418,7 +418,7 @@ source file the directive:
 
 The file will be compiled as-is as any hook object (specified as a compiler
 option or as a default hook object) and any backend adapter expansion rules
-are overriden by the directive.
+are overridden by the directive.
 
 
 Using Prolog defined expansions

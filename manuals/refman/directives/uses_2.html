@@ -164,7 +164,7 @@ specified object. Thus, this directive may be used to simplify writing
 of predicate definitions by allowing the programmer to omit the
 <code class="docutils literal notranslate"><span class="pre">Object::</span></code> prefix when using the predicates listed in the directive
 (as long as the calls do not occur as arguments for non-standard Prolog
-meta-predicates not declared on the adapter files). It is also possible
+meta-predicates not declared in the adapter files). It is also possible
 to include operator declarations in the second argument.</p>
 <p>This directive is also taken into account when compiling calls to the
 <a class="reference internal" href="../../userman/predicates.html#predicates-database"><span class="std std-ref">database</span></a> and
@@ -172,11 +172,11 @@ to include operator declarations in the second argument.</p>
 into these methods predicate arguments if bound at compile time.</p>
 <p>It is possible to specify a predicate alias using the notation
 <code class="docutils literal notranslate"><span class="pre">Name/Arity</span> <span class="pre">as</span> <span class="pre">Alias/Arity</span></code> or, in alternative, the notation
-<code class="docutils literal notranslate"><span class="pre">Name/Arity::Alias/Arity</span></code>. Aliases may be used for avoiding
+<code class="docutils literal notranslate"><span class="pre">Name/Arity::Alias/Arity</span></code>. Aliases may be used to avoid
 conflicts between predicates specified in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> and <code class="docutils literal notranslate"><span class="pre">uses/2</span></code>
 directives, for giving more meaningful names considering the calling
-context of the predicates, and for changing the order of the predicate
-arguments when calling the predicate. For predicates, is also possible
+context of the predicates, and to change the order of the predicate
+arguments when calling the predicate. For predicates, it is also possible
 to define alias shorthands using the notation <code class="docutils literal notranslate"><span class="pre">Predicate</span> <span class="pre">as</span> <span class="pre">Alias</span></code> or,
 in alternative, the notation <code class="docutils literal notranslate"><span class="pre">Predicate::Alias</span></code>, where <code class="docutils literal notranslate"><span class="pre">Predicate</span></code>
 and <code class="docutils literal notranslate"><span class="pre">Alias</span></code> are callable terms where some or all arguments may be

@@ -55,9 +55,9 @@ This control construct allows the programmer to bypass the Logtalk compiler
   :term:`parametric objects <parametric object>` when their identifiers
   correspond to predicates defined in ``user``.
 
-- Using it as a message to an object. This is mainly useful when the message is
-  e.g. a :ref:`conjunction of messages <messages_broadcasting>`, some of which
-  being calls to Prolog built-in predicates.
+- Using it as a message to an object. This is mainly useful when the message
+  is a :ref:`conjunction of messages <messages_broadcasting>` where some of
+  goals are calls to Prolog built-in predicates.
 
 .. note::
 

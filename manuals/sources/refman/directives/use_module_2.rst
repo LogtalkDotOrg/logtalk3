@@ -45,7 +45,7 @@ This directive declares that all calls (made from predicates defined in
 the category or object containing the directive) to the specified
 predicates (or non-terminals) are to be interpreted as calls to
 explicitly-qualified module predicates (or non-terminals). Thus, this
-directive may be used to simplify writing of predicate definitions by
+directive may be used to simplify the writing of predicate definitions by
 allowing the programmer to omit the ``Module:`` prefix when using the
 predicates listed in the directive (as long as the predicate calls do
 not occur as arguments for non-standard Prolog meta-predicates not
@@ -63,7 +63,7 @@ It is possible to specify a predicate alias using the notation
 conflicts between predicates specified in ``use_module/2`` and
 :ref:`directives_uses_2` directives or for giving more meaningful
 names considering the calling context of the predicates. For predicates,
-is also possible to define alias shorthands using the notation
+it is also possible to define alias shorthands using the notation
 ``Predicate as Alias`` or, in alternative, the notation
 ``Predicate::Alias``, where ``Predicate`` and ``Alias`` are callable
 terms where some or all arguments may be instantiated.
@@ -73,7 +73,7 @@ found on some Prolog implementations by requiring the first argument to
 be a module name (an atom) instead of a file specification. In Logtalk,
 there's no mixing between *loading* a resource and (declaring the)
 *using* (of) a resource. As a consequence, this directive doesn't
-automatically load the module. Loading the module file is dependent of
+automatically load the module. Loading the module file is dependent on
 the used :term:`backend Prolog compiler` and must be done separately (usually,
 using a source file directive such as ``use_module/1`` or ``use_module/2``
 in the entity file or preferably in the application :term:`loader file`

@@ -39,7 +39,7 @@
 	:- public(bits//1).
 	:- mode(bits(?list(integer)), zero_or_one).
 	:- info(bits//1, [
-		comment is 'Parses a sequence of one of more bits.',
+		comment is 'Parses a sequence of one or more bits.',
 		argnames is ['Bits']
 	]).
 

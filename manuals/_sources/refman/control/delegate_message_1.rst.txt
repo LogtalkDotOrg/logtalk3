@@ -41,7 +41,7 @@ is usually known as *delegation* but be aware that this is an overloaded
 word that can mean different things in different object-oriented
 programming languages.
 
-To prevent using of this control construct to break object
+To prevent the use of this control construct to break object
 encapsulation, an attempt to delegate a message to the original sender
 results in an error. The remaining error conditions are the same as the
 :ref:`control_send_to_object_2` control construct.
