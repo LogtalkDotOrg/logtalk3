@@ -77,7 +77,7 @@ Examples
 
 ::
 
-   % create a new engine for finding members of a list:
+   % create a new engine to enumerate list elements:
    | ?- threaded_engine_create(X, member(X, [1,2,3]), worker_1).
 
 .. seealso::

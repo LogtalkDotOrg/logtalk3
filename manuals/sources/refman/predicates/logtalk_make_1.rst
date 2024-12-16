@@ -114,8 +114,8 @@ these shortcuts as they are not part of the language.
 The target actions can be extended by defining clauses for the multifile
 and dynamic hook predicate
 :ref:`logtalk_make_target_action(Target) <predicates_logtalk_make_target_action_1>`
-where ``Target`` is one of the targets listed above. The additional user
-defined actions are run after the default ones.
+where ``Target`` is one of the targets listed above. The additional
+user-defined actions are run after the default ones.
 
 Modes and number of proofs
 --------------------------

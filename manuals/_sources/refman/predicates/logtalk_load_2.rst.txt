@@ -57,8 +57,8 @@ default using the source file directory (unless a
 
 Note that only the errors related to problems in the predicate argument
 are listed below. This predicate fails on the first error found during
-compilation of a source file. In this case, no contents of the source
-file are loaded.
+compilation of a source file. In this case, the source file contents is
+not loaded.
 
 .. warning::
 

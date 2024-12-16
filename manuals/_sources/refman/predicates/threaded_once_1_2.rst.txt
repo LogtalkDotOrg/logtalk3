@@ -43,7 +43,7 @@ back to the message queue of the object containing the call
 The ``threaded_once/2`` variant returns a threaded call identifier tag that
 can be used with the :ref:`threaded_exit/2 <predicates_threaded_exit_1_2>`
 and :ref:`predicates_threaded_cancel_1` predicates. Tags shall be regarded
-as opaque terms; users shall not rely on its type.
+as opaque terms; users shall not rely on their type.
 
 .. note::
 

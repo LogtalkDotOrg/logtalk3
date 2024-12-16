@@ -34,7 +34,7 @@ Description
    threaded_engine(Engine)
 
 Enumerates, by backtracking, all existing engines. Engine names shall be
-regarded as opaque terms; users shall not rely on its type.
+regarded as opaque terms; users shall not rely on their type.
 
 .. note::
 

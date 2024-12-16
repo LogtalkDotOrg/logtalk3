@@ -35,7 +35,7 @@ Description
    threaded_call(Goal, Tag)
 
 Proves ``Goal`` asynchronously using a new thread. The argument can be a
-message sending goal. Calls to this predicate always succeeds and return
+message sending goal. Calls to this predicate always succeed and return
 immediately. The results (success, failure, or exception) are sent back
 to the message queue of the object containing the call (:term:`this`) and
 can be retrieved by calling the
@@ -44,7 +44,7 @@ can be retrieved by calling the
 The ``threaded_call/2`` variant returns a threaded call identifier tag that
 can be used with the :ref:`threaded_exit/2 <predicates_threaded_exit_1_2>`
 and :ref:`predicates_threaded_cancel_1` predicates. Tags shall be regarded
-as opaque terms; users shall not rely on its type.
+as opaque terms; users shall not rely on their type.
 
 .. note::
 

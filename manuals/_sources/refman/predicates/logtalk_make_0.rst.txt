@@ -34,7 +34,7 @@ Description
    logtalk_make
 
 Reloads all Logtalk source files that have been modified since the time
-they are last loaded. Only source files loaded using the
+they were last loaded. Only source files loaded using the
 :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_load_2`
 predicates are reloaded. Non-modified files will also be reloaded when 
 a previous attempt to load them failed or when there is a change to the
@@ -47,8 +47,8 @@ main file (i.e. the file that contains the :ref:`directives_include_1`
 directive).
 
 Depending on the :term:`backend Prolog compiler`, the shortcut ``{*}`` may
-be used in alternative. Check the :term:`adapter files <adapter file>` for
-the availability of the shortcut as it is not part of the language.
+be used as an alternative. Check the :term:`adapter files <adapter file>`
+for the availability of the shortcut as it is not part of the language.
 
 .. warning::
 

@@ -34,7 +34,7 @@ Description
    logtalk_library_path(Library, Path)
 
 Dynamic and multifile user-defined predicate, allowing the declaration
-of aliases to :term:`library` paths. Library aliases may also be used on
+of aliases to :term:`library` paths. Library aliases may also be used in
 the second argument (using the notation *alias(path)*). Paths must always
 end with the path directory separator character (``'/'``).
 
