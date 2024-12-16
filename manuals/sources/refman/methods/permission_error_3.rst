@@ -33,7 +33,7 @@ Description
 
    permission_error(Operation, Permission, Culprit)
 
-Throws an permission error. Used when an operation is not allowed. For example,
+Throws a permission error. Used when an operation is not allowed. For example,
 sending a message for a predicate that is not within the scope of the sender.
 This built-in method is declared private and thus cannot be used as a message
 to an object. Calling this predicate is equivalent to the following sequence

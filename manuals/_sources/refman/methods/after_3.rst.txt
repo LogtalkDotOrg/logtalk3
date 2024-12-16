@@ -35,7 +35,7 @@ Description
 
 User-defined method for handling :ref:`after events <events_definitions>`.
 This method is declared in the :ref:`monitoring <apis:monitoring/0>` built-in
-protocol as a public predicate and automatically called by the runtime for
+protocol as a public predicate and is automatically called by the runtime for
 messages sent using the :ref:`control_send_to_object_2` control construct
 from within objects compiled with the :ref:`events <flag_events>` flag set
 to ``allow``.

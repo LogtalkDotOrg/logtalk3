@@ -59,7 +59,7 @@ Examples
 ::
 
    % upon compilation, the write/1 call will be
-   % the first goal on the clause body
+   % the first goal in the clause body
    test :-
        self(Self),
        write('executing a method in behalf of '),

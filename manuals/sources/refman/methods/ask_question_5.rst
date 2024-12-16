@@ -42,8 +42,8 @@ stream used for each ``Kind-Component`` pair can be found using the
 :ref:`logtalk::question_prompt_stream(Kind, Component, Prompt, Stream) <methods_question_prompt_stream_4>`
 hook predicate. The ``Check`` argument is a :term:`closure` that is converted
 into a checking goal by extending it with the user supplied answer. This
-predicate implements a read-loop that terminates when the checking
-predicate succeeds.
+predicate implements a read-loop that terminates when the check goal
+succeeds.
 
 This predicate starts by calling the
 :ref:`logtalk::question_hook(Question, Kind, Component, Tokens, Check, Answer) <methods_question_hook_6>`

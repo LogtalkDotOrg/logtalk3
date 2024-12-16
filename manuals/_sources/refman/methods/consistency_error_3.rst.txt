@@ -33,7 +33,7 @@ Description
 
    consistency_error(Consistency, Argument1, Argument2)
 
-Throws a consistency error. Used when two directive or predicate arguments are
+Throws a consistency error. Used when two directives or predicate arguments are
 individually correct but together are not consistent. For example, a predicate
 and its alias having different arity in a ``uses/2`` directive. This built-in
 method is declared private and thus cannot be used as a message to an object.

@@ -42,7 +42,7 @@ predicate, when defined and within scope, is automatically called by the
 by the ``expand_goal/2`` method may be restricted by changing its
 default public scope.
 
-Goal expansion may be also be applied when compiling source files by
+Goal expansion may also be applied when compiling source files by
 defining the object providing access to the ``goal_expansion/2`` clauses
 as a :term:`hook object`. Clauses for the
 ``goal_expansion/2`` predicate defined within an object or a category

@@ -38,7 +38,7 @@ User-defined hook predicates that are automatically called in case of
 coinductive success when proving a query for a coinductive predicates.
 The hook predicates are called with the head of the coinductive
 predicate on coinductive success and, optionally, with the hypothesis
-used that to reach coinductive success.
+that has used to reach coinductive success.
 
 When both hook predicates are defined, the
 ``coinductive_success_hook/1`` clauses are only used if no

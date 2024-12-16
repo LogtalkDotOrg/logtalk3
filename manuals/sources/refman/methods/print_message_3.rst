@@ -47,7 +47,7 @@ This predicate starts by converting the message term to a list of tokens
 and by calling the
 :ref:`logtalk::message_hook(Message, Kind, Component, Tokens) <methods_message_hook_4>`
 hook predicate. If this predicate succeeds, the ``print_message/3``
-predicate assumes that the message have been successfully printed.
+predicate assumes that the message has been successfully printed.
 
 By default: messages of kind ``debug`` or ``debug(_)`` are only printed when
 the ``debug`` flag is turned on; messages of kind ``banner``, ``comment``, or

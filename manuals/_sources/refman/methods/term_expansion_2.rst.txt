@@ -42,7 +42,7 @@ may be restricted by changing its default public scope.
 The ``term_expansion/2`` predicate may return a list of terms. Returning
 an empty list effectively suppresses the term.
 
-Term expansion may be also be applied when compiling source files by
+Term expansion may also be applied when compiling source files by
 defining the object providing access to the ``term_expansion/2`` clauses
 as a :term:`hook object`. Clauses for the
 ``term_expansion/2`` predicate defined within an object or a category

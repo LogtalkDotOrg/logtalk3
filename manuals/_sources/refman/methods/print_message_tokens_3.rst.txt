@@ -42,7 +42,7 @@ message was not intercepted by a
 user-defined hook predicate
 :ref:`methods_print_message_token_4` for each
 token. When a call to this hook predicate succeeds, the
-``print_message_tokens/3`` predicate assumes that the token have been
+``print_message_tokens/3`` predicate assumes that the token has been
 printed. When the call fails, the ``print_message_tokens/3`` predicate
 uses a default printing procedure for the token.
 

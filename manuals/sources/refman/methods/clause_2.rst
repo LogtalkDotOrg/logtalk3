@@ -57,9 +57,9 @@ Errors
 
 | ``Head`` is a variable:
 |     ``instantiation_error``
-| ``Head`` is a neither a variable nor a callable term:
+| ``Head`` is neither a variable nor a callable term:
 |     ``type_error(callable, Head)``
-| ``Body`` is a neither a variable nor a callable term:
+| ``Body`` is neither a variable nor a callable term:
 |     ``type_error(callable, Body)``
 | The predicate indicator of ``Head``, ``Name/Arity``, is that of a private predicate:
 |     ``permission_error(access, private_predicate, Name/Arity)``

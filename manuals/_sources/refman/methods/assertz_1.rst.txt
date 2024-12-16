@@ -73,7 +73,7 @@ Errors
 
 | ``Head`` is a variable:
 |     ``instantiation_error``
-| ``Head`` is a neither a variable nor a callable term:
+| ``Head`` is neither a variable nor a callable term:
 |     ``type_error(callable, Head)``
 | ``Body`` cannot be converted to a goal:
 |     ``type_error(callable, Body)``

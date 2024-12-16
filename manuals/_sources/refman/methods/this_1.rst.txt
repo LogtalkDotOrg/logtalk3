@@ -65,7 +65,7 @@ Examples
 ::
 
    % after compilation, the write/1 call will
-   % be the first goal on the clause body
+   % be the first goal in the clause body
    test :-
        this(This),
        write('Using a predicate clause contained in '),
