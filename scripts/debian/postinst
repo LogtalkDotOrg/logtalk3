@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk Debian package auxiliary script
-##   Last updated on November 10, 2024
+##   Last updated on December 16, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -46,7 +46,7 @@ if [ -x /usr/bin/update-menus ] ; then
 	update-menus
 fi
 
-echo "Links to the following scripts have been created on /usr/bin:"
+echo "Links to the following scripts have been created in /usr/bin:"
 echo
 echo "- logtalk_user_setup, logtalk_backend_select, logtalk_version_select"
 echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet"

@@ -266,7 +266,7 @@ supported (but expected soon). There's also preliminary support for
 Mermaid (not loaded by default as its current version lacks several
 required features for parity with d2 and Graphviz).
 
-The diagrams ``.d2`` and ``.dot`` files are created on the current
+The diagrams ``.d2`` and ``.dot`` files are created in the current
 directory by default. These files can be easily converted into a
 printable format such as SVG, PDF, or Postscript. Sample helper scripts
 are provided for converting a directory of ``.d2`` or ``.dot`` files to

@@ -60,7 +60,7 @@ For easy access, the installer creates an alias to the Logtalk folder in
 the Applications folder.
 
 On Windows systems, shortcuts for running Logtalk with selected backend
-Prolog compilers are created on the `Start Menu/Programs/Logtalk` menu.
+Prolog compilers are created in the `Start Menu/Programs/Logtalk` menu.
 The first run of the JIProlog and XSB integration shortcuts may require
 administrator privileges depending on the JIProlog and XSB installation
 (right-click on the shortcut and select the "Run as administrator" option).

@@ -27,12 +27,12 @@ _packs_. Collections of pack specifications are made available using
 _registries_. Registries can be local to a system, publicly shared, or
 private to a company (e.g. only available in a VPN). There is no concept
 of a central registry. Users can decide which registries they trust and want
-to use, and add them using their published URLs. The tool supports both pack
+to use and add them using their published URLs. The tool supports both pack
 checksums and signatures and takes several steps to sanitize registry and
 pack specifications. As with other Logtalk developer tools, portability is
 a main goal. This tool can be used with any supported Prolog backend and run
 on both POSIX and Windows systems. Moreover, this tool can be used not only
-for handling Logtalk packs but also Prolog only packs, thus providing a
+for handling Logtalk packs but also for Prolog only packs, thus providing a
 solution for sharing portable resources between multiple systems.
 
 A list of public Logtalk and Prolog pack registries is available at:
@@ -57,7 +57,7 @@ required:
 - `direnv` (when using virtual environments)
 
 The tool uses `bsdtar` instead of GNU `tar` so that it can uncompress
-`.zip` archives (`unzip` doesn't provide the desired options that allows
+`.zip` archives (`unzip` doesn't provide the desired options that allow
 a simple and reliable solution for ignoring the non-predictable name of
 the wrapper directory).
 
@@ -103,7 +103,7 @@ Or using Homebrew:
 
 	$ brew install coreutils wget libarchive gnupg2 git direnv
 
-On Linux systems, use the distribution own package manager to install any
+On Linux systems, use the distribution's own package manager to install any
 missing command. For example, in recent Ubuntu versions:
 
 	$ sudo apt update
@@ -163,7 +163,7 @@ the query:
 
 This directory holds sub-directories for registries, packs, and archives.
 These sub-directories are automatically created when loading the `packs`
-tool if they don't exist . Users should not manually modify the contents
+tool if they don't exist. Users should not manually modify the contents
 of these directories. Multiple and independent registry/pack setups are
 possible using _virtual environments_ as explained next.
 
@@ -185,8 +185,8 @@ environment is essentially a registries/packs storage directory.
 
 Defining the `logtalk_packs` library alias in a settings file or defining
 the `LOGTALKPACKS` environment variable before starting Logtalk allows easy
-creation and switching between virtual environments. By using a per application
-settings file (or a per application environment variable definition) each
+creation and switching between virtual environments. By using a per-application
+settings file (or a per-application environment variable definition), each
 application can thus use its own virtual environment. The `settings.lgt` file
 can define the `logtalk_packs` library alias using code such as:
 
@@ -248,7 +248,7 @@ this order) and can be manually created or edited if necessary. For example:
 	pack(talkshow, lflat, 2:1:0).
 
 These files can be distributed with applications so that users can easily
-fulfill application requirements by running once the query:
+fulfill application requirements by running the query once:
 
 	| ?- packs::restore('requirements.lgt').
 
@@ -282,7 +282,7 @@ two Logtalk source files:
 
 - A file defining an object named after the registry with a `_registry`
 suffix, implementing the `registry_protocol`. This naming convention helps
-preventing name conflicts.
+prevent name conflicts.
 
 - A loader file (named `loader.lgt` or `loader.logtalk`) that loads the
 registry object file and all pack object files.
@@ -344,12 +344,12 @@ With the contents of the `loader.lgt` file being:
 		...
 	)).
 
-It would be of course possible to have all objects in a single source file.
-But having a file per object and a loader file helps maintenance and it's
+It would be, of course, possible to have all objects in a single source file.
+But having a file per-object and a loader file helps maintenance and it's
 also a tool requirement for applying safety procedures to the source file
-contents and thus successfully loding the registry and pack specs.
+contents and thus successfully loading the registry and pack specs.
 
-As registries are git repos in the most common case and thus adding them
+As registries are git repos in the most common case, and thus adding them
 performs a git repo cloning, they should only contain the strictly required
 files.
 
@@ -362,7 +362,7 @@ a registry URL. Using the example above:
 
 	| ?- registries::add('https://github.com/jdoe/jdoe_awesome_packs.git').
 
-HTTPS URLs must end with either a `.git` extension or a an archive extension
+HTTPS URLs must end with either a `.git` extension or an archive extension
 (same valid extensions as for pack archives, including `gpg` encrypted).
 Git cloning URLs are preferred as they simplify updating registries. But a
 registry can also be made available via a local directory (using a `file://`
@@ -442,8 +442,8 @@ Pack specification
 
 A pack is specified using a Logtalk source file defining an object that
 implements the `pack_protocol`. The source file should be named after the
-pack with a `_pack` suffix. This naming convention helps preventing name
-conflicts, notably with the pack own objects. The file must be available
+pack with a `_pack` suffix. This naming convention helps prevent name
+conflicts, notably with the pack's own objects. The file must be available
 from a declared pack registry (by having the registry loader file loading
 it). The pack name is preferably a valid unquoted atom. An example of a
 pack specification object would be:
@@ -486,7 +486,7 @@ pack specification object would be:
 
 	:- end_object.
 
-The `license/1` argument must be an atom and should whenever possible be
+The `license/1` argument must be an atom and should, whenever possible, be
 a license identifier as specified in the [SPDX standard](https://spdx.org/licenses/).
 
 Optionally, the pack object can also define a `note(Action, Version, Note)`
@@ -563,9 +563,9 @@ Typically, pack archive download URLs are HTTPS URLs and handled using `curl`.
 It's also possible to use `git archive` to download pack archives, provided
 that the server supports it (as of this writing, Bitbucket and GitLab public
 hosting services support it but not GitHub). Using `git archive` is specially
-useful when the packs registry in hosted in a server using Single Sign-On (SSO)
+useful when the packs registry is hosted on a server using Single Sign-On (SSO)
 for authentication. In this case, HTTPS URLs can only be handled by `curl` by
-passing a token (see below for an example). When the user have setup SSH keys
+passing a token (see below for an example). When the user has setup SSH keys
 to authenticate to the packs registry server, `git archive` simplifies pack
 installation, providing a better user experience. For example:
 
@@ -594,11 +594,11 @@ Be sure to use a format that is supported by both the `packs` tool and the
 `git archive` command (the format is inferred from the `--output` option).
 Do not download the archive from the web interface of the git hosting
 service in order to compute the checksum. Different implementations
-of the archiving and compressing algorithms may be used resulting in
+of the archiving and compressing algorithms may be used, resulting in
 mismatched checksums.
 
 Users installing packs available using `git archive` URLs are advised to
-run a SSH agent to avoiding being prompted for passwords when installing
+run a SSH agent to avoid being prompted for passwords when installing
 or updating packs. They must also upload their SSH public keys to the
 pack provider hosts.
 
@@ -608,7 +608,7 @@ Multiple pack versions
 
 A pack may specify multiple versions. Each version is described using a
 `version/6` predicate clause as illustrated in the example above. The
-versions must be listed ordered from newest to oldest. For details, see
+versions must be listed in order from newest to oldest. For details, see
 the `pack_protocol` API documentation.
 
 Listing multiple versions allows the pack specification to be updated (by
@@ -623,11 +623,11 @@ Pack dependencies on other packs can be specified using a list of
 `Registry::Pack Operator Version` terms where `Operator` is a standard term
 comparison operator:
 
-- `Registry::Pack @>= Version` - the pack requires a dependency with version
+- `Registry::Pack @>= Version` - the pack requires a dependency with a version
 equal or above the specified one. For example, `logtalk @>= 3:36:0` means that
-the pack requires Logtalk 3.36.0 or later version.
+the pack requires Logtalk 3.36.0 or a later version.
 
-- `Registry::Pack @=< Version` - the pack requires a dependency with version
+- `Registry::Pack @=< Version` - the pack requires a dependency with a version
 up to the specified one. For example, `common::bits @=< 2:1` means that the pack
 requires a `common::bits` pack up to 2.1. This includes all previous versions
 and also all patches for version 2.1 (e.g. 2.1.7, 2.1.8, ...) but not version
@@ -647,7 +647,7 @@ version. For example, `common::bits == 2:1` means that the pack requires a
 for version 2.1).
 
 - `Registry::Pack \== Version` - the pack requires a dependency with any version
-other than then the one specified. For example, `common::bits \== 2.1` means that
+other than the one specified. For example, `common::bits \== 2.1` means that
 the pack requires a `common::bits` pack version other than any 2.1.x version.
 
 To specify _range_ dependencies by using two consecutive elements with the lower
@@ -675,7 +675,7 @@ documentation for details).
 Pack portability
 ----------------
 
-Ideally, packs are fully portable and can be used with all Logtalk supported
+Ideally, packs are fully portable and can be used with all Logtalk-supported
 Prolog backends. This can be declared by using the atom `all` in the last
 argument of the `version/6` predicate (see example above).
 
@@ -720,7 +720,7 @@ the pack. Otherwise, the files in the directory are copied to the pack
 installation directory. This allows the pack to be installed, updated,
 and uninstalled without consequences for the pack source files.
 
-You can also use a local archive instad of a directory. For example:
+You can also use a local archive instead of a directory. For example:
 
 	version(
 		1:0:0,
@@ -734,7 +734,7 @@ You can also use a local archive instad of a directory. For example:
 Packs that are expected to be fully portable should always be checked by
 loading them with the `portability` flag set to `warning`.
 
-To check your packs specifications, use the `packs::lint/0-2` predicates
+To check your pack manifest files, use the `packs::lint/0-2` predicates
 after adding the registry that provides the packs.
 
 
@@ -775,7 +775,7 @@ Any pack dependencies are also checked and installed or updated if necessary.
 Other install predicates are available to disambiguate between registries and
 to install a specific pack version.
 
-Packs becomes available for loading immediately after successful installation
+Packs become available for loading immediately after successful installation
 (no restarting of the Logtalk session is required). For example, after the
 pack `bar` is installed, you can load it at the top-level by typing:
 
@@ -819,17 +819,17 @@ predicates with the option `compatible(false)`.
 When installing large packs over unreliable network conditions, you may
 try switching the default downloader utility from `curl` to `wget`.
 
-When a pack may be already installed, you can use the `update(true)` option
-to ensure that the installation will by updated to the specified version:
+When a pack may already be installed, you can use the `update(true)` option
+to ensure that the installation will be updated to the specified version:
 
 	| ?- packs::install(reg, bar, 1:1:2, [update(true)]).
 
-When using a `checksig(true)` option to check a pack signature, is strongly
+When using a `checksig(true)` option to check a pack signature, it is strongly
 advised that you also use the `verbose(true)` option. For example:
 
 	| ?- packs::install(reg, bar, 1:1:2, [verbose(true), checksig(true)]).
 
-Note that the public key used to sign the pack archive must be already present
+Note that the public key used to sign the pack archive must already be present
 in your local system.
 
 Downloading pack archives may require passing extra command-line options to
@@ -898,7 +898,7 @@ For example:
 
 This query creates a `xml_docs` directory in the current directory. The XML
 documentation files can then be converted into a final format, e.g. HTML,
-using one of the `lgtdoc` tool provided scripts. For example:
+using one of the scripts provided by the `lgtdoc` tool. For example:
 
 	$ cd xml_docs
 	$ lgt2html
@@ -933,7 +933,7 @@ message:
 	!     Cannot uninstall pinned pack: bar
 	no
 
-To enable the pack to be updated ou uninstalled, the pack must first be
+To enable the pack to be updated or uninstalled, the pack must first be
 unpinned. Alternatively, the `force(true)` option can be used. Note that
 if you force update a pinned pack, the new version will be unpinned.
 
@@ -973,10 +973,10 @@ be taken when adding or updating a pack. Note that a registry can always
 index third-party packs.
 
 Pack checksums are checked by default. But pack signatures are only checked
-if requested as packs are often unsigned. Care should be taken when adding
+if requested, as packs are often unsigned. Care should be taken when adding
 public keys for pack signers to your local system.
 
-Registry and pack spec files plus the registry loader file are compiled
+Registry and pack spec files, plus the registry loader file, are compiled
 by term-expanding them so that only expected terms are actually loaded and
 only expected `logtalk_load/2` goals with expected relative file paths are
 allowed. Predicates defining URLs are discarded if the URLs are neither
@@ -986,7 +986,7 @@ allowed. Predicates defining URLs are discarded if the URLs are neither
 attempt to audit pack source files themselves.
 
 Registries and packs can always be pinned so that they are not accidentally
-updated to a version that you may not had the chance to audit.
+updated to a version that you may not have had the chance to audit.
 
 
 Best practices
@@ -1061,7 +1061,7 @@ For details on this bug, see:
 
 https://github.com/microsoft/terminal/issues/309
 
-The workaround is to use the Windows File Explorer to delete the left-over
+The workaround is to use the Windows File Explorer to delete the leftover
 folders and files.
 
 When using Ciao Prolog 1.20.0, a workaround is used for this system
@@ -1078,7 +1078,7 @@ Using SICStus Prolog as the backend on Windows doesn't currently work
 in version 4.7.0 and earlier versions. The underlying issues are fixed
 in the SICStus Prolog 4.7.1 version.
 
-XSB have an odd bug (likely in its parser) when reading files that may
+XSB has an odd bug (likely in its parser) when reading files that may
 cause a pack installed version to be reported as the `end_of_file` atom.
 
 Some tests fail on Windows when using ECLiPSe or XSB due to file path

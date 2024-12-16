@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on November 28, 2024
+##   Last updated on December 16, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -136,7 +136,7 @@ ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2rst.sh lgt2rst
 ln -sf ../share/logtalk/tools/lgtdoc/xml/lgt2txt.sh lgt2txt
 ln -sf ../share/logtalk/tools/packs/lgtenv.sh lgtenv
 
-echo "Links to the following scripts have been created on \"$prefix/bin\":"
+echo "Links to the following scripts have been created in \"$prefix/bin\":"
 echo
 echo "- logtalk_user_setup, logtalk_backend_select, logtalk_version_select"
 echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet"

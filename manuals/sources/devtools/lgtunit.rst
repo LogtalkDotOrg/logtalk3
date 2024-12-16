@@ -14,10 +14,10 @@ Tests are defined in objects, which represent a *test set* or *test
 suite*. In simple cases, we usually define a single object containing
 the tests. But it is also possible to use parametric test objects or
 multiple objects defining parametrizable tests or test subsets for
-testing more complex units and facilitate tests maintenance. Parametric
-test objects are specially useful to test multiple implementations of
-the same protocol using a single set of tests by passing the
-implementation object as a parameter value.
+testing more complex units and facilitating tests maintenance.
+Parametric test objects are specially useful to test multiple
+implementations of the same protocol using a single set of tests by
+passing the implementation object as a parameter value.
 
 Main files
 ----------
@@ -26,11 +26,11 @@ The ``lgtunit.lgt`` source file implements a framework for defining and
 running unit tests in Logtalk. The ``lgtunit_messages.lgt`` source file
 defines the default translations for the messages printed when running
 unit tests. These messages can be intercepted to customize the output,
-e.g. to make it less verbose, or for integration with e.g. GUI IDEs and
+e.g. to make it less verbose or for integration with e.g. GUI IDEs and
 continuous integration servers.
 
-Other files part of this tool provide support for alternative output
-formats of test results and are discussed below.
+Other files that are part of this tool provide support for alternative
+output formats of test results and are discussed below.
 
 API documentation
 -----------------
@@ -63,7 +63,7 @@ Writing and running tests
 In order to write your own unit tests, define objects extending the
 ``lgtunit`` object. You may start by copying the ``tests-sample.lgt``
 file (at the root of the Logtalk distribution) to a ``tests.lgt`` file
-in your project directory and edit it to add your tests:
+in your project directory and editing it to add your tests:
 
 ::
 
@@ -94,7 +94,7 @@ file, the source files defining the test objects should preferably not
 contain entities other than the test objects. Additional code necessary
 for the tests should go to separate files. In general, the tests
 themselves can be compiled in *optimized* mode. Assuming that's the
-case, also use the ``optimize(on)`` compiler option for faster tests
+case, also use the ``optimize(on)`` compiler option for faster
 execution.
 
 The term-expansion performed by the ``lgtunit`` object sets the test
@@ -133,12 +133,12 @@ tests after loading:
    )).
 
 You may copy this sample file to a ``tester.lgt`` file in your project
-directory and edit it to load your project and tests files. The
-``logtalk_tester`` testing automation script defaults to look for test
-driver files named ``tester.lgt`` or ``tester.logtalk`` (if you have
-work-in-progress test sets that you don't want to run by default, simply
-use a different file name such as ``tester_wip.lgt``; you can still run
-them automated by using ``logtalk_tester -n tester_wip``).
+directory and edit it to load your project and test files. The
+``logtalk_tester`` testing automation script defaults to looking for
+test driver files named ``tester.lgt`` or ``tester.logtalk`` (if you
+have work-in-progress test sets that you don't want to run by default,
+simply use a different file name such as ``tester_wip.lgt``; you can
+still run them automated by using ``logtalk_tester -n tester_wip``).
 
 Debugged test sets should preferably be compiled in optimal mode,
 specially when containing deterministic tests and when using the utility
@@ -222,8 +222,8 @@ You can use the ``scripts/logtalk_tester.sh`` Bash shell script or the
 ``scripts/logtalk_tester.ps1`` PowerShell script for automating running
 unit tests (e.g. from a CI/CD pipeline). When using one of the Logtalk
 installers, the ``.sh`` extension can usually be omitted. For example,
-assuming your current directory (or sub-directories) contain one or more
-``tester.lgt`` files:
+assuming your current directory (or sub-directories) contains one or
+more ``tester.lgt`` files:
 
 ::
 
@@ -243,8 +243,8 @@ consulting the script man page:
 
    $ man logtalk_tester
 
-The scripts support the same set of options but the option for passing
-additional arguments to the tests use different syntax. For example:
+The scripts support the same set of options. But the option for passing
+additional arguments to the tests uses different syntax. For example:
 
 ::
 
@@ -267,12 +267,12 @@ https://logtalk.org/man/logtalk_tester.html
 On POSIX systems, the ``logtalk_tester.sh`` Bash script timeout option
 requires either a ``timeout`` or a ``gtimeout`` command (provided by the
 GNU coreutils package). The ``logtalk_tester.ps1`` PowerShell script
-timeout option requires that Git for Windows is also installed as it
+timeout option requires that Git for Windows is also installed, as it
 requires the GNU timeout command bundled with it.
 
-In alternative to using the ``logtalk_tester.ps1`` PowerShell script,
-the Bash shell version of the automation script can also be used in
-Windows operating-systems with selected backends by using the Bash shell
+In addition to using the ``logtalk_tester.ps1`` PowerShell script, the
+Bash shell version of the automation script can also be used in Windows
+operating-systems with selected backends by using the Bash shell
 included in the Git for Windows installer. That requires defining a
 ``.profile`` file setting the paths to the Logtalk scripts and the
 Prolog backend executables. For example:
@@ -300,7 +300,7 @@ The Git for Windows installer also includes GNU ``coreutils`` and its
 Note that some tests may give different results when run from within the
 Bash shell compared with running the tests manually using a Windows GUI
 version of the Prolog backend. Some backends may also not be usable for
-automated testing due to the way their are made available as Windows
+automated testing due to the way they are made available as Windows
 applications.
 
 Additional advice on testing and on automating testing using continuous
@@ -362,7 +362,7 @@ on how to define your own test dialects. In all dialects, a **ground
 callable term**, usually an atom, is used to uniquely identify a test.
 This simplifies reporting failed tests and running tests selectively. An
 error message is printed if invalid or duplicated test identifiers are
-found. These errors must be corrected otherwise the reported test
+found. These errors must be corrected; otherwise the reported test
 results can be misleading. Ideally, tests should have descriptive names
 that clearly state the purpose of the test and what is being tested.
 
@@ -417,12 +417,12 @@ The possible values of the outcome argument are:
     and satisfy the ``Assertion`` goal.
 
 - | ``subsumes(Expected, Result)``
-  | The test is expected to succeed binding ``Result`` to a term that is
-    subsumed by the ``Expected`` term.
+  | The test is expected to succeed by binding ``Result`` to a term that
+    is subsumed by the ``Expected`` term.
 
 - | ``variant(Term1, Term2)``
-  | The test is expected to succeed binding ``Term1`` to a term that is
-    a variant of the ``Term2`` term.
+  | The test is expected to succeed by binding ``Term1`` to a term that
+    is a variant of the ``Term2`` term.
 
 - | ``exists(Assertion)``
   | A solution exists for the test goal that satisfies the ``Assertion``
@@ -460,7 +460,7 @@ and ``all(Assertion)`` outcomes, a message that includes the assertion
 goal is printed for assertion failures and errors to help to debug
 failed unit tests. Same for the ``subsumes(Expected, Result)`` and
 ``variant(Term1, Term2)`` assertions. Note that this message is only
-printed when the test goal succeeds as its failure will prevent the
+printed when the test goal succeeds, as its failure will prevent the
 assertion goal from being called. This allows distinguishing between
 test goal failure and assertion failure.
 
@@ -468,7 +468,7 @@ Note that the ``all(Assertion)`` outcome simplifies pinpointing which
 test goal solution failed the assertion. See also the section below on
 testing non-deterministic predicates.
 
-The ``fail`` and ``false`` outcomes are better reserved to cases where
+The ``fail`` and ``false`` outcomes are better reserved for cases where
 there is a single test goal. With multiple test goals, the test will
 succeed when *any* of those goals fail.
 
@@ -496,12 +496,12 @@ ignored):
   | Declare the test as a flaky test.
 
 - | ``note(Term)``
-  | Annotation to print (between parenthesis by default) after the test
+  | Annotation to print (between parentheses by default) after the test
     result (default is ``''``); the annotation term can share variables
     with the test goal, which can be used to pass additional information
     about the test result.
 
-Also supported is QuickCheck testing where random tests are
+Also supported is QuickCheck testing, where random tests are
 automatically generated and run given a predicate mode template with
 type information for each argument (see the section below for more
 details):
@@ -561,7 +561,7 @@ dialect by using a ``tester.lgt`` driver file with contents such as:
        tests::run
    )).
 
-The hook pipeline first applies our ``simple_dialect`` expansion
+The hook pipeline first applies our ``simple_dialect`` expansion,
 followed by the default ``lgtunit`` expansion. This solution allows
 other hook objects (e.g. required by the code being tested) to also be
 used by updating the pipeline.
@@ -626,24 +626,24 @@ The ``Goal`` argument is the random test that failed.
 
 The ``SequenceSeed`` argument is the starting seed used to generate the
 sequence of random tests. The ``TestSeed`` is the seed used to generate
-the test that failed. Both seems should be regarded as opaque terms.
-When the test seed equal to the sequence seed, this means means that the
+the test that failed. Both seeds should be regarded as opaque terms.
+When the test seed is equal to the sequence seed, this means that the
 failure or error occurred while using only type edge cases. See below
 how to use the seeds when testing bug fixes.
 
 The ``Discarded`` argument returns the number of generated tests that
-were discarded for failing to comply a pre-condition specified using the
-``pc/1`` option. This option is specially useful when constraining or
-enforcing a relation between the generated arguments and is often used
-as an alternative to define a custom type. For example, if we define the
-following predicate:
+were discarded for failing to comply with a pre-condition specified
+using the ``pc/1`` option. This option is specially useful when
+constraining or enforcing a relation between the generated arguments and
+is often used as an alternative to define a custom type. For example, if
+we define the following predicate:
 
 ::
 
    condition(I) :-
        between(0, 127, I).
 
-we can then use it to filter the generated tests:
+We can then use it to filter the generated tests:
 
 ::
 
@@ -665,7 +665,7 @@ following predicate definition:
        ;   Label = odd
        ).
 
-we can try:
+We can try:
 
 ::
 
@@ -676,11 +676,11 @@ we can try:
    % odd: 4963/10000 (49.630000%)
    yes
 
-The label statistics are key to verify that the generated tests provide
-the necessary coverage. The labelling predicates can return a single
-test label or a list of test labels. Labels should be ground and are
-typically atoms. To examine the generated tests themselves, you can use
-the verbose option, ``v/1``. For example:
+The label statistics are key to verifying that the generated tests
+provide the necessary coverage. The labeling predicates can return a
+single test label or a list of test labels. Labels should be ground and
+are typically atoms. To examine the generated tests themselves, you can
+use the verbose option, ``v/1``. For example:
 
 ::
 
@@ -727,7 +727,7 @@ The template can be a ``(::)/2``, ``(<<)/2``, or ``(:)/2`` qualified
 callable term. When the template is an unqualified callable term, it
 will be used to construct a goal to be called in the context of the
 *sender* using the ``(<<)/2`` debugging control construct. Another
-simple example by passing a template that will trigger a failed test (as
+simple example is passing a template that will trigger a failed test (as
 the ``random::random/1`` predicate always returns non-negative floats):
 
 ::
@@ -763,7 +763,7 @@ element of an input list. Cursory testing may fail to notice the bug:
 
 But QuickCheck will report a bug with lists with an odd number of
 elements with a simple property that verifies that the predicate always
-succeed and returns a list of integers:
+succeeds and returns a list of integers:
 
 ::
 
@@ -800,7 +800,7 @@ random test that found the bug will be generated and run again:
    yes
 
 Still, after verifying the bug fix, is also a good idea to re-run the
-tests using the sequence seed instead as bug fixes sometimes cause
+tests using the sequence seed instead, as bug fixes sometimes cause
 regressions elsewhere.
 
 When retesting using the ``logtalk_tester`` automation script, the
@@ -811,8 +811,8 @@ starting seed can be set using the ``-r`` option. For example:
    $ logtalk_tester -r "seed(3172,9814,20125)"
 
 We could now move to other properties that the predicate should comply
-(e.g. all elements in the output list being present in the input list).
-Often, both traditional unit tests and QuickCheck tests are used,
+with (e.g. all elements in the output list being present in the input
+list). Often, both traditional unit tests and QuickCheck tests are used,
 complementing each other to ensure the required code coverage.
 
 Another example using a Prolog module predicate:
@@ -844,20 +844,21 @@ cases (e.g. empty atom, empty list, or zero) before generating arbitrary
 values. When the output arguments check fails, the QuickCheck
 implementation tries (by default) up to 64 shrink operations of the
 counter-example to report a simpler case to help debugging the failed
-test. Edge cases, generating of arbitrary terms, and shrinking terms
-make use of the library ``arbitrary`` category via the ``type`` object
-(both entities can be extended by the user by defining clauses for
-multifile predicates).
+test. Edge cases, generating arbitrary terms, and shrinking terms make
+use of the library ``arbitrary`` category via the ``type`` object (both
+entities can be extended by the user by defining clauses for multifile
+predicates).
 
-The mode template syntax is the same used in the ``info/2`` predicate
-directives with an additional notation, ``{}/1``, for passing argument
-values as-is instead of generating random values for these arguments.
-For example, assume that we want to verify the ``type::valid/2``
-predicate, which takes as first argument a type. Randomly generating
-random types would be cumbersome at best but the main problem is that we
-need to generate random values for the second argument according to the
-first argument. Using the ``{}/1`` notation we can solve this problem
-for any specific type, e.g. integer, by writing:
+The mode template syntax is the same as that used in the ``info/2``
+predicate directives with an additional notation, ``{}/1``, for passing
+argument values as-is instead of generating random values for these
+arguments. For example, assume that we want to verify the
+``type::valid/2`` predicate, which takes as its first argument a type.
+Randomly generating random types would be cumbersome at best but the
+main problem is that we need to generate random values for the second
+argument according to the first argument. Using the ``{}/1`` notation,
+we can solve this problem for any specific type, e.g. integer, by
+writing:
 
 ::
 
@@ -873,11 +874,11 @@ value generators by writing:
            lgtunit::quick_check(type::valid({Type}, +Type))
         ).
 
-You can find the list of the basic supported types for using in the
+You can find the list of the basic supported types for use in the
 template in the API documentation for the library entities ``type`` and
 ``arbitrary``. Note that other library entities, including third-party
-or your own, can contribute with additional type definitions as both
-``type`` and ``arbitrary`` entities are user extensible by defining
+or your own, can contribute with additional type definitions, as both
+``type`` and ``arbitrary`` entities are user-extensible by defining
 clauses for their multifile predicates.
 
 The user can define new types to use in the property mode templates to
@@ -885,7 +886,7 @@ use with its QuickCheck tests by defining clauses for the ``type``
 library object and the ``arbitrary`` library category multifile
 predicates. QuickCheck will use the later to generate arbitrary input
 arguments and the former to verify output arguments. As a toy example,
-assume that the property mode template have an argument of type ``bit``
+assume that the property mode template has an argument of type ``bit``
 with possible values ``0`` and ``1``. We would then need to define:
 
 ::
@@ -940,7 +941,7 @@ the ``test/3`` dialect and the ``condition/1`` option. For example:
        ...
 
 The test is skipped if the condition goal fails or generates an error.
-The conditional compilation directives can also be used in alternative
+The conditional compilation directives can also be used in alternative,
 but note that in this case there will be no report on the number of
 skipped tests.
 
@@ -950,7 +951,7 @@ Selecting tests
 While debugging an application, we often want to temporarily run just a
 selection of relevant tests. This is specially useful when running all
 the tests slows down and distracts from testing fixes for a specific
-issue. This can be accomplished by prefixed the clause heads of the
+issue. This can be accomplished by prefixing the clause heads of the
 selected tests with the ``(+)/1`` operator. For example:
 
 ::
@@ -1006,9 +1007,9 @@ or:
        compare(Order, 1, 2),
        Order == (<).
 
-Using assertions is, however, preferable to directly check test results
-in the test body as it facilitates debugging by printing the unexpected
-results when the assertions fail.
+Using assertions is, however, preferable to directly checking test
+results in the test body as it facilitates debugging by printing the
+unexpected results when the assertions fail.
 
 The ``assertion/1-2`` utility predicates are also useful for the
 ``test/2-3`` dialects when we want to check multiple assertions in the
@@ -1031,8 +1032,8 @@ compound term structure while abstracting some of its arguments.
 Floating-point numbers can be compared using the ``=~=/2``,
 ``approximately_equal/3``, ``essentially_equal/3``, and
 ``tolerance_equal/4`` predicates provided by ``lgtunit``. Using the
-``=/2`` term unification built-in predicate is almost always an error as
-it would mask test goals failing to bind output arguments. The
+``=/2`` term unification built-in predicate is almost always an error,
+as it would mask test goals failing to bind output arguments. The
 ``lgtunit`` tool implements a linter check for the use of unification
 goals in test outcome assertions. In the rare cases that a unification
 goal is intended, wrapping the ``(=)/2`` goal using the ``{}/1`` control
@@ -1042,7 +1043,7 @@ When the meta-argument of the ``assertion/1-2`` predicates is call to a
 local predicate (in the tests object), you need to call them using the
 ``(::)/2`` message-sending control construct instead of the ``(^^)/2``
 *super* call control construct. This is necessary as *super* calls
-preserve the *sender* and the tests are implicitly run by the
+preserve the *sender*, and the tests are implicitly run by the
 ``lgtunit`` object sending a message to the tests object. For example:
 
 ::
@@ -1058,7 +1059,7 @@ preserve the *sender* and the tests are implicitly run by the
    consistent(X, Y) :-
        ...
 
-In this case, the *sender* is the tests object and the ``assertion/1``
+In this case, the *sender* is the tests object, and the ``assertion/1``
 meta-predicate will call the local ``consistent/2`` predicate in the
 expected context.
 
@@ -1146,8 +1147,8 @@ Two sets of predicates are provided, one for testing text input/output
 and one for testing binary input/output. In both cases, temporary files
 (possibly referenced by a user-defined alias) are used. The predicates
 allow setting, checking, and cleaning text/binary input/output. These
-predicate are declared as protected and thus called using the ``(^^/1)``
-control construct.
+predicates are declared as protected and thus called using the
+``(^^/1)`` control construct.
 
 As an example of testing an input predicate, consider the standard
 ``get_char/1`` predicate. This predicate reads a single character (atom)
@@ -1165,7 +1166,7 @@ be:
        get_char(_Char),
        ^^text_input_assertion('werty', Assertion).
 
-As you can see in the above example, the testing pattern consist on
+As you can see in the above example, the testing pattern consists on
 setting the input for the predicate being tested, calling it, and then
 checking the results. It is also possible to work with streams other
 than the current input/output streams by using the ``lgtunit`` predicate
@@ -1226,8 +1227,8 @@ standard conformance of built-in input/output predicates.
 Suppressing tested predicates output
 ------------------------------------
 
-Sometimes predicates being tested output text or binary data that at
-best clutters testing logs and at worse can interfere with parsing of
+Sometimes predicates being tested output text or binary data that, at
+best, clutters testing logs and, at worst, can interfere with parsing of
 test logs. If that output itself is not under testing, you can suppress
 it by using the goals ``^^suppress_text_output`` or
 ``^^suppress_binary_output`` at the beginning of the tests. For example:
@@ -1298,7 +1299,7 @@ Logtalk provides a ``timeout`` portability library implementing a simple
 abstraction for those backend Prolog compilers.
 
 The ``logtalk_tester`` automation script accepts a timeout option that
-can be used to set a limit per test set.
+can be used to set a limit per-test set.
 
 Setup and cleanup goals
 -----------------------
@@ -1327,7 +1328,7 @@ with the test body.
 Test annotations
 ----------------
 
-It's possible to define per unit and per test annotations to be printed
+It's possible to define per-unit and per-test annotations to be printed
 after the test results or when tests are skipped. This is particularly
 useful when some units or some unit tests may be run while still being
 developed. Annotations can be used to pass additional information to a
@@ -1337,7 +1338,7 @@ test automation scripts and integrating tools can also access these
 annotations.
 
 Units can define a global annotation using the predicate ``note/1``. To
-define per test annotations, use the ``test/3`` dialect and the
+define per-test annotations, use the ``test/3`` dialect and the
 ``note/1`` option. For example, you can inform why a test is being
 skipped by writing:
 
@@ -1355,7 +1356,7 @@ sub-goals. For example:
        foo(...),
        benchmark(bar(...), Time).
 
-Annotations are written, by default, between parenthesis after and in
+Annotations are written, by default, between parentheses after and in
 the same line as the test results.
 
 Test execution times and memory usage
@@ -1376,9 +1377,9 @@ portable solution to access memory data. However, several backend Prolog
 systems provide a ``statistics/2`` or similar predicate that can be used
 for a custom solution. Depending on the system, individual keys may be
 provided for each memory area (heap, trail, atom table, ...).
-Aggregating keys may also be provided. As an hypothetical example,
-assume you're running Logtalk with a backend providing a
-``statistics/2`` predicate with a ``memory_used`` key:
+Aggregating keys may also be provided. As a hypothetical example, assume
+you're running Logtalk with a backend providing a ``statistics/2``
+predicate with a ``memory_used`` key:
 
 ::
 
@@ -1394,7 +1395,7 @@ details.
 Working with test data files
 ----------------------------
 
-Frequently tests make use of test data files that are usually stored in
+Frequently, tests make use of test data files that are usually stored in
 the test set directory or in sub-directories. These data files are
 referenced using their relative paths. But to allow the tests to run
 independently of the Logtalk process current directory, the relative
@@ -1419,7 +1420,7 @@ It's also common for tests to create temporary files and directories
 that should be deleted after the tests completion. The ``clean_file/1``
 and ``clean_directory/1`` protected predicates can be used for this
 purpose. For example, assuming that the tests create a ``foo.txt`` text
-file and a ``tmp`` directory in the same directory of the tests object:
+file and a ``tmp`` directory in the same directory as the tests object:
 
 ::
 
@@ -1445,7 +1446,7 @@ test option declares a test to be flaky. For example:
    test(foo, true, [flaky]) :-
        ...
 
-For backawards compatibility, the ``note/1`` annotation can also be used
+For backwards compatibility, the ``note/1`` annotation can also be used
 to alert that a test failure is for a flaky test when its argument is an
 atom containing the sub-atom ``flaky``.
 
@@ -1460,7 +1461,7 @@ Mocking
 Sometimes the code being tested performs complex tasks that are not
 feasible or desirable when running tests. For example, the code may
 perform a login operation requiring the user to provide a username and a
-password using some GUI widget. In this case, the tests may required the
+password using some GUI widget. In this case, the tests may require the
 login operation to still be performed but using canned data (also
 simplifying testing automation). I.e. we want to *mock* (as in
 *imitate*) the login procedure. Ideally, this should be accomplished
@@ -1519,16 +1520,16 @@ The tests driver file would then set the ``complements`` flag to
    )).
 
 There are pros and cons for each solution. Term-expansion works by
-defining hook objects that are used at compile time while hot patching
+defining hook objects that are used at compile time, while hot patching
 happens at runtime. Complementing categories can also be dynamically
 created, stacked, and abolished. Hot patching disables static binding
-optimizations but that's usually not a problem as the code being tested
-if often compiled in debug mode to collect code coverage data. Two
-advantages of the term-expansion solution is that it allows defining
+optimizations, but that's usually not a problem as the code being tested
+is often compiled in debug mode to collect code coverage data. Two
+advantages of the term-expansion solution are that it allows defining
 conditions for expanding terms and goals and can replace both predicate
 definitions and predicate calls. Limitations in the current Prolog
 standards prevent patching callers to local predicates being patched.
-But often both solutions can be used with the choice depending on code
+But often both solutions can be used, with the choice depending on code
 clarity and user preference. See the Handbook sections on term-expansion
 and hot patching for more details on these mechanisms.
 
@@ -1541,7 +1542,7 @@ predicates.
 Debugging messages in tests
 ---------------------------
 
-Sometimes is useful to write debugging or logging messages from tests
+Sometimes it is useful to write debugging or logging messages from tests
 when running them manually. But those messages are better suppressed
 when running the tests automated. A common solution is to use debug
 *meta-messages*. For example:
@@ -1563,8 +1564,8 @@ The messages are only printed (and the user-defined printing goals are
 only called) when the ``debug`` flag is turned on. Note that this
 doesn't require compiling the tests in debug mode: you simply toggle the
 flag to toggle the debug messages. Also note that the
-``print_message/3`` goals are suppressed by compiler when compiling with
-the ``optimize`` flag turned on.
+``print_message/3`` goals are suppressed by the compiler when compiling
+with the ``optimize`` flag turned on.
 
 Debugging failed tests
 ----------------------
@@ -1583,7 +1584,7 @@ the ``debugger`` tool to debug failed unit tests. Start by compiling the
 unit test objects and the code being tested in debug mode. Load the
 debugger and trace the test that you want to debug. For example,
 assuming your tests are defined in a ``tests`` object and that the
-identifier of test to be debugged is ``test_foo``:
+identifier of the test to be debugged is ``test_foo``:
 
 ::
 
@@ -1600,7 +1601,7 @@ You can also compile the code and the tests in debug mode but without
 using the ``hook/1`` compiler option for the tests compilation. Assuming
 that the ``context_switching_calls`` flag is set to ``allow``, you can
 then use the ``(<<)/2`` debugging control construct to debug the tests.
-For example, assuming that the identifier of test to be debugged is
+For example, assuming that the identifier of the test to be debugged is
 ``test_foo`` and that you used the ``test/1`` dialect:
 
 ::
@@ -1614,7 +1615,7 @@ For example, assuming that the identifier of test to be debugged is
    | ?- tests<<test(test_foo).
    ...
 
-In the more complicated cases, it may be worth to define
+In the more complicated cases, it may be worth defining
 ``loader_debug.lgt`` and ``tester_debug.lgt`` driver files that load
 code and tests in debug mode and also load the debugger.
 
@@ -1653,14 +1654,14 @@ distribution:
    % point: position_/2 - 0/0 - (all)
    % point: 7 out of 8 clauses covered, 87.500000% coverage
 
-The numbers after the predicate indicators represents the clauses
-covered and the total number of clauses. E.g. for the
-``process_init_option/1`` predicate, the tests cover 1 out of 2 clauses.
-After these numbers, we either get ``(all)`` telling us that all clauses
-are covered or a list of indexes for the covered clauses. E.g. only the
-first clause for the ``process_init_option/1`` predicate, ``[1]``.
-Summary clause coverage numbers are also printed for entities and for
-clauses across all entities.
+The numbers after the predicate indicators represent the clauses covered
+and the total number of clauses. E.g. for the ``process_init_option/1``
+predicate, the tests cover 1 out of 2 clauses. After these numbers, we
+either get ``(all)`` telling us that all clauses are covered or a list
+of indexes for the covered clauses. E.g. only the first clause for the
+``process_init_option/1`` predicate, ``[1]``. Summary clause coverage
+numbers are also printed for entities and for clauses across all
+entities.
 
 In the printed predicate clause coverage information, you may get a
 total number of clauses smaller than the covered clauses. This results
@@ -1791,7 +1792,7 @@ test goal results and to provide more informative test failure messages.
 
 When the assertion, benchmarking, and deterministic meta-predicates call
 a local predicate of the tests object, you must call them using an
-implicit or explicit message instead of a using *super* call. For
+implicit or explicit message instead of using a *super* call. For
 example, to use an implicit message to call the ``assertion/1-2``
 meta-predicates, add the following directive to the tests object:
 
@@ -1844,14 +1845,14 @@ unified suite (using the ``run_test_sets/1`` predicate), the single
 xUnit report is created in the directory of the first test suite object
 in the set.
 
-To use in alternative the xUnit.net v2 XML format
+To use the xUnit.net v2 XML format
 (https://xunit.net/docs/format-xml-v2), load either the
 ``xunit_net_v2_output.lgt`` file or the ``xunit_net_v2_report.lgt``
 file.
 
 When using the ``logtalk_tester`` automation script, use either the
 ``-f xunit`` option or the ``-f xunit_net_v2`` option to generate the
-``xunit_report.xml`` files on the test set directories.
+``xunit_report.xml`` files in the test set directories.
 
 There are several third-party xUnit report converters that can generate
 HTML files for easy browsing. For example:
@@ -1877,7 +1878,7 @@ running the tests. A file named ``tap_report.txt`` will be created in
 the same directory as the object defining the tests.
 
 When using the ``logtalk_tester`` automation script, use the ``-f tap``
-option to generate the ``tap_report.xml`` files on the test set
+option to generate the ``tap_report.xml`` files in the test set
 directories.
 
 When using the ``test/3`` dialect with the TAP format, a ``note/1``
@@ -1916,7 +1917,7 @@ pass the tests directory (i.e. the directory where the
 the xUnit report files for generating the report, the directory where
 the report is to be saved, and the report title (see the script man page
 or type ``logtalk_allure_report -h``). The script also supports saving
-the history of past test runs. In this case, a persistant location for
+the history of past test runs. In this case, a persistent location for
 both the results and report directories must be used.
 
 It's also possible to use the script just to collect the xUnit report
@@ -1934,7 +1935,7 @@ to only perform the preprocessing step:
 
    $ logtalk_allure_report -p
 
-The scripts also supports passing *environment pairs*, which are
+The script also supports passing *environment pairs*, which are
 displayed in the generated Allure reports in the environment pane. This
 feature can be used to pass e.g. the backend name and the backend
 version or git commit hash. The option syntax differs, however, between
@@ -1963,7 +1964,7 @@ Or:
 
    PS> logtalk_allure_report -e "Project='Deep Thought',Commit=bf166b6"
 
-To show tests run trends in the report (e.g. when running the tests for
+To show test run trends in the report (e.g. when running the tests for
 each application source code commit), save the processed test results
 and the report data to permanent directories. For example:
 
@@ -1978,12 +1979,12 @@ Note that Allure cleans the report directory when generating a new
 report. Be careful to always specify a dedicated directory to prevent
 accidental data loss.
 
-The generated reports can include with links to the tests source code.
-This requires using the ``logtalk_tester`` shell script option that
-allows passing the base URL for those links. This option needs to be
-used together with the option to suppress the tests directory prefix so
-that the links can be constructed by appending the tests file relative
-path to the base URL. For example, assuming that you want to generate a
+The generated reports can include links to the tests source code. This
+requires using the ``logtalk_tester`` shell script option that allows
+passing the base URL for those links. This option needs to be used
+together with the option to suppress the tests directory prefix so that
+the links can be constructed by appending the tests file relative path
+to the base URL. For example, assuming that you want to generate a
 report for the tests included in the Logtalk distribution when using the
 GNU Prolog backend:
 
@@ -1998,23 +1999,23 @@ GNU Prolog backend:
 
 The use of a git hash in the base URL ensures that the generated links
 will always show the exact versions of the tests that were run. The
-links include the line number for the tests in the tests files (assuming
+links include the line number for the tests in the test files (assuming
 that the git repo is stored in a BitBucket, GitHub, or GitLab server).
 But note that not all supported backends provide accurate line numbers.
 
-It's also possible to generate single file reports. For example:
+It's also possible to generate single-file reports. For example:
 
 ::
 
    $ logtalk_allure_report -s -t "My Amazing Tests Report"
 
 There are some caveats when generating Allure reports that users must be
-aware. First, Allure expects test names to be unique across different
-tests sets. If there are two test with the same name in two different
+aware of. First, Allure expects test names to be unique across different
+tests sets. If there are two tests with the same name in two different
 test sets, only one of them will be reported. Second, when using the
 ``xunit`` format, dates are reported as MM/DD/YYYY. Finally, when using
 the ``xunit_net_v2`` format, tests are reported in a random order
-instead of their run order and dates are displayed as "unknown" in the
+instead of their run order, and dates are displayed as "unknown" in the
 overview page.
 
 Exporting code coverage results in XML format
@@ -2074,10 +2075,10 @@ the ``$HOME`` prefix by default):
      --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master \
      -o coverage_report.html coverage_report.xml
 
-If you are using Bitbucket, GitHub, or GitLab hosted in your own
+If you are using Bitbucket, GitHub, or GitLab hosted on your own
 servers, the ``url`` parameter may not contain a ``bitbucket``,
 ``github``, or ``gitlab`` string. In this case, you can use the XSLT
-parameter ``host`` to indicate which service are you running.
+parameter ``host`` to indicate which service you are running.
 
 Automatically creating bug reports at issue trackers
 ----------------------------------------------------
