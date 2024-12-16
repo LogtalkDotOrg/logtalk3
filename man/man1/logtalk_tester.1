@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "July 15, 2024" "Logtalk 3.81.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "December 16, 2024" "Logtalk 3.86.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -28,7 +28,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found on the current directory and recursively in its sub-directories by scanning by default for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the tests directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the script. The script prints by default a full report of test compilation errors and warnings, skipped test sets, broken test sets, crashed test sets, skipped tests, failed tests, and test set and test stats. Note that the existence of broken or crashed test sets may result in some inconsistency on test stats, notably in the number of passed and failed tests.
+\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found in the current directory and recursively in its sub-directories by scanning by default for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the tests directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the script. The script prints by default a full report of test compilation errors and warnings, skipped test sets, broken test sets, crashed test sets, skipped tests, failed tests, and test set and test stats. Note that the existence of broken or crashed test sets may result in some inconsistency on test stats, notably in the number of passed and failed tests.
 
 .SH OPTIONS
 .TP
@@ -69,7 +69,7 @@ Base URL for generating links to test files (no default). Must end with a slash 
 Code coverage report. Default is \fInone\fR. Valid values are \fIxml\fR and \fInone\fR.
 .TP
 .BI \-l
-Directory depth level to look for test sets. Level 1 means current directory only. Default is to recurse into all sub-directories.
+Directory depth level to look for test sets. Level 1 means the current directory only. Default is to recursively look into all sub-directories.
 .TP
 .BI \-e
 Regular expression for excluding directories (using the \fIfind\fR command support for POSIX-extended regular expressions).
@@ -117,23 +117,23 @@ The \fIfind\fR command used internally to enumerate test sets returned a non-zer
 
 .SH EXAMPLES
 .TP
-Run all tests on the current directory and sub-directories using the GNU Prolog backend, with results in TAP format, code coverage reports in XML format, and passing arguments \fIfoo\fR, \fIbar\fR, and \fIbaz\fR to the tests:
+Run all tests in the current directory and sub-directories using the GNU Prolog backend, with results in TAP format, code coverage reports in XML format, and passing arguments \fIfoo\fR, \fIbar\fR, and \fIbaz\fR to the tests:
 \fBlogtalk_tester -p gnu -tap -c xml -- foo bar baz\fR
 .PP
 .TP
-Run all tests on the current directory only using the ECLiPSe backend, with a timeout of 4 minutes per test set:
+Run all tests in the current directory only using the ECLiPSe backend, with a timeout of 4 minutes per test set:
 \fBlogtalk_tester -p eclipse -l 1 -t 240\fR
 .PP
 .TP
-Run all tests on the current directory and sub-directories using the SICStus Prolog backend and a random generator starting seed:
+Run all tests in the current directory and sub-directories using the SICStus Prolog backend and a random generator starting seed:
 \fBlogtalk_tester -p sicstus -r "seed(3172,9814,20125)"\fR
 .PP
 .TP
-Run all tests on the current directory and sub-directories using the SWI-Prolog backend and looking for \fItester_debug\fR driver and sourced files:
+Run all tests in the current directory and sub-directories using the SWI-Prolog backend and looking for \fItester_debug\fR driver and sourced files:
 \fBlogtalk_tester -p swi -n tester_debug\fR
 .PP
 .TP
-Run all tests on the current directory and sub-directories using the Tau Prolog backend, caching the compilation of the testing tool for better performance, but wiping the test set default scratch directories before running it:
+Run all tests in the current directory and sub-directories using the Tau Prolog backend, caching the compilation of the testing tool for better performance, but wiping the test set default scratch directories before running it:
 \fBlogtalk_tester -p tau -g "set_logtalk_flag(clean,off)" -w\fR
 .PP
 .TP
@@ -153,7 +153,7 @@ Run the Logtalk distribution tests using the GNU Prolog backend, passing a base 
 \fBlogtalk_tester -p gnu -b github:bug,auto -s "$HOME/logtalk3/" -u https://github.com/LogtalkDotOrg/logtalk3/tree/$(git rev-parse HEAD)/\fR
 .PP
 .TP
-Run all tests on the current directory and sub-directories using the YAP backend with its disable signal handling option:
+Run all tests in the current directory and sub-directories using the YAP backend with its disable signal handling option:
 \fBlogtalk_tester -p yap -i "-nosignals"\fR
 .PP
 .TP
@@ -200,4 +200,4 @@ The Logtalk User and Reference Manuals at \fB$LOGTALKHOME/manuals/index.html\fR
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2023 Paulo Moura.
+Copyright (c) 1998-2024 Paulo Moura.

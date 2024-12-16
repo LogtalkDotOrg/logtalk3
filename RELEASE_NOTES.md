@@ -49,6 +49,8 @@ Documentation
 
 * FIXED: Multiple Handbook grammar and spelling typos.
 
+* FIXED: Multiple man pages grammar and spelling typos.
+
 Library
 -------
 

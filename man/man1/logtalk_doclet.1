@@ -1,4 +1,4 @@
-.TH logtalk_doclet 1 "October 2, 2023" "Logtalk 3.71.0" "Logtalk Documentation"
+.TH logtalk_doclet 1 "December 16, 2024" "Logtalk 3.86.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_doclet \- Logtalk script for automating running doclets
@@ -15,7 +15,7 @@ logtalk_doclet \- Logtalk script for automating running doclets
 .B logtalk_doclet -h
 
 .SH DESCRIPTION
-\fBlogtalk_doclet\fR is a script for automating running Logtalk doclets. This script runs doclets found on a directory and recursively in its sub-directories by scanning for \fIdoclet.lgt\fR and \fIdoclet.logtalk\fR source files. The script assumes that the doclets use an \fIinitialization/1\fR directive to automatically run the documentation generation goal at loading time. A non-zero exit status is returned in case of failed doclets, timed out doclets, or crashed doclets.
+\fBlogtalk_doclet\fR is a script for automating running Logtalk doclets. This script runs doclets found in a directory and recursively in its sub-directories by scanning for \fIdoclet.lgt\fR and \fIdoclet.logtalk\fR source files. The script assumes that the doclets use an \fIinitialization/1\fR directive to automatically run the documentation generation goal at loading time. A non-zero exit status is returned in case of failed doclets, timed out doclets, or crashed doclets.
 
 .SH OPTIONS
 .TP
@@ -26,7 +26,7 @@ Print script version.
 Backend Prolog compiler. Required. The following identifiers are used: B-Prolog - \fIb\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, GNU Prolog (native code) - \fIgnunc\fR, JIProlog - \fIji\fR, XVM - \fIxvm\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, Tau Prolog - \fItau\fR, XSB - \fIxsb\fR, YAP - \fIyap\fR.
 .TP
 .BI \-d
-Directory to store the doclet running logs. Default is the local \fI./logtalk_doclet_logs\fR directory.
+Directory to store the doclet run logs. Default is the local \fI./logtalk_doclet_logs\fR directory.
 .TP
 .BI \-t
 Timeout in seconds for running each doclet. Default is \fI0\fR; i.e. disabled.
@@ -80,4 +80,4 @@ The Logtalk User and Reference Manuals at \fB$LOGTALKHOME/manuals/index.html\fR
 Paulo Moura <pmoura@logtalk.org>
 
 .SH COPYRIGHT
-Copyright (c) 1998-2021 Paulo Moura.
+Copyright (c) 1998-2024 Paulo Moura.
