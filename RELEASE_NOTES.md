@@ -84,6 +84,9 @@ reference linter warnings.
 hook predicate to support VSCode displaying warnings and errors augmented with
 explanations.
 
+* UPDATED: The `help` tool for the new `logtalk::message_prefix_file/6` hook
+predicate.
+
 * FIXED: The `diagrams` tool to also generate an `instance/class` caption for
 metaclasses.
 

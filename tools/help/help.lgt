@@ -23,9 +23,9 @@
 	implements(forwarding)).
 
 	:- info([
-		version is 0:34:0,
+		version is 0:35:0,
 		author is 'Paulo Moura',
-		date is 2024-09-16,
+		date is 2024-12-16,
 		comment is 'Command-line help for Logtalk libraries, entities, plus built-in control constructs, predicates, non-terminals, and methods.'
 	]).
 
@@ -391,6 +391,7 @@
 	built_in_method(ask_question, 5, '/manuals/refman/methods/', 'ask_question_5.html').
 	built_in_method(message_hook, 4, '/manuals/refman/methods/', 'message_hook_4.html').
 	built_in_method(message_prefix_stream, 4, '/manuals/refman/methods/', 'message_prefix_stream_4.html').
+	built_in_method(message_prefix_file, 6, '/manuals/refman/methods/', 'message_prefix_file_6.html').
 	built_in_method(print_message, 3, '/manuals/refman/methods/', 'print_message_3.html').
 	built_in_method(print_message_tokens, 3, '/manuals/refman/methods/', 'print_message_tokens_3.html').
 	built_in_method(print_message_token, 4, '/manuals/refman/methods/', 'print_message_token_4.html').
