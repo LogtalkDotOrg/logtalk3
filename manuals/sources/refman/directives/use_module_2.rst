@@ -55,7 +55,7 @@ declarations in the second argument.
 This directive is also taken into account when compiling calls to the
 :ref:`database <predicates_database>` and
 :ref:`reflection <predicates_reflection>` built-in methods by looking
-into these methods predicate arguments if bound at compile time.
+into these methods predicate arguments if bound at compile-time.
 
 It is possible to specify a predicate alias using the notation
 ``Name/Arity as Alias/Arity`` or, in alternative, the notation

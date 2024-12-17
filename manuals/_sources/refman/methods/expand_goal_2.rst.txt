@@ -42,7 +42,7 @@ expansion that is then unified with the second argument; if the
 ``goal_expansion/2`` predicate is not within scope, the two arguments
 are unified.
 
-Automatic goal expansion is only performed at compile time (to expand
+Automatic goal expansion is only performed at compile-time (to expand
 the body of clauses and meta-directives read from a source file) when
 using :term:`hook objects <hook object>`. This predicate can be
 used by the user to manually perform goal expansion at runtime (for

@@ -67,7 +67,7 @@ r(1).
 		{catch(bar(3), Z, true)}.
 
 	% problematic test as systems should be allowed to compile both goal
-	% arguments, which in this case would result in compile time callable
+	% arguments, which in this case would result in compile-time callable
 	% type error instead of success as in the original test definition
 	test(iso_catch_3_03, true) :-
 		{catch(true, _, 3)}.

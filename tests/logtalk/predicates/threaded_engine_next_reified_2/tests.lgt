@@ -31,7 +31,7 @@
 
 	:- threaded.
 
-	% engine name must be bound at runtime (but no error at compile time)
+	% engine name must be bound at runtime (but no error at compile-time)
 	throws(threaded_engine_next_reified_2_01, error(instantiation_error, logtalk(threaded_engine_next_reified(_,_), _))) :-
 		threaded_engine_next_reified(_, _).
 

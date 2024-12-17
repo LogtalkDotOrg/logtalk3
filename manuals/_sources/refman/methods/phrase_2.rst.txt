@@ -44,10 +44,10 @@ module system, calls in the format ``phrase(Module:GrammarRuleBody, Input)``
 may also be used.
 
 This method is opaque to cuts in the first argument. When the first
-argument is sufficiently instantiated at compile time, the method call
+argument is sufficiently instantiated at compile-time, the method call
 is compiled in order to eliminate the implicit overheads of converting
 the grammar rule body into a goal and meta-calling it. For performance
-reasons, the second argument is only type-checked at compile time.
+reasons, the second argument is only type-checked at compile-time.
 
 Meta-predicate template
 -----------------------

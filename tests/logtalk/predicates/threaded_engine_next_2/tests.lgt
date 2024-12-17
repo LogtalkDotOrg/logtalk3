@@ -35,7 +35,7 @@
 		succeeds/1, fails/1, throws/2
 	]).
 
-	% engine name must be bound at runtime (but no error at compile time)
+	% engine name must be bound at runtime (but no error at compile-time)
 	throws(threaded_engine_next_2_01, error(instantiation_error, logtalk(threaded_engine_next(_,_), _))) :-
 		threaded_engine_next(_, _).
 

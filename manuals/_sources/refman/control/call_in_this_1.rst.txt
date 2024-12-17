@@ -34,7 +34,7 @@ Description
    @Predicate
 
 Calls a predicate definition in :term:`this`. The argument must be a callable
-term at compile time. The predicate must be declared (by a scope directive).
+term at compile-time. The predicate must be declared (by a scope directive).
 This control construct provides access to predicate definitions in *this* from
 categories. For example, it allows overriding a predicate definition from a
 complementing category with a new definition that calls goals before and

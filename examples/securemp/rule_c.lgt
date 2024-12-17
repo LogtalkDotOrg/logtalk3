@@ -25,7 +25,7 @@
 	:- meta_predicate(map(1, *)).
 
 	map(Closure, Element) :-
-		% illegal call; results in a compile time error
+		% illegal call; results in a compile-time error
 		call(Closure, Element, _).
 
 :- end_object.

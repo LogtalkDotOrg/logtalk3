@@ -50,7 +50,7 @@ depending on the :ref:`optimize <flag_optimize>` and
 deploying an application while normal and debug modes are used when
 developing an application. Compiling code in optimal mode enables
 several optimizations, notably use of :term:`static binding` whenever
-enough information is available at compile time. In debug mode, most
+enough information is available at compile-time. In debug mode, most
 optimizations are turned off and the code is instrumented to generate
 :ref:`debug events <debugging_events>` that enable developer tools such
 as the :doc:`command-line debugger <../devtools/debugger>` and the
@@ -75,7 +75,7 @@ Calls to module predicates
 
 Local calls from an object (or category) to a module predicate have zero
 overhead (assuming both the module and the predicate are bound at
-compile time).
+compile-time).
 
 Messages
 --------
@@ -89,7 +89,7 @@ chosen backend Prolog compiler. The results for Logtalk 3.17.0 and later
 versions are:
 
 -  Static binding: 0
--  Dynamic binding (object bound at compile time): +1
+-  Dynamic binding (object bound at compile-time): +1
 -  Dynamic binding (object bound at runtime): +2
 
 Static binding is the common case with libraries and most application

@@ -1160,7 +1160,7 @@ lambda expression, or bad programming style, when the variable is used
 after the lambda expression. These linter warnings are controlled by
 the <a class="reference internal" href="programming.html#flag-lambda-variables"><span class="std std-ref">lambda_variables</span></a> flag. Note that the
 dynamic features of the language and lack of sufficient information at
-compile time may prevent the compiler of checking all uses of lambda
+compile-time may prevent the compiler of checking all uses of lambda
 expressions. To improve linter coverage, compile code using lambda
 expressions with the <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize flag</span></a> turned on
 as that will result in additional cases of meta-arguments being
@@ -1460,7 +1460,7 @@ used as messages when sending multiple messages to the same object
 <span id="predicates-context"></span><h3>Execution context methods<a class="headerlink" href="#execution-context-methods" title="Link to this heading"></a></h3>
 <p>Logtalk defines five built-in private methods to access an object
 execution context. These methods are in the common usage scenarios
-translated to a single unification performed at compile time with a
+translated to a single unification performed at compile-time with a
 clause head context argument. Therefore, they can be freely used without
 worrying about performance penalties. When called from inside a
 category, these methods refer to the execution context of the object
@@ -1515,7 +1515,7 @@ yes
 </div>
 <p>Note that the goals <code class="docutils literal notranslate"><span class="pre">self(Self)</span></code>, <code class="docutils literal notranslate"><span class="pre">sender(Sender)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">this(This)</span></code>, being translated to unifications with the clause head
-context arguments at compile time, are effectively removed from the
+context arguments at compile-time, are effectively removed from the
 clause body. Therefore, a clause such as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>predicate(<span class="nv">Arg</span>) <span class="o">:-</span>
     <span class="k">self</span>(<span class="nv">Self</span>),
@@ -1565,7 +1565,7 @@ Color parameter value is blue
 yes
 </pre></div>
 </div>
-<p>Calls to the <code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> method are translated to a compile time
+<p>Calls to the <code class="docutils literal notranslate"><span class="pre">parameter/2</span></code> method are translated to a compile-time
 unification when the second argument is a variable. When the second
 argument is bound, the calls are translated to a call to the built-in
 predicate <code class="docutils literal notranslate"><span class="pre">arg/3</span></code>.</p>
@@ -2178,7 +2178,7 @@ to use a <a class="reference internal" href="../refman/directives/uses_2.html#di
 </pre></div>
 </div>
 <p>Note that in the alternatives using <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> or <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives,
-the argument of the database handling predicates must be know at compile time.
+the argument of the database handling predicates must be know at compile-time.
 If that is not the case, you must use instead either an explicitly-qualified
 argument or the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> control construct. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(...).

@@ -1335,7 +1335,7 @@ load the patch after loading application code:
 	)).
 	
 There are pros and cons for each solution. Term-expansion works by defining
-hook objects that are used at compile time, while hot patching happens at
+hook objects that are used at compile-time, while hot patching happens at
 runtime. Complementing categories can also be dynamically created, stacked,
 and abolished. Hot patching disables static binding optimizations, but that's
 usually not a problem as the code being tested is often compiled in debug

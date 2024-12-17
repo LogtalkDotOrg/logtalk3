@@ -31,7 +31,7 @@
 
 	:- threaded.
 
-	% engine argument must be bound at runtime (but no error at compile time)
+	% engine argument must be bound at runtime (but no error at compile-time)
 	throws(threaded_engine_post_2_01, error(instantiation_error, logtalk(threaded_engine_post(_,_),_))) :-
 		threaded_engine_post(_, _).
 

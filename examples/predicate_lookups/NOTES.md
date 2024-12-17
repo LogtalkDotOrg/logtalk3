@@ -28,7 +28,7 @@ see the Handbook section on inheritance.
 The lookup algorithms differ for instances and for prototypes and also depend
 if the lookup is for a predicate declaration or for a predicate definition.
 Sending a message to an object, requires two predicate lookups (performed at
-compile time, when possible):
+compile-time, when possible):
 
 - Lookup the predicate declaration to check that the predicate in within
 the scope of the *sender*. In the most common cases, this means that the

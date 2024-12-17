@@ -42,7 +42,7 @@
 		{';'((!, fail), true)}.
 
 	test(iso_disjunction_2_03, true) :-
-		% try to avoid a compile time error with some backends
+		% try to avoid a compile-time error with some backends
 		three(Three),
 		{';'(!, call(Three))}.
 

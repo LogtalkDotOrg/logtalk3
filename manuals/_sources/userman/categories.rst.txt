@@ -77,7 +77,7 @@ on any other Logtalk entity:
        ...
    :- end_category.
 
-If a category implements one or more protocols then the opening
+If a category implements one or more protocols, then the opening
 directive will be:
 
 ::
@@ -112,7 +112,7 @@ the database handling built-in methods with categories (messages can
 only be sent to objects). A consequence of this restriction is that a
 category cannot declare a predicate (or non-terminal) as both multifile
 and dynamic. However, categories may contain declarations for dynamic
-predicates and they can contain predicates which handle dynamic predicates.
+predicates, and they can contain predicates that handle dynamic predicates.
 For example:
 
 ::
@@ -179,7 +179,7 @@ instead of *self*. For example:
 
 When defining a category that declares and handles dynamic predicates,
 working in the context of *this* ties those dynamic predicates to the
-object importing the category while working in the context of *self*
+object importing the category, while working in the context of *self*
 allows each object inheriting from the object that imports the category
 to have its own set of clauses for those dynamic predicates.
 
@@ -208,13 +208,13 @@ predicates to a set of objects. Complemented objects need to be compiled
 with the :ref:`complements <flag_complements>` compiler flag set ``allow``
 (to allow both patching and adding functionality) or ``restrict`` (to allow
 only adding new functionality). A complementing category takes preference
-over a previously loaded complementing category for the same object thus
+over a previously loaded complementing category for the same object, thus
 allowing patching a previous patch if necessary.
 
 When replacing a predicate definition, it is possible to call the overridden
 definition in the object from the new definition in the category by using the
 :ref:`call_in_this_1` control construct. This construct is only meaningful
-when used within categories and requires a compile time bound goal argument,
+when used within categories and requires a compile-time bound goal argument,
 which is called in :term:`this` (i.e. in the context of the complemented
 object or the object importing a category). As an example, consider the
 following object:
@@ -231,7 +231,7 @@ following object:
 
    :- end_object.
    
-We can use the ``(@)/1`` control construct e.g. wrap the original ``make_sound/0``
+We can use the ``(@)/1`` control construct to wrap the original ``make_sound/0``
 predicate definition by writing:
 
 ::
@@ -270,7 +270,7 @@ category that extends the category that you want to add.
 An unfortunate consequence of allowing an object to be patched at
 runtime using a complementing category is that it disables the use of
 :term:`static binding` optimizations for messages sent to the complemented
-object as it can always be later patched, thus rendering the static
+object, as it can always be later patched, thus rendering the static
 binding optimizations invalid.
 
 Another important caveat is that, while a complementing category can
@@ -286,7 +286,7 @@ Finding defined categories
 --------------------------
 
 We can find, by backtracking, all defined categories by using the
-:ref:`predicates_current_category_1` built-in predicate with a
+:ref:`predicates_current_category_1` built-in predicate with an
 unbound argument:
 
 .. code-block:: text
@@ -363,7 +363,7 @@ Dynamic categories can be abolished using the
    | ?- abolish_category(Category).
 
 The argument must be an identifier of a defined dynamic category;
-otherwise an error will be thrown.
+otherwise, an error will be thrown.
 
 .. _categories_directives:
 
@@ -371,7 +371,7 @@ Category directives
 -------------------
 
 Category directives are used to define category properties, document
-a category dependencies on other Logtalk entities, and load the
+category dependencies on other Logtalk entities, and load the
 contents of files into a category.
 
 .. _categories_dynamic:
@@ -419,7 +419,7 @@ Declaring object aliases
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The :ref:`directives_uses_1` directive can be used to declare object aliases.
-The typical uses of this directive is to shorten long object names and to
+The typical uses of this directive are to shorten long object names and to
 simplify experimenting with different object implementations of the same
 protocol when using explicit message-sending.
 
@@ -433,7 +433,7 @@ the system about the relationships that a category has with other entities.
 
 The built-in predicates :ref:`predicates_implements_protocol_2_3`
 and :ref:`predicates_conforms_to_protocol_2_3`
-allows us to find which categories implements which protocols:
+allow us to find which categories implement which protocols:
 
 .. code-block:: text
 
@@ -449,7 +449,7 @@ Note that, if we use an unbound first argument, we will need to use the
 :ref:`predicates_current_category_1` built-in predicate to ensure that
 the returned entity is a category and not an object.
 
-To find which objects import which categories we can use the
+To find which objects import which categories, we can use the
 :ref:`predicates_imports_category_2_3` built-in predicates:
 
 .. code-block:: text
@@ -464,7 +464,7 @@ or, if we also want to know the importation scope:
 
 Note that a category may be imported by several objects.
 
-To find which categories extend other categories we can use the
+To find which categories extend other categories, we can use the
 :ref:`predicates_extends_category_2_3` built-in predicates:
 
 .. code-block:: text
@@ -603,7 +603,7 @@ The following category properties are supported:
    entities or rules for the category own multifile predicates contributed
    by other entities)
 
-Some properties such as line numbers are only available when the category is
+Some properties, such as line numbers, are only available when the category is
 defined in a source file compiled with the :ref:`source_data <flag_source_data>`
 flag turned on. Moreover, line numbers are only supported in
 :term:`backend Prolog compilers <backend Prolog compiler>`
@@ -630,8 +630,8 @@ import any number of categories. The syntax is very simple:
        ...
    :- end_object.
 
-To make all public predicates imported via a category protected or to
-make all public and protected predicates private we prefix the
+To make all public predicates imported via a category protected, or to
+make all public and protected predicates private, we prefix the
 category's name with the corresponding keyword:
 
 ::
@@ -696,7 +696,7 @@ the category by simply sending a message to *self*. For example:
    :- end_object.
 
 This is the recommended way of calling a category predicate that can be
-specialized/overridden in a descendant object as the predicate definition
+specialized/overridden in a descendant object, as the predicate definition
 lookup will start from *self*.
 
 A direct call to a predicate definition found in an imported category can
@@ -724,7 +724,7 @@ on, the Logtalk compiler will try to optimize the calls by using
 :term:`static binding`. When :term:`dynamic binding` is used due to e.g.
 the lack of sufficient information at compilation time, the performance is
 similar to calling the category predicate using a message to :term:`self`
-(in both cases a predicate lookup caching mechanism is used).
+(in both cases, a predicate lookup caching mechanism is used).
 
 .. _categories_parametric:
 
@@ -767,5 +767,5 @@ The built-in category ``core_messages``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The built-in :ref:`core_messages <apis:core_messages/0>` category provides
-default translations for all compiler and runtime printed messages such as
+default translations for all compiler and runtime printed messages, such as
 warnings and errors. It does not define any public predicates.

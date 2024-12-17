@@ -47,7 +47,7 @@ Using this non-terminal is recommended when calling a predicate whose last
 two arguments are the two implicit grammar rule arguments to avoid hard-coding
 assumptions about how grammar rules are compiled into clauses. Note that the
 compiler ensures zero overhead when using this non-terminal with a bound
-argument at compile time. To call a predicate with a different argument order,
+argument at compile-time. To call a predicate with a different argument order,
 use a :term:`lambda expression` or define a :term:`predicate alias`. For
 example:
 

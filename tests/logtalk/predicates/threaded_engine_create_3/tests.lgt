@@ -31,7 +31,7 @@
 
 	:- threaded.
 
-	% goal argument must be bound at runtime (but no error at compile time)
+	% goal argument must be bound at runtime (but no error at compile-time)
 	throws(threaded_engine_create_3_01, error(instantiation_error, logtalk(threaded_engine_create(_,_,_), _))) :-
 		threaded_engine_create(_, _, _).
 

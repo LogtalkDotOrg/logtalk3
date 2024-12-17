@@ -39,7 +39,7 @@ processing.
 This private method is compiled into a unification between its argument
 and the corresponding implicit context argument in the predicate clause
 making the call. This unification occurs at the clause head when the
-argument is not bound at compile time (the most common case).
+argument is not bound at compile-time (the most common case).
 
 Modes and number of proofs
 --------------------------

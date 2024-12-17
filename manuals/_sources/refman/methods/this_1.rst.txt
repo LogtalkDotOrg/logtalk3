@@ -41,7 +41,7 @@ is being used to prove the current goal.
 This private method is implemented as a unification between its argument and
 the corresponding implicit execution-context argument in the predicate clause
 making the call. This unification occurs at the clause head when the argument
-is not bound at compile time (the most common case).
+is not bound at compile-time (the most common case).
 
 This method is useful for avoiding hard-coding references to an object
 identifier or for retrieving all object parameters with a single call

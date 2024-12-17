@@ -224,7 +224,7 @@
 	test(meta_compiler_map_reduce_5_01, true(Result == cab)) :-
 		meta::map_reduce([Code,Char]>>char_code(Char,Code), atom_concat, '', [99,97,98], Result).
 
-	% test for meta-calls that cannot be optimized due to unbound arguments at compile time
+	% test for meta-calls that cannot be optimized due to unbound arguments at compile-time
 
 	test(meta_compiler_skipped_01, true(type::valid(list(atom),Files))) :-
 		% make Object only bound at runtime

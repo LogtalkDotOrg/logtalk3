@@ -173,7 +173,7 @@ depending on the <a class="reference internal" href="programming.html#flag-optim
 deploying an application while normal and debug modes are used when
 developing an application. Compiling code in optimal mode enables
 several optimizations, notably use of <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> whenever
-enough information is available at compile time. In debug mode, most
+enough information is available at compile-time. In debug mode, most
 optimizations are turned off and the code is instrumented to generate
 <a class="reference internal" href="debugging.html#debugging-events"><span class="std std-ref">debug events</span></a> that enable developer tools such
 as the <a class="reference internal" href="../devtools/debugger.html"><span class="doc">command-line debugger</span></a> and the
@@ -195,7 +195,7 @@ in terms of number of inferences.</p>
 <h2>Calls to module predicates<a class="headerlink" href="#calls-to-module-predicates" title="Link to this heading"></a></h2>
 <p>Local calls from an object (or category) to a module predicate have zero
 overhead (assuming both the module and the predicate are bound at
-compile time).</p>
+compile-time).</p>
 </section>
 <section id="messages">
 <h2>Messages<a class="headerlink" href="#messages" title="Link to this heading"></a></h2>
@@ -208,7 +208,7 @@ chosen backend Prolog compiler. The results for Logtalk 3.17.0 and later
 versions are:</p>
 <ul class="simple">
 <li><p>Static binding: 0</p></li>
-<li><p>Dynamic binding (object bound at compile time): +1</p></li>
+<li><p>Dynamic binding (object bound at compile-time): +1</p></li>
 <li><p>Dynamic binding (object bound at runtime): +2</p></li>
 </ul>
 <p>Static binding is the common case with libraries and most application

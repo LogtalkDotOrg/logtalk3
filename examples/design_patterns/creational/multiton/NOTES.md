@@ -34,7 +34,7 @@ This pattern is not described in the GoF book. See the Wikipedia page for
 details and references.
 
 The sample implementation uses classes. To simplify, it assumes a fixed
-(at compile time) set of named instances. An alternative would be allow
+(at compile-time) set of named instances. An alternative would be allow
 the definition of the set of named instances at runtime by extending the
 protocol of the multiton with the necessary predicates. Also to simplify,
 the sample code uses the named instance identifiers as the access keys.

@@ -1186,7 +1186,7 @@ lambda expression, or bad programming style, when the variable is used
 after the lambda expression. These linter warnings are controlled by
 the :ref:`lambda_variables <flag_lambda_variables>` flag. Note that the
 dynamic features of the language and lack of sufficient information at
-compile time may prevent the compiler of checking all uses of lambda
+compile-time may prevent the compiler of checking all uses of lambda
 expressions. To improve linter coverage, compile code using lambda
 expressions with the :ref:`optimize flag <flag_optimize>` turned on
 as that will result in additional cases of meta-arguments being
@@ -1535,7 +1535,7 @@ Execution context methods
 
 Logtalk defines five built-in private methods to access an object
 execution context. These methods are in the common usage scenarios
-translated to a single unification performed at compile time with a
+translated to a single unification performed at compile-time with a
 clause head context argument. Therefore, they can be freely used without
 worrying about performance penalties. When called from inside a
 category, these methods refer to the execution context of the object
@@ -1597,7 +1597,7 @@ goal:
 
 Note that the goals ``self(Self)``, ``sender(Sender)``, and
 ``this(This)``, being translated to unifications with the clause head
-context arguments at compile time, are effectively removed from the
+context arguments at compile-time, are effectively removed from the
 clause body. Therefore, a clause such as:
 
 ::
@@ -1656,7 +1656,7 @@ following goal:
    Color parameter value is blue
    yes
 
-Calls to the ``parameter/2`` method are translated to a compile time
+Calls to the ``parameter/2`` method are translated to a compile-time
 unification when the second argument is a variable. When the second
 argument is bound, the calls are translated to a call to the built-in
 predicate ``arg/3``.
@@ -2381,7 +2381,7 @@ to use a :ref:`directives_uses_2` directive:
    :- end_object.
 
 Note that in the alternatives using ``uses/2`` or ``use_module/2`` directives,
-the argument of the database handling predicates must be know at compile time.
+the argument of the database handling predicates must be know at compile-time.
 If that is not the case, you must use instead either an explicitly-qualified
 argument or the :ref:`control_external_call_1` control construct. For example:
 

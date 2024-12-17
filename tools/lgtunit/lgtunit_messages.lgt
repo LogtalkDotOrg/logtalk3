@@ -278,7 +278,7 @@
 	message_tokens(unknown_entity_declared_covered(Entity)) -->
 		['unknown entity declared covered: ~q'-[Entity], nl].
 
-	% messages for test identifier errors (compile time)
+	% messages for test identifier errors (compile-time)
 
 	message_tokens(non_instantiated_test_identifier(_Object, File, Position, Type, Entity)) -->
 		['non-instantiated test identifier found'-[], nl],

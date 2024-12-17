@@ -153,7 +153,7 @@ call_n_maplist(Cont, [E|Es]) :-
 			type_error(callable,(':'(user,fail),':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
 		% the first exception term is the strictly conforming one
-		% try to avoid a compile time error with some backends
+		% try to avoid a compile-time error with some backends
 		three(Three),
 		{call(',', fail, Three)}.
 
@@ -162,7 +162,7 @@ call_n_maplist(Cont, [E|Es]) :-
 			type_error(callable,(':'(user,!);':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
 		% the first exception term is the strictly conforming one
-		% try to avoid a compile time error with some backends
+		% try to avoid a compile-time error with some backends
 		three(Three),
 		{call(';', !, Three)}.
 
@@ -171,7 +171,7 @@ call_n_maplist(Cont, [E|Es]) :-
 			type_error(callable,(':'(user,fail)->':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
 		% the first exception term is the strictly conforming one
-		% try to avoid a compile time error with some backends
+		% try to avoid a compile-time error with some backends
 		three(Three),
 		{call('->', fail, Three)}.
 
@@ -183,7 +183,7 @@ call_n_maplist(Cont, [E|Es]) :-
 			type_error(callable,(':'(user,fail),':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
 		% the first exception term is the strictly conforming one
-		% try to avoid a compile time error with some backends
+		% try to avoid a compile-time error with some backends
 		three(Three),
 		{call(','(fail), Three)}.
 
@@ -192,7 +192,7 @@ call_n_maplist(Cont, [E|Es]) :-
 			type_error(callable,(':'(user,!);':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
 		% the first exception term is the strictly conforming one
-		% try to avoid a compile time error with some backends
+		% try to avoid a compile-time error with some backends
 		three(Three),
 		{call(';'(!), Three)}.
 
@@ -201,7 +201,7 @@ call_n_maplist(Cont, [E|Es]) :-
 			type_error(callable,(':'(user,fail)->':'(user,3))), type_error(callable,':'(user,3))
 	])) :-
 		% the first exception term is the strictly conforming one
-		% try to avoid a compile time error with some backends
+		% try to avoid a compile-time error with some backends
 		three(Three),
 		{call('->'(fail), Three)}.
 

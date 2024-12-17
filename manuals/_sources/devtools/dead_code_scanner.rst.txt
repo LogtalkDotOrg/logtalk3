@@ -134,7 +134,7 @@ Caveats
 Use of local meta-calls with goal arguments only known at runtime can
 result in false positives. When using library or user-defined
 meta-predicates, compilation of the source files with the ``optimize``
-flag turned on may allow meta-calls to be resolved at compile time and
+flag turned on may allow meta-calls to be resolved at compile-time and
 thus allow calling information for the meta-arguments to be recorded,
 avoiding false positives for predicates that are only meta-called.
 

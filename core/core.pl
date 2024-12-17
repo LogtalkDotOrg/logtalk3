@@ -3302,7 +3302,7 @@ logtalk_make(Target) :-
 % Prolog, SWI-Prolog, and YAP
 %
 % when called from initialization/1 directives, calls to this predicate
-% are resolved at compile time when the key is instantiated
+% are resolved at compile-time when the key is instantiated
 
 logtalk_load_context(Key, Value) :-
 	'$lgt_execution_context'(ExCtx, user, user, user, user, [], []),
@@ -5757,7 +5757,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_send_to_self'(?term, +compilation_context)
 %
 % runtime processing of a message-sending call when the message is not
-% known at compile time
+% known at compile-time
 
 '$lgt_send_to_self'(Pred, Ctx) :-
 	% we must ensure that the argument is valid before compiling the message
@@ -5836,7 +5836,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_send_to_obj_rt'(?term, ?term, +atom, +compilation_context)
 %
 % runtime processing of a message-sending call when the message and
-% possibly the receiver object are not known at compile time
+% possibly the receiver object are not known at compile-time
 
 '$lgt_send_to_obj_rt'(Obj, Pred, Events, Ctx) :-
 	% we must ensure that the message is valid before compiling the
@@ -5855,7 +5855,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_send_to_obj'(+object_identifier, +callable, +execution_context)
 %
 % runtime processing of an event-aware message-sending call when the
-% receiver object is not known at compile time; as using the cache
+% receiver object is not known at compile-time; as using the cache
 % only requires a bound first argument, we delay errors other than an
 % instantiation error for a small performance gain
 
@@ -5996,7 +5996,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_send_to_obj_ne'(+object_identifier, +callable, +execution_context)
 %
 % runtime processing of an event-transparent message-sending call when
-% the receiver object is not known at compile time; as using the cache
+% the receiver object is not known at compile-time; as using the cache
 % only requires a bound first argument, we delay errors other than an
 % instantiation error for a small performance gain
 
@@ -6110,7 +6110,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_obj_super_call'(+atom, +term, +execution_context)
 %
 % runtime processing of an object "super" call when the predicate called is
-% not known at compile time; as using the cache only requires a bound first
+% not known at compile-time; as using the cache only requires a bound first
 % argument, we delay errors other than an instantiation error for a small
 % performance gain
 
@@ -6190,7 +6190,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_ctg_super_call'(+category_identifier, +term, +execution_context)
 %
 % runtime processing of a category "super" call when the predicate called
-% is not known at compile time;  as using the cache only requires a bound
+% is not known at compile-time;  as using the cache only requires a bound
 % first argument, we delay errors other than an instantiation error for a
 % small performance gain
 
@@ -6750,7 +6750,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_call_within_context_nv'(+object_identifier, +callable, +execution_context)
 %
 % calls a goal within the context of the specified object (arguments type-checked
-% at compile time)
+% at compile-time)
 
 '$lgt_call_within_context_nv'(Obj, Goal, ExCtx) :-
 	(	Obj == user ->
@@ -13257,7 +13257,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %		'$lgt_compile_body'(Pred, _, TPred, DPred, NewCtx)
 %	).
 
-% goal expansion (only applied at compile time)
+% goal expansion (only applied at compile-time)
 
 '$lgt_compile_body'(Pred, Caller, TPred, DPred, Ctx) :-
 	'$lgt_comp_ctx'(Ctx, Head, HeadExCtx, Entity, Sender, This, Self, Prefix, MetaVars, MetaCallCtx, ExCtx, compile(How,Cut,ExpandedGoals), Stack, Lines, Term),
@@ -14288,7 +14288,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	TPred = '$lgt_bagof'(Term, QGoal, List, HeadExCtx, local)
 		),
 		DPred = '$lgt_debug'(goal(bagof(Term, QGoal, List), TPred), HeadExCtx)
-	;	% compile time local call
+	;	% compile-time local call
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		'$lgt_compile_quantified_body'(QGoal, meta, TGoal, DGoal, Ctx),
 		TPred = bagof(Term, TGoal, List),
@@ -14445,7 +14445,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		;	TPred = '$lgt_setof'(Term, QGoal, List, HeadExCtx, local)
 		),
 		DPred = '$lgt_debug'(goal(setof(Term, QGoal, List), TPred), HeadExCtx)
-	;	% compile time local call
+	;	% compile-time local call
 		'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 		'$lgt_compile_quantified_body'(QGoal, meta, TGoal, DGoal, Ctx),
 		TPred = setof(Term, TGoal, List),
@@ -16296,7 +16296,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_head_exec_ctx'(Ctx, ExCtx),
 	'$lgt_execution_context'(ExCtx, _, Sender0, _, _, _, _),
 	(	var(Sender) ->
-		% compile time unification
+		% compile-time unification
 		Sender0 = Sender,
 		TPred = true,
 		DPred = (DSender = Sender)
@@ -16311,7 +16311,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_head_exec_ctx'(Ctx, ExCtx),
 	'$lgt_execution_context_this_entity'(ExCtx, This0, _),
 	(	var(This) ->
-		% compile time unification
+		% compile-time unification
 		This0 = This,
 		TPred = true,
 		DPred = (DThis = This)
@@ -16326,7 +16326,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_comp_ctx_head_exec_ctx'(Ctx, ExCtx),
 	'$lgt_execution_context'(ExCtx, _, _, _, Self0, _, _),
 	(	var(Self) ->
-		% compile time unification
+		% compile-time unification
 		Self0 = Self,
 		TPred = true,
 		DPred = (DSelf = Self)
@@ -16339,7 +16339,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(parameter(Arg, _), _, _, _, Ctx) :-
 	'$lgt_check'(integer, Arg),
 	(	'$lgt_pp_entity_'(_, Entity, _) ->
-		% compile time
+		% compile-time
 		true
 	;	% runtime <</2 call
 		'$lgt_comp_ctx_entity'(Ctx, Entity)
@@ -16350,7 +16350,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(parameter(Arg, Value), _, TPred, '$lgt_debug'(goal(parameter(Arg, DValue), DPred), ExCtx), Ctx) :-
 	!,
 	(	'$lgt_pp_entity_'(_, Entity, _) ->
-		% compile time; instantiate the Entity argument in the compilation context
+		% compile-time; instantiate the Entity argument in the compilation context
 		true
 	;	% runtime <</2 call; Entity alreay instantiated in the compilation context
 		true
@@ -16361,7 +16361,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	1 =< Arg, Arg =< Arity ->
 		arg(Arg, Entity, Value0),
 		(	var(Value) ->
-			% parameter compile time unification
+			% parameter compile-time unification
 			Value0 = Value,
 			TPred = true,
 			DPred = (DValue = Value)
@@ -20220,7 +20220,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_pp_term_source_data_'(Term, VariableNames, _, _, _),
 	VariableNames \== [],
 	(	'$lgt_pp_entity_'(_, Entity, _) ->
-		% compile time; instantiate the Entity argument in the compilation context
+		% compile-time; instantiate the Entity argument in the compilation context
 		true
 	;	% runtime <</2 call; Entity already instantiated in the compilation context
 		true
@@ -20720,7 +20720,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	\+ '$lgt_variable_aliasing'(Head),
 	% don't inline predicate definitions with variable aliasing in the clause
 	% head as this can result in optimization bugs when compiling predicate
-	% calls due to compile time variable bindings propagating to previous goals
+	% calls due to compile-time variable bindings propagating to previous goals
 	% in the same clause body
 	'$lgt_inlining_candidate'(TBody, Functor/Arity),
 	% valid candidate for inlining

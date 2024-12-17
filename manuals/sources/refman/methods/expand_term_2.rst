@@ -52,7 +52,7 @@ may return a single term or a list of terms.
 This built-in method may be used to expand a grammar rule into a clause
 for use with the built-in database methods.
 
-Automatic term expansion is only performed at compile time (to expand
+Automatic term expansion is only performed at compile-time (to expand
 terms read from a source file) when using a :term:`hook object`. This
 predicate can be used by the user to manually perform term expansion
 at runtime (for example, to convert a grammar rule into a clause).

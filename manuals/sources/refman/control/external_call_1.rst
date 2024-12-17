@@ -63,7 +63,7 @@ This control construct allows the programmer to bypass the Logtalk compiler
 
    This control construct is opaque to cuts when used to wrap a goal (thus
    ensuring the same semantics independently of the argument being bound at
-   compile time or at runtime).
+   compile-time or at runtime).
 
 Modes and number of proofs
 --------------------------
