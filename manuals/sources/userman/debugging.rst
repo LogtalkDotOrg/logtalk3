@@ -35,7 +35,7 @@ It can also be loaded automatically at startup time by using a
 The :doc:`../devtools/debugger` tool includes the debugging features found
 in traditional Prolog debuggers. There are some differences, however, between
 the usual implementation of Prolog debuggers and the current implementation
-of the Logtalk debugger that you should be aware. First, unlike most Prolog
+of the Logtalk debugger that you should be aware of. First, unlike most Prolog
 debuggers, the Logtalk debugger is not a built-in feature but a regular
 Logtalk application using documented debugging hook predicates. This
 translates to a different, although similar, set of debugging features
@@ -44,7 +44,7 @@ debugging is only possible for entities compiled in debug mode. When
 compiling an entity in debug mode, Logtalk decorates clauses with source
 information to allow tracing of the goal execution. Third, the tool
 provides several types of breakpoints (for pausing and interacting with
-the debugger) and also log points while most Prolog systems are limited
+the debugger) and also log points, while most Prolog systems are limited
 to traditional predicate spy points.
 
 .. _debugging_debug_mode:
@@ -72,7 +72,7 @@ write:
 The :ref:`predicates_logtalk_make_1` built-in predicate can also be used to
 recompile all loaded files (that were compiled without using explicit values
 for the :ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` compiler
-flags in a ``logtalk_load/2`` call or in a :term:`loader file` file, if used)
+flags in a ``logtalk_load/2`` call or in a :term:`loader file`, if used)
 in debug mode:
 
 .. code-block:: text
@@ -190,7 +190,7 @@ The ``debugger`` tool provides the following breakpoint types where the debugger
 pauses at a leashed port for user interaction:
 
 - Predicate breakpoints
-   Traditional Prolog spy points defined using a predicate (or a non-terminal)
+   Traditional Prolog spy points are defined using a predicate (or a non-terminal)
    indicator.
 - Clause breakpoints
    Defined using the location of a clause.
@@ -245,7 +245,7 @@ clause.
 
 Unconditional clause and predicate breakpoints can be removed by
 using the debugger ``nospy/1`` predicate. The argument can also be a list
-of breakpoints or a non-instantiated variable in which case all breakpoints
+of breakpoints or a non-instantiated variable, in which case all breakpoints
 will be removed. For example:
 
 .. code-block:: text
@@ -346,10 +346,10 @@ a goal:
    (Sender, This, Self, Goal)
 
 The debugger pauses for user interaction whenever the breakpoint goal and
-execution context subsumes the goal currently being executed and its
+execution context subsume the goal currently being executed and its
 execution context. The user may establish any number of context breakpoints
 as necessary. For example, in order to call the debugger whenever a
-predicate defined on an object named ``foo`` is called we may define
+predicate defined on an object named ``foo`` is called, we may define
 the following context breakpoint:
 
 .. code-block:: text
@@ -401,15 +401,15 @@ to its default settings and delete all defined breakpoints and log points.
 Defining log points
 -------------------
 
-Logtalk log points are similar to breakpoints and thus the line number must
+Logtalk log points are similar to breakpoints. Therefore, the line number must
 correspond to the first line of an entity clause. When the debugger reaches
 a log point, it prints a log message and continues without pausing execution
 for reading a port command. When the log message is an empty atom, the default
 port output message is printed. When the log message starts with a ``%``
-character, the default port output message is printed followed by the log
+character, the default port output message is printed, followed by the log
 message. In these two cases, the debugger prints a ``@`` character at the
 beginning of the line for easy recognition of log points output. When the log
-message is neither empty or starts with a ``%`` character, the log message is
+message is neither empty nor starts with a ``%`` character, the log message is
 printed instead of the default port output message. In this case, the message
 can contain ``$KEYWORD`` placeholders that are expanded at runtime. The valid
 keywords are:
@@ -443,7 +443,7 @@ Log points are defined using the ``log/3`` predicate. For example:
         Log point added.
    yes
 
-Predicates ``logging/3`` and ``nolog/3`` can be used to, respectively, query
+The ``logging/3`` and ``nolog/3`` predicate can be used to, respectively, query
 and remove log points. There's also a ``nologall/0`` predicate that removes
 all log points.
 
@@ -465,7 +465,7 @@ mode. To start the debugger in trace mode, write:
 
    yes
 
-Next, type the query to be debugged. For examples, using the ``family``
+Next, type the query to be debugged. For example, using the ``family``
 example in the Logtalk distribution compiled for debugging:
 
 .. code-block:: text
@@ -483,8 +483,8 @@ example in the Logtalk distribution compiled for debugging:
 While tracing, the debugger will pause for user input at each leashed port,
 printing an informative message. Each trace line starts with the port,
 followed by the goal invocation number, followed by the goal. The invocation
-numbers are unique and allows us to correlate the ports used for a goal.
-In the output above, you can see for example that the goal ``::female(_1082)``
+numbers are unique and allow us to correlate the ports used for a goal.
+In the output above, you can see, for example, that the goal ``::female(_1082)``
 succeeds with the answer ``::female(morticia)``. The debugger also provides
 determinism information by prefixing the ``exit`` port with a ``*`` character
 when a call succeeds with choice-points pending, thus indicating that there
@@ -524,8 +524,8 @@ Debugging using breakpoints
 ---------------------------
 
 Tracing a program execution may generate large amounts of debugging data.
-Debugging using breakpoints allows the user to concentrate in specific
-points of the code. To start a debugging session using breakpoints points,
+Debugging using breakpoints allows the user to concentrate on specific
+points of the code. To start a debugging session using breakpoints,
 write:
 
 .. code-block:: text
@@ -551,7 +551,7 @@ To stop the debugger, write:
    yes
 
 Note that stopping the debugger does not remove any defined breakpoints or
-and log points.
+log points.
 
 .. _debugging_commands:
 
@@ -805,12 +805,12 @@ tokenization for seven *meta-messages* that cover the most common cases:
    By default, the message is printed as passed to the ``format/2``
    predicate.
 ``List``
-   By default, the list items are printed indented one per line. The
+   By default, the list items are printed indented, one per line. The
    items are preceded by a dash and can be ``@Message``, ``Key-Value``,
    or ``Format+Arguments`` messages. If that is not the case, the item
    is printed as passed to the ``writeq/1`` predicate.
 ``Title::List``
-   By default, the title is printed followed by a newline and the
+   By default, the title is printed, followed by a newline and the
    indented list items, one per line. The items are printed as in
    the ``List`` meta message.
 ``[Stream,Prefix]>>Goal``
@@ -882,7 +882,7 @@ Selective printing of debug messages
 By default, all debug messages are either printed or skipped, depending on the
 :ref:`debug <flag_debug>` and :ref:`optimize <flag_optimize>` flags. When the
 code is not compiled in optimal mode, the :doc:`../devtools/debug_messages`
-tool allows selectively enabling of debug messages per :term:`component` and
+tool allows selective enabling of debug messages per :term:`component` and
 per debug group. For example, to enable all ``debug`` and ``debug(Group)``
 messages for the ``parser`` component:
 
@@ -950,7 +950,7 @@ trace and debug events. It also provides a
 predicate that allows an object (or a category) to declare itself
 as a debug handler provider. The Logtalk ``debugger`` and  ``ports_profiler``
 tools are regular applications that are implemented using this API, which
-can also be used to implement alternative or new debugging related tools.
+can also be used to implement alternative or new debugging-related tools.
 See the API documentation for details and the source code of the ``debugger``
 and  ``ports_profiler`` tools for usage examples.
 
@@ -1017,6 +1017,6 @@ Source-level debugger
 
 A minimal source-level debugger is provided by the Logtalk for VSCode
 extension: when debugging in the integrated terminal using the ``debugger``
-tool, the current clause (at leashed unification ports) is show in the
+tool, the current clause (at leashed unification ports) is shown in the
 active editor window. The extension can also be used with VSCodium. See
 its documentation for more details.

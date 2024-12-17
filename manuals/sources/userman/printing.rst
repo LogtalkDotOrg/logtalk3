@@ -22,22 +22,22 @@ Printing messages and asking questions
 ======================================
 
 Applications, components, and libraries often print all sorts of messages.
-These include banners, logging, debugging, and computation results messages
-but also, in some cases, user interaction messages. However, the authors of
+These include banners, logging, debugging, and computation results messages.
+But also, in some cases, user interaction messages. However, the authors of
 applications, components, and libraries often cannot anticipate the context
 where their software will be used and thus decide which and when messages
 should be displayed, suppressed, or diverted. Consider the different
 components in a Logtalk application development and deployment. At the base
 level, you have the Logtalk compiler and runtime. The compiler writes
 messages related to e.g. compiling and loading files, compiling
-entities, compilation warnings and errors. The runtime may write
+entities, and compilation warnings and errors. The runtime may write
 banner messages or throw execution errors that may result in printing
-human-level messages. The development environment can be console-based
+human-level messages. The development environment can be console-based,
 or you may be using a GUI tool such as PDT. In the latter case, PDT
 needs to intercept the Logtalk compiler and runtime messages to present
 the relevant information using its GUI. Then you have all the other
 components in a typical application. For example, your own libraries and
-third-party libraries. The libraries may want to print messages on its
+third-party libraries. The libraries may want to print messages on their
 own, e.g. banners, debugging information, or logging information. As you
 assemble all your application components, you want to have the final
 word on which messages are printed, where, and when. Uncontrolled message
@@ -48,22 +48,23 @@ user interfaces.
 The solution is to decouple the calls to print a message from the actual
 printing of the output text. The same is true for calls to read user input.
 By decoupling the call to input some data from the actual read of the data,
-we can easily switch e.g. from a command-line interface to a GUI input
-dialog or even automate providing the data (e.g. when automating testing
-of user interaction).
+we can easily switch from, for example, a command-line interface to a GUI
+input dialog or even automate providing the data (e.g. when automating
+testing of the user interaction).
 
 Logtalk provides a solution based on the *structured message printing
 mechanism* that was introduced by Quintus Prolog, where it was apparently
 implemented by Dave Bowen (thanks to Richard O'Keefe for the historical
 bits). This mechanism gives the programmer full control of message printing,
 allowing it to filter, rewrite, or redirect any message. Variations of this
-mechanism can also be found in some Prolog systems including SICStus Prolog,
+mechanism can also be found in some Prolog systems, including SICStus Prolog,
 SWI-Prolog, and YAP. Based on this mechanism, Logtalk introduces an extension
 that also allows abstracting asking a user for input. Both mechanisms are
 implemented by the :ref:`logtalk <apis:logtalk/0>` built-in object and
 described in this section. The message printing mechanism is extensively
-used by the Logtalk compiler itself and by the developer tools. The question
-asking mechanism is used e.g. in the :doc:`../devtools/debugger` tool.
+used by the Logtalk compiler itself and by the developer tools. The
+question-asking mechanism is used e.g. in the :doc:`../devtools/debugger`
+tool.
 
 .. _printing_messages:
 
@@ -72,7 +73,7 @@ Printing messages
 
 The main predicate for printing a message is
 :ref:`logtalk::print_message/3 <methods_print_message_3>`.
-A simple example, using the Logtalk runtime is:
+A simple example, using the Logtalk runtime, is:
 
 .. code-block:: text
 
@@ -117,28 +118,28 @@ list of message kinds is supported by default:
 
 Using a compound term allows easy partitioning of messages of the same kind
 in different groups. Note that you can define your own alternative message
-kind identifiers, for your own components, together with suitable definitions
+kind identifiers for your own components, together with suitable definitions
 for their associated prefixes and output streams.
 
 The second argument of ``print_message/3`` represents the *component*
-defining the message being printed. Here *component* is a generic term that
-can designate e.g. a tool, a library, or some sub-system in a large application.
-In our example, the component name is ``core``, identifying the Logtalk
-compiler/runtime. This argument was introduced to provide multiple namespaces
-for message terms and thus simplify programming-in-the-large by allowing easy
-filtering of all messages from a specific component and also avoiding conflicts
-when two components happen to define the same message term (e.g. ``banner``).
-Users should choose and use a unique name for a component, which usually is
-the name of the component itself. For example, all messages from the
-:doc:`../devtools/lgtunit` tool use ``lgtunit`` for the component argument.
-The compiler and runtime are interpreted as a single component designated as
-``core``.
+defining the message being printed. In this context, *component* is a generic
+term that can designate, e.g., a tool, a library, or some sub-system in a large
+application. In our example, the component name is ``core``, identifying the
+Logtalk compiler/runtime. This argument was introduced to provide multiple
+namespaces for message terms and thus simplify programming-in-the-large by
+allowing easy filtering of all messages from a specific component and also
+avoiding conflicts when two components happen to define the same message term
+(e.g. ``banner``). Users should choose and use a unique name for a component,
+which usually is the name of the component itself. For example, all messages
+from the :doc:`../devtools/lgtunit` tool use ``lgtunit`` for the component
+argument. The compiler and runtime are interpreted as a single component
+designated as ``core``.
 
 The third argument of ``print_message/3`` is the message itself, represented
 by a term. In the above example, the message term is ``banner``. Using a
 term to represent a message instead of a string with the message text itself
 has significant advantages. Notably, it allows using a compound term for
-easy parameterization of the message text and simplifies machine-processing,
+easy parameterization of the message text and simplifies machine processing,
 localization of applications, and message interception. For example:
 
 .. code-block:: text
@@ -151,8 +152,8 @@ localization of applications, and message interception. For example:
 Message tokenization
 --------------------
 
-The use of message terms require a solution for generating the actual
-messages text. This is supported by defining grammar rules for the
+The use of message terms requires a solution for generating the actual text
+of the messages. This is supported by defining grammar rules for the
 :ref:`logtalk::message_tokens//2 <methods_message_tokens_2>` multifile
 non-terminal, which translates a message term, for a given component,
 to a list of tokens. For example:
@@ -199,7 +200,7 @@ The following tokens can be used when translating a message:
 
 The ``logtalk`` object also defines public predicates for printing a list
 of tokens, for hooking into printing an individual token, and for setting
-default output stream and message prefixes. For example, the SWI-Prolog
+default output streams and message prefixes. For example, the SWI-Prolog
 adapter file uses the print message token hook predicate to enable coloring
 of messages printed on a console.
 
@@ -262,7 +263,8 @@ to use multiple definitions of the ``message_hook/4`` predicate as the
 order of the clauses of a multiple predicate cannot be assumed in general
 (for all ``message_hook/4`` predicate definitions to run, all but the last
 one to be called must fail). Using a single *master* definition is also not
-ideal as results in strong coupling instead of a clean separation of concerns.
+ideal as it would result in strong coupling instead of a clean separation of
+concerns.
 
 The experimental :ref:`logtalk::message_prefix_file/6 <methods_message_prefix_file_6>`
 hook predicate can be used to define a message line prefix and an output file
@@ -335,7 +337,7 @@ compiler messages:
 Asking questions
 ----------------
 
-Logtalk *structured question asking* mechanism complements the message
+Logtalk *structured question-asking* mechanism complements the message
 printing mechanism. It provides an abstraction for the common task of
 asking a user a question and reading back its reply. By default, this
 mechanism writes the question, writes a prompt, and reads the answer
@@ -344,13 +346,14 @@ be intercepted, filtered, rewritten, and redirected. Two typical examples
 are using a GUI dialog for asking questions and automatically providing
 answers to specific questions.
 
-The question asking mechanism works in tandem with the message printing
+The question-asking mechanism works in tandem with the message printing
 mechanism, using it to print the question text and a prompt. It provides
 an asking predicate and a hook predicate, both declared and defined in
 the ``logtalk`` built-in object. The asking predicate,
 :ref:`logtalk::ask_question/5 <methods_ask_question_5>`,
-is used for ask a question and read the answer. Assume that we defined
-the following message tokenization and question prompt and stream:
+is used for asking a question and reading the answer. Assume that we
+defined the following message tokenization and question prompt and
+stream:
 
 ::
 
@@ -402,7 +405,7 @@ succeeds. For example:
    N = 42
    yes
 
-Practical usage examples of this mechanism can be found e.g. in the
+Practical usage examples of this mechanism can be found, e.g., in the
 ``debugger`` tool where it's used to abstract the user interaction when
 tracing a goal execution in debug mode.
 
@@ -437,8 +440,8 @@ now skip asking the user:
    N = 42
    yes
 
-In a practical case, the fixed answer would be used for followup goals
-being tested. The question answer read loop (which calls the question
+In a practical case, the fixed answer would be used for follow-up goals
+being tested. The question-answer read loop (which calls the question
 check closure) is not used when a fixed answer is provided using the
 ``logtalk::question_hook/6`` predicate thus preventing the creation
 of endless loops. For example, the following query succeeds:

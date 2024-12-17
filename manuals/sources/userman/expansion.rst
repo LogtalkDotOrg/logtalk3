@@ -33,10 +33,10 @@ which expansions will be used when compiling a file using compile and loading
 predicate options. It also allows defining a default expansion for all source
 files. It defines a concept of *hook objects* that can be used as building
 blocks to create custom and reusable *expansion workflows* with explicit and
-well defined semantics. It prevents the simple act of loading expansion rules
+well-defined semantics. It prevents the simple act of loading expansion rules
 affecting subsequent compilation of files. It prevents conflicts between groups
 of expansion rules of different origins. It avoids a set of buggy expansion
-rules from breaking other sets of expansions rules.
+rules from breaking other sets of expansion rules.
 
 
 Defining expansions
@@ -47,9 +47,9 @@ Term and goal expansions are defined using, respectively, the predicates
 are declared in the :ref:`expanding <apis:expanding/0>` built-in protocol.
 Note that, unlike Prolog systems also providing these two predicates, they
 are **not** declared as :term:`multifile predicates <multifile predicate>`
-in the protocol. This design decision is key to give the programmer full
-control of the expansion process and prevent the problems that inflict most
-Prolog system providing a term-expansion mechanism.
+in the protocol. This design decision is key for giving the programmer full
+control of the expansion process and preventing the problems inflicting most
+of the Prolog systems that provide a term-expansion mechanism.
 
 An example of an object defining expansion rules:
 
@@ -84,7 +84,7 @@ predicates. This restriction prevents inconsistent results when, for example,
 an expansion is defined for a predicate with clauses found in both an included
 file and as argument in a call to the ``create_object/4`` predicate.
 
-Clauses for the ``term_expansion/2`` predicate are called until of them
+Clauses for the ``term_expansion/2`` predicate are called until one of them
 succeeds. The returned expansion can be a single term or a list of terms
 (including the empty list). For example:
 
@@ -210,7 +210,7 @@ Term and goal expansion of a source file during its compilation is performed
 by using *hook objects*. A hook object is simply an object implementing the
 :ref:`expanding <apis:expanding/0>` built-in protocol and defining clauses
 for the term and goal expansion hook predicates. Hook objects must be compiled
-and loaded prior to be used to expand a source file.
+and loaded prior to being used to expand a source file.
 
 To compile a source file using a hook object, we can use the
 :ref:`hook <flag_hook>` compiler flag in the second argument of the
@@ -229,7 +229,7 @@ directive in the source file itself. For example:
 
    :- set_logtalk_flag(hook, hook_object).
 
-To use multiple hook objects in the same source file, simple write each
+To use multiple hook objects in the same source file, simply write each
 directive before the block of code that it should handle. For example:
 
 ::
@@ -294,7 +294,7 @@ predicate. For example:
    
    yes
 
-Note that, due to the ``set_logtalk_flag/2`` directive being local to a source,
+Note that, due to the ``set_logtalk_flag/2`` directive being local to a source
 file, using it to specify a hook object will override any defined default hook
 object or any hook object specified as a ``logtalk_compile/2`` or ``logtalk_load/2``
 predicate compiler option for compiling or loading the source file.
@@ -321,7 +321,7 @@ Logtalk also provides a :ref:`predicates_logtalk_load_context_2`
 built-in predicate that can be used to access the compilation/loading
 context when performing expansions. The :ref:`logtalk <objects_logtalk>`
 built-in object also provides a set of predicates that can be useful,
-notably when adding Logtalk support for languages extensions originally
+notably when adding Logtalk support for language extensions originally
 developed for Prolog.
 
 As an example of using the virtual terms and the ``logtalk_load_context/2``
@@ -343,8 +343,8 @@ the following hook object:
 
    :- end_object.
 
-Assuming e.g. ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and a
-``car_protocol`` protocol, we could then load them using:
+Assuming, e.g., ``my_car.pl`` and ``lease_car.pl`` files  to be wrapped and
+a ``car_protocol`` protocol, we could then load them using:
 
 .. code-block:: text
 
@@ -368,13 +368,13 @@ Default compiler expansion workflow
 
 When :ref:`compiling a source file <programming_multi_pass_compiler>`,
 the compiler will first try, by default,
-the source file specific hook object specified using a local
+the source file-specific hook object specified using a local
 ``set_logtalk_flag/2`` directive, if defined. If that expansion fails,
 it tries the hook object specified using the ``hook/1`` compiler option
 in the ``logtalk_compile/2`` or ``logtalk_load/2`` goal that compiles
 or loads the file, if defined. If that expansion fails, it tries the
 default hook object, if defined. If that expansion also fails, the
-compiler tries the Prolog dialect specific expansion rules found
+compiler tries the Prolog dialect-specific expansion rules found
 in the :term:`adapter file` (which are used to support non-standard
 Prolog features).
 
@@ -385,17 +385,17 @@ User defined expansion workflows
 Sometimes we have multiple hook objects that we need to combine and use in
 the compilation of a source file. Logtalk includes a :doc:`../libraries/hook_flows`
 library that supports two basic expansion workflows: a :ref:`pipeline <apis:hook_pipeline/1>`
-of hook objects, where the expansion results from a hook object are feed to
+of hook objects, where the expansion results from a hook object are fed to
 the next hook object in the pipeline, and a :ref:`set <apis:hook_set/1>` of
 hook objects, where expansions are tried until one of them succeeds. These
-workflows are implemented as parametric objects allowing combining them to
+workflows are implemented as parametric objects, allowing combining them to
 implement more sophisticated expansion workflows. There is also a
 :doc:`../libraries/hook_objects` library that provides convenient hook
-objects for defining custom expansion workflows. This library includes an
+objects for defining custom expansion workflows. This library includes a
 hook object that can be used to restore the default expansion workflow used
 by the compiler.
 
-For example, assuming that you want to apply the Prolog backend specific
+For example, assuming that you want to apply the Prolog backend-specific
 expansion rules defined in its adapter file, using the
 :ref:`backend_adapter_hook <apis:backend_adapter_hook/0>` library object,
 passing the resulting terms to your own expansion when compiling a source
@@ -442,14 +442,13 @@ rules that we want to use:
             [hook(hook_set([prolog_module_hook(functions), my_expansion]))]
         ).
 
-But note that Prolog module
-libraries may provide definitions of the expansion predicates that are
-not compatible with the Logtalk compiler. Specially when setting the
-hook object to ``user``, be aware of any Prolog library that is loaded,
-possibly by default or implicitly by the Prolog system, that may be
-contributing definitions of the expansion predicates. It is usually
-safer to define a specific hook object for combining multiple expansions
-in a fully controlled way.
+But note that Prolog module libraries may provide definitions of the expansion
+predicates that are not compatible with the Logtalk compiler. In particular,
+when setting the hook object to ``user``, be aware of any Prolog library that
+is loaded, possibly by default or implicitly by the Prolog system, that may be
+contributing definitions of the expansion predicates. It is usually safer to
+define a specific hook object for combining multiple expansions in a fully
+controlled way.
 
 .. note::
 
@@ -463,7 +462,7 @@ Debugging expansions
 --------------------
 
 The ``term_expansion/2`` and ``goal_expansion/2`` predicates can be
-:ref:`debugged <debugging_debugging>` as any other object predicates. Note
+:ref:`debugged <debugging_debugging>` like any other object predicates. Note
 that expansions can often be manually tested by sending
 :ref:`methods_expand_term_2` and :ref:`methods_expand_goal_2`
 messages to a hook object with the term or goal whose expansion you want to
@@ -515,7 +514,7 @@ the queries:
 
 This solution does not require compiling the ``edcg`` hook object in debug
 mode or access to its source code (e.g. to modify its expansion rules to
-emit debug messages. We could also simply use the ``user`` pseudo-object
+emit debug messages). We could also simply use the ``user`` pseudo-object
 as the monitor object:
 
 .. code-block:: text

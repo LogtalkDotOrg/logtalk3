@@ -23,7 +23,7 @@ Performance
 
 Logtalk is implemented as a *trans-compiler* to Prolog. When compiling
 predicates, it preserves in the generated Prolog code all cases of
-first-argument indexing and tail-recursion. In practice, this mean that
+first-argument indexing and tail-recursion. In practice, this means that
 if you know how to write efficient Prolog predicates, you already know
 the basics of how to write efficient Logtalk predicates.
 
@@ -47,11 +47,11 @@ Source code compilation modes
 Source code can be compiled in *optimal*, *normal*, or *debug* mode,
 depending on the :ref:`optimize <flag_optimize>` and
 :ref:`debug <flag_debug>` compiler flags. Optimal mode is used when
-deploying an application while normal and debug modes are used when
+deploying an application, while normal and debug modes are used when
 developing an application. Compiling code in optimal mode enables
-several optimizations, notably use of :term:`static binding` whenever
+several optimizations, notably the use of :term:`static binding` whenever
 enough information is available at compile-time. In debug mode, most
-optimizations are turned off and the code is instrumented to generate
+optimizations are turned off, and the code is instrumented to generate
 :ref:`debug events <debugging_events>` that enable developer tools such
 as the :doc:`command-line debugger <../devtools/debugger>` and the
 :doc:`ports profiler <../devtools/ports_profiler>`.
@@ -60,7 +60,7 @@ Local predicate calls
 ---------------------
 
 Local calls to object (or category) predicates have zero overhead in
-terms of number of inferences, as expected, compared with local Prolog
+terms of the number of inferences, as expected, compared with local Prolog
 calls.
 
 Calls to imported or inherited predicates
@@ -98,18 +98,18 @@ flag turned on. Dynamic binding numbers are after the first call (i.e.
 after the generalization of the query is cached). All numbers with the
 :ref:`events <flag_events>` flag set to ``deny`` (setting this flag to
 ``allow`` adds an overhead of +5 inferences to the results above; note
-that this flag can be defined in a per-object basis as needed instead
+that this flag can be defined on a per-object basis as needed instead
 of globally and thus minimizing the performance impact).
 
 The dynamic binding caches assume the used :term:`backend Prolog compiler`
 does indexing of dynamic predicates. This is a common feature of modern
-Prolog systems but the actual details vary from system to system and may
+Prolog systems, but the actual details vary from system to system and may
 have an impact on dynamic binding performance.
 
 Note that messages to *self* (:ref:`control_send_to_self_1` calls) and
 messages to an object (:ref:`control_send_to_object_2` calls) from the
-top-level interpreter always use dynamic binding as the object that
-receives the message is only know at runtime.
+top-level interpreter always use dynamic binding, as the object that
+receives the message is only known at runtime.
 
 Messages sent from Prolog modules may use static binding depending on the
 used backend Prolog compiler native support for goal-expansion. Consult
@@ -123,7 +123,7 @@ the Prolog compiler documentation and adapter file notes for details.
    bookkeeping operations (e.g. keeping track of goal history or applying
    goal-expansion) that may influence the inference counting, the Logtalk
    runtime code for a ``(::)/2`` top-level goal is necessarily different
-   from the code generated for a ``(::)/2`` goal from a compiled object as
+   from the code generated for a ``(::)/2`` goal from a compiled object, as
    it requires *runtime* compilation of the goal into the same low-level
    message-sending primitive (assuming dynamic-binding is also required
    for the compiled object goal).
@@ -178,8 +178,8 @@ such as :ref:`inheritance <inheritance_inheritance>` and
 proportional to the number of entities, entity relations, and predicate
 declarations and definitions. When the :ref:`source_data <flag_source_data>`
 is turned on (the default when *developing* an application), the generated
-code also includes additional data about the source code such as entity and
-predicates positions in a source file. This data enables advanced developer
+code also includes additional data about the source code, such as entity and
+predicate positions in a source file. This data enables advanced developer
 tool functionality. But it is usually not required when *deploying* an
 application. Thus, turning this flag off is a common setting for minimizing
 an application footprint.
@@ -207,13 +207,13 @@ These debug events can be intercepted by defined clauses for the
 :ref:`logtalk::trace_event/2 <logtalk/0::trace_event/2>`
 and :ref:`logtalk::debug_handler/3 <logtalk/0::debug_handler/3>` multifile
 predicates. With no application (such as a debugger or a port profiler)
-loaded defining clauses for these predicates, each goal have an overhead of
+loaded defining clauses for these predicates, each goal has an overhead of
 four extra inferences due to the runtime checking for a definition of the
 hook predicates and a meta-call of the user goal. The clause head unification
-events results in one or more inferences per goal (depending on the number of
-clauses whose head unify with the goal and backtracking). In practice, this
+events result in one or more inferences per goal (depending on the number of
+clauses whose head unifies with the goal and backtracking). In practice, this
 overhead translates to code compiled in debug mode running typically ~2x to
-~7x slower than code compiled in normal or optimized mode depending on the
+~7x slower than code compiled in normal or optimized mode, depending on the
 application (the exact overhead is proportional to the number of passes on
 the call and unification ports; deterministic code often results in a
 relatively larger overhead when compared with code performing significant
@@ -223,7 +223,7 @@ backtracking).
 Other considerations
 --------------------
 
-One aspect of performance, that affects both Logtalk and Prolog code, is
+One aspect of performance that affects both Logtalk and Prolog code is
 the characteristics of the Prolog VM. The Logtalk distribution includes
 two examples,
 `bench <https://github.com/LogtalkDotOrg/logtalk3/tree/master/examples/bench>`_
@@ -233,5 +233,5 @@ to help evaluate performance with specific backend Prolog systems. A
 table with benchmark `results <https://logtalk.org/performance.html>`_ for
 a subset of the supported systems is also available at the Logtalk
 website. But note that multiple factors affect the performance of an
-application and the benchmark examples and their results only provide
+application. The benchmark examples and their results only provide
 a partial assessment.

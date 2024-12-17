@@ -38,7 +38,7 @@ several final formats (such as HTML and PDF).
 Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
 directives complement other directives that also provide important
-documentation information such as the :ref:`directives_mode_2` and
+documentation information, such as the :ref:`directives_mode_2` and
 :ref:`directives_meta_predicate_1` directives.
 
 .. _documenting_entity:
@@ -68,7 +68,7 @@ Logtalk tools:
    ``remarks`` keys.
 ``author``
    Entity author(s) (an atom or a compound term ``{entity}`` where
-   ``entity`` is the name of an XML entity in a user defined
+   ``entity`` is the name of an XML entity in a user-defined
    ``custom.ent`` file).
 ``version``
    Version number (a ``Major:Minor:Patch`` compound term) Following the
@@ -87,12 +87,12 @@ Logtalk tools:
 ``copyright``
    Copyright notice for the entity source code (an atom or a compound
    term ``{entity}`` where ``entity`` is the name of an XML entity
-   defined in a user defined ``custom.ent`` file).
+   defined in a user-defined ``custom.ent`` file).
 ``license``
    License terms for the entity source code; usually, just the license
    name (an atom or a compound term ``{entity}`` where ``entity`` is the
-   name of an XML entity in a user defined ``custom.ent`` file). License
-   names should whenever possible be a license identifier as specified
+   name of an XML entity in a user-defined ``custom.ent`` file). License
+   names should, whenever possible, be a license identifier as specified
    in the `SPDX standard <https://spdx.org/licenses/>`_.
 ``remarks``
    List of general remarks about the entity using ``Topic-Text`` pairs
@@ -114,7 +114,7 @@ For example:
        diagram is 'UML Class Diagram #312'
    ]).
 
-Use only the keywords that make sense for your application and remember that
+Use only the keywords that make sense for your application, and remember that
 you are free to invent your own keywords. All key-value pairs can be retrieved
 programmatically using the :ref:`reflection API <reflection_reflection>` and
 are visible to the :doc:`../devtools/lgtdoc` tool (which includes them in the
@@ -137,7 +137,7 @@ the :ref:`directives_info_2` directive:
    ]).
 
 The first argument can also a grammar rule non-terminal indicator,
-``Name//Arity``. Keys should be atoms and values should be bound terms.
+``Name//Arity``. Keys should be atoms. Values should be bound terms.
 The following keys are predefined and may be processed specially by
 Logtalk tools:
 
@@ -163,17 +163,17 @@ Logtalk tools:
    are ``container``, ``descendants``, ``instances``, ``classes``,
    ``subclasses``, and ``any``.
 ``redefinition``
-   Describes if predicate is expected to be redefined and, if so, in
-   what way. Some possible values are ``never``, ``free``,
+   Describes if a predicate is expected to be redefined and, if so,
+   in what way. Some possible values are ``never``, ``free``,
    ``specialize``, ``call_super_first``, ``call_super_last``.
 ``exceptions``
-   List of possible exceptions throw by the predicate using
+   List of possible exceptions thrown by the predicate using
    ``Description-Exception`` pairs. The description must be an
    atom. The exception term must be a ground term.
 ``examples``
    List of typical predicate call examples using the format
    ``Description-Goal-Bindings``. The description must be an atom
-   with the goal sharing variables with the bindings. The
+   with the goal term sharing variables with the bindings. The
    variable bindings term uses the format ``{Variable = Term, ...}``.
    When there are no variable bindings, the success or failure of
    the predicate call should be represented by the terms ``{true}``
@@ -269,8 +269,8 @@ followed by type errors, and then domain errors. These may then be
 followed by permission, existence, evaluation, representation, or
 resource errors.
 
-For each exception, use of *controlled language* as found e.g. in the ISO
-Prolog Core standard and this Handbook is advised. Some examples:
+For each exception, use of *controlled language* as found, e.g., in the
+ISO Prolog Core standard and this Handbook is advised. Some examples:
 
 Instantiation error when one or more arguments cannot be a variable
    ``Argument`` is a variable
@@ -319,16 +319,16 @@ parametric object will result in ``trace_0.xml`` and ``sort_1.xml`` XML
 files.
 
 Each entity XML file contains references to two other files, an XML
-specification file and a XSLT style-sheet file. The XML specification
+specification file and a XSLT stylesheet file. The XML specification
 file can be either a DTD file (``logtalk_entity.dtd``) or an XML Scheme
-file (``logtalk_entity.xsd``). The XSLT style-sheet file is responsible
+file (``logtalk_entity.xsd``). The XSLT stylesheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
-The default names for the XML specification file and the XSL style-sheet
+The default names for the XML specification file and the XSL stylesheet
 file are defined by the :doc:`../devtools/lgtdoc` tool but can be
 overridden by passing a list of options to the tool predicates. The
 ``lgtdoc/xml`` sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
-style-sheet files and sample scripts for converting XML documenting files
+stylesheet files and sample scripts for converting XML documenting files
 to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). For
 example, assume that you want to generate the API documentation for the
 ``types`` library:
@@ -388,7 +388,7 @@ starting point for generating the documentation of your Logtalk applications.
 
 The Logtalk DTD file, ``logtalk_entity.dtd``, contains a reference to a
 user-customizable file, ``custom.ent``, which declares XML entities for
-source code author names, license terms, and copyright string. After
+source code author names, license terms, and copyright strings. After
 editing the ``custom.ent`` file to reflect your personal data, you may
 use the XML entities on ``info/1`` documenting directives. For example,
 assuming that the XML entities are named *author*, *license*, and
@@ -447,9 +447,9 @@ Diagrams
 The :doc:`../devtools/diagrams` tool supports a wide range of diagrams that
 can also help in documenting an application. The generated diagrams can
 include URL links to both source code and API documentation. They can also
-be linked, connecting for example high level diagrams to detail diagrams.
+be linked, connecting, for example, high level diagrams to detail diagrams.
 These features allow diagrams to be an effective solution for navigating and
 understanding the structure and implementation of an application. This tool
 uses the same :ref:`reflection API <reflection_reflection>` as the ``lgtdoc``
-tool and thus have access to the same source data. See the tool documentation
+tool and thus has access to the same source data. See the tool documentation
 for details. 

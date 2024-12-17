@@ -26,7 +26,7 @@ code and Prolog module code to Logtalk. Detailed instructions are provided for
 encapsulating plain Prolog code in objects, converting Prolog modules into
 objects, and compiling and reusing Prolog modules as objects from inside
 Logtalk. An interesting application of the techniques described in this
-section is a solution for running a Prolog application which uses modules
+section is a solution for running a Prolog application that uses modules
 on a Prolog compiler with no module system. The :doc:`../devtools/wrapper`
 tool can be used to help in migrating Prolog code.
 
@@ -39,9 +39,9 @@ Logtalk source files may contain plain Prolog code intermixed with
 Logtalk code. The Logtalk compiler simply copies the plain Prolog code
 as-is to the generated Prolog file. With Prolog modules, it is assumed
 that the module code starts with a ``module/1-2`` directive and ends at
-the end of the file. There is no module ending directive which would
-allow us to define more than one module per file. In fact, most if not
-all Prolog module systems always define a single module per file. Some
+the end of the file. There is no module ending directive that would
+allow us to define more than one module per file. In fact, most, if not
+all, Prolog module systems always define a single module per file. Some
 of them mandate that the ``module/1-2`` directive be the first term in
 a source file. As such, when the Logtalk compiler finds a ``module/1-2``
 directive, it assumes that all code that follows until the end of the
@@ -76,7 +76,7 @@ definitions, is to use the :ref:`directives_uses_2` directive. If your
 Prolog compiler supports cross-referencing tools, you may use them to
 help you make sure that all calls to predicates on other source
 files/objects are listed in the :ref:`directives_uses_2` directives.
-The Logtalk ``wrapper`` tool can also help in detecting cross predicate
+The Logtalk ``wrapper`` tool can also help in detecting cross-predicate
 calls. Compiling the resulting objects with the Logtalk
 :ref:`unknown_predicates <flag_unknown_predicates>` and
 :ref:`portability <flag_portability>` flags set to ``warning`` will
@@ -92,7 +92,7 @@ Prolog *multifile* predicates are used when clauses for the same
 predicate are spread among several source files. When encapsulating
 plain Prolog code that uses multifile predicates, it's often the case that
 the clauses of the multifile predicates get spread between different
-objects and categories but conversion is straight-forward. In the
+objects and categories, but conversion is straight-forward. In the
 Logtalk object (or category) holding the multifile predicate
 :term:`primary declaration <primary predicate declaration>`, add a
 :ref:`predicate scope directive <predicates_scope>` and a
@@ -130,9 +130,9 @@ We can define a parametric object with ``city/4`` as its identifier:
 
    :- end_object.
 
-This solution is preferred when the multifile predicates are used to
-represent large tables of data. See the section on :ref:`objects_parametric`
-for more details.
+This solution is preferred when the multifile predicates are used
+to represent large tables of data. See the section on
+:ref:`parametric objects <objects_parametric>` for more details.
 
 .. _migration_converting:
 
@@ -142,11 +142,11 @@ Converting Prolog modules into objects
 Converting Prolog modules into objects may allow an application to run
 on a wider range of Prolog compilers, overcoming portability problems.
 Some Prolog compilers don't support a module system. Among those Prolog
-compilers which support a module system, the lack of standardization
+compilers that support a module system, the lack of standardization
 leads to several issues, notably with semantics, operators, and
 meta-predicates. In addition, the conversion allows you to take
-advantage of Logtalk more powerful abstraction and reuse mechanisms such
-as separation between interface from implementation, inheritance,
+advantage of Logtalk more powerful abstraction and reuse mechanisms, such
+as separation between interface and implementation, inheritance,
 parametric objects, and categories. It also allows you to take full
 advantage of Logtalk developer tools for improved productivity.
 
@@ -176,7 +176,7 @@ section). Assuming that this is the case, apply the following steps:
    meta-argument indicator, ``:``, with the Logtalk meta-argument indicator
    ``0`` for goal meta-arguments. For closure meta-arguments, use an integer
    denoting the number of additional arguments that will be appended to
-   construct a goal. Arguments which are not meta-arguments are represented by
+   construct a goal. Arguments that are not meta-arguments are represented by
    the ``*`` character. Do not use argument mode indicators such as ``?``, or
    ``+``, or ``-`` as Logtalk supports :ref:`mode directives <predicates_mode>`.
 #. Convert any explicit qualified calls to module predicates to messages
@@ -190,7 +190,7 @@ section). Assuming that this is the case, apply the following steps:
    the advantages of not requiring changes to the code making the predicate
    calls and of better visibility for the documenting and diagramming tools.
 #. If your module uses the database built-in predicates to implement
-   module local mutable state using dynamic predicates, add both
+   module-local mutable state using dynamic predicates, add both
    :ref:`directives_private_1` and
    :ref:`directives_dynamic_1` directives
    for each dynamic predicate.
@@ -199,7 +199,7 @@ section). Assuming that this is the case, apply the following steps:
    ``multifile/1`` directives and in the clause heads for all modules
    defining the multifile predicates that are also being converted into
    objects; if that is not the case, just keep the ``multifile/1``
-   directives and the clause heads as-is).
+   directives and the clause heads as-is.
 #. Compile the resulting objects with the Logtalk
    :ref:`unknown_predicates <flag_unknown_predicates>`, and
    :ref:`portability <flag_portability>` flags set to ``warning``
@@ -221,19 +221,19 @@ changes to the file name extensions.
 Compiling Prolog modules as objects
 -----------------------------------
 
-A possible alternative to port Prolog code to Logtalk is to compile the Prolog
+A possible alternative to porting Prolog code to Logtalk is to compile the Prolog
 source files using the ``logtalk_load/1-2`` and ``logtalk_compile/1-2``
 predicates. The Logtalk compiler provides partial support for compiling Prolog
 modules as Logtalk objects. This support may allow using modules from a backend
-Prolog system in a different backend Prolog system although its main purpose is
+Prolog system in a different backend Prolog system, although its main purpose is
 to help in porting existing Prolog code to Logtalk in order to benefit from its
 extended language features and its developer tools. Why partial support?
-Although there is a ISO Prolog standard for modules, it is (rightfully)
+Although there is an ISO Prolog standard for modules, it is (rightfully)
 ignored by most implementers and vendors (due to its flaws and deviation
 from common practice). In addition, there is no de facto standard for module
 systems, despite otherwise frequent misleading claims. Key system differences
 include the set of implemented module directives, the directive semantics, the
-handling of operators, the locality of flags, and on the integration of
+handling of operators, the locality of flags, and the integration of
 term-expansion mechanisms (when provided). Another potential issue is that,
 when compiling modules as objects, Logtalk assumes that any referenced module
 (e.g. using ``use_module/1-2`` directives) is also being compiled as an
@@ -242,7 +242,7 @@ message-sending goals will still work for normal predicates but will not
 work for meta-predicates called using implicit module qualification. The
 reason is that, unlike in Logtalk, calls to implicitly and explicitly
 qualified module meta-predicates have different semantics. Follows a
-discussion of other limitations of this approach that you should be aware.
+discussion of other limitations of this approach that you should be aware of.
 
 .. _migration_compatibility:
 
@@ -304,7 +304,7 @@ Currently, Logtalk supports the following module directives:
 
 A common issue when compiling modules as objects is the use of the atoms
 ``dynamic``, ``discontiguous``, and ``multifile`` as operators in
-directives. For better portability avoid this usage. For example, write:
+directives. For better portability, avoid this usage. For example, write:
 
 ::
 
@@ -323,7 +323,7 @@ compiler supports detection of missing directives (by setting its
 
 When compiling modules as objects, you probably don't need event support
 turned on. You may use the :ref:`events <flag_events>` compiler flag to
-``deny`` with the Logtalk compiling and loading built-in methods for a
+``deny`` in the Logtalk compiling and loading built-in methods for a
 small performance gain for the compiled code.
 
 .. _migration_unsupported_module_directives:
@@ -333,7 +333,7 @@ Unsupported module directives
 
 The ``reexport/1`` and ``use_module/1`` directives are not directly
 supported by the Logtalk compiler. But most Prolog adapter files provide
-support for compiling these directives using Logtalk first stage of
+support for compiling these directives using Logtalk's first stage of
 its :ref:`term-expansion mechanism <expansion_expansion>`. Nevertheless,
 these directives can be converted, respectively, into a sequence of
 ``:- use_module/2`` and ``export/1`` directives and ``use_module/2``
@@ -358,7 +358,7 @@ Although Logtalk supports
 semantics are different from similar mechanisms found in some Prolog
 compilers. In particular, Logtalk does not support defining term and
 goal expansions clauses in a source file for expanding the source file
-itself. Logtalk forces a clean separation between expansions clauses and
+itself. Logtalk forces a clean separation between expansion clauses and
 the source files that will be subject to source-to-source expansions by
 using :term:`hook objects <hook object>`. But hook objects also provide
 a working solution here when the expansion code is separated from the
@@ -366,8 +366,8 @@ code to be expanded. Logtalk supports using a module as a hook object
 as long as its name doesn't coincide with the name of an object and
 that the module uses ``term_expansion/2`` and ``goal_expansion/2``
 predicates. Assuming that's the case, before attempting to compile
-the modules as objects, set the default hook object is to the module
-containing the expansion code. For example, if the expansions stored
+the modules as objects, set the default hook object to the module
+containing the expansion code. For example, if the expansions are stored
 in a ``system`` module:
 
 .. code-block:: text
@@ -375,7 +375,7 @@ in a ``system`` module:
    | ?- set_logtalk_flag(hook, system).
    ...
 
-This, however, may not be enough as expansions may be stored in multiple
+This, however, may not be enough, as expansions may be stored in multiple
 modules. A common example is to use a module named ``prolog`` for system
 expansions and to store the user-defined expansions in ``user``. The Logtalk
 library provides a solution for these scenarios. Using the ``hook_flows``
@@ -391,7 +391,7 @@ assuming expansions stored on both ``user`` and ``system`` modules:
    ...
 
 After these queries, we can try to compile the modules and look for
-other porting or portability issues. A well know issue is Prolog module
+other porting or portability issues. A well-know issue is Prolog module
 term-expansions calling predicates such as ``prolog_load_context/2``,
 which will always fail when it's the Logtalk compiler instead of the
 Prolog compiler loading a source file. In some of these cases, it may
@@ -404,7 +404,7 @@ File search paths
 ~~~~~~~~~~~~~~~~~
 
 Some Prolog systems provide a mechanism for defining file search paths
-(this mechanism works differently from Logtalk own suport for defining
+(this mechanism works differently from Logtalk own support for defining
 library path aliases). When porting Prolog code that defines file search
 paths, e.g. for finding module libraries, it often helps to load the
 pristine Prolog application before attempting to compile its source files
@@ -418,7 +418,7 @@ use file directives such as ``use_module/2``.
 Dealing with proprietary Prolog directives and predicates
 ---------------------------------------------------------
 
-Most Prolog compilers define proprietary, non-standard, directives and
+Most Prolog compilers define proprietary, non-standard directives and
 predicates that may be used in both plain code and module code.
 Non-standard Prolog built-in predicates are usually not problematic, as
 Logtalk is usually able to identify and compile them correctly (but see
@@ -427,7 +427,7 @@ Logtalk will generate compilation errors on source files containing
 proprietary directives unless you first specify how the directives
 should be handled. Several actions are possible on a per-directive
 basis: ignoring the directive (i.e. do not copy the directive, although
-a goal can be proved as a consequence), rewriting and copy the directive
+a goal can be proved as a consequence), rewriting and copying the directive
 to the generated Prolog files, or rewriting and recompiling the
 resulting directive. To specify these actions, the adapter files contain
 clauses for the internal ``'$lgt_prolog_term_expansion'/2`` predicate.
@@ -451,7 +451,7 @@ predicate:
        atom_codes(Atom, String).
 
 This Logtalk feature can be used to allow compilation of legacy Prolog
-code without the need of changing the sources. When used, is advisable
+code without the need of changing the sources. When used, it is advisable
 to set the :ref:`portability <flag_portability>` compiler flag to
 ``warning`` in order to more easily identify source files that are
 likely non-portable across Prolog compilers.
@@ -480,7 +480,7 @@ Calling Prolog module predicates
 Prolog module predicates can be called from within objects or categories
 by simply using explicit module qualification, i.e. by writing
 ``Module:Goal`` or ``Goal@Module`` (depending on the module system).
-Logtalk also supports the use of ``use_module/2`` directives in object
+Logtalk also supports the use of ``use_module/2`` directives in objects
 and categories (with the restriction that the first argument of the
 directive must be the actual module name and not the module file name or
 the module file path). In this case, these directives are parsed in a
@@ -497,7 +497,7 @@ standardization of these directives, whose first argument can be a
 module name, a straight file name, or a file name using some kind of
 library notation, depending on the :term:`backend Prolog compiler`. Worse,
 modules are sometimes defined in files with names different from the
-module names requiring finding, opening, and reading the file in order
+module names, requiring finding, opening, and reading the file in order
 to find the actual module name.
 
 Logtalk allows you to send a message to a module in order to call one of
@@ -505,14 +505,14 @@ its predicates. This is usually not advised as it implies a performance
 penalty when compared to just using the ``Module:Call`` notation.
 Moreover, this works only if there is no object with the same name as
 the module you are targeting. This feature is necessary, however, in
-order to properly support compilation of modules containing
+order to properly support the compilation of modules containing
 ``use_module/2`` directives as objects. If the modules specified in the
 ``use_module/2`` directives are not compiled as objects but are instead
 loaded as-is by Prolog, the exported predicates would need to be called
 using the ``Module:Call`` notation but the converted module will be
 calling them through message-sending. Thus, this feature ensures that,
 on a module compiled as an object, any predicate calling other module
-predicates will work as expected either these other modules are loaded
+predicates will work as expected, either these other modules are loaded
 as-is or also compiled as objects.
 
 For more details, see the :ref:`predicates_prolog` section.
@@ -528,15 +528,15 @@ load any required libraries and the application source files. In contrast,
 Prolog applications often either scatter loading of source files from multiple
 files or use implicit loading of source files via ``use_module/1-2``
 directives. Due to this frequent ad-hoc approach, it's common to find Prolog
-applications with duplicated loading directives and are loading order ignores
+applications with duplicated loading directives, and where loading order ignores
 the dependencies between source files. These issues are easily exposed by the
 Logtalk linter when compiling Prolog files as Logtalk files. Also common are
 Prolog files with multiple circular dependencies. While this should not
 affect the *semantics* of the ported code, it may cause some performance
-penalties as it prevents the Logtalk compiler of optimizing the message
+penalties as it prevents the Logtalk compiler from optimizing the message
 sending goals using static-binding. It also makes the application architecture
 more difficult to understand. The definition of explicit loader files
-provides a good opportunity of sorting out loading order and circular
+provides a good opportunity for sorting out loading order and circular
 dependencies, with the linter warnings providing hints for possible code
 refactoring to eliminate these issues. The :doc:`../devtools/diagrams` tool
 supports directory and file loading and dependency diagrams that are also

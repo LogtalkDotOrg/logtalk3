@@ -177,7 +177,7 @@ loaded at the top-level interpreter by typing:</p>
 <p>The <a class="reference internal" href="../devtools/debugger.html"><span class="doc">debugger</span></a> tool includes the debugging features found
 in traditional Prolog debuggers. There are some differences, however, between
 the usual implementation of Prolog debuggers and the current implementation
-of the Logtalk debugger that you should be aware. First, unlike most Prolog
+of the Logtalk debugger that you should be aware of. First, unlike most Prolog
 debuggers, the Logtalk debugger is not a built-in feature but a regular
 Logtalk application using documented debugging hook predicates. This
 translates to a different, although similar, set of debugging features
@@ -186,7 +186,7 @@ debugging is only possible for entities compiled in debug mode. When
 compiling an entity in debug mode, Logtalk decorates clauses with source
 information to allow tracing of the goal execution. Third, the tool
 provides several types of breakpoints (for pausing and interacting with
-the debugger) and also log points while most Prolog systems are limited
+the debugger) and also log points, while most Prolog systems are limited
 to traditional predicate spy points.</p>
 <section id="compiling-source-files-in-debug-mode">
 <span id="debugging-debug-mode"></span><h2>Compiling source files in debug mode<a class="headerlink" href="#compiling-source-files-in-debug-mode" title="Link to this heading"></a></h2>
@@ -206,7 +206,7 @@ write:</p>
 <p>The <a class="reference internal" href="../refman/predicates/logtalk_make_1.html#predicates-logtalk-make-1"><span class="std std-ref">logtalk_make/1</span></a> built-in predicate can also be used to
 recompile all loaded files (that were compiled without using explicit values
 for the <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> and <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> compiler
-flags in a <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> call or in a <a class="reference internal" href="../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a> file, if used)
+flags in a <code class="docutils literal notranslate"><span class="pre">logtalk_load/2</span></code> call or in a <a class="reference internal" href="../glossary.html#term-loader-file"><span class="xref std std-term">loader file</span></a>, if used)
 in debug mode:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- logtalk_make(debug).
 </pre></div>
@@ -332,7 +332,7 @@ deselects the <code class="docutils literal notranslate"><span class="pre">debug
 pauses at a leashed port for user interaction:</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt>Predicate breakpoints</dt><dd><p>Traditional Prolog spy points defined using a predicate (or a non-terminal)
+<dt>Predicate breakpoints</dt><dd><p>Traditional Prolog spy points are defined using a predicate (or a non-terminal)
 indicator.</p>
 </dd>
 </dl>
@@ -400,7 +400,7 @@ conditional breakpoint, triggered breakpoint, or log point for the same
 clause.</p>
 <p>Unconditional clause and predicate breakpoints can be removed by
 using the debugger <code class="docutils literal notranslate"><span class="pre">nospy/1</span></code> predicate. The argument can also be a list
-of breakpoints or a non-instantiated variable in which case all breakpoints
+of breakpoints or a non-instantiated variable, in which case all breakpoints
 will be removed. For example:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::nospy(_).
 
@@ -485,10 +485,10 @@ a goal:</p>
 </pre></div>
 </div>
 <p>The debugger pauses for user interaction whenever the breakpoint goal and
-execution context subsumes the goal currently being executed and its
+execution context subsume the goal currently being executed and its
 execution context. The user may establish any number of context breakpoints
 as necessary. For example, in order to call the debugger whenever a
-predicate defined on an object named <code class="docutils literal notranslate"><span class="pre">foo</span></code> is called we may define
+predicate defined on an object named <code class="docutils literal notranslate"><span class="pre">foo</span></code> is called, we may define
 the following context breakpoint:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::spy(_, foo, _, _).
 
@@ -530,15 +530,15 @@ to its default settings and delete all defined breakpoints and log points.</p>
 </section>
 <section id="defining-log-points">
 <h2>Defining log points<a class="headerlink" href="#defining-log-points" title="Link to this heading"></a></h2>
-<p>Logtalk log points are similar to breakpoints and thus the line number must
+<p>Logtalk log points are similar to breakpoints. Therefore, the line number must
 correspond to the first line of an entity clause. When the debugger reaches
 a log point, it prints a log message and continues without pausing execution
 for reading a port command. When the log message is an empty atom, the default
 port output message is printed. When the log message starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code>
-character, the default port output message is printed followed by the log
+character, the default port output message is printed, followed by the log
 message. In these two cases, the debugger prints a <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> character at the
 beginning of the line for easy recognition of log points output. When the log
-message is neither empty or starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the log message is
+message is neither empty nor starts with a <code class="docutils literal notranslate"><span class="pre">%</span></code> character, the log message is
 printed instead of the default port output message. In this case, the message
 can contain <code class="docutils literal notranslate"><span class="pre">$KEYWORD</span></code> placeholders that are expanded at runtime. The valid
 keywords are:</p>
@@ -570,7 +570,7 @@ yes
 yes
 </pre></div>
 </div>
-<p>Predicates <code class="docutils literal notranslate"><span class="pre">logging/3</span></code> and <code class="docutils literal notranslate"><span class="pre">nolog/3</span></code> can be used to, respectively, query
+<p>The <code class="docutils literal notranslate"><span class="pre">logging/3</span></code> and <code class="docutils literal notranslate"><span class="pre">nolog/3</span></code> predicate can be used to, respectively, query
 and remove log points. There’s also a <code class="docutils literal notranslate"><span class="pre">nologall/0</span></code> predicate that removes
 all log points.</p>
 <p>Note that setting a log point will remove any existing clause breakpoint for
@@ -585,7 +585,7 @@ mode. To start the debugger in trace mode, write:</p>
 yes
 </pre></div>
 </div>
-<p>Next, type the query to be debugged. For examples, using the <code class="docutils literal notranslate"><span class="pre">family</span></code>
+<p>Next, type the query to be debugged. For example, using the <code class="docutils literal notranslate"><span class="pre">family</span></code>
 example in the Logtalk distribution compiled for debugging:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- addams::sister(Sister, Sibling).
      Call: (1) sister(_1082,_1104) ?
@@ -601,8 +601,8 @@ example in the Logtalk distribution compiled for debugging:</p>
 <p>While tracing, the debugger will pause for user input at each leashed port,
 printing an informative message. Each trace line starts with the port,
 followed by the goal invocation number, followed by the goal. The invocation
-numbers are unique and allows us to correlate the ports used for a goal.
-In the output above, you can see for example that the goal <code class="docutils literal notranslate"><span class="pre">::female(_1082)</span></code>
+numbers are unique and allow us to correlate the ports used for a goal.
+In the output above, you can see, for example, that the goal <code class="docutils literal notranslate"><span class="pre">::female(_1082)</span></code>
 succeeds with the answer <code class="docutils literal notranslate"><span class="pre">::female(morticia)</span></code>. The debugger also provides
 determinism information by prefixing the <code class="docutils literal notranslate"><span class="pre">exit</span></code> port with a <code class="docutils literal notranslate"><span class="pre">*</span></code> character
 when a call succeeds with choice-points pending, thus indicating that there
@@ -635,8 +635,8 @@ yes
 <section id="debugging-using-breakpoints">
 <span id="debugging-debug"></span><h2>Debugging using breakpoints<a class="headerlink" href="#debugging-using-breakpoints" title="Link to this heading"></a></h2>
 <p>Tracing a program execution may generate large amounts of debugging data.
-Debugging using breakpoints allows the user to concentrate in specific
-points of the code. To start a debugging session using breakpoints points,
+Debugging using breakpoints allows the user to concentrate on specific
+points of the code. To start a debugging session using breakpoints,
 write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- debugger::debug.
 
@@ -656,7 +656,7 @@ yes
 </pre></div>
 </div>
 <p>Note that stopping the debugger does not remove any defined breakpoints or
-and log points.</p>
+log points.</p>
 </section>
 <section id="debugging-commands">
 <span id="id1"></span><h2>Debugging commands<a class="headerlink" href="#debugging-commands" title="Link to this heading"></a></h2>
@@ -875,12 +875,12 @@ while the value is printed as passed to the <code class="docutils literal notran
 <dt><code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code></dt><dd><p>By default, the message is printed as passed to the <code class="docutils literal notranslate"><span class="pre">format/2</span></code>
 predicate.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">List</span></code></dt><dd><p>By default, the list items are printed indented one per line. The
+<dt><code class="docutils literal notranslate"><span class="pre">List</span></code></dt><dd><p>By default, the list items are printed indented, one per line. The
 items are preceded by a dash and can be <code class="docutils literal notranslate"><span class="pre">&#64;Message</span></code>, <code class="docutils literal notranslate"><span class="pre">Key-Value</span></code>,
 or <code class="docutils literal notranslate"><span class="pre">Format+Arguments</span></code> messages. If that is not the case, the item
 is printed as passed to the <code class="docutils literal notranslate"><span class="pre">writeq/1</span></code> predicate.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">Title::List</span></code></dt><dd><p>By default, the title is printed followed by a newline and the
+<dt><code class="docutils literal notranslate"><span class="pre">Title::List</span></code></dt><dd><p>By default, the title is printed, followed by a newline and the
 indented list items, one per line. The items are printed as in
 the <code class="docutils literal notranslate"><span class="pre">List</span></code> meta message.</p>
 </dd>
@@ -949,7 +949,7 @@ logtalk<span class="o">::</span>message_prefix_stream(debug, core, <span class="
 <p>By default, all debug messages are either printed or skipped, depending on the
 <a class="reference internal" href="programming.html#flag-debug"><span class="std std-ref">debug</span></a> and <a class="reference internal" href="programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags. When the
 code is not compiled in optimal mode, the <a class="reference internal" href="../devtools/debug_messages.html"><span class="doc">debug_messages</span></a>
-tool allows selectively enabling of debug messages per <a class="reference internal" href="../glossary.html#term-component"><span class="xref std std-term">component</span></a> and
+tool allows selective enabling of debug messages per <a class="reference internal" href="../glossary.html#term-component"><span class="xref std std-term">component</span></a> and
 per debug group. For example, to enable all <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">debug(Group)</span></code>
 messages for the <code class="docutils literal notranslate"><span class="pre">parser</span></code> component:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>% upon loading the tool, all messages are disabled by default:
@@ -1005,7 +1005,7 @@ trace and debug events. It also provides a
 predicate that allows an object (or a category) to declare itself
 as a debug handler provider. The Logtalk <code class="docutils literal notranslate"><span class="pre">debugger</span></code> and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code>
 tools are regular applications that are implemented using this API, which
-can also be used to implement alternative or new debugging related tools.
+can also be used to implement alternative or new debugging-related tools.
 See the API documentation for details and the source code of the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
 and  <code class="docutils literal notranslate"><span class="pre">ports_profiler</span></code> tools for usage examples.</p>
 <p>To define a new debug handler provider, add (to an object or category) clauses
@@ -1063,7 +1063,7 @@ logtalk<span class="o">::</span>trace_event(rule(<span class="nv">Entity</span>,
 <span id="debugging-source-level-debugger"></span><h2>Source-level debugger<a class="headerlink" href="#source-level-debugger" title="Link to this heading"></a></h2>
 <p>A minimal source-level debugger is provided by the Logtalk for VSCode
 extension: when debugging in the integrated terminal using the <code class="docutils literal notranslate"><span class="pre">debugger</span></code>
-tool, the current clause (at leashed unification ports) is show in the
+tool, the current clause (at leashed unification ports) is shown in the
 active editor window. The extension can also be used with VSCodium. See
 its documentation for more details.</p>
 </section>

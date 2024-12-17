@@ -28,7 +28,7 @@ instructions, please see the ``README.md``, ``INSTALL.md``, and
 ``CUSTOMIZE.md`` files distributed with Logtalk. The broad compatibility
 of Logtalk, both with Prolog compilers and operating-systems, together
 with all the possible user scenarios, means that installation can vary
-from very simple by running an installer or a couple of scripts to the
+from very simple, by running an installer or a couple of scripts, to the
 need of patching both Logtalk and Prolog compilers to workaround the
 lack of strong Prolog standards or to cope with the requirements of less
 common operating-systems.
@@ -46,7 +46,7 @@ and ``LOGTALKUSER``, pointing, respectively, to the Logtalk installation
 folder and to the Logtalk user folder.
 
 User applications should preferably be kept outside of the Logtalk user
-folder created by the installation process, however, as updating Logtalk
+folder created by the installation process, as updating Logtalk
 often results in updating the contents of this folder. If your
 applications depend on customizations to the distribution files, backup
 those changes before updating Logtalk.
@@ -62,7 +62,7 @@ Computer and operating system
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Logtalk is compatible with almost any computer/operating-system with a
-modern, standards compliant, Prolog compiler available.
+modern, standards-compliant, Prolog compiler available.
 
 .. _installing_compiler:
 
@@ -79,7 +79,7 @@ the official ISO Prolog Core standard include:
    standard
 
 Logtalk needs access to the predicate property ``built_in`` to properly
-compile objects and categories that contain Prolog built-in predicates
+compile objects and categories that contain Prolog built-in predicate
 calls. In addition, some Logtalk built-ins need to know the
 dynamic/static status of predicates to ensure correct application. The
 ISO standard for Prolog modules defines a ``predicate_property/2``
@@ -152,7 +152,7 @@ and directories:
 ``QUICK_START.md`` – Quick start instructions for those that do not like
 to read manuals
 
-``README.md`` – several useful information
+``README.md`` – several useful pieces of information
 
 ``RELEASE_NOTES.md`` – release notes for this version
 
@@ -200,7 +200,7 @@ application unit tests
 
    ``bricks``
       ``NOTES.md`` – example description and other notes
-      ``SCRIPT.txt`` – step by step example tutorial
+      ``SCRIPT.txt`` – step-by-step example tutorial
       ``loader.lgt`` – loader utility file for the example objects
       ``...`` – bricks example source files
 
@@ -227,7 +227,7 @@ application unit tests
    ``...`` – other documentation files
 
 ``paths``
-   ``NOTES.md`` – description on how to setup library and examples paths
+   ``NOTES.md`` – description on how to setup library and example paths
    ``paths.pl`` – default library and example paths
 
 ``ports``
@@ -260,7 +260,7 @@ and a Prolog compiler. Each adapter file contains two sets of
 predicates: ISO Prolog standard predicates and directives not built-in
 in the target Prolog compiler and Logtalk specific predicates.
 
-Logtalk already includes ready to use adapter files for most academic
+Logtalk already includes ready-to-use adapter files for most academic
 and commercial Prolog compilers. If an adapter file is not available for
 the compiler that you intend to use, then you need to build a new one,
 starting from the included ``template.pl`` file. Start by making a copy
@@ -271,13 +271,13 @@ borrow code from the predefined adapter files. If you are unsure
 that your Prolog compiler provides all the ISO predicates needed by
 Logtalk, try to run the system by setting the unknown predicate error
 handler to report as an error any call to a missing predicate. Better
-yet, switch to a modern, ISO compliant, Prolog compiler. If you send me
+yet, switch to a modern, ISO-compliant, Prolog compiler. If you send me
 your adapter file, with a reference to the target Prolog compiler, maybe
 I can include it in the next release of Logtalk.
 
 The adapter files specify *default* values for most of the Logtalk
 :ref:`compiler flags <programming_flags>`. They also specify values for
-read-only flags that are used to describe Prolog backend specific features.
+read-only flags that are used to describe Prolog backend-specific features.
 
 .. _installing_runtime:
 
@@ -286,7 +286,7 @@ Compiler and runtime
 
 The ``core`` sub-directory contains the Prolog and Logtalk source files that
 implement the Logtalk compiler and the Logtalk runtime. The compiler and
-the runtime may be split in two (or more) separate files or combined in
+the runtime may be split in two (or more) separate files or combined into
 a single file, depending on the Logtalk release that you are installing.
 
 .. _installing_library:
@@ -303,7 +303,7 @@ details about the library contents.
 Examples
 ~~~~~~~~
 
-The Logtalk distribution includes a large number of programing examples.
+The Logtalk distribution includes a large number of programming examples.
 The sources of each one of these examples can be found included in a
 subdirectory with the same name, inside the directory examples. The
 majority of these examples include tests and a file named ``SCRIPT.txt``

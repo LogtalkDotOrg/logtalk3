@@ -158,7 +158,7 @@ several final formats (such as HTML and PDF).</p>
 <p>Logtalk supports two documentation directives for providing arbitrary
 user-defined information about an entity or a predicate. These two
 directives complement other directives that also provide important
-documentation information such as the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> and
+documentation information, such as the <a class="reference internal" href="../refman/directives/mode_2.html#directives-mode-2"><span class="std std-ref">mode/2</span></a> and
 <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directives.</p>
 <section id="entity-documenting-directives">
 <span id="documenting-entity"></span><h2>Entity documenting directives<a class="headerlink" href="#entity-documenting-directives" title="Link to this heading"></a></h2>
@@ -181,7 +181,7 @@ If you need to provide additional details, use the <code class="docutils literal
 <code class="docutils literal notranslate"><span class="pre">remarks</span></code> keys.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">author</span></code></dt><dd><p>Entity author(s) (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where
-<code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity in a user defined
+<code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity in a user-defined
 <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">version</span></code></dt><dd><p>Version number (a <code class="docutils literal notranslate"><span class="pre">Major:Minor:Patch</span></code> compound term) Following the
@@ -200,12 +200,12 @@ deemed unnecessary).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">copyright</span></code></dt><dd><p>Copyright notice for the entity source code (an atom or a compound
 term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the name of an XML entity
-defined in a user defined <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
+defined in a user-defined <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">license</span></code></dt><dd><p>License terms for the entity source code; usually, just the license
 name (an atom or a compound term <code class="docutils literal notranslate"><span class="pre">{entity}</span></code> where <code class="docutils literal notranslate"><span class="pre">entity</span></code> is the
-name of an XML entity in a user defined <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file). License
-names should whenever possible be a license identifier as specified
+name of an XML entity in a user-defined <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file). License
+names should, whenever possible, be a license identifier as specified
 in the <a class="reference external" href="https://spdx.org/licenses/">SPDX standard</a>.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">remarks</span></code></dt><dd><p>List of general remarks about the entity using <code class="docutils literal notranslate"><span class="pre">Topic-Text</span></code> pairs
@@ -226,7 +226,7 @@ be atoms or compound terms).</p>
 ]).
 </pre></div>
 </div>
-<p>Use only the keywords that make sense for your application and remember that
+<p>Use only the keywords that make sense for your application, and remember that
 you are free to invent your own keywords. All key-value pairs can be retrieved
 programmatically using the <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> and
 are visible to the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool (which includes them in the
@@ -244,7 +244,7 @@ the <a class="reference internal" href="../refman/directives/info_2.html#directi
 </pre></div>
 </div>
 <p>The first argument can also a grammar rule non-terminal indicator,
-<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>. Keys should be atoms and values should be bound terms.
+<code class="docutils literal notranslate"><span class="pre">Name//Arity</span></code>. Keys should be atoms. Values should be bound terms.
 The following keys are predefined and may be processed specially by
 Logtalk tools:</p>
 <dl class="simple">
@@ -269,17 +269,17 @@ descriptions are deemed unnecessary).</p>
 are <code class="docutils literal notranslate"><span class="pre">container</span></code>, <code class="docutils literal notranslate"><span class="pre">descendants</span></code>, <code class="docutils literal notranslate"><span class="pre">instances</span></code>, <code class="docutils literal notranslate"><span class="pre">classes</span></code>,
 <code class="docutils literal notranslate"><span class="pre">subclasses</span></code>, and <code class="docutils literal notranslate"><span class="pre">any</span></code>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">redefinition</span></code></dt><dd><p>Describes if predicate is expected to be redefined and, if so, in
-what way. Some possible values are <code class="docutils literal notranslate"><span class="pre">never</span></code>, <code class="docutils literal notranslate"><span class="pre">free</span></code>,
+<dt><code class="docutils literal notranslate"><span class="pre">redefinition</span></code></dt><dd><p>Describes if a predicate is expected to be redefined and, if so,
+in what way. Some possible values are <code class="docutils literal notranslate"><span class="pre">never</span></code>, <code class="docutils literal notranslate"><span class="pre">free</span></code>,
 <code class="docutils literal notranslate"><span class="pre">specialize</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_first</span></code>, <code class="docutils literal notranslate"><span class="pre">call_super_last</span></code>.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">exceptions</span></code></dt><dd><p>List of possible exceptions throw by the predicate using
+<dt><code class="docutils literal notranslate"><span class="pre">exceptions</span></code></dt><dd><p>List of possible exceptions thrown by the predicate using
 <code class="docutils literal notranslate"><span class="pre">Description-Exception</span></code> pairs. The description must be an
 atom. The exception term must be a ground term.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">examples</span></code></dt><dd><p>List of typical predicate call examples using the format
 <code class="docutils literal notranslate"><span class="pre">Description-Goal-Bindings</span></code>. The description must be an atom
-with the goal sharing variables with the bindings. The
+with the goal term sharing variables with the bindings. The
 variable bindings term uses the format <code class="docutils literal notranslate"><span class="pre">{Variable</span> <span class="pre">=</span> <span class="pre">Term,</span> <span class="pre">...}</span></code>.
 When there are no variable bindings, the success or failure of
 the predicate call should be represented by the terms <code class="docutils literal notranslate"><span class="pre">{true}</span></code>
@@ -358,8 +358,8 @@ listed starting with instantiation and uninstantiation errors,
 followed by type errors, and then domain errors. These may then be
 followed by permission, existence, evaluation, representation, or
 resource errors.</p>
-<p>For each exception, use of <em>controlled language</em> as found e.g. in the ISO
-Prolog Core standard and this Handbook is advised. Some examples:</p>
+<p>For each exception, use of <em>controlled language</em> as found, e.g., in the
+ISO Prolog Core standard and this Handbook is advised. Some examples:</p>
 <dl>
 <dt>Instantiation error when one or more arguments cannot be a variable</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> is a variable</p>
 <p><code class="docutils literal notranslate"><span class="pre">Argument1</span></code> and <code class="docutils literal notranslate"><span class="pre">Argument2</span></code> are variables</p>
@@ -394,16 +394,16 @@ the default filename extensions, a <code class="docutils literal notranslate"><s
 parametric object will result in <code class="docutils literal notranslate"><span class="pre">trace_0.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">sort_1.xml</span></code> XML
 files.</p>
 <p>Each entity XML file contains references to two other files, an XML
-specification file and a XSLT style-sheet file. The XML specification
+specification file and a XSLT stylesheet file. The XML specification
 file can be either a DTD file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>) or an XML Scheme
-file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.xsd</span></code>). The XSLT style-sheet file is responsible
+file (<code class="docutils literal notranslate"><span class="pre">logtalk_entity.xsd</span></code>). The XSLT stylesheet file is responsible
 for converting the XML files to some desired format such as HTML or PDF.
-The default names for the XML specification file and the XSL style-sheet
+The default names for the XML specification file and the XSL stylesheet
 file are defined by the <a class="reference internal" href="../devtools/lgtdoc.html"><span class="doc">lgtdoc</span></a> tool but can be
 overridden by passing a list of options to the tool predicates. The
 <code class="docutils literal notranslate"><span class="pre">lgtdoc/xml</span></code> sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
-style-sheet files and sample scripts for converting XML documenting files
+stylesheet files and sample scripts for converting XML documenting files
 to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). For
 example, assume that you want to generate the API documentation for the
 <code class="docutils literal notranslate"><span class="pre">types</span></code> library:</p>
@@ -451,7 +451,7 @@ XSLT processor dependencies. You may use the supplied sample files as a
 starting point for generating the documentation of your Logtalk applications.</p>
 <p>The Logtalk DTD file, <code class="docutils literal notranslate"><span class="pre">logtalk_entity.dtd</span></code>, contains a reference to a
 user-customizable file, <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code>, which declares XML entities for
-source code author names, license terms, and copyright string. After
+source code author names, license terms, and copyright strings. After
 editing the <code class="docutils literal notranslate"><span class="pre">custom.ent</span></code> file to reflect your personal data, you may
 use the XML entities on <code class="docutils literal notranslate"><span class="pre">info/1</span></code> documenting directives. For example,
 assuming that the XML entities are named <em>author</em>, <em>license</em>, and
@@ -501,11 +501,11 @@ meant to be rendered as monospaced text (usually inline code fragments).</p>
 <p>The <a class="reference internal" href="../devtools/diagrams.html"><span class="doc">diagrams</span></a> tool supports a wide range of diagrams that
 can also help in documenting an application. The generated diagrams can
 include URL links to both source code and API documentation. They can also
-be linked, connecting for example high level diagrams to detail diagrams.
+be linked, connecting, for example, high level diagrams to detail diagrams.
 These features allow diagrams to be an effective solution for navigating and
 understanding the structure and implementation of an application. This tool
 uses the same <a class="reference internal" href="reflection.html#reflection-reflection"><span class="std std-ref">reflection API</span></a> as the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code>
-tool and thus have access to the same source data. See the tool documentation
+tool and thus has access to the same source data. See the tool documentation
 for details.</p>
 </section>
 </section>

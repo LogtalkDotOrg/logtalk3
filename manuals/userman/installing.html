@@ -157,7 +157,7 @@ instructions, please see the <code class="docutils literal notranslate"><span cl
 <code class="docutils literal notranslate"><span class="pre">CUSTOMIZE.md</span></code> files distributed with Logtalk. The broad compatibility
 of Logtalk, both with Prolog compilers and operating-systems, together
 with all the possible user scenarios, means that installation can vary
-from very simple by running an installer or a couple of scripts to the
+from very simple, by running an installer or a couple of scripts, to the
 need of patching both Logtalk and Prolog compilers to workaround the
 lack of strong Prolog standards or to cope with the requirements of less
 common operating-systems.</p>
@@ -173,7 +173,7 @@ possible. The installers set two environment variables, <code class="docutils li
 and <code class="docutils literal notranslate"><span class="pre">LOGTALKUSER</span></code>, pointing, respectively, to the Logtalk installation
 folder and to the Logtalk user folder.</p>
 <p>User applications should preferably be kept outside of the Logtalk user
-folder created by the installation process, however, as updating Logtalk
+folder created by the installation process, as updating Logtalk
 often results in updating the contents of this folder. If your
 applications depend on customizations to the distribution files, backup
 those changes before updating Logtalk.</p>
@@ -182,7 +182,7 @@ those changes before updating Logtalk.</p>
 <section id="computer-and-operating-system">
 <span id="installing-computer"></span><h3>Computer and operating system<a class="headerlink" href="#computer-and-operating-system" title="Link to this heading"></a></h3>
 <p>Logtalk is compatible with almost any computer/operating-system with a
-modern, standards compliant, Prolog compiler available.</p>
+modern, standards-compliant, Prolog compiler available.</p>
 </section>
 <section id="prolog-compiler">
 <span id="installing-compiler"></span><h3>Prolog compiler<a class="headerlink" href="#prolog-compiler" title="Link to this heading"></a></h3>
@@ -196,7 +196,7 @@ the official ISO Prolog Core standard include:</p>
 standard</p></li>
 </ul>
 <p>Logtalk needs access to the predicate property <code class="docutils literal notranslate"><span class="pre">built_in</span></code> to properly
-compile objects and categories that contain Prolog built-in predicates
+compile objects and categories that contain Prolog built-in predicate
 calls. In addition, some Logtalk built-ins need to know the
 dynamic/static status of predicates to ensure correct application. The
 ISO standard for Prolog modules defines a <code class="docutils literal notranslate"><span class="pre">predicate_property/2</span></code>
@@ -247,7 +247,7 @@ and directories:</p>
 <p><code class="docutils literal notranslate"><span class="pre">NOTICE.txt</span></code> – Logtalk copyright notice</p>
 <p><code class="docutils literal notranslate"><span class="pre">QUICK_START.md</span></code> – Quick start instructions for those that do not like
 to read manuals</p>
-<p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> – several useful information</p>
+<p><code class="docutils literal notranslate"><span class="pre">README.md</span></code> – several useful pieces of information</p>
 <p><code class="docutils literal notranslate"><span class="pre">RELEASE_NOTES.md</span></code> – release notes for this version</p>
 <p><code class="docutils literal notranslate"><span class="pre">UPGRADING.md</span></code> – instructions on how to upgrade your programs to the
 current Logtalk version</p>
@@ -282,7 +282,7 @@ tools, and contributions entities
 <dt><code class="docutils literal notranslate"><span class="pre">examples</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> – short description of the provided examples</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">bricks</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> – example description and other notes
-<code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> – step by step example tutorial
+<code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code> – step-by-step example tutorial
 <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> – loader utility file for the example objects
 <code class="docutils literal notranslate"><span class="pre">...</span></code> – bricks example source files</p>
 </dd>
@@ -305,7 +305,7 @@ compilers
 <code class="docutils literal notranslate"><span class="pre">index.html</span></code> – root document for all documentation
 <code class="docutils literal notranslate"><span class="pre">...</span></code> – other documentation files</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">paths</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> – description on how to setup library and examples paths
+<dt><code class="docutils literal notranslate"><span class="pre">paths</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> – description on how to setup library and example paths
 <code class="docutils literal notranslate"><span class="pre">paths.pl</span></code> – default library and example paths</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">ports</span></code></dt><dd><p><code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code> – description of included ports of third-party software
@@ -330,7 +330,7 @@ and installation
 and a Prolog compiler. Each adapter file contains two sets of
 predicates: ISO Prolog standard predicates and directives not built-in
 in the target Prolog compiler and Logtalk specific predicates.</p>
-<p>Logtalk already includes ready to use adapter files for most academic
+<p>Logtalk already includes ready-to-use adapter files for most academic
 and commercial Prolog compilers. If an adapter file is not available for
 the compiler that you intend to use, then you need to build a new one,
 starting from the included <code class="docutils literal notranslate"><span class="pre">template.pl</span></code> file. Start by making a copy
@@ -341,18 +341,18 @@ borrow code from the predefined adapter files. If you are unsure
 that your Prolog compiler provides all the ISO predicates needed by
 Logtalk, try to run the system by setting the unknown predicate error
 handler to report as an error any call to a missing predicate. Better
-yet, switch to a modern, ISO compliant, Prolog compiler. If you send me
+yet, switch to a modern, ISO-compliant, Prolog compiler. If you send me
 your adapter file, with a reference to the target Prolog compiler, maybe
 I can include it in the next release of Logtalk.</p>
 <p>The adapter files specify <em>default</em> values for most of the Logtalk
 <a class="reference internal" href="programming.html#programming-flags"><span class="std std-ref">compiler flags</span></a>. They also specify values for
-read-only flags that are used to describe Prolog backend specific features.</p>
+read-only flags that are used to describe Prolog backend-specific features.</p>
 </section>
 <section id="compiler-and-runtime">
 <span id="installing-runtime"></span><h3>Compiler and runtime<a class="headerlink" href="#compiler-and-runtime" title="Link to this heading"></a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">core</span></code> sub-directory contains the Prolog and Logtalk source files that
 implement the Logtalk compiler and the Logtalk runtime. The compiler and
-the runtime may be split in two (or more) separate files or combined in
+the runtime may be split in two (or more) separate files or combined into
 a single file, depending on the Logtalk release that you are installing.</p>
 </section>
 <section id="library">
@@ -363,7 +363,7 @@ details about the library contents.</p>
 </section>
 <section id="examples">
 <span id="installing-examples"></span><h3>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h3>
-<p>The Logtalk distribution includes a large number of programing examples.
+<p>The Logtalk distribution includes a large number of programming examples.
 The sources of each one of these examples can be found included in a
 subdirectory with the same name, inside the directory examples. The
 majority of these examples include tests and a file named <code class="docutils literal notranslate"><span class="pre">SCRIPT.txt</span></code>
