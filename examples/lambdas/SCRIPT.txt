@@ -25,7 +25,7 @@ ________________________________________________________________________
 
 
 % some sample queries using the call/N built-in methods (note that these
-% methods are private, hence the use of the context switching <</2 control
+% methods are private, hence the use of the context-switching <</2 control
 % construct):
 
 | ?- logtalk << call([X,Y]>>(Y is X*X), 5, R).

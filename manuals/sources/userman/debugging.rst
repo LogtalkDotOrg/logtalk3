@@ -767,7 +767,7 @@ stress that we are not bypassing or defeating an object predicate scope
 directives. The calls take place within the context of the specified
 object, not within the context of the object making the ``(<<)/2`` call.
 Thus, the ``(<<)/2`` control construct implements a form of
-*execution-context switching*.
+*execution-context-switching*.
 
 The availability of the ``(<<)/2`` control construct is controlled by the
 :ref:`context_switching_calls <flag_context_switching_calls>` compiler

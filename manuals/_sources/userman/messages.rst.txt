@@ -21,7 +21,7 @@
 Messages
 ========
 
-Messages allows us to ask an object to prove a goal and must always match a
+Messages allow us to ask an object to prove a goal and must always match a
 declared predicate within the scope of the *sender* object. Note that sending
 a message is fundamentally different from calling a predicate. When calling a
 predicate, the caller decides implicitly which predicate definition will be
@@ -45,10 +45,10 @@ or category) that is called to answer a message.
 
 .. _messages_operators:
 
-Operators used in message sending
+Operators used in message-sending
 ---------------------------------
 
-Logtalk declares the following operators for the message sending control
+Logtalk declares the following operators for the message-sending control
 constructs:
 
 ::
@@ -96,8 +96,8 @@ original *sender* and *meta-call context* by using the
 
 This control construct can only be used within objects and categories
 (at the top-level interpreter, the *sender* is always the pseudo-object
-``user`` so using this control construct would be equivalent to use the
-``(::)/2`` message sending control construct).
+``user`` so using this control construct would be equivalent to using the
+``(::)/2`` message-sending control construct).
 
 Sending a message to *self*
 ---------------------------
@@ -125,8 +125,8 @@ Broadcasting
 
 In the Logtalk context, *broadcasting* is interpreted as the sending of
 several messages to the same object. This can be achieved by using the
-message sending control construct described above. However, for convenience,
-Logtalk implements an extended syntax for message sending that may improve
+message-sending control construct described above. However, for convenience,
+Logtalk implements an extended syntax for message-sending that may improve
 program readability in some cases. This extended syntax uses the ``(,)/2``,
 ``(;)/2``, and ``(->)/2`` control constructs (plus the ``(*->)/2`` soft-cut
 control construct when provided by the backend Prolog compiler). For example,
@@ -142,7 +142,7 @@ This is semantically equivalent to:
 
    | ?- Object::Message1, Object::Message2, ... .
 
-This extended syntax may also be used with the ``(::)/1`` message sending
+This extended syntax may also be used with the ``(::)/1`` message-sending
 control construct.
 
 .. _messages_super:
@@ -174,7 +174,7 @@ call any imported or inherited predicate definition. This control
 construct may be used within objects and categories. When combined with
 :term:`static binding`, this control construct allows imported and inherited
 predicates to be called with the same performance as local predicates.
-As with the message sending control constructs, the ``(^^)/1`` call simply
+As with the message-sending control constructs, the ``(^^)/1`` call simply
 fails when the predicate is declared but not defined (as per the
 :term:`closed-world assumption`).
 
@@ -224,9 +224,9 @@ containing the predicate definition, we can write:
        {Self::Message},
        ... .
 
-When events are not used, is possible to turn off event generation globally
-or on a per entity basis by using the ``events`` compiler flag to optimize
-message sending performance (see the :ref:`events_events` section for more
+When events are not used, it is possible to turn off event generation globally
+or on a per-entity basis by using the ``events`` compiler flag to optimize
+message-sending performance (see the :ref:`events_events` section for more
 details).
 
 .. _messages_from_module:
@@ -242,13 +242,13 @@ Note that the module can be ``user``. This is usually the case when sending
 the message from the top-level interpreter. Thus, the same conditions apply
 in this case. Note that loading Prolog modules using Prolog directives or
 built-in predicates necessarily limits the range of possible optimizations
-for message sent from the modules.
+for messages sent from the modules.
 
 .. warning::
 
-   If you want to benchmark the performance of a message sending goal
+   If you want to benchmark the performance of a message-sending goal
    at the top-level interpreter, be careful to check first if the goal
-   is pre-compiled to use static binding, otherwise you will also be
+   is pre-compiled to use static binding; otherwise you will also be
    benchmarking the Logtalk compiler itself.
 
 .. _messages_performance:
@@ -256,7 +256,7 @@ for message sent from the modules.
 Message sending performance
 ---------------------------
 
-For a detailed discussion on message sending performance, see the
+For a detailed discussion on message-sending performance, see the
 :ref:`performance_performance` section.
 
 
@@ -278,7 +278,7 @@ For a detailed discussion on message sending performance, see the
    is sent. Cache entries are automatically removed when loading entities or
    using Logtalk dynamic features that invalidate the cached lookups.
 
-   Whenever static binding is used, message sending performance is roughly
+   Whenever static binding is used, message-sending performance is roughly
    the same as a predicate call in plain Prolog. When discussing Logtalk
    dynamic binding performance, two distinct cases should be considered:
    messages sent by the user from the top-level interpreter and messages
@@ -397,7 +397,7 @@ For a detailed discussion on message sending performance, see the
    
       | ?- benchmark(true).
    
-   For comparing message sending performance across several Prolog
+   For comparing message-sending performance across several Prolog
    compilers, we would call the ``benchmark/1`` predicate with a suitable
    argument. For example:
    
@@ -405,11 +405,11 @@ For a detailed discussion on message sending performance, see the
    
       | ?- benchmark(list::length([1,2,3,4,5,6,7,8,9,0], _)).
    
-   For comparing message sending performance with predicate calls in plain
+   For comparing message-sending performance with predicate calls in plain
    Prolog and with calls to predicates encapsulated in modules, we should
    use exactly the same predicate definition in the three cases.
    
-   It should be stressed that message sending is only one of the factors
+   It should be stressed that message-sending is only one of the factors
    affecting the performance of a Logtalk application (and often not the
    most important one). The strengths and limitations of the chosen Prolog
    compiler play a crucial role on all aspects of the development,

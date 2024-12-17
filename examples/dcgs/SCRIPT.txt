@@ -43,7 +43,7 @@ yes
 % "logtalk" built-in object and the <</2 control construct to invoke the foo//0
 % public grammar rule non-terminal as the backend Prolog system implementation
 % of the phrase/2-3 predicates is not Logtalk aware and would mishandle the
-% (::)/2 message sending operator):
+% (::)/2 message-sending operator):
 
 | ?- logtalk << phrase(morse::morse(Message), "... --- ...").
 

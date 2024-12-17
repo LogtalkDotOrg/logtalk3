@@ -68,7 +68,7 @@
 <li class="toctree-l2"><a class="reference internal" href="features.html">Main features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="nomenclature.html">Nomenclature</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Messages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#operators-used-in-message-sending">Operators used in message sending</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#operators-used-in-message-sending">Operators used in message-sending</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sending-a-message-to-an-object">Sending a message to an object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#delegating-a-message-to-an-object">Delegating a message to an object</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sending-a-message-to-self">Sending a message to <em>self</em></a></li>
@@ -144,7 +144,7 @@
              
   <section id="messages">
 <span id="messages-messages"></span><h1>Messages<a class="headerlink" href="#messages" title="Link to this heading"></a></h1>
-<p>Messages allows us to ask an object to prove a goal and must always match a
+<p>Messages allow us to ask an object to prove a goal and must always match a
 declared predicate within the scope of the <em>sender</em> object. Note that sending
 a message is fundamentally different from calling a predicate. When calling a
 predicate, the caller decides implicitly which predicate definition will be
@@ -164,8 +164,8 @@ an object interface. Likewise, the terms <em>predicate</em> and <em>method</em> 
 interchangeably when referring to the predicate definition (inside an object
 or category) that is called to answer a message.</p>
 <section id="operators-used-in-message-sending">
-<span id="messages-operators"></span><h2>Operators used in message sending<a class="headerlink" href="#operators-used-in-message-sending" title="Link to this heading"></a></h2>
-<p>Logtalk declares the following operators for the message sending control
+<span id="messages-operators"></span><h2>Operators used in message-sending<a class="headerlink" href="#operators-used-in-message-sending" title="Link to this heading"></a></h2>
+<p>Logtalk declares the following operators for the message-sending control
 constructs:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">op</span>(<span class="m">600</span>, xfy, <span class="o">::</span>).
 <span class="p">:- </span><span class="k">op</span>(<span class="m">600</span>,  fy, <span class="o">::</span>).
@@ -201,8 +201,8 @@ original <em>sender</em> and <em>meta-call context</em> by using the
 </div>
 <p>This control construct can only be used within objects and categories
 (at the top-level interpreter, the <em>sender</em> is always the pseudo-object
-<code class="docutils literal notranslate"><span class="pre">user</span></code> so using this control construct would be equivalent to use the
-<code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message sending control construct).</p>
+<code class="docutils literal notranslate"><span class="pre">user</span></code> so using this control construct would be equivalent to using the
+<code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending control construct).</p>
 </section>
 <section id="sending-a-message-to-self">
 <h2>Sending a message to <em>self</em><a class="headerlink" href="#sending-a-message-to-self" title="Link to this heading"></a></h2>
@@ -224,8 +224,8 @@ defined, the message simply fails (as per the <a class="reference internal" href
 <span id="messages-broadcasting"></span><h2>Broadcasting<a class="headerlink" href="#broadcasting" title="Link to this heading"></a></h2>
 <p>In the Logtalk context, <em>broadcasting</em> is interpreted as the sending of
 several messages to the same object. This can be achieved by using the
-message sending control construct described above. However, for convenience,
-Logtalk implements an extended syntax for message sending that may improve
+message-sending control construct described above. However, for convenience,
+Logtalk implements an extended syntax for message-sending that may improve
 program readability in some cases. This extended syntax uses the <code class="docutils literal notranslate"><span class="pre">(,)/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code> control constructs (plus the <code class="docutils literal notranslate"><span class="pre">(*-&gt;)/2</span></code> soft-cut
 control construct when provided by the backend Prolog compiler). For example,
@@ -237,7 +237,7 @@ if we wish to send several messages to the same object, we can write:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- Object::Message1, Object::Message2, ... .
 </pre></div>
 </div>
-<p>This extended syntax may also be used with the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> message sending
+<p>This extended syntax may also be used with the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> message-sending
 control construct.</p>
 </section>
 <section id="calling-imported-and-inherited-predicates">
@@ -262,7 +262,7 @@ call any imported or inherited predicate definition. This control
 construct may be used within objects and categories. When combined with
 <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a>, this control construct allows imported and inherited
 predicates to be called with the same performance as local predicates.
-As with the message sending control constructs, the <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code> call simply
+As with the message-sending control constructs, the <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code> call simply
 fails when the predicate is declared but not defined (as per the
 <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
 </section>
@@ -304,9 +304,9 @@ containing the predicate definition, we can write:</p>
     ... .
 </pre></div>
 </div>
-<p>When events are not used, is possible to turn off event generation globally
-or on a per entity basis by using the <code class="docutils literal notranslate"><span class="pre">events</span></code> compiler flag to optimize
-message sending performance (see the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more
+<p>When events are not used, it is possible to turn off event generation globally
+or on a per-entity basis by using the <code class="docutils literal notranslate"><span class="pre">events</span></code> compiler flag to optimize
+message-sending performance (see the <a class="reference internal" href="events.html#events-events"><span class="std std-ref">Event-driven programming</span></a> section for more
 details).</p>
 </section>
 <section id="sending-a-message-from-a-module">
@@ -319,18 +319,18 @@ Note that the module can be <code class="docutils literal notranslate"><span cla
 the message from the top-level interpreter. Thus, the same conditions apply
 in this case. Note that loading Prolog modules using Prolog directives or
 built-in predicates necessarily limits the range of possible optimizations
-for message sent from the modules.</p>
+for messages sent from the modules.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If you want to benchmark the performance of a message sending goal
+<p>If you want to benchmark the performance of a message-sending goal
 at the top-level interpreter, be careful to check first if the goal
-is pre-compiled to use static binding, otherwise you will also be
+is pre-compiled to use static binding; otherwise you will also be
 benchmarking the Logtalk compiler itself.</p>
 </div>
 </section>
 <section id="message-sending-performance">
 <span id="messages-performance"></span><h2>Message sending performance<a class="headerlink" href="#message-sending-performance" title="Link to this heading"></a></h2>
-<p>For a detailed discussion on message sending performance, see the
+<p>For a detailed discussion on message-sending performance, see the
 <a class="reference internal" href="performance.html#performance-performance"><span class="std std-ref">Performance</span></a> section.</p>
 </section>
 </section>

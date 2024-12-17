@@ -112,7 +112,7 @@ $KEYWORDS(kwc)=regex((repeat), 1)
 # sorting
 $KEYWORDS(kwc)=regex(((key)?sort)(?=[(]), 1)
 
-# Logtalk message sending operators
+# Logtalk message-sending operators
 $KEYWORDS(kwd)=regex((::|\^\^|<<|:))
 # Logtalk external-call control construct
 $KEYWORDS(kwd)=regex(([{}]))

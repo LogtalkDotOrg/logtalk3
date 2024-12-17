@@ -290,7 +290,7 @@ the <code class="docutils literal notranslate"><span class="pre">*</span></code>
 <code class="docutils literal notranslate"><span class="pre">+</span></code>, or <code class="docutils literal notranslate"><span class="pre">-</span></code> as Logtalk supports <a class="reference internal" href="predicates.html#predicates-mode"><span class="std std-ref">mode directives</span></a>.</p></li>
 <li><p>Convert any explicit qualified calls to module predicates to messages
 by replacing the <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> operator with the <a class="reference internal" href="../refman/control/send_to_object_2.html#control-send-to-object-2"><span class="std std-ref">(::)/2</span></a>
-message sending operator when the referenced modules are also being
+message-sending operator when the referenced modules are also being
 converted into objects. Calls in the pseudo-module <code class="docutils literal notranslate"><span class="pre">user</span></code> can be
 encapsulated using the <a class="reference internal" href="../refman/control/external_call_1.html#control-external-call-1"><span class="std std-ref">{}/1</span></a> Logtalk external
 call control construct. You can also use instead a <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
@@ -344,7 +344,7 @@ term-expansion mechanisms (when provided). Another potential issue is that,
 when compiling modules as objects, Logtalk assumes that any referenced module
 (e.g. using <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code> directives) is also being compiled as an
 object. If that’s not the case, the compiled module calls being compiled as
-message sending goals will still work for normal predicates but will not
+message-sending goals will still work for normal predicates but will not
 work for meta-predicates called using implicit module qualification. The
 reason is that, unlike in Logtalk, calls to implicitly and explicitly
 qualified module meta-predicates have different semantics. Follows a
@@ -579,7 +579,7 @@ order to properly support compilation of modules containing
 <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives are not compiled as objects but are instead
 loaded as-is by Prolog, the exported predicates would need to be called
 using the <code class="docutils literal notranslate"><span class="pre">Module:Call</span></code> notation but the converted module will be
-calling them through message sending. Thus, this feature ensures that,
+calling them through message-sending. Thus, this feature ensures that,
 on a module compiled as an object, any predicate calling other module
 predicates will work as expected either these other modules are loaded
 as-is or also compiled as objects.</p>

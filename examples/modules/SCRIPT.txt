@@ -24,7 +24,7 @@ ________________________________________________________________________
 ...
 
 
-% call one of the module exported predicates using message sending:
+% call one of the module exported predicates using message-sending:
 
 | ?- test::names.
 
@@ -62,7 +62,7 @@ Prop = defined_in(exports)
 yes
 
 
-% call the module exported/public predicate using message sending:
+% call the module exported/public predicate using message-sending:
 
 | ?- exports::p(N).
 

@@ -168,7 +168,7 @@
 
 	error(domain_error(message_sending_goal, _)) -->
 		[	'The argument of the message delegation control construct must be'-[], nl,
-			'a (::)/2 message sending goal.'-[], nl, nl
+			'a (::)/2 message-sending goal.'-[], nl, nl
 		].
 
 	error(domain_error(meta_directive_template, _)) -->
@@ -1072,12 +1072,12 @@
 			'requiring sending a message to the "user" pseudo-object.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _::Pred, [Pred])) -->
-		[	'Using message sending to call a local predicate is usually only required'-[], nl,
+		[	'Using message-sending to call a local predicate is usually only required'-[], nl,
 			'when we want to generate an event for the message. Otherwise, simply call'-[], nl,
 			'the predicate directly.'-[], nl, nl
 		].
 	explain(suspicious_call(_, _, _, _, _::Pred, [::Pred])) -->
-		[	'Using an object explicit message sending instead of a message to'-[], nl,
+		[	'Using an object explicit message-sending instead of a message to'-[], nl,
 			'"self" is usually only required when we want to generate an event'-[], nl,
 			'for the message. Otherwise, simply send a message to "self".'-[], nl, nl
 		].

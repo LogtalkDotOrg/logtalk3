@@ -88,7 +88,7 @@
 	:- public(test_whatever/0).
 
 	% in this alternative, a uses/2 directive
-	% is used for implicit message sending
+	% is used for implicit message-sending
 
 	:- uses(simple, [
 		whatever/1, whatever_all/1

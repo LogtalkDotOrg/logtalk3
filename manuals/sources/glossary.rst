@@ -427,7 +427,7 @@ Glossary
 
    predicate calling context
       The object or category from within a predicate is called (either
-      directly or using a control construct such as a message sending
+      directly or using a control construct such as a message-sending
       control construct).
 
    predicate definition context

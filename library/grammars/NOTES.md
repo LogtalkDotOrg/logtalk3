@@ -63,7 +63,7 @@ Usage
 
 The library uses (when necessary) parametric objects where the single
 parameter can be either `chars` or `codes`. The parameter must be bound
-when using the DCGs. For example, when using implicit message sending:
+when using the DCGs. For example, when using implicit message-sending:
 
 	:- uses(blank_grammars(chars), [
 		white_spaces//0, new_lines//0

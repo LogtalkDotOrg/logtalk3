@@ -31,11 +31,11 @@
 
 
 
-% message sending and super call operators
+% message-sending and super call operators
 
-% message sending to an explicit object
+% message-sending to an explicit object
 :- op(600, xfy, ::).
-% message sending to "self"
+% message-sending to "self"
 :- op(600,  fy, ::).
 % "super" call (calls an inherited or imported method definition)
 :- op(600,  fy, ^^).
@@ -513,14 +513,14 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  top-level interpreter versions of the message sending and context
+%  top-level interpreter versions of the message-sending and context
 %  switching call control constructs
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
-% top-level interpreter message sending calls
+% top-level interpreter message-sending calls
 
 Obj::Pred :-
 	var(Obj),
@@ -1510,7 +1510,7 @@ create_protocol(Ptc, Relations, Directives) :-
 		atom_codes(Identifier, [Code| Codes]),
 	% objects, protocols, and categories share a single namespace and there's
 	% no guarantee that a user named entity will not clash with the generated
-	% identifier despite the use of a per entity type base character
+	% identifier despite the use of a per-entity type base character
 	\+ '$lgt_current_protocol_'(Identifier, _, _, _, _),
 	\+ '$lgt_current_object_'(Identifier, _, _, _, _, _, _, _, _, _, _),
 	\+ '$lgt_current_category_'(Identifier, _, _, _, _, _),
@@ -5748,7 +5748,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  message sending
+%  message-sending
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -5756,7 +5756,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_send_to_self'(?term, +compilation_context)
 %
-% runtime processing of a message sending call when the message is not
+% runtime processing of a message-sending call when the message is not
 % known at compile time
 
 '$lgt_send_to_self'(Pred, Ctx) :-
@@ -5781,7 +5781,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_send_to_self_nv'(+object_identifier, +callable, +execution_context)
 %
-% runtime processing of a message sending call when the arguments have already
+% runtime processing of a message-sending call when the arguments have already
 % been type-checked; generates a cache entry to speed up future calls
 
 '$lgt_send_to_self_nv'(Obj, Pred, SenderExCtx) :-
@@ -5835,12 +5835,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_send_to_obj_rt'(?term, ?term, +atom, +compilation_context)
 %
-% runtime processing of a message sending call when the message and
+% runtime processing of a message-sending call when the message and
 % possibly the receiver object are not known at compile time
 
 '$lgt_send_to_obj_rt'(Obj, Pred, Events, Ctx) :-
 	% we must ensure that the message is valid before compiling the
-	% message sending goal otherwise an endless loop could result
+	% message-sending goal otherwise an endless loop could result
 	'$lgt_comp_ctx_exec_ctx'(Ctx, ExCtx),
 	'$lgt_check'(callable, Pred, logtalk(Obj::Pred, ExCtx)),
 	catch(
@@ -5854,7 +5854,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_send_to_obj'(+object_identifier, +callable, +execution_context)
 %
-% runtime processing of an event-aware message sending call when the
+% runtime processing of an event-aware message-sending call when the
 % receiver object is not known at compile time; as using the cache
 % only requires a bound first argument, we delay errors other than an
 % instantiation error for a small performance gain
@@ -5879,7 +5879,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_send_to_obj_nv'(+object_identifier, +callable, +execution_context)
 %
-% runtime processing of an event-aware message sending call when the arguments
+% runtime processing of an event-aware message-sending call when the arguments
 % have already been type-checked; generates a cache entry to speed up future calls
 
 '$lgt_send_to_obj_nv'(Obj, Pred, SenderExCtx) :-
@@ -5995,7 +5995,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_send_to_obj_ne'(+object_identifier, +callable, +execution_context)
 %
-% runtime processing of an event-transparent message sending call when
+% runtime processing of an event-transparent message-sending call when
 % the receiver object is not known at compile time; as using the cache
 % only requires a bound first argument, we delay errors other than an
 % instantiation error for a small performance gain
@@ -6020,7 +6020,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_send_to_obj_ne_nv'(+object_identifier, +term, +execution_context)
 %
-% runtime processing of an event-transparent message sending call when the arguments
+% runtime processing of an event-transparent message-sending call when the arguments
 % have already been type-checked; generates a cache entry to speed up future calls
 
 '$lgt_send_to_obj_ne_nv'(Obj, Pred, SenderExCtx) :-
@@ -15128,7 +15128,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		MTPred = '$lgt_threaded_notify_ctg'(Msg, This)
 	).
 
-% message sending
+% message-sending
 
 '$lgt_compile_body'(Alias::Pred, _, TPred, '$lgt_debug'(goal(Alias::Pred, TPred), ExCtx), Ctx) :-
 	callable(Alias),
@@ -15213,7 +15213,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_prolog_feature'(modules, unsupported),
 	\+ '$lgt_pp_module_'(_),
 	% not compiling a module as an object
-	% likely typo where a message sending goal is intended
+	% likely typo where a message-sending goal is intended
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(suspicious_calls, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
@@ -18530,7 +18530,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_compile_message_to_object'(@term, @object_identifier, -callable, +atom, +compilation_context)
 %
-% compiles a message sending call
+% compiles a message-sending call
 
 
 % messages to the pseudo-object "user"
@@ -19553,7 +19553,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_compile_context_switch_call'(@term, @term, -callable, @execution_context)
 %
-% compiles context switching calls
+% compiles context-switching calls
 
 '$lgt_compile_context_switch_call'(Obj, Goal, TGoal, ExCtx) :-
 	(	var(Obj) ->
@@ -25808,7 +25808,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % (when aplicable) or the atom "no"
 
 
-% message sending and context switching control constructs
+% message-sending and context-switching control constructs
 '$lgt_logtalk_built_in_predicate'(_ :: _, no).
 '$lgt_logtalk_built_in_predicate'(_ << _, no).
 % compiling and loading predicates
@@ -27007,7 +27007,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_logtalk_spec_operator'(?atom, ?atom, ?integer)
 
-% message sending operators
+% message-sending operators
 '$lgt_logtalk_spec_operator'((::), xfy, 600).
 '$lgt_logtalk_spec_operator'((::),  fy, 600).
 % "super" call operator

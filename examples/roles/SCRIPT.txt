@@ -47,7 +47,7 @@ yes
 
 
 % a class that is its own metaclass can access its own public predicates
-% using message sending:
+% using message-sending:
 
 | ?- superclass::foo(Foo).
 

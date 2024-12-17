@@ -94,8 +94,8 @@ Follows a short description of each included example (in alphabetical order):
 
 - `benchmarks`  
 	simple benchmarks for helping to compare the performance of Logtalk
-	message sending when using different backend Prolog compilers and
-	for comparing performance of message sending calls with predicate
+	message-sending when using different backend Prolog compilers and
+	for comparing performance of message-sending calls with predicate
 	calls in plain Prolog and explicitly-qualified Prolog module calls
 	(when applicable)
 
@@ -259,7 +259,7 @@ Follows a short description of each included example (in alphabetical order):
 - `jpl`  
 	examples adapted from SWI-Prolog/YAP JPL library; illustrates how
 	to use the `java` library minimal abstraction for calling Java
-	from Logtalk using familiar message sending syntax (requires Logtalk
+	from Logtalk using familiar message-sending syntax (requires Logtalk
 	to be run with SWI-Prolog, YAP, or JIProlog as the backend compiler)
 
 - `lambdas`  

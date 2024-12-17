@@ -21,7 +21,7 @@
 
 :- object(suspicious_calls).
 
-	% calling local predicates doesn't require message sending
+	% calling local predicates doesn't require message-sending
 
 	recursive([]).
 	recursive([H| T]) :-

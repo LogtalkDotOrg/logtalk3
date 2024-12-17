@@ -61,5 +61,5 @@ The code example is also mentioned in the following paper:
 
 The Logtalk compiler optimizes message-sending calls sent from an object
 to itself (as found in the definition of the `lookup/2` predicate in this
-example), removing the message sending overhead, and thus providing the
+example), removing the message-sending overhead, and thus providing the
 same performance as a local predicate call.

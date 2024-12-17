@@ -46,8 +46,8 @@ Usage
 
 The library uses (when necessary) parametric objects where the single
 parameter can be either ``chars`` or ``codes``. The parameter must be
-bound when using the DCGs. For example, when using implicit message
-sending:
+bound when using the DCGs. For example, when using implicit
+message-sending:
 
 ::
 

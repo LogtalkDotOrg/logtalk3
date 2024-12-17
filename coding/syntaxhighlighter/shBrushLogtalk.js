@@ -103,7 +103,7 @@
 			{ regex: new RegExp("^\\s*(complements|extends|i(nstantiates|mp(lements|orts))|specializes)(?=[(])", 'gm'), css: 'preprocessor' },
 			// atoms
 			{ regex: new RegExp("\\b[a-z][A-Za-z0-9_]*", 'g'), css: 'plain'},
-			// Logtalk message sending operators
+			// Logtalk message-sending operators
 			{ regex: new RegExp("(::|\\^\\^|<<|:)", 'g'), css: 'constants'},
 			// Logtalk external-call control construct
 			{ regex: new RegExp("(\\{|\\})", 'g'), css: 'constants'},

@@ -35,7 +35,7 @@ Description
    threaded_call(Goal, Tag)
 
 Proves ``Goal`` asynchronously using a new thread. The argument can be a
-message sending goal. Calls to this predicate always succeed and return
+message-sending goal. Calls to this predicate always succeed and return
 immediately. The results (success, failure, or exception) are sent back
 to the message queue of the object containing the call (:term:`this`) and
 can be retrieved by calling the

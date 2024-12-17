@@ -36,7 +36,7 @@ Description
 Declares object aliases. Typically used to shorten long object names, to
 simplify and consistently send messages to parameterized objects, and to
 simplify using or experimenting with different object implementations of
-the same protocol when using explicit message sending. Object aliases are
+the same protocol when using explicit message-sending. Object aliases are
 local to the object (or category) where they are defined.
 
 The objects being aliased can be :term:`parameter variables <parameter variable>`
@@ -49,7 +49,7 @@ declarations of the same alias, declaring an alias for an object alias,
 and redefining an alias to reference a different object are reported as
 compilation errors.
 
-To enable the use of :term:`static binding`, and thus optimal message sending
+To enable the use of :term:`static binding`, and thus optimal message-sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.
 

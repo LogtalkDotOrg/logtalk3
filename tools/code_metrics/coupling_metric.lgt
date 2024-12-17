@@ -208,7 +208,7 @@
 		(	object_property(Entity, calls(Target::_, _))
 		;	category_property(Entity, calls(Target::_, _))
 		),
-		% discard message sending calls where the target is only known at runtime
+		% discard message-sending calls where the target is only known at runtime
 		nonvar(Target),
 		Target = Template,
 		% but no explicit self messages
@@ -220,7 +220,7 @@
 		(	object_property(Entity, updates(Target::_, _))
 		;	category_property(Entity, updates(Target::_, _))
 		),
-		% discard message sending calls where the target is only known at runtime
+		% discard message-sending calls where the target is only known at runtime
 		nonvar(Target),
 		Target = Template,
 		% but no explicit self updates

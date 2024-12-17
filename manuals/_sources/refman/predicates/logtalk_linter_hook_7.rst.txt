@@ -34,7 +34,7 @@ Description
    logtalk_linter_hook(Goal, Flag, File, Lines, Type, Entity, Warning)
 
 Multifile user-defined predicate, supporting the definition of custom linter
-warnings. Experimental. The ``Goal`` argument can be a message sending goal,
+warnings. Experimental. The ``Goal`` argument can be a message-sending goal,
 ``Object::Message``, a call to a Prolog built-in predicate, or a call to a
 module predicate, ``Module:Predicate``. The ``Flag`` argument must be a
 supported linter flag. The ``Warning`` argument must be a valid ``core``

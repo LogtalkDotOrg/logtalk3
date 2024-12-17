@@ -26,7 +26,7 @@
 		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2019-06-11,
-		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
+		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message-sending syntax with JIProlog.',
 		parnames is ['Reference', 'ReturnValue']
 	]).
 
@@ -87,7 +87,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2016-09-22,
-		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message sending syntax with JIProlog.',
+		comment is 'Minimal abstraction for calling Java from Logtalk using familiar message-sending syntax with JIProlog.',
 		parnames is ['Reference']
 	]).
 

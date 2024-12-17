@@ -339,7 +339,7 @@ Runtime errors
 --------------
 
 This section briefly describes runtime errors that result from misuse of
-Logtalk built-in predicates, built-in methods or from message sending.
+Logtalk built-in predicates, built-in methods or from message-sending.
 For a complete and detailed description of runtime errors please consult
 the Reference Manual.
 
@@ -364,7 +364,7 @@ arguments, throwing an exception in case of misuse.
 Message sending
 ~~~~~~~~~~~~~~~
 
-The message sending mechanisms always check if the receiver of a message
+The message-sending mechanisms always check if the receiver of a message
 is a defined object and if the message corresponds to a declared
 predicate within the scope of the sender. The built-in protocol
 :ref:`forwarding <apis:forwarding/0>` declares a predicate,

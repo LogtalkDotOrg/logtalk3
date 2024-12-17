@@ -26,7 +26,7 @@
 		version is 1:4:0,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2023-03-13,
-		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
+		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message-sending syntax and a ``forward/1`` handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object.',
 			'ReturnValue' - 'Value returned by a method call (possibly the Java value void).'
@@ -90,7 +90,7 @@
 		version is 1:0:1,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2019-06-13,
-		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message sending syntax and a ``forward/1`` handler to resolve methods.',
+		comment is 'Minimal abstraction of the JPL API for calling Java from Logtalk using familiar message-sending syntax and a ``forward/1`` handler to resolve methods.',
 		parameters is [
 			'Reference' - 'Either a class name or a Java reference to an object.'
 		],

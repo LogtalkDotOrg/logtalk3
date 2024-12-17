@@ -29,7 +29,7 @@
 		_ST_ = [KEY=VALUE| _].
 	lookup(KEY, VALUE) :-
 		_ST_ = [_| STx],
-		% the compiler optimizes the next goal, removing the message sending
+		% the compiler optimizes the next goal, removing the message-sending
 		% overhead, providing the same performance as a local predicate call
 		dict(STx)::lookup(KEY, VALUE).
 

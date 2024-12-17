@@ -198,7 +198,7 @@ solver libraries by using explicit module qualification by writing
 the `{}/1` control construct allows you to bypass the Logtalk compiler).
 
 ECLiPSe defines an alias `in_set_range/2` for `(::)/2` that can be used to
-avoid conflicts with Logtalk `(::)/2` message sending operator.
+avoid conflicts with Logtalk `(::)/2` message-sending operator.
 
 Adopted from an adapter file written and tested with help of Taner Bilgic
 for Logtalk 1.x.
@@ -302,7 +302,7 @@ first loading attempt (use instead the `logtalk_make/0-1` predicates in this
 case).
 
 The `swihooks.pl` file includes experimental and commented out code for
-writing stack trace for errors generated from top-level message sending
+writing stack trace for errors generated from top-level message-sending
 calls. To try it, copy the code to your Logtalk settings file that is
 loaded at startup.
 

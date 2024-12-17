@@ -23,13 +23,13 @@ file.
 
 This is a minimal example illustrating the use of the `uses/1` directive
 to experiment with different object implementations of the same protocol
-when using explicit message sending. The main idea is to have a single
+when using explicit message-sending. The main idea is to have a single
 source line that can be edited to switch between different implementations
-as all message sending calls would be written using the object alias.
+as all message-sending calls would be written using the object alias.
 This is an alternative to accomplish the same goal by using a `uses/2`
-directive and implicit message sending. Note that both alternatives allow
+directive and implicit message-sending. Note that both alternatives allow
 compiling the code in optimized mode to take advantage of static binding
-for the message sending calls.
+for the message-sending calls.
 
 This example also illustrates defining an alias for an object defined at
 runtime using a _parameter variable_.

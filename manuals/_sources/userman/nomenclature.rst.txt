@@ -76,8 +76,8 @@ found elsewhere in this Handbook.
    :term:`inherited <inheritance>` by the object but calling a module predicate
    requires the predicate to exist in (or be reexported by) the module.
 
-**closed world assumption semantics**
-   Logtalk provides clear closed world assumption semantics: messages or calls
+**closed-world assumption semantics**
+   Logtalk provides clear closed-world assumption semantics: messages or calls
    for declared but undefined predicates fail. Messages or calls for unknown
    (i.e. not declared) predicates throw an error. Crucially, this semantics
    applies to both *static* and *dynamic* predicates. But in Prolog workarounds
@@ -141,7 +141,7 @@ found elsewhere in this Handbook.
    Logtalk provides consistent :term:`meta-predicate` call semantics:
    meta-arguments are always called in the meta-predicate
    calling context. This contrasts with Prolog module meta-predicates
-   where the semantics of implicitly qualified calls is different from
+   where the semantics of implicitly qualified calls are different from
    explicitly qualified calls.
 
 **operators scope**
@@ -180,7 +180,7 @@ Smalltalk nomenclature
 ----------------------
 
 The Logtalk name originates from a combination of the Prolog and Smalltalk
-names. Smalltalk had a significant influence in the design of Logtalk and
+names. Smalltalk had a significant influence on the design of Logtalk and
 thus inherits some of its ideas and nomenclature. The following list relates
 the most commonly used Smalltalk terms with their Logtalk counterparts.
 
@@ -198,7 +198,7 @@ the most commonly used Smalltalk terms with their Logtalk counterparts.
 
 **class**
    In Logtalk, *class* is a just a *role* that an object can play. This is
-   similar to Smalltalk where classes are also objects.
+   similar to Smalltalk, where classes are also objects.
 
 **class method**
    Class methods in Logtalk are simply instance methods declared and defined
@@ -215,7 +215,7 @@ the most commonly used Smalltalk terms with their Logtalk counterparts.
    single inheritance, multiple inheritance, and multiple instantiation.
 
 **instance**
-   While in Smalltalk every object is an *instance* of same class, objects
+   While in Smalltalk every object is an *instance* of some class, objects
    in Logtalk can play different roles, including the role of a prototype
    where the concepts of instance and class don't apply. Moreover, instances
    can be either created dynamically or defined statically.
@@ -237,7 +237,7 @@ the most commonly used Smalltalk terms with their Logtalk counterparts.
 
 **message selector**
    Logtalk uses the predicate template (i.e. the predicate callable term with
-   all its arguments unbound) as message selector. The actual type of the
+   all its arguments unbound) as a message selector. The actual type of the
    message arguments is not considered. Like Smalltalk, Logtalk uses *single
    dispatch* on the message receiver.
 
@@ -253,12 +253,12 @@ the most commonly used Smalltalk terms with their Logtalk counterparts.
 
 **method categories**
    There is no support in Logtalk for partitioning the methods of an object
-   in different categories. The Logtalk concept of *category* (a first-class
+   into different categories. The Logtalk concept of *category* (a first-class
    entity) was, however, partially inspired by Smalltalk method categories.
 
 **object**
    Unlike Smalltalk, where *everything* is an object, Logtalk language
-   constructs includes both *terms* (as in Prolog representing e.g. numbers
+   constructs include both *terms* (as in Prolog representing e.g. numbers
    and structures) and three first-class entities: objects, protocols, and
    categories.
 
@@ -276,7 +276,7 @@ the most commonly used Smalltalk terms with their Logtalk counterparts.
 **self**
    Logtalk uses the same definition of *self* found in Smalltalk: the object
    that received the message being processed. Note, however, that *self* is
-   not a keyword in Logtalk but implicit in the :ref:`control_send_to_self_1`
+   not a keyword in Logtalk but is implicit in the :ref:`control_send_to_self_1`
    message to *self* control construct.
 
 **subclass**
@@ -354,7 +354,7 @@ equivalents.
    Logtalk does not support nested classes.
 
 **static member**
-   Logtalk does not support a ``static`` keyword. But the equivalent to
+   Logtalk does not support a ``static`` keyword. But the equivalent of
    static members can be declared in a class metaclass.
 
 **template**
@@ -374,7 +374,7 @@ equivalents.
    Logtalk can use :term:`static binding` or :term:`dynamic binding` for
    locating both method declarations and method definitions. Moreover,
    methods that are declared but not defined simply fail when called
-   (as per :term:`closed-world assumption`).
+   (as per the :term:`closed-world assumption`).
 
 .. _nomenclature_java:
 
@@ -410,7 +410,7 @@ Logtalk equivalents.
    prototype extension.
 
 **interface**
-   Logtalk uses the term :term:`protocol` with similar meaning. But note
+   Logtalk uses the term :term:`protocol` with a similar meaning. But note
    that Logtalk objects and categories declared as implementing a protocol
    are not required to provide definitions for the declared predicates
    (:term:`closed-world assumption`).
@@ -442,7 +442,7 @@ Logtalk equivalents.
    *method*.
 
 **method call**
-   Logtalk usually uses the expression *message sending* for method
+   Logtalk usually uses the expression *message-sending* for method
    calls, true to its Smalltalk heritage.
 
 **method signature**
@@ -477,7 +477,7 @@ Logtalk equivalents.
    Static variables are *shared instance variables* and can simply be both
    declared and defined in a class. The built-in database methods can be
    used to implement destructive updates if necessary by accessing and
-   updated a single clause of a dynamic predicate stored in the class.
+   updating a single clause of a dynamic predicate stored in the class.
 
 **super**
    Instead of a ``super`` keyword, Logtalk provides a super operator and
@@ -513,7 +513,7 @@ their Logtalk equivalents.
 
 **abstract method**
    Logtalk uses the term *predicate* interchangeably with *method*. Predicates
-   can be declared without being also defined in an object (or category).
+   can be declared without also being defined in an object (or category).
 
 **class**
    Logtalk objects can play the role of classes, instances, or protocols
@@ -529,7 +529,7 @@ their Logtalk equivalents.
    anywhere without requiring a scope directive.
 
 **function object**
-   Predicates calls (goals) can be passed or returned from other predicates
+   Predicate calls (goals) can be passed or returned from other predicates
    and unified with other terms (e.g. variables).
 
 **import path**
@@ -563,7 +563,7 @@ their Logtalk equivalents.
 **method**
    Logtalk uses the terms *method* and *predicate* interchangeably.
    Predicates can be defined in objects (and categories). The value
-   of *self* is implicit unlike in Python where it is the first parameter
+   of *self* is implicit, unlike in Python where it is the first parameter
    of any method.
 
 **method resolution order**

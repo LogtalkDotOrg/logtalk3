@@ -187,7 +187,7 @@ predicate: a message may result e.g. in calling a predicate
 <a class="reference internal" href="../glossary.html#term-inheritance"><span class="xref std std-term">inherited</span></a> by the object but calling a module predicate
 requires the predicate to exist in (or be reexported by) the module.</p>
 </dd>
-<dt><strong>closed world assumption semantics</strong></dt><dd><p>Logtalk provides clear closed world assumption semantics: messages or calls
+<dt><strong>closed-world assumption semantics</strong></dt><dd><p>Logtalk provides clear closed-world assumption semantics: messages or calls
 for declared but undefined predicates fail. Messages or calls for unknown
 (i.e. not declared) predicates throw an error. Crucially, this semantics
 applies to both <em>static</em> and <em>dynamic</em> predicates. But in Prolog workarounds
@@ -244,7 +244,7 @@ local to modules in some systems and global in other systems).</p>
 <dt><strong>meta-predicate call semantics</strong></dt><dd><p>Logtalk provides consistent <a class="reference internal" href="../glossary.html#term-meta-predicate"><span class="xref std std-term">meta-predicate</span></a> call semantics:
 meta-arguments are always called in the meta-predicate
 calling context. This contrasts with Prolog module meta-predicates
-where the semantics of implicitly qualified calls is different from
+where the semantics of implicitly qualified calls are different from
 explicitly qualified calls.</p>
 </dd>
 <dt><strong>operators scope</strong></dt><dd><p>Operators declared inside an entity (object, protocol, or category) are
@@ -278,7 +278,7 @@ applications that use the module but not the new predicate).</p>
 <section id="smalltalk-nomenclature">
 <span id="nomenclature-smalltalk"></span><h2>Smalltalk nomenclature<a class="headerlink" href="#smalltalk-nomenclature" title="Link to this heading"></a></h2>
 <p>The Logtalk name originates from a combination of the Prolog and Smalltalk
-names. Smalltalk had a significant influence in the design of Logtalk and
+names. Smalltalk had a significant influence on the design of Logtalk and
 thus inherits some of its ideas and nomenclature. The following list relates
 the most commonly used Smalltalk terms with their Logtalk counterparts.</p>
 <dl class="simple">
@@ -292,7 +292,7 @@ and thus provides no equivalent to the Smalltalk assignment statement.</p>
 to provide similar functionality to Smalltalk blocks.</p>
 </dd>
 <dt><strong>class</strong></dt><dd><p>In Logtalk, <em>class</em> is a just a <em>role</em> that an object can play. This is
-similar to Smalltalk where classes are also objects.</p>
+similar to Smalltalk, where classes are also objects.</p>
 </dd>
 <dt><strong>class method</strong></dt><dd><p>Class methods in Logtalk are simply instance methods declared and defined
 in the class metaclass.</p>
@@ -305,7 +305,7 @@ predicate locally instead of defining it in the class instances.</p>
 <dt><strong>inheritance</strong></dt><dd><p>While Smalltalk only supports single inheritance, Logtalk supports
 single inheritance, multiple inheritance, and multiple instantiation.</p>
 </dd>
-<dt><strong>instance</strong></dt><dd><p>While in Smalltalk every object is an <em>instance</em> of same class, objects
+<dt><strong>instance</strong></dt><dd><p>While in Smalltalk every object is an <em>instance</em> of some class, objects
 in Logtalk can play different roles, including the role of a prototype
 where the concepts of instance and class don’t apply. Moreover, instances
 can be either created dynamically or defined statically.</p>
@@ -323,7 +323,7 @@ interpreted in Logtalk as a logic query, asking for the construction of a
 proof that something is true.</p>
 </dd>
 <dt><strong>message selector</strong></dt><dd><p>Logtalk uses the predicate template (i.e. the predicate callable term with
-all its arguments unbound) as message selector. The actual type of the
+all its arguments unbound) as a message selector. The actual type of the
 message arguments is not considered. Like Smalltalk, Logtalk uses <em>single
 dispatch</em> on the message receiver.</p>
 </dd>
@@ -336,11 +336,11 @@ definition) that is run to answer a message. Logtalk uses the words
 <em>method</em> and <em>predicate</em> interchangeably.</p>
 </dd>
 <dt><strong>method categories</strong></dt><dd><p>There is no support in Logtalk for partitioning the methods of an object
-in different categories. The Logtalk concept of <em>category</em> (a first-class
+into different categories. The Logtalk concept of <em>category</em> (a first-class
 entity) was, however, partially inspired by Smalltalk method categories.</p>
 </dd>
 <dt><strong>object</strong></dt><dd><p>Unlike Smalltalk, where <em>everything</em> is an object, Logtalk language
-constructs includes both <em>terms</em> (as in Prolog representing e.g. numbers
+constructs include both <em>terms</em> (as in Prolog representing e.g. numbers
 and structures) and three first-class entities: objects, protocols, and
 categories.</p>
 </dd>
@@ -355,7 +355,7 @@ objects and an object can implement multiple protocols.</p>
 </dd>
 <dt><strong>self</strong></dt><dd><p>Logtalk uses the same definition of <em>self</em> found in Smalltalk: the object
 that received the message being processed. Note, however, that <em>self</em> is
-not a keyword in Logtalk but implicit in the <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>
+not a keyword in Logtalk but is implicit in the <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>
 message to <em>self</em> control construct.</p>
 </dd>
 <dt><strong>subclass</strong></dt><dd><p>Same definition in Logtalk.</p>
@@ -416,7 +416,7 @@ objects, categories, and protocols).</p>
 </dd>
 <dt><strong>nested class</strong></dt><dd><p>Logtalk does not support nested classes.</p>
 </dd>
-<dt><strong>static member</strong></dt><dd><p>Logtalk does not support a <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword. But the equivalent to
+<dt><strong>static member</strong></dt><dd><p>Logtalk does not support a <code class="docutils literal notranslate"><span class="pre">static</span></code> keyword. But the equivalent of
 static members can be declared in a class metaclass.</p>
 </dd>
 <dt><strong>template</strong></dt><dd><p>Logtalk supports <a class="reference internal" href="objects.html#objects-parametric"><span class="std std-ref">parametric objects</span></a>, which
@@ -433,7 +433,7 @@ predicate can be redefined (either overridden or specialized).
 Logtalk can use <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> or <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> for
 locating both method declarations and method definitions. Moreover,
 methods that are declared but not defined simply fail when called
-(as per <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
+(as per the <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
 </dd>
 </dl>
 </section>
@@ -462,7 +462,7 @@ indicated using <em>specialization relations</em>. Moreover, the <em>extends
 relation</em> is used in Logtalk to indicate protocol, category, or
 prototype extension.</p>
 </dd>
-<dt><strong>interface</strong></dt><dd><p>Logtalk uses the term <a class="reference internal" href="../glossary.html#term-protocol"><span class="xref std std-term">protocol</span></a> with similar meaning. But note
+<dt><strong>interface</strong></dt><dd><p>Logtalk uses the term <a class="reference internal" href="../glossary.html#term-protocol"><span class="xref std std-term">protocol</span></a> with a similar meaning. But note
 that Logtalk objects and categories declared as implementing a protocol
 are not required to provide definitions for the declared predicates
 (<a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a>).</p>
@@ -487,7 +487,7 @@ or defined statically in a source file in the same way as classes.</p>
 <dt><strong>method</strong></dt><dd><p>Logtalk uses the term <a class="reference internal" href="../glossary.html#term-predicate"><span class="xref std std-term">predicate</span></a> interchangeably with the term
 <em>method</em>.</p>
 </dd>
-<dt><strong>method call</strong></dt><dd><p>Logtalk usually uses the expression <em>message sending</em> for method
+<dt><strong>method call</strong></dt><dd><p>Logtalk usually uses the expression <em>message-sending</em> for method
 calls, true to its Smalltalk heritage.</p>
 </dd>
 <dt><strong>method signature</strong></dt><dd><p>Logtalk selects the method/predicate to execute in order to answer a
@@ -516,7 +516,7 @@ methods are simply instance methods of the class metaclass.</p>
 <dt><strong>static variable</strong></dt><dd><p>Static variables are <em>shared instance variables</em> and can simply be both
 declared and defined in a class. The built-in database methods can be
 used to implement destructive updates if necessary by accessing and
-updated a single clause of a dynamic predicate stored in the class.</p>
+updating a single clause of a dynamic predicate stored in the class.</p>
 </dd>
 <dt><strong>super</strong></dt><dd><p>Instead of a <code class="docutils literal notranslate"><span class="pre">super</span></code> keyword, Logtalk provides a super operator and
 control construct, <a class="reference internal" href="../refman/control/call_super_1.html#control-call-super-1"><span class="std std-ref">(^^)/1</span></a>, for calling overridden
@@ -546,7 +546,7 @@ presence of <em>abstract methods</em> (i.e. predicates that are declared
 but not defined) does not make a class abstract.</p>
 </dd>
 <dt><strong>abstract method</strong></dt><dd><p>Logtalk uses the term <em>predicate</em> interchangeably with <em>method</em>. Predicates
-can be declared without being also defined in an object (or category).</p>
+can be declared without also being defined in an object (or category).</p>
 </dd>
 <dt><strong>class</strong></dt><dd><p>Logtalk objects can play the role of classes, instances, or protocols
 (depending on their relations with other objects).</p>
@@ -558,7 +558,7 @@ provides several implementations of a dictionary protocol.</p>
 for predicates not defined in regular objects, and thus callable from
 anywhere without requiring a scope directive.</p>
 </dd>
-<dt><strong>function object</strong></dt><dd><p>Predicates calls (goals) can be passed or returned from other predicates
+<dt><strong>function object</strong></dt><dd><p>Predicate calls (goals) can be passed or returned from other predicates
 and unified with other terms (e.g. variables).</p>
 </dd>
 <dt><strong>import path</strong></dt><dd><p>Logtalk uses the term <em>library</em> to refer to a directory of source files
@@ -584,7 +584,7 @@ objects that play the role of classes.</p>
 </dd>
 <dt><strong>method</strong></dt><dd><p>Logtalk uses the terms <em>method</em> and <em>predicate</em> interchangeably.
 Predicates can be defined in objects (and categories). The value
-of <em>self</em> is implicit unlike in Python where it is the first parameter
+of <em>self</em> is implicit, unlike in Python where it is the first parameter
 of any method.</p>
 </dd>
 <dt><strong>method resolution order</strong></dt><dd><p>Logtalk uses a depth-first algorithm to lookup method (predicate)

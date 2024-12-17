@@ -181,7 +181,7 @@ section). Assuming that this is the case, apply the following steps:
    ``+``, or ``-`` as Logtalk supports :ref:`mode directives <predicates_mode>`.
 #. Convert any explicit qualified calls to module predicates to messages
    by replacing the ``(:)/2`` operator with the :ref:`control_send_to_object_2`
-   message sending operator when the referenced modules are also being
+   message-sending operator when the referenced modules are also being
    converted into objects. Calls in the pseudo-module ``user`` can be
    encapsulated using the :ref:`control_external_call_1` Logtalk external
    call control construct. You can also use instead a :ref:`directives_uses_2`
@@ -238,7 +238,7 @@ term-expansion mechanisms (when provided). Another potential issue is that,
 when compiling modules as objects, Logtalk assumes that any referenced module
 (e.g. using ``use_module/1-2`` directives) is also being compiled as an
 object. If that's not the case, the compiled module calls being compiled as
-message sending goals will still work for normal predicates but will not
+message-sending goals will still work for normal predicates but will not
 work for meta-predicates called using implicit module qualification. The
 reason is that, unlike in Logtalk, calls to implicitly and explicitly
 qualified module meta-predicates have different semantics. Follows a
@@ -510,7 +510,7 @@ order to properly support compilation of modules containing
 ``use_module/2`` directives are not compiled as objects but are instead
 loaded as-is by Prolog, the exported predicates would need to be called
 using the ``Module:Call`` notation but the converted module will be
-calling them through message sending. Thus, this feature ensures that,
+calling them through message-sending. Thus, this feature ensures that,
 on a module compiled as an object, any predicate calling other module
 predicates will work as expected either these other modules are loaded
 as-is or also compiled as objects.

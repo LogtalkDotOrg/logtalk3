@@ -166,7 +166,7 @@ prolog_edit:locate(Entity::Predicate, EntityPredicateSpec, [file(Source), line(L
 
 
 % experimental hack to get a stack trace for errors
-% generated from top-level message sending calls
+% generated from top-level message-sending calls
 /*
 :- use_module(library(prolog_stack)).
 
@@ -477,7 +477,7 @@ prolog_clause:make_varnames_hook(_, (THead :- _), Offsets, Names, Bindings) :-
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne'(Obj, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_ne_'(Obj, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Obj::Msg, _, '$lgt_send_to_obj_'(Obj, Msg, _), TermPos, TermPos) :- !.
-% implicit message sending via uses/2 directives
+% implicit message-sending via uses/2 directives
 '$lgt_swi_unify_clause_body'(Msg, _, '$lgt_send_to_obj_ne_nv'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Msg, _, '$lgt_send_to_obj_ne'(_, Msg, _), TermPos, TermPos) :- !.
 '$lgt_swi_unify_clause_body'(Msg, _, '$lgt_send_to_obj_ne_'(_, Msg, _), TermPos, TermPos) :- !.

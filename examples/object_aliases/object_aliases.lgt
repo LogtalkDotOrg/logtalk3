@@ -22,7 +22,7 @@
 :- object(experiments).
 
 	% editing the random object in the following directive would avoid
-	% having to change all explicit message sending calls to it as
+	% having to change all explicit message-sending calls to it as
 	% they all would be written using the object alias
 	:- uses([
 		fast_random as rnd
@@ -48,7 +48,7 @@
 :- object(simple(_HeapType_)).
 
 	% allow consistently using the same object parametrization
-	% for all message sending calls by simply defining an alias
+	% for all message-sending calls by simply defining an alias
 	:- uses([
 		heap(_HeapType_) as h
 	]).

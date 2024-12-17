@@ -273,7 +273,7 @@ $language_data = array(
             '+', '-', '*', '/', '**',
             // logic and control
             '!', '\\+', ';',
-            // message sending operators
+            // message-sending operators
             '::', '^^', ':',
             // grammar rule and conditional functors
             '-->', '->',

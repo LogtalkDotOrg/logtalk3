@@ -280,7 +280,7 @@ operator:</p>
 </div>
 <p>Thus, in practice, the solution to use library entity operators in client
 entities is the same for using library entity predicates with implicit
-message sending.</p>
+message-sending.</p>
 </section>
 <section id="mode-directive">
 <span id="predicates-mode"></span><h3>Mode directive<a class="headerlink" href="#mode-directive" title="Link to this heading"></a></h3>
@@ -897,7 +897,7 @@ for details.</p>
 <span id="predicates-objects"></span><h3>Object predicates<a class="headerlink" href="#object-predicates" title="Link to this heading"></a></h3>
 <p>We define object predicates as we have always defined Prolog predicates,
 the only difference be that we have four more control structures (the
-three message sending operators plus the external call operator) to play
+three message-sending operators plus the external call operator) to play
 with. For example, if we wish to define an object containing common
 utility list predicates like <code class="docutils literal notranslate"><span class="pre">append/2</span></code> or <code class="docutils literal notranslate"><span class="pre">member/2</span></code> we could write
 something like:</p>
@@ -919,7 +919,7 @@ something like:</p>
 <p>Note that, abstracting from the opening and closing object directives
 and the scope directives, what we have written is also valid Prolog code.
 Calls in a predicate definition body default to the local predicates,
-unless we use the message sending operators or the external call operator.
+unless we use the message-sending operators or the external call operator.
 This simplifies conversion from plain Prolog code to Logtalk objects:
 often we just need to add the necessary encapsulation and scope directives
 to the old code.</p>
@@ -1350,7 +1350,7 @@ grammar rules for parsing determiners, nouns, and verbs. For example:</p>
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
-<p>Along with the message sending operators (<code class="docutils literal notranslate"><span class="pre">(::)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code>),
+<p>Along with the message-sending operators (<code class="docutils literal notranslate"><span class="pre">(::)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">(^^)/1</span></code>),
 we may also use other control constructs such as <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">(\+)/1</span></code>, <code class="docutils literal notranslate"><span class="pre">!/0</span></code>,
 <code class="docutils literal notranslate"><span class="pre">(;)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">(-&gt;)/2</span></code>, <code class="docutils literal notranslate"><span class="pre">{}/1</span></code>, <code class="docutils literal notranslate"><span class="pre">call//1-N</span></code>, and <code class="docutils literal notranslate"><span class="pre">catch/3</span></code> in the body of a
 grammar rule. When using a backend Prolog compiler that supports modules, we may
@@ -1842,7 +1842,7 @@ predicates, either in <code class="docutils literal notranslate"><span class="pr
 <section id="calling-prolog-built-in-predicates">
 <h3>Calling Prolog built-in predicates<a class="headerlink" href="#calling-prolog-built-in-predicates" title="Link to this heading"></a></h3>
 <p>In predicate clauses and object <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directives, predicate
-calls that are not prefixed with a message sending, super call, or module
+calls that are not prefixed with a message-sending, super call, or module
 qualification operator (<code class="docutils literal notranslate"><span class="pre">::</span></code>, <code class="docutils literal notranslate"><span class="pre">^^</span></code>, or <code class="docutils literal notranslate"><span class="pre">:</span></code>), are compiled to either
 calls to local predicates or as calls to Logtalk/Prolog built-in predicates.
 A predicate call is compiled as a call to a local predicate if the object
@@ -2036,7 +2036,7 @@ at runtime when the calls are made.</p>
 and <a class="reference internal" href="../glossary.html#term-predicate-shorthand"><span class="xref std std-term">predicate shorthands</span></a> in <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code>
 directives used within object and categories. For example, the ECLiPSe IC
 Constraint Solvers define a <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> variable domain operator that clashes
-with the Logtalk <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message sending operator. We can solve the conflict
+with the Logtalk <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending operator. We can solve the conflict
 by writing:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">use_module</span>(ic, [(<span class="o">::</span>)<span class="o">/</span><span class="m">2</span> <span class="o">as</span> ins<span class="o">/</span><span class="m">2</span>]).
 </pre></div>

@@ -22,7 +22,7 @@
 % this example is an adaptation of one of the examples distributed with JPL
 %
 % the original code was converted to use the minimal abstraction of the JPL
-% API for calling Java from Logtalk using familiar message sending syntax
+% API for calling Java from Logtalk using familiar message-sending syntax
 
 :- object(flags_table).
 

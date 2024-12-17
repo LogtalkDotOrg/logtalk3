@@ -253,7 +253,7 @@ Keywords={
     Group=1
   },
 
-  { Id=4, --Logtalk message sending operators
+  { Id=4, --Logtalk message-sending operators
     Regex=[[ (::|\^\^|<<|:(?!\-)) ]],
   },
   { Id=4, --Logtalk external-call control construct

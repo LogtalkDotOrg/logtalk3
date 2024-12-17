@@ -68,7 +68,7 @@ in alternative, the notation ``Predicate::Alias``, where ``Predicate``
 and ``Alias`` are callable terms where some or all arguments may be
 instantiated.
 
-To enable the use of :term:`static binding`, and thus optimal message sending
+To enable the use of :term:`static binding`, and thus optimal message-sending
 performance, the objects should be loaded before compiling the entities
 that call their predicates.
 

@@ -138,7 +138,7 @@ operator:
 
 Thus, in practice, the solution to use library entity operators in client
 entities is the same for using library entity predicates with implicit
-message sending.
+message-sending.
 
 .. _predicates_mode:
 
@@ -879,7 +879,7 @@ Object predicates
 
 We define object predicates as we have always defined Prolog predicates,
 the only difference be that we have four more control structures (the
-three message sending operators plus the external call operator) to play
+three message-sending operators plus the external call operator) to play
 with. For example, if we wish to define an object containing common
 utility list predicates like ``append/2`` or ``member/2`` we could write
 something like:
@@ -903,7 +903,7 @@ something like:
 Note that, abstracting from the opening and closing object directives
 and the scope directives, what we have written is also valid Prolog code.
 Calls in a predicate definition body default to the local predicates,
-unless we use the message sending operators or the external call operator.
+unless we use the message-sending operators or the external call operator.
 This simplifies conversion from plain Prolog code to Logtalk objects:
 often we just need to add the necessary encapsulation and scope directives
 to the old code.
@@ -1405,7 +1405,7 @@ grammar rules for parsing determiners, nouns, and verbs. For example:
 
    :- end_category.
 
-Along with the message sending operators (``(::)/1``, ``(::)/2``, and ``(^^)/1``),
+Along with the message-sending operators (``(::)/1``, ``(::)/2``, and ``(^^)/1``),
 we may also use other control constructs such as ``(<<)/2``, ``(\+)/1``, ``!/0``,
 ``(;)/2``, ``(->)/2``, ``{}/1``, ``call//1-N``, and ``catch/3`` in the body of a
 grammar rule. When using a backend Prolog compiler that supports modules, we may
@@ -1977,7 +1977,7 @@ Calling Prolog built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In predicate clauses and object ``initialization/1`` directives, predicate
-calls that are not prefixed with a message sending, super call, or module
+calls that are not prefixed with a message-sending, super call, or module
 qualification operator (``::``, ``^^``, or ``:``), are compiled to either
 calls to local predicates or as calls to Logtalk/Prolog built-in predicates.
 A predicate call is compiled as a call to a local predicate if the object 
@@ -2210,7 +2210,7 @@ Logtalk supports the declaration of :term:`predicate aliases <predicate alias>`
 and :term:`predicate shorthands <predicate shorthand>` in ``use_module/2``
 directives used within object and categories. For example, the ECLiPSe IC
 Constraint Solvers define a ``(::)/2`` variable domain operator that clashes
-with the Logtalk ``(::)/2`` message sending operator. We can solve the conflict
+with the Logtalk ``(::)/2`` message-sending operator. We can solve the conflict
 by writing:
 
 ::

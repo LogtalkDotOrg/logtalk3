@@ -81,7 +81,7 @@ Messages
 --------
 
 Logtalk implements :term:`static binding` and :term:`dynamic binding`
-for message sending calls. For dynamic binding, a caching mechanism is
+for message-sending calls. For dynamic binding, a caching mechanism is
 used by the runtime. It's useful to measure the performance overhead in
 *number of logic inferences* compared with plain Prolog and Prolog modules.
 Note that the number of logic inferences is a metric independent of the

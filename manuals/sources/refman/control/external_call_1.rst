@@ -51,7 +51,7 @@ This control construct allows the programmer to bypass the Logtalk compiler
 - Using it in place of an object identifier when sending a message. In this
   case, its argument is proved as a goal within the context of the ``user``
   pseudo-object with the resulting term being used as an object identifier
-  in the message sending goal. This feature is mainly used with
+  in the message-sending goal. This feature is mainly used with
   :term:`parametric objects <parametric object>` when their identifiers
   correspond to predicates defined in ``user``.
 

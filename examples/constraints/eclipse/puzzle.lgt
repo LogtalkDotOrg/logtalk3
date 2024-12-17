@@ -28,7 +28,7 @@
 	:- public([sendmore1/1, sendmore2/1]).
 
 	% we must define an alias (ins/2) for the ECLiPSe "ic" library operator ::/2
-	% in order to avoid conflicts with the ::/2 Logtalk message sending operator
+	% in order to avoid conflicts with the ::/2 Logtalk message-sending operator
 	% ECLiPSE 6.0#78 adds an alias in_set_range/2 for ::/2 that could also be used
 	:- use_module(ic, [alldifferent/1, (::)/2:ins/2, labeling/1, (#=)/2, (#\=)/2]).
 	:- op(700, xfx, ins).

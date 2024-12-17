@@ -35,7 +35,7 @@ Description
    threaded_once(Goal, Tag)
 
 Proves ``Goal`` asynchronously using a new thread. Only the first goal
-solution is found. The argument can be a message sending goal. This call
+solution is found. The argument can be a message-sending goal. This call
 always succeeds. The result (success, failure, or exception) is sent
 back to the message queue of the object containing the call
 (:term:`this`).

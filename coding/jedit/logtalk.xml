@@ -164,7 +164,7 @@
 		<!-- Numbers -->
 		<SEQ_REGEXP AT_WORD_START="TRUE" TYPE="DIGIT">\d+(\.\d+)?([eE]([-+])?\d+)?</SEQ_REGEXP>
 
-		<!-- Logtalk message sending operators -->
+		<!-- Logtalk message-sending operators -->
 		<SEQ TYPE="OPERATOR">::</SEQ>
 		<SEQ TYPE="OPERATOR">^^</SEQ>
 

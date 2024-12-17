@@ -235,7 +235,7 @@
 		;;
 		(":-" 0 'logtalk-default-face)
 		;;
-		;; message sending operators:
+		;; message-sending operators:
 		;;
 		("::\\|\\^\\^\\|[{}]" 0 'logtalk-message-operator-face)
 		;;

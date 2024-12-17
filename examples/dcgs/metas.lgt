@@ -52,7 +52,7 @@
 	]).
 
 	print :-
-		% use implicit message sending thanks to the uses/2 directive above
+		% use implicit message-sending thanks to the uses/2 directive above
 		phrase(list(print, [1,2,3]), [one, two, three]),
 		phrase(list(print, [a,b,c]), [one, two, three]).
 
@@ -61,7 +61,7 @@
 	:- public(successors/2).
 
 	successors(Elements, Successors) :-
-		% but we can also use explicit message sending
+		% but we can also use explicit message-sending
 		phrase(library::list(next, Successors), Elements).
 
 	next(Next, [Element| Result], Result) :-

@@ -34,16 +34,16 @@ logic and functional languages. In this section, we focus only on declarative
 object-oriented logic programming.
 
 The first key generalization of object-oriented programming concepts is the
-concept of object itself. What an object encapsulates depends on the *base programming
+concept of *object* itself. What an object encapsulates depends on the *base programming
 paradigm* where we apply object-oriented programming concepts. When these concepts
 are applied to an imperative language, where mutable state and destructive assignment
 are central, objects naturally encapsulate and abstract mutable state, providing
 disciplined access and modification. When these concepts are applied to a declarative
 logic language such as Prolog, objects naturally encapsulate predicates. Therefore, an
 object can be seen as a *theory*, expressed by a set of related predicates. Theories
-are usually static and thus Logtalk objects are static by default. This contrasts with
+are usually static, and thus Logtalk objects are static by default. This contrasts with
 imperative object-oriented languages where usually classes are static and objects are
-dynamic. This view of an object as a set of predicates also forgo a distinction
+dynamic. This view of an object as a set of predicates also forgoes a distinction
 between *data* and *procedures* that is central to imperative object-oriented
 languages but moot in declarative, :term:`homoiconic` logic languages.
 
@@ -59,7 +59,7 @@ and the role of an instance for its metaclass. Another common reuse pattern is
 *protocol implementation*. In this case, an object implementing a protocol reuses
 its predicate declarations by providing an implementation for those predicates and
 exposing those predicates to its clients. An essential consequence of this
-generalization is that protocols, objects, and categories are first-class entities
+generalization is that protocols, objects, and categories are first-class entities,
 while e.g. *prototype*, *parent*, *class*, *instance*, *metaclass*, *subclass*,
 *superclass*, or *ancestor* are just *roles* that an object can play. When sending
 a message to an object, the corresponding predicate *declaration* and predicate

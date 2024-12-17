@@ -60,7 +60,7 @@ Usage
 -----
 
 Load this library from your application loader file. To call the `dif/1-2`
-predicates using implicit message sending, add the following directive to
+predicates using implicit message-sending, add the following directive to
 any object or category calling the predicates:
 
 	:- uses(dif, [

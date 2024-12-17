@@ -433,8 +433,8 @@ contents (directives and clauses).</p>
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
-<p>If we need to create a lot of (dynamic) categories at runtime, then is
-best to define a metaclass or a prototype with a predicate that will
+<p>If we need to create a lot of (dynamic) categories at runtime, then it
+is best to define a metaclass or a prototype with a predicate that will
 call this built-in predicate in order to provide more sophisticated
 behavior.</p>
 </section>
@@ -445,13 +445,13 @@ behavior.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- abolish_category(Category).
 </pre></div>
 </div>
-<p>The argument must be an identifier of a defined dynamic category,
+<p>The argument must be an identifier of a defined dynamic category;
 otherwise an error will be thrown.</p>
 </section>
 <section id="category-directives">
 <span id="categories-directives"></span><h2>Category directives<a class="headerlink" href="#category-directives" title="Link to this heading"></a></h2>
-<p>Category directives are used to define category properties, to document
-a category dependencies on other Logtalk entities, and to load the
+<p>Category directives are used to define category properties, document
+a category dependencies on other Logtalk entities, and load the
 contents of files into a category.</p>
 <section id="dynamic-categories">
 <span id="categories-dynamic"></span><h3>Dynamic categories<a class="headerlink" href="#dynamic-categories" title="Link to this heading"></a></h3>
@@ -486,7 +486,7 @@ directive.</p>
 <p>The <a class="reference internal" href="../refman/directives/uses_1.html#directives-uses-1"><span class="std std-ref">uses/1</span></a> directive can be used to declare object aliases.
 The typical uses of this directive is to shorten long object names and to
 simplify experimenting with different object implementations of the same
-protocol when using explicit message sending.</p>
+protocol when using explicit message-sending.</p>
 </section>
 </section>
 <section id="category-relationships">
@@ -503,7 +503,7 @@ allows us to find which categories implements which protocols:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>| ?- conforms_to_protocol(Category, Protocol, Scope).
 </pre></div>
 </div>
-<p>Note that, if we use a unbound first argument, we will need to use the
+<p>Note that, if we use an unbound first argument, we will need to use the
 <a class="reference internal" href="../refman/predicates/current_category_1.html#predicates-current-category-1"><span class="std std-ref">current_category/1</span></a> built-in predicate to ensure that
 the returned entity is a category and not an object.</p>
 <p>To find which objects import which categories we can use the

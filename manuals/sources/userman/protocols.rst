@@ -22,7 +22,7 @@ Protocols
 =========
 
 Protocols enable the separation between interface and implementation:
-several objects can implement the same protocol and an object can
+several objects can implement the same protocol, and an object can
 implement several protocols. Protocols may contain only predicate
 declarations. In some languages the term *interface* is used with
 a similar meaning. Logtalk allows predicate declarations of any scope
@@ -56,7 +56,7 @@ compiler, the names of the intermediate Prolog files may include a
 directory hash and a process identifier to prevent file name clashes
 when embedding Logtalk applications or running parallel Logtalk processes).
 
-Protocol names must be atoms. Objects, categories and protocols share
+Protocol names must be atoms. Objects, categories, and protocols share
 the same namespace: we cannot have a protocol with the same name as an
 object or a category.
 
@@ -140,8 +140,8 @@ is equivalent to compiling and loading the protocol:
 
    :- end_protocol.
 
-If we need to create a lot of (dynamic) protocols at runtime, then is
-best to define a metaclass or a prototype with a predicate that will
+If we need to create a lot of (dynamic) protocols at runtime, then it
+is best to define a metaclass or a prototype with a predicate that will
 call this built-in predicate in order to provide more sophisticated
 behavior.
 
@@ -157,7 +157,7 @@ Dynamic protocols can be abolished using the
 
    | ?- abolish_protocol(Protocol).
 
-The argument must be an identifier of a defined dynamic protocol,
+The argument must be an identifier of a defined dynamic protocol;
 otherwise an error will be thrown.
 
 Protocol directives
@@ -226,7 +226,7 @@ or, if we also want to know the extension scope:
 
    | ?- extends_protocol(Protocol1, Protocol2, Scope).
 
-To find which objects or categories implement which protocols we can
+To find which objects or categories implement which protocols, we can
 call the :ref:`predicates_implements_protocol_2_3` built-in predicates:
 
 .. code-block:: text
@@ -300,7 +300,7 @@ The following protocol properties are supported:
    ``non_terminal(NonTerminal)``, and ``line_count(Line)`` with ``Line``
    being the begin line of the alias directive)
 
-Some of the properties such as line numbers are only available when the
+Some of the properties, such as line numbers, are only available when the
 protocol is defined in a source file compiled with the
 :ref:`source_data <flag_source_data>` flag turned on.
 
@@ -357,7 +357,7 @@ Omitting the scope keyword is equivalent to writing:
        ...
    :- end_object.
 
-The same rules applies to protocols implemented by categories.
+The same rules apply to protocols implemented by categories.
 
 .. _protocols_built_in:
 

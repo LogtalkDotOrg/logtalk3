@@ -1051,7 +1051,7 @@ Optional features compilation flags
 .. index:: pair: events; Flag
 
 ``events(Option)``
-   Allows message sending calls to be compiled with or without
+   Allows message-sending calls to be compiled with or without
    :ref:`event-driven programming <events_events>` support. Possible
    option values are ``allow`` and ``deny`` (the usual default). Objects
    (and categories) compiled with this option set to ``deny`` use
@@ -1064,7 +1064,7 @@ Optional features compilation flags
 .. index:: pair: context_switching_calls; Flag
 
 ``context_switching_calls(Option)``
-   Allows context switching calls (``(<<)/2``) to be either allowed or
+   Allows context-switching calls (``(<<)/2``) to be either allowed or
    denied. Possible option values are ``allow`` and ``deny``. The
    default flag vale is ``allow``. Note that changing this option is of
    no consequence for objects already compiled and loaded.
@@ -1408,7 +1408,7 @@ directives must be repeated to ensure a correct compilation.
 
 In general, Logtalk does not verify if a user predicate call/return
 arguments comply with the declared modes. On the other hand, Logtalk
-built-in predicates, built-in methods, and message sending control
+built-in predicates, built-in methods, and message-sending control
 structures are fully checked for calling mode errors.
 
 Logtalk error handling strongly depends on the ISO compliance of the

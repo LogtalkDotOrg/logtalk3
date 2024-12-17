@@ -82,7 +82,7 @@ Errors
 |     ``existence_error(procedure, Goal)``
 | ``Object`` does not exist:
 |     ``existence_error(object, Object)``
-| ``Object`` was created/compiled with support for context switching calls turned off:
+| ``Object`` was created/compiled with support for context-switching calls turned off:
 |     ``permission_error(access, database, Goal)``
 | 
 | ``Proxy`` is a variable:

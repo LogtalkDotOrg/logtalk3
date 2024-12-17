@@ -25,7 +25,7 @@
 		version is 1:2:1,
 		author is 'Paulo Moura and Sergio Castro',
 		date is 2023-03-16,
-		comment is 'Protocol for a minimal abstraction for calling Java from Logtalk using familiar message sending syntax.'
+		comment is 'Protocol for a minimal abstraction for calling Java from Logtalk using familiar message-sending syntax.'
 	]).
 
 	:- public(get_field/2).

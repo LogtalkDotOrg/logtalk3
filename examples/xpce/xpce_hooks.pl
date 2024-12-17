@@ -19,7 +19,7 @@
 
 
 % integration code for XPCE 6.6.21 and later versions supporting Logtalk
-% message sending goals as call-backs goals
+% message-sending goals as call-backs goals
 %
 % with this file you can use the syntax:
 %

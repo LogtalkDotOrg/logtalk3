@@ -22,7 +22,7 @@ To load this example and for sample queries, please see the `SCRIPT.txt` file.
 
 This folder provides simple benchmark tests for comparing Logtalk message
 sending performance with direct predicates calls in plain Prolog.
-These benchmarks may also be used for comparing Logtalk message sending
+These benchmarks may also be used for comparing Logtalk message-sending
 performance across Prolog compilers.
 
 This example is made of four loader files and five source files:
@@ -70,10 +70,10 @@ By default, the benchmark tests on the `SCRIPT.txt` file use a list of 30
 elements as an argument to the list length and list reverse predicates. When
 dynamic binding is used, increasing the list length results in decreasing
 performance differences between plain Prolog and Logtalk as the length and
-reverse computation times far outweigh the overhead of the message sending
+reverse computation times far outweigh the overhead of the message-sending
 mechanism. Likewise, decreasing the list length leads to increasing performance
 differences between plain Prolog and Logtalk (up to the point you will be
-measuring the Logtalk message sending mechanism overhead compared to plain
+measuring the Logtalk message-sending mechanism overhead compared to plain
 Prolog predicate calls). In real-life applications, only testing can give
 you a balanced view on the trade-offs between plain Prolog performance and
 Logtalk programming features.

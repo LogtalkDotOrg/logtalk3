@@ -30,5 +30,5 @@ This pattern can be used with both classes and prototypes.
 We use prototypes in this sample implementation. The context object
 uses a dynamic predicate to hold the current concrete state object
 identifier with a public predicate to set it. The concrete state
-objects perform the context switching after handling a forwarded
+objects perform the context-switching after handling a forwarded
 client request.

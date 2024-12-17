@@ -345,8 +345,8 @@ is equivalent to compiling and loading the category:
 
    :- end_category.
 
-If we need to create a lot of (dynamic) categories at runtime, then is
-best to define a metaclass or a prototype with a predicate that will
+If we need to create a lot of (dynamic) categories at runtime, then it
+is best to define a metaclass or a prototype with a predicate that will
 call this built-in predicate in order to provide more sophisticated
 behavior.
 
@@ -362,7 +362,7 @@ Dynamic categories can be abolished using the
 
    | ?- abolish_category(Category).
 
-The argument must be an identifier of a defined dynamic category,
+The argument must be an identifier of a defined dynamic category;
 otherwise an error will be thrown.
 
 .. _categories_directives:
@@ -370,8 +370,8 @@ otherwise an error will be thrown.
 Category directives
 -------------------
 
-Category directives are used to define category properties, to document
-a category dependencies on other Logtalk entities, and to load the
+Category directives are used to define category properties, document
+a category dependencies on other Logtalk entities, and load the
 contents of files into a category.
 
 .. _categories_dynamic:
@@ -421,7 +421,7 @@ Declaring object aliases
 The :ref:`directives_uses_1` directive can be used to declare object aliases.
 The typical uses of this directive is to shorten long object names and to
 simplify experimenting with different object implementations of the same
-protocol when using explicit message sending.
+protocol when using explicit message-sending.
 
 .. _categories_relationships:
 
@@ -445,7 +445,7 @@ or, if we also want to consider inherited protocols:
 
    | ?- conforms_to_protocol(Category, Protocol, Scope).
 
-Note that, if we use a unbound first argument, we will need to use the
+Note that, if we use an unbound first argument, we will need to use the
 :ref:`predicates_current_category_1` built-in predicate to ensure that
 the returned entity is a category and not an object.
 

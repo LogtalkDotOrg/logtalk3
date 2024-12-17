@@ -61,7 +61,7 @@ Usage
 -----
 
 Load this library from your application loader file. To call the coroutining
-predicates using implicit message sending, add the following directive to any
+predicates using implicit message-sending, add the following directive to any
 object or category calling the predicates (adjust the list to the predicates
 actually called):
 

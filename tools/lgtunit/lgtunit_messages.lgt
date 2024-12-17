@@ -249,7 +249,7 @@
 		[' covered, ~f% clause coverage'-[Percentage], nl, nl].
 
 	message_tokens(code_coverage_header) -->
-		[nl, 'clause coverage ratio and covered clauses per entity predicate'-[], nl, nl].
+		[nl, 'clause coverage ratio and covered clauses per-entity predicate'-[], nl, nl].
 
 	message_tokens(entity_coverage_starts(_Entity)) -->
 		[].

@@ -56,7 +56,7 @@ Usage
 -----
 
 Load this library from your application loader file. To call the
-``format/2-3`` predicates using implicit message sending, add the
+``format/2-3`` predicates using implicit message-sending, add the
 following directive to any object or category calling the predicates:
 
 ::

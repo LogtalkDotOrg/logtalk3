@@ -34,7 +34,7 @@ Description
    threaded_ignore(Goal)
 
 Proves ``Goal`` asynchronously using a new thread. Only the first goal
-solution is found. The argument can be a message sending goal. This call
+solution is found. The argument can be a message-sending goal. This call
 always succeeds, independently of the result (success, failure, or
 exception), which is simply discarded instead of being sent back to the
 message queue of the object containing the call

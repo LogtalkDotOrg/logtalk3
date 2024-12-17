@@ -37,7 +37,7 @@ syn region	logtalkAtom		start=+'+	skip=+\\'+	end=+'+		contains=logtalkEscapeSequ
 syn match	logtalkEscapeSequence	contained	"\\\([\\abfnrtv\"\']\|\(x[a-fA-F0-9]\+\|[0-7]\+\)\\\)"
 
 
-" Logtalk message sending operators
+" Logtalk message-sending operators
 
 syn match	logtalkOperator		"::"
 syn match	logtalkOperator		"\(0'\)\@<!:"
