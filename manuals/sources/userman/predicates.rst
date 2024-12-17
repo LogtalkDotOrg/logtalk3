@@ -23,10 +23,10 @@ Predicates
 
 Predicate directives and clauses can be encapsulated inside objects and
 categories. Protocols can only contain predicate directives. From the
-point-of-view of a traditional imperative object-oriented language,
+point of view of a traditional imperative object-oriented language,
 predicates allow both object state and object behavior to be represented.
 Mutable object state can be represented using dynamic object predicates
-but should only be used when strictly necessary as it breaks declarative
+but should only be used when strictly necessary, as it breaks declarative
 semantics.
 
 .. _predicates_reserved:
@@ -35,7 +35,7 @@ Reserved predicate names
 ------------------------
 
 For practical and performance reasons, some predicate names have a fixed
-interpretation. These predicates are declared in the built-protocols.
+interpretation. These predicates are declared in the built-in protocols.
 They are: :ref:`methods_goal_expansion_2` and :ref:`methods_term_expansion_2`,
 declared in the :ref:`expanding <apis:expanding/0>` protocol;
 :ref:`methods_before_3` and :ref:`methods_after_3`, declared in the
@@ -76,7 +76,7 @@ Protected predicates can only be called from the container object or
 from a container descendant. Private predicates can only be called from
 the container object. Predicates are local when they are not declared in
 a scope directive. Local predicates, like private predicates, can only be
-called from the container object (or category) but they are *invisible*
+called from the container object (or category), but they are *invisible*
 to the reflection built-in methods (:ref:`methods_current_predicate_1`
 and :ref:`methods_predicate_property_2`) and to the message error handling
 mechanisms (i.e. sending a message corresponding to a local predicate
@@ -108,7 +108,7 @@ only be called from an object holding its scope directive. But it can be
 defined in descendant objects. A typical example is an object playing
 the role of a class defining a private (possibly dynamic) predicate for
 its descendant instances. Only the class can call (and possibly
-assert/retract clauses for) the predicate but its clauses can be
+assert/retract clauses for) the predicate, but its clauses can be
 found/defined in the instances themselves.
 
 Scope directives may also be used to declare grammar rule non-terminals
@@ -122,13 +122,13 @@ and operators. For example:
 
 Note that, in the case of operators, the operator definitions don't become
 global when the entity containing the directives is compiled and loaded.
-This prevents an application from breaking when e.g. an updated third-party
-library adds new operators. It also allows loading entities that provide
-conflicting operator definitions. Here the usual programming idiom is to
-copy the operator definitions to a ``uses/2`` directive. For example, the
-:doc:`../devtools/lgtunit` tool makes available a ``(=~=)/2`` predicate
-(for approximate float equality) that is intended to be used as an infix
-operator:
+This prevents an application from breaking when, for example, an updated
+third-party library adds new operators. It also allows loading entities
+that provide conflicting operator definitions. Here the usual programming
+idiom is to copy the operator definitions to a ``uses/2`` directive. For
+example, the :doc:`../devtools/lgtunit` tool makes available a ``(=~=)/2``
+predicate (for approximate float equality) that is intended to be used
+as an infix operator:
 
 ::
 
@@ -157,7 +157,7 @@ documented using the :ref:`directives_mode_2` directive. For example:
 
 The first directive argument describes a valid *calling mode*. The minimum
 information will be the instantiation mode of each argument. The first
-four possible values are described e.g. in the ISO Prolog Core standard
+four possible values are described in the ISO Prolog Core standard
 [ISO95]_). The remaining two can also be found in use in some Prolog systems.
 
 ``+``
@@ -195,7 +195,7 @@ cases.
 
 The second directive argument documents the *number of proofs*, but not
 necessarily distinct solutions, for the specified mode. As an example,
-the ``member(X, [1,1,1,1])`` goal have only one distinct solution but four
+the ``member(X, [1,1,1,1])`` goal has only one distinct solution but four
 proofs for that solution. Note that different modes for the same predicate
 often have different determinism. The possible values are:
 
@@ -240,7 +240,7 @@ Notice that using the ``zero``, ``one``, ``zero_or_one``, ``zero_or_more``, or
 they can also be used for any predicate that doesn't throw an exception when
 the arguments are valid. For example, the ``current_predicate/1`` standard
 predicate throws an exception if the argument is neither a variable nor a
-predicate indicator; but it succeeds zero or more times when its argument is
+predicate indicator, but it succeeds zero or more times when its argument is
 valid:
 
 ::
@@ -249,7 +249,7 @@ valid:
 
 Some predicates have more than one valid mode, thus implying several mode
 directives. For example, to document the possible use modes of the standard
-``atom_concat/3`` predicate we would write:
+``atom_concat/3`` predicate, we would write:
 
 ::
 
@@ -259,7 +259,7 @@ directives. For example, to document the possible use modes of the standard
 The first ``mode/2`` directive specifies that the ``atom_concat/3`` predicate
 can be used to split an atom into a prefix and a suffix. The second ``mode/2``
 directive specifies that concatenating two atoms results in a new atom. There
-are often several alternatives ``mode/2`` directives that can be used to
+are often several alternative ``mode/2`` directives that can be used to
 specify a predicate. For example, an alternative to the second ``mode/2``
 directive above would be:
 
@@ -288,7 +288,7 @@ as :term:`closures <closure>` that will be used for constructing goals, or
 passing meta-arguments to calls to other meta-predicates. To ensure that these
 goals will be executed in the correct context
 (i.e. in the :term:`calling context <predicate calling context>`, not in the
-meta-predicate :term:`definition context <predicate definition context>`) we
+meta-predicate :term:`definition context <predicate definition context>`), we
 need to use the :ref:`directives_meta_predicate_1` directive (in the case of
 *meta non-terminals*, there's also a :ref:`directives_meta_non_terminal_1`
 directive). For example:
@@ -336,7 +336,7 @@ built-in meta-predicates and meta-directives:
    List of non-terminal indicators.
 
 To the best of my knowledge, the use of non-negative integers to specify
-closures has first introduced on Quintus Prolog for providing information
+closures was first introduced on Quintus Prolog for providing information
 for predicate cross-reference tools.
 
 Note that Logtalk meta-predicate semantics are different from Prolog
@@ -344,21 +344,21 @@ meta-predicate semantics (assuming a predicate-based module system as
 common):
 
 -  Meta-arguments are always called in the meta-predicate calling context,
-   independently of using explicit or implicit message-sending (to the object
+   independent of using explicit or implicit message-sending (to the object
    defining the meta-predicate when not local). Most Prolog systems have
    different semantics for explicit versus implicit module qualification.
 
--  Logtalk is not based on a predicate prefixing mechanism and thus the
+-  Logtalk is not based on a predicate prefixing mechanism. Therefore, the
    meta-predicate directive is required for any predicate with meta-arguments
    (including when simply passing the meta-arguments to a call to another
    meta-predicate). This is usually not required in Prolog systems due to the
-   module-prefixing of meta-arguments.
+   module prefixing of meta-arguments.
 
 -  Sending a message from a meta-predicate definition to call a meta-predicate
    defined in another object resets the calling context for any passed
    meta-argument to the object sending the message (including for messages to
    *self*). Meta-arguments behave differently in Prolog systems due to their
-   module-prefixing.
+   module prefixing.
 
 -  Logtalk protects from common scenarios where specially crafted meta-predicate
    definitions are used to break object (and category) encapsulation by changing
@@ -388,14 +388,14 @@ In that case, we must declare the predicate discontiguous by using the
    :- discontiguous(foo/1).
 
 This is a directive that we should avoid using: it makes your code
-harder to read and it is not supported by some Prolog backends.
+harder to read, and it is not supported by some Prolog backends.
 
 .. warning::
 
    As each Logtalk entity is compiled independently of other entities,
    this directive must be included in every object or category that
    contains a definition for the described predicate (even if the
-   predicate declaration is inherited from other entity).
+   predicate declaration is inherited from another entity).
 
 .. _predicates_dynamic:
 
@@ -404,7 +404,7 @@ Dynamic directive
 
 An object predicate can be static or dynamic. By default, all predicates (and
 non-terminals) of static objects defined in source files are static. To declare
-a dynamic predicate (or non-terminal) we use the :ref:`directives_dynamic_1`
+a dynamic predicate (or non-terminal), we use the :ref:`directives_dynamic_1`
 directive. For example:
 
 ::
@@ -426,7 +426,7 @@ predicate definitions).
    As each Logtalk entity is compiled independently from other entities, this
    directive must be included in every object that contains a definition for
    the described predicate (even if the predicate declaration is inherited
-   from other object or imported from a category). If we omit the dynamic
+   from another object or imported from a category). If we omit the dynamic
    declaration then the predicate definition will be compiled static.
 
 .. _predicates_op:
@@ -478,8 +478,8 @@ Uses directive
 ~~~~~~~~~~~~~~
 
 When a predicate makes heavy use of predicates defined on other objects,
-its predicate clauses can be verbose due to all the necessary message
-sending goals. Consider the following example:
+its predicate clauses can be verbose due to all the necessary
+message-sending goals. Consider the following example:
 
 ::
 
@@ -559,7 +559,7 @@ there are no conflicts between the predicates declared in the directive
 and the predicates defined in the object (or category) containing the
 directive. A predicate (or its alias if defined) cannot be listed in
 more than one ``uses/2`` directive. In addition, a ``uses/2`` directive
-cannot list a predicate (or its alias if defined) which is defined in
+cannot list a predicate (or its alias if defined) that is defined in
 the object (or category) containing the directive. Any conflicts are
 reported by Logtalk as compilation errors.
 
@@ -611,7 +611,7 @@ directive of the entity containing the ``alias/2`` directive. It can be
 an extended or implemented protocol, an imported category, an extended
 prototype, an instantiated class, or a specialized class. The second
 argument is a list of pairs of predicate indicators (or grammar rule
-non-terminal indicators) using the ``as`` infix operator as connector.
+non-terminal indicators) using the ``as`` infix operator.
 
 A common use for the ``alias/2`` directive is to give an alternative
 name to an inherited predicate in order to improve readability. For
@@ -631,17 +631,17 @@ example:
 The directive allows both ``width/1`` and ``side/1`` to be used as
 messages to the object ``square``. Thus, using this directive, there is
 no need to explicitly declare and define a "new" ``side/1`` predicate.
-Note that the ``alias/2`` directive does not rename a predicate, only
+Note that the ``alias/2`` directive does not rename a predicate, it only
 provides an alternative, additional name; the original name continues to
 be available (although it may be masked due to the default inheritance
 conflict mechanism).
 
 Another common use for this directive is to solve conflicts when two
 inherited predicates have the same name and arity. We may want to
-call the predicate which is masked out by the Logtalk lookup algorithm
+call the predicate that is masked out by the Logtalk lookup algorithm
 (see the :ref:`inheritance_inheritance` section) or we may need to
 call both predicates. This is simply accomplished by using the
-``alias/2`` directive to give alternative names to masked out or
+``alias/2`` directive to give alternative names to masked-out or
 conflicting predicates. Consider the following example:
 
 ::
@@ -680,10 +680,10 @@ similar to programming constructs of other object-oriented languages
 that support multi-inheritance (the most notable example probably being
 the renaming of inherited features in Eiffel).
 
-Note that the ``alias/2`` directive never hides a predicate which is
+Note that the ``alias/2`` directive never hides a predicate that is
 visible on the entity containing the directive as a result of the
 Logtalk lookup algorithm. However, it may be used to make visible a
-predicate which otherwise would be masked by another predicate, as
+predicate that otherwise would be masked by another predicate, as
 illustrated in the above example.
 
 The ``alias/2`` directive may also be used to give access to an
@@ -796,7 +796,7 @@ as:
    X = 4
    yes
 
-Note that the order of multifile predicate clauses depend on several factors,
+Note that the order of multifile predicate clauses depends on several factors,
 including loading order and compiler implementation details. Therefore, your
 code should never assume or rely on a specific order of the multifile predicate
 clauses.
@@ -814,13 +814,13 @@ which the clause is defined. The parameters of the entity for which the
 clause is defined can be accessed by simple unification at the clause
 head.
 
-Multifile predicate rules should not contain cuts as these may prevent
-other clauses for the predicate for being used by callers. The compiler
+Multifile predicate rules should not contain cuts, as these may prevent
+other clauses for the predicate from being used by callers. The compiler
 prints by default a warning when a cut is found in a multifile predicate
 definition.
 
 Local calls to the database methods from multifile predicate clauses
-defined in an object take place in the object own database instead of
+defined in an object take place in the object's own database instead of
 the database of the entity holding the multifile predicate primary
 declaration. Similarly, local calls to the ``expand_term/2`` and
 ``expand_goal/2`` methods from a multifile predicate clause look for
@@ -829,7 +829,7 @@ predicates starting from the entity defining the clause instead of the
 entity holding the multifile predicate primary declaration. Local calls
 to the ``current_predicate/1``, ``predicate_property/2``, and
 ``current_op/3`` methods from multifile predicate clauses defined in an
-object also lookup predicates and their properties in the object own
+object also lookup predicates and their properties in the object's own
 database instead of the database of the entity holding the multifile
 predicate primary declaration.
 
@@ -878,7 +878,7 @@ Object predicates
 ~~~~~~~~~~~~~~~~~
 
 We define object predicates as we have always defined Prolog predicates,
-the only difference be that we have four more control structures (the
+the only difference being that we have four more control structures (the
 three message-sending operators plus the external call operator) to play
 with. For example, if we wish to define an object containing common
 utility list predicates like ``append/2`` or ``member/2`` we could write
@@ -902,7 +902,7 @@ something like:
 
 Note that, abstracting from the opening and closing object directives
 and the scope directives, what we have written is also valid Prolog code.
-Calls in a predicate definition body default to the local predicates,
+Calls in a predicate definition body default to the local predicates
 unless we use the message-sending operators or the external call operator.
 This simplifies conversion from plain Prolog code to Logtalk objects:
 often we just need to add the necessary encapsulation and scope directives
@@ -977,7 +977,7 @@ Meta-predicates
 
 Meta-predicates may be defined inside objects and categories as any other
 predicate. A meta-predicate is declared using the
-:ref:`directives_meta_predicate_1` directive as described earlier on
+:ref:`directives_meta_predicate_1` directive as described earlier in
 this section. When defining a meta-predicate, the arguments in the 
 clause heads corresponding to the meta-arguments must be variables.
 All meta-arguments are called in the context of the object or category
@@ -1000,7 +1000,7 @@ be defined as:
 The ``0`` in the meta-predicate template tells us that the meta-argument is a
 goal that will be called by the meta-predicate.
 
-Some meta-predicates have meta-arguments which are not goals but
+Some meta-predicates have meta-arguments that are not goals but
 :term:`closures <closure>`. Logtalk supports the definition of meta-predicates
 that are called with closures instead of goals as long as the definition uses
 the :ref:`methods_call_N` built-in predicate to call the closure with the
@@ -1022,8 +1022,8 @@ calling a meta-predicate, a closure can correspond to a user-defined
 predicate, a built-in predicate, a :term:`lambda expression`, or a
 control construct.
 
-In some cases, is not a meta-argument but one of its sub-terms that is
-called as a goal or used as a closure. For example:
+In some cases, it is not a meta-argument but one of its sub-terms that
+is called as a goal or used as a closure. For example:
 
 ::
 
@@ -1036,7 +1036,7 @@ called as a goal or used as a closure. For example:
        call_all(Goals).
 
 The ``::`` mode indicator in the meta-predicate template allows the
-corresponding argument in the meta-predicate definiton to be a
+corresponding argument in the meta-predicate definition to be a
 non-variable term and instructs the compiler to look into the argument
 sub-terms for goal and closure :term:`meta-variables <meta-variable>`.
 
@@ -1098,7 +1098,7 @@ rewritten as:
    Ys = [2,4,6]
    yes
 
-Lambda expressions may also contain *lambda free variables*. I.e. variables
+Lambda expressions may also contain *lambda-free variables*. I.e. variables
 that are global to the lambda expression and shared with the surrounding
 meta-call context. Consider the following variant of the previous example:
 
@@ -1110,7 +1110,7 @@ meta-call context. Consider the following variant of the previous example:
    N = 3, L = [3,6,9]
    yes
 
-In this case, the lambda free variable, ``N``, bound by the ``between/3``
+In this case, the lambda-free variable, ``N``, bound by the ``between/3``
 goal, is fixed across all implicit calls made by the ``map/3`` goal.
 
 A second example of free variables in a lambda expression using GNU Prolog
@@ -1123,7 +1123,7 @@ as the backend compiler:
    Zs = [_#3(2..268435454),_#66(1..268435453),_#110(0..268435452)]
    yes
 
-The ISO Prolog construct ``{}/1`` for representing the lambda free
+The ISO Prolog construct ``{}/1`` is used for representing the lambda-free
 variables as this representation is often associated with set
 representation. Note that the order of the free variables is of no
 consequence (on the other hand, a list is used for the lambda parameters
@@ -1139,7 +1139,7 @@ Consider the following example by Markus Triska:
    yes
 
 Lambda expressions can be used, as expected, in non-deterministic
-queries as in the following example using SWI-Prolog as the backend
+queries, as in the following example using SWI-Prolog as the backend
 compiler and Markus Triska's CLP(FD) library:
 
 .. code-block:: text
@@ -1170,7 +1170,7 @@ languages such as OCaml and Haskell to connect lambda parameters with
 lambda functions. This syntax was also chosen in order to simplify
 parsing, error checking, and compilation of lambda expressions. The
 full specification of the lambda expression syntax can be found in
-the the :ref:`language grammar <grammar_lambdas>`.
+the :ref:`language grammar <grammar_lambdas>`.
 
 The compiler checks whenever possible that all variables in a lambda
 expression are either classified as free variables or as lambda
@@ -1178,7 +1178,7 @@ parameters. Non-classified variables in a lambda goal (including any
 anonymous variables) should be regarded as a programming error. The
 compiler also checks whenever possible if a variable is classified as
 both a free variable and a lambda parameter. There are a few cases
-where a variable playing a dual role is intended but, in general, this
+where a variable playing a dual role is intended, but, in general, this
 also results from a programming error. A third check verifies that no
 lambda parameter variable is used elsewhere in a clause. Such cases
 are either programming errors, when the variable appears before the
@@ -1186,9 +1186,9 @@ lambda expression, or bad programming style, when the variable is used
 after the lambda expression. These linter warnings are controlled by
 the :ref:`lambda_variables <flag_lambda_variables>` flag. Note that the
 dynamic features of the language and lack of sufficient information at
-compile-time may prevent the compiler of checking all uses of lambda
+compile-time may prevent the compiler from checking all uses of lambda
 expressions. To improve linter coverage, compile code using lambda
-expressions with the :ref:`optimize flag <flag_optimize>` turned on
+expressions with the :ref:`optimize flag <flag_optimize>` turned on,
 as that will result in additional cases of meta-arguments being
 evaluated for possible optimizations.
 
@@ -1202,8 +1202,8 @@ An optimizing meta-predicate and lambda expression compiler, based on the
 standard library for practical performance.
 
 A common use of lambda expressions as closure meta-arguments is to workaround
-closures always being extended by *appending* additional argument to construct
-a goal. For example, assume that we want to filer a list of atoms by a given
+closures always being extended by *appending* additional arguments to construct
+a goal. For example, assume that we want to filter a list of atoms by a given
 length. We can use the standard ``atom_length/2`` predicate despite the
 argument order by writing:
 
@@ -1275,7 +1275,7 @@ The redefinition of built-in predicates can also be accomplished using
 when porting code while minimizing the changes. For example, assume
 that existing code uses the ``format/2`` de facto standard predicate
 for writing messages. To convert the code to use the
-:ref:`message printing mechanism <printing_printing>` we could write:
+:ref:`message printing mechanism <printing_printing>`, we could write:
 
 ::
 
@@ -1303,7 +1303,7 @@ represent the parsing and rewrite rules common of most grammars in
 Prolog. In Logtalk, definite clause grammar rules can be encapsulated
 in objects and categories. Currently, the ISO/IEC WG17 group is working
 on a draft specification for a definite clause grammars Prolog standard.
-Therefore, in the mean time, Logtalk follows the common practice of Prolog
+Therefore, in the meantime, Logtalk follows the common practice of Prolog
 compilers supporting definite clause grammars, extending it to support
 calling grammar rules contained in categories and objects. A common
 example of a definite clause grammar is the definition of a set of rules
@@ -1345,8 +1345,8 @@ using the ``parse/2`` message:
 The non-terminals can be called from predicates using the private built-in
 methods :ref:`methods_phrase_2` and :ref:`methods_phrase_3` as shown in the
 example above. When we want to use the built-in methods ``phrase/2`` and
-``phrase/3``, the non-terminal used as first argument must be within the
-scope of the *sender*. For the above example, assuming that we want the
+``phrase/3``, the non-terminal used as in the first argument must be within
+the scope of the *sender*. For the above example, assuming that we want the
 predicate corresponding to the ``expr//1`` non-terminal to be public,
 the corresponding scope directive would be:
 
@@ -1415,10 +1415,10 @@ also use the ``(:)/2`` control construct.
 
    The semantics of ``(\+)/1`` and ``(->)/2`` control constructs in grammar rules
    with a terminal or a non-terminal in the **first** argument are problematic due
-   to unrestricted look ahead that may or may not be valid depending on the grammar
+   to unrestricted lookahead that may or may not be valid depending on the grammar
    rule implicit arguments. By default, the linter will print warnings for such
    calls (controlled by the :ref:`grammar_rules <flag_grammar_rules>` flag).
-   Preferably restrit the use of the ``(\+)/1`` control construct to ``{}/1``
+   Preferably restrict the use of the ``(\+)/1`` control construct to ``{}/1``
    arguments and the use of the ``(->)/2`` control construct to ``{}/1`` test
    arguments.
 
@@ -1468,13 +1468,13 @@ After compiling and loading this code, we may try the following query:
    bar predicate called
    yes
 
-This is the expected result as the expansion of the grammar rule into a
+This is the expected result, as the expansion of the grammar rule into a
 clause leaves the ``{bar}`` goal untouched, which, in turn, is converted
 into the goal ``bar`` when the clause is compiled. Note that we tested
 the ``bypass::foo//0`` non-terminal by calling the ``phrase/3`` built-in
 method in the context of the ``logtalk`` built-in object. This workaround
 is necessary due to the Prolog backend implementation of the ``phrase/3``
-predicate no being aware of the Logtalk ``(::)/2`` message-sending control
+predicate not being aware of the Logtalk ``(::)/2`` message-sending control
 construct semantics.
 
 A grammar rule non-terminal may be declared as dynamic or discontiguous,
@@ -1494,12 +1494,12 @@ directive, as in the following example:
 .. note::
 
    Future Logtalk versions may compile grammar rules differently from Prolog
-   traditional compilation to prevent name clases between non-terminals and
+   traditional compilation to prevent name clashes between non-terminals and
    predicates. Therefore, you should always call non-terminals from predicates
    using the ``phrase/2-3`` built-in methods and always call predicates from
    grammar rules using the ``call//1`` built-in method. This recommended
    practice, besides making your code forward compatible with future Logtalk
-   versions, also make the code more clear. The linter prints warnings when
+   versions, also makes the code more clear. The linter prints warnings when
    these guidelines are not followed (notably, when a predicate is called as
    a non-terminal or a non-terminal is called as a predicate).
 
@@ -1513,7 +1513,7 @@ methods to access message execution context, to find sets of solutions, to
 inspect objects, for database handling, for term and goal expansion, and
 for printing messages. Some of them are counterparts to standard Prolog
 built-in predicates that take into account Logtalk semantics. Similar to
-Prolog built-in predicates, built-in methods cannot not be redefined.
+Prolog built-in predicates, built-in methods cannot be redefined.
 
 .. _predicates_logic:
 
@@ -1542,7 +1542,7 @@ category, these methods refer to the execution context of the object
 importing the category. These methods are private and cannot be used as
 messages to objects.
 
-To find the object that received the message under execution we may use
+To find the object that received the message under execution, we may use
 the :ref:`methods_self_1` method. We may also retrieve the object that has
 sent the message under execution using the :ref:`methods_sender_1` method.
 
@@ -1608,7 +1608,7 @@ clause body. Therefore, a clause such as:
        ... .
 
 is compiled with the goal ``atom(Arg)`` as the first condition on the
-clause body. As such, the use of these context execution methods do not
+clause body. As such, the use of these context execution methods does not
 interfere with the optimizations that some Prolog compilers perform when
 the first clause body condition is a call to a built-in type-test
 predicate or a comparison operator.
@@ -1749,7 +1749,7 @@ Meta-call methods
 
 Logtalk supports the generalized :ref:`methods_call_N` meta-predicate. This
 built-in private meta-predicate must be used in the implementation of
-meta-predicates which work with :term:`closures <closure>` instead of goals.
+meta-predicates that work with :term:`closures <closure>` instead of goals.
 In addition, Logtalk supports the built-in private meta-predicates
 :ref:`methods_ignore_1`, :ref:`methods_once_1`, and
 :ref:`methods_not_1`. These methods cannot be used as messages to objects.
@@ -1781,11 +1781,11 @@ and the *black box view*. In the transparent box view, we look into an entity
 disregarding how it will be used and returning all information available
 on it, including predicate declarations and predicate definitions. This
 view is supported by the entity property built-in predicates. In the
-black box view, we look into an entity from a usage point-of-view using
+black box view, we look into an entity from a usage point of view using
 built-in methods for inspecting object operators and predicates that are
 within scope from where we are making the call:
-:ref:`methods_current_op_3`, which returns operator specifications,
-:ref:`methods_predicate_property_2`, which returns predicate properties,
+:ref:`methods_current_op_3`, which returns operator specifications;
+:ref:`methods_predicate_property_2`, which returns predicate properties;
 and :ref:`methods_current_predicate_1`, which enables us to query about
 user-defined predicate definitions. See below for a more detailed description
 of these methods.
@@ -1803,7 +1803,7 @@ used as messages to objects.
 
 Logtalk also supports :ref:`methods_phrase_1`, :ref:`methods_call_1`, and
 :ref:`methods_eos_0` built-in non-terminals.
-The ``call//1-N`` non-terminals takes a :term:`closure` (which can be a lambda
+The ``call//1-N`` non-terminals take a :term:`closure` (which can be a lambda
 expression) plus zero or more additional arguments and are processed by
 appending the input list of tokens and the list of remaining tokens to
 the arguments.
@@ -1834,7 +1834,7 @@ The following predicate properties are supported:
    The predicate scope (useful for finding the predicate scope with a
    single call to ``predicate_property/2``)
 ``public``, ``protected``, ``private``
-   The predicate scope (useful for testing if a predicate have a
+   The predicate scope (useful for testing if a predicate has a
    specific scope)
 ``static``, ``dynamic``
    All predicates are either static or dynamic (note, however, that a
@@ -1923,7 +1923,7 @@ category imported by the object, it will be the category name — not the
 object name — that will be returned by the property ``declared_in/1``.
 The same is true for protocol declared predicates.
 
-Some properties such as line numbers are only available when the entity
+Some properties, such as line numbers, are only available when the entity
 holding the predicates is defined in a source file compiled with the
 :ref:`source_data <flag_source_data>` flag turned on. Moreover, line
 numbers are only supported in :term:`backend Prolog compilers <backend Prolog compiler>`
@@ -1955,7 +1955,7 @@ grammar rule non-terminals declared for an object. For example:
        Object::predicate_property(Predicate, non_terminal(Name//Args)).
 
 Usually, the non-terminal and the corresponding predicate share the same
-functor but users should not rely on this always being true.
+functor, but users should not rely on this always being true.
 
 .. _predicates_prolog:
 
@@ -1968,7 +1968,7 @@ Logtalk source code must not have *accidental* dependencies on Prolog code that
 happens to be loaded at the time of the compilation. One immediate consequence
 is that only Prolog *built-in* predicates are visible from within objects and
 categories. But Prolog systems provide a widely diverse set of built-in
-predicates, easily rising portability issues. Relying on non-standard
+predicates, easily raising portability issues. Relying on non-standard
 predicates is often unavoidable, however, due to the narrow scope of Prolog
 standards. Logtalk applications may also require calling user-defined Prolog
 predicates, either in ``user`` or in Prolog modules. 
@@ -2062,7 +2062,7 @@ common scenarios are calling a foreign predicate (from within an object or a
 category) and making a set of foreign predicates available as part of an
 object (or category) protocol. Assuming, as this is the most common case,
 that foreign predicates are globally visible once made available (using a
-Prolog system specific loading or linking procedure), we can simply call
+Prolog system-specific loading or linking procedure), we can simply call
 them as user-defined plain predicates, as explained in the next section.
 When defining an object (or category) that makes available foreign
 predicates, the advisable solution is to name the predicates after the
@@ -2132,7 +2132,7 @@ using explicit qualification. For example:
        module:bar,
        ...
 
-You can also use in alternative the :ref:`directives_use_module_2` directive
+You can also use the :ref:`directives_use_module_2` directive
 to call the module predicates using implicit qualification:
 
 ::
@@ -2152,9 +2152,9 @@ that differ from the module names).
 As loading a Prolog module varies between Prolog systems, the actual loading
 directive or goal is preferably done from the application :term:`loader file`.
 An advantage of this approach is that it contributes to a clean separation
-between *loading* and *using* a resource with the loader file being the
+between *loading* and *using* a resource, with the loader file being the
 central point that loads all application resources (complex applications
-often use a *hierarchy* of loader files but the main idea remains the same).
+often use a *hierarchy* of loader files, but the main idea remains the same).
 
 As an example, assume that we need to call predicates defined in a CLP(FD)
 Prolog library, which can be loaded using ``library(clpfd)`` as the file
@@ -2164,9 +2164,9 @@ specification. In the loader file, we would add:
 
    :- use_module(library(clpfd), []).
 
-Specifying an empty import list is often used to avoid adding the module
-exported predicates to plain Prolog. In the objects and categories we can
-then call the library predicates, using implicit or explicit qualification,
+Specifying an empty import list is often used to avoid adding the
+module-exported predicates to plain Prolog. In the objects and categories we
+can then call the library predicates, using implicit or explicit qualification,
 as explained. For example:
 
 ::
@@ -2195,10 +2195,10 @@ as explained. For example:
 
 .. warning::
 
-   The actual module code **must** be loaded prior to compilation of Logtalk
-   source code that uses it. In particular, programmers should not expect
-   that the module be auto-loaded (including when using a backend Prolog
-   compiler that supports an auto-loading mechanism).
+   The actual module code **must** be loaded prior to the compilation of
+   Logtalk source code that uses it. In particular, programmers should
+   not expect that the module be auto-loaded (including when using a
+   backend Prolog compiler that supports an auto-loading mechanism).
 
 The module identifier argument can also be a :term:`parameter variable`
 when using the directive in a parametric object or a parametric category.
@@ -2208,7 +2208,7 @@ at runtime when the calls are made.
 
 Logtalk supports the declaration of :term:`predicate aliases <predicate alias>`
 and :term:`predicate shorthands <predicate shorthand>` in ``use_module/2``
-directives used within object and categories. For example, the ECLiPSe IC
+directives used within objects and categories. For example, the ECLiPSe IC
 Constraint Solvers define a ``(::)/2`` variable domain operator that clashes
 with the Logtalk ``(::)/2`` message-sending operator. We can solve the conflict
 by writing:
@@ -2250,7 +2250,7 @@ a module meta-predicate with the following meta-predicate directive:
    :- meta_predicate(bar(*, :)).
 
 The ``:`` meta-argument specifier is ambiguous. It tell us that the second
-argument of the meta-predicate is module sensitive but it does not tell us
+argument of the meta-predicate is module sensitive, but it does not tell us
 *how*. Some legacy module libraries and some Prolog systems use ``:`` to
 mean ``0`` (i.e. a meta-argument that will be meta-called). Some others
 use ``:`` for meta-arguments that are not meta-called but that still need
@@ -2381,9 +2381,9 @@ to use a :ref:`directives_uses_2` directive:
    :- end_object.
 
 Note that in the alternatives using ``uses/2`` or ``use_module/2`` directives,
-the argument of the database handling predicates must be know at compile-time.
-If that is not the case, you must use instead either an explicitly-qualified
-argument or the :ref:`control_external_call_1` control construct. For example:
+the argument of the database handling predicates must be known at compile-time.
+If that is not the case, you must use either an explicitly-qualified argument
+or the :ref:`control_external_call_1` control construct instead. For example:
 
 ::
 
