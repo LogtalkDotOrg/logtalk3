@@ -207,11 +207,11 @@ the ISO Prolog Core standard.</p>
 </section>
 <section id="type-checking">
 <h2>Type-checking<a class="headerlink" href="#type-checking" title="Link to this heading"></a></h2>
-<p>One of the most common case where errors may be generated is when
+<p>One of the most common cases where errors may be generated is when
 type-checking predicate arguments and input data before processing it.
 The standard library includes a <a class="reference external" href="../../docs/type_0.html#type-0" title="(in Logtalk APIs v3.86.0)"><span class="xref std std-ref">type</span></a> object that
 defines an extensive set of types, together with predicates for validating
-and checking terms. The set of types is user extensible and new types can
+and checking terms. The set of types is user extensible. New types can
 be defined by adding clauses for the <code class="docutils literal notranslate"><span class="pre">type/1</span></code> and <code class="docutils literal notranslate"><span class="pre">check/2</span></code> multifile
 predicates. For example, assume that we want to be able to check
 <em>temperatures</em> expressed in Celsius, Fahrenheit, or Kelvin scales. We
@@ -267,8 +267,8 @@ type-checking.</p>
 <section id="expected-terms">
 <h2>Expected terms<a class="headerlink" href="#expected-terms" title="Link to this heading"></a></h2>
 <p>Support for representing and handling <em>expected terms</em> is provided by the
-<a class="reference internal" href="../libraries/expecteds.html"><span class="doc">expecteds</span></a> library. Expected terms allows deferring errors
-to later stages of an application in alternative to raising an exception as
+<a class="reference internal" href="../libraries/expecteds.html"><span class="doc">expecteds</span></a> library. Expected terms allow deferring errors
+to later stages of an application in lieu to raising an exception as
 soon as an error is detected.</p>
 </section>
 <section id="compiler-warnings-and-errors">
@@ -289,7 +289,7 @@ to detect and report, depending on the used compiler flags (see the
 <p>The Logtalk compiler warns about any referenced entity that is not
 currently loaded. The warning may reveal a misspelled entity name or just
 an entity that will be loaded later. Out-of-order loading should be
-avoided when possible as it prevents some code optimizations such as
+avoided when possible as it prevents some code optimizations, such as
 <a class="reference internal" href="../glossary.html#term-static-binding"><span class="xref std std-term">static binding</span></a> of messages to methods.</p>
 </section>
 <section id="singleton-variables">
@@ -332,7 +332,7 @@ these calls are simple misspell errors.</p>
 <section id="portability-warnings">
 <span id="errors-portability"></span><h3>Portability warnings<a class="headerlink" href="#portability-warnings" title="Link to this heading"></a></h3>
 <p>A warning will be reported if a predicate clause contains a call to a
-non-standard built-in predicate or arithmetic function, Portability
+non-standard built-in predicate or arithmetic function. Portability
 warnings are also reported for non-standard flags or flag values. These
 warnings often cannot be avoided due to the limited scope of the ISO
 Prolog standard.</p>
@@ -340,7 +340,7 @@ Prolog standard.</p>
 <section id="deprecated-elements">
 <span id="errors-deprecated"></span><h3>Deprecated elements<a class="headerlink" href="#deprecated-elements" title="Link to this heading"></a></h3>
 <p>A warning will be reported if a deprecated directive, control construct,
-or predicate is used. These warnings should be fixed as soon as possible
+or predicate is used. These warnings should be fixed as soon as possible,
 as support for any deprecated features will likely be discontinued in
 future versions.</p>
 </section>
@@ -403,17 +403,17 @@ the error and abort the compilation.</p>
 <section id="runtime-errors">
 <span id="errors-runtime"></span><h2>Runtime errors<a class="headerlink" href="#runtime-errors" title="Link to this heading"></a></h2>
 <p>This section briefly describes runtime errors that result from misuse of
-Logtalk built-in predicates, built-in methods or from message-sending.
-For a complete and detailed description of runtime errors please consult
+Logtalk built-in predicates, built-in methods, or from message-sending.
+For a complete and detailed description of runtime errors, please consult
 the Reference Manual.</p>
 <section id="logtalk-built-in-predicates">
 <span id="errors-predicates"></span><h3>Logtalk built-in predicates<a class="headerlink" href="#logtalk-built-in-predicates" title="Link to this heading"></a></h3>
-<p>Most Logtalk built-in predicates checks the type and mode of the calling
+<p>Most Logtalk built-in predicates check the type and mode of the calling
 arguments, throwing an exception in case of misuse.</p>
 </section>
 <section id="logtalk-built-in-methods">
 <span id="errors-methods"></span><h3>Logtalk built-in methods<a class="headerlink" href="#logtalk-built-in-methods" title="Link to this heading"></a></h3>
-<p>Most Logtalk built-in method checks the type and mode of the calling
+<p>Most Logtalk built-in method check the type and mode of the calling
 arguments, throwing an exception in case of misuse.</p>
 </section>
 <section id="message-sending">

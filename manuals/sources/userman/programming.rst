@@ -21,7 +21,7 @@
 Writing and running applications
 ================================
 
-For a successful programming in Logtalk, you need a good working
+For successful programming in Logtalk, you need a good working
 knowledge of Prolog and an understanding of the principles of
 object-oriented programming. Most guidelines for writing good Prolog
 code apply as well to Logtalk programming. To those guidelines, you
@@ -36,7 +36,7 @@ problem solution. We encapsulate our predicate directives and definitions
 inside new objects, categories, and protocols that we create by hand with
 a text editor or by using the Logtalk built-in predicates. Some of the
 information collected during the analysis and design phases can be
-integrated into the objects, categories and protocols that we define by
+integrated into the objects, categories, and protocols that we define by
 using the available entity and predicate documenting directives.
 
 .. _programming_starting:
@@ -46,7 +46,7 @@ Starting Logtalk
 
 We run Logtalk inside a normal Prolog session, after loading the
 necessary files. Logtalk extends but does not modify your Prolog
-compiler. We can freely mix Prolog queries with the sending of messages
+compiler. We can freely mix Prolog queries with the sending of messages,
 and our applications can be made of both normal Prolog clauses and
 object definitions.
 
@@ -65,7 +65,7 @@ For example, assuming a POSIX operating-system and GNU Prolog as the backend:
    ...
 
 Depending on your Logtalk installation, you may need to type instead
-``gplgt.sh``. On Windows, using PowerShell 7.2 or later version and
+``gplgt.sh``. On Windows, using PowerShell 7.2 or a later version and
 ECLiPSe as the backend:
 
 .. code-block:: powershell
@@ -92,7 +92,7 @@ performance (by avoiding repeated recompilation of the
 
 To run parallel Logtalk processes with the ``clean`` flag turned off, each
 process must use its own :term:`scratch directory`. This is accomplished
-by defining the ``scratch_directory`` library alias to a per process
+by defining the ``scratch_directory`` library alias to a per-process
 location **before** loading the compiler/runtime. For example, assuming
 we're using GNU Prolog as the backend, a possible definition could be:
 
@@ -147,7 +147,7 @@ Prolog ``include/1`` directive, any occurrences of this directive in a
 Logtalk source file is handled by the Logtalk compiler,
 not by the :term:`backend Prolog compiler`, to improve portability.
 
-When writing a Logtalk source file the following advice applies:
+When writing a Logtalk source file, the following advice applies:
 
 - When practical and when performance is critical, define each entity on
   its own source file.
@@ -197,17 +197,17 @@ predicate directives and predicate definitions is irrelevant. In contrast,
 in a system implemented using a single-pass compiler, the order of the source
 file terms can and often is significant for proper and successful compilation.
 In these systems, predicates may become available for calling as soon as they
-are compiled even if the remaining of the source file is yet to be compiled.
+are compiled, even if the rest of the source file is yet to be compiled.
 
 The Logtalk compiler reads source files using the Prolog standard ``read_term/3``
 predicate. This ensures compatibility with any syntax extensions that the
 used backend may implement. In the first compiler stage, all source file
-terms are read and data about all defined entities, directives, predicates,
+terms are read, and data about all defined entities, directives, predicates,
 and grammar rules is collected. Any defined :ref:`term-expansion rules <expansion_expansion>`
 are applied to the read terms. Grammar rules are expanded into predicate
 clauses unless expanded by user-defined term-expansion rules. The second
 stage compiles all initialization goals and clause bodies, taking advantage
-of the data collected in the first stage, and applying any defined
+of the data collected in the first stage and applying any defined
 goal-expansion rules. Depending on the compilation mode, the generated
 code can be instrumented for debugging tools or optimized for performance.
 Linter checks are performed during these two first stages. The final step
@@ -234,37 +234,37 @@ This predicate runs the compiler on each file and, if no fatal errors
 are found, outputs Prolog source files that can then be consulted or
 compiled in the usual way by your Prolog compiler.
 
-To compile to disk and also load into memory the source files we can use
+To compile to disk and also load into memory the source files, we can use
 the :ref:`predicates_logtalk_load_1` built-in predicate:
 
 .. code-block:: text
 
    | ?- logtalk_load([source_file1, source_file2, ...]).
 
-This predicate works in the same way of the predicate
+This predicate works in the same way as the predicate
 ``logtalk_compile/1`` but also loads the compiled files into memory.
 
 Both predicates expect a source file name or a list of source file names
 as an argument. The Logtalk source file name extension, as defined in
 the adapter file (by default, ``.lgt``), can be omitted.
 
-If you have more than a few source files then you may want to use a
+If you have more than a few source files, then you may want to use a
 :term:`loader file` helper file containing the calls to the ``logtalk_load/1-2``
 predicates. Consulting or compiling the loader file will then compile
 and load all your Logtalk entities into memory (see below for details).
 
 With most :term:`backend Prolog compilers <backend Prolog compiler>`, you
-can use the shorthands ``{File}`` for ``logtalk_load(File)`` and
+can use the shorthand ``{File}`` for ``logtalk_load(File)`` and
 ``{File1, File2, ...}`` for ``logtalk_load([File1, File2, ...])``. The use
 these shorthands should be restricted to the Logtalk/Prolog top-level
-interpreter as they are not part of the language specification and may be
+interpreter, as they are not part of the language specification and may be
 commented out in case of conflicts with backend Prolog compiler features.
 
 The built-in predicate :ref:`predicates_logtalk_make_0` can be used to
 reload all modified source files. With most backend Prolog compilers,
 you can also use the ``{*}`` top-level shortcut. Files are also reloaded
 when the compilation mode changes. An extended version of this predicate,
-:ref:`predicates_logtalk_make_1`, accepts multiple targets including
+:ref:`predicates_logtalk_make_1`, accepts multiple targets, including
 ``all``, ``clean``, ``check``, ``circular``, ``documentation``, ``caches``,
 ``debug``, ``normal``, and ``optimal``. For example, assume that you have
 loaded your application files and found a bug. You can easily recompile the
@@ -274,7 +274,7 @@ using the ``logtalk_make(normal)`` or in optimized mode using the
 ``logtalk_make(optimal)`` goal. See the predicates documentation for a
 complete list of targets and top-level shortcuts. In particular, the
 ``logtalk_make(clean)`` goal can be specially useful before switching
-backend Prolog compilers as the generated intermediate files may not be
+backend Prolog compilers, as the generated intermediate files may not be
 compatible. The ``logtalk_make(caches)`` goal is usually used when
 benchmarking compiler performance improvements.
 
@@ -338,7 +338,7 @@ Usually these driver files contain calls to the built-in predicates
 *project-specific*, flag values) and :ref:`predicates_logtalk_load_1` or
 :ref:`predicates_logtalk_load_2` (for loading project files), wrapped
 inside a Prolog ``initialization/1`` directive for portability. For
-instance, if your code is split in three source files named
+instance, if your code is split into three source files named
 ``source1.lgt``, ``source2.lgt``, and ``source3.lgt``, then the contents
 of your loader file could be:
 
@@ -355,7 +355,7 @@ Another example of directives that are often used in a loader file would
 be ``op/3`` directives declaring global operators needed by your
 project. Loader files are also often used for setting source
 file-specific compiler flags (this is useful even when you only have a
-single source file if you always load it with using the same set of
+single source file if you always load it with the same set of
 compiler flags). For example:
 
 ::
@@ -395,15 +395,15 @@ Complex projects often use a main loader file that loads the loader files
 of each of the project components. Thus, loader files provide a central
 point to understand a project organization and dependencies.
 
-Worth mentioning here a common mistake when first starting working with loader
-files. New users sometimes try to set compiler flags using ``logtalk_load/2``
-when loading a loader file. For example, by writing:
+It is worth mentioning a common mistake when writing the first loader files.
+New users sometimes try to set compiler flags using ``logtalk_load/2`` when
+loading a loader file. For example, by writing:
 
 .. code-block:: text
 
    | ?- logtalk_load(loader, [optimize(on)]).
 
-This will not work as you might expect as the compiler flags will only
+This will not work as you might expect, as the compiler flags will only
 be used in the compilation of the ``loader.lgt`` file itself and will
 not affect the compilation of files loaded through the
 ``initialization/1`` directive contained on the loader file.
@@ -452,22 +452,22 @@ The best way to take advantage of this feature is to load at startup a source
 file containing clauses for the ``logtalk_library_path/2`` predicate needed
 for all available libraries (typically, using a :term:`settings file`, as
 discussed below). This allows us to load library source files or entire
-libraries without worrying about libraries paths, improving code portability.
+libraries without worrying about library paths, improving code portability.
 The directory paths on the second argument should always end with the path
-directory separator character. Most backend Prolog compilers allows the use
+directory separator character. Most backend Prolog compilers allow the use
 of environment variables in the second argument of the ``logtalk_library_path/2``
 predicate. Use of POSIX relative paths (e.g. ``'../'`` or ``'./'``) for
 top-level library directories (e.g. ``lgtuser`` in the example above) is
-not advised as different backend Prolog compilers may start with
+not advised, as different backend Prolog compilers may start with
 different initial working directories, which may result in portability
 problems of your loader files.
 
 This :term:`library notation` provides functionality inspired by the
 ``file_search_path/2`` mechanism introduced by Quintus Prolog and later
 adopted by some other Prolog compilers but with a key difference: there
-is no fragile search mechanism and the Logtalk ``make`` can be used to
+is no fragile search mechanism, and the Logtalk ``make`` can be used to
 check for duplicated library aliases. Multiple definitions for the
-same alias are problematic when using external dependencies as any
+same alias are problematic when using external dependencies, as any
 third-party update to those dependencies can introduce file name clashes.
 Note that the potential for these clashes cannot be reliably minimized by
 a careful ordering of the ``logtalk_library_path/2`` predicate clauses
@@ -478,10 +478,10 @@ due to this predicate being multifile and dynamic.
 Settings files
 --------------
 
-Although is always possible to edit the :term:`backend Prolog compiler` adapter
+Although it is always possible to edit the :term:`backend Prolog compiler` adapter
 files, the recommended solution to customize compiler flags is to create a
 ``settings.lgt`` file in the Logtalk user folder or in the user home folder.
-Depending on the backend Prolog compiler and on the operating-system,
+Depending on the backend Prolog compiler and the operating-system,
 is also possible to define per-project settings files by creating a
 ``settings.lgt`` file in the project directory and by starting Logtalk from
 this directory. At startup, Logtalk tries to load a ``settings.lgt`` file
@@ -498,7 +498,7 @@ The startup directory is only searched when the read-only
 :ref:`settings_file <flag_settings_file>` flag is set to ``allow``.
 When no settings files are found, Logtalk will use the default compiler flag
 values set on the backend Prolog compiler adapter files. When limitations of
-the backend Prolog compiler or on the operating-system prevent Logtalk from
+the backend Prolog compiler or the operating-system prevent Logtalk from
 finding the settings files, these can always be loaded manually after Logtalk
 startup.
 
@@ -552,7 +552,7 @@ entities, unknown predicates, undefined predicates (i.e. predicates that
 are declared but not defined), missing directives (including missing
 ``dynamic/1`` and ``meta_predicate/1`` directives), redefined built-in
 predicates, calls to non-portable predicates, singleton variables, goals that
-are always true or always false (i.e. goals that are can be replaced by
+are always true or always false (i.e. goals that can be replaced by
 ``true`` or ``fail``), and trivial fails (i.e. calls to predicates with no
 match clauses). Most of the linter warnings are controlled by
 :ref:`compiler flags <programming_flags_lint>`. See the next section
@@ -913,7 +913,7 @@ Lint flags
    Controls the Logtalk and Prolog built-in predicate redefinition warnings.
    Possible option values are ``warning`` and ``silent`` (the usual default).
    Warnings about redefined Prolog built-in predicates are often the result
-   of running a Logtalk application on several Prolog compilers as each
+   of running a Logtalk application on several Prolog compilers, as each
    Prolog compiler defines its set of built-in predicates.
 
 .. _flag_redefined_operators:
@@ -923,7 +923,7 @@ Lint flags
    Controls the Logtalk and Prolog built-in operator redefinition warnings.
    Possible option values are ``warning`` (the usual default) and ``silent``.
    Redefining Logtalk operators or standard Prolog operators can break term
-   parsing causing syntax errors or change how terms are parsed introducing
+   parsing, causing syntax errors or change how terms are parsed, introducing
    bugs.
 
 .. _flag_singleton_variables:
@@ -940,7 +940,7 @@ Lint flags
    Controls warnings about entity, predicate, and variable names per
    official coding guidelines (which advise using underscores for entity
    and predicate names and camel case for variable names). Additionally,
-   variable names should not differ only on case. Possible option values
+   variable names should not differ only in case. Possible option values
    are ``warning`` and ``silent`` (the usual default due to the current
    limitation to ASCII names and the computational cost of the checks).
 
@@ -987,8 +987,8 @@ Lint flags
 
 ``left_recursion(Option)``
    Controls warnings of left-recursion on clauses and grammar rules.
-   Specifically, when the clause or grammar rule head and the left
-   most goal in the body are variants. Possible option values are
+   Specifically, when the clause or grammar rule head and the leftmost
+   goal in the body are variants. Possible option values are
    ``warning`` (the usual default) and ``silent``.
 
 .. _flag_tail_recursive:
@@ -1055,7 +1055,7 @@ Optional features compilation flags
    :ref:`event-driven programming <events_events>` support. Possible
    option values are ``allow`` and ``deny`` (the usual default). Objects
    (and categories) compiled with this option set to ``deny`` use
-   optimized code for message-sending calls that does not trigger
+   optimized code for message-sending calls that do not trigger
    events. As such, this option can be used on a per-object (or
    per-category) basis. Note that changing this option is of no
    consequence for objects already compiled and loaded.
@@ -1066,7 +1066,7 @@ Optional features compilation flags
 ``context_switching_calls(Option)``
    Allows context-switching calls (``(<<)/2``) to be either allowed or
    denied. Possible option values are ``allow`` and ``deny``. The
-   default flag vale is ``allow``. Note that changing this option is of
+   default flag value is ``allow``. Note that changing this option is of
    no consequence for objects already compiled and loaded.
 
 Backend Prolog compiler and loader flags
@@ -1144,8 +1144,8 @@ Other flags
    character atom. Its default value is ``'$'``. Specifying a code
    prefix provides a way to solve possible conflicts between Logtalk
    compiled code and other Prolog code. In addition, some Prolog
-   compilers automatically hide predicates whose functor start with a
-   specific prefix such as the character ``$``. Although this is not a
+   compilers automatically hide predicates whose functor starts with a
+   specific prefix, such as the character ``$``. Although this is not a
    read-only flag, it should only be changed at startup time and **before**
    loading any source files. When changing this flag (e.g. from a
    :term:`settings file`), restart with the :ref:`clean <flag_clean>`
@@ -1167,7 +1167,7 @@ Other flags
    predicate with the same arguments. Care should be taken when
    developing applications with this flag turned on as changing and
    reloading a file may render :term:`static binding` optimizations
-   invalid for code defining in other loaded files. Turning on this
+   invalid for code defined in other loaded files. Turning on this
    flag automatically turns off the :ref:`debug <flag_debug>` flag.
 
 .. _flag_source_data:
@@ -1205,7 +1205,7 @@ Other flags
    can be used to get similar functionality to the Prolog directive
    ``ensure_loaded/1`` but should be used only with fully debugged
    code), ``changed`` (the usual default; reload files only when they
-   are changed since last loaded provided that any explicit flags
+   are changed since last loaded, provided that any explicit flags
    and the compilation mode are the same as before), and ``always``
    (always reload files).
 
@@ -1225,7 +1225,7 @@ Other flags
    :ref:`expanding <apis:expanding/0>` built-in
    protocol. The hook object must be compiled and loaded when this option
    is used. It's also possible to specify a Prolog module instead of a
-   Logtalk object but the module must be pre-loaded and its identifier
+   Logtalk object, but the module must be pre-loaded, and its identifier
    must be different from any object identifier.
 
 .. _flag_clean:
@@ -1235,7 +1235,7 @@ Other flags
    Controls cleaning of the intermediate Prolog files generated when
    compiling Logtalk source files. Possible option values are ``off``
    and ``on`` (the usual default). When turned on, intermediate files
-   are deleted after loading and all source files are recompiled
+   are deleted after loading, and all source files are recompiled
    disregarding any existing intermediate files. When turned off, the
    intermediate files are kept. This is useful when embedding applications,
    which requires collecting the intermediate code, and when working on
@@ -1243,7 +1243,7 @@ Other flags
    The flag must be turned on when changing compilation modes, changing
    flags such as :ref:`code_prefix <flag_code_prefix>`, or when turning
    on linter flags that are off by default without at the same time making
-   changes to the application source files themselves as any existing
+   changes to the application source files themselves, as any existing
    intermediate files would not be recompiled as necessary due to file
    timestamps not changing.
 
@@ -1266,7 +1266,7 @@ problem is that there is no standard behavior for reloading Prolog
 files. For static predicates, almost all Prolog compilers replace the
 old definitions with the new ones. However, for dynamic predicates, the
 behavior depends on the Prolog compiler. Most compilers replace the old
-definitions but some of them simply append the new ones, which usually
+definitions, but some of them simply append the new ones, which usually
 leads to trouble. See the compatibility notes for the backend Prolog
 compiler you intend to use for more information. There is an additional
 potential problem when using multi-threading programming. Reloading a
@@ -1277,9 +1277,9 @@ When using library entities and stable code, you can avoid reloading the
 corresponding source files (and, therefore, recompiling them) by setting
 the :ref:`reload <flag_reload>` compiler flag to ``skip``. For code under
 development, you can turn off the :ref:`clean <flag_clean>` flag to avoid
-recompiling files that have not been modified since last compilation
+recompiling files that have not been modified since the last compilation
 (assuming that backend Prolog compiler that you are using supports
-retrieving of file modification dates). You can disable deleting the
+retrieving file modification dates). You can disable deleting the
 intermediate files generated when compiling source files by changing the
 default flag value in your settings file, by using the corresponding
 compiler flag with the compiling and loading built-in predicates, or,
@@ -1289,13 +1289,13 @@ for the remaining of a working session, by using the call:
 
    | ?- set_logtalk_flag(clean, off).
 
-Some caveats that you should be aware. First, some warnings that might
+Some caveats that you should be aware of. First, some warnings that might
 be produced when compiling a source file will not show up if the
 corresponding object file is up-to-date because the source file is not
 being (re)compiled. Second, if you are using several Prolog compilers
 with Logtalk, be sure to perform the first compilation of your source
 files with the ``clean`` flag turned off: the intermediate Prolog files
-generated by the Logtalk compiler may be not compatible across Prolog
+generated by the Logtalk compiler may not be compatible across Prolog
 compilers or even for the same Prolog compiler across operating systems
 (e.g. due to the use of different character encodings or end-of-line
 characters).
@@ -1316,16 +1316,16 @@ information requested by the user will still be printed.
 Optimizing performance
 ----------------------
 
-The default compiler flag settings are appropriated for the
+The default compiler flag settings are appropriate for the
 **development** but not necessarily for the **deployment** of
 applications. To minimize the generated code size, turn the
 :ref:`source_data <flag_source_data>` flag off. To optimize runtime
 performance, turn on the :ref:`optimize <flag_optimize>` flag.
-Your chosen backend Prolog compiler may also provide performance
-related flags; check its documentation.
+Your chosen backend Prolog compiler may also provide
+performance-related flags; check its documentation.
 
 Pay special attention to file compilation/loading order. Whenever
-possible, compile and load your files taking into account file dependencies.
+possible, compile and load your files by taking into account file dependencies.
 By default, the compiler will print a warning whenever a file references
 an entity that is not yet loaded. Solving these warnings is key for optimal
 performance by enabling :term:`static binding` optimizations. For a clear
@@ -1339,7 +1339,7 @@ predicate allows the compiler to optimize local calls to the database
 methods (e.g. :ref:`methods_assertz_1` and :ref:`methods_retract_1`) that
 modify the predicate.
 
-Sending a :term:`message to self` implies :term:`dynamic binding` but
+Sending a :term:`message to self` implies :term:`dynamic binding`, but
 there are often cases where :ref:`control_send_to_self_1` is misused
 to call an imported or inherited predicate that is never going to be
 redefined in a descendant. In these cases, a :term:`super call`,
@@ -1358,17 +1358,17 @@ for a detailed discussion on Logtalk performance.
 Portable applications
 ---------------------
 
-Logtalk is compatible with most modern standards compliant Prolog compilers.
+Logtalk is compatible with most modern standards-compliant Prolog compilers.
 However, this does not necessarily imply that your Logtalk applications will
 have the same level of portability. If possible, you should only use in your
-applications Logtalk built-in predicates and ISO Prolog specified
+applications Logtalk built-in predicates and ISO Prolog-specified
 built-in predicates and arithmetic functions. If you need to use
 built-in predicates (or built-in arithmetic functions) that may not be
 available in other Prolog compilers, you should try to encapsulate the
 non-portable code in a small number of objects and provide a portable
 **interface** for that code through the use of Logtalk protocols. An
 example will be code that access operating-system specific features. The
-Logtalk compiler can warn you of the use of non-ISO specified built-in
+Logtalk compiler can warn you of the use of non-ISO-specified built-in
 predicates and arithmetic functions by using the
 :ref:`portability <flag_portability>` compiler flag.
 
@@ -1389,7 +1389,7 @@ Avoiding common errors
 ----------------------
 
 Try to write objects and protocol documentation **before** writing any
-other code; if you are having trouble documenting a predicate perhaps we
+other code; if you are having trouble documenting a predicate, perhaps you
 need to go back to the design stage.
 
 Try to avoid lengthy hierarchies. Composition is often a better choice
@@ -1418,7 +1418,7 @@ predicates behave as defined in the ISO standard regarding error
 conditions. In particular, if your Prolog compiler does not support a
 ``read_term/3`` built-in predicate compliant with the ISO Prolog
 Standard definition, then the current version of the Logtalk compiler
-may not be able to detect misspell variables in your source code.
+may not be able to detect misspelled variables in your source code.
 
 .. _programming_style:
 
@@ -1430,8 +1430,8 @@ directives be indented by one tab stop. When defining entity code, both
 directives and predicates, Prolog coding style guidelines may be
 applied. All Logtalk source files, examples, and standard library
 entities use tabs (the recommended setting is a tab width equivalent to
-4 spaces) for laying out code. Closed related entities can be defined in
-the same source file. However, for best performance, is often necessary
+4 spaces) for laying out code. Closely related entities can be defined in
+the same source file. However, for the best performance, is often necessary
 to have an entity per source file. Entities that might be useful in
 different contexts (such as library entities) are best defined in their
 own source files.

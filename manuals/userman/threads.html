@@ -179,7 +179,7 @@ programming. For simple tasks where you simply want to prove a set of
 goals, each one in its own thread, Logtalk provides a
 <a class="reference internal" href="../refman/predicates/threaded_1.html#predicates-threaded-1"><span class="std std-ref">threaded/1</span></a> built-in
 predicate. The remaining predicates allow for fine-grained control,
-including postponing retrieving of thread goal results at a later time,
+including postponing retrieval of thread goal results at a later time,
 supporting non-deterministic thread goals, and making <em>one-way</em>
 asynchronous calls. Together, these predicates provide high-level
 support for multi-threading programming, covering most common use cases.</p>
@@ -191,7 +191,7 @@ the set runs in its own thread.</p>
 <p>When the <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> predicate argument is a <em>conjunction</em> of goals,
 the predicate call is akin to <em>and-parallelism</em>. For example, assume
 that we want to find all the prime numbers in a given interval,
-<code class="docutils literal notranslate"><span class="pre">[N,</span> <span class="pre">M]</span></code>. We can split the interval in two parts and then span two
+<code class="docutils literal notranslate"><span class="pre">[N,</span> <span class="pre">M]</span></code>. We can split the interval into two parts and then span two
 threads to compute the prime numbers in each sub-interval:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>prime_numbers(<span class="nv">N</span>, <span class="nv">M</span>, <span class="nv">Primes</span>) <span class="o">:-</span>
     <span class="nv">M</span> <span class="o">&gt;</span> <span class="nv">N</span>,
@@ -208,7 +208,7 @@ prime_numbers(<span class="nv">N</span>, <span class="nv">M</span>, <span class=
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> call terminates when the two implicit threads
 terminate. In a computer with two or more processors (or with a
-processor with two or more cores) the code above can be expected to
+processor with two or more cores), the code above can be expected to
 provide better computation times when compared with single-threaded code
 for sufficiently large intervals.</p>
 <p>When the <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> predicate argument is a <em>disjunction</em> of goals,
@@ -230,7 +230,7 @@ never find it. We can try all the methods simultaneously by writing:</p>
 succeeds in finding the function root, leading to the termination of all
 the remaining competing threads.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">threaded/1</span></code> built-in predicate is most useful for lengthy,
-independent deterministic computations where the computational costs of
+independent, deterministic computations where the computational costs of
 each goal outweigh the overhead of the implicit thread creation and
 management.</p>
 </section>
@@ -251,7 +251,7 @@ built-in predicate within the same object where the call to the
 <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> predicate was made. The <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code>
 calls suspend execution until the results of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code>
 calls are sent back to the object message queue.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate allow us to retrieve alternative
+<p>The <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate allows us to retrieve alternative
 solutions through backtracking (if you want to commit to the first
 solution, you may use the <a class="reference internal" href="../refman/predicates/threaded_once_1_2.html#predicates-threaded-once-1-2"><span class="std std-ref">threaded_once/1-2</span></a>
 predicate instead of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> predicate). For example,
@@ -273,7 +273,7 @@ no
 <p>In this case, the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> and the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> calls
 are made within the pseudo-object <code class="docutils literal notranslate"><span class="pre">user</span></code>. The implicit thread running
 the <code class="docutils literal notranslate"><span class="pre">lists::member/2</span></code> goal suspends itself after providing a solution,
-waiting for a request fo an alternative solution; the thread is
+waiting for a request for an alternative solution; the thread is
 automatically terminated when the runtime engine detects that
 backtracking to the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> call is no longer possible.</p>
 <p>Calls to the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> predicate block the caller until the
@@ -288,7 +288,7 @@ queue, which may hurt performance.</p>
 failure-driven loops. When all the solutions have been found (and the
 thread generating them is therefore terminated), re-calling the
 predicate will generate an exception. Note that failing instead of
-throwing an exception is not an acceptable solution as it could be
+throwing an exception is not an acceptable solution, as it could be
 misinterpreted as a failure of the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> argument.</p>
 <p>The example in the previous section with prime numbers could be
 rewritten using the <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> and <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code>
@@ -311,7 +311,7 @@ call and the corresponding <code class="docutils literal notranslate"><span clas
 unification. If there are multiple <code class="docutils literal notranslate"><span class="pre">threaded_call/1</span></code> calls for a matching
 <code class="docutils literal notranslate"><span class="pre">threaded_exit/1</span></code> call, the connection can potentially be established with
 any of them (this is akin to what happens with tabling). Nevertheless, you
-can easily use a call <em>tag</em> by using in
+can easily use a call <em>tag</em> by using the
 alternative <a class="reference internal" href="../refman/predicates/threaded_call_1_2.html#predicates-threaded-call-1-2"><span class="std std-ref">threaded_call/2</span></a>,
 <a class="reference internal" href="../refman/predicates/threaded_once_1_2.html#predicates-threaded-once-1-2"><span class="std std-ref">threaded_once/2</span></a>, and
 <a class="reference internal" href="../refman/predicates/threaded_exit_1_2.html#predicates-threaded-exit-1-2"><span class="std std-ref">threaded_exit/2</span></a> built-in predicates.
@@ -345,7 +345,7 @@ canceled by using the <a class="reference internal" href="../refman/predicates/t
 the results. This may be accomplished by using the built-in predicate
 <a class="reference internal" href="../refman/predicates/threaded_ignore_1.html#predicates-threaded-ignore-1"><span class="std std-ref">threaded_ignore/1</span></a>.
 For example, assume that we are developing a multi-agent application
-where an agent may send an “happy birthday” message to another agent. We
+where an agent may send a “happy birthday” message to another agent. We
 could write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>..., <span class="k">threaded_ignore</span>(agent<span class="o">::</span>happy_birthday), ...
 </pre></div>
@@ -385,7 +385,7 @@ output. Given a large interval, a goal such as:</p>
 ...
 </pre></div>
 </div>
-<p>will most likely result in a mixed up output. By declaring the
+<p>will most likely result in a mixed-up output. By declaring the
 <code class="docutils literal notranslate"><span class="pre">odd_numbers/2</span></code> and <code class="docutils literal notranslate"><span class="pre">even_numbers/2</span></code> predicates synchronized:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>([
     odd_numbers<span class="o">/</span><span class="m">2</span>,
@@ -404,7 +404,7 @@ output. Given a large interval, a goal such as:</p>
 </div>
 <p>Note that, in a more realistic scenario, the two <code class="docutils literal notranslate"><span class="pre">threaded_ignore/1</span></code>
 calls would be made concurrently from different objects. Using the same
-synchronized directive for a set of predicates imply that they all use
+synchronized directive for a set of predicates implies that they all use
 the same mutex, as required for this example.</p>
 <p>As each Logtalk entity is independently compiled, this directive must be
 included in every object or category that contains a definition for the
@@ -413,12 +413,12 @@ another entity, in order to ensure proper compilation. Note that a
 synchronized predicate cannot be declared dynamic. To ensure atomic
 updates of a dynamic predicate, declare as synchronized the predicate
 performing the update.</p>
-<p>Synchronized predicates may be used as wrappers to messages sent to
+<p>Synchronized predicates may be used as wrappers for messages sent to
 objects that are not multi-threading aware. For example, assume a
 <code class="docutils literal notranslate"><span class="pre">log</span></code> object defining a <code class="docutils literal notranslate"><span class="pre">write_log_entry/2</span></code> predicate that writes
 log entries to a file, thus using side effects on its implementation.
-We can specify and define e.g. a <code class="docutils literal notranslate"><span class="pre">sync_write_log_entry/2</span></code> predicate
-as follows:</p>
+We can specify and define, for example, a <code class="docutils literal notranslate"><span class="pre">sync_write_log_entry/2</span></code>
+predicate as follows:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">synchronized</span>(sync_write_log_entry<span class="o">/</span><span class="m">2</span>).
 
 sync_write_log_entry(<span class="nv">File</span>, <span class="nv">Entry</span>) <span class="o">:-</span>
@@ -429,7 +429,7 @@ sync_write_log_entry(<span class="nv">File</span>, <span class="nv">Entry</span>
 <code class="docutils literal notranslate"><span class="pre">write_log_entry/2</span></code> predicate from multi-threaded code.</p>
 <p>The synchronization directive may be used when defining objects that may be
 reused in both single-threaded and multi-threaded Logtalk applications. The
-directive simply make calls to the synchronized predicates deterministic
+directive simply makes calls to the synchronized predicates deterministic
 when the objects are used in a single-threaded application.</p>
 </section>
 <section id="synchronizing-threads-through-notifications">
@@ -489,7 +489,7 @@ solutions left. After returning a solution, this predicate signals the
 engine to start computing the next one. Note that this predicate is
 deterministic. In contrast with the <code class="docutils literal notranslate"><span class="pre">threaded_exit/1-2</span></code> built-in
 predicates, retrieving the next solution requires calling the predicate
-again instead of by backtracking into its call. For example:</p>
+again instead of backtracking into its call. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>collect_all(<span class="nv">Engine</span>, [<span class="nv">Answer</span>| <span class="nv">Answers</span>]) <span class="o">:-</span>
     <span class="k">threaded_engine_next</span>(<span class="nv">Engine</span>, <span class="nv">Answer</span>),
     <span class="o">!</span>,
@@ -544,21 +544,21 @@ yes
 task results available for consumption using the <code class="docutils literal notranslate"><span class="pre">threaded_engine_next/2</span></code>
 and <code class="docutils literal notranslate"><span class="pre">threaded_engine_next_reified/2</span></code> built-in predicates. Blocking
 semantics are used by these two predicates: the <code class="docutils literal notranslate"><span class="pre">threaded_engine_yield/1</span></code>
-predicate blocks until the returned solution is consumed while the
+predicate blocks until the returned solution is consumed, while the
 <code class="docutils literal notranslate"><span class="pre">threaded_engine_next/2</span></code> predicate blocks until a solution becomes
 available.</p>
 </section>
 <section id="multi-threading-performance">
 <span id="threads-performance"></span><h2>Multi-threading performance<a class="headerlink" href="#multi-threading-performance" title="Link to this heading"></a></h2>
 <p>The performance of multi-threading applications is highly dependent on
-the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, on the operating-system, and on the use
+the <a class="reference internal" href="../glossary.html#term-backend-Prolog-compiler"><span class="xref std std-term">backend Prolog compiler</span></a>, the operating-system, and the use
 of <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a> and dynamic predicates. All compatible backend
 Prolog compilers that support multi-threading features make use of POSIX
 threads or <em>pthreads</em>. The performance of the underlying pthreads
 implementation can exhibit significant differences between operating
 systems. An important point is synchronized access to dynamic
 predicates. As different threads may try to simultaneously access and
-update dynamic predicates, these operations may used a lock-free algorithm
+update dynamic predicates, these operations may use a lock-free algorithm
 or be protected by a lock, usually implemented using a mutex. In the latter
 case, poor mutex lock operating-system performance, combined with a large
 number of collisions by several threads trying to acquire the same lock,

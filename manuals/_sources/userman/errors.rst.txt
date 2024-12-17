@@ -76,11 +76,11 @@ the ISO Prolog Core standard.
 Type-checking
 -------------
 
-One of the most common case where errors may be generated is when
+One of the most common cases where errors may be generated is when
 type-checking predicate arguments and input data before processing it.
 The standard library includes a :ref:`type <apis:type/0>` object that 
 defines an extensive set of types, together with predicates for validating
-and checking terms. The set of types is user extensible and new types can
+and checking terms. The set of types is user extensible. New types can
 be defined by adding clauses for the ``type/1`` and ``check/2`` multifile
 predicates. For example, assume that we want to be able to check
 *temperatures* expressed in Celsius, Fahrenheit, or Kelvin scales. We
@@ -147,8 +147,8 @@ Expected terms
 --------------
 
 Support for representing and handling *expected terms* is provided by the
-:doc:`../libraries/expecteds` library. Expected terms allows deferring errors
-to later stages of an application in alternative to raising an exception as
+:doc:`../libraries/expecteds` library. Expected terms allow deferring errors
+to later stages of an application in lieu to raising an exception as
 soon as an error is detected.
 
 Compiler warnings and errors
@@ -175,7 +175,7 @@ Unknown entities
 The Logtalk compiler warns about any referenced entity that is not
 currently loaded. The warning may reveal a misspelled entity name or just
 an entity that will be loaded later. Out-of-order loading should be
-avoided when possible as it prevents some code optimizations such as
+avoided when possible as it prevents some code optimizations, such as
 :term:`static binding` of messages to methods.
 
 .. _errors_singletons:
@@ -236,7 +236,7 @@ Portability warnings
 ~~~~~~~~~~~~~~~~~~~~
 
 A warning will be reported if a predicate clause contains a call to a
-non-standard built-in predicate or arithmetic function, Portability
+non-standard built-in predicate or arithmetic function. Portability
 warnings are also reported for non-standard flags or flag values. These
 warnings often cannot be avoided due to the limited scope of the ISO
 Prolog standard.
@@ -247,7 +247,7 @@ Deprecated elements
 ~~~~~~~~~~~~~~~~~~~
 
 A warning will be reported if a deprecated directive, control construct,
-or predicate is used. These warnings should be fixed as soon as possible
+or predicate is used. These warnings should be fixed as soon as possible,
 as support for any deprecated features will likely be discontinued in
 future versions.
 
@@ -339,8 +339,8 @@ Runtime errors
 --------------
 
 This section briefly describes runtime errors that result from misuse of
-Logtalk built-in predicates, built-in methods or from message-sending.
-For a complete and detailed description of runtime errors please consult
+Logtalk built-in predicates, built-in methods, or from message-sending.
+For a complete and detailed description of runtime errors, please consult
 the Reference Manual.
 
 .. _errors_predicates:
@@ -348,7 +348,7 @@ the Reference Manual.
 Logtalk built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Most Logtalk built-in predicates checks the type and mode of the calling
+Most Logtalk built-in predicates check the type and mode of the calling
 arguments, throwing an exception in case of misuse.
 
 .. _errors_methods:
@@ -356,7 +356,7 @@ arguments, throwing an exception in case of misuse.
 Logtalk built-in methods
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Most Logtalk built-in method checks the type and mode of the calling
+Most Logtalk built-in method check the type and mode of the calling
 arguments, throwing an exception in case of misuse.
 
 .. _errors_sending:

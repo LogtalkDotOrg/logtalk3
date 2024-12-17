@@ -59,7 +59,7 @@ Protocol inheritance refers to the inheritance of predicate declarations
 (:term:`scope directives <predicate scope directive>`). These can be contained
 in objects, protocols, or categories. Logtalk supports single and
 multi-inheritance of protocols: an object or a category may implement several
-protocols and a protocol may extend several protocols.
+protocols, and a protocol may extend several protocols.
 
 .. _inheritance_protocol_prototype:
 
@@ -104,7 +104,7 @@ Lookup order for prototype hierarchies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The lookup order for predicate definitions is similar to the lookup for
-predicate declarations except that implemented protocols are ignored (as
+predicate declarations, except that implemented protocols are ignored (as
 they can only contain predicate directives).
 
 .. _inheritance_implementation_class:
@@ -113,7 +113,7 @@ Lookup order for class hierarchies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The lookup order for predicate definitions is similar to the lookup for
-predicate declarations except that implemented protocols are ignored (as
+predicate declarations, except that implemented protocols are ignored (as
 they can only contain predicate directives) and that the lookup starts
 at the instance itself (that received the message) before proceeding, if
 no predicate definition is found there, to the instance classes imported
@@ -307,7 +307,7 @@ To make all :term:`public predicates<public predicate>`
 declared via implemented protocols, imported categories, or ancestor
 objects :term:`protected predicates <protected predicate>` or to make
 all public and protected predicates
-:term:`private predicates <private predicate>` we prefix the entity's
+:term:`private predicates <private predicate>`, we prefix the entity's
 name with the corresponding keyword. For example:
 
 ::
@@ -361,7 +361,7 @@ This is the same as:
    :- end_object.
 
 This way we ensure backward compatibility with older Logtalk versions
-and a simplified syntax when protected or private inheritance are not
+and a simplified syntax when protected or private inheritance is not
 used.
 
 .. _inheritance_multiple:
@@ -369,9 +369,9 @@ used.
 Multiple inheritance
 --------------------
 
-Logtalk supports multi-inheritance by enabling an object to extend,
+Logtalk supports multiple inheritance by enabling an object to extend,
 instantiate, or specialize more than one object. Likewise, a protocol
-may extends multiple protocols and a category may extend multiple
+may extend multiple protocols, and a category may extend multiple
 categories. In this case, the depth-first lookup algorithms described
 above traverse the list of entities per relation from left to right.
 Consider as an example the following object opening directive:
@@ -384,9 +384,9 @@ Consider as an example the following object opening directive:
 The lookup procedure will look first into the parent object `bar` and
 its related entities before looking into the parent object `baz`. The
 :ref:`directives_alias_2` predicate directive can always be used to
-solve multi-inheritance conflicts. It should also be noted that the
+solve multiple inheritance conflicts. It should also be noted that the
 multi-inheritance support does not affect performance when we use
-single-inheritance.
+single inheritance.
 
 .. _inheritance_composition:
 
@@ -396,7 +396,7 @@ Composition versus multiple inheritance
 It is not possible to discuss inheritance mechanisms without referring
 to the long and probably endless debate on single versus multiple
 inheritance. The single inheritance mechanism can be implemented
-efficiently but it imposes several limitations on reusing, even
+efficiently, but it imposes several limitations on reusing, even
 if the multiple characteristics we intend to inherit are orthogonal. On
 the other hand, the multiple inheritance mechanisms are attractive in
 their apparent capability of modeling complex situations. However, they
@@ -407,7 +407,7 @@ cases.
 No solution that we might consider satisfactory for all the
 problems presented by the multiple inheritance mechanisms has been
 found. From the simplicity of some extensions that use the Prolog search
-strategy like [McCabe92]_ or [Moss94]_ and to the sophisticated algorithms
+strategy, such as [McCabe92]_ or [Moss94]_, to the sophisticated algorithms
 of CLOS [Bobrow_et_al_88]_, there is no
 adequate solution for all the situations. Besides, the use of multiple
 inheritance carries some complex problems in the domain of software

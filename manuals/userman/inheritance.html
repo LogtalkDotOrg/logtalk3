@@ -184,7 +184,7 @@ reflection predicates.</p>
 (<a class="reference internal" href="../glossary.html#term-predicate-scope-directive"><span class="xref std std-term">scope directives</span></a>). These can be contained
 in objects, protocols, or categories. Logtalk supports single and
 multi-inheritance of protocols: an object or a category may implement several
-protocols and a protocol may extend several protocols.</p>
+protocols, and a protocol may extend several protocols.</p>
 <section id="lookup-order-for-prototype-hierarchies">
 <span id="inheritance-protocol-prototype"></span><h3>Lookup order for prototype hierarchies<a class="headerlink" href="#lookup-order-for-prototype-hierarchies" title="Link to this heading"></a></h3>
 <p>The lookup order for predicate declarations is first the object, second
@@ -216,13 +216,13 @@ objects.</p>
 <section id="inheritance-implementation-prototype">
 <span id="id1"></span><h3>Lookup order for prototype hierarchies<a class="headerlink" href="#inheritance-implementation-prototype" title="Link to this heading"></a></h3>
 <p>The lookup order for predicate definitions is similar to the lookup for
-predicate declarations except that implemented protocols are ignored (as
+predicate declarations, except that implemented protocols are ignored (as
 they can only contain predicate directives).</p>
 </section>
 <section id="inheritance-implementation-class">
 <span id="id2"></span><h3>Lookup order for class hierarchies<a class="headerlink" href="#inheritance-implementation-class" title="Link to this heading"></a></h3>
 <p>The lookup order for predicate definitions is similar to the lookup for
-predicate declarations except that implemented protocols are ignored (as
+predicate declarations, except that implemented protocols are ignored (as
 they can only contain predicate directives) and that the lookup starts
 at the instance itself (that received the message) before proceeding, if
 no predicate definition is found there, to the instance classes imported
@@ -389,7 +389,7 @@ no
 declared via implemented protocols, imported categories, or ancestor
 objects <a class="reference internal" href="../glossary.html#term-protected-predicate"><span class="xref std std-term">protected predicates</span></a> or to make
 all public and protected predicates
-<a class="reference internal" href="../glossary.html#term-private-predicate"><span class="xref std std-term">private predicates</span></a> we prefix the entity’s
+<a class="reference internal" href="../glossary.html#term-private-predicate"><span class="xref std std-term">private predicates</span></a>, we prefix the entity’s
 name with the corresponding keyword. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(<span class="nv">Object</span>,
     <span class="k">implements</span>(private<span class="o">::</span><span class="nv">Protocol</span>)).
@@ -435,14 +435,14 @@ keyword. For example:</p>
 </pre></div>
 </div>
 <p>This way we ensure backward compatibility with older Logtalk versions
-and a simplified syntax when protected or private inheritance are not
+and a simplified syntax when protected or private inheritance is not
 used.</p>
 </section>
 <section id="multiple-inheritance">
 <span id="inheritance-multiple"></span><h2>Multiple inheritance<a class="headerlink" href="#multiple-inheritance" title="Link to this heading"></a></h2>
-<p>Logtalk supports multi-inheritance by enabling an object to extend,
+<p>Logtalk supports multiple inheritance by enabling an object to extend,
 instantiate, or specialize more than one object. Likewise, a protocol
-may extends multiple protocols and a category may extend multiple
+may extend multiple protocols, and a category may extend multiple
 categories. In this case, the depth-first lookup algorithms described
 above traverse the list of entities per relation from left to right.
 Consider as an example the following object opening directive:</p>
@@ -453,16 +453,16 @@ Consider as an example the following object opening directive:</p>
 <p>The lookup procedure will look first into the parent object <cite>bar</cite> and
 its related entities before looking into the parent object <cite>baz</cite>. The
 <a class="reference internal" href="../refman/directives/alias_2.html#directives-alias-2"><span class="std std-ref">alias/2</span></a> predicate directive can always be used to
-solve multi-inheritance conflicts. It should also be noted that the
+solve multiple inheritance conflicts. It should also be noted that the
 multi-inheritance support does not affect performance when we use
-single-inheritance.</p>
+single inheritance.</p>
 </section>
 <section id="composition-versus-multiple-inheritance">
 <span id="inheritance-composition"></span><h2>Composition versus multiple inheritance<a class="headerlink" href="#composition-versus-multiple-inheritance" title="Link to this heading"></a></h2>
 <p>It is not possible to discuss inheritance mechanisms without referring
 to the long and probably endless debate on single versus multiple
 inheritance. The single inheritance mechanism can be implemented
-efficiently but it imposes several limitations on reusing, even
+efficiently, but it imposes several limitations on reusing, even
 if the multiple characteristics we intend to inherit are orthogonal. On
 the other hand, the multiple inheritance mechanisms are attractive in
 their apparent capability of modeling complex situations. However, they
@@ -472,7 +472,7 @@ cases.</p>
 <p>No solution that we might consider satisfactory for all the
 problems presented by the multiple inheritance mechanisms has been
 found. From the simplicity of some extensions that use the Prolog search
-strategy like <a class="reference internal" href="../bibliography.html#mccabe92" id="id3"><span>[McCabe92]</span></a> or <a class="reference internal" href="../bibliography.html#moss94" id="id4"><span>[Moss94]</span></a> and to the sophisticated algorithms
+strategy, such as <a class="reference internal" href="../bibliography.html#mccabe92" id="id3"><span>[McCabe92]</span></a> or <a class="reference internal" href="../bibliography.html#moss94" id="id4"><span>[Moss94]</span></a>, to the sophisticated algorithms
 of CLOS <a class="reference internal" href="../bibliography.html#bobrow-et-al-88" id="id5"><span>[Bobrow_et_al_88]</span></a>, there is no
 adequate solution for all the situations. Besides, the use of multiple
 inheritance carries some complex problems in the domain of software

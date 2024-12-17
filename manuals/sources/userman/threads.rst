@@ -64,7 +64,7 @@ programming. For simple tasks where you simply want to prove a set of
 goals, each one in its own thread, Logtalk provides a
 :ref:`predicates_threaded_1` built-in
 predicate. The remaining predicates allow for fine-grained control,
-including postponing retrieving of thread goal results at a later time,
+including postponing retrieval of thread goal results at a later time,
 supporting non-deterministic thread goals, and making *one-way*
 asynchronous calls. Together, these predicates provide high-level
 support for multi-threading programming, covering most common use cases.
@@ -81,7 +81,7 @@ the set runs in its own thread.
 When the ``threaded/1`` predicate argument is a *conjunction* of goals,
 the predicate call is akin to *and-parallelism*. For example, assume
 that we want to find all the prime numbers in a given interval,
-``[N, M]``. We can split the interval in two parts and then span two
+``[N, M]``. We can split the interval into two parts and then span two
 threads to compute the prime numbers in each sub-interval:
 
 ::
@@ -100,7 +100,7 @@ threads to compute the prime numbers in each sub-interval:
 
 The ``threaded/1`` call terminates when the two implicit threads
 terminate. In a computer with two or more processors (or with a
-processor with two or more cores) the code above can be expected to
+processor with two or more cores), the code above can be expected to
 provide better computation times when compared with single-threaded code
 for sufficiently large intervals.
 
@@ -126,7 +126,7 @@ succeeds in finding the function root, leading to the termination of all
 the remaining competing threads.
 
 The ``threaded/1`` built-in predicate is most useful for lengthy,
-independent deterministic computations where the computational costs of
+independent, deterministic computations where the computational costs of
 each goal outweigh the overhead of the implicit thread creation and
 management.
 
@@ -152,7 +152,7 @@ built-in predicate within the same object where the call to the
 calls suspend execution until the results of the ``threaded_call/1``
 calls are sent back to the object message queue.
 
-The ``threaded_exit/1`` predicate allow us to retrieve alternative
+The ``threaded_exit/1`` predicate allows us to retrieve alternative
 solutions through backtracking (if you want to commit to the first
 solution, you may use the :ref:`predicates_threaded_once_1_2`
 predicate instead of the ``threaded_call/1`` predicate). For example,
@@ -176,7 +176,7 @@ predicate, we could write:
 In this case, the ``threaded_call/1`` and the ``threaded_exit/1`` calls
 are made within the pseudo-object ``user``. The implicit thread running
 the ``lists::member/2`` goal suspends itself after providing a solution,
-waiting for a request fo an alternative solution; the thread is
+waiting for a request for an alternative solution; the thread is
 automatically terminated when the runtime engine detects that
 backtracking to the ``threaded_exit/1`` call is no longer possible.
 
@@ -193,7 +193,7 @@ Be careful when using the ``threaded_exit/1`` predicate inside
 failure-driven loops. When all the solutions have been found (and the
 thread generating them is therefore terminated), re-calling the
 predicate will generate an exception. Note that failing instead of
-throwing an exception is not an acceptable solution as it could be
+throwing an exception is not an acceptable solution, as it could be
 misinterpreted as a failure of the ``threaded_call/1`` argument.
 
 The example in the previous section with prime numbers could be
@@ -219,7 +219,7 @@ call and the corresponding ``threaded_call/1`` call is established using
 unification. If there are multiple ``threaded_call/1`` calls for a matching
 ``threaded_exit/1`` call, the connection can potentially be established with
 any of them (this is akin to what happens with tabling). Nevertheless, you
-can easily use a call *tag* by using in
+can easily use a call *tag* by using the
 alternative :ref:`threaded_call/2 <predicates_threaded_call_1_2>`,
 :ref:`threaded_once/2 <predicates_threaded_once_1_2>`, and
 :ref:`threaded_exit/2 <predicates_threaded_exit_1_2>` built-in predicates.
@@ -257,7 +257,7 @@ Sometimes we want to prove a goal in a new thread without caring about
 the results. This may be accomplished by using the built-in predicate
 :ref:`predicates_threaded_ignore_1`.
 For example, assume that we are developing a multi-agent application
-where an agent may send an "happy birthday" message to another agent. We
+where an agent may send a "happy birthday" message to another agent. We
 could write:
 
 ::
@@ -306,7 +306,7 @@ output. Given a large interval, a goal such as:
    1 3 2 4 6 8 5 7 10 ...
    ...
 
-will most likely result in a mixed up output. By declaring the
+will most likely result in a mixed-up output. By declaring the
 ``odd_numbers/2`` and ``even_numbers/2`` predicates synchronized:
 
 ::
@@ -329,7 +329,7 @@ one goal will only start after the other one finished:
 
 Note that, in a more realistic scenario, the two ``threaded_ignore/1``
 calls would be made concurrently from different objects. Using the same
-synchronized directive for a set of predicates imply that they all use
+synchronized directive for a set of predicates implies that they all use
 the same mutex, as required for this example.
 
 As each Logtalk entity is independently compiled, this directive must be
@@ -340,12 +340,12 @@ synchronized predicate cannot be declared dynamic. To ensure atomic
 updates of a dynamic predicate, declare as synchronized the predicate
 performing the update.
 
-Synchronized predicates may be used as wrappers to messages sent to
+Synchronized predicates may be used as wrappers for messages sent to
 objects that are not multi-threading aware. For example, assume a
 ``log`` object defining a ``write_log_entry/2`` predicate that writes
 log entries to a file, thus using side effects on its implementation.
-We can specify and define e.g. a ``sync_write_log_entry/2`` predicate
-as follows:
+We can specify and define, for example, a ``sync_write_log_entry/2``
+predicate as follows:
 
 ::
 
@@ -359,7 +359,7 @@ and then call the ``sync_write_log_entry/2`` predicate instead of the
 
 The synchronization directive may be used when defining objects that may be
 reused in both single-threaded and multi-threaded Logtalk applications. The
-directive simply make calls to the synchronized predicates deterministic
+directive simply makes calls to the synchronized predicates deterministic
 when the objects are used in a single-threaded application.
 
 .. _threads_notifications:
@@ -433,7 +433,7 @@ solutions left. After returning a solution, this predicate signals the
 engine to start computing the next one. Note that this predicate is
 deterministic. In contrast with the ``threaded_exit/1-2`` built-in
 predicates, retrieving the next solution requires calling the predicate
-again instead of by backtracking into its call. For example: 
+again instead of backtracking into its call. For example: 
 
 ::
 
@@ -499,7 +499,7 @@ The ``handle/1`` predicate, after performing a task, can use the
 task results available for consumption using the ``threaded_engine_next/2``
 and ``threaded_engine_next_reified/2`` built-in predicates. Blocking
 semantics are used by these two predicates: the ``threaded_engine_yield/1``
-predicate blocks until the returned solution is consumed while the
+predicate blocks until the returned solution is consumed, while the
 ``threaded_engine_next/2`` predicate blocks until a solution becomes
 available.
 
@@ -509,14 +509,14 @@ Multi-threading performance
 ---------------------------
 
 The performance of multi-threading applications is highly dependent on
-the :term:`backend Prolog compiler`, on the operating-system, and on the use
+the :term:`backend Prolog compiler`, the operating-system, and the use
 of :term:`dynamic binding` and dynamic predicates. All compatible backend
 Prolog compilers that support multi-threading features make use of POSIX
 threads or *pthreads*. The performance of the underlying pthreads
 implementation can exhibit significant differences between operating
 systems. An important point is synchronized access to dynamic
 predicates. As different threads may try to simultaneously access and
-update dynamic predicates, these operations may used a lock-free algorithm
+update dynamic predicates, these operations may use a lock-free algorithm
 or be protected by a lock, usually implemented using a mutex. In the latter
 case, poor mutex lock operating-system performance, combined with a large
 number of collisions by several threads trying to acquire the same lock,
