@@ -43,16 +43,16 @@ the TextMate Preferences window, select the "Advanced" tab, click on the
 
 LOGTALK_COMMAND
 	set to the name of the shell script you use to launch Logtalk 
-	followed by the option to run a goal at startup (e.g. `yaplgt -g`)
+	followed by the option to run a goal at startup (e.g., `yaplgt -g`)
 LOGTALK_HTML_COMMAND
 	set to the name of the shell script you use to generate the (X)HTML 
-	documentation (e.g. `lgt2html`)
+	documentation (e.g., `lgt2html`)
 LOGTALK_PDF_COMMAND
 	set to the name of the shell script you use to generate the PDF 
-	documentation (e.g. `lgt2pdf`)
+	documentation (e.g., `lgt2pdf`)
 LOGTALK_TXT_COMMAND
 	set to the name of the shell script you use to generate the TXT 
-	documentation (e.g. `lgt2txt`)
+	documentation (e.g., `lgt2txt`)
 
 Logtalk source files (including the library entities and the programming
 examples) are indented using tabs and are expected to remain perfectly 

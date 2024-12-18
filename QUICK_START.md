@@ -147,7 +147,7 @@ which is updated when you update Logtalk) with a suitable name to hold
 all the files of your application.
 
 5. Copy or rename the [`settings-sample.lgt`](settings-sample.lgt) file to
-`settings.lgt`, and modify it to preload developer tools (e.g. the `help`
+`settings.lgt`, and modify it to preload developer tools (e.g., the `help`
 and `debugger` tools), to define library aliases for your applications, to
 define default compiler flags, and more (see the comments in the file itself
 and the [`CUSTOMIZE.md`](CUSTOMIZE.md) file for details).

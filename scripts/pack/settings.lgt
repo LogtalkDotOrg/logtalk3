@@ -32,7 +32,7 @@
 %  directive within the source files.
 %
 %  Settings files are also a convenient place to define your own shortcuts
-%  for commonly used queries (e.g. load the debugger and start tracing).
+%  for commonly used queries (e.g., load the debugger and start tracing).
 %
 %  Logtalk looks for a settings file first in the startup directory (thus
 %  supporting per-project settings files). If not found, Logtalk looks for

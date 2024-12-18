@@ -265,7 +265,7 @@ For example:</p>
 private and dynamic predicate. The predicates <code class="docutils literal notranslate"><span class="pre">attribute/2</span></code>,
 <code class="docutils literal notranslate"><span class="pre">set_attribute/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">del_attribute/2</span></code> always access and modify
 the dynamic predicate contained in the object receiving the
-corresponding messages (i.e. <em>self</em>). But it’s also possible to define
+corresponding messages (i.e., <em>self</em>). But it’s also possible to define
 predicates that handle dynamic predicates in the context of <em>this</em>
 instead of <em>self</em>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(attributes).
@@ -311,7 +311,7 @@ categories:</p>
 <span class="p">:- </span><span class="k">end_category</span>.
 </pre></div>
 </div>
-<p>This allows us to add missing directives (e.g. to define
+<p>This allows us to add missing directives (e.g., to define
 <a class="reference internal" href="../glossary.html#term-predicate-alias"><span class="xref std std-term">aliases</span></a> for complemented object predicates),
 replace broken predicate definitions, add new predicates, and add protocols
 and categories to existing objects without requiring access or modifications
@@ -326,7 +326,7 @@ allowing patching a previous patch if necessary.</p>
 definition in the object from the new definition in the category by using the
 <a class="reference internal" href="../refman/control/call_in_this_1.html#call-in-this-1"><span class="std std-ref">(&#64;)/1</span></a> control construct. This construct is only meaningful
 when used within categories and requires a compile-time bound goal argument,
-which is called in <a class="reference internal" href="../glossary.html#term-this"><span class="xref std std-term">this</span></a> (i.e. in the context of the complemented
+which is called in <a class="reference internal" href="../glossary.html#term-this"><span class="xref std std-term">this</span></a> (i.e., in the context of the complemented
 object or the object importing a category). As an example, consider the
 following object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(bird).

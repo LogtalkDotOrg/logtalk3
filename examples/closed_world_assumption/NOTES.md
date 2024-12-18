@@ -27,8 +27,8 @@ implemented in Logtalk when calling predicates and sending messages.
 
 The CWA states that:
 
-- What is true is known to be true (i.e. what is true can be proved).
-- What is not know to be true, is false (i.e. what cannot be proved true,
+- What is true is known to be true (i.e., what is true can be proved).
+- What is not know to be true, is false (i.e., what cannot be proved true,
 is false).
 
 When applied to Logtalk (or Prolog), proofs are constructed using predicate

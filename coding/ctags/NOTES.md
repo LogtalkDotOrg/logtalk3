@@ -29,6 +29,6 @@ For older versions of ctags, you may need to copy the `logtalk.ctags` file to
 `$HOME/.ctags` or append its contents to the `$HOME/.ctags` file if it already
 exists instead.
 
-Several text editors (e.g. Atom, Sublime Text, TextMate, Vim, and Visual Studio
+Several text editors (e.g., Atom, Sublime Text, TextMate, Vim, and Visual Studio
 Code) support code navigation using ctags. Check the text editor documentation
 and the Logtalk support provided by this distribution for details.

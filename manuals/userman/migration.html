@@ -342,7 +342,7 @@ include the set of implemented module directives, the directive semantics, the
 handling of operators, the locality of flags, and the integration of
 term-expansion mechanisms (when provided). Another potential issue is that,
 when compiling modules as objects, Logtalk assumes that any referenced module
-(e.g. using <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code> directives) is also being compiled as an
+(e.g., using <code class="docutils literal notranslate"><span class="pre">use_module/1-2</span></code> directives) is also being compiled as an
 object. If that’s not the case, the compiled module calls being compiled as
 message-sending goals will still work for normal predicates but will not
 work for meta-predicates called using implicit module qualification. The
@@ -507,7 +507,7 @@ the notes on built-in meta-predicates for possible caveats). However,
 Logtalk will generate compilation errors on source files containing
 proprietary directives unless you first specify how the directives
 should be handled. Several actions are possible on a per-directive
-basis: ignoring the directive (i.e. do not copy the directive, although
+basis: ignoring the directive (i.e., do not copy the directive, although
 a goal can be proved as a consequence), rewriting and copying the directive
 to the generated Prolog files, or rewriting and recompiling the
 resulting directive. To specify these actions, the adapter files contain
@@ -558,7 +558,7 @@ the module file path). In this case, these directives are parsed in a
 similar way to Logtalk <a class="reference internal" href="../refman/directives/uses_2.html#directives-uses-2"><span class="std std-ref">uses/2</span></a>
 directives, with calls to the specified module predicates being
 automatically translated to <code class="docutils literal notranslate"><span class="pre">Module:Goal</span></code> calls.</p>
-<p>As a general rule, the Prolog modules should be loaded (e.g. in the
+<p>As a general rule, the Prolog modules should be loaded (e.g., in the
 auxiliary Logtalk loader files) <em>before</em> compiling objects that make use
 of module predicates. Moreover, the Logtalk compiler does not generate
 code for the automatic loading of modules referenced in

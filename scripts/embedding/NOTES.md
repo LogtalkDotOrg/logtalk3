@@ -26,7 +26,7 @@ These scripts allow pre-compilation of the Logtalk compiler/runtime
 and optionally of a Logtalk application. This is a common requirement
 for embedding, specially when deploying applications in read-only file
 systems. These sample scripts should be regarded as starting points
-as actual use often requires customization (e.g. the starting goal,
+as actual use often requires customization (e.g., the starting goal,
 inclusion of a top-level interpreter, etc).
 
 An alternative, available in some backend Prolog compilers such as
@@ -59,7 +59,7 @@ In alternative, a possible solution to run the Bash shell scripts is to
 install either the [Windows Subsystem for Linux (WSL)](https://docs.microsoft.com/en-us/windows/wsl/)
 or [Git for Windows](https://gitforwindows.org). Both provide access
 to a Bash shell. In both cases, use full paths with forward slashes
-(e.g. `C:/Users/jdoe/collect`) and without environment variables. You
+(e.g., `C:/Users/jdoe/collect`) and without environment variables. You
 must also specify the temporary directory for intermediate files using
 the scripts `-t` option. Also, symbolic links may not work and use of
 actual paths to files may be required.

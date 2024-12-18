@@ -132,7 +132,7 @@
 	% of regular polygon, defined in descendant classes, and the length
 	% of the side, which can be redefined from the default value here in
 	% descendant classes and instances; thus, we must sent the messages
-	% to _self_ (i.e. the instance that receives the perimeter/1 message)
+	% to _self_ (i.e., the instance that receives the perimeter/1 message)
 	% using the ::/1 control construct
 	perimeter(Perimeter) :-
 		::nsides(Number),
@@ -161,7 +161,7 @@
 
 	% the area depends on the length of the side, which can be redefined
 	% from the inherited default value in descendant classes and instances;
-	% thus, we must sent the side/1 message to _self_ (i.e. the instance that
+	% thus, we must sent the side/1 message to _self_ (i.e., the instance that
 	% receives the perimeter/1 message) using the ::/1 control construct
 	area(Area) :-
 		::side(Side),

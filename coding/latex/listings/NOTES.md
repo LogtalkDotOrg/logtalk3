@@ -70,6 +70,6 @@ For inline code use `\lstinline{...}` and for code blocks use:
 		...
 	\end{lstlisting}
 
-Consult the `listings` package documentation (e.g. by running the command
+Consult the `listings` package documentation (e.g., by running the command
 `texdoc listings`) and experiment with the above settings to get the exact
 appearance that your publication requires.

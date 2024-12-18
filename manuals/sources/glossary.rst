@@ -100,7 +100,7 @@ Glossary
    entity
       Generic name for Logtalk compilation units: :term:`objects <object>`,
       :term:`categories <category>`, and :term:`protocols <protocol>`.
-      Entities share a single namespace (i.e. entity
+      Entities share a single namespace (i.e., entity
       :term:`identifiers <identity>` must be unique) and can be static (the
       default) or dynamic. Static entities are defined in source files.
       Dynamic entities can also be defined in source files but are usually
@@ -112,7 +112,7 @@ Glossary
       to parameterize the entity predicates. Parameters are *logical variables*
       implicitly shared by all the entity clauses. Note that the identifier
       of a parametric entity is its functor, irrespective of the possible
-      values of its arguments (e.g. ``foo(bar)`` and ``foo(baz)`` are
+      values of its arguments (e.g., ``foo(bar)`` and ``foo(baz)`` are
       different parameterizations of the same parametric entity, ``foo/1``).
 
    entity alias
@@ -153,7 +153,7 @@ Glossary
 
    identity
       Property of an :term:`entity` that distinguishes it from every other entity.
-      The identifier of an entity is its functor (i.e. its name and arity),
+      The identifier of an entity is its functor (i.e., its name and arity),
       which must be unique. Object and :term:`category` identifiers can be
       atoms or compound terms. Protocol identities must be atoms. All Logtalk
       entities (objects, protocols, and categories) share the same namespace.
@@ -323,7 +323,7 @@ Glossary
 
    parameter variable
       A variable used as parameter in a parametric object or a parametric
-      category using the syntax ``_ParameterName_`` (i.e. a variable whose
+      category using the syntax ``_ParameterName_`` (i.e., a variable whose
       name stars and ends with an underscore). Parameter variables are
       *logical variables* shared by all entity terms. Occurrences of parameter
       variables in :term:`entity directives <entity directive>` and clauses
@@ -398,7 +398,7 @@ Glossary
       built-in meta-predicates.
 
    closure
-      A callable term (i.e. an atom or a compound term) passed to a
+      A callable term (i.e., an atom or a compound term) passed to a
       :term:`meta-predicate` call where it is extended with additional
       arguments to form a goal called by the meta-predicate.
 
@@ -431,7 +431,7 @@ Glossary
       control construct).
 
    predicate definition context
-      The object or category that contains the definition (i.e. clauses)
+      The object or category that contains the definition (i.e., clauses)
       for a predicate.
 
    predicate execution context
@@ -573,7 +573,7 @@ Glossary
       Compile time lookup of a :term:`predicate declaration` and
       :term:`predicate definition` when compiling a :term:`message` sending
       call (or a :term:`super call`). Dynamic binding is used whenever static
-      binding is not possible (e.g. due to the predicate being dynamic or due
+      binding is not possible (e.g., due to the predicate being dynamic or due
       to lack of enough information at compilation time). Also known as *early
       binding*. See also :term:`dynamic binding`.
 

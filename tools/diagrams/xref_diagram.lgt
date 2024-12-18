@@ -577,7 +577,7 @@
 			)
 		),
 		% usually caller and callee are the same predicate but that's not required
-		% (e.g. when the call is from an initialization/1 directive)
+		% (e.g., when the call is from an initialization/1 directive)
 		(	entity_property(Kind, Entity, defines(Callee0, CalleeProperties)),
 			member(non_terminal(CalleeNonTerminal), CalleeProperties) ->
 			Callee = CalleeNonTerminal

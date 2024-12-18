@@ -273,11 +273,11 @@ not by the <a class="reference internal" href="../glossary.html#term-backend-Pro
 <ul class="simple">
 <li><p>When practical and when performance is critical, define each entity on
 its own source file.</p></li>
-<li><p>Source file loading order can impact performance (e.g. if an object
+<li><p>Source file loading order can impact performance (e.g., if an object
 imports a category defined in a source file loaded after the object
 source file, no static binding optimizations will be possible).</p></li>
 <li><p>Initialization directives that result in the compilation and loading of
-other source files (e.g. libraries) should preferably be written in the
+other source files (e.g., libraries) should preferably be written in the
 application loader file to ensure the availability of the entities
 they define when compiling the application source files (thus enabling
 static binding optimizations).</p></li>
@@ -409,7 +409,7 @@ true.
 <section id="loader-files">
 <span id="programming-loaders"></span><h2>Loader files<a class="headerlink" href="#loader-files" title="Link to this heading"></a></h2>
 <p>If you look into the Logtalk distribution, you will notice that most source
-code directories (e.g. of tools, libraries, and examples) contain a <em>driver
+code directories (e.g., of tools, libraries, and examples) contain a <em>driver
 file</em> that can be used to load all included source files and any required
 libraries. These loader files are usually named <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> or contain
 the word <em>loader</em> in their name. Loader files are ordinary source files and
@@ -426,7 +426,7 @@ simply typing:</p>
 </pre></div>
 </div>
 <p>Usually these driver files contain calls to the built-in predicates
-<a class="reference internal" href="../refman/predicates/set_logtalk_flag_2.html#predicates-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> (e.g. for setting global,
+<a class="reference internal" href="../refman/predicates/set_logtalk_flag_2.html#predicates-set-logtalk-flag-2"><span class="std std-ref">set_logtalk_flag/2</span></a> (e.g., for setting global,
 <em>project-specific</em>, flag values) and <a class="reference internal" href="../refman/predicates/logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> or
 <a class="reference internal" href="../refman/predicates/logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a> (for loading project files), wrapped
 inside a Prolog <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive for portability. For
@@ -529,8 +529,8 @@ libraries without worrying about library paths, improving code portability.
 The directory paths on the second argument should always end with the path
 directory separator character. Most backend Prolog compilers allow the use
 of environment variables in the second argument of the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code>
-predicate. Use of POSIX relative paths (e.g. <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) for
-top-level library directories (e.g. <code class="docutils literal notranslate"><span class="pre">lgtuser</span></code> in the example above) is
+predicate. Use of POSIX relative paths (e.g., <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) for
+top-level library directories (e.g., <code class="docutils literal notranslate"><span class="pre">lgtuser</span></code> in the example above) is
 not advised, as different backend Prolog compilers may start with
 different initial working directories, which may result in portability
 problems of your loader files.</p>
@@ -610,12 +610,12 @@ commented out code snippets for common settings.</p>
 <span id="programming-linter"></span><h2>Compiler linter<a class="headerlink" href="#compiler-linter" title="Link to this heading"></a></h2>
 <p>The compiler includes a <a class="reference internal" href="../devtools/linter.html"><span class="doc">linter</span></a> that checks for a wide range
 of possible problems in source files. Notably, the compiler checks for unknown
-entities, unknown predicates, undefined predicates (i.e. predicates that
+entities, unknown predicates, undefined predicates (i.e., predicates that
 are declared but not defined), missing directives (including missing
 <code class="docutils literal notranslate"><span class="pre">dynamic/1</span></code> and <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives), redefined built-in
 predicates, calls to non-portable predicates, singleton variables, goals that
-are always true or always false (i.e. goals that can be replaced by
-<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">fail</span></code>), and trivial fails (i.e. calls to predicates with no
+are always true or always false (i.e., goals that can be replaced by
+<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">fail</span></code>), and trivial fails (i.e., calls to predicates with no
 match clauses). Most of the linter warnings are controlled by
 <a class="reference internal" href="#programming-flags-lint"><span class="std std-ref">compiler flags</span></a>. See the next section
 for details.</p>
@@ -1091,7 +1091,7 @@ compiled code and other Prolog code. In addition, some Prolog
 compilers automatically hide predicates whose functor starts with a
 specific prefix, such as the character <code class="docutils literal notranslate"><span class="pre">$</span></code>. Although this is not a
 read-only flag, it should only be changed at startup time and <strong>before</strong>
-loading any source files. When changing this flag (e.g. from a
+loading any source files. When changing this flag (e.g., from a
 <a class="reference internal" href="../glossary.html#term-settings-file"><span class="xref std std-term">settings file</span></a>), restart with the <a class="reference internal" href="#flag-clean"><span class="std std-ref">clean</span></a>
 flag turned on to ensure that any compiled files using the old
 <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> value will be recompiled.</p>
@@ -1200,7 +1200,7 @@ leads to trouble. See the compatibility notes for the backend Prolog
 compiler you intend to use for more information. There is an additional
 potential problem when using multi-threading programming. Reloading a
 threaded object does not recreate from scratch its old message queue,
-which may still be in use (e.g. threads may be waiting on it).</p>
+which may still be in use (e.g., threads may be waiting on it).</p>
 <p>When using library entities and stable code, you can avoid reloading the
 corresponding source files (and, therefore, recompiling them) by setting
 the <a class="reference internal" href="#flag-reload"><span class="std std-ref">reload</span></a> compiler flag to <code class="docutils literal notranslate"><span class="pre">skip</span></code>. For code under
@@ -1223,7 +1223,7 @@ with Logtalk, be sure to perform the first compilation of your source
 files with the <code class="docutils literal notranslate"><span class="pre">clean</span></code> flag turned off: the intermediate Prolog files
 generated by the Logtalk compiler may not be compatible across Prolog
 compilers or even for the same Prolog compiler across operating systems
-(e.g. due to the use of different character encodings or end-of-line
+(e.g., due to the use of different character encodings or end-of-line
 characters).</p>
 </section>
 <section id="batch-processing">
@@ -1254,7 +1254,7 @@ generate a file dependency diagram for your application.</p>
 used in alternative. When dynamic predicates cannot be avoided, try to
 make them private. Declaring a dynamic predicate also as a private
 predicate allows the compiler to optimize local calls to the database
-methods (e.g. <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> and <a class="reference internal" href="../refman/methods/retract_1.html#methods-retract-1"><span class="std std-ref">retract/1</span></a>) that
+methods (e.g., <a class="reference internal" href="../refman/methods/assertz_1.html#methods-assertz-1"><span class="std std-ref">assertz/1</span></a> and <a class="reference internal" href="../refman/methods/retract_1.html#methods-retract-1"><span class="std std-ref">retract/1</span></a>) that
 modify the predicate.</p>
 <p>Sending a <a class="reference internal" href="../glossary.html#term-message-to-self"><span class="xref std std-term">message to self</span></a> implies <a class="reference internal" href="../glossary.html#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>, but
 there are often cases where <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a> is misused

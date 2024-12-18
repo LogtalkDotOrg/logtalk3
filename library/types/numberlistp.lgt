@@ -67,7 +67,7 @@
 	:- public(average/2).
 	:- mode(average(+list(number), -float), zero_or_one).
 	:- info(average/2, [
-		comment is 'Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the list is empty.',
+		comment is 'Calculates the average (i.e., arithmetic mean) of a list of numbers. Fails if the list is empty.',
 		argnames is ['List', 'Average']
 	]).
 
@@ -156,7 +156,7 @@
 	:- public(normalize_unit/2).
 	:- mode(normalize_unit(+list(number), -list(float)), one).
 	:- info(normalize_unit/2, [
-		comment is 'Normalizes a list of numbers returning its unit vector (i.e. a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.',
+		comment is 'Normalizes a list of numbers returning its unit vector (i.e., a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.',
 		argnames is ['List', 'NormalizedList']
 	]).
 

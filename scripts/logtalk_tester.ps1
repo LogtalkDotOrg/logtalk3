@@ -309,7 +309,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -r random generator starting seed (no default)"
 	Write-Output "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
 	Write-Output "     (this option should not be used when running parallel processes that use the same test sets)"
-	Write-Output "  -a arguments as an array (i.e. comma separated) to be passed to the tests (no default)"
+	Write-Output "  -a arguments as an array (i.e., comma separated) to be passed to the tests (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""

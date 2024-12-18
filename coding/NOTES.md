@@ -27,7 +27,7 @@ editors and IDEs.
 source code browsers, bug trackers, and shells).
 
 - Support for setting Logtalk projects using common version control systems
-(e.g. git).
+(e.g., git).
 
 - Sample source files for testing syntax highlighting support.
 

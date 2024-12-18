@@ -44,7 +44,7 @@ called. For example:
 
 Note, however, that ``Goal`` and ``ExecutionContext`` can be unbound or only
 partially instantiated when the corresponding information is not available
-(e.g. due to compiler optimizations that throw away the necessary error context
+(e.g., due to compiler optimizations that throw away the necessary error context
 information). The ``ExecutionContext`` argument is an opaque term that
 can be decoded using the
 :ref:`logtalk::execution_context/7 <logtalk/0::execution_context/7>` predicate.

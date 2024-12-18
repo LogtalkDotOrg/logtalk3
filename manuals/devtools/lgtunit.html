@@ -263,7 +263,7 @@ tests after loading:</p>
     <span class="k">logtalk_load</span>(basic_types(loader)),
     <span class="c">% load the unit test tool</span>
     <span class="k">logtalk_load</span>(lgtunit(loader)),
-    <span class="c">% load your application files (e.g. &quot;source.lgt&quot;) enabling support for</span>
+    <span class="c">% load your application files (e.g., &quot;source.lgt&quot;) enabling support for</span>
     <span class="c">% code coverage, which requires compilation in debug mode and collecting</span>
     <span class="c">% source data information; if code coverage is not required, remove the</span>
     <span class="c">% &quot;debug(on)&quot; option for faster execution</span>
@@ -306,7 +306,7 @@ by typing:</p>
 </div>
 <p>When testing complex <em>units</em>, it is often desirable to split the tests
 between several test objects or use parametric test objects to be able
-to run the same tests using different parameters (e.g. different data
+to run the same tests using different parameters (e.g., different data
 sets or alternative implementations of the same protocol). In this case,
 you can run all test subsets using the goal:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lgtunit<span class="o">::</span>run_test_sets([test_set_1, test_set_2, ...]).
@@ -350,7 +350,7 @@ tested in optimized mode.</p>
 <h2>Automating running tests<a class="headerlink" href="#automating-running-tests" title="Link to this heading"></a></h2>
 <p>You can use the <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.sh</span></code> Bash shell script or the
 <code class="docutils literal notranslate"><span class="pre">scripts/logtalk_tester.ps1</span></code> PowerShell script for automating running
-unit tests (e.g. from a CI/CD pipeline). When using one of the Logtalk
+unit tests (e.g., from a CI/CD pipeline). When using one of the Logtalk
 installers, the <code class="docutils literal notranslate"><span class="pre">.sh</span></code> extension can usually be omitted. For example,
 assuming your current directory (or sub-directories) contains one or
 more <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> files:</p>
@@ -685,7 +685,7 @@ dialect by using a <code class="docutils literal notranslate"><span class="pre">
 </div>
 <p>The hook pipeline first applies our <code class="docutils literal notranslate"><span class="pre">simple_dialect</span></code> expansion,
 followed by the default <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> expansion. This solution allows
-other hook objects (e.g. required by the code being tested) to also be
+other hook objects (e.g., required by the code being tested) to also be
 used by updating the pipeline.</p>
 </section>
 <section id="quickcheck">
@@ -733,11 +733,11 @@ better reserved for testing at the top-level interpreter. The
 <li><p><code class="docutils literal notranslate"><span class="pre">broken(Why,</span> <span class="pre">Culprit)</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">broken(Why,</span> <span class="pre">Culprit)</span></code> result only occurs when the user-defined
-testing setup is broken. For example, a non-callable template (e.g. a
+testing setup is broken. For example, a non-callable template (e.g., a
 non-existing predicate), an invalid option, a problem with the
-pre-condition closure or with the label closure (e.g. a pre-condition
+pre-condition closure or with the label closure (e.g., a pre-condition
 that always fails or a label that fails to classify a generated test),
-or errors/failures when generating tests (e.g. due to an unknown type
+or errors/failures when generating tests (e.g., due to an unknown type
 being used in the template or a broken custom type arbitrary value
 generator).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Goal</span></code> argument is the random test that failed.</p>
@@ -900,7 +900,7 @@ starting seed can be set using the <code class="docutils literal notranslate"><s
 </pre></div>
 </div>
 <p>We could now move to other properties that the predicate should comply
-with (e.g. all elements in the output list being present in the input
+with (e.g., all elements in the output list being present in the input
 list). Often, both traditional unit tests and QuickCheck tests are used,
 complementing each other to ensure the required code coverage.</p>
 <p>Another example using a Prolog module predicate:</p>
@@ -925,8 +925,8 @@ that the results must comply with.</p>
 template for a property, generate random values for each input argument
 based on the type information, and check each output argument. For
 common types, the implementation tries first (by default) common edge
-cases (e.g. empty atom, empty list, or zero) before generating arbitrary
-values. When the output arguments check fails, the QuickCheck
+cases (e.g., empty atom, empty list, or zero) before generating
+arbitrary values. When the output arguments check fails, the QuickCheck
 implementation tries (by default) up to 64 shrink operations of the
 counter-example to report a simpler case to help debugging the failed
 test. Edge cases, generating arbitrary terms, and shrinking terms make
@@ -1120,7 +1120,7 @@ expected context.</p>
 <section id="testing-local-predicates">
 <h2>Testing local predicates<a class="headerlink" href="#testing-local-predicates" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">(&lt;&lt;)/2</span></code> debugging control construct can be used to access and
-test object local predicates (i.e. predicates without a scope
+test object local predicates (i.e., predicates without a scope
 directive). In this case, make sure that the <code class="docutils literal notranslate"><span class="pre">context_switching_calls</span></code>
 compiler flag is set to <code class="docutils literal notranslate"><span class="pre">allow</span></code> for those objects. This is seldom
 required, however, as local predicates are usually auxiliary predicates
@@ -1435,7 +1435,7 @@ any open stream connected to the file before deleting it.</p>
 <section id="flaky-tests">
 <h2>Flaky tests<a class="headerlink" href="#flaky-tests" title="Link to this heading"></a></h2>
 <p>Flaky tests are tests that pass or fail non-deterministically, usually
-due to external conditions (e.g. computer or network load). Thus, flaky
+due to external conditions (e.g., computer or network load). Thus, flaky
 tests often don’t result from bugs in the code being tested itself but
 from test execution conditions that are not predictable. The <code class="docutils literal notranslate"><span class="pre">flaky/0</span></code>
 test option declares a test to be flaky. For example:</p>
@@ -1693,7 +1693,7 @@ simplify writing unit tests and for general use:</p>
 <ul>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code></div>
-<div class="line">To check when two terms are a variant of each other (e.g. to check
+<div class="line">To check when two terms are a variant of each other (e.g., to check
 expected test results against actual results when they contain
 variables).</div>
 </div>
@@ -1882,7 +1882,7 @@ directory containing tests):</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">logtalk_allure_report</span></code> script supports command-line options to
-pass the tests directory (i.e. the directory where the
+pass the tests directory (i.e., the directory where the
 <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script was run), the directory where to collect all
 the xUnit report files for generating the report, the directory where
 the report is to be saved, and the report title (see the script man page
@@ -1923,7 +1923,7 @@ separated inside a string:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">PS</span><span class="o">&gt;</span> logtalk_allure_report <span class="o">-e</span> <span class="s">&quot;Project=&#39;Deep Thought&#39;,Commit=bf166b6&quot;</span>
 </pre></div>
 </div>
-<p>To show test run trends in the report (e.g. when running the tests for
+<p>To show test run trends in the report (e.g., when running the tests for
 each application source code commit), save the processed test results
 and the report data to permanent directories. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> logtalk_allure_report <span class="o">\</span>
@@ -1987,7 +1987,7 @@ web browser for the transformation. For example, using the popular
 </pre></div>
 </div>
 <p>On Windows operating-systems, this processor can be installed using e.g.
-Chocolatey. On a POSIX operating-systems (e.g. Linux, macOS, …) use
+Chocolatey. On a POSIX operating-systems (e.g., Linux, macOS, …) use
 the system package manager to install it if necessary.</p>
 <p>The coverage report can include links to the source code when hosted on
 Bitbucket, GitHub, or GitLab. This requires passing the base URL as the
@@ -1998,7 +1998,7 @@ XSLT processor, however. For example:</p>
   <span class="o">-</span>o coverage_report.html coverage_report.xml
 </pre></div>
 </div>
-<p>Note that the base URL should preferably be a permanent link (i.e. it
+<p>Note that the base URL should preferably be a permanent link (i.e., it
 should include the commit SHA1) so that the links to source code files
 and lines remain valid if the source code is later updated. It’s also
 necessary to suppress the local path prefix in the generated

@@ -24,7 +24,7 @@ ________________________________________________________________________
 ...
 
 % some example benchmark queries for backend Prolog compilers implementing
-% the time/1 timing predicate (e.g. SWI-Prolog, Trealla Prolog, YAP, XVM, 
+% the time/1 timing predicate (e.g., SWI-Prolog, Trealla Prolog, YAP, XVM, 
 % and others);:
 
 ?- time(true).  % auto-load the predicate in the case of SWI-Prolog

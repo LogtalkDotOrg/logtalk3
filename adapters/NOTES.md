@@ -98,7 +98,7 @@ following table summarizes the availability of these features:
 |  XVM             |       no      |      yes      |      yes      |       no      |       no      |      yes      |      yes     |  
 |  YAP             |      yes      |      yes      |      yes      |       no      |       no      |      yes      |      yes     |  
 
-A value of "yes" means at least minimal support (i.e. some limitations may be
+A value of "yes" means at least minimal support (i.e., some limitations may be
 present and a recent version of the Prolog system may be required). A value
 of "no" may simply mean that the backend Prolog compiler either does not
 provide a *compatible* implementation of the required features or that the
@@ -141,7 +141,7 @@ Note that this adapter file redefines the B-Prolog `(::)/2` finite-domain
 built-in predicate (you may use the alternative `in/2` built-in predicate
 instead).
 
-Some B-Prolog built-in predicates (e.g. `set_to_list/2` or `(@=)/2`)
+Some B-Prolog built-in predicates (e.g., `set_to_list/2` or `(@=)/2`)
 are not core predicates and can be redefined by the user. The predicate
 `predicate_property/2` does not return the property `built_in` for these
 predicates. The solution is to encapsulate calls to these predicates
@@ -370,7 +370,7 @@ After, you can load Logtalk on-demand by typing:
 
 The pack alternative is handy for deployment but not ideal for development as
 it implicitly assumes a single user and the files are buried inside the packs
-directory (e.g. `.local/share/swi-prolog/pack/`).
+directory (e.g., `.local/share/swi-prolog/pack/`).
 
 The Logtalk flag `prolog_compiler` is not usable due to lack of SWI-Prolog
 built-in predicates for separate compilation and loading. To generate
@@ -432,7 +432,7 @@ XSB generates intermediate files (with a `.xwam` extension) when compiling
 Prolog source files (thus including the Logtalk core files). Thus, you
 must either install Logtalk on a location where you have write access
 or perform the first run of the integration scripts from a user with the
-required privileges (e.g. using `sudo` on POSIX systems or choosing `Run as
+required privileges (e.g., using `sudo` on POSIX systems or choosing `Run as
 administrator` on Windows systems).
 
 Due to the relative long release cycle of XSB, you may need to use its

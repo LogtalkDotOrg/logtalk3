@@ -513,7 +513,7 @@ the queries:
    ...
 
 This solution does not require compiling the ``edcg`` hook object in debug
-mode or access to its source code (e.g. to modify its expansion rules to
+mode or access to its source code (e.g., to modify its expansion rules to
 emit debug messages). We could also simply use the ``user`` pseudo-object
 as the monitor object:
 

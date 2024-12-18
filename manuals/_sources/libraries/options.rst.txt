@@ -40,7 +40,7 @@ developer tool or application. The importing object should define the
 ``default_option/1`` predicate and, if option type-checking is required,
 the ``valid_option/1`` predicate must be defined for each option. This
 library requires options to be represented by compound terms where the
-functor is the option name (e.g. ``trim(true)`` or (``box(0,2)``)). The
+functor is the option name (e.g., ``trim(true)`` or (``box(0,2)``)). The
 ``option/2-3`` can be used to get or test an option given a list of
 options. When an option appears multiple times in a list, the
 ``option/2-3`` predicates get or test the first (leftmost) occurrence.

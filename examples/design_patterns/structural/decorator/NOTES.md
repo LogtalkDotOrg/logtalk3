@@ -45,7 +45,7 @@ decorators where a decorator acts as the decorated object for another
 decorator.
 
 Another possible implementation of this pattern is to use a *complementing
-category* (i.e. hot patching) to decorate an object. This can be a good
+category* (i.e., hot patching) to decorate an object. This can be a good
 alternative solution when we need only to decorated a few specific objects
 (although a complementing category can complement multiple objects). The
 advantage of using a decorator object is that it can be used to decorate

@@ -1755,7 +1755,7 @@
 		).
 
 	parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, File, Position, Type, Entity) :-
-		% notes can be variables (e.g. a parameter variable or a variable shared with the
+		% notes can be variables (e.g., a parameter variable or a variable shared with the
 		% test clause body);  use a boolean flag to track the presence of a note/1 option
 		parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, _NoteFlag, File, Position, Type, Entity).
 

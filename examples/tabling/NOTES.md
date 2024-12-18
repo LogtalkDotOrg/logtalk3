@@ -31,4 +31,4 @@ compiled predicates. Thus, different object sending a message for a tabled
 predicate will result in the equivalent of multiple tables. The same will
 happen if the sender of the message is a parametric object and different
 parameterizations are used. A possible workaround is to always send the
-message from the same (non-parametric) object (e.g. `user`).
+message from the same (non-parametric) object (e.g., `user`).

@@ -25,7 +25,7 @@ Logtalk wrappers for those programs. Loading this example and an individual
 plain Prolog benchmark allows us to evaluate the overhead of the implicit
 execution context argument that the Logtalk compiler adds to object (and
 category) predicates. Note that this old set of benchmarks don't cover all
-features of modern day Prolog and Logtalk programming (e.g. meta-predicates).
+features of modern day Prolog and Logtalk programming (e.g., meta-predicates).
 
 All plain Prolog programs define a `top/0` predicate to run the benchmark.
 The Logtalk versions provide a `top/0` public predicate.

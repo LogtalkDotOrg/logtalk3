@@ -1218,7 +1218,7 @@
 
 	explain(circular_references(_)) -->
 		[	'Circular references prevent some code optimizations to be applied by the'-[], nl,
-			'compiler (e.g. static binding). Try to avoid them whenever possible, e.g.'-[], nl,
+			'compiler (e.g., static binding). Try to avoid them whenever possible, e.g.'-[], nl,
 			'by refactoring your code.'-[], nl, nl
 		].
 

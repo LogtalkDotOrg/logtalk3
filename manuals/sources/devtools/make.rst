@@ -17,7 +17,7 @@ predicates, open in a web browser the links:
 - `../refman/predicates/logtalk_make_1.html <../refman/predicates/logtalk_make_1.html>`__
 
 There is also a user-defined hook predicate that supports defining
-additional actions for the make targets (e.g. running tests
+additional actions for the make targets (e.g., running tests
 automatically on make check or regenerating API documentation on make
 documentation):
 

@@ -164,18 +164,18 @@ the target <code class="docutils literal notranslate"><span class="pre">caches</
 <code class="docutils literal notranslate"><span class="pre">normal</span></code>, and <code class="docutils literal notranslate"><span class="pre">optimal</span></code>. These targets change the compilation mode
 (by changing the default value of the <a class="reference internal" href="../../userman/programming.html#flag-debug"><span class="std std-ref">debug</span></a> and
 <a class="reference internal" href="../../userman/programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags) and reload all affected files
-(i.e. all files loaded without an explicit <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> or <code class="docutils literal notranslate"><span class="pre">optimize/1</span></code>
+(i.e., all files loaded without an explicit <code class="docutils literal notranslate"><span class="pre">debug/1</span></code> or <code class="docutils literal notranslate"><span class="pre">optimize/1</span></code>
 compiler option).</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">all</span></code> target, only source files loaded using the
 <a class="reference internal" href="logtalk_load_1.html#predicates-logtalk-load-1"><span class="std std-ref">logtalk_load/1</span></a> and <a class="reference internal" href="logtalk_load_2.html#predicates-logtalk-load-2"><span class="std std-ref">logtalk_load/2</span></a>
 predicates are reloaded. Non-modified files will also be reloaded when
 a previous attempt to load them failed or when there is a change to the
-compilation mode (i.e. when the files were loaded without explicit
+compilation mode (i.e., when the files were loaded without explicit
 <a class="reference internal" href="../../userman/programming.html#flag-debug"><span class="std std-ref">debug</span></a> or <a class="reference internal" href="../../userman/programming.html#flag-optimize"><span class="std std-ref">optimize</span></a> flags and
 the default values of these flags changed after loading; no check is made,
 however, for other implicit compiler flags that may have changed since
 loading). When an included file is modified, this target reloads its
-main file (i.e. the file that contains the <a class="reference internal" href="../directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a>
+main file (i.e., the file that contains the <a class="reference internal" href="../directives/include_1.html#directives-include-1"><span class="std std-ref">include/1</span></a>
 directive).</p>
 <p>When using the <code class="docutils literal notranslate"><span class="pre">check</span></code> or <code class="docutils literal notranslate"><span class="pre">circular</span></code> targets, be sure to compile
 your source files with the <a class="reference internal" href="../../userman/programming.html#flag-source-data"><span class="std std-ref">source_data</span></a> flag

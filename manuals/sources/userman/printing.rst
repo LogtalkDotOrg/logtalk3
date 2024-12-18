@@ -49,7 +49,7 @@ The solution is to decouple the calls to print a message from the actual
 printing of the output text. The same is true for calls to read user input.
 By decoupling the call to input some data from the actual read of the data,
 we can easily switch from, for example, a command-line interface to a GUI
-input dialog or even automate providing the data (e.g. when automating
+input dialog or even automate providing the data (e.g., when automating
 testing of the user interaction).
 
 Logtalk provides a solution based on the *structured message printing
@@ -129,7 +129,7 @@ Logtalk compiler/runtime. This argument was introduced to provide multiple
 namespaces for message terms and thus simplify programming-in-the-large by
 allowing easy filtering of all messages from a specific component and also
 avoiding conflicts when two components happen to define the same message term
-(e.g. ``banner``). Users should choose and use a unique name for a component,
+(e.g., ``banner``). Users should choose and use a unique name for a component,
 which usually is the name of the component itself. For example, all messages
 from the :doc:`../devtools/lgtunit` tool use ``lgtunit`` for the component
 argument. The compiler and runtime are interpreted as a single component

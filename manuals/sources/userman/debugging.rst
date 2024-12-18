@@ -177,7 +177,7 @@ Activating the debugger
 The :ref:`debuggerp::trace/0 <apis:debuggerp/0::trace/0>` and
 :ref:`debuggerp::debug/0 <apis:debuggerp/0::debug/0>` predicates implicitly
 select the ``debugger`` tool as the active debug handler. If you have additional
-debug handlers loaded (e.g. the ``ports_profiler`` tool), those would no longer
+debug handlers loaded (e.g., the ``ports_profiler`` tool), those would no longer
 be active (there can be only one active debug handler at any given time). The
 :ref:`debuggerp::nodebug/0 <apis:debuggerp/0::nodebug/0>` predicate implicitly
 deselects the ``debugger`` tool as the active debug handler.
@@ -933,7 +933,7 @@ Ports profiling
 
 The Logtalk distribution includes a :doc:`../devtools/ports_profiler` tool
 based on the same procedure box model described above. This tool is
-specially useful for debugging performance issues (e.g. due to lack of
+specially useful for debugging performance issues (e.g., due to lack of
 determinism or unexpected backtracking). See the tool documentation for
 details. 
 

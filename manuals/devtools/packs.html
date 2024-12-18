@@ -165,11 +165,11 @@
 and uninstalling third-party libraries and applications, generically
 known as <em>packs</em>. Collections of pack specifications are made available
 using <em>registries</em>. Registries can be local to a system, publicly
-shared, or private to a company (e.g. only available in a VPN). There is
-no concept of a central registry. Users can decide which registries they
-trust and want to use and add them using their published URLs. The tool
-supports both pack checksums and signatures and takes several steps to
-sanitize registry and pack specifications. As with other Logtalk
+shared, or private to a company (e.g., only available in a VPN). There
+is no concept of a central registry. Users can decide which registries
+they trust and want to use and add them using their published URLs. The
+tool supports both pack checksums and signatures and takes several steps
+to sanitize registry and pack specifications. As with other Logtalk
 developer tools, portability is a main goal. This tool can be used with
 any supported Prolog backend and run on both POSIX and Windows systems.
 Moreover, this tool can be used not only for handling Logtalk packs but
@@ -276,8 +276,8 @@ handling, respectively, registries and packs. Both objects accept a
 alias when defined (in a settings file or in a backend Prolog
 initialization file). When this library alias is not defined, the tool
 uses the value of the <code class="docutils literal notranslate"><span class="pre">LOGTALKPACKS</span></code> environment variable when
-defined. Otherwise it defaults to the <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory. The
-actual directory can be retrieved by the query:</p>
+defined. Otherwise, it defaults to the <code class="docutils literal notranslate"><span class="pre">~/logtalk_packs</span></code> directory.
+The actual directory can be retrieved by the query:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>logtalk_packs(<span class="nv">Directory</span>).
 ...
 </pre></div>
@@ -288,7 +288,7 @@ the <code class="docutils literal notranslate"><span class="pre">packs</span></c
 the contents of these directories. Multiple and independent
 registry/pack setups are possible using <em>virtual environments</em> as
 explained next.</p>
-<p>Your registries and packs setup can be saved and restored (e.g. in a
+<p>Your registries and packs setup can be saved and restored (e.g., in a
 different system) by using the <code class="docutils literal notranslate"><span class="pre">packs::save/1-2</span></code> and
 <code class="docutils literal notranslate"><span class="pre">packs::restore/1-2</span></code> predicates, as explained in the next section
 about virtual environments. If necessary, before restoring, the
@@ -317,11 +317,11 @@ virtual environment. The <code class="docutils literal notranslate"><span class=
 </pre></div>
 </div>
 <p>The definition of the <code class="docutils literal notranslate"><span class="pre">logtalk_packs</span></code> library alias <strong>must</strong> always be
-an atom and thus never use library notation (i.e. it must never depend
+an atom and thus never use library notation (i.e., it must never depend
 on other library aliases).</p>
 <p>When a virtual environment also requires a specific Logtalk version
-(e.g. the version used to test and certify it), this can be installed as
-a pack from the official
+(e.g., the version used to test and certify it), this can be installed
+as a pack from the official
 <a class="reference external" href="https://github.com/LogtalkDotOrg/talkshow">talkshow</a> registry and
 used by (re)defining the <code class="docutils literal notranslate"><span class="pre">LOGTALKHOME</span></code> and <code class="docutils literal notranslate"><span class="pre">LOGTALKUSER</span></code> environment
 variables to point to its pack directory (which can be queried by using
@@ -341,7 +341,7 @@ direnv<span class="o">:</span> export <span class="o">+</span><span class="nv">L
 installed. These utilities load and unload environment variables when
 changing the current directory. On Windows systems, when using the
 <code class="docutils literal notranslate"><span class="pre">lgtenv.ps1</span></code> script, you also need to redefine the PowerShell prompt
-in a profile file (e.g. <code class="docutils literal notranslate"><span class="pre">$HOME\Documents\PowerShell\Profile.ps1</span></code>) to
+in a profile file (e.g., <code class="docutils literal notranslate"><span class="pre">$HOME\Documents\PowerShell\Profile.ps1</span></code>) to
 mimic the functionality of <code class="docutils literal notranslate"><span class="pre">direnv</span></code> of automatically loading an
 existing <code class="docutils literal notranslate"><span class="pre">.env</span></code> file when changing to its directory. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>function prompt <span class="k">{</span>
@@ -350,8 +350,8 @@ existing <code class="docutils literal notranslate"><span class="pre">.env</span
 <span class="k">}</span>
 </pre></div>
 </div>
-<p>A virtual environment setup (i.e. the currently defined registries and
-installed packs) can be saved into a file (e.g. <code class="docutils literal notranslate"><span class="pre">requirements.lgt</span></code>)
+<p>A virtual environment setup (i.e., the currently defined registries and
+installed packs) can be saved into a file (e.g., <code class="docutils literal notranslate"><span class="pre">requirements.lgt</span></code>)
 using the <code class="docutils literal notranslate"><span class="pre">packs::save/1</span></code> predicate:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>save(<span class="s">&#39;requirements.lgt&#39;</span>).
 ...
@@ -373,8 +373,8 @@ easily fulfill application requirements by running the query once:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> packs<span class="o">::</span>restore(<span class="s">&#39;requirements.lgt&#39;</span>).
 </pre></div>
 </div>
-<p>After, the application <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file can then load the required
-packs using their loader files:</p>
+<p>Subsequently, the application <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file can then load the
+required packs using their loader files:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
     <span class="c">% load required packs</span>
     <span class="k">logtalk_load</span>(foo(loader)),
@@ -463,7 +463,7 @@ objects):</p>
 </pre></div>
 </div>
 <p>It would be, of course, possible to have all objects in a single source
-file. But having a file per-object and a loader file helps maintenance
+file. But having a file per-object and a loader file helps maintenance,
 and it’s also a tool requirement for applying safety procedures to the
 source file contents and thus successfully loading the registry and pack
 specs.</p>
@@ -621,7 +621,7 @@ formats and extensions are:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">.tbz2</span></code>, <code class="docutils literal notranslate"><span class="pre">.tar.bz2</span></code></p></li>
 </ul>
 <p>Also, for encrypted packs, all the extensions above with a <code class="docutils literal notranslate"><span class="pre">.gpg</span></code>
-suffix (e.g. <code class="docutils literal notranslate"><span class="pre">.zip.gpg</span></code>).</p>
+suffix (e.g., <code class="docutils literal notranslate"><span class="pre">.zip.gpg</span></code>).</p>
 <p>The pack sources should contain <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code>, <code class="docutils literal notranslate"><span class="pre">README.md</span></code> (or
 <code class="docutils literal notranslate"><span class="pre">NOTES.md</span></code>), and <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> (or <code class="docutils literal notranslate"><span class="pre">loader.logtalk</span></code>) files.
 Ideally, it should also contain a <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> (<code class="docutils literal notranslate"><span class="pre">tester.logtalk</span></code>)
@@ -740,7 +740,7 @@ a later version.</p></li>
 version up to the specified one. For example, <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;=&lt;</span> <span class="pre">2:1</span></code>
 means that the pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code> pack up to 2.1. This
 includes all previous versions and also all patches for version 2.1
-(e.g. 2.1.7, 2.1.8, …) but not version 2.2 or newer.</p></li>
+(e.g., 2.1.7, 2.1.8, …) but not version 2.2 or newer.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Registry::Pack</span> <span class="pre">&#64;&lt;</span> <span class="pre">Version</span></code> - the pack requires a dependency with
 version older than the specified one. For example,
 <code class="docutils literal notranslate"><span class="pre">common::bits</span> <span class="pre">&#64;&lt;</span> <span class="pre">3</span></code> means that the pack requires a <code class="docutils literal notranslate"><span class="pre">common::bits</span></code>
@@ -771,7 +771,7 @@ Alternatives should be listed in decreasing order of preference.</p>
 <code class="docutils literal notranslate"><span class="pre">logtalk</span></code> or the backend identifier atom can be used in place of
 <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code> (see below for the table of backend specifiers). For
 example, <code class="docutils literal notranslate"><span class="pre">logtalk</span> <span class="pre">&#64;&gt;=</span> <span class="pre">3.36.0</span></code>.</p>
-<p>When a pack also depends on an operating-system version (e.g. a pack
+<p>When a pack also depends on an operating-system version (e.g., a pack
 containing shared libraries with executable code), the
 <code class="docutils literal notranslate"><span class="pre">os(Name,Machine)</span></code> compound term can also be used in place of
 <code class="docutils literal notranslate"><span class="pre">Registry::Pack</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">os('Darwin',x86_64)</span> <span class="pre">&#64;&gt;=</span> <span class="pre">'23.0.0'</span></code>.
@@ -953,8 +953,8 @@ entered interactively or using the <code class="docutils literal notranslate"><s
 </pre></div>
 </div>
 <p>See the <code class="docutils literal notranslate"><span class="pre">gpg</span></code> documentation for details. When using the <code class="docutils literal notranslate"><span class="pre">gpg/1</span></code>
-option, you should be careful to not leak passphrases in e.g. the query
-history.</p>
+option, you should be careful to not leak passphrases in, e.g., the
+query history.</p>
 <p>To uninstall a pack that you no longer need, use the
 <code class="docutils literal notranslate"><span class="pre">packs::uninstall/1-2</span></code> predicates. By default, only packs with no
 dependent packs can be uninstalled. You can print or get a list of the
@@ -1000,8 +1000,8 @@ organization). For example:</p>
 </div>
 <p>This query creates a <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code> directory in the current directory.
 The XML documentation files can then be converted into a final format,
-e.g. HTML, using one of the scripts provided by the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool. For
-example:</p>
+e.g., HTML, using one of the scripts provided by the <code class="docutils literal notranslate"><span class="pre">lgtdoc</span></code> tool.
+For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> cd xml_docs
 <span class="err">$</span> lgt2html
 </pre></div>
@@ -1017,7 +1017,7 @@ details.</p>
 <section id="pinning-registries-and-packs">
 <h2>Pinning registries and packs<a class="headerlink" href="#pinning-registries-and-packs" title="Link to this heading"></a></h2>
 <p>Registries and packs can be <em>pinned</em> after installation to prevent
-accidental updating or deleting, e.g. when using the batch <code class="docutils literal notranslate"><span class="pre">update/0</span></code>
+accidental updating or deleting, e.g., when using the batch <code class="docutils literal notranslate"><span class="pre">update/0</span></code>
 predicate. This is useful when your application requires a specific
 version or for security considerations (see below). For example, if we
 want the <code class="docutils literal notranslate"><span class="pre">bar</span></code> pack to stay at its current installed version:</p>

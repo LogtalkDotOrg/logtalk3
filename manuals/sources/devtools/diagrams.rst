@@ -333,8 +333,8 @@ supported backend Prolog compiler when generating diagrams.
 
 For printing large diagrams, you will need to either use a tool to slice
 the diagram in page-sized pieces or, preferably, use software capable of
-tiled printing (e.g. Adobe Reader). You can also hand-edit the generated
-``.dot`` files and play with settings such as aspect ratio for
+tiled printing (e.g., Adobe Reader). You can also hand-edit the
+generated ``.dot`` files and play with settings such as aspect ratio for
 fine-tuning the diagrams layout.
 
 Customization
@@ -456,7 +456,7 @@ options:
   | syntax for the URL source file line part (an atom; possible values
     are ``{github,gitlab,bitbucket}``; default is ``github``); when
     using this option, the ``CodeURLPrefix`` should be a permanent link
-    (i.e. it should include the commit SHA1)
+    (i.e., it should include the commit SHA1)
 
 - | ``predicate_url_target_format(Generator)``
   | documentation final format generator (an atom; default is
@@ -722,7 +722,7 @@ must come last to ensure correct links.
 
 See the ``SCRIPT.txt`` file in the tool directory for additional
 examples. To avoid retyping such complex goals when updating diagrams,
-use the ``doclet`` tool to save and reapply them easily (e.g. by using
+use the ``doclet`` tool to save and reapply them easily (e.g., by using
 the ``make`` tool with the ``documentation`` target).
 
 Creating diagrams for Prolog module applications

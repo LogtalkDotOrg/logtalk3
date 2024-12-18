@@ -9,7 +9,7 @@ Identifier (ULID) generator.
 https://github.com/ulid/spec
 
 Note that most backends provide time stamps with lower granularity than
-required (i.e. seconds but not milliseconds). Also note that, per spec,
+required (i.e., seconds but not milliseconds). Also note that, per spec,
 within the same millisecond, monotonic sort order is not guaranteed.
 
 The generation of ULIDs uses the ``/dev/urandom`` random number

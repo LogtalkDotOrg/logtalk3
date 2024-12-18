@@ -40,7 +40,7 @@ be used as a message to an object.
 .. warning::
 
    The argument is always compiled (for improved performance). As a
-   consequence, when the argument is a control construct (e.g. a
+   consequence, when the argument is a control construct (e.g., a
    conjunction), any meta-variables will be wrapped with the equivalent
    to the ``call/1`` control construct. Note that these semantics differ
    from the ISO Prolog Core standard specification for the ``(\+)/1``

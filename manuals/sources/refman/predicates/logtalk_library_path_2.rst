@@ -51,7 +51,7 @@ those rules also attempt to expand library paths. When asserting facts
 for this predicate, use preferably ``asserta/1`` instead of ``assertz/1``
 to help ensure the facts will be used before any rules.
 
-Relative paths (e.g. ``'../'`` or ``'./'``) should only be used within
+Relative paths (e.g., ``'../'`` or ``'./'``) should only be used within
 the *alias(path)*) notation so that library paths can always be expanded
 to absolute paths independently of the (usually unpredictable) current
 directory at the time the ``logtalk_library_path/2`` predicate is
@@ -72,7 +72,7 @@ initialization file (assumed to be loaded prior to Logtalk loading). This
 allows e.g. Logtalk to be installed in a read-only directory by setting
 this alias to the operating-system directory for temporary files. It also
 allows several Logtalk instances to run concurrently without conflict by
-using a unique scratch directory per instance (e.g. using a process ID or
+using a unique scratch directory per instance (e.g., using a process ID or
 a UUID generator).
 
 This predicate may be used to override the default location used by the

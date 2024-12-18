@@ -195,7 +195,7 @@ Checks if a term is valid. Throws an exception if the term is not valid.
 ``variant/2``
 ^^^^^^^^^^^^^
 
-Each term is a variant of the other (i.e. they are structurally equivalent).
+Each term is a variant of the other (i.e., they are structurally equivalent).
 
 | **Compilation flags:**
 |    ``static``

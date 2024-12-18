@@ -31,7 +31,7 @@ A plain Prolog version of the Unicode 6.2 standard is also included in the
 A `parallel_logtalk_processes_setup.pl` Prolog file is also provided with
 sample code for selected backend Prolog compilers for initializing Logtalk
 processes such that each process uses a unique scratch directory, therefore
-allowing parallel process execution (e.g. for usage at continuous integration
+allowing parallel process execution (e.g., for usage at continuous integration
 servers). Starting with Logtalk 3.48.0, this setup is only required in general
 when running with the `clean` flag turned off. See the comments in the file
 itself for usage instructions.
@@ -62,7 +62,7 @@ Simply type the goal:
 
 As a general rule, always use the corresponding loader file to load a
 library. Most library entities are part of small hierarchies or depend on
-other libraries and thus cannot be loaded and compiled separately (e.g. the
+other libraries and thus cannot be loaded and compiled separately (e.g., the
 `list` object implements the `listp` protocol and is part of a basic types
 hierarchy). Using the loader files takes care of all dependencies and also
 ensures compilation in optimized mode.

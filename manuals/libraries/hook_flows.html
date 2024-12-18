@@ -175,14 +175,14 @@
              
   <section id="hook-flows">
 <span id="library-hook-flows"></span><h1><code class="docutils literal notranslate"><span class="pre">hook_flows</span></code><a class="headerlink" href="#hook-flows" title="Link to this heading"></a></h1>
-<p>Hook objects (i.e. objects that define term- and goal-expansion rules)
+<p>Hook objects (i.e., objects that define term- and goal-expansion rules)
 can be combined to define expansion <em>workflows</em>. While in some cases the
 expansions are independent and thus can be applied in any order, in
 other cases a specific order is required. The <code class="docutils literal notranslate"><span class="pre">hook_pipeline</span></code> and
 <code class="docutils literal notranslate"><span class="pre">hook_set</span></code> parametric objects in this library implement the two most
 common scenarios of combining multiple hook objects for the expansion of
 source files. These parametric hook objects can be combined to define
-workflows of any complexity (e.g. a pipeline where one of the steps is
+workflows of any complexity (e.g., a pipeline where one of the steps is
 set with an element that is a pipeline). These two basic hook flows can
 also used as examples of how to construct your own custom expansion
 workflows.</p>
@@ -228,7 +228,7 @@ rules are tried in sequence only until one of them succeeds.</p>
 list of hook objects, interpreted as a set of hook objects. The hook
 objects are tried in sequence until one of them succeeds in expanding
 the current term (goal) into a different term (goal). This parametric
-object is used when applying multiple independent expansions (i.e.
+object is used when applying multiple independent expansions (i.e.,
 expansions that don’t apply to the same terms or goals).</p>
 <p>Both the <code class="docutils literal notranslate"><span class="pre">hook_pipeline(Pipeline)</span></code> and <code class="docutils literal notranslate"><span class="pre">hook_set(Set)</span></code> objects
 assume that the individual hook objects publicly implement the

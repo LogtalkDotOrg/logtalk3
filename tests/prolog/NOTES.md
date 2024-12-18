@@ -28,7 +28,7 @@ and the follow up corrigenda). Several tests originate from SICS, ECLiPSe, and
 SWI-Prolog and are used here with permission.
 
 This conformance suite also includes unit tests for Prolog features that
-are slowly becoming de facto standards (e.g. the `(*->)/2` soft-cut control
+are slowly becoming de facto standards (e.g., the `(*->)/2` soft-cut control
 construct or the `atomic_list_concat/2-3` and `setup_call_cleanup/3` built-in
 predicates). These tests are usually skipped, however, when running on a system
 that doesn't provide such features.
@@ -86,7 +86,7 @@ local to the entities as required by Logtalk semantics).
 
 Tests from the ISO Prolog standards that would require a portable way of
 specifying a source file text encoding plus a common extended text encoding
-(e.g. UTF-8) are currently skipped.
+(e.g., UTF-8) are currently skipped.
 
 Tests that are specified as undefined in the standards due to the potential
 of creating cyclic terms are skipped when using a backend Prolog compiler
@@ -132,7 +132,7 @@ when the exception term contains a module-qualified culprit. For example,
 the system generating instead a `type_error(callable,user:1)` exception.
 There are also cases where Prolog systems provide more fine-grained error
 checking than required by the current standards. This can translate to
-accepting more than one exception type (e.g. both an instantiation and
+accepting more than one exception type (e.g., both an instantiation and
 a domain error).
 
 There is a potential catch-22 when using a language to test itself as the

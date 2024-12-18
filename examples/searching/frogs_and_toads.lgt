@@ -36,7 +36,7 @@
 
 	goal_state(end, s([frog,frog,frog], empty, [toad,toad,toad])).
 
-Only one amphibian (i.e. frog or toad) can move at a time.
+Only one amphibian (i.e., frog or toad) can move at a time.
 Frogs can only move to the left and toads can only move to the right.
 Each move is ether a crawl or a hop.
 A crawl is a move to an adjacent empty space.

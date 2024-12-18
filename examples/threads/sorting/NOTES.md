@@ -45,7 +45,7 @@ other purpose, you may find the following paper a worthwhile reading:
 
 You probably want to play with the list sizes in order to find out when the 
 lists to be sorted are big enough to make the use of multi-threading worth
-performance-wise (i.e. to compensate the overhead of thread creation and 
+performance-wise (i.e., to compensate the overhead of thread creation and 
 management).
 
 The implementation of the Quicksort algorithm makes the possible performance 

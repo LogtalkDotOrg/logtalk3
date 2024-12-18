@@ -385,7 +385,7 @@ posting and retrieving notifications.
 
 Each notification posted by a call to the ``threaded_notify/1``
 predicate is consumed by a single ``threaded_wait/1`` predicate call
-(i.e. these predicates implement a peer-to-peer mechanism). Care should
+(i.e., these predicates implement a peer-to-peer mechanism). Care should
 be taken to avoid deadlocks when two (or more) threads both wait and
 post notifications to each other.
 

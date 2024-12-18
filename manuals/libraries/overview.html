@@ -184,10 +184,11 @@ the <code class="docutils literal notranslate"><span class="pre">unicode_data</s
 <p>A <code class="docutils literal notranslate"><span class="pre">parallel_logtalk_processes_setup.pl</span></code> Prolog file is also provided
 with sample code for selected backend Prolog compilers for initializing
 Logtalk processes such that each process uses a unique scratch
-directory, therefore allowing parallel process execution (e.g. for usage
-at continuous integration servers). Starting with Logtalk 3.48.0, this
-setup is only required in general when running with the <code class="docutils literal notranslate"><span class="pre">clean</span></code> flag
-turned off. See the comments in the file itself for usage instructions.</p>
+directory, therefore allowing parallel process execution (e.g., for
+usage at continuous integration servers). Starting with Logtalk 3.48.0,
+this setup is only required in general when running with the <code class="docutils literal notranslate"><span class="pre">clean</span></code>
+flag turned off. See the comments in the file itself for usage
+instructions.</p>
 <section id="library-documentation">
 <h2>Library documentation<a class="headerlink" href="#library-documentation" title="Link to this heading"></a></h2>
 <p>Specific notes about each library can be found in the corresponding
@@ -213,7 +214,7 @@ libraries. Simply type the goal:</p>
 <p>As a general rule, always use the corresponding loader file to load a
 library. Most library entities are part of small hierarchies or depend
 on other libraries and thus cannot be loaded and compiled separately
-(e.g. the <code class="docutils literal notranslate"><span class="pre">list</span></code> object implements the <code class="docutils literal notranslate"><span class="pre">listp</span></code> protocol and is part
+(e.g., the <code class="docutils literal notranslate"><span class="pre">list</span></code> object implements the <code class="docutils literal notranslate"><span class="pre">listp</span></code> protocol and is part
 of a basic types hierarchy). Using the loader files takes care of all
 dependencies and also ensures compilation in optimized mode.</p>
 </section>

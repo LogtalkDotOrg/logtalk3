@@ -329,7 +329,7 @@ overridden by passing a list of options to the tool predicates. The
 ``lgtdoc/xml`` sub-directory in the Logtalk installation directory contains
 the XML specification files described above, along with several sample XSL
 stylesheet files and sample scripts for converting XML documenting files
-to several formats (e.g. reStructuredText, Markdown, HTML, and PDF). For
+to several formats (e.g., reStructuredText, Markdown, HTML, and PDF). For
 example, assume that you want to generate the API documentation for the
 ``types`` library:
 

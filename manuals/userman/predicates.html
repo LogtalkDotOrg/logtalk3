@@ -210,7 +210,7 @@ the corresponding built-in protocol is missing.</p>
 <p>Logtalk provides a clear distinction between <em>declaring a predicate</em> and
 <em>defining a predicate</em> and thus clear <a class="reference internal" href="../glossary.html#term-closed-world-assumption"><span class="xref std std-term">closed-world assumption</span></a> semantics.
 Messages or calls for declared but undefined predicates fail. Messages or
-calls for unknown (i.e. non-declared) predicates throw an error. Note that
+calls for unknown (i.e., non-declared) predicates throw an error. Note that
 this is a fundamental requirement for supporting <a class="reference internal" href="protocols.html#protocols-protocols"><span class="std std-ref">protocols</span></a>:
 we must be able to declare a predicate without necessarily defining it.</p>
 <p>All object (or category) predicates that we want to access from other
@@ -230,7 +230,7 @@ a scope directive. Local predicates, like private predicates, can only be
 called from the container object (or category), but they are <em>invisible</em>
 to the reflection built-in methods (<a class="reference internal" href="../refman/methods/current_predicate_1.html#methods-current-predicate-1"><span class="std std-ref">current_predicate/1</span></a>
 and <a class="reference internal" href="../refman/methods/predicate_property_2.html#methods-predicate-property-2"><span class="std std-ref">predicate_property/2</span></a>) and to the message error handling
-mechanisms (i.e. sending a message corresponding to a local predicate
+mechanisms (i.e., sending a message corresponding to a local predicate
 results in a <code class="docutils literal notranslate"><span class="pre">predicate_declaration</span></code> existence error instead of a scope
 error).</p>
 <p>The scope declarations are made using the directives
@@ -307,7 +307,7 @@ the call will unify the computed term with the given argument.</p>
 <dt><code class="docutils literal notranslate"><span class="pre">++</span></code></dt><dd><p>Argument must be ground.</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">--</span></code></dt><dd><p>Argument must be unbound. Used mainly when returning an opaque term
-(e.g. a stream handle).</p>
+(e.g., a stream handle).</p>
 </dd>
 </dl>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> instantiation modes have the same meaning
@@ -330,27 +330,27 @@ the <code class="docutils literal notranslate"><span class="pre">member(X,</span
 proofs for that solution. Note that different modes for the same predicate
 often have different determinism. The possible values are:</p>
 <dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">zero</span></code></dt><dd><p>Predicate always fails (e.g. the <code class="docutils literal notranslate"><span class="pre">false/0</span></code> standard predicate).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero</span></code></dt><dd><p>Predicate always fails (e.g., the <code class="docutils literal notranslate"><span class="pre">false/0</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one</span></code></dt><dd><p>Predicate always succeeds once (e.g. the <code class="docutils literal notranslate"><span class="pre">flush_output/0</span></code> standard predicate).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">one</span></code></dt><dd><p>Predicate always succeeds once (e.g., the <code class="docutils literal notranslate"><span class="pre">flush_output/0</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></dt><dd><p>Predicate either fails or succeeds (e.g. the <code class="docutils literal notranslate"><span class="pre">atom/1</span></code> standard predicate).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></dt><dd><p>Predicate either fails or succeeds (e.g., the <code class="docutils literal notranslate"><span class="pre">atom/1</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></dt><dd><p>Predicate has zero or more proofs (e.g. the <code class="docutils literal notranslate"><span class="pre">current_predicate/1</span></code> standard predicate).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></dt><dd><p>Predicate has zero or more proofs (e.g., the <code class="docutils literal notranslate"><span class="pre">current_predicate/1</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></dt><dd><p>Predicate has one or more proofs (e.g. the <code class="docutils literal notranslate"><span class="pre">repeat/0</span></code> standard predicate).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">one_or_more</span></code></dt><dd><p>Predicate has one or more proofs (e.g., the <code class="docutils literal notranslate"><span class="pre">repeat/0</span></code> standard predicate).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">zero_or_error</span></code></dt><dd><p>Predicate either fails or throws an error.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></dt><dd><p>Predicate either succeeds once or throws an error (e.g. the <code class="docutils literal notranslate"><span class="pre">open/3</span></code> standard predicate).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></dt><dd><p>Predicate either succeeds once or throws an error (e.g., the <code class="docutils literal notranslate"><span class="pre">open/3</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></dt><dd><p>Predicate succeeds once or fails or throws an error (e.g. the <code class="docutils literal notranslate"><span class="pre">get_char/1</span></code> standard predicate).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></dt><dd><p>Predicate succeeds once or fails or throws an error (e.g., the <code class="docutils literal notranslate"><span class="pre">get_char/1</span></code> standard predicate).</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more_or_error</span></code></dt><dd><p>Predicate may fail or succeed multiple times or throw an error (e.g. the <code class="docutils literal notranslate"><span class="pre">retract/1</span></code> standard predicate).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">zero_or_more_or_error</span></code></dt><dd><p>Predicate may fail or succeed multiple times or throw an error (e.g., the <code class="docutils literal notranslate"><span class="pre">retract/1</span></code> standard predicate).</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">one_or_more_or_error</span></code></dt><dd><p>Predicate may succeed one or more times or throw an error.</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">error</span></code></dt><dd><p>Predicate will throw an error (e.g. the <code class="docutils literal notranslate"><span class="pre">type_error/2</span></code> built-in method).</p>
+<dt><code class="docutils literal notranslate"><span class="pre">error</span></code></dt><dd><p>Predicate will throw an error (e.g., the <code class="docutils literal notranslate"><span class="pre">type_error/2</span></code> built-in method).</p>
 </dd>
 </dl>
 <p>The last six values support documenting that some call modes may throw an
@@ -405,7 +405,7 @@ of mode directives is a good starting point for documenting your predicates.</p>
 as <a class="reference internal" href="../glossary.html#term-closure"><span class="xref std std-term">closures</span></a> that will be used for constructing goals, or
 passing meta-arguments to calls to other meta-predicates. To ensure that these
 goals will be executed in the correct context
-(i.e. in the <a class="reference internal" href="../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the
+(i.e., in the <a class="reference internal" href="../glossary.html#term-predicate-calling-context"><span class="xref std std-term">calling context</span></a>, not in the
 meta-predicate <a class="reference internal" href="../glossary.html#term-predicate-definition-context"><span class="xref std std-term">definition context</span></a>), we
 need to use the <a class="reference internal" href="../refman/directives/meta_predicate_1.html#directives-meta-predicate-1"><span class="std std-ref">meta_predicate/1</span></a> directive (in the case of
 <em>meta non-terminals</em>, there’s also a <a class="reference internal" href="../refman/directives/meta_non_terminal_1.html#directives-meta-non-terminal-1"><span class="std std-ref">meta_non_terminal/1</span></a>
@@ -931,7 +931,7 @@ no restrictions in declaring and calling dynamic predicates from inside
 a category. Because a category can be imported by multiple objects, dynamic
 predicates must be called either in the context of <a class="reference internal" href="../glossary.html#term-self"><span class="xref std std-term">self</span></a>, using the
 <a class="reference internal" href="../glossary.html#term-message-to-self"><span class="xref std std-term">message to self</span></a> control structure, <a class="reference internal" href="../refman/control/send_to_self_1.html#control-send-to-self-1"><span class="std std-ref">(::)/1</span></a>, or
-in the context of <a class="reference internal" href="../glossary.html#term-this"><span class="xref std std-term">this</span></a> (i.e. in the context of the object importing
+in the context of <a class="reference internal" href="../glossary.html#term-this"><span class="xref std std-term">this</span></a> (i.e., in the context of the object importing
 the category). For example, if we want to define a category implementing
 attributes using the dynamic database of <em>self</em> we could write:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">category</span>(attributes).
@@ -1719,11 +1719,11 @@ dynamic predicate can only be abolished if it was dynamically
 declared)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">logtalk</span></code>, <code class="docutils literal notranslate"><span class="pre">prolog</span></code>, <code class="docutils literal notranslate"><span class="pre">foreign</span></code></dt><dd><p>A predicate can be defined in Logtalk source code, Prolog code, or in
-foreign code (e.g. in C)</p>
+foreign code (e.g., in C)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">built_in</span></code></dt><dd><p>The predicate is a built-in predicate</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">multifile</span></code></dt><dd><p>The predicate is declared multifile (i.e. it can have clauses defined
+<dt><code class="docutils literal notranslate"><span class="pre">multifile</span></code></dt><dd><p>The predicate is declared multifile (i.e., it can have clauses defined
 in multiple files or entities)</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">meta_predicate(Template)</span></code></dt><dd><p>The predicate is declared as a meta-predicate with the specified
@@ -1750,7 +1750,7 @@ rule non-terminal</p>
 </dd>
 <dt><code class="docutils literal notranslate"><span class="pre">alias_declared_in(Entity)</span></code></dt><dd><p>The predicate alias is declared in the specified entity</p>
 </dd>
-<dt><code class="docutils literal notranslate"><span class="pre">synchronized</span></code></dt><dd><p>The predicate is declared as synchronized (i.e. it’s a deterministic
+<dt><code class="docutils literal notranslate"><span class="pre">synchronized</span></code></dt><dd><p>The predicate is declared as synchronized (i.e., it’s a deterministic
 predicate synchronized using a mutex when using a backend Prolog
 compiler supporting a compatible multi-threading implementation)</p>
 </dd>
@@ -1873,7 +1873,7 @@ predicate):</p>
 </pre></div>
 </div>
 <p>This directive is based on the fact that built-in predicates are visible in
-plain Prolog (i.e. in <code class="docutils literal notranslate"><span class="pre">user</span></code>). Besides helping to document the dependency
+plain Prolog (i.e., in <code class="docutils literal notranslate"><span class="pre">user</span></code>). Besides helping to document the dependency
 on a non-standard built-in predicate, this directive will also silence the
 compiler portability warning.</p>
 </section>
@@ -1923,7 +1923,7 @@ calls to the predicates (thus avoiding call indirection overheads).</p>
 </section>
 <section id="calling-prolog-user-defined-plain-predicates">
 <span id="predicates-prolog-user"></span><h3>Calling Prolog user-defined plain predicates<a class="headerlink" href="#calling-prolog-user-defined-plain-predicates" title="Link to this heading"></a></h3>
-<p>User-defined Prolog plain predicates (i.e. predicates that are not defined
+<p>User-defined Prolog plain predicates (i.e., predicates that are not defined
 in a Prolog module) can be called from within objects or categories by
 sending the corresponding message to <code class="docutils literal notranslate"><span class="pre">user</span></code>. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>foo <span class="o">:-</span>
@@ -2048,7 +2048,7 @@ the <code class="docutils literal notranslate"><span class="pre">ic</span></code
 <section id="calling-prolog-module-meta-predicates">
 <span id="predicates-prolog-module-meta-predicates"></span><h3>Calling Prolog module meta-predicates<a class="headerlink" href="#calling-prolog-module-meta-predicates" title="Link to this heading"></a></h3>
 <p>The Logtalk library provides implementations of common meta-predicates,
-which can be used in place of module meta-predicates (e.g. list mapping
+which can be used in place of module meta-predicates (e.g., list mapping
 meta-predicates). If that is not the case, the Logtalk compiler may need
 help to understand the module meta-predicate templates. Despite some recent
 progress in standardization of the syntax of <code class="docutils literal notranslate"><span class="pre">meta_predicate/1</span></code> directives
@@ -2070,7 +2070,7 @@ a module meta-predicate with the following meta-predicate directive:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">:</span></code> meta-argument specifier is ambiguous. It tell us that the second
 argument of the meta-predicate is module sensitive, but it does not tell us
 <em>how</em>. Some legacy module libraries and some Prolog systems use <code class="docutils literal notranslate"><span class="pre">:</span></code> to
-mean <code class="docutils literal notranslate"><span class="pre">0</span></code> (i.e. a meta-argument that will be meta-called). Some others
+mean <code class="docutils literal notranslate"><span class="pre">0</span></code> (i.e., a meta-argument that will be meta-called). Some others
 use <code class="docutils literal notranslate"><span class="pre">:</span></code> for meta-arguments that are not meta-called but that still need
 to be augmented with module information. Whichever the case, the Logtalk
 compiler doesn’t have enough information to unambiguously parse the

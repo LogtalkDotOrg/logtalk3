@@ -181,8 +181,8 @@
 generator. Currently only version 1 and version 4 UUIDs are supported.
 For reference material, see e.g.</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Universally_unique_identifier">https://en.wikipedia.org/wiki/Universally_unique_identifier</a></p>
-<p>Some backends provide time stamps with low granularity (e.g. seconds but
-not milliseconds or nanoseconds). To compensate, the generation of
+<p>Some backends provide time stamps with low granularity (e.g., seconds
+but not milliseconds or nanoseconds). To compensate, the generation of
 version 1 UUIDs uses 14 random bits for the clock sequence.</p>
 <p>The generation of version 4 UUIDs uses the <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> random
 number generator when available. This includes macOS, Linux, *BSD, and

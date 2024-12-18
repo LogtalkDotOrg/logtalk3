@@ -55,9 +55,9 @@ typing:
 
    | ?- set_logtalk_flag(debug, on).
 
-But note that loader files may override this flag setting (e.g. by using
-``debug(off)`` or ``optimize(on)`` options for loaded files). If that's
-the case, you will need to either edit the loader files or write
+But note that loader files may override this flag setting (e.g., by
+using ``debug(off)`` or ``optimize(on)`` options for loaded files). If
+that's the case, you will need to either edit the loader files or write
 customized loader files enabling debugging. For detailed information on
 using the debugger, consult the debugging section of the User Manual:
 

@@ -150,7 +150,7 @@ A good example is <em>class</em>. The support for meta-classes in e.g. Smalltalk
 translates to a concept of class that is different in key aspects from the
 concept of class in e.g. Java or C++. Other terms that can have different
 meanings are <em>delegation</em> and <em>forwarding</em>. There are also cases where the
-same concept is found under different names in some languages (e.g. <em>self</em>
+same concept is found under different names in some languages (e.g., <em>self</em>
 and <em>this</em>) but that can also mean different concepts in Logtalk and other
 languages. Always be aware of these differences and be cautious with assumptions
 carried from other programming languages.</p>
@@ -189,7 +189,7 @@ requires the predicate to exist in (or be reexported by) the module.</p>
 </dd>
 <dt><strong>closed-world assumption semantics</strong></dt><dd><p>Logtalk provides clear closed-world assumption semantics: messages or calls
 for declared but undefined predicates fail. Messages or calls for unknown
-(i.e. not declared) predicates throw an error. Crucially, this semantics
+(i.e., not declared) predicates throw an error. Crucially, this semantics
 applies to both <em>static</em> and <em>dynamic</em> predicates. But in Prolog workarounds
 are required to have a static predicate being known by the runtime without
 it being also defined (so that calling it would fail instead of throwing a
@@ -211,7 +211,7 @@ must be explicitly loaded (either automatically from a <a class="reference inter
 at startup or from the top-level). It also means that the debugger can be
 easily extended or replaced by an alternative application.</p>
 </dd>
-<dt><strong>directive operators</strong></dt><dd><p>Some Prolog systems declare directive names as operators (e.g. <code class="docutils literal notranslate"><span class="pre">dynamic</span></code>,
+<dt><strong>directive operators</strong></dt><dd><p>Some Prolog systems declare directive names as operators (e.g., <code class="docutils literal notranslate"><span class="pre">dynamic</span></code>,
 <code class="docutils literal notranslate"><span class="pre">multifile</span></code>, …). This is not required by the ISO Prolog Core standard.
 It’s a practice that should be avoided as it makes code non-portable.</p>
 </dd>
@@ -322,7 +322,7 @@ state as in Smalltalk can be emulated by using dynamic predicates.</p>
 interpreted in Logtalk as a logic query, asking for the construction of a
 proof that something is true.</p>
 </dd>
-<dt><strong>message selector</strong></dt><dd><p>Logtalk uses the predicate template (i.e. the predicate callable term with
+<dt><strong>message selector</strong></dt><dd><p>Logtalk uses the predicate template (i.e., the predicate callable term with
 all its arguments unbound) as a message selector. The actual type of the
 message arguments is not considered. Like Smalltalk, Logtalk uses <em>single
 dispatch</em> on the message receiver.</p>
@@ -331,7 +331,7 @@ dispatch</em> on the message receiver.</p>
 shared by several classes. When metaclasses are used, infinite regression
 is simply avoided by making a class an instance of itself.</p>
 </dd>
-<dt><strong>method</strong></dt><dd><p>Same as in Smalltalk, a <em>method</em> is the actual code (i.e. predicate
+<dt><strong>method</strong></dt><dd><p>Same as in Smalltalk, a <em>method</em> is the actual code (i.e., predicate
 definition) that is run to answer a message. Logtalk uses the words
 <em>method</em> and <em>predicate</em> interchangeably.</p>
 </dd>
@@ -542,7 +542,7 @@ their Logtalk equivalents.</p>
 <dl class="simple">
 <dt><strong>abstract class</strong></dt><dd><p>Logtalk uses a different definition of abstract class: a class that
 does not inherit a method for creating new instances. Notably, the
-presence of <em>abstract methods</em> (i.e. predicates that are declared
+presence of <em>abstract methods</em> (i.e., predicates that are declared
 but not defined) does not make a class abstract.</p>
 </dd>
 <dt><strong>abstract method</strong></dt><dd><p>Logtalk uses the term <em>predicate</em> interchangeably with <em>method</em>. Predicates
@@ -559,7 +559,7 @@ for predicates not defined in regular objects, and thus callable from
 anywhere without requiring a scope directive.</p>
 </dd>
 <dt><strong>function object</strong></dt><dd><p>Predicate calls (goals) can be passed or returned from other predicates
-and unified with other terms (e.g. variables).</p>
+and unified with other terms (e.g., variables).</p>
 </dd>
 <dt><strong>import path</strong></dt><dd><p>Logtalk uses the term <em>library</em> to refer to a directory of source files
 and supports defining aliases (symbolic names) to library paths to abstract

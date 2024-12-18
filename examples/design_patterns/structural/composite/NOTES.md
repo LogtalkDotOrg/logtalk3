@@ -29,7 +29,7 @@ Description:
 This pattern can be used with both classes and prototypes.
 
 In this sample implementation of the pattern, we choose to use classes
-and object composition (i.e. composite objects will store the identifiers
+and object composition (i.e., composite objects will store the identifiers
 of the objects that are part of the composite). In the sample queries,
 we create the instances dynamically at runtime but we could also have
 defined (some or all) of the instances statically in the source file.

@@ -35,4 +35,4 @@ detailed description of the flags.
 
 The `tutor` tool provides explanations and fix suggestions for compiler
 warnings and errors messages. New users are advised to load it at startup
-(e.g. from a settings file) for a more friendly experience.
+(e.g., from a settings file) for a more friendly experience.

@@ -113,7 +113,7 @@
 	% the perimeter depends on the number of sides of the specific type
 	% of regular polygon, defined in the descendants, and the length of
 	% the side, which can be redefined from the default value here in
-	% descendants; thus, we must sent the messages to _self_ (i.e. the
+	% descendants; thus, we must sent the messages to _self_ (i.e., the
 	% object that receives the perimeter/1 message) using the ::/1
 	% control construct
 	perimeter(Perimeter) :-
@@ -140,7 +140,7 @@
 
 	% the area depends on the length of the side, which can be redefined
 	% from the inherited default value in descendants; thus, we must sent
-	% the side/1 message to _self_ (i.e. the object that receives the
+	% the side/1 message to _self_ (i.e., the object that receives the
 	% perimeter/1 message) using the ::/1 control construct
 	area(Area) :-
 		::side(Side),

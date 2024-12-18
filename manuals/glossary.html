@@ -158,7 +158,7 @@ sending a <a class="reference internal" href="#term-message"><span class="xref s
 predicate, or calling a declared predicate with no clauses, fails.
 But messages or calls to undeclared predicates generate an error.</p>
 </dd>
-<dt id="term-closure">closure<a class="headerlink" href="#term-closure" title="Link to this term"></a></dt><dd><p>A callable term (i.e. an atom or a compound term) passed to a
+<dt id="term-closure">closure<a class="headerlink" href="#term-closure" title="Link to this term"></a></dt><dd><p>A callable term (i.e., an atom or a compound term) passed to a
 <a class="reference internal" href="#term-meta-predicate"><span class="xref std std-term">meta-predicate</span></a> call where it is extended with additional
 arguments to form a goal called by the meta-predicate.</p>
 </dd>
@@ -208,7 +208,7 @@ Encapsulation is enforced in Logtalk by using
 </dd>
 <dt id="term-entity">entity<a class="headerlink" href="#term-entity" title="Link to this term"></a></dt><dd><p>Generic name for Logtalk compilation units: <a class="reference internal" href="#term-object"><span class="xref std std-term">objects</span></a>,
 <a class="reference internal" href="#term-category"><span class="xref std std-term">categories</span></a>, and <a class="reference internal" href="#term-protocol"><span class="xref std std-term">protocols</span></a>.
-Entities share a single namespace (i.e. entity
+Entities share a single namespace (i.e., entity
 <a class="reference internal" href="#term-identity"><span class="xref std std-term">identifiers</span></a> must be unique) and can be static (the
 default) or dynamic. Static entities are defined in source files.
 Dynamic entities can also be defined in source files but are usually
@@ -270,7 +270,7 @@ access to the entities source code or restarting the application.
 Achieved using <a class="reference internal" href="#term-complementing-category"><span class="xref std std-term">complementing categories</span></a>.</p>
 </dd>
 <dt id="term-identity">identity<a class="headerlink" href="#term-identity" title="Link to this term"></a></dt><dd><p>Property of an <a class="reference internal" href="#term-entity"><span class="xref std std-term">entity</span></a> that distinguishes it from every other entity.
-The identifier of an entity is its functor (i.e. its name and arity),
+The identifier of an entity is its functor (i.e., its name and arity),
 which must be unique. Object and <a class="reference internal" href="#term-category"><span class="xref std std-term">category</span></a> identifiers can be
 atoms or compound terms. Protocol identities must be atoms. All Logtalk
 entities (objects, protocols, and categories) share the same namespace.</p>
@@ -410,7 +410,7 @@ Parameters are <em>logical variables</em> implicitly shared by all the entity
 predicate clauses.</p>
 </dd>
 <dt id="term-parameter-variable">parameter variable<a class="headerlink" href="#term-parameter-variable" title="Link to this term"></a></dt><dd><p>A variable used as parameter in a parametric object or a parametric
-category using the syntax <code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code> (i.e. a variable whose
+category using the syntax <code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code> (i.e., a variable whose
 name stars and ends with an underscore). Parameter variables are
 <em>logical variables</em> shared by all entity terms. Occurrences of parameter
 variables in <a class="reference internal" href="#term-entity-directive"><span class="xref std std-term">entity directives</span></a> and clauses
@@ -423,7 +423,7 @@ is a compound term possibly containing free variables that can be used
 to parameterize the entity predicates. Parameters are <em>logical variables</em>
 implicitly shared by all the entity clauses. Note that the identifier
 of a parametric entity is its functor, irrespective of the possible
-values of its arguments (e.g. <code class="docutils literal notranslate"><span class="pre">foo(bar)</span></code> and <code class="docutils literal notranslate"><span class="pre">foo(baz)</span></code> are
+values of its arguments (e.g., <code class="docutils literal notranslate"><span class="pre">foo(bar)</span></code> and <code class="docutils literal notranslate"><span class="pre">foo(baz)</span></code> are
 different parameterizations of the same parametric entity, <code class="docutils literal notranslate"><span class="pre">foo/1</span></code>).</p>
 </dd>
 <dt id="term-parametric-object">parametric object<a class="headerlink" href="#term-parametric-object" title="Link to this term"></a></dt><dd><p>See <a class="reference internal" href="#term-parametric-entity"><span class="xref std std-term">parametric entity</span></a>.</p>
@@ -472,7 +472,7 @@ include ar least a <a class="reference internal" href="#term-predicate-scope-dir
 Predicate definitions can be overridden or specialized in descendant
 entities.</p>
 </dd>
-<dt id="term-predicate-definition-context">predicate definition context<a class="headerlink" href="#term-predicate-definition-context" title="Link to this term"></a></dt><dd><p>The object or category that contains the definition (i.e. clauses)
+<dt id="term-predicate-definition-context">predicate definition context<a class="headerlink" href="#term-predicate-definition-context" title="Link to this term"></a></dt><dd><p>The object or category that contains the definition (i.e., clauses)
 for a predicate.</p>
 </dd>
 <dt id="term-predicate-directive">predicate directive<a class="headerlink" href="#term-predicate-directive" title="Link to this term"></a></dt><dd><p>A directive that specifies a predicate property that affects how
@@ -567,7 +567,7 @@ predicates and possibly adds new ones.</p>
 <dt id="term-static-binding">static binding<a class="headerlink" href="#term-static-binding" title="Link to this term"></a></dt><dd><p>Compile time lookup of a <a class="reference internal" href="#term-predicate-declaration"><span class="xref std std-term">predicate declaration</span></a> and
 <a class="reference internal" href="#term-predicate-definition"><span class="xref std std-term">predicate definition</span></a> when compiling a <a class="reference internal" href="#term-message"><span class="xref std std-term">message</span></a> sending
 call (or a <a class="reference internal" href="#term-super-call"><span class="xref std std-term">super call</span></a>). Dynamic binding is used whenever static
-binding is not possible (e.g. due to the predicate being dynamic or due
+binding is not possible (e.g., due to the predicate being dynamic or due
 to lack of enough information at compilation time). Also known as <em>early
 binding</em>. See also <a class="reference internal" href="#term-dynamic-binding"><span class="xref std std-term">dynamic binding</span></a>.</p>
 </dd>

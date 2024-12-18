@@ -117,7 +117,7 @@ tests after loading:
        logtalk_load(basic_types(loader)),
        % load the unit test tool
        logtalk_load(lgtunit(loader)),
-       % load your application files (e.g. "source.lgt") enabling support for
+       % load your application files (e.g., "source.lgt") enabling support for
        % code coverage, which requires compilation in debug mode and collecting
        % source data information; if code coverage is not required, remove the
        % "debug(on)" option for faster execution
@@ -167,7 +167,7 @@ You can also re-run a single test (or a list of tests) using the
 
 When testing complex *units*, it is often desirable to split the tests
 between several test objects or use parametric test objects to be able
-to run the same tests using different parameters (e.g. different data
+to run the same tests using different parameters (e.g., different data
 sets or alternative implementations of the same protocol). In this case,
 you can run all test subsets using the goal:
 
@@ -220,7 +220,7 @@ Automating running tests
 
 You can use the ``scripts/logtalk_tester.sh`` Bash shell script or the
 ``scripts/logtalk_tester.ps1`` PowerShell script for automating running
-unit tests (e.g. from a CI/CD pipeline). When using one of the Logtalk
+unit tests (e.g., from a CI/CD pipeline). When using one of the Logtalk
 installers, the ``.sh`` extension can usually be omitted. For example,
 assuming your current directory (or sub-directories) contains one or
 more ``tester.lgt`` files:
@@ -563,7 +563,7 @@ dialect by using a ``tester.lgt`` driver file with contents such as:
 
 The hook pipeline first applies our ``simple_dialect`` expansion,
 followed by the default ``lgtunit`` expansion. This solution allows
-other hook objects (e.g. required by the code being tested) to also be
+other hook objects (e.g., required by the code being tested) to also be
 used by updating the pipeline.
 
 QuickCheck
@@ -614,11 +614,11 @@ better reserved for testing at the top-level interpreter. The
 - ``broken(Why, Culprit)``
 
 The ``broken(Why, Culprit)`` result only occurs when the user-defined
-testing setup is broken. For example, a non-callable template (e.g. a
+testing setup is broken. For example, a non-callable template (e.g., a
 non-existing predicate), an invalid option, a problem with the
-pre-condition closure or with the label closure (e.g. a pre-condition
+pre-condition closure or with the label closure (e.g., a pre-condition
 that always fails or a label that fails to classify a generated test),
-or errors/failures when generating tests (e.g. due to an unknown type
+or errors/failures when generating tests (e.g., due to an unknown type
 being used in the template or a broken custom type arbitrary value
 generator).
 
@@ -811,7 +811,7 @@ starting seed can be set using the ``-r`` option. For example:
    $ logtalk_tester -r "seed(3172,9814,20125)"
 
 We could now move to other properties that the predicate should comply
-with (e.g. all elements in the output list being present in the input
+with (e.g., all elements in the output list being present in the input
 list). Often, both traditional unit tests and QuickCheck tests are used,
 complementing each other to ensure the required code coverage.
 
@@ -840,8 +840,8 @@ The QuickCheck test dialects and predicates take as argument the mode
 template for a property, generate random values for each input argument
 based on the type information, and check each output argument. For
 common types, the implementation tries first (by default) common edge
-cases (e.g. empty atom, empty list, or zero) before generating arbitrary
-values. When the output arguments check fails, the QuickCheck
+cases (e.g., empty atom, empty list, or zero) before generating
+arbitrary values. When the output arguments check fails, the QuickCheck
 implementation tries (by default) up to 64 shrink operations of the
 counter-example to report a simpler case to help debugging the failed
 test. Edge cases, generating arbitrary terms, and shrinking terms make
@@ -1067,7 +1067,7 @@ Testing local predicates
 ------------------------
 
 The ``(<<)/2`` debugging control construct can be used to access and
-test object local predicates (i.e. predicates without a scope
+test object local predicates (i.e., predicates without a scope
 directive). In this case, make sure that the ``context_switching_calls``
 compiler flag is set to ``allow`` for those objects. This is seldom
 required, however, as local predicates are usually auxiliary predicates
@@ -1436,7 +1436,7 @@ Flaky tests
 -----------
 
 Flaky tests are tests that pass or fail non-deterministically, usually
-due to external conditions (e.g. computer or network load). Thus, flaky
+due to external conditions (e.g., computer or network load). Thus, flaky
 tests often don't result from bugs in the code being tested itself but
 from test execution conditions that are not predictable. The ``flaky/0``
 test option declares a test to be flaky. For example:
@@ -1732,7 +1732,7 @@ The ``lgtunit`` tool provides several public utility predicates to
 simplify writing unit tests and for general use:
 
 - | ``variant(Term1, Term2)``
-  | To check when two terms are a variant of each other (e.g. to check
+  | To check when two terms are a variant of each other (e.g., to check
     expected test results against actual results when they contain
     variables).
 
@@ -1912,7 +1912,7 @@ directory containing tests):
    $ allure open
 
 The ``logtalk_allure_report`` script supports command-line options to
-pass the tests directory (i.e. the directory where the
+pass the tests directory (i.e., the directory where the
 ``logtalk_tester`` script was run), the directory where to collect all
 the xUnit report files for generating the report, the directory where
 the report is to be saved, and the report title (see the script man page
@@ -1964,7 +1964,7 @@ Or:
 
    PS> logtalk_allure_report -e "Project='Deep Thought',Commit=bf166b6"
 
-To show test run trends in the report (e.g. when running the tests for
+To show test run trends in the report (e.g., when running the tests for
 each application source code commit), save the processed test results
 and the report data to permanent directories. For example:
 
@@ -2040,7 +2040,7 @@ web browser for the transformation. For example, using the popular
    $ xsltproc -o coverage_report.html coverage_report.xml
 
 On Windows operating-systems, this processor can be installed using e.g.
-Chocolatey. On a POSIX operating-systems (e.g. Linux, macOS, ...) use
+Chocolatey. On a POSIX operating-systems (e.g., Linux, macOS, ...) use
 the system package manager to install it if necessary.
 
 The coverage report can include links to the source code when hosted on
@@ -2054,7 +2054,7 @@ XSLT processor, however. For example:
      --stringparam url https://github.com/LogtalkDotOrg/logtalk3/blob/master \
      -o coverage_report.html coverage_report.xml
 
-Note that the base URL should preferably be a permanent link (i.e. it
+Note that the base URL should preferably be a permanent link (i.e., it
 should include the commit SHA1) so that the links to source code files
 and lines remain valid if the source code is later updated. It's also
 necessary to suppress the local path prefix in the generated

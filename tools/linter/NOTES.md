@@ -27,7 +27,7 @@ compiling and loading source files. The lint warnings are controlled
 by a [set of flags](../userman/programming.html#programming-flags-lint).
 The default values for these flags are defined in the backend Prolog
 compiler adapter files and can be overridden from a settings file, from
-a source file (e.g. a loader file), or from an entity. These flags can
+a source file (e.g., a loader file), or from an entity. These flags can
 be set globally using the [set_logtalk_flag/2](../refman/predicates/set_logtalk_flag_2.html)
 built-in predicate. For (source file or entity) local scope, use instead
 the [set_logtalk_flag/2](../refman/directives/set_logtalk_flag_2.html)
@@ -39,7 +39,7 @@ See the documentation for details.
 
 Some lint checks are turned off by default, specially when computationally
 expensive. Still, it's a good idea to turn them on to check your code on a
-regular basis (e.g. in CI/CD pipelines).
+regular basis (e.g., in CI/CD pipelines).
 
 Note that, in some cases, the linter may generate false warnings due to source
 code analysis limitations or special cases that, while valid when intended,

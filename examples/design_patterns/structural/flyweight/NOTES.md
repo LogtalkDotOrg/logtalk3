@@ -36,5 +36,5 @@ Note that any object in Logtalk, independently of the role it plays (e.g.
 prototype or class), can also act as a flyweight object for its descendants.
 Static predicates that should be shared can simply be defined in the flyweight
 object and inherited by its descendants. Any dynamic predicates can be handled
-(i.e. asserted, accessed, and retracted) in either the flyweight object, if
+(i.e., asserted, accessed, and retracted) in either the flyweight object, if
 shared, or in *self*, if it may differ for each descendant.

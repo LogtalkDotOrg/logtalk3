@@ -32,7 +32,7 @@
 	:- public(ipv4//1).
 	:- mode(ipv4(?list(integer)), zero_or_one).
 	:- info(ipv4//1, [
-		comment is 'Parses an IPv4 network address in the format XXX.XXX.XXX.XXX where each XXX is an octet (i.e. an integer between 0 and 255).',
+		comment is 'Parses an IPv4 network address in the format XXX.XXX.XXX.XXX where each XXX is an octet (i.e., an integer between 0 and 255).',
 		argnames is ['Octets']
 	]).
 

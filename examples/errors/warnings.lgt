@@ -529,11 +529,11 @@
 
 :- object(steadfastness).
 
-	% incorrect max/3 definition (e.g. max(5,3,3) is true!)
+	% incorrect max/3 definition (e.g., max(5,3,3) is true!)
 	max(X, Y, X) :- X >= Y, !.
 	max(_, Y, Y).
 
-	% incorrect nt//2 definition (e.g. phrase(nt(75,0), _) is true!)
+	% incorrect nt//2 definition (e.g., phrase(nt(75,0), _) is true!)
 	nt(A, A) --> [A], {A >= 65}, !.
 	nt(_, 0) --> [_].
 
@@ -614,7 +614,7 @@
 :- object(redundant_univ).
 
 	% =../2 calls are only necessary when the second argument is a
-	% partial list (i.e. a variable or a list with a variable tail)
+	% partial list (i.e., a variable or a list with a variable tail)
 	foo :-
 		_ =.. [foo, bar, baz].
 

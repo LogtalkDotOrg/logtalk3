@@ -25,7 +25,7 @@ later version:
 	http://www.context.cx/
 
 To install copy the file "Logtalk.chl" to the Highlighters folder of 
-your ConTEXT folder (e.g. C:\Program Files\ConTEXT\Highlighters). If 
+your ConTEXT folder (e.g., C:\Program Files\ConTEXT\Highlighters). If 
 ConTEXT is running, restart it to update its list of highlighters.
 
 

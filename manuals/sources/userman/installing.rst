@@ -101,7 +101,7 @@ Logtalk installers
 ------------------
 
 Logtalk installers are available for macOS, Linux, and Microsoft
-Windows. Depending on the chosen installer, some tasks (e.g. setting
+Windows. Depending on the chosen installer, some tasks (e.g., setting
 environment variables or integrating Logtalk with some Prolog compilers)
 may need to be performed manually.
 

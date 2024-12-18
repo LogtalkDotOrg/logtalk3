@@ -62,7 +62,7 @@ methods that handle the private dynamic predicate (such as
 :ref:`methods_assertz_1` or :ref:`methods_retract_1`) must be made
 either in the context of *self*, using the *message to self* control
 structure, :ref:`control_send_to_self_1`, or in
-the context of *this* (i.e. in the context of the object importing the
+the context of *this* (i.e., in the context of the object importing the
 category). This way, we ensure that when we call one of the attribute
 predicates on an object, the intended object own definition of
 ``attribute_/2`` will be used. The predicate definitions are

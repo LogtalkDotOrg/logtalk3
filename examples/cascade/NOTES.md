@@ -34,7 +34,7 @@ the previous goal. For example, recovering from an unexpected error or
 just passing the unexpected error to the next goal.
 
 3. Allow postponing handling an error in one of the goals, facilitating
-composition (e.g. adding more goals to a conjunction of goals or using
+composition (e.g., adding more goals to a conjunction of goals or using
 some of the goals in a different context).
 
 4. Handle a goal failure by passing the reason for the failure to the

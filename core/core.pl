@@ -2948,7 +2948,7 @@ logtalk_make(Target) :-
 	'$lgt_file_exists'(MainPath),
 	logtalk_load(MainPath, Flags),
 	fail.
-% recompilation due to a change to the compilation mode (e.g. from "normal" to "debug")
+% recompilation due to a change to the compilation mode (e.g., from "normal" to "debug")
 '$lgt_logtalk_make'(all) :-
 	% find all files impacted by a change to compilation mode (this excludes all files
 	% that are compiled with an explicit compilation mode set using the corresponding
@@ -6223,7 +6223,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	% lookup predicate declaration (the predicate must not be
 		% declared in the same entity making the "super" call)
 		call(Dcl, Pred, Scope, _, _, DclCtn), DclCtn \= Ctg ->
-		(	% check that the call is within scope (i.e. public or protected)
+		(	% check that the call is within scope (i.e., public or protected)
 			Scope = p(_) ->
 			(	% construct category and predicate templates
 				'$lgt_term_template'(Ctg, GCtg),
@@ -6680,7 +6680,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 %
 % we must pass any extra arguments (a non-empty list when processing closures)
 % as compilation context meta-variables to properly compile calls to control
-% constructs (e.g. conjunctions) where those extra arguments must be called in
+% constructs (e.g., conjunctions) where those extra arguments must be called in
 % the correct context
 
 '$lgt_metacall_sender'(Pred, ExCtx, CallerExCtx, ExtraArgs) :-
@@ -7393,7 +7393,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 				atom_concat(BasePathSlash, FilePath, SourceFile0)
 			)
 		;	% we may have a relative file path without any parent file
-			% (e.g. when the user changes the working directory to the
+			% (e.g., when the user changes the working directory to the
 			% directory containing the file to be loaded)
 			'$lgt_expand_path'(FilePath, SourceFile0)
 		)
@@ -7569,7 +7569,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		Mode = optimal
 	;	Mode = normal
 	),
-	% ... or if the file modification date changed (e.g. to fix compilation errors)
+	% ... or if the file modification date changed (e.g., to fix compilation errors)
 	'$lgt_file_modification_time'(SourceFile, TimeStamp),
 	% compute text properties that are only available after successful file compilation
 	(	'$lgt_pp_file_encoding_'(SourceFile, Encoding, _, _) ->
@@ -8276,7 +8276,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_stream_current_line_number'(Input, Line) ->
 			Lines = Line-Line
 		;	% some backend Prolog compilers do not support, or do not always support
-			% (e.g. when a syntax error occurs) querying a stream line number
+			% (e.g., when a syntax error occurs) querying a stream line number
 			Lines = '-'(-1, -1)
 		)
 	),
@@ -8298,7 +8298,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		'$lgt_stream_current_line_number'(Input, Line) ->
 		Lines = Line-Line
 	;	% some backend Prolog compilers do not support, or do not always support
-		% (e.g. when a syntax error occurs) querying a stream line number
+		% (e.g., when a syntax error occurs) querying a stream line number
 		Lines = '-'(-1, -1)
 	),
 	'$lgt_print_message'(error, compiler_error(SourceFile, Lines, Error)),
@@ -11034,7 +11034,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, _, _, _, _, _, _)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _)
 	), !,
-	% the predicate must be declared (i.e. have a scope directive) and dynamic
+	% the predicate must be declared (i.e., have a scope directive) and dynamic
 	(	call(Dcl, Pred, Scope, _, Flags) ->
 		functor(Scope, p, _),
 		Flags /\ 2 =:= 2
@@ -11455,7 +11455,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	'$lgt_current_object_'(Entity, _, Dcl, _, _, _, _, _, _, _, _)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _)
 	), !,
-	% the predicate must be declared (i.e. have a scope directive) and multifile
+	% the predicate must be declared (i.e., have a scope directive) and multifile
 	(	call(Dcl, Pred, Scope, _, Flags) ->
 		functor(Scope, p, _),
 		Flags /\ 16 =:= 16
@@ -13817,7 +13817,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			TPred = call(TPred0)
 		;	TPred = TPred0
 		)
-	;	% runtime resolved meta-call (e.g. a lambda expression)
+	;	% runtime resolved meta-call (e.g., a lambda expression)
 		TPred = '$lgt_metacall'(Closure, ExtraArgs, HeadExCtx, local)
 	),
 	CallN =.. [call, Closure| ExtraArgs],
@@ -15197,7 +15197,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(':'(_, Callable), Caller, TPred, DPred, Ctx) :-
 	nonvar(Callable),
 	Callable = ':'(Module, Pred),
-	% in a module predicate call with multiple prefixes (e.g. m1:m2:m3:goal),
+	% in a module predicate call with multiple prefixes (e.g., m1:m2:m3:goal),
 	% only the one that immediately precedes the predicate is relevant
 	!,
 	'$lgt_compile_body'(':'(Module, Pred), Caller, TPred, DPred, Ctx).
@@ -16910,7 +16910,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% in the most common case, we're meta-calling the predicate
 	'$lgt_execution_context'(ExCtx, Entity, Sender, This, Self, MetaCallCtx, Stack),
 	(	'$lgt_member_var'(Pred, MetaVars) ->
-		% goal is a call to a user-defined predicate in sender (i.e. a meta-argument)
+		% goal is a call to a user-defined predicate in sender (i.e., a meta-argument)
 		TPred = '$lgt_metacall_sender'(Pred, ExCtx, MetaCallCtx, [])
 	;	% goal is a local call to a user-defined predicate
 		'$lgt_current_object_'(Entity, _, _, Def, _, _, _, _, DDef, _, _) ->
@@ -17321,7 +17321,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_fix_disjunction_left_side'(@var_or_callable, -callable)
 %
 % check if the compilation of the disjunction left-side produced an if-then or
-% a soft-cut (e.g. due to goal-expansion) and fix it if necessary to avoid
+% a soft-cut (e.g., due to goal-expansion) and fix it if necessary to avoid
 % converting the disjunction into an if-then-else or a soft-cut with an else part
 
 '$lgt_fix_disjunction_left_side'(Goal0, Goal) :-
@@ -20200,7 +20200,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 % '$lgt_parameter_variable_name'(+atom)
 %
-% checks if a variable name is a parameter variable name (i.e. if the variable
+% checks if a variable name is a parameter variable name (i.e., if the variable
 % name starts and ends with an underscore and have at least three characters)
 
 '$lgt_parameter_variable_name'(VariableName) :-
@@ -21341,7 +21341,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compilation in debug mode
 %
 % the wrapping when in compilation mode ensures that indirect predicate calls
-% (e.g. when sending a message) can also be intercepted by debug handlers
+% (e.g., when sending a message) can also be intercepted by debug handlers
 
 '$lgt_wrap_compiled_head'(Head, THead, ExCtx, Call) :-
 	(	'$lgt_compiler_flag'(debug, on) ->
@@ -25180,10 +25180,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 % instantiated argument on predicate call, can be further instantiated by the predicate call
 '$lgt_valid_mode_template_arg'((+)).
 '$lgt_valid_mode_template_arg'('+'(_)).
-% non-instantiated argument (i.e. a variable) on predicate call
+% non-instantiated argument (i.e., a variable) on predicate call
 '$lgt_valid_mode_template_arg'((-)).
 '$lgt_valid_mode_template_arg'('-'(_)).
-% not modified argument (i.e. not further instantiated) by the predicate call
+% not modified argument (i.e., not further instantiated) by the predicate call
 '$lgt_valid_mode_template_arg'((@)).
 '$lgt_valid_mode_template_arg'('@'(_)).
 % ground argument
@@ -25240,7 +25240,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_valid_predicate_property'(logtalk).
 % predicate is defined in Prolog source code
 '$lgt_valid_predicate_property'(prolog).
-% predicate is defined in foreign source code (e.g. C)
+% predicate is defined in foreign source code (e.g., C)
 '$lgt_valid_predicate_property'(foreign).
 
 % entity containing the predicate scope directive
@@ -27766,7 +27766,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 			'$lgt_mt_threaded_and_exit'(Queue, Results)
 		)
 	;	% adding a successful result can fail if the individual thread goals
-		% are not independent (i.e. they share variables with the same or
+		% are not independent (i.e., they share variables with the same or
 		% partially the same role leading to unification failures)
 		'$lgt_mt_threaded_and_exit'(false, Id, Queue, Results)
 	).
@@ -28238,7 +28238,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		call(Dcl, Pred, PredScope, _, Flags, SCtn0, TCtn),
 		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
 	), !,
-	% check that the call is within scope (i.e. public or protected)
+	% check that the call is within scope (i.e., public or protected)
 	(	Scope = p(_) ->
 		true
 	;	Obj = SCtn
@@ -28273,7 +28273,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		call(IDcl, Pred, PredScope, _, Flags, SCtn0, TCtn),
 		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
 	), !,
-	% check that the call is within scope (i.e. public or protected)
+	% check that the call is within scope (i.e., public or protected)
 	(	Scope = p(_) ->
 		true
 	;	Obj = SCtn
@@ -28308,7 +28308,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 		call(IDcl, Pred, PredScope, _, Flags, SCtn0, TCtn),
 		'$lgt_filter_scope_container'(PredScope, SCtn0, Obj, SCtn)
 	), !,
-	% check that the call is within scope (i.e. public or protected)
+	% check that the call is within scope (i.e., public or protected)
 	(	Scope = p(_) ->
 		true
 	;	Obj = SCtn

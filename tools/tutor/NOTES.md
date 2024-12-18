@@ -46,7 +46,7 @@ This tool can be loaded using the query:
 Usage
 -----
 
-Simply load the tool at startup (e.g. from a settings file). As an example,
+Simply load the tool at startup (e.g., from a settings file). As an example,
 with this tool loaded, instead of terse compiler warnings such as:
 
 	*     No matching clause for goal: baz(a)

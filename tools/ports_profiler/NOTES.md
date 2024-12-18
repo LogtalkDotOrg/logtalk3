@@ -27,8 +27,8 @@ This tool counts and reports the number of times each port in the
 It can also report the number of times each clause (or grammar rule)
 is used. It is inspired by the ECLiPSe `port_profiler` tool.
 
-The procedure box model is the same used in the debugger tool. This
-is an extended version of the original Byrd's four port model. Besides
+The procedure box model is the same as the one used in the debugger tool.
+This is an extended version of the original Byrd's four-port model. Besides
 the standard `call`, `exit`, `fail`, and `redo` ports, Logtalk also
 defines two post-unification ports, `fact` and `rule`, and an `exception`
 port. This tool can also distinguish between deterministic exits
@@ -73,8 +73,8 @@ globally before compiling your source files:
 
 	| ?- set_logtalk_flag(debug, on), set_logtalk_flag(source_data, on).
 
-Be aware, however, that loader files (e.g. library loader files) may override
-the default flag values and thus the loaded files may not be compiled in debug
+Be aware, however, that loader files (e.g., library loader files) may override
+the default flag values, and thus the loaded files may not be compiled in debug
 mode. In this case, you will need to modify the loader files themselves.
 
 
@@ -88,7 +88,7 @@ to stop profiling.
 
 Note that the `ports_profiler::start/0` predicate implicitly selects the
 `ports_profiler` tool as the active debug handler. If you have additional
-debug handlers loaded (e.g. the `debugger` tool), those would no longer
+debug handlers loaded (e.g., the `debugger` tool), those would no longer
 be active (there can be only one active debug handler at any given time).
 
 
@@ -192,7 +192,7 @@ Some useful information that can be inferred from the profiling data include:
 - inefficient indexing of predicate clauses (from the `fact`, `rule`, and `call` ports)
 - clauses that are never used or seldom used
 
-The profiling data should be analyzed taking into account the expected
+The profiling data should be analyzed by taking into account the expected
 behavior for the profiled predicates.
 
 
@@ -248,8 +248,8 @@ control construct to call the wrapped predicates. E.g.
 
 With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog code
-of working as-is when wrapped by an object. Often any required changes
-are straight-forward (e.g. adding `use_module/2` directives for called
+from working as-is when wrapped by an object. Often any required changes
+are straightforward (e.g., adding `use_module/2` directives for called
 module library predicates).
 
 

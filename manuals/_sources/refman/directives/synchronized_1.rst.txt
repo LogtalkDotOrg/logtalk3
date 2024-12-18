@@ -41,7 +41,7 @@ Description
 
 Declares :term:`synchronized <synchronized predicate>` predicates and
 synchronized grammar rule non-terminals. The most common use is for
-predicates that have side effects (e.g. asserting or retracting clauses
+predicates that have side effects (e.g., asserting or retracting clauses
 for a dynamic predicate) in multi-threaded applications. A synchronized
 predicate (or synchronized non-terminal) is protected by a mutex in order
 to allow for thread synchronization when proving a call to the predicate

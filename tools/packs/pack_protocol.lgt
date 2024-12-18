@@ -22,9 +22,9 @@
 :- protocol(pack_protocol).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:17:1,
 		author is 'Paulo Moura',
-		date is 2024-02-29,
+		date is 2024-12-18,
 		comment is 'Pack specification protocol. Objects implementing this protocol should be named after the pack with a ``_pack`` suffix and saved in a file with the same name as the object.'
 	]).
 
@@ -80,7 +80,7 @@
 		argnames is ['Action', 'Version', 'Note'],
 		remarks is [
 			'Action' - 'Possible values are ``install``, ``update``, and ``uninstall``. When unbound, the note apply to all actions.',
-			'Version' - 'Version acted on (i.e. version being installed, updated to, or uninstalled). When unbound, the note apply to all versions.',
+			'Version' - 'Version being installed, updated, or uninstalled. When unbound, the note apply to all versions.',
 			'Note' - 'Note to print when performing an action on a pack version.'
 		]
 	]).

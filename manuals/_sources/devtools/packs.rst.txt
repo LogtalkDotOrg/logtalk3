@@ -7,11 +7,11 @@ This tool provides predicates for downloading, installing, upgrading,
 and uninstalling third-party libraries and applications, generically
 known as *packs*. Collections of pack specifications are made available
 using *registries*. Registries can be local to a system, publicly
-shared, or private to a company (e.g. only available in a VPN). There is
-no concept of a central registry. Users can decide which registries they
-trust and want to use and add them using their published URLs. The tool
-supports both pack checksums and signatures and takes several steps to
-sanitize registry and pack specifications. As with other Logtalk
+shared, or private to a company (e.g., only available in a VPN). There
+is no concept of a central registry. Users can decide which registries
+they trust and want to use and add them using their published URLs. The
+tool supports both pack checksums and signatures and takes several steps
+to sanitize registry and pack specifications. As with other Logtalk
 developer tools, portability is a main goal. This tool can be used with
 any supported Prolog backend and run on both POSIX and Windows systems.
 Moreover, this tool can be used not only for handling Logtalk packs but
@@ -149,8 +149,8 @@ The tool uses a directory specified using the ``logtalk_packs`` library
 alias when defined (in a settings file or in a backend Prolog
 initialization file). When this library alias is not defined, the tool
 uses the value of the ``LOGTALKPACKS`` environment variable when
-defined. Otherwise it defaults to the ``~/logtalk_packs`` directory. The
-actual directory can be retrieved by the query:
+defined. Otherwise, it defaults to the ``~/logtalk_packs`` directory.
+The actual directory can be retrieved by the query:
 
 ::
 
@@ -164,7 +164,7 @@ the contents of these directories. Multiple and independent
 registry/pack setups are possible using *virtual environments* as
 explained next.
 
-Your registries and packs setup can be saved and restored (e.g. in a
+Your registries and packs setup can be saved and restored (e.g., in a
 different system) by using the ``packs::save/1-2`` and
 ``packs::restore/1-2`` predicates, as explained in the next section
 about virtual environments. If necessary, before restoring, the
@@ -197,12 +197,12 @@ virtual environment. The ``settings.lgt`` file can define the
    )).
 
 The definition of the ``logtalk_packs`` library alias **must** always be
-an atom and thus never use library notation (i.e. it must never depend
+an atom and thus never use library notation (i.e., it must never depend
 on other library aliases).
 
 When a virtual environment also requires a specific Logtalk version
-(e.g. the version used to test and certify it), this can be installed as
-a pack from the official
+(e.g., the version used to test and certify it), this can be installed
+as a pack from the official
 `talkshow <https://github.com/LogtalkDotOrg/talkshow>`__ registry and
 used by (re)defining the ``LOGTALKHOME`` and ``LOGTALKUSER`` environment
 variables to point to its pack directory (which can be queried by using
@@ -226,7 +226,7 @@ These scripts require, respectively,
 installed. These utilities load and unload environment variables when
 changing the current directory. On Windows systems, when using the
 ``lgtenv.ps1`` script, you also need to redefine the PowerShell prompt
-in a profile file (e.g. ``$HOME\Documents\PowerShell\Profile.ps1``) to
+in a profile file (e.g., ``$HOME\Documents\PowerShell\Profile.ps1``) to
 mimic the functionality of ``direnv`` of automatically loading an
 existing ``.env`` file when changing to its directory. For example:
 
@@ -237,8 +237,8 @@ existing ``.env`` file when changing to its directory. For example:
        'PS ' + $(Get-Location) + '> '
    }
 
-A virtual environment setup (i.e. the currently defined registries and
-installed packs) can be saved into a file (e.g. ``requirements.lgt``)
+A virtual environment setup (i.e., the currently defined registries and
+installed packs) can be saved into a file (e.g., ``requirements.lgt``)
 using the ``packs::save/1`` predicate:
 
 ::
@@ -266,8 +266,8 @@ easily fulfill application requirements by running the query once:
 
    | ?- packs::restore('requirements.lgt').
 
-After, the application ``loader.lgt`` file can then load the required
-packs using their loader files:
+Subsequently, the application ``loader.lgt`` file can then load the
+required packs using their loader files:
 
 ::
 
@@ -368,7 +368,7 @@ With the contents of the ``loader.lgt`` file being:
    )).
 
 It would be, of course, possible to have all objects in a single source
-file. But having a file per-object and a loader file helps maintenance
+file. But having a file per-object and a loader file helps maintenance,
 and it's also a tool requirement for applying safety procedures to the
 source file contents and thus successfully loading the registry and pack
 specs.
@@ -550,7 +550,7 @@ formats and extensions are:
 - ``.tbz2``, ``.tar.bz2``
 
 Also, for encrypted packs, all the extensions above with a ``.gpg``
-suffix (e.g. ``.zip.gpg``).
+suffix (e.g., ``.zip.gpg``).
 
 The pack sources should contain ``LICENSE``, ``README.md`` (or
 ``NOTES.md``), and ``loader.lgt`` (or ``loader.logtalk``) files.
@@ -692,7 +692,7 @@ standard term comparison operator:
   version up to the specified one. For example, ``common::bits @=< 2:1``
   means that the pack requires a ``common::bits`` pack up to 2.1. This
   includes all previous versions and also all patches for version 2.1
-  (e.g. 2.1.7, 2.1.8, ...) but not version 2.2 or newer.
+  (e.g., 2.1.7, 2.1.8, ...) but not version 2.2 or newer.
 
 - ``Registry::Pack @< Version`` - the pack requires a dependency with
   version older than the specified one. For example,
@@ -730,7 +730,7 @@ When a pack also depends on a Logtalk or backend version, the name
 ``Registry::Pack`` (see below for the table of backend specifiers). For
 example, ``logtalk @>= 3.36.0``.
 
-When a pack also depends on an operating-system version (e.g. a pack
+When a pack also depends on an operating-system version (e.g., a pack
 containing shared libraries with executable code), the
 ``os(Name,Machine)`` compound term can also be used in place of
 ``Registry::Pack``. For example, ``os('Darwin',x86_64) @>= '23.0.0'``.
@@ -953,8 +953,8 @@ entered interactively or using the ``gpg/1`` option. For example:
    | ?- packs::install(reg, bar, 1:1:2, [gpg('--batch --passphrase test123')]).
 
 See the ``gpg`` documentation for details. When using the ``gpg/1``
-option, you should be careful to not leak passphrases in e.g. the query
-history.
+option, you should be careful to not leak passphrases in, e.g., the
+query history.
 
 To uninstall a pack that you no longer need, use the
 ``packs::uninstall/1-2`` predicates. By default, only packs with no
@@ -1010,8 +1010,8 @@ organization). For example:
 
 This query creates a ``xml_docs`` directory in the current directory.
 The XML documentation files can then be converted into a final format,
-e.g. HTML, using one of the scripts provided by the ``lgtdoc`` tool. For
-example:
+e.g., HTML, using one of the scripts provided by the ``lgtdoc`` tool.
+For example:
 
 ::
 
@@ -1031,7 +1031,7 @@ Pinning registries and packs
 ----------------------------
 
 Registries and packs can be *pinned* after installation to prevent
-accidental updating or deleting, e.g. when using the batch ``update/0``
+accidental updating or deleting, e.g., when using the batch ``update/0``
 predicate. This is useful when your application requires a specific
 version or for security considerations (see below). For example, if we
 want the ``bar`` pack to stay at its current installed version:

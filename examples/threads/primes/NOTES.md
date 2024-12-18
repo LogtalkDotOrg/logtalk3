@@ -33,4 +33,4 @@ finding primes numbers on a given interval (with or without threads).
 
 You probably want to play with the list size in order to find out when the 
 list is big enough to make the use of multi-threading worth performance-wise 
-(i.e. to compensate the overhead of thread creation and management).
+(i.e., to compensate the overhead of thread creation and management).

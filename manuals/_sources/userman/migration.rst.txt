@@ -236,7 +236,7 @@ include the set of implemented module directives, the directive semantics, the
 handling of operators, the locality of flags, and the integration of
 term-expansion mechanisms (when provided). Another potential issue is that,
 when compiling modules as objects, Logtalk assumes that any referenced module
-(e.g. using ``use_module/1-2`` directives) is also being compiled as an
+(e.g., using ``use_module/1-2`` directives) is also being compiled as an
 object. If that's not the case, the compiled module calls being compiled as
 message-sending goals will still work for normal predicates but will not
 work for meta-predicates called using implicit module qualification. The
@@ -426,7 +426,7 @@ the notes on built-in meta-predicates for possible caveats). However,
 Logtalk will generate compilation errors on source files containing
 proprietary directives unless you first specify how the directives
 should be handled. Several actions are possible on a per-directive
-basis: ignoring the directive (i.e. do not copy the directive, although
+basis: ignoring the directive (i.e., do not copy the directive, although
 a goal can be proved as a consequence), rewriting and copying the directive
 to the generated Prolog files, or rewriting and recompiling the
 resulting directive. To specify these actions, the adapter files contain
@@ -488,7 +488,7 @@ similar way to Logtalk :ref:`directives_uses_2`
 directives, with calls to the specified module predicates being
 automatically translated to ``Module:Goal`` calls.
 
-As a general rule, the Prolog modules should be loaded (e.g. in the
+As a general rule, the Prolog modules should be loaded (e.g., in the
 auxiliary Logtalk loader files) *before* compiling objects that make use
 of module predicates. Moreover, the Logtalk compiler does not generate
 code for the automatic loading of modules referenced in

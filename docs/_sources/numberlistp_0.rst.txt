@@ -139,7 +139,7 @@ Calculates the sum of all list numbers. Returns the integer zero if the list is 
 ``average/2``
 ^^^^^^^^^^^^^
 
-Calculates the average (i.e. arithmetic mean) of a list of numbers. Fails if the list is empty.
+Calculates the average (i.e., arithmetic mean) of a list of numbers. Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``
@@ -372,7 +372,7 @@ Normalizes a list of numbers into the given range. Caller must handle arithmetic
 ``normalize_unit/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Normalizes a list of numbers returning its unit vector (i.e. a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.
+Normalizes a list of numbers returning its unit vector (i.e., a list with Euclidean norm equal to one). Caller must handle arithmetic exceptions if the input list if not normalizable.
 
 | **Compilation flags:**
 |    ``static``

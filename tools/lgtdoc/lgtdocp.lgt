@@ -52,7 +52,7 @@
 			'``exclude_prefixes(List)`` option' - 'List of path prefixes to exclude when generating the XML documenting files (default is ``[]``).',
 			'``exclude_entities(List)`` option' - 'List of entities to exclude when generating the XML documenting files (default is ``[]``).',
 			'``sort_predicates(Boolean)`` option' - 'Sort entity predicates (default is ``false``).',
-			'Known issues' - 'Some options may depend on the used XSL processor. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors (e.g. ``fop2``) reject reference to a DTD.'
+			'Known issues' - 'Some options may depend on the used XSL processor. Most XSL processors support DTDs but only some of them support XML Schemas. Some processors (e.g., ``fop2``) reject reference to a DTD.'
 		],
 		see_also is [lgtdoc]
 	]).

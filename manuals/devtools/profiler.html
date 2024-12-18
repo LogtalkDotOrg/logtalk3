@@ -174,9 +174,9 @@ directory.</p>
 <p>Logtalk also supports the YAP tick profiler (using the latest YAP
 development version) and the SWI-Prolog XPCE profiler. When using the
 XPCE profiler, you can avoid profiling the Logtalk compiler (which is
-invoked e.g. when you use the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending operator at the
-top-level interpreter) by compiling your code with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> flag
-turned on:</p>
+invoked, e.g., when you use the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending operator at
+the top-level interpreter) by compiling your code with the <code class="docutils literal notranslate"><span class="pre">optimize</span></code>
+flag turned on:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">set_logtalk_flag</span>(optimize, on).
 <span class="k">true</span>.
 
@@ -210,8 +210,8 @@ the caller predicates.</p>
 </section>
 <section id="compiling-source-code-for-profiling">
 <h2>Compiling source code for profiling<a class="headerlink" href="#compiling-source-code-for-profiling" title="Link to this heading"></a></h2>
-<p>In order to get user-level object and predicate names instead of
-compiler generated internal names when using the SWI-Prolog and YAP
+<p>To get the user-level object and predicate names instead of the
+compiler-generated internal names when using the SWI-Prolog and YAP
 profilers, you must set <code class="docutils literal notranslate"><span class="pre">code_prefix</span></code> flag to a character other than
 the default <code class="docutils literal notranslate"><span class="pre">$</span></code> before compiling your source code. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">?-</span> <span class="k">set_logtalk_flag</span>(code_prefix, <span class="s">&#39;.&#39;</span>).

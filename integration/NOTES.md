@@ -42,7 +42,7 @@ system path):
 * YAP (6.3.4 or later):              `yaplgt`
 
 For more information about these scripts and their dependencies, consult
-the corresponding `man` page (e.g. `man yaplgt`). The `man` pages are also
+the corresponding `man` page (e.g., `man yaplgt`). The `man` pages are also
 available at:
 
 https://logtalk.org/man/

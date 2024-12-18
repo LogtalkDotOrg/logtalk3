@@ -32,7 +32,7 @@
 	implements(monitoring)).
 
 	% react to any message sent to the subject object from
-	% the user object (i.e. the from the top-level)
+	% the user object (i.e., the from the top-level)
 	:- initialization(
 		define_events(_Event, subject, _Message, user, observer)
 	).

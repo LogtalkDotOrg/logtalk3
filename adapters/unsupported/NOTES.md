@@ -37,7 +37,7 @@ and "paths/paths.pl" and then load the resulting ".plm" files
 using the predicate load/1 (you will need to edit the "paths.pl" file
 by following the instructions on the "paths/NOTES.md" file).
 
-You will probably need to increase some of the default values (e.g. the
+You will probably need to increase some of the default values (e.g., the
 "control" parameter) in the "amzi.cfg" file in order to be able to load
 some of the libraries or some of the examples.
 
@@ -104,7 +104,7 @@ notation, for escape sequences in atoms, and its limited parser often
 requires atoms to be quoted and written between ()'s. Moreover, due to
 Lean Prolog limitation of compiling more than one file per session, the
 compilation of Logtalk source files generates intermediate Prolog files
-that are consulted (i.e. interpreted) instead of being compiled, severely
+that are consulted (i.e., interpreted) instead of being compiled, severely
 hurting performance. Thus, practical use requires embedding Logtalk and the
 Logtalk application in Lean Prolog by including all necessary files in a
 single file that can then be compiled. For example, you can collect all

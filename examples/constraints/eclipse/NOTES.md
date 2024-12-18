@@ -27,7 +27,7 @@ These examples are adapted with permission from the examples found at:
 
 	http://www.eclipse-clp.org/examples
 
-The examples code was changed to avoid using ECLiPSe special features (e.g. 
+The examples code was changed to avoid using ECLiPSe special features (e.g., 
 array notation or the do/2 loop operator) as they do not work when the "iso" 
 library is loaded (this library is loaded by the "eclipse*iso.pl" config 
 file, which is used in the Logtalk integration scripts and shortcuts).

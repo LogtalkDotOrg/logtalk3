@@ -9,8 +9,8 @@ For reference material, see e.g.
 
 https://en.wikipedia.org/wiki/Universally_unique_identifier
 
-Some backends provide time stamps with low granularity (e.g. seconds but
-not milliseconds or nanoseconds). To compensate, the generation of
+Some backends provide time stamps with low granularity (e.g., seconds
+but not milliseconds or nanoseconds). To compensate, the generation of
 version 1 UUIDs uses 14 random bits for the clock sequence.
 
 The generation of version 4 UUIDs uses the ``/dev/urandom`` random

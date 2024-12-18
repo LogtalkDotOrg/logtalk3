@@ -24,7 +24,7 @@
 	% option to suppress the test file and directory path prefix
 	create_logtalk_flag(suppress_path_prefix, '', [type(atom), keep(true)]),
 	% define a flag to allow overriding the directory where tests reports
-	% are created (e.g. when running tests defined in a directory different
+	% are created (e.g., when running tests defined in a directory different
 	% from the directory that contains the tests driver file)
 	create_logtalk_flag(tests_report_directory, '', [type(atom), keep(true)]),
 	% define a flag to allow the logtalk_tester script to pass the

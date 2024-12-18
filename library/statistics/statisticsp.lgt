@@ -117,7 +117,7 @@
 	:- public(average_deviation/3).
 	:- mode(average_deviation(+list(number), +float, -float), zero_or_one).
 	:- info(average_deviation/3, [
-		comment is 'Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.',
+		comment is 'Calculates the average absolute deviation of a list of numbers given a central tendency (e.g., mean, median, or mode). Fails if the list is empty.',
 		argnames is ['List', 'CentralTendency', 'Deviation']
 	]).
 

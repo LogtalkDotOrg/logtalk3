@@ -21,14 +21,14 @@ ________________________________________________________________________
 `hook_flows`
 ============
 
-Hook objects (i.e. objects that define term- and goal-expansion rules)
+Hook objects (i.e., objects that define term- and goal-expansion rules)
 can be combined to define expansion *workflows*. While in some cases
 the expansions are independent and thus can be applied in any order,
 in other cases a specific order is required. The `hook_pipeline` and
 `hook_set` parametric objects in this library implement the two most
 common scenarios of combining multiple hook objects for the expansion
 of source files. These parametric hook objects can be combined to
-define workflows of any complexity (e.g. a pipeline where one of the
+define workflows of any complexity (e.g., a pipeline where one of the
 steps is set with an element that is a pipeline). These two basic hook
 flows can also used as examples of how to construct your own custom
 expansion workflows.
@@ -81,7 +81,7 @@ The `hook_set(Set)` is a parametric object where the parameter is a list of
 hook objects, interpreted as a set of hook objects. The hook objects are tried
 in sequence until one of them succeeds in expanding the current term (goal)
 into a different term (goal). This parametric object is used when applying
-multiple independent expansions (i.e. expansions that don't apply to the same
+multiple independent expansions (i.e., expansions that don't apply to the same
 terms or goals).
 
 Both the `hook_pipeline(Pipeline)` and `hook_set(Set)` objects assume that the

@@ -29,7 +29,7 @@ for Logtalk support see the instructions on its website and use the
 
 To also use the Logtalk support for syntax coloring of Prolog files,
 either create an alias to `bat` that calls it with the `-l logtalk`
-option (e.g. for a Bash shell: `alias batpl='bat -l logtalk'`) or
+option (e.g., for a Bash shell: `alias batpl='bat -l logtalk'`) or
 edit the `bat` configuration file to map Prolog extensions to use
 the Logtalk syntax highlighter. For example, using `nano` as the
 text editor:

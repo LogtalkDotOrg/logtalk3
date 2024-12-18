@@ -146,7 +146,7 @@ Each object importing this category will have its own ``attribute_/2``
 private and dynamic predicate. The predicates ``attribute/2``,
 ``set_attribute/2``, and ``del_attribute/2`` always access and modify
 the dynamic predicate contained in the object receiving the
-corresponding messages (i.e. *self*). But it's also possible to define
+corresponding messages (i.e., *self*). But it's also possible to define
 predicates that handle dynamic predicates in the context of *this*
 instead of *self*. For example:
 
@@ -199,7 +199,7 @@ categories:
        ...
    :- end_category.
 
-This allows us to add missing directives (e.g. to define
+This allows us to add missing directives (e.g., to define
 :term:`aliases <predicate alias>` for complemented object predicates),
 replace broken predicate definitions, add new predicates, and add protocols
 and categories to existing objects without requiring access or modifications
@@ -215,7 +215,7 @@ When replacing a predicate definition, it is possible to call the overridden
 definition in the object from the new definition in the category by using the
 :ref:`call_in_this_1` control construct. This construct is only meaningful
 when used within categories and requires a compile-time bound goal argument,
-which is called in :term:`this` (i.e. in the context of the complemented
+which is called in :term:`this` (i.e., in the context of the complemented
 object or the object importing a category). As an example, consider the
 following object:
 

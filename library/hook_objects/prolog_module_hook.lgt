@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2020-02-17,
-		comment is 'This hook object applies the expansion rules defined in a Prolog module (e.g. ``user``).',
+		comment is 'This hook object applies the expansion rules defined in a Prolog module (e.g., ``user``).',
 		parnames is ['Module'],
 		see_also is [
 			backend_adapter_hook, default_workflow_hook,

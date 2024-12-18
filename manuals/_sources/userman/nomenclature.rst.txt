@@ -32,7 +32,7 @@ A good example is *class*. The support for meta-classes in e.g. Smalltalk
 translates to a concept of class that is different in key aspects from the
 concept of class in e.g. Java or C++. Other terms that can have different
 meanings are *delegation* and *forwarding*. There are also cases where the
-same concept is found under different names in some languages (e.g. *self*
+same concept is found under different names in some languages (e.g., *self*
 and *this*) but that can also mean different concepts in Logtalk and other
 languages. Always be aware of these differences and be cautious with assumptions
 carried from other programming languages.
@@ -79,7 +79,7 @@ found elsewhere in this Handbook.
 **closed-world assumption semantics**
    Logtalk provides clear closed-world assumption semantics: messages or calls
    for declared but undefined predicates fail. Messages or calls for unknown
-   (i.e. not declared) predicates throw an error. Crucially, this semantics
+   (i.e., not declared) predicates throw an error. Crucially, this semantics
    applies to both *static* and *dynamic* predicates. But in Prolog workarounds
    are required to have a static predicate being known by the runtime without
    it being also defined (so that calling it would fail instead of throwing a
@@ -104,7 +104,7 @@ found elsewhere in this Handbook.
    easily extended or replaced by an alternative application.
 
 **directive operators**
-   Some Prolog systems declare directive names as operators (e.g. ``dynamic``,
+   Some Prolog systems declare directive names as operators (e.g., ``dynamic``,
    ``multifile``, ...). This is not required by the ISO Prolog Core standard.
    It's a practice that should be avoided as it makes code non-portable.
 
@@ -236,7 +236,7 @@ the most commonly used Smalltalk terms with their Logtalk counterparts.
    proof that something is true.
 
 **message selector**
-   Logtalk uses the predicate template (i.e. the predicate callable term with
+   Logtalk uses the predicate template (i.e., the predicate callable term with
    all its arguments unbound) as a message selector. The actual type of the
    message arguments is not considered. Like Smalltalk, Logtalk uses *single
    dispatch* on the message receiver.
@@ -247,7 +247,7 @@ the most commonly used Smalltalk terms with their Logtalk counterparts.
    is simply avoided by making a class an instance of itself.
 
 **method**
-   Same as in Smalltalk, a *method* is the actual code (i.e. predicate
+   Same as in Smalltalk, a *method* is the actual code (i.e., predicate
    definition) that is run to answer a message. Logtalk uses the words
    *method* and *predicate* interchangeably.
 
@@ -508,7 +508,7 @@ their Logtalk equivalents.
 **abstract class**
    Logtalk uses a different definition of abstract class: a class that
    does not inherit a method for creating new instances. Notably, the
-   presence of *abstract methods* (i.e. predicates that are declared
+   presence of *abstract methods* (i.e., predicates that are declared
    but not defined) does not make a class abstract.
 
 **abstract method**
@@ -530,7 +530,7 @@ their Logtalk equivalents.
 
 **function object**
    Predicate calls (goals) can be passed or returned from other predicates
-   and unified with other terms (e.g. variables).
+   and unified with other terms (e.g., variables).
 
 **import path**
    Logtalk uses the term *library* to refer to a directory of source files

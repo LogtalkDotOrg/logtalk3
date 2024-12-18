@@ -451,7 +451,7 @@ same object, <em>this</em>, as the object message queue is used internally for
 posting and retrieving notifications.</p>
 <p>Each notification posted by a call to the <code class="docutils literal notranslate"><span class="pre">threaded_notify/1</span></code>
 predicate is consumed by a single <code class="docutils literal notranslate"><span class="pre">threaded_wait/1</span></code> predicate call
-(i.e. these predicates implement a peer-to-peer mechanism). Care should
+(i.e., these predicates implement a peer-to-peer mechanism). Care should
 be taken to avoid deadlocks when two (or more) threads both wait and
 post notifications to each other.</p>
 </section>

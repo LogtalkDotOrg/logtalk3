@@ -4,7 +4,7 @@
 =======
 
 This library provides access to a git project current branch and latest
-commit data (e.g. commit hash). Support for using this library on
+commit data (e.g., commit hash). Support for using this library on
 Windows operating-systems is experimental and may or may not work
 depending on the used Prolog backend.
 

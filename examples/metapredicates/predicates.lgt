@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% some simple predicates to use with library meta-predicates (e.g. fold_left/4
+% some simple predicates to use with library meta-predicates (e.g., fold_left/4
 % and partition/4) compiled as plain Prolog code and thus defined in the "user"
 % pseudo-object:
 

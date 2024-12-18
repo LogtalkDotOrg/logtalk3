@@ -84,7 +84,7 @@ surrounding field data and `false` to preserve the double quotes.
 The `csv` object uses the default values `keep`, `comma`, and `false`.
 
 When writing CSV files or streams, set the quoted fields option to `false`
-to write all non-numeric fields double-quoted (i.e. escaped).
+to write all non-numeric fields double-quoted (i.e., escaped).
 
 The library objects can also be used to guess the separator used in a CSV
 file if necessary. For example:

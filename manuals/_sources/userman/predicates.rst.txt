@@ -54,7 +54,7 @@ Declaring predicates
 Logtalk provides a clear distinction between *declaring a predicate* and
 *defining a predicate* and thus clear :term:`closed-world assumption` semantics.
 Messages or calls for declared but undefined predicates fail. Messages or
-calls for unknown (i.e. non-declared) predicates throw an error. Note that
+calls for unknown (i.e., non-declared) predicates throw an error. Note that
 this is a fundamental requirement for supporting :ref:`protocols <protocols_protocols>`:
 we must be able to declare a predicate without necessarily defining it.
 
@@ -79,7 +79,7 @@ a scope directive. Local predicates, like private predicates, can only be
 called from the container object (or category), but they are *invisible*
 to the reflection built-in methods (:ref:`methods_current_predicate_1`
 and :ref:`methods_predicate_property_2`) and to the message error handling
-mechanisms (i.e. sending a message corresponding to a local predicate
+mechanisms (i.e., sending a message corresponding to a local predicate
 results in a ``predicate_declaration`` existence error instead of a scope
 error).
 
@@ -173,7 +173,7 @@ four possible values are described in the ISO Prolog Core standard
    Argument must be ground.
 ``--``
    Argument must be unbound. Used mainly when returning an opaque term
-   (e.g. a stream handle).
+   (e.g., a stream handle).
 
 Note that the ``+`` and ``@`` instantiation modes have the same meaning
 for atomic arguments. E.g. you can write either ``+atom`` or ``@atom``
@@ -200,27 +200,27 @@ proofs for that solution. Note that different modes for the same predicate
 often have different determinism. The possible values are:
 
 ``zero``
-   Predicate always fails (e.g. the ``false/0`` standard predicate).
+   Predicate always fails (e.g., the ``false/0`` standard predicate).
 ``one``
-   Predicate always succeeds once (e.g. the ``flush_output/0`` standard predicate).
+   Predicate always succeeds once (e.g., the ``flush_output/0`` standard predicate).
 ``zero_or_one``
-   Predicate either fails or succeeds (e.g. the ``atom/1`` standard predicate).
+   Predicate either fails or succeeds (e.g., the ``atom/1`` standard predicate).
 ``zero_or_more``
-   Predicate has zero or more proofs (e.g. the ``current_predicate/1`` standard predicate).
+   Predicate has zero or more proofs (e.g., the ``current_predicate/1`` standard predicate).
 ``one_or_more``
-   Predicate has one or more proofs (e.g. the ``repeat/0`` standard predicate).
+   Predicate has one or more proofs (e.g., the ``repeat/0`` standard predicate).
 ``zero_or_error``
    Predicate either fails or throws an error.
 ``one_or_error``
-   Predicate either succeeds once or throws an error (e.g. the ``open/3`` standard predicate).
+   Predicate either succeeds once or throws an error (e.g., the ``open/3`` standard predicate).
 ``zero_or_one_or_error``
-   Predicate succeeds once or fails or throws an error (e.g. the ``get_char/1`` standard predicate).
+   Predicate succeeds once or fails or throws an error (e.g., the ``get_char/1`` standard predicate).
 ``zero_or_more_or_error``
-   Predicate may fail or succeed multiple times or throw an error (e.g. the ``retract/1`` standard predicate).
+   Predicate may fail or succeed multiple times or throw an error (e.g., the ``retract/1`` standard predicate).
 ``one_or_more_or_error``
    Predicate may succeed one or more times or throw an error.
 ``error``
-   Predicate will throw an error (e.g. the ``type_error/2`` built-in method).
+   Predicate will throw an error (e.g., the ``type_error/2`` built-in method).
 
 The last six values support documenting that some call modes may throw an
 error or will throw an error **despite the call arguments complying with the
@@ -287,7 +287,7 @@ Some predicates may have arguments that will be called as goals, interpreted
 as :term:`closures <closure>` that will be used for constructing goals, or
 passing meta-arguments to calls to other meta-predicates. To ensure that these
 goals will be executed in the correct context
-(i.e. in the :term:`calling context <predicate calling context>`, not in the
+(i.e., in the :term:`calling context <predicate calling context>`, not in the
 meta-predicate :term:`definition context <predicate definition context>`), we
 need to use the :ref:`directives_meta_predicate_1` directive (in the case of
 *meta non-terminals*, there's also a :ref:`directives_meta_non_terminal_1`
@@ -918,7 +918,7 @@ no restrictions in declaring and calling dynamic predicates from inside
 a category. Because a category can be imported by multiple objects, dynamic
 predicates must be called either in the context of :term:`self`, using the
 :term:`message to self` control structure, :ref:`control_send_to_self_1`, or
-in the context of :term:`this` (i.e. in the context of the object importing
+in the context of :term:`this` (i.e., in the context of the object importing
 the category). For example, if we want to define a category implementing
 attributes using the dynamic database of *self* we could write:
 
@@ -1842,11 +1842,11 @@ The following predicate properties are supported:
    declared)
 ``logtalk``, ``prolog``, ``foreign``
    A predicate can be defined in Logtalk source code, Prolog code, or in
-   foreign code (e.g. in C)
+   foreign code (e.g., in C)
 ``built_in``
    The predicate is a built-in predicate
 ``multifile``
-   The predicate is declared multifile (i.e. it can have clauses defined
+   The predicate is declared multifile (i.e., it can have clauses defined
    in multiple files or entities)
 ``meta_predicate(Template)``
    The predicate is declared as a meta-predicate with the specified
@@ -1873,7 +1873,7 @@ The following predicate properties are supported:
 ``alias_declared_in(Entity)``
    The predicate alias is declared in the specified entity
 ``synchronized``
-   The predicate is declared as synchronized (i.e. it's a deterministic
+   The predicate is declared as synchronized (i.e., it's a deterministic
    predicate synchronized using a mutex when using a backend Prolog
    compiler supporting a compatible multi-threading implementation)
 
@@ -2013,7 +2013,7 @@ predicate):
    :- uses(user, [atom_string/2])
 
 This directive is based on the fact that built-in predicates are visible in
-plain Prolog (i.e. in ``user``). Besides helping to document the dependency
+plain Prolog (i.e., in ``user``). Besides helping to document the dependency
 on a non-standard built-in predicate, this directive will also silence the
 compiler portability warning.
 
@@ -2076,7 +2076,7 @@ calls to the predicates (thus avoiding call indirection overheads).
 Calling Prolog user-defined plain predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-User-defined Prolog plain predicates (i.e. predicates that are not defined
+User-defined Prolog plain predicates (i.e., predicates that are not defined
 in a Prolog module) can be called from within objects or categories by
 sending the corresponding message to ``user``. For example:
 
@@ -2227,7 +2227,7 @@ Calling Prolog module meta-predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The Logtalk library provides implementations of common meta-predicates,
-which can be used in place of module meta-predicates (e.g. list mapping
+which can be used in place of module meta-predicates (e.g., list mapping
 meta-predicates). If that is not the case, the Logtalk compiler may need
 help to understand the module meta-predicate templates. Despite some recent
 progress in standardization of the syntax of ``meta_predicate/1`` directives
@@ -2252,7 +2252,7 @@ a module meta-predicate with the following meta-predicate directive:
 The ``:`` meta-argument specifier is ambiguous. It tell us that the second
 argument of the meta-predicate is module sensitive, but it does not tell us
 *how*. Some legacy module libraries and some Prolog systems use ``:`` to
-mean ``0`` (i.e. a meta-argument that will be meta-called). Some others
+mean ``0`` (i.e., a meta-argument that will be meta-called). Some others
 use ``:`` for meta-arguments that are not meta-called but that still need
 to be augmented with module information. Whichever the case, the Logtalk
 compiler doesn't have enough information to unambiguously parse the

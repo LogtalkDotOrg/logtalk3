@@ -74,7 +74,7 @@
 <li class="toctree-l2"><a class="reference internal" href="programming.html">Programming</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#using-compiler-options-on-calls-to-the-logtalk-compiling-and-loading-predicates-does-not-work">Using compiler options on calls to the Logtalk compiling and loading predicates does not work!</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files">Gecko-based browsers (e.g. Firefox) show non-rendered HTML entities when browsing XML documenting files!</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files">Gecko-based browsers (e.g., Firefox) show non-rendered HTML entities when browsing XML documenting files!</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compiling-a-source-file-results-in-errors-or-warnings-but-the-logtalk-compiler-reports-a-successful-compilation-with-zero-errors-and-zero-warnings">Compiling a source file results in errors or warnings but the Logtalk compiler reports a successful compilation with zero errors and zero warnings!</a></li>
 </ul>
 </li>
@@ -130,7 +130,7 @@
 <span id="faq-troubleshooting"></span><h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="#faq-troubleshooting-options"><span class="std std-ref">Using compiler options on calls to the Logtalk compiling and loading predicates does not work!</span></a></p></li>
-<li><p><a class="reference internal" href="#faq-troubleshooting-gecko"><span class="std std-ref">Gecko-based browsers (e.g. Firefox) show non-rendered HTML entities when browsing XML documenting files!</span></a></p></li>
+<li><p><a class="reference internal" href="#faq-troubleshooting-gecko"><span class="std std-ref">Gecko-based browsers (e.g., Firefox) show non-rendered HTML entities when browsing XML documenting files!</span></a></p></li>
 <li><p><a class="reference internal" href="#faq-troubleshooting-warnings"><span class="std std-ref">Compiling a source file results in errors or warnings but the Logtalk compiler reports a successful compilation with zero errors and zero warnings!</span></a></p></li>
 </ul>
 <section id="using-compiler-options-on-calls-to-the-logtalk-compiling-and-loading-predicates-does-not-work">
@@ -144,13 +144,13 @@ The solution is to edit the loader file and add the compiler options to
 the calls that compile/load the individual files.</p>
 </section>
 <section id="gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files">
-<span id="faq-troubleshooting-gecko"></span><h2>Gecko-based browsers (e.g. Firefox) show non-rendered HTML entities when browsing XML documenting files!<a class="headerlink" href="#gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files" title="Link to this heading"></a></h2>
-<p>Using Gecko-based browsers (e.g. Firefox) show non-rendered HTML
-entities (e.g. <code class="docutils literal notranslate"><span class="pre">&amp;ndash;</span></code>) when browsing XML documenting files after
+<span id="faq-troubleshooting-gecko"></span><h2>Gecko-based browsers (e.g., Firefox) show non-rendered HTML entities when browsing XML documenting files!<a class="headerlink" href="#gecko-based-browsers-e-g-firefox-show-non-rendered-html-entities-when-browsing-xml-documenting-files" title="Link to this heading"></a></h2>
+<p>Using Gecko-based browsers (e.g., Firefox) show non-rendered HTML
+entities (e.g., <code class="docutils literal notranslate"><span class="pre">&amp;ndash;</span></code>) when browsing XML documenting files after
 running the <code class="docutils literal notranslate"><span class="pre">lgt2xml</span></code> shell script in the directory containing the
 XML documenting files. This is a consequence of the lack of support
 for the <code class="docutils literal notranslate"><span class="pre">disable-output-escaping</span></code> attribute in the browser XSLT
-processor. The workaround is to use another browser (e.g. Safari or
+processor. The workaround is to use another browser (e.g., Safari or
 Opera) or to use instead the <code class="docutils literal notranslate"><span class="pre">lgt2html</span></code> shell script in the
 directory containing the XML documenting files to convert them to
 (X)HTML files for browsing.</p>

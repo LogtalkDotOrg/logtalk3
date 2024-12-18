@@ -181,10 +181,10 @@
 also terms representing common data structures such as lists and pairs.</p>
 <p>It also includes a user-extensible <code class="docutils literal notranslate"><span class="pre">type</span></code> object defining type
 checking predicates over common Logtalk and Prolog term types. The types
-define a hierarchy with the Prolog type <code class="docutils literal notranslate"><span class="pre">term</span></code> at the root (i.e.
+define a hierarchy with the Prolog type <code class="docutils literal notranslate"><span class="pre">term</span></code> at the root (i.e.,
 type-checking a predicate argument of type <code class="docutils literal notranslate"><span class="pre">term</span></code> trivially succeeds).
 Some types are only meaningful for backend Prolog systems supporting
-non-universal features (e.g. <code class="docutils literal notranslate"><span class="pre">cyclic</span></code> or <code class="docutils literal notranslate"><span class="pre">char(CharSet)</span></code> with a
+non-universal features (e.g., <code class="docutils literal notranslate"><span class="pre">cyclic</span></code> or <code class="docutils literal notranslate"><span class="pre">char(CharSet)</span></code> with a
 Unicode character set). See the API documentation for a full list of the
 types defined by default.</p>
 <section id="api-documentation">
@@ -260,7 +260,7 @@ type<span class="o">::</span>check(age, <span class="nv">Term</span>) <span clas
 spurious choice-points for these predicates. The unit tests of the
 <code class="docutils literal notranslate"><span class="pre">types</span></code> library perform this check for pre-defined and loaded
 user-defined ground types.</p>
-<p>When defining a meta-type (i.e. a type with arguments that are also
+<p>When defining a meta-type (i.e., a type with arguments that are also
 types), add also a clause for the <code class="docutils literal notranslate"><span class="pre">type::meta_type/3</span></code> multifile
 predicate. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(type<span class="o">::</span>meta_type<span class="o">/</span><span class="m">3</span>).

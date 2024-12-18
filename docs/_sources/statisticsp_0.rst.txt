@@ -272,7 +272,7 @@ Returns the list of modes of a list of numbers in ascending order. Fails if the 
 ``average_deviation/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Calculates the average absolute deviation of a list of numbers given a central tendency (e.g. mean, median, or mode). Fails if the list is empty.
+Calculates the average absolute deviation of a list of numbers given a central tendency (e.g., mean, median, or mode). Fails if the list is empty.
 
 | **Compilation flags:**
 |    ``static``

@@ -80,7 +80,7 @@ This will install Logtalk into the `$HOME/share` and `$HOME/bin` directories
 If you're using **Windows**, you can simply use the provided installer (which
 supports both admin and non-admin users) to perform a full installation.
 The Windows installer is built using Inno Setup, which is freely available.
-If you need to customize the installer (e.g. to recognize Prolog compilers
+If you need to customize the installer (e.g., to recognize Prolog compilers
 installed in non-standard locations), edit the Inno Setup script found on
 the [scripts/windows](scripts/windows) directory and regenerate the installer.
 
@@ -227,7 +227,7 @@ End-user setup
 
 Skip this step if you have set both Logtalk environment variables
 (`LOGTALKHOME` and `LOGTALKUSER`) to point to the same directory
-(e.g. when using a git repo clone for both).
+(e.g., when using a git repo clone for both).
 
 Each user must make a local copy of the Logtalk user-modifiable files (examples,
 libraries, tools, and other supporting files) in his/her home directory. These

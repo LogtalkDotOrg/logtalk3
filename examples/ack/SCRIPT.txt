@@ -25,7 +25,7 @@ ________________________________________________________________________
 
 
 % some example queries for backend Prolog compilers implementing the 
-% time/1 timing predicate (e.g. SWI-Prolog or YAP; the adapter files
+% time/1 timing predicate (e.g., SWI-Prolog or YAP; the adapter files
 % for these two systems ensure that a ::/2 goal in the argument of the
 % time/1 predicate is compiled prior to calling it):
 

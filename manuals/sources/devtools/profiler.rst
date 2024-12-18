@@ -41,9 +41,9 @@ Currently, this tool supports the profilers provided with SICStus Prolog
 Logtalk also supports the YAP tick profiler (using the latest YAP
 development version) and the SWI-Prolog XPCE profiler. When using the
 XPCE profiler, you can avoid profiling the Logtalk compiler (which is
-invoked e.g. when you use the ``(::)/2`` message-sending operator at the
-top-level interpreter) by compiling your code with the ``optimize`` flag
-turned on:
+invoked, e.g., when you use the ``(::)/2`` message-sending operator at
+the top-level interpreter) by compiling your code with the ``optimize``
+flag turned on:
 
 ::
 
@@ -83,8 +83,8 @@ the caller predicates.
 Compiling source code for profiling
 -----------------------------------
 
-In order to get user-level object and predicate names instead of
-compiler generated internal names when using the SWI-Prolog and YAP
+To get the user-level object and predicate names instead of the
+compiler-generated internal names when using the SWI-Prolog and YAP
 profilers, you must set ``code_prefix`` flag to a character other than
 the default ``$`` before compiling your source code. For example:
 

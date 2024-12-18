@@ -8,10 +8,10 @@ also terms representing common data structures such as lists and pairs.
 
 It also includes a user-extensible ``type`` object defining type
 checking predicates over common Logtalk and Prolog term types. The types
-define a hierarchy with the Prolog type ``term`` at the root (i.e.
+define a hierarchy with the Prolog type ``term`` at the root (i.e.,
 type-checking a predicate argument of type ``term`` trivially succeeds).
 Some types are only meaningful for backend Prolog systems supporting
-non-universal features (e.g. ``cyclic`` or ``char(CharSet)`` with a
+non-universal features (e.g., ``cyclic`` or ``char(CharSet)`` with a
 Unicode character set). See the API documentation for a full list of the
 types defined by default.
 
@@ -107,7 +107,7 @@ spurious choice-points for these predicates. The unit tests of the
 ``types`` library perform this check for pre-defined and loaded
 user-defined ground types.
 
-When defining a meta-type (i.e. a type with arguments that are also
+When defining a meta-type (i.e., a type with arguments that are also
 types), add also a clause for the ``type::meta_type/3`` multifile
 predicate. For example:
 

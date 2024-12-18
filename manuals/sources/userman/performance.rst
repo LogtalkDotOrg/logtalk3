@@ -120,7 +120,7 @@ the Prolog compiler documentation and adapter file notes for details.
    Some Prolog systems provide a ``time/1`` predicate that also reports
    the number of inferences. But the reported numbers are often misleading
    when the predicate is called from the top-level. Besides common top-level
-   bookkeeping operations (e.g. keeping track of goal history or applying
+   bookkeeping operations (e.g., keeping track of goal history or applying
    goal-expansion) that may influence the inference counting, the Logtalk
    runtime code for a ``(::)/2`` top-level goal is necessarily different
    from the code generated for a ``(::)/2`` goal from a compiled object, as

@@ -57,7 +57,7 @@ possible to define local :ref:`methods_coinductive_success_hook_1_2`
 predicates that are automatically called with the coinductive predicate
 term resulting from a successful unification with an ancestor goal as
 first argument. The second argument, when present, is the coinductive
-hypothesis (i.e. the ancestor goal) used. These hook predicates can
+hypothesis (i.e., the ancestor goal) used. These hook predicates can
 provide an alternative to the use of tabling when defining some
 coinductive predicates. There is no overhead when these hook predicates
 are not defined.

@@ -46,7 +46,7 @@ SWI-Prolog process, to the full path of the `../logtalk-3.86.0`
 directory.
 
 For easy access to the contents of the Logtalk installation folder
-(e.g. documentation or examples) you can create a symbolic link to the
+(e.g., documentation or examples) you can create a symbolic link to the
 `../logtalk-3.86.0` directory (in e.g. your home directory). Its full
 path can be easily found by using the query:
 

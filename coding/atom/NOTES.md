@@ -65,7 +65,7 @@ shell must be specified; e.g. the Bash shell provided by Git for Windows).
 
 By installing this package and the Logtalk ctags support (see `../ctags`), it
 is possible to use Atom's `Command Palette` to index and browse Logtalk code
-(e.g. to search and navigate to entity and predicate declarations).
+(e.g., to search and navigate to entity and predicate declarations).
 
 3. `atom-html-preview`
 

@@ -62,5 +62,5 @@ setting is a tab width equivalent to 4 spaces); you may set the tab width
 on the editor preference panel.
 
 Note that you will either need to choose a theme that highlights all relevant
-syntax elements (e.g. Vim dark) or play with the style settings for Logtalk
+syntax elements (e.g., Vim dark) or play with the style settings for Logtalk
 source files. The default theme doesn't highlight e.g. directives.

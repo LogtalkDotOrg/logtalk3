@@ -40,15 +40,15 @@ the calls that compile/load the individual files.
 
 .. _faq_troubleshooting_gecko:
 
-Gecko-based browsers (e.g. Firefox) show non-rendered HTML entities when browsing XML documenting files!
---------------------------------------------------------------------------------------------------------
+Gecko-based browsers (e.g., Firefox) show non-rendered HTML entities when browsing XML documenting files!
+---------------------------------------------------------------------------------------------------------
 
-Using Gecko-based browsers (e.g. Firefox) show non-rendered HTML
-entities (e.g. ``&ndash;``) when browsing XML documenting files after
+Using Gecko-based browsers (e.g., Firefox) show non-rendered HTML
+entities (e.g., ``&ndash;``) when browsing XML documenting files after
 running the ``lgt2xml`` shell script in the directory containing the
 XML documenting files. This is a consequence of the lack of support
 for the ``disable-output-escaping`` attribute in the browser XSLT
-processor. The workaround is to use another browser (e.g. Safari or
+processor. The workaround is to use another browser (e.g., Safari or
 Opera) or to use instead the ``lgt2html`` shell script in the
 directory containing the XML documenting files to convert them to
 (X)HTML files for browsing.

@@ -206,7 +206,7 @@ extending other objects) or class-based (with instantiation and
 specialization relations). An object may also implement one or more
 protocols or import one or more categories.
 
-A *stand-alone* object (i.e. an object with no extension, instantiation,
+A *stand-alone* object (i.e., an object with no extension, instantiation,
 or specialization relations with other objects) always plays the role of
 a prototype, that is, a self-describing object. If we want to use classes
 and instances, then we will need to specify at least one instantiation
@@ -757,7 +757,7 @@ The following object properties are supported:
    Source file begin and end lines of the object opening directive (if
    applicable)
 ``context_switching_calls``
-   The object supports context-switching calls (i.e. can be used with
+   The object supports context-switching calls (i.e., can be used with
    the :ref:`control_context_switch_2` debugging control construct)
 ``dynamic_declarations``
    The object supports dynamic declarations of predicates

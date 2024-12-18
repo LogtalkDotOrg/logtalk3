@@ -39,7 +39,7 @@ defined here can always be overridden by using the `logtalk_compile/2` and
 directive within the source files.
 
 Settings files are also a convenient place to define your own shortcuts
-for commonly used queries (e.g. load the debugger and start tracing).
+for commonly used queries (e.g., load the debugger and start tracing).
 
 
 Settings file locations
@@ -201,7 +201,7 @@ logtalk_library_path(my_project_examples, my_project('examples/')).
 
 %  To easily load multiple personal Logtalk projects without having to
 %  first define a library alias for each one, create a directory for
-%  storing their directories (e.g. `$HOME/my_logtalk_projects`), and
+%  storing their directories (e.g., `$HOME/my_logtalk_projects`), and
 %  edit and uncomment the following lines:
 
 /*
@@ -225,7 +225,7 @@ logtalk_library_path(Project, my_logtalk_projects(ProjectPath)) :-
 
 %  To easily load third-party libraries without having to first define
 %  a library alias for each one, create a directory for storing their
-%  directories (e.g. `$HOME/logtalk_third_party_libraries`), and edit
+%  directories (e.g., `$HOME/logtalk_third_party_libraries`), and edit
 %  and uncomment the following lines:
 
 /*

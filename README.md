@@ -187,7 +187,7 @@ Some files that are part of the Logtalk distribution are distributed using
 a different license and/or are copyrighted by a Logtalk contributor.
 
 Some examples are adaptations to Logtalk of Prolog examples found elsewhere
-(e.g. in manuals, tutorials, books, and public discussion forums). See those
+(e.g., in manuals, tutorials, books, and public discussion forums). See those
 examples documentation for information on the sources of the original code.
 
 Logtalk is a registered trademark of Paulo Moura.

@@ -50,19 +50,19 @@ There are also three variants of the ``all`` target: ``debug``,
 ``normal``, and ``optimal``. These targets change the compilation mode
 (by changing the default value of the :ref:`debug <flag_debug>` and
 :ref:`optimize <flag_optimize>` flags) and reload all affected files 
-(i.e. all files loaded without an explicit ``debug/1`` or ``optimize/1``
+(i.e., all files loaded without an explicit ``debug/1`` or ``optimize/1``
 compiler option).
 
 When using the ``all`` target, only source files loaded using the
 :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_load_2`
 predicates are reloaded. Non-modified files will also be reloaded when
 a previous attempt to load them failed or when there is a change to the
-compilation mode (i.e. when the files were loaded without explicit
+compilation mode (i.e., when the files were loaded without explicit
 :ref:`debug <flag_debug>` or :ref:`optimize <flag_optimize>` flags and
 the default values of these flags changed after loading; no check is made,
 however, for other implicit compiler flags that may have changed since
 loading). When an included file is modified, this target reloads its
-main file (i.e. the file that contains the :ref:`directives_include_1`
+main file (i.e., the file that contains the :ref:`directives_include_1`
 directive).
 
 When using the ``check`` or ``circular`` targets, be sure to compile

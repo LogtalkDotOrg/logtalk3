@@ -165,7 +165,7 @@ although sometimes handy, can inadvertently result in endless loops when
 those rules also attempt to expand library paths. When asserting facts
 for this predicate, use preferably <code class="docutils literal notranslate"><span class="pre">asserta/1</span></code> instead of <code class="docutils literal notranslate"><span class="pre">assertz/1</span></code>
 to help ensure the facts will be used before any rules.</p>
-<p>Relative paths (e.g. <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) should only be used within
+<p>Relative paths (e.g., <code class="docutils literal notranslate"><span class="pre">'../'</span></code> or <code class="docutils literal notranslate"><span class="pre">'./'</span></code>) should only be used within
 the <em>alias(path)</em>) notation so that library paths can always be expanded
 to absolute paths independently of the (usually unpredictable) current
 directory at the time the <code class="docutils literal notranslate"><span class="pre">logtalk_library_path/2</span></code> predicate is
@@ -184,7 +184,7 @@ initialization file (assumed to be loaded prior to Logtalk loading). This
 allows e.g. Logtalk to be installed in a read-only directory by setting
 this alias to the operating-system directory for temporary files. It also
 allows several Logtalk instances to run concurrently without conflict by
-using a unique scratch directory per instance (e.g. using a process ID or
+using a unique scratch directory per instance (e.g., using a process ID or
 a UUID generator).</p>
 <p>This predicate may be used to override the default location used by the
 <a class="reference internal" href="../../devtools/packs.html"><span class="doc">packs</span></a> tool to store registries and packs by defining

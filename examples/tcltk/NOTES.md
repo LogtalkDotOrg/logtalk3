@@ -23,7 +23,7 @@ This folder contains an example of using Tcl/Tk to provide a GUI for the
 was run to make the `logtalk` shell script available. If not, you will
 need to edit `query.tcl` file definition of the `load_cmd` variable and
 replace `logtalk` by the name of the integration script you want to use
-(e.g. `gplgt`) if using a POSIX system. On Windows, `logtalk` needs to
+(e.g., `gplgt`) if using a POSIX system. On Windows, `logtalk` needs to
 be replaced by the integration shortcut command for the backend you
 intend to use. That command must not use any environment variables and
 backslashes, spaces, and square brackets must be properly escaped as
