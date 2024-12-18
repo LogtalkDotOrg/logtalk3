@@ -3,10 +3,10 @@
 #############################################################################
 ## 
 ##   Distribution clean script for packaging
-##   Last updated on January 11, 2023
+##   Last updated on December 18, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
@@ -59,7 +59,6 @@ chmod a+x scripts/linux/*.sh
 chmod a+x scripts/macos/postflight
 chmod a+x scripts/macos/command_files/*.command
 chmod a+x tools/diagrams/*.sh
-chmod a+x tools/diagrams/*.js
 chmod a+x tools/lgtdoc/xml/*.sh
 chmod a-x tools/lgtdoc/xml/*.js
 chmod a+x tools/packs/*.sh
