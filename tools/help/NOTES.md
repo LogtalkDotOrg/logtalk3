@@ -114,7 +114,7 @@ If you're running Logtalk from a git clone of its repo, you will need to
 run the `scripts/update_html_docs.sh` or `scripts/update_html_docs.ps1`
 scripts to generate the APIs documentation `.info` file and also run the
 `manuals/sources/build_manuals.sh` or `manuals/sources/build_manuals.ps1`
-scripts to generated the Handbook `.info` file. In alternative, you can
+scripts to generate the Handbook `.info` file. Alternatively, you can
 download the `.info` files for the latest stable release from the Logtalk
 website and save them to the `docs` and `manuals` directories.
 
@@ -128,7 +128,7 @@ Or using Homebrew:
 
 	$ brew install texinfo
 
-On Linux systems, use the distribution own package manager to install the
+On Linux systems, use the distribution's own package manager to install the
 `texinfo` package. For example, in Ubuntu systems:
 
 	$ sudo apt install info
@@ -138,7 +138,7 @@ Known issues
 ------------
 
 The open commands used to open documentation URLs drops the fragment part, thus
-preventing navigating to the specified position on the documentation page.
+preventing navigation to the specified position on the documentation page.
 
 When browsing the Texinfo versions of the Handbook and the APIs documentation
 generated with a recent version of Sphinx and using a recent version of
@@ -146,5 +146,5 @@ Texinfo, the Texinfo search feature often displays the previous nodes of the
 searched nodes.
 
 ECLiPSe defines a `help` prefix operator that forces wrapping this atom between
-parenthesis when sending messages to the tool. E.g. use `(help)::help` instead
+parentheses when sending messages to the tool. E.g. use `(help)::help` instead
 of `help::help`.

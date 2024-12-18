@@ -153,7 +153,7 @@ respectively, entity and file diagrams.
 
 A utility object, `diagrams`, is provided for generating all supported
 diagrams in one step. This object provides an interface common to all
-diagrams but note that some predicates that generate diagrams only make
+diagrams, but note that some predicates that generate diagrams only make
 sense for some types of diagrams. For best results and fine-grained
 customization of each diagram, the individual diagram objects should
 be used with the intended set of options.
@@ -161,7 +161,7 @@ be used with the intended set of options.
 Graph elements
 --------------
 
-Limitations in both the graph languages and UML forces the invention of
+Limitations in both the graph languages and UML force the invention of
 a modeling language that can represent all kinds of Logtalk entities and
 entity relations. Currently we use the following Graphviz node shapes
 (libraries, entities, predicates, and files) and arrowheads (entity,
@@ -241,10 +241,10 @@ Supported graph languages
 -------------------------
 
 Currently only the DOT graph language provides support for all the features
-of the `diagrams` tool. The d2 graph language supports most but not all the
-features. There's also preliminary support for Mermaid (not loaded by default
-as its current version lacks several required features for parity with d2
-and Graphviz).
+of the `diagrams` tool. The d2 graph language supports most, but not all,
+of the features. There's also preliminary support for Mermaid (not loaded
+by default, as its current version lacks several required features for parity
+with d2 and Graphviz).
 
 The diagrams `.d2` and `.dot` files are created in the current directory by
 default. These files can be easily converted into a printable format such as
@@ -256,13 +256,13 @@ directory of `.d2` or `.dot` files to `.svg` files:
 
 The scripts assume that the d2 and Graphviz command-line executables are
 available from the system path. For Graphviz, the default is the `dot`
-executable but the scripts accept a command-line option to select in
+executable, but the scripts accept a command-line option to select in
 alternative the `circo`, `fdp`, or `neato` executables). For d2, the default
-layout engine is `elk` but the scripts accept a command-line option to select
+layout engine is `elk`, but the scripts accept a command-line option to select
 in alternative the `dagre` or `tala` layout engines.
 
-The recommended output format is SVG as it supports tooltips and URL links,
-which can be used for showing e.g. entity types, relation types, file paths,
+The recommended output format is SVG, as it supports tooltips and URL links,
+which can be used for showing, e.g., entity types, relation types, file paths,
 and for navigating to files and directories of files (libraries) or to API
 documentation. See the relevant diagram options below in order to take
 advantage of these features (see the discussion below on "linking diagrams").
@@ -280,7 +280,7 @@ executables may produce better results. For example:
 	fdp -Tsvg diagram.dot > diagram.svg
 	circo -Tsvg diagram.dot > diagram.svg
 
-It's also worth to experiment with different layouts to find the one that
+It's also worth experimenting with different layouts to find the one that
 produces the best results (see the `layout/1` option described below).
 
 When generating diagrams for multiple libraries or directories, it's possible
@@ -289,17 +289,17 @@ the `ccomps` command-line executable. For example:
 
 	ccomps -x -o subdiagram.dot diagram.dot
 
-For more information on the DOT language and related tools see:
+For more information on the DOT language and related tools, see:
 
 	http://www.graphviz.org/
 
 When using Windows, there are known issues with some Prolog compilers due
 to the internal representation of paths. If you encounter problems with a
-specific backend Prolog compiler, try if possible to use another supported
+specific backend Prolog compiler, try, if possible, to use another supported
 backend Prolog compiler when generating diagrams.
 
 For printing large diagrams, you will need to either use a tool to slice
-the diagram in page-sized pieces or, preferably, use software capable of
+the diagram into page-sized pieces or, preferably, use software capable of
 tiled printing (e.g., Adobe Reader). You can also hand-edit the generated
 `.dot` files and play with settings such as aspect ratio for fine-tuning
 the diagrams layout.
@@ -308,8 +308,8 @@ the diagrams layout.
 Customization
 -------------
 
-A set of options are available to specify the details to include in the
-generated diagrams. For entity diagrams the options are:
+A set of options is available to specify the details to include in the
+generated diagrams. For entity diagrams, the options are:
 
 - `layout(Layout)`  
 	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default is `bottom_to_top`)
@@ -398,7 +398,7 @@ In the particular case of cross-referencing diagrams, there are also the options
 - `predicate_url_target_format(Generator)`  
 	documentation final format generator (an atom; default is `sphinx`)
 
-For directory and file diagrams the options are:
+For directory and file diagrams, the options are:
 
 - `layout(Layout)`  
 	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default is `top_to_bottom`)
@@ -451,7 +451,7 @@ For directory and file diagrams the options are:
 - `zoom_url_suffix(Suffix)`  
 	extension for linked diagrams (an atom; default is `'.svg'`)
 
-For library diagrams the options are:
+For library diagrams, the options are:
 
 - `layout(Layout)`  
 	diagram layout (one of the atoms `{top_to_bottom,bottom_to_top,left_to_right,right_to_left}`; default is `top_to_bottom`)
@@ -514,7 +514,7 @@ or files. To confirm the exact default options used by each type of diagram,
 send the `default_options/1` message to the diagram object.
 
 Be sure to set the `source_data` flag `on` before compiling the libraries
-or files for which you want to generated diagrams.
+or files for which you want to generate diagrams.
 
 Support for displaying Prolog modules and Prolog module files in diagrams of
 Logtalk applications:
@@ -544,7 +544,7 @@ option allows (1) linking library diagrams to entity diagrams to predicate
 cross-referencing diagrams and (2) linking directory diagrams to file
 diagrams to entity diagrams to predicate cross-referencing diagrams. The
 sub-diagrams are automatically generated. For example, using the predicates
-that generate library diagrams will automatically also generate the entity
+that generate library diagrams will also automatically generate the entity
 and predicate cross-referencing diagrams.
 
 To generate local links for opening directories, files, and file locations
@@ -562,7 +562,7 @@ in selected text editors, set the URL code prefix:
 - IDEA: `url_prefixes('idea://open?file=', DocPrefix)`
 - PyCharm: `url_prefixes('pycharm://open?file=', DocPrefix)`
 
-In this case, the ``DocPrefix`` argument should be the path to directory
+In this case, the ``DocPrefix`` argument should be the path to the directory
 containing the HTML version of the application APIs.
 
 As most of the text editor URL scheme handlers require local links to use
@@ -577,8 +577,8 @@ option specifies local file prefixes that will be cut and replaced by the
 URL prefixes (which can be path prefix specific when addressing multiple
 code repositories). To generate local file system URLs, define the empty
 atom, `''`, as a prefix. As an example, consider the Logtalk library. Its
-source code is available from a GitHub repository and its documentation
-is published in the Logtalk website. The relevant URLs in this case are:
+source code is available from a GitHub repository, and its documentation
+is published on the Logtalk website. The relevant URLs in this case are:
 
 - https://github.com/LogtalkDotOrg/logtalk3/ (source code)
 - https://logtalk.org/library/ (API documentation)
@@ -609,7 +609,7 @@ directory (whose location is given by the `LOGTALKHOME` environment
 variable) or from the Logtalk user directory (whose location is given
 by the `LOGTALKUSER` environment variable). As we also don't want any
 local operating-system paths to be exposed in the diagram, we use the
-`omit_path_prefixes/1` option to suppress those path prefixes, Note
+`omit_path_prefixes/1` option to suppress those path prefixes. Note
 that all the paths and URLs must end with a slash for proper handling.
 The `git` library may be useful to retrieve the commit SHA1 from a
 local repo directory.
@@ -678,7 +678,7 @@ diagram (see the section above on supported graph languages for more details).
 
 When generating entity predicate call cross-reference diagrams, caller nodes
 are not created for auxiliary predicates. For example, if the `meta_compiler`
-library is used to optimize meta-predicates calls, the diagrams may show
+library is used to optimize meta-predicate calls, the diagrams may show
 predicates that are not apparently called by any other predicate when the
 callers are from the optimized meta-predicate goals (which are called via
 library generated auxiliary predicates). A workaround in this case would be
@@ -689,10 +689,10 @@ When generating diagrams in SVG format, a copy of the `diagrams.css` file
 must exist in any directory used for publishing diagrams using it. The
 `lgt2svg` scripts also take care of copying this file.
 
-The Graphviz command-line utilities, e.g. `dot`, are notorious for random
-crashes (segmentation faults usually), often requiring re-doing conversions
+The Graphviz command-line utilities, e.g., `dot`, are notorious for random
+crashes (segmentation faults usually), often requiring retrying conversions
 from `.dot` files to other formats. A possible workaround is to repeat the
-command until it completes without error. See for example the `lgt2svg.sh`
+command until it completes without error. See, for example, the `lgt2svg.sh`
 script.
 
 The conversion by the `d2` command-line executable of `.d2` files to `.svg`
@@ -701,6 +701,6 @@ layout engine. The `dagre` layout engine is much faster but doesn't support
 a node referencing itself (notably, a node representing a metaclass that
 instantiates itself).
 
-Using the default d2 layout engine (`elk`) works fine with graph with
+Using the default d2 layout engine (`elk`) works fine with graphs with
 a relatively small number of nodes and edges. When that's not the case,
 it's a good idea to experiment with other layout engines.

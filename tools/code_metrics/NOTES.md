@@ -74,7 +74,7 @@ Currently, the following metrics are provided:
 - Source code size (`size_metric`)
 - Halstead complexity (`halstead_metric` and `halstead_metric(Stroud)`)
 
-A helper object, `code_metrics`, is also provided allowing running all
+A helper object, `code_metrics`, is also provided, allowing running all
 loaded individual metrics. For code coverage metrics, see the `lgtunit`
 tool documentation.
 
@@ -83,17 +83,17 @@ Coupling metrics
 ----------------
 
 - Efferent coupling (`Ce`): Number of entities that an entity depends on.
-These include objects receiving messages from the entity plus the implemented
+These include objects receiving messages from the entity, plus the implemented
 protocols, imported categories, and extended/instantiated/specialized objects.
 
 - Afferent coupling (`Ca`): Number of entities that depend on an entity. For
-a protocol, the number of protocols that extend it plus the number of objects
+a protocol, the number of protocols that extend it, plus the number of objects
 and categories that implement it. For a category, the number of objects that
 import it. For an object, the number of categories and objects that send
 messages to it plus the number of objects that extend/instantiate/specialize
 it.
 
-- Instability: Computed as `Ce / (Ce + Ca)`. Measures the entity resilience
+- Instability: Computed as `Ce / (Ce + Ca)`. Measures an entity resilience
 to change. Ranging from 0.0 to 1.0, with 0.0 indicating a maximally stable
 entity and 1.0 indicating a maximally unstable entity. Ideally, an entity
 is either maximally stable or maximally unstable.
@@ -108,7 +108,7 @@ The dependencies count includes direct entity relations plus predicate calls
 or dynamic updates to predicates in external objects or categories.
 
 For more information on the interpretation of the coupling metric scores,
-see e.g. the original paper by Robert Martin:
+see, e.g., the original paper by Robert Martin:
 
 	@inproceedings{citeulike:1579528,
 		author = "Martin, Robert",
@@ -188,7 +188,7 @@ Cyclomatic complexity metric
 The cyclomatic complexity metric evaluates an entity code complexity by
 measuring the number of linearly independent paths through the code. In
 its current implementation, all defined predicates that are not called
-or updated are counted as graph connected components (the reasoning being
+or updated are counted as graph-connected components (the reasoning being
 that these predicates can be considered entry points). The implementation
 uses the same predicate abstraction as the UPN metric. The defined predicates
 include multifile predicate definitions contributed by the entity to other
@@ -227,7 +227,7 @@ or decision process.
 Excluding code from analysis
 ----------------------------
 
-A set of options are available to specify code that should be excluded when
+A set of options is available to specify code that should be excluded when
 applying code metrics:
 
 - `exclude_directories(Directories)`  
@@ -255,17 +255,15 @@ for the definition of metrics.
 Third-party tools
 -----------------
 
-`cloc` is an open-source command-line program that counts blank lines,
-comment lines, and lines of source code in many programming languages
-including Logtalk. Available at https://github.com/AlDanial/cloc
+The following open-source command-line programs can count blank lines,
+comment lines, and lines of source code in many programming languages,
+including Logtalk:
 
-`ohcount` is an open-source command-line program that counts blank lines,
-comment lines, and lines of source code in many programming languages
-including Logtalk. Available at https://github.com/blackducksoftware/ohcount
+- `cloc` - https://github.com/AlDanial/cloc
 
-`tokei` is an open-source command-line program that counts blank lines,
-comment lines, and lines of source code in many programming languages
-including Logtalk. Available at https://github.com/XAMPPRocky/tokei
+- `ohcount` - https://github.com/blackducksoftware/ohcount
+
+- `tokei` - https://github.com/XAMPPRocky/tokei
 
 
 Applying metrics to Prolog modules
@@ -307,4 +305,4 @@ library:
 
 With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog code
-of working when wrapped by an object.
+from working when wrapped by an object.

@@ -27,7 +27,7 @@ by the user to specify a sequence of goals and a sequence of shell commands
 that load the application and (re)generate its documentation.
 
 Doclet source files are preferably named `doclet.lgt` (or `doclet.logtalk`)
-and the doclet object are usually named after the application or library to be
+and the doclet objects are usually named after the application or library to be
 documented with a `_doclet` suffix. By using an `initialization/1` directive
 to automatically send the `update/0` message that generates the documentation
 upon doclet loading, we can abstract the name of the doclet object. The usual
@@ -35,7 +35,7 @@ query to load and run a doclet is therefore:
 
 	| ?- logtalk_load([doclet(loader), doclet]).
 
-For usage examples see the `sample_doclet.lgt`, `doclet1.lgt`,
+For usage examples, see the `sample_doclet.lgt`, `doclet1.lgt`,
 `zoom_doclet.lgt`, and `tools_doclet.lgt` source files.
 
 

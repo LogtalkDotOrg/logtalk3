@@ -144,7 +144,7 @@ extended by the user to specify a sequence of goals and a sequence of
 shell commands that load the application and (re)generate its
 documentation.</p>
 <p>Doclet source files are preferably named <code class="docutils literal notranslate"><span class="pre">doclet.lgt</span></code> (or
-<code class="docutils literal notranslate"><span class="pre">doclet.logtalk</span></code>) and the doclet object are usually named after the
+<code class="docutils literal notranslate"><span class="pre">doclet.logtalk</span></code>) and the doclet objects are usually named after the
 application or library to be documented with a <code class="docutils literal notranslate"><span class="pre">_doclet</span></code> suffix. By
 using an <code class="docutils literal notranslate"><span class="pre">initialization/1</span></code> directive to automatically send the
 <code class="docutils literal notranslate"><span class="pre">update/0</span></code> message that generates the documentation upon doclet
@@ -153,7 +153,7 @@ to load and run a doclet is therefore:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>([doclet(loader), doclet]).
 </pre></div>
 </div>
-<p>For usage examples see the <code class="docutils literal notranslate"><span class="pre">sample_doclet.lgt</span></code>, <code class="docutils literal notranslate"><span class="pre">doclet1.lgt</span></code>,
+<p>For usage examples, see the <code class="docutils literal notranslate"><span class="pre">sample_doclet.lgt</span></code>, <code class="docutils literal notranslate"><span class="pre">doclet1.lgt</span></code>,
 <code class="docutils literal notranslate"><span class="pre">zoom_doclet.lgt</span></code>, and <code class="docutils literal notranslate"><span class="pre">tools_doclet.lgt</span></code> source files.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>

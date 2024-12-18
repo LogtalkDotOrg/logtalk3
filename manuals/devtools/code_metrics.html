@@ -193,24 +193,24 @@ standard output. A second set of predicates computes and returns a score
 <li><p>Halstead complexity (<code class="docutils literal notranslate"><span class="pre">halstead_metric</span></code> and
 <code class="docutils literal notranslate"><span class="pre">halstead_metric(Stroud)</span></code>)</p></li>
 </ul>
-<p>A helper object, <code class="docutils literal notranslate"><span class="pre">code_metrics</span></code>, is also provided allowing running all
-loaded individual metrics. For code coverage metrics, see the
+<p>A helper object, <code class="docutils literal notranslate"><span class="pre">code_metrics</span></code>, is also provided, allowing running
+all loaded individual metrics. For code coverage metrics, see the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> tool documentation.</p>
 </section>
 <section id="coupling-metrics">
 <h2>Coupling metrics<a class="headerlink" href="#coupling-metrics" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Efferent coupling (<code class="docutils literal notranslate"><span class="pre">Ce</span></code>): Number of entities that an entity depends
-on. These include objects receiving messages from the entity plus the
+on. These include objects receiving messages from the entity, plus the
 implemented protocols, imported categories, and
 extended/instantiated/specialized objects.</p></li>
 <li><p>Afferent coupling (<code class="docutils literal notranslate"><span class="pre">Ca</span></code>): Number of entities that depend on an
-entity. For a protocol, the number of protocols that extend it plus
+entity. For a protocol, the number of protocols that extend it, plus
 the number of objects and categories that implement it. For a
 category, the number of objects that import it. For an object, the
 number of categories and objects that send messages to it plus the
 number of objects that extend/instantiate/specialize it.</p></li>
-<li><p>Instability: Computed as <code class="docutils literal notranslate"><span class="pre">Ce</span> <span class="pre">/</span> <span class="pre">(Ce</span> <span class="pre">+</span> <span class="pre">Ca)</span></code>. Measures the entity
+<li><p>Instability: Computed as <code class="docutils literal notranslate"><span class="pre">Ce</span> <span class="pre">/</span> <span class="pre">(Ce</span> <span class="pre">+</span> <span class="pre">Ca)</span></code>. Measures an entity
 resilience to change. Ranging from 0.0 to 1.0, with 0.0 indicating a
 maximally stable entity and 1.0 indicating a maximally unstable
 entity. Ideally, an entity is either maximally stable or maximally
@@ -225,7 +225,7 @@ fully concrete entity and 1.0 indicating a fully abstract entity.</p></li>
 calls or dynamic updates to predicates in external objects or
 categories.</p>
 <p>For more information on the interpretation of the coupling metric
-scores, see e.g. the original paper by Robert Martin:</p>
+scores, see, e.g., the original paper by Robert Martin:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">@</span>inproceedings<span class="k">{</span>citeulike<span class="o">:</span><span class="m">1579528</span>,
     author <span class="o">=</span> <span class="s">&quot;Martin, Robert&quot;</span>,
     booktitle <span class="o">=</span> <span class="s">&quot;Workshop Pragmatic and Theoretical Directions in Object-Oriented Software Metrics&quot;</span>,
@@ -302,7 +302,7 @@ other entities.</p>
 <p>The cyclomatic complexity metric evaluates an entity code complexity by
 measuring the number of linearly independent paths through the code. In
 its current implementation, all defined predicates that are not called
-or updated are counted as graph connected components (the reasoning
+or updated are counted as graph-connected components (the reasoning
 being that these predicates can be considered entry points). The
 implementation uses the same predicate abstraction as the UPN metric.
 The defined predicates include multifile predicate definitions
@@ -337,7 +337,7 @@ or decision process.</p>
 </section>
 <section id="excluding-code-from-analysis">
 <h2>Excluding code from analysis<a class="headerlink" href="#excluding-code-from-analysis" title="Link to this heading"></a></h2>
-<p>A set of options are available to specify code that should be excluded
+<p>A set of options is available to specify code that should be excluded
 when applying code metrics:</p>
 <ul>
 <li><div class="line-block">
@@ -375,17 +375,14 @@ predicates for the definition of metrics.</p>
 </section>
 <section id="third-party-tools">
 <h2>Third-party tools<a class="headerlink" href="#third-party-tools" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">cloc</span></code> is an open-source command-line program that counts blank lines,
-comment lines, and lines of source code in many programming languages
-including Logtalk. Available at <a class="reference external" href="https://github.com/AlDanial/cloc">https://github.com/AlDanial/cloc</a></p>
-<p><code class="docutils literal notranslate"><span class="pre">ohcount</span></code> is an open-source command-line program that counts blank
-lines, comment lines, and lines of source code in many programming
-languages including Logtalk. Available at
-<a class="reference external" href="https://github.com/blackducksoftware/ohcount">https://github.com/blackducksoftware/ohcount</a></p>
-<p><code class="docutils literal notranslate"><span class="pre">tokei</span></code> is an open-source command-line program that counts blank
-lines, comment lines, and lines of source code in many programming
-languages including Logtalk. Available at
-<a class="reference external" href="https://github.com/XAMPPRocky/tokei">https://github.com/XAMPPRocky/tokei</a></p>
+<p>The following open-source command-line programs can count blank lines,
+comment lines, and lines of source code in many programming languages,
+including Logtalk:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cloc</span></code> - <a class="reference external" href="https://github.com/AlDanial/cloc">https://github.com/AlDanial/cloc</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ohcount</span></code> - <a class="reference external" href="https://github.com/blackducksoftware/ohcount">https://github.com/blackducksoftware/ohcount</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tokei</span></code> - <a class="reference external" href="https://github.com/XAMPPRocky/tokei">https://github.com/XAMPPRocky/tokei</a></p></li>
+</ul>
 </section>
 <section id="applying-metrics-to-prolog-modules">
 <h2>Applying metrics to Prolog modules<a class="headerlink" href="#applying-metrics-to-prolog-modules" title="Link to this heading"></a></h2>
@@ -424,7 +421,7 @@ the Prolog file and then load it in debug mode:</p>
 </div>
 <p>With either wrapping solution, pay special attention to any compilation
 warnings that may signal issues that could prevent the plain Prolog code
-of working when wrapped by an object.</p>
+from working when wrapped by an object.</p>
 </section>
 </section>
 

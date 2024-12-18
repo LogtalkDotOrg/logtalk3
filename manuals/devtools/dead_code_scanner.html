@@ -147,9 +147,9 @@
 modules compiled as objects. Predicates (and non-terminals) are
 classified as dead code when:</p>
 <ul class="simple">
-<li><p>There is no scope directive for them and they are not called, directly
-or indirectly, by any predicate with a (local or inherited) scope
-directive.</p></li>
+<li><p>There is no scope directive for them, and they are not called,
+directly or indirectly, by any predicate with a (local or inherited)
+scope directive.</p></li>
 <li><p>They are listed in <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> and <code class="docutils literal notranslate"><span class="pre">use_module/2</span></code> directives but not
 called.</p></li>
 </ul>
@@ -167,8 +167,8 @@ operating-system.</p>
 predicates for finding dead code in entities, libraries, and
 directories. The source file <code class="docutils literal notranslate"><span class="pre">dead_code_scanner_messages.lgt</span></code> defines
 the default translations for the messages printed when scanning for dead
-code. These messages can be intercepted to customize the output, e.g. to
-make it less verbose, or for integration with e.g. GUI IDEs and
+code. These messages can be intercepted to customize the output, e.g.,
+to make it less verbose or for integration with, e.g., GUI IDEs and
 continuous integration servers.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
@@ -225,7 +225,7 @@ directory.</p>
 </section>
 <section id="excluding-code-from-analysis">
 <h2>Excluding code from analysis<a class="headerlink" href="#excluding-code-from-analysis" title="Link to this heading"></a></h2>
-<p>A set of options are available to specify code that should be excluded
+<p>A set of options is available to specify code that should be excluded
 when looking for unused predicates (and non-terminals):</p>
 <ul>
 <li><div class="line-block">

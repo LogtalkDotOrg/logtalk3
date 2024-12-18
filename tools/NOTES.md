@@ -54,17 +54,17 @@ To load the main developer tools, use the following goal:
 
 	| ?- logtalk_load(tools(loader)).
 
-The `ports_profiler` tool is not loaded by default, however, as it conflicts
+The `ports_profiler` tool is not loaded by default; however, as it conflicts
 with the `debugger` tool as both provide a debug handler that must be unique
 in a running session.
 
-The `profiler` tool is also not loaded by default as it provides integration
+The `profiler` tool is also not loaded by default, as it provides integration
 with selected backend Prolog compiler profilers that are not portable.
 
-The `tutor` tool is also not loaded by default given its useful mainly for
+The `tutor` tool is also not loaded by default, given its usefulness mainly for
 new users that need help understanding compiler warning and error messages.
 
-The `wrapper` tool is also not loaded by default given its specialized purpose
+The `wrapper` tool is also not loaded by default, given its specialized purpose
 and beta status.
 
 To load a specific tool, either change your Prolog working directory to the
@@ -79,7 +79,7 @@ Tools documentation
 -------------------
 
 Specific notes about each tool can be found in the corresponding `NOTES.md`
-files. HTML documentation for each tool API can be found on the `docs`
+files. HTML documentation for each tool API can be found in the `docs`
 directory (open the `../docs/index.html` file with your web browser). The
 documentation for these tools can be regenerated using the shell scripts
 `../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.

@@ -282,15 +282,15 @@ useful, notably when combined with the <em>zoom</em> option to link to,
 respectively, entity and file diagrams.</p>
 <p>A utility object, <code class="docutils literal notranslate"><span class="pre">diagrams</span></code>, is provided for generating all supported
 diagrams in one step. This object provides an interface common to all
-diagrams but note that some predicates that generate diagrams only make
+diagrams, but note that some predicates that generate diagrams only make
 sense for some types of diagrams. For best results and fine-grained
 customization of each diagram, the individual diagram objects should be
 used with the intended set of options.</p>
 </section>
 <section id="graph-elements">
 <h2>Graph elements<a class="headerlink" href="#graph-elements" title="Link to this heading"></a></h2>
-<p>Limitations in both the graph languages and UML forces the invention of
-a modeling language that can represent all kinds of Logtalk entities and
+<p>Limitations in both the graph languages and UML force the invention of a
+modeling language that can represent all kinds of Logtalk entities and
 entity relations. Currently we use the following Graphviz node shapes
 (libraries, entities, predicates, and files) and arrowheads (entity,
 predicate, and file relations):</p>
@@ -437,10 +437,10 @@ options.</p>
 <section id="supported-graph-languages">
 <h2>Supported graph languages<a class="headerlink" href="#supported-graph-languages" title="Link to this heading"></a></h2>
 <p>Currently only the DOT graph language provides support for all the
-features of the <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool. The d2 graph language supports most
-but not all the features. There’s also preliminary support for Mermaid
-(not loaded by default as its current version lacks several required
-features for parity with d2 and Graphviz).</p>
+features of the <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool. The d2 graph language supports most,
+but not all, of the features. There’s also preliminary support for
+Mermaid (not loaded by default, as its current version lacks several
+required features for parity with d2 and Graphviz).</p>
 <p>The diagrams <code class="docutils literal notranslate"><span class="pre">.d2</span></code> and <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files are created in the current
 directory by default. These files can be easily converted into a
 printable format such as SVG, PDF, or Postscript. Sample helper scripts
@@ -452,14 +452,14 @@ are provided for converting a directory of <code class="docutils literal notrans
 </ul>
 <p>The scripts assume that the d2 and Graphviz command-line executables are
 available from the system path. For Graphviz, the default is the <code class="docutils literal notranslate"><span class="pre">dot</span></code>
-executable but the scripts accept a command-line option to select in
+executable, but the scripts accept a command-line option to select in
 alternative the <code class="docutils literal notranslate"><span class="pre">circo</span></code>, <code class="docutils literal notranslate"><span class="pre">fdp</span></code>, or <code class="docutils literal notranslate"><span class="pre">neato</span></code> executables). For d2,
-the default layout engine is <code class="docutils literal notranslate"><span class="pre">elk</span></code> but the scripts accept a
+the default layout engine is <code class="docutils literal notranslate"><span class="pre">elk</span></code>, but the scripts accept a
 command-line option to select in alternative the <code class="docutils literal notranslate"><span class="pre">dagre</span></code> or <code class="docutils literal notranslate"><span class="pre">tala</span></code>
 layout engines.</p>
-<p>The recommended output format is SVG as it supports tooltips and URL
-links, which can be used for showing e.g. entity types, relation types,
-file paths, and for navigating to files and directories of files
+<p>The recommended output format is SVG, as it supports tooltips and URL
+links, which can be used for showing, e.g., entity types, relation
+types, file paths, and for navigating to files and directories of files
 (libraries) or to API documentation. See the relevant diagram options
 below in order to take advantage of these features (see the discussion
 below on “linking diagrams”).</p>
@@ -476,7 +476,7 @@ command-line executables may produce better results. For example:</p>
 circo <span class="o">-</span><span class="nv">Tsvg</span> diagram.dot <span class="o">&gt;</span> diagram.svg
 </pre></div>
 </div>
-<p>It’s also worth to experiment with different layouts to find the one
+<p>It’s also worth experimenting with different layouts to find the one
 that produces the best results (see the <code class="docutils literal notranslate"><span class="pre">layout/1</span></code> option described
 below).</p>
 <p>When generating diagrams for multiple libraries or directories, it’s
@@ -486,24 +486,24 @@ example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>ccomps <span class="o">-</span>x <span class="o">-</span>o subdiagram.dot diagram.dot
 </pre></div>
 </div>
-<p>For more information on the DOT language and related tools see:</p>
+<p>For more information on the DOT language and related tools, see:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>http<span class="o">://</span>www.graphviz.org<span class="o">/</span>
 </pre></div>
 </div>
 <p>When using Windows, there are known issues with some Prolog compilers
 due to the internal representation of paths. If you encounter problems
-with a specific backend Prolog compiler, try if possible to use another
-supported backend Prolog compiler when generating diagrams.</p>
+with a specific backend Prolog compiler, try, if possible, to use
+another supported backend Prolog compiler when generating diagrams.</p>
 <p>For printing large diagrams, you will need to either use a tool to slice
-the diagram in page-sized pieces or, preferably, use software capable of
-tiled printing (e.g., Adobe Reader). You can also hand-edit the
+the diagram into page-sized pieces or, preferably, use software capable
+of tiled printing (e.g., Adobe Reader). You can also hand-edit the
 generated <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files and play with settings such as aspect ratio for
 fine-tuning the diagrams layout.</p>
 </section>
 <section id="customization">
 <h2>Customization<a class="headerlink" href="#customization" title="Link to this heading"></a></h2>
-<p>A set of options are available to specify the details to include in the
-generated diagrams. For entity diagrams the options are:</p>
+<p>A set of options is available to specify the details to include in the
+generated diagrams. For entity diagrams, the options are:</p>
 <ul>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code></div>
@@ -682,7 +682,7 @@ using this option, the <code class="docutils literal notranslate"><span class="p
 </div>
 </li>
 </ul>
-<p>For directory and file diagrams the options are:</p>
+<p>For directory and file diagrams, the options are:</p>
 <ul>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code></div>
@@ -787,7 +787,7 @@ entity nodes (<code class="docutils literal notranslate"><span class="pre">true<
 </div>
 </li>
 </ul>
-<p>For library diagrams the options are:</p>
+<p>For library diagrams, the options are:</p>
 <ul>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">layout(Layout)</span></code></div>
@@ -902,7 +902,7 @@ reference external libraries or files. To confirm the exact default
 options used by each type of diagram, send the <code class="docutils literal notranslate"><span class="pre">default_options/1</span></code>
 message to the diagram object.</p>
 <p>Be sure to set the <code class="docutils literal notranslate"><span class="pre">source_data</span></code> flag <code class="docutils literal notranslate"><span class="pre">on</span></code> before compiling the
-libraries or files for which you want to generated diagrams.</p>
+libraries or files for which you want to generate diagrams.</p>
 <p>Support for displaying Prolog modules and Prolog module files in
 diagrams of Logtalk applications:</p>
 <ul>
@@ -938,8 +938,9 @@ This option allows (1) linking library diagrams to entity diagrams to
 predicate cross-referencing diagrams and (2) linking directory diagrams
 to file diagrams to entity diagrams to predicate cross-referencing
 diagrams. The sub-diagrams are automatically generated. For example,
-using the predicates that generate library diagrams will automatically
-also generate the entity and predicate cross-referencing diagrams.</p>
+using the predicates that generate library diagrams will also
+automatically generate the entity and predicate cross-referencing
+diagrams.</p>
 <p>To generate local links for opening directories, files, and file
 locations in selected text editors, set the URL code prefix:</p>
 <ul class="simple">
@@ -955,8 +956,8 @@ locations in selected text editors, set the URL code prefix:</p>
 <li><p>IDEA: <code class="docutils literal notranslate"><span class="pre">url_prefixes('idea://open?file=',</span> <span class="pre">DocPrefix)</span></code></p></li>
 <li><p>PyCharm: <code class="docutils literal notranslate"><span class="pre">url_prefixes('pycharm://open?file=',</span> <span class="pre">DocPrefix)</span></code></p></li>
 </ul>
-<p>In this case, the <code class="docutils literal notranslate"><span class="pre">DocPrefix</span></code> argument should be the path to directory
-containing the HTML version of the application APIs.</p>
+<p>In this case, the <code class="docutils literal notranslate"><span class="pre">DocPrefix</span></code> argument should be the path to the
+directory containing the HTML version of the application APIs.</p>
 <p>As most of the text editor URL scheme handlers require local links to
 use absolute paths, the <code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code> option is ignored. Note
 that local links require text editor support for URL schemes that can
@@ -969,7 +970,7 @@ be cut and replaced by the URL prefixes (which can be path prefix
 specific when addressing multiple code repositories). To generate local
 file system URLs, define the empty atom, <code class="docutils literal notranslate"><span class="pre">''</span></code>, as a prefix. As an
 example, consider the Logtalk library. Its source code is available from
-a GitHub repository and its documentation is published in the Logtalk
+a GitHub repository, and its documentation is published on the Logtalk
 website. The relevant URLs in this case are:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/LogtalkDotOrg/logtalk3/">https://github.com/LogtalkDotOrg/logtalk3/</a> (source code)</p></li>
@@ -1001,7 +1002,7 @@ directory (whose location is given by the <code class="docutils literal notransl
 variable) or from the Logtalk user directory (whose location is given by
 the <code class="docutils literal notranslate"><span class="pre">LOGTALKUSER</span></code> environment variable). As we also don’t want any
 local operating-system paths to be exposed in the diagram, we use the
-<code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code> option to suppress those path prefixes, Note
+<code class="docutils literal notranslate"><span class="pre">omit_path_prefixes/1</span></code> option to suppress those path prefixes. Note
 that all the paths and URLs must end with a slash for proper handling.
 The <code class="docutils literal notranslate"><span class="pre">git</span></code> library may be useful to retrieve the commit SHA1 from a
 local repo directory.</p>
@@ -1063,7 +1064,7 @@ depending on the type of the diagram (see the section above on supported
 graph languages for more details).</p>
 <p>When generating entity predicate call cross-reference diagrams, caller
 nodes are not created for auxiliary predicates. For example, if the
-<code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code> library is used to optimize meta-predicates calls, the
+<code class="docutils literal notranslate"><span class="pre">meta_compiler</span></code> library is used to optimize meta-predicate calls, the
 diagrams may show predicates that are not apparently called by any other
 predicate when the callers are from the optimized meta-predicate goals
 (which are called via library generated auxiliary predicates). A
@@ -1073,17 +1074,17 @@ the diagrams.</p>
 <p>When generating diagrams in SVG format, a copy of the <code class="docutils literal notranslate"><span class="pre">diagrams.css</span></code>
 file must exist in any directory used for publishing diagrams using it.
 The <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> scripts also take care of copying this file.</p>
-<p>The Graphviz command-line utilities, e.g. <code class="docutils literal notranslate"><span class="pre">dot</span></code>, are notorious for
-random crashes (segmentation faults usually), often requiring re-doing
+<p>The Graphviz command-line utilities, e.g., <code class="docutils literal notranslate"><span class="pre">dot</span></code>, are notorious for
+random crashes (segmentation faults usually), often requiring retrying
 conversions from <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files to other formats. A possible workaround
-is to repeat the command until it completes without error. See for
-example the <code class="docutils literal notranslate"><span class="pre">lgt2svg.sh</span></code> script.</p>
+is to repeat the command until it completes without error. See, for
+example, the <code class="docutils literal notranslate"><span class="pre">lgt2svg.sh</span></code> script.</p>
 <p>The conversion by the <code class="docutils literal notranslate"><span class="pre">d2</span></code> command-line executable of <code class="docutils literal notranslate"><span class="pre">.d2</span></code> files to
 <code class="docutils literal notranslate"><span class="pre">.svg</span></code> files can be quite slow (as of its 0.6.8 version) with the
 default <code class="docutils literal notranslate"><span class="pre">elk</span></code> layout engine. The <code class="docutils literal notranslate"><span class="pre">dagre</span></code> layout engine is much
 faster but doesn’t support a node referencing itself (notably, a node
 representing a metaclass that instantiates itself).</p>
-<p>Using the default d2 layout engine (<code class="docutils literal notranslate"><span class="pre">elk</span></code>) works fine with graph with
+<p>Using the default d2 layout engine (<code class="docutils literal notranslate"><span class="pre">elk</span></code>) works fine with graphs with
 a relatively small number of nodes and edges. When that’s not the case,
 it’s a good idea to experiment with other layout engines.</p>
 </section>

@@ -223,8 +223,8 @@ run the <code class="docutils literal notranslate"><span class="pre">scripts/upd
 <code class="docutils literal notranslate"><span class="pre">scripts/update_html_docs.ps1</span></code> scripts to generate the APIs
 documentation <code class="docutils literal notranslate"><span class="pre">.info</span></code> file and also run the
 <code class="docutils literal notranslate"><span class="pre">manuals/sources/build_manuals.sh</span></code> or
-<code class="docutils literal notranslate"><span class="pre">manuals/sources/build_manuals.ps1</span></code> scripts to generated the Handbook
-<code class="docutils literal notranslate"><span class="pre">.info</span></code> file. In alternative, you can download the <code class="docutils literal notranslate"><span class="pre">.info</span></code> files for
+<code class="docutils literal notranslate"><span class="pre">manuals/sources/build_manuals.ps1</span></code> scripts to generate the Handbook
+<code class="docutils literal notranslate"><span class="pre">.info</span></code> file. Alternatively, you can download the <code class="docutils literal notranslate"><span class="pre">.info</span></code> files for
 the latest stable release from the Logtalk website and save them to the
 <code class="docutils literal notranslate"><span class="pre">docs</span></code> and <code class="docutils literal notranslate"><span class="pre">manuals</span></code> directories.</p>
 <p>The required <code class="docutils literal notranslate"><span class="pre">info</span></code> command is provided by the third-party <code class="docutils literal notranslate"><span class="pre">texinfo</span></code>
@@ -237,7 +237,7 @@ installed with either MacPorts:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install texinfo
 </pre></div>
 </div>
-<p>On Linux systems, use the distribution own package manager to install
+<p>On Linux systems, use the distribution’s own package manager to install
 the <code class="docutils literal notranslate"><span class="pre">texinfo</span></code> package. For example, in Ubuntu systems:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install info
 </pre></div>
@@ -246,14 +246,14 @@ the <code class="docutils literal notranslate"><span class="pre">texinfo</span><
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
 <p>The open commands used to open documentation URLs drops the fragment
-part, thus preventing navigating to the specified position on the
+part, thus preventing navigation to the specified position on the
 documentation page.</p>
 <p>When browsing the Texinfo versions of the Handbook and the APIs
 documentation generated with a recent version of Sphinx and using a
 recent version of Texinfo, the Texinfo search feature often displays the
 previous nodes of the searched nodes.</p>
 <p>ECLiPSe defines a <code class="docutils literal notranslate"><span class="pre">help</span></code> prefix operator that forces wrapping this
-atom between parenthesis when sending messages to the tool. E.g. use
+atom between parentheses when sending messages to the tool. E.g. use
 <code class="docutils literal notranslate"><span class="pre">(help)::help</span></code> instead of <code class="docutils literal notranslate"><span class="pre">help::help</span></code>.</p>
 </section>
 </section>

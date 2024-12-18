@@ -7,9 +7,9 @@ This tool detects *likely* dead code in Logtalk entities and in Prolog
 modules compiled as objects. Predicates (and non-terminals) are
 classified as dead code when:
 
-- There is no scope directive for them and they are not called, directly
-  or indirectly, by any predicate with a (local or inherited) scope
-  directive.
+- There is no scope directive for them, and they are not called,
+  directly or indirectly, by any predicate with a (local or inherited)
+  scope directive.
 - They are listed in ``uses/2`` and ``use_module/2`` directives but not
   called.
 
@@ -29,8 +29,8 @@ The ``dead_code_scanner.lgt`` source file implements the scanning
 predicates for finding dead code in entities, libraries, and
 directories. The source file ``dead_code_scanner_messages.lgt`` defines
 the default translations for the messages printed when scanning for dead
-code. These messages can be intercepted to customize the output, e.g. to
-make it less verbose, or for integration with e.g. GUI IDEs and
+code. These messages can be intercepted to customize the output, e.g.,
+to make it less verbose or for integration with, e.g., GUI IDEs and
 continuous integration servers.
 
 API documentation
@@ -102,7 +102,7 @@ directory.
 Excluding code from analysis
 ----------------------------
 
-A set of options are available to specify code that should be excluded
+A set of options is available to specify code that should be excluded
 when looking for unused predicates (and non-terminals):
 
 - | ``exclude_directories(Directories)``

@@ -102,7 +102,7 @@ Or alternatively:
 
 	| ?- gtrace, foo::bar.
 
-You can also use the `gspy/1` predicate to spy a Logtalk predicate specified
+You can also use the `gspy/1` predicate to spy on a Logtalk predicate specified
 as `Entity::Functor/Arity` when using the graphical tracer. When using this
 tool, internal Logtalk compiler/runtime predicates and compiled predicates
 that resulted from the term-expansion mechanism may be exposed in some cases.
