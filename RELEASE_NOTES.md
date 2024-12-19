@@ -22,6 +22,11 @@ RELEASE NOTES
 =============
 
 
+3.87.0 - January ??, 2024
+=========================
+
+
+
 3.86.0 - December 18, 2024
 ==========================
 
@@ -119,15 +124,15 @@ Tarau.
 
 * UPDATED: The `assumptions` example with another individual example.
 
-Installers and installation scripts
------------------------------------
-
 Tests
 -----
 
 * ADDED: Additional tests for the left-recursion linter warning.
 
 * ADDED: Additional tests for the Prolog standard `round/1` evaluable.
+
+Installers and installation scripts
+-----------------------------------
 
 * IMPROVED: The manual installation script and MacPorts Portfile instructions
 for defining the `LOGTALKHOME` and `LOGTALKUSER` environment variables.
