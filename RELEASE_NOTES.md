@@ -36,6 +36,9 @@ IDEs, text editors, and syntax highlighters support
 * FIXED: VSCode support for finding predicate implementations when the
 definition is found in an included file.
 
+* FIXED: VSCode support for finding predicate references when the call
+is found in an included file.
+
 
 3.86.0 - December 18, 2024
 ==========================

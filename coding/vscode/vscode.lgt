@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:62:1,
+		version is 0:62:2,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-12-19,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -831,7 +831,10 @@
 				callable(Object),
 				memberchk(line_count(CallerLine), CallsProperties),
 				find_declaration_(Object::Name/Arity, Caller, CallerLine, File, Line),
-				entity_property(Caller, _, file(CallerFile))
+				(	member(include(CallerFile), CallsProperties) ->
+					true
+				;	entity_property(Caller, _, file(CallerFile))
+				)
 			),
 			References0
 		),
@@ -840,7 +843,10 @@
 			(	entity_property(Caller, _, calls(::Name/Arity, CallsProperties)),
 				memberchk(line_count(CallerLine), CallsProperties),
 				find_declaration_(::Name/Arity, Caller, CallerLine, File, Line),
-				entity_property(Caller, _, file(CallerFile))
+				(	member(include(CallerFile), CallsProperties) ->
+					true
+				;	entity_property(Caller, _, file(CallerFile))
+				)
 			),
 			References1,
 			References0
@@ -850,15 +856,22 @@
 			(	entity_property(Caller, _, calls(^^Name/Arity, CallsProperties)),
 				memberchk(line_count(CallerLine), CallsProperties),
 				find_declaration_(^^Name/Arity, Caller, CallerLine, File, Line),
-				entity_property(Caller, _, file(CallerFile))
+				(	member(include(CallerFile), CallsProperties) ->
+					true
+				;	entity_property(Caller, _, file(CallerFile))
+				)
 			),
 			References2,
 			References1
 		),
 		findall(
-			File-CallerLine,
+			CallerFile-CallerLine,
 			(	entity_property(Entity, _, calls(Name/Arity, CallsProperties)),
-				memberchk(line_count(CallerLine), CallsProperties)
+				memberchk(line_count(CallerLine), CallsProperties),
+				(	member(include(CallerFile), CallsProperties) ->
+					true
+				;	CallerFile = File
+				)
 			),
 			References,
 			References2
