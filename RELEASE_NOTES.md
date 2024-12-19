@@ -25,6 +25,10 @@ RELEASE NOTES
 3.87.0 - January ??, 2024
 =========================
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: Synced the MacPorts portfile with the version used upstream.
 
 
 3.86.0 - December 18, 2024
