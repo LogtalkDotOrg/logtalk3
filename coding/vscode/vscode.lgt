@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:62:2,
+		version is 0:62:3,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-12-19,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -1495,6 +1495,10 @@
         	protocol_property(Entity, lines(BeginLine, EndLine))
 		),
         BeginLine =< Line, Line =< EndLine,
+		!.
+	entity(File, _, Entity) :-
+		logtalk::loaded_file_property(Includer, includes(File, Line)),
+		entity(Includer, Line, Entity),
 		!.
 
 	entity_property(Object, object, Property) :-

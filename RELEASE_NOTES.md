@@ -42,7 +42,10 @@ IDEs, text editors, and syntax highlighters support
 * FIXED: VSCode support for finding predicate implementations when the
 definition is found in an included file.
 
-* FIXED: VSCode support for finding predicate references when the call
+* FIXED: VSCode support for finding predicate references when the call is
+found in an included file.
+
+* FIXED: VSCode support for finding predicate declarations when the reference
 is found in an included file.
 
 
