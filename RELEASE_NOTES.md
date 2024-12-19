@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.87.0 - January ??, 2024
+3.87.0 - January ??, 2025
 =========================
 
 Installers and installation scripts
