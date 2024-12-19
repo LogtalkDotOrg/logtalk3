@@ -30,6 +30,12 @@ Installers and installation scripts
 
 * UPDATED: Synced the MacPorts portfile with the version used upstream.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: VSCode support for finding predicate implementations when the
+definition is found in an included file.
+
 
 3.86.0 - December 18, 2024
 ==========================

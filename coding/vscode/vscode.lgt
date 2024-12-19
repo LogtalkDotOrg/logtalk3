@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:62:0,
+		version is 0:62:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-13,
+		date is 2024-12-19,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1147,7 +1147,10 @@
 			abolish_object(Obj)
 		),
 		DeclarationEntity = Entity,
-		entity_property(ImplementationEntity, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(ImplementationEntity, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 
 	% callers
