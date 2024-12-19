@@ -142,9 +142,9 @@
 % '$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)
 :- multifile('$lgt_loaded_file_'/7).
 :- dynamic('$lgt_loaded_file_'/7).
-% '$lgt_included_file_'(File, MainBasename, MainDirectory, TimeStamp)
-:- multifile('$lgt_included_file_'/4).
-:- dynamic('$lgt_included_file_'/4).
+% '$lgt_included_file_'(File, Line, MainBasename, MainDirectory, TimeStamp)
+:- multifile('$lgt_included_file_'/5).
+:- dynamic('$lgt_included_file_'/5).
 % '$lgt_failed_file_'(SourceFile)
 :- dynamic('$lgt_failed_file_'/1).
 % '$lgt_parent_file_'(SourceFile, ParentSourceFile)
@@ -2931,7 +2931,7 @@ logtalk_make(Target) :-
 	fail.
 % recompilation of included source files since last loaded
 '$lgt_logtalk_make'(all) :-
-	'$lgt_included_file_'(Path, MainBasename, MainDirectory, LoadingTimeStamp),
+	'$lgt_included_file_'(Path, _, MainBasename, MainDirectory, LoadingTimeStamp),
 	'$lgt_file_exists'(Path),
 	'$lgt_file_modification_time'(Path, CurrentTimeStamp),
 	LoadingTimeStamp @< CurrentTimeStamp,
@@ -9709,7 +9709,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_directive'(encoding(Encoding), Ctx) :-
 	'$lgt_source_file_context'(Path, _),
-	'$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, _, _, _)),
+	'$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, _, _, _, _)),
 	% encoding/1 directives may be used in included
 	% files but not as entity directives
 	!,
@@ -9788,12 +9788,12 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_file_directive'(include(File), Ctx) :-
 	!,
 	% read the file terms for compilation
-	'$lgt_comp_ctx_mode'(Ctx, Mode),
+	'$lgt_comp_ctx'(Ctx, _, _, _, _, _, _, _, _, _, _, Mode, _, Line-_, _),
 	'$lgt_read_file_to_terms'(File, Directory, Path, Terms, Mode),
 	% save the dependency in the main file to support make
 	'$lgt_pp_file_paths_flags_'(MainBasename, MainDirectory, _, _, _),
 	'$lgt_file_modification_time'(Path, TimeStamp),
-	assertz('$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, MainBasename, MainDirectory, TimeStamp))),
+	assertz('$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, Line, MainBasename, MainDirectory, TimeStamp))),
 	% save loading stack to deal with failed compilation
 	retractall('$lgt_file_loading_stack_'(Path, Directory)),
 	asserta('$lgt_file_loading_stack_'(Path, Directory)),
@@ -9995,7 +9995,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 		true
 	;	'$lgt_pp_file_paths_flags_'(MainBasename, MainDirectory, _, _, _),
 		'$lgt_file_modification_time'(Path, TimeStamp),
-		assertz('$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, MainBasename, MainDirectory, TimeStamp)))
+		'$lgt_comp_ctx_lines'(Ctx, Line-_),
+		assertz('$lgt_pp_runtime_clause_'('$lgt_included_file_'(Path, Line, MainBasename, MainDirectory, TimeStamp)))
 	),
 	% save loading stack to deal with failed compilation
 	retractall('$lgt_file_loading_stack_'(Path, Directory)),
@@ -23549,7 +23550,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_write_runtime_static_clauses'(Stream, Path, '$lgt_uses_predicate_'/5),
 	'$lgt_write_runtime_static_clauses'(Stream, Path, '$lgt_use_module_predicate_'/5),
 	'$lgt_write_runtime_dynamic_clauses'(Stream, Path, '$lgt_loaded_file_'/7),
-	'$lgt_write_runtime_dynamic_clauses'(Stream, Path, '$lgt_included_file_'/4).
+	'$lgt_write_runtime_dynamic_clauses'(Stream, Path, '$lgt_included_file_'/5).
 
 
 '$lgt_write_runtime_dynamic_clauses'(Stream, Path, Functor/Arity) :-

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:8:0,
+		version is 1:9:0,
 		author is 'Paulo Moura',
-		date is 2018-05-08,
+		date is 2024-12-19,
 		comment is 'Unit tests for the "logtalk" built-in object.'
 	]).
 
@@ -122,31 +122,43 @@
 		),
 		logtalk::loaded_file_property(SourceFile, object(Object)), Object == tests.
 
+	succeeds(logtalk_17) :-
+		object_property(logtalk, file(SourceFile)),
+		logtalk::loaded_file_property(SourceFile, object(Object, Start, End)), Object == logtalk, Start =< End.
+
+	succeeds(logtalk_18) :-
+		category_property(core_messages, file(SourceFile)),
+		logtalk::loaded_file_property(SourceFile, category(Category, Start, End)), Category == core_messages, Start =< End.
+
+	succeeds(logtalk_19) :-
+		protocol_property(expanding, file(SourceFile)),
+		logtalk::loaded_file_property(SourceFile, protocol(Protocol, Start, End)), Protocol == expanding, Start =< End.
+
 	% expand_library_path/2 tests
 
-	deterministic(logtalk_17) :-
+	deterministic(logtalk_20) :-
 		logtalk::expand_library_path(core, Path),
 		atom(Path).
 
-	deterministic(logtalk_18) :-
+	deterministic(logtalk_21) :-
 		logtalk::expand_library_path(core(logtalk), Path),
 		atom(Path).
 
-	fails(logtalk_19) :-
+	fails(logtalk_22) :-
 		logtalk::expand_library_path(non_existing_library_alias, _).
 
-	fails(logtalk_20) :-
+	fails(logtalk_23) :-
 		logtalk::expand_library_path(non_existing_library_alias(some_file), _).
 
 	% file_type_extension/2 tests
 
-	succeeds(logtalk_21) :-
+	succeeds(logtalk_24) :-
 		forall(
 			logtalk::file_type_extension(Type, Extension),
 			(atom(Type), atom(Extension))
 		).
 
-	succeeds(logtalk_22) :-
+	succeeds(logtalk_25) :-
 		setof(
 			Type,
 			Extension^(logtalk::file_type_extension(Type, Extension)),
@@ -159,7 +171,7 @@
 			Extensions == [logtalk, object, prolog, source]
 		).
 
-	succeeds(logtalk_23) :-
+	succeeds(logtalk_26) :-
 		findall(
 			LogtalkExtension,
 			logtalk::file_type_extension(logtalk, LogtalkExtension),

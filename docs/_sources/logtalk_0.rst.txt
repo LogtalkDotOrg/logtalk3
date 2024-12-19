@@ -14,8 +14,8 @@ Built-in object providing message printing, debugging, library, source file, and
 |    ``built_in``
 
 | **Author:** Paulo Moura
-| **Version:** 3:0:0
-| **Date:** 2024-12-13
+| **Version:** 3:1:0
+| **Date:** 2024-12-19
 
 | **Compilation flags:**
 |    ``static, built_in, context_switching_calls, threaded``
@@ -439,10 +439,14 @@ Enumerates, by backtracking, loaded file properties.
     - Property ``target/1``: Full path of the generated intermediate Prolog file.
     - Property ``modified/1``: File modification time stamp (should be regarded as an opaque but otherwise comparable term).
     - Property ``parent/1``: Full path of the parent file that loaded the file.
+    - Property ``includes/2``: Full path of a file included by the file and the line of the ``include/1`` directive.
     - Property ``includes/1``: Full path of a file included by the file.
     - Property ``library/1``: Library alias for the library that includes the file.
+    - Property ``object/3``: Identifier for an object defined in the file and the start and end lines of its definition.
     - Property ``object/1``: Identifier for an object defined in the file.
+    - Property ``protocol/3``: Identifier for a protocol defined in the file and the start and end lines of its definition.
     - Property ``protocol/1``: Identifier for a protocol defined in the file.
+    - Property ``category/3``: Identifier for a category defined in the file and the start and end lines of its definition.
     - Property ``category/1``: Identifier for a category defined in the file.
 
 

@@ -25,6 +25,12 @@ RELEASE NOTES
 3.87.0 - January ??, 2025
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: New `includes/2`, `object/3`, `protocol/3`, and `category/3`
+properties to the `logtalk::loaded_file_property/2` predicate.
+
 Installers and installation scripts
 -----------------------------------
 

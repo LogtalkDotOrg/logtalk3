@@ -1,10 +1,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Integration file for SWI-Prolog
-%  Last updated on February 11, 2020
+%  Last updated on December 19, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -157,7 +157,7 @@
 	'$lgt_extends_protocol_'/3,
 	'$lgt_complemented_object_'/5,
 	'$lgt_loaded_file_'/7,
-	'$lgt_included_file_'/4,
+	'$lgt_included_file_'/5,
 	'$lgt_failed_file_'/1,
 	'$lgt_parent_file_'/2,
 	'$lgt_file_loading_stack_'/2,

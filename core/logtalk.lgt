@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 3:0:0,
+		version is 3:1:0,
 		author is 'Paulo Moura',
-		date is 2024-12-13,
+		date is 2024-12-19,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -242,10 +242,14 @@
 			'Property ``target/1``' - 'Full path of the generated intermediate Prolog file.',
 			'Property ``modified/1``' - 'File modification time stamp (should be regarded as an opaque but otherwise comparable term).',
 			'Property ``parent/1``' - 'Full path of the parent file that loaded the file.',
+			'Property ``includes/2``' - 'Full path of a file included by the file and the line of the ``include/1`` directive.',
 			'Property ``includes/1``' - 'Full path of a file included by the file.',
 			'Property ``library/1``' - 'Library alias for the library that includes the file.',
+			'Property ``object/3``' - 'Identifier for an object defined in the file and the start and end lines of its definition.',
 			'Property ``object/1``' - 'Identifier for an object defined in the file.',
+			'Property ``protocol/3``' - 'Identifier for a protocol defined in the file and the start and end lines of its definition.',
 			'Property ``protocol/1``' - 'Identifier for a protocol defined in the file.',
+			'Property ``category/3``' - 'Identifier for a category defined in the file and the start and end lines of its definition.',
 			'Property ``category/1``' - 'Identifier for a category defined in the file.'
 		]
 	]).
@@ -649,15 +653,29 @@
 	loaded_file_property(parent(Parent), Basename, Directory, _, _, _, _, _) :-
 		atom_concat(Directory, Basename, Path),
 		{'$lgt_parent_file_'(Path, Parent)}.
+	loaded_file_property(includes(File, Line), Basename, Directory, _, _, _, _, _) :-
+		{'$lgt_included_file_'(File, Line, Basename, Directory, _)}.
 	loaded_file_property(includes(File), Basename, Directory, _, _, _, _, _) :-
-		{'$lgt_included_file_'(File, Basename, Directory, _)}.
+		{'$lgt_included_file_'(File, _, Basename, Directory, _)}.
+	loaded_file_property(object(Object, Start, End), Basename, Directory, _, _, _, _, _) :-
+		{	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
+			'$lgt_entity_property_'(Object, file_lines(Basename, Directory, Start, End))
+		}.
 	loaded_file_property(object(Object), Basename, Directory, _, _, _, _, _) :-
 		{	'$lgt_current_object_'(Object, _, _, _, _, _, _, _, _, _, _),
 			'$lgt_entity_property_'(Object, file_lines(Basename, Directory, _, _))
 		}.
+	loaded_file_property(protocol(Protocol, Start, End), Basename, Directory, _, _, _, _, _) :-
+		{	'$lgt_current_protocol_'(Protocol, _, _, _, _),
+			'$lgt_entity_property_'(Protocol, file_lines(Basename, Directory, Start, End))
+		}.
 	loaded_file_property(protocol(Protocol), Basename, Directory, _, _, _, _, _) :-
 		{	'$lgt_current_protocol_'(Protocol, _, _, _, _),
 			'$lgt_entity_property_'(Protocol, file_lines(Basename, Directory, _, _))
+		}.
+	loaded_file_property(category(Category, Start, End), Basename, Directory, _, _, _, _, _) :-
+		{	'$lgt_current_category_'(Category, _, _, _, _, _),
+			'$lgt_entity_property_'(Category, file_lines(Basename, Directory, Start, End))
 		}.
 	loaded_file_property(category(Category), Basename, Directory, _, _, _, _, _) :-
 		{	'$lgt_current_category_'(Category, _, _, _, _, _),

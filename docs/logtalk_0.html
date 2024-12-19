@@ -209,8 +209,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 3:0:0</div>
-<div class="line"><strong>Date:</strong> 2024-12-13</div>
+<div class="line"><strong>Version:</strong> 3:1:0</div>
+<div class="line"><strong>Date:</strong> 2024-12-19</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -734,10 +734,14 @@
 <li><p>Property <code class="docutils literal notranslate"><span class="pre">target/1</span></code>: Full path of the generated intermediate Prolog file.</p></li>
 <li><p>Property <code class="docutils literal notranslate"><span class="pre">modified/1</span></code>: File modification time stamp (should be regarded as an opaque but otherwise comparable term).</p></li>
 <li><p>Property <code class="docutils literal notranslate"><span class="pre">parent/1</span></code>: Full path of the parent file that loaded the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">includes/2</span></code>: Full path of a file included by the file and the line of the <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive.</p></li>
 <li><p>Property <code class="docutils literal notranslate"><span class="pre">includes/1</span></code>: Full path of a file included by the file.</p></li>
 <li><p>Property <code class="docutils literal notranslate"><span class="pre">library/1</span></code>: Library alias for the library that includes the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">object/3</span></code>: Identifier for an object defined in the file and the start and end lines of its definition.</p></li>
 <li><p>Property <code class="docutils literal notranslate"><span class="pre">object/1</span></code>: Identifier for an object defined in the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">protocol/3</span></code>: Identifier for a protocol defined in the file and the start and end lines of its definition.</p></li>
 <li><p>Property <code class="docutils literal notranslate"><span class="pre">protocol/1</span></code>: Identifier for a protocol defined in the file.</p></li>
+<li><p>Property <code class="docutils literal notranslate"><span class="pre">category/3</span></code>: Identifier for a category defined in the file and the start and end lines of its definition.</p></li>
 <li><p>Property <code class="docutils literal notranslate"><span class="pre">category/1</span></code>: Identifier for a category defined in the file.</p></li>
 </ul>
 </div></blockquote>
