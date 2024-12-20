@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2023-03-23,
+		date is 2024-12-20,
 		comment is 'Unit tests for the de facto Prolog standard findall/4 built-in predicate.'
 	]).
 
@@ -78,6 +78,9 @@
 		{	set_prolog_flag(unknown, error),
 			findall(1, foo(_), _, _)
 		}.
+
+	test(commons_findall_4_15, error(err)) :-
+		{findall(X, (X = 1; throw(err)), _, _)}.
 
 	% auxiliary predicates
 
