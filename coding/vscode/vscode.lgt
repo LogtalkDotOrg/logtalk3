@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:62:3,
+		version is 0:62:4,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-19,
+		date is 2024-12-21,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -468,7 +468,7 @@
 				create_object(Obj, [instantiates(Entity)], [], []),
 				Obj<<predicate_property(Template, declared_in(DeclarationEntity, Line))
 			)
-		;	% current_category(Entity),
+		;	current_category(Entity),
 			create_object(Obj, [imports(Entity)], [], []),
 			Obj<<predicate_property(Template, declared_in(DeclarationEntity, Line))
 		),
@@ -594,7 +594,7 @@
 					Obj<<predicate_property(Template, defined_in(Primary)),
 					abolish_object(Obj)
 				)
-			;	% current_category(This),
+			;	current_category(This),
 				create_object(Obj, [imports(This)], [], []),
 				Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
 				Obj<<predicate_property(Template, defined_in(Primary)),
@@ -639,7 +639,7 @@
 				),
 				abolish_object(Obj)
 			)
-		;	%current_category(This) ->
+		;	current_category(This) ->
 			create_object(Obj, [imports(This)], [], []),
 			Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
 			(	Obj<<predicate_property(Template, redefined_from(Entity, Line)) ->
@@ -1154,7 +1154,7 @@
 				;	ImplementationEntity<<predicate_property(Template, declared_in(DeclarationEntity))
 				)
 			)
-		;	% current_category(ImplementationEntity),
+		;	current_category(ImplementationEntity),
 			create_object(Obj, [imports(ImplementationEntity)], [], []),
 			Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
 			abolish_object(Obj)

@@ -48,6 +48,9 @@ found in an included file.
 * FIXED: VSCode support for finding predicate declarations when the reference
 is found in an included file.
 
+* FIXED: VSCode support for navigating call hierarchies where an exception
+would be thrown in some cases.
+
 
 3.86.0 - December 18, 2024
 ==========================
