@@ -639,7 +639,7 @@
 				),
 				abolish_object(Obj)
 			)
-		;	current_category(This) ->
+		;	current_category(This),
 			create_object(Obj, [imports(This)], [], []),
 			Obj<<predicate_property(Template, declared_in(DeclarationEntity)),
 			(	Obj<<predicate_property(Template, redefined_from(Entity, Line)) ->
