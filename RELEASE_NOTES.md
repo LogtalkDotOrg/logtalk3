@@ -51,6 +51,11 @@ is found in an included file.
 * FIXED: VSCode support for navigating call hierarchies where an exception
 would be thrown in some cases.
 
+Installers and installation scripts
+-----------------------------------
+
+* REMOVED: Deprecated `logtalk_user_setup.js` script. 
+
 
 3.86.0 - December 18, 2024
 ==========================

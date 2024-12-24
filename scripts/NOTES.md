@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,16 +22,11 @@ This directory contains support files for creating Docker containers and
 shell scripts used for Logtalk documenting, testing, managing, packaging,
 and installation.
 
-Scripts with a `.sh` extension are Bash shells scripts for macOS, Linux,
+Scripts with a `.sh` extension are Bash shell scripts for macOS, Linux,
 and similar systems.
 
 Scripts with a `.ps1` extension are PowerShell 7.3.x scripts for Windows
 systems.
-
-Scripts with extension `.js` are JScript command-line scripts for Windows.
-These are deprecated. They require WSH 5.6 or later version to be installed
-and should be run using `cscript.exe` from a DOS command line shell (you may
-download WSH 5.6 from `http://msdn.microsoft.com/downloads/list/webdev.asp`).
 
 You can also use the Bash scripts on Windows operating-systems by installing
 Git for Windows (which provides a Bash shell implementation and is available
@@ -111,8 +106,8 @@ also available in the Logtalk website.
 - `logtalk_backend_select.sh`  
 	experimental shell script for defining an alias, logtalk, to a chosen
 	backend Prolog integration script for POSIX operating-systems; the
-	alias is created in same directory where the `*lgt` integration scripts
-	are found
+	alias is created in the same directory where the `*lgt` integration
+	scripts are found
 
 - `debian`  
 	directory containing support files for building a Debian package
@@ -146,9 +141,9 @@ also available in the Logtalk website.
 - `windows`  
 	directory containing files used when building Windows GUI installers
 
-- `logtalk_user_setup.sh`, `logtalk_user_setup.ps1`, and `logtalk_user_setup.js`  
+- `logtalk_user_setup.sh` and `logtalk_user_setup.ps1` 
 	end-user scripts for copying the Logtalk user-modifiable files and
-	directories to the location pointed by the environment variable
+	directories to the location pointed to by the environment variable
 	`LOGTALKUSER` (defaults to `~/logtalk` on POSIX operating-systems
 	and to `My Documents\Logtalk` on Windows when the variable is not
 	defined); must be run by each end-user in order to ensure proper
@@ -158,8 +153,6 @@ also available in the Logtalk website.
 	running by a user with administration privileges due to the creation
 	of symbolic links or turning on "Developer mode" in the
 	Settings -> Update & Security -> For Developers panel.
-- `logtalk_user_setup.bat`  
-	wrapper for the `logtalk_user_setup.js` script to simplify its use
 
 - `update_html_docs.sh` and `update_html_docs.ps1`  
 	Bash shell and PowerShell scripts for updating the HTML	documentation
