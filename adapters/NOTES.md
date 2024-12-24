@@ -32,7 +32,7 @@ Prolog versions and operating-system versions.
 
 As a general rule, always try to use the latest version of your Prolog
 compiler of choice. For Prolog compilers with long release cycles, this
-may require use of development versions. Most Prolog compilers are moving
+may require the use of development versions. Most Prolog compilers are moving
 towards better compatibility with de facto and official standards and thus
 improved Logtalk compatibility. Also, visit the issue tracker on the Logtalk
 development website and check for any known Prolog compiler bugs that break
@@ -50,7 +50,7 @@ not intended as a full replacement for missing functionality.
 Top-level interpreter shorthands
 --------------------------------
 
-The adapter files define shorthands to often used Logtalk built-in
+The adapter files define shorthands to often-used Logtalk built-in
 predicates such as `logtalk_load/1` and `logtalk_make/1` including:
 
 * `{*}`  
@@ -165,7 +165,7 @@ Experimental. Joint work with the Ciao Prolog developer José Morales. One
 known issue is that most ISO Prolog standard and de facto standard predicates
 are not built-in predicates but library predicates. The internal predicate
 that checks predicate properties (defined in the adapter file) tries to
-workaround this issue for those predicates but the solution is fragile.
+workaround this issue for those predicates, but the solution is fragile.
 There are also several standards compliance issues, notably with multifile
 predicates, that trigger errors with some tools and examples. These issues
 are expected to be solved soon. For the best experience, use the latest
@@ -200,7 +200,7 @@ the `{}/1` control construct allows you to bypass the Logtalk compiler).
 ECLiPSe defines an alias `in_set_range/2` for `(::)/2` that can be used to
 avoid conflicts with Logtalk `(::)/2` message-sending operator.
 
-Adopted from an adapter file written and tested with help of Taner Bilgic
+Adopted from an adapter file written and tested with the help of Taner Bilgic
 for Logtalk 1.x.
 
 With this Prolog compiler, avoid reloading Logtalk source files defining
@@ -233,7 +233,7 @@ adapter file sets the `strict_iso` flag to `off`. This is recommended
 but not required to support Logtalk.
 
 See the `scripts/embedding/gprolog` directory for a sample shell script
-that can generate e.g. a new Prolog top-level that embeds Logtalk and
+that can generate, e.g., a new Prolog top-level that embeds Logtalk and
 optionally a Logtalk application.
 
 
@@ -243,7 +243,7 @@ JIProlog 4.1.7.1 and later versions
 	ji.pl
 
 Written with the help of Ugo Chirico, JIProlog author (but if you find any
-Logtalk problem please report it to me).
+Logtalk problem, please report it to me).
 
 See the `scripts/embedding/jiprolog` directory for a sample shell script
 for embedding Logtalk and optionally a Logtalk application. The script
@@ -259,7 +259,7 @@ Quintus Prolog 3.3~3.5
 Experimental. Quintus Prolog is still maintained but (apparently) no
 longer developed and thus it lacks compliance with current official and
 de facto standards. Notably, the `open/4` and `read_term/2-3` built-in
-predicates use a different argument order and there are also significant
+predicates use a different argument order, and there are also significant
 differences in arithmetic functions support. This adapter file copes with
 some of these issues using the dialect-level goal-expansion mechanism.
 
@@ -301,14 +301,14 @@ detect the fixed file as no intermediate Prolog file was generated in the
 first loading attempt (use instead the `logtalk_make/0-1` predicates in this
 case).
 
-The `swihooks.pl` file includes experimental and commented out code for
+The `swihooks.pl` file includes experimental and commented-out code for
 writing stack trace for errors generated from top-level message-sending
 calls. To try it, copy the code to your Logtalk settings file that is
 loaded at startup.
 
 The adapter file may set the `iso` SWI-Prolog flag to `true`. This setting
 may improve compatibility of Logtalk code across different backend
-Prolog compilers buy may also cause compatibility problems with some
+Prolog compilers, but may also cause compatibility problems with some
 SWI-Prolog libraries. Comment out the corresponding `set_prolog_flag/2`
 directive if necessary.
 
@@ -320,7 +320,7 @@ when halting the system regarding threads that wouldn't die: you can
 suppress the message on POSIX systems by using `% swilgt 2> /dev/null`.
 
 The definition of the predicate `{}/1` at the end of the adapter files
-conflicts with e.g. the `clpq` and `clpr` SWI-Prolog constraint libraries.
+conflicts with, e.g., the `clpq` and `clpr` SWI-Prolog constraint libraries.
 The `{}/1` predicate is used in Logtalk as a shortcut to the `logtalk_load/1`
 and  `logtalk_make/1` built-in predicates. Comment out the definition in the
 adapter file if necessary. Note that Logtalk also defines a `{}/1` control
@@ -328,11 +328,11 @@ construct but this is only used within objects and categories.
 
 Logtalk doesn't rely on the SWI-Prolog auto-loading mechanism for library
 predicates. Calls of these predicates within objects and categories must
-be explicitly qualified or implicit qualified by listing the predicates
+be explicitly qualified or implicitly qualified by listing the predicates
 in `use_module/2` directives. You may also set the Logtalk `portability`,
 and `unknown_predicates` compiler flags to `warning` in order to detect
 unqualified calls to library predicates. All the module libraries must
-be loaded prior to compilation of object and categories containing calls
+be loaded prior to compilation of objects and categories containing calls
 to the library predicates.
 
 macOS users of the `SWI-Prolog.app` application, must add the definitions
@@ -352,8 +352,8 @@ macOS GUI applications *don't* inherit shell environment variable values):
 	:- endif.
 
 The conditional compilation block allows automatically loading Logtalk at
-startup of the the `SWI-Prolog.app` macOS GUI application while still be
-able to use the shell integration script (`swilgt`).
+startup of the `SWI-Prolog.app` macOS GUI application while still be able
+to use the shell integration script (`swilgt`).
 
 To load Logtalk *on-demand* when using the `SWI-Prolog.app` application, you
 can use the goal:
@@ -369,19 +369,18 @@ After, you can load Logtalk on-demand by typing:
 	?- use_module(library(logtalk)).
 
 The pack alternative is handy for deployment but not ideal for development as
-it implicitly assumes a single user and the files are buried inside the packs
+it implicitly assumes a single user, and the files are buried inside the packs
 directory (e.g., `.local/share/swi-prolog/pack/`).
 
-The Logtalk flag `prolog_compiler` is not usable due to lack of SWI-Prolog
-built-in predicates for separate compilation and loading. To generate
-`.qlf` files when compiling Logtalk source files, set the Logtalk `clean`
-flag to `off` and add the option `qcompile(auto)` to the Logtalk flag
-`prolog_loader`.
+The Logtalk flag `prolog_compiler` is not usable due to the lack of SWI-Prolog
+built-in predicates for separate compilation and loading. To generate `.qlf`
+files when compiling Logtalk source files, set the Logtalk `clean` flag to
+`off` and add the option `qcompile(auto)` to the Logtalk flag `prolog_loader`.
 
 To use the SWI-Prolog graphical tracer for debugging Logtalk source code,
 see the `settings-sample.lgt` file for the necessary settings. Note that
 those settings result in large intermediate Prolog files as in addition
-to the information collected for Logtalk own reflection features, all file
+to the information collected for Logtalk's own reflection features, all file
 terms are decorated with additional source file location information for
 integration with the SWI-Prolog own development tools. Use the `gtrace/0-1`
 predicates to start the tracer. For example:
@@ -430,12 +429,12 @@ XSB 3.8.0 and later versions
 
 XSB generates intermediate files (with a `.xwam` extension) when compiling
 Prolog source files (thus including the Logtalk core files). Thus, you
-must either install Logtalk on a location where you have write access
+must either install Logtalk in a location where you have write access
 or perform the first run of the integration scripts from a user with the
 required privileges (e.g., using `sudo` on POSIX systems or choosing `Run as
 administrator` on Windows systems).
 
-Due to the relative long release cycle of XSB, you may need to use its
+Due to the relatively long release cycle of XSB, you may need to use its
 development version if the recommended version is not yet available as
 a stable release.
 
@@ -448,7 +447,7 @@ XSB due to the use of a different priority. XSB uses this operator within
 `table/1` directives to represent tabling options. In practice there's only
 a conflict when, in the same `table/1` directive, more than one predicate is
 declared as tabled and/or when more than one tabling option is specified.
-This cases are not common, however. The workaround is to use parenthesis
+These cases are not common, however. The workaround is to use parentheses
 around the predicates and/or the tabling options.
 
 To generate `.xwam` files from Logtalk source files, set the `prolog_compiler`
@@ -470,16 +469,16 @@ XVM 10.0.0 and later versions
 	xvm.pl
 
 Coinduction support requires setting the `unify_applies_occurs_check` to
-`true`. This can be accomplished e.g. by using the `--enable-occurs-check`
+`true`. This can be accomplished, e.g., by using the `--enable-occurs-check`
 command-line option:
 
 	$ xvmlgt --enable-occurs-check
 
-XVM can encrypt the intermediate Prolog files that generated by the Logtalk
-compiler. For embedded applications, this can be accomplished using the
-provided embedding script (see the `scripts/embedding/xvm/Notes.md` file for
-details). At the XVM top-level, encryption can be accomplished by setting
-globally the `prolog_compiler` flag:
+XVM can encrypt the intermediate Prolog files that are generated by the
+Logtalk compiler. For embedded applications, this can be accomplished using
+the provided embedding script (see the `scripts/embedding/xvm/Notes.md`
+file for details). At the XVM top-level, encryption can be accomplished by
+setting globally the `prolog_compiler` flag:
 
 	$ xvmlgt
 	...
@@ -526,7 +525,7 @@ tabling or threads.
 
 See the `scripts/embedding/yap` directory for a sample shell script
 that can help in pre-compiling Logtalk and Logtalk applications. The
-script documentation also explains how to generated saved states that
+script documentation also explains how to generate saved states that
 include Logtalk applications.
 
 Messages sent from modules (including `user`) use static binding when the

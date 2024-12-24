@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,7 +33,7 @@ and distributions conditions.
 
 The `loader.lgt` file loads all ports.
 
-HTML documentation for each port can be found on the `docs` directory
+HTML documentation for each port can be found in the `docs` directory
 (open the `docs/index.html` file with your web browser). The documentation
 for these tools can be regenerated using the shell scripts
 `../scripts/update_html_docs.sh` and `../scripts/update_svg_diagrams.sh`.

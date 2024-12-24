@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -36,7 +36,7 @@ Also provided in this folder are six Prolog files:
 
 Together, these files provide the same path definitions of the `paths.pl`
 file. They can be used when embedding or deploying Logtalk applications
-where e.g. tools or example paths should not be included. Note that the
+where, e.g., tools or example paths should not be included. Note that the
 obvious solution of having `paths.pl` including or loading the other four
 Prolog files is not portable!
 
@@ -67,5 +67,5 @@ user directory or in your Logtalk application directory.
 When manually loading Logtalk (instead of using the provided integration
 scripts and shortcuts), you will need to load the `paths.pl` into your
 Prolog compiler before loading the Logtalk compiler/runtime to ensure
-Logtalk proper startup and to easily compile and load library and example
+Logtalk proper startup and easily compile and load library and example
 source files using the notation `<library>(<file>)`.

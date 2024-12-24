@@ -35,13 +35,13 @@ defining built-in protocols, categories, and objects:
 - `user.lgt`  
 	definition of the built-in pseudo-object `user`
 
-Before loading the `core.pl` file into your favorite Prolog compiler,
-you must first load the appropriated adapter file for your Prolog
-compiler, which you will find in the `adapters` directory, and the
-`paths/paths.pl` file, which defines essential library paths for
-starting Logtalk. The provided Prolog POSIX integration scripts and
-Windows shortcuts automate this process and should be used unless
-there's a strong reason to manually load Logtalk.
+Before loading the `core.pl` file into your favorite Prolog compiler, you
+must first load the adapter file for your Prolog compiler, which you will
+find in the `adapters` directory, and the `paths/paths.pl` file, which
+defines essential library paths for starting Logtalk. The provided Prolog
+POSIX integration scripts and Windows scripts and shortcuts automate this
+process and should be used unless there's a strong reason to manually load
+Logtalk.
 
 HTML documentation for the core entity APIs can be found on the `docs`
 directory (open the `docs/index.html` file with your web browser). The

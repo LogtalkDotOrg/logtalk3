@@ -18,7 +18,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To consult the Logtalk documentation open the file `index.html` with a
+To consult the Logtalk documentation, open the file `index.html` with a
 web browser.
 
 The HTML, PDF, ePub, and Texinfo versions of the documentation are generated

@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -90,9 +90,9 @@ Credits
 -------
 
 Some code in this library is based on public domain Prolog code, in particular,
-code adopted from the Edinburgh Prolog library. The definition  of predicate
-`reverse/2` in object list is from Richard O'Keefe and can be found in its book
-"The Craft of Prolog".
+code adopted from the Edinburgh Prolog library. The definition of the predicate
+`reverse/2` in the `list` object is from Richard O'Keefe and can be found in its
+book "The Craft of Prolog".
 
 Some elements of this library are inspired by Richard O'Keefe library proposal
 available at:

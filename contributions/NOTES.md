@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,7 +60,7 @@ a short description of each included contribution:
 	See the `xml_parser/NOTES.md` file for details.
 
 See the copyright and license information on the contributed files for 
-usage and distributions conditions.
+usage and distribution conditions.
 
 The `contributions/loader.lgt` file loads all contributions.
 

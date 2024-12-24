@@ -79,8 +79,8 @@ Credits
 
 Some code in this library is based on public domain Prolog code, in
 particular, code adopted from the Edinburgh Prolog library. The
-definition of predicate ``reverse/2`` in object list is from Richard
-O'Keefe and can be found in its book "The Craft of Prolog".
+definition of the predicate ``reverse/2`` in the ``list`` object is from
+Richard O'Keefe and can be found in its book "The Craft of Prolog".
 
 Some elements of this library are inspired by Richard O'Keefe library
 proposal available at:

@@ -20,11 +20,12 @@ ________________________________________________________________________
 
 This directory contains Prolog integration shell scripts and supporting
 Prolog files. The POSIX scripts assume that Bash is installed and that
-the Prolog compilers are available in the system path.
+the Prolog compilers are available in the system path. The PowerShell
+scripts requires PowerShell 7.x or a later version.
 
-On POSIX systems, the Logtalk installers make the following integration
-scripts available from the command-line (you may need to adjust your
-system path):
+On POSIX and Windows systems, the Logtalk installers make the following
+integration scripts available from the command-line (you may need to adjust
+your system path):
 
 * B-Prolog (8.1 or later):           `bplgt`
 * Ciao Prolog (1.22.0 or later):     `ciaolgt`    (experimental; first run may require `sudo`)
@@ -41,27 +42,16 @@ system path):
 * XVM (10.0.0 or later):             `xvmlgt`
 * YAP (6.3.4 or later):              `yaplgt`
 
+Om Windows, you may need to type the `.ps1` extension (e.g. `swilgt.ps1`).
+
 For more information about these scripts and their dependencies, consult
 the corresponding `man` page (e.g., `man yaplgt`). The `man` pages are also
 available at:
 
 https://logtalk.org/man/
 
-On Windows systems, the Logtalk installer makes the Prolog integration
-shortcuts available from the `Start Menu/Programs/Logtalk` menu. But
-the POSIX shell scripts above can also be used by installing a bash
-shell implementation for Windows. The easiest way is to install Git for
-Windows from:
-
-http://msysgit.github.io/
-
-After installation, you can start the Bash shell by selecting `Git Bash`
-from the context menu. You will also need to add the `$LOGTALKHOME/scripts`
-and `$LOGTALKHOME/integration` directories plus the backend Prolog compiler
-executable directories to the system path environment variable. This can be
-accomplished by defining e.g. a `~/.profile` file with the necessary export
-commands. The integration scripts will need to be called, however, without
-omitting the `.sh` extension.
+On Windows systems, the Logtalk installer also makes Prolog integration
+shortcuts available from the `Start Menu/Programs/Logtalk` menu.
 
 The first run of the Ciao Prolog, XSB, or JIProlog integration scripts may
 require a user with administrative rights. On POSIX systems, run them **once**
@@ -74,7 +64,7 @@ development. But for production environments, improved performance can be
 achieved by generating a new GNU-Prolog top-level that includes Logtalk.
 See the `adapters/NOTES.md` file for details.
 
-The Tau Prolog integration scripts requires that the `NODE_PATH` environment
+The Tau Prolog integration scripts require that the `NODE_PATH` environment
 variable be set to the `node_modules` directory path where you installed
 Tau Prolog and its dependencies.
 

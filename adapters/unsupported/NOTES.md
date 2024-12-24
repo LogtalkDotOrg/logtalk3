@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -139,12 +139,12 @@ LPA MacProlog32 1.25
 	lpamac.pl
 
 This is my old Prolog development environment. Two known problems: (1) an
-LPA bug in operator handling that make calls like "\+ ::Pred" be
+LPA bug in operator handling that makes calls like "\+ ::Pred" be
 interpreted like "::(\+ Pred)" instead of "\+ (::Pred)". A workaround is
 to replace all occurrences of "\+ ::Pred" by "\+ (::Pred)"; (2) If you call
-the \+ operator in your code the writeq/1 built-in don't always output a
-space after the operator resulting in calls like "\+(...)". Because \+ is
-not defined as a predicate this will fail. Don't forget to use the dvol/1
+the \+ operator in your code, the `writeq/1` built-in don't always output a
+space after the operator, resulting in calls like "\+(...)". Because \+ is
+not defined as a predicate this will fail. Don't forget to use the `dvol/1`
 predicate to set the working directory before loading an example.
 Due to the size of the Logtalk compiler/runtime file, you must load it by
 using the consult/1 predicate instead of using the File:Open menu option.

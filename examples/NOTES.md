@@ -35,7 +35,7 @@ Some examples may redefine objects already loaded from other examples.
 It might be necessary to restart Logtalk after playing with some examples.
 
 Some examples have been adapted from public Prolog code or from Prolog
-text book and tutorials and are copyrighted by the respective authors.
+text books and tutorials and are copyrighted by the respective authors.
 
 These are programming examples, meaning that you should study the source
 files to fully understand them. Note, however, that some examples main
@@ -95,7 +95,7 @@ Follows a short description of each included example (in alphabetical order):
 - `benchmarks`  
 	simple benchmarks for helping to compare the performance of Logtalk
 	message-sending when using different backend Prolog compilers and
-	for comparing performance of message-sending calls with predicate
+	for comparing the performance of message-sending calls with predicate
 	calls in plain Prolog and explicitly-qualified Prolog module calls
 	(when applicable)
 
@@ -249,7 +249,7 @@ Follows a short description of each included example (in alphabetical order):
 	definitions
 
 - `instmethods`  
-	example of instance defined methods; also illustrates the use of
+	example of instance-defined methods; also illustrates the use of
 	"super calls" to call overridden method definitions
 
 - `instvars`  
@@ -516,13 +516,13 @@ Follows a short description of each included example (in alphabetical order):
 
 - `trebuchet`  
 	solution for the Advent of Code 2023 Day 1 problem; illustrates the
-	use of push-bask lists in DCGs
+	use of push-back lists in DCGs
 
 - `units`  
 	Logtalk version of a GNU Prolog/CX parametric unit example
 
 - `viewpoints`  
-	example on how to implement property sharing and value sharing
+	example of how to implement property sharing and value sharing
 	with prototypes
 
 - `wrappers`  
