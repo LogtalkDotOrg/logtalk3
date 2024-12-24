@@ -28,11 +28,10 @@ XSLT, CSS, and HTML 4 or XHTML 1.0.
 The shell and command-line scripts should be called from the directory
 containing the XML documenting files that you wish to convert. See the
 description of each script below for details. The `.sh` files are Bash
-shell scripts for POSIX systems, the `.ps1` are PowerShell scripts for
-Windows, and the `.js` files are JScript command-line scripts also for
-Windows (requiring WSH 5.6 or later version; deprecated). These scripts
-assume that the `LOGTALKHOME` and `LOGTALKUSER` environment variables
-are defined and that the chosen XSLT processor is available in the path.
+shell scripts for POSIX systems. The `.ps1` are PowerShell scripts for
+Windows. These scripts assume that the `LOGTALKHOME` and `LOGTALKUSER`
+environment variables are defined and that the chosen XSLT processor is
+available in the path.
 
 **MAKE SURE THAT THE XSL PROCESSORS AND ANY ADDITIONAL THIRD-PARTY SOFTWARE
 YOU INTEND TO USE ARE PROPERLY INSTALLED AND WORKING BEFORE RUNNING THESE
@@ -152,7 +151,7 @@ Brief description of each directory and file in this folder:
 	Cascade style sheet file to render the HTML/XHTML output of the XSL
 	files in a web browser.
 
-- `lgt2pdf.sh`, `lgt2pdf.ps1`, and `lgt2pdf.js`
+- `lgt2pdf.sh` and `lgt2pdf.ps1`  
 	Sample scripts to batch convert XML files to PDF files
 
 	Supported XSL-FO processors:  
@@ -169,73 +168,72 @@ Brief description of each directory and file in this folder:
 	installation, you may simply need to type `lgt2pdf` in order to run
 	the script).
 
-- `lgt2html.sh`, `lgt2html.ps1`, and `lgt2html.js`  
+- `lgt2html.sh` and `lgt2html.ps1`  
 	Sample scripts to batch convert XML files to HTML files. These
 	scripts also generate an `index.html` file which contains links
 	to all the converted files.
 
-	Supported XSLT processors for Bash and JScript scripts:  
+	Supported XSLT processors for Bash scripts:  
 		* [xsltproc](https://gitlab.gnome.org/GNOME/libxslt/-/wikis/home) (tested with version 1.1.8)  
 		* [Xalan](https://xml.apache.org/xalan-c/index.html) (tested with version 1.7.0)  
-		* [Microsoft MSXSL](http://msdn.microsoft.com/XML/XMLDownloads/default.aspx) (only for the Windows JScript script)
 		* [Saxon](https://www.saxonica.com/) (tested with version 9.5.1.1; JAR version)  
 
 	The PowerShell scripts use the .Net XSLT classes.
 
 	The scripts should be called from the directory containing the XML files
 	you wish to convert. Call the scripts with the help option for a description
-	of the available optional parameters (type `cscript lgt2html.js help` or
-	`lgt2html.sh -h`; depending on your Logtalk installation, you may simply
-	need to type `lgt2html` in order to run the script).
+	of the available optional parameters (type `lgt2html.sh -h` for help;
+	depending on your Logtalk installation, you may simply need to type
+	`lgt2html` in order to run the script).
 
-- `lgt2xml.sh`, `lgt2xml.ps1`, and `lgt2xml.js`  
+- `lgt2xml.sh` and `lgt2xml.ps1`  
 
 	Sample scripts for indexing the XML files in the current directory by
-	generating an `index.html` file which contains links to all the files.
-	In addition, these scripts also copies of the used XML specs, XSL, and
-	CSS files to the current directory, allowing direct visualization of
-	the XML files on a supported web browser. Unfortunately, this does not
-	work in recent versions of Google Chrome and Apple Safari using their
-	default security settings.
+	generating an `index.html` file that contains links to all the files.
+	In addition, these scripts also copy the used XML specs, XSL, and CSS
+	files to the current directory, allowing direct visualization of the
+	XML files on a supported web browser. Unfortunately, this does not work
+	in recent versions of Google Chrome and Apple Safari using their default
+	security settings.
 
 	The scripts should be called from the directory containing the XML files
 	you wish to index. Call the scripts with the help option for a description
-	of the available optional parameters (type `cscript lgt2xml.js help` or
-	`lgt2xml.sh -h`; depending on your Logtalk installation, you may simply
-	need to type `lgt2xml` in order to run the script).
+	of the available optional parameters (type `lgt2xml.sh -h` for help;
+	depending on your Logtalk installation, you may simply need to type
+	`lgt2xml` in order to run the script).
 
-- `lgt2md.sh`, `lgt2md.ps1`, and `lgt2md.js`  
+- `lgt2md.sh` and `lgt2md.ps1`  
 	Sample scripts to batch convert XML files to Markdown text files.
 
 	The scripts should be called from the directory containing the XML files
 	you wish to convert. Call the scripts with the help option for a description
-	of the available optional parameters (type `cscript lgt2md.js help` or
-	`lgt2md.sh -h`; depending on your Logtalk installation, you may simply
-	need to type `lgt2md` in order to run the script).
+	of the available optional parameters (type `lgt2md.sh -h` for help;
+	depending on your Logtalk installation, you may simply need to type
+	`lgt2md` in order to run the script).
 
-- `lgt2rst.sh`, `lgt2rst.ps1`, and `lgt2rst.js`  
+- `lgt2rst.sh` and `lgt2rst.ps1`  
 	Sample scripts to batch convert XML files to reStructuredText files and
 	optionally generate Sphinx HTML files.
 
 	The scripts should be called from the directory containing the XML files
 	you wish to convert. Call the scripts with the help option for a description
-	of the available optional parameters (type `cscript lgt2rst.js help` or
-	`lgt2rst.sh -h`; depending on your Logtalk installation, you may simply
-	need to type `lgt2rst` in order to run the script). The generated files
-	are expected to be used with Sphinx. Assuming that Sphinx and the 
-	Read the Docs Sphinx theme are both installed, `lgt2rst -s` calls the
-	`sphinx-quickstart` interactive script using the `conf.py_t` file in this
-	directory as the `conf.py` template and using the `css/sphinx/custom.css`
-	to customize the Read the Docs Sphinx Theme. You can edit the `conf.py_t` to
+	of the available optional parameters (type `lgt2rst.sh -h` for help;
+	depending on your Logtalk installation, you may simply need to type
+	`lgt2rst` in order to run the script). The generated files are expected
+	to be used with Sphinx. Assuming that Sphinx and the  Read the Docs Sphinx
+	theme are both installed, `lgt2rst -s` calls the `sphinx-quickstart`
+	interactive script using the `conf.py_t` file in this directory as the
+	`conf.py` template and using the `css/sphinx/custom.css` to customize
+	the Read the Docs Sphinx Theme. You can edit the `conf.py_t` to
 	customize it; see the Sphinx documentation for more details. To use the
 	`sphinx-quickstart` script in non-interactive mode pass the options to
 	it using the syntax `lgt2rst -s -- -q` followed by `-p`, `-a` and `-v`
-	options. For example `lgt2rst -s -- -q -p "My Project" -a "J. Doe" -v "1.12"`.
+	options. For example, `lgt2rst -s -- -q -p "My Project" -a "J. Doe" -v "1.12"`.
 	This use in non-interactive mode is currently only supported by the
 	`lgt2rst.sh` POSIX script. To add links from library APIs to library
 	descriptions, update the used `conf.py` to define a Intersphinx mapping
 	and optionally use the script `-l` option to explicitly qualify the links
-	to the library descriptions. The library description files musts have
+	to the library descriptions. The library description files must have
 	a reStructuredText target in the first line with the name of the library
 	prefixed by `library_`.
 
@@ -247,15 +245,14 @@ Brief description of each directory and file in this folder:
 	[Read the Docs theme](https://github.com/readthedocs/sphinx_rtd_theme)
 	(tested with version 1.0.0) with some CSS changes.
 
-- `lgt2txt.sh`, `lgt2txt.ps1`, and `lgt2txt.js`  
+- `lgt2txt.sh` and `lgt2txt.ps1`  
 	Sample scripts to batch convert XML files to plain text files.
 
 	The scripts should be called from the directory containing the XML files
 	you wish to convert. Call the scripts with the help option for a description
-	of the available optional parameters (type `cscript lgt2txt.js help` or
-	`lgt2txt.sh -h`; depending on your Logtalk installation, you may simply
-	need to type `lgt2txt` in order to run the script).
-
+	of the available optional parameters (type `lgt2txt.sh -h` for help;
+	depending on your Logtalk installation, you may simply need to type
+	`lgt2txt` in order to run the script).
 
 Note that you can write other XSL files for converting the XML files to
 other formats besides PDF or (X)HTML. You can also write alternative CSS

@@ -31,6 +31,11 @@ Logtalk compiler and runtime
 * ADDED: New `includes/2`, `object/3`, `protocol/3`, and `category/3`
 properties to the `logtalk::loaded_file_property/2` predicate.
 
+Tools
+-----
+
+* REMOVED: Deprecated `lgtdoc` tool `.js` scripts.
+
 Installers and installation scripts
 -----------------------------------
 

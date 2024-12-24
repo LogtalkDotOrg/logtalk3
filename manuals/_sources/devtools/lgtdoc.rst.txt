@@ -10,9 +10,9 @@ documentation about a source file, a library or directory of source
 files, or all loaded source files. The tool predicates accept several
 options for generating the XML files, including the output directory.
 
-The ``lgtdoc/xml`` directory contains several ready to use Bash and
+The ``lgtdoc/xml`` directory contains several ready-to-use Bash and
 PowerShell scripts for converting the XML documenting files into final
-formats including (X)HTML, PDF, Markdown, and reStructuredText (for use
+formats, including (X)HTML, PDF, Markdown, and reStructuredText (for use
 with Sphinx), and plain text files. The scripts are described in their
 ``man`` pages and made available in the system path by default.
 
@@ -40,8 +40,9 @@ additional requirements are:
 - Pygments: https://pygments.org/
 - Read the Docs theme: https://github.com/readthedocs/sphinx_rtd_theme
 
-2. Converting XML files to PDF files XSL-FO processor. The supported
-   XSL-FO processors for Bash and PowerShell conversion scripts are:
+2. Converting XML files to PDF files require a XSL-FO processor. The
+   supported XSL-FO processors for Bash and PowerShell conversion
+   scripts are:
 
 - Apache FOP processor: http://xmlgraphics.apache.org/fop/
 - RenderX XEP processor: http://www.renderx.com/
@@ -84,8 +85,8 @@ directives, consult the documenting section of the User Manual:
 
 `../../manuals/userman/documenting.html <../../manuals/userman/documenting.html>`__
 
-Extracting documenting information from your source code using with this
-tool requires compiling the source files using the ``source_data(on)``
+Extracting documenting information from your source code using this tool
+requires compiling the source files using the ``source_data(on)``
 compiler flag. For example:
 
 ::
