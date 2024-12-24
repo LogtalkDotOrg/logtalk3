@@ -29,11 +29,11 @@ Logtalk repository exists in the `C:\lgt3git` directory.
 The default location for the Logtalk system files installation when the
 `%LOGTALKHOME%` environment variable is not defined is:
 
-- For admin users installations:
+- For admin user installations:
 	* `C:\Program Files (x86)\Logtalk` on 64-bit Windows
 	* `C:\Program Files\Logtalk` on 32-bit Windows
 
-- For non-admin users installations:	
+- For non-admin user installations:	
 	* `%LOCALAPPDATA%\Logtalk`
 
 The default location for the Logtalk user files installation when the
@@ -65,7 +65,7 @@ copy the desired shortcut to the project directory and use its path
 as the value of the `Start in` shortcut setting.
 
 The installer can be run in silent mode when executed at the command-line
-by using the option `/SILENT` (progress window is show) or `/VERYSILENT`
+by using the option `/SILENT` (progress window is shown) or `/VERYSILENT`
 (no progress window). Currently, the installer cannot be run in system
 context.
 

@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,7 +24,7 @@ and built-in predicates. There are also test sets for logical update semantics,
 unbounded integer arithmetic, and Unicode support for Prolog systems supporting
 these features. Several of these unit tests are taken from the official ISO
 Prolog standard (updated up to the ISO/IEC 13211-1:1995 Prolog Core standard
-and the follow up corrigenda). Several tests originate from SICS, ECLiPSe, and
+and the follow-up corrigenda). Several tests originate from SICS, ECLiPSe, and
 SWI-Prolog and are used here with permission.
 
 This conformance suite also includes unit tests for Prolog features that
@@ -67,13 +67,13 @@ The test identifier prefixes indicate their origin:
 - `tpl_` - tests contributed by Trealla Prolog developers
 - `xvm_` - tests contributed by XVM developers
 
-To run all the provided tests with e.g. SWI-Prolog, open a terminal and type:
+To run all the provided tests with, e.g., SWI-Prolog, open a terminal and type:
 
 	$ cd $LOGTALKUSER/tests/prolog
 	$ logtalk_tester -p swi
 	...
 
-When running Logtalk form a git repo clone, you may need to type instead:
+When running Logtalk from a git repo clone, you may need to type instead:
 
 	$ logtalk_tester.sh -p swi
 
@@ -81,7 +81,7 @@ By convention, tests for standard built-in predicates encapsulate the main
 test goal using the `{}/1` control construct. In most cases, this precaution
 is not necessary as the calls would be compiled as-is. An exception is the
 input/output predicates that are affected by operator declarations (which
-otherwise would be compiled to ensure that entity declared operators are
+otherwise would be compiled to ensure that entity-declared operators are
 local to the entities as required by Logtalk semantics).
 
 Tests from the ISO Prolog standards that would require a portable way of
@@ -94,11 +94,11 @@ that either doesn't support cyclic terms or whose support for cyclic terms
 is limited (see the table column for coinduction in the `adapters/NOTES.md`
 file).
 
-There is some overlap between a few test sets. Notably, between tests sets
+There is some overlap between a few test sets. Notably, between test sets
 for arithmetic functions and the tests for the `is/2` built-in predicate.
 
 Failure of unit tests doesn't necessarily mean that a backend Prolog compiler
-is faulty. Standards are not perfect and there isn't always a community
+is faulty. Standards are not perfect, and there isn't always a community
 consensus on what should be the correct test results. Common causes of failure
 include:
 
@@ -107,8 +107,8 @@ non-conforming but otherwise arguably valid results
 - type checking of output arguments of standard predicates, which can be
 problematic from both semantics and performance perspectives
 
-Often, a relatively small of issues can cause a relatively large number of
-failures. This also means that fixing a single issue can result in multiple
+Often, a relatively small number of issues can cause a relatively large number
+of failures. This also means that fixing a single issue can result in multiple
 tests that previously failed passing.
 
 Some Prolog compilers provide a strict ISO mode that may result in different

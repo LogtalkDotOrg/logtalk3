@@ -26,8 +26,7 @@ for most libraries, developer tools, examples, contributions, and ports.
 The Prolog test suite includes conformance tests for both official and de
 facto standards. It can be used to highlight differences between backend
 Prolog compilers when porting and testing Logtalk applications. See the
-`prolog/NOTES.md` file for details about the these tests and how to run
-them.
+`prolog/NOTES.md` file for details about these tests and how to run them.
 
 You can automate running all these tests by calling the `logtalk_tester`
 shell script from the command-line (see the `scripts/NOTES.md` file for
@@ -35,7 +34,7 @@ details on how to use this script with POSIX and Windows operating-systems).
 Type `man logtalk_tester` or `logtalk_tester -h` for usage details, including
 how to select the backend Prolog compiler.
 
-To run all the provided unit tests with e.g. SWI-Prolog as the backend
+To run all the provided unit tests with, e.g., SWI-Prolog as the backend
 compiler, open a terminal and type:
 
 	$ cd $LOGTALKUSER

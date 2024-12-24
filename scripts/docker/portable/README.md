@@ -77,7 +77,7 @@ be mounted here.
 Building a local image
 ----------------------
 
-With all the the backends support by the Docker file:
+With all the the backends supported by the Docker file:
 
 	docker build -t logtalk3 .
 

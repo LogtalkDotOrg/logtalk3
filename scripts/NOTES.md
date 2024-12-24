@@ -141,7 +141,7 @@ also available in the Logtalk website.
 - `windows`  
 	directory containing files used when building Windows GUI installers
 
-- `logtalk_user_setup.sh` and `logtalk_user_setup.ps1` 
+- `logtalk_user_setup.sh` and `logtalk_user_setup.ps1`  
 	end-user scripts for copying the Logtalk user-modifiable files and
 	directories to the location pointed to by the environment variable
 	`LOGTALKUSER` (defaults to `~/logtalk` on POSIX operating-systems

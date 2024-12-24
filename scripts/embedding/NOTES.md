@@ -61,8 +61,8 @@ or [Git for Windows](https://gitforwindows.org). Both provide access
 to a Bash shell. In both cases, use full paths with forward slashes
 (e.g., `C:/Users/jdoe/collect`) and without environment variables. You
 must also specify the temporary directory for intermediate files using
-the scripts `-t` option. Also, symbolic links may not work and use of
-actual paths to files may be required.
+the scripts `-t` option. Also, symbolic links may not work, and the use
+of actual paths to files may be required.
 
 Settings for embedded applications
 ----------------------------------
@@ -74,7 +74,7 @@ to `skip` to prevent reloading of already loaded code when running the
 embedded application or saved state. You may also want to turn off the
 `source_data` flag to reduce the size of your application. When a settings
 file is passed as argument to the embedding scripts, the backend adapter
-file ia automatically patched, changing the value of the `settings_file`
+file is automatically patched, changing the value of the `settings_file`
 flag to `deny`, to prevent using any settings file accessible on a computer
 where the embedded application is run to disturb it.
 
@@ -119,6 +119,6 @@ use something like:
 Known issues
 ------------
 
-The Bash version of the embedding scripts use GNU `sed` when available.
+The Bash versions of the embedding scripts use GNU `sed` when available.
 Notably on macOS, if you get `sed` errors when running the embedding
-scripts, try installing GNU `sed` (using e.g. Homebrew or MacPorts).
+scripts, try installing GNU `sed` (using, e.g., Homebrew or MacPorts).

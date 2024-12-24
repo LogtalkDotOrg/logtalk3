@@ -29,17 +29,25 @@ Build arguments
 - `LOGTALK_VERSION`  
 The Logtalk version to be built.
 
-Valid identifiers are as shown in the Logtalk GitHub repository at [release names](https://github.com/LogtalkDotOrg/logtalk3/releases). Defaults to `master`, which causes the Docker image to be built with the latest version of Logtalk in its master branch.
+Valid identifiers are as shown in the Logtalk GitHub repository at
+[release names](https://github.com/LogtalkDotOrg/logtalk3/releases).
+Defaults to `master`, which causes the Docker image to be built with
+the latest version of Logtalk in its master branch.
 
 
 Volumes
 -------
 
 - `/source`  
-The work directory where Logtalk is started. The code base can be mounted here.
+The work directory where Logtalk is started. The code base can be mounted
+here.
 
 - `/logtalkuser_prefix`  
-To customize its installation, the user can mount in this volume the parent directory in its host system where it is located the custom Logtalk user directory. If no Logtalk user directory exists, it will be created the first time and will be persisted and used in the following executions of the Logtalk container.
+To customize its installation, the user can mount in this volume the parent
+directory in its host system where the custom Logtalk user directory is
+located. If no Logtalk user directory exists, it will be created the first
+time and will be persisted and used in the following executions of the
+Logtalk container.
 
 
 Building a Logtalk image

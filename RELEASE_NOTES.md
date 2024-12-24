@@ -31,6 +31,11 @@ Logtalk compiler and runtime
 * ADDED: New `includes/2`, `object/3`, `protocol/3`, and `category/3`
 properties to the `logtalk::loaded_file_property/2` predicate.
 
+Documentation
+-------------
+
+* FIXED: Grammar and spelling typos in scripts and tests documentation.
+
 Tools
 -----
 
