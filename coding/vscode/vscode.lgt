@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:62:4,
+		version is 0:62:5,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-21,
+		date is 2024-12-26,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1132,7 +1132,10 @@
 	% locally defined predicate
 	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
 		entity_property(Entity, Kind, defines(Name/Arity, Properties)),
-		entity_property(Entity, Kind, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Entity, Kind, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 	% multifile predicate
 	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
