@@ -49,6 +49,9 @@ Installers and installation scripts
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: VSCode support for finding dynamic predicate references in clauses
+that assert or retract clauses for them.
+
 * FIXED: VSCode support for finding predicate implementations when the
 definition is found in an included file.
 

@@ -23,7 +23,7 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:62:5,
+		version is 0:63:0,
 		author is 'Paulo Moura and Jacob Friedman',
 		date is 2024-12-26,
 		comment is 'Support for Visual Studio Code programatic features.'
@@ -873,8 +873,47 @@
 				;	CallerFile = File
 				)
 			),
-			References,
+			References3,
 			References2
+		),
+		findall(
+			UpdaterFile-UpdaterLine,
+			(	entity_property(Updater, _, updates(Object::Name/Arity, UpdatesProperties)),
+				callable(Object),
+				memberchk(line_count(UpdaterLine), UpdatesProperties),
+				find_declaration_(Object::Name/Arity, Updater, UpdaterLine, File, Line),
+				(	member(include(UpdaterFile), UpdatesProperties) ->
+					true
+				;	entity_property(Updater, _, file(UpdaterFile))
+				)
+			),
+			References4,
+			References3
+		),
+		findall(
+			UpdaterFile-UpdaterLine,
+			(	entity_property(Updater, _, updates(::Name/Arity, UpdatesProperties)),
+				memberchk(line_count(UpdaterLine), UpdatesProperties),
+				find_declaration_(::Name/Arity, Updater, UpdaterLine, File, Line),
+				(	member(include(UpdaterFile), UpdatesProperties) ->
+					true
+				;	entity_property(Updater, _, file(UpdaterFile))
+				)
+			),
+			References5,
+			References4
+		),
+		findall(
+			UpdaterFile-UpdaterLine,
+			(	entity_property(Entity, _, updates(Name/Arity, UpdatesProperties)),
+				memberchk(line_count(UpdaterLine), UpdatesProperties),
+				(	member(include(UpdaterFile), UpdatesProperties) ->
+					true
+				;	UpdaterFile = File
+				)
+			),
+			References,
+			References5
 		).
 
 	% predicate listed in a uses/2 directive
