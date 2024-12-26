@@ -1140,7 +1140,10 @@
 	% multifile predicate
 	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
 		entity_property(Entity, _, includes(Name/Arity, Other, Properties)),
-		entity_property(Other, _, file(File)),
+		(	member(include(File), Properties) ->
+			true
+		;	entity_property(Other, _, file(File))
+		),
 		memberchk(line_count(Line), Properties).
 	% descendant definitions
 	find_predicate_implementation(Name/Arity, Entity, File-Line) :-
