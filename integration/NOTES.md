@@ -45,10 +45,10 @@ your system path):
 Om Windows, you may need to type the `.ps1` extension (e.g. `swilgt.ps1`).
 
 For more information about these scripts and their dependencies, consult
-the corresponding `man` page (e.g., `man yaplgt`). The `man` pages are also
-available at:
+the corresponding `man` page (e.g., `man yaplgt`). HTML versions of the
+`man` pages are also available at:
 
-https://logtalk.org/man/
+https://logtalk.org/documentation.html#man-pages
 
 On Windows systems, the Logtalk installer also makes Prolog integration
 shortcuts available from the `Start Menu/Programs/Logtalk` menu.
@@ -69,10 +69,10 @@ variable be set to the `node_modules` directory path where you installed
 Tau Prolog and its dependencies.
 
 The environment variables `LOGTALKHOME` and `LOGTALKUSER` should be defined
-in order to run the integration scripts (see the `INSTALL.md` file for
-details on setting these variables). When the scripts detect an outdated
-Logtalk user directory, they create a new one by running the script
-`logtalk_user_setup.sh` (a backup is automatically created of the old
+in order to run the integration scripts (see the `INSTALL.md` file for details
+on setting these variables). When the scripts detect an outdated Logtalk user
+directory, they create a new one by running the `logtalk_user_setup.sh` or
+`logtalk_user_setup.ps1` script (a backup is automatically created of the old
 directory).
 
 Note that the integration scripts and shortcuts may fail if you use non-

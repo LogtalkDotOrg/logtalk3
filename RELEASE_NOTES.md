@@ -34,6 +34,8 @@ properties to the `logtalk::loaded_file_property/2` predicate.
 Documentation
 -------------
 
+* UPDATED: Notes on the Prolog integration scripts.
+
 * FIXED: Grammar and spelling typos in scripts and tests documentation.
 
 Tools
