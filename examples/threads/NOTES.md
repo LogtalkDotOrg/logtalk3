@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,24 +20,23 @@ ________________________________________________________________________
 
 This folder contains several examples of multi-threading programming.
 Multi-threading programming is only supported on some Prolog compilers.
-Currently this includes SWI-Prolog, YAP, and some XSB versions (make sure
-that you use the multi-threading versions of these Prolog compilers!). 
+Currently this includes SWI-Prolog, Trealla Prolog, XVM, and YAP. 
 Moreover, multi-threading may be turned off by default. In order to run 
 the examples, you may need to first turn on multi-threading support on
 the Prolog adapter files.
 
-Some examples try to benchmark single-threaded vs multi-threaded solutions.
-Depending on the Prolog compiler, the operating-system, and the computer
-used, you may need to adjust the size of the problem data in order to find
-the threshold where multi-threading solutions begin to outperform the
-single-threaded solutions.
+Some examples try to benchmark single-threaded versus multi-threaded
+solutions. Depending on the Prolog compiler, the operating-system, and
+the computer used, you may need to adjust the size of the problem data
+in order to find the threshold where multi-threading solutions begin
+to outperform the single-threaded solutions.
 
 Some examples may imply adjusting the default size of thread data areas or,
 preferably, use of the 64 bits version of the compatible Prolog compilers.
 
-There are known Prolog bugs on the multi-threading support found on XSB 
-and YAP. These bugs prevent some examples to run and may lead to crashes.
-Some bugs are platform-specific, only occurring on some operating-systems.
+There are known bugs in the multi-threading support found in some of the
+backends. These bugs prevent some examples from running and may result in
+crashes. Some of these bugs are specific to some operating-systems.
 
 Follows a short description of the included example (in alphabetical order):
 
@@ -55,7 +54,7 @@ Follows a short description of the included example (in alphabetical order):
 	using a barrier as a checkpoint to synchronize a set of worker
 	threads assembling a set of items
 - `fft`
-	multi-threading computation of the Fast Fourier Transform
+	multi-threaded computation of the Fast Fourier Transform
 - `fibonacci`
 	multi-threading solution for computing Fibonacci numbers
 - `functions`
@@ -66,7 +65,7 @@ Follows a short description of the included example (in alphabetical order):
 	multi-threading implementation of recursive Gaussian quadrature
 	methods for numerical integration of functions of one variable
 - `integration2d`
-	multi-threading implementation of recursive Gaussian quadrature
+	multi-threaded implementation of recursive Gaussian quadrature
 	methods for numerical integration of functions of two variables
 - `metered_concurrency`
 	an implementation of a metered concurrency task

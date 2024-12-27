@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -44,3 +44,6 @@ This directory contains several examples of using threaded engines:
 - `yield`  
 	example of fetching answers from an engine returned using the
 	yield predicate
+
+Threaded engines are only supported on some Prolog compilers. Currently
+these include ECLIPSe, SWI-Prolog, Trealla Prolog, XVM, and YAP. 
