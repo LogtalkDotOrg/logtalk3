@@ -64,7 +64,7 @@ Prolog compilers are created in the `Start Menu/Programs/Logtalk` menu.
 The first run of the JIProlog and XSB integration shortcuts may require
 administrator privileges depending on the JIProlog and XSB installation
 (right-click on the shortcut and select the "Run as administrator" option).
-PowerShell versions of the scripts listed above are also available (e.g.
+PowerShell versions of the scripts listed above are also available (e.g.,
 `gplgt.ps1`). PowerShell 7.3 or later version is required for running
 these scripts.
 
@@ -87,7 +87,7 @@ Basic help on Logtalk usage at the top-level interpreter
 --------------------------------------------------------
 
 Start Logtalk and call the goal `{help(loader)}` followed by `help::help`.
-This will provide you with an overview on how to get help and how to load
+This will provide you with an overview of how to get help and how to load
 and debug your code.
 
 
@@ -115,12 +115,12 @@ file contains a brief description of each example. The
 [learning guide](https://logtalk.org/learning.html) includes a suggested
 walkthrough.
 
-1. Select and open one of the examples directory.
+1. Select an example and open its directory.
 
 2. Read the example `NOTES.md` file for a description of the example.
 
 3. Open the `SCRIPT.txt` file for instructions on how to load the example
-and for sample queries that you may try by copying-and-pasting them to
+and for sample queries that you may try by copying and pasting them to
 your Prolog interpreter top-level.
 
 
@@ -134,7 +134,7 @@ Ready to start writing your own programs?
 the section on "Prolog integration and migration".
 
 2. Take a look at the [`coding`](coding) directory. There you will find
-syntax  support files for popular text editors which enable syntax coloring
+syntax  support files for popular text editors that enable syntax coloring
 and other text services when editing Logtalk source files. There's also
 support for syntax highlighters used for publishing source code and for
 source code versioning systems.

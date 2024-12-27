@@ -33,8 +33,8 @@ programming in the large. Logtalk supports modern code encapsulation and
 code reuse mechanisms while preserving the declarative programming features
 of Prolog.
 
-Logtalk is implemented as a trans-compiler in highly portable code and can
-use most modern and standards compliant Prolog implementations as a backend
+Logtalk is implemented as a transcompiler in highly portable code and can
+use most modern and standards-compliant Prolog implementations as a backend
 compiler.
 
 As a multi-paradigm language, Logtalk includes support for both *prototypes*
@@ -44,7 +44,7 @@ and *high-level multi-threading programming*. Logtalk uses standard Prolog
 syntax with the addition of some operators and directives for a smooth learning
 path.
 
-Logtalk is distributed under a commercial friendly license and includes full
+Logtalk is distributed under a commercial-friendly license and includes full
 documentation, tutorials, portable libraries, a comprehensive set of portable
 developer tools, and numerous programming examples to help get you started.
 
@@ -57,7 +57,7 @@ unacceptable behavior to contact@logtalk.org.
 Logtalk website
 ---------------
 
-The latest stable release of the Logtalk is always available at:
+The latest stable release of Logtalk is always available at:
 
 https://logtalk.org/
 
@@ -134,7 +134,7 @@ pages are also available at the Logtalk website.
 Registration
 ------------
 
-To register as a Logtalk user please use the registration form at:
+To register as a Logtalk user, please use the registration form at:
 
 https://logtalk.org/regform.html
 
@@ -160,7 +160,7 @@ https://logtalk.org/support.html
 Citations
 ---------
 
-If you find Logtalk useful, please include a citation on your publications
+If you find Logtalk useful, please include a citation in your publications
 (also cite the used backend Prolog compilers). The [BIBLIOGRAPHY.bib](BIBLIOGRAPHY.bib)
 file includes bibliographic references in BibTeX format (including the 2003
 PhD thesis on Logtalk design and implementation and the Logtalk Handbook).
@@ -179,7 +179,7 @@ Legal
 
 Logtalk is copyrighted by Paulo Moura and made available under the Apache
 License 2.0. See the [LICENSE.txt](LICENSE.txt) file for the license terms.
-The copyright notice and license applies to all files in this release unless
+The copyright notice and license apply to all files in this release unless
 otherwise explicitly stated. See the [NOTICE.txt](NOTICE.txt) for additional
 copyright information.
 

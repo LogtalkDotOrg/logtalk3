@@ -38,7 +38,7 @@ For bug reports and suggestions, create a ticket in our issue tracker at:
 https://github.com/LogtalkDotOrg/logtalk3/issues
 
 If you prefer to discuss your contribution first with other developers,
-you can join us for live discussion at our chat room:
+you can join us for a live discussion in our chat room:
 
 https://gitter.im/LogtalkDotOrg/logtalk3
 
@@ -47,7 +47,7 @@ In alternative, you can also join our discussion forums at:
 https://forums.logtalk.org/
 
 For contributing improvements and fixes to the Handbook, open it in your
-web browser, click on link on the top right that says "Edit on GitHub",
+web browser, click on the link on the top right that says "Edit on GitHub",
 make the proposed changes, and submit them as a pull request.
 
 In the specific case of developer tools and libraries documentation, note
@@ -93,4 +93,4 @@ Contributions should be made available under the Logtalk license without any
 additional terms or conditions. Contributions using other licensing terms may
 also be distributed with Logtalk with the understanding that the terms of their
 use depends solely on the authors chosen license terms and may require a
-separate, independent, agreement between users and authors.
+separate and independent agreement between users and authors.

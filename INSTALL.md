@@ -44,11 +44,11 @@ Logtalk basic installation
 Manual installation of Logtalk can be accomplished by decompressing the
 sources archive (or by cloning the development git server), optionally running
 an installation script, and defining a couple of environment variables. You
-can install Logtalk in any user accessible location. Whenever possible, it is
+can install Logtalk in any user-accessible location. Whenever possible, it is
 recommended that Logtalk be installed by a user with administrative rights,
 as described below. This leads to a setup where each Logtalk user may freely
 run and modify the provided examples, library, and tool files with the option
-of, at any time, restoring the files to its original state by simply running
+of, at any time, restoring the files to their original state by simply running
 one of the provided scripts.
 
 **Using the sources or git clone directory**
@@ -64,7 +64,7 @@ use `swilgt.sh` instead of `swilgt`).
 **Installing for a single user with no administrative rights**
 
 If you want to keep a pristine copy of the sources (or avoid possible merge
-conflicts when updating your git clone) use the provided installation script
+conflicts when updating your git clone), use the provided installation script
 to copy the files that typically you want to play with and modify elsewhere.
 
 For **POSIX** systems (macOS, Linux, ...), first, open a terminal, change the
@@ -112,7 +112,7 @@ integration and other useful shell scripts written to the `$prefix/bin`
 directory, which should be in your `PATH` environment variable. The script
 also creates a symbolic link, `$prefix/share/logtalk`, which can be used
 for e.g. defining the `LOGTALKHOME` environment variable described below.
-Man pages are installed on the `$prefix/share/man` directory, which should
+Man pages are installed in the `$prefix/share/man` directory, which should
 be in your `MANPATH` environment variable.
 
 If you're using **Windows**, you can simply use the provided GUI installer
@@ -121,9 +121,9 @@ You can also easily generate the GUI installer yourself. See the instructions
 on the `scripts/windows/NOTES.md` file. If the installer fails to detect the
 installation of the backend Prolog compiler you want to use, you can manually
 create a Windows integration shortcut by finding the full path to the Prolog
-executable and using the Prolog specific command-line options to load the
+executable and using the Prolog-specific command-line options to load the
 integration file (see the Bash integration scripts in the `integration`
-directory for the options and file to be loaded). For example assume that
+directory for the options and file to be loaded). For example, assume that
 you're using a non-standard and non-default installation of SWI-Prolog in
 a removable disk mounted as `G:\`. The shortcut would use a path such as:
 
@@ -196,8 +196,8 @@ If you're using Windows, the provided GUI installer (which supports both admin
 and non-admin users) takes care of the definition of the environment variables.
 
 
-Generating documentation human-readable formats
------------------------------------------------
+Generating documentation in human-readable formats
+--------------------------------------------------
 
 When downloading the source archive or cloning the git repo, the documentation
 human-readable formats are not included and must be manually generated afer
@@ -245,18 +245,18 @@ the `scripts/NOTES.md` file for details):
 The local copies made by the `logtalk_user_setup` scripts have both read and
 write permissions for the user running the script. When used with one of the
 backend Prolog compilers for which an integration script is provided on
-the `integration` directory, this setup as the advantage of allowing each
+the `integration` directory, this setup has the advantage of allowing each
 end-user to independently customize default compilation flags, library paths,
 and modify and experiment with the provided libraries and examples.
 
 Windows (admin and non-admin) users may also use the Logtalk GUI installer
 to setup their Logtalk user folder and the `LOGTALKUSER` environment variable.
 
-User applications should preferable be kept outside of the Logtalk user folder
-created by the scripts above as updating Logtalk often results in updating the
+User applications should preferably be kept outside of the Logtalk user folder
+created by the scripts above, as updating Logtalk often results in updating the
 contents of this folder. If your applications depend on customization of the
 distribution files, backup those changes before updating Logtalk (the scripts
-above automatically make a backup of any existing Logtalk user folder but you
+above automatically make a backup of any existing Logtalk user folder, but you
 should rely on your own backups).
 
 

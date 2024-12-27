@@ -21,7 +21,7 @@ ________________________________________________________________________
 UPGRADING GUIDELINES
 ====================
 
-* Always check carefully the release notes when updating to a new version,
+* Always check the release notes carefully when updating to a new version,
 specially, REMOVED, CHANGED, and RENAMED items.
 
 * Changes in the Logtalk compiler between releases may render some files from
@@ -47,7 +47,7 @@ MAJOR LANGUAGE CHANGES FROM LOGTALK 2.x TO LOGTALK 3.x
 Structured message printing
 ---------------------------
 
-The new structured message printing mechanism, an extended implementation
+The new structured message-printing mechanism, an extended implementation
 of the same mechanism available in some Prolog systems, allows fine-grained
 control over printing of informative, warning, and error messages. This
 mechanism is fully customizable using user-defined hook predicates.
@@ -55,7 +55,7 @@ mechanism is fully customizable using user-defined hook predicates.
 Structured question asking
 --------------------------
 
-The new structured question asking mechanism complements the structured
+The new structured question-asking mechanism complements the structured
 message printing mechanism and allows fine-grained control over querying
 the user for data. This mechanism is fully customizable using user-defined
 hook predicates.
@@ -94,14 +94,14 @@ object but a separate tool, `debugger`. Logtalk 3.x greatly improves support
 for source file paths, removing the need for the `altdirs` flag. The flag
 `startup_message` is removed due to the introduction of structured message
 printing in Logtalk 3.x (see also the provided sample settings file). The
-`smart_compilation` flag is no longer necessary and the old behavior can now
+`smart_compilation` flag is no longer necessary, and the old behavior can now
 be controlled using the `clean` flag.
 
 The `reload` flag, is no longer considered or required for static binding
 optimizations, which now depend on the `optimize` flag. In addition, the
-default value for this flag is now `changed`, i.e. a file will be reloaded
-only if changed since last loaded (provided that the any explicit flags are
-the same as the first time it was loaded).
+default value for this flag is now `changed`, i.e., a file will be reloaded
+only if changed since last loaded (provided that any explicit flags are the
+same as the first time it was loaded).
 
 Deprecated directives, control constructs, and flags
 ----------------------------------------------------
@@ -110,7 +110,7 @@ The `:/1` control construct is deprecated and only available up to version
 3.18.0. Its functionality is now subsumed by the `(^^)/1` control construct
 (aka "super" control construct), which have been generalized to allow
 calling any imported or inherited predicate. In addition, static binding
-support for the `(^^)/1` control construct have been implemented (enabled by
+support for the `(^^)/1` control construct has been implemented (enabled by
 turning on the `optimize` compiler flag).
 
 The documentation only directives `calls/1` and `uses/1` are deprecated and
@@ -142,7 +142,7 @@ Semantic changes
 ----------------
 
 The `{}/1` control construct is now opaque to cuts, thus ensuring the same
-semantics when its argument is known at compile and when it's only known at
+semantics when its argument is known at compile time and when it's only known at
 runtime.
 
 Logtalk and Prolog built-in predicates can no longer be used as messages
@@ -181,7 +181,7 @@ Documenting support
 -------------------
 
 The compiler no longer outputs XML documenting files for the compiled source
-files. The documenting support have been moved to a Logtalk application,
+files. The documenting support has been moved to a Logtalk application,
 `lgtdoc`, available in the `tools` directory. This new tool takes advantage
 of the improved reflection API.
 
