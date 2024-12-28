@@ -45,10 +45,13 @@ This `%LOGTALKUSER%` directory can be re-created by re-running the
 installer and choosing the corresponding installation option or by
 running the `logtalk_user_setup.bat` script.
 
-The installer creates integration shortcuts that start Logtalk in the
-`%LOGTALKUSER%` directory. You can edit the building script and change
-the `Start in` setting to `%CD%`. However, this works on Windows XP
-but is ignored on Windows 7.
+The installer makes available PowerShell integration scripts from the
+Windows system directory. Requires PowerShell 7.3 or a later version.
+
+The installer also creates integration shortcuts that start Logtalk
+in the `%LOGTALKUSER%` directory. You can edit the building script
+and change the `Start in` setting to `%CD%`. However, this works on
+Windows XP but is ignored on Windows 7.
 
 Note that the integration shortcuts are only created for the Prolog
 systems that are detected when running the installer. Most Prolog
