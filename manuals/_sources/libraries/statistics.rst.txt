@@ -3,10 +3,11 @@
 ``statistics``
 ==============
 
-The entities in this group define some useful predicates for descriptive
-statistics. Data is represented as a list of numbers (integers or
-floats). Use the object ``sample`` of your data represents a sample. Use
-the object ``population`` if your data represents a population.
+The entities in this library define some useful predicates for
+descriptive statistics. Data is represented as a list of numbers
+(integers or floats). Use the object ``sample`` of your data represents
+a sample. Use the object ``population`` if your data represents a
+population.
 
 API documentation
 -----------------

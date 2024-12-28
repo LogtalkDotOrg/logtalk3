@@ -3,7 +3,7 @@
 ``uuid``
 ========
 
-This library implements a Universally unique identifier (UUID)
+This library implements a Universally Unique Identifier (UUID)
 generator. Currently only version 1 and version 4 UUIDs are supported.
 For reference material, see e.g.
 
@@ -16,7 +16,7 @@ version 1 UUIDs uses 14 random bits for the clock sequence.
 The generation of version 4 UUIDs uses the ``/dev/urandom`` random
 number generator when available. This includes macOS, Linux, \*BSD, and
 other POSIX operating-systems. On Windows, a pseudo-random generator is
-used but randomized using the current wall time.
+used, but randomized using the current wall time.
 
 UUIDs can be generated as atoms, lists of characters, or lists of
 character codes.

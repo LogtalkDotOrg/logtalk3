@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -78,7 +78,7 @@ parametric object. For example:
 	yes
 
 The `maybe` object provides types and predicates for type-checking of the
-term held by optional terms. It also provides some  predicates for handling
+term held by optional terms. It also provides some predicates for handling
 lists of optional terms.
 
 

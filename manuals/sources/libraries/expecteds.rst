@@ -9,10 +9,10 @@ proposals for an ``Expected<T>`` type. An expected term is an opaque
 compound term that either contains an expected value or an error
 informing why the expected value is not present. Expected terms provide
 an alternative to generating an exception (or a failure) when something
-unexpected happens when asking for a value. This allows e.g. separating
-the code that constructs expected terms from the code that processes
-them, which is then free to deal if necessary and at its convenience
-with any unexpected events.
+unexpected happens when asking for a value. This allows, e.g.,
+separating the code that constructs expected terms from the code that
+processes them, which is then free to deal if necessary and at its
+convenience with any unexpected events.
 
 API documentation
 -----------------

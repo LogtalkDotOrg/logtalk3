@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ ________________________________________________________________________
 `os`
 ====
 
-This library entities define a *portable* operating-system interface for the
+This library provides a *portable* operating-system interface for the
 supported backend Prolog compilers.
 
 The `os_types` category defines some useful operating-system types for
@@ -56,6 +56,6 @@ Known issues
 
 Some predicates may only be supported by a subset of backend Prolog compilers
 on a subset of operating-systems. They should be used with care and fully
-tested in your application domain as some backend Prolog compilers have buggy
+tested in your application domain, as some backend Prolog compilers have buggy
 and inconsistent interfaces, notably across operating-systems. See the
 remarks section in the `os` object documentation for details.

@@ -4,7 +4,7 @@
 ================
 
 This library provides a set of convenient hook objects for defining
-custom expansion workflows (using e.g. the ``hook_flows`` library) and
+custom expansion workflows (using, e.g., the ``hook_flows`` library) and
 for debugging. They are usable and useful as-is but should also be
 regarded as term- and goal-expansion examples that you can learn from,
 clone, and change to fit your application requirements.
@@ -25,7 +25,7 @@ To load all hook objects in this library, load the ``loader.lgt`` file:
 
    | ?- logtalk_load(hook_objects(loader)).
 
-To load a specific hook object, e.g. the ``backend_adapter_hook``
+To load a specific hook object, e.g., the ``backend_adapter_hook``
 object:
 
 ::
@@ -73,7 +73,7 @@ When compiling a source file, we sometimes want to prevent applying
 expansion rules. This can be accomplished by simply loading the
 ``identity_hook.lgt`` file, which defines the ``identity_hook`` hook
 object, whose expansion rules simply succeed without changing the terms
-and goals, and setting it as the file specific hook object writing as
+and goals, and setting it as the file-specific hook object writing as
 the first term in the file the **directive**:
 
 ::
@@ -165,7 +165,7 @@ encapsulated and use instead the ``object_wrapper_hook/1-2`` objects.
 Outputting term-expansion results to a stream or a file
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Load the ``write_to_stream_hook.lgt`` file and using the
+Load the ``write_to_stream_hook.lgt`` file and use the
 ``write_to_stream_hook(Stream)`` or
 ``write_to_stream_hook(Stream, Options)`` hook objects. Alternatively,
 you can load the ``write_to_file_hook.lgt`` file and use the

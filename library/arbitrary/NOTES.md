@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,7 +60,7 @@ ground types.
 Pre-defined types
 -----------------
 
-This library defines random generators for most common Logtalk and Prolog
+This library defines random generators for the most common Logtalk and Prolog
 types. See the [API documentation](../../docs/library_index.html#arbitrary)
 for a listing of all the pre-defined types.
 
@@ -212,9 +212,9 @@ prevent excessively deep trees:
 
 In this second example, we use some of the pre-defined types provided by the
 library. The `types_frequency(Pairs)` type supports generating random terms
-for a type in the `Type-Frequency` pairs list where the type ie randomly
+for a type in the `Type-Frequency` pairs list where the type is randomly
 chosen after the types relative frequency. The `compound(Name, Types)` type
-supports generating compound term with a given name and random arguments
+supports generating compound terms with a given name and random arguments
 after the given types:
 
 	| ?- type::arbitrary(node(4), Arbitrary).
@@ -241,8 +241,8 @@ of the `optionals` and `expecteds` libraries.
 Scoped generators and shrinkers
 -------------------------------
 
-Declaring a new generator and possibly a shrinker for a custom type rises the
-possibility of a conflict with third-party defined generators and shrinkers.
+Declaring a new generator and possibly a shrinker for a custom type raises the
+possibility of a conflict with third-party-defined generators and shrinkers.
 An alternative is to use the `(::)/2` meta-type to define scoped generators
 and shrinkers. For example:
 

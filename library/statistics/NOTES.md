@@ -2,7 +2,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,7 +22,7 @@ ________________________________________________________________________
 `statistics`
 ============
 
-The entities in this group define some useful predicates for descriptive
+The entities in this library define some useful predicates for descriptive
 statistics. Data is represented as a list of numbers (integers or floats).
 Use the object `sample` of your data represents a sample. Use the object 
 `population` if your data represents a population.

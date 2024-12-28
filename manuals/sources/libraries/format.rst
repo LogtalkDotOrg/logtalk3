@@ -5,8 +5,8 @@
 
 The ``format`` object provides a portable abstraction over how the de
 facto standard ``format/2-3`` predicates are made available by the
-supported backend Prolog systems. Some system provide these predicates
-as built-in predicates while others make them available using a library
+supported backend Prolog systems. Some systems provide these predicates
+as built-in predicates, while others make them available using a library
 that must be explicitly loaded.
 
 Calls to the library predicates are inlined when compiled with the
@@ -15,7 +15,7 @@ case, there is no overhead compared with calling the abstracted
 predicates directly.
 
 This library provides linter checks for calls to the ``format/2-3``
-predicates. Given the differences between implementation of these
+predicates. Given the differences between the implementations of these
 predicates among Prolog systems, the linter checks focus on detecting
 common errors such as missing arguments and too many arguments. The
 linter warnings are printed when the ``suspicious_calls`` flag is set to
@@ -69,7 +69,7 @@ Portability
 -----------
 
 Some Prolog systems provide only a subset of the expected format
-specifiers. Notably, table related format specifiers are only fully
+specifiers. Notably, table-related format specifiers are only fully
 supported by a few systems. See the section below on testing.
 
 Only some of the supported Prolog backends provide implementations of

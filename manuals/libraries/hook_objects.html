@@ -187,7 +187,7 @@
   <section id="hook-objects">
 <span id="library-hook-objects"></span><h1><code class="docutils literal notranslate"><span class="pre">hook_objects</span></code><a class="headerlink" href="#hook-objects" title="Link to this heading"></a></h1>
 <p>This library provides a set of convenient hook objects for defining
-custom expansion workflows (using e.g. the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library) and
+custom expansion workflows (using, e.g., the <code class="docutils literal notranslate"><span class="pre">hook_flows</span></code> library) and
 for debugging. They are usable and useful as-is but should also be
 regarded as term- and goal-expansion examples that you can learn from,
 clone, and change to fit your application requirements.</p>
@@ -203,7 +203,7 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(loader)).
 </pre></div>
 </div>
-<p>To load a specific hook object, e.g. the <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook</span></code>
+<p>To load a specific hook object, e.g., the <code class="docutils literal notranslate"><span class="pre">backend_adapter_hook</span></code>
 object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hook_objects(backend_adapter_hook)).
 </pre></div>
@@ -242,7 +242,7 @@ to set the default hook object:</p>
 expansion rules. This can be accomplished by simply loading the
 <code class="docutils literal notranslate"><span class="pre">identity_hook.lgt</span></code> file, which defines the <code class="docutils literal notranslate"><span class="pre">identity_hook</span></code> hook
 object, whose expansion rules simply succeed without changing the terms
-and goals, and setting it as the file specific hook object writing as
+and goals, and setting it as the file-specific hook object writing as
 the first term in the file the <strong>directive</strong>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">set_logtalk_flag</span>(hook, identity_hook).
 </pre></div>
@@ -320,7 +320,7 @@ encapsulated and use instead the <code class="docutils literal notranslate"><spa
 </section>
 <section id="outputting-term-expansion-results-to-a-stream-or-a-file">
 <h3>Outputting term-expansion results to a stream or a file<a class="headerlink" href="#outputting-term-expansion-results-to-a-stream-or-a-file" title="Link to this heading"></a></h3>
-<p>Load the <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook.lgt</span></code> file and using the
+<p>Load the <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook.lgt</span></code> file and use the
 <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">write_to_stream_hook(Stream,</span> <span class="pre">Options)</span></code> hook objects. Alternatively,
 you can load the <code class="docutils literal notranslate"><span class="pre">write_to_file_hook.lgt</span></code> file and use the

@@ -65,7 +65,7 @@ their scope, use protected or private import. For example:
 
 	:- end_object.
 
-The `listing` category provides a bare bones `portray_clause/1` predicate
+The `listing` category provides a bare-bones `portray_clause/1` predicate
 implementation. As this predicate is called (by the `listing/0-1` predicates)
 using the `(::)/1` control construct, the object importing the category can
 easily override the inherited definition with its own or with a call to the
@@ -86,9 +86,9 @@ a non-terminal indicator, or a clause head template (to list only clauses
 with a matching head).
 
 This library is often useful as a debugging helper. For example, assuming
-that the we want to list dynamic predicate clauses for an object `data`
-compiled (or created) with the `complements` flag set to `allow`, we can
-hot patch it to add the `listing` category:
+that we want to list dynamic predicate clauses for an object `data` compiled
+(or created) with the `complements` flag set to `allow`, we can hot patch it
+to add the `listing` category:
 
 	| ?- create_category(patch, [extends(listing),complements(data)], [], []).
 	yes

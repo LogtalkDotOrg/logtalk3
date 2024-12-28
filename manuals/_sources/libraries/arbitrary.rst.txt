@@ -44,7 +44,7 @@ shrinkers for all ground types.
 Pre-defined types
 -----------------
 
-This library defines random generators for most common Logtalk and
+This library defines random generators for the most common Logtalk and
 Prolog types. See the `API
 documentation <../../docs/library_index.html#arbitrary>`__ for a listing
 of all the pre-defined types.
@@ -212,8 +212,8 @@ This argument allows us to prevent excessively deep trees:
 In this second example, we use some of the pre-defined types provided by
 the library. The ``types_frequency(Pairs)`` type supports generating
 random terms for a type in the ``Type-Frequency`` pairs list where the
-type ie randomly chosen after the types relative frequency. The
-``compound(Name, Types)`` type supports generating compound term with a
+type is randomly chosen after the types relative frequency. The
+``compound(Name, Types)`` type supports generating compound terms with a
 given name and random arguments after the given types:
 
 ::
@@ -242,7 +242,7 @@ Scoped generators and shrinkers
 -------------------------------
 
 Declaring a new generator and possibly a shrinker for a custom type
-rises the possibility of a conflict with third-party defined generators
+raises the possibility of a conflict with third-party-defined generators
 and shrinkers. An alternative is to use the ``(::)/2`` meta-type to
 define scoped generators and shrinkers. For example:
 

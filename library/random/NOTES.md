@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -70,7 +70,7 @@ The `random` and `fast_random` objects manage the random number generator
 seed using internal dynamic state. The predicates that update the seed
 are declared as synchronized (when running on Prolog backends that support
 threads). Still, care must be taken when using these objects from
-multi-threaded applications as there is no portable solution to protect
+multi-threaded applications, as there is no portable solution to protect
 seed updates from signals and prevent inconsistent state when threads are
 canceled.
 

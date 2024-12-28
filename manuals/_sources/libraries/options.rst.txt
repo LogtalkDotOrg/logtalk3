@@ -45,12 +45,12 @@ functor is the option name (e.g., ``trim(true)`` or (``box(0,2)``)). The
 options. When an option appears multiple times in a list, the
 ``option/2-3`` predicates get or test the first (leftmost) occurrence.
 
-The library also supports a user-defined ``fix_option/2`` predicate. An
+The library also supports a user-defined ``fix_option/2`` predicate. A
 usage example is when an option value can be a relative file path that
-should be expanded before used. Another usage example would be
-converting from a user-friendly option to a form more suitable for
-internal processing. When a call to the ``fix_option/2`` predicate
-fails, the option is used as-is.
+should be expanded before use. Another usage example would be converting
+from a user-friendly option to a form more suitable for internal
+processing. When a call to the ``fix_option/2`` predicate fails, the
+option is used as-is.
 
 A simple example:
 

@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -58,8 +58,8 @@ options. When an option appears multiple times in a list, the ``option/2-3``
 predicates get or test the first (leftmost) occurrence.
 
 The library also supports a user-defined ``fix_option/2`` predicate.
-An usage example is when an option value can be a relative file path
-that should be expanded before used. Another usage example would be
+A usage example is when an option value can be a relative file path
+that should be expanded before use. Another usage example would be
 converting from a user-friendly option to a form more suitable for
 internal processing. When a call to the ``fix_option/2`` predicate
 fails, the option is used as-is.

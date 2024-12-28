@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,7 +27,7 @@ for an `Expected<T>` type. An expected term is an opaque compound term that
 either contains an expected value or an error informing why the expected
 value is not present. Expected terms provide an alternative to generating
 an exception (or a failure) when something unexpected happens when asking
-for a value. This allows e.g. separating the code that constructs expected
+for a value. This allows, e.g., separating the code that constructs expected
 terms from the code that processes them, which is then free to deal if
 necessary and at its convenience with any unexpected events.
 

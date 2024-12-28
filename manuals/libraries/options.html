@@ -209,12 +209,12 @@ functor is the option name (e.g., <code class="docutils literal notranslate"><sp
 <code class="docutils literal notranslate"><span class="pre">option/2-3</span></code> can be used to get or test an option given a list of
 options. When an option appears multiple times in a list, the
 <code class="docutils literal notranslate"><span class="pre">option/2-3</span></code> predicates get or test the first (leftmost) occurrence.</p>
-<p>The library also supports a user-defined <code class="docutils literal notranslate"><span class="pre">fix_option/2</span></code> predicate. An
+<p>The library also supports a user-defined <code class="docutils literal notranslate"><span class="pre">fix_option/2</span></code> predicate. A
 usage example is when an option value can be a relative file path that
-should be expanded before used. Another usage example would be
-converting from a user-friendly option to a form more suitable for
-internal processing. When a call to the <code class="docutils literal notranslate"><span class="pre">fix_option/2</span></code> predicate
-fails, the option is used as-is.</p>
+should be expanded before use. Another usage example would be converting
+from a user-friendly option to a form more suitable for internal
+processing. When a call to the <code class="docutils literal notranslate"><span class="pre">fix_option/2</span></code> predicate fails, the
+option is used as-is.</p>
 <p>A simple example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(foo,
     <span class="k">imports</span>(options)).

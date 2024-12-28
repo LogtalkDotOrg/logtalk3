@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +32,7 @@ within the same millisecond, monotonic sort order is not guaranteed.
 
 The generation of ULIDs uses the `/dev/urandom` random number generator
 when available. This includes macOS, Linux, *BSD, and other POSIX
-operating-systems. On Windows, a pseudo-random generator is used but
+operating-systems. On Windows, a pseudo-random generator is used, but
 randomized using the current wall time. 
 
 ULIDs can be generated as atoms, lists of characters, or lists of

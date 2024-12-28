@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -79,4 +79,4 @@ Recent versions of macOS seem to disable the mapping of `localhost` to
 `127.0.0.1`. This issue may prevent running this library unit tests and
 the `redis::connect/1` predicate from working. This can be fixed either
 by editing the `/etc/hosts file or by using in alternative the predicate
-`redis::connect/3` with `'127.0.0.1'` as first argument.
+`redis::connect/3` with `'127.0.0.1'` as the first argument.

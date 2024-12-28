@@ -30,7 +30,7 @@ common scenarios of combining multiple hook objects for the expansion
 of source files. These parametric hook objects can be combined to
 define workflows of any complexity (e.g., a pipeline where one of the
 steps is set with an element that is a pipeline). These two basic hook
-flows can also used as examples of how to construct your own custom
+flows can also be used as examples of how to construct your own custom
 expansion workflows.
 
 

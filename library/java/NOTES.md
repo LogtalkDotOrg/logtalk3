@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ ________________________________________________________________________
 
 The library Java entities define a minimal abstraction for calling Java
 from Logtalk. This abstraction makes use of Logtalk parametric objects
-and allows creating Java object, accessing Java class fields, and calling
+and allows creating Java objects, accessing Java class fields, and calling
 Java class and object methods using syntax closer to Logtalk. It also
 gives access to some Java utility predicates.
 

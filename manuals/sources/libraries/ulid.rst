@@ -14,7 +14,7 @@ within the same millisecond, monotonic sort order is not guaranteed.
 
 The generation of ULIDs uses the ``/dev/urandom`` random number
 generator when available. This includes macOS, Linux, \*BSD, and other
-POSIX operating-systems. On Windows, a pseudo-random generator is used
+POSIX operating-systems. On Windows, a pseudo-random generator is used,
 but randomized using the current wall time.
 
 ULIDs can be generated as atoms, lists of characters, or lists of

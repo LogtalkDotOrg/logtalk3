@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,7 +21,7 @@ ________________________________________________________________________
 `uuid`
 ======
 
-This library implements a Universally unique identifier (UUID) generator.
+This library implements a Universally Unique Identifier (UUID) generator.
 Currently only version 1 and version 4 UUIDs are supported. For reference
 material, see e.g.
 
@@ -33,7 +33,7 @@ uses 14 random bits for the clock sequence.
 
 The generation of version 4 UUIDs uses the `/dev/urandom` random number
 generator when available. This includes macOS, Linux, *BSD, and other POSIX
-operating-systems. On Windows, a pseudo-random generator is used but
+operating-systems. On Windows, a pseudo-random generator is used, but
 randomized using the current wall time. 
 
 UUIDs can be generated as atoms, lists of characters, or lists of character

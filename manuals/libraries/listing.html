@@ -214,7 +214,7 @@ to restrict their scope, use protected or private import. For example:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">listing</span></code> category provides a bare bones <code class="docutils literal notranslate"><span class="pre">portray_clause/1</span></code>
+<p>The <code class="docutils literal notranslate"><span class="pre">listing</span></code> category provides a bare-bones <code class="docutils literal notranslate"><span class="pre">portray_clause/1</span></code>
 predicate implementation. As this predicate is called (by the
 <code class="docutils literal notranslate"><span class="pre">listing/0-1</span></code> predicates) using the <code class="docutils literal notranslate"><span class="pre">(::)/1</span></code> control construct, the
 object importing the category can easily override the inherited
@@ -234,9 +234,9 @@ provides <code class="docutils literal notranslate"><span class="pre">portray_cl
 indicator, a non-terminal indicator, or a clause head template (to list
 only clauses with a matching head).</p>
 <p>This library is often useful as a debugging helper. For example,
-assuming that the we want to list dynamic predicate clauses for an
-object <code class="docutils literal notranslate"><span class="pre">data</span></code> compiled (or created) with the <code class="docutils literal notranslate"><span class="pre">complements</span></code> flag set
-to <code class="docutils literal notranslate"><span class="pre">allow</span></code>, we can hot patch it to add the <code class="docutils literal notranslate"><span class="pre">listing</span></code> category:</p>
+assuming that we want to list dynamic predicate clauses for an object
+<code class="docutils literal notranslate"><span class="pre">data</span></code> compiled (or created) with the <code class="docutils literal notranslate"><span class="pre">complements</span></code> flag set to
+<code class="docutils literal notranslate"><span class="pre">allow</span></code>, we can hot patch it to add the <code class="docutils literal notranslate"><span class="pre">listing</span></code> category:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">create_category</span>(patch, [extends(listing),complements(data)], [], []).
 yes
 

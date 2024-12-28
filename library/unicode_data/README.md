@@ -14,7 +14,7 @@ Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication:
 
 	https://creativecommons.org/publicdomain/zero/1.0/
 
-We do appreciate acknowledgement if you use these resources, however, and we
+We do appreciate acknowledgment if you use these resources, however, and we
 also welcome contributions to improve them.
 
 Website
@@ -83,10 +83,10 @@ them with the `unicode_` string, converting to lower case, and replacing the
 camel case spelling with underscores. There are, however, two exceptions:
 the files and directories holding the code point categories and names.
 
-There's also an utility file, `unicode_data.pl`, that can be used to load all
-the files in these resources. It is mostly used to test portability of the code
-across Prolog compilers. Also included is a Logtalk version of this file,
-`unicode_data.lgt`, that uses Logtalk's own implementation of the `include/1`
+There's also a utility file, `unicode_data.pl`, that can be used to load all
+the files in these resources. It is mostly used to test the portability of the
+code across Prolog compilers. Also included is a Logtalk version of this file,
+`unicode_data.lgt`, which uses Logtalk's own implementation of the `include/1`
 directive and the `logtak_load/1` predicate to load all files. This file can
 be used to workaround Prolog systems with buggy or missing implementations of
 the `ensure_loaded/1` and `include/1` directives.

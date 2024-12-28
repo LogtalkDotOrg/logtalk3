@@ -214,7 +214,7 @@ shrinkers for all ground types.</p>
 </section>
 <section id="pre-defined-types">
 <h2>Pre-defined types<a class="headerlink" href="#pre-defined-types" title="Link to this heading"></a></h2>
-<p>This library defines random generators for most common Logtalk and
+<p>This library defines random generators for the most common Logtalk and
 Prolog types. See the <a class="reference external" href="../../docs/library_index.html#arbitrary">API
 documentation</a> for a listing
 of all the pre-defined types.</p>
@@ -365,8 +365,8 @@ This argument allows us to prevent excessively deep trees:</p>
 <p>In this second example, we use some of the pre-defined types provided by
 the library. The <code class="docutils literal notranslate"><span class="pre">types_frequency(Pairs)</span></code> type supports generating
 random terms for a type in the <code class="docutils literal notranslate"><span class="pre">Type-Frequency</span></code> pairs list where the
-type ie randomly chosen after the types relative frequency. The
-<code class="docutils literal notranslate"><span class="pre">compound(Name,</span> <span class="pre">Types)</span></code> type supports generating compound term with a
+type is randomly chosen after the types relative frequency. The
+<code class="docutils literal notranslate"><span class="pre">compound(Name,</span> <span class="pre">Types)</span></code> type supports generating compound terms with a
 given name and random arguments after the given types:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>arbitrary(node(<span class="m">4</span>), <span class="nv">Arbitrary</span>).
 <span class="nv">Arbitrary</span> <span class="o">=</span> <span class="m">907</span>
@@ -392,7 +392,7 @@ the implementation of the <code class="docutils literal notranslate"><span class
 <section id="scoped-generators-and-shrinkers">
 <h2>Scoped generators and shrinkers<a class="headerlink" href="#scoped-generators-and-shrinkers" title="Link to this heading"></a></h2>
 <p>Declaring a new generator and possibly a shrinker for a custom type
-rises the possibility of a conflict with third-party defined generators
+raises the possibility of a conflict with third-party-defined generators
 and shrinkers. An alternative is to use the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> meta-type to
 define scoped generators and shrinkers. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(scoped).

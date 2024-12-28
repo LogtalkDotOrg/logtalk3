@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -60,6 +60,6 @@ Known issues
 Two tests are currently skipped when using the SWI-Prolog backend as they
 cannot be interrupted and generate the expected timeout exceptions due to
 tests being run from an `initialization/1` directive goal that, in the
-SWI-Prolog, implementation of this directive, ignores signals. The test
+SWI-Prolog implementation of this directive, ignores signals. The test
 goals do generate the expected timeout exception when not called from an
 `initialization/1` directive.

@@ -203,7 +203,7 @@ Alternatively:
    Yes
 
 Notice that ``generate/2`` takes, as second argument, a Prolog term that
-corresponds to the JSON Syntax in Prolog and produces the corresponding
+corresponds to the JSON syntax in Prolog and produces the corresponding
 JSON output in the format specified in the first argument:
 (``codes(Variable)``, ``stream(Stream)``, ``file(File)``,
 ``chars(Variable)`` or ``atom(Variable)``).

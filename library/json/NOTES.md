@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org> and
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org> and
 Jacinto Dávila <jdavila@optimusprime.ai>  
 SPDX-License-Identifier: Apache-2.0
 
@@ -200,7 +200,7 @@ Alternatively:
 	Yes
 
 Notice that `generate/2` takes, as second argument, a Prolog term that
-corresponds to the JSON Syntax in Prolog and produces the corresponding
+corresponds to the JSON syntax in Prolog and produces the corresponding
 JSON output in the format specified in the first argument: (`codes(Variable)`,
 `stream(Stream)`, `file(File)`, `chars(Variable)` or `atom(Variable)`).
 
