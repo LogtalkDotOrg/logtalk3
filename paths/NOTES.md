@@ -37,8 +37,8 @@ Also provided in this folder are six Prolog files:
 Together, these files provide the same path definitions of the `paths.pl`
 file. They can be used when embedding or deploying Logtalk applications
 where, e.g., tools or example paths should not be included. Note that the
-obvious solution of having `paths.pl` including or loading the other four
-Prolog files is not portable!
+obvious solution of having `paths.pl` include or load the other six Prolog
+files raises portability issues.
 
 Basic library aliases defined in the `paths.pl` file include:
 
