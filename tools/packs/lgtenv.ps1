@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Packs virtual environment script
-##   Last updated on July 18, 2024
+##   Last updated on December 29, 2024
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -37,7 +37,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.3")
+	Write-Output ($myName + " 0.4")
 }
 
 Function Write-Usage-Help() {
@@ -101,11 +101,11 @@ if ($d -eq "") {
 
 if ($p -eq "") {
 	$packs = $directory
-} elseif (!(Test-Path $directory\$p -PathType Container)) {
-	$packs = $directory\$p
-	New-Item -Path $directory\$p -ItemType directory > $null
+} elseif (!(Test-Path (Join-Path $directory $p) -PathType Container)) {
+	$packs = Join-Path $directory $p
+	New-Item -Path (Join-Path $directory $p) -ItemType directory > $null
 } else {
-	$packs = $directory\$p
+	$packs = Join-Path $directory $p
 }
 
 if (!(Get-Command "Set-PsEnv" -ErrorAction SilentlyContinue)) {

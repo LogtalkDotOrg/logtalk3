@@ -43,6 +43,8 @@ Tools
 
 * REMOVED: Deprecated `lgtdoc` tool `.js` scripts.
 
+* FIXED: The `packs` tool `lgtenv.ps1` script when using the `-p` option.
+
 Installers and installation scripts
 -----------------------------------
 
