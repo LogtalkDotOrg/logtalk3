@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "December 16, 2024" "Logtalk 3.86.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "December 29, 2024" "Logtalk 3.87.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -28,7 +28,7 @@ logtalk_tester \- Logtalk script for automating running unit tests
 .B logtalk_tester -h
 
 .SH DESCRIPTION
-\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found in the current directory and recursively in its sub-directories by scanning by default for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the tests directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the script. The script prints by default a full report of test compilation errors and warnings, skipped test sets, broken test sets, crashed test sets, skipped tests, failed tests, and test set and test stats. Note that the existence of broken or crashed test sets may result in some inconsistency on test stats, notably in the number of passed and failed tests.
+\fBlogtalk_tester\fR is a script for automating running Logtalk unit tests. This script runs unit tests found in the current directory and recursively in its sub-directories by scanning by default for \fItester.lgt\fR and \fItester.logtalk\fR source files. The script returns a non-zero exit status in case of failed tests or test set errors. When a \fItester.sh\fR file exists in the tests directory, the file is sourced before running the tests. The \fItester.sh\fR file is sourced with all the parameters passed to the script. The script prints by default a full report of test compilation errors and warnings, skipped test sets, broken test sets, crashed test sets, skipped tests, failed tests, test set stats, and test stats. Note that the existence of broken or crashed test sets may result in some inconsistency in test stats, notably in the number of passed and failed tests.
 
 .SH OPTIONS
 .TP
@@ -60,7 +60,7 @@ Name of the tests driver and sourced files (minus file name extensions). Default
 Path prefix to suppress when printing test suite and test result paths. Default is the user home directory.
 .TP
 .BI \-b
-Bug report server and optionally the bug report label(s). Valid values are \fIgithub\fR and \fIgitlab\fR. (no default). Use of this option requires the script to be called from a git repo directory or from one its sub-directories and the use of the \fI-s\fR and \fI-u\fR options. To set the label(s), use the syntax \fI-b server:labels\fR where \fIlabels\fR are a comma separated list.
+Bug report server and optionally the bug report label(s). Valid values are \fIgithub\fR and \fIgitlab\fR. (no default). Use of this option requires the script to be called from a git repo directory or from one its sub-directories and the use of the \fI-s\fR and \fI-u\fR options. To set the label(s), use the syntax \fI-b server:labels\fR where \fIlabels\fR are a comma-separated list.
 .TP
 .BI \-u
 Base URL for generating links to test files (no default). Must end with a slash and usually includes a git hash so that the link remains valid if the test files are later updated.
@@ -95,16 +95,16 @@ Provide help on script usage.
 .SH "EXIT STATUS"
 .TP
 .B 0
-All non-skipped tests pass (flaky test failures are ignored) and there are no broken, timedout, or crashed test sets.
+All non-skipped tests pass (flaky test failures are ignored). There are no broken, timedout, or crashed test sets.
 .TP
 .B 1
-Some (non-flaky) tests fail but there are no broken, timedout, or crashed test sets.
+Some (non-flaky) tests fail. But there are no broken, timedout, or crashed test sets.
 .TP
 .B 3
-One or more test sets timedout while executing but there are no broken or crashed test sets.
+One or more test sets timedout while executing. But there are no broken or crashed test sets.
 .TP
 .B 5
-One or more test sets are broken and thus could not be executed but there are no crashed test sets.
+One or more test sets are broken and thus could not be executed. But there are no crashed test sets.
 .TP
 .B 7
 One or more test sets crashed the process running them.

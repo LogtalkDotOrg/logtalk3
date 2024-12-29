@@ -1,4 +1,4 @@
-.TH logtalk_doclet 1 "December 16, 2024" "Logtalk 3.86.0" "Logtalk Documentation"
+.TH logtalk_doclet 1 "December 29, 2024" "Logtalk 3.87.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_doclet \- Logtalk script for automating running doclets
@@ -29,7 +29,7 @@ Backend Prolog compiler. Required. The following identifiers are used: B-Prolog 
 Directory to store the doclet run logs. Default is the local \fI./logtalk_doclet_logs\fR directory.
 .TP
 .BI \-t
-Timeout in seconds for running each doclet. Default is \fI0\fR; i.e. disabled.
+Timeout in seconds for running each doclet. Default is \fI0\fR (i.e., disabled).
 .TP
 .BI \-s
 Path prefix to suppress when printing doclet paths. Default is the empty string.
@@ -43,13 +43,13 @@ Provide help on script usage.
 .SH "EXIT STATUS"
 .TP
 .B 0
-All doclets succeeded and there are no timed out or crashed doclets.
+All doclets succeeded. There are no timed out or crashed doclets.
 .TP
 .B 1
-Some doclets failed but there are no timed out or crashed doclets.
+Some doclets failed. But there are no timed out or crashed doclets.
 .TP
 .B 3
-One or more doclets timed out while executing but there are no crashed doclets.
+One or more doclets timed out while executing. But there are no crashed doclets.
 .TP
 .B 7
 One or more doclets crashed the process running them.
