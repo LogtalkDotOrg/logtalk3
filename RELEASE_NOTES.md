@@ -56,6 +56,9 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: VSCode support for finding dynamic predicate references in clauses
 that assert or retract clauses for them.
 
+* IMPROVED: VSCode support on Windows for backends with file path
+representation issues such as ECLiPSe and XSB.
+
 * FIXED: VSCode support for finding predicate implementations when the
 definition is found in an included file.
 
