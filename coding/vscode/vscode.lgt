@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:64:0,
+		version is 0:63:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-30,
+		date is 2024-12-26,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -370,8 +370,7 @@
 		atom_concat(Directory, '/.vscode_declaration', Data),
 		atom_concat(Directory, '/.vscode_declaration_done', Marker),
 		open(Data, write, DataStream),
-		(	find_declaration(Call, CallFile, CallLine, DeclarationFile0, DeclarationLine) ->
-			{'$lgt_prolog_os_file_name'(DeclarationFile0, DeclarationFile)},
+		(	find_declaration(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
 			{format(DataStream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
 		;	true
 		),
@@ -530,9 +529,8 @@
 		atom_concat(Directory, '/.vscode_definition', Data),
 		atom_concat(Directory, '/.vscode_definition_done', Marker),
 		open(Data, write, DataStream),
-		(	find_definition(Call, CallFile, CallLine, DefinitionFile0, DefinitionLine) ->
-			{'$lgt_prolog_os_file_name'(DefinitionFile0, DefinitionFile)},
-			{format(DataStream, 'File:~w;Line:~d~n', [DefinitionFile, DefinitionLine])}
+		(	find_definition(Call, CallFile, CallLine, DeclarationFile, DeclarationLine) ->
+			{format(DataStream, 'File:~w;Line:~d~n', [DeclarationFile, DeclarationLine])}
 		;	true
 		),
 		close(DataStream),
@@ -767,8 +765,7 @@
 		atom_concat(Directory, '/.vscode_type_definition_done', Marker),
 		entity(ReferenceFile, ReferenceLine, ReferenceEntity),
 		open(Data, write, DataStream),
-		(	find_type_definition_(Name/Arity, ReferenceEntity, File0, Line) ->
-			{'$lgt_prolog_os_file_name'(File0, File)},
+		(	find_type_definition_(Name/Arity, ReferenceEntity, File, Line) ->
 			{format(DataStream, 'File:~w;Line:~d~n', [File, Line])}
 		;	true
 		),
@@ -800,10 +797,8 @@
 		open(Data, write, DataStream),
 		(	find_references_(Resource, ResourceFile, ResourceLine, References) ->
 			forall(
-				member(File0-Line, References),
-				(	{'$lgt_prolog_os_file_name'(File0, File)},
-					{format(DataStream, 'File:~w;Line:~d~n', [File, Line])}
-				)
+				member(File-Line, References),
+				{format(DataStream, 'File:~w;Line:~d~n', [File, Line])}
 			)
 		;	true
 		),
@@ -1131,10 +1126,8 @@
 		open(Data, write, DataStream),
 		(	find_implementations_(Resource, ReferenceFile, ReferenceLine, Implementations) ->
 			forall(
-				member(ImplementationFile0-ImplementationLine, Implementations),
-				(	{'$lgt_prolog_os_file_name'(ImplementationFile0, ImplementationFile)},
-					{format(DataStream, 'File:~w;Line:~d~n', [ImplementationFile, ImplementationLine])}
-				)
+				member(ImplementationFile-ImplementationLine, Implementations),
+				{format(DataStream, 'File:~w;Line:~d~n', [ImplementationFile, ImplementationLine])}
 			)
 		;	true
 		),
@@ -1664,33 +1657,28 @@
 	% lgtunit test results
 	logtalk::message_hook(tests_results_summary(Object, Total, Skipped, Passed, Failed, Flaky, Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		entity_property(Object, Kind, file(File0)),
-		{'$lgt_prolog_os_file_name'(File0, File)},
+		entity_property(Object, Kind, file(File)),
 		entity_property(Object, Kind, lines(Line, _)),
 		(	Note == '' ->
 			{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky)~n', [File, Line, Total, Skipped, Passed, Failed, Flaky])}
 		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Total, Skipped, Passed, Failed, Flaky, Note])}
 		),
 		fail.
-	logtalk::message_hook(passed_test(_Object, _Test, File0, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+	logtalk::message_hook(passed_test(_Object, _Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
 		fail.
-	logtalk::message_hook(failed_test(_Object, _Test, File0, Start-_End, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+	logtalk::message_hook(failed_test(_Object, _Test, File, Start-_End, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
 		fail.
-	logtalk::message_hook(skipped_test(_Object, _Test, File0, Start-_, _Note), _, lgtunit, _) :-
+	logtalk::message_hook(skipped_test(_Object, _Test, File, Start-_, _Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(vscode_test_results, 'File:~w;Line:~d;Status:skipped~n', [File, Start])},
 		fail.
 	logtalk::message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		entity_property(Entity, Kind, file(File0)),
-		{'$lgt_prolog_os_file_name'(File0, File)},
+		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, defines(Predicate, Properties)),
 		memberchk(lines(Line, _), Properties),
 		(	Covered =:= Total ->
@@ -1701,8 +1689,7 @@
 		fail.
 	logtalk::message_hook(entity_coverage(Entity, Covered, Total, Percentage), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		entity_property(Entity, Kind, file(File0)),
-		{'$lgt_prolog_os_file_name'(File0, File)},
+		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, lines(Line, _)),
 		(	Total =:= 1 ->
 			{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
@@ -1712,23 +1699,20 @@
 	% code_metrics tool results
 	logtalk::message_hook(entity_score(cc_metric, Entity, Score), _, code_metrics, _) :-
 		stream_property(_, alias(vscode_metrics_results)),
-		entity_property(Entity, Kind, file(File0)),
-		{'$lgt_prolog_os_file_name'(File0, File)},
+		entity_property(Entity, Kind, file(File)),
 		entity_property(Entity, Kind, lines(Line, _)),
 		{format(vscode_metrics_results, 'File:~w;Line:~d;Score:~d~n', [File, Line, Score])},
 		fail.
 	% debugger messages
-	logtalk::message_hook(fact(_, _, File0, Line), _, debugger, _) :-
+	logtalk::message_hook(fact(_, _, File, Line), _, debugger, _) :-
 		logtalk::expand_library_path(logtalk_user('scratch/.debug_info'), DebugInfo),
 		open(DebugInfo, write, Stream),
-		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
 		close(Stream),
 		fail.
-	logtalk::message_hook(rule(_, _, File0, Line), _, debugger, _) :-
+	logtalk::message_hook(rule(_, _, File, Line), _, debugger, _) :-
 		logtalk::expand_library_path(logtalk_user('scratch/.debug_info'), DebugInfo),
 		open(DebugInfo, write, Stream),
-		{'$lgt_prolog_os_file_name'(File0, File)},
 		{format(Stream, 'File:~w;Line:~d~n', [File, Line])},
 		close(Stream),
 		fail.
