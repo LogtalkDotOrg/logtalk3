@@ -41,7 +41,7 @@ Documentation
 Tools
 -----
 
-* REMOVED: Deprecated `lgtdoc` tool `.js` scripts.
+* REMOVED: Deprecated `lgtdoc` tool `.js` scripts and `ie50.xsl` file.
 
 * FIXED: The `packs` tool `lgtenv.ps1` script when using the `-p` option.
 

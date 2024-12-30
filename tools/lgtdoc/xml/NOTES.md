@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -120,13 +120,6 @@ Brief description of each directory and file in this folder:
 	format (either A4 or US Letter). The files `logtalk_entity_to_pdf_a4.xsl`
 	and `logtalk_entity_to_pdf_us.xsl` import the `logtalk_entity_to_pdf.xsl`
 	file and set the paper format parameter to the appropriate value.
-
-- `ie50.xsl`  
-	XSLT file for viewing XML files in Microsoft Internet Explorer 5.x
-	(using the outdated Microsoft XML Parser; works with both Macintosh
-	and Windows versions). The links in the (internally generated) HTML
-	files point to related XML files. It can be used to browse and view
-	the XML files directly.
 
 - `logtalk_entity.dtd`  
 - `logtalk_index.dtd`  
