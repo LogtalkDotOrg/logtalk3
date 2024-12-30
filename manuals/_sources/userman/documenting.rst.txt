@@ -362,22 +362,14 @@ found in the ``_build/html`` directory by default:
 
    $ open _build/html/index.html
 
-For Windows operating-systems, PowerShell (recommended) and JScript (legacy)
-scripts are available. For example, assuming that we want to generate HTML
-documentation, we could run in a PowerShell window:
+For Windows operating-systems, PowerShell scripts are available. For
+example, assuming that we want to generate HTML documentation, we could
+run in a PowerShell window:
 
 .. code-block:: text
 
-   cd xml_docs
-   lgt2html.ps1 -p saxon
-
-When using the legacy JScript scripts, you can also use the ``.bat`` script
-alternatives:
-
-.. code-block:: text
-
-   cd xml_docs
-   lgt2html /p:saxon
+   PS > cd xml_docs
+   PS > lgt2html.ps1 -p saxon
 
 After completion, the generated HTML files will be found in the ``xml_docs``
 directory by default.

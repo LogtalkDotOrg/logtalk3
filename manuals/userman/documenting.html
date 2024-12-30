@@ -431,17 +431,11 @@ found in the <code class="docutils literal notranslate"><span class="pre">_build
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>open<span class="w"> </span>_build/html/index.html
 </pre></div>
 </div>
-<p>For Windows operating-systems, PowerShell (recommended) and JScript (legacy)
-scripts are available. For example, assuming that we want to generate HTML
-documentation, we could run in a PowerShell window:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd xml_docs
-lgt2html.ps1 -p saxon
-</pre></div>
-</div>
-<p>When using the legacy JScript scripts, you can also use the <code class="docutils literal notranslate"><span class="pre">.bat</span></code> script
-alternatives:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd xml_docs
-lgt2html /p:saxon
+<p>For Windows operating-systems, PowerShell scripts are available. For
+example, assuming that we want to generate HTML documentation, we could
+run in a PowerShell window:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PS &gt; cd xml_docs
+PS &gt; lgt2html.ps1 -p saxon
 </pre></div>
 </div>
 <p>After completion, the generated HTML files will be found in the <code class="docutils literal notranslate"><span class="pre">xml_docs</span></code>
