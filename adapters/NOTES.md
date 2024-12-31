@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on November 14, 2024
+Last updated on December 31, 2024
 
 This file is part of Logtalk <https://logtalk.org/>  
 SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
@@ -25,10 +25,10 @@ This file contains some notes about the adapter files provided. The folder
 `unsupported` contains adapter files for Prolog compilers that are not yet
 or no longer officially supported.
 
-If you improve or correct some of these files, or write new ones for other
-Prolog compilers, please send me a copy. It is simply not feasible to
-individually test Logtalk under all possible combinations of compatible
-Prolog versions and operating-system versions.
+If you improve some of these files or write new ones for other Prolog
+systems, please send me a copy. It is simply not feasible to individually
+test Logtalk under all possible combinations of compatible Prolog versions
+and operating-system versions.
 
 As a general rule, always try to use the latest version of your Prolog
 compiler of choice. For Prolog compilers with long release cycles, this
@@ -214,7 +214,7 @@ built-in predicates for separate compilation and loading. To generate
 flag to `off` and add the option `output:eco` to the Logtalk `prolog_loader`
 flag.
 
-ECLiPSe 7.0.25 and later versions multi-threading and engines support
+ECLiPSe 7.0.25 and later versions multi-threading and engine features
 provide enough support for Logtalk threaded engines. But other Logtalk
 multi-threading features cannot currently be supported due to missing
 mutex predicates and missing thread creation options.
@@ -332,10 +332,10 @@ be explicitly qualified or implicitly qualified by listing the predicates
 in `use_module/2` directives. You may also set the Logtalk `portability`,
 and `unknown_predicates` compiler flags to `warning` in order to detect
 unqualified calls to library predicates. All the module libraries must
-be loaded prior to compilation of objects and categories containing calls
-to the library predicates.
+be loaded prior to the compilation of objects and categories containing
+calls to the library predicates.
 
-macOS users of the `SWI-Prolog.app` application, must add the definitions
+macOS users of the `SWI-Prolog.app` application must add the definitions
 for the `LOGTALKHOME` and `LOGTALKUSER` environment variables to their
 `~/.plrc` or `~/.swiplrc` or `.config/swi-prolog/init.pl` init files (as
 macOS GUI applications *don't* inherit shell environment variable values):
@@ -352,7 +352,7 @@ macOS GUI applications *don't* inherit shell environment variable values):
 	:- endif.
 
 The conditional compilation block allows automatically loading Logtalk at
-startup of the `SWI-Prolog.app` macOS GUI application while still be able
+startup of the `SWI-Prolog.app` macOS GUI application while still being able
 to use the shell integration script (`swilgt`).
 
 To load Logtalk *on-demand* when using the `SWI-Prolog.app` application, you

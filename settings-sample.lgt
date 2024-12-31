@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Sample settings file
-%  Last updated on April 8, 2023
+%  Last updated on December 31, 2024
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>
@@ -29,7 +29,7 @@ About
 This is a sample settings file for Logtalk that can be used to override
 the default flag values in the backend Prolog compiler adapter files, to
 automatically load at startup libraries and tools, and to perform other
-initializations (including backend specific ones).
+initializations (including backend-specific ones).
 
 Settings files are specially useful when Logtalk is installed system-wide
 in a read-only directory. Using settings files allows Logtalk to easily
@@ -59,7 +59,7 @@ per-project setting files. The POSIX integration scripts automatically set
 this variable. On Windows systems, the integration shortcuts "Start in"
 field is set by default to `%LOGTALKUSER%` as the `%CD%` alternative only
 works on some Windows versions. A workaround to use per-project settings
-files is to copy the shortcut to the project directory and and edit its
+files is to copy the shortcut to the project directory and edit its
 "Target" field to prefix its content with:
 
 	C:\Windows\System32\cmd.exe /c set LOGTALK_STARTUP_DIRECTORY=%CD% &&
@@ -81,7 +81,7 @@ Defining a settings file
 To use settings files, copy this file to one of the supported locations
 listed above, rename it to `settings.lgt`, customize it (see the sample
 code below), and start Logtalk from the project directory (if you're
-using a project specific settings file) or from anywhere (when using a
+using a project-specific settings file) or from anywhere (when using a
 default settings file).
 
 Note that, for setting Logtalk flag values, you must use the predicate
@@ -98,7 +98,7 @@ Reference Manuals for details.
 Caveats
 -------
 
-Logtalk compiles and loads settings files silently but a warning will
+Logtalk compiles and loads settings files silently, but a warning will
 be printed by default if syntax errors are found. Be sure to debug and
 test your settings files as regular Logtalk source files before using
 them (you may use the `logtalk_compile/1-2` built-in predicates to compile

@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 1998-2024 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +31,7 @@ Prolog Core revision standardization proposal, which specifies the following
 minimal language features:
 
 1. An `encoding` Prolog flag, allowing applications to query the default
-encoding for opening streams. When the Prolog systems supports multiple
+encoding for opening streams. When the Prolog system supports multiple
 encodings, the default encoding can be changed by setting this flag to a
 supported encoding.
 
@@ -58,9 +58,9 @@ if the encoding is `UTF-16` or `UTF-32` but not if the encoding is `UTF-8`,
 
 - `append` mode: If an `encoding/1` option is present, use that encoding,
 otherwise use the default encoding (which can be queried using the
-`encoding` flag). Ignore `bom/1` option if present and never write a BOM.
+`encoding` flag). Ignore the `bom/1` option if present and never write a BOM.
 
-- `read` mode: the default is `bom(true)`, i.e. perform BOM detection and use
+- `read` mode: the default is `bom(true)`, i.e., perform BOM detection and use
 the corresponding encoding if a BOM is found. If no BOM is detected, then use
 the `encoding/1` option if present and the default encoding otherwise. When a
 `bom(false)` option is present, no BOM detection is performed, an `encoding/1`
@@ -71,9 +71,9 @@ NON-BREAKING SPACE (ZWNBSP).
 The `bom/1` option is ignored when not using a Unicode encoding. The `bom/1`
 and `encoding/1` options are ignored when a `type(binary)` option is present.
 
-4. The `open/3` predicate (for text files) always perform BOM detection on mode
-`read` and uses the corresponding encoding if a BOM is found. Otherwise the
-default encoding is used (which can be queried using the `encoding` flag).
+4. The `open/3` predicate (for text files) always performs BOM detection on
+mode `read` and uses the corresponding encoding if a BOM is found. Otherwise
+the default encoding is used (which can be queried using the `encoding` flag).
 In `write` mode, a BOM is written if the default encoding is `UTF-16` or
 `UTF-32` but not if the encoding is `UTF-8`, `UTF-16LE`, `UTF-16BE`, `UTF-32LE`,
 or `UTF-32LE`. If the encoding is `UTF-16` or `UTF-32`, the data is written
