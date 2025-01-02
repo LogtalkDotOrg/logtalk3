@@ -21,7 +21,7 @@ def setup(app):
 # -- Project information -----------------------------------------------------
 
 project = 'Logtalk APIs'
-copyright = '1998-2024, Paulo Moura'
+copyright = '1998-2025, Paulo Moura'
 author = 'Paulo Moura'
 
 # The short X.Y version

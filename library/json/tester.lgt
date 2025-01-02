@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 1998-2023 Paulo Moura <pmoura@logtalk.org> and
+%  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org> and
 %  Jacinto Dávila <jdavila@optimusprime.ai>
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
