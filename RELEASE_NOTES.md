@@ -43,6 +43,9 @@ Tools
 
 * REMOVED: Deprecated `lgtdoc` tool `.js` scripts and `ie50.xsl` file.
 
+* IMPROVED: Computation of the Halstead complexity metrics by considering
+recursive predicate calls.
+
 * FIXED: The `packs` tool `lgtenv.ps1` script when using the `-p` option.
 
 Installers and installation scripts

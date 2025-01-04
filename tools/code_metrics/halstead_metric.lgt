@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2018-2024 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2018-2025 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-License-Identifier: Apache-2.0
 %
 %  Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,9 +23,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:10:0,
 		author is 'Paulo Moura',
-		date is 2024-03-27,
+		date is 2025-01-04,
 		comment is 'Computes Halstead complexity numbers for an entity.',
 		parameters is ['Stroud' - 'Coefficient for computing the time required to program.'],
 		remarks is [
@@ -113,6 +113,9 @@
 			CalleeArity,
 			(	(	category_property(Entity, calls(Callee, _))
 				;	category_property(Entity, updates(Callee, _))
+				;	category_property(Entity, defines(Callee, DefinesProperties)),
+					\+ member(auxiliary, DefinesProperties),
+					memberchk(recursive, DefinesProperties)
 				),
 				predicate_arity(Callee, CalleeArity)
 			),
@@ -154,6 +157,9 @@
 			CalleeArity,
 			(	(	object_property(Entity, calls(Callee, _))
 				;	object_property(Entity, updates(Callee, _))
+				;	object_property(Entity, defines(Callee, DefinesProperties)),
+					\+ member(auxiliary, DefinesProperties),
+					memberchk(recursive, DefinesProperties)
 				),
 				predicate_arity(Callee, CalleeArity)
 			),

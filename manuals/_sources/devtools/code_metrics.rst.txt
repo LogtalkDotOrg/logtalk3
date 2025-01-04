@@ -126,6 +126,8 @@ significant deviation from the original definition, which used syntactic
 literals. A computation closer to the original definition of the metric
 would require switching to use the parser to collect information on
 syntactic literals, which would imply a much larger computation cost.
+The number of predicate calls doesn't include calls to built-in
+predicates and can underestimate recursive calls.
 
 The computation of this metric is parameterized by the *Stroud*
 coefficient for computing the time required to program (default is 18).

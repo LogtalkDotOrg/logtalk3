@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
+SPDX-FileCopyrightText: 2017-2025 Paulo Moura <pmoura@logtalk.org>
 SPDX-FileCopyrightText: 2017 Ebrahim Azarisooreh <ebrahim.azarisooreh@gmail.com>
 SPDX-License-Identifier: Apache-2.0
 
@@ -139,7 +139,8 @@ Note that this definition of operands is a significant deviation from the
 original definition, which used syntactic literals. A computation closer to
 the original definition of the metric would require switching to use the
 parser to collect information on syntactic literals, which would imply a
-much larger computation cost.
+much larger computation cost. The number of predicate calls doesn't include
+calls to built-in predicates and can underestimate recursive calls.
 
 The computation of this metric is parameterized by the _Stroud_ coefficient
 for computing the time required to program (default is 18). The following
