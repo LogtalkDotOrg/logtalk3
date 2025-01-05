@@ -46,7 +46,7 @@
 	test(ulid_generate_1_monotonic_sort_order, true(ULIDs == SortedULIDs)) :-
 		% per spec, within the same millisecond, monotonic sort order is not guaranteed
 		% sleep 1.1 seconds between generating new ULIDs as some backends don't provide
-		% millisecond accurancy
+		% millisecond accuracy
 		findall(
 			ULID,
 			(integer::between(1, 10, _), ulid(atom)::generate(ULID), os::sleep(1.1)),
