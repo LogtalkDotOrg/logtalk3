@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  This file is part of Logtalk <https://logtalk.org/>
-%  SPDX-FileCopyrightText: 2021-2024 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-FileCopyrightText: 2021-2025 Paulo Moura <pmoura@logtalk.org>
 %  SPDX-FileCopyrightText: 1998-2021 Jacob Friedman <jfriedman@graphstax.com>
 %  SPDX-License-Identifier: Apache-2.0
 %
@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:63:0,
+		version is 0:64:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2024-12-26,
+		date is 2025-01-05,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -95,6 +95,13 @@
 	:- info(tests/2, [
 		comment is 'Runs the tests with the given tests driver file and marker directory.',
 		argnames is ['Directory', 'Tester']
+	]).
+
+	:- public(test/3).
+	:- mode(test(+atom, @callable, ++callable), one).
+	:- info(test/3, [
+		comment is 'Re-run a single test.',
+		argnames is ['Directory', 'Object', 'Test']
 	]).
 
 	:- public(metrics/1).
@@ -333,6 +340,15 @@
 		atom_concat(Directory, '/.vscode_test_results', Data),
 		open(Data, write, _, [alias(vscode_test_results)]),
 		ignore(logtalk_load(Tester, [reload(always)])),
+		close(vscode_test_results),
+		open(Marker, append, Stream),
+		close(Stream).
+
+	test(Directory, Object, Test) :-
+		atom_concat(Directory, '/.vscode_loading_done', Marker),
+		atom_concat(Directory, '/.vscode_test_results', Data),
+		open(Data, append, _, [alias(vscode_test_results)]),
+		ignore(Object::run(Test)),
 		close(vscode_test_results),
 		open(Marker, append, Stream),
 		close(Stream).
@@ -1664,17 +1680,17 @@
 		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Total, Skipped, Passed, Failed, Flaky, Note])}
 		),
 		fail.
-	logtalk::message_hook(passed_test(_Object, _Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+	logtalk::message_hook(passed_test(Object, Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		{format(vscode_test_results, 'File:~w;Line:~d;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
+		{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
 		fail.
-	logtalk::message_hook(failed_test(_Object, _Test, File, Start-_End, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+	logtalk::message_hook(failed_test(Object, Test, File, Start-_End, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		{format(vscode_test_results, 'File:~w;Line:~d;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, CPUTime, WallTime])},
+		{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
 		fail.
-	logtalk::message_hook(skipped_test(_Object, _Test, File, Start-_, _Note), _, lgtunit, _) :-
+	logtalk::message_hook(skipped_test(Object, Test, File, Start-_, _Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
-		{format(vscode_test_results, 'File:~w;Line:~d;Status:skipped~n', [File, Start])},
+		{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:skipped~n', [File, Start, Object, Test])},
 		fail.
 	logtalk::message_hook(entity_predicate_coverage(Entity, Predicate, Covered, Total, _Percentage, Clauses), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),

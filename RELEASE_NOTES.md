@@ -59,6 +59,8 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: VSCode support for finding dynamic predicate references in clauses
 that assert or retract clauses for them.
 
+* ADDED: VSCode support for re-running a single test using CodeLens.
+
 * FIXED: VSCode support for finding predicate implementations when the
 definition is found in an included file.
 
