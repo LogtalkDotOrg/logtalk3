@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:64:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-01-05,
+		date is 2025-01-06,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -347,7 +347,7 @@
 	test(Directory, Object, Test) :-
 		atom_concat(Directory, '/.vscode_loading_done', Marker),
 		atom_concat(Directory, '/.vscode_test_results', Data),
-		open(Data, append, _, [alias(vscode_test_results)]),
+		open(Data, write, _, [alias(vscode_test_results)]),
 		ignore(Object::run(Test)),
 		close(vscode_test_results),
 		open(Marker, append, Stream),
