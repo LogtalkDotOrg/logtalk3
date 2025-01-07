@@ -102,7 +102,7 @@ Tool dependencies for full functionality
 - ``help``: ``info``
 - ``issue_creator``: ``gh``, ``glab``
 - ``lgtdoc``: Sphinx, ``libxslt``, ``fop``, ``texlive``, ``texinfo``
-- ``lgtunit``: Allure
+- ``lgtunit``: Allure, ``coreutils``, ``gsed``
 - ``packs``: ``coreutils``, ``libarchive``, ``gnupg2``, ``git``,
   ``curl``, ``wget``, ``direnv``
 
@@ -122,9 +122,10 @@ macOS - MacPorts
 
    $ sudo port install d2 graphviz
    $ sudo port install texinfo
-   $ sudo port install gh glab
    $ sudo port install libxslt fop texlive
-   $ sudo port install coreutils libarchive gnupg2 git curl wget direnv
+   $ sudo port install gsed
+   $ sudo port install coreutils gsed libarchive gnupg2 git curl wget direnv
+   $ sudo port install gh glab
 
 macOS - Homebrew
 ~~~~~~~~~~~~~~~~
@@ -134,7 +135,7 @@ macOS - Homebrew
    $ brew install d2 graphviz
    $ brew install texinfo
    $ brew install libxslt fop texlive
-   $ brew install allure
+   $ brew install allure gsed
    $ brew install coreutils libarchive gnupg2 git curl wget direnv
    $ brew install gh glab
 
@@ -168,6 +169,7 @@ Windows - Chocolatey
    > choco install gnupg git
    > choco install gh glab
    > choco install wget
+   > choco install sed
 
 Installers
 ~~~~~~~~~~
