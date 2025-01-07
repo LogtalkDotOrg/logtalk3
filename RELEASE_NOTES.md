@@ -55,6 +55,12 @@ Installers and installation scripts
 
 * UPDATED: Synced the MacPorts portfile with the version used upstream.
 
+Tests
+-----
+
+* ADDED: Additional tests for the `bagof/3`, `setof/3`, and `findall/3-4`
+Prolog standard and de facto standard predicates.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

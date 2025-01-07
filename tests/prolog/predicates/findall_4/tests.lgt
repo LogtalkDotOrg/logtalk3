@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2023-03-23,
+		date is 2025-01-07,
 		comment is 'Unit tests for the de facto Prolog standard findall/4 built-in predicate.'
 	]).
 
@@ -78,6 +78,9 @@
 		{	set_prolog_flag(unknown, error),
 			findall(1, foo(_), _, _)
 		}.
+
+	test(commons_findall_4_15, ball(err)) :-
+		{findall(X, (X = 1; throw(err)), _, _)}.
 
 	% auxiliary predicates
 

@@ -80,9 +80,9 @@ bagof_3_member(X, [_| L]) :-
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:11:0,
+		version is 1:12:0,
 		author is 'Paulo Moura',
-		date is 2024-10-30,
+		date is 2025-01-07,
 		comment is 'Unit tests for the ISO Prolog standard bagof/3 built-in predicate.'
 	]).
 
@@ -259,15 +259,18 @@ bagof_3_member(X, [_| L]) :-
 		;	variant(LL, [s(_,F,F,_,[1]),   s(C,_,_,C,[1]),   s(A,B,B,A,[1,1])])
 		)).
 
+	test(lgt_bagof_3_30, ball(err)) :-
+		{bagof(X, (X = 1; throw(err)), _)}.
+
 	% tests from the WG17 standardization work
 
-	test(wg17_bagof_3_30, false) :-
+	test(wg17_bagof_3_31, false) :-
 		{bagof(t, (L=2; L=1), L)}.
 
-	test(wg17_bagof_3_31, true((variant(Ls, [[E,_,_],[_,E,_],[_,_,E]]); variant(Ls, [[_,_,E],[_,E,_],[E,_,_]])))) :-
+	test(wg17_bagof_3_32, true((variant(Ls, [[E,_,_],[_,E,_],[_,_,E]]); variant(Ls, [[_,_,E],[_,E,_],[E,_,_]])))) :-
 		bagof(L, A^B^C^{L = [A,B,C], bagof(t, bagof_3_member(E,L), _)}, Ls).
 
-	test(wg17_bagof_3_32, true((L == [A,B,C]; L == [C,B,A]))) :-
+	test(wg17_bagof_3_33, true((L == [A,B,C]; L == [C,B,A]))) :-
 		bagof(E, {bagof(t, (A=E;B=E;C=E), _)}, L).
 
 	% auxiliary predicates
