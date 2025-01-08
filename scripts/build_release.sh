@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on August 20, 2024
+##   Last updated on January 8, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -87,16 +87,18 @@ cp debian/postrm "$directory/debian/DEBIAN"
 cd "$directory" || exit 1
 dpkg-deb --build debian "logtalk_$version-1_all.deb"
 
-sha256="$(openssl dgst -sha256 "logtalk-$version.tar.bz2" | sed 's/^.* //')"
 rmd160="$(openssl dgst -rmd160 "logtalk-$version.tar.bz2" | sed 's/^.* //')"
+sha256="$(openssl dgst -sha256 "logtalk-$version.tar.bz2" | sed 's/^.* //')"
+size=$(ls -dnL -- "logtalk-$version.tar.bz2" | awk '{print $5;exit}')
 sudo mkdir -p /opt/local/var/macports/distfiles/logtalk
 sudo cp -f "logtalk-$version.tar.bz2" "/opt/local/var/macports/distfiles/logtalk/logtalk-$version.tar.bz2"
 cd /opt/local/var/macports/sources/rsync.macports.org/macports/release/tarballs/ports/lang/logtalk/ || exit 1
 sudo mv -f Portfile Portfile.old
 sudo cp "$directory/logtalk-$version/scripts/macos/Portfile" .
 sudo sed -e "s/^version.*/version $version/" -i '' Portfile
+sudo sed -e "s/rmd160.*/rmd160 $rmd160 \\\/" -i '' Portfile
 sudo sed -e "s/sha256.*/sha256 $sha256 \\\/" -i '' Portfile
-sudo sed -e "s/rmd160.*/rmd160 $rmd160/" -i '' Portfile
+sudo sed -e "s/size.*/size $size/" -i '' Portfile
 sudo port clean logtalk
 sudo port destroot logtalk
 sudo port pkg logtalk
