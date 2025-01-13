@@ -13,3 +13,6 @@ formats:
 python:
   install:
     - requirements: manuals/sources/requirements.txt
+
+sphinx:
+  configuration: manuals/sources/conf.py
