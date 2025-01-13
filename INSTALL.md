@@ -157,6 +157,7 @@ the `install.sh` script, you will also need to add:
 
 	PATH=$PATH:$LOGTALKHOME/tools/diagrams
 	PATH=$PATH:$LOGTALKHOME/tools/lgtdoc/xml
+	PATH=$PATH:$LOGTALKHOME/tools/packs
 	PATH=$PATH:$LOGTALKHOME/scripts
 	PATH=$PATH:$LOGTALKHOME/integration
 	MANPATH=$MANPATH:$LOGTALKHOME/man
@@ -177,6 +178,7 @@ the `install.sh` script, you will also need to add:
 
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/diagrams
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/lgtdoc/xml
+	setenv PATH "${PATH}":"${LOGTALKHOME}"/tools/packs
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/scripts
 	setenv PATH "${PATH}":"${LOGTALKHOME}"/integration
 	setenv MANPATH "${MANPATH}":"${LOGTALKHOME}"/man

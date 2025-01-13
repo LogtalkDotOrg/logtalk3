@@ -25,7 +25,11 @@ RELEASE NOTES
 3.88.0 - February ??, 2025
 ==========================
 
+Documentation
+-------------
 
+* FIXED: The manual install instructions missing a `PATH` setting for the
+`packs` tool `lgtenv.sh` script.
 
 
 3.87.0 - January 8, 2025
