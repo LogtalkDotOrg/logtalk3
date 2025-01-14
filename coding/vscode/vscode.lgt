@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:64:0,
+		version is 0:64:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-01-06,
+		date is 2025-01-14,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1680,14 +1680,25 @@
 		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:~d tests: ~d skipped, ~d passed, ~d failed (~d flaky; ~w~n)', [File, Line, Total, Skipped, Passed, Failed, Flaky, Note])}
 		),
 		fail.
-	logtalk::message_hook(passed_test(Object, Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
-		stream_property(_, alias(vscode_test_results)),
-		{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
-		fail.
-	logtalk::message_hook(failed_test(Object, Test, File, Start-_End, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
-		stream_property(_, alias(vscode_test_results)),
-		{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
-		fail.
+	:- if(current_logtalk_flag(prolog_dialect, ji)).
+		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+			stream_property(_, alias(vscode_test_results)),
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed (in ~f/~f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
+			fail.
+		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+			stream_property(_, alias(vscode_test_results)),
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed (in ~f/~f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
+			fail.
+	:- else.
+		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+			stream_property(_, alias(vscode_test_results)),
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
+			fail.
+		logtalk::message_hook(failed_test(Object, Test, File, Start-_End, _Reason, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+			stream_property(_, alias(vscode_test_results)),
+			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
+			fail.
+	:- endif.
 	logtalk::message_hook(skipped_test(Object, Test, File, Start-_, _Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:skipped~n', [File, Start, Object, Test])},
@@ -1703,15 +1714,27 @@
 		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests clause coverage: ~w - ~w~n', [File, Line, Covered/Total, Clauses])}
 		),
 		fail.
-	logtalk::message_hook(entity_coverage(Entity, Covered, Total, Percentage), _, lgtunit, _) :-
-		stream_property(_, alias(vscode_test_results)),
-		entity_property(Entity, Kind, file(File)),
-		entity_property(Entity, Kind, lines(Line, _)),
-		(	Total =:= 1 ->
-			{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
-		;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
-		),
-		fail.
+	:- if(current_logtalk_flag(prolog_dialect, ji)).
+		logtalk::message_hook(entity_coverage(Entity, Covered, Total, Percentage), _, lgtunit, _) :-
+			stream_property(_, alias(vscode_test_results)),
+			entity_property(Entity, Kind, file(File)),
+			entity_property(Entity, Kind, lines(Line, _)),
+			(	Total =:= 1 ->
+				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
+			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~f% coverage~n', [File, Line, Covered, Total, Percentage])}
+			),
+			fail.
+	:- else.
+		logtalk::message_hook(entity_coverage(Entity, Covered, Total, Percentage), _, lgtunit, _) :-
+			stream_property(_, alias(vscode_test_results)),
+			entity_property(Entity, Kind, file(File)),
+			entity_property(Entity, Kind, lines(Line, _)),
+			(	Total =:= 1 ->
+				{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clause covered, ~2f% coverage~n', [File, Line, Covered, Total, Percentage])}
+			;	{format(vscode_test_results, 'File:~w;Line:~d;Status:Tests: ~d out of ~d clauses covered, ~2f% coverage~n', [File, Line, Covered, Total, Percentage])}
+			),
+			fail.
+	:- endif.
 	% code_metrics tool results
 	logtalk::message_hook(entity_score(cc_metric, Entity, Score), _, code_metrics, _) :-
 		stream_property(_, alias(vscode_metrics_results)),

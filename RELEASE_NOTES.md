@@ -31,6 +31,12 @@ Documentation
 * FIXED: The manual install instructions missing a `PATH` setting for the
 `packs` tool `lgtenv.sh` script.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: Workaround JIProlog `format/2-3` predicate issues in the VSCode
+support.
+
 
 3.87.0 - January 8, 2025
 ========================
