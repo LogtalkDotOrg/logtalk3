@@ -6,7 +6,7 @@
 ##   and runtime and optionally an application.xwam file with a Logtalk
 ##   application
 ## 
-##   Last updated on January 9, 2024
+##   Last updated on January 14, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -298,7 +298,15 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
 	xsblgt$extension -e "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
-	cat $(ls -rt *.P) > application.P
+	if test -n "$(find . -maxdepth 1 -name '*.P' -print -quit)" ; then
+		files="$(ls -rt ./*.P)"
+		for a in $files ; do cat "$a" >> application.P ; done
+	else
+		echo
+		echo "No application files found!"
+		echo
+		exit 1
+	fi
 	xsblgt$extension -e "compile(application),halt."
 	mv application.xwam "$directory"
 fi

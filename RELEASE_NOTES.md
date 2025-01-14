@@ -40,6 +40,9 @@ coverage stats.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* IMPROVED: The Prolog embedding scripts to avoid an error with a large number
+of application files.
+
 * FIXED: Workaround JIProlog `format/2-3` predicate issues in the VSCode
 support.
 

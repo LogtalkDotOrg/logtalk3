@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
 ## 
-##   Last updated on November 1, 2024
+##   Last updated on January 14, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -275,7 +275,15 @@ if [ "$loader" != "" ] ; then
 	mkdir -p "$temporary/application"
 	cd "$temporary/application" || exit 1
 	eclipselgt$extension -e "set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt"
-	cat "$(ls -rt ./*.pl)" > application.pl
+	if test -n "$(find . -maxdepth 1 -name '*.pl' -print -quit)" ; then
+		files="$(ls -rt ./*.pl)"
+		for a in $files ; do cat "$a" >> application.pl ; done
+	else
+		echo
+		echo "No application files found!"
+		echo
+		exit 1
+	fi
 	eclipselgt$extension -e "compile(application,[debug:off,opt_level:1,output:eco]),halt"
 	mv application.eco "$directory"
 	echo ":- ensure_loaded(logtalk)." > "$directory"/loader.pl

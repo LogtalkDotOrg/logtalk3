@@ -5,7 +5,7 @@
 ##   This script creates a XVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
 ## 
-##   Last updated on October 31, 2024
+##   Last updated on January 14, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -283,8 +283,15 @@ if [ "$loader" != "" ] ; then
 	else
 		xvmpl --goal "consult('$directory/logtalk'),set_logtalk_flag(clean,off),set_logtalk_flag(scratch_directory,'$temporary/application'),logtalk_load('$loader'),halt."
 	fi
-	cat "$(ls -rt ./*.pl)" > "$directory"/application.pl
-
+	if test -n "$(find . -maxdepth 1 -name '*.pl' -print -quit)" ; then
+		files="$(ls -rt ./*.pl)"
+		for a in $files ; do cat "$a" >> "$directory"/application.pl ; done
+	else
+		echo
+		echo "No application files found!"
+		echo
+		exit 1
+	fi
 	if [ "$encrypt" = "true" ] ; then
 		xvmpl --goal "encrypt_program('$directory/logtalk.pl'),halt."
 		xvmpl --goal "encrypt_program('$directory/application.pl'),halt."
