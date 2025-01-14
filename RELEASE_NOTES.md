@@ -31,6 +31,12 @@ Documentation
 * FIXED: The manual install instructions missing a `PATH` setting for the
 `packs` tool `lgtenv.sh` script.
 
+Tools
+-----
+
+* UPDATED: The `lgtunit` to use only two decimal places when printing code
+coverage stats.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

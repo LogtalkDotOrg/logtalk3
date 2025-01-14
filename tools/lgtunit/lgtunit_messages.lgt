@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 10:0:0,
+		version is 10:1:0,
 		author is 'Paulo Moura',
-		date is 2024-12-09,
+		date is 2025-01-14,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -238,15 +238,31 @@
 		clause_tokens(Clauses),
 		[nl].
 
-	message_tokens(covered_entities_numbers(Covered, Total, Percentage)) -->
-		['~d out of '-[Covered]],
-		entity_tokens(Total),
-		[' covered, ~f% entity coverage'-[Percentage], nl].
+	:- if(current_logtalk_flag(prolog_dialect, ji)).
 
-	message_tokens(covered_clause_numbers(Covered, Total, Percentage)) -->
-		['~d out of '-[Covered]],
-		clause_tokens(Total),
-		[' covered, ~f% clause coverage'-[Percentage], nl, nl].
+		message_tokens(covered_entities_numbers(Covered, Total, Percentage)) -->
+			['~d out of '-[Covered]],
+			entity_tokens(Total),
+			[' covered, ~f% entity coverage'-[Percentage], nl].
+
+		message_tokens(covered_clause_numbers(Covered, Total, Percentage)) -->
+			['~d out of '-[Covered]],
+			clause_tokens(Total),
+			[' covered, ~f% clause coverage'-[Percentage], nl, nl].
+
+	:- else.
+
+		message_tokens(covered_entities_numbers(Covered, Total, Percentage)) -->
+			['~d out of '-[Covered]],
+			entity_tokens(Total),
+			[' covered, ~2f% entity coverage'-[Percentage], nl].
+
+		message_tokens(covered_clause_numbers(Covered, Total, Percentage)) -->
+			['~d out of '-[Covered]],
+			clause_tokens(Total),
+			[' covered, ~2f% clause coverage'-[Percentage], nl, nl].
+
+	:- endif.
 
 	message_tokens(code_coverage_header) -->
 		[nl, 'clause coverage ratio and covered clauses per-entity predicate'-[], nl, nl].
@@ -261,10 +277,21 @@
 		;	['~q: ~q - ~w - ~w'-[Entity, Predicate, Covered/Total, Clauses], nl]
 		).
 
-	message_tokens(entity_coverage(Entity, Covered, Total, Percentage)) -->
-		['~q: ~d out of '-[Entity, Covered]],
-		clause_tokens(Total),
-		[' covered, ~f% coverage'-[Percentage], nl, nl].
+	:- if(current_logtalk_flag(prolog_dialect, ji)).
+
+		message_tokens(entity_coverage(Entity, Covered, Total, Percentage)) -->
+			['~q: ~d out of '-[Entity, Covered]],
+			clause_tokens(Total),
+			[' covered, ~f% coverage'-[Percentage], nl, nl].
+
+	:- else.
+
+		message_tokens(entity_coverage(Entity, Covered, Total, Percentage)) -->
+			['~q: ~d out of '-[Entity, Covered]],
+			clause_tokens(Total),
+			[' covered, ~2f% coverage'-[Percentage], nl, nl].
+
+	:- endif.
 
 	message_tokens(entity_coverage_ends(_Entity)) -->
 		[].
