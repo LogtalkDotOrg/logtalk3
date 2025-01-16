@@ -19,14 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
 :- object(natural,
 	extends(integer)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2009-3-6,
+		date is 2025-01-16,
 		comment is 'Natural numbers data type predicates.'
 	]).
 
@@ -40,13 +39,11 @@
 		Natural > 0.
 
 	check(Term) :-
-		this(This),
-		sender(Sender),
 		(	integer(Term), Term > 0 ->
 			true
 		;	var(Term) ->
-			throw(error(instantiation_error, This::check(Term), Sender))
-		;	throw(error(type_error(This, Term), This::check(Term), Sender))
+			instantiation_error
+		;	type_error(natural, Term)
 		).
 
 :- end_object.

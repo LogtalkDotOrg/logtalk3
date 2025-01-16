@@ -31,6 +31,12 @@ Documentation
 * FIXED: The manual install instructions missing a `PATH` setting for the
 `packs` tool `lgtenv.sh` script.
 
+Library
+-------
+
+* FIXED: The `types` library `natural::check/1` object predicate to throw
+`error/2` exceptions.
+
 Tools
 -----
 
