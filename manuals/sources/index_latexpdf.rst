@@ -29,9 +29,7 @@ The Logtalk Handbook
    faq/index
    devtools/index
    libraries/index
+   ports/index
+   contributions/index
    glossary
    bibliography
-
-.. only:: builder_html
-
-   * :ref:`search`

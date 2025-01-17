@@ -167,9 +167,9 @@ done
 rm -f temp0
 
 make html
-make latexpdf
 make epub
 make info
+make latexpdf
 #make linkcheck
 
 sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/contributions/index.html

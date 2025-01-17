@@ -31,6 +31,8 @@ Documentation
 * FIXED: The manual install instructions missing a `PATH` setting for the
 `packs` tool `lgtenv.sh` script.
 
+* FIXED: Handbook PDF version missing the sections on ports and contributions.
+
 Library
 -------
 
