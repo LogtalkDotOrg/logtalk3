@@ -43,7 +43,7 @@ applied to entities compiled with the ``optimize`` flag turned on):
    | ?- set_logtalk_flag(hook, meta_compiler).
    ...
 
-Otherwise, use the ``hook(meta_compiler)`` and ``optimize(on)`` complier
+Otherwise, use the ``hook(meta_compiler)`` and ``optimize(on)`` compiler
 options when compiling and loading the code that you want to optimize.
 For example:
 

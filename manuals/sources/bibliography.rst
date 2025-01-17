@@ -197,7 +197,7 @@
 .. [Razek92]
    Combining Objects and Relations
    Razek, G.
-   Comunications of the ACM, 27(12):66-70
+   Communications of the ACM, 27(12):66-70
 
 .. [Rumbaugh87]
    Relations as Semantic Constructs in an Object-Oriented Language

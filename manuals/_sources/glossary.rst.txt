@@ -341,7 +341,7 @@ Glossary
    predicate declaration
       A predicate declaration is composed by a set of
       :term:`predicates directives <predicate directive>`, which must
-      include ar least a :term:`scope directive <predicate scope directive>`.
+      include at least a :term:`scope directive <predicate scope directive>`.
 
    predicate definition
       The set of clauses for a predicate, contained in an object or category.
