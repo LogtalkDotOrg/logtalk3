@@ -34,13 +34,13 @@
 	:- public(start/0).
 	:- mode(start, one).
 	:- info(start/0, [
-		comment is 'Activates thr ports profiler for followup goals.'
+		comment is 'Activates the ports profiler for followup goals.'
 	]).
 
 	:- public(stop/0).
 	:- mode(stop, one).
 	:- info(stop/0, [
-		comment is 'Deactivates thr ports profiler.'
+		comment is 'Deactivates the ports profiler.'
 	]).
 
 	:- public(data/0).

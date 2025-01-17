@@ -47,7 +47,7 @@ Public predicates
 ``start/0``
 ^^^^^^^^^^^
 
-Activates thr ports profiler for followup goals.
+Activates the ports profiler for followup goals.
 
 | **Compilation flags:**
 |    ``static``
@@ -64,7 +64,7 @@ Activates thr ports profiler for followup goals.
 ``stop/0``
 ^^^^^^^^^^
 
-Deactivates thr ports profiler.
+Deactivates the ports profiler.
 
 | **Compilation flags:**
 |    ``static``
