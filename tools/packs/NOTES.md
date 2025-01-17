@@ -274,11 +274,11 @@ convenient or possible.
 Registry specification
 ----------------------
 
-A registry is a git remote repo that can be cloned, a downloadable archive,
-or a local directory containing a Logtalk loader file that loads source files
-defining the registry itself and the packs it provides. The registry name is
-ideally a valid unquoted atom. The registry directory must contain at least
-two Logtalk source files:
+A registry is a git remote repo that can be cloned, a downloadable or local
+archive, or a local directory containing a Logtalk loader file that loads
+source files defining the registry itself and the packs it provides. The
+registry name is ideally a valid unquoted atom. The registry directory must
+contain at least two Logtalk source files:
 
 - A file defining an object named after the registry with a `_registry`
 suffix, implementing the `registry_protocol`. This naming convention helps

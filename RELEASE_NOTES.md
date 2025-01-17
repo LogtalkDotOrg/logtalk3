@@ -28,6 +28,8 @@ RELEASE NOTES
 Documentation
 -------------
 
+* IMPROVED: Documentation of the `packs` tool.
+
 * FIXED: The manual install instructions missing a `PATH` setting for the
 `packs` tool `lgtenv.sh` script.
 

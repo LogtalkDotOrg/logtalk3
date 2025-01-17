@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:60:0,
+		version is 0:60:1,
 		author is 'Paulo Moura',
-		date is 2024-10-09,
+		date is 2025-01-17,
 		comment is 'Registry handling predicates.'
 	]).
 
@@ -62,7 +62,7 @@
 	:- public(add/3).
 	:- mode(add(+atom, +atom, ++list(compound)), zero_or_one).
 	:- info(add/3, [
-		comment is 'Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined but not using ``update(true)`` or ``force(true)`` options. A ``file://`` URL can be used for a local directory.',
+		comment is 'Adds a new registry using the given options. Fails if the registry cannot be added or if it is already defined but not using ``update(true)`` or ``force(true)`` options. A ``file://`` URL can be used for a local directory or archive.',
 		argnames is ['Registry', 'URL', 'Options'],
 		remarks is [
 			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.',
@@ -93,7 +93,7 @@
 	:- public(add/2).
 	:- mode(add(+atom, +atom), zero_or_one).
 	:- info(add/2, [
-		comment is 'Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or a an archive extension. A ``file://`` URL can be used for a local directory.',
+		comment is 'Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with either a ``.git`` extension or an archive extension. A ``file://`` URL can be used for a local directory or archive.',
 		argnames is ['Registry', 'URL'],
 		remarks is [
 			'Registry name' - 'Must be the URL basename when using a git URL or a local directory URL. Must also be the declared registry name in the registry specification object.'
@@ -109,10 +109,9 @@
 	:- public(add/1).
 	:- mode(add(+atom), zero_or_one).
 	:- info(add/1, [
-		comment is 'Adds a new registry from a git cloning or local directory URL using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with a ``.git`` extension. A ``file://`` URL can be used for a local directory.',
+		comment is 'Adds a new registry using default options. Fails if the registry cannot be added or if it is already defined. HTTPS URLs must end with a ``.git`` extension or an archive extension. A ``file://`` URL can be used for a local directory or archive.',
 		argnames is ['URL'],
 		remarks is [
-			'Limitations' - 'Cannot be used for archive download URLs.',
 			'Registry name' - 'Taken from the URL basename.'
 		],
 		exceptions is [
