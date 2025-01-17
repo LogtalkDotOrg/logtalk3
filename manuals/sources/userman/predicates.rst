@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -936,7 +936,7 @@ attributes using the dynamic database of *self* we could write:
            ::attribute_(Var, Value).
 
        set(Var, Value) :-
-           ::retractall(attribute_(Var, _)), 
+           ::retractall(attribute_(Var, _)),
            ::asserta(attribute_(Var, Value).
 
    :- end_category.
@@ -962,7 +962,7 @@ dynamic database of *this*, we would write instead:
            attribute_(Var, Value).
 
        set(Var, Value) :-
-           retractall(attribute_(Var, _)), 
+           retractall(attribute_(Var, _)),
            asserta(attribute_(Var, Value).
 
    :- end_category.
@@ -978,7 +978,7 @@ Meta-predicates
 Meta-predicates may be defined inside objects and categories as any other
 predicate. A meta-predicate is declared using the
 :ref:`directives_meta_predicate_1` directive as described earlier in
-this section. When defining a meta-predicate, the arguments in the 
+this section. When defining a meta-predicate, the arguments in the
 clause heads corresponding to the meta-arguments must be variables.
 All meta-arguments are called in the context of the object or category
 calling the meta-predicate. In particular, when sending a message that
@@ -1050,7 +1050,7 @@ take advantage of first-argument indexing:
    :- meta_predicate(map(1, *)).
    map(Closure, List) :-
        map_(List, Closure).
-   
+
    :- meta_predicate(map_(*, 1)).
    map_([], _).
    map_([Head| Tail], Closure) :-
@@ -1256,15 +1256,15 @@ but not all backends. The ``list`` library object includes the code:
 ::
 
    :- if(predicate_property(msort(_, _), built_in)).
-   
+
        msort(List, Sorted) :-
            {msort(List, Sorted)}.
-   
+
    :- else.
-   
+
        length(List, Length) :-
            ...
-   
+
    :- endif.
 
 I.e. the object will use the built-in predicate when available. Otherwise,
@@ -1282,7 +1282,7 @@ for writing messages. To convert the code to use the
    :- uses(logtalk, [
        print_message(comment, core, Format+Arguments) as format(Format, Arguments)
    ]).
-   
+
    process(Crate, Contents) :-
        format('Processing crate ~w...', [Crate]),
        ...,
@@ -1330,7 +1330,7 @@ for parsing simple arithmetic expressions:
        number(C) --> "-", number(X), {C is -X}.
        number(X) --> [C], {0'0 =< C, C =< 0'9, X is C - 0'0}.
 
-   :- end_object. 
+   :- end_object.
 
 After compiling and loading this object, we can test the grammar rules
 using the ``parse/2`` message:
@@ -1352,7 +1352,7 @@ the corresponding scope directive would be:
 
 ::
 
-   :- public(expr//1). 
+   :- public(expr//1).
 
 The ``//`` infix operator used above tells the Logtalk compiler that the
 scope directive refers to a grammar rule non-terminal, not to a predicate.
@@ -1565,7 +1565,7 @@ context methods:
        :- public(test/0).
 
        test :-
-           this(This), 
+           this(This),
            write('Calling predicate definition in '),
            writeq(This), nl,
            self(Self),
@@ -1625,7 +1625,7 @@ For example:
        :- public(test/0).
 
        test :-
-           parameter(1, Color), 
+           parameter(1, Color),
            write('Color parameter value is '),
            writeq(Color), nl.
 
@@ -1723,14 +1723,14 @@ the ``uses/2`` directive:
 ::
 
    :- object(an_object).
-   
+
        :- uses(user, [data/1]).
-   
+
        :- public(some_predicate/1).
        some_predicate(Arg) :-
            retractall(data(_)),
            assertz(data(Arg)).
-       
+
    :- end_object.
 
 When working with dynamic grammar rule non-terminals, you may use the built-in
@@ -1971,7 +1971,7 @@ categories. But Prolog systems provide a widely diverse set of built-in
 predicates, easily raising portability issues. Relying on non-standard
 predicates is often unavoidable, however, due to the narrow scope of Prolog
 standards. Logtalk applications may also require calling user-defined Prolog
-predicates, either in ``user`` or in Prolog modules. 
+predicates, either in ``user`` or in Prolog modules.
 
 Calling Prolog built-in predicates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1980,7 +1980,7 @@ In predicate clauses and object ``initialization/1`` directives, predicate
 calls that are not prefixed with a message-sending, super call, or module
 qualification operator (``::``, ``^^``, or ``:``), are compiled to either
 calls to local predicates or as calls to Logtalk/Prolog built-in predicates.
-A predicate call is compiled as a call to a local predicate if the object 
+A predicate call is compiled as a call to a local predicate if the object
 (or category) contains a scope directive, a multifile directive, a dynamic
 directive, or a definition for the called predicate. When that is not the
 case, the compiler checks if the call corresponds to a Logtalk or Prolog

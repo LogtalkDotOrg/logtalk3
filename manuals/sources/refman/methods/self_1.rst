@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -33,7 +33,7 @@ Description
 
    self(Self)
 
-Unifies its argument with the object that received the message under 
+Unifies its argument with the object that received the message under
 processing.
 
 This private method is compiled into a unification between its argument

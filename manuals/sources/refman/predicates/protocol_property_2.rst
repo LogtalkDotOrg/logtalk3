@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -62,7 +62,7 @@ Examples
 
    % enumerate the properties of the monitoring built-in protocol:
    | ?- protocol_property(monitoring, Property).
-   
+
    Property = source_data ;
    Property = static ;
    Property = built_in ;

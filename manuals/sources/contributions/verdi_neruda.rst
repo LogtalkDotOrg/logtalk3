@@ -39,7 +39,7 @@ met:
    notice, this list of conditions and the following disclaimer in the
    documentation and/or other materials provided with the distribution.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS \``AS IS'' AND ANY
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ''AS IS'' AND ANY
 EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
 PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR
@@ -143,10 +143,10 @@ list should look like:
 
 ::
 
-   dfs_interpreter 
-   bfs_interpreter 
+   dfs_interpreter
+   bfs_interpreter
    iddfs_interpreter(A)
-   bup_interpreter 
+   bup_interpreter
    a_star_interpreter(A)
 
 The variables means that the interpreters are parametric objects and

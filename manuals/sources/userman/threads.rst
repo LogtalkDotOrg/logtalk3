@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -163,7 +163,7 @@ predicate, we could write:
 
    | ?- threaded_call(lists::member(X, [1,2,3])).
 
-   X = _G189 
+   X = _G189
    yes
 
    | ?- threaded_exit(lists::member(X, [1,2,3])).
@@ -433,7 +433,7 @@ solutions left. After returning a solution, this predicate signals the
 engine to start computing the next one. Note that this predicate is
 deterministic. In contrast with the ``threaded_exit/1-2`` built-in
 predicates, retrieving the next solution requires calling the predicate
-again instead of backtracking into its call. For example: 
+again instead of backtracking into its call. For example:
 
 ::
 

@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -83,6 +83,6 @@ Examples
        % turn off suspicious call lint checks for the next predicate:
        :- set_logtalk_flag(suspicious_calls, silent).
        foo :-
-           ...   
+           ...
        :- set_logtalk_flag(suspicious_calls, warning).
        ...

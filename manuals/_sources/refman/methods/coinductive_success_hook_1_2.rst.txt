@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -70,7 +70,7 @@ Examples
    % Are there "occurrences" of arg1 in arg2?
    :- public(member/2).
    :- coinductive(member/2).
-   
+
    member(X, [X| _]).
    member(X, [_| T]) :-
        member(X, T).

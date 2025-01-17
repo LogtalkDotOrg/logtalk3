@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -37,7 +37,7 @@ Description
        implements(Protocols))
 
    category(Category,
-       extends(Categories))    
+       extends(Categories))
 
    category(Category,
        complements(Objects))
@@ -70,10 +70,10 @@ Template and modes
 
    category(+category_identifier,
        implements(+implemented_protocols))
-       
+
    category(+category_identifier,
        extends(+extended_categories))
-       
+
    category(+category_identifier,
        complements(+complemented_objects))
 
@@ -106,7 +106,7 @@ Examples
 
    :- category(attributes,
        implements(protected::variables)).
-       
+
    :- category(extended,
        extends(minimal)).
 

@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -120,7 +120,7 @@ object predicate. If we try to call a non-public predicate such as the
        error(
            existence_error(predicate_declaration, length/3),
            logtalk(list::length([1,2,3],0,_), ...)
-       )   
+       )
 
 The exception term describes the type of error and the context
 where the error occurred.
@@ -152,7 +152,7 @@ protocol:
 
    :- end_protocol.
 
-Similar to what we have done for objects, we use the 
+Similar to what we have done for objects, we use the
 :ref:`directives_protocol_1_2` and :ref:`directives_end_protocol_0`
 directives to encapsulate the predicate directives. We can improve
 this protocol by documenting the call/return modes and the

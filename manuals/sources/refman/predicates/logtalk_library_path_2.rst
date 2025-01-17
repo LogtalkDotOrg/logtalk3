@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -41,7 +41,7 @@ end with the path directory separator character (``'/'``).
 .. warning::
 
    Library aliases should be unique. The :ref:`predicates_logtalk_make_1`
-   built-in predicate can be used to detect and report duplicated library 
+   built-in predicate can be used to detect and report duplicated library
    aliases using the ``check`` target.
 
 Clauses for this predicate should preferably be facts. Defining rules to
@@ -147,7 +147,7 @@ Examples
 
    Path = '/Users/pmoura/logtalk/examples/viewpoints/loader.lgt'.
    yes
-   
+
 
 .. seealso::
 

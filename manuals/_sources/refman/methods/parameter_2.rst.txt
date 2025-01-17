@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -78,12 +78,12 @@ Examples
    :- object(box(_Color, _Weight)).
 
        ...
-       
+
        % this clause is translated into
        % a fact upon compilation
        color(Color) :-
            parameter(1, Color).
-       
+
        % upon compilation, the >/2 call will be
        % the single goal in the clause body
        heavy :-
@@ -98,7 +98,7 @@ The same example using *parameter variables*:
    :- object(box(_Color_, _Weight_)).
 
        ...
-       
+
        color(_Color_).
 
        heavy :-

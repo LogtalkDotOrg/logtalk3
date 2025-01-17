@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -65,15 +65,15 @@ file:
 ::
 
    :- initialization((write(<=>(1,2)), nl)).
-   
+
    :- object(ops).
-   
+
        :- op(700, xfx, <=>).
-   
+
        :- public(w/1).
        w(Term) :-
            write(Term), nl.
-   
+
        :- public(r/1).
        r(Term) :-
            read(Term).
@@ -96,12 +96,12 @@ a term from within the ``ops`` object versus reading from ``user``.
 
    | ?- ops::r(T).
    |: 3<=>4.
-   
+
    T = <=>(3, 4).
 
    | ?- read(T).
    |: 5<=>6.
-   
+
    SYNTAX ERROR: operator expected
 
 .. seealso::

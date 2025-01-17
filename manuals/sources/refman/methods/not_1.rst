@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -45,25 +45,25 @@ be used as a message to an object.
    to the ``call/1`` control construct. Note that these semantics differ
    from the ISO Prolog Core standard specification for the ``(\+)/1``
    built-in predicate. For example, assuming a conforming system:
-   
+
    ::
-   
+
       | ?- X = !, \+ (member(Y,[1,2,3]), X, write(Y), fail).
       1
-      
+
       X = !
-   
+
    But in Logtalk ``X`` is compiled into a meta-call, which is not
    cut-transparent:
-   
+
    ::
-   
+
       yes
       | ?- logtalk << (X = !, \+ (member(Y,[1,2,3]), X, write(Y), fail)).
       123
-      
+
       X = !
-   
+
    Note that the ISO Prolog Core standard doesn't specify a cut-transparent
    alternative to the ``call/1`` control construct.
 

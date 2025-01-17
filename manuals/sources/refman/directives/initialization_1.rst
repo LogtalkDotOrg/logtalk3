@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -82,22 +82,22 @@ Examples
 
    % call the init/0 predicate after loading the
    % source file containing the directive
-   
+
    :- initialization(init).
 
 ::
 
-   % print a debug message after loading a 
+   % print a debug message after loading a
    % source file defining an object
 
    :- object(log).
-   
+
        :- initialization(start_date).
-   
+
        start_date :-
            os::date_time(Year, Month, Day, _, _, _, _),
            logtalk::print_message(debug, my_app, 'Starting date: ~d-~d-~d~n'+[Year,Month,Day]).
-   
+
    :- end_object.
 
 .. seealso::

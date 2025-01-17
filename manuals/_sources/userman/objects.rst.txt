@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -375,12 +375,12 @@ identifier. For example:
 ::
 
    :- object(circle(_Id_, _Radius_, _Color_)).
-   
+
        :- public(area/1).
        ...
-   
+
    :- end_object.
-   
+
    % parametric object proxies:
    circle('#1', 1.23, blue).
    circle('#2', 3.71, yellow).

@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -91,12 +91,12 @@ succeeds. The returned expansion can be a single term or a list of terms
 .. code-block:: text
 
    | ?- an_object::expand_term(ping, Term).
-   
+
    Term = pong
    yes
-   
+
    | ?- an_object::expand_term(colors, Colors).
-   
+
    Colors = [white, yellow, blue, green, read, black]
    yes
 
@@ -106,7 +106,7 @@ trying to expand is returned:
 .. code-block:: text
 
    | ?- an_object::expand_term(sounds, Sounds).
-   
+
    Sounds = sounds
    yes
 
@@ -114,14 +114,14 @@ Clauses for the ``goal_expansion/2`` predicate are recursively called on the
 expanded goal until a fixed point is reached. For example:
 
 .. code-block:: text
-   
+
    | ?- an_object::expand_goal(a, Goal).
-   
+
    Goal = c
    yes
 
    | ?- an_object::expand_goal(X is 3+2*5, Goal).
-   
+
    X = 13,
    Goal = true
    yes
@@ -130,9 +130,9 @@ When no ``goal_expansion/2`` clause applies, the same goal that we are
 trying to expand is returned:
 
 .. code-block:: text
-   
+
    | ?- an_object::expand_goal(3 =:= 5, Goal).
-   
+
    Goal = (3=:=5)
    yes
 
@@ -168,7 +168,7 @@ Expanding grammar rules
 A common term expansion is the translation of grammar rules into predicate
 clauses. This transformation is performed automatically by the compiler
 when a source file entity defines grammar rules. It can also be done
-explicitly by calling the ``expand_term/2`` built-in method. For example: 
+explicitly by calling the ``expand_term/2`` built-in method. For example:
 
 .. code-block:: text
 
@@ -190,12 +190,12 @@ construct are not expanded. For example:
 .. code-block:: text
 
    | ?- an_object::expand_term({ping}, Term).
-   
+
    Term = {ping}
    yes
-   
+
    | ?- an_object::expand_goal({a}, Goal).
-   
+
    Goal = {a}
    yes
 
@@ -236,41 +236,41 @@ directive before the block of code that it should handle. For example:
 
    :- object(h1,
        implements(expanding)).
-   
+
        term_expansion((:- public(a/0)), (:- public(b/0))).
        term_expansion(a, b).
-   
+
    :- end_object.
 
 ::
 
    :- object(h2,
        implements(expanding)).
-   
+
        term_expansion((:- public(a/0)), (:- public(c/0))).
        term_expansion(a, c).
-   
+
    :- end_object.
 
 ::
 
    :- set_logtalk_flag(hook, h1).
-   
+
    :- object(s1).
-   
+
        :- public(a/0).
        a.
-   
+
    :- end_object.
-   
-   
+
+
    :- set_logtalk_flag(hook, h2).
-   
+
    :- object(s2).
-   
+
        :- public(a/0).
        a.
-   
+
    :- end_object.
 
 .. code-block:: text
@@ -291,7 +291,7 @@ predicate. For example:
 .. code-block:: text
 
    | ?- set_logtalk_flag(hook, hook_object).
-   
+
    yes
 
 Note that, due to the ``set_logtalk_flag/2`` directive being local to a source
@@ -352,7 +352,7 @@ a ``car_protocol`` protocol, we could then load them using:
             ['my_car.pl', 'lease_car.pl'],
             [hook(wrapper(car_protocol))]
         ).
-   
+
    yes
 
 .. note::
@@ -537,7 +537,7 @@ file from the ``edcgs`` library directory:
 
    | ?- {hook_flows(loader), hook_objects(loader)}.
    ...
-   
+
    | ?- open('unique_expanded.lgt', write, Stream),
         logtalk_compile(
             unique,

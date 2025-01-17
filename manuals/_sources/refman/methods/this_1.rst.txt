@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -36,7 +36,7 @@ Description
 Unifies its argument with the identifier of the object calling this method.
 When this method is called from a category, the argument is unified with the
 object importing the category on whose behalf the clause containing the call
-is being used to prove the current goal. 
+is being used to prove the current goal.
 
 This private method is implemented as a unification between its argument and
 the corresponding implicit execution-context argument in the predicate clause

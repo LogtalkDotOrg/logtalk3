@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -49,7 +49,7 @@ runtime.
 
 Possible values for ``Type`` include all the types defined by the ``type``
 library object and by other libraries such as ``os``, ``expecteds``, and
-``optionals``. The value of ``Culprit`` is the argument or one of its sub-terms 
+``optionals``. The value of ``Culprit`` is the argument or one of its sub-terms
 that caused the error.
 
 Modes and number of proofs

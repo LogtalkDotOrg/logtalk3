@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -36,7 +36,7 @@ Description
 Abolishes a runtime declared object dynamic predicate or an object local
 dynamic predicate. Only predicates that are dynamically declared at runtime
 (using a call to the :ref:`methods_asserta_1` or :ref:`methods_assertz_1`
-built-in methods) can be abolished. 
+built-in methods) can be abolished.
 
 When the predicate indicator is declared in a :ref:`directives_uses_2`
 or :ref:`directives_use_module_2` directive, the predicate is abolished in

@@ -168,7 +168,7 @@ distribution:
 
 	| ?- ports_profiler::data(addams, parent/2).
 	-------------
-	Clause  Count  
+	Clause  Count
 	-------------
 	     1      1
 	     2      1

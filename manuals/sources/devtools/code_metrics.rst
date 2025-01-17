@@ -203,7 +203,7 @@ McCabe:
        publisher = "IEEE Computer Society Press",
        address = "Los Alamitos, CA, USA",
        keywords = "Basis, Complexity measure, Control flow, Decomposition, Graph theory, Independence, Linear, Modularization, Programming, Reduction, Software, Testing",
-   } 
+   }
 
 Usage
 -----

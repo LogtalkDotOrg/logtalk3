@@ -748,16 +748,16 @@ example, assume the following broken predicate definition:
 
 ::
 
-   every_other([], []). 
-   every_other([_, X| L], [X | R]) :- 
-       every_other(L, R). 
+   every_other([], []).
+   every_other([_, X| L], [X | R]) :-
+       every_other(L, R).
 
 The predicate is supposed to construct a list by taking every other
 element of an input list. Cursory testing may fail to notice the bug:
 
 ::
 
-   | ?- every_other([1,2,3,4,5,6], List). 
+   | ?- every_other([1,2,3,4,5,6], List).
    List = [2, 4, 6]
    yes
 
@@ -902,7 +902,7 @@ with possible values ``0`` and ``1``. We would then need to define:
    arbitrary::arbitrary(bit).
 
    :- multifile(arbitrary::arbitrary/2).
-   arbitrary::arbitrary(bit, Arbitrary) :- 
+   arbitrary::arbitrary(bit, Arbitrary) :-
        random::member(Arbitrary, [0, 1]).
 
 Skipping tests

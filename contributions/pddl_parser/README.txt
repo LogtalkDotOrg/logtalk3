@@ -14,7 +14,7 @@ The Perl Foundation. Consult the "LICENSE.txt" file for details.
 This PDDL 3.0 file parser converts PDDL files to Logtalk/Prolog
 friendly syntax. For example:
 
-	PDDL         Prolog 
+	PDDL         Prolog
 	(on ?x ?y)   on(?x, ?y)
 
 Syntax sugar:

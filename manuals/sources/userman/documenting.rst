@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -274,7 +274,7 @@ ISO Prolog Core standard and this Handbook is advised. Some examples:
 
 Instantiation error when one or more arguments cannot be a variable
    ``Argument`` is a variable
-   
+
    ``Argument1`` and ``Argument2`` are variables
 
 Instantiation error when a closed list with bound elements is required
@@ -444,4 +444,4 @@ These features allow diagrams to be an effective solution for navigating and
 understanding the structure and implementation of an application. This tool
 uses the same :ref:`reflection API <reflection_reflection>` as the ``lgtdoc``
 tool and thus has access to the same source data. See the tool documentation
-for details. 
+for details.

@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -79,12 +79,12 @@ Errors
 |     ``instantiation_error``
 | ``Goal`` is neither a variable nor a callable term:
 |     ``type_error(callable, Goal)``
-| 
+|
 | ``Closure`` is a variable:
 |     ``instantiation_error``
 | ``Closure`` is neither a variable nor a callable term:
 |     ``type_error(callable, Closure)``
-| 
+|
 | ``Term`` is a variable:
 |     ``instantiation_error``
 | ``Term`` is neither a variable nor a callable term:

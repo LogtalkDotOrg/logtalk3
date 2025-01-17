@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -49,7 +49,7 @@ the target ``caches``.
 There are also three variants of the ``all`` target: ``debug``,
 ``normal``, and ``optimal``. These targets change the compilation mode
 (by changing the default value of the :ref:`debug <flag_debug>` and
-:ref:`optimize <flag_optimize>` flags) and reload all affected files 
+:ref:`optimize <flag_optimize>` flags) and reload all affected files
 (i.e., all files loaded without an explicit ``debug/1`` or ``optimize/1``
 compiler option).
 

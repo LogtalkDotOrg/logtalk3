@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -340,7 +340,7 @@ these directives can be converted, respectively, into a sequence of
 directives by finding which predicates exported by the
 specified modules are reexported or imported into the module containing
 the directive. For ``use_module/1`` directives, finding the names of the
-imported predicates that are actually used is easy. First, comment out the 
+imported predicates that are actually used is easy. First, comment out the
 directive and compile the file (making sure that the
 :ref:`unknown_predicates <flag_unknown_predicates>` compiler flag is set
 to ``warning``). Logtalk will print a warning with a list of predicates

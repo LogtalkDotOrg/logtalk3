@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -74,7 +74,7 @@ on :ref:`object relations <objects_relationships>`,
    turned on.
 
 The :ref:`logtalk <apis:logtalk/0>` built-in object provides predicates for
-querying loaded source files and their properties. 
+querying loaded source files and their properties.
 
 .. index:: single: black-box view
 

@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -230,7 +230,7 @@ following object:
            write('Chirp, chirp!'), nl.
 
    :- end_object.
-   
+
 We can use the ``(@)/1`` control construct to wrap the original ``make_sound/0``
 predicate definition by writing:
 
@@ -252,7 +252,7 @@ predicate will result in the following output:
 .. code-block:: text
 
    | ?- bird::make_sound.
-   
+
    Started making sound...
    Chirp, chirp!
    ... finished making sound.
@@ -545,7 +545,7 @@ The following category properties are supported:
    List of :ref:`properties <grammar_entity_properties>` for other entity multifile predicate that are
    defined in the category (the properties include
    ``number_of_clauses(Number)``, ``number_of_rules(Number)``,
-   ``lines(Start,End)``, and``line_count(Start)`` with ``Start`` being the begin line of the
+   ``lines(Start,End)``, and ``line_count(Start)`` with ``Start`` being the begin line of the
    first multifile predicate clause)
 ``alias(Entity, Properties)``
    List of :ref:`properties <grammar_entity_properties>` for an :term:`entity alias` declared by the object
@@ -733,7 +733,7 @@ Parametric categories
 
 Category predicates can be parameterized in the same way as object predicates
 by using a compound term as the category identifier where all the arguments
-of the compound term are variables. These variables, the *category parameters*, 
+of the compound term are variables. These variables, the *category parameters*,
 can be accessed by calling the :ref:`methods_parameter_2` or
 :ref:`methods_this_1` built-in local methods in the category predicate
 clauses or by using :term:`parameter variables <parameter variable>`.

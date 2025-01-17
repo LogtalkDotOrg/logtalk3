@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -78,7 +78,7 @@ Type-checking
 
 One of the most common cases where errors may be generated is when
 type-checking predicate arguments and input data before processing it.
-The standard library includes a :ref:`type <apis:type/0>` object that 
+The standard library includes a :ref:`type <apis:type/0>` object that
 defines an extensive set of types, together with predicates for validating
 and checking terms. The set of types is user extensible. New types can
 be defined by adding clauses for the ``type/1`` and ``check/2`` multifile

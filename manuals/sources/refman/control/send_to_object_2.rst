@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -89,7 +89,7 @@ Errors
 |     ``existence_error(predicate_declaration, Name/Arity)``
 | ``Object`` does not exist:
 |     ``existence_error(object, Object)``
-| 
+|
 | ``Proxy`` is a variable:
 |     ``instantiation_error``
 | ``Proxy`` is neither a variable nor a callable term:

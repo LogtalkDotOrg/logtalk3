@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -123,7 +123,7 @@ Support for both prototype and class-based systems
 Support for multiple object hierarchies
 ---------------------------------------
 
-   Languages like Smalltalk-80 [Goldberg83]_, Objective-C [Cox86]_ and Java 
+   Languages like Smalltalk-80 [Goldberg83]_, Objective-C [Cox86]_ and Java
    [Joy_et_al_00]_ define a single hierarchy rooted
    in a class usually named ``Object``. This makes it easy to ensure
    that all objects share a common behavior but also tends to result in
@@ -239,7 +239,7 @@ Performance
    caching of :term:`message lookups <message lookup>` (including messages
    to *self* and *super* calls), ensuring a performance level close to what
    could be achieved when using static binding.
-   
+
    For more detailed information on performance, see its dedicated
    :ref:`section <performance_performance>`.
 

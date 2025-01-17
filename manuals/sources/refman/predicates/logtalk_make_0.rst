@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -36,7 +36,7 @@ Description
 Reloads all Logtalk source files that have been modified since the time
 they were last loaded. Only source files loaded using the
 :ref:`predicates_logtalk_load_1` and :ref:`predicates_logtalk_load_2`
-predicates are reloaded. Non-modified files will also be reloaded when 
+predicates are reloaded. Non-modified files will also be reloaded when
 a previous attempt to load them failed or when there is a change to the
 compilation mode (i.e., when the files were loaded without explicit
 :ref:`debug <flag_debug>` or :ref:`optimize <flag_optimize>` flags and

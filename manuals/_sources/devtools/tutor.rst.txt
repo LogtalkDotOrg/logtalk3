@@ -37,7 +37,7 @@ as:
    *     No matching clause for goal: baz(a)
    *       while compiling object main_include_compiler_warning
    *       in file logtalk/examples/errors/include_compiler_warning.lgt between lines 37-38
-   *     
+   *
    *     Duplicated clause: b(one)
    *       first found at or above line 45
    *       while compiling object main_include_compiler_warning
@@ -52,7 +52,7 @@ the user will get:
    *       in file logtalk/examples/errors/include_compiler_warning.lgt between lines 37-38
    *     Calls to locally defined predicates without a clause with a matching head
    *     fail. Typo in a predicate argument? Predicate definition incomplete?
-   *     
+   *
    *     Duplicated clause: b(one)
    *       first found at or above line 45
    *       while compiling object main_include_compiler_warning

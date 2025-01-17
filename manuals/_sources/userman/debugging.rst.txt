@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -471,13 +471,13 @@ example in the Logtalk distribution compiled for debugging:
 .. code-block:: text
 
    | ?- addams::sister(Sister, Sibling).
-        Call: (1) sister(_1082,_1104) ? 
-        Rule: (1) sister(_1082,_1104) ? 
-        Call: (2) ::female(_1082) ? 
-        Call: (3) female(_1082) ? 
-        Fact: (3) female(morticia) ? 
-       *Exit: (3) female(morticia) ? 
-       *Exit: (2) ::female(morticia) ? 
+        Call: (1) sister(_1082,_1104) ?
+        Rule: (1) sister(_1082,_1104) ?
+        Call: (2) ::female(_1082) ?
+        Call: (3) female(_1082) ?
+        Fact: (3) female(morticia) ?
+       *Exit: (3) female(morticia) ?
+       *Exit: (2) ::female(morticia) ?
        ...
 
 While tracing, the debugger will pause for user input at each leashed port,
@@ -504,10 +504,10 @@ breakpoints. For example:
    yes
 
    | ?- addams::sister(Sister, Sibling).
-        Call: (1) sister(_1078,_1100) ? 
-        Rule: (1) sister(_1078,_1100) ? 
-        Call: (2) ::female(_1078) ? 
-     +  Call: (3) female(_1078) ? 
+        Call: (1) sister(_1078,_1100) ?
+        Rule: (1) sister(_1078,_1100) ?
+        Call: (2) ::female(_1078) ?
+     +  Call: (3) female(_1078) ?
 
 To stop tracing (but still allowing the debugger to pause at the defined
 breakpoints), write:
@@ -540,7 +540,7 @@ on the ``female/1`` predicate:
 .. code-block:: text
 
    | ?- addams::sister(Sister, Sibling).
-     +  Call: (3) female(_1078) ? 
+     +  Call: (3) female(_1078) ?
 
 To stop the debugger, write:
 
@@ -669,7 +669,7 @@ usually by ``...``. For example:
 ::
 
    | ?- write_term([0,1,2,3,4,5,6,7,8,9], [max_depth(5)]).
-   
+
    [0,1,2,3,4|...]
    yes
 
@@ -888,7 +888,7 @@ messages for the ``parser`` component:
 
 .. code-block:: text
 
-   % upon loading the tool, all messages are disabled by default: 
+   % upon loading the tool, all messages are disabled by default:
    | ?- logtalk_load(debug_messages(loader)).
    ...
 
@@ -908,7 +908,7 @@ To enable only ``debug(tokenization)`` messages for the ``parser`` component:
    | ?- debug_messages::enable(parser, tokenization).
    yes
 
-See the tool documentation for more details. 
+See the tool documentation for more details.
 
 .. _debugging_hooks:
 
@@ -935,7 +935,7 @@ The Logtalk distribution includes a :doc:`../devtools/ports_profiler` tool
 based on the same procedure box model described above. This tool is
 specially useful for debugging performance issues (e.g., due to lack of
 determinism or unexpected backtracking). See the tool documentation for
-details. 
+details.
 
 .. _debugging_events:
 
@@ -962,12 +962,12 @@ for the ``debug_handler/1`` and  ``debug_handler/3`` predicates. For example:
    % declare my_debug_handler as a debug handler provider
    :- multifile(logtalk::debug_handler/1).
    logtalk::debug_handler(my_debug_handler).
-   
+
    % handle debug events
    :- multifile(logtalk::debug_handler/3).
    logtalk::debug_handler(my_debug_handler, Event, ExCtx) :-
        debug_handler(Event, ExCtx).
-   
+
    debug_handler(fact(Entity,Fact,Clause,File,Line), ExCtx) :-
        ...
    debug_handler(rule(Entity,Head,Clause,File,Line), ExCtx) :-
@@ -1001,7 +1001,7 @@ predicate:
 
    :- multifile(logtalk::trace_event/2).
    :- dynamic(logtalk::trace_event/2).
-   
+
    % the Logtalk runtime calls all defined logtalk::trace_event/2 hooks using
    % a failure-driven loop; thus we don't have to worry about handling all
    % events or failing after handling an event to give other hooks a chance

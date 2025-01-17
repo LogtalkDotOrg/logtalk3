@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -222,11 +222,11 @@ for printing messages of a given kind and component. For example:
 
 ::
 
-	:- multifile(logtalk::message_prefix_stream/4).
-	:- dynamic(logtalk::message_prefix_stream/4).
+   :- multifile(logtalk::message_prefix_stream/4).
+   :- dynamic(logtalk::message_prefix_stream/4).
 
-	logtalk::message_prefix_stream(comment, my_app, '% ', user_output).
-	logtalk::message_prefix_stream(warning, my_app, '* ', user_error).
+   logtalk::message_prefix_stream(comment, my_app, '% ', user_output).
+   logtalk::message_prefix_stream(warning, my_app, '* ', user_error).
 
 A single clause at most is expected per message kind and component pair.
 When this predicate is not defined for a given kind and component pair,
@@ -234,20 +234,20 @@ the following defaults are used:
 
 ::
 
-	kind_prefix_stream(banner,         '',       user_output).
-	kind_prefix_stream(help,           '',       user_output).
-	kind_prefix_stream(question,       '',       user_output).
-	kind_prefix_stream(question(_),    '',       user_output).
-	kind_prefix_stream(information,    '% ',     user_output).
-	kind_prefix_stream(information(_), '% ',     user_output).
-	kind_prefix_stream(comment,        '% ',     user_output).
-	kind_prefix_stream(comment(_),     '% ',     user_output).
-	kind_prefix_stream(warning,        '*     ', user_error).
-	kind_prefix_stream(warning(_),     '*     ', user_error).
-	kind_prefix_stream(error,          '!     ', user_error).
-	kind_prefix_stream(error(_),       '!     ', user_error).
-	kind_prefix_stream(debug,          '>>> ',   user_error).
-	kind_prefix_stream(debug(_),       '>>> ',   user_error).
+   kind_prefix_stream(banner,         '',       user_output).
+   kind_prefix_stream(help,           '',       user_output).
+   kind_prefix_stream(question,       '',       user_output).
+   kind_prefix_stream(question(_),    '',       user_output).
+   kind_prefix_stream(information,    '% ',     user_output).
+   kind_prefix_stream(information(_), '% ',     user_output).
+   kind_prefix_stream(comment,        '% ',     user_output).
+   kind_prefix_stream(comment(_),     '% ',     user_output).
+   kind_prefix_stream(warning,        '*     ', user_error).
+   kind_prefix_stream(warning(_),     '*     ', user_error).
+   kind_prefix_stream(error,          '!     ', user_error).
+   kind_prefix_stream(error(_),       '!     ', user_error).
+   kind_prefix_stream(debug,          '>>> ',   user_error).
+   kind_prefix_stream(debug(_),       '>>> ',   user_error).
 
 When the message kind is unknown, ``information`` is used instead.
 
@@ -300,12 +300,12 @@ easily accomplished by defining the following category in a settings file:
 ::
 
    :- category(my_terse_logtalk_startup_settings).
-   
+
        :- multifile(logtalk::message_hook/4).
        :- dynamic(logtalk::message_hook/4).
-   
+
        logtalk::message_hook(default_flags, comment(settings), core, _).
-   
+
    :- end_category.
 
 The printing message mechanism automatically calls the ``message_hook/4``
@@ -318,18 +318,18 @@ compiler messages:
 ::
 
    :- category(my_verbose_logtalk_message_settings).
-   
+
        :- multifile(logtalk::message_hook/4).
        :- dynamic(logtalk::message_hook/4).
-   
+
        logtalk::message_hook(_Message, silent, core, Tokens) :-
            logtalk::message_prefix_stream(comment, core, Prefix, Stream),
            logtalk::print_message_tokens(Stream, Prefix, Tokens).
-   
+
        logtalk::message_hook(_Message, silent(Key), core, Tokens) :-
            logtalk::message_prefix_stream(comment(Key), core, Prefix, Stream),
            logtalk::print_message_tokens(Stream, Prefix, Tokens).
-   
+
    :- end_category.
 
 .. _printing_questions:
@@ -358,22 +358,22 @@ stream:
 ::
 
    :- category(hitchhikers_guide_to_the_galaxy).
-   
+
        :- multifile(logtalk::message_tokens//2).
        :- dynamic(logtalk::message_tokens//2).
-   
+
        % abstract the question text using the atom ultimate_question;
        % the second argument, hitchhikers, is the application component
        logtalk::message_tokens(ultimate_question, hitchhikers) -->
            ['The answer to the ultimate question of life, the universe and everything is?'-[], nl].
-   
+
       :- multifile(logtalk::question_prompt_stream/4).
       :- dynamic(logtalk::question_prompt_stream/4).
-   
+
       % the prompt is specified here instead of being part of the question text
       % as it will be repeated if the answer doesn't satisfy the question closure
       logtalk::question_prompt_stream(question, hitchhikers, '> ', user_input).
-   
+
    :- end_category.
 
 After compiling and loading this category, we can now ask the ultimate
@@ -382,13 +382,13 @@ question:
 .. code-block:: text
 
    | ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
-   
+
    The answer to the ultimate question of life, the universe and everything is?
    > 42.
 
    N = 42
    yes
-   
+
 Note that the fourth argument, ``'=='(42)`` in our example, is a :term:`closure`
 that is used to check the answers provided by the user. The question is repeated
 until the goal constructed by extending the closure with the user answer
@@ -422,12 +422,12 @@ on someone manually providing answers:
 ::
 
    :- category(hitchhikers_fixed_answers).
-   
+
        :- multifile(logtalk::question_hook/6).
        :- dynamic(logtalk::question_hook/6).
-   
+
        logtalk::question_hook(ultimate_question, question, hitchhikers, _, _, 42).
-   
+
    :- end_category.
 
 After compiling and loading this category, trying the question again will
@@ -436,7 +436,7 @@ now skip asking the user:
 .. code-block:: text
 
    | ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
-   
+
    N = 42
    yes
 

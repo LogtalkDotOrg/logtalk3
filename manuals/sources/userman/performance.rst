@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -146,7 +146,7 @@ compiler performs *inlining* of predicate calls whenever possible. This
 includes calls to Prolog predicates that are either built-in, foreign, or
 defined in a module (including ``user``). Inlining notably allows wrapping
 module or foreign predicates using an object without introducing any
-overhead. In the specific case of the 
+overhead. In the specific case of the
 :ref:`execution-context predicates <predicates_context>`,
 calls are inlined independently of the ``optimize`` flag value.
 

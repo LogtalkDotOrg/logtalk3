@@ -16,7 +16,7 @@ syntax. For example:
 
 ::
 
-   PDDL         Prolog 
+   PDDL         Prolog
    (on ?x ?y)   on(?x, ?y)
 
 Syntax sugar: op(200, fy, ?).

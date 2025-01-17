@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -69,14 +69,14 @@ Errors
 |     ``existence_error(object, Object)``
 | ``Object`` and the original *sender* are the same object:
 |     ``permission_error(access, object, Sender)``
-| 
+|
 | ``Proxy`` is a variable:
 |     ``instantiation_error``
 | ``Proxy`` is neither a variable nor an object identifier:
 |     ``type_error(object_identifier, Proxy)``
 | ``Proxy``, with predicate indicator ``Name/Arity``, does not exist in the ``user`` pseudo-object:
 |     ``existence_error(procedure, Name/Arity)``
-| 
+|
 | ``Message`` is a variable:
 |     ``instantiation_error``
 | ``Message`` is neither a variable nor a callable term:

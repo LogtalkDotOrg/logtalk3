@@ -1,5 +1,5 @@
 ..
-   This file is part of Logtalk <https://logtalk.org/>  
+   This file is part of Logtalk <https://logtalk.org/>
    SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
    SPDX-License-Identifier: Apache-2.0
 
@@ -100,7 +100,7 @@ we're using GNU Prolog as the backend, a possible definition could be:
 
    :- multifile(logtalk_library_path/2).
    :- dynamic(logtalk_library_path/2).
-   
+
    logtalk_library_path(scratch_directory, Directory) :-
        temporary_name(lgtXXXXXX, Name),
        decompose_file_name(Name, _, Prefix, _),
@@ -292,7 +292,7 @@ example:
    !     Existence error: directive object/1 does not exist
    !       in directive end_object/0
    !       in file /home/jdoe/logtalk/examples/errors/unmatched_directive.lgt at or above line 27
-   
+
    *     No matching clause for goal: baz(a)
    *       while compiling object main_include_compiler_warning
    *       in file /home/jdoe/logtalk/examples/errors/include_compiler_warning.lgt between lines 38-39
@@ -446,7 +446,7 @@ just need to type:
 
 .. code-block:: text
 
-   | ?- logtalk_load(viewpoints(loader)). 
+   | ?- logtalk_load(viewpoints(loader)).
 
 The best way to take advantage of this feature is to load at startup a source
 file containing clauses for the ``logtalk_library_path/2`` predicate needed
