@@ -46,6 +46,8 @@ extensions = [
 
 intersphinx_mapping = {'handbook': ('../manuals/','../../manuals/objects.inv')}
 
+spelling_word_list_filename = '../../manuals/sources/spelling_wordlist.txt'
+
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
