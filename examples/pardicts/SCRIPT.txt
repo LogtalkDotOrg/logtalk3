@@ -20,20 +20,20 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-?- logtalk_load(pardicts(loader)).
+| ?- logtalk_load(pardicts(loader)).
 ...
 
 
 % access individual parameters:
 
-?- obj(_{m:2,n:3})::sum(Sum),
+| ?- obj(_{m:2,n:3})::sum(Sum),
 Sum == 5.
 
-?- obj(_{m:2,n:3})::product(Sum),
+| ?- obj(_{m:2,n:3})::product(Sum),
 Sum == 6.
 
 
 % update individual parameters:
 
-?- Dict = _{m:2,n:3}, obj(Dict)::double.
+| ?- Dict = _{m:2,n:3}, obj(Dict)::double.
 Dict = _2524{m:4, n:6}.

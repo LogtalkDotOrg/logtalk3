@@ -32,7 +32,7 @@ ________________________________________________________________________
 
 % calculate the prime numbers in a given interval using a single thread:
 
-?- time(primes(1)::primes(1, 500000, Primes)).
+| ?- time(primes(1)::primes(1, 500000, Primes)).
 % 67,657,303 inferences, 11.98 CPU in 12.31 seconds (97% CPU, 5647521 Lips)
 
 Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...]
@@ -43,7 +43,7 @@ Yes
 % calculate the prime numbers in a given interval by splitting the interval 
 % in two sub-intervals and using a thread per sub-interval:
 
-?- time(primes(2)::primes(1, 500000, Primes)).
+| ?- time(primes(2)::primes(1, 500000, Primes)).
 % 77 inferences, 11.73 CPU in 7.48 seconds (157% CPU, 7 Lips)
 
 Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...]
@@ -54,7 +54,7 @@ Yes
 % calculate the prime numbers in a given interval by splitting the interval 
 % in four sub-intervals and using a thread per sub-interval:
 
-?- time(primes(4)::primes(1, 500000, Primes)).
+| ?- time(primes(4)::primes(1, 500000, Primes)).
 % 143 inferences, 11.62 CPU in 4.00 seconds (290% CPU, 12 Lips)
 
 Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...]
@@ -65,7 +65,7 @@ Yes
 % calculate the prime numbers in a given interval by splitting the interval 
 % in eight sub-intervals and using a thread per sub-interval:
 
-?- time(primes(8)::primes(1, 500000, Primes)).
+| ?- time(primes(8)::primes(1, 500000, Primes)).
 % 323 inferences, 11.56 CPU in 3.30 seconds (350% CPU, 28 Lips)
 
 Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...]

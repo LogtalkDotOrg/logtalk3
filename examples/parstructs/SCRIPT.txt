@@ -20,13 +20,13 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-?- logtalk_load(parstructs(loader)).
+| ?- logtalk_load(parstructs(loader)).
 ...
 
 
 % backtrackable update of an individual parameter:
 
-?- obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::b_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
+| ?- obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::b_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
 
 b-9
 b-2
@@ -36,7 +36,7 @@ B = 2.
 
 % non-backtrackable update of an individual parameter:
 
-?- obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::nb_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
+| ?- obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::nb_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
 
 b-9
 b-9

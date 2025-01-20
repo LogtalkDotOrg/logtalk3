@@ -21,13 +21,13 @@ ________________________________________________________________________
 
 % load the example:
 
-?- logtalk_load(pengines(loader)).
+| ?- logtalk_load(pengines(loader)).
 ...
 
 
 % try the version that dumps the answers to the current output:
 
-?- dumper::ask.
+| ?- dumper::ask.
 q(a)
 q(b)
 q(c)
@@ -36,62 +36,62 @@ true.
 
 % try the version that allows collecting the answers:
 
-?- engines::(ask(Engine), answers(Engine, Answers)).
+| ?- engines::(ask(Engine), answers(Engine, Answers)).
 Engine = 1,
 Answers = [q(a), q(b), q(c)].
 
 
 % retrieve answers on demand:
 
-?- engines::ask(my_question).
+| ?- engines::ask(my_question).
 true.
 
-?- write('Doing something else ...').
+| ?- write('Doing something else ...').
 Doing something else ...
 true.
 
-?- engines::answer(my_question, Answer).
+| ?- engines::answer(my_question, Answer).
 Answer = q(a) .
 
-?- write('Pause for tea ...').
+| ?- write('Pause for tea ...').
 Pause for tea ...
 true.
 
-?- engines::answer(my_question, Answer).
+| ?- engines::answer(my_question, Answer).
 Answer = q(b) .
 
-?- write('Any answers left?').
+| ?- write('Any answers left?').
 Any answers left?
 true.
 
-?- engines::answers(my_question, Answers).
+| ?- engines::answers(my_question, Answers).
 Answers = [q(c)].
 
 
 % use multiple engines concurrently:
 
-?- engines::ask(E2).
+| ?- engines::ask(E2).
 E2 = 2.
 
-?- engines::ask(E3).
+| ?- engines::ask(E3).
 E3 = 3.
 
-?- engines::answer(2, A1).
+| ?- engines::answer(2, A1).
 A1 = q(a) .
 
-?- engines::answer(3, A2).
+| ?- engines::answer(3, A2).
 A2 = q(a) .
 
-?- engines::answer(2, A1).
+| ?- engines::answer(2, A1).
 A1 = q(b) ;
 A1 = q(c) ;
 false.
 
-?- engines::answer(3, A2).
+| ?- engines::answer(3, A2).
 A2 = q(b) .
 
-?- engines::answer(3, A2).
+| ?- engines::answer(3, A2).
 A2 = q(c) .
 
-?- engines::answer(3, A2).
+| ?- engines::answer(3, A2).
 false.

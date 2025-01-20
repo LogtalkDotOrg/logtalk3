@@ -32,7 +32,7 @@ ________________________________________________________________________
 
 % solve the Towers of Hanoi problem for 24 disks using a single thread:
 
-?- time(hanoi(1)::run(24)).
+| ?- time(hanoi(1)::run(24)).
 % 25,165,864 inferences, 4.94 CPU in 5.12 seconds (96% CPU, 5094304 Lips)
 
 Yes
@@ -40,7 +40,7 @@ Yes
 
 % solve the Towers of Hanoi problem for 24 disks using two threads:
 
-?- time(hanoi(2)::run(24)).
+| ?- time(hanoi(2)::run(24)).
 % 78 inferences, 4.87 CPU in 2.66 seconds (183% CPU, 16 Lips)
 
 Yes
@@ -48,7 +48,7 @@ Yes
 
 % solve the Towers of Hanoi problem for 24 disks using four threads:
 
-?- time(hanoi(4)::run(24)).
+| ?- time(hanoi(4)::run(24)).
 % 78 inferences, 4.88 CPU in 2.60 seconds (187% CPU, 16 Lips)
 
 Yes
@@ -56,7 +56,7 @@ Yes
 
 % solve the Towers of Hanoi problem for 24 disks using eight threads:
 
-?- time(hanoi(8)::run(24)).
+| ?- time(hanoi(8)::run(24)).
 % 78 inferences, 4.98 CPU in 1.55 seconds (321% CPU, 16 Lips)
 
 Yes
@@ -64,7 +64,7 @@ Yes
 
 % solve the Towers of Hanoi problem for 24 disks using sixteen threads:
 
-?- time(hanoi(16)::run(24)).
+| ?- time(hanoi(16)::run(24)).
 % 78 inferences, 5.03 CPU in 1.44 seconds (348% CPU, 16 Lips)
 
 Yes

@@ -32,7 +32,7 @@ ________________________________________________________________________
 
 % generate a big list of random floats and then merge sort it using a single thread:
 
-?- generator::list(20000, List), time(msort(1)::msort(List, Sorted)).
+| ?- generator::list(20000, List), time(msort(1)::msort(List, Sorted)).
 % 1,145,746 inferences, 0.40 CPU in 0.43 seconds (93% CPU, 2864365 Lips)
 
 List = [0.326219, 0.545052, 0.21687, 0.0500493, 0.772745, 0.805005, 0.574483, 0.301708, 0.670021|...],
@@ -43,7 +43,7 @@ Yes
 
 % generate a big list of random floats and then merge sort it using two threads:
 
-?- generator::list(20000, List), time(msort(2)::msort(List, Sorted)).
+| ?- generator::list(20000, List), time(msort(2)::msort(List, Sorted)).
 % 80,067 inferences, 0.32 CPU in 0.21 seconds (150% CPU, 250209 Lips)
 
 List = [0.963245, 0.666814, 0.3841, 0.281952, 0.806571, 0.608224, 0.623344, 0.138888, 0.867367|...],
@@ -54,7 +54,7 @@ Yes
 
 % generate a big list of random floats and then merge sort it using four threads:
 
-?- generator::list(20000, List), time(msort(4)::msort(List, Sorted)).
+| ?- generator::list(20000, List), time(msort(4)::msort(List, Sorted)).
 % 80,079 inferences, 0.32 CPU in 0.16 seconds (204% CPU, 250247 Lips)
 
 List = [0.0923009, 0.443585, 0.72304, 0.945816, 0.501491, 0.311327, 0.597448, 0.915656, 0.666957|...],
@@ -65,7 +65,7 @@ Yes
 
 % generate a big list of random floats and then quick sort it using a single thread:
 
-?- generator::list(20000, List), time(qsort(1)::qsort(List, Sorted)).
+| ?- generator::list(20000, List), time(qsort(1)::qsort(List, Sorted)).
 % 1,145,746 inferences, 0.40 CPU in 0.43 seconds (93% CPU, 2864365 Lips)
 
 List = [0.326219, 0.545052, 0.21687, 0.0500493, 0.772745, 0.805005, 0.574483, 0.301708, 0.670021|...],
@@ -76,7 +76,7 @@ Yes
 
 % generate a big list of random floats and then quick sort it using two threads:
 
-?- generator::list(20000, List), time(qsort(2)::qsort(List, Sorted)).
+| ?- generator::list(20000, List), time(qsort(2)::qsort(List, Sorted)).
 % 80,067 inferences, 0.32 CPU in 0.21 seconds (150% CPU, 250209 Lips)
 
 List = [0.963245, 0.666814, 0.3841, 0.281952, 0.806571, 0.608224, 0.623344, 0.138888, 0.867367|...],
@@ -87,7 +87,7 @@ Yes
 
 % generate a big list of random floats and then quick sort it using four threads:
 
-?- generator::list(20000, List), time(qsort(4)::qsort(List, Sorted)).
+| ?- generator::list(20000, List), time(qsort(4)::qsort(List, Sorted)).
 % 80,079 inferences, 0.32 CPU in 0.16 seconds (204% CPU, 250247 Lips)
 
 List = [0.0923009, 0.443585, 0.72304, 0.945816, 0.501491, 0.311327, 0.597448, 0.915656, 0.666957|...],

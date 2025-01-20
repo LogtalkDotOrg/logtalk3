@@ -26,7 +26,7 @@ ________________________________________________________________________
 
 % run example:
 
-?- metered_concurrency::run.
+| ?- metered_concurrency::run.
 Worker 1 acquired semaphore
 Worker 6 acquired semaphore
 Worker 1 releasing semaphore

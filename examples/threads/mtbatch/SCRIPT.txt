@@ -26,16 +26,16 @@ ________________________________________________________________________
 
 % run all tests:
 
-?- mtbatch::run.
+| ?- mtbatch::run.
 ...
 
 
 % run all tests (average of 20 times for each test):
 
-?- mtbatch::run(20).
+| ?- mtbatch::run(20).
 ...
 
 
 % run the primes benchmark test (average of 10 times):
 
-?- mtbatch::run(primes, 10).
+| ?- mtbatch::run(primes, 10).

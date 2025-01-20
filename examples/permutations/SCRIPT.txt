@@ -27,25 +27,25 @@ ________________________________________________________________________
 % the time/1 timing predicate (e.g., SWI-Prolog, Trealla Prolog, YAP, XVM, 
 % and others);:
 
-?- time(true).  % auto-load the predicate in the case of SWI-Prolog
+| ?- time(true).  % auto-load the predicate in the case of SWI-Prolog
 true.
 
-?- time(permutations::backtracking(7)).
+| ?- time(permutations::backtracking(7)).
 % 5,945 inferences, 0.001 CPU in 0.001 seconds (99% CPU, 11388889 Lips)
 true.
 
-?- time(permutations::list(7, _)).
+| ?- time(permutations::list(7, _)).
 % 24,029 inferences, 0.002 CPU in 0.003 seconds (78% CPU, 11150348 Lips)
 true.
 
-?- time(permutations::all(7, _)).
+| ?- time(permutations::all(7, _)).
 % 10,993 inferences, 0.002 CPU in 0.003 seconds (79% CPU, 5091709 Lips)
 true.
 
-?- time(permutations::map(7, _)).
+| ?- time(permutations::map(7, _)).
 % 44,190 inferences, 0.006 CPU in 0.007 seconds (80% CPU, 7770353 Lips)
 true.
 
-?- time(permutations::copy(7)).
+| ?- time(permutations::copy(7)).
 % 34,110 inferences, 0.005 CPU in 0.006 seconds (79% CPU, 7558165 Lips)
 true.

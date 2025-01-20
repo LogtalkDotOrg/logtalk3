@@ -71,42 +71,42 @@ Areas = [4.75291, 43.2412, 0.477836, 103.508, 217.468].
 % time/1 predicate is compiled prior to calling it so that we benchmark
 % the code instead of the compiler):
 
-?- set_logtalk_flag(optimize, on).
+| ?- set_logtalk_flag(optimize, on).
 true.
 
-?- logtalk_load(proxies(loader)).
+| ?- logtalk_load(proxies(loader)).
 ...
 true.
 
-?- time(true).  % autoload the predicate in the case of SWI-Prolog
+| ?- time(true).  % autoload the predicate in the case of SWI-Prolog
 % 2 inferences, 0.000 CPU in 0.000 seconds (67% CPU, 250000 Lips)
 true.
 
-?- time(circle(one, 7, red)::id(Id)).
+| ?- time(circle(one, 7, red)::id(Id)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 76923 Lips)
 Id = one.
 
-?- time(circle(one, 7, red)::radius(Radius)).
+| ?- time(circle(one, 7, red)::radius(Radius)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (61% CPU, 83333 Lips)
 Radius = 7.
 
-?- time(circle(one, 7, red)::color(Color)).
+| ?- time(circle(one, 7, red)::color(Color)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
 Color = red.
 
-?- Id0 = one, time(circle(Id0, 7, red)::id(Id)).
+| ?- Id0 = one, time(circle(Id0, 7, red)::id(Id)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 76923 Lips)
 Id0 = Id, Id = one.
 
-?- Radius0 = 7, time(circle(one, Radius0, red)::radius(Radius)).
+| ?- Radius0 = 7, time(circle(one, Radius0, red)::radius(Radius)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (61% CPU, 83333 Lips)
 Radius0 = Radius, Radius = 7.
 
-?- Color0 = red, time(circle(one, 7, Color0)::color(Color)).
+| ?- Color0 = red, time(circle(one, 7, Color0)::color(Color)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
 Color0 = Color, Color = red.
 
-?- time({circle('#2', Radius, Color)}::id(Id)).
+| ?- time({circle('#2', Radius, Color)}::id(Id)).
 % 2 inferences, 0.000 CPU in 0.000 seconds (71% CPU, 90909 Lips)
 Radius = 3.71,
 Color = yellow,

@@ -40,7 +40,7 @@ $ cd "$LOGTALKHOME/scripts/embedding/swipl/"
 $ ./swipl_logtalk_qlf.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/spider.lgt"
 $ cd ~/collect
 $ swipl -g "[logtalk, application]"
-?- spider::start.
+| ?- spider::start.
 
 
 % create a SWI-Prolog saved state from the "spider" text adventure example:
@@ -56,7 +56,7 @@ $ cd "$LOGTALKHOME/scripts/embedding/sicstus/"
 $ ./sicstus_logtalk_po.sh -c -d "$HOME"/collect -l "$LOGTALKUSER/examples/adventure/sleepy.lgt"
 $ cd ~/collect
 $ sicstus --goal "load_files(['logtalk.po','application.po'])."
-?- sleepy::start.
+| ?- sleepy::start.
 
 
 % create a SICStus Prolog saved state from the "sleepy" text adventure example:

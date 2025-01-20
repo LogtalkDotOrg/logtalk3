@@ -29,32 +29,32 @@ ________________________________________________________________________
 % for these two systems ensure that a ::/2 goal in the argument of the
 % time/1 predicate is compiled prior to calling it):
 
-?- time(true).  % auto-load the predicate in the case of SWI-Prolog
+| ?- time(true).  % auto-load the predicate in the case of SWI-Prolog
 true.
 
-?- time(ack::ack(2, 4, V)).
+| ?- time(ack::ack(2, 4, V)).
 % 98 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
 V = 11.
 
-?- time(ack::ack(3, 3, V)).
+| ?- time(ack::ack(3, 3, V)).
 % 2,451 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
 V = 61.
 
-?- time(ack::ack(3, 4, V)).
+| ?- time(ack::ack(3, 4, V)).
 % 10,326 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
 V = 125.
 
 
 % some example queries for other backend Prolog compilers:
 
-?- ack::ack(2, 4, V).
+| ?- ack::ack(2, 4, V).
 V = 11
 yes
 
-?- ack::ack(3, 3, V).
+| ?- ack::ack(3, 3, V).
 V = 61
 yes
 
-?- ack::ack(3, 4, V).
+| ?- ack::ack(3, 4, V).
 V = 125
 yes

@@ -162,12 +162,12 @@ false.
 
 % sorting example:
 
-?- X = [1-2,2-3,1-4|X], sorting::keysort(X, L).
+| ?- X = [1-2,2-3,1-4|X], sorting::keysort(X, L).
 X = [1-2, 2-3, 1-4|X],
 L = [1-2|_S1], % where
     _S1 = [1-2|_S1] .
 
-?- X = [1-2,2-3|Y], Y = [1-4|Y], sorting::keysort(X, L).
+| ?- X = [1-2,2-3|Y], Y = [1-4|Y], sorting::keysort(X, L).
 X = [1-2, 2-3|_S1], % where
     _S1 = [1-4|_S1],
 Y = [1-4|_S1],
@@ -177,7 +177,7 @@ L = [1-2|_S2], % where
 
 % omega-automaton example:
 
-?- automaton::automaton(s0, X).
+| ?- automaton::automaton(s0, X).
 X = [a, b, c, d|X] ;
 X = [a, b, e|X] ;
 false.
@@ -191,7 +191,7 @@ true.
 
 % nested automata example:
 
-?- nested::state(s0, X), lists::absent(s2, X).
+| ?- nested::state(s0, X), lists::absent(s2, X).
 X = [s0|_S1], % where
     _S1 = [s1|_S1] ;
 X = [s0, s3|X] ;
@@ -230,7 +230,7 @@ false.
 
 % finding the cyclic paths in graphs:
 
-?- cp1::path(a, Path).
+| ?- cp1::path(a, Path).
 Path = [a, b|_S1], % where
     _S1 = [b|_S1] ;
 Path = [a, b, c, d|_S1], % where
@@ -239,14 +239,14 @@ Path = [a|_S1], % where
     _S1 = [b, c, a|_S1] ;
 false.
 
-?- cp2::path(a, Path).
+| ?- cp2::path(a, Path).
 Path = [a|_S1], % where
     _S1 = [b, c, a|_S1] ;
 Path = [a|_S1], % where
     _S1 = [b, c, d, a|_S1] ;
 false.
 
-?- cp3::path(a, Path, 3).
+| ?- cp3::path(a, Path, 3).
 Path = [a|_S1], % where
     _S1 = [b, c, a|_S1] ;
 false.
@@ -254,7 +254,7 @@ false.
 
 % testing for bipartite graphs (vertex adjacency lists must be ordered):
 
-?- A = v(a, [F]), B = v(b, [F, G]), C = v(c, [H, I]), D = v(d, [G]), E = v(e, [F, I]), F = v(f, [A, B]), G = v(g, [B, D]), H = v(h, [C]), I = v(i, [C, E]), graph::bipartite(A).
+| ?- A = v(a, [F]), B = v(b, [F, G]), C = v(c, [H, I]), D = v(d, [G]), E = v(e, [F, I]), F = v(f, [A, B]), G = v(g, [B, D]), H = v(h, [C]), I = v(i, [C, E]), graph::bipartite(A).
 A = v(a, [_S1]), % where
     _S1 = v(f, [v(a, [_S1]), v(b, [_S1, _S2])]),
     _S2 = v(g, [v(b, [_S1, _S2]), v(d, [_S2])]),

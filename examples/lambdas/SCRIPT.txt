@@ -337,7 +337,7 @@ yes
 % the following lambda benchmarks are so far only available when using
 % SWI-Prolog, XSB, or YAP as the Logtalk backend compilers:
 
-?- lambda_benchmarks::bench1.
+| ?- lambda_benchmarks::bench1.
 Using map/2 with a closure for testing less(0, X) with X in [1..100000]: 
 % 600,004 inferences, 0.091 CPU in 0.095 seconds (95% CPU, 6618178 Lips)
 Using map/2 with a lambda for testing less(0, X) with X in [1..100000]:  
@@ -347,7 +347,7 @@ true.
 % the second benchmarks is based on code posted by Jan Wielemaker in
 % the SWI-Prolog mailing list:
 
-?- lambda_benchmarks::bench2.
+| ?- lambda_benchmarks::bench2.
 Adding 1 to every integer in the list [1..100000] using a local add1/2 predicate:
 % 100,002 inferences, 0.015 CPU in 0.016 seconds (93% CPU, 6702547 Lips)
 Adding 1 to every integer in the list [1..100000] using map/3 with the integer::plus/3 predicate:
