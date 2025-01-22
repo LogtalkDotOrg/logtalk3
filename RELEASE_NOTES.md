@@ -28,6 +28,8 @@ RELEASE NOTES
 Documentation
 -------------
 
+* IMPROVED: Handbook documentation of the `mode/2` predicate directive.
+
 * IMPROVED: Documentation of the `packs` tool.
 
 * FIXED: The manual install instructions missing a `PATH` setting for the

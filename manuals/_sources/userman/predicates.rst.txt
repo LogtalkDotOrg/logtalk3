@@ -157,8 +157,9 @@ documented using the :ref:`directives_mode_2` directive. For example:
 
 The first directive argument describes a valid *calling mode*. The minimum
 information will be the instantiation mode of each argument. The first
-four possible values are described in the ISO Prolog Core standard
-[ISO95]_). The remaining two can also be found in use in some Prolog systems.
+four possible values are described in the ISO Prolog Core standard [ISO95]_
+(but with the meaning of the ``-`` instantiation mode redefined here). The
+remaining two can also be found in use in some Prolog systems.
 
 ``+``
    Argument must be instantiated (but not necessarily ground).
@@ -178,6 +179,11 @@ four possible values are described in the ISO Prolog Core standard
 Note that the ``+`` and ``@`` instantiation modes have the same meaning
 for atomic arguments. E.g. you can write either ``+atom`` or ``@atom``
 but the first alternative is preferred.
+
+The ISO ``-`` instantiation mode is equivalent to the Logtalk ``--`` mode,
+allowing the use ``-`` to document predicates with output arguments that
+don't require those arguments to be unbound at call time and also accept
+bound arguments without throwing an exception.
 
 These six mode atoms are also declared as prefix operators by the
 Logtalk compiler. This makes it possible to include type information

@@ -292,8 +292,9 @@ documented using the <a class="reference internal" href="../refman/directives/mo
 </div>
 <p id="predicates-mode-instantiation">The first directive argument describes a valid <em>calling mode</em>. The minimum
 information will be the instantiation mode of each argument. The first
-four possible values are described in the ISO Prolog Core standard
-<a class="reference internal" href="../bibliography.html#iso95" id="id1"><span>[ISO95]</span></a>). The remaining two can also be found in use in some Prolog systems.</p>
+four possible values are described in the ISO Prolog Core standard <a class="reference internal" href="../bibliography.html#iso95" id="id1"><span>[ISO95]</span></a>
+(but with the meaning of the <code class="docutils literal notranslate"><span class="pre">-</span></code> instantiation mode redefined here). The
+remaining two can also be found in use in some Prolog systems.</p>
 <dl class="simple">
 <dt><code class="docutils literal notranslate"><span class="pre">+</span></code></dt><dd><p>Argument must be instantiated (but not necessarily ground).</p>
 </dd>
@@ -313,6 +314,10 @@ the call will unify the computed term with the given argument.</p>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">+</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> instantiation modes have the same meaning
 for atomic arguments. E.g. you can write either <code class="docutils literal notranslate"><span class="pre">+atom</span></code> or <code class="docutils literal notranslate"><span class="pre">&#64;atom</span></code>
 but the first alternative is preferred.</p>
+<p>The ISO <code class="docutils literal notranslate"><span class="pre">-</span></code> instantiation mode is equivalent to the Logtalk <code class="docutils literal notranslate"><span class="pre">--</span></code> mode,
+allowing the use <code class="docutils literal notranslate"><span class="pre">-</span></code> to document predicates with output arguments that
+don’t require those arguments to be unbound at call time and also accept
+bound arguments without throwing an exception.</p>
 <p>These six mode atoms are also declared as prefix operators by the
 Logtalk compiler. This makes it possible to include type information
 for each argument as in the example above. Some possible type
