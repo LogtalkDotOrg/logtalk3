@@ -14,8 +14,8 @@ Portable operating-system access protocol.
 |    ``logtalk_load(os(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:39:0
-| **Date:** 2024-10-14
+| **Version:** 1:40:0
+| **Date:** 2025-01-23
 
 | **Compilation flags:**
 |    ``static``
@@ -777,7 +777,7 @@ Operating system type. Possible values are ``unix``, ``windows``, and ``unknown`
 ``operating_system_name/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Operating system name. On POSIX systems, it returns the value of ``uname -s``. On Windows systems, it returns ``'Windows'``.
+Operating system name. On POSIX systems, it returns the value of ``uname -s``. On macOS systems, it returns ``'Darwin'``. On Windows systems, it returns ``'Windows'``.
 
 | **Compilation flags:**
 |    ``static``

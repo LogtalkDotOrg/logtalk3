@@ -22,9 +22,9 @@
 :- protocol(osp).
 
 	:- info([
-		version is 1:39:0,
+		version is 1:40:0,
 		author is 'Paulo Moura',
-		date is 2024-10-14,
+		date is 2025-01-23,
 		comment is 'Portable operating-system access protocol.',
 		remarks is [
 			'Error handling' - 'Predicates that require a file or directory to exist throw an error when that is not the case. But the exact exception term is currently backend Prolog compiler dependent.'
@@ -310,7 +310,7 @@
 	:- public(operating_system_name/1).
 	:- mode(operating_system_name(?atom), zero_or_one).
 	:- info(operating_system_name/1, [
-		comment is 'Operating system name. On POSIX systems, it returns the value of ``uname -s``. On Windows systems, it returns ``\'Windows\'``.',
+		comment is 'Operating system name. On POSIX systems, it returns the value of ``uname -s``. On macOS systems, it returns ``\'Darwin\'``. On Windows systems, it returns ``\'Windows\'``.',
 		argnames is ['Name']
 	]).
 
