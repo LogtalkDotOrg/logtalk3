@@ -32,6 +32,8 @@ Documentation
 
 * IMPROVED: Documentation of the `packs` tool.
 
+* UPDATED: Notes on the developer tools third-party dependency requirements.
+
 * FIXED: The manual install instructions missing a `PATH` setting for the
 `packs` tool `lgtenv.sh` script.
 
