@@ -14,8 +14,8 @@ Common predicates for the packs tool objects.
 |    ``logtalk_load(packs(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:32:1
-| **Date:** 2024-10-13
+| **Version:** 0:33:0
+| **Date:** 2025-01-23
 
 | **Compilation flags:**
 |    ``static``
@@ -482,6 +482,25 @@ Loads all registry files from the given directory.
 |    ``load_registry(Directory)``
 | **Mode and number of proofs:**
 |    ``load_registry(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sha256sum_command/1
+.. _packs_common/0::sha256sum_command/1:
+
+``sha256sum_command/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the name of the sha256sum command to be used on POSIX systems. Fails if neither gsha256sum or sha256sum commands are found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sha256sum_command(Command)``
+| **Mode and number of proofs:**
+|    ``sha256sum_command(-atom)`` - ``zero_or_one``
 
 
 ------------

@@ -22,9 +22,9 @@
 :- category(packs_common).
 
 	:- info([
-		version is 0:32:1,
+		version is 0:33:0,
 		author is 'Paulo Moura',
-		date is 2024-10-13,
+		date is 2025-01-23,
 		comment is 'Common predicates for the packs tool objects.'
 	]).
 
@@ -205,6 +205,13 @@
 		argnames is ['Directory']
 	]).
 
+	:- protected(sha256sum_command/1).
+	:- mode(sha256sum_command(-atom), zero_or_one).
+	:- info(sha256sum_command/1, [
+		comment is 'Returns the name of the sha256sum command to be used on POSIX systems. Fails if neither gsha256sum or sha256sum commands are found.',
+		argnames is ['Command']
+	]).
+
 	:- protected(tar_command/1).
 	:- mode(tar_command(-atom), one).
 	:- info(tar_command/1, [
@@ -321,7 +328,12 @@
 		command('type curl >/dev/null 2>&1', missing_command(curl)),
 		command('type wget >/dev/null 2>&1', missing_command(wget)),
 		command('type bsdtar >/dev/null 2>&1', missing_command(bsdtar)),
-		command('type sha256sum >/dev/null 2>&1', missing_command(sha256sum)),
+		(	sha256sum_command(_) ->
+			% either gsha256sum or sha256sum exist
+			true
+		;	% warn on missing command
+			command('type sha256sum >/dev/null 2>&1', missing_command(sha256sum))
+		),
 		command('type gpg >/dev/null 2>&1', missing_command(gpg)).
 	verify_commands_availability(windows) :-
 		command('where /q git.exe', missing_command(git)),
@@ -355,6 +367,14 @@
 			true
 		;	print_message(error, packs, FailureMessage),
 			fail
+		).
+
+	sha256sum_command(Sha256sum) :-
+		(	shell('type gsha256sum >/dev/null 2>&1') ->
+			Sha256sum = gsha256sum
+		;	shell('type sha256sum >/dev/null 2>&1') ->
+			Sha256sum = sha256sum
+		;	fail
 		).
 
 	tar_command(Tar) :-

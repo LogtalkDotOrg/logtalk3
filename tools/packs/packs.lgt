@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:81:0,
+		version is 0:82:0,
 		author is 'Paulo Moura',
-		date is 2024-10-30,
+		date is 2025-01-23,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -2314,9 +2314,10 @@
 		verify_checksum(OS, Pack, Archive, CheckSum, Options).
 
 	verify_checksum(unix, Pack, Archive, sha256-CheckSum, Options) :-
+		^^sha256sum_command(Sha256sum),
 		(	^^option(verbose(true), Options) ->
-			atomic_list_concat(['echo "', CheckSum, ' \"', Archive, '\"" | sha256sum --check'],          Command)
-		;	atomic_list_concat(['echo "', CheckSum, ' \"', Archive, '\"" | sha256sum --check --status'], Command)
+			atomic_list_concat(['echo "', CheckSum, ' \"', Archive, '\"" | ', Sha256sum, ' --check'],          Command)
+		;	atomic_list_concat(['echo "', CheckSum, ' \"', Archive, '\"" | ', Sha256sum, ' --check --status'], Command)
 		),
 		^^command(Command, pack_archive_checksum_failed(Pack, Archive)).
 	verify_checksum(windows, Pack, Archive, sha256-CheckSum, Options) :-

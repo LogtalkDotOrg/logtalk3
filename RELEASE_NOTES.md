@@ -51,6 +51,11 @@ Tools
 * UPDATED: The `lgtunit` to use only two decimal places when printing code
 coverage stats.
 
+* FIXED: The `packs` tool to use the `gsha256sum` command when available
+instead of the `sha256sum` command on POSIX systems. This is required to
+workaround Apple adding the incompatible BSD version of the `sha256sum`
+command on macOS 15.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
