@@ -31,7 +31,7 @@ Description
 
 ::
 
-   permission_error(Operation, Permission, Culprit)
+   permission_error(Operation, PermissionType, Culprit)
 
 Throws a permission error. Used when an operation is not allowed. For example,
 sending a message for a predicate that is not within the scope of the sender.
@@ -43,7 +43,7 @@ of goals:
 
    ...,
    context(Context),
-   throw(error(permission_error(Operation,Permission,Culprit), Context)).
+   throw(error(permission_error(Operation,PermissionType,Culprit), Context)).
 
 This allows the user to generate errors in the same format used by the
 runtime.
@@ -61,7 +61,7 @@ Possible values for ``Operation`` include:
 - ``reposition``
 - ``repeat``
 
-Possible values for ``Permission`` include:
+Possible values for ``PermissionType`` include:
 
 - ``predicate_declaration``
 - ``protected_predicate``
@@ -99,7 +99,7 @@ Errors
 ------
 
 | When called:
-|     ``permission_error(Operation, Permission, Culprit)``
+|     ``permission_error(Operation, PermissionType, Culprit)``
 
 Examples
 --------

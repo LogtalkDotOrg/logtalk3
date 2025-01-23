@@ -154,7 +154,7 @@
 <span id="methods-permission-error-3"></span><span id="index-0"></span><h1><code class="docutils literal notranslate"><span class="pre">permission_error/3</span></code><a class="headerlink" href="#permission-error-3" title="Link to this heading"></a></h1>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">permission_error</span>(<span class="nv">Operation</span>, <span class="nv">Permission</span>, <span class="nv">Culprit</span>)
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="k">permission_error</span>(<span class="nv">Operation</span>, <span class="nv">PermissionType</span>, <span class="nv">Culprit</span>)
 </pre></div>
 </div>
 <p>Throws a permission error. Used when an operation is not allowed. For example,
@@ -164,7 +164,7 @@ to an object. Calling this predicate is equivalent to the following sequence
 of goals:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>...,
 <span class="k">context</span>(<span class="nv">Context</span>),
-<span class="k">throw</span>(error(<span class="k">permission_error</span>(<span class="nv">Operation</span>,<span class="nv">Permission</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
+<span class="k">throw</span>(error(<span class="k">permission_error</span>(<span class="nv">Operation</span>,<span class="nv">PermissionType</span>,<span class="nv">Culprit</span>), <span class="nv">Context</span>)).
 </pre></div>
 </div>
 <p>This allows the user to generate errors in the same format used by the
@@ -182,7 +182,7 @@ runtime.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">reposition</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">repeat</span></code></p></li>
 </ul>
-<p>Possible values for <code class="docutils literal notranslate"><span class="pre">Permission</span></code> include:</p>
+<p>Possible values for <code class="docutils literal notranslate"><span class="pre">PermissionType</span></code> include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">predicate_declaration</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">protected_predicate</span></code></p></li>
@@ -220,7 +220,7 @@ the error.</p>
 <div class="line-block">
 <div class="line">When called:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(Operation,</span> <span class="pre">Permission,</span> <span class="pre">Culprit)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(Operation,</span> <span class="pre">PermissionType,</span> <span class="pre">Culprit)</span></code></div>
 </div>
 </div>
 </section>
