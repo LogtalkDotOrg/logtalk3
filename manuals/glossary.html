@@ -146,9 +146,9 @@ and also <a class="reference internal" href="#term-hot-patching"><span class="xr
 should be functionally-cohesive, defining a single functionality.</p>
 </dd>
 <dt id="term-class">class<a class="headerlink" href="#term-class" title="Link to this term"></a></dt><dd><p>An <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a> that specializes another object, interpreted as its
-superclass. A class defines the common predicates of a set of objects
-that instantiate it. An object can also be interpreted as a class
-when it instantiates itself.</p>
+<a class="reference internal" href="#term-superclass"><span class="xref std std-term">superclass</span></a>. A class defines the common predicates of a set of
+objects that instantiate it. An object can also be interpreted as a
+class when it instantiates itself.</p>
 </dd>
 <dt id="term-clause-reference">clause reference<a class="headerlink" href="#term-clause-reference" title="Link to this term"></a></dt><dd><p>An opaque term that uniquely identifies a clause. Provided by
 some backends via alternative database built-in predicates.</p>
@@ -407,7 +407,7 @@ with other objects.</p>
 </dd>
 <dt id="term-parameter">parameter<a class="headerlink" href="#term-parameter" title="Link to this term"></a></dt><dd><p>An argument of a parametric object or a parametric category identifier.
 Parameters are <em>logical variables</em> implicitly shared by all the entity
-predicate clauses.</p>
+directives and predicate clauses.</p>
 </dd>
 <dt id="term-parameter-variable">parameter variable<a class="headerlink" href="#term-parameter-variable" title="Link to this term"></a></dt><dd><p>A variable used as parameter in a parametric object or a parametric
 category using the syntax <code class="docutils literal notranslate"><span class="pre">_ParameterName_</span></code> (i.e., a variable whose
@@ -432,7 +432,7 @@ different parameterizations of the same parametric entity, <code class="docutils
 the same name and number of arguments as the identifier of a parametric
 object.</p>
 </dd>
-<dt id="term-parent">parent<a class="headerlink" href="#term-parent" title="Link to this term"></a></dt><dd><p>A prototype that is extended by another prototype.</p>
+<dt id="term-parent">parent<a class="headerlink" href="#term-parent" title="Link to this term"></a></dt><dd><p>A <a class="reference internal" href="#term-prototype"><span class="xref std std-term">prototype</span></a> that is extended by another prototype.</p>
 </dd>
 <dt id="term-polymorphism">polymorphism<a class="headerlink" href="#term-polymorphism" title="Link to this term"></a></dt><dd><p>Different objects (and categories) can provide different implementations
 of the same predicate. The predicate declaration can be inherited from a
@@ -525,11 +525,11 @@ can be implemented by both objects and categories, and can be extended
 by other protocols. A protocol should be functionally-cohesive,
 specifying a single functionality. Also known as <em>interface</em>.</p>
 </dd>
-<dt id="term-prototype">prototype<a class="headerlink" href="#term-prototype" title="Link to this term"></a></dt><dd><p>A self-describing object that may extend or be extended by other
-objects. A prototype typically describes a concrete object instead of
-an abstraction of a set of objects. An object with no instantiation
-or specialization relations with other objects is always interpreted
-as a prototype.</p>
+<dt id="term-prototype">prototype<a class="headerlink" href="#term-prototype" title="Link to this term"></a></dt><dd><p>A self-describing <a class="reference internal" href="#term-object"><span class="xref std std-term">object</span></a> that may extend or be extended by
+other objects. A prototype typically describes a concrete object
+instead of an abstraction of a set of objects. An object with no
+instantiation or specialization relations with other objects is
+always interpreted as a prototype.</p>
 </dd>
 <dt id="term-public-inheritance">public inheritance<a class="headerlink" href="#term-public-inheritance" title="Link to this term"></a></dt><dd><p>All inherited predicates maintain their declared scope. See also
 <a class="reference internal" href="#term-protected-inheritance"><span class="xref std std-term">protected inheritance</span></a> and <a class="reference internal" href="#term-private-inheritance"><span class="xref std std-term">private inheritance</span></a>.</p>

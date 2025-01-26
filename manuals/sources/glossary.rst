@@ -47,9 +47,9 @@ Glossary
 
    class
       An :term:`object` that specializes another object, interpreted as its
-      superclass. A class defines the common predicates of a set of objects
-      that instantiate it. An object can also be interpreted as a class
-      when it instantiates itself.
+      :term:`superclass`. A class defines the common predicates of a set of
+      objects that instantiate it. An object can also be interpreted as a
+      class when it instantiates itself.
 
    abstract class
       A :term:`class` that cannot be instantiated by sending it a message.
@@ -319,7 +319,7 @@ Glossary
    parameter
       An argument of a parametric object or a parametric category identifier.
       Parameters are *logical variables* implicitly shared by all the entity
-      predicate clauses.
+      directives and predicate clauses.
 
    parameter variable
       A variable used as parameter in a parametric object or a parametric
@@ -330,7 +330,7 @@ Glossary
       are implicitly unified with the corresponding entity parameters.
 
    parent
-      A prototype that is extended by another prototype.
+      A :term:`prototype` that is extended by another prototype.
 
    predicate
       Predicates describe what is true about the application domain. A
@@ -489,11 +489,11 @@ Glossary
       See :term:`protocol`.
 
    prototype
-      A self-describing object that may extend or be extended by other
-      objects. A prototype typically describes a concrete object instead of
-      an abstraction of a set of objects. An object with no instantiation
-      or specialization relations with other objects is always interpreted
-      as a prototype.
+      A self-describing :term:`object` that may extend or be extended by
+      other objects. A prototype typically describes a concrete object
+      instead of an abstraction of a set of objects. An object with no
+      instantiation or specialization relations with other objects is
+      always interpreted as a prototype.
 
    self
       The object that received the :term:`message` under processing.
