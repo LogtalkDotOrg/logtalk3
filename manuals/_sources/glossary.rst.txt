@@ -490,8 +490,10 @@ Glossary
 
    prototype
       A self-describing object that may extend or be extended by other
-      objects. An object with no instantiation or specialization relations
-      with other objects is always interpreted as a prototype.
+      objects. A prototype typically describes a concrete object instead of
+      an abstraction of a set of objects. An object with no instantiation
+      or specialization relations with other objects is always interpreted
+      as a prototype.
 
    self
       The object that received the :term:`message` under processing.

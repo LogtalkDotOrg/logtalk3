@@ -30,6 +30,8 @@ Documentation
 
 * IMPROVED: Handbook documentation of the `mode/2` predicate directive.
 
+* IMPROVED: Handbook glossary definition of "prototype".
+
 * IMPROVED: Documentation of the `packs` tool.
 
 * UPDATED: Notes on the developer tools third-party dependency requirements.
