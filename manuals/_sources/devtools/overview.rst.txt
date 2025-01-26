@@ -102,7 +102,7 @@ Tool dependencies for full functionality
 - ``help``: ``info``
 - ``issue_creator``: ``gh``, ``glab``
 - ``lgtdoc``: Sphinx, ``libxslt``, ``fop``, ``texlive``, ``texinfo``,
-  ``pandoc``
+  ``pandoc``, ``xsltproc``
 - ``lgtunit``: Allure, ``coreutils``, ``gsed``
 - ``packs``: ``coreutils``, ``libarchive``, ``gnupg2``, ``git``,
   ``curl``, ``wget``, ``direnv``
@@ -122,7 +122,7 @@ macOS - MacPorts
 ::
 
    $ sudo port install d2 graphviz
-   $ sudo port install texinfo pandoc
+   $ sudo port install texinfo pandoc libxslt
    $ sudo port install libxslt fop texlive
    $ sudo port install gsed
    $ sudo port install coreutils gsed libarchive gnupg2 git curl wget direnv
@@ -134,7 +134,7 @@ macOS - Homebrew
 ::
 
    $ brew install d2 graphviz
-   $ brew install texinfo pandoc
+   $ brew install texinfo pandoc libxslt
    $ brew install libxslt fop texlive
    $ brew install allure gsed
    $ brew install coreutils libarchive gnupg2 git curl wget direnv
@@ -146,7 +146,7 @@ Ubuntu
 ::
 
    $ sudo apt install graphviz
-   $ sudo apt install info pandoc
+   $ sudo apt install info pandoc xsltproc
    $ sudo apt install xsltproc fop texlive
    $ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
    $ sudo apt install libarchive-tools gnupg2 git curl wget direnv
@@ -157,7 +157,7 @@ RedHat
 ::
 
    $ sudo dnf install graphviz
-   $ sudo dnf install texinfo pandoc
+   $ sudo dnf install texinfo pandoc libxslt
    $ sudo dnf install libxslt fop
    $ sudo dnf install bsdtar gnupg2 git curl wget direnv
 
@@ -166,7 +166,7 @@ Windows - Chocolatey
 
 ::
 
-   > choco install pandoc
+   > choco install pandoc xsltproc
    > choco install d2 graphviz
    > choco install xsltproc apache-fop texlive
    > choco install gnupg git
