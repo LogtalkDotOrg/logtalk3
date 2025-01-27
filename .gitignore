@@ -7,6 +7,8 @@
 
 # Logtalk distribution files and directories
 /TODO.txt
+/docs/*.pdf
+/docs/*.epub
 /docs/*.info
 /manuals/*.pdf
 /manuals/*.epub
@@ -15,6 +17,10 @@
 # Logtalk automated documenting and testing logs
 logtalk_tester_logs/
 logtalk_doclet_logs/
+
+# Test reports
+tap_report.xml
+xunit_report.xml
 
 # Logtalk temporary file directories
 .lgt_tmp/
@@ -49,3 +55,6 @@ tags
 # codeStylesettings is influenced by local plugins
 .idea/codeStyleSettings.xml
 
+# Jupyter notebooks
+.ipynb_checkpoints/
+.jupyter/

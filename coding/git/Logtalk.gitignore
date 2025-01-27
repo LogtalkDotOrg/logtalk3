@@ -6,6 +6,10 @@ lgt_tmp/
 logtalk_tester_logs/
 logtalk_doclet_logs/
 
+# Test reports
+tap_report.xml
+xunit_report.xml
+
 # backend Prolog compiler temporary files
 .pl-history
 *.out
