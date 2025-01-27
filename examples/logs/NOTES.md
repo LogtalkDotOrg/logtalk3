@@ -25,3 +25,56 @@ This folder contains an example of using a category to define a simple
 logging support for objects. This example illustrates how to define in 
 a category a set of predicates that handle a dynamic predicate in the 
 context of "this".
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(logs(loader)).
+```
+
+The object log is automatically initialized when the object is loaded:
+
+```logtalk
+object::print_log.
+```
+
+<!--
+2008/7/17-18:15:38 - start
+
+true.
+-->
+
+Add a new entry to the object log:
+
+```logtalk
+object::add_log_entry('something interesting happens').
+```
+
+<!--
+true.
+-->
+
+Check current object log:
+
+```logtalk
+object::print_log.
+```
+
+<!--
+2008/7/17-18:15:38 - start
+2008/7/17-18:18:10 - something interesting happens
+
+true.
+-->
+
+In alternative, enumerate all log entries using backtracking:
+
+```logtalk
+%%table
+object::log_entry(Date, Entry).
+```
+
+<!--
+Date = 2008/7/17-8:15:38, Entry = start ;
+Date = 2008/7/17-8:18:0, Entry = 'something interesting happens'.
+-->

@@ -46,7 +46,7 @@ Load the example:
 logtalk_load(localizations(loader)).
 ```
 
-% print the application language in several languages:
+Print the application language in several languages:
 
 ```logtalk
 my_game(de)::banner.

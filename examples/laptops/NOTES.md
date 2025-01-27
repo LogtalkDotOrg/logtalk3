@@ -32,7 +32,7 @@ Start by loading the example:
 logtalk_load(laptops(loader)).
 ```
 
-% describe the basic laptop:
+Describe the basic laptop:
 
 ```logtalk
 basic::describe.
@@ -46,7 +46,7 @@ Keyboard: qwerty
 true.
 -->
 
-% describe the business laptop:
+Describe the business laptop:
 
 ```logtalk
 business::describe.
@@ -60,7 +60,7 @@ Keyboard: qwerty
 true.
 -->
 
-% create a custom laptop and describe it:
+Create a custom laptop and describe it:
 
 ```logtalk
 custom::new(faster, thirteen, dvorak, Laptop).

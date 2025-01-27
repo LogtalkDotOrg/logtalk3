@@ -20,3 +20,52 @@ ________________________________________________________________________
 -->
 
 # lo - travellers
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(lo_travellers(loader)).
+```
+
+Build a route by adding one town at a time:
+
+```logtalk
+incremental::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route).
+```
+
+<!--
+Route = oxford-london-portsmouth-brighton-exeter-aberystwyth ;
+...
+-->
+
+Presort towns by geographical distance before using the incremental algorithm:
+
+```logtalk
+presort::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route).
+```
+
+<!--
+Route = brighton-london-oxford-portsmouth-exeter-aberystwyth ;
+...
+-->
+
+Come home after the journey:
+
+```logtalk
+circular::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route).
+```
+
+<!--
+Route = london-brighton-portsmouth-exeter-aberystwyth-oxford-london ;
+...
+-->
+
+Blind search by generating permutations of the list of towns:
+
+```logtalk
+permute::route([london, brighton, portsmouth, exeter, oxford, aberystwyth], Route).
+```
+
+<!--
+Route = (aberystwyth-exeter-portsmouth-brighton-london-oxford,273.6237583942784).
+-->

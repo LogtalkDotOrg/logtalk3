@@ -23,3 +23,26 @@ ________________________________________________________________________
 
 This example is an adaptation of the LPA Prolog++ faults example.
 
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(lpa_faults(loader)).
+```
+
+```logtalk
+fault::findall.
+```
+
+<!--
+Please answer all questions with yes or no.
+
+The starter turns but the engine does not fire?   no.
+The engine has difficulty starting?     yes.
+The engine cuts out shortly after starting?     yes.
+
+Location      : distributor
+Possible Fault: Worn distributor brushes
+
+No (more) explanations found.
+true.
+-->
