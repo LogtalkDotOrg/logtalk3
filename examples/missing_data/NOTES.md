@@ -29,3 +29,71 @@ For more details about this example, please see the comments in the
 `expecteds.lgt` source file.
 
 See also the `cascade` and `books` examples.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(missing_data(loader)).
+```
+
+In the first data processing example, we provide defaults for the missing data:
+
+```logtalk
+data_processing::print.
+```
+
+<!--
+gomez
+  father: john doe
+  mother: jane doe
+
+pubert
+  father: gomez
+  mother: morticia
+
+pugsley
+  father: gomez
+  mother: morticia
+
+morticia
+  father: john doe
+  mother: jane doe
+
+wednesday
+  father: gomez
+  mother: morticia
+
+true.
+-->
+
+In the second data processing example, we simply skip missing data:
+
+```logtalk
+data_processing::print_complete.
+```
+
+<!--
+pubert
+  father: gomez
+  mother: morticia
+
+pugsley
+  father: gomez
+  mother: morticia
+
+wednesday
+  father: gomez
+  mother: morticia
+
+true.
+-->
+
+In the third data processing example, we throw an error on missing data:
+
+```logtalk
+catch(data_processing::check, Error, true).
+```
+
+<!--
+Error = missing_father-gomez.
+-->

@@ -57,7 +57,7 @@ Start by loading the example:
 logtalk_load(mi(loader)).
 ```
 
-% set a point in the space-time:
+Set a point in the space-time:
 
 ```logtalk
 xyzt::rotate(1, 2, 3).
@@ -75,7 +75,7 @@ xyzt::translate(4).
 true.
 -->
 
-% verify it:
+Verify it:
 
 ```logtalk
 xyzt::xyzt(X, Y, Z, T).
@@ -85,7 +85,7 @@ xyzt::xyzt(X, Y, Z, T).
 T = 4, X = 1, Y = 2, Z = 3.
 -->
 
-% enumerate space_time public predicates:
+Enumerate space_time public predicates:
 
 ```logtalk
 xyzt::(current_predicate(Functor/Arity), functor(Pred, Functor, Arity), predicate_property(Pred, declared_in(Object))).
@@ -100,7 +100,7 @@ Pred = translate(_A), Arity = 1, Object = t, Functor = translate ? ;
 false.
 -->
 
-% get the origin distance from a point in the space-time(_, _, _, _):
+Get the origin distance from a point in the `space-time(_, _, _, _)`:
 
 ```logtalk
 xyzt(2,3,4,7)::distance(D).
@@ -118,7 +118,7 @@ xyzt(2,3,4,7)::time(T).
 T = 7.
 -->
 
-% enumerate xyzt(_, _, _, _) public predicates:
+Enumerate `xyzt(_, _, _, _)` public predicates:
 
 ```logtalk
 xyzt(2,3,4,7)::(current_predicate(Functor/Arity), functor(Pred, Functor, Arity), predicate_property(Pred, declared_in(Object))).

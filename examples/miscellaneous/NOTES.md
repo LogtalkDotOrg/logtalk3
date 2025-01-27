@@ -26,3 +26,42 @@ ________________________________________________________________________
 
 - `queens.lgt`  
 	N-Queens example
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(miscellaneous(loader)).
+```
+
+Towers of Hanoi using three disks:
+
+```logtalk
+hanoi::run(3).
+```
+
+<!--
+Move a disk from left to right.
+Move a disk from left to middle.
+Move a disk from right to middle.
+Move a disk from left to right.
+Move a disk from middle to left.
+Move a disk from middle to right.
+Move a disk from left to right.
+
+true.
+-->
+
+Placing eight queens in a chess table:
+
+```logtalk
+queens::queens(8).
+```
+
+<!--
+[1-5, 2-7, 3-2, 4-6, 5-3, 6-1, 7-4, 8-8] ;
+[1-4, 2-7, 3-5, 4-2, 5-6, 6-1, 7-3, 8-8] ;
+[1-6, 2-4, 3-7, 4-1, 5-3, 6-5, 7-2, 8-8] ;
+[1-6, 2-3, 3-5, 4-7, 5-1, 6-4, 7-2, 8-8] ;
+[1-4, 2-2, 3-8, 4-6, 5-1, 6-3, 7-5, 8-7] ;
+...
+-->

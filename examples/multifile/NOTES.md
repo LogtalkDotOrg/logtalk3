@@ -23,3 +23,49 @@ ________________________________________________________________________
 
 This example illustrates how to use multifile predicates/non-terminals within
 Logtalk objects and categories.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(multifile(loader)).
+```
+
+% call the a/1 multifile predicate:
+
+```logtalk
+%%table
+main::a(X).
+```
+
+<!--
+X = 1 ;
+X = 2 ;
+X = 3 ;
+X = 4 ;
+X = 5.
+-->
+
+Call the `b/1` multifile predicate:
+
+```logtalk
+%%table
+main::b(X).
+```
+
+<!--
+X = one ;
+X = two ;
+X = three.
+-->
+
+Call the `nt//1` multifile non-terminal:
+
+```logtalk
+%%table
+logtalk << phrase(main::nt(X), [1,2,3], Rest).
+```
+
+<!--
+X = 1, Rest = [2, 3] ;
+X = end, Rest = [1, 2, 3].
+-->

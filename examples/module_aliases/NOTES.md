@@ -25,3 +25,41 @@ This is a minimal example illustrating the use of the Logtalk `use_module/1`
 directive to module aliases (not to be confused by the Prolog directive with
 the same name). It requires backend support for modules and the `use_module/2`
 directive.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(module_aliases(loader)).
+```
+
+Demonstration of using aliases for using or experimenting with different
+modules:
+
+```logtalk
+data_source::all(Data).
+```
+
+<!--
+...
+Data = [1,2,3].
+-->
+
+Demonstration of using module aliases with parametric objects:
+
+```logtalk
+pardata(data1)::all(Data).
+```
+
+<!--
+...
+Data = [1,2,3].
+-->
+
+```logtalk
+pardata(data2)::all(Data).
+```
+
+<!--
+...
+Data = [4,5,6]
+-->

@@ -31,8 +31,8 @@ Start by loading the example:
 logtalk_load(metaclasses(loader)).
 ```
 
-% play and modify the example code to get comfortable using classes and
-% instances in Logtalk
+Play and modify the example code to get comfortable using classes and
+instances in Logtalk
 
 ```logtalk
 root::new(I).
