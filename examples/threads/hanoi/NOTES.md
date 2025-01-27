@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,11 +17,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
+# threads - hanoi
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
-
-This folder provides a multi-threading solution for solving the "Towers 
+This folder provides a multi-threading solution for solving the "Towers
 of Hanoi" problem. This solution is only useful for benchmarking as the 
 problem is solved without actually printing the solution steps.

@@ -20,39 +20,45 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(symbiosis(loader)).
+```logtalk
+logtalk_load(symbiosis(loader)).
 ...
 
 
 % using Prolog maplist/2 to check a list of integers
 
-| ?- symbiosis::p.
+```logtalk
+symbiosis::p.
 yes
 
 
 % using Prolog maplist/3 to convert characters into codes
 
-| ?- symbiosis::q(L).
+```logtalk
+symbiosis::q(L).
 L = [97, 98, 99]
 yes
 
 
 % sorting lists of lists using maplist/3
 
-| ?- symbiosis::r(L).
+```logtalk
+symbiosis::r(L).
 L = [1, 2, 3]
 yes
 
 
 % adding one to each integer in a list using maplist/3 with a lambda expression with a built-in predicate
 
-| ?- symbiosis::s(L).
+```logtalk
+symbiosis::s(L).
 L = [2,3,4]
 yes
 
 
 % adding one to each integer in a list using maplist/3 with a lambda expression with a local predicate
 
-| ?- symbiosis::t(L).
+```logtalk
+symbiosis::t(L).
 L = [2,3,4]
 yes

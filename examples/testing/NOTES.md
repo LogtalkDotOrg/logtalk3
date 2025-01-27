@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
+# testing
 
 This folder contains an example of defining and running unit tests using
 the test dialects supported by default by the Logtalk `lgtunit` tool. See

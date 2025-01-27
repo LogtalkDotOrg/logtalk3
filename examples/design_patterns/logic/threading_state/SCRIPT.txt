@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementation:
 
-| ?- logtalk_load(design_patterns('logic/threading_state/loader')).
+```logtalk
+logtalk_load(design_patterns('logic/threading_state/loader')).
 ...
 
 
 % convert a float into an integer:
 
-| ?- states::convert(12.34, Integer).
+```logtalk
+states::convert(12.34, Integer).
 
 Integer = 76
 yes
@@ -34,7 +36,8 @@ yes
 
 % confirm the result:
 
-| ?- Integer is round((12.34 * 12.34) /2.0).
+```logtalk
+Integer is round((12.34 * 12.34) /2.0).
 
 Integer = 76
 yes

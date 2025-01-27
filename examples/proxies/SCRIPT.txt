@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(proxies(loader)).
+```logtalk
+logtalk_load(proxies(loader)).
 ...
 
 
 % print the area and the perimeter for all circle proxies:
 
-| ?- forall(circle(Id, R, C), circle(Id, R, C)::print).
+```logtalk
+forall(circle(Id, R, C), circle(Id, R, C)::print).
 
 id: #1, area: 4.75291, perimeter: 7.72831, color: blue
 id: #2, area: 43.2412, perimeter: 23.3106, color: yellow
@@ -39,7 +41,8 @@ true.
 % Logtalk provides a convenient notation for accessing proxies
 % represented as Prolog facts when sending a message:
 
-| ?- {circle(_, _, _)}::print, fail; true.
+```logtalk
+{circle(_, _, _)}::print, fail; true.
 
 id: #1, area: 4.75291, perimeter: 7.72831, color: blue
 id: #2, area: 43.2412, perimeter: 23.3106, color: yellow
@@ -51,7 +54,8 @@ true.
 
 % print the area and the perimeter for the circle #2:
 
-| ?- {circle('#2', R, C)}::print.
+```logtalk
+{circle('#2', R, C)}::print.
 
 id: #2, area: 43.2412, perimeter: 23.3106, color: yellow
 R = 3.71,
@@ -60,7 +64,8 @@ C = yellow.
 
 % construct a list with the areas of all circles:
 
-| ?- findall(Area, {circle(_, _, _)}::area(Area), Areas).
+```logtalk
+findall(Area, {circle(_, _, _)}::area(Area), Areas).
 
 Areas = [4.75291, 43.2412, 0.477836, 103.508, 217.468].
 
@@ -71,42 +76,52 @@ Areas = [4.75291, 43.2412, 0.477836, 103.508, 217.468].
 % time/1 predicate is compiled prior to calling it so that we benchmark
 % the code instead of the compiler):
 
-| ?- set_logtalk_flag(optimize, on).
+```logtalk
+set_logtalk_flag(optimize, on).
 true.
 
-| ?- logtalk_load(proxies(loader)).
+```logtalk
+logtalk_load(proxies(loader)).
 ...
 true.
 
-| ?- time(true).  % autoload the predicate in the case of SWI-Prolog
+```logtalk
+time(true).  % autoload the predicate in the case of SWI-Prolog
 % 2 inferences, 0.000 CPU in 0.000 seconds (67% CPU, 250000 Lips)
 true.
 
-| ?- time(circle(one, 7, red)::id(Id)).
+```logtalk
+time(circle(one, 7, red)::id(Id)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 76923 Lips)
 Id = one.
 
-| ?- time(circle(one, 7, red)::radius(Radius)).
+```logtalk
+time(circle(one, 7, red)::radius(Radius)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (61% CPU, 83333 Lips)
 Radius = 7.
 
-| ?- time(circle(one, 7, red)::color(Color)).
+```logtalk
+time(circle(one, 7, red)::color(Color)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
 Color = red.
 
-| ?- Id0 = one, time(circle(Id0, 7, red)::id(Id)).
+```logtalk
+Id0 = one, time(circle(Id0, 7, red)::id(Id)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 76923 Lips)
 Id0 = Id, Id = one.
 
-| ?- Radius0 = 7, time(circle(one, Radius0, red)::radius(Radius)).
+```logtalk
+Radius0 = 7, time(circle(one, Radius0, red)::radius(Radius)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (61% CPU, 83333 Lips)
 Radius0 = Radius, Radius = 7.
 
-| ?- Color0 = red, time(circle(one, 7, Color0)::color(Color)).
+```logtalk
+Color0 = red, time(circle(one, 7, Color0)::color(Color)).
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
 Color0 = Color, Color = red.
 
-| ?- time({circle('#2', Radius, Color)}::id(Id)).
+```logtalk
+time({circle('#2', Radius, Color)}::id(Id)).
 % 2 inferences, 0.000 CPU in 0.000 seconds (71% CPU, 90909 Lips)
 Radius = 3.71,
 Color = yellow,

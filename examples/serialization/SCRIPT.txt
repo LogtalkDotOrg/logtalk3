@@ -20,21 +20,24 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(serialization(loader)).
+```logtalk
+logtalk_load(serialization(loader)).
 ...
 yes
 
 
 % create a protocol declaring some predicates:
 
-| ?- create_protocol(abc, [], [public([a/1,b/1,c/1])]).
+```logtalk
+create_protocol(abc, [], [public([a/1,b/1,c/1])]).
 
 yes
 
 
 % create some dynamic objects implementing the protocol:
 
-| ?- create_object(Object1, [implements(abc)], [], [a(1),b(1),c(1)]),
+```logtalk
+create_object(Object1, [implements(abc)], [], [a(1),b(1),c(1)]),
      create_object(Object2, [implements(abc)], [], [a(2),b(2),c(2)]),
 	 create_object(Object3, [implements(abc)], [], [a(3),b(3),c(3)]).
 
@@ -46,28 +49,32 @@ yes
 
 % save the objects to a file:
 
-| ?- serializer::save(abc, abc_objects).
+```logtalk
+serializer::save(abc, abc_objects).
 
 yes
 
 
 % abolish all objects:
 
-| ?- forall(conforms_to_protocol(Object,abc), abolish_object(Object)).
+```logtalk
+forall(conforms_to_protocol(Object,abc), abolish_object(Object)).
 
 yes
 
 
 % restore the serialized objects from the file:
 
-| ?- serializer::restore(abc_objects).
+```logtalk
+serializer::restore(abc_objects).
 
 yes
 
 
 % confirm the restoring process worked as expected:
 
-| ?- conforms_to_protocol(Object, abc), Object::(a(A), b(B), c(C)).
+```logtalk
+conforms_to_protocol(Object, abc), Object::(a(A), b(B), c(C)).
 
 Object = o3, A = B, B = C, C = 1 ;
 Object = o4, A = B, B = C, C = 2 ;

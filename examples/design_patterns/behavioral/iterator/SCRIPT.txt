@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/iterator/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/iterator/loader')).
 ...
 
 
 % add some books to our collection:
 
-| ?- book_collection::(
+```logtalk
+book_collection::(
 		add_title('Design Patterns'),
 		add_title('Design Patterns in Dynamic Languages'),
 		add_title('Analysis patterns')
@@ -35,7 +37,8 @@ ________________________________________________________________________
 
 % use the iterator predicate to print all titles in the collection:
 
-| ?- forall(book_collection::element(Title), (write(Title), nl)).
+```logtalk
+forall(book_collection::element(Title), (write(Title), nl)).
 
 Design Patterns
 Design Patterns in Dynamic Languages

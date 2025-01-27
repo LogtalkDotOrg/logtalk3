@@ -20,18 +20,21 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('ai/many_worlds/loader')).
+```logtalk
+logtalk_load(design_patterns('ai/many_worlds/loader')).
 ...
 
 
 % try the inheritance approach to the design pattern:
 
-| ?- world1::lowest(Lowest).
+```logtalk
+world1::lowest(Lowest).
 
 Lowest = 17.8
 yes
 
-| ?- world2::average(Average).
+```logtalk
+world2::average(Average).
 
 Average = 11.566666666666668
 yes
@@ -39,12 +42,14 @@ yes
 
 % try the parametric approach to the design pattern:
 
-| ?- reasoner(dataset1)::lowest(Lowest).
+```logtalk
+reasoner(dataset1)::lowest(Lowest).
 
 Lowest = 17.8
 yes
 
-| ?- reasoner(dataset2)::average(Average).
+```logtalk
+reasoner(dataset2)::average(Average).
 
 Average = 11.566666666666668
 yes

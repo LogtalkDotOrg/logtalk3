@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +17,69 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# carengines
 
 For a description of this example, please see the comments in the
 `carengines.lgt` source file.
+
+% start by loading the example:
+
+```logtalk
+logtalk_load(carengines(loader)).
+```
+
+% both cars provide the same interface, declared in the protocol
+% that is implemented by the categories imported by each object:
+
+```logtalk
+sedan::current_predicate(P).
+```
+
+<!--
+P = reference/1 ;
+P = capacity/1 ;
+P = cylinders/1 ;
+P = horsepower_rpm/2 ;
+P = bore_stroke/2 ;
+P = fuel/1 ;
+false.
+-->
+
+```logtalk
+coupe::current_predicate(P).
+```
+
+<!--
+P = reference/1 ;
+P = capacity/1 ;
+P = cylinders/1 ;
+P = horsepower_rpm/2 ;
+P = bore_stroke/2 ;
+P = fuel/1 ;
+false.
+-->
+
+% the sedan engine properties are the ones defined in the corresponding 
+% imported category (classic):
+
+```logtalk
+sedan::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)).
+```
+
+<!--
+Name = 'M180.940', Cylinders = 6, HP = 94, RPM = 4800.
+-->
+
+% the coupe engine properties are the ones defined in the corresponding 
+% imported category (sport) plus the ones inherited from the top category 
+% (classic) which are not overridden:
+
+```logtalk
+coupe::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)).
+```
+
+<!--
+Name = 'M180.941', Cylinders = 6, HP = 115, RPM = 3657.
+-->

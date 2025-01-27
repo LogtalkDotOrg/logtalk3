@@ -20,18 +20,21 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(lpa_timetables(loader)).
+```logtalk
+logtalk_load(lpa_timetables(loader)).
 ...
 
 
 % the setup phase initializes the timetable:
 
-| ?- timetable::setup.
+```logtalk
+timetable::setup.
 
 yes
 
 
-| ?- timetable::make(2).
+```logtalk
+timetable::make(2).
 
 + first_year - p1 - nicky - french
 + first_year - p2 - nicky - biology
@@ -58,7 +61,8 @@ yes
 
 % the partially completed timetable is ...
 
-| ?- timetable::print.
+```logtalk
+timetable::print.
 
 FORM TIMETABLE...
 
@@ -211,7 +215,8 @@ p5: second_year taught by diane
 yes
 
 
-| ?- timetable::make(5).
+```logtalk
+timetable::make(5).
 
 + first_year - p1 - diane - accountancy
 + first_year - p2 - phil - prolog++
@@ -379,7 +384,8 @@ yes
 
 % the completed timetable is ...
 
-| ?- timetable::print.
+```logtalk
+timetable::print.
 
 FORM TIMETABLE...
 

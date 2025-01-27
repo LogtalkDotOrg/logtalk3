@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(logs(loader)).
+```logtalk
+logtalk_load(logs(loader)).
 ...
 
 
 % the object log is automatically initialized when the object is loaded:
 
-| ?- object::print_log.
+```logtalk
+object::print_log.
 
 2008/7/17-18:15:38 - start
 yes
@@ -34,14 +36,16 @@ yes
 
 % add a new entry to the object log:
 
-| ?- object::add_log_entry('something interesting happens').
+```logtalk
+object::add_log_entry('something interesting happens').
 
 yes
 
 
 % check current object log:
 
-| ?- object::print_log.
+```logtalk
+object::print_log.
 
 2008/7/17-18:15:38 - start
 2008/7/17-18:18:10 - something interesting happens
@@ -50,7 +54,8 @@ yes
 
 % in alternative, enumerate all log entries using backtracking:
 
-| ?- object::log_entry(Date, Entry).
+```logtalk
+object::log_entry(Date, Entry).
 
 Date = 2008/7/17-8:15:38,
 Entry = start ;

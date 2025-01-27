@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +17,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 The examples in this folder illustrate how to use Constraint Domain Solvers 
 (such as the CLP(FD) library included with ECLiPSe, SICStus Prolog, SWI-Prolog,

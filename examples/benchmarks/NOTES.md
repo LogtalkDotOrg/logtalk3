@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# benchmarks
 
 This folder provides simple benchmark tests for comparing Logtalk message
 sending performance with direct predicates calls in plain Prolog.
@@ -101,3 +102,76 @@ When the number of benchmark test repetitions is too low, you may get a
 The test that creates and abolishes empty objects may take a long time to
 complete when compared with all the other tests.
 
+% start by loading the example by choosing one of the loader files
+% (you must quit and restart Logtalk for each testing scenario):
+
+
+% run benchmarks with event support turned on and using static binding:
+
+```logtalk
+logtalk_load(benchmarks(loader_events)).
+```
+
+
+% run benchmarks with event support turned off and using static binding:
+
+```logtalk
+logtalk_load(benchmarks(loader_no_events)).
+```
+
+% or simply:
+
+```logtalk
+logtalk_load(benchmarks(loader)).
+```
+
+
+% list all the benchmark tests:
+
+```logtalk
+benchmarks::benchmark(Id, Goal).
+```
+
+<!--
+Goal = my_length([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],_), Id = s1 ? ;
+Goal = object::length([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],_), Id = s2 ? ;
+Goal = my_nrev([0, 1, 2, 3, 4, 5, 6, 7|...], _G33), Id = s3 ? ;
+Goal = object::nrev([0, 1, 2, 3, 4, 5, 6|...], _G36), Id = s4 ? ;
+Goal = leaf::obj_local Id = c1 ? ;
+Goal = leaf::ctg_direct, Id = c2 ? ;
+Goal = leaf::ctg_self, Id = c3 ? ;
+Goal = create_object(xpto,[],[],[]),abolish_object(xpto), Id = d1 ? ;
+Goal = plain_dyndb, Id = d2 ? ;
+Goal = database::this_dyndb, Id = d3 ? ;
+Goal = database::self_dyndb, Id = d4 ? ;
+Goal = database::other_dyndb, Id = d5 ;
+false.
+-->
+
+% run all the benchmark tests the default number of times:
+
+```logtalk
+benchmarks::run.
+```
+
+
+% run all the benchmark tests 100000 times:
+
+```logtalk
+benchmarks::run(100000).
+```
+
+
+% or run specific sets of benchmark tests, for example:
+
+```logtalk
+benchmarks::run(s11, 1000000), benchmarks::run(s12, 1000000), benchmarks::run(s13, 1000000).
+```
+
+```logtalk
+benchmarks::run(s21, 1000000), benchmarks::run(s22, 1000000), benchmarks::run(s23, 1000000).
+```
+
+```logtalk
+benchmarks::run(s31, 1000000), benchmarks::run(s32, 1000000), benchmarks::run(s33, 1000000).
+```

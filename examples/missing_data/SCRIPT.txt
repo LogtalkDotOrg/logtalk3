@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(missing_data(loader)).
+```logtalk
+logtalk_load(missing_data(loader)).
 ...
 
 
 % in the first data processing example, we provide defaults for the missing data:
 
-| ?- data_processing::print.
+```logtalk
+data_processing::print.
 
 gomez
   father: john doe
@@ -53,7 +55,8 @@ true
 
 % in the second data processing example, we simply skip missing data:
 
-| ?- data_processing::print_complete.
+```logtalk
+data_processing::print_complete.
 pubert
   father: gomez
   mother: morticia
@@ -71,6 +74,7 @@ true
 
 % in the third data processing example, we throw an error on missing data:
 
-| ?- catch(data_processing::check, Error, true).
+```logtalk
+catch(data_processing::check, Error, true).
 Error = missing_father-gomez
 true

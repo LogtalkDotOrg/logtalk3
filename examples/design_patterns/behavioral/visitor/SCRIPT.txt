@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/visitor/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/visitor/loader')).
 ...
 
 
@@ -28,7 +29,8 @@ ________________________________________________________________________
 % with a closure (use a lambda expression so that we can print a
 % new-line after each component):
 
-| ?- sedan::visitor([Component]>>(write(Component),nl)).
+```logtalk
+sedan::visitor([Component]>>(write(Component),nl)).
 
 engine(diesel)
 wheel(front_left)
@@ -43,7 +45,8 @@ yes
 
 % use the visitor meta-predicate that is added using hot-patching:
 
-| ?- sedan::alt_visitor([Component]>>(write(Component),nl)).
+```logtalk
+sedan::alt_visitor([Component]>>(write(Component),nl)).
 
 engine(diesel)
 wheel(front_left)
@@ -59,7 +62,8 @@ yes
 % use the standard setof/3 meta-predicate to construct a list of
 % all component types:
 
-| ?- setof(
+```logtalk
+setof(
 		Type,
 		Component^Arity^(sedan::component(Component), functor(Component,Type,Arity)),
 		Types

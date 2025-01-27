@@ -20,14 +20,16 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(object_aliases(loader)).
+```logtalk
+logtalk_load(object_aliases(loader)).
 ...
 
 
 % demonstration of using aliases for shorten object names and
 % simplify trying alternative implementations:
 
-| ?- experiments::stats(TotalLess, TotalEqual, TotalGreater),
+```logtalk
+experiments::stats(TotalLess, TotalEqual, TotalGreater),
      Total is TotalLess + TotalEqual + TotalGreater.
 
 ...
@@ -38,12 +40,14 @@ yes
 % demonstration of using aliases for objects defined at runtime
 % using parameters:
 
-| ?- simple(<)::insert_top([3-c,1-a,2-b], Top).
+```logtalk
+simple(<)::insert_top([3-c,1-a,2-b], Top).
 
 Top = 1-a
 yes
 
-| ?- simple(>)::insert_top([3-c,1-a,2-b], Top).
+```logtalk
+simple(>)::insert_top([3-c,1-a,2-b], Top).
 
 Top = 3-c
 yes

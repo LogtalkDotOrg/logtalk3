@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# classvars
 
 This folder contains an example that shows how to implement class variables
 as defined in Smalltalk. The name shared instance variables is however much
@@ -30,3 +31,39 @@ This example defines a root class, `root` and three instances, `instance1`,
 `instance2`, and `instance3`. The root class defines a shared instance variable
 (using a dynamic predicate) and the setter and getter methods which implement
 the variable sharing behavior.
+
+% start by loading the example:
+
+```logtalk
+logtalk_load(classvars(loader)).
+```
+
+% get the value of the class variable for each instance:
+
+```logtalk
+instance1::cv(Value1), instance2::cv(Value2), instance3::cv(Value3).
+```
+
+<!--
+Value1 = Value2, Value2 = Value3, Value3 = 0.
+-->
+
+% change the value of the class variable via instance1:
+
+```logtalk
+instance1::set_cv(1).
+```
+
+<!--
+true.
+-->
+
+% get the value of the class variable for the other instances:
+
+```logtalk
+instance2::cv(Value2), instance3::cv(Value3).
+```
+
+<!--
+Value2 = 1, Value3 = 1.
+-->

@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# engines - interactors
 
 This example requires support for both threads and coroutining. Currently it
 runs on ECLiPSe and SWI-Prolog. It should run also on XSB and YAP if and when
@@ -32,3 +33,92 @@ Interactors are described in the paper:
 	title="Architecture and Implementation Aspects of the Lean Prolog System",
 	url="http://www.cse.unt.edu/~tarau/research/LeanProlog/ArchitectureOfLeanProlog.pdf"
 }
+
+% load the example:
+
+```logtalk
+logtalk_load(interactors(loader)).
+```
+
+<!--
+true.
+-->
+
+% get natural numbers in increasing order:
+
+```logtalk
+interactors::natural(N).
+```
+
+<!--
+N = 1.
+-->
+
+```logtalk
+interactors::natural(N).
+```
+
+<!--
+N = 2.
+-->
+
+```logtalk
+interactors::natural(N).
+```
+
+<!--
+N = 3.
+-->
+
+
+% get prime numbers in increasing order:
+
+```logtalk
+interactors::prime(P).
+```
+
+<!--
+N = 2.
+-->
+
+```logtalk
+interactors::prime(P).
+```
+
+<!--
+N = 3.
+-->
+
+```logtalk
+interactors::prime(P).
+```
+
+<!--
+N = 5.
+-->
+
+% interactor with goal injection:
+
+```logtalk
+interactors<<sums(S).
+```
+
+<!--
+S =  (0->2).
+-->
+
+```logtalk
+interactors<<sums(S).
+```
+
+<!--
+S =  (2->7).
+-->
+
+```logtalk
+interactors<<sums(S).
+```
+
+<!--
+S =  (7->9).
+-->

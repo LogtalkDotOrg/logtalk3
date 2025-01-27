@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(patches(loader)).
+```logtalk
+logtalk_load(patches(loader)).
 ...
 
 
 % find categories that complement objects:
 
-| ?- complements_object(Category, Object).
+```logtalk
+complements_object(Category, Object).
 
 Category = patch,
 Object = proto
@@ -36,7 +38,8 @@ yes
 % verify the patch in the "patch" category for the predicate init/0
 % defined in the object "proto":
 
-| ?- proto::init.
+```logtalk
+proto::init.
 
 parent init
 proto init
@@ -46,7 +49,8 @@ yes
 % verify the imported category added to the "proto" object by the
 % "patch" category:
 
-| ?- proto::pet(Pet).
+```logtalk
+proto::pet(Pet).
 
 Pet = cat
 yes 

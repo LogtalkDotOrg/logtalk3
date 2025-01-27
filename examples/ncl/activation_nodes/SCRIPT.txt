@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(activation_nodes(loader)).
+```logtalk
+logtalk_load(activation_nodes(loader)).
 ...
 
 
 % run the example:
 
-| ?- activation(_,_,_)::(a(a),b(b),c(c)).
+```logtalk
+activation(_,_,_)::(a(a),b(b),c(c)).
 
 T = 0
   a-_R2-_R1

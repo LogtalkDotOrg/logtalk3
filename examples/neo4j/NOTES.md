@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +17,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
+# neo4j
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file. This example is only supported when using XVM (with its `jni` plug-in
+This example is only supported when using XVM (with its `jni` plug-in
 installed), SWI-Prolog, or YAP as the backend compiler.
 
 There are two individual examples. The first is a simple example of using

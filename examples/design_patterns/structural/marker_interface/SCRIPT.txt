@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('structural/marker_interface/loader')).
+```logtalk
+logtalk_load(design_patterns('structural/marker_interface/loader')).
 ...
 
 
 % check for the marker interface:
 
-| ?- conforms_to_protocol(Entity, marker).
+```logtalk
+conforms_to_protocol(Entity, marker).
 
 Entity = an_object ;
 Entity = a_descendant_object ;

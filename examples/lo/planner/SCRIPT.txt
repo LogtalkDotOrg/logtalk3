@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(lo_planner(loader)).
+```logtalk
+logtalk_load(lo_planner(loader)).
 ...
 
 
 % plan a trip from london to the aiai conference in edinburgh:
 
-| ?- plan(london)::from(imperial, aiai, L).
+```logtalk
+plan(london)::from(imperial, aiai, L).
 
 L = [[taxi(imperial,lhr)]-[fly(lhr,edin)]-[taxi(edin,aiai)]] ? 
 

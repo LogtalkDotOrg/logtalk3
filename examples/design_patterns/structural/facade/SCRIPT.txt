@@ -20,14 +20,16 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('structural/facade/loader')).
+```logtalk
+logtalk_load(design_patterns('structural/facade/loader')).
 ...
 
 
 % use the simplified interface provided by the facade to start
 % the computer:
 
-| ?- computer_facade(cpu, memory, ssd)::start.
+```logtalk
+computer_facade(cpu, memory, ssd)::start.
 
 Freezing processor.
 Loading from 0x00 data: Some data from sector 100 with size 1024
@@ -38,7 +40,8 @@ yes
 
 % or, in alternative:
 
-| ?- computer_facade::start.
+```logtalk
+computer_facade::start.
 
 Freezing processor.
 Loading from 0x00 data: Some data from sector 100 with size 1024

@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# mi
 
 There are two examples in this folder. The first one is an adoption of a 
 multi-inheritance C++ example found on the D. M. Capper book "Introducing 
@@ -50,3 +50,82 @@ This example defines the following objects:
 
 - `xyzt(_,_,_,_)`  
 	this object inherits from both the objects `xyz(_,_,_)` and `t(_)`
+
+% start by loading the example:
+
+```logtalk
+logtalk_load(mi(loader)).
+```
+
+% set a point in the space-time:
+
+```logtalk
+xyzt::rotate(1, 2, 3).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+xyzt::translate(4).
+```
+
+<!--
+true.
+-->
+
+% verify it:
+
+```logtalk
+xyzt::xyzt(X, Y, Z, T).
+```
+
+<!--
+T = 4, X = 1, Y = 2, Z = 3.
+-->
+
+% enumerate space_time public predicates:
+
+```logtalk
+xyzt::(current_predicate(Functor/Arity), functor(Pred, Functor, Arity), predicate_property(Pred, declared_in(Object))).
+```
+
+<!--
+Pred = xyzt(_A,_B,_C,_D), Arity = 4, Object = space_time, Functor = xyzt ? ;
+Pred = xyz(_A,_B,_C), Arity = 3, Object = xyz, Functor = xyz ? ;
+Pred = rotate(_A,_B,_C), Arity = 3, Object = xyz, Functor = rotate ? ;
+Pred = t(_A), Arity = 1, Object = t, Functor = t ? ;
+Pred = translate(_A), Arity = 1, Object = t, Functor = translate ? ;
+false.
+-->
+
+% get the origin distance from a point in the space-time(_, _, _, _):
+
+```logtalk
+xyzt(2,3,4,7)::distance(D).
+```
+
+<!--
+D = 5.385164807134504.
+-->
+
+```logtalk
+xyzt(2,3,4,7)::time(T).
+```
+
+<!--
+T = 7.
+-->
+
+% enumerate xyzt(_, _, _, _) public predicates:
+
+```logtalk
+xyzt(2,3,4,7)::(current_predicate(Functor/Arity), functor(Pred, Functor, Arity), predicate_property(Pred, declared_in(Object))).
+```
+
+<!--
+Pred = distance(_A), Arity = 1, Object = xyz(_B,_C,_D), Functor = distance ? ;
+Pred = time(_A), Arity = 1, Object = t(_B), Functor = time ? ;
+false.
+-->

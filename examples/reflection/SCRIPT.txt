@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(reflection(loader)).
+```logtalk
+logtalk_load(reflection(loader)).
 ...
 
 
 % print the (public and protected) interface of each class:
 
-| ?- object::print, abstract_class::print, class::print.
+```logtalk
+object::print, abstract_class::print, class::print.
 
 Object: object
 
@@ -66,7 +68,8 @@ yes
 
 % class is the metaclass of all classes:
 
-| ?- class::instances(Instances), class::metaclass.
+```logtalk
+class::instances(Instances), class::metaclass.
 
 Instances = [class,abstract_class,object]
 yes
@@ -74,7 +77,8 @@ yes
 
 % create an abstract_class, check it and print its interface:
 
-| ?- abstract_class::new(ac), ac::abstract_class, ac::print.
+```logtalk
+abstract_class::new(ac), ac::abstract_class, ac::print.
 
 Object: ac
 
@@ -89,14 +93,16 @@ yes
 
 % try to create an instance of the abstract class:
 
-| ?- ac::new(i).
+```logtalk
+ac::new(i).
 
 uncaught exception: error(existence_error(predicate_declaration,new(i)),ac::new(i),user)
 
 
 % create a new instantiable class and print its interface:
 
-| ?- class::new(c), c::print.
+```logtalk
+class::new(c), c::print.
 
 Object: c
 
@@ -114,7 +120,8 @@ yes
 
 % create an instance of the new class:
 
-| ?- c::new(i), c::instances(Instances).
+```logtalk
+c::new(i), c::instances(Instances).
 
 Instances = [i]
 yes
@@ -122,14 +129,16 @@ yes
 
 % because c does not declare any predicates, its instances have no interface:
 
-| ?- i::current_predicate(Predicate).
+```logtalk
+i::current_predicate(Predicate).
 
 no
 
 
 % create an instance of object, root of the inheritance graph, and print its interface:
 
-| ?- object::new(j), j::print.
+```logtalk
+object::new(j), j::print.
 
 Object: j
 
@@ -142,6 +151,7 @@ yes
 
 % delete the dynamic objects that we created:
 
-| ?- c::delete(i), class::delete(c), abstract_class::delete(ac), object::delete(j).
+```logtalk
+c::delete(i), class::delete(c), abstract_class::delete(ac), object::delete(j).
 
 yes

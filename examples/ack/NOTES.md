@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,12 +17,84 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# ack
 
 This folder contains an implementation of the Ackermann function (general
 recursive function). For a description of this function see e.g.
 
 	https://en.wikipedia.org/wiki/Ackermann_function
+
+% print Logtalk, backend, and kernel versions:
+
+```{code-cell}
+%versions
+```
+
+% start by loading the example:
+
+```{code-cell}
+logtalk_load(ack(loader)).
+```
+
+## Sample queries
+
+```{code-cell}
+ack::ack(2, 4, V).
+```
+<!--
+V = 11.
+-->
+
+```{code-cell}
+ack::ack(3, 3, V).
+```
+<!--
+V = 61.
+-->
+
+```{code-cell}
+ack::ack(3, 4, V).
+```
+<!--
+V = 125.
+-->
+
+## Sample queries for backends implementing the time/1 predicate
+
+(e.g., SWI-Prolog or YAP; the adapter files
+for these two systems ensure that a ::/2 goal in the argument of the
+time/1 predicate is compiled prior to calling it)
+
+```{code-cell}
+% auto-load the predicate in the case of SWI-Prolog
+time(true).
+```
+<!--
+true.
+-->
+
+```{code-cell}
+time(ack::ack(2, 4, V)).
+```
+<!--
+% 98 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+V = 11.
+-->
+
+```{code-cell}
+time(ack::ack(3, 3, V)).
+```
+<!--
+% 2,451 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+V = 61.
+-->
+
+```{code-cell}
+time(ack::ack(3, 4, V)).
+```
+<!--
+% 10,326 inferences, 0.00 CPU in 0.00 seconds (0% CPU, Infinite Lips)
+V = 125.
+-->

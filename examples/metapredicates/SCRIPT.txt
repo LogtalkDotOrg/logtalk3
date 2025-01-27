@@ -20,28 +20,33 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(metapredicates(loader)).
+```logtalk
+logtalk_load(metapredicates(loader)).
 ...
 
 
 % try the simple meta-predicate definitions from the "goals.lgt" file:
 
-| ?- simple_client::test_whatever.
+```logtalk
+simple_client::test_whatever.
 
 yes
 
-| ?- simple_client::test_whatever_all.
+```logtalk
+simple_client::test_whatever_all.
 
 Hello world!
 yes
 
 % alternatively:
 
-| ?- simple_client_alt::test_whatever.
+```logtalk
+simple_client_alt::test_whatever.
 
 yes
 
-| ?- simple_client_alt::test_whatever_all.
+```logtalk
+simple_client_alt::test_whatever_all.
 
 Hello world!
 yes
@@ -51,7 +56,8 @@ yes
 % therefore, the integer comparisons are performed using the standard
 % Prolog built-in predicates
 
-| ?- sort(user)::sort([3, 1, 4, 2, 9], Sorted).
+```logtalk
+sort(user)::sort([3, 1, 4, 2, 9], Sorted).
 
 call: partition([1,4,2,9],3,_358,_359)
 exit: partition([1,4,2,9],3,[1,2],[4,9])
@@ -90,12 +96,14 @@ yes
 
 % test the setof/3 wrapper:
 
-| ?- object::p(L).
+```logtalk
+object::p(L).
 
 L = [1, 2, 3]
 yes
 
-| ?- object::q(L).
+```logtalk
+object::q(L).
 
 L = [1, 2, 3]
 yes
@@ -103,7 +111,8 @@ yes
 
 % call the meta-predicate apply/2 directly:
 
-| ?- metapreds::test_this.
+```logtalk
+metapreds::test_this.
 
 1, metapreds
 yes
@@ -111,7 +120,8 @@ yes
 
 % send an apply/2 message to self:
 
-| ?- descendant::test_self.
+```logtalk
+descendant::test_self.
 
 2, descendant
 yes
@@ -119,7 +129,8 @@ yes
 
 % send an apply/2 message from another object:
 
-| ?- test::test_obj.
+```logtalk
+test::test_obj.
 
 3, test
 yes
@@ -128,7 +139,8 @@ yes
 % use the partition/4 meta-predicate with a predicate defined in the
 % pseudo-object "user":
 
-| ?- meta::partition(even_integer, [1,2,3,4,5], Included, Excluded).
+```logtalk
+meta::partition(even_integer, [1,2,3,4,5], Included, Excluded).
 
 Included = [2, 4]
 Excluded = [1, 3, 5]
@@ -137,12 +149,14 @@ yes
 
 % get a visual illustration of the differences between left and right folds:
 
-| ?- folds::left(Left).
+```logtalk
+folds::left(Left).
 
 Left = '(((((((((0+1)+2)+3)+4)+5)+6)+7)+8)+9)'
 yes
 
-| ?- folds::right(Right).
+```logtalk
+folds::right(Right).
 
 Right = '(1+(2+(3+(4+(5+(6+(7+(8+(9+0)))))))))'
 yes
@@ -150,12 +164,14 @@ yes
 
 % walk a list using left and right folds (note the lambda parameters order):
 
-| ?- meta::fold_left([Y, X, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R).
+```logtalk
+meta::fold_left([Y, X, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R).
 
 R = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 yes
 
-| ?- meta::fold_right([X, Y, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R).
+```logtalk
+meta::fold_right([X, Y, [X|Y]]>>true, [], [1,2,3,4,5,6,7,8,9], R).
 
 R = [1, 2, 3, 4, 5, 6, 7, 8, 9].
 yes
@@ -163,12 +179,14 @@ yes
 
 % we can compose left folds:
 
-| ?- meta::fold_left([X,Y,Z]>>(Z is X + Y), 0, [1,2,3], Sum).
+```logtalk
+meta::fold_left([X,Y,Z]>>(Z is X + Y), 0, [1,2,3], Sum).
 
 Sum = 6
 yes
 
-| ?- meta::fold_left(meta::fold_left([X,Y,Z]>>(Z is X + Y)), 0, [[1,2,3],[4,5,6]], Sum).
+```logtalk
+meta::fold_left(meta::fold_left([X,Y,Z]>>(Z is X + Y)), 0, [[1,2,3],[4,5,6]], Sum).
 
 Sum = 21
 yes
@@ -177,7 +195,8 @@ yes
 % use the fold_left/4 meta-predicate with a predicate defined in the
 % pseudo-object "user":
 
-| ?- meta::fold_left(sum_squares, 0, [1,2,3], Result).
+```logtalk
+meta::fold_left(sum_squares, 0, [1,2,3], Result).
 
 Result = 34
 yes
@@ -186,12 +205,14 @@ yes
 % use the fold_left/4 and fold_right/4 meta-predicates with the atom_concat/3
 % Prolog built-in predicate:
 
-| ?- meta::fold_left(atom_concat, 'PREFIX', [abc,def,ghi], Result).
+```logtalk
+meta::fold_left(atom_concat, 'PREFIX', [abc,def,ghi], Result).
 
 Result = 'PREFIXabcdefghi'
 yes
 
-| ?- meta::fold_right(atom_concat, 'SUFIX', [abc,def,ghi], Result).
+```logtalk
+meta::fold_right(atom_concat, 'SUFIX', [abc,def,ghi], Result).
 
 Result = abcdefghiSUFIX
 yes
@@ -200,17 +221,20 @@ yes
 % use the fold_left/4 meta-predicate with predicates defined in the object
 % "predicates":
 
-| ?- meta::fold_left(predicates::sum, 0, [1,2,3,4,5], Result).
+```logtalk
+meta::fold_left(predicates::sum, 0, [1,2,3,4,5], Result).
 
 Result = 15
 yes
 
-| ?- meta::fold_left(predicates::product, 1, [1,2,3,4,5], Result).
+```logtalk
+meta::fold_left(predicates::product, 1, [1,2,3,4,5], Result).
 
 Result = 120
 yes
 
-| ?- meta::fold_left(predicates::tuple, (0,0), [(1,2), (3,4), (6,4)], Result).
+```logtalk
+meta::fold_left(predicates::tuple, (0,0), [(1,2), (3,4), (6,4)], Result).
 
 Result = (10, 10)
 yes
@@ -218,15 +242,18 @@ yes
 
 % alternatives to fold_left/4 and fold_right/4 when there isn't an initial value:
 
-| ?- meta::fold_left_1([X,Y,Z]>>(Z is X+Y), [1,2,3,4,5], R).
+```logtalk
+meta::fold_left_1([X,Y,Z]>>(Z is X+Y), [1,2,3,4,5], R).
 R = 15
 yes
 
-| ?- meta::fold_right_1([X,Y,Z]>>(Z is X-Y), [1,2,3,4,5], R).
+```logtalk
+meta::fold_right_1([X,Y,Z]>>(Z is X-Y), [1,2,3,4,5], R).
 R = 3
 yes
 
-| ?- meta::fold_right_1([X,Y,Z]>>(Z is X*Y), [1,2,3,4,5], R).
+```logtalk
+meta::fold_right_1([X,Y,Z]>>(Z is X*Y), [1,2,3,4,5], R).
 R = 120
 yes
 
@@ -234,11 +261,13 @@ yes
 % use the scan_left/4 and scan_right/4 meta-predicates with predicates
 % defined in the object "predicates":
 
-| ?- meta::scan_left(sum_squares, 0, [1,2,3], Result).
+```logtalk
+meta::scan_left(sum_squares, 0, [1,2,3], Result).
 Result = [0, 1, 5, 34]
 yes
 
-| ?- meta::scan_right(predicates::sum, 5, [1,2,3,4], Result).
+```logtalk
+meta::scan_right(predicates::sum, 5, [1,2,3,4], Result).
 Result = [15, 14, 12, 9, 5]
 yes
 
@@ -246,18 +275,21 @@ yes
 % compute a sequence of factorial numbers using a scan of natural numbers
 % using multiplication:
 
-| ?- meta::scan_left([X,Y,Z]>>(Z is X*Y), 1, [1,2,3,4,5,6], Result).
+```logtalk
+meta::scan_left([X,Y,Z]>>(Z is X*Y), 1, [1,2,3,4,5,6], Result).
 Result = [1, 1, 2, 6, 24, 120, 720]
 yes
 
 
 % use the map/2-3 meta-predicates with some Prolog built-in predicates:
 
-| ?- meta::map(integer, [1,2,3,4,5]).
+```logtalk
+meta::map(integer, [1,2,3,4,5]).
 
 yes
 
-| ?- meta::map(char_code, [a,b,c,d,e], Codes).
+```logtalk
+meta::map(char_code, [a,b,c,d,e], Codes).
 
 Codes = [97, 98, 99, 100, 101]
 yes
@@ -265,12 +297,14 @@ yes
 
 % use the fold_left/4 meta-predicate to calculate Fibonacci numbers:
 
-| ?- fibonacci::nth(10, Fib).
+```logtalk
+fibonacci::nth(10, Fib).
 
 Fib = 55
 yes
 
-| ?- fibonacci::nth(Nth, Fib).
+```logtalk
+fibonacci::nth(Nth, Fib).
 
 Fib = 0
 Nth = 0 ? ;
@@ -294,14 +328,16 @@ Nth = 5 ?
 
 % use the map_reduce/5 meta-predicate to give bad news to a company employees:
 
-| ?- company::(company(C1), get_salary(company(C1),S1)).
+```logtalk
+company::(company(C1), get_salary(company(C1),S1)).
 
 C1 = [topdept(name('Human Resources'),manager(name('Lisa'),salary(123456)),[]),topdept(name('Development'),manager(name('Anders'),salary(43210)),[subdept(name('Visual Basic'),manager(name('Amanda'),salary(8888)),[]),subdept(name('Visual C#'),manager(name('Erik'),salary(4444)),[])])]
 S1 = 179998
 yes
 
 
-| ?- company::(company(C1), cut_salary(company(C1), C2), get_salary(C2, S2)).
+```logtalk
+company::(company(C1), cut_salary(company(C1), C2), get_salary(C2, S2)).
 
 C1 = [topdept(name('Human Resources'),manager(name('Lisa'),salary(123456)),[]),topdept(name('Development'),manager(name('Anders'),salary(43210)),[subdept(name('Visual Basic'),manager(name('Amanda'),salary(8888)),[]),subdept(name('Visual C#'),manager(name('Erik'),salary(4444)),[])])]
 C2 = company([topdept(name('Human Resources'),manager(name('Lisa'),salary(61728)),[]),topdept(name('Development'),manager(name('Anders'),salary(21605)),[subdept(name('Visual Basic'),manager(name('Amanda'),salary(4444)),[]),subdept(name('Visual C#'),manager(name('Erik'),salary(2222)),[])])])

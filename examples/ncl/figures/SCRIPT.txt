@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(figures(loader)).
+```logtalk
+logtalk_load(figures(loader)).
 ...
 
 
 % recognize a parallelogram (the vertices rotation results in four solutions per class):
 
-| ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+```logtalk
+figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
 		edge(1, 2,  0, 20),
 		edge(2, 3, 45, 30),
 		edge(3, 4,  0, 20),
@@ -76,7 +78,8 @@ Z = 4,
 P = 1 ;
 no
 
-| ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+```logtalk
+figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
 		edge(1, 2,  0, 20),
 		edge(2, 3, 45, 30),
 		edge(3, 4,  0, 20),
@@ -97,7 +100,8 @@ no
 
 % recognize a rhombus (the vertices rotation results in four solutions per class):
 
-| ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+```logtalk
+figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
 		edge(a, b, 45, 10),
 		edge(b, c,  0, 10),
 		edge(c, d, 45, 10),
@@ -167,7 +171,8 @@ Z = d,
 P = a ;
 no
 
-| ?- figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+```logtalk
+figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
 		edge(a, b, 45, 10),
 		edge(b, c,  0, 10),
 		edge(c, d, 45, 10),
@@ -192,7 +197,8 @@ no
 
 % take perpendicularity into account when checking the class of a figure:
 
-| ?- figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+```logtalk
+figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
 		edge(1, 2,  0, 20),
 		edge(2, 3, 90, 20),
 		edge(3, 4,  0, 20),
@@ -215,7 +221,8 @@ Name = four_side_figure ;
 Name = four_side_figure ;
 no
 
-| ?- figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+```logtalk
+figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
 		edge(a, b, 45, 10),
 		edge(b, c,  0, 10),
 		edge(c, d, 45, 10),

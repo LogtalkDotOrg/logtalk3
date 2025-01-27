@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +17,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
+# reflection
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file. Run this example with no other examples loaded at the same time.
+Run this example with no other examples loaded at the same time.
 
 This folder contains an example that shows how to implement a reflective
 class-based system. There are three main classes:

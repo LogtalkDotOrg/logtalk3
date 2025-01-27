@@ -21,5 +21,6 @@ ________________________________________________________________________
 % just load the example, which contains an initialization/1 directive 
 % that runs it:
 
-| ?- logtalk_load(bottles(loader)).
+```logtalk
+logtalk_load(bottles(loader)).
 ...

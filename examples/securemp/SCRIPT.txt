@@ -21,5 +21,6 @@ ________________________________________________________________________
 % simply load the example and check the compilation and runtime
 % error messages:
 
-| ?- logtalk_load(securemp(loader)).
+```logtalk
+logtalk_load(securemp(loader)).
 ...

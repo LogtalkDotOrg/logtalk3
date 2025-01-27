@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(searching(loader)).
+```logtalk
+logtalk_load(searching(loader)).
 ...
 
 
 % farmer, cabbage, goat and wolf problem
 
-| ?- farmer::initial_state(Initial), depth_first(10)::solve(farmer, Initial, Path), farmer::print_path(Path).
+```logtalk
+farmer::initial_state(Initial), depth_first(10)::solve(farmer, Initial, Path), farmer::print_path(Path).
 
 cgwf.<__>..........____
 c_w_..........<__>.f_g_
@@ -45,7 +47,8 @@ yes
 
 % missionaries and cannibals problem, solved using a hill-climbing strategy
 
-| ?- miss_cann::initial_state(Initial), hill_climbing(16)::solve(miss_cann, Initial, Path, Cost), miss_cann::print_path(Path).
+```logtalk
+miss_cann::initial_state(Initial), hill_climbing(16)::solve(miss_cann, Initial, Path, Cost), miss_cann::print_path(Path).
 
 MMMCCC.<__>..........
 MMCC..........<__>.MC
@@ -68,7 +71,8 @@ yes
 
 % same problem as above with the addition of a monitor to measure hill-climbing performance
 
-| ?- performance::init, miss_cann::initial_state(Initial), hill_climbing(16)::solve(miss_cann, Initial, Path, Cost), miss_cann::print_path(Path), performance::report.
+```logtalk
+performance::init, miss_cann::initial_state(Initial), hill_climbing(16)::solve(miss_cann, Initial, Path, Cost), miss_cann::print_path(Path), performance::report.
 
 MMMCCC.<__>..........
 MMCC..........<__>.MC
@@ -99,7 +103,8 @@ yes
 
 % bridge problem, solved using a hill climbing strategy
 
-| ?- performance::init, bridge::initial_state(Initial), hill_climbing(30)::solve(bridge, Initial, Path, Cost), bridge::print_path(Path), performance::report.
+```logtalk
+performance::init, bridge::initial_state(Initial), hill_climbing(30)::solve(bridge, Initial, Path, Cost), bridge::print_path(Path), performance::report.
 
  _|____________|_ lamp 1 3 6 8 12 
 1 3  lamp _|____________|_ 6 8 12 
@@ -126,7 +131,8 @@ yes
 % water jugs problem solved using a breadth and a depth first strategy, with performance monitors
 % it's interesting to compare the results
 
-| ?- performance::init, water_jug::initial_state(Initial), breadth_first(6)::solve(water_jug, Initial, Path), water_jug::print_path(Path), performance::report.
+```logtalk
+performance::init, water_jug::initial_state(Initial), breadth_first(6)::solve(water_jug, Initial, Path), water_jug::print_path(Path), performance::report.
 
 4-gallon jug: 0
 3-gallon jug: 0
@@ -160,7 +166,8 @@ Initial = (0,0) ?
 yes
 
 
-| ?- performance::init, water_jug::initial_state(Initial), depth_first(10)::solve(water_jug, Initial, Path), water_jug::print_path(Path), performance::report.
+```logtalk
+performance::init, water_jug::initial_state(Initial), depth_first(10)::solve(water_jug, Initial, Path), water_jug::print_path(Path), performance::report.
 
 4-gallon jug: 0
 3-gallon jug: 0
@@ -202,7 +209,8 @@ yes
 
 % salt puzzle using breadth first search
 
-| ?- performance::init, salt(100, 500, 200)::initial_state(Initial), breadth_first(6)::solve(salt(100, 500, 200), Initial, Path), salt(100, 500, 200)::print_path(Path), performance::report.
+```logtalk
+performance::init, salt(100, 500, 200)::initial_state(Initial), breadth_first(6)::solve(salt(100, 500, 200), Initial, Path), salt(100, 500, 200)::print_path(Path), performance::report.
 
 (0, 0, 0)	all_empty
 (0, 500, 0)	fill(m1)
@@ -223,7 +231,8 @@ Path = [ (0, 0, 0, all_empty), (0, 500, 0, fill(m1)), (0, 300, 200, transfer(m1,
 yes
 
 
-| ?- performance::init, salt(200, 250, 550)::initial_state(Initial), breadth_first(7)::solve(salt(200, 250, 550), Initial, Path), salt(200, 250, 550)::print_path(Path), performance::report.
+```logtalk
+performance::init, salt(200, 250, 550)::initial_state(Initial), breadth_first(7)::solve(salt(200, 250, 550), Initial, Path), salt(200, 250, 550)::print_path(Path), performance::report.
 
 (0, 0, 0)	all_empty
 (0, 250, 0)	fill(m1)
@@ -246,7 +255,8 @@ Path = [ (0, 0, 0, all_empty), (0, 250, 0, fill(m1)), (0, 0, 250, transfer(m1, m
 yes
 
 
-| ?- performance::init, salt(100, 250, 550)::initial_state(Initial), breadth_first(11)::solve(salt(100, 250, 550), Initial, Path), salt(100, 250, 550)::print_path(Path), performance::report.
+```logtalk
+performance::init, salt(100, 250, 550)::initial_state(Initial), breadth_first(11)::solve(salt(100, 250, 550), Initial, Path), salt(100, 250, 550)::print_path(Path), performance::report.
 
 (0, 0, 0)	all_empty
 (0, 0, 550)	fill(m2)
@@ -275,7 +285,8 @@ yes
 
 % eight puzzle solved using a hill-climbing strategy
 
-| ?- performance::init, eight_puzzle::initial_state(five_steps, Initial), hill_climbing(25)::solve(eight_puzzle, Initial, Path, Cost), eight_puzzle::print_path(Path), performance::report.
+```logtalk
+performance::init, eight_puzzle::initial_state(five_steps, Initial), hill_climbing(25)::solve(eight_puzzle, Initial, Path, Cost), eight_puzzle::print_path(Path), performance::report.
 
 283
 164
@@ -317,7 +328,8 @@ yes
 
 % eight puzzle solved using a best-first strategy
 
-| ?- performance::init, eight_puzzle::initial_state(five_steps, Initial), best_first(25)::solve(eight_puzzle, Initial, Path, Cost), eight_puzzle::print_path(Path), performance::report.
+```logtalk
+performance::init, eight_puzzle::initial_state(five_steps, Initial), best_first(25)::solve(eight_puzzle, Initial, Path, Cost), eight_puzzle::print_path(Path), performance::report.
 
 283
 164
@@ -359,4 +371,5 @@ yes
 
 % turn off performance monitor
 
-| ?- performance::stop.
+```logtalk
+performance::stop.

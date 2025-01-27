@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# delegates
 
 This folder contains an implementation of the delegation design pattern and
 is based on the sample code found on the Rosetta Code website. For more
@@ -27,3 +28,56 @@ information see:
 	http://en.wikipedia.org/wiki/Delegation_pattern
 
 	http://rosettacode.org/wiki/Delegates#Logtalk
+
+% load the example:
+
+```logtalk
+logtalk_load(delegates(loader)).
+```
+
+% without a delegate:
+
+```logtalk
+a_delegator::operation(String).
+```
+
+<!--
+String = 'default implementation'.
+-->
+
+% with a delegate that does not implement thing/1:
+```logtalk
+a_delegator::set_delegate(an_object), a_delegator::operation(String).
+```
+
+<!--
+String = 'default implementation'.
+-->
+
+% with a delegate that implements thing/1:
+
+```logtalk
+a_delegator::set_delegate(a_delegate), a_delegator::operation(String).
+```
+
+<!--
+String = 'delegate implementation'.
+-->
+
+% same queries but using the parametric object implementation:
+
+```logtalk
+a_delegator(an_object)::operation(String).
+```
+
+<!--
+String = 'default implementation'.
+-->
+
+```logtalk
+a_delegator(a_delegate)::operation(String).
+```
+
+<!--
+String = 'delegate implementation'
+-->

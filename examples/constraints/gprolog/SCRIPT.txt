@@ -21,5 +21,6 @@ ________________________________________________________________________
 % loading the example runs an initialization query that solves an 
 % alphacipher puzzle and an crypt-arithmetic puzzle:
 
-| ?- logtalk_load(clp_gprolog(loader)).
+```logtalk
+logtalk_load(clp_gprolog(loader)).
 ...

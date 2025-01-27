@@ -20,20 +20,23 @@ ________________________________________________________________________
 
 % start by loading the loading the example:
 
-| ?- logtalk_load(ping_pong(loader)).
+```logtalk
+logtalk_load(ping_pong(loader)).
 ...
 
 
 % run example:
 
-| ?- ping_pong::play(1).
+```logtalk
+ping_pong::play(1).
 
 Ping ...
 .... Pong
 Game over!
 yes
 
-| ?- ping_pong::play(5).
+```logtalk
+ping_pong::play(5).
 
 Ping ...
 .... Pong

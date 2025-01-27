@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(relations(loader)).
+```logtalk
+logtalk_load(relations(loader)).
 ...
 
 

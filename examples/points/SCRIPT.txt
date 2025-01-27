@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(points(loader)).
+```logtalk
+logtalk_load(points(loader)).
 ...
 
 
 % let's start with a simple point:
 
-| ?- point::new(Point, [position-(1, 3)]), Point::(print, move(7, 4), print).
+```logtalk
+point::new(Point, [position-(1, 3)]), Point::(print, move(7, 4), print).
 
 p1 @ (1, 3)
 p1 @ (7, 4)
@@ -38,7 +40,8 @@ yes
 
 % same problem but with bounds on coordinate values:
 
-| ?- bounded_point::new(Point, [position-(1, 3), bounds(x)-(0, 13), bounds(y)-(-7, 7)]), Point::(print, move(7, 4), print).
+```logtalk
+bounded_point::new(Point, [position-(1, 3), bounds(x)-(0, 13), bounds(y)-(-7, 7)]), Point::(print, move(7, 4), print).
 
 bounds(x) : 0,13
 bounds(y) : -7,7
@@ -54,7 +57,8 @@ yes
 
 % same problem but storing the history of coordinate values:
 
-| ?- history_point::new(Point, [position-(1, 3)]), Point::(print, move(7, 4), print).
+```logtalk
+history_point::new(Point, [position-(1, 3)]), Point::(print, move(7, 4), print).
 
 location history: []
 hp3 @ (1, 3)
@@ -68,7 +72,8 @@ yes
 
 % same problem but with bounds on coordinate values and storing past values:
 
-| ?- bounded_history_point::new(Point, [position-(1, 3), bounds(x)-(0, 13), bounds(y)-(-7, 7)]), Point::(print, move(7, 4), print).
+```logtalk
+bounded_history_point::new(Point, [position-(1, 3), bounds(x)-(0, 13), bounds(y)-(-7, 7)]), Point::(print, move(7, 4), print).
 
 bounds(x) : 0,13
 bounds(y) : -7,7
@@ -86,5 +91,6 @@ yes
 
 % clean up instances:
 
-| ?- point::delete_all, bounded_point::delete_all, history_point::delete_all, bounded_history_point::delete_all.
+```logtalk
+point::delete_all, bounded_point::delete_all, history_point::delete_all, bounded_history_point::delete_all.
 yes

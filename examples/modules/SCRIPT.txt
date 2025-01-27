@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by compiling and loading the Prolog module files as objects:
 
-| ?- logtalk_load(modules(loader)).
+```logtalk
+logtalk_load(modules(loader)).
 ...
 
 
 % call one of the module exported predicates using message-sending:
 
-| ?- test::names.
+```logtalk
+test::names.
 
 paulo
 carlos
@@ -37,7 +39,8 @@ yes
 % same goal as above but the call is made using a meta-predicate
 % imported from other module:
 
-| ?- test::test.
+```logtalk
+test::test.
 
 paulo
 carlos
@@ -48,12 +51,14 @@ yes
 % test the compilation of the module export/1 directive; module 
 % exported predicates become public predicates:
 
-| ?- exports::current_predicate(Pred).
+```logtalk
+exports::current_predicate(Pred).
 
 Pred = p/1
 yes
 
-| ?- exports::predicate_property(p(_), Prop).
+```logtalk
+exports::predicate_property(p(_), Prop).
 
 Prop = public ;
 Prop = static ;
@@ -64,7 +69,8 @@ yes
 
 % call the module exported/public predicate using message-sending:
 
-| ?- exports::p(N).
+```logtalk
+exports::p(N).
 
 N = 1 ;
 N = 2 ;
@@ -74,12 +80,14 @@ yes
 
 % test the compilation and use of meta-predicates:
 
-| ?- test::names(Names).
+```logtalk
+test::names(Names).
 
 Names == [paulo, carlos, helena]
 yes
 
-| ?- test::test(Names).
+```logtalk
+test::test(Names).
 
 Names == [paulo, carlos, helena]
 yes

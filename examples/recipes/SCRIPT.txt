@@ -20,20 +20,23 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(recipes(loader)).
+```logtalk
+logtalk_load(recipes(loader)).
 yes
 
 
 % list all the ingredients required for the green soup recipe:
 
-| ?- green_soup::ingredients(Ingredients).
+```logtalk
+green_soup::ingredients(Ingredients).
 Ingredients = [peas,cream,water,oil]
 yes
 
 
 % list all the steps required to make mashed peas:
 
-| ?- mashed_peas::steps(Steps).
+```logtalk
+mashed_peas::steps(Steps).
 Steps = [1-'Boil the peas.',2-'Mash the peas',3-'Add salt and mix.']
 yes
 
@@ -42,7 +45,8 @@ yes
 % we have a ground recipe to skip the generic recipe represented 
 % by the recipe/3 parametric object):
 
-| ?- conforms_to_protocol(Recipe, recipep), ground(Recipe), Recipe::ingredient(peas).
+```logtalk
+conforms_to_protocol(Recipe, recipep), ground(Recipe), Recipe::ingredient(peas).
 Recipe = green_soup ? ;
 Recipe = mashed_peas ? ;
 no
@@ -50,12 +54,14 @@ no
 
 % patch the prototypical recipe to add a level/1 descriptor to all recipes:
 
-| ?- logtalk_load(recipes(patch_1)).
+```logtalk
+logtalk_load(recipes(patch_1)).
 yes
 
 % recipes are now easy by default:
 
-| ?- mashed_peas::level(Level).
+```logtalk
+mashed_peas::level(Level).
 Level = easy
 yes
 
@@ -63,10 +69,12 @@ yes
 % but you always get into trouble while making green soup; add a second patch
 % to define the level value for this recipe to be "hard":
 
-| ?- logtalk_load(recipes(patch_2)).
+```logtalk
+logtalk_load(recipes(patch_2)).
 yes
 
-| ?- green_soup::level(Level).
+```logtalk
+green_soup::level(Level).
 Level = hard
 yes
 
@@ -75,7 +83,8 @@ yes
 % predicate is not ideal to enumerate recipes as it will also return the
 % parametric object used for accessing recipes represented as Prolog facts:
 
-| ?- conforms_to_protocol(Recipe, recipep).
+```logtalk
+conforms_to_protocol(Recipe, recipep).
 Recipe = green_soup ;
 Recipe = mashed_peas ;
 Recipe = recipe(_, _, _) ;
@@ -92,7 +101,8 @@ no
 
 % an usage example of the recipe/1 predicate would be:
 
-| ?- recipe(Recipe), Recipe::cooking_time(CookingTime).
+```logtalk
+recipe(Recipe), Recipe::cooking_time(CookingTime).
 Recipe = green_soup,
 CookingTime = 36 ;
 Recipe = mashed_peas,

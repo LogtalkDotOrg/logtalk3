@@ -20,14 +20,16 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(slides(loader)).
+```logtalk
+logtalk_load(slides(loader)).
 ...
 
 
 % start a slideshow; the remote accepts as input the following single
 % characters: n (next), p (previous), f (first), l (last), e (end):
 
-| ?- slides::show([1,2,3,4,5,6], slide).
+```logtalk
+slides::show([1,2,3,4,5,6], slide).
 
 First slide
 remote: n.

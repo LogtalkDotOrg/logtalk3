@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(tak(loader)).
+```logtalk
+logtalk_load(tak(loader)).
 ...
 
 % NOTE: the example queries below use a SWI-Prolog proprietary predicate 
@@ -31,7 +32,8 @@ ________________________________________________________________________
 
 % single-threaded version:
 
-| ?- time(tak(1)::tak(18, 12, 6, R)).
+```logtalk
+time(tak(1)::tak(18, 12, 6, R)).
 % 254,476 inferences, 0.06 CPU in 0.07 seconds (91% CPU, 4241267 Lips)
 
 R = 7
@@ -40,7 +42,8 @@ yes
 
 % multi-threaded version:
 
-| ?- time(tak(3)::tak(18, 12, 6, R)).
+```logtalk
+time(tak(3)::tak(18, 12, 6, R)).
 % 714 inferences, 0.06 CPU in 0.05 seconds (121% CPU, 11900 Lips)
 
 R = 7
@@ -49,7 +52,8 @@ yes
 
 % single-threaded version:
 
-| ?- time(tak(1)::tak(21, 14, 7, R)).
+```logtalk
+time(tak(1)::tak(21, 14, 7, R)).
 % 1,583,068 inferences, 0.52 CPU in 0.61 seconds (86% CPU, 3044362 Lips)
 
 R = 14
@@ -58,7 +62,8 @@ yes
 
 % multi-threaded version:
 
-| ?- time(tak(3)::tak(21, 14, 7, R)).
+```logtalk
+time(tak(3)::tak(21, 14, 7, R)).
 % 106 inferences, 0.48 CPU in 0.38 seconds (127% CPU, 221 Lips)
 
 R = 14

@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % start by loading the example and the required libraries:
 
-| ?- logtalk_load(buckets(loader)).
+```logtalk
+logtalk_load(buckets(loader)).
 ...
 
 
@@ -28,7 +29,8 @@ ________________________________________________________________________
 values are random numbers and thus their sum varies by run and by the
 backend):
 
-| ?- buckets::start.
+```logtalk
+buckets::start.
 
 Sum of all bucket values: 52
 

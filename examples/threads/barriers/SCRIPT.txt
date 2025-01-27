@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the loading the example:
 
-| ?- logtalk_load(barriers(loader)).
+```logtalk
+logtalk_load(barriers(loader)).
 ...
 
 
 % run example:
 
-| ?- beatles::sing_along.
+```logtalk
+beatles::sing_along.
 
 hello(1)hello(4)hello(2)hello(3)
 Enough of hellos! Time for goodbyes!

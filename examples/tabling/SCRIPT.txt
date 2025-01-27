@@ -20,14 +20,16 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(tabling(loader)).
+```logtalk
+logtalk_load(tabling(loader)).
 ...
 
 
 % use tabling to cope with a left-recursive path finding predicate
 % (the order of the solutions may depend on the tabling strategy):
 
-| ?- paths::path(1, Y).
+```logtalk
+paths::path(1, Y).
 
 Y = 2 ? ;
 Y = 4 ? ;
@@ -38,7 +40,8 @@ yes
 
 % use tabling to avoid repeated calculation of Fibonacci numbers:
 
-| ?- fibonacci::fib(30, F).
+```logtalk
+fibonacci::fib(30, F).
 
 F = 1346269
 yes

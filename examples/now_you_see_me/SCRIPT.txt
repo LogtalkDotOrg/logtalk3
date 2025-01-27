@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(now_you_see_me(loader)).
+```logtalk
+logtalk_load(now_you_see_me(loader)).
 ...
 
 
 % show all the horseman on stage
 
-| ?- stage::list.
+```logtalk
+stage::list.
 danny
 merritt
 henley
@@ -36,19 +38,23 @@ yes
 
 % hide the four horseman
 
-| ?- magic::hide.
+```logtalk
+magic::hide.
 yes
 
-| ?- stage::list.
+```logtalk
+stage::list.
 true.
 
 
 % again show all the horseman on stage
 
-| ?- magic::show.
+```logtalk
+magic::show.
 yes
 
-| ?- stage::list.
+```logtalk
+stage::list.
 danny
 merritt
 henley

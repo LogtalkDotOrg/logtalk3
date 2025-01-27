@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the loading the example:
 
-| ?- logtalk_load(checkpoint(loader)).
+```logtalk
+logtalk_load(checkpoint(loader)).
 ...
 
 
 % run example:
 
-| ?- checkpoint::run.
+```logtalk
+checkpoint::run.
 
 Worker 1 item 3
 Worker 2 item 3

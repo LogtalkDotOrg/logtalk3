@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('creational/lazy_initialization/loader')).
+```logtalk
+logtalk_load(design_patterns('creational/lazy_initialization/loader')).
 ...
 
 
 % access/create an instance for key "apple":
 
-| ?- fruit::new(apple, Instance).
+```logtalk
+fruit::new(apple, Instance).
 
 Instance = o1
 yes
@@ -34,7 +36,8 @@ yes
 
 % access/create an instance for key "banana":
 
-| ?- fruit::new(banana, Instance).
+```logtalk
+fruit::new(banana, Instance).
 
 Instance = o2
 yes
@@ -42,7 +45,8 @@ yes
 
 % access/create an instance for key "apple":
 
-| ?- fruit::new(apple, Instance).
+```logtalk
+fruit::new(apple, Instance).
 
 Instance = o1
 yes
@@ -50,7 +54,8 @@ yes
 
 % show all initialized keys:
 
-| ?- fruit::show_all.
+```logtalk
+fruit::show_all.
 
 apple
 banana

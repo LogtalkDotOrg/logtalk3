@@ -20,5 +20,6 @@ ________________________________________________________________________
 
 % run the tests written using the DSL:
 
-| ?- logtalk_load(tests_dsl(tester)).
+```logtalk
+logtalk_load(tests_dsl(tester)).
 ...

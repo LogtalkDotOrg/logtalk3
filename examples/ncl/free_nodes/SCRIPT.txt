@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(free_nodes(loader)).
+```logtalk
+logtalk_load(free_nodes(loader)).
 ...
 
 
 % run the example:
 
-| ?- free(_,_,_)::(a(1), b(2), c(C)).
+```logtalk
+free(_,_,_)::(a(1), b(2), c(C)).
 
 C = 1+2
 yes

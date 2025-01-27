@@ -20,33 +20,39 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/chain_of_responsibility/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/chain_of_responsibility/loader')).
 ...
 
 
 % try some purchasing requests of varying amount:
 
-| ?- manager::process_request(3500).
+```logtalk
+manager::process_request(3500).
 
 Manager will approve 3500
 yes
 
-| ?- manager::process_request(6500).
+```logtalk
+manager::process_request(6500).
 
 Director will approve 6500
 yes
 
-| ?- manager::process_request(11500).
+```logtalk
+manager::process_request(11500).
 
 Vice President will approve 11500
 yes
 
-| ?- manager::process_request(27000).
+```logtalk
+manager::process_request(27000).
 
 President will approve 27000
 yes
 
-| ?- manager::process_request(32000).
+```logtalk
+manager::process_request(32000).
 
 Request denied for 32000
 no

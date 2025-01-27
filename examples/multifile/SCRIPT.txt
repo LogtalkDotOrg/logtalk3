@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(multifile(loader)).
+```logtalk
+logtalk_load(multifile(loader)).
 ...
 
 
 % call the a/1 multifile predicate:
 
-| ?- main::a(X).
+```logtalk
+main::a(X).
 X = 1 ;
 X = 2 ;
 X = 3 ;
@@ -36,7 +38,8 @@ true
 
 % call the b/1 multifile predicate:
 
-| ?- main::b(X).
+```logtalk
+main::b(X).
 X = one ;
 X = two ;
 X = three
@@ -44,7 +47,8 @@ true
 
 % call the nt//1 multifile non-terminal:
 
-| ?- logtalk << phrase(main::nt(X), [1,2,3], Rest).
+```logtalk
+logtalk << phrase(main::nt(X), [1,2,3], Rest).
 X = 1, Rest = [2, 3] ;
 X = end, Rest = [1, 2, 3]
 true

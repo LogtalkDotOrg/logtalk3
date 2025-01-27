@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(blackboard(loader)).
+```logtalk
+logtalk_load(blackboard(loader)).
 ...
 
 
 % start the producer and the consumer, each one running in its own thread:
 
-| ?- threaded_ignore(student::run(10)), threaded_ignore(teacher::run(4)).
+```logtalk
+threaded_ignore(student::run(10)), threaded_ignore(teacher::run(4)).
 
 teacher is writing...
 student is writing...

@@ -20,44 +20,51 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/strategy/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/strategy/loader')).
 ...
 
 
 % create a first customer:
 
-| ?- customer::new(first, normal_strategy).
+```logtalk
+customer::new(first, normal_strategy).
 
 yes
 
 % normal billing:
 
-| ?- first::add(1.0, 1).
+```logtalk
+first::add(1.0, 1).
 
 yes
 
 % start Happy Hour:
 
-| ?- first::(set_strategy(happy_hour_strategy), add(1.0, 2)).
+```logtalk
+first::(set_strategy(happy_hour_strategy), add(1.0, 2)).
 
 yes
 
 % create a second customer:
 
-| ?- customer::new(second, happy_hour_strategy), second::add(0.8, 1).
+```logtalk
+customer::new(second, happy_hour_strategy), second::add(0.8, 1).
 
 yes
 
 % first customer pays:
 
-| ?- first::print_bill.
+```logtalk
+first::print_bill.
 
 Total due: 2.0
 yes
 
 % end Happy Hour:
 
-| ?- second::(set_strategy(normal_strategy), add(1.3, 2), add(2.5, 1), print_bill).
+```logtalk
+second::(set_strategy(normal_strategy), add(1.3, 2), add(2.5, 1), print_bill).
 
 Total due: 5.5
 yes

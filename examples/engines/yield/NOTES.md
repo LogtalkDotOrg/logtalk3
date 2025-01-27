@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,12 +17,36 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# engines - yield
 
 This example illustrates fetching answers from an engine that returns them using
 the `threaded_engine_yield/1` built-in predicate. The original example was written
 by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It should run also
 on XSB and YAP if and when these systems bugs with coroutining and/or threads get
 fixed.
+
+% load the example:
+
+```logtalk
+logtalk_load(yield(loader)).
+```
+
+% some sample queries:
+
+```logtalk
+yield::yield(1, List).
+```
+
+<!--
+List = [1].
+-->
+
+```logtalk
+yield::yield(3, List).
+```
+
+<!--
+List = [1, 2, 3]
+-->

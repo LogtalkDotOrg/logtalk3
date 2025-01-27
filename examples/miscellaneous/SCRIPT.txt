@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(miscellaneous(loader)).
+```logtalk
+logtalk_load(miscellaneous(loader)).
 ...
 
 
 % towers of hanoi using three disks:
 
-| ?- hanoi::run(3).
+```logtalk
+hanoi::run(3).
 
 Move a disk from left to right.
 Move a disk from left to middle.
@@ -41,7 +43,8 @@ yes
 
 % placing eight queens in a chess table:
 
-| ?- queens::queens(8).
+```logtalk
+queens::queens(8).
 
 [1-5, 2-7, 3-2, 4-6, 5-3, 6-1, 7-4, 8-8] ;
 [1-4, 2-7, 3-5, 4-2, 5-6, 6-1, 7-3, 8-8] ;

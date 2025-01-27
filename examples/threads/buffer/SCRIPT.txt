@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(buffer(loader)).
+```logtalk
+logtalk_load(buffer(loader)).
 ...
 
 
@@ -28,7 +29,8 @@ ________________________________________________________________________
 % using a buffer capable of holding at most 7 items, with the consumer being
 % slower than the producer (float values in seconds must be used):
 
-| ?- threaded_ignore(producer(7,1.2)::run(25)), threaded_ignore(consumer(7,3.7)::run(25)).
+```logtalk
+threaded_ignore(producer(7,1.2)::run(25)), threaded_ignore(consumer(7,3.7)::run(25)).
 
 produced item 0 (1/7 items in the buffer)
 consumed item 0 (0/7 items in the buffer)

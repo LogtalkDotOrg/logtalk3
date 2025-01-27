@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/command/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/command/loader')).
 ...
 
 
 % first, test the basic functionality for light:
 
-| ?- light(l1)::turn_on.
+```logtalk
+light(l1)::turn_on.
 
 The light(l1) is on
 yes
@@ -34,7 +36,8 @@ yes
 
 % commands are represented using parametric object identifiers
 
-| ?- flip_up_command(light(l1))::execute.
+```logtalk
+flip_up_command(light(l1))::execute.
 
 The light(l1) is on
 yes
@@ -42,7 +45,8 @@ yes
 
 % use the client/invoker object to store_and_execute commands:
 
-| ?- switch::(
+```logtalk
+switch::(
 		store_and_execute(flip_up_command(light(kitchen))),
 		store_and_execute(flip_up_command(coffee_maker))
 	).
@@ -51,13 +55,15 @@ The light(kitchen) is on
 The coffee_maker is on
 yes
 
-| ?- switch::history.
+```logtalk
+switch::history.
 
 flip_up_command(light(kitchen))
 flip_up_command(coffee_maker)
 yes
 
-| ?- switch::reply_history.
+```logtalk
+switch::reply_history.
 
 The light(kitchen) is on
 The coffee_maker is on

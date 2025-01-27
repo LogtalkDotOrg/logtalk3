@@ -19,8 +19,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# pengines
 
 This example illustrates how to use SWI-Prolog Pengines from objects. It
 is based on simple example provided in the Pengines documentation:

@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('structural/decorator/loader')).
+```logtalk
+logtalk_load(design_patterns('structural/decorator/loader')).
 ...
 
 
 % send the string/0 message to the decorator object:
 
-| ?- colored_shape(circle, red)::string.
+```logtalk
+colored_shape(circle, red)::string.
 
 A circle of radius 10.0
 which is colored red
@@ -36,7 +38,8 @@ yes
 % colored_shape; thus our decorator forwards the message
 % to the decorated circle:
 
-| ?- colored_shape(circle, red)::diameter(Diameter).
+```logtalk
+colored_shape(circle, red)::diameter(Diameter).
 
 Diameter = 20.0.
 yes
@@ -44,18 +47,21 @@ yes
 
 % same queries but with a dynamically created object:
 
-| ?- create_object(Circle, [extends(circle)], [], [radius(7.0)]).
+```logtalk
+create_object(Circle, [extends(circle)], [], [radius(7.0)]).
 
 Circle = o1
 yes
 
-| ?- colored_shape(o1, blue)::string.
+```logtalk
+colored_shape(o1, blue)::string.
 
 A circle of radius 7.0
 which is colored blue
 yes
 
-| ?- colored_shape(o1, blue)::diameter(Diameter).
+```logtalk
+colored_shape(o1, blue)::diameter(Diameter).
 
 Diameter = 14.0.
 yes
@@ -64,19 +70,22 @@ yes
 % we can define a pipeline of decorators; e.g. a colored, named
 % shape:
 
-| ?- create_object(NamedShape, [extends(named_shape)], [], [shape(colored_shape(o1,blue)), name(thingy)]).
+```logtalk
+create_object(NamedShape, [extends(named_shape)], [], [shape(colored_shape(o1,blue)), name(thingy)]).
 
 NamedShape = o2
 yes
 
-| ?- o2::string.
+```logtalk
+o2::string.
 
 A circle of radius 7.0
 which is colored blue
 which is named thingy
 yes
 
-| ?- o2::diameter(Diameter).
+```logtalk
+o2::diameter(Diameter).
 
 Diameter = 14.0.
 yes
@@ -84,14 +93,16 @@ yes
 
 % same queries using the decorator defined in the source file:
 
-| ?- my_named_shape::string.
+```logtalk
+my_named_shape::string.
 
 A circle of radius 10.0
 which is colored green
 which is named Mr. Round
 yes
 
-| ?- my_named_shape::diameter(Diameter).
+```logtalk
+my_named_shape::diameter(Diameter).
 
 Diameter = 20.0.
 yes

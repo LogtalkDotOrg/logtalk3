@@ -20,20 +20,23 @@ ________________________________________________________________________
 
 % start by loading the example and necessary library supporting files:
 
-| ?- logtalk_load(sicstus(loader)).
+```logtalk
+logtalk_load(sicstus(loader)).
 ...
 
 
 % try some simple queries:
 
 
-| ?- sort(rational)::sort([1/8, 2/7, 6/5, 2/9, 1/3], Sorted).
+```logtalk
+sort(rational)::sort([1/8, 2/7, 6/5, 2/9, 1/3], Sorted).
 
 Sorted = [1/8, 2/9, 2/7, 1/3, 6/5]
 yes
 
 
-| ?- sort(colours)::sort([orange, indigo, red, yellow, violet, blue, green], Sorted).
+```logtalk
+sort(colours)::sort([orange, indigo, red, yellow, violet, blue, green], Sorted).
 
 Sorted = [red, orange, yellow, green, blue, indigo, violet]
 yes
@@ -42,7 +45,8 @@ yes
 % using the pseudo-object user implies using the Prolog built-in standard 
 % order operators:
 
-| ?- sort(user)::sort([3, 1, 4, 2, 9], Sorted).
+```logtalk
+sort(user)::sort([3, 1, 4, 2, 9], Sorted).
 
 Sorted = [1, 2, 3, 4, 9]
 yes
@@ -50,19 +54,22 @@ yes
 
 % some messages testing object parameter passing and using:
 
-| ?- red_circle(3)::color(Color).
+```logtalk
+red_circle(3)::color(Color).
 
 Color = red
 yes
 
 
-| ?- red_circle(3)::area(Area).
+```logtalk
+red_circle(3)::area(Area).
 
 Area = 28.274334
 yes
 
 
-| ?- red_circle(3)::ancestors(As).
+```logtalk
+red_circle(3)::ancestors(As).
 
 As = [circle(3, red), ellipse(3, 3, red)]
 yes
@@ -71,7 +78,8 @@ yes
 % show the execution context using a method (context/3) that is defined in the
 % hierarchy root and specialized (using super calls) in each descendant:
 
-| ?- red_circle(3)::context.
+```logtalk
+red_circle(3)::context.
 
 red_circle1
 self: red_circle(3)
@@ -94,7 +102,8 @@ yes
 % send a conjunction of messages/goals to an object; just some useful syntax sugar
 % (don't use message broadcasting syntax in order to workaround a XSB parser bug):
 
-| ?- square(2)::side(Side), square(2)::width(Width), square(2)::height(Height), square(2)::area(Area).
+```logtalk
+square(2)::side(Side), square(2)::width(Width), square(2)::height(Height), square(2)::area(Area).
 
 Side = 2
 Width = 2
@@ -105,7 +114,8 @@ yes
 
 % find all messages accepted by an object:
 
-| ?- square(2)::current_predicate(Pred).
+```logtalk
+square(2)::current_predicate(Pred).
 
 Pred = side/1 ; 
 Pred = width/1 ;
@@ -116,7 +126,8 @@ yes
 
 % find all data on a specific message accepted by an object:
 
-| ?- square(_)::predicate_property(side(_), Prop).
+```logtalk
+square(_)::predicate_property(side(_), Prop).
 
 Prop = public ;
 Prop = static ;

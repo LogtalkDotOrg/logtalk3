@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# instmethods
 
 This folder contains an example of instance defined methods. When using 
 classes and instances, methods must be declared in a class but the method 
@@ -39,3 +39,48 @@ This example defines the following objects:
 
 - `instance3`  
 	instance of root specializing the inherited method `method/0`
+
+% start by loading the example:
+
+```logtalk
+logtalk_load(instmethods(loader)).
+```
+
+% instance1 definition for method "method" is found in its class:
+
+```logtalk
+instance1::method.
+```
+
+<!--
+This is the default definition for the method, stored in class root.
+
+true.
+-->
+
+% instance2 overrides definition of method "method"
+
+```logtalk
+instance2::method.
+```
+
+<!--
+This is an overriding definition stored in the instance2 instance itself.
+
+true.
+-->
+
+% instance3 specializes definition of method "method"
+
+```logtalk
+instance3::method.
+```
+
+<!--
+This is a specializing definition stored in the instance3 instance itself.
+It makes a super call to execute the default definition:
+
+This is the default definition for the method, stored in class root.
+
+true.
+-->

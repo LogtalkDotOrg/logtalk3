@@ -20,29 +20,34 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('structural/twin/loader')).
+```logtalk
+logtalk_load(design_patterns('structural/twin/loader')).
 ...
 
 
 % each object can answer its messages and the messages for its
 % twin object, thanks to message forwarding:
 
-| ?- a_date::year(Year).
+```logtalk
+a_date::year(Year).
 
 Year = 2018
 yes
 
-| ?- a_date::hour(Hour).
+```logtalk
+a_date::hour(Hour).
 
 Hour = 11
 yes
 
-| ?- a_time::minutes(Minutes).
+```logtalk
+a_time::minutes(Minutes).
 
 Minutes = 27
 yes
 
-| ?- a_time::day(Day).
+```logtalk
+a_time::day(Day).
 
 Day = 13
 yes
@@ -50,20 +55,24 @@ yes
 
 % we can also create twins dynamically:
 
-| ?- time::new(twin_time, twin_date, [hour(12),minutes(37),seconds(17)]).
+```logtalk
+time::new(twin_time, twin_date, [hour(12),minutes(37),seconds(17)]).
 
 yes
 
-| ?- date::new(twin_date, twin_time, [year(2003),month(9),day(23)]).
+```logtalk
+date::new(twin_date, twin_time, [year(2003),month(9),day(23)]).
 
 yes
 
-| ?- twin_time::year(Year).
+```logtalk
+twin_time::year(Year).
 
 Year = 2003
 yes
 
-| ?- twin_date::seconds(Seconds).
+```logtalk
+twin_date::seconds(Seconds).
 
 Seconds = 17
 yes

@@ -21,13 +21,15 @@ ________________________________________________________________________
 % start by loading the sample properties used to use QuickCheck interactively
 % at the top-level interpreter:
 
-| ?- logtalk_load(quick_check(loader)).
+```logtalk
+logtalk_load(quick_check(loader)).
 ...
 
 
 % check that reversing a list twice gives back the same list:
 
-| ?- lgtunit::quick_check(reverse_2_twice_prop(+list)).
+```logtalk
+lgtunit::quick_check(reverse_2_twice_prop(+list)).
 % 100 random tests passed
 yes
 
@@ -35,14 +37,16 @@ yes
 % check the same_length_2_prop/1 property by running the default number of
 % random tests:
 
-| ?- lgtunit::quick_check(same_length_2_prop(+list)).
+```logtalk
+lgtunit::quick_check(same_length_2_prop(+list)).
 % 100 random tests passed
 yes
 
 
 % check the same_length_3_prop/1 property by running 25 random tests:
 
-| ?- lgtunit::quick_check(same_length_3_prop(+list), [n(25)]).
+```logtalk
+lgtunit::quick_check(same_length_3_prop(+list), [n(25)]).
 % 25 random tests passed
 yes
 
@@ -50,7 +54,8 @@ yes
 % try a broken property, broken_nth1_3_prop/1, to check returning of a
 % counter-example that falsifies the property:
 
-| ?- lgtunit::quick_check(broken_nth1_3_prop(+list), [n(25)]).
+```logtalk
+lgtunit::quick_check(broken_nth1_3_prop(+list), [n(25)]).
 *     quick check test failure (at test 1 after 0 shrinks):
 *       broken_nth1_3_prop([])
 no
@@ -59,11 +64,13 @@ no
 % the alternative lgtunit::quick_check/3 predicate returns results in
 % reified form:
 
-| ?- lgtunit::quick_check(same_length_2_prop(+list), Result, []).
+```logtalk
+lgtunit::quick_check(same_length_2_prop(+list), Result, []).
 Result = passed.
 yes
 
-| ?- lgtunit::quick_check(broken_nth1_3_prop(+list), Result, [n(250)]).
+```logtalk
+lgtunit::quick_check(broken_nth1_3_prop(+list), Result, [n(250)]).
 Result = failed(broken_nth1_3_prop([])).
 yes
 
@@ -72,7 +79,8 @@ yes
 % to test is not always necessary; for example assuming that the predicate
 % length/2 is defined in "user":
 
-| ?- lgtunit::quick_check(length(+list, -integer)).
+```logtalk
+lgtunit::quick_check(length(+list, -integer)).
 % 100 random tests passed
 yes
 
@@ -80,11 +88,13 @@ yes
 % the template of the quick_check/1-3 predicates can also use the
 % ::/2 and <</2 control constructs:
 
-| ?- lgtunit::quick_check(list::length(+list, -integer)).
+```logtalk
+lgtunit::quick_check(list::length(+list, -integer)).
 % 100 random tests passed
 yes
 
-| ?- lgtunit::quick_check(list<<length(+list, -integer)).
+```logtalk
+lgtunit::quick_check(list<<length(+list, -integer)).
 % 100 random tests passed
 yes
 
@@ -94,9 +104,11 @@ yes
 % module-qualified template; for example, assuming a system providing 
 % a "lists" module defining the de facto standard length/2 predicate:
 
-| ?- use_module(library(lists)).
+```logtalk
+use_module(library(lists)).
 yes
 
-| ?- lgtunit::quick_check(lists:length(+list, -integer)).
+```logtalk
+lgtunit::quick_check(lists:length(+list, -integer)).
 % 100 random tests passed
 yes

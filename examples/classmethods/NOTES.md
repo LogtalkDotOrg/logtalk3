@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# classmethods
 
 This example illustrates how to define "class methods" as found on class-
 based object-oriented programming languages such as Java or Objective-C.
@@ -38,3 +38,51 @@ This example defines the following objects:
 
 - `c42`  
 	static instance of class `circle`
+
+% start by loading the example:
+
+```logtalk
+logtalk_load(classmethods(loader)).
+```
+
+% use the "class method" area/2 to calculate the are of a circle given its radius:
+
+```logtalk
+circle::area(1.0, Area).
+```
+
+<!--
+Area = 3.14159.
+-->
+
+% ask our static instance, c42, its area:
+
+```logtalk
+c42::area(Area).
+```
+
+<!--
+Area = 24.6301.
+-->
+
+
+% create a dynamic instance of class circle using the "class method" new/4:
+
+```logtalk
+circle::new(1.2, 7.9, 2.0, Circle).
+```
+
+<!--
+Circle = o1.
+-->
+
+
+% ask the circle o1 its area:
+
+```logtalk
+o1::area(Area).
+```
+
+<!--
+Area = 4.52389.
+-->

@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(puzzles(loader)).
+```logtalk
+logtalk_load(puzzles(loader)).
 ...
 
 
 % Harry Potter's room of potions logical puzzle:
 
-| ?- potions::potions(P1, P2, P3, P4, P5, P6, P7).
+```logtalk
+potions::potions(P1, P2, P3, P4, P5, P6, P7).
 
 P1 = poison
 P2 = wine
@@ -41,7 +43,8 @@ yes
 
 % Horse show logical puzzle:
 
-| ?- horses::(horses(S), print(S)).
+```logtalk
+horses::(horses(S), print(S)).
 1 place: april riding doc, the chestnut gelding
 2 place: sue riding danny, the bay gelding
 3 place: doc riding gopher, the gray gelding
@@ -55,13 +58,15 @@ yes
 
 % Who Stole the Jam?
 
-| ?- jam_thief::thief(Thief).
+```logtalk
+jam_thief::thief(Thief).
 
 Thief = hare
 
 yes
 
-| ?- jam_thief::thief(Thief, Why).
+```logtalk
+jam_thief::thief(Thief, Why).
 
 Thief = hare
 Why = [trusty(dormouse),liar(hare),trusty(hatter)] ? 
@@ -71,7 +76,8 @@ yes
 
 % Houses logical puzzle:
 
-| ?- houses::(houses(Solution), print(Solution)).
+```logtalk
+houses::(houses(Solution), print(Solution)).
 h(norwegian,fox,kool,water,yellow)
 h(ukrainian,horse,chesterfield,tea,blue)
 h(english,snake,winston,milk,red)
@@ -86,12 +92,14 @@ h(spanish,dog,lucky,juice,white)
 Solution = [h(norwegian, fox, kool, water, yellow), h(ukrainian, horse, chesterfield, tea, blue), h(english, snake, winston, milk, red), h(japonese, zebra, kent, coffee, green), h(spanish, dog, lucky, juice, white)] ;
 no
 
-| ?- houses::zebra_owner(Owner).
+```logtalk
+houses::zebra_owner(Owner).
 Owner = japonese ;
 Owner = japonese ;
 no
 
-| ?- houses::water_drinker(Drinker).
+```logtalk
+houses::water_drinker(Drinker).
 Drinker = norwegian ;
 Drinker = norwegian ;
 no
@@ -99,7 +107,8 @@ no
 
 % Passing a note logical puzzle
 
-| ?- note::(students(S), print(S)).
+```logtalk
+note::(students(S), print(S)).
 s(mary,english,red,1)
 s(paul,math,yellow,2)
 s(josephine,science,green,3)
@@ -113,7 +122,8 @@ yes
 
 % Mort's Letter from Camp Swampy logical puzzle
 
-| ?- camp_swampy::(beds(S), print(S)).
+```logtalk
+camp_swampy::(beds(S), print(S)).
 tim thomas, from maine, sleeps on bed number 1
 sam franklin, from north_carolina, sleeps on bed number 2
 mac miller, from virginia, sleeps on bed number 3

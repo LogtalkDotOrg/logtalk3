@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(msglog(loader)).
+```logtalk
+logtalk_load(msglog(loader)).
 ...
 
 
@@ -28,24 +29,28 @@ ________________________________________________________________________
 
 % start recording user messages:
 
-| ?- msglog::record.
+```logtalk
+msglog::record.
 
 yes
 
 % send some messages:
 
-| ?- list::member(X, [1, 2, 3]).
+```logtalk
+list::member(X, [1, 2, 3]).
 
 X = 1 ;
 X = 2 ;
 X = 3 ;
 no
 
-| ?- character::is_alpha(p).
+```logtalk
+character::is_alpha(p).
 
 yes
 
-| ?- integer::between(1, 4, N).
+```logtalk
+integer::between(1, 4, N).
 
 N = 1 ;
 N = 2 ;
@@ -55,7 +60,8 @@ no
 
 % stop recording and print message log:
 
-| ?- msglog::(stop, print).
+```logtalk
+msglog::(stop, print).
 
 list::member(X, [1, 2, 3]).
 character::is_alpha(p).

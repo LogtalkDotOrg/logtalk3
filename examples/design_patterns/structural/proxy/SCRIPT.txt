@@ -20,14 +20,16 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('structural/proxy/loader')).
+```logtalk
+logtalk_load(design_patterns('structural/proxy/loader')).
 ...
 
 
 % first, lets create a old enough driver, no other than
 % Mr. Magoo itself (pedestrians be aware!):
 
-| ?- driver::new(magoo, 'Mr. Magoo', 87).
+```logtalk
+driver::new(magoo, 'Mr. Magoo', 87).
 
 yes
 
@@ -37,7 +39,8 @@ yes
 % car as a static object in the source file or create it
 % dynamically:
 
-| ?- create_object(packard_645, [extends(car)], [], []).
+```logtalk
+create_object(packard_645, [extends(car)], [], []).
 
 yes
 
@@ -45,7 +48,8 @@ yes
 % then we check, using the proxy object, that the driver
 % can actually drive the car:
 
-| ?- car_proxy(packard_645, magoo)::drive.
+```logtalk
+car_proxy(packard_645, magoo)::drive.
 
 Car has been driven!
 yes
@@ -54,7 +58,8 @@ yes
 % now, lets create a driver that is just too young, one of
 % the children that Mr. Magoo sometimes babysits:
 
-| ?- driver::new(wheeler, 'Wheeler', 7).
+```logtalk
+driver::new(wheeler, 'Wheeler', 7).
 
 yes
 
@@ -62,7 +67,8 @@ yes
 % then we check, using the proxy object, that the child
 % is effectively not allowed to drive the car:
 
-| ?- car_proxy(packard_645, wheeler)::drive.
+```logtalk
+car_proxy(packard_645, wheeler)::drive.
 
 Sorry, Wheeler is too young to drive!
 yes

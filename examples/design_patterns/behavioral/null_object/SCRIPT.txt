@@ -20,19 +20,22 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/null_object/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/null_object/loader')).
 ...
 
 
 % non null objects reply to the predicates with their own intrinsic
 % answers:
 
-| ?- dog::make_sound.
+```logtalk
+dog::make_sound.
 
 Woof...
 yes
 
-| ?- cat::make_sound.
+```logtalk
+cat::make_sound.
 
 Meowww...
 yes
@@ -40,6 +43,7 @@ yes
 
 % the null objects implements the same interface but does nothing.
 
-| ?- null_animal::make_sound.
+```logtalk
+null_animal::make_sound.
 
 yes

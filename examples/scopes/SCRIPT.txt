@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(scopes(loader)).
+```logtalk
+logtalk_load(scopes(loader)).
 ...
 
 
 % we can always send a message for a public predicate:
 
-| ?- prototype::foo(Foo).
+```logtalk
+prototype::foo(Foo).
 
 Foo = 1
 yes
@@ -34,11 +36,13 @@ yes
 
 % but we cannot send messages for protected or private predicates:
 
-| ?- prototype::bar(_).
+```logtalk
+prototype::bar(_).
 
 error(permission_error(access,protected_predicate,bar/1),logtalk(prototype::bar(_),c(user,user,r(user,prototype,[],[]))))
 
-| ?- prototype::baz(_).
+```logtalk
+prototype::baz(_).
 
 uncaught exception: error(permission_error(access,private_predicate,baz/1),logtalk(prototype::baz(_),c(user,user,r(user,prototype,[],[]))))
 
@@ -46,7 +50,8 @@ uncaught exception: error(permission_error(access,private_predicate,baz/1),logta
 % same for local predicates not declared by a scope directive; note the
 % different exception term compared with the two previous queries:
 
-| ?- prototype::local(_).
+```logtalk
+prototype::local(_).
 
 error(existence_error(predicate_declaration,local/1),logtalk(prototype::local(_),c(user,user,r(user,prototype,[],[]))))
 
@@ -56,17 +61,20 @@ error(existence_error(predicate_declaration,local/1),logtalk(prototype::local(_)
 % and p_baz/1 predicates are declared public, defined in the "prototype"
 % object, and inherited by the "descendant" object):
 
-| ?- descendant::p_foo(Foo).
+```logtalk
+descendant::p_foo(Foo).
 
 Foo = 2
 yes
 
-| ?- descendant::p_bar(Bar).
+```logtalk
+descendant::p_bar(Bar).
 
 Bar = 2
 yes
 
-| ?- descendant::p_baz(Baz).
+```logtalk
+descendant::p_baz(Baz).
 
 Baz = 2
 yes
@@ -75,12 +83,14 @@ yes
 % from descendant objects, we can access inherited predicate definitions for
 % public and protected predicates:
 
-| ?- descendant::d_foo(Foo).
+```logtalk
+descendant::d_foo(Foo).
 
 Foo = 1
 yes
 
-| ?- descendant::d_bar(Bar).
+```logtalk
+descendant::d_bar(Bar).
 
 Bar = 1
 yes

@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(logic(loader)).
+```logtalk
+logtalk_load(logic(loader)).
 ...
 
 
 % translate a single logic proposition:
 
-| ?- translator::translate((p v ~q) => (r & k), Cs).
+```logtalk
+translator::translate((p v ~q) => (r & k), Cs).
 r :- p.
 k :- p.
 q; r :- .
@@ -39,7 +41,8 @@ yes
 
 % translate a single logic proposition printing each translation step:
 
-| ?- translator::step_by_step((p v ~q) => (r & k), Cs).
+```logtalk
+translator::step_by_step((p v ~q) => (r & k), Cs).
 
 Processing proposition: p v ~q=>r&k
 
@@ -64,7 +67,8 @@ yes
 
 % translate a single logic proposition printing each translation step:
 
-| ?- translator::step_by_step(all(X, exists(Y, p(X) v ~q(X) => r(X, Y))), Cs).
+```logtalk
+translator::step_by_step(all(X, exists(Y, p(X) v ~q(X) => r(X, Y))), Cs).
 
 Processing proposition: all(X, exists(Y, p(X)v~q(X)=>r(X, Y)))
 
@@ -89,7 +93,8 @@ yes
 
 % translate a single logic proposition printing each translation step:
 
-| ?- translator::step_by_step(all(X, men(X) => mortal(X)), Cs).
+```logtalk
+translator::step_by_step(all(X, men(X) => mortal(X)), Cs).
 
 Processing proposition: all(X, men(X)=>mortal(X))
 

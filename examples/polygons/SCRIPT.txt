@@ -20,42 +20,51 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(polygons(loader)).
+```logtalk
+logtalk_load(polygons(loader)).
 ...
 
 
 % first create four polygons and move each one to a different position
 
-| ?- triangle::new(t, [position-(4, 5)]).
+```logtalk
+triangle::new(t, [position-(4, 5)]).
 yes
 
-| ?- square::new(s, [position-(3, 2)]).
+```logtalk
+square::new(s, [position-(3, 2)]).
 yes
 
-| ?- pentagon::new(p, [position-(7, 1)]).
+```logtalk
+pentagon::new(p, [position-(7, 1)]).
 yes
 
-| ?- hexagon::new(h, [position-(2, 4)]).
+```logtalk
+hexagon::new(h, [position-(2, 4)]).
 yes
 
 
 % create two tuples of relation concentric
 
-| ?- concentric::add_tuple([t, s]).
+```logtalk
+concentric::add_tuple([t, s]).
 yes
 
-| ?- concentric::add_tuple([p, h]).
+```logtalk
+concentric::add_tuple([p, h]).
 yes
 
 
 % check results
 
-| ?- concentric::tuple(Tuple), write(Tuple), nl, fail.
+```logtalk
+concentric::tuple(Tuple), write(Tuple), nl, fail.
 [t,s]
 [p,h]
 no
 
-| ?- t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
+```logtalk
+t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
 Xh = 7,
 Yh = 1,
 Xp = 7,
@@ -66,25 +75,29 @@ Ys = 5,
 Yt = 5
 yes
 
-| ?- after_event_registry::monitors(Ma).
+```logtalk
+after_event_registry::monitors(Ma).
 Ma = [concentric]
 yes
 
 
 % move the triangle and the hexagon to new positions
 
-| ?- t::move(3, 3), h::move(8, 4).
+```logtalk
+t::move(3, 3), h::move(8, 4).
 yes
 
 
 % check results
 
-| ?- concentric::tuple(Tuple), write(Tuple), nl, fail.
+```logtalk
+concentric::tuple(Tuple), write(Tuple), nl, fail.
 [t,s]
 [p,h]
 no
 
-| ?- t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
+```logtalk
+t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
 Xh = 8,
 Yh = 4,
 Xp = 8,
@@ -95,32 +108,37 @@ Ys = 3,
 Yt = 3
 yes
 
-| ?- after_event_registry::monitors(Ma).
+```logtalk
+after_event_registry::monitors(Ma).
 Ma = [concentric]
 yes
 
 
 % create another tuple of relation concentric
 
-| ?- concentric::add_tuple([t, p]).
+```logtalk
+concentric::add_tuple([t, p]).
 yes
 
 
 % move the pentagon to a new position
 
-| ?- p::move(2, 7).
+```logtalk
+p::move(2, 7).
 yes
 
 
 % check results
 
-| ?- concentric::tuple(Tuple), write(Tuple), nl, fail.
+```logtalk
+concentric::tuple(Tuple), write(Tuple), nl, fail.
 [t,s]
 [p,h]
 [t,p]
 no
 
-| ?- t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
+```logtalk
+t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Yh).
 Xh = 2,
 Yh = 7,
 Xp = 2,
@@ -131,24 +149,30 @@ Ys = 7,
 Yt = 7
 yes
 
-| ?- after_event_registry::monitors(Monitors).
+```logtalk
+after_event_registry::monitors(Monitors).
 Monitors = [concentric]
 yes
 
 
 % clean up instances, tuples and monitors
 
-| ?- concentric::remove_all_tuples.
+```logtalk
+concentric::remove_all_tuples.
 yes
 
-| ?- triangle::delete(t).
+```logtalk
+triangle::delete(t).
 yes
 
-| ?- square::delete(s).
+```logtalk
+square::delete(s).
 yes
 
-| ?- pentagon::delete(p).
+```logtalk
+pentagon::delete(p).
 yes
 
-| ?- hexagon::delete(h).
+```logtalk
+hexagon::delete(h).
 yes

@@ -37,7 +37,8 @@
 %
 % Usage example:
 %
-%	| ?- tokenizer::tokens(" We owe $1,048,576.24 to Agent 007 for Version 3.14159! ", Tokens).
+%	```logtalk
+tokenizer::tokens(" We owe $1,048,576.24 to Agent 007 for Version 3.14159! ", Tokens).
 
 :- object(tokenizer).
 

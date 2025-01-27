@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(dcgs(loader)).
+```logtalk
+logtalk_load(dcgs(loader)).
 ...
 
 
 % DCG rules implementing a simple calculator:
 
-| ?- calculator::parse("1+2-3*4", Result).
+```logtalk
+calculator::parse("1+2-3*4", Result).
 
 Result = -9
 yes
@@ -34,7 +36,8 @@ yes
 
 % recognize MAC addresses:
 
-| ?- macaddr::valid("00:1e:4a:ef:72:8b").
+```logtalk
+macaddr::valid("00:1e:4a:ef:72:8b").
 
 yes
 
@@ -45,7 +48,8 @@ yes
 % of the phrase/2-3 predicates is not Logtalk aware and would mishandle the
 % (::)/2 message-sending operator):
 
-| ?- logtalk << phrase(morse::morse(Message), "... --- ...").
+```logtalk
+logtalk << phrase(morse::morse(Message), "... --- ...").
 
 Message = [sos] 
 yes
@@ -53,7 +57,8 @@ yes
 
 % solve a cellphone keypad encoded enigma:
 
-| ?- enigma::solve("4 96853 5683 86 4283 346637 9484 968 8664448", Message).
+```logtalk
+enigma::solve("4 96853 5683 86 4283 346637 9484 968 8664448", Message).
 
 Message = [i, would, love, to, have, dinner, with, you, tonight] 
 yes
@@ -61,12 +66,14 @@ yes
 
 % recognizing grammatically correct sentences:
 
-| ?- sentence::parse([the, girl, likes, the, boy], Result).
+```logtalk
+sentence::parse([the, girl, likes, the, boy], Result).
 
 Result = true
 yes
 
-| ?- sentence::parse([the, girl, scares, the, boy], Result).
+```logtalk
+sentence::parse([the, girl, scares, the, boy], Result).
 
 Result = false
 yes
@@ -74,7 +81,8 @@ yes
 
 % generating parse trees for sentences:
 
-| ?- parsetree::parse([the, girl, likes, the, boy], Tree).
+```logtalk
+parsetree::parse([the, girl, likes, the, boy], Tree).
 
 Tree = s(np(d(the), n(girl)), vp(v(likes), np(d(the), n(boy))))
 yes
@@ -82,12 +90,14 @@ yes
 
 % bill of materials example:
 
-| ?- bom::parts(bike, L).
+```logtalk
+bom::parts(bike, L).
 
 L = [frame, crank, pedal, pedal, chain, spokes, rim, hub, spokes, rim, hub]
 yes
 
-| ?- bom::parts(wheel, L).
+```logtalk
+bom::parts(wheel, L).
 
 L = [spokes, rim, hub]
 yes
@@ -95,7 +105,8 @@ yes
 
 % parsing command-line shell input:
 
-| ?- shell::parse("pwd; cd ..; ls -a", L).
+```logtalk
+shell::parse("pwd; cd ..; ls -a", L).
 
 L = [pwd,'cd ..','ls -a'] ? 
 
@@ -104,7 +115,8 @@ yes
 
 % convert a string to a list of tokens (words, numbers, punctuation):
 
-| ?- tokenizer::tokens(" We owe $1,048,576.24 to Agent 007 for Version 3.14159! ", Tokens).
+```logtalk
+tokenizer::tokens(" We owe $1,048,576.24 to Agent 007 for Version 3.14159! ", Tokens).
 
 Tokens = [we,owe,$,1048576.24,to,agent,7,for,version,3.14159,!] ? 
 
@@ -113,7 +125,8 @@ yes
 
 % walker movements:
 
-| ?- walker::walk([n(5), e(4), s(2), nw(8), s(5), se(1), n(4)], Ending).
+```logtalk
+walker::walk([n(5), e(4), s(2), nw(8), s(5), se(1), n(4)], Ending).
 
 Ending = -0.94974746830583223,6.9497474683058318 ? 
 
@@ -122,12 +135,14 @@ yes
 
 % conversion between compound terms and XML:
 
-| ?- xml::convert(word(child, children), word(singular, plural), XML).
+```logtalk
+xml::convert(word(child, children), word(singular, plural), XML).
 
 XML = '<word><singular>child</singular><plural>children</plural></word>' 
 yes
 
-| ?- xml::convert(Term, Interpretation, '<word><singular>child</singular><plural>children</plural></word>').
+```logtalk
+xml::convert(Term, Interpretation, '<word><singular>child</singular><plural>children</plural></word>').
 
 Term = word(child, children)
 Interpretation = word(singular, plural) 
@@ -136,27 +151,32 @@ yes
 
 % parsing URLs:
 
-| ?- url::parse("https://logtalk.org", Components).
+```logtalk
+url::parse("https://logtalk.org", Components).
 
 Components = [protocol(http), address([logtalk, org]), path([]), file('')] 
 yes
 
-| ?- url::parse("https://logtalk.org/", Components).
+```logtalk
+url::parse("https://logtalk.org/", Components).
 
 Components = [protocol(http), address([logtalk, org]), path(['']), file('')] 
 yes
 
-| ?- url::parse("https://logtalk.org/cvs", Components).
+```logtalk
+url::parse("https://logtalk.org/cvs", Components).
 
 Components = [protocol(http), address([logtalk, org]), path([cvs]), file('')] 
 yes
 
-| ?- url::parse("https://logtalk.org/cvs.html", Components).
+```logtalk
+url::parse("https://logtalk.org/cvs.html", Components).
 
 Components = [protocol(http), address([logtalk, org]), path([]), file('cvs.html')] 
 yes
 
-| ?- url::parse("http://193.136.64.5/files/update", Components).
+```logtalk
+url::parse("http://193.136.64.5/files/update", Components).
 
 Components = [protocol(http), address([193, 136, 64, 5]), path([files, update]), file('')] 
 yes
@@ -164,7 +184,8 @@ yes
 
 % command language example:
 
-| ?- faa::main.
+```logtalk
+faa::main.
 Fly Amzi! Air
 enter command> list flights
 aa101
@@ -181,7 +202,8 @@ yes
 
 % IBAN validation:
 
-| ?- iban::valid("GB82 WEST 1234 5698 7654 32").
+```logtalk
+iban::valid("GB82 WEST 1234 5698 7654 32").
 yes
 
 
@@ -189,7 +211,8 @@ yes
 % (as phrase/2-3 are private methods, we use the "logtalk" built-in object and the
 % <</2 control construct to invoke the foo//0 public grammar rule non-terminal):
 
-| ?- logtalk << phrase(bypass::foo, _, _).
+```logtalk
+logtalk << phrase(bypass::foo, _, _).
 
 bar predicate called
 yes
@@ -197,14 +220,16 @@ yes
 
 % run the Logtalk DCG translator on the test cases:
 
-| ?- dcgtest::run.
+```logtalk
+dcgtest::run.
 
 ...
 
 
 % try the meta_non_terminal/1 + call//N examples:
 
-| ?- client::print.
+```logtalk
+client::print.
 
 1-one
 2-two
@@ -214,7 +239,8 @@ b-two
 c-three
 yes
 
-| ?- client::successors([1,2,3], Successors).
+```logtalk
+client::successors([1,2,3], Successors).
 
 Successors = [2, 3, 4]
 yes
@@ -222,12 +248,14 @@ yes
 
 % use lambda expressions in grammar rules
 
-| ?- logtalk << phrase(lambdas::aa(Duplicates), [a,b,c]).
+```logtalk
+logtalk << phrase(lambdas::aa(Duplicates), [a,b,c]).
 
 Duplicates = [a,a,b,b,c,c]
 yes
 
-| ?- logtalk << phrase(lambdas::aa([a,a,b,b,c,c]), Singletons).
+```logtalk
+logtalk << phrase(lambdas::aa([a,a,b,b,c,c]), Singletons).
 
 Singletons = [a,b,c]
 yes
@@ -236,7 +264,8 @@ yes
 % use call//1 and a lambda expressions to access
 % the grammar rule input list for debugging:
 
-| ?- debug::copy([1,2,3,4,5], Copy).
+```logtalk
+debug::copy([1,2,3,4,5], Copy).
 [1,2,3,4,5]
 [2,3,4,5]
 [3,4,5]
@@ -249,7 +278,8 @@ no
 
 % use a meta-non-terminal:
 
-| ?- logtalk << phrase(meta::repeat(bases::octal, 2, 4, Digits), [3,7,4,1,0,3,6], Rest).
+```logtalk
+logtalk << phrase(meta::repeat(bases::octal, 2, 4, Digits), [3,7,4,1,0,3,6], Rest).
 
 Digits = [3,7,4,1], Rest = [0,3,6]
 yes

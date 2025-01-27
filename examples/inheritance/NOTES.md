@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# inheritance
 
 This folder contains examples of public, protected, and private inheritance,
 for both prototype-based and class-based hierarchies.
@@ -49,3 +50,148 @@ The two object hierarchies are organized as follows:
 
 A second category named `interface`, imported by all objects except the 
 sub-class instances, allows us to query the objects about their interfaces.
+
+% start by loading the example:
+
+```logtalk
+logtalk_load(inheritance(loader)).
+```
+
+% parent interface
+
+```logtalk
+parent::interface.
+```
+
+<!--
+public/0 - public
+protected/0 - protected
+private/0 - private
+
+true.
+-->
+
+% prototype1 extends public::parent
+
+```logtalk
+prototype1::interface.
+```
+
+<!--
+public/0 - public
+protected/0 - protected
+
+true.
+-->
+
+% prototype2 extends protected::parent
+
+```logtalk
+prototype2::interface.
+```
+
+<!--
+public/0 - protected
+protected/0 - protected
+
+true.
+-->
+
+% prototype3 extends private::parent
+
+```logtalk
+prototype3::interface.
+```
+
+<!--
+public/0 - private
+protected/0 - private
+
+true.
+-->
+
+% descendant1 extends public::prototype1
+
+```logtalk
+descendant1::interface.
+```
+
+<!--
+public/0 - public
+protected/0 - protected
+
+true.
+-->
+
+% descendant2 extends public::prototype2
+
+```logtalk
+descendant2::interface.
+```
+
+<!--
+public/0 - protected
+protected/0 - protected
+
+true.
+-->
+
+% descendant3 extends public::prototype3
+
+```logtalk
+descendant3::interface.
+```
+
+<!--
+true.
+-->
+
+% object (root of the inheritance graph) interface
+
+```logtalk
+root::interface.
+```
+
+<!--
+public/0 - public
+protected/0 - protected
+private/0 - private
+
+true.
+-->
+
+% instance1 instantiates subclass1 that specializes public::root
+
+```logtalk
+instance1::interface.
+```
+
+<!--
+protected/0 - protected
+public/0 - public
+
+true.
+-->
+
+% instance2 instantiates subclass2 that specializes protected::root
+
+```logtalk
+instance2::interface.
+```
+
+<!--
+protected/0 - protected
+public/0 - protected
+
+true.
+-->
+
+% instance3 instantiates subclass3 that specializes private::root
+
+```logtalk
+instance3::interface.
+```
+
+<!--
+true.
+-->

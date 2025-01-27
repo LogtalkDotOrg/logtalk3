@@ -20,21 +20,24 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('structural/flyweight/loader')).
+```logtalk
+logtalk_load(design_patterns('structural/flyweight/loader')).
 ...
 
 
 % add cheese brands and respective cost to the flyweight object
 % using any of the shops:
 
-| ?- shop1::(stock_cheese(white, 1.25), stock_cheese(blue, 3.75)).
+```logtalk
+shop1::(stock_cheese(white, 1.25), stock_cheese(blue, 3.75)).
 
 yes
 
 
 % all shops now have white and blue cheese at the same cost:
 
-| ?- shop2::cheese(Brand, Cost).
+```logtalk
+shop2::cheese(Brand, Cost).
 
 Brand = white,
 Cost = 1.25 ;
@@ -45,20 +48,23 @@ yes
 
 % both shops can sell cheese but the units sold are stored per-shop:
 
-| ?- shop1::sell_cheese(blue, 3), shop2::sell_cheese(blue, 8).
+```logtalk
+shop1::sell_cheese(blue, 3), shop2::sell_cheese(blue, 8).
 
 yes
 
 
 % check cheese units sold and income for each shop:
 
-| ?- shop1::(total_units_sold(Units), total_income(Income)).
+```logtalk
+shop1::(total_units_sold(Units), total_income(Income)).
 
 Total = 3
 Income = 11.25
 yes
 
-| ?- shop2::(total_units_sold(Units), total_income(Income)).
+```logtalk
+shop2::(total_units_sold(Units), total_income(Income)).
 
 Total = 8
 Income = 30.0

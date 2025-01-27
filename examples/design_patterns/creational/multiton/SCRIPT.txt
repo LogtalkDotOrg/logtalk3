@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('creational/multiton/loader')).
+```logtalk
+logtalk_load(design_patterns('creational/multiton/loader')).
 ...
 
 
 % get a list of all named instances:
 
-| ?- multiton::instances(Instances).
+```logtalk
+multiton::instances(Instances).
 
 Instances = [i1, i2, i3]
 yes
@@ -34,28 +36,33 @@ yes
 
 % verify that no named instance exists until is actually requested:
 
-| ?- \+ current_object(i1), \+ current_object(i2), \+ current_object(i3).
+```logtalk
+\+ current_object(i1), \+ current_object(i2), \+ current_object(i3).
 
 yes
 
 
 % request to the multiton class one of its named instances:
 
-| ?- multiton::instance(i2).
+```logtalk
+multiton::instance(i2).
 
 yes
 
-| ?- current_object(i2).
+```logtalk
+current_object(i2).
 
 yes
 
 
 % try to request an instance that is not a member of the named instances:
 
-| ?- multiton::instance(foobar).
+```logtalk
+multiton::instance(foobar).
 
 no
 
-| ?- current_object(foobar).
+```logtalk
+current_object(foobar).
 
 no

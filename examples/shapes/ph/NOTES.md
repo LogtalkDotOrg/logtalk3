@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +17,54 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
+
+# shapes - ph
+
+% start by loading the example:
+
+```logtalk
+logtalk_load(shapes_ph(loader)).
+```
+
+% try some simple queries:
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+% objects playing the role of prototypes define predicates for themselves and
+% their descendants:
+
+```logtalk
+square::nsides(N).
+```
+
+<!--
+N = 4.
+-->
+
+```logtalk
+square::area(A).
+```
+
+<!--
+A = 1.
+-->
+
+% don't use message broadcasting syntax in order to workaround a XSB parser bug
+
+```logtalk
+q1::color(Color), q1::side(Side), q1::position(X, Y).
+```
+
+<!--
+Color = red, Side = 1, X = 0, Y = 0.
+-->
+
+% don't use message broadcasting syntax in order to workaround a XSB parser bug
+
+```logtalk
+q2::side(Side), q2::area(Area), q2::perimeter(Perimeter).
+```
+
+<!--
+Side = 3, Area = 9, Perimeter = 12.
+-->

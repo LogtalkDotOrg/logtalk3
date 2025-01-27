@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('structural/adapter/loader')).
+```logtalk
+logtalk_load(design_patterns('structural/adapter/loader')).
 ...
 
 
 % connect rechargers to phones:
 
-| ?- iphone_recharger(iphone)::connect.
+```logtalk
+iphone_recharger(iphone)::connect.
 
 Lightning connected
 Recharge Started
@@ -36,7 +38,8 @@ Recharge Started
 Recharge Finished
 yes
 
-| ?- iphone_micro_usb_recharger(iphone)::connect.
+```logtalk
+iphone_micro_usb_recharger(iphone)::connect.
 
 MicroUsb connected
 Lightning connected
@@ -47,7 +50,8 @@ Recharge Started
 Recharge Finished
 yes
 
-| ?- android_recharger(android)::connect.
+```logtalk
+android_recharger(android)::connect.
 
 MicroUsb connected
 Recharge Started

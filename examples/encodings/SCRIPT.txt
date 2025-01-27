@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(encodings(loader)).
+```logtalk
+logtalk_load(encodings(loader)).
 ...
 
 
 % query the table of "Hello world!" messages:
 
-| ?- babel::hello_world(Code, Text).
+```logtalk
+babel::hello_world(Code, Text).
 
 Code = el
 Text = 'Γειάσου κόσμος!' ;
@@ -60,7 +62,8 @@ Yes
 
 % query the table of names:
 
-| ?- latin::name(Name).
+```logtalk
+latin::name(Name).
 
 Name = 'António Simões' ;
 
@@ -75,7 +78,8 @@ Yes
 
 % query the table of countries:
 
-| ?- asian::country(Country, Name, Capital).
+```logtalk
+asian::country(Country, Name, Capital).
 
 Name = '中国'
 Capital = '北京'
@@ -102,7 +106,8 @@ Yes
 
 % query the table of greek mythology divinities:
 
-| ?- mythology::divinity(English, Greek).
+```logtalk
+mythology::divinity(English, Greek).
 Greek = 'Ηρα'
 English = hera ? ;
 

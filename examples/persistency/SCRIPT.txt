@@ -20,75 +20,89 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(persistency(loader)).
+```logtalk
+logtalk_load(persistency(loader)).
 ...
 yes
 
 % no initial state:
 
-| ?- persistency::state(S).
+```logtalk
+persistency::state(S).
 no
 
 % add some terms:
 
-| ?- persistency::add(a).
+```logtalk
+persistency::add(a).
 yes
 
-| ?- persistency::add(b).
+```logtalk
+persistency::add(b).
 true.
 
 % enumerate current terms:
 
-| ?- persistency::state(S).
+```logtalk
+persistency::state(S).
 S = a ;
 S = b ;
 no
 
 % save the terms to permanent storage:
 
-| ?- persistency::save.
+```logtalk
+persistency::save.
 yes
 
 % halt the process:
 
-| ?- halt.
+```logtalk
+halt.
 
 % restart Logtalk and reload:
 
-| ?- logtalk_load(persistency(loader)).
+```logtalk
+logtalk_load(persistency(loader)).
 ...
 yes
 
 % enumerate current terms:
 
-| ?- persistency::state(S).
+```logtalk
+persistency::state(S).
 S = a ;
 S = b ;
 no
 
 % add another term:
 
-| ?- persistency::add(c).
+```logtalk
+persistency::add(c).
 yes
 
 % save the terms to permanent storage:
 
-| ?- persistency::save.
+```logtalk
+persistency::save.
 yes
 
 % halt the process:
 
-| ?- halt.
+```logtalk
+halt.
 
 % restart Logtalk and reload:
 
-| ?- logtalk_load(persistency(loader)).
+```logtalk
+logtalk_load(persistency(loader)).
 ...
 yes
 
 % enumerate current terms:
 
-| ?- persistency::state(S).
+```logtalk
+persistency::state(S).
 S = a ;
 S = b ;
 S = c ;

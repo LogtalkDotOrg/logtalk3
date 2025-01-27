@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(scratchcards(loader)).
+```logtalk
+logtalk_load(scratchcards(loader)).
 ...
 
 
 % compute the points for the test_files/sample file:
 
-| ?- scratchcards::points('test_files/sample', Points).
+```logtalk
+scratchcards::points('test_files/sample', Points).
 
 Points = 13
 yes
@@ -34,7 +36,8 @@ yes
 
 % compute the total number of scratchcards for the test_files/input file:
 
-| ?- scratchcards::total('test_files/input', Total).
+```logtalk
+scratchcards::total('test_files/input', Total).
 
 Total = 6874754
 yes

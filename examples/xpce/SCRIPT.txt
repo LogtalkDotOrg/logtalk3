@@ -20,10 +20,12 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(xpce(loader)).
+```logtalk
+logtalk_load(xpce(loader)).
 ...
 
 
 % start the file viewer:
 
-| ?- view::file_viewer('$HOME').
+```logtalk
+view::file_viewer('$HOME').

@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(questions(loader)).
+```logtalk
+logtalk_load(questions(loader)).
 ...
 
 
 % we can now ask the ultimate question:
 
-| ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
+```logtalk
+logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
 
 The answer to the ultimate question of Life, The Universe and Everything is?
 > 42.
@@ -38,7 +40,8 @@ yes
 % note that the fourth argument of the logtalk::ask_question/5 predicate is
 % a closure that is used to type-check the answer:
 
-| ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
+```logtalk
+logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
 
 The answer to the ultimate question of Life, The Universe and Everything is?
 > icecream.
@@ -52,8 +55,10 @@ yes
 % if running using JIProlog, SWI-Prolog, or YAP as the backend, asking the
 % question again after the goal will present a GUI dialog:
 
-| ?- logtalk_load(questions(loader_gui)).
+```logtalk
+logtalk_load(questions(loader_gui)).
 ...
 
-| ?- logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
+```logtalk
+logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
 ...

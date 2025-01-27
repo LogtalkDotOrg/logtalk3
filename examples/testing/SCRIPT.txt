@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(testing(loader)).
+```logtalk
+logtalk_load(testing(loader)).
 ...
 
 % the test will auto-run, thanks to initialization directives

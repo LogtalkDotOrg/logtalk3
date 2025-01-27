@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +17,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+-->
 
 This folder contains a set of simple examples illustrating how to use the IC 
 Constraint Solver library distributed with ECLiPSe with Logtalk.

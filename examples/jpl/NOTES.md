@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +17,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
+# jpl
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file. Running all the examples and the benchmarks requires XVM (with its
+Running all the examples and the benchmarks requires XVM (with its
 `jni` plug-in installed) or SWI-Prolog (with the JPL library installed).
 YAP most likely would be usable when the old JPL library bundled with it
 is updated. Some examples (but not the benchmarks) can also be used with

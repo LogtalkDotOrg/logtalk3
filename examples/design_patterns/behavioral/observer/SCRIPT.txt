@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/observer/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/observer/loader')).
 ...
 
 
 % trigger an observed event:
 
-| ?- subject::ping(Reply).
+```logtalk
+subject::ping(Reply).
 
 user is asking observer:  ping(_992)
 observer replied to user: ping(pong)

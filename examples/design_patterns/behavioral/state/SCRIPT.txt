@@ -20,28 +20,33 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/state/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/state/loader')).
 ...
 
 
 % sequence of client messages:
 
-| ?- context::output(1 + 2).
+```logtalk
+context::output(1 + 2).
 
 1+2
 yes
 
-| ?- context::output(6 / 7).
+```logtalk
+context::output(6 / 7).
 
 /(6,7)
 yes
 
-| ?- context::output(3 * 4 + 5).
+```logtalk
+context::output(3 * 4 + 5).
 
 3*4+5
 yes
 
-| ?- context::output(1 - 2 / 7).
+```logtalk
+context::output(1 - 2 / 7).
 
 -(1,/(2,7))
 yes

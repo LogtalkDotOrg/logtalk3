@@ -20,28 +20,35 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(my_types(loader)).
+```logtalk
+logtalk_load(my_types(loader)).
 ...
 
 
 % type-check temperature values in different units:
 
-| ?- type::check(temperature(celsius), 38.7).
+```logtalk
+type::check(temperature(celsius), 38.7).
 yes
 
-| ?- type::check(temperature(fahrenheit), 101.2).
+```logtalk
+type::check(temperature(fahrenheit), 101.2).
 yes
 
-| ?- type::check(temperature(kelvin), 307.4).
+```logtalk
+type::check(temperature(kelvin), 307.4).
 yes
 
-| ?- type::valid(temperature(kelvin), -12.1).
+```logtalk
+type::valid(temperature(kelvin), -12.1).
 no
 
-| ?- catch(type::check(temperature(celsius), 38), Error, true).
+```logtalk
+catch(type::check(temperature(celsius), 38), Error, true).
 Error = type_error(float, 38).
 yes
 
-| ?- catch(type::check(temperature(kelvin), -12.1, my_error_context), Error, true).
+```logtalk
+catch(type::check(temperature(kelvin), -12.1, my_error_context), Error, true).
 Error = error(domain_error(property(float, [A]>>(A>=0.0)), -12.1), my_error_context).
 yes

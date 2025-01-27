@@ -20,18 +20,21 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('creational/builder/loader')).
+```logtalk
+logtalk_load(design_patterns('creational/builder/loader')).
 ...
 
 
 % parametric object version:
 
-| ?- builder(_)::(set_wheels(3), set_seats(2), set_color(red), get_result(Car)).
+```logtalk
+builder(_)::(set_wheels(3), set_seats(2), set_color(red), get_result(Car)).
 
 Car = car(3, 2, red)
 yes
 
-| ?- car(3, 2, red)::seats(Seats).
+```logtalk
+car(3, 2, red)::seats(Seats).
 
 Seats = 2
 yes
@@ -39,17 +42,20 @@ yes
 
 % objects with dynamic state version:
 
-| ?- builder::new(Builder).
+```logtalk
+builder::new(Builder).
 
 Builder = o2
 yes
 
-| ?- o2::(set_wheels(3), set_seats(2), set_color(red), get_result(Car)).
+```logtalk
+o2::(set_wheels(3), set_seats(2), set_color(red), get_result(Car)).
 
 Car = o1
 yes
 
-| ?- o1::seats(Seats).
+```logtalk
+o1::seats(Seats).
 
 Seats = 2
 yes

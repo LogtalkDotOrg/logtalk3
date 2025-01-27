@@ -20,5 +20,6 @@ ________________________________________________________________________
 
 % just load the example and check the output message:
 
-| ?- logtalk_load(hello_world(loader)).
+```logtalk
+logtalk_load(hello_world(loader)).
 ...

@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,21 +17,23 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# threads - mtbatch
 
 This folder provides an object for running multi-threading benchmarks. The
 supported backend Prolog compilers are SWI-Prolog, and YAP.
 
 For example, the following goal will run all benchmark tests:
 
-	| ?- mtbatch::run.
+	```logtalk
+mtbatch::run.
 
 You may also run just a single benchmark test a given number of times.
 For example:
 
-	| ?- mtbatch::run(primes, 10).
+	```logtalk
+mtbatch::run(primes, 10).
 
 The following tests are available:
 

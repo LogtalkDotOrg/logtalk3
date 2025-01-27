@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# engines - fluents
 
 This example requires support for both threads and coroutining. Currently it
 runs on ECLiPSe and SWI-Prolog. It should run also on XSB and YAP if and when
@@ -40,3 +41,58 @@ Fluents are described in the paper:
 	doi="10.1007/3-540-44957-4_82",
 	url="http://dx.doi.org/10.1007/3-540-44957-4_82"
 }
+
+% load the example:
+
+```logtalk
+logtalk_load(fluents(loader)).
+```
+
+<!--
+true.
+-->
+
+% get answers from the fluent:
+
+```logtalk
+fluents::next(N1).
+```
+
+<!--
+N1 = 1.
+-->
+
+```logtalk
+fluents::next(N2).
+```
+
+<!--
+N2 = 2.
+-->
+
+```logtalk
+fluents::next(N3).
+```
+
+<!--
+N3 = 3.
+-->
+
+% after exhausting the fluent answers, subsequent queries fail
+% until the threaded engine implementing the fluent is destroyed:
+
+```logtalk
+fluents::next(_).
+```
+
+<!--
+false.
+-->
+
+```logtalk
+fluents::next(_).
+```
+
+<!--
+false.
+-->

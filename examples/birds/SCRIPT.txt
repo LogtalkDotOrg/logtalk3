@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(birds(loader)).
+```logtalk
+logtalk_load(birds(loader)).
 ...
 
 
 % ask the expert system for help in identifying a bird:
 
-| ?- expert::identify.
+```logtalk
+expert::identify.
 Bird identification expert system
 
 bill:sharp_hooked? (yes or no): yes.
@@ -53,7 +55,8 @@ No (more) candidates found.
 
 % identify another bird:
 
-| ?- expert::identify.
+```logtalk
+expert::identify.
 Bird identification expert system
 
 bill:sharp_hooked? (yes or no): no.
@@ -87,4 +90,5 @@ Possible identification : black_footed_albatross
 No (more) candidates found.
 
 (34624 ms) yes
-| ?- 
+```logtalk
+

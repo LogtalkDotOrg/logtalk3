@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,12 +17,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
+# threads - buffer
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
-
-This folder contains a simple multi-threading example illustrating how 
+This folder contains a simple multi-threading example illustrating how
 to use the Logtalk built-in `threaded_wait/1` and `threaded_notify/1`
 predicates for synchronizing threads writing to and reading from a buffer
 that can only contain a fixed number of items at the same time. 

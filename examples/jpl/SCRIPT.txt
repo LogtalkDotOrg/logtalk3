@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(jpl(loader)).
+```logtalk
+logtalk_load(jpl(loader)).
 ...
 
 
 % get the Java version by using the getProperty/1 static method:
 
-| ?- java('java.lang.System', Version)::getProperty('java.version').
+```logtalk
+java('java.lang.System', Version)::getProperty('java.version').
 
 Version = '1.7.0_51'
 yes
@@ -34,7 +36,8 @@ yes
 
 % get the value of the "pi" constant by accessing the 'PI' class field:
 
-| ?- java('java.lang.Math')::get_field('PI', Pi).
+```logtalk
+java('java.lang.Math')::get_field('PI', Pi).
 
 Pi = 3.141592653589793
 yes
@@ -42,13 +45,15 @@ yes
 
 % create a new instance of ArrayList and add some elements to it:
 
-| ?- java('java.util.ArrayList')::new(ArrayList), java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')).
+```logtalk
+java('java.util.ArrayList')::new(ArrayList), java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')).
 yes
 
 
 % round-trip conversion:
 
-| ?- java::terms_to_array([x,[1,a,7,[y,z]],k,[],3.14,foo(bar)], Array), java::array_to_terms(Array, List).
+```logtalk
+java::terms_to_array([x,[1,a,7,[y,z]],k,[],3.14,foo(bar)], Array), java::array_to_terms(Array, List).
 Array = @'J#00000140321793636416',
 List = [x, [1, a, 7, [y, z]], k, [], 3.14, foo(bar)].
 yes
@@ -56,18 +61,22 @@ yes
 
 % some GUI examples, adapted from the JPL distribution examples
 
-| ?- color_chooser::color(Color).
+```logtalk
+color_chooser::color(Color).
 
 Color = @'J#00000140727398998200'
 yes
 
-| ?- flags_table::display.
+```logtalk
+flags_table::display.
 yes
 
-| ?- jlist::display.
+```logtalk
+jlist::display.
 yes
 
-| ?- text_entry::text(Text).
+```logtalk
+text_entry::text(Text).
 Text = ...
 yes
 
@@ -75,6 +84,7 @@ yes
 % run some benchmarks comparing plain JPL calls with calls to Logtalk's thin
 % abstraction layer:
 
-| ?- benchmarks::run.
+```logtalk
+benchmarks::run.
 ...
 

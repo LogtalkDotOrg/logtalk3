@@ -20,14 +20,16 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(module_aliases(loader)).
+```logtalk
+logtalk_load(module_aliases(loader)).
 ...
 
 
 % demonstration of using aliases for using or experimenting with different
 modules:
 
-| ?- data_source::all(Data).
+```logtalk
+data_source::all(Data).
 
 ...
 Data = [1,2,3]
@@ -36,13 +38,15 @@ yes
 
 % demonstration of using module aliases with parametric objects:
 
-| ?- pardata(data1)::all(Data).
+```logtalk
+pardata(data1)::all(Data).
 
 ...
 Data = [1,2,3]
 yes
 
-| ?- pardata(data2)::all(Data).
+```logtalk
+pardata(data2)::all(Data).
 
 ...
 Data = [4,5,6]

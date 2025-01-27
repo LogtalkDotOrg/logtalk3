@@ -20,14 +20,16 @@ ________________________________________________________________________
 
 % load the example:
 
-| ?- logtalk_load(process_modeling(loader)).
+```logtalk
+logtalk_load(process_modeling(loader)).
 ...
 
 
 % compute the number of times that process "b" can be executed
 % and its dependencies:
 
-| ?- process_model::solve([b(B)], Dependencies).
+```logtalk
+process_model::solve([b(B)], Dependencies).
 
 B = 2, Dependencies = [a(2),b(2)] ? ;
 B = 3, Dependencies = [a(2),b(3)] ? ;
@@ -38,7 +40,8 @@ yes
 % compute the number of times that process "c" can be executed
 % and its dependencies:
 
-| ?- process_model::solve([c(C)], Dependencies).
+```logtalk
+process_model::solve([c(C)], Dependencies).
 
 C = 3, Dependencies = [b(2),a(2),c(3)] ? ;
 C = 4, Dependencies = [b(3),a(3),c(4)]

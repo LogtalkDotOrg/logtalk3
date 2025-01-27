@@ -20,14 +20,16 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('behavioral/memento/loader')).
+```logtalk
+logtalk_load(design_patterns('behavioral/memento/loader')).
 ...
 
 
 % sample sequence of operations from "user", which plays
 % the role of the caretaker in this design pattern:
 
-| ?- originator::(
+```logtalk
+originator::(
 		set(s1),
 		set(s2),
 		save_to_memento(Momento1),

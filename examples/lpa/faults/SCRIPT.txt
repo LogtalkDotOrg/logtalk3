@@ -20,11 +20,13 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(lpa_faults(loader)).
+```logtalk
+logtalk_load(lpa_faults(loader)).
 ...
 
 
-| ?- fault::findall.
+```logtalk
+fault::findall.
 
 Please answer all questions with yes or no.
 

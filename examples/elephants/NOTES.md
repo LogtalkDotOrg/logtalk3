@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,11 +17,53 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# elephants
 
 This is a simple example illustrating the concept of _prototypes_ using
 elephants. A similar example is often found in knowledge representation
 discussions.
+
+% start by loading the example:
+
+```logtalk
+logtalk_load(elephants(loader)).
+```
+
+% prototypes are neither instances or classes but either standalone objects
+% as "clyde", our prototypical but concrete elephant ...
+
+```logtalk
+clyde::number_of_legs(N).
+```
+
+<!--
+N = 4.
+-->
+
+```logtalk
+clyde::color(C).
+```
+
+<!--
+C = grey.
+-->
+
+% ... or objects that are derived from other prototypes as "fred", which is
+% like "clyde" except in his color
+
+```logtalk
+fred::number_of_legs(N).
+```
+
+<!--
+N = 4.
+-->
+
+```logtalk
+fred::color(C).
+
+<!--
+C = white.
+-->

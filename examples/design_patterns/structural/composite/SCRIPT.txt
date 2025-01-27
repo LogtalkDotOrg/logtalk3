@@ -20,48 +20,55 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('structural/composite/loader')).
+```logtalk
+logtalk_load(design_patterns('structural/composite/loader')).
 ...
 
 
 % first, create some ellipses:
 
-| ?- ellipse::(new(e1), new(e2), new(e3), new(e4)).
+```logtalk
+ellipse::(new(e1), new(e2), new(e3), new(e4)).
 
 yes
 
 
 % second, create some composite graphics:
 
-| ?- composite_graphic::(new(cg), new(cg1), new(cg2)).
+```logtalk
+composite_graphic::(new(cg), new(cg1), new(cg2)).
 
 yes
 
 
 % add to the composite graphic cg1 the ellipses e1, e2, and e3:
 
-| ?- cg1::(add(e1), add(e2), add(e3)).
+```logtalk
+cg1::(add(e1), add(e2), add(e3)).
 
 yes
 
 
 % add to the composite graphic cg2 the ellipse e4:
 
-| ?- cg2::add(e4).
+```logtalk
+cg2::add(e4).
 
 yes
 
 
 % add to the composite graphic cg the composite graphics cg1 and cg2:
 
-| ?- cg::(add(cg1), add(cg2)).
+```logtalk
+cg::(add(cg1), add(cg2)).
 
 yes
 
 
 % finally, print the contents of the top-level composite graphic cg:
 
-| ?- cg::print.
+```logtalk
+cg::print.
 
 ellipse: e1
 ellipse: e2

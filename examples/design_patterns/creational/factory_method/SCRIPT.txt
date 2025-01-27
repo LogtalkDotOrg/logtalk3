@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('creational/factory_method/loader')).
+```logtalk
+logtalk_load(design_patterns('creational/factory_method/loader')).
 ...
 
 
 % create an ordinary maze game:
 
-| ?- ordinary_maze_game::new(Game), Game::play.
+```logtalk
+ordinary_maze_game::new(Game), Game::play.
 
 Playing using:
 o2 - Ordinary room
@@ -37,7 +39,8 @@ yes
 
 % create a magic maze game:
 
-| ?- magic_maze_game::new(Game), Game::play.
+```logtalk
+magic_maze_game::new(Game), Game::play.
 
 Playing using:
 o5 - Magic room

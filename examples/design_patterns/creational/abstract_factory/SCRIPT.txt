@@ -20,25 +20,29 @@ ________________________________________________________________________
 
 % start by loading the design pattern sample implementations:
 
-| ?- logtalk_load(design_patterns('creational/abstract_factory/loader')).
+```logtalk
+logtalk_load(design_patterns('creational/abstract_factory/loader')).
 ...
 
 
 % create buttons with different appearances:
 
-| ?- factory(linux)::create_button(Button), Button::paint.
+```logtalk
+factory(linux)::create_button(Button), Button::paint.
 
 Render a button in a Linux style
 Button = o1
 yes
 
-| ?- factory(macos)::create_button(Button), Button::paint.
+```logtalk
+factory(macos)::create_button(Button), Button::paint.
 
 Render a button in a macOS style
 Button = o2
 yes
 
-| ?- factory(windows)::create_button(Button), Button::paint.
+```logtalk
+factory(windows)::create_button(Button), Button::paint.
 
 Render a button in a Windows style
 Button = o3

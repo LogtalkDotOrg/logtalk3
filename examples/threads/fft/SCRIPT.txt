@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % start by loading the example and the required library files:
 
-| ?- logtalk_load(fft(loader)).
+```logtalk
+logtalk_load(fft(loader)).
 ...
 
 
@@ -33,7 +34,8 @@ ________________________________________________________________________
 % start by testing the results for the various multi-threading versions to check 
 % the results using a random number generator to create an initial list:
 
-| ?- N=8, cgenerator::list(N,L), fft(1)::fft(N,L,F1), fft(2)::fft(N,L,F2), fft(4)::fft(N,L,F4).
+```logtalk
+N=8, cgenerator::list(N,L), fft(1)::fft(N,L,F1), fft(2)::fft(N,L,F2), fft(4)::fft(N,L,F4).
 
 N = 8,
 L = [c(0.562342, 0.37745), c(0.448983, 0.0468073), c(0.482978, 0.81187), c(0.229581, 0.879153), c(0.39853, 0.909), c(0.248164, 0.314326), c(0.744353, 0.0665809), c(0.381964, 0.993583)],
@@ -45,7 +47,8 @@ yes
 
 % now we check using known results - in this case against Matlab... too lazy to do my own calcs:
 
-| ?- N=8, L=[c(1,0),c(2,0),c(3,0),c(4,0),c(5,0),c(6,0),c(7,0),c(8,0)], fft(4)::fft(N,L,F4), fft(8)::fft(N,L,F8).
+```logtalk
+N=8, L=[c(1,0),c(2,0),c(3,0),c(4,0),c(5,0),c(6,0),c(7,0),c(8,0)], fft(4)::fft(N,L,F4), fft(8)::fft(N,L,F8).
 
 N = 8,
 L = [c(1, 0), c(2, 0), c(3, 0), c(4, 0), c(5, 0), c(6, 0), c(7, 0), c(8, 0)],
@@ -70,7 +73,8 @@ ans =
 
 % now a longer test with N=16384...
 
-| ?- N=16384, cgenerator::list(N, L), time(fft(1)::fft(N,L,F1)), time(fft(2)::fft(N,L,F2)), time(fft(4)::fft(N,L,F3)).
+```logtalk
+N=16384, cgenerator::list(N, L), time(fft(1)::fft(N,L,F1)), time(fft(2)::fft(N,L,F2)), time(fft(4)::fft(N,L,F3)).
 
 % 1,540,128 inferences, 1.18 CPU in 1.27 seconds (93% CPU, 1305193 Lips)
 % 16,496 inferences, 1.23 CPU in 0.77 seconds (159% CPU, 13411 Lips)
@@ -86,7 +90,8 @@ yes
 
 % a smaller test
 
-| ?- N=8192, cgenerator::list(N, L), time(fft(1)::fft(N,L,F1)), time(fft(2)::fft(N,L,F2)), time(fft(4)::fft(N,L,F3)).
+```logtalk
+N=8192, cgenerator::list(N, L), time(fft(1)::fft(N,L,F1)), time(fft(2)::fft(N,L,F2)), time(fft(4)::fft(N,L,F3)).
 
 % 720,928 inferences, 0.55 CPU in 0.58 seconds (94% CPU, 1310778 Lips)
 % 8,304 inferences, 0.55 CPU in 0.33 seconds (166% CPU, 15098 Lips)
@@ -102,7 +107,8 @@ yes
 
 % a very big test
 
-| ?- N is 65536, cgenerator::list(N, L), time(fft(1)::fft(N,L,F1)), time(fft(2)::fft(N,L,F2)), time(fft(4)::fft(N,L,F3)).
+```logtalk
+N is 65536, cgenerator::list(N, L), time(fft(1)::fft(N,L,F1)), time(fft(2)::fft(N,L,F2)), time(fft(4)::fft(N,L,F3)).
 
 % 6,946,848 inferences, 5.91 CPU in 6.42 seconds (92% CPU, 1175440 Lips)
 % 65,648 inferences, 6.03 CPU in 3.80 seconds (159% CPU, 10887 Lips)

@@ -20,13 +20,15 @@ ________________________________________________________________________
 
 % start by loading the loading the example:
 
-| ?- logtalk_load(metered_concurrency(loader)).
+```logtalk
+logtalk_load(metered_concurrency(loader)).
 ...
 
 
 % run example:
 
-| ?- metered_concurrency::run.
+```logtalk
+metered_concurrency::run.
 Worker 1 acquired semaphore
 Worker 6 acquired semaphore
 Worker 1 releasing semaphore

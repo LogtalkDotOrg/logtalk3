@@ -1,3 +1,4 @@
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +17,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# family
 
 This folder contains an implementation of the classical family tree Prolog
 example. This solution defines a root category, `relations`, with predicates
@@ -28,3 +28,36 @@ can then be imported into objects defining the actual families using basic
 `female/1`, `male/1`, and `parent/2` facts. The relation predicates always
 calls the basic facts in _self_. Any number of family objects can be loaded
 at the same time.
+
+% load the example:
+
+```logtalk
+logtalk_load(family(loader)).
+```
+
+% some example queries using the Addams family relations:
+
+```logtalk
+addams::sister(Sister, Sibling).
+```
+
+<!--
+Sister = wednesday, Sibling = pubert ;
+Sister = wednesday, Sibling = pugsley ;
+Sister = wednesday, Sibling = pubert ;
+Sister = wednesday, Sibling = pugsley ;
+false.
+-->
+
+% some example queries using the Simpsons family relations:
+
+```logtalk
+simpsons::mother(Mother, Child).
+```
+
+<!--
+Mother = marge, Child = bart ;
+Mother = marge, Child = lisa ;
+Mother = marge, Child = maggie ;
+false.
+-->

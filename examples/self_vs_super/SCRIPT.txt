@@ -20,7 +20,8 @@ ________________________________________________________________________
 
 % start by loading the example:
 
-| ?- logtalk_load(self_vs_super(loader)).
+```logtalk
+logtalk_load(self_vs_super(loader)).
 ...
 
 
@@ -30,7 +31,8 @@ ________________________________________________________________________
 
 % "user" defines a foo/1 predicate:
 
-| ?- foo(X).
+```logtalk
+foo(X).
 
 X = 1 ? ;
 X = 2 ? ;
@@ -41,7 +43,8 @@ yes
 % "super" calls preserve "sender" and therefore the foo/1 predicate
 % is called by the meta-predicate in the context of "user":
 
-| ?- proto::meta_super(foo, X).
+```logtalk
+proto::meta_super(foo, X).
 Execution context for the parent object meta/2 meta-predicate:
   self: proto
   this: parent
@@ -56,7 +59,8 @@ yes
 % messages to "self" reset "sender" and therefore the foo/1 predicate
 % is called in the context of "proto", hence the existence error:
 
-| ?- proto::meta_self(foo, X).
+```logtalk
+proto::meta_self(foo, X).
 Execution context for the parent object meta/2 meta-predicate:
   self: proto
   this: parent
