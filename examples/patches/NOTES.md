@@ -32,3 +32,45 @@ to improve performance of applications that don't make use complementing
 categories and to provide a solution for preventing the use of categories
 to break object encapsulation. Note that the `complements` flag can be set
 on a per-object basis by using the `set_logtalk_flag/2` directive.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(patches(loader)).
+```
+
+Find categories that complement objects:
+
+```logtalk
+%%table
+complements_object(Category, Object).
+```
+
+<!--
+Category = patch, Object = proto.
+-->
+
+Verify the patch in the `patch` category for the predicate `init/0`
+defined in the object `proto`:
+
+```logtalk
+proto::init.
+```
+
+<!--
+parent init
+proto init
+
+true.
+-->
+
+Verify the imported category added to the `proto` object by the
+`patch` category:
+
+```logtalk
+proto::pet(Pet).
+```
+
+<!--
+Pet = cat.
+-->
