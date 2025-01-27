@@ -1689,6 +1689,10 @@ containing tests):
 	$ logtalk_allure_report
 	$ allure open
 
+The `allure open` command accepts `--host` and `--port` arguments in case
+their default values are not suitable (e.g., when running Logtalk in a remote
+host over a SSH connection).
+
 The `logtalk_allure_report` script supports command-line options to pass the
 tests directory (i.e., the directory where the `logtalk_tester` script was
 run), the directory where to collect all the xUnit report files for generating

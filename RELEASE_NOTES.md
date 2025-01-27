@@ -36,6 +36,8 @@ Documentation
 
 * UPDATED: Notes on the developer tools third-party dependency requirements.
 
+* UPDATED: The `lgtunit` tool documentation on generating Allure reports.
+
 * FIXED: The manual install instructions missing a `PATH` setting for the
 `packs` tool `lgtenv.sh` script.
 
