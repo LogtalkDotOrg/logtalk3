@@ -28,3 +28,65 @@ consequences for the implementation and optimization of `(^^)/1` calls. For
 more information on this example, please see the comments in the example
 source files. The example is inspired by the "Now You See Me" movie, whose
 main characters are four stage magicians known as the "Four Horsemen".
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(now_you_see_me(loader)).
+```
+
+Show all the horseman on stage
+
+```logtalk
+stage::list.
+```
+
+<!--
+danny
+merritt
+henley
+jack
+
+true.
+-->
+
+Hide the four horseman:
+
+```logtalk
+magic::hide.
+```
+
+<!--
+true.
+-->
+
+```logtalk
+stage::list.
+```
+
+<!--
+true.
+-->
+
+Again show all the horseman on stage:
+
+```logtalk
+magic::show.
+```
+
+<!--
+true.
+-->
+
+```logtalk
+stage::list.
+```
+
+<!--
+danny
+merritt
+henley
+jack
+
+true.
+-->

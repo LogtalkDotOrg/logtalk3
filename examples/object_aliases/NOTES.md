@@ -33,3 +33,39 @@ for the message-sending calls.
 
 This example also illustrates defining an alias for an object defined at
 runtime using a _parameter variable_.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(object_aliases(loader)).
+```
+
+Demonstration of using aliases for shorten object names and
+simplify trying alternative implementations:
+
+```logtalk
+experiments::stats(TotalLess, TotalEqual, TotalGreater), Total is TotalLess + TotalEqual + TotalGreater.
+```
+
+<!--
+Total = 42.
+-->
+
+Demonstration of using aliases for objects defined at runtime
+using parameters:
+
+```logtalk
+simple(<)::insert_top([3-c,1-a,2-b], Top).
+```
+
+<!--
+Top = 1-a.
+-->
+
+```logtalk
+simple(>)::insert_top([3-c,1-a,2-b], Top).
+```
+
+<!--
+Top = 3-c.
+-->

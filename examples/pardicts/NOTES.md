@@ -26,11 +26,44 @@ It illustrates using a SWI-Prolog native dictionary term for representing
 a parametric object parameters. This is accomplished simply by passing a
 dict as the single object parameter.
 
-Know issue
-----------
+## Know issue
 
 Don't use dot notation, `./2`, when working with dicts within objects and
 categories. SWI-Prolog provides different semantics for compiled versus
 asserted clauses that contain `./2` terms and that can clash with Logtalk
 dynamic binding caching and inlining optimizations (usually resulting
 in instantiation errors).
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(pardicts(loader)).
+```
+
+% access individual parameters:
+
+```logtalk
+obj(_{m:2,n:3})::sum(Sum),
+```
+
+<!--
+Sum == 5.
+-->
+
+```logtalk
+obj(_{m:2,n:3})::product(Sum),
+```
+
+<!--
+Sum == 6.
+-->
+
+% update individual parameters:
+
+```logtalk
+Dict = _{m:2,n:3}, obj(Dict)::double.
+```
+
+<!--
+Dict = _2524{m:4, n:6}.
+-->

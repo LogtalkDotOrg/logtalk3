@@ -29,3 +29,33 @@ by defining a set of predicates for accessing the individual parameters by a
 key (instead of using the Logtalk built-in `parameter/2` method that indexes
 individual parameters by position). The access predicates are goal-expanded
 to the corresponding ECLiPSe structure built-in predicates.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(parstructs(loader)).
+```
+
+Backtrackable update of an individual parameter:
+
+```logtalk
+obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::b_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
+```
+
+<!--
+b-9
+b-2
+Dict = p{a:1, b:2, c:3}, B = 2.
+-->
+
+Non-backtrackable update of an individual parameter:
+
+```logtalk
+obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::nb_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
+```
+
+<!--
+b-9
+b-9
+Dict = p{a:1, b:9, c:3}, B = 9.
+-->
