@@ -30,3 +30,9 @@ An extended discussion of this example can be found in the following blog
 post:
 
 https://logtalk.org/2019/11/05/user-defined-test-dialects.html
+
+Run the tests written using the DSL:
+
+```logtalk
+logtalk_load(tests_dsl(tester)).
+```

@@ -33,7 +33,7 @@ hook objects.
 
 For more details, please see the comments in the source files.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(expansion(loader)).

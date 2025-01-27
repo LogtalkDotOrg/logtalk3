@@ -41,7 +41,7 @@ simply fails as per the Closed World Assumption (CWA).
 See the comments in the `prototypes.lgt` and `classes.lgt` source files
 for further details.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(predicate_lookups(loader)).

@@ -25,7 +25,7 @@ This example illustrates how to work with metaclasses in Logtalk.
 See also the `reflection` and `roots` examples for a followup on
 using metaclasses.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(metaclasses(loader)).

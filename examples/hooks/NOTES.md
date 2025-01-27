@@ -26,7 +26,7 @@ hook support to (1) expand abbreviations in `info/1` directives; (2) convert
 `write/1` goals into `write_term/3` goals where the terms written are quoted
 and pre-processed by using `numbervars/3`.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(hooks(loader)).

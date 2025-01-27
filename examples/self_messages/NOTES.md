@@ -25,7 +25,7 @@ This simple programming example illustrates the semantics of messages
 to "self" (using the `::/1` control construct), i.e. to the object that
 received the message being processed.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(self_messages(loader)).

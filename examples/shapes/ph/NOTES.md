@@ -21,7 +21,7 @@ ________________________________________________________________________
 
 # shapes - ph
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(shapes_ph(loader)).

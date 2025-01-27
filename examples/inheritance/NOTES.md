@@ -51,7 +51,7 @@ The two object hierarchies are organized as follows:
 A second category named `interface`, imported by all objects except the 
 sub-class instances, allows us to query the objects about their interfaces.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(inheritance(loader)).

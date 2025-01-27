@@ -67,7 +67,7 @@ files. The reason for using the `.lgt` extension for these files is simply
 to  make it possible to load the example code using calls to the predicates 
 `logtalk_load/1-2`.
 
-By default, the benchmark tests on the `SCRIPT.txt` file use a list of 30
+By default, the benchmark test goals on the `NOTES.md` file use a list of 30
 elements as an argument to the list length and list reverse predicates. When
 dynamic binding is used, increasing the list length results in decreasing
 performance differences between plain Prolog and Logtalk as the length and

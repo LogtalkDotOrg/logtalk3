@@ -39,7 +39,7 @@ This example defines the following objects:
 - `c42`  
 	static instance of class `circle`
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(classmethods(loader)).

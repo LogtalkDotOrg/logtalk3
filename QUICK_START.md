@@ -117,12 +117,10 @@ walkthrough.
 
 1. Select an example and open its directory.
 
-2. Read the example `NOTES.md` file for a description of the example.
-
-3. Open the `SCRIPT.txt` file for instructions on how to load the example
-and for sample queries that you may try by copying and pasting them to
-your Prolog interpreter top-level.
-
+2. Read the example `NOTES.md` file for a description of the example,
+instructions on how to load it, and for sample queries that you may try
+by copying and pasting them to your Prolog interpreter top-level or by
+opening the `NOTES.md` file as a Jupyter notebook.
 
 Writing your own programs
 -------------------------

@@ -40,7 +40,7 @@ This example defines the following objects:
 - `instance3`  
 	instance of root specializing the inherited method `method/0`
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(instmethods(loader)).

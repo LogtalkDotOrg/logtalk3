@@ -24,7 +24,7 @@ ________________________________________________________________________
 For a description of this example, please see the comments in the
 `inlining.lgt` source file.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(inlining(loader)).

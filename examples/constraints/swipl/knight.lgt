@@ -145,7 +145,7 @@
 
 	/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	Examples:
-	See the "SCRIPT.txt" file for usage examples.
+	See the "NOTES.md" file for usage examples.
 	- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 :- end_object.

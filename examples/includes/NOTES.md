@@ -26,7 +26,7 @@ directive and an entity directive. It also illustrates how to use this
 directive to implement a simple persistency solution for an object
 database.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(includes(loader)).

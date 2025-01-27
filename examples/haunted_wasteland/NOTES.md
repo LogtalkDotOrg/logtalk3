@@ -29,7 +29,7 @@ https://adventofcode.com/2023/day/8
 The `test_files` directory contain sample inputs copied from the problem
 description.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(haunted_wasteland(loader)).

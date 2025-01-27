@@ -28,14 +28,14 @@ to work as expected in the correct context. This example also illustrates
 that "super" calls require dynamic binding when the called predicate is
 dynamic.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(super_calls(loader)).
 ```
 
-% the predicate get_local/1 calls the local/1 predicate in "self",
-% i.e. in the object that receives the get_local/1 message:
+The predicate `get_local/1` calls the `local/1` predicate in _self_,
+i.e. in the object that receives the `get_local/1` message:
 
 ```logtalk
 parent::get_local(Local).
@@ -53,8 +53,8 @@ prototype::get_local(Local).
 Local = prototype.
 -->
 
-% the prototype::correct/1 predicate makes a "super" call, which preserves
-% "self", to the inherited get_local/1 predicate:
+The `prototype::correct/1` predicate makes a _super_ call, which preserves
+_self_, to the inherited `get_local/1` predicate:
 
 ```logtalk
 prototype::correct(Local).
@@ -64,8 +64,8 @@ prototype::correct(Local).
 Local = prototype.
 -->
 
-% the prototype::wrong/1 predicate sends a message to the parent, which
-% (necessarily) resets "self" to the message receiver:
+The `prototype::wrong/1` predicate sends a message to the parent, which
+(necessarily) resets _self_ to the message receiver:
 
 ```logtalk
 prototype::wrong(Local).
@@ -75,7 +75,7 @@ prototype::wrong(Local).
 Local = parent.
 -->
 
-% "super" calls force dynamic binding when the called predicate is dynamic:
+The _super_ calls force dynamic binding when the called predicate is dynamic:
 
 ```logtalk
 bottom::value(Value).

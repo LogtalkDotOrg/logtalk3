@@ -42,7 +42,7 @@ rely in the calling order of event handlers and thus the check could be
 applied before or after the logging message that a transfer is being
 attempted.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(aspects(loader)).

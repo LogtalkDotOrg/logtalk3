@@ -25,7 +25,7 @@ This is a simple example illustrating the concept of _prototypes_ using
 elephants. A similar example is often found in knowledge representation
 discussions.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(elephants(loader)).

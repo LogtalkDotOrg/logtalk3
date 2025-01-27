@@ -24,7 +24,7 @@ ________________________________________________________________________
 This is a simple example illustrating the basics of defining and using
 protocols and categories.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(planets(loader)).

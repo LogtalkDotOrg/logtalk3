@@ -57,7 +57,7 @@ We redistribute these programs in good faith but understand that anyone
 repackaging the Logtalk distribution may choose to delete this example
 given the unclear legal status of some of these files.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(bench(loader)).

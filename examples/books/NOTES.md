@@ -34,7 +34,7 @@ For a description of this example, please see the comments in the
 
 See also the `missing_data `and `cascade` examples.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(books(loader)).

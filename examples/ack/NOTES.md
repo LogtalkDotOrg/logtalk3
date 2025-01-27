@@ -32,7 +32,7 @@ recursive function). For a description of this function see e.g.
 %versions
 ```
 
-% start by loading the example:
+Start by loading the example:
 
 ```{code-cell}
 logtalk_load(ack(loader)).

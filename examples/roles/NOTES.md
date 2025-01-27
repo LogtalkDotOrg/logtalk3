@@ -32,7 +32,7 @@ of them extending the other, its parent prototype.
 This simple example illustrates the different roles an object can play.
 See the comments in the `roles.lgt` file for detailed explanations.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(roles(loader)).

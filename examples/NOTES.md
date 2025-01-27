@@ -24,13 +24,13 @@ description of each example is included below.
 
 Each example folder contains a `NOTES.md` file and a loader helper file
 (usually named `loader.lgt`) that can be used to compile and load the
-example source code. Most examples also contain a `SCRIPT.txt` file with
-instructions on how to load the example and sample queries for you to try.
+example source code. The `NOTES.md` file of most examples can also be 
+open as a Jupyter notebook to execute the example sample queries.
 
 Most of these examples require objects, protocols, and categories that
 are defined in the Logtalk standard library or in other examples. See
-the `NOTES.md` files inside the library folder, plus the `NOTES.md`
-and `SCRIPT.txt` files inside each example folder.
+the `NOTES.md` files inside the library folder, plus the `NOTES.md` files
+inside each example folder.
 
 Some examples may redefine objects already loaded from other examples.
 It might be necessary to restart Logtalk after playing with some examples.
@@ -48,7 +48,7 @@ equivalent to 4 spaces).
 
 Most example folders contain two files, `tests.lgt` and `tester.lgt`. The
 file `tests.lgt` contains unit tests for the example. These unit tests
-are based on the sample queries found on the example `SCRIPT.txt` file.
+are based on the sample queries found on the example `NOTES.md` file.
 The file `tester.lgt` is a loader file that, when loaded, will automatically
 run all the example unit tests. You can automate running all these tests by
 calling the `logtalk_tester` shell script from the command-line (see the

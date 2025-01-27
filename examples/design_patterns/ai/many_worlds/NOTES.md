@@ -37,8 +37,8 @@ This is a pattern that is trivial in Logtalk but cumbersome at best
 using Prolog modules. There are two sensible implementations of this
 design pattern: using inheritance or using parametric objects. Both
 solutions are illustrated. Load the `loader.lgt` file to load the
-sample implementations and look into the `SCRIPT.txt` file for sample
-calls.
+sample implementations and look into the `NOTES.md` file for sample
+queries.
 
 In the parametric solution, we use a parametric object for the reasoning
 code and pass the dataset or knowledge base to reason about as a parameter.

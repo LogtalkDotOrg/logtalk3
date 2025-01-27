@@ -37,7 +37,7 @@ or viewpoints, `joe_sportsman`, `joe_employee`, `joe_chess_player`, and
 `joe_film_enthusiast`. Each descendant contains data related to a particular
 viewpoint about Joe.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(viewpoints(loader)).

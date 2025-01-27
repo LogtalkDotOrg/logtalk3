@@ -53,7 +53,7 @@ For details please see the comments in the `cascade.lgt` source file. The
 
 See also the `missing_data` and `books` examples.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(cascade(loader)).

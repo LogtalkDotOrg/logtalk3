@@ -29,7 +29,7 @@ This example defines a root class, `root`, and three instances, `instance1`,
 (using a dynamic predicate) and the corresponding setter and getter methods.
 The root class is used to store a default value for the instance variable.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(instvars(loader)).

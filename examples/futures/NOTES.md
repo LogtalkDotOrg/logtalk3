@@ -28,7 +28,7 @@ in Logtalk using its high-level multi-threading features. This example uses
 computations over lists as representative of long running operations that
 would benefit from asynchronous calls.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(futures(loader)).

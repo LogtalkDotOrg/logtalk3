@@ -64,7 +64,7 @@ to itself (as found in the definition of the `lookup/2` predicate in this
 example), removing the message-sending overhead, and thus providing the
 same performance as a local predicate call.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(units(loader)).

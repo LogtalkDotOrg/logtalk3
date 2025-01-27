@@ -26,7 +26,7 @@ objects in order to contrast with category-based composition. For a
 detailed description, please see the comments in the `laptops.lgt`
 source file.
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(laptops(loader)).

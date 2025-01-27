@@ -47,7 +47,7 @@ A web version of this paper is also available at:
 
 	http://www.cse.unt.edu/~tarau/research/PapersHTML/state.html
 
-% start by loading the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(assumptions(loader)).

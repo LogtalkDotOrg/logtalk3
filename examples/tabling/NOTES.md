@@ -32,3 +32,34 @@ predicate will result in the equivalent of multiple tables. The same will
 happen if the sender of the message is a parametric object and different
 parameterizations are used. A possible workaround is to always send the
 message from the same (non-parametric) object (e.g., `user`).
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(tabling(loader)).
+```
+
+Use tabling to cope with a left-recursive path finding predicate
+(the order of the solutions may depend on the tabling strategy):
+
+```logtalk
+paths::path(1, Y).
+```
+
+<!--
+Y = 2 ? ;
+Y = 4 ? ;
+Y = 3 ? ;
+Y = 5 ? ;
+false.
+-->
+
+Use tabling to avoid repeated calculation of Fibonacci numbers:
+
+```logtalk
+fibonacci::fib(30, F).
+```
+
+<!--
+F = 1346269.
+-->

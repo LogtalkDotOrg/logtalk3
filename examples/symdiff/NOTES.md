@@ -35,3 +35,39 @@ compound term. Accepted functors are `*`, `+`, `-`, `**`, and `log`.
 
 This example is still incomplete. For example, using sum distribution 
 property to simplify expressions is not yet implemented. 
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(symdiff(loader)).
+```
+
+Simplify the expression `x^1 + x0 - x1`:
+
+```logtalk
+(x**1 + x*0 - x*1)::simplify(S).
+```
+
+<!--
+S = 0.
+-->
+
+Differentiate and then simplify the expression `2x^3 + x^2 - 4x`:
+
+```logtalk
+(2*x**3 + x**2 - 4*x)::diff(D), D::simplify(S).
+```
+
+<!--
+D = 2*(3*x**2*1)+2*x**1*1-4*1, S = 2*(3*x**2)+2*x-4.
+-->
+
+Differentiate and then simplify the expression `ln(x^2 + 2x - 7) + 4x`:
+
+```logtalk
+(log(x**2 + 2*x - 7) + 4*x)::diff(D), D::simplify(S).
+```
+
+<!--
+D = (2*x**1*1+2*1)*(x**2+2*x-7)** -1+4*1, S = (2*x+2)*(x**2+2*x-7)** -1+4.
+-->
