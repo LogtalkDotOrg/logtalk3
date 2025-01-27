@@ -61,3 +61,37 @@ definitions better fitted to the requirements of specific applications.
 For a simpler version of this example, see the `reflection` example. If
 you are not familiar with the concept of metaclass used in this example,
 see the `metaclasses` example first.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(roots(loader)).
+```
+
+Some queries dealing with instance/class hierarchies:
+
+```logtalk
+object::ancestors(Ancestors).
+```
+
+<!--
+Ancestors = [class, abstract_class, object].
+-->
+
+```logtalk
+class::instances(Instances).
+```
+
+<!--
+Instances = [object, abstract_class, class].
+-->
+
+```logtalk
+class::superclass(Super).
+```
+
+<!--
+Super = abstract_class ;
+Super = object ;
+false.
+-->

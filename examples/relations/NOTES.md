@@ -25,3 +25,11 @@ This folder contains rewritten versions of some objects provided  with
 previous, 1.x versions, of Logtalk. They are intended to  help the
 conversion of applications from Logtalk 1.x to 2.x and to support most
 of the other examples provided with the current Logtalk package.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(relations(loader)).
+```
+
+The objects in this example are used by several of the other examples.

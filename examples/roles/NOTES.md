@@ -38,7 +38,7 @@ Start by loading the example:
 logtalk_load(roles(loader)).
 ```
 
-% prototypes can declare and defined their own predicates:
+Prototypes can declare and defined their own predicates:
 
 ```logtalk
 prototype::foo(Foo).
@@ -48,7 +48,7 @@ prototype::foo(Foo).
 Foo = 1.
 -->
 
-% derived prototypes inherit predicates from their parents:
+Derived prototypes inherit predicates from their parents:
 
 ```logtalk
 descendant::foo(Foo).
@@ -66,8 +66,8 @@ descendant::bar(X, Y).
 X = 1, Y = 2.
 -->
 
-% a class that is its own metaclass can access its own public predicates
-% using message-sending:
+A class that is its own metaclass can access its own public predicates
+using message-sending:
 
 ```logtalk
 superclass::foo(Foo).
@@ -77,9 +77,9 @@ superclass::foo(Foo).
 Foo = 1
 -->
 
-% a class that doesn't have a metaclass cannot receive any message as
-% the predicate declaration lookup to answer to validate the message
-% would start in the metaclass:
+A class that doesn't have a metaclass cannot receive any message as
+the predicate declaration lookup to answer to validate the message
+would start in the metaclass:
 
 ```logtalk
 subclass::current_predicate(_).
@@ -89,8 +89,8 @@ subclass::current_predicate(_).
 false.
 -->
 
-% an instance can receive messages for predicates declared in its
-% class(es) and in its class(es) superclass(es):
+An instance can receive messages for predicates declared in its
+class(es) and in its class(es) superclass(es):
 
 ```logtalk
 instance::current_predicate(P).

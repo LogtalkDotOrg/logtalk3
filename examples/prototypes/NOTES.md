@@ -31,3 +31,36 @@ Class-based OOP languages are far more popular and, unfortunately, many books
 and teaching materials equate OOP languages with class-based OOP languages.
 Some examples of other prototype-based OOP languages include Self, JavaScript,
 Io, NewtonScript, Lua, and Slate.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(prototypes(loader)).
+```
+
+Ask Alf about its attributes:
+
+```logtalk
+forall(alf::current_predicate(F/A), (functor(P,F,A), alf::P, writeq(P), nl)).
+```
+
+<!--
+chases('Lucky')
+favorite_food(cats)
+motto('Are you going to finish that sandwich?')
+name('Gordon Shumway')
+planet('Melmac')
+stomachs(8)
+
+true.
+-->
+
+Ask Rhonda about its love affairs:
+
+```logtalk
+rhonda::boyfriend(Melmacian).
+```
+
+<!--
+Melmacian = alf.
+-->
