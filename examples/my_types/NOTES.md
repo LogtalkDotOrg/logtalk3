@@ -24,3 +24,63 @@ ________________________________________________________________________
 This folder contains an example of defining new types for type-testing
 and type-checking purposes (what else?) using the user-extensible `type`
 library object.
+
+Load the example:
+
+```logtalk
+logtalk_load(my_types(loader)).
+```
+
+<!--
+true.
+-->
+
+% type-check temperature values in different units:
+
+```logtalk
+type::check(temperature(celsius), 38.7).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+type::check(temperature(fahrenheit), 101.2).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+type::check(temperature(kelvin), 307.4).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+type::valid(temperature(kelvin), -12.1).
+```
+
+<!--
+false.
+-->
+
+```logtalk
+catch(type::check(temperature(celsius), 38), Error, true).
+```
+
+<!--
+Error = type_error(float, 38).
+-->
+
+```logtalk
+catch(type::check(temperature(kelvin), -12.1, my_error_context), Error, true).
+```
+
+<!--
+Error = error(domain_error(property(float, [A]>>(A>=0.0)), -12.1), my_error_context).
+-->

@@ -67,3 +67,42 @@ required.
 For the default location of the `neo4j.conf` file, see:
 
 https://neo4j.com/docs/operations-manual/current/configuration/file-locations/
+
+Be sure to have installed Neo4j.
+
+Start by setting the Java CLASSPATH environment variable; three backend
+Prolog systems are supported (XVM, SWI-Prolog, and YAP) and for each one
+there's a Bash script file that sets the CLASSPATH environment variable
+when sourced; for example, when using SWI-Prolog (if necessary, edit the
+scripts for the location of the Neo4j JAR files):
+
+	$ cd "$LOGTALKUSER/examples/neo4j"
+	$ . set_classpath_swi.sh
+
+Second, start Logtalk and load the example:
+
+```logtalk
+logtalk_load(neo4j(loader)).
+```
+
+Print a greeting message:
+
+```logtalk
+hello_world('bolt://localhost:7687', 'neo4j', 'password')::print_greeting('Hello world!').
+```
+
+<!--
+Hello world!, from node 0
+
+true.
+-->
+
+Find the people Neo knows in the Matrix:
+
+```logtalk
+matrix('bolt://localhost:7687', 'neo4j', 'password')::neo_knows(Who).
+```
+
+<!--
+Who = ['Agent Smith', 'Cypher', 'Morpheus', 'Trinity'].
+-->
