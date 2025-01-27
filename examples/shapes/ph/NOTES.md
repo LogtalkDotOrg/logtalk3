@@ -27,11 +27,10 @@ Start by loading the example:
 logtalk_load(shapes_ph(loader)).
 ```
 
-% try some simple queries:
+Try some simple queries:
 
-
-% objects playing the role of prototypes define predicates for themselves and
-% their descendants:
+Objects playing the role of prototypes define predicates for themselves and
+their descendants:
 
 ```logtalk
 square::nsides(N).
@@ -49,7 +48,7 @@ square::area(A).
 A = 1.
 -->
 
-% don't use message broadcasting syntax in order to workaround a XSB parser bug
+Don't use message broadcasting syntax in order to workaround a XSB parser bug
 
 ```logtalk
 q1::color(Color), q1::side(Side), q1::position(X, Y).
@@ -59,7 +58,7 @@ q1::color(Color), q1::side(Side), q1::position(X, Y).
 Color = red, Side = 1, X = 0, Y = 0.
 -->
 
-% don't use message broadcasting syntax in order to workaround a XSB parser bug
+Don't use message broadcasting syntax in order to workaround a XSB parser bug
 
 ```logtalk
 q2::side(Side), q2::area(Area), q2::perimeter(Perimeter).

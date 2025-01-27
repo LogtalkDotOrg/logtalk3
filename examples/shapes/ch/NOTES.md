@@ -21,17 +21,16 @@ ________________________________________________________________________
 
 # shapes - ch
 
-% start by loading the example and the required library files:
+Start by loading the example and the required library files:
 
 ```logtalk
 logtalk_load(shapes_ch(loader)).
 ```
 
-% try some simple queries:
+Try some simple queries:
 
-
-% objects playing the role of classes define predicates for their (descendant)
-% instances, not for themselves:
+Objects playing the role of classes define predicates for their (descendant)
+instances, not for themselves:
 
 ```logtalk
 square::nsides(N).
@@ -41,7 +40,7 @@ square::nsides(N).
 error(existence_error(predicate_declaration, nsides(_)), square::nsides(N), user)
 -->
 
-% don't use message broadcasting syntax in order to workaround a XSB parser bug
+Don't use message broadcasting syntax in order to workaround a XSB parser bug
 
 ```logtalk
 q1::color(Color), q1::side(Side), q1::position(X, Y).
@@ -51,7 +50,7 @@ q1::color(Color), q1::side(Side), q1::position(X, Y).
 Color = red, Side = 1, X = 0, Y = 0.
 -->
 
-% don't use message broadcasting syntax in order to workaround a XSB parser bug
+Don't use message broadcasting syntax in order to workaround a XSB parser bug
 
 ```logtalk
 q2::side(Side), q2::area(Area), q2::perimeter(Perimeter).

@@ -31,3 +31,34 @@ reference pages on the the execution-context built-in methods.
 
 For an additional example using parametric objects, see the `sicstus`
 example.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(self_vs_this(loader)).
+```
+
+Illustrate the differences between _self_ and _this_:
+
+```logtalk
+aircraft::context.
+```
+
+<!--
+Running context/0 predicate definition in object "aircraft":
+  self: aircraft
+  this: aircraft
+  sender: user
+
+Running context/0 predicate definition in object "transport":
+  self: aircraft
+  this: transport
+  sender: user
+
+Running context/0 predicate definition in object "thing":
+  self: aircraft
+  this: thing
+  sender: user
+
+true.
+-->

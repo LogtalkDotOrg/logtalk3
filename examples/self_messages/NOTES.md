@@ -22,7 +22,7 @@ ________________________________________________________________________
 # self_messages
 
 This simple programming example illustrates the semantics of messages
-to "self" (using the `::/1` control construct), i.e. to the object that
+to _self_ (using the `::/1` control construct), i.e. to the object that
 received the message being processed.
 
 Start by loading the example:
@@ -31,8 +31,8 @@ Start by loading the example:
 logtalk_load(self_messages(loader)).
 ```
 
-% the predicate get_local/1 calls the local/1 predicate in "self",
-% i.e. in the object that receives the get_local/1 message:
+The predicate `get_local/1` calls the `local/1` predicate in _self_,
+i.e. in the object that receives the `get_local/1` message:
 
 ```logtalk
 parent::get_local(Local).
@@ -50,9 +50,9 @@ prototype::get_local(Local).
 Local = prototype.
 -->
 
-% the get_default/1 predicate also calls the default/1 predicate in
-% "self" but predicate is only defined in the "parent" object; its
-% definition is therefore inherited by the "prototype" object:
+The `get_default/1` predicate also calls the `default/1` predicate in
+_self_ but predicate is only defined in the _parent_ object; its
+definition is therefore inherited by the _prototype_ object:
 
 ```logtalk
 parent::get_default(Default).
@@ -70,9 +70,9 @@ prototype::get_default(Local).
 Default = parent.
 -->
 
-% the get_undefined/1 predicate also calls the undefined/1 predicate in
-% "self" but the predicate is only declared and not defined in either
-% object making the messages fail as per closed world assumption:
+The `get_undefined/1` predicate also calls the `undefined/1` predicate in
+_self_ but the predicate is only declared and not defined in either
+object making the messages fail as per closed world assumption:
 
 ```logtalk
 parent::get_undefined(_).
