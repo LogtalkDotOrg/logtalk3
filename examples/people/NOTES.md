@@ -35,7 +35,7 @@ when dealing with a very large number of objects due to its compact
 representation and/or connecting Prolog data tables with a Logtalk object
 hierarchies.
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(people(loader)).

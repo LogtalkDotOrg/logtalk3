@@ -34,7 +34,7 @@ Interactors are described in the paper:
 	url="http://www.cse.unt.edu/~tarau/research/LeanProlog/ArchitectureOfLeanProlog.pdf"
 }
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(interactors(loader)).

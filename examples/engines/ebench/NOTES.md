@@ -30,7 +30,7 @@ threads bugs are fixed.
 time(true). % autoload statistics library if using SWI-Prolog
 ```
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(ebench(loader)).

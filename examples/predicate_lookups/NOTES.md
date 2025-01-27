@@ -47,9 +47,9 @@ Start by loading the example:
 logtalk_load(predicate_lookups(loader)).
 ```
 
-% when sending a message to a prototype, the lookup for the predicate
-% declaration starts at the prototype itself; therefore, the following
-% message is valid:
+When sending a message to a prototype, the lookup for the predicate
+declaration starts at the prototype itself; therefore, the following
+message is valid:
 
 ```logtalk
 bike::frame(Material).
@@ -59,8 +59,8 @@ bike::frame(Material).
 Material = aluminum.
 -->
 
-% when a prototype doesn't contain a declaration for the predicate in
-% the message, the lookup continues in the prototype parent(s):
+When a prototype doesn't contain a declaration for the predicate in
+the message, the lookup continues in the prototype parent(s):
 
 ```logtalk
 bike::where(Where).
@@ -70,8 +70,8 @@ bike::where(Where).
 Where = land.
 -->
 
-% when sending a message to a prototype, the lookup for the predicate
-% definition starts at the prototype itself:
+When sending a message to a prototype, the lookup for the predicate
+definition starts at the prototype itself:
 
 ```logtalk
 mountain_bike::frame(Material).
@@ -81,15 +81,15 @@ mountain_bike::frame(Material).
 Material = carbon.
 -->
 
-% when a prototype doesn't contain a definition for the predicate in
-% the message, the lookup continues in the prototype parent(s):
+When a prototype doesn't contain a definition for the predicate in
+the message, the lookup continues in the prototype parent(s):
 
 ```logtalk
 mountain_bike::crewed.
 ```
 
-% we can use the built-in reflection predicates to query about predicate
-% declarations and definitions; for example:
+We can use the built-in reflection predicates to query about predicate
+declarations and definitions; for example:
 
 ```logtalk
 %%table
@@ -124,9 +124,9 @@ Property = number_of_rules(0)
 true.
 -->
 
-% when sending a message to an instance, the lookup for the predicate
-% declaration starts at the instance class; therefore, the following
-% message is valid:
+When sending a message to an instance, the lookup for the predicate
+declaration starts at the instance class; therefore, the following
+message is valid:
 
 ```logtalk
 paraglider::structure(Structure).
@@ -136,12 +136,12 @@ paraglider::structure(Structure).
 Structure = soft.
 -->
 
-% note that the lookup for the predicate definition starts in the
-% instance itself, resulting in the `structure(soft)` answer; 
+Note that the lookup for the predicate definition starts in the
+instance itself, resulting in the `structure(soft)` answer; 
 
-% when the instance class doesn't contain a declaration for the predicate
-% in the message, the lookup continues in the class superclasses; therefore,
-% the following message is also valid:
+When the instance class doesn't contain a declaration for the predicate
+in the message, the lookup continues in the class superclasses; therefore,
+the following message is also valid:
 
 ```logtalk
 sailplane::purpose(Purpose).
@@ -151,9 +151,9 @@ sailplane::purpose(Purpose).
 Purpose = fun.
 -->
 
-% when the instance doesn't contain a definition for the predicate in the
-% message, the lookup continues in the class and, if not found there, in
-% the class superclasses:
+When the instance doesn't contain a definition for the predicate in the
+message, the lookup continues in the class and, if not found there, in
+the class superclasses:
 
 ```logtalk
 sailplane::structure(Structure).
@@ -163,8 +163,8 @@ sailplane::structure(Structure).
 Structure = rigid.
 -->
 
-% we can use the built-in reflection predicates to query about predicate
-% declarations and definitions; for example:
+We can use the built-in reflection predicates to query about predicate
+declarations and definitions; for example:
 
 ```logtalk
 %%table

@@ -39,7 +39,7 @@ optimized mode, the multifile predicate clauses, which act as liking clauses,
 are inlined. The main downside of this solution is the boilerplate code that
 must be written (i.e., the multifile predicate definitions).
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(family(loader)).

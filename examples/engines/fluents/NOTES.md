@@ -42,7 +42,7 @@ Fluents are described in the paper:
 	url="http://dx.doi.org/10.1007/3-540-44957-4_82"
 }
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(fluents(loader)).

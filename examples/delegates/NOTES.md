@@ -29,7 +29,7 @@ information see:
 
 	http://rosettacode.org/wiki/Delegates#Logtalk
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(delegates(loader)).

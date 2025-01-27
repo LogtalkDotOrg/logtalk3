@@ -40,7 +40,7 @@ a single localization would be loaded at any given time, the code can be
 simplified by removing the country code parametrization from the core
 logic.
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(localizations(loader)).

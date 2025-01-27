@@ -29,7 +29,7 @@ see:
 
 	http://en.wikipedia.org/wiki/Collatz_conjecture
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(hailstone(loader)).

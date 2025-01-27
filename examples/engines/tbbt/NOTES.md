@@ -30,7 +30,7 @@ Currently this example requires ECLiPSe or SWI-Prolog. It should run also on
 XSB and YAP if and when these systems fix the bugs in their multi-threading
 support.
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(tbbt(loader)).

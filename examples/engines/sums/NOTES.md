@@ -26,7 +26,7 @@ was written by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It
 should run also on XSB and YAP if and when these systems bugs with coroutining
 and/or threads get fixed.
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(sums(loader)).

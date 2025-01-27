@@ -29,7 +29,7 @@ can then be imported into objects defining the actual families using basic
 calls the basic facts in _self_. Any number of family objects can be loaded
 at the same time.
 
-% load the example:
+Load the example:
 
 ```logtalk
 logtalk_load(family(loader)).
