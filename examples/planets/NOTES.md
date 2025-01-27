@@ -30,7 +30,7 @@ Start by loading the example:
 logtalk_load(planets(loader)).
 ```
 
-% compute the weights of the m1 and m2 objects on Earth and on Mars:
+Compute the weights of the m1 and m2 objects on Earth and on Mars:
 
 ```logtalk
 earth::weight(m1, W1).

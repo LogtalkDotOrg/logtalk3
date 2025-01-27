@@ -41,7 +41,7 @@ Load the example:
 logtalk_load(people(loader)).
 ```
 
-% create two new persons:
+Create two new persons:
 
 ```logtalk
 person::new(Id1, 'Oscar the Grouch', '1969/11/10'), person::new(Id2, 'Cookie Monster', '1969/12/02').
@@ -51,7 +51,7 @@ person::new(Id1, 'Oscar the Grouch', '1969/11/10'), person::new(Id2, 'Cookie Mon
 Id1 = o1, Id2 = o2.
 -->
 
-% print a description of a person:
+Print a description of a person:
 
 ```logtalk
 o2::print.
@@ -63,7 +63,7 @@ Birth:     1969/11/10
 true.
 -->
 
-% create a new teacher and a new student:
+Create a new teacher and a new student:
 
 ```logtalk
 teacher::new(Id3, 'Gordon Robinson', '1969/11/10', '3.2'), student::new(Id4, 'Roosevelt Franklin', '1969/11/10', 'Blue').
@@ -72,7 +72,7 @@ teacher::new(Id3, 'Gordon Robinson', '1969/11/10', '3.2'), student::new(Id4, 'Ro
 <!--
 Id3 = o3, Id4 = o4.
 
-% print a description of a student:
+Print a description of a student:
 
 ```logtalk
 o4::print.
@@ -85,7 +85,7 @@ Dormitory: Blue
 true.
 -->
 
-% try the alternative object representations using the object proxies:
+Try the alternative object representations using the object proxies:
 
 ```logtalk
 {student('Roosevelt Franklin', _, _)}::print.

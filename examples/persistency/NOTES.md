@@ -27,3 +27,137 @@ state and an include/1 directive to automatically restore the saved state
 when the object is loaded. The saved state file is created if it doesn't
 exist by the `loader.lgt` file before loading the example itself. See also
 the `serialization` example.
+
+Load the example:
+
+```logtalk
+logtalk_load(persistency(loader)).
+```
+
+<!--
+true.
+-->
+
+% no initial state:
+
+```logtalk
+persistency::state(S).
+no
+
+% add some terms:
+
+```logtalk
+persistency::add(a).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+persistency::add(b).
+```
+
+<!--
+true.
+-->
+
+% enumerate current terms:
+
+```logtalk
+persistency::state(S).
+```
+
+<!--
+S = a ;
+S = b ;
+false.
+-->
+
+% save the terms to permanent storage:
+
+```logtalk
+persistency::save.
+```
+
+<!--
+true.
+-->
+
+% halt the process:
+
+```logtalk
+halt.
+```
+
+Restart Logtalk and reload:
+
+```logtalk
+logtalk_load(persistency(loader)).
+```
+
+<!--
+true.
+-->
+
+Enumerate current terms:
+
+```logtalk
+%%table
+persistency::state(S).
+```
+
+<!--
+S = a ;
+S = b ;
+false.
+-->
+
+Add another term:
+
+```logtalk
+persistency::add(c).
+```
+
+<!--
+true.
+-->
+
+Save the terms to permanent storage:
+
+```logtalk
+persistency::save.
+```
+
+<!--
+true.
+-->
+
+Halt the process:
+
+```logtalk
+halt.
+
+Restart Logtalk and reload:
+
+```logtalk
+logtalk_load(persistency(loader)).
+```
+
+<!--
+true.
+-->
+
+Enumerate current terms:
+
+```logtalk
+%%table
+persistency::state(S).
+```
+
+<!--
+S = a ;
+S = b ;
+S = c ;
+false.
+-->

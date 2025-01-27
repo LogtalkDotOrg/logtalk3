@@ -25,3 +25,66 @@ This folder provides a Logtalk port of Prolog benchmarks based on list
 permutations. Some of the predicate definitions are purposively not
 tail-recursive. A non-optimized map list predicate is also used. The
 original code was written and contributed by Paul Tarau.
+
+Load the example:
+
+```logtalk
+logtalk_load(permutations(loader)).
+...
+
+Some example benchmark queries for backend Prolog compilers implementing
+the `time/1` timing predicate (e.g., SWI-Prolog, Trealla Prolog, YAP, XVM, 
+and others):
+
+```logtalk
+time(true).  % auto-load the predicate in the case of SWI-Prolog
+```
+
+<!--
+true.
+-->
+
+```logtalk
+time(permutations::backtracking(7)).
+```
+
+<!--
+% 5,945 inferences, 0.001 CPU in 0.001 seconds (99% CPU, 11388889 Lips)
+true.
+-->
+
+```logtalk
+time(permutations::list(7, _)).
+```
+
+<!--
+% 24,029 inferences, 0.002 CPU in 0.003 seconds (78% CPU, 11150348 Lips)
+true.
+-->
+
+```logtalk
+time(permutations::all(7, _)).
+```
+
+<!--
+% 10,993 inferences, 0.002 CPU in 0.003 seconds (79% CPU, 5091709 Lips)
+true.
+-->
+
+```logtalk
+time(permutations::map(7, _)).
+```
+
+<!--
+% 44,190 inferences, 0.006 CPU in 0.007 seconds (80% CPU, 7770353 Lips)
+true.
+-->
+
+```logtalk
+time(permutations::copy(7)).
+```
+
+<!--
+% 34,110 inferences, 0.005 CPU in 0.006 seconds (79% CPU, 7558165 Lips)
+true.
+-->

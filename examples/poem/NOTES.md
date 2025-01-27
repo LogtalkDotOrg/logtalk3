@@ -33,3 +33,15 @@ Original author contact:
 	Hants.    SO5 0ZN.
 
 	Tel. Romsey (0794) 515222 ext 311
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(poem(loader)).
+```
+
+To test this example call the predicate `run/0`:
+
+```logtalk
+poem::run.
+```
