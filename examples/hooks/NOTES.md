@@ -32,11 +32,11 @@ Start by loading the example:
 logtalk_load(hooks(loader)).
 ```
 
-% check the XML documenting file generated for "object"
-% for the results of the term_expansion/2 calls
+Check the XML documenting file generated for `object` for the results of the
+`term_expansion/2` calls
 
 
-% check the results of the goal_expansion/2 calls:
+Check the results of the `goal_expansion/2` calls:
 
 ```logtalk
 object::out.

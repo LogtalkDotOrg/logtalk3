@@ -23,3 +23,9 @@ ________________________________________________________________________
 
 No self-respecting programming language could do without a "Hello World"
 example!
+
+Just load the example and check the output message:
+
+```logtalk
+logtalk_load(hello_world(loader)).
+```

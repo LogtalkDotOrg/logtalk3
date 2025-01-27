@@ -57,7 +57,7 @@ Start by loading the example:
 logtalk_load(inheritance(loader)).
 ```
 
-% parent interface
+`parent` interface:
 
 ```logtalk
 parent::interface.
@@ -71,7 +71,7 @@ private/0 - private
 true.
 -->
 
-% prototype1 extends public::parent
+`prototype1` extends `public::parent`:
 
 ```logtalk
 prototype1::interface.
@@ -84,7 +84,7 @@ protected/0 - protected
 true.
 -->
 
-% prototype2 extends protected::parent
+`prototype2` extends `protected::parent`:
 
 ```logtalk
 prototype2::interface.
@@ -97,7 +97,7 @@ protected/0 - protected
 true.
 -->
 
-% prototype3 extends private::parent
+The `prototype3` prototype extends `private::parent`:
 
 ```logtalk
 prototype3::interface.
@@ -110,7 +110,7 @@ protected/0 - private
 true.
 -->
 
-% descendant1 extends public::prototype1
+The `descendant1` prototype extends `public::prototype1`:
 
 ```logtalk
 descendant1::interface.
@@ -123,7 +123,7 @@ protected/0 - protected
 true.
 -->
 
-% descendant2 extends public::prototype2
+The `descendant2` prototype extends `public::prototype2`:
 
 ```logtalk
 descendant2::interface.
@@ -136,7 +136,7 @@ protected/0 - protected
 true.
 -->
 
-% descendant3 extends public::prototype3
+The `descendant3` prototype extends `public::prototype3`
 
 ```logtalk
 descendant3::interface.
@@ -146,7 +146,7 @@ descendant3::interface.
 true.
 -->
 
-% object (root of the inheritance graph) interface
+Object (root of the inheritance graph) interface:
 
 ```logtalk
 root::interface.
@@ -160,7 +160,7 @@ private/0 - private
 true.
 -->
 
-% instance1 instantiates subclass1 that specializes public::root
+`instance1` instantiates `subclass1` that specializes `public::root`:
 
 ```logtalk
 instance1::interface.
@@ -173,7 +173,7 @@ public/0 - public
 true.
 -->
 
-% instance2 instantiates subclass2 that specializes protected::root
+`instance2` instantiates `subclass2` that specializes `protected::root`:
 
 ```logtalk
 instance2::interface.
@@ -186,7 +186,7 @@ public/0 - protected
 true.
 -->
 
-% instance3 instantiates subclass3 that specializes private::root
+`instance3` instantiates `subclass3` that specializes `private::root`:
 
 ```logtalk
 instance3::interface.

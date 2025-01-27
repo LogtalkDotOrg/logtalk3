@@ -30,7 +30,7 @@ Start by loading the example:
 logtalk_load(inlining(loader)).
 ```
 
-% check that the between/3 predicate is inlined:
+Check that the between/3 predicate is inlined:
 
 ```logtalk
 inlining::predicate_property(a(_,_), inline).

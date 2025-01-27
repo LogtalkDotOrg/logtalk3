@@ -32,7 +32,7 @@ Start by loading the example:
 logtalk_load(includes(loader)).
 ```
 
-% test the use of the Logtalk include/1 directive as a file directive:
+Test the use of the Logtalk include/1 directive as a file directive:
 
 ```logtalk
 findall(Vowel, vowel(Vowel), Vowels).
@@ -42,8 +42,8 @@ findall(Vowel, vowel(Vowel), Vowels).
 Vowels = [a,e,i,o,u].
 -->
 
-% test the use of the Logtalk include/1 directive as an entity directive
-% by getting a list of all capitals:
+Test the use of the Logtalk include/1 directive as an entity directive
+by getting a list of all capitals:
 
 ```logtalk
 countries::capitals(Capitals).
@@ -53,8 +53,8 @@ countries::capitals(Capitals).
 Capitals = [berlim, lisbon, madrid, paris, varsovia].
 -->
 
-% test the use of the Logtalk include/1 directive as an entity directive
-% by getting sets of countries with the same population:
+Test the use of the Logtalk `include/1` directive as an entity directive
+by getting sets of countries with the same population:
 
 ```logtalk
 setof(Countries, countries::same_population(Countries), Solutions).
@@ -64,7 +64,7 @@ setof(Countries, countries::same_population(Countries), Solutions).
 Solutions = [[france, poland], [germany, spain], [portugal]].
 -->
 
-% show the initial counter values, which may depend on previous runs:
+Show the initial counter values, which may depend on previous runs:
 
 ```logtalk
 counters::counter(Counter, Value).
@@ -80,7 +80,7 @@ Value = ... ;
 false.
 -->
 
-% increment one of the counters and save the counters database:
+Increment one of the counters and save the counters database:
 
 ```logtalk
 counters::inc_counter(b).

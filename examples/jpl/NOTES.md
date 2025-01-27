@@ -39,3 +39,95 @@ get a Java error saying that the AWT cannot be started. In alternative, try
 to run the example from within the SWI-Prolog macOS application instead
 of using the shell integration script. This issue is due to a macOS Java
 issue that's orthogonal to both SWI-Prolog/YAP and Logtalk.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(jpl(loader)).
+```
+
+Get the Java version by using the getProperty/1 static method:
+
+```logtalk
+java('java.lang.System', Version)::getProperty('java.version').
+```
+
+<!--
+Version = '1.7.0_51'.
+-->
+
+Get the value of the "pi" constant by accessing the 'PI' class field:
+
+```logtalk
+java('java.lang.Math')::get_field('PI', Pi).
+```
+
+<!--
+Pi = 3.141592653589793.
+-->
+
+Create a new instance of ArrayList and add some elements to it:
+
+```logtalk
+java('java.util.ArrayList')::new(ArrayList), java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')).
+```
+
+<!--
+true.
+-->
+
+Round-trip conversion:
+
+```logtalk
+java::terms_to_array([x,[1,a,7,[y,z]],k,[],3.14,foo(bar)], Array), java::array_to_terms(Array, List).
+```
+
+<!--
+Array = @'J#00000140321793636416', List = [x, [1, a, 7, [y, z]], k, [], 3.14, foo(bar)].
+-->
+
+Some GUI examples, adapted from the JPL distribution examples
+
+```logtalk
+color_chooser::color(Color).
+```
+
+<!--
+Color = @'J#00000140727398998200'.
+-->
+
+```logtalk
+flags_table::display.
+```
+
+<!--
+true.
+-->
+
+```logtalk
+jlist::display.
+```
+
+<!--
+true.
+-->
+
+```logtalk
+text_entry::text(Text).
+Text = ...
+```
+
+<!--
+true.
+-->
+
+Run some benchmarks comparing plain JPL calls with calls to Logtalk's thin
+abstraction layer:
+
+```logtalk
+benchmarks::run.
+```
+
+<!--
+...
+-->

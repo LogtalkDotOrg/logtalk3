@@ -39,7 +39,7 @@ logtalk_load(haunted_wasteland(loader)).
 true.
 -->
 
-% compute the number of steps (part 1) for the test_files/sample_1 file:
+Compute the number of steps (part 1) for the `test_files/sample_1` file:
 
 ```logtalk
 haunted_wasteland::steps_1('test_files/sample_1', Steps).
@@ -49,7 +49,7 @@ haunted_wasteland::steps_1('test_files/sample_1', Steps).
 Steps = 2.
 -->
 
-% compute the number of steps (part 1) for the test_files/input file:
+Compute the number of steps (part 1) for the `test_files/input` file:
 
 ```logtalk
 haunted_wasteland::steps_1('test_files/input', Steps).
@@ -59,7 +59,7 @@ haunted_wasteland::steps_1('test_files/input', Steps).
 Steps = 21409.
 -->
 
-% compute the total number of steps (part 2) for the test_files/input file:
+Compute the total number of steps (part 2) for the `test_files/input` file:
 
 ```logtalk
 haunted_wasteland::steps_2('test_files/input', Steps).

@@ -35,7 +35,7 @@ Load the example:
 logtalk_load(hailstone(loader)).
 ```
 
-% generating a sequence:
+Generating a sequence:
 
 ```logtalk
 hailstone::generate_sequence(10, Sequence).
@@ -54,7 +54,7 @@ hailstone::write_sequence(10).
 true.
 -->
 
-% calculating the length of a sequence:
+Calculating the length of a sequence:
 
 ```logtalk
 hailstone::sequence_length(27, Length).
@@ -64,7 +64,7 @@ hailstone::sequence_length(27, Length).
 Length = 112.
 -->
 
-% finding the longest sequence in an interval:
+Finding the longest sequence in an interval:
  
 ```logtalk
 hailstone::longest_sequence(1, 100000, N, Length).

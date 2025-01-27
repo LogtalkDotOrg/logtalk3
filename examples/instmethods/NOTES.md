@@ -46,7 +46,7 @@ Start by loading the example:
 logtalk_load(instmethods(loader)).
 ```
 
-% instance1 definition for method "method" is found in its class:
+The `instance1` definition for method `method/0` is found in its class:
 
 ```logtalk
 instance1::method.
@@ -58,7 +58,7 @@ This is the default definition for the method, stored in class root.
 true.
 -->
 
-% instance2 overrides definition of method "method"
+The `instance2` instance overrides the definition of method `method/0`:
 
 ```logtalk
 instance2::method.
@@ -70,7 +70,7 @@ This is an overriding definition stored in the instance2 instance itself.
 true.
 -->
 
-% instance3 specializes definition of method "method"
+The `instance3` instance specializes the definition of method `method/0`:
 
 ```logtalk
 instance3::method.

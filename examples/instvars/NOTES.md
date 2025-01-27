@@ -35,8 +35,8 @@ Start by loading the example:
 logtalk_load(instvars(loader)).
 ```
 
-% get the value of the instance variable for each instance (the default value,
-% stored in the instances class, is returned):
+Get the value of the instance variable for each instance (the default value,
+stored in the instances class, is returned):
 
 ```logtalk
 instance1::ivar(Value1), instance2::ivar(Value2), instance3::ivar(Value3).
@@ -46,13 +46,13 @@ instance1::ivar(Value1), instance2::ivar(Value2), instance3::ivar(Value3).
 Value1 = 0, Value2 = 0, Value3 = 0.
 -->
 
-% change the value of the instance variable for instance1:
+Change the value of the instance variable for `instance1`:
 
 ```logtalk
 instance1::set_ivar(1).
 ```
 
-% get the value of the instance variable for each instance:
+Get the value of the instance variable for each instance:
 
 ```logtalk
 instance1::ivar(Value1), instance2::ivar(Value2), instance3::ivar(Value3).

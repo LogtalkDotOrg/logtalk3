@@ -34,7 +34,7 @@ Start by loading the example:
 logtalk_load(futures(loader)).
 ```
 
-% use the asynchronous calls based predicate definition:
+Use the asynchronous calls based predicate definition:
 
 ```logtalk
 integer::sequence(1,100,List1), integer::sequence(101,200,List2), list_math::product_sum(List1,List2,Result).
@@ -44,7 +44,7 @@ integer::sequence(1,100,List1), integer::sequence(101,200,List2), list_math::pro
 Result = 76002500.
 -->
 
-% use the threaded engines based predicate definition:
+Use the threaded engines based predicate definition:
 
 ```logtalk
 integer::sequence(1,100,List1), integer::sequence(101,200,List2), list_math::product_sum_engines(List1,List2,Result).
