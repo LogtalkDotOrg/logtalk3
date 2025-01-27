@@ -39,3 +39,10 @@ meta-predicates, please see the paper:
 	publisher = "Springer-Verlag",
 	address = "Berlin Heidelberg",
 }
+
+% simply load the example and check the compilation and runtime
+% error messages:
+
+```logtalk
+logtalk_load(securemp(loader)).
+```

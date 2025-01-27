@@ -28,3 +28,29 @@ https://adventofcode.com/2023/day/4
 
 The `test_files` directory contain a sample input copied from the problem
 description.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(scratchcards(loader)).
+```
+
+Compute the points for the test_files/sample file:
+
+```logtalk
+scratchcards::points('test_files/sample', Points).
+```
+
+<!--
+Points = 13.
+-->
+
+Compute the total number of scratchcards for the test_files/input file:
+
+```logtalk
+scratchcards::total('test_files/input', Total).
+```
+
+<!--
+Total = 6874754.
+-->
