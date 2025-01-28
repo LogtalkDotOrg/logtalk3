@@ -188,3 +188,12 @@ JupyterLab interface and type in a cell:
 
 Executing the cell (by default, Shift-Enter) should print the Logtalk version,
 the backend version, and the Logtalk Jupyter kernel version.
+
+
+Running the examples documentation as Jupyter notebooks
+-------------------------------------------------------
+
+Most of the examples `NOTES.md` files can be open as Jupyter notebooks:
+
+	cd $LOGTALKUSER/examples
+	jupyter-lab --allow-root --NotebookApp.token='' --NotebookApp.password=''
