@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# bench
 
 This folder provides a classic set of plain Prolog benchmark programs and
 Logtalk wrappers for those programs. Loading this example and an individual
@@ -55,3 +70,85 @@ often shared in an academic setting without much concern about licensing.
 We redistribute these programs in good faith but understand that anyone
 repackaging the Logtalk distribution may choose to delete this example
 given the unclear legal status of some of these files.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(bench(loader)).
+```
+
+Run all tests, repeating each one 1000 times
+
+```logtalk
+run.
+```
+
+Run all tests, repeating each one N times, e.g. 2000 times
+
+```logtalk
+run(2000).
+```
+
+Run a specific benchmark, e.g. "nreverse", 10000 times
+
+```logtalk
+run(nreverse, 10000).
+```
+
+If you want to compare Logtalk and plain Prolog versions of an individual
+benchmark, load also its Prolog file (in this case, you must quit and
+restart Logtalk for each testing scenario); for example:
+
+```logtalk
+['$LOGTALKUSER/examples/bench/boyer.pl'].
+```
+
+<!--
+true.
+-->
+
+You can also use the `lgtunit` tool benchmark predicates directly; for
+example:
+
+```logtalk
+lgtunit::benchmark(boyer::top,1000,Time).
+```
+
+<!--
+Time = ...
+
+true.
+-->
+
+For accurate timings of compiled `(::)/2` goals, the `lgtunit::benchmark/3`
+calls should be made from compiled code in order to avoid the top-level
+interpretation of the goals; an handy alternative is to use:
+
+```logtalk
+logtalk<<(lgtunit::benchmark(boyer::top,1000,Time)).
+```
+
+<!--
+Time = ...
+
+true.
+-->
+
+Some Prolog compilers such as SWI-Prolog, Trealla Prolog, XVM, and YAP
+provide a handy `time/1` predicate that may also be used in alternative
+to the `lgtunit` benchmark predicates (the adapter files for these two
+systems ensure that `(::)/2` goals in the argument of the time/1 are
+fully compiled prior to calling them so that we benchmark the code
+instead of the Logtalk compiler):
+
+```logtalk
+time(true).  % autoload if necessary
+```
+
+```logtalk
+time((between(1,1000,_),top,fail;true)).
+```
+
+```logtalk
+time((between(1,1000,_),boyer::top,fail;true)).
+```

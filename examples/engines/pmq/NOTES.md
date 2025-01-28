@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# engines - pmq
 
 This folder contains an implementation of a message priority queue using
 a perpetual threaded engine holding the priority queue. At any moment, we
@@ -29,3 +43,105 @@ A variant is also provided that splits top messages from normal messages
 into separate queues. In this case, asking for a list of the pending
 messages returns a list with top messages before the normal messages but
 keeping the message sent order otherwise.
+
+Start by loading the example and the required libraries:
+
+```logtalk
+logtalk_load(pmq(loader)).
+```
+
+<!--
+true.
+-->
+
+Send some messages to the priority queue:
+
+```logtalk
+pmq::(send(13-let), send(5-out), send(11-the), send(17-who), send(7-dogs)).
+```
+
+<!--
+true
+-->
+
+Retrieve the current messages sorted by priority:
+
+```logtalk
+pmq::messages(Messages).
+```
+
+<!--
+Messages = [who, let, the, dogs, out].
+-->
+
+After retrieving the messages the priority queue is empty until new messages
+are received:
+
+```logtalk
+pmq::messages(Messages).
+```
+
+<!--
+Messages = [].
+-->
+
+Send the next batch of messages:
+
+```logtalk
+pmq::(send(8-fun), send(11-have), send(3-':-)')).
+-->
+
+
+Retrieve the current messages sorted by priority:
+
+```logtalk
+pmq::messages(Messages).
+```
+
+<!--
+Messages = [have, fun, ':-)'].
+-->
+
+
+Same messages but to an alternative implementation that splits top messages
+from normal messages instead of sorting all messages by priority:
+
+```logtalk
+split::(send(13-let), send(5-out), send(11-the), send(17-who), send(7-dogs)).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+split::messages(List).
+```
+
+<!--
+List = [let, the, who, out, dogs].
+-->
+
+```logtalk
+split::messages(List).
+```
+
+<!--
+List = [].
+-->
+
+```logtalk
+split::(send(8-fun), send(11-have), send(3-':-)')).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+split::messages(List).
+```
+
+<!--
+List = [have, fun, ':-)'].
+-->

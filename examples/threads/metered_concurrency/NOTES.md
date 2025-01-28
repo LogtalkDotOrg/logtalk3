@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# threads - metered_concurrency
 
 This folder contains an implementation of a metered concurrency task and it
 was coded for a contribution to the Rosetta Code website.
@@ -26,3 +41,34 @@ was coded for a contribution to the Rosetta Code website.
 For more information see:
 
 	https://rosettacode.org/wiki/Metered_concurrency#Logtalk
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(metered_concurrency(loader)).
+```
+
+Run example:
+
+```logtalk
+metered_concurrency::run.
+```
+
+<!--
+Worker 1 acquired semaphore
+Worker 6 acquired semaphore
+Worker 1 releasing semaphore
+Worker 2 acquired semaphore
+Worker 6 releasing semaphore
+Worker 5 acquired semaphore
+Worker 2 releasing semaphore
+Worker 7 acquired semaphore
+Worker 5 releasing semaphore
+Worker 3 acquired semaphore
+Worker 7 releasing semaphore
+Worker 4 acquired semaphore
+Worker 3 releasing semaphore
+Worker 4 releasing semaphore
+
+true.
+-->

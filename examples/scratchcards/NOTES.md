@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# scratchcards
 
 This folder contains a Logtalk solution for the Advent of Code 2023 Day 4
 problem:
@@ -28,3 +42,29 @@ https://adventofcode.com/2023/day/4
 
 The `test_files` directory contain a sample input copied from the problem
 description.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(scratchcards(loader)).
+```
+
+Compute the points for the test_files/sample file:
+
+```logtalk
+scratchcards::points('test_files/sample', Points).
+```
+
+<!--
+Points = 13.
+-->
+
+Compute the total number of scratchcards for the test_files/input file:
+
+```logtalk
+scratchcards::total('test_files/input', Total).
+```
+
+<!--
+Total = 6874754.
+-->

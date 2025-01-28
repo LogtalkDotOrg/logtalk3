@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# units
 
 This folder contains a Logtalk version of a GNU Prolog/CX unit example, a
 simple dictionary implementation using a list of key-value pairs:
@@ -63,3 +77,29 @@ The Logtalk compiler optimizes message-sending calls sent from an object
 to itself (as found in the definition of the `lookup/2` predicate in this
 example), removing the message-sending overhead, and thus providing the
 same performance as a local predicate call.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(units(loader)).
+```
+
+Get the dict:
+
+```logtalk
+dict([a=1,b=2,c=3,d=4,e=5])::dict(Dict).
+```
+
+<!--
+Dict = [a=1,b=2,c=3,d=4,e=5].
+-->
+
+Perform a dict lookup:
+
+```logtalk
+dict([a=1,b=2,c=3,d=4,e=5])::lookup(c, C).
+```
+
+<!--
+C = 3.
+-->

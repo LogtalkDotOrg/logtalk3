@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Command
@@ -31,3 +46,66 @@ This pattern can be used with both classes and prototypes.
 The simple way to implement this design pattern in Logtalk is to represent
 commands as parametric object identifiers with the parametric objects
 implementing the command protocol.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/command/loader')).
+```
+
+First, test the basic functionality for light:
+
+```logtalk
+light(l1)::turn_on.
+```
+
+<!--
+The light(l1) is on
+true.
+-->
+
+Commands are represented using parametric object identifiers:
+
+```logtalk
+flip_up_command(light(l1))::execute.
+```
+
+<!--
+The light(l1) is on
+true.
+-->
+
+Use the client/invoker object to store_and_execute commands:
+
+```logtalk
+switch::(
+		store_and_execute(flip_up_command(light(kitchen))),
+		store_and_execute(flip_up_command(coffee_maker))
+	).
+```
+
+<!--
+The light(kitchen) is on
+The coffee_maker is on
+true.
+-->
+
+```logtalk
+switch::history.
+```
+
+<!--
+flip_up_command(light(kitchen))
+flip_up_command(coffee_maker)
+true.
+-->
+
+```logtalk
+switch::reply_history.
+```
+
+<!--
+The light(kitchen) is on
+The coffee_maker is on
+true.
+-->

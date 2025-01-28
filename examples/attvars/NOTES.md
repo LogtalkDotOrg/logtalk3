@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# attvars
 
 This an example of using attributed variables within Logtalk objects and
 categories. It requires the use of a backend Prolog compiler with support
@@ -52,3 +66,35 @@ categories).
 second argument not corresponding to the enclosing entity are compiled as
 references to other Logtalk entities. If you need to refer to a Prolog
 module instead, wrap the predicate call using the `{}/1` control construct.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(attvars(loader)).
+```
+
+Simple finite, typed, domain reasoner:
+
+```logtalk
+domain(atom)::domain(X, [a,b]), X = c.
+```
+
+<!--
+false.
+-->
+
+```logtalk
+domain(integer)::domain(X, [1,2]), domain(integer)::domain(X, [1,3]).
+```
+
+<!--
+X = 1.
+-->
+
+```logtalk
+domain(integer)::domain(X, [1,2,3]), domain(integer)::domain(X, [1,3]).
+```
+
+<!--
+domain(X, [1, 3]).
+-->

@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Observer
@@ -43,3 +58,23 @@ restriction exists to ensure that events cannot be used to break
 encapsulation. When this limitation is an issue, note that the
 Logtalk standard library includes an implementation of the Smalltalk
 dependents mechanism that can be used in alternative.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/observer/loader')).
+```
+
+Trigger an observed event:
+
+```logtalk
+subject::ping(Reply).
+```
+
+<!--
+user is asking observer:  ping(_992)
+observer replied to user: ping(pong)
+Reply = pong
+
+true.
+-->

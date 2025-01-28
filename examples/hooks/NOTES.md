@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,12 +31,34 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# hooks
 
 This folder contains a very simple example of using the Logtalk compiler 
 hook support to (1) expand abbreviations in `info/1` directives; (2) convert
 `write/1` goals into `write_term/3` goals where the terms written are quoted
 and pre-processed by using `numbervars/3`.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(hooks(loader)).
+```
+
+Check the XML documenting file generated for `object` for the results of the
+`term_expansion/2` calls
+
+
+Check the results of the `goal_expansion/2` calls:
+
+```logtalk
+object::out.
+```
+
+<!--
+'A'
+x(A, A)
+3
+true.
+-->

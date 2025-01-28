@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Multiton
@@ -39,3 +54,65 @@ the definition of the set of named instances at runtime by extending the
 protocol of the multiton with the necessary predicates. Also to simplify,
 the sample code uses the named instance identifiers as the access keys.
 This could also be changed to use instead a dictionary.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('creational/multiton/loader')).
+```
+
+Get a list of all named instances:
+
+```logtalk
+multiton::instances(Instances).
+```
+
+<!--
+Instances = [i1, i2, i3].
+-->
+
+Verify that no named instance exists until is actually requested:
+
+```logtalk
+\+ current_object(i1), \+ current_object(i2), \+ current_object(i3).
+```
+
+<!--
+true.
+-->
+
+Request to the multiton class one of its named instances:
+
+```logtalk
+multiton::instance(i2).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+current_object(i2).
+```
+
+<!--
+true.
+-->
+
+Try to request an instance that is not a member of the named instances:
+
+```logtalk
+multiton::instance(foobar).
+```
+
+<!--
+false.
+-->
+
+```logtalk
+current_object(foobar).
+```
+
+<!--
+false.
+-->

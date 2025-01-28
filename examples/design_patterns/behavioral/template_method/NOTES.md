@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Template Method
@@ -36,3 +51,39 @@ objects. It also allows easy definition of default definitions for the
 algorithm steps that can be inherited, redefined, or specialized in the
 descendant objects. The predicates implementing the algorithm steps are
 often declared as protected.
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/template_method/loader')).
+```
+
+Print the steps for a car trip:
+
+```logtalk
+travel_by_car::journey.
+```
+
+<!--
+Rent a car
+Put book, pajamas, and toothbrush in luggage
+Drive car to destination
+Put book and pajamas in nightstand and toothbrush in bathroom
+
+true.
+-->
+
+Print the steps for a airplane trip:
+
+```logtalk
+travel_by_airplane::journey.
+```
+
+<!--
+Make a flight reservation
+Put book, pajamas, and toothbrush in luggage
+Check luggage weight against airline policy
+Go to the airport and board the airplane
+Put book and pajamas in nightstand and toothbrush in bathroom
+
+true.
+-->

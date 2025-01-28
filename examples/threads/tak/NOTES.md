@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,69 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# threads - tak
 
 This folder contains single-threaded and multi-threaded implementations 
 of the Takeuchi function (recursive arithmetic). The multi-threaded version 
 uses three threads per recursive call.
+
+NOTE: some example queries below use a proprietary predicate `time/1` in
+order to get accurate goal times. This predicate is found on several Prolog
+systems. For other Prolog compilers, replace the `time/1` call by any
+appropriate timing calls (e.g., `cputime/0`).
+
+Load the example:
+
+```logtalk
+logtalk_load(tak(loader)).
+```
+
+Single-threaded version:
+
+```logtalk
+time(tak(1)::tak(18, 12, 6, R)).
+```
+
+<!--
+% 254,476 inferences, 0.06 CPU in 0.07 seconds (91% CPU, 4241267 Lips)
+
+R = 7.
+-->
+
+Multi-threaded version:
+
+```logtalk
+time(tak(3)::tak(18, 12, 6, R)).
+```
+
+<!--
+% 714 inferences, 0.06 CPU in 0.05 seconds (121% CPU, 11900 Lips)
+
+R = 7.
+-->
+
+Single-threaded version:
+
+```logtalk
+time(tak(1)::tak(21, 14, 7, R)).
+```
+
+<!--
+% 1,583,068 inferences, 0.52 CPU in 0.61 seconds (86% CPU, 3044362 Lips)
+
+R = 14.
+-->
+
+Multi-threaded version:
+
+```logtalk
+time(tak(3)::tak(21, 14, 7, R)).
+```
+
+<!--
+% 106 inferences, 0.48 CPU in 0.38 seconds (127% CPU, 221 Lips)
+
+R = 14.
+-->

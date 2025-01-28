@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+-->
 
 This folder contains a Logtalk version of a free nodes example described
 in the Net-Clause Language (NCL) manual, available at:
@@ -28,3 +40,19 @@ https://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/prolog/impl/parallel
 
 The Logtalk version uses parametric objects to represent the concept of
 "net-variables" described in the paper as "global logical variables".
+
+Load the example:
+
+```logtalk
+logtalk_load(free_nodes(loader)).
+```
+
+Run the example:
+
+```logtalk
+free(_,_,_)::(a(1), b(2), c(C)).
+```
+
+<!--
+C = 1+2.
+-->

@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,50 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# threads - ping_pong
 
 This folder contains a simple multi-threaded implementation of a ping-pong
 game using a thread per player and threaded notifications to communicate
 moves. The player threads are automatically terminated when the game is over.
+
+Start by loading the loading the example:
+
+```logtalk
+logtalk_load(ping_pong(loader)).
+```
+
+Run example:
+
+```logtalk
+ping_pong::play(1).
+```
+
+<!--
+Ping ...
+.... Pong
+Game over!
+
+true.
+-->
+
+```logtalk
+ping_pong::play(5).
+```
+
+<!--
+Ping ...
+.... Pong
+Ping ...
+.... Pong
+Ping ...
+.... Pong
+Ping ...
+.... Pong
+Ping ...
+.... Pong
+Game over!
+
+true.
+-->

@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# named_databases
 
 This example implements "named databases", providing a prototype implementation
 for a *portable* API based on Lean Prolog implementation of this functionality.
@@ -91,3 +105,101 @@ API description:
 
 - `db_clear(Database)`  
 	Abolishes all dynamic predicates
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(named_databases(loader)).
+```
+
+Create a new named database:
+
+```logtalk
+db_create(my_db).
+```
+
+<!--
+true.
+-->
+
+Add some facts to the new database:
+
+```logtalk
+db_dynamic(my_db, foo/1).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+db_assertz(my_db, foo(1)), db_assertz(my_db, foo(2)), db_assertz(my_db, foo(3)).
+```
+
+<!--
+true.
+-->
+
+Prove goals using the named database:
+
+```logtalk
+%%table
+db_call(my_db, foo(X)).
+```
+
+<!--
+X = 1 ;
+X = 2 ;
+X = 3.
+-->
+
+```logtalk
+db_once(my_db, foo(X)).
+```
+
+<!--
+X = 1.
+-->
+
+Save all dynamic predicates in the database to a file:
+
+```logtalk
+db_save(my_db, 'my_db.pl').
+```
+
+<!--
+true.
+-->
+
+Clear the named database:
+
+```logtalk
+db_clear(my_db).
+```
+
+<!--
+true.
+-->
+
+Load the saved file into a different database:
+
+```logtalk
+db_create(foo_db), db_load(foo_db, 'my_db.pl').
+```
+
+<!--
+true.
+-->
+
+Check that the saved facts are there by retracting them one by one:
+
+```logtalk
+%%table
+db_retract(foo_db, foo(X)).
+```
+
+<!--
+X = 1 ;
+X = 2 ;
+X = 3.
+-->

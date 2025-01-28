@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# threads - team
 
 This folder contains an implementation of a synchronous concurrency task
 and it was coded for a contribution to the Rosetta Code website:
@@ -36,3 +51,31 @@ and it was coded for a contribution to the Rosetta Code website:
 For more information see:
 
 	https://rosettacode.org/wiki/Synchronous_concurrency
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(team(loader)).
+```
+
+Start the file reader and the line writer, each one running in its own thread:
+
+```logtalk
+team::start.
+```
+
+<!--
+a(0)
+a(1)
+a(2)
+a(3)
+a(4)
+a(5)
+a(6)
+a(7)
+a(8)
+a(9)
+Number of lines: 10
+
+true.
+-->

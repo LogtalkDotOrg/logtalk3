@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Factory Method
@@ -30,3 +45,39 @@ This pattern can be used with both classes and prototypes.
 
 The sample implementation uses prototypes for simplicity with categories
 playing a similar role to abstract classes.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('creational/factory_method/loader')).
+```
+
+Create an ordinary maze game:
+
+```logtalk
+ordinary_maze_game::new(Game), Game::play.
+```
+
+<!--
+Playing using:
+o2 - Ordinary room
+o3 - Ordinary room
+Game = o1
+
+true.
+-->
+
+Create a magic maze game:
+
+```logtalk
+magic_maze_game::new(Game), Game::play.
+```
+
+<!--
+Playing using:
+o5 - Magic room
+o6 - Magic room
+Game = o4
+
+true.
+-->

@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
+# poem
 
 The example in this folder is an adaptation of an example of POEM, an 
 object-oriented extension to Prolog developed by Ben Staveley-Taylor.
@@ -30,3 +47,15 @@ Original author contact:
 	Hants.    SO5 0ZN.
 
 	Tel. Romsey (0794) 515222 ext 311
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(poem(loader)).
+```
+
+To test this example call the predicate `run/0`:
+
+```logtalk
+poem::run.
+```

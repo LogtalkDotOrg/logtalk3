@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# trebuchet
 
 This folder contains a Logtalk solution for the Advent of Code 2023 Day 1
 problem:
@@ -31,3 +45,23 @@ Part 1, comment out the grammar rules for digits as letters.
 
 The `test_files` directory contain sample inputs copied from the problem
 description.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(trebuchet(loader)).
+```
+
+<!--
+true.
+-->
+
+Compute the calibration for the `sample_1` file:
+
+```logtalk
+trebuchet::solution('test_files/sample_1', Calibration).
+```
+
+<!--
+Calibration = 142.
+-->

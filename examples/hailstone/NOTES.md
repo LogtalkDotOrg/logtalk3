@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# hailstone
 
 This folder contains an implementation of the Hailstone sequence and it was
 coded for a contribution to the Rosetta Stone website. For more information
@@ -27,3 +42,48 @@ see:
 	http://rosettacode.org/wiki/Hailstone_sequence
 
 	http://en.wikipedia.org/wiki/Collatz_conjecture
+
+Load the example:
+
+```logtalk
+logtalk_load(hailstone(loader)).
+```
+
+Generating a sequence:
+
+```logtalk
+hailstone::generate_sequence(10, Sequence).
+```
+
+<!--
+Sequence = [10, 5, 16, 8, 4, 2, 1].
+-->
+
+```logtalk
+hailstone::write_sequence(10).
+```
+
+<!--
+10 5 16 8 4 2 1
+true.
+-->
+
+Calculating the length of a sequence:
+
+```logtalk
+hailstone::sequence_length(27, Length).
+```
+
+<!--
+Length = 112.
+-->
+
+Finding the longest sequence in an interval:
+ 
+```logtalk
+hailstone::longest_sequence(1, 100000, N, Length).
+```
+
+<!--
+N = 77031, Length = 351.
+-->

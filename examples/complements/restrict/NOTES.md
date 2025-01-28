@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,12 +31,63 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# complements (restrict)
 
 This folder contains an example that show how to use a category to
 explicitly complement an existing object compiled with the `complements`
 flag set to `restrict`. With this setting, a category can only add new
 functionality to the complemented object.
+
+Start by loading the non-patched vault objects:
+
+```logtalk
+logtalk_load(complements_restrict(vaults)).
+```
+
+Open the `my_vault` vault using the correct password:
+
+```logtalk
+my_vault::open('!"#$%&/()=').
+```
+
+Any other password will be rejected. For example:
+
+```logtalk
+my_vault::open('abc123').
+
+<!--
+false.
+-->
+
+Now load the `hacker` complementing category:
+
+```logtalk
+logtalk_load(complements_restrict(hacker)).
+...
+
+
+Try the hacker replaced password and fail miserably:
+
+```logtalk
+my_vault::open('1234567890').
+```
+
+<!--
+You have been hacked by SmartPants!
+false.
+-->
+
+
+The correct, original, password is still the only one capable
+of opening the vault, despite the hacker messages:
+
+```logtalk
+my_vault::open('!"#$%&/()=').
+```
+
+<!--
+You have been hacked by SmartPants!
+true.
+-->

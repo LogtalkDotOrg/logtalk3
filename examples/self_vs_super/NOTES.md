@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# self_vs_super
 
 This example illustrates the differences between a message to *self* and
 a *super* call when calling an inherited meta-predicate. See the comments
@@ -28,3 +42,59 @@ in the code for details.
 For an in-depth discussion of these concepts, see the corresponding
 Handbook glossary entries, the section on "Predicates", and the
 reference pages on the the execution-context built-in methods.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(self_vs_super(loader)).
+...
+
+
+Illustrate the differences between sending a message to _self_
+and making a _super_ call to call an inherited meta-predicate:
+
+The `user` object defines a foo/1 predicate:
+
+```logtalk
+foo(X).
+```
+
+<!--
+X = 1 ? ;
+X = 2 ? ;
+X = 3.
+-->
+
+The _super_ calls preserve _sender_ and therefore the `foo/1` predicate
+is called by the meta-predicate in the context of `user`:
+
+```logtalk
+proto::meta_super(foo, X).
+```
+
+<!--
+Execution context for the parent object meta/2 meta-predicate:
+  self: proto
+  this: parent
+  sender: user
+
+X = 1 ? ;
+X = 2 ? ;
+X = 3.
+-->
+
+Messages to _self_ reset _sender_ and therefore the `foo/1` predicate
+is called in the context of `proto`, hence the existence error:
+
+```logtalk
+proto::meta_self(foo, X).
+```
+
+<!--
+Execution context for the parent object meta/2 meta-predicate:
+  self: proto
+  this: parent
+  sender: proto
+
+uncaught exception: error(existence_error(procedure,foo/1),logtalk(call(foo(_307)),c(proto,proto,r(user,proto,c(user,user,r(user,proto,[],[])),[]))))
+-->

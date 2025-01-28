@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Marker interface
@@ -40,3 +55,24 @@ pattern to implement. The reflection API provides built-in predicates
 that allows to test if an object (or a category) implements or conforms
 to a given protocol. It is also possible to add a marker to an existing
 object at runtime using a complementing category (aka hot patching).
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('structural/marker_interface/loader')).
+```
+
+Check for the marker interface:
+
+```logtalk
+%%table
+conforms_to_protocol(Entity, marker).
+```
+
+<!--
+Entity = an_object ;
+Entity = a_descendant_object ;
+Entity = another_object ;
+Entity = a_category ;
+false.
+-->

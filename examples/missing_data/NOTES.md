@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# missing_data
 
 This example illustrates how to use the expected terms library to decouple
 data acquisition, which must be able to succeed when unexpected events
@@ -29,3 +43,71 @@ For more details about this example, please see the comments in the
 `expecteds.lgt` source file.
 
 See also the `cascade` and `books` examples.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(missing_data(loader)).
+```
+
+In the first data processing example, we provide defaults for the missing data:
+
+```logtalk
+data_processing::print.
+```
+
+<!--
+gomez
+  father: john doe
+  mother: jane doe
+
+pubert
+  father: gomez
+  mother: morticia
+
+pugsley
+  father: gomez
+  mother: morticia
+
+morticia
+  father: john doe
+  mother: jane doe
+
+wednesday
+  father: gomez
+  mother: morticia
+
+true.
+-->
+
+In the second data processing example, we simply skip missing data:
+
+```logtalk
+data_processing::print_complete.
+```
+
+<!--
+pubert
+  father: gomez
+  mother: morticia
+
+pugsley
+  father: gomez
+  mother: morticia
+
+wednesday
+  father: gomez
+  mother: morticia
+
+true.
+-->
+
+In the third data processing example, we throw an error on missing data:
+
+```logtalk
+catch(data_processing::check, Error, true).
+```
+
+<!--
+Error = missing_father-gomez.
+-->

@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# parstructs
 
 This example requires using ECLiPSe as the backend Prolog compiler. It
 illustrates using a ECLiPSe structure notation, which provides a solution
@@ -29,3 +43,33 @@ by defining a set of predicates for accessing the individual parameters by a
 key (instead of using the Logtalk built-in `parameter/2` method that indexes
 individual parameters by position). The access predicates are goal-expanded
 to the corresponding ECLiPSe structure built-in predicates.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(parstructs(loader)).
+```
+
+Backtrackable update of an individual parameter:
+
+```logtalk
+obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::b_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
+```
+
+<!--
+b-9
+b-2
+Dict = p{a:1, b:2, c:3}, B = 2.
+-->
+
+Non-backtrackable update of an individual parameter:
+
+```logtalk
+obj(Dict)::init([a-1, b-2, c-3]), (obj(Dict)::nb_set(b, 9), obj(Dict)::get(b, B), write(b-B), nl, fail; obj(Dict)::get(b, B), write(b-B), nl).
+```
+
+<!--
+b-9
+b-9
+Dict = p{a:1, b:9, c:3}, B = 9.
+-->

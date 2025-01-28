@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# family_alt
 
 This folder contains an alternative implementation of the `family` example,
 which in turn is a version of the classical family tree Prolog example.
@@ -38,3 +52,59 @@ found in the `family` example. Moreover, when this version is compiled in
 optimized mode, the multifile predicate clauses, which act as liking clauses,
 are inlined. The main downside of this solution is the boilerplate code that
 must be written (i.e., the multifile predicate definitions).
+
+Load the example:
+
+```logtalk
+logtalk_load(family(loader)).
+```
+
+Some example queries using the Addams family relations:
+
+```logtalk
+%%table
+family(addams)::sister(Sister, Sibling).
+```
+
+<!--
+Sister = wednesday, Sibling = pubert ;
+Sister = wednesday, Sibling = pugsley ;
+Sister = wednesday, Sibling = pubert ;
+Sister = wednesday, Sibling = pugsley ;
+false.
+-->
+
+Some example queries using the Simpsons family relations:
+
+```logtalk
+%%table
+family(simpsons)::mother(Mother, Child).
+```
+
+<!--
+Mother = marge, Child = bart ;
+Mother = marge, Child = lisa ;
+Mother = marge, Child = maggie ;
+false.
+-->
+
+Some example queries using the extended Simpsons family relations:
+
+```logtalk
+%%table
+family(simpsons_extended)::parent(Parent, Child).
+```
+
+<!--
+Parent = homer, Child = bart ;
+Parent = homer, Child = lisa ;
+Parent = homer, Child = maggie ;
+Parent = marge, Child = bart ;
+Parent = marge, Child = lisa ;
+Parent = marge, Child = maggie ;
+Parent = abe, Child = homer ;
+Parent = abe, Child = herb ;
+Parent = gaby, Child = herb ;
+Parent = mona, Child = homer ;
+false.
+-->

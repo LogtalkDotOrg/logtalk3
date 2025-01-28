@@ -60,6 +60,15 @@ instead of the `sha256sum` command on POSIX systems. This is required to
 workaround Apple adding the incompatible BSD version of the `sha256sum`
 command on macOS 15.
 
+Examples
+--------
+
+* CHANGED: Consolidate the examples `NOTES.md` and `SCRIPT.txt` files into a
+single `NOTES.md` file.
+
+* CHANGED: The contents of the examples `NOTES.md` files to allow open them
+as Jupyter notebooks.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

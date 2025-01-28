@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# points
 
 You can find the original description of this example (and a solution using 
 SICStus Objects) at the URL:
@@ -69,3 +84,83 @@ the verification of feasible limits for a coordinate value. Each one of
 the `point`, `bounded_point`, `history_point`, and `bounded_history_point`
 classes will import this category, using his operations to define the
 methods affecting the solutions that use multiple inheritance.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(points(loader)).
+```
+
+Let's start with a simple point:
+
+```logtalk
+point::new(Point, [position-(1, 3)]), Point::(print, move(7, 4), print).
+```
+
+<!--
+p1 @ (1, 3)
+p1 @ (7, 4)
+
+Point = p1.
+-->
+
+Same problem but with bounds on coordinate values:
+
+```logtalk
+bounded_point::new(Point, [position-(1, 3), bounds(x)-(0, 13), bounds(y)-(-7, 7)]), Point::(print, move(7, 4), print).
+```
+
+<!--
+bounds(x) : 0,13
+bounds(y) : -7,7
+bp2 @ (1, 3)
+bounds(x) : 0,13
+bounds(y) : -7,7
+bp2 @ (7, 4)
+
+Point = bp2.
+-->
+
+Same problem but storing the history of coordinate values:
+
+```logtalk
+history_point::new(Point, [position-(1, 3)]), Point::(print, move(7, 4), print).
+```
+
+<!--
+location history: []
+hp3 @ (1, 3)
+location history: [(1,3)]
+hp3 @ (7, 4)
+
+Point = hp3.
+-->
+
+Same problem but with bounds on coordinate values and storing past values:
+
+```logtalk
+bounded_history_point::new(Point, [position-(1, 3), bounds(x)-(0, 13), bounds(y)-(-7, 7)]), Point::(print, move(7, 4), print).
+```
+
+<!--
+bounds(x) : 0,13
+bounds(y) : -7,7
+location history: []
+bhp4 @ (1, 3)
+bounds(x) : 0,13
+bounds(y) : -7,7
+location history: [(1,3)]
+bhp4 @ (7, 4)
+
+Point = bhp4.
+-->
+
+Clean up instances:
+
+```logtalk
+point::delete_all, bounded_point::delete_all, history_point::delete_all, bounded_history_point::delete_all.
+```
+
+<!--
+true.
+-->

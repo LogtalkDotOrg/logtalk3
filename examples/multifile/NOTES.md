@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +31,55 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# multifile
 
 This example illustrates how to use multifile predicates/non-terminals within
 Logtalk objects and categories.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(multifile(loader)).
+```
+
+Call the `a/1` multifile predicate:
+
+```logtalk
+%%table
+main::a(X).
+```
+
+<!--
+X = 1 ;
+X = 2 ;
+X = 3 ;
+X = 4 ;
+X = 5.
+-->
+
+Call the `b/1` multifile predicate:
+
+```logtalk
+%%table
+main::b(X).
+```
+
+<!--
+X = one ;
+X = two ;
+X = three.
+-->
+
+Call the `nt//1` multifile non-terminal:
+
+```logtalk
+%%table
+logtalk << phrase(main::nt(X), [1,2,3], Rest).
+```
+
+<!--
+X = 1, Rest = [2, 3] ;
+X = end, Rest = [1, 2, 3].
+-->

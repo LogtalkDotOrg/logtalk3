@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# diamonds
 
 This example illustrates some variants of the "diamond problem" 
 (multi-inheritance conflicts and ambiguities) and its respective 
@@ -60,3 +74,76 @@ using prototype hierarchies:
 - `diamond3`  
 	presents a solution which allows both inherited definitions to be 
 	used in D
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(diamonds(loader)).
+```
+
+First variant of the "diamond problem", defined in the "diamond1" source file:
+
+```logtalk
+d1::m.
+```
+
+<!--
+Redefinition of method m/0 in object b1
+
+true.
+-->
+
+Second variant of the "diamond problem", defined in the "diamond2" source file:
+
+```logtalk
+d2::m.
+```
+
+<!--
+Redefinition of method m/0 in object c2
+
+true.
+-->
+
+Third variant of the "diamond problem", defined in the "diamond3" source file:
+
+```logtalk
+d3::b3_m.
+```
+
+<!--
+Redefinition of method m/0 in object b3
+
+true.
+-->
+
+```logtalk
+d3::c3_m.
+```
+
+<!--
+Redefinition of method m/0 in object c3
+
+true.
+-->
+
+```logtalk
+d3::m.
+```
+
+<!--
+Redefinition of method m/0 in object b3
+
+true.
+-->
+
+```logtalk
+d4::m.
+```
+
+<!--
+Redefinition of method m/0 in object b3
+Redefinition of method m/0 in object c3
+
+true.
+-->

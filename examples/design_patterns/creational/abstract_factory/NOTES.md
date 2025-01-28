@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Abstract Factory
@@ -29,3 +44,44 @@ This pattern can be used with both classes and prototypes.
 
 The sample implementation uses prototypes for simplicity with categories
 playing a similar role to abstract classes.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('creational/abstract_factory/loader')).
+```
+
+Create buttons with different appearances:
+
+```logtalk
+factory(linux)::create_button(Button), Button::paint.
+```
+
+<!--
+Render a button in a Linux style
+Button = o1
+
+true.
+-->
+
+```logtalk
+factory(macos)::create_button(Button), Button::paint.
+```
+
+<!--
+Render a button in a macOS style
+Button = o2
+
+true.
+-->
+
+```logtalk
+factory(windows)::create_button(Button), Button::paint.
+```
+
+<!--
+Render a button in a Windows style
+Button = o3
+
+true.
+-->

@@ -18,9 +18,6 @@ limitations under the License.
 ________________________________________________________________________
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
-
 This folder contains two examples that show how to use a category to 
 explicitly complement existing objects (without modifying its source 
 code), thus providing functionality similar to Objective-C categories.

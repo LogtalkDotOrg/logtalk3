@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,9 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example, please see the `SCRIPT.txt` file.
+# errors
 
 This folder contains examples of objects, categories, and protocols containing
 errors and code issues that will trigger Logtalk compiler warnings and errors.
@@ -36,3 +51,23 @@ detailed description of the flags.
 The `tutor` tool provides explanations and fix suggestions for compiler
 warnings and errors messages. New users are advised to load it at startup
 (e.g., from a settings file) for a more friendly experience.
+
+To augment compiler warnings and errors messages with explanations and
+fix suggestions, start by loading the `tutor` tool:
+
+```logtalk
+logtalk_load(tutor(loader)).
+```
+
+The entities on this example are divided in two sets. The first set 
+results on compiler warning messages, while the second set results in
+compiler error messages. To load each sets of entities, compile and
+load the corresponding loader files:
+
+```logtalk
+logtalk_load(errors(warnings_loader)).
+```
+
+```logtalk
+logtalk_load(errors(errors_loader)).
+```

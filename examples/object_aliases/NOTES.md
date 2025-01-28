@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# object_aliases
 
 This is a minimal example illustrating the use of the `uses/1` directive
 to experiment with different object implementations of the same protocol
@@ -33,3 +47,39 @@ for the message-sending calls.
 
 This example also illustrates defining an alias for an object defined at
 runtime using a _parameter variable_.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(object_aliases(loader)).
+```
+
+Demonstration of using aliases for shorten object names and
+simplify trying alternative implementations:
+
+```logtalk
+experiments::stats(TotalLess, TotalEqual, TotalGreater), Total is TotalLess + TotalEqual + TotalGreater.
+```
+
+<!--
+Total = 42.
+-->
+
+Demonstration of using aliases for objects defined at runtime
+using parameters:
+
+```logtalk
+simple(<)::insert_top([3-c,1-a,2-b], Top).
+```
+
+<!--
+Top = 1-a.
+-->
+
+```logtalk
+simple(>)::insert_top([3-c,1-a,2-b], Top).
+```
+
+<!--
+Top = 3-c.
+-->

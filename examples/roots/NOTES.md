@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# roots
 
 This folder contains rewritten versions of some objects provided  with
 previous, 1.x versions, of Logtalk. They are intended to  help the
@@ -61,3 +75,37 @@ definitions better fitted to the requirements of specific applications.
 For a simpler version of this example, see the `reflection` example. If
 you are not familiar with the concept of metaclass used in this example,
 see the `metaclasses` example first.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(roots(loader)).
+```
+
+Some queries dealing with instance/class hierarchies:
+
+```logtalk
+object::ancestors(Ancestors).
+```
+
+<!--
+Ancestors = [class, abstract_class, object].
+-->
+
+```logtalk
+class::instances(Instances).
+```
+
+<!--
+Instances = [object, abstract_class, class].
+-->
+
+```logtalk
+class::superclass(Super).
+```
+
+<!--
+Super = abstract_class ;
+Super = object ;
+false.
+-->

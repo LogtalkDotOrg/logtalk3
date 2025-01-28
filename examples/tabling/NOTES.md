@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# tabling
 
 This folder contains an example of using tabled predicates within objects.
 Currently supported compilers include B-Prolog, XSB, SWI-Prolog (when the
@@ -32,3 +46,34 @@ predicate will result in the equivalent of multiple tables. The same will
 happen if the sender of the message is a parametric object and different
 parameterizations are used. A possible workaround is to always send the
 message from the same (non-parametric) object (e.g., `user`).
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(tabling(loader)).
+```
+
+Use tabling to cope with a left-recursive path finding predicate
+(the order of the solutions may depend on the tabling strategy):
+
+```logtalk
+paths::path(1, Y).
+```
+
+<!--
+Y = 2 ? ;
+Y = 4 ? ;
+Y = 3 ? ;
+Y = 5 ? ;
+false.
+-->
+
+Use tabling to avoid repeated calculation of Fibonacci numbers:
+
+```logtalk
+fibonacci::fib(30, F).
+```
+
+<!--
+F = 1346269.
+-->

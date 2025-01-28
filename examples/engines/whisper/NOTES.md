@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,11 +31,51 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# engines - whisper
 
 This example creates a chain of engines passing a term. The original example was
 written by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It should
 run also on XSB and YAP if and when these systems bugs with coroutining and/or
 threads get fixed.
+
+Load the example:
+
+```logtalk
+logtalk_load(whisper(loader)).
+```
+
+Some sample queries:
+
+```logtalk
+whisper::whisper(0, 1, Final).
+```
+
+<!--
+Final = 1.
+-->
+
+```logtalk
+whisper::whisper(1, 1, Final).
+```
+
+<!--
+Final = 2.
+-->
+
+```logtalk
+whisper::whisper(3, 1, Final).
+```
+
+<!--
+Final = 4.
+-->
+
+```logtalk
+whisper::whisper(5, 3, Final).
+```
+
+<!--
+Final = 8.
+-->

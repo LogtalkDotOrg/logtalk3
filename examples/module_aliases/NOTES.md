@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,12 +31,49 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# module_aliases
 
 This is a minimal example illustrating the use of the Logtalk `use_module/1`
 directive to module aliases (not to be confused by the Prolog directive with
 the same name). It requires backend support for modules and the `use_module/2`
 directive.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(module_aliases(loader)).
+```
+
+Demonstration of using aliases for using or experimenting with different
+modules:
+
+```logtalk
+data_source::all(Data).
+```
+
+<!--
+...
+Data = [1,2,3].
+-->
+
+Demonstration of using module aliases with parametric objects:
+
+```logtalk
+pardata(data1)::all(Data).
+```
+
+<!--
+...
+Data = [1,2,3].
+-->
+
+```logtalk
+pardata(data2)::all(Data).
+```
+
+<!--
+...
+Data = [4,5,6]
+-->

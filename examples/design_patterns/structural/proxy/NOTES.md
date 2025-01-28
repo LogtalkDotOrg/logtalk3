@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Proxy
@@ -35,3 +50,69 @@ real object. When the proxy object is expected to implement the full
 protocol of the real object, an alternative solution is for the proxy
 object to inherit privately from the real object and overriding (or
 specializing) only those predicates that motivated the use of a proxy.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('structural/proxy/loader')).
+```
+
+First, lets create a old enough driver, no other than Mr. Magoo itself
+(pedestrians be aware!):
+
+```logtalk
+driver::new(magoo, 'Mr. Magoo', 87).
+```
+
+<!--
+true.
+-->
+
+In some of the cartoons, Mr. Magoo appears to be driving a 1929 Packard
+Model 645 touring car; we can define the car as a static object in the
+source file or create it dynamically:
+
+```logtalk
+create_object(packard_645, [extends(car)], [], []).
+```
+
+<!--
+true.
+-->
+
+Then we check, using the proxy object, that the driver can actually
+drive the car:
+
+```logtalk
+car_proxy(packard_645, magoo)::drive.
+```
+
+<!--
+Car has been driven!
+
+true.
+-->
+
+Now, lets create a driver that is just too young, one of the children
+that Mr. Magoo sometimes babysits:
+
+```logtalk
+driver::new(wheeler, 'Wheeler', 7).
+```
+
+<!--
+true.
+-->
+
+Then we check, using the proxy object, that the child is effectively not
+allowed to drive the car:
+
+```logtalk
+car_proxy(packard_645, wheeler)::drive.
+```
+
+<!--
+Sorry, Wheeler is too young to drive!
+
+true.
+-->

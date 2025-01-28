@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# patches
 
 This folder contains an example that shows how to use a complementing
 category to replace a broken predicate definition and to add a new imported
@@ -32,3 +46,45 @@ to improve performance of applications that don't make use complementing
 categories and to provide a solution for preventing the use of categories
 to break object encapsulation. Note that the `complements` flag can be set
 on a per-object basis by using the `set_logtalk_flag/2` directive.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(patches(loader)).
+```
+
+Find categories that complement objects:
+
+```logtalk
+%%table
+complements_object(Category, Object).
+```
+
+<!--
+Category = patch, Object = proto.
+-->
+
+Verify the patch in the `patch` category for the predicate `init/0`
+defined in the object `proto`:
+
+```logtalk
+proto::init.
+```
+
+<!--
+parent init
+proto init
+
+true.
+-->
+
+Verify the imported category added to the `proto` object by the
+`patch` category:
+
+```logtalk
+proto::pet(Pet).
+```
+
+<!--
+Pet = cat.
+-->

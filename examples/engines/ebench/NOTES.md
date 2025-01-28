@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,11 +31,57 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
+
+# engines - ebench
+
+This example provides benchmarking support for evaluating the performance
+of threaded engine creation and destroying. Currently it runs on ECLiPSe,
+SWI-Prolog, and XVM. It should run also on YAP if and when this system
+threads bugs are fixed.
+
+```logtalk
+time(true). % autoload statistics library if using SWI-Prolog
+```
+
+Load the example:
+
+```logtalk
+logtalk_load(ebench(loader)).
+```
+
+First, an example with an engine goal that succeeds deterministically:
+
+```logtalk
+time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,true,A),fail)).
+```
+
+```logtalk
+time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
+```
 
 
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+Second, an example with an engine goal that provides an infinite stream of solutions:
 
-This example provides benchmarking support for evaluating the performance of
-threaded engine creation and destroying. Currently it runs on ECLiPSe and
-SWI-Prolog. It should run also on YAP if and when this system threads bugs
-are fixed.
+```logtalk
+time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,repeat,A),fail)).
+```
+
+```logtalk
+time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
+```
+
+
+Finally, an example with an engine running a loop predicate using the engine term queue:
+
+```logtalk
+assertz((loop :- threaded_engine_fetch(_),loop)).
+```
+
+```logtalk
+time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,loop,A),fail)).
+```
+
+```logtalk
+time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
+```

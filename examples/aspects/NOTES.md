@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# aspects
 
 This example illustrates how to implement aspects (as in Aspect-Oriented
 Programming) using the event-driven programming support and hot patching
@@ -41,3 +55,39 @@ amount is exceeded. The downside of this alternative is that we should not
 rely in the calling order of event handlers and thus the check could be
 applied before or after the logging message that a transfer is being
 attempted.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(aspects(loader)).
+```
+
+Transfer 100 from john account to jane account
+
+```logtalk
+bank::transfer(john, jane, 100).
+```
+
+<!--
+Attempting transfer:
+  From:   john
+  To:     jane
+  Amount: 100
+Transfer successful.
+true.
+-->
+
+Try to transfer 400 from jane account to john account
+
+```logtalk
+bank::transfer(jane, john, 400).
+```
+
+<!--
+Attempting transfer:
+  From:   jane
+  To:     john
+  Amount: 400
+Maximum transfer amount (200) exceeded!
+false.
+-->

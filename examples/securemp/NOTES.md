@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# securemp
 
 This folder contains a set of source files for testing Logtalk secure
 implementation of meta-predicates. For full details on this example 
@@ -39,3 +53,10 @@ meta-predicates, please see the paper:
 	publisher = "Springer-Verlag",
 	address = "Berlin Heidelberg",
 }
+
+Simply load the example and check the compilation and runtime error
+messages:
+
+```logtalk
+logtalk_load(securemp(loader)).
+```

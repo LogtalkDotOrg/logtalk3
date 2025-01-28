@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# process_modeling
 
 This folder contains an example of using parametric objects to represent
 and restore shared variables between sets of constraints that are stored
@@ -34,3 +48,38 @@ This example can be run using B-Prolog, ECLiPSe, GNU Prolog, SICStus
 Prolog, SWI-Prolog, or YAP as the backend compiler (by using an ugly
 solution thanks to the lack of standardization of CLP(FD) constraint
 libraries).
+
+Load the example:
+
+```logtalk
+logtalk_load(process_modeling(loader)).
+```
+
+Compute the number of times that process `b` can be executed
+and its dependencies:
+
+```logtalk
+%%table
+process_model::solve([b(B)], Dependencies).
+```
+
+<!--
+B = 2, Dependencies = [a(2),b(2)] ? ;
+B = 3, Dependencies = [a(2),b(3)] ? ;
+B = 3, Dependencies = [a(3),b(3)] ? ;
+false.
+-->
+
+Compute the number of times that process `c` can be executed
+and its dependencies:
+
+```logtalk
+%%table
+process_model::solve([c(C)], Dependencies).
+```
+
+<!--
+C = 3, Dependencies = [b(2),a(2),c(3)] ? ;
+C = 4, Dependencies = [b(3),a(3),c(4)] ? ;
+false.
+-->

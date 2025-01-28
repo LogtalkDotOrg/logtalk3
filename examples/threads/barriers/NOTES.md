@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,8 +31,28 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# threads - barriers
 
 This folder contains examples of multi-threading barrier synchronization.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(barriers(loader)).
+```
+
+Run the example:
+
+```logtalk
+beatles::sing_along.
+```
+
+<!--
+hello(1)hello(4)hello(2)hello(3)
+Enough of hellos! Time for goodbyes!
+goodbye(2)goodbye(1)goodbye(3)goodbye(4)
+
+true.
+-->

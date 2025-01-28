@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# roles
 
 Logtalk provides _objects_, _protocols_, and _categories_ as first-class
 entities. Relations between entities define _patterns of code reuse_ and
@@ -31,3 +45,97 @@ of them extending the other, its parent prototype.
 
 This simple example illustrates the different roles an object can play.
 See the comments in the `roles.lgt` file for detailed explanations.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(roles(loader)).
+```
+
+Prototypes can declare and defined their own predicates:
+
+```logtalk
+prototype::foo(Foo).
+```
+
+<!--
+Foo = 1.
+-->
+
+Derived prototypes inherit predicates from their parents:
+
+```logtalk
+descendant::foo(Foo).
+```
+
+<!--
+Foo = 2.
+-->
+
+```logtalk
+descendant::bar(X, Y).
+```
+
+<!--
+X = 1, Y = 2.
+-->
+
+A class that is its own metaclass can access its own public predicates
+using message-sending:
+
+```logtalk
+superclass::foo(Foo).
+```
+
+<!--
+Foo = 1
+-->
+
+A class that doesn't have a metaclass cannot receive any message as
+the predicate declaration lookup to answer to validate the message
+would start in the metaclass:
+
+```logtalk
+subclass::current_predicate(_).
+```
+
+<!--
+false.
+-->
+
+An instance can receive messages for predicates declared in its
+class(es) and in its class(es) superclass(es):
+
+```logtalk
+instance::current_predicate(P).
+```
+
+<!--
+P = bar/2 ;
+P = foo/1 ;
+false.
+-->
+
+```logtalk
+instance::foo(Foo).
+```
+
+<!--
+Foo = 2.
+-->
+
+```logtalk
+instance::bar(X, Y).
+```
+
+<!--
+X = 1, Y = 2.
+-->
+
+```logtalk
+empty_instance::foo(Foo).
+```
+
+<!--
+Foo = 1.
+-->

@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# localizations
 
 This folder contains an example of using the message printing mechanism
 to provide software localization in several natural languages. Each language
@@ -39,3 +53,47 @@ same time but this is usually not required. In the simple case where
 a single localization would be loaded at any given time, the code can be
 simplified by removing the country code parametrization from the core
 logic.
+
+Load the example:
+
+```logtalk
+logtalk_load(localizations(loader)).
+```
+
+Print the application language in several languages:
+
+```logtalk
+my_game(de)::banner.
+```
+
+<!--
+>>> Willkommen Sie bei Mein tolles Spiel!
+true.
+-->
+
+```logtalk
+my_game(en)::banner.
+```
+
+<!--
+>>> Welcome to my great game!
+true.
+-->
+
+```logtalk
+my_game(fr)::banner.
+```
+
+<!--
+>>> Bienvenue sur mon grand jeu!
+true.
+-->
+
+```logtalk
+my_game(pt)::banner.
+```
+
+<!--
+>>> Bem vindo ao meu grande jogo!
+true.
+-->

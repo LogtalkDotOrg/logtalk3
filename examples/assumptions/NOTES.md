@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# assumptions
 
 This example provides a simple, limited, implementation of ground linear
 and intuitionistic assumptions as discussed in the following paper:
@@ -46,3 +60,69 @@ and intuitionistic assumptions as discussed in the following paper:
 A web version of this paper is also available at:
 
 	http://www.cse.unt.edu/~tarau/research/PapersHTML/state.html
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(assumptions(loader)).
+```
+
+Paths example:
+
+```logtalk
+%%table
+paths::init, paths::path(1, 5, Path).
+```
+
+<!--
+Path = [1, 2, 4, 5] ;
+Path = [1, 3, 5] ;
+false.
+-->
+
+Switch example
+
+```logtalk
+switch::test(2).
+```
+
+<!--
+two
+true.
+-->
+
+```logtalk
+switch::test(1).
+```
+
+<!--
+one
+true.
+-->
+
+```logtalk
+switch::test(4).
+```
+
+<!--
+unexpected(4)
+true.
+-->
+
+Grades example:
+
+```logtalk
+grades::(assumel(take(hans, german)), grade(hans)).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+grades::(assumel(take(hans, italian)), grade(hans)).
+```
+
+<!--
+false.
+-->

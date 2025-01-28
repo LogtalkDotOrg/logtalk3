@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Composite
@@ -33,3 +48,74 @@ and object composition (i.e., composite objects will store the identifiers
 of the objects that are part of the composite). In the sample queries,
 we create the instances dynamically at runtime but we could also have
 defined (some or all) of the instances statically in the source file.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('structural/composite/loader')).
+```
+
+First, create some ellipses:
+
+```logtalk
+ellipse::(new(e1), new(e2), new(e3), new(e4)).
+```
+
+<!--
+true.
+-->
+
+Second, create some composite graphics:
+
+```logtalk
+composite_graphic::(new(cg), new(cg1), new(cg2)).
+```
+
+<!--
+true.
+-->
+
+Add to the composite graphic `cg1` the ellipses `e1`, `e2`, and `e3`:
+
+```logtalk
+cg1::(add(e1), add(e2), add(e3)).
+```
+
+<!--
+true.
+-->
+
+Add to the composite graphic `cg2` the ellipse `e4`:
+
+```logtalk
+cg2::add(e4).
+```
+
+<!--
+true.
+-->
+
+Add to the composite graphic `cg` the composite graphics `cg1` and `cg2`:
+
+```logtalk
+cg::(add(cg1), add(cg2)).
+```
+
+<!--
+true.
+-->
+
+Finally, print the contents of the top-level composite graphic `cg`:
+
+```logtalk
+cg::print.
+```
+
+<!--
+ellipse: e1
+ellipse: e2
+ellipse: e3
+ellipse: e4
+
+true.
+-->

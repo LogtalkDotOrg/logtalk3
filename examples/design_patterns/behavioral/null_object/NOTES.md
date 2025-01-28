@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Null object
@@ -42,3 +57,42 @@ Logtalk doesn't provide a "null" built-in object by design. When the
 equivalent to a null object is necessary, one can be defined as e.g.
 defined in this pattern. Note that Logtalk provides a library
 implementation of "optionals", which are often a better solution.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/null_object/loader')).
+```
+
+Non null objects reply to the predicates with their own intrinsic
+answers:
+
+```logtalk
+dog::make_sound.
+```
+
+<!--
+Woof...
+
+true.
+-->
+
+```logtalk
+cat::make_sound.
+```
+
+<!--
+Meowww...
+
+true.
+-->
+
+The null objects implements the same interface but does nothing.
+
+```logtalk
+null_animal::make_sound.
+```
+
+<!--
+true.
+-->

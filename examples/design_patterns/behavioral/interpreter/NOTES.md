@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Interpreter
@@ -34,3 +49,18 @@ sample code makes use of tabling (to deal with left-recursion in the
 original example) and thus can only be run with B-Prolog, SWI-Prolog, XSB,
 or YAP backend Prolog compilers.
 
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/interpreter/loader')).
+```
+
+Parse and evaluate an expression in Reverse Polish notation (RPN):
+
+```logtalk
+interpreter::eval("a b + c a - -", [a=5, b=3, c=1], Value).
+```
+
+<!--
+Value = 12.
+-->

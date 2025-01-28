@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,21 +31,23 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# threads - mtbatch
 
 This folder provides an object for running multi-threading benchmarks. The
 supported backend Prolog compilers are SWI-Prolog, and YAP.
 
 For example, the following goal will run all benchmark tests:
 
-	| ?- mtbatch::run.
+	```logtalk
+mtbatch::run.
 
 You may also run just a single benchmark test a given number of times.
 For example:
 
-	| ?- mtbatch::run(primes, 10).
+	```logtalk
+mtbatch::run(primes, 10).
 
 The following tests are available:
 
@@ -48,3 +65,27 @@ The following tests are available:
 For the same backend Prolog compiler, the benchmark results can show 
 significant variation depending on the operating-system and if you're 
 using a 32 bits or a 64 bits version.
+
+Start by loading the loading the example:
+
+```logtalk
+logtalk_load(mtbatch(loader)).
+```
+
+Run all tests:
+
+```logtalk
+mtbatch::run.
+```
+
+Run all tests (average of 20 times for each test):
+
+```logtalk
+mtbatch::run(20).
+```
+
+Run the primes benchmark test (average of 10 times):
+
+```logtalk
+mtbatch::run(primes, 10).
+```

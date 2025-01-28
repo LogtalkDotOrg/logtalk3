@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Singleton
@@ -33,3 +48,20 @@ class instance, we can simply use a prototype, which is its own global
 point of access. As applications can use a mix of prototypes and
 classes, there is nothing to be gained in implementing this pattern
 using classes.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('creational/singleton/loader')).
+```
+
+As the singleton is implemented using a prototype, we access the
+singleton predicates directly:
+
+```logtalk
+singleton::foo(X).
+```
+
+<!--
+X = bar.
+-->

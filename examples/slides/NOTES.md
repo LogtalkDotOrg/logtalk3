@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# slides
 
 This is a simple example of using the library list zipper implementation
 to implement a basic slideshow functionality allowing remote commands to
@@ -28,3 +42,35 @@ slides. The slides are represented using a predicate with two arguments,
 the index and the slide contents. The main predicate, `show/2` takes a
 sequence of slides and the name of the predicate, which is used as a
 closure for displaying the slides.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(slides(loader)).
+```
+
+Start a slideshow; the remote accepts as input the following single
+characters: n (next), p (previous), f (first), l (last), e (end):
+
+```logtalk
+slides::show([1,2,3,4,5,6], slide).
+```
+
+<!--
+First slide
+remote: n.
+Second slide
+remote: n.
+Third slide
+remote: n.
+Fourth slide
+remote: p.
+Third slide
+remote: f.
+First slide
+remote: l.
+Last slide
+remote: e.
+
+true.
+-->

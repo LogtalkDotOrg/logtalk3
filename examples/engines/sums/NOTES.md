@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,11 +31,43 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# engines - sums
 
 This example illustrates using engines to accumulate state. The original example
 was written by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It
 should run also on XSB and YAP if and when these systems bugs with coroutining
 and/or threads get fixed.
+
+Load the example:
+
+```logtalk
+logtalk_load(sums(loader)).
+```
+
+Some sample queries:
+
+```logtalk
+sums::rd(1, Sums).
+```
+
+<!--
+Sums = [1].
+-->
+
+```logtalk
+sums::rd(3, Sums).
+```
+
+<!--
+Sums = [1, 3, 6].
+-->
+
+```logtalk
+sums::rd(5, Sums).
+```
+
+<!--
+Sums = [1, 3, 6, 10, 15].
+-->

@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,11 +31,40 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt` file.
+# threads - blackboard
 
 This folder contains a simple multi-threading example illustrating how
 to use the Logtalk built-in predicates `threaded_wait/1` and `threaded_notify/1`
 for synchronizing threads using shared resources. The example consists of
 two persons, a student and a teacher, sharing a blackboard chalk and eraser.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(blackboard(loader)).
+```
+
+Start the producer and the consumer, each one running in its own thread:
+
+```logtalk
+threaded_ignore(student::run(10)), threaded_ignore(teacher::run(4)).
+```
+
+<!--
+teacher is writing...
+student is writing...
+student is writing...
+student is writing...
+student is writing...
+teacher is writing...
+teacher is writing...
+teacher is writing...
+student is writing...
+student is writing...
+student is writing...
+student is writing...
+student is writing...
+student is writing...
+-->

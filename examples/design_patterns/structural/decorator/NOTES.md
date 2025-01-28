@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Decorator
@@ -51,3 +66,115 @@ alternative solution when we need only to decorated a few specific objects
 advantage of using a decorator object is that it can be used to decorate
 any object at compilation time or at runtime while with a complementing
 category we need to know in advance which objects we will be decorating.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('structural/decorator/loader')).
+```
+
+Send the `string/0` message to the decorator object:
+
+```logtalk
+colored_shape(circle, red)::string.
+```
+
+<!--
+A circle of radius 10.0
+which is colored red
+
+true.
+-->
+
+The `diameter/1` predicate in not defined for `shape` or for
+`colored_shape`; thus our decorator forwards the message
+to the decorated circle:
+
+```logtalk
+colored_shape(circle, red)::diameter(Diameter).
+```
+
+<!--
+Diameter = 20.0.
+-->
+
+Same queries but with a dynamically created object:
+
+```logtalk
+create_object(Circle, [extends(circle)], [], [radius(7.0)]).
+```
+
+<!--
+Circle = o1.
+-->
+
+```logtalk
+colored_shape(o1, blue)::string.
+```
+
+<!--
+A circle of radius 7.0
+which is colored blue
+
+true.
+-->
+
+```logtalk
+colored_shape(o1, blue)::diameter(Diameter).
+```
+
+<!--
+Diameter = 14.0.
+-->
+
+We can define a pipeline of decorators; e.g. a colored, named shape:
+
+```logtalk
+create_object(NamedShape, [extends(named_shape)], [], [shape(colored_shape(o1,blue)), name(thingy)]).
+```
+
+<!--
+NamedShape = o2.
+-->
+
+```logtalk
+o2::string.
+```
+
+<!--
+A circle of radius 7.0
+which is colored blue
+which is named thingy
+
+true.
+-->
+
+```logtalk
+o2::diameter(Diameter).
+```
+
+<!--
+Diameter = 14.0.
+-->
+
+Same queries using the decorator defined in the source file:
+
+```logtalk
+my_named_shape::string.
+```
+
+<!--
+A circle of radius 10.0
+which is colored green
+which is named Mr. Round
+
+true.
+-->
+
+```logtalk
+my_named_shape::diameter(Diameter).
+```
+
+<!--
+Diameter = 20.0.
+-->

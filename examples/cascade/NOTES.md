@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,10 +31,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
+-->
 
-
-To load this example and for sample queries, please see the `SCRIPT.txt`
-file.
+# cascade
 
 This example illustrates using expected terms to call a conjunction of
 goals where any of them may cause an error condition without using the
@@ -52,3 +66,75 @@ For details please see the comments in the `cascade.lgt` source file. The
 `cascade` object using DCGs.
 
 See also the `missing_data` and `books` examples.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(cascade(loader)).
+```
+
+Call the `cascade::process_image/2` repeatedly to trigger the random errors:
+
+```logtalk
+cascade::process_image(image, Final).
+```
+
+<!--
+Final = with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))).
+-->
+
+```logtalk
+cascade::process_image(image, Final).
+```
+
+<!--
+uncaught exception: missing_cat
+-->
+
+```logtalk
+cascade::process_image(image, Final).
+```
+
+<!--
+Final = with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))).
+-->
+
+```logtalk
+cascade::process_image(image, Final).
+```
+
+<!--
+uncaught exception: eyes_closed
+-->
+
+```logtalk
+cascade::process_image(image, Final).
+```
+
+<!--
+Final = with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))).
+-->
+
+```logtalk
+cascade::process_image(image, Final).
+```
+
+<!--
+uncaught exception: missing_cat
+-->
+
+```logtalk
+cascade::process_image(image, Final).
+```
+
+<!--
+Final = with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))).
+-->
+
+```logtalk
+cascade::process_image(image, Final).
+```
+
+<!--
+uncaught exception: sunny_day
+-->

@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Many worlds
@@ -36,8 +51,8 @@ This is a pattern that is trivial in Logtalk but cumbersome at best
 using Prolog modules. There are two sensible implementations of this
 design pattern: using inheritance or using parametric objects. Both
 solutions are illustrated. Load the `loader.lgt` file to load the
-sample implementations and look into the `SCRIPT.txt` file for sample
-calls.
+sample implementations and look into the `NOTES.md` file for sample
+queries.
 
 In the parametric solution, we use a parametric object for the reasoning
 code and pass the dataset or knowledge base to reason about as a parameter.
@@ -57,3 +72,27 @@ of applying the following steps:
 1. Replacing Prolog module directives with Logtalk directives.
 2. Changing calls and updates to predicates in "user" into messages to self.
 3. Declaring those predicates as public or protected as needed.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('ai/many_worlds/loader')).
+```
+
+Try the inheritance approach to the design pattern:
+
+```logtalk
+world1::lowest(Lowest).
+```
+
+<!--
+Lowest = 17.8.
+-->
+
+```logtalk
+world2::average(Average).
+```
+
+<!--
+Average = 11.566666666666668.
+-->

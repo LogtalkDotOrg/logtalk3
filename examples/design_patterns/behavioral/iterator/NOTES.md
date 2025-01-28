@@ -1,3 +1,18 @@
+---
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .md
+      format_name: markdown
+      format_version: '1.1'
+      jupytext_version: 1.16.6
+  kernelspec:
+    display_name: Logtalk
+    language: logtalk
+    name: logtalk_kernel
+---
+
+<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -16,7 +31,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
-
+-->
 
 Design pattern:
 	Iterator
@@ -31,3 +46,37 @@ A straightforward implementation of this design pattern is to define an
 iterator predicate that enumerates elements using backtracking. This
 predicate can then be called from meta-predicates such as the de facto
 standard `forall/2` predicate.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/iterator/loader')).
+```
+
+Add some books to our collection:
+
+```logtalk
+book_collection::(
+		add_title('Design Patterns'),
+		add_title('Design Patterns in Dynamic Languages'),
+		add_title('Analysis patterns')
+     ).
+```
+
+<!--
+true.
+-->
+
+Use the iterator predicate to print all titles in the collection:
+
+```logtalk
+forall(book_collection::element(Title), (write(Title), nl)).
+```
+
+<!--
+Design Patterns
+Design Patterns in Dynamic Languages
+Analysis patterns
+
+true.
+-->
