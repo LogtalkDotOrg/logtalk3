@@ -33,3 +33,52 @@ uses a dynamic predicate to hold the current concrete state object
 identifier with a public predicate to set it. The concrete state
 objects perform the context-switching after handling a forwarded
 client request.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/state/loader')).
+```
+
+Sequence of client messages:
+
+```logtalk
+context::output(1 + 2).
+```
+
+<!--
+1+2
+
+true.
+-->
+
+
+```logtalk
+context::output(6 / 7).
+```
+
+<!--
+/(6,7)
+
+true.
+-->
+
+```logtalk
+context::output(3 * 4 + 5).
+```
+
+<!--
+3*4+5
+
+true.
+-->
+
+```logtalk
+context::output(1 - 2 / 7).
+```
+
+<!--
+-(1,/(2,7))
+
+true.
+-->

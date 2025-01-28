@@ -44,3 +44,23 @@ restriction exists to ensure that events cannot be used to break
 encapsulation. When this limitation is an issue, note that the
 Logtalk standard library includes an implementation of the Smalltalk
 dependents mechanism that can be used in alternative.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/observer/loader')).
+```
+
+Trigger an observed event:
+
+```logtalk
+subject::ping(Reply).
+```
+
+<!--
+user is asking observer:  ping(_992)
+observer replied to user: ping(pong)
+Reply = pong
+
+true.
+-->

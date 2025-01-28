@@ -46,3 +46,42 @@ then asserting all listed clauses. These operations of saving and
 restoring state from mementos are inherently expensive but could be
 minimized by saving and restoring only the partial state affected
 by a given operation performed on the originator.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/memento/loader')).
+```
+
+Sample sequence of operations from _user_, which plays
+the role of the caretaker in this design pattern:
+
+```logtalk
+originator::(
+		set(s1),
+		set(s2),
+		save_to_memento(Momento1),
+		set(s3),
+		save_to_memento(Momento2),
+		set(s4),
+		restore_from_memento(Momento1),
+		set(s5),
+		restore_from_memento(Momento2)
+	).
+```
+
+<!--
+Originator: Setting state to s1
+Originator: Setting state to s2
+Originator: Saving to Memento.
+Originator: Setting state to s3
+Originator: Saving to Memento.
+Originator: Setting state to s4
+Originator: State after restoring from Memento: s2
+Originator: Setting state to s5
+Originator: State after restoring from Memento: s3
+Momento1 = o1,
+Momento2 = o2
+
+true.
+-->

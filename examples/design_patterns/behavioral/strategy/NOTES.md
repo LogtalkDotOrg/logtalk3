@@ -31,3 +31,73 @@ This pattern can be used with both classes and prototypes.
 
 The sample implementation uses prototypes and dynamic object predicates
 to allow the strategy to be changed dynamically at runtime.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/strategy/loader')).
+```
+
+Create a first customer:
+
+```logtalk
+customer::new(first, normal_strategy).
+```
+
+<!--
+true.
+-->
+
+Normal billing:
+
+```logtalk
+first::add(1.0, 1).
+```
+
+<!--
+true.
+-->
+
+Start Happy Hour:
+
+```logtalk
+first::(set_strategy(happy_hour_strategy), add(1.0, 2)).
+```
+
+<!--
+true.
+-->
+
+Create a second customer:
+
+```logtalk
+customer::new(second, happy_hour_strategy), second::add(0.8, 1).
+```
+
+<!--
+true.
+-->
+
+First customer pays:
+
+```logtalk
+first::print_bill.
+```
+
+<!--
+Total due: 2.0
+
+true.
+-->
+
+End Happy Hour:
+
+```logtalk
+second::(set_strategy(normal_strategy), add(1.3, 2), add(2.5, 1), print_bill).
+```
+
+<!--
+Total due: 5.5
+
+true.
+-->
