@@ -30,3 +30,53 @@ Description:
 
 This pattern can be used with both classes and prototypes.
 
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/mediator/loader')).
+```
+
+First, click the "book" button:
+
+```logtalk
+book_button::click.
+```
+
+<!--
+book_button disabled
+view_button enabled
+search_button enabled
+booking...
+
+true.
+-->
+
+Next, click the "view" button:
+
+```logtalk
+view_button::click.
+```
+
+<!--
+book_button enabled
+view_button disabled
+search_button enabled
+viewing...
+
+true.
+-->
+
+Finally, click the "search" button:
+
+```logtalk
+search_button::click.
+```
+
+<!--
+book_button enabled
+view_button enabled
+search_button disabled
+searching...
+
+true.
+-->

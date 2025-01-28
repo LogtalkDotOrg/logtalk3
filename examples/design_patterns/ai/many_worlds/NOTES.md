@@ -58,3 +58,27 @@ of applying the following steps:
 1. Replacing Prolog module directives with Logtalk directives.
 2. Changing calls and updates to predicates in "user" into messages to self.
 3. Declaring those predicates as public or protected as needed.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('ai/many_worlds/loader')).
+```
+
+Try the inheritance approach to the design pattern:
+
+```logtalk
+world1::lowest(Lowest).
+```
+
+<!--
+Lowest = 17.8.
+-->
+
+```logtalk
+world2::average(Average).
+```
+
+<!--
+Average = 11.566666666666668.
+-->

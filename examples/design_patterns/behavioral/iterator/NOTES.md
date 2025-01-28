@@ -32,3 +32,37 @@ A straightforward implementation of this design pattern is to define an
 iterator predicate that enumerates elements using backtracking. This
 predicate can then be called from meta-predicates such as the de facto
 standard `forall/2` predicate.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/iterator/loader')).
+```
+
+Add some books to our collection:
+
+```logtalk
+book_collection::(
+		add_title('Design Patterns'),
+		add_title('Design Patterns in Dynamic Languages'),
+		add_title('Analysis patterns')
+     ).
+```
+
+<!--
+true.
+-->
+
+Use the iterator predicate to print all titles in the collection:
+
+```logtalk
+forall(book_collection::element(Title), (write(Title), nl)).
+```
+
+<!--
+Design Patterns
+Design Patterns in Dynamic Languages
+Analysis patterns
+
+true.
+-->

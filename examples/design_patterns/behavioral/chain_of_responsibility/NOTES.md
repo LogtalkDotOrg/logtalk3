@@ -33,3 +33,56 @@ This pattern can be used with both classes and prototypes.
 In this sample implementation, we use prototypes and fixed successors
 in the chain of responsibility. But the successors could also easily
 be defined dynamically.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('behavioral/chain_of_responsibility/loader')).
+```
+
+Try some purchasing requests of varying amount:
+
+```logtalk
+manager::process_request(3500).
+```
+
+<!--
+Manager will approve 3500
+true.
+-->
+
+```logtalk
+manager::process_request(6500).
+```
+
+<!--
+Director will approve 6500
+true.
+-->
+
+```logtalk
+manager::process_request(11500).
+```
+
+<!--
+Vice President will approve 11500
+true.
+-->
+
+```logtalk
+manager::process_request(27000).
+```
+
+<!--
+President will approve 27000
+true.
+-->
+
+```logtalk
+manager::process_request(32000).
+```
+
+<!--
+Request denied for 32000
+false.
+-->
