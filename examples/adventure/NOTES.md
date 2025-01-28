@@ -47,3 +47,33 @@ Logtalk are solely my responsibility.
 
 There is no support for restarting a text adventure. If you want to play
 again, you must restart your Logtalk session and load the example again.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(adventure(loader)).
+```
+
+To play the Sleepy text adventure:
+
+```logtalk
+sleepy::start.
+```
+
+To play the Spider text adventure:
+
+```logtalk
+spider::start.
+```
+
+To play the Hunt the Wumpus text adventure:
+
+```logtalk
+wumpus::main.
+```
+
+To save the Nani:
+
+```logtalk
+nani_search::main.
+```

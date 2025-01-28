@@ -25,13 +25,13 @@ ________________________________________________________________________
 For a description of this example, please see the comments in the
 `aliases.lgt` source file.
 
-### Load the example
+Load the example:
 
 ```logtalk
 logtalk_load(aliases(loader)).
 ```
 
-### Check the object square(_) public protocol
+Check the object `square(_)` public protocol:
 
 ```logtalk
 %%table
@@ -46,7 +46,7 @@ Predicate = area/1 ;
 false.
 -->
 
-### Test the side/1 alias
+Test the `side/1` alias:
 
 ```logtalk
 square(2)::side(Side).
@@ -56,7 +56,7 @@ square(2)::side(Side).
 Side = 2.
 -->
 
-### Enumerate the properties of the side/1 predicate alias
+Enumerate the properties of the `side/1` predicate alias:
 
 ```logtalk
 %%table
@@ -79,7 +79,7 @@ Property = number_of_clauses(1) ;
 Property = number_of_rules(0).
 -->
 
-### Enumerate the properties of the width/1 predicate
+Enumerate the properties of the `width/1` predicate:
 
 ```logtalk
 %%table
@@ -99,7 +99,7 @@ Property = number_of_clauses(1) ;
 Property = number_of_rules(0).
 -->
 
-### Check the object circle(_) public protocol
+Check the object `circle(_)` public protocol:
 
 ```logtalk
 %%table
@@ -114,7 +114,7 @@ Predicate = area/1 ;
 false.
 -->
 
-### Test the r/1 alias
+Test the `r/1` alias:
 
 ```logtalk
 circle(3)::r(Radius).
@@ -124,7 +124,7 @@ circle(3)::r(Radius).
 Radius = 3.
 -->
 
-### Enumerate the properties of the r/1 predicate alias
+Enumerate the properties of the `r/1` predicate alias:
 
 ```logtalk
 %%table
@@ -147,7 +147,7 @@ Property = number_of_clauses(1) ;
 Property = number_of_rules(0).
 -->
 
-### Enumerate the properties of the rx/1 predicate
+Enumerate the properties of the `rx/1` predicate:
 
 ```logtalk
 %%table

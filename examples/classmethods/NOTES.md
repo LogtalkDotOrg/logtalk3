@@ -45,7 +45,7 @@ Start by loading the example:
 logtalk_load(classmethods(loader)).
 ```
 
-% use the "class method" area/2 to calculate the are of a circle given its radius:
+Use the _class method_ `area/2` to calculate the are of a circle given its radius:
 
 ```logtalk
 circle::area(1.0, Area).
@@ -55,7 +55,7 @@ circle::area(1.0, Area).
 Area = 3.14159.
 -->
 
-% ask our static instance, c42, its area:
+Ask our static instance, `c42`, its area:
 
 ```logtalk
 c42::area(Area).
@@ -66,7 +66,7 @@ Area = 24.6301.
 -->
 
 
-% create a dynamic instance of class circle using the "class method" new/4:
+Create a dynamic instance of class circle using the _class method_ `new/4`:
 
 ```logtalk
 circle::new(1.2, 7.9, 2.0, Circle).
@@ -77,7 +77,7 @@ Circle = o1.
 -->
 
 
-% ask the circle o1 its area:
+Ask the circle `o1` its area:
 
 ```logtalk
 o1::area(Area).

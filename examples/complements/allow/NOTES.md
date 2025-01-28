@@ -26,13 +26,13 @@ categories to explicitly complement an existing object compiled with the
 `complements` flag set to `allow`. With this setting, a category can both
 redefine and add new functionality to the complemented object.
 
-% start by loading the non-patched object "employee":
+Start by loading the non-patched `employee` object:
 
 ```logtalk
 logtalk_load(complements_allow(employee)).
 ```
 
-%  ask "employee" its name:
+Ask the `employee` object its name:
 
 ```logtalk
 employee::name(Name).
@@ -42,7 +42,7 @@ employee::name(Name).
 Name = john.
 -->
 
-%  ask "employee" its salary:
+Ask the `employee` object its salary:
 
 ```logtalk
 employee::salary(Salary).
@@ -52,7 +52,7 @@ employee::salary(Salary).
 Salary = 23500.
 -->
 
-% check the protocol of the object "employee":
+Check the protocol of the `employee` object:
 
 ```logtalk
 findall(Predicate, employee::current_predicate(Predicate), Predicates).
@@ -62,36 +62,35 @@ findall(Predicate, employee::current_predicate(Predicate), Predicates).
 Predicates = [age/1, name/1, salary/1].
 -->
 
-% now load the "add_on" complementing category:
+Now load the `add_on` complementing category:
 
 ```logtalk
 logtalk_load(complements_allow(add_on)).
 ```
 
 
-% load the "dynamic.lgt" source file that creates a dynamic complementing
-% category, also patching the "employee" object:
+Load the `dynamic.lgt` source file that creates a dynamic complementing
+category, also patching the `employee` object:
 
 ```logtalk
 logtalk_load(complements_allow(dynamic)).
 ```
 
 
-% find categories that complement objects:
+Find categories that complement objects:
 
 ```logtalk
+%%table
 complements_object(Category, Object).
 ```
 
 <!--
-Category = dynamic_patch,
-Object = employee ;
-Category = add_on,
-Object = employee ;
+Category = dynamic_patch, Object = employee ;
+Category = add_on, Object = employee ;
 false.
 -->
 
-% use the event handler defined in the "add_on" category for the object "employee":
+Use the event handler defined in the `add_on` category for the `employee` object:
 
 ```logtalk
 employee::name(Name).
@@ -103,7 +102,7 @@ Received message name(_16) from user
 Name = john.
 -->
 
-% check the consequences of the runtime patch of the salary/1 predicate:
+Check the consequences of the runtime patch of the `salary/1` predicate:
 
 ```logtalk
 employee::salary(Salary).
@@ -114,7 +113,7 @@ Received message salary(_G192) from user
 Salary = 42000.
 -->
 
-% check the new protocol of the object "employee":
+Check the new protocol of the `employee` object:
 
 ```logtalk
 employee::predicates(Predicates).
@@ -159,11 +158,17 @@ Property = defined_in(dynamic_patch) ;
 Property = number_of_clauses(0).
 -->
 
-% later, the boss finds out about the employee hacked salary:
+Later, the boss finds out about the employee hacked salary:
 
 ```logtalk
 abolish_category(dynamic_patch).
 ```
+
+<!--
+true.
+-->
+
+The employee salary is thus back to its original value:
 
 ```logtalk
 employee::salary(Salary).

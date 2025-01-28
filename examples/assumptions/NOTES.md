@@ -53,7 +53,7 @@ Start by loading the example:
 logtalk_load(assumptions(loader)).
 ```
 
-### paths example:
+Paths example:
 
 ```logtalk
 %%table
@@ -66,7 +66,7 @@ Path = [1, 3, 5] ;
 false.
 -->
 
-### switch example
+Switch example
 
 ```logtalk
 switch::test(2).
@@ -95,7 +95,7 @@ unexpected(4)
 true.
 -->
 
-% grades example:
+Grades example:
 
 ```logtalk
 grades::(assumel(take(hans, german)), grade(hans)).

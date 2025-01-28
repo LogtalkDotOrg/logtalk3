@@ -36,8 +36,8 @@ Start by loading the example and the required library files:
 logtalk_load(bricks(loader)).
 ```
 
-% create four bricks, all standing on the "ground" (use your imagination... ;-)
-% (don't use message broadcasting syntax in order to workaround a XSB parser bug)
+Create four bricks, all standing on the "ground" (use your imagination... ;-)
+(don't use message broadcasting syntax in order to workaround a XSB parser bug):
 
 ```logtalk
 brick::new(a, [position-(8, 1)]), brick::new(b, [position-(6, 1)]), brick::new(c, [position-(4, 1)]), brick::new(d, [position-(2, 1)]).
@@ -47,7 +47,7 @@ brick::new(a, [position-(8, 1)]), brick::new(b, [position-(6, 1)]), brick::new(c
 true.
 -->
 
-% set up ASCII stack monitor so we can watch the bricks moving
+Set up ASCII stack monitor so we can watch the bricks moving:
 
 ```logtalk
 after_event_registry::set_monitor(_, move(_,_), _, stack_monitor).
@@ -57,7 +57,7 @@ after_event_registry::set_monitor(_, move(_,_), _, stack_monitor).
 true.
 -->
 
-% ensure that top-level message goals generate events
+Ensure that top-level message goals generate events:
 
 ```logtalk
 set_logtalk_flag(events, allow).
@@ -67,7 +67,7 @@ set_logtalk_flag(events, allow).
 true.
 -->
 
-% make the stack (don't use message broadcasting syntax in order to workaround a XSB parser bug)
+Make the stack (don't use message broadcasting syntax in order to workaround a XSB parser bug):
 
 ```logtalk
 brick_stack::add_tuple([c,d]), brick_stack::add_tuple([b,c]), brick_stack::add_tuple([a,b]).
@@ -89,7 +89,7 @@ brick_stack::add_tuple([c,d]), brick_stack::add_tuple([b,c]), brick_stack::add_t
 true.
 -->
 
-% check results
+Check results:
 
 ```logtalk
 brick_stack::tuple(Tuple), write(Tuple), nl, fail.
@@ -111,7 +111,7 @@ Ma = [brick_stack, stack_monitor], Mb = [brick_stack].
 -->
 
 
-% move all stack to new position by moving bottom brick; check results
+Move all stack to new position by moving bottom brick; check results:
 
 ```logtalk
 d::move(9, 1).
@@ -160,7 +160,7 @@ brick_stack::tuple(Tuple), write(Tuple), nl, fail.
 false.
 -->
 
-% break stack in half by moving b to the "ground"; check results
+Break the stack in half by moving `b` to the "ground"; check results:
 
 ```logtalk
 b::move(3, 1).
@@ -196,7 +196,7 @@ brick_stack::tuple(Tuple), write(Tuple), nl, fail.
 false.
 -->
 
-% create new brick_stack tuple ; check results
+Create new `brick_stack` tuple and check results:
 
 ```logtalk
 brick_stack::add_tuple([d, a]).
@@ -234,7 +234,7 @@ brick_stack::tuple(Tuple), write(Tuple), nl, fail.
 false.
 -->
 
-% move all stack to new position by moving bottom brick; check results
+Move the stack to new position by moving bottom brick; check results:
 
 ```logtalk
 b::move(5, 1).
@@ -283,7 +283,7 @@ brick_stack::tuple(Tuple), write(Tuple), nl, fail.
 false.
 -->
 
-% clean up instances, tuples and monitors
+Clean up instances, tuples and monitors:
 
 ```logtalk
 brick_stack::remove_all_tuples.

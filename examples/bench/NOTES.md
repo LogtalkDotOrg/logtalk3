@@ -63,29 +63,27 @@ Start by loading the example:
 logtalk_load(bench(loader)).
 ```
 
-
-### Run all tests, repeating each one 1000 times
+Run all tests, repeating each one 1000 times
 
 ```logtalk
 run.
 ```
 
-### Run all tests, repeating each one N times, e.g. 2000 times
+Run all tests, repeating each one N times, e.g. 2000 times
 
 ```logtalk
 run(2000).
 ```
 
-### Run a specific benchmark, e.g. "nreverse", 10000 times
+Run a specific benchmark, e.g. "nreverse", 10000 times
 
 ```logtalk
 run(nreverse, 10000).
 ```
 
-
-% if you want to compare Logtalk and plain Prolog versions of an individual
-% benchmark, load also its Prolog file (in this case, you must quit and
-% restart Logtalk for each testing scenario); for example:
+If you want to compare Logtalk and plain Prolog versions of an individual
+benchmark, load also its Prolog file (in this case, you must quit and
+restart Logtalk for each testing scenario); for example:
 
 ```logtalk
 ['$LOGTALKUSER/examples/bench/boyer.pl'].
@@ -95,8 +93,8 @@ run(nreverse, 10000).
 true.
 -->
 
-% you can also use the "lgtunit" tool benchmark predicates directly; for
-% example:
+You can also use the `lgtunit` tool benchmark predicates directly; for
+example:
 
 ```logtalk
 lgtunit::benchmark(boyer::top,1000,Time).
@@ -104,12 +102,13 @@ lgtunit::benchmark(boyer::top,1000,Time).
 
 <!--
 Time = ...
-yes
+
+true.
 -->
 
-% for accurate timings of compiled ::/2 goals, the lgtunit::benchmark/3
-% calls should be made from compiled code in order to avoid the top-level
-% interpretation of the goals; an handy alternative is to use:
+For accurate timings of compiled `(::)/2` goals, the `lgtunit::benchmark/3`
+calls should be made from compiled code in order to avoid the top-level
+interpretation of the goals; an handy alternative is to use:
 
 ```logtalk
 logtalk<<(lgtunit::benchmark(boyer::top,1000,Time)).
@@ -117,14 +116,16 @@ logtalk<<(lgtunit::benchmark(boyer::top,1000,Time)).
 
 <!--
 Time = ...
-yes
+
+true.
 -->
 
-% some Prolog compilers such as SWI-Prolog and YAP provide a handy time/1
-% predicate that may also be used in alternative to the `lgtunit` benchmark
-% predicates (the adapter files for these two systems ensure that ::/2 goals
-% in the argument of the time/1 are fully compiled prior to calling them so
-% that we benchmark the code instead of the Logtalk compiler):
+Some Prolog compilers such as SWI-Prolog, Trealla Prolog, XVM, and YAP
+provide a handy `time/1` predicate that may also be used in alternative
+to the `lgtunit` benchmark predicates (the adapter files for these two
+systems ensure that `(::)/2` goals in the argument of the time/1 are
+fully compiled prior to calling them so that we benchmark the code
+instead of the Logtalk compiler):
 
 ```logtalk
 time(true).  % autoload if necessary

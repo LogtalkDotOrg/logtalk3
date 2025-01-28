@@ -40,7 +40,7 @@ Start by loading the example:
 logtalk_load(books(loader)).
 ```
 
-% print a list of books that have extras:
+Print a list of books that have extras:
 
 ```logtalk
 data_processing::print.
@@ -61,7 +61,7 @@ The Deathly Hallows
 true.
 -->
 
-% print variant using kilograms instead of grams by mapping optionals:
+Print variant using kilograms instead of grams by mapping optionals:
 
 ```logtalk
 data_processing::print_kg.
@@ -82,7 +82,7 @@ The Deathly Hallows
 true.
 -->
 
-% print a list of extras with declared weight
+Print a list of extras with declared weight:
 
 ```logtalk
 data_processing::print_heavy_extras.
@@ -91,10 +91,11 @@ data_processing::print_heavy_extras.
 <!--
 quidditch_set at 278 gr
 horcrux_set at 123 gr
+
 true.
 -->
 
-% get a list of book titles that have extras:
+Get a list of book titles that have extras:
 
 ```logtalk
 data_processing::books_with_extras(Titles).

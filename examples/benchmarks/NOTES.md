@@ -102,18 +102,18 @@ When the number of benchmark test repetitions is too low, you may get a
 The test that creates and abolishes empty objects may take a long time to
 complete when compared with all the other tests.
 
-% start by loading the example by choosing one of the loader files
-% (you must quit and restart Logtalk for each testing scenario):
+Start by loading the example by choosing one of the loader files
+(you must quit and restart Logtalk for each testing scenario):
 
 
-% run benchmarks with event support turned on and using static binding:
+Run benchmarks with event support turned on and using static binding:
 
 ```logtalk
 logtalk_load(benchmarks(loader_events)).
 ```
 
 
-% run benchmarks with event support turned off and using static binding:
+Run benchmarks with event support turned off and using static binding:
 
 ```logtalk
 logtalk_load(benchmarks(loader_no_events)).
@@ -126,9 +126,10 @@ logtalk_load(benchmarks(loader)).
 ```
 
 
-% list all the benchmark tests:
+List all the benchmark tests:
 
 ```logtalk
+%%table
 benchmarks::benchmark(Id, Goal).
 ```
 
@@ -148,21 +149,21 @@ Goal = database::other_dyndb, Id = d5 ;
 false.
 -->
 
-% run all the benchmark tests the default number of times:
+Run all the benchmark tests the default number of times:
 
 ```logtalk
 benchmarks::run.
 ```
 
 
-% run all the benchmark tests 100000 times:
+Run all the benchmark tests 100000 times:
 
 ```logtalk
 benchmarks::run(100000).
 ```
 
 
-% or run specific sets of benchmark tests, for example:
+Or run specific sets of benchmark tests, for example:
 
 ```logtalk
 benchmarks::run(s11, 1000000), benchmarks::run(s12, 1000000), benchmarks::run(s13, 1000000).

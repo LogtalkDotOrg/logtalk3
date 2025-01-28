@@ -26,19 +26,19 @@ explicitly complement an existing object compiled with the `complements`
 flag set to `restrict`. With this setting, a category can only add new
 functionality to the complemented object.
 
-% start by loading the non-patched vault objects:
+Start by loading the non-patched vault objects:
 
 ```logtalk
 logtalk_load(complements_restrict(vaults)).
 ```
 
-%  open the "my_vault" vault using the correct password:
+Open the `my_vault` vault using the correct password:
 
 ```logtalk
 my_vault::open('!"#$%&/()=').
 ```
 
-% any other password will be rejected; for example:
+Any other password will be rejected. For example:
 
 ```logtalk
 my_vault::open('abc123').
@@ -47,14 +47,14 @@ my_vault::open('abc123').
 false.
 -->
 
-% now load the "hacker" complementing category:
+Now load the `hacker` complementing category:
 
 ```logtalk
 logtalk_load(complements_restrict(hacker)).
 ...
 
 
-% try the hacker replaced password and fail miserably:
+Try the hacker replaced password and fail miserably:
 
 ```logtalk
 my_vault::open('1234567890').
@@ -66,8 +66,8 @@ false.
 -->
 
 
-% the correct, original, password is still the only one capable
-% of opening the vault, despite the hacker messages:
+The correct, original, password is still the only one capable
+of opening the vault, despite the hacker messages:
 
 ```logtalk
 my_vault::open('!"#$%&/()=').

@@ -38,7 +38,7 @@ Start by loading the example:
 logtalk_load(classvars(loader)).
 ```
 
-% get the value of the class variable for each instance:
+Get the value of the class variable for each instance:
 
 ```logtalk
 instance1::cv(Value1), instance2::cv(Value2), instance3::cv(Value3).
@@ -48,7 +48,7 @@ instance1::cv(Value1), instance2::cv(Value2), instance3::cv(Value3).
 Value1 = Value2, Value2 = Value3, Value3 = 0.
 -->
 
-% change the value of the class variable via instance1:
+Change the value of the class variable via instance1:
 
 ```logtalk
 instance1::set_cv(1).
@@ -58,7 +58,7 @@ instance1::set_cv(1).
 true.
 -->
 
-% get the value of the class variable for the other instances:
+Get the value of the class variable for the other instances:
 
 ```logtalk
 instance2::cv(Value2), instance3::cv(Value3).

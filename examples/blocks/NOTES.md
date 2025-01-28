@@ -36,8 +36,8 @@ Start by loading the example and the required library files:
 logtalk_load(blocks(loader)).
 ```
 
-% create four blocks, all standing on the "ground" (use your imagination... ;-)
-% (don't use message broadcasting syntax in order to workaround a XSB parser bug)
+Create four blocks, all standing on the "ground" (use your imagination... ;-)
+(don't use message broadcasting syntax in order to workaround a XSB parser bug):
 
 ```logtalk
 block::new(a, [position-(8, 1)]), block::new(b, [position-(6, 1)]), block::new(c, [position-(4, 1)]), block::new(d, [position-(2, 1)]).
@@ -47,7 +47,7 @@ block::new(a, [position-(8, 1)]), block::new(b, [position-(6, 1)]), block::new(c
 true.
 -->
 
-% set up ascii stack monitor so we can watch the blocks moving
+Set up ASCII stack monitor so we can watch the blocks moving:
 
 ```logtalk
 define_events(after, _, move(_,_), _, stack_monitor).
@@ -57,7 +57,7 @@ define_events(after, _, move(_,_), _, stack_monitor).
 true.
 -->
 
-% ensure that top-level message goals generate events
+Ensure that top-level message goals generate events:
 
 ```logtalk
 set_logtalk_flag(events, allow).
@@ -67,7 +67,7 @@ set_logtalk_flag(events, allow).
 true.
 -->
 
-% make the stack (don't use message broadcasting syntax in order to workaround a XSB parser bug)
+Make the stack (don't use message broadcasting syntax in order to workaround a XSB parser bug):
 
 ```logtalk
 block_stack::add_tuple(c-d), block_stack::add_tuple(b-c), block_stack::add_tuple(a-b).
@@ -90,7 +90,7 @@ block_stack::add_tuple(c-d), block_stack::add_tuple(b-c), block_stack::add_tuple
 true.
 -->
 
-% check results
+Check results:
 
 ```logtalk
 block_stack::tuples(Tuples).
@@ -101,6 +101,7 @@ Tuples = [c-d, b-c, a-b].
 -->
 
 ```logtalk
+%%table
 current_event(after, Object, Message, Sender, Monitor).
 ```
 
@@ -113,7 +114,7 @@ Object = b, Message = move(_, _), Monitor = block_stack ;
 false.
 -->
 
-% move all stack to new position by moving bottom block; check results
+Move all stack to new position by moving bottom block; check results:
 
 ```logtalk
 d::move(9, 1).
@@ -160,7 +161,7 @@ block_stack::tuples(Tuples).
 Tuples = [c-d, b-c, a-b].
 -->
 
-% break stack in half by moving b to the "ground"; check results
+Break stack in half by moving b to the "ground"; check results:
 
 ```logtalk
 b::move(3, 1).
@@ -195,7 +196,7 @@ block_stack::tuples(Tuples).
 Tuples = [c-d, a-b].
 -->
 
-% create new block_stack tuple; check results
+Create a new `block_stack` tuple and check results:
 
 ```logtalk
 block_stack::add_tuple(d-a).
@@ -231,7 +232,7 @@ block_stack::tuples(Tuples).
 Tuples = [c-d, a-b, d-a].
 -->
 
-% move all stack to new position by moving bottom block; check results
+Move all stack to new position by moving bottom block; check results:
 
 ```logtalk
 b::move(5, 1).
@@ -278,7 +279,7 @@ block_stack::tuples(Tuples).
 Tuples = [c-d, a-b, d-a].
 -->
 
-% clean up instances, tuples and monitors
+Clean up instances, tuples and monitors:
 
 ```logtalk
 block_stack::remove_all_tuples.

@@ -46,14 +46,14 @@ when sourced; for example, when using SWI-Prolog:
 	. set_classpath_swi.sh
 
 
-% second, start Logtalk and load the example:
+Second, start Logtalk and load the example:
 
 ```logtalk
 logtalk_load(clustering(loader)).
 ```
 
 
-% create 4 clusters from a list of float values:
+Create 4 clusters from a list of float values:
 
 ```logtalk
 clustering::clusters([1.0,1.5,1.8,3.5,3.6,4.0,4.2], 4, 10000, Clusters).

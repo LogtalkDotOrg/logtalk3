@@ -26,7 +26,7 @@ recursive function). For a description of this function see e.g.
 
 	https://en.wikipedia.org/wiki/Ackermann_function
 
-% print Logtalk, backend, and kernel versions:
+Print Logtalk, Prolog backend, and kernel versions:
 
 ```{code-cell}
 %versions
@@ -38,7 +38,7 @@ Start by loading the example:
 logtalk_load(ack(loader)).
 ```
 
-## Sample queries
+Sample queries
 
 ```{code-cell}
 ack::ack(2, 4, V).
@@ -61,11 +61,10 @@ ack::ack(3, 4, V).
 V = 125.
 -->
 
-## Sample queries for backends implementing the time/1 predicate
-
-(e.g., SWI-Prolog or YAP; the adapter files
-for these two systems ensure that a ::/2 goal in the argument of the
-time/1 predicate is compiled prior to calling it)
+Sample queries for backends implementing the time/1 predicate (e.g.,
+SWI-Prolog, Trealla Prolog, XVM, or YAP; the adapter files for these
+systems may ensure that a (::)/2 goal in the argument of the `time/1`
+predicate is compiled prior to calling it):
 
 ```{code-cell}
 % auto-load the predicate in the case of SWI-Prolog

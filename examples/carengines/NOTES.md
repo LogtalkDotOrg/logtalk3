@@ -30,8 +30,8 @@ Start by loading the example:
 logtalk_load(carengines(loader)).
 ```
 
-% both cars provide the same interface, declared in the protocol
-% that is implemented by the categories imported by each object:
+Both cars provide the same interface, declared in the protocol
+that is implemented by the categories imported by each object:
 
 ```logtalk
 sedan::current_predicate(P).
@@ -61,8 +61,8 @@ P = fuel/1 ;
 false.
 -->
 
-% the sedan engine properties are the ones defined in the corresponding 
-% imported category (classic):
+The `sedan` engine properties are the ones defined in the corresponding 
+imported category (`classic`):
 
 ```logtalk
 sedan::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)).
@@ -72,9 +72,9 @@ sedan::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)).
 Name = 'M180.940', Cylinders = 6, HP = 94, RPM = 4800.
 -->
 
-% the coupe engine properties are the ones defined in the corresponding 
-% imported category (sport) plus the ones inherited from the top category 
-% (classic) which are not overridden:
+The `coupe` engine properties are the ones defined in the corresponding 
+imported category (`sport`) plus the ones inherited from the top category 
+(`classic`) which are not overridden:
 
 ```logtalk
 coupe::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)).

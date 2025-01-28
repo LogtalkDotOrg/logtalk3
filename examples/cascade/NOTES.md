@@ -59,7 +59,7 @@ Start by loading the example:
 logtalk_load(cascade(loader)).
 ```
 
-% call the cascade::process_image/2 repeatedly to trigger the random errors:
+Call the `cascade::process_image/2` repeatedly to trigger the random errors:
 
 ```logtalk
 cascade::process_image(image, Final).

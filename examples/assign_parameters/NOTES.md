@@ -32,13 +32,13 @@ The objects in this example make use of the library category `assignvars`.
 This category contains an adaptation of the pure logical subset implementation
 of assignable variables by Nobukuni Kino, which can be found on the URL above.
 
-### Start by loading the "assign_parameters" category and the example:
+Start by loading the "assign_parameters" category and the example:
 
 ```logtalk
 logtalk_load(assign_parameters(loader)).
 ```
 
-### Rectangle example (don't use message broadcasting syntax in order to workaround a XSB parser bug):
+Rectangle example (don't use message broadcasting syntax in order to workaround a XSB parser bug):
 
 ```logtalk
 rectangle(2, 3, S)::init, rectangle(2, 3, S)::position(X0, Y0), rectangle(2, 3, S)::move(3, 7), rectangle(2, 3, S)::position(X1, Y1), rectangle(2, 3, S)::move(2, 5), rectangle(2, 3, S)::position(X2, Y2).
@@ -48,7 +48,7 @@ rectangle(2, 3, S)::init, rectangle(2, 3, S)::position(X0, Y0), rectangle(2, 3, 
 X0 = 0, Y0 = 0, X1 = 3, Y1 = 7, X2 = 2, Y2 = 5.
 -->
 
-### Finite state machine example
+Finite state machine example
 
 ```logtalk
 {fsm(T, I, F)}::recognise([0,1,1,2,1,2,0]).
@@ -68,7 +68,7 @@ I = red,
 F = [red]. 
 -->
 
-### Finite state machine example
+Finite state machine example
 
 ```logtalk
 {fsm(T, I, F)}::recognise([0,1,1,2,1,2,1,0]).

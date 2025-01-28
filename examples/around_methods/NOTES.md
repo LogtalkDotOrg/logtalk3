@@ -29,13 +29,13 @@ allows the new definition to call some goals, followed by a call to the
 original definition, followed by calls to some more goals, hence the name
 "around method".
 
-### Start by loading the unpatched object:
+Start by loading the unpatched object:
 
 ```logtalk
 logtalk_load(around_methods(bird)).
 ```
 
-### Call the unpatched bird::make_sound/0 predicate:
+Call the unpatched bird::make_sound/0 predicate:
 
 ```logtalk
 bird::make_sound.
@@ -46,13 +46,13 @@ Chirp, chirp!
 yes
 -->
 
-### Next load the complementing category defining the patch for the bird::make_sound/0 predicate:
+Next load the complementing category defining the patch for the bird::make_sound/0 predicate:
 
 ```logtalk
 logtalk_load(around_methods(patch)).
 ```
 
-### Call the now patched bird::make_sound/0 predicate:
+Call the now patched bird::make_sound/0 predicate:
 
 ```logtalk
 bird::make_sound.

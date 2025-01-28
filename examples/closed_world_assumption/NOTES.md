@@ -52,7 +52,7 @@ able to declare a predicate without necessarily defining it.
 logtalk_load(closed_world_assumption(loader)).
 ```
 
-% attic/0 is a public predicate, defined to be true:
+`attic/0` is a public predicate, defined to be true:
 
 ```logtalk
 house::attic.
@@ -62,7 +62,7 @@ house::attic.
 true.
 -->
 
-% cellar/0 is also a public predicate but without a definition; the
+`cellar/0` is also a public predicate but without a definition; the
 message will fail per closed world assumption:
 
 ```logtalk
@@ -73,7 +73,7 @@ house::cellar.
 false.
 -->
 
-% no pool/0 predicate declared; closed world assumption doesn't apply
+No `pool/0` predicate declared; closed world assumption doesn't apply
 % and thus the message generates an error:
 
 ```logtalk
@@ -84,7 +84,7 @@ house::pool.
 ERROR: error(existence_error(predicate_declaration,pool/0), logtalk(house::pool, _))
 -->
 
-% our house is pleasant as we have a porch and a garden:
+Our house is pleasant as we have a porch and a garden:
 
 ```logtalk
 house::pleasant.
@@ -94,9 +94,9 @@ house::pleasant.
 true.
 -->
 
-% but our house is not practical as we don't have a shed for the garden
-% tools or a garage to protect our bikes (per closed world assumption,
-% calling declared by undefined predicates fail):
+But our house is not practical as we don't have a shed for the garden
+tools or a garage to protect our bikes (per closed world assumption,
+calling declared by undefined predicates fail):
 
 ```logtalk
 house::practical.
@@ -106,9 +106,9 @@ house::practical.
 false.
 -->
 
-% no idea if we live in a fun house, however, as calling a undeclared and
-% undefined predicate generates an error; the closed world assumption
-% doesn't apply in this case:
+No idea if we live in a fun house, however, as calling a undeclared and
+undefined predicate generates an error; the closed world assumption
+doesn't apply in this case:
 
 ```logtalk
 house::fun.
