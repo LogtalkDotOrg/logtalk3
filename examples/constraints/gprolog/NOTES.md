@@ -23,3 +23,10 @@ This folder contains two simple examples illustrating how to use the Finite
 Domain Solver included with GNU Prolog with Logtalk. These examples are 
 adapted, with permission from the original author, Daniel Diaz, from the GNU 
 Prolog 1.3.0 distribution.
+
+Loading the example runs an initialization query that solves an alphacipher
+puzzle and an crypt-arithmetic puzzle:
+
+```logtalk
+logtalk_load(clp_gprolog(loader)).
+```
