@@ -32,7 +32,7 @@ Load the example:
 logtalk_load(sums(loader)).
 ```
 
-% some sample queries:
+Some sample queries:
 
 ```logtalk
 sums::rd(1, Sums).

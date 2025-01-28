@@ -52,7 +52,7 @@ logtalk_load(fluents(loader)).
 true.
 -->
 
-% get answers from the fluent:
+Get answers from the fluent:
 
 ```logtalk
 fluents::next(N1).
@@ -78,8 +78,8 @@ fluents::next(N3).
 N3 = 3.
 -->
 
-% after exhausting the fluent answers, subsequent queries fail
-% until the threaded engine implementing the fluent is destroyed:
+After exhausting the fluent answers, subsequent queries fail
+until the threaded engine implementing the fluent is destroyed:
 
 ```logtalk
 fluents::next(_).

@@ -34,13 +34,13 @@ For a detailed analysis of this example, see the following blog post:
 https://logtalk.org/2019/12/17/the-cost-of-defaulty-representations.html
 
 
-% start by loading the example and the "ports_profiler" tool:
+Start by loading the example and the `ports_profiler` tool:
 
 ```logtalk
 logtalk_load(defaulty(loader)).
 ```
 
-% get ports profiling data for both defaulty and tagged representations:
+Get ports profiling data for both defaulty and tagged representations:
 
 ```logtalk
 defaulty::count_atomics([a,1,_,b,2,_,c,3,_], As, Ns).
@@ -50,7 +50,7 @@ defaulty::count_atomics([a,1,_,b,2,_,c,3,_], As, Ns).
 As = Ns, Ns = 3.
 -->
 
-% print the profiling data:
+Print the profiling data:
 
 ```logtalk
 ports_profiler::data.
@@ -64,10 +64,11 @@ defaulty  count_atomic/5        3    15     9     9     0     0     0     0
 defaulty  count_atomics/3       0     1     1     1     0     0     0     0
 defaulty  count_atomics/5       1     9    10    10     0     0     0     0
 ---------------------------------------------------------------------------
+
 true.
 -->
 
-% reset the profiling data for the next query:
+Reset the profiling data for the next query:
 
 ```logtalk
 ports_profiler::reset.
@@ -93,5 +94,6 @@ tagged  count_atomic/5        3     6     9     9     0     0     0     0
 tagged  count_atomics/3       0     1     1     1     0     0     0     0
 tagged  count_atomics/5       1     9    10    10     0     0     0     0
 -------------------------------------------------------------------------
+
 true.
 -->

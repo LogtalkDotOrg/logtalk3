@@ -60,3 +60,76 @@ using prototype hierarchies:
 - `diamond3`  
 	presents a solution which allows both inherited definitions to be 
 	used in D
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(diamonds(loader)).
+```
+
+First variant of the "diamond problem", defined in the "diamond1" source file:
+
+```logtalk
+d1::m.
+```
+
+<!--
+Redefinition of method m/0 in object b1
+
+true.
+-->
+
+Second variant of the "diamond problem", defined in the "diamond2" source file:
+
+```logtalk
+d2::m.
+```
+
+<!--
+Redefinition of method m/0 in object c2
+
+true.
+-->
+
+Third variant of the "diamond problem", defined in the "diamond3" source file:
+
+```logtalk
+d3::b3_m.
+```
+
+<!--
+Redefinition of method m/0 in object b3
+
+true.
+-->
+
+```logtalk
+d3::c3_m.
+```
+
+<!--
+Redefinition of method m/0 in object c3
+
+true.
+-->
+
+```logtalk
+d3::m.
+```
+
+<!--
+Redefinition of method m/0 in object b3
+
+true.
+-->
+
+```logtalk
+d4::m.
+```
+
+<!--
+Redefinition of method m/0 in object b3
+Redefinition of method m/0 in object c3
+
+true.
+-->

@@ -56,7 +56,7 @@ Start by loading the example:
 logtalk_load(dynpred(loader)).
 ```
 
-% sending to descendant the message p/1, returns the definition in root:
+Sending to descendant the message `p/1`, returns the definition in root:
 
 ```logtalk
 descendant::p(Value).
@@ -66,8 +66,8 @@ descendant::p(Value).
 Value = root.
 -->
 
-% asserting a local definition for p/1 in descendant overrides the inherited 
-% definition:
+Asserting a local definition for `p/1` in descendant overrides the inherited 
+definition:
 
 ```logtalk
 descendant::(assertz(p(descendant)), p(Value)).
@@ -77,8 +77,8 @@ descendant::(assertz(p(descendant)), p(Value)).
 Value = descendant.
 -->
 
-% if we retract the local definition, again the definition inherited from root
-% will be used:
+If we retract the local definition, again the definition inherited from root
+will be used:
 
 ```logtalk
 descendant::(retractall(p(_)), p(Value)).
@@ -88,8 +88,8 @@ descendant::(retractall(p(_)), p(Value)).
 Value = root.
 -->
 
-% class does not understand the message p1/1 (the predicate is declared only 
-% for the class descendant instances):
+The object `class` does not understand the message `p1/1` (the predicate is
+declared only for the `class` descendant instances):
 
 ```logtalk
 class::p1(X).
@@ -100,7 +100,7 @@ error(existence_error(predicate_declaration, p1(_)), class::p1(_), user)
 -->
 
 
-% the same message is valid for the class instances:
+The same message is valid for the `class` instances:
 
 ```logtalk
 instance::p1(X).
@@ -110,8 +110,8 @@ instance::p1(X).
 X = class.
 -->
 
-% if we assert a clause for a new predicate, p2/1, in the class
-% (a side-effect being a dynamic declaration of the predicate):
+If we assert a clause for a new predicate, `p2/1`, in `class`
+(a side-effect being a dynamic declaration of the predicate):
 
 ```logtalk
 class::assertz(p2(class)).
@@ -121,7 +121,7 @@ class::assertz(p2(class)).
 true.
 -->
 
-% the new predicate, like p1/1, is not available for the class:
+The new predicate, like p1/1, is not available for `class`:
 
 ```logtalk
 class::p2(Value).
@@ -132,7 +132,7 @@ error(existence_error(predicate_declaration, p2(_)), class::p2(_), user)
 -->
 
 
-% but is available for the class instances, the same way as p1/1:
+But is available for the `class` instances, the same way as `p1/1`:
 
 ```logtalk
 instance::p2(X).
@@ -142,7 +142,7 @@ instance::p2(X).
 X = class.
 -->
 
-% if we change our mind and abolish the new predicate:
+If we change our mind and abolish the new predicate:
 
 ```logtalk
 class::abolish(p2/1).
@@ -156,10 +156,10 @@ instance::p2(_).
 error(existence_error(predicate_declaration,p2/1), logtalk(_,_))) :-
 -->
 
-% using a prototype, assert three new predicates (the method object_assert/0 
-% asserts the predicate public_predicate/0 from outside the prototype; the 
-% method self_assert/0 asserts the predicate protected_predicate/0 in self; 
-% the method this_assert/0 asserts the predicate private_predicate/0 in this):
+Using a prototype, assert three new predicates (the method `object_assert/0`
+asserts the predicate `public_predicate/0` from outside the prototype; the 
+method `self_assert/0` asserts the predicate `protected_predicate/0` in _self_; 
+the method `this_assert/0` asserts the predicate `private_predicate/0` in _this_):
 
 ```logtalk
 prototype::(object_assert, self_assert, this_assert).
@@ -169,7 +169,7 @@ prototype::(object_assert, self_assert, this_assert).
 true
 -->
 
-% and check the resulting scope of each predicate:
+Check the resulting scope of each predicate:
 
 ```logtalk
 prototype::dynamic_predicates.

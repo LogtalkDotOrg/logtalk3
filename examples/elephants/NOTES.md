@@ -31,8 +31,8 @@ Start by loading the example:
 logtalk_load(elephants(loader)).
 ```
 
-% prototypes are neither instances or classes but either standalone objects
-% as "clyde", our prototypical but concrete elephant ...
+Prototypes are neither instances or classes but either standalone objects
+as `clyde`, our prototypical but concrete elephant:
 
 ```logtalk
 clyde::number_of_legs(N).
@@ -50,8 +50,8 @@ clyde::color(C).
 C = grey.
 -->
 
-% ... or objects that are derived from other prototypes as "fred", which is
-% like "clyde" except in his color
+Or objects that are derived from other prototypes as `fred`, which is
+like `clyde` except in his color:
 
 ```logtalk
 fred::number_of_legs(N).

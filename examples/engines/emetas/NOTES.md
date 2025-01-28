@@ -45,7 +45,7 @@ logtalk_load(emetas(loader)).
 true.
 -->
 
-% some clauses for a predicate used in the next queries:
+Some clauses for a predicate used in the next queries:
 
 ```logtalk
 assertz(a(2)), assertz(a(1)), assertz(a(4)), assertz(a(3)).
@@ -55,7 +55,7 @@ assertz(a(2)), assertz(a(1)), assertz(a(4)), assertz(a(3)).
 true.
 -->
 
-% find the larger value from the values returned by a generator:
+Find the larger value from the values returned by a generator:
 
 ```logtalk
 emetas::best_of(X, (>), a(X)).
@@ -65,7 +65,7 @@ emetas::best_of(X, (>), a(X)).
 X = 4.
 -->
 
-% test the threaded engine implementation of the standard findall/3 meta-predicate:
+Test the threaded engine implementation of the standard `findall/3` meta-predicate:
 
 ```logtalk
 emetas::find_all(X, a(X), List).
@@ -75,7 +75,7 @@ emetas::find_all(X, a(X), List).
 List = [2, 1, 4, 3].
 -->
 
-% test the threaded engine implementation of the find_at_most/4 meta-predicate:
+Test the threaded engine implementation of the `find_at_most/4` meta-predicate:
 
 ```logtalk
 emetas::find_at_most(3, X, a(X), Xs).

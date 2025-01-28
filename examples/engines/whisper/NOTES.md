@@ -25,13 +25,14 @@ This example creates a chain of engines passing a term. The original example was
 written by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It should
 run also on XSB and YAP if and when these systems bugs with coroutining and/or
 threads get fixed.
+
 Load the example:
 
 ```logtalk
 logtalk_load(whisper(loader)).
 ```
 
-% some sample queries:
+Some sample queries:
 
 ```logtalk
 whisper::whisper(0, 1, Final).

@@ -44,7 +44,7 @@ logtalk_load(interactors(loader)).
 true.
 -->
 
-% get natural numbers in increasing order:
+Get natural numbers in increasing order:
 
 ```logtalk
 interactors::natural(N).
@@ -71,7 +71,7 @@ N = 3.
 -->
 
 
-% get prime numbers in increasing order:
+Get prime numbers in increasing order:
 
 ```logtalk
 interactors::prime(P).
@@ -97,7 +97,7 @@ interactors::prime(P).
 N = 5.
 -->
 
-% interactor with goal injection:
+Interactor with goal injection:
 
 ```logtalk
 interactors<<sums(S).

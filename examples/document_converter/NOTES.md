@@ -34,25 +34,23 @@ After downloading the Tika JAR file (for version 2.8.0, this would be the
 `tika-app-2.8.0.jar` file), copy it to this example `jars` folder before
 running the example.
 
-% be sure to have download the required JAR files before attempting to
-% run this example; see the `NOTES.txt` file for details
+Be sure to have download the required JAR files before attempting to
+run this example.
 
-% start by setting the Java CLASSPATH environment variable; three backend
-% Prolog systems are supported (XVM, SWI-Prolog, and YAP) and for each one
-% there's a Bash script file that sets the CLASSPATH environment variable
-% when sourced; for example, when using SWI-Prolog:
+Start by setting the Java `CLASSPATH` environment variable. Three backend
+Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
+script file that sets the `CLASSPATH` environment variable when sourced:
 
-$ cd "$LOGTALKUSER/examples/document_converter"
-$ . set_classpath_swi.sh
+	$ cd "$LOGTALKUSER/examples/document_converter"
+	$ . set_classpath_swi.sh
 
-
-% second, start Logtalk and load the example:
+Second, start Logtalk and load the example:
 
 ```logtalk
 logtalk_load(document_converter(loader)).
 ```
 
-% convert a "sample.pdf" document to a "sample.txt" file:
+Convert a "sample.pdf" document to a "sample.txt" file:
 
 ```logtalk
 document::convert('sample.pdf', 'sample.txt').
@@ -62,7 +60,7 @@ document::convert('sample.pdf', 'sample.txt').
 true.
 -->
 
-% get the text contents of a "sample.pdf" document:
+Get the text contents of a "sample.pdf" document:
 
 ```logtalk
 document::contents('sample.pdf', Contents).

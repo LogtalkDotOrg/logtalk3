@@ -36,7 +36,7 @@ Load the example:
 logtalk_load(ebench(loader)).
 ```
 
-% first, an example with an engine goal that succeeds deterministically:
+First, an example with an engine goal that succeeds deterministically:
 
 ```logtalk
 time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,true,A),fail)).
@@ -47,7 +47,7 @@ time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
 ```
 
 
-% second, an example with an engine goal that provides an infinite stream of solutions:
+Second, an example with an engine goal that provides an infinite stream of solutions:
 
 ```logtalk
 time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,repeat,A),fail)).
@@ -58,7 +58,7 @@ time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
 ```
 
 
-% finally, an example with an engine running a loop predicate using the engine term queue:
+Finally, an example with an engine running a loop predicate using the engine term queue:
 
 ```logtalk
 assertz((loop :- threaded_engine_fetch(_),loop)).

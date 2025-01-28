@@ -30,7 +30,7 @@ into separate queues. In this case, asking for a list of the pending
 messages returns a list with top messages before the normal messages but
 keeping the message sent order otherwise.
 
-% start by loading the example and the required libraries:
+Start by loading the example and the required libraries:
 
 ```logtalk
 logtalk_load(pmq(loader)).
@@ -40,7 +40,7 @@ logtalk_load(pmq(loader)).
 true.
 -->
 
-% send some messages to the priority queue:
+Send some messages to the priority queue:
 
 ```logtalk
 pmq::(send(13-let), send(5-out), send(11-the), send(17-who), send(7-dogs)).
@@ -50,7 +50,7 @@ pmq::(send(13-let), send(5-out), send(11-the), send(17-who), send(7-dogs)).
 true
 -->
 
-% retrieve the current messages sorted by priority:
+Retrieve the current messages sorted by priority:
 
 ```logtalk
 pmq::messages(Messages).
@@ -60,8 +60,8 @@ pmq::messages(Messages).
 Messages = [who, let, the, dogs, out].
 -->
 
-% after retrieving the messages the priority queue
-% is empty until new messages are received:
+After retrieving the messages the priority queue is empty until new messages
+are received:
 
 ```logtalk
 pmq::messages(Messages).
@@ -71,14 +71,14 @@ pmq::messages(Messages).
 Messages = [].
 -->
 
-% sends a next batch of messages:
+Send the next batch of messages:
 
 ```logtalk
 pmq::(send(8-fun), send(11-have), send(3-':-)')).
 -->
 
 
-% retrieve the current messages sorted by priority:
+Retrieve the current messages sorted by priority:
 
 ```logtalk
 pmq::messages(Messages).
@@ -89,8 +89,8 @@ Messages = [have, fun, ':-)'].
 -->
 
 
-% same messages but to an alternative implementation that splits top messages
-% from normal messages instead of sorting all messages by priority
+Same messages but to an alternative implementation that splits top messages
+from normal messages instead of sorting all messages by priority:
 
 ```logtalk
 split::(send(13-let), send(5-out), send(11-the), send(17-who), send(7-dogs)).

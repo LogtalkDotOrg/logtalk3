@@ -35,7 +35,7 @@ Load the example:
 logtalk_load(delegates(loader)).
 ```
 
-% without a delegate:
+Without a delegate:
 
 ```logtalk
 a_delegator::operation(String).
@@ -45,7 +45,8 @@ a_delegator::operation(String).
 String = 'default implementation'.
 -->
 
-% with a delegate that does not implement thing/1:
+With a delegate that does not implement `thing/1`:
+
 ```logtalk
 a_delegator::set_delegate(an_object), a_delegator::operation(String).
 ```
@@ -54,7 +55,7 @@ a_delegator::set_delegate(an_object), a_delegator::operation(String).
 String = 'default implementation'.
 -->
 
-% with a delegate that implements thing/1:
+With a delegate that implements `thing/1`:
 
 ```logtalk
 a_delegator::set_delegate(a_delegate), a_delegator::operation(String).
@@ -64,7 +65,7 @@ a_delegator::set_delegate(a_delegate), a_delegator::operation(String).
 String = 'delegate implementation'.
 -->
 
-% same queries but using the parametric object implementation:
+Same queries but using the parametric object implementation:
 
 ```logtalk
 a_delegator(an_object)::operation(String).

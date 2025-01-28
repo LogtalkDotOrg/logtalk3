@@ -37,3 +37,23 @@ detailed description of the flags.
 The `tutor` tool provides explanations and fix suggestions for compiler
 warnings and errors messages. New users are advised to load it at startup
 (e.g., from a settings file) for a more friendly experience.
+
+To augment compiler warnings and errors messages with explanations and
+fix suggestions, start by loading the `tutor` tool:
+
+```logtalk
+logtalk_load(tutor(loader)).
+```
+
+The entities on this example are divided in two sets. The first set 
+results on compiler warning messages, while the second set results in
+compiler error messages. To load each sets of entities, compile and
+load the corresponding loader files:
+
+```logtalk
+logtalk_load(errors(warnings_loader)).
+```
+
+```logtalk
+logtalk_load(errors(errors_loader)).
+```

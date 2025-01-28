@@ -49,7 +49,7 @@ Load the example:
 logtalk_load(lazy(loader)).
 ```
 
-% return a lazy list and access its elements:
+Return a lazy list and access its elements:
 
 ```logtalk
 lazy::find_all(X, (repeat,random::random(X)), List), list::member(E, List).

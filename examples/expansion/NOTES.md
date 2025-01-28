@@ -39,12 +39,11 @@ Start by loading the example:
 logtalk_load(expansion(loader)).
 ```
 
-% simple tests of the expand_term/2 and expand_goal/2 built-in methods:
+Simple tests of the `expand_term/2` and `expand_goal/2` built-in methods.
 
-
-% sending the messages expand_term/2 (expand_goal/2) to an object only
-% result in the use of the clauses defined for the term_expansion/2 
-% (goal_expansion/2) hook predicate if this predicate is public:
+Sending the messages `expand_term/2` (`expand_goal/2`) to an object only
+result in the use of the clauses defined for the `term_expansion/2` 
+(`goal_expansion/2`) hook predicate if this predicate is public:
 
 ```logtalk
 exp_public::expand_term(8, Term).
@@ -62,9 +61,9 @@ exp_public::expand_goal(write(Term), EGoal).
 EGoal = write_term(Term, [quoted(true)]).
 -->
 
-% the clauses for the term_expansion/2 (goal_expansion/2) hook predicate
+The clauses for the `term_expansion/2` (`goal_expansion/2`) hook predicate
 % will not be used if they are not within the scope of the sender (in this
-% case, the pseudo-object "user") as in the following cases:
+% case, the pseudo-object `user`) as in the following cases:
 
 ```logtalk
 exp_protected::expand_term(8, Term).
@@ -98,9 +97,9 @@ exp_private::expand_goal(write(Term), EGoal).
 EGoal = write(Term).
 ->
 
-% the following queries perform similar tests but with the calls to the
-% expand_term/2 (expand_goal/2) built-in method being made from within 
-% the prototypes:
+The following queries perform similar tests but with the calls to the
+`expand_term/2` (`expand_goal/2`) built-in method being made from within 
+the prototypes:
 
 ```logtalk
 desc_public::test_term_expansion(8, Term).

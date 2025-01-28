@@ -32,13 +32,13 @@ one for production code, or a single parametric object. This example
 illustrates both approaches although only the first one is used in the
 loader auxiliary files and in the sample queries.
 
-% start by loading the example with the debug statements activated:
+Start by loading the example with the debug statements activated:
 
 ```logtalk
 logtalk_load(debug_hooks(loader_debug)).
 ```
 
-% debug the definition of the "object" predicate append/3:
+Debug the definition of the `object::append/3` predicate:
 
 ```logtalk
 object::append([1,2,3], [4,5], List).
@@ -53,7 +53,7 @@ Base case: append([], [4, 5], [4, 5])
 List = [1, 2, 3, 4, 5].
 -->
 
-% debug calls to the "object" predicate sum/2:
+Debug calls to the `object::sum/2` predicate:
 
 ```logtalk
 object::sum([1,2,3,_], S).
@@ -79,13 +79,13 @@ object::sum(wrong, S).
 Exception: error(type_error(list, wrong), list::check(wrong), object)
 -->
 
-% load the example with the debug statements discarded:
+Load the example with the debug statements discarded:
 
 ```logtalk
 logtalk_load(debug_hooks(loader_production)).
 ```
 
-% call the "object" predicate append/3 without the debugging statements:
+Call the `object::append/3` predicate without the debugging statements:
 
 ```logtalk
 object::append([1,2,3], [4,5], List).
@@ -95,7 +95,7 @@ object::append([1,2,3], [4,5], List).
 List = [1, 2, 3, 4, 5].
 -->
 
-% call the "object" predicate sum/2 without the debugging statements:
+Call the `object::sum/2` predicate without the debugging statements:
 
 ```logtalk
 object::sum([1,2,3,_], S).

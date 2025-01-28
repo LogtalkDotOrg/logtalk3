@@ -30,3 +30,77 @@ Some examples and tests written by Michael Hendricks for his `edcg`
 SWI-Prolog pack repo at:
 
 	https://github.com/mndrix/edcg
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(edcgs(loader)).
+```
+
+Construct a [1,2,...,N] list:
+
+```logtalk
+list_constructors::flist(7, [], L).
+```
+
+<!--
+L = [1, 2, 3, 4, 5, 6, 7].
+-->
+
+Construct a [N,...,2,1] list:
+
+```logtalk
+list_constructors::rlist(7, L, []).
+```
+
+<!--
+L = [7, 6, 5, 4, 3, 2, 1].
+-->
+
+Sum the natural numbers 1..4:
+
+```logtalk
+list_sums::sum_first_n(4, 0, Sum),
+```
+
+<!--
+Sum = 10.
+-->
+
+Sum the elements of a list:
+
+```logtalk
+list_sums::sum([2,2,3], Sum).
+```
+
+<!--
+Sum = 7.
+-->
+
+Return the set of elements present in a list:
+
+```logtalk
+unique::unique([a], Unique).
+```
+
+<!--
+Unique = [a].
+-->
+
+```logtalk
+unique::unique([a,b,a], Unique).
+```
+
+<!--
+Unique = [a,b].
+-->
+
+Compute the length of a list:
+
+```logtalk
+synopsis::len([a,b,a], Len).
+```
+
+<!--
+Len = 3.
+-->

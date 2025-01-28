@@ -45,9 +45,10 @@ Load the example:
 logtalk_load(family(loader)).
 ```
 
-% some example queries using the Addams family relations:
+Some example queries using the Addams family relations:
 
 ```logtalk
+%%table
 family(addams)::sister(Sister, Sibling).
 ```
 
@@ -59,9 +60,10 @@ Sister = wednesday, Sibling = pugsley ;
 false.
 -->
 
-% some example queries using the Simpsons family relations:
+Some example queries using the Simpsons family relations:
 
 ```logtalk
+%%table
 family(simpsons)::mother(Mother, Child).
 ```
 
@@ -72,9 +74,10 @@ Mother = marge, Child = maggie ;
 false.
 -->
 
-% some example queries using the extended Simpsons family relations:
+Some example queries using the extended Simpsons family relations:
 
 ```logtalk
+%%table
 family(simpsons_extended)::parent(Parent, Child).
 ```
 

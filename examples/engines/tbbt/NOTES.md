@@ -36,13 +36,13 @@ Load the example:
 logtalk_load(tbbt(loader)).
 ```
 
-% explains the game of rock, paper, scissors, lizard, spock:
+Explain the game of rock, paper, scissors, lizard, spock:
 
 ```logtalk
 game::explain.
 ```
 
-% play a game:
+Play a game:
 
 ```logtalk
 game::play.

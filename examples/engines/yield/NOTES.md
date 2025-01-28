@@ -33,7 +33,7 @@ Load the example:
 logtalk_load(yield(loader)).
 ```
 
-% some sample queries:
+Some sample queries:
 
 ```logtalk
 yield::yield(1, List).
