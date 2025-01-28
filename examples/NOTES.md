@@ -27,9 +27,14 @@ example source code.
 
 The `NOTES.md` file of most examples can also be  open as a Jupyter
 notebook to execute the example sample queries. Requires installing
-Jupytext 1.16.6 or a later version:
+the Jupyter kernel for Logtalk (version 0.15.0 or later) and Jupytext
+(version 1.16.6 or a later) packages:
 
-https://github.com/mwouts/jupytext
+https://pypi.org/project/logtalk-jupyter-kernel/
+https://anaconda.org/conda-forge/logtalk-jupyter-kernel
+
+https://pypi.org/project/jupytext/
+https://anaconda.org/conda-forge/jupytext
 
 You should be able to open the `NOTES.md` files in JupyterLab by
 control-clicking on them and selection the "Open With" > "Notebook"
