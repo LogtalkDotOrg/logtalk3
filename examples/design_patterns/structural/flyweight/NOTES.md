@@ -39,3 +39,63 @@ Static predicates that should be shared can simply be defined in the flyweight
 object and inherited by its descendants. Any dynamic predicates can be handled
 (i.e., asserted, accessed, and retracted) in either the flyweight object, if
 shared, or in *self*, if it may differ for each descendant.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('structural/flyweight/loader')).
+```
+
+Add cheese brands and respective cost to the flyweight object using any of
+the shops:
+
+```logtalk
+shop1::(stock_cheese(white, 1.25), stock_cheese(blue, 3.75)).
+```
+
+<!--
+true.
+-->
+
+All shops now have white and blue cheese at the same cost:
+
+```logtalk
+shop2::cheese(Brand, Cost).
+```
+
+<!--
+Brand = white,
+Cost = 1.25 ;
+Brand = blue,
+Cost = 3.75
+
+true.
+-->
+
+Both shops can sell cheese but the units sold are stored per-shop:
+
+```logtalk
+shop1::sell_cheese(blue, 3), shop2::sell_cheese(blue, 8).
+```
+
+<!--
+true.
+-->
+
+Check cheese units sold and income for each shop:
+
+```logtalk
+shop1::(total_units_sold(Units), total_income(Income)).
+```
+
+<!--
+Total = 3, Income = 11.25.
+-->
+
+```logtalk
+shop2::(total_units_sold(Units), total_income(Income)).
+```
+
+<!--
+Total = 8, Income = 30.0.
+-->

@@ -41,3 +41,51 @@ This is a relatively expensive operation do to requiring retrieving the
 state of the prototype for copying. More efficient solutions can be
 implemented in most cases by e.g. having customized instance creation
 predicate definitions.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('creational/prototype/loader')).
+```
+
+Set the prototype instance and create a clone:
+
+```logtalk
+car::set_prototype(diesel_car_prototype).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+car::clone(Clone), Clone::describe.
+```
+
+<!--
+Motor: diesel
+Doors: 4
+Color: blue
+Clone = o1.
+-->
+
+Change the prototype instance and create a clone:
+
+```logtalk
+car::set_prototype(gasoline_car_prototype).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+car::clone(Clone), Clone::describe.
+```
+
+<!--
+Motor: gasoline
+Doors: 2
+Color: red
+Clone = o2.
+-->

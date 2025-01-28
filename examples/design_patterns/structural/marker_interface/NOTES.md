@@ -41,3 +41,24 @@ pattern to implement. The reflection API provides built-in predicates
 that allows to test if an object (or a category) implements or conforms
 to a given protocol. It is also possible to add a marker to an existing
 object at runtime using a complementing category (aka hot patching).
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('structural/marker_interface/loader')).
+```
+
+Check for the marker interface:
+
+```logtalk
+%%table
+conforms_to_protocol(Entity, marker).
+```
+
+<!--
+Entity = an_object ;
+Entity = a_descendant_object ;
+Entity = another_object ;
+Entity = a_category ;
+false.
+-->

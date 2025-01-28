@@ -35,3 +35,52 @@ This pattern is not described in the GoF book. See the Wikipedia page for
 details and references.
 
 The sample implementation uses classes.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('creational/lazy_initialization/loader')).
+```
+
+Access/create an instance for key "apple":
+
+```logtalk
+fruit::new(apple, Instance).
+```
+
+<!--
+Instance = o1.
+-->
+
+Access/create an instance for key "banana":
+
+```logtalk
+fruit::new(banana, Instance).
+```
+
+<!--
+Instance = o2.
+-->
+
+Access/create an instance for key "apple":
+
+```logtalk
+fruit::new(apple, Instance).
+```
+
+<!--
+Instance = o1.
+-->
+
+Show all initialized keys:
+
+```logtalk
+fruit::show_all.
+```
+
+<!--
+apple
+banana
+
+true.
+-->

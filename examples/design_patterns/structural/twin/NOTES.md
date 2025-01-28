@@ -46,3 +46,78 @@ categories, each category protocol adds to the protocol of the object
 message forwarding to its twin object (and thus one level of indirection).
 Note that this pattern implies a circular reference between the twin
 objects, which prevents some static binding optimizations.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('structural/twin/loader')).
+```
+
+Each object can answer its messages and the messages for its twin object,
+thanks to message forwarding:
+
+```logtalk
+a_date::year(Year).
+```
+
+<!--
+Year = 2018.
+-->
+
+```logtalk
+a_date::hour(Hour).
+```
+
+<!--
+Hour = 11.
+-->
+
+```logtalk
+a_time::minutes(Minutes).
+```
+
+<!--
+Minutes = 27.
+-->
+
+```logtalk
+a_time::day(Day).
+```
+
+<!--
+Day = 13.
+-->
+
+We can also create twins dynamically:
+
+```logtalk
+time::new(twin_time, twin_date, [hour(12),minutes(37),seconds(17)]).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+date::new(twin_date, twin_time, [year(2003),month(9),day(23)]).
+```
+
+<!--
+true.
+-->
+
+```logtalk
+twin_time::year(Year).
+```
+
+<!--
+Year = 2003.
+-->
+
+```logtalk
+twin_date::seconds(Seconds).
+```
+
+<!--
+Seconds = 17.
+-->

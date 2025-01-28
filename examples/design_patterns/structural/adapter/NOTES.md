@@ -35,3 +35,58 @@ We illustrate in our sample implementation a solution that mimics
 composition by using parametric objects. We could also have used in
 alternative dynamic predicates to hold the same information passed
 using parameters.
+
+Start by loading the design pattern sample implementations:
+
+```logtalk
+logtalk_load(design_patterns('structural/adapter/loader')).
+```
+
+Connect rechargers to phones:
+
+```logtalk
+iphone_recharger(iphone)::connect.
+```
+
+<!--
+Lightning connected
+Recharge Started
+  Recharge 25%
+  Recharge 50%
+  Recharge 75%
+Recharge Finished
+
+true.
+-->
+
+```logtalk
+iphone_micro_usb_recharger(iphone)::connect.
+```
+
+<!--
+MicroUsb connected
+Lightning connected
+Recharge Started
+  Recharge 25%
+  Recharge 50%
+  Recharge 75%
+Recharge Finished
+
+true.
+-->
+
+```logtalk
+android_recharger(android)::connect.
+```
+
+<!--
+MicroUsb connected
+Recharge Started
+  Recharge 20%
+  Recharge 40%
+  Recharge 60%
+  Recharge 80%
+Recharge Finished
+
+true.
+-->

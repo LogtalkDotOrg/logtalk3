@@ -33,3 +33,29 @@ Description:
 The sample implementation converts a floating-point number into an
 integer number using a sequence of operations represented using
 Definite Clause Grammar rules.
+
+Start by loading the design pattern sample implementation:
+
+```logtalk
+logtalk_load(design_patterns('logic/threading_state/loader')).
+```
+
+Convert a float into an integer:
+
+```logtalk
+states::convert(12.34, Integer).
+```
+
+<!--
+Integer = 76.
+-->
+
+Confirm the result:
+
+```logtalk
+Integer is round((12.34 * 12.34) /2.0).
+```
+
+<!--
+Integer = 76.
+-->
