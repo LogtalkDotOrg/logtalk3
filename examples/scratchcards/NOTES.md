@@ -40,8 +40,10 @@ problem:
 
 https://adventofcode.com/2023/day/4
 
-The `test_files` directory contain a sample input copied from the problem
-description.
+The `test_files` directory contain sample inputs for part 1 of the problem
+copied from the problem description. For copyright reasons, the part 2 files
+cannot be distributed here and must be downloaded from the Advent of Code
+2023 website.
 
 Start by loading the example:
 
@@ -49,20 +51,25 @@ Start by loading the example:
 logtalk_load(scratchcards(loader)).
 ```
 
-Compute the points for the test_files/sample file:
+Compute the points for the `test_files/sample` file (part 1):
 
 ```logtalk
-scratchcards::points('test_files/sample', Points).
+object_property(scratchcards, file(_, Directory)),
+atom_concat(Directory, 'test_files/sample', File),
+scratchcards::points(File, Points).
 ```
 
 <!--
 Points = 13.
 -->
 
-Compute the total number of scratchcards for the test_files/input file:
+Compute the total number of scratchcards for the `test_files/input` file
+(part 2):
 
 ```logtalk
-scratchcards::total('test_files/input', Total).
+object_property(scratchcards, file(_, Directory)),
+atom_concat(Directory, 'test_files/input', File),
+scratchcards::total(File, Total).
 ```
 
 <!--

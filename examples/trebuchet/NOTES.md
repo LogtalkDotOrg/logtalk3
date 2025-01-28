@@ -43,8 +43,10 @@ https://adventofcode.com/2023/day/1
 The solution provided is for Part 2 of the problem. To solve just for
 Part 1, comment out the grammar rules for digits as letters.
 
-The `test_files` directory contain sample inputs copied from the problem
-description.
+The `test_files` directory contain sample inputs for part 1 of the problem
+copied from the problem description. For copyright reasons, the part 2 files
+cannot be distributed here and must be downloaded from the Advent of Code
+2023 website.
 
 Start by loading the example:
 
@@ -56,12 +58,38 @@ logtalk_load(trebuchet(loader)).
 true.
 -->
 
-Compute the calibration for the `sample_1` file:
+Compute the calibration for the `test_files/sample_1` file (part 1):
 
 ```logtalk
-trebuchet::solution('test_files/sample_1', Calibration).
+object_property(trebuchet, file(_, Directory)),
+atom_concat(Directory, 'test_files/sample_1', File),
+trebuchet::solution(File, Calibration).
 ```
 
 <!--
 Calibration = 142.
+-->
+
+Compute the calibration for the `test_files/sample_2` file (part 1):
+
+```logtalk
+object_property(trebuchet, file(_, Directory)),
+atom_concat(Directory, 'test_files/sample_2', File),
+trebuchet::solution(File, Calibration).
+```
+
+<!--
+Calibration = 281.
+-->
+
+Compute the calibration for the `test_files/input` file (part 2):
+
+```logtalk
+object_property(trebuchet, file(_, Directory)),
+atom_concat(Directory, 'test_files/input', File),
+trebuchet::solution(File, Calibration).
+```
+
+<!--
+Calibration = 53894.
 -->

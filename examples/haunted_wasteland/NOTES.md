@@ -40,8 +40,10 @@ problem:
 
 https://adventofcode.com/2023/day/8
 
-The `test_files` directory contain sample inputs copied from the problem
-description.
+The `test_files` directory contain sample inputs for part 1 of the problem
+copied from the problem description. For copyright reasons, the part 2 files
+cannot be distributed here and must be downloaded from the Advent of Code
+2023 website.
 
 Start by loading the example:
 
@@ -53,30 +55,48 @@ logtalk_load(haunted_wasteland(loader)).
 true.
 -->
 
-Compute the number of steps (part 1) for the `test_files/sample_1` file:
+Compute the number of steps for the `test_files/sample_1` file (part 1):
 
 ```logtalk
-haunted_wasteland::steps_1('test_files/sample_1', Steps).
+object_property(haunted_wasteland, file(_, Directory)),
+atom_concat(Directory, 'test_files/sample_1', File),
+haunted_wasteland::steps_1(File, Steps).
 ```
 
 <!--
 Steps = 2.
 -->
 
-Compute the number of steps (part 1) for the `test_files/input` file:
+Compute the number of steps for the `test_files/sample_2` file (part 1):
 
 ```logtalk
-haunted_wasteland::steps_1('test_files/input', Steps).
+object_property(haunted_wasteland, file(_, Directory)),
+atom_concat(Directory, 'test_files/sample_2', File),
+haunted_wasteland::steps_1(File, Steps).
+```
+
+<!--
+Steps = 6.
+-->
+
+Compute the number of steps for the `test_files/input` file (part 2):
+
+```logtalk
+object_property(haunted_wasteland, file(_, Directory)),
+atom_concat(Directory, 'test_files/input', File),
+haunted_wasteland::steps_1(File, Steps).
 ```
 
 <!--
 Steps = 21409.
 -->
 
-Compute the total number of steps (part 2) for the `test_files/input` file:
+Compute the total number of steps for the `test_files/input` file (part 2):
 
 ```logtalk
-haunted_wasteland::steps_2('test_files/input', Steps).
+object_property(haunted_wasteland, file(_, Directory)),
+atom_concat(Directory, 'test_files/input', File),
+haunted_wasteland::steps_2(File, Steps).
 ```
 
 <!--
