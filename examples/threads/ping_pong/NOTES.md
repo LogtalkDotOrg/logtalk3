@@ -24,3 +24,43 @@ ________________________________________________________________________
 This folder contains a simple multi-threaded implementation of a ping-pong
 game using a thread per player and threaded notifications to communicate
 moves. The player threads are automatically terminated when the game is over.
+
+Start by loading the loading the example:
+
+```logtalk
+logtalk_load(ping_pong(loader)).
+```
+
+Run example:
+
+```logtalk
+ping_pong::play(1).
+```
+
+<!--
+Ping ...
+.... Pong
+Game over!
+
+true.
+-->
+
+```logtalk
+ping_pong::play(5).
+```
+
+<!--
+Ping ...
+.... Pong
+Ping ...
+.... Pong
+Ping ...
+.... Pong
+Ping ...
+.... Pong
+Ping ...
+.... Pong
+Game over!
+
+true.
+-->

@@ -23,3 +23,74 @@ ________________________________________________________________________
 
 This folder provides a multi-threading solution for calculating Fibonacci
 numbers. This solution is only useful for benchmarking.
+
+% start by loading the loading the example:
+
+```logtalk
+logtalk_load(fibonacci(loader)).
+```
+
+NOTE: some example queries below use a proprietary predicate `time/1` in
+order to get accurate goal times. This predicate is found on several Prolog
+systems. For other Prolog compilers, replace the `time/1` call by any
+appropriate timing calls (e.g., `cputime/0`).
+
+Calculate 24 Fibonacci number using a single thread:
+
+```logtalk
+time(fibonacci(1)::fib(24, N)).
+```
+
+<!--
+% 450,175 inferences, 0.20 CPU in 0.23 seconds (88% CPU, 2250875 Lips)
+
+N = 75025.
+-->
+
+Calculate the 24 Fibonacci number using two threads:
+
+```logtalk
+time(fibonacci(2)::fib(24, N)).
+```
+
+<!--
+% 81 inferences, 0.18 CPU in 0.14 seconds (131% CPU, 450 Lips)
+
+N = 75025.
+-->
+
+Calculate the 24 Fibonacci number using four threads:
+
+```logtalk
+time(fibonacci(4)::fib(24, N)).
+```
+
+<!--
+% 81 inferences, 0.17 CPU in 0.14 seconds (124% CPU, 476 Lips)
+
+N = 75025.
+-->
+
+Calculate the 24 Fibonacci number using eight threads:
+
+```logtalk
+time(fibonacci(8)::fib(24, N)).
+```
+
+<!--
+% 81 inferences, 0.16 CPU in 0.09 seconds (181% CPU, 506 Lips)
+
+N = 75025.
+-->
+
+Calculate the 24 Fibonacci number using sixteen threads:
+
+```logtalk
+time(fibonacci(16)::fib(24, N)).
+```
+
+<!--
+% 81 inferences, 0.16 CPU in 0.08 seconds (206% CPU, 506 Lips)
+
+N = 75025.
+-->

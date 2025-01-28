@@ -28,3 +28,39 @@ Rosetta Code website.
 For more information see:
 
 	https://rosettacode.org/wiki/Checkpoint_synchronization
+
+Start by loading the loading the example:
+
+```logtalk
+logtalk_load(checkpoint(loader)).
+```
+
+Run example:
+
+```logtalk
+checkpoint::run.
+```
+
+<!--
+Worker 1 item 3
+Worker 2 item 3
+Worker 5 item 3
+Worker 3 item 3
+Worker 4 item 3
+Assembly of item 3 done.
+Worker 1 item 2
+Worker 5 item 2
+Worker 2 item 2
+Worker 3 item 2
+Worker 4 item 2
+Assembly of item 2 done.
+Worker 2 item 1
+Worker 5 item 1
+Worker 3 item 1
+Worker 1 item 1
+Worker 4 item 1
+Assembly of item 1 done.
+All assemblies done.
+
+true.
+-->

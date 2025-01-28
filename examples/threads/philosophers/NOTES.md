@@ -33,3 +33,114 @@ avoiding deadlock (which is having one philosopher picking its chopsticks
 in a different order from the other philosophers; see the URL above for 
 details): one implementation uses a category and five philosopher objects 
 while the second implementation uses a parametric object.
+
+Start by loading the example and the required library files:
+
+```logtalk
+logtalk_load(philosophers(loader)).
+```
+
+Five meals for each philosopher, each one spending a maximum of five seconds of continuous thinking or eating:
+
+```logtalk
+threaded_ignore(p1::run(5, 5)), threaded_ignore(p2::run(5, 5)), threaded_ignore(p3::run(5, 5)), threaded_ignore(p4::run(5, 5)), threaded_ignore(p5::run(5, 5)).
+```
+
+<!--
+true.
+
+Philosopher p3 thinking for 1 seconds.
+Philosopher p1 thinking for 2 seconds.
+Philosopher p2 thinking for 3 seconds.
+Philosopher p4 thinking for 4 seconds.
+Philosopher p5 thinking for 3 seconds.
+Philosopher p3 eating for 2 seconds with chopsticks cs3 and cs2.
+Philosopher p1 eating for 3 seconds with chopsticks cs5 and cs1.
+Philosopher p2 thinking for 3 seconds.
+Philosopher p3 thinking for 2 seconds.
+Philosopher p5 thinking for 1 seconds.
+Philosopher p4 eating for 1 seconds with chopsticks cs4 and cs3.
+Philosopher p5 thinking for 1 seconds.
+Philosopher p1 thinking for 3 seconds.
+Philosopher p4 thinking for 1 seconds.
+Philosopher p3 eating for 2 seconds with chopsticks cs3 and cs2.
+Philosopher p5 eating for 2 seconds with chopsticks cs5 and cs4.
+Philosopher p2 thinking for 3 seconds.
+Philosopher p4 thinking for 2 seconds.
+Philosopher p3 thinking for 2 seconds.
+Philosopher p5 thinking for 1 seconds.
+Philosopher p1 eating for 3 seconds with chopsticks cs5 and cs1.
+Philosopher p4 eating for 4 seconds with chopsticks cs4 and cs3.
+Philosopher p5 thinking for 1 seconds.
+Philosopher p2 thinking for 1 seconds.
+Philosopher p3 thinking for 4 seconds.
+Philosopher p5 thinking for 2 seconds.
+Philosopher p2 thinking for 4 seconds.
+Philosopher p1 thinking for 1 seconds.
+Philosopher p5 thinking for 1 seconds.
+Philosopher p4 thinking for 4 seconds.
+Philosopher p1 eating for 1 seconds with chopsticks cs5 and cs1.
+Philosopher p5 thinking for 3 seconds.
+Philosopher p3 eating for 2 seconds with chopsticks cs3 and cs2.
+Philosopher p1 thinking for 3 seconds.
+Philosopher p2 thinking for 4 seconds.
+Philosopher p3 thinking for 3 seconds.
+Philosopher p5 eating for 4 seconds with chopsticks cs5 and cs4.
+Philosopher p4 thinking for 3 seconds.
+Philosopher p1 thinking for 4 seconds.
+Philosopher p2 eating for 1 seconds with chopsticks cs1 and cs2.
+Philosopher p3 thinking for 3 seconds.
+Philosopher p4 thinking for 3 seconds.
+Philosopher p2 thinking for 1 seconds.
+Philosopher p5 thinking for 2 seconds.
+Philosopher p2 eating for 3 seconds with chopsticks cs1 and cs2.
+Philosopher p1 thinking for 4 seconds.
+Philosopher p3 thinking for 3 seconds.
+Philosopher p5 eating for 2 seconds with chopsticks cs5 and cs4.
+Philosopher p4 thinking for 1 seconds.
+Philosopher p4 thinking for 4 seconds.
+Philosopher p2 thinking for 1 seconds.
+Philosopher p5 thinking for 4 seconds.
+Philosopher p1 eating for 4 seconds with chopsticks cs5 and cs1.
+Philosopher p2 thinking for 2 seconds.
+Philosopher p3 eating for 2 seconds with chopsticks cs3 and cs2.
+Philosopher p2 thinking for 3 seconds.
+Philosopher p3 thinking for 1 seconds.
+Philosopher p4 eating for 1 seconds with chopsticks cs4 and cs3.
+Philosopher p5 thinking for 1 seconds.
+Philosopher p3 thinking for 4 seconds.
+Philosopher p4 thinking for 4 seconds.
+Philosopher p1 thinking for 2 seconds.
+Philosopher p5 eating for 2 seconds with chopsticks cs5 and cs4.
+Philosopher p2 eating for 2 seconds with chopsticks cs1 and cs2.
+Philosopher p1 thinking for 3 seconds.
+Philosopher p5 thinking for 4 seconds.
+Philosopher p2 thinking for 2 seconds.
+Philosopher p3 eating for 4 seconds with chopsticks cs3 and cs2.
+Philosopher p4 thinking for 2 seconds.
+Philosopher p1 eating for 3 seconds with chopsticks cs5 and cs1.
+Philosopher p2 thinking for 1 seconds.
+Philosopher p4 thinking for 3 seconds.
+Philosopher p2 thinking for 1 seconds.
+Philosopher p5 thinking for 3 seconds.
+p3 terminated.
+Philosopher p2 thinking for 3 seconds.
+p1 terminated.
+Philosopher p4 eating for 3 seconds with chopsticks cs4 and cs3.
+Philosopher p5 thinking for 4 seconds.
+Philosopher p2 eating for 4 seconds with chopsticks cs1 and cs2.
+Philosopher p4 thinking for 4 seconds.
+Philosopher p5 eating for 1 seconds with chopsticks cs5 and cs4.
+Philosopher p2 thinking for 1 seconds.
+p5 terminated.
+Philosopher p2 eating for 4 seconds with chopsticks cs1 and cs2.
+Philosopher p4 eating for 3 seconds with chopsticks cs4 and cs3.
+p4 terminated.
+p2 terminated.
+-->
+
+Same problem as above but using a parametric object for representing the philosophers:
+
+```logtalk
+threaded_ignore(philosopher(p1,cs1,cs2)::run(5, 5)), threaded_ignore(philosopher(p2,cs2,cs3)::run(5, 5)), threaded_ignore(philosopher(p3,cs3,cs4)::run(5, 5)), threaded_ignore(philosopher(p4,cs4,cs5)::run(5, 5)), threaded_ignore(philosopher(p5,cs1,cs5)::run(5, 5)).
+```

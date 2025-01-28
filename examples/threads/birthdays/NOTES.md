@@ -24,3 +24,90 @@ ________________________________________________________________________
 This folder contains a simple multi-threading example with agents and
 their birthdays, illustrating the use of the built-in predicates
 `threaded_ignore/1`, `threaded_once/1`, and `threaded_exit/1`.
+
+Load the example:
+
+```logtalk
+logtalk_load(birthdays(loader)).
+```
+
+Create two new agents, Paul and Nathalie:
+
+```logtalk
+agent::(new(paul, 40, male), new(nathalie, 32, female)).
+```
+
+<!--
+true.
+-->
+
+Make them friends:
+
+```logtalk
+paul::new_friend(nathalie).
+```
+
+<!--
+true.
+-->
+
+Turn event support on for messages sent at the command-line
+(i.e., for messages sent from the pseudo-object `user`):
+
+```logtalk
+set_logtalk_flag(events, allow).
+```
+
+<!--
+true.
+-->
+
+It's birthday for Nathalie:
+
+```logtalk
+nathalie::birthday.
+```
+
+<!--
+Happy birthday from paul!
+Thanks! Here, have a slice of cake, paul.
+Thanks for the cake nathalie!
+Say goodbye to your 32's!
+
+true.
+-->
+
+Ask Nathalie her age:
+
+```logtalk
+nathalie::age(Age).
+```
+
+<!--
+Age = 33.
+-->
+
+A year goes by...
+
+```logtalk
+nathalie::birthday.
+```
+
+<!--
+Happy birthday from paul!
+Thanks! Here, have a slice of cake, paul.
+Thanks for the cake nathalie!
+Say goodbye to your 33's!
+
+true.
+-->
+
+Turn event support off:
+
+```logtalk
+set_logtalk_flag(events, deny).
+```
+
+<!--
+true.
+-->

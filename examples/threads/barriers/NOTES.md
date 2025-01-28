@@ -22,3 +22,23 @@ ________________________________________________________________________
 # threads - barriers
 
 This folder contains examples of multi-threading barrier synchronization.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(barriers(loader)).
+```
+
+Run the example:
+
+```logtalk
+beatles::sing_along.
+```
+
+<!--
+hello(1)hello(4)hello(2)hello(3)
+Enough of hellos! Time for goodbyes!
+goodbye(2)goodbye(1)goodbye(3)goodbye(4)
+
+true.
+-->

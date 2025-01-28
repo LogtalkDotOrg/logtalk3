@@ -23,3 +23,142 @@ ________________________________________________________________________
 
 This folder illustrates non-deterministic multi-threading calls and the
 use of tags to distinguish between multi-threading calls.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(nondet(loader)).
+```
+
+Mke a threaded call with a non-deterministic goal:
+
+```logtalk
+threaded_call(lists::member(X, [1,2,3])).
+```
+
+<!--
+X = _G189. 
+-->
+
+Retrieve through backtracking all solutions for the non-deterministic goal:
+
+```logtalk
+%%table
+threaded_exit(lists::member(X, [1,2,3])).
+```
+
+<!--
+X = 1 ;
+X = 2 ;
+X = 3 ;
+false.
+-->
+
+Make a threaded call by committing to the first solution found:
+
+```logtalk
+threaded_once(lists::member(X, [1,2,3])).
+```
+
+<!--
+X = _G189. 
+-->
+
+% retrieve through backtracking the goal solution:
+
+```logtalk
+threaded_exit(lists::member(X, [1,2,3])).
+```
+
+<!--
+X = 1 ;
+false.
+-->
+
+% when two or more variant calls are made...
+
+```logtalk
+threaded_call(lists::member(X, [1,2,3])), threaded_call(lists::member(Y, [1,2,3])).
+```
+
+<!--
+X = _G189 Y =_G190. 
+-->
+
+...the first threaded_exit/1 call will pick one of them:
+
+```logtalk
+%%table
+threaded_exit(lists::member(X, [1,2,3])).
+```
+
+<!--
+X = 1 ;
+X = 2 ;
+X = 3 ;
+false.
+-->
+
+...and a second threaded_exit/1 call will pick the remaining one:
+
+```logtalk
+%%table
+threaded_exit(lists::member(X, [1,2,3])).
+```
+
+<!--
+X = 1 ;
+X = 2 ;
+X = 3 ;
+false.
+-->
+
+Tags may be used to distinguish between threaded calls if needed:
+
+```logtalk
+threaded_call(lists::member(X, [1,2,3]), Tag).
+```
+
+<!--
+Tag = 1. 
+-->
+
+```logtalk
+threaded_call(lists::member(X, [1,2,3]), Tag).
+```
+
+<!--
+Tag = 2. 
+-->
+
+```logtalk
+%%table
+threaded_exit(lists::member(X, [1,2,3]), 2).
+```
+
+<!--
+X = 1 ;
+X = 2 ;
+X = 3 ;
+false.
+-->
+
+Use a subsumed goal instead of a variant of the original goal:
+
+```logtalk
+threaded_call(lists::member(X, [1,2,3,2])).
+```
+
+<!--
+X = _G189. 
+-->
+
+```logtalk
+threaded_exit(lists::member(2, [1,2,3,2])).
+```
+
+<!--
+More ;
+More ;
+false.
+-->

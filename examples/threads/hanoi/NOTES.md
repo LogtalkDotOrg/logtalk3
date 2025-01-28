@@ -24,3 +24,74 @@ ________________________________________________________________________
 This folder provides a multi-threading solution for solving the "Towers
 of Hanoi" problem. This solution is only useful for benchmarking as the 
 problem is solved without actually printing the solution steps.
+
+% start by loading the loading the example:
+
+```logtalk
+logtalk_load(hanoi(loader)).
+```
+
+NOTE: some example queries below use a proprietary predicate `time/1` in
+order to get accurate goal times. This predicate is found on several Prolog
+systems. For other Prolog compilers, replace the `time/1` call by any
+appropriate timing calls (e.g., `cputime/0`).
+
+Solve the Towers of Hanoi problem for 24 disks using a single thread:
+
+```logtalk
+time(hanoi(1)::run(24)).
+```
+
+<!--
+% 25,165,864 inferences, 4.94 CPU in 5.12 seconds (96% CPU, 5094304 Lips)
+
+true.
+-->
+
+Solve the Towers of Hanoi problem for 24 disks using two threads:
+
+```logtalk
+time(hanoi(2)::run(24)).
+```
+
+<!--
+% 78 inferences, 4.87 CPU in 2.66 seconds (183% CPU, 16 Lips)
+
+true.
+-->
+
+Solve the Towers of Hanoi problem for 24 disks using four threads:
+
+```logtalk
+time(hanoi(4)::run(24)).
+```
+
+<!--
+% 78 inferences, 4.88 CPU in 2.60 seconds (187% CPU, 16 Lips)
+
+true.
+-->
+
+Solve the Towers of Hanoi problem for 24 disks using eight threads:
+
+```logtalk
+time(hanoi(8)::run(24)).
+```
+
+<!--
+% 78 inferences, 4.98 CPU in 1.55 seconds (321% CPU, 16 Lips)
+
+true.
+-->
+
+Solve the Towers of Hanoi problem for 24 disks using sixteen threads:
+
+```logtalk
+time(hanoi(16)::run(24)).
+```
+
+<!--
+% 78 inferences, 5.03 CPU in 1.44 seconds (348% CPU, 16 Lips)
+
+true.
+-->

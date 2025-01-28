@@ -51,3 +51,27 @@ The following tests are available:
 For the same backend Prolog compiler, the benchmark results can show 
 significant variation depending on the operating-system and if you're 
 using a 32 bits or a 64 bits version.
+
+Start by loading the loading the example:
+
+```logtalk
+logtalk_load(mtbatch(loader)).
+```
+
+Run all tests:
+
+```logtalk
+mtbatch::run.
+```
+
+Run all tests (average of 20 times for each test):
+
+```logtalk
+mtbatch::run(20).
+```
+
+Run the primes benchmark test (average of 10 times):
+
+```logtalk
+mtbatch::run(primes, 10).
+```

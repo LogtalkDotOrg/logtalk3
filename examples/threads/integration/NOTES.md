@@ -50,3 +50,39 @@ For `quadsplit/1`, the method used is again division (split) of the original
 area amongst the number of threads specified. This method has no restriction
 on the number of threads and uses a span/collect idea for proving thread goals 
 and the predicates `threaded_once/1` and `threaded_exit/1`.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(integration(loader)).
+```
+
+Integrate the function `quiver` using the recursive adaptive trapezium method with 4 threads:
+
+```logtalk
+quadrec(4)::integrate(quiver, 0.001, 0.999, 0, 1.0e-10, Integral).
+```
+
+<!--
+Integral = 6.66134e-16.
+-->
+
+Integrate the function `quiver` using the recursive adaptive 4 point gaussian scheme with 8 threads:
+
+```logtalk
+quadrec(8)::integrate(quiver, 0.001, 0.999, 4, 1.0e-10, Integral).
+```
+
+<!--
+Integral = 2.70827e-10.
+-->
+
+The other versions:
+
+```logtalk
+quadsplit(8)::integrate(quiver, 0.001, 0.999, 4, 1.0e-10, Integral).
+```
+
+<!--
+Integral = 2.70827e-10.
+-->

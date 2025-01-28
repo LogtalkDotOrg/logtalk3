@@ -25,3 +25,125 @@ This folder contains a simple multi-threading example illustrating how
 to create threads for competing goals, which one performing the same 
 task using different methods. The first goal to complete leads to the 
 immediate termination of the threads running the remaining goals.
+
+Start by loading the loading the example:
+
+```logtalk
+logtalk_load(functions(loader)).
+```
+
+Find the roots of some functions using each one of provided methods:
+
+```logtalk
+bisection::find_root(f1, 1.0, 2.3, 1.0e-15, Zero).
+```
+
+<!--
+Zero = 2.0.
+-->
+
+```logtalk
+newton::find_root(f1, 1.0, 2.3, 1.0e-15, Zero).
+```
+
+<!--
+Zero = 2.0.
+-->
+
+```logtalk
+muller::find_root(f1, 1.0, 2.3, 1.0e-15, Zero).
+```
+
+<!--
+Zero = 2.0.
+-->
+
+```logtalk
+bisection::find_root(f2, 1.0, 1.3, 1.0e-15, Zero).
+```
+
+<!--
+Zero = 1.25809265664599.
+-->
+
+```logtalk
+newton::find_root(f2, 1.0, 1.3, 1.0e-15, Zero).
+```
+
+<!--
+Zero = 1.25809265664599.
+-->
+
+```logtalk
+muller::find_root(f2, 1.0, 1.3, 1.0e-15, Zero).
+```
+
+<!--
+Zero = 1.25809265664599.
+-->
+
+```logtalk
+bisection::find_root(humps, -1.0, 2.0, 1.0e-15, Zero).
+```
+
+<!--
+false.
+-->
+
+```logtalk
+muller::find_root(humps, -1.0, 2.0, 1.0e-15, Zero).
+```
+
+<!--
+Zero = 1.29954968258.
+-->
+
+```logtalk
+newton::find_root(humps, -1.0, 2.0, 1.0e-15, Zero).
+```
+
+<!--
+ERROR: is/2: Arithmetic: evaluation error: `float_overflow'
+-->
+
+Find the roots of some functions running all methods at once using multi-threading:
+
+```logtalk
+function_root::find_root(f1, 1.0, 2.3, 1.0e-15, Zero, Method).
+```
+
+<!--
+Zero = 2.0, Method = bisection.
+-->
+
+```logtalk
+function_root::find_root(f2, 1.0, 1.3, 1.0e-15, Zero, Method).
+```
+
+<!--
+Zero = 1.25809265664599, Method = newton.
+-->
+
+```logtalk
+function_root::find_root(f3, 0.0, 3.0, 1.0e-15, Zero, Method).
+```
+
+<!--
+Zero = 1.4142135623731, Method = newton.
+-->
+
+```logtalk
+function_root::find_root(f4, -1.0, 2.0, 1.0e-15, Zero, Method).
+```
+
+<!--
+Zero = -8.88178419700125e-16, Method = bisection.
+-->
+
+```logtalk
+function_root::find_root(humps, -1.0, 2.0, 1.0e-15, Zero, Method).
+```
+
+<!--
+Zero = 1.29954968258482, Method = muller.
+-->

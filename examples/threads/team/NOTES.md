@@ -37,3 +37,31 @@ and it was coded for a contribution to the Rosetta Code website:
 For more information see:
 
 	https://rosettacode.org/wiki/Synchronous_concurrency
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(team(loader)).
+```
+
+Start the file reader and the line writer, each one running in its own thread:
+
+```logtalk
+team::start.
+```
+
+<!--
+a(0)
+a(1)
+a(2)
+a(3)
+a(4)
+a(5)
+a(6)
+a(7)
+a(8)
+a(9)
+Number of lines: 10
+
+true.
+-->
