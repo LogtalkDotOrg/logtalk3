@@ -46,3 +46,171 @@ in this example. Such an extension is also available in Prolog III.)".
 Note that the use of the `dif` library limits the backend Prolog systems
 that can be used to run this example to B-Prolog, ECLiPSe, XVM, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.
+
+Load the example:
+
+```logtalk
+logtalk_load(figures(loader)).
+```
+
+Recognize a parallelogram (the vertices rotation results in four solutions per class):
+
+```logtalk
+%%table
+figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(1, 2,  0, 20),
+		edge(2, 3, 45, 30),
+		edge(3, 4,  0, 20),
+		edge(4, 1, 45, 30),
+		class(Name, X, Y, Z, P)
+	).
+```
+
+<!--
+Name = parallelogram, X = 1, Y = 2, Z = 3, P = 4 ;
+Name = four_side_figure, X = 1, Y = 2, Z = 3, P = 4 ;
+Name = parallelogram, X = 4, Y = 1, Z = 2, P = 3 ;
+Name = four_side_figure, X = 4, Y = 1, Z = 2, P = 3 ;
+Name = parallelogram, X = 3, Y = 4, Z = 1, P = 2 ;
+Name = parallelogram, X = 2, Y = 3, Z = 4, P = 1 ;
+Name = four_side_figure, X = 3, Y = 4, Z = 1, P = 2 ;
+Name = four_side_figure, X = 2, Y = 3, Z = 4, P = 1 ;
+false.
+-->
+
+```logtalk
+%%table
+figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(1, 2,  0, 20),
+		edge(2, 3, 45, 30),
+		edge(3, 4,  0, 20),
+		edge(4, 1, 45, 30),
+		class(Name)
+	).
+```
+
+<!--
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = parallelogram ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = four_side_figure ;
+false.
+-->
+
+Recognize a rhombus (the vertices rotation results in four solutions per class):
+
+```logtalk
+%%table
+figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(a, b, 45, 10),
+		edge(b, c,  0, 10),
+		edge(c, d, 45, 10),
+		edge(d, a,  0, 10),
+		class(Name, X, Y, Z, P)
+	).
+```
+
+<!--
+Name = rhombus, X = a, Y = b, Z = c, P = d ;
+Name = parallelogram, X = a, Y = b, Z = c, P = d ;
+Name = four_side_figure, X = a, Y = b, Z = c, P = d ;
+Name = rhombus, X = d, Y = a, Z = b, P = c ;
+Name = rhombus, X = c, Y = d, Z = a, P = b ;
+Name = rhombus, X = b, Y = c, Z = d, P = a ;
+Name = parallelogram, X = d, Y = a, Z = b, P = c ;
+Name = four_side_figure, X = d, Y = a, Z = b, P = c ;
+Name = parallelogram, X = c, Y = d, Z = a, P = b ;
+Name = parallelogram, X = b, Y = c, Z = d, P = a ;
+Name = four_side_figure, X = c, Y = d, Z = a, P = b ;
+Name = four_side_figure, X = b, Y = c, Z = d, P = a ;
+false.
+-->
+
+```logtalk
+%%table
+figures(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(a, b, 45, 10),
+		edge(b, c,  0, 10),
+		edge(c, d, 45, 10),
+		edge(d, a,  0, 10),
+		class(Name)
+	).
+```
+
+<!--
+Name = rhombus ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = rhombus ;
+Name = rhombus ;
+Name = rhombus ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = parallelogram ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = four_side_figure ;
+false.
+-->
+
+Take perpendicularity into account when checking the class of a figure:
+
+```logtalk
+%%table
+figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(1, 2,  0, 20),
+		edge(2, 3, 90, 20),
+		edge(3, 4,  0, 20),
+		edge(4, 1, 90, 20),
+		perpendicular,
+		class(Name)
+	).
+```
+
+<!--
+Name = square ;
+Name = rectangular ;
+Name = four_side_figure ;
+Name = square ;
+Name = square ;
+Name = square ;
+Name = rectangular ;
+Name = four_side_figure ;
+Name = rectangular ;
+Name = rectangular ;
+Name = four_side_figure ;
+Name = four_side_figure ;
+false.
+-->
+
+```logtalk
+%%table
+figures_split(_, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _)::(
+		edge(a, b, 45, 10),
+		edge(b, c,  0, 10),
+		edge(c, d, 45, 10),
+		edge(d, a,  0, 10),
+		perpendicular,
+		class(Name)
+	).
+```
+
+<!--
+Name = rhombus ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = rhombus ;
+Name = rhombus ;
+Name = rhombus ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = parallelogram ;
+Name = parallelogram ;
+Name = four_side_figure ;
+Name = four_side_figure ;
+false.
+-->

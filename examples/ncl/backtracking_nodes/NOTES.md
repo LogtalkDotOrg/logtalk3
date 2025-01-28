@@ -30,3 +30,20 @@ The Logtalk version uses parametric objects to represent the concept of
 events to implement the functionality of spreading activation nodes.
 When multiple spreading activation nodes fire, all their procedures must
 be true by default (in the NCL manual, this corresponds to `netmode(3)`).
+
+Load the example:
+
+```logtalk
+logtalk_load(backtracking_nodes(loader)).
+```
+
+Run the example:
+
+```logtalk
+backtracking(X,Y,Z)::(n(2), n(1), n(3)), bagof(E, backtracking(X,Y,Z)::n(E), L).
+```
+
+<!--
+X = 3, Y = 2, Z = 1, L = [3,2,1] ;
+false.
+-->

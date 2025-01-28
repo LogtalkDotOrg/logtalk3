@@ -29,3 +29,25 @@ set to `allow`, the generated object predicates can be called using the
 for e.g. using the Logtalk compiler lint checks to examine predicate
 call dependencies of the wrapped code and also to look for possible
 portability issues when the `portability` flag is set to `warning`.
+
+Start by loading the hook object:
+
+```logtalk
+logtalk_load(wrappers(wrapper)).
+```
+
+Compile the `zipper.pl` plain Prolog source file using the hook object:
+
+```logtalk
+logtalk_load('zipper.pl', [hook(wrapper)]).
+```
+
+Try one of the generated "zipper" object predicates:
+
+```logtalk
+zipper<<(zipper(3, [1,2,3,4,5], Zip, X), next(Zip, Next)).
+```
+
+<!--
+Zip = zip([2, 1], 3, [4, 5]), X = 3, Next = zip([3, 2, 1], 4, [5]).
+-->

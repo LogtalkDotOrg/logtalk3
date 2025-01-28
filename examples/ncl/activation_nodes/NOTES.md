@@ -27,3 +27,25 @@ https://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/prolog/impl/parallel
 The Logtalk version uses parametric objects to represent the concept of
 "net-variables" described in the paper as "global logical variables" and
 events to implement the functionality of spreading activation nodes.
+
+Load the example:
+
+```logtalk
+logtalk_load(activation_nodes(loader)).
+```
+
+Run the example:
+
+```logtalk
+activation(_,_,_)::(a(a),b(b),c(c)).
+```
+
+<!--
+T = 0
+  a-_R2-_R1
+T = 1
+T = 0
+  a-b-c
+
+true.
+-->

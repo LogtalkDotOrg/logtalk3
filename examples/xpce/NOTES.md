@@ -30,3 +30,15 @@ Logtalk.
 
 The example itself is a straightforward adaptation of an example from the
 XPCE user manual.
+
+Start by loading the example:
+
+```logtalk
+logtalk_load(xpce(loader)).
+```
+
+Start the file viewer:
+
+```logtalk
+view::file_viewer('$HOME').
+```
