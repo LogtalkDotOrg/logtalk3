@@ -1,4 +1,3 @@
-<!--
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
@@ -17,7 +16,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ________________________________________________________________________
--->
+
 
 This folder contains two examples that show how to use a category to 
 explicitly complement existing objects (without modifying its source 
