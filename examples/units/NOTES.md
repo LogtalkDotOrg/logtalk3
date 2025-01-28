@@ -70,7 +70,7 @@ Start by loading the example:
 logtalk_load(units(loader)).
 ```
 
-% get the dict:
+Get the dict:
 
 ```logtalk
 dict([a=1,b=2,c=3,d=4,e=5])::dict(Dict).
@@ -80,7 +80,7 @@ dict([a=1,b=2,c=3,d=4,e=5])::dict(Dict).
 Dict = [a=1,b=2,c=3,d=4,e=5].
 -->
 
-% perform a dict lookup :
+Perform a dict lookup:
 
 ```logtalk
 dict([a=1,b=2,c=3,d=4,e=5])::lookup(c, C).

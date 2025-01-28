@@ -70,7 +70,7 @@ message_counter::set_spy_point(_, list, _, _).
 true.
 -->
 
-% activate the monitor:
+Activate the monitor:
 
 ```logtalk
 message_counter::activate_monitor.

@@ -77,7 +77,7 @@ N = 4 ;
 false.
 -->
 
-% stop recording and print message log:
+Stop recording and print message log:
 
 ```logtalk
 msglog::(stop, print).

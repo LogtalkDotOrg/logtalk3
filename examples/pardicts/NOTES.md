@@ -40,7 +40,7 @@ Start by loading the example:
 logtalk_load(pardicts(loader)).
 ```
 
-% access individual parameters:
+Access individual parameters:
 
 ```logtalk
 obj(_{m:2,n:3})::sum(Sum),
@@ -58,7 +58,7 @@ obj(_{m:2,n:3})::product(Sum),
 Sum == 6.
 -->
 
-% update individual parameters:
+Update individual parameters:
 
 ```logtalk
 Dict = _{m:2,n:3}, obj(Dict)::double.

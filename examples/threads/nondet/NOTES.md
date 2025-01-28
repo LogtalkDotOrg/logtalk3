@@ -64,7 +64,7 @@ threaded_once(lists::member(X, [1,2,3])).
 X = _G189. 
 -->
 
-% retrieve through backtracking the goal solution:
+Retrieve through backtracking the goal solution:
 
 ```logtalk
 threaded_exit(lists::member(X, [1,2,3])).
@@ -75,7 +75,7 @@ X = 1 ;
 false.
 -->
 
-% when two or more variant calls are made...
+When two or more variant calls are made...
 
 ```logtalk
 threaded_call(lists::member(X, [1,2,3])), threaded_call(lists::member(Y, [1,2,3])).
@@ -85,7 +85,7 @@ threaded_call(lists::member(X, [1,2,3])), threaded_call(lists::member(Y, [1,2,3]
 X = _G189 Y =_G190. 
 -->
 
-...the first threaded_exit/1 call will pick one of them:
+...the first `threaded_exit/1` call will pick one of them:
 
 ```logtalk
 %%table

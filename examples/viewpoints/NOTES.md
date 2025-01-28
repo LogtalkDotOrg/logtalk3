@@ -47,7 +47,7 @@ logtalk_load(viewpoints(loader)).
 true.
 -->
 
-% we can start by asking joe its age:
+We can start by asking joe its age:
 
 ```logtalk
 joe_person::age(Age).
@@ -57,7 +57,7 @@ joe_person::age(Age).
 Age = 30.
 -->
 
-% the same question could be made via any of its viewpoints:
+The same question could be made via any of its viewpoints:
 
 ```logtalk
 joe_sportsman::age(Age).
@@ -67,7 +67,7 @@ joe_sportsman::age(Age).
 Age = 30
 -->
 
-% now let's tell joe to get older:
+Now let's tell joe to get older:
 
 ```logtalk
 joe_person::grow_older.
@@ -77,7 +77,7 @@ joe_person::grow_older.
 true.
 -->
 
-% we can verify the effect of the above message from any of the viewpoints:
+We can verify the effect of the above message from any of the viewpoints:
 
 ```logtalk
 joe_chess_player::age(Age).
@@ -87,8 +87,8 @@ joe_chess_player::age(Age).
 Age = 31
 -->
 
-% because the growOld/0 and the age/1 predicates are implemented using 
-% property sharing, we can send the grow_older/0 message to any viewpoint:
+Because the `growOld/0` and the `age/1` predicates are implemented using 
+property sharing, we can send the `grow_older/0` message to any viewpoint:
 
 ```logtalk
 joe_employee::grow_older.
@@ -98,7 +98,7 @@ joe_employee::grow_older.
 true.
 -->
 
-% we can check this by asking joe its age:
+We can check this by asking joe its age:
 
 ```logtalk
 joe_person::age(Age).
@@ -108,13 +108,11 @@ joe_person::age(Age).
 Age = 32
 -->
 
-% as you can see, although the modification message have been sent to a 
-% descendant, its the predicate age/1 in the parent that got updated
+As you can see, although the modification message have been sent to a 
+descendant, its the predicate `age/1` in the parent that got updated:
 
-
-% to illustrate value sharing we use a couple of predicates, score/1 and
-% set_score/0, defined in joe_person:
-
+To illustrate value sharing we use a couple of predicates, `score/1`
+and `set_score/0`, defined in `joe_person`:
 
 ```logtalk
 joe_person::score(Score).
@@ -124,8 +122,8 @@ joe_person::score(Score).
 Score = 0.
 -->
 
-% initially, score/1 is only defined for joe_person, so every descendant 
-% or viewpoint will share its value/definition:
+Initially, `score/1` is only defined for `joe_person`, so every descendant 
+or viewpoint will share its value/definition:
 
 ```logtalk
 joe_employee::score(Score).
@@ -135,8 +133,9 @@ joe_employee::score(Score).
 Score = 0.
 -->
 
-% but if we decide to increment the counter by sending the set_score/0 message to a descendant
-% (don't use message broadcasting syntax in order to workaround a XSB parser bug):
+But if we decide to increment the counter by sending the `set_score/0` message
+to a descendant (don't use message broadcasting syntax in order to workaround
+a XSB parser bug):
 
 ```logtalk
 joe_chess_player::set_score(2200), joe_chess_player::score(Score).
@@ -146,8 +145,8 @@ joe_chess_player::set_score(2200), joe_chess_player::score(Score).
 Score = 2200.
 -->
 
-% then the descendant will now have a local definition for counter/1,
-% independent of the definition in its parent, joe_person:
+Then the descendant will now have a local definition for `counter/1`,
+independent of the definition in its parent, `joe_person`:
 
 ```logtalk
 joe_person::score(Score).
@@ -157,8 +156,8 @@ joe_person::score(Score).
 Score = 0.
 -->
 
-% the other descendants/viewpoints will continue to share the definition 
-% in joe_person:
+The other descendants/viewpoints will continue to share the definition 
+in `joe_person`:
 
 ```logtalk
 joe_sportsman::score(Score).

@@ -150,7 +150,7 @@ Follows a short description of each included example (in alphabetical order):
 - `coinduction`  
 	experimental example of coinductive predicates
 	(requires Logtalk to be run with CxProlog, ECLiPSe, SICStus Prolog,
-	SWI-Prolog, or YAP)
+	SWI-Prolog, XVM, or YAP)
 
 - `complements`  
 	examples of using a category to explicitly complement an existing
@@ -261,7 +261,7 @@ Follows a short description of each included example (in alphabetical order):
 	examples adapted from SWI-Prolog/YAP JPL library; illustrates how
 	to use the `java` library minimal abstraction for calling Java
 	from Logtalk using familiar message-sending syntax (requires Logtalk
-	to be run with SWI-Prolog, YAP, or JIProlog as the backend compiler)
+	to be run with SWI-Prolog, XVM, YAP, or JIProlog as the backend compiler)
 
 - `lambdas`  
 	example of using lambda expressions

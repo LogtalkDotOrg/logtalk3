@@ -73,7 +73,7 @@ Meowww...
 true.
 -->
 
-% the null objects implements the same interface but does nothing.
+The null objects implements the same interface but does nothing.
 
 ```logtalk
 null_animal::make_sound.

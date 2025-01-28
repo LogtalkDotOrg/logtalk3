@@ -38,13 +38,13 @@ logtalk_load(persistency(loader)).
 true.
 -->
 
-% no initial state:
+No initial state:
 
 ```logtalk
 persistency::state(S).
 no
 
-% add some terms:
+Add some terms:
 
 ```logtalk
 persistency::add(a).
@@ -62,7 +62,7 @@ persistency::add(b).
 true.
 -->
 
-% enumerate current terms:
+Enumerate current terms:
 
 ```logtalk
 persistency::state(S).
@@ -74,7 +74,7 @@ S = b ;
 false.
 -->
 
-% save the terms to permanent storage:
+Save the terms to permanent storage:
 
 ```logtalk
 persistency::save.
@@ -84,7 +84,7 @@ persistency::save.
 true.
 -->
 
-% halt the process:
+Halt the process:
 
 ```logtalk
 halt.

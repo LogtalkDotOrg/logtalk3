@@ -30,7 +30,7 @@ Start by loading the example:
 logtalk_load(scopes(loader)).
 ```
 
-% we can always send a message for a public predicate:
+We can always send a message for a public predicate:
 
 ```logtalk
 prototype::foo(Foo).

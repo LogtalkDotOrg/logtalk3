@@ -119,7 +119,7 @@ Run benchmarks with event support turned off and using static binding:
 logtalk_load(benchmarks(loader_no_events)).
 ```
 
-% or simply:
+Or simply:
 
 ```logtalk
 logtalk_load(benchmarks(loader)).

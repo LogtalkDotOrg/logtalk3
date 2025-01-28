@@ -88,7 +88,7 @@ id: #5, area: 217.468, perimeter: 52.2761, color: cyan
 true.
 -->
 
-% print the area and the perimeter for the circle #2:
+Print the area and the perimeter for the circle #2:
 
 ```logtalk
 {circle('#2', R, C)}::print.
@@ -99,7 +99,7 @@ id: #2, area: 43.2412, perimeter: 23.3106, color: yellow
 R = 3.71, C = yellow.
 -->
 
-% construct a list with the areas of all circles:
+Construct a list with the areas of all circles:
 
 ```logtalk
 findall(Area, {circle(_, _, _)}::area(Area), Areas).

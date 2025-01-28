@@ -62,8 +62,8 @@ EGoal = write_term(Term, [quoted(true)]).
 -->
 
 The clauses for the `term_expansion/2` (`goal_expansion/2`) hook predicate
-% will not be used if they are not within the scope of the sender (in this
-% case, the pseudo-object `user`) as in the following cases:
+will not be used if they are not within the scope of the sender (in this
+case, the pseudo-object `user`) as in the following cases:
 
 ```logtalk
 exp_protected::expand_term(8, Term).
@@ -149,7 +149,7 @@ desc_private::test_goal_expansion(write(Term), EGoal).
 EGoal = write(Term).
 -->
 
-% simple tests of hook objects:
+Simple tests of hook objects:
 
 ```logtalk
 cooked << (aa, bb, cc).

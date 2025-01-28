@@ -30,7 +30,7 @@ Start by loading the example and the required library files:
 logtalk_load(multifile(loader)).
 ```
 
-% call the a/1 multifile predicate:
+Call the `a/1` multifile predicate:
 
 ```logtalk
 %%table

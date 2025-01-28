@@ -40,8 +40,8 @@ meta-predicates, please see the paper:
 	address = "Berlin Heidelberg",
 }
 
-% simply load the example and check the compilation and runtime
-% error messages:
+Simply load the example and check the compilation and runtime error
+messages:
 
 ```logtalk
 logtalk_load(securemp(loader)).

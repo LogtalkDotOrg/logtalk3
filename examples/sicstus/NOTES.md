@@ -121,7 +121,7 @@ square(2)::side(Side), square(2)::width(Width), square(2)::height(Height), squar
 Side = 2, Width = 2, Height = 2, Area = 4.
 -->
 
-% find all messages accepted by an object:
+Find all messages accepted by an object:
 
 ```logtalk
 %%table

@@ -25,7 +25,7 @@ This folder provides a multi-threading solution for solving the "Towers
 of Hanoi" problem. This solution is only useful for benchmarking as the 
 problem is solved without actually printing the solution steps.
 
-% start by loading the loading the example:
+Start by loading the loading the example:
 
 ```logtalk
 logtalk_load(hanoi(loader)).

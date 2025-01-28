@@ -35,7 +35,7 @@ logtalk_load(my_types(loader)).
 true.
 -->
 
-% type-check temperature values in different units:
+Type-check temperature values in different units:
 
 ```logtalk
 type::check(temperature(celsius), 38.7).

@@ -45,8 +45,8 @@ result in runtime error.
 (1) This is a necessary requirement for protocols/interfaces: we must be
 able to declare a predicate without necessarily defining it.
 
-% start by loading the example (by default, it will generate a number of
-% warnings, which are expected):
+Start by loading the example (by default, it will generate a number of
+warnings, which are expected):
 
 ```logtalk
 logtalk_load(closed_world_assumption(loader)).
@@ -74,7 +74,7 @@ false.
 -->
 
 No `pool/0` predicate declared; closed world assumption doesn't apply
-% and thus the message generates an error:
+and thus the message generates an error:
 
 ```logtalk
 house::pool.

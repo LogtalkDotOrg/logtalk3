@@ -24,7 +24,7 @@ ________________________________________________________________________
 This folder provides a multi-threading solution for calculating Fibonacci
 numbers. This solution is only useful for benchmarking.
 
-% start by loading the loading the example:
+Start by loading the loading the example:
 
 ```logtalk
 logtalk_load(fibonacci(loader)).
