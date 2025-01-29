@@ -77,6 +77,7 @@ N = 4.
 
 ```logtalk
 fred::color(C).
+```
 
 <!--
 C = white.
