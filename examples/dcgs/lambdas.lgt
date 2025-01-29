@@ -81,12 +81,12 @@
 :- end_object.
 
 
-:- object(meta).
+:- object(meta_nt).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2022-05-23,
+		date is 2025-01-29,
 		comment is 'Example definition of a meta-non-terminal.'
 	]).
 

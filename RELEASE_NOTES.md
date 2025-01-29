@@ -75,6 +75,9 @@ sample queries to allow running from any directory.
 
 * FIXED: Missing queries in the `defaulty` example documentation.
 
+* FIXED: The `dcgs` examples to allow opening its documentation as a notebook
+without loading warnings.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

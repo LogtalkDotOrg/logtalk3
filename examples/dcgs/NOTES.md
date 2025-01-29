@@ -277,10 +277,10 @@ url::parse("http://193.136.64.5/files/update", Components).
 Components = [protocol(http), address([193, 136, 64, 5]), path([files, update]), file('')].
 -->
 
-Command language example:
+Command language example (skip if running as a notebook):
 
 ```logtalk
-faa::main.
+(current_object(jupyter) -> true; faa::main).
 ```
 
 <!--
@@ -390,7 +390,7 @@ Copy = [1, 2, 3, 4, 5].
 Use a meta-non-terminal:
 
 ```logtalk
-logtalk << phrase(meta::repeat(bases::octal, 2, 4, Digits), [3,7,4,1,0,3,6], Rest).
+logtalk << phrase(meta_nt::repeat(bases::octal, 2, 4, Digits), [3,7,4,1,0,3,6], Rest).
 ```
 
 <!--

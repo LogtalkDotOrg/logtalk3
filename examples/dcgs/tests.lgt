@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:14:1,
+		version is 1:15:0,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2022-03-07,
+		date is 2025-01-29,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -167,5 +167,8 @@
 	test(dcgs_36, true(Copy == [1, 2, 3, 4, 5])) :-
 		^^suppress_text_output,
 		debug::copy([1,2,3,4,5], Copy).
+
+	test(dcgs_37, true(Digits-Rest == [3,7,4,1]-[0,3,6])) :-
+		logtalk << phrase(meta_nt::repeat(bases::octal, 2, 4, Digits), [3,7,4,1,0,3,6], Rest).
 
 :- end_object.
