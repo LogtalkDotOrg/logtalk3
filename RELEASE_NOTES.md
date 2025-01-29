@@ -67,7 +67,8 @@ Examples
 single `NOTES.md` file.
 
 * CHANGED: The contents of the examples `NOTES.md` files to allow open them
-as Jupyter notebooks.
+as Jupyter notebooks. Experimental. See the `examples/NOTES.md` file for the
+setup details.
 
 * FIXED: The `haunted_wasteland`, `scratchcards`, and `trebuchet` examples
 sample queries to allow running from any directory.

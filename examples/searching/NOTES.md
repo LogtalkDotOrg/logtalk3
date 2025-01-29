@@ -71,8 +71,7 @@ Start by loading the example and the required library files:
 
 ```logtalk
 logtalk_load(searching(loader)).
-...
-
+```
 
 The farmer, cabbage, goat and wolf problem:
 

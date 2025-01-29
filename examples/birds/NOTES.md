@@ -88,8 +88,7 @@ Start by loading the example and the required library files:
 
 ```logtalk
 logtalk_load(birds(loader)).
-...
-
+```
 
 Ask the expert system for help in identifying a bird:
 

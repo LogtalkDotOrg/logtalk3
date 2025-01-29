@@ -47,8 +47,7 @@ Start by loading the example:
 
 ```logtalk
 logtalk_load(self_vs_super(loader)).
-...
-
+```
 
 Illustrate the differences between sending a message to _self_
 and making a _super_ call to call an inherited meta-predicate:

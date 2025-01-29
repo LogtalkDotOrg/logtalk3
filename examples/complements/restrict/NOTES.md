@@ -65,8 +65,7 @@ Now load the `hacker` complementing category:
 
 ```logtalk
 logtalk_load(complements_restrict(hacker)).
-...
-
+```
 
 Try the hacker replaced password and fail miserably:
 
