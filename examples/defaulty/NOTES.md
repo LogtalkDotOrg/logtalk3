@@ -54,6 +54,12 @@ Start by loading the example and the `ports_profiler` tool:
 logtalk_load(defaulty(loader)).
 ```
 
+Activate the ports profiler:
+
+```logtalk
+ports_profiler::start.
+```
+
 Get ports profiling data for both defaulty and tagged representations:
 
 ```logtalk
@@ -111,3 +117,9 @@ tagged  count_atomics/5       1     9    10    10     0     0     0     0
 
 true.
 -->
+
+Deactivate the ports profiler:
+
+```logtalk
+ports_profiler::stop.
+```

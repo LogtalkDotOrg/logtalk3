@@ -62,7 +62,7 @@ Start by loading the example:
 logtalk_load(aspects(loader)).
 ```
 
-Transfer 100 from john account to jane account
+Transfer 100 from john account to jane account:
 
 ```logtalk
 bank::transfer(john, jane, 100).
@@ -77,7 +77,7 @@ Transfer successful.
 true.
 -->
 
-Try to transfer 400 from jane account to john account
+Try to transfer 400 from jane account to john account:
 
 ```logtalk
 bank::transfer(jane, john, 400).

@@ -52,7 +52,7 @@ Start by loading the example:
 logtalk_load(ack(loader)).
 ```
 
-Sample queries
+Sample queries:
 
 ```{code-cell}
 ack::ack(2, 4, V).

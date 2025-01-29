@@ -73,6 +73,8 @@ setup details.
 * FIXED: The `haunted_wasteland`, `scratchcards`, and `trebuchet` examples
 sample queries to allow running from any directory.
 
+* FIXED: Missing queries in the `defaulty` example documentation.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

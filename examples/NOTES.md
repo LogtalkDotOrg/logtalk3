@@ -32,8 +32,7 @@ the Jupyter kernel for Logtalk (version 0.15.0 or later):
 https://pypi.org/project/logtalk-jupyter-kernel/
 https://anaconda.org/conda-forge/logtalk-jupyter-kernel
 
-Plus a fork of  and a fork of Jupytext that can be installed using
-the command:
+Plus a fork of Jupytext that can be installed using the command:
 
 HATCH_BUILD_HOOKS_ENABLE=true python3 -m pip install git+https://github.com/pmoura/jupytext.git@add_logtalk_language_support
 
