@@ -56,6 +56,7 @@ Any other password will be rejected. For example:
 
 ```logtalk
 my_vault::open('abc123').
+```
 
 <!--
 false.
@@ -77,7 +78,6 @@ my_vault::open('1234567890').
 You have been hacked by SmartPants!
 false.
 -->
-
 
 The correct, original, password is still the only one capable
 of opening the vault, despite the hacker messages:
