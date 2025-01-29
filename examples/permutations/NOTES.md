@@ -44,7 +44,7 @@ Load the example:
 
 ```logtalk
 logtalk_load(permutations(loader)).
-...
+```
 
 Some example benchmark queries for backend Prolog compilers implementing
 the `time/1` timing predicate (e.g., SWI-Prolog, Trealla Prolog, YAP, XVM, 
