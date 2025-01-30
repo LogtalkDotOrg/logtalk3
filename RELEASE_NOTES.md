@@ -36,8 +36,9 @@ dependencies.
 Examples
 --------
 
-* FIXED: Typos in the `complements/restrict`, `elephants`, and `permutations`
-examples `NOTES.md` files that caused errors when open and run as notebooks.
+* FIXED: Typos in the `ack`, `complements/restrict`, `elephants`, and
+`permutations` examples `NOTES.md` files that caused errors when open
+and run as notebooks.
 
 Installers and installation scripts
 -----------------------------------
