@@ -211,8 +211,8 @@ else
 fi
 
 case $(sed --help 2>&1) in
-  *GNU*) sed_i () { sed -i "$@"; };;
-  *) sed_i () { sed -i '' "$@"; };;
+	*GNU*) sed_i () { sed -i "$@"; };;
+	*) sed_i () { sed -i '' "$@"; };;
 esac
 
 cp "$LOGTALKHOME/adapters/ciao.pl" .

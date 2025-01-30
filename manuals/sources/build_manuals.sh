@@ -173,8 +173,8 @@ make latexpdf
 #make linkcheck
 
 case $(sed --help 2>&1) in
-  *GNU*) sed_i () { sed -i "$@"; };;
-  *) sed_i () { sed -i '' "$@"; };;
+	*GNU*) sed_i () { sed -i "$@"; };;
+	*) sed_i () { sed -i '' "$@"; };;
 esac
 
 sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/contributions/index.html
