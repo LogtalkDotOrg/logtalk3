@@ -49,6 +49,9 @@ GNU versions of the `sed` command.
 * FIXED: The embedding scripts to work with both BSD and GNU versions of the
 `sed` command.
 
+* FIXED: Portable Docker image to install the Jupytext dependency required for
+opening examples documentation as Jupyter notebooks.
+
 
 3.88.0 - January 29, 2025
 =========================

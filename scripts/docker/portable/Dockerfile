@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on November 12, 2024
+##   Last updated on January 30, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -79,6 +79,10 @@ RUN python3 -m pip install --upgrade sphinx-rtd-theme
 RUN python3 -m pip install --upgrade jupyter_core
 RUN python3 -m pip install --upgrade jupyterlab
 RUN python3 -m pip install --upgrade notebook
+RUN python3 -m pip install --upgrade jupytext
+RUN curl -sOL https://logtalk.org/files/python/jupytext-1.16.6-py3-none-any.whl
+RUN python3 -m pip install --force-reinstall jupytext-1.16.6-py3-none-any.whl
+RUN rm -f jupytext-1.16.6-py3-none-any.whl
 RUN python3 -m pip install --upgrade logtalk-jupyter-kernel
 RUN python3 -m logtalk_kernel.install
 
