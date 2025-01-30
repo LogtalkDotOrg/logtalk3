@@ -22,6 +22,24 @@ RELEASE NOTES
 =============
 
 
+3.89.0 - February ??, 2025
+==========================
+
+Documentation
+-------------
+
+* ADDED: Alternative installation instructions for the developer tools Python
+dependencies.
+
+* FIXED: Missing developer tools dependency requirements for Ubuntu.
+
+Examples
+--------
+
+* FIXED: Typos in the `complements/restrict`, `elephants`, and `permutations`
+examples `NOTES.md` files that caused errors when open and run as notebooks.
+
+
 3.88.0 - January 29, 2025
 =========================
 

@@ -116,6 +116,14 @@ Python dependencies (all operating-systems)
    $ pip install --upgrade sphinx
    $ pip install --upgrade sphinx_rtd_theme
 
+In alternative, if your want to use the same versions used to build
+release documentation:
+
+::
+
+   $ cd manuals/sources
+   $ python3 -m pip install -r requirements.txt
+
 macOS - MacPorts
 ~~~~~~~~~~~~~~~~
 
@@ -146,8 +154,8 @@ Ubuntu
 ::
 
    $ sudo apt install graphviz
-   $ sudo apt install info pandoc
-   $ sudo apt install xsltproc fop texlive
+   $ sudo apt install texinfo pandoc
+   $ sudo apt install xsltproc fop texlive-full
    $ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
    $ sudo apt install libarchive-tools gnupg2 git curl wget direnv
 
