@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Release build script
-##   Last updated on January 8, 2025
+##   Last updated on January 30, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -23,6 +23,11 @@
 ## 
 #############################################################################
 
+
+case $(sed --help 2>&1) in
+  *GNU*) sed_i () { sed -i "$@"; };;
+  *) sed_i () { sed -i '' "$@"; };;
+esac
 
 git clone --depth=1 https://github.com/LogtalkDotOrg/logtalk3.git lgtclone
 version=$(sed -e 's/-stable$//' < lgtclone/VERSION.txt)
@@ -80,7 +85,7 @@ gzip --best "$directory/debian/usr/share/doc/logtalk"/*.txt
 gzip --best "$directory/debian/usr/share/doc/logtalk/changelog"
 gzip --best "$directory/debian/usr/share/doc/logtalk/changelog.Debian"
 cp debian/control "$directory/debian/DEBIAN"
-sudo sed -e "s/^Version:.*/Version: $version/" -i '' "$directory/debian/DEBIAN/control"
+sudo sed_i -e "s/^Version:.*/Version: $version/" "$directory/debian/DEBIAN/control"
 cp debian/postinst "$directory/debian/DEBIAN"
 cp debian/prerm "$directory/debian/DEBIAN"
 cp debian/postrm "$directory/debian/DEBIAN"
@@ -95,10 +100,10 @@ sudo cp -f "logtalk-$version.tar.bz2" "/opt/local/var/macports/distfiles/logtalk
 cd /opt/local/var/macports/sources/rsync.macports.org/macports/release/tarballs/ports/lang/logtalk/ || exit 1
 sudo mv -f Portfile Portfile.old
 sudo cp "$directory/logtalk-$version/scripts/macos/Portfile" .
-sudo sed -e "s/^version.*/version $version/" -i '' Portfile
-sudo sed -e "s/rmd160.*/rmd160 $rmd160 \\\/" -i '' Portfile
-sudo sed -e "s/sha256.*/sha256 $sha256 \\\/" -i '' Portfile
-sudo sed -e "s/size.*/size $size/" -i '' Portfile
+sudo sed_i -e "s/^version.*/version $version/" Portfile
+sudo sed_i -e "s/rmd160.*/rmd160 $rmd160 \\\/" Portfile
+sudo sed_i -e "s/sha256.*/sha256 $sha256 \\\/" Portfile
+sudo sed_i -e "s/size.*/size $size/" Portfile
 sudo port clean logtalk
 sudo port destroot logtalk
 sudo port pkg logtalk

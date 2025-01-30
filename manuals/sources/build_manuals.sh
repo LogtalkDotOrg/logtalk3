@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on January 25, 2024
+##   Last updated on January 30, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -172,14 +172,19 @@ make info
 make latexpdf
 #make linkcheck
 
-sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/contributions/index.html
-sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/devtools/index.html
-sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/faq/index.html
-sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/libraries/index.html
-sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/ports/index.html
-sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/refman/index.html
-sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/tutorial/index.html
-sed -e 's|../docs/index.html|../../docs/index.html|g' -i '' _build/html/userman/index.html
+case $(sed --help 2>&1) in
+  *GNU*) sed_i () { sed -i "$@"; };;
+  *) sed_i () { sed -i '' "$@"; };;
+esac
+
+sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/contributions/index.html
+sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/devtools/index.html
+sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/faq/index.html
+sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/libraries/index.html
+sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/ports/index.html
+sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/refman/index.html
+sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/tutorial/index.html
+sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/userman/index.html
 
 rm -f _build/html/index_latexpdf.html
 mv -f _build/html/* ../
