@@ -51,7 +51,7 @@ we get all dependencies installed) and then override it with the fork
 that contains the Logtalk support.
 
 You should be able to open the `NOTES.md` files in JupyterLab by
-control-clicking on them and selection the "Open With" > "Notebook"
+control-clicking on them and selecting the "Open With" > "Notebook"
 option. For VSCode and VSCodium, install the following extension:
 
 https://open-vsx.org/extension/parmentelat/vscode-jupytext
