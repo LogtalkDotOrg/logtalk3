@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ## 
-##   Last updated on January 14, 2025
+##   Last updated on January 30, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -217,12 +217,10 @@ else
 	extension=''
 fi
 
-# use GNU sed if available instead of BSD sed
-if gsed --version >/dev/null 2>&1 ; then
-	sed="gsed"
-else
-	sed="sed"
-fi
+case $(sed --help 2>&1) in
+  *GNU*) sed_i () { sed -i "$@"; };;
+  *) sed_i () { sed -i '' "$@"; };;
+esac
 
 cp "$LOGTALKHOME/adapters/cx.pl" .
 cp "$LOGTALKHOME/core/core.pl" .
@@ -241,7 +239,7 @@ if [ "$settings" != "" ] && [ "$settings" != "none" ] ; then
 	else
 		cxlgt$extension --goal "logtalk_compile('$settings',[optimize(on),scratch_directory('$temporary')]),halt"
 	fi
-	$sed -i "s/settings_file, allow/settings_file, deny/" cx.pl
+	sed_i "s/settings_file, allow/settings_file, deny/" cx.pl
 	cat \
 		cx.pl \
 		paths*.pl \

@@ -45,6 +45,9 @@ Installers and installation scripts
 * FIXED: The Handbook and the release build scripts to work with both BSD and
 GNU versions of the `sed` command.
 
+* FIXED: The embedding scripts to work with both BSD and GNU versions of the
+`sed` command.
+
 
 3.88.0 - January 29, 2025
 =========================
