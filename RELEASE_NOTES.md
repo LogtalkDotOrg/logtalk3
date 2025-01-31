@@ -36,8 +36,8 @@ dependencies.
 Examples
 --------
 
-* IMPROVED: The documentation of the `defaulty`, `errors`, `lambdas`, and
-`now_you_see_me` examples.
+* IMPROVED: The documentation of the `defaulty`, `errors`, `lambdas`, 
+`metapredicates_compiled`, and `now_you_see_me` examples.
 
 * FIXED: Typos in the `ack`, `complements/restrict`, `elephants`, and
 `permutations` examples `NOTES.md` files that caused errors when open

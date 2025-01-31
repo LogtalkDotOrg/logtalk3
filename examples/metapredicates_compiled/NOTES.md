@@ -40,3 +40,9 @@ that is only used for testing library support for compilation of
 calls to meta-predicates and lambda expressions that removes the
 implied overhead making their performance practical and equal or
 close to the first-order alternatives.
+
+Run the tests:
+
+```logtalk
+logtalk_load(metapredicates_compiled(tester)).
+```
