@@ -49,7 +49,7 @@ Start by loading the example:
 logtalk_load(now_you_see_me(loader)).
 ```
 
-Show all the horseman on stage
+Show all the horseman on stage:
 
 ```logtalk
 stage::list.
@@ -69,6 +69,8 @@ Hide the four horseman:
 ```logtalk
 magic::hide.
 ```
+
+Confirm that all of them are hiding:
 
 <!--
 true.
@@ -91,6 +93,8 @@ magic::show.
 <!--
 true.
 -->
+
+List the horseman now again on stage:
 
 ```logtalk
 stage::list.
