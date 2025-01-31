@@ -106,13 +106,12 @@ The object `class` does not understand the message `p1/1` (the predicate is
 declared only for the `class` descendant instances):
 
 ```logtalk
-class::p1(X).
+catch(class::p1(X), Error, true).
 ```
 
 <!--
-error(existence_error(predicate_declaration, p1(_)), class::p1(_), user)
+Error = error(existence_error(predicate_declaration,p1/1),logtalk(class::p1(_948),c(user,user,r(user,class,[],[])))).
 -->
-
 
 The same message is valid for the `class` instances:
 
@@ -138,13 +137,12 @@ true.
 The new predicate, like p1/1, is not available for `class`:
 
 ```logtalk
-class::p2(Value).
+catch(class::p2(Value), Error, true).
 ```
 
 <!--
-error(existence_error(predicate_declaration, p2(_)), class::p2(_), user)
+catch(instance::p2(_), Error, true).
 -->
-
 
 But is available for the `class` instances, the same way as `p1/1`:
 
@@ -160,14 +158,20 @@ If we change our mind and abolish the new predicate:
 
 ```logtalk
 class::abolish(p2/1).
-yes
-
-```logtalk
-instance::p2(_).
 ```
 
 <!--
-error(existence_error(predicate_declaration,p2/1), logtalk(_,_))) :-
+true.
+-->
+
+Then `instance` will no longer accept the `p2/1` message:
+
+```logtalk
+catch(instance::p2(_), Error, true).
+```
+
+<!--
+Error = error(existence_error(predicate_declaration,p2/1),logtalk(instance::p2(_1718),c(user,user,r(user,instance,[],[])))).
 -->
 
 Using a prototype, assert three new predicates (the method `object_assert/0`
