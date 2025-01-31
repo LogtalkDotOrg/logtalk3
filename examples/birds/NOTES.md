@@ -47,6 +47,7 @@ Please refer to the book for more information on the original example.
 The bird identification hierarchy is organized as a prototype hierarchy
 as follows:
 
+```text
 	<order>
 		<family>
 			<bird>
@@ -83,6 +84,7 @@ as follows:
 			swan
 				trumpeter_swan
 				whistling_swan
+```
 
 Start by loading the example and the required library files:
 
@@ -90,10 +92,10 @@ Start by loading the example and the required library files:
 logtalk_load(birds(loader)).
 ```
 
-Ask the expert system for help in identifying a bird:
+Ask the expert system for help in identifying a bird (skip if running as a notebook):
 
 ```logtalk
-expert::identify.
+(current_object(jupyter) -> true; expert::identify).
 ```
 
 <!--
@@ -121,10 +123,10 @@ No (more) candidates found.
 true.
 -->
 
-Identify another bird:
+Identify another bird (skip if running as a notebook):
 
 ```logtalk
-expert::identify.
+(current_object(jupyter) -> true; expert::identify).
 ```
 
 <!--

@@ -43,8 +43,10 @@ Start by loading the example and the required library files:
 logtalk_load(lpa_faults(loader)).
 ```
 
+Start an interactive fault diagnosis process (skip if running as a notebook):
+
 ```logtalk
-fault::findall.
+(current_object(jupyter) -> true; fault::findall).
 ```
 
 <!--

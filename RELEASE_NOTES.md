@@ -40,6 +40,9 @@ Examples
 `permutations` examples `NOTES.md` files that caused errors when open
 and run as notebooks.
 
+* FIXED: Skip the interactive queries in the `birds` and `lpa/faults` examples
+if opening their documentation as notebooks.
+
 Installers and installation scripts
 -----------------------------------
 
