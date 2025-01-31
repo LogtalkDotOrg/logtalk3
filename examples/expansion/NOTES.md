@@ -129,7 +129,11 @@ desc_public::test_goal_expansion(write(Term), EGoal).
 
 <!--
 EGoal = write_term(Term, [quoted(true)])
-yes
+```
+
+<!--
+true.
+-->
 
 ```logtalk
 desc_protected::test_term_expansion(8, Term).
