@@ -62,11 +62,15 @@ logtalk_load(tutor(loader)).
 The entities on this example are divided in two sets. The first set 
 results on compiler warning messages, while the second set results in
 compiler error messages. To load each sets of entities, compile and
-load the corresponding loader files:
+load the corresponding loader files.
+
+Illustrate common compiler errors:
 
 ```logtalk
 logtalk_load(errors(warnings_loader)).
 ```
+
+Illustrate common compiler warnings:
 
 ```logtalk
 logtalk_load(errors(errors_loader)).

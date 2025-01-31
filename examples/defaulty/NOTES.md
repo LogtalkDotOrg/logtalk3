@@ -60,7 +60,7 @@ Activate the ports profiler:
 ports_profiler::start.
 ```
 
-Get ports profiling data for both defaulty and tagged representations:
+Get ports profiling data for the defaulty representation:
 
 ```logtalk
 defaulty::count_atomics([a,1,_,b,2,_,c,3,_], As, Ns).
@@ -94,6 +94,8 @@ Reset the profiling data for the next query:
 ports_profiler::reset.
 ```
 
+Get ports profiling data for the tagged representation:
+
 ```logtalk
 tagged::count_atomics([a(a),n(1),o(_),a(b),n(2),o(_),a(c),n(3),o(_)], As, Ns).
 ```
@@ -101,6 +103,8 @@ tagged::count_atomics([a(a),n(1),o(_),a(b),n(2),o(_),a(c),n(3),o(_)], As, Ns).
 <!--
 As = Ns, Ns = 3.
 -->
+
+Print the profiling data:
 
 ```logtalk
 ports_profiler::data.

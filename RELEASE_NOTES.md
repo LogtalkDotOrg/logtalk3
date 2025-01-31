@@ -36,6 +36,9 @@ dependencies.
 Examples
 --------
 
+* IMPROVED: The documentation of the `defaulty`, `errors`, and `lambdas`
+examples.
+
 * FIXED: Typos in the `ack`, `complements/restrict`, `elephants`, and
 `permutations` examples `NOTES.md` files that caused errors when open
 and run as notebooks.
