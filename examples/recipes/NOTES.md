@@ -105,7 +105,11 @@ Patch the prototypical recipe to add a `level/1` descriptor to all recipes:
 
 ```logtalk
 logtalk_load(recipes(patch_1)).
-yes
+```
+
+<!--
+true.
+-->
 
 Recipes are now easy by default:
 
@@ -122,7 +126,13 @@ to define the level value for this recipe to be "hard":
 
 ```logtalk
 logtalk_load(recipes(patch_2)).
-yes
+```
+
+<!--
+true.
+-->
+
+Confirm the patched level:
 
 ```logtalk
 green_soup::level(Level).
