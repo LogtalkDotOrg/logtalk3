@@ -36,7 +36,7 @@ dependencies.
 Examples
 --------
 
-* IMPROVED: The documentation of the `defaulty`, `errors`, `lambdas`, 
+* IMPROVED: The documentation of the `bricks`, `defaulty`, `errors`, `lambdas`,
 `metapredicates_compiled`, and `now_you_see_me` examples.
 
 * FIXED: Typos in the `ack`, `around_methods`, `complements/restrict`,
