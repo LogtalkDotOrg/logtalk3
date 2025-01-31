@@ -39,9 +39,9 @@ Examples
 * IMPROVED: The documentation of the `defaulty`, `errors`, `lambdas`, 
 `metapredicates_compiled`, and `now_you_see_me` examples.
 
-* FIXED: Typos in the `ack`, `complements/restrict`, `elephants`,
-`permutations`, and `recipes` examples `NOTES.md` files that caused errors
-when open and run as notebooks.
+* FIXED: Typos in the `ack`, `around_methods`, `complements/restrict`,
+`elephants`, `permutations`, and `recipes` examples `NOTES.md` files that
+caused errors when open and run as notebooks.
 
 * FIXED: Skip the interactive queries in the `birds` and `lpa/faults` examples
 if opening their documentation as notebooks.

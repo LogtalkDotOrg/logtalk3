@@ -57,7 +57,8 @@ bird::make_sound.
 
 <!--
 Chirp, chirp!
-yes
+
+true.
 -->
 
 Next load the complementing category defining the patch for the bird::make_sound/0 predicate:
@@ -76,5 +77,6 @@ bird::make_sound.
 Started making sound...
 Chirp, chirp!
 ... finished making sound.
-yes
+
+true.
 -->
