@@ -344,7 +344,8 @@ true.
 -->
 
 The following lambda benchmarks are so far only available when using
-SWI-Prolog, XSB, or YAP as the Logtalk backend compilers:
+SWI-Prolog, Trealla Prolog, XSB, XVM, or YAP as the Logtalk backend
+compilers:
 
 ```logtalk
 lambda_benchmarks::bench1.

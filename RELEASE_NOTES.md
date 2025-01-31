@@ -46,6 +46,9 @@ and run as notebooks.
 * FIXED: Skip the interactive queries in the `birds` and `lpa/faults` examples
 if opening their documentation as notebooks.
 
+* FIXED: The `lambdas` example benchmarks can also be run with Trealla Prolog
+and XVM.
+
 Installers and installation scripts
 -----------------------------------
 

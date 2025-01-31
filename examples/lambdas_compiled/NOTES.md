@@ -41,14 +41,15 @@ meta-predicates and lambda expressions that removes the implied
 overhead making their performance practical and equal or close to
 the first-order alternatives.
 
-Start by loading the example:
+Run the tests:
 
 ```logtalk
-logtalk_load(lambdas_compiled(loader)).
+logtalk_load(lambdas_compiled(tester)).
 ```
 
 The following lambda benchmarks are so far only available when using
-SWI-Prolog, XSB, or YAP as the Logtalk backend compilers:
+SWI-Prolog, Trealla Prolog, XSB, XVM, or YAP as the Logtalk backend
+compilers:
 
 ```logtalk
 lambda_benchmarks::bench1.
