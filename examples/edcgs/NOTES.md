@@ -38,12 +38,12 @@ ________________________________________________________________________
 For a description of this example, please see the comments in the example
 source files and the original individual examples by Peter Van Roy at:
 
-	https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/CSD-90-583.pdf
+https://www2.eecs.berkeley.edu/Pubs/TechRpts/1990/CSD-90-583.pdf
 
 Some examples and tests written by Michael Hendricks for his `edcg`
 SWI-Prolog pack repo at:
 
-	https://github.com/mndrix/edcg
+https://github.com/mndrix/edcg
 
 Start by loading the example:
 
@@ -74,7 +74,7 @@ L = [7, 6, 5, 4, 3, 2, 1].
 Sum the natural numbers 1..4:
 
 ```logtalk
-list_sums::sum_first_n(4, 0, Sum),
+list_sums::sum_first_n(4, 0, Sum).
 ```
 
 <!--

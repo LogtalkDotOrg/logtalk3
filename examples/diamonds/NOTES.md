@@ -42,11 +42,13 @@ solutions on Logtalk.
 This classical problem can be simply described by constructing a 
 "diamond" of objects and inheritance links as follows:
 
-	    A       -- contains default definition for a predicate `m/0`
-	  /   \
-	B       C   -- contains redefinitions of the predicate `m/0`
-	  \   /
-	    D       -- inherits both redefinitions of the predicate `m/0`
+```text
+    A       -- contains default definition for a predicate `m/0`
+  /   \
+B       C   -- contains redefinitions of the predicate `m/0`
+  \   /
+    D       -- inherits both redefinitions of the predicate `m/0`
+```
 
 As such, the object D inherits two conflicting definitions for the 
 predicate `m/0`, one from object B and one from object C. If we send 

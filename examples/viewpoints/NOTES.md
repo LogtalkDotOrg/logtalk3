@@ -123,7 +123,7 @@ Age = 32
 -->
 
 As you can see, although the modification message have been sent to a 
-descendant, its the predicate `age/1` in the parent that got updated:
+descendant, its the predicate `age/1` in the parent that got updated.
 
 To illustrate value sharing we use a couple of predicates, `score/1`
 and `set_score/0`, defined in `joe_person`:

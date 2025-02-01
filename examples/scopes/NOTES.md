@@ -54,7 +54,7 @@ prototype::foo(Foo).
 Foo = 1.
 -->
 
-But we cannot send messages for protected or private predicates:
+But we cannot send messages for protected predicates:
 
 ```logtalk
 prototype::bar(_).
@@ -63,6 +63,8 @@ prototype::bar(_).
 <!--
 error(permission_error(access,protected_predicate,bar/1),logtalk(prototype::bar(_),c(user,user,r(user,prototype,[],[]))))
 -->
+
+Or for private predicates:
 
 ```logtalk
 prototype::baz(_).

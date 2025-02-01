@@ -44,7 +44,7 @@ Start by loading the example:
 logtalk_load(inlining(loader)).
 ```
 
-Check that the between/3 predicate is inlined:
+Confirm that the `between/3` predicate is inlined:
 
 ```logtalk
 inlining::predicate_property(a(_,_), inline).
@@ -53,6 +53,8 @@ inlining::predicate_property(a(_,_), inline).
 <!--
 true.
 -->
+
+List all definition properties of the inlined `a/2` predicate:
 
 ```logtalk
 object_property(inlining, defines(a/2, Properties)).

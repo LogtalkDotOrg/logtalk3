@@ -46,7 +46,7 @@ Start by loading the example:
 logtalk_load(includes(loader)).
 ```
 
-Test the use of the Logtalk include/1 directive as a file directive:
+Test the use of the Logtalk `include/1` directive as a file directive:
 
 ```logtalk
 findall(Vowel, vowel(Vowel), Vowels).
@@ -56,7 +56,7 @@ findall(Vowel, vowel(Vowel), Vowels).
 Vowels = [a,e,i,o,u].
 -->
 
-Test the use of the Logtalk include/1 directive as an entity directive
+Test the use of the Logtalk `include/1` directive as an entity directive
 by getting a list of all capitals:
 
 ```logtalk
@@ -94,7 +94,7 @@ Value = ... ;
 false.
 -->
 
-Increment one of the counters and save the counters database:
+Increment one of the counters:
 
 ```logtalk
 counters::inc_counter(b).
@@ -103,6 +103,8 @@ counters::inc_counter(b).
 <!--
 true.
 -->
+
+Save the counters database:
 
 ```logtalk
 counters::save_counters.

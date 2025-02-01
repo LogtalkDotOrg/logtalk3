@@ -93,7 +93,7 @@ X = 1 ;
 X = 2.
 -->
 
-Solver - a simple meta-interpreter for pure Prolog:
+A meta-interpreter for pure Prolog:
 
 ```logtalk
 %%table
@@ -105,6 +105,8 @@ X = 1 ;
 X = 2.
 -->
 
+A meta-interpreter returning a proof tree:
+
 ```logtalk
 %%table
 database::proof_tree(p(X), Tree).
@@ -115,7 +117,7 @@ X = 1, Tree = p(1):- (q(1, a):- (s(1):-true), (t(1, a):-true)), (r(a):-true) ;
 X = 2, Tree = p(2):- (q(2, b):- (s(2):-true), (t(2, b):-true)), (r(b):-true).
 -->
 
-Tracer - a simple meta-interpreter for tracing goal proofs using pure Prolog:
+A meta-interpreter for tracing goal proofs using pure Prolog:
 
 ```logtalk
 database::trace(p(X)).
@@ -178,7 +180,7 @@ lists::steps(reverse([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,2
 Steps = 496.
 -->
 
-Another example: expert system rules:
+An expert system rules example:
 
 ```logtalk
 rules::prove(weather(Weather)).

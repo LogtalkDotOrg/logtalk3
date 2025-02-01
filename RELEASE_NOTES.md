@@ -36,14 +36,11 @@ dependencies.
 Examples
 --------
 
-* IMPROVED: The documentation of the `bricks`, `defaulty`, `dynpred`, `errors`,
-`lambdas`, `metapredicates_compiled`, `mi`, `my_types`, `now_you_see_me`,
-`object_aliases`, and `self_vs_super` examples.
+* IMPROVED: The `NOTES.md` files of several examples for a better experience
+when open as notebooks.
 
-* FIXED: Typos in the `ack`, `around_methods`, `complements/restrict`,
-`elephants`, `expansion`, `family_alt`, `logic`, `metapredicates`,
-`permutations`, `planets`, and `recipes` examples `NOTES.md` files that caused
-errors when open and run as notebooks.
+* FIXED: Typos in the `NOTES.md` files of several examples that caused errors
+when open and run as notebooks.
 
 * FIXED: Skip the interactive queries in the `birds` and `lpa/faults` examples
 if opening their documentation as notebooks.

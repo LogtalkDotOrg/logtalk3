@@ -46,21 +46,23 @@ descendants, each one using one of the inheritance types.
 
 The two object hierarchies are organized as follows:
 
-	parent
-		prototype1				% public inheritance
-			descendant1
-		prototype2				% protected inheritance
-			descendant2
-		prototype3				% private inheritance
-			descendant3
+```text
+parent
+	prototype1				% public inheritance
+		descendant1
+	prototype2				% protected inheritance
+		descendant2
+	prototype3				% private inheritance
+		descendant3
 
-	root
-		subclass1				% public inheritance
-			instance1
-		subclass2				% protected inheritance
-			instance2
-		subclass3				% private inheritance
-			instance3
+root
+	subclass1				% public inheritance
+		instance1
+	subclass2				% protected inheritance
+		instance2
+	subclass3				% private inheritance
+		instance3
+```
 
 A second category named `interface`, imported by all objects except the 
 sub-class instances, allows us to query the objects about their interfaces.
