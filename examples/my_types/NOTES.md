@@ -49,7 +49,9 @@ logtalk_load(my_types(loader)).
 true.
 -->
 
-Type-check temperature values in different units:
+Type-check temperature values in different units. I.e., that the value is in the valid range.
+
+Celsius:
 
 ```logtalk
 type::check(temperature(celsius), 38.7).
@@ -59,6 +61,8 @@ type::check(temperature(celsius), 38.7).
 true.
 -->
 
+Fahrenheit:
+
 ```logtalk
 type::check(temperature(fahrenheit), 101.2).
 ```
@@ -66,6 +70,8 @@ type::check(temperature(fahrenheit), 101.2).
 <!--
 true.
 -->
+
+Kelvin (valid value):
 
 ```logtalk
 type::check(temperature(kelvin), 307.4).
@@ -75,6 +81,8 @@ type::check(temperature(kelvin), 307.4).
 true.
 -->
 
+Kelvin (invalid value):
+
 ```logtalk
 type::valid(temperature(kelvin), -12.1).
 ```
@@ -83,6 +91,8 @@ type::valid(temperature(kelvin), -12.1).
 false.
 -->
 
+The temperature type definition requires a float value:
+
 ```logtalk
 catch(type::check(temperature(celsius), 38), Error, true).
 ```
@@ -90,6 +100,8 @@ catch(type::check(temperature(celsius), 38), Error, true).
 <!--
 Error = type_error(float, 38).
 -->
+
+The Kelvin scale starts at 0.0:
 
 ```logtalk
 catch(type::check(temperature(kelvin), -12.1, my_error_context), Error, true).

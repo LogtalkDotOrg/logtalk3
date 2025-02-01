@@ -37,7 +37,8 @@ Examples
 --------
 
 * IMPROVED: The documentation of the `bricks`, `defaulty`, `dynpred`, `errors`,
-`lambdas`, `metapredicates_compiled`, and `now_you_see_me` examples.
+`lambdas`, `metapredicates_compiled`, `my_types`, and `now_you_see_me`
+examples.
 
 * FIXED: Typos in the `ack`, `around_methods`, `complements/restrict`,
 `elephants`, `expansion`, `family_alt`, `logic`, `permutations`, `planets`,
