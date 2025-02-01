@@ -56,7 +56,7 @@ must be written (i.e., the multifile predicate definitions).
 Load the example:
 
 ```logtalk
-logtalk_load(family(loader)).
+logtalk_load(family_alt(loader)).
 ```
 
 Some example queries using the Addams family relations:
