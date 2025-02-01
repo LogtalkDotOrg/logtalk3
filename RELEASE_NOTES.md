@@ -41,9 +41,9 @@ Examples
 `object_aliases`, and `self_vs_super` examples.
 
 * FIXED: Typos in the `ack`, `around_methods`, `complements/restrict`,
-`elephants`, `expansion`, `family_alt`, `logic`, `permutations`, `planets`,
-and `recipes` examples `NOTES.md` files that caused errors when open and run
-as notebooks.
+`elephants`, `expansion`, `family_alt`, `logic`, `metapredicates`,
+`permutations`, `planets`, and `recipes` examples `NOTES.md` files that caused
+errors when open and run as notebooks.
 
 * FIXED: Skip the interactive queries in the `birds` and `lpa/faults` examples
 if opening their documentation as notebooks.

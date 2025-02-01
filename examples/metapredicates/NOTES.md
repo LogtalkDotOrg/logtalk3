@@ -159,7 +159,7 @@ Sorted = [1,2,3,4,9].
 Test the `setof/3` wrapper:
 
 ```logtalk
-object::p(L).
+wrappers_client::p(L).
 ```
 
 <!--
@@ -167,7 +167,7 @@ L = [1, 2, 3].
 -->
 
 ```logtalk
-object::q(L).
+wrappers_client::q(L).
 ```
 
 <!--
@@ -299,7 +299,9 @@ Result = 'PREFIXabcdefghi'.
 
 ```logtalk
 meta::fold_right(atom_concat, 'SUFIX', [abc,def,ghi], Result).
+```
 
+<!--
 Result = abcdefghiSUFIX.
 -->
 
@@ -386,7 +388,9 @@ meta::scan_left([X,Y,Z]>>(Z is X*Y), 1, [1,2,3,4,5,6], Result).
 Result = [1, 1, 2, 6, 24, 120, 720].
 -->
 
-Use the `map/2-3` meta-predicates with some Prolog built-in predicates:
+Use the `map/2-3` meta-predicates with some Prolog built-in predicates.
+
+Check that all list elements are integers:
 
 ```logtalk
 meta::map(integer, [1,2,3,4,5]).
@@ -395,6 +399,8 @@ meta::map(integer, [1,2,3,4,5]).
 <!--
 true.
 -->
+
+Map characters to character codes:
 
 ```logtalk
 meta::map(char_code, [a,b,c,d,e], Codes).
@@ -414,9 +420,11 @@ fibonacci::nth(10, Fib).
 Fib = 55.
 -->
 
+The first six Fibonacci numbers:
+
 ```logtalk
 %%table
-fibonacci::nth(Nth, Fib).
+integer::between(0, 5, Nth), fibonacci::nth(Nth, Fib).
 ```
 
 <!--

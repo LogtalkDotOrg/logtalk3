@@ -22,8 +22,8 @@
 :- object(fibonacci).
 
 	:- info([
-		version is 1:0:0,
-		date is 2010-12-19,
+		version is 1:0:1,
+		date is 2025-02-01,
 		author is 'Paulo Moura',
 		comment is 'Computation of Fibonacci numbers using a fold left meta-predicate.'
 	]).
@@ -36,7 +36,8 @@
 	]).
 
 	nth(N, F) :-
-		meta::fold_left(next, 0-[0,1], _, N-[F, _]).
+		meta::fold_left(next, 0-[0,1], _, N-[F, _]),
+		!.
 
 	next(N1-[F1, F2], _, N2-[F2, F3]) :-
 		F3 is F1 + F2,
