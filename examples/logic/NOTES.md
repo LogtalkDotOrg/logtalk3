@@ -78,7 +78,6 @@ k :- p.
 q; r :- .
 q; k :- .
 
-
 Cs = [cl([r],[p]),cl([k],[p]),cl([q,r],[]),cl([q,k],[])].
 -->
 
@@ -105,7 +104,6 @@ k :- p.
 q; r :- .
 q; k :- .
 
-
 Cs = [cl([r],[p]),cl([k],[p]),cl([q,r],[]),cl([q,k],[])].
 -->
 
@@ -130,10 +128,7 @@ Clauses in Prolog-like notation:
 r(X, f1(X)) :- p(X).
 q(X); r(X, f1(X)) :- .
 
-
-X = X
-Y = f1(X)
-Cs = [cl([r(X, f1(X))], [p(X)]), cl([q(X), r(X, f1(X))], [])].
+X = X, Y = f1(X), Cs = [cl([r(X, f1(X))], [p(X)]), cl([q(X), r(X, f1(X))], [])].
 -->
 
 Translate a single logic proposition printing each translation step:
@@ -156,7 +151,5 @@ Processing proposition: all(X, men(X)=>mortal(X))
 Clauses in Prolog-like notation:
 mortal(X) :- men(X).
 
-
-X = X
-Cs = [cl([mortal(X)], [men(X)])].
+X = X, Cs = [cl([mortal(X)], [men(X)])].
 -->
