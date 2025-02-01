@@ -22,9 +22,9 @@
 :- object(my_game(_CountryCode_)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2021-02-07,
+		date is 2025-02-01,
 		comment is 'A simple example of supporting application localization in multiple languages.',
 		parnames is ['CountryCode']
 	]).
@@ -35,11 +35,11 @@
 	:- public(banner/0).
 
 	banner :-
-		logtalk::print_message(comment, my_game(_CountryCode_), banner).
+		logtalk::print_message(information, my_game(_CountryCode_), banner).
 
 	:- multifile(logtalk::message_prefix_stream/4).
 	:- dynamic(logtalk::message_prefix_stream/4).
-	logtalk::message_prefix_stream(comment, my_game(_), '>>> ', Stream) :-
+	logtalk::message_prefix_stream(information, my_game(_), '>>> ', Stream) :-
 		current_output(Stream).
 
 :- end_object.

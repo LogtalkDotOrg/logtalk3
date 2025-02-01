@@ -50,6 +50,9 @@ if opening their documentation as notebooks.
 * FIXED: The `lambdas` example benchmarks can also be run with Trealla Prolog
 and XVM.
 
+* FIXED: The `localizations` example to not depend for its expected output on
+the `report` flag value.
+
 Installers and installation scripts
 -----------------------------------
 

@@ -60,7 +60,9 @@ Load the example:
 logtalk_load(localizations(loader)).
 ```
 
-Print the application language in several languages:
+Print the application language in several languages.
+
+German banner:
 
 ```logtalk
 my_game(de)::banner.
@@ -71,6 +73,8 @@ my_game(de)::banner.
 true.
 -->
 
+English banner:
+
 ```logtalk
 my_game(en)::banner.
 ```
@@ -80,6 +84,8 @@ my_game(en)::banner.
 true.
 -->
 
+French banner:
+
 ```logtalk
 my_game(fr)::banner.
 ```
@@ -88,6 +94,8 @@ my_game(fr)::banner.
 >>> Bienvenue sur mon grand jeu!
 true.
 -->
+
+Portuguese banner:
 
 ```logtalk
 my_game(pt)::banner.
