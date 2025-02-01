@@ -65,8 +65,11 @@ experiments::stats(TotalLess, TotalEqual, TotalGreater), Total is TotalLess + To
 Total = 42.
 -->
 
-Demonstration of using aliases for objects defined at runtime
-using parameters:
+Demonstration of using aliases for objects defined at runtime using
+parameters.
+
+Using the `heap(<)` library object, insert all elements in a list and
+return the top element:
 
 ```logtalk
 simple(<)::insert_top([3-c,1-a,2-b], Top).
@@ -75,6 +78,9 @@ simple(<)::insert_top([3-c,1-a,2-b], Top).
 <!--
 Top = 1-a.
 -->
+
+Using the `heap(>)` library object, insert all elements in a list and
+return the top element:
 
 ```logtalk
 simple(>)::insert_top([3-c,1-a,2-b], Top).
