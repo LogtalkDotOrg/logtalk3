@@ -37,7 +37,7 @@ Examples
 --------
 
 * IMPROVED: The documentation of the `bricks`, `defaulty`, `dynpred`, `errors`,
-`lambdas`, `metapredicates_compiled`, `my_types`, `now_you_see_me`,
+`lambdas`, `metapredicates_compiled`, `mi`, `my_types`, `now_you_see_me`,
 `object_aliases`, and `self_vs_super` examples.
 
 * FIXED: Typos in the `ack`, `around_methods`, `complements/restrict`,

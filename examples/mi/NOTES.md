@@ -99,10 +99,11 @@ xyzt::xyzt(X, Y, Z, T).
 T = 4, X = 1, Y = 2, Z = 3.
 -->
 
-Enumerate space_time public predicates:
+Enumerate `xyzt` public predicates:
 
 ```logtalk
-xyzt::(current_predicate(Functor/Arity), functor(Pred, Functor, Arity), predicate_property(Pred, declared_in(Object))).
+%%table
+xyzt::current_predicate(Functor/Arity), functor(Pred, Functor, Arity), xyzt::predicate_property(Pred, declared_in(Object)).
 ```
 
 <!--
@@ -114,7 +115,7 @@ Pred = translate(_A), Arity = 1, Object = t, Functor = translate ? ;
 false.
 -->
 
-Get the origin distance from a point in the `space-time(_, _, _, _)`:
+Query the origin distance from a point in the `space-time(_, _, _, _)`:
 
 ```logtalk
 xyzt(2,3,4,7)::distance(D).
@@ -123,6 +124,8 @@ xyzt(2,3,4,7)::distance(D).
 <!--
 D = 5.385164807134504.
 -->
+
+Query the time:
 
 ```logtalk
 xyzt(2,3,4,7)::time(T).
@@ -135,7 +138,8 @@ T = 7.
 Enumerate `xyzt(_, _, _, _)` public predicates:
 
 ```logtalk
-xyzt(2,3,4,7)::(current_predicate(Functor/Arity), functor(Pred, Functor, Arity), predicate_property(Pred, declared_in(Object))).
+%%table
+xyzt(2,3,4,7)::current_predicate(Functor/Arity), functor(Pred, Functor, Arity), xyzt(2,3,4,7)::predicate_property(Pred, declared_in(Object)).
 ```
 
 <!--
