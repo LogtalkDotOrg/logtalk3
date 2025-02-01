@@ -25,7 +25,7 @@ Each example folder contains a `NOTES.md` file and a loader helper file
 (usually named `loader.lgt`) that can be used to compile and load the
 example source code.
 
-The `NOTES.md` file of most examples can also be  open as a Jupyter
+The `NOTES.md` file of most examples can also be open as a Jupyter
 notebook to execute the example sample queries. Requires installing
 the Jupyter kernel for Logtalk (version 0.15.0 or later):
 
@@ -75,9 +75,6 @@ These are programming examples, meaning that you should study the source
 files to fully understand them. Note, however, that some examples main
 purpose is to illustrate general principles rather than being adequate,
 efficient solutions for deployment code.
-
-All examples are indented using tabs (a common setting is a tab width
-equivalent to 4 spaces).
 
 Most example folders contain two files, `tests.lgt` and `tester.lgt`. The
 file `tests.lgt` contains unit tests for the example. These unit tests

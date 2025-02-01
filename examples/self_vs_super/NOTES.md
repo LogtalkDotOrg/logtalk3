@@ -49,10 +49,9 @@ Start by loading the example:
 logtalk_load(self_vs_super(loader)).
 ```
 
-Illustrate the differences between sending a message to _self_
-and making a _super_ call to call an inherited meta-predicate:
-
-The `user` object defines a foo/1 predicate:
+Illustrate the differences between sending a message to _self_ and
+making a _super_ call to call an inherited meta-predicate by using
+a `foo/1` predicate defined in `user`:
 
 ```logtalk
 foo(X).
@@ -86,7 +85,7 @@ Messages to _self_ reset _sender_ and therefore the `foo/1` predicate
 is called in the context of `proto`, hence the existence error:
 
 ```logtalk
-proto::meta_self(foo, X).
+catch(proto::meta_self(foo, X), Error, true).
 ```
 
 <!--
@@ -95,5 +94,5 @@ Execution context for the parent object meta/2 meta-predicate:
   this: parent
   sender: proto
 
-uncaught exception: error(existence_error(procedure,foo/1),logtalk(call(foo(_307)),c(proto,proto,r(user,proto,c(user,user,r(user,proto,[],[])),[]))))
+Error = error(existence_error(procedure,foo/1),logtalk(call(foo(_307)),c(proto,proto,r(user,proto,c(user,user,r(user,proto,[],[])),[])))).
 -->
