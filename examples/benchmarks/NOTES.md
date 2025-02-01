@@ -126,7 +126,6 @@ Run benchmarks with event support turned on and using static binding:
 logtalk_load(benchmarks(loader_events)).
 ```
 
-
 Run benchmarks with event support turned off and using static binding:
 
 ```logtalk
@@ -138,7 +137,6 @@ Or simply:
 ```logtalk
 logtalk_load(benchmarks(loader)).
 ```
-
 
 List all the benchmark tests:
 
@@ -169,13 +167,11 @@ Run all the benchmark tests the default number of times:
 benchmarks::run.
 ```
 
-
 Run all the benchmark tests 100000 times:
 
 ```logtalk
 benchmarks::run(100000).
 ```
-
 
 Or run specific sets of benchmark tests, for example:
 

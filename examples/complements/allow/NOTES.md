@@ -82,14 +82,12 @@ Now load the `add_on` complementing category:
 logtalk_load(complements_allow(add_on)).
 ```
 
-
 Load the `dynamic.lgt` source file that creates a dynamic complementing
 category, also patching the `employee` object:
 
 ```logtalk
 logtalk_load(complements_allow(dynamic)).
 ```
-
 
 Find categories that complement objects:
 

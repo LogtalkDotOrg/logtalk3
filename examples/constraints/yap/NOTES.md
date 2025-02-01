@@ -57,7 +57,6 @@ set_prolog_flag(toplevel_print_options, [quoted(true), portray(true), max_depth(
 true.
 -->
 
-
 ```logtalk
 puzzle::solve(Sum=Rs), label(Rs).
 ```

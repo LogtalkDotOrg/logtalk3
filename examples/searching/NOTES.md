@@ -95,7 +95,6 @@ Initial = (north,north,north,north) ?
 true.
 -->
 
-
 Missionaries and cannibals problem, solved using a hill-climbing strategy:
 
 ```logtalk

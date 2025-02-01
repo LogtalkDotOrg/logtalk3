@@ -43,7 +43,6 @@ The book is available on-line in HTML format at the URL:
 
 Please refer to the book for more information on the original example.
 
-
 The bird identification hierarchy is organized as a prototype hierarchy
 as follows:
 

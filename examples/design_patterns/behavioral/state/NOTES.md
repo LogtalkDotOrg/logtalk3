@@ -66,7 +66,6 @@ context::output(1 + 2).
 true.
 -->
 
-
 ```logtalk
 context::output(6 / 7).
 ```

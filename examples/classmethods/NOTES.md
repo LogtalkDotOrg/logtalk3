@@ -79,7 +79,6 @@ c42::area(Area).
 Area = 24.6301.
 -->
 
-
 Create a dynamic instance of class circle using the _class method_ `new/4`:
 
 ```logtalk
@@ -89,7 +88,6 @@ circle::new(1.2, 7.9, 2.0, Circle).
 <!--
 Circle = o1.
 -->
-
 
 Ask the circle `o1` its area:
 

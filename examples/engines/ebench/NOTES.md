@@ -60,7 +60,6 @@ time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,true,A),fail))
 time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
 ```
 
-
 Second, an example with an engine goal that provides an infinite stream of solutions:
 
 ```logtalk
@@ -70,7 +69,6 @@ time((between(1,2000,I),atom_number(A,I),threaded_engine_create(_,repeat,A),fail
 ```logtalk
 time((between(1,2000,I),atom_number(A,I),threaded_engine_destroy(A),fail)).
 ```
-
 
 Finally, an example with an engine running a loop predicate using the engine term queue:
 

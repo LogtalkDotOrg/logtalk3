@@ -71,7 +71,7 @@ set_logtalk_flag(events, allow).
 true.
 -->
 
-### `message_counter` example
+### `message_counter` example:
 
 
 Choose an object to spy:

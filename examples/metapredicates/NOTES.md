@@ -356,7 +356,6 @@ meta::fold_right_1([X,Y,Z]>>(Z is X*Y), [1,2,3,4,5], R).
 R = 120.
 -->
 
-
 Use the `scan_left/4` and `scan_right/4` meta-predicates with predicates
 defined in the object `predicates`:
 

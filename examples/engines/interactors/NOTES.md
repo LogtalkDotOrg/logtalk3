@@ -84,7 +84,6 @@ interactors::natural(N).
 N = 3.
 -->
 
-
 Get prime numbers in increasing order:
 
 ```logtalk

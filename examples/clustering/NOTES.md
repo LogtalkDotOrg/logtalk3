@@ -59,13 +59,11 @@ when sourced; for example, when using SWI-Prolog:
 	cd "$LOGTALKUSER/examples/clustering"
 	. set_classpath_swi.sh
 
-
 Second, start Logtalk and load the example:
 
 ```logtalk
 logtalk_load(clustering(loader)).
 ```
-
 
 Create 4 clusters from a list of float values:
 

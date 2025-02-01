@@ -91,7 +91,6 @@ Send the next batch of messages:
 pmq::(send(8-fun), send(11-have), send(3-':-)')).
 -->
 
-
 Retrieve the current messages sorted by priority:
 
 ```logtalk
@@ -101,7 +100,6 @@ pmq::messages(Messages).
 <!--
 Messages = [have, fun, ':-)'].
 -->
-
 
 Same messages but to an alternative implementation that splits top messages
 from normal messages instead of sorting all messages by priority:

@@ -80,7 +80,7 @@ symbiosis::r(L).
 L = [1, 2, 3].
 -->
 
-Adding one to each integer in a list using maplist/3 with a lambda expression with a built-in predicate
+Adding one to each integer in a list using maplist/3 with a lambda expression with a built-in predicate:
 
 ```logtalk
 symbiosis::s(L).
@@ -90,8 +90,7 @@ symbiosis::s(L).
 L = [2,3,4].
 -->
 
-
-Adding one to each integer in a list using maplist/3 with a lambda expression with a local predicate
+Adding one to each integer in a list using maplist/3 with a lambda expression with a local predicate:
 
 ```logtalk
 symbiosis::t(L).
