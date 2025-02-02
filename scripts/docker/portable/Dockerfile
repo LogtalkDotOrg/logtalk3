@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on January 30, 2025
+##   Last updated on February 2, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -85,6 +85,8 @@ RUN python3 -m pip install --force-reinstall jupytext-1.16.6-py3-none-any.whl
 RUN rm -f jupytext-1.16.6-py3-none-any.whl
 RUN python3 -m pip install --upgrade logtalk-jupyter-kernel
 RUN python3 -m logtalk_kernel.install
+RUN mkdir -p /root/.jupyter
+RUN cd /root/.jupyter && curl -O https://raw.githubusercontent.com/LogtalkDotOrg/logtalk-jupyter-kernel/master/logtalk_kernel/logtalk_kernel_config.py
 
 # Install backend dependencies
 RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install \

@@ -57,6 +57,9 @@ the `report` flag value.
 Installers and installation scripts
 -----------------------------------
 
+* ADDED: Portable Docker image support for configuring the default Prolog
+backend to be used for Jupyter notebooks.
+
 * FIXED: The Handbook and the release build scripts to work with both BSD and
 GNU versions of the `sed` command.
 

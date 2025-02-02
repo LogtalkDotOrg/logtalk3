@@ -193,11 +193,15 @@ the backend version, and the Logtalk Jupyter kernel version.
 Running the examples documentation as Jupyter notebooks
 -------------------------------------------------------
 
-Most of the examples `NOTES.md` files can be open as Jupyter notebooks, First,
-start a JupyterLab server from the `examples` directory:
+Most of the examples `NOTES.md` files can be open as Jupyter notebooks.
+Open a new integrated terminal in VSCode and run the following commands:
 
 	cd $LOGTALKUSER/examples
 	jupyter-lab --allow-root --NotebookApp.token='' --NotebookApp.password=''
 
 You can then open the examples `NOTES.md` files as notebooks in JupyterLab by
 control-clicking on them and selecting the "Open With" > "Notebook" option.
+
+To configure the backend to be use when opening the examples `NOTES.md`
+files as notebooks (default is SWI-Prolog), edit the Docker image file
+`~/.jupyter/logtalk_kernel_config.py`.
