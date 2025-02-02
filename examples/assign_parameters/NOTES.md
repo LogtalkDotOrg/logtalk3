@@ -62,7 +62,7 @@ rectangle(2, 3, S)::init, rectangle(2, 3, S)::position(X0, Y0), rectangle(2, 3, 
 X0 = 0, Y0 = 0, X1 = 3, Y1 = 7, X2 = 2, Y2 = 5.
 -->
 
-Finite state machine example
+Finite state machine example:
 
 ```logtalk
 {fsm(T, I, F)}::recognise([0,1,1,2,1,2,0]).
@@ -82,7 +82,7 @@ I = red,
 F = [red]. 
 -->
 
-Finite state machine example
+Finite state machine example:
 
 ```logtalk
 {fsm(T, I, F)}::recognise([0,1,1,2,1,2,1,0]).

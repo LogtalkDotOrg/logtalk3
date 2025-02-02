@@ -40,8 +40,10 @@ of threaded engine creation and destroying. Currently it runs on ECLiPSe,
 SWI-Prolog, and XVM. It should run also on YAP if and when this system
 threads bugs are fixed.
 
+Confirm that the `time/1` predicate is available:
+
 ```logtalk
-time(true). % autoload statistics library if using SWI-Prolog
+time(true).
 ```
 
 Load the example:

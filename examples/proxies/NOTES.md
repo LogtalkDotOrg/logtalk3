@@ -40,14 +40,20 @@ and set when the object is defined. However, there can be only one parametric
 object with a given functor and arity. For example, if we define the following
 parametric object:
 
-	:- object(circle(_Radius, _Color)).
-		...
-	:- end_object.
+```logtalk
+%%highlight
+:- object(circle(_Radius, _Color)).
+	...
+:- end_object.
+```
 
 then the following terms may be interpreted as references to the object above:
 
-	circle(1, blue)
-	circle(2, yellow)
+```logtalk
+%%highlight
+circle(1, blue)
+circle(2, yellow)
+```
 
 In the context of parametric objects, the above terms are known as "parametric
 object proxies". Proxies represent different instantiations of a parametric 
@@ -127,24 +133,30 @@ Some example queries for backend Prolog compilers implementing the
 `time/1` timing predicate (e.g., SWI-Prolog or YAP; the adapter files
 for these two systems ensure that a ::/2 goal in the argument of the
 `time/1` predicate is compiled prior to calling it so that we benchmark
-the code instead of the compiler):
+the code instead of the compiler).
+
+Recompile the example in optimal mode:
 
 ```logtalk
-set_logtalk_flag(optimize, on).
+logtalk_make(optimal).
+```
+
+<!--
 true.
+-->
+
+Confirm that the `time/1` predicate is available:
 
 ```logtalk
-logtalk_load(proxies(loader)).
-...
-true.
-
-```logtalk
-time(true).  % autoload the predicate in the case of SWI-Prolog
+time(true).
 ```
 
 <!--
 % 2 inferences, 0.000 CPU in 0.000 seconds (67% CPU, 250000 Lips)
 true.
+-->
+
+Benchmark some queries:
 
 ```logtalk
 time(circle(one, 7, red)::id(Id)).
@@ -153,6 +165,7 @@ time(circle(one, 7, red)::id(Id)).
 <!--
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 76923 Lips)
 Id = one.
+-->
 
 ```logtalk
 time(circle(one, 7, red)::radius(Radius)).
@@ -161,6 +174,7 @@ time(circle(one, 7, red)::radius(Radius)).
 <!--
 % 1 inferences, 0.000 CPU in 0.000 seconds (61% CPU, 83333 Lips)
 Radius = 7.
+-->
 
 ```logtalk
 time(circle(one, 7, red)::color(Color)).
@@ -169,6 +183,7 @@ time(circle(one, 7, red)::color(Color)).
 <!--
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
 Color = red.
+-->
 
 ```logtalk
 Id0 = one, time(circle(Id0, 7, red)::id(Id)).
@@ -177,6 +192,7 @@ Id0 = one, time(circle(Id0, 7, red)::id(Id)).
 <!--
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 76923 Lips)
 Id0 = Id, Id = one.
+-->
 
 ```logtalk
 Radius0 = 7, time(circle(one, Radius0, red)::radius(Radius)).
@@ -185,6 +201,7 @@ Radius0 = 7, time(circle(one, Radius0, red)::radius(Radius)).
 <!--
 % 1 inferences, 0.000 CPU in 0.000 seconds (61% CPU, 83333 Lips)
 Radius0 = Radius, Radius = 7.
+-->
 
 ```logtalk
 Color0 = red, time(circle(one, 7, Color0)::color(Color)).
@@ -193,6 +210,7 @@ Color0 = red, time(circle(one, 7, Color0)::color(Color)).
 <!--
 % 1 inferences, 0.000 CPU in 0.000 seconds (56% CPU, 71429 Lips)
 Color0 = Color, Color = red.
+-->
 
 ```logtalk
 time({circle('#2', Radius, Color)}::id(Id)).
@@ -200,6 +218,5 @@ time({circle('#2', Radius, Color)}::id(Id)).
 
 <!--
 % 2 inferences, 0.000 CPU in 0.000 seconds (71% CPU, 90909 Lips)
-Radius = 3.71,
-Color = yellow,
-Id = '#2'.
+Radius = 3.71, Color = yellow, Id = '#2'.
+-->

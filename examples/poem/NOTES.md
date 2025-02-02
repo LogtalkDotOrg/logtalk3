@@ -38,16 +38,6 @@ ________________________________________________________________________
 The example in this folder is an adaptation of an example of POEM, an 
 object-oriented extension to Prolog developed by Ben Staveley-Taylor.
 
-Original author contact:
-
-	Ben Staveley-Taylor,
-	Plessey Electronic Systems Research Ltd.,
-	Roke Manor,
-	ROMSEY,
-	Hants.    SO5 0ZN.
-
-	Tel. Romsey (0794) 515222 ext 311
-
 Start by loading the example:
 
 ```logtalk

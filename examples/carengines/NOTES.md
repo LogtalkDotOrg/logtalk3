@@ -45,10 +45,13 @@ logtalk_load(carengines(loader)).
 ```
 
 Both cars provide the same interface, declared in the protocol
-that is implemented by the categories imported by each object:
+that is implemented by the categories imported by each object.
+
+Public predicates of the `sedan` object:
 
 ```logtalk
-sedan::current_predicate(P).
+%%table
+sedan::current_predicate(Predicate).
 ```
 
 <!--
@@ -61,8 +64,11 @@ P = fuel/1 ;
 false.
 -->
 
+Public predicates of the `coupe` object:
+
 ```logtalk
-coupe::current_predicate(P).
+%%table
+coupe::current_predicate(Predicate).
 ```
 
 <!--

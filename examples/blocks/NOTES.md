@@ -104,7 +104,7 @@ block_stack::add_tuple(c-d), block_stack::add_tuple(b-c), block_stack::add_tuple
 true.
 -->
 
-Check results:
+List all tuples:
 
 ```logtalk
 block_stack::tuples(Tuples).
@@ -113,6 +113,8 @@ block_stack::tuples(Tuples).
 <!--
 Tuples = [c-d, b-c, a-b].
 -->
+
+List all _after_ events and monitors:
 
 ```logtalk
 %%table
@@ -128,7 +130,7 @@ Object = b, Message = move(_, _), Monitor = block_stack ;
 false.
 -->
 
-Move all stack to new position by moving bottom block; check results:
+Move all stack to new position by moving bottom block:
 
 ```logtalk
 d::move(9, 1).
@@ -159,6 +161,8 @@ d::move(9, 1).
 true.
 -->
 
+Check results:
+
 ```logtalk
 a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
 ```
@@ -166,6 +170,8 @@ a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Y
 <!--
 Xa = 9, Xb = 9, Xc = 9, Xd = 9, Ya = 4, Yb = 3, Yc = 2, Yd = 1.
 -->
+
+List all tuples:
 
 ```logtalk
 block_stack::tuples(Tuples).
@@ -175,7 +181,7 @@ block_stack::tuples(Tuples).
 Tuples = [c-d, b-c, a-b].
 -->
 
-Break stack in half by moving b to the "ground"; check results:
+Break stack in half by moving b to the "ground":
 
 ```logtalk
 b::move(3, 1).
@@ -194,6 +200,8 @@ b::move(3, 1).
 true.
 -->
 
+Check results:
+
 ```logtalk
 a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
 ```
@@ -201,6 +209,8 @@ a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Y
 <!--
 Xa = 3, Xb = 3, Xc = 9, Xd = 9, Ya = 2, Yb = 1, Yc = 2, Yd = 1.
 -->
+
+List all tuples:
 
 ```logtalk
 block_stack::tuples(Tuples).
@@ -210,7 +220,7 @@ block_stack::tuples(Tuples).
 Tuples = [c-d, a-b].
 -->
 
-Create a new `block_stack` tuple and check results:
+Create a new `block_stack` tuple:
 
 ```logtalk
 block_stack::add_tuple(d-a).
@@ -230,6 +240,8 @@ block_stack::add_tuple(d-a).
 true.
 -->
 
+Check results:
+
 ```logtalk
 a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
 ```
@@ -237,6 +249,8 @@ a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Y
 <!--
 Xa = 3, Xb = 3, Xc = 3, Xd = 3, Ya = 2, Yb = 1, Yc = 4, Yd = 3.
 -->
+
+List all tuples:
 
 ```logtalk
 block_stack::tuples(Tuples).
@@ -246,7 +260,7 @@ block_stack::tuples(Tuples).
 Tuples = [c-d, a-b, d-a].
 -->
 
-Move all stack to new position by moving bottom block; check results:
+Move all stack to new position by moving bottom block:
 
 ```logtalk
 b::move(5, 1).
@@ -277,6 +291,8 @@ b::move(5, 1).
 true.
 -->
 
+Check results:
+
 ```logtalk
 a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Yd).
 ```
@@ -284,6 +300,8 @@ a::position(Xa, Ya), b::position(Xb, Yb), c::position(Xc, Yc), d::position(Xd, Y
 <!--
 Xa = 5, Xb = 5, Xc = 5, Xd = 5, Ya = 2, Yb = 1, Yc = 4, Yd = 3.
 -->
+
+List all tuples:
 
 ```logtalk
 block_stack::tuples(Tuples).
@@ -302,6 +320,8 @@ block_stack::remove_all_tuples.
 <!--
 true.
 -->
+
+Delete all blocks:
 
 ```logtalk
 block::delete_all.

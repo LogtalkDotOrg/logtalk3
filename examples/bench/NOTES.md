@@ -139,11 +139,15 @@ provide a handy `time/1` predicate that may also be used in alternative
 to the `lgtunit` benchmark predicates (the adapter files for these two
 systems ensure that `(::)/2` goals in the argument of the time/1 are
 fully compiled prior to calling them so that we benchmark the code
-instead of the Logtalk compiler):
+instead of the Logtalk compiler).
+
+Confirm that the `time/1` predicate is available:
 
 ```logtalk
 time(true).  % autoload if necessary
 ```
+
+Benchmark some queries:
 
 ```logtalk
 time((between(1,1000,_),top,fail;true)).

@@ -39,9 +39,9 @@ This folder contains an implementation of the delegation design pattern and
 is based on the sample code found on the Rosetta Code website. For more
 information see:
 
-	http://en.wikipedia.org/wiki/Delegation_pattern
+http://en.wikipedia.org/wiki/Delegation_pattern
 
-	http://rosettacode.org/wiki/Delegates#Logtalk
+http://rosettacode.org/wiki/Delegates#Logtalk
 
 Load the example:
 

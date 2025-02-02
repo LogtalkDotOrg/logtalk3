@@ -76,65 +76,17 @@ logtalk_load(cascade(loader)).
 Call the `cascade::process_image/2` repeatedly to trigger the random errors:
 
 ```logtalk
-cascade::process_image(image, Final).
+%%table
+integer::between(1, 10, _), catch(cascade::process_image(image, Final), Error, true).
 ```
 
 <!--
 Final = with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))).
--->
-
-```logtalk
-cascade::process_image(image, Final).
-```
-
-<!--
-uncaught exception: missing_cat
--->
-
-```logtalk
-cascade::process_image(image, Final).
-```
-
-<!--
+Error = missing_cat.
 Final = with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))).
--->
-
-```logtalk
-cascade::process_image(image, Final).
-```
-
-<!--
-uncaught exception: eyes_closed
--->
-
-```logtalk
-cascade::process_image(image, Final).
-```
-
-<!--
+Error = eyes_closed.
 Final = with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))).
--->
-
-```logtalk
-cascade::process_image(image, Final).
-```
-
-<!--
-uncaught exception: missing_cat
--->
-
-```logtalk
-cascade::process_image(image, Final).
-```
-
-<!--
+Error = missing_cat.
 Final = with_rainbow(smaller(sparkling_eyes(with_bow_tie(cropped(image))))).
--->
-
-```logtalk
-cascade::process_image(image, Final).
-```
-
-<!--
-uncaught exception: sunny_day
+Error = sunny_day.
 -->

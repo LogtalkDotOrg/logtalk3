@@ -81,6 +81,8 @@ jam_thief::thief(Thief).
 Thief = hare.
 -->
 
+Ok... but why?
+
 ```logtalk
 jam_thief::thief(Thief, Why).
 ```
@@ -111,6 +113,8 @@ Solution = [h(norwegian, fox, kool, water, yellow), h(ukrainian, horse, chesterf
 false.
 -->
 
+Who owns the zebra?
+
 ```logtalk
 houses::zebra_owner(Owner).
 ```
@@ -120,6 +124,8 @@ Owner = japonese ;
 Owner = japonese ;
 false.
 -->
+
+Who is the water drinker?
 
 ```logtalk
 houses::water_drinker(Drinker).
