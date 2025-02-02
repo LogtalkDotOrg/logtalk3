@@ -60,10 +60,10 @@ Start by loading the example:
 logtalk_load(questions(loader)).
 ```
 
-We can now ask the ultimate question:
+We can now ask the ultimate question (skip if running as a notebook):
 
 ```logtalk
-logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
+(current_object(jupyter) -> true; logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N)).
 ```
 
 <!--
@@ -74,10 +74,10 @@ N = 42.
 -->
 
 Note that the fourth argument of the `logtalk::ask_question/5` predicate is
-a closure that is used to type-check the answer:
+a closure that is used to type-check the answer (skip if running as a notebook):
 
 ```logtalk
-logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
+(current_object(jupyter) -> true; logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N)).
 ```
 
 <!--
@@ -100,8 +100,10 @@ logtalk_load(questions(loader_gui)).
 true.
 -->
 
+ Skip if running as a notebook:
+
 ```logtalk
-logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N).
+(current_object(jupyter) -> true; logtalk::ask_question(question, hitchhikers, ultimate_question, '=='(42), N)).
 ```
 
 <!--

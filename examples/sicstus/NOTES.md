@@ -43,7 +43,9 @@ Start by loading the example and necessary library supporting files:
 logtalk_load(sicstus(loader)).
 ```
 
-Try some simple queries:
+Try some simple queries.
+
+Sort a list using rational numbers order:
 
 ```logtalk
 sort(rational)::sort([1/8, 2/7, 6/5, 2/9, 1/3], Sorted).
@@ -52,6 +54,8 @@ sort(rational)::sort([1/8, 2/7, 6/5, 2/9, 1/3], Sorted).
 <!--
 Sorted = [1/8, 2/9, 2/7, 1/3, 6/5].
 -->
+
+Sort a list using colors order:
 
 ```logtalk
 sort(colours)::sort([orange, indigo, red, yellow, violet, blue, green], Sorted).
@@ -148,8 +152,9 @@ Pred = width/1 ;
 Pred = height/1 ;
 Pred = area/1 ;
 false.
+-->
 
-Find all data on a specific message accepted by an object:
+Find all properties of a specific message accepted by an object:
 
 ```logtalk
 %%table

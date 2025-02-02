@@ -103,7 +103,9 @@ mountain_bike::crewed.
 ```
 
 We can use the built-in reflection predicates to query about predicate
-declarations and definitions; for example:
+declarations and definitions.
+
+Public predicates of the `mountain_bike` object:
 
 ```logtalk
 %%table
@@ -116,6 +118,8 @@ Predicate = frame/1 ;
 Predicate = where/1 ;
 false.
 -->
+
+Properties of the `mountain_bike` object `frame/1` predicate:
 
 ```logtalk
 %%table
@@ -177,8 +181,8 @@ sailplane::structure(Structure).
 Structure = rigid.
 -->
 
-We can use the built-in reflection predicates to query about predicate
-declarations and definitions; for example:
+Public predicates of the `sailplane` object:
+
 
 ```logtalk
 %%table
@@ -190,6 +194,8 @@ Predicate = purpose/1 ? ;
 Predicate = structure/1 ? ;
 false.
 -->
+
+Properties of the `sailplane` object `purpose/1` predicate:
 
 ```logtalk
 %%table

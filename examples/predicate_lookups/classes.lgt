@@ -21,21 +21,21 @@
 
 % using classes require at least the definition of a metaclass
 
-:- object(meta,
+:- object(metas,
 	% avoid infinite regression by having the metaclass instantiate itself
-	instantiates(meta)).
+	instantiates(metas)).
 
 :- end_object.
 
 
 :- object(native,
-	instantiates(meta)).
+	instantiates(metas)).
 
 :- end_object.
 
 
 :- object(artificial,
-	instantiates(meta)).
+	instantiates(metas)).
 
 	:- public(purpose/1).
 
