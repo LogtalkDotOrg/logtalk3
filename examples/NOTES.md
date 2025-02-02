@@ -18,12 +18,45 @@ limitations under the License.
 ________________________________________________________________________
 
 
+About
+-----
+
 This folder contains several examples of Logtalk programs. A brief
 description of each example is included below.
 
 Each example folder contains a `NOTES.md` file and a loader helper file
 (usually named `loader.lgt`) that can be used to compile and load the
 example source code.
+
+Most of these examples require objects, protocols, and categories that
+are defined in the Logtalk standard library or in other examples. See
+the `NOTES.md` files inside the library folder, plus the `NOTES.md` files
+inside each example folder.
+
+Some examples may redefine objects already loaded from other examples.
+It might be necessary to restart Logtalk after playing with some examples.
+
+Some examples have been adapted from public Prolog code or from Prolog
+text books and tutorials and are copyrighted by the respective authors.
+
+These are programming examples, meaning that you should study the source
+files to fully understand them. Note, however, that some examples main
+purpose is to illustrate general principles rather than being adequate,
+efficient solutions for deployment code.
+
+Most example folders contain two files, `tests.lgt` and `tester.lgt`. The
+file `tests.lgt` contains unit tests for the example. These unit tests
+are based on the sample queries found on the example `NOTES.md` file.
+The file `tester.lgt` is a loader file that, when loaded, will automatically
+run all the example unit tests. You can automate running all these tests by
+calling the `logtalk_tester` shell script from the command-line (see the
+`scripts/NOTES.md` file for details on how to use with POSIX and Windows
+operating-systems). Type `man logtalk_tester` or `logtalk_tester -h` for
+usage details, including how to select the backend Prolog compiler.
+
+
+Opening examples documentation as Jupyter notebooks
+---------------------------------------------------
 
 The `NOTES.md` file of most examples can also be open as a Jupyter
 notebook to execute the example sample queries. Requires installing
@@ -60,31 +93,15 @@ In the case of VSCode, you may need to download the extension `.vsix`
 file from the page above and install it manually (using the command
 "View" > "Command Palette" > "Extensions: Install from VSIX...").
 
-Most of these examples require objects, protocols, and categories that
-are defined in the Logtalk standard library or in other examples. See
-the `NOTES.md` files inside the library folder, plus the `NOTES.md` files
-inside each example folder.
+To configure the Prolog backend to be use when opening the examples
+`NOTES.md` files as notebooks (default is SWI-Prolog), copy and edit
+the following file to your `~/.jupyter` directory:
 
-Some examples may redefine objects already loaded from other examples.
-It might be necessary to restart Logtalk after playing with some examples.
+https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/blob/master/logtalk_kernel/logtalk_kernel_config.py
 
-Some examples have been adapted from public Prolog code or from Prolog
-text books and tutorials and are copyrighted by the respective authors.
 
-These are programming examples, meaning that you should study the source
-files to fully understand them. Note, however, that some examples main
-purpose is to illustrate general principles rather than being adequate,
-efficient solutions for deployment code.
-
-Most example folders contain two files, `tests.lgt` and `tester.lgt`. The
-file `tests.lgt` contains unit tests for the example. These unit tests
-are based on the sample queries found on the example `NOTES.md` file.
-The file `tester.lgt` is a loader file that, when loaded, will automatically
-run all the example unit tests. You can automate running all these tests by
-calling the `logtalk_tester` shell script from the command-line (see the
-`scripts/NOTES.md` file for details on how to use with POSIX and Windows
-operating-systems). Type `man logtalk_tester` or `logtalk_tester -h` for
-usage details, including how to select the backend Prolog compiler.
+Short description of the examples
+---------------------------------
 
 Follows a short description of each included example (in alphabetical order):
 

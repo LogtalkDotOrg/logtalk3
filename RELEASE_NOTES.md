@@ -36,6 +36,9 @@ dependencies.
 Examples
 --------
 
+* IMPROVED: Instructions on how to run the examples documentation as Jupyter
+notebooks.
+
 * IMPROVED: The `NOTES.md` files of several examples for a better experience
 when open as notebooks.
 
