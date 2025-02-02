@@ -64,6 +64,10 @@ error.
 JIProlog, Tau Prolog, and Trealla Prolog encoding is UTF-8. Therefore,
 only the `babel.lgt` file can be used with these backends.
 
+Below, we use the `catch/3` control construct to deal with the cases where
+an object demoing a specific encoding is not loaded due to the encoding not
+being supported bu the used Prolog backend.
+
 Be sure to use a text editor that supports these encodings when opening 
 these files. In addition, you may need to configure your text editor to 
 open the source file using the declared encoding. Be sure to use a font 
@@ -84,7 +88,7 @@ Query the table of "Hello world!" messages:
 
 ```logtalk
 %%table
-babel::hello_world(Code, Text).
+catch(babel::hello_world(Code, Text), Error, true).
 ```
 
 <!--
@@ -103,7 +107,7 @@ Query the table of names:
 
 ```logtalk
 %%table
-latin::name(Name).
+catch(latin::name(Name), Error, true).
 ```
 
 <!--
@@ -117,7 +121,7 @@ Query the table of countries:
 
 ```logtalk
 %%table
-asian::country(Country, Name, Capital).
+catch(asian::country(Country, Name, Capital), Error, true).
 ```
 
 <!--
@@ -132,7 +136,7 @@ Query the table of greek mythology divinities:
 
 ```logtalk
 %%table
-mythology::divinity(English, Greek).
+catch(mythology::divinity(English, Greek), Error, true).
 ```
 
 <!--

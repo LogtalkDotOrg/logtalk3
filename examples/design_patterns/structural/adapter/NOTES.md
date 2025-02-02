@@ -56,7 +56,9 @@ Start by loading the design pattern sample implementations:
 logtalk_load(design_patterns('structural/adapter/loader')).
 ```
 
-Connect rechargers to phones:
+Connect rechargers to phones.
+
+Lightning charger:
 
 ```logtalk
 iphone_recharger(iphone)::connect.
@@ -73,6 +75,8 @@ Recharge Finished
 true.
 -->
 
+Chain two chargers:
+
 ```logtalk
 iphone_micro_usb_recharger(iphone)::connect.
 ```
@@ -88,6 +92,8 @@ Recharge Finished
 
 true.
 -->
+
+MicroUsb charger:
 
 ```logtalk
 android_recharger(android)::connect.

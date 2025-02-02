@@ -20,5 +20,5 @@
 
 
 :- initialization(
-	logtalk_load(mediator)
+	logtalk_load(null_object)
 ).

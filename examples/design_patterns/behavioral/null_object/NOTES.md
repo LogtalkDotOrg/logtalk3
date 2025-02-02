@@ -64,8 +64,8 @@ Start by loading the design pattern sample implementations:
 logtalk_load(design_patterns('behavioral/null_object/loader')).
 ```
 
-Non null objects reply to the predicates with their own intrinsic
-answers:
+Non null objects reply to the predicates with their own intrinsic answers.
+For example, a dog:
 
 ```logtalk
 dog::make_sound.
@@ -77,6 +77,8 @@ Woof...
 true.
 -->
 
+Or a cat:
+
 ```logtalk
 cat::make_sound.
 ```
@@ -87,7 +89,7 @@ Meowww...
 true.
 -->
 
-The null objects implements the same interface but does nothing.
+The null object implements the same interface but does nothing.
 
 ```logtalk
 null_animal::make_sound.

@@ -90,6 +90,8 @@ The coffee_maker is on
 true.
 -->
 
+Show the commands history:
+
 ```logtalk
 switch::history.
 ```
@@ -99,6 +101,8 @@ flip_up_command(light(kitchen))
 flip_up_command(coffee_maker)
 true.
 -->
+
+Reply the commands:
 
 ```logtalk
 switch::reply_history.

@@ -35,17 +35,17 @@
 % descendant objects provide suitable implementations of the inherited
 % interface
 
-:- protocol(dog,
+:- object(dog,
 	extends(animal)).
 
 	make_sound :-
 		write('Woof...'), nl.
 
-:- end_protocol.
+:- end_object.
 
 
 :- object(cat,
-	implements(animal)).
+	extends(animal)).
 
 	make_sound :-
 		write('Meowww...'), nl.
@@ -57,7 +57,7 @@
 % interface that does nothing
 
 :- object(null_animal,
-	implements(animal)).
+	extends(animal)).
 
 	% be silent
 	make_sound.

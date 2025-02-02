@@ -54,9 +54,9 @@ Start by loading the design pattern sample implementations:
 logtalk_load(design_patterns('behavioral/visitor/loader')).
 ```
 
-Print all car components by calling the visitor/1 meta-predicate
-with a closure (use a lambda expression so that we can print a
-new-line after each component):
+Print all car components by calling the `visitor/1` meta-predicate with
+a closure (use a lambda expression so that we can print a new-line after
+each component):
 
 ```logtalk
 sedan::visitor([Component]>>(write(Component),nl)).
@@ -75,7 +75,7 @@ body(station_wagon)
 true.
 -->
 
-Use the visitor meta-predicate that is added using hot-patching:
+Use the `visitor/1` meta-predicate that is added using hot-patching:
 
 ```logtalk
 sedan::alt_visitor([Component]>>(write(Component),nl)).
@@ -94,8 +94,8 @@ body(station_wagon)
 true.
 -->
 
-Use the standard `setof/3` meta-predicate to construct a list of
-all component types:
+Use the standard `setof/3` meta-predicate to construct a list of all
+component types:
 
 ```logtalk
 setof(

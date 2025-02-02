@@ -20,5 +20,5 @@
 
 
 :- initialization(
-	logtalk_load(chain_of_responsibility)
+	logtalk_load(template)
 ).

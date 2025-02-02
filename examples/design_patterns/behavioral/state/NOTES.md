@@ -66,6 +66,8 @@ context::output(1 + 2).
 true.
 -->
 
+Next term will be printed in canonical format:
+
 ```logtalk
 context::output(6 / 7).
 ```
@@ -76,6 +78,8 @@ context::output(6 / 7).
 true.
 -->
 
+Back to using operators:
+
 ```logtalk
 context::output(3 * 4 + 5).
 ```
@@ -85,6 +89,8 @@ context::output(3 * 4 + 5).
 
 true.
 -->
+
+Next term will be printed in canonical format:
 
 ```logtalk
 context::output(1 - 2 / 7).
