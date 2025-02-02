@@ -23,18 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2010-04-10,
+		date is 2025-02-02,
 		comment is 'Unit tests for the "constraints/eclipse" example.'
 	]).
 
-	test(constraints_eclipse_1) :-
-		puzzle::sendmore1(Digits),
-		Digits == [9, 5, 6, 7, 1, 0, 8, 2].
+	test(constraints_eclipse_1, true(Digits == [9, 5, 6, 7, 1, 0, 8, 2])) :-
+		puzzle::sendmore1(Digits).
 
-	test(constraints_eclipse_2) :-
-		puzzle::sendmore2(Digits),
-		Digits == [9, 5, 6, 7, 1, 0, 8, 2].
+	test(constraints_eclipse_2, true(Digits == [9, 5, 6, 7, 1, 0, 8, 2])) :-
+		puzzle::sendmore2(Digits).
 
 :- end_object.
