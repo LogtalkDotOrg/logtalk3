@@ -87,7 +87,7 @@
 :- object(earth,
 	imports(planet)).
 
-	gravitational_acceleration(9.80665).
+	gravitational_acceleration(9.80).
 
 :- end_object.
 
@@ -95,7 +95,14 @@
 :- object(mars,
 	imports(planet)).
 
-	gravitational_acceleration(3.72076).
+	gravitational_acceleration(3.72).
 
 :- end_object.
 
+
+:- object(jupiter,
+	imports(planet)).
+
+	gravitational_acceleration(23.12).
+
+:- end_object.

@@ -117,7 +117,9 @@ Create an abstract class, check it and print its interface:
 
 ```logtalk
 abstract_class::new(ac), ac::abstract_class, ac::print.
+```
 
+<!--
 Object: ac
 
   interface:
@@ -132,11 +134,11 @@ true.
 Try to create an instance of the abstract class:
 
 ```logtalk
-ac::new(i).
+catch(ac::new(i), Error, true).
 ```
 
 <!--
-uncaught exception: error(existence_error(predicate_declaration,new(i)),ac::new(i),user)
+Error = error(existence_error(predicate_declaration,new(i)),ac::new(i),user).
 -->
 
 Create a new instantiable class and print its interface:
@@ -173,11 +175,11 @@ Instances = [i].
 Because `c` does not declare any predicates, its instances have no interface:
 
 ```logtalk
-i::current_predicate(Predicate).
+\+ i::current_predicate(_).
 ```
 
 <!--
-false.
+true.
 -->
 
 Create an instance of object, root of the inheritance graph, and print its interface:

@@ -44,36 +44,42 @@ Start by loading the example:
 logtalk_load(planets(loader)).
 ```
 
-Compute the weights of the m1 and m2 objects on Earth and on Mars:
+Compute the weight of the `m1` object on Earth:
 
 ```logtalk
 earth::weight(m1, W1).
 ```
 
 <!--
-W1 = 29.41995.
+W1 = 29.40.
 -->
+
+Compare with the weight of the `m1` object on Mars:
 
 ```logtalk
 mars::weight(m1, W1).
 ```
 
 <!--
-W1 = 11.162279999999999.
+W1 = 11.16.
 -->
+
+Compute the weight of the `m2` object on Earth:
 
 ```logtalk
 earth::weight(m2, W2).
 ```
 
 <!--
-W2 = 39.2266.
+W2 = 39.20.
 -->
 
+Compare with the weight of the `m2` object on Jupiter:
+
 ```logtalk
-mars::weight(m2, W2).
+jupiter::weight(m2, W2).
 ```
 
 <!--
-W2 = 14.88304.
+W2 = 92.48.
 -->

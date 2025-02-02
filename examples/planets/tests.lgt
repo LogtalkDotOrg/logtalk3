@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2020-12-24,
+		date is 2025-02-02,
 		comment is 'Unit tests for the "planets" example.'
 	]).
 
@@ -37,16 +37,16 @@
 	cover(earth).
 	cover(mars).
 
-	test(planets_01, true(W1 =~= 29.41995)) :-
+	test(planets_01, true(W1 =~= 29.4)) :-
 		earth::weight(m1, W1).
 
-	test(planets_02, true(W1 =~= 11.162279999999999)) :-
+	test(planets_02, true(W1 =~= 11.16)) :-
 		mars::weight(m1, W1).
 
-	test(planets_03, true(W2 =~= 39.2266)) :-
+	test(planets_03, true(W2 =~= 39.2)) :-
 		earth::weight(m2, W2).
 
-	test(planets_04, true(W2 =~= 14.88304)) :-
-		mars::weight(m2, W2).
+	test(planets_04, true(W2 =~= 92.48)) :-
+		jupiter::weight(m2, W2).
 
 :- end_object.

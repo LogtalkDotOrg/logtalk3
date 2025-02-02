@@ -40,6 +40,7 @@ implementation of meta-predicates. For full details on this example
 and on the safety rules used by Logtalk when compiling and executing
 meta-predicates, please see the paper:
 
+```text
 @inproceedings{pmoura09b,
 	author = {Paulo Moura},
 	title = "{Secure Implementation of Meta-predicates}",
@@ -53,6 +54,7 @@ meta-predicates, please see the paper:
 	publisher = "Springer-Verlag",
 	address = "Berlin Heidelberg",
 }
+```
 
 Simply load the example and check the compilation and runtime error
 messages:

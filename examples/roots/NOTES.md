@@ -85,6 +85,22 @@ logtalk_load(roots(loader)).
 Some queries dealing with instance/class hierarchies:
 
 ```logtalk
+abstract_class::ancestors(Ancestors).
+```
+
+<!--
+Ancestors = [class, abstract_class, object].
+-->
+
+```logtalk
+class::ancestors(Ancestors).
+```
+
+<!--
+Ancestors = [class, abstract_class, object].
+-->
+
+```logtalk
 object::ancestors(Ancestors).
 ```
 

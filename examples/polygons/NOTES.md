@@ -101,15 +101,14 @@ true.
 Check results:
 
 ```logtalk
-%%table
-concentric::tuple(Tuple), write(Tuple), nl, fail.
+concentric::tuple(Tuple), write(Tuple), nl, fail; true.
 ```
 
 <!--
 [t,s]
 [p,h]
 
-false.
+true.
 -->
 
 ```logtalk
@@ -141,15 +140,14 @@ true.
 Check results:
 
 ```logtalk
-%%table
-concentric::tuple(Tuple), write(Tuple), nl, fail.
+concentric::tuple(Tuple), write(Tuple), nl, fail; true.
 ```
 
 <!--
 [t,s]
 [p,h]
 
-false.
+true.
 -->
 
 ```logtalk
@@ -191,8 +189,7 @@ true.
 Check results:
 
 ```logtalk
-%%table
-concentric::tuple(Tuple), write(Tuple), nl, fail.
+concentric::tuple(Tuple), write(Tuple), nl, fail; true.
 ```
 
 <!--
@@ -200,7 +197,7 @@ concentric::tuple(Tuple), write(Tuple), nl, fail.
 [p,h]
 [t,p]
 
-false.
+true.
 -->
 
 ```logtalk
@@ -210,6 +207,8 @@ t::position(Xt, Yt), s::position(Xs, Ys), p::position(Xp, Yp), h::position(Xh, Y
 <!--
 Xh = 2, Yh = 7, Xp = 2, Xs = 2, Xt = 2, Yp = 7, Ys = 7, Yt = 7.
 -->
+
+List _after_ event monitors:
 
 ```logtalk
 after_event_registry::monitors(Monitors).

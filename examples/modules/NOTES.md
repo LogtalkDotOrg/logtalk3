@@ -88,6 +88,8 @@ exports::current_predicate(Pred).
 Pred = p/1.
 -->
 
+List the properties of the `exports` public predicate `p/1`:
+
 ```logtalk
 %%table
 exports::predicate_property(p(_), Prop).
