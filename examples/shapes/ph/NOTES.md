@@ -43,8 +43,7 @@ logtalk_load(shapes_ph(loader)).
 
 Try some simple queries:
 
-Objects playing the role of prototypes define predicates for themselves and
-their descendants:
+Objects playing the role of prototypes define predicates for themselves ...
 
 ```logtalk
 square::nsides(N).
@@ -54,12 +53,14 @@ square::nsides(N).
 N = 4.
 -->
 
+... and for their descendants:
+
 ```logtalk
-square::area(A).
+q2::area(A).
 ```
 
 <!--
-A = 1.
+A = 9.
 -->
 
 Don't use message broadcasting syntax in order to workaround a XSB parser bug

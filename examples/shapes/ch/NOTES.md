@@ -47,11 +47,11 @@ Objects playing the role of classes define predicates for their (descendant)
 instances, not for themselves:
 
 ```logtalk
-square::nsides(N).
+catch(square::nsides(N), Error, true).
 ```
 
 <!--
-error(existence_error(predicate_declaration, nsides(_)), square::nsides(N), user)
+Error = error(existence_error(predicate_declaration, nsides(_)), square::nsides(N), user).
 -->
 
 Don't use message broadcasting syntax in order to workaround a XSB parser bug

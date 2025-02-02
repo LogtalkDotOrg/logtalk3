@@ -22,5 +22,5 @@
 :- initialization((
 	logtalk_load(basic_types(loader)),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(testing, [hook(lgtunit)])
+	logtalk_load(tester)
 )).

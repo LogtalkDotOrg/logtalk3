@@ -43,14 +43,10 @@ To define tests for your own project, see the `lgtunit` tool documentation
 and the `tests-sample.lgt` and `tester-sample.lgt` sample files in the root
 of the distribution.
 
-Start by loading the example:
+Start by loading the tests driver file:
 
 ```logtalk
-logtalk_load(testing(loader)).
+logtalk_load(testing(tester)).
 ```
 
 The test will auto-run, thanks to initialization directives.
-
-You may also edit the initialization directives in the objects
-defined in the "testing.lgt" file in order to divert the test
-results to a "results.txt" file in the example directory.

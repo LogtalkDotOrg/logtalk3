@@ -50,10 +50,11 @@ logtalk_load(slides(loader)).
 ```
 
 Start a slideshow; the remote accepts as input the following single
-characters: n (next), p (previous), f (first), l (last), e (end):
+characters: n (next), p (previous), f (first), l (last), e (end)
+(skip if running as a notebook):
 
 ```logtalk
-slides::show([1,2,3,4,5,6], slide).
+(current_object(jupyter) -> true; slides::show([1,2,3,4,5,6], slide)).
 ```
 
 <!--
