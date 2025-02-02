@@ -107,10 +107,10 @@ Rows = [[1, 5, 6, 8, 9, 4, 3, 2, 7], [9, 2, 8, 7, 3, 1, 4, 5, 6], [4, 7, 3, 2, 6
 Vs = [1, 5, 6, 8, 9, 4, 3, 2, 7, 9, 2, 8, 7, 3, 1, 4, 5, 6, 4, 7, 3, 2, 6, 5, 9, 1, 8, 3, 6, 2, 4, 1, 7, 8, 9, 5, 7, 8, 9, 3, 5, 2, 6, 4, 1, 5, 1, 4, 9|...] .
 -->
 
-The following two queries implies that Ghostscript is available from the command-line:
+The following two queries implies that Ghostscript is available from the command-line (skip if running as a notebook):
 
 ```logtalk
-soduku::(problem(1, Rows), show([ff], Rows)).
+(current_object(jupyter) -> true; soduku::(problem(1, Rows), show([ff], Rows))).
 ```
 
 <!--
@@ -118,7 +118,7 @@ Rows = [[1, 5, 6, 8, 9, 4, 3, 2, 7], [9, 2, 8, 7, 3, 1, 4, 5, 6], [4, 7, 3, 2, 6
 -->
 
 ```logtalk
-soduku::show([ff], Rows).
+(current_object(jupyter) -> true; soduku::show([ff], Rows)).
 ```
 
 <!--
@@ -139,10 +139,10 @@ Qs = [1, 7, 4, 6, 8, 2, 5, 3] ;
 (etc)
 -->
 
-The following queries require that Ghostscript is available from the command-line:
+The following queries require that Ghostscript is available from the command-line (skip if running as a notebook):
 
 ```logtalk
-queens::show(8, [ff], Qs).
+(current_object(jupyter) -> true; queens::show(8, [ff], Qs)).
 ```
 
 <!--
@@ -153,7 +153,7 @@ Qs = [1, 7, 4, 6, 8, 2, 5, 3] ;
 -->
 
 ```logtalk
-queens::show(N, [ff], Qs).
+(current_object(jupyter) -> true; queens::show(N, [ff], Qs)).
 ```
 
 <!--
@@ -224,12 +224,12 @@ Vs = [11, 12, 18, 10, 15, 21, 13, 14, 3, 20, 17, 27, 23, 31, 30, 6, 2, 1, 29, 5,
 Es = [[1, 4, 63, 28, 31, 26, 19, 22], [62, 29, 2, 5, 20, 23, 32, 25], [3, 64, 39, 30, 27, 56, 21, 18], [38, 61, 6, 53, 40, 33, 24, 55], [7, 52, 41, 34, 57, 54, 17, 46], [60, 37, 8, 49, 44, 47, 14, 11], [51, 42, 35, 58, 9, 12, 45, 16], [36, 59, 50, 43, 48, 15, 10, 13]] .
 -->
 
-The following queries require that Ghostscript is available from the command-line:
+The following queries require that Ghostscript is available from the command-line (skip if running as a notebook):
 
 ```logtalk
-knight::n_tour(6, Ts), meta::map(clpfd:label, Ts), knight::show(Ts).
+(current_object(jupyter) -> true; knight::n_tour(6, Ts), meta::map(clpfd:label, Ts), knight::show(Ts)).
 ```
 
 ```logtalk
-knight::n_tour(8, Ts), meta::map(clpfd:label, Ts), knight::show(Ts).
+(current_object(jupyter) -> true; knight::n_tour(8, Ts), meta::map(clpfd:label, Ts), knight::show(Ts)).
 ```

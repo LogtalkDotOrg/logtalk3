@@ -78,7 +78,7 @@ categories:
 This folder includes an example, `tokenizer`, adapted with permission from 
 a Michael A. Covington example:
 
-	http://www.ai.uga.edu/~mc/
+http://www.ai.uga.edu/~mc/
 
 See the file `tokenizer.lgt` for more details.
 
@@ -86,7 +86,7 @@ This folder also includes two examples of DCGs, `bom` and `faa`, adapted
 with permission from the Amzi! Prolog documentation. The documentation is 
 available on-line in HTML format at the URL:
 
-	http://www.amzi.com/
+http://www.amzi.com/
 
 Please refer to the Amzi! Prolog documentation for more information on the 
 original examples.
