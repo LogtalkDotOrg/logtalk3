@@ -108,9 +108,8 @@ Use the event handler defined in the `add_on` category for the `employee` object
 employee::name(Name).
 ```
 
-Received message name(_16) from user
-
 <!--
+Received message name(_16) from user
 Name = john.
 -->
 
@@ -137,6 +136,8 @@ Received message predicates(_G180) from user
 Predicates = [after/3, age/1, before/3, income/1, name/1, predicates/1, salary/1].
 -->
 
+List the properties of the `predicates/1` predicate:
+
 ```logtalk
 %%table
 employee::predicate_property(predicates(_), Property).
@@ -153,6 +154,8 @@ Property = defined_in(add_on) ;
 Property = defined_in(add_on, 31) ;
 Property = number_of_clauses(1).
 -->
+
+List the properties of the `income/1` predicate:
 
 ```logtalk
 %%table
