@@ -33,7 +33,10 @@ not based on a predicate-prefixing mechanism as used by most Prolog module
 systems). Thus, we must override the template using the following directive
 to avoid a compilation error:
 
-	:- meta_predicate(pengines:pengine_create(*)).
+```logtalk
+%%highlight
+:- meta_predicate(pengines:pengine_create(*)).
+```
 
 Two object versions are provided. The first version, `dumper`, uses the
 original example code plus the overriding directive above to write all

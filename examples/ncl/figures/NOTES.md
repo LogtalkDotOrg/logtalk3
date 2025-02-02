@@ -37,12 +37,14 @@ This folder contains Logtalk versions of two examples of network modeling
 for recognizing polyhedra represented as graphs as described in the following
 paper:
 
-	@inproceedings{Markov1989AFF,
-		title={A Framework for Network Modeling in Prolog},
-		author={Z. I. Markov},
-		booktitle={IJCAI},
-		year={1989}
-	}
+```text
+@inproceedings{Markov1989AFF,
+	title={A Framework for Network Modeling in Prolog},
+	author={Z. I. Markov},
+	booktitle={IJCAI},
+	year={1989}
+}
+```
 
 A copy of the paper can be downloaded from:
 
