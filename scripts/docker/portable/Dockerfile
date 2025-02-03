@@ -71,9 +71,10 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
 RUN apt-add-repository ppa:qameta/allure \
     && apt-get install --no-install-recommends -y allure \
     && add-apt-repository --remove ppa:qameta/allure
-RUN python3 -m pip install --upgrade pygments
-RUN python3 -m pip install --upgrade sphinx
-RUN python3 -m pip install --upgrade sphinx-rtd-theme
+RUN python3 -m pip install pygments==2.19.1
+RUN python3 -m pip install sphinx==7.4.7
+RUN python3 -m pip install sphinx_rtd_theme==2.0.0
+RUN python3 -m pip install sphinxcontrib-spelling==8.0.1
 
 # Install Jupyter and the Logtalk kernel
 RUN python3 -m pip install --upgrade jupyter_core
@@ -118,6 +119,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     nano \
     ncurses-dev \
     ninja-build \
+    pandoc \
     pkg-config \
     rlwrap \
     tcl \
