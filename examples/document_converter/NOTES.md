@@ -56,7 +56,9 @@ Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
 script file that sets the `CLASSPATH` environment variable when sourced:
 
 	$ cd "$LOGTALKUSER/examples/document_converter"
-	$ . set_classpath_swi.sh
+	$ . set_classpath.sh
+
+Similar for Windows using the `set_classpath.ps1` PowerShell script.
 
 Second, start Logtalk and load the example:
 

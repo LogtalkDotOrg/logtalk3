@@ -51,13 +51,14 @@ to this example `jars` folder before running the example.
 Be sure to have download the required JAR files before attempting to
 run this example; see the `NOTES.txt` file for details
 
-Start by setting the Java CLASSPATH environment variable; three backend
-Prolog systems are supported (XVM, SWI-Prolog, and YAP) and for each one
-there's a Bash script file that sets the CLASSPATH environment variable
-when sourced; for example, when using SWI-Prolog:
+Start by setting the Java `CLASSPATH` environment variable. Three backend
+Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
+script file that sets the `CLASSPATH` environment variable when sourced:
 
-	cd "$LOGTALKUSER/examples/clustering"
-	. set_classpath_swi.sh
+	$ cd "$LOGTALKUSER/examples/clustering"
+	$ . set_classpath.sh
+
+Similar for Windows using the `set_classpath.ps1` PowerShell script.
 
 Second, start Logtalk and load the example:
 
