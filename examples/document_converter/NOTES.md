@@ -51,6 +51,8 @@ running the example.
 Be sure to have download the required JAR files before attempting to
 run this example.
 
+## Running from a terminal
+
 When running this example from the terminal (i.e., not as a notebook),
 start by setting the Java `CLASSPATH` environment variable. Three backend
 Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
@@ -62,6 +64,8 @@ $ . set_classpath.sh
 ```
 
 Similar for Windows using the `set_classpath.ps1` PowerShell script.
+
+## Running as a notebook
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

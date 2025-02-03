@@ -92,9 +92,10 @@ For the default location of the `neo4j.conf` file, see:
 
 https://neo4j.com/docs/operations-manual/current/configuration/file-locations/
 
-Be sure to have installed Neo4j.
+## Running from a terminal
 
-Start by setting the Java `CLASSPATH` environment variable. Three backend
+When running this example from the terminal (i.e., not as a notebook),
+start by setting the Java `CLASSPATH` environment variable. Three backend
 Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
 script file that sets the `CLASSPATH` environment variable when sourced:
 
@@ -103,18 +104,32 @@ $ cd "$LOGTALKUSER/examples/document_converter"
 $ . set_classpath.sh
 ```
 
-Similar for Windows using the `set_classpath.ps1` PowerShell script.
+## Running as a notebook
 
-Second, start Logtalk and load the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Set the required environment variables (edit for the location of the Neo4j JAR files in your system):
+
+```logtalk
+os::directory_files('/usr/local/Cellar/neo4j/5.26.1/libexec/lib', _JARs, [paths(absolute), extensions(['.jar'])]),
+atomic_list_concat(_JARs, ':', _CLASSPATH),
+setenv('CLASSPATH', _CLASSPATH).
+```
+
+Load the example:
 
 ```logtalk
 logtalk_load(neo4j(loader)).
 ```
 
-Print a greeting message:
+Print a greeting message (if not running as a notebook):
 
 ```logtalk
-hello_world('bolt://localhost:7687', 'neo4j', 'password')::print_greeting('Hello world!').
+(current_object(jupyter) -> true; hello_world('bolt://localhost:7687', 'neo4j', 'password')::print_greeting('Hello world!')).
 ```
 
 <!--
