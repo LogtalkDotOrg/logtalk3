@@ -64,6 +64,12 @@ In addition, the file `categories.lgt` illustrates how to define category
 predicates that handle dynamic predicates in the context of "this" and in
 the context of "self".
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

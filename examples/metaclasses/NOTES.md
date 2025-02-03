@@ -39,6 +39,12 @@ This example illustrates how to work with metaclasses in Logtalk.
 See also the `reflection` and `roots` examples for a followup on
 using metaclasses.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

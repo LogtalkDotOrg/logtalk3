@@ -42,6 +42,12 @@ using the `parameter/1` and `this/1` built-in methods. Parameters can also
 be accessed using _parameter variables_ as illustrated by the `parvars`
 example.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

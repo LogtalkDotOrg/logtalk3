@@ -42,6 +42,12 @@ on the `comp.lang.prolog` discussion group.
 
 The `lambda_warnings` file illustrates lint checks for lambda expressions.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -38,7 +38,13 @@ ________________________________________________________________________
 This folder contains a Logtalk version of the programming problem
 "99 bottles of beer on the wall", contributed to the web site:
 
-	http://99-bottles-of-beer.net/
+http://99-bottles-of-beer.net/
+
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
 
 Simply load the example, which contains an `initialization/1` directive 
 that runs it:

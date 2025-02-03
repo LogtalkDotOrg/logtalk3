@@ -39,7 +39,13 @@ This folder contains a simple multi-threaded implementation of a ping-pong
 game using a thread per player and threaded notifications to communicate
 moves. The player threads are automatically terminated when the game is over.
 
-Start by loading the loading the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the example:
 
 ```logtalk
 logtalk_load(ping_pong(loader)).

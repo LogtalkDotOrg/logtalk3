@@ -60,6 +60,12 @@ The main files defined in this example are:
 - `patch_1.lgt` and `patch_2.lgt`  
 	categories used to illustrate hot patching of the example objects
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

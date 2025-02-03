@@ -54,6 +54,12 @@ The example defines three objects:
 	this object implements a method that sends a message to an object
 	a specified number of times, returning the average execution time
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

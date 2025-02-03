@@ -44,6 +44,12 @@ for e.g. using the Logtalk compiler lint checks to examine predicate
 call dependencies of the wrapped code and also to look for possible
 portability issues when the `portability` flag is set to `warning`.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the hook object:
 
 ```logtalk

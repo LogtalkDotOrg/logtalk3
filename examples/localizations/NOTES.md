@@ -54,6 +54,12 @@ a single localization would be loaded at any given time, the code can be
 simplified by removing the country code parametrization from the core
 logic.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

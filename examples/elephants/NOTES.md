@@ -39,6 +39,12 @@ This is a simple example illustrating the concept of _prototypes_ using
 elephants. A similar example is often found in knowledge representation
 discussions.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

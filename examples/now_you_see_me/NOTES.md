@@ -43,6 +43,12 @@ more information on this example, please see the comments in the example
 source files. The example is inspired by the "Now You See Me" movie, whose
 main characters are four stage magicians known as the "Four Horsemen".
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

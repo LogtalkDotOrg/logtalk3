@@ -40,6 +40,12 @@ to use the Logtalk built-in `threaded_wait/1` and `threaded_notify/1`
 predicates for synchronizing threads writing to and reading from a buffer
 that can only contain a fixed number of items at the same time. 
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

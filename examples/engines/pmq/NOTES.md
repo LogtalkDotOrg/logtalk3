@@ -44,6 +44,12 @@ into separate queues. In this case, asking for a list of the pending
 messages returns a list with top messages before the normal messages but
 keeping the message sent order otherwise.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required libraries:
 
 ```logtalk

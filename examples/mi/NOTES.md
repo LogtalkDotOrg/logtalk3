@@ -65,6 +65,12 @@ This example defines the following objects:
 - `xyzt(_,_,_,_)`  
 	this object inherits from both the objects `xyz(_,_,_)` and `t(_)`
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

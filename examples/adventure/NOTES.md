@@ -62,6 +62,12 @@ Logtalk are solely my responsibility.
 There is no support for restarting a text adventure. If you want to play
 again, you must restart your Logtalk session and load the example again.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

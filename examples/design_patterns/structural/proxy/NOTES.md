@@ -51,7 +51,13 @@ protocol of the real object, an alternative solution is for the proxy
 object to inherit privately from the real object and overriding (or
 specializing) only those predicates that motivated the use of a proxy.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('structural/proxy/loader')).

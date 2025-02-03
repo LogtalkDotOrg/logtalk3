@@ -46,6 +46,12 @@ reference pages on the the execution-context built-in methods.
 For an additional example using parametric objects, see the `sicstus`
 example.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

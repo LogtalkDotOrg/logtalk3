@@ -85,6 +85,12 @@ the `point`, `bounded_point`, `history_point`, and `bounded_history_point`
 classes will import this category, using his operations to define the
 methods affecting the solutions that use multiple inheritance.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

@@ -48,6 +48,12 @@ For a description of this example, please see the comments in the
 
 See also the `missing_data `and `cascade` examples.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

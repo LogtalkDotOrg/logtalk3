@@ -75,6 +75,12 @@ fluctuations. Note that this benchmark is mainly of historical
 significance. It can be traced to a David Warren's paper about
 the Edinburgh Prolog compiler.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -45,6 +45,12 @@ The built-in `predicate_property/2` predicate fails to report some of the
 constraint predicates as built-in predicates. One workaround is to encapsulate
 calls to these predicates using the `{}/1` Logtalk control construct.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

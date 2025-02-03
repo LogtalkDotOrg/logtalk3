@@ -44,6 +44,12 @@ order to get accurate goal times. This predicate is found on several Prolog
 systems. For other Prolog compilers, replace the `time/1` call by any
 appropriate timing calls (e.g., `cputime/0`).
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

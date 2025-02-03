@@ -51,6 +51,12 @@ are currently not supported.
 Within objects and categories, is strongly recommended that you use the
 `use_module/2` directive for the CLP(FD) module.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

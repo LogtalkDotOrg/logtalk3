@@ -49,6 +49,12 @@ Prolog, SWI-Prolog, or YAP as the backend compiler (by using an ugly
 solution thanks to the lack of standardization of CLP(FD) constraint
 libraries).
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

@@ -71,6 +71,12 @@ Note that parametric objects can co-exist with "normal" objects. For example,
 when using a class-based design, we may use "normal" instances together with
 a parametric instance of the same class.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

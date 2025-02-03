@@ -56,6 +56,12 @@ meta-predicates, please see the paper:
 }
 ```
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Simply load the example and check the compilation and runtime error
 messages:
 

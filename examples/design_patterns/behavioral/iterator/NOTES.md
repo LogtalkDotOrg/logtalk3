@@ -47,7 +47,13 @@ iterator predicate that enumerates elements using backtracking. This
 predicate can then be called from meta-predicates such as the de facto
 standard `forall/2` predicate.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('behavioral/iterator/loader')).

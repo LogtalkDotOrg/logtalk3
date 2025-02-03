@@ -42,6 +42,12 @@ when the object is loaded. The saved state file is created if it doesn't
 exist by the `loader.lgt` file before loading the example itself. See also
 the `serialization` example.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

@@ -43,6 +43,12 @@ For an in-depth discussion of these concepts, see the corresponding
 Handbook glossary entries, the section on "Predicates", and the
 reference pages on the the execution-context built-in methods.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -119,6 +119,11 @@ complete when compared with all the other tests.
 Start by loading the example by choosing one of the loader files
 (you must quit and restart Logtalk for each testing scenario):
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
 
 Run benchmarks with event support turned on and using static binding:
 

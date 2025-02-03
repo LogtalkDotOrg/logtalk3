@@ -38,17 +38,6 @@ ________________________________________________________________________
 This folder provides an object for running multi-threading benchmarks. The
 supported backend Prolog compilers are SWI-Prolog, and YAP.
 
-For example, the following goal will run all benchmark tests:
-
-	```logtalk
-mtbatch::run.
-
-You may also run just a single benchmark test a given number of times.
-For example:
-
-	```logtalk
-mtbatch::run(primes, 10).
-
 The following tests are available:
 
 	primes			(independent and-parallelism)
@@ -66,7 +55,13 @@ For the same backend Prolog compiler, the benchmark results can show
 significant variation depending on the operating-system and if you're 
 using a 32 bits or a 64 bits version.
 
-Start by loading the loading the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the example:
 
 ```logtalk
 logtalk_load(mtbatch(loader)).
@@ -84,7 +79,7 @@ Run all tests (average of 20 times for each test):
 mtbatch::run(20).
 ```
 
-Run the primes benchmark test (average of 10 times):
+Run only the primes benchmark test (average of 10 times):
 
 ```logtalk
 mtbatch::run(primes, 10).

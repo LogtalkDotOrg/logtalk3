@@ -59,7 +59,13 @@ encapsulation. When this limitation is an issue, note that the
 Logtalk standard library includes an implementation of the Smalltalk
 dependents mechanism that can be used in alternative.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('behavioral/observer/loader')).

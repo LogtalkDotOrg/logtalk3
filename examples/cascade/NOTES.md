@@ -67,6 +67,12 @@ For details please see the comments in the `cascade.lgt` source file. The
 
 See also the `missing_data` and `books` examples.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

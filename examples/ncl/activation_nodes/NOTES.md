@@ -42,6 +42,12 @@ The Logtalk version uses parametric objects to represent the concept of
 "net-variables" described in the paper as "global logical variables" and
 events to implement the functionality of spreading activation nodes.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

@@ -48,6 +48,12 @@ copied from the problem description. For copyright reasons, the part 2 files
 cannot be distributed here and must be downloaded from the Advent of Code
 2023 website.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

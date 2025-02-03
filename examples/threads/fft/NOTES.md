@@ -38,6 +38,12 @@ ________________________________________________________________________
 This folder provides a multi-threading solution for calculating the Fast 
 Fourier Transform. This solution is mostly intended for benchmarking.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

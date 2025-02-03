@@ -52,6 +52,12 @@ categories:
 - `local.lgt`  
 	Simple example of defining an operator local to a source file.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

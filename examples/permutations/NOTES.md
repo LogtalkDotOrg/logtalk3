@@ -40,6 +40,12 @@ permutations. Some of the predicate definitions are purposively not
 tail-recursive. A non-optimized map list predicate is also used. The
 original code was written and contributed by Paul Tarau.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

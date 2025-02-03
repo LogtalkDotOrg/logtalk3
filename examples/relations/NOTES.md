@@ -40,6 +40,12 @@ previous, 1.x versions, of Logtalk. They are intended to  help the
 conversion of applications from Logtalk 1.x to 2.x and to support most
 of the other examples provided with the current Logtalk package.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

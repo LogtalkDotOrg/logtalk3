@@ -48,6 +48,12 @@ for the message-sending calls.
 This example also illustrates defining an alias for an object defined at
 runtime using a _parameter variable_.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

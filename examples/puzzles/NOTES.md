@@ -39,6 +39,12 @@ This folder contains examples of Logtalk implementations for popular
 logical puzzles. The description of each puzzle can be found on the 
 source files themselves.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

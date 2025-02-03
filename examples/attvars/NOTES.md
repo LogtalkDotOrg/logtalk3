@@ -67,6 +67,12 @@ second argument not corresponding to the enclosing entity are compiled as
 references to other Logtalk entities. If you need to refer to a Prolog
 module instead, wrap the predicate call using the `{}/1` control construct.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

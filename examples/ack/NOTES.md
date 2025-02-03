@@ -38,9 +38,9 @@ ________________________________________________________________________
 This folder contains an implementation of the Ackermann function (general
 recursive function). For a description of this function see e.g.
 
-	https://en.wikipedia.org/wiki/Ackermann_function
+https://en.wikipedia.org/wiki/Ackermann_function
 
-Print Logtalk, Prolog backend, and kernel versions:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 
 ```logtalk
 %versions

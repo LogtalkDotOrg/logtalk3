@@ -67,6 +67,12 @@ root
 A second category named `interface`, imported by all objects except the 
 sub-class instances, allows us to query the objects about their interfaces.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

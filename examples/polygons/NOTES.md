@@ -40,6 +40,12 @@ This is represented by a concentric binary relation ensuring that whenever
 a polygon is moved towards a new position, all polygons likewise concentric 
 are moved along with them.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

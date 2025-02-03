@@ -77,6 +77,12 @@ using prototype hierarchies:
 	presents a solution which allows both inherited definitions to be 
 	used in D
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

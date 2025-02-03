@@ -47,6 +47,12 @@ hook objects.
 
 For more details, please see the comments in the source files.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

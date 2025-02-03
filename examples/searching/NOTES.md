@@ -44,28 +44,36 @@ For a description of the search problems, please see a classical AI book
 This example defines two hierarchies of objects, one for representing 
 state-spaces and another for representing search methods:
 
-	state_space
-		farmer
-		water_jug
-		salt(Quantity, Measure1, Measure2)
-		heuristic_state_space
-			bridge
-			eight_puzzle
-			miss_cann
+```text
+state_space
+	farmer
+	water_jug
+	salt(Quantity, Measure1, Measure2)
+	heuristic_state_space
+		bridge
+		eight_puzzle
+		miss_cann
 
-	search_strategy
-		blind_search(Bound)
-			breadth_first(Bound)
-			depth_first(Bound)
-		heuristic_search(Threshold)
-			best_first(Threshold)
-			hill_climbing(Threshold)
+search_strategy
+	blind_search(Bound)
+		breadth_first(Bound)
+		depth_first(Bound)
+	heuristic_search(Threshold)
+		best_first(Threshold)
+		hill_climbing(Threshold)
+```
 
 Taken together, these two hierarchies implement a framework for solving 
 state-space search problems in Logtalk. There is also a monitor object, 
 `performance`, which tries to measure the time taken to find a solution, 
 the branching factor while searching for a solution, and the number of 
 transitions made to find a solution.
+
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
 
 Start by loading the example and the required library files:
 

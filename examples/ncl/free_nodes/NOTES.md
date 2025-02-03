@@ -41,6 +41,12 @@ https://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/prolog/impl/parallel
 The Logtalk version uses parametric objects to represent the concept of
 "net-variables" described in the paper as "global logical variables".
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

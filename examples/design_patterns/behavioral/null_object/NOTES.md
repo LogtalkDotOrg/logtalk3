@@ -58,7 +58,13 @@ equivalent to a null object is necessary, one can be defined as e.g.
 defined in this pattern. Note that Logtalk provides a library
 implementation of "optionals", which are often a better solution.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('behavioral/null_object/loader')).

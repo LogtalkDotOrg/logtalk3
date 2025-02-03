@@ -40,6 +40,12 @@ directive and an entity directive. It also illustrates how to use this
 directive to implement a simple persistency solution for an object
 database.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

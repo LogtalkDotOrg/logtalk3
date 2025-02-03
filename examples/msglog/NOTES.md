@@ -40,6 +40,12 @@ for implementing a simple message logger for messages sent from the command-
 line (i.e., from the pseudo-object `user`). If you need more than one message 
 logger, just create a new prototype as an extension of the object `msglog`.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

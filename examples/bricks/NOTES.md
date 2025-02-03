@@ -44,6 +44,12 @@ we want to automatically destroy the corresponding relation tuple.
 It's instructive to use the debugger to better understand this example.
 Set spy points in all block instances and then activate the debugger.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

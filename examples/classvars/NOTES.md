@@ -46,6 +46,12 @@ This example defines a root class, `root` and three instances, `instance1`,
 (using a dynamic predicate) and the setter and getter methods which implement
 the variable sharing behavior.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

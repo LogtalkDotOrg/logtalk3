@@ -71,6 +71,12 @@ We redistribute these programs in good faith but understand that anyone
 repackaging the Logtalk distribution may choose to delete this example
 given the unclear legal status of some of these files.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -39,7 +39,13 @@ This folder provides a multi-threading solution for solving the "Towers
 of Hanoi" problem. This solution is only useful for benchmarking as the 
 problem is solved without actually printing the solution steps.
 
-Start by loading the loading the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the example:
 
 ```logtalk
 logtalk_load(hanoi(loader)).

@@ -38,6 +38,12 @@ ________________________________________________________________________
 No self-respecting programming language could do without a "Hello World"
 example!
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Just load the example and check the output message:
 
 ```logtalk

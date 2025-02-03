@@ -42,6 +42,12 @@ files can only a common subset of Prolog module directives. Consult the
 "Prolog Integration and Migration Guide" in the Logtalk documentation 
 for details.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by compiling and loading the Prolog module files as objects:
 
 ```logtalk

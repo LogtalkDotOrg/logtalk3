@@ -40,6 +40,12 @@ to use the Logtalk built-in predicates `threaded_wait/1` and `threaded_notify/1`
 for synchronizing threads using shared resources. The example consists of
 two persons, a student and a teacher, sharing a blackboard chalk and eraser.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

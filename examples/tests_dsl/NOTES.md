@@ -45,6 +45,12 @@ post:
 
 https://logtalk.org/2019/11/05/user-defined-test-dialects.html
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Run the tests written using the DSL:
 
 ```logtalk

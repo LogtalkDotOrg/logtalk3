@@ -48,6 +48,12 @@ asserted clauses that contain `./2` terms and that can clash with Logtalk
 dynamic binding caching and inlining optimizations (usually resulting
 in instantiation errors).
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

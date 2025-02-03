@@ -44,6 +44,12 @@ compiles predicates and the way a closure is extended to form a goal.
 This example supports using ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog,
 Trella Prolog, and YAP as the backend compilers.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -68,6 +68,12 @@ gains due to the use of multi-threading highly dependent on the pivots used
 for vector partition. Increasing the number of threads alleviates the problem 
 provided an adequate number of processing cores.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

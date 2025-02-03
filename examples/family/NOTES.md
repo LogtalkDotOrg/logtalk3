@@ -43,6 +43,12 @@ can then be imported into objects defining the actual families using basic
 calls the basic facts in _self_. Any number of family objects can be loaded
 at the same time.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

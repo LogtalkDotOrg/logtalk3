@@ -40,11 +40,17 @@ objects as alternative implementation to dynamic object predicates for
 storing (backtrackable) object state. For more information on assignable 
 variables please consult the URL:
 
-	http://www.kprolog.com/en/logical_assignment/
+http://www.kprolog.com/en/logical_assignment/
 
 The objects in this example make use of the library category `assignvars`.
 This category contains an adaptation of the pure logical subset implementation
 of assignable variables by Nobukuni Kino, which can be found on the URL above.
+
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
 
 Start by loading the "assign_parameters" category and the example:
 

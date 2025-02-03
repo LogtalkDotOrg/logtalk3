@@ -52,6 +52,12 @@ The `tutor` tool provides explanations and fix suggestions for compiler
 warnings and errors messages. New users are advised to load it at startup
 (e.g., from a settings file) for a more friendly experience.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 To augment compiler warnings and errors messages with explanations and
 fix suggestions, start by loading the `tutor` tool:
 

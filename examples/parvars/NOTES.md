@@ -39,6 +39,12 @@ This folder contains an alternative version of the `parametric` example
 that uses _parameter variables_ instead of the `parameter/2` and `this/1`
 built-in methods to access entity parameters.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

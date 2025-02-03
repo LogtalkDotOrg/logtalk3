@@ -38,6 +38,12 @@ ________________________________________________________________________
 This is a simple example illustrating the basics of defining and using
 protocols and categories.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -76,6 +76,12 @@ For a simpler version of this example, see the `reflection` example. If
 you are not familiar with the concept of metaclass used in this example,
 see the `metaclasses` example first.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

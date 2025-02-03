@@ -40,6 +40,12 @@ explicitly complement an existing object compiled with the `complements`
 flag set to `restrict`. With this setting, a category can only add new
 functionality to the complemented object.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the non-patched vault objects:
 
 ```logtalk

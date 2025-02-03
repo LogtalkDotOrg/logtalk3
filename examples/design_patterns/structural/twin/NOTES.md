@@ -61,7 +61,13 @@ message forwarding to its twin object (and thus one level of indirection).
 Note that this pattern implies a circular reference between the twin
 objects, which prevents some static binding optimizations.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('structural/twin/loader')).

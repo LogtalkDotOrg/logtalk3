@@ -53,6 +53,12 @@ optimized mode, the multifile predicate clauses, which act as liking clauses,
 are inlined. The main downside of this solution is the boilerplate code that
 must be written (i.e., the multifile predicate definitions).
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

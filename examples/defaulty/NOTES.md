@@ -47,6 +47,11 @@ For a detailed analysis of this example, see the following blog post:
 
 https://logtalk.org/2019/12/17/the-cost-of-defaulty-representations.html
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
 
 Start by loading the example and the `ports_profiler` tool:
 

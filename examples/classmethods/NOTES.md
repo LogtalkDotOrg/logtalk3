@@ -53,6 +53,12 @@ This example defines the following objects:
 - `c42`  
 	static instance of class `circle`
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

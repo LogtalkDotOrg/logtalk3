@@ -40,6 +40,12 @@ logging support for objects. This example illustrates how to define in
 a category a set of predicates that handle a dynamic predicate in the 
 context of "this".
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -65,6 +65,12 @@ area amongst the number of threads specified. This method has no restriction
 on the number of threads and uses a span/collect idea for proving thread goals 
 and the predicates `threaded_once/1` and `threaded_exit/1`.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

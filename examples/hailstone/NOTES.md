@@ -43,6 +43,12 @@ see:
 
 	http://en.wikipedia.org/wiki/Collatz_conjecture
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

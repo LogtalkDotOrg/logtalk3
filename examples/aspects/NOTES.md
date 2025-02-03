@@ -56,6 +56,12 @@ rely in the calling order of event handlers and thus the check could be
 applied before or after the logging message that a transfer is being
 attempted.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

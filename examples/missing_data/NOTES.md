@@ -44,6 +44,12 @@ For more details about this example, please see the comments in the
 
 See also the `cascade` and `books` examples.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -87,6 +87,12 @@ David H. Bailey and Jonathan M. Borwein,
 Lawrence Berkeley National Laboratory. Paper LBNL-57491.
 http://repositories.cdlib.org/lbnl/LBNL-57491
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

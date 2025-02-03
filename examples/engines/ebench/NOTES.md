@@ -46,6 +46,12 @@ Confirm that the `time/1` predicate is available:
 time(true).
 ```
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

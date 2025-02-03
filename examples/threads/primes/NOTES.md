@@ -49,7 +49,13 @@ You probably want to play with the list size in order to find out when the
 list is big enough to make the use of multi-threading worth performance-wise 
 (i.e., to compensate the overhead of thread creation and management).
 
-Start by loading the loading the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the example:
 
 ```logtalk
 logtalk_load(primes(loader)).

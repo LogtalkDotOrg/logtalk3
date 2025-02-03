@@ -49,7 +49,13 @@ point of access. As applications can use a mix of prototypes and
 classes, there is nothing to be gained in implementing this pattern
 using classes.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('creational/singleton/loader')).

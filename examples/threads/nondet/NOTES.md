@@ -38,6 +38,12 @@ ________________________________________________________________________
 This folder illustrates non-deterministic multi-threading calls and the
 use of tags to distinguish between multi-threading calls.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

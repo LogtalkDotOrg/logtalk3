@@ -42,9 +42,15 @@ have side effects.
 The `slow_print` example was originally coded for a Rosetta Code contribution
 available at:
 
-	https://rosettacode.org/wiki/Mutex#Logtalk
+https://rosettacode.org/wiki/Mutex#Logtalk
 
-Start by loading the loading the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the example:
 
 ```logtalk
 logtalk_load(sync(loader)).

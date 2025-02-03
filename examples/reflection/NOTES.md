@@ -54,6 +54,12 @@ You can find more sophisticated versions of these classes in the `roots`
 example. If you are not familiar with the concept of metaclass used in
 this example, see the `metaclasses` example first.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

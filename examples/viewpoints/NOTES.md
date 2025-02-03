@@ -51,6 +51,12 @@ or viewpoints, `joe_sportsman`, `joe_employee`, `joe_chess_player`, and
 `joe_film_enthusiast`. Each descendant contains data related to a particular
 viewpoint about Joe.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

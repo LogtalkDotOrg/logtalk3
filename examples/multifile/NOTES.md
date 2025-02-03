@@ -38,6 +38,12 @@ ________________________________________________________________________
 This example illustrates how to use multifile predicates/non-terminals within
 Logtalk objects and categories.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

@@ -40,6 +40,12 @@ objects in order to contrast with category-based composition. For a
 detailed description, please see the comments in the `laptops.lgt`
 source file.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

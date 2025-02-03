@@ -43,6 +43,12 @@ To define tests for your own project, see the `lgtunit` tool documentation
 and the `tests-sample.lgt` and `tester-sample.lgt` sample files in the root
 of the distribution.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the tests driver file:
 
 ```logtalk

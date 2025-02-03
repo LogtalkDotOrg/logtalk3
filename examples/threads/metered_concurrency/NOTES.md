@@ -42,6 +42,12 @@ For more information see:
 
 	https://rosettacode.org/wiki/Metered_concurrency#Logtalk
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

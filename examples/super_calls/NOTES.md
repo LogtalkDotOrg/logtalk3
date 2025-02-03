@@ -42,6 +42,12 @@ to work as expected in the correct context. This example also illustrates
 that "super" calls require dynamic binding when the called predicate is
 dynamic.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

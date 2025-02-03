@@ -37,6 +37,12 @@ ________________________________________________________________________
 
 This folder contains examples of multi-threading barrier synchronization.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -67,7 +67,13 @@ advantage of using a decorator object is that it can be used to decorate
 any object at compilation time or at runtime while with a complementing
 category we need to know in advance which objects we will be decorating.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('structural/decorator/loader')).

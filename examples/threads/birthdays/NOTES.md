@@ -39,6 +39,12 @@ This folder contains a simple multi-threading example with agents and
 their birthdays, illustrating the use of the built-in predicates
 `threaded_ignore/1`, `threaded_once/1`, and `threaded_exit/1`.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

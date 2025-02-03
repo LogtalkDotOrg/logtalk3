@@ -48,6 +48,12 @@ The sample implementation converts a floating-point number into an
 integer number using a sequence of operations represented using
 Definite Clause Grammar rules.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the design pattern sample implementation:
 
 ```logtalk

@@ -40,6 +40,12 @@ hook support to (1) expand abbreviations in `info/1` directives; (2) convert
 `write/1` goals into `write_term/3` goals where the terms written are quoted
 and pre-processed by using `numbervars/3`.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -47,6 +47,12 @@ happen if the sender of the message is a parametric object and different
 parameterizations are used. A possible workaround is to always send the
 message from the same (non-parametric) object (e.g., `user`).
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

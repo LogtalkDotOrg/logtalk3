@@ -46,6 +46,12 @@ of them extending the other, its parent prototype.
 This simple example illustrates the different roles an object can play.
 See the comments in the `roles.lgt` file for detailed explanations.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

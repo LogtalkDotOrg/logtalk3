@@ -55,6 +55,12 @@ simply fails as per the Closed World Assumption (CWA).
 See the comments in the `prototypes.lgt` and `classes.lgt` source files
 for further details.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

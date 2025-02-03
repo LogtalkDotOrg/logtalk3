@@ -56,7 +56,13 @@ state of the prototype for copying. More efficient solutions can be
 implemented in most cases by e.g. having customized instance creation
 predicate definitions.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('creational/prototype/loader')).

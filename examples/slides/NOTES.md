@@ -43,6 +43,12 @@ the index and the slide contents. The main predicate, `show/2` takes a
 sequence of slides and the name of the predicate, which is used as a
 closure for displaying the slides.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

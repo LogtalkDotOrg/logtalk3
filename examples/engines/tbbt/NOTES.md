@@ -44,6 +44,12 @@ Currently this example requires ECLiPSe or SWI-Prolog. It should run also on
 XSB and YAP if and when these systems fix the bugs in their multi-threading
 support.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

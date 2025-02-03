@@ -49,6 +49,12 @@ when dealing with a very large number of objects due to its compact
 representation and/or connecting Prolog data tables with a Logtalk object
 hierarchies.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

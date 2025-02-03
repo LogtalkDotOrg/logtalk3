@@ -40,7 +40,13 @@ to create threads for competing goals, which one performing the same
 task using different methods. The first goal to complete leads to the 
 immediate termination of the threads running the remaining goals.
 
-Start by loading the loading the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the example:
 
 ```logtalk
 logtalk_load(functions(loader)).

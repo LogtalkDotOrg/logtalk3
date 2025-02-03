@@ -41,6 +41,12 @@ calls to meta-predicates and lambda expressions that removes the
 implied overhead making their performance practical and equal or
 close to the first-order alternatives.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Run the tests:
 
 ```logtalk

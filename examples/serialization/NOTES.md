@@ -41,6 +41,12 @@ Restoring this file recreates the serialized objects. Object identities are
 not perserved however. This example assumes that the dynamic objects contain
 only facts. See also the `persistency` example.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

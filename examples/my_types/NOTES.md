@@ -39,6 +39,12 @@ This folder contains an example of defining new types for type-testing
 and type-checking purposes (what else?) using the user-extensible `type`
 library object.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

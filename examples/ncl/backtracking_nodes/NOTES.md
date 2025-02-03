@@ -45,6 +45,12 @@ events to implement the functionality of spreading activation nodes.
 When multiple spreading activation nodes fire, all their procedures must
 be true by default (in the NCL manual, this corresponds to `netmode(3)`).
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

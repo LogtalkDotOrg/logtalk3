@@ -46,6 +46,12 @@ one for production code, or a single parametric object. This example
 illustrates both approaches although only the first one is used in the
 loader auxiliary files and in the sample queries.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example with the debug statements activated:
 
 ```logtalk

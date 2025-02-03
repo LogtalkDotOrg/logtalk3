@@ -73,7 +73,13 @@ of applying the following steps:
 2. Changing calls and updates to predicates in "user" into messages to self.
 3. Declaring those predicates as public or protected as needed.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('ai/many_worlds/loader')).

@@ -48,6 +48,12 @@ in a different order from the other philosophers; see the URL above for
 details): one implementation uses a category and five philosopher objects 
 while the second implementation uses a parametric object.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

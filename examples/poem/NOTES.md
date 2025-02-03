@@ -38,6 +38,12 @@ ________________________________________________________________________
 The example in this folder is an adaptation of an example of POEM, an 
 object-oriented extension to Prolog developed by Ben Staveley-Taylor.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

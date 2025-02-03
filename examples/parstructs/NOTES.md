@@ -44,6 +44,12 @@ key (instead of using the Logtalk built-in `parameter/2` method that indexes
 individual parameters by position). The access predicates are goal-expanded
 to the corresponding ECLiPSe structure built-in predicates.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -41,6 +41,12 @@ The CLP(FD) library is loaded from the `loader.lgt` auxiliary loader file.
 This library must always be loaded prior to compilation of the individual 
 example files.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

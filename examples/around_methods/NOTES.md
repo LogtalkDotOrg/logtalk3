@@ -43,6 +43,12 @@ allows the new definition to call some goals, followed by a call to the
 original definition, followed by calls to some more goals, hence the name
 "around method".
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the unpatched object:
 
 ```logtalk

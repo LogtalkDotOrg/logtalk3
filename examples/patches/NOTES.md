@@ -47,6 +47,12 @@ categories and to provide a solution for preventing the use of categories
 to break object encapsulation. Note that the `complements` flag can be set
 on a per-object basis by using the `set_logtalk_flag/2` directive.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -55,7 +55,13 @@ protocol of the multiton with the necessary predicates. Also to simplify,
 the sample code uses the named instance identifiers as the access keys.
 This could also be changed to use instead a dictionary.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('creational/multiton/loader')).

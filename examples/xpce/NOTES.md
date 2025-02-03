@@ -45,6 +45,12 @@ Logtalk.
 The example itself is a straightforward adaptation of an example from the
 XPCE user manual.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

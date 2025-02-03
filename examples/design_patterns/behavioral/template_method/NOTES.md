@@ -51,7 +51,14 @@ objects. It also allows easy definition of default definitions for the
 algorithm steps that can be inherited, redefined, or specialized in the
 descendant objects. The predicates implementing the algorithm steps are
 often declared as protected.
-Start by loading the design pattern sample implementations:
+
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('behavioral/template_method/loader')).

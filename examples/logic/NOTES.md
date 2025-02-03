@@ -60,6 +60,12 @@ a list of clauses. The second predicate, `step_by_step/2`, performs
 the same translations as `translate/2` but also prints the results 
 of each conversion step.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

@@ -67,6 +67,12 @@ This example defines the following objects:
 - `grammar`  
 	object illustrating using `phrase/2` as a meta-predicate meta-argument
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

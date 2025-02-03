@@ -48,7 +48,14 @@ meta-predicate that walks the structure and applies a user defined
 closure to each element. When the object defining the structure doesn't
 provide such a meta-predicate, a complementing category can define and
 add it to the object. Both cases are illustrated in the sample code.
-Start by loading the design pattern sample implementations:
+
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('behavioral/visitor/loader')).

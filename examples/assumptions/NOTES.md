@@ -64,6 +64,12 @@ A web version of this paper is also available at:
 
 http://www.cse.unt.edu/~tarau/research/PapersHTML/state.html
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

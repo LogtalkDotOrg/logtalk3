@@ -78,6 +78,12 @@ to itself (as found in the definition of the `lookup/2` predicate in this
 example), removing the message-sending overhead, and thus providing the
 same performance as a local predicate call.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

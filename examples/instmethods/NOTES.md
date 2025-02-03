@@ -54,6 +54,12 @@ This example defines the following objects:
 - `instance3`  
 	instance of root specializing the inherited method `method/0`
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

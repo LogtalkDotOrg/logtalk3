@@ -53,6 +53,12 @@ documentation available at:
 
 https://www.swi-prolog.org/pldoc/doc_for?object=section(%27packages/pengines.html%27)
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

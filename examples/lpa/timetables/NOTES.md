@@ -37,6 +37,12 @@ ________________________________________________________________________
 
 This example is an adaptation of the LPA Prolog++ timetables example.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and the required library files:
 
 ```logtalk

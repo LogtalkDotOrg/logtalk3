@@ -40,6 +40,12 @@ categories to explicitly complement an existing object compiled with the
 `complements` flag set to `allow`. With this setting, a category can both
 redefine and add new functionality to the complemented object.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the non-patched `employee` object:
 
 ```logtalk

@@ -91,6 +91,12 @@ http://www.amzi.com/
 Please refer to the Amzi! Prolog documentation for more information on the 
 original examples.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

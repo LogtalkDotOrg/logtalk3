@@ -54,6 +54,12 @@ to avoid conflicts with the `(::)/2` Logtalk message-sending operator. In the
 examples, the operator `ins/2` was chosen as the alias for the `(::)/2` operator.
 ECLiPSE 6.0#78 adds an alias in_set_range/2 for `(::)/2` that could also be used.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

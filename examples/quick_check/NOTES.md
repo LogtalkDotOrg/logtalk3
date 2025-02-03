@@ -43,6 +43,12 @@ the `lgtunit` tool.
 
 See also the `testing` and ``tests_dsl` examples.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the sample properties used to use QuickCheck interactively
 at the top-level interpreter:
 

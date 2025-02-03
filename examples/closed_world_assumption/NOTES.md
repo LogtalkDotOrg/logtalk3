@@ -59,6 +59,12 @@ result in runtime error.
 (1) This is a necessary requirement for protocols/interfaces: we must be
 able to declare a predicate without necessarily defining it.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example (by default, it will generate a number of
 warnings, which are expected):
 

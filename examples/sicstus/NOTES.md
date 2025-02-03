@@ -37,6 +37,12 @@ ________________________________________________________________________
 
 The examples in this folder are adapted from the SICStus Prolog manual.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example and necessary library supporting files:
 
 ```logtalk

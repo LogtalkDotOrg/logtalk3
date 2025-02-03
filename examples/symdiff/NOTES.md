@@ -50,6 +50,12 @@ compound term. Accepted functors are `*`, `+`, `-`, `**`, and `log`.
 This example is still incomplete. For example, using sum distribution 
 property to simplify expressions is not yet implemented. 
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

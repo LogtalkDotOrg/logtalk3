@@ -46,7 +46,13 @@ object delegates the simplified client requests to the objects that
 represent the abstracted subsystems, these subsystems can be implemented
 using prototypes, classes, or a mix of both.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('structural/facade/loader')).

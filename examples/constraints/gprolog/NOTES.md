@@ -38,6 +38,12 @@ Domain Solver included with GNU Prolog with Logtalk. These examples are
 adapted, with permission from the original author, Daniel Diaz, from the GNU 
 Prolog 1.3.0 distribution.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Loading the example runs an initialization query that solves an alphacipher
 puzzle and an crypt-arithmetic puzzle:
 

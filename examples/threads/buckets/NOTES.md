@@ -40,7 +40,13 @@ was coded for a contribution to the Rosetta Code website.
 
 For more information see:
 
-	https://rosettacode.org/wiki/Atomic_updates
+https://rosettacode.org/wiki/Atomic_updates
+
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
 
 Start by loading the example and the required libraries:
 

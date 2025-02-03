@@ -38,6 +38,12 @@ ________________________________________________________________________
 This simple programming example illustrates predicate scope semantics.
 See the comments in the `scopes.lgt` file for detailed explanations.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

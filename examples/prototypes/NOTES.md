@@ -46,6 +46,12 @@ and teaching materials equate OOP languages with class-based OOP languages.
 Some examples of other prototype-based OOP languages include Self, JavaScript,
 Io, NewtonScript, Lua, and Slate.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

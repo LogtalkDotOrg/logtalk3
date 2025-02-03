@@ -40,6 +40,12 @@ written by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It shoul
 run also on XSB and YAP if and when these systems bugs with coroutining and/or
 threads get fixed.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

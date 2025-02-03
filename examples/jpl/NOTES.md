@@ -54,6 +54,12 @@ to run the example from within the SWI-Prolog macOS application instead
 of using the shell integration script. This issue is due to a macOS Java
 issue that's orthogonal to both SWI-Prolog/YAP and Logtalk.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

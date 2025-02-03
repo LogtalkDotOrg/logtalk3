@@ -48,7 +48,13 @@ In this sample implementation, we use prototypes and fixed successors
 in the chain of responsibility. But the successors could also easily
 be defined dynamically.
 
-Start by loading the design pattern sample implementations:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the design pattern sample implementation:
 
 ```logtalk
 logtalk_load(design_patterns('behavioral/chain_of_responsibility/loader')).

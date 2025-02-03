@@ -41,9 +41,15 @@ Rosetta Code website.
 
 For more information see:
 
-	https://rosettacode.org/wiki/Checkpoint_synchronization
+https://rosettacode.org/wiki/Checkpoint_synchronization
 
-Start by loading the loading the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Start by loading the example:
 
 ```logtalk
 logtalk_load(checkpoint(loader)).

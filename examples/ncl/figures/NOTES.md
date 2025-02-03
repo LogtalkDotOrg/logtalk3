@@ -63,6 +63,12 @@ Note that the use of the `dif` library limits the backend Prolog systems
 that can be used to run this example to B-Prolog, ECLiPSe, XVM, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, XSB, and YAP.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

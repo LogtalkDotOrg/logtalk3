@@ -40,6 +40,12 @@ directive to module aliases (not to be confused by the Prolog directive with
 the same name). It requires backend support for modules and the `use_module/2`
 directive.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Start by loading the example:
 
 ```logtalk

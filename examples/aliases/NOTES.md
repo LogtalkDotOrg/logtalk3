@@ -38,6 +38,12 @@ ________________________________________________________________________
 For a description of this example, please see the comments in the
 `aliases.lgt` source file.
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk

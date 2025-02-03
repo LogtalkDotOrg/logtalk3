@@ -43,6 +43,12 @@ http://en.wikipedia.org/wiki/Delegation_pattern
 
 http://rosettacode.org/wiki/Delegates#Logtalk
 
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
 Load the example:
 
 ```logtalk
