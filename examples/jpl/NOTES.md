@@ -106,41 +106,6 @@ java::terms_to_array([x,[1,a,7,[y,z]],k,[],3.14,foo(bar)], Array), java::array_t
 Array = @'J#00000140321793636416', List = [x, [1, a, 7, [y, z]], k, [], 3.14, foo(bar)].
 -->
 
-Some GUI examples, adapted from the JPL distribution examples
-
-```logtalk
-color_chooser::color(Color).
-```
-
-<!--
-Color = @'J#00000140727398998200'.
--->
-
-```logtalk
-flags_table::display.
-```
-
-<!--
-true.
--->
-
-```logtalk
-jlist::display.
-```
-
-<!--
-true.
--->
-
-```logtalk
-text_entry::text(Text).
-Text = ...
-```
-
-<!--
-true.
--->
-
 Run some benchmarks comparing plain JPL calls with calls to Logtalk's thin
 abstraction layer:
 
@@ -150,4 +115,46 @@ benchmarks::run.
 
 <!--
 ...
+-->
+
+Some GUI examples, adapted from the JPL distribution examples (skip if running as a notebook)
+
+`JColorChooser` dialog example:
+
+```logtalk
+(current_object(jupyter) -> true; color_chooser::color(Color)).
+```
+
+<!--
+Color = @'J#00000140727398998200'.
+-->
+
+`JTable` example:
+
+```logtalk
+(current_object(jupyter) -> true; flags_table::display).
+```
+
+<!--
+true.
+-->
+
+`JList` dialog example:
+
+```logtalk
+(current_object(jupyter) -> true; jlist::display).
+```
+
+<!--
+true.
+-->
+
+`JOptionPane` dialog example:
+
+```logtalk
+(current_object(jupyter) -> true; text_entry::text(Text)).
+```
+
+<!--
+Text = ... .
 -->
