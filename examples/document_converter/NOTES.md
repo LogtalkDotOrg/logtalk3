@@ -51,35 +51,50 @@ running the example.
 Be sure to have download the required JAR files before attempting to
 run this example.
 
-Start by setting the Java `CLASSPATH` environment variable. Three backend
+When running this example from the terminal (i.e., not as a notebook),
+start by setting the Java `CLASSPATH` environment variable. Three backend
 Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
 script file that sets the `CLASSPATH` environment variable when sourced:
 
-	$ cd "$LOGTALKUSER/examples/document_converter"
-	$ . set_classpath.sh
+```text
+$ cd "$LOGTALKUSER/examples/document_converter"
+$ . set_classpath.sh
+```
 
 Similar for Windows using the `set_classpath.ps1` PowerShell script.
 
-Second, start Logtalk and load the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Set the required environment variables (edit if using a different Apache Tika version):
+
+```logtalk
+setenv('CLASSPATH', './jars/tika-app-2.8.0.jar'), setenv('TIKA_CONFIG', './jars/tika-config.xml').
+```
+
+Load the example:
 
 ```logtalk
 logtalk_load(document_converter(loader)).
 ```
 
-Convert a "sample.pdf" document to a "sample.txt" file:
+Convert a `sample.pdf` document to a `sample.txt` file:
 
 ```logtalk
-document::convert('sample.pdf', 'sample.txt').
+document::convert('test_files/sample.pdf', 'test_files/sample.txt').
 ```
 
 <!--
 true.
 -->
 
-Get the text contents of a "sample.pdf" document:
+Get the text contents of a `sample.pdf` document:
 
 ```logtalk
-document::contents('sample.pdf', Contents).
+document::contents('test_files/sample.pdf', Contents).
 ```
 
 <!--

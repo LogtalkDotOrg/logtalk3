@@ -51,16 +51,31 @@ to this example `jars` folder before running the example.
 Be sure to have download the required JAR files before attempting to
 run this example; see the `NOTES.txt` file for details
 
-Start by setting the Java `CLASSPATH` environment variable. Three backend
+When running this example from the terminal (i.e., not as a notebook),
+start by setting the Java `CLASSPATH` environment variable. Three backend
 Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
 script file that sets the `CLASSPATH` environment variable when sourced:
 
-	$ cd "$LOGTALKUSER/examples/clustering"
-	$ . set_classpath.sh
+```text
+$ cd "$LOGTALKUSER/examples/document_converter"
+$ . set_classpath.sh
+```
 
 Similar for Windows using the `set_classpath.ps1` PowerShell script.
 
-Second, start Logtalk and load the example:
+Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
+
+```logtalk
+%versions
+```
+
+Set the required environment variables (edit if using a different Apache Commons Math version):
+
+```logtalk
+setenv('CLASSPATH', './jars/commons-math3-3.6.1.jar').
+```
+
+Load the example:
 
 ```logtalk
 logtalk_load(clustering(loader)).

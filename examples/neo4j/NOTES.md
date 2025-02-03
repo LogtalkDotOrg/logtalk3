@@ -50,29 +50,39 @@ https://console.neo4j.org
 After instaling Neo4j (5.x or later version), you must edit the `neo4j.conf`
 file to run this example:
 
-1. Disable authentication:
+Disable authentication:
 
-	dbms.security.auth_enabled=false
+```text
+dbms.security.auth_enabled=false
+```
 
-2. Configure the Bolt connector:
+Configure the Bolt connector:
 
-	server.bolt.enabled=true
-	server.bolt.tls_level=DISABLED
-	server.bolt.listen_address=:7687
-	server.bolt.advertised_address=:7687
+```text
+server.bolt.enabled=true
+server.bolt.tls_level=DISABLED
+server.bolt.listen_address=:7687
+server.bolt.advertised_address=:7687
+```
 
-3. You may also need to disable some Neo4j system properties:
+You may also need to disable some Neo4j system properties:
 
-	#wrapper.java.additional=-Djava.awt.headless=true
-	#wrapper.java.additional.4=-Dneo4j.ext.udc.source=homebrew
+```text
+#wrapper.java.additional=-Djava.awt.headless=true
+#wrapper.java.additional.4=-Dneo4j.ext.udc.source=homebrew
+```
 
-or (depending on the Neo4j version):
+Or, depending on the Neo4j version:
 
-	#server.jvm.additional=-Djava.awt.headless=true-Dunsupported.dbms.udc.source=homebrew
+```text
+#server.jvm.additional=-Djava.awt.headless=true-Dunsupported.dbms.udc.source=homebrew
+```
 
 Save the edit file and start (or restart) Neo4j:
 
-	$ neo4j start
+```text
+$ neo4j start
+```
 
 When running this example on Windows, check first the Neo4j installation
 directory path used in the `set_classpath_*.ps1` scripts and adjust it if
@@ -88,8 +98,10 @@ Start by setting the Java `CLASSPATH` environment variable. Three backend
 Prolog systems are supported: XVM, SWI-Prolog, and YAP. There's a Bash
 script file that sets the `CLASSPATH` environment variable when sourced:
 
-	$ cd "$LOGTALKUSER/examples/neo4j"
-	$ . set_classpath.sh
+```text
+$ cd "$LOGTALKUSER/examples/document_converter"
+$ . set_classpath.sh
+```
 
 Similar for Windows using the `set_classpath.ps1` PowerShell script.
 
