@@ -36,7 +36,8 @@ ________________________________________________________________________
 # coinduction
 
 This example requires a recent version of CxProlog, ECLiPSE, SICStus Prolog,
-SWI-Prolog, or YAP as the backend Prolog compiler.
+SWI-Prolog, XVM, or YAP as the backend Prolog compiler. XVM requires starting
+with the `--enable-occurs-check` command-line option.
 
 Note that Logtalk support for coinduction is still experimental. The two major
 issues are lack of robust Prolog support for cyclic terms and lack of support

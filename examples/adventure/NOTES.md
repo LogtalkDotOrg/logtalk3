@@ -74,26 +74,26 @@ Start by loading the example:
 logtalk_load(adventure(loader)).
 ```
 
-To play the Sleepy text adventure:
+To play the Sleepy text adventure (skip if running as a notebook):
 
 ```logtalk
-sleepy::start.
+(current_object(jupyter) -> true; sleepy::start).
 ```
 
-To play the Spider text adventure:
+To play the Spider text adventure (skip if running as a notebook):
 
 ```logtalk
-spider::start.
+(current_object(jupyter) -> true; spider::start).
 ```
 
-To play the Hunt the Wumpus text adventure:
+To play the Hunt the Wumpus text adventure (skip if running as a notebook):
 
 ```logtalk
-wumpus::main.
+(current_object(jupyter) -> true; wumpus::main).
 ```
 
-To save the Nani:
+To save the Nani (skip if running as a notebook):
 
 ```logtalk
-nani_search::main.
+(current_object(jupyter) -> true; nani_search::main).
 ```
