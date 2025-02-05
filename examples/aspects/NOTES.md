@@ -45,7 +45,8 @@ https://en.wikipedia.org/wiki/Aspect-oriented_programming
 The following entities are defined:
 
 - `bank` (object defining a bank with a transfer predicate)
-- `accounts` (defining balance, withdraw, and deposit predicates)
+- `accounts` (category defining balance, withdraw, and deposit predicates)
+- `jane` and `john` (objects importing the `accounts` category)
 - `security` (hot patching category limiting maximum amount per transfer)
 - `logging` (event monitor object logging transfers)
 
@@ -68,7 +69,7 @@ Start by loading the example:
 logtalk_load(aspects(loader)).
 ```
 
-Transfer 100 from john account to jane account:
+Transfer 100 from `john` account to `jane` account:
 
 ```logtalk
 bank::transfer(john, jane, 100).
@@ -83,7 +84,7 @@ Transfer successful.
 true.
 -->
 
-Try to transfer 400 from jane account to john account:
+Try to transfer 400 from `jane` account to `john` account:
 
 ```logtalk
 bank::transfer(jane, john, 400).

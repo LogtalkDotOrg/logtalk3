@@ -95,7 +95,7 @@ Run all tests, repeating each one N times, e.g. 2000 times
 run(2000).
 ```
 
-Run a specific benchmark, e.g. "nreverse", 10000 times
+Run a specific benchmark, e.g. `nreverse`, 10000 times
 
 ```logtalk
 run(nreverse, 10000).
@@ -103,7 +103,7 @@ run(nreverse, 10000).
 
 If you want to compare Logtalk and plain Prolog versions of an individual
 benchmark, load also its Prolog file (in this case, you must quit and
-restart Logtalk for each testing scenario); for example:
+restart Logtalk for each testing scenario). For example:
 
 ```logtalk
 ['$LOGTALKUSER/examples/bench/boyer.pl'].
@@ -113,7 +113,7 @@ restart Logtalk for each testing scenario); for example:
 true.
 -->
 
-You can also use the `lgtunit` tool benchmark predicates directly; for
+You can also use the `lgtunit` tool benchmark predicates directly. For
 example:
 
 ```logtalk
@@ -142,10 +142,10 @@ true.
 
 Some Prolog compilers such as SWI-Prolog, Trealla Prolog, XVM, and YAP
 provide a handy `time/1` predicate that may also be used in alternative
-to the `lgtunit` benchmark predicates (the adapter files for these two
-systems ensure that `(::)/2` goals in the argument of the time/1 are
-fully compiled prior to calling them so that we benchmark the code
-instead of the Logtalk compiler).
+to the `lgtunit` benchmark predicates. The adapter files for SWI-Prolog
+and YAP ensure that `(::)/2` goals in the argument of the `time/1`
+meta-predicate are fully compiled prior to calling them so that we
+benchmark the code instead of the Logtalk compiler.
 
 Confirm that the `time/1` predicate is available:
 

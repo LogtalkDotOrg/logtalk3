@@ -358,7 +358,7 @@ client::successors([1,2,3], Successors).
 Successors = [2, 3, 4].
 -->
 
-Use lambda expressions in grammar rules
+Use lambda expressions in grammar rules:
 
 ```logtalk
 logtalk << phrase(lambdas::aa(Duplicates), [a,b,c]).

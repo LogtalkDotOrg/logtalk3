@@ -67,7 +67,7 @@ brick::new(a, [position-(8, 1)]), brick::new(b, [position-(6, 1)]), brick::new(c
 true.
 -->
 
-Set up ASCII stack monitor so we can watch the bricks moving:
+Set up an ASCII stack monitor so we can watch the bricks moving:
 
 ```logtalk
 after_event_registry::set_monitor(_, move(_,_), _, stack_monitor).
@@ -228,7 +228,7 @@ forall(brick_stack::tuple(Tuple), (write(Tuple), nl)).
 true.
 -->
 
-Create new `brick_stack` tuple and check results:
+Create a new `brick_stack` tuple and check results:
 
 ```logtalk
 brick_stack::add_tuple([d, a]).
@@ -271,7 +271,7 @@ forall(brick_stack::tuple(Tuple), (write(Tuple), nl)).
 true.
 -->
 
-Move the stack to new position by moving bottom brick; check results:
+Move the stack to new position by moving bottom brick:
 
 ```logtalk
 b::move(5, 1).

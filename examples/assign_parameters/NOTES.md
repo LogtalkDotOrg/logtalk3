@@ -52,7 +52,7 @@ Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 %versions
 ```
 
-Start by loading the "assign_parameters" category and the example:
+Start by loading the example:
 
 ```logtalk
 logtalk_load(assign_parameters(loader)).

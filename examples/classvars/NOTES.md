@@ -68,7 +68,7 @@ instance1::cv(Value1), instance2::cv(Value2), instance3::cv(Value3).
 Value1 = Value2, Value2 = Value3, Value3 = 0.
 -->
 
-Change the value of the class variable via instance1:
+Change the value of the class variable via `instance1`:
 
 ```logtalk
 instance1::set_cv(1).

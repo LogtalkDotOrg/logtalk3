@@ -76,7 +76,7 @@ List = [1, 2, 3, 4, 5].
 Debug calls to the `object::sum/2` predicate:
 
 ```logtalk
-object::sum([1,2,3,_], S).
+object::sum([1,2,3,_], Sum).
 ```
 
 <!--
@@ -84,7 +84,7 @@ Exception: error(instantiation_error, number::check(_G433), object)
 -->
 
 ```logtalk
-object::sum([1,2,3,a], S).
+object::sum([1,2,3,a], Sum).
 ```
 
 <!--
@@ -92,7 +92,7 @@ Exception: error(type_error(number, a), number::check(a), object)
 -->
 
 ```logtalk
-object::sum(wrong, S).
+object::sum(wrong, Sum).
 ```
 
 <!--
@@ -118,7 +118,7 @@ List = [1, 2, 3, 4, 5].
 Call the `object::sum/2` predicate without the debugging statements:
 
 ```logtalk
-object::sum([1,2,3,_], S).
+object::sum([1,2,3,_], Sum).
 ```
 
 <!--
@@ -126,7 +126,7 @@ Exception: instantiation_error
 -->
 
 ```logtalk
-object::sum([1,2,3,a], S).
+object::sum([1,2,3,a], Sum).
 ```
 
 <!--
@@ -134,7 +134,7 @@ Exception: type_error(evaluable, a/0)
 -->
 
 ```logtalk
-object::sum(wrong, S).
+object::sum(wrong, Sum).
 ```
 
 <!--

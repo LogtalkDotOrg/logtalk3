@@ -100,7 +100,7 @@ Name = 'M180.940', Cylinders = 6, HP = 94, RPM = 4800.
 
 The `coupe` engine properties are the ones defined in the corresponding 
 imported category (`sport`) plus the ones inherited from the top category 
-(`classic`) which are not overridden:
+(`classic`) that are not overridden:
 
 ```logtalk
 coupe::(reference(Name), cylinders(Cylinders), horsepower_rpm(HP, RPM)).

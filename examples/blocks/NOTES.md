@@ -67,7 +67,7 @@ block::new(a, [position-(8, 1)]), block::new(b, [position-(6, 1)]), block::new(c
 true.
 -->
 
-Set up ASCII stack monitor so we can watch the blocks moving:
+Set up an ASCII stack monitor so we can watch the blocks moving:
 
 ```logtalk
 define_events(after, _, move(_,_), _, stack_monitor).
