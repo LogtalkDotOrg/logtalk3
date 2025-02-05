@@ -275,11 +275,12 @@ false.
 -->
 
 ```logtalk
-X = [1, 2, 3, 1, 2, 3], lists::comember(2, X).
+X = [1, 2, 3, 1, 2, 3], \+ lists::comember(2, X).
 ```
 
 <!--
-false.
+true.
+-->
 
 ```logtalk
 %%table
@@ -294,11 +295,11 @@ false.
 -->
 
 ```logtalk
-X = [0, s(0), s(s(0))], lists::comember(s(0), X).
+X = [0, s(0), s(s(0))], \+ lists::comember(s(0), X).
 ```
 
 <!--
-false.
+true.
 -->
 
 ```logtalk
@@ -347,19 +348,19 @@ false.
 List non-membership example:
 
 ```logtalk
-X = [1,2,3], lists::absent(2, X).
+X = [1,2,3], \+ lists::absent(2, X).
 ```
 
 <!--
-false.
+true.
 -->
 
 ```logtalk
-X = [1,2,3], lists::absent(4, X).
+X = [1,2,3], \+ lists::absent(4, X).
 ```
 
 <!--
-false.
+true.
 -->
 
 ```logtalk
@@ -372,11 +373,11 @@ false.
 -->
 
 ```logtalk
-X = [1,2,3| X], lists::absent(2, X).
+X = [1,2,3| X], \+ lists::absent(2, X).
 ```
 
 <!--
-false.
+true.
 -->
 
 Sorting example:
