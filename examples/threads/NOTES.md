@@ -38,6 +38,9 @@ There are known bugs in the multi-threading support found in some of the
 backends. These bugs prevent some examples from running and may result in
 crashes. Some of these bugs are specific to some operating-systems.
 
+Some of the examples may not work or provide the expected output when run
+as notebooks. In that case, run the example queries from the top-level.
+
 Follows a short description of the included example (in alphabetical order):
 
 - `barriers`
