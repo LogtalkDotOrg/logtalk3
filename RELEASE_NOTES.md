@@ -28,6 +28,8 @@ RELEASE NOTES
 Documentation
 -------------
 
+* ADDED: Glossary definitions for "before", "after", and "around" methods.
+
 * ADDED: Alternative installation instructions for the developer tools Python
 dependencies.
 

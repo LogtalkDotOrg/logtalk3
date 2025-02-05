@@ -273,6 +273,16 @@ Glossary
    template method
       See :term:`abstract method`.
 
+   before method
+      The :term:`predicate definition` used to answer a ``before`` event.
+
+   after method
+      The :term:`predicate definition` used to answer an ``after`` event.
+
+   around method
+      An overriding definition for a predicate that calls additional goals
+      before and after a call to the overriden predicate definition.
+
    monitor
       Any object, implementing the :ref:`monitoring <apis:monitoring/0>`
       built-in protocol, that is notified by the runtime when a spied event
