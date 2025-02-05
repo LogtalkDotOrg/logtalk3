@@ -60,6 +60,7 @@ making a _super_ call to call an inherited meta-predicate by using
 a `foo/1` predicate defined in `user`:
 
 ```logtalk
+%%table
 foo(X).
 ```
 
@@ -73,6 +74,7 @@ The _super_ calls preserve _sender_ and therefore the `foo/1` predicate
 is called by the meta-predicate in the context of `user`:
 
 ```logtalk
+%%table
 proto::meta_super(foo, X).
 ```
 

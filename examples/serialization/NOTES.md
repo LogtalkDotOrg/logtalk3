@@ -71,8 +71,8 @@ Create some dynamic objects implementing the protocol:
 
 ```logtalk
 create_object(Object1, [implements(abc)], [], [a(1),b(1),c(1)]),
-     create_object(Object2, [implements(abc)], [], [a(2),b(2),c(2)]),
-	 create_object(Object3, [implements(abc)], [], [a(3),b(3),c(3)]).
+create_object(Object2, [implements(abc)], [], [a(2),b(2),c(2)]),
+create_object(Object3, [implements(abc)], [], [a(3),b(3),c(3)]).
 ```
 
 <!--
@@ -112,6 +112,7 @@ true.
 Confirm the restoring process worked as expected:
 
 ```logtalk
+%%table
 conforms_to_protocol(Object, abc), Object::(a(A), b(B), c(C)).
 ```
 

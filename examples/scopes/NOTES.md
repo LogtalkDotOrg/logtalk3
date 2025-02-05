@@ -63,32 +63,32 @@ Foo = 1.
 But we cannot send messages for protected predicates:
 
 ```logtalk
-prototype::bar(_).
+catch(prototype::bar(_), Error, true).
 ```
 
 <!--
-error(permission_error(access,protected_predicate,bar/1),logtalk(prototype::bar(_),c(user,user,r(user,prototype,[],[]))))
+Error = error(permission_error(access,protected_predicate,bar/1),logtalk(prototype::bar(_),c(user,user,r(user,prototype,[],[])))).
 -->
 
 Or for private predicates:
 
 ```logtalk
-prototype::baz(_).
+catch(prototype::baz(_), Error, true).
 ```
 
 <!--
-uncaught exception: error(permission_error(access,private_predicate,baz/1),logtalk(prototype::baz(_),c(user,user,r(user,prototype,[],[]))))
+Error = error(permission_error(access,private_predicate,baz/1),logtalk(prototype::baz(_),c(user,user,r(user,prototype,[],[])))).
 -->
 
 Same for local predicates not declared by a scope directive; note the
 different exception term compared with the two previous queries:
 
 ```logtalk
-prototype::local(_).
+catch(prototype::local(_), Error, true).
 ```
 
 <!--
-error(existence_error(predicate_declaration,local/1),logtalk(prototype::local(_),c(user,user,r(user,prototype,[],[]))))
+Error = error(existence_error(predicate_declaration,local/1),logtalk(prototype::local(_),c(user,user,r(user,prototype,[],[])))).
 -->
 
 From the object holding the scope directives, we can always access any

@@ -69,7 +69,7 @@ q2::area(A).
 A = 9.
 -->
 
-Don't use message broadcasting syntax in order to workaround a XSB parser bug
+Don't use message broadcasting syntax in order to workaround a XSB parser bug:
 
 ```logtalk
 q1::color(Color), q1::side(Side), q1::position(X, Y).
@@ -79,7 +79,7 @@ q1::color(Color), q1::side(Side), q1::position(X, Y).
 Color = red, Side = 1, X = 0, Y = 0.
 -->
 
-Don't use message broadcasting syntax in order to workaround a XSB parser bug
+Don't use message broadcasting syntax in order to workaround a XSB parser bug:
 
 ```logtalk
 q2::side(Side), q2::area(Area), q2::perimeter(Perimeter).

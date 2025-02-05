@@ -102,11 +102,11 @@ the predicate declaration lookup to answer to validate the message
 would start in the metaclass:
 
 ```logtalk
-subclass::current_predicate(_).
+\+ subclass::current_predicate(_).
 ```
 
 <!--
-false.
+true.
 -->
 
 An instance can receive messages for predicates declared in its

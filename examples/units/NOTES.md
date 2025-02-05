@@ -38,40 +38,47 @@ ________________________________________________________________________
 This folder contains a Logtalk version of a GNU Prolog/CX unit example, a
 simple dictionary implementation using a list of key-value pairs:
 
-	:- unit(dict(ST)).
+```logtalk
+%%highlight
+:- unit(dict(ST)).
 
-	dict(ST).
+dict(ST).
 
-	lookup(KEY, VALUE) :- ST=[KEY=VALUE|_].
-	lookup(KEY, VALUE) :- ST=[_|STx], dict(STx) :> lookup(KEY, VALUE).
+lookup(KEY, VALUE) :- ST=[KEY=VALUE|_].
+lookup(KEY, VALUE) :- ST=[_|STx], dict(STx) :> lookup(KEY, VALUE).
+```
 
 For a description of GNU Prolog/CX, see:
 
-	@inproceedings{inproceedings,
-		author = {Abreu, Salvador and Diaz, Daniel},
-		year = {2003},
-		month = {12},
-		pages = {128-147},
-		title = {Objective: In Minimum Context},
-		isbn = {978-3-540-20642-2},
-		doi = {10.1007/978-3-540-24599-5_10}
-	}
+```text
+@inproceedings{inproceedings,
+	author = {Abreu, Salvador and Diaz, Daniel},
+	year = {2003},
+	month = {12},
+	pages = {128-147},
+	title = {Objective: In Minimum Context},
+	isbn = {978-3-540-20642-2},
+	doi = {10.1007/978-3-540-24599-5_10}
+}
+```
 
 The code example is also mentioned in the following paper:
 
-	@incollection{pmoura11a,
-		author = {Paulo Moura},
-		booktitle = {Applications of Declarative Programming and Knowledge Management},
-		title = {Programming Patterns for Logtalk Parametric Objects},
-		editor = "Salvador Abreu and Dietmar Seipel",
-		series = "Lecture Notes in Artificial Intelligence",
-		volume = "6547",
-		publisher = "Springer-Verlag",
-		address = "Berlin Heidelberg",
-		pages = "52--69",
-		month = apr,
-		year = 2011
-	}
+```text
+@incollection{pmoura11a,
+	author = {Paulo Moura},
+	booktitle = {Applications of Declarative Programming and Knowledge Management},
+	title = {Programming Patterns for Logtalk Parametric Objects},
+	editor = "Salvador Abreu and Dietmar Seipel",
+	series = "Lecture Notes in Artificial Intelligence",
+	volume = "6547",
+	publisher = "Springer-Verlag",
+	address = "Berlin Heidelberg",
+	pages = "52--69",
+	month = apr,
+	year = 2011
+}
+```
 
 The Logtalk compiler optimizes message-sending calls sent from an object
 to itself (as found in the definition of the `lookup/2` predicate in this

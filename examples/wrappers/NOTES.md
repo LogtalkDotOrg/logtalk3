@@ -62,7 +62,7 @@ Compile the `zipper.pl` plain Prolog source file using the hook object:
 logtalk_load('zipper.pl', [hook(wrapper)]).
 ```
 
-Try one of the generated "zipper" object predicates:
+Try one of the generated `zipper` object predicates:
 
 ```logtalk
 zipper<<(zipper(3, [1,2,3,4,5], Zip, X), next(Zip, Next)).
