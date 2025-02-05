@@ -20,9 +20,12 @@
 
 
 :- if((
-	current_logtalk_flag(coinduction, supported),
 	\+ current_logtalk_flag(prolog_dialect, cx),
-	\+ current_logtalk_flag(prolog_dialect, eclipse)
+	\+ current_logtalk_flag(prolog_dialect, eclipse),
+	(	current_logtalk_flag(coinduction, supported)
+	;	current_logtalk_flag(prolog_dialect, xvm),
+		current_prolog_flag(unify_applies_occurs_check, true)
+	)
 )).
 
 	:- initialization((

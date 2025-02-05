@@ -19,7 +19,32 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(coinduction, supported)).
+:- if((
+	current_logtalk_flag(prolog_dialect, xvm),
+	current_prolog_flag(unify_applies_occurs_check, true)
+)).
+
+	:- initialization(
+		logtalk_load([
+			arithmetic,
+			simple,
+			binary,
+			streams,
+			filter,
+			sieve,
+			lists,
+			sorting,
+			automata,
+			counter,
+			nested,
+			cyclic_paths,
+			shared_paths,
+			tangle,
+			graph
+		])
+	).
+
+:- elif(current_logtalk_flag(coinduction, supported)).
 
 	:- if(current_logtalk_flag(prolog_dialect, cx)).
 		:- write_depth(10, 10).

@@ -119,10 +119,19 @@ For more information see:
 }
 ```
 
+**Warning**: Some of the queries below will hang when running from a notebook due
+to issues printing bindings with rational terms.
+
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 
 ```logtalk
 %versions
+```
+
+When using XVM as the backend, ensure that the `unify_applies_occurs_check` is set to `true`:
+
+```logtalk
+(current_prolog_flag(dialect, xvm) -> set_prolog_flag(unify_applies_occurs_check,true); true).
 ```
 
 Start by loading the example:

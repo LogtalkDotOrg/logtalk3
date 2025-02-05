@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2021-11-29,
+		date is 2025-02-05,
 		comment is 'Unit tests for the "coinduction" example.'
 	]).
 
@@ -117,7 +117,7 @@
 
 	test(coinduction_sieve_1, true) :-
 		sieve::primes(20, P),
-		P = [2, 3, 5, 7, 11, 13, 17, 19| P].
+		assertion(P == [2, 3, 5, 7, 11, 13, 17, 19| P]).
 
 	test(coinduction_cyclic_paths_1, true) :-
 		bagof(P, cp1::path(a, P), [P1, P2, P3]),

@@ -48,6 +48,9 @@ notebooks.
 * IMPROVED: The `NOTES.md` files of several examples for a better experience
 when open as notebooks.
 
+* IMPROVED: The `coinduction` example to allow running with the XVM backend
+when the `unify_applies_occurs_check` flag is only set to `true` after startup.
+
 * FIXED: Typos in the `NOTES.md` files of several examples that caused errors
 when open and run as notebooks.
 
