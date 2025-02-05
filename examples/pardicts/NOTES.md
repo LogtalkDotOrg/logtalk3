@@ -63,7 +63,7 @@ logtalk_load(pardicts(loader)).
 Access individual parameters:
 
 ```logtalk
-obj(_{m:2,n:3})::sum(Sum),
+obj(_{m:2,n:3})::sum(Sum).
 ```
 
 <!--
@@ -71,7 +71,7 @@ Sum == 5.
 -->
 
 ```logtalk
-obj(_{m:2,n:3})::product(Sum),
+obj(_{m:2,n:3})::product(Sum).
 ```
 
 <!--

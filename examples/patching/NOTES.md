@@ -74,7 +74,7 @@ Category = patch, Object = broken.
 -->
 
 Verify the patch in the `patch` category for the predicate `is_proper_list/1`
-defined in the object "broken":
+defined in the object `broken`:
 
 ```logtalk
 broken::is_proper_list([1,2,3]).
@@ -110,7 +110,7 @@ broken::last(_, _, _).
 <!--
     permission_error(access, private_predicate, last/3),
     broken::last(_, _, _),
-    user)
+    user
 -->
 
 Verify the patch in the `patch` category for the wrong scope of the `last/3`

@@ -82,11 +82,11 @@ Y = 3.
 -->
 
 ```logtalk
-[]::member(X).
+\+ []::member(X).
 ```
 
 <!--
-false.
+true.
 -->
 
 Some queries using the time and date parametric objects:

@@ -77,6 +77,7 @@ Syntax error: Operator expected
 You must use instead functor notation:
 
 ```logtalk
+%%table
 double::double(I, J).
 ```
 
@@ -98,6 +99,7 @@ true.
 -->
 
 ```logtalk
+%%table
 triple::triple(I, J).
 ```
 
@@ -135,7 +137,9 @@ You must use instead functor notation:
 ```logtalk
 %%table
 graph1::edge(N1, N2).
+```
 
+<!--
 N1 = a, N2 = b ;
 N1 = a, N2 = c ;
 N1 = b, N2 = d ;

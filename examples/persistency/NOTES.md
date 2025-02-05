@@ -61,21 +61,17 @@ true.
 No initial state:
 
 ```logtalk
-persistency::state(S).
-no
-
-Add some terms:
-
-```logtalk
-persistency::add(a).
+\+ persistency::state(_).
 ```
 
 <!--
 true.
 -->
 
+Add some terms:
+
 ```logtalk
-persistency::add(b).
+persistency::(add(a), add(b)).
 ```
 
 <!--
@@ -157,6 +153,7 @@ Halt the process:
 
 ```logtalk
 halt.
+```
 
 Restart Logtalk and reload:
 

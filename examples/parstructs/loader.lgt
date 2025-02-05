@@ -23,7 +23,7 @@
 
 	:- initialization((
 		logtalk_load(parstructs_hook, [optimize(on)]),
-		logtalk_load(source, [optimize(on)])
+		logtalk_load(source, [optimize(on), [hook(parstructs_hook)]])
 	)).
 
 :- else.
