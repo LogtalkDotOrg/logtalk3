@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2024-12-07,
+		date is 2025-02-04,
 		comment is 'Predicates for generating graph files in the DOT language (version 2.36.0 or later).'
 	]).
 
@@ -274,8 +274,8 @@
 	edge_arrow_filled(instantiates_class,     triangle, true).
 	edge_arrow_filled(specializes_class,      triangle, false).
 	edge_arrow_filled(implements_protocol,    circle,   true).
-	edge_arrow_filled(imports_category,       arrow,    true).
-	edge_arrow_filled(complements_object,     arrow,    true).
+	edge_arrow_filled(imports_category,       box,      true).
+	edge_arrow_filled(complements_object,     box,      false).
 	% multifile predicates
 	edge_arrow_filled(provides_clauses,       circle,   true).
 	% cross-referencing predicate calls

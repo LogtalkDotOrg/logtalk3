@@ -181,8 +181,8 @@ documentation for details. See also the <code class="docutils literal notranslat
 <code class="docutils literal notranslate"><span class="pre">lgt2svg</span></code> Bash and PowerShell scripts.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>Recent versions of d2 or Graphviz are required for generating diagrams
-in the final formats:</p>
+<p>Recent versions of d2 (0.6.9 or later) or Graphviz are required for
+generating diagrams in the final formats:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://d2lang.com">https://d2lang.com</a></p></li>
 <li><p><a class="reference external" href="https://www.graphviz.org/">https://www.graphviz.org/</a></p></li>
@@ -436,11 +436,10 @@ options.</p>
 </section>
 <section id="supported-graph-languages">
 <h2>Supported graph languages<a class="headerlink" href="#supported-graph-languages" title="Link to this heading"></a></h2>
-<p>Currently only the DOT graph language provides support for all the
-features of the <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool. The d2 graph language supports most,
-but not all, of the features. There’s also preliminary support for
-Mermaid (not loaded by default, as its current version lacks several
-required features for parity with d2 and Graphviz).</p>
+<p>Currently, both DOT and d2 graph languages support all the features of
+the <code class="docutils literal notranslate"><span class="pre">diagrams</span></code> tool. There’s also preliminary support for Mermaid (not
+loaded by default, as its current version lacks several required
+features for parity with d2 and Graphviz).</p>
 <p>The diagrams <code class="docutils literal notranslate"><span class="pre">.d2</span></code> and <code class="docutils literal notranslate"><span class="pre">.dot</span></code> files are created in the current
 directory by default. These files can be easily converted into a
 printable format such as SVG, PDF, or Postscript. Sample helper scripts

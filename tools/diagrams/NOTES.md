@@ -54,8 +54,8 @@ scripts.
 Requirements
 ------------
 
-Recent versions of d2 or Graphviz are required for generating diagrams in
-the final formats:
+Recent versions of d2 (0.6.9 or later) or Graphviz are required for generating
+diagrams in the final formats:
 
 - https://d2lang.com
 - https://www.graphviz.org/
@@ -240,9 +240,8 @@ Note that all the elements above can have captions. See below the diagrams
 Supported graph languages
 -------------------------
 
-Currently only the DOT graph language provides support for all the features
-of the `diagrams` tool. The d2 graph language supports most, but not all,
-of the features. There's also preliminary support for Mermaid (not loaded
+Currently, both DOT and d2 graph languages support all the features of the
+`diagrams` tool. There's also preliminary support for Mermaid (not loaded
 by default, as its current version lacks several required features for parity
 with d2 and Graphviz).
 

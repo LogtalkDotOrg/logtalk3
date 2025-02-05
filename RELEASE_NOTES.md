@@ -33,6 +33,12 @@ dependencies.
 
 * FIXED: Missing developer tools dependency requirements for Ubuntu.
 
+Tools
+-----
+
+* UPDATED: The `diagrams` tool for the new d2 0.6.9 release, which is now the
+minimum version required.
+
 Examples
 --------
 
