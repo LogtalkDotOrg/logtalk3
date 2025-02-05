@@ -99,7 +99,7 @@ object::sum(wrong, Sum).
 Exception: error(type_error(list, wrong), list::check(wrong), object)
 -->
 
-Load the example with the debug statements discarded:
+Reload the example with the debug statements discarded:
 
 ```logtalk
 logtalk_load(debug_hooks(loader_production)).

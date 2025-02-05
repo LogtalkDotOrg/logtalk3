@@ -53,17 +53,7 @@ Start by loading the example:
 logtalk_load(clp_swipl(loader)).
 ```
 
-Change the default term writing depth (SWI-Prolog 7.1.10 or earlier):
-
-```logtalk
-set_prolog_flag(toplevel_print_options, [quoted(true), portray(true), max_depth(50), priority(699)]).
-```
-
-<!--
-true.
--->
-
-Change the default term writing depth (SWI-Prolog 7.1.11 or later):
+Change the default term writing depth:
 
 ```logtalk
 set_prolog_flag(answer_write_options, [quoted(true), portray(true), max_depth(50), priority(699)]).
