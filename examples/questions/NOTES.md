@@ -51,8 +51,7 @@ When running the GUI dialog on the macOS Terminal application, you may get
 a Java error saying that the AWT cannot be started. In alternative, try
 to run the GUI version using either JIProlog or from within the SWI-Prolog
 macOS application instead of using the shell integration script. This issue
-is due to a macOS Java issue that's orthogonal to both SWI-Prolog/YAP and
-Logtalk.
+is due to a macOS Java issue that's orthogonal to both backends and Logtalk.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

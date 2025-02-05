@@ -47,7 +47,10 @@
 
 	:- endif.
 
-:- elif(current_logtalk_flag(prolog_dialect, ji)).
+:- elif((
+	current_logtalk_flag(prolog_dialect, Dialect),
+	(Dialect == ji; Dialect == xvm)
+)).
 
 	:- initialization((
 		logtalk_load(java(loader)),
