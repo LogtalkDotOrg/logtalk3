@@ -52,7 +52,7 @@ logtalk_load(metaclasses(loader)).
 ```
 
 Play and modify the example code to get comfortable using classes and
-instances in Logtalk
+instances in Logtalk.
 
 ```logtalk
 root::new(I).

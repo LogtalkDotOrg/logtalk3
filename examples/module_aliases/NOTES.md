@@ -46,6 +46,12 @@ Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 %versions
 ```
 
+Check that the Prolog backend supports modules:
+
+```logtalk
+current_logtalk_flag(modules, supported).
+```
+
 Start by loading the example:
 
 ```logtalk

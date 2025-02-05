@@ -89,7 +89,7 @@ Start by loading the example:
 logtalk_load(diamonds(loader)).
 ```
 
-First variant of the "diamond problem", defined in the "diamond1" source file:
+First variant of the "diamond problem", defined in the `diamond1.lgt` source file:
 
 ```logtalk
 d1::m.
@@ -101,7 +101,7 @@ Redefinition of method m/0 in object b1
 true.
 -->
 
-Second variant of the "diamond problem", defined in the "diamond2" source file:
+Second variant of the "diamond problem", defined in the `diamond2.lgt` source file:
 
 ```logtalk
 d2::m.
@@ -113,7 +113,7 @@ Redefinition of method m/0 in object c2
 true.
 -->
 
-Third variant of the "diamond problem", defined in the "diamond3" source file:
+Third variant of the "diamond problem", defined in the `diamond3.lgt` source file:
 
 ```logtalk
 d3::b3_m.

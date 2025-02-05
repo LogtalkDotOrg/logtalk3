@@ -115,7 +115,7 @@ exp_private::expand_goal(write(Term), EGoal).
 
 <!--
 EGoal = write(Term).
-->
+-->
 
 The following queries perform similar tests but with the calls to the
 `expand_term/2` (`expand_goal/2`) built-in method being made from within 

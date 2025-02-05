@@ -60,7 +60,7 @@ inlining::predicate_property(a(_,_), inline).
 true.
 -->
 
-List all definition properties of the inlined `a/2` predicate:
+Query the definition properties of the inlined `a/2` predicate:
 
 ```logtalk
 object_property(inlining, defines(a/2, Properties)).

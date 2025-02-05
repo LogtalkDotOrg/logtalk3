@@ -55,7 +55,7 @@ logtalk_load(lambdas(loader)).
 ```
 
 Some sample queries using the `call/N` built-in methods (note that these
-methods are private, hence the use of the context-switching `<</2` control
+methods are private, hence the use of the context-switching `(<<)/2` control
 construct):
 
 ```logtalk
@@ -76,7 +76,7 @@ logtalk << call([Z]>>(call([X,Y]>>(Y is X*X), 5, R), Z is R*R), T).
 T = 625.
 -->
 
-Some sample queries using the "metapredicates" library predicates.
+Some sample queries using the `metapredicates` library predicates.
 
 Checking that all list elements are greater than 3:
 

@@ -66,7 +66,7 @@ Start by loading the example:
 logtalk_load(jpl(loader)).
 ```
 
-Get the Java version by using the getProperty/1 static method:
+Get the Java version by using the `getProperty/1` static method:
 
 ```logtalk
 java('java.lang.System', Version)::getProperty('java.version').
@@ -76,7 +76,7 @@ java('java.lang.System', Version)::getProperty('java.version').
 Version = '1.7.0_51'.
 -->
 
-Get the value of the "pi" constant by accessing the 'PI' class field:
+Get the value of the "pi" constant by accessing the `'PI'` class field:
 
 ```logtalk
 java('java.lang.Math')::get_field('PI', Pi).
@@ -86,7 +86,7 @@ java('java.lang.Math')::get_field('PI', Pi).
 Pi = 3.141592653589793.
 -->
 
-Create a new instance of ArrayList and add some elements to it:
+Create a new instance of `ArrayList` and add some elements to it:
 
 ```logtalk
 java('java.util.ArrayList')::new(ArrayList), java(ArrayList)::(add('Paulo'), add('Carlos'), add('Helena')).

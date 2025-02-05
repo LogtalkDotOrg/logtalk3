@@ -36,6 +36,7 @@ ________________________________________________________________________
 # modules
 
 This example illustrates compilation of Prolog module files as objects.
+It doesn't require that the Prolgo backend supports modules.
 
 Due to the lack of standardization of Prolog module systems, the module 
 files can only a common subset of Prolog module directives. Consult the
