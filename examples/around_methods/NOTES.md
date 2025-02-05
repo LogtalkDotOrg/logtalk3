@@ -36,12 +36,11 @@ ________________________________________________________________________
 # around_methods
 
 This example illustrates how to use a complementing category to define what
-is often described as an "around method". It uses the **experimental** `@/1`
-goal annotation that allows calling the original predicate definition (in
-the patched object) from its new definition in the category. This annotation
-allows the new definition to call some goals, followed by a call to the
-original definition, followed by calls to some more goals, hence the name
-"around method".
+is often described as an "around method". It uses the `@/1` control construct
+that allows calling the original predicate definition (in the patched object)
+from its new definition in the category. This control construct allows the new
+definition to call some goals, followed by a call to the original definition,
+followed by calls to some more goals, hence the name "around method".
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 
@@ -55,7 +54,7 @@ Start by loading the unpatched object:
 logtalk_load(around_methods(bird)).
 ```
 
-Call the unpatched bird::make_sound/0 predicate:
+Call the unpatched `bird::make_sound/0` predicate:
 
 ```logtalk
 bird::make_sound.
@@ -67,13 +66,13 @@ Chirp, chirp!
 true.
 -->
 
-Next load the complementing category defining the patch for the bird::make_sound/0 predicate:
+Next load the complementing category defining the patch for the `bird::make_sound/0` predicate:
 
 ```logtalk
 logtalk_load(around_methods(patch)).
 ```
 
-Call the now patched bird::make_sound/0 predicate:
+Call the now patched `bird::make_sound/0` predicate:
 
 ```logtalk
 bird::make_sound.

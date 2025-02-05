@@ -40,7 +40,7 @@ Some examples have been adapted from public Prolog code or from Prolog
 text books and tutorials and are copyrighted by the respective authors.
 
 These are programming examples, meaning that you should study the source
-files to fully understand them. Note, however, that some examples main
+files to fully understand them. Note, however, that most examples main
 purpose is to illustrate general principles rather than being adequate,
 efficient solutions for deployment code.
 
@@ -51,8 +51,9 @@ The file `tester.lgt` is a loader file that, when loaded, will automatically
 run all the example unit tests. You can automate running all these tests by
 calling the `logtalk_tester` shell script from the command-line (see the
 `scripts/NOTES.md` file for details on how to use with POSIX and Windows
-operating-systems). Type `man logtalk_tester` or `logtalk_tester -h` for
-usage details, including how to select the backend Prolog compiler.
+operating-systems). Type `man logtalk_tester`, `logtalk_tester -h`, or
+`logtalk_tester.ps1 -h` for usage details, including how to select the
+backend Prolog compiler.
 
 
 Opening examples documentation as Jupyter notebooks
@@ -99,9 +100,12 @@ the following file to your `~/.jupyter` directory:
 
 https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/blob/master/logtalk_kernel/logtalk_kernel_config.py
 
+When opening an example `NOTES.md` file as a notebook, also open the
+source files side-by-side for a better understanding of the example.
 
-Short description of the examples
----------------------------------
+
+Examples overview
+-----------------
 
 Follows a short description of each included example (in alphabetical order):
 
@@ -118,7 +122,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `around_methods`  
 	example of defining a complementing category that uses the
-	experimental `@/1` goal annotation to define an "around method"
+	`@/1` control construct to define an "around method"
 
 - `aspects`  
 	example of defining aspects (as in Aspect-Oriented Programming)
