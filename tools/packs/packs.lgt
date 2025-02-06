@@ -23,7 +23,7 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:83:0,
+		version is 0:84:0,
 		author is 'Paulo Moura',
 		date is 2025-02-06,
 		comment is 'Pack handling predicates.'
@@ -1043,7 +1043,7 @@
 		PackObject::license(License),
 		PackObject::home(Home),
 		findall(
-			version(Version, Status, URL, Checksum, Dependencies, Portability),
+			version(Version, Status, URL, Cached, Checksum, Dependencies, Portability),
 			(	PackObject::version(Version, Status0, URL, Checksum, Dependencies, Portability),
 				(	installed(Registry, Pack, Version) ->
 					atom_concat(Status0, '; installed', Status1),
@@ -1052,6 +1052,11 @@
 					;	Status = Status1
 					)
 				;	Status = Status0
+				),
+				pack_archive_path(Registry, Pack, URL, _, Archive),
+				(	file_exists(Archive) ->
+					Cached = cached
+				;	Cached = uncached
 				)
 			),
 			Versions
@@ -2191,14 +2196,7 @@
 		make_directory_path(Path).
 
 	download_archive(Registry, Pack, URL, CheckSum, Options, Archive, IsGitArchive) :-
-		^^logtalk_packs(LogtalkPacks),
-		path_concat(LogtalkPacks, archives, Archives),
-		path_concat(Archives, packs, ArchivesPacks),
-		path_concat(ArchivesPacks, Registry, ArchivesPacksRegistry),
-		path_concat(ArchivesPacksRegistry, Pack, ArchivesPacksRegistryPack),
-		decompose_file_name(URL, _, Basename),
-		path_concat(ArchivesPacksRegistryPack, Basename, Archive0),
-		internal_os_path(Archive0, Archive),
+		pack_archive_path(Registry, Pack, URL, ArchivesPacksRegistryPack, Archive),
 		make_directory_path(ArchivesPacksRegistryPack),
 		(	file_exists(Archive),
 			(	verify_checksum(Pack, Archive, CheckSum, Options) ->
@@ -2256,6 +2254,16 @@
 			^^command(Command, pack_archive_download_failed(Pack, Command)),
 			IsGitArchive = false
 		).
+
+	pack_archive_path(Registry, Pack, URL, ArchivesPacksRegistryPack, Archive) :-
+		^^logtalk_packs(LogtalkPacks),
+		path_concat(LogtalkPacks, archives, Archives),
+		path_concat(Archives, packs, ArchivesPacks),
+		path_concat(ArchivesPacks, Registry, ArchivesPacksRegistry),
+		path_concat(ArchivesPacksRegistry, Pack, ArchivesPacksRegistryPack),
+		decompose_file_name(URL, _, Basename),
+		path_concat(ArchivesPacksRegistryPack, Basename, Archive0),
+		internal_os_path(Archive0, Archive).
 
 	git_archive_url(URL, Remote, Tag) :-
 		decompose_file_name(URL, Remote0, Archive),

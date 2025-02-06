@@ -38,6 +38,9 @@ dependencies.
 Tools
 -----
 
+* IMPROVED: The `packs` tool `describe/1-2` predicates now also inform if a
+pack archive is cached.
+
 * IMPROVED: The `packs` tool to discard an existing pack archive and try to
 download it again in case of a checksum error while installing.
 

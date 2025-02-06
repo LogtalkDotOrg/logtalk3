@@ -22,7 +22,7 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:39:0,
+		version is 0:40:0,
 		author is 'Paulo Moura',
 		date is 2025-02-06,
 		comment is 'Packs default message translations.'
@@ -399,9 +399,10 @@
 		pack_info_version(Version),
 		pack_info(Versions).
 
-	pack_info_version(version(Version, Status, URL, _Checksum, Dependencies, Portability)) -->
+	pack_info_version(version(Version, Status, URL, Cached, _Checksum, Dependencies, Portability)) -->
 		['  ~w (~w)'-[Version, Status], nl],
 		['    URL:          ~w'-[URL], nl],
+		['    Archive:      ~w'-[Cached], nl],
 		['    Dependencies: ~q'-[Dependencies], nl],
 		['    Portability:  ~q'-[Portability], nl].
 
