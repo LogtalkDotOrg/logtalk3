@@ -38,6 +38,9 @@ dependencies.
 Tools
 -----
 
+* IMPROVED: The `packs` tool to discard an existing pack archive and try to
+download it again in case of a checksum error while installing.
+
 * UPDATED: The `diagrams` tool for the new d2 0.6.9 release, which is now the
 minimum version required.
 
@@ -71,14 +74,14 @@ Installers and installation scripts
 * ADDED: Portable Docker image support for configuring the default Prolog
 backend to be used for Jupyter notebooks.
 
+* FIXED: Portable Docker image to install the Jupytext dependency required for
+opening examples documentation as Jupyter notebooks.
+
 * FIXED: The Handbook and the release build scripts to work with both BSD and
 GNU versions of the `sed` command.
 
 * FIXED: The embedding scripts to work with both BSD and GNU versions of the
 `sed` command.
-
-* FIXED: Portable Docker image to install the Jupytext dependency required for
-opening examples documentation as Jupyter notebooks.
 
 
 3.88.0 - January 29, 2025

@@ -23,9 +23,9 @@
 	imports((packs_common, options))).
 
 	:- info([
-		version is 0:82:0,
+		version is 0:83:0,
 		author is 'Paulo Moura',
-		date is 2025-01-23,
+		date is 2025-02-06,
 		comment is 'Pack handling predicates.'
 	]).
 
@@ -935,7 +935,7 @@
 		^^print_readme_file_path(Path).
 
 	install_pack_archive(Registry, Pack, Version, URL, CheckSum, Options) :-
-		download_archive(Registry, Pack, URL, Options, Archive, IsGitArchive),
+		download_archive(Registry, Pack, URL, CheckSum, Options, Archive, IsGitArchive),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
@@ -1751,7 +1751,7 @@
 		).
 
 	check_availability_archive(Registry, Pack, URL, CheckSum, Options) :-
-		download_archive(Registry, Pack, URL, Options, Archive, _),
+		download_archive(Registry, Pack, URL, CheckSum, Options, Archive, _),
 		(	^^option(checksum(true), Options) ->
 			verify_checksum(Pack, Archive, CheckSum, Options)
 		;	true
@@ -2190,7 +2190,7 @@
 		internal_os_path(Path, OSPath),
 		make_directory_path(Path).
 
-	download_archive(Registry, Pack, URL, Options, Archive, IsGitArchive) :-
+	download_archive(Registry, Pack, URL, CheckSum, Options, Archive, IsGitArchive) :-
 		^^logtalk_packs(LogtalkPacks),
 		path_concat(LogtalkPacks, archives, Archives),
 		path_concat(Archives, packs, ArchivesPacks),
@@ -2200,10 +2200,16 @@
 		path_concat(ArchivesPacksRegistryPack, Basename, Archive0),
 		internal_os_path(Archive0, Archive),
 		make_directory_path(ArchivesPacksRegistryPack),
-		(	file_exists(Archive) ->
-			(	git_archive_url(URL, _, _) ->
-				IsGitArchive = true
-			;	IsGitArchive = false
+		(	file_exists(Archive),
+			(	verify_checksum(Pack, Archive, CheckSum, Options) ->
+				(	git_archive_url(URL, _, _) ->
+					IsGitArchive = true
+				;	IsGitArchive = false
+				)
+			;	% assume incomplete download or corrupted archive and try to download again
+				delete_file(Archive),
+				print_message(error, packs, pack_archive_discarded(Pack)),
+				fail
 			)
 		;	atom_concat('file://', File, URL) ->
 			internal_os_path(File, OSFile),

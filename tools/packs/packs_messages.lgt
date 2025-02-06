@@ -22,9 +22,9 @@
 :- category(packs_messages).
 
 	:- info([
-		version is 0:38:0,
+		version is 0:39:0,
 		author is 'Paulo Moura',
-		date is 2024-10-30,
+		date is 2025-02-06,
 		comment is 'Packs default message translations.'
 	]).
 
@@ -347,6 +347,9 @@
 
 	message_tokens(pack_archive_checksum_failed(Pack, Archive)) -->
 		['Pack archive checksum check failed: ~q (~q)'-[Pack, Archive], nl].
+
+	message_tokens(pack_archive_discarded(Pack)) -->
+		['Discarding archive and attempting to download again: ~q'-[Pack], nl].
 
 	message_tokens(pack_signature_download_failed(Pack, Archive)) -->
 		['Pack archive signature download failed: ~q (~q)'-[Pack, Archive], nl].
