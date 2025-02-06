@@ -1055,7 +1055,7 @@
 				),
 				pack_archive_path(Registry, Pack, URL, _, Archive),
 				(	file_exists(Archive) ->
-					Cached = cached
+					Cached = cached(Archive)
 				;	Cached = uncached
 				)
 			),

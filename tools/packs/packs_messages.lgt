@@ -402,7 +402,10 @@
 	pack_info_version(version(Version, Status, URL, Cached, _Checksum, Dependencies, Portability)) -->
 		['  ~w (~w)'-[Version, Status], nl],
 		['    URL:          ~w'-[URL], nl],
-		['    Archive:      ~w'-[Cached], nl],
+		(	{Cached = cached(Archive)} ->
+			['    Archive:      cached (~w)'-[Archive], nl]
+		;	['    Archive:      uncached'-[], nl]
+		),
 		['    Dependencies: ~q'-[Dependencies], nl],
 		['    Portability:  ~q'-[Portability], nl].
 
