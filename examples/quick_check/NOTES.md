@@ -56,6 +56,12 @@ at the top-level interpreter:
 logtalk_load(quick_check(loader)).
 ```
 
+Ensure that QuickCheck warnings are printed:
+
+```logtalk
+set_logtalk_flag(report, warnings).
+```
+
 Check that reversing a list twice gives back the same list:
 
 ```logtalk
