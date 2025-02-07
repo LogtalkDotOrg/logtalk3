@@ -95,7 +95,7 @@ Send the next batch of messages:
 
 ```logtalk
 pmq::(send(8-fun), send(11-have), send(3-':-)')).
--->
+```
 
 Retrieve the current messages sorted by priority:
 

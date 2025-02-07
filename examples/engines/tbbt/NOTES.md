@@ -38,11 +38,14 @@ ________________________________________________________________________
 This example implements the rock, paper, scissors, lizard, Spock game played
 in the "The Big Bang Theory" sitcom using one threaded engine per player. See:
 
-	http://www.samkass.com/theories/RPSSL.html
+http://www.samkass.com/theories/RPSSL.html
 
-Currently this example requires ECLiPSe or SWI-Prolog. It should run also on
-XSB and YAP if and when these systems fix the bugs in their multi-threading
+Currently this example requires ECLiPSe, SWI-Prolog, or XVM. It should run also
+on XSB and YAP if and when these systems fix the bugs in their multi-threading
 support.
+
+When using XVM as the backend, this example must be run from the top-level
+interpreter.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

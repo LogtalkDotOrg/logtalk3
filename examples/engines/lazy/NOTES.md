@@ -43,6 +43,7 @@ This folder contains an example of using threaded engines and coroutining to
 implement a lazy alternative to the standard `findall/3` meta-predicate. This
 lazy version is described in the following paper:
 
+```bibtex
 @inbook{Tarau2000,
 	author="Tarau, Paul",
 	editor="Lloyd, John and Dahl, Veronica and Furbach, Ulrich and Kerber, Manfred and Lau, Kung-Kiu and Palamidessi, Catuscia and Pereira, Lu{\'i}s Moniz and Sagiv, Yehoshua and Stuckey, Peter J.",
@@ -56,6 +57,7 @@ lazy version is described in the following paper:
 	doi="10.1007/3-540-44957-4_82",
 	url="http://dx.doi.org/10.1007/3-540-44957-4_82"
 }
+```
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

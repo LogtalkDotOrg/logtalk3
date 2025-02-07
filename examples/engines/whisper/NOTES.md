@@ -36,9 +36,12 @@ ________________________________________________________________________
 # engines - whisper
 
 This example creates a chain of engines passing a term. The original example was
-written by Jan Wielemaker. Currently it runs on ECLiPSe and SWI-Prolog. It should
-run also on XSB and YAP if and when these systems bugs with coroutining and/or
-threads get fixed.
+written by Jan Wielemaker. Currently it runs on ECLiPSe, SWI-Prolog, and XVM. It
+should run also on XSB and YAP if and when these systems bugs with coroutining
+and/or threads get fixed.
+
+When using XVM as the backend, this example must be run from the top-level
+interpreter.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 
@@ -59,6 +62,8 @@ whisper::whisper(0, 1, Final).
 ```
 
 <!--
+1
+
 Final = 1.
 -->
 
@@ -67,6 +72,9 @@ whisper::whisper(1, 1, Final).
 ```
 
 <!--
+Sending 2 to engine 2
+2
+
 Final = 2.
 -->
 
@@ -75,6 +83,11 @@ whisper::whisper(3, 1, Final).
 ```
 
 <!--
+Sending 2 to engine 6
+Sending 3 to engine 5
+Sending 4 to engine 4
+4
+
 Final = 4.
 -->
 
@@ -83,5 +96,12 @@ whisper::whisper(5, 3, Final).
 ```
 
 <!--
+Sending 4 to engine 12
+Sending 5 to engine 11
+Sending 6 to engine 10
+Sending 7 to engine 9
+Sending 8 to engine 8
+8
+
 Final = 8.
 -->

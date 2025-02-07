@@ -42,11 +42,13 @@ these systems bugs with coroutining and/or threads get fixed.
 This folder contains examples of interactors implemented using threaded engines.
 Interactors are described in the paper:
 
+```bibtex
 @article{Tarau2000,
 	author="Paul Tarau",
 	title="Architecture and Implementation Aspects of the Lean Prolog System",
 	url="http://www.cse.unt.edu/~tarau/research/LeanProlog/ArchitectureOfLeanProlog.pdf"
 }
+```
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

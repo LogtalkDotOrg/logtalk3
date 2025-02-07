@@ -42,6 +42,7 @@ these systems bugs with coroutining and/or threads get fixed.
 This folder contains examples of fluents implemented using threaded engines.
 Fluents are described in the paper:
 
+```bibtex
 @inbook{Tarau2000,
 	author="Tarau, Paul",
 	editor="Lloyd, John and Dahl, Veronica and Furbach, Ulrich and Kerber, Manfred and Lau, Kung-Kiu and Palamidessi, Catuscia and Pereira, Lu{\'i}s Moniz and Sagiv, Yehoshua and Stuckey, Peter J.",
@@ -55,6 +56,7 @@ Fluents are described in the paper:
 	doi="10.1007/3-540-44957-4_82",
 	url="http://dx.doi.org/10.1007/3-540-44957-4_82"
 }
+```
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 
@@ -102,17 +104,17 @@ After exhausting the fluent answers, subsequent queries fail
 until the threaded engine implementing the fluent is destroyed:
 
 ```logtalk
-fluents::next(_).
+\+ fluents::next(_).
 ```
 
 <!--
-false.
+true.
 -->
 
 ```logtalk
-fluents::next(_).
+\+ fluents::next(_).
 ```
 
 <!--
-false.
+true.
 -->
