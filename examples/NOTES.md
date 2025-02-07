@@ -92,7 +92,13 @@ https://open-vsx.org/extension/parmentelat/vscode-jupytext
 
 In the case of VSCode, you may need to download the extension `.vsix`
 file from the page above and install it manually (using the command
-"View" > "Command Palette" > "Extensions: Install from VSIX...").
+"View" > "Command Palette" > "Extensions: Install from VSIX..."). If
+you edit the Jupytext setting for languages and add `markdown` to the
+list, you can then right-click on the `NOTES.md` files and select the
+option "Open as a Jupyter Notebook". Id you also add `logtalk` to the
+languages setting, the same option will be available for Logtalk source
+files and applicable when they are scripts written using the percent
+format.
 
 To configure the Prolog backend to be use when opening the examples
 `NOTES.md` files as notebooks (default is SWI-Prolog), copy and edit
