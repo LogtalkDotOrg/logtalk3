@@ -35,14 +35,20 @@ ________________________________________________________________________
 
 # threads - sync
 
-This folder contains two simple multi-threading examples illustrating the 
-use of the `synchronized/1` predicate directive to cope with methods that 
+This folder contains two simple multi-threading examples illustrating the
+use of the `synchronized/1` predicate directive to cope with methods that
 have side effects.
 
 The `slow_print` example was originally coded for a Rosetta Code contribution
 available at:
 
 https://rosettacode.org/wiki/Mutex#Logtalk
+
+This example should preferably be run from the top-level instead of as
+a notebook to observe the threads output.
+
+When using XVM as the backend, this example must be run from the top-level
+interpreter.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 
@@ -56,10 +62,10 @@ Start by loading the example:
 logtalk_load(sync(loader)).
 ```
 
-Slow print text:
+Slow print text  (skip if running as a notebook):
 
 ```logtalk
-slow_print::start.
+(current_object(jupyter) -> true; slow_print::start).
 ```
 
 <!--

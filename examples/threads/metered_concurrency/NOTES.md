@@ -42,6 +42,9 @@ For more information see:
 
 	https://rosettacode.org/wiki/Metered_concurrency#Logtalk
 
+When using XVM as the backend, this example must be run from the top-level
+interpreter.
+
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 
 ```logtalk

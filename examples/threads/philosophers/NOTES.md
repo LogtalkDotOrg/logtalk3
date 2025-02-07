@@ -35,18 +35,24 @@ ________________________________________________________________________
 
 # threads - philosophers
 
-This folder contains a Logtalk implementation of the classical "dining 
+This folder contains a Logtalk implementation of the classical "dining
 philosophers" multi-threading problem.
 
 For more information, consult e.g. the following URL:
 
-	http://en.wikipedia.org/wiki/Dining_philosophers_problem
+http://en.wikipedia.org/wiki/Dining_philosophers_problem
 
-Two different implementations are provided, both using the same solution for 
-avoiding deadlock (which is having one philosopher picking its chopsticks 
-in a different order from the other philosophers; see the URL above for 
-details): one implementation uses a category and five philosopher objects 
+Two different implementations are provided, both using the same solution for
+avoiding deadlock (which is having one philosopher picking its chopsticks
+in a different order from the other philosophers; see the URL above for
+details): one implementation uses a category and five philosopher objects
 while the second implementation uses a parametric object.
+
+This example should preferably be run from the top-level instead of as
+a notebook to observe the threads output.
+
+When using XVM as the backend, this example must be run from the top-level
+interpreter.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

@@ -43,6 +43,9 @@ For more information see:
 
 https://rosettacode.org/wiki/Checkpoint_synchronization
 
+When using XVM as the backend, this example must be run from the top-level
+interpreter.
+
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 
 ```logtalk
