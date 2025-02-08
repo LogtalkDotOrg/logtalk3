@@ -35,11 +35,11 @@ ________________________________________________________________________
 
 # super_calls
 
-This simple programming example illustrates that "super" calls (the (^^)/1
-control construct) preserve the value of "self" when calling an inherited
-definition. This allows any `::/1` goal in the called inherited definition
+This simple programming example illustrates that _super_ calls (the `(^^)/1`
+control construct) preserve the value of _self_ when calling an inherited
+definition. This allows any `(::)/1` goal in the called inherited definition
 to work as expected in the correct context. This example also illustrates
-that "super" calls require dynamic binding when the called predicate is
+that _super_ calls require dynamic binding when the called predicate is
 dynamic.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):

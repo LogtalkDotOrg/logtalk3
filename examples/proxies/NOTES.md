@@ -137,7 +137,7 @@ Areas = [4.75291, 43.2412, 0.477836, 103.508, 217.468].
 
 Some example queries for backend Prolog compilers implementing the 
 `time/1` timing predicate (e.g., SWI-Prolog or YAP; the adapter files
-for these two systems ensure that a ::/2 goal in the argument of the
+for these two systems ensure that a `(::)/2` goal in the argument of the
 `time/1` predicate is compiled prior to calling it so that we benchmark
 the code instead of the compiler).
 

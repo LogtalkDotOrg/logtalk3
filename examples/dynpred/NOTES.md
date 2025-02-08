@@ -61,8 +61,8 @@ The following objects are defined:
 	object)
 
 In addition, the file `categories.lgt` illustrates how to define category
-predicates that handle dynamic predicates in the context of "this" and in
-the context of "self".
+predicates that handle dynamic predicates in the context of _this_ and in
+the context of _self_.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

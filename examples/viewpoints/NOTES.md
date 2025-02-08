@@ -43,7 +43,7 @@ Applications" published by Springer.
 This prototype programming example illustrates how we can do both property 
 sharing and value sharing in Logtalk by calling the built-in predicate 
 modification methods `asserta/1`, `assertz/1`, and `retract/1` either in
-the context of "this" or in the context of "self".
+the context of _this_ or in the context of _self_.
 
 In this example we have a prototype, `joe_person`, containing general data
 on Joe such as its age, name, or address, and four descendant prototypes

@@ -38,7 +38,7 @@ ________________________________________________________________________
 This folder contains an example of using a category to define a simple 
 logging support for objects. This example illustrates how to define in 
 a category a set of predicates that handle a dynamic predicate in the 
-context of "this".
+context of _this_.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 

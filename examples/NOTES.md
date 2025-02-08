@@ -521,14 +521,14 @@ Follows a short description of each included example (in alphabetical order):
 	implementation of meta-predicates
 
 - `self_messages`  
-	simple example illustrating the semantics of messages to "self"
+	simple example illustrating the semantics of messages to _self_
 
 - `self_vs_super`  
 	simple example illustrating the semantics of calling an inherited
-	meta-predicate using a message to "self" versus using a "super" call
+	meta-predicate using a message to _self_ versus using a _super_ call
 
 - `self_vs_this`  
-	simple example illustrating the difference between "self" and "this"
+	simple example illustrating the difference between _self_ and _this_
 
 - `serialization`  
 	simple example of serializing objects to a file
@@ -544,8 +544,8 @@ Follows a short description of each included example (in alphabetical order):
 	example of using the library list zippers
 
 - `super_calls`  
-	simple example illustrating that "super" calls preserve the value
-	of "self"
+	simple example illustrating that _super_ calls preserve the value
+	of _self_
 
 - `symbiosis`
 	examples of using Prolog non-standard built-in meta-predicates

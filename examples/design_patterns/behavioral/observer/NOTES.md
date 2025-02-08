@@ -53,7 +53,7 @@ observers. The observer registry is global and subject predicates
 don't need to be modified to notify observers. A possible limitation
 is that events are only generated for public messages, i.e. for
 messages using the `(::)/2` control construct. Messages to self, which
-use the `::/1` control construct, don't generate events. This
+use the `(::)/1` control construct, don't generate events. This
 restriction exists to ensure that events cannot be used to break
 encapsulation. When this limitation is an issue, note that the
 Logtalk standard library includes an implementation of the Smalltalk

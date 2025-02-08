@@ -78,7 +78,7 @@ ack::ack(3, 4, V).
 V = 125.
 -->
 
-Sample queries for backends implementing the time/1 predicate. E.g.,
+Sample queries for backends implementing the `time/1` predicate. E.g.,
 SWI-Prolog, Trealla Prolog, XVM, or YAP. The adapter files for SWI-Prolog
 and YAP ensure that a `(::)/2` goal in the argument of the `time/1`
 meta-predicate is compiled prior to calling it:

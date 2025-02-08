@@ -45,7 +45,7 @@ Description:
 This pattern can be used with both classes and prototypes.
 
 The key for implementing this pattern is the *message to self* control
-construct, `::/1`. It allows a predicate implementing an algorithm to
+construct, `(::)/1`. It allows a predicate implementing an algorithm to
 call the predicates implementing the algorithm steps defined in descendant
 objects. It also allows easy definition of default definitions for the
 algorithm steps that can be inherited, redefined, or specialized in the

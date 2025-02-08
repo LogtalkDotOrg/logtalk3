@@ -69,7 +69,7 @@ This example is made of four loader files and five source files:
 - `category.lgt`  
 	contains a single predicate used when comparing performance of
 	calls to imported category predicates using direct calls and using 
-	messages to "self"
+	messages to _self_
 - `maze.lgt`  
 	contains a simple maze search problem using a depth-first strategy
 	with loop detection

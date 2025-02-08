@@ -36,7 +36,7 @@ ________________________________________________________________________
 # self_messages
 
 This simple programming example illustrates the semantics of messages
-to _self_ (using the `::/1` control construct), i.e. to the object that
+to _self_ (using the `(::)/1` control construct), i.e. to the object that
 received the message being processed.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):

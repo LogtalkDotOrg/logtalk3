@@ -60,7 +60,7 @@ Defining meta-interpreters as categories allows the use of the built-in
 predicate `clause/2` to access the clauses of object predicates without 
 forcing these predicates to be declared public or protected. Within a 
 category, calls to the built-in predicate `clause/2` retrieve clauses
-in "this", i.e. in the database of the object importing the category. 
+in _this_, i.e., in the database of the object importing the category. 
 
 Counting the number of resolution steps can be applied to a naive
 implementation of list reversing for computing LIPS (logical inferences
