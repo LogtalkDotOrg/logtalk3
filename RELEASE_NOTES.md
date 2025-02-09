@@ -50,6 +50,10 @@ minimum version required.
 Examples
 --------
 
+* ADDED: New `jupyter` example illustrating how to write source files that
+can be interpreted as scripts and open as Jupyter notebooks using the Jupytext
+package.
+
 * IMPROVED: Instructions on how to run the examples documentation as Jupyter
 notebooks.
 
