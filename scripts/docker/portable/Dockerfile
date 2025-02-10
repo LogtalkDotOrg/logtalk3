@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on February 2, 2025
+##   Last updated on February 10, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -53,186 +53,218 @@ ENV INFOPATH=$LOGTALKHOME/docs:$LOGTALKHOME/manuals:
 WORKDIR /downloads
 
 # Install Logtalk developer tools dependencies
-RUN apt-get update && apt-get install --no-install-recommends -y \
-    curl \
-    direnv \
-    fop \
-    git \
-    gnupg2 \
-    graphviz \
-    info \
-    libarchive-tools \
-    python3-pip \
-    software-properties-common \
-    texinfo \
-    texlive \
-    xsltproc \
-&& rm -rf /var/lib/apt/lists/*
-RUN apt-add-repository ppa:qameta/allure \
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y \
+        curl \
+        direnv \
+        fop \
+        git \
+        gnupg2 \
+        graphviz \
+        info \
+        libarchive-tools \
+        python3-pip \
+        software-properties-common \
+        texinfo \
+        texlive \
+        xsltproc \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-add-repository ppa:qameta/allure \
     && apt-get install --no-install-recommends -y allure \
-    && add-apt-repository --remove ppa:qameta/allure
-RUN python3 -m pip install pygments==2.19.1
-RUN python3 -m pip install sphinx==7.4.7
-RUN python3 -m pip install sphinx_rtd_theme==2.0.0
-RUN python3 -m pip install sphinxcontrib-spelling==8.0.1
+    && add-apt-repository --remove ppa:qameta/allure \
+    && python3 -m pip install pygments==2.19.1 \
+    && python3 -m pip install sphinx==7.4.7 \
+    && python3 -m pip install sphinx_rtd_theme==2.0.0 \
+    && python3 -m pip install sphinxcontrib-spelling==8.0.1
 
 # Install Jupyter and the Logtalk kernel
-RUN python3 -m pip install --upgrade jupyter_core
-RUN python3 -m pip install --upgrade jupyterlab
-RUN python3 -m pip install --upgrade notebook
-RUN python3 -m pip install --upgrade jupytext
-RUN curl -sOL https://logtalk.org/files/python/jupytext-1.16.6-py3-none-any.whl
-RUN python3 -m pip install --force-reinstall jupytext-1.16.6-py3-none-any.whl
-RUN rm -f jupytext-1.16.6-py3-none-any.whl
-RUN python3 -m pip install --upgrade logtalk-jupyter-kernel
-RUN python3 -m logtalk_kernel.install
-RUN mkdir -p /root/.jupyter
-RUN cd /root/.jupyter && curl -O https://raw.githubusercontent.com/LogtalkDotOrg/logtalk-jupyter-kernel/master/logtalk_kernel/logtalk_kernel_config.py
+RUN python3 -m pip install --upgrade jupyter_core \
+    && python3 -m pip install --upgrade jupyterlab \
+    && python3 -m pip install --upgrade notebook \
+    && python3 -m pip install --upgrade jupytext \
+    && python3 -m pip install --upgrade logtalk-jupyter-kernel \
+    && python3 -m logtalk_kernel.install \
+    && mkdir -p /root/.jupyter \
+    && cd /root/.jupyter \
+    && curl -O https://raw.githubusercontent.com/LogtalkDotOrg/logtalk-jupyter-kernel/master/logtalk_kernel/logtalk_kernel_config.py
 
 # Install backend dependencies
-RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install \
-    tzdata \
-&& rm -rf /var/lib/apt/lists/*
-RUN apt-get update && apt-get install --no-install-recommends -y \
-    build-essential \
-    cmake \
-    default-jdk \
-    junit4 \
-    libarchive-dev \
-    libdb-dev \
-    libedit-dev \
-    libffi-dev \
-    libgmp-dev \
-    libgoogle-perftools-dev \
-    libice-dev \
-    libjpeg-dev \
-    libossp-uuid-dev \
-    libpcre2-dev \
-    libreadline-dev \
-    libssl-dev \
-    libxext-dev \
-    libxft-dev \
-    libxinerama-dev \
-    libxpm-dev \
-    libxt-dev \
-    libyaml-dev \
-    nano \
-    ncurses-dev \
-    ninja-build \
-    pandoc \
-    pkg-config \
-    rlwrap \
-    tcl \
-    tk \
-    unixodbc-dev \
-    xxd \
-    zlib1g-dev \
-&& rm -rf /var/lib/apt/lists/*
+RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install tzdata \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get update \
+    && apt-get install --no-install-recommends -y \
+        build-essential \
+        cmake \
+        default-jdk \
+        junit4 \
+        libarchive-dev \
+        libdb-dev \
+        libedit-dev \
+        libffi-dev \
+        libgmp-dev \
+        libgoogle-perftools-dev \
+        libice-dev \
+        libjpeg-dev \
+        libossp-uuid-dev \
+        libpcre2-dev \
+        libreadline-dev \
+        libssl-dev \
+        libxext-dev \
+        libxft-dev \
+        libxinerama-dev \
+        libxpm-dev \
+        libxt-dev \
+        libyaml-dev \
+        nano \
+        ncurses-dev \
+        ninja-build \
+        pandoc \
+        pkg-config \
+        rlwrap \
+        tcl \
+        tk \
+        unixodbc-dev \
+        xxd \
+        zlib1g-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install Logtalk
-RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz
-RUN logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local
-RUN rm -rf logtalk3-${LOGTALK_VERSION}
-# Create the LOGTALKUSER directory for the root user
-RUN logtalk_user_setup
+# Install Logtalk and create the LOGTALKUSER directory for the root user
+RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz \
+    && logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local \
+    && rm -rf logtalk3-${LOGTALK_VERSION} \
+    && logtalk_user_setup
+
 # Download and install the Texinfo files for the latest stable version
-RUN cd /root/logtalk/manuals && curl -O https://logtalk.org/manuals/TheLogtalkHandbook-${LOGTALK_TEXINFO_VERSION}.info
-RUN cd /root/logtalk/docs && curl -O https://logtalk.org/docs/LogtalkAPIs-${LOGTALK_TEXINFO_VERSION}.info
+WORKDIR /root/logtalk/manuals
+RUN curl -O https://logtalk.org/manuals/TheLogtalkHandbook-${LOGTALK_TEXINFO_VERSION}.info \
+    && cd /root/logtalk/docs \
+    && curl -O https://logtalk.org/docs/LogtalkAPIs-${LOGTALK_TEXINFO_VERSION}.info
+
+# Install d2
+WORKDIR /downloads
+RUN curl -fsSLO https://github.com/terrastruct/d2/releases/download/v0.6.9/d2-v0.6.9-linux-amd64.tar.gz \
+    && tar -xzf d2-v0.6.9-linux-amd64.tar.gz \
+    && make -sC "d2-v0.6.9" install \
+    && rm -rf d2-v0.6.9-linux-amd64.tar.gz
 
 # Install B-Prolog
 WORKDIR /downloads
-RUN if [ "$B_VERSION" != "none" ] ; then curl -sL http://www.picat-lang.org/bprolog/download/bp${B_VERSION}_linux64.tar.gz | tar xz ; fi
+RUN if [ "$B_VERSION" != "none" ] ; then \
+        curl -sL http://www.picat-lang.org/bprolog/download/bp${B_VERSION}_linux64.tar.gz | tar xz ; \
+    fi
 ENV PATH=$PATH:/downloads/BProlog/
 
 # Install Ciao Prolog
 WORKDIR /downloads
-RUN if [ "$CIAO_VERSION" != "none" ] ; then git clone --depth 1 --branch ${CIAO_VERSION} https://github.com/ciao-lang/ciao ; fi
-WORKDIR ciao
-RUN if [ "$CIAO_VERSION" != "none" ] ; then ./ciao-boot.sh global-install && ./ciao-boot.sh realclean; fi
-RUN rm -rf /downloads/ciao
+RUN if [ "$CIAO_VERSION" != "none" ] ; then \
+        git clone --depth 1 --branch ${CIAO_VERSION} https://github.com/ciao-lang/ciao \
+        && cd ciao \
+        && ./ciao-boot.sh global-install && ./ciao-boot.sh realclean \
+        && rm -rf /downloads/ciao ; \
+    fi
 
 # Install CxProlog
 WORKDIR /downloads
-RUN if [ "$CX_VERSION" != "none" ] ; then curl -sL http://ctp.di.fct.unl.pt/~amd/cxprolog/cxunix/cxprolog-${CX_VERSION}.src.tgz | tar xz ; fi
-WORKDIR cxprolog-${CX_VERSION}
-RUN if [ "$CX_VERSION" != "none" ] ; then make install && make clean ; fi
-RUN rm -rf /downloads/cxprolog-${CX_VERSION}
+RUN if [ "$CX_VERSION" != "none" ] ; then \
+        curl -sL http://ctp.di.fct.unl.pt/~amd/cxprolog/cxunix/cxprolog-${CX_VERSION}.src.tgz | tar xz \
+        && cd cxprolog-${CX_VERSION} \
+        && make install && make clean \
+        && rm -rf /downloads/cxprolog-${CX_VERSION} ; \
+    fi
 
 # Install ECLiPSe
 WORKDIR /downloads/eclipse
-RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_basic.tgz ; fi
-RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_doc.tgz ; fi
-RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/UNPACK ; fi
-RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then chmod a+x UNPACK ; fi
-RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then ./UNPACK ; fi
-RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then echo -n "\n\n\n\n\n\n" | ./RUNME ; fi
+RUN if [ "$ECLIPSE_VERSION" != "none" ] ; then \
+        curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_basic.tgz \
+        && curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/eclipse_doc.tgz \
+        && curl -O http://eclipseclp.org/Distribution/Builds/${ECLIPSE_VERSION}/x86_64_linux/UNPACK \
+        && chmod a+x UNPACK \
+        && ./UNPACK \
+        && echo -n "\n\n\n\n\n\n" | ./RUNME \
+        && rm -f eclipse_basic.tgz eclipse_doc.tgz ; \
+    fi
 ENV PATH=$PATH:/downloads/eclipse/bin/x86_64_linux
-RUN rm eclipse_basic.tgz eclipse_doc.tgz
 
 # Install GNU Prolog
 WORKDIR /downloads
-RUN if [ "$GNU_VERSION" != "none" ] ; then git clone --depth 1 --branch ${GNU_VERSION} https://github.com/didoudiaz/gprolog ; fi
-WORKDIR gprolog/src
-RUN if [ "$GNU_VERSION" != "none" ] ; then ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install && make distclean ; fi
-RUN rm -rf /downloads/gprolog
+RUN if [ "$GNU_VERSION" != "none" ] ; then \
+        git clone --depth 1 --branch ${GNU_VERSION} https://github.com/didoudiaz/gprolog \
+        && cd gprolog/src \
+        && ./configure --prefix=/usr/local --without-doc-dir --without-html-dir && make && make install && make distclean \
+        && rm -rf /downloads/gprolog ; \
+    fi
 
 # Install SWI-Prolog
 WORKDIR /downloads
-RUN if [ "$SWI_VERSION" != "none" ] ; then git clone --depth 1 --branch ${SWI_VERSION} https://github.com/SWI-Prolog/swipl-devel.git ; fi
-WORKDIR swipl-devel
-RUN if [ "$SWI_VERSION" != "none" ] ; then git submodule update --init --depth 1 ; fi
-WORKDIR build
-RUN if [ "$SWI_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. ; fi
-RUN if [ "$SWI_VERSION" != "none" ] ; then ninja && ninja install && ninja clean ; fi
-RUN rm -rf /downloads/swipl-devel
+RUN if [ "$SWI_VERSION" != "none" ] ; then \
+        git clone --depth 1 --branch ${SWI_VERSION} https://github.com/SWI-Prolog/swipl-devel.git \
+        && cd swipl-devel \
+        && git submodule update --init --depth 1 \
+        && mkdir -p build \
+        && cd build \
+        && cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. \
+        && ninja && ninja install && ninja clean \
+        && rm -rf /downloads/swipl-devel ; \
+    fi
 
 # Install Trealla Prolog
 WORKDIR /downloads
-RUN if [ "$TREALLA_VERSION" != "none" ] ; then git clone --depth 1 --branch ${TREALLA_VERSION} https://github.com/trealla-prolog/trealla ; fi
-WORKDIR trealla
-RUN if [ "$TREALLA_VERSION" != "none" ] ; then make clean && make ; fi
+RUN if [ "$TREALLA_VERSION" != "none" ] ; then \
+        git clone --depth 1 --branch ${TREALLA_VERSION} https://github.com/trealla-prolog/trealla \
+        && cd trealla \
+        && make clean && make ; \
+    fi
 ENV PATH=$PATH:/downloads/trealla
 
 # Install XSB
 WORKDIR /downloads
-RUN if [ "$XSB_VERSION" != "none" ] ; then git clone --depth 1 --branch ${XSB_VERSION} https://git.code.sf.net/p/xsb/code xsb ; fi
-RUN if [ "$XSB_VERSION" != "none" ] ; then cd xsb/XSB/build && ./configure && ./makexsb && ./makexsb clean ; fi
+RUN if [ "$XSB_VERSION" != "none" ] ; then \
+        git clone --depth 1 --branch ${XSB_VERSION} https://git.code.sf.net/p/xsb/code xsb \
+        && cd xsb/XSB/build \
+        && ./configure && ./makexsb && ./makexsb clean ; \
+    fi
 ENV PATH=$PATH:/downloads/xsb/XSB/bin
 
 # Install YAP
 WORKDIR /downloads
-RUN if [ "$YAP_VERSION" != "none" ] ; then git clone --depth 1 --branch ${YAP_VERSION} https://github.com/vscosta/yap ; fi
-WORKDIR yap/build
-RUN if [ "$YAP_VERSION" != "none" ] ; then cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. && make && make install && make clean ; fi
-RUN rm -rf /downloads/yap
+RUN if [ "$YAP_VERSION" != "none" ] ; then \
+        git clone --depth 1 --branch ${YAP_VERSION} https://github.com/vscosta/yap \
+        && mkdir -p yap/build \
+        && cd yap/build \
+        && cmake -DCMAKE_INSTALL_PREFIX=/usr/local .. \
+        && make && make install && make clean \
+        && rm -rf /downloads/yap ; \
+    fi
 
 # Add the Logtalk environment variables to .bashrc and .profile
-RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.bashrc
-RUN echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.bashrc
-RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.profile
-RUN echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.profile
+RUN echo "export LOGTALKUSER=/root/logtalk" >> ~/.bashrc \
+    && echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.bashrc \
+    && echo "export LOGTALKUSER=/root/logtalk" >> ~/.profile \
+    && echo "export LOGTALKHOME=/usr/local/share/logtalk" >> ~/.profile
 
 # Define locales (required e.g. by Sphinx)
-RUN apt-get update && apt-get install --no-install-recommends -y \
-    locales \
-    locales-all \
-&& rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y locales locales-all \
+    && rm -rf /var/lib/apt/lists/*
 ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
 
 # Install support for man pages
-RUN sed -i 's:^path-exclude=/usr/share/man:#path-exclude=/usr/share/man:' /etc/dpkg/dpkg.cfg.d/excludes
-RUN apt-get update && apt --yes upgrade && apt-get install -y \
+RUN sed -i 's:^path-exclude=/usr/share/man:#path-exclude=/usr/share/man:' /etc/dpkg/dpkg.cfg.d/excludes \
+    && apt-get update \
+    && apt-get --yes upgrade \
+    && apt-get install --no-install-recommends -y \
         apt-utils \
         dialog \
         manpages \
         manpages-posix \
-        man-db
-RUN rm -f /usr/bin/man
-RUN dpkg-divert --quiet --remove --rename /usr/bin/man
-RUN rm -f /usr/share/man/man1/sh.1.gz
-RUN dpkg-divert --quiet --remove --rename /usr/share/man/man1/sh.1.gz
+        man-db \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -f /usr/bin/man \
+    && dpkg-divert --quiet --remove --rename /usr/bin/man \
+    && rm -f /usr/share/man/man1/sh.1.gz \
+    && dpkg-divert --quiet --remove --rename /usr/share/man/man1/sh.1.gz
 
 WORKDIR /source
 ENTRYPOINT ["bash"]

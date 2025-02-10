@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 This file is part of Logtalk <https://logtalk.org/>  
-SPDX-FileCopyrightText: 2024 Paulo Moura <pmoura@logtalk.org>  
+SPDX-FileCopyrightText: 2024-2025 Paulo Moura <pmoura@logtalk.org>  
 SPDX-License-Identifier: Apache-2.0
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,8 +24,8 @@ Logtalk Docker image
 Includes Logtalk and a subset of the supported (and experimental/legacy)
 Prolog backends:
 
-- B-Prolog
-- Ciao Prolog
+- B-Prolog (legacy)
+- Ciao Prolog (experimental)
 - CxProlog
 - ECLiPSe
 - GNU Prolog

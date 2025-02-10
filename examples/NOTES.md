@@ -66,23 +66,10 @@ the Jupyter kernel for Logtalk (version 0.15.0 or later):
 https://pypi.org/project/logtalk-jupyter-kernel/  
 https://anaconda.org/conda-forge/logtalk-jupyter-kernel
 
-Plus a fork of Jupytext (pull request pending) that can be installed
-using the command:
+Plus Jupytext (version 1.16.7 or later):
 
-	HATCH_BUILD_HOOKS_ENABLE=true python3 -m pip install git+https://github.com/pmoura/jupytext.git@add_logtalk_language_support
-
-In alternative, download the fork wheel file from:
-
-https://logtalk.org/files/python/jupytext-1.16.6-py3-none-any.whl
-
-Next, run the following commands:
-
-	python3.10 -m pip install jupytext
-	python3.10 -m pip install --force-reinstall jupytext-1.16.6-py3-none-any.whl
-
-I.e., first we install the latest, official version of jupytext (so that
-we get all dependencies installed) and then override it with the fork
-that contains the Logtalk support.
+https://pypi.org/project/jupytext/
+https://anaconda.org/conda-forge/jupytext
 
 You should be able to open the `NOTES.md` files in JupyterLab by
 control-clicking on them and selecting the "Open With" > "Notebook"
@@ -111,6 +98,14 @@ https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/blob/master/logtalk_kern
 
 When opening an example `NOTES.md` file as a notebook, also open the
 source files side-by-side for a better understanding of the example.
+
+
+Opening source files as scripts running as Jupyter notebooks
+------------------------------------------------------------
+
+The Jupytext package mentioned in the previous section also supports writing
+source files that can be interpreted as scripts and open as Jupyter notebooks.
+See the `jupyter` example for details and format examples.
 
 
 Examples overview
@@ -322,6 +317,10 @@ Follows a short description of each included example (in alphabetical order):
 	to use the `java` library minimal abstraction for calling Java
 	from Logtalk using familiar message-sending syntax (requires Logtalk
 	to be run with SWI-Prolog, XVM, YAP, or JIProlog as the backend compiler)
+
+- `jupyter`  
+	example illustrating how to write source files that can be interpreted
+	as scripts and open as Jupyter notebooks using the Jupytext package
 
 - `lambdas`  
 	example of using lambda expressions

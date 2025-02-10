@@ -81,8 +81,12 @@ Installers and installation scripts
 * ADDED: Portable Docker image support for configuring the default Prolog
 backend to be used for Jupyter notebooks.
 
+* IMPROVED: The Portable Docker image Dockerfile for smaller images.
+
 * FIXED: Portable Docker image to install the Jupytext dependency required for
 opening examples documentation as Jupyter notebooks.
+
+* FIXED: Portable Docker image to install d2 for use with the `diagrams` tool.
 
 * FIXED: The Handbook and the release build scripts to work with both BSD and
 GNU versions of the `sed` command.
