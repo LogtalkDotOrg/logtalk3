@@ -77,7 +77,7 @@ option. When using JupyterLab Desktop, you need to install the Logtalk
 kernel and Jupytext in the selected environment by creating a Python
 notebook and running on a cell:
 
-	%pip install logtalk-jupyter-kernel jupytext
+	%pip install --upgrade logtalk-jupyter-kernel jupytext
 
 When running JupyterLab Desktop on macOS, you must start it from the
 terminal so that it inherits the `LOGTALKHOME` and `LOGTALKUSER`
