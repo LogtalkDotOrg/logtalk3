@@ -20,9 +20,9 @@ ________________________________________________________________________
 
 This example contains Logtalk source files that cannot be compiled but
 can be interpreted as scripts and open as Jupyter notebooks using the
-Jupytext package. See the files comments for formatting details. The
-main advantages of writing these scripts as source files, in alternative
-to write notebooks, is to benefit from common text editor features such
-as syntax coloring and code completion. These scripts are also friendlier
-for source code versioning compared with the default JSON representation
-for notebooks.
+Jupytext package (version 1.16.7 or later required). See the files comments
+for formatting details. The main advantages of writing these scripts as
+source files, in alternative to write notebooks, is to benefit from common
+text editor features such as syntax coloring and code completion. These
+scripts are also friendlier for source code versioning compared with the
+default JSON representation for notebooks.
