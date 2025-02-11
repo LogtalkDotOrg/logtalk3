@@ -73,7 +73,20 @@ https://anaconda.org/conda-forge/jupytext
 
 You should be able to open the `NOTES.md` files in JupyterLab by
 control-clicking on them and selecting the "Open With" > "Notebook"
-option. For VSCode and VSCodium, install the following extension:
+option. When using JupyterLab Desktop, you need to install the Logtalk
+kernel and Jupytext in the selected environment by creating a Python
+notebook and running on a cell:
+
+	%pip install logtalk-jupyter-kernel jupytext
+
+When running JupyterLab Desktop on macOS, you must start it from the
+terminal so that it inherits the `LOGTALKHOME` and `LOGTALKUSER`
+environment variable values, which are required to successfully run
+the Logtalk kernel:
+
+	$ open /Applications/JupyterLab.app
+
+For VSCode and VSCodium, install the following extension:
 
 https://open-vsx.org/extension/parmentelat/vscode-jupytext
 
