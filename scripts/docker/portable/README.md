@@ -123,22 +123,28 @@ you're running.
 4. Open the project directory mounted in the container by using the "File" menu
 "Open Folder..." item.
 
-5. Install the "Logtalk for VSCode" extension in the container and configure
-it by going into "Settings", typing "Logtalk" in the search box, and selecting
-"Remote" settings.
+5. Install the "Logtalk Extension Pack" extension in the container. This pack
+includes the "Logtalk for VSCode" extension. Configure it by going into the
+"Settings" pane, typing "Logtalk" in the search box, and selecting "Remote"
+settings.
 
-Note that you can open an integrated terminal in the remote to find the values
-to be used for the configuration of the Logtalk extension. For example:
+The required settings for the "Logtalk for VSCode" extension are:
 
-	echo $LOGTALKHOME
+- "logtalk.home.path" - `/usr/local/share/logtalk`
+- "logtalk.user.path" - `/root/logtalk`
+- "logtalk.backend"
 
-For the value of the `LOGTALKUSER` environment variable, you'll need the full
-path to `~/logtalk`. By default, the container user is `root` and therefore
-the `LOGTALKUSER` environment variable would be set to `/root/logtalk`.
+The backend identifier must be for one of the installed Prolog systems:
 
-Similar for the integration script that you want to use. For example:
-
-	which gplgt
+- B-Prolog: `b`
+- Ciao Prolog: `ciao`
+- CxProlog: `cx`
+- ECLiPSe: `eclipse`
+- GNU Prolog: `gnu`
+- SWI-Prolog: `swi`
+- Trealla Prolog: `trealla`
+- XSB: `xsb`
+- YAP: `yap`
 
 
 Creating Jupyter notebooks
@@ -196,7 +202,7 @@ Running the examples documentation as Jupyter notebooks
 Most of the examples `NOTES.md` files can be open as Jupyter notebooks.
 Open a new integrated terminal in VSCode and run the following commands:
 
-	cd $LOGTALKUSER/examples
+	cd $LOGTALKUSER/examples  
 	jupyter-lab --allow-root --NotebookApp.token='' --NotebookApp.password=''
 
 You can then open the examples `NOTES.md` files as notebooks in JupyterLab by
