@@ -86,13 +86,8 @@ the Logtalk kernel:
 
 	$ open /Applications/JupyterLab.app
 
-For VSCode and VSCodium, install the following extension:
-
-https://open-vsx.org/extension/parmentelat/vscode-jupytext
-
-In the case of VSCode, you may need to download the extension `.vsix`
-file from the page above and install it manually (using the command
-"View" > "Command Palette" > "Extensions: Install from VSIX...").
+For VSCode and VSCodium, the Logtalk extension provides commands to open,
+pair, and sync notebooks.
 
 If you edit the Jupytext setting for languages and add `markdown` to the
 list, you can then right-click on the `NOTES.md` files and select the
