@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.89.0 - February ??, 2025
+3.89.0 - February 14, 2025
 ==========================
 
 Documentation
