@@ -25,7 +25,10 @@ RELEASE NOTES
 3.90.0 - March ??, 2025
 =======================
 
+Installers and installation scripts
+-----------------------------------
 
+* UPDATED: The portable Docker image to include Tau Prolog 0.3.4.
 
 
 3.89.0 - February 14, 2025

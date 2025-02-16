@@ -40,6 +40,7 @@ ARG CX_VERSION=0.98.3
 ARG ECLIPSE_VERSION=7.1_13
 ARG GNU_VERSION=master
 ARG SWI_VERSION=master
+ARG TAU_VERSION=0.3.4
 ARG TREALLA_VERSION=main
 ARG XSB_VERSION=git-origin
 ARG YAP_VERSION=master
@@ -206,6 +207,17 @@ RUN if [ "$SWI_VERSION" != "none" ] ; then \
         && ninja && ninja install && ninja clean \
         && rm -rf /downloads/swipl-devel ; \
     fi
+
+# Install Tau Prolog
+WORKDIR /downloads
+RUN if [ "$TAU_VERSION" != "none" ] ; then \
+        apt-get update \
+        && apt-get install --no-install-recommends -y nodejs npm \
+        && npm install -g readline-sync \
+        && npm install -g tau-prolog@${TAU_VERSION} \
+        && rm -rf /var/lib/apt/lists/* ; \
+    fi
+ENV NODE_PATH=/usr/local/lib/node_modules
 
 # Install Trealla Prolog
 WORKDIR /downloads

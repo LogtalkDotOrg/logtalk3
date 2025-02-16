@@ -30,6 +30,7 @@ Prolog backends:
 - ECLiPSe
 - GNU Prolog
 - SWI-Prolog
+- Tau Prolog
 - Trealla Prolog
 - XSB
 - YAP
@@ -57,6 +58,7 @@ Valid identifiers are as shown in the Logtalk GitHub repository at
 * `ECLIPSE_VERSION` (`7.1_13`)
 * `GNU_VERSION` (`master`)
 * `SWI_VERSION` (`swipl-devel` repo; `master`)
+* `TAU_VERSION` (`0.3.4`)
 * `TREALLA_VERSION` (`main`)
 * `XSB_VERSION` (`git-origin`)
 * `YAP_VERSION` (`master`)
@@ -142,6 +144,7 @@ The backend identifier must be for one of the installed Prolog systems:
 - ECLiPSe: `eclipse`
 - GNU Prolog: `gnu`
 - SWI-Prolog: `swi`
+- Tau Prolog: `tau`
 - Trealla Prolog: `trealla`
 - XSB: `xsb`
 - YAP: `yap`
