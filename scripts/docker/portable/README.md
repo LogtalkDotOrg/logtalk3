@@ -100,7 +100,7 @@ You can then run Logtalk with any of the installed backends. For details, see:
 
 https://github.com/LogtalkDotOrg/logtalk3/blob/master/QUICK_START.md
 
-Adding a ~/project directory as a volume:
+Adding a `~/project` directory as a volume:
 
 	docker run -it --name test -v /home/jdoe/project:/source logtalk3
 

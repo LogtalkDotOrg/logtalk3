@@ -278,5 +278,9 @@ RUN sed -i 's:^path-exclude=/usr/share/man:#path-exclude=/usr/share/man:' /etc/d
     && rm -f /usr/share/man/man1/sh.1.gz \
     && dpkg-divert --quiet --remove --rename /usr/share/man/man1/sh.1.gz
 
+# Copy the README.md into the image
+WORKDIR /root
+ADD README.md /root/README.md
+
 WORKDIR /source
 ENTRYPOINT ["bash"]
