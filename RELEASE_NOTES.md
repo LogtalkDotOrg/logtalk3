@@ -33,6 +33,9 @@ Installers and installation scripts
 
 * UPDATED: The portable Docker image to include Tau Prolog 0.3.4.
 
+* UPDATED: The publishing scripts for the Docker images to also push the
+`README.md` files.
+
 
 3.89.0 - February 14, 2025
 ==========================
