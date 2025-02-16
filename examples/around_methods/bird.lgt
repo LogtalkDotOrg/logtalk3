@@ -28,5 +28,3 @@
 		write('Chirp, chirp!'), nl.
 
 :- end_object.
-
-

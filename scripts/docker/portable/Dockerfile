@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on February 10, 2025
+##   Last updated on February 16, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ VOLUME ["/source"]
 
 # Logtalk
 ARG LOGTALK_VERSION=master
-ARG LOGTALK_TEXINFO_VERSION=3.89.0
+ARG LOGTALK_TEXINFO_VERSION=3.90.0
 # Backends
 ARG B_VERSION=81
 ARG CIAO_VERSION=v1.23.0-m1
