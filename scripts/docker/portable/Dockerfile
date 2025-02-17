@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on February 16, 2025
+##   Last updated on February 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -277,6 +277,16 @@ RUN sed -i 's:^path-exclude=/usr/share/man:#path-exclude=/usr/share/man:' /etc/d
     && dpkg-divert --quiet --remove --rename /usr/bin/man \
     && rm -f /usr/share/man/man1/sh.1.gz \
     && dpkg-divert --quiet --remove --rename /usr/share/man/man1/sh.1.gz
+
+# Install SSH server
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y openssh-server \
+    && rm -rf /var/lib/apt/lists/* \
+    && mkdir -p /var/run/sshd \
+    && echo 'root:portable' | chpasswd \
+    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config \
+    && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+EXPOSE 22
 
 # Copy the README.md into the image
 WORKDIR /root

@@ -42,6 +42,10 @@ Includes all Logtalk developer tool dependencies.
 Includes the `nano` text editor for small editing tasks. For actual
 development, use the VSCode recommended setup as described below.
 
+Includes a SSH server (not running by default) configured with user `root`
+and password `portable`. Can be started using the `service ssh start`
+command.
+
 
 Build arguments and their defaults
 ----------------------------------

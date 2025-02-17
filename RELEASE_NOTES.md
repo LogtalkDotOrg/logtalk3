@@ -31,6 +31,9 @@ Installers and installation scripts
 * ADDED: The `README.md` file for the portable Docker image to the image
 (available as `~/README.md`).
 
+* UPDATED: The portable Docker image to provide a SSH server (not running
+by default).
+
 * UPDATED: The portable Docker image to include Tau Prolog 0.3.4.
 
 * UPDATED: The publishing scripts for the Docker images to also push the
