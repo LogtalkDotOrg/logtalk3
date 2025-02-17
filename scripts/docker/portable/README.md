@@ -18,8 +18,7 @@ limitations under the License.
 ________________________________________________________________________
 
 
-Logtalk Docker image
-====================
+# Logtalk Docker image
 
 Includes Logtalk and a subset of the supported (and experimental/legacy)
 Prolog backends:
@@ -47,8 +46,7 @@ and password `portable`. Can be started using the `service ssh start`
 command.
 
 
-Build arguments and their defaults
-----------------------------------
+## Build arguments and their defaults
 
 * `LOGTALK_VERSION` (`master`)
 * `LOGTALK_TEXINFO_VERSION` (3.90.0)
@@ -72,16 +70,7 @@ websites. Setting the backend version build argument to `none` skips
 installing the backend.
 
 
-Volumes
--------
-
-* `/source`  
-The working directory where Logtalk is started. The source of your project can
-be mounted here.
-
-
-Building a local image
-----------------------
+## Building a local image
 
 With all the backends supported by the Docker file:
 
@@ -93,16 +82,33 @@ system:
 	docker build -t logtalk3 --build-arg B_VERSION=none .
 
 
-Running a container
--------------------
+## Volumes
+
+* `/source`  
+The working directory where Logtalk is started. The source of your project can
+be mounted here.
+
+
+## Running a container
 
 Providing a shell:
 
-	docker run -it --name=test logtalk3
+	docker run -it --name test logtalk3
 
 You can then run Logtalk with any of the installed backends. For details, see:
 
 https://github.com/LogtalkDotOrg/logtalk3/blob/master/QUICK_START.md
+
+Starting the SSH server on a running container:
+
+	docker run -it --name test -p 2222:22 logtalk3
+	docker exec -it test service ssh restart
+
+You can then connect to the server using the command:
+
+	 ssh root@localhost -p 2222
+
+Enter the password `portable` when prompted.
 
 Adding a `~/project` directory as a volume:
 
@@ -111,30 +117,85 @@ Adding a `~/project` directory as a volume:
 Note that you need to use absolute paths for your project directory.
 
 
-Editing your project
---------------------
+## Editing your project
 
-The recommended solution to work in a project using the image resources is
-to mount the project directory and then use VSCode with the "Dev Containers"
-extension installed (note that this extension is not available for VSCodium):
 
-1. Run the Docker image while mounting your project directory as a volume
-(see above; you must use absolute paths).
+### Using VSCode
 
-2. In the VSCode lower left corner, click on the "Open a Remote Window" icon.
+1. Install the "Dev Containers" extension provided by Microsoft (note that
+this extension is not available for VSCodium; see below for an alternative
+solution).
 
-3. Select the option "Attach to Running Container..." and select the container
+2. Create a new container while mounting your project directory.
+
+3. In the VSCode lower left corner, click on the "Open a Remote Window" icon
+and select the option "Attach to Running Container...". Select the container
 you're running.
 
-4. Open the project directory mounted in the container by using the "File" menu
-"Open Folder..." item.
+4. Install the "Logtalk Extension Pack" extension in the container. This pack
+includes the "Logtalk for VSCode" extension. See below how to configure it.
 
-5. Install the "Logtalk Extension Pack" extension in the container. This pack
-includes the "Logtalk for VSCode" extension. Configure it by going into the
-"Settings" pane, typing "Logtalk" in the search box, and selecting "Remote"
-settings.
+5. Open the project directory mounted in the container under `/source` by using
+the "File" menu "Open Folder..." item.
 
-The required settings for the "Logtalk for VSCode" extension are:
+In alternative, open your local project using the "File" menu "Open Folder..."
+item and add dev container configuration files to it:
+
+1. Create a `.devcontainer/devcontainer.json` file at the root of your local
+project and add the following contents to it:
+
+```json
+{
+    "name": "Logtalk",
+    "image": "logtalk/logtalk3-portable:latest",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "logtalkdotorg.logtalk-extension-pack"
+            ],
+            "settings": {
+                "logtalk.home.path": "/usr/local/share/logtalk",
+                "logtalk.user.path": "/root/logtalk",
+                "logtalk.backend": "swi"
+            }
+         }
+    }
+}
+```
+
+In the JSON code above, we use `swi` as the backend. Edit for the backend
+that you intend to use.
+
+2. In the VSCode lower left corner, click on the "Open a Remote Window" icon
+and select the option "Reopen in Container".
+
+3. Install the "Logtalk Extension Pack" extension in the remote. This pack
+includes the "Logtalk for VSCode" extension. See below how to configure it.
+
+
+### Using VSCodium
+
+1. Install the "Open Remote - SSH" extension provided by `jeanp413`.
+
+2. Create a new container while mounting your project directory and start the
+SSH server as explained above.
+
+3. In the VSCode lower left corner, click on the "Open a Remote Window" icon
+and select the option "Connect to Host...". Type `root@localhost:2222`. Enter
+the password `portable` when prompted.
+
+4. Install the "Logtalk Extension Pack" extension in the SSH remote. This pack
+includes the "Logtalk for VSCode" extension. See below how to configure it.
+
+5. Open the project directory mounted in the container under `/source` by using
+the "File" menu "Open Folder..." item.
+
+
+## Configuring the VSCode "Logtalk for VSCode" extension
+
+The "Logtalk for VSCode" extension can be configured by opening the "Settings"
+pane, typing "Logtalk" in the search box, and selecting "Remote" settings. The
+required settings are:
 
 - "logtalk.home.path" - `/usr/local/share/logtalk`
 - "logtalk.user.path" - `/root/logtalk`
@@ -154,8 +215,7 @@ The backend identifier must be for one of the installed Prolog systems:
 - YAP: `yap`
 
 
-Creating Jupyter notebooks
---------------------------
+## Creating Jupyter notebooks
 
 Install the "Jupyter" extension in the container. Create a new notebook by
 selecting the "File" menu "New File..." item and selecting the Jupyter
@@ -179,8 +239,7 @@ found at:
 https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/tree/master/notebooks
 
 
-Running the JupyterLab server
------------------------------
+## Running the JupyterLab server
 
 Open a new integrated terminal in VSCode and run the following command:
 
@@ -203,8 +262,7 @@ Executing the cell (by default, Shift-Enter) should print the Logtalk version,
 the backend version, and the Logtalk Jupyter kernel version.
 
 
-Running the examples documentation as Jupyter notebooks
--------------------------------------------------------
+## Running the examples documentation as Jupyter notebooks
 
 Most of the examples `NOTES.md` files can be open as Jupyter notebooks.
 Open a new integrated terminal in VSCode and run the following commands:

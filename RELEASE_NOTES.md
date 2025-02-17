@@ -31,6 +31,9 @@ Installers and installation scripts
 * ADDED: The `README.md` file for the portable Docker image to the image
 (available as `~/README.md`).
 
+* UPDATED: The portable Docker image `README.md` file with VSCode and
+VSCodium usage instructions.
+
 * UPDATED: The portable Docker image to provide a SSH server (not running
 by default).
 
