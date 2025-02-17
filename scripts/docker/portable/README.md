@@ -126,7 +126,8 @@ Note that you need to use absolute paths for your project directory.
 this extension is not available for VSCodium; see below for an alternative
 solution).
 
-2. Create a new container while mounting your project directory.
+2. Create a new container while mounting your project directory as explained
+above.
 
 3. In the VSCode lower left corner, click on the "Open a Remote Window" icon
 and select the option "Attach to Running Container...". Select the container
@@ -180,7 +181,7 @@ includes the "Logtalk for VSCode" extension. See below how to configure it.
 2. Create a new container while mounting your project directory and start the
 SSH server as explained above.
 
-3. In the VSCode lower left corner, click on the "Open a Remote Window" icon
+3. In the VSCodium lower left corner, click on the "Open a Remote Window" icon
 and select the option "Connect to Host...". Type `root@localhost:2222`. Enter
 the password `portable` when prompted.
 
@@ -191,7 +192,7 @@ includes the "Logtalk for VSCode" extension. See below how to configure it.
 the "File" menu "Open Folder..." item.
 
 
-## Configuring the VSCode "Logtalk for VSCode" extension
+## Configuring the "Logtalk for VSCode" extension
 
 The "Logtalk for VSCode" extension can be configured by opening the "Settings"
 pane, typing "Logtalk" in the search box, and selecting "Remote" settings. The
@@ -217,7 +218,8 @@ The backend identifier must be for one of the installed Prolog systems:
 
 ## Creating Jupyter notebooks
 
-Install the "Jupyter" extension in the container. Create a new notebook by
+Install the "Jupyter" extension in the container if missing (it's included
+in the "Logtalk Extension Pack" extension). Create a new notebook by
 selecting the "File" menu "New File..." item and selecting the Jupyter
 notebook file type or open an existing notebook in your mounted volume.
 If necessary, select the Logtalk kernel by clicking in the "Select Kernel"
@@ -225,13 +227,8 @@ button in the top right corner of the notebook file.
 
 To select the backend used to run the notebook (default is SWI-Prolog),
 create in the same directory a file named `logtalk_kernel_config.py` and
-edit it to select the backend. A copy of this file can be found at:
-
-	/usr/local/lib/python3.10/dist-packages/logtalk_kernel
-
-Alternatively, download the file from:
-
-https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/tree/master/logtalk_kernel
+edit it to select the backend. A copy of this file can be found in the
+image in the `/root/.jupyter` directory where the default backend is set.
 
 A Logtalk kernel overview notebook and a Logtalk tutorial notebook can be
 found at:
@@ -241,7 +238,8 @@ https://github.com/LogtalkDotOrg/logtalk-jupyter-kernel/tree/master/notebooks
 
 ## Running the JupyterLab server
 
-Open a new integrated terminal in VSCode and run the following command:
+Open a new integrated terminal in VSCode and run the following command from
+the container directory containing your notebooks:
 
 	jupyter-lab --allow-root --NotebookApp.token='' --NotebookApp.password=''
 
@@ -267,13 +265,14 @@ the backend version, and the Logtalk Jupyter kernel version.
 Most of the examples `NOTES.md` files can be open as Jupyter notebooks.
 Open a new integrated terminal in VSCode and run the following commands:
 
-	cd $LOGTALKUSER/examples  
+	cd /root/logtalk/examples  
 	jupyter-lab --allow-root --NotebookApp.token='' --NotebookApp.password=''
 
 You can then open the examples `NOTES.md` files as notebooks in JupyterLab by
 control-clicking on them and selecting the "Open With" > "Notebook" option.
 
-To configure the backend to be use when opening the examples `NOTES.md`
-files as notebooks (default is SWI-Prolog), edit the Docker image file
-`~/.jupyter/logtalk_kernel_config.py`. Currently, only ECLiPSe, SWI-Prolog,
-and Trealla Prolog can reliably be used as backends in the notebooks.
+To configure the backend to be used when opening the examples `NOTES.md`
+files as notebooks (default is SWI-Prolog), edit the image file
+`/root/.jupyter/logtalk_kernel_config.py`. Currently, only ECLiPSe,
+SWI-Prolog, and Trealla Prolog can reliably be used as backends in the
+notebooks.
