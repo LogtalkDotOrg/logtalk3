@@ -143,7 +143,8 @@ In alternative, open your local project using the "File" menu "Open Folder..."
 item and add dev container configuration files to it:
 
 1. Create a `.devcontainer/devcontainer.json` file at the root of your local
-project and add the following contents to it:
+project and add the following contents to it (using SWI-Prolog as the backend;
+update the setting if using another backend):
 
 ```json
 {
@@ -163,9 +164,6 @@ project and add the following contents to it:
     }
 }
 ```
-
-In the JSON code above, we use `swi` as the backend. Edit for the backend
-that you intend to use.
 
 2. In the VSCode lower left corner, click on the "Open a Remote Window" icon
 and select the option "Reopen in Container".
