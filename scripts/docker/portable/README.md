@@ -146,24 +146,24 @@ item and add dev container configuration files to it:
 project and add the following contents to it (using SWI-Prolog as the backend;
 update the setting if using another backend):
 
-```json
-{
-    "name": "Logtalk",
-    "image": "logtalk/logtalk3-portable:latest",
-    "customizations": {
-        "vscode": {
-            "extensions": [
-                "logtalkdotorg.logtalk-extension-pack"
-            ],
-            "settings": {
-                "logtalk.home.path": "/usr/local/share/logtalk",
-                "logtalk.user.path": "/root/logtalk",
-                "logtalk.backend": "swi"
-            }
-         }
-    }
-}
-```
+	```json
+	{
+	    "name": "Logtalk",
+	    "image": "logtalk/logtalk3-portable:latest",
+	    "customizations": {
+	        "vscode": {
+	            "extensions": [
+	                "logtalkdotorg.logtalk-extension-pack"
+	            ],
+	            "settings": {
+	                "logtalk.home.path": "/usr/local/share/logtalk",
+	                "logtalk.user.path": "/root/logtalk",
+	                "logtalk.backend": "swi"
+	            }
+	         }
+	    }
+	}
+	```
 
 2. In the VSCode lower left corner, click on the "Open a Remote Window" icon
 and select the option "Reopen in Container".
