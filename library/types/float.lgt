@@ -23,11 +23,58 @@
 	extends(number)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:6:0,
 		author is 'Paulo Moura',
-		date is 2018-07-15,
+		date is 2025-02-20,
 		comment is 'Floating point numbers data type predicates.'
 	]).
+
+	:- public(between/4).
+	:- mode(between(+float, +float, +positive_integer, -float), zero_or_more).
+	:- info(between/4, [
+		comment is 'Enumerates by backtracking a sequence of ``N`` equally spaced floats in the interval ``[Lower,Upper]``. Assumes ``N > 0`` and ``Lower =< Upper``; fails otherwise.',
+		argnames is ['Lower', 'Upper', 'N', 'Float']
+	]).
+
+	:- public(sequence/4).
+	:- mode(sequence(+float, +float, +positive_integer, -list(float)), zero_or_one).
+	:- info(sequence/4, [
+		comment is 'Generates a list with the sequence of ``N`` equally spaced floats in the interval ``[Lower,Upper]``. Assumes ``N > 0`` and ``Lower =< Upper``; fails otherwise.',
+		argnames is ['Lower', 'Upper', 'N', 'List']
+	]).
+
+	between(Lower, Upper, N, Float) :-
+		Lower =< Upper,
+		N > 0,
+		(	N =:= 1 ->
+			Float = Lower
+		;	Increment is (Upper - Lower) / (N - 1),
+			gen_float(N, Lower, Upper, Increment, Float)
+		).
+
+	gen_float(1, _, Float, _, Float) :-
+		!.
+	gen_float(_, Float, _, _, Float).
+	gen_float(N, Current, Upper, Increment, Float) :-
+		M is N - 1,
+		Next is Current + Increment,
+		gen_float(M, Next, Upper, Increment, Float).
+
+	sequence(Lower, Upper, N, List) :-
+		Lower =< Upper,
+		N > 0,
+		(	N =:= 1 ->
+			List = [Lower]
+		;	Increment is (Upper - Lower) / (N - 1),
+			gen_sequence(N, Lower, Upper, Increment, List)
+		).
+
+	gen_sequence(1, _, Upper, _, [Upper]) :-
+		!.
+	gen_sequence(N, Current, Upper, Increment, [Current| Tail]) :-
+		M is N - 1,
+		Next is Current + Increment,
+		gen_sequence(M, Next, Upper, Increment, Tail).
 
 	valid(Float) :-
 		float(Float).

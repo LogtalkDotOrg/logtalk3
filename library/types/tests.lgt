@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:16:0,
+		version is 0:17:0,
 		author is 'Paulo Moura',
-		date is 2024-05-24,
+		date is 2025-02-20,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -120,6 +120,42 @@
 
 	test(integer_sequence_4_06, true(Sequence == [-100,-90,-80,-70,-60,-50,-40,-30,-20,-10])) :-
 		integer::sequence(-100, -10, 10, Sequence).
+
+	test(float_between_4_01, true(Floats =~= [0.0, 0.0, 0.0, 0.0, 0.0])) :-
+		findall(Float, float::between(0.0, 0.0, 5, Float), Floats).
+
+	test(float_between_4_02, true(Floats =~= [0.0])) :-
+		findall(Float, float::between(0.0, 1.0, 1, Float), Floats).
+
+	test(float_between_4_03, true(Floats =~= [0.0, 1.0])) :-
+		findall(Float, float::between(0.0, 1.0, 2, Float), Floats).
+
+	test(float_between_4_04, true(Floats =~= [0.0, 0.25, 0.5, 0.75, 1.0])) :-
+		findall(Float, float::between(0.0, 1.0, 5, Float), Floats).
+
+	test(float_between_4_05, false) :-
+		float::between(0.0, 1.0, 0, _).
+
+	test(float_between_4_06, false) :-
+		float::between(1.0, 0.0, 4, _).
+
+	test(float_sequence_4_01, true(Sequence =~= [0.0, 0.0, 0.0, 0.0, 0.0])) :-
+		float::sequence(0.0, 0.0, 5, Sequence).
+
+	test(float_sequence_4_02, true(Sequence =~= [0.0])) :-
+		float::sequence(0.0, 1.0, 1, Sequence).
+
+	test(float_sequence_4_03, true(Sequence =~= [0.0, 1.0])) :-
+		float::sequence(0.0, 1.0, 2, Sequence).
+
+	test(float_sequence_4_04, true(Sequence =~= [0.0, 0.25, 0.5, 0.75, 1.0])) :-
+		float::sequence(0.0, 1.0, 5, Sequence).
+
+	test(float_sequence_4_05, false) :-
+		float::sequence(0.0, 1.0, 0, _).
+
+	test(float_sequence_4_06, false) :-
+		float::sequence(1.0, 0.0, 4, _).
 
 	test(list_sequential_occurrences_2_01, true(Counts == [a-2, b-1, a-4, c-3])) :-
 		list::sequential_occurrences([a,a,b,a,a,a,a,c,c,c], Counts).

@@ -14,8 +14,8 @@ Floating point numbers data type predicates.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:5:0
-| **Date:** 2018-07-15
+| **Version:** 1:6:0
+| **Date:** 2025-02-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -37,7 +37,43 @@ Floating point numbers data type predicates.
 Public predicates
 -----------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: between/4
+.. _float/0::between/4:
+
+``between/4``
+^^^^^^^^^^^^^
+
+Enumerates by backtracking a sequence of ``N`` equally spaced floats in the interval ``[Lower,Upper]``. Assumes ``N > 0`` and ``Lower =< Upper``; fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``between(Lower,Upper,N,Float)``
+| **Mode and number of proofs:**
+|    ``between(+float,+float,+positive_integer,-float)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: sequence/4
+.. _float/0::sequence/4:
+
+``sequence/4``
+^^^^^^^^^^^^^^
+
+Generates a list with the sequence of ``N`` equally spaced floats in the interval ``[Lower,Upper]``. Assumes ``N > 0`` and ``Lower =< Upper``; fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Lower,Upper,N,List)``
+| **Mode and number of proofs:**
+|    ``sequence(+float,+float,+positive_integer,-list(float))`` - ``zero_or_one``
+
+
+------------
 
 Protected predicates
 --------------------

@@ -25,6 +25,12 @@ RELEASE NOTES
 3.90.0 - March ??, 2025
 =======================
 
+Library
+-------
+
+* ADDED: Predicates `between/4` and `sequence/4` to the `float` object in the
+`types` library.
+
 Installers and installation scripts
 -----------------------------------
 
