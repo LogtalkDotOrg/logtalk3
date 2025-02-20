@@ -49,7 +49,7 @@ command.
 ## Build arguments and their defaults
 
 * `LOGTALK_VERSION` (`master`)
-* `LOGTALK_TEXINFO_VERSION` (3.89.1)
+* `LOGTALK_TEXINFO_VERSION` (3.90.0)
 
 Valid identifiers are as shown in the Logtalk GitHub repository at
 [release names](https://github.com/LogtalkDotOrg/logtalk3/releases).
