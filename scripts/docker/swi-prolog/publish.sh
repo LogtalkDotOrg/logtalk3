@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk Docker publishing script for stable versions
-##   Last updated on February 16, 2025
+##   Last updated on February 20, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2017 Sergio Castro <sergioc78@gmail.com> and
@@ -30,7 +30,7 @@ cd "$(dirname "$0")" || exit 1
 
 TAG=$(cat ../../../VERSION.txt | sed -e 's/-stable$//' | sed -e 's/\.//g')
 VERSION=lgt${TAG}stable
-docker build --build-arg LOGTALK_VERSION=${VERSION} -t logtalk/logtalk3-swi -t logtalk/logtalk3-swi:${TAG} .
+docker build --no-cache --build-arg LOGTALK_VERSION=${VERSION} -t logtalk/logtalk3-swi -t logtalk/logtalk3-swi:${TAG} .
 docker push logtalk/logtalk3-swi
 docker push logtalk/logtalk3-swi:${TAG}
 # https://github.com/christian-korneck/docker-pushrm
