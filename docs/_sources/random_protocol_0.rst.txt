@@ -442,6 +442,25 @@ Returns a normally distributed random value.
 
 ------------
 
+.. index:: geometric/2
+.. _random_protocol/0::geometric/2:
+
+``geometric/2``
+^^^^^^^^^^^^^^^
+
+Returns a geometric distributed random value (trials until the first success).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``geometric(Probability,Value)``
+| **Mode and number of proofs:**
+|    ``geometric(+probability,-float)`` - ``one``
+
+
+------------
+
 .. index:: exponential/2
 .. _random_protocol/0::exponential/2:
 
@@ -461,6 +480,63 @@ Returns an exponentially distributed random value.
 
 ------------
 
+.. index:: logistic/3
+.. _random_protocol/0::logistic/3:
+
+``logistic/3``
+^^^^^^^^^^^^^^
+
+Returns a scaled logistic distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logistic(Location,Scale,Value)``
+| **Mode and number of proofs:**
+|    ``logistic(+float,+positive_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: logistic/2
+.. _random_protocol/0::logistic/2:
+
+``logistic/2``
+^^^^^^^^^^^^^^
+
+Returns a logistic distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logistic(Location,Value)``
+| **Mode and number of proofs:**
+|    ``logistic(+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: logistic/1
+.. _random_protocol/0::logistic/1:
+
+``logistic/1``
+^^^^^^^^^^^^^^
+
+Returns a logistic distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logistic(Value)``
+| **Mode and number of proofs:**
+|    ``logistic(-float)`` - ``one``
+
+
+------------
+
 .. index:: poisson/2
 .. _random_protocol/0::poisson/2:
 
@@ -476,6 +552,25 @@ Returns a Poisson distributed random value.
 |    ``poisson(Lambda,Value)``
 | **Mode and number of proofs:**
 |    ``poisson(+non_negative_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: power/2
+.. _random_protocol/0::power/2:
+
+``power/2``
+^^^^^^^^^^^
+
+Returns a power distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``power(Exponent,Value)``
+| **Mode and number of proofs:**
+|    ``power(+positive_float,-float)`` - ``one``
 
 
 ------------

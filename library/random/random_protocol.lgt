@@ -180,6 +180,13 @@
 		argnames is ['Value']
 	]).
 
+	:- public(geometric/2).
+	:- mode(geometric(+probability, -float), one).
+	:- info(geometric/2, [
+		comment is 'Returns a geometric distributed random value (trials until the first success).',
+		argnames is ['Probability', 'Value']
+	]).
+
 	:- public(exponential/2).
 	:- mode(exponential(+positive_float, -float), one).
 	:- info(exponential/2, [
@@ -187,11 +194,39 @@
 		argnames is ['Lambda', 'Value']
 	]).
 
+	:- public(logistic/3).
+	:- mode(logistic(+float, +positive_float, -float), one).
+	:- info(logistic/3, [
+		comment is 'Returns a scaled logistic distributed random value.',
+		argnames is ['Location', 'Scale', 'Value']
+	]).
+
+	:- public(logistic/2).
+	:- mode(logistic(+float, -float), one).
+	:- info(logistic/2, [
+		comment is 'Returns a logistic distributed random value.',
+		argnames is ['Location', 'Value']
+	]).
+
+	:- public(logistic/1).
+	:- mode(logistic(-float), one).
+	:- info(logistic/1, [
+		comment is 'Returns a logistic distributed random value.',
+		argnames is ['Value']
+	]).
+
 	:- public(poisson/2).
 	:- mode(poisson(+non_negative_float, -float), one).
 	:- info(poisson/2, [
 		comment is 'Returns a Poisson distributed random value.',
 		argnames is ['Lambda', 'Value']
+	]).
+
+	:- public(power/2).
+	:- mode(power(+positive_float, -float), one).
+	:- info(power/2, [
+		comment is 'Returns a power distributed random value.',
+		argnames is ['Exponent', 'Value']
 	]).
 
 	:- public(weibull/3).
