@@ -2748,6 +2748,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`tutor <tutor/0::explain//1>`
 
+``exponential/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::exponential/2>`
+
 ``extension/1``
 ---------------
 
@@ -5939,6 +5949,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::non_blanks//1>`
 
+``normal/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::normal/1>`
+
+``normal/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::normal/3>`
+
 ``normal_element/2``
 --------------------
 
@@ -6692,6 +6722,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`integer <integer/0::plus/3>`
+
+``poisson/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::poisson/2>`
 
 ``port/5``
 ----------
@@ -9473,6 +9513,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`osp <osp/0::wall_time/1>`
+
+``weibull/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::weibull/2>`
+
+``weibull/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::weibull/3>`
 
 ``weighted_mean/3``
 -------------------

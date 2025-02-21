@@ -23,9 +23,9 @@
 	implements(pseudo_random_protocol)).
 
 	:- info([
-		version is 2:11:0,
+		version is 2:12:0,
 		author is 'Paulo Moura',
-		date is 2023-11-24,
+		date is 2025-02-21,
 		comment is 'Portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Multiple random number generators' - 'To define multiple random number generators, simply extend this object. The derived objects must send to *self* the ``reset_seed/0`` message.',
@@ -361,5 +361,7 @@
 		random(Random),
 		Random < Probability,
 		once(Goal).
+
+	:- include(sampling).
 
 :- end_object.

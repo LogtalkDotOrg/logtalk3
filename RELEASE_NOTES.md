@@ -31,6 +31,10 @@ Library
 * ADDED: Predicates `between/4` and `sequence/4` to the `float` object in the
 `types` library.
 
+* ADDED: Predicates `normal/1`, `normal/3`, `exponential/2`, `poisson/2`,
+and `weibull/2-3` to the `random` library for drawing samples from the
+corresponding distributions.
+
 Installers and installation scripts
 -----------------------------------
 

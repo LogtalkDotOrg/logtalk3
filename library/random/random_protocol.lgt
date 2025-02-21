@@ -22,9 +22,9 @@
 :- protocol(random_protocol).
 
 	:- info([
-		version is 3:3:0,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2023-11-24,
+		date is 2025-02-21,
 		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		see_also is [random, backend_random, fast_random]
 	]).
@@ -164,6 +164,48 @@
 	:- info(maybe_call/2, [
 		comment is 'Calls a goal or fails without calling it with probability ``Probability``. When the goal is called, it determines if this predicate succeeds once or fails.',
 		argnames is ['Probability', 'Goal']
+	]).
+
+	:- public(normal/3).
+	:- mode(normal(+float, +float, -float), one).
+	:- info(normal/3, [
+		comment is 'Returns a scaled normally distributed random value with mean ``Mean`` and standard deviation ``Deviation``.',
+		argnames is ['Mean', 'Deviation', 'Value']
+	]).
+
+	:- public(normal/1).
+	:- mode(normal(-float), one).
+	:- info(normal/1, [
+		comment is 'Returns a normally distributed random value.',
+		argnames is ['Value']
+	]).
+
+	:- public(exponential/2).
+	:- mode(exponential(+positive_float, -float), one).
+	:- info(exponential/2, [
+		comment is 'Returns an exponentially distributed random value.',
+		argnames is ['Lambda', 'Value']
+	]).
+
+	:- public(poisson/2).
+	:- mode(poisson(+non_negative_float, -float), one).
+	:- info(poisson/2, [
+		comment is 'Returns a Poisson distributed random value.',
+		argnames is ['Lambda', 'Value']
+	]).
+
+	:- public(weibull/3).
+	:- mode(weibull(+float, +positive_float, -float), one).
+	:- info(weibull/3, [
+		comment is 'Returns a scaled Weibull distributed random value.',
+		argnames is ['Lambda', 'Shape', 'Value']
+	]).
+
+	:- public(weibull/2).
+	:- mode(weibull(+positive_float, -float), one).
+	:- info(weibull/2, [
+		comment is 'Returns a Weibull distributed random value.',
+		argnames is ['Shape', 'Value']
 	]).
 
 	:- if(current_logtalk_flag(threads, supported)).

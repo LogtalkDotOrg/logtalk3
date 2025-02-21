@@ -14,8 +14,8 @@ Random number generator protocol. The predicates are declared as synchronized wh
 |    ``logtalk_load(random(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:0
-| **Date:** 2023-11-24
+| **Version:** 3:4:0
+| **Date:** 2025-02-21
 
 | **Compilation flags:**
 |    ``static``
@@ -400,6 +400,120 @@ Calls a goal or fails without calling it with probability ``Probability``. When 
 |    ``maybe_call(*,0)``
 | **Mode and number of proofs:**
 |    ``maybe_call(+probability,+callable)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: normal/3
+.. _random_protocol/0::normal/3:
+
+``normal/3``
+^^^^^^^^^^^^
+
+Returns a scaled normally distributed random value with mean ``Mean`` and standard deviation ``Deviation``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normal(Mean,Deviation,Value)``
+| **Mode and number of proofs:**
+|    ``normal(+float,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: normal/1
+.. _random_protocol/0::normal/1:
+
+``normal/1``
+^^^^^^^^^^^^
+
+Returns a normally distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normal(Value)``
+| **Mode and number of proofs:**
+|    ``normal(-float)`` - ``one``
+
+
+------------
+
+.. index:: exponential/2
+.. _random_protocol/0::exponential/2:
+
+``exponential/2``
+^^^^^^^^^^^^^^^^^
+
+Returns an exponentially distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exponential(Lambda,Value)``
+| **Mode and number of proofs:**
+|    ``exponential(+positive_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: poisson/2
+.. _random_protocol/0::poisson/2:
+
+``poisson/2``
+^^^^^^^^^^^^^
+
+Returns a Poisson distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``poisson(Lambda,Value)``
+| **Mode and number of proofs:**
+|    ``poisson(+non_negative_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: weibull/3
+.. _random_protocol/0::weibull/3:
+
+``weibull/3``
+^^^^^^^^^^^^^
+
+Returns a scaled Weibull distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``weibull(Lambda,Shape,Value)``
+| **Mode and number of proofs:**
+|    ``weibull(+float,+positive_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: weibull/2
+.. _random_protocol/0::weibull/2:
+
+``weibull/2``
+^^^^^^^^^^^^^
+
+Returns a Weibull distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``weibull(Shape,Value)``
+| **Mode and number of proofs:**
+|    ``weibull(+positive_float,-float)`` - ``one``
 
 
 ------------
