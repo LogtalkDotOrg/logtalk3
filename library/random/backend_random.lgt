@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:21:0,
 		author is 'Paulo Moura',
-		date is 2025-02-21,
+		date is 2025-02-22,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',

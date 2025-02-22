@@ -24,7 +24,7 @@
 	:- info([
 		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2025-02-21,
+		date is 2025-02-22,
 		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		see_also is [random, backend_random, fast_random]
 	]).
@@ -206,6 +206,13 @@
 	:- info(exponential/2, [
 		comment is 'Returns an exponentially distributed random value.',
 		argnames is ['Lambda', 'Value']
+	]).
+
+	:- public(binomial/3).
+	:- mode(binomial(+positive_integer, +positive_float, -float), one).
+	:- info(binomial/3, [
+		comment is 'Returns a binomial distributed random value.',
+		argnames is ['Trials', 'Probability', 'Value']
 	]).
 
 	:- public(logistic/3).

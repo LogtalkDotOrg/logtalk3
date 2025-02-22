@@ -45,6 +45,20 @@
 		random(Random),
 		Value is -log(1.0 - Random) / Lambda.
 
+	binomial(Trials, Probability, Value) :-
+		binomial(Trials, Probability, 0, Value).
+
+	binomial(0, _, Value, Value) :-
+		!.
+	binomial(N, Probability, Value0, Value) :-
+		M is N - 1,
+		random(Random),
+		(	Random < Probability ->
+			Value1 is Value0 + 1,
+			binomial(M, Probability, Value1, Value)
+		;	binomial(M, Probability, Value0, Value)
+		).
+
 	logistic(Location, Scale, Value) :-
 		random(Random),
 		Value is Location + Scale * log(Random / (1 - Random)).

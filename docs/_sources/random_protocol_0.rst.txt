@@ -15,7 +15,7 @@ Random number generator protocol. The predicates are declared as synchronized wh
 
 | **Author:** Paulo Moura
 | **Version:** 3:4:0
-| **Date:** 2025-02-21
+| **Date:** 2025-02-22
 
 | **Compilation flags:**
 |    ``static``
@@ -514,6 +514,25 @@ Returns an exponentially distributed random value.
 |    ``exponential(Lambda,Value)``
 | **Mode and number of proofs:**
 |    ``exponential(+positive_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: binomial/3
+.. _random_protocol/0::binomial/3:
+
+``binomial/3``
+^^^^^^^^^^^^^^
+
+Returns a binomial distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``binomial(Trials,Probability,Value)``
+| **Mode and number of proofs:**
+|    ``binomial(+positive_integer,+positive_float,-float)`` - ``one``
 
 
 ------------
