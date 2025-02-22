@@ -194,6 +194,13 @@
 		argnames is ['Value']
 	]).
 
+	:- public(standard_t/2).
+	:- mode(standard_t(+positive_integer, -float), one).
+	:- info(standard_t/2, [
+		comment is 'Returns a standard Student\'s t distributed random value given the degrees of freedom.',
+		argnames is ['DegreesOfFreedom', 'Value']
+	]).
+
 	:- public(geometric/2).
 	:- mode(geometric(+probability, -float), one).
 	:- info(geometric/2, [

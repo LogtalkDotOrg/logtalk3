@@ -109,3 +109,19 @@
 		circular_uniform_polar(Radius, Rho, Theta),
 		X is Rho * cos(Theta),
 		Y is Rho * sin(Theta).
+
+	standard_t(DegreesOfFreedom, Value) :-
+		normal(Normal),
+		chi_squared(DegreesOfFreedom, ChiSquared),
+		Value is Normal / sqrt(ChiSquared / DegreesOfFreedom).
+
+	chi_squared(DegreesOfFreedom, ChiSquared) :-
+		chi_squared(DegreesOfFreedom, 0, ChiSquared).
+
+	chi_squared(0, ChiSquared, ChiSquared) :-
+		!.
+	chi_squared(N, ChiSquared0, ChiSquared) :-
+		M is N - 1,
+		normal(Normal),
+		ChiSquared1 is ChiSquared0 + Normal * Normal,
+		chi_squared(M, ChiSquared1, ChiSquared).
