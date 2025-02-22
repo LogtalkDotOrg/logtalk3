@@ -1083,6 +1083,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`toychrdb <toychrdb/0::chr_trace/0>`
 
+``circular_uniform_cartesian/3``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::circular_uniform_cartesian/3>`
+
+``circular_uniform_polar/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::circular_uniform_polar/3>`
+
 ``class/1``
 -----------
 
@@ -9160,6 +9180,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`either <either/0::unexpecteds/2>`
+
+``uniform/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::uniform/3>`
 
 ``uninstall/0``
 ---------------

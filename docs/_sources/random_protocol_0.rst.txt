@@ -670,6 +670,63 @@ Returns a Weibull distributed random value.
 
 ------------
 
+.. index:: uniform/3
+.. _random_protocol/0::uniform/3:
+
+``uniform/3``
+^^^^^^^^^^^^^
+
+Returns a uniform distributed random value in the interval``[Lower, Upper[``. Fails if ``Lower`` or ``Upper`` are not integers or if ``Lower > Upper``. Same as ``random/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uniform(Lower,Upper,Value)``
+| **Mode and number of proofs:**
+|    ``uniform(+float,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: circular_uniform_polar/3
+.. _random_protocol/0::circular_uniform_polar/3:
+
+``circular_uniform_polar/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a circular uniform distributed random point in polar coordinates given the circle radius.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``circular_uniform_polar(Radius,Rho,Theta)``
+| **Mode and number of proofs:**
+|    ``circular_uniform_polar(+float,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: circular_uniform_cartesian/3
+.. _random_protocol/0::circular_uniform_cartesian/3:
+
+``circular_uniform_cartesian/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a circular uniform distributed random point in cartesian coordinates given the circle radius.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``circular_uniform_cartesian(Radius,X,Y)``
+| **Mode and number of proofs:**
+|    ``circular_uniform_cartesian(+float,+float,-float)`` - ``one``
+
+
+------------
+
 Protected predicates
 --------------------
 

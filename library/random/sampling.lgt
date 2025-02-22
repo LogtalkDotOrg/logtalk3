@@ -95,3 +95,17 @@
 		Shape > 0,
 		random(Random),
 		Value is Lambda * (-log(Random)) ** (1 / Shape).
+
+	uniform(Lower, Upper, Value) :-
+		random(Lower, Upper, Value).
+
+	circular_uniform_polar(Radius, Rho, Theta) :-
+		random(Random),
+		Rho is Radius * sqrt(Random),
+		DoublePi is 2 * pi,
+		random(0.0, DoublePi, Theta).
+
+	circular_uniform_cartesian(Radius, X, Y) :-
+		circular_uniform_polar(Radius, Rho, Theta),
+		X is Rho * cos(Theta),
+		Y is Rho * sin(Theta).

@@ -33,7 +33,8 @@ Library
 
 * ADDED: Predicates `normal/1`, `normal/3`, `lognormal/1`, `lognormal/3`,
 `exponential/2`, `geometric/2`, `binomial/3` `logistic/1-3`, `poisson/2`,
-`power/2`, and `weibull/2-3` to the `random` library for drawing samples
+`power/2`, `weibull/2-3`, `uniform/3`, `circular_uniform_polar/3`, and
+`circular_uniform_cartesian/3` to the `random` library for drawing samples
 from the corresponding distributions.
 
 Installers and installation scripts

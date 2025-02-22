@@ -264,6 +264,27 @@
 		argnames is ['Shape', 'Value']
 	]).
 
+	:- public(uniform/3).
+	:- mode(uniform(+float, +float, -float), one).
+	:- info(uniform/3, [
+		comment is 'Returns a uniform distributed random value in the interval``[Lower, Upper[``. Fails if ``Lower`` or ``Upper`` are not integers or if ``Lower > Upper``. Same as ``random/3``.',
+		argnames is ['Lower', 'Upper', 'Value']
+	]).
+
+	:- public(circular_uniform_polar/3).
+	:- mode(circular_uniform_polar(+float, +float, -float), one).
+	:- info(circular_uniform_polar/3, [
+		comment is 'Returns a circular uniform distributed random point in polar coordinates given the circle radius.',
+		argnames is ['Radius', 'Rho', 'Theta']
+	]).
+
+	:- public(circular_uniform_cartesian/3).
+	:- mode(circular_uniform_cartesian(+float, +float, -float), one).
+	:- info(circular_uniform_cartesian/3, [
+		comment is 'Returns a circular uniform distributed random point in cartesian coordinates given the circle radius.',
+		argnames is ['Radius', 'X', 'Y']
+	]).
+
 	:- if(current_logtalk_flag(threads, supported)).
 		:- synchronized([
 			random/1, random/3,
