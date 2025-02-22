@@ -260,20 +260,22 @@
 <li><p><a class="reference internal" href="#maybe-call-2" id="id20"><code class="docutils literal notranslate"><span class="pre">maybe_call/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#normal-3" id="id21"><code class="docutils literal notranslate"><span class="pre">normal/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#normal-1" id="id22"><code class="docutils literal notranslate"><span class="pre">normal/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#geometric-2" id="id23"><code class="docutils literal notranslate"><span class="pre">geometric/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exponential-2" id="id24"><code class="docutils literal notranslate"><span class="pre">exponential/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#logistic-3" id="id25"><code class="docutils literal notranslate"><span class="pre">logistic/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#logistic-2" id="id26"><code class="docutils literal notranslate"><span class="pre">logistic/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#logistic-1" id="id27"><code class="docutils literal notranslate"><span class="pre">logistic/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#poisson-2" id="id28"><code class="docutils literal notranslate"><span class="pre">poisson/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#power-2" id="id29"><code class="docutils literal notranslate"><span class="pre">power/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#weibull-3" id="id30"><code class="docutils literal notranslate"><span class="pre">weibull/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#weibull-2" id="id31"><code class="docutils literal notranslate"><span class="pre">weibull/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lognormal-3" id="id23"><code class="docutils literal notranslate"><span class="pre">lognormal/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#lognormal-1" id="id24"><code class="docutils literal notranslate"><span class="pre">lognormal/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#geometric-2" id="id25"><code class="docutils literal notranslate"><span class="pre">geometric/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exponential-2" id="id26"><code class="docutils literal notranslate"><span class="pre">exponential/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#logistic-3" id="id27"><code class="docutils literal notranslate"><span class="pre">logistic/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#logistic-2" id="id28"><code class="docutils literal notranslate"><span class="pre">logistic/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#logistic-1" id="id29"><code class="docutils literal notranslate"><span class="pre">logistic/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#poisson-2" id="id30"><code class="docutils literal notranslate"><span class="pre">poisson/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#power-2" id="id31"><code class="docutils literal notranslate"><span class="pre">power/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#weibull-3" id="id32"><code class="docutils literal notranslate"><span class="pre">weibull/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#weibull-2" id="id33"><code class="docutils literal notranslate"><span class="pre">weibull/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id32">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id33">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id34">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id34">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id35">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id36">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -686,7 +688,7 @@
 </section>
 <section id="normal-3">
 <span id="random-protocol-0-normal-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normal/3</span></code></a><a class="headerlink" href="#normal-3" title="Link to this heading"></a></h3>
-<p>Returns a scaled normally distributed random value with mean <code class="docutils literal notranslate"><span class="pre">Mean</span></code> and standard deviation <code class="docutils literal notranslate"><span class="pre">Deviation</span></code>.</p>
+<p>Returns a scaled normally distributed random value with the given mean and standard deviation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -707,7 +709,7 @@
 </section>
 <section id="normal-1">
 <span id="random-protocol-0-normal-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">normal/1</span></code></a><a class="headerlink" href="#normal-1" title="Link to this heading"></a></h3>
-<p>Returns a normally distributed random value.</p>
+<p>Returns a normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -726,8 +728,50 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="lognormal-3">
+<span id="random-protocol-0-lognormal-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lognormal/3</span></code></a><a class="headerlink" href="#lognormal-3" title="Link to this heading"></a></h3>
+<p>Returns a scaled log normally distributed random value with the given mean and standard deviation for the normal distribution.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lognormal(Mean,Deviation,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lognormal(+float,+float,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="lognormal-1">
+<span id="random-protocol-0-lognormal-1"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lognormal/1</span></code></a><a class="headerlink" href="#lognormal-1" title="Link to this heading"></a></h3>
+<p>Returns a log normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lognormal(Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">lognormal(-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="geometric-2">
-<span id="random-protocol-0-geometric-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">geometric/2</span></code></a><a class="headerlink" href="#geometric-2" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-geometric-2"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">geometric/2</span></code></a><a class="headerlink" href="#geometric-2" title="Link to this heading"></a></h3>
 <p>Returns a geometric distributed random value (trials until the first success).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -748,7 +792,7 @@
 <hr class="docutils" />
 </section>
 <section id="exponential-2">
-<span id="random-protocol-0-exponential-2"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exponential/2</span></code></a><a class="headerlink" href="#exponential-2" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-exponential-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exponential/2</span></code></a><a class="headerlink" href="#exponential-2" title="Link to this heading"></a></h3>
 <p>Returns an exponentially distributed random value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -769,7 +813,7 @@
 <hr class="docutils" />
 </section>
 <section id="logistic-3">
-<span id="random-protocol-0-logistic-3"></span><span id="index-24"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">logistic/3</span></code></a><a class="headerlink" href="#logistic-3" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-logistic-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">logistic/3</span></code></a><a class="headerlink" href="#logistic-3" title="Link to this heading"></a></h3>
 <p>Returns a scaled logistic distributed random value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -790,7 +834,7 @@
 <hr class="docutils" />
 </section>
 <section id="logistic-2">
-<span id="random-protocol-0-logistic-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">logistic/2</span></code></a><a class="headerlink" href="#logistic-2" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-logistic-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">logistic/2</span></code></a><a class="headerlink" href="#logistic-2" title="Link to this heading"></a></h3>
 <p>Returns a logistic distributed random value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -811,7 +855,7 @@
 <hr class="docutils" />
 </section>
 <section id="logistic-1">
-<span id="random-protocol-0-logistic-1"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">logistic/1</span></code></a><a class="headerlink" href="#logistic-1" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-logistic-1"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">logistic/1</span></code></a><a class="headerlink" href="#logistic-1" title="Link to this heading"></a></h3>
 <p>Returns a logistic distributed random value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -832,7 +876,7 @@
 <hr class="docutils" />
 </section>
 <section id="poisson-2">
-<span id="random-protocol-0-poisson-2"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">poisson/2</span></code></a><a class="headerlink" href="#poisson-2" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-poisson-2"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">poisson/2</span></code></a><a class="headerlink" href="#poisson-2" title="Link to this heading"></a></h3>
 <p>Returns a Poisson distributed random value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -853,7 +897,7 @@
 <hr class="docutils" />
 </section>
 <section id="power-2">
-<span id="random-protocol-0-power-2"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">power/2</span></code></a><a class="headerlink" href="#power-2" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-power-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">power/2</span></code></a><a class="headerlink" href="#power-2" title="Link to this heading"></a></h3>
 <p>Returns a power distributed random value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -874,7 +918,7 @@
 <hr class="docutils" />
 </section>
 <section id="weibull-3">
-<span id="random-protocol-0-weibull-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weibull/3</span></code></a><a class="headerlink" href="#weibull-3" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-weibull-3"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weibull/3</span></code></a><a class="headerlink" href="#weibull-3" title="Link to this heading"></a></h3>
 <p>Returns a scaled Weibull distributed random value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -895,7 +939,7 @@
 <hr class="docutils" />
 </section>
 <section id="weibull-2">
-<span id="random-protocol-0-weibull-2"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weibull/2</span></code></a><a class="headerlink" href="#weibull-2" title="Link to this heading"></a></h3>
+<span id="random-protocol-0-weibull-2"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">weibull/2</span></code></a><a class="headerlink" href="#weibull-2" title="Link to this heading"></a></h3>
 <p>Returns a Weibull distributed random value.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

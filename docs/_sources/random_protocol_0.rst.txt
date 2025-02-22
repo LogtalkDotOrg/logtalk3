@@ -410,7 +410,7 @@ Calls a goal or fails without calling it with probability ``Probability``. When 
 ``normal/3``
 ^^^^^^^^^^^^
 
-Returns a scaled normally distributed random value with mean ``Mean`` and standard deviation ``Deviation``.
+Returns a scaled normally distributed random value with the given mean and standard deviation.
 
 | **Compilation flags:**
 |    ``static``
@@ -429,7 +429,7 @@ Returns a scaled normally distributed random value with mean ``Mean`` and standa
 ``normal/1``
 ^^^^^^^^^^^^
 
-Returns a normally distributed random value.
+Returns a normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).
 
 | **Compilation flags:**
 |    ``static``
@@ -438,6 +438,44 @@ Returns a normally distributed random value.
 |    ``normal(Value)``
 | **Mode and number of proofs:**
 |    ``normal(-float)`` - ``one``
+
+
+------------
+
+.. index:: lognormal/3
+.. _random_protocol/0::lognormal/3:
+
+``lognormal/3``
+^^^^^^^^^^^^^^^
+
+Returns a scaled log normally distributed random value with the given mean and standard deviation for the normal distribution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lognormal(Mean,Deviation,Value)``
+| **Mode and number of proofs:**
+|    ``lognormal(+float,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: lognormal/1
+.. _random_protocol/0::lognormal/1:
+
+``lognormal/1``
+^^^^^^^^^^^^^^^
+
+Returns a log normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lognormal(Value)``
+| **Mode and number of proofs:**
+|    ``lognormal(-float)`` - ``one``
 
 
 ------------

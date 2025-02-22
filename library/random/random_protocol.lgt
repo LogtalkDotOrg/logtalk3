@@ -169,14 +169,28 @@
 	:- public(normal/3).
 	:- mode(normal(+float, +float, -float), one).
 	:- info(normal/3, [
-		comment is 'Returns a scaled normally distributed random value with mean ``Mean`` and standard deviation ``Deviation``.',
+		comment is 'Returns a scaled normally distributed random value with the given mean and standard deviation.',
 		argnames is ['Mean', 'Deviation', 'Value']
 	]).
 
 	:- public(normal/1).
 	:- mode(normal(-float), one).
 	:- info(normal/1, [
-		comment is 'Returns a normally distributed random value.',
+		comment is 'Returns a normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).',
+		argnames is ['Value']
+	]).
+
+	:- public(lognormal/3).
+	:- mode(lognormal(+float, +float, -float), one).
+	:- info(lognormal/3, [
+		comment is 'Returns a scaled log normally distributed random value with the given mean and standard deviation for the normal distribution.',
+		argnames is ['Mean', 'Deviation', 'Value']
+	]).
+
+	:- public(lognormal/1).
+	:- mode(lognormal(-float), one).
+	:- info(lognormal/1, [
+		comment is 'Returns a log normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).',
 		argnames is ['Value']
 	]).
 

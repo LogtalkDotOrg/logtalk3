@@ -28,6 +28,14 @@
 		random(X2),
 		Value is sqrt(-2.0 * log(X1)) * cos(2.0*pi*X2).
 
+	lognormal(Mean, Deviation, Scaled) :-
+		normal(Mean, Deviation, Value),
+		Scaled is exp(Mean + Deviation * Value).
+
+	lognormal(Value) :-
+		normal(Value0),
+		Value is exp(Value0).
+
 	geometric(Probability, Value) :-
 		random(Random),
 		Value is ceiling(log(1 - Random) / log(1 - Probability)).
