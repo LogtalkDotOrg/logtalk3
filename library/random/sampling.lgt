@@ -119,6 +119,7 @@
 		Y is Rho * sin(Theta).
 
 	chi_squared(DegreesOfFreedom, Value) :-
+		DegreesOfFreedom > 0,
 		chi_squared(DegreesOfFreedom, 0, Value).
 
 	chi_squared(0, Value, Value) :-
@@ -130,6 +131,11 @@
 		chi_squared(M, Value1, Value).
 
 	standard_t(DegreesOfFreedom, Value) :-
-		normal(Normal),
 		chi_squared(DegreesOfFreedom, ChiSquared),
+		normal(Normal),
 		Value is Normal / sqrt(ChiSquared / DegreesOfFreedom).
+
+	fisher(DegreesOfFreedomNumerator, DegreesOfFreedomDenominator, Value) :-
+		chi_squared(DegreesOfFreedomNumerator, ChiSquaredNumerator),
+		chi_squared(DegreesOfFreedomDenominator, ChiSquaredDenominator),
+		Value is (ChiSquaredNumerator / DegreesOfFreedomNumerator) / (ChiSquaredDenominator / DegreesOfFreedomDenominator).

@@ -208,6 +208,13 @@
 		argnames is ['DegreesOfFreedom', 'Value']
 	]).
 
+	:- public(fisher/3).
+	:- mode(fisher(+positive_integer, +positive_integer, -float), one).
+	:- info(fisher/3, [
+		comment is 'Returns a Fisher distributed random value given the degrees of freedom in the numerator and in the denominator.',
+		argnames is ['DegreesOfFreedomNumerator', 'DegreesOfFreedomDenominator', 'Value']
+	]).
+
 	:- public(geometric/2).
 	:- mode(geometric(+probability, -positive_integer), one).
 	:- info(geometric/2, [

@@ -518,6 +518,25 @@ Returns a standard Student's t distributed random value given the degrees of fre
 
 ------------
 
+.. index:: fisher/3
+.. _random_protocol/0::fisher/3:
+
+``fisher/3``
+^^^^^^^^^^^^
+
+Returns a Fisher distributed random value given the degrees of freedom in the numerator and in the denominator.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fisher(DegreesOfFreedomNumerator,DegreesOfFreedomDenominator,Value)``
+| **Mode and number of proofs:**
+|    ``fisher(+positive_integer,+positive_integer,-float)`` - ``one``
+
+
+------------
+
 .. index:: geometric/2
 .. _random_protocol/0::geometric/2:
 
