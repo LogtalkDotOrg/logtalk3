@@ -703,7 +703,26 @@ Returns a uniform distributed random value in the interval``[Lower, Upper[``. Fa
 | **Template:**
 |    ``uniform(Lower,Upper,Value)``
 | **Mode and number of proofs:**
-|    ``uniform(+float,+float,-float)`` - ``one``
+|    ``uniform(+float,+float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: triangular/4
+.. _random_protocol/0::triangular/4:
+
+``triangular/4``
+^^^^^^^^^^^^^^^^
+
+Returns a triangular distributed random value. Fails if the ``Left =< Mode =< Right`` condition does not hold.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``triangular(Left,Mode,Right,Value)``
+| **Mode and number of proofs:**
+|    ``triangular(+float,+float,+float,-float)`` - ``zero_or_one``
 
 
 ------------

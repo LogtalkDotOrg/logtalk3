@@ -272,10 +272,17 @@
 	]).
 
 	:- public(uniform/3).
-	:- mode(uniform(+float, +float, -float), one).
+	:- mode(uniform(+float, +float, -float), zero_or_one).
 	:- info(uniform/3, [
 		comment is 'Returns a uniform distributed random value in the interval``[Lower, Upper[``. Fails if ``Lower`` or ``Upper`` are not integers or if ``Lower > Upper``. Same as ``random/3``.',
 		argnames is ['Lower', 'Upper', 'Value']
+	]).
+
+	:- public(triangular/4).
+	:- mode(triangular(+float, +float, +float, -float), zero_or_one).
+	:- info(triangular/4, [
+		comment is 'Returns a triangular distributed random value. Fails if the ``Left =< Mode =< Right`` condition does not hold.',
+		argnames is ['Left', 'Mode', 'Right', 'Value']
 	]).
 
 	:- public(circular_uniform_polar/3).

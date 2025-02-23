@@ -99,6 +99,14 @@
 	uniform(Lower, Upper, Value) :-
 		random(Lower, Upper, Value).
 
+	triangular(Left, Mode, Right, Value) :-
+		Left =< Mode, Mode =< Right,
+		random(Random),
+		(	Random < (Mode - Left) / (Right - Left) ->
+			Value is Left + sqrt(Random * (Right - Left) * (Mode - Left))
+		;	Value is Right - sqrt((1 - Random) * (Right - Left) * (Right - Mode))
+		).
+
 	circular_uniform_polar(Radius, Rho, Theta) :-
 		random(Random),
 		Rho is Radius * sqrt(Random),
