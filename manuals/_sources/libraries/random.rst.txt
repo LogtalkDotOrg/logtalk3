@@ -5,7 +5,12 @@
 
 This library provides portable random number generators and an
 abstraction over the native backend Prolog compiler random number
-generator if available.
+generator if available. It includes predicates for generating random
+floats and random integers in a given interval; predicates for
+generating random sequences and sets; predicates for randomly selecting,
+enumerating, and swapping elements from a list; predicates that succeed,
+fail, or call another predicate with a given probability; and predicates
+for sampling common probability distributions.
 
 API documentation
 -----------------
