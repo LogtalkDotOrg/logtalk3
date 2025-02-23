@@ -70,18 +70,18 @@
 	logistic(Value) :-
 		logistic(0.0, Value).
 
-	poisson(Lambda, Value) :-
-		Lambda >= 0,
-		poisson(Lambda, 0, 1.0, Value).
+	poisson(Mean, Value) :-
+		Mean >= 0,
+		poisson(Mean, 0, 1.0, Value).
 
-	poisson(Lambda, Value, Product, Value) :-
-		Product =< exp(- Lambda),
+	poisson(Mean, Value, Product, Value) :-
+		Product =< exp(- Mean),
 		!.
-	poisson(Lambda, N0, Product0, Value) :-
+	poisson(Mean, N0, Product0, Value) :-
 		random(Random),
 		N is N0 + 1,
 		Product is Product0 * Random,
-		poisson(Lambda, N, Product, Value).
+		poisson(Mean, N, Product, Value).
 
 	power(Exponent, Value) :-
 		random(Random),

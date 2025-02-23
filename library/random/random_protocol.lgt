@@ -202,7 +202,7 @@
 	]).
 
 	:- public(geometric/2).
-	:- mode(geometric(+probability, -float), one).
+	:- mode(geometric(+probability, -positive_integer), one).
 	:- info(geometric/2, [
 		comment is 'Returns a geometric distributed random value (trials until the first success).',
 		argnames is ['Probability', 'Value']
@@ -244,10 +244,10 @@
 	]).
 
 	:- public(poisson/2).
-	:- mode(poisson(+non_negative_float, -float), one).
+	:- mode(poisson(+non_negative_float, -non_negative_integer), one).
 	:- info(poisson/2, [
-		comment is 'Returns a Poisson distributed random value.',
-		argnames is ['Lambda', 'Value']
+		comment is 'Returns a Poisson distributed random value given the expected number of events.',
+		argnames is ['Mean', 'Value']
 	]).
 
 	:- public(power/2).

@@ -513,7 +513,7 @@ Returns a geometric distributed random value (trials until the first success).
 | **Template:**
 |    ``geometric(Probability,Value)``
 | **Mode and number of proofs:**
-|    ``geometric(+probability,-float)`` - ``one``
+|    ``geometric(+probability,-positive_integer)`` - ``one``
 
 
 ------------
@@ -619,15 +619,15 @@ Returns a logistic distributed random value.
 ``poisson/2``
 ^^^^^^^^^^^^^
 
-Returns a Poisson distributed random value.
+Returns a Poisson distributed random value given the expected number of events.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``poisson(Lambda,Value)``
+|    ``poisson(Mean,Value)``
 | **Mode and number of proofs:**
-|    ``poisson(+non_negative_float,-float)`` - ``one``
+|    ``poisson(+non_negative_float,-non_negative_integer)`` - ``one``
 
 
 ------------
