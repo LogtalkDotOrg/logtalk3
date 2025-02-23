@@ -194,6 +194,13 @@
 		argnames is ['Value']
 	]).
 
+	:- public(chi_squared/2).
+	:- mode(chi_squared(+positive_integer, -float), one).
+	:- info(chi_squared/2, [
+		comment is 'Returns a chi-squared distributed random value given the degrees of freedom.',
+		argnames is ['DegreesOfFreedom', 'Value']
+	]).
+
 	:- public(standard_t/2).
 	:- mode(standard_t(+positive_integer, -float), one).
 	:- info(standard_t/2, [

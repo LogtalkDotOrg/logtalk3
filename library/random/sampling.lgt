@@ -118,18 +118,18 @@
 		X is Rho * cos(Theta),
 		Y is Rho * sin(Theta).
 
+	chi_squared(DegreesOfFreedom, Value) :-
+		chi_squared(DegreesOfFreedom, 0, Value).
+
+	chi_squared(0, Value, Value) :-
+		!.
+	chi_squared(N, Value0, Value) :-
+		M is N - 1,
+		normal(Normal),
+		Value1 is Value0 + Normal * Normal,
+		chi_squared(M, Value1, Value).
+
 	standard_t(DegreesOfFreedom, Value) :-
 		normal(Normal),
 		chi_squared(DegreesOfFreedom, ChiSquared),
 		Value is Normal / sqrt(ChiSquared / DegreesOfFreedom).
-
-	chi_squared(DegreesOfFreedom, ChiSquared) :-
-		chi_squared(DegreesOfFreedom, 0, ChiSquared).
-
-	chi_squared(0, ChiSquared, ChiSquared) :-
-		!.
-	chi_squared(N, ChiSquared0, ChiSquared) :-
-		M is N - 1,
-		normal(Normal),
-		ChiSquared1 is ChiSquared0 + Normal * Normal,
-		chi_squared(M, ChiSquared1, ChiSquared).

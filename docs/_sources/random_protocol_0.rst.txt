@@ -480,6 +480,25 @@ Returns a log normally distributed random value (using a default mean of 0.0 and
 
 ------------
 
+.. index:: chi_squared/2
+.. _random_protocol/0::chi_squared/2:
+
+``chi_squared/2``
+^^^^^^^^^^^^^^^^^
+
+Returns a chi-squared distributed random value given the degrees of freedom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chi_squared(DegreesOfFreedom,Value)``
+| **Mode and number of proofs:**
+|    ``chi_squared(+positive_integer,-float)`` - ``one``
+
+
+------------
+
 .. index:: standard_t/2
 .. _random_protocol/0::standard_t/2:
 
