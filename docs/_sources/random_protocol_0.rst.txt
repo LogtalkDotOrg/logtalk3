@@ -15,7 +15,7 @@ Random number generator protocol. The predicates are declared as synchronized wh
 
 | **Author:** Paulo Moura
 | **Version:** 3:4:0
-| **Date:** 2025-02-22
+| **Date:** 2025-02-24
 
 | **Compilation flags:**
 |    ``static``
@@ -913,6 +913,25 @@ Returns a von Mises distributed random value.
 |    ``von_mises(Mode,Concentration,Value)``
 | **Mode and number of proofs:**
 |    ``von_mises(+float,+non_negative_float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: gumbel/3
+.. _random_protocol/0::gumbel/3:
+
+``gumbel/3``
+^^^^^^^^^^^^
+
+Returns a Gumbel distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gumbel(Location,Scale,Value)``
+| **Mode and number of proofs:**
+|    ``gumbel(+float,+non_negative_float,-float)`` - ``zero_or_one``
 
 
 ------------

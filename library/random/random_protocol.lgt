@@ -24,7 +24,7 @@
 	:- info([
 		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2025-02-22,
+		date is 2025-02-24,
 		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		see_also is [random, backend_random, fast_random]
 	]).
@@ -353,6 +353,13 @@
 	:- info(von_mises/3, [
 		comment is 'Returns a von Mises distributed random value.',
 		argnames is ['Mode', 'Concentration', 'Value']
+	]).
+
+	:- public(gumbel/3).
+	:- mode(gumbel(+float, +non_negative_float, -float), zero_or_one).
+	:- info(gumbel/3, [
+		comment is 'Returns a Gumbel distributed random value.',
+		argnames is ['Location', 'Scale', 'Value']
 	]).
 
 	:- public(circular_uniform_polar/3).

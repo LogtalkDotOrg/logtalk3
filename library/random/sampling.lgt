@@ -245,3 +245,10 @@
 			)
 		;	von_mises(Mode, Concentration, S, R, Value)
 		).
+
+	gumbel(Location, Scale, Value) :-
+		uniform(Uniform),
+		(	Uniform =:= 0.0 ->
+			gumbel(Location, Scale, Value)
+		;	Value is Location - Scale * log(-log(Uniform))
+		).
