@@ -229,6 +229,13 @@
 		argnames is ['Probability', 'Value']
 	]).
 
+	:- public(hypergeometric/4).
+	:- mode(hypergeometric(+non_negative_integer, +non_negative_integer, +non_negative_integer, -non_negative_integer), one).
+	:- info(hypergeometric/4, [
+		comment is 'Returns a hypergeometric distributed random value.',
+		argnames is ['Population', 'Successes', 'Draws', 'Value']
+	]).
+
 	:- public(exponential/2).
 	:- mode(exponential(+positive_float, -float), one).
 	:- info(exponential/2, [

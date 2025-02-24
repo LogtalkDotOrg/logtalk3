@@ -46,9 +46,29 @@
 		;	Value is (Mean*Mean) / X
 		).
 
+	:- set_logtalk_flag(suspicious_calls, silent).
 	geometric(Probability, Value) :-
-		random(Random),
-		Value is ceiling(log(1 - Random) / log(1 - Probability)).
+		(	Probability =:= 0.0 ->
+			Value is 0
+		;	random(Random),
+			Value is ceiling(log(1 - Random) / log(1 - Probability))
+		).
+
+	hypergeometric(Population, Successes, Draws, Value) :-
+		hypergeometric(Draws, Population, Successes, 0, Value).
+
+	hypergeometric(0, _, _, Value, Value) :-
+		!.
+	hypergeometric(N, Population0, Successes0, Value0, Value) :-
+		M is N - 1,
+		Population1 is Population0 - 1,
+		uniform(Uniform),
+		(	Uniform < Successes0 / Population0 ->
+			Value1 is Value0 + 1,
+			Successes1 is Successes0 - 1,
+			hypergeometric(M, Population1, Successes1, Value1, Value)
+		;	hypergeometric(M, Population1, Successes0, Value0, Value)
+		).
 
 	exponential(Lambda, Value) :-
 		Lambda > 0,
