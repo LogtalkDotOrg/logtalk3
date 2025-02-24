@@ -936,6 +936,25 @@ Returns a Gumbel distributed random value.
 
 ------------
 
+.. index:: dirichlet/2
+.. _random_protocol/0::dirichlet/2:
+
+``dirichlet/2``
+^^^^^^^^^^^^^^^
+
+Returns a Dirichlet distributed list of random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dirichlet(Alphas,Thetas)``
+| **Mode and number of proofs:**
+|    ``dirichlet(+list(positive_float),-list(positive_float))`` - ``one``
+
+
+------------
+
 .. index:: circular_uniform_polar/3
 .. _random_protocol/0::circular_uniform_polar/3:
 

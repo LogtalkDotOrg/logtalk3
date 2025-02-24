@@ -252,3 +252,18 @@
 			gumbel(Location, Scale, Value)
 		;	Value is Location - Scale * log(-log(Uniform))
 		).
+
+	dirichlet(Alphas, Thetas) :-
+		dirichlet(Alphas, Thetas0, 0, Sum),
+		dirichlet(Thetas0, Sum, Thetas).
+
+	dirichlet([], [], Sum, Sum).
+	dirichlet([Alpha| Alphas], [Theta0| Thetas0], Sum0, Sum) :-
+		gamma(Alpha, Theta0),
+		Sum1 is Sum0 + Theta0,
+		dirichlet(Alphas, Thetas0, Sum1, Sum).
+
+	dirichlet([], _, []).
+	dirichlet([Theta0| Thetas0], Sum, [Theta| Thetas]) :-
+		Theta is Theta0 / Sum,
+		dirichlet(Thetas0, Sum, Thetas).

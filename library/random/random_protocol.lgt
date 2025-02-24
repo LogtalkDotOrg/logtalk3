@@ -362,6 +362,13 @@
 		argnames is ['Location', 'Scale', 'Value']
 	]).
 
+	:- public(dirichlet/2).
+	:- mode(dirichlet(+list(positive_float), -list(positive_float)), one).
+	:- info(dirichlet/2, [
+		comment is 'Returns a Dirichlet distributed list of random values.',
+		argnames is ['Alphas', 'Thetas']
+	]).
+
 	:- public(circular_uniform_polar/3).
 	:- mode(circular_uniform_polar(+float, +float, -float), one).
 	:- info(circular_uniform_polar/3, [

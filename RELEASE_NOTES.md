@@ -35,7 +35,7 @@ Library
 `chi_squared/2`, `standard_t/2`, `fisher/3`, `exponential/2`, `geometric/2`,
 `hypergeometric/4`, `binomial/3`, `bernoulli/2`, `logistic/1-3`, `poisson/2`,
 `power/2`, `weibull/2-3`, `beta/3`, `gamma/2`, `uniform/1`, `uniform/3`,
-`logseries/2`, `triangular/4`, `von_mises/3`, `gumbel/3`,
+`logseries/2`, `triangular/4`, `von_mises/3`, `gumbel/3`, `dirichlet/2`,
 `circular_uniform_polar/3`, and `circular_uniform_cartesian/3` to the `random`
 library for drawing samples from the corresponding probability distributions.
 
