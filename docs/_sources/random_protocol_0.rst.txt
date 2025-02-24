@@ -594,6 +594,44 @@ Returns a binomial distributed random value.
 
 ------------
 
+.. index:: beta/3
+.. _random_protocol/0::beta/3:
+
+``beta/3``
+^^^^^^^^^^
+
+Returns a beta distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``beta(Alpha,Beta,Value)``
+| **Mode and number of proofs:**
+|    ``beta(+positive_float,+positive_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: gamma/2
+.. _random_protocol/0::gamma/2:
+
+``gamma/2``
+^^^^^^^^^^^
+
+Returns a gamma distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gamma(Alpha,Value)``
+| **Mode and number of proofs:**
+|    ``gamma(+positive_float,-float)`` - ``one``
+
+
+------------
+
 .. index:: logistic/3
 .. _random_protocol/0::logistic/3:
 
@@ -742,6 +780,25 @@ Returns a uniform distributed random value in the interval``[Lower, Upper[``. Fa
 |    ``uniform(Lower,Upper,Value)``
 | **Mode and number of proofs:**
 |    ``uniform(+float,+float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: uniform/1
+.. _random_protocol/0::uniform/1:
+
+``uniform/1``
+^^^^^^^^^^^^^
+
+Returns a uniform distributed random value in the interval``[0.0, 1.0[``. Same as ``random/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``uniform(Value)``
+| **Mode and number of proofs:**
+|    ``uniform(-float)`` - ``one``
 
 
 ------------

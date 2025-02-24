@@ -236,6 +236,20 @@
 		argnames is ['Trials', 'Probability', 'Value']
 	]).
 
+	:- public(beta/3).
+	:- mode(beta(+positive_float, +positive_float, -float), one).
+	:- info(beta/3, [
+		comment is 'Returns a beta distributed random value.',
+		argnames is ['Alpha', 'Beta', 'Value']
+	]).
+
+	:- public(gamma/2).
+	:- mode(gamma(+positive_float, -float), one).
+	:- info(gamma/2, [
+		comment is 'Returns a gamma distributed random value.',
+		argnames is ['Alpha', 'Value']
+	]).
+
 	:- public(logistic/3).
 	:- mode(logistic(+float, +positive_float, -float), one).
 	:- info(logistic/3, [
@@ -290,6 +304,13 @@
 	:- info(uniform/3, [
 		comment is 'Returns a uniform distributed random value in the interval``[Lower, Upper[``. Fails if ``Lower`` or ``Upper`` are not integers or if ``Lower > Upper``. Same as ``random/3``.',
 		argnames is ['Lower', 'Upper', 'Value']
+	]).
+
+	:- public(uniform/1).
+	:- mode(uniform(-float), one).
+	:- info(uniform/1, [
+		comment is 'Returns a uniform distributed random value in the interval``[0.0, 1.0[``. Same as ``random/1``.',
+		argnames is ['Value']
 	]).
 
 	:- public(triangular/4).

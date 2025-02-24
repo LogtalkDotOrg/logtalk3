@@ -46,6 +46,7 @@
 		Value is -log(1.0 - Random) / Lambda.
 
 	binomial(Trials, Probability, Value) :-
+		Trials >= 0,
 		binomial(Trials, Probability, 0, Value).
 
 	binomial(0, _, Value, Value) :-
@@ -57,6 +58,38 @@
 			Value1 is Value0 + 1,
 			binomial(M, Probability, Value1, Value)
 		;	binomial(M, Probability, Value0, Value)
+		).
+
+	beta(Alpha, Beta, Value) :-
+		gamma(Alpha, AlphaValue),
+		gamma(Beta, BetaValue),
+		Value is AlphaValue / (AlphaValue + BetaValue).
+
+	gamma(Alpha, Value) :-
+		Alpha > 0.0,
+		(	Alpha < 1.0 ->
+			uniform(Uniform),
+			gamma(Alpha + 1.0, Value0),
+			Value is Value0 * Uniform ** (1.0 / Alpha)
+		;	D is Alpha - 1.0 / 3.0,
+        	C is 1.0 / sqrt(9.0 * D),
+			gamma(D, C, 0.0, 0.0, Value)
+		).
+
+	gamma(D, C, V0, _, Value) :-
+		V0 =< 0.0,
+		!,
+		normal(Normal),
+		V is 1.0 + C * Normal,
+		gamma(D, C, V, Normal, Value).
+	gamma(D, C, V, Normal, Value) :-
+		V3 is V * V * V,
+		uniform(Uniform),
+		(	Uniform < 1.0 - 0.0331 * (Normal * Normal) * (Normal * Normal) ->
+			Value is D * V3
+		;	log(Uniform) < 0.5 * Normal * Normal + D * (1.0 - V3 + log(V3)) ->
+			Value is D * V3
+		;	gamma(D, C, V, Normal, Value)
 		).
 
 	logistic(Location, Scale, Value) :-
@@ -98,6 +131,9 @@
 
 	uniform(Lower, Upper, Value) :-
 		random(Lower, Upper, Value).
+
+	uniform(Value) :-
+		random(Value).
 
 	triangular(Left, Mode, Right, Value) :-
 		Left =< Mode, Mode =< Right,
