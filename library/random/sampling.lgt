@@ -209,9 +209,26 @@
 		chi_squared(DegreesOfFreedomDenominator, ChiSquaredDenominator),
 		Value is (ChiSquaredNumerator / DegreesOfFreedomNumerator) / (ChiSquaredDenominator / DegreesOfFreedomDenominator).
 
+	logseries(Shape, Value) :-
+		0.0 < Shape, Shape < 1.0,
+		Q is - log(1.0 - Shape),
+		logseries(Shape, Q, Value).
+
+	logseries(Shape, Q, Value) :-
+		uniform(Uniform1),
+		uniform(Uniform2),
+		(	Uniform2 =:= 0.0 ->
+			logseries(Shape, Q, Value)
+		;	K is truncate(1 + log(Uniform2) / log(1.0 - Shape)),
+			(	Uniform1 =< (1.0 - (1.0 - Shape) ** K) / (Q * K) ->
+				Value is K
+			;	logseries(Shape, Q, Value)
+			)
+		).
+
 	von_mises(Mode, Concentration, Value) :-
-	    S is 0.5 / Concentration,
-	    R is S + sqrt(1.0 + S * S),
+		S is 0.5 / Concentration,
+		R is S + sqrt(1.0 + S * S),
 		von_mises(Mode, Concentration, S, R, Value).
 
 	von_mises(Mode, Concentration, S, R, Value) :-
@@ -227,4 +244,4 @@
 			;	Value is Mode - acos(F) - truncate((Mode - acos(F) / (2*pi))) * 2*pi
 			)
 		;	von_mises(Mode, Concentration, S, R, Value)
-	    ).
+		).

@@ -222,6 +222,13 @@
 		argnames is ['DegreesOfFreedomNumerator', 'DegreesOfFreedomDenominator', 'Value']
 	]).
 
+	:- public(logseries/2).
+	:- mode(logseries(+non_negative_integer, -positive_integer), zero_or_one).
+	:- info(logseries/2, [
+		comment is 'Returns a logseries distributed random value. Requires ``0.0 < Shape < 1`` and fails otherwise.',
+		argnames is ['Shape', 'Value']
+	]).
+
 	:- public(geometric/2).
 	:- mode(geometric(+probability, -positive_integer), one).
 	:- info(geometric/2, [

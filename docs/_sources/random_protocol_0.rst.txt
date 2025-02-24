@@ -418,7 +418,7 @@ Returns a scaled normally (Gaussian) distributed random value with the given mea
 | **Template:**
 |    ``normal(Mean,Deviation,Value)``
 | **Mode and number of proofs:**
-|    ``normal(+float,+float,-float)`` - ``one``
+|    ``normal(+float,+non_negative_float,-float)`` - ``one``
 
 
 ------------
@@ -456,7 +456,7 @@ Returns a scaled log normally distributed random value with the given mean and s
 | **Template:**
 |    ``lognormal(Mean,Deviation,Value)``
 | **Mode and number of proofs:**
-|    ``lognormal(+float,+float,-float)`` - ``one``
+|    ``lognormal(+float,+non_negative_float,-float)`` - ``one``
 
 
 ------------
@@ -556,6 +556,25 @@ Returns a Fisher distributed random value given the degrees of freedom in the nu
 
 ------------
 
+.. index:: logseries/2
+.. _random_protocol/0::logseries/2:
+
+``logseries/2``
+^^^^^^^^^^^^^^^
+
+Returns a logseries distributed random value. Requires ``0.0 < Shape < 1`` and fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logseries(Shape,Value)``
+| **Mode and number of proofs:**
+|    ``logseries(+non_negative_integer,-positive_integer)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: geometric/2
 .. _random_protocol/0::geometric/2:
 
@@ -571,6 +590,25 @@ Returns a geometric distributed random value (trials until the first success).
 |    ``geometric(Probability,Value)``
 | **Mode and number of proofs:**
 |    ``geometric(+probability,-positive_integer)`` - ``one``
+
+
+------------
+
+.. index:: hypergeometric/4
+.. _random_protocol/0::hypergeometric/4:
+
+``hypergeometric/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a hypergeometric distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hypergeometric(Population,Successes,Draws,Value)``
+| **Mode and number of proofs:**
+|    ``hypergeometric(+non_negative_integer,+non_negative_integer,+non_negative_integer,-non_negative_integer)`` - ``one``
 
 
 ------------
