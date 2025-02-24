@@ -410,7 +410,7 @@ Calls a goal or fails without calling it with probability ``Probability``. When 
 ``normal/3``
 ^^^^^^^^^^^^
 
-Returns a scaled normally distributed random value with the given mean and standard deviation.
+Returns a scaled normally (Gaussian) distributed random value with the given mean and standard deviation.
 
 | **Compilation flags:**
 |    ``static``
@@ -429,7 +429,7 @@ Returns a scaled normally distributed random value with the given mean and stand
 ``normal/1``
 ^^^^^^^^^^^^
 
-Returns a normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).
+Returns a normally (Gaussian) distributed random value (using a default mean of 0.0 and a default deviation of 1.0).
 
 | **Compilation flags:**
 |    ``static``
@@ -476,6 +476,25 @@ Returns a log normally distributed random value (using a default mean of 0.0 and
 |    ``lognormal(Value)``
 | **Mode and number of proofs:**
 |    ``lognormal(-float)`` - ``one``
+
+
+------------
+
+.. index:: wald/3
+.. _random_protocol/0::wald/3:
+
+``wald/3``
+^^^^^^^^^^
+
+Returns a scaled Wald (inverse Gaussian) distributed random value with the given mean.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``wald(Mean,Scale,Value)``
+| **Mode and number of proofs:**
+|    ``wald(+positive_float,+positive_float,-float)`` - ``one``
 
 
 ------------
@@ -590,6 +609,25 @@ Returns a binomial distributed random value.
 |    ``binomial(Trials,Probability,Value)``
 | **Mode and number of proofs:**
 |    ``binomial(+positive_integer,+positive_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: bernoulli/2
+.. _random_protocol/0::bernoulli/2:
+
+``bernoulli/2``
+^^^^^^^^^^^^^^^
+
+Returns a Bernoulli distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bernoulli(Probability,Value)``
+| **Mode and number of proofs:**
+|    ``bernoulli(+positive_integer,-float)`` - ``one``
 
 
 ------------
@@ -818,6 +856,25 @@ Returns a triangular distributed random value. Fails if the ``Left =< Mode =< Ri
 |    ``triangular(Left,Mode,Right,Value)``
 | **Mode and number of proofs:**
 |    ``triangular(+float,+float,+float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: von_mises/3
+.. _random_protocol/0::von_mises/3:
+
+``von_mises/3``
+^^^^^^^^^^^^^^^
+
+Returns a von Mises distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``von_mises(Mode,Concentration,Value)``
+| **Mode and number of proofs:**
+|    ``von_mises(+float,+non_negative_float,-float)`` - ``zero_or_one``
 
 
 ------------

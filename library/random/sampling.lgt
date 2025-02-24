@@ -33,8 +33,18 @@
 		Scaled is exp(Mean + Deviation * Value).
 
 	lognormal(Value) :-
-		normal(Value0),
-		Value is exp(Value0).
+		normal(Normal),
+		Value is exp(Normal).
+
+	wald(Mean, Scale, Value) :-
+		normal(Normal),
+		Y is Normal * Normal,
+		X is Mean + (Mean*Mean*Y) / (2*Scale) - (Mean / (2*Scale)) * sqrt(4*Mean*Scale*Y + Mean*Mean*Y*Y),
+		uniform(Uniform),
+		(	Uniform =< Mean / (Mean + X) ->
+			Value is X
+		;	Value is (Mean*Mean) / X
+		).
 
 	geometric(Probability, Value) :-
 		random(Random),

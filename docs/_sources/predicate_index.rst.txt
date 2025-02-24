@@ -731,6 +731,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`lgtunit <lgtunit/0::benchmark_reified/3>`
 
+``bernoulli/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::bernoulli/2>`
+
 ``beta/3``
 ----------
 
@@ -9683,6 +9693,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`html <html/0::void_element/1>`
+
+``von_mises/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::von_mises/3>`
+
+``wald/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`random_protocol <random_protocol/0::wald/3>`
 
 ``wall_time/1``
 ---------------
