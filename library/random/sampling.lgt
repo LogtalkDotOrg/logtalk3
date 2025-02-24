@@ -178,3 +178,23 @@
 		chi_squared(DegreesOfFreedomNumerator, ChiSquaredNumerator),
 		chi_squared(DegreesOfFreedomDenominator, ChiSquaredDenominator),
 		Value is (ChiSquaredNumerator / DegreesOfFreedomNumerator) / (ChiSquaredDenominator / DegreesOfFreedomDenominator).
+
+	von_mises(Mode, Concentration, Value) :-
+	    S is 0.5 / Concentration,
+	    R is S + sqrt(1.0 + S * S),
+		von_mises(Mode, Concentration, S, R, Value).
+
+	von_mises(Mode, Concentration, S, R, Value) :-
+		uniform(Uniform1),
+		uniform(Uniform2),
+		Z is cos(pi * Uniform1),
+		F is (1.0 + R * Z) / (R + Z),
+		C is Concentration * (R - F),
+		(	(Uniform2 < C * (2 - C); Uniform2 =< C * exp(1 - C)) ->
+			uniform(Uniform3),
+			(	Uniform3 > 0.5 ->
+				Value is Mode + acos(F) - truncate((Mode + acos(F) / (2*pi))) * 2*pi
+			;	Value is Mode - acos(F) - truncate((Mode - acos(F) / (2*pi))) * 2*pi
+			)
+		;	von_mises(Mode, Concentration, S, R, Value)
+	    ).

@@ -327,6 +327,13 @@
 		argnames is ['Left', 'Mode', 'Right', 'Value']
 	]).
 
+	:- public(von_mises/3).
+	:- mode(von_mises(+float, +non_negative_float, -float), zero_or_one).
+	:- info(von_mises/3, [
+		comment is 'Returns a von Mises distributed random value.',
+		argnames is ['Mode', 'Concentration', 'Value']
+	]).
+
 	:- public(circular_uniform_polar/3).
 	:- mode(circular_uniform_polar(+float, +float, -float), one).
 	:- info(circular_uniform_polar/3, [
