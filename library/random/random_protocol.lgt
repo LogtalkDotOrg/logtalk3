@@ -236,6 +236,13 @@
 		argnames is ['Trials', 'Probability', 'Value']
 	]).
 
+	:- public(bernoulli/2).
+	:- mode(bernoulli(+positive_integer, -float), one).
+	:- info(bernoulli/2, [
+		comment is 'Returns a Bernoulli distributed random value.',
+		argnames is ['Probability', 'Value']
+	]).
+
 	:- public(beta/3).
 	:- mode(beta(+positive_float, +positive_float, -float), one).
 	:- info(beta/3, [

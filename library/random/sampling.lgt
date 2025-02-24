@@ -60,6 +60,9 @@
 		;	binomial(M, Probability, Value0, Value)
 		).
 
+	bernoulli(Probability, Value) :-
+		binomial(1, Probability, 0, Value).
+
 	beta(Alpha, Beta, Value) :-
 		gamma(Alpha, AlphaValue),
 		gamma(Beta, BetaValue),
