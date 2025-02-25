@@ -20,27 +20,18 @@
 
 
 	normal(Mean, Deviation, Scaled) :-
-		normal(Value),
+		standard_normal(Value),
 		Scaled is Mean + Deviation * Value.
-
-	normal(Value) :-
-		random(X1),
-		random(X2),
-		Value is sqrt(-2.0 * log(X1)) * cos(2.0*pi*X2).
 
 	lognormal(Mean, Deviation, Scaled) :-
 		normal(Mean, Deviation, Value),
 		Scaled is exp(Mean + Deviation * Value).
 
-	lognormal(Value) :-
-		normal(Normal),
-		Value is exp(Normal).
-
 	wald(Mean, Scale, Value) :-
-		normal(Normal),
+		standard_normal(Normal),
 		Y is Normal * Normal,
 		X is Mean + (Mean*Mean*Y) / (2*Scale) - (Mean / (2*Scale)) * sqrt(4*Mean*Scale*Y + Mean*Mean*Y*Y),
-		uniform(Uniform),
+		random(Uniform),
 		(	Uniform =< Mean / (Mean + X) ->
 			Value is X
 		;	Value is (Mean*Mean) / X
@@ -62,7 +53,7 @@
 	hypergeometric(N, Population0, Successes0, Value0, Value) :-
 		M is N - 1,
 		Population1 is Population0 - 1,
-		uniform(Uniform),
+		random(Uniform),
 		(	Uniform < Successes0 / Population0 ->
 			Value1 is Value0 + 1,
 			Successes1 is Successes0 - 1,
@@ -70,10 +61,9 @@
 		;	hypergeometric(M, Population1, Successes0, Value0, Value)
 		).
 
-	exponential(Lambda, Value) :-
-		Lambda > 0,
-		random(Random),
-		Value is -log(1.0 - Random) / Lambda.
+	exponential(Scale, Value) :-
+		standard_exponential(Value0),
+		Value is Value0 * Scale.
 
 	binomial(Trials, Probability, Value) :-
 		Trials >= 0,
@@ -94,36 +84,13 @@
 		binomial(1, Probability, 0, Value).
 
 	beta(Alpha, Beta, Value) :-
-		gamma(Alpha, AlphaValue),
-		gamma(Beta, BetaValue),
+		standard_gamma(Alpha, AlphaValue),
+		standard_gamma(Beta, BetaValue),
 		Value is AlphaValue / (AlphaValue + BetaValue).
 
-	gamma(Alpha, Value) :-
-		Alpha > 0.0,
-		(	Alpha < 1.0 ->
-			uniform(Uniform),
-			gamma(Alpha + 1.0, Value0),
-			Value is Value0 * Uniform ** (1.0 / Alpha)
-		;	D is Alpha - 1.0 / 3.0,
-        	C is 1.0 / sqrt(9.0 * D),
-			gamma(D, C, 0.0, 0.0, Value)
-		).
-
-	gamma(D, C, V0, _, Value) :-
-		V0 =< 0.0,
-		!,
-		normal(Normal),
-		V is 1.0 + C * Normal,
-		gamma(D, C, V, Normal, Value).
-	gamma(D, C, V, Normal, Value) :-
-		V3 is V * V * V,
-		uniform(Uniform),
-		(	Uniform < 1.0 - 0.0331 * (Normal * Normal) * (Normal * Normal) ->
-			Value is D * V3
-		;	log(Uniform) < 0.5 * Normal * Normal + D * (1.0 - V3 + log(V3)) ->
-			Value is D * V3
-		;	gamma(D, C, V, Normal, Value)
-		).
+	gamma(Shape, Scale, Value) :-
+		standard_gamma(Shape, Value0),
+		Value is Value0 * Scale.
 
 	logistic(Location, Scale, Value) :-
 		random(Random),
@@ -195,14 +162,54 @@
 		!.
 	chi_squared(N, Value0, Value) :-
 		M is N - 1,
-		normal(Normal),
+		standard_normal(Normal),
 		Value1 is Value0 + Normal * Normal,
 		chi_squared(M, Value1, Value).
 
 	standard_t(DegreesOfFreedom, Value) :-
 		chi_squared(DegreesOfFreedom, ChiSquared),
-		normal(Normal),
+		standard_normal(Normal),
 		Value is Normal / sqrt(ChiSquared / DegreesOfFreedom).
+
+	standard_cauchy(Location, Scale, Value) :-
+		random(Uniform),
+		Value is Location + Scale * tan(pi * (Uniform - 0.5)).
+
+	standard_exponential(Value) :-
+		random(Uniform),
+		Value is -log(1.0 - Uniform).
+
+	standard_gamma(Shape, Value) :-
+		Shape > 0.0,
+		(	Shape < 1.0 ->
+			random(Uniform),
+			standard_gamma(Shape + 1.0, Value0),
+			Value is Value0 * Uniform ** (1.0 / Shape)
+		;	D is Shape - 1.0 / 3.0,
+        	C is 1.0 / sqrt(9.0 * D),
+			standard_gamma(D, C, 0.0, 0.0, Value)
+		).
+
+	standard_gamma(D, C, V0, _, Value) :-
+		V0 =< 0.0,
+		!,
+		standard_normal(Normal),
+		V is 1.0 + C * Normal,
+		standard_gamma(D, C, V, Normal, Value).
+	standard_gamma(D, C, V, Normal, Value) :-
+		V3 is V * V * V,
+		random(Uniform),
+		(	Uniform < 1.0 - 0.0331 * (Normal * Normal) * (Normal * Normal) ->
+			Value is D * V3
+		;	log(Uniform) < 0.5 * Normal * Normal + D * (1.0 - V3 + log(V3)) ->
+			Value is D * V3
+		;	standard_gamma(D, C, V, Normal, Value)
+		).
+
+	standard_normal(Value) :-
+		random(X1),
+		random(X2),
+		Value is sqrt(-2.0 * log(X1)) * cos(2.0*pi*X2).
 
 	fisher(DegreesOfFreedomNumerator, DegreesOfFreedomDenominator, Value) :-
 		chi_squared(DegreesOfFreedomNumerator, ChiSquaredNumerator),
@@ -215,8 +222,8 @@
 		logseries(Shape, Q, Value).
 
 	logseries(Shape, Q, Value) :-
-		uniform(Uniform1),
-		uniform(Uniform2),
+		random(Uniform1),
+		random(Uniform2),
 		(	Uniform2 =:= 0.0 ->
 			logseries(Shape, Q, Value)
 		;	K is truncate(1 + log(Uniform2) / log(1.0 - Shape)),
@@ -232,13 +239,13 @@
 		von_mises(Mode, Concentration, S, R, Value).
 
 	von_mises(Mode, Concentration, S, R, Value) :-
-		uniform(Uniform1),
-		uniform(Uniform2),
+		random(Uniform1),
+		random(Uniform2),
 		Z is cos(pi * Uniform1),
 		F is (1.0 + R * Z) / (R + Z),
 		C is Concentration * (R - F),
 		(	(Uniform2 < C * (2 - C); Uniform2 =< C * exp(1 - C)) ->
-			uniform(Uniform3),
+			random(Uniform3),
 			(	Uniform3 > 0.5 ->
 				Value is Mode + acos(F) - truncate((Mode + acos(F) / (2*pi))) * 2*pi
 			;	Value is Mode - acos(F) - truncate((Mode - acos(F) / (2*pi))) * 2*pi
@@ -247,7 +254,7 @@
 		).
 
 	gumbel(Location, Scale, Value) :-
-		uniform(Uniform),
+		random(Uniform),
 		(	Uniform =:= 0.0 ->
 			gumbel(Location, Scale, Value)
 		;	Value is Location - Scale * log(-log(Uniform))
@@ -259,7 +266,7 @@
 
 	dirichlet([], [], Sum, Sum).
 	dirichlet([Alpha| Alphas], [Theta0| Thetas0], Sum0, Sum) :-
-		gamma(Alpha, Theta0),
+		standard_gamma(Alpha, Theta0),
 		Sum1 is Sum0 + Theta0,
 		dirichlet(Alphas, Thetas0, Sum1, Sum).
 

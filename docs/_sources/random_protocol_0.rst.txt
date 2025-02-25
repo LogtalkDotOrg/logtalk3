@@ -15,7 +15,7 @@ Random number generator protocol. The predicates are declared as synchronized wh
 
 | **Author:** Paulo Moura
 | **Version:** 3:4:0
-| **Date:** 2025-02-24
+| **Date:** 2025-02-25
 
 | **Compilation flags:**
 |    ``static``
@@ -423,25 +423,6 @@ Returns a scaled normally (Gaussian) distributed random value with the given mea
 
 ------------
 
-.. index:: normal/1
-.. _random_protocol/0::normal/1:
-
-``normal/1``
-^^^^^^^^^^^^
-
-Returns a normally (Gaussian) distributed random value (using a default mean of 0.0 and a default deviation of 1.0).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``normal(Value)``
-| **Mode and number of proofs:**
-|    ``normal(-float)`` - ``one``
-
-
-------------
-
 .. index:: lognormal/3
 .. _random_protocol/0::lognormal/3:
 
@@ -457,25 +438,6 @@ Returns a scaled log normally distributed random value with the given mean and s
 |    ``lognormal(Mean,Deviation,Value)``
 | **Mode and number of proofs:**
 |    ``lognormal(+float,+non_negative_float,-float)`` - ``one``
-
-
-------------
-
-.. index:: lognormal/1
-.. _random_protocol/0::lognormal/1:
-
-``lognormal/1``
-^^^^^^^^^^^^^^^
-
-Returns a log normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``lognormal(Value)``
-| **Mode and number of proofs:**
-|    ``lognormal(-float)`` - ``one``
 
 
 ------------
@@ -533,6 +495,82 @@ Returns a standard Student's t distributed random value given the degrees of fre
 |    ``standard_t(DegreesOfFreedom,Value)``
 | **Mode and number of proofs:**
 |    ``standard_t(+positive_integer,-float)`` - ``one``
+
+
+------------
+
+.. index:: standard_cauchy/3
+.. _random_protocol/0::standard_cauchy/3:
+
+``standard_cauchy/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a standard Cauchy distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_cauchy(Location,Scale,Value)``
+| **Mode and number of proofs:**
+|    ``standard_cauchy(+float,+float,-float)`` - ``one``
+
+
+------------
+
+.. index:: standard_exponential/1
+.. _random_protocol/0::standard_exponential/1:
+
+``standard_exponential/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a standard exponential distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_exponential(Value)``
+| **Mode and number of proofs:**
+|    ``standard_exponential(-float)`` - ``one``
+
+
+------------
+
+.. index:: standard_gamma/2
+.. _random_protocol/0::standard_gamma/2:
+
+``standard_gamma/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a standard gamma distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_gamma(Shape,Value)``
+| **Mode and number of proofs:**
+|    ``standard_gamma(+positive_float,-float)`` - ``one``
+
+
+------------
+
+.. index:: standard_normal/1
+.. _random_protocol/0::standard_normal/1:
+
+``standard_normal/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a standard normally (Gaussian) distributed random value (using a default mean of 0.0 and a default deviation of 1.0).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal(Value)``
+| **Mode and number of proofs:**
+|    ``standard_normal(-float)`` - ``one``
 
 
 ------------
@@ -689,21 +727,21 @@ Returns a beta distributed random value.
 
 ------------
 
-.. index:: gamma/2
-.. _random_protocol/0::gamma/2:
+.. index:: gamma/3
+.. _random_protocol/0::gamma/3:
 
-``gamma/2``
+``gamma/3``
 ^^^^^^^^^^^
 
-Returns a gamma distributed random value.
+Returns a scaled gamma distributed random value.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``gamma(Alpha,Value)``
+|    ``gamma(Shape,Scale,Value)``
 | **Mode and number of proofs:**
-|    ``gamma(+positive_float,-float)`` - ``one``
+|    ``gamma(+positive_float,+positive_float,-float)`` - ``one``
 
 
 ------------

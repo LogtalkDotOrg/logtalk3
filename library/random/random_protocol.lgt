@@ -24,7 +24,7 @@
 	:- info([
 		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2025-02-24,
+		date is 2025-02-25,
 		comment is 'Random number generator protocol. The predicates are declared as synchronized when the library is compiled using a backend supporting threads.',
 		see_also is [random, backend_random, fast_random]
 	]).
@@ -173,25 +173,11 @@
 		argnames is ['Mean', 'Deviation', 'Value']
 	]).
 
-	:- public(normal/1).
-	:- mode(normal(-float), one).
-	:- info(normal/1, [
-		comment is 'Returns a normally (Gaussian) distributed random value (using a default mean of 0.0 and a default deviation of 1.0).',
-		argnames is ['Value']
-	]).
-
 	:- public(lognormal/3).
 	:- mode(lognormal(+float, +non_negative_float, -float), one).
 	:- info(lognormal/3, [
 		comment is 'Returns a scaled log normally distributed random value with the given mean and standard deviation for the normal distribution.',
 		argnames is ['Mean', 'Deviation', 'Value']
-	]).
-
-	:- public(lognormal/1).
-	:- mode(lognormal(-float), one).
-	:- info(lognormal/1, [
-		comment is 'Returns a log normally distributed random value (using a default mean of 0.0 and a default deviation of 1.0).',
-		argnames is ['Value']
 	]).
 
 	:- public(wald/3).
@@ -213,6 +199,34 @@
 	:- info(standard_t/2, [
 		comment is 'Returns a standard Student\'s t distributed random value given the degrees of freedom.',
 		argnames is ['DegreesOfFreedom', 'Value']
+	]).
+
+	:- public(standard_cauchy/3).
+	:- mode(standard_cauchy(+float, +float, -float), one).
+	:- info(standard_cauchy/3, [
+		comment is 'Returns a standard Cauchy distributed random value.',
+		argnames is ['Location', 'Scale', 'Value']
+	]).
+
+	:- public(standard_exponential/1).
+	:- mode(standard_exponential(-float), one).
+	:- info(standard_exponential/1, [
+		comment is 'Returns a standard exponential distributed random value.',
+		argnames is ['Value']
+	]).
+
+	:- public(standard_gamma/2).
+	:- mode(standard_gamma(+positive_float, -float), one).
+	:- info(standard_gamma/2, [
+		comment is 'Returns a standard gamma distributed random value.',
+		argnames is ['Shape', 'Value']
+	]).
+
+	:- public(standard_normal/1).
+	:- mode(standard_normal(-float), one).
+	:- info(standard_normal/1, [
+		comment is 'Returns a standard normally (Gaussian) distributed random value (using a default mean of 0.0 and a default deviation of 1.0).',
+		argnames is ['Value']
 	]).
 
 	:- public(fisher/3).
@@ -271,11 +285,11 @@
 		argnames is ['Alpha', 'Beta', 'Value']
 	]).
 
-	:- public(gamma/2).
-	:- mode(gamma(+positive_float, -float), one).
-	:- info(gamma/2, [
-		comment is 'Returns a gamma distributed random value.',
-		argnames is ['Alpha', 'Value']
+	:- public(gamma/3).
+	:- mode(gamma(+positive_float, +positive_float, -float), one).
+	:- info(gamma/3, [
+		comment is 'Returns a scaled gamma distributed random value.',
+		argnames is ['Shape', 'Scale', 'Value']
 	]).
 
 	:- public(logistic/3).
