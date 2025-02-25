@@ -28,6 +28,8 @@
 		Scaled is exp(Mean + Deviation * Value).
 
 	wald(Mean, Scale, Value) :-
+		Mean > 0.0,
+		Scale > 0.0,
 		standard_normal(Normal),
 		Y is Normal * Normal,
 		X is Mean + (Mean*Mean*Y) / (2*Scale) - (Mean / (2*Scale)) * sqrt(4*Mean*Scale*Y + Mean*Mean*Y*Y),
@@ -62,6 +64,7 @@
 		).
 
 	exponential(Scale, Value) :-
+		Scale > 0,
 		standard_exponential(Value0),
 		Value is Value0 * Scale.
 
@@ -89,19 +92,14 @@
 		Value is AlphaValue / (AlphaValue + BetaValue).
 
 	gamma(Shape, Scale, Value) :-
+		Scale > 0.0,
 		standard_gamma(Shape, Value0),
 		Value is Value0 * Scale.
 
 	logistic(Location, Scale, Value) :-
+		Scale > 0.0,
 		random(Random),
 		Value is Location + Scale * log(Random / (1 - Random)).
-
-	logistic(Location, Value) :-
-		random(Random),
-		Value is Location + log(Random / (1 - Random)).
-
-	logistic(Value) :-
-		logistic(0.0, Value).
 
 	poisson(Mean, Value) :-
 		Mean >= 0,
@@ -120,14 +118,14 @@
 		random(Random),
 		Value is Exponent * Random ** (1 / Exponent) / Exponent.
 
-	weibull(Shape, Value) :-
-		random(Random),
-		Value is (-log(Random)) ** (1 / Shape).
-
-	weibull(Lambda, Shape, Value) :-
+	weibull(Shape, Scale, Value) :-
 		Shape > 0,
+		Scale > 0,
 		random(Random),
-		Value is Lambda * (-log(Random)) ** (1 / Shape).
+		(	Random =:= 0.0 ->
+			weibull(Shape, Scale, Value)
+		;	Value is Scale * (-log(Random)) ** (1 / Shape)
+		).
 
 	uniform(Lower, Upper, Value) :-
 		random(Lower, Upper, Value).
@@ -199,7 +197,9 @@
 	standard_gamma(D, C, V, Normal, Value) :-
 		V3 is V * V * V,
 		random(Uniform),
-		(	Uniform < 1.0 - 0.0331 * (Normal * Normal) * (Normal * Normal) ->
+		(	Uniform =:= 0.0 ->
+			standard_gamma(D, C, V, Normal, Value)
+		;	Uniform < 1.0 - 0.0331 * (Normal * Normal) * (Normal * Normal) ->
 			Value is D * V3
 		;	log(Uniform) < 0.5 * Normal * Normal + D * (1.0 - V3 + log(V3)) ->
 			Value is D * V3
@@ -208,8 +208,11 @@
 
 	standard_normal(Value) :-
 		random(X1),
-		random(X2),
-		Value is sqrt(-2.0 * log(X1)) * cos(2.0*pi*X2).
+		(	X1 =:= 0.0 ->
+			standard_normal(Value)
+		;	random(X2),
+			Value is sqrt(-2.0 * log(X1)) * cos(2.0*pi*X2)
+		).
 
 	fisher(DegreesOfFreedomNumerator, DegreesOfFreedomDenominator, Value) :-
 		chi_squared(DegreesOfFreedomNumerator, ChiSquaredNumerator),

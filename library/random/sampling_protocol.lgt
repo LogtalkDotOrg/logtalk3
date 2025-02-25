@@ -57,41 +57,6 @@
 		argnames is ['DegreesOfFreedom', 'Value']
 	]).
 
-	:- public(standard_t/2).
-	:- mode(standard_t(+positive_integer, -float), one).
-	:- info(standard_t/2, [
-		comment is 'Returns a standard Student\'s t distributed random value given the degrees of freedom.',
-		argnames is ['DegreesOfFreedom', 'Value']
-	]).
-
-	:- public(standard_cauchy/3).
-	:- mode(standard_cauchy(+float, +float, -float), one).
-	:- info(standard_cauchy/3, [
-		comment is 'Returns a standard Cauchy distributed random value.',
-		argnames is ['Location', 'Scale', 'Value']
-	]).
-
-	:- public(standard_exponential/1).
-	:- mode(standard_exponential(-float), one).
-	:- info(standard_exponential/1, [
-		comment is 'Returns a standard exponential distributed random value.',
-		argnames is ['Value']
-	]).
-
-	:- public(standard_gamma/2).
-	:- mode(standard_gamma(+positive_float, -float), one).
-	:- info(standard_gamma/2, [
-		comment is 'Returns a standard gamma distributed random value.',
-		argnames is ['Shape', 'Value']
-	]).
-
-	:- public(standard_normal/1).
-	:- mode(standard_normal(-float), one).
-	:- info(standard_normal/1, [
-		comment is 'Returns a standard normally (Gaussian) distributed random value (using a default mean of 0.0 and a default deviation of 1.0).',
-		argnames is ['Value']
-	]).
-
 	:- public(fisher/3).
 	:- mode(fisher(+positive_integer, +positive_integer, -float), one).
 	:- info(fisher/3, [
@@ -123,8 +88,8 @@
 	:- public(exponential/2).
 	:- mode(exponential(+positive_float, -float), one).
 	:- info(exponential/2, [
-		comment is 'Returns an exponentially distributed random value.',
-		argnames is ['Lambda', 'Value']
+		comment is 'Returns a scaled exponentially distributed random value.',
+		argnames is ['Scale', 'Value']
 	]).
 
 	:- public(binomial/3).
@@ -162,20 +127,6 @@
 		argnames is ['Location', 'Scale', 'Value']
 	]).
 
-	:- public(logistic/2).
-	:- mode(logistic(+float, -float), one).
-	:- info(logistic/2, [
-		comment is 'Returns a logistic distributed random value.',
-		argnames is ['Location', 'Value']
-	]).
-
-	:- public(logistic/1).
-	:- mode(logistic(-float), one).
-	:- info(logistic/1, [
-		comment is 'Returns a logistic distributed random value.',
-		argnames is ['Value']
-	]).
-
 	:- public(poisson/2).
 	:- mode(poisson(+non_negative_float, -non_negative_integer), one).
 	:- info(poisson/2, [
@@ -194,14 +145,7 @@
 	:- mode(weibull(+float, +positive_float, -float), one).
 	:- info(weibull/3, [
 		comment is 'Returns a scaled Weibull distributed random value.',
-		argnames is ['Lambda', 'Shape', 'Value']
-	]).
-
-	:- public(weibull/2).
-	:- mode(weibull(+positive_float, -float), one).
-	:- info(weibull/2, [
-		comment is 'Returns a Weibull distributed random value.',
-		argnames is ['Shape', 'Value']
+		argnames is ['Shape', 'Scale', 'Value']
 	]).
 
 	:- public(uniform/3).
@@ -260,12 +204,39 @@
 		argnames is ['Radius', 'X', 'Y']
 	]).
 
-	:- if(current_logtalk_flag(threads, supported)).
-		:- synchronized([
-			random/1, random/3,
-			sequence/4, set/4, permutation/2,
-			randseq/4, randset/4
-		]).
-	:- endif.
+	:- public(standard_t/2).
+	:- mode(standard_t(+positive_integer, -float), one).
+	:- info(standard_t/2, [
+		comment is 'Returns a standard Student\'s t distributed random value given the degrees of freedom.',
+		argnames is ['DegreesOfFreedom', 'Value']
+	]).
+
+	:- public(standard_cauchy/3).
+	:- mode(standard_cauchy(+float, +float, -float), one).
+	:- info(standard_cauchy/3, [
+		comment is 'Returns a standard Cauchy distributed random value.',
+		argnames is ['Location', 'Scale', 'Value']
+	]).
+
+	:- public(standard_exponential/1).
+	:- mode(standard_exponential(-float), one).
+	:- info(standard_exponential/1, [
+		comment is 'Returns a standard exponential distributed random value.',
+		argnames is ['Value']
+	]).
+
+	:- public(standard_gamma/2).
+	:- mode(standard_gamma(+positive_float, -float), one).
+	:- info(standard_gamma/2, [
+		comment is 'Returns a standard gamma distributed random value.',
+		argnames is ['Shape', 'Value']
+	]).
+
+	:- public(standard_normal/1).
+	:- mode(standard_normal(-float), one).
+	:- info(standard_normal/1, [
+		comment is 'Returns a standard normally (Gaussian) distributed random value (using a default mean of 0.0 and a default deviation of 1.0).',
+		argnames is ['Value']
+	]).
 
 :- end_protocol.
