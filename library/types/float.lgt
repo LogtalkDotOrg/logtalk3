@@ -23,9 +23,9 @@
 	extends(number)).
 
 	:- info([
-		version is 1:6:0,
+		version is 1:7:0,
 		author is 'Paulo Moura',
-		date is 2025-02-20,
+		date is 2025-02-25,
 		comment is 'Floating point numbers data type predicates.'
 	]).
 
@@ -41,6 +41,13 @@
 	:- info(sequence/4, [
 		comment is 'Generates a list with the sequence of ``N`` equally spaced floats in the interval ``[Lower,Upper]``. Assumes ``N > 0`` and ``Lower =< Upper``; fails otherwise.',
 		argnames is ['Lower', 'Upper', 'N', 'List']
+	]).
+
+	:- public(sequence/5).
+	:- mode(sequence(+float, +float, +float, -list(float), -positive_integer), zero_or_one).
+	:- info(sequence/5, [
+		comment is 'Generates a list with the sequence of ``Step`` spaced floats in the interval ``[Lower,Upper]``. Also returns the length of the list. Assumes ``Lower =< Upper``; fails otherwise.',
+		argnames is ['Lower', 'Upper', 'Step', 'List', 'Length']
 	]).
 
 	between(Lower, Upper, N, Float) :-
@@ -75,6 +82,18 @@
 		M is N - 1,
 		Next is Current + Increment,
 		gen_sequence(M, Next, Upper, Increment, Tail).
+
+	sequence(Lower, Upper, Step, List, Length) :-
+		Lower =< Upper,
+		gen_sequence(Lower, Upper, Step, List, 1, Length).
+
+	gen_sequence(Current, Upper, Step, [Current], Length, Length) :-
+		Current + Step > Upper,
+		!.
+	gen_sequence(Current, Upper, Step, [Current| Tail], Length0, Length) :-
+		Length1 is Length0 + 1,
+		Next is Current + Step,
+		gen_sequence(Next, Upper, Step, Tail, Length1, Length).
 
 	valid(Float) :-
 		float(Float).

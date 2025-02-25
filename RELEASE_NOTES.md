@@ -28,8 +28,8 @@ RELEASE NOTES
 Library
 -------
 
-* ADDED: Predicates `between/4` and `sequence/4` to the `float` object in the
-`types` library.
+* ADDED: Predicates `between/4` and `sequence/4-5` to the `float` object in
+the `types` library.
 
 * ADDED: Predicates to the `random` library for drawing samples from common
 probability distributions.

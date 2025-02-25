@@ -226,8 +226,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:6:0</div>
-<div class="line"><strong>Date:</strong> 2025-02-20</div>
+<div class="line"><strong>Version:</strong> 1:7:0</div>
+<div class="line"><strong>Date:</strong> 2025-02-25</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -259,11 +259,12 @@
 <ul>
 <li><p><a class="reference internal" href="#between-4" id="id2"><code class="docutils literal notranslate"><span class="pre">between/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#sequence-4" id="id3"><code class="docutils literal notranslate"><span class="pre">sequence/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#sequence-5" id="id4"><code class="docutils literal notranslate"><span class="pre">sequence/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -306,6 +307,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">sequence(+float,+float,+positive_integer,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sequence-5">
+<span id="float-0-sequence-5"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">sequence/5</span></code></a><a class="headerlink" href="#sequence-5" title="Link to this heading"></a></h3>
+<p>Generates a list with the sequence of <code class="docutils literal notranslate"><span class="pre">Step</span></code> spaced floats in the interval <code class="docutils literal notranslate"><span class="pre">[Lower,Upper]</span></code>. Also returns the length of the list. Assumes <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>; fails otherwise.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequence(Lower,Upper,Step,List,Length)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">sequence(+float,+float,+float,-list(float),-positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>

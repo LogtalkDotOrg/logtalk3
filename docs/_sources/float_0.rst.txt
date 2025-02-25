@@ -14,8 +14,8 @@ Floating point numbers data type predicates.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:6:0
-| **Date:** 2025-02-20
+| **Version:** 1:7:0
+| **Date:** 2025-02-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -71,6 +71,25 @@ Generates a list with the sequence of ``N`` equally spaced floats in the interva
 |    ``sequence(Lower,Upper,N,List)``
 | **Mode and number of proofs:**
 |    ``sequence(+float,+float,+positive_integer,-list(float))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sequence/5
+.. _float/0::sequence/5:
+
+``sequence/5``
+^^^^^^^^^^^^^^
+
+Generates a list with the sequence of ``Step`` spaced floats in the interval ``[Lower,Upper]``. Also returns the length of the list. Assumes ``Lower =< Upper``; fails otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sequence(Lower,Upper,Step,List,Length)``
+| **Mode and number of proofs:**
+|    ``sequence(+float,+float,+float,-list(float),-positive_integer)`` - ``zero_or_one``
 
 
 ------------

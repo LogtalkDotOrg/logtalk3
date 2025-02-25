@@ -23,14 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:17:0,
+		version is 0:18:0,
 		author is 'Paulo Moura',
-		date is 2025-02-20,
+		date is 2025-02-25,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
+		op(700, xfx, =~=), (=~=)/2,
+		assertion/1, assertion/2
 	]).
 
 	test(type_checking_deterministic, true) :-
@@ -39,7 +40,7 @@
 				ground(Type),
 				type::arbitrary(Type, Value)
 			),
-			^^assertion(Type, lgtunit::deterministic(type::valid(Type,Value)))
+			assertion(Type, lgtunit::deterministic(type::valid(Type,Value)))
 		).
 
 	test(term_numbervars_3_01, true(ground(Term))) :-
@@ -156,6 +157,24 @@
 
 	test(float_sequence_4_06, false) :-
 		float::sequence(1.0, 0.0, 4, _).
+
+	test(float_sequence_5_01, true) :-
+		float::sequence(0.0, 10.0, 3.0, Sequence, Length),
+		assertion(Sequence =~= [0.0, 3.0, 6.0, 9.0]),
+		assertion(Length == 4).
+
+	test(float_sequence_5_02, true) :-
+		float::sequence(0.0, 10.0, 5.0, Sequence, Length),
+		assertion(Sequence =~= [0.0, 5.0, 10.0]),
+		assertion(Length == 3).
+
+	test(float_sequence_5_03, true) :-
+		float::sequence(0.0, 1.0, 2.0, Sequence, Length),
+		assertion(Sequence =~= [0.0]),
+		assertion(Length == 1).
+
+	test(float_sequence_5_04, false) :-
+		float::sequence(1.0, 0.0, 0.5, _, _).
 
 	test(list_sequential_occurrences_2_01, true(Counts == [a-2, b-1, a-4, c-3])) :-
 		list::sequential_occurrences([a,a,b,a,a,a,a,c,c,c], Counts).
