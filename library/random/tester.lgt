@@ -29,7 +29,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
 	logtalk_load(
-		[random_protocol, pseudo_random_protocol, random, backend_random, fast_random],
+		[random_protocol, pseudo_random_protocol, sampling_protocol, random, backend_random, fast_random],
 		[debug(on), source_data(on), clean(on)]
 	),
 	logtalk_load(types(loader)),

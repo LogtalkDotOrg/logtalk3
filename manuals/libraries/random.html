@@ -243,6 +243,12 @@ systems, notably B-Prolog, CxProlog, ECLiPSe, JIProlog, and Quintus
 Prolog, do not provide implementations for both the <code class="docutils literal notranslate"><span class="pre">get_seed/1</span></code> and
 <code class="docutils literal notranslate"><span class="pre">set_seed/1</span></code> predicates and calling these predicates simply succeed
 without performing any action.</p>
+<p>All random objects (<code class="docutils literal notranslate"><span class="pre">random</span></code>, <code class="docutils literal notranslate"><span class="pre">fast_random</span></code>, and <code class="docutils literal notranslate"><span class="pre">backend_random</span></code>)
+implement the <code class="docutils literal notranslate"><span class="pre">sampling_protocol</span></code> protocol. To maximize performance,
+the shared implementations of the sampling predicates is defined in the
+<code class="docutils literal notranslate"><span class="pre">sampling.lgt</span></code> file that’s included in the random objects. This allows
+these predicates to call the basic <code class="docutils literal notranslate"><span class="pre">random/1</span></code> and <code class="docutils literal notranslate"><span class="pre">random/3</span></code>
+predicates as locally defined predicates.</p>
 </section>
 </section>
 

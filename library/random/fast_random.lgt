@@ -20,7 +20,7 @@
 
 
 :- object(fast_random,
-	implements(pseudo_random_protocol)).
+	implements((pseudo_random_protocol, sampling_protocol))).
 
 	:- info([
 		version is 2:12:0,

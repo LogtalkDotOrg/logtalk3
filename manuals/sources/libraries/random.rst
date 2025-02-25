@@ -83,3 +83,10 @@ systems, notably B-Prolog, CxProlog, ECLiPSe, JIProlog, and Quintus
 Prolog, do not provide implementations for both the ``get_seed/1`` and
 ``set_seed/1`` predicates and calling these predicates simply succeed
 without performing any action.
+
+All random objects (``random``, ``fast_random``, and ``backend_random``)
+implement the ``sampling_protocol`` protocol. To maximize performance,
+the shared implementations of the sampling predicates is defined in the
+``sampling.lgt`` file that's included in the random objects. This allows
+these predicates to call the basic ``random/1`` and ``random/3``
+predicates as locally defined predicates.

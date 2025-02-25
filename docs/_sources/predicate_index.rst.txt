@@ -739,7 +739,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::bernoulli/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::bernoulli/2>`
 
 ``beta/3``
 ----------
@@ -749,7 +749,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::beta/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::beta/3>`
 
 ``between/3``
 -------------
@@ -780,7 +780,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::binomial/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::binomial/3>`
 
 ``bit//1``
 ----------
@@ -1041,7 +1041,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::chi_squared/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::chi_squared/2>`
 
 ``chr_is/2``
 ------------
@@ -1121,7 +1121,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::circular_uniform_cartesian/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::circular_uniform_cartesian/3>`
 
 ``circular_uniform_polar/3``
 ----------------------------
@@ -1131,7 +1131,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::circular_uniform_polar/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::circular_uniform_polar/3>`
 
 ``class/1``
 -----------
@@ -2364,7 +2364,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::dirichlet/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::dirichlet/2>`
 
 ``disable/1``
 -------------
@@ -2826,7 +2826,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::exponential/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::exponential/2>`
 
 ``extension/1``
 ---------------
@@ -3171,7 +3171,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::fisher/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::fisher/3>`
 
 ``flag_group_chk/1``
 --------------------
@@ -3597,7 +3597,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::gamma/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::gamma/3>`
 
 ``generate/1``
 --------------
@@ -3663,7 +3663,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::geometric/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::geometric/2>`
 
 ``geometric_mean/2``
 --------------------
@@ -3824,7 +3824,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::gumbel/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::gumbel/3>`
 
 ``hamming_distance/3``
 ----------------------
@@ -3936,7 +3936,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::hypergeometric/4>`
+* :ref:`sampling_protocol <sampling_protocol/0::hypergeometric/4>`
 
 ``ibk/3``
 ---------
@@ -5231,7 +5231,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::logistic/1>`
+* :ref:`sampling_protocol <sampling_protocol/0::logistic/1>`
 
 ``logistic/2``
 --------------
@@ -5241,7 +5241,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::logistic/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::logistic/2>`
 
 ``logistic/3``
 --------------
@@ -5251,7 +5251,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::logistic/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::logistic/3>`
 
 ``lognormal/3``
 ---------------
@@ -5261,7 +5261,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::lognormal/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::lognormal/3>`
 
 ``logseries/2``
 ---------------
@@ -5271,7 +5271,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::logseries/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::logseries/2>`
 
 ``logtalk_packs/0``
 -------------------
@@ -6127,7 +6127,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::normal/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::normal/3>`
 
 ``normal_element/2``
 --------------------
@@ -6891,7 +6891,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::poisson/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::poisson/2>`
 
 ``port/5``
 ----------
@@ -6931,7 +6931,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::power/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::power/2>`
 
 ``powerset/2``
 --------------
@@ -8681,7 +8681,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::standard_cauchy/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::standard_cauchy/3>`
 
 ``standard_deviation/2``
 ------------------------
@@ -8701,7 +8701,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::standard_exponential/1>`
+* :ref:`sampling_protocol <sampling_protocol/0::standard_exponential/1>`
 
 ``standard_gamma/2``
 --------------------
@@ -8711,7 +8711,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::standard_gamma/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::standard_gamma/2>`
 
 ``standard_normal/1``
 ---------------------
@@ -8721,7 +8721,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::standard_normal/1>`
+* :ref:`sampling_protocol <sampling_protocol/0::standard_normal/1>`
 
 ``standard_t/2``
 ----------------
@@ -8731,7 +8731,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::standard_t/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::standard_t/2>`
 
 ``start/0``
 -----------
@@ -9269,7 +9269,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::triangular/4>`
+* :ref:`sampling_protocol <sampling_protocol/0::triangular/4>`
 
 ``true/1``
 ----------
@@ -9319,7 +9319,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::uniform/1>`
+* :ref:`sampling_protocol <sampling_protocol/0::uniform/1>`
 
 ``uniform/3``
 -------------
@@ -9329,7 +9329,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::uniform/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::uniform/3>`
 
 ``uninstall/0``
 ---------------
@@ -9762,7 +9762,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::von_mises/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::von_mises/3>`
 
 ``wald/3``
 ----------
@@ -9772,7 +9772,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::wald/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::wald/3>`
 
 ``wall_time/1``
 ---------------
@@ -9792,7 +9792,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::weibull/2>`
+* :ref:`sampling_protocol <sampling_protocol/0::weibull/2>`
 
 ``weibull/3``
 -------------
@@ -9802,7 +9802,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`random_protocol <random_protocol/0::weibull/3>`
+* :ref:`sampling_protocol <sampling_protocol/0::weibull/3>`
 
 ``weighted_mean/3``
 -------------------

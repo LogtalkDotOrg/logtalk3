@@ -24,6 +24,7 @@
 	logtalk_load([
 		random_protocol,
 		pseudo_random_protocol,
+		sampling_protocol,
 		random,
 		backend_random,
 		fast_random
