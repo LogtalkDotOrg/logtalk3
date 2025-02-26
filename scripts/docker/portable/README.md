@@ -39,7 +39,8 @@ Includes Jupyter, JupyterLab, and the Logtalk kernel.
 Includes all Logtalk developer tool dependencies. 
 
 Includes the `nano` text editor for small editing tasks. For actual
-development, use the VSCode recommended setup as described below.
+development, use the VSCode or VSCodium recommended setups as described
+below.
 
 Includes a SSH server (not running by default) configured with user `root`
 and password `portable`. Can be started using the `service ssh start`
@@ -91,7 +92,7 @@ be mounted here.
 
 ## Running a container
 
-Providing a shell:
+### Providing a shell:
 
 	docker run -it --name test logtalk3
 
@@ -99,7 +100,7 @@ You can then run Logtalk with any of the installed backends. For details, see:
 
 https://github.com/LogtalkDotOrg/logtalk3/blob/master/QUICK_START.md
 
-Starting the SSH server on a running container:
+### Starting the SSH server on a running container:
 
 	docker run -it --name test -p 2222:22 logtalk3
 	docker exec -it test service ssh restart
@@ -110,7 +111,7 @@ You can then connect to the server using the command:
 
 Enter the password `portable` when prompted.
 
-Adding a `~/project` directory as a volume:
+### Adding a `~/project` directory as a volume:
 
 	docker run -it --name test -v /home/jdoe/project:/source logtalk3
 
