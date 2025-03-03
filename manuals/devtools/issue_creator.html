@@ -220,8 +220,10 @@ string or a <code class="docutils literal notranslate"><span class="pre">-b</spa
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
-<p>GitLab creates CI/CD pipelines in a detached HEAD state. As a
-consequence, the bug reports always show “Git branch: HEAD”.</p>
+<p>GitLab creates CI/CD pipelines in a detached HEAD state by default. As a
+consequence, the git branch would be reported as HEAD. To workaround
+this issue, this tool uses the value of the GitLab CI/CD pipeline
+variable <code class="docutils literal notranslate"><span class="pre">CI_COMMIT_REF_NAME</span></code> when defined as the branch name.</p>
 <p>This tool is in a beta stage of development. Your feedback is most
 appreciated.</p>
 </section>

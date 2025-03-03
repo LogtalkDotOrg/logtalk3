@@ -34,6 +34,12 @@ the `types` library.
 * ADDED: Predicates to the `random` library for drawing samples from common
 probability distributions.
 
+Tools
+-----
+
+* FIXED: The `issue_creator` tool to workaround GitLab creating CI/CD pipelines
+in a detached HEAD state.
+
 Installers and installation scripts
 -----------------------------------
 

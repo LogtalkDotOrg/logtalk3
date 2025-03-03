@@ -37,9 +37,9 @@
 :- object(issue_creator).
 
 	:- info([
-		version is 0:12:0,
+		version is 0:12:1,
 		author is 'Paulo Moura',
-		date is 2022-01-20,
+		date is 2025-03-03,
 		comment is 'Support for automatically creating bug report issues for failed tests in GitHub or GitLab servers.',
 		remarks is [
 			'Usage' - 'This tool is automatically loaded and used from the ``logtalk_tester`` automation script when using its ``-b`` option. See the script man page for details.'
@@ -52,7 +52,8 @@
 	]).
 
 	:- uses(os, [
-		decompose_file_name/3, operating_system_type/1, shell/1
+		decompose_file_name/3, operating_system_type/1, shell/1,
+		environment_variable/2
 	]).
 
 	:- uses(term_io, [
@@ -87,7 +88,13 @@
 
 	create_bug_report(Object, Test, File, Position, Reason, Note, Time) :-
 		decompose_file_name(File, Directory, _),
-		branch(Directory, Branch),
+		branch(Directory, Branch0),
+		(	Branch0 == 'HEAD',
+			environment_variable('CI_COMMIT_REF_NAME', Branch) ->
+			% assume GitLab CI/CD pipeline
+			true
+		;	Branch = Branch0
+		),
 		commit_hash_abbreviated(Directory, Hash),
 		commit_author(Directory, Author),
 		commit_date(Directory, Date),

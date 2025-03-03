@@ -109,7 +109,9 @@ environment variable to either an empty string or a `-b` option and use:
 Known issues
 ------------
 
-GitLab creates CI/CD pipelines in a detached HEAD state. As a consequence,
-the bug reports always show "Git branch: HEAD".
+GitLab creates CI/CD pipelines in a detached HEAD state by default. As a
+consequence, the git branch would be reported as HEAD. To workaround this
+issue, this tool uses the value of the GitLab CI/CD pipeline variable
+`CI_COMMIT_REF_NAME` when defined as the branch name.
 
 This tool is in a beta stage of development. Your feedback is most appreciated.
