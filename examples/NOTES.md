@@ -132,6 +132,10 @@ Follows a short description of each included example (in alphabetical order):
 	alternative names to inherited predicates in order to improve
 	readability or to solve multi-inheritance conflicts
 
+- `apache_poi`  
+	Java example of using the Apache POI library to read and write
+	Excel spreadsheets
+
 - `around_methods`  
 	example of defining a complementing category that uses the
 	`@/1` control construct to define an "around method"

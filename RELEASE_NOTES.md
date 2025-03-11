@@ -46,6 +46,12 @@ Installers and installation scripts
 * FIXED: The Docker image publishing scripts to use the `--no-cache` option
 to ensure that updated dependencies are pulled.
 
+Examples
+--------
+
+* ADDED: New `apache_poi` Java example of using the Apache POI library to read
+and write Excel spreadsheets.
+
 
 3.89.1 - February 18, 2025
 ==========================

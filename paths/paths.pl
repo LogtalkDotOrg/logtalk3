@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on December 10, 2024
+%  Last updated on March 11, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -163,6 +163,7 @@ logtalk_library_path(ack, examples('ack/')).
 logtalk_library_path(activation_nodes, ncl('activation_nodes/')).
 logtalk_library_path(adventure, examples('adventure/')).
 logtalk_library_path(aliases, examples('aliases/')).
+logtalk_library_path(apache_poi, examples('apache_poi/')).
 logtalk_library_path(around_methods, examples('around_methods/')).
 logtalk_library_path(aspects, examples('aspects/')).
 logtalk_library_path(assign_parameters, examples('assign_parameters/')).
