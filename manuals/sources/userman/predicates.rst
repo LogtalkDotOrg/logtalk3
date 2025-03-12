@@ -675,7 +675,7 @@ the predicates):
    % uses list member/2
    | ?- my_data_structure::list_member(X, L).
 
-    % uses set member/2
+   % uses set member/2
    | ?- my_data_structure::set_member(X, L).
 
    % uses list member/2
