@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:64:1,
+		version is 0:64:2,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-01-14,
+		date is 2025-03-12,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -988,15 +988,19 @@
 		find_predicate_references(Name/Arity, DeclarationEntity, DeclarationFile, DeclarationLine, References).
 
 	% local predicate call; no declaration
-	find_predicate_references(Name/Arity, Entity, _, _, References) :-
+	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
 		ground(Name/Arity),
 		findall(
 			Reference,
-			find_predicate_local_reference(Name/Arity, Entity, Reference),
+			(	find_predicate_local_reference(Name/Arity, Entity, ReferenceFile, StartLine, EndLine),
+				(	ReferenceFile \== File ->
+					true
+				;	\+ (StartLine =< Line, Line =< EndLine)
+				),
+				Reference = ReferenceFile-StartLine
+			),
 			References
-		),
-		% require at least one reference other than the selected one
-		References = [_, _| _].
+		).
 
 	% non-terminal
 	find_predicate_references(Name/Arity, Entity, File, Line, References) :-
@@ -1051,7 +1055,7 @@
 			find_predicate_references(Name/ExtArity, DeclarationEntity, DeclarationFile, DeclarationLine, References)
 		).
 
-	find_predicate_local_reference(Name/Arity, Entity, File-Line) :-
+	find_predicate_local_reference(Name/Arity, Entity, File, StartLine, EndLine) :-
 		% local predicate
 		ground(Name/Arity),
 		entity_property(Entity, Kind, file(File)),
@@ -1062,7 +1066,7 @@
 			memberchk(non_terminal(Name//Arity), DefinesProperties)
 		),
 		entity_property(Entity, Kind, calls(Name/ExtArity, CallsProperties)),
-		memberchk(line_count(Line), CallsProperties).
+		memberchk(lines(StartLine, EndLine), CallsProperties).
 
 	find_entity_references(Name/Arity, References) :-
 		ground(Name/Arity),

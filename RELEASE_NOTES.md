@@ -52,6 +52,11 @@ Examples
 * ADDED: New `apache_poi` Java example of using the Apache POI library to read
 and write Excel spreadsheets.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: VSCode support to also return single references to local predicates.
+
 
 3.89.1 - February 18, 2025
 ==========================
