@@ -36,7 +36,7 @@
 		logtalk_load(basic_types(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(java(loader)),
-		logtalk_load(apache_poi, [optimize(on), hook(java_hook), suspicious_calls(silent)])
+		logtalk_load(apache_poi, [optimize(on), hook(java_hook)])
 	)).
 
 :- elif((current_logtalk_flag(prolog_dialect, xvm), logtalk_library_path(jni, _))).
@@ -45,7 +45,7 @@
 		logtalk_load(basic_types(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(java(loader)),
-		logtalk_load(apache_poi, [optimize(on), hook(java_hook), suspicious_calls(silent)])
+		logtalk_load(apache_poi, [optimize(on), hook(java_hook)])
 	)).
 
 :- else.

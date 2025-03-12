@@ -40,7 +40,7 @@ the "spreadsheet" object main predicates.
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura and Ebrahim Azarisooreh',
-		date is 2025-03-11,
+		date is 2025-03-12,
 		comment is 'Predicates for reading and writing Excel spreadsheet files.',
 		remarks is [
 			'Spreadsheet objects' - 'Objects that represent the contents of a spreadsheet file using a chosen functor to represent sheet and cell data.',
@@ -262,9 +262,10 @@ the "spreadsheet" object main predicates.
 		valid_data(Object, Functor).
 
 	valid_data(Object, Functor) :-
-		Metadata =.. [Functor, SheetName, SheetIndex, FirstRow, LastRow],
 		forall(
-			Object::Metadata,
+			(	Metadata =.. [Functor, SheetName, SheetIndex, FirstRow, LastRow],
+				Object::Metadata
+			),
 			(	atom(SheetName),
 				integer(SheetIndex), SheetIndex >= 0,
 				integer(FirstRow), FirstRow >= 0,
@@ -280,9 +281,10 @@ the "spreadsheet" object main predicates.
 		).
 
 	valid_row(Object, Functor, SheetIndex, RowIndex) :-
-		Data =.. [Functor, SheetIndex, RowIndex, ColumnIndex, CellTypeName, CellValue],
 		forall(
-			Object::Data,
+			(	Data =.. [Functor, SheetIndex, RowIndex, ColumnIndex, CellTypeName, CellValue],
+				Object::Data
+			),
 			(	integer(ColumnIndex), ColumnIndex >= 0,
 				valid_cell_type(CellTypeName),
 				valid_cell_value(CellTypeName, CellValue)

@@ -38,7 +38,7 @@
 		logtalk_load(basic_types(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(java(loader)),
-		logtalk_load(apache_poi, [source_data(on), debug(on), suspicious_calls(silent)]),
+		logtalk_load(apache_poi, [source_data(on), debug(on)]),
 		logtalk_load('test_files/test_objects', [optimize(on)]),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run
@@ -52,7 +52,7 @@
 		logtalk_load(basic_types(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(java(loader)),
-		logtalk_load(apache_poi, [source_data(on), debug(on), suspicious_calls(silent)]),
+		logtalk_load(apache_poi, [source_data(on), debug(on)]),
 		logtalk_load('test_files/test_objects', [optimize(on)]),
 		logtalk_load(tests, [hook(lgtunit)]),
 		tests::run
