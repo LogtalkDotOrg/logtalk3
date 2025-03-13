@@ -37,6 +37,9 @@ Library
 * ADDED: Predicates `between/4` and `sequence/4-5` to the `float` object in
 the `types` library.
 
+* ADDED: Predicates `softmax/2-3` to the `numberlist` object in the `types`
+library.
+
 * ADDED: Predicates to the `random` library for drawing samples from common
 probability distributions.
 

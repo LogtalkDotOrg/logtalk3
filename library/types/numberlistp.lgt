@@ -22,9 +22,9 @@
 :- protocol(numberlistp).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2023-12-10,
+		date is 2025-03-13,
 		comment is 'List of numbers protocol.',
 		see_also is [numberlist, listp, varlistp]
 	]).
@@ -180,6 +180,25 @@
 	:- info(least_common_multiple/2, [
 		comment is 'Computes the least common multiple of a list of two or more positive integers. Fails if the list is empty or contains a single element. Fails also if any of the elements is zero. May require backend support for unbound integer arithmetic.',
 		argnames is ['Integers', 'LeastCommonMultiple']
+	]).
+
+	:- public(softmax/2).
+	:- mode(softmax(+list(float), -list(float)), one).
+	:- info(softmax/2, [
+		comment is 'Computes the softmax of a list of floats, returning a probability distribution.',
+		argnames is ['Floats', 'Softmax']
+	]).
+
+	:- public(softmax/3).
+	:- mode(softmax(+list(float), +positive_float, -list(float)), one).
+	:- info(softmax/3, [
+		comment is 'Computes the softmax of a list of floats with the given temperature, returning a probability distribution.',
+		argnames is ['Floats', 'Temperature', 'Softmax'],
+		remarks is [
+			'``Temperature > 1.0``' - 'Makes the distribution more uniform.',
+			'``Temperature < 1.0``' - 'Makes the distribution more concentrated on the largest values.',
+			'``Temperature = 1.0``' - 'Standard softmax behavior.'
+		]
 	]).
 
 :- end_protocol.

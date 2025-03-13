@@ -24,9 +24,9 @@
 	extends(list)).
 
 	:- info([
-		version is 1:15:2,
+		version is 1:16:0,
 		author is 'Paulo Moura',
-		date is 2024-06-12,
+		date is 2025-03-13,
 		comment is 'List of numbers predicates.',
 		see_also is [list, list(_), varlist, difflist]
 	]).
@@ -280,6 +280,25 @@
 	rescale([X| Xs], Factor, [Y| Ys]) :-
 		Y is X * Factor,
 		rescale(Xs, Factor, Ys).
+
+	softmax(Xs, Ys) :-
+		softmax(Xs, 1.0, Ys).
+
+	softmax(Xs, T, Ys) :-
+		T > 0.0,
+		softmax_exps_sum(Xs, T, Es, 0, Sum),
+		softmax_exps_softmax(Es, Sum, Ys).
+
+	softmax_exps_sum([], _, [], Sum, Sum).
+	softmax_exps_sum([X| Xs], T, [E| Es], Sum0, Sum) :-
+		E is exp(X / T),
+		Sum1 is Sum0 + E,
+		softmax_exps_sum(Xs, T, Es, Sum1, Sum).
+
+	softmax_exps_softmax([], _, []).
+	softmax_exps_softmax([E| Es], Sum, [Y| Ys]) :-
+		Y is E / Sum,
+		softmax_exps_softmax(Es, Sum, Ys).
 
 	:- if(current_logtalk_flag(prolog_dialect, xsb)).
 

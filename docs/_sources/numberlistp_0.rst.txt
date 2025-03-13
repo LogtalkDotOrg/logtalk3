@@ -14,8 +14,8 @@ List of numbers protocol.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:9:0
-| **Date:** 2023-12-10
+| **Version:** 1:10:0
+| **Date:** 2025-03-13
 
 | **Compilation flags:**
 |    ``static``
@@ -439,6 +439,50 @@ Computes the least common multiple of a list of two or more positive integers. F
 |    ``least_common_multiple(Integers,LeastCommonMultiple)``
 | **Mode and number of proofs:**
 |    ``least_common_multiple(+list(positive_integer),-positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: softmax/2
+.. _numberlistp/0::softmax/2:
+
+``softmax/2``
+^^^^^^^^^^^^^
+
+Computes the softmax of a list of floats, returning a probability distribution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``softmax(Floats,Softmax)``
+| **Mode and number of proofs:**
+|    ``softmax(+list(float),-list(float))`` - ``one``
+
+
+------------
+
+.. index:: softmax/3
+.. _numberlistp/0::softmax/3:
+
+``softmax/3``
+^^^^^^^^^^^^^
+
+Computes the softmax of a list of floats with the given temperature, returning a probability distribution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``softmax(Floats,Temperature,Softmax)``
+| **Mode and number of proofs:**
+|    ``softmax(+list(float),+positive_float,-list(float))`` - ``one``
+
+| **Remarks:**
+
+    - ``Temperature > 1.0``: Makes the distribution more uniform.
+    - ``Temperature < 1.0``: Makes the distribution more concentrated on the largest values.
+    - ``Temperature = 1.0``: Standard softmax behavior.
 
 
 ------------

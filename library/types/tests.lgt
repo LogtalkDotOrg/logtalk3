@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:18:0,
+		version is 0:19:0,
 		author is 'Paulo Moura',
-		date is 2025-02-25,
+		date is 2025-03-13,
 		comment is 'Unit tests for the "types" library.'
 	]).
 
@@ -285,6 +285,20 @@
 
 	test(numberlist_rescale_3_01, true(Rescaled == [2,4,6,8])) :-
 		numberlist::rescale([1,2,3,4], 2, Rescaled).
+
+	test(numberlist_softmax_2_01, true(Softmax =~= [0.03205860328008499, 0.08714431874203257, 0.23688281808991013, 0.6439142598879722])) :-
+		numberlist::softmax([1.0,2.0,3.0,4.0], Softmax).
+
+	test(numberlist_softmax_2_02, true(Sum =~= 1.0)) :-
+		numberlist::softmax([1.0,2.0,3.0,4.0], Softmax),
+		numberlist::sum(Softmax, Sum).
+
+	test(numberlist_softmax_3_01, true(Softmax =~= [0.002144008783584634, 0.015842201178506925, 0.11705891323853292, 0.8649548767993755])) :-
+		numberlist::softmax([1.0,2.0,3.0,4.0], 0.5, Softmax).
+
+	test(numberlist_softmax_3_02, true(Sum =~= 1.0)) :-
+		numberlist::softmax([1.0,2.0,3.0,4.0], 0.5, Softmax),
+		numberlist::sum(Softmax, Sum).
 
 	test(numberlist_least_common_multiple_2_01, true(Multiple == 6)) :-
 		numberlist::least_common_multiple([2,3], Multiple).

@@ -226,8 +226,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:9:0</div>
-<div class="line"><strong>Date:</strong> 2023-12-10</div>
+<div class="line"><strong>Version:</strong> 1:10:0</div>
+<div class="line"><strong>Date:</strong> 2025-03-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -278,11 +278,13 @@
 <li><p><a class="reference internal" href="#normalize-scalar-2" id="id20"><code class="docutils literal notranslate"><span class="pre">normalize_scalar/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#rescale-3" id="id21"><code class="docutils literal notranslate"><span class="pre">rescale/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#least-common-multiple-2" id="id22"><code class="docutils literal notranslate"><span class="pre">least_common_multiple/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#softmax-2" id="id23"><code class="docutils literal notranslate"><span class="pre">softmax/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#softmax-3" id="id24"><code class="docutils literal notranslate"><span class="pre">softmax/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id23">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id24">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id25">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id25">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id26">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id27">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -732,6 +734,58 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">least_common_multiple(+list(positive_integer),-positive_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
+<hr class="docutils" />
+</section>
+<section id="softmax-2">
+<span id="numberlistp-0-softmax-2"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">softmax/2</span></code></a><a class="headerlink" href="#softmax-2" title="Link to this heading"></a></h3>
+<p>Computes the softmax of a list of floats, returning a probability distribution.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">softmax(Floats,Softmax)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">softmax(+list(float),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="softmax-3">
+<span id="numberlistp-0-softmax-3"></span><span id="index-23"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">softmax/3</span></code></a><a class="headerlink" href="#softmax-3" title="Link to this heading"></a></h3>
+<p>Computes the softmax of a list of floats with the given temperature, returning a probability distribution.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">softmax(Floats,Temperature,Softmax)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">softmax(+list(float),+positive_float,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Remarks:</strong></div>
+</div>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Temperature</span> <span class="pre">&gt;</span> <span class="pre">1.0</span></code>: Makes the distribution more uniform.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Temperature</span> <span class="pre">&lt;</span> <span class="pre">1.0</span></code>: Makes the distribution more concentrated on the largest values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Temperature</span> <span class="pre">=</span> <span class="pre">1.0</span></code>: Standard softmax behavior.</p></li>
+</ul>
+</div></blockquote>
 </section>
 </section>
 <hr class="docutils" />
