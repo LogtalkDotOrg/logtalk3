@@ -25,6 +25,12 @@ RELEASE NOTES
 3.90.0 - March ??, 2025
 =======================
 
+Documentation
+-------------
+
+* ADDED: Support for generating single file versions of the Handbook and APIs
+documentation in LLM friendly Markdown format.
+
 Library
 -------
 

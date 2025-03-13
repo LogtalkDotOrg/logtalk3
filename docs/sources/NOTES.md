@@ -20,10 +20,14 @@ ________________________________________________________________________
 
 This directory contains files used by the Logtalk API documentation. The
 sources are generated automatically in reStructuredText markup language
-using the `scripts/update_html_docs.sh` script and then converted to HTML
-and Texinfo formats using Sphinx:
+using the `scripts/update_html_docs.sh` script and then converted to HTML,
+PDF, ePub, Texinfo, and Markdown formats using Sphinx:
 
 http://sphinx-doc.org/
+
+The Markdown format is a LLM friendly single file version. Users can copy
+this single file to their project directory when using AI coding tools to
+help avoid hallucinations and generate quality code.
 
 The conversion uses the `sphinx_rtd_theme` theme:
 

@@ -21,9 +21,13 @@ ________________________________________________________________________
 This directory contains the sources for the Logtalk documentation (which
 include the User Manual, Reference Manual, FAQ, and Glossary). The sources
 are written using the reStructuredText markup language and converted to
-HTML, PDF, ePub, and Texinfo formats using Sphinx:
+HTML, PDF, ePub, Texinfo, and Markdown formats using Sphinx:
 
 http://sphinx-doc.org/
+
+The Markdown format is a LLM friendly single file version. Users can copy
+this single file to their project directory when using AI coding tools to
+help avoid hallucinations and generate quality code.
 
 The conversion uses the `sphinx_rtd_theme` theme:
 

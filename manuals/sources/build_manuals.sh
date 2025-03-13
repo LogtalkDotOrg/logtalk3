@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on January 30, 2025
+##   Last updated on March 12, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -172,6 +172,11 @@ make info
 make latexpdf
 #make linkcheck
 
+version_base=$(cat ../../VERSION.txt | cut -f1 -d"-")
+
+sphinx-build -b singlehtml . _build/markdown
+pandoc _build/markdown/index.html -t gfm-raw_html -o _build/markdown/TheLogtalkHandbook-$version_base.md
+
 case $(sed --help 2>&1) in
 	*GNU*) sed_i () { sed -i "$@"; };;
 	*) sed_i () { sed -i '' "$@"; };;
@@ -192,5 +197,7 @@ rm -f ../_sources/index_latexpdf.rst.txt
 mv -f _build/latex/TheLogtalkHandbook*.pdf ../
 mv -f _build/epub/TheLogtalkHandbook*.epub ../
 mv -f _build/texinfo/TheLogtalkHandbook*.info ../
+
+mv -f _build/markdown/TheLogtalkHandbook*.md ../
 
 make clean
