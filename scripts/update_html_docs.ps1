@@ -168,6 +168,8 @@ Move-Item -Path _conf.py -Destination conf.py
 $version = Get-Content $env:LOGTALKUSER/VERSION.txt
 $version_base = $version.Split("-")[0]
 pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/LogtalkAPIs-$version_base.md
+# Remove heading link references from the Markdown file
+(Get-Content _build/singlehtml/LogtalkAPIs-$version_base.md) -replace '\[.\]\(#[-a-z]+ "Link to this heading"\)', '' | Set-Content _build/singlehtml/LogtalkAPIs-$version_base.md
 
 Copy-Item -Path .\_build\html\* -Destination .. -Recurse -Force
 Copy-Item -Path .\_build\texinfo\LogtalkAPIs-*.info -Destination ..

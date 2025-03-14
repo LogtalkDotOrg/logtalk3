@@ -180,6 +180,9 @@ $version = Get-Content $env:LOGTALKUSER/VERSION.txt
 $version_base = $version.Split("-")[0]
 pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/TheLogtalkHandbook-$version_base.md
 
+# Remove heading link references from the Markdown file
+(Get-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md) -replace '\[.\]\(#[-a-z]+ "Link to this heading"\)', '' | Set-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md
+# Fix relative links to the Logtalk API documentation
 (Get-Content _build/html/contributions/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/contributions/index.html
 (Get-Content _build/html/devtools/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/devtools/index.html
 (Get-Content _build/html/faq/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/faq/index.html

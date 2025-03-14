@@ -174,14 +174,18 @@ make latexpdf
 make singlehtml
 #make linkcheck
 
-version_base=$(cat ../../VERSION.txt | cut -f1 -d"-")
-pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/TheLogtalkHandbook-$version_base.md
-
+# Handle sed differences between GNU and BSD
 case $(sed --help 2>&1) in
 	*GNU*) sed_i () { sed -i "$@"; };;
 	*) sed_i () { sed -i '' "$@"; };;
 esac
 
+version_base=$(cat ../../VERSION.txt | cut -f1 -d"-")
+pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/TheLogtalkHandbook-$version_base.md
+
+# Remove heading link references from the Markdown file
+sed_i -E 's|\[.\]\(#[-a-z]+ "Link to this heading"\)||g' _build/singlehtml/TheLogtalkHandbook-$version_base.md
+# Fix relative links to the Logtalk API documentation
 sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/contributions/index.html
 sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/devtools/index.html
 sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/faq/index.html
