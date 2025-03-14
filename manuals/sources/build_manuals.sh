@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on March 12, 2025
+##   Last updated on March 14, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -30,6 +30,7 @@ cd "$(dirname "$0")" || exit 1
 rm -f ../TheLogtalkHandbook*.pdf
 rm -f ../TheLogtalkHandbook*.epub
 rm -f ../TheLogtalkHandbook*.info
+rm -f ../TheLogtalkHandbook*.md
 rm -rf ../_sources
 rm -rf ../_static
 rm -rf ../faq
@@ -170,12 +171,11 @@ make html
 make epub
 make info
 make latexpdf
+make singlehtml
 #make linkcheck
 
 version_base=$(cat ../../VERSION.txt | cut -f1 -d"-")
-
-sphinx-build -b singlehtml . _build/markdown
-pandoc _build/markdown/index.html -t gfm-raw_html -o _build/markdown/TheLogtalkHandbook-$version_base.md
+pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/TheLogtalkHandbook-$version_base.md
 
 case $(sed --help 2>&1) in
 	*GNU*) sed_i () { sed -i "$@"; };;
@@ -197,7 +197,6 @@ rm -f ../_sources/index_latexpdf.rst.txt
 mv -f _build/latex/TheLogtalkHandbook*.pdf ../
 mv -f _build/epub/TheLogtalkHandbook*.epub ../
 mv -f _build/texinfo/TheLogtalkHandbook*.info ../
-
-mv -f _build/markdown/TheLogtalkHandbook*.md ../
+mv -f _build/singlehtml/TheLogtalkHandbook*.md ../
 
 make clean

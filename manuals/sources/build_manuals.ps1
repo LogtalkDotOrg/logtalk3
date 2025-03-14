@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Documentation build script
-##   Last updated on December 16, 2023
+##   Last updated on March 14, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -29,6 +29,7 @@ Push-Location $dir
 Remove-Item ../TheLogtalkHandbook*.pdf
 Remove-Item ../TheLogtalkHandbook*.epub
 Remove-Item ../TheLogtalkHandbook*.info
+Remove-Item ../TheLogtalkHandbook*.md
 Remove-Item ../_sources -Recurse
 Remove-Item ../_static -Recurse
 Remove-Item ../faq -Recurse
@@ -172,7 +173,12 @@ Foreach-Object {
 .\make.bat latexpdf
 .\make.bat epub
 .\make.bat info
+.\make.bat singlehtml
 #.\make.bat linkcheck
+
+$version = Get-Content $env:LOGTALKUSER/VERSION.txt
+$version_base = $version.Split("-")[0]
+pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/TheLogtalkHandbook-$version_base.md
 
 (Get-Content _build/html/contributions/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/contributions/index.html
 (Get-Content _build/html/devtools/index.html).Replace('../docs/index.html', '../../docs/index.html') | Set-Content _build/html/devtools/index.html
@@ -189,6 +195,7 @@ Remove-Item ../_sources/index_latexpdf.rst.txt
 Move-Item -Path _build/latex/TheLogtalkHandbook*.pdf -Destination ../ -Force
 Move-Item -Path _build/epub/TheLogtalkHandbook*.epub -Destination ../ -Force
 Move-Item -Path _build/texinfo/TheLogtalkHandbook*.info -Destination ../ -Force
+Move-Item -Path _build/singlehtml/TheLogtalkHandbook*.md -Destination ../ -Force
 
 .\make.bat clean
 

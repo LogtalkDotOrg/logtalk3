@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on March 20, 2024
+##   Last updated on March 14, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -156,16 +156,25 @@ if ($i -eq $true) {
 	Copy-Item -Path _templates/layout_no_packs.html -Destination _templates/layout.html
 }
 Move-Item -Path _conf.py -Destination conf.py
+
 .\make.bat clean
 .\make.bat html
 .\make.bat info
 .\make.bat latexpdf
 .\make.bat epub
+.\make.bat singlehtml
 #.\make linkcheck
+
+$version = Get-Content $env:LOGTALKUSER/VERSION.txt
+$version_base = $version.Split("-")[0]
+pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/LogtalkAPIs-$version_base.md
+
 Copy-Item -Path .\_build\html\* -Destination .. -Recurse -Force
 Copy-Item -Path .\_build\texinfo\LogtalkAPIs-*.info -Destination ..
 Copy-Item -Path .\_build\latex\LogtalkAPIs-*.pdf -Destination ..
 Copy-Item -Path .\_build\epub\LogtalkAPIs-*.epub -Destination ..
+Copy-Item -Path .\_build\singlehtml\LogtalkAPIs-*.md -Destination ..
+
 .\make.bat clean
 Remove-Item _templates/layout.html
 Move-Item -Path conf.py -Destination _conf.py

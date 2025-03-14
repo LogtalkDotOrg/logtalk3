@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on March 12, 2025
+##   Last updated on March 14, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -151,24 +151,23 @@ else
 	cp _templates/layout_no_packs.html _templates/layout.html
 fi
 mv _conf.py conf.py
+
 make clean
 make html
 make info
 make latexpdf
 make epub
+make singlehtml
 #make linkcheck
 
 version_base=$(cat ../../VERSION.txt | cut -f1 -d"-")
-
-sphinx-build -b singlehtml . _build/markdown
-pandoc _build/markdown/index.html -t gfm-raw_html -o _build/markdown/LogtalkAPIs-$version_base.md
+pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/LogtalkAPIs-$version_base.md
 
 cp -R _build/html/* ../
 cp _build/texinfo/LogtalkAPIs-*.info ../
 cp _build/latex/LogtalkAPIs-*.pdf ../
 cp _build/epub/LogtalkAPIs-*.epub ../
-
-cp _build/markdown/LogtalkAPIs-*.md ../
+cp _build/singlehtml/LogtalkAPIs-*.md ../
 
 make clean
 rm _templates/layout.html
