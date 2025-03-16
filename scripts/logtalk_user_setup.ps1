@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk user folder setup script
-##   Last updated on November 27, 2023
+##   Last updated on March 16, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -88,7 +88,11 @@ function Get-Logtalkuser {
 
 Get-Logtalkuser
 
-if ($env:LOGTALKHOME -eq $env:LOGTALKUSER) {
+# Expand environment variables before comparison
+$expandedLogtalkhome = [Environment]::ExpandEnvironmentVariables($env:LOGTALKHOME)
+$expandedLogtalkuser = [Environment]::ExpandEnvironmentVariables($env:LOGTALKUSER)
+
+if ($expandedLogtalkhome -eq $expandedLogtalkuser) {
 	Write-Output "The environment variables LOGTALKHOME and LOGTALKUSER point"
 	Write-Output "to the same directory! Running this script is not necessary!"
 	Exit
@@ -132,7 +136,7 @@ function Create-Logtalkuser-Directory {
 	Copy-Item -Path $env:LOGTALKHOME\examples -Destination $env:LOGTALKUSER\examples -Recurse
 	Copy-Item -Path $env:LOGTALKHOME\library -Destination $env:LOGTALKUSER\library -Recurse
 	Copy-Item -Path $env:LOGTALKHOME\ports -Destination $env:LOGTALKUSER\ports -Recurse
-	Copy-Item -Path $env:LOGTALKHOME\scratch -Destination $env:LOGTALKUSER\sratch -Recurse
+	Copy-Item -Path $env:LOGTALKHOME\scratch -Destination $env:LOGTALKUSER\scratch -Recurse
 	Copy-Item -Path $env:LOGTALKHOME\tests -Destination $env:LOGTALKUSER\tests -Recurse
 	Copy-Item -Path $env:LOGTALKHOME\tools -Destination $env:LOGTALKUSER\tools -Recurse
 	Copy-Item -Path $env:LOGTALKHOME\loader-sample.lgt -Destination $env:LOGTALKUSER\loader-sample.lgt

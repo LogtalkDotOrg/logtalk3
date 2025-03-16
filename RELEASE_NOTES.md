@@ -67,6 +67,10 @@ Installers and installation scripts
 * FIXED: The Docker image publishing scripts to use the `--no-cache` option
 to ensure that updated dependencies are pulled.
 
+* FIXED: The `logtalk_user_setup.ps1` PowerShell script handling of the case
+where the values of the `LOGTALKHOME` and `LOGTALKUSER` environment variables
+are the same plus a typo when copying the `scratch` directory.
+
 Examples
 --------
 
