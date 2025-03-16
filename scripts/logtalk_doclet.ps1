@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on October 2, 2023
+##   Last updated on March 16, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -201,6 +201,10 @@ Function Check-Parameters() {
 		$script:versions_goal = ("use_module(library(logtalk))," + $versions_goal)
 	}
 
+	if ($s -ne "") {
+		$script:prefix = $s -replace '\\', '/'
+	}
+
 }
 
 ###################### here it starts ############################ 
@@ -217,6 +221,14 @@ $dot = ""
 $prolog = 'SWI-Prolog'
 $logtalk = "swilgt"
 $logtalk_option = "-g"
+$prefix = $env:USERPROFILE -replace '\\', '/'
+
+if (Test-Path $env:Programfiles\Git\usr\bin\timeout.exe) {
+	$timeout_command = "$env:Programfiles\Git\usr\bin\timeout.exe"
+} else {
+	$timeout_command = ""
+	Write-Output "Warning! Timeout support not available. The timeout option will be ignored."
+}
 
 Check-Parameters
 

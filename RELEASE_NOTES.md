@@ -58,6 +58,9 @@ in a detached HEAD state.
 * FIXED: The `logtalk_allure_report.ps1` PowerShell script creation of the
 `executor.json` file to wrap the key-value pairs in object syntax.
 
+* FIXED: The `logtalk_doclet.ps1` PowerShell script handling of the prefix and
+timeout options.
+
 Installers and installation scripts
 -----------------------------------
 
