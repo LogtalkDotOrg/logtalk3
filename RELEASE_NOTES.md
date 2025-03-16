@@ -64,6 +64,8 @@ and write Excel spreadsheets.
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 
+* ADDED: File `.augmentignore` for improved indexing using Augment Code.
+
 * FIXED: VSCode support to also return single references to local predicates.
 
 
