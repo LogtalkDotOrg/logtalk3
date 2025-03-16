@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on August 2, 2024
+##   Last updated on March 16, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -160,10 +160,12 @@ if (Test-Path $o\history) {
 
 # add a minimal executor.json so that trend graphs show build labels
 New-Item -Path $o -Name executor.json -ItemType "file" -Force > $null
-Add-Content -Path $o\executor.json -Value ('"buildOrder": "' + $next_build + '"')
-Add-Content -Path $o\executor.json -Value ('"buildName": "logtalk_allure_report#' + $next_build + '"')
-Add-Content -Path $o\executor.json -Value '"name": "logtalk_tester"'
-Add-Content -Path $o\executor.json -Value '"type": "logtalk_tester"'
+Add-Content -Path $o\executor.json -Value '{'
+Add-Content -Path $o\executor.json -Value ('	"buildOrder": "' + $next_build + '"')
+Add-Content -Path $o\executor.json -Value ('	"buildName": "logtalk_allure_report#' + $next_build + '"')
+Add-Content -Path $o\executor.json -Value  '	"name": "logtalk_tester"'
+Add-Content -Path $o\executor.json -Value  '	"type": "logtalk_tester"'
+Add-Content -Path $o\executor.json -Value '}'
 
 # add minimal categories.json to classify failed tests
 New-Item -Path $o -Name categories.json -ItemType "file" -Force > $null

@@ -55,6 +55,9 @@ Tools
 * FIXED: The `issue_creator` tool to workaround GitLab creating CI/CD pipelines
 in a detached HEAD state.
 
+* FIXED: The `logtalk_allure_report.ps1` PowerShell script creation of the
+`executor.json` file to wrap the key-value pairs in object syntax.
+
 Installers and installation scripts
 -----------------------------------
 
