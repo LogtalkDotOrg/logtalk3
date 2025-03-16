@@ -25,6 +25,12 @@ RELEASE NOTES
 3.90.0 - March ??, 2025
 =======================
 
+Prolog adapter and integration files
+------------------------------------
+
+* FIXED: The PowerShell integration scripts were not setting the `LOGTALKUSER`
+environment variable correctly when not defined by the user.
+
 Documentation
 -------------
 

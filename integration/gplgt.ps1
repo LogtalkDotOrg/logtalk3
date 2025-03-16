@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for GNU Prolog
-##   Last updated on April 19, 2022
+##   Last updated on March 16, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -52,7 +52,7 @@ function Get-Logtalkuser {
 	if ($null -eq $env:LOGTALKUSER) {
 		Write-Output "After the script completion, you must set the environment variable"
 		Write-Output "LOGTALKUSER pointing to %USERPROFILE%\Documents\Logtalk."
-		env:LOGTALKUSER = "%USERPROFILE%\Documents\Logtalk"
+		$env:LOGTALKUSER = "%USERPROFILE%\Documents\Logtalk"
 	}
 	# At the end LOGTALKUSER was set already or now is set
 }
