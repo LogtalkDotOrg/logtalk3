@@ -84,8 +84,8 @@ to ensure that updated dependencies are pulled.
 where the values of the `LOGTALKHOME` and `LOGTALKUSER` environment variables
 are the same plus a typo when copying the `scratch` directory.
 
-* FIXED: Typo in the `update_man_html_versions.ps1` PowerShell script handling
-of the SICStus Prolog backend.
+* FIXED: Typos in the `update_html_versions.ps1` and `update_svg_diagrams.ps1`
+PowerShell scripts handling of the SICStus Prolog backend.
 
 
 3.89.1 - February 18, 2025

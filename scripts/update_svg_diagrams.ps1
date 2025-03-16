@@ -2,7 +2,7 @@
 ## 
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ## 
-##   Last updated on December 25, 2023
+##   Last updated on March 16, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -104,8 +104,8 @@ if ("$p" -eq "b") {
 	$prolog='XVM'
 	$logtalk="xvmlgt -g"
 } elseif ("$p" -eq "sicstus") {
-	prolog='SICStus Prolog'
-	logtalk="sicstuslgt --goal"
+	$prolog='SICStus Prolog'
+	$logtalk="sicstuslgt --goal"
 } elseif ("$p" -eq "swi") {
 	$prolog='SWI-Prolog'
 	$logtalk="swilgt -g"
