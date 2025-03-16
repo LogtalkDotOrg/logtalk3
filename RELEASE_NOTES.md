@@ -61,16 +61,6 @@ in a detached HEAD state.
 * FIXED: The `logtalk_doclet.ps1` PowerShell script handling of the prefix and
 timeout options.
 
-Installers and installation scripts
------------------------------------
-
-* FIXED: The Docker image publishing scripts to use the `--no-cache` option
-to ensure that updated dependencies are pulled.
-
-* FIXED: The `logtalk_user_setup.ps1` PowerShell script handling of the case
-where the values of the `LOGTALKHOME` and `LOGTALKUSER` environment variables
-are the same plus a typo when copying the `scratch` directory.
-
 Examples
 --------
 
@@ -83,6 +73,19 @@ IDEs, text editors, and syntax highlighters support
 * ADDED: File `.augmentignore` for improved indexing using Augment Code.
 
 * FIXED: VSCode support to also return single references to local predicates.
+
+Installers and installation scripts
+-----------------------------------
+
+* FIXED: The Docker image publishing scripts to use the `--no-cache` option
+to ensure that updated dependencies are pulled.
+
+* FIXED: The `logtalk_user_setup.ps1` PowerShell script handling of the case
+where the values of the `LOGTALKHOME` and `LOGTALKUSER` environment variables
+are the same plus a typo when copying the `scratch` directory.
+
+* FIXED: Typo in the `update_man_html_versions.ps1` PowerShell script handling
+of the SICStus Prolog backend.
 
 
 3.89.1 - February 18, 2025

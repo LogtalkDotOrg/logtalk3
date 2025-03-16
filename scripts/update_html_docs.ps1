@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on March 14, 2025
+##   Last updated on March 16, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -103,8 +103,8 @@ if ("$p" -eq "b") {
 	$prolog='XVM'
 	$logtalk="xvmlgt -g"
 } elseif ("$p" -eq "sicstus") {
-	prolog='SICStus Prolog'
-	logtalk="sicstuslgt --goal"
+	$prolog='SICStus Prolog'
+	$logtalk="sicstuslgt --goal"
 } elseif ("$p" -eq "swi") {
 	$prolog='SWI-Prolog'
 	$logtalk="swilgt -g"
