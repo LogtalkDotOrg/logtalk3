@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.12")
+	Write-Output "${myName} 0.12"
 }
 
 function Get-Logtalkhome {
@@ -56,9 +56,9 @@ function Get-Logtalkhome {
 		
 		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
-			Write-Output ("Looking for: " + $DEFAULTPATH)
+			Write-Output "Looking for: ${DEFAULTPATH}"
 			if (Test-Path $DEFAULTPATH) {
-				Write-Output ("... using Logtalk installation found at " + $DEFAULTPATH)
+				Write-Output "... using Logtalk installation found at ${DEFAULTPATH}"
 				$env:LOGTALKHOME = $DEFAULTPATH
 				break
 			}
@@ -83,14 +83,14 @@ function Write-Usage-Help() {
 	Write-Output "This script converts .d2 and .dot files in the current directory to SVG files"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-c command] [-a arguments]")
-	Write-Output ("  " + $myName + " [-l layout] [-a arguments]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  ${myName} [-c command] [-a arguments]"
+	Write-Output "  ${myName} [-l layout] [-a arguments]"
+	Write-Output "  ${myName} -v"
+	Write-Output "  ${myName} -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output ("  -c Graphviz command (dot, circo, fdp, or neato; default is " + $c + ")")
-	Write-Output ("  -l d2 layout (dagre, elk, or tala; default is " + $l + ")")
+	Write-Output "  -c Graphviz command (dot, circo, fdp, or neato; default is ${c})"
+	Write-Output "  -l d2 layout (dagre, elk, or tala; default is ${l})"
 	Write-Output "  -a additional arguments wrapped as a string to be passed to the converter command (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h print help"
@@ -110,13 +110,13 @@ function Confirm-Parameters() {
 	}
 
 	if ($c -ne "dot" -and $c -ne "circo" -and $c -ne "fdp" -and $c -ne "neato") {
-	Write-Output ("Error! Unknown Graphviz command: " + $c)
+	Write-Output "Error! Unknown Graphviz command: ${c}"
 		Start-Sleep -Seconds 2
 		Exit
 	}
 
 	if ($l -ne "dagre" -and $l -ne "elk" -and $l -ne "tala") {
-	Write-Output ("Error! Unknown d2 layout: " + $l)
+	Write-Output "Error! Unknown d2 layout: ${l}"
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -131,7 +131,7 @@ Get-Logtalkhome
 
 # Check for existence
 if (Test-Path $env:LOGTALKHOME) {
-	$output = "Found LOGTALKHOME at: " + $env:LOGTALKHOME
+	$output = "Found LOGTALKHOME at: ${env:LOGTALKHOME}"
 	Write-Output $output
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
@@ -171,14 +171,14 @@ $dot_count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | %{$_.Count}
 
 if ($d2_count -gt 0) {
 	Write-Output "Converting .d2 files to .svg files ..."
-	Copy-Item -Path ($env:LOGTALKUSER + '\tools\diagrams\diagrams.css') -Destination .
+	Copy-Item -Path "${env:LOGTALKUSER}\tools\diagrams\diagrams.css" -Destination .
 	Get-ChildItem -Path . -Filter *.d2 | 
 	Foreach-Object {
-		Write-Host -NoNewline ("  converting " + $_.Name)
+		Write-Host -NoNewline "  converting $($_.Name)"
 		if ($a -ne "") {
-			& d2 --layout $l (-Split $a) $_.Name ($_.BaseName + ".svg")
+			& d2 --layout $l (-Split $a) $_.Name "$($_.BaseName).svg"
 		} else {
-			& d2 --layout $l $_.Name ($_.BaseName + ".svg")
+			& d2 --layout $l $_.Name "$($_.BaseName).svg"
 		}
 		if ($?) {
 			Write-Output " done"
@@ -191,17 +191,17 @@ if ($d2_count -gt 0) {
 
 if ($dot_count -gt 0) {
 	Write-Output "Converting .dot files to .svg files ..."
-	Copy-Item -Path ($env:LOGTALKUSER + '\tools\diagrams\diagrams.css') -Destination .
+	Copy-Item -Path "${env:LOGTALKUSER}\tools\diagrams\diagrams.css" -Destination .
 	Get-ChildItem -Path . -Filter *.dot | 
 	Foreach-Object {
-		Write-Host -NoNewline ("  converting " + $_.Name)
+		Write-Host -NoNewline "  converting $($_.Name)"
 		$converted = 1
 		$counter = 24
 		While (($converted -eq 1) -and ($counter -gt 0)) {
 			if ($a -ne "") {
-				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") (-Split $a) $_.Name
+				& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" (-Split $a) $_.Name
 			} else {
-				& $c -q -Tsvg -Gfontnames=svg -o ($_.BaseName + ".svg") $_.Name
+				& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" $_.Name
 			}
 			if ($?) {
 				$converted = 0

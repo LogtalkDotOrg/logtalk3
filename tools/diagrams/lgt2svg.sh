@@ -2,8 +2,8 @@
 
 #############################################################################
 ## 
-##   DOT diagram files to SVG files conversion script 
-##   Last updated on November 19, 2024
+##   DOT and d2 diagram files to SVG files conversion script 
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -160,9 +160,13 @@ dot_count=$(ls -1 ./*.dot 2>/dev/null | wc -l)
 d2_failed_flag=0
 dot_failed_flag=0
 
+# Copy CSS file once if needed
+if [ $d2_count -ne 0 ] || [ $dot_count -ne 0 ] ; then
+	cp "$LOGTALKUSER/tools/diagrams/diagrams.css" .
+fi
+
 if [ $d2_count -ne 0 ] ; then
 	echo "Converting .d2 files to .svg files ..."
-	cp "$LOGTALKUSER/tools/diagrams/diagrams.css" .
 	for file in ./*.d2; do
 		echo -n "  converting $(basename "$file")... "
 		d2 --layout "$layout" "${args[@]}" "$file" "${file%.*}.svg"  2>/dev/null | cat
@@ -177,20 +181,19 @@ fi
 
 if [ $dot_count -ne 0 ] ; then
 	echo "Converting .dot files to .svg files ..."
-	cp "$LOGTALKUSER/tools/diagrams/diagrams.css" .
 	for file in ./*.dot; do
 		echo -n "  converting $(basename "$file") "
-		converted=1
+		converted=0
 		counter=24
-		while [ $converted -eq 1 ] && [ $counter -gt 0 ] ; do
+		while [ $converted -eq 0 ] && [ $counter -gt 0 ] ; do
 			$command -q -Tsvg -Gfontnames=svg -o "${file%.*}.svg" "${args[@]}" "$file" 2>/dev/null | cat
 			if [ "${PIPESTATUS[0]}" == 0 ] ; then
-				converted=0
+				converted=1
 			fi
-			(( --counter ))
+			counter=$((counter - 1))
 			echo -n "."
 		done
-		if [ $counter == 0 ] ; then
+		if [ $converted -eq 0 ] ; then
 			dot_failed_flag=1
 			echo " failed"
 		else
