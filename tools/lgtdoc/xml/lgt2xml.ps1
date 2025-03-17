@@ -41,8 +41,7 @@ function Write-Script-Version {
 }
 
 function Get-Logtalkhome {
-	if ($null -eq $env:LOGTALKHOME) 
-	{
+	if ($null -eq $env:LOGTALKHOME) {
 		Write-Output "The environment variable LOGTALKHOME should be defined first, pointing"
 		Write-Output "to your Logtalk installation directory!"
 		Write-Output "Trying the default locations for the Logtalk installation..."
@@ -101,116 +100,75 @@ function Confirm-Parameters() {
 	if ($f -ne "xhtml" -and $f -ne "html") {
 		Write-Output "Error! Unknown output file format: $f"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if ($v -eq $true) {
 		Write-Script-Version
-		Exit
+		Exit 0
 	}
 
 	if ($h -eq $true) {
 		Write-Usage-Help
-		Exit
+		Exit 0
 	}
 
-}
-
-###################### here it starts ############################ 
-
-Confirm-Parameters
-
-Get-Logtalkhome
-
-# Check for existence
-if (Test-Path $env:LOGTALKHOME) {
-	$output = "Found LOGTALKHOME at: $env:LOGTALKHOME"
-	Write-Output $output
-} else {
-	Write-Output "... unable to locate Logtalk installation directory!"
-	Start-Sleep -Seconds 2
-	Exit
-}
-
-Get-Logtalkuser
-
-# Check for existence
-if (Test-Path $env:LOGTALKUSER) {
-	if (!(Test-Path $env:LOGTALKUSER/VERSION.txt)) {
-		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
-		Write-Output "Creating an up-to-date Logtalk user directory..."
-		logtalk_user_setup
-	} else {
-		$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
-		$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
-		if ($user_version -lt $system_version) {
-			Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
-			Write-Output "    $user_version < $system_version"
-			Write-Output "Creating an up-to-date Logtalk user directory..."
-			logtalk_user_setup
-		}
-	}
-} else {
-	Write-Output "Cannot find %LOGTALKUSER% directory! Creating a new Logtalk user directory"
-	Write-Output "by running the logtalk_user_setup shell script:"
-	logtalk_user_setup
 }
 
 function New-Index-File() {
-	New-Item -Path . -Name $i -ItemType "file" -Force > $null
+	New-Item -Path . -Name "$i" -ItemType "file" -Force > $null
 
 	switch ( $f ) {
 		"xhtml" {
-			Add-Content -Path $i -Value "<?xml version=`"1.0`" encoding=`"utf-8`"?>"
-			Add-Content -Path $i -Value "<?xml-stylesheet href=`"logtalk.css`" type=`"text/css`"?>"
-			Add-Content -Path $i -Value "<!DOCTYPE html PUBLIC `"-//W3C//DTD XHTML 1.0 Strict//EN`" `"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd`">"
-			Add-Content -Path $i -Value "<html lang=`"en`" xml:lang=`"en`" xmlns=`"http://www.w3.org/1999/xhtml`">"
+			Add-Content -Path "$i" -Value "<?xml version=`"1.0`" encoding=`"utf-8`"?>"
+			Add-Content -Path "$i" -Value "<?xml-stylesheet href=`"logtalk.css`" type=`"text/css`"?>"
+			Add-Content -Path "$i" -Value "<!DOCTYPE html PUBLIC `"-//W3C//DTD XHTML 1.0 Strict//EN`" `"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd`">"
+			Add-Content -Path "$i" -Value "<html lang=`"en`" xml:lang=`"en`" xmlns=`"http://www.w3.org/1999/xhtml`">"
 		}
 		"html" {
-			Add-Content -Path $i -Value "<!DOCTYPE html PUBLIC `"-//W3C//DTD HTML 4.01//EN`" `"http://www.w3.org/TR/html4/strict.dtd`">"
-			Add-Content -Path $i -Value "<html>"
+			Add-Content -Path "$i" -Value "<!DOCTYPE html PUBLIC `"-//W3C//DTD HTML 4.01//EN`" `"http://www.w3.org/TR/html4/strict.dtd`">"
+			Add-Content -Path "$i" -Value "<html>"
 		}
 	}
 
-	Add-Content -Path $i -Value "<head>"
-	Add-Content -Path $i -Value "    <meta http-equiv=`"content-type`" content=`"text/html; charset=utf-8`"/>"
-	Add-Content -Path $i -Value "    <title>$i</title>"
-	Add-Content -Path $i -Value "    <link rel=`"stylesheet`" href=`"logtalk.css`" type=`"text/css`"/>"
-	Add-Content -Path $i -Value "</head>"
-	Add-Content -Path $i -Value "<body>"
-	Add-Content -Path $i -Value "<h1>$i</h1>"
-	Add-Content -Path $i -Value "<ul>"
+	Add-Content -Path "$i" -Value "<head>"
+	Add-Content -Path "$i" -Value "    <meta http-equiv=`"content-type`" content=`"text/html; charset=utf-8`"/>"
+	Add-Content -Path "$i" -Value "    <title>$i</title>"
+	Add-Content -Path "$i" -Value "    <link rel=`"stylesheet`" href=`"logtalk.css`" type=`"text/css`"/>"
+	Add-Content -Path "$i" -Value "</head>"
+	Add-Content -Path "$i" -Value "<body>"
+	Add-Content -Path "$i" -Value "<h1>$i</h1>"
+	Add-Content -Path "$i" -Value "<ul>"
 
 	if (Test-Path "directory_index.xml") {
-		Add-Content -Path $i -Value "    <li><a href=`"library_index.xml`">Library index</a></li>"
-		Add-Content -Path $i -Value "    <li><a href=`"directory_index.xml`">Directory index</a></li>"
-		Add-Content -Path $i -Value "    <li><a href=`"entity_index.xml`">Entity index</a></li>"
-		Add-Content -Path $i -Value "    <li><a href=`"predicate_index.xml`">Predicate index</a></li>"
-	} elseif (Get-ChildItem -Path . -Filter .\*.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
-		Get-ChildItem -Path . -Filter .\*.xml |
+		Add-Content -Path "$i" -Value "    <li><a href=`"library_index.xml`">Library index</a></li>"
+		Add-Content -Path "$i" -Value "    <li><a href=`"directory_index.xml`">Directory index</a></li>"
+		Add-Content -Path "$i" -Value "    <li><a href=`"entity_index.xml`">Entity index</a></li>"
+		Add-Content -Path "$i" -Value "    <li><a href=`"predicate_index.xml`">Predicate index</a></li>"
+	} elseif (Get-ChildItem -Path . -Filter *.xml | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
+		Get-ChildItem -Path . -Filter *.xml |
 		Foreach-Object {
-			if ($_ | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
+			if (Select-String -Path $_.FullName -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
 				$entity = ($_.BaseName -replace '_[^_]*$')
 				$pars   = ($_.BaseName -replace '.*_')
 				Write-Output "  indexing $($_.BaseName).html"
-				if ($pars -gt 0) {
-					Add-Content -Path $i -Value "    <li><a href=`"$($_.Name)`">$entity/$pars</a></li>"
+				if ([int]$pars -gt 0) {
+					Add-Content -Path "$i" -Value "    <li><a href=`"$($_.Name)`">$entity/$pars</a></li>"
 				} else {
-					Add-Content -Path $i -Value "    <li><a href=`"$($_.Name)`">$entity</a></li>"
+					Add-Content -Path "$i" -Value "    <li><a href=`"$($_.Name)`">$entity</a></li>"
 				}
 			}
 		}
 	}
 
-	Add-Content -Path $i -Value "</ul>"
+	Add-Content -Path "$i" -Value "</ul>"
 
 	$date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 
-	Add-Content -Path $i -Value "<p>Generated on $date</p>"
-	Add-Content -Path $i -Value "</body>"
-	Add-Content -Path $i -Value "</html>"
+	Add-Content -Path "$i" -Value "<p>Generated on $date</p>"
+	Add-Content -Path "$i" -Value "</body>"
+	Add-Content -Path "$i" -Value "</html>"
 }
-
 
 ###################### here it starts ############################ 
 
@@ -219,26 +177,25 @@ Confirm-Parameters
 Get-Logtalkhome
 
 # Check for existence
-if (Test-Path $env:LOGTALKHOME) {
-	$output = "Found LOGTALKHOME at: $env:LOGTALKHOME"
-	Write-Output $output
+if (Test-Path "$env:LOGTALKHOME") {
+	Write-Output "Found LOGTALKHOME at: $env:LOGTALKHOME"
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
-	Exit
+	Exit 1
 }
 
 Get-Logtalkuser
 
 # Check for existence
-if (Test-Path $env:LOGTALKUSER) {
-	if (!(Test-Path $env:LOGTALKUSER/VERSION.txt)) {
+if (Test-Path "$env:LOGTALKUSER") {
+	if (!(Test-Path "$env:LOGTALKUSER/VERSION.txt")) {
 		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
 		Write-Output "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	} else {
-		$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
-		$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
+		$system_version = Get-Content "$env:LOGTALKHOME/VERSION.txt"
+		$user_version = Get-Content "$env:LOGTALKUSER/VERSION.txt"
 		if ($user_version -lt $system_version) {
 			Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
 			Write-Output "    $user_version < $system_version"
@@ -253,44 +210,56 @@ if (Test-Path $env:LOGTALKUSER) {
 }
 
 if (!(Test-Path "logtalk_entity.dtd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.dtd" -Destination .
 }
 
 if (!(Test-Path "logtalk_index.dtd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.dtd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.dtd" -Destination .
 }
 
 if (!(Test-Path "custom.ent")) {
-	Copy-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\custom.ent -Destination .
+	Copy-Item -Path "$env:LOGTALKUSER/tools/lgtdoc/xml/custom.ent" -Destination .
 }
 
 if (!(Test-Path "logtalk_entity.xsd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.xsd" -Destination .
 }
 
 if (!(Test-Path "logtalk_index.xsd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.xsd" -Destination .
 }
 
 if (!(Test-Path "logtalk.css")) {
-	Copy-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk.css -Destination .
+	Copy-Item -Path "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk.css" -Destination .
 }
 
 if (!(Test-Path "logtalk_entity_to_xml.xsl")) {
-	Copy-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_xml.xsl -Destination .
+	Copy-Item -Path "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_xml.xsl" -Destination .
 }
 
 if (!(Test-Path "logtalk_index_to_xml.xsl")) {
-	Copy-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index_to_xml.xsl -Destination .
+	Copy-Item -Path "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_xml.xsl" -Destination .
 }
 
-if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch -Quiet) {
-	Write-Output "Indexing XML files..."
-	Write-Output ""
-	Write-Output "generating $i file..."
-	New-Index-File
-	Write-Output "$i file generated"
-	Write-Output ""
+if (Test-Path -Path "*.xml" -PathType Leaf) {
+	$hasLogtalkFiles =
+		Get-ChildItem -Path "*.xml" -File | 
+		Select-Object -First 1 | 
+		Get-Content -Raw | 
+		Select-String -Pattern '<logtalk' -CaseSensitive -SimpleMatch -Quiet
+	
+	if ($hasLogtalkFiles) {
+		Write-Output "Indexing XML files..."
+		Write-Output ""
+		Write-Output "generating $i file..."
+		New-Index-File
+		Write-Output "$i file generated"
+		Write-Output ""
+	} else {
+		Write-Output ""
+		Write-Output "No Logtalk XML files exist in the current directory!"
+		Write-Output ""
+	}
 } else {
 	Write-Output ""
 	Write-Output "No XML files exist in the current directory!"

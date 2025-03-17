@@ -71,7 +71,7 @@ function Get-Logtalkuser {
 	if ($null -eq $env:LOGTALKUSER) {
 		Write-Output "After the script completion, you must set the environment variable"
 		Write-Output "LOGTALKUSER pointing to %USERPROFILE%\Documents\Logtalk."
-		$env:LOGTALKUSER = "%USERPROFILE%\Documents\Logtalk"
+		$env:LOGTALKUSER = "$env:USERPROFILE\Documents\Logtalk"
 	}
 	# At the end LOGTALKUSER was set already or now is set
 }

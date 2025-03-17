@@ -101,29 +101,29 @@ function Confirm-Parameters() {
 	if ($f -ne "a4" -and $f -ne "us") {
 		Write-Output "Error! Unsupported output format: $f"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if (-not(Test-Path $d)) { # cannot be ""
 		Write-Output "The $d output directory does not exist!"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if ($p -ne "fop" -and $p -ne "fop2" -and $p -ne "xep" -and $p -ne "xinc") {
 		Write-Output "Error! Unsupported XSL-FO processor: $p"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if ($v -eq $true) {
 		Write-Script-Version
-		Exit
+		Exit 0
 	}
 
 	if ($h -eq $true) {
 		Write-Usage-Help
-		Exit
+		Exit 0
 	}
 
 }
@@ -135,18 +135,18 @@ Confirm-Parameters
 Get-Logtalkhome
 
 # Check for existence
-if (Test-Path $env:LOGTALKHOME) {
+if (Test-Path "$env:LOGTALKHOME") {
 	Write-Output "Found LOGTALKHOME at: $env:LOGTALKHOME"
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
-	Exit
+	Exit 1
 }
 
 Get-Logtalkuser
 
 # Check for existence
-if (Test-Path $env:LOGTALKUSER) {
+if (Test-Path "$env:LOGTALKUSER") {
 	if (!(Test-Path "$env:LOGTALKUSER/VERSION.txt")) {
 		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
 		Write-Output "Creating an up-to-date Logtalk user directory..."
@@ -168,33 +168,33 @@ if (Test-Path $env:LOGTALKUSER) {
 }
 
 if ($f -eq "a4") {
-	$entity_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_pdf_a4.xsl"
+	$entity_xslt = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_pdf_a4.xsl"
 } else {
-	$entity_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_pdf_us.xsl"
+	$entity_xslt = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_pdf_us.xsl"
 }
 
 if (!(Test-Path "logtalk_entity.dtd")) {
-	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd" -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.dtd" -Destination .
 }
 
 if (!(Test-Path "custom.ent")) {
-	Copy-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\custom.ent" -Destination .
+	Copy-Item -Path "$env:LOGTALKUSER/tools/lgtdoc/xml/custom.ent" -Destination .
 }
 
 if (!(Test-Path "logtalk_entity.xsd")) {
-	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd" -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.xsd" -Destination .
 }
 
 
 if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch -Quiet) {
 	Write-Output "Converting XML files to PDF files..."
 
-	Get-ChildItem -Path .\*.xml |
+	Get-ChildItem -Path . -Filter *.xml |
 	Foreach-Object {
 		if (Select-String -Path $_ -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
 			Write-Output "  converting $($_.Name)"
-			$file = Join-Path $pwd $_.Name
-			$pdf = Join-Path $d "$($_.BaseName).pdf"
+			$file = Join-Path "$pwd" "$($_.Name)"
+			$pdf = Join-Path "$d" "$($_.BaseName).pdf"
 			if ($p -eq "xinc") {
 				xinc -xml "$file" -xsl "$entity_xslt" -pdf "$pdf" > $null
 			} else {
@@ -210,7 +210,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Write-Output ""
 }
 
-if ($pwd -ne (Join-Path $env:LOGTALKHOME xml)) {
+if ($pwd -ne (Join-Path "$env:LOGTALKHOME" xml)) {
 	Remove-Item -Path .\logtalk_entity.dtd
 	Remove-Item -Path .\logtalk_entity.xsd
 	Remove-Item -Path .\custom.ent

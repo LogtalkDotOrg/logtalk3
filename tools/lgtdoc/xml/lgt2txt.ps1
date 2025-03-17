@@ -95,19 +95,19 @@ function Write-Usage-Help() {
 function Confirm-Parameters() {
 
 	if (-not(Test-Path $d)) { # cannot be ""
-		Write-Output "The $p output directory does not exist!"
+		Write-Output "The $d output directory does not exist!"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if ($v -eq $true) {
 		Write-Script-Version
-		Exit
+		Exit 0
 	}
 
 	if ($h -eq $true) {
 		Write-Usage-Help
-		Exit
+		Exit 0
 	}
 
 }
@@ -119,25 +119,25 @@ Confirm-Parameters
 Get-Logtalkhome
 
 # Check for existence
-if (Test-Path $env:LOGTALKHOME) {
+if (Test-Path "$env:LOGTALKHOME") {
 	Write-Output "Found LOGTALKHOME at: $env:LOGTALKHOME"
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
-	Exit
+	Exit 1
 }
 
 Get-Logtalkuser
 
 # Check for existence
-if (Test-Path $env:LOGTALKUSER) {
-	if (!(Test-Path $env:LOGTALKUSER/VERSION.txt)) {
+if (Test-Path "$env:LOGTALKUSER") {
+	if (!(Test-Path "$env:LOGTALKUSER/VERSION.txt")) {
 		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
 		Write-Output "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	} else {
-		$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
-		$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
+		$system_version = Get-Content "$env:LOGTALKHOME/VERSION.txt"
+		$user_version = Get-Content "$env:LOGTALKUSER/VERSION.txt"
 		if ($user_version -lt $system_version) {
 			Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
 			Write-Output "    $user_version < $system_version"
@@ -151,27 +151,27 @@ if (Test-Path $env:LOGTALKUSER) {
 	logtalk_user_setup
 }
 
-$entity_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_txt.xsl"
-$index_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index_to_txt.xsl"
+$entity_xslt = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_txt.xsl"
+$index_xslt = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_txt.xsl"
 
 if (!(Test-Path "logtalk_entity.dtd")) {
-	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd" -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.dtd" -Destination .
 }
 
 if (!(Test-Path "logtalk_index.dtd")) {
-	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.dtd" -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.dtd" -Destination .
 }
 
 if (!(Test-Path "custom.ent")) {
-	Copy-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\custom.ent" -Destination .
+	Copy-Item -Path "$env:LOGTALKUSER/tools/lgtdoc/xml/custom.ent" -Destination .
 }
 
 if (!(Test-Path "logtalk_entity.xsd")) {
-	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd" -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_entity.xsd" -Destination .
 }
 
 if (!(Test-Path "logtalk_index.xsd")) {
-	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd" -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME/tools/lgtdoc/xml/logtalk_index.xsd" -Destination .
 }
 
 
@@ -179,10 +179,10 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Write-Output "Converting XML files to plain text files..."
 
 	$xslt_settings = New-Object System.Xml.Xsl.XsltSettings
-	$xslt_settings.EnableDocumentFunction = 1
+	$xslt_settings.EnableDocumentFunction = $true
 
 	$xml_reader_settings = New-Object System.Xml.XmlReaderSettings
-	$xml_reader_settings.DtdProcessing = 1
+	$xml_reader_settings.DtdProcessing = [System.Xml.DtdProcessing]::Ignore
 
 	$xml_url_resolver = New-Object System.Xml.XmlUrlResolver
 
@@ -192,11 +192,11 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	$index_xslt_object = New-Object System.Xml.Xsl.XslCompiledTransform;
 	$index_xslt_object.Load($index_xslt, $xslt_settings, $xml_url_resolver)
 
-	Get-ChildItem -Path .\*.xml |
+	Get-ChildItem -Path . -Filter *.xml |
 	Foreach-Object {
 		if (Select-String -Path $_ -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
 			Write-Output "  converting $($_.Name)"
-			$file = Join-Path $pwd $_.Name
+			$file = Join-Path "$pwd" "$($_.Name)"
 			$text = Join-Path $d "$($_.BaseName).txt"
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
 			$fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
@@ -206,16 +206,16 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 			$reader.Dispose()
 		}
 	}
-	Get-ChildItem -Path . -Filter .\*.xml |
+	Get-ChildItem -Path . -Filter *.xml |
 	Foreach-Object {
 		if (Select-String -Path $_ -Pattern '<logtalk_index' -CaseSensitive -SimpleMatch -Quiet) {
 			Write-Output "  converting $($_.Name)"
-			$file = Join-Path $pwd $_.Name
-			$text = Join-Path $d "$($_.BaseName).txt"
+			$file = Join-Path "$pwd" "$($_.Name)"
+			$text = Join-Path "$d" "$($_.BaseName).txt"
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
 			$fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
-			$entity_xslt_object.Transform($reader, $null, $writer)
+			$index_xslt_object.Transform($reader, $null, $writer)
 			$writer.Close()
 			$reader.Dispose()
 		}
@@ -228,7 +228,7 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Write-Output ""
 }
 
-if ($pwd -ne (Join-Path $env:LOGTALKHOME xml)) {
+if ($pwd -ne (Join-Path "$env:LOGTALKHOME" xml)) {
 	Remove-Item -Path .\logtalk_entity.dtd
 	Remove-Item -Path .\logtalk_entity.xsd
 	Remove-Item -Path .\logtalk_index.dtd
