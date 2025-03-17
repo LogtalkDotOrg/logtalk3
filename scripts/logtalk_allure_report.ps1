@@ -82,23 +82,25 @@ Function Confirm-Parameters() {
 
 ###################### here it starts ############################ 
 
-$minimal_version="2.26.0" 
+$minimalAllureVersion="2.26.0" 
 
 if ($null -eq (Get-Command "allure" -ErrorAction SilentlyContinue))  {
 	Write-Output "Error: allure is not installed!"
 	Exit 1
 } else {
-	if ((allure --version) -lt $minimal_version) {
-		Write-Output "Warning: allure $minimal_version or later version is recommended!"
+	$allureVersion = allure --version
+	if (-not [System.Version]::TryParse($allureVersion, [ref]$null) -or 
+		[System.Version]$allureVersion -lt [System.Version]$minimalAllureVersion) {
+		Write-Output "Warning: allure $minimalAllureVersion or later version is recommended!"
 	}
 }
 
 Confirm-Parameters
 
 if (Test-Path $o -PathType container) {
-	if ((Test-Path $o\data) -and (Test-Path $o\export) -and (Test-Path $o\history) -and `
-		(Test-Path $o\plugins) -and (Test-Path $o\widgets) -and (Test-Path $o\app.js) -and `
-		(Test-Path $o\favicon.ico) -and (Test-Path $o\index.html) -and (Test-Path $o\styles.css)) {
+	if ((Test-Path "$o/data") -and (Test-Path "$o/export") -and (Test-Path "$o/history") -and `
+		(Test-Path "$o/plugins") -and (Test-Path "$o/widgets") -and (Test-Path "$o/app.js") -and `
+		(Test-Path "$o/favicon.ico") -and (Test-Path "$o/index.html") -and (Test-Path "$o/styles.css")) {
 		Write-Output "Warning: Overriding previous report..."
 	} else {
 		Write-Output "Error! Specified report directory is not empty and does not contain a previous"
@@ -113,20 +115,20 @@ if (Test-Path $o -PathType container) {
 
 New-Item -Path $i -ItemType directory -Force > $null
 try {
-	Remove-Item -Path $i\xunit_report_*.xml -Recurse -Force
+	Remove-Item -Path "$i/xunit_report_*.xml" -Recurse -Force
 } catch {
 	Write-Output "Error occurred at cleanup previous results"
 }
 
 $counter=0
-Get-ChildItem -Path $d\xunit_report.xml -Recurse |
+Get-ChildItem -Path "$d/xunit_report.xml" -Recurse |
 Foreach-Object {
 	$counter++
-	Move-Item -Path $_.FullName -Destination "$i\xunit_report_$counter.xml"
+	Move-Item -Path $_.FullName -Destination "$i/xunit_report_$counter.xml"
 }
 
 if ($e -ne "") {
-	$e.Split(",") | Set-Content -Path $i/environment.properties
+	$e.Split(",") | Set-Content -Path "$i/environment.properties"
 }
 
 if ($p -eq $true) {
@@ -135,60 +137,60 @@ if ($p -eq $true) {
 
 # assume that the $i directory is kept between test
 # runs and use a custom file to track the build order
-if (Test-Path $i\history ) {
-	$current_build = [int](Get-Content -Path $i\history\logtalk_build_number)
+if (Test-Path "$i/history") {
+	$current_build = [int](Get-Content -Path "$i/history/logtalk_build_number")
 } else {
 	$current_build = 1
 }
 
 # move the history from the previous report to the
 # $results directory so that we can get trend graphs
-if (Test-Path $o\history) {
-	if (Test-Path $i\history) {
+if (Test-Path "$o/history") {
+	if (Test-Path "$i/history") {
 		try {
-			Remove-Item -Path $i\history -Confirm -Recurse -Force
+			Remove-Item -Path "$i/history" -Force -Recurse
 		} catch {
 			Write-Output "Error occurred at cleanup results history"
 		}
 	}
-	Move-Item -Path $o\history -Destination $i\history
+	Move-Item -Path "$o/history" -Destination "$i/history"
 	$next_build = $current_build + 1
-	Set-Content -Path $i\history\logtalk_build_number -Value $next_build
+	Set-Content -Path "$i/history/logtalk_build_number" -Value $next_build
 } else {
 	$next_build = $current_build
 }
 
 # add a minimal executor.json so that trend graphs show build labels
-New-Item -Path $o -Name executor.json -ItemType "file" -Force > $null
-Add-Content -Path $o\executor.json -Value '{'
-Add-Content -Path $o\executor.json -Value "	`"buildOrder`": `"$next_build`""
-Add-Content -Path $o\executor.json -Value "	`"buildName`": `"logtalk_allure_report#$next_build`""
-Add-Content -Path $o\executor.json -Value '	"name": "logtalk_tester"'
-Add-Content -Path $o\executor.json -Value '	"type": "logtalk_tester"'
-Add-Content -Path $o\executor.json -Value '}'
+New-Item -Path $i -Name executor.json -ItemType "file" -Force > $null
+Add-Content -Path "$i/executor.json" -Value '{'
+Add-Content -Path "$i/executor.json" -Value "	`"buildOrder`": `"$next_build`""
+Add-Content -Path "$i/executor.json" -Value "	`"buildName`": `"logtalk_allure_report#$next_build`""
+Add-Content -Path "$i/executor.json" -Value '	"name": "logtalk_tester"'
+Add-Content -Path "$i/executor.json" -Value '	"type": "logtalk_tester"'
+Add-Content -Path "$i/executor.json" -Value '}'
 
 # add minimal categories.json to classify failed tests
-New-Item -Path $o -Name categories.json -ItemType "file" -Force > $null
-Add-Content -Path $o\categories.json -Value '['
-Add-Content -Path $o\categories.json -Value '	{'
-Add-Content -Path $o\categories.json -Value '		"name": "Failed tests",'
-Add-Content -Path $o\categories.json -Value '		"matchedStatuses": ["failed"]'
-Add-Content -Path $o\categories.json -Value '	}'
-Add-Content -Path $o\categories.json -Value ']'
+New-Item -Path $i -Name categories.json -ItemType "file" -Force > $null
+Add-Content -Path "$i/categories.json" -Value '['
+Add-Content -Path "$i/categories.json" -Value '	{'
+Add-Content -Path "$i/categories.json" -Value '		"name": "Failed tests",'
+Add-Content -Path "$i/categories.json" -Value '		"matchedStatuses": ["failed"]'
+Add-Content -Path "$i/categories.json" -Value '	}'
+Add-Content -Path "$i/categories.json" -Value ']'
 
-Push-Location (Join-Path $i ..)
+Push-Location (Join-Path "$i" ..)
 
 if ($s -eq $true) {
-	if ($t -ne "") {
-		allure generate --single-file --clean --name $t --report-dir $o $i
+	if ("$t" -ne "") {
+		allure generate --single-file --clean --name "$t" --report-dir "$o" "$i"
 	} else {
-		allure generate --single-file --clean --report-dir $o $i
+		allure generate --single-file --clean --report-dir "$o" "$i"
 	}
 } else {
-	if ($t -ne "") {
-		allure generate --clean --name $t --report-dir $o $i
+	if ("$t" -ne "") {
+		allure generate --clean --name "$t" --report-dir "$o" "$i"
 	} else {
-		allure generate --clean --report-dir $o $i
+		allure generate --clean --report-dir "$o" "$i"
 	}
 }
 

@@ -28,7 +28,7 @@
 param(
 	[Parameter()]
 	[String]$p,
-	[String]$d = "$pwd\logtalk_doclet_logs",
+	[String]$d = "$pwd/logtalk_doclet_logs",
 	[String]$s = $env:USERPROFILE,
 	# disable timeouts to maintain backward compatibility
 	[String]$t = 0,
@@ -43,7 +43,7 @@ Function Write-Script-Version {
 	Write-Output "$myName 2.5"
 }
 
-Function Run-Doclets() {
+Function Invoke-Doclets() {
 param(
 	[Parameter(Position = 0)]
 	[String]$path
@@ -54,20 +54,20 @@ param(
 	Write-Output '*******************************************************************************'
 	Write-Output "***** Documenting $directory_short"
 	$name = $directory -match '/' -replace '__'
-	$doclet_exit = Run-Doclet $name $documenting_goal
+	$doclet_exit = Invoke-Doclet $name $documenting_goal
 	if ($doclet_exit -eq 0) {
 		return 0
 	} elseif ($doclet_exit -eq 124) {
 		Write-Output "*****         timeout"
-		Add-Content -Path $d\$name.errors -Value "LOGTALK_TIMEOUT"
+		Add-Content -Path "$d/$name.errors" -Value "LOGTALK_TIMEOUT"
 	} else {
 		Write-Output "*****         crash"
-		Add-Content -Path $d\$name.errors -Value "LOGTALK_CRASH"
+		Add-Content -Path "$d/$name.errors" -Value "LOGTALK_CRASH"
 	}
-	Exit 0
+	return 0
 }
 
-Function Run-Doclet() {
+Function Invoke-Doclet() {
 param(
 	[Parameter(Position = 0)]
 	[String]$name,
@@ -86,7 +86,7 @@ param(
 
 Function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
-	$myName = Split-Path -Path $myFullName -leaf -Resolve 
+	$myName = Split-Path -Path "$myFullName" -leaf -Resolve 
 
 	Write-Output ""
 	Write-Output "This script automates running doclets found on the current directory and recursively"
@@ -222,8 +222,8 @@ $logtalk = "swilgt"
 $logtalk_option = "-g"
 $prefix = $env:USERPROFILE -replace '\\', '/'
 
-if (Test-Path $env:Programfiles\Git\usr\bin\timeout.exe) {
-	$timeout_command = "$env:Programfiles\Git\usr\bin\timeout.exe"
+if (Test-Path "$env:Programfiles/Git/usr/bin/timeout.exe") {
+	$timeout_command = "$env:Programfiles/Git/usr/bin/timeout.exe"
 } else {
 	$timeout_command = ""
 	Write-Output "Warning! Timeout support not available. The timeout option will be ignored."
@@ -231,35 +231,35 @@ if (Test-Path $env:Programfiles\Git\usr\bin\timeout.exe) {
 
 Confirm-Parameters
 
-New-Item -Path $d -ItemType directory -Force > $null
+New-Item -Path "$d" -ItemType directory -Force > $null
 
-if (Test-Path $d\*.results) {
-	Remove-Item -Path $d\*.results -Force
+if (Test-Path "$d/*.results") {
+	Remove-Item -Path "$d/*.results" -Force
 }
-if (Test-Path $d\*.errors) {
-	Remove-Item -Path $d\*.errors -Force
+if (Test-Path "$d/*.errors") {
+	Remove-Item -Path "$d/*.errors" -Force
 }
-if (Test-Path $d\errors.all) {
-	Remove-Item -Path $d\errors.all -Force
+if (Test-Path "$d/errors.all") {
+	Remove-Item -Path "$d/errors.all" -Force
 }
-if (Test-Path $d\tester_versions.txt) {
-	Remove-Item -Path $d\tester_versions.txt -Force
+if (Test-Path "$d/tester_versions.txt") {
+	Remove-Item -Path "$d/tester_versions.txt" -Force
 }
 
 $start_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 
 Write-Output '*******************************************************************************'
 Write-Output "***** Batch documentation processing started @ $start_date"
-$tester_versions_file = Join-Path $d tester_versions.txt
-& $logtalk $logtalk_option " `"$versions_goal`"" > $tester_versions_file 2> $null
-Select-String -Path $d\tester_versions.txt -Pattern "Logtalk version:" -SimpleMatch -Raw
-(Select-String -Path $d\tester_versions.txt -Pattern "Prolog version:" -SimpleMatch -Raw) -replace "Prolog", $prolog
+$tester_versions_file = Join-Path "$d" tester_versions.txt
+& $logtalk $logtalk_option " `"$versions_goal`"" > "$tester_versions_file" 2> $null
+Select-String -Path "$d/tester_versions.txt" -Pattern "Logtalk version:" -SimpleMatch -Raw
+(Select-String -Path "$d/tester_versions.txt" -Pattern "Prolog version:" -SimpleMatch -Raw) -replace "Prolog", $prolog
 
 $doclets=0
 Get-ChildItem -Path . -Include doclet.lgt doclet.logtalk -Recurse | 
 Foreach-Object {
 	$doclets++
-	Run-Doclets $_.FullName
+	Invoke-Doclets $_.FullName
 }
 
 Push-Location $d

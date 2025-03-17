@@ -52,11 +52,11 @@ param(
 
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
-	$myName = Split-Path -Path $myFullName -leaf -Resolve
+	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
 	Write-Output "$myName 13.6"
 }
 
-Function Run-TestSet() {
+Function Invoke-TestSet() {
 param(
 	[Parameter(Position = 0)]
 	[String]$path
@@ -94,7 +94,7 @@ param(
 	} else {
 		$flag_goal = "true"
 	}
-	if ($issue_server-ne "") {
+	if ($issue_server -ne "") {
 		$flag_goal = "logtalk_load(issue_creator(loader)),set_logtalk_flag(issue_server,'$issue_server'),set_logtalk_flag(issue_labels,'$issue_labels'),$flag_goal"
 	}
 	if ($u -ne "") {
@@ -104,22 +104,22 @@ param(
 		$flag_goal = "set_logtalk_flag(tests_report_directory,'$unit/'),$flag_goal"
 	}
 	if ($m -eq "optimal" -or $m -eq "all") {
-		$tests_exit = Run-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_optimal_goal"
+		$tests_exit = Invoke-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_optimal_goal"
 		$mode_prefix="% (opt)   "
 	} elseif ($m -eq "normal" -or $m -eq "all") {
-		$tests_exit = Run-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_normal_goal"
+		$tests_exit = Invoke-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_normal_goal"
 		$mode_prefix="%         "
 	} elseif ($m -eq "debug" -or $m -eq "all") {
-		$tests_exit = Run-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_debug_goal"
+		$tests_exit = Invoke-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_debug_goal"
 		$mode_prefix="% (debug) "
 	}
 
-	if ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
+	if ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path "$results/$name.results" -Pattern "tests skipped" -SimpleMatch -Quiet)) {
 		Write-Output "%         skipped"
-	} elseif ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet)) {
+	} elseif ($tests_exit -eq 0 -and $o -eq "verbose" -and (Select-String -Path "$results/$name.results" -Pattern "(not applicable)" -SimpleMatch -Quiet)) {
 		Write-Output "%         not applicable"
-	} elseif ($tests_exit -eq 0 -and (Test-Path $results/$name.totals) -and $o -eq "verbose") {
-		Get-Content -Path $results/$name.totals | Select-String -AllMatches -Pattern '^object' -CaseSensitive -Raw |
+	} elseif ($tests_exit -eq 0 -and (Test-Path "$results/$name.totals") -and $o -eq "verbose") {
+		Get-Content -Path "$results/$name.totals" | Select-String -AllMatches -Pattern '^object' -CaseSensitive -Raw |
 		ForEach-Object {$_.Matches} {
 			$line = $_.split("`t")
 			Write-Host -NoNewline $mode_prefix
@@ -165,17 +165,17 @@ param(
 	}
 	if ($c -eq "xml") {
 		if (Test-Path $env:LOGTALKUSER) {
-			Copy-Item -Path "$env:LOGTALKUSER\tools\lgtunit\coverage_report.dtd" -Destination .
-			Copy-Item -Path "$env:LOGTALKUSER\tools\lgtunit\coverage_report.xsl" -Destination .
+			Copy-Item -Path "$env:LOGTALKUSER/tools/lgtunit/coverage_report.dtd" -Destination .
+			Copy-Item -Path "$env:LOGTALKUSER/tools/lgtunit/coverage_report.xsl" -Destination .
 		} elseif (Test-Path $env:LOGTALKHOME) {
-			Copy-Item -Path "$env:LOGTALKHOME\tools\lgtunit\coverage_report.dtd" -Destination .
-			Copy-Item -Path "$env:LOGTALKHOME\tools\lgtunit\coverage_report.xsl" -Destination .
+			Copy-Item -Path "$env:LOGTALKHOME/tools/lgtunit/coverage_report.dtd" -Destination .
+			Copy-Item -Path "$env:LOGTALKHOME/tools/lgtunit/coverage_report.xsl" -Destination .
 		}
 	}
 	Pop-Location
 }
 
-Function Run-Tests() {
+Function Invoke-Tests() {
 param(
 	[Parameter(Position = 0)]
 	[String]$name,
@@ -226,49 +226,49 @@ param(
 	$short = $directory -replace $prefix, ""
 	if ($format -eq "xunit") {
 		$timestamp=$(Get-Date +"%Y-%m-%dT%H:%M:%S")
-		New-Item -Path . -Name $directory/xunit_report.xml -ItemType "file" -Force > $null
-		Add-Content -Path $directory/xunit_report.xml -Value "<?xml version=`"1.0`" encoding=`"UTF-8`"?>"
-		Add-Content -Path $directory/xunit_report.xml -Value "<testsuites>"
-		Add-Content -Path $directory/xunit_report.xml -Value "<testsuite package=`"$short/`" name=`"$short/tests.lgt`" tests=`"0`" errors=`"1`" failures=`"0`" skipped=`"0`" time=`"0`" timestamp=`"$timestamp`" id=`"0`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<testcase classname=`"tests`" name=`"$name`" time=`"0`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<failure message=`"$exception`" type=`"$exception`">$exception</failure>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</testcase>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</testsuite>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</testsuites>"
+		New-Item -Path . -Name "$directory/xunit_report.xml" -ItemType "file" -Force > $null
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<?xml version=`"1.0`" encoding=`"UTF-8`"?>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<testsuites>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<testsuite package=`"$short/`" name=`"$short/tests.lgt`" tests=`"0`" errors=`"1`" failures=`"0`" skipped=`"0`" time=`"0`" timestamp=`"$timestamp`" id=`"0`">"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<testcase classname=`"tests`" name=`"$name`" time=`"0`">"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<failure message=`"$exception`" type=`"$exception`">$exception</failure>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</testcase>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</testsuite>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</testsuites>"
 	} elseif ($format -eq "xunit_net_v2") {
 		$run_date = Get-Date -Format "yyyy-MM-dd"
 		$run_time = Get-Date -Format "HH:mm:ss"
-		New-Item -Path . -Name $directory/xunit_report.xml -ItemType "file" -Force > $null
-		Add-Content -Path $directory/xunit_report.xml -Value "<?xml version=`"1.0`" encoding=`"UTF-8`"?>"
-		Add-Content -Path $directory/xunit_report.xml -Value "<assemblies>"
-		Add-Content -Path $directory/xunit_report.xml -Value "<assembly name=`"$short/tests.lgt::tests`" config-file=`"$short/tests.lgt`" test-framework=`"lgtunit`" run-date=`"$run_date`" run-time=`"$run_time`" time=`"0`" total=`"0`" errors=`"1`" failures=`"1`" skipped=`"0`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<errors>"
-		Add-Content -Path $directory/xunit_report.xml -Value "<error type=`"$exception`" name=`"$exception`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<failure exception-type=`"$exception`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<message><![CDATA[$exception]]></message>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</failure>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</error>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</errors>"
+		New-Item -Path . -Name "$directory/xunit_report.xml" -ItemType "file" -Force > $null
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<?xml version=`"1.0`" encoding=`"UTF-8`"?>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<assemblies>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<assembly name=`"$short/tests.lgt::tests`" config-file=`"$short/tests.lgt`" test-framework=`"lgtunit`" run-date=`"$run_date`" run-time=`"$run_time`" time=`"0`" total=`"0`" errors=`"1`" failures=`"1`" skipped=`"0`">"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<errors>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<error type=`"$exception`" name=`"$exception`">"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<failure exception-type=`"$exception`">"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<message><![CDATA[$exception]]></message>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</failure>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</error>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</errors>"
 		# hack for Allure ignoring the "errors" tag
-		Add-Content -Path $directory/xunit_report.xml -Value "<collection name=`"$short/tests.lgt::tests`" time=`"0`" total=`"1`" passed=`"0`" failed=`"1`" skipped=`"0`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<test name=`"$name::tests`" type=`"$short/tests.lgt::tests`" method=`"$name`" time=`"0`" result=`"Fail`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<failure exception-type=`"$exception`">"
-		Add-Content -Path $directory/xunit_report.xml -Value "<message><![CDATA[$exception]]></message>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</failure>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</test>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</collection>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</assembly>"
-		Add-Content -Path $directory/xunit_report.xml -Value "</assemblies>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<collection name=`"$short/tests.lgt::tests`" time=`"0`" total=`"1`" passed=`"0`" failed=`"1`" skipped=`"0`">"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<test name=`"$name::tests`" type=`"$short/tests.lgt::tests`" method=`"$name`" time=`"0`" result=`"Fail`">"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<failure exception-type=`"$exception`">"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "<message><![CDATA[$exception]]></message>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</failure>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</test>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</collection>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</assembly>"
+		Add-Content -Path "$directory/xunit_report.xml" -Value "</assemblies>"
 	} elseif ($format -eq "tap") {
-		New-Item -Path . -Name $directory/tap_report.xml -ItemType "file" -Force > $null
-		Add-Content -Path $directory/tap_report.txt -Value "TAP version 13"
-		Add-Content -Path $directory/tap_report.txt -Value "Bail out! $unit $exception"
+		New-Item -Path . -Name "$directory/tap_report.txt" -ItemType "file" -Force > $null
+		Add-Content -Path "$directory/tap_report.txt" -Value "TAP version 13"
+		Add-Content -Path "$directory/tap_report.txt" -Value "Bail out! $unit $exception"
 	}
 }
 
 Function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
-	$myName = Split-Path -Path $myFullName -leaf -Resolve 
+	$myName = Split-Path -Path "$myFullName" -leaf -Resolve 
 
 	Write-Output ""
 	Write-Output "This script automates running unit tests found in the current directory and"
@@ -522,8 +522,8 @@ $base = $pwd
 $level = 999
 $exclude = ""
 
-if (Test-Path $env:Programfiles\Git\usr\bin\timeout.exe) {
-	$timeout_command = "$env:Programfiles\Git\usr\bin\timeout.exe"
+if (Test-Path "$env:Programfiles/Git/usr/bin/timeout.exe") {
+	$timeout_command = "$env:Programfiles/Git/usr/bin/timeout.exe"
 } else {
 	$timeout_command = ""
 	Write-Output "Warning! Timeout support not available. The timeout option will be ignored."
@@ -563,20 +563,20 @@ $tester_debug_goal = "set_logtalk_flag(debug,on),logtalk_load($n),halt$dot"
 
 New-Item -Path $results -ItemType directory -Force > $null
 
-if (Test-Path $results/*.results) {
-	Remove-Item -Path $results/*.results -Force
+if (Test-Path "$results/*.results") {
+	Remove-Item -Path "$results/*.results" -Force
 }
-if (Test-Path $results/*.errors) {
-	Remove-Item -Path $results/*.errors -Force
+if (Test-Path "$results/*.errors") {
+	Remove-Item -Path "$results/*.errors" -Force
 }
-if (Test-Path $results/*.totals) {
-	Remove-Item -Path $results/*.totals -Force
+if (Test-Path "$results/*.totals") {
+	Remove-Item -Path "$results/*.totals" -Force
 }
-if (Test-Path $results/errors.all) {
-	Remove-Item -Path $results/errors.all -Force
+if (Test-Path "$results/errors.all") {
+	Remove-Item -Path "$results/errors.all" -Force
 }
-if (Test-Path $results/tester_versions.txt) {
-	Remove-Item -Path $results/tester_versions.txt -Force
+if (Test-Path "$results/tester_versions.txt") {
+	Remove-Item -Path "$results/tester_versions.txt" -Force
 }
 
 if ($o -eq "verbose") {
@@ -588,40 +588,40 @@ if ($o -eq "verbose") {
 }
 
 if ($exclude -eq "") {
-	$testsets = (Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse | Measure-Object).count
+	$testsets = (Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | Measure-Object).count
 } else {
-	$testsets = (Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} | Measure-Object).count
+	$testsets = (Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} | Measure-Object).count
 }
 
 if ($l -eq "") {
 	if ($o -eq "verbose") {
 		if ($exclude -eq "") {
-			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse |
+			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse |
 			Foreach-Object {
-				Run-TestSet $_.FullName
+				Invoke-TestSet $_.FullName
 			}
 		} else {
-			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
+			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
-				Run-TestSet $_.FullName
+				Invoke-TestSet $_.FullName
 			}
 		}
 	} else {
 		$counter = 1
 		if ($exclude -eq "") {
-			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse |
+			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse |
 			Foreach-Object {
 				Write-Host -NoNewline "% running $testsets test sets: "
 				Write-Host -NoNewline "$counter`r"
-				Run-TestSet $_.FullName
+				Invoke-TestSet $_.FullName
 				$counter++
 			}
 		} else {
-			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
+			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
 				Write-Host -NoNewline "% running $testsets test sets: "
 				Write-Host -NoNewline "$counter`r"
-				Run-TestSet $_.FullName
+				Invoke-TestSet $_.FullName
 				$counter++
 			}
 		}
@@ -630,33 +630,33 @@ if ($l -eq "") {
 } else {
 	if ($o -eq "verbose") {
 		if ($exclude -eq "") {
-			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
+			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
 			Foreach-Object {
-				Run-TestSet $_.FullName
+				Invoke-TestSet $_.FullName
 			}
 		} else {
-			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
+			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
-				Run-TestSet $_.FullName
+				Invoke-TestSet $_.FullName
 			}
 		}
 	} else {
 		$counter = 1
 		if ($exclude -eq "") {
-			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
+			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
 			Foreach-Object {
 				Write-Host -NoNewline "% running $testsets test sets: "
 				Write-Host -NoNewline "$counter`r"
-				Run-TestSet $_.FullName
+				Invoke-TestSet $_.FullName
 				$counter++
 				Write-Output "%"
 			}
 		} else {
-			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
+			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
 				Write-Host -NoNewline "% running $testsets test sets: "
 				Write-Host -NoNewline "$counter`r"
-				Run-TestSet $_.FullName
+				Invoke-TestSet $_.FullName
 				$counter++
 				Write-Output "%"
 			}
@@ -731,7 +731,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Patter
 	Get-ChildItem -Path . -Filter *.errors |
 	Foreach-Object {
 		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace $prefix, ''
+			(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ''
 		}
 	}
 }
@@ -741,7 +741,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Patter
 	Get-ChildItem -Path . -Filter *.errors |
 	Foreach-Object {
 		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_TIMEOUT' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace $prefix, ''
+			(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ''
 		}
 	}
 }
@@ -751,7 +751,7 @@ if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Patter
 	Get-ChildItem -Path . -Filter *.errors |
 	Foreach-Object {
 		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '\') -replace $prefix, ''
+			(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ''
 		}
 	}
 }

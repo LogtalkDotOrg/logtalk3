@@ -82,46 +82,32 @@ if ($h -eq $true) {
 }
 
 if ("$p" -eq "b") {
-	$prolog='B-Prolog'
 	$logtalk="bplgt -g"
 } elseif ("$p" -eq "ciao") {
-	$prolog='Ciao Prolog'
 	$logtalk="ciaolgt -e"
 } elseif ("$p" -eq "cx") {
-	$prolog='CxProlog'
 	$logtalk="cxlgt --goal"
 } elseif ("$p" -eq "eclipse") {
-	$prolog='ECLiPSe'
 	$logtalk="eclipselgt -e"
 } elseif ("$p" -eq "gnu") {
-	$prolog='GNU Prolog'
 	$logtalk="gplgt --query-goal"
 } elseif ("$p" -eq "ji") {
-	$prolog='JIProlog'
 	$logtalk="jiplgt -n -g"
-} elseif ("$p" -eq "xvm") {
-	$prolog='XVM'
-	$logtalk="xvmlgt -g"
 } elseif ("$p" -eq "sicstus") {
-	$prolog='SICStus Prolog'
 	$logtalk="sicstuslgt --goal"
 } elseif ("$p" -eq "swi") {
-	$prolog='SWI-Prolog'
 	$logtalk="swilgt -g"
 } elseif ("$p" -eq "swipack") {
-	$prolog='SWI-Prolog'
 	$logtalk="swipl -g"
 } elseif ("$p" -eq "tau") {
-	$prolog='Tau Prolog'
 	$logtalk="taulgt -g"
 } elseif ("$p" -eq "trealla") {
-	$prolog='Trealla Prolog'
 	$logtalk="tplgt -g"
 } elseif ("$p" -eq "xsb") {
-	$prolog='XSB'
 	$logtalk="xsblgt -e"
+} elseif ("$p" -eq "xvm") {
+	$logtalk="xvmlgt -g"
 } elseif ("$p" -eq "yap") {
-	$prolog='YAP'
 	$logtalk="yaplgt -g"
 } else {
 	Write-Output "Error! Unsupported backend Prolog compiler: $p"
@@ -130,24 +116,24 @@ if ("$p" -eq "b") {
 }
 
 if ($env:LOGTALKPACKS -ne "") {
-	$logtalk_packs = '$env:LOGTALKPACKS\'
+	$logtalk_packs = '$env:LOGTALKPACKS/'
 } else {
-	$logtalk_packs = '$env:USERPROFILE\logtalk_packs\'
+	$logtalk_packs = '$env:USERPROFILE/logtalk_packs/'
 }
 
 $cwd = $pwd
 
 if ($i -eq $true) {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),library(packs_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd\..\docs\sources'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\', '$logtalk_packs'])]),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),library(packs_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/', '$logtalk_packs'])]),halt."
 } elseif ($env:LOGTALKPACKS -ne "") {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd\..\docs\sources'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\']),exclude_prefixes(['$env:USERPROFILE\logtalk_packs\','$env:LOGTALKPACKS\'])]),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/']),exclude_prefixes(['$env:USERPROFILE/logtalk_packs/','$env:LOGTALKPACKS/'])]),halt."
 } else {
-	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd\..\docs\sources'),omit_path_prefixes(['$env:LOGTALKUSER\','$env:LOGTALKHOME\']),exclude_prefixes(['$env:USERPROFILE\logtalk_packs\'])]),halt."
+	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/']),exclude_prefixes(['$env:USERPROFILE/logtalk_packs/'])]),halt."
 }
 
 ($logtalk + " " + ("`"$goal`"" -replace '\\','/')) | Invoke-Expression
 
-Push-Location $pwd\..\docs\sources
+Push-Location "$pwd/../docs/sources"
 
 lgt2rst -t "Logtalk APIs"
 if ($i -eq $true) {
@@ -157,13 +143,13 @@ if ($i -eq $true) {
 }
 Move-Item -Path _conf.py -Destination conf.py
 
-.\make.bat clean
-.\make.bat html
-.\make.bat info
-.\make.bat latexpdf
-.\make.bat epub
-.\make.bat singlehtml
-#.\make linkcheck
+./make.bat clean
+./make.bat html
+./make.bat info
+./make.bat latexpdf
+./make.bat epub
+./make.bat singlehtml
+#./make linkcheck
 
 $version = Get-Content $env:LOGTALKUSER/VERSION.txt
 $version_base = $version.Split("-")[0]
@@ -171,24 +157,24 @@ pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/Logtalk
 # Remove heading link references from the Markdown file
 (Get-Content _build/singlehtml/LogtalkAPIs-$version_base.md) -replace '\[.\]\(#[-a-z]+ "Link to this heading"\)', '' | Set-Content _build/singlehtml/LogtalkAPIs-$version_base.md
 
-Copy-Item -Path .\_build\html\* -Destination .. -Recurse -Force
-Copy-Item -Path .\_build\texinfo\LogtalkAPIs-*.info -Destination ..
-Copy-Item -Path .\_build\latex\LogtalkAPIs-*.pdf -Destination ..
-Copy-Item -Path .\_build\epub\LogtalkAPIs-*.epub -Destination ..
-Copy-Item -Path .\_build\singlehtml\LogtalkAPIs-*.md -Destination ..
+Copy-Item -Path ./_build/html/* -Destination .. -Recurse -Force
+Copy-Item -Path ./_build/texinfo/LogtalkAPIs-*.info -Destination ..
+Copy-Item -Path ./_build/latex/LogtalkAPIs-*.pdf -Destination ..
+Copy-Item -Path ./_build/epub/LogtalkAPIs-*.epub -Destination ..
+Copy-Item -Path ./_build/singlehtml/LogtalkAPIs-*.md -Destination ..
 
-.\make.bat clean
+./make.bat clean
 Remove-Item _templates/layout.html
 Move-Item -Path conf.py -Destination _conf.py
 Move-Item -Path browserconfig.xml -Destination browserconfig.xml.saved
 try {
-	Remove-Item .\*.xml
+	Remove-Item ./*.xml
 } catch {
 	Write-Output "Error occurred at cleanup"
 }
 Move-Item -Path browserconfig.xml.saved -Destination browserconfig.xml
 try {
-	Remove-Item .\*.rst
+	Remove-Item ./*.rst
 } catch {
 	Write-Output "Error occurred at cleanup"
 }
