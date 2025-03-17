@@ -101,24 +101,24 @@ function Confirm-Parameters() {
 
 	if ($h -eq $true) {
 		Write-Usage-Help
-		Exit
+		Exit 0
 	}
 
 	if ($v -eq $true) {
 		Write-Script-Version
-		Exit
+		Exit 0
 	}
 
 	if ($c -ne "dot" -and $c -ne "circo" -and $c -ne "fdp" -and $c -ne "neato") {
 	Write-Output "Error! Unknown Graphviz command: ${c}"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if ($l -ne "dagre" -and $l -ne "elk" -and $l -ne "tala") {
 	Write-Output "Error! Unknown d2 layout: ${l}"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 }
@@ -136,7 +136,7 @@ if (Test-Path $env:LOGTALKHOME) {
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
-	Exit
+	Exit 1
 }
 
 Get-Logtalkuser
@@ -163,15 +163,19 @@ if (Test-Path $env:LOGTALKUSER) {
 	logtalk_user_setup
 }
 
-$d2_failed_flag=0
-$dot_failed_flag=0
+$d2_failed_flag = $false
+$dot_failed_flag = $false
 
-$d2_count = Get-ChildItem -Path . -Filter *.d2 | Measure-Object | %{$_.Count}
-$dot_count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | %{$_.Count}
+$d2_count = Get-ChildItem -Path . -Filter *.d2 | Measure-Object | ForEach-Object{$_.Count}
+$dot_count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | ForEach-Object{$_.Count}
+
+# Copy CSS file once if needed
+if ($d2_count -gt 0 -or $dot_count -gt 0) {
+	Copy-Item -Path "${env:LOGTALKUSER}\tools\diagrams\diagrams.css" -Destination .
+}
 
 if ($d2_count -gt 0) {
 	Write-Output "Converting .d2 files to .svg files ..."
-	Copy-Item -Path "${env:LOGTALKUSER}\tools\diagrams\diagrams.css" -Destination .
 	Get-ChildItem -Path . -Filter *.d2 | 
 	Foreach-Object {
 		Write-Host -NoNewline "  converting $($_.Name)"
@@ -183,7 +187,7 @@ if ($d2_count -gt 0) {
 		if ($?) {
 			Write-Output " done"
 		} else {
-			$d2_failed_flag = 1
+			$d2_failed_flag = $true
 			Write-Output " failed"
 		}
 	}
@@ -191,26 +195,37 @@ if ($d2_count -gt 0) {
 
 if ($dot_count -gt 0) {
 	Write-Output "Converting .dot files to .svg files ..."
-	Copy-Item -Path "${env:LOGTALKUSER}\tools\diagrams\diagrams.css" -Destination .
 	Get-ChildItem -Path . -Filter *.dot | 
 	Foreach-Object {
 		Write-Host -NoNewline "  converting $($_.Name)"
-		$converted = 1
+		$converted = $false
 		$counter = 24
-		While (($converted -eq 1) -and ($counter -gt 0)) {
-			if ($a -ne "") {
-				& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" (-Split $a) $_.Name
-			} else {
-				& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" $_.Name
+		
+		# Retry logic to handle Graphviz's random crashes
+		while (-not $converted -and $counter -gt 0) {
+			try {
+				if ($a -ne "") {
+					& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" (-Split $a) $_.Name
+				} else {
+					& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" $_.Name
+				}
+				
+				# Check if command succeeded
+				if ($?) {
+					$converted = $true
+				}
 			}
-			if ($?) {
-				$converted = 0
+			catch {
+				# Continue on error
 			}
+			
 			$counter--
 			Write-Host -NoNewline "."
 		}
-		if ($counter -eq 0) {
-			$dot_failed_flag = 1
+		
+		# Report conversion status
+		if (-not $converted) {
+			$dot_failed_flag = $true
 			Write-Output " failed"
 		} else {
 			Write-Output " done"
@@ -221,12 +236,13 @@ if ($dot_count -gt 0) {
 if ($d2_count -eq 0 -and $dot_count -eq 0) {
 	Write-Output "No .d2 or .dot files exist in the current directory!"
 	Write-Output ""
-}
-
-if ($d2_failed_flag -eq 0 -and $dot_failed_flag -eq 0) {
+	Exit 0
+} elseif (-not $d2_failed_flag -and -not $dot_failed_flag) {
 	Write-Output "Conversion done."
 	Write-Output ""
+	Exit 0
 } else {
 	Write-Output "One or more files could not be converted!"
 	Write-Output ""
+	Exit 1
 }

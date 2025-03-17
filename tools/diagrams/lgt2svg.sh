@@ -203,16 +203,15 @@ if [ $dot_count -ne 0 ] ; then
 fi
 
 if [ $d2_count -eq 0 ] && [ $dot_count -eq 0 ] ; then
-	echo "No .d2 or .dot files exist in the current directory!"
-	echo
-fi
-
-if [ $d2_failed_flag -eq 0 ] && [ $dot_failed_flag -eq 0 ] ; then
-	echo "Conversion done."
-	echo
-	exit 0
+    echo "No .d2 or .dot files exist in the current directory!"
+    echo
+    exit 0
+elif [ $d2_failed_flag -eq 0 ] && [ $dot_failed_flag -eq 0 ] ; then
+    echo "Conversion done."
+    echo
+    exit 0
 else
-	echo "One or more files could not be converted!"
-	echo
-	exit 1
+    echo "One or more files could not be converted!"
+    echo
+    exit 1
 fi

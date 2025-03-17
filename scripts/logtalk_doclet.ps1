@@ -216,7 +216,6 @@ $documenting_goal = "logtalk_load([doclet(loader),doclet]),halt$dot"
 
 # default argument values
 
-$base = $pwd
 $dot = ""
 $prolog = 'SWI-Prolog'
 $logtalk = "swilgt"

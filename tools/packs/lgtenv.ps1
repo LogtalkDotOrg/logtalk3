@@ -37,7 +37,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.4")
+	Write-Output "$myName 0.4"
 }
 
 Function Write-Usage-Help() {
