@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Allure report generator script
-##   Last updated on March 16, 2025
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -41,7 +41,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.13")
+	Write-Output "$myName 0.13"
 }
 
 Function Write-Usage-Help() {
@@ -52,9 +52,9 @@ Function Write-Usage-Help() {
 	Write-Output "This script generates Allure reports from test results."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-d tests] [-i results] [-o report] [-t title] [-p] [-e pairs]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName [-d tests] [-i results] [-o report] [-t title] [-p] [-e pairs]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d tests directory (default is the current directory)"
@@ -84,12 +84,12 @@ Function Check-Parameters() {
 
 $minimal_version="2.26.0" 
 
-if ((Get-Command "allure" -ErrorAction SilentlyContinue) -eq $null)  { 
+if ($null -eq (Get-Command "allure" -ErrorAction SilentlyContinue))  {
 	Write-Output "Error: allure is not installed!"
 	Exit 1
 } else {
 	if ((allure --version) -lt $minimal_version) {
-		Write-Output ("Warning: allure " + $minimal_version + " or later version is recommended!")
+		Write-Output "Warning: allure $minimal_version or later version is recommended!"
 	}
 }
 
@@ -122,7 +122,7 @@ $counter=0
 Get-ChildItem -Path $d\xunit_report.xml -Recurse |
 Foreach-Object {
 	$counter++
-	Move-Item -Path $_.FullName -Destination ($i + "\xunit_report_" + $counter + ".xml")
+	Move-Item -Path $_.FullName -Destination "$i\xunit_report_$counter.xml"
 }
 
 if ($e -ne "") {
@@ -161,10 +161,10 @@ if (Test-Path $o\history) {
 # add a minimal executor.json so that trend graphs show build labels
 New-Item -Path $o -Name executor.json -ItemType "file" -Force > $null
 Add-Content -Path $o\executor.json -Value '{'
-Add-Content -Path $o\executor.json -Value ('	"buildOrder": "' + $next_build + '"')
-Add-Content -Path $o\executor.json -Value ('	"buildName": "logtalk_allure_report#' + $next_build + '"')
-Add-Content -Path $o\executor.json -Value  '	"name": "logtalk_tester"'
-Add-Content -Path $o\executor.json -Value  '	"type": "logtalk_tester"'
+Add-Content -Path $o\executor.json -Value "	`"buildOrder`": `"$next_build`""
+Add-Content -Path $o\executor.json -Value "	`"buildName`": `"logtalk_allure_report#$next_build`""
+Add-Content -Path $o\executor.json -Value '	"name": "logtalk_tester"'
+Add-Content -Path $o\executor.json -Value '	"type": "logtalk_tester"'
 Add-Content -Path $o\executor.json -Value '}'
 
 # add minimal categories.json to classify failed tests
@@ -184,10 +184,12 @@ if ($s -eq $true) {
 	} else {
 		allure generate --single-file --clean --report-dir $o $i
 	}
-} else if ($t -ne "") {
-	allure generate --clean --name $t --report-dir $o $i
 } else {
-	allure generate --clean --report-dir $o $i
+	if ($t -ne "") {
+		allure generate --clean --name $t --report-dir $o $i
+	} else {
+		allure generate --clean --report-dir $o $i
+	}
 }
 
 Pop-Location

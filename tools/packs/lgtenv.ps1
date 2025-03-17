@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Packs virtual environment script
-##   Last updated on December 29, 2024
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -50,9 +50,9 @@ Function Write-Usage-Help() {
 	Write-Output "to be installed."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-d results] [-c] [-p packs]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName [-d results] [-c] [-p packs]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d directory where to create the virtual environment"
@@ -63,7 +63,6 @@ Function Write-Usage-Help() {
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
-	Exit
 }
 
 Function Check-Parameters() {
@@ -92,7 +91,7 @@ if ($d -eq "") {
 		$directory = $d
 		New-Item -Path $d -ItemType directory > $null
 	} else {
-		Write-Output "Error: directory " + $d + " does not exist."
+		Write-Output "Error: directory $d does not exist."
 		exit 1
 	}
 } else {

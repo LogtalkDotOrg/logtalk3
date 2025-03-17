@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ## 
-##   Last updated on March 16, 2025
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.25")
+	Write-Output "$myName 0.25"
 }
 
 function Write-Usage-Help() {
@@ -52,12 +52,12 @@ function Write-Usage-Help() {
 	Write-Output "developer tools, ports, contributions, and optionally installed packs."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-p prolog] [-i]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName [-p prolog] [-i]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output ("  -p backend Prolog compiler (default is " + $p + ")")
+	Write-Output "  -p backend Prolog compiler (default is $p)"
 	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output "  -i include all installed packs"
 	Write-Output "  -v print version"
@@ -124,7 +124,7 @@ if ("$p" -eq "b") {
 	$prolog='YAP'
 	$logtalk="yaplgt -g"
 } else {
-	Write-Output ("Error! Unsupported backend Prolog compiler: " + "$p")
+	Write-Output "Error! Unsupported backend Prolog compiler: $p"
 	Write-Usage-Help
 	Exit
 }

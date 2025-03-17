@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Documentation automation script
-##   Last updated on March 16, 2025
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.5")
+	Write-Output "$myName 2.5"
 }
 
 Function Run-Doclets() {
@@ -74,8 +74,8 @@ param(
 	[Parameter(Position = 1)]
 	[String]$goal
 )
-	$results_file = Join-Path $d ($name + ".results")
-	$errors_file  = Join-Path $d ($name + ".errors")
+	$results_file = Join-Path $d "$name.results"
+	$errors_file  = Join-Path $d "$name.errors"
 	if ($t -ne 0) {
 		& $timeout_command $t $logtalk $logtalk_option $goal $a > $results_file 2> $errors_file
 	} else {
@@ -94,9 +94,9 @@ Function Write-Usage-Help() {
 	Write-Output  "case of failed doclets or doclet errors, this script returns a non-zero exit code."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " -p prolog [-d results] [-t timeout] [-s prefix] [-a arguments]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName -p prolog [-d results] [-t timeout] [-s prefix] [-a arguments]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
@@ -104,8 +104,8 @@ Function Write-Usage-Help() {
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -d directory to store the doclet logs (default is ./logtalk_doclet_logs)"
-	Write-Output ("  -t timeout in seconds for running each doclet (default is " + $t + "; i.e. disabled)")
-	Write-Output ("  -s suppress path prefix (default is " + $s + ")")
+	Write-Output "  -t timeout in seconds for running each doclet (default is $t; i.e. disabled)"
+	Write-Output "  -s suppress path prefix (default is $s)"
 	Write-Output "  -a arguments wrapped as a string to be passed to the integration script used to run the doclets (no default)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
@@ -192,13 +192,13 @@ Function Check-Parameters() {
 		$script:logtalk="yaplgt"
 		$script:logtalk_option="-g"
 	} else {
-		Write-Output ("Error! Unsupported backend Prolog compiler: " + "$p")
+		Write-Output "Error! Unsupported backend Prolog compiler: $p"
 		Write-Usage-Help
 		Exit
 	}
 
 	if ($p -eq "swipack") {
-		$script:versions_goal = ("use_module(library(logtalk))," + $versions_goal)
+		$script:versions_goal = "use_module(library(logtalk)),$versions_goal"
 	}
 
 	if ($s -ne "") {
@@ -211,8 +211,8 @@ Function Check-Parameters() {
 
 # documenting goals
 
-$versions_goal = ("logtalk_load(library(tester_versions)),halt" + $dot)
-$documenting_goal = ("logtalk_load([doclet(loader),doclet]),halt" + $dot)
+$versions_goal = "logtalk_load(library(tester_versions)),halt$dot"
+$documenting_goal = "logtalk_load([doclet(loader),doclet]),halt$dot"
 
 # default argument values
 
@@ -250,11 +250,11 @@ if (Test-Path $d\tester_versions.txt) {
 $start_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 
 Write-Output '*******************************************************************************'
-Write-Output ("***** Batch documentation processing started @ " + $start_date)
+Write-Output "***** Batch documentation processing started @ $start_date"
 $tester_versions_file = Join-Path $d tester_versions.txt
-& $logtalk $logtalk_option (" `"" + $versions_goal + "`"") > $tester_versions_file 2> $null
+& $logtalk $logtalk_option " `"$versions_goal`"" > $tester_versions_file 2> $null
 Select-String -Path $d\tester_versions.txt -Pattern "Logtalk version:" -SimpleMatch -Raw
-(Select-String -Path $d\tester_versions.txt -Pattern "Prolog version:"  -SimpleMatch -Raw) -replace "Prolog", $prolog
+(Select-String -Path $d\tester_versions.txt -Pattern "Prolog version:" -SimpleMatch -Raw) -replace "Prolog", $prolog
 
 $doclets=0
 Get-ChildItem -Path . -Include doclet.lgt doclet.logtalk -Recurse | 
@@ -266,7 +266,7 @@ Foreach-Object {
 Push-Location $d
 
 $timeouts = (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_TIMEOUT').count
-$crashes =  (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_CRASH').count
+$crashes  = (Get-ChildItem -Path . -Filter *.errors  | Select-String -Pattern 'LOGTALK_CRASH').count
 $failures = (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'failed').count
 
 Write-Output "*******************************************************************************"
@@ -291,12 +291,12 @@ Write-Output "***** Failures"
 Write-Output "*******************************************************************************"
 Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'failed' -SimpleMatch -Raw
 Write-Output "*******************************************************************************"
-Write-Output ("***** " + $doclets + " doclets: " + $timeouts + " timeouts, " + $crashes + " crashes, " + $failures + " failures")
+Write-Output "***** $doclets doclets: $timeouts timeouts, $crashes crashes, $failures failures"
 Write-Output "*******************************************************************************"
 
 $end_date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 
-Write-Output ("***** Batch documentation processing ended @ " + $end_date)
+Write-Output "***** Batch documentation processing ended @ $end_date"
 Write-Output '*******************************************************************************'
 
 Pop-Location

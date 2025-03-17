@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 18, 2024
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -53,7 +53,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 13.6")
+	Write-Output "$myName 13.6"
 }
 
 Function Run-TestSet() {
@@ -75,42 +75,42 @@ param(
 	}
 	if ($o -eq "verbose") {
 		Write-Output "%"
-		Write-Output ("% " + $unit_short)
+		Write-Output "% $unit_short"
 	}
-	$source = ".\\" + $n + ".ps1"
+	$source = ".\\$n.ps1"
 	if (Test-Path $source) {
 		& $source @allargs
 		if ($LASTEXITCODE -gt 0) {
-			Write-Output ("%         source " + $n + ".ps1 returned code " + $LASTEXITCODE)
+			Write-Output "%         source $n.ps1 returned code $LASTEXITCODE"
 			Exit 9
 		}
 	}
 	# convert any forward slashes so that the derived file name is usable
 	# also convert any colon if running on Windows systems so that the derived file name is usable
 	$name = (($unit -replace '/', '__') -replace '\\', '__') -replace ':', '___'
-	$report_goal = "logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'" + $results + "'),set_logtalk_flag(test_unit_name,'" + $name + "')"
+	$report_goal = "logtalk_load(lgtunit(automation_report)),set_logtalk_flag(test_results_directory,'$results'),set_logtalk_flag(test_unit_name,'$name')"
 	if ($s -ne "") {
-		$flag_goal = ("set_logtalk_flag(suppress_path_prefix,'" + $prefix + "')")
+		$flag_goal = "set_logtalk_flag(suppress_path_prefix,'$prefix')"
 	} else {
 		$flag_goal = "true"
 	}
 	if ($issue_server-ne "") {
-		$flag_goal = "logtalk_load(issue_creator(loader)),set_logtalk_flag(issue_server,'" + $issue_server + "'),set_logtalk_flag(issue_labels,'" + $issue_labels + "')," + $flag_goal
+		$flag_goal = "logtalk_load(issue_creator(loader)),set_logtalk_flag(issue_server,'$issue_server'),set_logtalk_flag(issue_labels,'$issue_labels'),$flag_goal"
 	}
 	if ($u -ne "") {
-		$flag_goal = "set_logtalk_flag(tests_base_url,'" + $url + "')," + $flag_goal
+		$flag_goal = "set_logtalk_flag(tests_base_url,'$url'),$flag_goal"
 	}
 	if ($f -ne "default" -and $c -ne "none") {
-		$flag_goal = "set_logtalk_flag(tests_report_directory,'" + $unit + "/')," + $flag_goal
+		$flag_goal = "set_logtalk_flag(tests_report_directory,'$unit/'),$flag_goal"
 	}
 	if ($m -eq "optimal" -or $m -eq "all") {
-		$tests_exit = Run-Tests $name ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_optimal_goal)
+		$tests_exit = Run-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_optimal_goal"
 		$mode_prefix="% (opt)   "
 	} elseif ($m -eq "normal" -or $m -eq "all") {
-		$tests_exit = Run-Tests $name ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_normal_goal)
+		$tests_exit = Run-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_normal_goal"
 		$mode_prefix="%         "
 	} elseif ($m -eq "debug" -or $m -eq "all") {
-		$tests_exit = Run-Tests $name ($initialization_goal + "," + $report_goal + "," + $format_goal + "," + $coverage_goal + "," + $flag_goal+ "," + $seed_goal + "," + $tester_debug_goal)
+		$tests_exit = Run-Tests $name "$initialization_goal,$report_goal,$format_goal,$coverage_goal,$flag_goal,$seed_goal,$tester_debug_goal"
 		$mode_prefix="% (debug) "
 	}
 
@@ -138,9 +138,9 @@ param(
 			Write-Host -NoNewline '%         completed tests from object '
 			Write-Host -NoNewline $line[1]
 			if ($duration -eq 1) {
-				Write-Output (" in " + $duration + " second")
+				Write-Output " in $duration second"
 			} else {
-				Write-Output (" in " + $duration + " seconds")
+				Write-Output " in $duration seconds"
 			}
 		}
 		Write-Host -NoNewline '%         clause coverage '
@@ -165,11 +165,11 @@ param(
 	}
 	if ($c -eq "xml") {
 		if (Test-Path $env:LOGTALKUSER) {
-			Copy-Item -Path $env:LOGTALKUSER\tools\lgtunit\coverage_report.dtd -Destination .
-			Copy-Item -Path $env:LOGTALKUSER\tools\lgtunit\coverage_report.xsl -Destination .
+			Copy-Item -Path "$env:LOGTALKUSER\tools\lgtunit\coverage_report.dtd" -Destination .
+			Copy-Item -Path "$env:LOGTALKUSER\tools\lgtunit\coverage_report.xsl" -Destination .
 		} elseif (Test-Path $env:LOGTALKHOME) {
-			Copy-Item -Path $env:LOGTALKHOME\tools\lgtunit\coverage_report.dtd -Destination .
-			Copy-Item -Path $env:LOGTALKHOME\tools\lgtunit\coverage_report.xsl -Destination .
+			Copy-Item -Path "$env:LOGTALKHOME\tools\lgtunit\coverage_report.dtd" -Destination .
+			Copy-Item -Path "$env:LOGTALKHOME\tools\lgtunit\coverage_report.xsl" -Destination .
 		}
 	}
 	Pop-Location
@@ -184,31 +184,31 @@ param(
 )
 	if ($a -eq "") {
 		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $backend_options $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe "$logtalk.ps1") $backend_options $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
 			& $logtalk $backend_options $logtalk_option $goal > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	} else {
 		if ($t -ne 0) {
-			& $timeout_command $t pwsh (where.exe ($logtalk + ".ps1")) $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
+			& $timeout_command $t pwsh (where.exe "$logtalk.ps1") $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		} else {
 			& $logtalk $backend_options $logtalk_option $goal '--' @a > "$results/$name.results" 2> "$results/$name.errors"
 		}
 	}
-	if (Select-String -Path $results/$name.errors -Pattern "Likely bug in the backend Prolog compiler. Please file a bug report." -SimpleMatch -Quiet) {
-		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
+	if (Select-String -Path "$results/$name.errors" -Pattern "Likely bug in the backend Prolog compiler. Please file a bug report." -SimpleMatch -Quiet) {
+		Add-Content -Path "$results/$name.errors" -Value "LOGTALK_BROKEN"
 		return 5
 	} elseif ($LASTEXITCODE -eq 0 -and
-		!(Test-Path $results/$name.totals -PathType Leaf) -and
-		!(Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
-		!(Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
-		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
+		!(Test-Path "$results/$name.totals" -PathType Leaf) -and
+		!(Select-String -Path "$results/$name.results" -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
+		!(Select-String -Path "$results/$name.results" -Pattern "tests skipped" -SimpleMatch -Quiet)) {
+		Add-Content -Path "$results/$name.errors" -Value "LOGTALK_BROKEN"
 		return 5
 	} elseif ($LASTEXITCODE -eq 0 -and
-		!(Select-String -Path $results/$name.results -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
-		!(Select-String -Path $results/$name.totals -Pattern "^object" -Quiet) -and
-		!(Select-String -Path $results/$name.results -Pattern "tests skipped" -SimpleMatch -Quiet)) {
-		Add-Content -Path $results/$name.errors -Value "LOGTALK_BROKEN"
+		!(Select-String -Path "$results/$name.results" -Pattern "(not applicable)" -SimpleMatch -Quiet) -and
+		!(Select-String -Path "$results/$name.totals" -Pattern "^object" -Quiet) -and
+		!(Select-String -Path "$results/$name.results" -Pattern "tests skipped" -SimpleMatch -Quiet)) {
+		Add-Content -Path "$results/$name.errors" -Value "LOGTALK_BROKEN"
 		return 5
 	}
 	return $LASTEXITCODE
@@ -279,33 +279,33 @@ Function Write-Usage-Help() {
 	Write-Output "The `"tester.sh`" file is sourced with all the parameters passed to the script."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-a arguments]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName -p prolog [-o output] [-m mode] [-f format] [-d results] [-t timeout] [-n driver] [-s prefix] [-b tracker] [-u url] [-c report] [-l level] [-e exclude] [-i options] [-g goal] [-r seed] [-w] [-a arguments]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Required arguments:"
 	Write-Output "  -p backend Prolog compiler"
 	Write-Output "     (valid values are b, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output ("  -o output (valid values are verbose and minimal; default is " + $o + ")")
-	Write-Output ("  -m compilation mode (default is " + $m + ")")
+	Write-Output "  -o output (valid values are verbose and minimal; default is $o)"
+	Write-Output "  -m compilation mode (default is $m)"
 	Write-Output "     (valid values are optimal, normal, debug, and all)"
-	Write-Output ("  -f format for writing the test results (default is " + $f + ")")
+	Write-Output "  -f format for writing the test results (default is $f)"
 	Write-Output "     (valid values are default, tap, xunit, and xunit_net_v2)"
 	Write-Output "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
-	Write-Output ("  -t timeout in seconds for running each test set (default is " + $t + "; i.e. disabled)")
-	Write-Output ("  -n name of the test driver and sourced files (minus file name extensions; default is " + $n + ")")
-	Write-Output ("  -s suppress path prefix (default is " + $s + ")")
+	Write-Output "  -t timeout in seconds for running each test set (default is $t; i.e. disabled)"
+	Write-Output "  -n name of the test driver and sourced files (minus file name extensions; default is $n)"
+	Write-Output "  -s suppress path prefix (default is $s)"
 	Write-Output "  -b bug report server (valid values are github and gitlab; no default)"
 	Write-Output "  -u base URL to generate links to test files (no default)"
-	Write-Output ("  -c code coverage report (default is " + $c + ")")
+	Write-Output "  -c code coverage report (default is $c)"
 	Write-Output "     (valid values are none and xml)"
 	Write-Output "  -l directory depth level to look for test sets (default is to recurse into all sub-directories)"
 	Write-Output "     (level 1 means current directory only)"
 	Write-Output "  -e exclude directories matching a regular expression"
 	Write-Output "  -i integration script command-line options (no default)"
-	Write-Output ("  -g initialization goal (default is " + $g + ")")
+	Write-Output "  -g initialization goal (default is $g)"
 	Write-Output "  -r random generator starting seed (no default)"
 	Write-Output "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
 	Write-Output "     (this option should not be used when running parallel processes that use the same test sets)"
@@ -406,19 +406,19 @@ Function Check-Parameters() {
 		$script:logtalk = "yaplgt"
 		$script:logtalk_option = "-g"
 	} else {
-		Write-Output ("Error! Unsupported backend Prolog compiler: " + $p)
+		Write-Output "Error! Unsupported backend Prolog compiler: $p"
 		Write-Usage-Help
 		Exit
 	}
 
 	if ($o -ne "verbose" -and $o -ne "minimal") {
-		Write-Output ("Error! Unknown output verbosity: " + $o)
+		Write-Output "Error! Unknown output verbosity: $o"
 		Write-Usage-Help
 		Exit 1
 	}
 
 	if ($m -ne "optimal" -and $m -ne "normal" -and $m -ne "debug" -and $m -ne "all") {
-		Write-Output ("Error! Unknown compilation mode: " + $m)
+		Write-Output "Error! Unknown compilation mode: $m"
 		Write-Usage-Help
 		Exit 1
 	}
@@ -432,7 +432,7 @@ Function Check-Parameters() {
 	} elseif ($f -eq "xunit_net_v2") {
 		$script:format_goal = $format_xunit_net_v2_goal
 	} else {
-		Write-Output ("Error! Unknown format: " + $f)
+		Write-Output "Error! Unknown format: $f"
 		Write-Usage-Help
 		Exit 1
 	}
@@ -442,7 +442,7 @@ Function Check-Parameters() {
 	} elseif ($c -eq "xml") {
 		$script:coverage_goal = $coverage_xml_goal
 	} else {
-		Write-Output ("Error! Unknown coverage report: " + $c)
+		Write-Output "Error! Unknown coverage report: $c"
 		Write-Usage-Help
 		Exit 1
 	}
@@ -456,7 +456,7 @@ Function Check-Parameters() {
 			$script:issue_server = $b
 		}
 		if ($script:issue_server -ne "github" -and $script:issue_server -ne "gitlab") {
-			Write-Output ("Error! Issue tracker server must be either github or gitlab: " + $b)
+			Write-Output "Error! Issue tracker server must be either github or gitlab: $b"
 			Write-Usage-Help
 			Exit 1
 		}		
@@ -466,7 +466,7 @@ Function Check-Parameters() {
 		if ($l -is [int] -and $l -ge 1) {
 			$script:level = $l - 1
 		} else {
-			Write-Output ("Error! Level must be an integer equal or greater than 1: " + $l)
+			Write-Output "Error! Level must be an integer equal or greater than 1: $l"
 			Write-Usage-Help
 			Exit 1
 		}
@@ -487,7 +487,7 @@ Function Check-Parameters() {
 	}
 
 	if ($r -ne "") {
-		$script:seed_goal = ("logtalk_load(arbitrary(loader)),type::set_seed(" + $r + ")")
+		$script:seed_goal = "logtalk_load(arbitrary(loader)),type::set_seed($r)"
 	} else {
 		$script:seed_goal = "true"
 	}
@@ -547,19 +547,19 @@ $coverage_xml_goal = "logtalk_load(lgtunit(coverage_report))"
 $coverage_goal = $coverage_default_goal
 
 $results = (Join-Path $pwd "logtalk_tester_logs") -replace '\\', '/'
-$prefix = ($env:USERPROFILE + "/") -replace '\\', '/'
+$prefix = "$env:USERPROFILE/" -replace '\\', '/'
 
 Check-Parameters
 
 if ($p -eq "swipack") {
-	$initialization_goal = ("use_module(library(logtalk))," + $initialization_goal)
+	$initialization_goal = "use_module(library(logtalk)),$initialization_goal"
 }
 
-$versions_goal = ("logtalk_load(library(tester_versions)),halt" + $dot)
+$versions_goal = "logtalk_load(library(tester_versions)),halt$dot"
 
-$tester_optimal_goal = ("set_logtalk_flag(optimize,on),logtalk_load(" + $n + "),halt" + $dot)
-$tester_normal_goal = ("logtalk_load(" + $n + "),halt" + $dot)
-$tester_debug_goal = ("set_logtalk_flag(debug,on),logtalk_load(" + $n + "),halt" + $dot)
+$tester_optimal_goal = "set_logtalk_flag(optimize,on),logtalk_load($n),halt$dot"
+$tester_normal_goal = "logtalk_load($n),halt$dot"
+$tester_debug_goal = "set_logtalk_flag(debug,on),logtalk_load($n),halt$dot"
 
 New-Item -Path $results -ItemType directory -Force > $null
 
@@ -588,20 +588,20 @@ if ($o -eq "verbose") {
 }
 
 if ($exclude -eq "") {
-	$testsets = (Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | Measure-Object).count
+	$testsets = (Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse | Measure-Object).count
 } else {
-	$testsets = (Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} | Measure-Object).count
+	$testsets = (Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} | Measure-Object).count
 }
 
 if ($l -eq "") {
 	if ($o -eq "verbose") {
 		if ($exclude -eq "") {
-			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
+			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse |
 			Foreach-Object {
 				Run-TestSet $_.FullName
 			}
 		} else {
-			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} |
+			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
 				Run-TestSet $_.FullName
 			}
@@ -609,7 +609,7 @@ if ($l -eq "") {
 	} else {
 		$counter = 1
 		if ($exclude -eq "") {
-			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse |
+			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse |
 			Foreach-Object {
 				Write-Host -NoNewline "% running $testsets test sets: "
 				Write-Host -NoNewline "$counter`r"
@@ -617,7 +617,7 @@ if ($l -eq "") {
 				$counter++
 			}
 		} else {
-			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Recurse | where-object{$_.fullname -notmatch $exclude} |
+			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
 				Write-Host -NoNewline "% running $testsets test sets: "
 				Write-Host -NoNewline "$counter`r"
@@ -630,12 +630,12 @@ if ($l -eq "") {
 } else {
 	if ($o -eq "verbose") {
 		if ($exclude -eq "") {
-			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
+			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
 			Foreach-Object {
 				Run-TestSet $_.FullName
 			}
 		} else {
-			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level | where-object{$_.fullname -notmatch $exclude} |
+			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
 				Run-TestSet $_.FullName
 			}
@@ -643,7 +643,7 @@ if ($l -eq "") {
 	} else {
 		$counter = 1
 		if ($exclude -eq "") {
-			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level |
+			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
 			Foreach-Object {
 				Write-Host -NoNewline "% running $testsets test sets: "
 				Write-Host -NoNewline "$counter`r"
@@ -652,7 +652,7 @@ if ($l -eq "") {
 				Write-Output "%"
 			}
 		} else {
-			Get-ChildItem -Path $base\* -Include ($n + ".lgt"), ($n + ".logtalk") -Depth $level | where-object{$_.fullname -notmatch $exclude} |
+			Get-ChildItem -Path "$base\*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
 				Write-Host -NoNewline "% running $testsets test sets: "
 				Write-Host -NoNewline "$counter`r"
@@ -782,13 +782,13 @@ if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Patter
 	}
 }
 Write-Output "%"
-Write-Output ("% " + $testsets + " test sets: " + $testsetruns + " completed, " + $testsetskipped + " skipped, " + $broken + " broken, " + $timeouts + " timedout, " + $crashed + " crashed")
-Write-Output ("% " + $total + " tests: " + $skipped + " skipped, " + $passed + " passed, " + $failed + " failed (" + $flaky + " flaky)")
+Write-Output "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
+Write-Output "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
 
 if ($o -eq "verbose") {
 	$end_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 	Write-Output "%"
-	Write-Output ("% Batch testing ended @ " + $end_date)
+	Write-Output "% Batch testing ended @ $end_date"
 }
 
 Pop-Location
