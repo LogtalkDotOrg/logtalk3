@@ -61,6 +61,9 @@ in a detached HEAD state.
 * FIXED: The `logtalk_doclet.ps1` PowerShell script handling of the prefix and
 timeout options.
 
+* FIXED: The `logtalk_tester.ps1` PowerShell script `xunit_net_v2` format
+option.
+
 Examples
 --------
 

@@ -236,12 +236,12 @@ param(
 		Add-Content -Path $directory/xunit_report.xml -Value "</testsuite>"
 		Add-Content -Path $directory/xunit_report.xml -Value "</testsuites>"
 	} elseif ($format -eq "xunit_net_v2") {
-		run_date=$(date +"%Y-%m-%d")
-		run_time=$(date +"%H:%M:%S")
+		$run_date = Get-Date -Format "yyyy-MM-dd"
+		$run_time = Get-Date -Format "HH:mm:ss"
 		New-Item -Path . -Name $directory/xunit_report.xml -ItemType "file" -Force > $null
 		Add-Content -Path $directory/xunit_report.xml -Value "<?xml version=`"1.0`" encoding=`"UTF-8`"?>"
 		Add-Content -Path $directory/xunit_report.xml -Value "<assemblies>"
-		Add-Content -Path $directory/xunit_report.xml -Value "<assembly name=`"$short/tests.lgt::tests`" con}g-file=`"$short/tests.lgt`" test-framework=`"lgtunit`" run-date=`"$run_date`" run-time=`"$run_time`" time=`"0`" total=`"0`" errors=`"1`" failures=`"1`" skipped=`"0`">"
+		Add-Content -Path $directory/xunit_report.xml -Value "<assembly name=`"$short/tests.lgt::tests`" config-file=`"$short/tests.lgt`" test-framework=`"lgtunit`" run-date=`"$run_date`" run-time=`"$run_time`" time=`"0`" total=`"0`" errors=`"1`" failures=`"1`" skipped=`"0`">"
 		Add-Content -Path $directory/xunit_report.xml -Value "<errors>"
 		Add-Content -Path $directory/xunit_report.xml -Value "<error type=`"$exception`" name=`"$exception`">"
 		Add-Content -Path $directory/xunit_report.xml -Value "<failure exception-type=`"$exception`">"
@@ -261,8 +261,8 @@ param(
 		Add-Content -Path $directory/xunit_report.xml -Value "</assemblies>"
 	} elseif ($format -eq "tap") {
 		New-Item -Path . -Name $directory/tap_report.xml -ItemType "file" -Force > $null
-		Add-Content -Path $directory/tap_report.xml -Value "TAP version 13"
-		Add-Content -Path $directory/tap_report.xml -Value "Bail out! $unit $exception"
+		Add-Content -Path $directory/tap_report.txt -Value "TAP version 13"
+		Add-Content -Path $directory/tap_report.txt -Value "Bail out! $unit $exception"
 	}
 }
 
@@ -293,10 +293,10 @@ Function Write-Usage-Help() {
 	Write-Output "     (valid values are optimal, normal, debug, and all)"
 	Write-Output "  -f format for writing the test results (default is $f)"
 	Write-Output "     (valid values are default, tap, xunit, and xunit_net_v2)"
-	Write-Output "  -d directory to store the test logs (default is ./logtalk_tester_logs)"
+	Write-Output "  -d directory to store the test logs (default is $results)"
 	Write-Output "  -t timeout in seconds for running each test set (default is $t; i.e. disabled)"
 	Write-Output "  -n name of the test driver and sourced files (minus file name extensions; default is $n)"
-	Write-Output "  -s suppress path prefix (default is $s)"
+	Write-Output "  -s suppress path prefix (default is $prefix)"
 	Write-Output "  -b bug report server (valid values are github and gitlab; no default)"
 	Write-Output "  -u base URL to generate links to test files (no default)"
 	Write-Output "  -c code coverage report (default is $c)"
@@ -305,7 +305,7 @@ Function Write-Usage-Help() {
 	Write-Output "     (level 1 means current directory only)"
 	Write-Output "  -e exclude directories matching a regular expression"
 	Write-Output "  -i integration script command-line options (no default)"
-	Write-Output "  -g initialization goal (default is $g)"
+	Write-Output "  -g initialization goal (default is $initialization_goal)"
 	Write-Output "  -r random generator starting seed (no default)"
 	Write-Output "  -w wipe default scratch directories (./.lgt_tmp and ./lgt_tmp) before running a test set"
 	Write-Output "     (this option should not be used when running parallel processes that use the same test sets)"
@@ -315,7 +315,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 }
 
-Function Check-Parameters() {
+Function Confirm-Parameters() {
 
 	if ($v -eq $true) {
 		Write-Script-Version
@@ -549,7 +549,7 @@ $coverage_goal = $coverage_default_goal
 $results = (Join-Path $pwd "logtalk_tester_logs") -replace '\\', '/'
 $prefix = "$env:USERPROFILE/" -replace '\\', '/'
 
-Check-Parameters
+Confirm-Parameters
 
 if ($p -eq "swipack") {
 	$initialization_goal = "use_module(library(logtalk)),$initialization_goal"
