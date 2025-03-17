@@ -69,7 +69,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 }
 
-Function Check-Parameters() {
+Function Confirm-Parameters() {
 	if ($v -eq $true) {
 		Write-Script-Version
 		Exit
@@ -93,7 +93,7 @@ if ($null -eq (Get-Command "allure" -ErrorAction SilentlyContinue))  {
 	}
 }
 
-Check-Parameters
+Confirm-Parameters
 
 if (Test-Path $o -PathType container) {
 	if ((Test-Path $o\data) -and (Test-Path $o\export) -and (Test-Path $o\history) -and `

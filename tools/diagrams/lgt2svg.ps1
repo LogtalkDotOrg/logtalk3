@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   DOT diagram files to SVG files conversion script 
-##   Last updated on November 20, 2024
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022-2024 Paulo Moura <pmoura@logtalk.org>
@@ -54,7 +54,7 @@ function Get-Logtalkhome {
 			"%LOCALAPPDATA%\Logtalk"
 		)
 		
-		# Checking all possibilites
+		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
 			Write-Output ("Looking for: " + $DEFAULTPATH)
 			if (Test-Path $DEFAULTPATH) {
@@ -97,7 +97,7 @@ function Write-Usage-Help() {
 	Write-Output ""
 }
 
-function Check-Parameters() {
+function Confirm-Parameters() {
 
 	if ($h -eq $true) {
 		Write-Usage-Help
@@ -125,7 +125,7 @@ function Check-Parameters() {
 
 ###################### here it starts ############################ 
 
-Check-Parameters
+Confirm-Parameters
 
 Get-Logtalkhome
 

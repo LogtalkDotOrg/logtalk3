@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to plain text conversion script 
-##   Last updated on November 27, 2023
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -35,7 +35,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.2")
+	Write-Output "$myName 2.2"
 }
 
 function Get-Logtalkhome {
@@ -51,11 +51,11 @@ function Get-Logtalkhome {
 			"%LOCALAPPDATA%\Logtalk"
 		)
 		
-		# Checking all possibilites
+		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
-			Write-Output ("Looking for: " + $DEFAULTPATH)
+			Write-Output "Looking for: $DEFAULTPATH"
 			if (Test-Path $DEFAULTPATH) {
-				Write-Output ("... using Logtalk installation found at " + $DEFAULTPATH)
+				Write-Output "... using Logtalk installation found at $DEFAULTPATH"
 				$env:LOGTALKHOME = $DEFAULTPATH
 				break
 			}
@@ -81,21 +81,21 @@ function Write-Usage-Help() {
 	Write-Output "current directory to plain text files"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-d directory]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName [-d directory]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output ("  -d output directory for the generated files (default is " + $d + ")")
+	Write-Output "  -d output directory for the generated files (default is $d)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
 }
 
-function Check-Parameters() {
+function Confirm-Parameters() {
 
 	if (-not(Test-Path $d)) { # cannot be ""
-		Write-Output ("The " + $p + " output directory does not exist!")
+		Write-Output "The $p output directory does not exist!"
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -114,14 +114,13 @@ function Check-Parameters() {
 
 ###################### here it starts ############################ 
 
-Check-Parameters
+Confirm-Parameters
 
 Get-Logtalkhome
 
 # Check for existence
 if (Test-Path $env:LOGTALKHOME) {
-	$output = "Found LOGTALKHOME at: " + $env:LOGTALKHOME
-	Write-Output $output
+	Write-Output "Found LOGTALKHOME at: $env:LOGTALKHOME"
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
@@ -152,27 +151,27 @@ if (Test-Path $env:LOGTALKUSER) {
 	logtalk_user_setup
 }
 
-$entity_xslt =$env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_entity_to_txt.xsl"
-$index_xslt  =$env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_index_to_txt.xsl"
+$entity_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_txt.xsl"
+$index_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index_to_txt.xsl"
 
 if (!(Test-Path "logtalk_entity.dtd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd" -Destination .
 }
 
 if (!(Test-Path "logtalk_index.dtd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.dtd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.dtd" -Destination .
 }
 
 if (!(Test-Path "custom.ent")) {
-	Copy-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\custom.ent -Destination .
+	Copy-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\custom.ent" -Destination .
 }
 
 if (!(Test-Path "logtalk_entity.xsd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd" -Destination .
 }
 
 if (!(Test-Path "logtalk_index.xsd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_index.xsd" -Destination .
 }
 
 
@@ -196,11 +195,11 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Get-ChildItem -Path .\*.xml |
 	Foreach-Object {
 		if (Select-String -Path $_ -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
-			Write-Output ("  converting " + $_.Name)
+			Write-Output "  converting $($_.Name)"
 			$file = Join-Path $pwd $_.Name
-			$text = Join-Path $d ($_.BaseName + ".txt")
+			$text = Join-Path $d "$($_.BaseName).txt"
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
-            $fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
+			$fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
 			$entity_xslt_object.Transform($reader, $null, $writer)
 			$writer.Close()
@@ -210,11 +209,11 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Get-ChildItem -Path . -Filter .\*.xml |
 	Foreach-Object {
 		if (Select-String -Path $_ -Pattern '<logtalk_index' -CaseSensitive -SimpleMatch -Quiet) {
-			Write-Output ("  converting " + $_.Name)
+			Write-Output "  converting $($_.Name)"
 			$file = Join-Path $pwd $_.Name
-			$text = Join-Path $d ($_.BaseName + ".txt")
+			$text = Join-Path $d "$($_.BaseName).txt"
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
-            $fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
+			$fs = New-Object IO.FileStream $text, 'Append', 'Write', 'Read'
 			$writer = New-Object System.IO.StreamWriter($fs)
 			$entity_xslt_object.Transform($reader, $null, $writer)
 			$writer.Close()

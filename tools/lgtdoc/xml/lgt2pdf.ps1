@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on March 15, 2023
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -37,7 +37,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.0")
+	Write-Output "$myName 2.0"
 }
 
 function Get-Logtalkhome {
@@ -53,11 +53,11 @@ function Get-Logtalkhome {
 			"%LOCALAPPDATA%\Logtalk"
 		)
 		
-		# Checking all possibilites
+		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
-			Write-Output ("Looking for: " + $DEFAULTPATH)
+			Write-Output "Looking for: $DEFAULTPATH"
 			if (Test-Path $DEFAULTPATH) {
-				Write-Output ("... using Logtalk installation found at " + $DEFAULTPATH)
+				Write-Output "... using Logtalk installation found at $DEFAULTPATH"
 				$env:LOGTALKHOME = $DEFAULTPATH
 				break
 			}
@@ -83,35 +83,35 @@ function Write-Usage-Help() {
 	Write-Output "current directory to PDF files"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-f format] [-d directory] [-p processor]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName [-f format] [-d directory] [-p processor]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output ("  -f output file format (either a4 or us; default is " + $f + ")")
-	Write-Output ("  -d output directory for the generated files (default is " + $d + ")")
-	Write-Output ("  -p XSL-FO processor (either fop, fop2, xep, or xinc; default is " + $d + ")")
+	Write-Output "  -f output file format (either a4 or us; default is $f)"
+	Write-Output "  -d output directory for the generated files (default is $d)"
+	Write-Output "  -p XSL-FO processor (either fop, fop2, xep, or xinc; default is $p)"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
 }
 
-function Check-Parameters() {
+function Confirm-Parameters() {
 
 	if ($f -ne "a4" -and $f -ne "us") {
-		Write-Output ("Error! Unsupported output format: " + $f)
+		Write-Output "Error! Unsupported output format: $f"
 		Start-Sleep -Seconds 2
 		Exit
 	}
 
 	if (-not(Test-Path $d)) { # cannot be ""
-		Write-Output ("The " + $p + " output directory does not exist!")
+		Write-Output "The $d output directory does not exist!"
 		Start-Sleep -Seconds 2
 		Exit
 	}
 
 	if ($p -ne "fop" -and $p -ne "fop2" -and $p -ne "xep" -and $p -ne "xinc") {
-		Write-Output ("Error! Unsupported XSL-FO processor: " + $f)
+		Write-Output "Error! Unsupported XSL-FO processor: $p"
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -130,14 +130,13 @@ function Check-Parameters() {
 
 ###################### here it starts ############################ 
 
-Check-Parameters
+Confirm-Parameters
 
 Get-Logtalkhome
 
 # Check for existence
 if (Test-Path $env:LOGTALKHOME) {
-	$output = "Found LOGTALKHOME at: " + $env:LOGTALKHOME
-	Write-Output $output
+	Write-Output "Found LOGTALKHOME at: $env:LOGTALKHOME"
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
@@ -148,13 +147,13 @@ Get-Logtalkuser
 
 # Check for existence
 if (Test-Path $env:LOGTALKUSER) {
-	if (!(Test-Path $env:LOGTALKUSER/VERSION.txt)) {
+	if (!(Test-Path "$env:LOGTALKUSER/VERSION.txt")) {
 		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
 		Write-Output "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	} else {
-		$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
-		$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
+		$system_version = Get-Content "$env:LOGTALKHOME/VERSION.txt"
+		$user_version = Get-Content "$env:LOGTALKUSER/VERSION.txt"
 		if ($user_version -lt $system_version) {
 			Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
 			Write-Output "    $user_version < $system_version"
@@ -169,21 +168,21 @@ if (Test-Path $env:LOGTALKUSER) {
 }
 
 if ($f -eq "a4") {
-	$entity_xslt =$env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_entity_to_pdf_a4.xsl"
+	$entity_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_pdf_a4.xsl"
 } else {
-	$entity_xslt  =$env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_entity_to_pdf_us.xsl"
+	$entity_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_pdf_us.xsl"
 }
 
 if (!(Test-Path "logtalk_entity.dtd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.dtd" -Destination .
 }
 
 if (!(Test-Path "custom.ent")) {
-	Copy-Item -Path $env:LOGTALKUSER\tools\lgtdoc\xml\custom.ent -Destination .
+	Copy-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\custom.ent" -Destination .
 }
 
 if (!(Test-Path "logtalk_entity.xsd")) {
-	Copy-Item -Path $env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd -Destination .
+	Copy-Item -Path "$env:LOGTALKHOME\tools\lgtdoc\xml\logtalk_entity.xsd" -Destination .
 }
 
 
@@ -193,13 +192,13 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Get-ChildItem -Path .\*.xml |
 	Foreach-Object {
 		if (Select-String -Path $_ -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
-			Write-Output ("  converting " + $_.Name)
+			Write-Output "  converting $($_.Name)"
 			$file = Join-Path $pwd $_.Name
-			$pdf = Join-Path $d ($_.BaseName + ".pdf")
-			if ( $p -eq  "xinc") {
-				 xinc -xml "$file" -xsl "$entity_xslt" -pdf "$pdf" > $null
+			$pdf = Join-Path $d "$($_.BaseName).pdf"
+			if ($p -eq "xinc") {
+				xinc -xml "$file" -xsl "$entity_xslt" -pdf "$pdf" > $null
 			} else {
-				 & $p -q -xml "$file" -xsl "$entity_xslt" -pdf "$pdf" > $null			
+				& $p -q -xml "$file" -xsl "$entity_xslt" -pdf "$pdf" > $null			
 			}
 		}
 	}

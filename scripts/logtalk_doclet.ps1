@@ -112,7 +112,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 }
 
-Function Check-Parameters() {
+Function Confirm-Parameters() {
 
 	if ($v -eq $true) {
 		Write-Script-Version
@@ -230,7 +230,7 @@ if (Test-Path $env:Programfiles\Git\usr\bin\timeout.exe) {
 	Write-Output "Warning! Timeout support not available. The timeout option will be ignored."
 }
 
-Check-Parameters
+Confirm-Parameters
 
 New-Item -Path $d -ItemType directory -Force > $null
 

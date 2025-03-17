@@ -51,7 +51,7 @@ function Get-Logtalkhome {
 			"%LOCALAPPDATA%\Logtalk"
 		)
 
-		# Checking all possibilites
+		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
 			Write-Output "Looking for: $DEFAULTPATH"
 			if (Test-Path $DEFAULTPATH) {

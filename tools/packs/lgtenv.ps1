@@ -65,7 +65,7 @@ Function Write-Usage-Help() {
 	Write-Output ""
 }
 
-Function Check-Parameters() {
+Function Confirm-Parameters() {
 
 	if ($v -eq $true) {
 		Write-Script-Version
@@ -82,7 +82,7 @@ Function Check-Parameters() {
 
 $base = $pwd
 
-Check-Parameters
+Confirm-Parameters
 
 if ($d -eq "") {
 	$directory = $base

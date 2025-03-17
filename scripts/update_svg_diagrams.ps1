@@ -55,7 +55,7 @@ function Write-Usage-Help() {
 	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output ("  -p backend Prolog compiler (default is " + $p + ")")
+	Write-Output "  -p backend Prolog compiler (default is $p)"
 	Write-Output "     (valid values are b, ciao, cx, eclipse, gnu, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output "  -i include all installed packs"
 	Write-Output "  -v print version"
@@ -68,8 +68,6 @@ $scriptpath = $MyInvocation.MyCommand.Path
 $dir = Split-Path $scriptpath
 Push-Location $dir
 
-
-$prolog='SWI-Prolog'
 $logtalk="swilgt$extension -g"
 
 if ($v -eq $true) {
@@ -83,49 +81,35 @@ if ($h -eq $true) {
 }
 
 if ("$p" -eq "b") {
-	$prolog='B-Prolog'
 	$logtalk="bplgt -g"
 } elseif ("$p" -eq "ciao") {
-	$prolog='Ciao Prolog'
 	$logtalk="ciaolgt -e"
 } elseif ("$p" -eq "cx") {
-	$prolog='CxProlog'
 	$logtalk="cxlgt --goal"
 } elseif ("$p" -eq "eclipse") {
-	$prolog='ECLiPSe'
 	$logtalk="eclipselgt -e"
 } elseif ("$p" -eq "gnu") {
-	$prolog='GNU Prolog'
 	$logtalk="gplgt --query-goal"
 } elseif ("$p" -eq "ji") {
-	$prolog='JIProlog'
 	$logtalk="jiplgt -n -g"
-} elseif ("$p" -eq "xvm") {
-	$prolog='XVM'
-	$logtalk="xvmlgt -g"
 } elseif ("$p" -eq "sicstus") {
-	$prolog='SICStus Prolog'
 	$logtalk="sicstuslgt --goal"
 } elseif ("$p" -eq "swi") {
-	$prolog='SWI-Prolog'
 	$logtalk="swilgt -g"
 } elseif ("$p" -eq "swipack") {
-	$prolog='SWI-Prolog'
 	$logtalk="swipl -g"
 } elseif ("$p" -eq "tau") {
-	$prolog='Tau Prolog'
 	$logtalk="taulgt -g"
 } elseif ("$p" -eq "trealla") {
-	$prolog='Trealla Prolog'
 	$logtalk="tplgt -g"
 } elseif ("$p" -eq "xsb") {
-	$prolog='XSB'
 	$logtalk="xsblgt -e"
+} elseif ("$p" -eq "xvm") {
+	$logtalk="xvmlgt -g"
 } elseif ("$p" -eq "yap") {
-	$prolog='YAP'
 	$logtalk="yaplgt -g"
 } else {
-	Write-Output ("Error! Unsupported backend Prolog compiler: " + "$p")
+	Write-Output "Error! Unsupported backend Prolog compiler: $p"
 	Write-Usage-Help
 	Exit
 }
@@ -135,8 +119,6 @@ if ($env:LOGTALKPACKS -ne "") {
 } else {
 	$logtalk_packs = '$env:USERPROFILE\logtalk_packs\'
 }
-
-$cwd = $pwd
 
 # documentation goals
 

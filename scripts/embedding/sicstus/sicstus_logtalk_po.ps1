@@ -5,7 +5,7 @@
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
 ## 
-##   Last updated on September 6, 2023
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2022 Hans N. Beck
@@ -64,7 +64,7 @@ function Get-Logtalkhome {
 			"%LOCALAPPDATA%\Logtalk"
 		)
 		
-		# Checking all possibilites
+		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
 			Write-Output ("Looking for: " + $DEFAULTPATH)
 			if (Test-Path $DEFAULTPATH) {
@@ -114,7 +114,7 @@ function Write-Usage-Help() {
 	Write-Output ""
 }
 
-function Check-Parameters() {
+function Confirm-Parameters() {
 
 	if ($h -eq $true) {
 		Write-Usage-Help
@@ -172,7 +172,7 @@ function Check-Parameters() {
 
 ###################### here it starts ############################ 
 
-Check-Parameters
+Confirm-Parameters
 
 Get-Logtalkhome
 

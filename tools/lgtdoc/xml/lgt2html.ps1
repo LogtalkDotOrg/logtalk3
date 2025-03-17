@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to (X)HTML conversion script 
-##   Last updated on March 15, 2023
+##   Last updated on March 17, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 2.3")
+	Write-Output "$myName 2.3"
 }
 
 function Get-Logtalkhome {
@@ -54,11 +54,11 @@ function Get-Logtalkhome {
 			"%LOCALAPPDATA%\Logtalk"
 		)
 		
-		# Checking all possibilites
+		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
-			Write-Output ("Looking for: " + $DEFAULTPATH)
+			Write-Output "Looking for: $DEFAULTPATH"
 			if (Test-Path $DEFAULTPATH) {
-				Write-Output ("... using Logtalk installation found at " + $DEFAULTPATH)
+				Write-Output "... using Logtalk installation found at $DEFAULTPATH"
 				$env:LOGTALKHOME = $DEFAULTPATH
 				break
 			}
@@ -84,30 +84,30 @@ function Write-Usage-Help() {
 	Write-Output "current directory to XHTML or HTML files"
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-f format] [-d directory] [-i index] [-t title]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName [-f format] [-d directory] [-i index] [-t title]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output ("  -f output file format (either xhtml or html; default is " + $f + ")")
-	Write-Output ("  -d output directory for the generated files (default is " + $d + ")")
-	Write-Output ("  -i name of the index file (default is " + $i + ")")
-	Write-Output ("  -t title to be used in the index file (default is `"" + $t + "`")")
+	Write-Output "  -f output file format (either xhtml or html; default is $f)"
+	Write-Output "  -d output directory for the generated files (default is $d)"
+	Write-Output "  -i name of the index file (default is $i)"
+	Write-Output "  -t title to be used in the index file (default is `"$t`")"
 	Write-Output "  -v print version"
 	Write-Output "  -h help"
 	Write-Output ""
 }
 
-function Check-Parameters() {
+function Confirm-Parameters() {
 
 	if ($f -ne "xhtml" -and $f -ne "html") {
-		Write-Output ("Error! Unknown output file format: " + $f)
+		Write-Output "Error! Unknown output file format: $f"
 		Start-Sleep -Seconds 2
 		Exit
 	}
 
 	if (-not(Test-Path $d)) { # cannot be ""
-		Write-Output ("The " + $p + " output directory does not exist!")
+		Write-Output "The $p output directory does not exist!"
 		Start-Sleep -Seconds 2
 		Exit
 	}
@@ -124,7 +124,7 @@ function Check-Parameters() {
 
 }
 
-function Create-Index-File() {
+function New-Index-File() {
 	New-Item -Path . -Name $i -ItemType "file" -Force > $null
 
 	switch ( $f ) {
@@ -142,11 +142,11 @@ function Create-Index-File() {
 
 	Add-Content -Path $i -Value "<head>"
 	Add-Content -Path $i -Value "    <meta http-equiv=`"content-type`" content=`"text/html; charset=utf-8`"/>"
-	Add-Content -Path $i -Value ("    <title>" + $i + "</title>")
+	Add-Content -Path $i -Value "    <title>$i</title>"
 	Add-Content -Path $i -Value "    <link rel=`"stylesheet`" href=`"logtalk.css`" type=`"text/css`"/>"
 	Add-Content -Path $i -Value "</head>"
 	Add-Content -Path $i -Value "<body>"
-	Add-Content -Path $i -Value ("<h1>" + $i + "</h1>")
+	Add-Content -Path $i -Value "<h1>$i</h1>"
 	Add-Content -Path $i -Value "<ul>"
 
 	if (Test-Path "directory_index.xml") {
@@ -160,11 +160,11 @@ function Create-Index-File() {
 			if ($_ | Select-String -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
 				$entity = ($_.BaseName -replace '_[^_]*$')
 				$pars   = ($_.BaseName -replace '.*_')
-				Write-Output ("  indexing " + $_.BaseName + ".html")
+				Write-Output "  indexing $($_.BaseName).html"
 				if ($pars -gt 0) {
-					Add-Content -Path $i -Value ("    <li><a href=`"" + $_.BaseName + ".html`">" + $entity + "/" + $pars + "</a></li>")
+					Add-Content -Path $i -Value "    <li><a href=`"$($_.BaseName).html`">$entity/$pars</a></li>"
 				} else {
-					Add-Content -Path $i -Value ("    <li><a href=`"" + $_.BaseName + ".html`">" + $entity + "</a></li>")
+					Add-Content -Path $i -Value "    <li><a href=`"$($_.BaseName).html`">$entity</a></li>"
 				}
 			}
 		}
@@ -174,21 +174,20 @@ function Create-Index-File() {
 
 	$date = Get-Date -Format "yyyy-MM-dd-HH:mm:ss"
 
-	Add-Content -Path $i -Value ("<p>Generated on " + $date + "</p>")
+	Add-Content -Path $i -Value "<p>Generated on $date</p>"
 	Add-Content -Path $i -Value "</body>"
 	Add-Content -Path $i -Value "</html>"
 }
 
 ###################### here it starts ############################ 
 
-Check-Parameters
+Confirm-Parameters
 
 Get-Logtalkhome
 
 # Check for existence
 if (Test-Path $env:LOGTALKHOME) {
-	$output = "Found LOGTALKHOME at: " + $env:LOGTALKHOME
-	Write-Output $output
+	Write-Output "Found LOGTALKHOME at: $env:LOGTALKHOME"
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
@@ -220,11 +219,11 @@ if (Test-Path $env:LOGTALKUSER) {
 }
 
 if ($f -eq "xhtml") {
-	$entity_xslt = $env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_entity_to_xhtml.xsl"
-	$index_xslt  = $env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_index_to_xhtml.xsl"
+	$entity_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_xhtml.xsl"
+	$index_xslt  = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index_to_xhtml.xsl"
 } else {
-	$entity_xslt = $env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_entity_to_html.xsl"
-	$index_xslt  = $env:LOGTALKUSER + "\tools\lgtdoc\xml\logtalk_index_to_html.xsl"
+	$entity_xslt = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity_to_html.xsl"
+	$index_xslt  = "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_index_to_html.xsl"
 }
 
 if (!(Test-Path "logtalk_entity.dtd")) {
@@ -271,9 +270,9 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Get-ChildItem -Path .\*.xml |
 	Foreach-Object {
 		if (Select-String -Path $_ -Pattern '<logtalk_entity' -CaseSensitive -SimpleMatch -Quiet) {
-			Write-Output ("  converting " + $_.Name)
+			Write-Output "  converting $($_.Name)"
 			$file = Join-Path $pwd $_.Name
-			$html = Join-Path $d ($_.BaseName + ".html")
+			$html = Join-Path $d "$($_.BaseName).html"
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
 			$writer = [System.Xml.XmlTextWriter]::Create($html)
 			$entity_xslt_object.Transform($reader, $writer)
@@ -284,9 +283,9 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	Get-ChildItem -Path . -Filter .\*.xml |
 	Foreach-Object {
 		if (Select-String -Path $_ -Pattern '<logtalk_index' -CaseSensitive -SimpleMatch -Quiet) {
-			Write-Output ("  converting " + $_.Name)
+			Write-Output "  converting $($_.Name)"
 			$file = Join-Path $pwd $_.Name
-			$html = Join-Path $d ($_.BaseName + ".html")
+			$html = Join-Path $d "$($_.BaseName).html"
 			$reader = [System.Xml.XmlReader]::Create($file, $xml_reader_settings)
 			$writer = [System.Xml.XmlTextWriter]::Create($html)
 			$index_xslt_object.Transform($reader, $writer)
@@ -296,9 +295,9 @@ if (Select-String -Path .\*.xml -Pattern '<logtalk' -CaseSensitive -SimpleMatch 
 	}
 	Write-Output "conversion done"
 	Write-Output ""
-	Write-Output ("generating " + $i + " file...")
-	Create-Index-File
-	Write-Output ($i + " file generated")
+	Write-Output "generating $i file..."
+	New-Index-File
+	Write-Output "$i file generated"
 	Write-Output ""
 } else {
 	Write-Output ""
