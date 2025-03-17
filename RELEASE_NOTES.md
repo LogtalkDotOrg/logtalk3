@@ -90,6 +90,9 @@ are the same plus a typo when copying the `scratch` directory.
 * FIXED: Typos in the `update_html_versions.ps1` and `update_svg_diagrams.ps1`
 PowerShell scripts handling of the SICStus Prolog backend.
 
+* FIXED: The embedding scripts setting of the `settings_file` flag value to
+`deny`.
+
 
 3.89.1 - February 18, 2025
 ==========================

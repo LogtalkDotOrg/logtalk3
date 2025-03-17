@@ -37,8 +37,8 @@ param(
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "application",
-	[String]$p = ($env:LOGTALKHOME + '\paths\paths.pl'),
-	[String]$s = ($env:LOGTALKHOME + '\scripts\embedding\settings-embedding-sample.lgt'), 
+	[String]$p = "$env:LOGTALKHOME\paths\paths.pl",
+	[String]$s = "$env:LOGTALKHOME\scripts\embedding\settings-embedding-sample.lgt", 
 	[String]$l,
 	[String]$g = "true",
 	[Switch]$v,
@@ -48,7 +48,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output ($myName + " 0.20")
+	Write-Output "$myName 0.20"
 }
 
 function Get-Logtalkhome {
@@ -66,9 +66,9 @@ function Get-Logtalkhome {
 		
 		# Checking all default paths
 		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
-			Write-Output ("Looking for: " + $DEFAULTPATH)
+			Write-Output "Looking for: $DEFAULTPATH"
 			if (Test-Path $DEFAULTPATH) {
-				Write-Output ("... using Logtalk installation found at " + $DEFAULTPATH)
+				Write-Output "... using Logtalk installation found at $DEFAULTPATH"
 				$env:LOGTALKHOME = $DEFAULTPATH
 				break
 			}
@@ -95,20 +95,20 @@ function Write-Usage-Help() {
 	Write-Output "given its loader file."
 	Write-Output ""
 	Write-Output "Usage:"
-	Write-Output ("  " + $myName + " [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]")
-	Write-Output ("  " + $myName + " -v")
-	Write-Output ("  " + $myName + " -h")
+	Write-Output "  $myName [-c] [-d directory] [-t tmpdir] [-n name] [-p paths] [-s settings] [-l loader] [-g goal]"
+	Write-Output "  $myName -v"
+	Write-Output "  $myName -h"
 	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -c compile library alias paths in paths and settings files"
 	Write-Output "  -d directory for generated QLF files (absolute path; default is current directory)"
 	Write-Output "  -t temporary directory for intermediate files (absolute path; default is an auto-created directory)"
 	Write-Output "  -n name of the generated saved state (default is application)"
-	Write-Output ("  -p library paths file (absolute path; default is " + $p + ")")
-	Write-Output ("  -s settings file (absolute path or 'none'; default is " + $s + ")")
+	Write-Output "  -p library paths file (absolute path; default is $p)"
+	Write-Output "  -s settings file (absolute path or 'none'; default is $s)"
 	Write-Output "  -l loader file for the application (absolute path)"
 	Write-Output "  -g startup goal for the application in canonical syntax (default is $goal)"
-	Write-Output ("  -v print version of " +  $myName)
+	Write-Output "  -v print version of $myName"
 	Write-Output "  -h help"
 	Write-Output ""
 }
@@ -117,30 +117,30 @@ function Confirm-Parameters() {
 
 	if ($h -eq $true) {
 		Write-Usage-Help
-		Exit
+		Exit 0
 	}
 
 	if ($v -eq $true) {
 		Write-Script-Version
-		Exit
+		Exit 0
 	}
 
 	if (-not(Test-Path $p)) { # cannot be ""
-		Write-Output ("The " + $p + " library paths file does not exist!")
+		Write-Output "The $p library paths file does not exist!"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if (($s -ne "") -and ($s -ne "none") -and (-not(Test-Path $s))) {
-		Write-Output ("The " + $s + " settings file does not exist!")
+		Write-Output "The $s settings file does not exist!"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if (($l -ne "") -and (-not(Test-Path $l))) {
-		Write-Output ("The " + $loader + " loader file does not exist!")
+		Write-Output "The $l loader file does not exist!"
 		Start-Sleep -Seconds 2
-		Exit
+		Exit 1
 	}
 
 	if ($t -eq "") {
@@ -151,9 +151,9 @@ function Confirm-Parameters() {
 		try {
 			New-Item -Path $d -ItemType Directory > $null
 		} catch {
-			Write-Output ("Could not create destination directory! at " + $d)
+			Write-Output "Could not create destination directory at $d!"
 			Start-Sleep -Seconds 2
-			Exit 
+			Exit 1
 		}
 	}
 
@@ -161,9 +161,9 @@ function Confirm-Parameters() {
 		try {
 			New-Item -Path $t -ItemType Directory > $null
 		} catch {
-			Write-Output ("Could not create temporary directory! at " + $t)
+			Write-Output "Could not create temporary directory at $t!"
 			Start-Sleep -Seconds 2
-			Exit 
+			Exit 1
 		}
 	}
 
@@ -177,12 +177,12 @@ Get-Logtalkhome
 
 # Check for existence
 if (Test-Path $env:LOGTALKHOME) {
-	$output = "Found LOGTALKHOME at: " + $env:LOGTALKHOME
+	$output = "Found LOGTALKHOME at: $env:LOGTALKHOME"
 	Write-Output $output
 } else {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
-	Exit
+	Exit 1
 }
 
 Get-Logtalkuser
@@ -212,19 +212,19 @@ if (Test-Path $env:LOGTALKUSER) {
 Push-Location
 Set-Location $t
 
-Copy-Item -Path ($env:LOGTALKHOME + '\adapters\eclipse.pl') -Destination .
-Copy-Item -Path ($env:LOGTALKHOME + '\core\core.pl') -Destination .
+Copy-Item -Path "$env:LOGTALKHOME\adapters\eclipse.pl" -Destination .
+Copy-Item -Path "$env:LOGTALKHOME\core\core.pl" -Destination .
 
-$ScratchDirOption = ", scratch_directory('" + $t.Replace('\','/') + "')"
+$ScratchDirOption = ", scratch_directory('$($t.Replace('\','/'))')"
 
-$GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)" + $ScratchDirOption + "]), halt"
+$GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)$ScratchDirOption]), halt"
 eclipselgt -e $GoalParam 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $p.Replace('\','/') + "',[hook(expand_library_alias_paths)" + $ScratchDirOption + "]),halt"
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/')),[hook(expand_library_alias_paths)$ScratchDirOption]),halt"
 	eclipselgt -e $GoalParam
 } else {
-	Copy-Item -Path $p -Destination ($t + '\paths_lgt.pl')
+	Copy-Item -Path $p -Destination "$t\paths_lgt.pl"
 }
 
 if (($s -eq "") -or ($s -eq "none")) {
@@ -239,12 +239,12 @@ if (($s -eq "") -or ($s -eq "none")) {
 		core.pl | Set-Content logtalk.pl
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('" + $s.Replace('\','/') + "',[hook(expand_library_alias_paths),optimize(on)" + $ScratchDirOption + "]), halt"
+		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/')),[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption]), halt"
 	} else {
-		$GoalParam = "logtalk_compile('" + $s.Replace('\','/') + "',[optimize(on)" + $ScratchDirOption + "]), halt" 
+		$GoalParam = "logtalk_compile('$($s.Replace('\','/')),[optimize(on)$ScratchDirOption]), halt" 
 	}
 	eclipselgt -e $GoalParam
-	eclipse.pl -replace 'settings_file, allow' 'settings_file, deny'
+	(Get-Content eclipse.pl) -replace 'settings_file, allow', 'settings_file, deny' | Set-Content eclipse.pl
 	Get-Content -Path eclipse.pl,
 		paths_*.pl,
 		expanding*_lgt.pl,
@@ -259,19 +259,19 @@ if (($s -eq "") -or ($s -eq "none")) {
 
 eclipse -L iso -t user -e "compile(logtalk,[debug:off,opt_level:1,output:eco]),halt"
 Move-item -Path logtalk.eco -Destination $d
-Remove-Item logtalk.pl -Confirm
+Remove-Item logtalk.pl -Force
 
 if ($l -ne "") {
 	try {
-		New-Item -Path $t/application -ItemType Directory > $null
-		Push-Location $t/application
+		New-Item -Path "$t/application" -ItemType Directory > $null
+		Push-Location "$t/application"
 	} catch {
-		Write-Output ("Could not create temporary directory! at " + $t + "/application")
+		Write-Output "Could not create temporary directory at $t/application!"
 		Start-Sleep -Seconds 2
-		Exit 
+		Exit 1
 	}
 
-	$GoalParam = "set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'" + $t.Replace('\', '/') + "/application'), logtalk_load('" + $l.Replace('\', '/')  + "'), halt" 
+	$GoalParam = "set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'$($t.Replace('\', '/'))/application'), logtalk_load('$($l.Replace('\', '/'))'), halt" 
 	eclipselgt -e $GoalParam
 
 	Get-Item *.pl | 
@@ -283,10 +283,10 @@ if ($l -ne "") {
 	Move-Item -Path application.eco -Destination $d
 	Remove-Item application.pl -Confirm
 	
-	Set-Content -Path $d/loader.pl -Value ":- ensure_loaded(logtalk)."
-	Add-Content -Path $d/loader.pl -Value  ":- ensure_loaded(application)."
-	if ($g -ne $true) {
-		Add-Content -Path $d/loader.pl -Value  ":- initialization(($g))."
+	Set-Content -Path "$d/loader.pl" -Value ":- ensure_loaded(logtalk)."
+	Add-Content -Path "$d/loader.pl" -Value  ":- ensure_loaded(application)."
+	if ($g -ne "true") {
+		Add-Content -Path "$d/loader.pl" -Value  ":- initialization(($g))."
 	}
 
 	Set-Location $d
@@ -299,7 +299,7 @@ if ($l -ne "") {
 Pop-Location
 
 try {
-	Remove-Item $t -Confirm -Recurse
+	Remove-Item $t -Force -Recurse
 } catch {
 	Write-Output "Error occurred at cleanup"
 }
