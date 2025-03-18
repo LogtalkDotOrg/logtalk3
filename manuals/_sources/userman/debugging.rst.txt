@@ -675,6 +675,9 @@ usually by ``...``. For example:
 
 The default maximum depth depends on the backend. To print compound
 terms without a depth limit, set it explicitly to zero if necessary.
+The :ref:`debuggerp::write_max_depth/1 <apis:debuggerp/0::write_max_depth/1>`
+and :ref:`debuggerp::set_write_max_depth/1 <apis:debuggerp/0::set_write_max_depth/1>`
+predicates can be used to query and set the default maximum depth.
 
 .. _debugging_custom_term_writing:
 
