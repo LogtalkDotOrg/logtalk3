@@ -52,6 +52,9 @@ probability distributions.
 Tools
 -----
 
+* ADDED: Predicates `write_max_depth/1` and `set_write_max_depth/1` to the
+`debugger` tool.
+
 * FIXED: The `issue_creator` tool to workaround GitLab creating CI/CD pipelines
 in a detached HEAD state.
 

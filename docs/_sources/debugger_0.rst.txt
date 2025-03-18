@@ -14,8 +14,8 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 7:9:1
-| **Date:** 2024-11-03
+| **Version:** 7:10:0
+| **Date:** 2025-03-18
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -33,7 +33,7 @@ Command-line debugger based on an extended procedure box model supporting execut
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`debuggerp/0::debug/0`  :ref:`debuggerp/0::debugging/0`  :ref:`debuggerp/0::debugging/1`  :ref:`debuggerp/0::leash/1`  :ref:`debuggerp/0::leashing/1`  :ref:`debuggerp/0::log/3`  :ref:`debuggerp/0::logging/3`  :ref:`debuggerp/0::nodebug/0`  :ref:`debuggerp/0::nolog/3`  :ref:`debuggerp/0::nologall/0`  :ref:`debuggerp/0::nospy/1`  :ref:`debuggerp/0::nospy/3`  :ref:`debuggerp/0::nospy/4`  :ref:`debuggerp/0::nospyall/0`  :ref:`debuggerp/0::notrace/0`  :ref:`debuggerp/0::reset/0`  :ref:`debuggerp/0::spy/1`  :ref:`debuggerp/0::spy/3`  :ref:`debuggerp/0::spy/4`  :ref:`debuggerp/0::spying/1`  :ref:`debuggerp/0::spying/3`  :ref:`debuggerp/0::spying/4`  :ref:`debuggerp/0::trace/0`  
+|     :ref:`debuggerp/0::debug/0`  :ref:`debuggerp/0::debugging/0`  :ref:`debuggerp/0::debugging/1`  :ref:`debuggerp/0::leash/1`  :ref:`debuggerp/0::leashing/1`  :ref:`debuggerp/0::log/3`  :ref:`debuggerp/0::logging/3`  :ref:`debuggerp/0::nodebug/0`  :ref:`debuggerp/0::nolog/3`  :ref:`debuggerp/0::nologall/0`  :ref:`debuggerp/0::nospy/1`  :ref:`debuggerp/0::nospy/3`  :ref:`debuggerp/0::nospy/4`  :ref:`debuggerp/0::nospyall/0`  :ref:`debuggerp/0::notrace/0`  :ref:`debuggerp/0::reset/0`  :ref:`debuggerp/0::set_write_max_depth/1`  :ref:`debuggerp/0::spy/1`  :ref:`debuggerp/0::spy/3`  :ref:`debuggerp/0::spy/4`  :ref:`debuggerp/0::spying/1`  :ref:`debuggerp/0::spying/3`  :ref:`debuggerp/0::spying/4`  :ref:`debuggerp/0::trace/0`  :ref:`debuggerp/0::write_max_depth/1`  
 
 .. contents::
    :local:
@@ -299,7 +299,7 @@ Port to zap to.
 ``write_max_depth_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Current term maximum depth.
+Current term write maximum depth.
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -307,7 +307,7 @@ Current term maximum depth.
 | **Template:**
 |    ``write_max_depth_(MaxDepth)``
 | **Mode and number of proofs:**
-|    ``write_max_depth_(?integer)`` - ``zero_or_one``
+|    ``write_max_depth_(?non_negative_integer)`` - ``zero_or_one``
 
 
 ------------

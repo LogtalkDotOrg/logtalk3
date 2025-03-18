@@ -22,9 +22,9 @@
 :- protocol(debuggerp).
 
 	:- info([
-		version is 3:3:1,
+		version is 3:4:0,
 		author is 'Paulo Moura',
-		date is 2024-11-02,
+		date is 2025-03-18,
 		comment is 'Debugger protocol.',
 		remarks is [
 			'Debugger help' - 'Type the character ``h`` (condensed help) or the character ``?`` (extended help) at a leashed port.',
@@ -211,6 +211,20 @@
 	:- info(nologall/0, [
 		comment is 'Removes all log points.',
 		see_also is [reset/0]
+	]).
+
+	:- public(write_max_depth/1).
+	:- mode(write_max_depth(?non_negative_integer), zero_or_one).
+	:- info(write_max_depth/1, [
+		comment is 'Current term write maximum depth. When not defined, the backend default is used.',
+		argnames is ['MaxDepth']
+	]).
+
+	:- public(set_write_max_depth/1).
+	:- mode(set_write_max_depth(+non_negative_integer), one).
+	:- info(set_write_max_depth/1, [
+		comment is 'Sets the default term maximum write depth. For most backends, a value of zero means that the whole term is written.',
+		argnames is ['MaxDepth']
 	]).
 
 :- end_protocol.

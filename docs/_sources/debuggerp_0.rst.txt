@@ -14,8 +14,8 @@ Debugger protocol.
 |    ``logtalk_load(debugger(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 3:3:1
-| **Date:** 2024-11-02
+| **Version:** 3:4:0
+| **Date:** 2025-03-18
 
 | **Compilation flags:**
 |    ``static``
@@ -490,6 +490,44 @@ Removes all log points.
 
 | **See also:**
 |    :ref:`debuggerp/0::reset/0`
+
+
+------------
+
+.. index:: write_max_depth/1
+.. _debuggerp/0::write_max_depth/1:
+
+``write_max_depth/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Current term write maximum depth. When not defined, the backend default is used.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_max_depth(MaxDepth)``
+| **Mode and number of proofs:**
+|    ``write_max_depth(?non_negative_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: set_write_max_depth/1
+.. _debuggerp/0::set_write_max_depth/1:
+
+``set_write_max_depth/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sets the default term maximum write depth. For most backends, a value of zero means that the whole term is written.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set_write_max_depth(MaxDepth)``
+| **Mode and number of proofs:**
+|    ``set_write_max_depth(+non_negative_integer)`` - ``one``
 
 
 ------------

@@ -23,9 +23,9 @@
 	implements(debuggerp)).
 
 	:- info([
-		version is 7:9:1,
+		version is 7:10:0,
 		author is 'Paulo Moura',
-		date is 2024-11-03,
+		date is 2025-03-18,
 		comment is 'Command-line debugger based on an extended procedure box model supporting execution tracing and spy points.'
 	]).
 
@@ -136,9 +136,9 @@
 
 	:- private(write_max_depth_/1).
 	:- dynamic(write_max_depth_/1).
-	:- mode(write_max_depth_(?integer), zero_or_one).
+	:- mode(write_max_depth_(?non_negative_integer), zero_or_one).
 	:- info(write_max_depth_/1, [
-		comment is 'Current term maximum depth.',
+		comment is 'Current term write maximum depth.',
 		argnames is ['MaxDepth']
 	]).
 
@@ -1499,6 +1499,13 @@
 			get_code(_)
 		;	true
 		).
+
+	write_max_depth(Depth) :-
+		write_max_depth_(Depth).
+
+	set_write_max_depth(Depth) :-
+		retractall(write_max_depth_(_)),
+		assertz(write_max_depth_(Depth)).
 
 :- end_object.
 

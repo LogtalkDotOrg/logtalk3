@@ -8391,6 +8391,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`monitorp <monitorp/0::set_spy_point/4>`
 
+``set_write_max_depth/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::set_write_max_depth/1>`
+
 ``setup/0``
 -----------
 
@@ -9904,6 +9914,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`csv_protocol <csv_protocol/0::write_file/3>`
 * :ref:`tsv_protocol <tsv_protocol/0::write_file/3>`
+
+``write_max_depth/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`debuggerp <debuggerp/0::write_max_depth/1>`
 
 ``write_stream/3``
 ------------------
