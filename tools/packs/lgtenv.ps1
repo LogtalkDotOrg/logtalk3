@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Packs virtual environment script
-##   Last updated on March 17, 2025
+##   Last updated on March 18, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -37,7 +37,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.4"
+	Write-Output "$myName 0.5"
 }
 
 Function Write-Usage-Help() {
@@ -69,12 +69,12 @@ Function Confirm-Parameters() {
 
 	if ($v -eq $true) {
 		Write-Script-Version
-		Exit
+		Exit 0
 	}
 
 	if ($h -eq $true) {
 		Write-Usage-Help
-		Exit
+		Exit 0
 	}
 }
 
@@ -92,7 +92,7 @@ if ($d -eq "") {
 		New-Item -Path $d -ItemType directory > $null
 	} else {
 		Write-Output "Error: directory $d does not exist."
-		exit 1
+		Exit 1
 	}
 } else {
 	$directory = $d
@@ -114,4 +114,4 @@ if (!(Get-Command "Set-PsEnv" -ErrorAction SilentlyContinue)) {
 
 Add-Content -Path $directory\.env -Value "LOGTALKPACKS=$packs"
 Set-PsEnv
-Exit
+Exit 0
