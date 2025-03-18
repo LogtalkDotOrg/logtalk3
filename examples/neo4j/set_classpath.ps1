@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Set CLASSPATH environment variable
-##   Last updated on June 19, 2024
+##   Last updated on March 18, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -23,9 +23,16 @@
 
 #Requires -Version 7.3
 
-Get-ChildItem -Path C:\neo4j-community-*\lib\* -Filter *.jar |
+$first = $true
+
+Get-ChildItem -Path jars\* -Filter *.jar |
 Foreach-Object {
-	$classpath += ";" + $_.FullName
+    if ($first) {
+        $classpath = $_.FullName
+        $first = $false
+    } else {
+        $classpath += ";" + $_.FullName
+    }
 }
 
 [System.Environment]::setEnvironmentVariable("CLASSPATH", $classpath, "Process")
