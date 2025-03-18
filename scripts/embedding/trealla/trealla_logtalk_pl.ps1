@@ -222,7 +222,7 @@ $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwardin
 tplgt -g $GoalParam 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/')),[hook(expand_library_alias_paths)$ScratchDirOption]),halt"
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/'))',[hook(expand_library_alias_paths)$ScratchDirOption]),halt"
 	tplgt -g $GoalParam
 } else {
 	Copy-Item -Path $p -Destination "$t\paths_lgt.pl"
@@ -240,9 +240,9 @@ if (($s -eq "") -or ($s -eq "none")) {
 		core.pl | Set-Content "$d/logtalk.pl"
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/')),[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption]), halt"
+		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/'))',[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption]), halt"
 	} else {
-		$GoalParam = "logtalk_compile('$($s.Replace('\','/')),[optimize(on)$ScratchDirOption]), halt" 
+		$GoalParam = "logtalk_compile('$($s.Replace('\','/'))',[optimize(on)$ScratchDirOption]), halt" 
 	}
 	tplgt -g $GoalParam
 	(Get-Content trealla.pl) -replace 'settings_file, allow', 'settings_file, deny' | Set-Content trealla.pl

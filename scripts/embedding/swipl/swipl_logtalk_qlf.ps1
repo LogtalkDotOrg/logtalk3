@@ -237,7 +237,7 @@ $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwardin
 swilgt -g $GoalParam -t "halt" 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/')),[hook(expand_library_alias_paths)$ScratchDirOption])"
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/'))',[hook(expand_library_alias_paths)$ScratchDirOption])"
 	swilgt -g $GoalParam -t "halt"
 } else {
 	Copy-Item -Path $p -Destination "$t\paths_lgt.pl"
@@ -256,9 +256,9 @@ if (($s -eq "") -or ($s -eq "none")) {
 		$k | Set-Content logtalk.pl
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/')),[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption])"
+		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/'))',[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption])"
 	} else {
-		$GoalParam = "logtalk_compile('$($s.Replace('\','/')),[optimize(on)$ScratchDirOption])" 
+		$GoalParam = "logtalk_compile('$($s.Replace('\','/'))',[optimize(on)$ScratchDirOption])" 
 	}
 	swilgt -g $GoalParam -t "halt"
 	(Get-Content swi.pl) -replace 'settings_file, allow', 'settings_file, deny' | Set-Content swi.pl

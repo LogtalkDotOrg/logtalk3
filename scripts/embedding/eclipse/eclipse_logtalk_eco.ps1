@@ -221,7 +221,7 @@ $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwardin
 eclipselgt -e $GoalParam 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/')),[hook(expand_library_alias_paths)$ScratchDirOption]),halt"
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/'))',[hook(expand_library_alias_paths)$ScratchDirOption]),halt"
 	eclipselgt -e $GoalParam
 } else {
 	Copy-Item -Path $p -Destination "$t\paths_lgt.pl"
@@ -239,9 +239,9 @@ if (($s -eq "") -or ($s -eq "none")) {
 		core.pl | Set-Content logtalk.pl
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/')),[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption]), halt"
+		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/'))',[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption]), halt"
 	} else {
-		$GoalParam = "logtalk_compile('$($s.Replace('\','/')),[optimize(on)$ScratchDirOption]), halt" 
+		$GoalParam = "logtalk_compile('$($s.Replace('\','/'))',[optimize(on)$ScratchDirOption]), halt" 
 	}
 	eclipselgt -e $GoalParam
 	(Get-Content eclipse.pl) -replace 'settings_file, allow', 'settings_file, deny' | Set-Content eclipse.pl

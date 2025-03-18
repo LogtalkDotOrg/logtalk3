@@ -229,7 +229,7 @@ $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwardin
 yaplgt -g $GoalParam 
 
 if ($c -eq $true) {
-	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/')),[hook(expand_library_alias_paths)$ScratchDirOption]),halt."
+	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/'))',[hook(expand_library_alias_paths)$ScratchDirOption]),halt."
 	yaplgt -g $GoalParam
 } else {
 	Copy-Item -Path $p -Destination "$t\paths_lgt.pl"
@@ -248,9 +248,9 @@ if (($s -eq "") -or ($s -eq "none")) {
 		$k | Set-Content "$d/logtalk.pl"
 } else {
 	if ($c -eq $true) {
-		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/')),[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption]), halt."
+		$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($s.Replace('\','/'))',[hook(expand_library_alias_paths),optimize(on)$ScratchDirOption]), halt."
 	} else {
-		$GoalParam = "logtalk_compile('$($s.Replace('\','/')),[optimize(on)$ScratchDirOption]), halt."
+		$GoalParam = "logtalk_compile('$($s.Replace('\','/'))',[optimize(on)$ScratchDirOption]), halt."
 	}
 	yaplgt -g $GoalParam
 	(Get-Content yap.pl) -replace 'settings_file, allow', 'settings_file, deny' | Set-Content yap.pl
