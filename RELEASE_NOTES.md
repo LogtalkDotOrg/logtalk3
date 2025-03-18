@@ -80,6 +80,9 @@ IDEs, text editors, and syntax highlighters support
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The Windows installation script to also create a symbolic link to
+the `scripts` directory to simplify access to the embedding scripts.
+
 * FIXED: The Docker image publishing scripts to use the `--no-cache` option
 to ensure that updated dependencies are pulled.
 

@@ -1,5 +1,5 @@
 ﻿; Logtalk Inno Setup script for generating Windows installers
-; Last updated on January 2, 2025
+; Last updated on March 18, 2025
 ; 
 ; This file is part of Logtalk <https://logtalk.org/>  
 ; SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -195,9 +195,10 @@ Name: "{code:GetLgtUserDir}\Release Notes"; Filename: "{app}\RELEASE_NOTES.md"; 
 Name: "{code:GetLgtUserDir}\Read Me"; Filename: "{app}\README.md"; Components: user
 Name: "{code:GetLgtUserDir}\Customization Instructions"; Filename: "{app}\CUSTOMIZE.md"; Components: user
 Name: "{code:GetLgtUserDir}\adapters"; Filename: "{app}\adapters"; Components: user
+Name: "{code:GetLgtUserDir}\coding"; Filename: "{app}\coding"; Components: user
 Name: "{code:GetLgtUserDir}\manuals"; Filename: "{app}\manuals"; Components: user
 Name: "{code:GetLgtUserDir}\paths"; Filename: "{app}\paths"; Components: user
-Name: "{code:GetLgtUserDir}\coding"; Filename: "{app}\coding"; Components: user
+Name: "{code:GetLgtUserDir}\scripts"; Filename: "{app}\scripts"; Components: user
 
 Name: "{userdesktop}\Logtalk user files"; Filename: "{code:GetLgtUserDir}"; Components: user; Tasks: shortcut
 
