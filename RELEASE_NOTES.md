@@ -76,6 +76,9 @@ Examples
 * ADDED: New `apache_poi` Java example of using the Apache POI library to read
 and write Excel spreadsheets.
 
+* ADDED: New `lips` example of the classical naive list reverse benchmark
+computing million of logical inferences per second.
+
 IDEs, text editors, and syntax highlighters support
 ---------------------------------------------------
 

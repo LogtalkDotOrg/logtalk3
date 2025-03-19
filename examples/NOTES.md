@@ -345,6 +345,10 @@ Follows a short description of each included example (in alphabetical order):
 	example of defining an object as a composition of other objects
 	in order to contrast with category-based composition
 
+- `lips`  
+	example of the classical naive list reverse benchmark computing
+	million of logical inferences per second
+
 - `lo`  
 	examples adapted from the Francis G. McCabe L&O system
 

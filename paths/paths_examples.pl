@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on March 11, 2025
+%  Last updated on March 19, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -116,6 +116,7 @@ logtalk_library_path(lambdas, examples('lambdas/')).
 logtalk_library_path(lambdas_compiled, examples('lambdas_compiled/')).
 logtalk_library_path(laptops, examples('laptops/')).
 logtalk_library_path(lazy, engines('lazy/')).
+logtalk_library_path(lips, examples('lips/')).
 logtalk_library_path(lo_planner, examples('lo/planner/')).
 logtalk_library_path(lo_travellers, examples('lo/travellers/')).
 logtalk_library_path(localizations, examples('localizations/')).
