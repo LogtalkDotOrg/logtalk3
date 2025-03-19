@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Logtalk uninstall script
-##   Last updated on October 12, 2023
+##   Last updated on March 19, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -63,6 +63,7 @@ cd "$LOGTALKHOME"/.. || exit 1
 rm -rf "$directory"
 rm -f logtalk
 cd ../bin || exit 1
+rm -f logtalk_setup_env.sh
 rm -f bplgt
 rm -f ciaolgt
 rm -f cxlgt

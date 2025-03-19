@@ -3,8 +3,8 @@
 #############################################################################
 ## 
 ##   Logtalk installation script
-##   Last updated on December 16, 2024
-## 
+##   Last updated on March 19, 2025
+##   
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
@@ -144,6 +144,8 @@ echo "- lgt2svg, lgt2pdf, lgt2html, lgt2xml, lgt2md, lgt2rst, lgt2txt"
 echo "- lgtenv"
 echo
 echo "Ensure that the \"$prefix/bin\" directory is in your PATH."
+
+ln -sf ../share/logtalk/integration/logtalk_setup_env.sh logtalk_setup_env.sh
 
 ln -sf ../share/logtalk/integration/bplgt.sh bplgt
 ln -sf ../share/logtalk/integration/ciaolgt.sh ciaolgt

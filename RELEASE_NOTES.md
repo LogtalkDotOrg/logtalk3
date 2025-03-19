@@ -28,6 +28,9 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* CHANGED: Moved all common setup code from the Bash shell integration scripts
+to a shared setup script.
+
 * FIXED: The PowerShell integration scripts were not setting the `LOGTALKUSER`
 environment variable correctly when not defined by the user.
 

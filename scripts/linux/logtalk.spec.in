@@ -77,6 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/logtalk_doclet
 /usr/local/bin/logtalk_version_select
 /usr/local/bin/logtalk_backend_select
+/usr/local/bin/logtalk_setup_env.sh
 /usr/local/bin/bplgt
 /usr/local/bin/ciaolgt
 /usr/local/bin/cxlgt
