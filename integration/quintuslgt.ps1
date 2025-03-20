@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for Quintus Prolog
-##   Last updated on March 16, 2025
+##   Last updated on March 20, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -66,7 +66,7 @@ if (!(Test-Path $env:LOGTALKHOME)) {
 	Write-Output "... unable to locate Logtalk installation directory!"
 	Write-Output ""
 	Start-Sleep -Seconds 2
-	Exit
+	Exit 1
 }
 
 Get-Logtalkuser
@@ -74,7 +74,7 @@ Get-Logtalkuser
 # Check for existence
 if (Test-Path $env:LOGTALKUSER) {
 	if (!(Test-Path $env:LOGTALKUSER/VERSION.txt)) {
-		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
+		Write-Output "Cannot find VERSION.txt in the Logtalk user directory at %LOGTALKUSER%!"
 		Write-Output "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	} else {
@@ -88,8 +88,8 @@ if (Test-Path $env:LOGTALKUSER) {
 		}
 	}
 } else {
-	Write-Output "Cannot find %LOGTALKUSER% directory! Creating a new Logtalk user directory"
-	Write-Output "by running the logtalk_user_setup shell script:"
+	Write-Output "Cannot find the Logtalk user directory at %LOGTALKUSER%!"
+	Write-Output "Running the logtalk_user_setup shell script to create the directory:"
 	logtalk_user_setup
 }
 

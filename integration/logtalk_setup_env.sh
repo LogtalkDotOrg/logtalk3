@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Common environment setup for Logtalk integration scripts
-##   Last updated on March 19, 2025
+##   Last updated on March 20, 2025
 ##   
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -75,7 +75,7 @@ setup_logtalk_env() {
 
 	if [ -d "$LOGTALKUSER" ]; then
 		if ! [ -f "$LOGTALKUSER/VERSION.txt" ]; then
-			echo "Cannot find version information in the Logtalk user directory at $LOGTALKUSER!"
+			echo "Cannot find VERSION.txt in the Logtalk user directory at $LOGTALKUSER!"
 			echo "Creating an up-to-date Logtalk user directory..."
 			logtalk_user_setup
 		else
@@ -89,8 +89,8 @@ setup_logtalk_env() {
 			fi
 		fi
 	else
-		echo "Cannot find \$LOGTALKUSER directory! Creating a new Logtalk user directory"
-		echo "by running the \"logtalk_user_setup\" shell script:"
+		echo "Cannot find the Logtalk user directory at $LOGTALKUSER!"
+		echo "Running the logtalk_user_setup shell script to create the directory:"
 		logtalk_user_setup
 	fi
 	
