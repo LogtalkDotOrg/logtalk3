@@ -40,6 +40,8 @@ Documentation
 * ADDED: Support for generating single file versions of the Handbook and APIs
 documentation in LLM friendly Markdown format.
 
+* IMPROVED: The documentation of the `logtalk_tester.sh` Bash script.
+
 Library
 -------
 
@@ -58,6 +60,12 @@ Tools
 * ADDED: Predicates `write_max_depth/1` and `set_write_max_depth/1` to the
 `debugger` tool.
 
+* IMPROVED: The `logtalk_tester.*` scripts handling of the `-b` and `-u`
+options.
+
+* FIXED: The `logtalk_tester.ps1` PowerShell script `xunit_net_v2` format
+option.
+
 * FIXED: The `issue_creator` tool to workaround GitLab creating CI/CD pipelines
 in a detached HEAD state.
 
@@ -66,9 +74,6 @@ in a detached HEAD state.
 
 * FIXED: The `logtalk_doclet.ps1` PowerShell script handling of the prefix and
 timeout options.
-
-* FIXED: The `logtalk_tester.ps1` PowerShell script `xunit_net_v2` format
-option.
 
 Examples
 --------

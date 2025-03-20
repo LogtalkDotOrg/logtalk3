@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on October 11, 2024
+##   Last updated on March 20, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -322,7 +322,7 @@ usage_help()
 	echo "  -t timeout in seconds for running each test set (default is $timeout; i.e. disabled)"
 	echo "  -n name of the test driver and sourced files (minus file name extensions; default is $driver)"
 	echo "  -s suppress path prefix (default is $prefix)"
-	echo "  -b bug report server (valid values are github and gitlab; no default)"
+	echo "  -b bug report server (valid values are github and gitlab; no default; requires -u option)"
 	echo "  -u base URL to generate links to test files (no default)"
 	echo "  -c code coverage report (default is $coverage)"
 	echo "     (valid values are none and xml)"
@@ -505,7 +505,7 @@ elif [ "$c_arg" != "" ] ; then
 fi
 
 if [ "$d_arg" != "" ] ; then
-	results="$d_arg"
+	results=$(realpath "$d_arg" 2>/dev/null || echo "$d_arg")
 fi
 
 if [ "$t_arg" != "" ] ; then
@@ -517,20 +517,30 @@ if [ "$s_arg" != "" ] ; then
 fi
 
 if [ "$b_arg" != "" ] ; then
+	if [ "$u_arg" == "" ] ; then
+		echo "Error! Issue tracker option (-b) requires the base URL (-u) option" >&2
+		usage_help
+		exit 1
+	fi
 	issue_server="$(echo "$b_arg" | cut -d':' -f1)"
+	if [ "$issue_server" != "github" ] && [ "$issue_server" != "gitlab" ] ; then
+		echo "Error! Issue tracker server must be either github or gitlab: $b_arg" >&2 
+		usage_help
+		exit 1
+	fi
 	labels="$(echo "$b_arg" | cut -d':' -f2)"
 	if [ "$labels" != "" ] && [ "$labels" != "$issue_server" ] ; then
 		issue_labels="$labels"
 	fi
-	if [ "$issue_server" != "github" ] && [ "$issue_server" != "gitlab" ] ; then
-		echo "Error! Issue tracker server must be either github or gitlab: $b_arg" >&2
-		usage_help
-		exit 1
-	fi		
 fi
 
 if [ "$u_arg" != "" ] ; then
-	url="$u_arg"
+    if [[ ! "$u_arg" =~ ^https?:// ]] ; then
+        echo "Error! Base URL must start with http:// or https://" >&2
+        usage_help
+        exit 1
+    fi
+    url="$u_arg"
 fi
 
 if [ "$n_arg" != "" ] ; then
@@ -645,12 +655,15 @@ skipped=0
 passed=0
 failed=0
 flaky=0
+temp_file=$(mktemp)
+grep -s '^object' ./*.totals > "$temp_file"
 while read -r line ; do
 	skipped=$((skipped+$(cut -f 4 <<< "$line")))
 	passed=$((passed+$(cut -f 5 <<< "$line")))
 	failed=$((failed+$(cut -f 6 <<< "$line")))
 	flaky=$((flaky+$(cut -f 7 <<< "$line")))
-done < <(grep -s '^object' ./*.totals)
+done < "$temp_file"
+rm -f "$temp_file"
 total=$((skipped+passed+failed))
 
 if grep -q -s -a -h '^!' -- *.errors || grep -q -s -a -h '^!' -- *.results || grep -q -s -a -h '^\*' -- *.errors || grep -q -s -a -h '^\*' -- *.results ; then

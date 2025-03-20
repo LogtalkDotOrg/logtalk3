@@ -1,11 +1,11 @@
 #############################################################################
 ## 
 ##   Unit testing automation script
-##   Last updated on March 18, 2025
+##   Last updated on March 20, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
-##   SPDX-License-Identi}er: Apache-2.0
+##   SPDX-License-Identifier: Apache-2.0
 ##   
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
@@ -297,7 +297,7 @@ Function Write-Usage-Help() {
 	Write-Output "  -t timeout in seconds for running each test set (default is $t; i.e. disabled)"
 	Write-Output "  -n name of the test driver and sourced files (minus file name extensions; default is $n)"
 	Write-Output "  -s suppress path prefix (default is $prefix)"
-	Write-Output "  -b bug report server (valid values are github and gitlab; no default)"
+	Write-Output "  -b bug report server (valid values are github and gitlab; no default; requires -u option)"
 	Write-Output "  -u base URL to generate links to test files (no default)"
 	Write-Output "  -c code coverage report (default is $c)"
 	Write-Output "     (valid values are none and xml)"
@@ -448,8 +448,18 @@ Function Confirm-Parameters() {
 	}
 
 	if ($b -ne "") {
-		if ($b -contains ":") {
+		if ($u -eq "") {
+			Write-Output "Error! Issue tracker option (-b) requires the base URL (-u) option"
+			Write-Usage-Help
+			Exit 1
+		}
+		if ($b.Contains(":")) {
 			$script:issue_array = $b.Split(":")
+			if ($issue_array.Length -ne 2) {
+				Write-Output "Error! Invalid issue tracker format. Expected 'server:labels' or just 'server'"
+				Write-Usage-Help
+				Exit 1
+			}
 			$script:issue_server = $issue_array[0]
 			$script:issue_labels = $issue_array[1]
 		} else {
@@ -459,7 +469,7 @@ Function Confirm-Parameters() {
 			Write-Output "Error! Issue tracker server must be either github or gitlab: $b"
 			Write-Usage-Help
 			Exit 1
-		}		
+		}
 	}
 
 	if ($l -ne "") {
@@ -500,6 +510,11 @@ Function Confirm-Parameters() {
 		$script:prefix = $s -replace '\\', '/'
 	}
 
+	if ($u -ne "" -and -not ($u -match '^https?://')) {
+		Write-Output "Error! Base URL must start with http:// or https://"
+		Write-Usage-Help
+		Exit 1
+	}
 }
 
 ###################### here it starts ############################ 
@@ -561,7 +576,12 @@ $tester_optimal_goal = "set_logtalk_flag(optimize,on),logtalk_load($n),halt$dot"
 $tester_normal_goal = "logtalk_load($n),halt$dot"
 $tester_debug_goal = "set_logtalk_flag(debug,on),logtalk_load($n),halt$dot"
 
-New-Item -Path $results -ItemType directory -Force > $null
+try {
+	New-Item -Path $results -ItemType directory -Force > $null
+} catch {
+	Write-Output "Error! Failed to create results directory: $_"
+	Exit 1
+}
 
 if (Test-Path "$results/*.results") {
 	Remove-Item -Path "$results/*.results" -Force

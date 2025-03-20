@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "December 29, 2024" "Logtalk 3.87.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "March 20, 2025" "Logtalk 3.90.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -60,7 +60,7 @@ Name of the tests driver and sourced files (minus file name extensions). Default
 Path prefix to suppress when printing test suite and test result paths. Default is the user home directory.
 .TP
 .BI \-b
-Bug report server and optionally the bug report label(s). Valid values are \fIgithub\fR and \fIgitlab\fR. (no default). Use of this option requires the script to be called from a git repo directory or from one its sub-directories and the use of the \fI-s\fR and \fI-u\fR options. To set the label(s), use the syntax \fI-b server:labels\fR where \fIlabels\fR are a comma-separated list.
+Bug report server and optionally the bug report label(s). Valid values are \fIgithub\fR and \fIgitlab\fR. (no default). Use of this option requires the script to be called from a git repo directory or from one its sub-directories and the use of the \fI-s\fR and \fI-u\fR options. To set the label(s), use the syntax \fI-b server:labels\fR where \fIlabels\fR are a comma-separated list. The default label is \fIbug\fR.
 .TP
 .BI \-u
 Base URL for generating links to test files (no default). Must end with a slash and usually includes a git hash so that the link remains valid if the test files are later updated.
