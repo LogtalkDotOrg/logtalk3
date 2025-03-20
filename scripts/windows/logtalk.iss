@@ -116,7 +116,6 @@ Source: "{#MyBaseDir}\tester-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestN
 Source: "{#MyBaseDir}\tests-sample.lgt"; DestDir: "{code:GetLgtUserDir}"; DestName: "tests-sample.lgt"; Components: user; Flags: ignoreversion uninsneveruninstall
 Source: "{#MyBaseDir}\VERSION.txt"; DestDir: "{code:GetLgtUserDir}"; DestName: "VERSION.txt"; Components: user; Flags: ignoreversion uninsneveruninstall
 
-Source: "{#MyBaseDir}\scripts\*.psm1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\cxprolog\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\eclipse\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
@@ -128,6 +127,7 @@ Source: "{#MyBaseDir}\scripts\embedding\swipl\*.ps1"; DestDir: "{win}"; Componen
 Source: "{#MyBaseDir}\scripts\embedding\trealla\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\xsb\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\scripts\embedding\yap\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
+Source: "{#MyBaseDir}\integration\*.psm1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\integration\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\tools\diagrams\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
 Source: "{#MyBaseDir}\tools\lgtdoc\xml\*.ps1"; DestDir: "{win}"; Components: base; Flags: ignoreversion; Check: IsAdminInstallMode
