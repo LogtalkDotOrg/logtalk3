@@ -37,6 +37,8 @@ scripts to a module.
 * FIXED: The PowerShell integration scripts were not setting the `LOGTALKUSER`
 environment variable correctly when not defined by the user.
 
+* FIXED: The `gplgt.ps1` PowerShell integration script to run without the GUI.
+
 Documentation
 -------------
 
