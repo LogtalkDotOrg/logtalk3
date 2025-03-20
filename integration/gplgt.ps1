@@ -27,6 +27,7 @@
 Import-Module (Join-Path $PSScriptRoot "LogtalkSetup.psm1")
 Initialize-LogtalkEnvironment
 
+$env:LINEDIT = 'gui=no'
 $source = '$LOGTALKHOME/integration/logtalk_gp.pl'
 
 if ($args.Count -gt 2 -and $args[$args.Count-2] -eq "--%") {
