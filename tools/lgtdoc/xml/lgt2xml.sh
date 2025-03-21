@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to XML conversion script 
-##   Last updated on April 13, 2022
+##   Last updated on March 21, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,65 +25,12 @@
 
 
 print_version() {
-	echo "$(basename "$0") 1.2"
+	echo "$(basename "$0") 1.3"
 	exit 0
 }
 
-if ! [ "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME should be defined first, pointing"
-	echo "to your Logtalk installation directory!"
-	echo "Trying the default locations for the Logtalk installation..."
-	if [ -d "/usr/local/share/logtalk" ]; then
-		LOGTALKHOME=/usr/local/share/logtalk
-		echo "... using Logtalk installation found at /usr/local/share/logtalk"
-	elif [ -d "/usr/share/logtalk" ]; then
-		LOGTALKHOME=/usr/share/logtalk
-		echo "... using Logtalk installation found at /usr/share/logtalk"
-	elif [ -d "/opt/local/share/logtalk" ]; then
-		LOGTALKHOME=/opt/local/share/logtalk
-		echo "... using Logtalk installation found at /opt/local/share/logtalk"
-	elif [ -d "/opt/share/logtalk" ]; then
-		LOGTALKHOME=/opt/share/logtalk
-		echo "... using Logtalk installation found at /opt/share/logtalk"
-	elif [ -d "$HOME/share/logtalk" ]; then
-		LOGTALKHOME="$HOME/share/logtalk"
-		echo "... using Logtalk installation found at $HOME/share/logtalk"
-	elif [ -f "$( cd "$( dirname "$0" )" && pwd )/../core/core.pl" ]; then
-		LOGTALKHOME="$( cd "$( dirname "$0" )" && pwd )/.."
-		echo "... using Logtalk installation found at $( cd "$( dirname "$0" )" && pwd )/.."
-	else
-		echo "... unable to locate Logtalk installation directory!" >&2
-		echo
-		exit 1
-	fi
-	echo
-elif ! [ -d "$LOGTALKHOME" ]; then
-	echo "The environment variable LOGTALKHOME points to a non-existing directory!" >&2
-	echo "Its current value is: $LOGTALKHOME" >&2
-	echo "The variable must be set to your Logtalk installation directory!" >&2
-	echo
-	exit 1
-fi
-export LOGTALKHOME
-
-if ! [ "$LOGTALKUSER" ]; then
-	echo "The environment variable LOGTALKUSER should be defined first, pointing"
-	echo "to your Logtalk user directory!"
-	echo "Trying the default location for the Logtalk user directory..."
-	export LOGTALKUSER=$HOME/logtalk
-	if [ -d "$LOGTALKUSER" ]; then
-		echo "... using Logtalk user directory found at $LOGTALKUSER"
-	else
-		echo "... Logtalk user directory not found at default location. Creating a new"
-		echo "Logtalk user directory by running the \"logtalk_user_setup\" shell script:"
-		logtalk_user_setup
-	fi
-elif ! [ -d "$LOGTALKUSER" ]; then
-	echo "Cannot find \$LOGTALKUSER directory! Creating a new Logtalk user directory"
-	echo "by running the \"logtalk_user_setup\" shell script:"
-	logtalk_user_setup
-fi
-echo
+source "$(dirname "$0")/logtalk_setup_env.sh"
+setup_logtalk_env || exit 1
 
 format=xhtml
 index_file=index.html

@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to reStructuredText files conversion script
-##   Last updated on March 18, 2025
+##   Last updated on March 21, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -40,42 +40,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 5.1"
-}
-
-function Get-Logtalkhome {
-	if ($null -eq $env:LOGTALKHOME) 
-	{
-		Write-Output "The environment variable LOGTALKHOME should be defined first, pointing"
-		Write-Output "to your Logtalk installation directory!"
-		Write-Output "Trying the default locations for the Logtalk installation..."
-		
-		$DEFAULTPATHS = [string[]](
-			"C:\Program Files (x86)\Logtalk",
-			"C:\Program Files\Logtalk",
-			"%LOCALAPPDATA%\Logtalk"
-		)
-		
-		# Checking all default paths
-		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
-			Write-Output "Looking for: $DEFAULTPATH"
-			if (Test-Path $DEFAULTPATH) {
-				Write-Output "... using Logtalk installation found at $DEFAULTPATH"
-				$env:LOGTALKHOME = $DEFAULTPATH
-				break
-			}
-		}
-	}
-	# At the end LOGTALKHOME was set already or now is set
-}
-
-function Get-Logtalkuser {
-	if ($null -eq $env:LOGTALKUSER) {
-		Write-Output "After the script completion, you must set the environment variable"
-		Write-Output "LOGTALKUSER pointing to %USERPROFILE%\Documents\Logtalk."
-		$env:LOGTALKUSER = "%USERPROFILE%\Documents\Logtalk"
-	}
-	# At the end LOGTALKUSER was set already or now is set
+	Write-Output "$myName 5.2"
 }
 
 function Write-Usage-Help() {
@@ -174,42 +139,10 @@ function New-Index-File() {
 
 ###################### here it starts ############################ 
 
+Import-Module (Join-Path $PSScriptRoot "LogtalkSetup.psm1")
+Initialize-LogtalkEnvironment
+
 Confirm-Parameters
-
-Get-Logtalkhome
-
-# Check for existence
-if (Test-Path "$env:LOGTALKHOME") {
-	Write-Output "Found LOGTALKHOME at: $env:LOGTALKHOME"
-} else {
-	Write-Output "... unable to locate Logtalk installation directory!"
-	Start-Sleep -Seconds 2
-	Exit 1
-}
-
-Get-Logtalkuser
-
-# Check for existence
-if (Test-Path "$env:LOGTALKUSER") {
-	if (!(Test-Path "$env:LOGTALKUSER/VERSION.txt")) {
-		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
-		Write-Output "Creating an up-to-date Logtalk user directory..."
-		logtalk_user_setup
-	} else {
-		$system_version = Get-Content "$env:LOGTALKHOME/VERSION.txt"
-		$user_version = Get-Content "$env:LOGTALKUSER/VERSION.txt"
-		if ($user_version -lt $system_version) {
-			Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
-			Write-Output "    $user_version < $system_version"
-			Write-Output "Creating an up-to-date Logtalk user directory..."
-			logtalk_user_setup
-		}
-	}
-} else {
-	Write-Output "Cannot find %LOGTALKUSER% directory! Creating a new Logtalk user directory"
-	Write-Output "by running the logtalk_user_setup shell script:"
-	logtalk_user_setup
-}
 
 $entity_xslt = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_entity_to_rst.xsl"
 $index_xslt  = "$env:LOGTALKUSER/tools/lgtdoc/xml/logtalk_index_to_rst.xsl"
