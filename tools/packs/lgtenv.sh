@@ -103,8 +103,8 @@ else
 fi
 
 if ! [ -x "$(command -v direnv)" ]; then
-  echo "Error: direnv is not installed."
-  exit 1
+	echo "Error: direnv is not installed."
+	exit 1
 fi
 
 echo export LOGTALKPACKS="$packs" >> "$directory"/.envrc

@@ -68,6 +68,8 @@ Tools
 * IMPROVED: The `logtalk_tester.*` scripts handling of the `-b` and `-u`
 options.
 
+* IMPROVED: The `lgtenv.ps1` PowerShell script handling of file paths.
+
 * FIXED: The `logtalk_tester.ps1` PowerShell script `xunit_net_v2` format
 option.
 

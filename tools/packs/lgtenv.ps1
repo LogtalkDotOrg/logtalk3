@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Packs virtual environment script
-##   Last updated on March 18, 2025
+##   Last updated on March 21, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -37,7 +37,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.5"
+	Write-Output "$myName 0.6"
 }
 
 Function Write-Usage-Help() {
@@ -80,7 +80,7 @@ Function Confirm-Parameters() {
 
 # default argument values
 
-$base = $pwd
+$base = (Get-Location).Path
 
 Confirm-Parameters
 
@@ -88,30 +88,37 @@ if ($d -eq "") {
 	$directory = $base
 } elseif (!(Test-Path $d -PathType Container)) {
 	if ($c -eq $true) {
-		$directory = $d
-		New-Item -Path $d -ItemType directory > $null
+		$directory = (New-Item -Path $d -ItemType Directory -Force).FullName
 	} else {
 		Write-Output "Error: directory $d does not exist."
 		Exit 1
 	}
 } else {
-	$directory = $d
+	$directory = (Resolve-Path $d).Path
 }
 
 if ($p -eq "") {
 	$packs = $directory
-} elseif (!(Test-Path (Join-Path $directory $p) -PathType Container)) {
-	$packs = Join-Path $directory $p
-	New-Item -Path (Join-Path $directory $p) -ItemType directory > $null
 } else {
-	$packs = Join-Path $directory $p
+	$packsPath = Join-Path -Path $directory -ChildPath $p
+	if (!(Test-Path $packsPath -PathType Container)) {
+		$packs = (New-Item -Path $packsPath -ItemType Directory -Force).FullName
+	} else {
+		$packs = (Resolve-Path $packsPath).Path
+	}
 }
 
 if (!(Get-Command "Set-PsEnv" -ErrorAction SilentlyContinue)) {
-  Write-Output "Error: Set-PsEnv is not installed."
-  Exit 1
+	Write-Output "Error: Set-PsEnv is not installed."
+	Exit 1
 }
 
-Add-Content -Path $directory\.env -Value "LOGTALKPACKS=$packs"
-Set-PsEnv
-Exit 0
+$envFile = Join-Path -Path $directory -ChildPath ".env"
+try {
+	Add-Content -Path $envFile -Value "LOGTALKPACKS=$packs" -ErrorAction Stop
+	Set-PsEnv
+	Exit 0
+} catch {
+	Write-Output "Error: Failed to write to .env file: $_"
+	Exit 1
+}
