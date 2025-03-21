@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   DOT and d2 diagram files to SVG files conversion script 
-##   Last updated on March 17, 2025
+##   Last updated on March 21, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -65,24 +65,35 @@ if ! [ "$LOGTALKUSER" ]; then
 	echo "The environment variable LOGTALKUSER should be defined first, pointing"
 	echo "to your Logtalk user directory!"
 	echo "Trying the default location for the Logtalk user directory..."
+	echo
 	export LOGTALKUSER=$HOME/logtalk
-	if [ -d "$LOGTALKUSER" ]; then
-		echo "... using Logtalk user directory found at $LOGTALKUSER"
-	else
-		echo "... Logtalk user directory not found at default location. Creating a new"
-		echo "Logtalk user directory by running the \"logtalk_user_setup\" shell script:"
+fi
+
+if [ -d "$LOGTALKUSER" ]; then
+	if ! [ -f "$LOGTALKUSER/VERSION.txt" ]; then
+		echo "Cannot find VERSION.txt in the Logtalk user directory at $LOGTALKUSER!"
+		echo "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
+	else
+		system_version=$(cat "$LOGTALKHOME/VERSION.txt")
+		user_version=$(cat "$LOGTALKUSER/VERSION.txt")
+		if [ "$user_version" \< "$system_version" ]; then
+			echo "Logtalk user directory at $LOGTALKUSER is outdated: "
+			echo "	$user_version < $system_version"
+			echo "Creating an up-to-date Logtalk user directory..."
+			logtalk_user_setup
+		fi
 	fi
-elif ! [ -d "$LOGTALKUSER" ]; then
-	echo "Cannot find \$LOGTALKUSER directory! Creating a new Logtalk user directory"
-	echo "by running the \"logtalk_user_setup\" shell script:"
+else
+	echo "Cannot find the Logtalk user directory at $LOGTALKUSER!"
+	echo "Running the logtalk_user_setup shell script to create the directory:"
 	logtalk_user_setup
 fi
 echo
 
 
 print_version() {
-	echo "$(basename "$0") 0.12"
+	echo "$(basename "$0") 0.13"
 	exit 0
 }
 
@@ -127,32 +138,31 @@ done
 shift $((OPTIND - 1))
 args=("$@")
 
+case "$c_arg" in
+	"dot"|"circo"|"fdp"|"neato")
+		command="$c_arg"
+		;;
+	"")
+		;;
+	*)
+		echo "Error! Unknown Graphviz command: $c_arg" >&2
+		usage_help
+		exit 1
+		;;
+esac
 
-if [ "$c_arg" == "dot" ] ; then
-	command="dot"
-elif [ "$c_arg" == "circo" ] ; then
-	command="circo"
-elif [ "$c_arg" == "fdp" ] ; then
-	command="fdp"
-elif [ "$c_arg" == "neato" ] ; then
-	command="neato"
-elif [ "$c_arg" != "" ] ; then
-	echo "Error! Unknown Graphviz command: $c_arg" >&2
-	usage_help
-	exit 1
-fi
-
-if [ "$l_arg" == "dagre" ] ; then
-	layout="dagre"
-elif [ "$l_arg" == "elk" ] ; then
-	layout="elk"
-elif [ "$l_arg" == "tala" ] ; then
-	layout="tala"
-elif [ "$l_arg" != "" ] ; then
-	echo "Error! Unknown d2 layout: $l_arg" >&2
-	usage_help
-	exit 1
-fi
+case "$l_arg" in
+	"dagre"|"elk"|"tala")
+		layout="$l_arg"
+		;;
+	"")
+		;;
+	*)
+		echo "Error! Unknown d2 layout: $l_arg" >&2
+		usage_help
+		exit 1
+		;;
+esac
 
 d2_count=$(ls -1 ./*.d2 2>/dev/null | wc -l)
 dot_count=$(ls -1 ./*.dot 2>/dev/null | wc -l)

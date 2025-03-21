@@ -1,10 +1,10 @@
 #############################################################################
 ## 
-##   DOT diagram files to SVG files conversion script 
-##   Last updated on March 18, 2025
+##   DOT and d2 diagram files to SVG files conversion script 
+##   Last updated on March 21, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
-##   Copyright 2022-2024 Paulo Moura <pmoura@logtalk.org>
+##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
 ##   Copyright 2022 Hans N. Beck
 ##   SPDX-License-Identifier: Apache-2.0
 ##   
@@ -42,20 +42,19 @@ function Write-Script-Version {
 }
 
 function Get-Logtalkhome {
-	if ($null -eq $env:LOGTALKHOME) 
-	{
-		Write-Output "The environment variable LOGTALKHOME should be defined first, pointing"
-		Write-Output "to your Logtalk installation directory!"
+	if ($null -eq $env:LOGTALKHOME) {
+		Write-Output "The environment variable LOGTALKHOME should be defined first,"
+		Write-Output "pointing to your Logtalk installation directory!"
 		Write-Output "Trying the default locations for the Logtalk installation..."
-		
+
 		$DEFAULTPATHS = [string[]](
-			"C:\Program Files (x86)\Logtalk",
-			"C:\Program Files\Logtalk",
-			"%LOCALAPPDATA%\Logtalk"
+			(Join-Path ${env:ProgramFiles(x86)} "Logtalk"),
+			(Join-Path $env:ProgramFiles "Logtalk"),
+			(Join-Path $env:LOCALAPPDATA "Logtalk")
 		)
-		
+
 		# Checking all default paths
-		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
+		foreach ($DEFAULTPATH in $DEFAULTPATHS) {
 			Write-Output "Looking for: $DEFAULTPATH"
 			if (Test-Path $DEFAULTPATH) {
 				Write-Output "... using Logtalk installation found at $DEFAULTPATH"
@@ -70,8 +69,9 @@ function Get-Logtalkhome {
 function Get-Logtalkuser {
 	if ($null -eq $env:LOGTALKUSER) {
 		Write-Output "After the script completion, you must set the environment variable"
-		Write-Output "LOGTALKUSER pointing to %USERPROFILE%\Documents\Logtalk."
-		$env:LOGTALKUSER = "$env:USERPROFILE\Documents\Logtalk"
+		Write-Output "LOGTALKUSER pointing to your Documents\Logtalk directory."
+		$DocumentsPath = [Environment]::GetFolderPath("MyDocuments")
+		$env:LOGTALKUSER = Join-Path $DocumentsPath "Logtalk"
 	}
 	# At the end LOGTALKUSER was set already or now is set
 }
@@ -110,13 +110,13 @@ function Confirm-Parameters() {
 	}
 
 	if ($c -ne "dot" -and $c -ne "circo" -and $c -ne "fdp" -and $c -ne "neato") {
-	Write-Output "Error! Unknown Graphviz command: $c"
+		Write-Output "Error! Unknown Graphviz command: $c"
 		Start-Sleep -Seconds 2
 		Exit 1
 	}
 
 	if ($l -ne "dagre" -and $l -ne "elk" -and $l -ne "tala") {
-	Write-Output "Error! Unknown d2 layout: $l"
+		Write-Output "Error! Unknown d2 layout: $l"
 		Start-Sleep -Seconds 2
 		Exit 1
 	}
@@ -143,23 +143,24 @@ Get-Logtalkuser
 
 # Check for existence
 if (Test-Path $env:LOGTALKUSER) {
-	if (!(Test-Path $env:LOGTALKUSER/VERSION.txt)) {
-		Write-Output "Cannot find version information in the Logtalk user directory at %LOGTALKUSER%!"
+	$VersionFile = "VERSION.txt"
+	if (!(Test-Path (Join-Path $env:LOGTALKUSER $VersionFile))) {
+		Write-Output "Cannot find $VersionFile in the Logtalk user directory at $env:LOGTALKUSER!"
 		Write-Output "Creating an up-to-date Logtalk user directory..."
 		logtalk_user_setup
 	} else {
-		$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
-		$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
+		$system_version = Get-Content (Join-Path $env:LOGTALKHOME $VersionFile)
+		$user_version   = Get-Content (Join-Path $env:LOGTALKUSER $VersionFile)
 		if ($user_version -lt $system_version) {
-			Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
+			Write-Output "Logtalk user directory at $env:LOGTALKUSER is outdated: "
 			Write-Output "    $user_version < $system_version"
 			Write-Output "Creating an up-to-date Logtalk user directory..."
 			logtalk_user_setup
 		}
 	}
 } else {
-	Write-Output "Cannot find %LOGTALKUSER% directory! Creating a new Logtalk user directory"
-	Write-Output "by running the logtalk_user_setup shell script:"
+	Write-Output "Cannot find the Logtalk user directory at $env:LOGTALKUSER!"
+	Write-Output "Running the logtalk_user_setup shell script to create the directory:"
 	logtalk_user_setup
 }
 
