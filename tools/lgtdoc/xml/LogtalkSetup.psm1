@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Common code for PowerShell integration scripts
-##   Last updated on March 20, 2025
+##   Last updated on March 21, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022 Hans N. Beck and Paulo Moura <pmoura@logtalk.org>
@@ -23,23 +23,22 @@
 
 
 function Get-Logtalkhome {
-	if ($null -eq $env:LOGTALKHOME) 
-	{
+	if ($null -eq $env:LOGTALKHOME) {
 		Write-Output "The environment variable LOGTALKHOME should be defined first,"
 		Write-Output "pointing to your Logtalk installation directory!"
 		Write-Output "Trying the default locations for the Logtalk installation..."
 
 		$DEFAULTPATHS = [string[]](
-			"C:\Program Files (x86)\Logtalk",
-			"C:\Program Files\Logtalk",
-			"$env:LOCALAPPDATA\Logtalk"
+			(Join-Path ${env:ProgramFiles(x86)} "Logtalk"),
+			(Join-Path $env:ProgramFiles "Logtalk"),
+			(Join-Path $env:LOCALAPPDATA "Logtalk")
 		)
 
 		# Checking all default paths
-		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
-			Write-Output ("Looking for: " + $DEFAULTPATH)
+		foreach ($DEFAULTPATH in $DEFAULTPATHS) {
+			Write-Output "Looking for: $DEFAULTPATH"
 			if (Test-Path $DEFAULTPATH) {
-				Write-Output ("... using Logtalk installation found at " + $DEFAULTPATH)
+				Write-Output "... using Logtalk installation found at $DEFAULTPATH"
 				$env:LOGTALKHOME = $DEFAULTPATH
 				break
 			}
@@ -50,8 +49,9 @@ function Get-Logtalkhome {
 function Get-Logtalkuser {
 	if ($null -eq $env:LOGTALKUSER) {
 		Write-Output "After the script completion, you must set the environment variable"
-		Write-Output "LOGTALKUSER pointing to %USERPROFILE%\Documents\Logtalk."
-		$env:LOGTALKUSER = "$env:USERPROFILE\Documents\Logtalk"
+		Write-Output "LOGTALKUSER pointing to your Documents\Logtalk directory."
+		$DocumentsPath = [Environment]::GetFolderPath("MyDocuments")
+		$env:LOGTALKUSER = Join-Path $DocumentsPath "Logtalk"
 	}
 }
 
@@ -68,22 +68,23 @@ function Initialize-LogtalkEnvironment {
 	Get-Logtalkuser
 
 	if (Test-Path $env:LOGTALKUSER) {
-		if (!(Test-Path $env:LOGTALKUSER/VERSION.txt)) {
-			Write-Output "Cannot find VERSION.txt in the Logtalk user directory at %LOGTALKUSER%!"
+		$VersionFile = "VERSION.txt"
+		if (!(Test-Path (Join-Path $env:LOGTALKUSER $VersionFile))) {
+			Write-Output "Cannot find $VersionFile in the Logtalk user directory at $env:LOGTALKUSER!"
 			Write-Output "Creating an up-to-date Logtalk user directory..."
 			logtalk_user_setup
 		} else {
-			$system_version = Get-Content $env:LOGTALKHOME/VERSION.txt
-			$user_version = Get-Content $env:LOGTALKUSER/VERSION.txt
+			$system_version = Get-Content (Join-Path $env:LOGTALKHOME $VersionFile)
+			$user_version   = Get-Content (Join-Path $env:LOGTALKUSER $VersionFile)
 			if ($user_version -lt $system_version) {
-				Write-Output "Logtalk user directory at %LOGTALKUSER% is outdated: "
+				Write-Output "Logtalk user directory at $env:LOGTALKUSER is outdated: "
 				Write-Output "    $user_version < $system_version"
 				Write-Output "Creating an up-to-date Logtalk user directory..."
 				logtalk_user_setup
 			}
 		}
 	} else {
-		Write-Output "Cannot find the Logtalk user directory at %LOGTALKUSER%!"
+		Write-Output "Cannot find the Logtalk user directory at $env:LOGTALKUSER!"
 		Write-Output "Running the logtalk_user_setup shell script to create the directory:"
 		logtalk_user_setup
 	}
