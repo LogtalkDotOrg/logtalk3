@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   XML documenting files to PDF conversion script 
-##   Last updated on March 21, 2025
+##   Last updated on March 22, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -96,7 +96,7 @@ function Confirm-Parameters() {
 
 ###################### here it starts ############################ 
 
-Import-Module (Join-Path $PSScriptRoot "LogtalkSetup.psm1")
+Import-Module (Join-Path $PSScriptRoot "LogtalkSetupEnv.psm1")
 Initialize-LogtalkEnvironment
 
 Confirm-Parameters

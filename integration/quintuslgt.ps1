@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Integration script for Quintus Prolog
-##   Last updated on March 20, 2025
+##   Last updated on March 22, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 #Requires -Version 7.3
 
-Import-Module (Join-Path $PSScriptRoot "LogtalkSetup.psm1")
+Import-Module (Join-Path $PSScriptRoot "LogtalkSetupEnv.psm1")
 Initialize-LogtalkEnvironment
 
 $source = $env:LOGTALKHOME + '\integration\logtalk_quintus.pl'
