@@ -3,7 +3,7 @@
 #############################################################################
 ## 
 ##   Distribution clean script for packaging
-##   Last updated on January 6, 2025
+##   Last updated on March 22, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -37,22 +37,26 @@ find . -name .lgt_tmp -print0 | xargs -0 rm -rf
 find . -type f -print0 | xargs -0 chmod 644
 find . -type d -print0 | xargs -0 chmod 755
 
+chmod a+x docs/sources/*.sh
 chmod a+x integration/*.sh
 chmod a+x integration/unsupported/*.sh
 chmod a+x manuals/sources/*.sh
 chmod a+x scripts/*.sh
+chmod a+x scripts/embedding/ciao/*.sh
+chmod a+x scripts/embedding/cxprolog/*.sh
 chmod a+x scripts/embedding/eclipse/*.sh
 chmod a+x scripts/embedding/gprolog/*.sh
 chmod a+x scripts/embedding/jiprolog/*.sh
-chmod a+x scripts/embedding/xvm/*.sh
 chmod a+x scripts/embedding/sicstus/*.sh
 chmod a+x scripts/embedding/swipl/*.sh
 chmod a+x scripts/embedding/trealla/*.sh
 chmod a+x scripts/embedding/xsb/*.sh
+chmod a+x scripts/embedding/xvm/*.sh
 chmod a+x scripts/embedding/yap/*.sh
 chmod a+x scripts/debian/postinst
 chmod a+x scripts/debian/prerm
 chmod a+x scripts/debian/postrm
+chmod a+x scripts/docker/portable/*.sh
 chmod a+x scripts/docker/swi-prolog/*.sh
 chmod a+x scripts/linux/*.sh
 chmod a+x scripts/macos/postflight
