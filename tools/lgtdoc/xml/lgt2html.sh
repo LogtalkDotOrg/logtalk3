@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.5"
+	echo "$(basename "$0") 2.6"
 	exit 0
 }
 
@@ -176,6 +176,11 @@ if [ "$format" = "xhtml" ] ; then
 else
 	entity_xslt=$html_entity_xslt
 	index_xslt=$html_index_xslt
+fi
+
+if ! [ -x "$(command -v $processor)" ] ; then
+	echo "Error: Cannot find the $processor command-line tool!" >&2
+	exit 1
 fi
 
 if ! [ -e "./logtalk_entity.dtd" ] ; then

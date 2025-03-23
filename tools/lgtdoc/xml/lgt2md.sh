@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.5"
+	echo "$(basename "$0") 2.6"
 	exit 0
 }
 
@@ -130,6 +130,11 @@ if [ "$p_arg" != "" ] && [ "$p_arg" != "xsltproc" ] && [ "$p_arg" != "xalan" ] &
 	exit 1
 elif [ "$p_arg" != "" ] ; then
 	processor=$p_arg
+fi
+
+if ! [ -x "$(command -v $processor)" ] ; then
+	echo "Error: Cannot find the $processor command-line tool!" >&2
+	exit 1
 fi
 
 if ! [ -e "./logtalk_entity.dtd" ] ; then

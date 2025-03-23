@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 5.2"
+	echo "$(basename "$0") 5.3"
 	exit 0
 }
 
@@ -165,6 +165,11 @@ fi
 
 if [ "$l_arg" != "" ] ; then
 	mapping=$l_arg
+fi
+
+if ! [ -x "$(command -v $processor)" ] ; then
+	echo "Error: Cannot find the $processor command-line tool!" >&2
+	exit 1
 fi
 
 if ! [ -e "./logtalk_entity.dtd" ] ; then

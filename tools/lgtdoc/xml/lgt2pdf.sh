@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.4"
+	echo "$(basename "$0") 2.5"
 	exit 0
 }
 
@@ -103,6 +103,11 @@ if [ "$format" = "a4" ] ; then
 	xsl=$a4_xsl
 else
 	xsl=$us_xsl
+fi
+
+if ! [ -x "$(command -v $processor)" ] ; then
+	echo "Error: Cannot find the $processor command-line tool!" >&2
+	exit 1
 fi
 
 if ! [ -e "./logtalk_entity.dtd" ] ; then
