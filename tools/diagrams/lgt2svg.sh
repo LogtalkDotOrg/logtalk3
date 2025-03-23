@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   DOT and d2 diagram files to SVG files conversion script
-##   Last updated on March 21, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -165,10 +165,23 @@ esac
 d2_count=$(ls -1 ./*.d2 2>/dev/null | wc -l)
 dot_count=$(ls -1 ./*.dot 2>/dev/null | wc -l)
 
+if [ $d2_count -ne 0 ] && ! command -v d2 >/dev/null 2>&1; then
+	echo "Error! Cannot find the d2 command-line tool!" >&2
+	echo "See https://d2lang.com/ for installation instructions." >&2
+	echo
+	exit 1
+fi
+
+if [ $dot_count -ne 0 ] && ! command -v "$command" >/dev/null 2>&1; then
+	echo "Error! Cannot find the $command command-line tool!" >&2
+	echo "See https://graphviz.org/ for installation instructions." >&2
+	echo
+	exit 1
+fi
+
 d2_failed_flag=0
 dot_failed_flag=0
 
-# Copy CSS file once if needed
 if [ $d2_count -ne 0 ] || [ $dot_count -ne 0 ] ; then
 	cp "$LOGTALKUSER/tools/diagrams/diagrams.css" .
 fi
@@ -219,7 +232,7 @@ elif [ $d2_failed_flag -eq 0 ] && [ $dot_failed_flag -eq 0 ] ; then
     echo
     exit 0
 else
-    echo "One or more files could not be converted!"
+    echo "Error! One or more files could not be converted!" >&2
     echo
     exit 1
 fi

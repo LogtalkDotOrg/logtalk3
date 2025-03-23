@@ -1,25 +1,25 @@
 #############################################################################
-## 
-##   DOT and d2 diagram files to SVG files conversion script 
-##   Last updated on March 21, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##
+##   DOT and d2 diagram files to SVG files conversion script
+##   Last updated on March 23, 2025
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
 ##   Copyright 2022 Hans N. Beck
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 
@@ -28,9 +28,9 @@
 [CmdletBinding()]
 param(
 	[Parameter()]
-	[String]$c = "dot", 
-	[String]$l = "elk", 
-	[String]$a = "", 
+	[String]$c = "dot",
+	[String]$l = "elk",
+	[String]$a = "",
 	[Switch]$v,
 	[Switch]$h
 )
@@ -78,7 +78,7 @@ function Get-Logtalkuser {
 
 function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
-	$myName = Split-Path -Path $myFullName -leaf -Resolve 
+	$myName = Split-Path -Path $myFullName -leaf -Resolve
 
 	Write-Output "This script converts .d2 and .dot files in the current directory to SVG files"
 	Write-Output ""
@@ -123,7 +123,7 @@ function Confirm-Parameters() {
 
 }
 
-###################### here it starts ############################ 
+###################### here it starts ############################
 
 Confirm-Parameters
 
@@ -170,14 +170,29 @@ $dot_failed_flag = $false
 $d2_count = Get-ChildItem -Path . -Filter *.d2 | Measure-Object | ForEach-Object{$_.Count}
 $dot_count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | ForEach-Object{$_.Count}
 
-# Copy CSS file once if needed
+if ($d2_count -gt 0) {
+	if ($null -eq (Get-Command "d2" -ErrorAction SilentlyContinue)) {
+		Write-Output "Error: d2 command-line executable not found!"
+		Write-Output "See https://d2lang.com/ for installation instructions."
+		Exit 1
+	}
+}
+
+if ($dot_count -gt 0) {
+	if ($null -eq (Get-Command "$c" -ErrorAction SilentlyContinue)) {
+		Write-Output "Error: $c command-line executable not found!"
+		Write-Output "See https://graphviz.org/ for installation instructions."
+		Exit 1
+	}
+}
+
 if ($d2_count -gt 0 -or $dot_count -gt 0) {
 	Copy-Item -Path "$env:LOGTALKUSER\tools\diagrams\diagrams.css" -Destination .
 }
 
 if ($d2_count -gt 0) {
 	Write-Output "Converting .d2 files to .svg files ..."
-	Get-ChildItem -Path . -Filter *.d2 | 
+	Get-ChildItem -Path . -Filter *.d2 |
 	Foreach-Object {
 		Write-Host -NoNewline "  converting $($_.Name)"
 		if ($a -ne "") {
@@ -196,12 +211,12 @@ if ($d2_count -gt 0) {
 
 if ($dot_count -gt 0) {
 	Write-Output "Converting .dot files to .svg files ..."
-	Get-ChildItem -Path . -Filter *.dot | 
+	Get-ChildItem -Path . -Filter *.dot |
 	Foreach-Object {
 		Write-Host -NoNewline "  converting $($_.Name)"
 		$converted = $false
 		$counter = 24
-		
+
 		# Retry logic to handle Graphviz's random crashes
 		while (-not $converted -and $counter -gt 0) {
 			try {
@@ -210,7 +225,7 @@ if ($dot_count -gt 0) {
 				} else {
 					& $c -q -Tsvg -Gfontnames=svg -o "$($_.BaseName).svg" $_.Name
 				}
-				
+
 				# Check if command succeeded
 				if ($?) {
 					$converted = $true
@@ -219,11 +234,11 @@ if ($dot_count -gt 0) {
 			catch {
 				# Continue on error
 			}
-			
+
 			$counter--
 			Write-Host -NoNewline "."
 		}
-		
+
 		# Report conversion status
 		if (-not $converted) {
 			$dot_failed_flag = $true
