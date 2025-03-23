@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Allure report generator script
-##   Last updated on August 7, 2024
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -24,7 +24,7 @@
 #############################################################################
 
 print_version() {
-	echo "$(basename "$0") 0.13"
+	echo "$(basename "$0") 0.14"
 	exit 0
 }
 
@@ -116,8 +116,8 @@ if [ -d "$report" ] && [ -n "$(ls -A "$report")" ] ; then
 		[ -e "$report/favicon.ico" ] && [ -e "$report/index.html" ] && [ -e "$report/styles.css" ] ; then
 		echo "Warning: Overriding previous report..."
 	else
-		echo "Error! Specified report directory is not empty and does not contain a previous"
-		echo "       report. Terminating the script execution to prevent any data loss."
+		echo "Error! Specified report directory is not empty and does not contain a previous" >&2
+		echo "       report. Terminating the script execution to prevent any data loss." >&2
 		exit 1
 	fi
 fi

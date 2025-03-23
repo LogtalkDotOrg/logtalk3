@@ -90,7 +90,7 @@ if ($d -eq "") {
 	if ($c -eq $true) {
 		$directory = (New-Item -Path $d -ItemType Directory -Force).FullName
 	} else {
-		Write-Output "Error: directory $d does not exist."
+		Write-Error "Error: directory $d does not exist."
 		Exit 3
 	}
 } else {
@@ -109,8 +109,8 @@ if ($p -eq "") {
 }
 
 if (!(Get-Command "Set-PsEnv" -ErrorAction SilentlyContinue)) {
-	Write-Output "Error! Cannot find the Set-PsEnv PowerShell module!"
-	Write-Output "See  https://github.com/rajivharris/Set-PsEnv for installation instructions."
+	Write-Error "Error! Cannot find the Set-PsEnv PowerShell module!"
+	Write-Error "See  https://github.com/rajivharris/Set-PsEnv for installation instructions."
 	Exit 7
 }
 
@@ -120,6 +120,6 @@ try {
 	Set-PsEnv
 	Exit 0
 } catch {
-	Write-Output "Error: Failed to write to .env file: $_"
+	Write-Error "Error: Failed to write to .env file: $_"
 	Exit 5
 }

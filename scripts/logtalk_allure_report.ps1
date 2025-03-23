@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Allure report generator script
-##   Last updated on March 18, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -72,11 +72,11 @@ Function Write-Usage-Help() {
 Function Confirm-Parameters() {
 	if ($v -eq $true) {
 		Write-Script-Version
-		Exit
+		Exit 0
 	}
 	if ($h -eq $true) {
 		Write-Usage-Help
-		Exit
+		Exit 0
 	}
 }
 
@@ -85,7 +85,7 @@ Function Confirm-Parameters() {
 $minimalAllureVersion="2.26.0"
 
 if ($null -eq (Get-Command "allure" -ErrorAction SilentlyContinue))  {
-	Write-Output "Error: allure is not installed!"
+	Write-Error "Error: allure is not installed!"
 	Exit 1
 } else {
 	$allureVersion = allure --version
@@ -103,9 +103,9 @@ if (Test-Path $o -PathType container) {
 		(Test-Path "$o/favicon.ico") -and (Test-Path "$o/index.html") -and (Test-Path "$o/styles.css")) {
 		Write-Output "Warning: Overriding previous report..."
 	} else {
-		Write-Output "Error! Specified report directory is not empty and does not contain a previous"
-		Write-Output "       report. Terminating the script execution to prevent any data loss."
-		Exit
+		Write-Error "Error! Specified report directory is not empty and does not contain a previous"
+		Write-Error "       report. Terminating the script execution to prevent any data loss."
+		Exit 1
 	}
 }
 
@@ -117,7 +117,7 @@ New-Item -Path $i -ItemType directory -Force > $null
 try {
 	Remove-Item -Path "$i/xunit_report_*.xml" -Recurse -Force
 } catch {
-	Write-Output "Error occurred at cleanup previous results"
+	Write-Error "Error occurred at cleanup previous results"
 }
 
 $counter=0
@@ -132,7 +132,7 @@ if ($e -ne "") {
 }
 
 if ($p -eq $true) {
-	Exit
+	Exit 0
 }
 
 # assume that the $i directory is kept between test

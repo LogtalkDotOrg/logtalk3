@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on March 18, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -72,10 +72,10 @@ if (Test-Path $env:LOGTALKHOME) {
 	Write-Output "Using Logtalk installation found at: $env:LOGTALKHOME"
 	Write-Output ""
 } else {
-	Write-Output "... unable to locate Logtalk installation directory!"
-	Write-Output ""
+	Write-Error "... unable to locate Logtalk installation directory!"
+	Write-Error ""
 	Start-Sleep -Seconds 2
-	Exit
+	Exit 1
 }
 
 function Get-Logtalkuser {
@@ -96,7 +96,7 @@ $expandedLogtalkuser = [Environment]::ExpandEnvironmentVariables($env:LOGTALKUSE
 if ($expandedLogtalkhome -eq $expandedLogtalkuser) {
 	Write-Output "The environment variables LOGTALKHOME and LOGTALKUSER point"
 	Write-Output "to the same directory! Running this script is not necessary!"
-	Exit
+	Exit 0
 }
 
 function Create-Logtalkuser-Directory {

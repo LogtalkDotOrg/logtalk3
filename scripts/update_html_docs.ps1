@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ##
-##   Last updated on March 19, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -73,12 +73,12 @@ Push-Location $dir
 
 if ($v -eq $true) {
 	Write-Script-Version
-	Exit
+	Exit 0
 }
 
 if ($h -eq $true) {
 	Write-Usage-Help
-	Exit
+	Exit 0
 }
 
 if ("$p" -eq "b") {
@@ -110,9 +110,9 @@ if ("$p" -eq "b") {
 } elseif ("$p" -eq "yap") {
 	$logtalk="yaplgt -g"
 } else {
-	Write-Output "Error! Unsupported backend Prolog compiler: $p"
+	Write-Error "Error! Unsupported backend Prolog compiler: $p"
 	Write-Usage-Help
-	Exit
+	Exit 1
 }
 
 if ($env:LOGTALKPACKS -ne "") {
@@ -170,13 +170,13 @@ Move-Item -Path browserconfig.xml -Destination browserconfig.xml.saved
 try {
 	Remove-Item ./*.xml
 } catch {
-	Write-Output "Error occurred at cleanup"
+	Write-Error "Error occurred at cleanup"
 }
 Move-Item -Path browserconfig.xml.saved -Destination browserconfig.xml
 try {
 	Remove-Item ./*.rst
 } catch {
-	Write-Output "Error occurred at cleanup"
+	Write-Error "Error occurred at cleanup"
 }
 
 Pop-Location

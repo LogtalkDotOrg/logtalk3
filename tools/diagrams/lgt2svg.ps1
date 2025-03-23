@@ -110,13 +110,13 @@ function Confirm-Parameters() {
 	}
 
 	if ($c -ne "dot" -and $c -ne "circo" -and $c -ne "fdp" -and $c -ne "neato") {
-		Write-Output "Error! Unknown Graphviz command: $c"
+		Write-Error "Error! Unknown Graphviz command: $c"
 		Start-Sleep -Seconds 2
 		Exit 1
 	}
 
 	if ($l -ne "dagre" -and $l -ne "elk" -and $l -ne "tala") {
-		Write-Output "Error! Unknown d2 layout: $l"
+		Write-Error "Error! Unknown d2 layout: $l"
 		Start-Sleep -Seconds 2
 		Exit 1
 	}
@@ -134,7 +134,7 @@ if (Test-Path $env:LOGTALKHOME) {
 	$output = "Found LOGTALKHOME at: $env:LOGTALKHOME"
 	Write-Output $output
 } else {
-	Write-Output "... unable to locate Logtalk installation directory!"
+	Write-Error "... unable to locate Logtalk installation directory!"
 	Start-Sleep -Seconds 2
 	Exit 1
 }
@@ -172,16 +172,16 @@ $dot_count = Get-ChildItem -Path . -Filter *.dot | Measure-Object | ForEach-Obje
 
 if ($d2_count -gt 0) {
 	if ($null -eq (Get-Command "d2" -ErrorAction SilentlyContinue)) {
-		Write-Output "Error: d2 command-line executable not found!"
-		Write-Output "See https://d2lang.com/ for installation instructions."
+		Write-Error "Error: d2 command-line executable not found!"
+		Write-Error "See https://d2lang.com/ for installation instructions."
 		Exit 1
 	}
 }
 
 if ($dot_count -gt 0) {
 	if ($null -eq (Get-Command "$c" -ErrorAction SilentlyContinue)) {
-		Write-Output "Error: $c command-line executable not found!"
-		Write-Output "See https://graphviz.org/ for installation instructions."
+		Write-Error "Error: $c command-line executable not found!"
+		Write-Error "See https://graphviz.org/ for installation instructions."
 		Exit 1
 	}
 }
@@ -258,7 +258,7 @@ if ($d2_count -eq 0 -and $dot_count -eq 0) {
 	Write-Output ""
 	Exit 0
 } else {
-	Write-Output "One or more files could not be converted!"
-	Write-Output ""
+	Write-Error "One or more files could not be converted!"
+	Write-Error ""
 	Exit 1
 }

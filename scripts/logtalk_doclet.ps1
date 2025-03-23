@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on March 18, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -116,16 +116,16 @@ Function Confirm-Parameters() {
 
 	if ($v -eq $true) {
 		Write-Script-Version
-		Exit
+		Exit 0
 	}
 
 	if ($h -eq $true) {
 		Write-Usage-Help
-		Exit
+		Exit 0
 	}
 
 	if ($p -eq "") {
-		Write-Output ("Error! Backend Prolog compiler not specified!")
+		Write-Error ("Error! Backend Prolog compiler not specified!")
 		Write-Usage-Help
 		Exit 1
 	} elseif ($p -eq "b") {
@@ -192,9 +192,9 @@ Function Confirm-Parameters() {
 		$script:logtalk="yaplgt"
 		$script:logtalk_option="-g"
 	} else {
-		Write-Output "Error! Unsupported backend Prolog compiler: $p"
+		Write-Error "Error! Unsupported backend Prolog compiler: $p"
 		Write-Usage-Help
-		Exit
+		Exit 1
 	}
 
 	if ($p -eq "swipack") {

@@ -2,7 +2,7 @@
 ##
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ##
-##   Last updated on March 18, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -72,12 +72,12 @@ $logtalk="swilgt$extension -g"
 
 if ($v -eq $true) {
 	Write-Script-Version
-	Exit
+	Exit 0
 }
 
 if ($h -eq $true) {
 	Write-Usage-Help
-	Exit
+	Exit 0
 }
 
 if ("$p" -eq "b") {
@@ -109,9 +109,9 @@ if ("$p" -eq "b") {
 } elseif ("$p" -eq "yap") {
 	$logtalk="yaplgt -g"
 } else {
-	Write-Output "Error! Unsupported backend Prolog compiler: $p"
+	Write-Error "Error! Unsupported backend Prolog compiler: $p"
 	Write-Usage-Help
-	Exit
+	Exit 1
 }
 
 if ($env:LOGTALKPACKS -ne "") {
@@ -157,7 +157,7 @@ lgt2svg
 try {
 	Remove-Item ./*.dot
 } catch {
-	Write-Output "Error occurred at cleanup"
+	Write-Error "Error occurred at cleanup"
 }
 
 Pop-Location

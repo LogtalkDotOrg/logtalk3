@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on March 20, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -328,7 +328,7 @@ Function Confirm-Parameters() {
 	}
 
 	if ($p -eq "") {
-		Write-Output ("Error! Backend Prolog compiler not specified!")
+		Write-Error ("Error! Backend Prolog compiler not specified!")
 		Write-Usage-Help
 		Exit 1
 	} elseif ($p -eq "b") {
@@ -406,19 +406,19 @@ Function Confirm-Parameters() {
 		$script:logtalk = "yaplgt"
 		$script:logtalk_option = "-g"
 	} else {
-		Write-Output "Error! Unsupported backend Prolog compiler: $p"
+		Write-Error "Error! Unsupported backend Prolog compiler: $p"
 		Write-Usage-Help
-		Exit
+		Exit 1
 	}
 
 	if ($o -ne "verbose" -and $o -ne "minimal") {
-		Write-Output "Error! Unknown output verbosity: $o"
+		Write-Error "Error! Unknown output verbosity: $o"
 		Write-Usage-Help
 		Exit 1
 	}
 
 	if ($m -ne "optimal" -and $m -ne "normal" -and $m -ne "debug" -and $m -ne "all") {
-		Write-Output "Error! Unknown compilation mode: $m"
+		Write-Error "Error! Unknown compilation mode: $m"
 		Write-Usage-Help
 		Exit 1
 	}
@@ -432,7 +432,7 @@ Function Confirm-Parameters() {
 	} elseif ($f -eq "xunit_net_v2") {
 		$script:format_goal = $format_xunit_net_v2_goal
 	} else {
-		Write-Output "Error! Unknown format: $f"
+		Write-Error "Error! Unknown format: $f"
 		Write-Usage-Help
 		Exit 1
 	}
@@ -442,21 +442,21 @@ Function Confirm-Parameters() {
 	} elseif ($c -eq "xml") {
 		$script:coverage_goal = $coverage_xml_goal
 	} else {
-		Write-Output "Error! Unknown coverage report: $c"
+		Write-Error "Error! Unknown coverage report: $c"
 		Write-Usage-Help
 		Exit 1
 	}
 
 	if ($b -ne "") {
 		if ($u -eq "") {
-			Write-Output "Error! Issue tracker option (-b) requires the base URL (-u) option"
+			Write-Error "Error! Issue tracker option (-b) requires the base URL (-u) option"
 			Write-Usage-Help
 			Exit 1
 		}
 		if ($b.Contains(":")) {
 			$script:issue_array = $b.Split(":")
 			if ($issue_array.Length -ne 2) {
-				Write-Output "Error! Invalid issue tracker format. Expected 'server:labels' or just 'server'"
+				Write-Error "Error! Invalid issue tracker format. Expected 'server:labels' or just 'server'"
 				Write-Usage-Help
 				Exit 1
 			}
@@ -466,7 +466,7 @@ Function Confirm-Parameters() {
 			$script:issue_server = $b
 		}
 		if ($script:issue_server -ne "github" -and $script:issue_server -ne "gitlab") {
-			Write-Output "Error! Issue tracker server must be either github or gitlab: $b"
+			Write-Error "Error! Issue tracker server must be either github or gitlab: $b"
 			Write-Usage-Help
 			Exit 1
 		}
@@ -476,7 +476,7 @@ Function Confirm-Parameters() {
 		if ($l -is [int] -and $l -ge 1) {
 			$script:level = $l - 1
 		} else {
-			Write-Output "Error! Level must be an integer equal or greater than 1: $l"
+			Write-Error "Error! Level must be an integer equal or greater than 1: $l"
 			Write-Usage-Help
 			Exit 1
 		}
@@ -511,7 +511,7 @@ Function Confirm-Parameters() {
 	}
 
 	if ($u -ne "" -and -not ($u -match '^https?://')) {
-		Write-Output "Error! Base URL must start with http:// or https://"
+		Write-Error "Error! Base URL must start with http:// or https://"
 		Write-Usage-Help
 		Exit 1
 	}
@@ -579,7 +579,7 @@ $tester_debug_goal = "set_logtalk_flag(debug,on),logtalk_load($n),halt$dot"
 try {
 	New-Item -Path $results -ItemType directory -Force > $null
 } catch {
-	Write-Output "Error! Failed to create results directory: $_"
+	Write-Error "Error! Failed to create results directory: $_"
 	Exit 1
 }
 
