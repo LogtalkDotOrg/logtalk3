@@ -1,29 +1,29 @@
 #!/usr/bin/env bash
 
 #############################################################################
-## 
+##
 ##   This script creates an ECLiPSe logtalk.eco file with the Logtalk
 ##   compiler and runtime and optionally an application.eco file with
 ##   a Logtalk application
-## 
+##
 ##   Last updated on January 30, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 
@@ -106,9 +106,8 @@ settings="$LOGTALKHOME/scripts/embedding/settings-embedding-sample.lgt"
 compile="false"
 goal="true"
 
-usage_help()
-{
-	echo 
+usage_help() {
+	echo
 	echo "This script creates a ECLiPSe logtalk.eco file with the Logtalk compiler and"
 	echo "runtime and an optional application.eco file from an application source code"
 	echo "given its loader file."
@@ -131,8 +130,7 @@ usage_help()
 	echo
 }
 
-while getopts "cd:t:p:s:l:g:vh" option
-do
+while getopts "cd:t:p:s:l:g:vh" option; do
 	case $option in
 		c) compile="true";;
 		d) d_arg="$OPTARG";;

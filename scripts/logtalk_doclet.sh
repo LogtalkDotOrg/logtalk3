@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
 #############################################################################
-## 
+##
 ##   Documentation automation script
 ##   Last updated on October 2, 2023
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 export LC_ALL=C
@@ -99,9 +99,8 @@ run_doclet() {
 	return $?
 }
 
-usage_help()
-{
-	echo 
+usage_help() {
+	echo
 	echo "This script automates running doclets found on the current directory and recursively"
 	echo "in its sub-directories by scanning for doclet.lgt and doclet.logtalk source files. In"
 	echo  "case of failed doclets or doclet errors, this script returns a non-zero exit code."
@@ -125,8 +124,7 @@ usage_help()
 	echo
 }
 
-while getopts "vp:m:f:d:t:s:h" option
-do
+while getopts "vp:m:f:d:t:s:h" option; do
 	case $option in
 		v) print_version;;
 		p) p_arg="$OPTARG";;

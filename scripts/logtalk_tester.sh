@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
 #############################################################################
-## 
+##
 ##   Unit testing automation script
 ##   Last updated on March 20, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 # loosely based on a unit test automation script contributed by Parker Jones
@@ -176,7 +176,7 @@ run_testset() {
 			echo -n "$(cut -f 5 <<< "$line")"
 			echo -n ' passed, '
 			echo -n "$(cut -f 6 <<< "$line")"
-			echo -n ' failed ('		
+			echo -n ' failed ('
 			echo -n "$(cut -f 7 <<< "$line")"
 			echo ' flaky)'
 			duration=$(( $(date +%s) - start_time ))
@@ -291,9 +291,8 @@ ensure_format_report() {
 	fi
 }
 
-usage_help()
-{
-	echo 
+usage_help() {
+	echo
 	echo "This script automates running unit tests found in the current directory and"
 	echo "recursively in its sub-directories by scanning by default for \"tester.lgt\""
 	echo "and \"tester.logtalk\" source files. In case of failed unit tests or test set"
@@ -339,8 +338,7 @@ usage_help()
 	echo
 }
 
-while getopts "vp:o:m:f:d:t:n:s:b:u:c:l:e:g:r:i:wh" option
-do
+while getopts "vp:o:m:f:d:t:n:s:b:u:c:l:e:g:r:i:wh" option; do
 	case $option in
 		v) print_version;;
 		p) p_arg="$OPTARG";;
@@ -404,7 +402,7 @@ elif [ "$p_arg" == "xvm" ] ; then
 	prolog='XVM'
 	logtalk=xvmlgt$extension
 	logtalk_call="$logtalk $i_arg -g"
-	case "$i_arg" in 
+	case "$i_arg" in
 		*"--standard-top-level"*) dot=".";;
 		*"--custom-top-level"*) dot="?";;
 		*) dot=".";;
@@ -524,7 +522,7 @@ if [ "$b_arg" != "" ] ; then
 	fi
 	issue_server="$(echo "$b_arg" | cut -d':' -f1)"
 	if [ "$issue_server" != "github" ] && [ "$issue_server" != "gitlab" ] ; then
-		echo "Error! Issue tracker server must be either github or gitlab: $b_arg" >&2 
+		echo "Error! Issue tracker server must be either github or gitlab: $b_arg" >&2
 		usage_help
 		exit 1
 	fi

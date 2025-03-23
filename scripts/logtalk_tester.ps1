@@ -1,24 +1,24 @@
 #############################################################################
-## 
+##
 ##   Unit testing automation script
 ##   Last updated on March 20, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the speci}c language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 
@@ -130,7 +130,7 @@ param(
 			Write-Host -NoNewline $line[4]
 			Write-Host -NoNewline ' passed, '
 			Write-Host -NoNewline $line[5]
-			Write-Host -NoNewline ' failed ('		
+			Write-Host -NoNewline ' failed ('
 			Write-Host -NoNewline $line[6]
 			Write-Output ' flaky)'
 			$end_time = Get-Date -UFormat %s
@@ -268,7 +268,7 @@ param(
 
 Function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
-	$myName = Split-Path -Path "$myFullName" -leaf -Resolve 
+	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
 
 	Write-Output ""
 	Write-Output "This script automates running unit tests found in the current directory and"
@@ -517,7 +517,7 @@ Function Confirm-Parameters() {
 	}
 }
 
-###################### here it starts ############################ 
+###################### here it starts ############################
 
 $PSNativeCommandArgumentPassing = 'Standard'
 
@@ -780,7 +780,7 @@ if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Patter
 	Write-Output "% Skipped tests"
 	Get-ChildItem -Path . -Filter *.totals |
 	Foreach-Object {
-		Get-Content -Path $_ | 
+		Get-Content -Path $_ |
 		Foreach-Object {
 			if ($_ -match '^skipped') {
 				($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, ''
@@ -793,7 +793,7 @@ if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Patter
 	Write-Output "% Failed tests"
 	Get-ChildItem -Path . -Filter *.totals |
 	Foreach-Object {
-		Get-Content -Path $_ | 
+		Get-Content -Path $_ |
 		Foreach-Object {
 			if ($_ -match '^failed') {
 				($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, ''

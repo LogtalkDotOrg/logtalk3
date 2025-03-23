@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
 
 #############################################################################
-## 
+##
 ##   This script creates a XVM logtalk.pl file with the Logtalk compiler and
 ##   runtime and optionally an application.pl file with a Logtalk application
-## 
+##
 ##   Last updated on January 30, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 
@@ -107,9 +107,8 @@ foreign="false"
 goal="true"
 encrypt="false"
 
-usage_help()
-{
-	echo 
+usage_help() {
+	echo
 	echo "This script creates a XVM logtalk.pl file with the Logtalk compiler/runtime"
 	echo "and an optional application.pl file from an application source code given"
 	echo "its loader file. When embedding an application, this script also creates a"
@@ -136,8 +135,7 @@ usage_help()
 	echo
 }
 
-while getopts "cd:t:p:s:l:g:fxvh" option
-do
+while getopts "cd:t:p:s:l:g:fxvh" option; do
 	case $option in
 		c) compile="true";;
 		d) d_arg="$OPTARG";;

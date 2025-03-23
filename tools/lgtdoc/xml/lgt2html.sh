@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
 #############################################################################
-## 
-##   XML documenting files to (X)HTML conversion script 
+##
+##   XML documenting files to (X)HTML conversion script
 ##   Last updated on March 21, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 
@@ -49,9 +49,8 @@ processor=xsltproc
 # processor=xalan
 # processor=saxon
 
-usage_help()
-{
-	echo 
+usage_help() {
+	echo
 	echo "This script converts all Logtalk XML files documenting files in the"
 	echo "current directory to XHTML or HTML files"
 	echo
@@ -71,8 +70,7 @@ usage_help()
 	echo
 }
 
-create_index_file()
-{
+create_index_file() {
 	echo "" > "$index_file"
 
 	case "$format" in
@@ -127,9 +125,8 @@ create_index_file()
 	echo "</html>" >> "$index_file"
 }
 
-while getopts "vf:d:i:t:p:h" Option
-do
-	case $Option in
+while getopts "vf:d:i:t:p:h" option; do
+	case $option in
 		v) print_version;;
 		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;

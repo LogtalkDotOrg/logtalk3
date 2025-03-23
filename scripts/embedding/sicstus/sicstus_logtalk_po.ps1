@@ -1,29 +1,29 @@
 
 #############################################################################
-## 
+##
 ##   This script creates a SICStus Prolog logtalk.po file with the Logtalk
 ##   compiler and runtime and optionally an application.po file with a
 ##   Logtalk application
-## 
+##
 ##   Last updated on March 18, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
 ##   Copyright 2022 Hans N. Beck
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 
@@ -32,13 +32,13 @@
 [CmdletBinding()]
 param(
 	[Parameter()]
-	[Switch]$c, 
-	[Switch]$x, 
+	[Switch]$c,
+	[Switch]$x,
 	[String]$d = $pwd,
 	[String]$t,
 	[String]$n = "application",
 	[String]$p = "$env:LOGTALKHOME\paths\paths.pl",
-	[String]$s = "$env:LOGTALKHOME\scripts\embedding\settings-embedding-sample.lgt", 
+	[String]$s = "$env:LOGTALKHOME\scripts\embedding\settings-embedding-sample.lgt",
 	[String]$l,
 	[String]$g = "true",
 	[Switch]$v,
@@ -52,20 +52,20 @@ function Write-Script-Version {
 }
 
 function Get-Logtalkhome {
-	if ($null -eq $env:LOGTALKHOME) 
+	if ($null -eq $env:LOGTALKHOME)
 	{
 		Write-Output "The environment variable LOGTALKHOME should be defined first, pointing"
 		Write-Output "to your Logtalk installation directory!"
 		Write-Output "Trying the default locations for the Logtalk installation..."
-		
+
 		$DEFAULTPATHS = [string[]](
 			"C:\Program Files (x86)\Logtalk",
 			"C:\Program Files\Logtalk",
 			"%LOCALAPPDATA%\Logtalk"
 		)
-		
+
 		# Checking all default paths
-		foreach ($DEFAULTPATH in $DEFAULTPATHS) { 
+		foreach ($DEFAULTPATH in $DEFAULTPATHS) {
 			Write-Output "Looking for: $DEFAULTPATH"
 			if (Test-Path $DEFAULTPATH) {
 				Write-Output "... using Logtalk installation found at $DEFAULTPATH"
@@ -88,7 +88,7 @@ function Get-Logtalkuser {
 
 function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
-	$myName = Split-Path -Path $myFullName -leaf -Resolve 
+	$myName = Split-Path -Path $myFullName -leaf -Resolve
 
 	Write-Output "This script creates a SICStus Prolog logtalk.po file with the Logtalk compiler"
 	Write-Output "and runtime and an optional application.po file from an application source"
@@ -170,7 +170,7 @@ function Confirm-Parameters() {
 
 }
 
-###################### here it starts ############################ 
+###################### here it starts ############################
 
 Confirm-Parameters
 
@@ -218,7 +218,7 @@ Copy-Item -Path "$env:LOGTALKHOME\core\core.pl" -Destination .
 $ScratchDirOption = ", scratch_directory('$($t.Replace('\','/'))')"
 
 $GoalParam = "logtalk_compile([core(expanding), core(monitoring), core(forwarding), core(user), core(logtalk), core(core_messages)], [optimize(on)$ScratchDirOption]), halt."
-sicstuslgt --goal $GoalParam 
+sicstuslgt --goal $GoalParam
 
 if ($c -eq $true) {
 	$GoalParam = "logtalk_load(expand_library_alias_paths(loader)),logtalk_compile('$($p.Replace('\','/'))',[hook(expand_library_alias_paths)$ScratchDirOption]),halt."
@@ -274,7 +274,7 @@ if ($l -ne "") {
 	$GoalParam = "load_files('$($d.Replace('\', '/'))/logtalk.po'), set_logtalk_flag(clean,off), set_logtalk_flag(scratch_directory,'$($t.Replace('\', '/'))/application'), logtalk_load('$($l.Replace('\', '/'))'), halt."
 
 	sicstus --goal $GoalParam
-	Get-Item *.pl | 
+	Get-Item *.pl |
 		Sort-Object -Property @{Expression = "LastWriteTime"; Descending = $false} |
 		Get-Content |
 		Set-Content application.pl
