@@ -1,4 +1,4 @@
-.TH lgtenv 1 "August 19, 2024" "Logtalk 3.82.0" "Logtalk Documentation"
+.TH lgtenv 1 "March 23, 2025" "Logtalk 3.90.0" "Logtalk Documentation"
 
 .SH NAME
 lgtenv \- Logtalk script for creating packs virtual environments
@@ -26,6 +26,23 @@ Create directory if it does not exist.
 .TP
 .BI \-p
 Packs sub-directory. Relative path. Default is the current directory.
+
+.SH "EXIT STATUS"
+.TP
+.B 0
+Success.
+.TP
+.B 1
+Usage error.
+.TP
+.B 3
+Directory not found.
+.TP
+.B 5
+Directory not writable.
+.TP
+.B 7
+Dependency \fBdirenv\fR not found.
 
 .SH REQUIREMENTS
 Requires \fBdirenv\fR to be installed (see https://github.com/direnv/direnv).

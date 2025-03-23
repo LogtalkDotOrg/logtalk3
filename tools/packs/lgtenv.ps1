@@ -1,24 +1,24 @@
 #############################################################################
-## 
+##
 ##   Packs virtual environment script
-##   Last updated on March 21, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##   Last updated on March 23, 2025
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 
@@ -37,12 +37,12 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.6"
+	Write-Output "$myName 0.7"
 }
 
 Function Write-Usage-Help() {
 	$myFullName = $MyInvocation.ScriptName
-	$myName = Split-Path -Path $myFullName -leaf -Resolve 
+	$myName = Split-Path -Path $myFullName -leaf -Resolve
 
 	Write-Output ""
 	Write-Output "This script creates a packs virtual environment in the current directory or in a"
@@ -91,7 +91,7 @@ if ($d -eq "") {
 		$directory = (New-Item -Path $d -ItemType Directory -Force).FullName
 	} else {
 		Write-Output "Error: directory $d does not exist."
-		Exit 1
+		Exit 3
 	}
 } else {
 	$directory = (Resolve-Path $d).Path
@@ -110,7 +110,7 @@ if ($p -eq "") {
 
 if (!(Get-Command "Set-PsEnv" -ErrorAction SilentlyContinue)) {
 	Write-Output "Error: Set-PsEnv is not installed."
-	Exit 1
+	Exit 7
 }
 
 $envFile = Join-Path -Path $directory -ChildPath ".env"
@@ -120,5 +120,5 @@ try {
 	Exit 0
 } catch {
 	Write-Output "Error: Failed to write to .env file: $_"
-	Exit 1
+	Exit 5
 }

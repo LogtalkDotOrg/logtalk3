@@ -68,6 +68,9 @@ scripts to a shared setup script.
 * CHANGED: Moved all common setup code from the `lgtdoc` tool PowerShell
 integration scripts to a module.
 
+* CHANGED: The `packs` tool `lgtenv.*` scripts to exit with a specific code
+for each error.
+
 * ADDED: Predicates `write_max_depth/1` and `set_write_max_depth/1` to the
 `debugger` tool.
 

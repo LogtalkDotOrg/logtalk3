@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Packs virtual environment script
-##   Last updated on July 30, 2024
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 0.4"
+	echo "$(basename "$0") 0.5"
 	exit 0
 }
 
@@ -64,7 +64,7 @@ while getopts "vd:cp:h" option; do
 		d) d_arg="$OPTARG";;
 		c) create='true';;
 		p) p_arg="$OPTARG";;
-		h) usage_help; exit;;
+		h) usage_help; exit 0;;
 		*) usage_help; exit 1;;
 	esac
 done
@@ -77,11 +77,11 @@ elif [ ! -d "$d_arg" ] ; then
 		mkdir "$directory"
 	else
 		echo "Error: directory $d_arg does not exist."
-		exit 1
+		exit 3
 	fi
 elif [ ! -w "$d_arg" ] ; then
 	echo "Error: directory $d_arg is not writable."
-	exit 1
+	exit 5
 else
 	directory="$d_arg"
 fi
@@ -93,14 +93,14 @@ elif [ ! -d "$directory/$p_arg" ] ; then
 	mkdir -p "$directory/$p_arg"
 elif [ ! -w "$directory/$p_arg" ] ; then
 	echo "Error: directory $directory/$p_arg is not writable."
-	exit 1
+	exit 5
 else
 	packs="$directory/$p_arg"
 fi
 
 if ! [ -x "$(command -v direnv)" ]; then
 	echo "Error: direnv is not installed."
-	exit 1
+	exit 7
 fi
 
 echo export LOGTALKPACKS="$packs" >> "$directory"/.envrc
