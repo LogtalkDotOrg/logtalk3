@@ -85,7 +85,8 @@ Function Confirm-Parameters() {
 $minimalAllureVersion="2.26.0"
 
 if ($null -eq (Get-Command "allure" -ErrorAction SilentlyContinue))  {
-	Write-Error "Error: allure is not installed!"
+	Write-Error "Error: Cannot find the allure command-line tool!"
+	Write-Error "See https://allurereport.org/docs/ for installation instructions."
 	Exit 1
 } else {
 	$allureVersion = allure --version

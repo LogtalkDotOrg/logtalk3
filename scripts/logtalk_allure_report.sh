@@ -39,7 +39,8 @@ single_file="false"
 environment_pairs=""
 
 if ! [ -x "$(command -v allure)" ] ; then
-	echo "Error: allure is not installed!" >&2
+	echo "Error: Cannot find the allure command-line tool!" >&2
+	echo "See https://allurereport.org/docs/ for installation instructions." >&2
 	exit 1
 elif ! [ "$(printf '%s\n' "$minimal_version" "$(allure --version)" | sort -V | head -n1)" = "$minimal_version" ] ; then
 	echo "Warning: allure $minimal_version or later version is recommended!"
