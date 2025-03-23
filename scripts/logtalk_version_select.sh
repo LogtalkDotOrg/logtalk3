@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk version select script
-##   Last updated on May 18, 2018
+##   Last updated on March 23, 2023
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.10"
+	echo "$(basename "$0") 0.11"
 	exit 0
 }
 
@@ -136,8 +136,8 @@ while getopts "vlsh" option; do
 		v) print_version;;
 		l) list_versions;;
 		s) show_selected;;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

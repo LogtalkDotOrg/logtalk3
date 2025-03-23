@@ -51,7 +51,7 @@ while getopts "vh" option
 do
 	case $option in
 		v) print_version;;
-		h) usage_help;;
+		*) usage_help; exit 0;;
 		*) usage_help; exit 1;;
 	esac
 done

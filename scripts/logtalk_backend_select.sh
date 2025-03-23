@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk backend Prolog compiler select script
-##   Last updated on October 2, 2023
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.13"
+	echo "  0.14"
 	exit 0
 }
 
@@ -187,8 +187,8 @@ while getopts "vlsrh" option; do
 		l) list_backends;;
 		s) show_selected;;
 		r) remove_link;;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

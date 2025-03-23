@@ -6,7 +6,7 @@
 ##   compiler and runtime and optionally an application.pl file with
 ##   a Logtalk application
 ##
-##   Last updated on January 30, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.6"
+	echo "$(basename "$0") 0.7"
 	exit 0
 }
 
@@ -138,8 +138,8 @@ do
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		v) print_version;;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

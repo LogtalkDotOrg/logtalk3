@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   XML documenting files to PDF conversion script
-##   Last updated on March 21, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.3"
+	echo "$(basename "$0") 2.4"
 	exit 0
 }
 
@@ -69,8 +69,8 @@ while getopts "vf:d:p:h" option; do
 		f) f_arg="$OPTARG";;
 		d) d_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

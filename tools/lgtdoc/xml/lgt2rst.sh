@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   XML documenting files to reStructuredText files conversion script
-##   Last updated on March 21, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 5.1"
+	echo "$(basename "$0") 5.2"
 	exit 0
 }
 
@@ -131,8 +131,8 @@ while getopts "vd:i:t:p:l:smh" option; do
 		l) l_arg="$OPTARG";;
 		s) sphinx=true;;
 		m) make_html=true;;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

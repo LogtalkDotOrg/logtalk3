@@ -128,8 +128,8 @@ while getopts "c:l:vh" option; do
 		c) c_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		v) print_version;;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

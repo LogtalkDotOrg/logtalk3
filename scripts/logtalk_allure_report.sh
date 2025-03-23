@@ -77,8 +77,8 @@ while getopts "vd:i:o:t:psh" option; do
 		t) t_arg="$OPTARG";;
 		p) p_arg="true";;
 		s) s_arg="true";;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

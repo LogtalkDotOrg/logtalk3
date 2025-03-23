@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on March 20, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 20.0"
+	echo "$(basename "$0") 20.1"
 	exit 0
 }
 
@@ -358,7 +358,7 @@ while getopts "vp:o:m:f:d:t:n:s:b:u:c:l:e:g:r:i:wh" option; do
 		g) g_arg="$OPTARG";;
 		r) r_arg="$OPTARG";;
 		w) wipe='true';;
-		h) usage_help; exit;;
+		h) usage_help; exit 0;;
 		*) usage_help; exit 1;;
 	esac
 done

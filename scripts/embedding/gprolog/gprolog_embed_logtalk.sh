@@ -5,7 +5,7 @@
 ##   This script creates a new GNU Prolog top-level interpreter
 ##   that embeds Logtalk and optionally a Logtalk application
 ##
-##   Last updated on January 30, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -27,7 +27,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 0.18"
+	echo "$(basename "$0") 0.19"
 	exit 0
 }
 
@@ -140,8 +140,8 @@ while getopts "cd:t:n:p:l:s:vh" option; do
 		s) s_arg="$OPTARG";;
 		l) l_arg="$OPTARG";;
 		v) print_version;;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

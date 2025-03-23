@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   XML documenting files to (X)HTML conversion script
-##   Last updated on March 21, 2025
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -25,7 +25,7 @@
 
 
 print_version() {
-	echo "$(basename "$0") 2.4"
+	echo "$(basename "$0") 2.5"
 	exit 0
 }
 
@@ -133,8 +133,8 @@ while getopts "vf:d:i:t:p:h" option; do
 		i) i_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		p) p_arg="$OPTARG";;
-		h) usage_help; exit;;
-		*) usage_help; exit;;
+		h) usage_help; exit 0;;
+		*) usage_help; exit 1;;
 	esac
 done
 

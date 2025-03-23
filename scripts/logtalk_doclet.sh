@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on October 2, 2023
+##   Last updated on March 23, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -26,7 +26,7 @@
 export LC_ALL=C
 
 print_version() {
-	echo "$(basename "$0") 2.6"
+	echo "$(basename "$0") 2.7"
 	exit 0
 }
 
@@ -131,7 +131,7 @@ while getopts "vp:m:f:d:t:s:h" option; do
 		d) d_arg="$OPTARG";;
 		t) t_arg="$OPTARG";;
 		s) s_arg="$OPTARG";;
-		h) usage_help; exit;;
+		h) usage_help; exit 0;;
 		*) usage_help; exit 1;;
 	esac
 done

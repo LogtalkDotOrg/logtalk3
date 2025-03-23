@@ -92,6 +92,8 @@ in a detached HEAD state.
 * FIXED: The `logtalk_doclet.ps1` PowerShell script handling of the prefix and
 timeout options.
 
+* FIXED: The Bash shell scripts to exit with code 1 in case of wrong usage.
+
 Examples
 --------
 
