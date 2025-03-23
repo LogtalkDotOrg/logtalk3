@@ -109,7 +109,8 @@ if ($p -eq "") {
 }
 
 if (!(Get-Command "Set-PsEnv" -ErrorAction SilentlyContinue)) {
-	Write-Output "Error: Set-PsEnv is not installed."
+	Write-Output "Error! Cannot find the Set-PsEnv PowerShell module!"
+	Write-Output "See  https://github.com/rajivharris/Set-PsEnv for installation instructions."
 	Exit 7
 }
 

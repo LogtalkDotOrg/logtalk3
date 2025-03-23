@@ -76,11 +76,11 @@ elif [ ! -d "$d_arg" ] ; then
 		directory="$d_arg"
 		mkdir "$directory"
 	else
-		echo "Error: directory $d_arg does not exist."
+		echo "Error: directory $d_arg does not exist." >&2
 		exit 3
 	fi
 elif [ ! -w "$d_arg" ] ; then
-	echo "Error: directory $d_arg is not writable."
+	echo "Error: directory $d_arg is not writable." >&2
 	exit 5
 else
 	directory="$d_arg"
@@ -92,14 +92,15 @@ elif [ ! -d "$directory/$p_arg" ] ; then
 	packs="$directory/$p_arg"
 	mkdir -p "$directory/$p_arg"
 elif [ ! -w "$directory/$p_arg" ] ; then
-	echo "Error: directory $directory/$p_arg is not writable."
+	echo "Error: directory $directory/$p_arg is not writable." >&2
 	exit 5
 else
 	packs="$directory/$p_arg"
 fi
 
 if ! [ -x "$(command -v direnv)" ]; then
-	echo "Error: direnv is not installed."
+	echo "Error! Cannot find the direnv command-line tool!" >&2
+	echo "See https://direnv.net for installation instructions." >&2
 	exit 7
 fi
 
