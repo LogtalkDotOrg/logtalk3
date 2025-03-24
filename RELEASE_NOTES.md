@@ -113,6 +113,9 @@ IDEs, text editors, and syntax highlighters support
 Installers and installation scripts
 -----------------------------------
 
+* CHANGED: The `logtalk_user_setup.*` scripts to create a symbolic link to the
+APIs documentation` sub-directory in the `LOGTALKHOME` directory.
+
 * UPDATED: The Windows installation script to also create a symbolic link to
 the `scripts` directory to simplify access to the embedding scripts.
 

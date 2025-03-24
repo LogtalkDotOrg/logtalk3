@@ -122,7 +122,6 @@ fi
 
 echo "Copying Logtalk files and directories..."
 mkdir -p "$LOGTALKUSER"/contributions
-mkdir -p "$LOGTALKUSER"/docs
 mkdir -p "$LOGTALKUSER"/examples
 mkdir -p "$LOGTALKUSER"/library
 mkdir -p "$LOGTALKUSER"/ports
@@ -130,7 +129,6 @@ mkdir -p "$LOGTALKUSER"/scratch
 mkdir -p "$LOGTALKUSER"/tests
 mkdir -p "$LOGTALKUSER"/tools
 cp -RL "$LOGTALKHOME"/contributions "$LOGTALKUSER"/
-cp -RL "$LOGTALKHOME"/docs "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/examples "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/library "$LOGTALKUSER"/
 cp -RL "$LOGTALKHOME"/ports "$LOGTALKUSER"/
@@ -158,6 +156,7 @@ ln -sf "$LOGTALKHOME"/RELEASE_NOTES.md "$LOGTALKUSER"/RELEASE_NOTES.md
 ln -sf "$LOGTALKHOME"/UPGRADING.md "$LOGTALKUSER"/UPGRADING.md
 ln -sf "$LOGTALKHOME"/adapters "$LOGTALKUSER"/adapters
 ln -sf "$LOGTALKHOME"/coding "$LOGTALKUSER"/coding
+ln -sf "$LOGTALKHOME"/docs "$LOGTALKUSER"/docs
 ln -sf "$LOGTALKHOME"/integration "$LOGTALKUSER"/integration
 ln -sf "$LOGTALKHOME"/manuals "$LOGTALKUSER"/manuals
 ln -sf "$LOGTALKHOME"/paths "$LOGTALKUSER"/paths

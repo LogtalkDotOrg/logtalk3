@@ -133,7 +133,6 @@ function Create-Logtalkuser-Directory {
 
 	Write-Output "Copying Logtalk files and directories..."
 	Copy-Item -Path "$env:LOGTALKHOME\contributions" -Destination "$env:LOGTALKUSER\contributions" -Recurse
-	Copy-Item -Path "$env:LOGTALKHOME\docs" -Destination "$env:LOGTALKUSER\docs" -Recurse
 	Copy-Item -Path "$env:LOGTALKHOME\examples" -Destination "$env:LOGTALKUSER\examples" -Recurse
 	Copy-Item -Path "$env:LOGTALKHOME\library" -Destination "$env:LOGTALKUSER\library" -Recurse
 	Copy-Item -Path "$env:LOGTALKHOME\ports" -Destination "$env:LOGTALKUSER\ports" -Recurse
@@ -166,6 +165,7 @@ function Create-Logtalkuser-Directory {
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\UPGRADING.md" -Target "$env:LOGTALKHOME\UPGRADING.md" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\adapters" -Target "$env:LOGTALKHOME\adapters" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\coding" -Target "$env:LOGTALKHOME\coding" > $null
+	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\docs" -Target "$env:LOGTALKHOME\docs" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\integration" -Target "$env:LOGTALKHOME\integration" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\manuals" -Target "$env:LOGTALKHOME\manuals" > $null
 	New-Item -ItemType SymbolicLink -Path "$env:LOGTALKUSER\paths" -Target "$env:LOGTALKHOME\paths" > $null
