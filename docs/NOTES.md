@@ -46,3 +46,16 @@ distribution. The other versions can be downloaded from the Logtalk website
 (for the latest stable release) at:
 
 https://logtalk.org/documentation.html
+
+The Markdown format is a LLM friendly single file version. Users can copy
+this single file to their project directory when using AI coding tools to
+help avoid hallucinations and generate quality code. Depending on the LLM
+pr AI coding tool, you may need to split in several files for indexing due
+to file size limitations. For example, using the POSIX `split` utility
+command:
+
+	$ split -p '### (debugger|lgtunit|packs)' LogtalkAPIs-3.90.0.md LogtalkAPIs_
+	$ for file in "LogtalkAPIs_"*; do mv "$file" "${file}.md"; done
+
+Experiment with the section headers until all generated files are below
+the maximum size.
