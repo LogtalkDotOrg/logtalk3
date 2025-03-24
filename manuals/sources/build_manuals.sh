@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
 #############################################################################
-## 
+##
 ##   Documentation build script
-##   Last updated on March 14, 2025
-## 
-##   This file is part of Logtalk <https://logtalk.org/>  
+##   Last updated on March 24, 2025
+##
+##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
 ##   SPDX-License-Identifier: Apache-2.0
-##   
+##
 ##   Licensed under the Apache License, Version 2.0 (the "License");
 ##   you may not use this file except in compliance with the License.
 ##   You may obtain a copy of the License at
-##   
+##
 ##       http://www.apache.org/licenses/LICENSE-2.0
-##   
+##
 ##   Unless required by applicable law or agreed to in writing, software
 ##   distributed under the License is distributed on an "AS IS" BASIS,
 ##   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ##   See the License for the specific language governing permissions and
 ##   limitations under the License.
-## 
+##
 #############################################################################
 
 
@@ -181,10 +181,12 @@ case $(sed --help 2>&1) in
 esac
 
 version_base=$(cat ../../VERSION.txt | cut -f1 -d"-")
-pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/TheLogtalkHandbook-$version_base.md
+pandoc _build/singlehtml/index.html --wrap=none -t gfm-raw_html -o _build/singlehtml/TheLogtalkHandbook-$version_base.md
 
 # Remove heading link references from the Markdown file
-sed_i -E 's|\[.\]\(#[-a-z0-9]+ "Link to this heading"\)||g' _build/singlehtml/TheLogtalkHandbook-$version_base.md
+sed_i -E 's/\[.\]\(#[-a-z0-9]+ "Link to this heading"\)//g' _build/singlehtml/TheLogtalkHandbook-$version_base.md
+# Remove other links leaving only the text
+sed_i -E 's/\[([^]]+)\]\([^)]+\)/\1/g' _build/singlehtml/TheLogtalkHandbook-$version_base.md
 # Fix relative links to the Logtalk API documentation
 sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/contributions/index.html
 sed_i -e 's|../docs/index.html|../../docs/index.html|g' _build/html/devtools/index.html

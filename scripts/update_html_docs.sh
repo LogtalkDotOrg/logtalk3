@@ -5,7 +5,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ##
-##   Last updated on March 23, 2025
+##   Last updated on March 24, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -68,7 +68,7 @@ set_goal() {
 }
 
 print_version() {
-	echo "$(basename "$0") 0.27"
+	echo "$(basename "$0") 0.28"
 	exit 0
 }
 
@@ -159,7 +159,7 @@ make singlehtml
 #make linkcheck
 
 version_base=$(cat ../../VERSION.txt | cut -f1 -d"-")
-pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/LogtalkAPIs-$version_base.md
+pandoc _build/singlehtml/index.html --wrap=none -t gfm-raw_html -o _build/singlehtml/LogtalkAPIs-$version_base.md
 
 # Handle sed differences between GNU and BSD
 case $(sed --help 2>&1) in
@@ -168,7 +168,9 @@ case $(sed --help 2>&1) in
 esac
 
 # Remove heading link references from the Markdown file
-sed_i -E 's|\[.\]\(#[-a-z0-9]+ "Link to this heading"\)||g' _build/singlehtml/LogtalkAPIs-$version_base.md
+sed_i -E 's/\[.\]\(#[-a-z0-9]+ "Link to this heading"\)//g' _build/singlehtml/LogtalkAPIs-$version_base.md
+# Remove other links leaving only the text
+sed_i -E 's/\[([^]]+)\]\([^)]+\)/\1/g' _build/singlehtml/LogtalkAPIs-$version_base.md
 
 cp -R _build/html/* ../
 cp _build/texinfo/LogtalkAPIs-*.info ../

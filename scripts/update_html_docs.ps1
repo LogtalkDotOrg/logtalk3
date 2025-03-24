@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ##
-##   Last updated on March 23, 2025
+##   Last updated on March 24, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.26"
+	Write-Output "$myName 0.28"
 }
 
 function Write-Usage-Help() {
@@ -153,9 +153,11 @@ Move-Item -Path _conf.py -Destination conf.py
 
 $version = Get-Content $env:LOGTALKUSER/VERSION.txt
 $version_base = $version.Split("-")[0]
-pandoc _build/singlehtml/index.html -t gfm-raw_html -o _build/singlehtml/LogtalkAPIs-$version_base.md
+pandoc _build/singlehtml/index.html --wrap=none -t gfm-raw_html -o _build/singlehtml/LogtalkAPIs-$version_base.md
 # Remove heading link references from the Markdown file
 (Get-Content _build/singlehtml/LogtalkAPIs-$version_base.md) -replace '\[.\]\(#[-a-z0-9]+ "Link to this heading"\)', '' | Set-Content _build/singlehtml/LogtalkAPIs-$version_base.md
+# Remove other links leaving only the text
+(Get-Content _build/singlehtml/LogtalkAPIs-$version_base.md) -replace '\[([^]]+)\]\([^)]+\)', '$1' | Set-Content _build/singlehtml/LogtalkAPIs-$version_base.md
 
 Copy-Item -Path ./_build/html/* -Destination .. -Recurse -Force
 Copy-Item -Path ./_build/texinfo/LogtalkAPIs-*.info -Destination ..
