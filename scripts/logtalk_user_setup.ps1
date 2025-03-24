@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on March 23, 2025
+##   Last updated on March 24, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -147,6 +147,7 @@ function Create-Logtalkuser-Directory {
 	Copy-Item -Path "$env:LOGTALKHOME\VERSION.txt" -Destination "$env:LOGTALKUSER\VERSION.txt"
 	Remove-Item -Path "$env:LOGTALKUSER\tools\diagrams\lgt2*.*"
 	Remove-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\lgt2*.*"
+	Remove-Item -Path "$env:LOGTALKUSER\tools\packs\lgtenv.*"
 	Remove-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.dtd"
 	Remove-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.rng"
 	Remove-Item -Path "$env:LOGTALKUSER\tools\lgtdoc\xml\logtalk_entity.xsd"

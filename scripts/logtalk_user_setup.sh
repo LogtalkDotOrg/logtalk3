@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on November 27, 2023
+##   Last updated on March 24, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -143,7 +143,9 @@ cp "$LOGTALKHOME"/tester-sample.lgt "$LOGTALKUSER"/tester-sample.lgt
 cp "$LOGTALKHOME"/tests-sample.lgt "$LOGTALKUSER"/tests-sample.lgt
 cp "$LOGTALKHOME"/VERSION.txt "$LOGTALKUSER"/
 chmod -R u+w "$LOGTALKUSER"
+rm -f "$LOGTALKUSER"/tools/diagrams/lgt2*
 rm -f "$LOGTALKUSER"/tools/lgtdoc/xml/lgt2*
+rm -f "$LOGTALKUSER"/tools/packs/lgtenv*
 ln -sf "$LOGTALKHOME"/ACKNOWLEDGMENTS.md "$LOGTALKUSER"/ACKNOWLEDGMENTS.md
 ln -sf "$LOGTALKHOME"/BIBLIOGRAPHY.bib "$LOGTALKUSER"/BIBLIOGRAPHY.bib
 ln -sf "$LOGTALKHOME"/CONTRIBUTING.md "$LOGTALKUSER"/CONTRIBUTING.md

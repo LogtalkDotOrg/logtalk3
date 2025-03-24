@@ -126,6 +126,9 @@ to ensure that updated dependencies are pulled.
 where the values of the `LOGTALKHOME` and `LOGTALKUSER` environment variables
 are the same plus a typo when copying the `scratch` directory.
 
+* FIXED: The `logtalk_user_setup.*` scripts creation of symbolic links to all
+tool scripts in the `LOGTALKHOME` directory.
+
 * FIXED: Typos in the `update_html_versions.ps1` and `update_svg_diagrams.ps1`
 PowerShell scripts handling of the SICStus Prolog backend.
 
