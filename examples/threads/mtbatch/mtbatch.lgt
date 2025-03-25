@@ -25,7 +25,7 @@
 		version is 1:7:0,
 		author is 'Paulo Moura',
 		date is 2024-01-20,
-		comment is 'Multi-threading benchmarks. Supports SWI-Prolog, XSB, and YAP.'
+		comment is 'Multi-threading benchmarks.'
 	]).
 
 	:- threaded.

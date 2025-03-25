@@ -36,7 +36,7 @@ ________________________________________________________________________
 # threads - hanoi
 
 This folder provides a multi-threading solution for solving the "Towers
-of Hanoi" problem. This solution is only useful for benchmarking as the 
+of Hanoi" problem. This solution is only useful for benchmarking as the
 problem is solved without actually printing the solution steps.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):

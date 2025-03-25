@@ -35,9 +35,9 @@ ________________________________________________________________________
 
 # threads - functions
 
-This folder contains a simple multi-threading example illustrating how 
-to create threads for competing goals, which one performing the same 
-task using different methods. The first goal to complete leads to the 
+This folder contains a simple multi-threading example illustrating how
+to create threads for competing goals, which one performing the same
+task using different methods. The first goal to complete leads to the
 immediate termination of the threads running the remaining goals.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):

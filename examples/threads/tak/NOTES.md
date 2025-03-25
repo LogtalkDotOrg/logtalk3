@@ -35,8 +35,8 @@ ________________________________________________________________________
 
 # threads - tak
 
-This folder contains single-threaded and multi-threaded implementations 
-of the Takeuchi function (recursive arithmetic). The multi-threaded version 
+This folder contains single-threaded and multi-threaded implementations
+of the Takeuchi function (recursive arithmetic). The multi-threaded version
 uses three threads per recursive call.
 
 NOTE: some example queries below use a proprietary predicate `time/1` in

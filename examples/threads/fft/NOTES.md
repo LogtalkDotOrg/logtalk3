@@ -35,7 +35,7 @@ ________________________________________________________________________
 
 # threads - fft
 
-This folder provides a multi-threading solution for calculating the Fast 
+This folder provides a multi-threading solution for calculating the Fast
 Fourier Transform. This solution is mostly intended for benchmarking.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
@@ -55,7 +55,7 @@ order to get accurate goal times. This predicate is found on several Prolog
 systems. For other Prolog compilers, replace the `time/1` call by any
 appropriate timing calls (e.g., `cputime/0`).
 
-Start by testing the results for the various multi-threading versions to check 
+Start by testing the results for the various multi-threading versions to check
 the results using a random number generator to create an initial list:
 
 ```logtalk

@@ -35,24 +35,28 @@ ________________________________________________________________________
 
 # threads - mtbatch
 
-This folder provides an object for running multi-threading benchmarks. The
-supported backend Prolog compilers are SWI-Prolog, and YAP.
+This folder provides an object for running multi-threading benchmarks.
 
-The following tests are available:
+The following tests *independent and-parallelism* are available, based on
+individual multi-threading examples:
 
-	primes			(independent and-parallelism)
-	msort			(independent and-parallelism)
-	qsort			(independent and-parallelism)
-	fib				(independent and-parallelism)
-	hanoi			(independent and-parallelism)
-	tak				(independent and-parallelism)
-	fft				(independent and-parallelism)
-	integration		(independent and-parallelism)
-	integration2d	(independent and-parallelism)
-	search			(competitive or-parallelism)
+- `primes`
+- `msort`
+- `qsort`
+- `fib`
+- `hanoi`
+- `tak`
+- `fft`
+- `integration`
+- `integration2d`
 
-For the same backend Prolog compiler, the benchmark results can show 
-significant variation depending on the operating-system and if you're 
+There's also a test of *competitive or-parallelism* based on the `searching`
+example:
+
+- `search`
+
+For the same backend Prolog compiler, the benchmark results can show
+significant variation depending on the operating-system and if you're
 using a 32 bits or a 64 bits version.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
@@ -67,7 +71,7 @@ Start by loading the example:
 logtalk_load(mtbatch(loader)).
 ```
 
-Run all tests:
+Run all tests the default number of times (10):
 
 ```logtalk
 mtbatch::run.

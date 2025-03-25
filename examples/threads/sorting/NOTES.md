@@ -35,15 +35,15 @@ ________________________________________________________________________
 
 # threads - sorting
 
-This folder contains a multi-threading implementation of the merge sort 
-algorithm.  Depending on the size of the lists that are ordered, using 
-only one thread can be faster. The number of threads to be use in sorting 
+This folder contains a multi-threading implementation of the merge sort
+algorithm.  Depending on the size of the lists that are ordered, using
+only one thread can be faster. The number of threads to be use in sorting
 is set using the `qsort/1` and `msort/1` object parameters. You may need
 to adjust the size of the memory areas used by your Prolog compiler,
 depending on the size of the lists you want to sort.
 
 This example uses a simple implementation of the merge sort algorithm,
-intended only to illustrate Logtalk multi-threading features. For any 
+intended only to illustrate Logtalk multi-threading features. For any
 other purpose, you may find the following paper a worthwhile reading:
 
 @incollection{ apt93modular,
@@ -58,14 +58,14 @@ other purpose, you may find the following paper a worthwhile reading:
 	url = "citeseer.ist.psu.edu/apt93modular.html"
 }
 
-You probably want to play with the list sizes in order to find out when the 
+You probably want to play with the list sizes in order to find out when the
 lists to be sorted are big enough to make the use of multi-threading worth
-performance-wise (i.e., to compensate the overhead of thread creation and 
+performance-wise (i.e., to compensate the overhead of thread creation and
 management).
 
-The implementation of the Quicksort algorithm makes the possible performance 
-gains due to the use of multi-threading highly dependent on the pivots used 
-for vector partition. Increasing the number of threads alleviates the problem 
+The implementation of the Quicksort algorithm makes the possible performance
+gains due to the use of multi-threading highly dependent on the pivots used
+for vector partition. Increasing the number of threads alleviates the problem
 provided an adequate number of processing cores.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):

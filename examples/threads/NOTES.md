@@ -20,8 +20,8 @@ ________________________________________________________________________
 
 This folder contains several examples of multi-threading programming.
 Multi-threading programming is only supported on some Prolog compilers.
-Currently this includes SWI-Prolog, Trealla Prolog, XVM, and YAP. 
-Moreover, multi-threading may be turned off by default. In order to run 
+Currently this includes SWI-Prolog, Trealla Prolog, XVM, and YAP.
+Moreover, multi-threading may be turned off by default. In order to run
 the examples, you may need to first turn on multi-threading support on
 the Prolog adapter files.
 

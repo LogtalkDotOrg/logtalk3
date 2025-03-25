@@ -35,18 +35,18 @@ ________________________________________________________________________
 
 # threads - primes
 
-This folder contains a simple example of calculating prime numbers in a 
-given interval using multiple threads. Try to run the example in single 
-and multi-processor (or multi-core) computers and compare the results. 
-Most Prolog compilers allows you to measure the time taken for proving 
+This folder contains a simple example of calculating prime numbers in a
+given interval using multiple threads. Try to run the example in single
+and multi-processor (or multi-core) computers and compare the results.
+Most Prolog compilers allows you to measure the time taken for proving
 a goal using proprietary predicates.
 
-Note that this example is only meant to illustrate how to use Logtalk 
-multi-threading predicates, not to taken as the efficient solution for 
+Note that this example is only meant to illustrate how to use Logtalk
+multi-threading predicates, not to taken as the efficient solution for
 finding primes numbers on a given interval (with or without threads).
 
-You probably want to play with the list size in order to find out when the 
-list is big enough to make the use of multi-threading worth performance-wise 
+You probably want to play with the list size in order to find out when the
+list is big enough to make the use of multi-threading worth performance-wise
 (i.e., to compensate the overhead of thread creation and management).
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
@@ -78,7 +78,7 @@ time(primes(1)::primes(1, 500000, Primes)).
 Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...].
 -->
 
-Calculate the prime numbers in a given interval by splitting the interval 
+Calculate the prime numbers in a given interval by splitting the interval
 in two sub-intervals and using a thread per sub-interval:
 
 ```logtalk
@@ -91,7 +91,7 @@ time(primes(2)::primes(1, 500000, Primes)).
 Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...].
 -->
 
-Calculate the prime numbers in a given interval by splitting the interval 
+Calculate the prime numbers in a given interval by splitting the interval
 in four sub-intervals and using a thread per sub-interval:
 
 ```logtalk
@@ -104,7 +104,7 @@ time(primes(4)::primes(1, 500000, Primes)).
 Primes = [2, 3, 5, 7, 11, 13, 17, 19, 23|...].
 -->
 
-Calculate the prime numbers in a given interval by splitting the interval 
+Calculate the prime numbers in a given interval by splitting the interval
 in eight sub-intervals and using a thread per sub-interval:
 
 ```logtalk

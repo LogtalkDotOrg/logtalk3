@@ -35,12 +35,12 @@ ________________________________________________________________________
 
 # threads - integration
 
-This folder contains a multi-threading implementation of Recursive Gaussian 
+This folder contains a multi-threading implementation of Recursive Gaussian
 Quadrature Methods for Numerical Integration for functions of one-variable.
 
-Adaptive quadrature methods are efficient techniques for numerical 
-integration as they compensate for functional variation along the 
-integral domain, effectively in regions with large function variations 
+Adaptive quadrature methods are efficient techniques for numerical
+integration as they compensate for functional variation along the
+integral domain, effectively in regions with large function variations
 a larger sampling of point are used.
 
 There are two parametric objects, `quadrec/1` and `quadsplit/1`, both
@@ -62,7 +62,7 @@ predicate is used.
 
 For `quadsplit/1`, the method used is again division (split) of the original
 area amongst the number of threads specified. This method has no restriction
-on the number of threads and uses a span/collect idea for proving thread goals 
+on the number of threads and uses a span/collect idea for proving thread goals
 and the predicates `threaded_once/1` and `threaded_exit/1`.
 
 Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
