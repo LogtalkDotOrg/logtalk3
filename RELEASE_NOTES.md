@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.90.0 - March ??, 2025
+3.90.0 - March 25, 2025
 =======================
 
 Prolog adapter and integration files

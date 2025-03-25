@@ -126,7 +126,7 @@ not listed, see the dependency websites for installation instructions.
 	$ pip install --upgrade sphinx_rtd_theme
 
 In alternative, if your want to use the same versions used to build release
-documentation: 
+documentation:
 
 	$ cd manuals/sources
 	$ python3 -m pip install -r requirements.txt
