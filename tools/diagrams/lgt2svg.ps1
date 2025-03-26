@@ -194,7 +194,7 @@ if ($d2_count -gt 0) {
 	Write-Output "Converting .d2 files to .svg files ..."
 	Get-ChildItem -Path . -Filter *.d2 |
 	Foreach-Object {
-		Write-Output "  converting $($_.Name)" -NoNewline
+		Write-Host -NoNewline "  converting $($_.Name)"
 		if ($a -ne "") {
 			& d2 --layout $l (-Split $a) $_.Name "$($_.BaseName).svg"
 		} else {
@@ -213,7 +213,7 @@ if ($dot_count -gt 0) {
 	Write-Output "Converting .dot files to .svg files ..."
 	Get-ChildItem -Path . -Filter *.dot |
 	Foreach-Object {
-		Write-Output "  converting $($_.Name)" -NoNewline
+		Write-Host -NoNewline "  converting $($_.Name)"
 		$converted = $false
 		$counter = 24
 
@@ -233,7 +233,7 @@ if ($dot_count -gt 0) {
 			}
 			catch {
 				# Continue on error
-				Write-Output "." -NoNewline
+				Write-Host -NoNewline "."
 			}
 
 			$counter--

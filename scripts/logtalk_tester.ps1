@@ -122,28 +122,28 @@ param(
 		Get-Content -Path "$results/$name.totals" | Select-String -AllMatches -Pattern '^object' -CaseSensitive -Raw |
 		ForEach-Object {$_.Matches} {
 			$line = $_.split("`t")
-			Write-Output $mode_prefix -NoNewline
-			Write-Output $line[2] -NoNewline
-			Write-Output ' tests: ' -NoNewline
-			Write-Output $line[3] -NoNewline
-			Write-Output ' skipped, ' -NoNewline
-			Write-Output $line[4] -NoNewline
-			Write-Output ' passed, ' -NoNewline
-			Write-Output $line[5] -NoNewline
-			Write-Output ' failed (' -NoNewline
-			Write-Output $line[6] -NoNewline
-			Write-Output ' flaky)' -NoNewline
+			Write-Host -NoNewline $mode_prefix
+			Write-Host -NoNewline $line[2]
+			Write-Host -NoNewline ' tests: '
+			Write-Host -NoNewline $line[3]
+			Write-Host -NoNewline ' skipped, '
+			Write-Host -NoNewline $line[4]
+			Write-Host -NoNewline ' passed, '
+			Write-Host -NoNewline $line[5]
+			Write-Host -NoNewline ' failed ('
+			Write-Host -NoNewline $line[6]
+			Write-Output ' flaky)'
 			$end_time = Get-Date -UFormat %s
 			$duration = $end_time - $start_time
-			Write-Output '%         completed tests from object ' -NoNewline
-			Write-Output $line[1] -NoNewline
+			Write-Host -NoNewline '%         completed tests from object '
+			Write-Host -NoNewline $line[1]
 			if ($duration -eq 1) {
 				Write-Output " in $duration second"
 			} else {
 				Write-Output " in $duration seconds"
 			}
 		}
-		Write-Output '%         clause coverage ' -NoNewline
+		Write-Host -NoNewline '%         clause coverage '
 		(Get-Content -Path $results/$name.totals | Select-String -Pattern '^coverage' -CaseSensitive -Raw).split("`t")[1]
 	} elseif ($tests_exit -eq 5) {
 		if ($o -eq "verbose") {
@@ -631,16 +631,16 @@ if ($l -eq "") {
 		if ($exclude -eq "") {
 			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse |
 			Foreach-Object {
-				Write-Output "% running $testsets test sets: " -NoNewline
-				Write-Output "$counter`r" -NoNewline
+				Write-Host -NoNewline "% running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
 				Invoke-TestSet $_.FullName
 				$counter++
 			}
 		} else {
 			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Recurse | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
-				Write-Output "% running $testsets test sets: " -NoNewline
-				Write-Output "$counter`r" -NoNewline
+				Write-Host -NoNewline "% running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
 				Invoke-TestSet $_.FullName
 				$counter++
 			}
@@ -665,8 +665,8 @@ if ($l -eq "") {
 		if ($exclude -eq "") {
 			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level |
 			Foreach-Object {
-				Write-Output "% running $testsets test sets: " -NoNewline
-				Write-Output "$counter`r" -NoNewline
+				Write-Host -NoNewline "% running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
 				Invoke-TestSet $_.FullName
 				$counter++
 				Write-Output "%"
@@ -674,8 +674,8 @@ if ($l -eq "") {
 		} else {
 			Get-ChildItem -Path "$base/*" -Include "$n.lgt", "$n.logtalk" -Depth $level | where-object{$_.fullname -notmatch $exclude} |
 			Foreach-Object {
-				Write-Output "% running $testsets test sets: " -NoNewline
-				Write-Output "$counter`r" -NoNewline
+				Write-Host -NoNewline "% running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
 				Invoke-TestSet $_.FullName
 				$counter++
 				Write-Output "%"
