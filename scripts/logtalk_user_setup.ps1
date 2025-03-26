@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Logtalk user folder setup script
-##   Last updated on March 24, 2025
+##   Last updated on March 26, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -28,7 +28,7 @@
 [CmdletBinding()]
 param ()
 
-function Describe-Script {
+function Show-Script-Description {
 	Write-Output ""
 	Write-Output "This script copies all the Logtalk per-user files and directories to the"
 	Write-Output "user home directory. The location can be set by defining the LOGTALKUSER"
@@ -37,7 +37,7 @@ function Describe-Script {
 	Write-Output ""
 }
 
-Describe-Script
+Show-Script-Description
 
 function Get-Logtalkhome {
 	if ($null -eq $env:LOGTALKHOME)
@@ -99,7 +99,7 @@ if ($expandedLogtalkhome -eq $expandedLogtalkuser) {
 	Exit 0
 }
 
-function Create-Logtalkuser-Directory {
+function New-Logtalkuser-Directory {
 	if (Test-Path $env:LOGTALKUSER) {
 		$date = Get-Date -Format "yyyy-MM-dd-HHmmss"
 		Move-Item -Path $env:LOGTALKUSER -Destination "$env:LOGTALKUSER-backup-$date"
@@ -194,4 +194,4 @@ function Create-Logtalkuser-Directory {
 	Write-Output ""
 }
 
-Create-Logtalkuser-Directory
+New-Logtalkuser-Directory

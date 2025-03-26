@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   XML documenting files to XML conversion script
-##   Last updated on March 23, 2025
+##   Last updated on March 26, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 1.4"
+	Write-Output "$myName 1.5"
 }
 
 function Write-Usage-Help() {
@@ -47,12 +47,12 @@ function Write-Usage-Help() {
 
 	Write-Output "This script generates an index for all the Logtalk XML files"
 	Write-Output "documenting files in the current directory"
-	Write-Output
+	Write-Output ""
 	Write-Output "Usage:"
 	Write-Output "  $myName [-f format] [-i index] [-t title]"
 	Write-Output "  $myName -v"
 	Write-Output "  $myName -h"
-	Write-Output
+	Write-Output ""
 	Write-Output "Optional arguments:"
 	Write-Output "  -f output file format (either xhtml or html; default is $f)"
 	Write-Output "  -i name of the index file (default is $i)"

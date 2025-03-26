@@ -149,19 +149,19 @@ param(
 		if ($o -eq "verbose") {
 			Write-Output "%         broken"
 		}
-		Ensure-Format-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Broken"
+		Write-xUnit-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Broken"
 	} elseif ($tests_exit -eq 137 -or $tests_exit -eq 124) {
 		if ($o -eq "verbose") {
 			Write-Output "%         timeout"
 		}
 		Add-Content -Path $results/$name.errors -Value "LOGTALK_TIMEOUT"
-		Ensure-Format-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Timeout"
+		Write-xUnit-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Timeout"
 	} elseif ($tests_exit -ne 0) {
 		if ($o -eq "verbose") {
 			Write-Output "%         crash"
 		}
 		Add-Content -Path $results/$name.errors -Value "LOGTALK_CRASH"
-		Ensure-Format-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Crash"
+		Write-xUnit-Report $unit (Split-Path -Path $unit -Leaf -Resolve) "Crash"
 	}
 	if ($c -eq "xml") {
 		if (Test-Path $env:LOGTALKUSER) {
@@ -214,7 +214,7 @@ param(
 	return $LASTEXITCODE
 }
 
-Function Ensure-Format-Report() {
+Function Write-xUnit-Report() {
 param(
 	[Parameter(Position = 0)]
 	[String]$directory,
