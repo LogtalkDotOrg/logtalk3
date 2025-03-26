@@ -1,6 +1,6 @@
 name(logtalk).
 title('Logtalk - Object-Oriented Logic Programming Language').
-version('3.90.0').
+version('3.90.1').
 author('Paulo Moura', 'pmoura@logtalk.org').
 packager('Paulo Moura', 'pmoura@logtalk.org').
 maintainer('Paulo Moura', 'pmoura@logtalk.org').

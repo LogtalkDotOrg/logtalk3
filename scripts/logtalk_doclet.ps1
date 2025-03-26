@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation automation script
-##   Last updated on March 23, 2025
+##   Last updated on March 26, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 2.6"
+	Write-Output "$myName 2.7"
 }
 
 Function Invoke-Doclets() {
@@ -271,20 +271,20 @@ $failures = (Get-ChildItem -Path . -Filter *.results | Select-String -Pattern 'f
 Write-Output "*******************************************************************************"
 Write-Output "***** Compilation errors/warnings and failed doclets"
 Write-Output "*******************************************************************************"
-(Get-ChildItem -Path . -Filter *.results  | Select-String -Pattern 'syntax_error' -SimpleMatch -Raw) -replace '.results', '' | Tee-Object -FilePath errors.all -Append
-(Get-ChildItem -Path . -Filter *.errors   | Select-String -Pattern 'syntax_error' -SimpleMatch -Raw) -replace '.errors', ''  | Tee-Object -FilePath errors.all -Append
-(Get-ChildItem -Path . -Filter *.results  | Select-String -Pattern '!     ' -SimpleMatch -Raw) -replace '.results', '' | Tee-Object -FilePath errors.all -Append
-(Get-ChildItem -Path . -Filter *.errors   | Select-String -Pattern '!     ' -SimpleMatch -Raw) -replace '.errors', ''  | Tee-Object -FilePath errors.all -Append
-(Get-ChildItem -Path . -Filter *.results  | Select-String -Pattern '*     ' -SimpleMatch -Raw) -replace '.results', '' | Tee-Object -FilePath errors.all -Append
-(Get-ChildItem -Path . -Filter *.errors   | Select-String -Pattern '*     ' -SimpleMatch -Raw) -replace '.errors', ''  | Tee-Object -FilePath errors.all -Append
+(Get-ChildItem -Path . -Filter *.results  | Select-String -Pattern 'syntax_error' -SimpleMatch -Raw) -replace '.results', "" | Tee-Object -FilePath errors.all -Append
+(Get-ChildItem -Path . -Filter *.errors   | Select-String -Pattern 'syntax_error' -SimpleMatch -Raw) -replace '.errors', ""  | Tee-Object -FilePath errors.all -Append
+(Get-ChildItem -Path . -Filter *.results  | Select-String -Pattern '!     ' -SimpleMatch -Raw) -replace '.results', "" | Tee-Object -FilePath errors.all -Append
+(Get-ChildItem -Path . -Filter *.errors   | Select-String -Pattern '!     ' -SimpleMatch -Raw) -replace '.errors', ""  | Tee-Object -FilePath errors.all -Append
+(Get-ChildItem -Path . -Filter *.results  | Select-String -Pattern '*     ' -SimpleMatch -Raw) -replace '.results', "" | Tee-Object -FilePath errors.all -Append
+(Get-ChildItem -Path . -Filter *.errors   | Select-String -Pattern '*     ' -SimpleMatch -Raw) -replace '.errors', ""  | Tee-Object -FilePath errors.all -Append
 Write-Output "*******************************************************************************"
 Write-Output "***** Timeouts"
 Write-Output "*******************************************************************************"
-((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ''
+((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ""
 Write-Output "*******************************************************************************"
 Write-Output "***** Crashes"
 Write-Output "*******************************************************************************"
-((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ''
+((Get-ChildItem -Path . -Filter *.errors | Select-String -Pattern 'LOGTALK_CRASH' -SimpleMatch -Raw) -replace '\\', '__') -replace $prefix, ""
 Write-Output "*******************************************************************************"
 Write-Output "***** Failures"
 Write-Output "*******************************************************************************"

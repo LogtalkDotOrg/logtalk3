@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   DOT and d2 diagram files to SVG files conversion script
-##   Last updated on March 23, 2025
+##   Last updated on March 26, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   Copyright 2022-2025 Paulo Moura <pmoura@logtalk.org>
@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.13"
+	Write-Output "$myName 0.14"
 }
 
 function Get-Logtalkhome {
@@ -194,7 +194,7 @@ if ($d2_count -gt 0) {
 	Write-Output "Converting .d2 files to .svg files ..."
 	Get-ChildItem -Path . -Filter *.d2 |
 	Foreach-Object {
-		Write-Host -NoNewline "  converting $($_.Name)"
+		Write-Output "  converting $($_.Name)" -NoNewline
 		if ($a -ne "") {
 			& d2 --layout $l (-Split $a) $_.Name "$($_.BaseName).svg"
 		} else {
@@ -213,7 +213,7 @@ if ($dot_count -gt 0) {
 	Write-Output "Converting .dot files to .svg files ..."
 	Get-ChildItem -Path . -Filter *.dot |
 	Foreach-Object {
-		Write-Host -NoNewline "  converting $($_.Name)"
+		Write-Output "  converting $($_.Name)" -NoNewline
 		$converted = $false
 		$counter = 24
 
@@ -233,10 +233,10 @@ if ($dot_count -gt 0) {
 			}
 			catch {
 				# Continue on error
+				Write-Output "." -NoNewline
 			}
 
 			$counter--
-			Write-Host -NoNewline "."
 		}
 
 		# Report conversion status

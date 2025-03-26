@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on March 24, 2025
+##   Last updated on March 26, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -181,7 +181,7 @@ $version_base = $version.Split("-")[0]
 pandoc _build/singlehtml/index.html --wrap=none -t gfm-raw_html -o _build/singlehtml/TheLogtalkHandbook-$version_base.md
 
 # Remove heading link references from the Markdown file
-(Get-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md) -replace '\[.\]\(#[-a-z0-9]+ "Link to this heading"\)', '' | Set-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md
+(Get-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md) -replace '\[.\]\(#[-a-z0-9]+ "Link to this heading"\)', "" | Set-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md
 # Remove other links leaving only the text
 (Get-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md) -replace '\[([^]]+)\]\([^)]+\)', '$1' | Set-Content _build/singlehtml/TheLogtalkHandbook-$version_base.md
 # Fix relative links to the Logtalk API documentation

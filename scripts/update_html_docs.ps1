@@ -3,7 +3,7 @@
 ##   Logtalk script for updating the HTML core, library, tools, ports,
 ##   contributions, and (optionally) packs documentation
 ##
-##   Last updated on March 24, 2025
+##   Last updated on March 26, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -40,7 +40,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.28"
+	Write-Output "$myName 0.29"
 }
 
 function Write-Usage-Help() {
@@ -131,7 +131,7 @@ if ($i -eq $true) {
 	$goal = "set_logtalk_flag(source_data,on),logtalk_load([library(all_loader),tools(loader),issue_creator(loader),ports_profiler(loader),tutor(loader),wrapper(loader),lgtunit(coverage_report),lgtunit(automation_report),lgtunit(minimal_output),lgtunit(tap_output),lgtunit(tap_report),lgtunit(xunit_output),lgtunit(xunit_report),lgtunit(xunit_net_v2_output),lgtunit(xunit_net_v2_report),ports(loader),contributions(loader)]),lgtdoc::all([xml_docs_directory('$cwd/../docs/sources'),omit_path_prefixes(['$env:LOGTALKUSER/','$env:LOGTALKHOME/']),exclude_prefixes(['$env:USERPROFILE/logtalk_packs/'])]),halt."
 }
 
-($logtalk + " " + ("`"$goal`"" -replace '\\','/')) | Invoke-Expression
+& $logtalk ($goal -replace '\\','/')
 
 Push-Location "$pwd/../docs/sources"
 
@@ -155,9 +155,9 @@ $version = Get-Content $env:LOGTALKUSER/VERSION.txt
 $version_base = $version.Split("-")[0]
 pandoc _build/singlehtml/index.html --wrap=none -t gfm-raw_html -o _build/singlehtml/LogtalkAPIs-$version_base.md
 # Remove heading link references from the Markdown file
-(Get-Content _build/singlehtml/LogtalkAPIs-$version_base.md) -replace '\[.\]\(#[-a-z0-9]+ "Link to this heading"\)', '' | Set-Content _build/singlehtml/LogtalkAPIs-$version_base.md
+(Get-Content "_build/singlehtml/LogtalkAPIs-$version_base.md") -replace '\[.\]\(#[-a-z0-9]+ "Link to this heading"\)', "" | Set-Content -Path "_build/singlehtml/LogtalkAPIs-$version_base.md"
 # Remove other links leaving only the text
-(Get-Content _build/singlehtml/LogtalkAPIs-$version_base.md) -replace '\[([^]]+)\]\([^)]+\)', '$1' | Set-Content _build/singlehtml/LogtalkAPIs-$version_base.md
+(Get-Content "_build/singlehtml/LogtalkAPIs-$version_base.md") -replace '\[([^]]+)\]\([^)]+\)', '$1' | Set-Content -Path "_build/singlehtml/LogtalkAPIs-$version_base.md"
 
 Copy-Item -Path ./_build/html/* -Destination .. -Recurse -Force
 Copy-Item -Path ./_build/texinfo/LogtalkAPIs-*.info -Destination ..

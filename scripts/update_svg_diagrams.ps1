@@ -2,7 +2,7 @@
 ##
 ##   Logtalk script for updating the HTML library and tools SVG diagrams
 ##
-##   Last updated on March 23, 2025
+##   Last updated on March 26, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -38,7 +38,7 @@ param(
 function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path $myFullName -leaf -Resolve
-	Write-Output "$myName 0.26"
+	Write-Output "$myName 0.27"
 }
 
 function Write-Usage-Help() {
@@ -143,14 +143,14 @@ $contributions_goal = "git_hash(Hash,[]), atomic_list_concat(['https://github.co
 
 Push-Location ../docs
 
-($logtalk + " " + ("`"$core_goal`"" -replace '\\', '/')) | Invoke-Expression
-($logtalk + " " + ("`"$library_goal`"" -replace '\\', '/')) | Invoke-Expression
+& $logtalk ($core_goal -replace '\\', '/')
+& $logtalk ($library_goal -replace '\\', '/')
 if ($i -eq $true) {
-	($logtalk + " " + ("`"$packs_goal`"" -replace '\\', '/')) | Invoke-Expression
+    & $logtalk ($packs_goal -replace '\\', '/')
 }
-($logtalk + " " + ("`"$tools_goal`"" -replace '\\', '/')) | Invoke-Expression
-($logtalk + " " + ("`"$contributions_goal`"" -replace '\\', '/')) | Invoke-Expression
-($logtalk + " " + ("`"$ports_goal`"" -replace '\\', '/')) | Invoke-Expression
+& $logtalk ($tools_goal -replace '\\', '/')
+& $logtalk ($contributions_goal -replace '\\', '/')
+& $logtalk ($ports_goal -replace '\\', '/')
 
 lgt2svg
 
