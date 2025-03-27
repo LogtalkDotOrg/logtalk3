@@ -22,14 +22,14 @@ RELEASE NOTES
 =============
 
 
-3.90.1 - March 26, 2025
+3.90.1 - March 27, 2025
 =======================
 
 Tools
 -----
 
-* FIXED: Linter warnings in PowerShell scripts that could trigger false
-positives when using some vendors security scanning tools.
+* FIXED: PowerShell script coding patterns that could trigger false positives
+when using some vendors security scanning tools.
 
 
 3.90.0 - March 25, 2025
