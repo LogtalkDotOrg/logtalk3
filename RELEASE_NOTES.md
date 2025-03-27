@@ -25,7 +25,11 @@ RELEASE NOTES
 3.91.0 - April ??, 2025
 =======================
 
+Installers and installation scripts
+-----------------------------------
 
+* UPDATED: The Windows installation script to also detect the new SICStus
+Prolog 4.10.x versions.
 
 
 3.90.1 - March 27, 2025
