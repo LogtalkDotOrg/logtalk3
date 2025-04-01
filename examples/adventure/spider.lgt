@@ -27,9 +27,9 @@
 :- object(spider).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'David Matuszek, Villanova University. Adapted to Logtalk by Paulo Moura.',
-		date is 2019-03-11,
+		date is 2025-03-29,
 		comment is 'Spider - A Sample Adventure Game.'
 	]).
 
@@ -218,7 +218,7 @@
 	do(u) :- !, go(u).
 	do(d) :- !, go(d).
 	do(_) :-
-		write('I don''t understand'), nl,
+		write('I don''t understand. Try typing "help."'), nl,
 		nl,
 		fail.
 
