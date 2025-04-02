@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on February 17, 2025
+##   Last updated on April 2, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -67,7 +67,9 @@ RUN apt-get update \
         python3-pip \
         software-properties-common \
         texinfo \
-        texlive \
+        texlive-latex-extra \
+        tex-gyre \
+        latexmk \
         xsltproc \
     && rm -rf /var/lib/apt/lists/* \
     && apt-add-repository ppa:qameta/allure \
