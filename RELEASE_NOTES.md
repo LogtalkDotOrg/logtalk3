@@ -32,6 +32,9 @@ Tools
 Unicode fullwidth comma when generating reStructuredText index entries for
 entity names.
 
+* UPDATED: Developer tools requirements for Ubuntu to avoid requiring the
+full Texlive installation.
+
 * FIXED: The `lgtdoc` tool to ignore the `startup` library name when
 looking for the name of the library when processing directory files.
 
