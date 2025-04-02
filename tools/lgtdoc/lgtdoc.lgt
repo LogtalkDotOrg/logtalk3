@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:1:2,
+		version is 11:1:3,
 		author is 'Paulo Moura',
-		date is 2024-12-02,
+		date is 2025-04-02,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -378,6 +378,7 @@
 		(	findall(
 				Length-Library,
 				(	logtalk_library_path(Library, _),
+					Library \== startup,
 					expand_library_path(Library, LibraryPath),
 					sub_atom(Path, 0, _, _, LibraryPath),
 					atom_length(LibraryPath, Length)

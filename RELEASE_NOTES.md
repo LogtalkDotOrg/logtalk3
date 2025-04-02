@@ -28,7 +28,10 @@ RELEASE NOTES
 Tools
 -----
 
-* FIXED: Renamed the `lgtdoc` Sphinx configuration template file to
+* FIXED: The `lgtdoc` tool to ignore the `startup` library name when
+looking for the name of the library when processing directory files.
+
+* FIXED: Renamed the `lgtdoc` tool Sphinx configuration template file to
 `conf.py.jinja` as the still documented `conf.py_t` name is no longer
 recognized by recent Sphinx versions.
 
