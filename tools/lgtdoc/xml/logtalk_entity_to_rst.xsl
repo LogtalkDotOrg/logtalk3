@@ -9,7 +9,7 @@
 % 
 %  XSLT stylesheet for converting XML documenting files into
 %  reStructuredText files for use with Sphinx
-%  Last updated on September 30, 2024
+%  Last updated on April 2, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>  
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -67,12 +67,8 @@
 
 
 <xsl:template match="/">
-	<xsl:text>.. index:: </xsl:text>
-	<xsl:call-template name="replace-string">
-		<xsl:with-param name="text" select="logtalk_entity/entity/name" />
-		<xsl:with-param name="replace" select="','" />
-		<xsl:with-param name="with" select="'&#xff0c;'" />
-	</xsl:call-template>
+	<xsl:text>.. index:: single: </xsl:text>
+	<xsl:value-of select="logtalk_entity/entity/name" />
 	<xsl:value-of select="$nl" />
 	<xsl:text>.. _</xsl:text><xsl:value-of select="logtalk_entity/entity/functor" /><xsl:text>:</xsl:text>
 	<xsl:value-of select="$nl2" />

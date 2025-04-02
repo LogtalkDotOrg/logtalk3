@@ -28,6 +28,10 @@ RELEASE NOTES
 Tools
 -----
 
+* IMPROVED: The `lgtdoc` tool no longer replaces the ASCII comma with the
+Unicode fullwidth comma when generating reStructuredText index entries for
+entity names.
+
 * FIXED: The `lgtdoc` tool to ignore the `startup` library name when
 looking for the name of the library when processing directory files.
 
