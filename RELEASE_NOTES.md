@@ -25,6 +25,13 @@ RELEASE NOTES
 3.91.0 - April ??, 2025
 =======================
 
+Tools
+-----
+
+* FIXED: Renamed the `lgtdoc` Sphinx configuration template file to
+`conf.py.jinja` as the still documented `conf.py_t` name is no longer
+recognized by recent Sphinx versions.
+
 Installers and installation scripts
 -----------------------------------
 

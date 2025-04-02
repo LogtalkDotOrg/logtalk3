@@ -215,9 +215,9 @@ Brief description of each directory and file in this folder:
 	`lgt2rst` in order to run the script). The generated files are expected
 	to be used with Sphinx. Assuming that Sphinx and the  Read the Docs Sphinx
 	theme are both installed, `lgt2rst -s` calls the `sphinx-quickstart`
-	interactive script using the `conf.py_t` file in this directory as the
+	interactive script using the `conf.py.jinja` file in this directory as the
 	`conf.py` template and using the `css/sphinx/custom.css` to customize
-	the Read the Docs Sphinx Theme. You can edit the `conf.py_t` to
+	the Read the Docs Sphinx Theme. You can edit the `conf.py.jinja` to
 	customize it; see the Sphinx documentation for more details. To use the
 	`sphinx-quickstart` script in non-interactive mode pass the options to
 	it using the syntax `lgt2rst -s -- -q` followed by `-p`, `-a` and `-v`
