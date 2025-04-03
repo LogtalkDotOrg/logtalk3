@@ -50,6 +50,8 @@ Prolog 4.10.x versions.
 
 * FIXED: The portable Docker image Texlive requirements.
 
+* FIXED: The portable Docker image Allure installation.
+
 
 3.90.1 - March 27, 2025
 =======================

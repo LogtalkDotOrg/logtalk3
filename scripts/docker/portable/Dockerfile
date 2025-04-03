@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on April 2, 2025
+##   Last updated on April 3, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -57,6 +57,7 @@ WORKDIR /downloads
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
         curl \
+        wget \
         direnv \
         fop \
         git \
@@ -72,13 +73,15 @@ RUN apt-get update \
         latexmk \
         xsltproc \
     && rm -rf /var/lib/apt/lists/* \
-    && apt-add-repository ppa:qameta/allure \
-    && apt-get install --no-install-recommends -y allure \
-    && add-apt-repository --remove ppa:qameta/allure \
     && python3 -m pip install pygments==2.19.1 \
     && python3 -m pip install sphinx==7.4.7 \
     && python3 -m pip install sphinx_rtd_theme==2.0.0 \
     && python3 -m pip install sphinxcontrib-spelling==8.0.1
+
+# Install Allure
+RUN curl -OL https://github.com/allure-framework/allure2/releases/download/2.33.0/allure_2.33.0-1_all.deb \
+    && dpkg -i allure_2.33.0-1_all.deb \
+    && rm -f allure_2.33.0-1_all.deb
 
 # Install Jupyter and the Logtalk kernel
 RUN python3 -m pip install --upgrade jupyter_core \
