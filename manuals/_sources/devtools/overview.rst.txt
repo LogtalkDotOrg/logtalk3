@@ -156,7 +156,6 @@ Ubuntu
    $ sudo apt install graphviz
    $ sudo apt install texinfo pandoc
    $ sudo apt install xsltproc fop texlive-latex-extra tex-gyre latexmk
-   $ sudo apt-add-repository ppa:qameta/allure && sudo apt install allure
    $ sudo apt install libarchive-tools gnupg2 git curl wget direnv
 
 RedHat
