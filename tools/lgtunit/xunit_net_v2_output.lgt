@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 4:0:1,
+		version is 4:0:2,
 		author is 'Paulo Moura',
-		date is 2024-04-01,
+		date is 2025-04-04,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -70,9 +70,9 @@
 	message_hook(passed_test(Object, Test, File, Position, Note, CPUTime, WallTime)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, CPUTime, WallTime)))).
-	message_hook(failed_test(Object, Test, File, Position, Reason, Note, CPUTime, WallTime)) :-
+	message_hook(failed_test(Object, Test, File, Position, Reason, Flaky, Note, CPUTime, WallTime)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Note, CPUTime, WallTime)))).
+		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Flaky, Note, CPUTime, WallTime)))).
 	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Note)))).
@@ -176,7 +176,7 @@
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-WallTime, result-'Pass']),
 		write_test_element_traits(Short, Position, Note),
 		write_xml_close_tag(test).
-	write_test_element_tags(failed_test(File, Position, Reason, Note, _, WallTime), Name, Object) :-
+	write_test_element_tags(failed_test(File, Position, Reason, _, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-WallTime, result-'Fail']),
 		write_test_element_traits(Short, Position, Note),

@@ -45,6 +45,9 @@ recognized by recent Sphinx versions.
 * FIXED: Bug in the `lgtunit` tool where broken QuickCheck tests would be
 reported as backend bugs.
 
+* FIXED: Regression in the `lgtunit` tool TAP and xUnit output formats where
+failed tests would not be reported.
+
 Installers and installation scripts
 -----------------------------------
 
