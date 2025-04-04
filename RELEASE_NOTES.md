@@ -48,6 +48,9 @@ reported as backend bugs.
 * FIXED: Regression in the `lgtunit` tool TAP and xUnit output formats where
 failed tests would not be reported.
 
+* FIXED: Missing handling of broken QuickCheck tests in the `lgtunit` tool
+TAP and xUnit output formats.
+
 Installers and installation scripts
 -----------------------------------
 

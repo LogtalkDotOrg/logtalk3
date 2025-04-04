@@ -36,7 +36,7 @@
 :- object(xunit_net_v2_report).
 
 	:- info([
-		version is 5:0:2,
+		version is 5:0:3,
 		author is 'Paulo Moura',
 		date is 2025-04-04,
 		comment is 'Intercepts unit test execution messages and generates a ``xunit_report.xml`` file using the xUnit.net v2 XML format in the same directory as the tests object file.',
@@ -234,6 +234,8 @@
 	failed_test(wrong_error(_, Error), 'Wrong error', wrong_error, Error).
 	failed_test(quick_check_failed(Error, _, _), 'QuickCheck test failed', quick_check_failed, Error).
 	failed_test(quick_check_error(Error, _, _), 'QuickCheck test error', quick_check_error, Error).
+	failed_test(quick_check_broken(Why, _), 'QuickCheck test broken', quick_check_broken, Why).
+	failed_test(quick_check_broken(Why), 'QuickCheck test broken', quick_check_broken, Why).
 	failed_test(step_error(_, Error), 'Test step error', step_error, Error).
 	failed_test(step_failure(Step), 'Test step failure', step_failure, Step).
 

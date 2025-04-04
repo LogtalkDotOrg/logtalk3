@@ -33,7 +33,7 @@
 :- object(tap_report).
 
 	:- info([
-		version is 5:0:2,
+		version is 5:0:3,
 		author is 'Paulo Moura',
 		date is 2025-04-04,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
@@ -171,6 +171,15 @@
 		write(tap_report, '  message: "test goal throws the wrong error"'), nl(tap_report),
 		write(tap_report, '  got: '), pretty_print_term(Error), nl(tap_report),
 		write(tap_report, '  expected: '), pretty_print_term(ExpectedError), nl(tap_report).
+
+	write_failed_reason_message_data(quick_check_broken(Why, Error)) :-
+		write(tap_report, '  message: "broken QuickCheck test"'), nl(tap_report),
+		write(tap_report, '  why: '), pretty_print_term(Why), nl(tap_report),
+		write(tap_report, '  error: '), pretty_print_term(Error), nl(tap_report).
+	write_failed_reason_message_data(quick_check_broken(Why)) :-
+		write(tap_report, '  message: "broken QuickCheck test"'), nl(tap_report),
+		write(tap_report, '  why: '), pretty_print_term(Why), nl(tap_report).
+
 	write_failed_reason_message_data(step_error(Step, Error)) :-
 		write(tap_report, '  message: "'), write(tap_report, Step), write(tap_report, ' goal throws an error but should have succeeded"'), nl(tap_report),
 		write(tap_report, '  got: '), pretty_print_term(Error), nl(tap_report).
