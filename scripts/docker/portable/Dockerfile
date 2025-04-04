@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on April 3, 2025
+##   Last updated on April 4, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -72,11 +72,17 @@ RUN apt-get update \
         tex-gyre \
         latexmk \
         xsltproc \
+        gh \
     && rm -rf /var/lib/apt/lists/* \
     && python3 -m pip install pygments==2.19.1 \
     && python3 -m pip install sphinx==7.4.7 \
     && python3 -m pip install sphinx_rtd_theme==2.0.0 \
     && python3 -m pip install sphinxcontrib-spelling==8.0.1
+
+# Install glab
+RUN curl -OL https://gitlab.com/gitlab-org/cli/-/releases/v1.55.0/downloads/glab_1.55.0_linux_amd64.deb \
+    && dpkg -i glab_1.55.0_linux_amd64.deb \
+    && rm -f glab_1.55.0_linux_amd64.deb
 
 # Install Allure
 RUN curl -OL https://github.com/allure-framework/allure2/releases/download/2.33.0/allure_2.33.0-1_all.deb \
