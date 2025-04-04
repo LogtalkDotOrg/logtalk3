@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 10:1:0,
+		version is 10:1:1,
 		author is 'Paulo Moura',
-		date is 2025-01-14,
+		date is 2025-04-04,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -407,6 +407,11 @@
 		['  quick check test error (at test ~w with starting seed ~q and test seed ~q): ~q'-[Test, Seed, TestSeed, Error], nl].
 	failed_test_reason(quick_check_error(Error, Culprit)) -->
 		['  quick check test error (caused by ~q): ~q'-[Error, Culprit], nl].
+
+	failed_test_reason(quick_check_broken(Why, Error)) -->
+		['  quick check test broken (caused by ~q): ~q'-[Why, Error], nl].
+	failed_test_reason(quick_check_broken(Why)) -->
+		['  quick check test broken (caused by ~q)'-[Why], nl].
 
 	failed_test_reason(step_error(Step, Error)) -->
 		['  ~w goal throws an error but should have succeeded: ~q'-[Step, Error], nl].

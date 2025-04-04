@@ -42,6 +42,9 @@ looking for the name of the library when processing directory files.
 `conf.py.jinja` as the still documented `conf.py_t` name is no longer
 recognized by recent Sphinx versions.
 
+* FIXED: Bug in the `lgtunit` tool where broken QuickCheck tests would be
+reported as backend bugs.
+
 Installers and installation scripts
 -----------------------------------
 
