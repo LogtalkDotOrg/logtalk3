@@ -154,7 +154,8 @@ documentation:
 	$ sudo apt install graphviz
 	$ sudo apt install texinfo pandoc
 	$ sudo apt install xsltproc fop texlive-latex-extra tex-gyre latexmk
-	$ sudo apt install libarchive-tools gnupg2 git curl wget direnv
+	$ sudo apt install coreutils libarchive-tools gnupg2 git curl wget direnv
+	$ sudo apt install gh
 
 ### RedHat
 
