@@ -42,6 +42,9 @@ looking for the name of the library when processing directory files.
 `conf.py.jinja` as the still documented `conf.py_t` name is no longer
 recognized by recent Sphinx versions.
 
+* FIXED: Bug in the `lgtunit` tool where the `quick_check/3` test dialect
+would throw an error when using the `pc/1` option.
+
 * FIXED: Bug in the `lgtunit` tool where broken QuickCheck tests would be
 reported as backend bugs.
 

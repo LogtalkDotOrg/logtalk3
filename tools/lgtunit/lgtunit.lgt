@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 20:0:0,
+		version is 20:0:1,
 		author is 'Paulo Moura',
-		date is 2024-12-09,
+		date is 2025-04-04,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -2282,7 +2282,9 @@
 		!.
 	extend_quick_check_closure(':'(Module,Closure), (':'(Module,Closure))-(':'(Module,Closure))) :-
 		!.
-	extend_quick_check_closure(Closure, (Sender<<Closure)-Closure) :-
+	extend_quick_check_closure(Closure, (Sender<<call(Closure))-Closure) :-
+		% the call/1 wrapper is required when the Closure is a lambda expression
+		% as otherwise we would try to extend the (<</2) control construct
 		sender(Sender).
 
 	generate_test(true, _, Template, Entity, Operator, Name, Types, Arguments, ArgumentsCopy, Test, EdgeCases, _Verbose, Discarded, Discarded, Goal) :-
