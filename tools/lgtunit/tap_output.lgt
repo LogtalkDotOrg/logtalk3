@@ -29,9 +29,9 @@
 :- object(tap_output).
 
 	:- info([
-		version is 4:0:3,
+		version is 4:1:0,
 		author is 'Paulo Moura',
-		date is 2025-04-04,
+		date is 2025-04-05,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.'
@@ -115,19 +115,19 @@
 	message_hook(passed_test(Object, Test, _, _, Note, _, _)) :-
 		test_count(N),
 		write('ok '), write(N), write(' - '), writeq(Test), write(' @ '), writeq(Object),
-		write_test_note(passed, Note).
+		write_test_note(passed, false, Note).
 	% failed test
-	message_hook(failed_test(Object, Test, _, _, Reason, _, Note, _, _)) :-
+	message_hook(failed_test(Object, Test, _, _, Reason, Flaky, Note, _, _)) :-
 		test_count(N),
 		write('not ok '), write(N), write(' - '), writeq(Test), write(' @ '), writeq(Object),
-		write_test_note(failed, Note),
+		write_test_note(failed, Flaky, Note),
 		write_failed_reason_message(Reason).
 	% skipped test
 	message_hook(skipped_test(Object, Test, _, _, Note)) :-
 		test_count(N),
 		write('ok '), write(N), write(' - '), writeq(Test), write(' @ '), writeq(Object),
 		write(' # skip'),
-		write_test_note(skipped, Note).
+		write_test_note(skipped, false, Note).
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write('  ---'), nl,
@@ -178,7 +178,7 @@
 	write_failed_reason_message_data(step_failure(Step)) :-
 		write('  message: "'), write(Step), write(' goal failed but should have succeeded"'), nl.
 
-	write_test_note(Result, Note) :-
+	write_test_note(Result, Flaky, Note) :-
 		(	Note == '' ->
 			true
 		;	(	atom(Note), sub_atom(Note, 0, _, _, 'todo')
@@ -189,7 +189,10 @@
 			% write note as a TODO directive
 			write(' # '), write(Note)
 		;	% write note as a comment after the test description
-			write(' ('), write(Note), write(')')
+			(	Flaky == true, \+ sub_atom(Note, _, _, _, flaky) ->
+				write(' (flaky; '), write(Note), write(')')
+			;	write(' ('), write(Note), write(')')
+			)
 		),
 		nl.
 

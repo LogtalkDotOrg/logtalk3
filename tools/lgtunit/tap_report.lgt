@@ -33,7 +33,7 @@
 :- object(tap_report).
 
 	:- info([
-		version is 5:0:3,
+		version is 5:1:0,
 		author is 'Paulo Moura',
 		date is 2025-04-04,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
@@ -121,13 +121,13 @@
 		test_count(N),
 		write(tap_report, 'ok '), write(tap_report, N), write(tap_report, ' - '),
 		writeq(tap_report, Test), write(tap_report, ' @ '), writeq(tap_report, Object),
-		write_test_note(passed, Note).
+		write_test_note(passed, false, Note).
 	% failed test
-	message_hook(failed_test(Object, Test, _, _, Reason, _, Note, _, _)) :-
+	message_hook(failed_test(Object, Test, _, _, Reason, Flaky, Note, _, _)) :-
 		test_count(N),
 		write(tap_report, 'not ok '), write(tap_report, N), write(tap_report, ' - '),
 		writeq(tap_report, Test), write(tap_report, ' @ '), writeq(tap_report, Object),
-		write_test_note(failed, Note),
+		write_test_note(failed, Flaky, Note),
 		write_failed_reason_message(Reason).
 	% skipped test
 	message_hook(skipped_test(Object, Test, _, _, Note)) :-
@@ -135,7 +135,7 @@
 		write(tap_report, 'ok '), write(tap_report, N), write(tap_report, ' - '),
 		writeq(tap_report, Test), write(tap_report, ' @ '), writeq(tap_report, Object),
 		write(tap_report, ' # skip'),
-		write_test_note(skipped, Note).
+		write_test_note(skipped, false, Note).
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write(tap_report, '  ---'), nl(tap_report),
@@ -186,7 +186,7 @@
 	write_failed_reason_message_data(step_failure(Step)) :-
 		write(tap_report, '  message: "'), write(tap_report, Step), write(tap_report, ' goal failed but should have succeeded"'), nl(tap_report).
 
-	write_test_note(Result, Note) :-
+	write_test_note(Result, Flaky, Note) :-
 		(	Note == '' ->
 			true
 		;	(	atom(Note), sub_atom(Note, 0, _, _, 'todo')
@@ -197,7 +197,10 @@
 			% write note as a TODO directive
 			write(tap_report, ' # '), write(tap_report, Note)
 		;	% write note as a comment after the test description
-			write(tap_report, ' ('), write(tap_report, Note), write(tap_report, ')')
+			(	Flaky == true, \+ sub_atom(Note, _, _, _, flaky) ->
+				write(tap_report, ' (flaky; '), write(tap_report, Note), write(tap_report, ')')
+			;	write(tap_report, ' ('), write(tap_report, Note), write(tap_report, ')')
+			)
 		),
 		nl(tap_report).
 

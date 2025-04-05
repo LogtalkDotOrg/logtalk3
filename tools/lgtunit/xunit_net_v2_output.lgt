@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 4:0:3,
+		version is 4:1:0,
 		author is 'Paulo Moura',
-		date is 2025-04-04,
+		date is 2025-04-05,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -174,12 +174,12 @@
 	write_test_element_tags(passed_test(File, Position, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-WallTime, result-'Pass']),
-		write_test_element_traits(Short, Position, Note),
+		write_test_element_traits(Short, Position, false, Note),
 		write_xml_close_tag(test).
-	write_test_element_tags(failed_test(File, Position, Reason, _, Note, _, WallTime), Name, Object) :-
+	write_test_element_tags(failed_test(File, Position, Reason, Flaky, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-WallTime, result-'Fail']),
-		write_test_element_traits(Short, Position, Note),
+		write_test_element_traits(Short, Position, Flaky, Note),
 		write_xml_open_tag(failure, []),
 		failed_test(Reason, Description, _, Error),
 		write_xml_element(message, [], Description),
@@ -192,7 +192,7 @@
 	write_test_element_tags(skipped_test(File, Position, Note), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-0.0, result-'Skip']),
-		write_test_element_traits(Short, Position, Note),
+		write_test_element_traits(Short, Position, false, Note),
 		write_xml_element(reason, [], 'Skipped test'),
 		write_xml_close_tag(test).
 
@@ -314,8 +314,9 @@
 
 	% write test element auxiliary predicates
 
-	write_test_element_traits(Short, Position, Note) :-
+	write_test_element_traits(Short, Position, Flaky, Note) :-
 		write_xml_open_tag(traits, []),
+		write_xml_empty_tag(trait, [name-flaky, value-Flaky]),
 		write_xml_empty_tag(trait, [name-file, value-Short]),
 		write_xml_empty_tag(trait, [name-position, value-Position]),
 		(	tests_url(Short, Position, URL) ->

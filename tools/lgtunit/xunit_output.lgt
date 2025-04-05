@@ -29,9 +29,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 4:0:3,
+		version is 4:1:0,
 		author is 'Paulo Moura',
-		date is 2025-04-04,
+		date is 2025-04-05,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -130,13 +130,13 @@
 	write_testcase_element_tags(passed_test(File, Position, Note, _, WallTime), ClassName, Name) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-WallTime]),
-		write_testcase_properties(Short, Position, Note),
+		write_testcase_properties(Short, Position, false, Note),
 		write_xml_close_tag(testcase).
-	write_testcase_element_tags(failed_test(File, Position, Reason, _, Note, _, WallTime), ClassName, Name) :-
+	write_testcase_element_tags(failed_test(File, Position, Reason, Flaky, Note, _, WallTime), ClassName, Name) :-
 		suppress_path_prefix(File, Short),
 		failed_test(Reason, Description, Type, Error),
 		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-WallTime]),
-		write_testcase_properties(Short, Position, Note),
+		write_testcase_properties(Short, Position, Flaky, Note),
 		(	Error == '' ->
 			write_xml_empty_tag(failure, [message-Description, type-Type])
 		;	writeq_xml_cdata_element(failure, [message-Description, type-Type], Error)
@@ -145,7 +145,7 @@
 	write_testcase_element_tags(skipped_test(File, Position, Note), ClassName, Name) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(testcase, [classname-ClassName, name-Name, time-0.0]),
-		write_testcase_properties(Short, Position, Note),
+		write_testcase_properties(Short, Position, false, Note),
 		write_xml_empty_tag(skipped, [message-'Skipped test']),
 		write_xml_close_tag(testcase).
 
@@ -236,8 +236,9 @@
 		;	ShortPath = Path
 		).
 
-	write_testcase_properties(Short, Position, Note) :-
+	write_testcase_properties(Short, Position, Flaky, Note) :-
 		write_xml_open_tag(properties, []),
+		write_xml_empty_tag(property, [name-flaky, value-Flaky]),
 		write_xml_empty_tag(property, [name-file, value-Short]),
 		write_xml_empty_tag(property, [name-position, value-Position]),
 		(	tests_url(Short, Position, URL) ->

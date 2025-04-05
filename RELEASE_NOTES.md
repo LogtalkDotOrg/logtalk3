@@ -28,6 +28,9 @@ RELEASE NOTES
 Tools
 -----
 
+* ADDED: Flaky test property/note support to the `lgtunit` tool TAP and xUnit
+output formats.
+
 * IMPROVED: The `lgtdoc` tool no longer replaces the ASCII comma with the
 Unicode fullwidth comma when generating reStructuredText index entries for
 entity names.
