@@ -29,9 +29,9 @@
 :- object(xunit_net_v2_output).
 
 	:- info([
-		version is 4:1:0,
+		version is 5:0:0,
 		author is 'Paulo Moura',
-		date is 2025-04-05,
+		date is 2025-04-07,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit.net v2 XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_net_v2_output))``.'
@@ -67,15 +67,15 @@
 		assertz(message_cache_(tests_end_date_time(Year,Month,Day,Hours,Minutes,Seconds))),
 		generate_xml_report.
 	% "testcase" tag predicates
-	message_hook(passed_test(Object, Test, File, Position, Note, CPUTime, WallTime)) :-
+	message_hook(passed_test(Object, Test, File, Position, Flaky, Note, CPUTime, WallTime)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Note, CPUTime, WallTime)))).
+		assertz(message_cache_(test(Object, Test, passed_test(File, Position, Flaky, Note, CPUTime, WallTime)))).
 	message_hook(failed_test(Object, Test, File, Position, Reason, Flaky, Note, CPUTime, WallTime)) :-
 		!,
 		assertz(message_cache_(test(Object, Test, failed_test(File, Position, Reason, Flaky, Note, CPUTime, WallTime)))).
-	message_hook(skipped_test(Object, Test, File, Position, Note)) :-
+	message_hook(skipped_test(Object, Test, File, Position, Flaky, Note)) :-
 		!,
-		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Note)))).
+		assertz(message_cache_(test(Object, Test, skipped_test(File, Position, Flaky, Note)))).
 	% catchall clause
 	message_hook(Message) :-
 		assertz(message_cache_(Message)).
@@ -163,7 +163,7 @@
 	write_test_elements(Object) :-
 		message_cache_(tests_skipped(Object, File, Note)),
 		Object::test(Name),
-		write_test_element_tags(skipped_test(File, 0-0, Note), Name, Object),
+		write_test_element_tags(skipped_test(File, 0-0, false, Note), Name, Object),
 		fail.
 	write_test_elements(Object) :-
 		message_cache_(test(Object, Name, Test)),
@@ -171,10 +171,10 @@
 		fail.
 	write_test_elements(_).
 
-	write_test_element_tags(passed_test(File, Position, Note, _, WallTime), Name, Object) :-
+	write_test_element_tags(passed_test(File, Position, Flaky, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-WallTime, result-'Pass']),
-		write_test_element_traits(Short, Position, false, Note),
+		write_test_element_traits(Short, Position, Flaky, Note),
 		write_xml_close_tag(test).
 	write_test_element_tags(failed_test(File, Position, Reason, Flaky, Note, _, WallTime), Name, Object) :-
 		suppress_path_prefix(File, Short),
@@ -189,10 +189,10 @@
 		),
 		write_xml_close_tag(failure),
 		write_xml_close_tag(test).
-	write_test_element_tags(skipped_test(File, Position, Note), Name, Object) :-
+	write_test_element_tags(skipped_test(File, Position, Flaky, Note), Name, Object) :-
 		suppress_path_prefix(File, Short),
 		write_xml_open_tag(test, [name-(Name::Object),type-(Short::Object), method-Name, time-0.0, result-'Skip']),
-		write_test_element_traits(Short, Position, false, Note),
+		write_test_element_traits(Short, Position, Flaky, Note),
 		write_xml_element(reason, [], 'Skipped test'),
 		write_xml_close_tag(test).
 
@@ -237,7 +237,7 @@
 	assembly_time(Object, Time) :-
 		findall(
 			WallTime,
-			(	message_cache_(test(Object, _, passed_test(_, _, _, _, WallTime)))
+			(	message_cache_(test(Object, _, passed_test(_, _, _, _, _, WallTime)))
 			;	message_cache_(test(Object, _, failed_test(_, _, _, _, _, WallTime)))
 			),
 			WallTimes
@@ -324,7 +324,7 @@
 		;	true
 		),
 		(	Note \== '' ->
-			write_xml_empty_tag(property, [name-note, value-Note])
+			write_xml_empty_tag(trait, [name-note, value-Note])
 		;	true
 		),
 		write_xml_close_tag(traits).

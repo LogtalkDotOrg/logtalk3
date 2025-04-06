@@ -34,9 +34,9 @@
 :- object(automation_report).
 
 	:- info([
-		version is 5:0:0,
+		version is 6:0:0,
 		author is 'Paulo Moura',
-		date is 2024-02-20,
+		date is 2025-04-07,
 		comment is 'Intercepts unit test execution messages and generates a ``*.totals`` files for parsing by the ``logtalk_tester.sh`` automation shell script.',
 		remarks is [
 			'Usage' - 'Automatically loaded by the ``logtalk_tester.sh`` shell script.'
@@ -86,7 +86,7 @@
 		),
 		nl(results_file).
 	% skipped test
-	message_hook(skipped_test(Object, Test, File, _, _)) :-
+	message_hook(skipped_test(Object, Test, File, _, _, _)) :-
 		write(results_file, 'skipped\t'), write(results_file, File), write(results_file, '\t'),
 		writeq(results_file, Test), write(results_file, ' @ '), writeq(results_file, Object), nl(results_file).
 	% skipped test set

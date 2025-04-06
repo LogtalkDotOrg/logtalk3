@@ -27,9 +27,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 20:0:1,
+		version is 21:0:0,
 		author is 'Paulo Moura',
-		date is 2025-04-04,
+		date is 2025-04-07,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1068,7 +1068,7 @@
 				cpu_time(CPUStart),
 				(	catch(::test(Test, Variables, true), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Flaky, Note, CPUStart, WallStart, Output)) ->
 					(	var(Error) ->
-						passed_test(Test, File, Position, Note, CPUStart, WallStart, Output)
+						passed_test(Test, File, Position, Flaky, Note, CPUStart, WallStart, Output)
 					;	true
 					)
 				;	failed_test(Test, File, Position, failure_instead_of_success, Flaky, Note, CPUStart, WallStart, Output)
@@ -1076,7 +1076,7 @@
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
 			)
-		;	skipped_test(Test, File, Position, Note, Output)
+		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
 	run_test(deterministic(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
 		(	run_test_condition(Condition) ->
@@ -1086,7 +1086,7 @@
 				(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Flaky, Note, CPUStart, WallStart, Output)) ->
 					(	var(Error) ->
 						(	Deterministic == true ->
-							passed_test(Test, File, Position, Note, CPUStart, WallStart, Output)
+							passed_test(Test, File, Position, Flaky, Note, CPUStart, WallStart, Output)
 						;	failed_test(Test, File, Position, non_deterministic_success, Flaky, Note, CPUStart, WallStart, Output)
 						)
 					;	true
@@ -1096,7 +1096,7 @@
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
 			)
-		;	skipped_test(Test, File, Position, Note, Output)
+		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
 	run_test(fails(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
 		(	run_test_condition(Condition) ->
@@ -1108,12 +1108,12 @@
 						failed_test(Test, File, Position, success_instead_of_failure, Flaky, Note, CPUStart, WallStart, Output)
 					;	true
 					)
-				;	passed_test(Test, File, Position, Note, CPUStart, WallStart, Output)
+				;	passed_test(Test, File, Position, Flaky, Note, CPUStart, WallStart, Output)
 				),
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
 			)
-		;	skipped_test(Test, File, Position, Note, Output)
+		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
 	run_test(throws(Test, Variables, PossibleErrors, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
 		(	run_test_condition(Condition) ->
@@ -1132,7 +1132,7 @@
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
 			)
-		;	skipped_test(Test, File, Position, Note, Output)
+		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
 	% quick_check/3 dialect
 	run_test(quick_check(Test, Variables, Position, Condition, Setup, Cleanup, Flaky, Note), File, Output) :-
@@ -1142,7 +1142,7 @@
 				cpu_time(CPUStart),
 				(	catch(::test(Test, Variables, quick_check), Error, failed_test(Test, File, Position, Error, Flaky, Note, CPUStart, WallStart, Output)) ->
 					(	var(Error) ->
-						passed_test(Test, File, Position, Note, CPUStart, WallStart, Output)
+						passed_test(Test, File, Position, Flaky, Note, CPUStart, WallStart, Output)
 					;	true
 					)
 				;	failed_test(Test, File, Position, failure_instead_of_success, Flaky, Note, CPUStart, WallStart, Output)
@@ -1150,7 +1150,7 @@
 				run_test_cleanup(Test, Cleanup, File, Position, Output)
 			;	true
 			)
-		;	skipped_test(Test, File, Position, Note, Output)
+		;	skipped_test(Test, File, Position, Flaky, Note, Output)
 		).
 	% quick_check/2 dialect
 	run_test(quick_check(Test, Variables, Position), File, Output) :-
@@ -1210,8 +1210,8 @@
 			failed_test(Test, File, Position, failure_instead_of_error(PossibleError), CPUStart, WallStart, Output)
 		).
 
-	run_test(skipped(Test, Position, Note), File, Output) :-
-		skipped_test(Test, File, Position, Note, Output).
+	run_test(skipped(Test, Position, Flaky, Note), File, Output) :-
+		skipped_test(Test, File, Position, Flaky, Note, Output).
 
 	run_test(skipped(Test, Position), File, Output) :-
 		skipped_test(Test, File, Position, Output).
@@ -1222,7 +1222,7 @@
 	check_error(Test, [PossibleError| PossibleErrors], Error, File, Position, Flaky, Note, CPUStart, WallStart, Output) :-
 		(	member(ExpectedError, [PossibleError| PossibleErrors]),
 			subsumes_term(ExpectedError, Error) ->
-			passed_test(Test, File, Position, Note, CPUStart, WallStart, Output)
+			passed_test(Test, File, Position, Flaky, Note, CPUStart, WallStart, Output)
 		;	failed_test(Test, File, Position, wrong_error(PossibleError, Error), Flaky, Note, CPUStart, WallStart, Output)
 		).
 
@@ -1258,7 +1258,7 @@
 		print_message(information, lgtunit, tests_end_date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		print_message(silent, lgtunit, tests_ended).
 
-	passed_test(Test, File, Position, Note, CPUStart, WallStart, Output) :-
+	passed_test(Test, File, Position, Flaky, Note, CPUStart, WallStart, Output) :-
 		self(Object),
 		cpu_time(CPUEnd),
 		CPUTime is CPUEnd - CPUStart,
@@ -1268,11 +1268,11 @@
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(information, lgtunit, passed_test(Object, Test, File, Position, Note, CPUTime, WallTime)),
+		print_message(information, lgtunit, passed_test(Object, Test, File, Position, Flaky, Note, CPUTime, WallTime)),
 		set_output(Current).
 
 	passed_test(Test, File, Position, CPUStart, WallStart, Output) :-
-		passed_test(Test, File, Position, '', CPUStart, WallStart, Output).
+		passed_test(Test, File, Position, false, '', CPUStart, WallStart, Output).
 
 	failed_test(Test, File, Position, Reason, Flaky, Note, CPUStart, WallStart, Output) :-
 		self(Object),
@@ -1296,17 +1296,17 @@
 	failed_test(Test, File, Position, Reason, CPUStart, WallStart, Output) :-
 		failed_test(Test, File, Position, Reason, false, '', CPUStart, WallStart, Output).
 
-	skipped_test(Test, File, Position, Note, Output) :-
+	skipped_test(Test, File, Position, Flaky, Note, Output) :-
 		self(Object),
 		increment_skipped_tests_counter,
 		% ensure that any redirection of the current output stream by
 		% the test itself doesn't affect printing the test results
 		current_output(Current), set_output(Output),
-		print_message(information, lgtunit, skipped_test(Object, Test, File, Position, Note)),
+		print_message(information, lgtunit, skipped_test(Object, Test, File, Position, Flaky, Note)),
 		set_output(Current).
 
 	skipped_test(Test, File, Position, Output) :-
-		skipped_test(Test, File, Position, '', Output).
+		skipped_test(Test, File, Position, false, '', Output).
 
 	tests_skipped :-
 		self(Object),
@@ -1435,8 +1435,8 @@
 		test_idiom_head(Head, Test),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		(	Head = test(Test, _, Options) ->
-			parse_test_options(Options, Test, _, _, _, _, Note, File, Position, Type, Entity),
-			assertz(test_(Test, skipped(Test, Position, Note)))
+			parse_test_options(Options, Test, _, _, _, Flaky, Note, File, Position, Type, Entity),
+			assertz(test_(Test, skipped(Test, Position, Flaky, Note)))
 		;	assertz(test_(Test, skipped(Test, Position)))
 		).
 

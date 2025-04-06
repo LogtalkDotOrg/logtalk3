@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 10:1:1,
+		version is 11:0:0,
 		author is 'Paulo Moura',
-		date is 2025-04-04,
+		date is 2025-04-07,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -118,10 +118,10 @@
 		message_tokens(tests_runtime(_Object, CPUTime, WallTime)) -->
 			['runtime: ~9f/~9f cpu/wall seconds'-[CPUTime, WallTime], nl].
 
-		message_tokens(passed_test(_Object, Test, _File, _Position, Note, CPUTime, WallTime)) -->
+		message_tokens(passed_test(_Object, Test, _File, _Position, Flaky, Note, CPUTime, WallTime)) -->
 			(	{Note == ''} ->
-				['~q: success (in ~9f/~9f cpu/wall seconds)'-[Test, CPUTime, WallTime], nl]
-			;	['~q: success (~w) (in ~9f/~9f cpu/wall seconds)'-[Test, Note, CPUTime, WallTime], nl]
+				['~q: success'-[Test]], flaky(Flaky), ['(in ~9f/~9f cpu/wall seconds)'-[CPUTime, WallTime], nl]
+			;	['~q: success'-[Test]], flaky(Flaky), ['(~w) (in ~9f/~9f cpu/wall seconds)'-[Note, CPUTime, WallTime], nl]
 			).
 
 		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, CPUTime, WallTime)) -->
@@ -138,10 +138,10 @@
 		message_tokens(tests_runtime(_Object, CPUTime, WallTime)) -->
 			['runtime: ~w/~w seconds'-[CPUTime, WallTime], nl].
 
-		message_tokens(passed_test(_Object, Test, _File, _Position, Note, CPUTime, WallTime)) -->
+		message_tokens(passed_test(_Object, Test, _File, _Position, Flaky, Note, CPUTime, WallTime)) -->
 			(	{Note == ''} ->
-				['~q: success (in ~w/~w cpu/wall seconds)'-[Test, CPUTime, WallTime], nl]
-			;	['~q: success (~w) (in ~w/~w cpu/wall seconds)'-[Test, Note, CPUTime, WallTime], nl]
+				['~q: success'-[Test]], flaky(Flaky), ['(in ~w/~w cpu/wall seconds)'-[CPUTime, WallTime], nl]
+			;	['~q: success'-[Test]], flaky(Flaky), ['(~w) (in ~w/~w cpu/wall seconds)'-[Note, CPUTime, WallTime], nl]
 			).
 
 		message_tokens(failed_test(_Object, Test, File, Position, Reason, Flaky, Note, CPUTime, WallTime)) -->
@@ -155,10 +155,10 @@
 
 	:- endif.
 
-	message_tokens(skipped_test(_Object, Test, _File, _Position, Note)) -->
+	message_tokens(skipped_test(_Object, Test, _File, _Position, Flaky, Note)) -->
 		(	{Note == ''} ->
-			['~q: skipped'-[Test], nl]
-		;	['~q: skipped (~w)'-[Test, Note], nl]
+			['~q: skipped'-[Test]], flaky(Flaky), [nl]
+		;	['~q: skipped (~w)'-[Test, Note]], flaky(Flaky), [nl]
 		).
 
 	message_tokens(verbose_quick_check_test(passed, Goal)) -->

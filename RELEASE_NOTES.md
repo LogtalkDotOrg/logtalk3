@@ -28,6 +28,9 @@ RELEASE NOTES
 Tools
 -----
 
+* CHANGED: The `lgtunit` tool messages for passed and skipped tests to also
+include the flaky flag.
+
 * ADDED: Flaky test property/note support to the `lgtunit` tool TAP and xUnit
 output formats.
 
@@ -56,6 +59,11 @@ failed tests would not be reported.
 
 * FIXED: Missing handling of broken QuickCheck tests in the `lgtunit` tool
 TAP and xUnit output formats.
+
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* UPDATED: VSCode support for the changes to the `lgtunit` tool messages.
 
 Installers and installation scripts
 -----------------------------------

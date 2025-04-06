@@ -33,9 +33,9 @@
 :- object(tap_report).
 
 	:- info([
-		version is 5:1:0,
+		version is 6:0:0,
 		author is 'Paulo Moura',
-		date is 2025-04-04,
+		date is 2025-04-07,
 		comment is 'Intercepts unit test execution messages and generates a ``tap_report.txt`` file using the TAP output format in the same directory as the tests object file.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_report))``.'
@@ -117,11 +117,11 @@
 		),
 		nl(tap_report).
 	% passed test
-	message_hook(passed_test(Object, Test, _, _, Note, _, _)) :-
+	message_hook(passed_test(Object, Test, _, _, Flaky, Note, _, _)) :-
 		test_count(N),
 		write(tap_report, 'ok '), write(tap_report, N), write(tap_report, ' - '),
 		writeq(tap_report, Test), write(tap_report, ' @ '), writeq(tap_report, Object),
-		write_test_note(passed, false, Note).
+		write_test_note(passed, Flaky, Note).
 	% failed test
 	message_hook(failed_test(Object, Test, _, _, Reason, Flaky, Note, _, _)) :-
 		test_count(N),
@@ -130,12 +130,12 @@
 		write_test_note(failed, Flaky, Note),
 		write_failed_reason_message(Reason).
 	% skipped test
-	message_hook(skipped_test(Object, Test, _, _, Note)) :-
+	message_hook(skipped_test(Object, Test, _, _, Flaky, Note)) :-
 		test_count(N),
 		write(tap_report, 'ok '), write(tap_report, N), write(tap_report, ' - '),
 		writeq(tap_report, Test), write(tap_report, ' @ '), writeq(tap_report, Object),
 		write(tap_report, ' # skip'),
-		write_test_note(skipped, false, Note).
+		write_test_note(skipped, Flaky, Note).
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write(tap_report, '  ---'), nl(tap_report),

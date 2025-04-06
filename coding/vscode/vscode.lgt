@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:64:2,
+		version is 0:65:0,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2025-03-12,
+		date is 2025-04-07,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1685,7 +1685,7 @@
 		),
 		fail.
 	:- if(current_logtalk_flag(prolog_dialect, ji)).
-		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed (in ~f/~f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
 			fail.
@@ -1694,7 +1694,7 @@
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed (in ~f/~f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
 			fail.
 	:- else.
-		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, _Note, CPUTime, WallTime), _, lgtunit, _) :-
+		logtalk::message_hook(passed_test(Object, Test, File, Start-_End, _Flaky, _Note, CPUTime, WallTime), _, lgtunit, _) :-
 			stream_property(_, alias(vscode_test_results)),
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:passed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
 			fail.
@@ -1703,7 +1703,7 @@
 			{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:failed (in ~9f/~9f cpu/wall seconds)~n', [File, Start, Object, Test, CPUTime, WallTime])},
 			fail.
 	:- endif.
-	logtalk::message_hook(skipped_test(Object, Test, File, Start-_, _Note), _, lgtunit, _) :-
+	logtalk::message_hook(skipped_test(Object, Test, File, Start-_, _Flaky, _Note), _, lgtunit, _) :-
 		stream_property(_, alias(vscode_test_results)),
 		{format(vscode_test_results, 'File:~w;Line:~d;Object:~k;Test:~k;Status:skipped~n', [File, Start, Object, Test])},
 		fail.

@@ -29,9 +29,9 @@
 :- object(tap_output).
 
 	:- info([
-		version is 4:1:0,
+		version is 5:0:0,
 		author is 'Paulo Moura',
-		date is 2025-04-05,
+		date is 2025-04-07,
 		comment is 'Intercepts unit test execution messages and outputs a report using the TAP format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(tap_output))``.'
@@ -112,10 +112,10 @@
 		),
 		nl.
 	% passed test
-	message_hook(passed_test(Object, Test, _, _, Note, _, _)) :-
+	message_hook(passed_test(Object, Test, _, _, Flaky, Note, _, _)) :-
 		test_count(N),
 		write('ok '), write(N), write(' - '), writeq(Test), write(' @ '), writeq(Object),
-		write_test_note(passed, false, Note).
+		write_test_note(passed, Flaky, Note).
 	% failed test
 	message_hook(failed_test(Object, Test, _, _, Reason, Flaky, Note, _, _)) :-
 		test_count(N),
@@ -123,11 +123,11 @@
 		write_test_note(failed, Flaky, Note),
 		write_failed_reason_message(Reason).
 	% skipped test
-	message_hook(skipped_test(Object, Test, _, _, Note)) :-
+	message_hook(skipped_test(Object, Test, _, _, Flaky, Note)) :-
 		test_count(N),
 		write('ok '), write(N), write(' - '), writeq(Test), write(' @ '), writeq(Object),
 		write(' # skip'),
-		write_test_note(skipped, false, Note).
+		write_test_note(skipped, Flaky, Note).
 	% code coverage results
 	message_hook(covered_clause_numbers(_, _, Percentage)) :-
 		write('  ---'), nl,
