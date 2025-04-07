@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-628 554,-628 554,4 -4,4"/>
 <text text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object hook_pipeline/1</text>
-<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2025&#45;04&#45;07, 00:15</text>
+<text text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2025&#45;04&#45;07, 21:31</text>
 <g id="clust1" class="cluster">
 <title>cluster_hook_pipeline_1_object</title>
 <g id="a_clust1"><a xlink:title="hook_pipeline(Pipeline)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 530,-54.25 530,-54.25 536,-54.25 542,-60.25 542,-66.25 542,-66.25 542,-604 542,-604 542,-610 536,-616 530,-616 530,-616 20,-616 20,-616 14,-616 8,-610 8,-604 8,-604 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt">
 <text text-anchor="start" x="20" y="-598.5" font-family="Monospace" font-size="10.00" fill="dimgray">hook_pipeline(Pipeline)</text>
 </a>
 </g>
@@ -27,7 +27,7 @@
 <!-- goal_expansion/2 -->
 <g id="node1" class="node">
 <title>goal_expansion/2</title>
-<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L69">
+<g id="a_node1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L69">
 <polygon fill="cornsilk" stroke="black" points="183.25,-577.25 48.75,-577.25 48.75,-541.25 183.25,-541.25 183.25,-577.25"/>
 <text text-anchor="start" x="56.75" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="62" y="-561.17" font-family="Monospace" font-size="11.00">goal_expansion/2</text>
@@ -41,7 +41,7 @@
 <!-- goal_expansion_pipeline/3 -->
 <g id="node6" class="node">
 <title>goal_expansion_pipeline/3</title>
-<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L73">
+<g id="a_node6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L73">
 <polygon fill="cornsilk" stroke="black" points="213.62,-458 18.38,-458 18.38,-422 213.62,-422 213.62,-458"/>
 <text text-anchor="start" x="26.38" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.62" y="-441.93" font-family="Monospace" font-size="11.00">goal_expansion_pipeline/3</text>
@@ -55,12 +55,12 @@
 <!-- goal_expansion/2&#45;&gt;goal_expansion_pipeline/3 -->
 <g id="edge5" class="edge">
 <title>goal_expansion/2&#45;&gt;goal_expansion_pipeline/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L69" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L69" xlink:title="calls">
 <path fill="none" stroke="black" d="M116,-540.95C116,-522.25 116,-492.12 116,-469.83"/>
 <polygon fill="black" stroke="black" points="119.5,-469.89 116,-459.89 112.5,-469.89 119.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L69">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L69">
 <text text-anchor="start" x="116" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -68,7 +68,7 @@
 <!-- term_expansion/2 -->
 <g id="node2" class="node">
 <title>term_expansion/2</title>
-<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L40">
+<g id="a_node2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L40">
 <polygon fill="cornsilk" stroke="black" points="413.25,-577.25 278.75,-577.25 278.75,-541.25 413.25,-541.25 413.25,-577.25"/>
 <text text-anchor="start" x="286.75" y="-561.95" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="292" y="-561.17" font-family="Monospace" font-size="11.00">term_expansion/2</text>
@@ -82,7 +82,7 @@
 <!-- term_expansion_pipeline/3 -->
 <g id="node3" class="node">
 <title>term_expansion_pipeline/3</title>
-<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L44">
+<g id="a_node3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L44">
 <polygon fill="cornsilk" stroke="black" points="443.62,-458 248.38,-458 248.38,-422 443.62,-422 443.62,-458"/>
 <text text-anchor="start" x="256.38" y="-442.7" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="261.62" y="-441.93" font-family="Monospace" font-size="11.00">term_expansion_pipeline/3</text>
@@ -96,12 +96,12 @@
 <!-- term_expansion/2&#45;&gt;term_expansion_pipeline/3 -->
 <g id="edge1" class="edge">
 <title>term_expansion/2&#45;&gt;term_expansion_pipeline/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L40" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L40" xlink:title="calls">
 <path fill="none" stroke="black" d="M346,-540.95C346,-522.25 346,-492.12 346,-469.83"/>
 <polygon fill="black" stroke="black" points="349.5,-469.89 346,-459.89 342.5,-469.89 349.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L40">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L40" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L40">
 <text text-anchor="start" x="346" y="-496.7" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,7 +109,7 @@
 <!-- term_expansion_pipeline_all/3 -->
 <g id="node4" class="node">
 <title>term_expansion_pipeline_all/3</title>
-<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L50">
+<g id="a_node4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L50">
 <polygon fill="cornsilk" stroke="black" points="426.12,-338.75 203.88,-338.75 203.88,-302.75 426.12,-302.75 426.12,-338.75"/>
 <text text-anchor="start" x="211.88" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="217.12" y="-322.68" font-family="Monospace" font-size="11.00">term_expansion_pipeline_all/3</text>
@@ -123,12 +123,12 @@
 <!-- term_expansion_pipeline/3&#45;&gt;term_expansion_pipeline_all/3 -->
 <g id="edge2" class="edge">
 <title>term_expansion_pipeline/3&#45;&gt;term_expansion_pipeline_all/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L45" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M341.43,-421.7C336.43,-402.82 328.37,-372.31 322.46,-349.96"/>
 <polygon fill="black" stroke="black" points="325.92,-349.36 319.98,-340.58 319.15,-351.15 325.92,-349.36"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L45">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L45">
 <text text-anchor="start" x="331.43" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -136,7 +136,7 @@
 <!-- flatten/3 -->
 <g id="node10" class="node">
 <title>flatten/3</title>
-<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L104">
+<g id="a_node10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L104" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L104">
 <polygon fill="cornsilk" stroke="black" points="531.62,-338.75 444.38,-338.75 444.38,-302.75 531.62,-302.75 531.62,-338.75"/>
 <text text-anchor="start" x="452.38" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="457.62" y="-322.68" font-family="Monospace" font-size="11.00">flatten/3</text>
@@ -150,12 +150,12 @@
 <!-- term_expansion_pipeline/3&#45;&gt;flatten/3 -->
 <g id="edge3" class="edge">
 <title>term_expansion_pipeline/3&#45;&gt;flatten/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L45" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M366.95,-421.7C391.07,-401.78 430.87,-368.92 458.21,-346.35"/>
 <polygon fill="black" stroke="black" points="460.31,-349.15 465.79,-340.09 455.85,-343.75 460.31,-349.15"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L45">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L45">
 <text text-anchor="start" x="421.26" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -163,7 +163,7 @@
 <!-- hook_term_expansion/3 -->
 <g id="node5" class="node">
 <title>hook_term_expansion/3</title>
-<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L61">
+<g id="a_node5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L61" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L61">
 <polygon fill="cornsilk" stroke="black" points="399.12,-219.5 230.88,-219.5 230.88,-183.5 399.12,-183.5 399.12,-219.5"/>
 <text text-anchor="start" x="238.88" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="244.12" y="-203.43" font-family="Monospace" font-size="11.00">hook_term_expansion/3</text>
@@ -177,12 +177,12 @@
 <!-- term_expansion_pipeline_all/3&#45;&gt;hook_term_expansion/3 -->
 <g id="edge4" class="edge">
 <title>term_expansion_pipeline_all/3&#45;&gt;hook_term_expansion/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L52" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L52" xlink:title="calls">
 <path fill="none" stroke="black" d="M315,-302.45C315,-283.75 315,-253.62 315,-231.33"/>
 <polygon fill="black" stroke="black" points="318.5,-231.39 315,-221.39 311.5,-231.39 318.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L52">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L52">
 <text text-anchor="start" x="315" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,7 +190,7 @@
 <!-- hook_goal_expansion/4 -->
 <g id="node7" class="node">
 <title>hook_goal_expansion/4</title>
-<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L80">
+<g id="a_node7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L80">
 <polygon fill="cornsilk" stroke="black" points="186.12,-338.75 17.88,-338.75 17.88,-302.75 186.12,-302.75 186.12,-338.75"/>
 <text text-anchor="start" x="25.88" y="-323.45" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="31.12" y="-322.68" font-family="Monospace" font-size="11.00">hook_goal_expansion/4</text>
@@ -204,12 +204,12 @@
 <!-- goal_expansion_pipeline/3&#45;&gt;hook_goal_expansion/4 -->
 <g id="edge6" class="edge">
 <title>goal_expansion_pipeline/3&#45;&gt;hook_goal_expansion/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L74" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L74" xlink:title="calls">
 <path fill="none" stroke="black" d="M113.93,-421.7C111.69,-402.91 108.07,-372.59 105.41,-350.27"/>
 <polygon fill="black" stroke="black" points="108.91,-350.14 104.25,-340.62 101.96,-350.97 108.91,-350.14"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L74">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L74">
 <text text-anchor="start" x="109.42" y="-377.45" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <!-- push_if_new/3 -->
 <g id="node8" class="node">
 <title>push_if_new/3</title>
-<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L96">
+<g id="a_node8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L96">
 <polygon fill="cornsilk" stroke="black" points="159.12,-219.5 44.87,-219.5 44.87,-183.5 159.12,-183.5 159.12,-219.5"/>
 <text text-anchor="start" x="52.88" y="-204.2" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="58.12" y="-203.43" font-family="Monospace" font-size="11.00">push_if_new/3</text>
@@ -231,12 +231,12 @@
 <!-- hook_goal_expansion/4&#45;&gt;push_if_new/3 -->
 <g id="edge7" class="edge">
 <title>hook_goal_expansion/4&#45;&gt;push_if_new/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L80" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L80" xlink:title="calls">
 <path fill="none" stroke="black" d="M102,-302.45C102,-283.75 102,-253.62 102,-231.33"/>
 <polygon fill="black" stroke="black" points="105.5,-231.39 102,-221.39 98.5,-231.39 105.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L80">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L80">
 <text text-anchor="start" x="102" y="-258.2" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -244,7 +244,7 @@
 <!-- member_equal/2 -->
 <g id="node9" class="node">
 <title>member_equal/2</title>
-<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L99">
+<g id="a_node9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L99">
 <polygon fill="cornsilk" stroke="black" points="162.5,-100.25 41.5,-100.25 41.5,-64.25 162.5,-64.25 162.5,-100.25"/>
 <text text-anchor="start" x="49.5" y="-84.95" font-family="Monospace" font-size="9.00"> </text>
 <text text-anchor="start" x="54.75" y="-84.17" font-family="Monospace" font-size="11.00">member_equal/2</text>
@@ -258,12 +258,12 @@
 <!-- push_if_new/3&#45;&gt;member_equal/2 -->
 <g id="edge8" class="edge">
 <title>push_if_new/3&#45;&gt;member_equal/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L96" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L96" xlink:title="calls">
 <path fill="none" stroke="black" d="M102,-183.2C102,-164.5 102,-134.37 102,-112.08"/>
 <polygon fill="black" stroke="black" points="105.5,-112.14 102,-102.14 98.5,-112.14 105.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/c339f74afacfef6e662d1481a29a6d745715ec49/library/hook_flows/hook_pipeline.lgt#L96">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L96" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/4766c76275dd0af5e80fd0208200ac5703c2ac78/library/hook_flows/hook_pipeline.lgt#L96">
 <text text-anchor="start" x="102" y="-138.95" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
