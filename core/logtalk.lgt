@@ -217,8 +217,8 @@
 	:- mode(expand_library_path(+atom, ?atom), zero_or_one).
 	:- mode(expand_library_path(+callable, ?atom), zero_or_one).
 	:- info(expand_library_path/2, [
-		comment is 'Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.',
-		argnames is ['LibraryPath', 'AbsolutePath']
+		comment is 'Expands a library alias (an atom) or a compound term (using library notation) into its absolute path. Uses a depth bound to prevent loops.',
+		argnames is ['LibraryAlias', 'AbsolutePath']
 	]).
 
 	:- public(loaded_file/1).
@@ -619,16 +619,11 @@
 
 	default_question_prompt_stream(question, _, '> ', user_input).
 
-	expand_library_path(LibraryAliasOrPath, AbsolutePath) :-
-		(	atom(LibraryAliasOrPath) ->
-			(	{'$lgt_expand_library_alias'(LibraryAliasOrPath, AbsolutePath)} ->
-				% library alias
-				true
-			;	% library path
-				{'$lgt_expand_path'(LibraryAliasOrPath, AbsolutePath)}
-			)
-		;	callable(LibraryAliasOrPath),
-			LibraryAliasOrPath =.. [Library, File],
+	expand_library_path(LibraryAlias, AbsolutePath) :-
+		(	atom(LibraryAlias) ->
+			{'$lgt_expand_library_alias'(LibraryAlias, AbsolutePath)}
+		;	callable(LibraryAlias),
+			LibraryAlias =.. [Library, File],
 			atom(File),
 			{'$lgt_expand_library_alias'(Library, Prefix)},
 			atom_concat(Prefix, File, AbsolutePath)

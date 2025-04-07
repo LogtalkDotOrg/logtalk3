@@ -380,13 +380,13 @@ Debug event handler. Called by the runtime when the given provider is active.
 ``expand_library_path/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.
+Expands a library alias (an atom) or a compound term (using library notation) into its absolute path. Uses a depth bound to prevent loops.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``expand_library_path(LibraryPath,AbsolutePath)``
+|    ``expand_library_path(LibraryAlias,AbsolutePath)``
 | **Mode and number of proofs:**
 |    ``expand_library_path(+atom,?atom)`` - ``zero_or_one``
 |    ``expand_library_path(+callable,?atom)`` - ``zero_or_one``

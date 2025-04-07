@@ -28,8 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
-* FIXED: The `logtalk::expand_library_path/2` predicate to also expand library
-paths in addition to library aliases as documented.
+* FIXED: The documentation of the `logtalk::expand_library_path/2` predicate
+to clarify that only expands library aliases (atoms) or compound terms in
+library notation.
 
 Library
 -------

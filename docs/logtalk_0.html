@@ -661,7 +661,7 @@
 </section>
 <section id="expand-library-path-2">
 <span id="logtalk-0-expand-library-path-2"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">expand_library_path/2</span></code></a><a class="headerlink" href="#expand-library-path-2" title="Link to this heading"></a></h3>
-<p>Expands a library alias or a library path into its absolute path. Uses a depth bound to prevent loops.</p>
+<p>Expands a library alias (an atom) or a compound term (using library notation) into its absolute path. Uses a depth bound to prevent loops.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -671,7 +671,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">expand_library_path(LibraryPath,AbsolutePath)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">expand_library_path(LibraryAlias,AbsolutePath)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
