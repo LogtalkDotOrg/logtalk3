@@ -377,9 +377,9 @@
 		% where source files are organized in multiple sub-directories
 		(	findall(
 				Length-Library,
-				(	logtalk_library_path(Library, LibraryPath0),
+				(	logtalk_library_path(Library, _),
 					Library \== startup, Library \== home,
-					expand_library_path(LibraryPath0, LibraryPath),
+					expand_library_path(Library, LibraryPath),
 					sub_atom(Path, 0, _, _, LibraryPath),
 					atom_length(LibraryPath, Length)
 				),
