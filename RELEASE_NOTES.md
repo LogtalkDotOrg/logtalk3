@@ -25,6 +25,12 @@ RELEASE NOTES
 3.91.0 - April ??, 2025
 =======================
 
+Logtalk compiler and runtime
+----------------------------
+
+* FIXED: The `logtalk::expand_library_path/2` predicate to also expand library
+paths in addition to library aliases as documented.
+
 Tools
 -----
 

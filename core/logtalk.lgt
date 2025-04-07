@@ -28,9 +28,9 @@
 :- object(logtalk).
 
 	:- info([
-		version is 3:1:0,
+		version is 3:1:1,
 		author is 'Paulo Moura',
-		date is 2024-12-19,
+		date is 2025-04-07,
 		comment is 'Built-in object providing message printing, debugging, library, source file, and hacking methods.',
 		remarks is [
 			'Default message kinds' - '``silent``, ``silent(Key)``, ``banner``, ``help``, ``comment``, ``comment(Key)``, ``information``, ``information(Key)``, ``warning``, ``warning(Key)``, ``error``, ``error(Key)``, ``debug``, ``debug(Key)``, ``question``, and ``question(Key)``.',
@@ -619,11 +619,16 @@
 
 	default_question_prompt_stream(question, _, '> ', user_input).
 
-	expand_library_path(LibraryPath, AbsolutePath) :-
-		(	atom(LibraryPath) ->
-			{'$lgt_expand_library_alias'(LibraryPath, AbsolutePath)}
-		;	callable(LibraryPath),
-			LibraryPath =.. [Library, File],
+	expand_library_path(LibraryAliasOrPath, AbsolutePath) :-
+		(	atom(LibraryAliasOrPath) ->
+			(	{'$lgt_expand_library_alias'(LibraryAliasOrPath, AbsolutePath)} ->
+				% library alias
+				true
+			;	% library path
+				{'$lgt_expand_path'(LibraryAliasOrPath, AbsolutePath)}
+			)
+		;	callable(LibraryAliasOrPath),
+			LibraryAliasOrPath =.. [Library, File],
 			atom(File),
 			{'$lgt_expand_library_alias'(Library, Prefix)},
 			atom_concat(Prefix, File, AbsolutePath)
