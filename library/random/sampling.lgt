@@ -179,6 +179,9 @@
 
 	standard_gamma(Shape, Value) :-
 		Shape > 0.0,
+		standard_gamma_(Shape, Value).
+
+	standard_gamma_(Shape, Value) :-
 		(	Shape < 1.0 ->
 			random(Uniform),
 			standard_gamma(Shape + 1.0, Value0),

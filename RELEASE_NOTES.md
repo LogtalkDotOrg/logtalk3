@@ -31,6 +31,12 @@ Logtalk compiler and runtime
 * FIXED: The `logtalk::expand_library_path/2` predicate to also expand library
 paths in addition to library aliases as documented.
 
+Library
+-------
+
+* FIXED: Avoid a non-tail recursive predicate linter warning when loading the
+`random` library with the `tail_recursive` set to `warning`.
+
 Tools
 -----
 

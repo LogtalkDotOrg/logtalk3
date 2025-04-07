@@ -23,9 +23,9 @@
 	implements((pseudo_random_protocol, sampling_protocol))).
 
 	:- info([
-		version is 1:21:0,
+		version is 1:21:1,
 		author is 'Paulo Moura',
-		date is 2025-02-25,
+		date is 2025-04-07,
 		comment is 'Random number generator predicates using the backend Prolog compiler built-in random generator.',
 		remarks is [
 			'Implementation' - 'The backend Prolog compiler built-in random generator is only used for the basic ``random/1``, ``get_seed/1``, and ``set_seed/1`` predicates.',

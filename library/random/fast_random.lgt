@@ -23,9 +23,9 @@
 	implements((pseudo_random_protocol, sampling_protocol))).
 
 	:- info([
-		version is 2:12:0,
+		version is 2:12:1,
 		author is 'Paulo Moura',
-		date is 2025-02-25,
+		date is 2025-04-07,
 		comment is 'Fast portable random number generator predicates. Core predicates originally written by Richard O''Keefe. Based on algorithm AS 183 from Applied Statistics.',
 		remarks is [
 			'Single random number generator' - 'This object provides a faster version of the ``random`` library object but does not support being extended to define multiple random number generators.',
