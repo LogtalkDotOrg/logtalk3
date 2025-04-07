@@ -71,6 +71,9 @@ Installers and installation scripts
 * UPDATED: The Windows installation script to also detect the new SICStus
 Prolog 4.10.x versions.
 
+* UPDATED: The portable Docker image documentation on how to browse Allure
+reports from the host.
+
 * UPDATED: The portable Docker image to also include the `issue_creator`
 tool dependencies `gh` and `glab`.
 

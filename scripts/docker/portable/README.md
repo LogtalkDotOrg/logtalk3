@@ -144,8 +144,8 @@ In alternative, open your local project using the "File" menu "Open Folder..."
 item and add dev container configuration files to it:
 
 1. Create a `.devcontainer/devcontainer.json` file at the root of your local
-project and add the following contents to it (using SWI-Prolog as the backend;
-update the setting if using another backend):
+project and add the following contents to it (using the SWI-Prolog backend as
+an example; update the setting if using another backend):
 
 	```json
 	{
@@ -162,9 +162,17 @@ update the setting if using another backend):
 	                "logtalk.backend": "swi"
 	            }
 	         }
-	    }
+	    },
+	    "forwardPorts": [8989]
 	}
 	```
+
+The forwarded port can be used to browse Allure test reports from the host by
+running in a container terminal the command:
+
+	allure open -p 8989
+
+Change the port number if it conflicts with any service running on your host.
 
 2. In the VSCode lower left corner, click on the "Open a Remote Window" icon
 and select the option "Reopen in Container".
@@ -177,8 +185,14 @@ includes the "Logtalk for VSCode" extension. See below how to configure it.
 
 1. Install the "Open Remote - SSH" extension provided by `jeanp413`.
 
-2. Create a new container while mounting your project directory and start the
-SSH server as explained above.
+2. Create a new container while mounting your project directory and starting
+the SSH server as explained above. Forward an additional port using a second
+`-p` option (e.g. `-p 8998:8998`) if you want to browse Allure test reports
+from the host by running in a container terminal the command:
+
+	allure open -p 8989
+
+Change the port number if it conflicts with any service running on your host.
 
 3. In the VSCodium lower left corner, click on the "Open a Remote Window" icon
 and select the option "Connect to Host...". Type `root@localhost:2222`. Enter
