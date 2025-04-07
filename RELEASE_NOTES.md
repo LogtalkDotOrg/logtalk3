@@ -34,6 +34,9 @@ include the flaky flag.
 * ADDED: Flaky test property/note support to the `lgtunit` tool TAP and xUnit
 output formats.
 
+* IMPROVED: The `lgtdoc` tool finding the library name for entities defined
+in a source file.
+
 * IMPROVED: The `lgtdoc` tool no longer replaces the ASCII comma with the
 Unicode fullwidth comma when generating reStructuredText index entries for
 entity names.
@@ -41,8 +44,8 @@ entity names.
 * UPDATED: Developer tools requirements for Ubuntu to avoid requiring the
 full Texlive installation.
 
-* FIXED: The `lgtdoc` tool to ignore the `startup` library name when
-looking for the name of the library when processing directory files.
+* FIXED: The `lgtdoc` tool to ignore the `home` and `startup` library names
+when looking for the name of the library when processing directory files.
 
 * FIXED: Renamed the `lgtdoc` tool Sphinx configuration template file to
 `conf.py.jinja` as the still documented `conf.py_t` name is no longer

@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 11:1:3,
+		version is 11:1:4,
 		author is 'Paulo Moura',
-		date is 2025-04-02,
+		date is 2025-04-07,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -377,9 +377,9 @@
 		% where source files are organized in multiple sub-directories
 		(	findall(
 				Length-Library,
-				(	logtalk_library_path(Library, _),
-					Library \== startup,
-					expand_library_path(Library, LibraryPath),
+				(	logtalk_library_path(Library, LibraryPath0),
+					Library \== startup, Library \== home,
+					expand_library_path(LibraryPath0, LibraryPath),
 					sub_atom(Path, 0, _, _, LibraryPath),
 					atom_length(LibraryPath, Length)
 				),
