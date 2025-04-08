@@ -102,7 +102,7 @@ https://github.com/LogtalkDotOrg/logtalk3/blob/master/QUICK_START.md
 
 ### Starting the SSH server on a running container:
 
-	docker run -it --name test -p 2222:22 logtalk3
+	docker run -it --name test -p 127.0.0.1:2222:22 logtalk3
 	docker exec -it test service ssh restart
 
 You can then connect to the server using the command:
@@ -187,8 +187,8 @@ includes the "Logtalk for VSCode" extension. See below how to configure it.
 
 2. Create a new container while mounting your project directory and starting
 the SSH server as explained above. Forward an additional port using a second
-`-p` option (e.g. `-p 8998:8998`) if you want to browse Allure test reports
-from the host by running in a container terminal the command:
+`-p` option (e.g. `-p 127.0.0.1:8998:8998`) if you want to browse Allure test
+reports from the host by running in a container terminal the command:
 
 	allure open -p 8989
 
