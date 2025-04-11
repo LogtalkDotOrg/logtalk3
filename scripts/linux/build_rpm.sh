@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk RPM package build script
-##   Last updated on November 23, 2018
+##   Last updated on April 11, 2025
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -31,7 +31,8 @@ archive=logtalk-$version
 directory="$PWD"
 
 cd ../.. || exit 1
-tar -cjf "$HOME/rpmbuild/SOURCES/$archive.tar.bz2" .
+mkdir -p ~/rpmbuild/SOURCES
+cp "$archive.tar.bz2" "$HOME/rpmbuild/SOURCES/$archive.tar.bz2"
 mkdir -p ~/rpmbuild/RPMS/noarch
 
 cd "$directory" || exit 1
