@@ -34,6 +34,10 @@ are available.
 Installers and installation scripts
 -----------------------------------
 
+* UPDATED: The `build_release.sh` script to accept options to customize the
+git clone URL and for selectively turn off the building of each archive and
+installer.
+
 * FIXED: Workaround intermittent portable Docker image build failures when
 installing `tzdata`.
 
