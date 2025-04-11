@@ -23,11 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura and Ebrahim Azarisooreh',
-		date is 2025-03-11,
+		date is 2025-04-11,
 		comment is 'Tests for reading and writing Excel spreadsheet files.'
 	]).
+
+	condition :-
+		os::environment_variable('CLASSPATH', CLASSPATH),
+		sub_atom(CLASSPATH, _, _, _, 'poi-').
 
 	cover(spreadsheet).
 

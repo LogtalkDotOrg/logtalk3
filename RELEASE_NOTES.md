@@ -25,6 +25,12 @@ RELEASE NOTES
 3.92.0 - May ??, 2025
 =====================
 
+Examples
+--------
+
+* FIXED: Only run the `apache_poi` example tests when the required JAR files
+are available.
+
 Installers and installation scripts
 -----------------------------------
 
