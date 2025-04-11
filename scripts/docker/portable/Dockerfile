@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on April 4, 2025
+##   Last updated on April 11, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -101,9 +101,9 @@ RUN python3 -m pip install --upgrade jupyter_core \
     && curl -O https://raw.githubusercontent.com/LogtalkDotOrg/logtalk-jupyter-kernel/master/logtalk_kernel/logtalk_kernel_config.py
 
 # Install backend dependencies
-RUN DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install tzdata \
-    && rm -rf /var/lib/apt/lists/* \
+RUN rm -rf /var/lib/apt/lists/* \
     && apt-get update \
+    && DEBIAN_FRONTEND=noninteractive apt-get --no-install-recommends -y install tzdata \
     && apt-get install --no-install-recommends -y \
         build-essential \
         cmake \

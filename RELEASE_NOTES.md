@@ -25,7 +25,11 @@ RELEASE NOTES
 3.92.0 - May ??, 2025
 =====================
 
+Installers and installation scripts
+-----------------------------------
 
+* FIXED: Workaround intermittent portable Docker image build failures when
+installing `tzdata`.
 
 
 3.91.0 - April 8, 2025
