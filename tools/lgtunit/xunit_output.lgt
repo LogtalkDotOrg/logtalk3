@@ -29,9 +29,9 @@
 :- object(xunit_output).
 
 	:- info([
-		version is 5:0:0,
+		version is 5:0:1,
 		author is 'Paulo Moura',
-		date is 2025-04-07,
+		date is 2025-04-11,
 		comment is 'Intercepts unit test execution messages and outputs a report using the xUnit XML format to the current output stream.',
 		remarks is [
 			'Usage' - 'Simply load this object before running your tests using the goal ``logtalk_load(lgtunit(xunit_output))``.'
@@ -119,7 +119,7 @@
 	write_test_elements(Object) :-
 		message_cache_(tests_skipped(Object, File, Note)),
 		Object::test(Name),
-		write_testcase_element_tags(skipped_test(File, 0-0, Note), Object, Name),
+		write_testcase_element_tags(skipped_test(File, 0-0, false, Note), Object, Name),
 		fail.
 	write_test_elements(Object) :-
 		message_cache_(test(Object, Name, Test)),

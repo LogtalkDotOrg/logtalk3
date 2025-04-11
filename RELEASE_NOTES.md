@@ -25,6 +25,12 @@ RELEASE NOTES
 3.92.0 - May ??, 2025
 =====================
 
+Tools
+-----
+
+* FIXED: Internal predicate call bug in the `lgtunit` tool `xunit_output`
+object.
+
 Examples
 --------
 
