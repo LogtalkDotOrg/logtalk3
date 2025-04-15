@@ -32,7 +32,7 @@ directory="$PWD"
 
 cd ../.. || exit 1
 mkdir -p ~/rpmbuild/SOURCES
-cp "$logtalk-$version_clean.tar.bz2" "$HOME/rpmbuild/SOURCES/$archive.tar.bz2"
+cp "logtalk-$version_clean.tar.bz2" "$HOME/rpmbuild/SOURCES/$archive.tar.bz2"
 mkdir -p ~/rpmbuild/RPMS/noarch
 
 cd "$directory" || exit 1
