@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on April 11, 2025
+##   Last updated on April 16, 2025
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2024 Paulo Moura <pmoura@logtalk.org>
@@ -140,7 +140,7 @@ RUN rm -rf /var/lib/apt/lists/* \
         zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Logtalk and create the LOGTALKUSER directory for the root user
+# Install Logtalk
 RUN curl -sL https://github.com/LogtalkDotOrg/logtalk3/archive/${LOGTALK_VERSION}.tar.gz | tar xz \
     && logtalk3-${LOGTALK_VERSION}/scripts/install.sh -p /usr/local \
     && rm -rf logtalk3-${LOGTALK_VERSION} \
@@ -151,6 +151,36 @@ WORKDIR /root/logtalk/manuals
 RUN curl -O https://logtalk.org/manuals/TheLogtalkHandbook-${LOGTALK_TEXINFO_VERSION}.info \
     && cd /root/logtalk/docs \
     && curl -O https://logtalk.org/docs/LogtalkAPIs-${LOGTALK_TEXINFO_VERSION}.info
+
+# Download required JAR files for the apache_poi example
+RUN cd /usr/local/share/logtalk/examples/apache_poi/jars \
+    && curl -OL https://repo1.maven.org/maven2/commons-codec/commons-codec/1.18.0/commons-codec-1.18.0.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.27.1/commons-compress-1.27.1.jar \
+    && curl -OL https://repo1.maven.org/maven2/commons-io/commons-io/2.19.0/commons-io-2.19.0.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/lucee/curvesapi/1.6.0/curvesapi-1.6.0.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.24.3/log4j-core-2.24.3.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/poi/poi/5.4.1/poi-5.4.1.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/poi/poi-excelant/5.4.1/poi-excelant-5.4.1.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml/5.4.1/poi-ooxml-5.4.1.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml-full/5.4.1/poi-ooxml-full-5.4.1.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/poi/poi-ooxml-schemas/4.1.2/poi-ooxml-schemas-4.1.2.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/poi/poi-scratchpad/5.4.1/poi-scratchpad-5.4.1.jar \
+    && curl -OL https://repo1.maven.org/maven2/com/zaxxer/SparseBitSet/1.3/SparseBitSet-1.3.jar \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/xmlbeans/xmlbeans/5.3.0/xmlbeans-5.3.0.jar
+
+# Download required JAR files for the clustering example
+RUN cd /usr/local/share/logtalk/examples/clustering/jars \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/commons/commons-math3/3.6.1/commons-math3-3.6.1.jar
+
+# Download required JAR files for the document_converter example
+RUN cd /usr/local/share/logtalk/examples/document_converter/jars \
+    && curl -OL https://repo1.maven.org/maven2/org/apache/tika/tika-app/2.8.0/tika-app-2.8.0.jar
+
+# Create the LOGTALKUSER directory for the root user
+RUN logtalk_user_setup
 
 # Install d2
 WORKDIR /downloads

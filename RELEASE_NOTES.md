@@ -30,6 +30,12 @@ Examples
 
 * IMPROVED: Tests of the `philosophers` multi-threading example.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The portable Docker image to include the JAR files required by the
+`apache_poi`, `clustering`, and `document_converter` examples.
+
 
 3.91.1 - April 15, 2025
 =======================
