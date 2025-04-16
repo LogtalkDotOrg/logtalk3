@@ -136,18 +136,23 @@
 	implements(philosopherp)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:4:0,
 		author is 'Paulo Moura',
-		date is 2024-02-06,
+		date is 2025-04-16,
 		comment is 'Dining philosophers problem: philosopher representation.'
 	]).
+
+	% public predicate just for testing support
+	:- public(terminated/0).
+	:- dynamic(terminated/0).
 
 	:- uses(format, [format/2]).
 	:- uses(random, [random/3]).
 
 	run(0, _) :-
 		this(Philosopher),
-		format('~w terminated.~n', [Philosopher]).
+		format('~w terminated.~n', [Philosopher]),
+		assertz(terminated).
 	run(Count, MaxTime) :-
 		Count > 0,
 		think(MaxTime),

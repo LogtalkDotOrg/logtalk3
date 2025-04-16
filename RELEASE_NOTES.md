@@ -25,7 +25,10 @@ RELEASE NOTES
 3.92.0 - May ??, 2025
 =====================
 
+Examples
+--------
 
+* IMPROVED: Tests of the `philosophers` multi-threading example.
 
 
 3.91.1 - April 15, 2025

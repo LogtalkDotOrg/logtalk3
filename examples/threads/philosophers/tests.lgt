@@ -23,21 +23,26 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2024-02-06,
+		date is 2025-04-16,
 		comment is 'Unit tests for the "threads/philosophers" example.'
 	]).
 
 	:- threaded.
 
-	test(philosophers_1, true) :-
+	test(philosophers_1, true((p1::terminated,p2::terminated,p3::terminated,p4::terminated,p5::terminated))) :-
 		^^suppress_text_output,
-		threaded_call(p1::run(5, 5)),
-		threaded_call(p2::run(5, 5)),
-		threaded_call(p3::run(5, 5)),
-		threaded_call(p4::run(5, 5)),
-		threaded_call(p5::run(5, 5)),
+		p1::retractall(terminated),
+		p2::retractall(terminated),
+		p3::retractall(terminated),
+		p4::retractall(terminated),
+		p5::retractall(terminated),
+		threaded_once(p1::run(5, 5)),
+		threaded_once(p2::run(5, 5)),
+		threaded_once(p3::run(5, 5)),
+		threaded_once(p4::run(5, 5)),
+		threaded_once(p5::run(5, 5)),
 		threaded_exit(p1::run(5, 5)),
 		threaded_exit(p2::run(5, 5)),
 		threaded_exit(p3::run(5, 5)),
@@ -47,11 +52,11 @@
 	test(philosophers_2, true(Philosophers == [p1,p2,p3,p4,p5])) :-
 		^^suppress_text_output,
 		philosopher(_,_,_)::retractall(terminated(_)),
-		threaded_call(philosopher(p1,cs1,cs2)::run(5, 5)),
-		threaded_call(philosopher(p2,cs2,cs3)::run(5, 5)),
-		threaded_call(philosopher(p3,cs3,cs4)::run(5, 5)),
-		threaded_call(philosopher(p4,cs4,cs5)::run(5, 5)),
-		threaded_call(philosopher(p5,cs1,cs5)::run(5, 5)),
+		threaded_once(philosopher(p1,cs1,cs2)::run(5, 5)),
+		threaded_once(philosopher(p2,cs2,cs3)::run(5, 5)),
+		threaded_once(philosopher(p3,cs3,cs4)::run(5, 5)),
+		threaded_once(philosopher(p4,cs4,cs5)::run(5, 5)),
+		threaded_once(philosopher(p5,cs1,cs5)::run(5, 5)),
 		threaded_exit(philosopher(p1,cs1,cs2)::run(5, 5)),
 		threaded_exit(philosopher(p2,cs2,cs3)::run(5, 5)),
 		threaded_exit(philosopher(p3,cs3,cs4)::run(5, 5)),
