@@ -36,6 +36,9 @@ Examples
 
 * IMPROVED: Tests of the `philosophers` multi-threading example.
 
+* UPDATED: The SWI-Prolog backend specific `pengines` example to not require
+the `gui` flag set to `true`.
+
 Installers and installation scripts
 -----------------------------------
 

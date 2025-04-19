@@ -20,10 +20,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if((
-	current_logtalk_flag(prolog_dialect, swi),
-	current_prolog_flag(gui, true)
-)).
+:- if(current_logtalk_flag(prolog_dialect, swi)).
 
 	:- use_module(library(pengines), []).
 	:- use_module(pengines_server, []).
