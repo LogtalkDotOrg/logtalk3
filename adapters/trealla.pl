@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 2.59.21 and later versions
-%  Last updated on November 12, 2024
+%  Last updated on April 19, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -445,7 +445,7 @@
 % Logtalk source file, given a list of flags
 
 '$lgt_load_prolog_code'(File, _Source, _Options) :-
-	consult(File).
+	load_files(File).
 
 
 % '$lgt_load_prolog_file'(+atom)
@@ -453,7 +453,7 @@
 % compile and (re)load a Prolog file (used in standards compliance tests)
 
 '$lgt_load_prolog_file'(File) :-
-	consult(File).
+	load_files(File).
 
 
 % '$lgt_file_modification_time'(+atom, -nonvar)

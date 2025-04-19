@@ -25,6 +25,12 @@ RELEASE NOTES
 3.92.0 - May ??, 2025
 =====================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: Trealla Prolog adapter file for the deprecation of the `consult/1`
+built-in predicate in version 2.68.11.
+
 Examples
 --------
 
