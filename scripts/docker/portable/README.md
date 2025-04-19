@@ -287,5 +287,5 @@ control-clicking on them and selecting the "Open With" > "Notebook" option.
 To configure the backend to be used when opening the examples `NOTES.md`
 files as notebooks (default is SWI-Prolog), edit the image file
 `/root/.jupyter/logtalk_kernel_config.py`. Currently, only ECLiPSe,
-SWI-Prolog, and Trealla Prolog can reliably be used as backends in the
-notebooks.
+GNU Prolog, SWI-Prolog, and Trealla Prolog can reliably be used as backends
+in the notebooks.
