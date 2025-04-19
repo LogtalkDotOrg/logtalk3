@@ -661,3 +661,14 @@ Glossary
    clause reference
       An opaque term that uniquely identifies a clause. Provided by
       some backends via alternative database built-in predicates.
+
+   flaky test
+      A test that can unpredictably succeed, fail, or throw an error and
+      thus can yield different results when repeated without any code
+      changes. Can result from, e.g., race conditions or dependencies on
+      external resources outside user control.
+
+   test dialect
+      Predicate syntax for defining a test. I.e., the predicate name;
+      the number, syntax, and semantics of the predicate arguments; and
+      the syntax and semantics of any options.

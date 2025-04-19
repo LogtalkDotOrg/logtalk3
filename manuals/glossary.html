@@ -240,6 +240,11 @@ event — and the return of control to the sender — <code class="docutils lite
 usually defined using a <a class="reference internal" href="#term-hook-object"><span class="xref std std-term">hook object</span></a> or a combination of hook
 objects.</p>
 </dd>
+<dt id="term-flaky-test">flaky test<a class="headerlink" href="#term-flaky-test" title="Link to this term"></a></dt><dd><p>A test that can unpredictably succeed, fail, or throw an error and
+thus can yield different results when repeated without any code
+changes. Can result from, e.g., race conditions or dependencies on
+external resources outside user control.</p>
+</dd>
 <dt id="term-grammar-rule">grammar rule<a class="headerlink" href="#term-grammar-rule" title="Link to this term"></a></dt><dd><p>An alternative notation for predicates used to parse or generate
 sentences in some language. This notation hides the arguments used to
 pass the sequences of tokens being processed, thus simplifying the
@@ -606,6 +611,10 @@ a multi-threaded application, it can only be called by a single
 thread at a time.</p>
 </dd>
 <dt id="term-template-method">template method<a class="headerlink" href="#term-template-method" title="Link to this term"></a></dt><dd><p>See <a class="reference internal" href="#term-abstract-method"><span class="xref std std-term">abstract method</span></a>.</p>
+</dd>
+<dt id="term-test-dialect">test dialect<a class="headerlink" href="#term-test-dialect" title="Link to this term"></a></dt><dd><p>Predicate syntax for defining a test. I.e., the predicate name;
+the number, syntax, and semantics of the predicate arguments; and
+the syntax and semantics of any options.</p>
 </dd>
 <dt id="term-tester-file">tester file<a class="headerlink" href="#term-tester-file" title="Link to this term"></a></dt><dd><p>A <a class="reference internal" href="#term-source-file"><span class="xref std std-term">source file</span></a> whose main purpose is to load and a run a set of
 unit tests.</p>
