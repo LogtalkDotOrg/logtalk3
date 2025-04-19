@@ -672,3 +672,13 @@ Glossary
       Predicate syntax for defining a test. I.e., the predicate name;
       the number, syntax, and semantics of the predicate arguments; and
       the syntax and semantics of any options.
+
+   test outcome
+      The expected result of a test goal. E.g., success, failure, an error,
+      deterministic success, success with bindings that subsume or are a
+      variant of specific terms.
+
+   mocking
+      Techniques used to replace dependencies in the code being tested with
+      controlled substitutes, simplifying testing. Can be accomplished using,
+      e.g., term expansion, hot patching, or message interception.

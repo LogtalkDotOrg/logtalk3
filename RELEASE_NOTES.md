@@ -34,7 +34,8 @@ built-in predicate in version 2.68.11.
 Documentation
 -------------
 
-* ADDED: Glossary entries for "flaky test" and "test dialect".
+* ADDED: Glossary entries for "flaky test", "test dialect", "test outcome",
+and "mocking".
 
 Examples
 --------
