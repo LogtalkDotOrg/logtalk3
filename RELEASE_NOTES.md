@@ -35,7 +35,7 @@ Documentation
 -------------
 
 * ADDED: Glossary entries for "flaky test", "test dialect", "test outcome",
-and "mocking".
+"mocking", "term-expansion", and "goal-expansion".
 
 Examples
 --------

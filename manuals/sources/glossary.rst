@@ -225,7 +225,7 @@ Glossary
       :term:`predicates directives <predicate directive>` and clauses.
       Prolog modules are usually static although some Prolog systems
       allow the creation of dynamic modules at runtime. Prolog modules
-      can be interpreted as prototypes.
+      can be interpreted as :term:`prototypes <prototype>`.
 
    message
       A query sent to an object. In logical terms, a message can be
@@ -307,16 +307,33 @@ Glossary
 
    hook object
       An object, implementing the :ref:`expanding <apis:expanding/0>` built-in
-      protocol, defining term- and goal-expansion predicates, used in the
-      compilation of Logtalk or Prolog source files. A hook object can be
-      specified using the :ref:`hook <flag_hook>` flag. It can also
-      be specified using a :ref:`directives_set_logtalk_flag_2` directive in
-      the source files to be expanded.
+      protocol, defining :term:`term-expansion` and :term:`goal-expansion`
+      predicates, used in the compilation of Logtalk or Prolog source files.
+      A hook object can be specified using the :ref:`hook <flag_hook>` flag.
+      It can also be specified using a :ref:`directives_set_logtalk_flag_2`
+      directive in the source files to be expanded.
+
+   term-expansion
+      The transformation of a term (usually a directive or a clause) into
+      another term or a list of terms, defined by clauses for the
+      :ref:`methods_term_expansion_2` predicate that is declared by the
+      :ref:`expanding <apis:expanding/0>` built-in protocol. Term-expansion
+      is usually applied at compile time once (i.e., the result of an
+      expansion is not further expanded). See also :term:`goal-expansion`
+      and :term:`expansion workflow`.
+
+   goal-expansion
+      The transformation of a goal into another goal, defined by clauses for
+      the :ref:`methods_goal_expansion_2` predicate that is declared by the
+      :ref:`expanding <apis:expanding/0>` built-in protocol. Goal-expansion
+      is usually recursively applied at compile time until a fixed-point is
+      reached (i.e., until the result of an expansion cannot be further
+      expanded). See also :term:`term-expansion` and :term:`expansion workflow`.
 
    expansion workflow
-      A sequence of term-expansion or goal-expansion steps where each step is
-      usually defined using a :term:`hook object` or a combination of hook
-      objects.
+      A sequence of :term:`term-expansion` or :term:`goal-expansion` steps
+      where each step is usually defined using a :term:`hook object` or a
+      combination of hook objects.
 
    parametric object
       See :term:`parametric entity`.
@@ -630,7 +647,7 @@ Glossary
 
    steadfastness
       A predicate definition is *steadfast* when it still generates only
-      correct answers when called with unexpected arguments (notably,
+      correct answers when called with unexpectedly bound arguments (notably,
       bound output arguments). Typically, a predicate may not be steadfast
       when output argument unifications can occur before a cut in a predicate
       clause body.
@@ -655,8 +672,8 @@ Glossary
       A property of programming languages where *code* and *data* use the
       same representation. Logtalk (and Prolog) are examples of homoiconic
       programming languages. A Logtalk program is a set of terms (clauses
-      and directives) that can be handled as *data* by e.g. the term-expansion
-      mechanism.
+      and directives) that can be handled as *data* by e.g. the
+      :term:`term-expansion` mechanism.
 
    clause reference
       An opaque term that uniquely identifies a clause. Provided by
@@ -681,4 +698,4 @@ Glossary
    mocking
       Techniques used to replace dependencies in the code being tested with
       controlled substitutes, simplifying testing. Can be accomplished using,
-      e.g., term expansion, hot patching, or message interception.
+      e.g., :term:`term-expansion`, hot patching, or message interception.
