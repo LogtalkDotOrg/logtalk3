@@ -128,10 +128,15 @@ Print Logtalk, Prolog backend, and kernel versions (if running as a notebook):
 %versions
 ```
 
-When using XVM as the backend, ensure that the `unify_applies_occurs_check` is set to `true`:
+When using XVM as the backend, ensure that the `enable_occurs_check` flag or the
+`unify_applies_occurs_check` flag is set to `true`:
 
 ```logtalk
-(current_prolog_flag(dialect, xvm) -> set_prolog_flag(unify_applies_occurs_check,true); true).
+(	current_prolog_flag(dialect, xvm) -> 
+	catch(set_prolog_flag(enable_occurs_check, true), _, true),
+	catch(set_prolog_flag(unify_applies_occurs_check, true), _, true)
+;	true
+).
 ```
 
 Start by loading the example:

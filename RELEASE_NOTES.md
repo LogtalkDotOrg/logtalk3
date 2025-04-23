@@ -48,6 +48,9 @@ Examples
 
 * IMPROVED: Tests of the `philosophers` multi-threading example.
 
+* UPDATED: The `coinduction` example for the XVM 11.x renaming of the flag
+`unify_applies_occurs_check` to `enable_occurs_check`.
+
 * UPDATED: The SWI-Prolog backend specific `pengines` example to not require
 the `gui` flag set to `true`.
 
