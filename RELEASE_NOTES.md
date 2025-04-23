@@ -54,6 +54,9 @@ Examples
 * UPDATED: The SWI-Prolog backend specific `pengines` example to not require
 the `gui` flag set to `true`.
 
+* FIXED: The `egines/pmq` example `tester.lgt` file loading the library
+`pairs` object twice in different compilation modes.
+
 Installers and installation scripts
 -----------------------------------
 
