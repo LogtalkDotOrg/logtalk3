@@ -31,6 +31,9 @@ Prolog adapter and integration files
 * UPDATED: Trealla Prolog adapter file for the deprecation of the `consult/1`
 built-in predicate in version 2.68.11.
 
+* UPDATED: The XVM adapter file for the renaming in version 11.x of the
+`unify_applies_occurs_check` flag to `enable_occurs_check`.
+
 Documentation
 -------------
 

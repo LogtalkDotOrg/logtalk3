@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for XVM 10.0.0 and later versions
-%  Last updated on November 12, 2024
+%  Last updated on April 23, 2025
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>
@@ -280,7 +280,11 @@
 	).
 '$lgt_prolog_feature'(modules, unsupported).
 '$lgt_prolog_feature'(coinduction, Coinduction) :-
-	(	catch(current_prolog_flag(unify_applies_occurs_check, true), _, fail) ->
+	(	catch(current_prolog_flag(enable_occurs_check, true), _, fail) ->
+		% XVM 11.x and later versions
+		Coinduction = supported
+	;	catch(current_prolog_flag(unify_applies_occurs_check, true), _, fail) ->
+		% XVM 10.x and earlier versions
 		Coinduction = supported
 	;	Coinduction = unsupported
 	).

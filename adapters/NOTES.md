@@ -1,7 +1,7 @@
 ________________________________________________________________________
 
 Notes on supported backend Prolog compilers  
-Last updated on December 31, 2024
+Last updated on April 23, 2025
 
 This file is part of Logtalk <https://logtalk.org/>  
 SPDX-FileCopyrightText: 1998-2025 Paulo Moura <pmoura@logtalk.org>  
@@ -468,9 +468,10 @@ XVM 10.0.0 and later versions
 
 	xvm.pl
 
-Coinduction support requires setting the `unify_applies_occurs_check` to
-`true`. This can be accomplished, e.g., by using the `--enable-occurs-check`
-command-line option:
+Coinduction support requires setting the `enable_occurs_check` flag (XVM 11.x
+and later versions) or `unify_applies_occurs_check` flag (XVM 10.x and earlier
+versions) set to `true`. This can be accomplished, e.g., by using the
+`--enable-occurs-check` command-line option:
 
 	$ xvmlgt --enable-occurs-check
 
