@@ -555,7 +555,7 @@ dialect by using a ``tester.lgt`` driver file with contents such as:
    :- initialization((
        set_logtalk_flag(report, warnings),
        logtalk_load(lgtunit(loader)),
-       logtalk_load(library(hook_flows_loader)),
+       logtalk_load(hook_flows(loader)),
        logtalk_load(simple_dialect),
        logtalk_load(tests, [hook(hook_pipeline([simple_dialect,lgtunit]))]),
        tests::run

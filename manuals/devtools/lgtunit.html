@@ -676,7 +676,7 @@ dialect by using a <code class="docutils literal notranslate"><span class="pre">
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">initialization</span>((
     <span class="k">set_logtalk_flag</span>(report, warnings),
     <span class="k">logtalk_load</span>(lgtunit(loader)),
-    <span class="k">logtalk_load</span>(library(hook_flows_loader)),
+    <span class="k">logtalk_load</span>(hook_flows(loader)),
     <span class="k">logtalk_load</span>(simple_dialect),
     <span class="k">logtalk_load</span>(tests, [hook(hook_pipeline([simple_dialect,lgtunit]))]),
     tests<span class="o">::</span>run

@@ -37,6 +37,9 @@ Documentation
 * ADDED: Glossary entries for "flaky test", "test dialect", "test outcome",
 "mocking", "term-expansion", and "goal-expansion".
 
+* FIXED: Typo in the sample code for user-defined test dialects in the
+`lgtunit` tool documentation. Thanks to Paul Brown for the bug report.
+
 Examples
 --------
 
