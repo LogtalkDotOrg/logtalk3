@@ -46,7 +46,7 @@ Documentation
 Examples
 --------
 
-* IMPROVED: Tests of the `philosophers` multi-threading example.
+* IMPROVED: Tests of the `buffer` and `philosophers` multi-threading examples.
 
 * UPDATED: The `coinduction` example for the XVM 11.x renaming of the flag
 `unify_applies_occurs_check` to `enable_occurs_check`.
