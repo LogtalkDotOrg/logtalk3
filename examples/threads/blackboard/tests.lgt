@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2024-02-06,
+		date is 2025-04-24,
 		comment is 'Unit tests for the "threads/blackboard" example.'
 	]).
 
@@ -34,8 +34,8 @@
 	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
 		test(blackboard_1, true) :-
-			threaded_call(student::run(10)),
-			threaded_call(teacher::run(4)),
+			threaded_once(student::run(10)),
+			threaded_once(teacher::run(4)),
 			threaded_exit(teacher::run(4)),
 			threaded_exit(student::run(10)).
 
@@ -43,8 +43,8 @@
 
 		test(blackboard_1, true) :-
 			^^set_text_output(''),
-			threaded_call(student::run(10)),
-			threaded_call(teacher::run(4)),
+			threaded_once(student::run(10)),
+			threaded_once(teacher::run(4)),
 			threaded_exit(teacher::run(4)),
 			threaded_exit(student::run(10)),
 			^^text_output_contents(Chars),
