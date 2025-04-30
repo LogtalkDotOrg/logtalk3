@@ -40,15 +40,32 @@ This folder provides an object for running multi-threading benchmarks.
 The following tests *independent and-parallelism* are available, based on
 individual multi-threading examples:
 
-- `primes`
-- `msort`
-- `qsort`
-- `fib`
-- `hanoi`
-- `tak`
-- `fft`
-- `integration`
-- `integration2d`
+- `primes` (defaults to 16 threads, starting list size of 10000, and 10 multiples)
+- `primes(MaxThreads, StartSize, Multiples)`
+
+- `msort` (defaults to 16 threads, starting list size 5000, and 10 multiples)
+- `msort(MaxThreads, Size, Multiples)`
+
+- `qsort` (defaults to 16 threads, starting list size 5000, and 10 multiples)
+- `qsort(MaxThreads, Size, Multiples)`
+
+- `fib` (defaults to 16 threads and the [20,27] interval)
+- `fib(MaxThreads, Lower, Upper)`
+
+- `hanoi` (defaults to 16 threads and the [20,27] interval)
+- `hanoi(MaxThreads, Lower, Upper)`
+
+- `tak` (defaults to 243 threads and the [7,11] interval)
+- `tak(MaxThreads, Lower, Upper)` (use a power of 3 as argument: 1, 3, 9, 27, 81, ...)
+
+- `fft` (defaults to 16 threads and the [10,16] interval)
+- `fft(MaxThreads, Lower, Upper)`
+
+- `integration` (defaults to 16 threads)
+- `integration(MaxThreads)`
+
+- `integration2d` (defaults to 16 threads)
+- `integration2d(MaxThreads)` (use a power of 4 as argument: 1, 4, 16, 64, 256, ...)
 
 There's also a test of *competitive or-parallelism* based on the `searching`
 example:

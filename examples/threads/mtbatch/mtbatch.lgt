@@ -22,9 +22,9 @@
 :- object(mtbatch).
 
 	:- info([
-		version is 1:7:0,
+		version is 1:8:0,
 		author is 'Paulo Moura',
-		date is 2024-01-20,
+		date is 2025-04-30,
 		comment is 'Multi-threading benchmarks.'
 	]).
 
@@ -56,21 +56,24 @@
 
 	% run all benchmark tests N times:
 	run(N) :-
-		run(_, N),
+		list::member(Benchmark, [primes, msort, qsort, fib, hanoi, tak, fft, integration, integration2d, search]),
+		run(Benchmark, N),
 		fail.
 	run(_).
 
 	% prime numbers benchmarks:
 	run(primes, N) :-
+		run(primes(16, 10000, 10), N).
+	run(primes(MaxThreads, StartSize, Multiples), N) :-
 		write('Prime numbers (average of '), write(N), write(' runs)'), nl,
-		loop::forto(Threads, 1, 16,
+		loop::forto(Threads, 1, MaxThreads,
 			(	put_char('\t'), write(Threads)
 			)
 		), nl,
-		loop::forto(S, 1, 10,
-			(	Size is S*10000,
+		loop::forto(S, 1, Multiples,
+			(	Size is S*StartSize,
 				write(Size),
-				loop::forto(Threads, 1, 16,
+				loop::forto(Threads, 1, MaxThreads,
 					(	catch(run(primes(Threads, Size), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -84,18 +87,20 @@
 
 	% merge sort benchmarks:
 	run(msort, N) :-
+		run(msort(16, 5000, 10), N).
+	run(msort(MaxThreads, StartSize, Multiples), N) :-
 		write('Merge sort (average of '), write(N), write(' runs)'), nl,
-		loop::forto(T, 0, 4,
-			(	Threads is truncate(2**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+			(	Threads is 2^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
-		loop::forto(S, 1, 10,
-			(	Size is S*5000,
+		loop::forto(S, 1, Multiples,
+			(	Size is S*StartSize,
 				write(Size),
 				generator::list(Size, List),
-				loop::forto(T, 0, 4,
-					(	Threads is truncate(2**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+					(	Threads is 2^T,
 						catch(run(msort(Threads, List), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -109,18 +114,20 @@
 
 	% quicksort benchmarks:
 	run(qsort, N) :-
+		run(qsort(16, 5000, 10), N).
+	run(qsort(MaxThreads, StartSize, Multiples), N) :-
 		write('Quicksort (average of '), write(N), write(' runs)'), nl,
-		loop::forto(T, 0, 4,
-			(	Threads is truncate(2**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+			(	Threads is 2^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
-		loop::forto(S, 1, 10,
-			(	Size is S*5000,
+		loop::forto(S, 1, Multiples,
+			(	Size is S*StartSize,
 				write(Size),
 				generator::list(Size, List),
-				loop::forto(T, 0, 4,
-					(	Threads is truncate(2**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+					(	Threads is 2^T,
 						catch(run(qsort(Threads, List), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -134,16 +141,18 @@
 
 	% Fibonacci numbers benchmarks:
 	run(fib, N) :-
+		run(fib(16, 20, 27), N).
+	run(fib(MaxThreads, Lower, Upper), N) :-
 		write('Fibonacci numbers (average of '), write(N), write(' runs)'), nl,
-		loop::forto(T, 0, 4,
-			(	Threads is truncate(2**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+			(	Threads is 2^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
-		loop::forto(Nth, 20, 27,
+		loop::forto(Nth, Lower, Upper,
 			(	write(Nth),
-				loop::forto(T, 0, 4,
-					(	Threads is truncate(2**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+					(	Threads is 2^T,
 						catch(run(fibonacci(Threads, Nth), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -157,16 +166,18 @@
 
 	% Towers of Hanoi benchmarks:
 	run(hanoi, N) :-
+		run(hanoi(16, 20, 27), N).
+	run(hanoi(MaxThreads, Lower, Upper), N) :-
 		write('Towers of Hanoi (average of '), write(N), write(' runs)'), nl,
-		loop::forto(T, 0, 4,
-			(	Threads is truncate(2**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+			(	Threads is 2^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
-		loop::forto(Disks, 20, 27,
+		loop::forto(Disks, Lower, Upper,
 			(	write(Disks),
-				loop::forto(T, 0, 4,
-					(	Threads is truncate(2**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+					(	Threads is 2^T,
 						catch(run(hanoi(Threads, Disks), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -180,18 +191,20 @@
 
 	% Takeuchi function benchmarks:
 	run(tak, N) :-
+		run(tak(243, 7, 11), N).
+	run(tak(MaxThreads, Lower, Upper), N) :-
 		write('Takeuchi function (average of '), write(N), write(' runs)'), nl,
-		loop::forto(T, 0, 5,
-			(	Threads is truncate(3**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(3)),
+			(	Threads is 3^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
-		loop::forto(Z, 7, 11,
+		loop::forto(Z, Lower, Upper,
 			(	X is 3*Z,
 				Y is 2*Z,
 				write((X, Y, Z)),
-				loop::forto(T, 0, 5,
-					(	Threads is truncate(3**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(3)),
+					(	Threads is 3^T,
 						catch(run(tak(Threads, X, Y, Z), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -205,18 +218,20 @@
 
 	% fast Fourier transform benchmarks:
 	run(fft, N) :-
+		run(fft(16, 10, 16), N).
+	run(fft(MaxThreads, Lower, Upper), N) :-
 		write('Fast Fourier transform (average of '), write(N), write(' runs)'), nl,
-		loop::forto(T, 0, 4,
-			(	Threads is truncate(2**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+			(	Threads is 2^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
-		loop::forto(S, 10, 16,
-			(	Size is truncate(2**S),
+		loop::forto(S, Lower, Upper,
+			(	Size is 2^S,
 				write(Size),
 				cgenerator::list(Size, List),
-				loop::forto(T, 0, 4,
-					(	Threads is truncate(2**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+					(	Threads is 2^T,
 						catch(run(fft(Threads, Size, List), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -230,11 +245,13 @@
 
 	% integration benchmarks:
 	run(integration, N) :-
+		run(integration(16), N).
+	run(integration(MaxThreads), N) :-
 		NP = 3,
 		write('Numerical integration of functions of one variable (average of '), write(N), write(' runs)'), nl,
 		write('using a recursive quadrature method with '), write(NP), write(' points'), nl,
-		loop::forto(T, 0, 4,
-			(	Threads is truncate(2**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+			(	Threads is 2^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
@@ -253,8 +270,8 @@
 			;	Function = test06,    Inf =  0.000, Sup = 1.000, Epsilon = 1.0e-13
 			),
 			(	write(Function),
-				loop::forto(T, 0, 4,
-					(	Threads is truncate(2**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+					(	Threads is 2^T,
 						catch(run(quadrec(Threads, Function, Inf, Sup, NP, Epsilon), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -267,8 +284,8 @@
 		), nl,
 		write('Numerical integration of functions of one variable (average of '), write(N), write(' runs)'), nl,
 		write('using a split/spawn/collect quadrature method with '), write(NP), write(' points'), nl,
-		loop::forto(T, 0, 4,
-			(	Threads is truncate(2**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+			(	Threads is 2^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
@@ -287,8 +304,8 @@
 			;	Function = test06,    Inf =  0.000, Sup = 1.000, Epsilon = 1.0e-13
 			),
 			(	write(Function),
-				loop::forto(T, 0, 4,
-					(	Threads is truncate(2**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(2)),
+					(	Threads is 2^T,
 						catch(run(quadsplit(Threads, Function, Inf, Sup, NP, Epsilon), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -302,11 +319,13 @@
 
 	% integration2d benchmarks:
 	run(integration2d, N) :-
+		run(integration2d(16), N).
+	run(integration2d(MaxThreads), N) :-
 		NP = 3,
 		write('Numerical integration of functions of two variables (average of '), write(N), write(' runs)'), nl,
 		write('using a recursive quadrature method with '), write(NP), write(' points'), nl,
-		loop::forto(T, 0, 2,
-			(	Threads is truncate(4**T),
+		loop::forto(T, 0, round(log(MaxThreads) / log(4)),
+			(	Threads is 4^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
@@ -322,8 +341,8 @@
 			;	Function = bailey5, A =  0, B = 100, C = 0, D = 100, Epsilon = 1.0e-6
 			),
 			(	write(Function),
-				loop::forto(T, 0, 2,
-					(	Threads is truncate(4**T),
+				loop::forto(T, 0, round(log(MaxThreads) / log(4)),
+					(	Threads is 4^T,
 						catch(run(quadrec2d(Threads, Function, A, B, C, D, NP, Epsilon), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)
@@ -336,8 +355,8 @@
 		), nl,
 		write('Numerical integration of functions of two variables (average of '), write(N), write(' runs)'), nl,
 		write('using a split/spawn/collect quadrature method with '), write(NP), write(' points'), nl,
-		loop::forto(T, 1, 4,
-			(	Threads is T*T,
+		loop::forto(T, 0, round(log(MaxThreads) / log(4)),
+			(	Threads is 4^T,
 				put_char('\t'), write(Threads)
 			)
 		), nl,
@@ -353,8 +372,8 @@
 			;	Function = bailey5, A =  0, B = 100, C = 0, D = 100, Epsilon = 1.0e-6
 			),
 			(	write(Function),
-				loop::forto(T, 1, 4,
-					(	Threads is T*T,
+				loop::forto(T, 0, round(log(MaxThreads) / log(4)),
+					(	Threads is 4^T,
 						catch(run(quadsplit2d(Threads, Function, A, B, C, D, NP, Epsilon), N, Average), Error, write_error) ->
 						(	var(Error) ->
 							write_average(Average)

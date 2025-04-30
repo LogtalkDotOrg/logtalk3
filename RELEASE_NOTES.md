@@ -49,6 +49,9 @@ Examples
 * IMPROVED: Tests of the `blackboard`, `buffer`, and `philosophers`
 multi-threading examples.
 
+* IMPROVED: The `mtbatch` multi-threading example to support parameterization
+of the individual benchmarks.
+
 * UPDATED: The `coinduction` example for the XVM 11.x renaming of the flag
 `unify_applies_occurs_check` to `enable_occurs_check`.
 
