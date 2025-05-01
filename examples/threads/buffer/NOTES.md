@@ -38,7 +38,8 @@ ________________________________________________________________________
 This folder contains a simple multi-threading example illustrating how
 to use the Logtalk built-in `threaded_wait/1` and `threaded_notify/1`
 predicates for synchronizing threads writing to and reading from a buffer
-that can only contain a fixed number of items at the same time.
+that can only contain a fixed number of items at the same time. This
+example uses a single producer thread and a single consumer thread.
 
 This example should preferably be run from the top-level instead of as
 a notebook to observe the threads output.
