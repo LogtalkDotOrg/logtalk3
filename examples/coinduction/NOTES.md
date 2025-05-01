@@ -520,6 +520,9 @@ false.
 
 ```logtalk
 cp3::path(a, Path, 3).
+```
+
+<!--
 Path = [a|_S1], % where
     _S1 = [b, c, a|_S1] ;
 false.

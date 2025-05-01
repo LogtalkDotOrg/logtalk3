@@ -61,6 +61,9 @@ the `gui` flag set to `true`.
 * FIXED: The `egines/pmq` example `tester.lgt` file loading the library
 `pairs` object twice in different compilation modes.
 
+* FIXED: Formatting typo in the `coinduction` example `NOTES.md` file that
+caused an error when open as a Jupyter notebook.
+
 Installers and installation scripts
 -----------------------------------
 
